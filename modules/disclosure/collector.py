@@ -1,3 +1,4 @@
+
 """
 modules/disclosure/collector.py
 DART 공시 수집 + 20년 차 CPA 심화 분석 엔진
@@ -15,23 +16,70 @@ from datetime import datetime, timedelta
 from dotenv import load_dotenv
 import OpenDartReader as odr
 import pandas as pd
+from bs4 import BeautifulSoup
+from groq import Groq
 
 load_dotenv()
 
 # ─── 설정 ────────────────────────────────────────────────────────────────────
 DART_API_KEY = os.getenv("DART_API_KEY", "")
+GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
+GROQ_MODEL = "llama-3.3-70b-versatile"
+
+# Groq 클라이언트 (키 없으면 None — 템플릿 분석으로 폴백)
+_groq_client = Groq(api_key=GROQ_API_KEY) if GROQ_API_KEY else None
 
 TARGET_CORPS = {
     "005930": "삼성전자",
     "000660": "SK하이닉스",
-    "005935": "삼성전자우",
-    "005380": "현대차",
-    "373220": "LG에너지솔루션",
-    "012450": "한화에어로스페이스",
-    "402340": "SK스퀘어",
     "207940": "삼성바이오로직스",
-    "034020": "두산에너빌리티",
+    "373220": "LG에너지솔루션",
+    "005380": "현대차",
+    # 삼성전자우(005935) — 우선주 제외
+    "000270": "기아",
+    "068270": "셀트리온",
+    "005490": "POSCO홀딩스",
     "105560": "KB금융",
+    "035420": "NAVER",
+    "055550": "신한지주",
+    "006400": "삼성SDI",
+    "051910": "LG화학",
+    "028260": "삼성물산",
+    "012330": "현대모비스",
+    "086790": "하나금융지주",
+    "035720": "카카오",
+    "000810": "삼성화재",
+    "138040": "메리츠금융지주",
+    "010130": "고려아연",
+    "003670": "포스코퓨처엠",
+    "011200": "HMM",
+    "066570": "LG전자",
+    "017670": "SK텔레콤",
+    "032830": "삼성생명",
+    "316140": "우리금융지주",
+    "012450": "한화에어로스페이스",
+    "259960": "크래프톤",
+    "033780": "KT&G",
+    "034020": "두산에너빌리티",
+    "034730": "SK",
+    "009150": "삼성전기",
+    "323410": "카카오뱅크",
+    "003550": "LG",
+    "329180": "HD현대중공업",
+    "015760": "한국전력",
+    "267250": "HD현대",
+    "024110": "기업은행",
+    "090430": "아모레퍼시픽",
+    "010950": "S-Oil",
+    "047050": "포스코인터내셔널",
+    "042660": "한화오션",
+    "003490": "대한항공",
+    "000100": "유한양행",
+    "030200": "KT",
+    "096770": "SK이노베이션",
+    "018260": "삼성에스디에스",
+    "352820": "하이브",
+    "078930": "GS",
 }
 
 DAYS_BACK = 7
@@ -91,6 +139,23 @@ def _priority_score(report_nm: str) -> int:
         if kw in report_nm:
             score += 1
     return score
+
+
+def _fetch_document_text(dart_client, rcept_no: str, max_chars: int = 2000) -> str:
+    """공시 원문 HTML을 가져와 순수 텍스트로 변환한다."""
+    import warnings
+    from bs4 import XMLParsedAsHTMLWarning
+    warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
+    try:
+        html = dart_client.document(rcept_no)
+        if not html:
+            return ""
+        soup = BeautifulSoup(html, "html.parser")
+        text = soup.get_text(separator=" ", strip=True)
+        text = re.sub(r"\s+", " ", text).strip()
+        return text[:max_chars]
+    except Exception:
+        return ""
 
 
 def _detect_type(report_nm: str) -> str:
@@ -336,15 +401,68 @@ _CPA_TEMPLATES: dict[str, dict] = {
 }
 
 
-def build_cpa_summary(corp_name: str, report_nm: str, disc_type: str, rcept_dt: str) -> str:
-    t = _CPA_TEMPLATES.get(disc_type, _CPA_TEMPLATES["기타"])
-    summary = (
+def _analyze_with_groq(corp_name: str, report_nm: str, disc_type: str, doc_text: str) -> str | None:
+    """Groq LLM으로 공시 원문을 읽고 일반인 언어로 분석을 생성한다."""
+    if not _groq_client or not doc_text:
+        return None
+
+    prompt = f"""당신은 20년 경력의 시니어 공인회계사(CPA)입니다.
+아래 한국 상장기업의 공시 원문을 읽고, **일반 개인투자자**가 이해할 수 있는 언어로 분석해주세요.
+전문 용어는 반드시 쉬운 말로 풀어서 설명하고, 숫자가 있으면 반드시 인용하세요.
+
+기업명: {corp_name}
+공시 제목: {report_nm}
+공시 유형: {disc_type}
+공시 원문:
+{doc_text}
+
+다음 4가지 항목으로 분석해주세요. 각 항목은 2~3문장으로 간결하게 작성하세요.
+
+[Cash] 이 공시가 회사의 돈(현금)에 미치는 영향은?
+[Risk] 투자자가 주의해야 할 위험 요소는?
+[Hidden Agenda] 이 공시 뒤에 숨겨진 경영진의 의도나 전략적 시그널은?
+[Verdict] 회계사로서 한 줄 최종 평가는?
+
+반드시 한국어로 답하고, 항목 제목([Cash] 등)은 그대로 유지하세요."""
+
+    try:
+        res = _groq_client.chat.completions.create(
+            model=GROQ_MODEL,
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.3,
+            max_tokens=800,
+        )
+        return res.choices[0].message.content.strip()
+    except Exception as e:
+        print(f"  [WARN] Groq 분석 실패: {e}")
+        return None
+
+
+def build_cpa_summary(
+    corp_name: str, report_nm: str, disc_type: str, rcept_dt: str, doc_text: str = ""
+) -> str:
+    header = (
         f"[공시] {corp_name} | {report_nm} | {rcept_dt}\n"
         f"[분류] {disc_type}\n\n"
-        f"[Cash]\n{textwrap.fill(t['cash'], width=80)}\n\n"
+    )
+
+    # Groq AI 분석 시도 (원문 있을 때만)
+    ai_analysis = _analyze_with_groq(corp_name, report_nm, disc_type, doc_text)
+    if ai_analysis:
+        return header + ai_analysis
+
+    # 폴백: 템플릿 기반 분석
+    t = _CPA_TEMPLATES.get(disc_type, _CPA_TEMPLATES["기타"])
+    doc_section = (
+        f"\n\n[원문 발췌]\n{textwrap.fill(doc_text, width=80)}" if doc_text else ""
+    )
+    summary = (
+        header
+        + f"[Cash]\n{textwrap.fill(t['cash'], width=80)}\n\n"
         f"[Risk]\n{textwrap.fill(t['risk'], width=80)}\n\n"
         f"[Hidden Agenda]\n{textwrap.fill(t['hidden'], width=80)}\n\n"
         f"[Verdict]\n{t['verdict']}"
+        f"{doc_section}"
     )
     return summary
 
@@ -431,7 +549,8 @@ def collect(stock_codes: list[str] | None = None) -> None:
 
             print(f"  [분석중]     [{disc_type}] {report_nm} ({rcept_dt})")
 
-            summary = build_cpa_summary(corp_name, report_nm, disc_type, rcept_dt)
+            doc_text = _fetch_document_text(dart, rcept_no)
+            summary = build_cpa_summary(corp_name, report_nm, disc_type, rcept_dt, doc_text)
 
             record = DisclosureLocal(
                 disclosure_id=rcept_no,
