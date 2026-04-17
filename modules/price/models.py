@@ -1,4 +1,5 @@
 """Price 모듈 로컬 테이블 정의"""
+
 from sqlalchemy import Column, String, Integer, Float, Date
 from sqlalchemy.orm import declarative_base
 
