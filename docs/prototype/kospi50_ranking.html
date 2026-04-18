@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>DiscloseAI — KOSPI 50 EQS 비교</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #0f172a; --panel: #1e293b; --border: #334155;
+    --text: #e2e8f0; --muted: #94a3b8;
+    --accent: #6366f1;
+    --A: #16a34a; --B: #65a30d; --C: #ca8a04; --D: #ea580c; --F: #dc2626;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 24px; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic", sans-serif; }
+  .container { max-width: 1400px; margin: 0 auto; }
+  header { display: flex; justify-content: space-between; align-items: flex-end;
+    border-bottom: 1px solid var(--border); padding-bottom: 16px; margin-bottom: 24px; }
+  header h1 { margin: 0; font-size: 28px; }
+  header .meta { color: var(--muted); font-size: 14px; }
+  .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 16px; }
+  .stat { background: var(--panel); border: 1px solid var(--border); border-radius: 12px;
+    padding: 16px; }
+  .stat .num { font-size: 28px; font-weight: 700; }
+  .stat .lbl { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .grid { display: grid; gap: 16px; margin-bottom: 16px; }
+  .grid-2 { grid-template-columns: 2fr 1fr; }
+  .panel { background: var(--panel); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px; }
+  .panel h2 { margin: 0 0 12px; font-size: 16px; color: var(--muted); font-weight: 500; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; padding: 8px 6px; color: var(--muted); font-weight: 500;
+    border-bottom: 1px solid var(--border); cursor: pointer; user-select: none; }
+  th:hover { color: var(--text); }
+  th.sort-asc::after { content: " ▲"; color: var(--accent); }
+  th.sort-desc::after { content: " ▼"; color: var(--accent); }
+  td { padding: 6px; border-bottom: 1px solid rgba(51, 65, 85, 0.4); }
+  tr:hover td { background: rgba(99, 102, 241, 0.06); }
+  .grade-pill { display: inline-block; padding: 2px 8px; border-radius: 999px;
+    font-size: 11px; font-weight: 700; color: white; min-width: 20px; text-align: center; }
+  .grade-A { background: var(--A); } .grade-B { background: var(--B); }
+  .grade-C { background: var(--C); } .grade-D { background: var(--D); }
+  .grade-F { background: var(--F); }
+  .num-cell { font-variant-numeric: tabular-nums; text-align: right; }
+  .total-cell { font-weight: 700; }
+  .err-row td { color: var(--muted); font-style: italic; }
+  .module-bar { display: inline-block; height: 6px; background: var(--accent);
+    border-radius: 2px; vertical-align: middle; margin-right: 4px; }
+  .chart-wrap { position: relative; height: 240px; }
+  footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+    color: var(--muted); font-size: 12px; }
+  .disclaimer { background: rgba(234, 179, 8, 0.08);
+    border: 1px solid rgba(234, 179, 8, 0.3); padding: 12px 16px; border-radius: 8px;
+    margin-top: 16px; font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div>
+      <h1>KOSPI 50 — EQS 비교 분석</h1>
+      <div class="meta">DiscloseAI · 2026-04-19 02:01 분석</div>
+    </div>
+    <div style="text-align:right;">
+      <div class="meta">분석 윈도우</div>
+      <div style="font-size:18px;font-weight:600;">2015~2025 (11년)</div>
+    </div>
+  </header>
+
+  <div class="stat-row">
+    <div class="stat"><div class="num">49<span style="color:var(--muted);font-size:18px;"> / 50</span></div><div class="lbl">분석 성공</div></div>
+    <div class="stat"><div class="num">59.5</div><div class="lbl">평균 EQS</div></div>
+    <div class="stat"><div class="num" style="color:var(--A);">2</div><div class="lbl">A등급</div></div>
+    <div class="stat"><div class="num" style="color:var(--F);">3</div><div class="lbl">F등급</div></div>
+  </div>
+
+  <div class="grid grid-2">
+    <div class="panel">
+      <h2>랭킹 (컬럼 헤더 클릭 시 정렬)</h2>
+      <div style="max-height:600px;overflow-y:auto;">
+        <table id="ranking">
+          <thead>
+            <tr>
+              <th data-key="rank">#</th>
+              <th data-key="name">기업</th>
+              <th class="num-cell" data-key="market_cap">시총</th>
+              <th class="num-cell" data-key="total">총점</th>
+              <th data-key="grade">등급</th>
+              <th class="num-cell" data-key="m1">M1</th>
+              <th class="num-cell" data-key="m2">M2</th>
+              <th class="num-cell" data-key="m3">M3</th>
+              <th class="num-cell" data-key="m4">M4</th>
+              <th class="num-cell" data-key="m5">M5</th>
+              <th class="num-cell" data-key="years">년수</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div>
+      <div class="panel">
+        <h2>등급 분포</h2>
+        <div class="chart-wrap"><canvas id="gradeChart"></canvas></div>
+      </div>
+      <div class="panel" style="margin-top:16px;">
+        <h2>모듈별 평균 점수</h2>
+        <div class="chart-wrap"><canvas id="moduleChart"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>총점 분포</h2>
+    <div class="chart-wrap" style="height:200px;"><canvas id="histChart"></canvas></div>
+  </div>
+
+  <footer>
+    <div class="disclaimer">
+      ⚠️ 본 분석은 K-IFRS 재무제표 기반 과거 통계 정보입니다. 투자 조언이 아닙니다.
+      금융지주사 등 일부 기업은 DART 과거 사업보고서 누락으로 단축 윈도우 기준입니다.
+    </div>
+    <div style="margin-top:12px;">
+      Powered by DART OpenAPI · DiscloseAI Financial Module
+    </div>
+  </footer>
+</div>
+
+<script>
+const DATA = {"rows": [{"name": "삼성전자", "code": "005930", "industry_code": null, "is_financial": false, "market_cap": 1425240202674176, "year_count": 11, "total": 63.7, "grade": "C", "modules": {"M1": 61.0, "M2": 84.7, "M3": 80.7, "M4": 25.6, "M5": 66.7}, "error": null}, {"name": "SK하이닉스", "code": "000660", "industry_code": null, "is_financial": false, "market_cap": 798959010316288, "year_count": 11, "total": 63.7, "grade": "C", "modules": {"M1": 56.5, "M2": 76.7, "M3": 79.5, "M4": 27.9, "M5": 77.8}, "error": null}, {"name": "삼성전자우", "code": "005930", "industry_code": null, "is_financial": false, "market_cap": 1425240202674176, "year_count": 11, "total": 63.7, "grade": "C", "modules": {"M1": 61.0, "M2": 84.7, "M3": 80.7, "M4": 25.6, "M5": 66.7}, "error": null}, {"name": "현대차", "code": "005380", "industry_code": null, "is_financial": false, "market_cap": 140039581335552, "year_count": 11, "total": 30.8, "grade": "F", "modules": {"M1": 75.9, "M2": 51.6, "M3": 15.5, "M4": 0.0, "M5": 11.1}, "error": null}, {"name": "LG에너지솔루션", "code": "373220", "industry_code": null, "is_financial": false, "market_cap": 97811999752192, "year_count": 6, "total": 55.2, "grade": "C", "modules": {"M1": 63.9, "M2": 92.8, "M3": 75.0, "M4": 0.0, "M5": 44.4}, "error": null}, {"name": "한화에어로스페이스", "code": "012450", "industry_code": null, "is_financial": false, "market_cap": 73211626651648, "year_count": 11, "total": 57.0, "grade": "C", "modules": {"M1": 78.7, "M2": 63.4, "M3": 75.0, "M4": 12.3, "M5": 55.6}, "error": null}, {"name": "SK스퀘어", "code": "402340", "industry_code": null, "is_financial": false, "market_cap": 89939643465728, "year_count": 3, "total": 25.1, "grade": "F", "modules": {"M1": 0.0, "M2": null, "M3": 4.8, "M4": 51.1, "M5": 44.4}, "error": null}, {"name": "삼성바이오로직스", "code": "207940", "industry_code": null, "is_financial": false, "market_cap": 74111816564736, "year_count": 9, "total": 76.1, "grade": "B", "modules": {"M1": 86.6, "M2": 96.3, "M3": 81.9, "M4": 27.0, "M5": 88.9}, "error": null}, {"name": "두산에너빌리티", "code": "034020", "industry_code": null, "is_financial": false, "market_cap": 69490469502976, "year_count": 11, "total": 65.0, "grade": "B", "modules": {"M1": 89.6, "M2": 75.2, "M3": 85.7, "M4": 18.9, "M5": 55.6}, "error": null}, {"name": "KB금융", "code": "105560", "industry_code": "064", "is_financial": true, "market_cap": 58198786572288, "year_count": 3, "total": 44.1, "grade": "D", "modules": {"M1": 98.9, "M2": null, "M3": null, "M4": 0.0, "M5": 33.3}, "error": null}, {"name": "기아", "code": "000270", "industry_code": null, "is_financial": false, "market_cap": 61874041257984, "year_count": 11, "total": 69.3, "grade": "B", "modules": {"M1": 91.9, "M2": null, "M3": 65.4, "M4": 64.2, "M5": 55.6}, "error": null}, {"name": "HD현대중공업", "code": "329180", "industry_code": null, "is_financial": false, "market_cap": 53950069866496, "year_count": 6, "total": 74.3, "grade": "B", "modules": {"M1": 46.0, "M2": 93.1, "M3": 65.5, "M4": 89.2, "M5": 77.8}, "error": null}, {"name": "삼성생명", "code": "032830", "industry_code": "067", "is_financial": true, "market_cap": 45522207375360, "year_count": 3, "total": 42.9, "grade": "D", "modules": {"M1": 95.5, "M2": null, "M3": null, "M4": 0.0, "M5": 33.3}, "error": null}, {"name": "삼성물산", "code": "028260", "industry_code": null, "is_financial": false, "market_cap": 49336004116480, "year_count": 11, "total": 58.1, "grade": "C", "modules": {"M1": 92.9, "M2": 75.6, "M3": 50.0, "M4": 16.4, "M5": 55.6}, "error": null}, {"name": "신한지주", "code": "055550", "industry_code": "064", "is_financial": true, "market_cap": 47275573248000, "year_count": 3, "total": 47.1, "grade": "D", "modules": {"M1": 96.9, "M2": null, "M3": null, "M4": 0.0, "M5": 44.4}, "error": null}, {"name": "셀트리온", "code": "068270", "industry_code": null, "is_financial": false, "market_cap": 45395879133184, "year_count": 11, "total": 71.2, "grade": "B", "modules": {"M1": 90.8, "M2": 71.9, "M3": 73.3, "M4": 64.6, "M5": 55.6}, "error": null}, {"name": "삼성전기", "code": "009150", "industry_code": null, "is_financial": false, "market_cap": 51296581189632, "year_count": 11, "total": 67.7, "grade": "B", "modules": {"M1": 70.3, "M2": 81.2, "M3": 50.0, "M4": 92.8, "M5": 44.4}, "error": null}, {"name": "삼성SDI", "code": "006400", "industry_code": null, "is_financial": false, "market_cap": 40369832067072, "year_count": 11, "total": 53.6, "grade": "C", "modules": {"M1": 83.0, "M2": 78.7, "M3": 50.0, "M4": 34.0, "M5": 22.2}, "error": null}, {"name": "한화오션", "code": "042660", "industry_code": null, "is_financial": false, "market_cap": 39831635755008, "year_count": 11, "total": 54.1, "grade": "C", "modules": {"M1": 98.1, "M2": 83.4, "M3": 0.0, "M4": 22.2, "M5": 66.7}, "error": null}, {"name": "HD현대일렉트릭", "code": "267260", "industry_code": null, "is_financial": false, "market_cap": 39124069253120, "year_count": 9, "total": 68.8, "grade": "B", "modules": {"M1": 70.0, "M2": 86.9, "M3": 47.2, "M4": 73.2, "M5": 66.7}, "error": null}, {"name": "미래에셋증권", "code": "006800", "industry_code": "066", "is_financial": true, "market_cap": 41165881606144, "year_count": 3, "total": 64.9, "grade": "C", "modules": {"M1": 69.2, "M2": null, "M3": null, "M4": 92.1, "M5": 33.3}, "error": null}, {"name": "현대모비스", "code": "012330", "industry_code": null, "is_financial": false, "market_cap": 38127104163840, "year_count": 11, "total": 76.2, "grade": "B", "modules": {"M1": 93.9, "M2": 80.6, "M3": 82.9, "M4": 56.8, "M5": 66.7}, "error": null}, {"name": "고려아연", "code": "010130", "industry_code": null, "is_financial": false, "market_cap": 30530122809344, "year_count": 11, "total": 62.0, "grade": "C", "modules": {"M1": 52.7, "M2": 59.3, "M3": 58.9, "M4": 94.5, "M5": 44.4}, "error": null}, {"name": "하나금융지주", "code": "086790", "industry_code": "064", "is_financial": true, "market_cap": 33837249724416, "year_count": 3, "total": 54.1, "grade": "C", "modules": {"M1": 95.3, "M2": null, "M3": null, "M4": 44.9, "M5": 22.2}, "error": null}, {"name": "NAVER", "code": "035420", "industry_code": null, "is_financial": false, "market_cap": 32363463573504, "year_count": 11, "total": 69.7, "grade": "B", "modules": {"M1": 83.3, "M2": null, "M3": 73.0, "M4": 66.7, "M5": 55.6}, "error": null}, {"name": "POSCO홀딩스", "code": "005490", "industry_code": null, "is_financial": false, "market_cap": 29113997852672, "year_count": 11, "total": 63.3, "grade": "C", "modules": {"M1": 80.3, "M2": 84.7, "M3": 83.8, "M4": 23.5, "M5": 44.4}, "error": null}, {"name": "효성중공업", "code": "298040", "industry_code": null, "is_financial": false, "market_cap": 27748988878848, "year_count": 8, "total": 70.8, "grade": "B", "modules": {"M1": 99.2, "M2": 77.7, "M3": 50.0, "M4": 60.6, "M5": 66.7}, "error": null}, {"name": "HD한국조선해양", "code": "009540", "industry_code": null, "is_financial": false, "market_cap": 29664787562496, "year_count": 11, "total": 85.3, "grade": "A", "modules": {"M1": 79.7, "M2": 89.8, "M3": 75.0, "M4": 93.1, "M5": 88.9}, "error": null}, {"name": "한국전력", "code": "015760", "industry_code": null, "is_financial": false, "market_cap": 29466151616512, "year_count": 11, "total": 72.8, "grade": "B", "modules": {"M1": 75.3, "M2": 88.6, "M3": 77.1, "M4": 34.3, "M5": 88.9}, "error": null}, {"name": "LS ELECTRIC", "code": "010120", "industry_code": null, "is_financial": false, "market_cap": 27731142115328, "year_count": 11, "total": 75.7, "grade": "B", "modules": {"M1": 98.3, "M2": 82.5, "M3": 53.2, "M4": 77.6, "M5": 66.7}, "error": null}, {"name": "한미반도체", "code": "042700", "industry_code": null, "is_financial": false, "market_cap": 27175384252416, "year_count": 11, "total": 62.7, "grade": "C", "modules": {"M1": 89.7, "M2": null, "M3": 56.8, "M4": 26.3, "M5": 77.8}, "error": null}, {"name": "SK", "code": "034730", "industry_code": null, "is_financial": false, "market_cap": 20091357888512, "year_count": 11, "total": 65.3, "grade": "B", "modules": {"M1": 94.1, "M2": 79.5, "M3": 75.0, "M4": 11.1, "M5": 66.7}, "error": null}, {"name": "우리금융지주", "code": "316140", "industry_code": "064", "is_financial": true, "market_cap": 26096487628800, "year_count": 3, "total": 41.1, "grade": "D", "modules": {"M1": 90.1, "M2": null, "M3": null, "M4": 0.0, "M5": 33.3}, "error": null}, {"name": "한화시스템", "code": "272210", "industry_code": null, "is_financial": false, "market_cap": 24215627497472, "year_count": 7, "total": 51.4, "grade": "C", "modules": {"M1": 88.6, "M2": 45.7, "M3": 50.0, "M4": 39.6, "M5": 33.3}, "error": null}, {"name": "삼성중공업", "code": "010140", "industry_code": null, "is_financial": false, "market_cap": 24813068353536, "year_count": 11, "total": 81.5, "grade": "A", "modules": {"M1": 70.1, "M2": 85.7, "M3": 100.0, "M4": 73.8, "M5": 77.8}, "error": null}, {"name": "LG화학", "code": "051910", "industry_code": null, "is_financial": false, "market_cap": 28179037159424, "year_count": 11, "total": 64.2, "grade": "C", "modules": {"M1": 50.9, "M2": 94.1, "M3": 77.5, "M4": 65.1, "M5": 33.3}, "error": null}, {"name": "현대로템", "code": "064350", "industry_code": null, "is_financial": false, "market_cap": 23574735749120, "year_count": 11, "total": 62.2, "grade": "C", "modules": {"M1": 87.3, "M2": null, "M3": 50.0, "M4": 45.0, "M5": 66.7}, "error": null}, {"name": "삼성화재", "code": "000810", "industry_code": "067", "is_financial": true, "market_cap": 20404567539712, "year_count": 3, "total": 41.8, "grade": "D", "modules": {"M1": 92.0, "M2": null, "M3": null, "M4": 0.0, "M5": 33.3}, "error": null}, {"name": "두산", "code": "000150", "industry_code": null, "is_financial": false, "market_cap": 22659385524224, "year_count": 11, "total": 54.0, "grade": "C", "modules": {"M1": 87.9, "M2": 76.3, "M3": 50.0, "M4": 0.0, "M5": 55.6}, "error": null}, {"name": "카카오", "code": "035720", "industry_code": null, "is_financial": false, "market_cap": 21994533814272, "year_count": 11, "total": 55.8, "grade": "C", "modules": {"M1": 82.8, "M2": null, "M3": 50.0, "M4": 34.6, "M5": 55.6}, "error": null}, {"name": "LIG넥스원", "code": "079550", "industry_code": null, "is_financial": false, "market_cap": 19136438599680, "year_count": 11, "total": 51.0, "grade": "C", "modules": {"M1": 32.9, "M2": 51.2, "M3": 75.0, "M4": 62.4, "M5": 33.3}, "error": null}, {"name": "SK이노베이션", "code": "096770", "industry_code": null, "is_financial": false, "market_cap": 21624212422656, "year_count": 11, "total": 73.4, "grade": "B", "modules": {"M1": 65.1, "M2": 91.4, "M3": 75.0, "M4": 80.0, "M5": 55.6}, "error": null}, {"name": "KODEX 200", "code": null, "industry_code": null, "is_financial": false, "market_cap": null, "year_count": 0, "total": null, "grade": null, "modules": {"M1": null, "M2": null, "M3": null, "M4": null, "M5": null}, "error": "ETF/REIT 등 재무제표 비대상"}, {"name": "HMM", "code": "011200", "industry_code": null, "is_financial": false, "market_cap": 19902320607232, "year_count": 11, "total": 57.3, "grade": "C", "modules": {"M1": 78.9, "M2": 78.5, "M3": 50.0, "M4": 45.8, "M5": 33.3}, "error": null}, {"name": "SK텔레콤", "code": "017670", "industry_code": null, "is_financial": false, "market_cap": 20937988636672, "year_count": 11, "total": 49.8, "grade": "D", "modules": {"M1": 41.9, "M2": null, "M3": 84.2, "M4": 28.5, "M5": 44.4}, "error": null}, {"name": "현대건설", "code": "000720", "industry_code": null, "is_financial": false, "market_cap": 19896649908224, "year_count": 11, "total": 50.6, "grade": "C", "modules": {"M1": 75.8, "M2": 83.0, "M3": 50.0, "M4": 0.0, "M5": 44.4}, "error": null}, {"name": "HD현대", "code": "267250", "industry_code": null, "is_financial": false, "market_cap": 18338457583616, "year_count": 9, "total": 59.2, "grade": "C", "modules": {"M1": 74.9, "M2": 89.1, "M3": 54.0, "M4": 0.0, "M5": 77.8}, "error": null}, {"name": "메리츠금융지주", "code": "138040", "industry_code": "064", "is_financial": true, "market_cap": 19411811434496, "year_count": 3, "total": 24.3, "grade": "F", "modules": {"M1": 61.8, "M2": null, "M3": null, "M4": 0.0, "M5": 11.1}, "error": null}, {"name": "포스코퓨처엠", "code": "003670", "industry_code": null, "is_financial": false, "market_cap": 20857879527424, "year_count": 11, "total": 53.2, "grade": "C", "modules": {"M1": 95.6, "M2": 86.4, "M3": 0.0, "M4": 39.4, "M5": 44.4}, "error": null}, {"name": "KT&G", "code": "033780", "industry_code": null, "is_financial": false, "market_cap": 18052236181504, "year_count": 11, "total": 70.9, "grade": "B", "modules": {"M1": 81.3, "M2": 70.5, "M3": 76.7, "M4": 92.6, "M5": 33.3}, "error": null}], "summary": {"total_count": 50, "success_count": 49, "fail_count": 1, "grade_distribution": {"A": 2, "B": 15, "C": 23, "D": 6, "F": 3}, "module_means": {"M1": 77.1, "M2": 79.1, "M3": 61.2, "M4": 39.5, "M5": 52.2}, "avg_total": 59.5}};
+const MODULE_COLORS = {M1:'#06b6d4', M2:'#8b5cf6', M3:'#22c55e', M4:'#eab308', M5:'#ef4444'};
+
+// 랭킹 표 렌더
+const tbody = document.querySelector('#ranking tbody');
+let sortKey = 'market_cap';
+let sortDir = -1;  // -1: 내림차순
+
+const GRADE_RANK = {A: 5, B: 4, C: 3, D: 2, F: 1};
+
+function fmtCap(v) {
+  if (v === null || v === undefined) return '—';
+  if (v >= 1e12) return (v / 1e12).toFixed(1) + '조';
+  if (v >= 1e8)  return (v / 1e8).toFixed(0) + '억';
+  return v.toLocaleString();
+}
+
+function render() {
+  const rows = [...DATA.rows];
+  rows.sort((a, b) => {
+    const va = pick(a, sortKey), vb = pick(b, sortKey);
+    if (va === null && vb === null) return 0;
+    if (va === null) return 1;
+    if (vb === null) return -1;
+    if (typeof va === 'string') return va.localeCompare(vb, 'ko') * sortDir;
+    return (va - vb) * sortDir;
+  });
+  tbody.innerHTML = '';
+  rows.forEach((r, i) => {
+    const tr = document.createElement('tr');
+    if (r.total === null) tr.className = 'err-row';
+    const moduleCells = ['M1','M2','M3','M4','M5'].map(m => {
+      const v = r.modules[m];
+      return `<td class="num-cell" style="color:${MODULE_COLORS[m]};">${v === null ? '—' : v.toFixed(0)}</td>`;
+    }).join('');
+    const finBadge = r.is_financial ? ' <span style="color:var(--accent);font-size:10px;">[금융]</span>' : '';
+    tr.innerHTML = `
+      <td>${i+1}</td>
+      <td><strong>${r.name}</strong>${finBadge} <span style="color:var(--muted);font-size:11px;">${r.code || ''}</span></td>
+      <td class="num-cell" style="color:var(--muted);">${fmtCap(r.market_cap)}</td>
+      <td class="num-cell total-cell">${r.total === null ? '—' : r.total.toFixed(1)}</td>
+      <td>${r.grade ? `<span class="grade-pill grade-${r.grade}">${r.grade}</span>` : ''}</td>
+      ${moduleCells}
+      <td class="num-cell" style="color:var(--muted);">${r.year_count}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+  // 헤더 정렬 표시 갱신
+  document.querySelectorAll('#ranking th').forEach(th => {
+    th.classList.remove('sort-asc', 'sort-desc');
+    if (th.dataset.key === sortKey) th.classList.add(sortDir > 0 ? 'sort-asc' : 'sort-desc');
+  });
+}
+
+function pick(r, key) {
+  if (key === 'rank') return null;
+  if (key === 'name') return r.name;
+  if (key === 'market_cap') return r.market_cap;
+  if (key === 'total') return r.total;
+  if (key === 'grade') return r.grade ? GRADE_RANK[r.grade] : null;
+  if (key === 'years') return r.year_count;
+  if (key.startsWith('m')) return r.modules[key.toUpperCase()];
+  return null;
+}
+
+document.querySelectorAll('#ranking th').forEach(th => {
+  th.addEventListener('click', () => {
+    const k = th.dataset.key;
+    if (!k || k === 'rank') return;
+    if (sortKey === k) sortDir = -sortDir;
+    else { sortKey = k; sortDir = -1; }
+    render();
+  });
+});
+
+render();
+
+// 등급 분포 도넛
+new Chart(document.getElementById('gradeChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['A','B','C','D','F'],
+    datasets: [{
+      data: ['A','B','C','D','F'].map(g => DATA.summary.grade_distribution[g] || 0),
+      backgroundColor: ['#16a34a','#65a30d','#ca8a04','#ea580c','#dc2626'],
+      borderColor: 'var(--panel)', borderWidth: 2,
+    }]
+  },
+  options: {
+    plugins: { legend: { position: 'right', labels: { color: '#e2e8f0', font: { size: 12 } } } }
+  }
+});
+
+// 모듈별 평균
+new Chart(document.getElementById('moduleChart'), {
+  type: 'bar',
+  data: {
+    labels: ['M1 발생액','M2 분식','M3 OCF/NI','M4 지속성','M5 Piotroski'],
+    datasets: [{
+      data: ['M1','M2','M3','M4','M5'].map(m => DATA.summary.module_means[m] || 0),
+      backgroundColor: ['#06b6d4','#8b5cf6','#22c55e','#eab308','#ef4444'],
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { min: 0, max: 100, ticks: { color: '#94a3b8' }, grid: { color: 'rgba(148,163,184,0.1)' } },
+      y: { ticks: { color: '#e2e8f0' }, grid: { display: false } }
+    }
+  }
+});
+
+// 총점 히스토그램 (10점 bin)
+const bins = Array.from({length: 10}, (_, i) => 0);  // 0-9, 10-19, ..., 90-100
+DATA.rows.forEach(r => {
+  if (r.total === null) return;
+  const idx = Math.min(9, Math.floor(r.total / 10));
+  bins[idx]++;
+});
+new Chart(document.getElementById('histChart'), {
+  type: 'bar',
+  data: {
+    labels: ['0-9','10-19','20-29','30-39','40-49','50-59','60-69','70-79','80-89','90-100'],
+    datasets: [{
+      data: bins,
+      backgroundColor: ['#dc2626','#dc2626','#dc2626','#ea580c','#ea580c','#ca8a04','#ca8a04','#65a30d','#65a30d','#16a34a'],
+    }]
+  },
+  options: {
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { ticks: { color: '#94a3b8' }, grid: { display: false } },
+      y: { ticks: { color: '#94a3b8', stepSize: 1 }, grid: { color: 'rgba(148,163,184,0.1)' } }
+    }
+  }
+});
+</script>
+</body>
+</html>
