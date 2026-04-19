@@ -16,9 +16,10 @@
 - [x] **Step 4** 의존성·환경 갱신 (`requirements.txt`에 requests·networkx·pandas·bs4·lxml 추가, `shared/config.py`에 `FTC_API_KEY` 추가, `.gitignore`에 graph export·raw_cache 추가)
 - [x] **Step 5** 검증 통과: `python -m modules.relation --help` ✓ / init DB 생성 ✓ / imports OK ✓ / `pytest tests/test_smoke.py` 2 passed ✓ / black 포매팅 통과
 
-### 사용자 수동 작업 (이번 세션 중 미완)
-- [ ] `.env` 실파일에 `FTC_API_KEY=...` 한 줄 추가 (settings.json deny로 Claude 편집 차단)
-- [ ] `.env.example`에 `FTC_API_KEY=` 항목 추가 (같은 이유)
+### 사용자 수동 작업
+- [x] `.env` 실파일에 `FTC_API_KEY=...` 한 줄 추가 완료 (2026-04-19)
+- [x] data.go.kr에 공정위 API 10종 활용신청 완료 (2026-04-19)
+- [~] `.env.example` 업데이트는 스킵 결정 (본인만 작업 중이라 불필요)
 
 ### Phase 2 — 실제 구현 (미착수, 다음 세션 이후)
 
@@ -57,9 +58,11 @@
 - `5% ~ 20%` → `investment` (유의적 투자)
 - `< 5%` → 엣지 없음
 
-### 공정위 API 5개 (data.go.kr 인증키 1개로 공통)
-**필수 3**: 지정된 대규모기업집단 조회 / 지정된 대규모기업집단 소속회사 조회 / 사용 가능 공개년월 조회
-**권장 2**: 대규모기업집단 소속회사 주주현황 / 대규모기업집단 소속회사 개요
+### 공정위 API 10개 (활용신청 완료 2026-04-19, 인증키 1개로 공통)
+**MVP 필수 3**: 지정된 대규모기업집단 조회 / 지정된 대규모기업집단 소속회사 조회 / 사용 가능 공개년월 조회
+**MVP 보조 3** (Phase 2b에서 여건 시): 지주회사 자회사 및 손자회사 현황 / 특수관계인 내부지분 현황 / 지정된 대규모기업집단 자산순위
+**v2 연기 4**: 소속회사 재무현황 / 소속회사 참여업종 / 계열 편입/제외/유예 변경내역 / 기업집단별 순환출자 현황
+(MVP에서 제외: 소속회사 주주현황·개요 — 활용신청하지 않음)
 
 ### 환경변수 (`.env`)
 - `DART_API_KEY` — 발급 완료
