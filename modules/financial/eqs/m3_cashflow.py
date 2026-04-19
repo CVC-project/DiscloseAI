@@ -61,12 +61,32 @@ def _vol_score(values: List[float]) -> float:
     return round((1 - cv) * 100, 1)
 
 
+# 개별 연도 OCF/NI 비율 outlier 제한 — 단일 연도의 폭발적 악화가 다년 평균을
+# 왜곡하지 않도록. 3 = OCF가 NI의 3배, -3 = OCF가 NI의 -3배 수준. 실무에서 이
+# 정도 범위를 벗어나면 일회성·비경상적 요인이라 해석이 어렵다.
+_RATIO_CLIP = 3.0
+
+
 def score_m3(panel: FirmPanel) -> ModuleScore:
     pairs = _ocf_ni_pairs(panel)
     if len(pairs) < 2:
         return ModuleScore(name="M3", score=None, note="OCF/NI 비율 데이터 부족(2년 이상 필요)")
+
+    # 데이터 품질 체크: 전체 연도 중 순적자 해가 과반이면 비율 해석 자체가 어려움.
+    total_years = len(panel.years)
+    valid = len(pairs)
+    if valid * 2 < total_years:
+        loss_years = total_years - valid
+        return ModuleScore(
+            name="M3",
+            score=None,
+            note=f"적자 연도 {loss_years}/{total_years} — OCF/NI 해석 불가",
+        )
+
     years = [p[0] for p in pairs]
-    ratios = [p[1] for p in pairs]
+    ratios_raw = [p[1] for p in pairs]
+    # 개별 연도 outlier winsorize — 단일 연도가 평균을 망가뜨리는 것 방지
+    ratios = [max(-_RATIO_CLIP, min(_RATIO_CLIP, r)) for r in ratios_raw]
     avg = mean(ratios)
 
     if len(pairs) >= 3:

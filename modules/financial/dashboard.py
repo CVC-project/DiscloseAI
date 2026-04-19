@@ -639,7 +639,14 @@ def build_dashboard(
 
 
 def _record_row(r: FirmRecord) -> dict:
-    """배치 1행 → 표 + 차트용 dict."""
+    """배치 1행 → 표 + 차트용 dict.
+
+    ``module_notes``: 각 모듈의 산출 사유·해석 노트. UI 툴팁 노출용.
+    - 정상 산출: ``'M=-1.5 (정상)'`` 등 원시 지표 + 해석
+    - 결측 None: 왜 계산 못 했는지 사유 (예: ``'매출원가 없음(서비스형)'``)
+    - 업종 제외: ``'금융업 제외'`` — eqs.modules에는 없지만 excluded에 기록됨
+    """
+    all_mods = ("M1", "M2", "M3", "M4", "M5")
     common = {
         "name": r.display_name,
         "code": r.corp.stock_code if r.corp else None,
@@ -649,13 +656,36 @@ def _record_row(r: FirmRecord) -> dict:
         "year_count": len(r.panel.years) if r.panel else 0,
     }
     if r.eqs is None:
-        return {**common, "total": None, "grade": None,
-                "modules": {m: None for m in ("M1", "M2", "M3", "M4", "M5")},
-                "error": r.error}
-    mod_map = {m.name: m.score for m in r.eqs.modules}
-    return {**common, "total": r.eqs.total, "grade": r.eqs.grade,
-            "modules": {m: mod_map.get(m) for m in ("M1", "M2", "M3", "M4", "M5")},
-            "error": None}
+        err = r.error or "분석 실패"
+        return {
+            **common,
+            "total": None, "grade": None,
+            "modules": {m: None for m in all_mods},
+            "module_notes": {m: err for m in all_mods},
+            "error": r.error,
+        }
+    mod_map = {m.name: (m.score, m.note) for m in r.eqs.modules}
+    excluded = set(r.eqs.excluded or [])
+    modules: dict = {}
+    notes: dict = {}
+    for m in all_mods:
+        if m in mod_map:
+            score, note = mod_map[m]
+            modules[m] = score
+            notes[m] = note or ""
+        elif m in excluded:
+            modules[m] = None
+            notes[m] = "금융업 제외 — 해당 모듈 부적합"
+        else:
+            modules[m] = None
+            notes[m] = ""
+    return {
+        **common,
+        "total": r.eqs.total, "grade": r.eqs.grade,
+        "modules": modules,
+        "module_notes": notes,
+        "error": None,
+    }
 
 
 _RANKING_TEMPLATE = """<!doctype html>
@@ -822,7 +852,12 @@ function render() {{
     if (r.total === null) tr.className = 'err-row';
     const moduleCells = ['M1','M2','M3','M4','M5'].map(m => {{
       const v = r.modules[m];
-      return `<td class="num-cell" style="color:${{MODULE_COLORS[m]}};">${{v === null ? '—' : v.toFixed(0)}}</td>`;
+      const note = (r.module_notes && r.module_notes[m]) ? r.module_notes[m] : '';
+      const safeNote = note.replace(/"/g, '&quot;');
+      const display = v === null ? '—' : v.toFixed(0);
+      const titleAttr = safeNote ? `title="${{safeNote}}"` : '';
+      const cursor = note ? 'cursor:help;' : '';
+      return `<td class="num-cell" ${{titleAttr}} style="color:${{MODULE_COLORS[m]}};${{cursor}}">${{display}}</td>`;
     }}).join('');
     const finBadge = r.is_financial ? ' <span style="color:var(--accent);font-size:10px;">[금융]</span>' : '';
     tr.innerHTML = `

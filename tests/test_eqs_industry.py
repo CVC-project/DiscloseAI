@@ -21,11 +21,15 @@ def test_non_financial():
 
 
 def test_excluded_for_finance():
-    assert excluded_modules("064") == {"M3"}
+    # 금융업(064~067)은 M2·M3 둘 다 제외
+    # M3: OCF 개념 다름, M2: 매출/매출원가 개념 부적합
+    assert excluded_modules("064") == {"M2", "M3"}
+    assert excluded_modules("067") == {"M2", "M3"}
     assert excluded_modules("013") == set()
 
 
-def test_active_modules_filters_out_m3():
+def test_active_modules_filters_out_m2_m3():
+    """금융업은 M2·M3 모두 빠진 M1/M4/M5만 활성."""
     all_mods = ["M1", "M2", "M3", "M4", "M5"]
-    assert active_modules(all_mods, "065") == ["M1", "M2", "M4", "M5"]
+    assert active_modules(all_mods, "065") == ["M1", "M4", "M5"]
     assert active_modules(all_mods, "013") == all_mods

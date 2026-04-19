@@ -70,8 +70,8 @@ def _safe_div(num: Optional[float], den: Optional[float]) -> Optional[float]:
     return num / den
 
 
-def _beneish_indices(prev: FirmYear, curr: FirmYear) -> Optional[dict]:
-    """8개 지수 계산. 결측이 있어 주요 지수를 못 만들면 None."""
+def _compute_all_indices(prev: FirmYear, curr: FirmYear) -> dict:
+    """8개 지수 원시 계산 (결측은 None 그대로). 필터링 X."""
     # 매출/AR
     dsri_curr = _safe_div(curr.accounts_receivable, curr.revenue)
     dsri_prev = _safe_div(prev.accounts_receivable, prev.revenue)
@@ -136,7 +136,7 @@ def _beneish_indices(prev: FirmYear, curr: FirmYear) -> Optional[dict]:
     )
     lvgi = _safe_div(lev_curr, lev_prev)
 
-    indices = {
+    return {
         "DSRI": dsri,
         "GMI": gmi,
         "AQI": aqi,
@@ -146,14 +146,33 @@ def _beneish_indices(prev: FirmYear, curr: FirmYear) -> Optional[dict]:
         "TATA": tata,
         "LVGI": lvgi,
     }
-    # 핵심 4지수(DSRI/GMI/SGI/TATA)가 모두 있어야 의미 있는 점수
-    if any(indices[k] is None for k in ("DSRI", "GMI", "SGI", "TATA")):
+
+
+# 핵심 지수 사람이 읽는 한글 라벨 (결측 사유 메시지용)
+_CORE_LABELS = {
+    "DSRI": "매출채권 비율",
+    "GMI": "매출총이익률",
+    "SGI": "매출 성장",
+    "TATA": "발생액/자산",
+}
+_CORE_INDICES = tuple(_CORE_LABELS.keys())
+
+
+def _beneish_indices(prev: FirmYear, curr: FirmYear) -> Optional[dict]:
+    """핵심 4지수가 모두 있을 때만 8지수 dict 반환. 부차 결측은 1.0 대체."""
+    indices = _compute_all_indices(prev, curr)
+    if any(indices[k] is None for k in _CORE_INDICES):
         return None
-    # 부차 지수가 None이면 1로 대체 (변화 없음 가정 — Beneish 원논문 관행)
+    # 부차 지수 결측은 1.0 대체 (변화 없음 가정 — Beneish 원논문 관행)
     for k in ("AQI", "DEPI", "SGAI", "LVGI"):
         if indices[k] is None:
             indices[k] = 1.0
     return indices
+
+
+def _panel_has_cogs(panel: FirmPanel) -> bool:
+    """패널에 매출원가가 한 해라도 있는지. 모두 None이면 서비스·플랫폼 기업."""
+    return any(y.cogs is not None for y in panel.years)
 
 
 def m_score(prev: FirmYear, curr: FirmYear, coefs: BeneishCoefficients = BENEISH_KR) -> Optional[float]:
@@ -195,14 +214,30 @@ def _m_to_score(m: float) -> float:
 def score_m2(
     panel: FirmPanel, coefs: BeneishCoefficients = BENEISH_KR
 ) -> ModuleScore:
-    """패널의 가장 최근 (t-1, t) 페어로 M2 산출."""
+    """패널의 가장 최근 (t-1, t) 페어로 M2 산출.
+
+    ``note`` 필드는 산출 실패 시 구체적 사유를 담아 랭킹 대시보드 툴팁으로 노출된다.
+    """
     curr = panel.latest()
     prev = panel.prior()
     if curr is None or prev is None:
         return ModuleScore(name="M2", score=None, note="패널 부족(t,t-1 필요)")
+
+    # 서비스·플랫폼 기업 사전 감지 (DART에 매출원가 항목 자체 없음)
+    if not _panel_has_cogs(panel):
+        return ModuleScore(
+            name="M2",
+            score=None,
+            note="매출원가 항목 없음(서비스·플랫폼형) — Beneish 모델 부적합",
+        )
+
     m = m_score(prev, curr, coefs)
     if m is None:
-        return ModuleScore(name="M2", score=None, note="핵심 지수(DSRI/GMI/SGI/TATA) 결측")
+        # 어떤 핵심 지수가 빠졌는지 구체적으로 표시
+        raw = _compute_all_indices(prev, curr)
+        missing = [_CORE_LABELS[k] for k in _CORE_INDICES if raw[k] is None]
+        reason = ", ".join(missing) if missing else "핵심 지수"
+        return ModuleScore(name="M2", score=None, note=f"{reason} 결측 — 산출 불가")
     score = _m_to_score(m)
     flag = "분식 의심" if m > M_THRESHOLD else "정상"
     return ModuleScore(name="M2", score=score, raw=m, note=f"M={m:.2f} ({flag})")

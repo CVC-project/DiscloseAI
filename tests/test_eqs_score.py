@@ -32,21 +32,23 @@ def test_compute_eqs_manipulator_low():
     assert res_h.total > res_m.total
 
 
-def test_compute_eqs_excludes_m3_for_finance():
+def test_compute_eqs_excludes_m2_m3_for_finance():
+    """금융업(064~067)은 M2·M3 모두 제외. 남은 3개 모듈(M1, M4, M5)로 산출."""
     panel = healthy_panel()
     panel.industry_code = "065"  # 증권
     res = compute_eqs(panel)
-    assert "M3" in res.excluded
+    assert set(res.excluded) == {"M2", "M3"}
     module_names = [m.name for m in res.modules]
+    assert "M2" not in module_names
     assert "M3" not in module_names
-    assert len(res.modules) == 4
+    assert len(res.modules) == 3
 
 
 def test_redistribute_renormalizes():
-    new = _redistribute(DEFAULT_WEIGHTS, ["M3"])
+    # 금융업 케이스: M2·M3 2개 제외 시 남은 3개(M1,M4,M5) 균등 재배분
+    new = _redistribute(DEFAULT_WEIGHTS, ["M2", "M3"])
+    assert "M2" not in new
     assert "M3" not in new
-    # 남은 4개 가중치 합 == 1
     assert abs(sum(new.values()) - 1.0) < 1e-9
-    # 균등 재배분
     for v in new.values():
-        assert abs(v - 0.25) < 1e-9
+        assert abs(v - 1.0 / 3) < 1e-9
