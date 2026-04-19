@@ -4,7 +4,9 @@ shared/models.py의 RelationData와 별개로 개발·테스트 단계에서 사
 MVP 검증 완료 후 shared/ 로 승격 PR 예정.
 """
 
-from sqlalchemy import Boolean, Column, Float, Integer, String
+from datetime import datetime
+
+from sqlalchemy import Boolean, Column, DateTime, Float, Integer, String, Text
 from sqlalchemy.orm import declarative_base
 
 Base = declarative_base()
@@ -22,6 +24,35 @@ class CompanyNode(Base):
     sector = Column(String)  # 섹터 (viewer/CLAUDE.md의 sectors 키)
     group_name = Column(String, index=True)  # 공정위 기업집단명 (null 가능)
     is_target = Column(Boolean, default=True)  # top50 포함 여부
+
+
+class RelationRaw(Base):
+    """ingest 단계의 원본 수집 데이터 (기업명 정규화·ticker 매칭 전).
+
+    transform/filters.apply()가 이 테이블을 읽어 ticker 매칭 + 개인·재단 필터를 거쳐
+    RelationLocal로 마이그레이션. ingest는 이 테이블에 "원본 그대로" 저장하는 것이 원칙.
+
+    source_type 값:
+      - hyslrSttus: DART 최대주주 현황 (target_name = 자기 기업명, source_name = 주주명)
+      - otrCprInvstmntSttus: DART 타법인 출자 (source_name = 자기 기업명, target_name = 피투자법인명)
+      - ftc: 공정위 소속회사 정보
+      - dart_filing: 사업보고서 주석 특수관계자 섹션
+    """
+
+    __tablename__ = "relation_raw"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    source_name = Column(
+        String, nullable=False, index=True
+    )  # 정규화 전 원본 기업명·주주명
+    target_name = Column(String, nullable=False, index=True)
+    relate = Column(String)  # DART hyslrSttus의 관계 필드 (본인/친인척/계열회사 등)
+    ratio = Column(Float)  # 지분율 %
+    stock_knd = Column(String)  # 주식 종류 (보통주/우선주)
+    source_type = Column(String, nullable=False)
+    bsns_year = Column(Integer)  # 사업연도 (DART 기준)
+    raw_response = Column(Text)  # 원본 API 응답 항목 (JSON 문자열, 감사 추적용)
+    created_at = Column(DateTime, default=datetime.utcnow)
 
 
 class RelationLocal(Base):

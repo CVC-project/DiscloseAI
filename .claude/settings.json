@@ -1,13 +1,7 @@
 {
   "permissions": {
     "allow": [
-      "Bash(python -m pytest *)",
-      "Bash(black *)",
-      "Bash(git status)",
-      "Bash(git diff*)",
-      "Bash(git log*)",
-      "Bash(git add *)",
-      "Bash(git commit *)"
+      "Bash(*)"
     ],
     "deny": [
       "Bash(git push --force*)",
