@@ -26,6 +26,11 @@ from typing import List, Optional, Tuple
 from ._ols import ols_simple
 from .types import FirmPanel, FirmYear, ModuleScore
 
+# AR(1) 추정을 시도할 최소 연도 수. 미만이면 None 반환.
+# 이론적으로는 3년이면 pair 2개로 기울기 계산 가능하지만, 3~4년 노이즈가
+# 심해 φ가 ±1 극단값으로 튀는 경우가 많음 (예: 금융지주사). 5년 이상 요구해
+# 통계적 신뢰도 확보.
+MIN_YEARS = 5
 # 이 길이 이상이면 robust trim(사이클 outlier 1점 제거) 적용
 ROBUST_MIN_YEARS = 7
 # 이 길이 이상이면 추정이 안정적이라는 의미로 note 표기
@@ -119,8 +124,12 @@ def score_m4(panel: FirmPanel, *, robust: bool = True) -> ModuleScore:
     """
     series = _roa_series(panel)
     n = len(series)
-    if n < 3:
-        return ModuleScore(name="M4", score=None, note="ROA 시계열 부족(3년 이상 필요)")
+    if n < MIN_YEARS:
+        return ModuleScore(
+            name="M4",
+            score=None,
+            note=f"ROA 시계열 {n}년 — AR(1) 추정에 최소 {MIN_YEARS}년 필요",
+        )
     roa = [s[1] for s in series]
 
     used_robust = False

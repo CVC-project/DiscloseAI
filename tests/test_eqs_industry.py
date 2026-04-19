@@ -2,6 +2,7 @@
 
 from modules.financial.eqs.industry import (
     is_financial,
+    is_holding,
     excluded_modules,
     active_modules,
 )
@@ -33,3 +34,24 @@ def test_active_modules_filters_out_m2_m3():
     all_mods = ["M1", "M2", "M3", "M4", "M5"]
     assert active_modules(all_mods, "065") == ["M1", "M4", "M5"]
     assert active_modules(all_mods, "013") == all_mods
+
+
+def test_is_holding():
+    """지주·투자회사 내부 코드 '100' prefix 인식."""
+    assert is_holding("100")
+    assert is_holding("100A")  # 추후 하위 분류 가능성
+    assert not is_holding("013")  # 반도체
+    assert not is_holding("064")  # 금융
+    assert not is_holding(None)
+    assert not is_holding("")
+
+
+def test_excluded_for_holding():
+    """지주사(100)는 M1만 제외. 자회사 지분법이익이 단일기업 fallback에 부적합."""
+    assert excluded_modules("100") == {"M1"}
+
+
+def test_active_modules_filters_out_m1_for_holding():
+    """지주사는 M1만 빠진 M2/M3/M4/M5 활성."""
+    all_mods = ["M1", "M2", "M3", "M4", "M5"]
+    assert active_modules(all_mods, "100") == ["M2", "M3", "M4", "M5"]

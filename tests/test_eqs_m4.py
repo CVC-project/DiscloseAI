@@ -53,6 +53,15 @@ def test_m4_insufficient_panel():
     assert s.score is None
 
 
+def test_m4_requires_5_years():
+    """3~4년 패널은 AR(1) 추정 노이즈 심해 None (금융지주 3년·SK스퀘어 3년 등 방지)."""
+    for n in (3, 4):
+        years = [make_year(2020 + i, ni=100 + i, ta=5000) for i in range(n)]
+        s = score_m4(FirmPanel(corp_code="X", years=years))
+        assert s.score is None, f"{n}년 데이터인데 점수 산출됨: {s.score}"
+        assert "5년" in s.note or "부족" in s.note
+
+
 def test_m4_robust_trims_cyclical_outlier():
     """10년 안정 + 1년 사이클 침체 → robust=True가 robust=False보다 점수 높아야."""
     # 9년은 ROA가 상승 트렌드, 1년만 폭락(사이클 침체)

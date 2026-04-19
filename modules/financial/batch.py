@@ -43,7 +43,7 @@ ALIASES = {
 INSTRUMENT_BLACKLIST = {"KODEX 200"}
 
 # 금융업 (KRX 업종코드 064~067) — fnlttSinglAcntAll endpoint가 옛 데이터 미제공.
-# CLAUDE.local.md 규칙대로 M3 자동 제외 + 별도 BIS 모듈 도입 시까지 EQS 보류.
+# CLAUDE.local.md 규칙대로 M2·M3 자동 제외 + 별도 BIS 모듈 도입 시까지 EQS 보류.
 # KOSPI 50 명단 기준 자동 분류용 — KRX 정식 분류 연동 전까지 하드코딩.
 _FINANCIAL_INDUSTRIES = {
     "KB금융": "064",          # 은행지주
@@ -56,10 +56,25 @@ _FINANCIAL_INDUSTRIES = {
     "삼성화재": "067",
 }
 
+# 지주·투자회사 — 자회사 지분법이익이 주수익이라 M1(발생액 품질)의
+# 단일기업 fallback이 '이상 발생액'으로 오인. industry.py excluded_modules에서
+# M1 자동 제외. 내부 코드 "100".
+_HOLDING_COMPANIES = {
+    "SK스퀘어": "100",   # SK하이닉스 지분 보유
+    "SK": "100",         # SK그룹 지주
+    "HD현대": "100",     # HD그룹 지주
+    "두산": "100",       # 두산그룹 지주
+    "삼성물산": "100",    # 삼성그룹 사실상 지주 역할
+}
+
 
 def _industry_for(name: str) -> Optional[str]:
-    """이름 기반 업종코드 추정. 미상이면 None (비금융 기본 가정)."""
-    return _FINANCIAL_INDUSTRIES.get(name)
+    """이름 기반 업종코드 추정. 금융 > 지주 > 일반 순. 미상이면 None."""
+    if name in _FINANCIAL_INDUSTRIES:
+        return _FINANCIAL_INDUSTRIES[name]
+    if name in _HOLDING_COMPANIES:
+        return _HOLDING_COMPANIES[name]
+    return None
 
 KOSPI_TOP_50 = [
     "삼성전자", "SK하이닉스", "삼성전자우", "현대차", "LG에너지솔루션",
