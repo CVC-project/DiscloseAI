@@ -15,6 +15,7 @@ from .translate import (
     translate_all,
 )
 from .highlights import extract_highlights, Highlight
+from .ratios import Ratios, compute_ratios, LABELS as RATIO_LABELS
 
 __all__ = [
     "translate_income",
@@ -23,4 +24,7 @@ __all__ = [
     "translate_all",
     "extract_highlights",
     "Highlight",
+    "Ratios",
+    "compute_ratios",
+    "RATIO_LABELS",
 ]
