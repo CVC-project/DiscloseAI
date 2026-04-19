@@ -9,6 +9,12 @@
 # 로컬 DB (개별 모듈 개발용)
 modules/*/data/*.db
 
+# 그래프 export 결과물 (재생성 가능)
+modules/*/data/graph_*.json
+
+# API RAW 캐시 (재생성 가능)
+modules/*/data/raw_cache/
+
 # Python
 __pycache__/
 *.pyc

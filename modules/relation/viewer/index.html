@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Corporate Universe — DiscloseAI (Top 50)</title>
+    <!--
+      TODO (Phase 2f): docs/prototype/corporate_universe_v5.html을 여기로 fork.
+      변경점 3곳만:
+        1. const raw=[...하드코딩] 제거 → fetch('../data/graph_top50.json')으로 교체
+        2. init() 내부 rl.split(':') → 3-split로 수정, edges.push에 type·ratio·detail 포함
+        3. draw() 엣지 루프에 relation_type별 스타일 분기 추가
+
+      스타일 표·sectors 확장·K-IFRS 툴팁 상세는 modules/relation/viewer/CLAUDE.md 참조.
+      원본 docs/prototype/corporate_universe_v5.html은 수정 금지 (다른 팀원 참고용).
+    -->
+  </head>
+  <body>
+    <p style="font-family: monospace; color: #888; padding: 40px">
+      viewer/index.html: Phase 2f에서 프로토타입 fork + fetch 로더로 구현 예정.<br />
+      데이터 소스: <code>../data/graph_top50.json</code> (Phase 2e에서 생성)
+    </p>
+  </body>
+</html>
