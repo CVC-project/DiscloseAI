@@ -17,7 +17,7 @@ from __future__ import annotations
 
 import json
 import os
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass, field, fields
 from typing import Dict, Iterable, List, Optional
 
 # ---------------------------------------------------------------------------
@@ -219,10 +219,20 @@ def save_sector_stats(stats: Dict[str, SectorStats], path: Optional[str] = None)
 
 
 def load_sector_stats(path: Optional[str] = None) -> Dict[str, SectorStats]:
-    """저장된 섹터 통계 로드. 파일 없으면 빈 dict."""
+    """저장된 섹터 통계 로드. 파일 없으면 빈 dict.
+
+    스키마 진화 대비: ``SectorStats`` 가 나중에 필드를 추가해도 구버전 JSON을
+    읽을 수 있도록, dataclass fields로 한정한 알려진 키만 **v로 전달한다.
+    (구버전 JSON이 새 필드 누락 시 ``field(default_factory=...)`` 기본값 적용,
+    미래 JSON에 모르는 키가 있으면 조용히 무시.)
+    """
     in_path = path or _CACHE_FILE
     if not os.path.exists(in_path):
         return {}
     with open(in_path, "r", encoding="utf-8") as fp:
         raw = json.load(fp)
-    return {k: SectorStats(**v) for k, v in raw.items()}
+    known = {f.name for f in fields(SectorStats)}
+    return {
+        k: SectorStats(**{fk: v[fk] for fk in known if fk in v})
+        for k, v in raw.items()
+    }
