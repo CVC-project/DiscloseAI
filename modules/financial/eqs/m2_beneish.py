@@ -171,8 +171,12 @@ def _beneish_indices(prev: FirmYear, curr: FirmYear) -> Optional[dict]:
 
 
 def _panel_has_cogs(panel: FirmPanel) -> bool:
-    """패널에 매출원가가 한 해라도 있는지. 모두 None이면 서비스·플랫폼 기업."""
-    return any(y.cogs is not None for y in panel.years)
+    """패널에 **양수 매출원가**가 한 해라도 있는지.
+
+    None이거나 0으로 기록된 해만 있으면 서비스·플랫폼 기업 간주. cogs=0
+    케이스도 실질적으로 매출원가 항목이 없다는 신호로 보고 제외.
+    """
+    return any(y.cogs is not None and y.cogs > 0 for y in panel.years)
 
 
 def m_score(prev: FirmYear, curr: FirmYear, coefs: BeneishCoefficients = BENEISH_KR) -> Optional[float]:

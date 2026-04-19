@@ -701,6 +701,14 @@ def _record_row(r: FirmRecord) -> dict:
         }
     mod_map = {m.name: (m.score, m.note) for m in r.eqs.modules}
     excluded = set(r.eqs.excluded or [])
+    # 업종별로 제외 사유 메시지 분기 (금융·지주 혼동 방지)
+    ind = r.industry_code or ""
+    if ind.startswith(("064", "065", "066", "067")):
+        excluded_note = "금융업 제외 — 해당 모듈 부적합"
+    elif ind.startswith("100"):
+        excluded_note = "지주·투자회사 제외 — 단일기업 fallback 부적합"
+    else:
+        excluded_note = "제외 — 해당 모듈 부적합"
     modules: dict = {}
     notes: dict = {}
     for m in all_mods:
@@ -710,7 +718,7 @@ def _record_row(r: FirmRecord) -> dict:
             notes[m] = note or ""
         elif m in excluded:
             modules[m] = None
-            notes[m] = "금융업 제외 — 해당 모듈 부적합"
+            notes[m] = excluded_note
         else:
             modules[m] = None
             notes[m] = ""

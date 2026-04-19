@@ -121,3 +121,17 @@ def test_m4_phi_zero_maps_to_middle_not_zero():
     assert _phi_to_score(-1.5) == 0.0
     # φ = 0.5: 중간 지속 → 75
     assert _phi_to_score(0.5) == 75.0
+
+
+def test_m4_phi_exploding_range_mapped_correctly():
+    """폭주 구간 [1, 2]는 100→0 선형 감소. φ=1.5 → 50점 (regression guard).
+
+    초기 구현에서 조건 순서 버그로 φ>1.0 케이스가 도달 불가했던 dead code를
+    수정한 이후 추가. 폭주 과열 기업이 만점 받지 않도록 검증.
+    """
+    from modules.financial.eqs.m4_persistence import _phi_to_score
+
+    assert _phi_to_score(1.0) == 100.0   # 경계: 이상적 지속
+    assert _phi_to_score(1.5) == 50.0    # 폭주 중간
+    assert _phi_to_score(2.0) == 0.0     # 폭주 경계
+    assert _phi_to_score(2.5) == 0.0     # 발산

@@ -11,6 +11,60 @@
 - **도메인 메모**: 금융업(064~066) 제외 확인 완료
 -->
 
+## 2026-04-19 (/check)
+- **작업**: 이번 세션 대규모 확장 — 수익성 비율·업계 비교·용어 툴팁·EQS 로직 정교화
+  - **Phase 1**: `translator/ratios.py` 신규 (매출총/영업/순이익률·ROE·ROA).
+    대시보드에 💰 수익성 섹션 + 📊🏛💵 재무제표 3종 5년 표.
+  - **Phase 2**: `industry_groups.py` 신규 — KOSPI 50 → 11개 섹터 수동 매핑 +
+    섹터 평균 집계 + JSON 캐시. pykrx는 KRX 사이트 개편 이후 미동작.
+    대시보드 🏭 업계 대비 섹션 (내 회사 vs 섹터 평균 ±차이).
+  - **용어 사전**: `glossary.py` 신규 — GlossaryEntry 데이터클래스(label/
+    description/how/benchmark/intuition). 대시보드 ⓘ 툴팁을 카드형 섹션 UI로 재설계.
+  - **2025년 사업보고서 반영**: range(2020,2025) → range(2021,2026).
+    배치 + 대시보드 모두 2025 결산 기준 재생성.
+  - **EQS 로직 수정**:
+    - M2: 매출원가 없는 서비스 기업 자동 감지 (`_panel_has_cogs`, cogs>0 필수),
+      핵심 지수 결측 시 한글 사유 표기 (매출채권/매출총이익률/매출성장/발생액).
+    - M3: 단일 연도 OCF/NI ±3 winsorize, 적자 연도 과반이면 None.
+    - M4: 하드 컷오프(φ≤0 즉시 0점) → 선형 매핑 [-1,1] 구간 (φ=0→50, φ=-1→0).
+      최소 5년 데이터 요구(MIN_YEARS=5)로 3~4년 AR(1) 노이즈 차단.
+    - 금융업 excluded: M3만 → **M2·M3 둘 다 제외**.
+    - 지주사 분류(SK스퀘어·SK·HD현대·두산·삼성물산, 내부코드 "100") + M1 제외.
+  - **대시보드**: ranking 표에 모듈 사유 title 툴팁, 업종별 제외 사유 분기.
+- **파일**: `modules/financial/translator/ratios.py` (신규), `industry_groups.py` (신규),
+  `glossary.py` (신규), `eqs/industry.py`, `eqs/m2_beneish.py`, `eqs/m3_cashflow.py`,
+  `eqs/m4_persistence.py`, `eqs/score.py`, `batch.py`, `dashboard.py`,
+  `translator/__init__.py`. 테스트 신규: `test_ratios.py`, `test_industry_groups.py`,
+  `test_glossary.py`, `test_batch.py`. 기존 수정: `test_eqs_industry.py`,
+  `test_eqs_score.py`, `test_eqs_m2.py`, `test_eqs_m3.py`, `test_eqs_m4.py`.
+- **테스트**: **171/171 통과** (신규 50여 건 추가).
+- **리뷰 (/check code-reviewer)**:
+  - 🔴 Critical 2건 즉시 수정 완료:
+    1. `_phi_to_score` 조건 순서 버그(φ>1.0 도달 불가 dead code) → 폭주 구간
+       [1,2]에서 100→0 정상 매핑. regression guard 테스트 추가.
+    2. `m3_cashflow.py` docstring/구현 불일치("OCF,NI 모두 양수") → docstring
+       을 구현과 일치시킴 (NI>0만 필터, OCF 음수는 의도적으로 포함).
+  - 🟡 Warning 2건 수정 완료:
+    3. `dashboard.py` 지주사에도 "금융업 제외" 메시지 → industry_code 분기로
+       "금융업 제외" / "지주·투자회사 제외" 별도 표시.
+    4. `m2_beneish.py` cogs=0 케이스 서비스 감지 우회 → `cogs > 0` 조건 추가.
+  - 🔵 Note 1건 개선: batch.py progress 출력에 `[지주]` 태그 추가.
+  - 🟢 확인: ratios `_safe_div`, industry_groups JSON 왕복, frozen dataclass,
+    모듈 간 import 금지 규칙 준수.
+- **도메인 메모**:
+  - **금융업 M2 추가 제외**: 매출/매출원가 개념이 이자수익 중심 금융업과 맞지
+    않아 Beneish 지수(GMI 등) 자체가 부적합. K-Beneish 계수 재추정과 별개로
+    금융업은 원천 제외가 타당.
+  - **지주사 M1 제외**: 단일기업 fallback이 자회사 지분법이익(비현금성)을
+    '이상 발생액'으로 오인. SK스퀘어 |TA/A|=0.385로 M1=0이던 사례. cross-section
+    Modified Jones가 가능해지면 재도입 검토.
+  - **M4 5년 최소**: 금융지주사들의 DART 데이터가 2023~2025 3년뿐. AR(1) pair
+    2개로 φ 추정 시 ±1 극단값 튀어나옴(삼성화재 φ=-1.20 등). 5년 미만은
+    정직하게 '—' 표기가 옳음.
+  - **M3 winsorize 근거**: 단일 연도 OCF 폭락(현대건설 2025 -0.75조)이 5년
+    평균을 음수로 끌어내려 0점 만드는 현상 방지. ±3배 클립 = OCF가 NI의 3배
+    안/밖인 극단만 제한. 실무에서 이 범위를 벗어나면 일회성/비경상적 요인 해석.
+
 ## 2026-04-19 (밤) — KOSPI 50 batch
 - **작업**: KOSPI 시총 50개 일괄 EQS 분석 + 비교 대시보드
 - **파일**: `modules/financial/batch.py` (신규), `modules/financial/dashboard.py` (build_ranking_dashboard 추가)

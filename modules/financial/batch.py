@@ -181,7 +181,12 @@ def collect_batch(
             if progress:
                 tot = eqs.total if eqs.total is not None else "—"
                 grade = eqs.grade or "—"
-                tag = " [금융]" if industry else ""
+                if industry and industry.startswith("100"):
+                    tag = " [지주]"
+                elif industry:
+                    tag = " [금융]"
+                else:
+                    tag = ""
                 cap_str = f" cap={market_cap/1e12:.1f}조" if market_cap else ""
                 print(f"[{i:2d}/{n}] {name} ({corp.stock_code}){tag}: {len(panel.years)}년 → EQS={tot} ({grade}){cap_str}")
         except Exception as e:  # noqa: BLE001 — 한 종목 실패가 전체를 막지 않도록
