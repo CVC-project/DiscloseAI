@@ -18,6 +18,7 @@ import OpenDartReader as odr
 import pandas as pd
 from bs4 import BeautifulSoup
 from groq import Groq
+import yfinance as yf
 
 load_dotenv()
 
@@ -141,7 +142,17 @@ def _priority_score(report_nm: str) -> int:
     return score
 
 
-def _fetch_document_text(dart_client, rcept_no: str, max_chars: int = 2000) -> str:
+def _fetch_current_price(stock_code: str) -> str:
+    """yfinance로 현재 주가를 가져온다. 실패 시 빈 문자열 반환."""
+    try:
+        ticker = yf.Ticker(f"{stock_code}.KS")
+        price = ticker.fast_info["lastPrice"]
+        return f"{int(price):,}원"
+    except Exception:
+        return ""
+
+
+def _fetch_document_text(dart_client, rcept_no: str) -> str:
     """공시 원문 HTML을 가져와 순수 텍스트로 변환한다."""
     import warnings
     from bs4 import XMLParsedAsHTMLWarning
@@ -152,8 +163,7 @@ def _fetch_document_text(dart_client, rcept_no: str, max_chars: int = 2000) -> s
             return ""
         soup = BeautifulSoup(html, "html.parser")
         text = soup.get_text(separator=" ", strip=True)
-        text = re.sub(r"\s+", " ", text).strip()
-        return text[:max_chars]
+        return re.sub(r"\s+", " ", text).strip()
     except Exception:
         return ""
 
@@ -401,10 +411,128 @@ _CPA_TEMPLATES: dict[str, dict] = {
 }
 
 
-def _analyze_with_groq(corp_name: str, report_nm: str, disc_type: str, doc_text: str) -> str | None:
+def _analyze_with_groq(corp_name: str, report_nm: str, disc_type: str, doc_text: str, stock_code: str = "") -> str | None:
     """Groq LLM으로 공시 원문을 읽고 일반인 언어로 분석을 생성한다."""
     if not _groq_client or not doc_text:
         return None
+
+    current_price = _fetch_current_price(stock_code) if stock_code else ""
+    price_context = f"현재 주가: {current_price}" if current_price else "현재 주가: 조회 불가"
+    fin_context = get_financial_context(stock_code) if stock_code else ""
+
+    # 공시 유형별 특화 분석 지침
+    _TYPE_FOCUS: dict[str, str] = {
+        "증자": (
+            "【필수 확인】"
+            " ① 신주 수량 ÷ 기발행 주식수 = 희석비율(%) 직접 계산"
+            " ② 발행가액의 현주가 대비 할인율"
+            " ③ 최대주주 참여 여부 — 불참이면 반드시 언급"
+            " ④ 조달 목적: 운영자금·시설투자·채무상환 중 무엇인지"
+            " ⑤ 납입일과 신주 상장 예정일"
+        ),
+        "전환사채": (
+            "【필수 확인】"
+            " ① 전환가격 vs 현재 주가 괴리율"
+            " ② 리픽싱(전환가 하향조정) 조항 유무 — 있으면 반드시 경고"
+            " ③ 인수자가 특수관계인인지 외부 기관투자자인지"
+            " ④ 만기·이자율·풋/콜 옵션"
+            " ⑤ 전환 청구 가능 기간"
+        ),
+        "BW": (
+            "【필수 확인】"
+            " ① 분리형/비분리형 여부 — 분리형이면 신주인수권 별도 유통 경고"
+            " ② 행사가격 vs 현재 주가 비교"
+            " ③ 신주인수권 행사 가능 기간"
+            " ④ 조달 목적"
+        ),
+        "계약": (
+            "【필수 확인】"
+            " ① 계약금액 절대값 + 연간 매출 대비 % 직접 계산"
+            " ② 계약 기간"
+            " ③ 상대방 기업명과 신용도"
+            " ④ 선급·후급·분할 지급 중 어떤 구조인지"
+            " ⑤ 해지 조항 유무"
+        ),
+        "CAPEX": (
+            "【필수 확인】"
+            " ① 투자금액 + 자기자본 대비 %"
+            " ② 완공 예정일 — 생산능력 증가 시점 추정"
+            " ③ 재원: 자체 현금인지 차입인지"
+            " ④ 경쟁사 대비 투자 타이밍이 선제적인지 후행적인지"
+        ),
+        "임원변동": (
+            "【필수 확인】"
+            " ① 누가 바뀌었나: CEO·CFO·사내이사 직책 명시"
+            " ② 신임 임원 전 직장·전문분야로 전략 방향 추론"
+            " ③ 교체 이유: 사임·임기만료·해임 중 무엇인지"
+            " ④ 최대주주와의 관계"
+            " ⑤ CFO 교체라면 회계정책 변경 가능성 언급"
+        ),
+        "실적": (
+            "【필수 확인】"
+            " ① 매출·영업이익·순이익 숫자와 전년 동기 대비 증감률"
+            " ② 영업이익과 순이익 간 괴리가 크면 일회성 항목 설명"
+            " ③ 재고 증감 추이 — 수요 선행지표로 활용"
+            " ④ 경영진 가이던스 변경 여부"
+            " ⑤ 부문별 실적 차이가 크면 부문별로 분석"
+        ),
+        "자기주식": (
+            "【필수 확인】"
+            " ① 취득 규모 + 발행주식 대비 %"
+            " ② 목적: 소각인지 단순 보유인지 — 소각이면 ROE 상승 효과 언급"
+            " ③ 재원: 자체 현금인지 차입인지"
+            " ④ 취득 기간"
+            " ⑤ 경영권 방어 목적 가능성 여부"
+        ),
+        "채권발행": (
+            "【필수 확인】"
+            " ① 발행금액·금리·만기"
+            " ② 조달 목적: 운영자금·차환·시설투자 중 무엇인지"
+            " ③ 기존 부채비율 대비 변화"
+            " ④ 이자보상배율에 미치는 영향"
+            " ⑤ 고금리 환경 대비 리파이낸싱 리스크"
+        ),
+        "M&A/분할": (
+            "【필수 확인】"
+            " ① 인수금액 + EBITDA 기준 인수 배수(Multiple) 계산"
+            " ② 재원: 현금·주식교환·차입 중 무엇인지"
+            " ③ 물적분할인지 인적분할인지 — 물적분할은 기존 주주 가치 희석 경고"
+            " ④ PMI(통합) 계획 언급 여부"
+            " ⑤ 인수 후 시너지 실현 예상 기간"
+        ),
+        "영업양도": (
+            "【필수 확인】"
+            " ① 양도 자산·사업부 명칭"
+            " ② 양도가액 + 장부가 대비 프리미엄/디스카운트 여부"
+            " ③ 양수자 정체: 경쟁사·사모펀드·전략적 투자자 중 무엇인지"
+            " ④ 핵심 사업인지 비핵심 사업인지 판단"
+            " ⑤ 매각 이유"
+        ),
+        "내부자거래": (
+            "【필수 확인】"
+            " ① 매수인지 매도인지 방향 명시"
+            " ② 거래 규모 + 보유 주식 대비 %"
+            " ③ 거래 타이밍: 실적 발표·공시 전후인지"
+            " ④ 거래자의 직책(대표이사·최대주주·임원)"
+            " ⑤ 대량 매도라면 내부 정보 기반 선행매도 가능성 경고"
+        ),
+        "최대주주변동": (
+            "【필수 확인】"
+            " ① 신규 최대주주 정체: SI(전략적투자자)·FI(재무적투자자)·PEF(사모펀드) 중 무엇인지"
+            " ② 인수가격 + 경영권 프리미엄 수준"
+            " ③ 신규 최대주주 업종 배경과 기존 사업과의 시너지"
+            " ④ PEF라면 단기 구조조정·재매각 시나리오 언급"
+            " ⑤ 변동 이유"
+        ),
+        "기타": (
+            "【필수 확인】"
+            " ① 공시에 등장하는 금액·날짜·조건을 최대한 인용"
+            " ② 규제·소송 관련이라면 충당부채 설정 여부 확인"
+            " ③ 향후 추가 공시 가능성 언급"
+        ),
+    }
+
+    type_focus = _TYPE_FOCUS.get(disc_type, _TYPE_FOCUS["기타"])
 
     prompt = f"""당신은 20년 경력의 시니어 공인회계사(CPA)입니다.
 아래 한국 상장기업의 공시 원문을 읽고, **일반 개인투자자**가 이해할 수 있는 언어로 분석해주세요.
@@ -413,15 +541,22 @@ def _analyze_with_groq(corp_name: str, report_nm: str, disc_type: str, doc_text:
 기업명: {corp_name}
 공시 제목: {report_nm}
 공시 유형: {disc_type}
+{price_context}
+{fin_context}
+{type_focus}
+
 공시 원문:
 {doc_text}
 
-다음 4가지 항목으로 분석해주세요. 각 항목은 2~3문장으로 간결하게 작성하세요.
+다음 5가지 항목으로 분석해주세요.
 
-[Cash] 이 공시가 회사의 돈(현금)에 미치는 영향은?
-[Risk] 투자자가 주의해야 할 위험 요소는?
-[Hidden Agenda] 이 공시 뒤에 숨겨진 경영진의 의도나 전략적 시그널은?
-[Verdict] 회계사로서 한 줄 최종 평가는?
+[Cash] 핵심 한 줄 요약 (현금 영향의 핵심을 한 문장으로) + 근거 bullet 2~3개 (숫자 반드시 인용, 각 bullet은 대시(-)로 시작)
+[Risk] 핵심 한 줄 요약 (가장 큰 위험을 한 문장으로) + 근거 bullet 2~3개
+[Hidden Agenda] 핵심 한 줄 요약 (경영진의 숨은 의도를 한 문장으로) + 근거 bullet 2~3개
+[Verdict] 회계사로서 한 줄 최종 평가 (1문장, 핵심 판단 포인트 포함)
+[오늘의 개념] 공시 원문에 실제로 등장한 단어 중 일반인이 모를 법한 회계·금융·사업 용어를 딱 1개 골라서 아래 형식으로 작성하세요.
+  - 첫 줄: **[용어]란?** 으로 시작해서 2~3문장으로 쉽게 설명 (전문용어 없이, 실생활 비유 포함)
+  - 마지막 줄: 👉 다음엔 이것도 알아보세요: "[공시 원문에서 찾은 연관 용어]가 뭔지 궁금하지 않으세요?"
 
 반드시 한국어로 답하고, 항목 제목([Cash] 등)은 그대로 유지하세요."""
 
@@ -430,7 +565,7 @@ def _analyze_with_groq(corp_name: str, report_nm: str, disc_type: str, doc_text:
             model=GROQ_MODEL,
             messages=[{"role": "user", "content": prompt}],
             temperature=0.3,
-            max_tokens=800,
+            max_tokens=1200,
         )
         return res.choices[0].message.content.strip()
     except Exception as e:
@@ -550,7 +685,13 @@ def collect(stock_codes: list[str] | None = None) -> None:
             print(f"  [분석중]     [{disc_type}] {report_nm} ({rcept_dt})")
 
             doc_text = _fetch_document_text(dart, rcept_no)
-            summary = build_cpa_summary(corp_name, report_nm, disc_type, rcept_dt, doc_text)
+            ai_result = _analyze_with_groq(corp_name, report_nm, disc_type, doc_text, stock_code)
+            ai_ok = ai_result is not None
+            if ai_ok:
+                header = f"[공시] {corp_name} | {report_nm} | {rcept_dt}\n[분류] {disc_type}\n\n"
+                summary = header + ai_result
+            else:
+                summary = build_cpa_summary(corp_name, report_nm, disc_type, rcept_dt, doc_text)
 
             record = DisclosureLocal(
                 disclosure_id=rcept_no,
@@ -561,6 +702,7 @@ def collect(stock_codes: list[str] | None = None) -> None:
                 title=report_nm,
                 amount=None,
                 summary=summary,
+                ai_analyzed=ai_ok,
             )
             session.add(record)
             session.commit()
@@ -574,6 +716,182 @@ def collect(stock_codes: list[str] | None = None) -> None:
     print(f"{'='*60}")
     print(f"  수집 완료 | 신규 저장: {saved}건 | 중복 스킵: {skipped}건 | 노이즈 제거: {filtered}건")
     print(f"{'='*60}\n")
+
+
+# ─── 재무제표 수집 ────────────────────────────────────────────────────────────
+
+# reprt_code 매핑: 분기 → DART 코드
+_QUARTER_CODE = {1: "11013", 2: "11012", 3: "11014", 4: "11011"}
+
+# 계정과목 매핑
+_ACCOUNT_MAP = {
+    "매출액": "revenue",
+    "영업이익": "operating_income",
+    "당기순이익(손실)": "net_income",
+    "당기순이익": "net_income",
+    "자산총계": "total_assets",
+    "부채총계": "total_debt",
+    "자본총계": "equity",
+}
+
+
+def _parse_amount(val) -> float | None:
+    try:
+        return float(str(val).replace(",", ""))
+    except Exception:
+        return None
+
+
+def fetch_financial_statements(quarters: int = 8) -> None:
+    """49개 기업의 최근 N분기 재무제표를 DART에서 가져와 DB 저장."""
+    if not DART_API_KEY:
+        print("[ERROR] DART_API_KEY 없음")
+        return
+
+    dart = odr(DART_API_KEY)
+    from modules.disclosure.db import get_local_session
+    from modules.disclosure.models import FinancialStatement
+
+    session = get_local_session()
+    today = datetime.today()
+    saved, skipped = 0, 0
+
+    # 최근 N분기 (year, quarter) 목록 생성
+    periods = []
+    y, q = today.year, (today.month - 1) // 3 + 1
+    for _ in range(quarters):
+        q -= 1
+        if q == 0:
+            q = 4
+            y -= 1
+        periods.append((y, q))
+
+    print(f"\n[재무제표 수집] 최근 {quarters}분기 × {len(TARGET_CORPS)}개 기업")
+
+    for stock_code, corp_name in TARGET_CORPS.items():
+        for year, quarter in periods:
+            exists = session.query(FinancialStatement).filter_by(
+                corp_code=stock_code, year=year, quarter=quarter
+            ).first()
+            if exists:
+                skipped += 1
+                continue
+
+            reprt_code = _QUARTER_CODE[quarter]
+            try:
+                df = dart.finstate(stock_code, year, reprt_code=reprt_code)
+                if df is None or df.empty:
+                    continue
+
+                row_data: dict = {}
+                for _, row in df.iterrows():
+                    key = _ACCOUNT_MAP.get(str(row.get("account_nm", "")))
+                    if key and key not in row_data:
+                        row_data[key] = _parse_amount(row.get("thstrm_amount"))
+
+                rec = FinancialStatement(
+                    corp_code=stock_code,
+                    corp_name=corp_name,
+                    year=year,
+                    quarter=quarter,
+                    fetched_at=today.date(),
+                    **row_data,
+                )
+                session.add(rec)
+                session.commit()
+                saved += 1
+                print(f"  저장: {corp_name} {year}Q{quarter}")
+
+            except Exception as e:
+                print(f"  [WARN] {corp_name} {year}Q{quarter}: {e}")
+
+    session.close()
+    print(f"[재무제표 수집 완료] 저장: {saved}건 / 스킵: {skipped}건\n")
+
+
+def get_financial_context(corp_code: str) -> str:
+    """DB에서 기업의 최근 8분기 재무 요약을 텍스트로 반환 (Groq 프롬프트용)."""
+    from modules.disclosure.db import get_local_session
+    from modules.disclosure.models import FinancialStatement
+
+    session = get_local_session()
+    rows = (
+        session.query(FinancialStatement)
+        .filter_by(corp_code=corp_code)
+        .order_by(FinancialStatement.year.desc(), FinancialStatement.quarter.desc())
+        .limit(8)
+        .all()
+    )
+    session.close()
+
+    if not rows:
+        return ""
+
+    def fmt(v):
+        if v is None:
+            return "N/A"
+        return f"{v/1e8:,.0f}억원"
+
+    lines = ["【최근 분기 재무제표】"]
+    for r in rows:
+        lines.append(
+            f"{r.year}Q{r.quarter} | 매출 {fmt(r.revenue)} | 영업이익 {fmt(r.operating_income)}"
+            f" | 순이익 {fmt(r.net_income)} | 총자산 {fmt(r.total_assets)} | 부채 {fmt(r.total_debt)}"
+        )
+    return "\n".join(lines)
+
+
+# ─── 백필 로직 ───────────────────────────────────────────────────────────────
+
+def backfill_ai(max_records: int = 50) -> int:
+    """
+    ai_analyzed=False 인 과거 공시를 Groq로 분석해 summary 업데이트.
+    Groq 한도 초과 시 즉시 중단 (내일 이어받기).
+    max_records: 1회 호출당 최대 처리 건수 (Groq 한도 여유분 조절용).
+    """
+    if not _groq_client:
+        return 0
+
+    from modules.disclosure.db import get_local_session
+    from modules.disclosure.models import DisclosureLocal
+
+    dart = odr(DART_API_KEY) if DART_API_KEY else None
+    session = get_local_session()
+
+    pending = (
+        session.query(DisclosureLocal)
+        .filter(DisclosureLocal.ai_analyzed == False)
+        .order_by(DisclosureLocal.disclosure_date.desc())
+        .limit(max_records)
+        .all()
+    )
+
+    print(f"\n[백필] 미분석 {len(pending)}건 처리 시작 (최대 {max_records}건)")
+    done = 0
+
+    for rec in pending:
+        doc_text = ""
+        if dart and rec.disclosure_id:
+            doc_text = _fetch_document_text(dart, rec.disclosure_id)
+
+        ai_result = _analyze_with_groq(rec.corp_name, rec.title, rec.disclosure_type, doc_text, rec.corp_code or "")
+
+        if ai_result is None:
+            # Groq 실패 = 한도 초과 또는 오류 → 중단
+            print(f"  [백필 중단] Groq 한도 초과 또는 오류 — {done}건 완료")
+            break
+
+        rcept_dt = rec.disclosure_date.strftime("%Y%m%d") if rec.disclosure_date else ""
+        header = f"[공시] {rec.corp_name} | {rec.title} | {rcept_dt}\n[분류] {rec.disclosure_type}\n\n"
+        rec.summary = header + ai_result
+        rec.ai_analyzed = True
+        session.commit()
+        done += 1
+        print(f"  [백필완료] {rec.corp_name} | {rec.title}")
+
+    session.close()
+    print(f"[백필] 완료: {done}건")
+    return done
 
 
 # ─── 진입점 ───────────────────────────────────────────────────────────────────

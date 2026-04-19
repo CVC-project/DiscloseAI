@@ -25,14 +25,16 @@ log = logging.getLogger(__name__)
 
 
 def run_collect():
-    """collector.collect() 실행 — 에러가 나도 스케줄러는 계속 동작."""
+    """신규 공시 수집 → 남은 Groq 한도로 과거 미분석 백필."""
     log.info("수집 시작...")
     try:
-        from modules.disclosure.collector import collect
+        from modules.disclosure.collector import collect, backfill_ai
         collect()
-        log.info("수집 완료.")
+        log.info("수집 완료. 백필 시작...")
+        filled = backfill_ai(max_records=50)
+        log.info(f"백필 완료: {filled}건")
     except Exception as e:
-        log.error(f"수집 중 오류 발생: {e}")
+        log.error(f"수집/백필 중 오류 발생: {e}")
 
 
 def is_market_hours() -> bool:
@@ -51,6 +53,17 @@ def market_hours_job():
         log.debug("[장중 폴링] 장외 시간 — 스킵")
 
 
+def run_financial_update():
+    """분기 재무제표 업데이트 — 매월 1일 새벽 실행."""
+    log.info("[재무제표] 업데이트 시작...")
+    try:
+        from modules.disclosure.collector import fetch_financial_statements
+        fetch_financial_statements(quarters=8)
+        log.info("[재무제표] 업데이트 완료.")
+    except Exception as e:
+        log.error(f"[재무제표] 오류: {e}")
+
+
 def setup_schedule():
     # 오전 7시 배치
     schedule.every().day.at("07:00").do(run_collect).tag("배치")
@@ -65,10 +78,16 @@ def setup_schedule():
     # 오후 7시 야간 수집
     schedule.every().day.at("19:00").do(run_collect).tag("야간")
 
+    # 매월 1일 새벽 6시 재무제표 업데이트
+    schedule.every().day.at("06:00").do(
+        lambda: run_financial_update() if datetime.now().day == 1 else None
+    ).tag("재무업데이트")
+
     log.info("스케줄 등록 완료:")
     log.info("  - 07:00 배치 수집")
     log.info("  - 09:00~15:30 30분마다 장중 폴링")
     log.info("  - 19:00 야간 수집")
+    log.info("  - 매월 1일 06:00 재무제표 업데이트")
 
 
 if __name__ == "__main__":
