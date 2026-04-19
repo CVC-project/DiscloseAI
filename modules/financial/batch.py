@@ -177,6 +177,32 @@ def collect_batch(
     return out
 
 
+def build_sector_stats(records: List[FirmRecord]) -> dict:
+    """배치 결과 → 섹터별 평균 수익성 비율 + 캐시 저장.
+
+    각 FirmRecord의 가장 최근 연도 비율을 뽑아 industry_groups에서 집계.
+    저장 경로(JSON)를 반환. dashboard.py가 이 파일을 로드해 '업계 대비' 섹션 렌더링.
+    """
+    from .industry_groups import compute_sector_stats, save_sector_stats
+    from .translator.ratios import compute_ratios
+
+    company_ratios: dict = {}
+    for r in records:
+        if r.panel is None or r.error is not None:
+            continue
+        latest = r.panel.latest()
+        if latest is None:
+            continue
+        company_ratios[r.display_name] = compute_ratios(latest).as_dict()
+
+    stats = compute_sector_stats(company_ratios)
+    return {
+        "cache_path": save_sector_stats(stats),
+        "sectors_computed": len(stats),
+        "total_companies": sum(s.n_companies for s in stats.values()),
+    }
+
+
 def summarize(records: List[FirmRecord]) -> dict:
     """배치 결과 요약 통계."""
     ok = [r for r in records if r.eqs and r.eqs.total is not None]

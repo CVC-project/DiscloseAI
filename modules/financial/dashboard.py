@@ -26,7 +26,9 @@ from typing import Iterable, List, Optional
 
 from .batch import FirmRecord, summarize
 from .eqs.types import EQSResult, FirmPanel
+from .industry_groups import get_sector, load_sector_stats
 from .translator.highlights import Highlight
+from .translator.ratios import LABELS as RATIO_LABELS, compute_ratios
 
 _DASHBOARD_DIR = os.path.join(
     os.path.dirname(os.path.dirname(os.path.dirname(__file__))),
@@ -38,6 +40,7 @@ def _firm_year_to_dict(y) -> dict:
     return {
         "year": y.year,
         "revenue": y.revenue,
+        "cogs": y.cogs,
         "operating_income": y.operating_income,
         "net_income": y.net_income,
         "operating_cashflow": y.operating_cashflow,
@@ -46,10 +49,40 @@ def _firm_year_to_dict(y) -> dict:
         "total_assets": y.total_assets,
         "total_liabilities": y.total_liabilities,
         "total_equity": y.total_equity,
+        "current_assets": y.current_assets,
+        "current_liabilities": y.current_liabilities,
+        "long_term_debt": y.long_term_debt,
+    }
+
+
+def _industry_payload(corp_name: Optional[str]) -> Optional[dict]:
+    """회사명으로 섹터 + 섹터 평균 비율 로드. 데이터 없으면 None."""
+    if not corp_name:
+        return None
+    sector = get_sector(corp_name)
+    if not sector:
+        return None
+    stats = load_sector_stats()
+    if sector not in stats:
+        return None
+    s = stats[sector]
+    return {
+        "sector": sector,
+        "n_companies": s.n_companies,
+        "averages": {
+            "gross_margin": s.avg_gross_margin,
+            "operating_margin": s.avg_operating_margin,
+            "net_margin": s.avg_net_margin,
+            "roe": s.avg_roe,
+            "roa": s.avg_roa,
+        },
+        "members": s.members,
     }
 
 
 def _serialize(panel: FirmPanel, eqs: EQSResult, summary: List[str], highlights: Iterable[Highlight]) -> dict:
+    latest = panel.latest()
+    ratios = compute_ratios(latest).as_dict() if latest else {k: None for k in RATIO_LABELS}
     return {
         "corp": {
             "name": panel.corp_name or "(이름 없음)",
@@ -67,6 +100,12 @@ def _serialize(panel: FirmPanel, eqs: EQSResult, summary: List[str], highlights:
                 for m in eqs.modules
             ],
         },
+        "ratios": {
+            "year": latest.year if latest else None,
+            "values": ratios,
+            "labels": RATIO_LABELS,
+        },
+        "industry": _industry_payload(panel.corp_name),
         "summary": summary,
         "highlights": [asdict(h) for h in highlights],
     }
@@ -149,6 +188,77 @@ _HTML_TEMPLATE = """<!doctype html>
   .highlight-card .title {{ font-weight: 700; margin-bottom: 4px; }}
   .highlight-card .meta {{ font-size: 12px; color: var(--muted); margin-left: 8px; }}
   .chart-wrap {{ position: relative; height: 280px; }}
+  .ratios-list {{ margin: 0; padding: 0; }}
+  .ratio-row {{
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 0; border-bottom: 1px solid var(--border);
+  }}
+  .ratio-row:last-child {{ border-bottom: none; }}
+  .ratio-name {{ flex: 0 0 130px; color: var(--muted); font-size: 13px; }}
+  .ratio-bar-wrap {{
+    flex: 1; height: 8px; background: rgba(148,163,184,0.15);
+    border-radius: 4px; overflow: hidden; position: relative;
+  }}
+  .ratio-bar-fill {{ height: 100%; transition: width 0.3s; border-radius: 4px; }}
+  .ratio-bar-fill.positive {{ background: linear-gradient(90deg, var(--accent), #8b5cf6); }}
+  .ratio-bar-fill.negative {{ background: var(--bad); }}
+  .ratio-value {{
+    flex: 0 0 90px; text-align: right; font-weight: 600; font-size: 16px;
+  }}
+  .ratio-value.na {{ color: var(--muted); font-weight: 400; font-size: 13px; }}
+  .stmt-table {{
+    width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 14px;
+  }}
+  .stmt-table th, .stmt-table td {{
+    padding: 10px 8px; border-bottom: 1px solid var(--border); text-align: right;
+  }}
+  .stmt-table th:first-child, .stmt-table td:first-child {{
+    text-align: left; color: var(--muted); font-weight: 500;
+  }}
+  .stmt-table thead th {{
+    color: var(--muted); font-weight: 500; font-size: 12px;
+    border-bottom: 2px solid var(--border);
+  }}
+  .stmt-table td {{ font-variant-numeric: tabular-nums; }}
+  .stmt-table tr.highlight-row td {{
+    font-weight: 700; background: rgba(99,102,241,0.08);
+  }}
+  .stmt-table td.negative {{ color: var(--bad); }}
+  .industry-row {{
+    display: grid; grid-template-columns: 130px 1fr 90px 90px 90px;
+    gap: 12px; align-items: center;
+    padding: 10px 0; border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }}
+  .industry-row:last-child {{ border-bottom: none; }}
+  .industry-row .ind-label {{ color: var(--muted); }}
+  .industry-row .ind-bar-wrap {{
+    position: relative; height: 24px; background: rgba(148,163,184,0.08);
+    border-radius: 4px; overflow: hidden;
+  }}
+  .industry-row .ind-bar-mine {{
+    position: absolute; left: 0; top: 0; height: 100%;
+    background: linear-gradient(90deg, var(--accent), #8b5cf6); opacity: 0.85;
+  }}
+  .industry-row .ind-bar-avg {{
+    position: absolute; top: 0; height: 100%; width: 2px;
+    background: var(--warn);
+  }}
+  .industry-row .ind-val {{ text-align: right; font-variant-numeric: tabular-nums; }}
+  .industry-row .ind-val.mine {{ font-weight: 600; }}
+  .industry-row .ind-val.avg {{ color: var(--muted); }}
+  .industry-row .ind-diff {{ text-align: right; font-weight: 600; }}
+  .industry-row .ind-diff.up {{ color: var(--good); }}
+  .industry-row .ind-diff.down {{ color: var(--bad); }}
+  .industry-row .ind-diff.na {{ color: var(--muted); font-weight: 400; }}
+  .industry-head {{
+    display: grid; grid-template-columns: 130px 1fr 90px 90px 90px;
+    gap: 12px; padding: 8px 0; border-bottom: 2px solid var(--border);
+    color: var(--muted); font-size: 12px;
+  }}
+  .industry-head div:nth-child(3), .industry-head div:nth-child(4), .industry-head div:nth-child(5) {{
+    text-align: right;
+  }}
   footer {{
     margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
     color: var(--muted); font-size: 12px;
@@ -188,24 +298,44 @@ _HTML_TEMPLATE = """<!doctype html>
     </div>
   </div>
 
-  <div class="panel">
+  <div class="panel" style="margin-top:0;">
+    <h2>💰 수익성 지표 <span style="color:var(--muted);font-weight:400;font-size:13px;" id="ratiosYear"></span></h2>
+    <div class="ratios-list" id="ratiosList"></div>
+  </div>
+
+  <div class="panel" id="industryPanel" style="margin-top:16px; display:none;">
+    <h2>🏭 업계 대비 <span style="color:var(--muted);font-weight:400;font-size:13px;" id="industryMeta"></span></h2>
+    <div class="industry-head">
+      <div>지표</div>
+      <div>내 회사 vs 업계 평균</div>
+      <div>내 회사</div>
+      <div>업계 평균</div>
+      <div>차이</div>
+    </div>
+    <div id="industryRows"></div>
+  </div>
+
+  <div class="panel" style="margin-top:16px;">
     <h2>매출 · 영업현금흐름 · 순이익 시계열</h2>
     <div class="chart-wrap" style="height:320px;"><canvas id="ts"></canvas></div>
   </div>
 
-  <div class="grid grid-3" style="margin-top:16px;">
-    <div class="panel">
-      <h2>📊 손익계산서</h2>
-      <div class="summary-line" id="sumIncome"></div>
-    </div>
-    <div class="panel">
-      <h2>🏛 재무상태표</h2>
-      <div class="summary-line" id="sumBalance"></div>
-    </div>
-    <div class="panel">
-      <h2>💵 현금흐름표</h2>
-      <div class="summary-line" id="sumCash"></div>
-    </div>
+  <div class="panel" style="margin-top:16px;">
+    <h2>📊 손익계산서 (최근 5년)</h2>
+    <div class="summary-line" id="sumIncome"></div>
+    <table class="stmt-table" id="incomeTable"></table>
+  </div>
+
+  <div class="panel" style="margin-top:16px;">
+    <h2>🏛 재무상태표 (최근 5년)</h2>
+    <div class="summary-line" id="sumBalance"></div>
+    <table class="stmt-table" id="balanceTable"></table>
+  </div>
+
+  <div class="panel" style="margin-top:16px;">
+    <h2>💵 현금흐름표 (최근 5년)</h2>
+    <div class="summary-line" id="sumCash"></div>
+    <table class="stmt-table" id="cashflowTable"></table>
   </div>
 
   <div class="panel" style="margin-top:16px;">
@@ -278,6 +408,71 @@ new Chart(document.getElementById('radar'), {{
   }}
 }});
 
+// 수익성 지표 렌더링
+// 막대바는 30%를 풀 게이지 기준 — 대부분 비율 지표가 30%면 우수 수준
+const ratioRef = 30;
+const rList = document.getElementById('ratiosList');
+if (DATA.ratios.year !== null) {{
+  document.getElementById('ratiosYear').textContent = `(${{DATA.ratios.year}}년 결산 기준)`;
+}}
+Object.entries(DATA.ratios.labels).forEach(([key, label]) => {{
+  const v = DATA.ratios.values[key];
+  const row = document.createElement('div');
+  row.className = 'ratio-row';
+  let valueHtml, barHtml;
+  if (v === null || v === undefined) {{
+    valueHtml = `<div class="ratio-value na">N/A</div>`;
+    barHtml = `<div class="ratio-bar-wrap"></div>`;
+  }} else {{
+    const pct = Math.min(Math.abs(v) / ratioRef * 100, 100);
+    const cls = v >= 0 ? 'positive' : 'negative';
+    valueHtml = `<div class="ratio-value">${{v.toFixed(1)}}%</div>`;
+    barHtml = `<div class="ratio-bar-wrap"><div class="ratio-bar-fill ${{cls}}" style="width:${{pct}}%"></div></div>`;
+  }}
+  row.innerHTML = `<div class="ratio-name">${{label}}</div>${{barHtml}}${{valueHtml}}`;
+  rList.appendChild(row);
+}});
+
+// 업계 대비 렌더링
+if (DATA.industry) {{
+  document.getElementById('industryPanel').style.display = '';
+  document.getElementById('industryMeta').textContent =
+    `· ${{DATA.industry.sector}} (${{DATA.industry.n_companies}}개사 평균)`;
+  const rowsDiv = document.getElementById('industryRows');
+  // 막대 시각화 기준: 양쪽 값의 최대치 * 1.2
+  Object.entries(DATA.ratios.labels).forEach(([key, label]) => {{
+    const mine = DATA.ratios.values[key];
+    const avg = DATA.industry.averages[key];
+    const row = document.createElement('div');
+    row.className = 'industry-row';
+    let barHtml = '<div class="ind-bar-wrap"></div>';
+    let diffHtml = '<div class="ind-diff na">—</div>';
+    let mineHtml = '<div class="ind-val mine">—</div>';
+    let avgHtml = '<div class="ind-val avg">—</div>';
+    if (mine !== null && mine !== undefined) {{
+      mineHtml = `<div class="ind-val mine">${{mine.toFixed(1)}}%</div>`;
+    }}
+    if (avg !== null && avg !== undefined) {{
+      avgHtml = `<div class="ind-val avg">${{avg.toFixed(1)}}%</div>`;
+    }}
+    if (mine !== null && avg !== null && mine !== undefined && avg !== undefined) {{
+      const maxRef = Math.max(Math.abs(mine), Math.abs(avg)) * 1.2 || 1;
+      const mineW = Math.max(0, Math.min(100, mine / maxRef * 100));
+      const avgW = avg / maxRef * 100;
+      barHtml = `<div class="ind-bar-wrap">
+        <div class="ind-bar-mine" style="width:${{mineW}}%"></div>
+        <div class="ind-bar-avg" style="left:${{avgW}}%"></div>
+      </div>`;
+      const diff = mine - avg;
+      const diffCls = diff >= 0 ? 'up' : 'down';
+      const sign = diff >= 0 ? '+' : '';
+      diffHtml = `<div class="ind-diff ${{diffCls}}">${{sign}}${{diff.toFixed(1)}}%p</div>`;
+    }}
+    row.innerHTML = `<div class="ind-label">${{label}}</div>${{barHtml}}${{mineHtml}}${{avgHtml}}${{diffHtml}}`;
+    rowsDiv.appendChild(row);
+  }});
+}}
+
 // 시계열
 const yrs = DATA.years.map(y => y.year);
 const toEok = v => v === null ? null : v / 1e8;  // 원 → 억원 (DART는 원 단위)
@@ -304,6 +499,61 @@ new Chart(document.getElementById('ts'), {{
 document.getElementById('sumIncome').textContent  = DATA.summary[0] || '';
 document.getElementById('sumBalance').textContent = DATA.summary[1] || '';
 document.getElementById('sumCash').textContent    = DATA.summary[2] || '';
+
+// 재무제표 3종 표 렌더링
+function formatMoney(v) {{
+  if (v === null || v === undefined) return '—';
+  const eok = v / 1e8;  // 원 → 억원
+  if (Math.abs(eok) >= 10000) {{
+    return (eok / 10000).toFixed(1) + '조';
+  }}
+  return Math.round(eok).toLocaleString('ko-KR') + '억';
+}}
+
+function renderStatementTable(tableId, rows, years) {{
+  const table = document.getElementById(tableId);
+  const yearHead = years.map(y => `<th>${{y}}</th>`).join('');
+  let html = `<thead><tr><th>항목</th>${{yearHead}}</tr></thead><tbody>`;
+  rows.forEach(row => {{
+    const cells = row.values.map(v => {{
+      const cls = (v !== null && v !== undefined && v < 0) ? 'negative' : '';
+      return `<td class="${{cls}}">${{formatMoney(v)}}</td>`;
+    }}).join('');
+    const hClass = row.highlight ? 'highlight-row' : '';
+    html += `<tr class="${{hClass}}"><td>${{row.label}}</td>${{cells}}</tr>`;
+  }});
+  html += '</tbody>';
+  table.innerHTML = html;
+}}
+
+const stmtYears = DATA.years.map(y => y.year);
+
+// 손익계산서
+renderStatementTable('incomeTable', [
+  {{label: '매출액', values: DATA.years.map(y => y.revenue)}},
+  {{label: '매출원가', values: DATA.years.map(y => y.cogs)}},
+  {{label: '매출총이익', values: DATA.years.map(y =>
+    (y.revenue !== null && y.cogs !== null) ? y.revenue - y.cogs : null)}},
+  {{label: '영업이익', values: DATA.years.map(y => y.operating_income), highlight: true}},
+  {{label: '당기순이익', values: DATA.years.map(y => y.net_income), highlight: true}},
+], stmtYears);
+
+// 재무상태표
+renderStatementTable('balanceTable', [
+  {{label: '자산총계', values: DATA.years.map(y => y.total_assets), highlight: true}},
+  {{label: '　유동자산', values: DATA.years.map(y => y.current_assets)}},
+  {{label: '부채총계', values: DATA.years.map(y => y.total_liabilities), highlight: true}},
+  {{label: '　유동부채', values: DATA.years.map(y => y.current_liabilities)}},
+  {{label: '　비유동부채', values: DATA.years.map(y => y.long_term_debt)}},
+  {{label: '자본총계', values: DATA.years.map(y => y.total_equity), highlight: true}},
+], stmtYears);
+
+// 현금흐름표
+renderStatementTable('cashflowTable', [
+  {{label: '영업활동 CF', values: DATA.years.map(y => y.operating_cashflow), highlight: true}},
+  {{label: '투자활동 CF', values: DATA.years.map(y => y.investing_cashflow)}},
+  {{label: '재무활동 CF', values: DATA.years.map(y => y.financing_cashflow)}},
+], stmtYears);
 
 // Highlights
 const hc = document.getElementById('highlights');
