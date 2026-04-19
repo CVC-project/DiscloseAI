@@ -1,0 +1,92 @@
+"""M4 — 이익 지속성 (AR(1) + 일회성)."""
+
+from modules.financial.eqs.m4_persistence import score_m4
+from modules.financial.eqs.types import FirmPanel
+from tests._factories import make_year
+
+
+def _panel_persistent_roa():
+    """ROA가 단조 증가하는 trending → AR(1) φ ≈ 1."""
+    nis = [100, 101, 102, 103, 104, 105]
+    years = [make_year(2018 + i, ni=nis[i], ta=5000) for i in range(len(nis))]
+    return FirmPanel(corp_code="X", years=years)
+
+
+def _panel_volatile_roa():
+    """ROA가 +/-로 튀는 패턴 → φ 음수 → 낮은 점수."""
+    pattern = [100, -100, 100, -100, 100, -100]
+    years = [make_year(2018 + i, ni=ni, ta=5000) for i, ni in enumerate(pattern)]
+    return FirmPanel(corp_code="X", years=years)
+
+
+def test_m4_persistent_high():
+    s = score_m4(_panel_persistent_roa())
+    assert s.score is not None
+    assert s.score >= 70
+
+
+def test_m4_volatile_low():
+    s = score_m4(_panel_volatile_roa())
+    assert s.score is not None
+    assert s.score < 50
+
+
+def test_m4_nonrecurring_penalty():
+    """동일 AR(1)이라도 일회성 비중이 크면 점수가 낮아져야."""
+    nis = [100, 101, 102, 103, 104, 105]
+
+    def _build(with_nonrec: bool) -> FirmPanel:
+        ys = [make_year(2018 + i, ni=nis[i], ta=5000) for i in range(len(nis))]
+        if with_nonrec:
+            ys[-1].nonrecurring_income = 80  # 약 80% 일회성
+        return FirmPanel(corp_code="X", years=ys)
+
+    s_with = score_m4(_build(True)).score
+    s_without = score_m4(_build(False)).score
+    assert s_with is not None and s_without is not None
+    assert s_with < s_without
+
+
+def test_m4_insufficient_panel():
+    years = [make_year(2023), make_year(2024)]
+    s = score_m4(FirmPanel(corp_code="X", years=years))
+    assert s.score is None
+
+
+def test_m4_robust_trims_cyclical_outlier():
+    """10년 안정 + 1년 사이클 침체 → robust=True가 robust=False보다 점수 높아야."""
+    # 9년은 ROA가 상승 트렌드, 1년만 폭락(사이클 침체)
+    nis = [100, 102, 104, 106, 108, 110, 30, 110, 112, 114]  # idx=6에 침체
+    years = [make_year(2015 + i, ni=nis[i], ta=5000) for i in range(len(nis))]
+    panel = FirmPanel(corp_code="X", years=years)
+    s_robust = score_m4(panel, robust=True).score
+    s_naive = score_m4(panel, robust=False).score
+    assert s_robust is not None and s_naive is not None
+    assert s_robust > s_naive
+
+
+def test_m4_robust_note_indicates_trimmed_year():
+    nis = [100, 102, 104, 106, 108, 110, 30, 110, 112, 114]
+    years = [make_year(2015 + i, ni=nis[i], ta=5000) for i in range(len(nis))]
+    panel = FirmPanel(corp_code="X", years=years)
+    s = score_m4(panel, robust=True)
+    assert "robust" in s.note
+    assert "trim" in s.note
+
+
+def test_m4_short_window_skips_robust_and_warns():
+    """5년만 있으면 robust 미적용, note에 사이클 영향 경고."""
+    nis = [100, 101, 102, 103, 104]
+    years = [make_year(2020 + i, ni=nis[i], ta=5000) for i in range(len(nis))]
+    panel = FirmPanel(corp_code="X", years=years)
+    s = score_m4(panel, robust=True)
+    assert "robust" not in s.note  # 7년 미만이라 미적용
+    assert "사이클 영향 가능" in s.note
+
+
+def test_m4_long_window_marked_stable():
+    nis = list(range(100, 110))  # 10개
+    years = [make_year(2015 + i, ni=nis[i], ta=5000) for i in range(len(nis))]
+    panel = FirmPanel(corp_code="X", years=years)
+    s = score_m4(panel)
+    assert "안정" in s.note

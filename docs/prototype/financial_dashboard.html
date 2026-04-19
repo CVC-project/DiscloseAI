@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>DiscloseAI — 삼성전자 이익 해부</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #0f172a;
+    --panel: #1e293b;
+    --border: #334155;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --good: #22c55e;
+    --warn: #eab308;
+    --bad: #ef4444;
+    --accent: #6366f1;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 24px;
+    background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic", sans-serif;
+    line-height: 1.5;
+  }
+  .container { max-width: 1200px; margin: 0 auto; }
+  header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    border-bottom: 1px solid var(--border); padding-bottom: 16px; margin-bottom: 24px;
+  }
+  header h1 { margin: 0; font-size: 28px; }
+  header .meta { color: var(--muted); font-size: 14px; }
+  .grid { display: grid; gap: 16px; margin-bottom: 16px; }
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+  .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .panel {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px;
+  }
+  .panel h2 { margin: 0 0 12px; font-size: 16px; color: var(--muted); font-weight: 500; }
+  .score-big {
+    font-size: 72px; font-weight: 700; line-height: 1;
+    background: linear-gradient(135deg, var(--accent), #8b5cf6);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .grade {
+    display: inline-block; padding: 4px 16px; border-radius: 999px;
+    font-weight: 700; font-size: 18px; margin-left: 12px;
+  }
+  .grade-A { background: #16a34a; color: white; }
+  .grade-B { background: #65a30d; color: white; }
+  .grade-C { background: #ca8a04; color: white; }
+  .grade-D { background: #ea580c; color: white; }
+  .grade-F { background: #dc2626; color: white; }
+  .module-list { list-style: none; padding: 0; margin: 16px 0 0; }
+  .module-list li {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 0; border-bottom: 1px solid var(--border);
+  }
+  .module-list li:last-child { border-bottom: none; }
+  .module-name { color: var(--muted); font-size: 13px; }
+  .module-score { font-weight: 700; font-size: 18px; }
+  .summary-line {
+    background: rgba(99, 102, 241, 0.1); border-left: 3px solid var(--accent);
+    padding: 12px 16px; border-radius: 4px; margin-bottom: 8px;
+  }
+  .highlight-card {
+    border-left: 4px solid var(--border);
+    padding: 12px 16px; margin-bottom: 8px;
+    background: rgba(0,0,0,0.2); border-radius: 4px;
+  }
+  .highlight-card.sev-high { border-left-color: var(--bad); }
+  .highlight-card.sev-mid { border-left-color: var(--warn); }
+  .highlight-card.sev-low { border-left-color: var(--good); }
+  .highlight-card .title { font-weight: 700; margin-bottom: 4px; }
+  .highlight-card .meta { font-size: 12px; color: var(--muted); margin-left: 8px; }
+  .chart-wrap { position: relative; height: 280px; }
+  footer {
+    margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+    color: var(--muted); font-size: 12px;
+  }
+  .disclaimer {
+    background: rgba(234, 179, 8, 0.08); border: 1px solid rgba(234, 179, 8, 0.3);
+    padding: 12px 16px; border-radius: 8px; margin-top: 16px; font-size: 13px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div>
+      <h1>삼성전자 <span style="color:var(--muted);font-size:18px;">(00126380)</span></h1>
+      <div class="meta">DiscloseAI · 이익 해부 (Earnings Quality Score)</div>
+    </div>
+    <div style="text-align:right;">
+      <div class="meta">분석 기간</div>
+      <div style="font-size:18px;font-weight:600;">2015~2025 (11년)</div>
+    </div>
+  </header>
+
+  <div class="grid grid-2">
+    <div class="panel">
+      <h2>EQS 종합 점수</h2>
+      <div>
+        <span class="score-big">63.7</span>
+        <span class="grade grade-C">C</span>
+      </div>
+      <ul class="module-list" id="moduleList"></ul>
+    </div>
+
+    <div class="panel">
+      <h2>5개 모듈 프로파일</h2>
+      <div class="chart-wrap"><canvas id="radar"></canvas></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>매출 · 영업현금흐름 · 순이익 시계열</h2>
+    <div class="chart-wrap" style="height:320px;"><canvas id="ts"></canvas></div>
+  </div>
+
+  <div class="grid grid-3" style="margin-top:16px;">
+    <div class="panel">
+      <h2>📊 손익계산서</h2>
+      <div class="summary-line" id="sumIncome"></div>
+    </div>
+    <div class="panel">
+      <h2>🏛 재무상태표</h2>
+      <div class="summary-line" id="sumBalance"></div>
+    </div>
+    <div class="panel">
+      <h2>💵 현금흐름표</h2>
+      <div class="summary-line" id="sumCash"></div>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:16px;">
+    <h2>⚡ 주목 포인트</h2>
+    <div id="highlights"></div>
+  </div>
+
+  <footer>
+    <div class="disclaimer">
+      ⚠️ 본 분석은 과거 통계 기반 참고 정보입니다. 투자 조언이 아닙니다.
+      EQS 점수는 K-IFRS 재무제표 자동 분석 결과로, 단일 지표만으로 투자 판단을 내리지 마세요.
+    </div>
+    <div style="margin-top:12px;">
+      Powered by DART OpenAPI · DiscloseAI Financial Module · 분석 시점 데이터 기준
+    </div>
+  </footer>
+</div>
+
+<script>
+const DATA = {"corp": {"name": "삼성전자", "code": "00126380", "industry": null, "year_count": 11}, "years": [{"year": 2015, "revenue": 200653482000000.0, "operating_income": 26413442000000.0, "net_income": 19060144000000.0, "operating_cashflow": null, "investing_cashflow": null, "financing_cashflow": null, "total_assets": 242179521000000.0, "total_liabilities": 63119716000000.0, "total_equity": 179059805000000.0}, {"year": 2016, "revenue": 201866745000000.0, "operating_income": 29240672000000.0, "net_income": 22726092000000.0, "operating_cashflow": null, "investing_cashflow": null, "financing_cashflow": null, "total_assets": 262174324000000.0, "total_liabilities": 69211291000000.0, "total_equity": 192963033000000.0}, {"year": 2017, "revenue": 239575376000000.0, "operating_income": 53645038000000.0, "net_income": 42186747000000.0, "operating_cashflow": null, "investing_cashflow": null, "financing_cashflow": null, "total_assets": 301752090000000.0, "total_liabilities": 87260662000000.0, "total_equity": 214491428000000.0}, {"year": 2018, "revenue": 243771415000000.0, "operating_income": 58886669000000.0, "net_income": 44344857000000.0, "operating_cashflow": null, "investing_cashflow": null, "financing_cashflow": null, "total_assets": 339357244000000.0, "total_liabilities": 91604067000000.0, "total_equity": 247753177000000.0}, {"year": 2019, "revenue": 230400881000000.0, "operating_income": 27768509000000.0, "net_income": 21738865000000.0, "operating_cashflow": 45382915000000.0, "investing_cashflow": -39948171000000.0, "financing_cashflow": -9484510000000.0, "total_assets": 352564497000000.0, "total_liabilities": 89684076000000.0, "total_equity": 262880421000000.0}, {"year": 2020, "revenue": 236806988000000.0, "operating_income": 35993876000000.0, "net_income": 26407832000000.0, "operating_cashflow": 65287009000000.0, "investing_cashflow": -53628591000000.0, "financing_cashflow": -8327839000000.0, "total_assets": 378235718000000.0, "total_liabilities": 102287702000000.0, "total_equity": 275948016000000.0}, {"year": 2021, "revenue": 279604799000000.0, "operating_income": 51633856000000.0, "net_income": 39907450000000.0, "operating_cashflow": 65105448000000.0, "investing_cashflow": -33047763000000.0, "financing_cashflow": -23991033000000.0, "total_assets": 426621158000000.0, "total_liabilities": 121721227000000.0, "total_equity": 304899931000000.0}, {"year": 2022, "revenue": 302231360000000.0, "operating_income": 43376630000000.0, "net_income": 55654077000000.0, "operating_cashflow": 62181346000000.0, "investing_cashflow": -31602804000000.0, "financing_cashflow": -19390049000000.0, "total_assets": 448424507000000.0, "total_liabilities": 93674903000000.0, "total_equity": 354749604000000.0}, {"year": 2023, "revenue": 258935494000000.0, "operating_income": 6566976000000.0, "net_income": 15487100000000.0, "operating_cashflow": 44137427000000.0, "investing_cashflow": -16922817000000.0, "financing_cashflow": -8593059000000.0, "total_assets": 455905980000000.0, "total_liabilities": 92228115000000.0, "total_equity": 363677865000000.0}, {"year": 2024, "revenue": 300870903000000.0, "operating_income": 32725961000000.0, "net_income": 34451351000000.0, "operating_cashflow": 72982621000000.0, "investing_cashflow": -85381702000000.0, "financing_cashflow": -7797243000000.0, "total_assets": 514531948000000.0, "total_liabilities": 112339878000000.0, "total_equity": 402192070000000.0}, {"year": 2025, "revenue": 333605938000000.0, "operating_income": 43601051000000.0, "net_income": 45206805000000.0, "operating_cashflow": 85315148000000.0, "investing_cashflow": -68512206000000.0, "financing_cashflow": -13478040000000.0, "total_assets": 566942110000000.0, "total_liabilities": 130621773000000.0, "total_equity": 436320337000000.0}], "eqs": {"total": 63.7, "grade": "C", "excluded": [], "modules": [{"name": "M1", "score": 61.0, "raw": 0.07795112267742021, "note": "|TA/A|=0.078 (단일기업 fallback)"}, {"name": "M2", "score": 84.7, "raw": -2.634633229729922, "note": "M=-2.63 (정상)"}, {"name": "M3", "score": 80.7, "raw": 2.0234550185832747, "note": "평균 OCF/NI=2.02, 추세=-0.003/yr, n=7"}, {"name": "M4", "score": 25.6, "raw": 0.25554864752267586, "note": "φ=+0.26, robust:2023년 침체 trim, 11년 추정(안정)"}, {"name": "M5", "score": 66.7, "raw": 6.0, "note": "F-score=6/9"}]}, "summary": ["100원 팔면 영업으로 13원이 남습니다 (세금·이자 등 빼고 최종 14원).", "빚이 전체 자산의 23%입니다, 자본은 77%.", "벌어서 투자하고 — 여유 있는 구조 (영업 흑자로 투자도 하고 빚도 갚는다)."], "highlights": [{"severity": 4, "title": "현금창출력 우수", "message": "영업현금흐름이 순이익의 189%로 이익을 충분히 뒷받침합니다."}]};
+
+// 모듈 점수 리스트
+const moduleColors = {
+  M1: '#06b6d4', M2: '#8b5cf6', M3: '#22c55e', M4: '#eab308', M5: '#ef4444'
+};
+const moduleLabels = {
+  M1: 'M1 발생액 품질', M2: 'M2 분식 확률', M3: 'M3 현금흐름 괴리',
+  M4: 'M4 이익 지속성', M5: 'M5 재무 건전성'
+};
+
+const ml = document.getElementById('moduleList');
+DATA.eqs.modules.forEach(m => {
+  const li = document.createElement('li');
+  const score = m.score === null ? '—' : m.score.toFixed(1);
+  li.innerHTML = `
+    <div>
+      <span class="module-score" style="color:${moduleColors[m.name]}">${score}</span>
+      <span class="module-name" style="margin-left:12px;">${moduleLabels[m.name]}</span>
+    </div>
+    <span class="module-name" style="font-size:11px;text-align:right;max-width:200px;">${m.note}</span>
+  `;
+  ml.appendChild(li);
+});
+
+// 레이더 차트
+new Chart(document.getElementById('radar'), {
+  type: 'radar',
+  data: {
+    labels: DATA.eqs.modules.map(m => moduleLabels[m.name]),
+    datasets: [{
+      label: 'EQS',
+      data: DATA.eqs.modules.map(m => m.score || 0),
+      backgroundColor: 'rgba(99, 102, 241, 0.25)',
+      borderColor: '#6366f1',
+      borderWidth: 2,
+      pointBackgroundColor: '#8b5cf6',
+    }]
+  },
+  options: {
+    plugins: { legend: { display: false } },
+    scales: {
+      r: {
+        min: 0, max: 100,
+        grid: { color: 'rgba(148, 163, 184, 0.2)' },
+        angleLines: { color: 'rgba(148, 163, 184, 0.2)' },
+        pointLabels: { color: '#e2e8f0', font: { size: 12 } },
+        ticks: { color: '#94a3b8', backdropColor: 'transparent', stepSize: 25 }
+      }
+    }
+  }
+});
+
+// 시계열
+const yrs = DATA.years.map(y => y.year);
+const toEok = v => v === null ? null : v / 1e8;  // 원 → 억원 (DART는 원 단위)
+new Chart(document.getElementById('ts'), {
+  type: 'line',
+  data: {
+    labels: yrs,
+    datasets: [
+      {label: '매출', data: DATA.years.map(y => toEok(y.revenue)), borderColor: '#06b6d4', backgroundColor: 'transparent', tension: 0.3},
+      {label: '영업현금흐름', data: DATA.years.map(y => toEok(y.operating_cashflow)), borderColor: '#22c55e', backgroundColor: 'transparent', tension: 0.3},
+      {label: '순이익', data: DATA.years.map(y => toEok(y.net_income)), borderColor: '#eab308', backgroundColor: 'transparent', tension: 0.3},
+    ]
+  },
+  options: {
+    plugins: { legend: { labels: { color: '#e2e8f0' } } },
+    scales: {
+      x: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(148,163,184,0.1)' } },
+      y: { ticks: { color: '#94a3b8', callback: v => (v/10000).toFixed(0) + '조' }, grid: { color: 'rgba(148,163,184,0.1)' } }
+    }
+  }
+});
+
+// 번역 3개
+document.getElementById('sumIncome').textContent  = DATA.summary[0] || '';
+document.getElementById('sumBalance').textContent = DATA.summary[1] || '';
+document.getElementById('sumCash').textContent    = DATA.summary[2] || '';
+
+// Highlights
+const hc = document.getElementById('highlights');
+if (DATA.highlights.length === 0) {
+  hc.innerHTML = '<div class="meta">감지된 주목 포인트 없음 (정상 신호)</div>';
+}
+DATA.highlights.forEach(h => {
+  const sev = h.severity >= 7 ? 'high' : h.severity >= 5 ? 'mid' : 'low';
+  const div = document.createElement('div');
+  div.className = `highlight-card sev-${sev}`;
+  div.innerHTML = `<div class="title">${h.title} <span class="meta">severity ${h.severity}/10</span></div><div>${h.message}</div>`;
+  hc.appendChild(div);
+});
+</script>
+</body>
+</html>
