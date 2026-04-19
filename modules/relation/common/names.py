@@ -8,10 +8,40 @@ from __future__ import annotations
 
 import re
 
-# DART/FTC 표기 vs KRX 약칭 등 수동 매핑 예외
+# DART/FTC 정식 법인명 vs KRX 약칭 매핑 (normalize 후 key·value 모두 소문자+공백없음 형태)
+#
+# 공정위 FTC API는 정식 법인명을 사용 (예: "삼성에스디아이", "에스케이하이닉스").
+# top50.csv는 KRX 약칭 (예: "삼성SDI", "SK하이닉스"). 둘을 일치시키기 위한 매핑.
+#
+# ticker_map은 top50 corp_name을 normalize한 결과를 key로 가지므로,
+# ALIAS의 value도 동일하게 normalize된 소문자·공백제거 형태여야 매칭됨.
 NAME_ALIASES: dict[str, str] = {
     "현대자동차": "현대차",
-    "에스케이": "SK",
+    # SK 그룹
+    "에스케이하이닉스": "sk하이닉스",
+    "에스케이스퀘어": "sk스퀘어",
+    "에스케이이노베이션": "sk이노베이션",
+    "에스케이텔레콤": "sk텔레콤",
+    "에스케이": "sk",
+    # LG 그룹
+    "엘지에너지솔루션": "lg에너지솔루션",
+    "엘지화학": "lg화학",
+    "엘지전자": "lg전자",
+    # HD현대 그룹
+    "에이치디현대중공업": "hd현대중공업",
+    "에이치디현대일렉트릭": "hd현대일렉트릭",
+    "에이치디한국조선해양": "hd한국조선해양",
+    "에이치디현대": "hd현대",
+    # 삼성 그룹 (정식 법인명 → 약칭)
+    "삼성에스디아이": "삼성sdi",
+    "삼성생명보험": "삼성생명",
+    "삼성화재해상보험": "삼성화재",
+    # 기타
+    "네이버": "naver",
+    "포스코홀딩스": "posco홀딩스",
+    "엘에스일렉트릭": "lselectric",  # top50 "LS ELECTRIC" normalize → "lselectric"
+    "케이티앤지": "kt&g",
+    "한국항공우주산업": "한국항공우주",
 }
 
 # 제거 대상 법인 접미어·접두어 (소문자 비교)
@@ -77,13 +107,16 @@ def normalize_company_name(name: str | None) -> str:
     # 모든 공백 제거
     s = _WHITESPACE_RE.sub("", s)
 
-    # 별칭 매핑 (lowercase 비교)
-    s_lower = s.lower()
-    for alias_key, alias_value in NAME_ALIASES.items():
-        if s_lower == alias_key.lower():
-            return alias_value
+    # 별칭 매핑 (key/value 모두 lower+공백제거로 정규화 후 비교)
+    def _norm(x: str) -> str:
+        return _WHITESPACE_RE.sub("", x.lower())
 
-    return s
+    s_norm = _norm(s)
+    for alias_key, alias_value in NAME_ALIASES.items():
+        if s_norm == _norm(alias_key):
+            return _norm(alias_value)
+
+    return s_norm
 
 
 def build_ticker_map(top50_csv_path) -> dict[str, str]:
