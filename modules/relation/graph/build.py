@@ -9,6 +9,7 @@ MultiDiGraph 선택 이유: 같은 (source, target) 쌍에 relation_type이 다�
 from __future__ import annotations
 
 import logging
+import math
 
 import networkx as nx
 
@@ -16,6 +17,17 @@ from modules.relation.storage.db import get_local_session
 from modules.relation.storage.models import CompanyNode, RelationLocal
 
 logger = logging.getLogger(__name__)
+
+
+def _scale_size(market_cap_eok: float) -> float:
+    """시가총액(억원) → 프로토타입 호환 sz (0.5 ~ 3.5).
+
+    제곱근 스케일 사용: 삼성전자 12.6M억 → ~3.5, 한국항공우주 0.18M억 → ~0.9.
+    """
+    if market_cap_eok <= 0:
+        return 0.5
+    sz = math.sqrt(market_cap_eok / 100000) * 0.3 + 0.5
+    return max(0.5, min(3.5, sz))
 
 
 def build_graph() -> nx.MultiDiGraph:
@@ -43,14 +55,22 @@ def build_graph() -> nx.MultiDiGraph:
     try:
         # 노드 추가
         for node in session.query(CompanyNode).all():
-            sz = round((node.market_cap or 0) / 10000, 1)
-            mc = f"{int((node.market_cap or 0) // 10000)}조"
+            cap = node.market_cap or 0
+            sz = _scale_size(cap)
+            # mc 표시 문자열 — 시가총액 억원 → 조원
+            mc_trillion = cap / 10000
+            if mc_trillion >= 100:
+                mc = f"{int(mc_trillion)}조"
+            elif mc_trillion >= 10:
+                mc = f"{mc_trillion:.0f}조"
+            else:
+                mc = f"{mc_trillion:.1f}조"
             G.add_node(
                 node.ticker,
                 n=node.corp_name,
                 t=node.ticker,
                 s=node.sector or "기타",
-                sz=max(sz, 0.5),  # 최소 크기 0.5
+                sz=sz,
                 mc=mc,
                 group=node.group_name,
                 is_target=bool(node.is_target),
