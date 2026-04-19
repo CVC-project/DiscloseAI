@@ -48,9 +48,30 @@ def test_label_missing_key_returns_key_itself():
 
 
 def test_all_entries_have_both_label_and_description():
-    """모든 glossary 항목은 (표시명, 설명) 튜플이어야."""
+    """모든 glossary 항목은 label + description 필수 필드를 채워야."""
     for key, entry in GLOSSARY.items():
-        assert isinstance(entry, tuple) and len(entry) == 2, f"{key} 형식 오류"
-        lbl, desc = entry
-        assert lbl, f"{key} 표시명 비어있음"
-        assert desc and len(desc) >= 10, f"{key} 설명이 너무 짧음"
+        assert entry.label, f"{key} 표시명 비어있음"
+        assert entry.description and len(entry.description) >= 10, (
+            f"{key} description이 너무 짧음"
+        )
+
+
+def test_ratios_have_benchmark_and_intuition():
+    """수익성 비율 5개는 기준선·직관 섹션을 채워 UI에서 3개 섹션 렌더되게 함."""
+    for key in ("gross_margin", "operating_margin", "net_margin", "roe", "roa"):
+        entry = GLOSSARY[key]
+        assert entry.benchmark, f"{key} benchmark 비어있음"
+        assert entry.intuition, f"{key} intuition 비어있음"
+
+
+def test_eqs_modules_have_how_section():
+    """EQS M1~M5는 '산출 방식' 섹션 필수 — 사용자가 어떻게 계산되는지 알아야."""
+    for m in ("M1", "M2", "M3", "M4", "M5"):
+        entry = GLOSSARY[m]
+        assert entry.how, f"{m} how(산출 방식) 비어있음"
+
+
+def test_as_dict_has_all_fields():
+    """as_dict()는 label/description/how/benchmark/intuition 5개 키 반환 (대시보드 JSON 직렬화용)."""
+    d = GLOSSARY["roe"].as_dict()
+    assert set(d.keys()) == {"label", "description", "how", "benchmark", "intuition"}

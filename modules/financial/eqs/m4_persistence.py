@@ -44,13 +44,27 @@ def _roa_series(panel: FirmPanel) -> List[Tuple[int, float]]:
 def _phi_to_score(phi: float) -> float:
     """φ를 0~100으로 변환.
 
-    φ=1.0 → 100, |φ-1|>=1 (즉 φ<=0 또는 φ>=2) → 0.
-    문서와 코드 일관성: φ=0 케이스는 0점 (완전 일회성 이익).
+    해석:
+    - φ = +1 완전 지속 → 100점
+    - φ = 0 무관 (랜덤이지만 극단 반전 아님) → 50점
+    - φ = -1 완전 반전 → 0점
+    - φ > 2 또는 φ < -1: 발산/극단 → 0점
+
+    변경 이력: 기존 하드 컷오프(φ≤0 즉시 0점)는 5년 단기 AR(1) 추정 노이즈에
+    지나치게 민감했음. 경미한 음수 φ(예: -0.3)는 "들쑥날쑥 경향"으로 낮지만
+    0점은 아닌 점수를 주도록 선형 매핑 구간을 [-1, 1]로 확장.
     """
-    dist = abs(phi - 1.0)
-    if dist >= 1.0:
+    if phi >= 1.0:
+        return 100.0
+    if phi <= -1.0:
         return 0.0
-    return round((1 - dist) * 100, 1)
+    if phi > 2.0:
+        return 0.0
+    if phi > 1.0:
+        # 폭주 구간: φ=1→100, φ=2→0 선형
+        return round(100 * (2 - phi), 1)
+    # 주 구간 [-1, 1]: φ=-1→0, φ=0→50, φ=1→100 선형
+    return round(50 + 50 * phi, 1)
 
 
 def _nonrecurring_penalty(panel: FirmPanel) -> Optional[float]:

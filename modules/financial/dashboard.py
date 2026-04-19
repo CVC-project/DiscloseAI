@@ -109,7 +109,7 @@ def _serialize(panel: FirmPanel, eqs: EQSResult, summary: List[str], highlights:
         "industry": _industry_payload(panel.corp_name),
         "summary": summary,
         "highlights": [asdict(h) for h in highlights],
-        "glossary": {k: {"label": v[0], "desc": v[1]} for k, v in GLOSSARY.items()},
+        "glossary": {k: v.as_dict() for k, v in GLOSSARY.items()},
     }
 
 
@@ -273,17 +273,42 @@ _HTML_TEMPLATE = """<!doctype html>
   .help:hover {{ background: var(--accent); color: white; }}
   .help .help-text {{
     display: none; position: absolute;
-    left: 0; bottom: calc(100% + 8px);
-    width: 280px; padding: 10px 12px;
+    left: 0; bottom: calc(100% + 10px);
+    width: 340px; padding: 0;
     background: #0b1220; color: var(--text);
-    border: 1px solid var(--accent); border-radius: 6px;
+    border: 1px solid var(--accent); border-radius: 8px;
     font-size: 12px; line-height: 1.55;
     z-index: 100; text-align: left;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.6);
     font-weight: 400; white-space: normal;
+    overflow: hidden;
   }}
   .help:hover .help-text {{ display: block; }}
-  .help-text strong {{ color: var(--accent); }}
+  .help-title {{
+    font-size: 13px; font-weight: 700; color: var(--text);
+    background: linear-gradient(135deg, rgba(99,102,241,0.25), rgba(139,92,246,0.15));
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(99,102,241,0.3);
+  }}
+  .help-section {{
+    padding: 8px 14px;
+    border-bottom: 1px solid rgba(51, 65, 85, 0.4);
+  }}
+  .help-section:last-child {{ border-bottom: none; }}
+  .help-section-label {{
+    font-size: 10px; font-weight: 700;
+    color: var(--warn); letter-spacing: 0.5px;
+    margin-bottom: 4px; text-transform: uppercase;
+  }}
+  .help-section-body {{
+    font-size: 12px; line-height: 1.55; color: var(--text);
+  }}
+  /* 왼쪽 끝 근처의 툴팁은 왼쪽이 아닌 오른쪽 정렬 */
+  .industry-row .help .help-text,
+  .ratio-row .help .help-text,
+  .stmt-table .help .help-text {{
+    left: auto; right: auto;
+  }}
   footer {{
     margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
     color: var(--muted); font-size: 12px;
@@ -382,11 +407,21 @@ _HTML_TEMPLATE = """<!doctype html>
 <script>
 const DATA = {data_json};
 
-// 용어 설명 툴팁 헬퍼 — glossary에 있는 key만 ⓘ 출력
+// 용어 설명 툴팁 헬퍼 — glossary에 있는 key만 ⓘ 출력 (섹션형 카드)
 function helpIcon(key) {{
   const g = DATA.glossary && DATA.glossary[key];
   if (!g) return '';
-  return `<span class="help">ⓘ<span class="help-text">${{g.desc}}</span></span>`;
+  const sections = [];
+  if (g.description) sections.push(['📖 개념', g.description]);
+  if (g.how)         sections.push(['🧮 산출 방식', g.how]);
+  if (g.benchmark)   sections.push(['📏 기준선', g.benchmark]);
+  if (g.intuition)   sections.push(['💡 쉽게 말하면', g.intuition]);
+  const body = sections.map(([lbl, txt]) =>
+    `<div class="help-section"><div class="help-section-label">${{lbl}}</div><div class="help-section-body">${{txt}}</div></div>`
+  ).join('');
+  return `<span class="help">ⓘ<span class="help-text">
+    <div class="help-title">${{g.label}}</div>${{body}}
+  </span></span>`;
 }}
 
 // 모듈 점수 리스트

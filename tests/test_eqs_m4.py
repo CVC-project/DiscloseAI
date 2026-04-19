@@ -90,3 +90,25 @@ def test_m4_long_window_marked_stable():
     panel = FirmPanel(corp_code="X", years=years)
     s = score_m4(panel)
     assert "안정" in s.note
+
+
+def test_m4_phi_zero_maps_to_middle_not_zero():
+    """_phi_to_score: 기존 하드 컷오프(φ=0 → 0점) 대신 중간값(50점) 부여.
+
+    5년 단기 AR(1) 추정 노이즈가 φ를 0 부근으로 흔드는 사이클 산업에서
+    즉시 0점 처리되던 문제를 완화. 경미한 음수 φ도 낮지만 0은 아닌 점수로.
+    """
+    from modules.financial.eqs.m4_persistence import _phi_to_score
+
+    # φ = 1: 완전 지속 → 100
+    assert _phi_to_score(1.0) == 100.0
+    # φ = 0: 무관 → 50 (기존 0)
+    assert _phi_to_score(0.0) == 50.0
+    # φ = -0.5: 약한 반전 → 25 (기존 0)
+    assert _phi_to_score(-0.5) == 25.0
+    # φ = -1: 완전 반전 → 0
+    assert _phi_to_score(-1.0) == 0.0
+    # φ = -1.5: 더 나쁨 → 0
+    assert _phi_to_score(-1.5) == 0.0
+    # φ = 0.5: 중간 지속 → 75
+    assert _phi_to_score(0.5) == 75.0
