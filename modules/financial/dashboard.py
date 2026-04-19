@@ -10,7 +10,7 @@
     from modules.financial.translator import translate_all, extract_highlights
     from modules.financial.dashboard import build_dashboard
 
-    panel = fetch_panel("00126380", range(2015, 2025), corp_name="삼성전자")
+    panel = fetch_panel("00126380", range(2021, 2026), corp_name="삼성전자")
     eqs = compute_eqs(panel)
     out = build_dashboard(panel, eqs, translate_all(panel.latest()),
                          extract_highlights(panel))
@@ -26,6 +26,7 @@ from typing import Iterable, List, Optional
 
 from .batch import FirmRecord, summarize
 from .eqs.types import EQSResult, FirmPanel
+from .glossary import GLOSSARY
 from .industry_groups import get_sector, load_sector_stats
 from .translator.highlights import Highlight
 from .translator.ratios import LABELS as RATIO_LABELS, compute_ratios
@@ -108,6 +109,7 @@ def _serialize(panel: FirmPanel, eqs: EQSResult, summary: List[str], highlights:
         "industry": _industry_payload(panel.corp_name),
         "summary": summary,
         "highlights": [asdict(h) for h in highlights],
+        "glossary": {k: {"label": v[0], "desc": v[1]} for k, v in GLOSSARY.items()},
     }
 
 
@@ -259,6 +261,29 @@ _HTML_TEMPLATE = """<!doctype html>
   .industry-head div:nth-child(3), .industry-head div:nth-child(4), .industry-head div:nth-child(5) {{
     text-align: right;
   }}
+  .help {{
+    display: inline-block; margin-left: 4px; cursor: help;
+    color: var(--muted); font-size: 10px;
+    position: relative; vertical-align: middle;
+    width: 14px; height: 14px; line-height: 14px;
+    text-align: center; border-radius: 50%;
+    background: rgba(148,163,184,0.15);
+    font-weight: 400; font-style: normal;
+  }}
+  .help:hover {{ background: var(--accent); color: white; }}
+  .help .help-text {{
+    display: none; position: absolute;
+    left: 0; bottom: calc(100% + 8px);
+    width: 280px; padding: 10px 12px;
+    background: #0b1220; color: var(--text);
+    border: 1px solid var(--accent); border-radius: 6px;
+    font-size: 12px; line-height: 1.55;
+    z-index: 100; text-align: left;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+    font-weight: 400; white-space: normal;
+  }}
+  .help:hover .help-text {{ display: block; }}
+  .help-text strong {{ color: var(--accent); }}
   footer {{
     margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
     color: var(--muted); font-size: 12px;
@@ -357,6 +382,13 @@ _HTML_TEMPLATE = """<!doctype html>
 <script>
 const DATA = {data_json};
 
+// 용어 설명 툴팁 헬퍼 — glossary에 있는 key만 ⓘ 출력
+function helpIcon(key) {{
+  const g = DATA.glossary && DATA.glossary[key];
+  if (!g) return '';
+  return `<span class="help">ⓘ<span class="help-text">${{g.desc}}</span></span>`;
+}}
+
 // 모듈 점수 리스트
 const moduleColors = {{
   M1: '#06b6d4', M2: '#8b5cf6', M3: '#22c55e', M4: '#eab308', M5: '#ef4444'
@@ -373,7 +405,7 @@ DATA.eqs.modules.forEach(m => {{
   li.innerHTML = `
     <div>
       <span class="module-score" style="color:${{moduleColors[m.name]}}">${{score}}</span>
-      <span class="module-name" style="margin-left:12px;">${{moduleLabels[m.name]}}</span>
+      <span class="module-name" style="margin-left:12px;">${{moduleLabels[m.name]}}${{helpIcon(m.name)}}</span>
     </div>
     <span class="module-name" style="font-size:11px;text-align:right;max-width:200px;">${{m.note}}</span>
   `;
@@ -429,7 +461,7 @@ Object.entries(DATA.ratios.labels).forEach(([key, label]) => {{
     valueHtml = `<div class="ratio-value">${{v.toFixed(1)}}%</div>`;
     barHtml = `<div class="ratio-bar-wrap"><div class="ratio-bar-fill ${{cls}}" style="width:${{pct}}%"></div></div>`;
   }}
-  row.innerHTML = `<div class="ratio-name">${{label}}</div>${{barHtml}}${{valueHtml}}`;
+  row.innerHTML = `<div class="ratio-name">${{label}}${{helpIcon(key)}}</div>${{barHtml}}${{valueHtml}}`;
   rList.appendChild(row);
 }});
 
@@ -468,7 +500,7 @@ if (DATA.industry) {{
       const sign = diff >= 0 ? '+' : '';
       diffHtml = `<div class="ind-diff ${{diffCls}}">${{sign}}${{diff.toFixed(1)}}%p</div>`;
     }}
-    row.innerHTML = `<div class="ind-label">${{label}}</div>${{barHtml}}${{mineHtml}}${{avgHtml}}${{diffHtml}}`;
+    row.innerHTML = `<div class="ind-label">${{label}}${{helpIcon(key)}}</div>${{barHtml}}${{mineHtml}}${{avgHtml}}${{diffHtml}}`;
     rowsDiv.appendChild(row);
   }});
 }}
@@ -520,7 +552,8 @@ function renderStatementTable(tableId, rows, years) {{
       return `<td class="${{cls}}">${{formatMoney(v)}}</td>`;
     }}).join('');
     const hClass = row.highlight ? 'highlight-row' : '';
-    html += `<tr class="${{hClass}}"><td>${{row.label}}</td>${{cells}}</tr>`;
+    const info = row.key ? helpIcon(row.key) : '';
+    html += `<tr class="${{hClass}}"><td>${{row.label}}${{info}}</td>${{cells}}</tr>`;
   }});
   html += '</tbody>';
   table.innerHTML = html;
@@ -540,19 +573,19 @@ renderStatementTable('incomeTable', [
 
 // 재무상태표
 renderStatementTable('balanceTable', [
-  {{label: '자산총계', values: DATA.years.map(y => y.total_assets), highlight: true}},
-  {{label: '　유동자산', values: DATA.years.map(y => y.current_assets)}},
-  {{label: '부채총계', values: DATA.years.map(y => y.total_liabilities), highlight: true}},
-  {{label: '　유동부채', values: DATA.years.map(y => y.current_liabilities)}},
+  {{label: '자산총계', key: 'total_assets', values: DATA.years.map(y => y.total_assets), highlight: true}},
+  {{label: '　유동자산', key: 'current_assets', values: DATA.years.map(y => y.current_assets)}},
+  {{label: '부채총계', key: 'total_liabilities', values: DATA.years.map(y => y.total_liabilities), highlight: true}},
+  {{label: '　유동부채', key: 'current_liabilities', values: DATA.years.map(y => y.current_liabilities)}},
   {{label: '　비유동부채', values: DATA.years.map(y => y.long_term_debt)}},
-  {{label: '자본총계', values: DATA.years.map(y => y.total_equity), highlight: true}},
+  {{label: '자본총계', key: 'total_equity', values: DATA.years.map(y => y.total_equity), highlight: true}},
 ], stmtYears);
 
 // 현금흐름표
 renderStatementTable('cashflowTable', [
-  {{label: '영업활동 CF', values: DATA.years.map(y => y.operating_cashflow), highlight: true}},
-  {{label: '투자활동 CF', values: DATA.years.map(y => y.investing_cashflow)}},
-  {{label: '재무활동 CF', values: DATA.years.map(y => y.financing_cashflow)}},
+  {{label: '영업활동 CF', key: 'operating_cashflow', values: DATA.years.map(y => y.operating_cashflow), highlight: true}},
+  {{label: '투자활동 CF', key: 'investing_cashflow', values: DATA.years.map(y => y.investing_cashflow)}},
+  {{label: '재무활동 CF', key: 'financing_cashflow', values: DATA.years.map(y => y.financing_cashflow)}},
 ], stmtYears);
 
 // Highlights
