@@ -2,8 +2,10 @@
 
 > 이 파일은 `modules/relation/` 아래 파일 작업 시 자동 로드됨.
 > 상세 도메인 규칙은 서브폴더 각 CLAUDE.md를 **해당 폴더 작업 시에만** 참조 (Progressive Disclosure).
-> 전체 계획 원본: `C:\Users\yangw\.claude\plans\v2-twinkly-kurzweil.md`
-> 세션 재개용 진행 상태: [PLAN.md](PLAN.md)
+>
+> 관련 문서 (세션 재개·설계 참조):
+> - [PLAN.md](PLAN.md) — 진행 상태 체크리스트 (매 세션 갱신)
+> - [SPEC.md](SPEC.md) — Phase 1·2 상세 명세 (함수 시그니처·테스트·리스크). 설계 변경 시만 갱신.
 
 ## 담당 범위
 코스피 시총 상위 50개 기업의 **지분·계열 관계** 수집·분류·시각화. 공급·경쟁은 v2.
