@@ -23,12 +23,23 @@ def cmd_init(args):
     init_local_db()
 
 
+def cmd_map_corp_codes(args):
+    from modules.relation.ingest.dart import map_corp_codes
+
+    result = map_corp_codes()
+    print(f"매칭 완료: {result['matched']}/{result['total']}")
+    if result["unmatched_tickers"]:
+        print("매칭 실패:")
+        for t in result["unmatched_tickers"]:
+            print(f"  - {t}")
+
+
 def cmd_collect(args):
     source = args.source
     if source == "dart":
         from modules.relation.ingest import dart
 
-        dart.collect(corp=args.corp)
+        dart.collect(corp=args.corp, bsns_year=args.year)
     elif source == "ftc":
         from modules.relation.ingest import ftc
 
@@ -40,7 +51,7 @@ def cmd_collect(args):
     elif source == "all":
         from modules.relation.ingest import dart, filing, ftc
 
-        dart.collect(corp=None)
+        dart.collect(corp=None, bsns_year=args.year)
         ftc.collect()
         filing.collect()
     else:
@@ -89,9 +100,17 @@ def build_parser() -> argparse.ArgumentParser:
         func=cmd_init
     )
 
+    sub.add_parser(
+        "map-corp-codes",
+        help="DART corpCode.xml 다운 → top50.csv의 corp_code 컬럼 갱신 (one-off)",
+    ).set_defaults(func=cmd_map_corp_codes)
+
     p_collect = sub.add_parser("collect", help="원천 데이터 수집")
     p_collect.add_argument("source", choices=["dart", "ftc", "filing", "all"])
     p_collect.add_argument("--corp", help="DART 수집 시 특정 ticker (예: 005930)")
+    p_collect.add_argument(
+        "--year", type=int, default=2024, help="사업연도 (기본 2024)"
+    )
     p_collect.set_defaults(func=cmd_collect)
 
     sub.add_parser("transform", help="필터·K-IFRS 분류·중복 제거").set_defaults(

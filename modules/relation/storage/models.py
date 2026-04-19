@@ -4,7 +4,7 @@ shared/models.py의 RelationData와 별개로 개발·테스트 단계에서 사
 MVP 검증 완료 후 shared/ 로 승격 PR 예정.
 """
 
-from datetime import datetime
+from datetime import UTC, datetime
 
 from sqlalchemy import Boolean, Column, DateTime, Float, Integer, String, Text
 from sqlalchemy.orm import declarative_base
@@ -52,7 +52,7 @@ class RelationRaw(Base):
     source_type = Column(String, nullable=False)
     bsns_year = Column(Integer)  # 사업연도 (DART 기준)
     raw_response = Column(Text)  # 원본 API 응답 항목 (JSON 문자열, 감사 추적용)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(UTC))
 
 
 class RelationLocal(Base):
