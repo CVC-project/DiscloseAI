@@ -18,6 +18,9 @@ class DisclosureLocal(Base):
     amount = Column(Float)
     summary = Column(Text)
     ai_analyzed = Column(Boolean, default=False, nullable=False, server_default="0")
+    stock_code = Column(String)       # 종목코드 (yfinance용) — corp_code와 별도
+    high_impact = Column(Boolean, default=False, server_default="0")  # 유상증자·CB·BW·감사의견 이상
+    dilution_ratio = Column(Float)    # 발행금액 ÷ 시가총액 (희석률)
 
 
 class FinancialStatement(Base):
@@ -40,3 +43,6 @@ class FinancialStatement(Base):
     equity = Column(Float)                           # 자본총계
     operating_cashflow = Column(Float)               # 영업활동현금흐름
     fetched_at = Column(Date)                        # 수집일
+    roe = Column(Float)                              # ROE = 순이익/자본 × 100
+    debt_ratio = Column(Float)                       # 부채비율 = 총부채/자본 × 100
+    operating_margin = Column(Float)                 # 영업이익률 = 영업이익/매출 × 100

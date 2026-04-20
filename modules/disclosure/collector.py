@@ -152,8 +152,108 @@ def _fetch_current_price(stock_code: str) -> str:
         return ""
 
 
-def _fetch_document_text(dart_client, rcept_no: str) -> str:
-    """공시 원문 HTML을 가져와 순수 텍스트로 변환한다."""
+# 발행금액 파싱 패턴 (증자·CB·BW 희석률 계산용)
+_ISSUE_AMOUNT_PATTERN = re.compile(
+    r"발행\s*(?:총\s*)?(?:금액|가액|예정금액)[^0-9]*?([\d,]+)\s*(백만원|억원|천원|원)?"
+)
+# 감사의견 이상 감지 패턴
+_AUDIT_OPINION_BAD = re.compile(r"감사의견\s*[:：]?\s*(한정|부적정|의견\s*거절)")
+
+
+def _parse_issue_amount(doc_text: str) -> float | None:
+    """공시 원문에서 발행금액을 파싱해 원 단위로 반환."""
+    m = _ISSUE_AMOUNT_PATTERN.search(doc_text)
+    if not m:
+        return None
+    try:
+        raw = float(m.group(1).replace(",", ""))
+        unit = m.group(2) or ""
+        if "백만원" in unit:
+            return raw * 1_000_000
+        if "억원" in unit:
+            return raw * 100_000_000
+        if "천원" in unit:
+            return raw * 1_000
+        return raw
+    except Exception:
+        return None
+
+
+def _calc_dilution_ratio(doc_text: str, stock_code: str) -> float | None:
+    """희석률 = 발행금액 ÷ 시가총액 × 100. 계산 불가 시 None."""
+    try:
+        issue_amount = _parse_issue_amount(doc_text)
+        if issue_amount is None or issue_amount <= 0:
+            return None
+        ticker = yf.Ticker(f"{stock_code}.KS")
+        market_cap = ticker.fast_info.get("marketCap")
+        if not market_cap or market_cap <= 0:
+            return None
+        return round(issue_amount / market_cap * 100, 4)
+    except Exception:
+        return None
+
+
+# 사업보고서·분기보고서 식별 패턴
+_ANNUAL_REPORT_PATTERN = re.compile(r"사업보고서|분기보고서|반기보고서")
+
+# 추출 대상 섹션 (Tier1 정확명 → Tier2 변형명 순)
+_TARGET_SECTIONS: list[tuple[str, list[str]]] = [
+    ("사업의 내용",            ["사업의 내용", "주요사업내용", "사업내용"]),
+    ("재무제표",               ["재무제표", "연결재무제표", "요약재무정보", "재무상태표"]),
+    ("이사의 경영진단 및 분석의견", ["이사의 경영진단 및 분석의견", "경영진단 및 분석의견", "경영진단"]),
+    ("그 밖에 투자자 보호를 위하여 필요한 사항", ["그 밖에 투자자 보호를 위하여 필요한 사항", "투자자보호"]),
+    ("자본금 변동사항",        ["자본금 변동사항", "자본금의 변동"]),
+    ("주식의 총수 등",         ["주식의 총수 등", "발행주식의 총수", "주식의 총수"]),
+    ("회계감사인의 감사의견 등", ["회계감사인의 감사의견 등", "감사의견", "외부감사에 관한 사항"]),
+]
+
+# 재무제표 섹션에서 주석 시작 시 중단
+_FINSTATE_STOP = re.compile(r"주\s*석|재무제표\s*주석|연결재무제표\s*주석")
+
+
+def _extract_annual_sections(text: str) -> str:
+    """사업보고서 텍스트에서 대상 섹션만 추출. 못 찾으면 빈 문자열."""
+    extracted = []
+
+    for section_name, patterns in _TARGET_SECTIONS:
+        # Tier1 → Tier2 순으로 매칭 시도
+        found_pos = -1
+        for pat in patterns:
+            idx = text.find(pat)
+            if idx != -1:
+                found_pos = idx
+                break
+
+        if found_pos == -1:
+            continue
+
+        # 섹션 끝: 다음 대섹션 시작 위치 (없으면 5,000자)
+        next_pos = len(text)
+        for _, other_patterns in _TARGET_SECTIONS:
+            for op in other_patterns:
+                oi = text.find(op, found_pos + len(patterns[0]) + 1)
+                if oi != -1 and oi < next_pos:
+                    next_pos = oi
+                    break
+
+        chunk = text[found_pos:found_pos + min(next_pos - found_pos, 5000)]
+
+        # 재무제표 섹션은 주석 시작 전까지만
+        if section_name == "재무제표":
+            m = _FINSTATE_STOP.search(chunk)
+            if m:
+                chunk = chunk[:m.start()]
+
+        extracted.append(f"[{section_name}]\n{chunk.strip()}")
+
+    return "\n\n".join(extracted)
+
+
+def _fetch_document_text(dart_client, rcept_no: str, report_nm: str = "") -> str:
+    """공시 원문 HTML을 가져와 순수 텍스트로 변환한다.
+    사업보고서·분기보고서는 핵심 섹션만 추출, 나머지는 전문(최대 10,000자).
+    """
     import warnings
     from bs4 import XMLParsedAsHTMLWarning
     warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
@@ -162,8 +262,19 @@ def _fetch_document_text(dart_client, rcept_no: str) -> str:
         if not html:
             return ""
         soup = BeautifulSoup(html, "html.parser")
-        text = soup.get_text(separator=" ", strip=True)
-        return re.sub(r"\s+", " ", text).strip()
+        text = re.sub(r"\s+", " ", soup.get_text(separator=" ", strip=True)).strip()
+
+        # 사업보고서·분기보고서: 섹션 추출 3단계
+        if _ANNUAL_REPORT_PATTERN.search(report_nm):
+            # Tier1+2: 섹션 추출
+            extracted = _extract_annual_sections(text)
+            if extracted:
+                return extracted
+            # Tier3: 재무제표 DB만 사용 (원문 건너뜀)
+            return ""
+
+        # 수시공시: 전문 최대 10,000자
+        return text[:10000]
     except Exception:
         return ""
 
@@ -569,8 +680,12 @@ def _analyze_with_groq(corp_name: str, report_nm: str, disc_type: str, doc_text:
         )
         return res.choices[0].message.content.strip()
     except Exception as e:
-        print(f"  [WARN] Groq 분석 실패: {e}")
-        return None
+        err_str = str(e)
+        if "429" in err_str or "rate_limit" in err_str.lower():
+            print(f"  [WARN] Groq 일일 한도 초과 — 오늘 중단")
+            raise  # 백필에서 잡아서 완전 중단
+        print(f"  [WARN] Groq 분석 실패 (건너뜀): {e}")
+        return None  # 400 등 → None 반환, 다음 건으로 넘어감
 
 
 def build_cpa_summary(
@@ -684,7 +799,7 @@ def collect(stock_codes: list[str] | None = None) -> None:
 
             print(f"  [분석중]     [{disc_type}] {report_nm} ({rcept_dt})")
 
-            doc_text = _fetch_document_text(dart, rcept_no)
+            doc_text = _fetch_document_text(dart, rcept_no, report_nm)
             ai_result = _analyze_with_groq(corp_name, report_nm, disc_type, doc_text, stock_code)
             ai_ok = ai_result is not None
             if ai_ok:
@@ -693,9 +808,20 @@ def collect(stock_codes: list[str] | None = None) -> None:
             else:
                 summary = build_cpa_summary(corp_name, report_nm, disc_type, rcept_dt, doc_text)
 
+            # high_impact: 유상증자·CB·BW 무조건, 감사의견 이상 감지
+            is_high_impact = disc_type in ("증자", "전환사채", "BW")
+            if not is_high_impact and _AUDIT_OPINION_BAD.search(doc_text or ""):
+                is_high_impact = True
+
+            # 희석률: 증자·CB·BW에서 발행금액 파싱 후 시가총액 대비 %
+            dilution = None
+            if is_high_impact and disc_type in ("증자", "전환사채", "BW") and doc_text:
+                dilution = _calc_dilution_ratio(doc_text, stock_code)
+
             record = DisclosureLocal(
                 disclosure_id=rcept_no,
                 corp_code=str(row.get("corp_code", stock_code)),
+                stock_code=stock_code,
                 corp_name=corp_name,
                 disclosure_date=datetime.strptime(rcept_dt, "%Y%m%d").date() if rcept_dt else None,
                 disclosure_type=disc_type,
@@ -703,6 +829,8 @@ def collect(stock_codes: list[str] | None = None) -> None:
                 amount=None,
                 summary=summary,
                 ai_analyzed=ai_ok,
+                high_impact=is_high_impact,
+                dilution_ratio=dilution,
             )
             session.add(record)
             session.commit()
@@ -858,10 +986,18 @@ def backfill_ai(max_records: int = 50) -> int:
     dart = odr(DART_API_KEY) if DART_API_KEY else None
     session = get_local_session()
 
+    # 사업보고서·분기보고서·반기보고서 우선, 이후 나머지 최신순
+    from sqlalchemy import case
+    priority = case(
+        (DisclosureLocal.title.contains("사업보고서"), 0),
+        (DisclosureLocal.title.contains("분기보고서"), 0),
+        (DisclosureLocal.title.contains("반기보고서"), 0),
+        else_=1,
+    )
     pending = (
         session.query(DisclosureLocal)
         .filter(DisclosureLocal.ai_analyzed == False)
-        .order_by(DisclosureLocal.disclosure_date.desc())
+        .order_by(priority, DisclosureLocal.disclosure_date.desc())
         .limit(max_records)
         .all()
     )
@@ -872,14 +1008,19 @@ def backfill_ai(max_records: int = 50) -> int:
     for rec in pending:
         doc_text = ""
         if dart and rec.disclosure_id:
-            doc_text = _fetch_document_text(dart, rec.disclosure_id)
+            doc_text = _fetch_document_text(dart, rec.disclosure_id, rec.title or "")
 
-        ai_result = _analyze_with_groq(rec.corp_name, rec.title, rec.disclosure_type, doc_text, rec.corp_code or "")
+        try:
+            ai_result = _analyze_with_groq(rec.corp_name, rec.title, rec.disclosure_type, doc_text, rec.stock_code or "")
+        except Exception:
+            # 429 한도 초과 → 완전 중단
+            print(f"  [백필 중단] Groq 일일 한도 소진 — {done}건 완료")
+            break
 
         if ai_result is None:
-            # Groq 실패 = 한도 초과 또는 오류 → 중단
-            print(f"  [백필 중단] Groq 한도 초과 또는 오류 — {done}건 완료")
-            break
+            # 400 등 단건 오류 → 이 건만 건너뛰고 계속
+            print(f"  [백필 스킵] {rec.corp_name} | {rec.title}")
+            continue
 
         rcept_dt = rec.disclosure_date.strftime("%Y%m%d") if rec.disclosure_date else ""
         header = f"[공시] {rec.corp_name} | {rec.title} | {rcept_dt}\n[분류] {rec.disclosure_type}\n\n"
