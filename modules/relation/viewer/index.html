@@ -264,7 +264,28 @@ function setMode(mode, btn) {
 }
 
 // ===== GRAPH ENGINE (same) =====
-function init(){const nm={};nodes=raw.map((r,i)=>{const sec=sectors[r.s]||{cx:0,cy:0,color:'#888'};const ang=(i/raw.length)*Math.PI*2+Math.random()*0.5;const rad=160+Math.random()*140;const n={...r,x:W/2+sec.cx*W*0.3+Math.cos(ang)*rad+(Math.random()-0.5)*60,y:H/2+sec.cy*H*0.3+Math.sin(ang)*rad+(Math.random()-0.5)*60,vx:0,vy:0,glow:0,pp:Math.random()*6.28,col:sec.color};nm[r.n]=n;return n;});edges=[];nodes.forEach(n=>{if(!n.rl)return;n.rl.forEach(r=>{const parts=r.split(':');const tn=parts[0],rt=parts[1],detail=parts.slice(2).join(':');const tgt=nm[tn];if(tgt)edges.push({a:n,b:tgt,type:rt,detail:detail});});});}
+function init(){
+  const nm={};
+  nodes=raw.map((r,i)=>{const sec=sectors[r.s]||{cx:0,cy:0,color:'#888'};const ang=(i/raw.length)*Math.PI*2+Math.random()*0.5;const rad=160+Math.random()*140;const n={...r,x:W/2+sec.cx*W*0.3+Math.cos(ang)*rad+(Math.random()-0.5)*60,y:H/2+sec.cy*H*0.3+Math.sin(ang)*rad+(Math.random()-0.5)*60,vx:0,vy:0,glow:0,pp:Math.random()*6.28,col:sec.color};nm[r.n]=n;return n;});
+  edges=[];
+  nodes.forEach(n=>{if(!n.rl)return;n.rl.forEach(r=>{const parts=r.split(':');const tn=parts[0],rt=parts[1],detail=parts.slice(2).join(':');const tgt=nm[tn];if(tgt)edges.push({a:n,b:tgt,type:rt,detail:detail});});});
+
+  // === 평행 엣지 offset 계산 (같은 (min,max) 쌍에 여러 relation_type 엣지가 있으면 나란히 그리기) ===
+  // ftc_group 같은 무방향 엣지는 이미 source/target이 ticker 정렬 상태라 (A→B) 하나만 저장됨.
+  // K-IFRS 지분 엣지는 방향이 있어 A→B와 B→A가 별도로 존재할 수 있음 — 이것도 같은 쌍으로 묶어 offset.
+  const pairIdx = {};
+  edges.forEach(e=>{
+    const key = [e.a.t, e.b.t].sort().join('|');
+    if(!pairIdx[key]) pairIdx[key] = [];
+    pairIdx[key].push(e);
+  });
+  Object.values(pairIdx).forEach(group=>{
+    group.forEach((e,i)=>{
+      e.parallelIdx = i;
+      e.parallelCount = group.length;
+    });
+  });
+}
 function physics(){const cx=W/2,cy=H/2;nodes.forEach(n=>{n.vx+=(cx-n.x)*0.00015;n.vy+=(cy-n.y)*0.00015;nodes.forEach(m=>{if(n===m)return;const dx=n.x-m.x,dy=n.y-m.y,d=Math.sqrt(dx*dx+dy*dy)||1;if(d<280){const f=500/(d*d);n.vx+=dx/d*f;n.vy+=dy/d*f;}});});edges.forEach(e=>{const dx=e.b.x-e.a.x,dy=e.b.y-e.a.y,d=Math.sqrt(dx*dx+dy*dy)||1;const f=(d-200)*0.002;e.a.vx+=dx/d*f;e.a.vy+=dy/d*f;e.b.vx-=dx/d*f;e.b.vy-=dy/d*f;});nodes.forEach(n=>{n.vx*=0.88;n.vy*=0.88;n.x+=n.vx;n.y+=n.vy;n.pp+=0.015;if(alertOn&&alertSrc){if(n.n===alertSrc)n.glow=Math.min(1,n.glow+0.04);else{const h1=edges.some(e=>(e.a.n===alertSrc&&e.b.n===n.n)||(e.b.n===alertSrc&&e.a.n===n.n));if(h1)n.glow=Math.min(0.8,n.glow+0.025);else n.glow=Math.max(0,n.glow-0.015);}}else n.glow=Math.max(0,n.glow-0.02);});}
 function draw(){
 time+=0.016;x.clearRect(0,0,W,H);
@@ -289,14 +310,66 @@ x.save();x.translate(camX,camY);x.scale(zm,zm);
 ripples=ripples.filter(r=>{r.radius+=3;r.alpha-=0.008;if(r.alpha<=0)return false;x.beginPath();x.arc(r.x,r.y,r.radius,0,Math.PI*2);x.strokeStyle=`rgba(77,166,255,${r.alpha})`;x.lineWidth=1.5;x.stroke();return true;});
 
 // === EDGES ===
-edges.forEach(e=>{const isH=hov&&(e.a.n===hov.n||e.b.n===hov.n);const isA=alertOn&&alertSrc&&(e.a.n===alertSrc||e.b.n===alertSrc);const fa=flt==='all'||e.a.s===flt,fb=flt==='all'||e.b.s===flt;if(!fa&&!fb)return;const st=EDGE_STYLES[e.type]||{color:'#999',width:0.5,dash:[]};x.beginPath();x.moveTo(e.a.x,e.a.y);x.lineTo(e.b.x,e.b.y);if(isA){x.strokeStyle=`rgba(251,191,36,${0.5+Math.sin(time*4)*0.2})`;x.lineWidth=2;x.setLineDash([6,4]);}else if(isH){x.strokeStyle=st.color;x.lineWidth=st.width*1.8;x.setLineDash(st.dash);x.globalAlpha=1.0;}else{x.strokeStyle=st.color;x.lineWidth=st.width;x.setLineDash(st.dash);x.globalAlpha=0.6;}x.stroke();x.globalAlpha=1.0;x.setLineDash([]);});
+// === 엣지 그리기 (평행 offset + 방향 화살표 + 선택 강조) ===
+const ARROW_TYPES = new Set(['subsidiary','associate','investment','dart_filing']);  // 방향성 있는 관계만 화살표
+edges.forEach(e=>{
+  const isH=hov&&(e.a.n===hov.n||e.b.n===hov.n);
+  const isA=alertOn&&alertSrc&&(e.a.n===alertSrc||e.b.n===alertSrc);
+  const fa=flt==='all'||e.a.s===flt,fb=flt==='all'||e.b.s===flt;
+  if(!fa&&!fb)return;
+  // sel 기반 alpha — 선택 노드와 연결된 엣지만 선명
+  const selConnected = !sel || (e.a===sel || e.b===sel);
+  const st=EDGE_STYLES[e.type]||{color:'#999',width:0.5,dash:[]};
+
+  // 평행 offset — 같은 쌍에 여러 엣지 있으면 수직 방향으로 약간 떨어뜨려 나란히
+  const dx0=e.b.x-e.a.x, dy0=e.b.y-e.a.y;
+  const len=Math.sqrt(dx0*dx0+dy0*dy0)||1;
+  const px=-dy0/len, py=dx0/len;  // perpendicular unit
+  const offsetStep = 5;
+  const off = (e.parallelCount>1) ? ((e.parallelIdx - (e.parallelCount-1)/2) * offsetStep) : 0;
+  const x1=e.a.x+px*off, y1=e.a.y+py*off;
+  const x2=e.b.x+px*off, y2=e.b.y+py*off;
+
+  x.beginPath();x.moveTo(x1,y1);x.lineTo(x2,y2);
+  if(isA){x.strokeStyle=`rgba(251,191,36,${0.5+Math.sin(time*4)*0.2})`;x.lineWidth=2;x.setLineDash([6,4]);x.globalAlpha=1.0;}
+  else if(isH||(sel&&selConnected)){x.strokeStyle=st.color;x.lineWidth=st.width*1.5;x.setLineDash(st.dash);x.globalAlpha=1.0;}
+  else if(sel&&!selConnected){x.strokeStyle=st.color;x.lineWidth=st.width;x.setLineDash(st.dash);x.globalAlpha=0.08;}
+  else{x.strokeStyle=st.color;x.lineWidth=st.width;x.setLineDash(st.dash);x.globalAlpha=0.6;}
+  x.stroke();
+
+  // 방향 화살표 (K-IFRS 지분·주석 관계만 — ftc_group/manual은 무방향)
+  if(ARROW_TYPES.has(e.type) && x.globalAlpha >= 0.3){
+    x.setLineDash([]);
+    const nodeR = e.b.sz*22;
+    const tipX = x2 - (dx0/len)*nodeR;
+    const tipY = y2 - (dy0/len)*nodeR;
+    const arrowSize = Math.max(4, st.width*2.2);
+    const ang = Math.atan2(dy0, dx0);
+    x.beginPath();
+    x.moveTo(tipX, tipY);
+    x.lineTo(tipX - arrowSize*Math.cos(ang-0.45), tipY - arrowSize*Math.sin(ang-0.45));
+    x.lineTo(tipX - arrowSize*Math.cos(ang+0.45), tipY - arrowSize*Math.sin(ang+0.45));
+    x.closePath();
+    x.fillStyle = st.color;
+    x.fill();
+  }
+
+  x.globalAlpha=1.0;x.setLineDash([]);
+});
 
 // === NODES as 3D PLANETS ===
+// 선택된 노드의 이웃 집합 (sel 기반 강조용)
+const selNeighbors = sel ? new Set(edges.filter(e=>e.a===sel||e.b===sel).flatMap(e=>[e.a,e.b])) : null;
 nodes.forEach(n=>{
   const filtered=flt!=='all'&&n.s!==flt;
+  const selFaded = sel && n!==sel && (!selNeighbors || !selNeighbors.has(n));
   const r=n.sz*18;
   const pulse=Math.sin(n.pp)*0.08+1;
   const pr=r*pulse;
+
+  // 선택 모드에서 이웃 아닌 노드는 전체적으로 흐리게
+  x.save();
+  if(selFaded) x.globalAlpha = 0.15;
 
   // Alert glow
   if(n.glow>0.01){const gr=pr*(2.5+n.glow*2);const g=x.createRadialGradient(n.x,n.y,pr*0.5,n.x,n.y,gr);g.addColorStop(0,n.n===alertSrc?`rgba(251,191,36,${n.glow*0.5})`:`rgba(77,166,255,${n.glow*0.4})`);g.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=g;x.beginPath();x.arc(n.x,n.y,gr,0,Math.PI*2);x.fill();}
@@ -359,6 +432,7 @@ nodes.forEach(n=>{
 
   // Name label
   if(!filtered||isH){x.fillStyle=`rgba(255,255,255,${filtered?0.2:0.85})`;x.font=`${n.sz>2?'12':'10'}px -apple-system,sans-serif`;x.textAlign='center';x.fillText(n.n,n.x,n.y+pr+16);}
+  x.restore();  // selFaded 처리용 globalAlpha 복원
 });
 
 // === MASCOT EMOJI ===
@@ -396,7 +470,9 @@ x.restore();physics();requestAnimationFrame(draw);}
 
 // ===== INTERACTION =====
 c.addEventListener('mousemove',e=>{if(drag){camX=cs.x+(e.clientX-ds.x);camY=cs.y+(e.clientY-ds.y);return;}const mx=(e.clientX-camX)/zm,my=(e.clientY-camY)/zm;hov=null;nodes.forEach(n=>{const dx=n.x-mx,dy=n.y-my;if(Math.sqrt(dx*dx+dy*dy)<n.sz*22){hov=n;c.style.cursor='pointer';}});if(!hov)c.style.cursor='grab';});
-c.addEventListener('mousedown',e=>{const mx=(e.clientX-camX)/zm,my=(e.clientY-camY)/zm;let clicked=null;nodes.forEach(n=>{const dx=n.x-mx,dy=n.y-my;if(Math.sqrt(dx*dx+dy*dy)<n.sz*22)clicked=n;});if(clicked){sel=clicked;if(currentMode==='analyze')showAnalyze(clicked);else if(currentMode==='disclosure')showDisclosure(clicked);else showTimemachine(clicked);}else{drag=true;ds={x:e.clientX,y:e.clientY};cs={x:camX,y:camY};c.style.cursor='grabbing';}});
+c.addEventListener('mousedown',e=>{const mx=(e.clientX-camX)/zm,my=(e.clientY-camY)/zm;let clicked=null;nodes.forEach(n=>{const dx=n.x-mx,dy=n.y-my;if(Math.sqrt(dx*dx+dy*dy)<n.sz*22)clicked=n;});if(clicked){sel=clicked;if(currentMode==='analyze')showAnalyze(clicked);else if(currentMode==='disclosure')showDisclosure(clicked);else showTimemachine(clicked);}else{sel=null;closePanel();drag=true;ds={x:e.clientX,y:e.clientY};cs={x:camX,y:camY};c.style.cursor='grabbing';}});
+// ESC 키로 선택 해제
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){sel=null;closePanel();}});
 c.addEventListener('mouseup',()=>{drag=false;c.style.cursor='grab';});
 c.addEventListener('wheel',e=>{const d=e.deltaY>0?0.9:1.1;const mx=e.clientX,my=e.clientY;const wx=(mx-camX)/zm,wy=(my-camY)/zm;zm=Math.max(0.2,Math.min(4,zm*d));camX=mx-wx*zm;camY=my-wy*zm;e.preventDefault();},{passive:false});
 
