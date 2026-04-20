@@ -58,6 +58,23 @@ edges.forEach(e => {
 x.setLineDash([]);  // reset
 ```
 
+## 평행 엣지 offset — 폭 기반 동적 계산 (2026-04-20)
+
+같은 기업 쌍에 여러 `relation_type` 엣지가 공존하는 경우(레이어 공존 원칙, `graph/CLAUDE.md` 참조) Canvas에서 **나란히** 그린다. 고정 step(2.5px) 방식은 굵은 실선(`subsidiary` 2.5px + `associate` 2.0px)끼리는 반폭 합(2.25) > gap(2.5)에 근접해 시각상 겹침 발생 → **폭 기반 동적 offset**으로 전환.
+
+**알고리즘** (`init()` 끝, pairIdx 그룹핑 직후):
+1. 같은 쌍 그룹 내 엣지별 hover-state 폭 계산: `w = EDGE_STYLES[type].width * 1.5`
+2. 첫 엣지 중심 = `w[0]/2`, 이후 누적: `center[i] = center[i-1] + w[i-1]/2 + PAD + w[i]/2` (PAD=1px 여백)
+3. 평균으로 중앙 정렬: `e.parallelOffset = center[i] - mean`
+4. `draw()`에서는 `const off = e.parallelOffset || 0` 로 사용 (수직 단위벡터 × off)
+
+**효과**:
+- 2-엣지 pair: subsidiary+associate면 gap ≈ 4.4px, ftc_group+investment면 gap ≈ 3.0px — 각자 최소 여백 확보
+- 3-엣지 pair: 자동으로 더 넓은 총 span, 굵은 선끼리 서로 양끝으로 밀림
+- 굵은 선이 많을수록 자동으로 벌어지고, 가는 선끼리는 바짝 붙어 "train track" 느낌 유지
+
+**참조 상수**: `PAD = 1.0`. hover 계수 1.5는 `draw()`의 `st.width*1.5`(선택/호버 시 강조) 와 일치시켜 worst-case를 기준.
+
 ## 섹터 필터 + 노드 색 통합 (UI 개선 iteration 2026-04-20)
 
 - 우측 하단 `.legend-sector` **제거**. 섹터-색 매핑은 중앙 하단 `.hud-sub` 필터 버튼에 **색띠(border-left 3px) + 활성 시 배경 투명 색상**으로 통합.

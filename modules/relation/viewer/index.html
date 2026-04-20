@@ -279,11 +279,18 @@ function init(){
     if(!pairIdx[key]) pairIdx[key] = [];
     pairIdx[key].push(e);
   });
+  // 폭 기반 동적 offset — 각 엣지의 hover-state 폭(base*1.5) 합 + 1px 여백을 누적해 per-edge 오프셋 산출.
+  // 2.5px 고정 step 대비: 가는 선끼리는 더 바짝, 굵은 실선(subsidiary)끼리는 자동으로 더 벌어져 overlap 방지.
   Object.values(pairIdx).forEach(group=>{
-    group.forEach((e,i)=>{
-      e.parallelIdx = i;
-      e.parallelCount = group.length;
-    });
+    group.forEach((e,i)=>{ e.parallelIdx=i; e.parallelCount=group.length; });
+    if(group.length===1){ group[0].parallelOffset=0; return; }
+    const PAD=1.0;  // 평행 선 사이 최소 여백 (px)
+    const widths=group.map(e=>((EDGE_STYLES[e.type]||{width:1}).width)*1.5);  // hover 시 최대 폭
+    const centers=[]; let acc=widths[0]/2;
+    centers.push(acc);
+    for(let i=1;i<group.length;i++){ acc+=widths[i-1]/2+PAD+widths[i]/2; centers.push(acc); }
+    const mid=(centers[0]+centers[group.length-1])/2;
+    group.forEach((e,i)=>{ e.parallelOffset=centers[i]-mid; });
   });
 }
 function physics(){const cx=W/2,cy=H/2;nodes.forEach(n=>{n.vx+=(cx-n.x)*0.00015;n.vy+=(cy-n.y)*0.00015;nodes.forEach(m=>{if(n===m)return;const dx=n.x-m.x,dy=n.y-m.y,d=Math.sqrt(dx*dx+dy*dy)||1;if(d<280){const f=500/(d*d);n.vx+=dx/d*f;n.vy+=dy/d*f;}});});edges.forEach(e=>{const dx=e.b.x-e.a.x,dy=e.b.y-e.a.y,d=Math.sqrt(dx*dx+dy*dy)||1;const f=(d-200)*0.002;e.a.vx+=dx/d*f;e.a.vy+=dy/d*f;e.b.vx-=dx/d*f;e.b.vy-=dy/d*f;});nodes.forEach(n=>{n.vx*=0.88;n.vy*=0.88;n.x+=n.vx;n.y+=n.vy;n.pp+=0.015;if(alertOn&&alertSrc){if(n.n===alertSrc)n.glow=Math.min(1,n.glow+0.04);else{const h1=edges.some(e=>(e.a.n===alertSrc&&e.b.n===n.n)||(e.b.n===alertSrc&&e.a.n===n.n));if(h1)n.glow=Math.min(0.8,n.glow+0.025);else n.glow=Math.max(0,n.glow-0.015);}}else n.glow=Math.max(0,n.glow-0.02);});}
@@ -325,8 +332,8 @@ edges.forEach(e=>{
   const dx0=e.b.x-e.a.x, dy0=e.b.y-e.a.y;
   const len=Math.sqrt(dx0*dx0+dy0*dy0)||1;
   const px=-dy0/len, py=dx0/len;  // perpendicular unit
-  const offsetStep = 2.5;  // 이중선 간격 (train track 느낌으로 바짝 붙임)
-  const off = (e.parallelCount>1) ? ((e.parallelIdx - (e.parallelCount-1)/2) * offsetStep) : 0;
+  // offset은 init()에서 폭 기반 사전 계산됨 (e.parallelOffset)
+  const off = e.parallelOffset || 0;
   const x1=e.a.x+px*off, y1=e.a.y+py*off;
   const x2=e.b.x+px*off, y2=e.b.y+py*off;
 
