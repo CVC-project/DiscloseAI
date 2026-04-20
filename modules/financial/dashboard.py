@@ -429,8 +429,8 @@ const moduleColors = {{
   M1: '#06b6d4', M2: '#8b5cf6', M3: '#22c55e', M4: '#eab308', M5: '#ef4444'
 }};
 const moduleLabels = {{
-  M1: 'M1 발생액 품질', M2: 'M2 분식 확률', M3: 'M3 현금흐름 괴리',
-  M4: 'M4 이익 지속성', M5: 'M5 재무 건전성'
+  M1: '이익실체', M2: '회계투명', M3: '현금뒷받침',
+  M4: '이익안정', M5: '재무체력'
 }};
 
 const ml = document.getElementById('moduleList');
@@ -689,6 +689,7 @@ def _record_row(r: FirmRecord) -> dict:
         "is_financial": r.industry_code is not None and r.industry_code.startswith(("064", "065", "066", "067")),
         "market_cap": r.market_cap,
         "year_count": len(r.panel.years) if r.panel else 0,
+        "dart_url": r.dart_url,
     }
     if r.eqs is None:
         err = r.error or "분석 실패"
@@ -768,6 +769,40 @@ _RANKING_TEMPLATE = """<!doctype html>
   th:hover {{ color: var(--text); }}
   th.sort-asc::after {{ content: " ▲"; color: var(--accent); }}
   th.sort-desc::after {{ content: " ▼"; color: var(--accent); }}
+  th {{ position: relative; }}
+  th .th-tip {{
+    display: none; position: absolute;
+    left: 50%; bottom: calc(100% + 10px);
+    transform: translateX(-50%);
+    width: 300px; padding: 0;
+    background: #0b1220; color: var(--text);
+    border: 1px solid var(--accent); border-radius: 8px;
+    font-size: 12px; line-height: 1.55;
+    z-index: 200; text-align: left;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+    font-weight: 400; white-space: normal;
+    overflow: hidden; cursor: default;
+  }}
+  th:hover .th-tip {{ display: block; }}
+  .th-tip-title {{
+    font-size: 13px; font-weight: 700; color: var(--text);
+    background: linear-gradient(135deg, rgba(99,102,241,0.25), rgba(139,92,246,0.15));
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(99,102,241,0.3);
+  }}
+  .th-tip-section {{
+    padding: 8px 14px;
+    border-bottom: 1px solid rgba(51, 65, 85, 0.4);
+  }}
+  .th-tip-section:last-child {{ border-bottom: none; }}
+  .th-tip-label {{
+    font-size: 10px; font-weight: 700;
+    color: var(--warn); letter-spacing: 0.5px;
+    margin-bottom: 4px; text-transform: uppercase;
+  }}
+  .th-tip-body {{
+    font-size: 12px; line-height: 1.55; color: var(--text);
+  }}
   td {{ padding: 6px; border-bottom: 1px solid rgba(51, 65, 85, 0.4); }}
   tr:hover td {{ background: rgba(99, 102, 241, 0.06); }}
   .grade-pill {{ display: inline-block; padding: 2px 8px; border-radius: 999px;
@@ -818,13 +853,13 @@ _RANKING_TEMPLATE = """<!doctype html>
               <th data-key="rank">#</th>
               <th data-key="name">기업</th>
               <th class="num-cell" data-key="market_cap">시총</th>
-              <th class="num-cell" data-key="total">총점</th>
+              <th class="num-cell" data-key="total">평균점수</th>
               <th data-key="grade">등급</th>
-              <th class="num-cell" data-key="m1">M1</th>
-              <th class="num-cell" data-key="m2">M2</th>
-              <th class="num-cell" data-key="m3">M3</th>
-              <th class="num-cell" data-key="m4">M4</th>
-              <th class="num-cell" data-key="m5">M5</th>
+              <th class="num-cell" data-key="m1">이익실체</th>
+              <th class="num-cell" data-key="m2">회계투명</th>
+              <th class="num-cell" data-key="m3">현금뒷받침</th>
+              <th class="num-cell" data-key="m4">이익안정</th>
+              <th class="num-cell" data-key="m5">재무체력</th>
               <th class="num-cell" data-key="years">년수</th>
             </tr>
           </thead>
@@ -846,7 +881,7 @@ _RANKING_TEMPLATE = """<!doctype html>
   </div>
 
   <div class="panel">
-    <h2>총점 분포</h2>
+    <h2>평균점수 분포</h2>
     <div class="chart-wrap" style="height:200px;"><canvas id="histChart"></canvas></div>
   </div>
 
@@ -854,6 +889,9 @@ _RANKING_TEMPLATE = """<!doctype html>
     <div class="disclaimer">
       ⚠️ 본 분석은 K-IFRS 재무제표 기반 과거 통계 정보입니다. 투자 조언이 아닙니다.
       금융지주사 등 일부 기업은 DART 과거 사업보고서 누락으로 단축 윈도우 기준입니다.
+    </div>
+    <div style="margin-top:8px; font-size:12px; color:var(--muted);">
+      * 표시 = 대체 모델(fallback) 적용. 금융업·지주사·서비스업 등 표준 모델이 부적합한 종목에 업종 특성에 맞는 별도 산식을 사용했습니다. 마우스를 올리면 상세 사유를 확인할 수 있습니다.
     </div>
     <div style="margin-top:12px;">
       Powered by DART OpenAPI · DiscloseAI Financial Module
@@ -864,6 +902,31 @@ _RANKING_TEMPLATE = """<!doctype html>
 <script>
 const DATA = {data_json};
 const MODULE_COLORS = {{M1:'#06b6d4', M2:'#8b5cf6', M3:'#22c55e', M4:'#eab308', M5:'#ef4444'}};
+
+// M1~M5 컬럼 헤더 툴팁 생성
+function buildThTooltip(key) {{
+  const g = DATA.glossary && DATA.glossary[key];
+  if (!g) return '';
+  const sections = [];
+  if (g.description) sections.push(['📖 개념', g.description]);
+  if (g.how)         sections.push(['🧮 산출 방식', g.how]);
+  if (g.benchmark)   sections.push(['📏 기준선', g.benchmark]);
+  if (g.intuition)   sections.push(['💡 쉽게 말하면', g.intuition]);
+  const body = sections.map(([lbl, txt]) =>
+    `<div class="th-tip-section"><div class="th-tip-label">${{lbl}}</div><div class="th-tip-body">${{txt}}</div></div>`
+  ).join('');
+  return `<span class="th-tip"><div class="th-tip-title">${{g.label}}</div>${{body}}</span>`;
+}}
+
+// 페이지 로드 시 M1~M5 헤더에 툴팁 삽입
+const TH_LABELS = {{m1:'이익실체', m2:'회계투명', m3:'현금뒷받침', m4:'이익안정', m5:'재무체력'}};
+document.querySelectorAll('#ranking th').forEach(th => {{
+  const key = th.dataset.key || '';
+  const upper = key.toUpperCase();
+  if (['M1','M2','M3','M4','M5'].includes(upper)) {{
+    th.innerHTML = (TH_LABELS[key] || key) + buildThTooltip(upper);
+  }}
+}});
 
 // 랭킹 표 렌더
 const tbody = document.querySelector('#ranking tbody');
@@ -897,15 +960,20 @@ function render() {{
       const v = r.modules[m];
       const note = (r.module_notes && r.module_notes[m]) ? r.module_notes[m] : '';
       const safeNote = note.replace(/"/g, '&quot;');
-      const display = v === null ? '—' : v.toFixed(0);
+      const isFallback = note.includes('fallback');
+      const fbMark = isFallback ? '*' : '';
+      const display = v === null ? '—' : v.toFixed(0) + fbMark;
       const titleAttr = safeNote ? `title="${{safeNote}}"` : '';
       const cursor = note ? 'cursor:help;' : '';
       return `<td class="num-cell" ${{titleAttr}} style="color:${{MODULE_COLORS[m]}};${{cursor}}">${{display}}</td>`;
     }}).join('');
     const finBadge = r.is_financial ? ' <span style="color:var(--accent);font-size:10px;">[금융]</span>' : '';
+    const nameHtml = r.dart_url
+      ? `<a href="${{r.dart_url}}" target="_blank" rel="noopener" style="color:var(--text);text-decoration:none;border-bottom:1px dashed var(--muted);" title="DART 사업보고서 보기">${{r.name}}</a>`
+      : r.name;
     tr.innerHTML = `
       <td>${{i+1}}</td>
-      <td><strong>${{r.name}}</strong>${{finBadge}} <span style="color:var(--muted);font-size:11px;">${{r.code || ''}}</span></td>
+      <td><strong>${{nameHtml}}</strong>${{finBadge}} <span style="color:var(--muted);font-size:11px;">${{r.code || ''}}</span></td>
       <td class="num-cell" style="color:var(--muted);">${{fmtCap(r.market_cap)}}</td>
       <td class="num-cell total-cell">${{r.total === null ? '—' : r.total.toFixed(1)}}</td>
       <td>${{r.grade ? `<span class="grade-pill grade-${{r.grade}}">${{r.grade}}</span>` : ''}}</td>
@@ -964,7 +1032,7 @@ new Chart(document.getElementById('gradeChart'), {{
 new Chart(document.getElementById('moduleChart'), {{
   type: 'bar',
   data: {{
-    labels: ['M1 발생액','M2 분식','M3 OCF/NI','M4 지속성','M5 Piotroski'],
+    labels: ['이익실체','회계투명','현금뒷받침','이익안정','재무체력'],
     datasets: [{{
       data: ['M1','M2','M3','M4','M5'].map(m => DATA.summary.module_means[m] || 0),
       backgroundColor: ['#06b6d4','#8b5cf6','#22c55e','#eab308','#ef4444'],
@@ -980,7 +1048,7 @@ new Chart(document.getElementById('moduleChart'), {{
   }}
 }});
 
-// 총점 히스토그램 (10점 bin)
+// 평균점수 히스토그램 (10점 bin)
 const bins = Array.from({{length: 10}}, (_, i) => 0);  // 0-9, 10-19, ..., 90-100
 DATA.rows.forEach(r => {{
   if (r.total === null) return;
@@ -1024,7 +1092,8 @@ def build_ranking_dashboard(
     os.makedirs(out_dir, exist_ok=True)
     rows = [_record_row(r) for r in records]
     summary = summarize(records)
-    payload = {"rows": rows, "summary": summary}
+    glossary = {k: v.as_dict() for k, v in GLOSSARY.items() if k.startswith("M")}
+    payload = {"rows": rows, "summary": summary, "glossary": glossary}
     html = _RANKING_TEMPLATE.format(
         analyzed_at=datetime.now().strftime("%Y-%m-%d %H:%M"),
         year_range=year_range,

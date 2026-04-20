@@ -11,11 +11,12 @@
 
 from __future__ import annotations
 
+import os
 import time
 from dataclasses import dataclass
 from typing import Iterable, List, Optional, Tuple
 
-from .collector import CorpInfo, find_corp, fetch_panel
+from .collector import CorpInfo, find_corp, fetch_panel, fetch_latest_report_url
 from .eqs import compute_eqs
 from .eqs.types import EQSResult, FirmPanel
 
@@ -100,6 +101,7 @@ class FirmRecord:
     eqs: Optional[EQSResult] = None
     market_cap: Optional[float] = None  # 시가총액 (원), yfinance에서
     industry_code: Optional[str] = None  # 064~067이면 금융업
+    dart_url: Optional[str] = None  # DART 최신 사업보고서 URL
     error: Optional[str] = None
 
 
@@ -166,6 +168,7 @@ def collect_batch(
 
         industry = _industry_for(name)
         market_cap = fetch_market_cap(corp.stock_code) if fetch_market_caps and corp.stock_code else None
+        dart_url = fetch_latest_report_url(corp.corp_code)
 
         try:
             panel = fetch_panel(
@@ -177,7 +180,8 @@ def collect_batch(
             )
             eqs = compute_eqs(panel)
             out.append(FirmRecord(name, corp, panel=panel, eqs=eqs,
-                                  market_cap=market_cap, industry_code=industry))
+                                  market_cap=market_cap, industry_code=industry,
+                                  dart_url=dart_url))
             if progress:
                 tot = eqs.total if eqs.total is not None else "—"
                 grade = eqs.grade or "—"
@@ -191,7 +195,7 @@ def collect_batch(
                 print(f"[{i:2d}/{n}] {name} ({corp.stock_code}){tag}: {len(panel.years)}년 → EQS={tot} ({grade}){cap_str}")
         except Exception as e:  # noqa: BLE001 — 한 종목 실패가 전체를 막지 않도록
             out.append(FirmRecord(name, corp, market_cap=market_cap, industry_code=industry,
-                                  error=f"{type(e).__name__}: {e}"))
+                                  dart_url=dart_url, error=f"{type(e).__name__}: {e}"))
             if progress:
                 print(f"[{i:2d}/{n}] {name}: 에러 {e}")
     return out
@@ -221,6 +225,89 @@ def build_sector_stats(records: List[FirmRecord]) -> dict:
         "sectors_computed": len(stats),
         "total_companies": sum(s.n_companies for s in stats.values()),
     }
+
+
+_MODULE_LABELS = {
+    "M1": "이익실체",
+    "M2": "회계투명",
+    "M3": "현금뒷받침",
+    "M4": "이익안정",
+    "M5": "재무체력",
+}
+
+
+def _to_eok(v):
+    """원 → 억원 변환. None이면 None."""
+    if v is None:
+        return None
+    return round(v / 1e8)
+
+
+def export_for_frontend(
+    records: List[FirmRecord],
+    output_dir: Optional[str] = None,
+    *,
+    output_name: str = "eqs_data.json",
+) -> str:
+    """relation/price 등 다른 모듈이 사용할 종목별 EQS 데이터 JSON 내보내기.
+
+    행성 클릭 시 표시할 데이터:
+    - name, stock_code, market_cap, grade, total(평균점수)
+    - modules: M1~M5 각 점수 + 한글 라벨 + note(산출 방식)
+    - dart_url: 최신 사업보고서 링크
+    - latest_year: 최근 재무 데이터(매출, 영업이익, 순이익, 영업CF 등)
+    """
+    import json
+
+    out_dir = output_dir or os.path.join(
+        os.path.dirname(os.path.dirname(os.path.dirname(__file__))),
+        "docs", "prototype",
+    )
+    os.makedirs(out_dir, exist_ok=True)
+
+    items = []
+    for r in records:
+        if r.eqs is None:
+            continue
+        # 모듈별 점수
+        modules = {}
+        for m in r.eqs.modules:
+            modules[m.name] = {
+                "label": _MODULE_LABELS.get(m.name, m.name),
+                "score": m.score,
+                "note": m.note or "",
+            }
+        # 최근 연도 재무 요약
+        latest = r.panel.latest() if r.panel else None
+        latest_year = None
+        if latest:
+            latest_year = {
+                "year": latest.year,
+                "revenue": _to_eok(latest.revenue),
+                "operating_income": _to_eok(latest.operating_income),
+                "net_income": _to_eok(latest.net_income),
+                "operating_cashflow": _to_eok(latest.operating_cashflow),
+                "total_assets": _to_eok(latest.total_assets),
+                "total_equity": _to_eok(latest.total_equity),
+            }
+
+        items.append({
+            "name": r.display_name,
+            "stock_code": r.corp.stock_code if r.corp else None,
+            "corp_code": r.corp.corp_code if r.corp else None,
+            "market_cap": r.market_cap,
+            "grade": r.eqs.grade,
+            "total": r.eqs.total,
+            "modules": modules,
+            "dart_url": r.dart_url,
+            "latest_year": latest_year,
+            "industry_code": r.industry_code,
+        })
+
+    out_path = os.path.join(out_dir, output_name)
+    with open(out_path, "w", encoding="utf-8") as f:
+        json.dump(items, f, ensure_ascii=False, indent=2)
+    return out_path
 
 
 def summarize(records: List[FirmRecord]) -> dict:

@@ -1,10 +1,14 @@
 """EQS 종합 점수 + 등급화.
 
-기본 가중치 (5개 모듈, 합 1.0):
-  M1=0.20, M2=0.20, M3=0.20, M4=0.20, M5=0.20
+5개 모듈의 가중평균으로 0~100점 산출 후 등급 부여.
 
-업종 예외:
-- 금융업 → M3 제외, 남은 4개 모듈에 균등 재배분 (각 0.25)
+기본 가중치 (5개 모듈, 합 1.0):
+  M1(이익실체)=0.20, M2(회계투명)=0.20, M3(현금뒷받침)=0.20,
+  M4(이익안정)=0.20, M5(재무체력)=0.20
+
+v2: 모든 업종에서 5개 모듈을 항상 호출. 금융업·지주사·서비스업 등
+표준 모델이 부적합한 경우 각 모듈 내부에서 fallback 모델이 자동 적용.
+score=None인 모듈은 평균에서 제외되고 가중치가 재조정됨.
 
 등급:
   A ≥ 80, B ≥ 65, C ≥ 50, D ≥ 35, F < 35
@@ -78,17 +82,13 @@ def compute_eqs(
     weights = (weights or DEFAULT_WEIGHTS).copy()
     excluded = sorted(excluded_modules(panel.industry_code))
 
-    modules: List[ModuleScore] = []
-    if "M1" not in excluded:
-        modules.append(score_m1(panel))
-    if "M2" not in excluded:
-        modules.append(score_m2(panel))
-    if "M3" not in excluded:
-        modules.append(score_m3(panel))
-    if "M4" not in excluded:
-        modules.append(score_m4(panel))
-    if "M5" not in excluded:
-        modules.append(score_m5(panel))
+    modules: List[ModuleScore] = [
+        score_m1(panel),
+        score_m2(panel),
+        score_m3(panel),
+        score_m4(panel),
+        score_m5(panel),
+    ]
 
     eff_weights = _redistribute(weights, excluded)
     total = _aggregate(modules, eff_weights)

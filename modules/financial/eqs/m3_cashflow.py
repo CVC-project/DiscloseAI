@@ -1,23 +1,30 @@
-"""M3 — 현금흐름 괴리 (OCF/NI 비율 추세).
+"""M3 — 현금뒷받침 (이익의 현금 실현도).
 
-핵심 가정: 정상 영업기업은 장기적으로 OCF가 NI를 따라가야 한다. NI는 늘어나는데
-OCF가 따라오지 못하면 발생액 누적·재고 비대화·매출채권 부풀리기 신호.
+"번 돈이 실제 현금으로 들어왔는가?"를 측정한다.
+점수가 높을수록 이익이 현금으로 잘 뒷받침된다는 뜻이다.
 
-지표 3가지를 합산:
-- 평균 비율: mean(OCF/NI), 1.0 이상이 이상적
-- 추세 (slope of OCF/NI over years): >0 이면 가산, <0 이면 감점
-- 변동성: std/|mean|, 낮을수록 가산
+점수 도출 경로 (3가지):
 
-NI<=0(적자)인 해는 비율 해석이 무의미하므로 제외. **OCF가 음수인 해는
-의도적으로 포함** — "NI 흑자인데 OCF는 마이너스"야말로 M3가 포착하려는
-발생액 누적/현금 회수 악화의 핵심 신호이기 때문. (이후 개별 연도 비율은
-±3으로 winsorize되어 단일 연도 극단값이 평균을 망가뜨리지 않도록 제한.)
+1. ``score_m3(panel)`` — 정상 경로 (일반 영업기업):
+   OCF/NI 비율의 평균(50%) + 추세(25%) + 변동성(25%) 가중합.
+   1.0 이상이 이상적. NI<=0 해는 제외, OCF 음수는 의도적 포함(핵심 신호).
+   개별 연도 비율은 ±3으로 winsorize.
 
-금융업은 호출자에서 제외 (industry.excluded_modules).
+2. ``_score_m3_financial(panel)`` — 금융업 소득안정성 fallback:
+   금융업(064~067)은 OCF 개념이 다르므로(예금 유출입, 이자수익 중심)
+   ROE 안정성(CV, 50%) + 영업마진 안정성(CV, 30%) + NI 성장방향 일관성(20%)으로
+   이익 품질을 측정. (Barth et al., 2008)
+   대상: KB금융, 신한지주, 삼성생명, 삼성화재, 미래에셋증권 등.
+
+3. ``_score_m3_loss_heavy(panel)`` — 적자빈발 기업 현금창출력 fallback:
+   적자 연도 >50%이면 OCF/NI 해석 불가. 대신 OCF/자산(CROA) 평균(60%) +
+   CROA 추세(40%)로 현금 창출 능력 측정. (Credit Suisse HOLT 개념)
+   대상: 한국전력, 삼성중공업, SK이노베이션 등.
 """
 
 from __future__ import annotations
 
+import math
 from statistics import mean, pstdev
 from typing import List, Tuple
 
@@ -71,21 +78,101 @@ def _vol_score(values: List[float]) -> float:
 _RATIO_CLIP = 3.0
 
 
+def _score_m3_financial(panel: FirmPanel) -> ModuleScore:
+    """금융업용 소득안정성 fallback.
+
+    금융업은 OCF 개념이 비금융과 근본적으로 다르므로(예금 유출입, 이자수익)
+    OCF/NI 대신 ROE·영업마진 안정성 + NI 성장 방향 일관성으로 이익 품질 측정.
+    (Barth et al., 2008 — 안정적 이익 = 높은 이익 품질)
+    """
+    years = [y for y in panel.years
+             if y.net_income is not None and y.total_equity and y.total_equity != 0
+             and y.revenue and y.operating_income is not None]
+    if len(years) < 3:
+        return ModuleScore(name="M3", score=None, note="금융업 fallback: 3년 이상 필요")
+
+    roes = [y.net_income / y.total_equity for y in years]
+    opms = [y.operating_income / y.revenue for y in years]
+
+    # 1) ROE 안정성 (CV 기반, 50%)
+    avg_roe = mean(roes)
+    roe_score = max(0.0, 100 * (1 - pstdev(roes) / abs(avg_roe))) if avg_roe != 0 else 0.0
+
+    # 2) 영업마진 안정성 (CV 기반, 30%)
+    avg_opm = mean(opms)
+    opm_score = max(0.0, 100 * (1 - pstdev(opms) / abs(avg_opm))) if avg_opm != 0 else 0.0
+
+    # 3) NI 성장 방향 일관성 (20%)
+    ni_vals = [y.net_income for y in years]
+    if len(ni_vals) >= 3:
+        changes = [1 if ni_vals[i] >= ni_vals[i - 1] else -1 for i in range(1, len(ni_vals))]
+        # 같은 방향으로 갈수록 일관성 높음
+        same_dir = sum(1 for i in range(1, len(changes)) if changes[i] == changes[i - 1])
+        dir_score = (same_dir / max(1, len(changes) - 1)) * 100
+    else:
+        dir_score = 50.0  # 데이터 부족 시 중립
+
+    score = round(roe_score * 0.5 + opm_score * 0.3 + dir_score * 0.2, 1)
+    cv_roe = pstdev(roes) / abs(avg_roe) if avg_roe != 0 else float("inf")
+    return ModuleScore(
+        name="M3", score=score, raw=cv_roe,
+        note=f"ROE CV={cv_roe:.2f}, 영업마진CV={pstdev(opms)/abs(avg_opm) if avg_opm != 0 else 0:.2f} — 금융업 소득안정성 fallback",
+    )
+
+
+def _score_m3_loss_heavy(panel: FirmPanel) -> ModuleScore:
+    """적자빈발 기업용 현금창출력 fallback.
+
+    적자 연도가 과반이면 OCF/NI 비율 해석이 불가. 대신 OCF/자산(CROA)으로
+    이익 부호와 무관하게 현금 창출 능력을 측정.
+    (Credit Suisse HOLT Cash Return on Assets 개념)
+    """
+    croa_pairs = []
+    for y in panel.years:
+        if y.operating_cashflow is not None and y.total_assets and y.total_assets != 0:
+            croa_pairs.append((y.year, y.operating_cashflow / y.total_assets))
+    if len(croa_pairs) < 2:
+        return ModuleScore(name="M3", score=None, note="OCF/자산 데이터 부족")
+
+    years_list = [p[0] for p in croa_pairs]
+    croas = [p[1] for p in croa_pairs]
+    avg_croa = mean(croas)
+
+    # 1) 평균 CROA 레벨 (60%): logistic, 5%에서 50점
+    z = (avg_croa - 0.05) * 30
+    z = max(-60, min(60, z))
+    level_score = 100 / (1 + math.exp(-z))
+
+    # 2) CROA 추세 (40%): slope
+    if len(croa_pairs) >= 3:
+        fit = ols_simple(years_list, croas)
+        slope = fit[1] if fit else 0.0
+        clipped = max(-0.02, min(0.02, slope))
+        trend_score = 50 + (clipped / 0.02) * 50
+        score = round(level_score * 0.6 + trend_score * 0.4, 1)
+        note = f"평균 OCF/자산={avg_croa:.1%}, 추세={slope:+.4f}/yr — 적자빈발 현금창출력 fallback"
+    else:
+        score = round(level_score, 1)
+        note = f"평균 OCF/자산={avg_croa:.1%} — 적자빈발 현금창출력 fallback (2년)"
+
+    return ModuleScore(name="M3", score=score, raw=avg_croa, note=note)
+
+
 def score_m3(panel: FirmPanel) -> ModuleScore:
+    # 금융업은 OCF 개념이 다르므로 소득안정성 fallback 사용
+    from .industry import is_financial
+    if is_financial(panel.industry_code):
+        return _score_m3_financial(panel)
+
     pairs = _ocf_ni_pairs(panel)
     if len(pairs) < 2:
-        return ModuleScore(name="M3", score=None, note="OCF/NI 비율 데이터 부족(2년 이상 필요)")
+        return _score_m3_loss_heavy(panel)
 
     # 데이터 품질 체크: 전체 연도 중 순적자 해가 과반이면 비율 해석 자체가 어려움.
     total_years = len(panel.years)
     valid = len(pairs)
     if valid * 2 < total_years:
-        loss_years = total_years - valid
-        return ModuleScore(
-            name="M3",
-            score=None,
-            note=f"적자 연도 {loss_years}/{total_years} — OCF/NI 해석 불가",
-        )
+        return _score_m3_loss_heavy(panel)
 
     years = [p[0] for p in pairs]
     ratios_raw = [p[1] for p in pairs]

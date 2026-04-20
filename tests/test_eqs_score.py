@@ -1,4 +1,7 @@
-"""EQS 종합 점수 + 등급화 + 업종 예외 통합."""
+"""EQS 종합 점수 + 등급화 + fallback 통합.
+
+v2: fallback 도입으로 업종 제외 없음. 모든 종목에서 5개 모듈 산출.
+"""
 
 from modules.financial.eqs import compute_eqs, grade_from_score
 from modules.financial.eqs.score import _redistribute, DEFAULT_WEIGHTS
@@ -32,23 +35,30 @@ def test_compute_eqs_manipulator_low():
     assert res_h.total > res_m.total
 
 
-def test_compute_eqs_excludes_m2_m3_for_finance():
-    """금융업(064~067)은 M2·M3 모두 제외. 남은 3개 모듈(M1, M4, M5)로 산출."""
+def test_compute_eqs_financial_all_5_modules():
+    """v2: 금융업도 5개 모듈 모두 산출 (fallback 적용)."""
     panel = healthy_panel()
     panel.industry_code = "065"  # 증권
     res = compute_eqs(panel)
-    assert set(res.excluded) == {"M2", "M3"}
+    assert res.excluded == []
     module_names = [m.name for m in res.modules]
-    assert "M2" not in module_names
-    assert "M3" not in module_names
-    assert len(res.modules) == 3
+    assert len(res.modules) == 5
+    assert "M2" in module_names
+    assert "M3" in module_names
+
+
+def test_compute_eqs_holding_all_5_modules():
+    """v2: 지주사도 5개 모듈 모두 산출 (fallback 적용)."""
+    panel = healthy_panel()
+    panel.industry_code = "100"
+    res = compute_eqs(panel)
+    assert res.excluded == []
+    assert len(res.modules) == 5
+    assert any(m.name == "M1" for m in res.modules)
 
 
 def test_redistribute_renormalizes():
-    # 금융업 케이스: M2·M3 2개 제외 시 남은 3개(M1,M4,M5) 균등 재배분
-    new = _redistribute(DEFAULT_WEIGHTS, ["M2", "M3"])
-    assert "M2" not in new
-    assert "M3" not in new
+    # 비어있으면 변화 없음
+    new = _redistribute(DEFAULT_WEIGHTS, [])
     assert abs(sum(new.values()) - 1.0) < 1e-9
-    for v in new.values():
-        assert abs(v - 1.0 / 3) < 1e-9
+    assert len(new) == 5

@@ -52,6 +52,11 @@ _ACCOUNT_ID_MAP: Dict[str, str] = {
     # 손익계산서
     "ifrs-full_Revenue": "revenue",
     "ifrs_Revenue": "revenue",
+    # 금융업 수익 항목 — "매출액" 대신 이자/수수료/보험수익으로 기록됨.
+    # collector가 첫 매칭만 사용하므로, revenue가 이미 잡혔으면 무시됨.
+    "ifrs-full_RevenueFromInterest": "revenue",
+    "ifrs-full_FeeAndCommissionIncome": "revenue",
+    "ifrs-full_InsuranceRevenue": "revenue",
     "ifrs-full_CostOfSales": "cogs",
     "ifrs-full_GrossProfit": None,  # 직접 안 쓰지만 매칭표시용
     "dart_OperatingIncomeLoss": "operating_income",
@@ -76,6 +81,10 @@ _ACCOUNT_ID_MAP: Dict[str, str] = {
 _ACCOUNT_NM_MAP: Dict[str, str] = {
     "수익(매출액)": "revenue",
     "매출액": "revenue",
+    "영업수익": "revenue",
+    "이자수익": "revenue",
+    "수수료수익": "revenue",
+    "보험수익": "revenue",
     "매출원가": "cogs",
     "영업이익": "operating_income",
     "영업이익(손실)": "operating_income",
@@ -274,3 +283,24 @@ def fetch_panel(
         industry_code=industry_code,
         years=fys,
     )
+
+
+def fetch_latest_report_url(corp_code: str) -> Optional[str]:
+    """DART 최신 사업보고서 조회 URL 반환. 없으면 None."""
+    try:
+        from datetime import datetime
+        bgn = f"{datetime.now().year - 2}0101"
+        r = _get(f"{_BASE}/list.json", {
+            "corp_code": corp_code,
+            "bgn_de": bgn,
+            "pblntf_ty": "A",
+            "last_reprt_at": "Y",
+            "page_count": 1,
+        })
+        data = r.json()
+        if data.get("status") == "000" and data.get("list"):
+            rcept_no = data["list"][0]["rcept_no"]
+            return f"https://dart.fss.or.kr/dsaf001/main.do?rcpNo={rcept_no}"
+    except Exception:  # noqa: BLE001
+        pass
+    return None

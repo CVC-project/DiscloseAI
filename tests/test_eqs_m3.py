@@ -88,8 +88,8 @@ def test_m3_loss_years_over_half_insufficient_pairs():
         assert len(s.note) > 0
 
 
-def test_m3_loss_years_strictly_over_half():
-    """적자 연도가 과반(>50%) → 비율 데이터 부족."""
+def test_m3_loss_years_strictly_over_half_fallback():
+    """적자 연도가 과반(>50%) → 현금창출력 fallback 적용."""
     years = [
         make_year(2020, ni=-100, ocf=20),    # 적자
         make_year(2021, ni=-50, ocf=10),     # 적자
@@ -97,11 +97,9 @@ def test_m3_loss_years_strictly_over_half():
         make_year(2023, ni=100, ocf=120),    # 흑자
         make_year(2024, ni=100, ocf=120),    # 흑자
     ]
-    # total_years=5, valid=2. valid*2 < total_years? 2*2 < 5? Yes, 4<5
     s = score_m3(FirmPanel(corp_code="X", years=years))
-    assert s.score is None
-    assert "적자 연도" in s.note
-    assert "OCF/NI 해석 불가" in s.note
+    assert s.score is not None  # fallback으로 점수 산출
+    assert "fallback" in s.note
 
 
 def test_m3_exactly_half_loss_years_allowed():

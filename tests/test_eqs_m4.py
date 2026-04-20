@@ -53,13 +53,21 @@ def test_m4_insufficient_panel():
     assert s.score is None
 
 
-def test_m4_requires_5_years():
-    """3~4년 패널은 AR(1) 추정 노이즈 심해 None (금융지주 3년·SK스퀘어 3년 등 방지)."""
+def test_m4_short_history_fallback():
+    """3~4년 패널은 AR(1) 대신 ROA CV+방향 일관성 fallback."""
     for n in (3, 4):
         years = [make_year(2020 + i, ni=100 + i, ta=5000) for i in range(n)]
         s = score_m4(FirmPanel(corp_code="X", years=years))
-        assert s.score is None, f"{n}년 데이터인데 점수 산출됨: {s.score}"
-        assert "5년" in s.note or "부족" in s.note
+        assert s.score is not None, f"{n}년 데이터인데 fallback 실패"
+        assert "fallback" in s.note
+
+
+def test_m4_requires_3_years_minimum():
+    """2년 이하는 fallback도 불가 → None."""
+    for n in (1, 2):
+        years = [make_year(2020 + i, ni=100 + i, ta=5000) for i in range(n)]
+        s = score_m4(FirmPanel(corp_code="X", years=years))
+        assert s.score is None
 
 
 def test_m4_robust_trims_cyclical_outlier():

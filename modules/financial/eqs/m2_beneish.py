@@ -1,20 +1,22 @@
-"""M2 — Beneish M-score (분식 확률).
+"""M2 — 회계투명 (분식 가능성 탐지).
 
-Beneish(1999) 8변수 모델:
+"회계 처리가 투명한가, 분식 가능성은 없는가?"를 측정한다.
+점수가 높을수록 회계가 투명하다는 뜻이다.
 
-  DSRI = (AR_t/Sales_t) / (AR_(t-1)/Sales_(t-1))
-  GMI  = GM_(t-1) / GM_t                       (GM = (Sales-COGS)/Sales)
-  AQI  = (1-(CA+PPE)/TA)_t / (1-(CA+PPE)/TA)_(t-1)
-  SGI  = Sales_t / Sales_(t-1)
-  DEPI = (Dep_(t-1)/(Dep+PPE)_(t-1)) / (Dep_t/(Dep+PPE)_t)
-  SGAI = (SGA_t/Sales_t) / (SGA_(t-1)/Sales_(t-1))
-  TATA = (NI - OCF) / TA
-  LVGI = ((LTD+CL)/TA)_t / ((LTD+CL)/TA)_(t-1)
+점수 도출 경로 (2가지):
 
-  M = -4.84 + 0.92·DSRI + 0.528·GMI + 0.404·AQI + 0.892·SGI
-        + 0.115·DEPI - 0.172·SGAI + 4.679·TATA - 0.327·LVGI
+1. ``score_m2(panel)`` — 정상 경로 (제조업 등 COGS가 있는 기업):
+   Beneish(1999) 8변수 M-score 모델.
+   DSRI·GMI·AQI·SGI·DEPI·SGAI·TATA·LVGI 8개 지수 가중합으로 M-score 산출.
+   M > -1.78이면 분식 가능성 높음 (미국 표본 기준).
+   로지스틱 변환: M이 낮을수록(=정상) 100점, 높을수록 0점.
 
-해석: M > -1.78이면 분식 가능성 높음 (미국 표본 기준).
+2. ``_score_m2_fallback(panel)`` — TATA+SGI 간소화 모델:
+   COGS가 없는 서비스/플랫폼/금융업, 또는 매출채권 결측 기업에 적용.
+   TATA=(NI-OCF)/TA (Beneish 최고 예측력 변수, 계수 4.679) + SGI(매출성장)
+   + OCF/Revenue(현금전환율) + LVGI(레버리지 변화) 4변수로 간소화.
+   동일한 로지스틱 변환 함수(_m_to_score)를 사용해 0~100 스케일 유지.
+   대상: 카카오, NAVER, SK텔레콤, 금융사, 기아, 한미반도체, 현대로템 등.
 
 K-Beneish: 미국 계수가 K-IFRS 환경(보수적 수익 인식, 다른 발생액 패턴)에는
 잘 맞지 않는다는 한국 학계 비판이 꾸준하다. ``BeneishCoefficients``에 한국
@@ -215,6 +217,50 @@ def _m_to_score(m: float) -> float:
     return round(sig * 100, 1)
 
 
+def _score_m2_fallback(panel: FirmPanel, *, reason: str = "") -> ModuleScore:
+    """COGS/매출채권 없는 기업용 간소화 M-score (TATA+SGI+OCFR+LVGI).
+
+    Beneish(1999) 원논문에서 TATA(계수 4.679)가 단일 변수 중 가장 높은 예측력.
+    SGI(0.892)와 결합하면 핵심 분식 신호를 포착 가능.
+    OCF/Revenue(현금전환율)와 LVGI(레버리지 변화)로 보완.
+    """
+    curr = panel.latest()
+    prev = panel.prior()
+    if curr is None or prev is None:
+        return ModuleScore(name="M2", score=None, note="패널 부족(t,t-1 필요)")
+
+    # TATA — 핵심 (항상 산출 가능)
+    if curr.net_income is None or curr.operating_cashflow is None or not curr.total_assets:
+        return ModuleScore(name="M2", score=None, note="NI/OCF/TA 결측 — fallback 불가")
+    tata = (curr.net_income - curr.operating_cashflow) / curr.total_assets
+
+    # SGI — 매출 성장 (항상 산출 가능)
+    if curr.revenue is None or prev.revenue is None or prev.revenue == 0:
+        return ModuleScore(name="M2", score=None, note="매출 결측 — fallback 불가")
+    sgi = curr.revenue / prev.revenue
+
+    # OCFR — 현금전환율
+    ocfr = curr.operating_cashflow / curr.revenue if curr.revenue != 0 else 0.0
+
+    # LVGI — 레버리지 변화
+    lev_curr = ((curr.long_term_debt or 0) + (curr.current_liabilities or 0)) / curr.total_assets
+    lev_prev = (
+        ((prev.long_term_debt or 0) + (prev.current_liabilities or 0)) / prev.total_assets
+        if prev.total_assets
+        else lev_curr
+    )
+    lvgi = lev_curr / lev_prev if lev_prev != 0 else 1.0
+
+    # 간소화 M-score: TATA·SGI 중심, OCFR·LVGI 보완
+    m = -3.50 + 5.0 * tata + 0.9 * sgi - 0.5 * ocfr - 0.3 * lvgi
+    score = _m_to_score(m)
+    flag = "의심" if m > M_THRESHOLD else "정상"
+    return ModuleScore(
+        name="M2", score=score, raw=m,
+        note=f"M={m:.2f} ({flag}) — {reason} fallback",
+    )
+
+
 def score_m2(
     panel: FirmPanel, coefs: BeneishCoefficients = BENEISH_KR
 ) -> ModuleScore:
@@ -229,11 +275,7 @@ def score_m2(
 
     # 서비스·플랫폼 기업 사전 감지 (DART에 매출원가 항목 자체 없음)
     if not _panel_has_cogs(panel):
-        return ModuleScore(
-            name="M2",
-            score=None,
-            note="매출원가 항목 없음(서비스·플랫폼형) — Beneish 모델 부적합",
-        )
+        return _score_m2_fallback(panel, reason="매출원가 없음(서비스·플랫폼형)")
 
     m = m_score(prev, curr, coefs)
     if m is None:
@@ -241,7 +283,7 @@ def score_m2(
         raw = _compute_all_indices(prev, curr)
         missing = [_CORE_LABELS[k] for k in _CORE_INDICES if raw[k] is None]
         reason = ", ".join(missing) if missing else "핵심 지수"
-        return ModuleScore(name="M2", score=None, note=f"{reason} 결측 — 산출 불가")
+        return _score_m2_fallback(panel, reason=f"{reason} 결측")
     score = _m_to_score(m)
     flag = "분식 의심" if m > M_THRESHOLD else "정상"
     return ModuleScore(name="M2", score=score, raw=m, note=f"M={m:.2f} ({flag})")

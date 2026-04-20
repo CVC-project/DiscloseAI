@@ -1,20 +1,16 @@
-"""업종 분류 + EQS 모듈 예외 규칙.
+"""업종 분류 + EQS 모듈 분기 규칙.
 
-**금융업(KRX 064~067)** — M2, M3 제외:
+v2: 모든 모듈에 fallback이 추가되어 업종 제외(excluded_modules)는 빈 set 반환.
+각 모듈이 내부에서 is_financial/is_holding을 확인해 적절한 fallback을 선택한다.
 
-- M3 (현금흐름 괴리): 영업현금흐름 개념이 비금융과 근본적으로 다름
-  (이자수익·예금 변동 등). 추후 BIS비율 등으로 대체 예정.
-- M2 (Beneish 분식 확률): 매출/매출원가 개념이 비금융과 다름 (이자수익이
-  주수익, 매출원가 없음) → Beneish 지수 계산 자체가 부적합.
+**금융업(KRX 064~067)**:
+- M2: TATA+SGI fallback (매출원가 없음 → 정상 Beneish 불가)
+- M3: 소득안정성 fallback (ROE·영업마진 CV → OCF/NI 대체)
+- M4: 단축 fallback (DART 3년 데이터 → AR(1) 불가, ROA CV+방향일관성 사용)
 
-**지주/투자회사(내부 코드 "100")** — M1 제외:
-
-- M1 (발생액 품질): 단일기업 fallback은 |총발생액/자산|을 신호로 쓰는데,
-  지주사의 자회사 지분법이익이 비현금성이라 '이상 발생액'으로 오인됨
-  (SK스퀘어 |TA/A|=0.385 → 0점 사례). 자회사별 cross-section이 아닌 이상
-  지주사에는 본 모듈 부적합.
-- M2·M3·M4·M5는 유지: 지주사도 매출·현금흐름·이익 지속성·재무 건전성은
-  의미 있는 신호. 매출원가가 없는 지주사는 M2가 자동으로 결측 판정됨.
+**지주/투자회사(내부 코드 "100")**:
+- M1: 지주사 fallback (임계 0.40 완화 + 자본누적 일치도)
+- M2: TATA+SGI fallback (매출원가 없는 경우)
 """
 
 from __future__ import annotations
@@ -45,11 +41,11 @@ def is_holding(industry_code: Optional[str]) -> bool:
 
 
 def excluded_modules(industry_code: Optional[str]) -> Set[str]:
-    """업종에 따라 EQS 산출에서 제외할 모듈 이름 집합."""
-    if is_financial(industry_code):
-        return {"M2", "M3"}
-    if is_holding(industry_code):
-        return {"M1"}
+    """업종에 따라 EQS 산출에서 제외할 모듈 이름 집합.
+
+    v2: 모든 모듈에 fallback이 추가되어 업종 제외 불필요.
+    is_financial/is_holding은 각 모듈 내부에서 fallback 분기에 사용.
+    """
     return set()
 
 

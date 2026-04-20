@@ -63,30 +63,28 @@ def test_panel_has_cogs_service_company():
     assert _panel_has_cogs(panel) is False
 
 
-def test_score_m2_service_company_auto_detection():
-    """서비스 기업 자동 감지 → 점수=None, note에 구체적 사유."""
+def test_score_m2_service_company_fallback():
+    """서비스 기업 자동 감지 → TATA+SGI fallback으로 점수 산출."""
     years = [
         make_year(2023, cogs=None, revenue=1000, ni=100),
         make_year(2024, cogs=None, revenue=1200, ni=120),
     ]
     panel = FirmPanel(corp_code="SERVICE", years=years)
     s = score_m2(panel)
-    assert s.score is None
-    assert "매출원가 항목 없음" in s.note
-    assert "서비스·플랫폼형" in s.note
+    assert s.score is not None  # fallback으로 점수 나옴
+    assert "fallback" in s.note
+    assert "매출원가 없음" in s.note
 
 
-def test_score_m2_missing_core_index_detail():
-    """핵심 지수 결측 시 구체적 사유 표기 — DSRI와 GMI 부족."""
+def test_score_m2_missing_core_index_fallback():
+    """핵심 지수 결측 시 fallback 적용."""
     y0 = make_year(2023, revenue=1000, cogs=700, ni=100, ocf=120)
-    # y1에서 revenue=None → DSRI 계산 불가
+    # y1에서 revenue=None → 정상 M-score 불가, fallback도 매출 필요
     y1 = make_year(2024, revenue=None, cogs=None, ni=150, ocf=180)
     panel = FirmPanel(corp_code="X", years=[y0, y1])
     s = score_m2(panel)
+    # revenue가 None이면 fallback도 산출 불가
     assert s.score is None
-    assert "결측 — 산출 불가" in s.note
-    # 결측된 핵심 지수들이 note에 나열되어야 함
-    assert len(s.note) > 0
 
 
 def test_score_m2_partial_cogs_mixed():

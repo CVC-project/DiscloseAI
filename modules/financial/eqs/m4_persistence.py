@@ -1,22 +1,23 @@
-"""M4 — 이익 지속성 (AR(1) + 일회성 비중).
+"""M4 — 이익안정 (이익 지속성).
 
-핵심 가설: 양질의 이익은 다음 기간에도 유지된다.
+"올해 이익이 내년에도 비슷하게 유지될 가능성이 있는가?"를 측정한다.
+점수가 높을수록 이익이 꾸준하고 예측 가능하다는 뜻이다.
 
-지속성 = AR(1) 회귀계수 φ:  E_t = α + φ·E_(t-1) + ε
-- φ가 1에 가까울수록 영구적(persistent), 0에 가까울수록 일회성
-- 음수면 평균회귀, 1 초과면 폭주(불안)
+점수 도출 경로 (2가지):
 
-일회성 비중 = nonrecurring / |NI|. 클수록 감점.
-이익은 자산 대비 ROA로 정규화한다 — 절대규모 트렌드 영향을 줄이려고.
+1. ``score_m4(panel)`` — 정상 경로 (5년 이상 데이터):
+   AR(1) 회귀계수 φ로 지속성 측정: E_t = α + φ·E_(t-1) + ε
+   - φ=1 → 완전 지속(100점), φ=0 → 무관(50점), φ=-1 → 반전(0점)
+   - 일회성 비중 페널티: nonrecurring/|NI|가 클수록 감점.
+   - robust trim (7년+): 사이클 침체 1점 제거 후 재추정.
+   - 10년+ 이면 "안정 추정", 5~9년이면 "사이클 영향 가능" 표기.
 
-**사이클 산업 보정 (옵션 c)**:
-반도체·조선·정유 등 경기 사이클이 깊은 산업은 5년 윈도우에서 침체 1번에
-AR(1) φ가 음수로 추정되어 점수가 0이 된다. 이를 보정하기 위해:
-
-1. **권장 윈도우 10년+**: 패널이 길수록 사이클이 평균화된다.
-2. **robust trim**: 패널이 7년 이상이면 가장 큰 잔차 1점(=사이클 침체)을 제외하고
-   재추정. 1회성 충격을 사이클 잡음으로 처리.
-3. **note에 윈도우 길이 명시**: 짧은 윈도우 추정의 신뢰도를 사용자가 알도록.
+2. ``_score_m4_short_history(panel)`` — 3~4년 단축 fallback:
+   AR(1) 회귀가 통계적으로 불안정한 짧은 이력에서 대안 지표 사용.
+   ROA 변동계수(CV, 60%) + 방향 일관성(40%).
+   (Dichev & Tang, 2009 — 이익 변동성 = 지속성의 역수)
+   대상: 금융지주사(KB금융, 신한지주 등), SK스퀘어, SK이노베이션 등.
+   2년 이하는 여전히 None (최소 3년 필요).
 """
 
 from __future__ import annotations
@@ -113,6 +114,41 @@ def _robust_ar1(roa: List[float]) -> Optional[Tuple[float, int]]:
     return refit[1], outlier_obs
 
 
+def _score_m4_short_history(panel: FirmPanel, series: List[Tuple[int, float]]) -> ModuleScore:
+    """3~4년 데이터용 지속성 프록시 (Dichev & Tang, 2009).
+
+    AR(1) 회귀가 통계적으로 불안정한 짧은 이력에서 ROA 변동계수(CV)와
+    방향 일관성으로 지속성을 근사.
+    """
+    from statistics import mean as _mean, pstdev as _pstdev
+
+    n = len(series)
+    roas = [s[1] for s in series]
+    avg = _mean(roas)
+
+    # 1) ROA CV (60%) — 낮을수록 안정 (= 지속적)
+    if avg != 0:
+        cv = _pstdev(roas) / abs(avg)
+        cv_score = max(0.0, 100 * (1 - min(1.0, cv)))
+    else:
+        cv = float("inf")
+        cv_score = 0.0
+
+    # 2) 방향 일관성 (40%) — 같은 방향으로 변할수록 예측 가능
+    if n >= 3:
+        changes = [1 if roas[i] >= roas[i - 1] else -1 for i in range(1, n)]
+        same_dir = sum(1 for i in range(1, len(changes)) if changes[i] == changes[i - 1])
+        dir_score = (same_dir / max(1, len(changes) - 1)) * 100
+    else:
+        dir_score = 50.0
+
+    score = round(cv_score * 0.6 + dir_score * 0.4, 1)
+    return ModuleScore(
+        name="M4", score=score, raw=cv if cv != float("inf") else None,
+        note=f"ROA CV={cv:.2f}, 방향일치={dir_score:.0f}% — {n}년 단축 fallback",
+    )
+
+
 def score_m4(panel: FirmPanel, *, robust: bool = True) -> ModuleScore:
     """이익 지속성 점수.
 
@@ -124,10 +160,12 @@ def score_m4(panel: FirmPanel, *, robust: bool = True) -> ModuleScore:
     series = _roa_series(panel)
     n = len(series)
     if n < MIN_YEARS:
+        if n >= 3:
+            return _score_m4_short_history(panel, series)
         return ModuleScore(
             name="M4",
             score=None,
-            note=f"ROA 시계열 {n}년 — AR(1) 추정에 최소 {MIN_YEARS}년 필요",
+            note=f"ROA 시계열 {n}년 — 최소 3년 필요",
         )
     roa = [s[1] for s in series]
 
