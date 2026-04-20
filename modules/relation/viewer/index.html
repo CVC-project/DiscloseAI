@@ -24,10 +24,10 @@ canvas{display:block}
 .hud-modes button.on[data-mode="analyze"]{background:rgba(77,166,255,0.2)}
 .hud-modes button.on[data-mode="disclosure"]{background:rgba(251,191,36,0.2);border-color:#fbbf24}
 .hud-modes button.on[data-mode="timemachine"]{background:rgba(124,108,240,0.2);border-color:#7c6cf0}
-.hud-sub{display:flex;gap:4px;background:rgba(8,12,24,0.92);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:4px 8px;transition:opacity 0.3s}
-.hud-sub button{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);color:#666;padding:4px 10px;border-radius:5px;cursor:pointer;font-size:10px;transition:all 0.2s}
-.hud-sub button:hover{color:#aaa}
-.hud-sub button.on{background:rgba(77,166,255,0.15);border-color:rgba(77,166,255,0.3);color:#4da6ff}
+.hud-sub{display:flex;gap:4px;background:rgba(8,12,24,0.92);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:4px 8px;transition:opacity 0.3s;flex-wrap:wrap;max-width:92vw;justify-content:center}
+.hud-sub button{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);color:#888;padding:4px 10px;border-radius:5px;cursor:pointer;font-size:10px;transition:all 0.2s;border-left:3px solid var(--sc,transparent)}
+.hud-sub button:hover{color:#ddd;background:rgba(255,255,255,0.08)}
+.hud-sub button.on{background:color-mix(in srgb, var(--sc, #4da6ff) 22%, transparent);border-color:var(--sc, #4da6ff);color:var(--sc, #4da6ff)}
 .mode-hint{font-size:10px;color:#555;text-align:center}
 
 /* Panel */
@@ -95,14 +95,27 @@ canvas{display:block}
 .title h1{font-size:16px;font-weight:600;color:rgba(255,255,255,0.85)}
 .title p{font-size:11px;color:rgba(255,255,255,0.3);margin-top:2px}
 .title .live{display:inline-block;width:6px;height:6px;background:#22c55e;border-radius:50%;margin-right:4px;animation:pulse 2s infinite}
-.legend{position:fixed;z-index:50;background:rgba(8,12,24,0.92);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:10px 14px;font-size:10px;color:#888;max-width:220px}
+.legend{position:fixed;z-index:50;background:rgba(8,12,24,0.92);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:10px 14px;font-size:10px;color:#888;max-width:260px}
 .legend-title{font-size:10px;font-weight:600;color:#ccc;margin-bottom:6px;padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,0.08)}
-.legend-sector{bottom:16px;right:16px}
 .legend-edge{bottom:16px;left:16px}
 .legend-item{display:flex;align-items:center;gap:6px;margin:3px 0;line-height:1.2}
-.legend-dot{width:8px;height:8px;border-radius:50%;flex:0 0 8px}
 .legend-line{width:20px;height:0;flex:0 0 20px;border-top-width:2px;border-top-style:solid}
-.legend-grid{display:grid;grid-template-columns:1fr 1fr;column-gap:8px}
+
+/* 엣지 범례 hover 툴팁 (K-IFRS·공정거래법·자본시장법 근거) */
+.legend-edge .legend-item{position:relative;cursor:help;padding:2px 2px;border-radius:4px;transition:background 0.15s}
+.legend-edge .legend-item:hover{background:rgba(255,255,255,0.06)}
+.legend-edge .legend-item:hover::after{
+  content:attr(data-tooltip);
+  position:absolute;left:calc(100% + 10px);bottom:-4px;
+  width:300px;padding:10px 12px;
+  background:rgba(8,12,24,0.98);
+  border:1px solid rgba(251,191,36,0.4);
+  border-radius:6px;
+  font-size:11px;color:#e0e0e0;line-height:1.6;
+  z-index:200;pointer-events:none;
+  white-space:normal;text-align:left;
+  box-shadow:0 4px 20px rgba(0,0,0,0.5);
+}
 
 /* Disclosure panel */
 .disc-impact{padding:6px 10px;border-radius:6px;margin-bottom:6px;font-size:12px;display:flex;justify-content:space-between;align-items:center}
@@ -137,46 +150,26 @@ canvas{display:block}
   <div class="mode-hint" id="modeHint">기업을 클릭하면 재무제표와 EQS 분석을 볼 수 있습니다</div>
 </div>
 
-<!-- 우측 하단: 섹터(노드 색) 범례 -->
-<div class="legend legend-sector">
-  <div class="legend-title">섹터 (노드 색)</div>
-  <div class="legend-grid">
-    <div class="legend-item"><div class="legend-dot" style="background:#7c6cf0"></div>반도체</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#4da6ff"></div>디스플레이</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#22d3ee"></div>2차전지</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#34d399"></div>바이오</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#f97316"></div>자동차</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#a78bfa"></div>금융</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#f472b6"></div>플랫폼</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#facc15"></div>에너지</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#64748b"></div>중공업·방산</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#d97706"></div>건설</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#06b6d4"></div>통신</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#78716c"></div>기타</div>
-  </div>
-  <div style="margin-top:6px;font-size:9px;color:#555">노드 크기 = 시가총액 비례</div>
-</div>
-
-<!-- 좌측 하단: 관계 유형(엣지 색) 범례 -->
+<!-- 좌측 하단: 관계 유형(엣지 색) 범례 — 각 항목 hover 시 K-IFRS·공정거래법 근거 툴팁 -->
 <div class="legend legend-edge">
-  <div class="legend-title">관계 유형 (엣지 색)</div>
-  <div class="legend-item"><span class="legend-line" style="border-color:#ef4444;border-top-width:2.5px"></span>종속기업 (K-IFRS &gt;50%)</div>
-  <div class="legend-item"><span class="legend-line" style="border-color:#f97316;border-top-width:2px"></span>관계기업 (K-IFRS 20~50%)</div>
-  <div class="legend-item"><span class="legend-line" style="border-color:#94a3b8;border-top-style:dashed"></span>유의적 투자 (5~20%)</div>
-  <div class="legend-item"><span class="legend-line" style="border-color:#fbbf24;border-top-style:dashed"></span>공정위 계열</div>
-  <div class="legend-item"><span class="legend-line" style="border-color:#facc15;border-top-style:dotted"></span>사업보고서 특수관계자</div>
-  <div class="legend-item"><span class="legend-line" style="border-color:#a78bfa;border-top-style:dotted"></span>수동 보정</div>
-  <div style="margin-top:6px;font-size:9px;color:#555">실선 = K-IFRS 공식지분, 점선 = 계열/수동</div>
+  <div class="legend-title">관계 유형 (엣지 색) <span style="font-weight:400;color:#666">— 항목에 커서를 올려두면 상세 설명</span></div>
+  <div class="legend-item" data-tooltip="K-IFRS 1110 &#39;연결재무제표&#39; 기준. 의결권 50% 초과 보유 시 지배력이 인정되어 지배기업-종속기업 관계가 성립합니다. 지배기업은 종속기업의 자산·부채·손익을 합산한 연결재무제표를 작성할 의무를 집니다."><span class="legend-line" style="border-color:#ef4444;border-top-width:2.5px"></span>종속기업 (K-IFRS &gt;50%)</div>
+  <div class="legend-item" data-tooltip="K-IFRS 1028 &#39;관계기업과 공동기업에 대한 투자&#39; 기준. 의결권 20~50% 보유 시 유의적 영향력(significant influence)이 추정되어 관계기업으로 분류됩니다. 지분법(equity method)을 적용하여 피투자기업 순이익 중 지분만큼을 투자자의 손익에 반영합니다."><span class="legend-line" style="border-color:#f97316;border-top-width:2px"></span>관계기업 (K-IFRS 20~50%)</div>
+  <div class="legend-item" data-tooltip="자본시장법 제147조 &#39;주식등의 대량보유상황 보고&#39; 기준. 상장주식 5% 이상 취득 시 5영업일 이내 공시 의무(5% rule). K-IFRS 1109상 금융자산으로 공정가치 측정하며, 지배·유의적 영향력 없는 지분투자로 분류됩니다."><span class="legend-line" style="border-color:#94a3b8;border-top-style:dashed;border-top-width:1.2px"></span>유의적 투자 (5~20%)</div>
+  <div class="legend-item" data-tooltip="공정거래법 제2조 제11호 &#39;기업집단&#39; 정의 및 동법 시행령. 공정거래위원회가 매년 5월 지정·공시하는 &#39;공시대상기업집단&#39;(자산총액 5조원 이상)의 소속회사 간 관계. 동일인이 사실상 지배하는 기업 집합으로, K-IFRS 특수관계자 정의보다 광범위합니다."><span class="legend-line" style="border-color:#fbbf24;border-top-style:dashed;border-top-width:1.5px"></span>공정위 계열</div>
+  <div class="legend-item" data-tooltip="K-IFRS 1024 &#39;특수관계자 공시&#39; 기준. 사업보고서 주석에 공시된 지배·종속·관계·공동기업 및 동일인 지배 하 형제회사 등. 지분율로는 포착되지 않지만 실질 지배력·영향력이 인정되는 관계까지 포함하여 공정위 미지정 독립기업의 실질 관계를 보강합니다."><span class="legend-line" style="border-color:#a78bfa;border-top-style:dashed;border-top-width:1.2px"></span>사업보고서 특수관계자</div>
+  <div class="legend-item" data-tooltip="공개 DB(DART·공정거래위원회)에 반영되지 않은 상호 관계 — CPA 팀의 실사·감사 정보 또는 알려진 인적 지배 관계 기반 수동 보정. 향후 공시에 반영되면 자동 소스(K-IFRS/공정위)로 대체됩니다."><span class="legend-line" style="border-color:#ec4899;border-top-style:dotted;border-top-width:1px"></span>수동 보정</div>
+  <div style="margin-top:6px;font-size:9px;color:#555">실선 = K-IFRS 지분율 분류, 점선 = 공정위/주석/수동</div>
 </div>
 
 <script>
 const c=document.getElementById('c'),x=c.getContext('2d');let W,H;function resize(){W=c.width=innerWidth;H=c.height=innerHeight}resize();onresize=resize;
 
 // ===== DATA =====
-const sectors={'반도체':{color:'#7c6cf0',cx:-0.25,cy:-0.2},'디스플레이':{color:'#4da6ff',cx:0.25,cy:-0.25},'2차전지':{color:'#22d3ee',cx:0.3,cy:0.1},'바이오':{color:'#34d399',cx:-0.3,cy:0.2},'자동차':{color:'#f97316',cx:0,cy:0.3},'금융':{color:'#a78bfa',cx:-0.15,cy:-0.35},'플랫폼':{color:'#f472b6',cx:0.2,cy:-0.1},'에너지':{color:'#facc15',cx:-0.35,cy:0},'중공업·방산':{color:'#64748b',cx:0.35,cy:-0.1},'건설':{color:'#d97706',cx:0.1,cy:0.35},'통신':{color:'#06b6d4',cx:-0.2,cy:0.35},'기타':{color:'#78716c',cx:0,cy:0}};
+const sectors={'반도체':{color:'#7c6cf0',cx:-0.25,cy:-0.2},'디스플레이':{color:'#4da6ff',cx:0.25,cy:-0.25},'2차전지':{color:'#22d3ee',cx:0.3,cy:0.1},'바이오':{color:'#34d399',cx:-0.3,cy:0.2},'자동차':{color:'#f97316',cx:0,cy:0.3},'금융':{color:'#a78bfa',cx:-0.15,cy:-0.35},'플랫폼':{color:'#f472b6',cx:0.2,cy:-0.1},'에너지':{color:'#facc15',cx:-0.35,cy:0},'중공업·방산':{color:'#64748b',cx:0.35,cy:-0.1},'건설':{color:'#d97706',cx:0.1,cy:0.35},'통신':{color:'#06b6d4',cx:-0.2,cy:0.35},'기타':{color:'#a3e635',cx:0,cy:0}};
 
-// === relation_type별 엣지 스타일 (Phase 2f) ===
-const EDGE_STYLES={subsidiary:{color:'#ef4444',width:2.0,dash:[]},associate:{color:'#f97316',width:1.5,dash:[]},investment:{color:'#94a3b8',width:0.8,dash:[2,3]},ftc_group:{color:'#fbbf24',width:1.0,dash:[4,2]},dart_filing:{color:'#facc15',width:1.0,dash:[6,2]},manual:{color:'#a78bfa',width:0.8,dash:[2,2]}};
+// === relation_type별 엣지 스타일 (Phase 2f + UI 개선 iteration 2026-04-20) ===
+const EDGE_STYLES={subsidiary:{color:'#ef4444',width:2.5,dash:[]},associate:{color:'#f97316',width:2.0,dash:[]},investment:{color:'#94a3b8',width:1.2,dash:[3,3]},ftc_group:{color:'#fbbf24',width:1.5,dash:[8,4]},dart_filing:{color:'#a78bfa',width:1.2,dash:[5,3]},manual:{color:'#ec4899',width:1.0,dash:[2,3]}};
 const EDGE_LABELS={subsidiary:'종속기업(>50%)',associate:'관계기업(20~50%)',investment:'유의적투자(5~20%)',ftc_group:'공정위 계열',dart_filing:'사업보고서 특수관계자',manual:'수동 보정'};
 
 // Phase 2f: 하드코딩 raw 배열을 fetch로 대체. 원본 코드는 하단 RAW_HARDCODED_LEGACY 주석 참조.
@@ -249,7 +242,14 @@ function setMode(mode, btn) {
   const sub = document.getElementById('hudSub');
   const hint = document.getElementById('modeHint');
   if (mode === 'analyze') {
-    sub.innerHTML = `<button class="on" onclick="filter('all',this)">전체</button><button onclick="filter('반도체',this)">반도체</button><button onclick="filter('디스플레이',this)">디스플레이</button><button onclick="filter('2차전지',this)">2차전지</button><button onclick="filter('바이오',this)">바이오</button><button onclick="filter('자동차',this)">자동차</button><button onclick="filter('금융',this)">금융</button>`;
+    // 섹터 필터 버튼 — sectors 사전에서 자동 생성 (색띠 inline). 섹터 추가 시 자동 반영.
+    const sectorOrder = ['반도체','디스플레이','2차전지','바이오','자동차','금융','플랫폼','에너지','중공업·방산','건설','통신','기타'];
+    const allBtn = `<button class="on" style="--sc:#9ca3af" onclick="filter('all',this)">전체</button>`;
+    const secBtns = sectorOrder
+      .filter(s => sectors[s])
+      .map(s => `<button style="--sc:${sectors[s].color}" onclick="filter('${s}',this)">${s}</button>`)
+      .join('');
+    sub.innerHTML = allBtn + secBtns;
     hint.textContent = '기업을 클릭하면 재무제표 번역 + EQS 이익 품질 분석을 볼 수 있습니다';
     flt = 'all';
   } else if (mode === 'disclosure') {
