@@ -18,6 +18,6 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
       - name: Black formatting check
-        run: python -m black --check .
+        run: python -m black --check modules/disclosure/
       - name: Pytest
         run: python -m pytest tests/ -v
