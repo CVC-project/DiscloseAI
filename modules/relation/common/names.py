@@ -54,6 +54,8 @@ _LEGAL_SUFFIXES = (
     "co.ltd.",
     "co.ltd",
     "co.,",
+    "co.",
+    "co",
     "ltd.",
     "ltd",
     "inc.",

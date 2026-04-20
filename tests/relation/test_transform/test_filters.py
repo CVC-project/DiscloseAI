@@ -22,8 +22,11 @@ from modules.relation.transform.filters import (
         # 법인: 관계어와 무관하게 False
         ("삼성생명보험㈜", "최대주주 본인", False),  # 법인 표기(㈜) 있음
         ("삼성물산(주)", "계열회사", False),
-        # 애매한 경우 — relate 없으면 False
-        ("홍길동", None, False),
+        # relate 비어있어도 개인명 형태면 개인으로 판별 (DART relate 미기재 방어)
+        ("홍길동", None, True),
+        ("이재용", "", True),
+        # 법인 표기 있으면 relate 없어도 법인
+        ("삼성전자㈜", None, False),
         # 빈 문자열
         ("", None, False),
     ],

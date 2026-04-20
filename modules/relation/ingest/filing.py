@@ -15,6 +15,7 @@ import json
 import logging
 import re
 import zipfile
+from pathlib import Path
 
 from bs4 import BeautifulSoup
 
@@ -22,6 +23,8 @@ from modules.relation.common.names import build_ticker_map, normalize_company_na
 from modules.relation.ingest._http import dart_get, dart_get_binary
 from modules.relation.storage.db import get_local_session
 from modules.relation.storage.models import CompanyNode, RelationRaw
+
+_TOP50_CSV = Path(__file__).parent.parent / "data" / "top50.csv"
 
 logger = logging.getLogger(__name__)
 
@@ -237,9 +240,7 @@ def collect(bsns_year: int = 2024) -> dict:
         f"filing 파싱 대상 {len(targets)}개: {[t['corp_name'] for t in targets]}"
     )
 
-    ticker_map = build_ticker_map(
-        __import__("modules.relation.ingest.dart", fromlist=["_TOP50_CSV"])._TOP50_CSV
-    )
+    ticker_map = build_ticker_map(_TOP50_CSV)
 
     session = get_local_session()
     parsed_count = 0

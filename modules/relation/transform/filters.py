@@ -33,25 +33,40 @@ FOUNDATION_KEYWORDS = ("재단", "공익", "장학회", "문화재단")
 RRN_PATTERN = re.compile(r"\d{6}-\d{7}")  # 주민번호
 
 
+_CORP_MARKERS = ("주식회사", "(주)", "㈜", "(유)", "Ltd", "Inc", "Corp")
+
+
+def _looks_like_korean_person_name(name: str) -> bool:
+    """2~5자 순한글 이름이면서 법인 표기가 없음 → 개인명으로 간주."""
+    stripped = name.replace(" ", "")
+    if not (2 <= len(stripped) <= 5):
+        return False
+    if any(sym in name for sym in _CORP_MARKERS):
+        return False
+    return all("\uac00" <= c <= "\ud7a3" for c in stripped)
+
+
 def is_personal_shareholder(name: str, relate: str | None) -> bool:
-    """주주명·관계 필드로 개인 여부 판단."""
+    """주주명·관계 필드로 개인 여부 판단.
+
+    판별 경로:
+      (A) relate가 PERSONAL_RELATIONS에 포함 + 이름이 개인명 형태
+      (B) relate가 비어있어도 이름이 명확한 개인명 형태면 개인으로 간주
+          (DART 일부 응답에서 relate 미기재 케이스 방어)
+      (C) 주민번호 패턴 포함
+    """
     if not name:
         return False
-    # relate가 개인 관계어이고 name에 법인 표기(주식회사/㈜ 등)가 없으면 개인
+    # (C) 주민번호 패턴
+    if RRN_PATTERN.search(name):
+        return True
+    # (A) 관계어 + 개인명 형태
     if relate:
         for kw in PERSONAL_RELATIONS:
-            if kw in relate:
-                if not any(
-                    sym in name
-                    for sym in ("주식회사", "(주)", "㈜", "(유)", "Ltd", "Inc", "Corp")
-                ):
-                    # 이름에 재단·회사 식별자 없고, 2~4자 한글이면 개인 확정
-                    if 2 <= len(name.replace(" ", "")) <= 5 and all(
-                        "\uac00" <= c <= "\ud7a3" for c in name.replace(" ", "")
-                    ):
-                        return True
-    # 주민번호 패턴
-    if RRN_PATTERN.search(name):
+            if kw in relate and _looks_like_korean_person_name(name):
+                return True
+    # (B) relate 비어있을 때 개인명 형태만으로 판별 (false positive 허용 — 법인명에 해당하는 2~5자 한글은 대부분 법인 표기 포함)
+    elif _looks_like_korean_person_name(name):
         return True
     return False
 

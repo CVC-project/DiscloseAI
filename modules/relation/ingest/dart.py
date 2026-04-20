@@ -223,6 +223,8 @@ def _load_top50() -> list[dict]:
 def collect(corp: str | None = None, bsns_year: int = 2024) -> dict:
     """DART 2개 엔드포인트 호출 → RelationRaw INSERT.
 
+    Idempotent: 동일 (corp, bsns_year, source_type) 기존 레코드 삭제 후 재생성.
+
     Args:
         corp: None이면 top50 전체, 'ticker' 주면 해당 1개만 수집
         bsns_year: 사업연도
@@ -241,6 +243,17 @@ def collect(corp: str | None = None, bsns_year: int = 2024) -> dict:
     errors: list[str] = []
 
     try:
+        # Idempotency: 기존 DART ingest 레코드 삭제 후 재생성
+        # (삼성전자 단건 수집도 전체 bsns_year 범위의 hyslrSttus·otrCprInvstmntSttus 초기화)
+        corp_names = [r.get("corp_name") for r in top50]
+        session.query(RelationRaw).filter(
+            RelationRaw.source_type.in_(["hyslrSttus", "otrCprInvstmntSttus"]),
+            RelationRaw.bsns_year == bsns_year,
+            (
+                RelationRaw.source_name.in_(corp_names)
+                | RelationRaw.target_name.in_(corp_names)
+            ),
+        ).delete(synchronize_session=False)
         for row in top50:
             ticker = row.get("ticker", "").strip()
             corp_code = row.get("corp_code", "").strip()
