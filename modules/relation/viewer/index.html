@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DiscloseAI — Corporate Universe (Top 50)</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#060a13;color:#e0e0e0;font-family:-apple-system,'Pretendard',sans-serif;overflow:hidden;user-select:none}
+canvas{display:block}
+
+/* Alert */
+.alert-banner{position:fixed;top:-80px;left:0;right:0;z-index:100;background:linear-gradient(90deg,rgba(20,40,80,0.96),rgba(30,60,120,0.96));border-bottom:2px solid #4da6ff;padding:14px 24px;display:flex;align-items:center;gap:12px;transition:top 0.6s cubic-bezier(0.16,1,0.3,1)}
+.alert-banner.show{top:0}
+.alert-dot{width:10px;height:10px;background:#ff4444;border-radius:50%;animation:pulse 1s infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(0.8)}}
+
+/* HUD */
+.hud-main{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:50;display:flex;flex-direction:column;align-items:center;gap:6px}
+.hud-modes{display:flex;gap:4px;background:rgba(8,12,24,0.95);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:5px 8px}
+.hud-modes button{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);color:#777;padding:6px 16px;border-radius:7px;cursor:pointer;font-size:12px;font-weight:500;transition:all 0.25s}
+.hud-modes button:hover{background:rgba(255,255,255,0.08);color:#ccc}
+.hud-modes button.on{color:#fff;border-color:#4da6ff}
+.hud-modes button.on[data-mode="analyze"]{background:rgba(77,166,255,0.2)}
+.hud-modes button.on[data-mode="disclosure"]{background:rgba(251,191,36,0.2);border-color:#fbbf24}
+.hud-modes button.on[data-mode="timemachine"]{background:rgba(124,108,240,0.2);border-color:#7c6cf0}
+.hud-sub{display:flex;gap:4px;background:rgba(8,12,24,0.92);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:4px 8px;transition:opacity 0.3s;flex-wrap:wrap;max-width:92vw;justify-content:center}
+.hud-sub button{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);color:#888;padding:4px 10px;border-radius:5px;cursor:pointer;font-size:10px;transition:all 0.2s;border-left:3px solid var(--sc,transparent)}
+.hud-sub button:hover{color:#ddd;background:rgba(255,255,255,0.08)}
+.hud-sub button.on{background:color-mix(in srgb, var(--sc, #4da6ff) 22%, transparent);border-color:var(--sc, #4da6ff);color:var(--sc, #4da6ff)}
+.mode-hint{font-size:10px;color:#555;text-align:center}
+
+/* Panel */
+.panel{position:fixed;right:-520px;top:0;bottom:0;width:520px;z-index:90;background:rgba(8,12,24,0.98);border-left:1px solid rgba(77,166,255,0.15);overflow-y:auto;transition:right 0.5s cubic-bezier(0.16,1,0.3,1)}
+.panel.open{right:0}
+.close-btn{position:absolute;top:14px;right:14px;background:none;border:none;color:#555;font-size:22px;cursor:pointer;z-index:5}
+
+/* Fin cards */
+.fin-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:14px 16px;margin-bottom:10px}
+.fin-card .card-title{font-size:13px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.fin-card .card-title .src{font-size:10px;color:#555;margin-left:auto}
+.fin-row{display:flex;align-items:center;justify-content:space-between;padding:3px 0;font-size:12px}
+.fin-row .label{color:#888;min-width:80px}
+.fin-row .value{font-weight:500}
+.fin-bar-wrap{flex:1;max-width:100px;height:5px;background:rgba(255,255,255,0.05);border-radius:3px;margin:0 8px;overflow:hidden}
+.fin-bar{height:100%;border-radius:3px}
+.fin-insight{margin-top:10px;padding:8px 10px;background:rgba(77,166,255,0.05);border-left:3px solid rgba(77,166,255,0.25);border-radius:0 6px 6px 0;font-size:11px;color:#8bb8d9;line-height:1.6}
+.fin-change{font-size:10px;padding:1px 5px;border-radius:4px;margin-left:4px}
+.fin-change.up{background:rgba(74,222,128,0.1);color:#4ade80}
+.fin-change.down{background:rgba(248,113,113,0.1);color:#f87171}
+.checkpoint{padding:8px 10px;background:rgba(251,191,36,0.04);border:1px solid rgba(251,191,36,0.1);border-radius:7px;margin-bottom:6px;font-size:11px}
+.checkpoint .cp-title{color:#e0e0e0;font-weight:500}
+.checkpoint .cp-detail{color:#888;margin-top:3px;line-height:1.5}
+
+/* EQS */
+.eqs-module{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:10px 12px;margin-bottom:6px}
+.eqs-bar{height:5px;background:rgba(255,255,255,0.05);border-radius:3px;margin:5px 0;overflow:hidden}
+.eqs-fill{height:100%;border-radius:3px}
+.eqs-what{background:rgba(77,166,255,0.04);border:1px solid rgba(77,166,255,0.1);border-radius:8px;padding:10px;font-size:11px;color:#8bb8d9;line-height:1.7}
+
+/* Timemachine */
+.tm-scene{padding:20px}
+.tm-header{text-align:center;margin-bottom:20px}
+.tm-header .tm-date{font-size:28px;font-weight:700;color:#7c6cf0}
+.tm-header .tm-sub{font-size:12px;color:#666;margin-top:4px}
+.tm-disclosure{background:rgba(77,166,255,0.06);border:1px solid rgba(77,166,255,0.15);border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.tm-disclosure .tm-label{font-size:10px;color:#4da6ff;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px}
+.tm-disclosure .tm-title{font-size:15px;font-weight:600;color:#fff}
+.tm-disclosure .tm-detail{font-size:12px;color:#999;margin-top:4px}
+.tm-news{margin-bottom:14px}
+.tm-news-item{display:flex;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.03);font-size:11px}
+.tm-news-item .src{color:#fbbf24;min-width:50px}
+.tm-news-item .headline{color:#ccc}
+.tm-choices{display:flex;gap:10px;justify-content:center;margin:20px 0}
+.tm-choice{padding:12px 28px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;border:2px solid;transition:all 0.2s;text-align:center}
+.tm-choice:hover{transform:scale(1.05)}
+.tm-choice.buy{background:rgba(74,222,128,0.08);border-color:rgba(74,222,128,0.3);color:#4ade80}
+.tm-choice.hold{background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);color:#aaa}
+.tm-choice.sell{background:rgba(248,113,113,0.08);border-color:rgba(248,113,113,0.3);color:#f87171}
+.tm-result{display:none;animation:fadeUp 0.5s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.tm-result-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:16px;margin-bottom:10px}
+.tm-result-card .big-num{font-size:32px;font-weight:700;text-align:center}
+.tm-result-row{display:flex;justify-content:space-between;padding:4px 0;font-size:12px}
+.tm-lesson{background:rgba(124,108,240,0.06);border:1px solid rgba(124,108,240,0.15);border-radius:10px;padding:14px;margin-top:14px}
+.tm-lesson .lesson-title{font-size:12px;font-weight:600;color:#7c6cf0;margin-bottom:6px}
+.tm-lesson .lesson-body{font-size:11px;color:#999;line-height:1.7}
+.tm-eqs-hint{background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.12);border-radius:8px;padding:10px 12px;margin-top:10px;font-size:11px;color:#d98888;line-height:1.6}
+.tm-next{display:block;margin:16px auto 0;padding:10px 30px;background:rgba(124,108,240,0.15);border:1px solid rgba(124,108,240,0.3);border-radius:8px;color:#7c6cf0;font-size:13px;cursor:pointer;font-weight:500}
+
+/* Common */
+.section-title{font-size:12px;font-weight:600;margin:14px 0 8px;padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,0.05)}
+.tag{display:inline-block;font-size:10px;padding:2px 7px;border-radius:8px;margin:2px;background:rgba(255,255,255,0.05);color:#999;border:1px solid rgba(255,255,255,0.08)}
+.title{position:fixed;top:16px;left:20px;z-index:50}
+.title h1{font-size:16px;font-weight:600;color:rgba(255,255,255,0.85)}
+.title p{font-size:11px;color:rgba(255,255,255,0.3);margin-top:2px}
+.title .live{display:inline-block;width:6px;height:6px;background:#22c55e;border-radius:50%;margin-right:4px;animation:pulse 2s infinite}
+.legend{position:fixed;z-index:50;background:rgba(8,12,24,0.92);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:10px 14px;font-size:10px;color:#888;max-width:260px}
+.legend-title{font-size:10px;font-weight:600;color:#ccc;margin-bottom:6px;padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,0.08)}
+.legend-edge{bottom:16px;left:16px}
+.legend-item{display:flex;align-items:center;gap:6px;margin:3px 0;line-height:1.2}
+.legend-line{width:20px;height:0;flex:0 0 20px;border-top-width:2px;border-top-style:solid}
+
+/* 엣지 범례 hover 툴팁 (K-IFRS·공정거래법·자본시장법 근거) */
+.legend-edge .legend-item{position:relative;cursor:help;padding:2px 2px;border-radius:4px;transition:background 0.15s}
+.legend-edge .legend-item:hover{background:rgba(255,255,255,0.06)}
+.legend-edge .legend-item:hover::after{
+  content:attr(data-tooltip);
+  position:absolute;left:calc(100% + 10px);bottom:-4px;
+  width:300px;padding:10px 12px;
+  background:rgba(8,12,24,0.98);
+  border:1px solid rgba(251,191,36,0.4);
+  border-radius:6px;
+  font-size:11px;color:#e0e0e0;line-height:1.6;
+  z-index:200;pointer-events:none;
+  white-space:normal;text-align:left;
+  box-shadow:0 4px 20px rgba(0,0,0,0.5);
+}
+
+/* Disclosure panel */
+.disc-impact{padding:6px 10px;border-radius:6px;margin-bottom:6px;font-size:12px;display:flex;justify-content:space-between;align-items:center}
+.disc-impact .company{font-weight:500}
+.disc-impact .badge{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600}
+</style>
+</head>
+<body>
+
+<div class="alert-banner" id="alert">
+  <div class="alert-dot"></div>
+  <div style="font-size:13px;flex:1;line-height:1.5"><strong style="color:#4da6ff">📡 신규 공시 감지</strong><br>삼성전자 (005930) — 타법인 주식 취득 결정 (<strong style="color:#4da6ff">레인보우로보틱스</strong>, <span style="color:#fbbf24;font-weight:600">5,000억원</span>)</div>
+  <button style="background:none;border:1px solid rgba(255,255,255,0.2);color:white;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:11px" onclick="document.getElementById('alert').classList.remove('show')">닫기</button>
+</div>
+
+<div class="title"><h1>DiscloseAI</h1><p><span class="live"></span>기업을 클릭하여 해부를 시작하세요</p></div>
+
+<canvas id="c"></canvas>
+
+<div class="panel" id="panel">
+  <button class="close-btn" onclick="closePanel()">×</button>
+  <div id="panelInner" style="padding:20px"></div>
+</div>
+
+<div class="hud-main">
+  <div class="hud-sub" id="hudSub"></div>
+  <div class="hud-modes">
+    <button class="on" data-mode="analyze" onclick="setMode('analyze',this)">📊 기업분석</button>
+    <button data-mode="disclosure" onclick="setMode('disclosure',this)">📡 공시</button>
+    <button data-mode="timemachine" onclick="setMode('timemachine',this)">🕰 타임머신</button>
+  </div>
+  <div class="mode-hint" id="modeHint">기업을 클릭하면 재무제표와 EQS 분석을 볼 수 있습니다</div>
+</div>
+
+<!-- 좌측 하단: 관계 유형(엣지 색) 범례 — 각 항목 hover 시 K-IFRS·공정거래법 근거 툴팁 -->
+<div class="legend legend-edge">
+  <div class="legend-title">관계 유형 (엣지 색) <span style="font-weight:400;color:#666">— 항목에 커서를 올려두면 상세 설명</span></div>
+  <div class="legend-item" data-tooltip="K-IFRS 1110 &#39;연결재무제표&#39; 기준. 의결권 50% 초과 보유 시 지배력이 인정되어 지배기업-종속기업 관계가 성립합니다. 지배기업은 종속기업의 자산·부채·손익을 합산한 연결재무제표를 작성할 의무를 집니다."><span class="legend-line" style="border-color:#ef4444;border-top-width:2.5px"></span>종속기업 (K-IFRS &gt;50%)</div>
+  <div class="legend-item" data-tooltip="K-IFRS 1028 &#39;관계기업과 공동기업에 대한 투자&#39; 기준. 의결권 20~50% 보유 시 유의적 영향력(significant influence)이 추정되어 관계기업으로 분류됩니다. 지분법(equity method)을 적용하여 피투자기업 순이익 중 지분만큼을 투자자의 손익에 반영합니다."><span class="legend-line" style="border-color:#f97316;border-top-width:2px"></span>관계기업 (K-IFRS 20~50%)</div>
+  <div class="legend-item" data-tooltip="자본시장법 제147조 &#39;주식등의 대량보유상황 보고&#39; 기준. 상장주식 5% 이상 취득 시 5영업일 이내 공시 의무(5% rule). K-IFRS 1109상 금융자산으로 공정가치 측정하며, 지배·유의적 영향력 없는 지분투자로 분류됩니다."><span class="legend-line" style="border-color:#94a3b8;border-top-style:dashed;border-top-width:1.2px"></span>유의적 투자 (5~20%)</div>
+  <div class="legend-item" data-tooltip="공정거래법 제2조 제11호 &#39;기업집단&#39; 정의 및 동법 시행령. 공정거래위원회가 매년 5월 지정·공시하는 &#39;공시대상기업집단&#39;(자산총액 5조원 이상)의 소속회사 간 관계. 동일인이 사실상 지배하는 기업 집합으로, K-IFRS 특수관계자 정의보다 광범위합니다."><span class="legend-line" style="border-color:#fbbf24;border-top-style:dashed;border-top-width:1.5px"></span>공정위 계열</div>
+  <div class="legend-item" data-tooltip="K-IFRS 1024 &#39;특수관계자 공시&#39; 기준. 사업보고서 주석에 공시된 지배·종속·관계·공동기업 및 동일인 지배 하 형제회사 등. 지분율로는 포착되지 않지만 실질 지배력·영향력이 인정되는 관계까지 포함하여 공정위 미지정 독립기업의 실질 관계를 보강합니다."><span class="legend-line" style="border-color:#a78bfa;border-top-style:dashed;border-top-width:1.2px"></span>사업보고서 특수관계자</div>
+  <div class="legend-item" data-tooltip="공개 DB(DART·공정거래위원회)에 반영되지 않은 상호 관계 — CPA 팀의 실사·감사 정보 또는 알려진 인적 지배 관계 기반 수동 보정. 향후 공시에 반영되면 자동 소스(K-IFRS/공정위)로 대체됩니다."><span class="legend-line" style="border-color:#ec4899;border-top-style:dotted;border-top-width:1px"></span>수동 보정</div>
+  <div style="margin-top:6px;font-size:9px;color:#555">실선 = K-IFRS 지분율 분류, 점선 = 공정위/주석/수동</div>
+</div>
+
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');let W,H;function resize(){W=c.width=innerWidth;H=c.height=innerHeight}resize();onresize=resize;
+
+// ===== DATA =====
+const sectors={'반도체':{color:'#7c6cf0',cx:-0.25,cy:-0.2},'디스플레이':{color:'#4da6ff',cx:0.25,cy:-0.25},'2차전지':{color:'#22d3ee',cx:0.3,cy:0.1},'바이오':{color:'#34d399',cx:-0.3,cy:0.2},'자동차':{color:'#f97316',cx:0,cy:0.3},'금융':{color:'#a78bfa',cx:-0.15,cy:-0.35},'플랫폼':{color:'#f472b6',cx:0.2,cy:-0.1},'에너지':{color:'#facc15',cx:-0.35,cy:0},'중공업·방산':{color:'#64748b',cx:0.35,cy:-0.1},'건설':{color:'#d97706',cx:0.1,cy:0.35},'통신':{color:'#06b6d4',cx:-0.2,cy:0.35},'기타':{color:'#a3e635',cx:0,cy:0}};
+
+// === relation_type별 엣지 스타일 (Phase 2f + UI 개선 iteration 2026-04-20) ===
+const EDGE_STYLES={subsidiary:{color:'#ef4444',width:2.5,dash:[]},associate:{color:'#f97316',width:2.0,dash:[]},investment:{color:'#94a3b8',width:1.2,dash:[3,3]},ftc_group:{color:'#fbbf24',width:1.5,dash:[8,4]},dart_filing:{color:'#a78bfa',width:1.2,dash:[5,3]},manual:{color:'#ec4899',width:1.0,dash:[2,3]}};
+const EDGE_LABELS={subsidiary:'종속기업(>50%)',associate:'관계기업(20~50%)',investment:'유의적투자(5~20%)',ftc_group:'공정위 계열',dart_filing:'사업보고서 특수관계자',manual:'수동 보정'};
+
+// Phase 2f: 하드코딩 raw 배열을 fetch로 대체. 원본 코드는 하단 RAW_HARDCODED_LEGACY 주석 참조.
+let raw=[];
+const _LEGACY_HARDCODED_RAW=[
+  {n:'삼성전자',t:'005930',s:'반도체',sz:3.5,mc:'512조',rv:'300.9',oi:'36.5',oim:'12.1',ni:'26.4',ta:'464',tl:'102',eq:'362',dr:'28',ocf:'62.1',icf:'-53.2',fcf:'-12.1',rv_chg:12,oi_chg:18,recv_days:78,recv_chg:26,seg_main:'DS(반도체)',seg_pct:63,rp_name:'삼성디스플레이',rp_amt:'8.2조',eqs:82,gr:'A',m1:85,m2:88,m3:78,m4:80,m5:79,m1t:'이익의 현금 뒷받침 양호.',m2t:'M-score -2.83 안전구간. 조작 징후 없음.',m3t:'OCF/NI 2.35. 현금흐름 건전.',m4t:'AR(1) 0.82. 이익 지속 가능.',m5t:'F-score 7/9. 전반적 개선.',
+   tm:{date:'2024년 8월',disclosure:'평택 P4 반도체 신규 투자 결정 (30조원)',news:[{src:'한경',h:'"AI 반도체 초격차... 삼성 30조 베팅"'},{src:'매경',h:'"HBM 시장 선점 나선다... 목표가 상향"'},{src:'증권사',h:'매수 의견 15개 / 매도 0개'},{src:'종토방',h:'"10만전자 간다 🚀🚀🚀"'}],answer:{stock_chg:'+12.5%',supply:[{n:'원익IPS',chg:'+32.8%'},{n:'한미반도체',chg:'+28.5%'},{n:'HPSP',chg:'+41.2%'}],lesson:'대형주 CAPEX 공시는 공급사에 더 큰 영향을 미칩니다.',eqs_hint:'EQS 82점(A등급). 이 경우 공시 내용의 신뢰도가 높아\n실제 투자로 이어질 가능성이 높았습니다.'}},
+   disc:[{title:'타법인주식취득: 레인보우로보틱스 5,000억원',impacts:[{n:'레인보우로보틱스',type:'피인수',badge:'수혜',badge_col:'#4ade80',conf:87},{n:'두산로보틱스',type:'경쟁사',badge:'경쟁압박',badge_col:'#f87171',conf:64},{n:'원익IPS',type:'공급사',badge:'영향권',badge_col:'#4da6ff',conf:52}]}],
+   rl:['SK하이닉스:경쟁','삼성디스플레이:종속','삼성SDI:계열','원익IPS:공급','한미반도체:공급','레인보우로보틱스:피인수','HPSP:공급']},
+
+  {n:'SK하이닉스',t:'000660',s:'반도체',sz:2.8,mc:'186조',rv:'66.2',oi:'23.5',oim:'35.5',ni:'19.8',ta:'82',tl:'31',eq:'51',dr:'61',ocf:'28.3',icf:'-18.5',fcf:'-5.2',rv_chg:95,oi_chg:999,recv_days:45,recv_chg:5,seg_main:'DRAM/HBM',seg_pct:72,rp_name:'SK스퀘어',rp_amt:'2.1조',eqs:78,gr:'B',m1:80,m2:82,m3:85,m4:65,m5:76,m1t:'발생액 정상 범위.',m2t:'M-score 안전구간.',m3t:'현금흐름 양호.',m4t:'전년 적자→흑전. 지속성 확인 필요.',m5t:'F-score 7/9.',
+   tm:{date:'2023년 8월',disclosure:'2023년 반기보고서: 반도체 부문 영업적자 -5.5조',news:[{src:'조선',h:'"메모리 빙하기... 역대급 적자 충격"'},{src:'매경',h:'"감산해도 소용없어... 수요 절벽"'},{src:'증권사',h:'목표가 하향 8건 / 매수 유지 5건'},{src:'종토방',h:'"3만전자 가나... 손절해야 하나"'}],answer:{stock_chg:'+185% (1년 후)',supply:[{n:'원익IPS',chg:'+120%'},{n:'한미반도체',chg:'+95%'}],lesson:'역대급 적자 = 바닥 신호일 수 있습니다.\n모든 뉴스가 부정적일 때가 오히려 기회였습니다.',eqs_hint:'EQS 42점(D등급)이었으나, M5(재무건전성) F-score가\n바닥에서 반등 시작. 업황 회복 시그널이 숫자에 먼저 나타남.'}},
+   disc:[],rl:['삼성전자:경쟁','원익IPS:공급','한미반도체:공급','HPSP:공급','SK스퀘어:모회사']},
+
+  {n:'LG디스플레이',t:'034220',s:'디스플레이',sz:1.2,mc:'8.2조',rv:'21.3',oi:'-0.8',oim:'-3.8',ni:'-1.2',ta:'28',tl:'19',eq:'9',dr:'211',ocf:'1.8',icf:'-2.1',fcf:'-0.5',rv_chg:-5,oi_chg:-999,recv_days:62,recv_chg:8,seg_main:'OLED',seg_pct:78,rp_name:'LG전자',rp_amt:'12.5조',eqs:42,gr:'D',m1:38,m2:45,m3:52,m4:35,m5:40,m1t:'비용 이연 가능성. 발생액 높음.',m2t:'M-score -1.95 위험구간.',m3t:'감가상각 효과로 OCF 흑자이나 본질적 적자.',m4t:'3년 연속 적자. 이익 회복 불확실.',m5t:'F-score 3/9. 전반적 악화.',
+   tm:{date:'2024년 8월',disclosure:'유상증자 결정 — 8,000억원 (시설투자 목적)',news:[{src:'한경',h:'"LGD 또 유증... 주주가치 희석 불가피"'},{src:'전자신문',h:'"OLED 투자 지속... 적자의 늪 탈출 언제?"'},{src:'증권사',h:'매수 2 / 중립 5 / 매도 1'},{src:'종토방',h:'"물타기할까 손절할까..."'}],answer:{stock_chg:'-28% (6개월 후)',supply:[{n:'덕산네오룩스',chg:'-15%'},{n:'AP시스템',chg:'-22%'}],lesson:'EQS D등급 기업의 유상증자는 과거 89건 중 72%에서\n6개월 내 주가 하락. 자금 조달 목적을 반드시 확인하세요.',eqs_hint:'EQS 42점(D등급). 특히 M2(분식확률) -1.95로 위험구간.\n"뉴스 5개가 못 본 걸, 숫자 하나가 말해주고 있었다"'}},
+   disc:[],rl:['삼성디스플레이:경쟁','LG전자:계열']},
+
+  {n:'에코프로비엠',t:'247540',s:'2차전지',sz:1.0,mc:'8.5조',rv:'4.8',oi:'0.3',oim:'6.3',ni:'0.15',ta:'6',tl:'3.5',eq:'2.5',dr:'140',ocf:'0.1',icf:'-1.2',fcf:'-0.8',rv_chg:-35,oi_chg:-70,recv_days:92,recv_chg:45,seg_main:'양극재',seg_pct:95,rp_name:'에코프로',rp_amt:'0.5조',eqs:45,gr:'D',m1:38,m2:42,m3:40,m4:48,m5:55,m1t:'매출채권 92일 급증(+45%). 미회수 심각.',m2t:'M-score -1.85 위험구간.',m3t:'OCF 극히 낮음. 현금흐름 괴리 심각.',m4t:'이익 급감. 업황 의존.',m5t:'F-score 4/9.',
+   tm:{date:'2023년 6월',disclosure:'에코프로비엠 주가 100만원 돌파 (시총 30조)',news:[{src:'한경',h:'"2차전지 대장주... 200만원 간다"'},{src:'매경',h:'"에코프로 신화, K-배터리의 자존심"'},{src:'증권사',h:'매수 8 / 중립 1 / 매도 0'},{src:'종토방',h:'"영끌해서라도 사야 한다 🚀🚀🚀"'}],answer:{stock_chg:'-72% (1년 후)',supply:[],lesson:'시장 열광과 재무제표는 다른 이야기를 하고 있었습니다.\n매출채권 +45%, 현금흐름 괴리 심각 — 숫자는 이미 경고 중.',eqs_hint:'그 당시 EQS를 산출했다면 45점(D등급).\nM1 발생액 품질, M3 현금흐름 괴리 모두 위험.\n\n"뉴스 8개가 못 본 걸, 숫자 하나가 말해주고 있었다"'}},
+   disc:[],rl:['에코프로:모회사']},
+
+  // Simplified entries
+  {n:'삼성디스플레이',t:'비상장',s:'디스플레이',sz:1.4,mc:'-',rv:'34.6',oi:'2.1',oim:'6.1',ni:'1.8',ta:'45',tl:'12',eq:'33',dr:'36',ocf:'5.2',icf:'-4.8',fcf:'-0.3',rv_chg:8,oi_chg:15,recv_days:55,recv_chg:3,seg_main:'OLED',seg_pct:85,rp_name:'삼성전자',rp_amt:'12.3조',eqs:65,gr:'C',m1:62,m2:68,m3:70,m4:60,m5:65,m1t:'보통.',m2t:'정상.',m3t:'양호.',m4t:'변동성.',m5t:'F-score 5/9.',tm:null,disc:[],rl:['LG디스플레이:경쟁','삼성전자:모회사']},
+  {n:'삼성SDI',t:'006400',s:'2차전지',sz:1.6,mc:'42조',rv:'22.8',oi:'1.8',oim:'7.9',ni:'1.5',ta:'38',tl:'15',eq:'23',dr:'65',ocf:'3.2',icf:'-4.5',fcf:'-1.8',rv_chg:-8,oi_chg:-25,recv_days:72,recv_chg:18,seg_main:'배터리',seg_pct:88,rp_name:'삼성전자',rp_amt:'2.1조',eqs:71,gr:'B',m1:68,m2:72,m3:65,m4:70,m5:78,m1t:'소폭 증가.',m2t:'정상.',m3t:'투자 확대.',m4t:'감소 추세.',m5t:'F-score 6/9.',tm:null,disc:[],rl:['LG화학:경쟁']},
+  {n:'LG전자',t:'066570',s:'디스플레이',sz:1.5,mc:'22조',rv:'84.2',oi:'3.5',oim:'4.2',ni:'2.1',ta:'48',tl:'28',eq:'20',dr:'140',ocf:'6.2',icf:'-3.8',fcf:'-1.5',rv_chg:5,oi_chg:12,recv_days:48,recv_chg:2,seg_main:'H&A(가전)',seg_pct:42,rp_name:'LG디스플레이',rp_amt:'5.8조',eqs:73,gr:'B',m1:70,m2:75,m3:72,m4:74,m5:74,m1t:'정상.',m2t:'안전.',m3t:'양호.',m4t:'안정.',m5t:'F-score 6/9.',tm:null,disc:[],rl:['LG디스플레이:계열','삼성전자:경쟁']},
+  {n:'원익IPS',t:'240810',s:'반도체',sz:0.9,mc:'2.8조',rv:'1.2',oi:'0.18',oim:'15.0',ni:'0.14',ta:'1.5',tl:'0.4',eq:'1.1',dr:'36',ocf:'0.22',icf:'-0.15',fcf:'-0.05',rv_chg:45,oi_chg:80,recv_days:85,recv_chg:32,seg_main:'반도체장비',seg_pct:95,rp_name:'삼성전자',rp_amt:'0.8조',eqs:61,gr:'C',m1:55,m2:62,m3:58,m4:68,m5:65,m1t:'매출채권 급증. 확인 필요.',m2t:'M-score 경계선.',m3t:'매출채권 회수 지연.',m4t:'수주 기반 변동.',m5t:'F-score 5/9.',tm:null,disc:[],rl:[]},
+  {n:'한미반도체',t:'042700',s:'반도체',sz:1.0,mc:'3.5조',rv:'0.8',oi:'0.22',oim:'27.5',ni:'0.18',ta:'1.0',tl:'0.2',eq:'0.8',dr:'25',ocf:'0.2',icf:'-0.08',fcf:'-0.03',rv_chg:60,oi_chg:120,recv_days:55,recv_chg:8,seg_main:'반도체후공정',seg_pct:92,rp_name:'-',rp_amt:'-',eqs:74,gr:'B',m1:72,m2:76,m3:75,m4:70,m5:77,m1t:'정상.',m2t:'안전.',m3t:'양호.',m4t:'성장기.',m5t:'F-score 7/9.',tm:null,disc:[],rl:[]},
+  {n:'HPSP',t:'403870',s:'반도체',sz:0.8,mc:'2.1조',rv:'0.3',oi:'0.12',oim:'40',ni:'0.1',ta:'0.5',tl:'0.1',eq:'0.4',dr:'25',ocf:'0.15',icf:'-0.05',fcf:'-0.02',rv_chg:35,oi_chg:50,recv_days:40,recv_chg:5,seg_main:'반도체장비',seg_pct:98,rp_name:'-',rp_amt:'-',eqs:69,gr:'B',m1:65,m2:70,m3:72,m4:68,m5:70,m1t:'정상.',m2t:'정상.',m3t:'양호.',m4t:'성장.',m5t:'F-score 6/9.',tm:null,disc:[],rl:[]},
+  {n:'현대자동차',t:'005380',s:'자동차',sz:2.5,mc:'65조',rv:'168',oi:'14.2',oim:'8.5',ni:'11.5',ta:'120',tl:'72',eq:'48',dr:'150',ocf:'12.8',icf:'-8.5',fcf:'-3.2',rv_chg:8,oi_chg:5,recv_days:32,recv_chg:-5,seg_main:'자동차',seg_pct:85,rp_name:'기아',rp_amt:'5.2조',eqs:79,gr:'B',m1:78,m2:82,m3:75,m4:80,m5:77,m1t:'정상.',m2t:'안전.',m3t:'양호.',m4t:'안정.',m5t:'F-score 7/9.',tm:null,disc:[],rl:['기아:계열']},
+  {n:'기아',t:'000270',s:'자동차',sz:2.0,mc:'48조',rv:'105',oi:'12.1',oim:'11.5',ni:'9.8',ta:'68',tl:'38',eq:'30',dr:'127',ocf:'10.5',icf:'-5.2',fcf:'-2.8',rv_chg:10,oi_chg:8,recv_days:28,recv_chg:-8,seg_main:'자동차',seg_pct:90,rp_name:'현대차',rp_amt:'3.8조',eqs:81,gr:'A',m1:80,m2:84,m3:78,m4:82,m5:80,m1t:'정상.',m2t:'안전.',m3t:'양호.',m4t:'성장.',m5t:'F-score 7/9.',tm:null,disc:[],rl:['현대자동차:계열']},
+  {n:'KB금융',t:'105560',s:'금융',sz:1.8,mc:'32조',rv:'14.5',oi:'5.8',oim:'40',ni:'4.5',ta:'680',tl:'640',eq:'40',dr:'1600',ocf:'-',icf:'-',fcf:'-',rv_chg:5,oi_chg:8,recv_days:0,recv_chg:0,seg_main:'은행',seg_pct:65,rp_name:'-',rp_amt:'-',eqs:83,gr:'A',m1:82,m2:85,m3:0,m4:84,m5:82,m1t:'금융업 별도.',m2t:'안전.',m3t:'금융업 제외.',m4t:'안정.',m5t:'BIS양호.',tm:null,disc:[],rl:['신한지주:경쟁']},
+  {n:'신한지주',t:'055550',s:'금융',sz:1.6,mc:'28조',rv:'12.8',oi:'5.2',oim:'40.6',ni:'4.1',ta:'620',tl:'585',eq:'35',dr:'1671',ocf:'-',icf:'-',fcf:'-',rv_chg:3,oi_chg:5,recv_days:0,recv_chg:0,seg_main:'은행',seg_pct:60,rp_name:'-',rp_amt:'-',eqs:81,gr:'A',m1:80,m2:83,m3:0,m4:82,m5:80,m1t:'금융업 별도.',m2t:'안전.',m3t:'제외.',m4t:'안정.',m5t:'양호.',tm:null,disc:[],rl:['KB금융:경쟁']},
+  {n:'네이버',t:'035420',s:'플랫폼',sz:1.8,mc:'52조',rv:'10.3',oi:'1.8',oim:'17.5',ni:'1.2',ta:'25',tl:'10',eq:'15',dr:'67',ocf:'2.5',icf:'-3.2',fcf:'-0.8',rv_chg:12,oi_chg:15,recv_days:35,recv_chg:5,seg_main:'서치플랫폼',seg_pct:55,rp_name:'-',rp_amt:'-',eqs:74,gr:'B',m1:72,m2:76,m3:68,m4:75,m5:78,m1t:'정상.',m2t:'안전.',m3t:'투자 확대.',m4t:'안정.',m5t:'F-score 7/9.',tm:null,disc:[],rl:['카카오:경쟁']},
+  {n:'카카오',t:'035720',s:'플랫폼',sz:1.3,mc:'18조',rv:'7.8',oi:'0.5',oim:'6.4',ni:'0.2',ta:'18',tl:'8',eq:'10',dr:'80',ocf:'1.2',icf:'-2.5',fcf:'-0.8',rv_chg:3,oi_chg:-20,recv_days:42,recv_chg:12,seg_main:'플랫폼',seg_pct:48,rp_name:'-',rp_amt:'-',eqs:58,gr:'C',m1:55,m2:60,m3:52,m4:58,m5:65,m1t:'순이익 급감.',m2t:'경계선.',m3t:'악화.',m4t:'감소 추세.',m5t:'F-score 5/9.',tm:null,disc:[],rl:['네이버:경쟁']},
+  {n:'셀트리온',t:'068270',s:'바이오',sz:1.8,mc:'45조',rv:'3.8',oi:'1.2',oim:'31.6',ni:'0.9',ta:'15',tl:'5',eq:'10',dr:'50',ocf:'1.0',icf:'-0.5',fcf:'-0.2',rv_chg:18,oi_chg:25,recv_days:95,recv_chg:15,seg_main:'바이오시밀러',seg_pct:90,rp_name:'-',rp_amt:'-',eqs:70,gr:'B',m1:65,m2:72,m3:68,m4:72,m5:73,m1t:'바이오 특성.',m2t:'안전.',m3t:'양호.',m4t:'성장.',m5t:'F-score 6/9.',tm:null,disc:[],rl:['삼성바이오로직스:경쟁']},
+  {n:'삼성바이오로직스',t:'207940',s:'바이오',sz:2.0,mc:'78조',rv:'4.2',oi:'1.5',oim:'35.7',ni:'1.2',ta:'12',tl:'3',eq:'9',dr:'33',ocf:'1.8',icf:'-2.0',fcf:'-0.5',rv_chg:22,oi_chg:30,recv_days:88,recv_chg:10,seg_main:'CMO',seg_pct:95,rp_name:'-',rp_amt:'-',eqs:76,gr:'B',m1:74,m2:78,m3:72,m4:76,m5:80,m1t:'양호.',m2t:'안전.',m3t:'양호.',m4t:'수주 확대.',m5t:'F-score 7/9.',tm:null,disc:[],rl:['삼성전자:계열','셀트리온:경쟁']},
+  {n:'LG화학',t:'051910',s:'2차전지',sz:1.5,mc:'28조',rv:'55.6',oi:'2.3',oim:'4.1',ni:'1.5',ta:'52',tl:'30',eq:'22',dr:'136',ocf:'4.5',icf:'-6.2',fcf:'-2.8',rv_chg:-12,oi_chg:-35,recv_days:58,recv_chg:12,seg_main:'석유화학',seg_pct:52,rp_name:'-',rp_amt:'-',eqs:68,gr:'B',m1:65,m2:70,m3:62,m4:68,m5:75,m1t:'상승 추세.',m2t:'정상.',m3t:'투자 과다.',m4t:'감소.',m5t:'F-score 6/9.',tm:null,disc:[],rl:['삼성SDI:경쟁']},
+  {n:'LG에너지솔루션',t:'373220',s:'2차전지',sz:2.2,mc:'95조',rv:'36.2',oi:'1.2',oim:'3.3',ni:'0.8',ta:'45',tl:'22',eq:'23',dr:'96',ocf:'3.5',icf:'-8.2',fcf:'-3.5',rv_chg:-10,oi_chg:-55,recv_days:65,recv_chg:22,seg_main:'배터리',seg_pct:100,rp_name:'-',rp_amt:'-',eqs:59,gr:'C',m1:52,m2:60,m3:55,m4:58,m5:70,m1t:'재고 급증.',m2t:'경계선.',m3t:'투자 과다.',m4t:'이익 급감.',m5t:'F-score 5/9.',tm:null,disc:[],rl:[]},
+  {n:'에코프로',t:'086520',s:'2차전지',sz:0.9,mc:'4.2조',rv:'0.1',oi:'-0.02',oim:'-20',ni:'-0.03',ta:'2',tl:'0.8',eq:'1.2',dr:'67',ocf:'-0.05',icf:'-0.1',fcf:'0.02',rv_chg:-50,oi_chg:-999,recv_days:120,recv_chg:60,seg_main:'지주',seg_pct:100,rp_name:'-',rp_amt:'-',eqs:38,gr:'D',m1:30,m2:35,m3:32,m4:40,m5:52,m1t:'적자.',m2t:'위험.',m3t:'적자+현금소진.',m4t:'적자 지속.',m5t:'F-score 3/9.',tm:null,disc:[],rl:[]},
+  {n:'포스코홀딩스',t:'005490',s:'에너지',sz:1.6,mc:'25조',rv:'77',oi:'3.2',oim:'4.2',ni:'2.5',ta:'95',tl:'55',eq:'40',dr:'138',ocf:'5.8',icf:'-4.2',fcf:'-2.1',rv_chg:-8,oi_chg:-15,recv_days:42,recv_chg:3,seg_main:'철강',seg_pct:70,rp_name:'-',rp_amt:'-',eqs:72,gr:'B',m1:70,m2:74,m3:68,m4:72,m5:76,m1t:'정상.',m2t:'안전.',m3t:'양호.',m4t:'안정.',m5t:'F-score 6/9.',tm:null,disc:[],rl:[]},
+  {n:'레인보우로보틱스',t:'277810',s:'반도체',sz:0.5,mc:'0.6조',rv:'0.02',oi:'-0.01',oim:'-50',ni:'-0.015',ta:'0.1',tl:'0.03',eq:'0.07',dr:'43',ocf:'-0.008',icf:'-0.02',fcf:'0.01',rv_chg:80,oi_chg:-999,recv_days:45,recv_chg:20,seg_main:'로봇',seg_pct:100,rp_name:'-',rp_amt:'-',eqs:35,gr:'D',m1:30,m2:32,m3:28,m4:38,m5:45,m1t:'매출 극소.',m2t:'데이터 부족.',m3t:'적자.',m4t:'적자 지속.',m5t:'F-score 3/9.',tm:null,disc:[],rl:['두산로보틱스:경쟁']},
+  {n:'두산로보틱스',t:'454910',s:'반도체',sz:0.7,mc:'1.8조',rv:'0.15',oi:'-0.03',oim:'-20',ni:'-0.04',ta:'0.5',tl:'0.15',eq:'0.35',dr:'43',ocf:'-0.02',icf:'-0.05',fcf:'0.03',rv_chg:50,oi_chg:-999,recv_days:55,recv_chg:15,seg_main:'협동로봇',seg_pct:100,rp_name:'-',rp_amt:'-',eqs:38,gr:'D',m1:35,m2:38,m3:32,m4:40,m5:48,m1t:'적자.',m2t:'부족.',m3t:'적자.',m4t:'적자.',m5t:'F-score 3/9.',tm:null,disc:[],rl:[]},
+  {n:'SK스퀘어',t:'402340',s:'반도체',sz:1.3,mc:'12조',rv:'0.1',oi:'0.5',oim:'500',ni:'0.3',ta:'18',tl:'3',eq:'15',dr:'20',ocf:'0.8',icf:'-0.2',fcf:'-0.1',rv_chg:15,oi_chg:25,recv_days:20,recv_chg:0,seg_main:'지주',seg_pct:100,rp_name:'-',rp_amt:'-',eqs:66,gr:'C',m1:62,m2:68,m3:65,m4:64,m5:70,m1t:'지주사.',m2t:'정상.',m3t:'양호.',m4t:'자회사 의존.',m5t:'F-score 6/9.',tm:null,disc:[],rl:[]},
+];
+
+// ===== MODE & STATE =====
+let currentMode = 'analyze';
+let nodes=[],edges=[],sel=null,hov=null,flt='all';
+let camX=0,camY=0,zm=1,drag=false,ds={x:0,y:0},cs={x:0,y:0};
+let alertOn=false,alertSrc=null,ripples=[],stars=[],time=0;
+// Enhanced starfield
+for(let i=0;i<400;i++)stars.push({x:Math.random(),y:Math.random(),s:Math.random()*2+0.2,b:Math.random(),twinkleSpeed:0.5+Math.random()*3});
+// Nebula clouds
+let nebulae=[];
+for(let i=0;i<6;i++)nebulae.push({x:Math.random(),y:Math.random(),r:0.08+Math.random()*0.15,hue:200+Math.random()*80,alpha:0.015+Math.random()*0.02});
+// Shooting stars
+let shootingStars=[];
+setInterval(()=>{if(Math.random()<0.3)shootingStars.push({x:Math.random()*W,y:Math.random()*H*0.5,vx:3+Math.random()*4,vy:1+Math.random()*2,life:1,len:30+Math.random()*40});},2000);
+
+// Emoji mascot
+const mascot={emoji:'🐱',x:W/2,y:H/2,targetNode:null,progress:1,bounceY:0,bouncePhase:0,waitTimer:0,trail:[],scale:1};
+function pickNextNode(){const bigNodes=nodes.filter(n=>n.sz>=1.5);if(bigNodes.length===0)return;let next;do{next=bigNodes[Math.floor(Math.random()*bigNodes.length)];}while(next===mascot.targetNode&&bigNodes.length>1);mascot.targetNode=next;mascot.progress=0;}
+
+function setMode(mode, btn) {
+  currentMode = mode;
+  document.querySelectorAll('.hud-modes button').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  closePanel();
+  const sub = document.getElementById('hudSub');
+  const hint = document.getElementById('modeHint');
+  if (mode === 'analyze') {
+    // 섹터 필터 버튼 — sectors 사전에서 자동 생성 (색띠 inline). 섹터 추가 시 자동 반영.
+    const sectorOrder = ['반도체','디스플레이','2차전지','바이오','자동차','금융','플랫폼','에너지','중공업·방산','건설','통신','기타'];
+    const allBtn = `<button class="on" style="--sc:#9ca3af" onclick="filter('all',this)">전체</button>`;
+    const secBtns = sectorOrder
+      .filter(s => sectors[s])
+      .map(s => `<button style="--sc:${sectors[s].color}" onclick="filter('${s}',this)">${s}</button>`)
+      .join('');
+    sub.innerHTML = allBtn + secBtns;
+    hint.textContent = '기업을 클릭하면 재무제표 번역 + EQS 이익 품질 분석을 볼 수 있습니다';
+    flt = 'all';
+  } else if (mode === 'disclosure') {
+    sub.innerHTML = `<button style="background:rgba(251,191,36,0.1);border-color:rgba(251,191,36,0.3);color:#fbbf24" onclick="simAlert()">📡 공시 시뮬레이션</button>`;
+    hint.textContent = '공시 시뮬레이션 버튼을 누르거나, 기업을 클릭하면 공시 영향 분석을 볼 수 있습니다';
+    flt = 'all';
+  } else {
+    sub.innerHTML = `<span style="color:#7c6cf0;font-size:11px">⏰ 기업을 클릭하면 과거로 돌아갑니다</span>`;
+    hint.textContent = '삼성전자, SK하이닉스, LG디스플레이, 에코프로비엠에 타임머신 시나리오가 준비되어 있습니다';
+    flt = 'all';
+  }
+}
+
+// ===== GRAPH ENGINE (same) =====
+function init(){
+  const nm={};
+  nodes=raw.map((r,i)=>{const sec=sectors[r.s]||{cx:0,cy:0,color:'#888'};const ang=(i/raw.length)*Math.PI*2+Math.random()*0.5;const rad=160+Math.random()*140;const n={...r,x:W/2+sec.cx*W*0.3+Math.cos(ang)*rad+(Math.random()-0.5)*60,y:H/2+sec.cy*H*0.3+Math.sin(ang)*rad+(Math.random()-0.5)*60,vx:0,vy:0,glow:0,pp:Math.random()*6.28,col:sec.color};nm[r.n]=n;return n;});
+  edges=[];
+  nodes.forEach(n=>{if(!n.rl)return;n.rl.forEach(r=>{const parts=r.split(':');const tn=parts[0],rt=parts[1],detail=parts.slice(2).join(':');const tgt=nm[tn];if(tgt)edges.push({a:n,b:tgt,type:rt,detail:detail});});});
+
+  // === 평행 엣지 offset 계산 (같은 (min,max) 쌍에 여러 relation_type 엣지가 있으면 나란히 그리기) ===
+  // ftc_group 같은 무방향 엣지는 이미 source/target이 ticker 정렬 상태라 (A→B) 하나만 저장됨.
+  // K-IFRS 지분 엣지는 방향이 있어 A→B와 B→A가 별도로 존재할 수 있음 — 이것도 같은 쌍으로 묶어 offset.
+  const pairIdx = {};
+  edges.forEach(e=>{
+    const key = [e.a.n, e.b.n].sort().join('|');
+    if(!pairIdx[key]) pairIdx[key] = [];
+    pairIdx[key].push(e);
+  });
+  // 폭 기반 동적 offset — 각 엣지의 hover-state 폭(base*1.5) 합 + 1px 여백을 누적해 per-edge 오프셋 산출.
+  // 2.5px 고정 step 대비: 가는 선끼리는 더 바짝, 굵은 실선(subsidiary)끼리는 자동으로 더 벌어져 overlap 방지.
+  Object.values(pairIdx).forEach(group=>{
+    group.forEach((e,i)=>{ e.parallelIdx=i; e.parallelCount=group.length; });
+    if(group.length===1){ group[0].parallelOffset=0; return; }
+    const PAD=0.5;  // 평행 선 사이 최소 여백 (px) - 딱 붙게 설정 (Z-order 훼손 방지를 위해 0.5로 설정)
+    const widths=group.map(e=>(EDGE_STYLES[e.type]||{width:1}).width);  // 엣지 두께만큼만 떨어뜨리기
+    const centers=[]; let acc=widths[0]/2;
+    centers.push(acc);
+    for(let i=1;i<group.length;i++){ acc+=widths[i-1]/2+PAD+widths[i]/2; centers.push(acc); }
+    const mid=(centers[0]+centers[group.length-1])/2;
+    group.forEach((e,i)=>{ e.parallelOffset=centers[i]-mid; });
+  });
+}
+function physics(){const cx=W/2,cy=H/2;nodes.forEach(n=>{n.vx+=(cx-n.x)*0.00015;n.vy+=(cy-n.y)*0.00015;nodes.forEach(m=>{if(n===m)return;const dx=n.x-m.x,dy=n.y-m.y,d=Math.sqrt(dx*dx+dy*dy)||1;if(d<280){const f=500/(d*d);n.vx+=dx/d*f;n.vy+=dy/d*f;}});});edges.forEach(e=>{const dx=e.b.x-e.a.x,dy=e.b.y-e.a.y,d=Math.sqrt(dx*dx+dy*dy)||1;const f=(d-200)*0.002;e.a.vx+=dx/d*f;e.a.vy+=dy/d*f;e.b.vx-=dx/d*f;e.b.vy-=dy/d*f;});nodes.forEach(n=>{n.vx*=0.88;n.vy*=0.88;n.x+=n.vx;n.y+=n.vy;n.pp+=0.015;if(alertOn&&alertSrc){if(n.n===alertSrc)n.glow=Math.min(1,n.glow+0.04);else{const h1=edges.some(e=>(e.a.n===alertSrc&&e.b.n===n.n)||(e.b.n===alertSrc&&e.a.n===n.n));if(h1)n.glow=Math.min(0.8,n.glow+0.025);else n.glow=Math.max(0,n.glow-0.015);}}else n.glow=Math.max(0,n.glow-0.02);});}
+function draw(){
+time+=0.016;x.clearRect(0,0,W,H);
+
+// === BACKGROUND: deep space gradient ===
+const bgGrad=x.createRadialGradient(W/2,H/2,0,W/2,H/2,W*0.7);
+bgGrad.addColorStop(0,'#0a0f1e');bgGrad.addColorStop(0.5,'#070b16');bgGrad.addColorStop(1,'#040711');
+x.fillStyle=bgGrad;x.fillRect(0,0,W,H);
+
+// === NEBULAE ===
+nebulae.forEach(nb=>{const ng=x.createRadialGradient(nb.x*W,nb.y*H,0,nb.x*W,nb.y*H,nb.r*W);ng.addColorStop(0,`hsla(${nb.hue},60%,40%,${nb.alpha})`);ng.addColorStop(0.5,`hsla(${nb.hue},50%,30%,${nb.alpha*0.5})`);ng.addColorStop(1,'transparent');x.fillStyle=ng;x.fillRect(0,0,W,H);});
+
+// === STARS with twinkle ===
+stars.forEach(s=>{const tw=Math.sin(time*s.twinkleSpeed+s.b*10)*0.4+0.6;const bright=tw*s.s*0.3;x.beginPath();x.arc(s.x*W,s.y*H,s.s*0.6,0,Math.PI*2);x.fillStyle=`rgba(200,210,255,${Math.min(1,bright)})`;x.fill();if(s.s>1.5){x.beginPath();x.moveTo(s.x*W-s.s*2,s.y*H);x.lineTo(s.x*W+s.s*2,s.y*H);x.moveTo(s.x*W,s.y*H-s.s*2);x.lineTo(s.x*W,s.y*H+s.s*2);x.strokeStyle=`rgba(200,220,255,${bright*0.3})`;x.lineWidth=0.5;x.stroke();}});
+
+// === SHOOTING STARS ===
+shootingStars=shootingStars.filter(ss=>{ss.x+=ss.vx;ss.y+=ss.vy;ss.life-=0.02;if(ss.life<=0)return false;x.beginPath();x.moveTo(ss.x,ss.y);x.lineTo(ss.x-ss.vx*ss.len/5,ss.y-ss.vy*ss.len/5);const sg=x.createLinearGradient(ss.x,ss.y,ss.x-ss.vx*ss.len/5,ss.y-ss.vy*ss.len/5);sg.addColorStop(0,`rgba(255,255,255,${ss.life*0.8})`);sg.addColorStop(1,'transparent');x.strokeStyle=sg;x.lineWidth=1;x.stroke();return true;});
+
+x.save();x.translate(camX,camY);x.scale(zm,zm);
+
+// === RIPPLES ===
+ripples=ripples.filter(r=>{r.radius+=3;r.alpha-=0.008;if(r.alpha<=0)return false;x.beginPath();x.arc(r.x,r.y,r.radius,0,Math.PI*2);x.strokeStyle=`rgba(77,166,255,${r.alpha})`;x.lineWidth=1.5;x.stroke();return true;});
+
+// === EDGES ===
+// === 엣지 그리기 (평행 offset + 방향 화살표 + 선택 강조) ===
+const ARROW_TYPES = new Set(['subsidiary','associate','investment','dart_filing']);  // 방향성 있는 관계만 화살표
+edges.forEach(e=>{
+  const isH=hov&&(e.a.n===hov.n||e.b.n===hov.n);
+  const isA=alertOn&&alertSrc&&(e.a.n===alertSrc||e.b.n===alertSrc);
+  const fa=flt==='all'||e.a.s===flt,fb=flt==='all'||e.b.s===flt;
+  if(!fa&&!fb)return;
+  // sel 기반 alpha — 선택 노드와 연결된 엣지만 선명
+  const selConnected = !sel || (e.a===sel || e.b===sel);
+  const st=EDGE_STYLES[e.type]||{color:'#999',width:0.5,dash:[]};
+
+  // 평행 offset — 같은 쌍에 여러 엣지 있으면 수직 방향으로 약간 떨어뜨려 나란히
+  const dx0=e.b.x-e.a.x, dy0=e.b.y-e.a.y;
+  const len=Math.sqrt(dx0*dx0+dy0*dy0)||1;
+  let px=-dy0/len, py=dx0/len;  // perpendicular unit
+  if(e.a.n > e.b.n) { px = -px; py = -py; } // 법선벡터 방향 통일 (방향 오프셋 상쇄 방지)
+  
+  // offset은 init()에서 폭 기반 사전 계산됨 (e.parallelOffset)
+  const off = e.parallelOffset || 0;
+  const x1=e.a.x+px*off, y1=e.a.y+py*off;
+  const x2=e.b.x+px*off, y2=e.b.y+py*off;
+
+  x.beginPath();x.moveTo(x1,y1);x.lineTo(x2,y2);
+  if(isA){x.strokeStyle=`rgba(251,191,36,${0.5+Math.sin(time*4)*0.2})`;x.lineWidth=2;x.setLineDash([6,4]);x.globalAlpha=1.0;}
+  else if(isH||(sel&&selConnected)){x.strokeStyle=st.color;x.lineWidth=st.width*1.5;x.setLineDash(st.dash);x.globalAlpha=1.0;}
+  else if(sel&&!selConnected){x.strokeStyle=st.color;x.lineWidth=st.width;x.setLineDash(st.dash);x.globalAlpha=0.08;}
+  else{x.strokeStyle=st.color;x.lineWidth=st.width;x.setLineDash(st.dash);x.globalAlpha=0.6;}
+  x.stroke();
+
+  // 흐름 효과 — hover/select 시 방향성 있는 엣지에 움직이는 점선 오버레이 (source→target 방향으로 흐름)
+  const isFlow = ARROW_TYPES.has(e.type) && (isH || (sel && selConnected));
+  if(isFlow){
+    x.beginPath();x.moveTo(x1,y1);x.lineTo(x2,y2);
+    x.setLineDash([10,16]);
+    x.lineDashOffset = -time * 45;  // 음수 → path 방향(a→b)으로 흐름
+    x.strokeStyle = st.color;
+    x.lineWidth = st.width * 1.6;
+    x.globalAlpha = 0.95;
+    x.stroke();
+    x.lineDashOffset = 0;
+  }
+
+  // 방향 화살표 (K-IFRS 지분·주석 관계만 — ftc_group/manual은 무방향, 공시 시뮬레이션 isA 제외)
+  if(ARROW_TYPES.has(e.type) && !isA && x.globalAlpha >= 0.3){
+    x.setLineDash([]);
+    const nodeR = e.b.sz*22;
+    const tipX = x2 - (dx0/len)*nodeR;
+    const tipY = y2 - (dy0/len)*nodeR;
+    const arrowSize = isFlow ? Math.max(14, st.width*6) : Math.max(9, st.width*4);
+    const ang = Math.atan2(dy0, dx0);
+    x.globalAlpha = isFlow ? 1.0 : Math.min(0.9, x.globalAlpha);
+    x.beginPath();
+    x.moveTo(tipX, tipY);
+    x.lineTo(tipX - arrowSize*Math.cos(ang-0.5), tipY - arrowSize*Math.sin(ang-0.5));
+    x.lineTo(tipX - arrowSize*Math.cos(ang+0.5), tipY - arrowSize*Math.sin(ang+0.5));
+    x.closePath();
+    x.fillStyle = st.color;
+    x.fill();
+  }
+
+  x.globalAlpha=1.0;x.setLineDash([]);
+});
+
+// === NODES as 3D PLANETS ===
+// 선택된 노드의 이웃 집합 (sel 기반 강조용)
+const selNeighbors = sel ? new Set(edges.filter(e=>e.a===sel||e.b===sel).flatMap(e=>[e.a,e.b])) : null;
+nodes.forEach(n=>{
+  const filtered=flt!=='all'&&n.s!==flt;
+  const selFaded = sel && n!==sel && (!selNeighbors || !selNeighbors.has(n));
+  const r=n.sz*18;
+  const pulse=Math.sin(n.pp)*0.08+1;
+  const pr=r*pulse;
+
+  // 선택 모드에서 이웃 아닌 노드는 전체적으로 흐리게
+  x.save();
+  if(selFaded) x.globalAlpha = 0.15;
+
+  // Alert glow
+  if(n.glow>0.01){const gr=pr*(2.5+n.glow*2);const g=x.createRadialGradient(n.x,n.y,pr*0.5,n.x,n.y,gr);g.addColorStop(0,n.n===alertSrc?`rgba(251,191,36,${n.glow*0.5})`:`rgba(77,166,255,${n.glow*0.4})`);g.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=g;x.beginPath();x.arc(n.x,n.y,gr,0,Math.PI*2);x.fill();}
+
+  const isH=hov&&hov.n===n.n,isS=sel&&sel.n===n.n;
+  const alpha=filtered?0.15:1;
+
+  // Parse hex color
+  const col=n.col;
+  const hr=parseInt(col.slice(1,3),16),hg=parseInt(col.slice(3,5),16),hb=parseInt(col.slice(5,7),16);
+
+  // === 3D PLANET: radial gradient with highlight ===
+  const lightX=n.x-pr*0.3, lightY=n.y-pr*0.3;
+  const planetGrad=x.createRadialGradient(lightX,lightY,pr*0.1,n.x,n.y,pr);
+
+  if(isS){
+    planetGrad.addColorStop(0,`rgba(${Math.min(255,hr+100)},${Math.min(255,hg+100)},${Math.min(255,hb+100)},${alpha})`);
+    planetGrad.addColorStop(0.4,`rgba(${hr},${hg},${hb},${alpha})`);
+    planetGrad.addColorStop(1,`rgba(${Math.floor(hr*0.3)},${Math.floor(hg*0.3)},${Math.floor(hb*0.3)},${alpha})`);
+    x.shadowColor=col;x.shadowBlur=30;
+  }else if(isH){
+    planetGrad.addColorStop(0,`rgba(${Math.min(255,hr+80)},${Math.min(255,hg+80)},${Math.min(255,hb+80)},${alpha*0.9})`);
+    planetGrad.addColorStop(0.4,`rgba(${hr},${hg},${hb},${alpha*0.85})`);
+    planetGrad.addColorStop(1,`rgba(${Math.floor(hr*0.25)},${Math.floor(hg*0.25)},${Math.floor(hb*0.25)},${alpha*0.8})`);
+    x.shadowColor=col;x.shadowBlur=20;
+  }else{
+    planetGrad.addColorStop(0,`rgba(${Math.min(255,hr+60)},${Math.min(255,hg+60)},${Math.min(255,hb+60)},${alpha*0.7})`);
+    planetGrad.addColorStop(0.5,`rgba(${hr},${hg},${hb},${alpha*0.5})`);
+    planetGrad.addColorStop(1,`rgba(${Math.floor(hr*0.2)},${Math.floor(hg*0.2)},${Math.floor(hb*0.2)},${alpha*0.4})`);
+    x.shadowBlur=0;
+  }
+
+  x.beginPath();x.arc(n.x,n.y,pr,0,Math.PI*2);
+  x.fillStyle=planetGrad;x.fill();
+  x.shadowBlur=0;
+
+  // Atmosphere ring
+  if(!filtered&&pr>12){
+    const atmo=x.createRadialGradient(n.x,n.y,pr*0.9,n.x,n.y,pr*1.15);
+    atmo.addColorStop(0,'transparent');
+    atmo.addColorStop(0.5,`rgba(${hr},${hg},${hb},0.08)`);
+    atmo.addColorStop(1,'transparent');
+    x.beginPath();x.arc(n.x,n.y,pr*1.15,0,Math.PI*2);x.fillStyle=atmo;x.fill();
+  }
+
+  // Specular highlight (small bright spot)
+  if(!filtered){
+    const specGrad=x.createRadialGradient(lightX,lightY,0,lightX,lightY,pr*0.35);
+    specGrad.addColorStop(0,`rgba(255,255,255,${alpha*0.25})`);
+    specGrad.addColorStop(1,'transparent');
+    x.beginPath();x.arc(lightX,lightY,pr*0.35,0,Math.PI*2);x.fillStyle=specGrad;x.fill();
+  }
+
+  // EQS arc (analyze mode)
+  if(!filtered&&pr>10&&currentMode==='analyze'){const ec=n.eqs>=70?'#4ade80':n.eqs>=50?'#fbbf24':'#f87171';x.beginPath();x.arc(n.x,n.y,pr+5,-(Math.PI/2),-(Math.PI/2)+(Math.PI*2*n.eqs/100));x.strokeStyle=ec+'88';x.lineWidth=2;x.stroke();}
+
+  // Mode-specific labels
+  if(currentMode==='timemachine'&&n.tm&&!filtered){x.fillStyle='rgba(124,108,240,0.9)';x.font='bold 9px -apple-system,sans-serif';x.textAlign='center';x.fillText('⏰ 타임머신',n.x,n.y-pr-10);}
+  if(n.glow>0.3&&n.n!==alertSrc&&!filtered&&currentMode==='disclosure'){const hasT=(ts)=>edges.some(e=>((e.a.n===alertSrc&&e.b.n===n.n)||(e.b.n===alertSrc&&e.a.n===n.n))&&ts.includes(e.type));const imp=hasT(['subsidiary','associate'])?'↑ 수혜 예상':hasT(['competition'])?'↓ 경쟁 압박':'● 영향권';x.fillStyle=imp.includes('수혜')?'rgba(74,222,128,0.9)':imp.includes('경쟁')?'rgba(248,113,113,0.9)':'rgba(77,166,255,0.9)';x.font='bold 9px -apple-system,sans-serif';x.textAlign='center';x.fillText(imp,n.x,n.y-pr-10);}
+
+  // Name label
+  if(!filtered||isH){x.fillStyle=`rgba(255,255,255,${filtered?0.2:0.85})`;x.font=`${n.sz>2?'12':'10'}px -apple-system,sans-serif`;x.textAlign='center';x.fillText(n.n,n.x,n.y+pr+16);}
+  x.restore();  // selFaded 처리용 globalAlpha 복원
+});
+
+// === MASCOT EMOJI ===
+if(mascot.targetNode===null||mascot.progress>=1){mascot.waitTimer+=0.016;if(mascot.waitTimer>2){mascot.waitTimer=0;pickNextNode();}}
+if(mascot.targetNode&&mascot.progress<1){
+  mascot.progress=Math.min(1,mascot.progress+0.012);
+  const t=mascot.progress;
+  const ease=t<0.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+  const prevNode=mascot.prevNode||mascot.targetNode;
+  mascot.x=prevNode.x+(mascot.targetNode.x-prevNode.x)*ease;
+  mascot.y=prevNode.y+(mascot.targetNode.y-prevNode.y)*ease;
+  mascot.bounceY=Math.abs(Math.sin(t*Math.PI))*40;
+  mascot.scale=1+Math.sin(t*Math.PI)*0.15;
+  // trail
+  if(Math.random()<0.3)mascot.trail.push({x:mascot.x,y:mascot.y-mascot.bounceY,alpha:0.4,s:6+Math.random()*4});
+}else if(mascot.targetNode){
+  mascot.x=mascot.targetNode.x;mascot.y=mascot.targetNode.y;
+  mascot.bouncePhase+=0.05;
+  mascot.bounceY=Math.abs(Math.sin(mascot.bouncePhase))*8;
+  mascot.scale=1+Math.sin(mascot.bouncePhase*2)*0.05;
+}
+// draw trail
+mascot.trail=mascot.trail.filter(p=>{p.alpha-=0.015;p.s*=0.97;if(p.alpha<=0)return false;x.beginPath();x.arc(p.x,p.y,p.s,0,Math.PI*2);x.fillStyle=`rgba(255,220,100,${p.alpha*0.3})`;x.fill();return true;});
+// draw mascot shadow
+const mSize=22*mascot.scale/zm;
+x.beginPath();x.ellipse(mascot.x,mascot.y+8/zm,mSize*0.6,mSize*0.2,0,0,Math.PI*2);x.fillStyle='rgba(0,0,0,0.2)';x.fill();
+// draw mascot
+x.font=`${Math.round(mSize*2)}px serif`;x.textAlign='center';x.textBaseline='middle';
+x.fillText(mascot.emoji,mascot.x,mascot.y-mascot.bounceY/zm);
+
+// Update prevNode for next hop
+if(mascot.progress>=1&&mascot.targetNode){mascot.prevNode=mascot.targetNode;}
+
+x.restore();physics();requestAnimationFrame(draw);}
+
+// ===== INTERACTION =====
+c.addEventListener('mousemove',e=>{if(drag){camX=cs.x+(e.clientX-ds.x);camY=cs.y+(e.clientY-ds.y);return;}const mx=(e.clientX-camX)/zm,my=(e.clientY-camY)/zm;hov=null;nodes.forEach(n=>{const dx=n.x-mx,dy=n.y-my;if(Math.sqrt(dx*dx+dy*dy)<n.sz*22){hov=n;c.style.cursor='pointer';}});if(!hov)c.style.cursor='grab';});
+c.addEventListener('mousedown',e=>{const mx=(e.clientX-camX)/zm,my=(e.clientY-camY)/zm;let clicked=null;nodes.forEach(n=>{const dx=n.x-mx,dy=n.y-my;if(Math.sqrt(dx*dx+dy*dy)<n.sz*22)clicked=n;});if(clicked){sel=clicked;if(currentMode==='analyze')showAnalyze(clicked);else if(currentMode==='disclosure')showDisclosure(clicked);else showTimemachine(clicked);}else{sel=null;closePanel();drag=true;ds={x:e.clientX,y:e.clientY};cs={x:camX,y:camY};c.style.cursor='grabbing';}});
+// ESC 키로 선택 해제
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){sel=null;closePanel();}});
+c.addEventListener('mouseup',()=>{drag=false;c.style.cursor='grab';});
+c.addEventListener('wheel',e=>{const d=e.deltaY>0?0.9:1.1;const mx=e.clientX,my=e.clientY;const wx=(mx-camX)/zm,wy=(my-camY)/zm;zm=Math.max(0.2,Math.min(4,zm*d));camX=mx-wx*zm;camY=my-wy*zm;e.preventDefault();},{passive:false});
+
+function closePanel(){document.getElementById('panel').classList.remove('open');sel=null;}
+function filter(f,btn){flt=f;document.querySelectorAll('.hud-sub button').forEach(b=>b.classList.remove('on'));btn.classList.add('on');}
+function simAlert(){alertOn=true;alertSrc='삼성전자';document.getElementById('alert').classList.add('show');const src=nodes.find(n=>n.n==='삼성전자');if(src)for(let i=0;i<3;i++)setTimeout(()=>ripples.push({x:src.x,y:src.y,radius:src.sz*18,alpha:0.6}),i*400);setTimeout(()=>{alertOn=false;alertSrc=null;},10000);}
+
+// ===== PANEL: ANALYZE =====
+function showAnalyze(n) {
+  const p = document.getElementById('panel');
+  const eqsCol=n.eqs>=70?'#4ade80':n.eqs>=50?'#fbbf24':'#f87171';
+  const oiSign=String(n.oi).startsWith('-');
+  const isFinancial=n.s==='금융';
+  const margin100=`100원 팔면 ${Math.abs(parseFloat(n.oim)).toFixed(0)}원이 ${parseFloat(n.oim)>0?'남습니다':'손해입니다'}`;
+  let cps=[];
+  if(Math.abs(n.recv_chg)>20&&n.recv_days>0)cps.push(`매출채권 회수 ${n.recv_chg>0?n.recv_days+'일로 늘어남':'개선됨'} (${n.recv_chg>0?'+':''}${n.recv_chg}%)`);
+  if(n.seg_pct>50)cps.push(`${n.seg_main} 부문이 이익의 ${n.seg_pct}% — 사실상 "${n.seg_main} 회사"`);
+  if(n.rp_name&&n.rp_name!=='-')cps.push(`${n.rp_name} 향 관계사 거래 ${n.rp_amt}`);
+  const cpHtml=cps.length?cps.map((c,i)=>`<div class="checkpoint"><span style="color:#fbbf24;font-weight:600">${i+1}.</span> <span class="cp-title">${c}</span></div>`).join(''):'<div style="color:#555;font-size:11px">특이사항 없음</div>';
+  const rels=edges.filter(e=>e.a.n===n.n||e.b.n===n.n);
+  const relHtml=rels.map(e=>{const o=e.a.n===n.n?e.b:e.a;return `<span class="tag">${e.type} ${o.n}</span>`;}).join('');
+  const mods=[{id:'M1',name:'발생액 품질',s:n.m1,t:n.m1t,c:'#4da6ff'},{id:'M2',name:'분식 확률',s:n.m2,t:n.m2t,c:'#f87171'},{id:'M3',name:'현금흐름 괴리',s:n.m3,t:n.m3t,c:'#fbbf24'},{id:'M4',name:'이익 지속성',s:n.m4,t:n.m4t,c:'#4ade80'},{id:'M5',name:'재무 건전성',s:n.m5,t:n.m5t,c:'#7c6cf0'}];
+  const modsHtml=mods.filter(m=>m.s>0).map(m=>{const mc=m.s>=70?'#4ade80':m.s>=50?'#fbbf24':'#f87171';return `<div class="eqs-module"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px"><div><span style="font-size:10px;font-weight:600;color:${m.c};background:${m.c}18;padding:1px 5px;border-radius:3px">${m.id}</span> <span style="font-size:12px;font-weight:500">${m.name}</span></div><span style="font-size:13px;font-weight:600;color:${mc}">${m.s}</span></div><div class="eqs-bar"><div class="eqs-fill" style="width:${m.s}%;background:${mc}"></div></div><div style="font-size:10px;color:#888;margin-top:3px">${m.t}</div></div>`;}).join('');
+  const eqsExplain=n.eqs>=70?`이익 품질 <strong style="color:#4ade80">양호</strong>. 재무제표를 상당 부분 신뢰 가능.`:n.eqs>=50?`이익 품질 <strong style="color:#fbbf24">주의</strong> 필요. 일부 경고 신호 감지.`:`이익 품질 <strong style="color:#f87171">경고</strong>. 보고된 이익의 질에 의문. 추가 확인 필요.`;
+
+  document.getElementById('panelInner').innerHTML=`
+    <h2 style="color:#4da6ff;font-size:18px">${n.n}</h2>
+    <div style="color:#666;font-size:12px;margin-bottom:16px">${n.t} | ${n.s} | 시총 ${n.mc}</div>
+    ${!isFinancial?`
+    <div class="fin-card"><div class="card-title">💰 돈을 잘 벌고 있나?<span class="src">손익계산서</span></div>
+      <div class="fin-row"><span class="label">매출액</span><div class="fin-bar-wrap"><div class="fin-bar" style="width:100%;background:#4da6ff"></div></div><span class="value">${n.rv}조</span><span class="fin-change ${n.rv_chg>=0?'up':'down'}">${n.rv_chg>=0?'+':''}${n.rv_chg}%</span></div>
+      <div class="fin-row"><span class="label">영업이익</span><div class="fin-bar-wrap"><div class="fin-bar" style="width:${Math.min(100,Math.abs(parseFloat(n.oi)/parseFloat(n.rv)*100*3))}%;background:${oiSign?'#f87171':'#4ade80'}"></div></div><span class="value" style="color:${oiSign?'#f87171':'#4ade80'}">${n.oi}조</span><span class="fin-change ${n.oi_chg>=0?'up':'down'}">${Math.abs(n.oi_chg)>500?(n.oi_chg>0?'흑전':'적전'):(n.oi_chg>=0?'+':'')+n.oi_chg+'%'}</span></div>
+      <div class="fin-insight">"${margin100}"</div></div>
+    <div class="fin-card"><div class="card-title">🏦 곳간은 튼튼한가?<span class="src">재무상태표</span></div>
+      <div class="fin-row"><span class="label">자산</span><div class="fin-bar-wrap"><div class="fin-bar" style="width:100%;background:#4da6ff"></div></div><span class="value">${n.ta}조</span></div>
+      <div class="fin-row"><span class="label">부채</span><div class="fin-bar-wrap"><div class="fin-bar" style="width:${Math.min(100,parseFloat(n.tl)/parseFloat(n.ta)*100)}%;background:#f87171"></div></div><span class="value">${n.tl}조</span></div>
+      <div class="fin-insight">"부채비율 ${n.dr}%" — ${n.dr<100?'양호 ✅':n.dr<200?'보통 ⚠':'높음 🔴'}</div></div>
+    <div class="fin-card"><div class="card-title">💵 현금이 진짜 들어오나?<span class="src">현금흐름표</span></div>
+      <div class="fin-row"><span class="label">영업활동</span><span class="value" style="color:${String(n.ocf).startsWith('-')?'#f87171':'#4ade80'}">${n.ocf}조 ${String(n.ocf).startsWith('-')?'🔴':'🟢'}</span></div>
+      <div class="fin-row"><span class="label">투자활동</span><span class="value" style="color:#4da6ff">${n.icf}조</span></div>
+      <div class="fin-row"><span class="label">재무활동</span><span class="value" style="color:#fbbf24">${n.fcf}조</span></div></div>
+    `:`<div class="fin-card"><div class="card-title">🏦 금융업 재무 요약</div><div class="fin-row"><span class="label">영업수익</span><span class="value">${n.rv}조</span></div><div class="fin-row"><span class="label">영업이익</span><span class="value" style="color:#4ade80">${n.oi}조</span></div><div class="fin-insight">금융업은 별도 분석 기준 적용</div></div>`}
+    <div class="section-title" style="color:#fbbf24">⚡ 주목 포인트</div>${cpHtml}
+    <div class="section-title" style="color:#4da6ff">🔬 이익 해부 (EQS)</div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><span style="font-size:32px;font-weight:700;color:${eqsCol}">${n.eqs}</span><span style="font-size:13px;padding:3px 8px;border-radius:5px;background:${eqsCol}15;color:${eqsCol};font-weight:600">${n.gr}등급</span></div>
+    <div class="eqs-what">${eqsExplain}<br><br>⚕️ EQS는 "이 기업의 이익을 믿어도 되는 정도"를 진단합니다. 주가 예측이 아닌 재무 건강 진단.</div>
+    ${modsHtml}
+    <div class="section-title" style="color:#888">🔗 관계 (${rels.length}개)</div>${relHtml||'없음'}`;
+  p.classList.add('open');
+}
+
+// ===== PANEL: DISCLOSURE =====
+function showDisclosure(n) {
+  const p=document.getElementById('panel');
+  const disc=n.disc&&n.disc.length?n.disc[0]:null;
+  const rels=edges.filter(e=>e.a.n===n.n||e.b.n===n.n);
+  let impactsHtml='';
+  if(disc){impactsHtml=disc.impacts.map(imp=>`<div class="disc-impact" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06)"><span class="company">${imp.n} <span style="color:#666;font-size:10px">(${imp.type})</span></span><span class="badge" style="background:${imp.badge_col}18;color:${imp.badge_col};border:1px solid ${imp.badge_col}33">${imp.badge} ${imp.conf}%</span></div>`).join('');}
+  document.getElementById('panelInner').innerHTML=`
+    <h2 style="color:#fbbf24;font-size:18px">📡 ${n.n} 공시</h2>
+    <div style="color:#666;font-size:12px;margin-bottom:16px">${n.t} | ${n.s}</div>
+    ${disc?`
+    <div style="background:rgba(77,166,255,0.05);border:1px solid rgba(77,166,255,0.12);border-radius:10px;padding:14px;margin-bottom:14px">
+      <div style="font-size:10px;color:#4da6ff;margin-bottom:4px">최근 주요 공시</div>
+      <div style="font-size:14px;font-weight:600;color:#fff">${disc.title}</div>
+    </div>
+    <div class="section-title" style="color:#fbbf24">📊 영향 분석 (CatBoost + Calibration)</div>
+    ${impactsHtml}
+    <div style="font-size:10px;color:#555;margin-top:8px;line-height:1.5">* 신뢰도 60% 미만은 "판단 유보"로 표시<br>* 과거 유사 패턴 기반 분류 (예측이 아닌 통계 참고)</div>
+    `:`<div style="color:#555;font-size:12px;padding:30px 0;text-align:center">최근 주요 공시 데이터 없음<br><br>공시 시뮬레이션 버튼을 눌러<br>삼성전자의 공시 영향 분석을 체험해보세요</div>`}
+    <div class="section-title" style="color:#888">🔗 관계 네트워크</div>
+    ${rels.map(e=>{const o=e.a.n===n.n?e.b:e.a;return `<span class="tag">${e.type} ${o.n}</span>`;}).join('')||'없음'}`;
+  p.classList.add('open');
+}
+
+// ===== PANEL: TIMEMACHINE =====
+function showTimemachine(n) {
+  const p=document.getElementById('panel');
+  if(!n.tm){
+    document.getElementById('panelInner').innerHTML=`
+      <h2 style="color:#7c6cf0;font-size:18px">🕰 타임머신</h2>
+      <div style="color:#666;font-size:12px;margin-bottom:20px">${n.n}</div>
+      <div style="text-align:center;padding:40px 0;color:#555">
+        <div style="font-size:40px;margin-bottom:12px">🔒</div>
+        <div style="font-size:13px">이 기업의 타임머신 시나리오는<br>아직 준비되지 않았습니다</div>
+        <div style="font-size:11px;color:#444;margin-top:12px">삼성전자, SK하이닉스, LG디스플레이,<br>에코프로비엠에서 체험 가능합니다</div>
+      </div>`;
+    p.classList.add('open');return;
+  }
+  const tm=n.tm;
+  const newsHtml=tm.news.map(nw=>`<div class="tm-news-item"><span class="src">${nw.src}</span><span class="headline">${nw.h}</span></div>`).join('');
+  const supplyHtml=tm.answer.supply.map(s=>`<div class="tm-result-row"><span style="color:#888">${s.n}</span><span style="color:${s.chg.startsWith('+')?'#4ade80':'#f87171'};font-weight:500">${s.chg}</span></div>`).join('');
+  
+  document.getElementById('panelInner').innerHTML=`
+    <div class="tm-scene">
+      <div class="tm-header">
+        <div style="font-size:11px;color:#7c6cf0;letter-spacing:2px">TIME MACHINE</div>
+        <div class="tm-date">${tm.date}</div>
+        <div class="tm-sub">당신은 이 시점으로 돌아왔습니다</div>
+      </div>
+      <div class="tm-disclosure">
+        <div class="tm-label">📡 방금 공시가 떴습니다</div>
+        <div class="tm-title">${n.n} — ${tm.disclosure}</div>
+      </div>
+      <div style="font-size:11px;color:#fbbf24;font-weight:500;margin-bottom:6px">📰 그때 뉴스 반응</div>
+      <div class="tm-news">${newsHtml}</div>
+      <div style="text-align:center;font-size:13px;color:#999;margin:16px 0 8px">당신의 선택은?</div>
+      <div class="tm-choices" id="tmChoices">
+        <div class="tm-choice buy" onclick="revealTM(this,'매수')">🟢<br>매수</div>
+        <div class="tm-choice hold" onclick="revealTM(this,'관망')">⚪<br>관망</div>
+        <div class="tm-choice sell" onclick="revealTM(this,'매도')">🔴<br>매도</div>
+      </div>
+      <div class="tm-result" id="tmResult">
+        <div class="tm-result-card">
+          <div style="font-size:11px;color:#888;margin-bottom:6px;text-align:center">이후 실제 결과</div>
+          <div class="big-num" style="color:${tm.answer.stock_chg.startsWith('+')?'#4ade80':'#f87171'}">${n.n} ${tm.answer.stock_chg}</div>
+          ${supplyHtml?`<div style="margin-top:10px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.05)"><div style="font-size:10px;color:#666;margin-bottom:4px">관련 기업</div>${supplyHtml}</div>`:''}
+        </div>
+        <div class="tm-lesson">
+          <div class="lesson-title">💡 이 공시에서 배울 점</div>
+          <div class="lesson-body">${tm.answer.lesson.replace(/\n/g,'<br>')}</div>
+        </div>
+        <div class="tm-eqs-hint">
+          <div style="font-weight:600;margin-bottom:4px">🔬 그때 EQS가 말해줬을 것</div>
+          ${tm.answer.eqs_hint.replace(/\n/g,'<br>')}
+        </div>
+      </div>
+    </div>`;
+  p.classList.add('open');
+}
+
+function revealTM(el, choice) {
+  document.getElementById('tmChoices').querySelectorAll('.tm-choice').forEach(c=>{c.style.opacity='0.3';c.style.pointerEvents='none';});
+  el.style.opacity='1';el.style.border='2px solid #fff';
+  document.getElementById('tmResult').style.display='block';
+}
+
+// INIT — Phase 2f: fetch로 data/graph_top50.json 로드 후 init/draw
+fetch('../data/graph_top50.json')
+  .then(r => { if (!r.ok) throw new Error('graph_top50.json 로드 실패 — `python -m modules.relation export` 먼저 실행'); return r.json(); })
+  .then(data => {
+    raw = data;
+    init();
+    draw();
+    setMode('analyze', document.querySelector('[data-mode="analyze"]'));
+    console.log(`[viewer] 노드 ${nodes.length}, 엣지 ${edges.length} 로드 완료`);
+  })
+  .catch(err => {
+    console.error(err);
+    document.body.innerHTML = `<pre style="color:#fbbf24;padding:40px;font-family:monospace">
+[viewer 로드 에러]
+${err.message}
+
+해결:
+  1. python -m modules.relation run  (전체 파이프라인 실행)
+  2. 또는 python -m modules.relation export  (graph_top50.json 생성)
+  3. 로컬 서버가 modules/relation/data/ 경로를 서빙하는지 확인
+
+상세 로그는 개발자 콘솔(F12)에 있습니다.
+</pre>`;
+  });
+</script>
+</body>
+</html>

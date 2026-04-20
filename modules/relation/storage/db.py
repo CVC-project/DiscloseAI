@@ -1,10 +1,14 @@
-"""Relation 모듈 로컬 DB — 개발/테스트용 SQLite"""
+"""Relation 모듈 로컬 DB — 개발/테스트용 SQLite."""
 
 import os
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-_DB_PATH = os.path.join(os.path.dirname(__file__), "data", "relation.db")
+# storage/db.py -> modules/relation/data/relation.db
+_MODULE_DIR = os.path.dirname(os.path.dirname(__file__))
+_DB_PATH = os.path.join(_MODULE_DIR, "data", "relation.db")
+
 engine = create_engine(f"sqlite:///{_DB_PATH}")
 LocalSession = sessionmaker(bind=engine)
 
