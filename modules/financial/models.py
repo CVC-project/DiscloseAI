@@ -4,6 +4,7 @@
 shared/models.py의 FinancialData와 동일한 구조를 유지하면
 나중에 Supabase로 옮길 때 편합니다.
 """
+
 from sqlalchemy import Column, String, Integer, Float
 from sqlalchemy.orm import declarative_base
 
@@ -12,6 +13,7 @@ Base = declarative_base()
 
 class FinancialLocal(Base):
     """로컬 재무 데이터 (shared/models.py의 FinancialData와 동일 구조)"""
+
     __tablename__ = "financial_local"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
