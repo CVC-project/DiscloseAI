@@ -29,6 +29,7 @@ def run_collect():
     log.info("수집 시작...")
     try:
         from modules.disclosure.collector import collect, backfill_ai
+
         collect()
         log.info("수집 완료. 백필 시작...")
         filled = backfill_ai(max_records=50)
@@ -41,6 +42,7 @@ def is_market_hours() -> bool:
     """현재 시각이 장중(09:00~15:30)인지 확인."""
     now = datetime.now().time()
     from datetime import time as t
+
     return t(9, 0) <= now <= t(15, 30)
 
 
@@ -58,6 +60,7 @@ def run_financial_update():
     log.info("[재무제표] 업데이트 시작...")
     try:
         from modules.disclosure.collector import fetch_financial_statements
+
         fetch_financial_statements(quarters=8)
         log.info("[재무제표] 업데이트 완료.")
     except Exception as e:

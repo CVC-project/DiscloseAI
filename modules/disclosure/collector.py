@@ -1,4 +1,3 @@
-
 """
 modules/disclosure/collector.py
 DART 공시 수집 + 20년 차 CPA 심화 분석 엔진
@@ -102,15 +101,29 @@ INSIDER_BATCH_THRESHOLD = 5
 
 # 고관심 포함 키워드
 INCLUDE_PRIORITY = [
-    "공급계약", "시설투자", "대표이사", "사내이사",
-    "유상증자", "무상증자", "전환사채", "신주인수권",
-    "합병", "분할", "영업양수도", "자기주식",
-    "매출액변동", "손익변동", "실적발표",
-    "회사채", "기업어음", "단기사채",
+    "공급계약",
+    "시설투자",
+    "대표이사",
+    "사내이사",
+    "유상증자",
+    "무상증자",
+    "전환사채",
+    "신주인수권",
+    "합병",
+    "분할",
+    "영업양수도",
+    "자기주식",
+    "매출액변동",
+    "손익변동",
+    "실적발표",
+    "회사채",
+    "기업어음",
+    "단기사채",
 ]
 
 
 # ─── 헬퍼 함수 ───────────────────────────────────────────────────────────────
+
 
 def _is_noise(report_nm: str) -> bool:
     for pat in EXCLUDE_PATTERNS:
@@ -199,13 +212,22 @@ _ANNUAL_REPORT_PATTERN = re.compile(r"사업보고서|분기보고서|반기보�
 
 # 추출 대상 섹션 (Tier1 정확명 → Tier2 변형명 순)
 _TARGET_SECTIONS: list[tuple[str, list[str]]] = [
-    ("사업의 내용",            ["사업의 내용", "주요사업내용", "사업내용"]),
-    ("재무제표",               ["재무제표", "연결재무제표", "요약재무정보", "재무상태표"]),
-    ("이사의 경영진단 및 분석의견", ["이사의 경영진단 및 분석의견", "경영진단 및 분석의견", "경영진단"]),
-    ("그 밖에 투자자 보호를 위하여 필요한 사항", ["그 밖에 투자자 보호를 위하여 필요한 사항", "투자자보호"]),
-    ("자본금 변동사항",        ["자본금 변동사항", "자본금의 변동"]),
-    ("주식의 총수 등",         ["주식의 총수 등", "발행주식의 총수", "주식의 총수"]),
-    ("회계감사인의 감사의견 등", ["회계감사인의 감사의견 등", "감사의견", "외부감사에 관한 사항"]),
+    ("사업의 내용", ["사업의 내용", "주요사업내용", "사업내용"]),
+    ("재무제표", ["재무제표", "연결재무제표", "요약재무정보", "재무상태표"]),
+    (
+        "이사의 경영진단 및 분석의견",
+        ["이사의 경영진단 및 분석의견", "경영진단 및 분석의견", "경영진단"],
+    ),
+    (
+        "그 밖에 투자자 보호를 위하여 필요한 사항",
+        ["그 밖에 투자자 보호를 위하여 필요한 사항", "투자자보호"],
+    ),
+    ("자본금 변동사항", ["자본금 변동사항", "자본금의 변동"]),
+    ("주식의 총수 등", ["주식의 총수 등", "발행주식의 총수", "주식의 총수"]),
+    (
+        "회계감사인의 감사의견 등",
+        ["회계감사인의 감사의견 등", "감사의견", "외부감사에 관한 사항"],
+    ),
 ]
 
 # 재무제표 섹션에서 주석 시작 시 중단
@@ -237,13 +259,13 @@ def _extract_annual_sections(text: str) -> str:
                     next_pos = oi
                     break
 
-        chunk = text[found_pos:found_pos + min(next_pos - found_pos, 5000)]
+        chunk = text[found_pos : found_pos + min(next_pos - found_pos, 5000)]
 
         # 재무제표 섹션은 주석 시작 전까지만
         if section_name == "재무제표":
             m = _FINSTATE_STOP.search(chunk)
             if m:
-                chunk = chunk[:m.start()]
+                chunk = chunk[: m.start()]
 
         extracted.append(f"[{section_name}]\n{chunk.strip()}")
 
@@ -256,6 +278,7 @@ def _fetch_document_text(dart_client, rcept_no: str, report_nm: str = "") -> str
     """
     import warnings
     from bs4 import XMLParsedAsHTMLWarning
+
     warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
     try:
         html = dart_client.document(rcept_no)
@@ -522,13 +545,17 @@ _CPA_TEMPLATES: dict[str, dict] = {
 }
 
 
-def _analyze_with_groq(corp_name: str, report_nm: str, disc_type: str, doc_text: str, stock_code: str = "") -> str | None:
+def _analyze_with_groq(
+    corp_name: str, report_nm: str, disc_type: str, doc_text: str, stock_code: str = ""
+) -> str | None:
     """Groq LLM으로 공시 원문을 읽고 일반인 언어로 분석을 생성한다."""
     if not _groq_client or not doc_text:
         return None
 
     current_price = _fetch_current_price(stock_code) if stock_code else ""
-    price_context = f"현재 주가: {current_price}" if current_price else "현재 주가: 조회 불가"
+    price_context = (
+        f"현재 주가: {current_price}" if current_price else "현재 주가: 조회 불가"
+    )
     fin_context = get_financial_context(stock_code) if stock_code else ""
 
     # 공시 유형별 특화 분석 지침
@@ -692,8 +719,7 @@ def build_cpa_summary(
     corp_name: str, report_nm: str, disc_type: str, rcept_dt: str, doc_text: str = ""
 ) -> str:
     header = (
-        f"[공시] {corp_name} | {report_nm} | {rcept_dt}\n"
-        f"[분류] {disc_type}\n\n"
+        f"[공시] {corp_name} | {report_nm} | {rcept_dt}\n" f"[분류] {disc_type}\n\n"
     )
 
     # Groq AI 분석 시도 (원문 있을 때만)
@@ -707,8 +733,7 @@ def build_cpa_summary(
         f"\n\n[원문 발췌]\n{textwrap.fill(doc_text, width=80)}" if doc_text else ""
     )
     summary = (
-        header
-        + f"[Cash]\n{textwrap.fill(t['cash'], width=80)}\n\n"
+        header + f"[Cash]\n{textwrap.fill(t['cash'], width=80)}\n\n"
         f"[Risk]\n{textwrap.fill(t['risk'], width=80)}\n\n"
         f"[Hidden Agenda]\n{textwrap.fill(t['hidden'], width=80)}\n\n"
         f"[Verdict]\n{t['verdict']}"
@@ -718,6 +743,7 @@ def build_cpa_summary(
 
 
 # ─── 메인 수집 로직 ───────────────────────────────────────────────────────────
+
 
 def collect(stock_codes: list[str] | None = None) -> None:
     if not DART_API_KEY:
@@ -785,11 +811,15 @@ def collect(stock_codes: list[str] | None = None) -> None:
             # 2차: 내부자 보고서 배치 판별 — 5건 초과 시 정기 신고로 간주
             if _is_insider_noise(report_nm, rcept_dt, insider_batch_map):
                 filtered += 1
-                print(f"  [SKIP-BATCH] {report_nm} ({rcept_dt}, {insider_batch_map.get(rcept_dt)}건 중 1)")
+                print(
+                    f"  [SKIP-BATCH] {report_nm} ({rcept_dt}, {insider_batch_map.get(rcept_dt)}건 중 1)"
+                )
                 continue
 
             # 중복 체크
-            exists = session.query(DisclosureLocal).filter_by(disclosure_id=rcept_no).first()
+            exists = (
+                session.query(DisclosureLocal).filter_by(disclosure_id=rcept_no).first()
+            )
             if exists:
                 skipped += 1
                 print(f"  [SKIP-DUP]   {report_nm} ({rcept_no})")
@@ -800,13 +830,17 @@ def collect(stock_codes: list[str] | None = None) -> None:
             print(f"  [분석중]     [{disc_type}] {report_nm} ({rcept_dt})")
 
             doc_text = _fetch_document_text(dart, rcept_no, report_nm)
-            ai_result = _analyze_with_groq(corp_name, report_nm, disc_type, doc_text, stock_code)
+            ai_result = _analyze_with_groq(
+                corp_name, report_nm, disc_type, doc_text, stock_code
+            )
             ai_ok = ai_result is not None
             if ai_ok:
                 header = f"[공시] {corp_name} | {report_nm} | {rcept_dt}\n[분류] {disc_type}\n\n"
                 summary = header + ai_result
             else:
-                summary = build_cpa_summary(corp_name, report_nm, disc_type, rcept_dt, doc_text)
+                summary = build_cpa_summary(
+                    corp_name, report_nm, disc_type, rcept_dt, doc_text
+                )
 
             # high_impact: 유상증자·CB·BW 무조건, 감사의견 이상 감지
             is_high_impact = disc_type in ("증자", "전환사채", "BW")
@@ -823,7 +857,9 @@ def collect(stock_codes: list[str] | None = None) -> None:
                 corp_code=str(row.get("corp_code", stock_code)),
                 stock_code=stock_code,
                 corp_name=corp_name,
-                disclosure_date=datetime.strptime(rcept_dt, "%Y%m%d").date() if rcept_dt else None,
+                disclosure_date=(
+                    datetime.strptime(rcept_dt, "%Y%m%d").date() if rcept_dt else None
+                ),
                 disclosure_type=disc_type,
                 title=report_nm,
                 amount=None,
@@ -842,7 +878,9 @@ def collect(stock_codes: list[str] | None = None) -> None:
     session.close()
 
     print(f"{'='*60}")
-    print(f"  수집 완료 | 신규 저장: {saved}건 | 중복 스킵: {skipped}건 | 노이즈 제거: {filtered}건")
+    print(
+        f"  수집 완료 | 신규 저장: {saved}건 | 중복 스킵: {skipped}건 | 노이즈 제거: {filtered}건"
+    )
     print(f"{'='*60}\n")
 
 
@@ -898,9 +936,11 @@ def fetch_financial_statements(quarters: int = 8) -> None:
 
     for stock_code, corp_name in TARGET_CORPS.items():
         for year, quarter in periods:
-            exists = session.query(FinancialStatement).filter_by(
-                corp_code=stock_code, year=year, quarter=quarter
-            ).first()
+            exists = (
+                session.query(FinancialStatement)
+                .filter_by(corp_code=stock_code, year=year, quarter=quarter)
+                .first()
+            )
             if exists:
                 skipped += 1
                 continue
@@ -971,6 +1011,7 @@ def get_financial_context(corp_code: str) -> str:
 
 # ─── 백필 로직 ───────────────────────────────────────────────────────────────
 
+
 def backfill_ai(max_records: int = 50) -> int:
     """
     ai_analyzed=False 인 과거 공시를 Groq로 분석해 summary 업데이트.
@@ -988,6 +1029,7 @@ def backfill_ai(max_records: int = 50) -> int:
 
     # 사업보고서·분기보고서·반기보고서 우선, 이후 나머지 최신순
     from sqlalchemy import case
+
     priority = case(
         (DisclosureLocal.title.contains("사업보고서"), 0),
         (DisclosureLocal.title.contains("분기보고서"), 0),
@@ -1011,7 +1053,13 @@ def backfill_ai(max_records: int = 50) -> int:
             doc_text = _fetch_document_text(dart, rec.disclosure_id, rec.title or "")
 
         try:
-            ai_result = _analyze_with_groq(rec.corp_name, rec.title, rec.disclosure_type, doc_text, rec.stock_code or "")
+            ai_result = _analyze_with_groq(
+                rec.corp_name,
+                rec.title,
+                rec.disclosure_type,
+                doc_text,
+                rec.stock_code or "",
+            )
         except Exception:
             # 429 한도 초과 → 완전 중단
             print(f"  [백필 중단] Groq 일일 한도 소진 — {done}건 완료")
