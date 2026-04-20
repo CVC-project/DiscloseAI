@@ -1,4 +1,5 @@
 """공시 후 5일 주가변동 라벨링 — 수혜 / 악재 / 중립"""
+
 from __future__ import annotations
 
 import logging
@@ -12,7 +13,7 @@ from modules.price.models import PriceLocal
 logger = logging.getLogger(__name__)
 
 # 라벨링 임계값 (CLAUDE.local.md 기준)
-POSITIVE_THRESHOLD = 2.0   # +2% 이상 → 수혜
+POSITIVE_THRESHOLD = 2.0  # +2% 이상 → 수혜
 NEGATIVE_THRESHOLD = -2.0  # -2% 이하 → 악재
 
 
@@ -94,16 +95,17 @@ def label_disclosure(
         # 공시일 당일 또는 직후 첫 거래일 종가
         base_row = _next_trading_day(session, corp_code, disclosure_date)
         if base_row is None:
-            logger.warning(
-                "기준 종가 없음: %s %s", corp_code, disclosure_date
-            )
+            logger.warning("기준 종가 없음: %s %s", corp_code, disclosure_date)
             return None
 
         # 기준일로부터 n번째 거래일 종가
         end_row = _nth_trading_day(session, corp_code, base_row.date, trading_days)
         if end_row is None:
             logger.warning(
-                "%d거래일 후 데이터 없음: %s (기준일: %s)", trading_days, corp_code, base_row.date
+                "%d거래일 후 데이터 없음: %s (기준일: %s)",
+                trading_days,
+                corp_code,
+                base_row.date,
             )
             return None
 
@@ -118,7 +120,11 @@ def label_disclosure(
 
         logger.info(
             "[%s] %s → %s일 후 %.2f%% → %s",
-            corp_code, base_row.date, trading_days, change_pct, label,
+            corp_code,
+            base_row.date,
+            trading_days,
+            change_pct,
+            label,
         )
         return {
             "disclosure_id": disclosure_id,

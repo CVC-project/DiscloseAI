@@ -1,4 +1,5 @@
 """VKOSPI 수집 및 변동성 필터링 테스트"""
+
 import pytest
 from datetime import date, timedelta
 from unittest.mock import patch, MagicMock
@@ -147,9 +148,7 @@ class TestSaveVkospi:
         from unittest.mock import patch
 
         # 기존 데이터 삽입
-        existing = VkospiLocal(
-            date=date(2026, 4, 15), vkospi=15.0, is_low_vol=False
-        )
+        existing = VkospiLocal(date=date(2026, 4, 15), vkospi=15.0, is_low_vol=False)
         db_session.add(existing)
         db_session.commit()
 
@@ -167,7 +166,9 @@ class TestSaveVkospi:
         assert db_session.query(VkospiLocal).count() == 2
         # 기존 데이터는 변경 안 됨
         old_row = (
-            db_session.query(VkospiLocal).filter(VkospiLocal.date == date(2026, 4, 15)).first()
+            db_session.query(VkospiLocal)
+            .filter(VkospiLocal.date == date(2026, 4, 15))
+            .first()
         )
         assert old_row.vkospi == 15.0
 
@@ -177,7 +178,7 @@ class TestSaveVkospi:
 
         records = [
             {"date": date(2026, 4, 14), "vkospi": 14.99},  # < 15.0
-            {"date": date(2026, 4, 15), "vkospi": 15.0},   # = 15.0 (not low_vol)
+            {"date": date(2026, 4, 15), "vkospi": 15.0},  # = 15.0 (not low_vol)
             {"date": date(2026, 4, 16), "vkospi": 15.01},  # > 15.0
         ]
 
@@ -252,9 +253,7 @@ class TestGetVkospiOnDate:
 
     def test_get_vkospi_on_date_exists(self, db_session):
         """존재하는 날짜"""
-        vkospi_row = VkospiLocal(
-            date=date(2026, 4, 15), vkospi=15.5, is_low_vol=False
-        )
+        vkospi_row = VkospiLocal(date=date(2026, 4, 15), vkospi=15.5, is_low_vol=False)
         db_session.add(vkospi_row)
         db_session.commit()
 
@@ -341,7 +340,9 @@ class TestFilterLowVolatilityDisclosures:
         assert len(result) == 1
         assert result[0].disclosure_id == "disc_001"
 
-    def test_filter_low_volatility_disclosures_exclude_none_disclosure_id(self, db_session):
+    def test_filter_low_volatility_disclosures_exclude_none_disclosure_id(
+        self, db_session
+    ):
         """disclosure_id가 None인 행 제외"""
         vkospi = VkospiLocal(date=date(2026, 4, 15), vkospi=14.0, is_low_vol=True)
         db_session.add(vkospi)
