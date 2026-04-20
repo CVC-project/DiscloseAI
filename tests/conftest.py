@@ -20,22 +20,14 @@ def _restore_shared_models(monkeypatch):
     test_smoke.py의 module-level binding이 오염되는 것을 방지한다."""
     # sys.modules 복원
     monkeypatch.setitem(sys.modules, "shared.models", _real_shared_models)
-    # test_smoke의 top-level name binding도 실제 클래스로 복원
-    try:
-        import tests.test_smoke as smoke_mod
-
-        monkeypatch.setattr(
-            smoke_mod, "FinancialData", _real_shared_models.FinancialData
-        )
-        monkeypatch.setattr(
-            smoke_mod, "DisclosureData", _real_shared_models.DisclosureData
-        )
-        monkeypatch.setattr(
-            smoke_mod, "RelationData", _real_shared_models.RelationData
-        )
-        monkeypatch.setattr(smoke_mod, "PriceData", _real_shared_models.PriceData)
-    except (ImportError, AttributeError):
-        pass
+    # test_smoke 모듈 객체를 sys.modules에서 찾아 name binding 복원
+    # tests/__init__.py 없으면 'test_smoke', 있으면 'tests.test_smoke'
+    smoke_mod = sys.modules.get("test_smoke") or sys.modules.get("tests.test_smoke")
+    if smoke_mod is not None:
+        for attr in ("FinancialData", "DisclosureData", "RelationData", "PriceData"):
+            real_cls = getattr(_real_shared_models, attr, None)
+            if real_cls is not None:
+                monkeypatch.setattr(smoke_mod, attr, real_cls)
     yield
 
 
