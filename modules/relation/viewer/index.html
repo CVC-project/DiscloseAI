@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>공시해부학 - DiscloseAI v4</title>
+<title>DiscloseAI — Corporate Universe (Top 50)</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#060a13;color:#e0e0e0;font-family:-apple-system,'Pretendard',sans-serif;overflow:hidden;user-select:none}
@@ -95,9 +95,14 @@ canvas{display:block}
 .title h1{font-size:16px;font-weight:600;color:rgba(255,255,255,0.85)}
 .title p{font-size:11px;color:rgba(255,255,255,0.3);margin-top:2px}
 .title .live{display:inline-block;width:6px;height:6px;background:#22c55e;border-radius:50%;margin-right:4px;animation:pulse 2s infinite}
-.legend{position:fixed;bottom:16px;right:16px;z-index:50;background:rgba(8,12,24,0.9);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:10px 14px;font-size:10px;color:#666}
-.legend-item{display:flex;align-items:center;gap:6px;margin:3px 0}
-.legend-dot{width:8px;height:8px;border-radius:50%}
+.legend{position:fixed;z-index:50;background:rgba(8,12,24,0.92);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:10px 14px;font-size:10px;color:#888;max-width:220px}
+.legend-title{font-size:10px;font-weight:600;color:#ccc;margin-bottom:6px;padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,0.08)}
+.legend-sector{bottom:16px;right:16px}
+.legend-edge{bottom:16px;left:16px}
+.legend-item{display:flex;align-items:center;gap:6px;margin:3px 0;line-height:1.2}
+.legend-dot{width:8px;height:8px;border-radius:50%;flex:0 0 8px}
+.legend-line{width:20px;height:0;flex:0 0 20px;border-top-width:2px;border-top-style:solid}
+.legend-grid{display:grid;grid-template-columns:1fr 1fr;column-gap:8px}
 
 /* Disclosure panel */
 .disc-impact{padding:6px 10px;border-radius:6px;margin-bottom:6px;font-size:12px;display:flex;justify-content:space-between;align-items:center}
@@ -113,7 +118,7 @@ canvas{display:block}
   <button style="background:none;border:1px solid rgba(255,255,255,0.2);color:white;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:11px" onclick="document.getElementById('alert').classList.remove('show')">닫기</button>
 </div>
 
-<div class="title"><h1>공시해부학</h1><p><span class="live"></span>기업을 클릭하여 해부를 시작하세요</p></div>
+<div class="title"><h1>DiscloseAI</h1><p><span class="live"></span>기업을 클릭하여 해부를 시작하세요</p></div>
 
 <canvas id="c"></canvas>
 
@@ -132,10 +137,36 @@ canvas{display:block}
   <div class="mode-hint" id="modeHint">기업을 클릭하면 재무제표와 EQS 분석을 볼 수 있습니다</div>
 </div>
 
-<div class="legend">
-  <div class="legend-item"><div class="legend-dot" style="background:#7c6cf0"></div>대형 (시총 50조+)</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#4da6ff"></div>중형 (5~50조)</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#2dd4a0"></div>중소형 (5조 미만)</div>
+<!-- 우측 하단: 섹터(노드 색) 범례 -->
+<div class="legend legend-sector">
+  <div class="legend-title">섹터 (노드 색)</div>
+  <div class="legend-grid">
+    <div class="legend-item"><div class="legend-dot" style="background:#7c6cf0"></div>반도체</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#4da6ff"></div>디스플레이</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#22d3ee"></div>2차전지</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#34d399"></div>바이오</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#f97316"></div>자동차</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#a78bfa"></div>금융</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#f472b6"></div>플랫폼</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#facc15"></div>에너지</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#64748b"></div>중공업·방산</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#d97706"></div>건설</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#06b6d4"></div>통신</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#78716c"></div>기타</div>
+  </div>
+  <div style="margin-top:6px;font-size:9px;color:#555">노드 크기 = 시가총액 비례</div>
+</div>
+
+<!-- 좌측 하단: 관계 유형(엣지 색) 범례 -->
+<div class="legend legend-edge">
+  <div class="legend-title">관계 유형 (엣지 색)</div>
+  <div class="legend-item"><span class="legend-line" style="border-color:#ef4444;border-top-width:2.5px"></span>종속기업 (K-IFRS &gt;50%)</div>
+  <div class="legend-item"><span class="legend-line" style="border-color:#f97316;border-top-width:2px"></span>관계기업 (K-IFRS 20~50%)</div>
+  <div class="legend-item"><span class="legend-line" style="border-color:#94a3b8;border-top-style:dashed"></span>유의적 투자 (5~20%)</div>
+  <div class="legend-item"><span class="legend-line" style="border-color:#fbbf24;border-top-style:dashed"></span>공정위 계열</div>
+  <div class="legend-item"><span class="legend-line" style="border-color:#facc15;border-top-style:dotted"></span>사업보고서 특수관계자</div>
+  <div class="legend-item"><span class="legend-line" style="border-color:#a78bfa;border-top-style:dotted"></span>수동 보정</div>
+  <div style="margin-top:6px;font-size:9px;color:#555">실선 = K-IFRS 공식지분, 점선 = 계열/수동</div>
 </div>
 
 <script>
