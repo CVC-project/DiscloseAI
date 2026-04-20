@@ -275,7 +275,7 @@ function init(){
   // K-IFRS 지분 엣지는 방향이 있어 A→B와 B→A가 별도로 존재할 수 있음 — 이것도 같은 쌍으로 묶어 offset.
   const pairIdx = {};
   edges.forEach(e=>{
-    const key = [e.a.t, e.b.t].sort().join('|');
+    const key = [e.a.n, e.b.n].sort().join('|');
     if(!pairIdx[key]) pairIdx[key] = [];
     pairIdx[key].push(e);
   });
@@ -284,8 +284,8 @@ function init(){
   Object.values(pairIdx).forEach(group=>{
     group.forEach((e,i)=>{ e.parallelIdx=i; e.parallelCount=group.length; });
     if(group.length===1){ group[0].parallelOffset=0; return; }
-    const PAD=1.0;  // 평행 선 사이 최소 여백 (px)
-    const widths=group.map(e=>((EDGE_STYLES[e.type]||{width:1}).width)*1.5);  // hover 시 최대 폭
+    const PAD=0.0;  // 평행 선 사이 최소 여백 (px) - 딱 붙게 설정
+    const widths=group.map(e=>(EDGE_STYLES[e.type]||{width:1}).width);  // 엣지 두께만큼만 떨어뜨리기
     const centers=[]; let acc=widths[0]/2;
     centers.push(acc);
     for(let i=1;i<group.length;i++){ acc+=widths[i-1]/2+PAD+widths[i]/2; centers.push(acc); }
@@ -331,7 +331,9 @@ edges.forEach(e=>{
   // 평행 offset — 같은 쌍에 여러 엣지 있으면 수직 방향으로 약간 떨어뜨려 나란히
   const dx0=e.b.x-e.a.x, dy0=e.b.y-e.a.y;
   const len=Math.sqrt(dx0*dx0+dy0*dy0)||1;
-  const px=-dy0/len, py=dx0/len;  // perpendicular unit
+  let px=-dy0/len, py=dx0/len;  // perpendicular unit
+  if(e.a.n > e.b.n) { px = -px; py = -py; } // 법선벡터 방향 통일 (방향 오프셋 상쇄 방지)
+  
   // offset은 init()에서 폭 기반 사전 계산됨 (e.parallelOffset)
   const off = e.parallelOffset || 0;
   const x1=e.a.x+px*off, y1=e.a.y+py*off;
