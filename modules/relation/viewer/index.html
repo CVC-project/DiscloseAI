@@ -284,7 +284,7 @@ function init(){
   Object.values(pairIdx).forEach(group=>{
     group.forEach((e,i)=>{ e.parallelIdx=i; e.parallelCount=group.length; });
     if(group.length===1){ group[0].parallelOffset=0; return; }
-    const PAD=0.0;  // 평행 선 사이 최소 여백 (px) - 딱 붙게 설정
+    const PAD=0.5;  // 평행 선 사이 최소 여백 (px) - 딱 붙게 설정 (Z-order 훼손 방지를 위해 0.5로 설정)
     const widths=group.map(e=>(EDGE_STYLES[e.type]||{width:1}).width);  // 엣지 두께만큼만 떨어뜨리기
     const centers=[]; let acc=widths[0]/2;
     centers.push(acc);
@@ -359,8 +359,8 @@ edges.forEach(e=>{
     x.lineDashOffset = 0;
   }
 
-  // 방향 화살표 (K-IFRS 지분·주석 관계만 — ftc_group/manual은 무방향)
-  if(ARROW_TYPES.has(e.type) && x.globalAlpha >= 0.3){
+  // 방향 화살표 (K-IFRS 지분·주석 관계만 — ftc_group/manual은 무방향, 공시 시뮬레이션 isA 제외)
+  if(ARROW_TYPES.has(e.type) && !isA && x.globalAlpha >= 0.3){
     x.setLineDash([]);
     const nodeR = e.b.sz*22;
     const tipX = x2 - (dx0/len)*nodeR;
@@ -451,7 +451,7 @@ nodes.forEach(n=>{
 
   // Mode-specific labels
   if(currentMode==='timemachine'&&n.tm&&!filtered){x.fillStyle='rgba(124,108,240,0.9)';x.font='bold 9px -apple-system,sans-serif';x.textAlign='center';x.fillText('⏰ 타임머신',n.x,n.y-pr-10);}
-  if(n.glow>0.3&&n.n!==alertSrc&&!filtered&&currentMode==='disclosure'){const imp=edges.some(e=>(e.a.n===alertSrc&&e.b.n===n.n&&(e.type==='공급'||e.type==='종속'||e.type==='피인수'))||(e.b.n===alertSrc&&e.a.n===n.n&&(e.type==='공급'||e.type==='종속'||e.type==='피인수')))?'↑ 수혜 예상':edges.some(e=>(e.a.n===alertSrc&&e.b.n===n.n&&e.type==='경쟁')||(e.b.n===alertSrc&&e.a.n===n.n&&e.type==='경쟁'))?'↓ 경쟁 압박':'● 영향권';x.fillStyle=imp.includes('수혜')?'rgba(74,222,128,0.9)':imp.includes('경쟁')?'rgba(248,113,113,0.9)':'rgba(77,166,255,0.9)';x.font='bold 9px -apple-system,sans-serif';x.textAlign='center';x.fillText(imp,n.x,n.y-pr-10);}
+  if(n.glow>0.3&&n.n!==alertSrc&&!filtered&&currentMode==='disclosure'){const hasT=(ts)=>edges.some(e=>((e.a.n===alertSrc&&e.b.n===n.n)||(e.b.n===alertSrc&&e.a.n===n.n))&&ts.includes(e.type));const imp=hasT(['subsidiary','associate'])?'↑ 수혜 예상':hasT(['competition'])?'↓ 경쟁 압박':'● 영향권';x.fillStyle=imp.includes('수혜')?'rgba(74,222,128,0.9)':imp.includes('경쟁')?'rgba(248,113,113,0.9)':'rgba(77,166,255,0.9)';x.font='bold 9px -apple-system,sans-serif';x.textAlign='center';x.fillText(imp,n.x,n.y-pr-10);}
 
   // Name label
   if(!filtered||isH){x.fillStyle=`rgba(255,255,255,${filtered?0.2:0.85})`;x.font=`${n.sz>2?'12':'10'}px -apple-system,sans-serif`;x.textAlign='center';x.fillText(n.n,n.x,n.y+pr+16);}
