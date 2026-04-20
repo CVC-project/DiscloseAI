@@ -6,8 +6,14 @@
 # Claude Code 개인 설정
 .claude/settings.local.json
 
-# 로컬 DB (개별 모듈 개발용)
+# 로컬 DB / 캐시 (개별 모듈 개발용)
 modules/*/data/*.db
+modules/*/data/*.xml
+modules/*/data/*.json
+
+# batch 수집 결과 캐시 (대시보드 재생성용)
+docs/prototype/_*.pkl
+docs/prototype/_*.json
 
 # 그래프 export 결과물 (재생성 가능)
 modules/*/data/graph_*.json
