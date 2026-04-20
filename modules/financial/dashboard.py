@@ -32,8 +32,7 @@ from .translator.highlights import Highlight
 from .translator.ratios import LABELS as RATIO_LABELS, compute_ratios
 
 _DASHBOARD_DIR = os.path.join(
-    os.path.dirname(os.path.dirname(os.path.dirname(__file__))),
-    "docs", "prototype"
+    os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "docs", "prototype"
 )
 
 
@@ -81,9 +80,16 @@ def _industry_payload(corp_name: Optional[str]) -> Optional[dict]:
     }
 
 
-def _serialize(panel: FirmPanel, eqs: EQSResult, summary: List[str], highlights: Iterable[Highlight]) -> dict:
+def _serialize(
+    panel: FirmPanel,
+    eqs: EQSResult,
+    summary: List[str],
+    highlights: Iterable[Highlight],
+) -> dict:
     latest = panel.latest()
-    ratios = compute_ratios(latest).as_dict() if latest else {k: None for k in RATIO_LABELS}
+    ratios = (
+        compute_ratios(latest).as_dict() if latest else {k: None for k in RATIO_LABELS}
+    )
     return {
         "corp": {
             "name": panel.corp_name or "(이름 없음)",
@@ -653,7 +659,11 @@ def build_dashboard(
     os.makedirs(out_dir, exist_ok=True)
     payload = _serialize(panel, eqs, summary, highlights)
     years_in_panel = [y.year for y in panel.years]
-    year_range = f"{min(years_in_panel)}~{max(years_in_panel)} ({len(years_in_panel)}년)" if years_in_panel else "—"
+    year_range = (
+        f"{min(years_in_panel)}~{max(years_in_panel)} ({len(years_in_panel)}년)"
+        if years_in_panel
+        else "—"
+    )
     html = _HTML_TEMPLATE.format(
         corp_name=payload["corp"]["name"],
         corp_code=payload["corp"]["code"],
@@ -686,7 +696,8 @@ def _record_row(r: FirmRecord) -> dict:
         "name": r.display_name,
         "code": r.corp.stock_code if r.corp else None,
         "industry_code": r.industry_code,
-        "is_financial": r.industry_code is not None and r.industry_code.startswith(("064", "065", "066", "067")),
+        "is_financial": r.industry_code is not None
+        and r.industry_code.startswith(("064", "065", "066", "067")),
         "market_cap": r.market_cap,
         "year_count": len(r.panel.years) if r.panel else 0,
         "dart_url": r.dart_url,
@@ -695,7 +706,8 @@ def _record_row(r: FirmRecord) -> dict:
         err = r.error or "분석 실패"
         return {
             **common,
-            "total": None, "grade": None,
+            "total": None,
+            "grade": None,
             "modules": {m: None for m in all_mods},
             "module_notes": {m: err for m in all_mods},
             "error": r.error,
@@ -725,7 +737,8 @@ def _record_row(r: FirmRecord) -> dict:
             notes[m] = ""
     return {
         **common,
-        "total": r.eqs.total, "grade": r.eqs.grade,
+        "total": r.eqs.total,
+        "grade": r.eqs.grade,
         "modules": modules,
         "module_notes": notes,
         "error": None,

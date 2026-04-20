@@ -119,7 +119,11 @@ def _compute_all_indices(prev: FirmYear, curr: FirmYear) -> dict:
     sga_prev = _safe_div(prev.sga, prev.revenue)
     sgai = _safe_div(sga_curr, sga_prev)
     # 총발생액 / 자산
-    if curr.net_income is None or curr.operating_cashflow is None or not curr.total_assets:
+    if (
+        curr.net_income is None
+        or curr.operating_cashflow is None
+        or not curr.total_assets
+    ):
         tata = None
     else:
         tata = (curr.net_income - curr.operating_cashflow) / curr.total_assets
@@ -181,7 +185,9 @@ def _panel_has_cogs(panel: FirmPanel) -> bool:
     return any(y.cogs is not None and y.cogs > 0 for y in panel.years)
 
 
-def m_score(prev: FirmYear, curr: FirmYear, coefs: BeneishCoefficients = BENEISH_KR) -> Optional[float]:
+def m_score(
+    prev: FirmYear, curr: FirmYear, coefs: BeneishCoefficients = BENEISH_KR
+) -> Optional[float]:
     """M-score 원시 계산값. 결측이면 None."""
     idx = _beneish_indices(prev, curr)
     if idx is None:
@@ -230,7 +236,11 @@ def _score_m2_fallback(panel: FirmPanel, *, reason: str = "") -> ModuleScore:
         return ModuleScore(name="M2", score=None, note="패널 부족(t,t-1 필요)")
 
     # TATA — 핵심 (항상 산출 가능)
-    if curr.net_income is None or curr.operating_cashflow is None or not curr.total_assets:
+    if (
+        curr.net_income is None
+        or curr.operating_cashflow is None
+        or not curr.total_assets
+    ):
         return ModuleScore(name="M2", score=None, note="NI/OCF/TA 결측 — fallback 불가")
     tata = (curr.net_income - curr.operating_cashflow) / curr.total_assets
 
@@ -243,9 +253,12 @@ def _score_m2_fallback(panel: FirmPanel, *, reason: str = "") -> ModuleScore:
     ocfr = curr.operating_cashflow / curr.revenue if curr.revenue != 0 else 0.0
 
     # LVGI — 레버리지 변화
-    lev_curr = ((curr.long_term_debt or 0) + (curr.current_liabilities or 0)) / curr.total_assets
+    lev_curr = (
+        (curr.long_term_debt or 0) + (curr.current_liabilities or 0)
+    ) / curr.total_assets
     lev_prev = (
-        ((prev.long_term_debt or 0) + (prev.current_liabilities or 0)) / prev.total_assets
+        ((prev.long_term_debt or 0) + (prev.current_liabilities or 0))
+        / prev.total_assets
         if prev.total_assets
         else lev_curr
     )
@@ -256,14 +269,14 @@ def _score_m2_fallback(panel: FirmPanel, *, reason: str = "") -> ModuleScore:
     score = _m_to_score(m)
     flag = "의심" if m > M_THRESHOLD else "정상"
     return ModuleScore(
-        name="M2", score=score, raw=m,
+        name="M2",
+        score=score,
+        raw=m,
         note=f"M={m:.2f} ({flag}) — {reason} fallback",
     )
 
 
-def score_m2(
-    panel: FirmPanel, coefs: BeneishCoefficients = BENEISH_KR
-) -> ModuleScore:
+def score_m2(panel: FirmPanel, coefs: BeneishCoefficients = BENEISH_KR) -> ModuleScore:
     """패널의 가장 최근 (t-1, t) 페어로 M2 산출.
 
     ``note`` 필드는 산출 실패 시 구체적 사유를 담아 랭킹 대시보드 툴팁으로 노출된다.

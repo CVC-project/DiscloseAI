@@ -33,9 +33,15 @@ class TestM2BeneishNegativeGrossMargin:
     def test_negative_gross_margin_score_is_deterministic(self):
         """총이익률 음수 → M2 점수가 None이 아닌 특정 값으로 계산되고 재현 가능."""
         # 음수 마진 패널 (COGS > Revenue)
-        y0 = make_year(2023, revenue=1000, cogs=1200, sga=100, depreciation=50, ni=100, ocf=120)
-        y1 = make_year(2024, revenue=1100, cogs=1300, sga=110, depreciation=55, ni=150, ocf=180)
-        negative_margin = FirmPanel(corp_code="X", corp_name="NegativeCo", industry_code="013", years=[y0, y1])
+        y0 = make_year(
+            2023, revenue=1000, cogs=1200, sga=100, depreciation=50, ni=100, ocf=120
+        )
+        y1 = make_year(
+            2024, revenue=1100, cogs=1300, sga=110, depreciation=55, ni=150, ocf=180
+        )
+        negative_margin = FirmPanel(
+            corp_code="X", corp_name="NegativeCo", industry_code="013", years=[y0, y1]
+        )
 
         # 같은 패널로 두 번 점수 계산하면 동일
         score1 = score_m2(negative_margin)
@@ -49,9 +55,15 @@ class TestM2BeneishNegativeGrossMargin:
 
     def test_negative_gross_margin_raw_score_captured(self):
         """음수 마진의 M-score raw 값도 저장됨."""
-        y0 = make_year(2023, revenue=1000, cogs=1500, ni=100, ocf=120, sga=100, depreciation=50)
-        y1 = make_year(2024, revenue=1200, cogs=1800, ni=150, ocf=180, sga=120, depreciation=60)
-        panel = FirmPanel(corp_code="X", corp_name="NegativeCo", industry_code="013", years=[y0, y1])
+        y0 = make_year(
+            2023, revenue=1000, cogs=1500, ni=100, ocf=120, sga=100, depreciation=50
+        )
+        y1 = make_year(
+            2024, revenue=1200, cogs=1800, ni=150, ocf=180, sga=120, depreciation=60
+        )
+        panel = FirmPanel(
+            corp_code="X", corp_name="NegativeCo", industry_code="013", years=[y0, y1]
+        )
         result = score_m2(panel)
 
         # raw 값이 M-score (음수일 가능성)
@@ -62,9 +74,15 @@ class TestM2BeneishNegativeGrossMargin:
 
     def test_negative_gross_margin_indices_calculated(self):
         """음수 마진이 포함된 패널도 8개 지수가 모두 계산됨."""
-        y0 = make_year(2023, revenue=1000, cogs=1100, ni=100, ocf=120, sga=100, depreciation=50)
-        y1 = make_year(2024, revenue=1200, cogs=1400, ni=150, ocf=180, sga=120, depreciation=60)
-        panel = FirmPanel(corp_code="X", corp_name="NegativeCo", industry_code="013", years=[y0, y1])
+        y0 = make_year(
+            2023, revenue=1000, cogs=1100, ni=100, ocf=120, sga=100, depreciation=50
+        )
+        y1 = make_year(
+            2024, revenue=1200, cogs=1400, ni=150, ocf=180, sga=120, depreciation=60
+        )
+        panel = FirmPanel(
+            corp_code="X", corp_name="NegativeCo", industry_code="013", years=[y0, y1]
+        )
 
         # M-score 계산 직접 호출
         m_raw = m_score(y0, y1, BENEISH_US)

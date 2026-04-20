@@ -142,8 +142,7 @@ def _score_m1_holding(panel: FirmPanel) -> ModuleScore:
     last = panel.years[-1] if panel.years else None
     if first and last and first.total_equity and last.total_equity:
         cumulative_ni = sum(
-            y.net_income for y in panel.years
-            if y.net_income is not None
+            y.net_income for y in panel.years if y.net_income is not None
         )
         equity_change = last.total_equity - first.total_equity
         if cumulative_ni > 0:
@@ -156,7 +155,9 @@ def _score_m1_holding(panel: FirmPanel) -> ModuleScore:
 
     score = round(div_score * 0.7 + eq_score * 0.3, 1)
     return ModuleScore(
-        name="M1", score=score, raw=divergence,
+        name="M1",
+        score=score,
+        raw=divergence,
         note=f"|NI-OCF|/자산={divergence:.3f} (지주 임계 0.40), 자본일치={eq_score:.0f} — 지주사 fallback",
     )
 
@@ -169,6 +170,7 @@ def score_m1(panel: FirmPanel) -> ModuleScore:
     """
     # 지주사는 지분법이익 특성상 별도 fallback 사용
     from .industry import is_holding
+
     if is_holding(panel.industry_code):
         return _score_m1_holding(panel)
 

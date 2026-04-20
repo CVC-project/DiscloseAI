@@ -126,7 +126,9 @@ def _require_key() -> str:
 def _get(url: str, params: Optional[dict] = None) -> requests.Response:
     p = dict(params or {})
     p["crtfc_key"] = _require_key()
-    r = requests.get(url, params=p, timeout=_TIMEOUT, headers={"User-Agent": _USER_AGENT})
+    r = requests.get(
+        url, params=p, timeout=_TIMEOUT, headers={"User-Agent": _USER_AGENT}
+    )
     r.raise_for_status()
     return r
 
@@ -289,14 +291,18 @@ def fetch_latest_report_url(corp_code: str) -> Optional[str]:
     """DART 최신 사업보고서 조회 URL 반환. 없으면 None."""
     try:
         from datetime import datetime
+
         bgn = f"{datetime.now().year - 2}0101"
-        r = _get(f"{_BASE}/list.json", {
-            "corp_code": corp_code,
-            "bgn_de": bgn,
-            "pblntf_ty": "A",
-            "last_reprt_at": "Y",
-            "page_count": 1,
-        })
+        r = _get(
+            f"{_BASE}/list.json",
+            {
+                "corp_code": corp_code,
+                "bgn_de": bgn,
+                "pblntf_ty": "A",
+                "last_reprt_at": "Y",
+                "page_count": 1,
+            },
+        )
         data = r.json()
         if data.get("status") == "000" and data.get("list"):
             rcept_no = data["list"][0]["rcept_no"]

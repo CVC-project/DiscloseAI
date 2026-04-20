@@ -79,7 +79,9 @@ def _rule_ar_outpaces_sales(panel: FirmPanel) -> Optional[Highlight]:
     ):
         return None
     rev_g = (curr.revenue - prev.revenue) / prev.revenue
-    ar_g = (curr.accounts_receivable - prev.accounts_receivable) / prev.accounts_receivable
+    ar_g = (
+        curr.accounts_receivable - prev.accounts_receivable
+    ) / prev.accounts_receivable
     gap = ar_g - rev_g
     if gap >= 0.15:
         return Highlight(

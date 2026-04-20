@@ -76,8 +76,14 @@ def test_fetch_annual_financial_maps_into_firm_year():
             {"account_id": "dart_OperatingIncomeLoss", "thstrm_amount": "120,000"},
             {"account_id": "ifrs-full_ProfitLoss", "thstrm_amount": "80,000"},
             {"account_id": "ifrs-full_Assets", "thstrm_amount": "5,000,000"},
-            {"account_id": "ifrs-full_CashFlowsFromUsedInOperatingActivities", "thstrm_amount": "150,000"},
-            {"account_id": "ifrs-full_TradeAndOtherCurrentReceivables", "thstrm_amount": "300,000"},
+            {
+                "account_id": "ifrs-full_CashFlowsFromUsedInOperatingActivities",
+                "thstrm_amount": "150,000",
+            },
+            {
+                "account_id": "ifrs-full_TradeAndOtherCurrentReceivables",
+                "thstrm_amount": "300,000",
+            },
         ],
     }
     with patch.object(collector, "_get", return_value=_mock_resp(payload)) as m:
@@ -113,13 +119,19 @@ def test_fetch_annual_financial_falls_back_to_separate_when_consolidated_missing
 
 def test_fetch_annual_financial_returns_none_when_both_missing():
     miss = {"status": "013"}
-    with patch.object(collector, "_get", side_effect=[_mock_resp(miss), _mock_resp(miss)]):
+    with patch.object(
+        collector, "_get", side_effect=[_mock_resp(miss), _mock_resp(miss)]
+    ):
         fy = fetch_annual_financial("123", 2024)
     assert fy is None
 
 
 def test_fetch_annual_financial_raises_on_bad_status():
-    with patch.object(collector, "_get", return_value=_mock_resp({"status": "020", "message": "한도 초과"})):
+    with patch.object(
+        collector,
+        "_get",
+        return_value=_mock_resp({"status": "020", "message": "한도 초과"}),
+    ):
         with pytest.raises(DartError):
             fetch_annual_financial("123", 2024)
 
@@ -130,7 +142,10 @@ def test_fetch_annual_financial_skips_unknown_accounts():
         "list": [
             {"account_id": "ifrs-full_Revenue", "thstrm_amount": "1000"},
             {"account_id": "unknown_account", "thstrm_amount": "9999"},
-            {"account_id": "ifrs-full_GrossProfit", "thstrm_amount": "300"},  # 매핑 None
+            {
+                "account_id": "ifrs-full_GrossProfit",
+                "thstrm_amount": "300",
+            },  # 매핑 None
         ],
     }
     with patch.object(collector, "_get", return_value=_mock_resp(payload)):

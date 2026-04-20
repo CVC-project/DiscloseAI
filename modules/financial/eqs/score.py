@@ -50,7 +50,9 @@ def grade_from_score(score: Optional[float]) -> Optional[str]:
     return "F"
 
 
-def _redistribute(weights: Dict[str, float], excluded: Sequence[str]) -> Dict[str, float]:
+def _redistribute(
+    weights: Dict[str, float], excluded: Sequence[str]
+) -> Dict[str, float]:
     """제외된 모듈의 가중치를 남은 모듈에 비례 재배분."""
     kept = {k: v for k, v in weights.items() if k not in excluded}
     total = sum(kept.values())
@@ -63,7 +65,11 @@ def _aggregate(
     modules: List[ModuleScore], weights: Dict[str, float]
 ) -> Optional[float]:
     """가중평균. score=None인 모듈은 평균에서 제외하고 가중치도 재조정."""
-    valid = [(m, weights[m.name]) for m in modules if m.score is not None and m.name in weights]
+    valid = [
+        (m, weights[m.name])
+        for m in modules
+        if m.score is not None and m.name in weights
+    ]
     total_w = sum(w for _, w in valid)
     if total_w == 0:
         return None

@@ -73,16 +73,25 @@ def test_compute_sector_stats_basic():
     """3개 반도체 회사의 평균이 올바르게 계산됨."""
     company_ratios = {
         "삼성전자": {
-            "gross_margin": 30.0, "operating_margin": 12.0,
-            "net_margin": 10.0, "roe": 10.0, "roa": 5.0,
+            "gross_margin": 30.0,
+            "operating_margin": 12.0,
+            "net_margin": 10.0,
+            "roe": 10.0,
+            "roa": 5.0,
         },
         "SK하이닉스": {
-            "gross_margin": 40.0, "operating_margin": 18.0,
-            "net_margin": 15.0, "roe": 15.0, "roa": 7.0,
+            "gross_margin": 40.0,
+            "operating_margin": 18.0,
+            "net_margin": 15.0,
+            "roe": 15.0,
+            "roa": 7.0,
         },
         "삼성전기": {
-            "gross_margin": 20.0, "operating_margin": 6.0,
-            "net_margin": 5.0, "roe": 5.0, "roa": 3.0,
+            "gross_margin": 20.0,
+            "operating_margin": 6.0,
+            "net_margin": 5.0,
+            "roe": 5.0,
+            "roa": 3.0,
         },
     }
     stats = compute_sector_stats(company_ratios)

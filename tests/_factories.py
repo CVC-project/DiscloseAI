@@ -89,12 +89,16 @@ def healthy_panel(corp_code: str = "005930", n_years: int = 5) -> FirmPanel:
                 shares=1000.0,
             )
         )
-    return FirmPanel(corp_code=corp_code, corp_name="HealthyCo", industry_code="013", years=years)
+    return FirmPanel(
+        corp_code=corp_code, corp_name="HealthyCo", industry_code="013", years=years
+    )
 
 
 def manipulator_panel(corp_code: str = "999999") -> FirmPanel:
     """분식 의심 패턴 — AR 급증, OCF는 NI를 못 따라감, 부채 급증."""
-    y0 = make_year(2023, revenue=1000, ar=200, ni=80, ocf=70, tl=2000, ta=5000, cogs=700)
+    y0 = make_year(
+        2023, revenue=1000, ar=200, ni=80, ocf=70, tl=2000, ta=5000, cogs=700
+    )
     y1 = make_year(
         2024,
         revenue=1500,  # 매출 +50%
@@ -105,4 +109,6 @@ def manipulator_panel(corp_code: str = "999999") -> FirmPanel:
         ta=6500,
         cogs=1100,  # 마진 압박
     )
-    return FirmPanel(corp_code=corp_code, corp_name="SuspectCo", industry_code="013", years=[y0, y1])
+    return FirmPanel(
+        corp_code=corp_code, corp_name="SuspectCo", industry_code="013", years=[y0, y1]
+    )

@@ -114,7 +114,9 @@ def _robust_ar1(roa: List[float]) -> Optional[Tuple[float, int]]:
     return refit[1], outlier_obs
 
 
-def _score_m4_short_history(panel: FirmPanel, series: List[Tuple[int, float]]) -> ModuleScore:
+def _score_m4_short_history(
+    panel: FirmPanel, series: List[Tuple[int, float]]
+) -> ModuleScore:
     """3~4년 데이터용 지속성 프록시 (Dichev & Tang, 2009).
 
     AR(1) 회귀가 통계적으로 불안정한 짧은 이력에서 ROA 변동계수(CV)와
@@ -137,14 +139,18 @@ def _score_m4_short_history(panel: FirmPanel, series: List[Tuple[int, float]]) -
     # 2) 방향 일관성 (40%) — 같은 방향으로 변할수록 예측 가능
     if n >= 3:
         changes = [1 if roas[i] >= roas[i - 1] else -1 for i in range(1, n)]
-        same_dir = sum(1 for i in range(1, len(changes)) if changes[i] == changes[i - 1])
+        same_dir = sum(
+            1 for i in range(1, len(changes)) if changes[i] == changes[i - 1]
+        )
         dir_score = (same_dir / max(1, len(changes) - 1)) * 100
     else:
         dir_score = 50.0
 
     score = round(cv_score * 0.6 + dir_score * 0.4, 1)
     return ModuleScore(
-        name="M4", score=score, raw=cv if cv != float("inf") else None,
+        name="M4",
+        score=score,
+        raw=cv if cv != float("inf") else None,
         note=f"ROA CV={cv:.2f}, 방향일치={dir_score:.0f}% — {n}년 단축 fallback",
     )
 

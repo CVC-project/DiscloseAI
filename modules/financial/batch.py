@@ -26,17 +26,17 @@ from .eqs.types import EQSResult, FirmPanel
 # - 우선주는 DART에 별도 등록되지 않으므로 본주 corp_code(8자리)로 직접 매핑
 ALIASES = {
     "삼성전자우": "00126380",  # corp_code 직접 매핑 (본주와 동일 재무제표)
-    "현대차": "005380",        # 정식명: 현대자동차
+    "현대차": "005380",  # 정식명: 현대자동차
     "기아": "000270",
     "셀트리온": "068270",
     "LS ELECTRIC": "010120",
     "카카오": "035720",
     "LIG넥스원": "079550",
     "KT&G": "033780",
-    "NAVER": "035420",         # 정식명: 네이버
-    "삼성물산": "028260",       # find_corp 부분매칭이 다른 삼성물산을 잡음
+    "NAVER": "035420",  # 정식명: 네이버
+    "삼성물산": "028260",  # find_corp 부분매칭이 다른 삼성물산을 잡음
     "미래에셋증권": "006800",
-    "SK": "034730",            # SK(주) — 자회사가 너무 많아 부분매칭 위험
+    "SK": "034730",  # SK(주) — 자회사가 너무 많아 부분매칭 위험
     "우리금융지주": "316140",
 }
 
@@ -47,13 +47,13 @@ INSTRUMENT_BLACKLIST = {"KODEX 200"}
 # CLAUDE.local.md 규칙대로 M2·M3 자동 제외 + 별도 BIS 모듈 도입 시까지 EQS 보류.
 # KOSPI 50 명단 기준 자동 분류용 — KRX 정식 분류 연동 전까지 하드코딩.
 _FINANCIAL_INDUSTRIES = {
-    "KB금융": "064",          # 은행지주
+    "KB금융": "064",  # 은행지주
     "신한지주": "064",
     "하나금융지주": "064",
     "우리금융지주": "064",
     "메리츠금융지주": "064",
-    "미래에셋증권": "066",     # 증권
-    "삼성생명": "067",         # 보험
+    "미래에셋증권": "066",  # 증권
+    "삼성생명": "067",  # 보험
     "삼성화재": "067",
 }
 
@@ -61,11 +61,11 @@ _FINANCIAL_INDUSTRIES = {
 # 단일기업 fallback이 '이상 발생액'으로 오인. industry.py excluded_modules에서
 # M1 자동 제외. 내부 코드 "100".
 _HOLDING_COMPANIES = {
-    "SK스퀘어": "100",   # SK하이닉스 지분 보유
-    "SK": "100",         # SK그룹 지주
-    "HD현대": "100",     # HD그룹 지주
-    "두산": "100",       # 두산그룹 지주
-    "삼성물산": "100",    # 삼성그룹 사실상 지주 역할
+    "SK스퀘어": "100",  # SK하이닉스 지분 보유
+    "SK": "100",  # SK그룹 지주
+    "HD현대": "100",  # HD그룹 지주
+    "두산": "100",  # 두산그룹 지주
+    "삼성물산": "100",  # 삼성그룹 사실상 지주 역할
 }
 
 
@@ -77,17 +77,58 @@ def _industry_for(name: str) -> Optional[str]:
         return _HOLDING_COMPANIES[name]
     return None
 
+
 KOSPI_TOP_50 = [
-    "삼성전자", "SK하이닉스", "삼성전자우", "현대차", "LG에너지솔루션",
-    "한화에어로스페이스", "SK스퀘어", "삼성바이오로직스", "두산에너빌리티", "KB금융",
-    "기아", "HD현대중공업", "삼성생명", "삼성물산", "신한지주",
-    "셀트리온", "삼성전기", "삼성SDI", "한화오션", "HD현대일렉트릭",
-    "미래에셋증권", "현대모비스", "고려아연", "하나금융지주", "NAVER",
-    "POSCO홀딩스", "효성중공업", "HD한국조선해양", "한국전력", "LS ELECTRIC",
-    "한미반도체", "SK", "우리금융지주", "한화시스템", "삼성중공업",
-    "LG화학", "현대로템", "삼성화재", "두산", "카카오",
-    "LIG넥스원", "SK이노베이션", "KODEX 200", "HMM", "SK텔레콤",
-    "현대건설", "HD현대", "메리츠금융지주", "포스코퓨처엠", "KT&G",
+    "삼성전자",
+    "SK하이닉스",
+    "삼성전자우",
+    "현대차",
+    "LG에너지솔루션",
+    "한화에어로스페이스",
+    "SK스퀘어",
+    "삼성바이오로직스",
+    "두산에너빌리티",
+    "KB금융",
+    "기아",
+    "HD현대중공업",
+    "삼성생명",
+    "삼성물산",
+    "신한지주",
+    "셀트리온",
+    "삼성전기",
+    "삼성SDI",
+    "한화오션",
+    "HD현대일렉트릭",
+    "미래에셋증권",
+    "현대모비스",
+    "고려아연",
+    "하나금융지주",
+    "NAVER",
+    "POSCO홀딩스",
+    "효성중공업",
+    "HD한국조선해양",
+    "한국전력",
+    "LS ELECTRIC",
+    "한미반도체",
+    "SK",
+    "우리금융지주",
+    "한화시스템",
+    "삼성중공업",
+    "LG화학",
+    "현대로템",
+    "삼성화재",
+    "두산",
+    "카카오",
+    "LIG넥스원",
+    "SK이노베이션",
+    "KODEX 200",
+    "HMM",
+    "SK텔레콤",
+    "현대건설",
+    "HD현대",
+    "메리츠금융지주",
+    "포스코퓨처엠",
+    "KT&G",
 ]
 
 
@@ -120,6 +161,7 @@ def resolve_corp(name: str) -> Optional[CorpInfo]:
     if key.isdigit() and len(key) == 8:
         # corp_code 직접 lookup
         from .collector import fetch_corp_codes
+
         for c in fetch_corp_codes():
             if c.corp_code == key:
                 return c
@@ -134,6 +176,7 @@ def fetch_market_cap(stock_code: str) -> Optional[float]:
     """
     try:
         import yfinance as yf
+
         ticker = yf.Ticker(f"{stock_code}.KS")
         info = ticker.info
         return info.get("marketCap")
@@ -167,7 +210,11 @@ def collect_batch(
             continue
 
         industry = _industry_for(name)
-        market_cap = fetch_market_cap(corp.stock_code) if fetch_market_caps and corp.stock_code else None
+        market_cap = (
+            fetch_market_cap(corp.stock_code)
+            if fetch_market_caps and corp.stock_code
+            else None
+        )
         dart_url = fetch_latest_report_url(corp.corp_code)
 
         try:
@@ -179,9 +226,17 @@ def collect_batch(
                 sleep_sec=sleep_sec,
             )
             eqs = compute_eqs(panel)
-            out.append(FirmRecord(name, corp, panel=panel, eqs=eqs,
-                                  market_cap=market_cap, industry_code=industry,
-                                  dart_url=dart_url))
+            out.append(
+                FirmRecord(
+                    name,
+                    corp,
+                    panel=panel,
+                    eqs=eqs,
+                    market_cap=market_cap,
+                    industry_code=industry,
+                    dart_url=dart_url,
+                )
+            )
             if progress:
                 tot = eqs.total if eqs.total is not None else "—"
                 grade = eqs.grade or "—"
@@ -192,10 +247,20 @@ def collect_batch(
                 else:
                     tag = ""
                 cap_str = f" cap={market_cap/1e12:.1f}조" if market_cap else ""
-                print(f"[{i:2d}/{n}] {name} ({corp.stock_code}){tag}: {len(panel.years)}년 → EQS={tot} ({grade}){cap_str}")
+                print(
+                    f"[{i:2d}/{n}] {name} ({corp.stock_code}){tag}: {len(panel.years)}년 → EQS={tot} ({grade}){cap_str}"
+                )
         except Exception as e:  # noqa: BLE001 — 한 종목 실패가 전체를 막지 않도록
-            out.append(FirmRecord(name, corp, market_cap=market_cap, industry_code=industry,
-                                  dart_url=dart_url, error=f"{type(e).__name__}: {e}"))
+            out.append(
+                FirmRecord(
+                    name,
+                    corp,
+                    market_cap=market_cap,
+                    industry_code=industry,
+                    dart_url=dart_url,
+                    error=f"{type(e).__name__}: {e}",
+                )
+            )
             if progress:
                 print(f"[{i:2d}/{n}] {name}: 에러 {e}")
     return out
@@ -261,7 +326,8 @@ def export_for_frontend(
 
     out_dir = output_dir or os.path.join(
         os.path.dirname(os.path.dirname(os.path.dirname(__file__))),
-        "docs", "prototype",
+        "docs",
+        "prototype",
     )
     os.makedirs(out_dir, exist_ok=True)
 
@@ -291,18 +357,20 @@ def export_for_frontend(
                 "total_equity": _to_eok(latest.total_equity),
             }
 
-        items.append({
-            "name": r.display_name,
-            "stock_code": r.corp.stock_code if r.corp else None,
-            "corp_code": r.corp.corp_code if r.corp else None,
-            "market_cap": r.market_cap,
-            "grade": r.eqs.grade,
-            "total": r.eqs.total,
-            "modules": modules,
-            "dart_url": r.dart_url,
-            "latest_year": latest_year,
-            "industry_code": r.industry_code,
-        })
+        items.append(
+            {
+                "name": r.display_name,
+                "stock_code": r.corp.stock_code if r.corp else None,
+                "corp_code": r.corp.corp_code if r.corp else None,
+                "market_cap": r.market_cap,
+                "grade": r.eqs.grade,
+                "total": r.eqs.total,
+                "modules": modules,
+                "dart_url": r.dart_url,
+                "latest_year": latest_year,
+                "industry_code": r.industry_code,
+            }
+        )
 
     out_path = os.path.join(out_dir, output_name)
     with open(out_path, "w", encoding="utf-8") as f:

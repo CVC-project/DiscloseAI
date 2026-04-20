@@ -33,7 +33,7 @@ def test_build_sector_stats_records_with_error():
         corp_code="00000001",
         corp_name="Test",
         stock_code="000000",
-        modify_date="20240101"
+        modify_date="20240101",
     )
     panel = healthy_panel()
     eqs = EQSResult(
@@ -49,7 +49,7 @@ def test_build_sector_stats_records_with_error():
         corp=corp,
         panel=panel,
         eqs=eqs,
-        error="API_ERROR"  # error 설정됨
+        error="API_ERROR",  # error 설정됨
     )
     result = build_sector_stats([record])
     # error가 있으면 skip
@@ -63,15 +63,11 @@ def test_build_sector_stats_record_with_none_latest():
         corp_code="00000001",
         corp_name="Test",
         stock_code="000000",
-        modify_date="20240101"
+        modify_date="20240101",
     )
     empty_panel = FirmPanel(corp_code="test", years=[])  # 빈 panel
     record = FirmRecord(
-        display_name="Test",
-        corp=corp,
-        panel=empty_panel,
-        eqs=None,
-        error=None
+        display_name="Test", corp=corp, panel=empty_panel, eqs=None, error=None
     )
     result = build_sector_stats([record])
     # latest()=None이므로 skip
@@ -105,7 +101,7 @@ def test_build_sector_stats_valid_records(
         corp_code="00000001",
         corp_name="TestCo",
         stock_code="000001",
-        modify_date="20240101"
+        modify_date="20240101",
     )
     panel = healthy_panel()
     eqs = EQSResult(
@@ -117,11 +113,7 @@ def test_build_sector_stats_valid_records(
         grade="A",
     )
     record = FirmRecord(
-        display_name="TestCo",
-        corp=corp,
-        panel=panel,
-        eqs=eqs,
-        error=None
+        display_name="TestCo", corp=corp, panel=panel, eqs=eqs, error=None
     )
 
     result = build_sector_stats([record])
@@ -158,31 +150,22 @@ def test_build_sector_stats_multiple_records(
         corp_code="00000001",
         corp_name="Co1",
         stock_code="000001",
-        modify_date="20240101"
+        modify_date="20240101",
     )
     panel1 = healthy_panel()
     record1 = FirmRecord(
-        display_name="Co1",
-        corp=corp1,
-        panel=panel1,
-        eqs=MagicMock(),
-        error=None
+        display_name="Co1", corp=corp1, panel=panel1, eqs=MagicMock(), error=None
     )
 
     # 에러 레코드
-    record2 = FirmRecord(
-        display_name="Co2",
-        corp=None,
-        panel=None,
-        error="매칭실패"
-    )
+    record2 = FirmRecord(display_name="Co2", corp=None, panel=None, error="매칭실패")
 
     # 빈 panel 레코드
     record3 = FirmRecord(
         display_name="Co3",
         corp=corp1,
         panel=FirmPanel(corp_code="test", years=[]),
-        error=None
+        error=None,
     )
 
     result = build_sector_stats([record1, record2, record3])
@@ -219,13 +202,13 @@ def test_resolve_corp_corp_code_lookup(mock_fetch_corp_codes):
         corp_code="00126380",
         corp_name="삼성전자",
         stock_code="005930",
-        modify_date="20240101"
+        modify_date="20240101",
     )
     other_corp = CorpInfo(
         corp_code="00000001",
         corp_name="Other",
         stock_code="000001",
-        modify_date="20240101"
+        modify_date="20240101",
     )
     # Mock이 여러 기업을 반환하되, 목표 기업도 포함
     mock_fetch_corp_codes.return_value = [other_corp, target_corp]
@@ -255,4 +238,5 @@ def test_resolve_corp_instrument_blacklist_exact_match():
     # 유사하지만 다른 이름은 find_corp 시도 (mock 없으면 None)
     # 여기서는 단순히 정확한 match만 테스트
     from modules.financial.batch import INSTRUMENT_BLACKLIST
+
     assert "KODEX 200" in INSTRUMENT_BLACKLIST

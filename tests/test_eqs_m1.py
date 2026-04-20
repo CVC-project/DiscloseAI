@@ -22,12 +22,24 @@ def _varied_panel(seed: int) -> FirmPanel:
     ta0 = 5000 * s
     ta1 = 5300 * s
     y0 = make_year(
-        2023, revenue=rev0, ar=300 * s, ni=80 * s, ocf=70 * s,
-        ta=ta0, ppe=ta0 * ppe_ratio, cogs=700 * s,
+        2023,
+        revenue=rev0,
+        ar=300 * s,
+        ni=80 * s,
+        ocf=70 * s,
+        ta=ta0,
+        ppe=ta0 * ppe_ratio,
+        cogs=700 * s,
     )
     y1 = make_year(
-        2024, revenue=rev1, ar=300 * s + 30 * (seed % 3), ni=90 * s, ocf=80 * s,
-        ta=ta1, ppe=ta1 * ppe_ratio, cogs=770 * s,
+        2024,
+        revenue=rev1,
+        ar=300 * s + 30 * (seed % 3),
+        ni=90 * s,
+        ocf=80 * s,
+        ta=ta1,
+        ppe=ta1 * ppe_ratio,
+        cogs=770 * s,
     )
     return FirmPanel(corp_code=str(seed), years=[y0, y1])
 

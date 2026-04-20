@@ -233,6 +233,5 @@ def load_sector_stats(path: Optional[str] = None) -> Dict[str, SectorStats]:
         raw = json.load(fp)
     known = {f.name for f in fields(SectorStats)}
     return {
-        k: SectorStats(**{fk: v[fk] for fk in known if fk in v})
-        for k, v in raw.items()
+        k: SectorStats(**{fk: v[fk] for fk in known if fk in v}) for k, v in raw.items()
     }

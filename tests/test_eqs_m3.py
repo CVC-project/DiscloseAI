@@ -44,9 +44,9 @@ def test_m3_winsorize_extreme_outlier():
     """극단적 outlier (OCF/NI > 3)는 ±3으로 클립. 예: 10배는 3배로."""
     years = [
         make_year(2020, ni=100, ocf=1000),  # OCF/NI=10 → 3으로 클립
-        make_year(2021, ni=100, ocf=100),   # OCF/NI=1
-        make_year(2022, ni=100, ocf=100),   # OCF/NI=1
-        make_year(2023, ni=100, ocf=100),   # OCF/NI=1
+        make_year(2021, ni=100, ocf=100),  # OCF/NI=1
+        make_year(2022, ni=100, ocf=100),  # OCF/NI=1
+        make_year(2023, ni=100, ocf=100),  # OCF/NI=1
     ]
     s = score_m3(FirmPanel(corp_code="X", years=years))
     # 클립된 데이터: [3, 1, 1, 1] 평균≈1.5, 이는 충분히 높은 점수를 줘야 함
@@ -60,9 +60,9 @@ def test_m3_negative_outlier_winsorize():
     """극단적 음수 outlier도 클립 (예: -10은 -3으로)."""
     years = [
         make_year(2020, ni=100, ocf=-1000),  # OCF/NI=-10 → -3으로 클립
-        make_year(2021, ni=100, ocf=100),    # OCF/NI=1
-        make_year(2022, ni=100, ocf=100),    # OCF/NI=1
-        make_year(2023, ni=100, ocf=100),    # OCF/NI=1
+        make_year(2021, ni=100, ocf=100),  # OCF/NI=1
+        make_year(2022, ni=100, ocf=100),  # OCF/NI=1
+        make_year(2023, ni=100, ocf=100),  # OCF/NI=1
     ]
     s = score_m3(FirmPanel(corp_code="X", years=years))
     assert s.score is not None
@@ -72,10 +72,10 @@ def test_m3_negative_outlier_winsorize():
 def test_m3_loss_years_over_half_insufficient_pairs():
     """적자 연도가 절반 이상 → 유효 데이터 부족으로 None 반환."""
     years = [
-        make_year(2020, ni=-100, ocf=20),    # 적자 → 제외
-        make_year(2021, ni=-50, ocf=10),     # 적자 → 제외
-        make_year(2022, ni=100, ocf=120),    # 흑자
-        make_year(2023, ni=100, ocf=120),    # 흑자
+        make_year(2020, ni=-100, ocf=20),  # 적자 → 제외
+        make_year(2021, ni=-50, ocf=10),  # 적자 → 제외
+        make_year(2022, ni=100, ocf=120),  # 흑자
+        make_year(2023, ni=100, ocf=120),  # 흑자
     ]
     # total_years=4, valid=2. 2*2 < 4? No (2*2=4, not <4)
     # 이 경우는 정확히 반반이므로 산출됨.
@@ -91,11 +91,11 @@ def test_m3_loss_years_over_half_insufficient_pairs():
 def test_m3_loss_years_strictly_over_half_fallback():
     """적자 연도가 과반(>50%) → 현금창출력 fallback 적용."""
     years = [
-        make_year(2020, ni=-100, ocf=20),    # 적자
-        make_year(2021, ni=-50, ocf=10),     # 적자
-        make_year(2022, ni=-50, ocf=10),     # 적자
-        make_year(2023, ni=100, ocf=120),    # 흑자
-        make_year(2024, ni=100, ocf=120),    # 흑자
+        make_year(2020, ni=-100, ocf=20),  # 적자
+        make_year(2021, ni=-50, ocf=10),  # 적자
+        make_year(2022, ni=-50, ocf=10),  # 적자
+        make_year(2023, ni=100, ocf=120),  # 흑자
+        make_year(2024, ni=100, ocf=120),  # 흑자
     ]
     s = score_m3(FirmPanel(corp_code="X", years=years))
     assert s.score is not None  # fallback으로 점수 산출
@@ -105,10 +105,10 @@ def test_m3_loss_years_strictly_over_half_fallback():
 def test_m3_exactly_half_loss_years_allowed():
     """적자 연도가 정확히 50% → 비율 데이터 있으면 산출 (>는 아님)."""
     years = [
-        make_year(2020, ni=-100, ocf=20),    # 적자
-        make_year(2021, ni=-100, ocf=20),    # 적자
-        make_year(2022, ni=100, ocf=120),    # 흑자
-        make_year(2023, ni=100, ocf=120),    # 흑자
+        make_year(2020, ni=-100, ocf=20),  # 적자
+        make_year(2021, ni=-100, ocf=20),  # 적자
+        make_year(2022, ni=100, ocf=120),  # 흑자
+        make_year(2023, ni=100, ocf=120),  # 흑자
     ]
     # 2/4 = 50% 적자 (not > 50%)
     s = score_m3(FirmPanel(corp_code="X", years=years))
@@ -119,10 +119,10 @@ def test_m3_exactly_half_loss_years_allowed():
 def test_ocf_ni_pairs_filters_correctly():
     """_ocf_ni_pairs가 정확히 필터링 (NI<=0 제외)."""
     years = [
-        make_year(2020, ni=0, ocf=100),       # 제외 (NI==0)
-        make_year(2021, ni=-50, ocf=100),     # 제외 (NI<0)
-        make_year(2022, ni=100, ocf=150),     # 포함
-        make_year(2023, ni=100, ocf=None),    # 제외 (OCF=None)
+        make_year(2020, ni=0, ocf=100),  # 제외 (NI==0)
+        make_year(2021, ni=-50, ocf=100),  # 제외 (NI<0)
+        make_year(2022, ni=100, ocf=150),  # 포함
+        make_year(2023, ni=100, ocf=None),  # 제외 (OCF=None)
     ]
     pairs = _ocf_ni_pairs(FirmPanel(corp_code="X", years=years))
     assert len(pairs) == 1
@@ -132,7 +132,7 @@ def test_ocf_ni_pairs_filters_correctly():
 def test_m3_zero_ni_excluded():
     """NI=0인 해는 비율 의미 없음 → 제외."""
     years = [
-        make_year(2020, ni=0, ocf=100),      # NI=0 → 제외
+        make_year(2020, ni=0, ocf=100),  # NI=0 → 제외
         make_year(2021, ni=100, ocf=120),
         make_year(2022, ni=100, ocf=120),
     ]

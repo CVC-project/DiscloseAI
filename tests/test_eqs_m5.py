@@ -16,20 +16,31 @@ def test_m5_perfect_score():
     """모든 9개 criteria를 만족하도록 설계된 케이스."""
     prev = make_year(
         2023,
-        revenue=1000, cogs=700, ni=50, ta=5000, ca=2000, cl=1500, ltd=1000,
-        ppe=1500, ar=300, shares=1000, ocf=40,
+        revenue=1000,
+        cogs=700,
+        ni=50,
+        ta=5000,
+        ca=2000,
+        cl=1500,
+        ltd=1000,
+        ppe=1500,
+        ar=300,
+        shares=1000,
+        ocf=40,
     )
     curr = make_year(
         2024,
         revenue=1300,  # 매출↑
-        cogs=850,      # GM 개선 (1-850/1300=34.6% > 30%)
-        ni=120,        # ROA↑
-        ta=5500,       # asset turnover: 1300/5500=0.236 > 1000/5000=0.2
-        ca=2500, cl=1500,  # current ratio↑
-        ltd=800,       # 부채↓
-        ppe=1500, ar=300,
-        shares=1000,   # 신주 없음
-        ocf=200,       # CFO>0, CFO>NI
+        cogs=850,  # GM 개선 (1-850/1300=34.6% > 30%)
+        ni=120,  # ROA↑
+        ta=5500,  # asset turnover: 1300/5500=0.236 > 1000/5000=0.2
+        ca=2500,
+        cl=1500,  # current ratio↑
+        ltd=800,  # 부채↓
+        ppe=1500,
+        ar=300,
+        shares=1000,  # 신주 없음
+        ocf=200,  # CFO>0, CFO>NI
     )
     panel = FirmPanel(corp_code="X", years=[prev, curr])
     f = piotroski_f(prev, curr)
@@ -39,14 +50,19 @@ def test_m5_perfect_score():
 
 def test_m5_zero_score_when_all_negative():
     """전부 악화: ROA<0, CFO<0, 부채↑, 신주발행, 마진↓ 등."""
-    prev = make_year(2023, ni=100, ocf=120, ltd=500, shares=1000, cogs=600, revenue=1000)
+    prev = make_year(
+        2023, ni=100, ocf=120, ltd=500, shares=1000, cogs=600, revenue=1000
+    )
     curr = make_year(
         2024,
-        ni=-100, ocf=-50,
-        ltd=1000,        # 부채 증가
-        shares=1500,     # 신주발행
-        cogs=900, revenue=900,  # 매출 감소, 마진 악화
-        ca=500, cl=1500,  # current ratio 악화
+        ni=-100,
+        ocf=-50,
+        ltd=1000,  # 부채 증가
+        shares=1500,  # 신주발행
+        cogs=900,
+        revenue=900,  # 매출 감소, 마진 악화
+        ca=500,
+        cl=1500,  # current ratio 악화
     )
     panel = FirmPanel(corp_code="X", years=[prev, curr])
     f = piotroski_f(prev, curr)

@@ -51,9 +51,9 @@ def test_all_entries_have_both_label_and_description():
     """모든 glossary 항목은 label + description 필수 필드를 채워야."""
     for key, entry in GLOSSARY.items():
         assert entry.label, f"{key} 표시명 비어있음"
-        assert entry.description and len(entry.description) >= 10, (
-            f"{key} description이 너무 짧음"
-        )
+        assert (
+            entry.description and len(entry.description) >= 10
+        ), f"{key} description이 너무 짧음"
 
 
 def test_ratios_have_benchmark_and_intuition():

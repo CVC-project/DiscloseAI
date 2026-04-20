@@ -36,11 +36,7 @@ def _ocf_ni_pairs(panel: FirmPanel) -> List[Tuple[int, float]]:
     """(year, OCF/NI) 리스트. NI<=0 또는 결측 제외."""
     out: List[Tuple[int, float]] = []
     for y in panel.years:
-        if (
-            y.net_income is None
-            or y.operating_cashflow is None
-            or y.net_income <= 0
-        ):
+        if y.net_income is None or y.operating_cashflow is None or y.net_income <= 0:
             continue
         out.append((y.year, y.operating_cashflow / y.net_income))
     return out
@@ -85,9 +81,15 @@ def _score_m3_financial(panel: FirmPanel) -> ModuleScore:
     OCF/NI 대신 ROE·영업마진 안정성 + NI 성장 방향 일관성으로 이익 품질 측정.
     (Barth et al., 2008 — 안정적 이익 = 높은 이익 품질)
     """
-    years = [y for y in panel.years
-             if y.net_income is not None and y.total_equity and y.total_equity != 0
-             and y.revenue and y.operating_income is not None]
+    years = [
+        y
+        for y in panel.years
+        if y.net_income is not None
+        and y.total_equity
+        and y.total_equity != 0
+        and y.revenue
+        and y.operating_income is not None
+    ]
     if len(years) < 3:
         return ModuleScore(name="M3", score=None, note="금융업 fallback: 3년 이상 필요")
 
@@ -96,18 +98,26 @@ def _score_m3_financial(panel: FirmPanel) -> ModuleScore:
 
     # 1) ROE 안정성 (CV 기반, 50%)
     avg_roe = mean(roes)
-    roe_score = max(0.0, 100 * (1 - pstdev(roes) / abs(avg_roe))) if avg_roe != 0 else 0.0
+    roe_score = (
+        max(0.0, 100 * (1 - pstdev(roes) / abs(avg_roe))) if avg_roe != 0 else 0.0
+    )
 
     # 2) 영업마진 안정성 (CV 기반, 30%)
     avg_opm = mean(opms)
-    opm_score = max(0.0, 100 * (1 - pstdev(opms) / abs(avg_opm))) if avg_opm != 0 else 0.0
+    opm_score = (
+        max(0.0, 100 * (1 - pstdev(opms) / abs(avg_opm))) if avg_opm != 0 else 0.0
+    )
 
     # 3) NI 성장 방향 일관성 (20%)
     ni_vals = [y.net_income for y in years]
     if len(ni_vals) >= 3:
-        changes = [1 if ni_vals[i] >= ni_vals[i - 1] else -1 for i in range(1, len(ni_vals))]
+        changes = [
+            1 if ni_vals[i] >= ni_vals[i - 1] else -1 for i in range(1, len(ni_vals))
+        ]
         # 같은 방향으로 갈수록 일관성 높음
-        same_dir = sum(1 for i in range(1, len(changes)) if changes[i] == changes[i - 1])
+        same_dir = sum(
+            1 for i in range(1, len(changes)) if changes[i] == changes[i - 1]
+        )
         dir_score = (same_dir / max(1, len(changes) - 1)) * 100
     else:
         dir_score = 50.0  # 데이터 부족 시 중립
@@ -115,7 +125,9 @@ def _score_m3_financial(panel: FirmPanel) -> ModuleScore:
     score = round(roe_score * 0.5 + opm_score * 0.3 + dir_score * 0.2, 1)
     cv_roe = pstdev(roes) / abs(avg_roe) if avg_roe != 0 else float("inf")
     return ModuleScore(
-        name="M3", score=score, raw=cv_roe,
+        name="M3",
+        score=score,
+        raw=cv_roe,
         note=f"ROE CV={cv_roe:.2f}, 영업마진CV={pstdev(opms)/abs(avg_opm) if avg_opm != 0 else 0:.2f} — 금융업 소득안정성 fallback",
     )
 
@@ -161,6 +173,7 @@ def _score_m3_loss_heavy(panel: FirmPanel) -> ModuleScore:
 def score_m3(panel: FirmPanel) -> ModuleScore:
     # 금융업은 OCF 개념이 다르므로 소득안정성 fallback 사용
     from .industry import is_financial
+
     if is_financial(panel.industry_code):
         return _score_m3_financial(panel)
 
