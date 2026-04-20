@@ -5,6 +5,7 @@
   주가 변동에 더 순수하게 반영된다.
   → 저변동 시기 공시만 필터링하면 라벨 정확도가 올라간다.
 """
+
 from __future__ import annotations
 
 import logging
@@ -57,11 +58,15 @@ def filter_low_volatility_disclosures(
     # VKOSPI 저변동 날짜 집합
     low_vol_dates: set[date] = {
         row.date
-        for row in session.query(VkospiLocal).filter(VkospiLocal.is_low_vol.is_(True)).all()
+        for row in session.query(VkospiLocal)
+        .filter(VkospiLocal.is_low_vol.is_(True))
+        .all()
     }
 
     if not low_vol_dates:
-        logger.warning("저변동 날짜 데이터 없음 — vkospi_collector.py를 먼저 실행하세요.")
+        logger.warning(
+            "저변동 날짜 데이터 없음 — vkospi_collector.py를 먼저 실행하세요."
+        )
         return []
 
     query = session.query(PriceLocal).filter(
@@ -89,6 +94,7 @@ def compute_label_purity(
             "non_neutral_ratio": {"total": float, "low_vol": float},
         }
     """
+
     def _count(records: list[PriceLocal]) -> dict:
         counts: dict[str, int] = {"수혜": 0, "악재": 0, "중립": 0}
         for r in records:

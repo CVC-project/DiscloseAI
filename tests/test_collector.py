@@ -1,4 +1,5 @@
 """주가 수집 모듈 (collector) 테스트"""
+
 import pytest
 from datetime import date, timedelta
 from unittest.mock import patch, MagicMock
@@ -65,9 +66,7 @@ class TestFetchPrices:
             {
                 "Close": [50000.0, 51000.0, 52000.0],
             },
-            index=pd.DatetimeIndex(
-                ["2024-01-01", "2024-01-02", "2024-01-03"]
-            ),
+            index=pd.DatetimeIndex(["2024-01-01", "2024-01-02", "2024-01-03"]),
         )
         mock_download.return_value = mock_df
 
@@ -214,9 +213,11 @@ class TestSavePrices:
         rows = local_session.query(PriceLocal).all()
         assert len(rows) == 2
         # 기존 데이터 유지 확인
-        first_row = local_session.query(PriceLocal).filter_by(
-            corp_code="005930", date=date(2024, 1, 1)
-        ).first()
+        first_row = (
+            local_session.query(PriceLocal)
+            .filter_by(corp_code="005930", date=date(2024, 1, 1))
+            .first()
+        )
         assert first_row.close_price == 50000.0
 
     @patch("modules.price.collector.get_local_session")
@@ -262,9 +263,7 @@ class TestCollectPrices:
     @patch("modules.price.collector.init_local_db")
     @patch("modules.price.collector.save_prices")
     @patch("modules.price.collector.fetch_prices")
-    def test_collect_prices_integration(
-        self, mock_fetch, mock_save, mock_init
-    ):
+    def test_collect_prices_integration(self, mock_fetch, mock_save, mock_init):
         """주가 수집 + 저장 통합"""
         mock_fetch.return_value = [
             {

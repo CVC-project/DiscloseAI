@@ -1,4 +1,5 @@
 """공시 후 주가변동 라벨링 모듈 (labeler) 테스트"""
+
 import pytest
 from datetime import date, timedelta
 from unittest.mock import patch, MagicMock
@@ -392,9 +393,21 @@ class TestLabelBulk:
         ]
 
         disclosures = [
-            {"corp_code": "005930", "disclosure_date": date(2024, 1, 1), "disclosure_id": "acc_001"},
-            {"corp_code": "005930", "disclosure_date": date(2024, 1, 2), "disclosure_id": "acc_002"},
-            {"corp_code": "005930", "disclosure_date": date(2024, 1, 3), "disclosure_id": "acc_003"},
+            {
+                "corp_code": "005930",
+                "disclosure_date": date(2024, 1, 1),
+                "disclosure_id": "acc_001",
+            },
+            {
+                "corp_code": "005930",
+                "disclosure_date": date(2024, 1, 2),
+                "disclosure_id": "acc_002",
+            },
+            {
+                "corp_code": "005930",
+                "disclosure_date": date(2024, 1, 3),
+                "disclosure_id": "acc_003",
+            },
         ]
 
         result = label_bulk(disclosures)

@@ -3,6 +3,7 @@
 quiz_data.py: QUIZ_LIST 데이터 검증
 quiz.py: 퀴즈 실행 로직 검증
 """
+
 from __future__ import annotations
 
 import re
@@ -78,8 +79,12 @@ class TestQuizListDataTypes:
         """ticker 필드는 str이고 숫자여야 함"""
         for i, item in enumerate(QUIZ_LIST):
             assert isinstance(item["ticker"], str), f"Item {i} ticker is not str"
-            assert item["ticker"].isdigit(), f"Item {i} ticker is not numeric: {item['ticker']}"
-            assert len(item["ticker"]) == 6, f"Item {i} ticker not 6 digits: {item['ticker']}"
+            assert item[
+                "ticker"
+            ].isdigit(), f"Item {i} ticker is not numeric: {item['ticker']}"
+            assert (
+                len(item["ticker"]) == 6
+            ), f"Item {i} ticker not 6 digits: {item['ticker']}"
 
     def test_date_format_is_valid(self):
         """date 필드는 YYYY-MM-DD 형식이어야 함"""
@@ -87,7 +92,9 @@ class TestQuizListDataTypes:
         for i, item in enumerate(QUIZ_LIST):
             date_str = item["date"]
             assert isinstance(date_str, str), f"Item {i} date is not str"
-            assert re.match(date_pattern, date_str), f"Item {i} date format invalid: {date_str}"
+            assert re.match(
+                date_pattern, date_str
+            ), f"Item {i} date format invalid: {date_str}"
             # 실제 유효한 날짜인지 검증
             try:
                 datetime.strptime(date_str, "%Y-%m-%d")
@@ -126,23 +133,21 @@ class TestQuizListDataTypes:
         """change_pct는 float이고 -100~100 범위여야 함"""
         for i, item in enumerate(QUIZ_LIST):
             change = item["change_pct"]
-            assert isinstance(change, (int, float)), (
-                f"Item {i} change_pct is not float: {type(change)}"
-            )
-            assert -100 <= change <= 100, (
-                f"Item {i} change_pct out of range: {change}"
-            )
+            assert isinstance(
+                change, (int, float)
+            ), f"Item {i} change_pct is not float: {type(change)}"
+            assert -100 <= change <= 100, f"Item {i} change_pct out of range: {change}"
 
     def test_kospi_change_pct_is_valid_float(self):
         """kospi_change_pct는 float이고 -100~100 범위여야 함"""
         for i, item in enumerate(QUIZ_LIST):
             kospi = item["kospi_change_pct"]
-            assert isinstance(kospi, (int, float)), (
-                f"Item {i} kospi_change_pct is not float: {type(kospi)}"
-            )
-            assert -100 <= kospi <= 100, (
-                f"Item {i} kospi_change_pct out of range: {kospi}"
-            )
+            assert isinstance(
+                kospi, (int, float)
+            ), f"Item {i} kospi_change_pct is not float: {type(kospi)}"
+            assert (
+                -100 <= kospi <= 100
+            ), f"Item {i} kospi_change_pct out of range: {kospi}"
 
     def test_window_is_str(self):
         """window 필드는 str이고 비어있으면 안 됨"""
@@ -153,7 +158,9 @@ class TestQuizListDataTypes:
     def test_explanation_is_str(self):
         """explanation 필드는 str이고 비어있으면 안 됨"""
         for i, item in enumerate(QUIZ_LIST):
-            assert isinstance(item["explanation"], str), f"Item {i} explanation is not str"
+            assert isinstance(
+                item["explanation"], str
+            ), f"Item {i} explanation is not str"
             assert len(item["explanation"]) > 0, f"Item {i} explanation is empty"
 
 
@@ -176,9 +183,7 @@ class TestQuizListDataConsistency:
         for i, item in enumerate(QUIZ_LIST):
             try:
                 alpha = item["change_pct"] - item["kospi_change_pct"]
-                assert isinstance(alpha, (int, float)), (
-                    f"Item {i} alpha is not numeric"
-                )
+                assert isinstance(alpha, (int, float)), f"Item {i} alpha is not numeric"
             except TypeError as e:
                 pytest.fail(f"Item {i} alpha calculation failed: {e}")
 
@@ -264,17 +269,19 @@ class TestQuizDataEdgeCases:
         """음수 변동률은 반드시 악재 또는 중립 라벨을 가져야 함"""
         for i, item in enumerate(QUIZ_LIST):
             if item["change_pct"] < 0:
-                assert item["answer"] in {"악재", "중립"}, (
-                    f"Item {i} has negative change but label is {item['answer']}"
-                )
+                assert item["answer"] in {
+                    "악재",
+                    "중립",
+                }, f"Item {i} has negative change but label is {item['answer']}"
 
     def test_positive_changes_have_correct_label(self):
         """양수 변동률은 반드시 수혜 또는 중립 라벨을 가져야 함"""
         for i, item in enumerate(QUIZ_LIST):
             if item["change_pct"] > 0:
-                assert item["answer"] in {"수혜", "중립"}, (
-                    f"Item {i} has positive change but label is {item['answer']}"
-                )
+                assert item["answer"] in {
+                    "수혜",
+                    "중립",
+                }, f"Item {i} has positive change but label is {item['answer']}"
 
     def test_zero_change_is_neutral(self):
         """정확히 0% 변동은 중립 라벨이어야 함"""
@@ -291,27 +298,19 @@ class TestQuizDataEdgeCases:
             # 모든 문자가 한글 또는 영문 또는 숫자여야 함
             for char in company:
                 assert (
-                    char.isalnum()
-                    or ord(char) >= 0xAC00  # 한글 시작
+                    char.isalnum() or ord(char) >= 0xAC00  # 한글 시작
                 ), f"Item {i} company has invalid character: {char}"
 
     def test_dates_are_reasonable(self):
         """날짜들이 합리적인 범위에 있어야 함 (2015 이후)"""
         for i, item in enumerate(QUIZ_LIST):
             date_obj = datetime.strptime(item["date"], "%Y-%m-%d")
-            assert date_obj.year >= 2015, (
-                f"Item {i} date is too old: {item['date']}"
-            )
-            assert date_obj.year <= 2024, (
-                f"Item {i} date is in future: {item['date']}"
-            )
+            assert date_obj.year >= 2015, f"Item {i} date is too old: {item['date']}"
+            assert date_obj.year <= 2024, f"Item {i} date is in future: {item['date']}"
 
     def test_extreme_changes_are_rare(self):
         """극단적인 변동(-50% 이상 또는 +50% 이상)은 드물어야 함"""
-        extreme_items = [
-            item for item in QUIZ_LIST
-            if abs(item["change_pct"]) >= 50
-        ]
+        extreme_items = [item for item in QUIZ_LIST if abs(item["change_pct"]) >= 50]
         # 2개 이상의 극단적 사건이 있어야 함 (사건이 극단적이므로)
         assert len(extreme_items) >= 0  # 극단 사건이 없을 수도 있음
 
