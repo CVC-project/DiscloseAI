@@ -39,8 +39,11 @@ class PriceData(SharedBase):
     disclosure_id = Column(String)
 
 
-# shared.models을 테스트 모델로 대체
+# shared.models / shared.db를 테스트 모델로 임시 교체 후 linker 임포트
 import sys
+
+_orig_shared_models = sys.modules.get("shared.models")
+_orig_shared_db = sys.modules.get("shared.db")
 
 shared_models_module = MagicMock()
 shared_models_module.DisclosureData = DisclosureData
@@ -48,10 +51,8 @@ shared_models_module.PriceData = PriceData
 shared_models_module.Base = SharedBase
 sys.modules["shared.models"] = shared_models_module
 
-# shared.db도 mock
 shared_db_module = MagicMock()
 sys.modules["shared.db"] = shared_db_module
-
 
 from modules.price.linker import (
     _detect_market,
@@ -60,6 +61,17 @@ from modules.price.linker import (
     link_single,
     run_pipeline,
 )
+
+# linker 임포트 완료 후 sys.modules 원복 (다른 테스트 오염 방지)
+if _orig_shared_models is not None:
+    sys.modules["shared.models"] = _orig_shared_models
+else:
+    sys.modules.pop("shared.models", None)
+
+if _orig_shared_db is not None:
+    sys.modules["shared.db"] = _orig_shared_db
+else:
+    sys.modules.pop("shared.db", None)
 
 
 @pytest.fixture

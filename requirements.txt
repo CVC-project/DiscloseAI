@@ -3,7 +3,7 @@ python-dotenv>=1.0
 pytest>=7.4
 black>=24.0
 
-# 공용 유틸 — relation·price·financial·disclosure 모듈에서 사용
+# 공용 유틸 — 전 모듈에서 사용
 pandas>=2.1
 requests>=2.31.0
 beautifulsoup4>=4.12
@@ -15,3 +15,8 @@ networkx>=3.2
 # price 모듈 — 주가 수집·라벨링
 yfinance>=0.2.0
 pykrx>=1.0.0
+
+# disclosure 모듈 — DART 공시 수집 + AI 분석
+OpenDartReader>=0.2
+groq>=0.9
+schedule>=1.2
