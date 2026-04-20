@@ -1,4 +1,5 @@
 """VKOSPI (한국판 VIX) 수집 — pykrx 사용"""
+
 from __future__ import annotations
 
 import logging
@@ -55,9 +56,7 @@ def save_vkospi(records: list[dict]) -> int:
     session = get_local_session()
     saved = 0
     try:
-        existing_dates = {
-            r.date for r in session.query(VkospiLocal.date).all()
-        }
+        existing_dates = {r.date for r in session.query(VkospiLocal.date).all()}
         for rec in records:
             if rec["date"] in existing_dates:
                 continue

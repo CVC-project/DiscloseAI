@@ -8,6 +8,7 @@
 
 모듈 간 연결은 import 금지 → shared DB 테이블로만 데이터 공유 (CLAUDE.md 규칙).
 """
+
 from __future__ import annotations
 
 import logging
@@ -22,7 +23,7 @@ from modules.price.labeler import label_disclosure
 logger = logging.getLogger(__name__)
 
 # 주가 수집 범위: 공시일 기준 앞뒤로 얼마나 가져올지
-_PRE_DAYS = 5    # 공시 전 버퍼 (거래일 기준이 아닌 달력일)
+_PRE_DAYS = 5  # 공시 전 버퍼 (거래일 기준이 아닌 달력일)
 _POST_DAYS = 15  # 공시 후 버퍼 (5거래일 확보를 위해 여유 있게)
 
 
@@ -173,7 +174,11 @@ def link_single(disclosure: DisclosureData, market: str | None = None) -> bool:
     pushed = push_to_shared(corp_code, result, prices)
     logger.info(
         "[%s/%s] 연결 완료 — 라벨: %s, 변동: %.2f%%, 저장: %d건",
-        corp_code, resolved_market, result["label"], result["change_pct"], pushed,
+        corp_code,
+        resolved_market,
+        result["label"],
+        result["change_pct"],
+        pushed,
     )
     return True
 

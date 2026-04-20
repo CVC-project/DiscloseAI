@@ -1,4 +1,5 @@
 """yfinance 주가 수집 — KOSPI(.KS) / KOSDAQ(.KQ)"""
+
 from __future__ import annotations
 
 import logging
@@ -71,6 +72,7 @@ def fetch_prices(
     # yfinance 1.x: MultiIndex 튜플 컬럼 ('Close', '005930.KS') → 평탄화
     # yfinance 0.x: 단순 문자열 컬럼 'Close'
     import pandas as pd
+
     if isinstance(df.columns, pd.MultiIndex):
         df.columns = [c[0] for c in df.columns]
 
@@ -94,7 +96,9 @@ def fetch_prices(
                 "corp_code": corp_code,
                 "date": idx.date() if hasattr(idx, "date") else idx,
                 "close_price": float(close_val),
-                "daily_return": float(ret_val) if ret_val == ret_val else None,  # NaN → None
+                "daily_return": (
+                    float(ret_val) if ret_val == ret_val else None
+                ),  # NaN → None
             }
         )
 
@@ -161,9 +165,7 @@ def collect_prices(
     init_local_db()
     records = fetch_prices(corp_code, market, start, end)
     saved = save_prices(records)
-    logger.info(
-        "[%s] 저장 완료: %d건 (%s ~ %s)", corp_code, saved, start, end
-    )
+    logger.info("[%s] 저장 완료: %d건 (%s ~ %s)", corp_code, saved, start, end)
     return saved
 
 

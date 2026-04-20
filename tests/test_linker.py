@@ -1,4 +1,5 @@
 """공시 ↔ 주가 연결 모듈 (linker) 테스트"""
+
 import pytest
 from datetime import date, timedelta
 from unittest.mock import patch, MagicMock
@@ -11,6 +12,7 @@ SharedBase = declarative_base()
 
 class DisclosureData(SharedBase):
     """Test용 DisclosureData"""
+
     __tablename__ = "disclosure_data"
     id = Column(Integer, primary_key=True, autoincrement=True)
     disclosure_id = Column(String, unique=True, index=True)
@@ -25,6 +27,7 @@ class DisclosureData(SharedBase):
 
 class PriceData(SharedBase):
     """Test용 PriceData"""
+
     __tablename__ = "price_data"
     id = Column(Integer, primary_key=True, autoincrement=True)
     corp_code = Column(String, nullable=False, index=True)
@@ -38,15 +41,16 @@ class PriceData(SharedBase):
 
 # shared.models을 테스트 모델로 대체
 import sys
+
 shared_models_module = MagicMock()
 shared_models_module.DisclosureData = DisclosureData
 shared_models_module.PriceData = PriceData
 shared_models_module.Base = SharedBase
-sys.modules['shared.models'] = shared_models_module
+sys.modules["shared.models"] = shared_models_module
 
 # shared.db도 mock
 shared_db_module = MagicMock()
-sys.modules['shared.db'] = shared_db_module
+sys.modules["shared.db"] = shared_db_module
 
 
 from modules.price.linker import (
@@ -151,9 +155,7 @@ class TestFetchUnlinkedDisclosures:
         assert result == []
 
     @patch("modules.price.linker.get_session")
-    def test_fetch_unlinked_disclosures_no_date(
-        self, mock_get_session, shared_session
-    ):
+    def test_fetch_unlinked_disclosures_no_date(self, mock_get_session, shared_session):
         """disclosure_date 없는 행은 제외"""
         mock_get_session.return_value = shared_session
 
@@ -341,9 +343,7 @@ class TestLinkSingle:
     @patch("modules.price.linker.push_to_shared")
     @patch("modules.price.linker.label_disclosure")
     @patch("modules.price.linker.collect_prices")
-    def test_link_single_success(
-        self, mock_collect, mock_label, mock_push
-    ):
+    def test_link_single_success(self, mock_collect, mock_label, mock_push):
         """단일 공시 처리 성공"""
         disclosure = MagicMock()
         disclosure.corp_code = "005930"
@@ -367,9 +367,7 @@ class TestLinkSingle:
     @patch("modules.price.linker.push_to_shared")
     @patch("modules.price.linker.label_disclosure")
     @patch("modules.price.linker.collect_prices")
-    def test_link_single_labeling_fails(
-        self, mock_collect, mock_label, mock_push
-    ):
+    def test_link_single_labeling_fails(self, mock_collect, mock_label, mock_push):
         """라벨링 실패"""
         disclosure = MagicMock()
         disclosure.corp_code = "005930"
@@ -386,9 +384,7 @@ class TestLinkSingle:
     @patch("modules.price.linker.push_to_shared")
     @patch("modules.price.linker.label_disclosure")
     @patch("modules.price.linker.collect_prices")
-    def test_link_single_auto_detect_market(
-        self, mock_collect, mock_label, mock_push
-    ):
+    def test_link_single_auto_detect_market(self, mock_collect, mock_label, mock_push):
         """시장 자동 감지"""
         disclosure = MagicMock()
         disclosure.corp_code = "005930"
@@ -413,9 +409,7 @@ class TestRunPipeline:
 
     @patch("modules.price.linker.link_single")
     @patch("modules.price.linker.fetch_unlinked_disclosures")
-    def test_run_pipeline_all_success(
-        self, mock_fetch, mock_link
-    ):
+    def test_run_pipeline_all_success(self, mock_fetch, mock_link):
         """파이프라인 모든 공시 성공"""
         disclosures = [
             MagicMock(disclosure_id="acc_001"),
@@ -432,9 +426,7 @@ class TestRunPipeline:
 
     @patch("modules.price.linker.link_single")
     @patch("modules.price.linker.fetch_unlinked_disclosures")
-    def test_run_pipeline_partial_failure(
-        self, mock_fetch, mock_link
-    ):
+    def test_run_pipeline_partial_failure(self, mock_fetch, mock_link):
         """일부 공시 실패"""
         disclosures = [
             MagicMock(disclosure_id="acc_001"),
@@ -452,9 +444,7 @@ class TestRunPipeline:
 
     @patch("modules.price.linker.link_single")
     @patch("modules.price.linker.fetch_unlinked_disclosures")
-    def test_run_pipeline_exception_handling(
-        self, mock_fetch, mock_link
-    ):
+    def test_run_pipeline_exception_handling(self, mock_fetch, mock_link):
         """예외 발생하면 계속 진행"""
         disclosures = [
             MagicMock(disclosure_id="acc_001"),
@@ -484,9 +474,7 @@ class TestRunPipeline:
 
     @patch("modules.price.linker.link_single")
     @patch("modules.price.linker.fetch_unlinked_disclosures")
-    def test_run_pipeline_limit_parameter(
-        self, mock_fetch, mock_link
-    ):
+    def test_run_pipeline_limit_parameter(self, mock_fetch, mock_link):
         """limit 파라미터 전달"""
         mock_fetch.return_value = []
 
