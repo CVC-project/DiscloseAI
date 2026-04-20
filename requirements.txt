@@ -3,9 +3,15 @@ python-dotenv>=1.0
 pytest>=7.4
 black>=24.0
 
-# relation 모듈 — API 호출·그래프·HTML 파싱
-requests>=2.31
-networkx>=3.2
+# 공용 유틸 — relation·price·financial·disclosure 모듈에서 사용
 pandas>=2.1
+requests>=2.31.0
 beautifulsoup4>=4.12
 lxml>=5.1
+
+# relation 모듈 — 기업 관계 그래프
+networkx>=3.2
+
+# price 모듈 — 주가 수집·라벨링
+yfinance>=0.2.0
+pykrx>=1.0.0
