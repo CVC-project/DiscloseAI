@@ -1,0 +1,6 @@
+ticker,corp_name,group_name,reason
+# 단계 1(공정위 API)·단계 2(K-IFRS)·단계 3(주석 파싱)까지 거치고도
+# group_name이 null로 남거나 CPA 감각으로 보정이 필요한 경우만 이 파일에 기록.
+# 실전 예상 0~2건. 컬럼: ticker / corp_name / group_name / reason(보정 근거 한 줄)
+# 예시 (실제 데이터 수집 전이라 비어있음):
+# 042700,한미반도체,,"자산 5조 미만 독립기업 — 공정위 미지정, 계열 엣지 없음"

@@ -49,6 +49,7 @@ PRD 상세: docs/PRD.md
 ## Agent
 - code-reviewer: Sonnet, 읽기 전용 리뷰
 - test-generator: Haiku, pytest 자동 생성
+- ui-ux-reviewer: Sonnet, UI/UX 시각화 검증 (읽기 전용)
 
 ## 브랜치 전략
 - main: 배포용 (직접 push 금지)
