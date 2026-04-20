@@ -325,7 +325,7 @@ edges.forEach(e=>{
   const dx0=e.b.x-e.a.x, dy0=e.b.y-e.a.y;
   const len=Math.sqrt(dx0*dx0+dy0*dy0)||1;
   const px=-dy0/len, py=dx0/len;  // perpendicular unit
-  const offsetStep = 5;
+  const offsetStep = 2.5;  // 이중선 간격 (train track 느낌으로 바짝 붙임)
   const off = (e.parallelCount>1) ? ((e.parallelIdx - (e.parallelCount-1)/2) * offsetStep) : 0;
   const x1=e.a.x+px*off, y1=e.a.y+py*off;
   const x2=e.b.x+px*off, y2=e.b.y+py*off;
@@ -337,18 +337,32 @@ edges.forEach(e=>{
   else{x.strokeStyle=st.color;x.lineWidth=st.width;x.setLineDash(st.dash);x.globalAlpha=0.6;}
   x.stroke();
 
+  // 흐름 효과 — hover/select 시 방향성 있는 엣지에 움직이는 점선 오버레이 (source→target 방향으로 흐름)
+  const isFlow = ARROW_TYPES.has(e.type) && (isH || (sel && selConnected));
+  if(isFlow){
+    x.beginPath();x.moveTo(x1,y1);x.lineTo(x2,y2);
+    x.setLineDash([10,16]);
+    x.lineDashOffset = -time * 45;  // 음수 → path 방향(a→b)으로 흐름
+    x.strokeStyle = st.color;
+    x.lineWidth = st.width * 1.6;
+    x.globalAlpha = 0.95;
+    x.stroke();
+    x.lineDashOffset = 0;
+  }
+
   // 방향 화살표 (K-IFRS 지분·주석 관계만 — ftc_group/manual은 무방향)
   if(ARROW_TYPES.has(e.type) && x.globalAlpha >= 0.3){
     x.setLineDash([]);
     const nodeR = e.b.sz*22;
     const tipX = x2 - (dx0/len)*nodeR;
     const tipY = y2 - (dy0/len)*nodeR;
-    const arrowSize = Math.max(4, st.width*2.2);
+    const arrowSize = isFlow ? Math.max(14, st.width*6) : Math.max(9, st.width*4);
     const ang = Math.atan2(dy0, dx0);
+    x.globalAlpha = isFlow ? 1.0 : Math.min(0.9, x.globalAlpha);
     x.beginPath();
     x.moveTo(tipX, tipY);
-    x.lineTo(tipX - arrowSize*Math.cos(ang-0.45), tipY - arrowSize*Math.sin(ang-0.45));
-    x.lineTo(tipX - arrowSize*Math.cos(ang+0.45), tipY - arrowSize*Math.sin(ang+0.45));
+    x.lineTo(tipX - arrowSize*Math.cos(ang-0.5), tipY - arrowSize*Math.sin(ang-0.5));
+    x.lineTo(tipX - arrowSize*Math.cos(ang+0.5), tipY - arrowSize*Math.sin(ang+0.5));
     x.closePath();
     x.fillStyle = st.color;
     x.fill();
