@@ -27,7 +27,6 @@ from typing import List, Optional, Sequence
 from ._ols import ols_multi
 from .types import FirmPanel, FirmYear, ModuleScore
 
-
 # |DA/A| 또는 |TA/A| 0% → 100점, 20% 이상 → 0점으로 선형 매핑.
 # 0.20 임계값은 Dechow(1995)의 미국 표본 평균 |DA| 약 4~6%의 4σ 근처 — 한국
 # 데이터로 재추정 시 조정 예정.

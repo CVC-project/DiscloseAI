@@ -155,7 +155,7 @@ def _mean(values: Iterable[Optional[float]]) -> Optional[float]:
 
 
 def compute_sector_stats(
-    company_ratios: Dict[str, Dict[str, Optional[float]]]
+    company_ratios: Dict[str, Dict[str, Optional[float]]],
 ) -> Dict[str, SectorStats]:
     """각 회사의 비율 dict → 섹터별 평균 집계.
 
