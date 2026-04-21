@@ -4,10 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DiscloseAI — Corporate Galaxies (섹터 은하수)</title>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#060a13;color:#e0e0e0;font-family:-apple-system,'Pretendard',sans-serif;overflow:hidden;user-select:none}
 canvas{display:block}
+#c3d{position:fixed;top:0;left:0;width:100vw;height:100vh;display:none;cursor:grab;z-index:1}
+#c3d.drag{cursor:grabbing}
+body.mode-3d #c{display:none}
+body.mode-3d #c3d{display:block}
+.btn-3d-toggle{position:fixed;top:16px;right:20px;z-index:60;padding:8px 14px;border-radius:9px;border:1px solid rgba(255,255,255,0.14);background:rgba(8,12,24,0.85);color:#e0e0e0;font-size:12px;cursor:pointer;backdrop-filter:blur(8px);transition:all 0.2s}
+.btn-3d-toggle:hover{background:rgba(30,41,59,0.95)}
+.btn-3d-toggle.on{background:linear-gradient(135deg,rgba(77,166,255,0.28),rgba(167,139,250,0.28));border-color:#a78bfa;color:#fff;box-shadow:0 0 14px rgba(167,139,250,0.45)}
 
 /* Alert */
 .alert-banner{position:fixed;top:-80px;left:0;right:0;z-index:100;background:linear-gradient(90deg,rgba(20,40,80,0.96),rgba(30,60,120,0.96));border-bottom:2px solid #4da6ff;padding:14px 24px;display:flex;align-items:center;gap:12px;transition:top 0.6s cubic-bezier(0.16,1,0.3,1)}
@@ -134,7 +149,9 @@ canvas{display:block}
 <div class="title"><h1>DiscloseAI</h1><p><span class="live"></span>기업을 클릭하여 해부를 시작하세요</p></div>
 
 <canvas id="c"></canvas>
+<canvas id="c3d"></canvas>
 
+<button class="btn-3d-toggle" id="btn-3d" title="2D ↔ 3D 전환">🌌 3D</button>
 
 <div class="panel" id="panel">
   <button class="close-btn" onclick="closePanel()">×</button>
@@ -655,6 +672,7 @@ function physics(){
 }
 function draw(){
 time+=0.016;
+if(document.body.classList.contains('mode-3d')){physics();requestAnimationFrame(draw);return;}
 x.clearRect(0,0,W,H);
 
 // === BACKGROUND: deep space gradient ===
@@ -1065,12 +1083,12 @@ if(mascot.progress>=1&&mascot.targetNode){mascot.prevNode=mascot.targetNode;}
 x.restore();physics();requestAnimationFrame(draw);}
 
 // ===== INTERACTION =====
-c.addEventListener('mousemove',e=>{if(drag){camX=cs.x+(e.clientX-ds.x);camY=cs.y+(e.clientY-ds.y);return;}const mx=(e.clientX-camX)/zm,my=(e.clientY-camY)/zm;hov=null;nodes.forEach(n=>{const dx=n.x-mx,dy=n.y-my;if(Math.sqrt(dx*dx+dy*dy)<n.sz*22){hov=n;c.style.cursor='pointer';}});if(!hov)c.style.cursor='grab';});
-c.addEventListener('mousedown',e=>{const mx=(e.clientX-camX)/zm,my=(e.clientY-camY)/zm;let clicked=null;nodes.forEach(n=>{const dx=n.x-mx,dy=n.y-my;if(Math.sqrt(dx*dx+dy*dy)<n.sz*22)clicked=n;});if(clicked){sel=clicked;if(currentMode==='analyze')showAnalyze(clicked);else if(currentMode==='disclosure')showDisclosure(clicked);else showTimemachine(clicked);}else{sel=null;closePanel();drag=true;ds={x:e.clientX,y:e.clientY};cs={x:camX,y:camY};c.style.cursor='grabbing';}});
+c.addEventListener('mousemove',e=>{if(document.body.classList.contains('mode-3d'))return;if(drag){camX=cs.x+(e.clientX-ds.x);camY=cs.y+(e.clientY-ds.y);return;}const mx=(e.clientX-camX)/zm,my=(e.clientY-camY)/zm;hov=null;nodes.forEach(n=>{const dx=n.x-mx,dy=n.y-my;if(Math.sqrt(dx*dx+dy*dy)<n.sz*22){hov=n;c.style.cursor='pointer';}});if(!hov)c.style.cursor='grab';});
+c.addEventListener('mousedown',e=>{if(document.body.classList.contains('mode-3d'))return;const mx=(e.clientX-camX)/zm,my=(e.clientY-camY)/zm;let clicked=null;nodes.forEach(n=>{const dx=n.x-mx,dy=n.y-my;if(Math.sqrt(dx*dx+dy*dy)<n.sz*22)clicked=n;});if(clicked){sel=clicked;if(currentMode==='analyze')showAnalyze(clicked);else if(currentMode==='disclosure')showDisclosure(clicked);else showTimemachine(clicked);}else{sel=null;closePanel();drag=true;ds={x:e.clientX,y:e.clientY};cs={x:camX,y:camY};c.style.cursor='grabbing';}});
 // ESC 키로 선택 해제
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){sel=null;closePanel();}});
-c.addEventListener('mouseup',()=>{drag=false;c.style.cursor='grab';});
-c.addEventListener('wheel',e=>{const d=e.deltaY>0?0.9:1.1;const mx=e.clientX,my=e.clientY;const wx=(mx-camX)/zm,wy=(my-camY)/zm;zm=Math.max(0.2,Math.min(4,zm*d));camX=mx-wx*zm;camY=my-wy*zm;e.preventDefault();},{passive:false});
+c.addEventListener('mouseup',()=>{if(document.body.classList.contains('mode-3d'))return;drag=false;c.style.cursor='grab';});
+c.addEventListener('wheel',e=>{if(document.body.classList.contains('mode-3d'))return;const d=e.deltaY>0?0.9:1.1;const mx=e.clientX,my=e.clientY;const wx=(mx-camX)/zm,wy=(my-camY)/zm;zm=Math.max(0.2,Math.min(4,zm*d));camX=mx-wx*zm;camY=my-wy*zm;e.preventDefault();},{passive:false});
 
 function closePanel(){document.getElementById('panel').classList.remove('open');sel=null;}
 function filter(f,btn){flt=f;document.querySelectorAll('.hud-sub button').forEach(b=>b.classList.remove('on'));btn.classList.add('on');}
@@ -1218,7 +1236,725 @@ function revealTM(el, choice) {
   init();
   draw();
   setMode('analyze', document.querySelector('[data-mode="analyze"]'));
+
+  // ===== Expose shared state for 3D module =====
+  window._ug = {
+    get nodes(){return nodes;},
+    get edges(){return edges;},
+    get sectors(){return sectors;},
+    get sel(){return sel;},
+    set sel(v){sel=v;},
+    get hov(){return hov;},
+    set hov(v){hov=v;},
+    get flt(){return flt;},
+    set flt(v){flt=v;},
+    get currentMode(){return currentMode;},
+    get alertOn(){return alertOn;},
+    get alertSrc(){return alertSrc;},
+    EDGE_STYLES, EDGE_LABELS,
+    hexA,
+    showAnalyze, showDisclosure, showTimemachine, closePanel,
+    is3D(){return document.body.classList.contains('mode-3d');}
+  };
+  window.dispatchEvent(new Event('_ug_ready'));
 })();
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+// ===== Setup references (wait for _ug ready) =====
+let UG = null;
+let scene, camera, renderer, controls, raycaster, mouse = new THREE.Vector2();
+let ready = false, initialized = false;
+let galaxyGroups = {};   // name -> {group, core, arms[], tiltQuat}
+let planetMeshes = [];   // {mesh, node, ring, halo, _baseY}
+let edgeLines = [];      // {line, mat, edge, curve, pulse, pulsePhase, directional}
+let selRing = null, hovRing = null;
+let clock = new THREE.Clock();
+
+const SC = 0.018;  // 2D world units → 3D units
+const VERT_SPREAD = 0.25;  // how far galaxies spread in Y
+
+// 2D world (W,H) varies with screen size, but init() has set everything.
+// We use the absolute x,y of galaxies and subtract a center.
+function getCenter(){
+  let sumX=0, sumY=0, c=0;
+  UG.nodes.forEach(n=>{ sumX += n.gcx; sumY += n.gcy; c++; });
+  return c ? {x: sumX/c, y: sumY/c} : {x:0, y:0};
+}
+let W2, CENTER;
+function wto3(wx, wy){ return [(wx - CENTER.x)*SC, -(wy - CENTER.y)*SC]; }
+
+// Per-galaxy 3D tilt (axis + angle) - deterministic from sector name
+function tiltFor(name){
+  const seed = name.charCodeAt(0) + (name.charCodeAt(1)||0);
+  const ax = ((seed*17)%100)/100 - 0.5;
+  const az = ((seed*31)%100)/100 - 0.5;
+  const angle = 0.18 + ((seed*7)%100)/100 * 0.45;  // 0.18 ~ 0.63 rad
+  return {axis: new THREE.Vector3(ax, 0, az).normalize(), angle};
+}
+
+// Per-galaxy vertical offset in 3D (staggers them so they don't all sit at y=0)
+function verticalFor(name){
+  const seed = name.charCodeAt(0);
+  return ((seed*13) % 100)/100 * VERT_SPREAD * 2 - VERT_SPREAD;
+}
+
+// ====== INIT ======
+function init(){
+  const canvas = document.getElementById('c3d');
+  scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x040711);
+  scene.fog = new THREE.FogExp2(0x040711, 0.004);
+
+  camera = new THREE.PerspectiveCamera(55, innerWidth/innerHeight, 0.1, 400);
+  camera.position.set(0, 22, 32);
+
+  renderer = new THREE.WebGLRenderer({canvas, antialias:true});
+  renderer.setSize(innerWidth, innerHeight);
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.25;
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+  controls = new OrbitControls(camera, canvas);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.07;
+  controls.minDistance = 3;
+  controls.maxDistance = 120;
+  controls.rotateSpeed = 0.7;
+  controls.zoomSpeed = 0.9;
+  controls.panSpeed = 0.7;
+
+  raycaster = new THREE.Raycaster();
+
+  // ==== LIGHTS ====
+  scene.add(new THREE.AmbientLight(0x404868, 0.35));
+  const pt = new THREE.PointLight(0xffffff, 0.5, 100);
+  pt.position.set(0, 20, 10);
+  scene.add(pt);
+
+  CENTER = getCenter();
+
+  buildStarField();
+  buildNebulae();
+  buildGalaxies();
+  buildPlanets();
+  buildEdges();
+  buildSelectionRings();
+
+  // Events
+  canvas.addEventListener('pointermove', onPointerMove);
+  canvas.addEventListener('pointerdown', onPointerDown);
+  canvas.addEventListener('pointerup', onPointerUp);
+  canvas.addEventListener('pointerleave', ()=>{
+    const tip = document.getElementById('tip');
+    if(tip) tip.classList.remove('show');
+  });
+  addEventListener('resize', onResize);
+
+  ready = true;
+  animate();
+}
+
+// ====== STAR FIELD ======
+function buildStarField(){
+  const geom = new THREE.BufferGeometry();
+  const pos = [], col = [], sz = [];
+  const n = 4000;
+  for(let i=0;i<n;i++){
+    const th = Math.random()*Math.PI*2;
+    const ph = Math.acos(Math.random()*2-1);
+    const r = 110 + Math.random()*60;
+    pos.push(Math.sin(ph)*Math.cos(th)*r, Math.cos(ph)*r*0.6, Math.sin(ph)*Math.sin(th)*r);
+    const roll = Math.random();
+    const c = roll<0.08 ? [1.0,0.75,0.55]
+      : roll<0.2 ? [0.7,0.85,1.0]
+      : roll<0.28 ? [1.0,0.9,0.7]
+      : [1,1,1];
+    col.push(c[0],c[1],c[2]);
+    sz.push(0.2 + Math.random()*0.6);
+  }
+  geom.setAttribute('position', new THREE.Float32BufferAttribute(pos,3));
+  geom.setAttribute('color', new THREE.Float32BufferAttribute(col,3));
+  geom.setAttribute('aSize', new THREE.Float32BufferAttribute(sz,1));
+  const mat = new THREE.ShaderMaterial({
+    uniforms:{uTime:{value:0}},
+    vertexShader:`attribute float aSize;varying vec3 vColor;varying float vSize;uniform float uTime;
+      void main(){vColor=color;vSize=aSize;
+        vec4 mv = modelViewMatrix * vec4(position,1.0);
+        gl_PointSize = aSize * (250.0/-mv.z);
+        gl_Position = projectionMatrix * mv;}`,
+    fragmentShader:`varying vec3 vColor;varying float vSize;uniform float uTime;
+      void main(){
+        vec2 p = gl_PointCoord - 0.5;
+        float d = length(p);
+        if(d>0.5) discard;
+        float tw = 0.5 + 0.5*sin(uTime*2.0 + vSize*30.0);
+        float alpha = (1.0 - d*2.0) * (0.4 + 0.6*tw);
+        gl_FragColor = vec4(vColor, alpha);
+      }`,
+    vertexColors:true,
+    transparent:true,
+    blending: THREE.AdditiveBlending,
+    depthWrite:false
+  });
+  const pts = new THREE.Points(geom, mat);
+  pts.userData.starMat = mat;
+  scene.add(pts);
+}
+
+// ====== NEBULAE ======
+function buildNebulae(){
+  // A few large colored faint sphere shells
+  for(let i=0;i<5;i++){
+    const r = 30 + Math.random()*15;
+    const hue = 210 + Math.random()*80;
+    const color = new THREE.Color(`hsl(${hue}, 55%, 50%)`);
+    const mat = new THREE.MeshBasicMaterial({
+      color, transparent:true, opacity: 0.03 + Math.random()*0.02,
+      side: THREE.BackSide, blending: THREE.AdditiveBlending, depthWrite:false
+    });
+    const m = new THREE.Mesh(new THREE.SphereGeometry(r, 20, 14), mat);
+    m.position.set((Math.random()-0.5)*60, (Math.random()-0.5)*20, (Math.random()-0.5)*60);
+    scene.add(m);
+  }
+}
+
+// ====== GALAXIES ======
+function buildGalaxies(){
+  // Group nodes by sector to figure out gcx/gcy for each
+  const bySec = {};
+  UG.nodes.forEach(n=>{
+    if(!bySec[n.s]) bySec[n.s] = {gcx:n.gcx, gcy:n.gcy, sec:n.secRef, nodes:[]};
+    bySec[n.s].nodes.push(n);
+  });
+
+  Object.entries(bySec).forEach(([name, info])=>{
+    const [cx, cz] = wto3(info.gcx, info.gcy);
+    const cy = verticalFor(name);
+    const sec = info.sec;
+    const galRadius = (175 * sec.size) * SC;  // matches 2D init
+
+    const group = new THREE.Group();
+    group.position.set(cx, cy, cz);
+    // Tilt
+    const {axis, angle} = tiltFor(name);
+    group.quaternion.setFromAxisAngle(axis, angle);
+    scene.add(group);
+
+    // === Galaxy halo (flat glow disk) ===
+    const haloGeom = new THREE.PlaneGeometry(galRadius*3.2, galRadius*3.2);
+    const haloMat = new THREE.ShaderMaterial({
+      transparent:true, depthWrite:false, blending:THREE.AdditiveBlending, side:THREE.DoubleSide,
+      uniforms:{uColor:{value:new THREE.Color(sec.color)}},
+      vertexShader:`varying vec2 vUv; void main(){vUv=uv; gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
+      fragmentShader:`varying vec2 vUv; uniform vec3 uColor;
+        void main(){
+          float d = length(vUv-0.5)*2.0;
+          float a = smoothstep(1.0, 0.0, d) * 0.25;
+          gl_FragColor = vec4(uColor, a);
+        }`
+    });
+    const halo = new THREE.Mesh(haloGeom, haloMat);
+    halo.rotation.x = -Math.PI/2;
+    group.add(halo);
+
+    // === Spiral arm particles ===
+    const armCount = 600 + Math.floor(info.nodes.length*20);
+    const armPos = new Float32Array(armCount*3);
+    const armCol = new Float32Array(armCount*3);
+    const armSz = new Float32Array(armCount);
+    const secColor = new THREE.Color(sec.color);
+    for(let i=0;i<armCount;i++){
+      const armIdx = i % sec.arms;
+      const armPhase = (armIdx/sec.arms) * Math.PI*2;
+      const rFrac = Math.pow(Math.random(), 0.55);
+      const r = galRadius * (0.08 + rFrac*0.95);
+      const spiralAng = armPhase + Math.log(r*50+1)*sec.tightness*sec.spin + (Math.random()-0.5)*0.45;
+      const thickness = galRadius*0.02 + r*0.08;
+      const jx = (Math.random()-0.5)*thickness*2;
+      const jy = (Math.random()-0.5)*thickness*0.6;
+      const jz = (Math.random()-0.5)*thickness*2;
+      armPos[i*3] = Math.cos(spiralAng)*r + jx;
+      armPos[i*3+1] = jy;
+      armPos[i*3+2] = Math.sin(spiralAng)*r + jz;
+      // Fade out at edges, color blend with white near core
+      const centerBias = 1 - rFrac;
+      const cc = secColor.clone().lerp(new THREE.Color(1,0.95,0.85), centerBias*0.6);
+      armCol[i*3] = cc.r; armCol[i*3+1] = cc.g; armCol[i*3+2] = cc.b;
+      armSz[i] = 0.5 + Math.random()*1.8 - rFrac*0.5;
+    }
+    const armGeom = new THREE.BufferGeometry();
+    armGeom.setAttribute('position', new THREE.BufferAttribute(armPos,3));
+    armGeom.setAttribute('color', new THREE.BufferAttribute(armCol,3));
+    armGeom.setAttribute('aSize', new THREE.BufferAttribute(armSz,1));
+    const armMat = new THREE.ShaderMaterial({
+      uniforms:{uTime:{value:0}},
+      vertexShader:`attribute float aSize;varying vec3 vColor;varying float vSize;
+        void main(){vColor=color;vSize=aSize;
+          vec4 mv = modelViewMatrix * vec4(position,1.0);
+          gl_PointSize = aSize * (200.0/-mv.z);
+          gl_Position = projectionMatrix * mv;}`,
+      fragmentShader:`varying vec3 vColor;varying float vSize;
+        void main(){
+          vec2 p = gl_PointCoord - 0.5;
+          float d = length(p);
+          float a = smoothstep(0.5, 0.0, d);
+          gl_FragColor = vec4(vColor, a*0.75);
+        }`,
+      vertexColors:true, transparent:true,
+      blending: THREE.AdditiveBlending, depthWrite:false
+    });
+    const armPts = new THREE.Points(armGeom, armMat);
+    group.add(armPts);
+
+    // === Core glowing sphere ===
+    const coreGeom = new THREE.SphereGeometry(galRadius*0.12, 24, 18);
+    const coreMat = new THREE.MeshBasicMaterial({color: 0xfff4d0, transparent:true, opacity:0.9});
+    const core = new THREE.Mesh(coreGeom, coreMat);
+    group.add(core);
+    // Core glow via sprite-like addt sphere
+    const coreGlow = new THREE.Mesh(
+      new THREE.SphereGeometry(galRadius*0.4, 20, 14),
+      new THREE.MeshBasicMaterial({color: sec.color, transparent:true, opacity:0.25, blending:THREE.AdditiveBlending, depthWrite:false})
+    );
+    group.add(coreGlow);
+    const coreGlow2 = new THREE.Mesh(
+      new THREE.SphereGeometry(galRadius*0.8, 20, 14),
+      new THREE.MeshBasicMaterial({color: sec.color, transparent:true, opacity:0.08, blending:THREE.AdditiveBlending, depthWrite:false})
+    );
+    group.add(coreGlow2);
+
+    // === Label (CSS-free: sprite canvas) ===
+    const label = makeTextSprite(sec.name || name, sec.color);
+    label.position.y = galRadius*0.4;
+    label.position.z = 0;
+    group.add(label);
+
+    galaxyGroups[name] = {group, core, coreGlow, coreGlow2, armMat, halo, sec, galRadius, label};
+  });
+}
+
+function makeTextSprite(text, color){
+  const cv = document.createElement('canvas');
+  cv.width = 512; cv.height = 128;
+  const cx = cv.getContext('2d');
+  cx.fillStyle = color;
+  cx.shadowColor = color;
+  cx.shadowBlur = 18;
+  cx.font = '600 52px -apple-system, Pretendard, sans-serif';
+  cx.textAlign = 'center';
+  cx.textBaseline = 'middle';
+  cx.fillText(text, 256, 64);
+  const tex = new THREE.CanvasTexture(cv);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  const mat = new THREE.SpriteMaterial({map:tex, transparent:true, depthWrite:false, depthTest:false});
+  const sprite = new THREE.Sprite(mat);
+  sprite.scale.set(5, 1.25, 1);
+  sprite.renderOrder = 999;
+  return sprite;
+}
+
+// ====== PLANETS / STARS ======
+function buildPlanets(){
+  const STAR_THRESHOLD = 1.1;
+  UG.nodes.forEach(n=>{
+    const g = galaxyGroups[n.s];
+    if(!g) return;
+    // Planet orbits inside galaxy local space
+    const orbitR = n.orbitR * SC;
+    const orbitA = n.orbitA;
+    const r = Math.max(0.12, n.sz * 0.28);
+
+    let mesh;
+    const col = new THREE.Color(g.sec.color);
+    if(n.sz < STAR_THRESHOLD){
+      // Star: sphere with strong emission
+      mesh = new THREE.Mesh(
+        new THREE.SphereGeometry(r, 16, 12),
+        new THREE.MeshStandardMaterial({
+          color: new THREE.Color(1,0.95,0.85),
+          emissive: col, emissiveIntensity: 1.2,
+          roughness: 0.4, metalness: 0.0
+        })
+      );
+      // Glow halo
+      const halo = new THREE.Mesh(
+        new THREE.SphereGeometry(r*2.2, 20, 14),
+        new THREE.MeshBasicMaterial({color: col, transparent:true, opacity:0.25, blending:THREE.AdditiveBlending, depthWrite:false})
+      );
+      mesh.add(halo);
+    } else {
+      // Planet: textured sphere
+      mesh = new THREE.Mesh(
+        new THREE.SphereGeometry(r, 28, 20),
+        new THREE.MeshStandardMaterial({
+          color: col.clone().multiplyScalar(1.1),
+          emissive: col, emissiveIntensity: 0.2,
+          roughness: 0.6, metalness: 0.1
+        })
+      );
+      mesh.rotation.z = Math.random()*0.5;
+      // Atmosphere
+      const atm = new THREE.Mesh(
+        new THREE.SphereGeometry(r*1.15, 24, 18),
+        new THREE.MeshBasicMaterial({color: col, transparent:true, opacity:0.18, blending:THREE.AdditiveBlending, side:THREE.BackSide, depthWrite:false})
+      );
+      mesh.add(atm);
+      // Ring for some
+      if(n.sz > 1.8 && Math.random() < 0.7){
+        const ringIn = r*1.4, ringOut = r*2.3;
+        const ring = new THREE.Mesh(
+          new THREE.RingGeometry(ringIn, ringOut, 48),
+          new THREE.MeshBasicMaterial({color: col, transparent:true, opacity:0.45, side:THREE.DoubleSide})
+        );
+        ring.rotation.x = -Math.PI/2 + (Math.random()-0.5)*0.3;
+        mesh.add(ring);
+      }
+      // Grade indicator — small orb
+      const gColor = {A:0x4ade80,B:0x60a5fa,C:0xfbbf24,D:0xf87171}[n.gr] || 0x94a3b8;
+      const orb = new THREE.Mesh(
+        new THREE.SphereGeometry(r*0.25, 10, 8),
+        new THREE.MeshBasicMaterial({color: gColor})
+      );
+      orb.position.set(0, r*1.8, 0);
+      mesh.add(orb);
+    }
+
+    // Position in galaxy's local orbit
+    mesh.position.set(Math.cos(orbitA)*orbitR, 0, Math.sin(orbitA)*orbitR);
+    mesh.userData.node = n;
+    mesh.userData.galaxy = n.s;
+    mesh.userData.orbitR = orbitR;
+    mesh.userData.orbitA = orbitA;
+    mesh.userData.pickR = r;
+    g.group.add(mesh);
+    planetMeshes.push({mesh, node:n, baseR: r, galaxyName:n.s});
+  });
+}
+
+// ====== EDGES ======
+function buildEdges(){
+  UG.edges.forEach(e=>{
+    const st = UG.EDGE_STYLES[e.type] || {color:'#999', width:1, dash:[]};
+    // Compute 3D endpoints by placing node in its galaxy's local frame, transformed by galaxy quat
+    const pA = worldPosOfNode(e.a);
+    const pB = worldPosOfNode(e.b);
+    const mid = pA.clone().add(pB).multiplyScalar(0.5);
+    // lift mid-point based on distance for nicer arcs
+    const dist = pA.distanceTo(pB);
+    const up = new THREE.Vector3(0, 0.5 + dist*0.12, 0);
+    mid.add(up);
+    const curve = new THREE.QuadraticBezierCurve3(pA, mid, pB);
+    const col = new THREE.Color(st.color);
+    const dashed = (st.dash && st.dash.length > 0);
+
+    const pts = curve.getPoints(28);
+    const geom = new THREE.BufferGeometry().setFromPoints(pts);
+    const mat = new THREE.LineBasicMaterial({color: col, transparent:true, opacity: 0.45, linewidth:1});
+    const line = new THREE.Line(geom, mat);
+    line.userData.edge = e;
+    scene.add(line);
+
+    const dir = ['subsidiary','associate','investment','dart_filing'].includes(e.type);
+    let pulse = null;
+    if(dir){
+      pulse = new THREE.Mesh(
+        new THREE.SphereGeometry(0.08, 10, 8),
+        new THREE.MeshBasicMaterial({color: col, blending:THREE.AdditiveBlending, transparent:true, opacity:0})
+      );
+      scene.add(pulse);
+    }
+    edgeLines.push({line, mat, edge:e, curve, pulse, pulsePhase:Math.random(), directional:dir, dashed, pA:pA.clone(), pB:pB.clone()});
+  });
+}
+
+// World-space position of a node accounting for galaxy tilt + orbit
+const _tmpVec = new THREE.Vector3();
+function worldPosOfNode(n){
+  const g = galaxyGroups[n.s];
+  if(!g) return new THREE.Vector3();
+  // Find mesh
+  const pm = planetMeshes.find(p=>p.node===n);
+  if(pm){
+    pm.mesh.getWorldPosition(_tmpVec);
+    return _tmpVec.clone();
+  }
+  return g.group.position.clone();
+}
+
+// ====== SELECTION RINGS ======
+function buildSelectionRings(){
+  const geom = new THREE.TorusGeometry(1, 0.04, 8, 40);
+  selRing = new THREE.Mesh(geom, new THREE.MeshBasicMaterial({color:0x4da6ff, transparent:true, opacity:0.9}));
+  selRing.visible = false;
+  scene.add(selRing);
+  hovRing = new THREE.Mesh(geom, new THREE.MeshBasicMaterial({color:0xfbbf24, transparent:true, opacity:0.75}));
+  hovRing.visible = false;
+  scene.add(hovRing);
+}
+
+// ====== INTERACTION ======
+let _downPos = null, _travel = 0;
+function onPointerDown(e){
+  _downPos = {x:e.clientX, y:e.clientY};
+  _travel = 0;
+}
+function onPointerMove(e){
+  if(_downPos && (e.buttons & 1)){
+    _travel += Math.hypot(e.clientX-_downPos.x, e.clientY-_downPos.y);
+    _downPos = {x:e.clientX, y:e.clientY};
+  }
+  mouse.x = (e.clientX / innerWidth) * 2 - 1;
+  mouse.y = -(e.clientY / innerHeight) * 2 + 1;
+  raycaster.setFromCamera(mouse, camera);
+  raycaster.params.Points = raycaster.params.Points || {};
+  raycaster.params.Points.threshold = 0.4;
+  const objs = planetMeshes.map(p=>p.mesh);
+  const hits = raycaster.intersectObjects(objs, false);
+  const n = hits.length ? hits[0].object.userData.node : null;
+  UG.hov = n;
+
+  // Display tooltip reusing 2D style (create one if not present)
+  let tip = document.getElementById('tip3d');
+  if(!tip){
+    tip = document.createElement('div');
+    tip.id = 'tip3d';
+    tip.style.cssText = 'position:fixed;pointer-events:none;background:rgba(6,12,24,0.96);border:1px solid rgba(77,166,255,0.4);border-radius:8px;padding:10px 12px;font-size:12px;z-index:100;max-width:260px;opacity:0;transition:opacity 0.15s;color:#e0e0e0';
+    document.body.appendChild(tip);
+  }
+  if(n){
+    tip.innerHTML = `
+      <div style="font-weight:600;font-size:13px;margin-bottom:2px">${n.n}</div>
+      <div style="color:#94a3b8;font-size:11px">${n.s} · 시총 ${n.mc}</div>
+      <div style="display:flex;justify-content:space-between;gap:12px;margin-top:4px"><span style="color:#94a3b8">매출</span><span>${n.rv}조</span></div>
+      <div style="display:flex;justify-content:space-between;gap:12px"><span style="color:#94a3b8">영업익</span><span>${n.oi}조</span></div>
+      <div style="display:flex;justify-content:space-between;gap:12px"><span style="color:#94a3b8">EQS</span><span style="color:${gradeColor(n.gr)}">${n.eqs} (${n.gr})</span></div>`;
+    tip.style.left = (e.clientX+14)+'px';
+    tip.style.top = (e.clientY+14)+'px';
+    tip.style.opacity = '1';
+    document.getElementById('c3d').style.cursor = 'pointer';
+  } else {
+    tip.style.opacity = '0';
+    document.getElementById('c3d').style.cursor = '';
+  }
+}
+function gradeColor(g){return {A:'#4ade80',B:'#60a5fa',C:'#fbbf24',D:'#f87171'}[g]||'#94a3b8';}
+
+function onPointerUp(e){
+  if(_travel > 6){ _downPos = null; _travel = 0; return; }  // drag, not click
+  _downPos = null;
+  mouse.x = (e.clientX / innerWidth) * 2 - 1;
+  mouse.y = -(e.clientY / innerHeight) * 2 + 1;
+  raycaster.setFromCamera(mouse, camera);
+  const objs = planetMeshes.map(p=>p.mesh);
+  const hits = raycaster.intersectObjects(objs, false);
+  if(hits.length){
+    const n = hits[0].object.userData.node;
+    UG.sel = n;
+    if(UG.currentMode === 'analyze') UG.showAnalyze(n);
+    else if(UG.currentMode === 'disclosure') UG.showDisclosure(n);
+    else UG.showTimemachine(n);
+    flyToNode(n);
+  } else {
+    UG.sel = null;
+    UG.closePanel();
+  }
+}
+
+function flyToNode(n){
+  const target = worldPosOfNode(n);
+  const start = controls.target.clone();
+  const startCam = camera.position.clone();
+  const offset = target.clone().sub(start).length() < 2 ? camera.position.clone().sub(start) : new THREE.Vector3(2, 1.5, 2);
+  const endCam = target.clone().add(new THREE.Vector3(2, 1.5, 2));
+  let t = 0;
+  function step(){
+    t = Math.min(1, t + 0.045);
+    const e = t<0.5 ? 2*t*t : 1 - Math.pow(-2*t+2,2)/2;
+    controls.target.lerpVectors(start, target, e);
+    camera.position.lerpVectors(startCam, endCam, e);
+    controls.update();
+    if(t<1) requestAnimationFrame(step);
+  }
+  step();
+}
+
+function onResize(){
+  if(!renderer) return;
+  camera.aspect = innerWidth/innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+}
+
+// ====== ANIMATION LOOP ======
+function animate(){
+  requestAnimationFrame(animate);
+  if(!UG.is3D()) return;
+
+  const dt = Math.min(0.05, clock.getDelta());
+  const t = clock.elapsedTime;
+  controls.update();
+
+  // Galaxies rotate
+  Object.entries(galaxyGroups).forEach(([name, g])=>{
+    // rotate in local Y of the disk (after tilt)
+    // We need to rotate around the tilted-up axis. Simpler: rotate the arm Points children.
+    g.group.children.forEach(ch=>{
+      if(ch.isPoints){ ch.rotation.y += g.sec.rotation * 60 * dt; }
+    });
+    // Pulse core
+    if(g.coreGlow){
+      g.coreGlow.scale.setScalar(1 + Math.sin(t*0.8 + name.charCodeAt(0))*0.08);
+    }
+    // Label always faces camera (sprite auto-does that)
+  });
+
+  // Planets orbit
+  planetMeshes.forEach(p=>{
+    const g = galaxyGroups[p.galaxyName];
+    if(!g) return;
+    const orbitSpeed = g.sec.rotation * 50 * (1 / Math.max(0.4, p.node.sz*0.6));
+    p.mesh.userData.orbitA += orbitSpeed * dt;
+    const a = p.mesh.userData.orbitA;
+    const r = p.mesh.userData.orbitR;
+    p.mesh.position.set(Math.cos(a)*r, 0, Math.sin(a)*r);
+    // Self rotate
+    p.mesh.rotation.y += dt * 0.25 * (p.node.sz);
+    // Filter dim
+    const dim = (UG.flt !== 'all' && p.node.s !== UG.flt);
+    if(p.mesh.material){
+      if(p.mesh.material.transparent === undefined) p.mesh.material.transparent = true;
+      p.mesh.material.transparent = true;
+      p.mesh.material.opacity = dim ? 0.15 : 1;
+    }
+    // Alert source glow
+    const isAlert = UG.alertOn && UG.alertSrc === p.node.n;
+    const highlighted = (UG.sel === p.node) || (UG.hov === p.node) || isAlert;
+    const targetScale = highlighted ? (isAlert ? 1.3 : 1.2) : 1.0;
+    p.mesh.scale.x += (targetScale - p.mesh.scale.x) * 0.15;
+    p.mesh.scale.y += (targetScale - p.mesh.scale.y) * 0.15;
+    p.mesh.scale.z += (targetScale - p.mesh.scale.z) * 0.15;
+    if(isAlert && p.mesh.material && p.mesh.material.emissiveIntensity !== undefined){
+      p.mesh.material.emissiveIntensity = 1.5 + Math.sin(t*3)*0.5;
+    }
+  });
+
+  // Edges: recompute curve endpoints since planets orbit
+  edgeLines.forEach(e=>{
+    const pA = worldPosOfNode(e.edge.a);
+    const pB = worldPosOfNode(e.edge.b);
+    const mid = pA.clone().add(pB).multiplyScalar(0.5);
+    const dist = pA.distanceTo(pB);
+    mid.y += 0.5 + dist*0.12;
+    e.curve.v0.copy(pA);
+    e.curve.v1.copy(mid);
+    e.curve.v2.copy(pB);
+    const pts = e.curve.getPoints(28);
+    const posAttr = e.line.geometry.attributes.position;
+    for(let i=0;i<pts.length;i++){
+      posAttr.array[i*3] = pts[i].x;
+      posAttr.array[i*3+1] = pts[i].y;
+      posAttr.array[i*3+2] = pts[i].z;
+    }
+    posAttr.needsUpdate = true;
+
+    const conn = (UG.sel && (e.edge.a === UG.sel || e.edge.b === UG.sel)) ||
+                 (UG.hov && (e.edge.a === UG.hov || e.edge.b === UG.hov));
+    const fa = UG.flt==='all' || e.edge.a.s === UG.flt;
+    const fb = UG.flt==='all' || e.edge.b.s === UG.flt;
+    const filtered = (!fa && !fb);
+
+    const targetOpacity = filtered ? 0.05 : (conn ? 0.95 : 0.35);
+    e.mat.opacity += (targetOpacity - e.mat.opacity) * 0.15;
+
+    if(e.pulse){
+      if(conn && !filtered){
+        e.pulse.visible = true;
+        e.pulsePhase = (e.pulsePhase + dt*0.4) % 1;
+        const pt = e.curve.getPoint(e.pulsePhase);
+        e.pulse.position.copy(pt);
+        e.pulse.material.opacity = 1 - Math.abs(e.pulsePhase - 0.5)*0.8;
+      } else {
+        e.pulse.visible = false;
+      }
+    }
+  });
+
+  // Selection ring
+  if(UG.sel){
+    const p = planetMeshes.find(pp=>pp.node===UG.sel);
+    if(p){
+      p.mesh.getWorldPosition(_tmpVec);
+      selRing.visible = true;
+      selRing.position.copy(_tmpVec);
+      const s = (p.baseR * 2.5) + Math.sin(t*3)*0.08;
+      selRing.scale.setScalar(s);
+      // Make ring face camera
+      selRing.lookAt(camera.position);
+    }
+  } else { selRing.visible = false; }
+  if(UG.hov && UG.hov !== UG.sel){
+    const p = planetMeshes.find(pp=>pp.node===UG.hov);
+    if(p){
+      p.mesh.getWorldPosition(_tmpVec);
+      hovRing.visible = true;
+      hovRing.position.copy(_tmpVec);
+      hovRing.scale.setScalar(p.baseR * 2.2);
+      hovRing.lookAt(camera.position);
+    }
+  } else { hovRing.visible = false; }
+
+  // Update star shader time
+  scene.traverse(o=>{
+    if(o.material && o.material.uniforms && o.material.uniforms.uTime){
+      o.material.uniforms.uTime.value = t;
+    }
+  });
+
+  renderer.render(scene, camera);
+}
+
+function resetCamera(){
+  const start = controls.target.clone();
+  const end = new THREE.Vector3(0,0,0);
+  const startCam = camera.position.clone();
+  const endCam = new THREE.Vector3(0, 22, 32);
+  let t = 0;
+  function step(){
+    t = Math.min(1, t + 0.04);
+    const e = t<0.5 ? 2*t*t : 1 - Math.pow(-2*t+2,2)/2;
+    controls.target.lerpVectors(start, end, e);
+    camera.position.lerpVectors(startCam, endCam, e);
+    controls.update();
+    if(t<1) requestAnimationFrame(step);
+  }
+  step();
+}
+
+// ====== TOGGLE ======
+function wireToggle(){
+  document.getElementById('btn-3d').addEventListener('click', ()=>{
+    const on = document.body.classList.toggle('mode-3d');
+    const btn = document.getElementById('btn-3d');
+    btn.classList.toggle('on', on);
+    btn.textContent = on ? '🗺️ 2D' : '🌌 3D';
+    if(on && !initialized){
+      initialized = true;
+      init();
+    }
+    if(on && renderer){
+      onResize();
+    }
+  });
+}
+
+// Wait for _ug to be ready
+if(window._ug){ UG = window._ug; wireToggle(); }
+else window.addEventListener('_ug_ready', ()=>{ UG = window._ug; wireToggle(); });
+
 </script>
 </body>
 </html>

@@ -2,6 +2,8 @@
 python-dotenv==1.0.1      # .env 파일 읽기
 sqlalchemy==2.0.36        # DB(데이터 저장소) 다루기
 requests==2.32.3          # 외부 API 호출
+fastapi>=0.100.0          # 웹 프레임워크
+uvicorn>=0.23.0           # ASGI 서버
 
 # --- Financial 모듈 ---
 pandas==2.2.3             # 표 형태 데이터 처리
