@@ -22,7 +22,6 @@ from modules.financial.collector import (
     FS_DIV_SEPARATE,
 )
 
-
 # ---------- _to_float ----------
 
 
