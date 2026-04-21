@@ -6,20 +6,17 @@
 # Claude Code 개인 설정
 .claude/settings.local.json
 
-# 로컬 DB / 캐시 (개별 모듈 개발용)
-modules/*/data/*.db
+# 로컬 DB / 산출물 — 팀 공유를 위해 커밋 허용 (2026-04-21 변경)
+#   기존: modules/*/data/*.db·*.json 전부 제외
+#   변경: 각 모듈의 수집·계산 결과 DB와 export JSON은 git에 커밋하여
+#         리더·다른 팀원이 통합 대시보드·분석에 활용 가능하게 함.
+#   제외 대상: 원시 응답 XML, API RAW 캐시, *.tmp (용량·무의미)
 modules/*/data/*.xml
-modules/*/data/*.json
-
-# batch 수집 결과 캐시 (대시보드 재생성용)
-docs/prototype/_*.pkl
-docs/prototype/_*.json
-
-# 그래프 export 결과물 (재생성 가능)
-modules/*/data/graph_*.json
-
-# API RAW 캐시 (재생성 가능)
+modules/*/data/*.tmp
 modules/*/data/raw_cache/
+
+# batch 수집 중간 pickle (임시 캐시)
+docs/prototype/_*.pkl
 
 # UI 검증 스크린샷 (로컬 전용, ui-ux-reviewer agent 생성물)
 modules/*/viewer/screenshots/
