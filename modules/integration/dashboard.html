@@ -1081,7 +1081,17 @@ function showAnalyze(n) {
   const p = document.getElementById('panel');
   const eqsCol=n.eqs>=70?'#4ade80':n.eqs>=50?'#fbbf24':'#f87171';
   const oiSign=String(n.oi).startsWith('-');
-  const isFinancial=n.s==='금융';
+  // 금융업 판별은 eqs_data.json의 industry_code('064'·'066'·'067') 기준 우선,
+  // 없으면 섹터명 fallback
+  const isFinancial = n.is_financial_biz === true || n.s==='금융';
+  // 시총·DART·분석 기준 연도 (eqs_data.json이 유일 소스. null 가능)
+  const mcDisplay = _marketCapFmt(n.market_cap) || n.mc || '-';
+  const yearBadge = n.latest_year ? ` · ${n.latest_year}년 재무 기준` : '';
+  const finBadge = isFinancial ? ' <span style="font-size:10px;padding:2px 6px;background:rgba(167,139,250,0.2);color:#a78bfa;border-radius:4px;margin-left:4px">금융업 별도기준</span>' : '';
+  // 기업명: DART 사업보고서 링크로 감싸기 (dart_url 있을 때만)
+  const companyTitle = n.dart_url
+    ? `<a href="${n.dart_url}" target="_blank" rel="noopener" style="color:#4da6ff;text-decoration:none;border-bottom:1px dashed #4da6ff;" title="DART 사업보고서 열기">${n.n} <span style="font-size:13px">↗</span></a>`
+    : n.n;
   const margin100=`100원 팔면 ${Math.abs(parseFloat(n.oim)).toFixed(0)}원이 ${parseFloat(n.oim)>0?'남습니다':'손해입니다'}`;
   let cps=[];
   if(Math.abs(n.recv_chg)>20&&n.recv_days>0)cps.push(`매출채권 회수 ${n.recv_chg>0?n.recv_days+'일로 늘어남':'개선됨'} (${n.recv_chg>0?'+':''}${n.recv_chg}%)`);
@@ -1095,8 +1105,8 @@ function showAnalyze(n) {
   const eqsExplain=n.eqs>=70?`이익 품질 <strong style="color:#4ade80">양호</strong>. 재무제표를 상당 부분 신뢰 가능.`:n.eqs>=50?`이익 품질 <strong style="color:#fbbf24">주의</strong> 필요. 일부 경고 신호 감지.`:`이익 품질 <strong style="color:#f87171">경고</strong>. 보고된 이익의 질에 의문. 추가 확인 필요.`;
 
   document.getElementById('panelInner').innerHTML=`
-    <h2 style="color:#4da6ff;font-size:18px">${n.n}</h2>
-    <div style="color:#666;font-size:12px;margin-bottom:16px">${n.t} | ${n.s} | 시총 ${n.mc}</div>
+    <h2 style="color:#4da6ff;font-size:18px">${companyTitle}${finBadge}</h2>
+    <div style="color:#666;font-size:12px;margin-bottom:16px">${n.t} | ${n.s} | 시총 ${mcDisplay}${yearBadge}</div>
     ${!isFinancial?`
     <div class="fin-card"><div class="card-title">💰 돈을 잘 벌고 있나?<span class="src">손익계산서</span></div>
       <div class="fin-row"><span class="label">매출액</span><div class="fin-bar-wrap"><div class="fin-bar" style="width:100%;background:#4da6ff"></div></div><span class="value">${n.rv}조</span>${n.rv_chg != null ? `<span class="fin-change ${n.rv_chg>=0?'up':'down'}">${n.rv_chg>=0?'+':''}${n.rv_chg}%</span>` : ''}</div>
@@ -1238,6 +1248,17 @@ function showTimemachine(n) {
           <div class="lesson-body">${tm.answer.lesson.replace(/\n/g,'<br>')}</div>
         </div>
         ` : ''}
+        ${tm.refUrl ? `
+        <a href="${tm.refUrl}" target="_blank" rel="noopener"
+           style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;padding:8px 14px;
+                  background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);
+                  border-radius:8px;color:#a78bfa;font-size:12px;font-weight:500;text-decoration:none;
+                  transition:background 0.15s"
+           onmouseover="this.style.background='rgba(99,102,241,0.25)'"
+           onmouseout="this.style.background='rgba(99,102,241,0.15)'">
+          📰 관련 기사 보기 <span style="font-size:11px">↗</span>
+        </a>
+        ` : ''}
         <div style="font-size:10px;color:#555;margin-top:10px;line-height:1.5;padding:8px;background:rgba(255,255,255,0.02);border-radius:6px">
           데이터 출처: modules/price/quiz_data.py · 실제 주가 데이터 기반<br>
           ⚠ 본 분석은 과거 통계이며 투자 권유가 아닙니다
@@ -1261,6 +1282,12 @@ function revealTM(el, choice) {
 function _trillionFmt(v) {
   if (v === null || v === undefined) return '-';
   return (v / 10000).toFixed(1);
+}
+// 시총(원 단위) → "1,425.2조" 포맷. financial 담당자의 eqs_data.json 소스 기준.
+// 레퍼 docs/prototype/kospi50_ranking.html의 fmtCap과 동일하게 소수점 1자리.
+function _marketCapFmt(v) {
+  if (v == null) return null;
+  return (v / 1e12).toFixed(1) + '조';
 }
 // EQS 5모듈 점수 기반 해설 자동 생성 (legacy m1t~m5t 대체)
 function _eqsBucket(s) {
@@ -1328,6 +1355,12 @@ function _eqsNarration(idx, score) {
     const fin = eqsByTicker[t];
     if (fin) {
       n.has_financial = true;
+      // 프로토타입 메타 (extract_data.py가 eqs_data.json에서 보강)
+      n.market_cap = fin.market_cap ?? null;          // 원 단위, null 가능
+      n.dart_url = fin.dart_url ?? null;               // DART 사업보고서
+      n.industry_code = fin.industry_code ?? null;
+      n.is_financial_biz = fin.is_financial === true;  // 금융업(064/066/067)
+      n.latest_year = fin.latest_year ?? null;         // 분석 기준 연도
       n.eqs = Math.round(fin.eqs_total || 0);
       n.gr = fin.eqs_grade || '-';
       n.m1 = Math.round(fin.eqs_m1 || 0);
@@ -1383,6 +1416,7 @@ function _eqsNarration(idx, score) {
         category: sc.category || '',
         disclosure: sc.title || '',
         context: sc.context || '',
+        refUrl: sc.refUrl || '',  // extract_data.py에서 자동 생성한 네이버 뉴스 검색 URL
         news: [],
         answer: {
           stock_chg: (sc.change_pct >= 0 ? '+' : '') + sc.change_pct + '%',

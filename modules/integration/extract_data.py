@@ -28,14 +28,19 @@ import csv
 import json
 import sqlite3
 import sys
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
+from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 INTEGRATION_DATA = Path(__file__).parent / "data"
 TOP50_CSV = ROOT / "modules" / "relation" / "data" / "top50.csv"
 FINANCIAL_DB = ROOT / "modules" / "financial" / "data" / "financial.db"
 DISCLOSURE_DB = ROOT / "modules" / "disclosure" / "data" / "disclosure.db"
+EQS_PROTOTYPE_JSON = ROOT / "docs" / "prototype" / "eqs_data.json"
+
+# KRX 업종코드 중 금융업 식별용 (기타금융·증권·보험)
+FINANCIAL_INDUSTRY_CODES = frozenset({"064", "065", "066", "067"})
 
 
 # --------------------------------------------------------------------------- #
@@ -51,6 +56,71 @@ def load_top50() -> list[dict]:
         return []
     with TOP50_CSV.open(encoding="utf-8") as f:
         return list(csv.DictReader(f))
+
+
+# --------------------------------------------------------------------------- #
+#  eqs 프로토타입 메타 로드 (market_cap·dart_url·industry_code·latest_year)
+# --------------------------------------------------------------------------- #
+def load_eqs_prototype_meta() -> dict[str, dict]:
+    """``docs/prototype/eqs_data.json``에서 financial.db에 없는 메타 정보 로드.
+
+    financial_local 테이블은 EQS 점수·재무수치만 저장하고 시총·DART URL은
+    별도 파일(financial 담당자의 프로토타입 산출물)에서만 얻을 수 있다.
+
+    Returns:
+        {corp_code: {market_cap, dart_url, industry_code, is_financial, latest_year}}
+    """
+    if not EQS_PROTOTYPE_JSON.exists():
+        print(f"[WARN] eqs_data.json 없음: {EQS_PROTOTYPE_JSON}", file=sys.stderr)
+        return {}
+    try:
+        rows = json.loads(EQS_PROTOTYPE_JSON.read_text(encoding="utf-8"))
+    except Exception as exc:  # pragma: no cover
+        print(f"[WARN] eqs_data.json 파싱 실패: {exc}", file=sys.stderr)
+        return {}
+
+    meta_map: dict[str, dict] = {}
+    for r in rows if isinstance(rows, list) else []:
+        cc = r.get("corp_code")
+        if not cc:
+            continue
+        industry = r.get("industry_code")
+        latest = r.get("latest_year")
+        meta_map[cc] = {
+            "market_cap": r.get("market_cap"),
+            "dart_url": r.get("dart_url"),
+            "industry_code": industry,
+            "is_financial": industry in FINANCIAL_INDUSTRY_CODES,
+            "latest_year": latest.get("year") if isinstance(latest, dict) else latest,
+        }
+    return meta_map
+
+
+# --------------------------------------------------------------------------- #
+#  네이버 뉴스 검색 URL 자동 생성 (quiz 시나리오용)
+# --------------------------------------------------------------------------- #
+def build_news_url(company: str, date_str: str, category: str = "") -> str:
+    """공시 이벤트의 네이버 뉴스 검색 URL 생성.
+
+    레퍼 ``modules/price/quiz.html``의 refUrl 패턴과 동일:
+      https://search.naver.com/search.naver?where=news&query={쿼리}&ds={YYYY.MM.DD}&de={YYYY.MM.DD}&sort=1
+
+    기간은 공시일 ±3일. 쿼리는 ``{company}+{category}+{연도}``로 조합.
+    """
+    try:
+        d = datetime.strptime(date_str, "%Y-%m-%d")
+    except (ValueError, TypeError):
+        # 날짜 파싱 실패 시 company만으로 검색
+        query = quote(company)
+        return f"https://search.naver.com/search.naver?where=news&query={query}&sort=1"
+    ds = (d - timedelta(days=3)).strftime("%Y.%m.%d")
+    de = (d + timedelta(days=3)).strftime("%Y.%m.%d")
+    parts = [company, category, str(d.year)] if category else [company, str(d.year)]
+    query = quote(" ".join(p for p in parts if p))
+    return (
+        f"https://search.naver.com/search.naver?where=news&query={query}"
+        f"&ds={ds}&de={de}&sort=1"
+    )
 
 
 # --------------------------------------------------------------------------- #
@@ -205,10 +275,18 @@ def main() -> int:
     disc_payload = extract_disclosures(corp_to_ticker)
     scenarios = extract_price_scenarios()
 
-    # 각 record에 ticker 필드 주입 (dashboard가 ticker 기준으로 join하기 위함)
-    # financial·disclosure는 내부적으로 다른 식별자를 쓰므로, 공통 키로 통일
+    # eqs 프로토타입 메타 로드 (market_cap·dart_url·industry_code·latest_year)
+    prototype_meta = load_eqs_prototype_meta()
+    print(f"[INFO] eqs_data.json 메타 로드: {len(prototype_meta)} 기업")
+
+    # 각 record에 ticker 필드 + 프로토타입 메타 주입
     eqs_rows = [
-        {**r, "ticker": corp_to_ticker.get(r.get("corp_code"), "")} for r in eqs_rows
+        {
+            **r,
+            "ticker": corp_to_ticker.get(r.get("corp_code"), ""),
+            **prototype_meta.get(r.get("corp_code"), {}),
+        }
+        for r in eqs_rows
     ]
     disc_payload["disclosures"] = [
         {**d, "ticker": corp_to_ticker.get(d.get("corp_code"), "")}
@@ -217,6 +295,18 @@ def main() -> int:
     # statements는 corp_code 컬럼이 이미 ticker (6자리)임 → 그대로 ticker 필드로 복제
     disc_payload["statements"] = [
         {**s, "ticker": s.get("corp_code", "")} for s in disc_payload["statements"]
+    ]
+    # price 시나리오에 refUrl 자동 생성 (레퍼 quiz.html의 #dartLink 패턴)
+    scenarios = [
+        {
+            **s,
+            "refUrl": build_news_url(
+                s.get("company", ""),
+                s.get("date", ""),
+                s.get("category", ""),
+            ),
+        }
+        for s in scenarios
     ]
 
     meta = {
