@@ -29,6 +29,21 @@
   - price 커버리지 **15/50 = 30%**. 나머지 35개 기업은 `has_quiz=false` 플래그로 timemachine 모드에서 "데이터 없음(수집 중)" 뱃지 표시
   - shared DB(Supabase) 미적재. 공식 서빙 구조는 Phase D 이후
 
+## 2026-04-22 (Phase D — eqs 메타 주입 + 외부 링크 + 누락값 안내)
+
+- **작업 (commit `07b1040`)**:
+  - `docs/prototype/eqs_data.json`(49건)에서 `market_cap`·`dart_url`·`industry_code`·`latest_year` 주입 → 시총 1,262조 → **1,425.2조**(2025 스냅샷) 갱신
+  - `showAnalyze` h2를 DART 사업보고서 링크로 감싸기 (dart_url 있을 때만)
+  - `is_financial_biz` flag (industry_code '064'~'067') 기반 "금융업 별도기준" 뱃지
+  - 분석 연도 뱃지 "2025년 재무 기준" 표시
+  - `build_news_url(company, date, category)`로 네이버 뉴스 검색 URL 자동 생성 → timemachine에 "📰 관련 기사 보기" 버튼
+- **작업 (commit `53eba5f`, 이번 세션 후속 fix)**:
+  - 공시 카드 summary 300자 컷 → **"더보기 ▾" / "접기 ▴" 토글** 구현 (전문 확인 가능)
+  - `financial_local.investing_cashflow`·`financing_cashflow` 전수 NULL 상태 → `-조` 대신 **"데이터 수집 중"** 회색 뱃지로 명시 (financial 담당자 수집 반영 대기)
+- **검증**: Playwright 전수 통과 (Samsung DART 링크·1425.2조 표시·더보기 토글 양방향·뱃지 표시), pytest 570/570, black clean
+- **외부 데이터 소스 추가**:
+  - `docs/prototype/eqs_data.json` — financial 담당자의 프로토타입 산출물 (market_cap 원 단위·dart_url). financial.db에 해당 컬럼이 없기 때문에 **유일한 최신 소스**
+
 ## 향후 업데이트 시 체크리스트 (팀원 공유용)
 
 팀원이 자기 모듈 데이터 갱신 → git merge → **리더가 integration 재생성** 순서.
