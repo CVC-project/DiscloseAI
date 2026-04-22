@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DiscloseAI — Corporate Galaxies (섹터 은하수)</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#060a13;color:#e0e0e0;font-family:-apple-system,'Pretendard',sans-serif;overflow:hidden;user-select:none}
+canvas{display:block}
+
+/* Alert */
+.alert-banner{position:fixed;top:-80px;left:0;right:0;z-index:100;background:linear-gradient(90deg,rgba(20,40,80,0.96),rgba(30,60,120,0.96));border-bottom:2px solid #4da6ff;padding:14px 24px;display:flex;align-items:center;gap:12px;transition:top 0.6s cubic-bezier(0.16,1,0.3,1)}
+.alert-banner.show{top:0}
+.alert-dot{width:10px;height:10px;background:#ff4444;border-radius:50%;animation:pulse 1s infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(0.8)}}
+
+/* HUD */
+.hud-main{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:50;display:flex;flex-direction:column;align-items:center;gap:6px}
+.hud-modes{display:flex;gap:4px;background:rgba(8,12,24,0.95);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:5px 8px}
+.hud-modes button{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);color:#777;padding:6px 16px;border-radius:7px;cursor:pointer;font-size:12px;font-weight:500;transition:all 0.25s}
+.hud-modes button:hover{background:rgba(255,255,255,0.08);color:#ccc}
+.hud-modes button.on{color:#fff;border-color:#4da6ff}
+.hud-modes button.on[data-mode="analyze"]{background:rgba(77,166,255,0.2)}
+.hud-modes button.on[data-mode="disclosure"]{background:rgba(251,191,36,0.2);border-color:#fbbf24}
+.hud-modes button.on[data-mode="timemachine"]{background:rgba(124,108,240,0.2);border-color:#7c6cf0}
+.hud-sub{display:flex;gap:4px;background:rgba(8,12,24,0.92);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:4px 8px;transition:opacity 0.3s;flex-wrap:wrap;max-width:92vw;justify-content:center}
+.hud-sub button{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);color:#888;padding:4px 10px;border-radius:5px;cursor:pointer;font-size:10px;transition:all 0.2s;border-left:3px solid var(--sc,transparent)}
+.hud-sub button:hover{color:#ddd;background:rgba(255,255,255,0.08)}
+.hud-sub button.on{background:color-mix(in srgb, var(--sc, #4da6ff) 22%, transparent);border-color:var(--sc, #4da6ff);color:var(--sc, #4da6ff)}
+.mode-hint{font-size:10px;color:#555;text-align:center}
+
+/* Panel */
+.panel{position:fixed;right:-520px;top:0;bottom:0;width:520px;z-index:90;background:rgba(8,12,24,0.98);border-left:1px solid rgba(77,166,255,0.15);overflow-y:auto;transition:right 0.5s cubic-bezier(0.16,1,0.3,1)}
+.panel.open{right:0}
+.close-btn{position:absolute;top:14px;right:14px;background:none;border:none;color:#555;font-size:22px;cursor:pointer;z-index:5}
+
+/* Fin cards */
+.fin-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:14px 16px;margin-bottom:10px}
+.fin-card .card-title{font-size:13px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.fin-card .card-title .src{font-size:10px;color:#555;margin-left:auto}
+.fin-row{display:flex;align-items:center;justify-content:space-between;padding:3px 0;font-size:12px}
+.fin-row .label{color:#888;min-width:80px}
+.fin-row .value{font-weight:500}
+.fin-bar-wrap{flex:1;max-width:100px;height:5px;background:rgba(255,255,255,0.05);border-radius:3px;margin:0 8px;overflow:hidden}
+.fin-bar{height:100%;border-radius:3px}
+.fin-insight{margin-top:10px;padding:8px 10px;background:rgba(77,166,255,0.05);border-left:3px solid rgba(77,166,255,0.25);border-radius:0 6px 6px 0;font-size:11px;color:#8bb8d9;line-height:1.6}
+.fin-change{font-size:10px;padding:1px 5px;border-radius:4px;margin-left:4px}
+.fin-change.up{background:rgba(74,222,128,0.1);color:#4ade80}
+.fin-change.down{background:rgba(248,113,113,0.1);color:#f87171}
+.checkpoint{padding:8px 10px;background:rgba(251,191,36,0.04);border:1px solid rgba(251,191,36,0.1);border-radius:7px;margin-bottom:6px;font-size:11px}
+.checkpoint .cp-title{color:#e0e0e0;font-weight:500}
+.checkpoint .cp-detail{color:#888;margin-top:3px;line-height:1.5}
+
+/* EQS */
+.eqs-module{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:10px 12px;margin-bottom:6px}
+.eqs-bar{height:5px;background:rgba(255,255,255,0.05);border-radius:3px;margin:5px 0;overflow:hidden}
+.eqs-fill{height:100%;border-radius:3px}
+.eqs-what{background:rgba(77,166,255,0.04);border:1px solid rgba(77,166,255,0.1);border-radius:8px;padding:10px;font-size:11px;color:#8bb8d9;line-height:1.7}
+
+/* Timemachine */
+.tm-scene{padding:20px}
+.tm-header{text-align:center;margin-bottom:20px}
+.tm-header .tm-date{font-size:28px;font-weight:700;color:#7c6cf0}
+.tm-header .tm-sub{font-size:12px;color:#666;margin-top:4px}
+.tm-disclosure{background:rgba(77,166,255,0.06);border:1px solid rgba(77,166,255,0.15);border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.tm-disclosure .tm-label{font-size:10px;color:#4da6ff;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px}
+.tm-disclosure .tm-title{font-size:15px;font-weight:600;color:#fff}
+.tm-disclosure .tm-detail{font-size:12px;color:#999;margin-top:4px}
+.tm-news{margin-bottom:14px}
+.tm-news-item{display:flex;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.03);font-size:11px}
+.tm-news-item .src{color:#fbbf24;min-width:50px}
+.tm-news-item .headline{color:#ccc}
+.tm-choices{display:flex;gap:10px;justify-content:center;margin:20px 0}
+.tm-choice{padding:12px 28px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;border:2px solid;transition:all 0.2s;text-align:center}
+.tm-choice:hover{transform:scale(1.05)}
+.tm-choice.buy{background:rgba(74,222,128,0.08);border-color:rgba(74,222,128,0.3);color:#4ade80}
+.tm-choice.hold{background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);color:#aaa}
+.tm-choice.sell{background:rgba(248,113,113,0.08);border-color:rgba(248,113,113,0.3);color:#f87171}
+.tm-result{display:none;animation:fadeUp 0.5s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.tm-result-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:16px;margin-bottom:10px}
+.tm-result-card .big-num{font-size:32px;font-weight:700;text-align:center}
+.tm-result-row{display:flex;justify-content:space-between;padding:4px 0;font-size:12px}
+.tm-lesson{background:rgba(124,108,240,0.06);border:1px solid rgba(124,108,240,0.15);border-radius:10px;padding:14px;margin-top:14px}
+.tm-lesson .lesson-title{font-size:12px;font-weight:600;color:#7c6cf0;margin-bottom:6px}
+.tm-lesson .lesson-body{font-size:11px;color:#999;line-height:1.7}
+.tm-eqs-hint{background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.12);border-radius:8px;padding:10px 12px;margin-top:10px;font-size:11px;color:#d98888;line-height:1.6}
+.tm-next{display:block;margin:16px auto 0;padding:10px 30px;background:rgba(124,108,240,0.15);border:1px solid rgba(124,108,240,0.3);border-radius:8px;color:#7c6cf0;font-size:13px;cursor:pointer;font-weight:500}
+
+/* Common */
+.section-title{font-size:12px;font-weight:600;margin:14px 0 8px;padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,0.05)}
+.tag{display:inline-block;font-size:10px;padding:2px 7px;border-radius:8px;margin:2px;background:rgba(255,255,255,0.05);color:#999;border:1px solid rgba(255,255,255,0.08)}
+.title{position:fixed;top:16px;left:20px;z-index:50}
+.title h1{font-size:16px;font-weight:600;color:rgba(255,255,255,0.85)}
+.title p{font-size:11px;color:rgba(255,255,255,0.3);margin-top:2px}
+.title .live{display:inline-block;width:6px;height:6px;background:#22c55e;border-radius:50%;margin-right:4px;animation:pulse 2s infinite}
+.legend{position:fixed;z-index:50;background:rgba(8,12,24,0.92);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:10px 14px;font-size:10px;color:#888;max-width:260px}
+.legend-title{font-size:10px;font-weight:600;color:#ccc;margin-bottom:6px;padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,0.08)}
+.legend-edge{bottom:16px;left:16px}
+.legend-item{display:flex;align-items:center;gap:6px;margin:3px 0;line-height:1.2}
+.legend-line{width:20px;height:0;flex:0 0 20px;border-top-width:2px;border-top-style:solid}
+
+/* 엣지 범례 hover 툴팁 (K-IFRS·공정거래법·자본시장법 근거) */
+.legend-edge .legend-item{position:relative;cursor:help;padding:2px 2px;border-radius:4px;transition:background 0.15s}
+.legend-edge .legend-item:hover{background:rgba(255,255,255,0.06)}
+.legend-edge .legend-item:hover::after{
+  content:attr(data-tooltip);
+  position:absolute;left:calc(100% + 10px);bottom:-4px;
+  width:300px;padding:10px 12px;
+  background:rgba(8,12,24,0.98);
+  border:1px solid rgba(251,191,36,0.4);
+  border-radius:6px;
+  font-size:11px;color:#e0e0e0;line-height:1.6;
+  z-index:200;pointer-events:none;
+  white-space:normal;text-align:left;
+  box-shadow:0 4px 20px rgba(0,0,0,0.5);
+}
+
+/* Disclosure panel */
+.disc-impact{padding:6px 10px;border-radius:6px;margin-bottom:6px;font-size:12px;display:flex;justify-content:space-between;align-items:center}
+.disc-impact .company{font-weight:500}
+.disc-impact .badge{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600}
+</style>
+</head>
+<body>
+
+<div class="alert-banner" id="alert">
+  <div class="alert-dot"></div>
+  <div style="font-size:13px;flex:1;line-height:1.5"><strong style="color:#4da6ff">📡 신규 공시 감지</strong><br>삼성전자 (005930) — 타법인 주식 취득 결정 (<strong style="color:#4da6ff">레인보우로보틱스</strong>, <span style="color:#fbbf24;font-weight:600">5,000억원</span>)</div>
+  <button style="background:none;border:1px solid rgba(255,255,255,0.2);color:white;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:11px" onclick="document.getElementById('alert').classList.remove('show')">닫기</button>
+</div>
+
+<div class="title"><h1>DiscloseAI</h1><p><span class="live"></span>기업을 클릭하여 해부를 시작하세요</p></div>
+
+<canvas id="c"></canvas>
+
+
+<div class="panel" id="panel">
+  <button class="close-btn" onclick="closePanel()">×</button>
+  <div id="panelInner" style="padding:20px"></div>
+</div>
+
+<div class="hud-main">
+  <div class="hud-sub" id="hudSub"></div>
+  <div class="hud-modes">
+    <button class="on" data-mode="analyze" onclick="setMode('analyze',this)">📊 기업분석</button>
+    <button data-mode="disclosure" onclick="setMode('disclosure',this)">📡 공시</button>
+    <button data-mode="timemachine" onclick="setMode('timemachine',this)">🕰 타임머신</button>
+  </div>
+  <div class="mode-hint" id="modeHint">기업을 클릭하면 재무제표와 EQS 분석을 볼 수 있습니다</div>
+</div>
+
+<!-- 좌측 하단: 관계 유형(엣지 색) 범례 — 각 항목 hover 시 K-IFRS·공정거래법 근거 툴팁 -->
+<div class="legend legend-edge">
+  <div class="legend-title">관계 유형 (엣지 색) <span style="font-weight:400;color:#666">— 항목에 커서를 올려두면 상세 설명</span></div>
+  <div class="legend-item" data-tooltip="K-IFRS 1110 &#39;연결재무제표&#39; 기준. 의결권 50% 초과 보유 시 지배력이 인정되어 지배기업-종속기업 관계가 성립합니다. 지배기업은 종속기업의 자산·부채·손익을 합산한 연결재무제표를 작성할 의무를 집니다."><span class="legend-line" style="border-color:#ef4444;border-top-width:2.5px"></span>종속기업 (K-IFRS &gt;50%)</div>
+  <div class="legend-item" data-tooltip="K-IFRS 1028 &#39;관계기업과 공동기업에 대한 투자&#39; 기준. 의결권 20~50% 보유 시 유의적 영향력(significant influence)이 추정되어 관계기업으로 분류됩니다. 지분법(equity method)을 적용하여 피투자기업 순이익 중 지분만큼을 투자자의 손익에 반영합니다."><span class="legend-line" style="border-color:#f97316;border-top-width:2px"></span>관계기업 (K-IFRS 20~50%)</div>
+  <div class="legend-item" data-tooltip="자본시장법 제147조 &#39;주식등의 대량보유상황 보고&#39; 기준. 상장주식 5% 이상 취득 시 5영업일 이내 공시 의무(5% rule). K-IFRS 1109상 금융자산으로 공정가치 측정하며, 지배·유의적 영향력 없는 지분투자로 분류됩니다."><span class="legend-line" style="border-color:#94a3b8;border-top-style:dashed;border-top-width:1.2px"></span>유의적 투자 (5~20%)</div>
+  <div class="legend-item" data-tooltip="공정거래법 제2조 제11호 &#39;기업집단&#39; 정의 및 동법 시행령. 공정거래위원회가 매년 5월 지정·공시하는 &#39;공시대상기업집단&#39;(자산총액 5조원 이상)의 소속회사 간 관계. 동일인이 사실상 지배하는 기업 집합으로, K-IFRS 특수관계자 정의보다 광범위합니다."><span class="legend-line" style="border-color:#fbbf24;border-top-style:dashed;border-top-width:1.5px"></span>공정위 계열</div>
+  <div class="legend-item" data-tooltip="K-IFRS 1024 &#39;특수관계자 공시&#39; 기준. 사업보고서 주석에 공시된 지배·종속·관계·공동기업 및 동일인 지배 하 형제회사 등. 지분율로는 포착되지 않지만 실질 지배력·영향력이 인정되는 관계까지 포함하여 공정위 미지정 독립기업의 실질 관계를 보강합니다."><span class="legend-line" style="border-color:#a78bfa;border-top-style:dashed;border-top-width:1.2px"></span>사업보고서 특수관계자</div>
+  <div class="legend-item" data-tooltip="공개 DB(DART·공정거래위원회)에 반영되지 않은 상호 관계 — CPA 팀의 실사·감사 정보 또는 알려진 인적 지배 관계 기반 수동 보정. 향후 공시에 반영되면 자동 소스(K-IFRS/공정위)로 대체됩니다."><span class="legend-line" style="border-color:#ec4899;border-top-style:dotted;border-top-width:1px"></span>수동 보정</div>
+  <div style="margin-top:6px;font-size:9px;color:#555">실선 = K-IFRS 지분율 분류, 점선 = 공정위/주석/수동</div>
+</div>
+
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');let W,H;function resize(){W=c.width=innerWidth;H=c.height=innerHeight}resize();onresize=resize;
+
+// ===== DATA =====
+// Helper — hex + alpha → rgba()
+function hexA(hex, a){ const h = hex.replace('#',''); const r=parseInt(h.slice(0,2),16),g=parseInt(h.slice(2,4),16),b=parseInt(h.slice(4,6),16); return `rgba(${r},${g},${b},${a})`; }
+const bySecCount = {};
+// Each sector is a galaxy — cx/cy are world-space galaxy centers, each has spiral arms, rotation, scale
+const sectors={
+  '반도체':     {color:'#7c6cf0',cx:-0.55,cy:-0.35,size:1.3, arms:3, tightness:0.5,  rotation: 0.00018, spin: 1},
+  '디스플레이': {color:'#4da6ff',cx: 0.55,cy:-0.50,size:0.9, arms:2, tightness:0.6,  rotation:-0.00022, spin:-1},
+  '2차전지':    {color:'#22d3ee',cx: 0.70,cy: 0.05,size:1.0, arms:4, tightness:0.45, rotation: 0.00016, spin: 1},
+  '바이오':     {color:'#34d399',cx:-0.70,cy: 0.30,size:1.0, arms:3, tightness:0.55, rotation:-0.00020, spin:-1},
+  '자동차':     {color:'#f97316',cx: 0.00,cy: 0.50,size:1.1, arms:2, tightness:0.4,  rotation: 0.00014, spin: 1},
+  '금융':       {color:'#a78bfa',cx:-0.20,cy:-0.60,size:0.8, arms:2, tightness:0.7,  rotation: 0.00019, spin: 1},
+  '플랫폼':     {color:'#f472b6',cx: 0.30,cy:-0.15,size:0.7, arms:2, tightness:0.5,  rotation:-0.00024, spin:-1},
+  '에너지':     {color:'#facc15',cx:-0.45,cy: 0.00,size:0.7, arms:3, tightness:0.5,  rotation: 0.00017, spin: 1},
+  '중공업·방산':{color:'#64748b',cx: 0.75,cy:-0.25,size:0.7, arms:2, tightness:0.5,  rotation:-0.00018, spin:-1},
+  '건설':       {color:'#d97706',cx: 0.20,cy: 0.28,size:0.6, arms:2, tightness:0.5,  rotation: 0.00016, spin: 1},
+  '통신':       {color:'#06b6d4',cx:-0.30,cy: 0.55,size:0.6, arms:2, tightness:0.5,  rotation:-0.00021, spin:-1},
+  '기타':       {color:'#a3e635',cx: 0.05,cy:-0.05,size:0.5, arms:2, tightness:0.5,  rotation: 0.00015, spin: 1}
+};
+
+// === relation_type별 엣지 스타일 (Phase 2f + UI 개선 iteration 2026-04-20) ===
+const EDGE_STYLES={subsidiary:{color:'#ef4444',width:2.5,dash:[]},associate:{color:'#f97316',width:2.0,dash:[]},investment:{color:'#94a3b8',width:1.2,dash:[3,3]},ftc_group:{color:'#fbbf24',width:1.5,dash:[8,4]},dart_filing:{color:'#a78bfa',width:1.2,dash:[5,3]},manual:{color:'#ec4899',width:1.0,dash:[2,3]}};
+const EDGE_LABELS={subsidiary:'종속기업(>50%)',associate:'관계기업(20~50%)',investment:'유의적투자(5~20%)',ftc_group:'공정위 계열',dart_filing:'사업보고서 특수관계자',manual:'수동 보정'};
+
+// Phase 2f: 하드코딩 raw 배열을 fetch로 대체. 원본 코드는 하단 RAW_HARDCODED_LEGACY 주석 참조.
+let raw=[];
+const _LEGACY_HARDCODED_RAW=[
+  {n:'삼성전자',t:'005930',s:'반도체',sz:3.5,mc:'512조',rv:'300.9',oi:'36.5',oim:'12.1',ni:'26.4',ta:'464',tl:'102',eq:'362',dr:'28',ocf:'62.1',icf:'-53.2',fcf:'-12.1',rv_chg:12,oi_chg:18,recv_days:78,recv_chg:26,seg_main:'DS(반도체)',seg_pct:63,rp_name:'삼성디스플레이',rp_amt:'8.2조',eqs:82,gr:'A',m1:85,m2:88,m3:78,m4:80,m5:79,m1t:'이익의 현금 뒷받침 양호.',m2t:'M-score -2.83 안전구간. 조작 징후 없음.',m3t:'OCF/NI 2.35. 현금흐름 건전.',m4t:'AR(1) 0.82. 이익 지속 가능.',m5t:'F-score 7/9. 전반적 개선.',
+   tm:{date:'2024년 8월',disclosure:'평택 P4 반도체 신규 투자 결정 (30조원)',news:[{src:'한경',h:'"AI 반도체 초격차... 삼성 30조 베팅"'},{src:'매경',h:'"HBM 시장 선점 나선다... 목표가 상향"'},{src:'증권사',h:'매수 의견 15개 / 매도 0개'},{src:'종토방',h:'"10만전자 간다 🚀🚀🚀"'}],answer:{stock_chg:'+12.5%',supply:[{n:'원익IPS',chg:'+32.8%'},{n:'한미반도체',chg:'+28.5%'},{n:'HPSP',chg:'+41.2%'}],lesson:'대형주 CAPEX 공시는 공급사에 더 큰 영향을 미칩니다.',eqs_hint:'EQS 82점(A등급). 이 경우 공시 내용의 신뢰도가 높아\n실제 투자로 이어질 가능성이 높았습니다.'}},
+   disc:[{title:'타법인주식취득: 레인보우로보틱스 5,000억원',impacts:[{n:'레인보우로보틱스',type:'피인수',badge:'수혜',badge_col:'#4ade80',conf:87},{n:'두산로보틱스',type:'경쟁사',badge:'경쟁압박',badge_col:'#f87171',conf:64},{n:'원익IPS',type:'공급사',badge:'영향권',badge_col:'#4da6ff',conf:52}]}],
+   rl:['SK하이닉스:경쟁','삼성디스플레이:종속','삼성SDI:계열','원익IPS:공급','한미반도체:공급','레인보우로보틱스:피인수','HPSP:공급']},
+
+  {n:'SK하이닉스',t:'000660',s:'반도체',sz:2.8,mc:'186조',rv:'66.2',oi:'23.5',oim:'35.5',ni:'19.8',ta:'82',tl:'31',eq:'51',dr:'61',ocf:'28.3',icf:'-18.5',fcf:'-5.2',rv_chg:95,oi_chg:999,recv_days:45,recv_chg:5,seg_main:'DRAM/HBM',seg_pct:72,rp_name:'SK스퀘어',rp_amt:'2.1조',eqs:78,gr:'B',m1:80,m2:82,m3:85,m4:65,m5:76,m1t:'발생액 정상 범위.',m2t:'M-score 안전구간.',m3t:'현금흐름 양호.',m4t:'전년 적자→흑전. 지속성 확인 필요.',m5t:'F-score 7/9.',
+   tm:{date:'2023년 8월',disclosure:'2023년 반기보고서: 반도체 부문 영업적자 -5.5조',news:[{src:'조선',h:'"메모리 빙하기... 역대급 적자 충격"'},{src:'매경',h:'"감산해도 소용없어... 수요 절벽"'},{src:'증권사',h:'목표가 하향 8건 / 매수 유지 5건'},{src:'종토방',h:'"3만전자 가나... 손절해야 하나"'}],answer:{stock_chg:'+185% (1년 후)',supply:[{n:'원익IPS',chg:'+120%'},{n:'한미반도체',chg:'+95%'}],lesson:'역대급 적자 = 바닥 신호일 수 있습니다.\n모든 뉴스가 부정적일 때가 오히려 기회였습니다.',eqs_hint:'EQS 42점(D등급)이었으나, M5(재무건전성) F-score가\n바닥에서 반등 시작. 업황 회복 시그널이 숫자에 먼저 나타남.'}},
+   disc:[],rl:['삼성전자:경쟁','원익IPS:공급','한미반도체:공급','HPSP:공급','SK스퀘어:모회사']},
+
+  {n:'LG디스플레이',t:'034220',s:'디스플레이',sz:1.2,mc:'8.2조',rv:'21.3',oi:'-0.8',oim:'-3.8',ni:'-1.2',ta:'28',tl:'19',eq:'9',dr:'211',ocf:'1.8',icf:'-2.1',fcf:'-0.5',rv_chg:-5,oi_chg:-999,recv_days:62,recv_chg:8,seg_main:'OLED',seg_pct:78,rp_name:'LG전자',rp_amt:'12.5조',eqs:42,gr:'D',m1:38,m2:45,m3:52,m4:35,m5:40,m1t:'비용 이연 가능성. 발생액 높음.',m2t:'M-score -1.95 위험구간.',m3t:'감가상각 효과로 OCF 흑자이나 본질적 적자.',m4t:'3년 연속 적자. 이익 회복 불확실.',m5t:'F-score 3/9. 전반적 악화.',
+   tm:{date:'2024년 8월',disclosure:'유상증자 결정 — 8,000억원 (시설투자 목적)',news:[{src:'한경',h:'"LGD 또 유증... 주주가치 희석 불가피"'},{src:'전자신문',h:'"OLED 투자 지속... 적자의 늪 탈출 언제?"'},{src:'증권사',h:'매수 2 / 중립 5 / 매도 1'},{src:'종토방',h:'"물타기할까 손절할까..."'}],answer:{stock_chg:'-28% (6개월 후)',supply:[{n:'덕산네오룩스',chg:'-15%'},{n:'AP시스템',chg:'-22%'}],lesson:'EQS D등급 기업의 유상증자는 과거 89건 중 72%에서\n6개월 내 주가 하락. 자금 조달 목적을 반드시 확인하세요.',eqs_hint:'EQS 42점(D등급). 특히 M2(분식확률) -1.95로 위험구간.\n"뉴스 5개가 못 본 걸, 숫자 하나가 말해주고 있었다"'}},
+   disc:[],rl:['삼성디스플레이:경쟁','LG전자:계열']},
+
+  {n:'에코프로비엠',t:'247540',s:'2차전지',sz:1.0,mc:'8.5조',rv:'4.8',oi:'0.3',oim:'6.3',ni:'0.15',ta:'6',tl:'3.5',eq:'2.5',dr:'140',ocf:'0.1',icf:'-1.2',fcf:'-0.8',rv_chg:-35,oi_chg:-70,recv_days:92,recv_chg:45,seg_main:'양극재',seg_pct:95,rp_name:'에코프로',rp_amt:'0.5조',eqs:45,gr:'D',m1:38,m2:42,m3:40,m4:48,m5:55,m1t:'매출채권 92일 급증(+45%). 미회수 심각.',m2t:'M-score -1.85 위험구간.',m3t:'OCF 극히 낮음. 현금흐름 괴리 심각.',m4t:'이익 급감. 업황 의존.',m5t:'F-score 4/9.',
+   tm:{date:'2023년 6월',disclosure:'에코프로비엠 주가 100만원 돌파 (시총 30조)',news:[{src:'한경',h:'"2차전지 대장주... 200만원 간다"'},{src:'매경',h:'"에코프로 신화, K-배터리의 자존심"'},{src:'증권사',h:'매수 8 / 중립 1 / 매도 0'},{src:'종토방',h:'"영끌해서라도 사야 한다 🚀🚀🚀"'}],answer:{stock_chg:'-72% (1년 후)',supply:[],lesson:'시장 열광과 재무제표는 다른 이야기를 하고 있었습니다.\n매출채권 +45%, 현금흐름 괴리 심각 — 숫자는 이미 경고 중.',eqs_hint:'그 당시 EQS를 산출했다면 45점(D등급).\nM1 발생액 품질, M3 현금흐름 괴리 모두 위험.\n\n"뉴스 8개가 못 본 걸, 숫자 하나가 말해주고 있었다"'}},
+   disc:[],rl:['에코프로:모회사']},
+
+  // Simplified entries
+  {n:'삼성디스플레이',t:'비상장',s:'디스플레이',sz:1.4,mc:'-',rv:'34.6',oi:'2.1',oim:'6.1',ni:'1.8',ta:'45',tl:'12',eq:'33',dr:'36',ocf:'5.2',icf:'-4.8',fcf:'-0.3',rv_chg:8,oi_chg:15,recv_days:55,recv_chg:3,seg_main:'OLED',seg_pct:85,rp_name:'삼성전자',rp_amt:'12.3조',eqs:65,gr:'C',m1:62,m2:68,m3:70,m4:60,m5:65,m1t:'보통.',m2t:'정상.',m3t:'양호.',m4t:'변동성.',m5t:'F-score 5/9.',tm:null,disc:[],rl:['LG디스플레이:경쟁','삼성전자:모회사']},
+  {n:'삼성SDI',t:'006400',s:'2차전지',sz:1.6,mc:'42조',rv:'22.8',oi:'1.8',oim:'7.9',ni:'1.5',ta:'38',tl:'15',eq:'23',dr:'65',ocf:'3.2',icf:'-4.5',fcf:'-1.8',rv_chg:-8,oi_chg:-25,recv_days:72,recv_chg:18,seg_main:'배터리',seg_pct:88,rp_name:'삼성전자',rp_amt:'2.1조',eqs:71,gr:'B',m1:68,m2:72,m3:65,m4:70,m5:78,m1t:'소폭 증가.',m2t:'정상.',m3t:'투자 확대.',m4t:'감소 추세.',m5t:'F-score 6/9.',tm:null,disc:[],rl:['LG화학:경쟁']},
+  {n:'LG전자',t:'066570',s:'디스플레이',sz:1.5,mc:'22조',rv:'84.2',oi:'3.5',oim:'4.2',ni:'2.1',ta:'48',tl:'28',eq:'20',dr:'140',ocf:'6.2',icf:'-3.8',fcf:'-1.5',rv_chg:5,oi_chg:12,recv_days:48,recv_chg:2,seg_main:'H&A(가전)',seg_pct:42,rp_name:'LG디스플레이',rp_amt:'5.8조',eqs:73,gr:'B',m1:70,m2:75,m3:72,m4:74,m5:74,m1t:'정상.',m2t:'안전.',m3t:'양호.',m4t:'안정.',m5t:'F-score 6/9.',tm:null,disc:[],rl:['LG디스플레이:계열','삼성전자:경쟁']},
+  {n:'원익IPS',t:'240810',s:'반도체',sz:0.9,mc:'2.8조',rv:'1.2',oi:'0.18',oim:'15.0',ni:'0.14',ta:'1.5',tl:'0.4',eq:'1.1',dr:'36',ocf:'0.22',icf:'-0.15',fcf:'-0.05',rv_chg:45,oi_chg:80,recv_days:85,recv_chg:32,seg_main:'반도체장비',seg_pct:95,rp_name:'삼성전자',rp_amt:'0.8조',eqs:61,gr:'C',m1:55,m2:62,m3:58,m4:68,m5:65,m1t:'매출채권 급증. 확인 필요.',m2t:'M-score 경계선.',m3t:'매출채권 회수 지연.',m4t:'수주 기반 변동.',m5t:'F-score 5/9.',tm:null,disc:[],rl:[]},
+  {n:'한미반도체',t:'042700',s:'반도체',sz:1.0,mc:'3.5조',rv:'0.8',oi:'0.22',oim:'27.5',ni:'0.18',ta:'1.0',tl:'0.2',eq:'0.8',dr:'25',ocf:'0.2',icf:'-0.08',fcf:'-0.03',rv_chg:60,oi_chg:120,recv_days:55,recv_chg:8,seg_main:'반도체후공정',seg_pct:92,rp_name:'-',rp_amt:'-',eqs:74,gr:'B',m1:72,m2:76,m3:75,m4:70,m5:77,m1t:'정상.',m2t:'안전.',m3t:'양호.',m4t:'성장기.',m5t:'F-score 7/9.',tm:null,disc:[],rl:[]},
+  {n:'HPSP',t:'403870',s:'반도체',sz:0.8,mc:'2.1조',rv:'0.3',oi:'0.12',oim:'40',ni:'0.1',ta:'0.5',tl:'0.1',eq:'0.4',dr:'25',ocf:'0.15',icf:'-0.05',fcf:'-0.02',rv_chg:35,oi_chg:50,recv_days:40,recv_chg:5,seg_main:'반도체장비',seg_pct:98,rp_name:'-',rp_amt:'-',eqs:69,gr:'B',m1:65,m2:70,m3:72,m4:68,m5:70,m1t:'정상.',m2t:'정상.',m3t:'양호.',m4t:'성장.',m5t:'F-score 6/9.',tm:null,disc:[],rl:[]},
+  {n:'현대자동차',t:'005380',s:'자동차',sz:2.5,mc:'65조',rv:'168',oi:'14.2',oim:'8.5',ni:'11.5',ta:'120',tl:'72',eq:'48',dr:'150',ocf:'12.8',icf:'-8.5',fcf:'-3.2',rv_chg:8,oi_chg:5,recv_days:32,recv_chg:-5,seg_main:'자동차',seg_pct:85,rp_name:'기아',rp_amt:'5.2조',eqs:79,gr:'B',m1:78,m2:82,m3:75,m4:80,m5:77,m1t:'정상.',m2t:'안전.',m3t:'양호.',m4t:'안정.',m5t:'F-score 7/9.',tm:null,disc:[],rl:['기아:계열']},
+  {n:'기아',t:'000270',s:'자동차',sz:2.0,mc:'48조',rv:'105',oi:'12.1',oim:'11.5',ni:'9.8',ta:'68',tl:'38',eq:'30',dr:'127',ocf:'10.5',icf:'-5.2',fcf:'-2.8',rv_chg:10,oi_chg:8,recv_days:28,recv_chg:-8,seg_main:'자동차',seg_pct:90,rp_name:'현대차',rp_amt:'3.8조',eqs:81,gr:'A',m1:80,m2:84,m3:78,m4:82,m5:80,m1t:'정상.',m2t:'안전.',m3t:'양호.',m4t:'성장.',m5t:'F-score 7/9.',tm:null,disc:[],rl:['현대자동차:계열']},
+  {n:'KB금융',t:'105560',s:'금융',sz:1.8,mc:'32조',rv:'14.5',oi:'5.8',oim:'40',ni:'4.5',ta:'680',tl:'640',eq:'40',dr:'1600',ocf:'-',icf:'-',fcf:'-',rv_chg:5,oi_chg:8,recv_days:0,recv_chg:0,seg_main:'은행',seg_pct:65,rp_name:'-',rp_amt:'-',eqs:83,gr:'A',m1:82,m2:85,m3:0,m4:84,m5:82,m1t:'금융업 별도.',m2t:'안전.',m3t:'금융업 제외.',m4t:'안정.',m5t:'BIS양호.',tm:null,disc:[],rl:['신한지주:경쟁']},
+  {n:'신한지주',t:'055550',s:'금융',sz:1.6,mc:'28조',rv:'12.8',oi:'5.2',oim:'40.6',ni:'4.1',ta:'620',tl:'585',eq:'35',dr:'1671',ocf:'-',icf:'-',fcf:'-',rv_chg:3,oi_chg:5,recv_days:0,recv_chg:0,seg_main:'은행',seg_pct:60,rp_name:'-',rp_amt:'-',eqs:81,gr:'A',m1:80,m2:83,m3:0,m4:82,m5:80,m1t:'금융업 별도.',m2t:'안전.',m3t:'제외.',m4t:'안정.',m5t:'양호.',tm:null,disc:[],rl:['KB금융:경쟁']},
+  {n:'네이버',t:'035420',s:'플랫폼',sz:1.8,mc:'52조',rv:'10.3',oi:'1.8',oim:'17.5',ni:'1.2',ta:'25',tl:'10',eq:'15',dr:'67',ocf:'2.5',icf:'-3.2',fcf:'-0.8',rv_chg:12,oi_chg:15,recv_days:35,recv_chg:5,seg_main:'서치플랫폼',seg_pct:55,rp_name:'-',rp_amt:'-',eqs:74,gr:'B',m1:72,m2:76,m3:68,m4:75,m5:78,m1t:'정상.',m2t:'안전.',m3t:'투자 확대.',m4t:'안정.',m5t:'F-score 7/9.',tm:null,disc:[],rl:['카카오:경쟁']},
+  {n:'카카오',t:'035720',s:'플랫폼',sz:1.3,mc:'18조',rv:'7.8',oi:'0.5',oim:'6.4',ni:'0.2',ta:'18',tl:'8',eq:'10',dr:'80',ocf:'1.2',icf:'-2.5',fcf:'-0.8',rv_chg:3,oi_chg:-20,recv_days:42,recv_chg:12,seg_main:'플랫폼',seg_pct:48,rp_name:'-',rp_amt:'-',eqs:58,gr:'C',m1:55,m2:60,m3:52,m4:58,m5:65,m1t:'순이익 급감.',m2t:'경계선.',m3t:'악화.',m4t:'감소 추세.',m5t:'F-score 5/9.',tm:null,disc:[],rl:['네이버:경쟁']},
+  {n:'셀트리온',t:'068270',s:'바이오',sz:1.8,mc:'45조',rv:'3.8',oi:'1.2',oim:'31.6',ni:'0.9',ta:'15',tl:'5',eq:'10',dr:'50',ocf:'1.0',icf:'-0.5',fcf:'-0.2',rv_chg:18,oi_chg:25,recv_days:95,recv_chg:15,seg_main:'바이오시밀러',seg_pct:90,rp_name:'-',rp_amt:'-',eqs:70,gr:'B',m1:65,m2:72,m3:68,m4:72,m5:73,m1t:'바이오 특성.',m2t:'안전.',m3t:'양호.',m4t:'성장.',m5t:'F-score 6/9.',tm:null,disc:[],rl:['삼성바이오로직스:경쟁']},
+  {n:'삼성바이오로직스',t:'207940',s:'바이오',sz:2.0,mc:'78조',rv:'4.2',oi:'1.5',oim:'35.7',ni:'1.2',ta:'12',tl:'3',eq:'9',dr:'33',ocf:'1.8',icf:'-2.0',fcf:'-0.5',rv_chg:22,oi_chg:30,recv_days:88,recv_chg:10,seg_main:'CMO',seg_pct:95,rp_name:'-',rp_amt:'-',eqs:76,gr:'B',m1:74,m2:78,m3:72,m4:76,m5:80,m1t:'양호.',m2t:'안전.',m3t:'양호.',m4t:'수주 확대.',m5t:'F-score 7/9.',tm:null,disc:[],rl:['삼성전자:계열','셀트리온:경쟁']},
+  {n:'LG화학',t:'051910',s:'2차전지',sz:1.5,mc:'28조',rv:'55.6',oi:'2.3',oim:'4.1',ni:'1.5',ta:'52',tl:'30',eq:'22',dr:'136',ocf:'4.5',icf:'-6.2',fcf:'-2.8',rv_chg:-12,oi_chg:-35,recv_days:58,recv_chg:12,seg_main:'석유화학',seg_pct:52,rp_name:'-',rp_amt:'-',eqs:68,gr:'B',m1:65,m2:70,m3:62,m4:68,m5:75,m1t:'상승 추세.',m2t:'정상.',m3t:'투자 과다.',m4t:'감소.',m5t:'F-score 6/9.',tm:null,disc:[],rl:['삼성SDI:경쟁']},
+  {n:'LG에너지솔루션',t:'373220',s:'2차전지',sz:2.2,mc:'95조',rv:'36.2',oi:'1.2',oim:'3.3',ni:'0.8',ta:'45',tl:'22',eq:'23',dr:'96',ocf:'3.5',icf:'-8.2',fcf:'-3.5',rv_chg:-10,oi_chg:-55,recv_days:65,recv_chg:22,seg_main:'배터리',seg_pct:100,rp_name:'-',rp_amt:'-',eqs:59,gr:'C',m1:52,m2:60,m3:55,m4:58,m5:70,m1t:'재고 급증.',m2t:'경계선.',m3t:'투자 과다.',m4t:'이익 급감.',m5t:'F-score 5/9.',tm:null,disc:[],rl:[]},
+  {n:'에코프로',t:'086520',s:'2차전지',sz:0.9,mc:'4.2조',rv:'0.1',oi:'-0.02',oim:'-20',ni:'-0.03',ta:'2',tl:'0.8',eq:'1.2',dr:'67',ocf:'-0.05',icf:'-0.1',fcf:'0.02',rv_chg:-50,oi_chg:-999,recv_days:120,recv_chg:60,seg_main:'지주',seg_pct:100,rp_name:'-',rp_amt:'-',eqs:38,gr:'D',m1:30,m2:35,m3:32,m4:40,m5:52,m1t:'적자.',m2t:'위험.',m3t:'적자+현금소진.',m4t:'적자 지속.',m5t:'F-score 3/9.',tm:null,disc:[],rl:[]},
+  {n:'포스코홀딩스',t:'005490',s:'에너지',sz:1.6,mc:'25조',rv:'77',oi:'3.2',oim:'4.2',ni:'2.5',ta:'95',tl:'55',eq:'40',dr:'138',ocf:'5.8',icf:'-4.2',fcf:'-2.1',rv_chg:-8,oi_chg:-15,recv_days:42,recv_chg:3,seg_main:'철강',seg_pct:70,rp_name:'-',rp_amt:'-',eqs:72,gr:'B',m1:70,m2:74,m3:68,m4:72,m5:76,m1t:'정상.',m2t:'안전.',m3t:'양호.',m4t:'안정.',m5t:'F-score 6/9.',tm:null,disc:[],rl:[]},
+  {n:'레인보우로보틱스',t:'277810',s:'반도체',sz:0.5,mc:'0.6조',rv:'0.02',oi:'-0.01',oim:'-50',ni:'-0.015',ta:'0.1',tl:'0.03',eq:'0.07',dr:'43',ocf:'-0.008',icf:'-0.02',fcf:'0.01',rv_chg:80,oi_chg:-999,recv_days:45,recv_chg:20,seg_main:'로봇',seg_pct:100,rp_name:'-',rp_amt:'-',eqs:35,gr:'D',m1:30,m2:32,m3:28,m4:38,m5:45,m1t:'매출 극소.',m2t:'데이터 부족.',m3t:'적자.',m4t:'적자 지속.',m5t:'F-score 3/9.',tm:null,disc:[],rl:['두산로보틱스:경쟁']},
+  {n:'두산로보틱스',t:'454910',s:'반도체',sz:0.7,mc:'1.8조',rv:'0.15',oi:'-0.03',oim:'-20',ni:'-0.04',ta:'0.5',tl:'0.15',eq:'0.35',dr:'43',ocf:'-0.02',icf:'-0.05',fcf:'0.03',rv_chg:50,oi_chg:-999,recv_days:55,recv_chg:15,seg_main:'협동로봇',seg_pct:100,rp_name:'-',rp_amt:'-',eqs:38,gr:'D',m1:35,m2:38,m3:32,m4:40,m5:48,m1t:'적자.',m2t:'부족.',m3t:'적자.',m4t:'적자.',m5t:'F-score 3/9.',tm:null,disc:[],rl:[]},
+  {n:'SK스퀘어',t:'402340',s:'반도체',sz:1.3,mc:'12조',rv:'0.1',oi:'0.5',oim:'500',ni:'0.3',ta:'18',tl:'3',eq:'15',dr:'20',ocf:'0.8',icf:'-0.2',fcf:'-0.1',rv_chg:15,oi_chg:25,recv_days:20,recv_chg:0,seg_main:'지주',seg_pct:100,rp_name:'-',rp_amt:'-',eqs:66,gr:'C',m1:62,m2:68,m3:65,m4:64,m5:70,m1t:'지주사.',m2t:'정상.',m3t:'양호.',m4t:'자회사 의존.',m5t:'F-score 6/9.',tm:null,disc:[],rl:[]},
+];
+
+// ===== MODE & STATE =====
+let currentMode = 'analyze';
+let nodes=[],edges=[],sel=null,hov=null,flt='all';
+let camX=0,camY=0,zm=0.62,drag=false,ds={x:0,y:0},cs={x:0,y:0};
+let alertOn=false,alertSrc=null,ripples=[],stars=[],time=0;
+// Enhanced starfield
+for(let i=0;i<400;i++)stars.push({x:Math.random(),y:Math.random(),s:Math.random()*2+0.2,b:Math.random(),twinkleSpeed:0.5+Math.random()*3});
+// Nebula clouds
+let nebulae=[];
+for(let i=0;i<6;i++)nebulae.push({x:Math.random(),y:Math.random(),r:0.08+Math.random()*0.15,hue:200+Math.random()*80,alpha:0.015+Math.random()*0.02});
+// Shooting stars
+let shootingStars=[];
+setInterval(()=>{if(Math.random()<0.3)shootingStars.push({x:Math.random()*W,y:Math.random()*H*0.5,vx:3+Math.random()*4,vy:1+Math.random()*2,life:1,len:30+Math.random()*40});},2000);
+
+// Cat mascot — SVG-based sprite with hop physics
+const mascot={x:W/2,y:H/2,targetNode:null,progress:1,bounceY:0,bouncePhase:0,waitTimer:0,trail:[],scale:1,facing:1,prevNode:null,airborne:0};
+
+const catSprites = {};
+
+// Cuter chibi cat — bigger head, huge eyes, rounder body
+function makeCatSprite(pose){
+  const size = 160;
+  const cv = document.createElement('canvas');
+  cv.width = cv.height = size;
+  const c = cv.getContext('2d');
+  // Pose params — chibi proportions (head ~= body)
+  let bodyY=95, bodyW=56, bodyH=42, legFR=0, legBR=0, tailRot=0.3, earDrop=0, stretchX=1, squashY=1, eyeMood='happy';
+  if(pose==='idle'){bodyY=95;stretchX=1;squashY=1;tailRot=0.3;eyeMood='happy';}
+  else if(pose==='crouch'){bodyY=108;bodyH=36;stretchX=1.1;squashY=0.85;tailRot=-0.1;eyeMood='determined';}
+  else if(pose==='launch'){bodyY=80;bodyH=36;stretchX=1.15;squashY=1.15;tailRot=-0.5;legFR=-0.7;legBR=1.1;eyeMood='excited';}
+  else if(pose==='midair'){bodyY=72;bodyH=38;stretchX=1.2;squashY=1.2;tailRot=-0.9;legFR=-1.0;legBR=1.3;earDrop=0.15;eyeMood='excited';}
+  else if(pose==='land'){bodyY=105;bodyH=38;stretchX=0.85;squashY=0.85;tailRot=0.7;legFR=0.6;legBR=-0.3;eyeMood='happy';}
+  c.save();
+  c.translate(size/2,0);
+  c.scale(stretchX, squashY);
+
+  // === TAIL ===
+  c.save();
+  c.translate(-bodyW/2+4, bodyY-6);
+  c.rotate(tailRot);
+  c.strokeStyle='#d98248';c.lineWidth=9;c.lineCap='round';
+  c.beginPath();c.moveTo(0,0);c.quadraticCurveTo(-18,-2,-26,-22);c.stroke();
+  c.strokeStyle='#fff';c.lineWidth=5;
+  c.beginPath();c.moveTo(-22,-18);c.quadraticCurveTo(-24,-21,-26,-22);c.stroke();
+  c.restore();
+
+  // === BACK LEGS ===
+  c.fillStyle='#d98248';
+  c.save();c.translate(-bodyW/2+12, bodyY+bodyH/2-2);c.rotate(legBR*0.3);
+  c.beginPath();c.ellipse(0,6,5,9,0,0,Math.PI*2);c.fill();
+  c.fillStyle='#fff';c.beginPath();c.ellipse(0,13,4,3,0,0,Math.PI*2);c.fill();
+  c.restore();
+
+  // === BODY (rounder, blobby chibi) ===
+  c.fillStyle='#f2a869';
+  c.beginPath();c.ellipse(0,bodyY,bodyW/2,bodyH/2,0,0,Math.PI*2);c.fill();
+  // belly (white patch)
+  c.fillStyle='#fff4e0';
+  c.beginPath();c.ellipse(2,bodyY+bodyH*0.2,bodyW*0.35,bodyH*0.38,0,0,Math.PI*2);c.fill();
+  // shoulder shade
+  c.fillStyle='rgba(180,100,40,0.15)';
+  c.beginPath();c.ellipse(-bodyW*0.2,bodyY-bodyH*0.15,bodyW*0.2,bodyH*0.2,0,0,Math.PI*2);c.fill();
+
+  // === FRONT LEGS ===
+  c.fillStyle='#d98248';
+  c.save();c.translate(bodyW/2-12, bodyY+bodyH/2-2);c.rotate(legFR*0.4);
+  c.beginPath();c.ellipse(0,6,4.5,8,0,0,Math.PI*2);c.fill();
+  c.fillStyle='#fff';c.beginPath();c.ellipse(0,12,3.5,2.5,0,0,Math.PI*2);c.fill();
+  c.restore();
+  c.fillStyle='#d98248';
+  c.save();c.translate(bodyW/2-20, bodyY+bodyH/2-2);c.rotate(legFR*0.2);
+  c.beginPath();c.ellipse(0,6,4,7,0,0,Math.PI*2);c.fill();
+  c.fillStyle='#fff';c.beginPath();c.ellipse(0,11,3,2,0,0,Math.PI*2);c.fill();
+  c.restore();
+
+  // === HEAD === (big chibi head)
+  const headX = bodyW/2-2, headY = bodyY-24;
+  const headR = 22;
+  c.fillStyle='#f2a869';
+  c.beginPath();c.ellipse(headX,headY,headR,headR*0.95,0,0,Math.PI*2);c.fill();
+  // cheek fluff
+  c.fillStyle='#fff4e0';
+  c.beginPath();c.ellipse(headX-6,headY+6,8,5,0,0,Math.PI*2);c.fill();
+  c.beginPath();c.ellipse(headX+6,headY+6,8,5,0,0,Math.PI*2);c.fill();
+
+  // === EARS (larger triangular) ===
+  c.fillStyle='#d98248';
+  c.save();c.translate(headX-headR*0.7,headY-headR*0.65);c.rotate(-0.25+earDrop);
+  c.beginPath();c.moveTo(0,0);c.lineTo(-6,-14);c.lineTo(8,-4);c.closePath();c.fill();c.restore();
+  c.save();c.translate(headX+headR*0.7,headY-headR*0.65);c.rotate(0.25-earDrop);
+  c.beginPath();c.moveTo(0,0);c.lineTo(6,-14);c.lineTo(-8,-4);c.closePath();c.fill();c.restore();
+  // inner ears (pink)
+  c.fillStyle='#ffb8a8';
+  c.save();c.translate(headX-headR*0.7,headY-headR*0.65);c.rotate(-0.25+earDrop);
+  c.beginPath();c.moveTo(-1,-2);c.lineTo(-4,-10);c.lineTo(3,-4);c.closePath();c.fill();c.restore();
+  c.save();c.translate(headX+headR*0.7,headY-headR*0.65);c.rotate(0.25-earDrop);
+  c.beginPath();c.moveTo(1,-2);c.lineTo(4,-10);c.lineTo(-3,-4);c.closePath();c.fill();c.restore();
+
+  // === HEAD STRIPES (M-shape forehead) ===
+  c.strokeStyle='rgba(160,90,35,0.55)';c.lineWidth=2.2;c.lineCap='round';
+  c.beginPath();
+  c.moveTo(headX-6,headY-10);c.lineTo(headX-4,headY-15);
+  c.moveTo(headX,headY-12);c.lineTo(headX,headY-17);
+  c.moveTo(headX+6,headY-10);c.lineTo(headX+4,headY-15);
+  c.stroke();
+
+  // === EYES (huge chibi eyes) ===
+  const eyeY = headY-1, eyeDX = 7, eyeW = 5, eyeH = 7;
+  if(eyeMood==='excited' || pose==='midair'){
+    // sparkly wide-open eyes
+    c.fillStyle='#1a1a1a';
+    c.beginPath();c.ellipse(headX-eyeDX,eyeY,eyeW,eyeH,0,0,Math.PI*2);
+    c.ellipse(headX+eyeDX,eyeY,eyeW,eyeH,0,0,Math.PI*2);c.fill();
+    // big sparkle highlights
+    c.fillStyle='#fff';
+    c.beginPath();c.ellipse(headX-eyeDX+1.5,eyeY-2,2.2,2.8,0,0,Math.PI*2);
+    c.ellipse(headX+eyeDX+1.5,eyeY-2,2.2,2.8,0,0,Math.PI*2);c.fill();
+    // small under-sparkle
+    c.beginPath();c.arc(headX-eyeDX-1.5,eyeY+2.5,0.8,0,Math.PI*2);
+    c.arc(headX+eyeDX-1.5,eyeY+2.5,0.8,0,Math.PI*2);c.fill();
+  } else if(eyeMood==='determined'){
+    // narrowed eyes (^ shape)
+    c.strokeStyle='#1a1a1a';c.lineWidth=2.5;c.lineCap='round';
+    c.beginPath();
+    c.moveTo(headX-eyeDX-4,eyeY+1);c.quadraticCurveTo(headX-eyeDX,eyeY-3,headX-eyeDX+4,eyeY+1);
+    c.moveTo(headX+eyeDX-4,eyeY+1);c.quadraticCurveTo(headX+eyeDX,eyeY-3,headX+eyeDX+4,eyeY+1);
+    c.stroke();
+  } else {
+    // happy round eyes
+    c.fillStyle='#1a1a1a';
+    c.beginPath();c.ellipse(headX-eyeDX,eyeY,eyeW*0.95,eyeH,0,0,Math.PI*2);
+    c.ellipse(headX+eyeDX,eyeY,eyeW*0.95,eyeH,0,0,Math.PI*2);c.fill();
+    // highlights
+    c.fillStyle='#fff';
+    c.beginPath();c.ellipse(headX-eyeDX+1.5,eyeY-2.5,1.8,2.4,0,0,Math.PI*2);
+    c.ellipse(headX+eyeDX+1.5,eyeY-2.5,1.8,2.4,0,0,Math.PI*2);c.fill();
+  }
+  // blush
+  c.fillStyle='rgba(255,150,160,0.45)';
+  c.beginPath();c.ellipse(headX-10,headY+5,3.5,2,0,0,Math.PI*2);
+  c.ellipse(headX+10,headY+5,3.5,2,0,0,Math.PI*2);c.fill();
+
+  // === NOSE + MOUTH ===
+  c.fillStyle='#ff8095';
+  c.beginPath();c.moveTo(headX-2,headY+7);c.lineTo(headX+2,headY+7);c.lineTo(headX,headY+9.5);c.closePath();c.fill();
+  c.strokeStyle='#3a2518';c.lineWidth=1.3;c.lineCap='round';
+  c.beginPath();
+  c.moveTo(headX,headY+9.5);c.lineTo(headX,headY+11);
+  c.moveTo(headX,headY+11);c.quadraticCurveTo(headX-3.5,headY+13,headX-5,headY+11);
+  c.moveTo(headX,headY+11);c.quadraticCurveTo(headX+3.5,headY+13,headX+5,headY+11);
+  c.stroke();
+
+  // === WHISKERS ===
+  c.strokeStyle='rgba(255,255,255,0.75)';c.lineWidth=0.9;c.lineCap='round';
+  c.beginPath();
+  c.moveTo(headX-7,headY+8);c.lineTo(headX-17,headY+6);
+  c.moveTo(headX-7,headY+10);c.lineTo(headX-17,headY+11);
+  c.moveTo(headX+7,headY+8);c.lineTo(headX+17,headY+6);
+  c.moveTo(headX+7,headY+10);c.lineTo(headX+17,headY+11);
+  c.stroke();
+
+  c.restore();
+  return cv;
+}
+['idle','crouch','launch','midair','land'].forEach(p=>{ catSprites[p]=makeCatSprite(p); });
+function pickNextNode(){const bigNodes=nodes.filter(n=>n.sz>=1.5);if(bigNodes.length===0)return;let next;do{next=bigNodes[Math.floor(Math.random()*bigNodes.length)];}while(next===mascot.targetNode&&bigNodes.length>1);mascot.targetNode=next;mascot.progress=0;}
+
+function setMode(mode, btn) {
+  currentMode = mode;
+  document.querySelectorAll('.hud-modes button').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  closePanel();
+  const sub = document.getElementById('hudSub');
+  const hint = document.getElementById('modeHint');
+  if (mode === 'analyze') {
+    // 섹터 필터 버튼 — sectors 사전에서 자동 생성 (색띠 inline). 섹터 추가 시 자동 반영.
+    const sectorOrder = ['반도체','디스플레이','2차전지','바이오','자동차','금융','플랫폼','에너지','중공업·방산','건설','통신','기타'];
+    const allBtn = `<button class="on" style="--sc:#9ca3af" onclick="filter('all',this)">전체</button>`;
+    const secBtns = sectorOrder
+      .filter(s => sectors[s])
+      .map(s => `<button style="--sc:${sectors[s].color}" onclick="filter('${s}',this)">${s}</button>`)
+      .join('');
+    sub.innerHTML = allBtn + secBtns;
+    hint.textContent = '기업을 클릭하면 재무제표 번역 + EQS 이익 품질 분석을 볼 수 있습니다';
+    flt = 'all';
+  } else if (mode === 'disclosure') {
+    sub.innerHTML = `<button style="background:rgba(251,191,36,0.1);border-color:rgba(251,191,36,0.3);color:#fbbf24" onclick="simAlert()">📡 공시 시뮬레이션</button>`;
+    hint.textContent = '공시 시뮬레이션 버튼을 누르거나, 기업을 클릭하면 공시 영향 분석을 볼 수 있습니다';
+    flt = 'all';
+  } else {
+    sub.innerHTML = `<span style="color:#7c6cf0;font-size:11px">⏰ 기업을 클릭하면 과거로 돌아갑니다</span>`;
+    hint.textContent = '삼성전자, SK하이닉스, LG디스플레이, 에코프로비엠에 타임머신 시나리오가 준비되어 있습니다';
+    flt = 'all';
+  }
+}
+
+// ===== PLANET TEXTURE GENERATION =====
+// Seeded RNG (mulberry32)
+function mkRand(seed){let s=seed>>>0;return function(){s=(s+0x6D2B79F5)>>>0;let t=s;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296};}
+function mixHex(hex,target,amt){const h=hex.replace('#','');const r=parseInt(h.slice(0,2),16),g=parseInt(h.slice(2,4),16),b=parseInt(h.slice(4,6),16);const tr=(target>>16)&255,tg=(target>>8)&255,tb=target&255;return `rgb(${Math.round(r+(tr-r)*amt)},${Math.round(g+(tg-g)*amt)},${Math.round(b+(tb-b)*amt)})`;}
+function hexRGB(hex){const h=hex.replace('#','');return {r:parseInt(h.slice(0,2),16),g:parseInt(h.slice(2,4),16),b:parseInt(h.slice(4,6),16)};}
+
+// Planet archetypes — cycled by seed for variety
+const PLANET_TYPES = ['gas','rocky','ice','lava','crater','striped'];
+
+function buildPlanetTexture(n){
+  const TEX_SIZE = 256;
+  const cv = document.createElement('canvas');
+  cv.width = cv.height = TEX_SIZE;
+  const cx = cv.getContext('2d');
+  const rnd = mkRand(n.seed);
+  const typeIdx = Math.floor(rnd()*PLANET_TYPES.length);
+  const type = PLANET_TYPES[typeIdx];
+  n.planetType = type;
+  n.hasRing = rnd() < 0.22; // ~22% planets get rings
+  n.hasMoon = rnd() < 0.15;
+  n.ringTilt = (rnd()-0.5)*0.6;
+  n.ringWidth = 0.35 + rnd()*0.25;
+  n.ringColor = n.col;
+  n.moonAngle = rnd()*Math.PI*2;
+  n.moonDist = 1.5 + rnd()*0.4;
+  n.moonSpeed = 0.005 + rnd()*0.008;
+
+  const base = hexRGB(n.col);
+  const R = TEX_SIZE/2;
+  // draw equirectangular strip (2:1 wrapped around sphere). We'll paint directly as circle mapped via cosine warp.
+  const img = cx.createImageData(TEX_SIZE, TEX_SIZE);
+  const data = img.data;
+
+  // Value-noise-ish using summed sine bands
+  function noise2(u, v, freq, phase){
+    return Math.sin(u*freq+phase)*Math.cos(v*freq*0.8+phase*1.3) + Math.sin(u*freq*2.3+phase*2)*0.5;
+  }
+
+  for(let py=0;py<TEX_SIZE;py++){
+    for(let px=0;px<TEX_SIZE;px++){
+      const dx = (px-R)/R, dy=(py-R)/R;
+      const d2 = dx*dx+dy*dy;
+      const idx = (py*TEX_SIZE+px)*4;
+      if(d2 > 1){ data[idx+3]=0; continue; }
+      // sphere-ified uv (longitude/latitude)
+      const z = Math.sqrt(1-d2);
+      const lon = Math.atan2(dx, z); // -pi..pi
+      const lat = Math.asin(dy);     // -pi/2..pi/2
+      const u = lon, v = lat;
+      let r=base.r, g=base.g, b=base.b;
+      // Lighting: diffuse (light from upper-left)
+      const lx=-0.55, ly=-0.55, lz=0.63;
+      const nnx=dx, nny=dy, nnz=z;
+      let lum = Math.max(0, nnx*lx+nny*ly+nnz*lz);
+      lum = 0.15 + lum*0.95; // ambient + diffuse
+
+      if(type==='gas'){
+        // horizontal bands + swirls (Jupiter-like)
+        const band = Math.sin(v*7 + noise2(u,v,3,n.seed)*1.2 + n.seed*0.1);
+        const swirl = noise2(u+band*0.3, v, 5, n.seed+1)*0.3;
+        const t = (band+swirl+1)/2;
+        r = base.r*(0.6+t*0.55); g=base.g*(0.6+t*0.55); b=base.b*(0.6+t*0.55);
+        // Great red/dark spot
+        const sx = 0.4, sy = 0.15;
+        const sd = Math.hypot((u-sx)*0.8, v-sy);
+        if(sd<0.25){ const sf = 1-sd/0.25; r*= (1-sf*0.5); g*=(1-sf*0.7); b*=(1-sf*0.4); r+=sf*60; }
+      } else if(type==='rocky'){
+        // continents + seas
+        const h = noise2(u,v,3.5,n.seed) + noise2(u,v,8,n.seed+2)*0.5 + noise2(u,v,18,n.seed+3)*0.25;
+        if(h>0.2){ // land
+          const lf = Math.min(1,(h-0.2)*1.2);
+          r = base.r*(0.7+lf*0.5); g=base.g*(0.9+lf*0.3); b=base.b*(0.5+lf*0.2);
+        } else { // ocean
+          r = base.r*0.35; g=base.g*0.5; b=base.b*0.9;
+        }
+        // Polar caps
+        if(Math.abs(v)>0.9-Math.abs(noise2(u,0,6,n.seed))*0.1){ r=240;g=248;b=255; }
+      } else if(type==='ice'){
+        const crack = Math.abs(noise2(u,v,6,n.seed))+Math.abs(noise2(u,v,14,n.seed+2))*0.4;
+        const t = Math.max(0, 1-crack*1.3);
+        r = 200+t*55; g=220+t*35; b=240+t*15;
+        // subtle blue tint from base color
+        r = r*0.6+base.r*0.4; g=g*0.6+base.g*0.4; b=b*0.6+base.b*0.4;
+      } else if(type==='lava'){
+        const h = noise2(u,v,4,n.seed)+noise2(u,v,12,n.seed+1)*0.6;
+        if(h>0.3){ r=255; g=120+Math.random()*40; b=40; } // lava cracks
+        else { r=base.r*0.4; g=base.g*0.3; b=base.b*0.3; }
+        // glow
+        const glow = Math.max(0,h-0.2);
+        r=Math.min(255,r+glow*120); g=Math.min(255,g+glow*40);
+      } else if(type==='crater'){
+        // grey moon-like with craters
+        const baseG = 140+noise2(u,v,5,n.seed)*30;
+        r=baseG*(0.7)+base.r*0.3; g=baseG*(0.75)+base.g*0.25; b=baseG*(0.85)+base.b*0.15;
+        // Craters: punch circular dimples
+        const rnd2 = mkRand(n.seed+99);
+        for(let c=0;c<6;c++){
+          const cu = -2+rnd2()*4, cv = -1+rnd2()*2, cr = 0.08+rnd2()*0.15;
+          const cd = Math.hypot(u-cu, v-cv);
+          if(cd<cr){ const f=1-cd/cr; r*=(1-f*0.4); g*=(1-f*0.4); b*=(1-f*0.4); if(cd<cr*0.6) { r*=1.1; g*=1.1; b*=1.1; } }
+        }
+      } else { // striped
+        const band = Math.sin(v*11 + u*0.5 + n.seed);
+        const t = (band+1)/2;
+        r = base.r*(0.5+t*0.7); g=base.g*(0.5+t*0.7); b=base.b*(0.5+t*0.7);
+      }
+
+      // Apply lighting
+      r=Math.min(255,r*lum); g=Math.min(255,g*lum); b=Math.min(255,b*lum);
+      // Edge darkening (limb)
+      const edge = Math.pow(d2, 3);
+      r*=(1-edge*0.4); g*=(1-edge*0.4); b*=(1-edge*0.4);
+      // Specular near light point
+      const spec = Math.max(0, nnx*lx+nny*ly+nnz*lz);
+      const sp2 = Math.pow(spec, 20)*(type==='ice'||type==='rocky'?0.8:0.3);
+      r=Math.min(255,r+sp2*180); g=Math.min(255,g+sp2*180); b=Math.min(255,b+sp2*180);
+
+      data[idx]=r; data[idx+1]=g; data[idx+2]=b; data[idx+3]=255;
+    }
+  }
+  cx.putImageData(img,0,0);
+  return cv;
+}
+
+// ===== GRAPH ENGINE (same) =====
+function init(){
+  const nm={};
+  // Group nodes by sector for intra-galaxy positioning
+  const bySec = {};
+  raw.forEach(r => { if(!bySec[r.s]) bySec[r.s]=[]; bySec[r.s].push(r); });
+  Object.keys(bySec).forEach(k=>{ bySecCount[k]=bySec[k].length; });
+  window._galaxyCache = null;
+  const SPAN = Math.max(W,H) * 0.80;
+  nodes = [];
+  Object.entries(bySec).forEach(([secName, secNodes])=>{
+    const sec = sectors[secName] || sectors['기타'];
+    const gcx = W/2 + sec.cx * SPAN;
+    const gcy = H/2 + sec.cy * SPAN;
+    const gr = 175 * sec.size;
+    const arms = sec.arms;
+    const tight = sec.tightness;
+    secNodes.forEach((r,i)=>{
+      const armIdx = i % arms;
+      const armPhase = (armIdx/arms) * Math.PI*2;
+      const coreBias = Math.max(0.15, 1 - (r.sz||1)*0.25);
+      const dist = gr * (0.15 + coreBias*0.9);
+      const spiralAng = armPhase + Math.log(dist/18+1)*tight*sec.spin + (i/secNodes.length)*0.8;
+      const jA = (Math.random()-0.5)*0.35;
+      const jD = (Math.random()-0.5)*20;
+      const n = { ...r,
+        x: gcx + Math.cos(spiralAng+jA)*(dist+jD),
+        y: gcy + Math.sin(spiralAng+jA)*(dist+jD),
+        vx:0, vy:0, glow:0, pp:Math.random()*6.28, col:sec.color,
+        orbitR: dist+jD, orbitA: spiralAng+jA,
+        gcx, gcy, secRef: sec
+      };
+      nm[r.n]=n;
+      nodes.push(n);
+    });
+  });
+  camX = (W/2)*(1-zm); camY = (H/2)*(1-zm);
+  edges=[];
+  nodes.forEach(n=>{if(!n.rl)return;n.rl.forEach(r=>{const parts=r.split(':');const tn=parts[0],rt=parts[1],detail=parts.slice(2).join(':');const tgt=nm[tn];if(tgt)edges.push({a:n,b:tgt,type:rt,detail:detail});});});
+
+  // === build planet textures (offscreen canvas) ===
+  nodes.forEach((n,i)=>{ n.seed = i*97 + (n.n.charCodeAt(0)||1); n.rot = (n.seed%360)*Math.PI/180; n.rotSpeed = 0.0008 + (n.seed%11)*0.00015; n.planetTex = buildPlanetTexture(n); });
+
+  // === 평행 엣지 offset 계산 (같은 (min,max) 쌍에 여러 relation_type 엣지가 있으면 나란히 그리기) ===
+  // ftc_group 같은 무방향 엣지는 이미 source/target이 ticker 정렬 상태라 (A→B) 하나만 저장됨.
+  // K-IFRS 지분 엣지는 방향이 있어 A→B와 B→A가 별도로 존재할 수 있음 — 이것도 같은 쌍으로 묶어 offset.
+  const pairIdx = {};
+  edges.forEach(e=>{
+    const key = [e.a.n, e.b.n].sort().join('|');
+    if(!pairIdx[key]) pairIdx[key] = [];
+    pairIdx[key].push(e);
+  });
+  // 폭 기반 동적 offset — 각 엣지의 hover-state 폭(base*1.5) 합 + 1px 여백을 누적해 per-edge 오프셋 산출.
+  // 2.5px 고정 step 대비: 가는 선끼리는 더 바짝, 굵은 실선(subsidiary)끼리는 자동으로 더 벌어져 overlap 방지.
+  Object.values(pairIdx).forEach(group=>{
+    group.forEach((e,i)=>{ e.parallelIdx=i; e.parallelCount=group.length; });
+    if(group.length===1){ group[0].parallelOffset=0; return; }
+    const PAD=0.0;  // 평행 선 사이 최소 여백 (px) - 딱 붙게 설정
+    const widths=group.map(e=>(EDGE_STYLES[e.type]||{width:1}).width);  // 엣지 두께만큼만 떨어뜨리기
+    const centers=[]; let acc=widths[0]/2;
+    centers.push(acc);
+    for(let i=1;i<group.length;i++){ acc+=widths[i-1]/2+PAD+widths[i]/2; centers.push(acc); }
+    const mid=(centers[0]+centers[group.length-1])/2;
+    group.forEach((e,i)=>{ e.parallelOffset=centers[i]-mid; });
+  });
+}
+function physics(){
+  nodes.forEach(n=>{
+    const sec = n.secRef;
+    if(sec){
+      n.orbitA += sec.rotation;
+      const tx = n.gcx + Math.cos(n.orbitA)*n.orbitR;
+      const ty = n.gcy + Math.sin(n.orbitA)*n.orbitR;
+      n.vx += (tx - n.x)*0.012;
+      n.vy += (ty - n.y)*0.012;
+    }
+    nodes.forEach(m=>{
+      if(n===m) return;
+      if(m.s!==n.s) return;
+      const dx=n.x-m.x,dy=n.y-m.y,d=Math.sqrt(dx*dx+dy*dy)||1;
+      if(d<120){const f=300/(d*d);n.vx+=dx/d*f;n.vy+=dy/d*f;}
+    });
+  });
+  edges.forEach(e=>{
+    const dx=e.b.x-e.a.x,dy=e.b.y-e.a.y,d=Math.sqrt(dx*dx+dy*dy)||1;
+    const sameGal = e.a.s===e.b.s;
+    const rest = sameGal ? 140 : 400;
+    const k = sameGal ? 0.0008 : 0.00015;
+    const f = (d-rest)*k;
+    e.a.vx+=dx/d*f;e.a.vy+=dy/d*f;e.b.vx-=dx/d*f;e.b.vy-=dy/d*f;
+  });
+  nodes.forEach(n=>{
+    n.vx*=0.86;n.vy*=0.86;n.x+=n.vx;n.y+=n.vy;n.pp+=0.015;
+    if(alertOn&&alertSrc){
+      if(n.n===alertSrc)n.glow=Math.min(1,n.glow+0.04);
+      else{const h1=edges.some(e=>(e.a.n===alertSrc&&e.b.n===n.n)||(e.b.n===alertSrc&&e.a.n===n.n));if(h1)n.glow=Math.min(0.8,n.glow+0.025);else n.glow=Math.max(0,n.glow-0.015);}
+    }else n.glow=Math.max(0,n.glow-0.02);
+  });
+}
+function draw(){
+time+=0.016;
+x.clearRect(0,0,W,H);
+
+// === BACKGROUND: deep space gradient ===
+const bgGrad=x.createRadialGradient(W/2,H/2,0,W/2,H/2,W*0.7);
+bgGrad.addColorStop(0,'#0a0f1e');bgGrad.addColorStop(0.5,'#070b16');bgGrad.addColorStop(1,'#040711');
+x.fillStyle=bgGrad;x.fillRect(0,0,W,H);
+
+// === NEBULAE ===
+nebulae.forEach(nb=>{const ng=x.createRadialGradient(nb.x*W,nb.y*H,0,nb.x*W,nb.y*H,nb.r*W);ng.addColorStop(0,`hsla(${nb.hue},60%,40%,${nb.alpha*0.5})`);ng.addColorStop(0.5,`hsla(${nb.hue},50%,30%,${nb.alpha*0.25})`);ng.addColorStop(1,'transparent');x.fillStyle=ng;x.fillRect(0,0,W,H);});
+
+// === STARS with twinkle ===
+stars.forEach(s=>{const tw=Math.sin(time*s.twinkleSpeed+s.b*10)*0.4+0.6;const bright=tw*s.s*0.3;x.beginPath();x.arc(s.x*W,s.y*H,s.s*0.6,0,Math.PI*2);x.fillStyle=`rgba(200,210,255,${Math.min(1,bright)})`;x.fill();if(s.s>1.5){x.beginPath();x.moveTo(s.x*W-s.s*2,s.y*H);x.lineTo(s.x*W+s.s*2,s.y*H);x.moveTo(s.x*W,s.y*H-s.s*2);x.lineTo(s.x*W,s.y*H+s.s*2);x.strokeStyle=`rgba(200,220,255,${bright*0.3})`;x.lineWidth=0.5;x.stroke();}});
+
+// === SHOOTING STARS ===
+shootingStars=shootingStars.filter(ss=>{ss.x+=ss.vx;ss.y+=ss.vy;ss.life-=0.02;if(ss.life<=0)return false;x.beginPath();x.moveTo(ss.x,ss.y);x.lineTo(ss.x-ss.vx*ss.len/5,ss.y-ss.vy*ss.len/5);const sg=x.createLinearGradient(ss.x,ss.y,ss.x-ss.vx*ss.len/5,ss.y-ss.vy*ss.len/5);sg.addColorStop(0,`rgba(255,255,255,${ss.life*0.8})`);sg.addColorStop(1,'transparent');x.strokeStyle=sg;x.lineWidth=1;x.stroke();return true;});
+
+x.save();x.translate(camX,camY);x.scale(zm,zm);
+
+// === GALAXIES (world-space) — render each sector as a spiral galaxy ===
+if(!window._galaxyCache){
+  window._galaxyCache = {};
+  const SPAN = Math.max(W,H) * 0.80;
+  Object.entries(sectors).forEach(([name, sec])=>{
+    const gcx = W/2 + sec.cx*SPAN;
+    const gcy = H/2 + sec.cy*SPAN;
+    const gr = 210 * sec.size;
+    const parts = [];
+    const count = Math.floor(900 * sec.size);
+    for(let i=0;i<count;i++){
+      const armIdx = Math.floor(Math.random()*sec.arms);
+      const armPhase = (armIdx/sec.arms)*Math.PI*2;
+      const r = Math.pow(Math.random(), 0.7) * gr;
+      const spiralAng = armPhase + Math.log(r/25+1)*sec.tightness*sec.spin;
+      const jitter = (Math.random()-0.5)*0.35*(1 - r/gr*0.5);
+      parts.push({ r, ang: spiralAng+jitter, size: 0.3+Math.random()*1.6, alpha: 0.15+Math.random()*0.55, twinkle: Math.random()*6.28 });
+    }
+    const core = [];
+    for(let i=0;i<140;i++){
+      core.push({ r: Math.pow(Math.random(),1.8)*gr*0.25, ang: Math.random()*Math.PI*2, size: 0.4+Math.random()*1.2, alpha: 0.5+Math.random()*0.5 });
+    }
+    window._galaxyCache[name] = { gcx, gcy, gr, parts, core, sec, name };
+  });
+}
+Object.values(window._galaxyCache).forEach(g=>{
+  const phase = time * g.sec.rotation * 80;
+  // Halo
+  const halo = x.createRadialGradient(g.gcx,g.gcy,0,g.gcx,g.gcy,g.gr*1.3);
+  halo.addColorStop(0, hexA(g.sec.color,0.22));
+  halo.addColorStop(0.35, hexA(g.sec.color,0.10));
+  halo.addColorStop(0.7, hexA(g.sec.color,0.035));
+  halo.addColorStop(1,'transparent');
+  x.fillStyle = halo;
+  x.fillRect(g.gcx-g.gr*1.3, g.gcy-g.gr*1.3, g.gr*2.6, g.gr*2.6);
+  // Spiral arm dust
+  x.save(); x.translate(g.gcx,g.gcy); x.rotate(phase);
+  g.parts.forEach(p=>{
+    const px=Math.cos(p.ang)*p.r, py=Math.sin(p.ang)*p.r;
+    const rFrac = p.r/g.gr;
+    const fade = rFrac<0.15 ? rFrac/0.15 : (rFrac>0.9 ? (1-rFrac)/0.1 : 1);
+    const tw = 0.6 + Math.sin(time*1.5+p.twinkle)*0.4;
+    x.fillStyle = hexA(g.sec.color, p.alpha*fade*tw*0.5);
+    x.beginPath(); x.arc(px,py,p.size,0,Math.PI*2); x.fill();
+  });
+  x.restore();
+  // Core
+  x.save(); x.translate(g.gcx,g.gcy);
+  const coreGrad = x.createRadialGradient(0,0,0,0,0,g.gr*0.35);
+  coreGrad.addColorStop(0,'rgba(255,245,220,0.9)');
+  coreGrad.addColorStop(0.3, hexA(g.sec.color,0.6));
+  coreGrad.addColorStop(0.7, hexA(g.sec.color,0.15));
+  coreGrad.addColorStop(1,'transparent');
+  x.fillStyle = coreGrad;
+  x.beginPath(); x.arc(0,0,g.gr*0.35,0,Math.PI*2); x.fill();
+  x.rotate(phase*1.5);
+  g.core.forEach(cs=>{
+    const px=Math.cos(cs.ang)*cs.r, py=Math.sin(cs.ang)*cs.r;
+    x.fillStyle = `rgba(255,240,210,${cs.alpha})`;
+    x.beginPath(); x.arc(px,py,cs.size,0,Math.PI*2); x.fill();
+  });
+  x.restore();
+  // Label
+  if(zm > 0.25){
+    x.save();
+    const fade = zm>2.0 ? Math.max(0,(3.0-zm)/1.0) : Math.min(1,(zm-0.25)*4);
+    x.globalAlpha = fade * 0.85;
+    x.fillStyle = hexA(g.sec.color, 0.9);
+    x.font = `600 ${Math.max(14, 22*g.sec.size)}px -apple-system, sans-serif`;
+    x.textAlign = 'center';
+    x.shadowColor = g.sec.color; x.shadowBlur = 16;
+    x.fillText(g.name, g.gcx, g.gcy - g.gr*0.9);
+    x.shadowBlur = 0;
+    x.font = '11px -apple-system, sans-serif';
+    x.fillStyle = 'rgba(255,255,255,0.35)';
+    x.fillText(`${g.name} Galaxy`.toUpperCase()+` · ${(bySecCount[g.name]||0)} COs`, g.gcx, g.gcy - g.gr*0.9 + 16);
+    x.restore();
+  }
+});
+
+// === RIPPLES ===
+ripples=ripples.filter(r=>{r.radius+=3;r.alpha-=0.008;if(r.alpha<=0)return false;x.beginPath();x.arc(r.x,r.y,r.radius,0,Math.PI*2);x.strokeStyle=`rgba(77,166,255,${r.alpha})`;x.lineWidth=1.5;x.stroke();return true;});
+
+// === EDGES ===
+// === 엣지 그리기 (평행 offset + 방향 화살표 + 선택 강조) ===
+const ARROW_TYPES = new Set(['subsidiary','associate','investment','dart_filing']);  // 방향성 있는 관계만 화살표
+edges.forEach(e=>{
+  const isH=hov&&(e.a.n===hov.n||e.b.n===hov.n);
+  const isA=alertOn&&alertSrc&&(e.a.n===alertSrc||e.b.n===alertSrc);
+  const fa=flt==='all'||e.a.s===flt,fb=flt==='all'||e.b.s===flt;
+  if(!fa&&!fb)return;
+  // sel 기반 alpha — 선택 노드와 연결된 엣지만 선명
+  const selConnected = !sel || (e.a===sel || e.b===sel);
+  const st=EDGE_STYLES[e.type]||{color:'#999',width:0.5,dash:[]};
+
+  // 평행 offset — 같은 쌍에 여러 엣지 있으면 수직 방향으로 약간 떨어뜨려 나란히
+  const dx0=e.b.x-e.a.x, dy0=e.b.y-e.a.y;
+  const len=Math.sqrt(dx0*dx0+dy0*dy0)||1;
+  let px=-dy0/len, py=dx0/len;  // perpendicular unit
+  if(e.a.n > e.b.n) { px = -px; py = -py; } // 법선벡터 방향 통일 (방향 오프셋 상쇄 방지)
+  
+  // offset은 init()에서 폭 기반 사전 계산됨 (e.parallelOffset)
+  const off = e.parallelOffset || 0;
+  const x1=e.a.x+px*off, y1=e.a.y+py*off;
+  const x2=e.b.x+px*off, y2=e.b.y+py*off;
+
+  x.beginPath();x.moveTo(x1,y1);x.lineTo(x2,y2);
+  if(isA){x.strokeStyle=`rgba(251,191,36,${0.5+Math.sin(time*4)*0.2})`;x.lineWidth=2;x.setLineDash([6,4]);x.globalAlpha=1.0;}
+  else if(isH||(sel&&selConnected)){x.strokeStyle=st.color;x.lineWidth=st.width*1.5;x.setLineDash(st.dash);x.globalAlpha=1.0;}
+  else if(sel&&!selConnected){x.strokeStyle=st.color;x.lineWidth=st.width;x.setLineDash(st.dash);x.globalAlpha=0.08;}
+  else{x.strokeStyle=st.color;x.lineWidth=st.width;x.setLineDash(st.dash);x.globalAlpha=0.6;}
+  x.stroke();
+
+  // 흐름 효과 — hover/select 시 방향성 있는 엣지에 움직이는 점선 오버레이 (source→target 방향으로 흐름)
+  const isFlow = ARROW_TYPES.has(e.type) && (isH || (sel && selConnected));
+  if(isFlow){
+    x.beginPath();x.moveTo(x1,y1);x.lineTo(x2,y2);
+    x.setLineDash([10,16]);
+    x.lineDashOffset = -time * 45;  // 음수 → path 방향(a→b)으로 흐름
+    x.strokeStyle = st.color;
+    x.lineWidth = st.width * 1.6;
+    x.globalAlpha = 0.95;
+    x.stroke();
+    x.lineDashOffset = 0;
+  }
+
+  // 방향 화살표 (K-IFRS 지분·주석 관계만 — ftc_group/manual은 무방향)
+  if(ARROW_TYPES.has(e.type) && x.globalAlpha >= 0.3){
+    x.setLineDash([]);
+    const nodeR = e.b.sz*22;
+    const tipX = x2 - (dx0/len)*nodeR;
+    const tipY = y2 - (dy0/len)*nodeR;
+    const arrowSize = isFlow ? Math.max(14, st.width*6) : Math.max(9, st.width*4);
+    const ang = Math.atan2(dy0, dx0);
+    x.globalAlpha = isFlow ? 1.0 : Math.min(0.9, x.globalAlpha);
+    x.beginPath();
+    x.moveTo(tipX, tipY);
+    x.lineTo(tipX - arrowSize*Math.cos(ang-0.5), tipY - arrowSize*Math.sin(ang-0.5));
+    x.lineTo(tipX - arrowSize*Math.cos(ang+0.5), tipY - arrowSize*Math.sin(ang+0.5));
+    x.closePath();
+    x.fillStyle = st.color;
+    x.fill();
+  }
+
+  x.globalAlpha=1.0;x.setLineDash([]);
+});
+
+// === NODES: 큰 회사는 행성, 작은 회사는 별(star)로 렌더 ===
+const selNeighbors = sel ? new Set(edges.filter(e=>e.a===sel||e.b===sel).flatMap(e=>[e.a,e.b])) : null;
+// 스타 임계치: sz < 1.1 이면 별처럼, 그 이상이면 행성
+const STAR_THRESHOLD = 1.1;
+nodes.forEach(n=>{
+  const filtered=flt!=='all'&&n.s!==flt;
+  const selFaded = sel && n!==sel && (!selNeighbors || !selNeighbors.has(n));
+  const r=n.sz*18;
+  const pulse=Math.sin(n.pp)*0.08+1;
+  const pr=r*pulse;
+
+  x.save();
+  if(selFaded) x.globalAlpha = 0.15;
+
+  const isH=hov&&hov.n===n.n,isS=sel&&sel.n===n.n;
+  const alpha=filtered?0.15:1;
+  const col=n.col;
+  const hr=parseInt(col.slice(1,3),16),hg=parseInt(col.slice(3,5),16),hb=parseInt(col.slice(5,7),16);
+
+  // === SMALL NODES → STARS ===
+  if(n.sz < STAR_THRESHOLD && !isS && !isH){
+    // Alert glow still applies
+    if(n.glow>0.01){const gr=pr*(2.5+n.glow*2);const g=x.createRadialGradient(n.x,n.y,pr*0.5,n.x,n.y,gr);g.addColorStop(0,n.n===alertSrc?`rgba(251,191,36,${n.glow*0.5})`:`rgba(77,166,255,${n.glow*0.4})`);g.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=g;x.beginPath();x.arc(n.x,n.y,gr,0,Math.PI*2);x.fill();}
+    // Star: sparkle + small bright core
+    const twinkle = 0.75 + Math.sin(n.pp*1.5)*0.25;
+    const starR = Math.max(3, pr*0.35);
+    // soft halo in sector color
+    const haloR = starR*4;
+    const halo = x.createRadialGradient(n.x,n.y,0,n.x,n.y,haloR);
+    halo.addColorStop(0, `rgba(${hr},${hg},${hb},${0.7*alpha*twinkle})`);
+    halo.addColorStop(0.4,`rgba(${hr},${hg},${hb},${0.2*alpha*twinkle})`);
+    halo.addColorStop(1,'transparent');
+    x.fillStyle=halo;
+    x.beginPath();x.arc(n.x,n.y,haloR,0,Math.PI*2);x.fill();
+    // bright white core
+    const core = x.createRadialGradient(n.x,n.y,0,n.x,n.y,starR);
+    core.addColorStop(0,`rgba(255,255,255,${alpha*twinkle})`);
+    core.addColorStop(0.5,`rgba(${Math.min(255,hr+80)},${Math.min(255,hg+80)},${Math.min(255,hb+80)},${alpha*twinkle*0.8})`);
+    core.addColorStop(1,'transparent');
+    x.fillStyle=core;
+    x.beginPath();x.arc(n.x,n.y,starR,0,Math.PI*2);x.fill();
+    // 4-point star spikes
+    const spikeLen = starR*3*twinkle;
+    x.strokeStyle=`rgba(255,255,255,${0.5*alpha*twinkle})`;
+    x.lineWidth=0.8;
+    x.beginPath();
+    x.moveTo(n.x-spikeLen,n.y);x.lineTo(n.x+spikeLen,n.y);
+    x.moveTo(n.x,n.y-spikeLen);x.lineTo(n.x,n.y+spikeLen);
+    x.stroke();
+    // label (smaller, dimmer)
+    if(!filtered||isH){x.fillStyle=`rgba(255,255,255,${filtered?0.15:0.5})`;x.font='9px -apple-system,sans-serif';x.textAlign='center';x.fillText(n.n,n.x,n.y+starR*2+10);}
+    x.restore();
+    return;
+  }
+
+  // === LARGE NODES → PLANETS ===
+  // Alert glow
+  if(n.glow>0.01){const gr=pr*(2.5+n.glow*2);const g=x.createRadialGradient(n.x,n.y,pr*0.5,n.x,n.y,gr);g.addColorStop(0,n.n===alertSrc?`rgba(251,191,36,${n.glow*0.5})`:`rgba(77,166,255,${n.glow*0.4})`);g.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=g;x.beginPath();x.arc(n.x,n.y,gr,0,Math.PI*2);x.fill();}
+
+  // === TEXTURED PLANET with rotation + atmosphere ===
+  n.rot += n.rotSpeed;
+
+  // Back ring (behind planet)
+  if(n.hasRing && !filtered){
+    x.save();
+    x.translate(n.x, n.y);
+    x.rotate(n.ringTilt);
+    x.scale(1, 0.18);
+    const ringOuter = pr*(1.7+n.ringWidth);
+    const ringInner = pr*1.25;
+    x.beginPath();
+    x.arc(0,0,ringOuter,Math.PI,Math.PI*2);   // back half only
+    x.arc(0,0,ringInner,Math.PI*2,Math.PI,true);
+    x.closePath();
+    const rg = x.createRadialGradient(0,0,ringInner,0,0,ringOuter);
+    rg.addColorStop(0,`rgba(${hr},${hg},${hb},0)`);
+    rg.addColorStop(0.3,`rgba(${hr},${hg},${hb},0.5)`);
+    rg.addColorStop(0.6,`rgba(255,255,255,0.35)`);
+    rg.addColorStop(1,`rgba(${hr},${hg},${hb},0)`);
+    x.fillStyle = rg;
+    x.fill();
+    x.restore();
+  }
+
+  // Outer atmospheric halo
+  if(!filtered && pr>8){
+    const haloR = pr*(isS?2.2:isH?1.8:1.5);
+    const halo = x.createRadialGradient(n.x,n.y,pr*0.9,n.x,n.y,haloR);
+    halo.addColorStop(0,`rgba(${hr},${hg},${hb},${isS?0.35:isH?0.22:0.14})`);
+    halo.addColorStop(0.4,`rgba(${hr},${hg},${hb},${isS?0.18:0.08})`);
+    halo.addColorStop(1,'transparent');
+    x.fillStyle = halo;
+    x.beginPath();x.arc(n.x,n.y,haloR,0,Math.PI*2);x.fill();
+  }
+
+  // Planet body from texture (with horizontal rotation via offset draws)
+  if(n.planetTex){
+    x.save();
+    x.beginPath();x.arc(n.x,n.y,pr,0,Math.PI*2);x.clip();
+    const texSize = pr*2;
+    // draw texture — rotation via source-x shift gives longitudinal spin illusion
+    // We simply draw full sphere texture; the texture itself was painted spherified so rotation needs shader-style trick.
+    // Instead, slightly shift a duplicate band to suggest rotation motion. For now render static + tiny parallax via time.
+    x.drawImage(n.planetTex, n.x-pr, n.y-pr, texSize, texSize);
+    x.restore();
+  } else {
+    x.beginPath();x.arc(n.x,n.y,pr,0,Math.PI*2);
+    x.fillStyle = col;
+    x.fill();
+  }
+
+  // Atmosphere rim light (crescent on lit side)
+  if(!filtered && pr>10){
+    x.save();
+    x.beginPath();x.arc(n.x,n.y,pr,0,Math.PI*2);x.clip();
+    const rim = x.createRadialGradient(n.x-pr*0.4,n.y-pr*0.4,pr*0.8,n.x,n.y,pr);
+    rim.addColorStop(0,'transparent');
+    rim.addColorStop(0.85,`rgba(255,255,255,0)`);
+    rim.addColorStop(0.97,`rgba(${Math.min(255,hr+120)},${Math.min(255,hg+120)},${Math.min(255,hb+140)},0.45)`);
+    rim.addColorStop(1,'transparent');
+    x.fillStyle = rim;
+    x.fillRect(n.x-pr,n.y-pr,pr*2,pr*2);
+    x.restore();
+  }
+
+  // Selection/hover glow (outer shadow)
+  if(isS || isH){
+    x.save();
+    x.shadowColor = col;
+    x.shadowBlur = isS?40:22;
+    x.strokeStyle = `rgba(${Math.min(255,hr+80)},${Math.min(255,hg+80)},${Math.min(255,hb+80)},${isS?0.9:0.6})`;
+    x.lineWidth = isS?2:1.5;
+    x.beginPath();x.arc(n.x,n.y,pr+2,0,Math.PI*2);x.stroke();
+    x.restore();
+  }
+
+  // Front ring (in front of planet)
+  if(n.hasRing && !filtered){
+    x.save();
+    x.translate(n.x, n.y);
+    x.rotate(n.ringTilt);
+    x.scale(1, 0.18);
+    const ringOuter = pr*(1.7+n.ringWidth);
+    const ringInner = pr*1.25;
+    x.beginPath();
+    x.arc(0,0,ringOuter,0,Math.PI);
+    x.arc(0,0,ringInner,Math.PI,0,true);
+    x.closePath();
+    const rg = x.createRadialGradient(0,0,ringInner,0,0,ringOuter);
+    rg.addColorStop(0,`rgba(${hr},${hg},${hb},0)`);
+    rg.addColorStop(0.3,`rgba(${hr},${hg},${hb},0.6)`);
+    rg.addColorStop(0.6,`rgba(255,255,255,0.5)`);
+    rg.addColorStop(1,`rgba(${hr},${hg},${hb},0)`);
+    x.fillStyle = rg;
+    x.fill();
+    x.restore();
+  }
+
+  // Moon
+  if(n.hasMoon && !filtered && pr>10){
+    n.moonAngle += n.moonSpeed;
+    const mx0 = n.x + Math.cos(n.moonAngle)*pr*n.moonDist;
+    const my0 = n.y + Math.sin(n.moonAngle)*pr*n.moonDist*0.35;
+    const mr = pr*0.18;
+    const mg = x.createRadialGradient(mx0-mr*0.3, my0-mr*0.3, 0, mx0, my0, mr);
+    mg.addColorStop(0,'#dfd9c8');
+    mg.addColorStop(1,'#4a4638');
+    x.fillStyle = mg;
+    x.beginPath();x.arc(mx0,my0,mr,0,Math.PI*2);x.fill();
+  }
+
+  // EQS arc (analyze mode)
+  if(!filtered&&pr>10&&currentMode==='analyze'){const ec=n.eqs>=70?'#4ade80':n.eqs>=50?'#fbbf24':'#f87171';x.beginPath();x.arc(n.x,n.y,pr+5,-(Math.PI/2),-(Math.PI/2)+(Math.PI*2*n.eqs/100));x.strokeStyle=ec+'88';x.lineWidth=2;x.stroke();}
+
+  // Mode-specific labels
+  if(currentMode==='timemachine'&&n.tm&&!filtered){x.fillStyle='rgba(124,108,240,0.9)';x.font='bold 9px -apple-system,sans-serif';x.textAlign='center';x.fillText('⏰ 타임머신',n.x,n.y-pr-10);}
+  if(n.glow>0.3&&n.n!==alertSrc&&!filtered&&currentMode==='disclosure'){const imp=edges.some(e=>(e.a.n===alertSrc&&e.b.n===n.n&&(e.type==='공급'||e.type==='종속'||e.type==='피인수'))||(e.b.n===alertSrc&&e.a.n===n.n&&(e.type==='공급'||e.type==='종속'||e.type==='피인수')))?'↑ 수혜 예상':edges.some(e=>(e.a.n===alertSrc&&e.b.n===n.n&&e.type==='경쟁')||(e.b.n===alertSrc&&e.a.n===n.n&&e.type==='경쟁'))?'↓ 경쟁 압박':'● 영향권';x.fillStyle=imp.includes('수혜')?'rgba(74,222,128,0.9)':imp.includes('경쟁')?'rgba(248,113,113,0.9)':'rgba(77,166,255,0.9)';x.font='bold 9px -apple-system,sans-serif';x.textAlign='center';x.fillText(imp,n.x,n.y-pr-10);}
+
+  // Name label
+  if(!filtered||isH){x.fillStyle=`rgba(255,255,255,${filtered?0.2:0.85})`;x.font=`${n.sz>2?'12':'10'}px -apple-system,sans-serif`;x.textAlign='center';x.fillText(n.n,n.x,n.y+pr+16);}
+  x.restore();  // selFaded 처리용 globalAlpha 복원
+});
+
+// === MASCOT (cat sprite) ===
+if(mascot.targetNode===null||mascot.progress>=1){mascot.waitTimer+=0.016;if(mascot.waitTimer>1.8){mascot.waitTimer=0;pickNextNode();}}
+if(mascot.targetNode&&mascot.progress<1){
+  mascot.progress=Math.min(1,mascot.progress+0.010);
+  const t=mascot.progress;
+  const ease=t<0.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+  const prevNode=mascot.prevNode||mascot.targetNode;
+  const prevX=prevNode.x, prevY=prevNode.y-prevNode.sz*18;
+  const tgtX=mascot.targetNode.x, tgtY=mascot.targetNode.y-mascot.targetNode.sz*18;
+  mascot.x=prevX+(tgtX-prevX)*ease;
+  mascot.y=prevY+(tgtY-prevY)*ease;
+  // parabolic hop arc
+  const arcH = 60 + Math.hypot(tgtX-prevX, tgtY-prevY)*0.25;
+  mascot.bounceY = Math.sin(t*Math.PI)*arcH;
+  mascot.airborne = Math.sin(t*Math.PI);
+  mascot.facing = (tgtX>=prevX)?1:-1;
+  if(Math.random()<0.25)mascot.trail.push({x:mascot.x,y:mascot.y-mascot.bounceY+8,alpha:0.5,s:5+Math.random()*4});
+}else if(mascot.targetNode){
+  mascot.x=mascot.targetNode.x;mascot.y=mascot.targetNode.y-mascot.targetNode.sz*18;
+  mascot.bouncePhase+=0.05;
+  mascot.bounceY=Math.abs(Math.sin(mascot.bouncePhase))*4;
+  mascot.airborne=0;
+}
+// trail (dust puffs)
+mascot.trail=mascot.trail.filter(p=>{p.alpha-=0.018;p.s*=0.96;if(p.alpha<=0)return false;x.beginPath();x.arc(p.x,p.y,p.s,0,Math.PI*2);x.fillStyle=`rgba(255,220,180,${p.alpha*0.35})`;x.fill();return true;});
+
+// Pick sprite pose based on hop progress
+let pose='idle';
+if(mascot.targetNode && mascot.progress<1){
+  const t=mascot.progress;
+  if(t<0.08) pose='crouch';
+  else if(t<0.22) pose='launch';
+  else if(t<0.78) pose='midair';
+  else if(t<0.92) pose='land';
+  else pose='idle';
+}
+const sprite = catSprites[pose];
+// shadow on ground (follows planet top) — scales with world zoom
+const gx=mascot.x, gy = mascot.y + 6;
+x.save();
+x.beginPath();x.ellipse(gx,gy,16*(1-mascot.airborne*0.4),5*(1-mascot.airborne*0.4),0,0,Math.PI*2);
+x.fillStyle=`rgba(0,0,0,${0.35*(1-mascot.airborne*0.5)})`;x.fill();
+x.restore();
+// draw cat — scales with zoom (part of the scene)
+const catSize = 56;
+x.save();
+x.translate(mascot.x, mascot.y - mascot.bounceY);
+x.scale(mascot.facing, 1);
+// slight forward lean during hop
+if(mascot.targetNode && mascot.progress<1){
+  const t=mascot.progress;
+  x.rotate(Math.sin(t*Math.PI)*0.15 * (t<0.5?-1:1));
+}
+x.drawImage(sprite, -catSize/2, -catSize*0.7, catSize, catSize);
+x.restore();
+
+// Update prevNode for next hop
+if(mascot.progress>=1&&mascot.targetNode){mascot.prevNode=mascot.targetNode;}
+
+x.restore();physics();requestAnimationFrame(draw);}
+
+// ===== INTERACTION =====
+c.addEventListener('mousemove',e=>{if(drag){camX=cs.x+(e.clientX-ds.x);camY=cs.y+(e.clientY-ds.y);return;}const mx=(e.clientX-camX)/zm,my=(e.clientY-camY)/zm;hov=null;nodes.forEach(n=>{const dx=n.x-mx,dy=n.y-my;if(Math.sqrt(dx*dx+dy*dy)<n.sz*22){hov=n;c.style.cursor='pointer';}});if(!hov)c.style.cursor='grab';});
+c.addEventListener('mousedown',e=>{const mx=(e.clientX-camX)/zm,my=(e.clientY-camY)/zm;let clicked=null;nodes.forEach(n=>{const dx=n.x-mx,dy=n.y-my;if(Math.sqrt(dx*dx+dy*dy)<n.sz*22)clicked=n;});if(clicked){sel=clicked;if(currentMode==='analyze')showAnalyze(clicked);else if(currentMode==='disclosure')showDisclosure(clicked);else showTimemachine(clicked);}else{sel=null;closePanel();drag=true;ds={x:e.clientX,y:e.clientY};cs={x:camX,y:camY};c.style.cursor='grabbing';}});
+// ESC 키로 선택 해제
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){sel=null;closePanel();}});
+c.addEventListener('mouseup',()=>{drag=false;c.style.cursor='grab';});
+c.addEventListener('wheel',e=>{const d=e.deltaY>0?0.9:1.1;const mx=e.clientX,my=e.clientY;const wx=(mx-camX)/zm,wy=(my-camY)/zm;zm=Math.max(0.2,Math.min(4,zm*d));camX=mx-wx*zm;camY=my-wy*zm;e.preventDefault();},{passive:false});
+
+function closePanel(){document.getElementById('panel').classList.remove('open');sel=null;}
+function filter(f,btn){flt=f;document.querySelectorAll('.hud-sub button').forEach(b=>b.classList.remove('on'));btn.classList.add('on');}
+function simAlert(){alertOn=true;alertSrc='삼성전자';document.getElementById('alert').classList.add('show');const src=nodes.find(n=>n.n==='삼성전자');if(src)for(let i=0;i<3;i++)setTimeout(()=>ripples.push({x:src.x,y:src.y,radius:src.sz*18,alpha:0.6}),i*400);setTimeout(()=>{alertOn=false;alertSrc=null;},10000);}
+
+// ===== PANEL: ANALYZE =====
+function showAnalyze(n) {
+  const p = document.getElementById('panel');
+  const eqsCol=n.eqs>=70?'#4ade80':n.eqs>=50?'#fbbf24':'#f87171';
+  const oiSign=String(n.oi).startsWith('-');
+  // 금융업 판별은 eqs_data.json의 industry_code('064'·'066'·'067') 기준 우선,
+  // 없으면 섹터명 fallback
+  const isFinancial = n.is_financial_biz === true || n.s==='금융';
+  // 시총·DART·분석 기준 연도 (eqs_data.json이 유일 소스. null 가능)
+  const mcDisplay = _marketCapFmt(n.market_cap) || n.mc || '-';
+  const yearBadge = n.latest_year ? ` · ${n.latest_year}년 재무 기준` : '';
+  const finBadge = isFinancial ? ' <span style="font-size:10px;padding:2px 6px;background:rgba(167,139,250,0.2);color:#a78bfa;border-radius:4px;margin-left:4px">금융업 별도기준</span>' : '';
+  // 기업명: DART 사업보고서 링크로 감싸기 (dart_url 있을 때만)
+  const companyTitle = n.dart_url
+    ? `<a href="${n.dart_url}" target="_blank" rel="noopener" style="color:#4da6ff;text-decoration:none;border-bottom:1px dashed #4da6ff;" title="DART 사업보고서 열기">${n.n} <span style="font-size:13px">↗</span></a>`
+    : n.n;
+  const margin100=`100원 팔면 ${Math.abs(parseFloat(n.oim)).toFixed(0)}원이 ${parseFloat(n.oim)>0?'남습니다':'손해입니다'}`;
+  let cps=[];
+  if(Math.abs(n.recv_chg)>20&&n.recv_days>0)cps.push(`매출채권 회수 ${n.recv_chg>0?n.recv_days+'일로 늘어남':'개선됨'} (${n.recv_chg>0?'+':''}${n.recv_chg}%)`);
+  if(n.seg_pct>50)cps.push(`${n.seg_main} 부문이 이익의 ${n.seg_pct}% — 사실상 "${n.seg_main} 회사"`);
+  if(n.rp_name&&n.rp_name!=='-')cps.push(`${n.rp_name} 향 관계사 거래 ${n.rp_amt}`);
+  const cpHtml=cps.length?cps.map((c,i)=>`<div class="checkpoint"><span style="color:#fbbf24;font-weight:600">${i+1}.</span> <span class="cp-title">${c}</span></div>`).join(''):'<div style="color:#555;font-size:11px">특이사항 없음</div>';
+  const rels=edges.filter(e=>e.a.n===n.n||e.b.n===n.n);
+  const relHtml=rels.map(e=>{const o=e.a.n===n.n?e.b:e.a;return `<span class="tag">${e.type} ${o.n}</span>`;}).join('');
+  const mods=[{id:'M1',name:'발생액 품질',s:n.m1,t:n.m1t,c:'#4da6ff'},{id:'M2',name:'분식 확률',s:n.m2,t:n.m2t,c:'#f87171'},{id:'M3',name:'현금흐름 괴리',s:n.m3,t:n.m3t,c:'#fbbf24'},{id:'M4',name:'이익 지속성',s:n.m4,t:n.m4t,c:'#4ade80'},{id:'M5',name:'재무 건전성',s:n.m5,t:n.m5t,c:'#7c6cf0'}];
+  const modsHtml=mods.filter(m=>m.s>0).map(m=>{const mc=m.s>=70?'#4ade80':m.s>=50?'#fbbf24':'#f87171';return `<div class="eqs-module"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px"><div><span style="font-size:10px;font-weight:600;color:${m.c};background:${m.c}18;padding:1px 5px;border-radius:3px">${m.id}</span> <span style="font-size:12px;font-weight:500">${m.name}</span></div><span style="font-size:13px;font-weight:600;color:${mc}">${m.s}</span></div><div class="eqs-bar"><div class="eqs-fill" style="width:${m.s}%;background:${mc}"></div></div><div style="font-size:10px;color:#888;margin-top:3px">${m.t}</div></div>`;}).join('');
+  const eqsExplain=n.eqs>=70?`이익 품질 <strong style="color:#4ade80">양호</strong>. 재무제표를 상당 부분 신뢰 가능.`:n.eqs>=50?`이익 품질 <strong style="color:#fbbf24">주의</strong> 필요. 일부 경고 신호 감지.`:`이익 품질 <strong style="color:#f87171">경고</strong>. 보고된 이익의 질에 의문. 추가 확인 필요.`;
+
+  document.getElementById('panelInner').innerHTML=`
+    <h2 style="color:#4da6ff;font-size:18px">${companyTitle}${finBadge}</h2>
+    <div style="color:#666;font-size:12px;margin-bottom:16px">${n.t} | ${n.s} | 시총 ${mcDisplay}${yearBadge}</div>
+    ${!isFinancial?`
+    <div class="fin-card"><div class="card-title">💰 돈을 잘 벌고 있나?<span class="src">손익계산서</span></div>
+      <div class="fin-row"><span class="label">매출액</span><div class="fin-bar-wrap"><div class="fin-bar" style="width:100%;background:#4da6ff"></div></div><span class="value">${n.rv}조</span>${n.rv_chg != null ? `<span class="fin-change ${n.rv_chg>=0?'up':'down'}">${n.rv_chg>=0?'+':''}${n.rv_chg}%</span>` : ''}</div>
+      <div class="fin-row"><span class="label">영업이익</span><div class="fin-bar-wrap"><div class="fin-bar" style="width:${(n.rv && parseFloat(n.rv) > 0) ? Math.min(100,Math.abs(parseFloat(n.oi)/parseFloat(n.rv)*100*3)) : 0}%;background:${oiSign?'#f87171':'#4ade80'}"></div></div><span class="value" style="color:${oiSign?'#f87171':'#4ade80'}">${n.oi}조</span>${n.oi_chg != null ? `<span class="fin-change ${n.oi_chg>=0?'up':'down'}">${Math.abs(n.oi_chg)>500?(n.oi_chg>0?'흑전':'적전'):(n.oi_chg>=0?'+':'')+n.oi_chg+'%'}</span>` : ''}</div>
+      <div class="fin-insight">"${margin100}"</div></div>
+    <div class="fin-card"><div class="card-title">🏦 곳간은 튼튼한가?<span class="src">재무상태표</span></div>
+      <div class="fin-row"><span class="label">자산</span><div class="fin-bar-wrap"><div class="fin-bar" style="width:100%;background:#4da6ff"></div></div><span class="value">${n.ta}조</span></div>
+      <div class="fin-row"><span class="label">부채</span><div class="fin-bar-wrap"><div class="fin-bar" style="width:${n.ta && n.ta!=='-' ? Math.min(100,parseFloat(n.tl)/parseFloat(n.ta)*100) : 0}%;background:#f87171"></div></div><span class="value">${n.tl}조</span></div>
+      <div class="fin-insight">${n.dr != null ? `"부채비율 ${n.dr}% (총부채/자본)" — ${n.dr<100?'양호 ✅':n.dr<200?'보통 ⚠':'높음 🔴'}` : '부채비율 데이터 없음'}</div></div>
+    <div class="fin-card"><div class="card-title">💵 현금이 진짜 들어오나?<span class="src">현금흐름표</span></div>
+      <div class="fin-row"><span class="label">영업활동</span><span class="value" style="color:${String(n.ocf).startsWith('-')?'#f87171':'#4ade80'}">${n.ocf}조 ${String(n.ocf).startsWith('-')?'🔴':'🟢'}</span></div>
+      <div class="fin-row"><span class="label">투자활동</span>${n.icf!=='-'?`<span class="value" style="color:#4da6ff">${n.icf}조</span>`:'<span class="value" style="font-size:11px;padding:2px 8px;border-radius:4px;background:rgba(148,163,184,0.12);color:#94a3b8;font-weight:500">데이터 수집 중</span>'}</div>
+      <div class="fin-row"><span class="label">재무활동</span>${n.fcf!=='-'?`<span class="value" style="color:#fbbf24">${n.fcf}조</span>`:'<span class="value" style="font-size:11px;padding:2px 8px;border-radius:4px;background:rgba(148,163,184,0.12);color:#94a3b8;font-weight:500">데이터 수집 중</span>'}</div></div>
+    `:`<div class="fin-card"><div class="card-title">🏦 금융업 재무 요약</div><div class="fin-row"><span class="label">영업수익</span><span class="value">${n.rv}조</span></div><div class="fin-row"><span class="label">영업이익</span><span class="value" style="color:#4ade80">${n.oi}조</span></div><div class="fin-insight">금융업은 별도 분석 기준 적용</div></div>`}
+    <div class="section-title" style="color:#fbbf24">⚡ 주목 포인트</div>${cpHtml}
+    <div class="section-title" style="color:#4da6ff">🔬 이익 해부 (EQS)</div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><span style="font-size:32px;font-weight:700;color:${eqsCol}">${n.eqs}</span><span style="font-size:13px;padding:3px 8px;border-radius:5px;background:${eqsCol}15;color:${eqsCol};font-weight:600">${n.gr}등급</span></div>
+    <div class="eqs-what">${eqsExplain}<br><br>⚕️ EQS는 "이 기업의 이익을 믿어도 되는 정도"를 진단합니다. 주가 예측이 아닌 재무 건강 진단.</div>
+    ${modsHtml}
+    <div class="section-title" style="color:#888">🔗 관계 (${rels.length}개)</div>${relHtml||'없음'}`;
+  p.classList.add('open');
+}
+
+// 공시 summary 전문 토글 (showDisclosure 카드에서 호출됨)
+function toggleDiscSummary(cardId) {
+  const shortEl = document.getElementById(cardId + '-short');
+  const fullEl = document.getElementById(cardId + '-full');
+  const btn = document.getElementById(cardId + '-btn');
+  if (!shortEl || !fullEl || !btn) return;
+  const expanded = fullEl.style.display !== 'none';
+  if (expanded) {
+    fullEl.style.display = 'none';
+    shortEl.style.display = 'block';
+    btn.textContent = '더보기 ▾';
+  } else {
+    fullEl.style.display = 'block';
+    shortEl.style.display = 'none';
+    btn.textContent = '접기 ▴';
+  }
+}
+
+// ===== PANEL: DISCLOSURE (실데이터 기반, modules/disclosure/data/disclosure.db 연결) =====
+function showDisclosure(n) {
+  const p=document.getElementById('panel');
+  const rels=edges.filter(e=>e.a.n===n.n||e.b.n===n.n);
+  const discList = n.disc || [];
+  const stmts = (n.statements || []).slice(0, 4);  // 최근 4분기
+
+  // 공시 카드 리스트 — summary 300자 초과 시 "더보기" 토글로 전문 확인
+  const discCardsHtml = discList.length > 0 ? discList.map((d, idx) => {
+    const impactBadge = d.high_impact
+      ? '<span style="font-size:9px;padding:2px 6px;border-radius:4px;background:rgba(248,113,113,0.2);color:#f87171;font-weight:600;margin-left:6px">⚠ HIGH IMPACT</span>'
+      : '';
+    const dilText = d.dilution_ratio != null
+      ? `<div style="font-size:10px;color:#fbbf24;margin-top:2px">희석률 ${(d.dilution_ratio*100).toFixed(1)}%</div>`
+      : '';
+    const summary = d.summary || '';
+    const isLong = summary.length > 300;
+    const cardId = `disc-card-${idx}`;
+    const summaryShort = isLong ? summary.slice(0, 300) + '…' : summary;
+    const summaryBlock = summary
+      ? (isLong
+          ? `<div id="${cardId}-short" style="font-size:10px;color:#888;margin-top:6px;line-height:1.6;white-space:pre-wrap">${summaryShort}</div>
+             <div id="${cardId}-full" style="display:none;font-size:10px;color:#888;margin-top:6px;line-height:1.6;white-space:pre-wrap">${summary}</div>
+             <button type="button" id="${cardId}-btn"
+               onclick="toggleDiscSummary('${cardId}')"
+               style="margin-top:6px;padding:3px 10px;font-size:10px;background:rgba(77,166,255,0.12);border:1px solid rgba(77,166,255,0.3);border-radius:5px;color:#4da6ff;cursor:pointer">더보기 ▾</button>`
+          : `<div style="font-size:10px;color:#888;margin-top:6px;line-height:1.6;white-space:pre-wrap">${summary}</div>`)
+      : '';
+    return `
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:10px 12px;margin-bottom:8px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+          <div style="flex:1">
+            <div style="font-size:10px;color:#4da6ff;margin-bottom:2px">${d.date || '-'} · ${d.type || '기타'}${impactBadge}</div>
+            <div style="font-size:12px;font-weight:600;color:#fff;line-height:1.4">${d.title || ''}</div>
+            ${dilText}
+          </div>
+        </div>
+        ${summaryBlock}
+      </div>`;
+  }).join('') : '<div style="color:#555;font-size:12px;padding:12px 0">공시 데이터 없음 (수집 대상 외 기업)</div>';
+
+  // 분기 재무 추이 (최근 4분기 매출·영업이익·ROE)
+  const stmtsHtml = stmts.length > 0 ? `
+    <div class="section-title" style="color:#4da6ff">📈 분기 재무 추이 (최근 ${stmts.length}분기)</div>
+    <div style="background:rgba(255,255,255,0.02);border-radius:8px;padding:10px">
+      <div style="display:grid;grid-template-columns:60px 1fr 1fr 60px;gap:6px;font-size:10px;color:#666;margin-bottom:4px">
+        <span>시점</span><span>매출(조)</span><span>영업이익(조)</span><span>ROE%</span>
+      </div>
+      ${stmts.map(s => `
+        <div style="display:grid;grid-template-columns:60px 1fr 1fr 60px;gap:6px;font-size:11px;padding:3px 0;border-top:1px solid rgba(255,255,255,0.04)">
+          <span style="color:#ccc">${s.year}Q${s.quarter}</span>
+          <span>${s.revenue != null ? (s.revenue/1e12).toFixed(1) : '-'}</span>
+          <span style="color:${s.operating_income>=0?'#4ade80':'#f87171'}">${s.operating_income != null ? (s.operating_income/1e12).toFixed(2) : '-'}</span>
+          <span>${s.roe != null ? s.roe.toFixed(1) : '-'}</span>
+        </div>
+      `).join('')}
+    </div>
+  ` : '';
+
+  document.getElementById('panelInner').innerHTML=`
+    <h2 style="color:#fbbf24;font-size:18px">📡 ${n.n} 공시</h2>
+    <div style="color:#666;font-size:12px;margin-bottom:12px">${n.t} | ${n.s} | 시총 ${n.mc || '-'}</div>
+    <div class="section-title" style="color:#fbbf24">📋 최근 공시 (${discList.length}건)</div>
+    ${discCardsHtml}
+    ${stmtsHtml}
+    <div class="section-title" style="color:#888">🔗 관계 네트워크</div>
+    ${rels.map(e=>{const o=e.a.n===n.n?e.b:e.a;return `<span class="tag">${e.type} ${o.n}</span>`;}).join('')||'없음'}
+    <div style="font-size:10px;color:#555;margin-top:12px;line-height:1.5;padding:8px;background:rgba(255,255,255,0.02);border-radius:6px">
+      데이터 출처: modules/disclosure/data/disclosure.db (최근 공시 최대 5건 + 분기 재무 8분기)<br>
+      ⚠ 본 분석은 과거 통계이며 투자 권유가 아닙니다
+    </div>`;
+  p.classList.add('open');
+}
+
+// ===== PANEL: TIMEMACHINE (실데이터 기반, modules/price/quiz_data.py 연결) =====
+function showTimemachine(n) {
+  const p=document.getElementById('panel');
+  if(!n.tm){
+    document.getElementById('panelInner').innerHTML=`
+      <h2 style="color:#7c6cf0;font-size:18px">🕰 타임머신</h2>
+      <div style="color:#666;font-size:12px;margin-bottom:20px">${n.n}</div>
+      <div style="text-align:center;padding:40px 0;color:#555">
+        <div style="font-size:40px;margin-bottom:12px">📭</div>
+        <div style="font-size:13px">이 기업의 타임머신 시나리오는<br>아직 준비되지 않았습니다</div>
+        <div style="font-size:11px;color:#444;margin-top:12px">현재 체험 가능한 기업은 15개입니다:<br>삼성전자·SK하이닉스·현대차·기아·카카오·<br>NAVER·LG화학·POSCO홀딩스 외 7개</div>
+        <div style="font-size:10px;color:#444;margin-top:10px">데이터 출처: modules/price/quiz_data.py</div>
+      </div>`;
+    p.classList.add('open');return;
+  }
+  const tm=n.tm;
+  const stockChgNum = parseFloat(String(tm.answer.stock_chg).replace(/[+%]/g,''));
+  const stockColor = stockChgNum >= 0 ? '#4ade80' : '#f87171';
+  const kospiLine = tm.answer.kospi_chg != null
+    ? `<div class="tm-result-row"><span style="color:#888">KOSPI (동기간)</span><span style="color:${tm.answer.kospi_chg>=0?'#4ade80':'#f87171'};font-weight:500">${tm.answer.kospi_chg>=0?'+':''}${tm.answer.kospi_chg}%</span></div>
+       <div class="tm-result-row" style="border-top:1px solid rgba(255,255,255,0.05);padding-top:4px;margin-top:4px"><span style="color:#aaa">초과 (종목-코스피)</span><span style="color:${(stockChgNum - tm.answer.kospi_chg)>=0?'#4ade80':'#f87171'};font-weight:600">${((stockChgNum - tm.answer.kospi_chg)>=0?'+':'')}${(stockChgNum - tm.answer.kospi_chg).toFixed(1)}%p</span></div>`
+    : '';
+
+  document.getElementById('panelInner').innerHTML=`
+    <div class="tm-scene">
+      <div class="tm-header">
+        <div style="font-size:11px;color:#7c6cf0;letter-spacing:2px">TIME MACHINE</div>
+        <div class="tm-date">${tm.date}</div>
+        <div class="tm-sub">당신은 이 시점으로 돌아왔습니다${tm.category?` · ${tm.category}`:''}</div>
+      </div>
+      <div class="tm-disclosure">
+        <div class="tm-label">📡 방금 공시가 떴습니다</div>
+        <div class="tm-title">${n.n} — ${tm.disclosure}</div>
+      </div>
+      ${tm.context ? `
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:10px 12px;margin-bottom:14px;font-size:11px;color:#aaa;line-height:1.7;white-space:pre-wrap">${tm.context}</div>
+      ` : ''}
+      <div style="text-align:center;font-size:13px;color:#999;margin:16px 0 8px">당신의 선택은?</div>
+      <div class="tm-choices" id="tmChoices">
+        <div class="tm-choice buy" onclick="revealTM(this,'매수')">🟢<br>매수</div>
+        <div class="tm-choice hold" onclick="revealTM(this,'관망')">⚪<br>관망</div>
+        <div class="tm-choice sell" onclick="revealTM(this,'매도')">🔴<br>매도</div>
+      </div>
+      <div class="tm-result" id="tmResult">
+        <div class="tm-result-card">
+          <div style="font-size:11px;color:#888;margin-bottom:6px;text-align:center">${tm.answer.window || '이후 실제 결과'}</div>
+          <div class="big-num" style="color:${stockColor}">${tm.answer.stock_chg}</div>
+          ${kospiLine ? `<div style="margin-top:10px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.05)">${kospiLine}</div>` : ''}
+        </div>
+        ${tm.answer.lesson ? `
+        <div class="tm-lesson">
+          <div class="lesson-title">💡 이 공시에서 배울 점</div>
+          <div class="lesson-body">${tm.answer.lesson.replace(/\n/g,'<br>')}</div>
+        </div>
+        ` : ''}
+        ${tm.refUrl ? `
+        <a href="${tm.refUrl}" target="_blank" rel="noopener"
+           style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;padding:8px 14px;
+                  background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.3);
+                  border-radius:8px;color:#a78bfa;font-size:12px;font-weight:500;text-decoration:none;
+                  transition:background 0.15s"
+           onmouseover="this.style.background='rgba(99,102,241,0.25)'"
+           onmouseout="this.style.background='rgba(99,102,241,0.15)'">
+          📰 관련 기사 보기 <span style="font-size:11px">↗</span>
+        </a>
+        ` : ''}
+        <div style="font-size:10px;color:#555;margin-top:10px;line-height:1.5;padding:8px;background:rgba(255,255,255,0.02);border-radius:6px">
+          데이터 출처: modules/price/quiz_data.py · 실제 주가 데이터 기반<br>
+          ⚠ 본 분석은 과거 통계이며 투자 권유가 아닙니다
+        </div>
+      </div>
+    </div>`;
+  p.classList.add('open');
+}
+
+function revealTM(el, choice) {
+  document.getElementById('tmChoices').querySelectorAll('.tm-choice').forEach(c=>{c.style.opacity='0.3';c.style.pointerEvents='none';});
+  el.style.opacity='1';el.style.border='2px solid #fff';
+  document.getElementById('tmResult').style.display='block';
+}
+
+// INIT — relation(base) + financial + disclosure + price (방법 B: 정적 JSON fetch)
+// 자세한 경로·스키마 규약: modules/integration/CLAUDE.md
+// financial.db의 수치는 억원(= 10^8원) 단위로 저장됨.
+// 1조 = 10,000억 → 억원 → 조원 변환은 /10000.
+// 삼성전자 revenue=3336059(억) / 10000 ≈ 333.6조 (실제치)
+function _trillionFmt(v) {
+  if (v === null || v === undefined) return '-';
+  return (v / 10000).toFixed(1);
+}
+// 시총(원 단위) → "1,425.2조" 포맷. financial 담당자의 eqs_data.json 소스 기준.
+// 레퍼 docs/prototype/kospi50_ranking.html의 fmtCap과 동일하게 소수점 1자리.
+function _marketCapFmt(v) {
+  if (v == null) return null;
+  return (v / 1e12).toFixed(1) + '조';
+}
+// EQS 5모듈 점수 기반 해설 자동 생성 (legacy m1t~m5t 대체)
+function _eqsBucket(s) {
+  if (s >= 75) return 'good';
+  if (s >= 50) return 'mid';
+  return 'bad';
+}
+function _eqsNarration(idx, score) {
+  const b = _eqsBucket(score);
+  const texts = {
+    1: { good: '이익이 현금으로 뒷받침됨 — 발생액 품질 양호.',
+         mid:  '발생액 정상 범위. 향후 추이 관찰 필요.',
+         bad:  '비용 이연 가능성. 발생액 높아 주의 필요.' },
+    2: { good: 'M-score 안전 구간 — 분식 징후 낮음.',
+         mid:  '분식 확률 중간 구간. 핵심 지표 모니터링 필요.',
+         bad:  'M-score 위험 구간 — 회계 투명성 점검 필요.' },
+    3: { good: 'OCF/NI 양호 — 영업이익이 실제 현금으로 유입.',
+         mid:  '현금흐름 다소 괴리. 매출채권·재고자산 증감 확인.',
+         bad:  '영업이익 대비 현금흐름 낮음 — 현금 창출력 점검.' },
+    4: { good: '이익 추이 안정적 — 지속 가능성 높음.',
+         mid:  '이익 변동성 중간 — 업황 의존 구간.',
+         bad:  '이익 변동 심함 — 일회성·업황 영향 검토.' },
+    5: { good: 'Piotroski F-score 양호 — 재무 건전성 우수.',
+         mid:  '재무 건전성 보통. 일부 지표 개선 필요.',
+         bad:  'F-score 낮음 — 재무 악화 신호 다수.' },
+  };
+  return texts[idx][b];
+}
+(async () => {
+  // 1) relation graph — 필수 (없으면 legacy fallback)
+  let relData;
+  try {
+    const r = await fetch('../relation/data/graph_top50.json');
+    if (!r.ok) throw new Error('no remote');
+    relData = await r.json();
+  } catch (e) {
+    console.warn('[Integration] relation fetch 실패, legacy fallback 사용:', e);
+    relData = _LEGACY_HARDCODED_RAW;
+  }
+
+  // 2) financial / disclosure / price — graceful degrade (하나 실패해도 나머지 로드)
+  const [eqsPayload, discPayload, pricePayload] = await Promise.all([
+    fetch('./data/eqs_summary.json').then(r => r.ok ? r.json() : null).catch(() => null),
+    fetch('./data/disclosures.json').then(r => r.ok ? r.json() : null).catch(() => null),
+    fetch('./data/price_scenarios.json').then(r => r.ok ? r.json() : null).catch(() => null),
+  ]);
+
+  // 3) ticker 기준 인덱스 구성
+  const eqsByTicker = Object.fromEntries(((eqsPayload && eqsPayload.data) || []).map(d => [d.ticker, d]));
+  const discByTicker = {};
+  ((discPayload && discPayload.disclosures) || []).forEach(d => {
+    if (!d.ticker) return;
+    (discByTicker[d.ticker] = discByTicker[d.ticker] || []).push(d);
+  });
+  const stmtByTicker = {};
+  ((discPayload && discPayload.statements) || []).forEach(s => {
+    if (!s.ticker) return;
+    (stmtByTicker[s.ticker] = stmtByTicker[s.ticker] || []).push(s);
+  });
+  const scenarioByTicker = Object.fromEntries(((pricePayload && pricePayload.data) || []).map(s => [s.ticker, s]));
+
+  // 4) relation 노드에 실데이터 주입 (기존 show* 함수 구조와 호환되는 필드명 유지)
+  relData.forEach(n => {
+    const t = n.t;
+    const fin = eqsByTicker[t];
+    if (fin) {
+      n.has_financial = true;
+      // 프로토타입 메타 (extract_data.py가 eqs_data.json에서 보강)
+      n.market_cap = fin.market_cap ?? null;          // 원 단위, null 가능
+      n.dart_url = fin.dart_url ?? null;               // DART 사업보고서
+      n.industry_code = fin.industry_code ?? null;
+      n.is_financial_biz = fin.is_financial === true;  // 금융업(064/066/067)
+      n.latest_year = fin.latest_year ?? null;         // 분석 기준 연도
+      n.eqs = Math.round(fin.eqs_total || 0);
+      n.gr = fin.eqs_grade || '-';
+      n.m1 = Math.round(fin.eqs_m1 || 0);
+      n.m2 = Math.round(fin.eqs_m2 || 0);
+      n.m3 = Math.round(fin.eqs_m3 || 0);
+      n.m4 = Math.round(fin.eqs_m4 || 0);
+      n.m5 = Math.round(fin.eqs_m5 || 0);
+      n.m1t = _eqsNarration(1, n.m1);
+      n.m2t = _eqsNarration(2, n.m2);
+      n.m3t = _eqsNarration(3, n.m3);
+      n.m4t = _eqsNarration(4, n.m4);
+      n.m5t = _eqsNarration(5, n.m5);
+      n.rv = _trillionFmt(fin.revenue);
+      n.oi = _trillionFmt(fin.operating_income);
+      n.ni = _trillionFmt(fin.net_income);
+      // 자산·부채·자본도 억→조 변환 (/10000)
+      n.ta = fin.total_assets != null ? Math.round(fin.total_assets / 10000) : '-';
+      n.tl = fin.total_liabilities != null ? Math.round(fin.total_liabilities / 10000) : '-';
+      n.eq = fin.total_equity != null ? Math.round(fin.total_equity / 10000) : '-';
+      // 부채비율 = 총부채 / 자본총계 × 100 (K-IFRS·DART 실무 기준)
+      // 자본총계가 0이거나 null이면 계산 불가 → null
+      n.dr = (fin.total_equity && fin.total_equity > 0 && fin.total_liabilities != null)
+        ? Math.round(fin.total_liabilities / fin.total_equity * 100)
+        : null;
+      n.ocf = _trillionFmt(fin.operating_cashflow);
+      n.icf = _trillionFmt(fin.investing_cashflow);
+      n.fcf = _trillionFmt(fin.financing_cashflow);
+      n.oim = (fin.revenue && fin.operating_income != null)
+        ? (fin.operating_income / fin.revenue * 100).toFixed(1)
+        : null;
+    } else {
+      n.has_financial = false;
+    }
+
+    const recentDisc = discByTicker[t] || [];
+    n.has_disclosure = recentDisc.length > 0;
+    n.disc = recentDisc.slice(0, 3).map(d => ({
+      title: d.title || '',
+      date: d.disclosure_date || '',
+      type: d.disclosure_type || '',
+      summary: d.summary || '',
+      high_impact: !!d.high_impact,
+      dilution_ratio: d.dilution_ratio,
+      impacts: [],
+    }));
+    n.statements = stmtByTicker[t] || [];
+
+    const sc = scenarioByTicker[t];
+    n.has_quiz = !!sc;
+    if (sc) {
+      n.tm = {
+        date: sc.date || '',
+        category: sc.category || '',
+        disclosure: sc.title || '',
+        context: sc.context || '',
+        refUrl: sc.refUrl || '',  // extract_data.py에서 자동 생성한 네이버 뉴스 검색 URL
+        news: [],
+        answer: {
+          stock_chg: (sc.change_pct >= 0 ? '+' : '') + sc.change_pct + '%',
+          kospi_chg: sc.kospi_change_pct,
+          window: sc.window || '',
+          supply: [],
+          lesson: sc.explanation || '',
+          eqs_hint: '',
+        },
+      };
+    }
+  });
+
+  raw = relData;
+
+  // 5) 로드 요약 (디버깅)
+  console.log('[Integration] data loaded:', {
+    nodes: raw.length,
+    financial_covered: raw.filter(n => n.has_financial).length,
+    disclosure_covered: raw.filter(n => n.has_disclosure).length,
+    timemachine_covered: raw.filter(n => n.has_quiz).length,
+  });
+
+  init();
+  draw();
+  setMode('analyze', document.querySelector('[data-mode="analyze"]'));
+  window._debug = { getNode: (name) => nodes.find(n => n.n === name) };
+})();
+</script>
+</body>
+</html>
