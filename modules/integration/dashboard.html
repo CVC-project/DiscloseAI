@@ -1118,8 +1118,8 @@ function showAnalyze(n) {
       <div class="fin-insight">${n.dr != null ? `"부채비율 ${n.dr}% (총부채/자본)" — ${n.dr<100?'양호 ✅':n.dr<200?'보통 ⚠':'높음 🔴'}` : '부채비율 데이터 없음'}</div></div>
     <div class="fin-card"><div class="card-title">💵 현금이 진짜 들어오나?<span class="src">현금흐름표</span></div>
       <div class="fin-row"><span class="label">영업활동</span><span class="value" style="color:${String(n.ocf).startsWith('-')?'#f87171':'#4ade80'}">${n.ocf}조 ${String(n.ocf).startsWith('-')?'🔴':'🟢'}</span></div>
-      <div class="fin-row"><span class="label">투자활동</span><span class="value" style="color:#4da6ff">${n.icf}조</span></div>
-      <div class="fin-row"><span class="label">재무활동</span><span class="value" style="color:#fbbf24">${n.fcf}조</span></div></div>
+      <div class="fin-row"><span class="label">투자활동</span>${n.icf!=='-'?`<span class="value" style="color:#4da6ff">${n.icf}조</span>`:'<span class="value" style="font-size:11px;padding:2px 8px;border-radius:4px;background:rgba(148,163,184,0.12);color:#94a3b8;font-weight:500">데이터 수집 중</span>'}</div>
+      <div class="fin-row"><span class="label">재무활동</span>${n.fcf!=='-'?`<span class="value" style="color:#fbbf24">${n.fcf}조</span>`:'<span class="value" style="font-size:11px;padding:2px 8px;border-radius:4px;background:rgba(148,163,184,0.12);color:#94a3b8;font-weight:500">데이터 수집 중</span>'}</div></div>
     `:`<div class="fin-card"><div class="card-title">🏦 금융업 재무 요약</div><div class="fin-row"><span class="label">영업수익</span><span class="value">${n.rv}조</span></div><div class="fin-row"><span class="label">영업이익</span><span class="value" style="color:#4ade80">${n.oi}조</span></div><div class="fin-insight">금융업은 별도 분석 기준 적용</div></div>`}
     <div class="section-title" style="color:#fbbf24">⚡ 주목 포인트</div>${cpHtml}
     <div class="section-title" style="color:#4da6ff">🔬 이익 해부 (EQS)</div>
@@ -1130,6 +1130,24 @@ function showAnalyze(n) {
   p.classList.add('open');
 }
 
+// 공시 summary 전문 토글 (showDisclosure 카드에서 호출됨)
+function toggleDiscSummary(cardId) {
+  const shortEl = document.getElementById(cardId + '-short');
+  const fullEl = document.getElementById(cardId + '-full');
+  const btn = document.getElementById(cardId + '-btn');
+  if (!shortEl || !fullEl || !btn) return;
+  const expanded = fullEl.style.display !== 'none';
+  if (expanded) {
+    fullEl.style.display = 'none';
+    shortEl.style.display = 'block';
+    btn.textContent = '더보기 ▾';
+  } else {
+    fullEl.style.display = 'block';
+    shortEl.style.display = 'none';
+    btn.textContent = '접기 ▴';
+  }
+}
+
 // ===== PANEL: DISCLOSURE (실데이터 기반, modules/disclosure/data/disclosure.db 연결) =====
 function showDisclosure(n) {
   const p=document.getElementById('panel');
@@ -1137,16 +1155,27 @@ function showDisclosure(n) {
   const discList = n.disc || [];
   const stmts = (n.statements || []).slice(0, 4);  // 최근 4분기
 
-  // 공시 카드 리스트
-  const discCardsHtml = discList.length > 0 ? discList.map(d => {
+  // 공시 카드 리스트 — summary 300자 초과 시 "더보기" 토글로 전문 확인
+  const discCardsHtml = discList.length > 0 ? discList.map((d, idx) => {
     const impactBadge = d.high_impact
       ? '<span style="font-size:9px;padding:2px 6px;border-radius:4px;background:rgba(248,113,113,0.2);color:#f87171;font-weight:600;margin-left:6px">⚠ HIGH IMPACT</span>'
       : '';
     const dilText = d.dilution_ratio != null
       ? `<div style="font-size:10px;color:#fbbf24;margin-top:2px">희석률 ${(d.dilution_ratio*100).toFixed(1)}%</div>`
       : '';
-    // summary는 너무 길면 잘라서 표시 (300자)
-    const summaryShort = d.summary ? d.summary.slice(0, 300) + (d.summary.length > 300 ? '...' : '') : '';
+    const summary = d.summary || '';
+    const isLong = summary.length > 300;
+    const cardId = `disc-card-${idx}`;
+    const summaryShort = isLong ? summary.slice(0, 300) + '…' : summary;
+    const summaryBlock = summary
+      ? (isLong
+          ? `<div id="${cardId}-short" style="font-size:10px;color:#888;margin-top:6px;line-height:1.6;white-space:pre-wrap">${summaryShort}</div>
+             <div id="${cardId}-full" style="display:none;font-size:10px;color:#888;margin-top:6px;line-height:1.6;white-space:pre-wrap">${summary}</div>
+             <button type="button" id="${cardId}-btn"
+               onclick="toggleDiscSummary('${cardId}')"
+               style="margin-top:6px;padding:3px 10px;font-size:10px;background:rgba(77,166,255,0.12);border:1px solid rgba(77,166,255,0.3);border-radius:5px;color:#4da6ff;cursor:pointer">더보기 ▾</button>`
+          : `<div style="font-size:10px;color:#888;margin-top:6px;line-height:1.6;white-space:pre-wrap">${summary}</div>`)
+      : '';
     return `
       <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:10px 12px;margin-bottom:8px">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
@@ -1156,7 +1185,7 @@ function showDisclosure(n) {
             ${dilText}
           </div>
         </div>
-        ${summaryShort ? `<div style="font-size:10px;color:#888;margin-top:6px;line-height:1.6;white-space:pre-wrap">${summaryShort}</div>` : ''}
+        ${summaryBlock}
       </div>`;
   }).join('') : '<div style="color:#555;font-size:12px;padding:12px 0">공시 데이터 없음 (수집 대상 외 기업)</div>';
 
@@ -1443,6 +1472,7 @@ function _eqsNarration(idx, score) {
   init();
   draw();
   setMode('analyze', document.querySelector('[data-mode="analyze"]'));
+  window._debug = { getNode: (name) => nodes.find(n => n.n === name) };
 })();
 </script>
 </body>
