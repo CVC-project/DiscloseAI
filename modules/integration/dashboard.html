@@ -1099,8 +1099,8 @@ function showAnalyze(n) {
     <div style="color:#666;font-size:12px;margin-bottom:16px">${n.t} | ${n.s} | 시총 ${n.mc}</div>
     ${!isFinancial?`
     <div class="fin-card"><div class="card-title">💰 돈을 잘 벌고 있나?<span class="src">손익계산서</span></div>
-      <div class="fin-row"><span class="label">매출액</span><div class="fin-bar-wrap"><div class="fin-bar" style="width:100%;background:#4da6ff"></div></div><span class="value">${n.rv}조</span><span class="fin-change ${n.rv_chg>=0?'up':'down'}">${n.rv_chg>=0?'+':''}${n.rv_chg}%</span></div>
-      <div class="fin-row"><span class="label">영업이익</span><div class="fin-bar-wrap"><div class="fin-bar" style="width:${Math.min(100,Math.abs(parseFloat(n.oi)/parseFloat(n.rv)*100*3))}%;background:${oiSign?'#f87171':'#4ade80'}"></div></div><span class="value" style="color:${oiSign?'#f87171':'#4ade80'}">${n.oi}조</span><span class="fin-change ${n.oi_chg>=0?'up':'down'}">${Math.abs(n.oi_chg)>500?(n.oi_chg>0?'흑전':'적전'):(n.oi_chg>=0?'+':'')+n.oi_chg+'%'}</span></div>
+      <div class="fin-row"><span class="label">매출액</span><div class="fin-bar-wrap"><div class="fin-bar" style="width:100%;background:#4da6ff"></div></div><span class="value">${n.rv}조</span>${n.rv_chg != null ? `<span class="fin-change ${n.rv_chg>=0?'up':'down'}">${n.rv_chg>=0?'+':''}${n.rv_chg}%</span>` : ''}</div>
+      <div class="fin-row"><span class="label">영업이익</span><div class="fin-bar-wrap"><div class="fin-bar" style="width:${(n.rv && parseFloat(n.rv) > 0) ? Math.min(100,Math.abs(parseFloat(n.oi)/parseFloat(n.rv)*100*3)) : 0}%;background:${oiSign?'#f87171':'#4ade80'}"></div></div><span class="value" style="color:${oiSign?'#f87171':'#4ade80'}">${n.oi}조</span>${n.oi_chg != null ? `<span class="fin-change ${n.oi_chg>=0?'up':'down'}">${Math.abs(n.oi_chg)>500?(n.oi_chg>0?'흑전':'적전'):(n.oi_chg>=0?'+':'')+n.oi_chg+'%'}</span>` : ''}</div>
       <div class="fin-insight">"${margin100}"</div></div>
     <div class="fin-card"><div class="card-title">🏦 곳간은 튼튼한가?<span class="src">재무상태표</span></div>
       <div class="fin-row"><span class="label">자산</span><div class="fin-bar-wrap"><div class="fin-bar" style="width:100%;background:#4da6ff"></div></div><span class="value">${n.ta}조</span></div>
@@ -1120,31 +1120,70 @@ function showAnalyze(n) {
   p.classList.add('open');
 }
 
-// ===== PANEL: DISCLOSURE =====
+// ===== PANEL: DISCLOSURE (실데이터 기반, modules/disclosure/data/disclosure.db 연결) =====
 function showDisclosure(n) {
   const p=document.getElementById('panel');
-  const disc=n.disc&&n.disc.length?n.disc[0]:null;
   const rels=edges.filter(e=>e.a.n===n.n||e.b.n===n.n);
-  let impactsHtml='';
-  if(disc){impactsHtml=disc.impacts.map(imp=>`<div class="disc-impact" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06)"><span class="company">${imp.n} <span style="color:#666;font-size:10px">(${imp.type})</span></span><span class="badge" style="background:${imp.badge_col}18;color:${imp.badge_col};border:1px solid ${imp.badge_col}33">${imp.badge} ${imp.conf}%</span></div>`).join('');}
+  const discList = n.disc || [];
+  const stmts = (n.statements || []).slice(0, 4);  // 최근 4분기
+
+  // 공시 카드 리스트
+  const discCardsHtml = discList.length > 0 ? discList.map(d => {
+    const impactBadge = d.high_impact
+      ? '<span style="font-size:9px;padding:2px 6px;border-radius:4px;background:rgba(248,113,113,0.2);color:#f87171;font-weight:600;margin-left:6px">⚠ HIGH IMPACT</span>'
+      : '';
+    const dilText = d.dilution_ratio != null
+      ? `<div style="font-size:10px;color:#fbbf24;margin-top:2px">희석률 ${(d.dilution_ratio*100).toFixed(1)}%</div>`
+      : '';
+    // summary는 너무 길면 잘라서 표시 (300자)
+    const summaryShort = d.summary ? d.summary.slice(0, 300) + (d.summary.length > 300 ? '...' : '') : '';
+    return `
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:10px 12px;margin-bottom:8px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+          <div style="flex:1">
+            <div style="font-size:10px;color:#4da6ff;margin-bottom:2px">${d.date || '-'} · ${d.type || '기타'}${impactBadge}</div>
+            <div style="font-size:12px;font-weight:600;color:#fff;line-height:1.4">${d.title || ''}</div>
+            ${dilText}
+          </div>
+        </div>
+        ${summaryShort ? `<div style="font-size:10px;color:#888;margin-top:6px;line-height:1.6;white-space:pre-wrap">${summaryShort}</div>` : ''}
+      </div>`;
+  }).join('') : '<div style="color:#555;font-size:12px;padding:12px 0">공시 데이터 없음 (수집 대상 외 기업)</div>';
+
+  // 분기 재무 추이 (최근 4분기 매출·영업이익·ROE)
+  const stmtsHtml = stmts.length > 0 ? `
+    <div class="section-title" style="color:#4da6ff">📈 분기 재무 추이 (최근 ${stmts.length}분기)</div>
+    <div style="background:rgba(255,255,255,0.02);border-radius:8px;padding:10px">
+      <div style="display:grid;grid-template-columns:60px 1fr 1fr 60px;gap:6px;font-size:10px;color:#666;margin-bottom:4px">
+        <span>시점</span><span>매출(조)</span><span>영업이익(조)</span><span>ROE%</span>
+      </div>
+      ${stmts.map(s => `
+        <div style="display:grid;grid-template-columns:60px 1fr 1fr 60px;gap:6px;font-size:11px;padding:3px 0;border-top:1px solid rgba(255,255,255,0.04)">
+          <span style="color:#ccc">${s.year}Q${s.quarter}</span>
+          <span>${s.revenue != null ? (s.revenue/1e12).toFixed(1) : '-'}</span>
+          <span style="color:${s.operating_income>=0?'#4ade80':'#f87171'}">${s.operating_income != null ? (s.operating_income/1e12).toFixed(2) : '-'}</span>
+          <span>${s.roe != null ? s.roe.toFixed(1) : '-'}</span>
+        </div>
+      `).join('')}
+    </div>
+  ` : '';
+
   document.getElementById('panelInner').innerHTML=`
     <h2 style="color:#fbbf24;font-size:18px">📡 ${n.n} 공시</h2>
-    <div style="color:#666;font-size:12px;margin-bottom:16px">${n.t} | ${n.s}</div>
-    ${disc?`
-    <div style="background:rgba(77,166,255,0.05);border:1px solid rgba(77,166,255,0.12);border-radius:10px;padding:14px;margin-bottom:14px">
-      <div style="font-size:10px;color:#4da6ff;margin-bottom:4px">최근 주요 공시</div>
-      <div style="font-size:14px;font-weight:600;color:#fff">${disc.title}</div>
-    </div>
-    <div class="section-title" style="color:#fbbf24">📊 영향 분석 (CatBoost + Calibration)</div>
-    ${impactsHtml}
-    <div style="font-size:10px;color:#555;margin-top:8px;line-height:1.5">* 신뢰도 60% 미만은 "판단 유보"로 표시<br>* 과거 유사 패턴 기반 분류 (예측이 아닌 통계 참고)</div>
-    `:`<div style="color:#555;font-size:12px;padding:30px 0;text-align:center">최근 주요 공시 데이터 없음<br><br>공시 시뮬레이션 버튼을 눌러<br>삼성전자의 공시 영향 분석을 체험해보세요</div>`}
+    <div style="color:#666;font-size:12px;margin-bottom:12px">${n.t} | ${n.s} | 시총 ${n.mc || '-'}</div>
+    <div class="section-title" style="color:#fbbf24">📋 최근 공시 (${discList.length}건)</div>
+    ${discCardsHtml}
+    ${stmtsHtml}
     <div class="section-title" style="color:#888">🔗 관계 네트워크</div>
-    ${rels.map(e=>{const o=e.a.n===n.n?e.b:e.a;return `<span class="tag">${e.type} ${o.n}</span>`;}).join('')||'없음'}`;
+    ${rels.map(e=>{const o=e.a.n===n.n?e.b:e.a;return `<span class="tag">${e.type} ${o.n}</span>`;}).join('')||'없음'}
+    <div style="font-size:10px;color:#555;margin-top:12px;line-height:1.5;padding:8px;background:rgba(255,255,255,0.02);border-radius:6px">
+      데이터 출처: modules/disclosure/data/disclosure.db (최근 공시 최대 5건 + 분기 재무 8분기)<br>
+      ⚠ 본 분석은 과거 통계이며 투자 권유가 아닙니다
+    </div>`;
   p.classList.add('open');
 }
 
-// ===== PANEL: TIMEMACHINE =====
+// ===== PANEL: TIMEMACHINE (실데이터 기반, modules/price/quiz_data.py 연결) =====
 function showTimemachine(n) {
   const p=document.getElementById('panel');
   if(!n.tm){
@@ -1152,29 +1191,35 @@ function showTimemachine(n) {
       <h2 style="color:#7c6cf0;font-size:18px">🕰 타임머신</h2>
       <div style="color:#666;font-size:12px;margin-bottom:20px">${n.n}</div>
       <div style="text-align:center;padding:40px 0;color:#555">
-        <div style="font-size:40px;margin-bottom:12px">🔒</div>
+        <div style="font-size:40px;margin-bottom:12px">📭</div>
         <div style="font-size:13px">이 기업의 타임머신 시나리오는<br>아직 준비되지 않았습니다</div>
-        <div style="font-size:11px;color:#444;margin-top:12px">삼성전자, SK하이닉스, LG디스플레이,<br>에코프로비엠에서 체험 가능합니다</div>
+        <div style="font-size:11px;color:#444;margin-top:12px">현재 체험 가능한 기업은 15개입니다:<br>삼성전자·SK하이닉스·현대차·기아·카카오·<br>NAVER·LG화학·POSCO홀딩스 외 7개</div>
+        <div style="font-size:10px;color:#444;margin-top:10px">데이터 출처: modules/price/quiz_data.py</div>
       </div>`;
     p.classList.add('open');return;
   }
   const tm=n.tm;
-  const newsHtml=tm.news.map(nw=>`<div class="tm-news-item"><span class="src">${nw.src}</span><span class="headline">${nw.h}</span></div>`).join('');
-  const supplyHtml=tm.answer.supply.map(s=>`<div class="tm-result-row"><span style="color:#888">${s.n}</span><span style="color:${s.chg.startsWith('+')?'#4ade80':'#f87171'};font-weight:500">${s.chg}</span></div>`).join('');
-  
+  const stockChgNum = parseFloat(String(tm.answer.stock_chg).replace(/[+%]/g,''));
+  const stockColor = stockChgNum >= 0 ? '#4ade80' : '#f87171';
+  const kospiLine = tm.answer.kospi_chg != null
+    ? `<div class="tm-result-row"><span style="color:#888">KOSPI (동기간)</span><span style="color:${tm.answer.kospi_chg>=0?'#4ade80':'#f87171'};font-weight:500">${tm.answer.kospi_chg>=0?'+':''}${tm.answer.kospi_chg}%</span></div>
+       <div class="tm-result-row" style="border-top:1px solid rgba(255,255,255,0.05);padding-top:4px;margin-top:4px"><span style="color:#aaa">초과 (종목-코스피)</span><span style="color:${(stockChgNum - tm.answer.kospi_chg)>=0?'#4ade80':'#f87171'};font-weight:600">${((stockChgNum - tm.answer.kospi_chg)>=0?'+':'')}${(stockChgNum - tm.answer.kospi_chg).toFixed(1)}%p</span></div>`
+    : '';
+
   document.getElementById('panelInner').innerHTML=`
     <div class="tm-scene">
       <div class="tm-header">
         <div style="font-size:11px;color:#7c6cf0;letter-spacing:2px">TIME MACHINE</div>
         <div class="tm-date">${tm.date}</div>
-        <div class="tm-sub">당신은 이 시점으로 돌아왔습니다</div>
+        <div class="tm-sub">당신은 이 시점으로 돌아왔습니다${tm.category?` · ${tm.category}`:''}</div>
       </div>
       <div class="tm-disclosure">
         <div class="tm-label">📡 방금 공시가 떴습니다</div>
         <div class="tm-title">${n.n} — ${tm.disclosure}</div>
       </div>
-      <div style="font-size:11px;color:#fbbf24;font-weight:500;margin-bottom:6px">📰 그때 뉴스 반응</div>
-      <div class="tm-news">${newsHtml}</div>
+      ${tm.context ? `
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:10px 12px;margin-bottom:14px;font-size:11px;color:#aaa;line-height:1.7;white-space:pre-wrap">${tm.context}</div>
+      ` : ''}
       <div style="text-align:center;font-size:13px;color:#999;margin:16px 0 8px">당신의 선택은?</div>
       <div class="tm-choices" id="tmChoices">
         <div class="tm-choice buy" onclick="revealTM(this,'매수')">🟢<br>매수</div>
@@ -1183,17 +1228,19 @@ function showTimemachine(n) {
       </div>
       <div class="tm-result" id="tmResult">
         <div class="tm-result-card">
-          <div style="font-size:11px;color:#888;margin-bottom:6px;text-align:center">이후 실제 결과</div>
-          <div class="big-num" style="color:${tm.answer.stock_chg.startsWith('+')?'#4ade80':'#f87171'}">${n.n} ${tm.answer.stock_chg}</div>
-          ${supplyHtml?`<div style="margin-top:10px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.05)"><div style="font-size:10px;color:#666;margin-bottom:4px">관련 기업</div>${supplyHtml}</div>`:''}
+          <div style="font-size:11px;color:#888;margin-bottom:6px;text-align:center">${tm.answer.window || '이후 실제 결과'}</div>
+          <div class="big-num" style="color:${stockColor}">${tm.answer.stock_chg}</div>
+          ${kospiLine ? `<div style="margin-top:10px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.05)">${kospiLine}</div>` : ''}
         </div>
+        ${tm.answer.lesson ? `
         <div class="tm-lesson">
           <div class="lesson-title">💡 이 공시에서 배울 점</div>
           <div class="lesson-body">${tm.answer.lesson.replace(/\n/g,'<br>')}</div>
         </div>
-        <div class="tm-eqs-hint">
-          <div style="font-weight:600;margin-bottom:4px">🔬 그때 EQS가 말해줬을 것</div>
-          ${tm.answer.eqs_hint.replace(/\n/g,'<br>')}
+        ` : ''}
+        <div style="font-size:10px;color:#555;margin-top:10px;line-height:1.5;padding:8px;background:rgba(255,255,255,0.02);border-radius:6px">
+          데이터 출처: modules/price/quiz_data.py · 실제 주가 데이터 기반<br>
+          ⚠ 본 분석은 과거 통계이며 투자 권유가 아닙니다
         </div>
       </div>
     </div>`;
@@ -1208,9 +1255,39 @@ function revealTM(el, choice) {
 
 // INIT — relation(base) + financial + disclosure + price (방법 B: 정적 JSON fetch)
 // 자세한 경로·스키마 규약: modules/integration/CLAUDE.md
+// financial.db의 수치는 억원(= 10^8원) 단위로 저장됨.
+// 1조 = 10,000억 → 억원 → 조원 변환은 /10000.
+// 삼성전자 revenue=3336059(억) / 10000 ≈ 333.6조 (실제치)
 function _trillionFmt(v) {
   if (v === null || v === undefined) return '-';
-  return (v / 1e12).toFixed(1);
+  return (v / 10000).toFixed(1);
+}
+// EQS 5모듈 점수 기반 해설 자동 생성 (legacy m1t~m5t 대체)
+function _eqsBucket(s) {
+  if (s >= 75) return 'good';
+  if (s >= 50) return 'mid';
+  return 'bad';
+}
+function _eqsNarration(idx, score) {
+  const b = _eqsBucket(score);
+  const texts = {
+    1: { good: '이익이 현금으로 뒷받침됨 — 발생액 품질 양호.',
+         mid:  '발생액 정상 범위. 향후 추이 관찰 필요.',
+         bad:  '비용 이연 가능성. 발생액 높아 주의 필요.' },
+    2: { good: 'M-score 안전 구간 — 분식 징후 낮음.',
+         mid:  '분식 확률 중간 구간. 핵심 지표 모니터링 필요.',
+         bad:  'M-score 위험 구간 — 회계 투명성 점검 필요.' },
+    3: { good: 'OCF/NI 양호 — 영업이익이 실제 현금으로 유입.',
+         mid:  '현금흐름 다소 괴리. 매출채권·재고자산 증감 확인.',
+         bad:  '영업이익 대비 현금흐름 낮음 — 현금 창출력 점검.' },
+    4: { good: '이익 추이 안정적 — 지속 가능성 높음.',
+         mid:  '이익 변동성 중간 — 업황 의존 구간.',
+         bad:  '이익 변동 심함 — 일회성·업황 영향 검토.' },
+    5: { good: 'Piotroski F-score 양호 — 재무 건전성 우수.',
+         mid:  '재무 건전성 보통. 일부 지표 개선 필요.',
+         bad:  'F-score 낮음 — 재무 악화 신호 다수.' },
+  };
+  return texts[idx][b];
 }
 (async () => {
   // 1) relation graph — 필수 (없으면 legacy fallback)
@@ -1258,13 +1335,18 @@ function _trillionFmt(v) {
       n.m3 = Math.round(fin.eqs_m3 || 0);
       n.m4 = Math.round(fin.eqs_m4 || 0);
       n.m5 = Math.round(fin.eqs_m5 || 0);
-      n.m1t = ''; n.m2t = ''; n.m3t = ''; n.m4t = ''; n.m5t = '';
+      n.m1t = _eqsNarration(1, n.m1);
+      n.m2t = _eqsNarration(2, n.m2);
+      n.m3t = _eqsNarration(3, n.m3);
+      n.m4t = _eqsNarration(4, n.m4);
+      n.m5t = _eqsNarration(5, n.m5);
       n.rv = _trillionFmt(fin.revenue);
       n.oi = _trillionFmt(fin.operating_income);
       n.ni = _trillionFmt(fin.net_income);
-      n.ta = fin.total_assets != null ? Math.round(fin.total_assets / 1e12) : '-';
-      n.tl = fin.total_liabilities != null ? Math.round(fin.total_liabilities / 1e12) : '-';
-      n.eq = fin.total_equity != null ? Math.round(fin.total_equity / 1e12) : '-';
+      // 자산·부채·자본도 억→조 변환 (/10000)
+      n.ta = fin.total_assets != null ? Math.round(fin.total_assets / 10000) : '-';
+      n.tl = fin.total_liabilities != null ? Math.round(fin.total_liabilities / 10000) : '-';
+      n.eq = fin.total_equity != null ? Math.round(fin.total_equity / 10000) : '-';
       // 부채비율 = 총부채 / 자본총계 × 100 (K-IFRS·DART 실무 기준)
       // 자본총계가 0이거나 null이면 계산 불가 → null
       n.dr = (fin.total_equity && fin.total_equity > 0 && fin.total_liabilities != null)
