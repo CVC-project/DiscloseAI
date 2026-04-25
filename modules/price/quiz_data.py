@@ -25,7 +25,7 @@ QUIZ_LIST: list[dict] = [
         ),
         "answer": "악재",
         "change_pct": -11.2,
-        "kospi_change_pct": -3.0,
+        "kospi_change_pct": -6.7,
         "window": "공시 후 5거래일",
         "explanation": (
             "LG화학은 공시 당일 포함 5거래일 동안 약 -11% 급락했습니다. "
@@ -33,29 +33,33 @@ QUIZ_LIST: list[dict] = [
             "'물적분할 반대' 청원이 수만 명에 달했습니다. "
             "이 사건은 이후 물적분할 시 주주보호 규제 논의의 기폭제가 됐습니다."
         ),
+        "dart_url": "https://dart.fss.or.kr/dsab007/search.ax?textCrpNm=LG화학&startDay=20200917&endDay=20200917",
     },
     {
         "id": 2,
-        "company": "한국전력",
-        "ticker": "015760",
-        "date": "2022-08-17",
-        "category": "유상증자",
-        "title": "주요사항보고서 (유상증자결정) — 2조 원 규모 주주배정 유상증자",
+        "company": "HD현대중공업",
+        "ticker": "009540",
+        "date": "2026-04-22",
+        "category": "대형수주",
+        "title": "단일판매·공급계약 체결 — 미국향 데이터센터 발전설비 6,200억 원 수주",
         "context": (
-            "한국전력이 약 2조 원 규모의 주주배정 유상증자를 결정했습니다.\n"
-            "  당시 한전은 2022년 상반기에만 14조 원 넘는 영업손실을 기록 중이었고,\n"
-            "  전기요금 인상 없이 연료비 급등을 혼자 떠안는 구조였습니다.\n"
-            "  유상증자 발행가는 시가 대비 할인된 가격으로 책정될 예정이었습니다."
+            "HD현대중공업이 미국 에너지 인프라 기업 '에이페리온 에너지 그룹(AEG)'과\n"
+            "  약 6,200억 원 규모의 데이터센터용 발전설비 공급 계약을 체결했다고 공시했습니다.\n"
+            "  공급 대상은 미국 내 AI 데이터센터에 전력을 공급할 발전 설비이며,\n"
+            "  AI 인프라 투자 붐과 맞물려 체결된 대형 수출 계약입니다.\n"
+            "  HD현대중공업 연간 매출 대비 약 6% 수준의 단일 계약으로 이례적인 규모입니다."
         ),
-        "answer": "악재",
-        "change_pct": -3.7,
-        "kospi_change_pct": 6.2,
-        "window": "공시 후 5거래일",
+        "answer": "수혜",
+        "change_pct": 9.2,
+        "kospi_change_pct": 0.4,
+        "window": "공시 후 3거래일",
         "explanation": (
-            "주가는 공시 후 5거래일간 약 -4% 하락했습니다. "
-            "주주배정 유상증자는 기존 주주의 지분 희석을 뜻하고, "
-            "한전의 구조적 적자가 해소되지 않은 상황에서의 증자라 시장 반응이 부정적이었습니다."
+            "HD현대중공업 주가는 공시 당일 장중 두 자릿수 상승을 기록하며 강하게 반응했습니다. "
+            "AI 데이터센터 전력 수요 급증이라는 글로벌 테마와 맞물린 대형 미국 수출 계약으로, "
+            "에너지 설비 섹터 전반이 동반 상승했습니다. "
+            "수주 대상인 AEG는 미국 내 대규모 데이터센터 전력 인프라를 운영하는 에너지 기업입니다."
         ),
+        "dart_url": "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260422800175",
     },
     {
         "id": 3,
@@ -72,13 +76,14 @@ QUIZ_LIST: list[dict] = [
         ),
         "answer": "수혜",
         "change_pct": 4.8,
-        "kospi_change_pct": 1.5,
+        "kospi_change_pct": 4.6,
         "window": "공시 후 5거래일",
         "explanation": (
             "삼성전자 주가는 발표 당일 +4% 급등하며 5거래일간 약 +5% 상승했습니다. "
             "최대 공급자의 감산 선언은 반도체 가격 반등 신호로 해석되어 "
             "SK하이닉스 등 반도체 섹터 전체가 동반 상승했습니다."
         ),
+        "dart_url": "https://dart.fss.or.kr/dsab007/search.ax?textCrpNm=삼성전자&startDay=20230407&endDay=20230407",
     },
     {
         "id": 4,
@@ -95,13 +100,14 @@ QUIZ_LIST: list[dict] = [
         ),
         "answer": "수혜",
         "change_pct": 26.7,
-        "kospi_change_pct": 2.5,
+        "kospi_change_pct": 3.8,
         "window": "공시 후 3거래일",
         "explanation": (
-            "현대차 주가는 3거래일 동안 약 +27% 폭등했습니다. 기아도 같은 기간 +40%에 달하는 급등을 기록했습니다. "
+            "현대차 주가는 3거래일 동안 약 +27% 폭등했습니다. 기아도 같은 기간 +23%에 달하는 급등을 기록했습니다. "
             "다만 이후 애플이 협력사를 확정 짓지 않았다는 보도와 함께 현대차가 '협의 사실이 없다'고 번복하자 "
             "주가는 원상 복귀 수준으로 급락했습니다."
         ),
+        "dart_url": "https://dart.fss.or.kr/dsab007/search.ax?textCrpNm=현대자동차&startDay=20210108&endDay=20210108",
     },
     {
         "id": 5,
@@ -119,19 +125,20 @@ QUIZ_LIST: list[dict] = [
         ),
         "answer": "악재",
         "change_pct": -5.1,
-        "kospi_change_pct": -4.0,
+        "kospi_change_pct": -0.7,
         "window": "공시 후 5거래일",
         "explanation": (
             "발표 당일 주가는 약 -5% 하락했습니다. "
             "인수 시너지보다 막대한 인수 비용·재무 부담이 단기 악재로 해석된 전형적인 사례입니다. "
             "장기적으로는 낸드 경쟁력 강화에 긍정적이었으나, 주가는 수개월간 부진했습니다."
         ),
+        "dart_url": "https://dart.fss.or.kr/dsab007/search.ax?textCrpNm=SK하이닉스&startDay=20201020&endDay=20201020",
     },
     {
         "id": 6,
         "company": "두산중공업",
         "ticker": "034020",
-        "date": "2020-03-25",
+        "date": "2020-10-14",
         "category": "유상증자",
         "title": "주요사항보고서 (유상증자결정) — 1조 원 규모 기습 유상증자",
         "context": (
@@ -143,7 +150,7 @@ QUIZ_LIST: list[dict] = [
         ),
         "answer": "악재",
         "change_pct": -24.5,
-        "kospi_change_pct": 3.5,
+        "kospi_change_pct": -1.3,
         "window": "공시 후 5거래일",
         "explanation": (
             "주가는 5거래일간 약 -25% 폭락했습니다. "
@@ -151,12 +158,13 @@ QUIZ_LIST: list[dict] = [
             "유동성 위기라는 신호 자체가 추가 매도 심리를 자극했습니다. "
             "이후 두산중공업은 산업은행 주도 구조조정에 들어갔습니다."
         ),
+        "dart_url": "https://dart.fss.or.kr/dsab007/search.ax?textCrpNm=두산중공업&startDay=20201014&endDay=20201014",
     },
     {
         "id": 7,
         "company": "셀트리온",
         "ticker": "068270",
-        "date": "2022-11-15",
+        "date": "2023-08-17",
         "category": "합병",
         "title": "셀트리온·셀트리온헬스케어·셀트리온제약 3사 통합 합병 재공시",
         "context": (
@@ -168,13 +176,14 @@ QUIZ_LIST: list[dict] = [
         ),
         "answer": "악재",
         "change_pct": -4.3,
-        "kospi_change_pct": 3.4,
+        "kospi_change_pct": 0.5,
         "window": "공시 후 5거래일 (셀트리온 기준)",
         "explanation": (
             "셀트리온 주가는 발표 후 5거래일간 약 -4% 하락했습니다. "
             "반면 셀트리온헬스케어는 합병 프리미엄 기대로 급등했습니다. "
             "셀트리온 기존 주주들은 헬스케어의 낮은 수익성과 재고 리스크를 우려했습니다."
         ),
+        "dart_url": "https://dart.fss.or.kr/dsab007/search.ax?textCrpNm=셀트리온&startDay=20230817&endDay=20230817",
     },
     {
         "id": 8,
@@ -192,7 +201,7 @@ QUIZ_LIST: list[dict] = [
         ),
         "answer": "악재",
         "change_pct": -6.0,
-        "kospi_change_pct": -2.0,
+        "kospi_change_pct": -3.7,
         "window": "공시 후 5거래일",
         "explanation": (
             "주가는 5거래일간 약 -6% 하락했습니다. "
@@ -200,12 +209,13 @@ QUIZ_LIST: list[dict] = [
             "배터리 적자를 메우기 위해 알짜 자산을 끌어다 쓴다는 비판이 나왔습니다. "
             "소액주주들은 합병 반대 의결권 행사를 추진했습니다."
         ),
+        "dart_url": "https://dart.fss.or.kr/dsab007/search.ax?textCrpNm=SK이노베이션&startDay=20240717&endDay=20240717",
     },
     {
         "id": 9,
         "company": "삼성바이오로직스",
         "ticker": "207940",
-        "date": "2018-05-04",
+        "date": "2018-05-03",
         "category": "회계이슈",
         "title": "금융감독원 회계 처리 위반 혐의 조사 착수 공시",
         "context": (
@@ -217,7 +227,7 @@ QUIZ_LIST: list[dict] = [
         ),
         "answer": "악재",
         "change_pct": -18.0,
-        "kospi_change_pct": -2.1,
+        "kospi_change_pct": 0.2,
         "window": "거래재개 후 5거래일 (거래정지 해제 기준)",
         "explanation": (
             "거래정지 해제 후 삼성바이오로직스는 이틀간 -18% 이상 급락했습니다. "
@@ -225,12 +235,13 @@ QUIZ_LIST: list[dict] = [
             "기관·외국인 투자자가 대규모로 이탈했습니다. "
             "최종적으로는 고의 분식회계로 과징금 처분이 내려졌습니다."
         ),
+        "dart_url": "https://dart.fss.or.kr/dsab007/search.ax?textCrpNm=삼성바이오로직스&startDay=20180503&endDay=20180503",
     },
     {
         "id": 10,
         "company": "POSCO홀딩스",
         "ticker": "005490",
-        "date": "2022-01-28",
+        "date": "2021-12-10",
         "category": "지주사전환",
         "title": "포스코 → 포스코홀딩스 지주회사 체제 전환 공시",
         "context": (
@@ -242,19 +253,20 @@ QUIZ_LIST: list[dict] = [
         ),
         "answer": "수혜",
         "change_pct": 6.2,
-        "kospi_change_pct": -3.8,
+        "kospi_change_pct": -0.4,
         "window": "공시 후 5거래일",
         "explanation": (
             "주가는 발표 후 5거래일간 약 +6% 상승했습니다. "
             "지주사 전환이 배터리소재 사업의 밸류에이션을 독립적으로 부각시킬 것이라는 기대가 컸습니다. "
             "이후 포스코홀딩스는 2차전지 테마주 대장격으로 2023년 고점 대비 3배 이상 상승하기도 했습니다."
         ),
+        "dart_url": "https://dart.fss.or.kr/dsab007/search.ax?textCrpNm=POSCO홀딩스&startDay=20211210&endDay=20211210",
     },
     {
         "id": 11,
         "company": "기아",
         "ticker": "000270",
-        "date": "2021-01-08",
+        "date": "2021-01-19",
         "category": "대형협력",
         "title": "애플 자율주행 전기차 협력사 후보 거론 (현대차그룹 동반 보도)",
         "context": (
@@ -264,15 +276,17 @@ QUIZ_LIST: list[dict] = [
             "  당시 기아는 EV6 출시를 앞두고 전기차 전환 전략을 공격적으로 추진 중이었습니다."
         ),
         "answer": "수혜",
-        "change_pct": 11.4,
-        "kospi_change_pct": 2.5,
+        "change_pct": 22.8,
+        "kospi_change_pct": 4.2,
         "window": "공시 후 3거래일",
         "explanation": (
-            "기아 주가는 3거래일간 약 +11% 상승했습니다. "
-            "현대차 계열사 중 기아가 더 직접적인 수혜주로 부각되면서 현대차보다 더 큰 상승폭을 기록했습니다. "
+            "기아 주가는 3거래일간 약 +23% 급등했습니다. "
+            "기아의 조지아 공장이 애플카 생산 거점으로 유력하다는 외신 보도가 더해지며 "
+            "현대차와 함께 동반 폭등했습니다. "
             "이후 협력설 부인으로 급락한 것도 현대차와 동일합니다. "
             "단기 투기 세력이 대거 유입된 사례로 교과서에 자주 인용됩니다."
         ),
+        "dart_url": "https://dart.fss.or.kr/dsab007/search.ax?textCrpNm=기아&startDay=20210119&endDay=20210119",
     },
     {
         "id": 12,
@@ -290,7 +304,7 @@ QUIZ_LIST: list[dict] = [
         ),
         "answer": "수혜",
         "change_pct": 15.3,
-        "kospi_change_pct": 0.5,
+        "kospi_change_pct": -3.1,
         "window": "공시 후 5거래일 (삼성물산 기준)",
         "explanation": (
             "삼성물산 주가는 합병 발표 후 5거래일간 약 +15% 상승했습니다. "
@@ -298,12 +312,13 @@ QUIZ_LIST: list[dict] = [
             "단, 합병 비율(0.35주)이 삼성물산 내재가치 대비 저평가라는 비판이 거셌고 "
             "이 사건은 이후 국민연금 의결권 논란으로 이어졌습니다."
         ),
+        "dart_url": "https://dart.fss.or.kr/dsab007/search.ax?textCrpNm=삼성물산&startDay=20150526&endDay=20150526",
     },
     {
         "id": 13,
         "company": "NAVER",
         "ticker": "035420",
-        "date": "2024-04-16",
+        "date": "2024-04-30",
         "category": "해외리스크",
         "title": "일본 총무성, 라인야후 네이버 지분 매각 권고 보도",
         "context": (
@@ -315,7 +330,7 @@ QUIZ_LIST: list[dict] = [
         ),
         "answer": "악재",
         "change_pct": -6.3,
-        "kospi_change_pct": -1.5,
+        "kospi_change_pct": 0.9,
         "window": "보도 후 5거래일",
         "explanation": (
             "NAVER 주가는 관련 보도 후 5거래일간 약 -6% 하락했습니다. "
@@ -323,6 +338,7 @@ QUIZ_LIST: list[dict] = [
             "지분 강제 매각 시나리오는 NAVER 밸류에이션에 심각한 타격이었습니다. "
             "이후 NAVER는 지분 매각 협상을 진행하면서 주가 회복에 상당한 시간이 걸렸습니다."
         ),
+        "dart_url": "https://dart.fss.or.kr/dsab007/search.ax?textCrpNm=NAVER&startDay=20240430&endDay=20240430",
     },
     {
         "id": 14,
@@ -340,7 +356,7 @@ QUIZ_LIST: list[dict] = [
         ),
         "answer": "수혜",
         "change_pct": 7.1,
-        "kospi_change_pct": -1.2,
+        "kospi_change_pct": 0.0,
         "window": "철회 발표 후 3거래일 (현대모비스 기준)",
         "explanation": (
             "철회 발표 후 현대모비스 주가는 약 +7% 상승했습니다. "
@@ -348,12 +364,13 @@ QUIZ_LIST: list[dict] = [
             "반면 현대글로비스는 합병 기대가 사라지며 하락했습니다. "
             "이 사건은 행동주의 펀드가 한국 재벌 지배구조 개편에 처음 실질적으로 영향력을 행사한 사례입니다."
         ),
+        "dart_url": "https://dart.fss.or.kr/dsab007/search.ax?textCrpNm=현대모비스&startDay=20180521&endDay=20180521",
     },
     {
         "id": 15,
         "company": "카카오",
         "ticker": "035720",
-        "date": "2021-09-01",
+        "date": "2021-09-09",
         "category": "규제리스크",
         "title": "카카오페이·카카오뱅크 IPO 완료 후 카카오 자체 주가 반응",
         "context": (
@@ -365,7 +382,7 @@ QUIZ_LIST: list[dict] = [
         ),
         "answer": "악재",
         "change_pct": -28.4,
-        "kospi_change_pct": -3.2,
+        "kospi_change_pct": -4.3,
         "window": "2021년 9월 한 달간",
         "explanation": (
             "카카오 주가는 9월 한 달간 약 -28% 하락했습니다. "
@@ -373,5 +390,6 @@ QUIZ_LIST: list[dict] = [
             "규제 리스크가 겹치며 기관 매도가 쏟아졌습니다. "
             "이 사례는 자회사 IPO가 반드시 모회사 주가에 긍정적이지 않다는 것을 보여주는 교훈으로 자주 언급됩니다."
         ),
+        "dart_url": "https://dart.fss.or.kr/dsab007/search.ax?textCrpNm=카카오&startDay=20210909&endDay=20210909",
     },
 ]
