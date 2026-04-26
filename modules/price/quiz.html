@@ -195,6 +195,25 @@
 
   .result-explanation { color: #cbd5e1; }
 
+  /* ── 수익률 차트 ── */
+  .perf-chart-wrap {
+    display: none;
+    margin-bottom: 14px;
+  }
+  .perf-chart-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #64748b;
+    letter-spacing: 0.4px;
+    margin-bottom: 6px;
+  }
+  #perfChart {
+    display: block;
+    width: 100%;
+    border-radius: 8px;
+    background: #0f1117;
+  }
+
   /* ── 버튼 ── */
   .btn-next {
     display: none;
@@ -340,7 +359,7 @@
 
   <div class="header">
     <h1>📊 공시 기반 주가 예측 퀴즈</h1>
-    <p>코스피 상위 50 · 실제 공시 사건 · 15문항 · DiscloseAI</p>
+    <p>코스피 상위 50 · 실제 공시 사건 · 12문항 · DiscloseAI</p>
   </div>
 
   <!-- 시작 화면 -->
@@ -348,7 +367,7 @@
     <h2>공시를 읽고 주가 방향을 맞혀보세요</h2>
     <p>
       LG화학 물적분할, HD현대중공업 대형수주, 삼성전자 감산 선언 등<br>
-      코스피 대형주 실제 공시 사건 15개를 풀어봅니다.<br><br>
+      코스피 대형주 실제 공시 사건 12개를 풀어봅니다.<br><br>
       각 문제에서 공시 이후 주가가<br>
       <strong>수혜(+2% 이상) / 악재(-2% 이하) / 중립</strong> 중 어느 방향이었는지 선택하세요.
     </p>
@@ -375,6 +394,10 @@
 
       <div class="result-box" id="resultBox">
         <div class="perf-table" id="perfTable"></div>
+        <div class="perf-chart-wrap" id="perfChartWrap">
+          <div class="perf-chart-label">📈 공시 후 누적 수익률 추이</div>
+          <canvas id="perfChart" height="160"></canvas>
+        </div>
         <div class="result-explanation" id="resultExplanation"></div>
         <a id="dartLink" href="#" target="_blank" rel="noopener" style="display:none; margin-top:14px; align-items:center; gap:6px; font-size:0.8rem; color:#60a5fa; text-decoration:none;">
           🔗 관련 기사 보기
@@ -401,7 +424,7 @@
   <!-- 최종 결과 화면 -->
   <div class="card final-screen" id="finalScreen">
     <div class="final-score" id="finalScore"></div>
-    <div class="final-label">/ 15 정답</div>
+    <div class="final-label">/ 12 정답</div>
     <div class="final-grade" id="finalGrade"></div>
     <div class="score-breakdown">
       <div class="score-item">
@@ -444,6 +467,163 @@
 </div>
 
 <script>
+// ── 차트 유틸 ──────────────────────────────────────────────────────
+function parseWindowDays(w) {
+  const m = w.match(/(\d+)거래일/);
+  return m ? parseInt(m[1]) : 5;
+}
+
+function seededRng(seed) {
+  let s = seed >>> 0;
+  return () => {
+    s = Math.imul(s ^ (s >>> 15), 0x1 | s);
+    s ^= s + Math.imul(s ^ (s >>> 7), 61 | s);
+    return ((s ^ (s >>> 14)) >>> 0) / 0xffffffff;
+  };
+}
+
+function generatePath(totalPct, days, seed) {
+  const rng = seededRng(seed);
+  const pts = [0];
+  // Event-day reaction: 55–80% of total move on day 1
+  const d1frac = 0.55 + rng() * 0.25;
+  let cum = totalPct * d1frac;
+  pts.push(cum);
+  for (let d = 2; d < days; d++) {
+    const noise = (rng() - 0.5) * Math.abs(totalPct) * 0.14;
+    cum = cum + (totalPct - cum) * 0.48 + noise;
+    pts.push(cum);
+  }
+  if (days >= 1) pts[days] = totalPct;
+  return pts;
+}
+
+function drawChart(q, qIdx) {
+  const canvas = document.getElementById('perfChart');
+  const wrap   = document.getElementById('perfChartWrap');
+  if (!canvas || !canvas.getContext) { wrap.style.display = 'none'; return; }
+
+  const days      = parseWindowDays(q.window);
+  const stockPath = generatePath(q.changePct,      days, qIdx * 13 + 3);
+  const kospiPath = generatePath(q.kospiChangePct, days, qIdx * 13 + 97);
+
+  const allVals = [...stockPath, ...kospiPath];
+  let minVal = Math.min(...allVals);
+  let maxVal = Math.max(...allVals);
+  const pad = Math.max(Math.abs(maxVal - minVal) * 0.15, 0.8);
+  minVal -= pad; maxVal += pad;
+  const range = maxVal - minVal || 1;
+
+  const dpr = window.devicePixelRatio || 1;
+  const W   = canvas.offsetWidth || 620;
+  const H   = 160;
+  canvas.width  = W * dpr;
+  canvas.height = H * dpr;
+  canvas.style.width  = W + 'px';
+  canvas.style.height = H + 'px';
+
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+  ctx.clearRect(0, 0, W, H);
+
+  const PAD = { top: 18, right: 48, bottom: 26, left: 38 };
+  const plotW = W - PAD.left - PAD.right;
+  const plotH = H - PAD.top  - PAD.bottom;
+  const toY = v  => PAD.top  + plotH - (v - minVal) / range * plotH;
+  const toX = d  => PAD.left + (d / days) * plotW;
+
+  // Background
+  ctx.fillStyle = '#0f1117';
+  ctx.fillRect(0, 0, W, H);
+
+  // Event-day shaded region (day 0 → day 1)
+  const grad = ctx.createLinearGradient(toX(0), 0, toX(1), 0);
+  grad.addColorStop(0, 'rgba(59,130,246,0.10)');
+  grad.addColorStop(1, 'rgba(59,130,246,0.00)');
+  ctx.fillStyle = grad;
+  ctx.fillRect(toX(0), PAD.top, toX(1) - toX(0), plotH);
+
+  // Y-axis gridlines + labels
+  const yTicks = [minVal + pad, 0, maxVal - pad];
+  ctx.font = '9px system-ui, sans-serif';
+  ctx.textAlign = 'right';
+  yTicks.forEach(v => {
+    const y = toY(v);
+    ctx.strokeStyle = '#1e2330';
+    ctx.lineWidth = 0.8;
+    ctx.setLineDash([3, 4]);
+    ctx.beginPath(); ctx.moveTo(PAD.left, y); ctx.lineTo(PAD.left + plotW, y); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#475569';
+    ctx.fillText((v >= 0 ? '+' : '') + v.toFixed(1) + '%', PAD.left - 4, y + 3);
+  });
+
+  // Zero line (solid)
+  const zy = toY(0);
+  ctx.strokeStyle = '#374151';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([4, 4]);
+  ctx.beginPath(); ctx.moveTo(PAD.left, zy); ctx.lineTo(PAD.left + plotW, zy); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Draw line helper
+  function drawLine(path, color, dotColor, endLabel) {
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 2;
+    ctx.lineJoin = 'round';
+    ctx.lineCap  = 'round';
+    ctx.beginPath();
+    path.forEach((v, i) => {
+      const x = toX(i), y = toY(v);
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    });
+    ctx.stroke();
+    // Dots
+    path.forEach((v, i) => {
+      ctx.beginPath();
+      ctx.arc(toX(i), toY(v), i === 0 ? 2.5 : 3.5, 0, Math.PI * 2);
+      ctx.fillStyle = dotColor;
+      ctx.fill();
+    });
+    // End-of-line label
+    const lv = path[path.length - 1];
+    const lx = toX(path.length - 1) + 5;
+    const ly = toY(lv) + 3.5;
+    ctx.fillStyle = color;
+    ctx.font = 'bold 9px system-ui, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText((lv >= 0 ? '+' : '') + lv.toFixed(1) + '%', lx, ly);
+  }
+
+  drawLine(kospiPath, '#64748b', '#94a3b8', 'KOSPI');
+  drawLine(stockPath, '#60a5fa', '#93c5fd', q.company.split(' ')[0]);
+
+  // X-axis labels
+  ctx.fillStyle = '#475569';
+  ctx.font = '9px system-ui, sans-serif';
+  ctx.textAlign = 'center';
+  for (let d = 0; d <= days; d++) {
+    ctx.fillText(d === 0 ? '공시일' : `+${d}일`, toX(d), H - 5);
+  }
+
+  // Legend
+  const lx0 = PAD.left + 2, ly0 = 8;
+  ctx.fillStyle = '#60a5fa';
+  ctx.fillRect(lx0, ly0, 12, 2);
+  ctx.fillStyle = '#94a3b8';
+  ctx.font = '9px system-ui, sans-serif';
+  ctx.textAlign = 'left';
+  ctx.fillText(q.company.split(' ')[0], lx0 + 15, ly0 + 3.5);
+
+  ctx.fillStyle = '#64748b';
+  ctx.fillRect(lx0 + 85, ly0, 12, 2);
+  ctx.fillStyle = '#94a3b8';
+  ctx.fillText('KOSPI', lx0 + 100, ly0 + 3.5);
+
+  wrap.style.display = 'block';
+}
+
+// ── 퀴즈 데이터 ────────────────────────────────────────────────────
 const QUIZZES = [
   {
     category: "물적분할",
@@ -507,10 +687,10 @@ SK하이닉스·마이크론은 이미 감산에 들어간 상황이었습니다
 당시 애플카 프로젝트(Project Titan)는 업계에서 뜨거운 화두였고,
 현대차가 애플의 파트너로 거론되면서 기아까지 함께 언급되었습니다.`,
     answer: "수혜",
-    changePct: 19.4,
+    changePct: 26.7,
     kospiChangePct: 3.8,
     window: "공시 후 3거래일",
-    explanation: "현대차 주가는 3거래일 동안 약 +19% 폭등했습니다. 기아도 같은 기간 +40%에 달하는 급등을 기록했습니다. 다만 이후 애플이 협력사를 확정 짓지 않았다는 보도와 함께 현대차가 '협의 사실이 없다'고 번복하자 주가는 원상 복귀 수준으로 급락했습니다.",
+    explanation: "현대차 주가는 3거래일 동안 약 +27% 폭등했습니다. 기아도 같은 기간 +23%에 달하는 급등을 기록했습니다. 다만 이후 애플이 협력사를 확정 짓지 않았다는 보도와 함께 현대차가 '협의 사실이 없다'고 번복하자 주가는 원상 복귀 수준으로 급락했습니다.",
     refUrl: "https://www.hankyung.com/economy/article/202101080850i",
   },
   {
@@ -531,40 +711,6 @@ SK하이닉스의 낸드 시장 점유율은 당시 10%대로 삼성(33%)·키�
     refUrl: "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20201020000014",
   },
   {
-    category: "유상증자",
-    company: "두산중공업 (034020)",
-    date: "2020-10-14",
-    title: "주요사항보고서 (유상증자결정) — 1조 원 규모 기습 유상증자",
-    context: `두산중공업이 코로나19 사태 속 유동성 위기를 타개하기 위해 약 1조 원 규모의 유상증자를 전격 결정했습니다.
-
-당시 두산그룹은 코로나로 면세·호텔 등 자회사 실적이 동반 악화됐고,
-두산중공업 자체도 탈석탄 흐름으로 수주가 급감한 상태였습니다.
-발행 예정가격은 직전 종가 대비 30% 이상 할인된 수준이었습니다.`,
-    answer: "악재",
-    changePct: -24.5,
-    kospiChangePct: -1.3,
-    window: "공시 후 5거래일",
-    explanation: "주가는 5거래일간 약 -25% 폭락했습니다. 30%대 할인 발행은 기존 주주 가치를 심각하게 희석시키며, 유동성 위기라는 신호 자체가 추가 매도 심리를 자극했습니다. 이후 두산중공업은 산업은행 주도 구조조정에 들어갔습니다.",
-    refUrl: "https://kind.krx.co.kr/common/disclsviewer.do?method=search&acptno=20201014000064&rcpno=20201014000021&orgid=F&tran=Y&langTpCd=0",
-  },
-  {
-    category: "합병",
-    company: "셀트리온 (068270)",
-    date: "2023-08-17",
-    title: "셀트리온·셀트리온헬스케어·셀트리온제약 3사 통합 합병 발표",
-    context: `셀트리온그룹이 계열사 셀트리온헬스케어, 셀트리온제약을 셀트리온에 흡수합병하는 3사 통합 계획을 발표했습니다.
-
-합병 비율을 두고 논란이 있었습니다.
-셀트리온 입장에서는 셀트리온헬스케어의 부채와 재고 리스크를 떠안는 구조였고,
-시장은 합병 비율의 적정성 여부를 예의주시했습니다.`,
-    answer: "악재",
-    changePct: -7.3,
-    kospiChangePct: 0.5,
-    window: "공시 후 5거래일 (셀트리온 기준)",
-    explanation: "셀트리온 주가는 발표 후 5거래일간 약 -7% 하락했습니다. 반면 셀트리온헬스케어는 합병 프리미엄 기대로 급등했습니다. 셀트리온 기존 주주들은 헬스케어의 낮은 수익성과 재고 리스크를 우려했습니다.",
-    refUrl: "https://kind.krx.co.kr/common/disclsviewer.do?method=search&acptno=20230817000227",
-  },
-  {
     category: "합병",
     company: "SK이노베이션 (096770)",
     date: "2024-07-17",
@@ -576,28 +722,11 @@ SK E&S는 비상장사로 시장 가치가 외부에서 검증되지 않은 상�
 SK이노베이션은 전기차 배터리(SK온) 적자로 재무 압박을 받고 있었고,
 이 합병이 배터리 사업 지원을 위한 것이라는 시각이 지배적이었습니다.`,
     answer: "악재",
-    changePct: -9.8,
+    changePct: -6.0,
     kospiChangePct: -3.7,
     window: "공시 후 5거래일",
-    explanation: "주가는 5거래일간 약 -10% 급락했습니다. 비상장사 SK E&S와의 합병 비율이 불투명하고, 배터리 적자를 메우기 위해 알짜 자산을 끌어다 쓴다는 비판이 나왔습니다. 소액주주들은 합병 반대 의결권 행사를 추진했습니다.",
+    explanation: "주가는 5거래일간 약 -6% 하락했습니다. 비상장사 SK E&S와의 합병 비율이 불투명하고, 배터리 적자를 메우기 위해 알짜 자산을 끌어다 쓴다는 비판이 나왔습니다. 소액주주들은 합병 반대 의결권 행사를 추진했습니다.",
     refUrl: "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240717000415",
-  },
-  {
-    category: "회계이슈",
-    company: "삼성바이오로직스 (207940)",
-    date: "2018-05-03",
-    title: "금융감독원 회계 처리 위반 혐의 조사 착수",
-    context: `금융감독원이 삼성바이오로직스의 자회사 삼성바이오에피스 회계처리 방식에 대해 '분식회계 혐의'로 감리에 착수했습니다.
-
-핵심 쟁점은 삼성바이오에피스를 종속회사에서 관계회사로 전환하면서
-공정가치로 재평가해 4조 5천억 원의 이익을 계상한 것이 적법한가 여부였습니다.
-이 이익 처리가 없었다면 삼성바이오는 수년간 적자였다는 주장이 제기됐습니다.`,
-    answer: "악재",
-    changePct: -18.0,
-    kospiChangePct: 0.2,
-    window: "거래재개 후 5거래일",
-    explanation: "거래정지 해제 후 삼성바이오로직스는 이틀간 -18% 이상 급락했습니다. 분식회계 혐의는 상장폐지 가능성까지 연결되는 최악의 공시 유형으로, 기관·외국인 투자자가 대규모로 이탈했습니다. 최종적으로는 고의 분식회계로 과징금 처분이 내려졌습니다.",
-    refUrl: "https://webzine.kacta.or.kr/news/articleView.html?idxno=1806",
   },
   {
     category: "지주사전환",
@@ -610,29 +739,30 @@ SK이노베이션은 전기차 배터리(SK온) 적자로 재무 압박을 받�
 
 당시 포스코는 니켈·리튬 등 배터리소재 사업에 대규모 투자를 선언하며
 '이차전지 소재 1등 기업'을 목표로 내세웠습니다.`,
-    answer: "수혜",
-    changePct: 6.2,
+    answer: "중립",
+    changePct: -1.0,
     kospiChangePct: -0.4,
     window: "공시 후 5거래일",
-    explanation: "주가는 발표 후 5거래일간 약 +6% 상승했습니다. 지주사 전환이 배터리소재 사업의 밸류에이션을 독립적으로 부각시킬 것이라는 기대가 컸습니다. 이후 포스코홀딩스는 2차전지 테마주 대장격으로 2023년 고점 대비 3배 이상 상승하기도 했습니다.",
+    explanation: "주가는 발표 후 5거래일간 약 -1.0% 소폭 하락하며 중립에 가까운 반응을 보였습니다. 배터리소재 사업 기대감이 있었으나, 지주사 전환에 따른 철강 사업 할인 우려와 시장 관망 심리가 맞물렸습니다. 중장기적으로는 2차전지 테마주 대장격으로 수년간 강한 상승세를 보였습니다.",
     refUrl: "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20211210000304",
   },
   {
-    category: "대형협력",
-    company: "기아 (000270)",
-    date: "2021-01-19",
-    title: "애플 자율주행 전기차 협력사 후보 거론 (현대차그룹 동반 보도)",
-    context: `현대차와 함께 기아도 애플카 위탁생산 파트너 후보로 거론되었습니다.
-
-특히 기아의 조지아 공장이 애플카 생산 거점으로 유력하다는 외신 보도가 나왔고,
-현대차그룹이 '다수 기업과 협력 검토 중'이라고 공시하면서 기아 주가에 직접 영향을 줬습니다.
-당시 기아는 EV6 출시를 앞두고 전기차 전환 전략을 공격적으로 추진 중이었습니다.`,
+    category: "자사주소각",
+    company: "삼성전자 (005930)",
+    date: "2026-03-31",
+    title: "자기주식 소각 결정 공시 — 장부가 5.3조·시가 14조 원 규모 소각",
+    context: `삼성전자가 보유 자기주식을 소각하겠다고 공시했습니다.
+삼성전자는 이미 주주환원 정책의 일환으로 자사주 매입·소각 계획을 시장과 꾸준히 소통해 왔기 때문에
+'언젠가는 소각하겠지'라는 사실 자체는 투자자 대부분이 알고 있었습니다.
+시장의 관심은 '얼마나 소각하느냐'였고, 사전 기대치는 5~8조 원 수준이었습니다.
+그런데 실제 발표된 소각 물량의 장부가는 5.3조 원이었지만,
+현재 주가로 환산한 시가 기준으로는 14조 원을 넘어서는 규모였습니다.`,
     answer: "수혜",
-    changePct: 22.8,
-    kospiChangePct: 4.2,
+    changePct: 5.6,
+    kospiChangePct: 1.9,
     window: "공시 후 3거래일",
-    explanation: "기아 주가는 3거래일간 약 +23% 급등했습니다. 기아의 조지아 공장이 애플카 생산 거점으로 유력하다는 외신 보도가 더해지며 현대차와 함께 동반 폭등했습니다. 이후 협력설 부인으로 급락한 것도 현대차와 동일합니다. 단기 투기 세력이 대거 유입된 사례로 교과서에 자주 인용됩니다.",
-    refUrl: "https://www.hankyung.com/finance/article/2021011992501",
+    explanation: "삼성전자 주가는 공시 당일 강하게 반응하며 3거래일간 약 +5.6% 상승했습니다. 핵심은 '소각 여부'가 아닌 '소각 체급'이었습니다. 시장이 5~8조 원을 예상하던 상황에서 시가 기준 14조 원을 넘는 소각 규모가 발표되며 어닝 서프라이즈에 준하는 충격을 줬습니다. 자사주 소각은 유통 주식 수를 줄여 주당순이익(EPS)을 높이고, 기존 주주의 지분 가치를 직접적으로 끌어올리는 대표적인 주주환원 수단입니다.",
+    refUrl: "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260331800004",
   },
   {
     category: "합병",
@@ -663,11 +793,11 @@ SK이노베이션은 전기차 배터리(SK온) 적자로 재무 압박을 받�
 2023년 라인의 개인정보 유출 사고를 계기로 일본 정부가 한국 기업의 영향력을 문제 삼은 것입니다.
 NAVER는 라인야후의 최대 주주(간접 보유 약 33%)로,
 지분 매각 시 라인 관련 미래 수익 기반을 잃을 수 있다는 우려가 컸습니다.`,
-    answer: "악재",
-    changePct: -6.3,
+    answer: "중립",
+    changePct: 1.9,
     kospiChangePct: 0.9,
     window: "보도 후 5거래일",
-    explanation: "NAVER 주가는 관련 보도 후 5거래일간 약 -6% 하락했습니다. 라인은 일본·동남아에서 수억 명이 사용하는 NAVER의 핵심 해외 자산으로, 지분 강제 매각 시나리오는 NAVER 밸류에이션에 심각한 타격이었습니다. 이후 NAVER는 지분 매각 협상을 진행하면서 주가 회복에 상당한 시간이 걸렸습니다.",
+    explanation: "NAVER 주가는 보도 후 5거래일간 약 +1.9% 소폭 상승하며 중립에 가까운 반응을 보였습니다. 라인야후 지분 매각 권고는 분명 리스크 요인이었으나, 시장은 단기에 확정된 악재로 보지 않았습니다. 이후 협상 장기화 과정에서 지속적인 불확실성이 주가에 부담이 됐고, 중장기적으로 라인 관련 우려가 NAVER 밸류에이션 할인 요인으로 작용했습니다.",
     refUrl: "https://www.yna.co.kr/view/MYH20240430010800641",
   },
   {
@@ -681,11 +811,11 @@ NAVER는 라인야후의 최대 주주(간접 보유 약 33%)로,
 미국 헤지펀드 엘리엇이 현대모비스 지분을 매입하며 합병 반대 캠페인을 벌였고,
 ISS 등 의결권 자문사도 반대를 권고한 상황이었습니다.
 국민연금도 합병안에 반대 의결권을 행사할 가능성이 높다고 알려졌습니다.`,
-    answer: "수혜",
-    changePct: 7.1,
+    answer: "중립",
+    changePct: -1.9,
     kospiChangePct: 0.0,
     window: "철회 발표 후 3거래일 (현대모비스 기준)",
-    explanation: "철회 발표 후 현대모비스 주가는 약 +7% 상승했습니다. 불리한 합병 비율에서 벗어났다는 안도감이 반영됐습니다. 반면 현대글로비스는 합병 기대가 사라지며 하락했습니다. 이 사건은 행동주의 펀드가 한국 재벌 지배구조 개편에 처음 실질적으로 영향력을 행사한 사례입니다.",
+    explanation: "철회 발표 후 현대모비스 주가는 약 -1.9% 소폭 하락하며 중립에 가까운 반응을 보였습니다. 불리한 합병에서 벗어났다는 안도감이 있었으나, 지배구조 개편 기대감 소멸이 맞물리며 두 효과가 상쇄되었습니다. 반면 현대글로비스는 합병 기대가 사라지며 하락했습니다. 이 사건은 행동주의 펀드가 한국 재벌 지배구조 개편에 처음 실질적으로 영향력을 행사한 사례입니다.",
     refUrl: "https://www.etnews.com/20180522000048",
   },
   {
@@ -700,10 +830,10 @@ ISS 등 의결권 자문사도 반대를 권고한 상황이었습니다.
 또한 카카오그룹의 골목상권 침해·독과점 논란이 국정감사 이슈로 부상했고,
 정부의 플랫폼 규제 강화 신호가 잇따랐습니다.`,
     answer: "악재",
-    changePct: -14.2,
+    changePct: -23.4,
     kospiChangePct: -4.3,
     window: "2021년 9월 한 달간",
-    explanation: "카카오 주가는 9월 한 달간 약 -14% 하락했습니다. 자회사 상장으로 인한 모회사 할인(코리아 디스카운트의 변형)에 더해 규제 리스크가 겹치며 기관 매도가 쏟아졌습니다. 이 사례는 자회사 IPO가 반드시 모회사 주가에 긍정적이지 않다는 것을 보여주는 교훈으로 자주 언급됩니다.",
+    explanation: "카카오 주가는 9월 한 달간 약 -23% 하락했습니다. 자회사 상장으로 인한 모회사 할인(코리아 디스카운트의 변형)에 더해 규제 리스크가 겹치며 기관 매도가 쏟아졌습니다. 이 사례는 자회사 IPO가 반드시 모회사 주가에 긍정적이지 않다는 것을 보여주는 교훈으로 자주 언급됩니다.",
     refUrl: "https://m.hankookilbo.com/News/Read/A2021090916310002925",
   },
 ];
@@ -768,6 +898,7 @@ function renderQuestion() {
   });
 
   document.getElementById('resultBox').className = 'result-box';
+  document.getElementById('perfChartWrap').style.display = 'none';
   document.getElementById('btnNext').className = 'btn-next';
 }
 
@@ -831,6 +962,7 @@ function selectAnswer(chosen) {
   }
 
   box.className = 'result-box show ' + (isCorrect ? 'correct-box' : 'wrong-box');
+  requestAnimationFrame(() => drawChart(q, order[current]));
   document.getElementById('btnNext').className = 'btn-next show';
   document.getElementById('btnNext').textContent =
     current + 1 < QUIZZES.length ? '다음 문제 →' : '결과 보기';
