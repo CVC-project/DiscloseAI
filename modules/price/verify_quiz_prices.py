@@ -41,7 +41,7 @@ QUIZ_ITEMS = [
 # quiz_data.py 현재 등록값
 CURRENT = {
      1: {"change": -11.2, "kospi":  -6.7},
-     2: {"change":   9.2, "kospi":   0.4},
+     2: {"change":  12.6, "kospi":   2.4},
      3: {"change":   4.8, "kospi":   4.6},
      4: {"change":  26.7, "kospi":   3.8},
      5: {"change":  -5.1, "kospi":  -0.7},
