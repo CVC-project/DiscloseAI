@@ -2,8 +2,9 @@
 
 이름 매칭의 함정:
 - DART 정식명과 시장 통용명이 다른 경우 (현대차/현대자동차, KT&G/케이티앤지)
-- 우선주는 별도 종목코드를 가지지만 corp_code는 본주와 같음
-- ETF는 재무제표가 없어 제외 필요
+- 우선주는 별도 종목코드를 가지지만 corp_code는 본주와 같음 → 본주와 재무가
+  동일하여 분석 중복이므로 universe에서 제외 (삼성전자우 등)
+- ETF는 재무제표가 없어 제외 (KODEX 200 등)
 
 해결: ``ALIASES``에 시장 통용명 → 종목코드를 명시. find_corp가 종목코드로
 6자리 정확매칭하므로 안전.
@@ -23,9 +24,7 @@ from .eqs.types import EQSResult, FirmPanel
 # 시장 통용명 → 종목코드(6자리) 또는 corp_code(8자리) 매핑.
 # - 부분매칭 휴리스틱이 잘못 잡는 경우(현대차→현대차증권) 방지
 # - 정식 corp_name이 다른 경우(NAVER→네이버) 보강
-# - 우선주는 DART에 별도 등록되지 않으므로 본주 corp_code(8자리)로 직접 매핑
 ALIASES = {
-    "삼성전자우": "00126380",  # corp_code 직접 매핑 (본주와 동일 재무제표)
     "현대차": "005380",  # 정식명: 현대자동차
     "기아": "000270",
     "셀트리온": "068270",
@@ -40,8 +39,10 @@ ALIASES = {
     "우리금융지주": "316140",
 }
 
-# 재무제표가 없는 종목 (ETF, REIT 등) — 분석 대상에서 제외
-INSTRUMENT_BLACKLIST = {"KODEX 200"}
+# 재무제표가 없는 종목 (ETF, REIT 등) — 분석 대상에서 제외.
+# 현재 universe(KOSPI_TOP_50)에는 ETF가 포함되어 있지 않지만, 입력 단계 안전망으로
+# 빈 set 유지. 향후 ETF 의심 종목 추가 시 여기에 등록.
+INSTRUMENT_BLACKLIST: set[str] = set()
 
 # 금융업 (KRX 업종코드 064~067) — fnlttSinglAcntAll endpoint가 옛 데이터 미제공.
 # CLAUDE.local.md 규칙대로 M2·M3 자동 제외 + 별도 BIS 모듈 도입 시까지 EQS 보류.
@@ -81,7 +82,6 @@ def _industry_for(name: str) -> Optional[str]:
 KOSPI_TOP_50 = [
     "삼성전자",
     "SK하이닉스",
-    "삼성전자우",
     "현대차",
     "LG에너지솔루션",
     "한화에어로스페이스",
@@ -121,7 +121,6 @@ KOSPI_TOP_50 = [
     "카카오",
     "LIG넥스원",
     "SK이노베이션",
-    "KODEX 200",
     "HMM",
     "SK텔레콤",
     "현대건설",
@@ -293,11 +292,11 @@ def build_sector_stats(records: List[FirmRecord]) -> dict:
 
 
 _MODULE_LABELS = {
-    "M1": "이익실체",
-    "M2": "회계투명",
-    "M3": "현금뒷받침",
-    "M4": "이익안정",
-    "M5": "재무체력",
+    "M1": "현금이익률",
+    "M2": "매출 회수 건전성",
+    "M3": "부채 건전성",
+    "M4": "본업 안정성",
+    "M5": "자본 성장성",
 }
 
 

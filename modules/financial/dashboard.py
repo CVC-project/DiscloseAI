@@ -435,8 +435,8 @@ const moduleColors = {{
   M1: '#06b6d4', M2: '#8b5cf6', M3: '#22c55e', M4: '#eab308', M5: '#ef4444'
 }};
 const moduleLabels = {{
-  M1: '이익실체', M2: '회계투명', M3: '현금뒷받침',
-  M4: '이익안정', M5: '재무체력'
+  M1: '현금이익률', M2: '매출 회수 건전성', M3: '부채 건전성',
+  M4: '본업 안정성', M5: '자본 성장성'
 }};
 
 const ml = document.getElementById('moduleList');
@@ -785,7 +785,7 @@ _RANKING_TEMPLATE = """<!doctype html>
   th {{ position: relative; }}
   th .th-tip {{
     display: none; position: absolute;
-    left: 50%; bottom: calc(100% + 10px);
+    left: 50%; top: calc(100% + 10px);
     transform: translateX(-50%);
     width: 300px; padding: 0;
     background: #0b1220; color: var(--text);
@@ -797,6 +797,8 @@ _RANKING_TEMPLATE = """<!doctype html>
     overflow: hidden; cursor: default;
   }}
   th:hover .th-tip {{ display: block; }}
+  #ranking th:first-child .th-tip {{ left: 0; transform: none; }}
+  #ranking th:last-child  .th-tip {{ left: auto; right: 0; transform: none; }}
   .th-tip-title {{
     font-size: 13px; font-weight: 700; color: var(--text);
     background: linear-gradient(135deg, rgba(99,102,241,0.25), rgba(139,92,246,0.15));
@@ -858,8 +860,8 @@ _RANKING_TEMPLATE = """<!doctype html>
 
   <div class="grid grid-2">
     <div class="panel">
-      <h2>랭킹 (컬럼 헤더 클릭 시 정렬)</h2>
-      <div style="max-height:600px;overflow-y:auto;">
+      <h2>랭킹 (컬럼 헤더에 마우스를 올리면 설명, 클릭하면 정렬)</h2>
+      <div style="overflow:visible;">
         <table id="ranking">
           <thead>
             <tr>
@@ -868,11 +870,11 @@ _RANKING_TEMPLATE = """<!doctype html>
               <th class="num-cell" data-key="market_cap">시총</th>
               <th class="num-cell" data-key="total">평균점수</th>
               <th data-key="grade">등급</th>
-              <th class="num-cell" data-key="m1">이익실체</th>
-              <th class="num-cell" data-key="m2">회계투명</th>
-              <th class="num-cell" data-key="m3">현금뒷받침</th>
-              <th class="num-cell" data-key="m4">이익안정</th>
-              <th class="num-cell" data-key="m5">재무체력</th>
+              <th class="num-cell" data-key="m1">현금이익률</th>
+              <th class="num-cell" data-key="m2">매출 회수</th>
+              <th class="num-cell" data-key="m3">부채 건전성</th>
+              <th class="num-cell" data-key="m4">본업 안정성</th>
+              <th class="num-cell" data-key="m5">자본 성장성</th>
               <th class="num-cell" data-key="years">년수</th>
             </tr>
           </thead>
@@ -916,9 +918,46 @@ _RANKING_TEMPLATE = """<!doctype html>
 const DATA = {data_json};
 const MODULE_COLORS = {{M1:'#06b6d4', M2:'#8b5cf6', M3:'#22c55e', M4:'#eab308', M5:'#ef4444'}};
 
-// M1~M5 컬럼 헤더 툴팁 생성
-function buildThTooltip(key) {{
-  const g = DATA.glossary && DATA.glossary[key];
+// 컬럼 헤더 툴팁 — 주린이 친화 설명. M1~M5는 glossary에서, 나머지는 EXTRA_TOOLTIPS에서.
+const EXTRA_TOOLTIPS = {{
+  rank: {{
+    label: '#',
+    description: '현재 정렬 기준에 따른 순위. 기본 정렬은 시총 내림차순.',
+    intuition: '컬럼 헤더(시총·평균점수 등)를 클릭하면 해당 기준으로 다시 정렬됩니다.',
+  }},
+  name: {{
+    label: '기업명',
+    description: '회사 이름. 행을 클릭하면 해당 회사의 상세 사업보고서(DART)가 새 창에서 열립니다.',
+    intuition: '"우"가 붙은 우선주, ETF는 분석에서 제외했습니다.',
+  }},
+  market_cap: {{
+    label: '시가총액 (시총)',
+    description: '시가총액 = 현재 주가 × 발행 주식 수. 시장이 회사 전체에 매긴 값.',
+    benchmark: '10조+ 초대형 / 1조~10조 대형 / 1천억~1조 중형 / 1천억↓ 소형',
+    intuition: '"회사를 통째로 사려면 얼마인가?" 매출이나 자산과 다른, 시장의 평가입니다. 매일 변합니다.',
+  }},
+  total: {{
+    label: '평균점수 (EQS Total)',
+    description: 'M1~M5 다섯 지표의 단순 평균(0~100점). 금융업은 M2 제외 4개 평균.',
+    how: '5개 지표 점수를 더해 5로 나눔. 산출 불가한 지표는 평균에서 자동 제외.',
+    benchmark: '80↑ A 우수 / 65↑ B 양호 / 50↑ C 보통 / 35↑ D 주의 / 35↓ F 취약',
+    intuition: '학교 성적표 평균과 비슷합니다. 5과목 평균을 내서 등급을 매기는 셈.',
+  }},
+  grade: {{
+    label: '등급 (Grade)',
+    description: '평균점수에 따라 부여한 5단계 등급.',
+    benchmark: 'A: 80↑, B: 65~79, C: 50~64, D: 35~49, F: 35↓',
+    intuition: 'A는 "재무가 매우 튼튼해 보임", F는 "재무 신호에 빨간불". 다만 등급은 과거 재무만 본 값이고, 주가가 싼지·비싼지는 별개입니다.',
+  }},
+  years: {{
+    label: '분석 연도 수',
+    description: '점수 산출에 사용한 회계연도 수. 정상은 5년.',
+    intuition: '상장한 지 얼마 안 된 회사(예: LG에너지솔루션)나 사업보고서가 일부 누락된 회사는 3~4년만 사용. 데이터가 짧으면 노이즈가 커질 수 있습니다.',
+  }},
+}};
+
+function buildThTooltip(key, upper) {{
+  const g = (DATA.glossary && DATA.glossary[upper]) || EXTRA_TOOLTIPS[key];
   if (!g) return '';
   const sections = [];
   if (g.description) sections.push(['📖 개념', g.description]);
@@ -931,14 +970,17 @@ function buildThTooltip(key) {{
   return `<span class="th-tip"><div class="th-tip-title">${{g.label}}</div>${{body}}</span>`;
 }}
 
-// 페이지 로드 시 M1~M5 헤더에 툴팁 삽입
-const TH_LABELS = {{m1:'이익실체', m2:'회계투명', m3:'현금뒷받침', m4:'이익안정', m5:'재무체력'}};
+// 페이지 로드 시 모든 헤더에 툴팁 삽입 (M1~M5는 glossary, 나머지는 EXTRA_TOOLTIPS)
+const TH_LABELS = {{m1:'현금이익률', m2:'매출 회수 건전성', m3:'부채 건전성', m4:'본업 안정성', m5:'자본 성장성'}};
 document.querySelectorAll('#ranking th').forEach(th => {{
   const key = th.dataset.key || '';
   const upper = key.toUpperCase();
-  if (['M1','M2','M3','M4','M5'].includes(upper)) {{
-    th.innerHTML = (TH_LABELS[key] || key) + buildThTooltip(upper);
-  }}
+  const isModule = ['M1','M2','M3','M4','M5'].includes(upper);
+  const tip = buildThTooltip(key, upper);
+  if (!tip) return;
+  // 표 헤더에 보일 짧은 라벨 — M모듈은 한글 라벨, 기존 텍스트가 있으면 그대로 유지
+  const visibleLabel = isModule ? (TH_LABELS[key] || key) : (th.textContent.trim());
+  th.innerHTML = visibleLabel + tip;
 }});
 
 // 랭킹 표 렌더
@@ -1045,7 +1087,7 @@ new Chart(document.getElementById('gradeChart'), {{
 new Chart(document.getElementById('moduleChart'), {{
   type: 'bar',
   data: {{
-    labels: ['이익실체','회계투명','현금뒷받침','이익안정','재무체력'],
+    labels: ['현금이익률','매출 회수','부채 건전성','본업 안정성','자본 성장성'],
     datasets: [{{
       data: ['M1','M2','M3','M4','M5'].map(m => DATA.summary.module_means[m] || 0),
       backgroundColor: ['#06b6d4','#8b5cf6','#22c55e','#eab308','#ef4444'],
