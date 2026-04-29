@@ -307,6 +307,106 @@ def _to_eok(v):
     return round(v / 1e8)
 
 
+def _history_block(panel: FirmPanel) -> Optional[dict]:
+    """5년 시계열을 sparkline용 JSON 블록으로 직렬화 (억원 단위).
+
+    panel.years는 (year, quarter) 오름차순 정렬됨. 연간 결산만 추출 후
+    매출/영업이익/순이익/영업CF 4개 지표를 array로 반환. 누락 연도는 None
+    으로 채워 array 길이를 일정하게 유지 (sparkline에서 점 누락 처리).
+    """
+    annual = [fy for fy in (panel.years or []) if fy.quarter is None]
+    if not annual:
+        return None
+    return {
+        "years": [fy.year for fy in annual],
+        "revenue": [_to_eok(fy.revenue) for fy in annual],
+        "operating_income": [_to_eok(fy.operating_income) for fy in annual],
+        "net_income": [_to_eok(fy.net_income) for fy in annual],
+        "operating_cashflow": [_to_eok(fy.operating_cashflow) for fy in annual],
+    }
+
+
+def _compute_industry_percentiles(records: List[FirmRecord]) -> dict:
+    """동종업계(섹터) 내 firm 단위 백분위 산출 — 0(최하)~100(최상).
+
+    그룹키: ``industry_groups.get_sector(name)`` (KOSPI 50 11개 섹터).
+    표본 < 3인 섹터는 백분위 산출 부적절 → ``_industry_size``만 기록.
+
+    metrics:
+      - operating_margin (%) : 영업이익/매출 — 높을수록 좋음
+      - debt_to_equity (%)   : 부채총계/자본총계 — 낮을수록 좋음 (반전)
+      - ocf_to_revenue (%)   : 영업CF/매출 — 높을수록 좋음
+      - eqs_total            : EQS 종합점수 — 높을수록 좋음
+    """
+    from .industry_groups import get_sector
+
+    groups: dict = {}
+    for r in records:
+        if r.corp is None or r.panel is None or r.error is not None:
+            continue
+        sec = get_sector(r.display_name)
+        if not sec:
+            continue
+        groups.setdefault(sec, []).append(r)
+
+    def _operating_margin(r: FirmRecord) -> Optional[float]:
+        l = r.panel.latest() if r.panel else None
+        if l is None or not l.revenue or l.operating_income is None:
+            return None
+        return l.operating_income / l.revenue * 100
+
+    def _debt_to_equity(r: FirmRecord) -> Optional[float]:
+        l = r.panel.latest() if r.panel else None
+        if (
+            l is None
+            or l.total_equity is None
+            or l.total_equity <= 0
+            or l.total_liabilities is None
+        ):
+            return None
+        return l.total_liabilities / l.total_equity * 100
+
+    def _ocf_to_revenue(r: FirmRecord) -> Optional[float]:
+        l = r.panel.latest() if r.panel else None
+        if l is None or not l.revenue or l.operating_cashflow is None:
+            return None
+        return l.operating_cashflow / l.revenue * 100
+
+    def _eqs_total(r: FirmRecord) -> Optional[float]:
+        return r.eqs.total if (r.eqs and r.eqs.total is not None) else None
+
+    metrics = [
+        ("operating_margin", _operating_margin, "high"),
+        ("debt_to_equity", _debt_to_equity, "low"),
+        ("ocf_to_revenue", _ocf_to_revenue, "high"),
+        ("eqs_total", _eqs_total, "high"),
+    ]
+
+    out: dict = {}
+    for sector, group in groups.items():
+        size = len(group)
+        # 모든 firm에 sector·size 기록
+        for r in group:
+            out[r.corp.corp_code] = {"_sector": sector, "_size": size}
+        if size < 3:
+            continue
+        for metric_name, extractor, direction in metrics:
+            valid = [(r, extractor(r)) for r in group]
+            valid = [(r, v) for r, v in valid if v is not None]
+            if len(valid) < 3:
+                continue
+            # direction='high' → 큰 값이 1등 (rank 0); 'low' → 작은 값이 1등
+            valid_sorted = sorted(
+                valid, key=lambda x: x[1], reverse=(direction == "high")
+            )
+            n = len(valid_sorted)
+            for rank, (r, _) in enumerate(valid_sorted):
+                # rank 0(최상위) → 100, rank n-1(최하위) → 0
+                pct = round((n - 1 - rank) / (n - 1) * 100) if n > 1 else 50
+                out[r.corp.corp_code][metric_name] = pct
+    return out
+
+
 def export_for_frontend(
     records: List[FirmRecord],
     output_dir: Optional[str] = None,
@@ -329,6 +429,8 @@ def export_for_frontend(
         "prototype",
     )
     os.makedirs(out_dir, exist_ok=True)
+
+    percentiles = _compute_industry_percentiles(records)
 
     items = []
     for r in records:
@@ -370,6 +472,10 @@ def export_for_frontend(
                 "dart_url": r.dart_url,
                 "latest_year": latest_year,
                 "industry_code": r.industry_code,
+                "history": _history_block(r.panel) if r.panel else None,
+                "percentile": percentiles.get(
+                    r.corp.corp_code if r.corp else "", None
+                ),
             }
         )
 

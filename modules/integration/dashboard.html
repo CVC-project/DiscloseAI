@@ -1109,18 +1109,18 @@ function showAnalyze(n) {
     <div style="color:#666;font-size:12px;margin-bottom:16px">${n.t} | ${n.s} | 시총 ${mcDisplay}${yearBadge}</div>
     ${!isFinancial?`
     <div class="fin-card"><div class="card-title">💰 돈을 잘 벌고 있나?<span class="src">손익계산서</span></div>
-      <div class="fin-row"><span class="label">매출액</span><div class="fin-bar-wrap"><div class="fin-bar" style="width:100%;background:#4da6ff"></div></div><span class="value">${n.rv}조</span>${n.rv_chg != null ? `<span class="fin-change ${n.rv_chg>=0?'up':'down'}">${n.rv_chg>=0?'+':''}${n.rv_chg}%</span>` : ''}</div>
-      <div class="fin-row"><span class="label">영업이익</span><div class="fin-bar-wrap"><div class="fin-bar" style="width:${(n.rv && parseFloat(n.rv) > 0) ? Math.min(100,Math.abs(parseFloat(n.oi)/parseFloat(n.rv)*100*3)) : 0}%;background:${oiSign?'#f87171':'#4ade80'}"></div></div><span class="value" style="color:${oiSign?'#f87171':'#4ade80'}">${n.oi}조</span>${n.oi_chg != null ? `<span class="fin-change ${n.oi_chg>=0?'up':'down'}">${Math.abs(n.oi_chg)>500?(n.oi_chg>0?'흑전':'적전'):(n.oi_chg>=0?'+':'')+n.oi_chg+'%'}</span>` : ''}</div>
-      <div class="fin-insight">"${margin100}"</div></div>
+      <div class="fin-row"><span class="label">매출액</span><div class="fin-bar-wrap"><div class="fin-bar" style="width:100%;background:#4da6ff"></div></div><span class="value">${n.rv}조${n.history ? _sparkline(n.history.revenue, '#4da6ff') : ''}</span>${n.rv_chg != null ? `<span class="fin-change ${n.rv_chg>=0?'up':'down'}">${n.rv_chg>=0?'+':''}${n.rv_chg}%</span>` : ''}</div>
+      <div class="fin-row"><span class="label">영업이익</span><div class="fin-bar-wrap"><div class="fin-bar" style="width:${(n.rv && parseFloat(n.rv) > 0) ? Math.min(100,Math.abs(parseFloat(n.oi)/parseFloat(n.rv)*100*3)) : 0}%;background:${oiSign?'#f87171':'#4ade80'}"></div></div><span class="value" style="color:${oiSign?'#f87171':'#4ade80'}">${n.oi}조${n.history ? _sparkline(n.history.operating_income, oiSign?'#f87171':'#4ade80') : ''}</span>${n.oi_chg != null ? `<span class="fin-change ${n.oi_chg>=0?'up':'down'}">${Math.abs(n.oi_chg)>500?(n.oi_chg>0?'흑전':'적전'):(n.oi_chg>=0?'+':'')+n.oi_chg+'%'}</span>` : ''}</div>
+      <div class="fin-insight">"${margin100}"${n.percentile && n.percentile.operating_margin != null ? _percentileBadge(n.percentile.operating_margin, n.percentile._size) : ''}</div></div>
     <div class="fin-card"><div class="card-title">🏦 곳간은 튼튼한가?<span class="src">재무상태표</span></div>
       <div class="fin-row"><span class="label">자산</span><div class="fin-bar-wrap"><div class="fin-bar" style="width:100%;background:#4da6ff"></div></div><span class="value">${n.ta}조</span></div>
       <div class="fin-row"><span class="label">부채</span><div class="fin-bar-wrap"><div class="fin-bar" style="width:${n.ta && n.ta!=='-' ? Math.min(100,parseFloat(n.tl)/parseFloat(n.ta)*100) : 0}%;background:#f87171"></div></div><span class="value">${n.tl}조</span></div>
-      <div class="fin-insight">${n.dr != null ? `"부채비율 ${n.dr}% (총부채/자본)" — ${n.dr<100?'양호 ✅':n.dr<200?'보통 ⚠':'높음 🔴'}` : '부채비율 데이터 없음'}</div></div>
+      <div class="fin-insight">${n.dr != null ? `"부채비율 ${n.dr}% (총부채/자본)" — ${n.dr<100?'양호 ✅':n.dr<200?'보통 ⚠':'높음 🔴'}` : '부채비율 데이터 없음'}${n.percentile && n.percentile.debt_to_equity != null ? _percentileBadge(n.percentile.debt_to_equity, n.percentile._size) : ''}</div></div>
     <div class="fin-card"><div class="card-title">💵 현금이 진짜 들어오나?<span class="src">현금흐름표</span></div>
-      <div class="fin-row"><span class="label">영업활동</span><span class="value" style="color:${String(n.ocf).startsWith('-')?'#f87171':'#4ade80'}">${n.ocf}조 ${String(n.ocf).startsWith('-')?'🔴':'🟢'}</span></div>
+      <div class="fin-row"><span class="label">영업활동</span><span class="value" style="color:${String(n.ocf).startsWith('-')?'#f87171':'#4ade80'}">${n.ocf}조 ${String(n.ocf).startsWith('-')?'🔴':'🟢'}${n.history ? _sparkline(n.history.operating_cashflow, String(n.ocf).startsWith('-')?'#f87171':'#4ade80') : ''}</span></div>
       <div class="fin-row"><span class="label">투자활동</span>${n.icf!=='-'?`<span class="value" style="color:#4da6ff">${n.icf}조</span>`:'<span class="value" style="font-size:11px;padding:2px 8px;border-radius:4px;background:rgba(148,163,184,0.12);color:#94a3b8;font-weight:500">데이터 수집 중</span>'}</div>
       <div class="fin-row"><span class="label">재무활동</span>${n.fcf!=='-'?`<span class="value" style="color:#fbbf24">${n.fcf}조</span>`:'<span class="value" style="font-size:11px;padding:2px 8px;border-radius:4px;background:rgba(148,163,184,0.12);color:#94a3b8;font-weight:500">데이터 수집 중</span>'}</div></div>
-    `:`<div class="fin-card"><div class="card-title">🏦 금융업 재무 요약</div><div class="fin-row"><span class="label">영업수익</span><span class="value">${n.rv}조</span></div><div class="fin-row"><span class="label">영업이익</span><span class="value" style="color:#4ade80">${n.oi}조</span></div><div class="fin-insight">금융업은 별도 분석 기준 적용</div></div>`}
+    `:`<div class="fin-card"><div class="card-title">🏦 금융업 재무 요약</div><div class="fin-row"><span class="label">영업수익</span><span class="value">${n.rv}조${n.history ? _sparkline(n.history.revenue, '#4da6ff') : ''}</span></div><div class="fin-row"><span class="label">영업이익</span><span class="value" style="color:#4ade80">${n.oi}조${n.history ? _sparkline(n.history.operating_income, '#4ade80') : ''}</span></div><div class="fin-insight">금융업은 별도 분석 기준 적용</div></div>`}
     <div class="section-title" style="color:#fbbf24">⚡ 주목 포인트</div>${cpHtml}
     <div class="section-title" style="color:#4da6ff">🔬 이익 해부 (EQS)</div>
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><span style="font-size:32px;font-weight:700;color:${eqsCol}">${n.eqs}</span><span style="font-size:13px;padding:3px 8px;border-radius:5px;background:${eqsCol}15;color:${eqsCol};font-weight:600">${n.gr}등급</span></div>
@@ -1324,6 +1324,42 @@ function _eqsBucket(s) {
   if (s >= 50) return 'mid';
   return 'bad';
 }
+// 시계열 sparkline — 5년 추이를 60×16 SVG로 렌더. 양/음수 모두 0선 기준 정규화.
+// values: 억원 단위 숫자 배열 (None은 null로 들어옴 — 점 누락 처리).
+// color: 라인 색상. 단년만 있으면 빈 문자열.
+function _sparkline(values, color = '#4da6ff') {
+  if (!Array.isArray(values)) return '';
+  const pts = values.filter(v => v != null && Number.isFinite(v));
+  if (pts.length < 2) return '';
+  const w = 60, h = 16, pad = 1;
+  const min = Math.min(...pts, 0);
+  const max = Math.max(...pts, 0);
+  const range = (max - min) || 1;
+  const xStep = (w - pad * 2) / (values.length - 1);
+  const path = values.map((v, i) => {
+    if (v == null || !Number.isFinite(v)) return null;
+    const x = pad + i * xStep;
+    const y = h - pad - ((v - min) / range) * (h - pad * 2);
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  }).filter(Boolean);
+  if (path.length < 2) return '';
+  // 마지막 점만 강조
+  const last = path[path.length - 1].split(',');
+  return `<svg width="${w}" height="${h}" style="vertical-align:middle;margin-left:6px" aria-hidden="true">`
+    + `<polyline points="${path.join(' ')}" fill="none" stroke="${color}" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>`
+    + `<circle cx="${last[0]}" cy="${last[1]}" r="1.6" fill="${color}"/>`
+    + `</svg>`;
+}
+// 동종업계 백분위 뱃지 — 0~100 점수, 100=업계 1등.
+// '업계 상위 X%' (역수로 표시 — 백분위 80 → 상위 20%).
+function _percentileBadge(pct, sectorSize) {
+  if (pct == null || !Number.isFinite(pct)) return '';
+  if (sectorSize != null && sectorSize < 3) return '';  // 표본 부족
+  const topPct = Math.max(1, Math.round(100 - pct));
+  // 색상: 상위 30% 초록, 70%까지 노랑, 그 외 빨강
+  const color = topPct <= 30 ? '#4ade80' : topPct <= 70 ? '#fbbf24' : '#f87171';
+  return `<span style="font-size:10px;padding:1px 5px;border-radius:3px;background:${color}20;color:${color};font-weight:500;margin-left:6px" title="동종업계(${sectorSize}개사) 내 백분위">업계 상위 ${topPct}%</span>`;
+}
 function _eqsNarration(idx, score) {
   const b = _eqsBucket(score);
   const texts = {
@@ -1420,6 +1456,9 @@ function _eqsNarration(idx, score) {
       n.oim = (fin.revenue && fin.operating_income != null)
         ? (fin.operating_income / fin.revenue * 100).toFixed(1)
         : null;
+      // 시계열(sparkline) + 동종업계 백분위 (financial 모듈에서 산출)
+      n.history = fin.history || null;
+      n.percentile = fin.percentile || null;
     } else {
       n.has_financial = false;
     }

@@ -92,6 +92,8 @@ def load_eqs_prototype_meta() -> dict[str, dict]:
             "industry_code": industry,
             "is_financial": industry in FINANCIAL_INDUSTRY_CODES,
             "latest_year": latest.get("year") if isinstance(latest, dict) else latest,
+            "history": r.get("history"),
+            "percentile": r.get("percentile"),
         }
     return meta_map
 
