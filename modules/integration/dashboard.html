@@ -1078,9 +1078,20 @@ function simAlert(){alertOn=true;alertSrc='삼성전자';document.getElementById
 
 // ===== PANEL: ANALYZE =====
 function showAnalyze(n) {
+  window.__lastShownNode = n;  // 쉬운말 모드 토글 시 재렌더용
   const p = document.getElementById('panel');
   const eqsCol=n.eqs>=70?'#4ade80':n.eqs>=50?'#fbbf24':'#f87171';
   const oiSign=String(n.oi).startsWith('-');
+  const easy = _isEasyMode();
+  const easyLine = (key) => easy ? `<div style="font-size:11px;color:#9ca3af;font-style:italic;margin:4px 0 -2px 2px;line-height:1.45">${EASY_NOTES[key]}</div>` : '';
+  const val = _calcValuation(n);
+  // PER/PBR/ROE 색상 — 통상적 벤치마크 기준
+  const perCol = val.per == null ? '#94a3b8' : val.per < 10 ? '#4ade80' : val.per < 20 ? '#fbbf24' : '#f87171';
+  const pbrCol = val.pbr == null ? '#94a3b8' : val.pbr < 1 ? '#4ade80' : val.pbr < 3 ? '#fbbf24' : '#f87171';
+  const roeCol = val.roe == null ? '#94a3b8' : val.roe >= 15 ? '#4ade80' : val.roe >= 5 ? '#fbbf24' : '#f87171';
+  const perTip = val.per == null ? '데이터 부족 (적자 등)' : val.per < 10 ? '저평가 구간 — 이익 대비 가격 낮음' : val.per < 20 ? '평균 구간' : '고평가 구간 — 미래 성장 기대';
+  const pbrTip = val.pbr == null ? '데이터 부족' : val.pbr < 1 ? '청산가치 이하 — 자본 대비 저평가' : val.pbr < 3 ? '평균 구간' : '자본 대비 고평가';
+  const roeTip = val.roe == null ? '데이터 부족' : val.roe >= 15 ? '주주 자본 활용 우수' : val.roe >= 5 ? '평균 수준' : '낮음 — 자본 대비 이익 적음';
   // 금융업 판별은 eqs_data.json의 industry_code('064'·'066'·'067') 기준 우선,
   // 없으면 섹터명 fallback
   const isFinancial = n.is_financial_biz === true || n.s==='금융';
@@ -1105,24 +1116,32 @@ function showAnalyze(n) {
   const eqsExplain=n.eqs>=70?`이익 품질 <strong style="color:#4ade80">양호</strong>. 재무제표를 상당 부분 신뢰 가능.`:n.eqs>=50?`이익 품질 <strong style="color:#fbbf24">주의</strong> 필요. 일부 경고 신호 감지.`:`이익 품질 <strong style="color:#f87171">경고</strong>. 보고된 이익의 질에 의문. 추가 확인 필요.`;
 
   document.getElementById('panelInner').innerHTML=`
-    <h2 style="color:#4da6ff;font-size:18px">${companyTitle}${finBadge}</h2>
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px">
+      <h2 style="color:#4da6ff;font-size:18px;margin:0">${companyTitle}${finBadge}</h2>
+      <button onclick="_toggleEasyMode()" title="회계용어를 쉬운말로 풀어 추가 설명을 보여줍니다" style="font-size:11px;padding:4px 9px;border-radius:14px;border:1px solid ${easy?'#4ade80':'#475569'};background:${easy?'rgba(74,222,128,0.12)':'rgba(71,85,105,0.18)'};color:${easy?'#4ade80':'#cbd5e1'};cursor:pointer;font-weight:500;white-space:nowrap;flex-shrink:0">${easy?'✓ 쉬운말 ON':'쉬운말 OFF'}</button>
+    </div>
     <div style="color:#666;font-size:12px;margin-bottom:16px">${n.t} | ${n.s} | 시총 ${mcDisplay}${yearBadge}</div>
     ${!isFinancial?`
-    <div class="fin-card"><div class="card-title">💰 돈을 잘 벌고 있나?<span class="src">손익계산서</span></div>
+    <div class="fin-card"><div class="card-title">💰 돈을 잘 벌고 있나?<span class="src">손익계산서</span></div>${easyLine('income')}
       <div class="fin-row"><span class="label">매출액</span><div class="fin-bar-wrap"><div class="fin-bar" style="width:100%;background:#4da6ff"></div></div><span class="value">${n.rv}조${n.history ? _sparkline(n.history.revenue, '#4da6ff') : ''}</span>${n.rv_chg != null ? `<span class="fin-change ${n.rv_chg>=0?'up':'down'}">${n.rv_chg>=0?'+':''}${n.rv_chg}%</span>` : ''}</div>
       <div class="fin-row"><span class="label">영업이익</span><div class="fin-bar-wrap"><div class="fin-bar" style="width:${(n.rv && parseFloat(n.rv) > 0) ? Math.min(100,Math.abs(parseFloat(n.oi)/parseFloat(n.rv)*100*3)) : 0}%;background:${oiSign?'#f87171':'#4ade80'}"></div></div><span class="value" style="color:${oiSign?'#f87171':'#4ade80'}">${n.oi}조${n.history ? _sparkline(n.history.operating_income, oiSign?'#f87171':'#4ade80') : ''}</span>${n.oi_chg != null ? `<span class="fin-change ${n.oi_chg>=0?'up':'down'}">${Math.abs(n.oi_chg)>500?(n.oi_chg>0?'흑전':'적전'):(n.oi_chg>=0?'+':'')+n.oi_chg+'%'}</span>` : ''}</div>
       <div class="fin-insight">"${margin100}"${n.percentile && n.percentile.operating_margin != null ? _percentileBadge(n.percentile.operating_margin, n.percentile._size) : ''}</div></div>
-    <div class="fin-card"><div class="card-title">🏦 곳간은 튼튼한가?<span class="src">재무상태표</span></div>
+    <div class="fin-card"><div class="card-title">🏦 곳간은 튼튼한가?<span class="src">재무상태표</span></div>${easyLine('balance')}
       <div class="fin-row"><span class="label">자산</span><div class="fin-bar-wrap"><div class="fin-bar" style="width:100%;background:#4da6ff"></div></div><span class="value">${n.ta}조</span></div>
       <div class="fin-row"><span class="label">부채</span><div class="fin-bar-wrap"><div class="fin-bar" style="width:${n.ta && n.ta!=='-' ? Math.min(100,parseFloat(n.tl)/parseFloat(n.ta)*100) : 0}%;background:#f87171"></div></div><span class="value">${n.tl}조</span></div>
       <div class="fin-insight">${n.dr != null ? `"부채비율 ${n.dr}% (총부채/자본)" — ${n.dr<100?'양호 ✅':n.dr<200?'보통 ⚠':'높음 🔴'}` : '부채비율 데이터 없음'}${n.percentile && n.percentile.debt_to_equity != null ? _percentileBadge(n.percentile.debt_to_equity, n.percentile._size) : ''}</div></div>
-    <div class="fin-card"><div class="card-title">💵 현금이 진짜 들어오나?<span class="src">현금흐름표</span></div>
+    <div class="fin-card"><div class="card-title">💵 현금이 진짜 들어오나?<span class="src">현금흐름표</span></div>${easyLine('cash')}
       <div class="fin-row"><span class="label">영업활동</span><span class="value" style="color:${String(n.ocf).startsWith('-')?'#f87171':'#4ade80'}">${n.ocf}조 ${String(n.ocf).startsWith('-')?'🔴':'🟢'}${n.history ? _sparkline(n.history.operating_cashflow, String(n.ocf).startsWith('-')?'#f87171':'#4ade80') : ''}</span></div>
       <div class="fin-row"><span class="label">투자활동</span>${n.icf!=='-'?`<span class="value" style="color:#4da6ff">${n.icf}조</span>`:'<span class="value" style="font-size:11px;padding:2px 8px;border-radius:4px;background:rgba(148,163,184,0.12);color:#94a3b8;font-weight:500">데이터 수집 중</span>'}</div>
       <div class="fin-row"><span class="label">재무활동</span>${n.fcf!=='-'?`<span class="value" style="color:#fbbf24">${n.fcf}조</span>`:'<span class="value" style="font-size:11px;padding:2px 8px;border-radius:4px;background:rgba(148,163,184,0.12);color:#94a3b8;font-weight:500">데이터 수집 중</span>'}</div></div>
-    `:`<div class="fin-card"><div class="card-title">🏦 금융업 재무 요약</div><div class="fin-row"><span class="label">영업수익</span><span class="value">${n.rv}조${n.history ? _sparkline(n.history.revenue, '#4da6ff') : ''}</span></div><div class="fin-row"><span class="label">영업이익</span><span class="value" style="color:#4ade80">${n.oi}조${n.history ? _sparkline(n.history.operating_income, '#4ade80') : ''}</span></div><div class="fin-insight">금융업은 별도 분석 기준 적용</div></div>`}
+    <div class="fin-card"><div class="card-title">📊 가격은 적정한가?<span class="src">PER · PBR · ROE</span></div>${easyLine('valuation')}
+      <div class="fin-row"><span class="label" title="시가총액 ÷ 순이익. 현재 가격으로 투자비를 회수하는 데 몇 년 걸리는지.">PER</span><span class="value" style="color:${perCol}">${val.per != null ? val.per + '배' : '—'}</span><span style="font-size:11px;color:#94a3b8;margin-left:8px">${perTip}</span></div>
+      <div class="fin-row"><span class="label" title="시가총액 ÷ 자본총계. 청산가치(주주 몫) 대비 시장가 배수.">PBR</span><span class="value" style="color:${pbrCol}">${val.pbr != null ? val.pbr + '배' : '—'}</span><span style="font-size:11px;color:#94a3b8;margin-left:8px">${pbrTip}</span></div>
+      <div class="fin-row"><span class="label" title="순이익 ÷ 자본총계 × 100. 주주가 맡긴 100원으로 1년에 몇 원 벌었는지.">ROE</span><span class="value" style="color:${roeCol}">${val.roe != null ? val.roe + '%' : '—'}</span><span style="font-size:11px;color:#94a3b8;margin-left:8px">${roeTip}</span></div>
+      <div class="fin-insight" style="font-size:11px">PER 10↓ 저평가 / 10~20 보통 / 20+ 고평가 · PBR 1↓ 자본 이하 / 1~3 보통 / 3+ 고평가 · ROE 15+ 우수 / 5~15 보통 / 5↓ 저조</div></div>
+    `:`<div class="fin-card"><div class="card-title">🏦 금융업 재무 요약</div><div class="fin-row"><span class="label">영업수익</span><span class="value">${n.rv}조${n.history ? _sparkline(n.history.revenue, '#4da6ff') : ''}</span></div><div class="fin-row"><span class="label">영업이익</span><span class="value" style="color:#4ade80">${n.oi}조${n.history ? _sparkline(n.history.operating_income, '#4ade80') : ''}</span></div><div class="fin-row"><span class="label">ROE</span><span class="value" style="color:${roeCol}">${val.roe != null ? val.roe + '%' : '—'}</span></div><div class="fin-insight">금융업은 별도 분석 기준 적용</div></div>`}
     <div class="section-title" style="color:#fbbf24">⚡ 주목 포인트</div>${cpHtml}
-    <div class="section-title" style="color:#4da6ff">🔬 이익 해부 (EQS)</div>
+    <div class="section-title" style="color:#4da6ff">🔬 이익 해부 (EQS)</div>${easyLine('eqs')}
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><span style="font-size:32px;font-weight:700;color:${eqsCol}">${n.eqs}</span><span style="font-size:13px;padding:3px 8px;border-radius:5px;background:${eqsCol}15;color:${eqsCol};font-weight:600">${n.gr}등급</span></div>
     <div class="eqs-what">${eqsExplain}<br><br>⚕️ EQS는 "이 기업의 이익을 믿어도 되는 정도"를 진단합니다. 주가 예측이 아닌 재무 건강 진단.</div>
     ${modsHtml}
@@ -1360,6 +1379,44 @@ function _percentileBadge(pct, sectorSize) {
   const color = topPct <= 30 ? '#4ade80' : topPct <= 70 ? '#fbbf24' : '#f87171';
   return `<span style="font-size:10px;padding:1px 5px;border-radius:3px;background:${color}20;color:${color};font-weight:500;margin-left:6px" title="동종업계(${sectorSize}개사) 내 백분위">업계 상위 ${topPct}%</span>`;
 }
+// ④ PER · PBR · ROE 산출 — 시총(원) / 순이익·자본(억원) 기반.
+// 결과: 비율값, 색상 코드, 해석 한 줄. 데이터 부족 시 null 필드.
+function _calcValuation(n) {
+  const mc = n.market_cap;          // 원
+  const ni = n.ni;                  // 조 단위 string ("1.0", "-0.5", "-")
+  const eq = n.eq;                  // 조 단위 정수
+  const niTril = (ni && ni !== '-') ? parseFloat(ni) : null;
+  const eqTril = (eq != null && eq !== '-') ? parseFloat(eq) : null;
+  const out = { per: null, pbr: null, roe: null };
+  if (mc != null && niTril != null && niTril > 0) {
+    out.per = +(mc / 1e12 / niTril).toFixed(1);  // 시총조 ÷ 순이익조
+  }
+  if (mc != null && eqTril != null && eqTril > 0) {
+    out.pbr = +(mc / 1e12 / eqTril).toFixed(2);
+  }
+  if (niTril != null && eqTril != null && eqTril > 0) {
+    out.roe = +(niTril / eqTril * 100).toFixed(1);
+  }
+  return out;
+}
+// ⑤ 쉬운말 모드 — 회계용어를 학생 어휘로 풀어 보여주는 토글.
+// 상태는 localStorage 보존 → 새로고침해도 유지.
+function _isEasyMode() {
+  try { return localStorage.getItem('easyMode') === '1'; } catch (e) { return false; }
+}
+function _toggleEasyMode() {
+  const cur = _isEasyMode();
+  try { localStorage.setItem('easyMode', cur ? '0' : '1'); } catch (e) {}
+  // 패널이 열려 있으면 마지막 클릭한 회사 다시 렌더
+  if (window.__lastShownNode) showAnalyze(window.__lastShownNode);
+}
+const EASY_NOTES = {
+  income:  '쉽게: 회사가 100원어치 팔아서 본업으로 얼마 남기는지 보는 표.',
+  balance: '쉽게: 회사가 가진 것(자산)과 갚을 것(부채), 그리고 주주 몫(자본)을 적은 표.',
+  cash:    '쉽게: 본업 / 미래 투자 / 빚·배당 — 세 가지로 들어오고 나간 진짜 현금.',
+  valuation:'쉽게: 시장이 이 회사 1주를 얼마에 사는지 — 이익·자산 대비 비싼지 싼지.',
+  eqs:     '쉽게: "이 회사 이익이 진짜인가?"를 5가지로 나눠 100점 만점으로 채점.',
+};
 function _eqsNarration(idx, score) {
   const b = _eqsBucket(score);
   const texts = {
