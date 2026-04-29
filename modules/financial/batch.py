@@ -352,6 +352,8 @@ def export_for_frontend(
                 "operating_income": _to_eok(latest.operating_income),
                 "net_income": _to_eok(latest.net_income),
                 "operating_cashflow": _to_eok(latest.operating_cashflow),
+                "investing_cashflow": _to_eok(latest.investing_cashflow),
+                "financing_cashflow": _to_eok(latest.financing_cashflow),
                 "total_assets": _to_eok(latest.total_assets),
                 "total_equity": _to_eok(latest.total_equity),
             }
@@ -375,6 +377,79 @@ def export_for_frontend(
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(items, f, ensure_ascii=False, indent=2)
     return out_path
+
+
+def persist_to_db(records: List[FirmRecord]) -> dict:
+    """배치 결과를 modules/financial/data/financial.db (financial_local)에 upsert.
+
+    각 기업의 최근 연도 1행만 저장 — extract_data.py가 'corp_code별 최신 1건'
+    으로 읽기 때문에 latest year만 있으면 충분. 동일 corp_code의 기존 행은
+    DELETE 후 INSERT (단순 upsert + 중복 정리).
+
+    EQS 5모듈/총점/등급은 latest year 행에 함께 attach.
+    재무수치는 **억원 단위**로 저장 (기존 financial_local 컨벤션 유지) —
+    integration의 dashboard.html은 억→조(/10000) 변환을 가정한다.
+    """
+    from .db import get_local_session, init_local_db
+    from .models import FinancialLocal
+
+    init_local_db()  # 테이블 없으면 생성
+    session = get_local_session()
+    written = 0
+    skipped = 0
+    try:
+        for r in records:
+            if r.corp is None or r.panel is None or r.error is not None:
+                skipped += 1
+                continue
+            latest = r.panel.latest()
+            if latest is None:
+                skipped += 1
+                continue
+            # 동일 corp_code 기존 행 삭제 (중복 정리 + upsert)
+            session.query(FinancialLocal).filter(
+                FinancialLocal.corp_code == r.corp.corp_code
+            ).delete(synchronize_session=False)
+
+            # EQS 모듈 점수 추출 (있는 경우)
+            mod_scores = {}
+            eqs_total = None
+            eqs_grade = None
+            if r.eqs is not None:
+                eqs_total = r.eqs.total
+                eqs_grade = r.eqs.grade
+                for m in r.eqs.modules:
+                    mod_scores[m.name] = m.score
+
+            session.add(
+                FinancialLocal(
+                    corp_code=r.corp.corp_code,
+                    corp_name=r.display_name,
+                    year=latest.year,
+                    quarter=latest.quarter,
+                    revenue=_to_eok(latest.revenue),
+                    operating_income=_to_eok(latest.operating_income),
+                    net_income=_to_eok(latest.net_income),
+                    total_assets=_to_eok(latest.total_assets),
+                    total_liabilities=_to_eok(latest.total_liabilities),
+                    total_equity=_to_eok(latest.total_equity),
+                    operating_cashflow=_to_eok(latest.operating_cashflow),
+                    investing_cashflow=_to_eok(latest.investing_cashflow),
+                    financing_cashflow=_to_eok(latest.financing_cashflow),
+                    eqs_m1=mod_scores.get("M1"),
+                    eqs_m2=mod_scores.get("M2"),
+                    eqs_m3=mod_scores.get("M3"),
+                    eqs_m4=mod_scores.get("M4"),
+                    eqs_m5=mod_scores.get("M5"),
+                    eqs_total=eqs_total,
+                    eqs_grade=eqs_grade,
+                )
+            )
+            written += 1
+        session.commit()
+    finally:
+        session.close()
+    return {"written": written, "skipped": skipped}
 
 
 def summarize(records: List[FirmRecord]) -> dict:

@@ -13,6 +13,7 @@ from modules.financial.batch import (
     build_sector_stats,
     collect_batch,
     export_for_frontend,
+    persist_to_db,
     summarize,
 )
 from modules.financial.dashboard import build_dashboard, build_ranking_dashboard
@@ -32,6 +33,9 @@ def main() -> int:
 
     out_path = export_for_frontend(records)
     print(f"\n[export] {out_path}")
+
+    db_info = persist_to_db(records)
+    print(f"[db persist] financial_local: written={db_info['written']} skipped={db_info['skipped']}")
 
     sector_info = build_sector_stats(records)
     print(f"[sectors] {sector_info}")
