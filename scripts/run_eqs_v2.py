@@ -10,6 +10,7 @@ import sys
 
 from modules.financial.batch import (
     KOSPI_TOP_50,
+    build_per_firm_dashboards,
     build_sector_stats,
     collect_batch,
     export_for_frontend,
@@ -56,6 +57,10 @@ def main() -> int:
                 extract_highlights(samsung.panel),
             )
             print(f"[firm dashboard] {single_path}")
+
+    # 3) 47개 기업 단독 dashboard (firm_<ticker>.html) — 통합 대시보드 오버레이용
+    dash_info = build_per_firm_dashboards(records)
+    print(f"[per-firm dashboards] written={dash_info['written']} skipped={dash_info['skipped']}")
 
     return 0
 

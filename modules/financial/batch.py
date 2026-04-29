@@ -350,27 +350,27 @@ def _compute_industry_percentiles(records: List[FirmRecord]) -> dict:
         groups.setdefault(sec, []).append(r)
 
     def _operating_margin(r: FirmRecord) -> Optional[float]:
-        l = r.panel.latest() if r.panel else None
-        if l is None or not l.revenue or l.operating_income is None:
+        latest = r.panel.latest() if r.panel else None
+        if latest is None or not latest.revenue or latest.operating_income is None:
             return None
-        return l.operating_income / l.revenue * 100
+        return latest.operating_income / latest.revenue * 100
 
     def _debt_to_equity(r: FirmRecord) -> Optional[float]:
-        l = r.panel.latest() if r.panel else None
+        latest = r.panel.latest() if r.panel else None
         if (
-            l is None
-            or l.total_equity is None
-            or l.total_equity <= 0
-            or l.total_liabilities is None
+            latest is None
+            or latest.total_equity is None
+            or latest.total_equity <= 0
+            or latest.total_liabilities is None
         ):
             return None
-        return l.total_liabilities / l.total_equity * 100
+        return latest.total_liabilities / latest.total_equity * 100
 
     def _ocf_to_revenue(r: FirmRecord) -> Optional[float]:
-        l = r.panel.latest() if r.panel else None
-        if l is None or not l.revenue or l.operating_cashflow is None:
+        latest = r.panel.latest() if r.panel else None
+        if latest is None or not latest.revenue or latest.operating_cashflow is None:
             return None
-        return l.operating_cashflow / l.revenue * 100
+        return latest.operating_cashflow / latest.revenue * 100
 
     def _eqs_total(r: FirmRecord) -> Optional[float]:
         return r.eqs.total if (r.eqs and r.eqs.total is not None) else None
@@ -385,7 +385,7 @@ def _compute_industry_percentiles(records: List[FirmRecord]) -> dict:
     out: dict = {}
     for sector, group in groups.items():
         size = len(group)
-        # 모든 firm에 sector·size 기록
+        # 모든 firm에 sector·size 기록 — metric별 valid 표본수는 _metric_size에 별도 기록
         for r in group:
             out[r.corp.corp_code] = {"_sector": sector, "_size": size}
         if size < 3:
@@ -393,17 +393,20 @@ def _compute_industry_percentiles(records: List[FirmRecord]) -> dict:
         for metric_name, extractor, direction in metrics:
             valid = [(r, extractor(r)) for r in group]
             valid = [(r, v) for r, v in valid if v is not None]
-            if len(valid) < 3:
-                continue
+            n = len(valid)
+            if n < 3:
+                continue  # 백분위 산출은 표본 ≥ 3 (n>1 필연 → 분모 0 dead code 제거)
             # direction='high' → 큰 값이 1등 (rank 0); 'low' → 작은 값이 1등
             valid_sorted = sorted(
                 valid, key=lambda x: x[1], reverse=(direction == "high")
             )
-            n = len(valid_sorted)
             for rank, (r, _) in enumerate(valid_sorted):
                 # rank 0(최상위) → 100, rank n-1(최하위) → 0
-                pct = round((n - 1 - rank) / (n - 1) * 100) if n > 1 else 50
+                pct = round((n - 1 - rank) / (n - 1) * 100)
                 out[r.corp.corp_code][metric_name] = pct
+            # metric별 valid 표본수 기록 — _size와 다를 수 있음 (특정 metric 결측 firm 존재 시)
+            for r, _ in valid:
+                out[r.corp.corp_code].setdefault("_metric_sizes", {})[metric_name] = n
     return out
 
 
@@ -420,6 +423,16 @@ def export_for_frontend(
     - modules: M1~M5 각 점수 + 한글 라벨 + note(산출 방식)
     - dart_url: 최신 사업보고서 링크
     - latest_year: 최근 재무 데이터(매출, 영업이익, 순이익, 영업CF 등)
+
+    ⚠️ 단위 컨벤션 (코드 전반에서 가정 — 변경 시 dashboard.html `_marketCapFmt`/
+       `_calcValuation` 동시 수정 필요):
+       - ``market_cap``: **원** (yfinance raw, ``r.market_cap`` 그대로)
+       - ``latest_year.*`` (revenue/operating_income/net_income/total_assets/
+         total_equity/operating_cashflow/investing_cashflow/financing_cashflow):
+         **억원** (``_to_eok``로 원→억 변환)
+       - ``history.*`` (revenue/operating_income/net_income/operating_cashflow):
+         **억원** (5년 array)
+       - ``percentile.*``: 정수 0~100 (단위 없음)
     """
     import json
 
