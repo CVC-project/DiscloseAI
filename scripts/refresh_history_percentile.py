@@ -15,14 +15,14 @@ from pathlib import Path
 
 from modules.financial.batch import (
     KOSPI_TOP_50,
+    build_per_firm_dashboards,
     build_sector_stats,
     collect_batch,
     export_for_frontend,
     persist_to_db,
     summarize,
 )
-from modules.financial.dashboard import build_dashboard, build_ranking_dashboard
-from modules.financial.translator import extract_highlights, translate_all
+from modules.financial.dashboard import build_ranking_dashboard
 
 EQS_JSON = Path("docs/prototype/eqs_data.json")
 
@@ -78,17 +78,9 @@ def main() -> int:
     rank_path = build_ranking_dashboard(records, year_range="2021-2025")
     print(f"[ranking] {rank_path}")
 
-    samsung = next((r for r in records if r.display_name == "삼성전자"), None)
-    if samsung and samsung.panel and samsung.eqs:
-        latest = samsung.panel.latest()
-        if latest is not None:
-            single_path = build_dashboard(
-                samsung.panel,
-                samsung.eqs,
-                translate_all(latest),
-                extract_highlights(samsung.panel),
-            )
-            print(f"[firm dashboard] {single_path}")
+    # 47개 기업 단독 dashboard (firm_<ticker>.html) — 통합 대시보드 오버레이용
+    dash_info = build_per_firm_dashboards(records)
+    print(f"[per-firm dashboards] written={dash_info['written']} skipped={dash_info['skipped']}")
 
     return 0
 

@@ -485,6 +485,40 @@ def export_for_frontend(
     return out_path
 
 
+def build_per_firm_dashboards(records: List[FirmRecord]) -> dict:
+    """각 기업별 단독 분석 HTML 생성 — 통합 대시보드 오버레이용.
+
+    파일명: ``firm_<ticker>.html`` (ticker 없으면 corp_code 사용).
+    자체완결형 — DATA를 인라인 임베드하므로 file:// 환경에서도 동작.
+    """
+    from .dashboard import build_dashboard
+    from .translator import extract_highlights, translate_all
+
+    written = 0
+    skipped = 0
+    for r in records:
+        if r.corp is None or r.panel is None or r.eqs is None or r.error is not None:
+            skipped += 1
+            continue
+        latest = r.panel.latest()
+        if latest is None:
+            skipped += 1
+            continue
+        ticker = r.corp.stock_code or r.corp.corp_code
+        try:
+            build_dashboard(
+                r.panel,
+                r.eqs,
+                translate_all(latest),
+                extract_highlights(r.panel),
+                output_name=f"firm_{ticker}.html",
+            )
+            written += 1
+        except Exception:  # noqa: BLE001 — 한 기업 실패가 전체를 막지 않도록
+            skipped += 1
+    return {"written": written, "skipped": skipped}
+
+
 def persist_to_db(records: List[FirmRecord]) -> dict:
     """배치 결과를 modules/financial/data/financial.db (financial_local)에 upsert.
 

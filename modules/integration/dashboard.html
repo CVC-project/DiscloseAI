@@ -141,6 +141,15 @@ canvas{display:block}
   <div id="panelInner" style="padding:20px"></div>
 </div>
 
+<!-- 풀스크린 기업분석 오버레이 — 기업 행성 클릭 시 firm_<ticker>.html 단독 분석 페이지를 iframe으로 띄움 -->
+<div id="fullAnalysis" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(8,12,28,0.92);backdrop-filter:blur(4px)">
+  <div style="position:absolute;top:14px;right:18px;display:flex;gap:8px;align-items:center;z-index:10001">
+    <span id="fullAnalysisTitle" style="color:#cbd5e1;font-size:13px;padding:6px 12px;background:rgba(15,23,42,0.7);border:1px solid #334155;border-radius:18px"></span>
+    <button onclick="closeFullAnalysis()" title="닫고 우주 화면으로 돌아가기" style="font-size:18px;line-height:1;width:36px;height:36px;border-radius:50%;border:1px solid #475569;background:rgba(15,23,42,0.85);color:#e2e8f0;cursor:pointer;font-weight:600">×</button>
+  </div>
+  <iframe id="fullAnalysisFrame" src="about:blank" style="position:absolute;inset:0;width:100%;height:100%;border:0;background:#0f172a"></iframe>
+</div>
+
 <div class="hud-main">
   <div class="hud-sub" id="hudSub"></div>
   <div class="hud-modes">
@@ -1077,8 +1086,39 @@ function filter(f,btn){flt=f;document.querySelectorAll('.hud-sub button').forEac
 function simAlert(){alertOn=true;alertSrc='삼성전자';document.getElementById('alert').classList.add('show');const src=nodes.find(n=>n.n==='삼성전자');if(src)for(let i=0;i<3;i++)setTimeout(()=>ripples.push({x:src.x,y:src.y,radius:src.sz*18,alpha:0.6}),i*400);setTimeout(()=>{alertOn=false;alertSrc=null;},10000);}
 
 // ===== PANEL: ANALYZE =====
+// 풀스크린 단독 분석 오버레이 — firm_<ticker>.html 로드.
+// docs/prototype/firm_<ticker>.html은 batch 단계에서 47개 기업분 사전 생성됨.
+// 자체완결형(데이터 인라인)이라 file:// 환경에서도 그대로 동작.
+function openFullAnalysis(n) {
+  const ticker = n.t;
+  if (!ticker) return false;
+  const url = `../../docs/prototype/firm_${ticker}.html`;
+  const overlay = document.getElementById('fullAnalysis');
+  const frame = document.getElementById('fullAnalysisFrame');
+  const title = document.getElementById('fullAnalysisTitle');
+  if (!overlay || !frame) return false;
+  title.textContent = `${n.n} (${ticker})`;
+  frame.src = url;
+  overlay.style.display = 'block';
+  // ESC로 닫기
+  document.addEventListener('keydown', _fullAnalysisEsc);
+  return true;
+}
+function closeFullAnalysis() {
+  const overlay = document.getElementById('fullAnalysis');
+  const frame = document.getElementById('fullAnalysisFrame');
+  if (overlay) overlay.style.display = 'none';
+  if (frame) frame.src = 'about:blank';  // iframe 메모리 해제
+  document.removeEventListener('keydown', _fullAnalysisEsc);
+}
+function _fullAnalysisEsc(e) {
+  if (e.key === 'Escape') closeFullAnalysis();
+}
+
 function showAnalyze(n) {
   window.__lastShownNode = n;  // 쉬운말 모드 토글 시 재렌더용
+  // 우선 풀스크린 오버레이 시도 (단독 분석 페이지) — 실패 시 기존 우측 패널 fallback
+  if (openFullAnalysis(n)) return;
   const p = document.getElementById('panel');
   const eqsCol=n.eqs>=70?'#4ade80':n.eqs>=50?'#fbbf24':'#f87171';
   const oiSign=String(n.oi).startsWith('-');

@@ -653,8 +653,15 @@ def build_dashboard(
     summary: List[str],
     highlights: List[Highlight],
     output_dir: Optional[str] = None,
+    *,
+    output_name: str = "financial_dashboard.html",
 ) -> str:
-    """HTML 대시보드 생성. 저장 경로 반환."""
+    """HTML 대시보드 생성. 저장 경로 반환.
+
+    ``output_name``: 기본 ``financial_dashboard.html``. 통합 대시보드의
+    기업분석 오버레이용으로 ticker별 ``firm_<ticker>.html`` 형태로 다수 생성
+    가능 (자체완결형 — file:// 환경에서도 그대로 동작).
+    """
     out_dir = output_dir or _DASHBOARD_DIR
     os.makedirs(out_dir, exist_ok=True)
     payload = _serialize(panel, eqs, summary, highlights)
@@ -672,7 +679,7 @@ def build_dashboard(
         grade=eqs.grade or "F",
         data_json=json.dumps(payload, ensure_ascii=False),
     )
-    out_path = os.path.join(out_dir, "financial_dashboard.html")
+    out_path = os.path.join(out_dir, output_name)
     with open(out_path, "w", encoding="utf-8") as fp:
         fp.write(html)
     return out_path
