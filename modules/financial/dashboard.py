@@ -142,7 +142,7 @@ _HTML_TEMPLATE = """<!doctype html>
     --nebula: #c084fc;
   }}
   * {{ box-sizing: border-box; }}
-  /* 갤럭시 배경 — 깊은 공간 + 다중 별빛(radial-gradient 점) + 부드러운 nebula 그라데이션 */
+  /* 갤럭시 배경 — 깊은 공간 + 강한 nebula + 은하수 대각선 sweep */
   body {{
     margin: 0; padding: 24px;
     color: var(--text);
@@ -150,34 +150,67 @@ _HTML_TEMPLATE = """<!doctype html>
     line-height: 1.5;
     min-height: 100vh;
     background:
-      radial-gradient(ellipse at 20% 30%, rgba(124, 108, 240, 0.18), transparent 55%),
-      radial-gradient(ellipse at 80% 70%, rgba(244, 114, 182, 0.10), transparent 55%),
-      radial-gradient(ellipse at 50% 100%, rgba(34, 211, 238, 0.08), transparent 60%),
+      /* 큰 nebula 구름 4개 — 인디고·마젠타·시안·골드 */
+      radial-gradient(ellipse 55% 45% at 15% 18%, rgba(124, 108, 240, 0.42), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 88% 75%, rgba(244, 114, 182, 0.30), transparent 65%),
+      radial-gradient(ellipse 45% 38% at 50% 100%, rgba(34, 211, 238, 0.22), transparent 65%),
+      radial-gradient(ellipse 28% 22% at 95% 8%, rgba(251, 191, 36, 0.15), transparent 70%),
+      /* 은하수 대각선 — 보라색 옅은 띠 */
+      linear-gradient(135deg, transparent 28%, rgba(167, 139, 250, 0.08) 42%, rgba(196, 181, 253, 0.14) 50%, rgba(167, 139, 250, 0.08) 58%, transparent 72%),
       var(--bg);
     background-attachment: fixed;
     position: relative;
     overflow-x: hidden;
   }}
-  /* 별빛 — 작은 점들 다수 배치. 슬로우 트윙클 */
+  /* 별빛 레이어 1 — 30개+ 점, 다양한 크기, 슬로우 트윙클 */
   body::before {{
     content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
     background-image:
-      radial-gradient(1px 1px at 8% 12%, #ffffff66, transparent 60%),
-      radial-gradient(1px 1px at 22% 78%, #ffffff44, transparent 60%),
-      radial-gradient(1.4px 1.4px at 35% 24%, #c4b5fd99, transparent 60%),
-      radial-gradient(1px 1px at 47% 67%, #ffffff66, transparent 60%),
-      radial-gradient(1px 1px at 58% 9%, #93c5fd88, transparent 60%),
-      radial-gradient(1.6px 1.6px at 71% 53%, #ffffff77, transparent 60%),
-      radial-gradient(1px 1px at 84% 33%, #fbcfe888, transparent 60%),
-      radial-gradient(1px 1px at 92% 88%, #ffffff66, transparent 60%),
-      radial-gradient(1.2px 1.2px at 14% 55%, #ffffff55, transparent 60%),
-      radial-gradient(1px 1px at 64% 88%, #c4b5fdaa, transparent 60%);
-    animation: starsTwinkle 8s ease-in-out infinite alternate;
+      /* 큰 별 (밝은) */
+      radial-gradient(2.2px 2.2px at 7% 11%, #fff, transparent 55%),
+      radial-gradient(2px 2px at 28% 83%, #fff, transparent 55%),
+      radial-gradient(2.4px 2.4px at 52% 31%, #c4b5fd, transparent 55%),
+      radial-gradient(2px 2px at 73% 60%, #fff, transparent 55%),
+      radial-gradient(2.2px 2.2px at 91% 17%, #fbcfe8, transparent 55%),
+      radial-gradient(2px 2px at 11% 71%, #93c5fd, transparent 55%),
+      /* 중간 별 */
+      radial-gradient(1.4px 1.4px at 18% 28%, #ffffffcc, transparent 60%),
+      radial-gradient(1.4px 1.4px at 33% 12%, #ffffffaa, transparent 60%),
+      radial-gradient(1.5px 1.5px at 41% 56%, #c4b5fdcc, transparent 60%),
+      radial-gradient(1.4px 1.4px at 47% 89%, #ffffffaa, transparent 60%),
+      radial-gradient(1.5px 1.5px at 62% 8%, #93c5fdcc, transparent 60%),
+      radial-gradient(1.4px 1.4px at 68% 38%, #ffffffaa, transparent 60%),
+      radial-gradient(1.5px 1.5px at 79% 75%, #fbcfe8cc, transparent 60%),
+      radial-gradient(1.4px 1.4px at 85% 48%, #ffffffaa, transparent 60%),
+      radial-gradient(1.4px 1.4px at 96% 64%, #ffffffaa, transparent 60%),
+      /* 작은 별 다수 */
+      radial-gradient(1px 1px at 4% 35%, #ffffff88, transparent 65%),
+      radial-gradient(1px 1px at 14% 91%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 21% 47%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 26% 22%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 36% 75%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 43% 18%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 49% 50%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 55% 73%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 58% 24%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 65% 92%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 71% 16%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 75% 45%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 81% 24%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 88% 81%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 94% 39%, #ffffff77, transparent 65%);
+    animation: starsTwinkle 7s ease-in-out infinite alternate;
   }}
   @keyframes starsTwinkle {{
-    0%   {{ opacity: 0.7; }}
+    0%   {{ opacity: 0.65; }}
     50%  {{ opacity: 1.0; }}
-    100% {{ opacity: 0.55; }}
+    100% {{ opacity: 0.5; }}
+  }}
+  /* 패널의 cosmic 글로우 가로 라인 (헤더 위 장식) */
+  .container::before {{
+    content: ''; display: block; height: 1px; margin: 0 auto 18px;
+    background: linear-gradient(90deg, transparent, var(--accent2), var(--accent), transparent);
+    opacity: 0.6;
   }}
   .container {{ max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }}
   /* 헤더 — 코스믹 그라데이션 라인 + 회사명 글로우 */
@@ -197,18 +230,30 @@ _HTML_TEMPLATE = """<!doctype html>
   .grid {{ display: grid; gap: 16px; margin-bottom: 16px; }}
   .grid-2 {{ grid-template-columns: 1fr 1fr; }}
   .grid-3 {{ grid-template-columns: 1fr 1fr 1fr; }}
-  /* 패널 — 글래스(반투명+블러) + 부드러운 indigo 글로우 보더 */
+  /* 패널 — 글래스(반투명+블러) + 인디고 글로우 보더 + 미세 코스믹 그라디언트 */
   .panel {{
-    background: var(--panel);
+    background:
+      linear-gradient(135deg, rgba(167,139,250,0.04), rgba(77,166,255,0.04) 60%, rgba(244,114,182,0.03)),
+      var(--panel);
     border: 1px solid var(--border);
     border-radius: 14px; padding: 20px;
-    backdrop-filter: blur(8px) saturate(1.2);
-    box-shadow: 0 1px 0 rgba(255,255,255,0.04) inset, 0 18px 40px rgba(0,0,0,0.35);
-    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    backdrop-filter: blur(12px) saturate(1.3);
+    -webkit-backdrop-filter: blur(12px) saturate(1.3);
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.06) inset,
+      0 0 0 1px rgba(167,139,250,0.08) inset,
+      0 18px 40px rgba(0,0,0,0.4),
+      0 0 24px rgba(77,166,255,0.06);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    position: relative;
   }}
   .panel:hover {{
     border-color: var(--border-strong);
-    box-shadow: 0 1px 0 rgba(255,255,255,0.06) inset, 0 18px 50px rgba(77,166,255,0.12);
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.08) inset,
+      0 0 0 1px rgba(167,139,250,0.15) inset,
+      0 22px 50px rgba(77,166,255,0.18),
+      0 0 32px rgba(167,139,250,0.18);
   }}
   .panel h2 {{
     margin: 0 0 12px; font-size: 16px;
@@ -518,10 +563,12 @@ new Chart(document.getElementById('radar'), {{
     datasets: [{{
       label: 'EQS',
       data: DATA.eqs.modules.map(m => m.score || 0),
-      backgroundColor: 'rgba(99, 102, 241, 0.25)',
-      borderColor: '#6366f1',
+      backgroundColor: 'rgba(77, 166, 255, 0.22)',
+      borderColor: '#4da6ff',
       borderWidth: 2,
-      pointBackgroundColor: '#8b5cf6',
+      pointBackgroundColor: '#a78bfa',
+      pointBorderColor: '#fff',
+      pointHoverRadius: 6,
     }}]
   }},
   options: {{
@@ -529,8 +576,8 @@ new Chart(document.getElementById('radar'), {{
     scales: {{
       r: {{
         min: 0, max: 100,
-        grid: {{ color: 'rgba(148, 163, 184, 0.2)' }},
-        angleLines: {{ color: 'rgba(148, 163, 184, 0.2)' }},
+        grid: {{ color: 'rgba(167, 139, 250, 0.18)' }},
+        angleLines: {{ color: 'rgba(167, 139, 250, 0.22)' }},
         pointLabels: {{ color: '#e2e8f0', font: {{ size: 12 }} }},
         ticks: {{ color: '#94a3b8', backdropColor: 'transparent', stepSize: 25 }}
       }}
@@ -611,9 +658,9 @@ new Chart(document.getElementById('ts'), {{
   data: {{
     labels: yrs,
     datasets: [
-      {{label: '매출', data: DATA.years.map(y => toEok(y.revenue)), borderColor: '#06b6d4', backgroundColor: 'transparent', tension: 0.3}},
-      {{label: '영업현금흐름', data: DATA.years.map(y => toEok(y.operating_cashflow)), borderColor: '#22c55e', backgroundColor: 'transparent', tension: 0.3}},
-      {{label: '순이익', data: DATA.years.map(y => toEok(y.net_income)), borderColor: '#eab308', backgroundColor: 'transparent', tension: 0.3}},
+      {{label: '매출', data: DATA.years.map(y => toEok(y.revenue)), borderColor: '#4da6ff', backgroundColor: 'rgba(77,166,255,0.08)', tension: 0.35, borderWidth: 2.2, pointBackgroundColor: '#4da6ff', pointRadius: 3, fill: true}},
+      {{label: '영업현금흐름', data: DATA.years.map(y => toEok(y.operating_cashflow)), borderColor: '#34d399', backgroundColor: 'rgba(52,211,153,0.06)', tension: 0.35, borderWidth: 2.2, pointBackgroundColor: '#34d399', pointRadius: 3, fill: true}},
+      {{label: '순이익', data: DATA.years.map(y => toEok(y.net_income)), borderColor: '#fbbf24', backgroundColor: 'rgba(251,191,36,0.06)', tension: 0.35, borderWidth: 2.2, pointBackgroundColor: '#fbbf24', pointRadius: 3, fill: true}},
     ]
   }},
   options: {{
