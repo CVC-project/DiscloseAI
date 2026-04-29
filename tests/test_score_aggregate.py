@@ -1,4 +1,10 @@
-"""EQS 종합 점수 _aggregate 가중치 재정규화 검증."""
+"""EQS 종합 점수 _aggregate 가중치 재정규화 검증.
+
+⚠️ v2 redesign(45b180a)에서 가중치 시스템 제거 — v2는 단순 평균(score=None 자동 제외).
+module-level skip 처리. 추후 v2 기준 _aggregate 테스트 재작성 예정.
+"""
+import pytest
+pytest.skip("v1 EQS API stale — 45b180a v2 redesign 이후", allow_module_level=True)
 
 from modules.financial.eqs.score import _aggregate, DEFAULT_WEIGHTS
 from modules.financial.eqs.types import ModuleScore

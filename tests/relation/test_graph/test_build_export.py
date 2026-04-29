@@ -2,6 +2,11 @@
 
 from __future__ import annotations
 
+import pytest
+
+# networkx는 graph 빌드용 — 미설치 환경에서는 collection skip.
+pytest.importorskip("networkx")
+
 import json
 
 from modules.relation.graph import build, export

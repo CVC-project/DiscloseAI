@@ -23,9 +23,14 @@ def test_get_sector_samsung():
     assert get_sector("삼성전자") == "반도체/전자부품"
 
 
-def test_get_sector_preferred_stock_same_as_common():
-    """우선주는 본주와 같은 섹터."""
-    assert get_sector("삼성전자우") == get_sector("삼성전자")
+def test_get_sector_preferred_stock_excluded():
+    """우선주(삼성전자우 등)는 본주와 재무 동일하므로 v2에서 universe·SECTORS 모두 제외.
+
+    v1: 우선주를 본주와 같은 섹터로 취급
+    v2: 본주 1개만 분석 (우선주는 None 반환)
+    """
+    assert get_sector("삼성전자우") is None
+    assert get_sector("삼성전자") == "반도체/전자부품"
 
 
 def test_get_sector_financial():

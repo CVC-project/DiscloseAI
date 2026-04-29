@@ -1,6 +1,10 @@
 """VKOSPI 수집 및 변동성 필터링 테스트"""
 
 import pytest
+
+# pykrx는 ad-hoc 의존(KRX 비공식 API 래퍼) — 미설치 환경에서는 collection skip.
+pytest.importorskip("pykrx")
+
 from datetime import date, timedelta
 from unittest.mock import patch, MagicMock
 import pandas as pd

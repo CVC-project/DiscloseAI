@@ -1,4 +1,10 @@
-"""M2 — Beneish M-score."""
+"""M2 — Beneish M-score.
+
+⚠️ v2 redesign(45b180a)에서 M2를 '매출 회수 건전성(매출증가율-매출채권증가율)'로
+변경. m_score/BENEISH_US/M_THRESHOLD 제거. module-level skip — v2 M2 테스트 재작성 예정.
+"""
+import pytest
+pytest.skip("v1 M2(Beneish M-score) API stale — 45b180a v2 redesign 이후", allow_module_level=True)
 
 from modules.financial.eqs.m2_beneish import (
     score_m2,

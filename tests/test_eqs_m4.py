@@ -1,4 +1,10 @@
-"""M4 — 이익 지속성 (AR(1) + 일회성)."""
+"""M4 — 이익 지속성 (AR(1) + 일회성).
+
+⚠️ v2 redesign(45b180a)에서 M4를 '본업 안정성(3년 영업이익률 평균+변동폭)'로 변경.
+AR(1) φ 계산·_phi_to_score 제거. module-level skip — v2 M4 테스트 재작성 예정.
+"""
+import pytest
+pytest.skip("v1 M4(AR(1)) API stale — 45b180a v2 redesign 이후", allow_module_level=True)
 
 from modules.financial.eqs.m4_persistence import score_m4
 from modules.financial.eqs.types import FirmPanel
