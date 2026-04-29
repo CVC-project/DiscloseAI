@@ -1379,23 +1379,22 @@ function _percentileBadge(pct, sectorSize) {
   const color = topPct <= 30 ? '#4ade80' : topPct <= 70 ? '#fbbf24' : '#f87171';
   return `<span style="font-size:10px;padding:1px 5px;border-radius:3px;background:${color}20;color:${color};font-weight:500;margin-left:6px" title="동종업계(${sectorSize}개사) 내 백분위">업계 상위 ${topPct}%</span>`;
 }
-// ④ PER · PBR · ROE 산출 — 시총(원) / 순이익·자본(억원) 기반.
-// 결과: 비율값, 색상 코드, 해석 한 줄. 데이터 부족 시 null 필드.
+// ④ PER · PBR · ROE 산출 — 시총(원) / 순이익·자본(억원 raw) 기반.
+// 원본 raw 값을 사용 (n.ni·n.eq는 표시용 반올림 — 정밀도 손실 회피).
 function _calcValuation(n) {
   const mc = n.market_cap;          // 원
-  const ni = n.ni;                  // 조 단위 string ("1.0", "-0.5", "-")
-  const eq = n.eq;                  // 조 단위 정수
-  const niTril = (ni && ni !== '-') ? parseFloat(ni) : null;
-  const eqTril = (eq != null && eq !== '-') ? parseFloat(eq) : null;
+  const ni = n.net_income_raw;      // 억원 (raw)
+  const eq = n.equity_raw;          // 억원 (raw)
   const out = { per: null, pbr: null, roe: null };
-  if (mc != null && niTril != null && niTril > 0) {
-    out.per = +(mc / 1e12 / niTril).toFixed(1);  // 시총조 ÷ 순이익조
+  // 시총(원) → 억원 변환은 / 1e8. PER = 시총_억 / 순이익_억.
+  if (mc != null && ni != null && ni > 0) {
+    out.per = +(mc / 1e8 / ni).toFixed(1);
   }
-  if (mc != null && eqTril != null && eqTril > 0) {
-    out.pbr = +(mc / 1e12 / eqTril).toFixed(2);
+  if (mc != null && eq != null && eq > 0) {
+    out.pbr = +(mc / 1e8 / eq).toFixed(2);
   }
-  if (niTril != null && eqTril != null && eqTril > 0) {
-    out.roe = +(niTril / eqTril * 100).toFixed(1);
+  if (ni != null && eq != null && eq > 0) {
+    out.roe = +(ni / eq * 100).toFixed(1);
   }
   return out;
 }
@@ -1516,6 +1515,9 @@ function _eqsNarration(idx, score) {
       // 시계열(sparkline) + 동종업계 백분위 (financial 모듈에서 산출)
       n.history = fin.history || null;
       n.percentile = fin.percentile || null;
+      // PER·PBR·ROE 산출용 원본 값 (억원 raw) — _trillionFmt 반올림 손실 회피
+      n.net_income_raw = fin.net_income;       // 억원
+      n.equity_raw = fin.total_equity;          // 억원
     } else {
       n.has_financial = false;
     }
