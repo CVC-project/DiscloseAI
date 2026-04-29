@@ -91,6 +91,50 @@
     background: linear-gradient(90deg, transparent, var(--accent2), var(--accent), transparent);
     opacity: 0.6;
   }
+  /* === 코스믹 장식: 떠다니는 행성 + 슈팅 스타 === */
+  .cosmic-decor { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .planet { position: absolute; opacity: 0.85; filter: drop-shadow(0 0 18px rgba(167,139,250,0.30)); }
+  .planet-1 { top: 5%; right: 4%; width: 140px; height: 120px; animation: floatA 22s ease-in-out infinite; }
+  .planet-2 { bottom: 7%; left: 3%; width: 100px; height: 100px; animation: floatB 28s ease-in-out infinite; }
+  .planet-3 { top: 52%; right: 7%; width: 60px; height: 60px; animation: floatA 25s ease-in-out infinite; opacity: 0.7; }
+  @keyframes floatA {
+    0%, 100% { transform: translateY(0) rotate(0); }
+    50%      { transform: translateY(-14px) rotate(2deg); }
+  }
+  @keyframes floatB {
+    0%, 100% { transform: translateY(0) rotate(0); }
+    50%      { transform: translateY(12px) rotate(-2deg); }
+  }
+  /* 슈팅 스타 — 사선 streak. 18초 주기로 한 번 가로지름 */
+  .shooting-star {
+    position: absolute; top: 14%; left: -10%;
+    width: 140px; height: 1.5px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.95) 60%, rgba(196,181,253,0.9) 90%, transparent);
+    filter: drop-shadow(0 0 8px rgba(255,255,255,0.85));
+    border-radius: 1px;
+    transform: rotate(22deg);
+    animation: shoot 14s linear infinite;
+    opacity: 0;
+  }
+  .shooting-star.delay { animation-delay: 7s; top: 38%; }
+  @keyframes shoot {
+    0%  { opacity: 0; transform: translate(0, 0) rotate(22deg); }
+    2%  { opacity: 1; }
+    9%  { opacity: 1; transform: translate(110vw, 45vh) rotate(22deg); }
+    10% { opacity: 0; transform: translate(110vw, 45vh) rotate(22deg); }
+    100%{ opacity: 0; transform: translate(110vw, 45vh) rotate(22deg); }
+  }
+  /* 헤일로가 있는 밝은 별 — 코어 + 부드러운 후광 */
+  body::after {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image:
+      radial-gradient(4px 4px at 13% 24%, #fff 0%, rgba(255,255,255,0.4) 25%, transparent 70%),
+      radial-gradient(4.5px 4.5px at 76% 13%, #c4b5fd 0%, rgba(196,181,253,0.4) 25%, transparent 70%),
+      radial-gradient(5px 5px at 39% 86%, #93c5fd 0%, rgba(147,197,253,0.35) 25%, transparent 70%),
+      radial-gradient(4px 4px at 89% 67%, #fbcfe8 0%, rgba(251,207,232,0.35) 25%, transparent 70%),
+      radial-gradient(4px 4px at 6% 64%, #fde68a 0%, rgba(253,230,138,0.3) 25%, transparent 70%);
+    animation: starsTwinkle 9s ease-in-out infinite alternate-reverse;
+  }
   .container { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
   /* 헤더 — 코스믹 그라데이션 라인 + 회사명 글로우 */
   header {
@@ -307,6 +351,54 @@
 </style>
 </head>
 <body>
+<!-- 갤럭시 장식: 떠다니는 행성 + 슈팅 스타 (배경 레이어, 콘텐츠와 무관) -->
+<div class="cosmic-decor" aria-hidden="true">
+  <!-- Planet 1: 시안/인디고 가스자이언트 with ring (top-right) -->
+  <svg class="planet planet-1" viewBox="0 0 140 120" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="pg1" cx="38%" cy="38%">
+        <stop offset="0%" stop-color="#bae6fd"/>
+        <stop offset="55%" stop-color="#3b82f6"/>
+        <stop offset="100%" stop-color="#0c1b3a"/>
+      </radialGradient>
+      <linearGradient id="pg1ring" x1="0%" y1="50%" x2="100%" y2="50%">
+        <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.05"/>
+        <stop offset="50%" stop-color="#a78bfa" stop-opacity="0.55"/>
+        <stop offset="100%" stop-color="#a78bfa" stop-opacity="0.05"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="70" cy="60" rx="62" ry="9" fill="none" stroke="url(#pg1ring)" stroke-width="2.5" transform="rotate(-18 70 60)"/>
+    <ellipse cx="70" cy="60" rx="62" ry="9" fill="none" stroke="#c4b5fd" stroke-opacity="0.15" stroke-width="6" transform="rotate(-18 70 60)"/>
+    <circle cx="70" cy="60" r="28" fill="url(#pg1)"/>
+    <circle cx="60" cy="52" r="5" fill="#bae6fd" opacity="0.35"/>
+  </svg>
+  <!-- Planet 2: 마젠타/보라 작은 행성 (bottom-left) -->
+  <svg class="planet planet-2" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="pg2" cx="36%" cy="36%">
+        <stop offset="0%" stop-color="#fbcfe8"/>
+        <stop offset="55%" stop-color="#c026d3"/>
+        <stop offset="100%" stop-color="#3b0764"/>
+      </radialGradient>
+    </defs>
+    <circle cx="50" cy="50" r="32" fill="url(#pg2)" filter="drop-shadow(0 0 18px rgba(192,38,211,0.45))"/>
+    <ellipse cx="44" cy="42" rx="6" ry="4" fill="#fbcfe8" opacity="0.4"/>
+  </svg>
+  <!-- Planet 3: 골드/오렌지 작은 행성 with ring (mid-right) -->
+  <svg class="planet planet-3" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="pg3" cx="35%" cy="35%">
+        <stop offset="0%" stop-color="#fef3c7"/>
+        <stop offset="55%" stop-color="#f59e0b"/>
+        <stop offset="100%" stop-color="#451a03"/>
+      </radialGradient>
+    </defs>
+    <ellipse cx="40" cy="40" rx="36" ry="6" fill="none" stroke="#fcd34d" stroke-opacity="0.45" stroke-width="1.6" transform="rotate(15 40 40)"/>
+    <circle cx="40" cy="40" r="16" fill="url(#pg3)"/>
+  </svg>
+  <span class="shooting-star"></span>
+  <span class="shooting-star delay"></span>
+</div>
 <div class="container">
   <header>
     <div>
