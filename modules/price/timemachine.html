@@ -92,8 +92,7 @@
     .chip{background:var(--card);border:1px solid var(--border);color:var(--text);
       padding:5px 13px;border-radius:999px;cursor:pointer;font-size:0.78rem;font-weight:600;transition:.15s;white-space:nowrap;}
     .chip:hover{border-color:var(--blue);color:var(--blue2);}
-    .chip.cta{background:linear-gradient(135deg,#3b82f6,#6366f1);border-color:transparent;color:#fff;}
-    .chip.cta:hover{opacity:.88;}
+    .chips-label{font-size:0.71rem;color:var(--muted);margin-bottom:5px;}
     .input-row{display:flex;gap:8px;align-items:flex-end;}
     .chat-input{flex:1;background:var(--card);border:1px solid var(--border);color:var(--text);
       border-radius:10px;padding:10px 13px;font-size:0.875rem;resize:none;outline:none;
@@ -105,7 +104,14 @@
       width:42px;height:42px;border-radius:10px;cursor:pointer;font-size:1rem;transition:.15s;flex-shrink:0;}
     .send-btn:hover:not(:disabled){opacity:.85;}
     .send-btn:disabled{opacity:.3;cursor:default;}
-    .chips-label{font-size:0.71rem;color:var(--muted);margin-bottom:5px;}
+    .action-row{display:flex;gap:8px;margin-top:8px;}
+    .btn-hint{flex:1;background:var(--card);border:1px solid var(--border);color:var(--text);
+      padding:8px;border-radius:8px;cursor:pointer;font-size:0.8rem;font-weight:600;transition:.15s;}
+    .btn-hint:hover:not(:disabled){border-color:var(--blue);color:var(--blue2);}
+    .btn-hint:disabled{opacity:.4;cursor:default;}
+    .btn-reveal{flex:1;background:var(--card);border:1px solid var(--border);color:var(--text);
+      padding:8px;border-radius:8px;cursor:pointer;font-size:0.8rem;font-weight:600;transition:.15s;}
+    .btn-reveal:hover{border-color:var(--green);color:var(--green);}
 
     /* ── RESULT ── */
     #s-result{align-items:center;padding:40px 24px;text-align:center;}
@@ -146,8 +152,8 @@
   <button class="btn-primary" onclick="showSelect()">시작하기 →</button>
   <div class="feats">
     <div class="feat"><div class="fi">📊</div><strong>실제 데이터</strong>KRX 검증된 주가 기반</div>
-    <div class="feat"><div class="fi">💬</div><strong>자유 대화</strong>직접 입력 가능</div>
-    <div class="feat"><div class="fi">💡</div><strong>교훈 공개</strong>당신이 놓친 변수</div>
+    <div class="feat"><div class="fi">💬</div><strong>자유 대화</strong>Gemini AI와 대화</div>
+    <div class="feat"><div class="fi">💡</div><strong>힌트 제공</strong>모르면 AI가 안내</div>
   </div>
 </div>
 
@@ -166,21 +172,25 @@
       <div class="hdr-co" id="h-co"></div>
       <div class="hdr-era" id="h-era"></div>
     </div>
-    <div class="turn-badge" id="h-turn">Turn 1 / 4</div>
+    <div class="turn-badge" id="h-turn">대화 시작</div>
   </div>
-  <div class="prog-bar"><div class="prog-fill" id="prog" style="width:25%"></div></div>
+  <div class="prog-bar"><div class="prog-fill" id="prog" style="width:0%"></div></div>
   <div class="chat-msgs" id="msgs"></div>
   <div class="input-area" id="input-area" style="display:none">
-    <div id="chips-wrap" style="display:none">
-      <div class="chips-label" id="chips-label">빠른 선택</div>
-      <div class="chips" id="chips"></div>
+    <div id="hints-wrap" style="display:none">
+      <div class="chips-label">💡 이런 거 물어보세요</div>
+      <div class="chips" id="hint-chips"></div>
     </div>
     <div class="input-row">
       <textarea class="chat-input" id="chat-input" rows="1"
-        placeholder="직접 입력하거나 위 버튼을 눌러주세요"
+        placeholder="공시에 대해 자유롭게 질문해보세요"
         oninput="autoResize(this)"
         onkeydown="handleKey(event)"></textarea>
       <button class="send-btn" id="send-btn" onclick="submitInput()" title="전송">↑</button>
+    </div>
+    <div class="action-row">
+      <button class="btn-hint" id="hint-btn" onclick="fetchHints()">💡 힌트</button>
+      <button class="btn-reveal" onclick="confirmResult()">📊 결과 보기</button>
     </div>
   </div>
 </div>
@@ -209,210 +219,96 @@
 </div>
 
 <script>
+// ── CONFIG ────────────────────────────────────────────────────────────────
+const GEMINI_KEY = 'AIzaSyBj1VUfHfjh3-bS5gToqvc-KUe1ryML8yk';
+const GEMINI_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
+
 // ── SCENARIOS ─────────────────────────────────────────────────────────────
 const SC = [
   {
     id:1, company:"LG화학", ticker:"051910",
     era:"2020년 9월 17일", category:"물적분할", badge:"🧪", diff:"중급",
     desc:"배터리 사업부 물적분할·별도 상장 추진 공시",
+    ctx:`📊 현재 배경:
+- 올해 전기차 테마로 연초 대비 +280% 상승 (주가 약 82만 원)
+- 테슬라·GM·현대차에 배터리 독점 공급 중
+- LG화학 시총의 약 65%가 배터리 사업 가치로 분석됨
+- 물적분할 시 기존 주주는 LG에너지솔루션 주식을 직접 받지 못하고 LG화학을 통해 간접 보유하게 됨`,
+    background:"LG화학 배터리 사업부 물적분할로 LG에너지솔루션 설립. 당시 LG화학 주가 약 82만 원, 연초 대비 +290%. 배터리 사업이 시총의 약 65% 차지. 물적분할 후 모회사는 자회사 지분만 보유하는 지주회사 구조로 전환됨. 한국 시장에서 지주회사에는 통상 20~40% 할인 적용.",
     answer:"악재", changePct:-11.2, kospiPct:-6.7, window:"공시 후 5거래일",
     insight:"모회사 디스카운트의 속도. 시장은 배터리가 분리되는 순간 즉시 LG화학에 할인을 적용했습니다. 이후 LG에너지솔루션이 2022년 1월 시총 100조로 상장됐지만, LG화학은 물적분할 전 주가를 회복하지 못했습니다.",
     lesson:"물적분할은 회사 자산 자체는 사라지지 않지만 기존 주주의 직접 권리가 희석된다. 한국 시장에서 물적분할 공시는 단기 악재 패턴이 반복된다.",
-    t1:`2020년 9월 17일 오전, 당신은 LG화학 주주입니다.
-
-📄 공시 알림:
-"LG화학, 배터리 사업부를 물적분할 → 'LG에너지솔루션'으로 별도 상장 추진"
-
-올해 전기차 테마 덕분에 LG화학은 연초 대비 +280% 상승한 상태입니다. 그 핵심 동력이 바로 이 배터리 사업부죠.
-
-📊 현재 배경:
-- 테슬라·GM·현대차 배터리 공급 중
-- LG화학 시총의 약 65%가 배터리 가치라는 분석
-- 전기차 전환 가속으로 배터리 수주 급증
-
-이 공시를 보고 어떤 결정을 내리시겠어요?`,
-    t1_chips:['수혜 예상','악재 예상','중립'],
-    t2:{
-      "pos":`배터리 성장성을 긍정적으로 보셨군요.
-
-한 가지 중요한 질문을 드려야 할 것 같아요.
-
-물적분할이 되면 LG에너지솔루션은 LG화학의 자회사가 됩니다. 기존 LG화학 주주는 LG에너지솔루션 주식을 직접 받지 못합니다. LG화학을 통해 간접적으로만 보유하게 되죠.
-
-지금까지 LG화학 주가에 프리미엄을 줬던 '배터리 직접 보유'라는 메리트가 사라지는 겁니다.
-
-시장은 이 구조 변화를 어떻게 가격에 반영할까요?`,
-      "neg":`날카로운 판단입니다. 이미 물적분할의 핵심 문제를 짚으셨군요.
-
-조금 더 구체적으로 생각해볼게요.
-
-LG화학 주가에서 배터리가 차지하는 비중이 얼마나 될까요? 당시 애널리스트들은 시총의 60~70%가 배터리 가치라고 추정했습니다.
-
-그 자산이 자회사로 분리되면, LG화학은 사실상 무엇이 되는 건가요?
-
-→ 석유화학 사업 + 배터리 지분 보유 지주사
-→ 지주사에는 보통 20~40% 할인이 적용됩니다
-
-이 할인이 얼마나 클 것 같으세요?`,
-      "neu":`신중한 판단이군요. 양면을 다 보고 계시는 것 같아요.
-
-정리해드릴게요:
-
-🟢 긍정론: 배터리를 독립시켜 전문 투자 유치 → 성장 가속
-🔴 부정론: 기존 주주는 배터리 직접 권리 상실 → 자회사 할인 발생
-
-그런데 한 가지 여쭤볼게요.
-
-지금 LG화학 주가(약 82만 원)에는 배터리 프리미엄이 이미 충분히 반영된 상태입니다. 그 프리미엄이 분리된다면, 주가는 어떻게 될까요?`
-    },
-    t2_chips:['자회사 할인 효과가 크겠네요','그래도 배터리 성장이 반영될 것 같습니다'],
-    t3:`추가 정보를 드릴게요.
-
-📊 당시 LG화학 주가: 약 82만 원 (연초 대비 +290%)
-
-이 주가에는 전기차·배터리 프리미엄이 이미 충분히 반영된 상태입니다.
-
-물적분할 후 시장의 논리:
-1. 배터리 직접 보유 프리미엄 → LG화학에서 LG에너지솔루션으로 이전
-2. LG화학 = 석유화학 + 배터리 지분 보유 지주사로 재평가
-3. 한국 시장에서 지주사에는 보통 20~40% 할인 적용
-
-이 정보를 보고나서도 판단이 같으신가요?`,
-    t3_chips:['판단을 바꾸겠습니다','원래 판단을 유지합니다']
+    hints:["물적분할이 기존 주주에게 불리한 이유는?","지주사 할인이란 뭔가요?","배터리 비중이 65%면 주가에 어떤 영향?","한국에서 비슷한 물적분할 사례가 있나요?"],
   },
   {
     id:2, company:"SK하이닉스", ticker:"000660",
     era:"2020년 10월 20일", category:"대형M&A", badge:"💾", diff:"고급",
     desc:"인텔 낸드 플래시 사업부 10.2조 원 인수 결정 공시",
+    ctx:`📊 현재 배경:
+- 인수 금액 10.2조 원 ≈ 2020년 예상 영업이익(약 5조 원)의 2배
+- 인수 후 낸드 점유율 11% → 약 20% 예상 (삼성 33%, 키옥시아 20%)
+- 현재 낸드 가격은 2018년 고점 대비 40% 하락한 상태
+- 코로나 이후 반도체 수요는 회복세이나, 낸드 가격 반등 시점은 여전히 불확실`,
+    background:"SK하이닉스가 인텔의 낸드·SSD 사업부를 약 90억 달러(10.2조 원)에 인수. 당시 낸드 점유율 약 11%, 인수 후 약 20% 예상. 2020년 예상 영업이익 약 5조 원(인수금액 ≈ 2년치 영업이익). 낸드 가격은 2018년 고점 대비 40% 낮은 상태. AI·HBM 수요 폭발은 당시 시장이 전혀 예상하지 못한 변수.",
     answer:"악재", changePct:-5.1, kospiPct:-0.7, window:"공시 후 5거래일",
     insight:"AI 수요 폭발은 당시 아무도 알 수 없었습니다. 2024년 SK하이닉스는 HBM·낸드 수혜로 역대 최고 실적을 기록했고, 이 인수는 '최고의 M&A' 중 하나로 재평가됩니다. 단기 악재가 장기 최고의 투자였던 사례입니다.",
     lesson:"대형 M&A는 단기 재무 부담으로 주가가 하락해도 장기적으로 완전히 다른 결과를 낳을 수 있다. '불황에 사는' 전략의 진짜 가치는 3~5년 후에 드러난다.",
-    t1:`2020년 10월 20일 오전, 당신은 SK하이닉스 주주입니다.
-
-📄 공시 알림:
-"SK하이닉스, 인텔의 낸드 플래시·SSD 사업부를 약 90억 달러(약 10.2조 원)에 인수 결정"
-
-코로나 이후 회복세이지만, 낸드 가격은 2018년 고점 대비 여전히 40% 낮습니다.
-
-📊 현재 배경:
-- SK하이닉스 낸드 점유율: 약 11% (삼성 33%, 키옥시아 20%)
-- 인수 완료 시 점유율 약 20%로 상승 예상
-- 10.2조 원 ≈ 2020년 예상 영업이익의 약 2배
-
-이 공시를 보고 어떤 결정을 내리시겠어요?`,
-    t1_chips:['수혜 예상','악재 예상','중립'],
-    t2:{
-      "pos":`장기 성장성을 보셨군요.
-
-단기 시장 반응도 함께 생각해볼게요.
-
-10.2조 원은 현금으로 지급됩니다. SK하이닉스의 2020년 예상 영업이익이 약 5조 원인데, 이 딜 하나로 2년치 이익을 한 번에 지출하는 셈이에요.
-
-그리고 지금은 낸드 가격 바닥 구간입니다. "왜 하필 싸게 팔 때 비싸게 사느냐"는 시각도 있어요.
-
-재무 부담과 타이밍 리스크, 어떻게 보세요?`,
-      "neg":`10.2조 원이라는 금액이 부담스러우셨군요.
-
-좀 더 생각해볼 부분이 있어요.
-
-이 인수가 나온 시점이 낸드 가격 저점입니다. 불황에 경쟁사 자산을 사는 건 고전적인 M&A 전략이기도 합니다.
-
-낸드 시장 점유율이 11% → 20%로 뛰는 것, 이건 장기적으로 어떤 의미일까요? 메모리는 호황기에 점유율이 곧 실적입니다.
-
-그래도 단기 재무 부담이 더 크다고 보세요?`,
-      "neu":`양면을 다 보고 계시네요.
-
-정리해드릴게요:
-
-🟢 긍정론: 낸드 저점 매수 + 점유율 2배 도약 → 호황기 대비
-🔴 부정론: 10.2조 현금 지출 → 단기 재무 부담 + 낸드 반등 시점 불확실
-
-한 가지 힌트를 드릴게요. 2022~2024년에 어떤 일이 일어날지 알고 있다면 판단이 달라질까요?`
-    },
-    t2_chips:['단기 재무 부담이 더 큽니다','장기 점유율 확보가 더 중요합니다'],
-    t3:`추가 정보를 드릴게요.
-
-2020년 10월, 세상은 아직 'AI 대전환'이 올 줄 몰랐습니다.
-
-ChatGPT는 2년 뒤이고, GPU 서버에 HBM·낸드가 이렇게 많이 필요할 줄은 아무도 예상 못 했어요.
-
-즉, 이 인수를 평가할 때 전제가 '기존 메모리 수요'였는데 실제로는 완전히 다른 AI 수요가 터졌습니다.
-
-이 힌트가 있어도, 2020년의 투자자로서 단기 주가 판단이 바뀔까요?`,
-    t3_chips:['판단을 바꾸겠습니다','원래 판단을 유지합니다']
+    hints:["영업이익 2배 규모 인수, 재무 부담은?","낸드 점유율이 2배가 되면 어떤 효과?","M&A 발표 후 주가가 내리는 경우가 많나요?","불황에 자산을 사는 게 왜 좋은 전략인가요?"],
   },
   {
     id:3, company:"HD현대중공업", ticker:"009540",
     era:"2026년 4월 22일", category:"대형수주", badge:"⚓", diff:"초급",
     desc:"미국 데이터센터 발전설비 6,200억 원 수주 공시",
+    ctx:`📊 현재 배경:
+- 수주액 6,200억 원 ≈ 연간 매출의 약 6%
+- 상대방: 미국 에너지 인프라 기업 에이페리온 에너지 그룹(AEG)
+- 제품: 힘센엔진 (선박용 엔진을 육상 발전용으로 전용한 제품)
+- AI 데이터센터 전력 수요 폭증으로 미국 전력망 부족 심화 중`,
+    background:"HD현대중공업이 미국 에너지 인프라 기업 에이페리온 에너지 그룹(AEG)으로부터 데이터센터용 발전설비를 6,200억 원에 수주. 연간 매출의 약 6% 규모. 힘센엔진(선박용 엔진의 육상 발전 전용 제품) 활용. AI 데이터센터 전력 수요 급증, 미국 전력망 부족 심화 상황. 조선사에서 AI 에너지 인프라 플레이어로의 섹터 리레이팅 내러티브.",
     answer:"수혜", changePct:12.6, kospiPct:2.4, window:"공시 후 3거래일",
     insight:"섹터 리레이팅 내러티브. 시장은 단순히 6,200억 원의 금액에 반응한 게 아니라 'HD현대중공업 = AI 에너지 인프라 플레이어'라는 새로운 스토리에 반응했습니다. 수익보다 내러티브가 먼저 가격에 반영된 사례입니다.",
     lesson:"대형 수주는 금액 자체보다 '어느 시장에 진입했는가'라는 내러티브가 주가를 더 크게 움직이는 경우가 많다. 섹터 리레이팅 기대가 실적보다 먼저 반영된다.",
-    t1:`2026년 4월 22일 아침, 당신은 HD현대중공업 주주입니다.
-
-📄 공시 알림:
-"단일판매·공급계약 체결 — 미국향 데이터센터 발전설비 6,200억 원 수주"
-
-상대방: 미국 에너지 인프라 기업 '에이페리온 에너지 그룹(AEG)'
-HD현대중공업 연간 매출의 약 6% 규모입니다.
-
-📊 현재 배경:
-- AI 데이터센터 전력 수요 폭증 중
-- 미국 전력망, AI 수요 감당 부족 심화
-- '힘센엔진': 선박용 엔진을 육상 발전으로 전용한 제품
-
-이 공시를 보고 어떤 결정을 내리시겠어요?`,
-    t1_chips:['수혜 예상','악재 예상','중립'],
-    t2:{
-      "pos":`AI 인프라 테마와 연결하셨군요.
-
-한 가지 더 짚어볼까요?
-
-HD현대중공업은 조선사입니다. 발전설비는 기존 주력 사업이 아니에요. 신규 시장 진입인 셈이죠.
-
-투자자들은 이걸 두 가지로 볼 수 있습니다:
-
-📈 "조선사가 AI 인프라 시장에 진입!" → 섹터 리레이팅 기대
-📉 "본업 외 신사업, 실적 기여까지 시간 필요" → 신중 반응
-
-시장은 어느 쪽으로 기울 것 같으세요?`,
-      "neg":`신중한 시각이네요.
-
-수주 공시는 보통 주가에 긍정적이기 때문에 악재라고 보신 이유가 궁금합니다.
-
-상대방인 AEG(에이페리온 에너지 그룹)는 한국 시장에서 잘 알려지지 않은 미국 기업입니다. 계약 이행 가능성이나 대금 수취 리스크를 우려하신 건가요?
-
-아니면 6,200억 원이라는 금액이 기대에 미치지 못한다고 보신 건가요?`,
-      "neu":`신중한 접근이네요.
-
-🟢 긍정: 매출 확대 확실, AI 인프라 테마 탑승
-🔴 부정: 비주력 신사업, 상대방 신용도 불명확, 마진 미공개
-
-한 가지 더 드릴 힌트가 있어요. 이 계약의 진짜 의미는 금액보다 '스토리'에 있을 수 있습니다.`
-    },
-    t2_chips:['조선사의 AI 인프라 진입에 기대합니다','실제 실적 기여가 확인돼야 합니다'],
-    t3:`추가 맥락입니다.
-
-이 공시가 나오기 직전, 미국 전력망 인프라 투자가 국가적 과제로 부상했습니다.
-
-AI 데이터센터는 24시간 안정적 전력이 필수인데, 기존 미국 전력망으로는 감당이 안 되는 상황이었어요.
-
-비상·분산 발전 솔루션 수요가 폭발했고, HD현대중공업의 힘센엔진이 선택받았습니다.
-
-더 중요한 건 —
-'조선사'라는 기존 프레임에서 벗어나
-'에너지 솔루션 기업'으로 재평가받을 수 있는 내러티브가 생겼다는 겁니다.
-
-판단이 달라지시나요?`,
-    t3_chips:['판단을 바꾸겠습니다','원래 판단을 유지합니다']
+    hints:["수주 공시가 주가에 호재인 이유는?","힘센엔진이 뭔가요?","AI 데이터센터 전력 수요가 얼마나 큰가요?","섹터 리레이팅이란 무슨 뜻인가요?"],
   }
 ];
 
+// ── GEMINI RESPONSE HELPER ───────────────────────────────────────────────
+function extractText(data){
+  const parts = data.candidates?.[0]?.content?.parts || [];
+  const textPart = parts.find(p => !p.thought && p.text);
+  return textPart?.text || parts.find(p => p.text)?.text || '';
+}
+
+// ── PROMPTS ──────────────────────────────────────────────────────────────
+function buildSystem(sc){
+  return `당신은 '공시 시간여행' 금융 교육 AI입니다.
+사용자가 실제 한국 상장사 공시가 있었던 날의 투자자 역할을 체험하고 있습니다.
+
+[시나리오]
+종목: ${sc.company} (${sc.ticker})
+공시일: ${sc.era}
+공시 내용: ${sc.desc}
+배경 정보: ${sc.background}
+
+[대화 가이드]
+- 사용자의 질문에 관련된 재무 수치, 시장 데이터, 역사적 사례, 업종 맥락을 구체적으로 설명하세요
+- 수치, 날짜, 비율, 회사명, 사건명 등 팩트를 적극 활용하세요
+- 재무 변수, 시장 컨텍스트, 역사적 선례, 수급 분석, 글로벌 트렌드 등 다양한 각도를 탐구하세요
+- 사용자가 이미 언급한 내용은 반복하지 말고 새로운 시각과 정보를 추가하세요
+- 실제 결과(${sc.answer}, ${sc.changePct}% 변동)는 절대 사전에 공개하지 마세요
+- 투자 조언이 아닌 '과거 통계 기반 학습 시뮬레이션'임을 인지하세요
+- 한국어로만 답변하세요
+- 이모지는 최대 2개만 사용하세요`;
+}
+
+function buildIntro(sc){
+  return `${sc.era}, 당신은 ${sc.company} 주주입니다.\n\n📄 공시 알림:\n"${sc.desc}"\n\n${sc.ctx}\n\n이 공시에 대해 자유롭게 질문하거나 의견을 말씀해 주세요.\n💡 힌트 버튼을 누르면 참고 질문을 추천해드립니다.`;
+}
+
 // ── STATE ─────────────────────────────────────────────────────────────────
-let S = { sc:null, turn:0, init:null, final:null, changed:false };
-let pendingCb = null;
-let typeIv = null;
+let S = { sc:null, final:null, messages:[], msgCount:0 };
 let inputLocked = false;
+let typeIv = null;
 
 // ── SCREENS ───────────────────────────────────────────────────────────────
 function showScreen(id){
@@ -439,112 +335,119 @@ function showSelect(){
 
 // ── CHAT ENGINE ───────────────────────────────────────────────────────────
 function startSc(id){
-  S = { sc: SC.find(s=>s.id===id), turn:1, init:null, final:null, changed:false };
+  S = { sc:SC.find(s=>s.id===id), final:null, messages:[], msgCount:0 };
   document.getElementById('h-co').textContent = S.sc.company;
   document.getElementById('h-era').textContent = S.sc.era + ' 투자자로 시간여행';
   document.getElementById('msgs').innerHTML = '';
-  hideInput();
-  setProgress(1);
+  document.getElementById('hints-wrap').style.display = 'none';
+  document.getElementById('hint-chips').innerHTML = '';
+  document.getElementById('input-area').style.display = 'none';
+  setProgress(0);
   showScreen('s-chat');
   setTimeout(()=>showTyping(()=>{
-    addAI(S.sc.t1, true, ()=>{
-      showInput(S.sc.t1_chips, '어떻게 하시겠어요?');
+    addAI(buildIntro(S.sc), false, ()=>{
+      document.getElementById('input-area').style.display = 'block';
+      lockInput(false);
+      scrollBottom();
     });
   }), 500);
 }
 
-// called when user submits (chip or text)
 function onUserInput(text){
   if(inputLocked || !text.trim()) return;
-  hideInput();
+  document.getElementById('hints-wrap').style.display = 'none';
+  document.getElementById('chat-input').value = '';
+  document.getElementById('chat-input').style.height = '42px';
   addUser(text);
-  if(pendingCb){ const cb=pendingCb; pendingCb=null; cb(text); }
+  S.messages.push({role:'user', content:text});
+  S.msgCount++;
+  setProgress(S.msgCount);
+  fetchAI();
 }
 
-function turn2(userText){
-  setProgress(2);
-  S.init = detectStance(userText);
-  S.final = S.init;
-  const stance = S.init === '수혜 예상' ? 'pos' : S.init === '악재 예상' ? 'neg' : 'neu';
-  const msg = S.sc.t2[stance];
-  setTimeout(()=>showTyping(()=>{
-    addAI(msg, true, ()=>{
-      showInput(S.sc.t2_chips, '어떻게 생각하세요?');
+async function fetchAI(){
+  lockInput(true);
+  const msgs = document.getElementById('msgs');
+  const typingEl = document.createElement('div');
+  typingEl.className = 'typing-wrap';
+  typingEl.innerHTML = `<div class="ai-av">🤖</div><div class="typing-bub"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>`;
+  msgs.appendChild(typingEl);
+  scrollBottom();
+
+  let reply = '잠시 연결에 문제가 있어요. 다시 시도해주세요.';
+
+  try {
+    const contents = S.messages.map(m=>({
+      role: m.role === 'user' ? 'user' : 'model',
+      parts:[{text:m.content}]
+    }));
+    const res = await fetch(`${GEMINI_URL}?key=${GEMINI_KEY}`, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        system_instruction:{parts:[{text:buildSystem(S.sc)}]},
+        contents,
+        generationConfig:{maxOutputTokens:8192}
+      })
     });
-  }), 600);
+    if(res.ok){
+      const data = await res.json();
+      reply = extractText(data) || '응답을 받지 못했습니다.';
+      S.messages.push({role:'assistant', content:reply});
+    } else {
+      const err = await res.json().catch(()=>({}));
+      reply = `오류 (${res.status}): ${err?.error?.message || '알 수 없는 오류'}`;
+    }
+  } catch(e){ reply = `연결 오류: ${e.message}`; }
+
+  typingEl.remove();
+  addAI(reply, true, ()=>lockInput(false));
 }
 
-function turn3(userText){
-  setProgress(3);
-  setTimeout(()=>showTyping(()=>{
-    addAI(S.sc.t3, true, ()=>{
-      showInput(S.sc.t3_chips, '판단을 바꾸시겠어요?');
-    });
-  }), 600);
-}
+function fetchHints(){
+  const hintsWrap = document.getElementById('hints-wrap');
+  if(hintsWrap.style.display !== 'none'){ hintsWrap.style.display = 'none'; return; }
 
-function turn4(userText){
-  setProgress(4);
-  const changed = detectChange(userText);
-  if(changed){
-    S.changed = true;
-    S.final = S.init === '수혜 예상' ? '악재 예상' : '수혜 예상';
-  }
-  const reveal = `지금까지 함께 생각해주셨습니다.\n\n공시 후 실제 주가 흐름을 공개합니다.\n\n측정 기준: ${S.sc.window}\n실제 변동: ${S.sc.changePct>=0?'+':''}${S.sc.changePct}% (코스피 ${S.sc.kospiPct>=0?'+':''}${S.sc.kospiPct}%)\n\n${S.sc.changePct>=0?'📈':'📉'} 실제 결과: ${S.sc.answer}`;
-  setTimeout(()=>showTyping(()=>{
-    addAI(reveal, false, ()=>{
-      showInput(['결과 분석 보기 →'], '', true);
-    });
-  }), 600);
-}
-
-// ── INPUT SYSTEM ──────────────────────────────────────────────────────────
-function showInput(chips, label, isCta=false){
-  inputLocked = false;
-  const area = document.getElementById('input-area');
-  const chipsWrap = document.getElementById('chips-wrap');
-  const chipsEl = document.getElementById('chips');
-  const chipsLabel = document.getElementById('chips-label');
-  const inputEl = document.getElementById('chat-input');
-  const sendBtn = document.getElementById('send-btn');
-
-  if(chips && chips.length){
-    chipsLabel.textContent = label || '빠른 선택';
-    chipsEl.innerHTML = chips.map(c=>
-      `<span class="chip${isCta?' cta':''}" onclick="onUserInput('${c.replace(/'/g,"\\'")}')">${c}</span>`
-    ).join('');
-    chipsWrap.style.display = 'block';
-  } else {
-    chipsWrap.style.display = 'none';
-  }
-
-  if(isCta){
-    inputEl.style.display = 'none';
-    sendBtn.style.display = 'none';
-  } else {
-    inputEl.style.display = 'block';
-    sendBtn.style.display = 'block';
-    inputEl.disabled = false;
-    inputEl.value = '';
-    inputEl.style.height = '42px';
-    setTimeout(()=>inputEl.focus(), 100);
-  }
-
-  pendingCb = (text) => {
-    // route by turn
-    if(S.turn === 1){ S.turn=2; turn2(text); }
-    else if(S.turn === 2){ S.turn=3; turn3(text); }
-    else if(S.turn === 3){ S.turn=4; turn4(text); }
-    else { showResult(); }
-  };
-
-  area.style.display = 'block';
+  document.getElementById('hint-chips').innerHTML = S.sc.hints.map((h, i)=>
+    `<span class="chip" onclick="sendHint(${i})">${h}</span>`
+  ).join('');
+  hintsWrap.style.display = 'block';
   scrollBottom();
 }
 
-function hideInput(){
-  document.getElementById('input-area').style.display = 'none';
-  inputLocked = true;
+function sendHint(i){ onUserInput(S.sc.hints[i]); }
+
+function confirmResult(){
+  const modal = document.createElement('div');
+  modal.id = 'result-pick-modal';
+  modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.75);display:flex;align-items:center;justify-content:center;z-index:9999;padding:24px;';
+  modal.innerHTML = `
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px 24px;max-width:360px;width:100%;text-align:center;">
+      <div style="font-size:1.6rem;margin-bottom:10px;">🎯</div>
+      <h3 style="font-size:1.05rem;font-weight:700;margin-bottom:8px;">최종 예측</h3>
+      <p style="color:var(--muted);font-size:0.82rem;margin-bottom:20px;">공시 후 주가 방향을 최종 선택하세요</p>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <button onclick="pickFinal('수혜 예상')" style="background:#1a3a2a;border:1px solid #2d5a3d;color:#4ade80;padding:12px;border-radius:10px;cursor:pointer;font-size:0.9rem;font-weight:600;">📈 수혜 예상 (상승)</button>
+        <button onclick="pickFinal('악재 예상')" style="background:#3a1a1a;border:1px solid #5a2d2d;color:#f87171;padding:12px;border-radius:10px;cursor:pointer;font-size:0.9rem;font-weight:600;">📉 악재 예상 (하락)</button>
+        <button onclick="pickFinal('중립')" style="background:var(--bg2);border:1px solid var(--border);color:var(--muted);padding:12px;border-radius:10px;cursor:pointer;font-size:0.9rem;">🤔 잘 모르겠습니다</button>
+      </div>
+      <button onclick="document.getElementById('result-pick-modal').remove()" style="background:none;border:none;color:var(--muted);font-size:0.78rem;cursor:pointer;margin-top:14px;">취소</button>
+    </div>`;
+  document.body.appendChild(modal);
+}
+
+function pickFinal(stance){
+  S.final = stance;
+  document.getElementById('result-pick-modal')?.remove();
+  showResult();
+}
+
+// ── INPUT HELPERS ─────────────────────────────────────────────────────────
+function lockInput(locked){
+  inputLocked = locked;
+  document.getElementById('chat-input').disabled = locked;
+  document.getElementById('send-btn').disabled = locked;
+  if(!locked) setTimeout(()=>document.getElementById('chat-input').focus(), 100);
 }
 
 function submitInput(){
@@ -563,33 +466,10 @@ function autoResize(el){
   el.style.height = Math.min(el.scrollHeight, 100) + 'px';
 }
 
-// ── STANCE DETECTION ─────────────────────────────────────────────────────
-function detectStance(text){
-  const t = text;
-  // explicit chips
-  if(t.includes('수혜')) return '수혜 예상';
-  if(t.includes('악재')) return '악재 예상';
-  // keywords
-  const pos = ['상승','오를','오른','살','매수','호재','좋','긍정','기대','수혜'];
-  const neg = ['하락','내릴','내린','팔','매도','위험','나쁘','부정','조심','악재','우려'];
-  const ps = pos.filter(w=>t.includes(w)).length;
-  const ns = neg.filter(w=>t.includes(w)).length;
-  if(ps > ns) return '수혜 예상';
-  if(ns > ps) return '악재 예상';
-  return '중립';
-}
-
-function detectChange(text){
-  const t = text;
-  if(t.includes('유지') || t.includes('그대로') || t.includes('변함없')) return false;
-  const changeWords = ['바꾸','변경','달라','아니','다시','반대','수정','틀렸','틀리'];
-  return changeWords.some(w=>t.includes(w));
-}
-
 // ── UI HELPERS ────────────────────────────────────────────────────────────
 function setProgress(t){
-  document.getElementById('h-turn').textContent = `Turn ${t} / 4`;
-  document.getElementById('prog').style.width = (t/4*100) + '%';
+  document.getElementById('h-turn').textContent = t ? `${t}번째 대화` : '대화 시작';
+  document.getElementById('prog').style.width = Math.min(t * 10, 100) + '%';
 }
 
 function showTyping(cb){
@@ -658,7 +538,7 @@ function showResult(){
   document.getElementById('r-date').textContent = s.era;
 
   const predEl = document.getElementById('r-pred');
-  predEl.textContent = S.final + (S.changed ? ' (변경)' : '');
+  predEl.textContent = S.final;
   predEl.className = 'stat-val ' + (S.final==='수혜 예상'?'vg':S.final==='악재 예상'?'vr':'vb');
 
   const ansEl = document.getElementById('r-ans');
