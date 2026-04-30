@@ -1,111 +1,80 @@
-"""M5 — Piotroski F-score (재무 건전성).
+"""M5 v2 — 자본 성장성 (Equity Growth).
 
-9개 binary criteria, 1점씩 합산 → 0~9.
+"회사가 벌어서 자기 돈을 키워나가고 있는가?"
 
-수익성 (4):
-1. ROA > 0
-2. CFO > 0
-3. ΔROA > 0  (전년 대비)
-4. CFO > NI (이익이 현금으로 뒷받침)
+설계: ``modules/financial/EQS_V2_DESIGN.md`` §M5 (+ 2026-04-27 보정: 100점 캡 +10%→+30%).
 
-레버리지·유동성 (3):
-5. ΔLong-term debt < 0  (부채 감소)
-6. ΔCurrent ratio > 0   (유동성 개선)
-7. 신주 발행 없음 (shares_outstanding 비증가)
+산출:
+    CAGR = (자본총계[t] ÷ 자본총계[t-2])^(1/2) - 1
+    점수 변환 (선형 보간, 5단계):
+      CAGR ≤ -10%/yr  → 0
+      CAGR = 0%/yr    → 50
+      CAGR = +10%/yr  → 80   (이전 100 → 80)
+      CAGR = +20%/yr  → 95
+      CAGR ≥ +30%/yr  → 100
 
-영업효율 (2):
-8. ΔGross margin > 0
-9. ΔAsset turnover > 0  (Sales/Assets)
+이전 정의(±10%/yr 캡)는 KOSPI 우량주 다수가 +10%/yr 초과해 100점에 몰림(24/48).
++10%/yr=80점 anchor + +30%/yr=100점 캡으로 변별력 확보.
 
-데이터 누락 시 해당 criterion은 0점 처리(=보수적).
+예외:
+- 자본총계[t-2] ≤ 0: 0점 + "2년 전 자본잠식"
+- 자본총계[t]   ≤ 0: 0점 + "현재 자본잠식 — 상장폐지 사유"
+- 데이터 < 2년: 산출 보류
 """
 
 from __future__ import annotations
 
-from typing import Optional
-
-from .types import FirmPanel, FirmYear, ModuleScore
-
-
-def _roa(y: FirmYear) -> Optional[float]:
-    if y.net_income is None or not y.total_assets:
-        return None
-    return y.net_income / y.total_assets
-
-
-def _current_ratio(y: FirmYear) -> Optional[float]:
-    if y.current_assets is None or not y.current_liabilities:
-        return None
-    return y.current_assets / y.current_liabilities
-
-
-def _gross_margin(y: FirmYear) -> Optional[float]:
-    if y.revenue is None or y.cogs is None or y.revenue == 0:
-        return None
-    return (y.revenue - y.cogs) / y.revenue
-
-
-def _asset_turnover(y: FirmYear) -> Optional[float]:
-    if y.revenue is None or not y.total_assets:
-        return None
-    return y.revenue / y.total_assets
-
-
-def _gt(a: Optional[float], b: Optional[float]) -> int:
-    if a is None or b is None:
-        return 0
-    return 1 if a > b else 0
-
-
-def _lt(a: Optional[float], b: Optional[float]) -> int:
-    if a is None or b is None:
-        return 0
-    return 1 if a < b else 0
-
-
-def piotroski_f(prev: FirmYear, curr: FirmYear) -> int:
-    """Piotroski F-score (0~9)."""
-    score = 0
-    roa_curr = _roa(curr)
-    roa_prev = _roa(prev)
-    cr_curr = _current_ratio(curr)
-    cr_prev = _current_ratio(prev)
-    gm_curr = _gross_margin(curr)
-    gm_prev = _gross_margin(prev)
-    at_curr = _asset_turnover(curr)
-    at_prev = _asset_turnover(prev)
-
-    # 1. ROA > 0
-    score += _gt(roa_curr, 0.0)
-    # 2. CFO > 0
-    score += _gt(curr.operating_cashflow, 0.0)
-    # 3. ΔROA > 0
-    score += _gt(roa_curr, roa_prev)
-    # 4. CFO > NI
-    score += _gt(curr.operating_cashflow, curr.net_income)
-    # 5. ΔLTD < 0  (부채 감소)
-    score += _lt(curr.long_term_debt, prev.long_term_debt)
-    # 6. ΔCurrent ratio > 0
-    score += _gt(cr_curr, cr_prev)
-    # 7. 신주발행 없음 (curr <= prev)
-    if (
-        curr.shares_outstanding is not None
-        and prev.shares_outstanding is not None
-        and curr.shares_outstanding <= prev.shares_outstanding
-    ):
-        score += 1
-    # 8. ΔGross margin > 0
-    score += _gt(gm_curr, gm_prev)
-    # 9. ΔAsset turnover > 0
-    score += _gt(at_curr, at_prev)
-    return score
+from .types import FirmPanel, ModuleScore
 
 
 def score_m5(panel: FirmPanel) -> ModuleScore:
-    curr = panel.latest()
-    prev = panel.prior()
-    if curr is None or prev is None:
-        return ModuleScore(name="M5", score=None, note="패널 부족(t,t-1 필요)")
-    f = piotroski_f(prev, curr)
-    score = round(f / 9 * 100, 1)
-    return ModuleScore(name="M5", score=score, raw=float(f), note=f"F-score={f}/9")
+    if len(panel.years) < 3:
+        return ModuleScore(
+            name="M5",
+            score=None,
+            note=f"패널 {len(panel.years)}년 — t와 t-2 자본 필요(최소 3년)",
+        )
+
+    curr = panel.years[-1]
+    base = panel.years[-3]  # t-2
+
+    if curr.total_equity is None or base.total_equity is None:
+        return ModuleScore(name="M5", score=None, note="자본총계 결측")
+
+    if base.total_equity <= 0:
+        return ModuleScore(
+            name="M5",
+            score=0.0,
+            raw=None,
+            note=f"2년 전 자본잠식(자본={base.total_equity/1e8:.0f}억)",
+        )
+    if curr.total_equity <= 0:
+        return ModuleScore(
+            name="M5",
+            score=0.0,
+            raw=None,
+            note="현재 자본잠식 — 상장폐지 사유",
+        )
+
+    ratio = curr.total_equity / base.total_equity
+    cagr = ratio ** 0.5 - 1
+
+    # 5단계 선형 보간: -10%→0, 0%→50, +10%→80, +20%→95, +30%+→100
+    if cagr <= -0.10:
+        score = 0.0
+    elif cagr <= 0.0:
+        score = (cagr + 0.10) / 0.10 * 50.0  # -10%~0% → 0~50
+    elif cagr <= 0.10:
+        score = 50.0 + (cagr / 0.10) * 30.0  # 0%~+10% → 50~80
+    elif cagr <= 0.20:
+        score = 80.0 + ((cagr - 0.10) / 0.10) * 15.0  # +10%~+20% → 80~95
+    elif cagr <= 0.30:
+        score = 95.0 + ((cagr - 0.20) / 0.10) * 5.0  # +20%~+30% → 95~100
+    else:
+        score = 100.0
+    return ModuleScore(
+        name="M5",
+        score=round(score, 1),
+        raw=cagr,
+        note=f"자본 CAGR {cagr*100:+.1f}%/yr ({base.year}→{curr.year}, 자본 ×{ratio:.2f})",
+    )

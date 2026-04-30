@@ -41,6 +41,7 @@ class FirmYear:
     long_term_debt: Optional[float] = None
     ppe: Optional[float] = None  # 유형자산 (Property/Plant/Equipment)
     accounts_receivable: Optional[float] = None
+    contract_assets: Optional[float] = None  # 계약자산(미청구공사) — 건설·조선 M2용
     shares_outstanding: Optional[float] = None
 
     # 현금흐름표

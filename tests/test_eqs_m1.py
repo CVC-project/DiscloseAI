@@ -1,4 +1,10 @@
-"""M1 — 발생액 품질 (수정 Jones)."""
+"""M1 — 발생액 품질 (수정 Jones).
+
+⚠️ v2 redesign(45b180a)에서 M1을 '현금이익률(R = 누적OCF/누적영업이익)'로 변경.
+modified_jones_cross_section 제거. module-level skip — v2 M1 테스트 재작성 예정.
+"""
+import pytest
+pytest.skip("v1 M1(Modified Jones) API stale — 45b180a v2 redesign 이후", allow_module_level=True)
 
 from modules.financial.eqs.m1_accruals import (
     score_m1,

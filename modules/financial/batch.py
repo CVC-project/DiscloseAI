@@ -2,8 +2,9 @@
 
 이름 매칭의 함정:
 - DART 정식명과 시장 통용명이 다른 경우 (현대차/현대자동차, KT&G/케이티앤지)
-- 우선주는 별도 종목코드를 가지지만 corp_code는 본주와 같음
-- ETF는 재무제표가 없어 제외 필요
+- 우선주는 별도 종목코드를 가지지만 corp_code는 본주와 같음 → 본주와 재무가
+  동일하여 분석 중복이므로 universe에서 제외 (삼성전자우 등)
+- ETF는 재무제표가 없어 제외 (KODEX 200 등)
 
 해결: ``ALIASES``에 시장 통용명 → 종목코드를 명시. find_corp가 종목코드로
 6자리 정확매칭하므로 안전.
@@ -23,9 +24,7 @@ from .eqs.types import EQSResult, FirmPanel
 # 시장 통용명 → 종목코드(6자리) 또는 corp_code(8자리) 매핑.
 # - 부분매칭 휴리스틱이 잘못 잡는 경우(현대차→현대차증권) 방지
 # - 정식 corp_name이 다른 경우(NAVER→네이버) 보강
-# - 우선주는 DART에 별도 등록되지 않으므로 본주 corp_code(8자리)로 직접 매핑
 ALIASES = {
-    "삼성전자우": "00126380",  # corp_code 직접 매핑 (본주와 동일 재무제표)
     "현대차": "005380",  # 정식명: 현대자동차
     "기아": "000270",
     "셀트리온": "068270",
@@ -40,8 +39,10 @@ ALIASES = {
     "우리금융지주": "316140",
 }
 
-# 재무제표가 없는 종목 (ETF, REIT 등) — 분석 대상에서 제외
-INSTRUMENT_BLACKLIST = {"KODEX 200"}
+# 재무제표가 없는 종목 (ETF, REIT 등) — 분석 대상에서 제외.
+# 현재 universe(KOSPI_TOP_50)에는 ETF가 포함되어 있지 않지만, 입력 단계 안전망으로
+# 빈 set 유지. 향후 ETF 의심 종목 추가 시 여기에 등록.
+INSTRUMENT_BLACKLIST: set[str] = set()
 
 # 금융업 (KRX 업종코드 064~067) — fnlttSinglAcntAll endpoint가 옛 데이터 미제공.
 # CLAUDE.local.md 규칙대로 M2·M3 자동 제외 + 별도 BIS 모듈 도입 시까지 EQS 보류.
@@ -81,7 +82,6 @@ def _industry_for(name: str) -> Optional[str]:
 KOSPI_TOP_50 = [
     "삼성전자",
     "SK하이닉스",
-    "삼성전자우",
     "현대차",
     "LG에너지솔루션",
     "한화에어로스페이스",
@@ -121,7 +121,6 @@ KOSPI_TOP_50 = [
     "카카오",
     "LIG넥스원",
     "SK이노베이션",
-    "KODEX 200",
     "HMM",
     "SK텔레콤",
     "현대건설",
@@ -293,11 +292,11 @@ def build_sector_stats(records: List[FirmRecord]) -> dict:
 
 
 _MODULE_LABELS = {
-    "M1": "이익실체",
-    "M2": "회계투명",
-    "M3": "현금뒷받침",
-    "M4": "이익안정",
-    "M5": "재무체력",
+    "M1": "현금이익률",
+    "M2": "매출 회수 건전성",
+    "M3": "부채 건전성",
+    "M4": "본업 안정성",
+    "M5": "자본 성장성",
 }
 
 
@@ -306,6 +305,109 @@ def _to_eok(v):
     if v is None:
         return None
     return round(v / 1e8)
+
+
+def _history_block(panel: FirmPanel) -> Optional[dict]:
+    """5년 시계열을 sparkline용 JSON 블록으로 직렬화 (억원 단위).
+
+    panel.years는 (year, quarter) 오름차순 정렬됨. 연간 결산만 추출 후
+    매출/영업이익/순이익/영업CF 4개 지표를 array로 반환. 누락 연도는 None
+    으로 채워 array 길이를 일정하게 유지 (sparkline에서 점 누락 처리).
+    """
+    annual = [fy for fy in (panel.years or []) if fy.quarter is None]
+    if not annual:
+        return None
+    return {
+        "years": [fy.year for fy in annual],
+        "revenue": [_to_eok(fy.revenue) for fy in annual],
+        "operating_income": [_to_eok(fy.operating_income) for fy in annual],
+        "net_income": [_to_eok(fy.net_income) for fy in annual],
+        "operating_cashflow": [_to_eok(fy.operating_cashflow) for fy in annual],
+    }
+
+
+def _compute_industry_percentiles(records: List[FirmRecord]) -> dict:
+    """동종업계(섹터) 내 firm 단위 백분위 산출 — 0(최하)~100(최상).
+
+    그룹키: ``industry_groups.get_sector(name)`` (KOSPI 50 11개 섹터).
+    표본 < 3인 섹터는 백분위 산출 부적절 → ``_industry_size``만 기록.
+
+    metrics:
+      - operating_margin (%) : 영업이익/매출 — 높을수록 좋음
+      - debt_to_equity (%)   : 부채총계/자본총계 — 낮을수록 좋음 (반전)
+      - ocf_to_revenue (%)   : 영업CF/매출 — 높을수록 좋음
+      - eqs_total            : EQS 종합점수 — 높을수록 좋음
+    """
+    from .industry_groups import get_sector
+
+    groups: dict = {}
+    for r in records:
+        if r.corp is None or r.panel is None or r.error is not None:
+            continue
+        sec = get_sector(r.display_name)
+        if not sec:
+            continue
+        groups.setdefault(sec, []).append(r)
+
+    def _operating_margin(r: FirmRecord) -> Optional[float]:
+        latest = r.panel.latest() if r.panel else None
+        if latest is None or not latest.revenue or latest.operating_income is None:
+            return None
+        return latest.operating_income / latest.revenue * 100
+
+    def _debt_to_equity(r: FirmRecord) -> Optional[float]:
+        latest = r.panel.latest() if r.panel else None
+        if (
+            latest is None
+            or latest.total_equity is None
+            or latest.total_equity <= 0
+            or latest.total_liabilities is None
+        ):
+            return None
+        return latest.total_liabilities / latest.total_equity * 100
+
+    def _ocf_to_revenue(r: FirmRecord) -> Optional[float]:
+        latest = r.panel.latest() if r.panel else None
+        if latest is None or not latest.revenue or latest.operating_cashflow is None:
+            return None
+        return latest.operating_cashflow / latest.revenue * 100
+
+    def _eqs_total(r: FirmRecord) -> Optional[float]:
+        return r.eqs.total if (r.eqs and r.eqs.total is not None) else None
+
+    metrics = [
+        ("operating_margin", _operating_margin, "high"),
+        ("debt_to_equity", _debt_to_equity, "low"),
+        ("ocf_to_revenue", _ocf_to_revenue, "high"),
+        ("eqs_total", _eqs_total, "high"),
+    ]
+
+    out: dict = {}
+    for sector, group in groups.items():
+        size = len(group)
+        # 모든 firm에 sector·size 기록 — metric별 valid 표본수는 _metric_size에 별도 기록
+        for r in group:
+            out[r.corp.corp_code] = {"_sector": sector, "_size": size}
+        if size < 3:
+            continue
+        for metric_name, extractor, direction in metrics:
+            valid = [(r, extractor(r)) for r in group]
+            valid = [(r, v) for r, v in valid if v is not None]
+            n = len(valid)
+            if n < 3:
+                continue  # 백분위 산출은 표본 ≥ 3 (n>1 필연 → 분모 0 dead code 제거)
+            # direction='high' → 큰 값이 1등 (rank 0); 'low' → 작은 값이 1등
+            valid_sorted = sorted(
+                valid, key=lambda x: x[1], reverse=(direction == "high")
+            )
+            for rank, (r, _) in enumerate(valid_sorted):
+                # rank 0(최상위) → 100, rank n-1(최하위) → 0
+                pct = round((n - 1 - rank) / (n - 1) * 100)
+                out[r.corp.corp_code][metric_name] = pct
+            # metric별 valid 표본수 기록 — _size와 다를 수 있음 (특정 metric 결측 firm 존재 시)
+            for r, _ in valid:
+                out[r.corp.corp_code].setdefault("_metric_sizes", {})[metric_name] = n
+    return out
 
 
 def export_for_frontend(
@@ -321,6 +423,16 @@ def export_for_frontend(
     - modules: M1~M5 각 점수 + 한글 라벨 + note(산출 방식)
     - dart_url: 최신 사업보고서 링크
     - latest_year: 최근 재무 데이터(매출, 영업이익, 순이익, 영업CF 등)
+
+    ⚠️ 단위 컨벤션 (코드 전반에서 가정 — 변경 시 dashboard.html `_marketCapFmt`/
+       `_calcValuation` 동시 수정 필요):
+       - ``market_cap``: **원** (yfinance raw, ``r.market_cap`` 그대로)
+       - ``latest_year.*`` (revenue/operating_income/net_income/total_assets/
+         total_equity/operating_cashflow/investing_cashflow/financing_cashflow):
+         **억원** (``_to_eok``로 원→억 변환)
+       - ``history.*`` (revenue/operating_income/net_income/operating_cashflow):
+         **억원** (5년 array)
+       - ``percentile.*``: 정수 0~100 (단위 없음)
     """
     import json
 
@@ -330,6 +442,8 @@ def export_for_frontend(
         "prototype",
     )
     os.makedirs(out_dir, exist_ok=True)
+
+    percentiles = _compute_industry_percentiles(records)
 
     items = []
     for r in records:
@@ -353,6 +467,8 @@ def export_for_frontend(
                 "operating_income": _to_eok(latest.operating_income),
                 "net_income": _to_eok(latest.net_income),
                 "operating_cashflow": _to_eok(latest.operating_cashflow),
+                "investing_cashflow": _to_eok(latest.investing_cashflow),
+                "financing_cashflow": _to_eok(latest.financing_cashflow),
                 "total_assets": _to_eok(latest.total_assets),
                 "total_equity": _to_eok(latest.total_equity),
             }
@@ -369,6 +485,10 @@ def export_for_frontend(
                 "dart_url": r.dart_url,
                 "latest_year": latest_year,
                 "industry_code": r.industry_code,
+                "history": _history_block(r.panel) if r.panel else None,
+                "percentile": percentiles.get(
+                    r.corp.corp_code if r.corp else "", None
+                ),
             }
         )
 
@@ -376,6 +496,113 @@ def export_for_frontend(
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(items, f, ensure_ascii=False, indent=2)
     return out_path
+
+
+def build_per_firm_dashboards(records: List[FirmRecord]) -> dict:
+    """각 기업별 단독 분석 HTML 생성 — 통합 대시보드 오버레이용.
+
+    파일명: ``firm_<ticker>.html`` (ticker 없으면 corp_code 사용).
+    자체완결형 — DATA를 인라인 임베드하므로 file:// 환경에서도 동작.
+    """
+    from .dashboard import build_dashboard
+    from .translator import extract_highlights, translate_all
+
+    written = 0
+    skipped = 0
+    for r in records:
+        if r.corp is None or r.panel is None or r.eqs is None or r.error is not None:
+            skipped += 1
+            continue
+        latest = r.panel.latest()
+        if latest is None:
+            skipped += 1
+            continue
+        ticker = r.corp.stock_code or r.corp.corp_code
+        try:
+            build_dashboard(
+                r.panel,
+                r.eqs,
+                translate_all(latest),
+                extract_highlights(r.panel),
+                output_name=f"firm_{ticker}.html",
+            )
+            written += 1
+        except Exception:  # noqa: BLE001 — 한 기업 실패가 전체를 막지 않도록
+            skipped += 1
+    return {"written": written, "skipped": skipped}
+
+
+def persist_to_db(records: List[FirmRecord]) -> dict:
+    """배치 결과를 modules/financial/data/financial.db (financial_local)에 upsert.
+
+    각 기업의 최근 연도 1행만 저장 — extract_data.py가 'corp_code별 최신 1건'
+    으로 읽기 때문에 latest year만 있으면 충분. 동일 corp_code의 기존 행은
+    DELETE 후 INSERT (단순 upsert + 중복 정리).
+
+    EQS 5모듈/총점/등급은 latest year 행에 함께 attach.
+    재무수치는 **억원 단위**로 저장 (기존 financial_local 컨벤션 유지) —
+    integration의 dashboard.html은 억→조(/10000) 변환을 가정한다.
+    """
+    from .db import get_local_session, init_local_db
+    from .models import FinancialLocal
+
+    init_local_db()  # 테이블 없으면 생성
+    session = get_local_session()
+    written = 0
+    skipped = 0
+    try:
+        for r in records:
+            if r.corp is None or r.panel is None or r.error is not None:
+                skipped += 1
+                continue
+            latest = r.panel.latest()
+            if latest is None:
+                skipped += 1
+                continue
+            # 동일 corp_code 기존 행 삭제 (중복 정리 + upsert)
+            session.query(FinancialLocal).filter(
+                FinancialLocal.corp_code == r.corp.corp_code
+            ).delete(synchronize_session=False)
+
+            # EQS 모듈 점수 추출 (있는 경우)
+            mod_scores = {}
+            eqs_total = None
+            eqs_grade = None
+            if r.eqs is not None:
+                eqs_total = r.eqs.total
+                eqs_grade = r.eqs.grade
+                for m in r.eqs.modules:
+                    mod_scores[m.name] = m.score
+
+            session.add(
+                FinancialLocal(
+                    corp_code=r.corp.corp_code,
+                    corp_name=r.display_name,
+                    year=latest.year,
+                    quarter=latest.quarter,
+                    revenue=_to_eok(latest.revenue),
+                    operating_income=_to_eok(latest.operating_income),
+                    net_income=_to_eok(latest.net_income),
+                    total_assets=_to_eok(latest.total_assets),
+                    total_liabilities=_to_eok(latest.total_liabilities),
+                    total_equity=_to_eok(latest.total_equity),
+                    operating_cashflow=_to_eok(latest.operating_cashflow),
+                    investing_cashflow=_to_eok(latest.investing_cashflow),
+                    financing_cashflow=_to_eok(latest.financing_cashflow),
+                    eqs_m1=mod_scores.get("M1"),
+                    eqs_m2=mod_scores.get("M2"),
+                    eqs_m3=mod_scores.get("M3"),
+                    eqs_m4=mod_scores.get("M4"),
+                    eqs_m5=mod_scores.get("M5"),
+                    eqs_total=eqs_total,
+                    eqs_grade=eqs_grade,
+                )
+            )
+            written += 1
+        session.commit()
+    finally:
+        session.close()
+    return {"written": written, "skipped": skipped}
 
 
 def summarize(records: List[FirmRecord]) -> dict:

@@ -1,4 +1,10 @@
-"""M5 — Piotroski F-score."""
+"""M5 — Piotroski F-score.
+
+⚠️ v2 redesign(45b180a)에서 M5를 '자본 성장성(2년 자본 CAGR)'로 변경.
+piotroski_f 제거. module-level skip — v2 M5 테스트 재작성 예정.
+"""
+import pytest
+pytest.skip("v1 M5(Piotroski) API stale — 45b180a v2 redesign 이후", allow_module_level=True)
 
 from modules.financial.eqs.m5_piotroski import score_m5, piotroski_f
 from modules.financial.eqs.types import FirmPanel

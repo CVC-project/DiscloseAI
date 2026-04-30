@@ -24,12 +24,11 @@ from typing import Dict, Iterable, List, Optional
 # KOSPI 50 → 섹터 하드코딩 매핑
 # ---------------------------------------------------------------------------
 
-# 한 회사는 정확히 1개 섹터에 속함. 우선주(삼성전자우)는 본주와 같은 섹터.
+# 한 회사는 정확히 1개 섹터에 속함.
 # 분류 기준: KRX 업종분류 + 시장 통용 분류 절충 (같은 매출·비용 구조 기업끼리).
 SECTORS: Dict[str, List[str]] = {
     "반도체/전자부품": [
         "삼성전자",
-        "삼성전자우",
         "SK하이닉스",
         "삼성전기",
         "한미반도체",
@@ -100,8 +99,9 @@ SECTORS: Dict[str, List[str]] = {
     ],
 }
 
-# ETF 등 재무제표 없는 종목 — 섹터 미포함.
-_EXCLUDED = {"KODEX 200"}
+# ETF 등 재무제표 없는 종목 — 섹터 미포함. 현재 universe에는 ETF가 없지만
+# 안전망으로 빈 set 유지 (향후 ETF 추가 시 여기에 등록).
+_EXCLUDED: set = set()
 
 
 def get_sector(name: str) -> Optional[str]:

@@ -1,0 +1,721 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>DiscloseAI — HD현대 이익 해부</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #060814;
+    --panel: rgba(15, 23, 42, 0.55);
+    --panel-solid: #0f172a;
+    --border: rgba(99, 102, 241, 0.22);
+    --border-strong: rgba(99, 102, 241, 0.45);
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --good: #4ade80;
+    --warn: #fbbf24;
+    --bad: #f87171;
+    --accent: #4da6ff;
+    --accent2: #a78bfa;
+    --nebula: #c084fc;
+  }
+  * { box-sizing: border-box; }
+  /* 갤럭시 배경 — 깊은 공간 + 강한 nebula + 은하수 대각선 sweep */
+  body {
+    margin: 0; padding: 24px;
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic", sans-serif;
+    line-height: 1.5;
+    min-height: 100vh;
+    background:
+      /* 큰 nebula 구름 4개 — 인디고·마젠타·시안·골드 */
+      radial-gradient(ellipse 55% 45% at 15% 18%, rgba(124, 108, 240, 0.42), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 88% 75%, rgba(244, 114, 182, 0.30), transparent 65%),
+      radial-gradient(ellipse 45% 38% at 50% 100%, rgba(34, 211, 238, 0.22), transparent 65%),
+      radial-gradient(ellipse 28% 22% at 95% 8%, rgba(251, 191, 36, 0.15), transparent 70%),
+      /* 은하수 대각선 — 보라색 옅은 띠 */
+      linear-gradient(135deg, transparent 28%, rgba(167, 139, 250, 0.08) 42%, rgba(196, 181, 253, 0.14) 50%, rgba(167, 139, 250, 0.08) 58%, transparent 72%),
+      var(--bg);
+    background-attachment: fixed;
+    position: relative;
+    overflow-x: hidden;
+  }
+  /* 별빛 레이어 1 — 30개+ 점, 다양한 크기, 슬로우 트윙클 */
+  body::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image:
+      /* 큰 별 (밝은) */
+      radial-gradient(2.2px 2.2px at 7% 11%, #fff, transparent 55%),
+      radial-gradient(2px 2px at 28% 83%, #fff, transparent 55%),
+      radial-gradient(2.4px 2.4px at 52% 31%, #c4b5fd, transparent 55%),
+      radial-gradient(2px 2px at 73% 60%, #fff, transparent 55%),
+      radial-gradient(2.2px 2.2px at 91% 17%, #fbcfe8, transparent 55%),
+      radial-gradient(2px 2px at 11% 71%, #93c5fd, transparent 55%),
+      /* 중간 별 */
+      radial-gradient(1.4px 1.4px at 18% 28%, #ffffffcc, transparent 60%),
+      radial-gradient(1.4px 1.4px at 33% 12%, #ffffffaa, transparent 60%),
+      radial-gradient(1.5px 1.5px at 41% 56%, #c4b5fdcc, transparent 60%),
+      radial-gradient(1.4px 1.4px at 47% 89%, #ffffffaa, transparent 60%),
+      radial-gradient(1.5px 1.5px at 62% 8%, #93c5fdcc, transparent 60%),
+      radial-gradient(1.4px 1.4px at 68% 38%, #ffffffaa, transparent 60%),
+      radial-gradient(1.5px 1.5px at 79% 75%, #fbcfe8cc, transparent 60%),
+      radial-gradient(1.4px 1.4px at 85% 48%, #ffffffaa, transparent 60%),
+      radial-gradient(1.4px 1.4px at 96% 64%, #ffffffaa, transparent 60%),
+      /* 작은 별 다수 */
+      radial-gradient(1px 1px at 4% 35%, #ffffff88, transparent 65%),
+      radial-gradient(1px 1px at 14% 91%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 21% 47%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 26% 22%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 36% 75%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 43% 18%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 49% 50%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 55% 73%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 58% 24%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 65% 92%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 71% 16%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 75% 45%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 81% 24%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 88% 81%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 94% 39%, #ffffff77, transparent 65%);
+    animation: starsTwinkle 7s ease-in-out infinite alternate;
+  }
+  @keyframes starsTwinkle {
+    0%   { opacity: 0.65; }
+    50%  { opacity: 1.0; }
+    100% { opacity: 0.5; }
+  }
+  /* 패널의 cosmic 글로우 가로 라인 (헤더 위 장식) */
+  .container::before {
+    content: ''; display: block; height: 1px; margin: 0 auto 18px;
+    background: linear-gradient(90deg, transparent, var(--accent2), var(--accent), transparent);
+    opacity: 0.6;
+  }
+  /* === 코스믹 장식: 떠다니는 행성 + 슈팅 스타 === */
+  .cosmic-decor { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .planet { position: absolute; opacity: 0.85; filter: drop-shadow(0 0 18px rgba(167,139,250,0.30)); }
+  .planet-1 { top: 5%; right: 4%; width: 140px; height: 120px; animation: floatA 22s ease-in-out infinite; }
+  .planet-2 { bottom: 7%; left: 3%; width: 100px; height: 100px; animation: floatB 28s ease-in-out infinite; }
+  .planet-3 { top: 52%; right: 7%; width: 60px; height: 60px; animation: floatA 25s ease-in-out infinite; opacity: 0.7; }
+  @keyframes floatA {
+    0%, 100% { transform: translateY(0) rotate(0); }
+    50%      { transform: translateY(-14px) rotate(2deg); }
+  }
+  @keyframes floatB {
+    0%, 100% { transform: translateY(0) rotate(0); }
+    50%      { transform: translateY(12px) rotate(-2deg); }
+  }
+  /* 슈팅 스타 — 사선 streak. 18초 주기로 한 번 가로지름 */
+  .shooting-star {
+    position: absolute; top: 14%; left: -10%;
+    width: 140px; height: 1.5px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.95) 60%, rgba(196,181,253,0.9) 90%, transparent);
+    filter: drop-shadow(0 0 8px rgba(255,255,255,0.85));
+    border-radius: 1px;
+    transform: rotate(22deg);
+    animation: shoot 14s linear infinite;
+    opacity: 0;
+  }
+  .shooting-star.delay { animation-delay: 7s; top: 38%; }
+  @keyframes shoot {
+    0%  { opacity: 0; transform: translate(0, 0) rotate(22deg); }
+    2%  { opacity: 1; }
+    9%  { opacity: 1; transform: translate(110vw, 45vh) rotate(22deg); }
+    10% { opacity: 0; transform: translate(110vw, 45vh) rotate(22deg); }
+    100%{ opacity: 0; transform: translate(110vw, 45vh) rotate(22deg); }
+  }
+  /* 헤일로가 있는 밝은 별 — 코어 + 부드러운 후광 */
+  body::after {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image:
+      radial-gradient(4px 4px at 13% 24%, #fff 0%, rgba(255,255,255,0.4) 25%, transparent 70%),
+      radial-gradient(4.5px 4.5px at 76% 13%, #c4b5fd 0%, rgba(196,181,253,0.4) 25%, transparent 70%),
+      radial-gradient(5px 5px at 39% 86%, #93c5fd 0%, rgba(147,197,253,0.35) 25%, transparent 70%),
+      radial-gradient(4px 4px at 89% 67%, #fbcfe8 0%, rgba(251,207,232,0.35) 25%, transparent 70%),
+      radial-gradient(4px 4px at 6% 64%, #fde68a 0%, rgba(253,230,138,0.3) 25%, transparent 70%);
+    animation: starsTwinkle 9s ease-in-out infinite alternate-reverse;
+  }
+  .container { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+  /* 헤더 — 코스믹 그라데이션 라인 + 회사명 글로우 */
+  header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    padding-bottom: 16px; margin-bottom: 24px;
+    border-bottom: 1px solid transparent;
+    border-image: linear-gradient(90deg, transparent, var(--accent2), var(--accent), transparent) 1;
+  }
+  header h1 {
+    margin: 0; font-size: 30px; letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #cbd5e1, var(--accent), var(--nebula));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 36px rgba(77,166,255,0.18);
+  }
+  header .meta { color: var(--muted); font-size: 14px; }
+  .grid { display: grid; gap: 16px; margin-bottom: 16px; }
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+  .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+  /* 패널 — 글래스(반투명+블러) + 인디고 글로우 보더 + 미세 코스믹 그라디언트 */
+  .panel {
+    background:
+      linear-gradient(135deg, rgba(167,139,250,0.04), rgba(77,166,255,0.04) 60%, rgba(244,114,182,0.03)),
+      var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px; padding: 20px;
+    backdrop-filter: blur(12px) saturate(1.3);
+    -webkit-backdrop-filter: blur(12px) saturate(1.3);
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.06) inset,
+      0 0 0 1px rgba(167,139,250,0.08) inset,
+      0 18px 40px rgba(0,0,0,0.4),
+      0 0 24px rgba(77,166,255,0.06);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    position: relative;
+  }
+  .panel:hover {
+    border-color: var(--border-strong);
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.08) inset,
+      0 0 0 1px rgba(167,139,250,0.15) inset,
+      0 22px 50px rgba(77,166,255,0.18),
+      0 0 32px rgba(167,139,250,0.18);
+  }
+  .panel h2 {
+    margin: 0 0 12px; font-size: 16px;
+    color: var(--text); font-weight: 600; letter-spacing: 0.01em;
+  }
+  .score-big {
+    font-size: 76px; font-weight: 800; line-height: 1;
+    background: linear-gradient(135deg, var(--accent), var(--accent2), var(--nebula));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 40px rgba(167,139,250,0.25);
+    letter-spacing: -0.03em;
+  }
+  .grade {
+    display: inline-block; padding: 4px 16px; border-radius: 999px;
+    font-weight: 700; font-size: 18px; margin-left: 12px;
+  }
+  .grade-A { background: #16a34a; color: white; }
+  .grade-B { background: #65a30d; color: white; }
+  .grade-C { background: #ca8a04; color: white; }
+  .grade-D { background: #ea580c; color: white; }
+  .grade-F { background: #dc2626; color: white; }
+  .module-list { list-style: none; padding: 0; margin: 16px 0 0; }
+  .module-list li {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 0; border-bottom: 1px solid var(--border);
+  }
+  .module-list li:last-child { border-bottom: none; }
+  .module-name { color: var(--muted); font-size: 13px; }
+  .module-score { font-weight: 700; font-size: 18px; }
+  .summary-line {
+    background: rgba(99, 102, 241, 0.1); border-left: 3px solid var(--accent);
+    padding: 12px 16px; border-radius: 4px; margin-bottom: 8px;
+  }
+  .highlight-card {
+    border-left: 4px solid var(--border);
+    padding: 12px 16px; margin-bottom: 8px;
+    background: rgba(0,0,0,0.2); border-radius: 4px;
+  }
+  .highlight-card.sev-high { border-left-color: var(--bad); }
+  .highlight-card.sev-mid { border-left-color: var(--warn); }
+  .highlight-card.sev-low { border-left-color: var(--good); }
+  .highlight-card .title { font-weight: 700; margin-bottom: 4px; }
+  .highlight-card .meta { font-size: 12px; color: var(--muted); margin-left: 8px; }
+  .chart-wrap { position: relative; height: 280px; }
+  .ratios-list { margin: 0; padding: 0; }
+  .ratio-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 0; border-bottom: 1px solid var(--border);
+  }
+  .ratio-row:last-child { border-bottom: none; }
+  .ratio-name { flex: 0 0 130px; color: var(--muted); font-size: 13px; }
+  .ratio-bar-wrap {
+    flex: 1; height: 8px; background: rgba(148,163,184,0.15);
+    border-radius: 4px; overflow: hidden; position: relative;
+  }
+  .ratio-bar-fill { height: 100%; transition: width 0.3s; border-radius: 4px; }
+  .ratio-bar-fill.positive { background: linear-gradient(90deg, var(--accent), #8b5cf6); }
+  .ratio-bar-fill.negative { background: var(--bad); }
+  .ratio-value {
+    flex: 0 0 90px; text-align: right; font-weight: 600; font-size: 16px;
+  }
+  .ratio-value.na { color: var(--muted); font-weight: 400; font-size: 13px; }
+  .stmt-table {
+    width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 14px;
+  }
+  .stmt-table th, .stmt-table td {
+    padding: 10px 8px; border-bottom: 1px solid var(--border); text-align: right;
+  }
+  .stmt-table th:first-child, .stmt-table td:first-child {
+    text-align: left; color: var(--muted); font-weight: 500;
+  }
+  .stmt-table thead th {
+    color: var(--muted); font-weight: 500; font-size: 12px;
+    border-bottom: 2px solid var(--border);
+  }
+  .stmt-table td { font-variant-numeric: tabular-nums; }
+  .stmt-table tr.highlight-row td {
+    font-weight: 700; background: rgba(99,102,241,0.08);
+  }
+  .stmt-table td.negative { color: var(--bad); }
+  .industry-row {
+    display: grid; grid-template-columns: 130px 1fr 90px 90px 90px;
+    gap: 12px; align-items: center;
+    padding: 10px 0; border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+  .industry-row:last-child { border-bottom: none; }
+  .industry-row .ind-label { color: var(--muted); }
+  .industry-row .ind-bar-wrap {
+    position: relative; height: 24px; background: rgba(148,163,184,0.08);
+    border-radius: 4px; overflow: hidden;
+  }
+  .industry-row .ind-bar-mine {
+    position: absolute; left: 0; top: 0; height: 100%;
+    background: linear-gradient(90deg, var(--accent), #8b5cf6); opacity: 0.85;
+  }
+  .industry-row .ind-bar-avg {
+    position: absolute; top: 0; height: 100%; width: 2px;
+    background: var(--warn);
+  }
+  .industry-row .ind-val { text-align: right; font-variant-numeric: tabular-nums; }
+  .industry-row .ind-val.mine { font-weight: 600; }
+  .industry-row .ind-val.avg { color: var(--muted); }
+  .industry-row .ind-diff { text-align: right; font-weight: 600; }
+  .industry-row .ind-diff.up { color: var(--good); }
+  .industry-row .ind-diff.down { color: var(--bad); }
+  .industry-row .ind-diff.na { color: var(--muted); font-weight: 400; }
+  .industry-head {
+    display: grid; grid-template-columns: 130px 1fr 90px 90px 90px;
+    gap: 12px; padding: 8px 0; border-bottom: 2px solid var(--border);
+    color: var(--muted); font-size: 12px;
+  }
+  .industry-head div:nth-child(3), .industry-head div:nth-child(4), .industry-head div:nth-child(5) {
+    text-align: right;
+  }
+  .help {
+    display: inline-block; margin-left: 4px; cursor: help;
+    color: var(--muted); font-size: 10px;
+    position: relative; vertical-align: middle;
+    width: 14px; height: 14px; line-height: 14px;
+    text-align: center; border-radius: 50%;
+    background: rgba(148,163,184,0.15);
+    font-weight: 400; font-style: normal;
+  }
+  .help:hover { background: var(--accent); color: white; }
+  .help .help-text {
+    display: none; position: absolute;
+    left: 0; bottom: calc(100% + 10px);
+    width: 340px; padding: 0;
+    background: #0b1220; color: var(--text);
+    border: 1px solid var(--accent); border-radius: 8px;
+    font-size: 12px; line-height: 1.55;
+    z-index: 100; text-align: left;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+    font-weight: 400; white-space: normal;
+    overflow: hidden;
+  }
+  .help:hover .help-text { display: block; }
+  .help-title {
+    font-size: 13px; font-weight: 700; color: var(--text);
+    background: linear-gradient(135deg, rgba(99,102,241,0.25), rgba(139,92,246,0.15));
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(99,102,241,0.3);
+  }
+  .help-section {
+    padding: 8px 14px;
+    border-bottom: 1px solid rgba(51, 65, 85, 0.4);
+  }
+  .help-section:last-child { border-bottom: none; }
+  .help-section-label {
+    font-size: 10px; font-weight: 700;
+    color: var(--warn); letter-spacing: 0.5px;
+    margin-bottom: 4px; text-transform: uppercase;
+  }
+  .help-section-body {
+    font-size: 12px; line-height: 1.55; color: var(--text);
+  }
+  /* 왼쪽 끝 근처의 툴팁은 왼쪽이 아닌 오른쪽 정렬 */
+  .industry-row .help .help-text,
+  .ratio-row .help .help-text,
+  .stmt-table .help .help-text {
+    left: auto; right: auto;
+  }
+  footer {
+    margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+    color: var(--muted); font-size: 12px;
+  }
+  .disclaimer {
+    background: rgba(234, 179, 8, 0.08); border: 1px solid rgba(234, 179, 8, 0.3);
+    padding: 12px 16px; border-radius: 8px; margin-top: 16px; font-size: 13px;
+  }
+</style>
+</head>
+<body>
+<!-- 갤럭시 장식: 떠다니는 행성 + 슈팅 스타 (배경 레이어, 콘텐츠와 무관) -->
+<div class="cosmic-decor" aria-hidden="true">
+  <!-- Planet 1: 시안/인디고 가스자이언트 with ring (top-right) -->
+  <svg class="planet planet-1" viewBox="0 0 140 120" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="pg1" cx="38%" cy="38%">
+        <stop offset="0%" stop-color="#bae6fd"/>
+        <stop offset="55%" stop-color="#3b82f6"/>
+        <stop offset="100%" stop-color="#0c1b3a"/>
+      </radialGradient>
+      <linearGradient id="pg1ring" x1="0%" y1="50%" x2="100%" y2="50%">
+        <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.05"/>
+        <stop offset="50%" stop-color="#a78bfa" stop-opacity="0.55"/>
+        <stop offset="100%" stop-color="#a78bfa" stop-opacity="0.05"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="70" cy="60" rx="62" ry="9" fill="none" stroke="url(#pg1ring)" stroke-width="2.5" transform="rotate(-18 70 60)"/>
+    <ellipse cx="70" cy="60" rx="62" ry="9" fill="none" stroke="#c4b5fd" stroke-opacity="0.15" stroke-width="6" transform="rotate(-18 70 60)"/>
+    <circle cx="70" cy="60" r="28" fill="url(#pg1)"/>
+    <circle cx="60" cy="52" r="5" fill="#bae6fd" opacity="0.35"/>
+  </svg>
+  <!-- Planet 2: 마젠타/보라 작은 행성 (bottom-left) -->
+  <svg class="planet planet-2" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="pg2" cx="36%" cy="36%">
+        <stop offset="0%" stop-color="#fbcfe8"/>
+        <stop offset="55%" stop-color="#c026d3"/>
+        <stop offset="100%" stop-color="#3b0764"/>
+      </radialGradient>
+    </defs>
+    <circle cx="50" cy="50" r="32" fill="url(#pg2)" filter="drop-shadow(0 0 18px rgba(192,38,211,0.45))"/>
+    <ellipse cx="44" cy="42" rx="6" ry="4" fill="#fbcfe8" opacity="0.4"/>
+  </svg>
+  <!-- Planet 3: 골드/오렌지 작은 행성 with ring (mid-right) -->
+  <svg class="planet planet-3" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="pg3" cx="35%" cy="35%">
+        <stop offset="0%" stop-color="#fef3c7"/>
+        <stop offset="55%" stop-color="#f59e0b"/>
+        <stop offset="100%" stop-color="#451a03"/>
+      </radialGradient>
+    </defs>
+    <ellipse cx="40" cy="40" rx="36" ry="6" fill="none" stroke="#fcd34d" stroke-opacity="0.45" stroke-width="1.6" transform="rotate(15 40 40)"/>
+    <circle cx="40" cy="40" r="16" fill="url(#pg3)"/>
+  </svg>
+  <span class="shooting-star"></span>
+  <span class="shooting-star delay"></span>
+</div>
+<div class="container">
+  <header>
+    <div>
+      <h1>HD현대 <span style="color:var(--muted);font-size:18px;">(01205709)</span></h1>
+      <div class="meta">DiscloseAI · 이익 해부 (Earnings Quality Score)</div>
+    </div>
+    <div style="text-align:right;">
+      <div class="meta">분석 기간</div>
+      <div style="font-size:18px;font-weight:600;">2021~2025 (5년)</div>
+    </div>
+  </header>
+
+  <div class="grid grid-2">
+    <div class="panel">
+      <h2>EQS 종합 점수</h2>
+      <div>
+        <span class="score-big">71.0</span>
+        <span class="grade grade-B">B</span>
+      </div>
+      <ul class="module-list" id="moduleList"></ul>
+    </div>
+
+    <div class="panel">
+      <h2>5개 모듈 프로파일</h2>
+      <div class="chart-wrap"><canvas id="radar"></canvas></div>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:0;">
+    <h2>💰 수익성 지표 <span style="color:var(--muted);font-weight:400;font-size:13px;" id="ratiosYear"></span></h2>
+    <div class="ratios-list" id="ratiosList"></div>
+  </div>
+
+  <div class="panel" id="industryPanel" style="margin-top:16px; display:none;">
+    <h2>🏭 업계 대비 <span style="color:var(--muted);font-weight:400;font-size:13px;" id="industryMeta"></span></h2>
+    <div class="industry-head">
+      <div>지표</div>
+      <div>내 회사 vs 업계 평균</div>
+      <div>내 회사</div>
+      <div>업계 평균</div>
+      <div>차이</div>
+    </div>
+    <div id="industryRows"></div>
+  </div>
+
+  <div class="panel" style="margin-top:16px;">
+    <h2>매출 · 영업현금흐름 · 순이익 시계열</h2>
+    <div class="chart-wrap" style="height:320px;"><canvas id="ts"></canvas></div>
+  </div>
+
+  <div class="panel" style="margin-top:16px;">
+    <h2>📊 손익계산서 (최근 5년)</h2>
+    <div class="summary-line" id="sumIncome"></div>
+    <table class="stmt-table" id="incomeTable"></table>
+  </div>
+
+  <div class="panel" style="margin-top:16px;">
+    <h2>🏛 재무상태표 (최근 5년)</h2>
+    <div class="summary-line" id="sumBalance"></div>
+    <table class="stmt-table" id="balanceTable"></table>
+  </div>
+
+  <div class="panel" style="margin-top:16px;">
+    <h2>💵 현금흐름표 (최근 5년)</h2>
+    <div class="summary-line" id="sumCash"></div>
+    <table class="stmt-table" id="cashflowTable"></table>
+  </div>
+
+  <div class="panel" style="margin-top:16px;">
+    <h2>⚡ 주목 포인트</h2>
+    <div id="highlights"></div>
+  </div>
+
+  <footer>
+    <div class="disclaimer">
+      ⚠️ 본 분석은 과거 통계 기반 참고 정보입니다. 투자 조언이 아닙니다.
+      EQS 점수는 K-IFRS 재무제표 자동 분석 결과로, 단일 지표만으로 투자 판단을 내리지 마세요.
+    </div>
+    <div style="margin-top:12px;">
+      Powered by DART OpenAPI · DiscloseAI Financial Module · 분석 시점 데이터 기준
+    </div>
+  </footer>
+</div>
+
+<script>
+const DATA = {"corp": {"name": "HD현대", "code": "01205709", "industry": "100", "year_count": 5}, "years": [{"year": 2021, "revenue": 28158746399000.0, "cogs": 25492548379000.0, "operating_income": 1085411576000.0, "net_income": 186012264000.0, "operating_cashflow": 205801317000.0, "investing_cashflow": -1862489886000.0, "financing_cashflow": 1708417573000.0, "total_assets": 35815655908000.0, "total_liabilities": 23928156390000.0, "total_equity": 11887499518000.0, "current_assets": 13402353216000.0, "current_liabilities": 11685895014000.0, "long_term_debt": 12242261376000.0}, {"year": 2022, "revenue": 60849668073000.0, "cogs": 54883097648000.0, "operating_income": 3387008264000.0, "net_income": 2234955013000.0, "operating_cashflow": 2133778170000.0, "investing_cashflow": 1235407171000.0, "financing_cashflow": -1537397606000.0, "total_assets": 65570861076000.0, "total_liabilities": 42307197037000.0, "total_equity": 23263664039000.0, "current_assets": 30130809645000.0, "current_liabilities": 26274593765000.0, "long_term_debt": 16032603272000.0}, {"year": 2023, "revenue": 61331302785000.0, "cogs": 56366042540000.0, "operating_income": 2031563587000.0, "net_income": 785832206000.0, "operating_cashflow": 3934871003000.0, "investing_cashflow": -2622447720000.0, "financing_cashflow": -905816018000.0, "total_assets": 67982820888000.0, "total_liabilities": 44750983788000.0, "total_equity": 23231837100000.0, "current_assets": 32083110520000.0, "current_liabilities": 28532163119000.0, "long_term_debt": 16218820669000.0}, {"year": 2024, "revenue": 67765626088000.0, "cogs": 61338721114000.0, "operating_income": 2983162778000.0, "net_income": 1930179481000.0, "operating_cashflow": 7511489661000.0, "investing_cashflow": -2400882029000.0, "financing_cashflow": -3927148848000.0, "total_assets": 73866670219000.0, "total_liabilities": 47481568074000.0, "total_equity": 26385102145000.0, "current_assets": 35592849734000.0, "current_liabilities": 32333112202000.0, "long_term_debt": 15148455872000.0}, {"year": 2025, "revenue": 71259438270000.0, "cogs": 61203798281000.0, "operating_income": 6099636253000.0, "net_income": 3675482625000.0, "operating_cashflow": 7384884225000.0, "investing_cashflow": -4746311853000.0, "financing_cashflow": -1944899536000.0, "total_assets": 78685890494000.0, "total_liabilities": 48350799380000.0, "total_equity": 30335091114000.0, "current_assets": 39632675115000.0, "current_liabilities": 33637107184000.0, "long_term_debt": 14713692196000.0}], "eqs": {"total": 71.0, "grade": "B", "excluded": [], "modules": [{"name": "M1", "score": 92.4, "raw": 1.6943162227316848, "note": "3년 누적 OCF/영업이익=1.69"}, {"name": "M2", "score": 66.1, "raw": 0.046252390886523775, "note": "매출증가율 +5.2%, 매출채권증가율 +9.8%, 차이 D=+4.6%p"}, {"name": "M3", "score": 45.2, "raw": 1.5938900331070882, "note": "부채비율=159% (업종 manufacturing, 양호선=100% / 위험선=400%)"}, {"name": "M4", "score": 64.8, "raw": 0.05424792553468871, "note": "3년 평균 영업이익률 +5.4%, 변동폭 5.2%p (업종 manufacturing/general)"}, {"name": "M5", "score": 86.4, "raw": 0.14269644158303985, "note": "자본 CAGR +14.3%/yr (2023→2025, 자본 ×1.31)"}]}, "ratios": {"year": 2025, "values": {"gross_margin": 14.11130964981714, "operating_margin": 8.55975910150828, "net_margin": 5.157888855471608, "roe": 12.116273563139956, "roa": 4.671082200283753}, "labels": {"gross_margin": "매출총이익률", "operating_margin": "영업이익률", "net_margin": "순이익률", "roe": "ROE", "roa": "ROA"}}, "industry": {"sector": "지주/복합기업", "n_companies": 5, "averages": {"gross_margin": 14.511583091312675, "operating_margin": 129.35069298236766, "net_margin": 128.73412075359843, "roe": 11.322686923631288, "roa": 8.103599788094973}, "members": ["SK스퀘어", "삼성물산", "SK", "두산", "HD현대"]}, "summary": ["100원 팔면 영업으로 9원이 남습니다 (세금·이자 등 빼고 최종 5원).", "빚이 전체 자산의 61%입니다, 자본은 39%.", "벌어서 투자하고 — 여유 있는 구조 (영업 흑자로 투자도 하고 빚도 갚는다)."], "highlights": [{"severity": 4, "title": "현금창출력 우수", "message": "영업현금흐름이 순이익의 201%로 이익을 충분히 뒷받침합니다."}], "glossary": {"gross_margin": {"label": "매출총이익률", "description": "매출에서 원가(재료·부품·생산 인건비)를 뺀 이익이 매출에서 차지하는 비율.", "how": null, "benchmark": "30%+ 우수 / 15%~30% 양호 / 15%↓ 원가 압박 큼", "intuition": "'100원 팔면 원가 빼고 얼마 남는지' — 제품 자체의 경쟁력 지표."}, "operating_margin": {"label": "영업이익률", "description": "본업 활동으로 번 이익(매출−원가−판관비−인건비)이 매출에서 차지하는 비율.", "how": null, "benchmark": "15%+ 우수 / 10%~15% 양호 / 5%↓ 약함", "intuition": "'100원 팔아서 본업으로 몇 원 남나' — 회사 운영 효율성을 보여줌."}, "net_margin": {"label": "순이익률", "description": "세금·이자·일회성 손익까지 모두 빼고 최종으로 남는 돈이 매출에서 차지하는 비율.", "how": null, "benchmark": "10%+ 우수 / 5%~10% 양호 / 2%↓ 취약", "intuition": "회사의 최종 성적표. 영업이익률보다 낮은 이유는 이자·세금 때문."}, "roe": {"label": "ROE (자기자본이익률)", "description": "주주가 맡긴 돈(자본) 100원으로 한 해 동안 얼마를 벌었는지.", "how": "순이익 ÷ 자본총계 × 100", "benchmark": "15%+ 우수 / 10%~15% 양호 / 5%↓ 저조", "intuition": "'내가 투자한 돈의 수익률'. 워런 버핏이 가장 중시하는 지표 중 하나."}, "roa": {"label": "ROA (총자산이익률)", "description": "회사 전체 자산(부채 포함)으로 얼마나 효율적으로 벌었는지.", "how": "순이익 ÷ 자산총계 × 100", "benchmark": "7%+ 우수 / 5%~7% 양호 / 2%↓ 비효율", "intuition": "ROE와 달리 빚도 포함한 전체 자산 기준. 빚에 의존하는 경영인지 가릴 수 있음."}, "operating_cashflow": {"label": "영업활동 CF", "description": "본업(물건·서비스 판매)으로 실제로 들어온 현금.", "how": null, "benchmark": "꾸준히 +  / 이익 대비 80%+ 가 이상적", "intuition": "장부상 '이익'보다 '진짜 번 돈'에 가까움. 이익은 +인데 여기가 -면 외상만 쌓이는 신호."}, "investing_cashflow": {"label": "투자활동 CF", "description": "공장·설비·자회사 주식 등을 사거나 판 현금.", "how": null, "benchmark": "성장기 기업: − (적극 투자) / 축소기: + (매각)", "intuition": "마이너스면 '돈 써서 미래에 투자 중' — 성장 의지. 플러스면 '자산 팔고 있음' — 축소 신호."}, "financing_cashflow": {"label": "재무활동 CF", "description": "빚을 내거나 갚고, 주주에게 배당을 지급한 현금.", "how": null, "benchmark": "안정기: − (빚 상환·배당) / 성장기: + (빚·증자)", "intuition": "마이너스면 '빚 갚거나 배당 주는 중' — 재무구조 개선. 플러스면 '빚 늘리는 중'."}, "total_assets": {"label": "자산총계", "description": "회사가 가진 모든 것(현금·재고·공장·매출채권 등)의 합계.", "how": null, "benchmark": null, "intuition": "'회사 크기'의 가장 기본 지표. = 부채총계 + 자본총계."}, "total_liabilities": {"label": "부채총계", "description": "회사가 갚아야 할 모든 빚(차입금·매입채무·퇴직급여 등)의 합계.", "how": null, "benchmark": "부채비율(부채/자산) 50%↓ 안전 / 70%+ 고부채", "intuition": "많으면 이자 부담 ↑, 경기 둔화 시 취약해짐."}, "total_equity": {"label": "자본총계", "description": "자산에서 부채를 뺀 '주주의 몫'.", "how": null, "benchmark": "마이너스면 '자본잠식' — 상장폐지 사유", "intuition": "회사를 지금 청산하면 주주에게 돌아올 금액에 가까움."}, "current_assets": {"label": "유동자산", "description": "1년 안에 현금화할 수 있는 자산 (현금·예금·재고·매출채권).", "how": null, "benchmark": "유동비율(유동자산/유동부채) 150%+ 안전", "intuition": "단기 부채 갚을 여력. 부족하면 흑자 도산 가능."}, "current_liabilities": {"label": "유동부채", "description": "1년 안에 갚아야 하는 빚 (단기차입·매입채무·미지급금).", "how": null, "benchmark": null, "intuition": "이 금액보다 유동자산이 작으면 빚 상환 압박 받음."}, "M1": {"label": "M1 현금이익률", "description": "본업에서 번 영업이익이 진짜 영업현금으로 돌아왔는가를 측정.", "how": "R = 3년 누적 영업활동현금흐름(OCF) ÷ 3년 누적 영업이익. R=1.0이면 75점, R=2.0이면 100점, R≤0이면 0점 (선형 보간).", "benchmark": "R≥2.0 → 100점 (영업이익의 2배 현금) / R=1.0 → 75점 (이익=현금) / R=0.5 → 37.5점 / R≤0 → 0점", "intuition": "장부 이익이 실제 현금으로 들어왔는지. 영업이익만큼 현금이 들어왔으면 75점, 그보다 더 들어왔으면 100점까지 가산."}, "M2": {"label": "M2 매출 회수 건전성", "description": "매출증가율과 외상(매출채권+계약자산)증가율의 차이로 매출 신뢰도 평가.", "how": "(미수채권증가율) − (매출증가율) = D. D ≤ -10%p → 100점, 0%p → 80점, +10%p → 50점, +30%p+ → 0점. 건설·조선은 매출채권에 계약자산(미청구공사) 합산.", "benchmark": "-10%p↓ 매우 양호 / 0%p 정상 / +10%p 주의 / +30%p↑ 강한 의심", "intuition": "매출은 10% 늘었는데 외상은 30% 늘면 의심이다. 금융업은 매출채권 개념 부적합으로 제외."}, "M3": {"label": "M3 부채 건전성", "description": "부채총계 ÷ 자본총계. 빚이 자기 돈의 몇 배인지를 본다.", "how": "업종별 임계값 [T1·T2·T3·T4] 4구간 선형 보간 — D/E=0 → 100점, T1 → 80점, T2 → 60점, T3 → 35점, T4 → 0점. 업종(IT 30~250%, 제조 50~400%, 건설 100~600%, 은행 800~2500%)마다 임계값이 다름.", "benchmark": "T1(양호선) 이내 → 80점 이상. 자본잠식(자본 ≤ 0)은 0점 + 상장폐지 사유.", "intuition": "동일 업종 안에서 빚 부담이 적은 회사를 가린다. 건설·항공이 200%여도 정상이고, 소프트웨어가 100%면 이례적."}, "M4": {"label": "M4 본업 안정성", "description": "3년 영업이익률의 평균(꾸준히 돈을 내는가) + 변동폭(들쭉날쭉한가).", "how": "평균점수 × 0.6 + 변동폭점수 × 0.4. 평균·변동폭 각각 업종별 임계값. 사이클 업종(반도체·조선·정유)은 변동폭 임계값이 5배 완화.", "benchmark": "해당 업종 우수선(80점) 이상이 우량. 평균이 적자거나 변동폭이 임계 초과면 0점.", "intuition": "고마진 업종(SW·바이오)은 OM 25%가 80점, 저마진 업종(유통)은 OM 4%가 80점. 본질 차이를 임계값에 내재화."}, "M5": {"label": "M5 자본 성장성", "description": "2년간 자기자본의 연평균 성장률(CAGR). 주주의 몫이 커지는 속도.", "how": "CAGR = (자본총계[t] ÷ 자본총계[t-2])^(1/2) − 1. 5단계 선형 보간: -10%/yr → 0점, 0%/yr → 50점, +10%/yr → 80점, +20%/yr → 95점, +30%/yr → 100점.", "benchmark": "+10%/yr → 80점 (양호) / 0%/yr → 50점 (정체) / 마이너스는 자본 감소(자사주 소각·배당 환원 포함)", "intuition": "회사가 벌어서 안에 쌓이는 속도. 단, 자사주 매입·소각이 활발하면 CAGR이 부당하게 낮을 수 있음."}}};
+
+// 용어 설명 툴팁 헬퍼 — glossary에 있는 key만 ⓘ 출력 (섹션형 카드)
+function helpIcon(key) {
+  const g = DATA.glossary && DATA.glossary[key];
+  if (!g) return '';
+  const sections = [];
+  if (g.description) sections.push(['📖 개념', g.description]);
+  if (g.how)         sections.push(['🧮 산출 방식', g.how]);
+  if (g.benchmark)   sections.push(['📏 기준선', g.benchmark]);
+  if (g.intuition)   sections.push(['💡 쉽게 말하면', g.intuition]);
+  const body = sections.map(([lbl, txt]) =>
+    `<div class="help-section"><div class="help-section-label">${lbl}</div><div class="help-section-body">${txt}</div></div>`
+  ).join('');
+  return `<span class="help">ⓘ<span class="help-text">
+    <div class="help-title">${g.label}</div>${body}
+  </span></span>`;
+}
+
+// 모듈 점수 리스트
+const moduleColors = {
+  M1: '#06b6d4', M2: '#8b5cf6', M3: '#22c55e', M4: '#eab308', M5: '#ef4444'
+};
+const moduleLabels = {
+  M1: '현금이익률', M2: '매출 회수 건전성', M3: '부채 건전성',
+  M4: '본업 안정성', M5: '자본 성장성'
+};
+
+const ml = document.getElementById('moduleList');
+DATA.eqs.modules.forEach(m => {
+  const li = document.createElement('li');
+  const score = m.score === null ? '—' : m.score.toFixed(1);
+  li.innerHTML = `
+    <div>
+      <span class="module-score" style="color:${moduleColors[m.name]}">${score}</span>
+      <span class="module-name" style="margin-left:12px;">${moduleLabels[m.name]}${helpIcon(m.name)}</span>
+    </div>
+    <span class="module-name" style="font-size:11px;text-align:right;max-width:200px;">${m.note}</span>
+  `;
+  ml.appendChild(li);
+});
+
+// 레이더 차트
+new Chart(document.getElementById('radar'), {
+  type: 'radar',
+  data: {
+    labels: DATA.eqs.modules.map(m => moduleLabels[m.name]),
+    datasets: [{
+      label: 'EQS',
+      data: DATA.eqs.modules.map(m => m.score || 0),
+      backgroundColor: 'rgba(77, 166, 255, 0.22)',
+      borderColor: '#4da6ff',
+      borderWidth: 2,
+      pointBackgroundColor: '#a78bfa',
+      pointBorderColor: '#fff',
+      pointHoverRadius: 6,
+    }]
+  },
+  options: {
+    plugins: { legend: { display: false } },
+    scales: {
+      r: {
+        min: 0, max: 100,
+        grid: { color: 'rgba(167, 139, 250, 0.18)' },
+        angleLines: { color: 'rgba(167, 139, 250, 0.22)' },
+        pointLabels: { color: '#e2e8f0', font: { size: 12 } },
+        ticks: { color: '#94a3b8', backdropColor: 'transparent', stepSize: 25 }
+      }
+    }
+  }
+});
+
+// 수익성 지표 렌더링
+// 막대바는 30%를 풀 게이지 기준 — 대부분 비율 지표가 30%면 우수 수준
+const ratioRef = 30;
+const rList = document.getElementById('ratiosList');
+if (DATA.ratios.year !== null) {
+  document.getElementById('ratiosYear').textContent = `(${DATA.ratios.year}년 결산 기준)`;
+}
+Object.entries(DATA.ratios.labels).forEach(([key, label]) => {
+  const v = DATA.ratios.values[key];
+  const row = document.createElement('div');
+  row.className = 'ratio-row';
+  let valueHtml, barHtml;
+  if (v === null || v === undefined) {
+    valueHtml = `<div class="ratio-value na">N/A</div>`;
+    barHtml = `<div class="ratio-bar-wrap"></div>`;
+  } else {
+    const pct = Math.min(Math.abs(v) / ratioRef * 100, 100);
+    const cls = v >= 0 ? 'positive' : 'negative';
+    valueHtml = `<div class="ratio-value">${v.toFixed(1)}%</div>`;
+    barHtml = `<div class="ratio-bar-wrap"><div class="ratio-bar-fill ${cls}" style="width:${pct}%"></div></div>`;
+  }
+  row.innerHTML = `<div class="ratio-name">${label}${helpIcon(key)}</div>${barHtml}${valueHtml}`;
+  rList.appendChild(row);
+});
+
+// 업계 대비 렌더링
+if (DATA.industry) {
+  document.getElementById('industryPanel').style.display = '';
+  document.getElementById('industryMeta').textContent =
+    `· ${DATA.industry.sector} (${DATA.industry.n_companies}개사 평균)`;
+  const rowsDiv = document.getElementById('industryRows');
+  // 막대 시각화 기준: 양쪽 값의 최대치 * 1.2
+  Object.entries(DATA.ratios.labels).forEach(([key, label]) => {
+    const mine = DATA.ratios.values[key];
+    const avg = DATA.industry.averages[key];
+    const row = document.createElement('div');
+    row.className = 'industry-row';
+    let barHtml = '<div class="ind-bar-wrap"></div>';
+    let diffHtml = '<div class="ind-diff na">—</div>';
+    let mineHtml = '<div class="ind-val mine">—</div>';
+    let avgHtml = '<div class="ind-val avg">—</div>';
+    if (mine !== null && mine !== undefined) {
+      mineHtml = `<div class="ind-val mine">${mine.toFixed(1)}%</div>`;
+    }
+    if (avg !== null && avg !== undefined) {
+      avgHtml = `<div class="ind-val avg">${avg.toFixed(1)}%</div>`;
+    }
+    if (mine !== null && avg !== null && mine !== undefined && avg !== undefined) {
+      const maxRef = Math.max(Math.abs(mine), Math.abs(avg)) * 1.2 || 1;
+      const mineW = Math.max(0, Math.min(100, mine / maxRef * 100));
+      const avgW = avg / maxRef * 100;
+      barHtml = `<div class="ind-bar-wrap">
+        <div class="ind-bar-mine" style="width:${mineW}%"></div>
+        <div class="ind-bar-avg" style="left:${avgW}%"></div>
+      </div>`;
+      const diff = mine - avg;
+      const diffCls = diff >= 0 ? 'up' : 'down';
+      const sign = diff >= 0 ? '+' : '';
+      diffHtml = `<div class="ind-diff ${diffCls}">${sign}${diff.toFixed(1)}%p</div>`;
+    }
+    row.innerHTML = `<div class="ind-label">${label}${helpIcon(key)}</div>${barHtml}${mineHtml}${avgHtml}${diffHtml}`;
+    rowsDiv.appendChild(row);
+  });
+}
+
+// 시계열
+const yrs = DATA.years.map(y => y.year);
+const toEok = v => v === null ? null : v / 1e8;  // 원 → 억원 (DART는 원 단위)
+new Chart(document.getElementById('ts'), {
+  type: 'line',
+  data: {
+    labels: yrs,
+    datasets: [
+      {label: '매출', data: DATA.years.map(y => toEok(y.revenue)), borderColor: '#4da6ff', backgroundColor: 'rgba(77,166,255,0.08)', tension: 0.35, borderWidth: 2.2, pointBackgroundColor: '#4da6ff', pointRadius: 3, fill: true},
+      {label: '영업현금흐름', data: DATA.years.map(y => toEok(y.operating_cashflow)), borderColor: '#34d399', backgroundColor: 'rgba(52,211,153,0.06)', tension: 0.35, borderWidth: 2.2, pointBackgroundColor: '#34d399', pointRadius: 3, fill: true},
+      {label: '순이익', data: DATA.years.map(y => toEok(y.net_income)), borderColor: '#fbbf24', backgroundColor: 'rgba(251,191,36,0.06)', tension: 0.35, borderWidth: 2.2, pointBackgroundColor: '#fbbf24', pointRadius: 3, fill: true},
+    ]
+  },
+  options: {
+    plugins: { legend: { labels: { color: '#e2e8f0' } } },
+    scales: {
+      x: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(148,163,184,0.1)' } },
+      y: { ticks: { color: '#94a3b8', callback: v => (v/10000).toFixed(0) + '조' }, grid: { color: 'rgba(148,163,184,0.1)' } }
+    }
+  }
+});
+
+// 번역 3개
+document.getElementById('sumIncome').textContent  = DATA.summary[0] || '';
+document.getElementById('sumBalance').textContent = DATA.summary[1] || '';
+document.getElementById('sumCash').textContent    = DATA.summary[2] || '';
+
+// 재무제표 3종 표 렌더링
+function formatMoney(v) {
+  if (v === null || v === undefined) return '—';
+  const eok = v / 1e8;  // 원 → 억원
+  if (Math.abs(eok) >= 10000) {
+    return (eok / 10000).toFixed(1) + '조';
+  }
+  return Math.round(eok).toLocaleString('ko-KR') + '억';
+}
+
+function renderStatementTable(tableId, rows, years) {
+  const table = document.getElementById(tableId);
+  const yearHead = years.map(y => `<th>${y}</th>`).join('');
+  let html = `<thead><tr><th>항목</th>${yearHead}</tr></thead><tbody>`;
+  rows.forEach(row => {
+    const cells = row.values.map(v => {
+      const cls = (v !== null && v !== undefined && v < 0) ? 'negative' : '';
+      return `<td class="${cls}">${formatMoney(v)}</td>`;
+    }).join('');
+    const hClass = row.highlight ? 'highlight-row' : '';
+    const info = row.key ? helpIcon(row.key) : '';
+    html += `<tr class="${hClass}"><td>${row.label}${info}</td>${cells}</tr>`;
+  });
+  html += '</tbody>';
+  table.innerHTML = html;
+}
+
+const stmtYears = DATA.years.map(y => y.year);
+
+// 손익계산서
+renderStatementTable('incomeTable', [
+  {label: '매출액', values: DATA.years.map(y => y.revenue)},
+  {label: '매출원가', values: DATA.years.map(y => y.cogs)},
+  {label: '매출총이익', values: DATA.years.map(y =>
+    (y.revenue !== null && y.cogs !== null) ? y.revenue - y.cogs : null)},
+  {label: '영업이익', values: DATA.years.map(y => y.operating_income), highlight: true},
+  {label: '당기순이익', values: DATA.years.map(y => y.net_income), highlight: true},
+], stmtYears);
+
+// 재무상태표
+renderStatementTable('balanceTable', [
+  {label: '자산총계', key: 'total_assets', values: DATA.years.map(y => y.total_assets), highlight: true},
+  {label: '　유동자산', key: 'current_assets', values: DATA.years.map(y => y.current_assets)},
+  {label: '부채총계', key: 'total_liabilities', values: DATA.years.map(y => y.total_liabilities), highlight: true},
+  {label: '　유동부채', key: 'current_liabilities', values: DATA.years.map(y => y.current_liabilities)},
+  {label: '　비유동부채', values: DATA.years.map(y => y.long_term_debt)},
+  {label: '자본총계', key: 'total_equity', values: DATA.years.map(y => y.total_equity), highlight: true},
+], stmtYears);
+
+// 현금흐름표
+renderStatementTable('cashflowTable', [
+  {label: '영업활동 CF', key: 'operating_cashflow', values: DATA.years.map(y => y.operating_cashflow), highlight: true},
+  {label: '투자활동 CF', key: 'investing_cashflow', values: DATA.years.map(y => y.investing_cashflow)},
+  {label: '재무활동 CF', key: 'financing_cashflow', values: DATA.years.map(y => y.financing_cashflow)},
+], stmtYears);
+
+// Highlights
+const hc = document.getElementById('highlights');
+if (DATA.highlights.length === 0) {
+  hc.innerHTML = '<div class="meta">감지된 주목 포인트 없음 (정상 신호)</div>';
+}
+DATA.highlights.forEach(h => {
+  const sev = h.severity >= 7 ? 'high' : h.severity >= 5 ? 'mid' : 'low';
+  const div = document.createElement('div');
+  div.className = `highlight-card sev-${sev}`;
+  div.innerHTML = `<div class="title">${h.title} <span class="meta">severity ${h.severity}/10</span></div><div>${h.message}</div>`;
+  hc.appendChild(div);
+});
+</script>
+</body>
+</html>

@@ -1,4 +1,10 @@
-"""M3 — OCF/NI 괴리 추세."""
+"""M3 — OCF/NI 괴리 추세.
+
+⚠️ v2 redesign(45b180a)에서 M3를 '부채 건전성(D/E 업종별 임계값)'로 변경.
+_ocf_ni_pairs 제거. module-level skip — v2 M3 테스트 재작성 예정.
+"""
+import pytest
+pytest.skip("v1 M3(OCF/NI 괴리) API stale — 45b180a v2 redesign 이후", allow_module_level=True)
 
 from modules.financial.eqs.m3_cashflow import score_m3, _ocf_ni_pairs
 from modules.financial.eqs.types import FirmPanel

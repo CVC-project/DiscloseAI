@@ -71,6 +71,17 @@ _ACCOUNT_ID_MAP: Dict[str, str] = {
     "ifrs-full_NoncurrentLiabilities": "long_term_debt",
     "ifrs-full_PropertyPlantAndEquipment": "ppe",
     "ifrs-full_TradeAndOtherCurrentReceivables": "accounts_receivable",
+    # 보강 매핑 (2026-04-27): 기아·한미반도체·현대로템 등 결측 회피.
+    # K-IFRS 표준 + 일부 회사가 사용하는 변형 ID들.
+    "ifrs-full_TradeReceivables": "accounts_receivable",
+    "ifrs-full_CurrentTradeReceivables": "accounts_receivable",
+    "ifrs-full_TradeAndOtherReceivables": "accounts_receivable",
+    "ifrs-full_OtherCurrentReceivables": "accounts_receivable",
+    "dart_ShortTermTradeReceivable": "accounts_receivable",
+    # 진행기준 회계 — 건설·조선·중공업의 미청구공사 (수주산업 M2 분식 사각지대 보완)
+    "ifrs-full_ContractAssets": "contract_assets",
+    "ifrs-full_CurrentContractAssets": "contract_assets",
+    "dart_ContractAssets": "contract_assets",
     # 현금흐름표
     "ifrs-full_CashFlowsFromUsedInOperatingActivities": "operating_cashflow",
     "ifrs-full_CashFlowsFromUsedInInvestingActivities": "investing_cashflow",
@@ -99,6 +110,18 @@ _ACCOUNT_NM_MAP: Dict[str, str] = {
     "비유동부채": "long_term_debt",
     "유형자산": "ppe",
     "매출채권": "accounts_receivable",
+    "매출채권 및 기타채권": "accounts_receivable",
+    "단기매출채권": "accounts_receivable",
+    "장기매출채권": "accounts_receivable",
+    "장기성매출채권": "accounts_receivable",  # 기아 등 자동차 할부채권
+    "외상매출금": "accounts_receivable",
+    "받을어음": "accounts_receivable",
+    "매출채권 및 미수금": "accounts_receivable",
+    "공사미수금": "accounts_receivable",  # 일부 회사가 매출채권 대신 사용
+    "계약자산": "contract_assets",
+    "미청구공사": "contract_assets",
+    "공사미수금(계약자산)": "contract_assets",
+    "초과청구공사": "contract_assets",
     "영업활동현금흐름": "operating_cashflow",
     "영업활동으로 인한 현금흐름": "operating_cashflow",
     "투자활동현금흐름": "investing_cashflow",

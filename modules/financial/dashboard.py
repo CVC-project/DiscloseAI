@@ -127,42 +127,188 @@ _HTML_TEMPLATE = """<!doctype html>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
   :root {{
-    --bg: #0f172a;
-    --panel: #1e293b;
-    --border: #334155;
+    --bg: #060814;
+    --panel: rgba(15, 23, 42, 0.55);
+    --panel-solid: #0f172a;
+    --border: rgba(99, 102, 241, 0.22);
+    --border-strong: rgba(99, 102, 241, 0.45);
     --text: #e2e8f0;
     --muted: #94a3b8;
-    --good: #22c55e;
-    --warn: #eab308;
-    --bad: #ef4444;
-    --accent: #6366f1;
+    --good: #4ade80;
+    --warn: #fbbf24;
+    --bad: #f87171;
+    --accent: #4da6ff;
+    --accent2: #a78bfa;
+    --nebula: #c084fc;
   }}
   * {{ box-sizing: border-box; }}
+  /* 갤럭시 배경 — 깊은 공간 + 강한 nebula + 은하수 대각선 sweep */
   body {{
     margin: 0; padding: 24px;
-    background: var(--bg); color: var(--text);
+    color: var(--text);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic", sans-serif;
     line-height: 1.5;
+    min-height: 100vh;
+    background:
+      /* 큰 nebula 구름 4개 — 인디고·마젠타·시안·골드 */
+      radial-gradient(ellipse 55% 45% at 15% 18%, rgba(124, 108, 240, 0.42), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 88% 75%, rgba(244, 114, 182, 0.30), transparent 65%),
+      radial-gradient(ellipse 45% 38% at 50% 100%, rgba(34, 211, 238, 0.22), transparent 65%),
+      radial-gradient(ellipse 28% 22% at 95% 8%, rgba(251, 191, 36, 0.15), transparent 70%),
+      /* 은하수 대각선 — 보라색 옅은 띠 */
+      linear-gradient(135deg, transparent 28%, rgba(167, 139, 250, 0.08) 42%, rgba(196, 181, 253, 0.14) 50%, rgba(167, 139, 250, 0.08) 58%, transparent 72%),
+      var(--bg);
+    background-attachment: fixed;
+    position: relative;
+    overflow-x: hidden;
   }}
-  .container {{ max-width: 1200px; margin: 0 auto; }}
+  /* 별빛 레이어 1 — 30개+ 점, 다양한 크기, 슬로우 트윙클 */
+  body::before {{
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image:
+      /* 큰 별 (밝은) */
+      radial-gradient(2.2px 2.2px at 7% 11%, #fff, transparent 55%),
+      radial-gradient(2px 2px at 28% 83%, #fff, transparent 55%),
+      radial-gradient(2.4px 2.4px at 52% 31%, #c4b5fd, transparent 55%),
+      radial-gradient(2px 2px at 73% 60%, #fff, transparent 55%),
+      radial-gradient(2.2px 2.2px at 91% 17%, #fbcfe8, transparent 55%),
+      radial-gradient(2px 2px at 11% 71%, #93c5fd, transparent 55%),
+      /* 중간 별 */
+      radial-gradient(1.4px 1.4px at 18% 28%, #ffffffcc, transparent 60%),
+      radial-gradient(1.4px 1.4px at 33% 12%, #ffffffaa, transparent 60%),
+      radial-gradient(1.5px 1.5px at 41% 56%, #c4b5fdcc, transparent 60%),
+      radial-gradient(1.4px 1.4px at 47% 89%, #ffffffaa, transparent 60%),
+      radial-gradient(1.5px 1.5px at 62% 8%, #93c5fdcc, transparent 60%),
+      radial-gradient(1.4px 1.4px at 68% 38%, #ffffffaa, transparent 60%),
+      radial-gradient(1.5px 1.5px at 79% 75%, #fbcfe8cc, transparent 60%),
+      radial-gradient(1.4px 1.4px at 85% 48%, #ffffffaa, transparent 60%),
+      radial-gradient(1.4px 1.4px at 96% 64%, #ffffffaa, transparent 60%),
+      /* 작은 별 다수 */
+      radial-gradient(1px 1px at 4% 35%, #ffffff88, transparent 65%),
+      radial-gradient(1px 1px at 14% 91%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 21% 47%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 26% 22%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 36% 75%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 43% 18%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 49% 50%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 55% 73%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 58% 24%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 65% 92%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 71% 16%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 75% 45%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 81% 24%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 88% 81%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 94% 39%, #ffffff77, transparent 65%);
+    animation: starsTwinkle 7s ease-in-out infinite alternate;
+  }}
+  @keyframes starsTwinkle {{
+    0%   {{ opacity: 0.65; }}
+    50%  {{ opacity: 1.0; }}
+    100% {{ opacity: 0.5; }}
+  }}
+  /* 패널의 cosmic 글로우 가로 라인 (헤더 위 장식) */
+  .container::before {{
+    content: ''; display: block; height: 1px; margin: 0 auto 18px;
+    background: linear-gradient(90deg, transparent, var(--accent2), var(--accent), transparent);
+    opacity: 0.6;
+  }}
+  /* === 코스믹 장식: 떠다니는 행성 + 슈팅 스타 === */
+  .cosmic-decor {{ position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }}
+  .planet {{ position: absolute; opacity: 0.85; filter: drop-shadow(0 0 18px rgba(167,139,250,0.30)); }}
+  .planet-1 {{ top: 5%; right: 4%; width: 140px; height: 120px; animation: floatA 22s ease-in-out infinite; }}
+  .planet-2 {{ bottom: 7%; left: 3%; width: 100px; height: 100px; animation: floatB 28s ease-in-out infinite; }}
+  .planet-3 {{ top: 52%; right: 7%; width: 60px; height: 60px; animation: floatA 25s ease-in-out infinite; opacity: 0.7; }}
+  @keyframes floatA {{
+    0%, 100% {{ transform: translateY(0) rotate(0); }}
+    50%      {{ transform: translateY(-14px) rotate(2deg); }}
+  }}
+  @keyframes floatB {{
+    0%, 100% {{ transform: translateY(0) rotate(0); }}
+    50%      {{ transform: translateY(12px) rotate(-2deg); }}
+  }}
+  /* 슈팅 스타 — 사선 streak. 18초 주기로 한 번 가로지름 */
+  .shooting-star {{
+    position: absolute; top: 14%; left: -10%;
+    width: 140px; height: 1.5px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.95) 60%, rgba(196,181,253,0.9) 90%, transparent);
+    filter: drop-shadow(0 0 8px rgba(255,255,255,0.85));
+    border-radius: 1px;
+    transform: rotate(22deg);
+    animation: shoot 14s linear infinite;
+    opacity: 0;
+  }}
+  .shooting-star.delay {{ animation-delay: 7s; top: 38%; }}
+  @keyframes shoot {{
+    0%  {{ opacity: 0; transform: translate(0, 0) rotate(22deg); }}
+    2%  {{ opacity: 1; }}
+    9%  {{ opacity: 1; transform: translate(110vw, 45vh) rotate(22deg); }}
+    10% {{ opacity: 0; transform: translate(110vw, 45vh) rotate(22deg); }}
+    100%{{ opacity: 0; transform: translate(110vw, 45vh) rotate(22deg); }}
+  }}
+  /* 헤일로가 있는 밝은 별 — 코어 + 부드러운 후광 */
+  body::after {{
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image:
+      radial-gradient(4px 4px at 13% 24%, #fff 0%, rgba(255,255,255,0.4) 25%, transparent 70%),
+      radial-gradient(4.5px 4.5px at 76% 13%, #c4b5fd 0%, rgba(196,181,253,0.4) 25%, transparent 70%),
+      radial-gradient(5px 5px at 39% 86%, #93c5fd 0%, rgba(147,197,253,0.35) 25%, transparent 70%),
+      radial-gradient(4px 4px at 89% 67%, #fbcfe8 0%, rgba(251,207,232,0.35) 25%, transparent 70%),
+      radial-gradient(4px 4px at 6% 64%, #fde68a 0%, rgba(253,230,138,0.3) 25%, transparent 70%);
+    animation: starsTwinkle 9s ease-in-out infinite alternate-reverse;
+  }}
+  .container {{ max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }}
+  /* 헤더 — 코스믹 그라데이션 라인 + 회사명 글로우 */
   header {{
     display: flex; justify-content: space-between; align-items: flex-end;
-    border-bottom: 1px solid var(--border); padding-bottom: 16px; margin-bottom: 24px;
+    padding-bottom: 16px; margin-bottom: 24px;
+    border-bottom: 1px solid transparent;
+    border-image: linear-gradient(90deg, transparent, var(--accent2), var(--accent), transparent) 1;
   }}
-  header h1 {{ margin: 0; font-size: 28px; }}
+  header h1 {{
+    margin: 0; font-size: 30px; letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #cbd5e1, var(--accent), var(--nebula));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 36px rgba(77,166,255,0.18);
+  }}
   header .meta {{ color: var(--muted); font-size: 14px; }}
   .grid {{ display: grid; gap: 16px; margin-bottom: 16px; }}
   .grid-2 {{ grid-template-columns: 1fr 1fr; }}
   .grid-3 {{ grid-template-columns: 1fr 1fr 1fr; }}
+  /* 패널 — 글래스(반투명+블러) + 인디고 글로우 보더 + 미세 코스믹 그라디언트 */
   .panel {{
-    background: var(--panel); border: 1px solid var(--border);
-    border-radius: 12px; padding: 20px;
+    background:
+      linear-gradient(135deg, rgba(167,139,250,0.04), rgba(77,166,255,0.04) 60%, rgba(244,114,182,0.03)),
+      var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px; padding: 20px;
+    backdrop-filter: blur(12px) saturate(1.3);
+    -webkit-backdrop-filter: blur(12px) saturate(1.3);
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.06) inset,
+      0 0 0 1px rgba(167,139,250,0.08) inset,
+      0 18px 40px rgba(0,0,0,0.4),
+      0 0 24px rgba(77,166,255,0.06);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    position: relative;
   }}
-  .panel h2 {{ margin: 0 0 12px; font-size: 16px; color: var(--muted); font-weight: 500; }}
+  .panel:hover {{
+    border-color: var(--border-strong);
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.08) inset,
+      0 0 0 1px rgba(167,139,250,0.15) inset,
+      0 22px 50px rgba(77,166,255,0.18),
+      0 0 32px rgba(167,139,250,0.18);
+  }}
+  .panel h2 {{
+    margin: 0 0 12px; font-size: 16px;
+    color: var(--text); font-weight: 600; letter-spacing: 0.01em;
+  }}
   .score-big {{
-    font-size: 72px; font-weight: 700; line-height: 1;
-    background: linear-gradient(135deg, var(--accent), #8b5cf6);
+    font-size: 76px; font-weight: 800; line-height: 1;
+    background: linear-gradient(135deg, var(--accent), var(--accent2), var(--nebula));
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 40px rgba(167,139,250,0.25);
+    letter-spacing: -0.03em;
   }}
   .grade {{
     display: inline-block; padding: 4px 16px; border-radius: 999px;
@@ -326,6 +472,54 @@ _HTML_TEMPLATE = """<!doctype html>
 </style>
 </head>
 <body>
+<!-- 갤럭시 장식: 떠다니는 행성 + 슈팅 스타 (배경 레이어, 콘텐츠와 무관) -->
+<div class="cosmic-decor" aria-hidden="true">
+  <!-- Planet 1: 시안/인디고 가스자이언트 with ring (top-right) -->
+  <svg class="planet planet-1" viewBox="0 0 140 120" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="pg1" cx="38%" cy="38%">
+        <stop offset="0%" stop-color="#bae6fd"/>
+        <stop offset="55%" stop-color="#3b82f6"/>
+        <stop offset="100%" stop-color="#0c1b3a"/>
+      </radialGradient>
+      <linearGradient id="pg1ring" x1="0%" y1="50%" x2="100%" y2="50%">
+        <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.05"/>
+        <stop offset="50%" stop-color="#a78bfa" stop-opacity="0.55"/>
+        <stop offset="100%" stop-color="#a78bfa" stop-opacity="0.05"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="70" cy="60" rx="62" ry="9" fill="none" stroke="url(#pg1ring)" stroke-width="2.5" transform="rotate(-18 70 60)"/>
+    <ellipse cx="70" cy="60" rx="62" ry="9" fill="none" stroke="#c4b5fd" stroke-opacity="0.15" stroke-width="6" transform="rotate(-18 70 60)"/>
+    <circle cx="70" cy="60" r="28" fill="url(#pg1)"/>
+    <circle cx="60" cy="52" r="5" fill="#bae6fd" opacity="0.35"/>
+  </svg>
+  <!-- Planet 2: 마젠타/보라 작은 행성 (bottom-left) -->
+  <svg class="planet planet-2" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="pg2" cx="36%" cy="36%">
+        <stop offset="0%" stop-color="#fbcfe8"/>
+        <stop offset="55%" stop-color="#c026d3"/>
+        <stop offset="100%" stop-color="#3b0764"/>
+      </radialGradient>
+    </defs>
+    <circle cx="50" cy="50" r="32" fill="url(#pg2)" filter="drop-shadow(0 0 18px rgba(192,38,211,0.45))"/>
+    <ellipse cx="44" cy="42" rx="6" ry="4" fill="#fbcfe8" opacity="0.4"/>
+  </svg>
+  <!-- Planet 3: 골드/오렌지 작은 행성 with ring (mid-right) -->
+  <svg class="planet planet-3" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="pg3" cx="35%" cy="35%">
+        <stop offset="0%" stop-color="#fef3c7"/>
+        <stop offset="55%" stop-color="#f59e0b"/>
+        <stop offset="100%" stop-color="#451a03"/>
+      </radialGradient>
+    </defs>
+    <ellipse cx="40" cy="40" rx="36" ry="6" fill="none" stroke="#fcd34d" stroke-opacity="0.45" stroke-width="1.6" transform="rotate(15 40 40)"/>
+    <circle cx="40" cy="40" r="16" fill="url(#pg3)"/>
+  </svg>
+  <span class="shooting-star"></span>
+  <span class="shooting-star delay"></span>
+</div>
 <div class="container">
   <header>
     <div>
@@ -435,8 +629,8 @@ const moduleColors = {{
   M1: '#06b6d4', M2: '#8b5cf6', M3: '#22c55e', M4: '#eab308', M5: '#ef4444'
 }};
 const moduleLabels = {{
-  M1: '이익실체', M2: '회계투명', M3: '현금뒷받침',
-  M4: '이익안정', M5: '재무체력'
+  M1: '현금이익률', M2: '매출 회수 건전성', M3: '부채 건전성',
+  M4: '본업 안정성', M5: '자본 성장성'
 }};
 
 const ml = document.getElementById('moduleList');
@@ -461,10 +655,12 @@ new Chart(document.getElementById('radar'), {{
     datasets: [{{
       label: 'EQS',
       data: DATA.eqs.modules.map(m => m.score || 0),
-      backgroundColor: 'rgba(99, 102, 241, 0.25)',
-      borderColor: '#6366f1',
+      backgroundColor: 'rgba(77, 166, 255, 0.22)',
+      borderColor: '#4da6ff',
       borderWidth: 2,
-      pointBackgroundColor: '#8b5cf6',
+      pointBackgroundColor: '#a78bfa',
+      pointBorderColor: '#fff',
+      pointHoverRadius: 6,
     }}]
   }},
   options: {{
@@ -472,8 +668,8 @@ new Chart(document.getElementById('radar'), {{
     scales: {{
       r: {{
         min: 0, max: 100,
-        grid: {{ color: 'rgba(148, 163, 184, 0.2)' }},
-        angleLines: {{ color: 'rgba(148, 163, 184, 0.2)' }},
+        grid: {{ color: 'rgba(167, 139, 250, 0.18)' }},
+        angleLines: {{ color: 'rgba(167, 139, 250, 0.22)' }},
         pointLabels: {{ color: '#e2e8f0', font: {{ size: 12 }} }},
         ticks: {{ color: '#94a3b8', backdropColor: 'transparent', stepSize: 25 }}
       }}
@@ -554,9 +750,9 @@ new Chart(document.getElementById('ts'), {{
   data: {{
     labels: yrs,
     datasets: [
-      {{label: '매출', data: DATA.years.map(y => toEok(y.revenue)), borderColor: '#06b6d4', backgroundColor: 'transparent', tension: 0.3}},
-      {{label: '영업현금흐름', data: DATA.years.map(y => toEok(y.operating_cashflow)), borderColor: '#22c55e', backgroundColor: 'transparent', tension: 0.3}},
-      {{label: '순이익', data: DATA.years.map(y => toEok(y.net_income)), borderColor: '#eab308', backgroundColor: 'transparent', tension: 0.3}},
+      {{label: '매출', data: DATA.years.map(y => toEok(y.revenue)), borderColor: '#4da6ff', backgroundColor: 'rgba(77,166,255,0.08)', tension: 0.35, borderWidth: 2.2, pointBackgroundColor: '#4da6ff', pointRadius: 3, fill: true}},
+      {{label: '영업현금흐름', data: DATA.years.map(y => toEok(y.operating_cashflow)), borderColor: '#34d399', backgroundColor: 'rgba(52,211,153,0.06)', tension: 0.35, borderWidth: 2.2, pointBackgroundColor: '#34d399', pointRadius: 3, fill: true}},
+      {{label: '순이익', data: DATA.years.map(y => toEok(y.net_income)), borderColor: '#fbbf24', backgroundColor: 'rgba(251,191,36,0.06)', tension: 0.35, borderWidth: 2.2, pointBackgroundColor: '#fbbf24', pointRadius: 3, fill: true}},
     ]
   }},
   options: {{
@@ -653,8 +849,15 @@ def build_dashboard(
     summary: List[str],
     highlights: List[Highlight],
     output_dir: Optional[str] = None,
+    *,
+    output_name: str = "financial_dashboard.html",
 ) -> str:
-    """HTML 대시보드 생성. 저장 경로 반환."""
+    """HTML 대시보드 생성. 저장 경로 반환.
+
+    ``output_name``: 기본 ``financial_dashboard.html``. 통합 대시보드의
+    기업분석 오버레이용으로 ticker별 ``firm_<ticker>.html`` 형태로 다수 생성
+    가능 (자체완결형 — file:// 환경에서도 그대로 동작).
+    """
     out_dir = output_dir or _DASHBOARD_DIR
     os.makedirs(out_dir, exist_ok=True)
     payload = _serialize(panel, eqs, summary, highlights)
@@ -672,7 +875,7 @@ def build_dashboard(
         grade=eqs.grade or "F",
         data_json=json.dumps(payload, ensure_ascii=False),
     )
-    out_path = os.path.join(out_dir, "financial_dashboard.html")
+    out_path = os.path.join(out_dir, output_name)
     with open(out_path, "w", encoding="utf-8") as fp:
         fp.write(html)
     return out_path
@@ -785,7 +988,7 @@ _RANKING_TEMPLATE = """<!doctype html>
   th {{ position: relative; }}
   th .th-tip {{
     display: none; position: absolute;
-    left: 50%; bottom: calc(100% + 10px);
+    left: 50%; top: calc(100% + 10px);
     transform: translateX(-50%);
     width: 300px; padding: 0;
     background: #0b1220; color: var(--text);
@@ -797,6 +1000,8 @@ _RANKING_TEMPLATE = """<!doctype html>
     overflow: hidden; cursor: default;
   }}
   th:hover .th-tip {{ display: block; }}
+  #ranking th:first-child .th-tip {{ left: 0; transform: none; }}
+  #ranking th:last-child  .th-tip {{ left: auto; right: 0; transform: none; }}
   .th-tip-title {{
     font-size: 13px; font-weight: 700; color: var(--text);
     background: linear-gradient(135deg, rgba(99,102,241,0.25), rgba(139,92,246,0.15));
@@ -858,8 +1063,8 @@ _RANKING_TEMPLATE = """<!doctype html>
 
   <div class="grid grid-2">
     <div class="panel">
-      <h2>랭킹 (컬럼 헤더 클릭 시 정렬)</h2>
-      <div style="max-height:600px;overflow-y:auto;">
+      <h2>랭킹 (컬럼 헤더에 마우스를 올리면 설명, 클릭하면 정렬)</h2>
+      <div style="overflow:visible;">
         <table id="ranking">
           <thead>
             <tr>
@@ -868,11 +1073,11 @@ _RANKING_TEMPLATE = """<!doctype html>
               <th class="num-cell" data-key="market_cap">시총</th>
               <th class="num-cell" data-key="total">평균점수</th>
               <th data-key="grade">등급</th>
-              <th class="num-cell" data-key="m1">이익실체</th>
-              <th class="num-cell" data-key="m2">회계투명</th>
-              <th class="num-cell" data-key="m3">현금뒷받침</th>
-              <th class="num-cell" data-key="m4">이익안정</th>
-              <th class="num-cell" data-key="m5">재무체력</th>
+              <th class="num-cell" data-key="m1">현금이익률</th>
+              <th class="num-cell" data-key="m2">매출 회수</th>
+              <th class="num-cell" data-key="m3">부채 건전성</th>
+              <th class="num-cell" data-key="m4">본업 안정성</th>
+              <th class="num-cell" data-key="m5">자본 성장성</th>
               <th class="num-cell" data-key="years">년수</th>
             </tr>
           </thead>
@@ -916,9 +1121,46 @@ _RANKING_TEMPLATE = """<!doctype html>
 const DATA = {data_json};
 const MODULE_COLORS = {{M1:'#06b6d4', M2:'#8b5cf6', M3:'#22c55e', M4:'#eab308', M5:'#ef4444'}};
 
-// M1~M5 컬럼 헤더 툴팁 생성
-function buildThTooltip(key) {{
-  const g = DATA.glossary && DATA.glossary[key];
+// 컬럼 헤더 툴팁 — 주린이 친화 설명. M1~M5는 glossary에서, 나머지는 EXTRA_TOOLTIPS에서.
+const EXTRA_TOOLTIPS = {{
+  rank: {{
+    label: '#',
+    description: '현재 정렬 기준에 따른 순위. 기본 정렬은 시총 내림차순.',
+    intuition: '컬럼 헤더(시총·평균점수 등)를 클릭하면 해당 기준으로 다시 정렬됩니다.',
+  }},
+  name: {{
+    label: '기업명',
+    description: '회사 이름. 행을 클릭하면 해당 회사의 상세 사업보고서(DART)가 새 창에서 열립니다.',
+    intuition: '"우"가 붙은 우선주, ETF는 분석에서 제외했습니다.',
+  }},
+  market_cap: {{
+    label: '시가총액 (시총)',
+    description: '시가총액 = 현재 주가 × 발행 주식 수. 시장이 회사 전체에 매긴 값.',
+    benchmark: '10조+ 초대형 / 1조~10조 대형 / 1천억~1조 중형 / 1천억↓ 소형',
+    intuition: '"회사를 통째로 사려면 얼마인가?" 매출이나 자산과 다른, 시장의 평가입니다. 매일 변합니다.',
+  }},
+  total: {{
+    label: '평균점수 (EQS Total)',
+    description: 'M1~M5 다섯 지표의 단순 평균(0~100점). 금융업은 M2 제외 4개 평균.',
+    how: '5개 지표 점수를 더해 5로 나눔. 산출 불가한 지표는 평균에서 자동 제외.',
+    benchmark: '80↑ A 우수 / 65↑ B 양호 / 50↑ C 보통 / 35↑ D 주의 / 35↓ F 취약',
+    intuition: '학교 성적표 평균과 비슷합니다. 5과목 평균을 내서 등급을 매기는 셈.',
+  }},
+  grade: {{
+    label: '등급 (Grade)',
+    description: '평균점수에 따라 부여한 5단계 등급.',
+    benchmark: 'A: 80↑, B: 65~79, C: 50~64, D: 35~49, F: 35↓',
+    intuition: 'A는 "재무가 매우 튼튼해 보임", F는 "재무 신호에 빨간불". 다만 등급은 과거 재무만 본 값이고, 주가가 싼지·비싼지는 별개입니다.',
+  }},
+  years: {{
+    label: '분석 연도 수',
+    description: '점수 산출에 사용한 회계연도 수. 정상은 5년.',
+    intuition: '상장한 지 얼마 안 된 회사(예: LG에너지솔루션)나 사업보고서가 일부 누락된 회사는 3~4년만 사용. 데이터가 짧으면 노이즈가 커질 수 있습니다.',
+  }},
+}};
+
+function buildThTooltip(key, upper) {{
+  const g = (DATA.glossary && DATA.glossary[upper]) || EXTRA_TOOLTIPS[key];
   if (!g) return '';
   const sections = [];
   if (g.description) sections.push(['📖 개념', g.description]);
@@ -931,14 +1173,17 @@ function buildThTooltip(key) {{
   return `<span class="th-tip"><div class="th-tip-title">${{g.label}}</div>${{body}}</span>`;
 }}
 
-// 페이지 로드 시 M1~M5 헤더에 툴팁 삽입
-const TH_LABELS = {{m1:'이익실체', m2:'회계투명', m3:'현금뒷받침', m4:'이익안정', m5:'재무체력'}};
+// 페이지 로드 시 모든 헤더에 툴팁 삽입 (M1~M5는 glossary, 나머지는 EXTRA_TOOLTIPS)
+const TH_LABELS = {{m1:'현금이익률', m2:'매출 회수 건전성', m3:'부채 건전성', m4:'본업 안정성', m5:'자본 성장성'}};
 document.querySelectorAll('#ranking th').forEach(th => {{
   const key = th.dataset.key || '';
   const upper = key.toUpperCase();
-  if (['M1','M2','M3','M4','M5'].includes(upper)) {{
-    th.innerHTML = (TH_LABELS[key] || key) + buildThTooltip(upper);
-  }}
+  const isModule = ['M1','M2','M3','M4','M5'].includes(upper);
+  const tip = buildThTooltip(key, upper);
+  if (!tip) return;
+  // 표 헤더에 보일 짧은 라벨 — M모듈은 한글 라벨, 기존 텍스트가 있으면 그대로 유지
+  const visibleLabel = isModule ? (TH_LABELS[key] || key) : (th.textContent.trim());
+  th.innerHTML = visibleLabel + tip;
 }});
 
 // 랭킹 표 렌더
@@ -1045,7 +1290,7 @@ new Chart(document.getElementById('gradeChart'), {{
 new Chart(document.getElementById('moduleChart'), {{
   type: 'bar',
   data: {{
-    labels: ['이익실체','회계투명','현금뒷받침','이익안정','재무체력'],
+    labels: ['현금이익률','매출 회수','부채 건전성','본업 안정성','자본 성장성'],
     datasets: [{{
       data: ['M1','M2','M3','M4','M5'].map(m => DATA.summary.module_means[m] || 0),
       backgroundColor: ['#06b6d4','#8b5cf6','#22c55e','#eab308','#ef4444'],

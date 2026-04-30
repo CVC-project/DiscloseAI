@@ -141,6 +141,26 @@ canvas{display:block}
   <div id="panelInner" style="padding:20px"></div>
 </div>
 
+<!-- 기업분석 모달 오버레이 — 기업 행성 클릭 시 firm_<ticker>.html 단독 분석 페이지를 iframe으로 띄움.
+     ⚠️ 브라우저 보안 정책상 file:// 프로토콜로 dashboard.html을 직접 열면 iframe이 다른 file://
+     문서를 로드하지 못함. 정상 동작하려면 `python -m http.server`로 HTTP 서빙 필요.
+     file:// 감지 시 우상단에 '새 창에서 열기' 버튼이 노출되어 window.open으로 fallback. -->
+<div id="fullAnalysis" onclick="if(event.target===this)closeFullAnalysis()" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(8,12,28,0.55);backdrop-filter:blur(2px)">
+  <div style="position:absolute;top:5vh;left:6vw;right:6vw;bottom:5vh;border-radius:14px;overflow:hidden;border:1px solid #334155;box-shadow:0 24px 80px rgba(0,0,0,0.6);background:#0f172a">
+    <div style="position:absolute;top:10px;right:12px;display:flex;gap:8px;align-items:center;z-index:10001">
+      <span id="fullAnalysisTitle" style="color:#cbd5e1;font-size:13px;padding:6px 12px;background:rgba(15,23,42,0.85);border:1px solid #334155;border-radius:18px"></span>
+      <button id="fullAnalysisOpenNew" onclick="_openFullInNewTab()" title="새 창에서 열기 (file:// 환경에서 권장)" style="display:none;font-size:12px;line-height:1;padding:8px 12px;border-radius:18px;border:1px solid #475569;background:rgba(15,23,42,0.85);color:#cbd5e1;cursor:pointer;font-weight:500">새 창 ↗</button>
+      <button onclick="closeFullAnalysis()" title="닫기 (ESC)" style="font-size:18px;line-height:1;width:34px;height:34px;border-radius:50%;border:1px solid #475569;background:rgba(15,23,42,0.85);color:#e2e8f0;cursor:pointer;font-weight:600">×</button>
+    </div>
+    <div id="fullAnalysisFileNotice" style="display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;max-width:480px;padding:24px;color:#cbd5e1;font-size:14px;line-height:1.6">
+      <div style="font-size:32px;margin-bottom:12px">🛰</div>
+      <div style="font-weight:600;margin-bottom:8px">단독 분석 페이지를 iframe으로 표시할 수 없습니다</div>
+      <div style="color:#94a3b8;font-size:13px">브라우저 보안 정책상 <code style="background:rgba(99,102,241,0.15);padding:2px 6px;border-radius:4px">file://</code> 환경에서는 iframe이 차단됩니다.<br>우상단 <strong style="color:#4da6ff">'새 창 ↗'</strong> 버튼으로 열거나, 터미널에서 <code style="background:rgba(99,102,241,0.15);padding:2px 6px;border-radius:4px">python -m http.server</code> 실행 후 <code style="background:rgba(99,102,241,0.15);padding:2px 6px;border-radius:4px">localhost:8000</code>으로 접속해주세요.</div>
+    </div>
+    <iframe id="fullAnalysisFrame" src="about:blank" style="position:absolute;inset:0;width:100%;height:100%;border:0;background:#0f172a"></iframe>
+  </div>
+</div>
+
 <div class="hud-main">
   <div class="hud-sub" id="hudSub"></div>
   <div class="hud-modes">
@@ -1077,10 +1097,81 @@ function filter(f,btn){flt=f;document.querySelectorAll('.hud-sub button').forEac
 function simAlert(){alertOn=true;alertSrc='삼성전자';document.getElementById('alert').classList.add('show');const src=nodes.find(n=>n.n==='삼성전자');if(src)for(let i=0;i<3;i++)setTimeout(()=>ripples.push({x:src.x,y:src.y,radius:src.sz*18,alpha:0.6}),i*400);setTimeout(()=>{alertOn=false;alertSrc=null;},10000);}
 
 // ===== PANEL: ANALYZE =====
+// 풀스크린 단독 분석 오버레이 — firm_<ticker>.html 로드.
+// firm_<ticker>.html은 batch에서 47개 기업분 사전 생성. 자체완결형(데이터 인라인).
+// ⚠️ Chrome/Edge 보안 정책상 file:// 부모가 file:// iframe 로드 차단 — HTTP 서빙(python -m http.server)
+//    환경에서만 iframe 동작. file://에서는 안내 메시지 + '새 창' 버튼 fallback (window.open은 동작).
+window.__fullAnalysisUrl = null;
+function openFullAnalysis(n) {
+  const ticker = n.t;
+  if (!ticker) return false;
+  const url = `../../docs/prototype/firm_${ticker}.html`;
+  const overlay = document.getElementById('fullAnalysis');
+  const frame = document.getElementById('fullAnalysisFrame');
+  const title = document.getElementById('fullAnalysisTitle');
+  const openBtn = document.getElementById('fullAnalysisOpenNew');
+  const notice = document.getElementById('fullAnalysisFileNotice');
+  if (!overlay || !frame) return false;
+  title.textContent = `${n.n} (${ticker})`;
+  window.__fullAnalysisUrl = url;
+  // file:// 환경 감지 — 그 경우 iframe 차단되니 안내 메시지 + 새 창 버튼만 노출
+  const isFile = location.protocol === 'file:';
+  if (isFile) {
+    frame.style.display = 'none';
+    notice.style.display = 'block';
+    openBtn.style.display = 'inline-block';
+    frame.src = 'about:blank';
+  } else {
+    frame.style.display = '';
+    notice.style.display = 'none';
+    openBtn.style.display = 'none';
+    frame.src = url;
+  }
+  overlay.style.display = 'block';
+  document.addEventListener('keydown', _fullAnalysisEsc);
+  return true;
+}
+function _openFullInNewTab() {
+  if (window.__fullAnalysisUrl) window.open(window.__fullAnalysisUrl, '_blank');
+}
+function closeFullAnalysis() {
+  const overlay = document.getElementById('fullAnalysis');
+  const frame = document.getElementById('fullAnalysisFrame');
+  if (overlay) overlay.style.display = 'none';
+  if (frame) frame.src = 'about:blank';  // iframe 메모리 해제
+  window.__fullAnalysisUrl = null;
+  document.removeEventListener('keydown', _fullAnalysisEsc);
+}
+function _fullAnalysisEsc(e) {
+  if (e.key === 'Escape') closeFullAnalysis();
+}
+
 function showAnalyze(n) {
+  window.__lastShownNode = n;  // 쉬운말 모드 토글 시 재렌더용
+  // 우선 풀스크린 오버레이 시도 (단독 분석 페이지) — 실패 시 기존 우측 패널 fallback
+  if (openFullAnalysis(n)) return;
   const p = document.getElementById('panel');
-  const eqsCol=n.eqs>=70?'#4ade80':n.eqs>=50?'#fbbf24':'#f87171';
+  // n.eqs가 null이면 색상도 회색 + 표시 분기 (실점수 0과 산출 실패 구분)
+  const eqsScore = n.eqs;
+  const eqsCol = eqsScore == null ? '#94a3b8' : eqsScore>=70?'#4ade80':eqsScore>=50?'#fbbf24':'#f87171';
   const oiSign=String(n.oi).startsWith('-');
+  // OCF 부호는 raw 억원 값으로 판정 (반올림 후 "-0.0" 경계 오판 회피)
+  const ocfNeg = n.ocf_raw != null && n.ocf_raw < 0;
+  const easy = _isEasyMode();
+  const easyLine = (key) => easy ? `<div style="font-size:11px;color:#9ca3af;font-style:italic;margin:4px 0 -2px 2px;line-height:1.45">${EASY_NOTES[key]}</div>` : '';
+  const val = _calcValuation(n);
+  // 색상은 중립톤 — 적정 PER/PBR은 업종마다 크게 다르므로 단정적 색깔(저평가/고평가) 회피.
+  const valCol = '#cbd5e1';
+  // 일반 해석 — 절대 기준 대신 "이 숫자가 무엇을 의미하는가"만 안내.
+  const perTip = val.per == null
+    ? '순이익이 음수(적자)거나 데이터 부족 — PER 계산 의미 없음'
+    : '순이익 대비 시장 가격의 배수. 높을수록 시장이 미래 성장을 더 크게 기대한다는 뜻 (업종마다 통상 수준 다름).';
+  const pbrTip = val.pbr == null
+    ? '데이터 부족'
+    : '자본총계(주주 몫) 대비 시장 가격의 배수. 1배 = 청산가치 수준. 업종 자산 구조에 따라 통상 범위 다름.';
+  const roeTip = val.roe == null
+    ? '데이터 부족'
+    : '주주가 맡긴 100원으로 한 해 동안 번 돈(원). 같은 업종 안에서 비교할 때 의미 큼.';
   // 금융업 판별은 eqs_data.json의 industry_code('064'·'066'·'067') 기준 우선,
   // 없으면 섹터명 fallback
   const isFinancial = n.is_financial_biz === true || n.s==='금융';
@@ -1101,29 +1192,42 @@ function showAnalyze(n) {
   const rels=edges.filter(e=>e.a.n===n.n||e.b.n===n.n);
   const relHtml=rels.map(e=>{const o=e.a.n===n.n?e.b:e.a;return `<span class="tag">${e.type} ${o.n}</span>`;}).join('');
   const mods=[{id:'M1',name:'발생액 품질',s:n.m1,t:n.m1t,c:'#4da6ff'},{id:'M2',name:'분식 확률',s:n.m2,t:n.m2t,c:'#f87171'},{id:'M3',name:'현금흐름 괴리',s:n.m3,t:n.m3t,c:'#fbbf24'},{id:'M4',name:'이익 지속성',s:n.m4,t:n.m4t,c:'#4ade80'},{id:'M5',name:'재무 건전성',s:n.m5,t:n.m5t,c:'#7c6cf0'}];
-  const modsHtml=mods.filter(m=>m.s>0).map(m=>{const mc=m.s>=70?'#4ade80':m.s>=50?'#fbbf24':'#f87171';return `<div class="eqs-module"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px"><div><span style="font-size:10px;font-weight:600;color:${m.c};background:${m.c}18;padding:1px 5px;border-radius:3px">${m.id}</span> <span style="font-size:12px;font-weight:500">${m.name}</span></div><span style="font-size:13px;font-weight:600;color:${mc}">${m.s}</span></div><div class="eqs-bar"><div class="eqs-fill" style="width:${m.s}%;background:${mc}"></div></div><div style="font-size:10px;color:#888;margin-top:3px">${m.t}</div></div>`;}).join('');
-  const eqsExplain=n.eqs>=70?`이익 품질 <strong style="color:#4ade80">양호</strong>. 재무제표를 상당 부분 신뢰 가능.`:n.eqs>=50?`이익 품질 <strong style="color:#fbbf24">주의</strong> 필요. 일부 경고 신호 감지.`:`이익 품질 <strong style="color:#f87171">경고</strong>. 보고된 이익의 질에 의문. 추가 확인 필요.`;
+  // 모듈 점수 null(산출 제외)/양수만 렌더 — 0점도 표시(실점수 0과 null 구분)
+  const modsHtml=mods.filter(m=>m.s != null).map(m=>{const mc=m.s>=70?'#4ade80':m.s>=50?'#fbbf24':'#f87171';return `<div class="eqs-module"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px"><div><span style="font-size:10px;font-weight:600;color:${m.c};background:${m.c}18;padding:1px 5px;border-radius:3px">${m.id}</span> <span style="font-size:12px;font-weight:500">${m.name}</span></div><span style="font-size:13px;font-weight:600;color:${mc}">${m.s}</span></div><div class="eqs-bar"><div class="eqs-fill" style="width:${m.s}%;background:${mc}"></div></div><div style="font-size:10px;color:#888;margin-top:3px">${m.t}</div></div>`;}).join('');
+  const eqsExplain = eqsScore == null
+    ? `EQS 산출 <strong style="color:#94a3b8">불가</strong> — 데이터 부족 또는 업종 제외 모듈이 많아 종합점수를 낼 수 없음.`
+    : eqsScore>=70?`이익 품질 <strong style="color:#4ade80">양호</strong>. 재무제표를 상당 부분 신뢰 가능.`:eqsScore>=50?`이익 품질 <strong style="color:#fbbf24">주의</strong> 필요. 일부 경고 신호 감지.`:`이익 품질 <strong style="color:#f87171">경고</strong>. 보고된 이익의 질에 의문. 추가 확인 필요.`;
 
   document.getElementById('panelInner').innerHTML=`
-    <h2 style="color:#4da6ff;font-size:18px">${companyTitle}${finBadge}</h2>
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px">
+      <h2 style="color:#4da6ff;font-size:18px;margin:0">${companyTitle}${finBadge}</h2>
+      <button onclick="_toggleEasyMode()" title="회계용어를 쉬운말로 풀어 추가 설명을 보여줍니다" style="font-size:11px;padding:4px 9px;border-radius:14px;border:1px solid ${easy?'#4ade80':'#475569'};background:${easy?'rgba(74,222,128,0.12)':'rgba(71,85,105,0.18)'};color:${easy?'#4ade80':'#cbd5e1'};cursor:pointer;font-weight:500;white-space:nowrap;flex-shrink:0">${easy?'✓ 쉬운말 ON':'쉬운말 OFF'}</button>
+    </div>
     <div style="color:#666;font-size:12px;margin-bottom:16px">${n.t} | ${n.s} | 시총 ${mcDisplay}${yearBadge}</div>
     ${!isFinancial?`
-    <div class="fin-card"><div class="card-title">💰 돈을 잘 벌고 있나?<span class="src">손익계산서</span></div>
-      <div class="fin-row"><span class="label">매출액</span><div class="fin-bar-wrap"><div class="fin-bar" style="width:100%;background:#4da6ff"></div></div><span class="value">${n.rv}조</span>${n.rv_chg != null ? `<span class="fin-change ${n.rv_chg>=0?'up':'down'}">${n.rv_chg>=0?'+':''}${n.rv_chg}%</span>` : ''}</div>
-      <div class="fin-row"><span class="label">영업이익</span><div class="fin-bar-wrap"><div class="fin-bar" style="width:${(n.rv && parseFloat(n.rv) > 0) ? Math.min(100,Math.abs(parseFloat(n.oi)/parseFloat(n.rv)*100*3)) : 0}%;background:${oiSign?'#f87171':'#4ade80'}"></div></div><span class="value" style="color:${oiSign?'#f87171':'#4ade80'}">${n.oi}조</span>${n.oi_chg != null ? `<span class="fin-change ${n.oi_chg>=0?'up':'down'}">${Math.abs(n.oi_chg)>500?(n.oi_chg>0?'흑전':'적전'):(n.oi_chg>=0?'+':'')+n.oi_chg+'%'}</span>` : ''}</div>
-      <div class="fin-insight">"${margin100}"</div></div>
-    <div class="fin-card"><div class="card-title">🏦 곳간은 튼튼한가?<span class="src">재무상태표</span></div>
+    <div class="fin-card"><div class="card-title">💰 돈을 잘 벌고 있나?<span class="src">손익계산서</span></div>${easyLine('income')}
+      <div class="fin-row"><span class="label">매출액</span><div class="fin-bar-wrap"><div class="fin-bar" style="width:100%;background:#4da6ff"></div></div><span class="value">${n.rv}조${n.history ? _sparkline(n.history.revenue, '#4da6ff') : ''}</span>${n.rv_chg != null ? `<span class="fin-change ${n.rv_chg>=0?'up':'down'}">${n.rv_chg>=0?'+':''}${n.rv_chg}%</span>` : ''}</div>
+      <div class="fin-row"><span class="label">영업이익</span><div class="fin-bar-wrap"><div class="fin-bar" style="width:${(n.rv && parseFloat(n.rv) > 0) ? Math.min(100,Math.abs(parseFloat(n.oi)/parseFloat(n.rv)*100*3)) : 0}%;background:${oiSign?'#f87171':'#4ade80'}"></div></div><span class="value" style="color:${oiSign?'#f87171':'#4ade80'}">${n.oi}조${n.history ? _sparkline(n.history.operating_income, oiSign?'#f87171':'#4ade80') : ''}</span>${n.oi_chg != null ? `<span class="fin-change ${n.oi_chg>=0?'up':'down'}">${Math.abs(n.oi_chg)>500?(n.oi_chg>0?'흑전':'적전'):(n.oi_chg>=0?'+':'')+n.oi_chg+'%'}</span>` : ''}</div>
+      <div class="fin-insight">"${margin100}"${n.percentile && n.percentile.operating_margin != null ? _percentileBadge(n.percentile.operating_margin, n.percentile._size) : ''}</div></div>
+    <div class="fin-card"><div class="card-title">🏦 곳간은 튼튼한가?<span class="src">재무상태표</span></div>${easyLine('balance')}
       <div class="fin-row"><span class="label">자산</span><div class="fin-bar-wrap"><div class="fin-bar" style="width:100%;background:#4da6ff"></div></div><span class="value">${n.ta}조</span></div>
       <div class="fin-row"><span class="label">부채</span><div class="fin-bar-wrap"><div class="fin-bar" style="width:${n.ta && n.ta!=='-' ? Math.min(100,parseFloat(n.tl)/parseFloat(n.ta)*100) : 0}%;background:#f87171"></div></div><span class="value">${n.tl}조</span></div>
-      <div class="fin-insight">${n.dr != null ? `"부채비율 ${n.dr}% (총부채/자본)" — ${n.dr<100?'양호 ✅':n.dr<200?'보통 ⚠':'높음 🔴'}` : '부채비율 데이터 없음'}</div></div>
-    <div class="fin-card"><div class="card-title">💵 현금이 진짜 들어오나?<span class="src">현금흐름표</span></div>
-      <div class="fin-row"><span class="label">영업활동</span><span class="value" style="color:${String(n.ocf).startsWith('-')?'#f87171':'#4ade80'}">${n.ocf}조 ${String(n.ocf).startsWith('-')?'🔴':'🟢'}</span></div>
+      <div class="fin-insight">${n.dr != null ? `"부채비율 ${n.dr}% (총부채/자본)" — ${n.dr<100?'양호 ✅':n.dr<200?'보통 ⚠':'높음 🔴'}` : '부채비율 데이터 없음'}${n.percentile && n.percentile.debt_to_equity != null ? _percentileBadge(n.percentile.debt_to_equity, n.percentile._size) : ''}</div></div>
+    <div class="fin-card"><div class="card-title">💵 현금이 진짜 들어오나?<span class="src">현금흐름표</span></div>${easyLine('cash')}
+      <div class="fin-row"><span class="label">영업활동</span><span class="value" style="color:${ocfNeg?'#f87171':'#4ade80'}">${n.ocf}조 ${ocfNeg?'🔴':'🟢'}${n.history ? _sparkline(n.history.operating_cashflow, ocfNeg?'#f87171':'#4ade80') : ''}</span></div>
       <div class="fin-row"><span class="label">투자활동</span>${n.icf!=='-'?`<span class="value" style="color:#4da6ff">${n.icf}조</span>`:'<span class="value" style="font-size:11px;padding:2px 8px;border-radius:4px;background:rgba(148,163,184,0.12);color:#94a3b8;font-weight:500">데이터 수집 중</span>'}</div>
       <div class="fin-row"><span class="label">재무활동</span>${n.fcf!=='-'?`<span class="value" style="color:#fbbf24">${n.fcf}조</span>`:'<span class="value" style="font-size:11px;padding:2px 8px;border-radius:4px;background:rgba(148,163,184,0.12);color:#94a3b8;font-weight:500">데이터 수집 중</span>'}</div></div>
-    `:`<div class="fin-card"><div class="card-title">🏦 금융업 재무 요약</div><div class="fin-row"><span class="label">영업수익</span><span class="value">${n.rv}조</span></div><div class="fin-row"><span class="label">영업이익</span><span class="value" style="color:#4ade80">${n.oi}조</span></div><div class="fin-insight">금융업은 별도 분석 기준 적용</div></div>`}
+    <div class="fin-card"><div class="card-title">📊 가격은 적정한가?<span class="src">PER · PBR · ROE</span></div>${easyLine('valuation')}
+      <div class="fin-row"><span class="label" title="시가총액 ÷ 순이익. 현재 가격으로 1년 순이익을 회수하는 데 몇 년 걸리는지.">PER</span><span class="value" style="color:${valCol}">${val.per != null ? val.per + '배' : '—'}</span></div>
+      <div class="fin-insight" style="font-size:11px;color:#94a3b8">${perTip}</div>
+      <div class="fin-row"><span class="label" title="시가총액 ÷ 자본총계. 주주 몫 대비 시장 평가 배수.">PBR</span><span class="value" style="color:${valCol}">${val.pbr != null ? val.pbr + '배' : '—'}</span></div>
+      <div class="fin-insight" style="font-size:11px;color:#94a3b8">${pbrTip}</div>
+      <div class="fin-row"><span class="label" title="순이익 ÷ 자본총계 × 100. 주주 자본 활용 효율.">ROE</span><span class="value" style="color:${valCol}">${val.roe != null ? val.roe + '%' : '—'}</span></div>
+      <div class="fin-insight" style="font-size:11px;color:#94a3b8">${roeTip}</div></div>
+    `:`<div class="fin-card"><div class="card-title">🏦 금융업 재무 요약</div><div class="fin-row"><span class="label">영업수익</span><span class="value">${n.rv}조${n.history ? _sparkline(n.history.revenue, '#4da6ff') : ''}</span></div><div class="fin-row"><span class="label">영업이익</span><span class="value" style="color:#4ade80">${n.oi}조${n.history ? _sparkline(n.history.operating_income, '#4ade80') : ''}</span></div><div class="fin-row"><span class="label">ROE</span><span class="value" style="color:${valCol}">${val.roe != null ? val.roe + '%' : '—'}</span></div><div class="fin-insight" style="font-size:11px;color:#94a3b8">${roeTip}</div></div>`}
     <div class="section-title" style="color:#fbbf24">⚡ 주목 포인트</div>${cpHtml}
-    <div class="section-title" style="color:#4da6ff">🔬 이익 해부 (EQS)</div>
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><span style="font-size:32px;font-weight:700;color:${eqsCol}">${n.eqs}</span><span style="font-size:13px;padding:3px 8px;border-radius:5px;background:${eqsCol}15;color:${eqsCol};font-weight:600">${n.gr}등급</span></div>
+    <div class="section-title" style="color:#4da6ff">🔬 이익 해부 (EQS)</div>${easyLine('eqs')}
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><span style="font-size:32px;font-weight:700;color:${eqsCol}">${eqsScore == null ? '—' : eqsScore}</span><span style="font-size:13px;padding:3px 8px;border-radius:5px;background:${eqsCol}15;color:${eqsCol};font-weight:600">${n.gr}등급</span></div>
     <div class="eqs-what">${eqsExplain}<br><br>⚕️ EQS는 "이 기업의 이익을 믿어도 되는 정도"를 진단합니다. 주가 예측이 아닌 재무 건강 진단.</div>
     ${modsHtml}
     <div class="section-title" style="color:#888">🔗 관계 (${rels.length}개)</div>${relHtml||'없음'}`;
@@ -1324,6 +1428,104 @@ function _eqsBucket(s) {
   if (s >= 50) return 'mid';
   return 'bad';
 }
+// 시계열 sparkline — 5년 추이를 60×16 SVG로 렌더. 양/음수 모두 0선 기준 정규화.
+// values: 억원 단위 숫자 배열 (None은 null로 들어옴 — 누락 연도는 선이 끊김).
+// color: 라인 색상. 유효 점이 2개 미만이면 빈 문자열.
+function _sparkline(values, color = '#4da6ff') {
+  if (!Array.isArray(values)) return '';
+  const pts = values.filter(v => v != null && Number.isFinite(v));
+  if (pts.length < 2) return '';
+  const w = 60, h = 16, pad = 1;
+  const min = Math.min(...pts, 0);
+  const max = Math.max(...pts, 0);
+  const range = (max - min) || 1;
+  const xStep = (w - pad * 2) / (values.length - 1);
+  // M/L SVG path — null 위치에서 선이 끊겨 누락 연도가 보간된 것처럼 보이지 않도록.
+  let d = '';
+  let lastValid = null;
+  let started = false;
+  values.forEach((v, i) => {
+    if (v == null || !Number.isFinite(v)) { started = false; return; }
+    const x = pad + i * xStep;
+    const y = h - pad - ((v - min) / range) * (h - pad * 2);
+    d += (started ? ' L ' : ' M ') + `${x.toFixed(1)} ${y.toFixed(1)}`;
+    started = true;
+    lastValid = [x, y];
+  });
+  if (!lastValid) return '';
+  return `<svg width="${w}" height="${h}" style="vertical-align:middle;margin-left:6px" aria-hidden="true">`
+    + `<path d="${d}" fill="none" stroke="${color}" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>`
+    + `<circle cx="${lastValid[0].toFixed(1)}" cy="${lastValid[1].toFixed(1)}" r="1.6" fill="${color}"/>`
+    + `</svg>`;
+}
+// 동종업계 백분위 뱃지 — 0~100 점수, 100=업계 1등.
+// '업계 상위 X%' (역수로 표시 — 백분위 80 → 상위 20%).
+function _percentileBadge(pct, sectorSize) {
+  if (pct == null || !Number.isFinite(pct)) return '';
+  if (sectorSize != null && sectorSize < 3) return '';  // 표본 부족
+  const topPct = Math.max(1, Math.round(100 - pct));
+  // 색상: 상위 30% 초록, 70%까지 노랑, 그 외 빨강
+  const color = topPct <= 30 ? '#4ade80' : topPct <= 70 ? '#fbbf24' : '#f87171';
+  return `<span style="font-size:10px;padding:1px 5px;border-radius:3px;background:${color}20;color:${color};font-weight:500;margin-left:6px" title="동종업계(${sectorSize}개사) 내 백분위">업계 상위 ${topPct}%</span>`;
+}
+// ④ PER · PBR · ROE 산출 — 시총(원) / 순이익·자본(억원 raw) 기반.
+// 1차: financial.db raw 값(정밀도 최상). 2차: legacy 하드코딩(file:// fetch 실패 시).
+function _calcValuation(n) {
+  let mc = n.market_cap;            // 원 (수치)
+  let ni = n.net_income_raw;        // 억원 (raw)
+  let eq = n.equity_raw;            // 억원 (raw)
+  // Fallback — fetch 실패해서 legacy 하드코딩만 있을 때 (n.mc:"512조", n.ni:"26.4", n.eq:"362")
+  if (mc == null && typeof n.mc === 'string' && n.mc !== '-') {
+    // 단위 키워드 명시적 검사 — '조'/'억'/'만'에 따라 배수 결정 (단위 없으면 조 가정 — 현재 legacy 데이터 컨벤션)
+    const m = n.mc.match(/([0-9.]+)\s*(조|억|만)?/);
+    if (m) {
+      const num = parseFloat(m[1]);
+      const unit = m[2];
+      if (Number.isFinite(num)) {
+        if (unit === '억') mc = num * 1e8;
+        else if (unit === '만') mc = num * 1e4;
+        else mc = num * 1e12;  // '조' 또는 단위 없음
+      }
+    }
+  }
+  if (ni == null && n.ni != null && n.ni !== '-') {
+    const v = parseFloat(n.ni);
+    if (!isNaN(v)) ni = v * 10000;  // "26.4"(조) → 264000(억)
+  }
+  if (eq == null && n.eq != null && n.eq !== '-') {
+    const v = parseFloat(n.eq);
+    if (!isNaN(v)) eq = v * 10000;  // 362(조) → 3620000(억)
+  }
+  const out = { per: null, pbr: null, roe: null };
+  if (mc != null && ni != null && ni > 0) {
+    out.per = +(mc / 1e8 / ni).toFixed(1);  // 시총_억 / 순이익_억
+  }
+  if (mc != null && eq != null && eq > 0) {
+    out.pbr = +(mc / 1e8 / eq).toFixed(2);
+  }
+  if (ni != null && eq != null && eq > 0) {
+    out.roe = +(ni / eq * 100).toFixed(1);
+  }
+  return out;
+}
+// ⑤ 쉬운말 모드 — 회계용어를 학생 어휘로 풀어 보여주는 토글.
+// 상태는 localStorage 보존 → 새로고침해도 유지.
+function _isEasyMode() {
+  try { return localStorage.getItem('easyMode') === '1'; } catch (e) { return false; }
+}
+function _toggleEasyMode() {
+  const cur = _isEasyMode();
+  try { localStorage.setItem('easyMode', cur ? '0' : '1'); } catch (e) {}
+  // 패널이 열려 있으면 마지막 클릭한 회사 다시 렌더
+  if (window.__lastShownNode) showAnalyze(window.__lastShownNode);
+}
+const EASY_NOTES = {
+  income:  '쉽게: 회사가 100원어치 팔아서 본업으로 얼마 남기는지 보는 표.',
+  balance: '쉽게: 회사가 가진 것(자산)과 갚을 것(부채), 그리고 주주 몫(자본)을 적은 표.',
+  cash:    '쉽게: 본업 / 미래 투자 / 빚·배당 — 세 가지로 들어오고 나간 진짜 현금.',
+  valuation:'쉽게: 시장이 이 회사 1주를 얼마에 사는지 — 이익·자산 대비 비싼지 싼지.',
+  eqs:     '쉽게: "이 회사 이익이 진짜인가?"를 5가지로 나눠 100점 만점으로 채점.',
+};
 function _eqsNarration(idx, score) {
   const b = _eqsBucket(score);
   const texts = {
@@ -1390,13 +1592,14 @@ function _eqsNarration(idx, score) {
       n.industry_code = fin.industry_code ?? null;
       n.is_financial_biz = fin.is_financial === true;  // 금융업(064/066/067)
       n.latest_year = fin.latest_year ?? null;         // 분석 기준 연도
-      n.eqs = Math.round(fin.eqs_total || 0);
+      // EQS 점수는 null(산출 실패/금융업 M2 제외 등)과 실점수 0을 구분 — null은 그대로 보존.
+      n.eqs = fin.eqs_total != null ? Math.round(fin.eqs_total) : null;
       n.gr = fin.eqs_grade || '-';
-      n.m1 = Math.round(fin.eqs_m1 || 0);
-      n.m2 = Math.round(fin.eqs_m2 || 0);
-      n.m3 = Math.round(fin.eqs_m3 || 0);
-      n.m4 = Math.round(fin.eqs_m4 || 0);
-      n.m5 = Math.round(fin.eqs_m5 || 0);
+      n.m1 = fin.eqs_m1 != null ? Math.round(fin.eqs_m1) : null;
+      n.m2 = fin.eqs_m2 != null ? Math.round(fin.eqs_m2) : null;
+      n.m3 = fin.eqs_m3 != null ? Math.round(fin.eqs_m3) : null;
+      n.m4 = fin.eqs_m4 != null ? Math.round(fin.eqs_m4) : null;
+      n.m5 = fin.eqs_m5 != null ? Math.round(fin.eqs_m5) : null;
       n.m1t = _eqsNarration(1, n.m1);
       n.m2t = _eqsNarration(2, n.m2);
       n.m3t = _eqsNarration(3, n.m3);
@@ -1417,9 +1620,19 @@ function _eqsNarration(idx, score) {
       n.ocf = _trillionFmt(fin.operating_cashflow);
       n.icf = _trillionFmt(fin.investing_cashflow);
       n.fcf = _trillionFmt(fin.financing_cashflow);
+      // 부호 판정용 raw 값 — _trillionFmt 반올림으로 "0.0"/"-0.0" 경계 오판 회피
+      n.ocf_raw = fin.operating_cashflow;
+      n.icf_raw = fin.investing_cashflow;
+      n.fcf_raw = fin.financing_cashflow;
       n.oim = (fin.revenue && fin.operating_income != null)
         ? (fin.operating_income / fin.revenue * 100).toFixed(1)
         : null;
+      // 시계열(sparkline) + 동종업계 백분위 (financial 모듈에서 산출)
+      n.history = fin.history || null;
+      n.percentile = fin.percentile || null;
+      // PER·PBR·ROE 산출용 원본 값 (억원 raw) — _trillionFmt 반올림 손실 회피
+      n.net_income_raw = fin.net_income;       // 억원
+      n.equity_raw = fin.total_equity;          // 억원
     } else {
       n.has_financial = false;
     }

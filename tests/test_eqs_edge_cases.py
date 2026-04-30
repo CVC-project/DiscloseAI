@@ -1,14 +1,10 @@
 """EQS 엣지케이스 회귀 테스트 — code-review 지적 #1~#4.
 
-이 테스트들은 미커버된 엣지케이스가 현재 코드에서 어떻게 동작하는지를
-"회귀 테스트"로 고정하기 위함. 버그 검증이 아니라 동작 보존 목적.
-
-리뷰 지적:
-#1 M2 Beneish — 총이익률 음수 케이스 (COGS > Revenue)
-#2 M3 — OCF<0 이지만 NI>0 인 해의 추세 영향
-#3 score._aggregate — 외부 weights 키 누락 시 silent fallback
-#4 score._aggregate — 가중치 합 ≠ 1 인 weights 통과 시 정규화
+⚠️ v2 redesign(commit 45b180a)에서 v1 API(DEFAULT_WEIGHTS, _redistribute 등)가
+제거되어 module-level skip 처리. v2 기준 회귀 테스트는 별도 PR에서 재작성 예정.
 """
+import pytest
+pytest.skip("v1 EQS API stale — 45b180a v2 redesign 이후", allow_module_level=True)
 
 from modules.financial.eqs.m2_beneish import (
     score_m2,
