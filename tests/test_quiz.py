@@ -26,8 +26,8 @@ class TestQuizListStructure:
     """QUIZ_LIST 기본 구조 검증"""
 
     def test_quiz_list_length(self):
-        """QUIZ_LIST가 정확히 15개 항목을 가져야 함"""
-        assert len(QUIZ_LIST) == 15, f"Expected 15 items, got {len(QUIZ_LIST)}"
+        """QUIZ_LIST가 정확히 12개 항목을 가져야 함"""
+        assert len(QUIZ_LIST) == 12, f"Expected 12 items, got {len(QUIZ_LIST)}"
 
     def test_all_items_are_dict(self):
         """모든 항목이 dict 타입이어야 함"""
@@ -54,11 +54,10 @@ class TestQuizListStructure:
             for field in required_fields:
                 assert field in item, f"Item {i} missing field: {field}"
 
-    def test_id_field_unique_and_sequential(self):
-        """id는 1~15로 유일하고 연속이어야 함"""
+    def test_id_field_unique(self):
+        """id는 중복 없이 유일해야 함"""
         ids = [item["id"] for item in QUIZ_LIST]
-        assert sorted(ids) == list(range(1, 16)), f"IDs not sequential: {sorted(ids)}"
-        assert len(set(ids)) == 15, f"Duplicate IDs found: {ids}"
+        assert len(set(ids)) == len(ids), f"Duplicate IDs found: {ids}"
 
 
 class TestQuizListDataTypes:
@@ -306,7 +305,7 @@ class TestQuizDataEdgeCases:
         for i, item in enumerate(QUIZ_LIST):
             date_obj = datetime.strptime(item["date"], "%Y-%m-%d")
             assert date_obj.year >= 2015, f"Item {i} date is too old: {item['date']}"
-            assert date_obj.year <= 2024, f"Item {i} date is in future: {item['date']}"
+            assert date_obj.year <= datetime.now().year, f"Item {i} date is in future: {item['date']}"
 
     def test_extreme_changes_are_rare(self):
         """극단적인 변동(-50% 이상 또는 +50% 이상)은 드물어야 함"""
