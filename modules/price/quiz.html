@@ -195,6 +195,25 @@
 
   .result-explanation { color: #cbd5e1; }
 
+  /* ── 수익률 차트 ── */
+  .perf-chart-wrap {
+    display: none;
+    margin-bottom: 14px;
+  }
+  .perf-chart-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #64748b;
+    letter-spacing: 0.4px;
+    margin-bottom: 6px;
+  }
+  #perfChart {
+    display: block;
+    width: 100%;
+    border-radius: 8px;
+    background: #0f1117;
+  }
+
   /* ── 버튼 ── */
   .btn-next {
     display: none;
@@ -285,6 +304,54 @@
     text-align: center;
     line-height: 1.6;
   }
+
+  /* ── 카드뉴스 ── */
+  .cardnews-screen { display:none; }
+  .cardnews-screen.show { display:block; }
+  .cn-header { text-align:center; margin-bottom:20px; }
+  .cn-header h2 { font-size:1.1rem; font-weight:700; }
+  .cn-header p { color:#94a3b8; font-size:0.84rem; margin-top:6px; }
+  .company-tabs { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; }
+  .company-tab {
+    padding:5px 12px; border-radius:999px; border:1.5px solid #2d3448;
+    background:transparent; color:#94a3b8; font-size:0.74rem; font-weight:600;
+    cursor:pointer; transition:all 0.15s;
+  }
+  .company-tab:hover { border-color:#3b82f6; color:#60a5fa; }
+  .company-tab.active { border-color:#3b82f6; background:#1a2540; color:#60a5fa; }
+  .cn-slide {
+    background:#161b27; border-radius:12px; padding:20px 24px;
+    min-height:200px; margin-bottom:16px;
+  }
+  .cn-slide-num { font-size:0.68rem; font-weight:700; color:#3b82f6; letter-spacing:1px; margin-bottom:6px; }
+  .cn-slide-heading { font-size:1rem; font-weight:700; color:#f1f5f9; margin-bottom:12px; line-height:1.4; }
+  .cn-slide-body { font-size:0.86rem; line-height:1.8; color:#cbd5e1; white-space:pre-wrap; }
+  .cn-slide-body strong { color:#e2e8f0; }
+  .cn-nav { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+  .btn-cn { padding:9px 18px; border-radius:8px; border:1.5px solid #2d3448; background:transparent; color:#94a3b8; font-size:0.84rem; font-weight:600; cursor:pointer; transition:all 0.15s; }
+  .btn-cn:hover:not(:disabled) { border-color:#3b82f6; color:#60a5fa; }
+  .btn-cn:disabled { opacity:0.3; cursor:default; }
+  .cn-prog { font-size:0.78rem; color:#64748b; }
+  .btn-view-cn {
+    display:block; width:100%; margin-top:12px; padding:12px;
+    border-radius:10px; border:1.5px solid #3b82f6; background:transparent;
+    color:#60a5fa; font-size:0.9rem; font-weight:600; cursor:pointer; transition:all 0.15s;
+  }
+  .btn-view-cn:hover { background:#1a2540; }
+
+  /* ── 인라인 카드뉴스 ── */
+  .inline-cn {
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid #2d3448;
+  }
+  .inline-cn-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #3b82f6;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
 </style>
 </head>
 <body>
@@ -292,15 +359,15 @@
 
   <div class="header">
     <h1>📊 공시 기반 주가 예측 퀴즈</h1>
-    <p>코스피 상위 50 · 실제 공시 사건 · 15문항 · DiscloseAI</p>
+    <p>코스피 상위 50 · 실제 공시 사건 · 12문항 · DiscloseAI</p>
   </div>
 
   <!-- 시작 화면 -->
   <div class="card start-screen" id="startScreen">
     <h2>공시를 읽고 주가 방향을 맞혀보세요</h2>
     <p>
-      LG화학 물적분할, 한국전력 유상증자, 삼성전자 감산 선언 등<br>
-      코스피 대형주 실제 공시 사건 15개를 풀어봅니다.<br><br>
+      LG화학 물적분할, HD현대중공업 대형수주, 삼성전자 감산 선언 등<br>
+      코스피 대형주 실제 공시 사건 12개를 풀어봅니다.<br><br>
       각 문제에서 공시 이후 주가가<br>
       <strong>수혜(+2% 이상) / 악재(-2% 이하) / 중립</strong> 중 어느 방향이었는지 선택하세요.
     </p>
@@ -327,7 +394,27 @@
 
       <div class="result-box" id="resultBox">
         <div class="perf-table" id="perfTable"></div>
+        <div class="perf-chart-wrap" id="perfChartWrap">
+          <div class="perf-chart-label">📈 공시 후 누적 수익률 추이</div>
+          <canvas id="perfChart" height="160"></canvas>
+        </div>
         <div class="result-explanation" id="resultExplanation"></div>
+        <a id="dartLink" href="#" target="_blank" rel="noopener" style="display:none; margin-top:14px; align-items:center; gap:6px; font-size:0.8rem; color:#60a5fa; text-decoration:none;">
+          🔗 관련 기사 보기
+        </a>
+        <div class="inline-cn" id="inlineCn" style="display:none;">
+          <div class="inline-cn-label">📰 이 기업 카드뉴스</div>
+          <div class="cn-slide" style="margin-bottom:12px; min-height:160px;">
+            <div class="cn-slide-num" id="inlineCnNum"></div>
+            <div class="cn-slide-heading" id="inlineCnHeading"></div>
+            <div class="cn-slide-body" id="inlineCnBody"></div>
+          </div>
+          <div class="cn-nav">
+            <button class="btn-cn" id="btnInlinePrev" onclick="prevInlineCn()">← 이전</button>
+            <span class="cn-prog" id="inlineCnProg"></span>
+            <button class="btn-cn" id="btnInlineNext" onclick="nextInlineCn()">다음 →</button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -337,7 +424,7 @@
   <!-- 최종 결과 화면 -->
   <div class="card final-screen" id="finalScreen">
     <div class="final-score" id="finalScore"></div>
-    <div class="final-label">/ 15 정답</div>
+    <div class="final-label">/ 12 정답</div>
     <div class="final-grade" id="finalGrade"></div>
     <div class="score-breakdown">
       <div class="score-item">
@@ -350,6 +437,27 @@
       </div>
     </div>
     <button class="btn-restart" onclick="restartQuiz()">다시 풀기</button>
+    <button class="btn-view-cn" onclick="showCardNews()">📰 투자 교육 카드뉴스 보기</button>
+  </div>
+
+  <!-- 카드뉴스 화면 -->
+  <div class="card cardnews-screen" id="cardnewsScreen">
+    <div class="cn-header">
+      <h2>📰 투자 교육 카드뉴스</h2>
+      <p>퀴즈에 나온 사건들을 더 깊이 이해해보세요</p>
+    </div>
+    <div class="company-tabs" id="companyTabs"></div>
+    <div class="cn-slide">
+      <div class="cn-slide-num" id="cnSlideNum"></div>
+      <div class="cn-slide-heading" id="cnSlideHeading"></div>
+      <div class="cn-slide-body" id="cnSlideBody"></div>
+    </div>
+    <div class="cn-nav">
+      <button class="btn-cn" id="btnCnPrev" onclick="prevCnCard()">← 이전</button>
+      <span class="cn-prog" id="cnProg"></span>
+      <button class="btn-cn" id="btnCnNext" onclick="nextCnCard()">다음 →</button>
+    </div>
+    <button class="btn-restart" onclick="restartQuiz()" style="width:100%;margin-top:4px">퀴즈 다시 풀기</button>
   </div>
 
   <div class="disclaimer">
@@ -359,6 +467,163 @@
 </div>
 
 <script>
+// ── 차트 유틸 ──────────────────────────────────────────────────────
+function parseWindowDays(w) {
+  const m = w.match(/(\d+)거래일/);
+  return m ? parseInt(m[1]) : 5;
+}
+
+function seededRng(seed) {
+  let s = seed >>> 0;
+  return () => {
+    s = Math.imul(s ^ (s >>> 15), 0x1 | s);
+    s ^= s + Math.imul(s ^ (s >>> 7), 61 | s);
+    return ((s ^ (s >>> 14)) >>> 0) / 0xffffffff;
+  };
+}
+
+function generatePath(totalPct, days, seed) {
+  const rng = seededRng(seed);
+  const pts = [0];
+  // Event-day reaction: 55–80% of total move on day 1
+  const d1frac = 0.55 + rng() * 0.25;
+  let cum = totalPct * d1frac;
+  pts.push(cum);
+  for (let d = 2; d < days; d++) {
+    const noise = (rng() - 0.5) * Math.abs(totalPct) * 0.14;
+    cum = cum + (totalPct - cum) * 0.48 + noise;
+    pts.push(cum);
+  }
+  if (days >= 1) pts[days] = totalPct;
+  return pts;
+}
+
+function drawChart(q, qIdx) {
+  const canvas = document.getElementById('perfChart');
+  const wrap   = document.getElementById('perfChartWrap');
+  if (!canvas || !canvas.getContext) { wrap.style.display = 'none'; return; }
+
+  const days      = parseWindowDays(q.window);
+  const stockPath = generatePath(q.changePct,      days, qIdx * 13 + 3);
+  const kospiPath = generatePath(q.kospiChangePct, days, qIdx * 13 + 97);
+
+  const allVals = [...stockPath, ...kospiPath];
+  let minVal = Math.min(...allVals);
+  let maxVal = Math.max(...allVals);
+  const pad = Math.max(Math.abs(maxVal - minVal) * 0.15, 0.8);
+  minVal -= pad; maxVal += pad;
+  const range = maxVal - minVal || 1;
+
+  const dpr = window.devicePixelRatio || 1;
+  const W   = canvas.offsetWidth || 620;
+  const H   = 160;
+  canvas.width  = W * dpr;
+  canvas.height = H * dpr;
+  canvas.style.width  = W + 'px';
+  canvas.style.height = H + 'px';
+
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+  ctx.clearRect(0, 0, W, H);
+
+  const PAD = { top: 18, right: 48, bottom: 26, left: 38 };
+  const plotW = W - PAD.left - PAD.right;
+  const plotH = H - PAD.top  - PAD.bottom;
+  const toY = v  => PAD.top  + plotH - (v - minVal) / range * plotH;
+  const toX = d  => PAD.left + (d / days) * plotW;
+
+  // Background
+  ctx.fillStyle = '#0f1117';
+  ctx.fillRect(0, 0, W, H);
+
+  // Event-day shaded region (day 0 → day 1)
+  const grad = ctx.createLinearGradient(toX(0), 0, toX(1), 0);
+  grad.addColorStop(0, 'rgba(59,130,246,0.10)');
+  grad.addColorStop(1, 'rgba(59,130,246,0.00)');
+  ctx.fillStyle = grad;
+  ctx.fillRect(toX(0), PAD.top, toX(1) - toX(0), plotH);
+
+  // Y-axis gridlines + labels
+  const yTicks = [minVal + pad, 0, maxVal - pad];
+  ctx.font = '9px system-ui, sans-serif';
+  ctx.textAlign = 'right';
+  yTicks.forEach(v => {
+    const y = toY(v);
+    ctx.strokeStyle = '#1e2330';
+    ctx.lineWidth = 0.8;
+    ctx.setLineDash([3, 4]);
+    ctx.beginPath(); ctx.moveTo(PAD.left, y); ctx.lineTo(PAD.left + plotW, y); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#475569';
+    ctx.fillText((v >= 0 ? '+' : '') + v.toFixed(1) + '%', PAD.left - 4, y + 3);
+  });
+
+  // Zero line (solid)
+  const zy = toY(0);
+  ctx.strokeStyle = '#374151';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([4, 4]);
+  ctx.beginPath(); ctx.moveTo(PAD.left, zy); ctx.lineTo(PAD.left + plotW, zy); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Draw line helper
+  function drawLine(path, color, dotColor, endLabel) {
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 2;
+    ctx.lineJoin = 'round';
+    ctx.lineCap  = 'round';
+    ctx.beginPath();
+    path.forEach((v, i) => {
+      const x = toX(i), y = toY(v);
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    });
+    ctx.stroke();
+    // Dots
+    path.forEach((v, i) => {
+      ctx.beginPath();
+      ctx.arc(toX(i), toY(v), i === 0 ? 2.5 : 3.5, 0, Math.PI * 2);
+      ctx.fillStyle = dotColor;
+      ctx.fill();
+    });
+    // End-of-line label
+    const lv = path[path.length - 1];
+    const lx = toX(path.length - 1) + 5;
+    const ly = toY(lv) + 3.5;
+    ctx.fillStyle = color;
+    ctx.font = 'bold 9px system-ui, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText((lv >= 0 ? '+' : '') + lv.toFixed(1) + '%', lx, ly);
+  }
+
+  drawLine(kospiPath, '#64748b', '#94a3b8', 'KOSPI');
+  drawLine(stockPath, '#60a5fa', '#93c5fd', q.company.split(' ')[0]);
+
+  // X-axis labels
+  ctx.fillStyle = '#475569';
+  ctx.font = '9px system-ui, sans-serif';
+  ctx.textAlign = 'center';
+  for (let d = 0; d <= days; d++) {
+    ctx.fillText(d === 0 ? '공시일' : `+${d}일`, toX(d), H - 5);
+  }
+
+  // Legend
+  const lx0 = PAD.left + 2, ly0 = 8;
+  ctx.fillStyle = '#60a5fa';
+  ctx.fillRect(lx0, ly0, 12, 2);
+  ctx.fillStyle = '#94a3b8';
+  ctx.font = '9px system-ui, sans-serif';
+  ctx.textAlign = 'left';
+  ctx.fillText(q.company.split(' ')[0], lx0 + 15, ly0 + 3.5);
+
+  ctx.fillStyle = '#64748b';
+  ctx.fillRect(lx0 + 85, ly0, 12, 2);
+  ctx.fillStyle = '#94a3b8';
+  ctx.fillText('KOSPI', lx0 + 100, ly0 + 3.5);
+
+  wrap.style.display = 'block';
+}
+
+// ── 퀴즈 데이터 ────────────────────────────────────────────────────
 const QUIZZES = [
   {
     category: "물적분할",
@@ -371,25 +636,28 @@ const QUIZZES = [
 소액주주 입장에서는 알짜 배터리 사업의 이익을 직접 향유할 수 없게 됩니다.`,
     answer: "악재",
     changePct: -11.2,
-    kospiChangePct: -3.0,
+    kospiChangePct: -6.7,
     window: "공시 후 5거래일",
     explanation: "LG화학은 공시 당일 포함 5거래일 동안 약 -11% 급락했습니다. 소액주주들이 배터리 미래가치를 LG화학 주가로 누릴 수 없다는 점에 강하게 반발했고, '물적분할 반대' 청원이 수만 명에 달했습니다. 이 사건은 이후 물적분할 시 주주보호 규제 논의의 기폭제가 됐습니다.",
+    refUrl: "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20200917000127",
   },
   {
-    category: "유상증자",
-    company: "한국전력 (015760)",
-    date: "2022-10-21",
-    title: "주요사항보고서 (유상증자결정) — 2조 원 규모 주주배정 유상증자",
-    context: `한국전력이 약 2조 원 규모의 주주배정 유상증자를 결정했습니다.
+    category: "대형수주",
+    company: "HD현대중공업 (009540)",
+    date: "2026-04-22",
+    title: "단일판매·공급계약 체결 — 미국향 데이터센터 발전설비 6,200억 원 수주",
+    context: `HD현대중공업이 미국 에너지 인프라 기업 '에이페리온 에너지 그룹(AEG)'과
+약 6,200억 원 규모의 데이터센터용 발전설비 공급 계약을 체결했다고 공시했습니다.
 
-당시 한전은 2022년 상반기에만 14조 원 넘는 영업손실을 기록 중이었고,
-전기요금 인상 없이 연료비 급등을 혼자 떠안는 구조였습니다.
-유상증자 발행가는 시가 대비 할인된 가격으로 책정될 예정이었습니다.`,
-    answer: "악재",
-    changePct: -10.6,
-    kospiChangePct: 6.2,
-    window: "공시 후 5거래일",
-    explanation: "주가는 공시 후 5거래일간 약 -11% 하락했습니다. 주주배정 유상증자는 기존 주주의 지분 희석을 뜻하고, 한전의 구조적 적자가 해소되지 않은 상황에서의 증자라 시장 반응이 냉혹했습니다.",
+공급 대상은 미국 내 AI 데이터센터에 전력을 공급할 발전 설비이며,
+AI 인프라 투자 붐과 맞물려 체결된 대형 수출 계약입니다.
+HD현대중공업 연간 매출 대비 약 6% 수준의 단일 계약으로 이례적인 규모입니다.`,
+    answer: "수혜",
+    changePct: 12.6,
+    kospiChangePct: 2.4,
+    window: "공시 후 3거래일",
+    explanation: "HD현대중공업 주가는 공시 후 3거래일간 12.6% 급등하며 강하게 반응했습니다. 같은 기간 코스피 상승률(+2.4%) 대비 약 5배p 초과 상승한 수치입니다.AI 데이터센터 전력 수요 급증이라는 글로벌 테마와 맞물린 대형 미국 수출 계약으로, 에너지 설비 섹터 전반이 동반 상승했습니다. 수주 대상인 AEG는 미국 내 대규모 데이터센터 전력 인프라를 운영하는 에너지 기업입니다.",
+    refUrl: "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260422800175",
   },
   {
     category: "생산전략",
@@ -403,9 +671,10 @@ SK하이닉스·마이크론은 이미 감산에 들어간 상황이었습니다
 삼성은 그간 '인위적 감산은 없다'는 입장을 고수해왔기에 이 발표는 시장에 충격을 줬습니다.`,
     answer: "수혜",
     changePct: 4.8,
-    kospiChangePct: 1.5,
+    kospiChangePct: 4.6,
     window: "공시 후 5거래일",
     explanation: "삼성전자 주가는 발표 당일 +4% 급등하며 5거래일간 약 +5% 상승했습니다. 최대 공급자의 감산 선언은 반도체 가격 반등 신호로 해석되어 SK하이닉스 등 반도체 섹터 전체가 동반 상승했습니다.",
+    refUrl: "https://www.etnews.com/20230407000046",
   },
   {
     category: "대형협력",
@@ -418,58 +687,28 @@ SK하이닉스·마이크론은 이미 감산에 들어간 상황이었습니다
 당시 애플카 프로젝트(Project Titan)는 업계에서 뜨거운 화두였고,
 현대차가 애플의 파트너로 거론되면서 기아까지 함께 언급되었습니다.`,
     answer: "수혜",
-    changePct: 19.4,
-    kospiChangePct: 2.5,
+    changePct: 26.7,
+    kospiChangePct: 3.8,
     window: "공시 후 3거래일",
-    explanation: "현대차 주가는 3거래일 동안 약 +19% 폭등했습니다. 기아도 같은 기간 +40%에 달하는 급등을 기록했습니다. 다만 이후 애플이 협력사를 확정 짓지 않았다는 보도와 함께 현대차가 '협의 사실이 없다'고 번복하자 주가는 원상 복귀 수준으로 급락했습니다.",
+    explanation: "현대차 주가는 3거래일 동안 약 +27% 폭등했습니다. 기아도 같은 기간 +23%에 달하는 급등을 기록했습니다. 다만 이후 애플이 협력사를 확정 짓지 않았다는 보도와 함께 현대차가 '협의 사실이 없다'고 번복하자 주가는 원상 복귀 수준으로 급락했습니다.",
+    refUrl: "https://www.hankyung.com/economy/article/202101080850i",
   },
   {
     category: "대형M&A",
     company: "SK하이닉스 (000660)",
     date: "2020-10-20",
-    title: "인텔 낸드 플래시 사업부 약 9조 원에 인수 결정 공시",
-    context: `SK하이닉스가 인텔의 낸드 플래시 메모리 및 SSD 사업부를 약 90억 달러(9조 원)에 인수하기로 결정했다고 공시했습니다.
+    title: "인텔 낸드 플래시 사업부 약 10.2조 원에 인수 결정 공시",
+    context: `SK하이닉스가 인텔의 낸드 플래시 메모리 및 SSD 사업부를 약 90억 달러(약 10.2조 원)에 인수하기로 결정했다고 공시했습니다.
 
 SK하이닉스의 낸드 시장 점유율은 당시 10%대로 삼성(33%)·키옥시아에 크게 뒤처져 있었고,
 이번 인수로 점유율 20%대로 도약이 기대되었습니다.
-단, 9조 원이라는 사상 최대 규모의 현금 지출이 수반됩니다.`,
+단, 10.2조 원이라는 사상 최대 규모의 현금 지출이 수반됩니다.`,
     answer: "악재",
     changePct: -5.1,
-    kospiChangePct: -4.0,
+    kospiChangePct: -0.7,
     window: "공시 후 5거래일",
     explanation: "발표 당일 주가는 약 -5% 하락했습니다. 인수 시너지보다 막대한 인수 비용·재무 부담이 단기 악재로 해석된 전형적인 사례입니다. 장기적으로는 낸드 경쟁력 강화에 긍정적이었으나, 주가는 수개월간 부진했습니다.",
-  },
-  {
-    category: "유상증자",
-    company: "두산중공업 (034020)",
-    date: "2020-03-25",
-    title: "주요사항보고서 (유상증자결정) — 1조 원 규모 기습 유상증자",
-    context: `두산중공업이 코로나19 사태 속 유동성 위기를 타개하기 위해 약 1조 원 규모의 유상증자를 전격 결정했습니다.
-
-당시 두산그룹은 코로나로 면세·호텔 등 자회사 실적이 동반 악화됐고,
-두산중공업 자체도 탈석탄 흐름으로 수주가 급감한 상태였습니다.
-발행 예정가격은 직전 종가 대비 30% 이상 할인된 수준이었습니다.`,
-    answer: "악재",
-    changePct: -24.5,
-    kospiChangePct: 3.5,
-    window: "공시 후 5거래일",
-    explanation: "주가는 5거래일간 약 -25% 폭락했습니다. 30%대 할인 발행은 기존 주주 가치를 심각하게 희석시키며, 유동성 위기라는 신호 자체가 추가 매도 심리를 자극했습니다. 이후 두산중공업은 산업은행 주도 구조조정에 들어갔습니다.",
-  },
-  {
-    category: "합병",
-    company: "셀트리온 (068270)",
-    date: "2022-11-03",
-    title: "셀트리온·셀트리온헬스케어·셀트리온제약 3사 통합 합병 발표",
-    context: `셀트리온그룹이 계열사 셀트리온헬스케어, 셀트리온제약을 셀트리온에 흡수합병하는 3사 통합 계획을 발표했습니다.
-
-합병 비율을 두고 논란이 있었습니다.
-셀트리온 입장에서는 셀트리온헬스케어의 부채와 재고 리스크를 떠안는 구조였고,
-시장은 합병 비율의 적정성 여부를 예의주시했습니다.`,
-    answer: "악재",
-    changePct: -7.3,
-    kospiChangePct: 3.4,
-    window: "공시 후 5거래일 (셀트리온 기준)",
-    explanation: "셀트리온 주가는 발표 후 5거래일간 약 -7% 하락했습니다. 반면 셀트리온헬스케어는 합병 프리미엄 기대로 급등했습니다. 셀트리온 기존 주주들은 헬스케어의 낮은 수익성과 재고 리스크를 우려했습니다.",
+    refUrl: "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20201020000014",
   },
   {
     category: "합병",
@@ -478,36 +717,21 @@ SK하이닉스의 낸드 시장 점유율은 당시 10%대로 삼성(33%)·키�
     title: "SK이노베이션-SK E&S 합병 결의 공시",
     context: `SK이노베이션이 SK그룹 LNG·도시가스 계열사인 SK E&S와의 합병을 결의했습니다.
 
-합병 비율은 SK이노베이션 1 : SK E&S 0.3 수준으로,
+합병 비율은 SK이노베이션 1 : SK E&S 1.192 수준으로,
 SK E&S는 비상장사로 시장 가치가 외부에서 검증되지 않은 상태였습니다.
 SK이노베이션은 전기차 배터리(SK온) 적자로 재무 압박을 받고 있었고,
 이 합병이 배터리 사업 지원을 위한 것이라는 시각이 지배적이었습니다.`,
     answer: "악재",
-    changePct: -9.8,
-    kospiChangePct: -2.0,
+    changePct: -6.0,
+    kospiChangePct: -3.7,
     window: "공시 후 5거래일",
-    explanation: "주가는 5거래일간 약 -10% 급락했습니다. 비상장사 SK E&S와의 합병 비율이 불투명하고, 배터리 적자를 메우기 위해 알짜 자산을 끌어다 쓴다는 비판이 나왔습니다. 소액주주들은 합병 반대 의결권 행사를 추진했습니다.",
-  },
-  {
-    category: "회계이슈",
-    company: "삼성바이오로직스 (207940)",
-    date: "2018-05-04",
-    title: "금융감독원 회계 처리 위반 혐의 조사 착수",
-    context: `금융감독원이 삼성바이오로직스의 자회사 삼성바이오에피스 회계처리 방식에 대해 '분식회계 혐의'로 감리에 착수했습니다.
-
-핵심 쟁점은 삼성바이오에피스를 종속회사에서 관계회사로 전환하면서
-공정가치로 재평가해 4조 5천억 원의 이익을 계상한 것이 적법한가 여부였습니다.
-이 이익 처리가 없었다면 삼성바이오는 수년간 적자였다는 주장이 제기됐습니다.`,
-    answer: "악재",
-    changePct: -18.0,
-    kospiChangePct: -2.1,
-    window: "거래재개 후 5거래일",
-    explanation: "거래정지 해제 후 삼성바이오로직스는 이틀간 -18% 이상 급락했습니다. 분식회계 혐의는 상장폐지 가능성까지 연결되는 최악의 공시 유형으로, 기관·외국인 투자자가 대규모로 이탈했습니다. 최종적으로는 고의 분식회계로 과징금 처분이 내려졌습니다.",
+    explanation: "주가는 5거래일간 약 -6% 하락했습니다. 비상장사 SK E&S와의 합병 비율이 불투명하고, 배터리 적자를 메우기 위해 알짜 자산을 끌어다 쓴다는 비판이 나왔습니다. 소액주주들은 합병 반대 의결권 행사를 추진했습니다.",
+    refUrl: "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240717000415",
   },
   {
     category: "지주사전환",
     company: "POSCO홀딩스 (005490)",
-    date: "2022-01-28",
+    date: "2021-12-10",
     title: "포스코 → 포스코홀딩스 지주회사 체제 전환 공시",
     context: `포스코가 철강 사업을 포스코(존속법인)에 남기고,
 지주회사 '포스코홀딩스'를 설립해 배터리소재·수소·에너지 신사업을 총괄하는
@@ -515,27 +739,30 @@ SK이노베이션은 전기차 배터리(SK온) 적자로 재무 압박을 받�
 
 당시 포스코는 니켈·리튬 등 배터리소재 사업에 대규모 투자를 선언하며
 '이차전지 소재 1등 기업'을 목표로 내세웠습니다.`,
-    answer: "수혜",
-    changePct: 6.2,
-    kospiChangePct: -3.8,
+    answer: "중립",
+    changePct: -1.0,
+    kospiChangePct: -0.4,
     window: "공시 후 5거래일",
-    explanation: "주가는 발표 후 5거래일간 약 +6% 상승했습니다. 지주사 전환이 배터리소재 사업의 밸류에이션을 독립적으로 부각시킬 것이라는 기대가 컸습니다. 이후 포스코홀딩스는 2차전지 테마주 대장격으로 2023년 고점 대비 3배 이상 상승하기도 했습니다.",
+    explanation: "주가는 발표 후 5거래일간 약 -1.0% 소폭 하락하며 중립에 가까운 반응을 보였습니다. 배터리소재 사업 기대감이 있었으나, 지주사 전환에 따른 철강 사업 할인 우려와 시장 관망 심리가 맞물렸습니다. 중장기적으로는 2차전지 테마주 대장격으로 수년간 강한 상승세를 보였습니다.",
+    refUrl: "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20211210000304",
   },
   {
-    category: "대형협력",
-    company: "기아 (000270)",
-    date: "2021-01-08",
-    title: "애플 자율주행 전기차 협력사 후보 거론 (현대차그룹 동반 보도)",
-    context: `현대차와 함께 기아도 애플카 위탁생산 파트너 후보로 거론되었습니다.
-
-특히 기아의 조지아 공장이 애플카 생산 거점으로 유력하다는 외신 보도가 나왔고,
-현대차그룹이 '다수 기업과 협력 검토 중'이라고 공시하면서 기아 주가에 직접 영향을 줬습니다.
-당시 기아는 EV6 출시를 앞두고 전기차 전환 전략을 공격적으로 추진 중이었습니다.`,
+    category: "자사주소각",
+    company: "삼성전자 (005930)",
+    date: "2026-03-31",
+    title: "자기주식 소각 결정 공시 — 장부가 5.3조·시가 14조 원 규모 소각",
+    context: `삼성전자가 보유 자기주식을 소각하겠다고 공시했습니다.
+삼성전자는 이미 주주환원 정책의 일환으로 자사주 매입·소각 계획을 시장과 꾸준히 소통해 왔기 때문에
+'언젠가는 소각하겠지'라는 사실 자체는 투자자 대부분이 알고 있었습니다.
+시장의 관심은 '얼마나 소각하느냐'였고, 사전 기대치는 5~8조 원 수준이었습니다.
+그런데 실제 발표된 소각 물량의 장부가는 5.3조 원이었지만,
+현재 주가로 환산한 시가 기준으로는 14조 원을 넘어서는 규모였습니다.`,
     answer: "수혜",
-    changePct: 39.8,
-    kospiChangePct: 2.5,
+    changePct: 5.6,
+    kospiChangePct: 1.9,
     window: "공시 후 3거래일",
-    explanation: "기아 주가는 3거래일간 약 +40% 폭등했습니다. 현대차 계열사 중 기아가 더 직접적인 수혜주로 부각되면서 현대차보다 더 큰 상승폭을 기록했습니다. 이후 협력설 부인으로 급락한 것도 현대차와 동일합니다. 단기 투기 세력이 대거 유입된 사례로 교과서에 자주 인용됩니다.",
+    explanation: "삼성전자 주가는 공시 당일 강하게 반응하며 3거래일간 약 +5.6% 상승했습니다. 핵심은 '소각 여부'가 아닌 '소각 체급'이었습니다. 시장이 5~8조 원을 예상하던 상황에서 시가 기준 14조 원을 넘는 소각 규모가 발표되며 어닝 서프라이즈에 준하는 충격을 줬습니다. 자사주 소각은 유통 주식 수를 줄여 주당순이익(EPS)을 높이고, 기존 주주의 지분 가치를 직접적으로 끌어올리는 대표적인 주주환원 수단입니다.",
+    refUrl: "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260331800004",
   },
   {
     category: "합병",
@@ -548,16 +775,17 @@ SK이노베이션은 전기차 배터리(SK온) 적자로 재무 압박을 받�
 당시 삼성물산의 자산가치(토목·건설·상사 등) 대비 현저히 낮은 비율이라는 비판이 있었습니다.
 이 합병은 이재용 삼성전자 부회장의 경영권 승계와 연결된 거래라는 의혹이 제기되었고,
 헤지펀드 엘리엇이 삼성물산 지분을 대거 매입해 합병 반대를 선언했습니다.`,
-    answer: "악재",
-    changePct: -8.5,
-    kospiChangePct: 0.5,
+    answer: "수혜",
+    changePct: 13.8,
+    kospiChangePct: -3.1,
     window: "공시 후 5거래일 (삼성물산 기준)",
-    explanation: "삼성물산 주가는 합병 발표 후 약 -9% 하락했습니다. 삼성물산이 저평가된 비율로 흡수되어 기존 주주가 손해를 본다는 분석이 지배적이었습니다. 반면 제일모직은 합병 후 삼성전자 지분을 보유하게 되는 지주사 역할이 부각돼 상승했습니다. 이 사건은 이후 국민연금 의결권 논란으로 이어졌습니다.",
+    explanation: "삼성물산 주가는 합병 발표 후 5거래일간 약 +14% 상승했습니다. 합병 발표가 M&A 프리미엄 매수세를 자극했고, 엘리엇이 지분을 대거 매입하며 추가 상승을 이끌었습니다. 단, 합병 비율(0.35주)이 삼성물산 내재가치 대비 저평가라는 비판이 거셌고 이 사건은 이후 국민연금 의결권 논란으로 이어졌습니다.",
+    refUrl: "https://news.samsungcnt.com/ko/%EC%A0%84%EC%B2%B4%EA%B8%B0%EC%82%AC/%EC%A0%84%EC%82%AC%EA%B3%B5%ED%86%B5/2015-05-%EC%82%BC%EC%84%B1%EB%AC%BC%EC%82%B0-%C2%B7-%EC%A0%9C%EC%9D%BC%EB%AA%A8%EC%A7%81-%ED%95%A9%EB%B3%91/",
   },
   {
     category: "해외리스크",
     company: "NAVER (035420)",
-    date: "2024-04-26",
+    date: "2024-04-30",
     title: "일본 총무성, 라인야후 네이버 지분 매각 권고 보도",
     context: `일본 총무성이 라인야후(구 라인·야후재팬 합병사)에 대해
 네이버가 보유한 라인야후 지분을 줄이도록 권고했다는 보도가 나왔습니다.
@@ -565,11 +793,12 @@ SK이노베이션은 전기차 배터리(SK온) 적자로 재무 압박을 받�
 2023년 라인의 개인정보 유출 사고를 계기로 일본 정부가 한국 기업의 영향력을 문제 삼은 것입니다.
 NAVER는 라인야후의 최대 주주(간접 보유 약 33%)로,
 지분 매각 시 라인 관련 미래 수익 기반을 잃을 수 있다는 우려가 컸습니다.`,
-    answer: "악재",
-    changePct: -6.3,
-    kospiChangePct: -1.5,
+    answer: "중립",
+    changePct: 1.9,
+    kospiChangePct: 0.9,
     window: "보도 후 5거래일",
-    explanation: "NAVER 주가는 관련 보도 후 5거래일간 약 -6% 하락했습니다. 라인은 일본·동남아에서 수억 명이 사용하는 NAVER의 핵심 해외 자산으로, 지분 강제 매각 시나리오는 NAVER 밸류에이션에 심각한 타격이었습니다. 이후 NAVER는 지분 매각 협상을 진행하면서 주가 회복에 상당한 시간이 걸렸습니다.",
+    explanation: "NAVER 주가는 보도 후 5거래일간 약 +1.9% 소폭 상승하며 중립에 가까운 반응을 보였습니다. 라인야후 지분 매각 권고는 분명 리스크 요인이었으나, 시장은 단기에 확정된 악재로 보지 않았습니다. 이후 협상 장기화 과정에서 지속적인 불확실성이 주가에 부담이 됐고, 중장기적으로 라인 관련 우려가 NAVER 밸류에이션 할인 요인으로 작용했습니다.",
+    refUrl: "https://www.yna.co.kr/view/MYH20240430010800641",
   },
   {
     category: "합병철회",
@@ -582,28 +811,29 @@ NAVER는 라인야후의 최대 주주(간접 보유 약 33%)로,
 미국 헤지펀드 엘리엇이 현대모비스 지분을 매입하며 합병 반대 캠페인을 벌였고,
 ISS 등 의결권 자문사도 반대를 권고한 상황이었습니다.
 국민연금도 합병안에 반대 의결권을 행사할 가능성이 높다고 알려졌습니다.`,
-    answer: "수혜",
-    changePct: 7.1,
-    kospiChangePct: -1.2,
+    answer: "중립",
+    changePct: -1.9,
+    kospiChangePct: 0.0,
     window: "철회 발표 후 3거래일 (현대모비스 기준)",
-    explanation: "철회 발표 후 현대모비스 주가는 약 +7% 상승했습니다. 불리한 합병 비율에서 벗어났다는 안도감이 반영됐습니다. 반면 현대글로비스는 합병 기대가 사라지며 하락했습니다. 이 사건은 행동주의 펀드가 한국 재벌 지배구조 개편에 처음 실질적으로 영향력을 행사한 사례입니다.",
+    explanation: "철회 발표 후 현대모비스 주가는 약 -1.9% 소폭 하락하며 중립에 가까운 반응을 보였습니다. 불리한 합병에서 벗어났다는 안도감이 있었으나, 지배구조 개편 기대감 소멸이 맞물리며 두 효과가 상쇄되었습니다. 반면 현대글로비스는 합병 기대가 사라지며 하락했습니다. 이 사건은 행동주의 펀드가 한국 재벌 지배구조 개편에 처음 실질적으로 영향력을 행사한 사례입니다.",
+    refUrl: "https://www.etnews.com/20180522000048",
   },
   {
-    category: "물적분할",
+    category: "규제리스크",
     company: "카카오 (035720)",
-    date: "2021-09-01",
-    title: "카카오페이·카카오뱅크 IPO 완료 후 카카오 주가 반응 + 플랫폼 규제 리스크",
-    context: `카카오의 핵심 자회사인 카카오뱅크(8월)·카카오페이(11월 예정) IPO가 진행됐습니다.
-
-두 자회사의 상장으로 카카오는 대규모 평가이익을 얻었지만,
+    date: "2021-09-09",
+    title: "카카오페이·카카오뱅크 IPO 완료 후 카카오 자체 주가 반응",
+    context: `카카오의 핵심 자회사 카카오뱅크가 2021년 8월 상장했습니다.
+자회사 상장으로 카카오는 대규모 평가이익을 얻었지만,
 기존 카카오 주주 입장에서는 '알짜 자회사'가 별도 상장되어 카카오 할인이 심화된다는 우려가 있었습니다.
-또한 카카오그룹의 골목상권 침해·독과점 논란이 국정감사 이슈로 부상했고,
+9월에는 카카오그룹의 골목상권 침해·독과점 논란이 국정감사 이슈로 부상했고,
 정부의 플랫폼 규제 강화 신호가 잇따랐습니다.`,
     answer: "악재",
-    changePct: -14.2,
-    kospiChangePct: -3.2,
+    changePct: -23.4,
+    kospiChangePct: -4.3,
     window: "2021년 9월 한 달간",
-    explanation: "카카오 주가는 9월 한 달간 약 -14% 하락했습니다. 자회사 상장으로 인한 모회사 할인(코리아 디스카운트의 변형)에 더해 규제 리스크가 겹치며 기관 매도가 쏟아졌습니다. 이 사례는 자회사 IPO가 반드시 모회사 주가에 긍정적이지 않다는 것을 보여주는 교훈으로 자주 언급됩니다.",
+    explanation: "카카오 주가는 9월 한 달간 약 -23% 하락했습니다. 자회사 상장으로 인한 모회사 할인(코리아 디스카운트의 변형)에 더해 규제 리스크가 겹치며 기관 매도가 쏟아졌습니다. 이 사례는 자회사 IPO가 반드시 모회사 주가에 긍정적이지 않다는 것을 보여주는 교훈으로 자주 언급됩니다.",
+    refUrl: "https://m.hankookilbo.com/News/Read/A2021090916310002925",
   },
 ];
 
@@ -667,6 +897,7 @@ function renderQuestion() {
   });
 
   document.getElementById('resultBox').className = 'result-box';
+  document.getElementById('perfChartWrap').style.display = 'none';
   document.getElementById('btnNext').className = 'btn-next';
 }
 
@@ -719,11 +950,33 @@ function selectAnswer(chosen) {
     </div>
   `;
   explEl.textContent = q.explanation;
+  const dartLink = document.getElementById('dartLink');
+  if (q.refUrl) {
+    dartLink.href = q.refUrl;
+    const isDart = q.refUrl.includes('dart.fss.or.kr') || q.refUrl.includes('kind.krx.co.kr');
+    dartLink.textContent = isDart ? '🔗 DART/KIND 원문 공시 보기' : '🔗 관련 기사 보기';
+    dartLink.style.display = 'inline-flex';
+  } else {
+    dartLink.style.display = 'none';
+  }
 
   box.className = 'result-box show ' + (isCorrect ? 'correct-box' : 'wrong-box');
+  requestAnimationFrame(() => drawChart(q, order[current]));
   document.getElementById('btnNext').className = 'btn-next show';
   document.getElementById('btnNext').textContent =
     current + 1 < QUIZZES.length ? '다음 문제 →' : '결과 보기';
+
+  // 인라인 카드뉴스
+  const cnKey = Object.keys(CARD_NEWS).find(k => q.company.startsWith(k));
+  const inlineCnEl = document.getElementById('inlineCn');
+  if (cnKey) {
+    inlineCnCards = CARD_NEWS[cnKey];
+    inlineCnIdx = 0;
+    renderInlineCn();
+    inlineCnEl.style.display = 'block';
+  } else {
+    inlineCnEl.style.display = 'none';
+  }
 }
 
 function nextQuestion() {
@@ -757,6 +1010,213 @@ function showFinal() {
 
 function restartQuiz() {
   startQuiz();
+}
+
+// ── 카드뉴스 ─────────────────────────────────────────────────────
+const CARD_NEWS = {
+  "LG화학": [
+    { h: "물적분할 결정", b: `LG화학이 공식 공시했습니다:\n"배터리 사업을 물적분할해 'LG에너지솔루션'을 신설합니다"\n\n**분할 방식:**\n- 배터리 사업 100% 자회사화\n- 기존 LG화학은 화학 사업만 남음\n\n**규모:** 2020년대 최대 규모 물적분할` },
+    { h: "물적분할이란?", b: `**분할 전:** LG화학 = 화학 사업 + 배터리 사업\n\n**분할 후:**\nLG화학 (화학만)\nLG에너지솔루션 (배터리만) ← 신설\n\n**중요한 점:**\n기존 LG화학 주주에게 자동으로\nLG에너지솔루션 주식이 배정되지 않음` },
+    { h: "인적분할 vs 물적분할", b: `**① 인적분할 방식:**\nLG화학 주주 → LG화학 주식 + LG에너지솔루션 주식 자동 보유\n→ 두 회사 주식 모두 보유\n\n**② 물적분할 방식 (LG의 선택):**\nLG화학 주주 → LG화학 주식만 보유\n→ LG에너지솔루션은 별도 IPO로 상장\n\n**결과:**\n물적분할은 기존 주주가 배터리 회사 주식을 못 받는 것` },
+    { h: "소액주주의 손해", b: `**LG화학에 남는 것:**\n- 화학 사업 (성숙 산업, 낮은 성장률)\n\n**분할된 것:**\n- 배터리 사업 (전기차 시대의 핵심, 높은 성장률)\n\n**소액주주의 입장:**\n"내가 가진 LG화학 주식은 구닥다리 화학만 남고,\n미래 먹거리인 배터리는 왜 못 받지?"` },
+    { h: "왜 물적분할을 택했나?", b: `**LG의 진짜 의도:**\n\n인적분할하면: 주주들이 배터리 주식도 받음\n→ 화학만 남은 LG화학 가치 떨어짐\n→ LG화학 지배력 약화\n\n**물적분할 선택:**\n- 배터리만 100% 자회사로 보유\n- 지배력 유지 + 배터리 수익 독점` },
+    { h: "구조의 문제점", b: `**분할 전:** LG화학 주주 = 화학 + 배터리 이익 향유 가능\n\n**분할 후:**\n- LG화학 주주 = 화학 이익만 향유\n- 배터리 이익 → LG 지배주주 + LG에너지솔루션 주주가 독점\n\n**피해:**\n소액주주는 배터리 이익을 못 받고,\n주식을 사려면 추가 자금이 필요함` },
+    { h: "시장 평가", b: `**긍정:**\n- 배터리 사업 가치 명확해짐\n- LG에너지솔루션 IPO로 상장\n- 전기차 시대 수혜주 탄생\n\n**부정:**\n- 기존 LG화학 주주 피해\n- 배터리 수익 독점\n- 소액주주 소외\n\n**결과:**\nLG에너지솔루션 상장 후 주가 상승 ↑\n기존 LG화학 주주는 손실 ↓` },
+    { h: "투자자 실제 손해", b: `**분할 전:** LG화학 주식 100주\n→ 추정 가치: 100만 원 (예시)\n\n**분할 후:** LG화학 주식 100주만\n→ 화학 이익만 향유\n→ 추정 가치: 60만 원 (예시)\n\n**결론:**\n원래 100만 원 가치를 받으려면,\n추가로 50만 원을 더 내야 함` },
+    { h: "역사적 의미", b: `1. **규모의 거대함**\n   - 배터리 사업 수조 원대\n   - 한국 기업 최대 수준\n\n2. **소액주주 권리 문제**\n   - 기존 주주의 권리 무시\n   - 지배주주 이익 극대화\n   - 소수주주 보호 장치 부재\n\n3. **기업 지배구조 논란**\n   - 지배주주가 일방적으로 결정` },
+    { h: "투자 교훈", b: `**법적으로:** ✓ 합법 (회사법상 물적분할 규정 준수)\n\n**실질적으로:** ✗ 부당\n- 소액주주 이익 침해\n- 배터리 수익 독점\n\n**투자 교훈:**\n1. 물적분할은 주주에게 항상 유리한가? → **아니다**\n2. 지배주주의 의도 파악 필수\n   왜 지금? 왜 이 방식?\n3. 소액주주도 반대 목소리 내야 함` },
+  ],
+  "삼성전자": [
+    { h: "충격의 발표", b: `삼성전자가 공식 발표했습니다:\n"메모리 반도체 생산량을 **의미 있는 수준**으로 감산하겠습니다"\n\n시장의 반응: "어? 삼성이?"\n\n지금까지 삼성은 줄곧\n**"인위적 감산은 없다"**고 주장해왔기 때문입니다.` },
+    { h: "시장 현황", b: `**당시 메모리 시장 상황:**\n\nD램(컴퓨터 메모리):\n→ 2022년 고점 대비 **50% 이상 폭락**\n\n낸드플래시(저장장치):\n→ 2022년 고점 대비 **50% 이상 폭락**\n\n초과공급으로 인한 극심한 공급 과잉 상태` },
+    { h: "경쟁사의 선제 감산", b: `**SK하이닉스:** 이미 감산 결정하고 진행 중\n\n**마이크론:** 감산 선언\n\n**삼성전자:** 그동안 고수해온 "인위적 감산 없다" 입장 변경\n\n→ 업계 최대 공급자의 감산 선언으로\n시장은 공급 감소 신호로 해석` },
+    { h: "왜 감산하나?", b: `**메모리 산업의 반복 패턴:**\n\n호황기 → 모두 생산 증대 → 공급 과잉\n    ↓\n가격 폭락 → 회사들 감산 결정\n    ↓\n공급 감소 → 수급 균형 → 가격 회복\n    ↓\n다시 호황기로...` },
+    { h: "메모리 산업의 숙명", b: `**메모리 반도체의 특징:**\n- 제조 공정이 상향 평준화 (기술 차별화 어려움)\n- 상품화됨 (누구 제품이나 비슷)\n- 가격 경쟁 극심 (대량 판매만 수익)\n\n**결과:**\n경기 좋을 때 다들 동시에 투자\n→ 공급 과잉 → 가격 폭락 → 어쩔 수 없이 감산` },
+    { h: "삼성이 버텼던 이유", b: `**회사의 논리:**\n- 최고 기술력으로 경쟁사보다 저가 생산 가능\n- 공급 부족 때 시장 점유율 확대\n- 불황도 견딜 수 있는 체력\n\n**현실:**\n- 가격 폭락이 이 정도일 줄은...\n- 결국 감산 불가피` },
+    { h: "감산 선언의 의미", b: `**개별 기업의 한계 인정:**\n아무리 잘해도 산업 전체의 공급 과잉은 못 견딤\n\n**이성적 선택:**\n계속 버티면 손실만 커짐\n차라리 함께 감산해서 가격 회복 유도\n\n**시장 신호:**\n업황이 정말 심각하다는 증거\n→ 투자자들에게 조정 신호` },
+    { h: "메모리 사이클 교훈", b: `**메모리 산업은:**\n- 10년에 여러 번 반복\n- 호황과 불황의 순환\n- 감산 후 회복, 다시 과잉...\n\n**투자 교훈:**\n메모리 주식 투자자는 이 사이클을 이해해야 합니다.\n\n- 불황 때도 있고 호황 때도 있다\n- 장기 관점에서 평균 수익률로 생각해야 함\n\n**결론:** 개별 회사의 의지로는 산업 사이클을 벗어날 수 없습니다.` },
+  ],
+  "현대차": [
+    { h: "공시 발표", b: `현대차가 공식 공시했습니다:\n"다수 기업과 자율주행 전기차 개발을 협의 중입니다"\n\n**배경:**\n- 언론에서 "애플과 협력 중"이라는 보도\n- 현대차의 사실상 인정 공시\n\n**함께 언급된 기업:** 현대자동차, 기아` },
+    { h: "애플카 프로젝트", b: `**당시 업계의 화두:**\n\n**Project Titan (타이탄):**\n- 애플의 비밀 프로젝트\n- 자율주행 전기차 개발 목표\n- 기술 수준 최고 기대\n\n업계 흥미: "혹시 애플이 테슬라를 넘을까?"` },
+    { h: "파트너십의 의미", b: `**긍정적 해석:**\n- 애플이 현대차를 신뢰\n- 글로벌 제조 능력 인정\n- 현대차의 입지 상승\n\n**주가 반응:**\n- 발표 후 현대차·기아 주가 폭등\n- 시장도 긍정적 평가` },
+    { h: "투자 관점의 의문", b: `**시나리오 1 (낙관):**\n애플 + 현대차 = 함께 설계·제조\n→ 현대차 수익성 ↑\n\n**시나리오 2 (우려):**\n애플 = 디자인·OS·주도권\n현대차 = 제조만 담당 (부품 공급자)\n→ 현대차 수익성 ↓\n\n어떤 구조인지에 따라 평가가 완전히 달라짐` },
+    { h: "독립성 상실 우려", b: `**투자자들의 우려:**\n\n"애플의 자동차 프로젝트가 주가 되면, 현대차는 뭐 하나?"\n\n**장기 리스크:**\n- 기술 주도권 상실\n- 이익율 낮은 제조만 담당\n- 차기 프로젝트는?\n\n**핵심:** 현대차가 단순 제조사로 전락하지 않아야 진정한 성공` },
+    { h: "기술 이전 문제", b: `**자율주행 기술 관련 우려:**\n\n- 현대차가 개발한 기술 활용?\n- 아니면 애플 기술 사용?\n- 기술 공유 범위?\n\n**미래 시나리오:**\n- 애플과 경쟁할 때 기술 격차?\n- 독점 공급 계약으로 종속?` },
+    { h: "시장 평가", b: `✓ **긍정:**\n- 애플 파트너십 자체가 신뢰 신호\n- 미래 사업 확보\n- 기아도 포함되어 수혜\n\n✗ **우려:**\n- 주도권 상실 가능성\n- 수익성 낮은 제조만?\n- 장기 자립성 문제` },
+    { h: "결론과 교훈", b: `**투자자 입장:**\n"좋은 뉴스지만, 계약 내용이 투명해야 한다"\n\n**확인해야 할 것:**\n- 기술 개발 주도권은 누가?\n- 이익 배분은?\n- 독점 공급 기간은?\n- 이후 독립적 사업 가능?\n\n**결론:**\n파트너십은 반가우나,\n현대차가 단순 제조사로 전락하지 않아야\n진정한 성공입니다.` },
+  ],
+  "SK하이닉스": [
+    { h: "대규모 인수 결정", b: `SK하이닉스가 공식 발표했습니다:\n"인텔의 낸드 플래시 메모리·SSD 사업을 인수하겠습니다"\n\n**규모:** 약 90억 달러 (약 10.2조 원)\n\n**대상:**\n- 낸드 플래시 메모리 제조\n- SSD(저장장치) 사업` },
+    { h: "낸드 시장 현황", b: `**낸드 플래시 시장 점유율:**\n\n삼성       33%\n키옥시아   20%\nSK하이닉스 10%\n인텔        5%\n\nSK하이닉스는 시장에서 훨씬 뒤처져 있었습니다.` },
+    { h: "AI 슈퍼사이클 배경", b: `**인수 결정의 배경:**\n\n**AI 붐이 부는 중:**\n- ChatGPT 등 생성형 AI 확대\n- 데이터 센터 수요 급증\n- 클라우드 컴퓨팅 폭발적 성장\n\n**메모리 부족 심화:**\n- 서버용 메모리(DRAM) 부족\n- 데이터 저장용 낸드 플래시 부족\n- 가격 상승` },
+    { h: "인수의 의미", b: `**왜 이 시점에 10.2조를 들었나?**\n\n**슈퍼사이클 진입:**\n- 지난 몇 년은 메모리 불황\n- 2024년부터 수요 급증 신호\n- 앞으로 여러 해 호황 예상\n\n**경쟁력 강화의 시급성:**\n- 이제 수요 폭주할 텐데\n- 지금 점유율 높여야 함\n- 늦으면 삼성에 밀림` },
+    { h: "점유율 도약의 영향", b: `**SK하이닉스 낸드 점유율:**\n인수 전: 10% → 인수 후: **20%대**\n\n**이것이 의미하는 것:**\n\n불황 때: 점유율 낮아도 버틸 수 있음\n\n**호황기:**\n- 점유율 높을수록 이익 폭발\n- 20% vs 10% = 실적 2배 차이\n- 미래 10년 수익 결정` },
+    { h: "10.2조는 비싼가, 싼가?", b: `**슈퍼사이클 맥락에서:**\n\n10.2조 투자 → 점유율 20% → 호황기 수익 폭증\n→ 3~5년 내 회수 + 초과 수익 기대\n\n- 호황이 5년 지속되면 충분히 회수 가능\n- 오히려 "싼 가격에 샀다" 평가도 가능` },
+    { h: "불황에 사서 호황에", b: `**SK하이닉스의 타이밍:**\n\n**2020년대 초:**\n메모리 불황 (가격 폭락)\n인텔도 낸드 사업 철수 검토\n\n**2024년:**\nAI 붐으로 수요 급증\n낸드 공급 부족, 가격 상승\n\n**결과:**\n불황에 샀던 인텔 자산이 호황 때 큰 수익 창출` },
+    { h: "여전한 위험 요소", b: `✗ **슈퍼사이클 지속성:**\n생성형 AI는 얼마나 갈까?\n\n✗ **통합 비용:**\n9조 + 추가 투자 + 공장 현대화 비용\n\n✗ **경쟁 심화:**\n삼성도 투자 확대\n신규 진입자 나올 수 있음` },
+    { h: "결론", b: `**전략:** ✓✓ 탁월한 결정\n- 불황에 반도체 설비 인수\n- 호황기를 맞아 수익 창출\n- 타이밍 완벽\n\n**재무:** ✗→✓ 우려→기대로 전환\n- 불황: 9조 부담스러웠을 것\n- 호황: 3~4년 내 회수 가능\n\n**투자 결론:**\nAI 슈퍼사이클이 계속되는 한,\nSK하이닉스는 최고의 투자처가 될 가능성 높습니다.` },
+  ],
+  "두산중공업": [
+    { h: "위기의 신호", b: `코로나19가 세계를 마비시키던 시점, 두산그룹이 심각한 타격을 입었습니다.\n\n**두산그룹의 동반 악화:**\n- 면세점: 해외 관광객 급감으로 매출 폭락\n- 호텔·리조트: 예약 취소 및 방문객 감소\n\n**두산중공업까지 어려움:**\n- 탈석탄 흐름으로 인한 수주 급감\n- 유동성 부족으로 자금 조달 절실` },
+    { h: "기습 유상증자 발표", b: `발표 시점: 2020년, 코로나19 한창일 때\n**규모:** 약 1조원\n**발행 방식:** 유상증자 (신주 발행으로 자금 조달)\n\n주주들은 전혀 예상하지 못한 발표였습니다.\n"왜 갑자기? 왜 이렇게 큰 규모?"` },
+    { h: "주주들의 손해", b: `**발행 예정가격: 직전 종가 대비 30% 이상 할인**\n\n예시:\n- 직전 종가: 10,000원\n- 발행가격: 7,000원 수준\n\n**기존 주주의 피해:**\n- 새 주식이 저가로 발행됨\n- 기존 주주의 지분율 희석\n- 주당순이익(EPS) 하락\n\n주식 100주 보유자:\n→ 여전히 100주지만, 전체 주식 수가 늘어\n→ 회사 내 소유 비중이 떨어짐` },
+    { h: "왜 이렇게 할인했나?", b: `**회사의 입장:**\n- 즉시 자금 필요\n- 낮은 가격으로라도 빨리 팔아야 함\n- 투자자들을 유인하기 위해 매력적인 가격 제시\n\n**투자자의 입장:**\n- 위기 기업에 투자 리스크 커짐\n- 저가 제시로 고위험을 보상\n- "싼 가격에 사서 나중에 오르기를 기대"` },
+    { h: "유상증자의 종류", b: `**① 주주배정 방식:**\n기존 주주들에게만 신주 제공\n→ 기존 주주의 권리 보호, 지분 희석 최소화\n\n**② 제3자배정 방식:**\n새로운 투자자에게 신주 제공\n→ 기존 주주의 지분율 크게 하락\n\n**③ 일반공모 방식:**\n누구나 살 수 있게 공개\n→ 광범위한 자금 조달 가능` },
+    { h: "기존 주주들의 반발", b: `**주주들의 주요 불만:**\n\n**투명성 부족:**\n왜 갑자기? 왜 이 규모?\n자금을 정확히 어디에 쓸 건가?\n\n**가치 훼손:**\n30% 할인은 너무 심한가?\n더 나은 조건으로 조달할 수 없었나?\n\n**경영진 신뢰도:**\n위기 상황에서 과연 올바른 결정인가?` },
+    { h: "유상증자와 주주가치", b: `**회사가 유상증자하는 이유:**\n긴급 자금 필요 / 설비 투자 / 빚 상환 / 인수합병\n\n**주주에게 미치는 영향:**\n- 지분율: 희석됨\n- 주당순이익: 하락\n- 단기 주가: 보통 하락\n- 장기 가치: 투자 성패에 따라 다름` },
+    { h: "유상증자 vs 무상증자", b: `**유상증자 (돈 받고 주식 발행):**\n장점: 실질적인 자금 확보\n단점: 기존 주주 희석, 주가 영향\n\n**무상증자 (공짜로 주식 배분):**\n장점: 주주 환원 의도 표현\n단점: 자금 조달 불가, 순가치 나누기만\n\n두산의 경우: 실질 자금이 필요해서 유상증자 선택` },
+    { h: "교훈", b: `두산중공업 사건이 보여주는 교훈:\n\n**공시의 중요성:** 기업은 주주에게 미리 알려야 함\n\n**공정한 조건:** 할인율이 과도하지 않아야 함\n\n**자금 사용 계획:** 조달한 자금 사용처를 명확히\n\n**기존 주주 보호:** 과도한 희석 방지` },
+    { h: "결론", b: `**기업의 입장:**\n살아남아야 함, 자금 조달이 최우선\n\n**주주의 입장:**\n회사가 위기니까 일단 응원하고 싶음\n하지만 지분 희석은 싫음\n투명한 설명을 원함\n\n**결론:**\n두산중공업의 유상증자는 기업의 자금 조달 필요성과\n주주의 권리 보호가 충돌하는 현장입니다.\n위기 상황이어도 **투명성과 공정성**이 있어야\n주주들의 신뢰를 유지할 수 있습니다.` },
+  ],
+  "셀트리온": [
+    { h: "배경: 분식회계 의혹에서 출발", b: `셀트리온 그룹은 오랫동안 분식회계 의혹을 받아왔습니다.\n\n**셀트리온** (개발·생산)\n**셀트리온헬스케어** (판매·유통)\n**셀트리온제약** (화학약품 제조)\n\n이렇게 분리된 구조에서 계열사 간 거래가 복잡해지고,\n가공매출·재고 관리의 투명성 문제가 지속됐습니다.` },
+    { h: "합병 발표", b: `**2020년 9월, 3사 통합 계획 공개**\n서정진 회장이 야심찬 계획을 발표했습니다:\n\n✓ 셀트리온 + 셀트리온헬스케어 + 셀트리온제약 3사 합병\n✓ 글로벌 빅파마로 도약\n✓ 지배구조 투명화\n✓ 분식회계 의혹 완전 해소\n\n당초 목표: 2021년 말까지 완료` },
+    { h: "핵심 문제 - 합병 비율", b: `**셀트리온이 떠안을 '짐':**\n\n**셀트리온 입장:**\n- 셀트리온헬스케어의 높은 부채를 모두 떠안음\n- 재고 관리 리스크 증가\n\n**시장의 우려:**\n- 합병 비율의 적정성 논란\n- 셀트리온 주주들의 희석 우려\n- 단기적 수익성 악화 가능성` },
+    { h: "지배구조의 복잡성", b: `**합병이 지연된 이유:**\n\n**분식회계 조사 (2020~2023)**\n금융당국 4년 조사 진행\n→ 2023년 3월 결론: 고의성 없음 판정\n\n**주주 이해관계 충돌**\n셀트리온 주주 vs 헬스케어 주주\n제약 주주까지 포함되며 복잡성 증대\n\n**매수청구권 리스크**\n반대 주주의 주식매수청구권 행사 우려` },
+    { h: "1단계 완료", b: `**2023년 12월, 셀트리온-헬스케어 합병**\n\n✓ 합병 완료: 2023년 12월 28일\n✓ 찬성률: 95% 이상\n✓ 매수청구권: 79억원 (예상치 대폭 하회)\n\n**통합 셀트리온의 위상:**\n- 시가총액: 약 40조원\n- 유가증권 시장 6~8위 규모` },
+    { h: "시너지 기대", b: `**합병으로 달성 가능한 것들:**\n\n- 원가율 개선: 70% → **40%** (목표)\n- 거래 투명화: 특수관계자 거래 제거\n- 재고 관리: 인식 기준 통일로 부정확성 해소\n- 비용 절감: 중복 조직 정리\n\n**2030년 매출 목표:** 12조원` },
+    { h: "예상 밖의 반전", b: `**2024년 8월, 충격의 발표**\n셀트리온제약과의 2단계 합병이 무산됨\n\n**셀트리온 주주:** 다수 반대 (합병비율 불만족)\n**셀트리온제약 주주:** 다수 찬성\n\n결과: 이해관계 대립으로 합병 추진 중단` },
+    { h: "교훈", b: `**합병 비율은 왜 중요한가?**\n\n**투명한 평가의 필수성:**\n합병비율 산정 방식이 명확해야 함\n수익가치 vs 자산가치 조합의 적정성\n\n**주주권의 중요성:**\n소수주주도 의견을 낼 수 있음\n합병으로 손해 본다 느끼면 반발\n\n**지배구조 개선의 어려움:**\n좋은 의도도 주주들을 설득하기 어려움\n합리적 이유와 공정한 조건이 필수` },
+  ],
+  "SK이노베이션": [
+    { h: "합병 결의", b: `SK이노베이션이 공식 발표했습니다:\n"SK E&S와 합병하겠습니다"\n\n**합병 대상:**\nSK E&S: LNG, 도시가스 사업 계열사\n\n**합병 비율:**\nSK이노베이션 1 : SK E&S 1.192` },
+    { h: "비율의 문제", b: `**"가치가 검증되지 않은 회사와의 합병"**\n\nSK E&S는 **비상장사**입니다:\n- 시장에서 주가로 가치 검증 안 됨\n- 실제 가치가 얼마인지 외부에서 알 수 없음\n- 1.192라는 비율이 공정한지 판단 불가\n\n의문: "누가 정한 비율인가? 그룹 내부에서 임의로?"` },
+    { h: "SK이노베이션의 상황", b: `**SK온 (전기차 배터리):**\n- 막대한 투자 진행 중\n- 그럼에도 **적자 상태**\n- 수익화까지 시간 필요\n\n**재무 압박:**\n- 배터리 사업으로 손실 지속\n- 추가 자금 필요\n- 사업 구조 개선 절실` },
+    { h: "합병의 실제 목적", b: `**시장의 지배적 시각:**\n\n합병의 진짜 이유:\n1. SK E&S의 수익성 좋은 에너지 사업\n2. 이를 SK이노베이션에 통합\n3. SK이노베이션의 수익으로 배터리 적자 보전\n\nSK E&S (수익 나는 사업)\n  ↓ (합병)\nSK이노베이션 (배터리로 적자 중)` },
+    { h: "그룹 내 이익 이동?", b: `**SK이노베이션 주주 입장:**\n배터리 적자를 왜 에너지 사업으로 메워야 하나?\n배터리가 전략이면 별도 자금 조달하지 왜 합병?\n\n**SK E&S 주주 입장:**\n우리 회사의 수익이 배터리 손실 메우는 데 쓰인다?\n불공정한 비율 아닌가?\n\n**그룹 입장:**\n그룹 전체 효율화, 배터리는 미래 성장동력` },
+    { h: "가치 평가의 불투명성", b: `**상장사 SK이노베이션:**\n시장에서 가격 형성, 주가로 가치 검증됨 (투명)\n\n**비상장사 SK E&S:**\n누가 가격 정했나?\n독립적 평가 있었나?\n그룹 내부에서 임의로 책정?\n\n**결과:**\n외부 투자자들이 1.192 비율의 공정성 판단 불가` },
+    { h: "의미", b: `**계열사 간 시너지 추구:**\n그룹 차원의 효율화\n실적 좋은 회사가 약한 회사 지원\n\n**비상장사의 한계:**\n가치 평가 논란 불가피\n시장 검증 없음 → 공정성 의심\n\n**지배구조 개선의 과제:**\n내부 거래는 투명성 필수\n독립적 평가 + 소수주주 보호 장치 필요` },
+    { h: "교훈", b: `**기업 입장:**\n그룹 전체 효율화는 필요\n배터리는 미래 전략사업\n자금 지원은 불가피\n\n**주주 입장:**\n나의 회사가 다른 회사 손실 메우나?\n공정한 합병비율인가?\n가치가 투명하게 평가됐나?\n\n**결론:**\n계열사 합병은 효율화도 좋지만,\n**투명한 평가 절차**가 필수입니다.` },
+  ],
+  "삼성바이오로직스": [
+    { h: "감리 착수", b: `금융감독원이 공식 발표했습니다:\n"삼성바이오로직스의 회계 처리 방식을 감리합니다"\n\n**혐의:** 분식회계\n\n**대상:** 자회사 삼성바이오에피스의 회계 처리` },
+    { h: "핵심 쟁점", b: `**삼성바이오가 한 일:**\n\n**변경 전:**\n삼성바이오로직스 → 삼성바이오에피스 (**종속회사**)\n\n**변경 후:**\n삼성바이오로직스 → 삼성바이오에피스 (**관계회사**)\n\n차이:\n- 종속회사: 의결권 50% 초과 보유\n- 관계회사: 의결권 20~50% 보유` },
+    { h: "갑자기 생긴 이익", b: `**회사 분류 변경의 결과:**\n\n**공정가치 재평가:**\n삼성바이오에피스를 관계회사로 전환\n→ 보유 지분을 시장 가치(공정가치)로 재평가\n\n**결과:**\n4조 5천억 원의 이익 계상` },
+    { h: "공정가치란?", b: `**공정가치 (Fair Value):**\n시장에서 정상적인 거래로 형성되는 가격\n회계 기준상 정당한 평가 방식\n\n**문제:**\n- 삼성바이오에피스는 비상장사\n- 시장 가격이 없음\n- "누가 정한 공정가치인가?"` },
+    { h: "왜 논란인가?", b: `**비판의 핵심:**\n\n의혹:\n1. 회사 분류 변경이 필요했나?\n2. 공정가치 평가가 객관적인가?\n3. 이 시점에 왜 변경했나?\n\n**결과:**\n거대한 이익 계상 (4조 5천억)\n→ 실적 급호전 (종이상의 이익)` },
+    { h: "적자 회사의 흑자 변신", b: `**만약 4조 5천억을 빼면:**\n\n발표 실적: 흑자 (공정가치 이익 포함)\n실질 실적: 수년간 **적자** (공정가치 이익 제외)\n\n**의미:**\n"결국 이 이익 때문에 회사가 살아 있는 건가?"` },
+    { h: "회계 처리의 모호성", b: `**옹호 입장:**\n- 회계 기준에 따른 정당한 처리\n- 공정가치 평가는 합법적 방식\n- 감시기관 사전 승인도 있었음\n\n**비판 입장:**\n- 실질이 아닌 형식만 따름\n- 이익 조작 의도 의혹\n- 투자자 기만` },
+    { h: "교훈", b: `**핵심 교훈:**\n회계 기준 내라도 투자자를 기만하는 처리는 문제가 됩니다.\n\n**투자자 입장:**\n- 종이상의 이익은 이익이 아님\n- 실질적 현금 흐름 확인 필수\n- 회계 변경의 의도 의심\n\n**결론:**\n회계 기준만으로는 부족합니다.\n거래의 **실질**을 들여다봐야 합니다.` },
+  ],
+  "POSCO홀딩스": [
+    { h: "구조 변경", b: `포스코가 대규모 구조 개편을 공시했습니다.\n\n**변경 전:** 포스코 = 철강 + 신사업 혼재\n\n**변경 후:**\n포스코홀딩스 (지주회사)\n  ├─ 포스코 (철강)\n  └─ 신사업 (배터리소재·수소·에너지)` },
+    { h: "신사업의 야심", b: `**포스코의 전략:**\n\n**배터리소재 사업:**\n- 니켈, 리튬 등 핵심 원료\n- 전기차 배터리 핵심 부품\n\n**투자 규모:** 수조 원대 대규모 투자\n\n**목표:** "이차전지 소재 세계 1등 기업"` },
+    { h: "왜 지주회사로?", b: `**사업 성격이 다름:**\n- 철강: 성숙 산업, 저성장, 안정적\n- 신사업: 고성장, 불확실, 미래 지향\n\n**투자자 구분:**\n- 철강 투자자: 배당, 안정성 원함\n- 신사업 투자자: 성장성 원함\n\n**자금 조달 구분:**\n- 철강: 안정적 현금흐름\n- 신사업: 초기 투자 자금 필요` },
+    { h: "시장 평가의 변화", b: `**긍정적 평가:**\n- 신사업이 별도 기업으로 인식\n- 성장성 높게 평가 가능\n- 주가 상승 기대\n\n**부정적 평가:**\n- 기존 철강 사업 가치 하락 가능\n- 신사업 리스크 노출\n- 지주회사 보유세로 인한 손실` },
+    { h: "투자자 관점의 딜레마", b: `✓ **긍정:**\n- 배터리소재는 미래 산업\n- 전기차 수요 증가로 성장성\n- 새로운 수익원 확보\n\n✗ **위험:**\n- 배터리소재 사업 미성숙\n- 회수 기간 길고 불확실\n- 철강 기반 약화 가능성` },
+    { h: "자금 조달 부담", b: `**신사업 투자 규모:** 수조 원 필요, 아직 수익 없음\n\n**자금 조달 방법:**\n1. 철강 사업 현금흐름\n2. 유상증자 (기존 주주 희석)\n3. 부채 증가\n\n**악순환 우려:**\n철강 수익 → 신사업 투자\n→ 철강 고갈 → 신사업 지원 부족?` },
+    { h: "경쟁 상황", b: `**배터리소재 시장:**\n\n- 테슬라 공급망 확보됨\n- 글로벌 기업들이 이미 투자 중\n- 중국도 나섰음\n\n**포스코의 현황:**\n철강에서 신사업으로 전환 중\n기술력은 있지만 시장 진입 후발\n\n"포스코 규모의 투자로 1등을 할 수 있을까?"` },
+    { h: "결론", b: `✓ **하는 일은 맞음**\n배터리소재 미래 산업, 전기차 수요는 분명\n\n✗ **하지만 과제 많음**\n투자 규모 대비 회수 불확실\n후발 진입 리스크\n철강 기반 약화 우려\n\n**투자 결론:**\n성장성은 있지만, 단기(5년)에는 적자 지속 가능성 높음.\n장기(10년) 관점에서만 평가 가능한 기업입니다.` },
+  ],
+  "삼성물산": [
+    { h: "합병 발표", b: `**2015년, 삼성물산이 제일모직에 흡수합병**\n\n합병 비율:\n제일모직 1주 : 삼성물산 **0.35주**\n\n삼성물산 주주 100명이 있다면,\n합병 후 35주만 받는다는 뜻입니다.` },
+    { h: '"비율이 너무 낮다"', b: `**삼성물산의 자산:**\n토목·건설 사업 / 국제 무역(상사) / 부동산 등 실질 자산 다수\n\n**제일모직의 자산:**\n의류·패션 사업 중심\n\n**문제점:**\n더 큰 자산을 가진 삼성물산이\n더 낮은 비율로 대우받았다는 의심` },
+    { h: "의도된 거래?", b: `**합병의 숨겨진 의도 의혹:**\n\n이재용 삼성전자 부회장이 경영권 승계 중\n\n**의혹:**\n"낮은 합병비로 삼성물산의 가치를 깎아내리고,\n이재용의 계열사들 지분을 높여서\n경영권을 효율적으로 이양하려는 것 아닌가?"` },
+    { h: "헤지펀드 엘리엇의 등장", b: `**글로벌 행동주의 헤지펀드 엘리엇이 움직였습니다.**\n\n- 삼성물산 지분 **1.5%** 대거 매입\n- 합병 반대 선언\n- 국내외 투자자 결집\n- 주주총회에서 반대 캠페인\n\n"이 합병 비율은 삼성물산 주주에게\n부당한 손해를 입힙니다"` },
+    { h: "투표 결과와 여파", b: `결국: **95.6% 찬성**으로 합병 강행\n\n삼성그룹: "이것이 최선의 경영 구조"\n반대주주: "기울어진 합병이 통과되었다"\n\n**교훈:**\n- 합병비율의 공정성: 독립적 평가 필요\n- 소수주주의 권리: 5%의 반대도 유효함\n- 경영권 승계와 자산거래는 구분해야 함` },
+    { h: "국민연금과 의결권 논란", b: `**국민연금의 찬성 의결:**\n당시 국민연금이 합병에 찬성 의결을 해 논란\n→ 국민연금이 삼성물산 주주로서 손해를 봤다는 주장\n→ 국민연금 의결권 행사 투명성 문제 제기\n\n**이후 변화:**\n- 기관투자자 의결권 행사 공시 강화\n- 스튜어드십 코드 도입\n- 소수주주 보호 장치 논의 활성화` },
+  ],
+  "NAVER": [
+    { h: "배경: 라인 개인정보 대량 유출", b: `라인(LINE, 일본 메신저 앱)에서 충격적인 사건이 터졌습니다.\n\n**사건:** 사용자 개인정보 대량 유출 (약 4천3백만 명 영향)\n\n**당사자들:**\n라인야후 (구 라인·야후재팬 합병사)\n최대주주: 네이버 (간접 보유 약 33%)\n\n일본 국민들이 분노:\n"왜 한국 기업이 우리 정보를 관리하나?"` },
+    { h: "네이버-라인의 관계", b: `**역사:**\n라인은 원래 일본 기업 (NHN의 자회사)\n2012년: 네이버가 NHN 지분 인수\n2015년: 라인·야후재팬 합병 → 라인야후 탄생\n\n**구조:**\n네이버 (한국)\n  ↓ (약 33%)\n라인야후 (일본)\n  ├─ 메신저 (라인)\n  └─ 포탈·검색 (야후재팬)` },
+    { h: "정보유출의 충격", b: `**일본 국민의 분노:**\n\n라인 사용자 약 9천만 명 (일본 전 인구의 70%)\n메시지, 전화번호, 이메일 등 노출\n한국 네이버 자회사에서 관리\n\n**일본 언론:**\n"국가 핵심 인프라가 해외 기업의 손에"` },
+    { h: "일본 정부의 반응", b: `**일본 총무성(정부 부처)이 나섰습니다:**\n\n**권고 내용:**\n"네이버가 라인야후 지분을 줄이도록 권고합니다"\n\n**이유:**\n일본 국가 안보 문제\n개인정보 보호 필요\n외국 자본의 영향력 최소화\n\n강제력은 없지만 일본 정부의 명확한 의사 표시` },
+    { h: "네이버의 딜레마", b: `**지분 매각 시 네이버가 잃는 것:**\n- 라인 관련 미래 수익 포기\n- 일본 시장에서의 영향력 축소\n- 투자 회수 기회 감소\n\n**현실:**\n일본 정부 압박 무시 불가\n그렇다고 쉽게 팔 수도 없음` },
+    { h: "네이버의 선택", b: `**결국 네이버는:**\n\n대응:\n- 개인정보 보안 강화 약속\n- 경영진 파견 축소\n- 일본 경영진 확대\n\n**본질적 해결은 어렵다:**\n여전히 네이버 지분 변함 없음\n정보는 여전히 해외(한국) 기업 관리` },
+    { h: "국가 안보 vs 기업 자산", b: `**일본의 입장:**\n국민 정보 = 국가 자산\n외국 기업의 영향력 제한 필요\n안보 문제로 인식\n\n**네이버의 입장:**\n합법적 투자 / 수익원 포기 불가능\n\n**충돌:**\n국가 안보 > 기업 이익\n(특히 정보 관련 산업에서는)` },
+    { h: "교훈", b: `**국가별 정보 규제 강화:**\n- 미국: TikTok 규제\n- EU: GDPR 등 개인정보 보호\n- 일본: 라인 규제\n\n**기업의 전략적 고민:**\n해외 투자도 정치 위험 존재\n국가 안보 문제는 우회 불가능\n\n**결론:**\n글로벌 시대에도 **정보만은 국경이 있습니다.**\n네이버는 수익을 위해 투자했지만,\n일본은 국가 안보로 보았던 것입니다.` },
+  ],
+  "현대모비스": [
+    { h: "합병 계획과 철회", b: `**2018년 5월 21일, 현대모비스는 분할·합병 절차를 중단했습니다.**\n\n**원래 계획 (2018년 3월):**\n현대모비스의 '모듈 및 AS 부품 사업' 부문을 분할\n→ 해당 사업부를 현대글로비스와 합병\n\n합병 비율: 0.61 대 1` },
+    { h: "철회 이유 ① 의결권 자문사", b: `**세계 최대 의결권 자문사들이 반대를 권고했습니다:**\n\n- ISS (Institutional Shareholder Services)\n- 글라스루이스\n- 한국기업지배구조원\n\n이들의 반대 권고는 기관투자자들의\n의결권 행사에 큰 영향을 미칩니다.` },
+    { h: "철회 이유 ② 엘리엇의 공격", b: `**미국계 행동주의 헤지펀드 엘리엇매니지먼트가 움직였습니다.**\n\n- 지분 1%대로 현대모비스 매입\n- 합병 반대 선언\n- 주주들을 규합\n\n**엘리엇의 주장:**\n합병 비율이 불공정함\n유보금으로 배당을 늘리라고 주주들을 설득` },
+    { h: "핵심 쟁점: 불공정한 합병비율", b: `**왜 불공정한가?**\n\n모비스 수익의 80~90%를 차지하는\n수익성 높은 사업부(A/S부품, 모듈)를\n순자산 기준 겨우 **21% 비율**로 글로비스에 넘기는 구조\n\n오너 일가의 글로비스 지분: 약 30%\n→ 오너 일가에게 유리한 구조라는 의심\n\n실제로 A/S 부품 부문 실제 실적이 추정치의 **2배**에 달했음` },
+    { h: "영향과 교훈", b: `**결과:**\n지분 1.6%의 엘리엇이 31%의 우호 지분을 꺾으면서\n현대차그룹 지배구조 개편에 제동이 걸렸습니다.\n\n"작은 헤지펀드가 대기업 경영진의\n지배구조 개편 계획을 무산시킨" 드문 사례\n\n**교훈:**\n- 소수주주도 연대하면 영향력이 있음\n- 합병 비율의 공정성이 핵심\n- 행동주의 투자자의 역할` },
+  ],
+  "카카오": [
+    { h: "자회사 상장", b: `카카오의 핵심 자회사들이 상장했습니다:\n\n- **카카오뱅크**: 2021년 8월 상장\n- **카카오페이**: 2021년 11월 예정\n\n**기존 카카오 지분:**\n카카오뱅크: 높은 지분율 보유\n카카오페이: 높은 지분율 보유` },
+    { h: "평가이익의 현실", b: `**자회사 상장의 결과:**\n\n**카카오가 얻은 것:**\n카카오뱅크 상장으로 평가이익 발생\n카카오페이 상장으로 추가 평가이익\n\n**현실:**\n이익은 카카오에 남음\n하지만 주주는 다른 가치 잃음` },
+    { h: "기존 주주의 손실", b: `**상장 전 (이상):**\n카카오 주주 = 카카오 + 뱅크 + 페이 가치 향유\n\n**상장 후 (실제):**\n카카오 주주 = 카카오만 보유\n(뱅크·페이는 별도 상장되어 직접 구매 필요)\n\n**결과:**\n미래 수익 높은 뱅크·페이의 성장 이익은\n별도 주주들이 가져감` },
+    { h: "카카오 할인 심화", b: `**문제:**\n카카오는 플랫폼 기업 (수익성 안정적)\n뱅크·페이는 미래 성장주 (고수익)\n→ 두 개 분리되니 카카오만 저평가\n\n**결과:** 카카오 주가 부진 (할인율 심화)` },
+    { h: "규제 리스크 부상", b: `**정부·언론의 비판:**\n\n**카카오의 문제점:**\n- 카카오맵: 독점적 지위 이용\n- 카카오톡: 배달 시장 장악\n- 소상공인 피해\n\n**구체적 사례:**\n배달 앱 수수료 인상\n골목상권 정보 독점\n중소 사업자 이탈 가속` },
+    { h: "국정감사 이슈", b: `**2021년 국정감사에서:**\n\n**주요 질의:**\n카카오의 시장 지배력 남용\n소상공인 보호 필요\n플랫폼 규제 강화 요구\n\n**언론 반응:**\n"카카오, 국민 불만 1순위 기업"` },
+    { h: "정부 규제 신호", b: `**정부의 움직임:**\n\n1. **공정거래위원회**\n   조사 및 과징금 논의\n\n2. **국회 규제 논의**\n   플랫폼 규제법 추진\n\n3. **소비자 보호**\n   수수료 공시 강화\n\n신호: "카카오는 규제 대상이 될 것이다"` },
+    { h: "주가에 미친 영향", b: `**초기 (IPO 직후):**\n평가이익에 주가 상승\n\n**후기 (규제 이슈 부상):**\n플랫폼 규제 우려 + 독과점 위험\n→ 주가 하락 전환\n\n**결과:**\n평가이익을 규제 리스크가 상쇄` },
+    { h: "투자자의 딜레마", b: `✓ **긍정:**\n뱅크·페이 미래 성장성\n플랫폼 기반 사업 확장성\n\n✗ **위험:**\n규제 강화 가능성\n수익성 악화 우려\n기존 주주 할인 심화` },
+    { h: "교훈", b: `1. **평가이익만으로는 부족**\n   주주 가치 손상, 할인 심화\n\n2. **규제 리스크는 별도**\n   플랫폼 독과점은 정치 이슈\n   언제든 규제 칼날 떨어질 수 있음\n\n3. **기업의 선택**\n   IPO 타이밍, 규제 대응 전략,\n   주주 커뮤니케이션\n\n**투자 결론:**\n자회사 IPO는 단기 평가이익이지만,\n기존 주주에게는 장기 손실이 될 수 있습니다.` },
+  ],
+  "HD현대중공업": [
+    { h: "조선업계가 AI 데이터센터를 만든다고? 💻⚓", b: `HD현대중공업, **6,271억** 규모 역대급 수주 대박!\n\n미국 에너지 인프라 기업 '에이페리온 에너지 그룹(AEG)'에\n20MW급 **힘센엔진** 기반 발전설비를 공급합니다.\n\n#HD현대중공업 #힘센엔진 #미국수출 #역대최대규모` },
+    { h: "역대급 숫자가 증명합니다", b: `**누구에게?** 미국 에너지 기업 '에이페리온 에너지 그룹(AEG)'\n**얼마나?** 약 **6,271억 원** (역대 최대 발전 엔진 계약)\n**무엇을?** 20MW급 **'힘센엔진'** 기반 발전설비 (총 684MW)\n\n"축구장 수십 개 규모의 데이터센터를 돌릴\n거대한 심장이 탄생합니다."` },
+    { h: "0.1초의 멈춤도 허용하지 않는다", b: `AI 데이터센터는 **24시간 무중단 전력**이 필수!\nHD현대중공업의 독보적 기술력이 선택받은 이유입니다.\n\n**압도적 출력:** 20MW급의 강력한 힘\n**빠른 대응:** 비상시 즉각 가동되는 기동성\n**검증된 신뢰:** 글로벌 시장이 인정한 안정성\n\n"바다에서 검증된 기술, 이제 육지 위 AI를 움직입니다."` },
+    { h: "배만 만드는 회사가 아닙니다", b: `그동안 선박 추진과 일반 플랜트에 주력했던 '힘센엔진'이\n이제는 **급성장하는 AI 인프라 시장**의 핵심으로 진입했습니다.\n\n선박용 엔진 ➡ **데이터센터 상용 발전**\n단순 제조 ➡ **고부가가치 에너지 솔루션**\n\n"포트폴리오의 진화,\n현대중공업의 새로운 성장 엔진!"` },
+    { h: "미국 전력 시장의 교두보를 열다", b: `2030년 미국 전력 수요 증가분의 **50%는 데이터센터**에서 발생합니다.\n\n이번 수주는 단순한 계약을 넘어,\n폭발적으로 성장할 **북미 전력 인프라 시장**의\n강력한 보증수표가 될 것입니다.\n\n"미국 AI 열풍의 숨은 주인공은 대한민국입니다."` },
+    { h: "K-엔진, 세계의 전력을 설계하다", b: `바다 위 1위를 넘어,\n디지털 혁명의 심장이 된 HD현대중공업.\n\n세계 전역으로 뻗어 나갈 힘센엔진의 활약을 기대해 주세요!\n\nHD현대중공업의 도전은 멈추지 않습니다.` },
+  ],
+};
+
+const CN_KEYS = Object.keys(CARD_NEWS);
+let cnCompanyIdx = 0;
+let cnCardIdx = 0;
+
+function showCardNews() {
+  document.getElementById('finalScreen').classList.remove('show');
+  document.getElementById('cardnewsScreen').classList.add('show');
+  cnCompanyIdx = 0;
+  cnCardIdx = 0;
+  buildCompanyTabs();
+  renderCnSlide();
+}
+
+function buildCompanyTabs() {
+  const wrap = document.getElementById('companyTabs');
+  wrap.innerHTML = '';
+  CN_KEYS.forEach((key, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'company-tab' + (i === cnCompanyIdx ? ' active' : '');
+    btn.textContent = key;
+    btn.onclick = () => { cnCompanyIdx = i; cnCardIdx = 0; buildCompanyTabs(); renderCnSlide(); };
+    wrap.appendChild(btn);
+  });
+}
+
+// ── 인라인 카드뉴스 ─────────────────────────────────────────────────
+let inlineCnCards = [];
+let inlineCnIdx = 0;
+
+function renderInlineCn() {
+  const card = inlineCnCards[inlineCnIdx];
+  document.getElementById('inlineCnNum').textContent = `카드 ${inlineCnIdx + 1} / ${inlineCnCards.length}`;
+  document.getElementById('inlineCnHeading').textContent = card.h;
+  document.getElementById('inlineCnBody').innerHTML = card.b.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  document.getElementById('inlineCnProg').textContent = `${inlineCnIdx + 1} / ${inlineCnCards.length}`;
+  document.getElementById('btnInlinePrev').disabled = inlineCnIdx === 0;
+  document.getElementById('btnInlineNext').disabled = inlineCnIdx === inlineCnCards.length - 1;
+}
+function prevInlineCn() {
+  if (inlineCnIdx > 0) { inlineCnIdx--; renderInlineCn(); }
+}
+function nextInlineCn() {
+  if (inlineCnIdx < inlineCnCards.length - 1) { inlineCnIdx++; renderInlineCn(); }
+}
+
+function renderCnSlide() {
+  const cards = CARD_NEWS[CN_KEYS[cnCompanyIdx]];
+  const card = cards[cnCardIdx];
+  document.getElementById('cnSlideNum').textContent = `카드 ${cnCardIdx + 1} / ${cards.length}`;
+  document.getElementById('cnSlideHeading').textContent = card.h;
+  document.getElementById('cnSlideBody').innerHTML = card.b.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  document.getElementById('cnProg').textContent = `${cnCardIdx + 1} / ${cards.length}`;
+  document.getElementById('btnCnPrev').disabled = cnCardIdx === 0;
+  document.getElementById('btnCnNext').disabled = cnCardIdx === cards.length - 1;
+}
+
+function prevCnCard() {
+  if (cnCardIdx > 0) { cnCardIdx--; renderCnSlide(); }
+}
+function nextCnCard() {
+  if (cnCardIdx < CARD_NEWS[CN_KEYS[cnCompanyIdx]].length - 1) { cnCardIdx++; renderCnSlide(); }
 }
 </script>
 </body>

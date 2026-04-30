@@ -28,6 +28,7 @@ CATEGORY_TAG = {
     "생산전략": "[생산전략]",
     "대형협력": "[대형협력]",
     "대형M&A": "[대형M&A]",
+    "대형수주": "[대형수주]",
     "합병": "[합병]",
     "합병철회": "[합병철회]",
     "지주사전환": "[지주사전환]",
@@ -90,6 +91,9 @@ def _ask_question(q: dict, index: int, total: int) -> bool:
     for line in q["explanation"].splitlines():
         print(f"  {line.strip()}")
     print()
+    if q.get("dart_url"):
+        print(f"  🔗 DART 원문 공시: {q['dart_url']}")
+        print()
 
     input("  Enter 키를 누르면 다음 문제로 이동합니다...")
     return is_correct

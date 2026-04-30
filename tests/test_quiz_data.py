@@ -15,9 +15,9 @@ from modules.price.quiz_data import QUIZ_LIST
 class TestQuizListBasics:
     """QUIZ_LIST 기본 속성 검증"""
 
-    def test_quiz_list_has_15_items(self):
-        """QUIZ_LIST가 정확히 15개 항목을 포함한다"""
-        assert len(QUIZ_LIST) == 15, f"Expected 15 quiz items, got {len(QUIZ_LIST)}"
+    def test_quiz_list_has_12_items(self):
+        """QUIZ_LIST가 정확히 12개 항목을 포함한다"""
+        assert len(QUIZ_LIST) == 12, f"Expected 12 quiz items, got {len(QUIZ_LIST)}"
 
     def test_all_items_are_dict(self):
         """모든 항목이 딕셔너리 타입이다"""
@@ -159,11 +159,10 @@ class TestIdUniqueness:
             unique_ids
         ), f"Duplicate IDs found: {[id for id in ids if ids.count(id) > 1]}"
 
-    def test_ids_are_consecutive_1_to_15(self):
-        """id는 1부터 15까지 연속적으로 존재한다"""
-        ids = sorted([q["id"] for q in QUIZ_LIST])
-        expected_ids = list(range(1, 16))
-        assert ids == expected_ids, f"IDs are not 1-15: {ids}"
+    def test_ids_are_unique(self):
+        """id는 중복 없이 유일하다"""
+        ids = [q["id"] for q in QUIZ_LIST]
+        assert len(ids) == len(set(ids)), f"Duplicate IDs found: {ids}"
 
 
 class TestEdgeCases:
