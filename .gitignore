@@ -6,6 +6,13 @@
 # Claude Code 개인 설정
 .claude/settings.local.json
 
+# 디버그 산출물 (비교 리포트, 임시 JSON)
+COMPARISON_REPORT.txt
+comparison_*.txt
+html_data.json
+py_data.json
+modules/price/verify_quiz_prices.py
+
 # 로컬 DB / 산출물 — 팀 공유를 위해 커밋 허용 (2026-04-21 변경)
 #   기존: modules/*/data/*.db·*.json 전부 제외
 #   변경: 각 모듈의 수집·계산 결과 DB와 export JSON은 git에 커밋하여
