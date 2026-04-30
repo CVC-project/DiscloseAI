@@ -3,6 +3,10 @@
 .env.*
 !.env.example
 
+# LLM 채팅 — 사용자별 API 키 (절대 커밋 금지)
+modules/integration/chat_config.local.js
+!modules/integration/chat_config.local.js.example
+
 # Claude Code 개인 설정
 .claude/settings.local.json
 
