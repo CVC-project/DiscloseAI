@@ -327,6 +327,8 @@ const sectors={
 // === relation_type별 엣지 스타일 (Phase 2f + UI 개선 iteration 2026-04-20) ===
 const EDGE_STYLES={subsidiary:{color:'#ef4444',width:2.5,dash:[]},associate:{color:'#f97316',width:2.0,dash:[]},investment:{color:'#94a3b8',width:1.2,dash:[3,3]},ftc_group:{color:'#fbbf24',width:1.5,dash:[8,4]},dart_filing:{color:'#a78bfa',width:1.2,dash:[5,3]},manual:{color:'#ec4899',width:1.0,dash:[2,3]}};
 const EDGE_LABELS={subsidiary:'종속기업(>50%)',associate:'관계기업(20~50%)',investment:'유의적투자(5~20%)',ftc_group:'공정위 계열',dart_filing:'사업보고서 특수관계자',manual:'수동 보정'};
+// 방향성 있는 엣지 타입 (gather edge 헬퍼에서도 참조하므로 모듈 레벨로 끌어올림)
+const ARROW_TYPES = new Set(['subsidiary','associate','investment','dart_filing']);
 
 // Phase 2f: 하드코딩 raw 배열을 fetch로 대체. 원본 코드는 하단 RAW_HARDCODED_LEGACY 주석 참조.
 let raw=[];
@@ -396,20 +398,28 @@ function _enterGatherMode(centerNode){
   });
   // 자기 자신은 제외
   neighbors.delete(centerNode);
-  // 오빗 반경: center 행성 크기에 비례하되 최소값 보장 (혼잡 시 두 번째 링까지 사용 가능)
-  const baseR = Math.max(180, centerNode.sz * 60);
+
+  // === 자연스러운 별자리 배치 (phyllotaxis + per-node jitter) ===
+  // 황금각(137.508°)은 식물 잎차례 분포 알고리즘 — 정방향 격자 느낌 없이 균등하게 공간 충전.
+  // 각 노드의 seed(init 시 부여된 deterministic int)로 jitter 주어 클러스터 회피.
+  // 첫 멤버까지 최소 거리. 큰 행성(sz≥3) 주변에 가까운 멤버가 행성에 가려지지 않도록
+  // sz 계수를 70+로 두고 floor 200으로 함.
+  const baseR = Math.max(200, centerNode.sz * 70);
+  const golden = Math.PI * (3 - Math.sqrt(5));  // ≈ 2.39996 rad
   const arr = Array.from(neighbors);
   const N = arr.length;
   const members = new Map();
   arr.forEach((nb, i) => {
-    // 두 링으로 분배 (10개 이상이면)
-    const ringIdx = N > 10 && i >= Math.ceil(N/2) ? 1 : 0;
-    const ringR = baseR + ringIdx * 80;
-    const inRing = ringIdx === 0 ? Math.min(N, Math.ceil(N/2) || 1) : (N - Math.ceil(N/2));
-    const idxInRing = ringIdx === 0 ? i : i - Math.ceil(N/2);
-    const ang = (idxInRing / Math.max(1, inRing)) * Math.PI * 2 - Math.PI/2 + ringIdx * 0.3;
-    const tx = centerNode.x + Math.cos(ang) * ringR;
-    const ty = centerNode.y + Math.sin(ang) * ringR;
+    const seed = nb.seed || (i * 137 + 7);
+    // 각도: 황금각 분포 + 미세 jitter (±0.18 rad)
+    const angJitter = ((seed * 31) % 100 - 50) / 50 * 0.18;
+    const ang = i * golden + angJitter + (centerNode.seed || 0) * 0.001;
+    // 반경: sqrt(i/N) 로 점진적 외연 확장 + per-node ±18 unit jitter
+    const radial = baseR * (0.92 + 0.55 * Math.sqrt((i + 0.5) / Math.max(1, N)));
+    const rJitter = ((seed * 53) % 100 - 50) / 50 * 18;
+    const r = radial + rJitter;
+    const tx = centerNode.x + Math.cos(ang) * r;
+    const ty = centerNode.y + Math.sin(ang) * r;
     members.set(nb, { fromX: nb.x, fromY: nb.y, toX: tx, toY: ty });
   });
   gatherMode = {
@@ -612,6 +622,86 @@ function pickNextNode(){const bigNodes=nodes.filter(n=>n.sz>=1.5);if(bigNodes.le
 
 // === 말풍선 그리기 (gather + 마스코트 도착 시) ===
 // world-space 좌표(zm 영향). 가독성 위해 텍스트 폰트는 zm-역수 보정으로 항상 비슷한 크기.
+// === Gather 모드 전용 엣지 렌더 (center → member 강조 + 관계 라벨) ===
+// memberIsB: true면 e.a=center, e.b=member / false면 e.b=center, e.a=member.
+// 화살표 끝점이 멤버 별 크기(작음)에 정확히 닿도록 별도 반경 사용. 흐름 점선·관계명 라벨 포함.
+function _drawGatherEdge(e, memberIsB){
+  const center = memberIsB ? e.a : e.b;
+  const member = memberIsB ? e.b : e.a;
+  const st = EDGE_STYLES[e.type] || {color:'#999', width:0.5, dash:[]};
+  const cx = center.x, cy = center.y;
+  const mx = member.x, my = member.y;
+  const dx = mx - cx, dy = my - cy;
+  const len = Math.hypot(dx, dy) || 1;
+  const ux = dx/len, uy = dy/len;
+  // 양쪽 시작점: 행성 표면(센터)·별 가장자리(멤버) 에서 출발해 노드를 안 침범
+  const cR = center.sz * 22;   // 센터 행성 반경
+  const mR = 10;               // 멤버 별 가장자리 (gather 멤버는 starR≈4.5에 약간 여유)
+  const x1 = cx + ux*cR, y1 = cy + uy*cR;
+  const x2 = mx - ux*mR, y2 = my - uy*mR;
+
+  // 메인 라인 — 강조: lineWidth ×1.6, alpha 0.95
+  x.beginPath();
+  x.moveTo(x1, y1); x.lineTo(x2, y2);
+  x.strokeStyle = st.color;
+  x.lineWidth = Math.max(1.4, st.width * 1.6);
+  x.setLineDash(st.dash);
+  x.globalAlpha = 0.95;
+  x.stroke();
+
+  // 흐르는 점선 (center → member 방향)
+  x.beginPath();
+  x.moveTo(x1, y1); x.lineTo(x2, y2);
+  x.setLineDash([8, 12]);
+  x.lineDashOffset = -time * 30 * (memberIsB ? 1 : -1);  // a→b 방향이 양수
+  x.lineWidth = Math.max(1.6, st.width * 1.8);
+  x.globalAlpha = 0.55;
+  x.stroke();
+  x.setLineDash([]);
+
+  // 멤버 쪽 화살표 (방향성 있는 관계만 — subsidiary/associate/investment/dart_filing)
+  if (ARROW_TYPES.has(e.type)) {
+    const arrowSize = Math.max(10, st.width * 5);
+    const ang = Math.atan2(uy, ux);
+    x.fillStyle = st.color;
+    x.globalAlpha = 1.0;
+    x.beginPath();
+    x.moveTo(x2, y2);
+    x.lineTo(x2 - arrowSize*Math.cos(ang - 0.5), y2 - arrowSize*Math.sin(ang - 0.5));
+    x.lineTo(x2 - arrowSize*Math.cos(ang + 0.5), y2 - arrowSize*Math.sin(ang + 0.5));
+    x.closePath();
+    x.fill();
+  }
+
+  // 관계 라벨 (중간 지점, 줌 0.5 이상에서만 표시)
+  if (zm > 0.5) {
+    const labelText = EDGE_LABELS[e.type] || e.type;
+    const lx = (x1 + x2) / 2;
+    const ly = (y1 + y2) / 2;
+    const fontPx = Math.max(9, 10 / Math.max(0.6, zm) * 0.95);
+    x.font = `500 ${fontPx}px -apple-system, sans-serif`;
+    x.textAlign = 'center';
+    x.textBaseline = 'middle';
+    const tw = x.measureText(labelText).width;
+    const padX = 5, padY = 3;
+    // 배경 박스 (가독성)
+    x.fillStyle = 'rgba(8, 12, 24, 0.82)';
+    x.strokeStyle = st.color;
+    x.lineWidth = 0.8;
+    x.globalAlpha = 1.0;
+    const bx = lx - tw/2 - padX, by = ly - fontPx/2 - padY;
+    const bw = tw + padX*2, bh = fontPx + padY*2;
+    x.beginPath();
+    x.rect(bx, by, bw, bh);
+    x.fill();
+    x.stroke();
+    // 텍스트
+    x.fillStyle = st.color;
+    x.fillText(labelText, lx, ly);
+  }
+  x.globalAlpha = 1.0;
+}
+
 function _drawSpeechBubble(text, ax, ay){
   // 폰트 크기를 zm로 역보정 → 화면상 일관된 크기
   const fontPx = Math.max(11, 13 / Math.max(0.6, zm) * 0.9);
@@ -1033,13 +1123,15 @@ if (gatherMode && _gp) {
 
 // === EDGES ===
 // === 엣지 그리기 (평행 offset + 방향 화살표 + 선택 강조) ===
-const ARROW_TYPES = new Set(['subsidiary','associate','investment','dart_filing']);  // 방향성 있는 관계만 화살표
+// ARROW_TYPES는 모듈 상단(EDGE_STYLES 옆)에서 정의됨 — _drawGatherEdge에서도 참조.
 edges.forEach(e=>{
-  // gather 활성 시 center↔member 외 엣지는 숨김 (중심에서 모인 멤버로의 명시적 연결만 표시)
+  // gather 활성 시 center↔member 외 엣지 숨김 + center↔member는 전용 강조 렌더 후 종료
   if (gatherMode) {
-    const isCenterEdge = (e.a === gatherMode.center && gatherMode.members.has(e.b))
-                      || (e.b === gatherMode.center && gatherMode.members.has(e.a));
-    if (!isCenterEdge) return;
+    const memberIsB = e.a === gatherMode.center && gatherMode.members.has(e.b);
+    const memberIsA = e.b === gatherMode.center && gatherMode.members.has(e.a);
+    if (!memberIsA && !memberIsB) return;
+    _drawGatherEdge(e, memberIsB);
+    return;
   }
   const isH=hov&&(e.a.n===hov.n||e.b.n===hov.n);
   const isA=alertOn&&alertSrc&&(e.a.n===alertSrc||e.b.n===alertSrc);
