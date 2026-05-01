@@ -639,7 +639,12 @@ function _drawGatherEdge(e, memberIsB){
   // 평행 오프셋 (다중 엣지 분리). 일반 엣지 렌더와 같은 부호 규칙(이름 정렬)을 따른다.
   let nx = -uy, ny = ux;
   if (e.a.n > e.b.n) { nx = -nx; ny = -ny; }
-  const off = e.parallelOffset || 0;
+  // gather 모드는 같은 쌍의 다중 엣지(예: 종속+공정위)를 명확히 구분해 보여야 하므로
+  // init의 빡빡한 offset(width 합 ~2~4px)을 동적으로 재계산: 균등 간격 14px × 인덱스.
+  const pCount = e.parallelCount || 1;
+  const pIdx = e.parallelIdx || 0;
+  const SPACING = 14;   // 평행 선 간격 (월드 단위)
+  const off = pCount > 1 ? (pIdx - (pCount - 1) / 2) * SPACING : 0;
   // 양쪽 시작점: 행성 표면(센터)·별 가장자리(멤버) 에서 출발해 노드를 안 침범
   const cR = center.sz * 22;   // 센터 행성 반경
   const mR = 10;               // 멤버 별 가장자리
