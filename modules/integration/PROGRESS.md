@@ -2,6 +2,56 @@
 
 > `/check` skill 실행 시 아래 형식으로 자동 기록됩니다.
 
+## 2026-05-01 (Phase F — 메인 화면 인터랙션: 섹터 줌 · 모임 효과 · 고양이 인터랙션 · 공시 풀스크린)
+
+- **작업 범위**: 메인 대시보드 UX 개편 4가지. 사용자 직접 지시 (auto mode):
+  1. 섹터 탭 클릭 → 해당 은하 중심으로 카메라 줌인 (이전엔 정적, 마우스 스크롤 직접 이동 필요)
+  2. 기업분석/공시 모드에서 행성 클릭 → 즉시 패널 안 띄우고 **연결 기업이 클릭 행성 주위로 모이는 효과** + 비연결 노드 fade out + 모인 기업은 작은 반짝이는 별로 (규모 무관)
+  3. 고양이 마스코트가 클릭 행성 위로 이동 → 모드별 말풍선 ("재무제표/공시를 확인하려면 나를 쓰다듬어줘") → **고양이 클릭 시** 패널/오버레이 호출
+  4. 공시 화면을 우측 슬라이드 패널 → analyze와 동일한 풀스크린 오버레이로 (`openFullDisclosure`)
+- **타임머신 모드는 본 변경 제외** (사용자 명시) — 기존 즉시 패널 동작 유지
+
+### Stage 1 — 섹터 카메라 트윈 (filter() 확장 + _panTo)
+- 신규 `_camTween` state + `_easeInOutCubic` + `_panTo(toX, toY, toZm, dur=600)` + `_camForWorldCenter(wx, wy, zm)` (코드: dashboard.html ~L361-L394)
+- draw() 시작에 트윈 진행도 보간 (~L800)
+- `filter(f, btn)`: f가 sector 키면 `sectors[f].cx/cy * SPAN` 계산 → 화면 중앙에 두는 (camX, camY) 도출 + 줌 레벨 1.5x. f='all'이면 baseZm=0.62 원래 뷰
+- 사용자가 마우스 드래그 시작하면 트윈 자동 취소 (`_cancelCamTween`)
+
+### Stage 2 — 모임 효과 (gatherMode + 렌더 광환)
+- 신규 `gatherMode` state: `{center, members: Map<node, {fromX, fromY, toX, toY}>, startTime, dur:600}` (~L283-L320)
+- `_enterGatherMode(centerNode)`: edges에서 centerNode와 연결된 모든 노드 수집 (모든 섹터 횡단, Set 중복 제거) → 원형 오빗 위치 계산 (10개 이상이면 두 링으로 분배, baseR = max(180, sz*60))
+- 렌더: edges 루프 직전에 `_gatherSnapshot` 으로 멤버 좌표 임시 mutate (트윈 진행도 적용) → 렌더 후 원위치 복구. 엣지는 center↔member만 표시, 다른 엣지 숨김
+- 노드 분기 확장: `(n.sz < STAR_THRESHOLD || isGatherMember) && !isS && !isH` → gather 멤버는 sz 무관 작은 별. 비-(center↔member) 노드는 globalAlpha=0.12
+
+### Stage 3 — 고양이 마스코트 인터랙션
+- gather 활성 시 자동 hopping(`pickNextNode`) 차단, `mascot.targetNode = gatherMode.center` 강제 (~L1226)
+- 마스코트 도착(progress >= 1) 시 말풍선 렌더 (`_drawSpeechBubble` 신규, ~L595): 둥근 사각 + 꼬리 + 펄스 애니메이션, zm 역수 보정으로 화면상 일관 크기. 모드별 텍스트 분기 (analyze: "재무제표를 확인하려면…" / disclosure: "공시를 확인하려면…")
+- mousedown 핸들러 재구성 (~L1450): 1) 마스코트 hit 우선 (`_hitMascot`, 반경 38) → `_onMascotClick` 호출 → 모드별 패널/오버레이. 2) 노드 hit → analyze/disclosure는 `_enterGatherMode` (timemachine은 즉시 `showTimemachine`). 3) 배경 → gather 활성이면 `_exitGatherMode` 아니면 closePanel + drag 시작
+
+### Stage 4 — 공시 풀스크린 오버레이 (`openFullDisclosure`)
+- analyze의 `fullAnalysis` 패턴 미러. iframe 없이 inline 렌더 (분석은 회사별 정적 HTML 있지만 공시는 dashboard 데이터 직접 사용이 더 깔끔)
+- HTML: `#fullDisclosure` 오버레이 + `#fullDisclosureCard` (top 5vh / left 6vw). 헤더 (회사명·티커·섹터·DART 링크·닫기 버튼) + 본문 영역 (`#fullDisclosureBody`)
+- CSS: `#fullAnalysisCard, #fullDisclosureCard` 통합 셀렉터 + chat-open 시 right:372px (사이드바 회피)
+- 공시 카드 렌더: Phase 3에서 만든 `_parseDiscSummary` / `_renderDiscSections` / `_escHtml` 그대로 재사용. high_impact 뱃지·dilution_ratio·분기 재무 8건 표
+- ESC 키로 닫기, body click outside card 영역도 닫기
+- `_onMascotClick`이 disclosure 모드에서 `openFullDisclosure(center)` 호출, 함수 미정의 시 `showDisclosure` 폴백
+
+### 검증
+- `pytest tests/` 470 passed / 8 skipped (회귀 없음)
+- `black --check modules/integration/` clean
+- Playwright E2E:
+  - 반도체 탭 → zm 0.62→1.50 부드러운 이동 + 전체 → 0.62 복귀 ✅
+  - 삼성전자 클릭 → gather, 7개 멤버 (삼성바이오로직스·삼성SDI·삼성중공업 등) ✅
+  - 현대차 클릭 → 5개 멤버로 재구성 ✅
+  - 배경 클릭 → gather 해제 ✅
+  - disclosure 모드 + 마스코트 클릭 → `openFullDisclosure(center)` 호출 ✅
+  - 풀디스클로저 화면: 회사명·DART 링크·공시 3건 카드(4섹션 분리)·분기 재무 표 정상 ✅
+
+### 명시적 비범위
+- 시각 디자인(별빛 더 추가·행성 강화·차트 색상 등) — Phase E와 동일하게 보류
+- timemachine 탭의 모임/고양이 효과 — 사용자 결정으로 추후
+- gather 해제 시 멤버 위치 역방향 트윈 — 현재 즉시 snap (개선 여지)
+
 ## 2026-05-01 (Phase E — v2 데이터 + 내용 동기화)
 
 - **작업 범위**: 4개 모듈 v2 PR(#14·#15·#16·#17·#18, 모두 dev에 merge됨) 결과를 integration JSON·dashboard에 반영. **시각 디자인은 현재 톤 유지**(별빛·행성·그라디언트 추가 X) — 사용자 명시 보류. 신규 AI 컨셉(P1·P2·12.x)도 별도 영역.
