@@ -2560,7 +2560,8 @@
     function openFullAnalysis(n) {
       const ticker = n.t;
       if (!ticker) return false;
-      const url = `../../docs/prototype/firm_${ticker}.html`;
+      // 캐시 버스팅 — firm_*.html 차트 CSS·옵션 변경 시 사용자 새로고침 없이 반영
+      const url = `../../docs/prototype/firm_${ticker}.html?v=${window.__FIRM_VER||'5'}`;
       const overlay = document.getElementById('fullAnalysis');
       const frame = document.getElementById('fullAnalysisFrame');
       const title = document.getElementById('fullAnalysisTitle');

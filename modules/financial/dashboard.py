@@ -341,8 +341,8 @@ _HTML_TEMPLATE = """<!doctype html>
   .highlight-card.sev-low {{ border-left-color: var(--good); }}
   .highlight-card .title {{ font-weight: 700; margin-bottom: 4px; }}
   .highlight-card .meta {{ font-size: 12px; color: var(--muted); margin-left: 8px; }}
-  .chart-wrap {{ position: relative; height: 280px; }}
-  .chart-wrap.radar {{ height: 420px; max-width: 480px; margin: 0 auto; }}
+  .chart-wrap {{ position: relative; height: 280px; max-width: 800px; margin: 0 auto; }}
+  .chart-wrap.radar {{ aspect-ratio: 1 / 1; height: auto; max-width: 460px; margin: 0 auto; }}
   .chart-wrap canvas {{ display: block !important; width: 100% !important; height: 100% !important; }}
   .ratios-list {{ margin: 0; padding: 0; }}
   .ratio-row {{
@@ -1041,7 +1041,7 @@ _RANKING_TEMPLATE = """<!doctype html>
   .err-row td {{ color: var(--muted); font-style: italic; }}
   .module-bar {{ display: inline-block; height: 6px; background: var(--accent);
     border-radius: 2px; vertical-align: middle; margin-right: 4px; }}
-  .chart-wrap {{ position: relative; height: 240px; }}
+  .chart-wrap {{ position: relative; height: 240px; max-width: 800px; margin: 0 auto; }}
   footer {{ margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
     color: var(--muted); font-size: 12px; }}
   .disclaimer {{ background: rgba(234, 179, 8, 0.08);
