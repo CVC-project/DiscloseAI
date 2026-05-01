@@ -2,6 +2,27 @@
 
 > `/check` skill 실행 시 아래 형식으로 자동 기록됩니다.
 
+## 2026-05-01 (Phase E — v2 데이터 + 내용 동기화)
+
+- **작업 범위**: 4개 모듈 v2 PR(#14·#15·#16·#17·#18, 모두 dev에 merge됨) 결과를 integration JSON·dashboard에 반영. **시각 디자인은 현재 톤 유지**(별빛·행성·그라디언트 추가 X) — 사용자 명시 보류. 신규 AI 컨셉(P1·P2·12.x)도 별도 영역.
+- **데이터 재추출** (`python -m modules.integration.extract_data`):
+  - `eqs_summary.json` 47 rows (avg EQS 68.1, v2 점수). 모든 row가 `dart_url`·`percentile`·`history`·`market_cap` 보유
+  - `disclosures.json` 180 disc / 252 stmt. **180/180이 Gemini `[Cash]`/`[Risk]`/`[Hidden Agenda]`/`[Verdict]` 4섹션 완비**
+  - `price_scenarios.json` 12 scenarios (id 6/7/9 제거, 신규 11=삼성 자사주소각·2=HD현대중공업 포함). 12/12 refUrl + dart_url
+- **dashboard.html 수정** (총 6곳, 시각 효과 추가 없이 텍스트·구조만):
+  1. **EQS v2 라벨 동기화** (`mods` 배열 L1298): 발생액 품질→**현금이익률**, 분식 확률→**매출회수 건전성**, 현금흐름 괴리→**부채 건전성**, 이익 지속성→**본업 안정성**, 재무 건전성→**자본 성장성**. `glossary.py` `GlossaryEntry.label` 단일 출처
+  2. **EQS v2 내러티브 동기화** (`_eqsNarration` L1635-1651): 5개 모듈 × good/mid/bad 15개 텍스트를 v2 정의(현금이익률 R≥1.0, 매출회수 D, 부채비율 업종 임계, OM 평균+변동폭, 자본 CAGR)로 재작성. `glossary.py` `intuition`+`benchmark` 차용
+  3. **공시 summary AI 4섹션 파싱·렌더** (신규 `_parseDiscSummary`·`_renderDiscSections`·`_escHtml` 헬퍼 + `showDisclosure` 재작성): 정규식으로 `[Cash]`/`[Risk]`/`[Hidden Agenda]`/`[Verdict]` 분할 → 라벨만 작은 색상(기존 mods 팔레트 #4ade80/#f87171/#a78bfa/#fbbf24) + 본문 #aaa, 배경 박스 추가 X. 비구조 평문은 기존 300자 컷 폴백 유지
+  4. **채팅 context 동기화 누락 보강**: `showAnalyze`/`showDisclosure`/`showTimemachine` 진입 + `closePanel` 종료 시 `_chatSetContext` 호출. 이전엔 `openFullAnalysis` 성공 경로에서만 갱신되어 fallback 패널·공시·타임머신 모드 클릭은 chip이 stale 상태로 남았음
+  5. **timemachine 미준비 안내 동적화** (L1495 fallback 블록): 하드코딩된 "현재 체험 가능한 기업은 15개입니다: 삼성전자·SK하이닉스·…" → `nodes.filter(x => x.has_quiz)` 기반 자동 계산. 현재 12개로 정확 표시 (15→12 변경은 quiz_data.py 정리 결과)
+- **이미 구현되어 있던 것** (검증만): DART 사업보고서 외부 링크(L1209·1287, commit 07b1040), `_sparkline`·`_percentileBadge`(L1313·1315·1319·1321), Gemini 채팅 사이드바 자체(L126-231 + 1852-2152, commit b713372)
+- **검증**:
+  - `pytest tests/` 470 passed, 8 skipped (회귀 없음)
+  - `black --check modules/integration/` clean
+  - Playwright: 삼성전자 노드 → 풀스크린 분석 우회 후 우측 패널 fallback 확인. v2 라벨 5/5 노출, v1 잔재 0건. disclosure 패널에서 4 AI 섹션 100% 매칭, "원문 보기 ▾" 토글 동작. SK스퀘어(quiz 없음) 클릭 시 timemachine 미준비 화면이 동적 "12개" 표시
+- **명시적 비범위** (다음 PR로): 갤럭시 시각 효과(별빛 30개·SVG 행성·슈팅스타·헤일로), EQS 점수 그라디언트, 차트 색상 통일, sparkline SVG 시각 강화, AI 분석 진한 색상 박스, AI_DIRECTION.md의 P1·P2·12.x 신기능
+- **외부 의존**: financial v2 collector가 investing/financing cashflow를 메웠는지(Phase D의 "데이터 수집 중" 뱃지 자동 사라졌는지)는 추후 확인
+
 ## 2026-04-22 (Phase C — 통합 대시보드 신설)
 
 - **작업**: 4개 모듈(relation·financial·disclosure·price) 데이터를 localhost 단일 대시보드로 통합
