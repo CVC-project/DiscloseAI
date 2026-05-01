@@ -84,13 +84,39 @@ TARGET_CORPS = {
 
 DAYS_BACK = 7
 
-# 노이즈 제외 키워드 (정규식) — 항상 제외
+# 노이즈 제외 키워드 (정규식) — 항상 제외 (DB 저장 X)
 EXCLUDE_PATTERNS = [
     r"주주총회소집공고",
     r"사외이사\s*선임",
     r"보고서\s*제출",
     r"IR\s*개최",
     r"소수주주권.*행사",
+    r"임원주주특정증권등소유보고서",   # 정기 의무 신고, 실질 거래 없음
+    r"의결권대리행사권유참고서류",      # 위임장 권유 서류, 투자 판단 무관
+]
+
+# 저장은 하되 Groq 분석 생략 — 나중에 backfill 최하위 순위
+GROQ_SKIP_PATTERNS = [
+    r"최대주주등소유주식변동신고서",    # 담보제공·소량처분 등 단순 신고
+    r"증권발행실적보고서",              # 이미 발행된 것의 사후 보고
+]
+
+# collect()에서 즉시 Groq 분석 — 가장 중요한 공시
+GROQ_IMMEDIATE_PATTERNS = [
+    r"사업보고서",
+    r"분기보고서",
+    r"반기보고서",
+    r"유상증자",
+    r"무상증자",
+    r"전환사채",
+    r"신주인수권",
+    r"합병",
+    r"분할",
+    r"영업양수",
+    r"영업양도",
+    r"매출액.*변동",
+    r"손익.*변동",
+    r"실적발표",
 ]
 
 # 내부자 거래 보고서 식별 패턴 (배치 여부로 노이즈 판별)
@@ -132,6 +158,31 @@ def _is_noise(report_nm: str) -> bool:
     return False
 
 
+def _is_groq_skip(report_nm: str) -> bool:
+    return any(re.search(p, report_nm) for p in GROQ_SKIP_PATTERNS)
+
+
+def _is_groq_immediate(report_nm: str) -> bool:
+    return any(re.search(p, report_nm) for p in GROQ_IMMEDIATE_PATTERNS)
+
+
+_DISPLAY_WORTHY_TYPES = {
+    "정기보고서", "증자", "전환사채", "BW", "M&A/분할", "영업양도",
+    "계약", "CAPEX", "실적", "자기주식", "채권발행",
+}
+_DISPLAY_WORTHY_TITLE = re.compile(r"사업보고서|분기보고서|반기보고서")
+
+
+def _is_display_worthy(disc_type: str, title: str, is_high_impact: bool) -> bool:
+    if is_high_impact:
+        return True
+    if disc_type in _DISPLAY_WORTHY_TYPES:
+        return True
+    if _DISPLAY_WORTHY_TITLE.search(title or ""):
+        return True
+    return False
+
+
 def _build_insider_batch_map(df: pd.DataFrame) -> dict:
     """날짜별 내부자 보고서 건수 맵 반환 — 배치 판별에 사용."""
     mask = df["report_nm"].str.contains(INSIDER_PATTERN, regex=True, na=False)
@@ -167,7 +218,7 @@ def _fetch_current_price(stock_code: str) -> str:
 
 # 발행금액 파싱 패턴 (증자·CB·BW 희석률 계산용)
 _ISSUE_AMOUNT_PATTERN = re.compile(
-    r"발행\s*(?:총\s*)?(?:금액|가액|예정금액)[^0-9]*?([\d,]+)\s*(백만원|억원|천원|원)?"
+    r"발행\s*(?:예정\s*)?(?:총\s*)?금액[^0-9]*?([\d,]+)\s*(백만원|억원|천원|원)?"
 )
 # 감사의견 이상 감지 패턴
 _AUDIT_OPINION_BAD = re.compile(r"감사의견\s*[:：]?\s*(한정|부적정|의견\s*거절)")
@@ -210,13 +261,17 @@ def _calc_dilution_ratio(doc_text: str, stock_code: str) -> float | None:
 # 사업보고서·분기보고서 식별 패턴
 _ANNUAL_REPORT_PATTERN = re.compile(r"사업보고서|분기보고서|반기보고서")
 
-# 추출 대상 섹션 (Tier1 정확명 → Tier2 변형명 순)
+# 추출 대상 섹션 — 중요도 높은 순으로 정렬 (총 13,000자 캡 내 우선 채움)
 _TARGET_SECTIONS: list[tuple[str, list[str]]] = [
-    ("사업의 내용", ["사업의 내용", "주요사업내용", "사업내용"]),
-    ("재무제표", ["재무제표", "연결재무제표", "요약재무정보", "재무상태표"]),
     (
         "이사의 경영진단 및 분석의견",
         ["이사의 경영진단 및 분석의견", "경영진단 및 분석의견", "경영진단"],
+    ),
+    ("사업의 내용", ["사업의 내용", "주요사업내용", "사업내용"]),
+    ("재무제표", ["재무제표", "연결재무제표", "요약재무정보", "재무상태표"]),
+    (
+        "회계감사인의 감사의견 등",
+        ["회계감사인의 감사의견 등", "감사의견", "외부감사에 관한 사항"],
     ),
     (
         "그 밖에 투자자 보호를 위하여 필요한 사항",
@@ -224,22 +279,25 @@ _TARGET_SECTIONS: list[tuple[str, list[str]]] = [
     ),
     ("자본금 변동사항", ["자본금 변동사항", "자본금의 변동"]),
     ("주식의 총수 등", ["주식의 총수 등", "발행주식의 총수", "주식의 총수"]),
-    (
-        "회계감사인의 감사의견 등",
-        ["회계감사인의 감사의견 등", "감사의견", "외부감사에 관한 사항"],
-    ),
 ]
 
 # 재무제표 섹션에서 주석 시작 시 중단
 _FINSTATE_STOP = re.compile(r"주\s*석|재무제표\s*주석|연결재무제표\s*주석")
 
 
+_MAX_SECTION_CHARS = 4500   # 섹션당 최대 글자
+_MAX_TOTAL_CHARS = 13000    # 전체 합산 최대 글자 (Groq 413 방지)
+
+
 def _extract_annual_sections(text: str) -> str:
-    """사업보고서 텍스트에서 대상 섹션만 추출. 못 찾으면 빈 문자열."""
+    """사업보고서 텍스트에서 중요도 순으로 섹션 추출. 총 13,000자 캡."""
     extracted = []
+    total = 0
 
     for section_name, patterns in _TARGET_SECTIONS:
-        # Tier1 → Tier2 순으로 매칭 시도
+        if total >= _MAX_TOTAL_CHARS:
+            break
+
         found_pos = -1
         for pat in patterns:
             idx = text.find(pat)
@@ -250,7 +308,6 @@ def _extract_annual_sections(text: str) -> str:
         if found_pos == -1:
             continue
 
-        # 섹션 끝: 다음 대섹션 시작 위치 (없으면 5,000자)
         next_pos = len(text)
         for _, other_patterns in _TARGET_SECTIONS:
             for op in other_patterns:
@@ -259,15 +316,17 @@ def _extract_annual_sections(text: str) -> str:
                     next_pos = oi
                     break
 
-        chunk = text[found_pos : found_pos + min(next_pos - found_pos, 5000)]
+        remaining = _MAX_TOTAL_CHARS - total
+        chunk = text[found_pos : found_pos + min(next_pos - found_pos, _MAX_SECTION_CHARS, remaining)]
 
-        # 재무제표 섹션은 주석 시작 전까지만
         if section_name == "재무제표":
             m = _FINSTATE_STOP.search(chunk)
             if m:
                 chunk = chunk[: m.start()]
 
-        extracted.append(f"[{section_name}]\n{chunk.strip()}")
+        chunk = chunk.strip()
+        extracted.append(f"[{section_name}]\n{chunk}")
+        total += len(chunk)
 
     return "\n\n".join(extracted)
 
@@ -304,6 +363,8 @@ def _fetch_document_text(dart_client, rcept_no: str, report_nm: str = "") -> str
 
 def _detect_type(report_nm: str) -> str:
     """공시 명칭으로부터 분류 태그를 추출한다."""
+    if _ANNUAL_REPORT_PATTERN.search(report_nm):
+        return "정기보고서"
     if INSIDER_PATTERN.search(report_nm):
         return "내부자거래"
     if "최대주주" in report_nm and "변동" in report_nm:
@@ -557,6 +618,7 @@ def _analyze_with_groq(
         f"현재 주가: {current_price}" if current_price else "현재 주가: 조회 불가"
     )
     fin_context = get_financial_context(stock_code) if stock_code else ""
+    annual_context = get_annual_report_context(corp_name, report_nm)
 
     # 공시 유형별 특화 분석 지침
     _TYPE_FOCUS: dict[str, str] = {
@@ -681,20 +743,28 @@ def _analyze_with_groq(
 공시 유형: {disc_type}
 {price_context}
 {fin_context}
-{type_focus}
+{f"{annual_context}" + chr(10) if annual_context else ""}{type_focus}
 
 공시 원문:
 {doc_text}
 
 다음 5가지 항목으로 분석해주세요.
 
-[Cash] 핵심 한 줄 요약 (현금 영향의 핵심을 한 문장으로) + 근거 bullet 2~3개 (숫자 반드시 인용, 각 bullet은 대시(-)로 시작)
-[Risk] 핵심 한 줄 요약 (가장 큰 위험을 한 문장으로) + 근거 bullet 2~3개
-[Hidden Agenda] 핵심 한 줄 요약 (경영진의 숨은 의도를 한 문장으로) + 근거 bullet 2~3개
-[Verdict] 회계사로서 한 줄 최종 평가 (1문장, 핵심 판단 포인트 포함)
+[Cash] 핵심 한 줄 요약 (현금 영향의 핵심을 한 문장으로) + 근거 bullet 2~3개
+  각 bullet은 대시(-)로 시작하고, 판단의 근거가 된 원문 문구를 반드시 따옴표로 인용하세요.
+  예: - 총 3,000억원 조달 예정 (원문: "제3자배정 유상증자로 보통주 300만주, 주당 10,000원 발행")
+[Risk] 핵심 한 줄 요약 (가장 큰 위험을 한 문장으로) + 근거 bullet 2~3개 (동일하게 원문 인용)
+[Hidden Agenda] 핵심 한 줄 요약 (경영진의 숨은 의도를 한 문장으로) + 근거 bullet 2~3개 (동일하게 원문 인용)
+[Verdict] 이 공시가 주주·투자자에게 의미하는 바를 한 줄로 (1문장, 핵심 판단 포인트 포함)
 [오늘의 개념] 공시 원문에 실제로 등장한 단어 중 일반인이 모를 법한 회계·금융·사업 용어를 딱 1개 골라서 아래 형식으로 작성하세요.
   - 첫 줄: **[용어]란?** 으로 시작해서 2~3문장으로 쉽게 설명 (전문용어 없이, 실생활 비유 포함)
   - 마지막 줄: 👉 다음엔 이것도 알아보세요: "[공시 원문에서 찾은 연관 용어]가 뭔지 궁금하지 않으세요?"
+
+【중요 규칙】
+- 원문에서 직접 확인한 수치·사실은 그대로 작성하고, 원문 문구를 따옴표로 인용하세요.
+- 원문에 명시되지 않아 추론하거나 불확실한 내용은 반드시 문장 앞에 [추정] 태그를 붙이세요.
+  예: "[추정] 경영진은 이번 자금으로 해외 사업 확장을 노릴 가능성이 있습니다."
+- [추정] 태그 없이 확인되지 않은 내용을 사실처럼 서술하지 마세요.
 
 반드시 한국어로 답하고, 항목 제목([Cash] 등)은 그대로 유지하세요."""
 
@@ -708,11 +778,16 @@ def _analyze_with_groq(
         return res.choices[0].message.content.strip()
     except Exception as e:
         err_str = str(e)
-        if "429" in err_str or "rate_limit" in err_str.lower():
-            print(f"  [WARN] Groq 일일 한도 초과 — 오늘 중단")
-            raise  # 백필에서 잡아서 완전 중단
+        # 413 페이로드 초과 → 단건 스킵 (전체 중단 X)
+        if re.search(r'\b413\b', err_str) or "request_too_large" in err_str.lower():
+            print(f"  [WARN] Groq 페이로드 초과 (단건 스킵): {corp_name} | {report_nm}")
+            return None
+        # 429 한도 초과 → 오늘 전체 중단
+        if re.search(r'\b429\b', err_str) or "rate_limit" in err_str.lower():
+            print(f"  [WARN] Groq 한도 초과 — 오늘 중단")
+            raise
         print(f"  [WARN] Groq 분석 실패 (건너뜀): {e}")
-        return None  # 400 등 → None 반환, 다음 건으로 넘어감
+        return None
 
 
 def build_cpa_summary(
@@ -729,17 +804,12 @@ def build_cpa_summary(
 
     # 폴백: 템플릿 기반 분석
     t = _CPA_TEMPLATES.get(disc_type, _CPA_TEMPLATES["기타"])
-    doc_section = (
-        f"\n\n[원문 발췌]\n{textwrap.fill(doc_text, width=80)}" if doc_text else ""
-    )
-    summary = (
+    return (
         header + f"[Cash]\n{textwrap.fill(t['cash'], width=80)}\n\n"
         f"[Risk]\n{textwrap.fill(t['risk'], width=80)}\n\n"
         f"[Hidden Agenda]\n{textwrap.fill(t['hidden'], width=80)}\n\n"
         f"[Verdict]\n{t['verdict']}"
-        f"{doc_section}"
     )
-    return summary
 
 
 # ─── 메인 수집 로직 ───────────────────────────────────────────────────────────
@@ -827,12 +897,27 @@ def collect(stock_codes: list[str] | None = None) -> None:
 
             disc_type = _detect_type(report_nm)
 
-            print(f"  [분석중]     [{disc_type}] {report_nm} ({rcept_dt})")
+            # Groq 사용 티어 결정
+            # Tier 1 (즉시): 사업보고서·증자·M&A 등 핵심 공시 → 즉시 Groq
+            # Tier 2 (백필): 그 외 일반 공시 → 저장만, backfill에서 처리
+            # Tier 3 (스킵): 단순 정기 신고 → Groq 없이 템플릿만
+            groq_skip = _is_groq_skip(report_nm)
+            groq_now = not groq_skip and _is_groq_immediate(report_nm)
 
-            doc_text = _fetch_document_text(dart, rcept_no, report_nm)
-            ai_result = _analyze_with_groq(
-                corp_name, report_nm, disc_type, doc_text, stock_code
-            )
+            doc_text = ""
+            ai_result = None
+
+            if groq_now:
+                print(f"  [즉시분석]   [{disc_type}] {report_nm} ({rcept_dt})")
+                doc_text = _fetch_document_text(dart, rcept_no, report_nm)
+                ai_result = _analyze_with_groq(
+                    corp_name, report_nm, disc_type, doc_text, stock_code
+                )
+            elif groq_skip:
+                print(f"  [SKIP-AI]    [{disc_type}] {report_nm} ({rcept_dt})")
+            else:
+                print(f"  [저장-백필]  [{disc_type}] {report_nm} ({rcept_dt})")
+
             ai_ok = ai_result is not None
             if ai_ok:
                 header = f"[공시] {corp_name} | {report_nm} | {rcept_dt}\n[분류] {disc_type}\n\n"
@@ -867,6 +952,7 @@ def collect(stock_codes: list[str] | None = None) -> None:
                 ai_analyzed=ai_ok,
                 high_impact=is_high_impact,
                 dilution_ratio=dilution,
+                display_worthy=_is_display_worthy(disc_type, report_nm, is_high_impact),
             )
             session.add(record)
             session.commit()
@@ -1009,6 +1095,44 @@ def get_financial_context(corp_code: str) -> str:
     return "\n".join(lines)
 
 
+def get_annual_report_context(corp_name: str, current_title: str = "") -> str:
+    """같은 기업의 최신 사업보고서 AI 분석 요약 반환 (수시공시 분석 보강용).
+    사업보고서 자체를 분석할 때나 분석된 사업보고서가 없으면 빈 문자열 반환."""
+    if _ANNUAL_REPORT_PATTERN.search(current_title):
+        return ""
+
+    from modules.disclosure.db import get_local_session
+    from modules.disclosure.models import DisclosureLocal
+
+    session = get_local_session()
+    rec = (
+        session.query(DisclosureLocal)
+        .filter(
+            DisclosureLocal.corp_name == corp_name,
+            DisclosureLocal.ai_analyzed == True,
+            DisclosureLocal.title.like("%사업보고서%")
+            | DisclosureLocal.title.like("%분기보고서%")
+            | DisclosureLocal.title.like("%반기보고서%"),
+        )
+        .order_by(DisclosureLocal.disclosure_date.desc())
+        .first()
+    )
+    session.close()
+
+    if not rec or not rec.summary:
+        return ""
+
+    summary = rec.summary
+    body_start = summary.find("[Cash]")
+    if body_start > 0:
+        summary = summary[body_start:]
+    verdict_end = summary.find("[오늘의 개념]")
+    if verdict_end > 0:
+        summary = summary[:verdict_end]
+
+    return f"【{rec.corp_name} {rec.title} 핵심 요약】\n{summary[:1200]}"
+
+
 # ─── 백필 로직 ───────────────────────────────────────────────────────────────
 
 
@@ -1027,18 +1151,26 @@ def backfill_ai(max_records: int = 50) -> int:
     dart = odr(DART_API_KEY) if DART_API_KEY else None
     session = get_local_session()
 
-    # 사업보고서·분기보고서·반기보고서 우선, 이후 나머지 최신순
-    from sqlalchemy import case
+    from sqlalchemy import case, and_
 
+    # GROQ_SKIP 항목은 backfill 대상에서 제외 (템플릿 전용)
+    skip_titles = ["최대주주등소유주식변동신고서", "증권발행실적보고서"]
+    skip_filter = and_(*[~DisclosureLocal.title.contains(t) for t in skip_titles])
+
+    # 우선순위: 정기보고서 → 고임팩트 수시공시 → 중간 → 기타
     priority = case(
         (DisclosureLocal.title.contains("사업보고서"), 0),
         (DisclosureLocal.title.contains("분기보고서"), 0),
         (DisclosureLocal.title.contains("반기보고서"), 0),
-        else_=1,
+        (DisclosureLocal.disclosure_type.in_(["증자", "전환사채", "BW", "M&A/분할", "실적"]), 1),
+        (DisclosureLocal.disclosure_type.in_(["계약", "CAPEX", "영업양도"]), 2),
+        (DisclosureLocal.disclosure_type.in_(["임원변동", "자기주식", "채권발행", "최대주주변동", "내부자거래"]), 3),
+        else_=4,
     )
     pending = (
         session.query(DisclosureLocal)
         .filter(DisclosureLocal.ai_analyzed == False)
+        .filter(skip_filter)
         .order_by(priority, DisclosureLocal.disclosure_date.desc())
         .limit(max_records)
         .all()
