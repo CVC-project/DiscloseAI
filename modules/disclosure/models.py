@@ -33,6 +33,9 @@ class DisclosureLocal(Base):
         Boolean, default=False, server_default="0"
     )  # 유상증자·CB·BW·감사의견 이상
     dilution_ratio = Column(Float)  # 발행금액 ÷ 시가총액 (희석률)
+    display_worthy = Column(
+        Boolean, default=False, index=True, server_default="0"
+    )  # 대시보드 기본 뷰 노출 여부 (Tier 1 or high_impact)
 
 
 class FinancialStatement(Base):
