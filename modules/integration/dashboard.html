@@ -1182,7 +1182,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){sel=null;closePanel
 c.addEventListener('mouseup',()=>{drag=false;c.style.cursor='grab';});
 c.addEventListener('wheel',e=>{const d=e.deltaY>0?0.9:1.1;const mx=e.clientX,my=e.clientY;const wx=(mx-camX)/zm,wy=(my-camY)/zm;zm=Math.max(0.2,Math.min(4,zm*d));camX=mx-wx*zm;camY=my-wy*zm;e.preventDefault();},{passive:false});
 
-function closePanel(){document.getElementById('panel').classList.remove('open');sel=null;}
+function closePanel(){document.getElementById('panel').classList.remove('open');sel=null;if(typeof _chatSetContext==='function')_chatSetContext(null);}
 function filter(f,btn){flt=f;document.querySelectorAll('.hud-sub button').forEach(b=>b.classList.remove('on'));btn.classList.add('on');}
 function simAlert(){alertOn=true;alertSrc='삼성전자';document.getElementById('alert').classList.add('show');const src=nodes.find(n=>n.n==='삼성전자');if(src)for(let i=0;i<3;i++)setTimeout(()=>ripples.push({x:src.x,y:src.y,radius:src.sz*18,alpha:0.6}),i*400);setTimeout(()=>{alertOn=false;alertSrc=null;},10000);}
 
@@ -1252,6 +1252,8 @@ function _fullAnalysisEsc(e) {
 
 function showAnalyze(n) {
   window.__lastShownNode = n;  // 쉬운말 모드 토글 시 재렌더용
+  // 채팅 context 동기화 (openFullAnalysis 내부에서도 호출되지만 fallback 경로 보호용)
+  if (typeof _chatSetContext === 'function') _chatSetContext(n);
   // 우선 풀스크린 오버레이 시도 (단독 분석 페이지) — 실패 시 기존 우측 패널 fallback
   if (openFullAnalysis(n)) return;
   const p = document.getElementById('panel');
@@ -1295,7 +1297,7 @@ function showAnalyze(n) {
   const cpHtml=cps.length?cps.map((c,i)=>`<div class="checkpoint"><span style="color:#fbbf24;font-weight:600">${i+1}.</span> <span class="cp-title">${c}</span></div>`).join(''):'<div style="color:#555;font-size:11px">특이사항 없음</div>';
   const rels=edges.filter(e=>e.a.n===n.n||e.b.n===n.n);
   const relHtml=rels.map(e=>{const o=e.a.n===n.n?e.b:e.a;return `<span class="tag">${e.type} ${o.n}</span>`;}).join('');
-  const mods=[{id:'M1',name:'발생액 품질',s:n.m1,t:n.m1t,c:'#4da6ff'},{id:'M2',name:'분식 확률',s:n.m2,t:n.m2t,c:'#f87171'},{id:'M3',name:'현금흐름 괴리',s:n.m3,t:n.m3t,c:'#fbbf24'},{id:'M4',name:'이익 지속성',s:n.m4,t:n.m4t,c:'#4ade80'},{id:'M5',name:'재무 건전성',s:n.m5,t:n.m5t,c:'#7c6cf0'}];
+  const mods=[{id:'M1',name:'현금이익률',s:n.m1,t:n.m1t,c:'#4da6ff'},{id:'M2',name:'매출회수 건전성',s:n.m2,t:n.m2t,c:'#f87171'},{id:'M3',name:'부채 건전성',s:n.m3,t:n.m3t,c:'#fbbf24'},{id:'M4',name:'본업 안정성',s:n.m4,t:n.m4t,c:'#4ade80'},{id:'M5',name:'자본 성장성',s:n.m5,t:n.m5t,c:'#7c6cf0'}];
   // 모듈 점수 null(산출 제외)/양수만 렌더 — 0점도 표시(실점수 0과 null 구분)
   const modsHtml=mods.filter(m=>m.s != null).map(m=>{const mc=m.s>=70?'#4ade80':m.s>=50?'#fbbf24':'#f87171';return `<div class="eqs-module"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px"><div><span style="font-size:10px;font-weight:600;color:${m.c};background:${m.c}18;padding:1px 5px;border-radius:3px">${m.id}</span> <span style="font-size:12px;font-weight:500">${m.name}</span></div><span style="font-size:13px;font-weight:600;color:${mc}">${m.s}</span></div><div class="eqs-bar"><div class="eqs-fill" style="width:${m.s}%;background:${mc}"></div></div><div style="font-size:10px;color:#888;margin-top:3px">${m.t}</div></div>`;}).join('');
   const eqsExplain = eqsScore == null
@@ -1356,8 +1358,51 @@ function toggleDiscSummary(cardId) {
   }
 }
 
+// disclosure summary 안의 Gemini 4섹션([Cash]/[Risk]/[Hidden Agenda]/[Verdict])을 파싱.
+// 매칭 실패 시 hasStructured=false 반환하여 호출부가 평문 폴백을 쓰도록 한다.
+function _parseDiscSummary(raw) {
+  const s = (raw || '').trim();
+  if (!s) return { hasStructured: false, raw: '' };
+  const sectionRe = /\[(Cash|Risk|Hidden Agenda|Verdict)\]\s*([\s\S]*?)(?=\n\s*\[(?:Cash|Risk|Hidden Agenda|Verdict)\]|$)/g;
+  const out = { hasStructured: false, raw: s, cash: '', risk: '', hidden: '', verdict: '' };
+  let m;
+  while ((m = sectionRe.exec(s)) !== null) {
+    const key = m[1];
+    const txt = (m[2] || '').trim();
+    if (!txt) continue;
+    if (key === 'Cash') out.cash = txt;
+    else if (key === 'Risk') out.risk = txt;
+    else if (key === 'Hidden Agenda') out.hidden = txt;
+    else if (key === 'Verdict') out.verdict = txt;
+  }
+  out.hasStructured = !!(out.cash || out.risk || out.hidden || out.verdict);
+  return out;
+}
+
+// HTML escape (정규식 캡처 텍스트를 안전하게 innerHTML에 주입)
+function _escHtml(s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+// 4섹션을 작은 라벨 + 본문 형태로 렌더 (배경 박스 없이 현재 카드 톤 유지)
+function _renderDiscSections(parsed) {
+  const seg = (label, accent, body) => body
+    ? `<div style="margin:4px 0 6px"><strong style="color:${accent};font-size:10px;letter-spacing:0.3px">${label}</strong>
+         <span style="color:#aaa;font-size:10px;line-height:1.6;white-space:pre-wrap">  ${_escHtml(body)}</span></div>`
+    : '';
+  return [
+    seg('💰 Cash', '#4ade80', parsed.cash),
+    seg('⚠ Risk', '#f87171', parsed.risk),
+    seg('🕵 Hidden Agenda', '#a78bfa', parsed.hidden),
+    seg('🎯 Verdict', '#fbbf24', parsed.verdict),
+  ].join('');
+}
+
 // ===== PANEL: DISCLOSURE (실데이터 기반, modules/disclosure/data/disclosure.db 연결) =====
 function showDisclosure(n) {
+  if (typeof _chatSetContext === 'function') _chatSetContext(n);
   const p=document.getElementById('panel');
   const rels=edges.filter(e=>e.a.n===n.n||e.b.n===n.n);
   const discList = n.disc || [];
@@ -1372,18 +1417,31 @@ function showDisclosure(n) {
       ? `<div style="font-size:10px;color:#fbbf24;margin-top:2px">희석률 ${(d.dilution_ratio*100).toFixed(1)}%</div>`
       : '';
     const summary = d.summary || '';
-    const isLong = summary.length > 300;
     const cardId = `disc-card-${idx}`;
-    const summaryShort = isLong ? summary.slice(0, 300) + '…' : summary;
-    const summaryBlock = summary
-      ? (isLong
-          ? `<div id="${cardId}-short" style="font-size:10px;color:#888;margin-top:6px;line-height:1.6;white-space:pre-wrap">${summaryShort}</div>
-             <div id="${cardId}-full" style="display:none;font-size:10px;color:#888;margin-top:6px;line-height:1.6;white-space:pre-wrap">${summary}</div>
-             <button type="button" id="${cardId}-btn"
-               onclick="toggleDiscSummary('${cardId}')"
-               style="margin-top:6px;padding:3px 10px;font-size:10px;background:rgba(77,166,255,0.12);border:1px solid rgba(77,166,255,0.3);border-radius:5px;color:#4da6ff;cursor:pointer">더보기 ▾</button>`
-          : `<div style="font-size:10px;color:#888;margin-top:6px;line-height:1.6;white-space:pre-wrap">${summary}</div>`)
-      : '';
+    const parsed = _parseDiscSummary(summary);
+    let summaryBlock = '';
+    if (parsed.hasStructured) {
+      // Gemini 4섹션 분할 렌더 + (원본 토글)
+      summaryBlock = `
+        <div style="margin-top:6px">
+          ${_renderDiscSections(parsed)}
+          <div id="${cardId}-full" style="display:none;font-size:10px;color:#666;margin-top:6px;line-height:1.5;white-space:pre-wrap;border-top:1px dashed rgba(255,255,255,0.08);padding-top:6px">${_escHtml(summary)}</div>
+          <button type="button" id="${cardId}-btn"
+            onclick="(function(){var f=document.getElementById('${cardId}-full');var b=document.getElementById('${cardId}-btn');var open=f.style.display!=='none';f.style.display=open?'none':'block';b.textContent=open?'원문 보기 ▾':'원문 접기 ▴';})()"
+            style="margin-top:4px;padding:2px 8px;font-size:9px;background:rgba(77,166,255,0.08);border:1px solid rgba(77,166,255,0.2);border-radius:4px;color:#4da6ff;cursor:pointer">원문 보기 ▾</button>
+        </div>`;
+    } else if (summary) {
+      // 폴백: 비구조 평문 (300자 컷 토글)
+      const isLong = summary.length > 300;
+      const summaryShort = isLong ? summary.slice(0, 300) + '…' : summary;
+      summaryBlock = isLong
+        ? `<div id="${cardId}-short" style="font-size:10px;color:#888;margin-top:6px;line-height:1.6;white-space:pre-wrap">${_escHtml(summaryShort)}</div>
+           <div id="${cardId}-full" style="display:none;font-size:10px;color:#888;margin-top:6px;line-height:1.6;white-space:pre-wrap">${_escHtml(summary)}</div>
+           <button type="button" id="${cardId}-btn"
+             onclick="toggleDiscSummary('${cardId}')"
+             style="margin-top:6px;padding:3px 10px;font-size:10px;background:rgba(77,166,255,0.12);border:1px solid rgba(77,166,255,0.3);border-radius:5px;color:#4da6ff;cursor:pointer">더보기 ▾</button>`
+        : `<div style="font-size:10px;color:#888;margin-top:6px;line-height:1.6;white-space:pre-wrap">${_escHtml(summary)}</div>`;
+    }
     return `
       <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:10px 12px;margin-bottom:8px">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
@@ -1432,15 +1490,25 @@ function showDisclosure(n) {
 
 // ===== PANEL: TIMEMACHINE (실데이터 기반, modules/price/quiz_data.py 연결) =====
 function showTimemachine(n) {
+  if (typeof _chatSetContext === 'function') _chatSetContext(n);
   const p=document.getElementById('panel');
   if(!n.tm){
+    // has_quiz 플래그로 동적 계산 — quiz_data.py 변경 시 자동 갱신.
+    const covered = (nodes || []).filter(x => x.has_quiz);
+    const previewN = 8;
+    const names = covered.map(x => x.n);
+    const preview = names.slice(0, previewN).join('·');
+    const remainder = names.length > previewN ? ` 외 ${names.length - previewN}개` : '';
+    const coverageHtml = covered.length > 0
+      ? `현재 체험 가능한 기업은 ${covered.length}개입니다:<br>${preview}${remainder}`
+      : '아직 등록된 시나리오가 없습니다';
     document.getElementById('panelInner').innerHTML=`
       <h2 style="color:#7c6cf0;font-size:18px">🕰 타임머신</h2>
       <div style="color:#666;font-size:12px;margin-bottom:20px">${n.n}</div>
       <div style="text-align:center;padding:40px 0;color:#555">
         <div style="font-size:40px;margin-bottom:12px">📭</div>
         <div style="font-size:13px">이 기업의 타임머신 시나리오는<br>아직 준비되지 않았습니다</div>
-        <div style="font-size:11px;color:#444;margin-top:12px">현재 체험 가능한 기업은 15개입니다:<br>삼성전자·SK하이닉스·현대차·기아·카카오·<br>NAVER·LG화학·POSCO홀딩스 외 7개</div>
+        <div style="font-size:11px;color:#444;margin-top:12px">${coverageHtml}</div>
         <div style="font-size:10px;color:#444;margin-top:10px">데이터 출처: modules/price/quiz_data.py</div>
       </div>`;
     p.classList.add('open');return;
@@ -1633,21 +1701,21 @@ const EASY_NOTES = {
 function _eqsNarration(idx, score) {
   const b = _eqsBucket(score);
   const texts = {
-    1: { good: '이익이 현금으로 뒷받침됨 — 발생액 품질 양호.',
-         mid:  '발생액 정상 범위. 향후 추이 관찰 필요.',
-         bad:  '비용 이연 가능성. 발생액 높아 주의 필요.' },
-    2: { good: 'M-score 안전 구간 — 분식 징후 낮음.',
-         mid:  '분식 확률 중간 구간. 핵심 지표 모니터링 필요.',
-         bad:  'M-score 위험 구간 — 회계 투명성 점검 필요.' },
-    3: { good: 'OCF/NI 양호 — 영업이익이 실제 현금으로 유입.',
-         mid:  '현금흐름 다소 괴리. 매출채권·재고자산 증감 확인.',
-         bad:  '영업이익 대비 현금흐름 낮음 — 현금 창출력 점검.' },
-    4: { good: '이익 추이 안정적 — 지속 가능성 높음.',
-         mid:  '이익 변동성 중간 — 업황 의존 구간.',
-         bad:  '이익 변동 심함 — 일회성·업황 영향 검토.' },
-    5: { good: 'Piotroski F-score 양호 — 재무 건전성 우수.',
-         mid:  '재무 건전성 보통. 일부 지표 개선 필요.',
-         bad:  'F-score 낮음 — 재무 악화 신호 다수.' },
+    1: { good: '영업이익이 현금으로 충분히 회수됨 — 회계 이익이 실제 현금.',
+         mid:  '현금 회수가 영업이익 수준. 추세 모니터링 권장.',
+         bad:  '영업이익 대비 현금 회수 부족 — 외상이 쌓이는 신호.' },
+    2: { good: '매출 증가 속도가 외상 증가보다 빠름 — 매출이 진짜 현금으로 회수.',
+         mid:  '매출과 외상 증가가 비슷한 수준 — 정상 범위.',
+         bad:  '외상이 매출보다 빠르게 늘고 있음 — 매출 신뢰도 점검 필요.' },
+    3: { good: '부채비율이 업종 양호선 이내 — 자본 부담 낮음.',
+         mid:  '부채비율이 업종 평균 구간 — 추세 관찰 필요.',
+         bad:  '부채비율이 업종 위험선 이상 — 이자 부담·신용도 점검.' },
+    4: { good: '영업이익률이 업종 우수선 위·변동폭 안정 — 본업 꾸준.',
+         mid:  '본업 수익은 평균 수준이나 변동폭 다소 큼.',
+         bad:  '본업 수익이 업종 평균 이하 또는 변동폭 과대.' },
+    5: { good: '자기자본이 빠르게 누적 — 주주 몫이 커지는 속도 양호.',
+         mid:  '자본 성장 정체 — 이익 환원과 사내유보 균형 확인.',
+         bad:  '자본 감소 추세 — 적자·자사주매입·배당 환원 등 원인 점검.' },
   };
   return texts[idx][b];
 }
