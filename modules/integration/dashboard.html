@@ -1402,9 +1402,8 @@
     }
     function _exitGatherMode() {
       gatherMode = null;
-      // 원래 전체 뷰로 복귀 (섹터 'all' 동일 카메라)
-      const baseZm = 0.62;
-      _panTo((W / 2) * (1 - baseZm), (H / 2) * (1 - baseZm), baseZm, 600);
+      // 카메라는 현재 위치·줌 유지 — 사용자가 그 영역에서 다른 행성을 바로 선택할 수 있게.
+      // (이전엔 baseZm 0.62로 강제 복귀 → 매번 다시 찾아가야 하는 불편)
     }
     // 모임 클러스터(center + 멤버들의 toX/toY)의 bounding box를 계산해 카메라 줌·팬을 맞춘다.
     // 좌하단 범례·하단 HUD·우측 채팅 사이드바 영역은 사용 가능 viewport에서 제외.
@@ -2471,7 +2470,37 @@
     }
 
     // ===== INTERACTION =====
-    c.addEventListener('mousemove', e => { if (drag) { camX = cs.x + (e.clientX - ds.x); camY = cs.y + (e.clientY - ds.y); return; } const mx = (e.clientX - camX) / zm, my = (e.clientY - camY) / zm; hov = null; nodes.forEach(n => { const dx = n.x - mx, dy = n.y - my; if (Math.sqrt(dx * dx + dy * dy) < n.sz * 22) { hov = n; c.style.cursor = 'pointer'; } }); if (!hov) c.style.cursor = 'grab'; });
+    // 클릭/호버 hit-test 헬퍼 — gather 활성 시 멤버는 orbit 위치(info.toX/toY)에 있음.
+    // 일반 nodes.forEach는 n.x(원위치) 기준이라 hit fail. 멤버는 별도로 toX/toY로 검사.
+    function _hitNodeAt(mx, my) {
+      // 1) gather 활성: center / 멤버를 orbit 위치 기준으로 우선 체크
+      if (gatherMode) {
+        const c0 = gatherMode.center;
+        if (Math.hypot(c0.x - mx, c0.y - my) < c0.sz * 22) return c0;
+        let hit = null;
+        gatherMode.members.forEach((info, member) => {
+          if (hit) return;
+          // gather 멤버는 작은 별 (mR≈10) → 좀 넉넉히 18 px 반경
+          if (Math.hypot(info.toX - mx, info.toY - my) < 18) hit = member;
+        });
+        if (hit) return hit;
+        // gather 활성 시 비-(center/member) 노드는 fade out 상태라 클릭 무시
+        return null;
+      }
+      // 2) 일반 모드: 모든 노드의 원위치 기준
+      let hit = null;
+      nodes.forEach(n => {
+        const dx = n.x - mx, dy = n.y - my;
+        if (Math.sqrt(dx * dx + dy * dy) < n.sz * 22) hit = n;
+      });
+      return hit;
+    }
+    c.addEventListener('mousemove', e => {
+      if (drag) { camX = cs.x + (e.clientX - ds.x); camY = cs.y + (e.clientY - ds.y); return; }
+      const mx = (e.clientX - camX) / zm, my = (e.clientY - camY) / zm;
+      hov = _hitNodeAt(mx, my);
+      c.style.cursor = hov ? 'pointer' : 'grab';
+    });
     c.addEventListener('mousedown', e => {
       _cancelCamTween();
       const mx = (e.clientX - camX) / zm, my = (e.clientY - camY) / zm;
@@ -2480,9 +2509,8 @@
         _onMascotClick();
         return;
       }
-      // 2) 노드 hit 검사
-      let clicked = null;
-      nodes.forEach(n => { const dx = n.x - mx, dy = n.y - my; if (Math.sqrt(dx * dx + dy * dy) < n.sz * 22) clicked = n; });
+      // 2) 노드 hit 검사 — gather 활성 시 멤버는 orbit 위치 기준 (헬퍼 _hitNodeAt 처리)
+      const clicked = _hitNodeAt(mx, my);
       if (clicked) {
         sel = clicked;
         // analyze·disclosure 모드는 gather 효과 거치고 고양이 쓰다듬기로 패널 호출.
