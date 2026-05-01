@@ -183,11 +183,21 @@ canvas{display:block}
 #chatSidebar.collapsed ~ #chatToggleFab{display:flex}
 
 /* 채팅 사이드바가 열려 있을 때, 모달은 사이드바 좌측까지만 확장 (덮지 않게) */
-#fullAnalysisCard{position:absolute;top:5vh;left:6vw;right:6vw;bottom:5vh;
+#fullAnalysisCard,#fullDisclosureCard{position:absolute;top:5vh;left:6vw;right:6vw;bottom:5vh;
   border-radius:14px;overflow:hidden;border:1px solid #334155;
   box-shadow:0 24px 80px rgba(0,0,0,0.6);background:#0f172a;
   transition:right 0.4s cubic-bezier(0.16,1,0.3,1)}
-body.chat-open #fullAnalysisCard{right:372px}
+body.chat-open #fullAnalysisCard,body.chat-open #fullDisclosureCard{right:372px}
+#fullDisclosureBody{position:absolute;inset:62px 0 0 0;overflow-y:auto;padding:20px 32px 32px 32px;background:#0f172a;color:#e2e8f0;font-family:'Pretendard','Apple SD Gothic Neo',sans-serif}
+#fullDisclosureBody .disc-card{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:18px 22px;margin-bottom:14px;line-height:1.6}
+#fullDisclosureBody .disc-meta{font-size:11px;color:#64748b;margin-bottom:4px}
+#fullDisclosureBody .disc-title{font-size:14px;font-weight:600;color:#f8fafc;margin-bottom:10px}
+#fullDisclosureBody .disc-section{margin:6px 0;font-size:12px}
+#fullDisclosureBody .disc-section strong{font-size:11px;letter-spacing:0.3px;margin-right:6px}
+#fullDisclosureBody .disc-empty{padding:48px 0;text-align:center;color:#64748b;font-size:13px}
+#fullDisclosureBody .stmt-table{margin-top:18px;background:#1e293b;border:1px solid #334155;border-radius:10px;padding:16px}
+#fullDisclosureBody .stmt-row{display:grid;grid-template-columns:90px 1fr 1fr 90px;gap:8px;font-size:12px;padding:6px 0;border-top:1px solid #334155}
+#fullDisclosureBody .stmt-row:first-child{border-top:0;color:#64748b;font-size:11px}
 </style>
 <!-- 사용자별 Gemini API 키 — chat_config.local.js (gitignored). 없으면 채팅이 graceful fail 한다.
      onerror로 missing 플래그를 세워 _chatInit 단계에서 사용자에게 명확한 안내 표시. -->
@@ -248,6 +258,24 @@ body.chat-open #fullAnalysisCard{right:372px}
       <div style="color:#94a3b8;font-size:13px">브라우저 보안 정책상 <code style="background:rgba(99,102,241,0.15);padding:2px 6px;border-radius:4px">file://</code> 환경에서는 iframe이 차단됩니다.<br>우상단 <strong style="color:#4da6ff">'새 창 ↗'</strong> 버튼으로 열거나, 터미널에서 <code style="background:rgba(99,102,241,0.15);padding:2px 6px;border-radius:4px">python -m http.server</code> 실행 후 <code style="background:rgba(99,102,241,0.15);padding:2px 6px;border-radius:4px">localhost:8000</code>으로 접속해주세요.</div>
     </div>
     <iframe id="fullAnalysisFrame" src="about:blank" style="position:absolute;inset:0;width:100%;height:100%;border:0;background:#0f172a"></iframe>
+  </div>
+</div>
+
+<!-- 공시 풀스크린 오버레이 (Stage 4) — analyze 패턴과 동일하나 iframe 없이 inline 렌더 -->
+<div id="fullDisclosure" onclick="if(event.target===this)closeFullDisclosure()" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(8,12,28,0.55);backdrop-filter:blur(2px)">
+  <div id="fullDisclosureCard">
+    <div style="position:absolute;top:0;left:0;right:0;height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;background:#1e293b;border-bottom:1px solid #334155;z-index:10001">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="font-size:18px;color:#fbbf24">📡</span>
+        <span id="fullDisclosureTitle" style="color:#f8fafc;font-size:15px;font-weight:600"></span>
+        <span id="fullDisclosureSubtitle" style="color:#64748b;font-size:12px"></span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <a id="fullDisclosureDartLink" href="#" target="_blank" rel="noopener" title="DART 최신 사업보고서" style="display:none;font-size:12px;line-height:1;padding:8px 12px;border-radius:18px;border:1px solid #4da6ff66;background:rgba(77,166,255,0.12);color:#9ec5ff;text-decoration:none;font-weight:500">📄 사업보고서 ↗</a>
+        <button onclick="closeFullDisclosure()" title="닫기 (ESC)" style="font-size:18px;line-height:1;width:34px;height:34px;border-radius:50%;border:1px solid #475569;background:rgba(15,23,42,0.85);color:#e2e8f0;cursor:pointer;font-weight:600">×</button>
+      </div>
+    </div>
+    <div id="fullDisclosureBody"></div>
   </div>
 </div>
 
@@ -349,6 +377,77 @@ let currentMode = 'analyze';
 let nodes=[],edges=[],sel=null,hov=null,flt='all';
 let camX=0,camY=0,zm=0.62,drag=false,ds={x:0,y:0},cs={x:0,y:0};
 let alertOn=false,alertSrc=null,ripples=[],stars=[],time=0;
+
+// ===== GATHER MODE (행성 클릭 → 연결 기업이 클릭 행성 주위로 모이는 효과) =====
+// gatherMode: {
+//   center: node,
+//   members: Map<node, {fromX, fromY, toX, toY}>,
+//   startTime: performance.now(),
+//   dur: 600,
+// }
+// 활성 시: center=원래 행성 그대로 / members=오빗 위치로 트윈 + 작은 별 렌더 / 그 외=알파 0.12 / 고양이가 center 위에 위치
+let gatherMode = null;
+function _enterGatherMode(centerNode){
+  // edges에서 center에 연결된 모든 (a/b) 노드 수집 (모든 섹터 횡단). 중복은 Set으로 제거.
+  const neighbors = new Set();
+  edges.forEach(e => {
+    if (e.a === centerNode) neighbors.add(e.b);
+    else if (e.b === centerNode) neighbors.add(e.a);
+  });
+  // 자기 자신은 제외
+  neighbors.delete(centerNode);
+  // 오빗 반경: center 행성 크기에 비례하되 최소값 보장 (혼잡 시 두 번째 링까지 사용 가능)
+  const baseR = Math.max(180, centerNode.sz * 60);
+  const arr = Array.from(neighbors);
+  const N = arr.length;
+  const members = new Map();
+  arr.forEach((nb, i) => {
+    // 두 링으로 분배 (10개 이상이면)
+    const ringIdx = N > 10 && i >= Math.ceil(N/2) ? 1 : 0;
+    const ringR = baseR + ringIdx * 80;
+    const inRing = ringIdx === 0 ? Math.min(N, Math.ceil(N/2) || 1) : (N - Math.ceil(N/2));
+    const idxInRing = ringIdx === 0 ? i : i - Math.ceil(N/2);
+    const ang = (idxInRing / Math.max(1, inRing)) * Math.PI * 2 - Math.PI/2 + ringIdx * 0.3;
+    const tx = centerNode.x + Math.cos(ang) * ringR;
+    const ty = centerNode.y + Math.sin(ang) * ringR;
+    members.set(nb, { fromX: nb.x, fromY: nb.y, toX: tx, toY: ty });
+  });
+  gatherMode = {
+    center: centerNode,
+    members,
+    startTime: performance.now(),
+    dur: 600,
+  };
+}
+function _exitGatherMode(){
+  gatherMode = null;
+}
+// 현 프레임에서의 멤버 표시 좌표 + 페이드 진행도 계산
+function _gatherProgress(){
+  if (!gatherMode) return null;
+  const t = Math.min(1, (performance.now() - gatherMode.startTime) / gatherMode.dur);
+  const e = _easeInOutCubic(t);
+  return { progress: e, isComplete: t >= 1 };
+}
+
+// ===== CAMERA TWEEN (섹터 탭 클릭 → 부드러운 이동) =====
+// _camTween 활성 시 draw() 시작 시점에 camX·camY·zm을 진행도에 따라 보간한다.
+// 사용자가 마우스 드래그를 시작하면 자동으로 취소(cs 갱신 시점에서 처리).
+let _camTween = null;
+function _easeInOutCubic(t){return t<0.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2;}
+function _panTo(toX, toY, toZm, dur){
+  _camTween = {
+    startTime: performance.now(),
+    dur: dur || 600,
+    fromX: camX, fromY: camY, fromZm: zm,
+    toX, toY, toZm,
+  };
+}
+function _cancelCamTween(){ _camTween = null; }
+// 섹터 중심을 화면 중앙(W/2, H/2)에 두는 카메라 좌표 계산
+function _camForWorldCenter(wx, wy, targetZm){
+  return { camX: W/2 - wx*targetZm, camY: H/2 - wy*targetZm };
+}
 // Enhanced starfield
 for(let i=0;i<400;i++)stars.push({x:Math.random(),y:Math.random(),s:Math.random()*2+0.2,b:Math.random(),twinkleSpeed:0.5+Math.random()*3});
 // Nebula clouds
@@ -510,6 +609,52 @@ function makeCatSprite(pose){
 }
 ['idle','crouch','launch','midair','land'].forEach(p=>{ catSprites[p]=makeCatSprite(p); });
 function pickNextNode(){const bigNodes=nodes.filter(n=>n.sz>=1.5);if(bigNodes.length===0)return;let next;do{next=bigNodes[Math.floor(Math.random()*bigNodes.length)];}while(next===mascot.targetNode&&bigNodes.length>1);mascot.targetNode=next;mascot.progress=0;}
+
+// === 말풍선 그리기 (gather + 마스코트 도착 시) ===
+// world-space 좌표(zm 영향). 가독성 위해 텍스트 폰트는 zm-역수 보정으로 항상 비슷한 크기.
+function _drawSpeechBubble(text, ax, ay){
+  // 폰트 크기를 zm로 역보정 → 화면상 일관된 크기
+  const fontPx = Math.max(11, 13 / Math.max(0.6, zm) * 0.9);
+  x.save();
+  x.font = `600 ${fontPx}px -apple-system, sans-serif`;
+  const padX = fontPx * 0.9;
+  const padY = fontPx * 0.55;
+  const m = x.measureText(text);
+  const w = m.width + padX*2;
+  const h = fontPx * 1.5 + padY*2;
+  const left = ax - w/2;
+  const top = ay - h - 10;  // 마스코트 위쪽
+  // 말풍선 본체 (둥근 사각형)
+  const r = 8;
+  x.beginPath();
+  x.moveTo(left+r, top);
+  x.lineTo(left+w-r, top);
+  x.quadraticCurveTo(left+w, top, left+w, top+r);
+  x.lineTo(left+w, top+h-r);
+  x.quadraticCurveTo(left+w, top+h, left+w-r, top+h);
+  // 꼬리(말풍선 아래쪽 중앙에서 마스코트 방향)
+  x.lineTo(ax+8, top+h);
+  x.lineTo(ax, top+h+9);
+  x.lineTo(ax-8, top+h);
+  x.lineTo(left+r, top+h);
+  x.quadraticCurveTo(left, top+h, left, top+h-r);
+  x.lineTo(left, top+r);
+  x.quadraticCurveTo(left, top, left+r, top);
+  x.closePath();
+  // 부드러운 펄스
+  const pulse = 0.85 + Math.sin(time*3)*0.15;
+  x.fillStyle = `rgba(8, 12, 24, ${0.92*pulse})`;
+  x.strokeStyle = 'rgba(255, 220, 120, 0.85)';
+  x.lineWidth = 1.4;
+  x.fill();
+  x.stroke();
+  // 텍스트
+  x.fillStyle = '#fff5dc';
+  x.textAlign = 'center';
+  x.textBaseline = 'middle';
+  x.fillText(text, ax, top + h/2);
+  x.restore();
+}
 
 function setMode(mode, btn) {
   currentMode = mode;
@@ -765,6 +910,15 @@ function physics(){
 }
 function draw(){
 time+=0.016;
+// 카메라 트윈 진행 (섹터 탭·기타 _panTo 호출자에 의해 활성화)
+if(_camTween){
+  const t = Math.min(1, (performance.now()-_camTween.startTime)/_camTween.dur);
+  const e = _easeInOutCubic(t);
+  camX = _camTween.fromX + (_camTween.toX - _camTween.fromX)*e;
+  camY = _camTween.fromY + (_camTween.toY - _camTween.fromY)*e;
+  zm   = _camTween.fromZm + (_camTween.toZm - _camTween.fromZm)*e;
+  if(t>=1) _camTween = null;
+}
 x.clearRect(0,0,W,H);
 
 // === BACKGROUND: deep space gradient ===
@@ -866,10 +1020,27 @@ Object.values(window._galaxyCache).forEach(g=>{
 // === RIPPLES ===
 ripples=ripples.filter(r=>{r.radius+=3;r.alpha-=0.008;if(r.alpha<=0)return false;x.beginPath();x.arc(r.x,r.y,r.radius,0,Math.PI*2);x.strokeStyle=`rgba(77,166,255,${r.alpha})`;x.lineWidth=1.5;x.stroke();return true;});
 
+// === GATHER MODE — 멤버 좌표 임시 mutate (edges와 nodes가 모두 같은 좌표 사용하도록 edges 전에 적용) ===
+const _gp = _gatherProgress();
+const _gatherSnapshot = [];
+if (gatherMode && _gp) {
+  gatherMode.members.forEach((info, nb) => {
+    _gatherSnapshot.push({ n: nb, x: nb.x, y: nb.y });
+    nb.x = info.fromX + (info.toX - info.fromX) * _gp.progress;
+    nb.y = info.fromY + (info.toY - info.fromY) * _gp.progress;
+  });
+}
+
 // === EDGES ===
 // === 엣지 그리기 (평행 offset + 방향 화살표 + 선택 강조) ===
 const ARROW_TYPES = new Set(['subsidiary','associate','investment','dart_filing']);  // 방향성 있는 관계만 화살표
 edges.forEach(e=>{
+  // gather 활성 시 center↔member 외 엣지는 숨김 (중심에서 모인 멤버로의 명시적 연결만 표시)
+  if (gatherMode) {
+    const isCenterEdge = (e.a === gatherMode.center && gatherMode.members.has(e.b))
+                      || (e.b === gatherMode.center && gatherMode.members.has(e.a));
+    if (!isCenterEdge) return;
+  }
   const isH=hov&&(e.a.n===hov.n||e.b.n===hov.n);
   const isA=alertOn&&alertSrc&&(e.a.n===alertSrc||e.b.n===alertSrc);
   const fa=flt==='all'||e.a.s===flt,fb=flt==='all'||e.b.s===flt;
@@ -932,30 +1103,38 @@ edges.forEach(e=>{
 
 // === NODES: 큰 회사는 행성, 작은 회사는 별(star)로 렌더 ===
 const selNeighbors = sel ? new Set(edges.filter(e=>e.a===sel||e.b===sel).flatMap(e=>[e.a,e.b])) : null;
-// 스타 임계치: sz < 1.1 이면 별처럼, 그 이상이면 행성
+// 스타 임계치: sz < 1.1 이면 별처럼, 그 이상이면 행성. gather 멤버는 임계와 무관하게 별로 강제.
 const STAR_THRESHOLD = 1.1;
 nodes.forEach(n=>{
   const filtered=flt!=='all'&&n.s!==flt;
   const selFaded = sel && n!==sel && (!selNeighbors || !selNeighbors.has(n));
+  const isGatherCenter = gatherMode && gatherMode.center === n;
+  const isGatherMember = gatherMode && gatherMode.members.has(n);
+  const gatherFaded = gatherMode && !isGatherCenter && !isGatherMember;
   const r=n.sz*18;
   const pulse=Math.sin(n.pp)*0.08+1;
   const pr=r*pulse;
 
   x.save();
-  if(selFaded) x.globalAlpha = 0.15;
+  if(selFaded || gatherFaded) x.globalAlpha = 0.12;
 
   const isH=hov&&hov.n===n.n,isS=sel&&sel.n===n.n;
   const alpha=filtered?0.15:1;
   const col=n.col;
   const hr=parseInt(col.slice(1,3),16),hg=parseInt(col.slice(3,5),16),hb=parseInt(col.slice(5,7),16);
+  // gather 멤버는 작은 별로 강제 (기업 규모 무관). pr 새로 계산.
+  const _origPr = pr;
+  const _renderPr = isGatherMember ? 8 : pr;
 
-  // === SMALL NODES → STARS ===
-  if(n.sz < STAR_THRESHOLD && !isS && !isH){
+  // === SMALL NODES → STARS (gather 멤버는 sz 무관하게 별 분기로) ===
+  if((n.sz < STAR_THRESHOLD || isGatherMember) && !isS && !isH){
     // Alert glow still applies
     if(n.glow>0.01){const gr=pr*(2.5+n.glow*2);const g=x.createRadialGradient(n.x,n.y,pr*0.5,n.x,n.y,gr);g.addColorStop(0,n.n===alertSrc?`rgba(251,191,36,${n.glow*0.5})`:`rgba(77,166,255,${n.glow*0.4})`);g.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=g;x.beginPath();x.arc(n.x,n.y,gr,0,Math.PI*2);x.fill();}
-    // Star: sparkle + small bright core
-    const twinkle = 0.75 + Math.sin(n.pp*1.5)*0.25;
-    const starR = Math.max(3, pr*0.35);
+    // Star: sparkle + small bright core (gather 멤버는 빠른 깜빡임으로 부각)
+    const twinkle = isGatherMember
+      ? 0.65 + Math.sin(time*5 + n.pp*2)*0.35
+      : 0.75 + Math.sin(n.pp*1.5)*0.25;
+    const starR = isGatherMember ? 4.5 : Math.max(3, pr*0.35);
     // soft halo in sector color
     const haloR = starR*4;
     const halo = x.createRadialGradient(n.x,n.y,0,n.x,n.y,haloR);
@@ -1113,8 +1292,22 @@ nodes.forEach(n=>{
   x.restore();  // selFaded 처리용 globalAlpha 복원
 });
 
+// gather 멤버 좌표 원위치로 복구 (다음 프레임이나 패널 코드가 원좌표 가정)
+if (_gatherSnapshot.length) {
+  _gatherSnapshot.forEach(s => { s.n.x = s.x; s.n.y = s.y; });
+}
+
 // === MASCOT (cat sprite) ===
-if(mascot.targetNode===null||mascot.progress>=1){mascot.waitTimer+=0.016;if(mascot.waitTimer>1.8){mascot.waitTimer=0;pickNextNode();}}
+// gather 활성 시 마스코트는 center로 향함 (자동 점프 차단)
+if (gatherMode && mascot.targetNode !== gatherMode.center) {
+  mascot.prevNode = mascot.targetNode || gatherMode.center;
+  mascot.targetNode = gatherMode.center;
+  mascot.progress = 0;
+  mascot.waitTimer = 0;
+}
+if (!gatherMode) {
+  if(mascot.targetNode===null||mascot.progress>=1){mascot.waitTimer+=0.016;if(mascot.waitTimer>1.8){mascot.waitTimer=0;pickNextNode();}}
+}
 if(mascot.targetNode&&mascot.progress<1){
   mascot.progress=Math.min(1,mascot.progress+0.010);
   const t=mascot.progress;
@@ -1169,6 +1362,14 @@ if(mascot.targetNode && mascot.progress<1){
 x.drawImage(sprite, -catSize/2, -catSize*0.7, catSize, catSize);
 x.restore();
 
+// === SPEECH BUBBLE (gather 활성 + 마스코트 도착 시) ===
+if (gatherMode && mascot.targetNode === gatherMode.center && mascot.progress >= 1) {
+  const text = currentMode === 'disclosure'
+    ? '공시를 확인하려면 나를 쓰다듬어줘'
+    : '재무제표를 확인하려면 나를 쓰다듬어줘';
+  _drawSpeechBubble(text, mascot.x, mascot.y - mascot.bounceY - 30);
+}
+
 // Update prevNode for next hop
 if(mascot.progress>=1&&mascot.targetNode){mascot.prevNode=mascot.targetNode;}
 
@@ -1176,14 +1377,83 @@ x.restore();physics();requestAnimationFrame(draw);}
 
 // ===== INTERACTION =====
 c.addEventListener('mousemove',e=>{if(drag){camX=cs.x+(e.clientX-ds.x);camY=cs.y+(e.clientY-ds.y);return;}const mx=(e.clientX-camX)/zm,my=(e.clientY-camY)/zm;hov=null;nodes.forEach(n=>{const dx=n.x-mx,dy=n.y-my;if(Math.sqrt(dx*dx+dy*dy)<n.sz*22){hov=n;c.style.cursor='pointer';}});if(!hov)c.style.cursor='grab';});
-c.addEventListener('mousedown',e=>{const mx=(e.clientX-camX)/zm,my=(e.clientY-camY)/zm;let clicked=null;nodes.forEach(n=>{const dx=n.x-mx,dy=n.y-my;if(Math.sqrt(dx*dx+dy*dy)<n.sz*22)clicked=n;});if(clicked){sel=clicked;if(currentMode==='analyze')showAnalyze(clicked);else if(currentMode==='disclosure')showDisclosure(clicked);else showTimemachine(clicked);}else{sel=null;closePanel();drag=true;ds={x:e.clientX,y:e.clientY};cs={x:camX,y:camY};c.style.cursor='grabbing';}});
+c.addEventListener('mousedown',e=>{
+  _cancelCamTween();
+  const mx=(e.clientX-camX)/zm, my=(e.clientY-camY)/zm;
+  // 1) 고양이 클릭 우선 판정 (gather 활성 시 마스코트가 클릭 행성 위에 있고 hit 영역을 가짐)
+  if (gatherMode && _hitMascot(mx, my)) {
+    _onMascotClick();
+    return;
+  }
+  // 2) 노드 hit 검사
+  let clicked=null;
+  nodes.forEach(n=>{const dx=n.x-mx,dy=n.y-my;if(Math.sqrt(dx*dx+dy*dy)<n.sz*22)clicked=n;});
+  if(clicked){
+    sel=clicked;
+    // analyze·disclosure 모드는 gather 효과 거치고 고양이 쓰다듬기로 패널 호출.
+    // timemachine은 사용자 결정으로 기존 즉시 패널 동작 유지.
+    if (currentMode === 'timemachine') {
+      showTimemachine(clicked);
+    } else {
+      // 동일 행성 재클릭은 no-op, 다른 행성 클릭이면 재구성
+      if (gatherMode && gatherMode.center === clicked) return;
+      _enterGatherMode(clicked);
+    }
+  } else {
+    // 배경 클릭 → gather 해제 또는 panel 닫기
+    if (gatherMode) {
+      _exitGatherMode();
+      sel = null;
+    } else {
+      sel=null;
+      closePanel();
+    }
+    drag=true;ds={x:e.clientX,y:e.clientY};cs={x:camX,y:camY};
+    c.style.cursor='grabbing';
+  }
+});
+// 마스코트 hit 영역 — gather 활성 시 마스코트가 center 위에 있는 상태에서만 클릭 인정.
+// 좌표는 world space. mascot.bounceY는 시각적 hop 오프셋이므로 hit 영역에는 미적용.
+function _hitMascot(mx, my){
+  if (!gatherMode || !mascot.targetNode) return false;
+  const cx = mascot.x;
+  const cy = mascot.y - 14;  // sprite 중심이 mascot.y에서 살짝 위 (cat sprite anchor 보정)
+  const dx = mx - cx, dy = my - cy;
+  return Math.sqrt(dx*dx + dy*dy) < 38;
+}
+function _onMascotClick(){
+  if (!gatherMode) return;
+  const center = gatherMode.center;
+  if (currentMode === 'analyze') {
+    showAnalyze(center);
+  } else if (currentMode === 'disclosure') {
+    if (typeof openFullDisclosure === 'function') openFullDisclosure(center);
+    else showDisclosure(center);  // Stage 4 미구현 시 폴백
+  }
+}
 // ESC 키로 선택 해제
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){sel=null;closePanel();}});
 c.addEventListener('mouseup',()=>{drag=false;c.style.cursor='grab';});
 c.addEventListener('wheel',e=>{const d=e.deltaY>0?0.9:1.1;const mx=e.clientX,my=e.clientY;const wx=(mx-camX)/zm,wy=(my-camY)/zm;zm=Math.max(0.2,Math.min(4,zm*d));camX=mx-wx*zm;camY=my-wy*zm;e.preventDefault();},{passive:false});
 
 function closePanel(){document.getElementById('panel').classList.remove('open');sel=null;if(typeof _chatSetContext==='function')_chatSetContext(null);}
-function filter(f,btn){flt=f;document.querySelectorAll('.hud-sub button').forEach(b=>b.classList.remove('on'));btn.classList.add('on');}
+function filter(f,btn){
+  flt=f;
+  document.querySelectorAll('.hud-sub button').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  // 섹터 탭 → 해당 은하 중심으로 부드러운 이동 (전체 → 원래 뷰)
+  if(f==='all'){
+    const baseZm = 0.62;
+    _panTo((W/2)*(1-baseZm), (H/2)*(1-baseZm), baseZm, 600);
+  } else if(sectors[f]){
+    const SPAN = Math.max(W,H)*0.80;
+    const wx = W/2 + sectors[f].cx*SPAN;
+    const wy = H/2 + sectors[f].cy*SPAN;
+    const targetZm = 1.5;  // 섹터 줌 레벨 (은하가 화면 절반 차지)
+    const c = _camForWorldCenter(wx, wy, targetZm);
+    _panTo(c.camX, c.camY, targetZm, 600);
+  }
+}
 function simAlert(){alertOn=true;alertSrc='삼성전자';document.getElementById('alert').classList.add('show');const src=nodes.find(n=>n.n==='삼성전자');if(src)for(let i=0;i<3;i++)setTimeout(()=>ripples.push({x:src.x,y:src.y,radius:src.sz*18,alpha:0.6}),i*400);setTimeout(()=>{alertOn=false;alertSrc=null;},10000);}
 
 // ===== PANEL: ANALYZE =====
@@ -1248,6 +1518,103 @@ function closeFullAnalysis() {
 }
 function _fullAnalysisEsc(e) {
   if (e.key === 'Escape') closeFullAnalysis();
+}
+
+// === 공시 풀스크린 오버레이 (Stage 4) — analyze 패턴 미러 ===
+// disclosures.json 의 회사별 공시 + 분기 재무 8건을 inline 렌더.
+// AI 4섹션 분리는 _parseDiscSummary / _renderDiscSections 재사용.
+function openFullDisclosure(n) {
+  if (!n) return false;
+  const overlay = document.getElementById('fullDisclosure');
+  const titleEl = document.getElementById('fullDisclosureTitle');
+  const subEl = document.getElementById('fullDisclosureSubtitle');
+  const dartLink = document.getElementById('fullDisclosureDartLink');
+  const body = document.getElementById('fullDisclosureBody');
+  if (!overlay || !body) return false;
+
+  titleEl.textContent = `${n.n} 공시`;
+  subEl.textContent = n.t ? `${n.t} · ${n.s || ''}` : (n.s || '');
+  if (n.dart_url) {
+    dartLink.href = n.dart_url;
+    dartLink.style.display = 'inline-block';
+  } else {
+    dartLink.style.display = 'none';
+    dartLink.removeAttribute('href');
+  }
+
+  // 공시 카드 (최근 5건)
+  const discList = (n.disc || []);
+  let cardsHtml;
+  if (discList.length === 0) {
+    cardsHtml = '<div class="disc-empty">📭 이 기업의 공시 데이터가 아직 수집되지 않았습니다</div>';
+  } else {
+    cardsHtml = discList.map((d, idx) => {
+      const impactBadge = d.high_impact
+        ? '<span style="font-size:10px;padding:2px 8px;border-radius:6px;background:rgba(248,113,113,0.18);color:#fca5a5;font-weight:600;margin-left:8px">⚠ HIGH IMPACT</span>'
+        : '';
+      const dilText = d.dilution_ratio != null
+        ? `<div style="font-size:11px;color:#fbbf24;margin-top:4px">희석률 ${(d.dilution_ratio*100).toFixed(1)}%</div>`
+        : '';
+      const parsed = _parseDiscSummary(d.summary);
+      let summaryBlock = '';
+      if (parsed.hasStructured) {
+        summaryBlock = `<div style="margin-top:10px">${_renderDiscSections(parsed)}</div>`;
+      } else if (d.summary) {
+        summaryBlock = `<div style="margin-top:10px;font-size:12px;color:#94a3b8;white-space:pre-wrap;line-height:1.6">${_escHtml(d.summary)}</div>`;
+      }
+      return `
+        <div class="disc-card">
+          <div class="disc-meta">${d.date || '-'} · ${d.type || '기타'}${impactBadge}</div>
+          <div class="disc-title">${_escHtml(d.title || '')}</div>
+          ${dilText}
+          ${summaryBlock}
+        </div>`;
+    }).join('');
+  }
+
+  // 분기 재무 추이 (최근 8분기)
+  const stmts = (n.statements || []).slice(0, 8);
+  let stmtsHtml = '';
+  if (stmts.length > 0) {
+    stmtsHtml = `
+      <div class="stmt-table">
+        <div style="font-size:13px;font-weight:600;color:#4da6ff;margin-bottom:10px">📈 분기 재무 추이 (최근 ${stmts.length}분기)</div>
+        <div class="stmt-row"><span>시점</span><span>매출(조)</span><span>영업이익(조)</span><span>ROE%</span></div>
+        ${stmts.map(s => `
+          <div class="stmt-row">
+            <span style="color:#cbd5e1">${s.year}Q${s.quarter}</span>
+            <span>${s.revenue != null ? (s.revenue/1e12).toFixed(1) : '-'}</span>
+            <span style="color:${s.operating_income>=0?'#4ade80':'#f87171'}">${s.operating_income != null ? (s.operating_income/1e12).toFixed(2) : '-'}</span>
+            <span>${s.roe != null ? s.roe.toFixed(1) : '-'}</span>
+          </div>
+        `).join('')}
+      </div>`;
+  }
+
+  body.innerHTML = `
+    <div style="font-size:13px;color:#94a3b8;margin-bottom:14px">
+      ${discList.length > 0 ? `최근 공시 ${discList.length}건` : '공시 데이터 없음'}
+    </div>
+    ${cardsHtml}
+    ${stmtsHtml}
+  `;
+  body.scrollTop = 0;
+
+  overlay.style.display = 'block';
+  document.addEventListener('keydown', _fullDisclosureEsc);
+  if (typeof _chatSetContext === 'function') _chatSetContext(n);
+  return true;
+}
+function closeFullDisclosure() {
+  const overlay = document.getElementById('fullDisclosure');
+  const dartLink = document.getElementById('fullDisclosureDartLink');
+  if (overlay) overlay.style.display = 'none';
+  if (dartLink) { dartLink.style.display = 'none'; dartLink.removeAttribute('href'); }
+  document.removeEventListener('keydown', _fullDisclosureEsc);
+  if (typeof _chatSetContext === 'function') _chatSetContext(null);
+}
+function _fullDisclosureEsc(e) {
+  if (e.key === 'Escape') closeFullDisclosure();
 }
 
 function showAnalyze(n) {
