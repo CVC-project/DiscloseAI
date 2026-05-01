@@ -91,14 +91,14 @@ EXCLUDE_PATTERNS = [
     r"보고서\s*제출",
     r"IR\s*개최",
     r"소수주주권.*행사",
-    r"임원주주특정증권등소유보고서",   # 정기 의무 신고, 실질 거래 없음
-    r"의결권대리행사권유참고서류",      # 위임장 권유 서류, 투자 판단 무관
+    r"임원주주특정증권등소유보고서",  # 정기 의무 신고, 실질 거래 없음
+    r"의결권대리행사권유참고서류",  # 위임장 권유 서류, 투자 판단 무관
 ]
 
 # 저장은 하되 Groq 분석 생략 — 나중에 backfill 최하위 순위
 GROQ_SKIP_PATTERNS = [
-    r"최대주주등소유주식변동신고서",    # 담보제공·소량처분 등 단순 신고
-    r"증권발행실적보고서",              # 이미 발행된 것의 사후 보고
+    r"최대주주등소유주식변동신고서",  # 담보제공·소량처분 등 단순 신고
+    r"증권발행실적보고서",  # 이미 발행된 것의 사후 보고
 ]
 
 # collect()에서 즉시 Groq 분석 — 가장 중요한 공시
@@ -167,8 +167,17 @@ def _is_groq_immediate(report_nm: str) -> bool:
 
 
 _DISPLAY_WORTHY_TYPES = {
-    "정기보고서", "증자", "전환사채", "BW", "M&A/분할", "영업양도",
-    "계약", "CAPEX", "실적", "자기주식", "채권발행",
+    "정기보고서",
+    "증자",
+    "전환사채",
+    "BW",
+    "M&A/분할",
+    "영업양도",
+    "계약",
+    "CAPEX",
+    "실적",
+    "자기주식",
+    "채권발행",
 }
 _DISPLAY_WORTHY_TITLE = re.compile(r"사업보고서|분기보고서|반기보고서")
 
@@ -285,8 +294,8 @@ _TARGET_SECTIONS: list[tuple[str, list[str]]] = [
 _FINSTATE_STOP = re.compile(r"주\s*석|재무제표\s*주석|연결재무제표\s*주석")
 
 
-_MAX_SECTION_CHARS = 4500   # 섹션당 최대 글자
-_MAX_TOTAL_CHARS = 13000    # 전체 합산 최대 글자 (Groq 413 방지)
+_MAX_SECTION_CHARS = 4500  # 섹션당 최대 글자
+_MAX_TOTAL_CHARS = 13000  # 전체 합산 최대 글자 (Groq 413 방지)
 
 
 def _extract_annual_sections(text: str) -> str:
@@ -317,7 +326,10 @@ def _extract_annual_sections(text: str) -> str:
                     break
 
         remaining = _MAX_TOTAL_CHARS - total
-        chunk = text[found_pos : found_pos + min(next_pos - found_pos, _MAX_SECTION_CHARS, remaining)]
+        chunk = text[
+            found_pos : found_pos
+            + min(next_pos - found_pos, _MAX_SECTION_CHARS, remaining)
+        ]
 
         if section_name == "재무제표":
             m = _FINSTATE_STOP.search(chunk)
@@ -779,11 +791,11 @@ def _analyze_with_groq(
     except Exception as e:
         err_str = str(e)
         # 413 페이로드 초과 → 단건 스킵 (전체 중단 X)
-        if re.search(r'\b413\b', err_str) or "request_too_large" in err_str.lower():
+        if re.search(r"\b413\b", err_str) or "request_too_large" in err_str.lower():
             print(f"  [WARN] Groq 페이로드 초과 (단건 스킵): {corp_name} | {report_nm}")
             return None
         # 429 한도 초과 → 오늘 전체 중단
-        if re.search(r'\b429\b', err_str) or "rate_limit" in err_str.lower():
+        if re.search(r"\b429\b", err_str) or "rate_limit" in err_str.lower():
             print(f"  [WARN] Groq 한도 초과 — 오늘 중단")
             raise
         print(f"  [WARN] Groq 분석 실패 (건너뜀): {e}")
@@ -1162,9 +1174,19 @@ def backfill_ai(max_records: int = 50) -> int:
         (DisclosureLocal.title.contains("사업보고서"), 0),
         (DisclosureLocal.title.contains("분기보고서"), 0),
         (DisclosureLocal.title.contains("반기보고서"), 0),
-        (DisclosureLocal.disclosure_type.in_(["증자", "전환사채", "BW", "M&A/분할", "실적"]), 1),
+        (
+            DisclosureLocal.disclosure_type.in_(
+                ["증자", "전환사채", "BW", "M&A/분할", "실적"]
+            ),
+            1,
+        ),
         (DisclosureLocal.disclosure_type.in_(["계약", "CAPEX", "영업양도"]), 2),
-        (DisclosureLocal.disclosure_type.in_(["임원변동", "자기주식", "채권발행", "최대주주변동", "내부자거래"]), 3),
+        (
+            DisclosureLocal.disclosure_type.in_(
+                ["임원변동", "자기주식", "채권발행", "최대주주변동", "내부자거래"]
+            ),
+            3,
+        ),
         else_=4,
     )
     pending = (

@@ -18,6 +18,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from dotenv import load_dotenv
+
 load_dotenv()
 
 from google import genai
@@ -46,8 +47,9 @@ class ChatRequest(BaseModel):
     history: list = []
 
 
-def _build_system_prompt(corp_name: str, disc_title: str, disc_type: str,
-                          disc_date: str, summary: str) -> str:
+def _build_system_prompt(
+    corp_name: str, disc_title: str, disc_type: str, disc_date: str, summary: str
+) -> str:
     context_block = ""
     if summary:
         context_block = f"""
@@ -83,7 +85,9 @@ async def _stream_gemini(system_prompt: str, history: list, question: str):
     gemini_history = []
     for h in history:
         role = "user" if h.get("role") == "user" else "model"
-        gemini_history.append(types.Content(role=role, parts=[types.Part(text=h.get("content", ""))]))
+        gemini_history.append(
+            types.Content(role=role, parts=[types.Part(text=h.get("content", ""))])
+        )
 
     config = types.GenerateContentConfig(
         system_instruction=system_prompt,
@@ -91,7 +95,9 @@ async def _stream_gemini(system_prompt: str, history: list, question: str):
     )
 
     try:
-        chat = _client.chats.create(model=GEMINI_MODEL, history=gemini_history, config=config)
+        chat = _client.chats.create(
+            model=GEMINI_MODEL, history=gemini_history, config=config
+        )
         for chunk in chat.send_message_stream(question):
             if chunk.text:
                 data = json.dumps({"text": chunk.text}, ensure_ascii=False)
@@ -125,7 +131,9 @@ def serve_report():
     report_path = Path(__file__).parent / "report_latest.html"
     if report_path.exists():
         return HTMLResponse(content=report_path.read_text(encoding="utf-8"))
-    return HTMLResponse(content="<p>report_latest.html 없음. 먼저 generate_report.py를 실행하세요.</p>")
+    return HTMLResponse(
+        content="<p>report_latest.html 없음. 먼저 generate_report.py를 실행하세요.</p>"
+    )
 
 
 # ── 단독 실행 시 ──────────────────────────────────────────

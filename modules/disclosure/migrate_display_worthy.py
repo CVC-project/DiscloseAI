@@ -22,14 +22,20 @@ def main():
     with engine.connect() as conn:
         cols = [
             row[1]
-            for row in conn.execute(text("PRAGMA table_info(disclosure_local)")).fetchall()
+            for row in conn.execute(
+                text("PRAGMA table_info(disclosure_local)")
+            ).fetchall()
         ]
         if "display_worthy" not in cols:
             conn.execute(
-                text("ALTER TABLE disclosure_local ADD COLUMN display_worthy INTEGER DEFAULT 0")
+                text(
+                    "ALTER TABLE disclosure_local ADD COLUMN display_worthy INTEGER DEFAULT 0"
+                )
             )
             conn.execute(
-                text("CREATE INDEX IF NOT EXISTS ix_disclosure_local_display_worthy ON disclosure_local (display_worthy)")
+                text(
+                    "CREATE INDEX IF NOT EXISTS ix_disclosure_local_display_worthy ON disclosure_local (display_worthy)"
+                )
             )
             conn.commit()
             print("[마이그레이션] display_worthy 컬럼 추가 완료")
@@ -54,7 +60,9 @@ def main():
     session.commit()
     session.close()
 
-    print(f"[완료] 전체 {total}건 처리 | display_worthy=True: {worthy_count}건 | False: {total - worthy_count}건")
+    print(
+        f"[완료] 전체 {total}건 처리 | display_worthy=True: {worthy_count}건 | False: {total - worthy_count}건"
+    )
 
 
 if __name__ == "__main__":

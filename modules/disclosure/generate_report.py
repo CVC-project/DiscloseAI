@@ -42,6 +42,7 @@ def escape(s: str) -> str:
 
 import re as _re
 
+
 def _mark_uncertain(text: str) -> str:
     """[추정] 태그 이후 텍스트를 회색 이탤릭으로 변환."""
     return _re.sub(
@@ -102,8 +103,16 @@ def _disc_row(r) -> str:
     """모달 안 공시 한 줄 (클릭 시 분석 펼침)."""
     color = TYPE_COLORS.get(r.disclosure_type or "기타", "#94a3b8")
     high_badge = '<span class="badge high">⚠ HIGH</span>' if r.high_impact else ""
-    ai_badge = '<span class="badge ai">AI</span>' if r.ai_analyzed else '<span class="badge tmpl">템플릿</span>'
-    dilution = f'<span class="dilution">희석률 {fmt_ratio(r.dilution_ratio)}</span>' if (r.dilution_ratio is not None and r.dilution_ratio > 0) else ""
+    ai_badge = (
+        '<span class="badge ai">AI</span>'
+        if r.ai_analyzed
+        else '<span class="badge tmpl">템플릿</span>'
+    )
+    dilution = (
+        f'<span class="dilution">희석률 {fmt_ratio(r.dilution_ratio)}</span>'
+        if (r.dilution_ratio is not None and r.dilution_ratio > 0)
+        else ""
+    )
     dart_link = ""
     if r.disclosure_id:
         dart_link = f'<a class="dart-link" href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo={r.disclosure_id}" target="_blank" onclick="event.stopPropagation()">원문↗</a>'
@@ -172,21 +181,26 @@ def generate(days: int = 7, all_disclosures: bool = False) -> str:
 
     # 검색용 JS 데이터 (기업명 + 공시 제목 목록)
     search_data = {
-        name: [r.title or "" for r in corp_rows]
-        for name, corp_rows in sorted_companies
+        name: [r.title or "" for r in corp_rows] for name, corp_rows in sorted_companies
     }
 
     # 기업 카드 그리드
     corp_cards_html = ""
     for corp_name, corp_rows in sorted_companies:
         high_in_corp = sum(1 for r in corp_rows if r.high_impact)
-        types_in_corp = list({r.disclosure_type for r in corp_rows if r.disclosure_type})
+        types_in_corp = list(
+            {r.disclosure_type for r in corp_rows if r.disclosure_type}
+        )
         type_dots = "".join(
             f'<span class="tdot" style="background:{TYPE_COLORS.get(t,"#94a3b8")}" title="{escape(t)}"></span>'
             for t in types_in_corp[:5]
         )
         high_cls = "corp-high" if high_in_corp else ""
-        high_mark = f'<span class="corp-high-mark">⚠ {high_in_corp}</span>' if high_in_corp else ""
+        high_mark = (
+            f'<span class="corp-high-mark">⚠ {high_in_corp}</span>'
+            if high_in_corp
+            else ""
+        )
         name_esc = escape(corp_name)
         corp_cards_html += f"""<div class="corp-card {high_cls}" data-corp="{name_esc}" data-titles="{escape('|'.join(r.title or '' for r in corp_rows))}" onclick="openModal('{name_esc}')">
   <div class="corp-card-top">
@@ -660,7 +674,9 @@ def main():
     parser.add_argument("--all", action="store_true", help="저가치 공시 포함 전체 출력")
     args = parser.parse_args()
 
-    print(f"[리포트 생성] 최근 {args.days}일 공시 조회 중{'(전체)' if args.all else ''}...")
+    print(
+        f"[리포트 생성] 최근 {args.days}일 공시 조회 중{'(전체)' if args.all else ''}..."
+    )
     html = generate(days=args.days, all_disclosures=args.all)
 
     out_path = args.out or os.path.join(
