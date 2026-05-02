@@ -1280,6 +1280,27 @@
       font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
       font-size: 14.5px
     }
+    /* kind 별 모드 — body 자체 레이아웃 변경 (cardnews는 풀 fit, chat-first는 flex column) */
+    #fullTimemachineBody.tm-mode-cardnews {
+      padding: 0;
+      overflow: hidden;
+      display: flex;
+      align-items: stretch;
+      justify-content: center
+    }
+    #fullTimemachineBody.tm-mode-cardnews .tm-cardnews-frame {
+      width: 100%;
+      max-width: 560px;
+      height: 100%;
+      border: 0;
+      background: #0f1117;
+      box-shadow: 0 0 60px rgba(94, 234, 212, 0.05)
+    }
+    #fullTimemachineBody.tm-mode-chat {
+      padding: 0;
+      overflow: hidden;
+      display: flex
+    }
     #fullTimemachineBody .tm-section {
       background: #1e293b;
       border: 1px solid #334155;
@@ -1443,43 +1464,57 @@
     }
 
     /* Chat-first UX (timemachine kind) — modules/price/timemachine.html 차용 */
+    /* shell이 body 전체를 flex column으로 채우고, msgs만 flex:1 + 내부 스크롤 */
     #fullTimemachineBody .tm-chat-shell {
+      flex: 1;
       display: flex;
       flex-direction: column;
-      height: calc(100vh - 62px - 10vh);
-      max-width: 880px;
+      width: 100%;
+      max-width: 920px;
       margin: 0 auto;
-      gap: 10px
+      padding: 18px 28px 18px;
+      gap: 8px;
+      min-height: 0;       /* flex 자식의 overflow 가 동작하도록 */
+      box-sizing: border-box
     }
     #fullTimemachineBody .tm-chat-head {
-      padding: 4px 4px 12px;
+      flex: 0 0 auto;
+      padding: 0 0 10px;
       border-bottom: 1px solid #334155
     }
     #fullTimemachineBody .tm-chat-co {
-      font-size: 19px;
+      font-size: 18px;
       font-weight: 700;
       color: #f8fafc;
-      margin-bottom: 4px
+      margin-bottom: 3px
     }
     #fullTimemachineBody .tm-chat-era {
-      font-size: 13px;
+      font-size: 12.5px;
       color: #5eead4;
       letter-spacing: 0.3px
     }
     #fullTimemachineBody .tm-chat-msgs {
-      flex: 1;
+      flex: 1 1 auto;
       overflow-y: auto;
-      padding: 12px 4px;
+      padding: 8px 4px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      min-height: 200px
+      gap: 8px;
+      min-height: 100px    /* 너무 작아지지 않게 */
     }
     #fullTimemachineBody .tm-chat-toolbar {
+      flex: 0 0 auto;
       display: flex;
       gap: 8px;
-      padding: 4px 0;
+      padding: 6px 0;
       border-top: 1px solid #1e293b
+    }
+    #fullTimemachineBody .tm-chat-shell .tm-chat-input-row {
+      flex: 0 0 auto;
+      margin-top: 0
+    }
+    #fullTimemachineBody .tm-chat-hints {
+      flex: 0 0 auto
     }
     #fullTimemachineBody .tm-tb-btn {
       padding: 8px 14px;
@@ -3728,7 +3763,9 @@
       const overlay = document.getElementById('fullTimemachine');
       overlay.style.display = 'none';
       document.removeEventListener('keydown', _fullTimemachineEsc);
-      // tm 채팅 상태 초기화
+      // body 모드 클래스 cleanup + 채팅 상태 초기화
+      const body = document.getElementById('fullTimemachineBody');
+      if (body) body.classList.remove('tm-mode-cardnews', 'tm-mode-chat');
       window.__tmChatHistory = [];
     }
     function _fullTimemachineEsc(e) {
@@ -3778,6 +3815,9 @@
       _tmCurrent = sc;
       _tmCurrentKind = opts.kind || 'timemachine';
       window.__tmChatHistory = [];
+      // body 모드 클래스 reset → 진입 함수가 자기 모드 class 를 추가
+      const body = document.getElementById('fullTimemachineBody');
+      body.classList.remove('tm-mode-cardnews', 'tm-mode-chat');
       if (_tmCurrentKind === 'cardnews') {
         _tmRenderCardnews(sc);
       } else if (_tmCurrentKind === 'timemachine') {
@@ -3796,8 +3836,9 @@
       };
       const file = CARDNEWS_FILES[sc.id];
       if (file) {
-        body.innerHTML = `<iframe src="${file}"
-          style="position:absolute;inset:0;width:100%;height:100%;border:0;background:#0f1117"
+        body.classList.add('tm-mode-cardnews');
+        // 모바일 디자인(max-width 480px)에 맞춰 iframe을 좁게 중앙 정렬, 풀 height
+        body.innerHTML = `<iframe src="${file}" class="tm-cardnews-frame"
           title="카드뉴스 — ${_escHtmlSafe(sc.company)}"></iframe>`;
       } else {
         body.innerHTML = `<div style="padding:80px 24px;text-align:center;color:#94a3b8;font-size:15px;line-height:1.7">
@@ -3831,6 +3872,7 @@
         return m ? `${m[1]}년 ${parseInt(m[2], 10)}월 ${parseInt(m[3], 10)}일` : (raw || '');
       };
       const keyMissing = !window.GEMINI_API_KEY || window.GEMINI_API_KEY === 'YOUR_API_KEY_HERE';
+      body.classList.add('tm-mode-chat');
       body.innerHTML = `
         <div class="tm-chat-shell">
           <div class="tm-chat-head">
