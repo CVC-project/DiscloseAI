@@ -2,6 +2,142 @@
 
 > `/check` skill 실행 시 아래 형식으로 자동 기록됩니다.
 
+## 2026-05-02 (Phase G — 제대로 된 타임머신 MVP: 4-phase quiz UX + Gemini 자유대화 + 탭 전용 UI)
+
+- **작업 범위**: 타임머신 모드를 우측 슬라이드 정적 패널 1장(매수/관망/매도 즉시 정답) → **풀스크린 4-phase quiz UX + Gemini 자유대화 + 탭 전용 하단 3분할 콘텐츠 패널**로 전면 개편. 사용자 직접 지시:
+  1. 행성 클릭 → cat hop + 말풍선 → cat 클릭 → 풀스크린 4-phase 진입 (행성 직접 진입 경로)
+  2. 타임머신 탭 좌하단 관계 legend 숨김 + 화면 하단 3분할 콘텐츠 패널 (카드뉴스·퀴즈·타임머신) — **다른 탭은 무영향**
+  3. 패널 카드 클릭 → 카메라 fly + cat hop + 말풍선 → cat 클릭 → 풀스크린 진입 (카드 진입 경로)
+  4. 다중 시나리오 행성(삼성전자 id=3·11) → 행성 직접 클릭 시 시나리오 선택 picker 카드 2개 표시. 카드 진입은 단일 시나리오 강제
+
+### Stage 1 — 데이터 인덱싱 + 클릭 분기 (dashboard.html)
+- `scenarioByTicker` 단건 매핑(`Object.fromEntries`) → `scenariosByTicker` 배열 매핑으로 변경. 같은 ticker 다중 시나리오 보존
+- 노드에 `n.tmAll = scenarios[]` 추가. `n.tm` 단일 객체는 legacy `showTimemachine` 폴백 호환을 위해 첫 시나리오로 유지
+- 콘텐츠 활성화 화이트리스트(JS 상수): `TM_CARDNEWS_IDS=[11]` / `TM_QUIZ_IDS=[1,2,3,4,5,8,10,11,12,13,14,15]` / `TM_FREECHAT_IDS=[1,2,3]` (price.quiz_data 기반)
+- 신규 state: `tmFocusNode`, `tmFocusScenario`, `_tmPanelsRendered`. 클릭 핸들러에서 timemachine 모드 분기를 `_enterTimemachineFocus(clicked)` 호출로 교체 (gather 우회 즉시 패널 → 카메라 pan + cat hop)
+- mascot 애니메이션 로직에 `_focusNode = gatherMode?.center || tmFocusNode` 일원화. `_hitMascot`도 timemachine focus 감지하도록 확장
+- 말풍선: 시나리오 보유 → "타임머신을 체험하려면 나를 클릭해줘" / 미보유 → "이 기업의 시나리오는 아직 준비되지 않았습니다" + cat 클릭 비활성
+
+### Stage 2 — 타임머신 탭 전용 UI (CSS + HTML)
+- `body.mode-tm` 클래스 토글(setMode에서 자동) → `body.mode-tm .legend.legend-edge { display:none }` (좌하단 관계 범례만 숨김, 다른 탭 영향 X)
+- `#tmContentPanels` 신규 — 3-column grid (`grid-template-columns: 1fr 1fr 1fr`), 화면 하단 고정, 채팅 사이드바 폭 따라 right offset 동기 (`var(--chat-sidebar-w)`). 좁은 화면(<1100px) 세로 스택
+- 각 패널 좌측 border 컬러 차별화: 카드뉴스 amber / 퀴즈 violet / 타임머신 cyan. timemachine.html picker 디자인 차용 (날짜·카테고리 badge·난이도·회사명·제목·CTA)
+- 카운트 뱃지 (`(N건)`) — TM_CARDNEWS_IDS·TM_QUIZ_IDS·TM_FREECHAT_IDS 화이트리스트로 자동 계산
+
+### Stage 3 — 풀스크린 타임머신 오버레이 (HTML/CSS)
+- `<div id="fullTimemachine">` + `#fullTimemachineCard` (fullDisclosure 미러). 통합 셀렉터에 추가: `#fullAnalysisCard, #fullDisclosureCard, #fullTimemachineCard` + `body.chat-open` 시 right offset 동기
+- 본문(`#fullTimemachineBody`) 4 phase: tmPhaseA(배경) / tmPhaseB(자유대화) / tmPhaseC(결정 3버튼) / tmPhaseD(정답 reveal)
+- CSS: tm-section 카드, tm-decision 3색 버튼(녹/회/적), tm-big-num 38px, tm-match badge(ok/no), tm-chat 메시지(user/assistant/system), tm-hints 5칩, tm-picker 2열 grid
+
+### Stage 4 — JS 로직 (13 신규 함수, dashboard.html 내)
+- `_renderTmPanels()` — 12건 시나리오 마스터 → 화이트리스트 기반 3패널 분배. setMode('timemachine') 진입 시 1회 (이미 렌더되면 skip)
+- `_tmCardClick(sid)` — 카드 클릭. ticker로 노드 찾기 → `_panTo` 카메라 fly → `tmFocusNode = node`, `tmFocusScenario = sc` 저장 (cat 클릭 시 단일 강제)
+- `_enterTimemachineFocus(node)` — 행성 직접 클릭 진입. 카메라 fly + tmFocusNode set, tmFocusScenario null (picker 분기 가능 상태)
+- `_exitTimemachineFocus()` — 배경 클릭/탭 전환 시 focus 해제
+- `openFullTimemachine(node, forcedScenario?)` — 진입점. forcedScenario가 있으면 즉시 시작 / `tmAll.length === 1` 시 시작 / `length >= 2` 시 picker
+- `_tmShowPicker(scenarios)` / `_tmStartScenarioById(sid)` — 다중 시나리오 picker 렌더 + 카드 클릭 시 단일 진입
+- `_tmStartScenario(sc)` — 4 phase 컨테이너 렌더 + Phase A→B→C 호출
+- `_tmRenderBackground(sc)` — Phase A 배경 카드 (date·category·title·context)
+- `_tmRenderChat(sc)` — Phase B 자유대화. TM_FREECHAT_IDS 미포함이면 phase 자체 생략. 포함 + chat_config 키 미설정이면 안내(graceful fail). 5개 힌트 칩 + 입력란 + Enter 전송
+- `_tmGeminiCall(sc, history)` / `_tmBuildSystem(sc)` / `_tmExtractText(data)` — Gemini 호출 (window.GEMINI_API_KEY, chat_config.local.js 인프라 차용). system prompt에 시점 제약("공시일 이후 사건 절대 언급 금지") + 정답 사전공개 금지 강제
+- `_tmRenderDecision(sc)` — Phase C 3버튼 (수혜/중립/악재)
+- `_tmReveal(userChoice)` — Phase D. 결정 버튼 비활성화 + chosen 표시 → change_pct·kospi_change_pct·excess(종목-코스피)·정답·일치 여부 badge·explanation·refUrl
+- `_tmChatSend()` / `_tmChatAppend(role, text)` / `_tmHintClick(el)` — 자유대화 입출력
+- `closeFullTimemachine()` / `_fullTimemachineEsc(e)` — ESC + × 닫기, tmChatHistory 초기화
+
+### 보안 처리
+- timemachine.html(price 모듈)의 하드코딩 API 키(`AIzaSyBj1VUf...`)는 사용 안 함. dashboard 채팅 사이드바와 동일한 `window.GEMINI_API_KEY` (chat_config.local.js, gitignored) 단일 출처
+- 키 미설정 시 graceful fail — 자유대화 phase만 비활성, 결정·정답은 정상 동작
+
+### 검증
+- `pytest tests/` 470 passed, 8 skipped (회귀 없음)
+- `black --check modules/integration/` clean
+- Playwright E2E:
+  - 타임머신 탭 진입 → `body.mode-tm` 클래스 / 좌하단 legend display:none / 하단 3패널 display:grid / 카운트 (1·12·3) ✅
+  - LG화학 퀴즈 카드 클릭 → 카메라 fly → cat 도착 → 말풍선 "타임머신을 체험하려면 나를 클릭해줘" ✅
+  - cat 클릭 → 풀스크린 오버레이 진입 → Phase A(배경)·B(API 키 안내)·C(3버튼) 렌더 ✅
+  - "악재" 클릭 → Phase D reveal: -11.2% / KOSPI -6.7% / 초과 -4.5%p / 정답 악재 / "당신의 선택과 일치" 뱃지 / lesson / 관련기사 링크 ✅
+  - 삼성전자 행성 직접 클릭 → cat hop → cat 클릭 → 시나리오 picker 카드 2장 (감산결정·자사주소각) ✅
+  - KB금융 (시나리오 미보유) 행성 클릭 → cat 말풍선 "준비되지 않았습니다" / cat 클릭 시 overlay display:none 유지 ✅
+  - 기업분석 탭 복귀 → `body.mode-tm` 제거 / legend display:block / 하단 3패널 display:none ✅
+
+### 명시적 비범위 (이번 PR 제외)
+- **카드뉴스 6슬라이드 통합** (id 11 cardnews_samsung_buyback.html) — 후속 PR. MVP는 카드뉴스 패널에 1건만 노출, 클릭은 quiz UX로 진입
+- **사용자 점수 누적 / localStorage** — Phase D는 매번 일회성
+- **시나리오 추가 수집** — quiz_data.py 12건 그대로
+- **modules/price/timemachine.html 자체 수정** — 하드코딩 API 키는 별도 PR (price 모듈 담당)
+
+## 2026-05-01 (Phase F — 메인 화면 인터랙션: 섹터 줌 · 모임 효과 · 고양이 인터랙션 · 공시 풀스크린)
+
+- **작업 범위**: 메인 대시보드 UX 개편 4가지. 사용자 직접 지시 (auto mode):
+  1. 섹터 탭 클릭 → 해당 은하 중심으로 카메라 줌인 (이전엔 정적, 마우스 스크롤 직접 이동 필요)
+  2. 기업분석/공시 모드에서 행성 클릭 → 즉시 패널 안 띄우고 **연결 기업이 클릭 행성 주위로 모이는 효과** + 비연결 노드 fade out + 모인 기업은 작은 반짝이는 별로 (규모 무관)
+  3. 고양이 마스코트가 클릭 행성 위로 이동 → 모드별 말풍선 ("재무제표/공시를 확인하려면 나를 쓰다듬어줘") → **고양이 클릭 시** 패널/오버레이 호출
+  4. 공시 화면을 우측 슬라이드 패널 → analyze와 동일한 풀스크린 오버레이로 (`openFullDisclosure`)
+- **타임머신 모드는 본 변경 제외** (사용자 명시) — 기존 즉시 패널 동작 유지
+
+### Stage 1 — 섹터 카메라 트윈 (filter() 확장 + _panTo)
+- 신규 `_camTween` state + `_easeInOutCubic` + `_panTo(toX, toY, toZm, dur=600)` + `_camForWorldCenter(wx, wy, zm)` (코드: dashboard.html ~L361-L394)
+- draw() 시작에 트윈 진행도 보간 (~L800)
+- `filter(f, btn)`: f가 sector 키면 `sectors[f].cx/cy * SPAN` 계산 → 화면 중앙에 두는 (camX, camY) 도출 + 줌 레벨 1.5x. f='all'이면 baseZm=0.62 원래 뷰
+- 사용자가 마우스 드래그 시작하면 트윈 자동 취소 (`_cancelCamTween`)
+
+### Stage 2 — 모임 효과 (gatherMode + 렌더 광환)
+- 신규 `gatherMode` state: `{center, members: Map<node, {fromX, fromY, toX, toY}>, startTime, dur:600}` (~L283-L320)
+- `_enterGatherMode(centerNode)`: edges에서 centerNode와 연결된 모든 노드 수집 (모든 섹터 횡단, Set 중복 제거) → 원형 오빗 위치 계산 (10개 이상이면 두 링으로 분배, baseR = max(180, sz*60))
+- 렌더: edges 루프 직전에 `_gatherSnapshot` 으로 멤버 좌표 임시 mutate (트윈 진행도 적용) → 렌더 후 원위치 복구. 엣지는 center↔member만 표시, 다른 엣지 숨김
+- 노드 분기 확장: `(n.sz < STAR_THRESHOLD || isGatherMember) && !isS && !isH` → gather 멤버는 sz 무관 작은 별. 비-(center↔member) 노드는 globalAlpha=0.12
+
+### Stage 3 — 고양이 마스코트 인터랙션
+- gather 활성 시 자동 hopping(`pickNextNode`) 차단, `mascot.targetNode = gatherMode.center` 강제 (~L1226)
+- 마스코트 도착(progress >= 1) 시 말풍선 렌더 (`_drawSpeechBubble` 신규, ~L595): 둥근 사각 + 꼬리 + 펄스 애니메이션, zm 역수 보정으로 화면상 일관 크기. 모드별 텍스트 분기 (analyze: "재무제표를 확인하려면…" / disclosure: "공시를 확인하려면…")
+- mousedown 핸들러 재구성 (~L1450): 1) 마스코트 hit 우선 (`_hitMascot`, 반경 38) → `_onMascotClick` 호출 → 모드별 패널/오버레이. 2) 노드 hit → analyze/disclosure는 `_enterGatherMode` (timemachine은 즉시 `showTimemachine`). 3) 배경 → gather 활성이면 `_exitGatherMode` 아니면 closePanel + drag 시작
+
+### Stage 4 — 공시 풀스크린 오버레이 (`openFullDisclosure`)
+- analyze의 `fullAnalysis` 패턴 미러. iframe 없이 inline 렌더 (분석은 회사별 정적 HTML 있지만 공시는 dashboard 데이터 직접 사용이 더 깔끔)
+- HTML: `#fullDisclosure` 오버레이 + `#fullDisclosureCard` (top 5vh / left 6vw). 헤더 (회사명·티커·섹터·DART 링크·닫기 버튼) + 본문 영역 (`#fullDisclosureBody`)
+- CSS: `#fullAnalysisCard, #fullDisclosureCard` 통합 셀렉터 + chat-open 시 right:372px (사이드바 회피)
+- 공시 카드 렌더: Phase 3에서 만든 `_parseDiscSummary` / `_renderDiscSections` / `_escHtml` 그대로 재사용. high_impact 뱃지·dilution_ratio·분기 재무 8건 표
+- ESC 키로 닫기, body click outside card 영역도 닫기
+- `_onMascotClick`이 disclosure 모드에서 `openFullDisclosure(center)` 호출, 함수 미정의 시 `showDisclosure` 폴백
+
+### 검증
+- `pytest tests/` 470 passed / 8 skipped (회귀 없음)
+- `black --check modules/integration/` clean
+- Playwright E2E:
+  - 반도체 탭 → zm 0.62→1.50 부드러운 이동 + 전체 → 0.62 복귀 ✅
+  - 삼성전자 클릭 → gather, 7개 멤버 (삼성바이오로직스·삼성SDI·삼성중공업 등) ✅
+  - 현대차 클릭 → 5개 멤버로 재구성 ✅
+  - 배경 클릭 → gather 해제 ✅
+  - disclosure 모드 + 마스코트 클릭 → `openFullDisclosure(center)` 호출 ✅
+  - 풀디스클로저 화면: 회사명·DART 링크·공시 3건 카드(4섹션 분리)·분기 재무 표 정상 ✅
+
+### 명시적 비범위
+- 시각 디자인(별빛 더 추가·행성 강화·차트 색상 등) — Phase E와 동일하게 보류
+- timemachine 탭의 모임/고양이 효과 — 사용자 결정으로 추후
+- gather 해제 시 멤버 위치 역방향 트윈 — 현재 즉시 snap (개선 여지)
+
+## 2026-05-01 (Phase E — v2 데이터 + 내용 동기화)
+
+- **작업 범위**: 4개 모듈 v2 PR(#14·#15·#16·#17·#18, 모두 dev에 merge됨) 결과를 integration JSON·dashboard에 반영. **시각 디자인은 현재 톤 유지**(별빛·행성·그라디언트 추가 X) — 사용자 명시 보류. 신규 AI 컨셉(P1·P2·12.x)도 별도 영역.
+- **데이터 재추출** (`python -m modules.integration.extract_data`):
+  - `eqs_summary.json` 47 rows (avg EQS 68.1, v2 점수). 모든 row가 `dart_url`·`percentile`·`history`·`market_cap` 보유
+  - `disclosures.json` 180 disc / 252 stmt. **180/180이 Gemini `[Cash]`/`[Risk]`/`[Hidden Agenda]`/`[Verdict]` 4섹션 완비**
+  - `price_scenarios.json` 12 scenarios (id 6/7/9 제거, 신규 11=삼성 자사주소각·2=HD현대중공업 포함). 12/12 refUrl + dart_url
+- **dashboard.html 수정** (총 6곳, 시각 효과 추가 없이 텍스트·구조만):
+  1. **EQS v2 라벨 동기화** (`mods` 배열 L1298): 발생액 품질→**현금이익률**, 분식 확률→**매출회수 건전성**, 현금흐름 괴리→**부채 건전성**, 이익 지속성→**본업 안정성**, 재무 건전성→**자본 성장성**. `glossary.py` `GlossaryEntry.label` 단일 출처
+  2. **EQS v2 내러티브 동기화** (`_eqsNarration` L1635-1651): 5개 모듈 × good/mid/bad 15개 텍스트를 v2 정의(현금이익률 R≥1.0, 매출회수 D, 부채비율 업종 임계, OM 평균+변동폭, 자본 CAGR)로 재작성. `glossary.py` `intuition`+`benchmark` 차용
+  3. **공시 summary AI 4섹션 파싱·렌더** (신규 `_parseDiscSummary`·`_renderDiscSections`·`_escHtml` 헬퍼 + `showDisclosure` 재작성): 정규식으로 `[Cash]`/`[Risk]`/`[Hidden Agenda]`/`[Verdict]` 분할 → 라벨만 작은 색상(기존 mods 팔레트 #4ade80/#f87171/#a78bfa/#fbbf24) + 본문 #aaa, 배경 박스 추가 X. 비구조 평문은 기존 300자 컷 폴백 유지
+  4. **채팅 context 동기화 누락 보강**: `showAnalyze`/`showDisclosure`/`showTimemachine` 진입 + `closePanel` 종료 시 `_chatSetContext` 호출. 이전엔 `openFullAnalysis` 성공 경로에서만 갱신되어 fallback 패널·공시·타임머신 모드 클릭은 chip이 stale 상태로 남았음
+  5. **timemachine 미준비 안내 동적화** (L1495 fallback 블록): 하드코딩된 "현재 체험 가능한 기업은 15개입니다: 삼성전자·SK하이닉스·…" → `nodes.filter(x => x.has_quiz)` 기반 자동 계산. 현재 12개로 정확 표시 (15→12 변경은 quiz_data.py 정리 결과)
+- **이미 구현되어 있던 것** (검증만): DART 사업보고서 외부 링크(L1209·1287, commit 07b1040), `_sparkline`·`_percentileBadge`(L1313·1315·1319·1321), Gemini 채팅 사이드바 자체(L126-231 + 1852-2152, commit b713372)
+- **검증**:
+  - `pytest tests/` 470 passed, 8 skipped (회귀 없음)
+  - `black --check modules/integration/` clean
+  - Playwright: 삼성전자 노드 → 풀스크린 분석 우회 후 우측 패널 fallback 확인. v2 라벨 5/5 노출, v1 잔재 0건. disclosure 패널에서 4 AI 섹션 100% 매칭, "원문 보기 ▾" 토글 동작. SK스퀘어(quiz 없음) 클릭 시 timemachine 미준비 화면이 동적 "12개" 표시
+- **명시적 비범위** (다음 PR로): 갤럭시 시각 효과(별빛 30개·SVG 행성·슈팅스타·헤일로), EQS 점수 그라디언트, 차트 색상 통일, sparkline SVG 시각 강화, AI 분석 진한 색상 박스, AI_DIRECTION.md의 P1·P2·12.x 신기능
+- **외부 의존**: financial v2 collector가 investing/financing cashflow를 메웠는지(Phase D의 "데이터 수집 중" 뱃지 자동 사라졌는지)는 추후 확인
+
 ## 2026-04-22 (Phase C — 통합 대시보드 신설)
 
 - **작업**: 4개 모듈(relation·financial·disclosure·price) 데이터를 localhost 단일 대시보드로 통합

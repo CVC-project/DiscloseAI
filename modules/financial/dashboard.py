@@ -341,7 +341,9 @@ _HTML_TEMPLATE = """<!doctype html>
   .highlight-card.sev-low {{ border-left-color: var(--good); }}
   .highlight-card .title {{ font-weight: 700; margin-bottom: 4px; }}
   .highlight-card .meta {{ font-size: 12px; color: var(--muted); margin-left: 8px; }}
-  .chart-wrap {{ position: relative; height: 280px; }}
+  .chart-wrap {{ position: relative; height: 280px; max-width: 800px; margin: 0 auto; }}
+  .chart-wrap.radar {{ aspect-ratio: 1 / 1; height: auto; max-width: 460px; margin: 0 auto; }}
+  .chart-wrap canvas {{ display: block !important; width: 100% !important; height: 100% !important; }}
   .ratios-list {{ margin: 0; padding: 0; }}
   .ratio-row {{
     display: flex; align-items: center; gap: 12px;
@@ -544,7 +546,7 @@ _HTML_TEMPLATE = """<!doctype html>
 
     <div class="panel">
       <h2>5개 모듈 프로파일</h2>
-      <div class="chart-wrap"><canvas id="radar"></canvas></div>
+      <div class="chart-wrap radar"><canvas id="radar"></canvas></div>
     </div>
   </div>
 
@@ -664,13 +666,16 @@ new Chart(document.getElementById('radar'), {{
     }}]
   }},
   options: {{
+    responsive: true,
+    maintainAspectRatio: false,
+    layout: {{ padding: {{ top: 4, bottom: 4, left: 4, right: 4 }} }},
     plugins: {{ legend: {{ display: false }} }},
     scales: {{
       r: {{
         min: 0, max: 100,
         grid: {{ color: 'rgba(167, 139, 250, 0.18)' }},
         angleLines: {{ color: 'rgba(167, 139, 250, 0.22)' }},
-        pointLabels: {{ color: '#e2e8f0', font: {{ size: 12 }} }},
+        pointLabels: {{ color: '#e2e8f0', font: {{ size: 13 }} }},
         ticks: {{ color: '#94a3b8', backdropColor: 'transparent', stepSize: 25 }}
       }}
     }}
@@ -756,6 +761,9 @@ new Chart(document.getElementById('ts'), {{
     ]
   }},
   options: {{
+    responsive: true,
+    maintainAspectRatio: false,
+    layout: {{ padding: {{ top: 4, bottom: 4, left: 4, right: 8 }} }},
     plugins: {{ legend: {{ labels: {{ color: '#e2e8f0' }} }} }},
     scales: {{
       x: {{ ticks: {{ color: '#94a3b8' }}, grid: {{ color: 'rgba(148,163,184,0.1)' }} }},
@@ -1033,7 +1041,7 @@ _RANKING_TEMPLATE = """<!doctype html>
   .err-row td {{ color: var(--muted); font-style: italic; }}
   .module-bar {{ display: inline-block; height: 6px; background: var(--accent);
     border-radius: 2px; vertical-align: middle; margin-right: 4px; }}
-  .chart-wrap {{ position: relative; height: 240px; }}
+  .chart-wrap {{ position: relative; height: 240px; max-width: 800px; margin: 0 auto; }}
   footer {{ margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
     color: var(--muted); font-size: 12px; }}
   .disclaimer {{ background: rgba(234, 179, 8, 0.08);
