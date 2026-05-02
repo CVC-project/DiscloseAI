@@ -1029,7 +1029,8 @@
 
     /* 채팅 사이드바가 열려 있을 때, 모달은 사이드바 좌측까지만 확장 (덮지 않게) */
     #fullAnalysisCard,
-    #fullDisclosureCard {
+    #fullDisclosureCard,
+    #fullTimemachineCard {
       position: absolute;
       top: 5vh;
       left: 6vw;
@@ -1044,7 +1045,8 @@
     }
 
     body.chat-open #fullAnalysisCard,
-    body.chat-open #fullDisclosureCard {
+    body.chat-open #fullDisclosureCard,
+    body.chat-open #fullTimemachineCard {
       right: calc(var(--chat-sidebar-w) + 12px)
     }
 
@@ -1122,6 +1124,331 @@
       border-top: 0;
       color: #94a3b8;
       font-size: 13px
+    }
+
+    /* === Timemachine 탭 전용 UI === */
+    /* 좌하단 관계 legend 숨김 (타임머신 탭에서만) */
+    body.mode-tm .legend.legend-edge { display: none !important; }
+
+    /* 화면 하단 3분할 콘텐츠 패널 (카드뉴스·퀴즈·타임머신) */
+    #tmContentPanels {
+      position: fixed;
+      left: 0;
+      right: var(--chat-sidebar-w, 0);
+      bottom: 92px;  /* HUD 위로 살짝 띄움 */
+      max-height: 38vh;
+      display: none;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      padding: 12px 14px;
+      background: linear-gradient(to top, rgba(8, 12, 28, 0.92), rgba(8, 12, 28, 0.55));
+      z-index: 18;
+      pointer-events: auto;
+      overflow: hidden;
+      transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1)
+    }
+    body.mode-tm #tmContentPanels { display: grid; }
+    body:not(.chat-open) #tmContentPanels { right: 0; }
+
+    .tm-panel {
+      background: rgba(15, 23, 42, 0.78);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 10px;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      overflow: hidden
+    }
+    .tm-panel[data-kind="cardnews"]    { border-color: rgba(251, 191, 36, 0.32) }
+    .tm-panel[data-kind="quiz"]        { border-color: rgba(168, 139, 250, 0.32) }
+    .tm-panel[data-kind="timemachine"] { border-color: rgba(94, 234, 212, 0.32) }
+
+    .tm-panel h3 {
+      margin: 0 0 8px 0;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #e2e8f0;
+      letter-spacing: 0.2px;
+      display: flex;
+      align-items: baseline;
+      gap: 6px
+    }
+    .tm-panel h3 .tm-count {
+      font-size: 11px;
+      font-weight: 400;
+      color: #94a3b8
+    }
+
+    .tm-cards {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding-right: 4px
+    }
+    .tm-cards::-webkit-scrollbar { width: 5px }
+    .tm-cards::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.3); border-radius: 3px }
+
+    .tm-card {
+      background: rgba(8, 12, 28, 0.65);
+      border: 1px solid rgba(148, 163, 184, 0.15);
+      border-left-width: 3px;
+      border-radius: 8px;
+      padding: 9px 11px;
+      cursor: pointer;
+      transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s
+    }
+    .tm-panel[data-kind="cardnews"] .tm-card    { border-left-color: #fbbf24 }
+    .tm-panel[data-kind="quiz"] .tm-card        { border-left-color: #a78bfa }
+    .tm-panel[data-kind="timemachine"] .tm-card { border-left-color: #5eead4 }
+
+    .tm-card:hover {
+      transform: translateY(-1px);
+      border-color: rgba(99, 179, 237, 0.55);
+      box-shadow: 0 4px 14px rgba(77, 166, 255, 0.18)
+    }
+
+    .tm-card .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-bottom: 5px;
+      font-size: 10.5px
+    }
+    .tm-card .meta .date {
+      color: #93c5fd;
+      background: rgba(99, 102, 241, 0.16);
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-weight: 500
+    }
+    .tm-card .meta .badge {
+      color: #c4b5fd;
+      background: rgba(168, 139, 250, 0.18);
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-weight: 500
+    }
+    .tm-card .meta .level {
+      color: #fbbf24;
+      background: rgba(251, 191, 36, 0.16);
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-weight: 500
+    }
+    .tm-card .firm {
+      font-size: 13px;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 3px
+    }
+    .tm-card .title {
+      font-size: 11.5px;
+      color: #cbd5e1;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden
+    }
+    .tm-card .cta {
+      margin-top: 6px;
+      font-size: 11px;
+      color: #5eead4;
+      font-weight: 500;
+      text-align: right
+    }
+    .tm-panel[data-kind="cardnews"] .tm-card .cta { color: #fbbf24 }
+    .tm-panel[data-kind="quiz"] .tm-card .cta     { color: #a78bfa }
+
+    @media (max-width: 1100px) {
+      #tmContentPanels { grid-template-columns: 1fr; max-height: 50vh }
+    }
+
+    /* 풀스크린 타임머신 오버레이 본문 — fullDisclosure 미러 */
+    #fullTimemachineBody {
+      position: absolute;
+      inset: 62px 0 0 0;
+      overflow-y: auto;
+      padding: 24px 36px 36px 36px;
+      background: #0f172a;
+      color: #e2e8f0;
+      font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+      font-size: 14.5px
+    }
+    #fullTimemachineBody .tm-section {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 22px 26px;
+      margin-bottom: 18px;
+      line-height: 1.65
+    }
+    #fullTimemachineBody .tm-section-h {
+      font-size: 12px;
+      font-weight: 600;
+      color: #5eead4;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 8px
+    }
+    #fullTimemachineBody .tm-section-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: #f8fafc;
+      margin-bottom: 12px;
+      line-height: 1.45
+    }
+    #fullTimemachineBody .tm-context {
+      font-size: 14px;
+      line-height: 1.75;
+      color: #cbd5e1;
+      white-space: pre-wrap
+    }
+    #fullTimemachineBody .tm-decision {
+      display: flex;
+      gap: 14px;
+      margin-top: 8px
+    }
+    #fullTimemachineBody .tm-decision button {
+      flex: 1;
+      padding: 14px 18px;
+      border-radius: 10px;
+      border: 1.5px solid;
+      background: rgba(8, 12, 28, 0.5);
+      color: #e2e8f0;
+      font-size: 14.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s
+    }
+    #fullTimemachineBody .tm-decision .b-up   { border-color: #22c55e; color: #4ade80 }
+    #fullTimemachineBody .tm-decision .b-mid  { border-color: #94a3b8; color: #cbd5e1 }
+    #fullTimemachineBody .tm-decision .b-down { border-color: #ef4444; color: #f87171 }
+    #fullTimemachineBody .tm-decision button:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(77, 166, 255, 0.22)
+    }
+    #fullTimemachineBody .tm-decision button:disabled { opacity: 0.4; cursor: default }
+    #fullTimemachineBody .tm-decision button.chosen { box-shadow: 0 0 0 2px #fff inset; opacity: 1 }
+
+    #fullTimemachineBody .tm-reveal-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 14px
+    }
+    #fullTimemachineBody .tm-reveal-row:first-of-type { border-top: 0 }
+    #fullTimemachineBody .tm-big-num {
+      font-size: 38px;
+      font-weight: 700;
+      text-align: center;
+      margin: 6px 0 14px
+    }
+    #fullTimemachineBody .tm-match {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      margin-left: 8px
+    }
+    #fullTimemachineBody .tm-match.ok { background: rgba(74, 222, 128, 0.18); color: #4ade80 }
+    #fullTimemachineBody .tm-match.no { background: rgba(248, 113, 113, 0.18); color: #f87171 }
+
+    /* Phase B 자유대화 */
+    #fullTimemachineBody .tm-chat {
+      max-height: 320px;
+      overflow-y: auto;
+      padding: 6px 4px;
+      margin-bottom: 10px
+    }
+    #fullTimemachineBody .tm-chat-msg {
+      padding: 9px 13px;
+      border-radius: 12px;
+      margin: 6px 0;
+      font-size: 13.5px;
+      line-height: 1.6;
+      max-width: 88%
+    }
+    #fullTimemachineBody .tm-chat-msg.user {
+      background: rgba(77, 166, 255, 0.18);
+      color: #dbeafe;
+      margin-left: auto;
+      border-bottom-right-radius: 4px
+    }
+    #fullTimemachineBody .tm-chat-msg.assistant {
+      background: rgba(148, 163, 184, 0.12);
+      color: #e2e8f0;
+      margin-right: auto;
+      border-bottom-left-radius: 4px
+    }
+    #fullTimemachineBody .tm-chat-msg.system {
+      background: rgba(251, 191, 36, 0.10);
+      color: #fde68a;
+      font-size: 12px;
+      text-align: center;
+      max-width: 100%
+    }
+    #fullTimemachineBody .tm-hints {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 8px 0
+    }
+    #fullTimemachineBody .tm-hint {
+      padding: 5px 10px;
+      background: rgba(94, 234, 212, 0.12);
+      border: 1px solid rgba(94, 234, 212, 0.3);
+      border-radius: 14px;
+      font-size: 11.5px;
+      color: #5eead4;
+      cursor: pointer;
+      transition: background 0.15s
+    }
+    #fullTimemachineBody .tm-hint:hover { background: rgba(94, 234, 212, 0.22) }
+    #fullTimemachineBody .tm-chat-input-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px
+    }
+    #fullTimemachineBody .tm-chat-input-row textarea {
+      flex: 1;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid #334155;
+      background: rgba(8, 12, 28, 0.7);
+      color: #e2e8f0;
+      font-size: 13.5px;
+      font-family: inherit;
+      resize: none;
+      min-height: 42px;
+      max-height: 120px
+    }
+    #fullTimemachineBody .tm-chat-input-row button {
+      padding: 0 16px;
+      border-radius: 8px;
+      border: 0;
+      background: linear-gradient(135deg, #5eead4, #4da6ff);
+      color: #0f172a;
+      font-weight: 600;
+      cursor: pointer
+    }
+
+    /* Picker (다중 시나리오) */
+    #fullTimemachineBody .tm-picker {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 10px
+    }
+    @media (max-width: 800px) {
+      #fullTimemachineBody .tm-picker { grid-template-columns: 1fr }
     }
   </style>
   <!-- 사용자별 Gemini API 키 — chat_config.local.js (gitignored). 없으면 채팅이 graceful fail 한다.
@@ -1228,6 +1555,42 @@
         </div>
       </div>
       <div id="fullDisclosureBody"></div>
+    </div>
+  </div>
+
+  <!-- 타임머신 풀스크린 오버레이 — 4 phase (배경·자유대화·결정·정답) -->
+  <div id="fullTimemachine" onclick="if(event.target===this)closeFullTimemachine()"
+    style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(8,12,28,0.55);backdrop-filter:blur(2px)">
+    <div id="fullTimemachineCard">
+      <div
+        style="position:absolute;top:0;left:0;right:0;height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;background:#1e293b;border-bottom:1px solid #334155;z-index:10001">
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="font-size:18px;color:#5eead4">🕰</span>
+          <span id="fullTimemachineTitle" style="color:#f8fafc;font-size:18px;font-weight:700"></span>
+          <span id="fullTimemachineSubtitle" style="color:#94a3b8;font-size:13.5px"></span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <button onclick="closeFullTimemachine()" title="닫기 (ESC)"
+            style="font-size:18px;line-height:1;width:34px;height:34px;border-radius:50%;border:1px solid #475569;background:rgba(15,23,42,0.85);color:#e2e8f0;cursor:pointer;font-weight:600">×</button>
+        </div>
+      </div>
+      <div id="fullTimemachineBody"></div>
+    </div>
+  </div>
+
+  <!-- 타임머신 탭 전용 — 화면 하단 3분할 콘텐츠 패널 -->
+  <div id="tmContentPanels">
+    <div class="tm-panel" data-kind="cardnews">
+      <h3>📰 카드뉴스 <span class="tm-count" id="tmCountCard"></span></h3>
+      <div class="tm-cards" id="tmCardsCard"></div>
+    </div>
+    <div class="tm-panel" data-kind="quiz">
+      <h3>📝 퀴즈 <span class="tm-count" id="tmCountQuiz"></span></h3>
+      <div class="tm-cards" id="tmCardsQuiz"></div>
+    </div>
+    <div class="tm-panel" data-kind="timemachine">
+      <h3>⏰ 타임머신 <span class="tm-count" id="tmCountTm"></span></h3>
+      <div class="tm-cards" id="tmCardsTm"></div>
     </div>
   </div>
 
@@ -1355,6 +1718,17 @@
     let nodes = [], edges = [], sel = null, hov = null, flt = 'all';
     let camX = 0, camY = 0, zm = 0.62, drag = false, ds = { x: 0, y: 0 }, cs = { x: 0, y: 0 };
     let alertOn = false, alertSrc = null, ripples = [], stars = [], time = 0;
+
+    // ===== TIMEMACHINE STATE =====
+    // 콘텐츠 활성화 ID 화이트리스트 (price.quiz_data.QUIZ_LIST 기반)
+    const TM_CARDNEWS_IDS = new Set([11]);                             // 카드뉴스 6슬라이드 (삼성 자사주소각)
+    const TM_QUIZ_IDS     = new Set([1, 2, 3, 4, 5, 8, 10, 11, 12, 13, 14, 15]);
+    const TM_FREECHAT_IDS = new Set([1, 2, 3]);                        // timemachine.html 자유대화 보유
+    // 타임머신 탭에서 선택된 행성 (cat hop 대상). null = 미선택.
+    // {node, scenario?: 단일 시나리오 강제 (카드 클릭 시), panelRendered: 패널 1회 렌더 플래그}
+    let tmFocusNode = null;
+    let tmFocusScenario = null;
+    let _tmPanelsRendered = false;
 
     // ===== GATHER MODE (행성 클릭 → 연결 기업이 클릭 행성 주위로 모이는 효과) =====
     // gatherMode: {
@@ -1751,6 +2125,14 @@
       document.querySelectorAll('.hud-modes button').forEach(b => b.classList.remove('on'));
       btn.classList.add('on');
       closePanel();
+      // 타임머신 탭 전용 UI 토글 (좌하단 legend 숨김 + 하단 3패널 표시)
+      document.body.classList.toggle('mode-tm', mode === 'timemachine');
+      if (mode === 'timemachine') {
+        if (!_tmPanelsRendered) { _renderTmPanels(); _tmPanelsRendered = true; }
+      } else {
+        // 다른 탭으로 나가면 타임머신 focus 상태 해제
+        if (tmFocusNode) _exitTimemachineFocus();
+      }
       const sub = document.getElementById('hudSub');
       const hint = document.getElementById('modeHint');
       // 섹터 필터 버튼 헬퍼 — analyze·disclosure 공유
@@ -2405,14 +2787,15 @@
       }
 
       // === MASCOT (cat sprite) ===
-      // gather 활성 시 마스코트는 center로 향함 (자동 점프 차단)
-      if (gatherMode && mascot.targetNode !== gatherMode.center) {
-        mascot.prevNode = mascot.targetNode || gatherMode.center;
-        mascot.targetNode = gatherMode.center;
+      // gather/timemachine focus 활성 시 마스코트는 클릭 행성으로 향함 (자동 점프 차단)
+      const _focusNode = gatherMode ? gatherMode.center : tmFocusNode;
+      if (_focusNode && mascot.targetNode !== _focusNode) {
+        mascot.prevNode = mascot.targetNode || _focusNode;
+        mascot.targetNode = _focusNode;
         mascot.progress = 0;
         mascot.waitTimer = 0;
       }
-      if (!gatherMode) {
+      if (!_focusNode) {
         if (mascot.targetNode === null || mascot.progress >= 1) { mascot.waitTimer += 0.016; if (mascot.waitTimer > 1.8) { mascot.waitTimer = 0; pickNextNode(); } }
       }
       if (mascot.targetNode && mascot.progress < 1) {
@@ -2469,11 +2852,16 @@
       x.drawImage(sprite, -catSize / 2, -catSize * 0.7, catSize, catSize);
       x.restore();
 
-      // === SPEECH BUBBLE (gather 활성 + 마스코트 도착 시) ===
+      // === SPEECH BUBBLE (gather 또는 timemachine focus 활성 + 마스코트 도착 시) ===
       if (gatherMode && mascot.targetNode === gatherMode.center && mascot.progress >= 1) {
         const text = currentMode === 'disclosure'
           ? '공시를 확인하려면 나를 클릭해줘'
           : '재무제표를 확인하려면 나를 클릭해줘';
+        _drawSpeechBubble(text, mascot.x, mascot.y - mascot.bounceY - 30);
+      } else if (tmFocusNode && mascot.targetNode === tmFocusNode && mascot.progress >= 1) {
+        const text = tmFocusNode.has_quiz
+          ? '타임머신을 체험하려면 나를 클릭해줘'
+          : '이 기업의 시나리오는 아직 준비되지 않았습니다';
         _drawSpeechBubble(text, mascot.x, mascot.y - mascot.bounceY - 30);
       }
 
@@ -2518,8 +2906,8 @@
     c.addEventListener('mousedown', e => {
       _cancelCamTween();
       const mx = (e.clientX - camX) / zm, my = (e.clientY - camY) / zm;
-      // 1) 고양이 클릭 우선 판정 (gather 활성 시 마스코트가 클릭 행성 위에 있고 hit 영역을 가짐)
-      if (gatherMode && _hitMascot(mx, my)) {
+      // 1) 고양이 클릭 우선 판정 (gather/timemachine focus 활성 시 마스코트가 클릭 행성 위)
+      if ((gatherMode || tmFocusNode) && _hitMascot(mx, my)) {
         _onMascotClick();
         return;
       }
@@ -2527,19 +2915,21 @@
       const clicked = _hitNodeAt(mx, my);
       if (clicked) {
         sel = clicked;
-        // analyze·disclosure 모드는 gather 효과 거치고 고양이 쓰다듬기로 패널 호출.
-        // timemachine은 사용자 결정으로 기존 즉시 패널 동작 유지.
         if (currentMode === 'timemachine') {
-          showTimemachine(clicked);
+          // 타임머신 모드: 행성 클릭 → 카메라 fly + cat hop + 말풍선 (시나리오 보유/미보유 분기)
+          _enterTimemachineFocus(clicked);
         } else {
           // 동일 행성 재클릭은 no-op, 다른 행성 클릭이면 재구성
           if (gatherMode && gatherMode.center === clicked) return;
           _enterGatherMode(clicked);
         }
       } else {
-        // 배경 클릭 → gather 해제 또는 panel 닫기
+        // 배경 클릭 → gather/timemachine focus 해제 또는 panel 닫기
         if (gatherMode) {
           _exitGatherMode();
+          sel = null;
+        } else if (tmFocusNode) {
+          _exitTimemachineFocus();
           sel = null;
         } else {
           sel = null;
@@ -2549,16 +2939,22 @@
         c.style.cursor = 'grabbing';
       }
     });
-    // 마스코트 hit 영역 — gather 활성 시 마스코트가 center 위에 있는 상태에서만 클릭 인정.
+    // 마스코트 hit 영역 — gather 또는 timemachine focus 활성 시 마스코트가 클릭 행성 위에 있을 때만 인정.
     // 좌표는 world space. mascot.bounceY는 시각적 hop 오프셋이므로 hit 영역에는 미적용.
     function _hitMascot(mx, my) {
-      if (!gatherMode || !mascot.targetNode) return false;
+      if (!mascot.targetNode) return false;
+      if (!gatherMode && !tmFocusNode) return false;
       const cx = mascot.x;
       const cy = mascot.y - 14;  // sprite 중심이 mascot.y에서 살짝 위 (cat sprite anchor 보정)
       const dx = mx - cx, dy = my - cy;
       return Math.sqrt(dx * dx + dy * dy) < 38;
     }
     function _onMascotClick() {
+      // 타임머신 모드: 시나리오 보유 행성에서만 풀스크린 진입
+      if (currentMode === 'timemachine' && tmFocusNode) {
+        if (tmFocusNode.has_quiz) openFullTimemachine(tmFocusNode, tmFocusScenario);
+        return;
+      }
       if (!gatherMode) return;
       const center = gatherMode.center;
       if (currentMode === 'analyze') {
@@ -3015,7 +3411,390 @@
       p.classList.add('open');
     }
 
+    // ===== TIMEMACHINE — 풀스크린 오버레이 + 3패널 + cat hop flow =====
+    // 카드뉴스/퀴즈/타임머신 3분할 패널 렌더 (setMode('timemachine') 진입 시 1회)
+    function _renderTmPanels() {
+      const all = (window.__tmScenarios || []).slice();
+      const cardScs = all.filter(s => TM_CARDNEWS_IDS.has(s.id));
+      const quizScs = all.filter(s => TM_QUIZ_IDS.has(s.id));
+      const tmScs   = all.filter(s => TM_FREECHAT_IDS.has(s.id));
+      const fmtDate = (raw) => {
+        if (!raw) return '';
+        const m = String(raw).match(/^(\d{4})-(\d{2})-(\d{2})/);
+        if (!m) return raw;
+        return `${m[1]}년 ${parseInt(m[2], 10)}월 ${parseInt(m[3], 10)}일`;
+      };
+      // 난이도 휴리스틱 — 시나리오 카테고리 기반 (timemachine.html 기준 차용)
+      const levelOf = (s) => {
+        const c = s.category || '';
+        if (['대형M&A', '합병', '합병철회', '회계이슈', '규제리스크', '해외리스크'].includes(c)) return '고급';
+        if (['물적분할', '지주사전환', '생산전략', '대형협력', '자사주소각'].includes(c)) return '중급';
+        return '초급';
+      };
+      const buildCard = (s, kind) => {
+        const date = _escHtmlSafe(fmtDate(s.date));
+        const cat = _escHtmlSafe(s.category || '-');
+        const lv = _escHtmlSafe(levelOf(s));
+        const firm = _escHtmlSafe(s.company || '');
+        const title = _escHtmlSafe(s.title || '');
+        const cta = kind === 'cardnews' ? '카드뉴스 보기 →' : kind === 'quiz' ? '퀴즈 풀기 →' : '대화 시작 →';
+        return `<div class="tm-card" data-sid="${s.id}" onclick="_tmCardClick(${s.id})">
+          <div class="meta"><span class="date">${date}</span><span class="badge">${cat}</span><span class="level">${lv}</span></div>
+          <div class="firm">${firm}</div>
+          <div class="title">${title}</div>
+          <div class="cta">${cta}</div>
+        </div>`;
+      };
+      const empty = (label) => `<div style="padding:14px;color:#64748b;font-size:12px;text-align:center">${label}</div>`;
+      const cardWrap = document.getElementById('tmCardsCard');
+      const quizWrap = document.getElementById('tmCardsQuiz');
+      const tmWrap   = document.getElementById('tmCardsTm');
+      cardWrap.innerHTML = cardScs.length ? cardScs.map(s => buildCard(s, 'cardnews')).join('') : empty('아직 준비된 카드뉴스가 없습니다');
+      quizWrap.innerHTML = quizScs.length ? quizScs.map(s => buildCard(s, 'quiz')).join('') : empty('아직 준비된 퀴즈가 없습니다');
+      tmWrap.innerHTML   = tmScs.length   ? tmScs.map(s => buildCard(s, 'timemachine')).join('') : empty('아직 준비된 타임머신 시나리오가 없습니다');
+      const setCount = (id, n) => { const el = document.getElementById(id); if (el) el.textContent = `(${n}건)`; };
+      setCount('tmCountCard', cardScs.length);
+      setCount('tmCountQuiz', quizScs.length);
+      setCount('tmCountTm', tmScs.length);
+    }
+
+    // 카드 클릭 → 해당 ticker 행성 찾아서 카메라 fly + cat hop + 말풍선
+    function _tmCardClick(sid) {
+      const sc = (window.__tmScenarios || []).find(s => s.id === sid);
+      if (!sc) return;
+      const node = (nodes || []).find(n => n.t === sc.ticker);
+      if (!node) {
+        // 비상장·매칭 실패 — 즉시 시나리오 진입 (행성 hop 단계 생략)
+        openFullTimemachine({ n: sc.company, t: sc.ticker, has_quiz: true, tmAll: [sc] }, sc);
+        return;
+      }
+      // 카메라 부드럽게 이동 (simAlert 패턴 차용)
+      const targetZm = 1.0;
+      _panTo(W / 2 - node.x * targetZm, H / 2 - node.y * targetZm, targetZm, 700);
+      // tmFocus 설정 — 카드 클릭이라 단일 시나리오 강제 지정
+      tmFocusNode = node;
+      tmFocusScenario = sc;
+    }
+
+    // 행성 직접 클릭 (focus 전환) — 카메라 fly + cat hop + 시나리오 미지정 (cat 클릭 시 picker 또는 단일)
+    function _enterTimemachineFocus(node) {
+      // 같은 행성 재클릭 → no-op
+      if (tmFocusNode === node) return;
+      const targetZm = 1.0;
+      _panTo(W / 2 - node.x * targetZm, H / 2 - node.y * targetZm, targetZm, 700);
+      tmFocusNode = node;
+      tmFocusScenario = null;  // 행성 직접 클릭은 picker로 분기
+    }
+    function _exitTimemachineFocus() {
+      tmFocusNode = null;
+      tmFocusScenario = null;
+    }
+
+    // 풀스크린 오버레이 진입점 — 시나리오 단일/다중 분기
+    function openFullTimemachine(node, forcedScenario) {
+      const overlay = document.getElementById('fullTimemachine');
+      const titleEl = document.getElementById('fullTimemachineTitle');
+      const subEl = document.getElementById('fullTimemachineSubtitle');
+      const body = document.getElementById('fullTimemachineBody');
+      const all = node.tmAll || [];
+      titleEl.textContent = node.n || '';
+      subEl.textContent = node.t ? `(${node.t})` : '';
+      // 단일 시나리오 강제 지정 (카드 클릭 진입) → 바로 시작
+      if (forcedScenario) {
+        _tmStartScenario(forcedScenario);
+      } else if (all.length === 1) {
+        _tmStartScenario(all[0]);
+      } else if (all.length >= 2) {
+        _tmShowPicker(all);
+      } else {
+        body.innerHTML = `<div style="padding:60px 0;text-align:center;color:#94a3b8">이 기업의 시나리오는 아직 준비되지 않았습니다</div>`;
+      }
+      overlay.style.display = 'block';
+      document.addEventListener('keydown', _fullTimemachineEsc);
+    }
+    function closeFullTimemachine() {
+      const overlay = document.getElementById('fullTimemachine');
+      overlay.style.display = 'none';
+      document.removeEventListener('keydown', _fullTimemachineEsc);
+      // tm 채팅 상태 초기화
+      window.__tmChatHistory = [];
+    }
+    function _fullTimemachineEsc(e) {
+      if (e.key === 'Escape') closeFullTimemachine();
+    }
+
+    // 다중 시나리오 picker — 삼성전자 같은 경우
+    function _tmShowPicker(scenarios) {
+      const body = document.getElementById('fullTimemachineBody');
+      const fmtDate = (raw) => {
+        const m = String(raw || '').match(/^(\d{4})-(\d{2})-(\d{2})/);
+        return m ? `${m[1]}년 ${parseInt(m[2], 10)}월 ${parseInt(m[3], 10)}일` : (raw || '');
+      };
+      const cards = scenarios.map((s, i) => `
+        <div class="tm-card" style="border-left-color:#5eead4" onclick="_tmStartScenarioById(${s.id})">
+          <div class="meta">
+            <span class="date">${_escHtmlSafe(fmtDate(s.date))}</span>
+            <span class="badge">${_escHtmlSafe(s.category || '-')}</span>
+          </div>
+          <div class="firm">${_escHtmlSafe(s.company || '')}</div>
+          <div class="title">${_escHtmlSafe(s.title || '')}</div>
+          <div class="cta" style="color:#5eead4">대화 시작 →</div>
+        </div>`).join('');
+      body.innerHTML = `
+        <div style="padding:8px 0 0">
+          <div style="font-size:18px;font-weight:600;color:#f8fafc;margin-bottom:4px">시나리오 선택</div>
+          <div style="font-size:13px;color:#94a3b8;margin-bottom:14px">시나리오를 선택하면 그날로 돌아갑니다</div>
+          <div class="tm-picker">${cards}</div>
+        </div>`;
+    }
+    function _tmStartScenarioById(sid) {
+      const sc = (window.__tmScenarios || []).find(s => s.id === sid);
+      if (sc) _tmStartScenario(sc);
+    }
+
+    // Phase A→B→C→D 컨테이너 렌더, 진입은 Phase A
+    let _tmCurrent = null;  // 현재 시나리오 (decision 콜백 등에서 참조)
+    function _tmStartScenario(sc) {
+      _tmCurrent = sc;
+      window.__tmChatHistory = [];
+      const body = document.getElementById('fullTimemachineBody');
+      body.innerHTML = `
+        <div id="tmPhaseA"></div>
+        <div id="tmPhaseB"></div>
+        <div id="tmPhaseC"></div>
+        <div id="tmPhaseD" style="display:none"></div>
+      `;
+      _tmRenderBackground(sc);
+      _tmRenderChat(sc);
+      _tmRenderDecision(sc);
+    }
+
+    function _tmRenderBackground(sc) {
+      const fmtDate = (raw) => {
+        const m = String(raw || '').match(/^(\d{4})-(\d{2})-(\d{2})/);
+        return m ? `${m[1]}년 ${parseInt(m[2], 10)}월 ${parseInt(m[3], 10)}일` : (raw || '');
+      };
+      const phaseA = document.getElementById('tmPhaseA');
+      phaseA.innerHTML = `
+        <div class="tm-section">
+          <div class="tm-section-h">📅 ${_escHtmlSafe(fmtDate(sc.date))} · ${_escHtmlSafe(sc.category || '-')}</div>
+          <div class="tm-section-title">${_escHtmlSafe(sc.title || '')}</div>
+          <div class="tm-context">${_escHtmlSafe(sc.context || '')}</div>
+        </div>`;
+    }
+
+    function _tmRenderChat(sc) {
+      const phaseB = document.getElementById('tmPhaseB');
+      const isFreechatOk = TM_FREECHAT_IDS.has(sc.id);
+      const keyMissing = !window.GEMINI_API_KEY || window.GEMINI_API_KEY === 'YOUR_API_KEY_HERE';
+      if (!isFreechatOk) {
+        // Phase B 자체 생략 — 자유대화는 id 1·2·3에만 활성
+        phaseB.innerHTML = '';
+        return;
+      }
+      if (keyMissing) {
+        phaseB.innerHTML = `
+          <div class="tm-section">
+            <div class="tm-section-h">💬 자유 대화</div>
+            <div style="color:#fbbf24;font-size:13px;line-height:1.7">
+              Gemini API 키가 설정되지 않아 자유대화는 비활성 상태입니다.<br>
+              <code style="background:rgba(99,102,241,0.15);padding:2px 6px;border-radius:4px">modules/integration/chat_config.local.js</code> 에 키를 입력하면 활성화됩니다.<br>
+              그대로 결정·정답 단계로 진행할 수 있습니다.
+            </div>
+          </div>`;
+        return;
+      }
+      const hints = ['이 공시가 기존 주주에게 어떤 영향을 주나요?', '비슷한 과거 사례가 있나요?', '재무 부담은 어느 정도인가요?', '시장은 어떻게 반응할까요?', '단기 대응과 장기 관점은 다를까요?'];
+      const hintHtml = hints.map(h => `<span class="tm-hint" onclick="_tmHintClick(this)">${_escHtmlSafe(h)}</span>`).join('');
+      phaseB.innerHTML = `
+        <div class="tm-section">
+          <div class="tm-section-h">💬 자유 대화 (당시 시점 한정)</div>
+          <div class="tm-chat" id="tmChatMsgs"></div>
+          <div class="tm-hints">${hintHtml}</div>
+          <div class="tm-chat-input-row">
+            <textarea id="tmChatInput" rows="1" placeholder="이 공시에 대해 자유롭게 질문해보세요"
+              onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();_tmChatSend();}"></textarea>
+            <button id="tmChatSend" onclick="_tmChatSend()">전송</button>
+          </div>
+        </div>`;
+      // 환영 메시지
+      _tmChatAppend('system', `${sc.date ? sc.date + ', ' : ''}당신은 ${sc.company} 주주입니다. 자유롭게 질문해보세요. (당시 시점 정보만 답변)`);
+    }
+
+    function _tmHintClick(el) {
+      const inp = document.getElementById('tmChatInput');
+      if (!inp) return;
+      inp.value = el.textContent;
+      inp.focus();
+    }
+
+    function _tmChatAppend(role, text) {
+      const wrap = document.getElementById('tmChatMsgs');
+      if (!wrap) return null;
+      const div = document.createElement('div');
+      div.className = 'tm-chat-msg ' + role;
+      if (role === 'assistant') {
+        div.innerHTML = (typeof _renderMarkdown === 'function') ? _renderMarkdown(text) : _escHtmlSafe(text);
+      } else {
+        div.textContent = text;
+      }
+      wrap.appendChild(div);
+      wrap.scrollTop = wrap.scrollHeight;
+      return div;
+    }
+
+    window.__tmChatHistory = [];
+    let _tmChatBusy = false;
+    async function _tmChatSend() {
+      if (_tmChatBusy) return;
+      const inp = document.getElementById('tmChatInput');
+      const text = (inp && inp.value || '').trim();
+      if (!text || !_tmCurrent) return;
+      _tmChatBusy = true;
+      inp.value = '';
+      _tmChatAppend('user', text);
+      window.__tmChatHistory.push({ role: 'user', text });
+      const sendBtn = document.getElementById('tmChatSend');
+      if (sendBtn) sendBtn.disabled = true;
+      const typing = _tmChatAppend('assistant', '…');
+      try {
+        const reply = await _tmGeminiCall(_tmCurrent, window.__tmChatHistory);
+        if (typing) typing.remove();
+        _tmChatAppend('assistant', reply);
+        window.__tmChatHistory.push({ role: 'model', text: reply });
+      } catch (err) {
+        if (typing) typing.remove();
+        _tmChatAppend('system', '응답 생성 실패: ' + (err.message || err));
+      } finally {
+        if (sendBtn) sendBtn.disabled = false;
+        _tmChatBusy = false;
+      }
+    }
+
+    function _tmBuildSystem(sc) {
+      // modules/price/timemachine.html L283 buildSystem(sc) 차용 — 시점 제약·역할·답변 톤
+      return `당신은 '공시 시간여행' 금융 교육 AI입니다.
+사용자가 실제 한국 상장사 공시가 있었던 날의 투자자 역할을 체험하고 있습니다.
+
+[시나리오]
+종목: ${sc.company} (${sc.ticker})
+공시일: ${sc.date}
+공시 내용: ${sc.title}
+배경 정보: ${sc.context || ''}
+
+[대화 가이드]
+- 사용자의 질문에 관련된 재무 수치, 시장 데이터, 역사적 사례, 업종 맥락을 구체적으로 설명하세요
+- 수치, 날짜, 비율, 회사명, 사건명 등 팩트를 적극 활용하세요
+- 재무 변수, 시장 컨텍스트, 역사적 선례, 수급 분석, 글로벌 트렌드 등 다양한 각도를 탐구하세요
+- 사용자가 이미 언급한 내용은 반복하지 말고 새로운 시각과 정보를 추가하세요
+- 실제 결과(${sc.answer || ''}, ${sc.change_pct != null ? sc.change_pct + '%' : ''} 변동)는 절대 사전에 공개하지 마세요
+- 공시일(${sc.date}) 이후에 발생한 사건·시세·뉴스는 절대 언급하지 마세요. "당시 시점에서는 알 수 없는 정보"라고 답하세요.
+- 투자 조언이 아닌 '과거 통계 기반 학습 시뮬레이션'임을 인지하세요
+- 한국어로만 답변하세요
+- 이모지는 최대 2개만 사용하세요`;
+    }
+
+    function _tmExtractText(data) {
+      const parts = (data && data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts) || [];
+      const textPart = parts.find(p => !p.thought && p.text);
+      return (textPart && textPart.text) || (parts.find(p => p.text) || {}).text || '';
+    }
+
+    async function _tmGeminiCall(sc, history) {
+      if (!window.GEMINI_API_KEY || window.GEMINI_API_KEY === 'YOUR_API_KEY_HERE') {
+        throw new Error('API 키 미설정');
+      }
+      const model = window.GEMINI_MODEL || 'gemini-2.5-flash';
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(window.GEMINI_API_KEY)}`;
+      const recent = (history || []).slice(-10);
+      const contents = recent.map(m => ({ role: m.role, parts: [{ text: m.text }] }));
+      const body = {
+        systemInstruction: { parts: [{ text: _tmBuildSystem(sc) }] },
+        contents,
+        generationConfig: { temperature: 0.6, maxOutputTokens: 1200 },
+      };
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      if (!res.ok) {
+        const errText = await res.text().catch(() => '');
+        let msg = `HTTP ${res.status}`;
+        try { const j = JSON.parse(errText); if (j.error && j.error.message) msg = j.error.message; } catch (_) { }
+        if (res.status === 429) msg = '요청 한도 초과 — 잠시 후 다시 시도해주세요.';
+        throw new Error(msg);
+      }
+      const data = await res.json();
+      return _tmExtractText(data) || '(빈 응답)';
+    }
+
+    // Phase C — 결정 버튼 3개 (수혜·중립·악재)
+    function _tmRenderDecision(sc) {
+      const phaseC = document.getElementById('tmPhaseC');
+      phaseC.innerHTML = `
+        <div class="tm-section">
+          <div class="tm-section-h">🤔 당신의 판단은?</div>
+          <div style="font-size:13.5px;color:#cbd5e1;margin-bottom:14px">당시 시점에서, 이 공시가 ${_escHtmlSafe(sc.company)} 주가에 어떻게 작용했을까요?</div>
+          <div class="tm-decision">
+            <button class="b-up"   onclick="_tmReveal('수혜')">🟢 수혜</button>
+            <button class="b-mid"  onclick="_tmReveal('중립')">⚪ 중립</button>
+            <button class="b-down" onclick="_tmReveal('악재')">🔴 악재</button>
+          </div>
+        </div>`;
+    }
+
+    // Phase D — 정답 reveal (changePct·kospiPct·explanation, 일치 여부)
+    function _tmReveal(userChoice) {
+      const sc = _tmCurrent;
+      if (!sc) return;
+      // Phase C 버튼 비활성화 + 선택 표시
+      const decBtns = document.querySelectorAll('#tmPhaseC .tm-decision button');
+      decBtns.forEach(b => {
+        b.disabled = true;
+        if (b.textContent.includes(userChoice)) b.classList.add('chosen');
+      });
+      const chg = sc.change_pct;
+      const kospi = sc.kospi_change_pct;
+      const stockColor = chg >= 0 ? '#4ade80' : '#f87171';
+      const matched = sc.answer === userChoice;
+      const matchClass = matched ? 'ok' : 'no';
+      const matchLabel = matched ? '당신의 선택과 일치' : '당신의 선택과 불일치';
+      const excess = (chg != null && kospi != null) ? (chg - kospi) : null;
+      const excessRow = (excess != null) ? `<div class="tm-reveal-row"><span style="color:#94a3b8">초과 (종목-코스피)</span><span style="color:${excess >= 0 ? '#4ade80' : '#f87171'};font-weight:600">${(excess >= 0 ? '+' : '') + excess.toFixed(1)}%p</span></div>` : '';
+      const kospiRow = (kospi != null) ? `<div class="tm-reveal-row"><span style="color:#94a3b8">KOSPI (동기간)</span><span style="color:${kospi >= 0 ? '#4ade80' : '#f87171'};font-weight:500">${kospi >= 0 ? '+' : ''}${kospi}%</span></div>` : '';
+      const phaseD = document.getElementById('tmPhaseD');
+      phaseD.style.display = 'block';
+      phaseD.innerHTML = `
+        <div class="tm-section">
+          <div class="tm-section-h">📊 실제 결과 <span class="tm-match ${matchClass}">${matchLabel}</span></div>
+          <div style="font-size:12.5px;color:#94a3b8;text-align:center;margin-bottom:4px">${_escHtmlSafe(sc.window || '공시 후 결과')}</div>
+          <div class="tm-big-num" style="color:${stockColor}">${chg >= 0 ? '+' : ''}${chg}%</div>
+          ${kospiRow}
+          ${excessRow}
+          <div class="tm-reveal-row"><span style="color:#94a3b8">정답</span><span style="font-weight:600;color:#e2e8f0">${_escHtmlSafe(sc.answer || '-')}</span></div>
+        </div>
+        ${sc.explanation ? `<div class="tm-section">
+          <div class="tm-section-h">💡 이 공시에서 배울 점</div>
+          <div style="font-size:14px;color:#cbd5e1;line-height:1.75">${_escHtmlSafe(sc.explanation).replace(/\n/g, '<br>')}</div>
+        </div>` : ''}
+        ${sc.refUrl ? `<a href="${_escHtmlSafe(sc.refUrl)}" target="_blank" rel="noopener"
+          style="display:inline-flex;align-items:center;gap:6px;padding:9px 16px;background:rgba(99,102,241,0.15);border:1px solid rgba(99,102,241,0.35);border-radius:8px;color:#a78bfa;font-size:13px;font-weight:500;text-decoration:none">
+          📰 관련 기사 보기 ↗</a>` : ''}
+        <div style="font-size:11px;color:#64748b;margin-top:14px">⚠ 본 분석은 과거 통계 기반 참고 정보이며, 투자 권유가 아닙니다.</div>
+      `;
+      phaseD.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // 안전한 HTML escape (이미 _escapeHtml 있지만 여기서는 호출 시점에 정의 안 됐을 수 있어 별도)
+    function _escHtmlSafe(s) {
+      return String(s == null ? '' : s)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
     // ===== PANEL: TIMEMACHINE (실데이터 기반, modules/price/quiz_data.py 연결) =====
+    // ⚠ 우측 슬라이드 패널은 legacy fallback 전용 — 신규 click flow는 openFullTimemachine() 사용.
     function showTimemachine(n) {
       if (typeof _chatSetContext === 'function') _chatSetContext(n);
       const p = document.getElementById('panel');
@@ -3287,7 +4066,14 @@
         if (!s.ticker) return;
         (stmtByTicker[s.ticker] = stmtByTicker[s.ticker] || []).push(s);
       });
-      const scenarioByTicker = Object.fromEntries(((pricePayload && pricePayload.data) || []).map(s => [s.ticker, s]));
+      // 같은 ticker에 시나리오 2건 이상 있을 수 있음 (예: 삼성전자 id 3·11) → 배열로 보관.
+      const scenariosByTicker = {};
+      ((pricePayload && pricePayload.data) || []).forEach(s => {
+        if (!s.ticker) return;
+        (scenariosByTicker[s.ticker] = scenariosByTicker[s.ticker] || []).push(s);
+      });
+      // 콘텐츠 패널이 사용할 전역 시나리오 마스터
+      window.__tmScenarios = (pricePayload && pricePayload.data) || [];
 
       // 4) relation 노드에 실데이터 주입 (기존 show* 함수 구조와 호환되는 필드명 유지)
       relData.forEach(n => {
@@ -3359,15 +4145,19 @@
         }));
         n.statements = stmtByTicker[t] || [];
 
-        const sc = scenarioByTicker[t];
-        n.has_quiz = !!sc;
-        if (sc) {
+        // 같은 ticker의 모든 시나리오 — n.tmAll = 원본 배열 (id·company·context·explanation 등 그대로)
+        const scList = scenariosByTicker[t] || [];
+        n.has_quiz = scList.length > 0;
+        n.tmAll = scList;
+        if (scList.length > 0) {
+          // 기존 showTimemachine() 우측 패널 fallback 호환을 위해 첫 시나리오를 n.tm 단일 객체로 보관
+          const sc = scList[0];
           n.tm = {
             date: sc.date || '',
             category: sc.category || '',
             disclosure: sc.title || '',
             context: sc.context || '',
-            refUrl: sc.refUrl || '',  // extract_data.py에서 자동 생성한 네이버 뉴스 검색 URL
+            refUrl: sc.refUrl || '',
             news: [],
             answer: {
               stock_chg: (sc.change_pct >= 0 ? '+' : '') + sc.change_pct + '%',
