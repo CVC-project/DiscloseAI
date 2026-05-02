@@ -1753,19 +1753,24 @@
       closePanel();
       const sub = document.getElementById('hudSub');
       const hint = document.getElementById('modeHint');
-      if (mode === 'analyze') {
-        // 섹터 필터 버튼 — sectors 사전에서 자동 생성 (색띠 inline). 섹터 추가 시 자동 반영.
+      // 섹터 필터 버튼 헬퍼 — analyze·disclosure 공유
+      const _sectorBtnsHtml = () => {
         const sectorOrder = ['반도체', '디스플레이', '2차전지', '바이오', '자동차', '금융', '플랫폼', '에너지', '중공업·방산', '건설', '통신', '기타'];
         const allBtn = `<button class="on" style="--sc:#9ca3af" onclick="filter('all',this)">전체</button>`;
         const secBtns = sectorOrder
           .filter(s => sectors[s])
           .map(s => `<button style="--sc:${sectors[s].color}" onclick="filter('${s}',this)">${s}</button>`)
           .join('');
-        sub.innerHTML = allBtn + secBtns;
+        return allBtn + secBtns;
+      };
+      if (mode === 'analyze') {
+        sub.innerHTML = _sectorBtnsHtml();
         hint.textContent = '기업을 클릭하면 재무제표 번역 + EQS 이익 품질 분석을 볼 수 있습니다';
         flt = 'all';
       } else if (mode === 'disclosure') {
-        sub.innerHTML = `<button style="background:rgba(251,191,36,0.1);border-color:rgba(251,191,36,0.3);color:#fbbf24" onclick="simAlert()">📡 공시 시뮬레이션</button>`;
+        // 공시 모드: 섹터 필터 + 별도 색상의 공시 시뮬레이션 버튼
+        const simBtn = `<button style="background:rgba(251,191,36,0.12);border-color:rgba(251,191,36,0.35);color:#fbbf24;--sc:#fbbf24" onclick="simAlert()">📡 공시 시뮬레이션</button>`;
+        sub.innerHTML = simBtn + _sectorBtnsHtml();
         hint.textContent = '공시 시뮬레이션 버튼을 누르거나, 기업을 클릭하면 공시 영향 분석을 볼 수 있습니다';
         flt = 'all';
       } else {
@@ -2467,8 +2472,8 @@
       // === SPEECH BUBBLE (gather 활성 + 마스코트 도착 시) ===
       if (gatherMode && mascot.targetNode === gatherMode.center && mascot.progress >= 1) {
         const text = currentMode === 'disclosure'
-          ? '공시를 확인하려면 나를 쓰다듬어줘'
-          : '재무제표를 확인하려면 나를 쓰다듬어줘';
+          ? '공시를 확인하려면 나를 클릭해줘'
+          : '재무제표를 확인하려면 나를 클릭해줘';
         _drawSpeechBubble(text, mascot.x, mascot.y - mascot.bounceY - 30);
       }
 
@@ -2586,7 +2591,21 @@
         _panTo(c.camX, c.camY, targetZm, 600);
       }
     }
-    function simAlert() { alertOn = true; alertSrc = '삼성전자'; document.getElementById('alert').classList.add('show'); const src = nodes.find(n => n.n === '삼성전자'); if (src) for (let i = 0; i < 3; i++)setTimeout(() => ripples.push({ x: src.x, y: src.y, radius: src.sz * 18, alpha: 0.6 }), i * 400); setTimeout(() => { alertOn = false; alertSrc = null; }, 10000); }
+    function simAlert() {
+      alertOn = true;
+      alertSrc = '삼성전자';
+      document.getElementById('alert').classList.add('show');
+      const src = nodes.find(n => n.n === '삼성전자');
+      if (src) {
+        // 공시 발생 행성으로 카메라 부드럽게 이동 (모더리트 줌 1.0)
+        const targetZm = 1.0;
+        _panTo(W / 2 - src.x * targetZm, H / 2 - src.y * targetZm, targetZm, 700);
+        for (let i = 0; i < 3; i++) {
+          setTimeout(() => ripples.push({ x: src.x, y: src.y, radius: src.sz * 18, alpha: 0.6 }), i * 400);
+        }
+      }
+      setTimeout(() => { alertOn = false; alertSrc = null; }, 10000);
+    }
 
     // ===== PANEL: ANALYZE =====
     // 풀스크린 단독 분석 오버레이 — firm_<ticker>.html 로드.
