@@ -1320,10 +1320,21 @@
       height: 100%;
       will-change: transform
     }
+    /* 슬라이드는 stage의 100% 너비를 차지 (translate 단위) — 시각 카드는 안쪽 .tm-cn-slide-card */
     .tm-cn-slide {
       flex: 0 0 100%;
+      width: 100%;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      padding: 0 8px;
+      box-sizing: border-box;
+      min-height: 0
+    }
+    .tm-cn-slide-card {
+      position: relative;
+      width: 100%;
       max-width: 980px;
-      margin: 0 auto;
       padding: 28px 36px;
       border-radius: 16px;
       border: 1px solid #2d3448;
@@ -1331,11 +1342,13 @@
       display: flex;
       flex-direction: column;
       gap: 14px;
-      overflow-y: auto
+      overflow-y: auto;
+      min-height: 0
     }
-    .tm-cn-slide.cn-cover { background: linear-gradient(145deg, #0d1b35 0%, #0f1117 60%, #1a0a2e 100%) }
-    .tm-cn-slide.cn-amber { background: linear-gradient(160deg, #1a1500 0%, #0f1117 100%) }
-    .tm-cn-slide.cn-emerald { background: linear-gradient(160deg, #0d2620 0%, #0f1117 100%) }
+    .tm-cn-slide-card.cn-cover { background: linear-gradient(145deg, #0d1b35 0%, #0f1117 60%, #1a0a2e 100%) }
+    .tm-cn-slide-card.cn-amber { background: linear-gradient(160deg, #1a1500 0%, #0f1117 100%) }
+    .tm-cn-slide-card.cn-emerald { background: linear-gradient(160deg, #0d2620 0%, #0f1117 100%) }
+    .tm-cn-slide-card.cn-fact { background: linear-gradient(160deg, #0f1c2e 0%, #0f1117 100%) }
     .tm-cn-num {
       position: absolute;
       top: 24px;
@@ -4180,9 +4193,11 @@
       _tmCnIdx = 0;
       const total = data.slides.length;
       const slidesHtml = data.slides.map((s, i) => `
-        <div class="tm-cn-slide cn-${s.kind}">
-          <div class="tm-cn-num">${String(i + 1).padStart(2, '0')} / ${String(total).padStart(2, '0')}</div>
-          ${s.html}
+        <div class="tm-cn-slide">
+          <div class="tm-cn-slide-card cn-${s.kind}">
+            <div class="tm-cn-num">${String(i + 1).padStart(2, '0')} / ${String(total).padStart(2, '0')}</div>
+            ${s.html}
+          </div>
         </div>`).join('');
       const dotsHtml = data.slides.map((_, i) =>
         `<span class="tm-cn-dot${i === 0 ? ' on' : ''}" data-idx="${i}" onclick="_tmCnGo(${i})"></span>`).join('');
