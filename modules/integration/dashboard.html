@@ -1442,6 +1442,68 @@
       cursor: pointer
     }
 
+    /* Chat-first UX (timemachine kind) — modules/price/timemachine.html 차용 */
+    #fullTimemachineBody .tm-chat-shell {
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 62px - 10vh);
+      max-width: 880px;
+      margin: 0 auto;
+      gap: 10px
+    }
+    #fullTimemachineBody .tm-chat-head {
+      padding: 4px 4px 12px;
+      border-bottom: 1px solid #334155
+    }
+    #fullTimemachineBody .tm-chat-co {
+      font-size: 19px;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 4px
+    }
+    #fullTimemachineBody .tm-chat-era {
+      font-size: 13px;
+      color: #5eead4;
+      letter-spacing: 0.3px
+    }
+    #fullTimemachineBody .tm-chat-msgs {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 200px
+    }
+    #fullTimemachineBody .tm-chat-toolbar {
+      display: flex;
+      gap: 8px;
+      padding: 4px 0;
+      border-top: 1px solid #1e293b
+    }
+    #fullTimemachineBody .tm-tb-btn {
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: 1px solid #334155;
+      background: rgba(15, 23, 42, 0.7);
+      color: #cbd5e1;
+      font-size: 12.5px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s
+    }
+    #fullTimemachineBody .tm-tb-btn:hover { background: rgba(77, 166, 255, 0.12) }
+    #fullTimemachineBody .tm-tb-final {
+      margin-left: auto;
+      background: linear-gradient(135deg, rgba(94, 234, 212, 0.18), rgba(77, 166, 255, 0.15));
+      color: #5eead4;
+      border-color: rgba(94, 234, 212, 0.45);
+      font-weight: 600
+    }
+    #fullTimemachineBody .tm-tb-final:hover {
+      background: linear-gradient(135deg, rgba(94, 234, 212, 0.28), rgba(77, 166, 255, 0.22))
+    }
+
     /* Picker (다중 시나리오) */
     #fullTimemachineBody .tm-picker {
       display: grid;
@@ -1730,6 +1792,7 @@
     // {node, scenario?: 단일 시나리오 강제 (카드 클릭 시), panelRendered: 패널 1회 렌더 플래그}
     let tmFocusNode = null;
     let tmFocusScenario = null;
+    let tmFocusKind = null;        // 카드 클릭으로 진입 시 강제 kind ('cardnews'|'quiz'|'timemachine')
     let _tmPanelsRendered = false;
 
     // ===== GATHER MODE (행성 클릭 → 연결 기업이 클릭 행성 주위로 모이는 효과) =====
@@ -2995,14 +3058,18 @@
       return Math.sqrt(dx * dx + dy * dy) < 38;
     }
     function _onMascotClick() {
-      // 타임머신 모드: 시나리오 보유 행성에서 첫번째 가용 콘텐츠 종류 default
+      // 타임머신 모드: 시나리오 보유 행성에서 풀스크린 진입
+      // 카드 클릭으로 진입(tmFocusKind 있음)은 그 kind 사용, 행성 클릭은 우선순위 default
       if (currentMode === 'timemachine' && tmFocusNode) {
         if (!tmFocusNode.has_quiz) return;
-        const kinds = _tmKindsForNode(tmFocusNode);
-        // 우선순위: timemachine → quiz → cardnews (가장 풍부한 UX 우선)
-        const kind = kinds.includes('timemachine') ? 'timemachine'
-                   : kinds.includes('quiz') ? 'quiz'
-                   : kinds[0];
+        let kind = tmFocusKind;
+        if (!kind) {
+          const kinds = _tmKindsForNode(tmFocusNode);
+          // 우선순위: timemachine → quiz → cardnews (가장 풍부한 UX 우선)
+          kind = kinds.includes('timemachine') ? 'timemachine'
+               : kinds.includes('quiz') ? 'quiz'
+               : kinds[0];
+        }
         openFullTimemachine(tmFocusNode, tmFocusScenario, kind);
         return;
       }
@@ -3540,8 +3607,8 @@
       setCount('tmCountTm', tmScs.length);
     }
 
-    // 카드 클릭 → 해당 ticker 행성 찾아서 카메라 fly + cat hop + 자동 풀스크린 진입
-    // kind: 'cardnews' | 'quiz' | 'timemachine' — 진입할 컨텐츠 종류
+    // 카드 클릭 → 해당 ticker 행성으로 카메라 fly + cat hop (자동 풀스크린 진입 X — 사용자가 말풍선/cat 클릭으로 진입)
+    // kind: 'cardnews' | 'quiz' | 'timemachine' — 진입 의도 (말풍선 click 시 동일 kind 풀스크린)
     function _tmCardClick(sid, kind) {
       const sc = (window.__tmScenarios || []).find(s => s.id === sid);
       if (!sc) return;
@@ -3556,9 +3623,10 @@
       _cancelCamTween();
       const cam = _tmFocusCam(node, targetZm);
       _panTo(cam.camX, cam.camY, targetZm, 700);
-      // tmFocus 설정 — 카드 클릭이라 단일 시나리오 강제 지정
+      // tmFocus 설정 — 카드 클릭이라 단일 시나리오·kind 강제 지정
       tmFocusNode = node;
       tmFocusScenario = sc;
+      tmFocusKind = kind;
       // mascot 강제 retarget (이미 같은 행성 위에 있어도 progress 0 부터 다시 hop)
       if (mascot && mascot.targetNode !== node) {
         mascot.prevNode = mascot.targetNode || node;
@@ -3566,13 +3634,7 @@
         mascot.progress = 0;
         mascot.waitTimer = 0;
       }
-      // 카메라 도착 직후 풀스크린 오버레이 자동 진입 (panel 카드 click 의도는 "이 컨텐츠 보기"이므로)
-      window.clearTimeout(window.__tmAutoOpenTimer);
-      window.__tmAutoOpenTimer = window.setTimeout(() => {
-        if (tmFocusNode === node && tmFocusScenario === sc) {
-          openFullTimemachine(node, sc, kind);
-        }
-      }, 750);
+      // 자동 풀스크린 진입 안 함. 사용자가 cat 또는 말풍선을 클릭해야 진입.
     }
 
     // 행성 직접 클릭 (focus 전환) — 카메라 fly + cat hop + 말풍선 (사용자가 말풍선/cat 클릭으로 진입)
@@ -3585,7 +3647,7 @@
       _panTo(cam.camX, cam.camY, targetZm, 700);
       tmFocusNode = node;
       tmFocusScenario = null;  // 행성 직접 클릭은 말풍선 선택으로 분기
-      window.clearTimeout(window.__tmAutoOpenTimer);
+      tmFocusKind = null;
       // mascot 강제 retarget
       if (mascot && mascot.targetNode !== node) {
         mascot.prevNode = mascot.targetNode || node;
@@ -3597,8 +3659,8 @@
     function _exitTimemachineFocus() {
       tmFocusNode = null;
       tmFocusScenario = null;
+      tmFocusKind = null;
       _tmBubbleHits = [];
-      window.clearTimeout(window.__tmAutoOpenTimer);
     }
 
     // 풀스크린 오버레이 진입점 — 시나리오 단일/다중 분기 + 종류별 phase 옵션
@@ -3678,24 +3740,143 @@
       if (sc) _tmStartScenario(sc, { kind: kind || 'timemachine' });
     }
 
-    // Phase A→B→C→D 컨테이너 렌더, 진입은 Phase A
-    let _tmCurrent = null;  // 현재 시나리오 (decision 콜백 등에서 참조)
+    // 시나리오 진입 — kind에 따라 완전히 다른 UX 분기
+    //   - cardnews:    iframe (modules/price/cardnews_*.html) — 6슬라이드 스토리텔링
+    //   - timemachine: chat-first (Gemini 자유대화) → 최종 예측 modal → 결과
+    //   - quiz:        Phase A 배경 + Phase C 결정 → Phase D 정답 (Phase B 자유대화 생략)
+    let _tmCurrent = null;
     let _tmCurrentKind = 'timemachine';
     function _tmStartScenario(sc, opts) {
       opts = opts || {};
       _tmCurrent = sc;
       _tmCurrentKind = opts.kind || 'timemachine';
       window.__tmChatHistory = [];
+      if (_tmCurrentKind === 'cardnews') {
+        _tmRenderCardnews(sc);
+      } else if (_tmCurrentKind === 'timemachine') {
+        _tmRenderChatFirst(sc);
+      } else {
+        _tmRenderQuizFlow(sc);
+      }
+    }
+
+    // 카드뉴스 — modules/price/cardnews_*.html iframe 차용. 현재 id=11 (삼성 자사주소각) 만 6슬라이드 보유.
+    function _tmRenderCardnews(sc) {
+      const body = document.getElementById('fullTimemachineBody');
+      // id별 카드뉴스 HTML 매핑 (price 모듈 산출물). 추가될 경우 여기 확장.
+      const CARDNEWS_FILES = {
+        11: '../price/cardnews_samsung_buyback.html',
+      };
+      const file = CARDNEWS_FILES[sc.id];
+      if (file) {
+        body.innerHTML = `<iframe src="${file}"
+          style="position:absolute;inset:0;width:100%;height:100%;border:0;background:#0f1117"
+          title="카드뉴스 — ${_escHtmlSafe(sc.company)}"></iframe>`;
+      } else {
+        body.innerHTML = `<div style="padding:80px 24px;text-align:center;color:#94a3b8;font-size:15px;line-height:1.7">
+          <div style="font-size:36px;margin-bottom:14px">📰</div>
+          이 시나리오의 카드뉴스는 아직 준비되지 않았습니다<br>
+          <span style="font-size:12.5px;color:#64748b;margin-top:8px;display:inline-block">
+            현재 카드뉴스는 삼성전자 자사주소각(2026-03-31) 1건만 제공됩니다 — modules/price/cardnews_*.html
+          </span>
+        </div>`;
+      }
+    }
+
+    // 퀴즈 — 정적 Phase A → C → D (자유대화 없음, 한 번 결정으로 정답 공개)
+    function _tmRenderQuizFlow(sc) {
       const body = document.getElementById('fullTimemachineBody');
       body.innerHTML = `
         <div id="tmPhaseA"></div>
-        <div id="tmPhaseB"></div>
         <div id="tmPhaseC"></div>
         <div id="tmPhaseD" style="display:none"></div>
       `;
       _tmRenderBackground(sc);
-      _tmRenderChat(sc, _tmCurrentKind);
       _tmRenderDecision(sc);
+    }
+
+    // 타임머신 — modules/price/timemachine.html 차용, 채팅 우선 UX
+    // 1) 인트로 메시지(공시 알림 + 배경)  2) Gemini 자유대화 (시점 제약)  3) "🎯 최종 예측" → 모달 → 결과 화면
+    function _tmRenderChatFirst(sc) {
+      const body = document.getElementById('fullTimemachineBody');
+      const fmtDate = (raw) => {
+        const m = String(raw || '').match(/^(\d{4})-(\d{2})-(\d{2})/);
+        return m ? `${m[1]}년 ${parseInt(m[2], 10)}월 ${parseInt(m[3], 10)}일` : (raw || '');
+      };
+      const keyMissing = !window.GEMINI_API_KEY || window.GEMINI_API_KEY === 'YOUR_API_KEY_HERE';
+      body.innerHTML = `
+        <div class="tm-chat-shell">
+          <div class="tm-chat-head">
+            <div class="tm-chat-co">${_escHtmlSafe(sc.company)} <span style="color:#94a3b8;font-size:13px;font-weight:400">(${_escHtmlSafe(sc.ticker || '')})</span></div>
+            <div class="tm-chat-era">${_escHtmlSafe(fmtDate(sc.date))} 시점 시간여행 · ${_escHtmlSafe(sc.category || '-')}</div>
+          </div>
+          <div class="tm-chat-msgs" id="tmChatMsgs"></div>
+          <div class="tm-chat-hints" id="tmChatHints" style="display:none"></div>
+          <div class="tm-chat-toolbar">
+            <button class="tm-tb-btn tm-tb-hint" onclick="_tmToggleHints()">💡 힌트</button>
+            <button class="tm-tb-btn tm-tb-final" onclick="_tmShowFinalModal()">🎯 최종 예측</button>
+          </div>
+          <div class="tm-chat-input-row" id="tmChatInputRow">
+            <textarea id="tmChatInput" rows="1" placeholder="${keyMissing ? 'Gemini API 키 미설정 — 자유대화 비활성. chat_config.local.js를 확인하세요.' : '이 공시에 대해 자유롭게 질문해보세요'}"
+              ${keyMissing ? 'disabled' : ''}
+              onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();_tmChatSend();}"></textarea>
+            <button id="tmChatSend" onclick="_tmChatSend()" ${keyMissing ? 'disabled' : ''}>전송</button>
+          </div>
+        </div>`;
+      // 인트로 메시지 — modules/price/timemachine.html buildIntro(sc) 차용
+      const intro = `${fmtDate(sc.date)}, 당신은 ${sc.company} 주주입니다.\n\n📄 공시 알림:\n"${sc.title || ''}"\n\n${sc.context || ''}\n\n이 공시에 대해 자유롭게 질문하거나 의견을 말씀해 주세요.\n💡 힌트 버튼을 누르면 참고 질문을 추천해드립니다. 충분히 분석했다면 🎯 최종 예측 버튼을 눌러 결과를 확인하세요.`;
+      setTimeout(() => _tmChatAppend('assistant', intro), 200);
+      if (keyMissing) {
+        setTimeout(() => _tmChatAppend('system', 'Gemini API 키가 설정되어 있지 않아 자유대화는 비활성입니다. modules/integration/chat_config.local.js를 설정하면 활성화됩니다. 그대로 🎯 최종 예측 버튼을 눌러 결과 화면으로 진행할 수 있습니다.'), 400);
+      }
+    }
+    // 힌트 칩 토글 — timemachine.html fetchHints() 차용
+    function _tmToggleHints() {
+      const wrap = document.getElementById('tmChatHints');
+      if (!wrap) return;
+      if (wrap.style.display === 'block') { wrap.style.display = 'none'; return; }
+      // 시나리오별 힌트 — quiz_data.py / timemachine.html 의 5개 표준 질문 차용
+      const sc = _tmCurrent;
+      const SCENARIO_HINTS = {
+        1: ['물적분할이 기존 주주에게 불리한 이유는?', '지주사 할인이란 뭔가요?', '배터리 비중이 65%면 주가에 어떤 영향?', '한국에서 비슷한 물적분할 사례가 있나요?'],
+        2: ['수주 공시가 주가에 호재인 이유는?', '힘센엔진이 뭔가요?', 'AI 데이터센터 전력 수요가 얼마나 큰가요?', '섹터 리레이팅이란 무슨 뜻인가요?'],
+        3: ['감산 결정이 주가에 호재인 이유는?', '메모리 반도체 사이클이란?', 'D램·낸드 가격 흐름은?', '경쟁사 감산이 미친 영향은?'],
+      };
+      const generic = ['이 공시가 기존 주주에게 어떤 영향을 주나요?', '비슷한 과거 사례가 있나요?', '재무 부담은 어느 정도인가요?', '시장은 어떻게 반응할까요?', '단기 대응과 장기 관점은 다를까요?'];
+      const hints = (sc && SCENARIO_HINTS[sc.id]) || generic;
+      wrap.innerHTML = hints.map(h => `<span class="tm-hint" onclick="_tmHintClickText(this)">${_escHtmlSafe(h)}</span>`).join('');
+      wrap.style.display = 'block';
+    }
+    function _tmHintClickText(el) {
+      const inp = document.getElementById('tmChatInput');
+      if (inp && !inp.disabled) {
+        inp.value = el.textContent;
+        inp.focus();
+      }
+    }
+    // 최종 예측 modal — timemachine.html confirmResult() 차용
+    function _tmShowFinalModal() {
+      const m = document.createElement('div');
+      m.id = 'tmFinalModal';
+      m.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.78);display:flex;align-items:center;justify-content:center;z-index:10100;padding:24px';
+      m.onclick = (e) => { if (e.target === m) m.remove(); };
+      m.innerHTML = `
+        <div style="background:#0f172a;border:1px solid #334155;border-radius:14px;padding:26px 24px;max-width:380px;width:100%;text-align:center">
+          <div style="font-size:32px;margin-bottom:10px">🎯</div>
+          <h3 style="font-size:17px;font-weight:700;margin:0 0 8px;color:#f8fafc">최종 예측</h3>
+          <p style="color:#94a3b8;font-size:13px;margin:0 0 18px">공시 후 주가 방향을 최종 선택하세요</p>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <button onclick="_tmPickFinal('수혜')" style="background:#1a3a2a;border:1.5px solid #2d5a3d;color:#4ade80;padding:13px;border-radius:10px;cursor:pointer;font-size:14.5px;font-weight:600">📈 수혜 예상 (상승)</button>
+            <button onclick="_tmPickFinal('악재')" style="background:#3a1a1a;border:1.5px solid #5a2d2d;color:#f87171;padding:13px;border-radius:10px;cursor:pointer;font-size:14.5px;font-weight:600">📉 악재 예상 (하락)</button>
+            <button onclick="_tmPickFinal('중립')" style="background:rgba(148,163,184,0.1);border:1.5px solid #475569;color:#cbd5e1;padding:13px;border-radius:10px;cursor:pointer;font-size:14px">🤔 중립 / 잘 모르겠습니다</button>
+          </div>
+          <button onclick="document.getElementById('tmFinalModal')?.remove()" style="background:none;border:0;color:#64748b;font-size:12.5px;cursor:pointer;margin-top:14px">취소</button>
+        </div>`;
+      document.body.appendChild(m);
+    }
+    function _tmPickFinal(stance) {
+      document.getElementById('tmFinalModal')?.remove();
+      _tmReveal(stance);
     }
 
     function _tmRenderBackground(sc) {
@@ -3704,58 +3885,13 @@
         return m ? `${m[1]}년 ${parseInt(m[2], 10)}월 ${parseInt(m[3], 10)}일` : (raw || '');
       };
       const phaseA = document.getElementById('tmPhaseA');
+      if (!phaseA) return;
       phaseA.innerHTML = `
         <div class="tm-section">
           <div class="tm-section-h">📅 ${_escHtmlSafe(fmtDate(sc.date))} · ${_escHtmlSafe(sc.category || '-')}</div>
           <div class="tm-section-title">${_escHtmlSafe(sc.title || '')}</div>
           <div class="tm-context">${_escHtmlSafe(sc.context || '')}</div>
         </div>`;
-    }
-
-    function _tmRenderChat(sc, kind) {
-      const phaseB = document.getElementById('tmPhaseB');
-      // 자유대화 phase는 'timemachine' kind + 시나리오 id가 freechat 화이트리스트일 때만 노출
-      const isFreechatOk = (kind === 'timemachine') && TM_FREECHAT_IDS.has(sc.id);
-      const keyMissing = !window.GEMINI_API_KEY || window.GEMINI_API_KEY === 'YOUR_API_KEY_HERE';
-      if (!isFreechatOk) {
-        // Phase B 자체 생략 — quiz·cardnews kind 또는 freechat 미보유 시나리오
-        phaseB.innerHTML = '';
-        return;
-      }
-      if (keyMissing) {
-        phaseB.innerHTML = `
-          <div class="tm-section">
-            <div class="tm-section-h">💬 자유 대화</div>
-            <div style="color:#fbbf24;font-size:13px;line-height:1.7">
-              Gemini API 키가 설정되지 않아 자유대화는 비활성 상태입니다.<br>
-              <code style="background:rgba(99,102,241,0.15);padding:2px 6px;border-radius:4px">modules/integration/chat_config.local.js</code> 에 키를 입력하면 활성화됩니다.<br>
-              그대로 결정·정답 단계로 진행할 수 있습니다.
-            </div>
-          </div>`;
-        return;
-      }
-      const hints = ['이 공시가 기존 주주에게 어떤 영향을 주나요?', '비슷한 과거 사례가 있나요?', '재무 부담은 어느 정도인가요?', '시장은 어떻게 반응할까요?', '단기 대응과 장기 관점은 다를까요?'];
-      const hintHtml = hints.map(h => `<span class="tm-hint" onclick="_tmHintClick(this)">${_escHtmlSafe(h)}</span>`).join('');
-      phaseB.innerHTML = `
-        <div class="tm-section">
-          <div class="tm-section-h">💬 자유 대화 (당시 시점 한정)</div>
-          <div class="tm-chat" id="tmChatMsgs"></div>
-          <div class="tm-hints">${hintHtml}</div>
-          <div class="tm-chat-input-row">
-            <textarea id="tmChatInput" rows="1" placeholder="이 공시에 대해 자유롭게 질문해보세요"
-              onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();_tmChatSend();}"></textarea>
-            <button id="tmChatSend" onclick="_tmChatSend()">전송</button>
-          </div>
-        </div>`;
-      // 환영 메시지
-      _tmChatAppend('system', `${sc.date ? sc.date + ', ' : ''}당신은 ${sc.company} 주주입니다. 자유롭게 질문해보세요. (당시 시점 정보만 답변)`);
-    }
-
-    function _tmHintClick(el) {
-      const inp = document.getElementById('tmChatInput');
-      if (!inp) return;
-      inp.value = el.textContent;
-      inp.focus();
     }
 
     function _tmChatAppend(role, text) {
@@ -3859,9 +3995,10 @@
       return _tmExtractText(data) || '(빈 응답)';
     }
 
-    // Phase C — 결정 버튼 3개 (수혜·중립·악재)
+    // Phase C — 결정 버튼 3개 (수혜·중립·악재) [quiz kind 전용]
     function _tmRenderDecision(sc) {
       const phaseC = document.getElementById('tmPhaseC');
+      if (!phaseC) return;
       phaseC.innerHTML = `
         <div class="tm-section">
           <div class="tm-section-h">🤔 당신의 판단은?</div>
@@ -3878,12 +4015,17 @@
     function _tmReveal(userChoice) {
       const sc = _tmCurrent;
       if (!sc) return;
-      // Phase C 버튼 비활성화 + 선택 표시
+      // quiz kind: Phase C 버튼 비활성화 + 선택 표시
       const decBtns = document.querySelectorAll('#tmPhaseC .tm-decision button');
       decBtns.forEach(b => {
         b.disabled = true;
         if (b.textContent.includes(userChoice)) b.classList.add('chosen');
       });
+      // timemachine kind: 입력란 비활성화 + 결과 영역 노출
+      const inp = document.getElementById('tmChatInput');
+      if (inp) inp.disabled = true;
+      const sendBtn = document.getElementById('tmChatSend');
+      if (sendBtn) sendBtn.disabled = true;
       const chg = sc.change_pct;
       const kospi = sc.kospi_change_pct;
       const stockColor = chg >= 0 ? '#4ade80' : '#f87171';
@@ -3893,7 +4035,13 @@
       const excess = (chg != null && kospi != null) ? (chg - kospi) : null;
       const excessRow = (excess != null) ? `<div class="tm-reveal-row"><span style="color:#94a3b8">초과 (종목-코스피)</span><span style="color:${excess >= 0 ? '#4ade80' : '#f87171'};font-weight:600">${(excess >= 0 ? '+' : '') + excess.toFixed(1)}%p</span></div>` : '';
       const kospiRow = (kospi != null) ? `<div class="tm-reveal-row"><span style="color:#94a3b8">KOSPI (동기간)</span><span style="color:${kospi >= 0 ? '#4ade80' : '#f87171'};font-weight:500">${kospi >= 0 ? '+' : ''}${kospi}%</span></div>` : '';
-      const phaseD = document.getElementById('tmPhaseD');
+      // chat-first 모드는 #tmPhaseD가 없으므로 동적 추가
+      let phaseD = document.getElementById('tmPhaseD');
+      if (!phaseD) {
+        phaseD = document.createElement('div');
+        phaseD.id = 'tmPhaseD';
+        document.getElementById('fullTimemachineBody').appendChild(phaseD);
+      }
       phaseD.style.display = 'block';
       phaseD.innerHTML = `
         <div class="tm-section">
