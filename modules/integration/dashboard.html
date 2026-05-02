@@ -2683,17 +2683,18 @@
       } else {
         cardsHtml = discList.map((d, idx) => {
           const impactBadge = d.high_impact
-            ? '<span style="font-size:10px;padding:2px 8px;border-radius:6px;background:rgba(248,113,113,0.18);color:#fca5a5;font-weight:600;margin-left:8px">⚠ HIGH IMPACT</span>'
+            ? '<span style="font-size:12px;padding:3px 10px;border-radius:7px;background:rgba(248,113,113,0.18);color:#fca5a5;font-weight:600;margin-left:10px">⚠ HIGH IMPACT</span>'
             : '';
           const dilText = d.dilution_ratio != null
-            ? `<div style="font-size:11px;color:#fbbf24;margin-top:4px">희석률 ${(d.dilution_ratio * 100).toFixed(1)}%</div>`
+            ? `<div style="font-size:13px;color:#fbbf24;margin-top:6px">희석률 ${(d.dilution_ratio * 100).toFixed(1)}%</div>`
             : '';
           const parsed = _parseDiscSummary(d.summary);
           let summaryBlock = '';
           if (parsed.hasStructured) {
-            summaryBlock = `<div style="margin-top:10px">${_renderDiscSections(parsed)}</div>`;
+            // 풀스크린이라 large=true → 큰 폰트
+            summaryBlock = `<div style="margin-top:12px">${_renderDiscSections(parsed, true)}</div>`;
           } else if (d.summary) {
-            summaryBlock = `<div style="margin-top:10px;font-size:12px;color:#94a3b8;white-space:pre-wrap;line-height:1.6">${_escHtml(d.summary)}</div>`;
+            summaryBlock = `<div style="margin-top:12px;font-size:14.5px;color:#cbd5e1;white-space:pre-wrap;line-height:1.7">${_escHtml(d.summary)}</div>`;
           }
           return `
         <div class="disc-card">
@@ -2886,11 +2887,18 @@
         .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
     }
 
-    // 4섹션을 작은 라벨 + 본문 형태로 렌더 (배경 박스 없이 현재 카드 톤 유지)
-    function _renderDiscSections(parsed) {
+    // 4섹션을 라벨 + 본문 형태로 렌더 (배경 박스 없이 카드 톤 유지)
+    // large=true: 풀스크린 오버레이용 큰 폰트 / 기본: 우측 패널용 작은 폰트
+    function _renderDiscSections(parsed, large) {
+      const labelSize = large ? 14 : 10;
+      const bodySize  = large ? 15 : 10;
+      const lh        = large ? 1.75 : 1.6;
+      const bodyColor = large ? '#cbd5e1' : '#aaa';
+      const marginTop = large ? 10 : 4;
+      const marginBot = large ? 12 : 6;
       const seg = (label, accent, body) => body
-        ? `<div style="margin:4px 0 6px"><strong style="color:${accent};font-size:10px;letter-spacing:0.3px">${label}</strong>
-         <span style="color:#aaa;font-size:10px;line-height:1.6;white-space:pre-wrap">  ${_escHtml(body)}</span></div>`
+        ? `<div style="margin:${marginTop}px 0 ${marginBot}px"><strong style="color:${accent};font-size:${labelSize}px;letter-spacing:0.4px">${label}</strong>
+         <span style="color:${bodyColor};font-size:${bodySize}px;line-height:${lh};white-space:pre-wrap">  ${_escHtml(body)}</span></div>`
         : '';
       return [
         seg('💰 Cash', '#4ade80', parsed.cash),
