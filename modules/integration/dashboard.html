@@ -1127,8 +1127,10 @@
     }
 
     /* === Timemachine 탭 전용 UI === */
-    /* 좌하단 관계 legend 숨김 (타임머신 탭에서만) */
+    /* 좌하단 관계 legend + 좌상단 알림 배너 + 좌상단 타이틀 모두 숨김 (타임머신 탭에서만) */
     body.mode-tm .legend.legend-edge { display: none !important; }
+    body.mode-tm .alert-banner { display: none !important; }
+    body.mode-tm .title { display: none !important; }
 
     /* 화면 하단 3분할 콘텐츠 패널 (카드뉴스·퀴즈·타임머신) */
     #tmContentPanels {
@@ -2076,7 +2078,8 @@
       x.globalAlpha = 1.0;
     }
 
-    function _drawSpeechBubble(text, ax, ay) {
+    function _drawSpeechBubble(text, ax, ay, opts) {
+      opts = opts || {};
       // 폰트 크기를 zm로 역보정 → 화면상 일관된 크기
       const fontPx = Math.max(11, 13 / Math.max(0.6, zm) * 0.9);
       x.save();
@@ -2088,6 +2091,7 @@
       const h = fontPx * 1.5 + padY * 2;
       const left = ax - w / 2;
       const top = ay - h - 10;  // 마스코트 위쪽
+      const drawTail = opts.drawTail !== false;
       // 말풍선 본체 (둥근 사각형)
       const r = 8;
       x.beginPath();
@@ -2096,28 +2100,34 @@
       x.quadraticCurveTo(left + w, top, left + w, top + r);
       x.lineTo(left + w, top + h - r);
       x.quadraticCurveTo(left + w, top + h, left + w - r, top + h);
-      // 꼬리(말풍선 아래쪽 중앙에서 마스코트 방향)
-      x.lineTo(ax + 8, top + h);
-      x.lineTo(ax, top + h + 9);
-      x.lineTo(ax - 8, top + h);
+      if (drawTail) {
+        // 꼬리(말풍선 아래쪽 중앙에서 마스코트 방향)
+        x.lineTo(ax + 8, top + h);
+        x.lineTo(ax, top + h + 9);
+        x.lineTo(ax - 8, top + h);
+      }
       x.lineTo(left + r, top + h);
       x.quadraticCurveTo(left, top + h, left, top + h - r);
       x.lineTo(left, top + r);
       x.quadraticCurveTo(left, top, left + r, top);
       x.closePath();
-      // 부드러운 펄스
+      // hover/active 색상 변형 + 부드러운 펄스
       const pulse = 0.85 + Math.sin(time * 3) * 0.15;
-      x.fillStyle = `rgba(8, 12, 24, ${0.92 * pulse})`;
-      x.strokeStyle = 'rgba(255, 220, 120, 0.85)';
-      x.lineWidth = 1.4;
+      const accent = opts.accent || 'rgba(255, 220, 120, 0.85)';
+      const fillBase = opts.fillBase || 'rgba(8, 12, 24,';
+      x.fillStyle = `${fillBase} ${0.92 * pulse})`;
+      x.strokeStyle = accent;
+      x.lineWidth = opts.clickable ? 1.8 : 1.4;
       x.fill();
       x.stroke();
       // 텍스트
-      x.fillStyle = '#fff5dc';
+      x.fillStyle = opts.textColor || '#fff5dc';
       x.textAlign = 'center';
       x.textBaseline = 'middle';
       x.fillText(text, ax, top + h / 2);
       x.restore();
+      // hit 영역 반환 (world coords)
+      return { x: left, y: top, w: w, h: h };
     }
 
     function setMode(mode, btn) {
@@ -2853,16 +2863,40 @@
       x.restore();
 
       // === SPEECH BUBBLE (gather 또는 timemachine focus 활성 + 마스코트 도착 시) ===
+      _tmBubbleHits = [];  // 매 프레임 reset, 도착 시 채움
       if (gatherMode && mascot.targetNode === gatherMode.center && mascot.progress >= 1) {
         const text = currentMode === 'disclosure'
           ? '공시를 확인하려면 나를 클릭해줘'
           : '재무제표를 확인하려면 나를 클릭해줘';
         _drawSpeechBubble(text, mascot.x, mascot.y - mascot.bounceY - 30);
       } else if (tmFocusNode && mascot.targetNode === tmFocusNode && mascot.progress >= 1) {
-        const text = tmFocusNode.has_quiz
-          ? '타임머신을 체험하려면 나를 클릭해줘'
-          : '이 기업의 시나리오는 아직 준비되지 않았습니다';
-        _drawSpeechBubble(text, mascot.x, mascot.y - mascot.bounceY - 30);
+        if (!tmFocusNode.has_quiz) {
+          // 시나리오 미보유 — 단일 안내 말풍선 (클릭 불가)
+          _drawSpeechBubble('이 기업의 시나리오는 아직 준비되지 않았습니다',
+            mascot.x, mascot.y - mascot.bounceY - 30);
+        } else {
+          // 가용 콘텐츠 종류별 말풍선 stack
+          const kinds = _tmKindsForNode(tmFocusNode);
+          const baseTop = mascot.y - mascot.bounceY - 30;
+          // 색상: cardnews=amber / quiz=violet / timemachine=cyan
+          const accents = {
+            cardnews: 'rgba(251, 191, 36, 0.95)',
+            quiz: 'rgba(168, 139, 250, 0.95)',
+            timemachine: 'rgba(94, 234, 212, 0.95)',
+          };
+          // 각 말풍선 약 28~32px 높이 — 위쪽 누적 stack (top-most = first kind)
+          let stackY = baseTop;
+          // 위에서 아래 순서: cardnews → quiz → timemachine. 즉 stack을 위로 쌓으려면 reverse 로 그려야 timemachine이 가장 가까이 cat 위에 옴
+          const reversed = kinds.slice().reverse();
+          reversed.forEach((kind) => {
+            const text = TM_BUBBLE_TEXT[kind] || '';
+            const rect = _drawSpeechBubble(text, mascot.x, stackY,
+              { accent: accents[kind], clickable: true, drawTail: kind === reversed[0] });
+            _tmBubbleHits.push({ kind, rect });
+            // 다음 말풍선은 이 말풍선 위쪽 (rect.y 가 위)
+            stackY = rect.y - 6;
+          });
+        }
       }
 
       // Update prevNode for next hop
@@ -2906,7 +2940,18 @@
     c.addEventListener('mousedown', e => {
       _cancelCamTween();
       const mx = (e.clientX - camX) / zm, my = (e.clientY - camY) / zm;
-      // 1) 고양이 클릭 우선 판정 (gather/timemachine focus 활성 시 마스코트가 클릭 행성 위)
+      // 1a) 타임머신 말풍선 클릭 우선 판정 (말풍선이 cat 보다 위쪽에 위치, hit 영역 별도)
+      if (currentMode === 'timemachine' && tmFocusNode && _tmBubbleHits.length) {
+        for (let i = 0; i < _tmBubbleHits.length; i++) {
+          const h = _tmBubbleHits[i];
+          if (mx >= h.rect.x && mx <= h.rect.x + h.rect.w &&
+              my >= h.rect.y && my <= h.rect.y + h.rect.h) {
+            openFullTimemachine(tmFocusNode, null, h.kind);
+            return;
+          }
+        }
+      }
+      // 1b) 고양이 클릭 (gather/timemachine focus 활성 시 마스코트가 클릭 행성 위)
       if ((gatherMode || tmFocusNode) && _hitMascot(mx, my)) {
         _onMascotClick();
         return;
@@ -2950,9 +2995,15 @@
       return Math.sqrt(dx * dx + dy * dy) < 38;
     }
     function _onMascotClick() {
-      // 타임머신 모드: 시나리오 보유 행성에서만 풀스크린 진입
+      // 타임머신 모드: 시나리오 보유 행성에서 첫번째 가용 콘텐츠 종류 default
       if (currentMode === 'timemachine' && tmFocusNode) {
-        if (tmFocusNode.has_quiz) openFullTimemachine(tmFocusNode, tmFocusScenario);
+        if (!tmFocusNode.has_quiz) return;
+        const kinds = _tmKindsForNode(tmFocusNode);
+        // 우선순위: timemachine → quiz → cardnews (가장 풍부한 UX 우선)
+        const kind = kinds.includes('timemachine') ? 'timemachine'
+                   : kinds.includes('quiz') ? 'quiz'
+                   : kinds[0];
+        openFullTimemachine(tmFocusNode, tmFocusScenario, kind);
         return;
       }
       if (!gatherMode) return;
@@ -3412,6 +3463,39 @@
     }
 
     // ===== TIMEMACHINE — 풀스크린 오버레이 + 3패널 + cat hop flow =====
+    // 행성에 어떤 콘텐츠가 활성인지 판정 → 말풍선 갯수·종류 결정
+    // 반환: 가용 종류 배열 (순서: cardnews → quiz → timemachine)
+    function _tmKindsForNode(node) {
+      if (!node || !node.has_quiz) return [];
+      const all = node.tmAll || [];
+      const out = [];
+      if (all.some(s => TM_CARDNEWS_IDS.has(s.id))) out.push('cardnews');
+      if (all.some(s => TM_QUIZ_IDS.has(s.id))) out.push('quiz');
+      if (all.some(s => TM_FREECHAT_IDS.has(s.id))) out.push('timemachine');
+      return out;
+    }
+    // 카드 클릭/행성 클릭 시 카메라 target 좌표 — 하단 3패널이 가린 영역을 피해 상단 가용 영역 중앙으로
+    function _tmFocusCam(node, targetZm) {
+      const panelHpx = Math.min(H * 0.38, H);
+      const hudH = 92;
+      const availTop = 80;       // 상단 여유
+      const availBottom = H - hudH - panelHpx;
+      const screenCy = availTop + (availBottom - availTop) / 2;
+      const screenCx = W / 2;
+      return {
+        camX: screenCx - node.x * targetZm,
+        camY: screenCy - node.y * targetZm,
+      };
+    }
+    // 가용 콘텐츠 종류별 텍스트
+    const TM_BUBBLE_TEXT = {
+      cardnews: '카드뉴스를 보려면 말풍선을 클릭해줘',
+      quiz: '퀴즈를 체험하려면 말풍선을 클릭해줘',
+      timemachine: '타임머신을 체험하려면 말풍선을 클릭해줘',
+    };
+    // 말풍선 hit 영역 (world coords) — mousedown 핸들러에서 클릭 검사
+    let _tmBubbleHits = [];
+
     // 카드뉴스/퀴즈/타임머신 3분할 패널 렌더 (setMode('timemachine') 진입 시 1회)
     function _renderTmPanels() {
       const all = (window.__tmScenarios || []).slice();
@@ -3436,12 +3520,10 @@
         const cat = _escHtmlSafe(s.category || '-');
         const lv = _escHtmlSafe(levelOf(s));
         const firm = _escHtmlSafe(s.company || '');
-        const title = _escHtmlSafe(s.title || '');
         const cta = kind === 'cardnews' ? '카드뉴스 보기 →' : kind === 'quiz' ? '퀴즈 풀기 →' : '대화 시작 →';
-        return `<div class="tm-card" data-sid="${s.id}" onclick="_tmCardClick(${s.id})">
+        return `<div class="tm-card" data-sid="${s.id}" onclick="_tmCardClick(${s.id},'${kind}')">
           <div class="meta"><span class="date">${date}</span><span class="badge">${cat}</span><span class="level">${lv}</span></div>
           <div class="firm">${firm}</div>
-          <div class="title">${title}</div>
           <div class="cta">${cta}</div>
         </div>`;
       };
@@ -3458,54 +3540,95 @@
       setCount('tmCountTm', tmScs.length);
     }
 
-    // 카드 클릭 → 해당 ticker 행성 찾아서 카메라 fly + cat hop + 말풍선
-    function _tmCardClick(sid) {
+    // 카드 클릭 → 해당 ticker 행성 찾아서 카메라 fly + cat hop + 자동 풀스크린 진입
+    // kind: 'cardnews' | 'quiz' | 'timemachine' — 진입할 컨텐츠 종류
+    function _tmCardClick(sid, kind) {
       const sc = (window.__tmScenarios || []).find(s => s.id === sid);
       if (!sc) return;
       const node = (nodes || []).find(n => n.t === sc.ticker);
       if (!node) {
         // 비상장·매칭 실패 — 즉시 시나리오 진입 (행성 hop 단계 생략)
-        openFullTimemachine({ n: sc.company, t: sc.ticker, has_quiz: true, tmAll: [sc] }, sc);
+        openFullTimemachine({ n: sc.company, t: sc.ticker, has_quiz: true, tmAll: [sc] }, sc, kind);
         return;
       }
-      // 카메라 부드럽게 이동 (simAlert 패턴 차용)
+      // 카메라 부드럽게 이동 — 하단 3패널이 가린 영역 회피하고 상단 가용 영역 중앙에 배치
       const targetZm = 1.0;
-      _panTo(W / 2 - node.x * targetZm, H / 2 - node.y * targetZm, targetZm, 700);
+      _cancelCamTween();
+      const cam = _tmFocusCam(node, targetZm);
+      _panTo(cam.camX, cam.camY, targetZm, 700);
       // tmFocus 설정 — 카드 클릭이라 단일 시나리오 강제 지정
       tmFocusNode = node;
       tmFocusScenario = sc;
+      // mascot 강제 retarget (이미 같은 행성 위에 있어도 progress 0 부터 다시 hop)
+      if (mascot && mascot.targetNode !== node) {
+        mascot.prevNode = mascot.targetNode || node;
+        mascot.targetNode = node;
+        mascot.progress = 0;
+        mascot.waitTimer = 0;
+      }
+      // 카메라 도착 직후 풀스크린 오버레이 자동 진입 (panel 카드 click 의도는 "이 컨텐츠 보기"이므로)
+      window.clearTimeout(window.__tmAutoOpenTimer);
+      window.__tmAutoOpenTimer = window.setTimeout(() => {
+        if (tmFocusNode === node && tmFocusScenario === sc) {
+          openFullTimemachine(node, sc, kind);
+        }
+      }, 750);
     }
 
-    // 행성 직접 클릭 (focus 전환) — 카메라 fly + cat hop + 시나리오 미지정 (cat 클릭 시 picker 또는 단일)
+    // 행성 직접 클릭 (focus 전환) — 카메라 fly + cat hop + 말풍선 (사용자가 말풍선/cat 클릭으로 진입)
     function _enterTimemachineFocus(node) {
       // 같은 행성 재클릭 → no-op
       if (tmFocusNode === node) return;
+      _cancelCamTween();
       const targetZm = 1.0;
-      _panTo(W / 2 - node.x * targetZm, H / 2 - node.y * targetZm, targetZm, 700);
+      const cam = _tmFocusCam(node, targetZm);
+      _panTo(cam.camX, cam.camY, targetZm, 700);
       tmFocusNode = node;
-      tmFocusScenario = null;  // 행성 직접 클릭은 picker로 분기
+      tmFocusScenario = null;  // 행성 직접 클릭은 말풍선 선택으로 분기
+      window.clearTimeout(window.__tmAutoOpenTimer);
+      // mascot 강제 retarget
+      if (mascot && mascot.targetNode !== node) {
+        mascot.prevNode = mascot.targetNode || node;
+        mascot.targetNode = node;
+        mascot.progress = 0;
+        mascot.waitTimer = 0;
+      }
     }
     function _exitTimemachineFocus() {
       tmFocusNode = null;
       tmFocusScenario = null;
+      _tmBubbleHits = [];
+      window.clearTimeout(window.__tmAutoOpenTimer);
     }
 
-    // 풀스크린 오버레이 진입점 — 시나리오 단일/다중 분기
-    function openFullTimemachine(node, forcedScenario) {
+    // 풀스크린 오버레이 진입점 — 시나리오 단일/다중 분기 + 종류별 phase 옵션
+    // kind: 'timemachine'(default, freechat 가능) | 'quiz'(no freechat) | 'cardnews'(no freechat, MVP는 quiz UX)
+    function openFullTimemachine(node, forcedScenario, kind) {
+      kind = kind || 'timemachine';
       const overlay = document.getElementById('fullTimemachine');
       const titleEl = document.getElementById('fullTimemachineTitle');
       const subEl = document.getElementById('fullTimemachineSubtitle');
       const body = document.getElementById('fullTimemachineBody');
-      const all = node.tmAll || [];
+      const allRaw = node.tmAll || [];
+      // 종류별 가용 시나리오 필터
+      let candidates = allRaw;
+      if (kind === 'cardnews')   candidates = allRaw.filter(s => TM_CARDNEWS_IDS.has(s.id));
+      else if (kind === 'quiz')  candidates = allRaw.filter(s => TM_QUIZ_IDS.has(s.id));
+      else                       candidates = allRaw.filter(s => TM_FREECHAT_IDS.has(s.id));
       titleEl.textContent = node.n || '';
       subEl.textContent = node.t ? `(${node.t})` : '';
-      // 단일 시나리오 강제 지정 (카드 클릭 진입) → 바로 시작
+      const opts = { kind };
       if (forcedScenario) {
-        _tmStartScenario(forcedScenario);
-      } else if (all.length === 1) {
-        _tmStartScenario(all[0]);
-      } else if (all.length >= 2) {
-        _tmShowPicker(all);
+        _tmStartScenario(forcedScenario, opts);
+      } else if (candidates.length === 1) {
+        _tmStartScenario(candidates[0], opts);
+      } else if (candidates.length >= 2) {
+        _tmShowPicker(candidates, opts);
+      } else if (allRaw.length >= 2) {
+        // 종류 불일치 시 fallback — 전체 시나리오 picker
+        _tmShowPicker(allRaw, opts);
+      } else if (allRaw.length === 1) {
+        _tmStartScenario(allRaw[0], opts);
       } else {
         body.innerHTML = `<div style="padding:60px 0;text-align:center;color:#94a3b8">이 기업의 시나리오는 아직 준비되지 않았습니다</div>`;
       }
@@ -3524,21 +3647,24 @@
     }
 
     // 다중 시나리오 picker — 삼성전자 같은 경우
-    function _tmShowPicker(scenarios) {
+    function _tmShowPicker(scenarios, opts) {
+      opts = opts || {};
+      const kind = opts.kind || 'timemachine';
       const body = document.getElementById('fullTimemachineBody');
       const fmtDate = (raw) => {
         const m = String(raw || '').match(/^(\d{4})-(\d{2})-(\d{2})/);
         return m ? `${m[1]}년 ${parseInt(m[2], 10)}월 ${parseInt(m[3], 10)}일` : (raw || '');
       };
+      const cta = kind === 'cardnews' ? '카드뉴스 보기 →' : kind === 'quiz' ? '퀴즈 풀기 →' : '대화 시작 →';
       const cards = scenarios.map((s, i) => `
-        <div class="tm-card" style="border-left-color:#5eead4" onclick="_tmStartScenarioById(${s.id})">
+        <div class="tm-card" style="border-left-color:#5eead4" onclick="_tmStartScenarioById(${s.id},'${kind}')">
           <div class="meta">
             <span class="date">${_escHtmlSafe(fmtDate(s.date))}</span>
             <span class="badge">${_escHtmlSafe(s.category || '-')}</span>
           </div>
           <div class="firm">${_escHtmlSafe(s.company || '')}</div>
           <div class="title">${_escHtmlSafe(s.title || '')}</div>
-          <div class="cta" style="color:#5eead4">대화 시작 →</div>
+          <div class="cta" style="color:#5eead4">${cta}</div>
         </div>`).join('');
       body.innerHTML = `
         <div style="padding:8px 0 0">
@@ -3547,15 +3673,18 @@
           <div class="tm-picker">${cards}</div>
         </div>`;
     }
-    function _tmStartScenarioById(sid) {
+    function _tmStartScenarioById(sid, kind) {
       const sc = (window.__tmScenarios || []).find(s => s.id === sid);
-      if (sc) _tmStartScenario(sc);
+      if (sc) _tmStartScenario(sc, { kind: kind || 'timemachine' });
     }
 
     // Phase A→B→C→D 컨테이너 렌더, 진입은 Phase A
     let _tmCurrent = null;  // 현재 시나리오 (decision 콜백 등에서 참조)
-    function _tmStartScenario(sc) {
+    let _tmCurrentKind = 'timemachine';
+    function _tmStartScenario(sc, opts) {
+      opts = opts || {};
       _tmCurrent = sc;
+      _tmCurrentKind = opts.kind || 'timemachine';
       window.__tmChatHistory = [];
       const body = document.getElementById('fullTimemachineBody');
       body.innerHTML = `
@@ -3565,7 +3694,7 @@
         <div id="tmPhaseD" style="display:none"></div>
       `;
       _tmRenderBackground(sc);
-      _tmRenderChat(sc);
+      _tmRenderChat(sc, _tmCurrentKind);
       _tmRenderDecision(sc);
     }
 
@@ -3583,12 +3712,13 @@
         </div>`;
     }
 
-    function _tmRenderChat(sc) {
+    function _tmRenderChat(sc, kind) {
       const phaseB = document.getElementById('tmPhaseB');
-      const isFreechatOk = TM_FREECHAT_IDS.has(sc.id);
+      // 자유대화 phase는 'timemachine' kind + 시나리오 id가 freechat 화이트리스트일 때만 노출
+      const isFreechatOk = (kind === 'timemachine') && TM_FREECHAT_IDS.has(sc.id);
       const keyMissing = !window.GEMINI_API_KEY || window.GEMINI_API_KEY === 'YOUR_API_KEY_HERE';
       if (!isFreechatOk) {
-        // Phase B 자체 생략 — 자유대화는 id 1·2·3에만 활성
+        // Phase B 자체 생략 — quiz·cardnews kind 또는 freechat 미보유 시나리오
         phaseB.innerHTML = '';
         return;
       }
