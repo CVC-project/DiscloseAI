@@ -2934,7 +2934,7 @@
         if (mascot.targetNode === null || mascot.progress >= 1) { mascot.waitTimer += 0.016; if (mascot.waitTimer > 1.8) { mascot.waitTimer = 0; pickNextNode(); } }
       }
       if (mascot.targetNode && mascot.progress < 1) {
-        mascot.progress = Math.min(1, mascot.progress + 0.010);
+        mascot.progress = Math.min(1, mascot.progress + 0.022);
         const t = mascot.progress;
         const ease = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
         const prevNode = mascot.prevNode || mascot.targetNode;
