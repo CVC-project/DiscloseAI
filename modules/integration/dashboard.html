@@ -2845,6 +2845,33 @@
         // EQS arc (analyze mode)
         if (!filtered && pr > 10 && currentMode === 'analyze') { const ec = n.eqs >= 70 ? '#4ade80' : n.eqs >= 50 ? '#fbbf24' : '#f87171'; x.beginPath(); x.arc(n.x, n.y, pr + 5, -(Math.PI / 2), -(Math.PI / 2) + (Math.PI * 2 * n.eqs / 100)); x.strokeStyle = ec + '88'; x.lineWidth = 2; x.stroke(); }
 
+        // === TIMEMACHINE FOCUS HALO === 행성 활성화 표식 — pulsing ring + soft outer glow
+        if (currentMode === 'timemachine' && n === tmFocusNode) {
+          x.save();
+          // 시간 기반 펄스 (느리게)
+          const tpulse = 0.5 + Math.sin(time * 2.5) * 0.5;
+          // 1) 외곽 부드러운 글로우 (radial gradient)
+          const glowR = pr + 28 + tpulse * 12;
+          const grad = x.createRadialGradient(n.x, n.y, pr * 0.9, n.x, n.y, glowR);
+          grad.addColorStop(0, 'rgba(94, 234, 212, 0.55)');
+          grad.addColorStop(0.5, 'rgba(94, 234, 212, 0.18)');
+          grad.addColorStop(1, 'rgba(94, 234, 212, 0)');
+          x.fillStyle = grad;
+          x.beginPath(); x.arc(n.x, n.y, glowR, 0, Math.PI * 2); x.fill();
+          // 2) 안쪽 활성 ring (실선)
+          x.strokeStyle = `rgba(94, 234, 212, ${0.7 + tpulse * 0.3})`;
+          x.lineWidth = 2.5;
+          x.beginPath(); x.arc(n.x, n.y, pr + 8, 0, Math.PI * 2); x.stroke();
+          // 3) 회전 점선 ring (살짝 외곽)
+          x.strokeStyle = `rgba(255, 220, 120, ${0.45 + tpulse * 0.2})`;
+          x.lineWidth = 1.4;
+          x.setLineDash([6, 8]);
+          x.lineDashOffset = -time * 12;
+          x.beginPath(); x.arc(n.x, n.y, pr + 16, 0, Math.PI * 2); x.stroke();
+          x.setLineDash([]);
+          x.restore();
+        }
+
         // Mode-specific labels
         if (currentMode === 'timemachine' && n.tm && !filtered) { x.fillStyle = 'rgba(124,108,240,0.9)'; x.font = 'bold 9px -apple-system,sans-serif'; x.textAlign = 'center'; x.fillText('⏰ 타임머신', n.x, n.y - pr - 10); }
         if (n.glow > 0.3 && n.n !== alertSrc && !filtered && currentMode === 'disclosure') { const imp = edges.some(e => (e.a.n === alertSrc && e.b.n === n.n && (e.type === '공급' || e.type === '종속' || e.type === '피인수')) || (e.b.n === alertSrc && e.a.n === n.n && (e.type === '공급' || e.type === '종속' || e.type === '피인수'))) ? '↑ 수혜 예상' : edges.some(e => (e.a.n === alertSrc && e.b.n === n.n && e.type === '경쟁') || (e.b.n === alertSrc && e.a.n === n.n && e.type === '경쟁')) ? '↓ 경쟁 압박' : '● 영향권'; x.fillStyle = imp.includes('수혜') ? 'rgba(74,222,128,0.9)' : imp.includes('경쟁') ? 'rgba(248,113,113,0.9)' : 'rgba(77,166,255,0.9)'; x.font = 'bold 9px -apple-system,sans-serif'; x.textAlign = 'center'; x.fillText(imp, n.x, n.y - pr - 10); }
