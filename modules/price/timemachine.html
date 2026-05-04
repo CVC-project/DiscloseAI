@@ -150,6 +150,10 @@
   <h1>공시 <span>시간여행</span></h1>
   <p class="sub">실제 공시가 나온 그날로 돌아갑니다.<br>당신이 그 투자자였다면 어떻게 했을까요?<br>AI와 대화하며 의사결정을 시뮬레이션해보세요.</p>
   <button class="btn-primary" onclick="showSelect()">시작하기 →</button>
+  <button id="btn-key" onclick="showKeyModal(false)" style="background:none;border:1px solid var(--border);color:var(--muted);
+    padding:8px 18px;border-radius:8px;cursor:pointer;font-size:0.78rem;margin-top:10px;transition:.15s;"
+    onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--muted)'">🔑 API 키 설정</button>
+  <div id="key-status" style="font-size:0.72rem;margin-top:6px;"></div>
   <div class="feats">
     <div class="feat"><div class="fi">📊</div><strong>실제 데이터</strong>KRX 검증된 주가 기반</div>
     <div class="feat"><div class="fi">💬</div><strong>자유 대화</strong>Gemini AI와 대화</div>
@@ -220,8 +224,58 @@
 
 <script>
 // ── CONFIG ────────────────────────────────────────────────────────────────
-const GEMINI_KEY = 'AIzaSyBj1VUfHfjh3-bS5gToqvc-KUe1ryML8yk';
+const STORAGE_KEY = 'disclose_gemini_key';
+let GEMINI_KEY = localStorage.getItem(STORAGE_KEY) || '';
 const GEMINI_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
+
+function getKey() { return GEMINI_KEY; }
+function saveKey(k) { GEMINI_KEY = k.trim(); localStorage.setItem(STORAGE_KEY, GEMINI_KEY); }
+
+function showKeyModal(onSave) {
+  const existing = document.getElementById('key-modal');
+  if (existing) existing.remove();
+  const m = document.createElement('div');
+  m.id = 'key-modal';
+  m.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;z-index:9999;padding:24px;';
+  m.innerHTML = `
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px 24px;max-width:400px;width:100%;">
+      <div style="font-size:1.4rem;margin-bottom:10px;text-align:center;">🔑</div>
+      <h3 style="font-size:1rem;font-weight:700;margin-bottom:6px;text-align:center;">Gemini API 키 입력</h3>
+      <p style="color:var(--muted);font-size:0.8rem;margin-bottom:16px;text-align:center;line-height:1.6">
+        Google AI Studio에서 발급한 API 키를 입력하세요.<br>키는 브라우저에만 저장되며 외부로 전송되지 않습니다.
+      </p>
+      <input id="key-input" type="password"
+        placeholder="AIzaSy..."
+        style="width:100%;background:var(--bg2);border:1px solid var(--border);color:var(--text);
+               border-radius:8px;padding:10px 12px;font-size:0.875rem;outline:none;margin-bottom:12px;"
+        value="${GEMINI_KEY}">
+      <div style="display:flex;gap:8px;">
+        <button onclick="applyKey()" style="flex:1;background:linear-gradient(135deg,#3b82f6,#6366f1);border:none;color:#fff;
+          padding:10px;border-radius:8px;cursor:pointer;font-size:0.875rem;font-weight:600;">저장 후 시작</button>
+        ${GEMINI_KEY ? `<button onclick="document.getElementById('key-modal').remove()" style="flex:1;background:var(--bg2);border:1px solid var(--border);color:var(--muted);padding:10px;border-radius:8px;cursor:pointer;font-size:0.875rem;">취소</button>` : ''}
+      </div>
+      <p style="color:var(--muted);font-size:0.72rem;margin-top:10px;text-align:center">
+        <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener" style="color:var(--blue2);">Google AI Studio</a>에서 무료 발급 가능
+      </p>
+    </div>`;
+  document.body.appendChild(m);
+  document.getElementById('key-input').focus();
+  if (onSave) m.dataset.onSave = 'true';
+}
+
+function applyKey() {
+  const v = document.getElementById('key-input').value.trim();
+  if (!v) { document.getElementById('key-input').style.borderColor = 'var(--red)'; return; }
+  saveKey(v);
+  document.getElementById('key-modal').remove();
+  updateKeyStatus();
+  const cb = window._keyModalCb;
+  if (cb) { window._keyModalCb = null; cb(); }
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && document.getElementById('key-modal')) applyKey();
+});
 
 // ── SCENARIOS ─────────────────────────────────────────────────────────────
 const SC = [
@@ -318,6 +372,11 @@ function showScreen(id){
 }
 
 function showSelect(){
+  if (!getKey()) {
+    window._keyModalCb = showSelect;
+    showKeyModal(true);
+    return;
+  }
   const grid = document.getElementById('sc-grid');
   grid.innerHTML = SC.map(s=>`
     <div class="sc-card" onclick="startSc(${s.id})">
@@ -381,7 +440,15 @@ async function fetchAI(){
       role: m.role === 'user' ? 'user' : 'model',
       parts:[{text:m.content}]
     }));
-    const res = await fetch(`${GEMINI_URL}?key=${GEMINI_KEY}`, {
+    const key = getKey();
+    if (!key) {
+      typingEl.remove();
+      lockInput(false);
+      window._keyModalCb = () => fetchAI();
+      showKeyModal(true);
+      return;
+    }
+    const res = await fetch(`${GEMINI_URL}?key=${key}`, {
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
@@ -589,6 +656,14 @@ function typeText(el, text){
 }
 
 function replay(){ startSc(S.sc.id); }
+
+function updateKeyStatus(){
+  const el = document.getElementById('key-status');
+  if (!el) return;
+  el.textContent = getKey() ? '✅ API 키 등록됨' : '⚠️ API 키 미설정 — 대화를 시작하면 입력 창이 뜹니다';
+  el.style.color = getKey() ? 'var(--green)' : 'var(--yellow)';
+}
+updateKeyStatus();
 </script>
 </body>
 </html>

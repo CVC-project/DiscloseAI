@@ -60,7 +60,7 @@ QUIZ_LIST: list[dict] = [
             "에너지 설비 섹터 전반이 동반 상승했습니다. "
             "수주 대상인 AEG는 미국 내 대규모 데이터센터 전력 인프라를 운영하는 에너지 기업입니다."
         ),
-        "dart_url": "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260422800175",
+        "dart_url": "https://dart.fss.or.kr/dsab007/search.ax?textCrpNm=HD%ED%98%84%EB%8C%80%EC%A4%91%EA%B3%B5%EC%97%85&startDay=20260419&endDay=20260425",
     },
     {
         "id": 3,
@@ -213,7 +213,7 @@ QUIZ_LIST: list[dict] = [
             "자사주 소각은 유통 주식 수를 줄여 주당순이익(EPS)을 높이고, "
             "기존 주주의 지분 가치를 직접적으로 끌어올리는 대표적인 주주환원 수단입니다."
         ),
-        "dart_url": "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260331800004",
+        "dart_url": "https://dart.fss.or.kr/dsab007/search.ax?textCrpNm=%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90&startDay=20260328&endDay=20260403",
     },
     {
         "id": 12,
