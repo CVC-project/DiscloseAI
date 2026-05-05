@@ -58,11 +58,11 @@ def summary_html(text: str) -> str:
         return "<em>분석 없음</em>"
 
     SECTION_META = {
-        "[Cash]":         ("cash",    "💰 Cash — 현금 영향"),
-        "[Risk]":         ("risk",    "⚠️ Risk — 주요 위험"),
-        "[Hidden Agenda]":("hidden",  "🔍 Hidden Agenda — 숨은 의도"),
-        "[Verdict]":      ("verdict", "⚖️ Verdict — 한 줄 판단"),
-        "[오늘의 개념]":  ("concept", "📖 오늘의 개념"),
+        "[Cash]": ("cash", "💰 Cash — 현금 영향"),
+        "[Risk]": ("risk", "⚠️ Risk — 주요 위험"),
+        "[Hidden Agenda]": ("hidden", "🔍 Hidden Agenda — 숨은 의도"),
+        "[Verdict]": ("verdict", "⚖️ Verdict — 한 줄 판단"),
+        "[오늘의 개념]": ("concept", "📖 오늘의 개념"),
     }
 
     lines = text.split("\n")
@@ -75,8 +75,12 @@ def summary_html(text: str) -> str:
             if line.startswith(prefix):
                 if current:
                     cards.append(current)
-                body_text = line[len(prefix):].strip()
-                current = {"cls": cls, "label": label, "lines": [body_text] if body_text else []}
+                body_text = line[len(prefix) :].strip()
+                current = {
+                    "cls": cls,
+                    "label": label,
+                    "lines": [body_text] if body_text else [],
+                }
                 matched = True
                 break
         if not matched and current is not None:
@@ -248,23 +252,35 @@ def generate(days: int = 7, all_disclosures: bool = False) -> str:
 
     # 공시 유형 → 메타 그룹 매핑
     TYPE_META = {
-        "증자": "자금조달", "전환사채": "자금조달", "BW": "자금조달",
-        "자기주식": "자금조달", "채권발행": "자금조달",
+        "증자": "자금조달",
+        "전환사채": "자금조달",
+        "BW": "자금조달",
+        "자기주식": "자금조달",
+        "채권발행": "자금조달",
         "정기보고서": "정기보고서",
-        "실적": "사업 이벤트", "계약": "사업 이벤트", "M&A/분할": "사업 이벤트",
-        "영업양도": "사업 이벤트", "CAPEX": "사업 이벤트",
-        "임원변동": "지배구조", "최대주주변동": "지배구조", "내부자거래": "지배구조",
+        "실적": "사업 이벤트",
+        "계약": "사업 이벤트",
+        "M&A/분할": "사업 이벤트",
+        "영업양도": "사업 이벤트",
+        "CAPEX": "사업 이벤트",
+        "임원변동": "지배구조",
+        "최대주주변동": "지배구조",
+        "내부자거래": "지배구조",
     }
     META_ORDER = ["정기보고서", "자금조달", "사업 이벤트", "지배구조", "기타"]
     META_COLORS = {
-        "정기보고서": "#0ea5e9", "자금조달": "#ef4444",
-        "사업 이벤트": "#10b981", "지배구조": "#8b5cf6", "기타": "#64748b",
+        "정기보고서": "#0ea5e9",
+        "자금조달": "#ef4444",
+        "사업 이벤트": "#10b981",
+        "지배구조": "#8b5cf6",
+        "기타": "#64748b",
     }
 
     # 모달 콘텐츠 — 메타 그룹별로 묶어서 생성
     modal_data_html = ""
     for corp_name, corp_rows in sorted_companies:
         from collections import defaultdict as _dd
+
         meta_groups: dict = _dd(list)
         for r in corp_rows:
             meta = TYPE_META.get(r.disclosure_type or "기타", "기타")
