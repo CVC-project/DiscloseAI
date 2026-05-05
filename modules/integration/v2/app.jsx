@@ -226,6 +226,25 @@ function GalaxyCanvas({ density = 220 }) {
 function SolarStage({ stage, planets, activeId, accentColor, onPick }) {
   const ref = useRef(null);
   const hitsRef = useRef([]);
+  // 매 render에서 latest props를 ref로 흘려, mount 1회 useEffect 안에서 stale 없이 사용.
+  // (KOSPI/UTC 1초 갱신 등으로 App rerender 시 SolarStage useEffect가 재실행되어
+  //  t=0으로 리셋되는 문제를 차단 — 회전이 1초마다 흔들리는 듯 보였음.)
+  const propsRef = useRef({ planets, activeId, accentColor, stage, onPick });
+  propsRef.current = { planets, activeId, accentColor, stage, onPick };
+
+  // orbitData도 ref. planets 식별자 시그니처 변경 시에만 재계산.
+  const orbitRef = useRef([]);
+  const orbitSig = planets.map((p, i) => p.id || ("p" + i)).join("|");
+  useEffect(() => {
+    orbitRef.current = planets.map((p, i) => {
+      const id = p.id || ("p" + i);
+      const seed = id.split("").reduce((a, c) => a + c.charCodeAt(0), 0);
+      const radiusRatio = 0.55 + ((seed * 17) % 100) / 100; // 0.55~1.55
+      const phase = ((seed * 31) % 1000) / 1000 * Math.PI * 2;
+      const speedRatio = 1 / Math.sqrt(radiusRatio);
+      return { radiusRatio, phase, speedRatio };
+    });
+  }, [orbitSig]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const canvas = ref.current;
@@ -241,26 +260,24 @@ function SolarStage({ stage, planets, activeId, accentColor, onPick }) {
     const onResize = () => resize();
     window.addEventListener("resize", onResize);
 
-    // 행성마다 자기 궤도 — 동일한 메인 ring + 작은 변동 (각 행성당 0.92~1.08 배)
-    // 일관된 변동을 위해 결정적 함수 사용 (planets 변경 시에도 같은 행성에는 같은 비율)
-    const orbitVar = planets.map((p) => {
-      const seed = (p.id || "").split("").reduce((a, c) => a + c.charCodeAt(0), 0);
-      // 0.92 ~ 1.08 (16% 범위)
-      return 0.92 + ((seed * 17) % 17) / 100;
-    });
-
     // 틸팅 (Y축 squash + 살짝 회전) — 원본 디자인의 "평평한 + 비스듬한" 타원
-    const TILT = 0.16; // ~9.2도, 시계방향
-    const Y_SQUASH = 0.32; // 더 평평하게 (이전 0.78에서 대폭 squash)
-    const ORBIT_SPEED = 0.00065; // 매우 느림 (이전 0.0042에서 약 1/6)
+    const TILT = 0.16;
+    const Y_SQUASH = 0.48;
+    const ORBIT_SPEED = 0.20; // rad/sec — 1바퀴 약 31초
 
     let t = 0;
-    function loop() {
-      t += ORBIT_SPEED;
+    let lastTs = performance.now();
+    function loop(ts) {
+      const dt = Math.min(80, ts - lastTs) / 1000;
+      lastTs = ts;
+      t += ORBIT_SPEED * dt;
       const W = canvas.width, H = canvas.height;
       ctx.clearRect(0, 0, W, H);
       const cx = W / 2, cy = H / 2;
       const baseR = Math.min(W, H) * 0.32;
+      // latest props from ref
+      const { stage, planets, activeId, accentColor } = propsRef.current;
+      const orbitData = orbitRef.current;
       const sunRGB = stage === "galaxy" ? [255, 220, 160] : hexToRGB(accentColor || "#5eead4");
 
       // 중심 별 — 더 작게, glow 위주
@@ -288,7 +305,7 @@ function SolarStage({ stage, planets, activeId, accentColor, onPick }) {
       ctx.rotate(TILT);
       planets.forEach((p, i) => {
         const isActive = p.id === activeId;
-        const r = baseR * orbitVar[i];
+        const r = baseR * orbitData[i].radiusRatio;
         if (!isActive) {
           ctx.strokeStyle = "rgba(148,163,184,0.10)";
           ctx.lineWidth = 1;
@@ -305,7 +322,7 @@ function SolarStage({ stage, planets, activeId, accentColor, onPick }) {
       const activeIdx = planets.findIndex((p) => p.id === activeId);
       if (activeIdx >= 0) {
         const ap = planets[activeIdx];
-        const r = baseR * orbitVar[activeIdx];
+        const r = baseR * orbitData[activeIdx].radiusRatio;
         ctx.save();
         ctx.translate(cx, cy);
         ctx.rotate(TILT);
@@ -323,10 +340,10 @@ function SolarStage({ stage, planets, activeId, accentColor, onPick }) {
 
       // ----- 3단계: 행성 본체 + glow -----
       planets.forEach((p, i) => {
-        const r = baseR * orbitVar[i];
-        // 균등 각도 배치 + 매우 느린 자전. 작은 phase 차이로 행성마다 공전 위상 다름.
-        const phase = (i * 0.7) % (Math.PI * 2);
-        const ang = (i / total) * Math.PI * 2 + t + phase * 0.0;
+        const od = orbitData[i];
+        const r = baseR * od.radiusRatio;
+        // 행성마다 다른 시작 위상 + 외행성일수록 살짝 느림
+        const ang = od.phase + t * od.speedRatio;
         // 회전·squash 변환된 캔버스 좌표
         const lx = Math.cos(ang) * r;
         const ly = Math.sin(ang) * r * Y_SQUASH;
@@ -402,13 +419,14 @@ function SolarStage({ stage, planets, activeId, accentColor, onPick }) {
 
       raf = requestAnimationFrame(loop);
     }
-    loop();
+    raf = requestAnimationFrame(loop);
 
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", onResize);
     };
-  }, [stage, planets, activeId, accentColor]);
+    // mount 1회만. props 변경은 propsRef로 흘려 stale 없이 사용.
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleClick = useCallback((e) => {
     const canvas = ref.current;
