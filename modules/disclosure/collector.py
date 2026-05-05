@@ -343,9 +343,28 @@ def _extract_annual_sections(text: str) -> str:
     return "\n\n".join(extracted)
 
 
+_EARNINGS_KEYWORDS = re.compile(r"매출액|영업이익|당기순이익|순이익")
+
+
+def _extract_earnings_table(soup) -> str:
+    """실적 공시 HTML에서 핵심 재무 수치 표를 파싱해 텍스트로 반환."""
+    result = []
+    for table in soup.find_all("table"):
+        rows = table.find_all("tr")
+        for row in rows:
+            cells = [c.get_text(strip=True) for c in row.find_all(["td", "th"])]
+            line = " | ".join(cells)
+            if _EARNINGS_KEYWORDS.search(line):
+                result.append(line)
+    if not result:
+        return ""
+    return "【실적 핵심 수치 (표 직접 추출)】\n" + "\n".join(result[:20])
+
+
 def _fetch_document_text(dart_client, rcept_no: str, report_nm: str = "") -> str:
     """공시 원문 HTML을 가져와 순수 텍스트로 변환한다.
     사업보고서·분기보고서는 핵심 섹션만 추출, 나머지는 전문(최대 10,000자).
+    실적 공시는 표 파싱 결과를 앞에 추가한다.
     """
     import warnings
     from bs4 import XMLParsedAsHTMLWarning
@@ -358,17 +377,18 @@ def _fetch_document_text(dart_client, rcept_no: str, report_nm: str = "") -> str
         soup = BeautifulSoup(html, "html.parser")
         text = re.sub(r"\s+", " ", soup.get_text(separator=" ", strip=True)).strip()
 
-        # 사업보고서·분기보고서: 섹션 추출 3단계
+        # 사업보고서·분기보고서: 섹션 추출
         if _ANNUAL_REPORT_PATTERN.search(report_nm):
-            # Tier1+2: 섹션 추출
             extracted = _extract_annual_sections(text)
-            if extracted:
-                return extracted
-            # Tier3: 재무제표 DB만 사용 (원문 건너뜀)
-            return ""
+            return extracted if extracted else ""
 
-        # 수시공시: 전문 최대 10,000자
-        return text[:10000]
+        # 실적 공시: 표 파싱 결과를 앞에 붙임
+        earnings_table = ""
+        if re.search(r"매출액.*변동|손익.*변동|실적발표|영업실적", report_nm):
+            earnings_table = _extract_earnings_table(soup)
+
+        body = text[:10000]
+        return f"{earnings_table}\n\n{body}".strip() if earnings_table else body
     except Exception:
         return ""
 
@@ -785,6 +805,9 @@ def _analyze_with_groq(
 - 원문에 명시되지 않아 추론하거나 불확실한 내용은 반드시 문장 앞에 [추정] 태그를 붙이세요.
   예: "[추정] 경영진은 이번 자금으로 해외 사업 확장을 노릴 가능성이 있습니다."
 - [추정] 태그 없이 확인되지 않은 내용을 사실처럼 서술하지 마세요.
+- 모든 bullet에는 반드시 구체적인 숫자(금액·%·배율·기간)가 포함되어야 합니다. 숫자 없는 bullet은 작성하지 마세요.
+- "지속적인 성장", "최고 수준", "적극적으로 추진" 같은 IR 홍보 문구를 그대로 인용하지 마세요. 그 뒤에 나오는 실제 수치를 인용하세요.
+- 재무제표 데이터가 제공된 경우, 전년 대비 증감률과 영업이익률을 분석에 반드시 활용하세요.
 
 반드시 한국어로 답하고, 항목 제목([Cash] 등)은 그대로 유지하세요."""
 
@@ -1119,11 +1142,28 @@ def get_financial_context(corp_code: str) -> str:
             return "N/A"
         return f"{v/1e8:,.0f}억원"
 
-    lines = ["【최근 분기 재무제표】"]
-    for r in rows:
+    def pct(cur, prev):
+        if cur is None or prev is None or prev == 0:
+            return ""
+        return f" ({(cur-prev)/abs(prev)*100:+.1f}%)"
+
+    lines = ["【최근 분기 재무제표 (전년 동기 대비)】"]
+    for i, r in enumerate(rows):
+        # 전년 동기: 4분기 뒤 (같은 분기)
+        prev = rows[i + 4] if i + 4 < len(rows) else None
+        rev_chg = pct(r.revenue, prev.revenue) if prev else ""
+        op_chg = pct(r.operating_income, prev.operating_income) if prev else ""
+        ni_chg = pct(r.net_income, prev.net_income) if prev else ""
+
+        # 영업이익률
+        op_margin = ""
+        if r.revenue and r.operating_income:
+            op_margin = f" [영업이익률 {r.operating_income/r.revenue*100:.1f}%]"
+
         lines.append(
-            f"{r.year}Q{r.quarter} | 매출 {fmt(r.revenue)} | 영업이익 {fmt(r.operating_income)}"
-            f" | 순이익 {fmt(r.net_income)} | 총자산 {fmt(r.total_assets)} | 부채 {fmt(r.total_debt)}"
+            f"{r.year}Q{r.quarter} | 매출 {fmt(r.revenue)}{rev_chg}"
+            f" | 영업이익 {fmt(r.operating_income)}{op_chg}{op_margin}"
+            f" | 순이익 {fmt(r.net_income)}{ni_chg}"
         )
     return "\n".join(lines)
 
