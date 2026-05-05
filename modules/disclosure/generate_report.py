@@ -53,31 +53,68 @@ def _mark_uncertain(text: str) -> str:
 
 
 def summary_html(text: str) -> str:
-    """summary 텍스트를 섹션별로 색상 구분해 HTML로 변환."""
+    """summary 텍스트를 섹션 카드로 변환."""
     if not text:
         return "<em>분석 없음</em>"
+
+    SECTION_META = {
+        "[Cash]": ("cash", "💰 Cash — 현금 영향"),
+        "[Risk]": ("risk", "⚠️ Risk — 주요 위험"),
+        "[Hidden Agenda]": ("hidden", "🔍 Hidden Agenda — 숨은 의도"),
+        "[Verdict]": ("verdict", "⚖️ Verdict — 한 줄 판단"),
+        "[오늘의 개념]": ("concept", "📖 오늘의 개념"),
+    }
+
     lines = text.split("\n")
-    html_lines = []
+    cards: list[dict] = []
+    current: dict | None = None
+
     for line in lines:
-        line_e = escape(line)
-        line_e = _mark_uncertain(line_e)
-        if line_e.startswith("[Cash]"):
-            html_lines.append(f'<p class="sec cash">{line_e}</p>')
-        elif line_e.startswith("[Risk]"):
-            html_lines.append(f'<p class="sec risk">{line_e}</p>')
-        elif line_e.startswith("[Hidden Agenda]"):
-            html_lines.append(f'<p class="sec hidden">{line_e}</p>')
-        elif line_e.startswith("[Verdict]"):
-            html_lines.append(f'<p class="sec verdict">{line_e}</p>')
-        elif line_e.startswith("[오늘의 개념]"):
-            html_lines.append(f'<p class="sec concept">{line_e}</p>')
-        elif line_e.startswith("- "):
-            html_lines.append(f'<p class="bullet">{line_e}</p>')
-        elif line_e.strip() == "":
-            html_lines.append("<br>")
-        else:
-            html_lines.append(f"<p>{line_e}</p>")
-    return "\n".join(html_lines)
+        matched = False
+        for prefix, (cls, label) in SECTION_META.items():
+            if line.startswith(prefix):
+                if current:
+                    cards.append(current)
+                body_text = line[len(prefix) :].strip()
+                current = {
+                    "cls": cls,
+                    "label": label,
+                    "lines": [body_text] if body_text else [],
+                }
+                matched = True
+                break
+        if not matched and current is not None:
+            current["lines"].append(line)
+
+    if current:
+        cards.append(current)
+
+    if not cards:
+        return f"<p>{escape(text)}</p>"
+
+    parts = ['<div class="analysis-cards">']
+    for card in cards:
+        body_lines = []
+        for l in card["lines"]:
+            l_e = escape(l)
+            l_e = _mark_uncertain(l_e)
+            if not l_e.strip():
+                continue
+            if l_e.startswith("- "):
+                body_lines.append(f'<p class="bullet">{l_e}</p>')
+            else:
+                body_lines.append(f"<p>{l_e}</p>")
+        if not body_lines:
+            continue
+        body = "\n".join(body_lines)
+        parts.append(
+            f'<div class="analysis-card {card["cls"]}">'
+            f'<div class="analysis-card-header">{card["label"]}</div>'
+            f'<div class="analysis-card-body">{body}</div>'
+            f"</div>"
+        )
+    parts.append("</div>")
+    return "\n".join(parts)
 
 
 TYPE_COLORS = {
@@ -113,9 +150,9 @@ def _disc_row(r) -> str:
         if (r.dilution_ratio is not None and r.dilution_ratio > 0)
         else ""
     )
-    dart_link = ""
+    dart_btn = ""
     if r.disclosure_id:
-        dart_link = f'<a class="dart-link" href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo={r.disclosure_id}" target="_blank" onclick="event.stopPropagation()">원문↗</a>'
+        dart_btn = f'<a class="dart-btn" href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo={r.disclosure_id}" target="_blank" onclick="event.stopPropagation()">📄 DART 원문 보기 ↗</a>'
     analysis = summary_html(r.summary or "")
     title_esc = escape(r.title or "")
     summary_esc = escape(r.summary or "").replace("\n", "\\n")
@@ -131,7 +168,7 @@ def _disc_row(r) -> str:
       <span class="disc-title">{title_esc}</span>
     </div>
     <div class="disc-row-right">
-      {dilution}{ai_badge}{dart_link}
+      {dilution}{ai_badge}
       <span class="disc-date">{disc_date_esc}</span>
       <span class="disc-chevron">▼</span>
     </div>
@@ -139,7 +176,7 @@ def _disc_row(r) -> str:
   <div class="disc-analysis">
     <div class="disc-analysis-inner">
       {analysis}
-      <div class="chat-row">{chat_btn}</div>
+      <div class="chat-row">{dart_btn}{chat_btn}</div>
     </div>
   </div>
 </div>"""
@@ -213,11 +250,57 @@ def generate(days: int = 7, all_disclosures: bool = False) -> str:
   </div>
 </div>"""
 
-    # 모달 콘텐츠 (기업별 사전 생성, 숨김)
+    # 공시 유형 → 메타 그룹 매핑
+    TYPE_META = {
+        "증자": "자금조달",
+        "전환사채": "자금조달",
+        "BW": "자금조달",
+        "자기주식": "자금조달",
+        "채권발행": "자금조달",
+        "정기보고서": "정기보고서",
+        "실적": "사업 이벤트",
+        "계약": "사업 이벤트",
+        "M&A/분할": "사업 이벤트",
+        "영업양도": "사업 이벤트",
+        "CAPEX": "사업 이벤트",
+        "임원변동": "지배구조",
+        "최대주주변동": "지배구조",
+        "내부자거래": "지배구조",
+    }
+    META_ORDER = ["정기보고서", "자금조달", "사업 이벤트", "지배구조", "기타"]
+    META_COLORS = {
+        "정기보고서": "#0ea5e9",
+        "자금조달": "#ef4444",
+        "사업 이벤트": "#10b981",
+        "지배구조": "#8b5cf6",
+        "기타": "#64748b",
+    }
+
+    # 모달 콘텐츠 — 메타 그룹별로 묶어서 생성
     modal_data_html = ""
     for corp_name, corp_rows in sorted_companies:
-        rows_html = "\n".join(_disc_row(r) for r in corp_rows)
-        modal_data_html += f'<div class="modal-corp-data" data-corp="{escape(corp_name)}">{rows_html}</div>\n'
+        from collections import defaultdict as _dd
+
+        meta_groups: dict = _dd(list)
+        for r in corp_rows:
+            meta = TYPE_META.get(r.disclosure_type or "기타", "기타")
+            meta_groups[meta].append(r)
+        ordered_metas = [m for m in META_ORDER if m in meta_groups]
+        ordered_metas += [m for m in meta_groups if m not in META_ORDER]
+        groups_html = ""
+        for meta in ordered_metas:
+            group_rows = meta_groups[meta]
+            color = META_COLORS.get(meta, "#64748b")
+            rows_html = "\n".join(_disc_row(r) for r in group_rows)
+            groups_html += f"""<div class="disc-type-group" data-meta="{escape(meta)}">
+  <div class="disc-type-header">
+    <span class="disc-type-dot" style="background:{color}"></span>
+    <span class="disc-type-label">{escape(meta)}</span>
+    <span class="disc-type-count">{len(group_rows)}건</span>
+  </div>
+  {rows_html}
+</div>"""
+        modal_data_html += f'<div class="modal-corp-data" data-corp="{escape(corp_name)}">{groups_html}</div>\n'
 
     generated_at = datetime.now().strftime("%Y-%m-%d %H:%M")
     search_json = json.dumps(search_data, ensure_ascii=False)
@@ -294,20 +377,42 @@ def generate(days: int = 7, all_disclosures: bool = False) -> str:
   .disc-chevron{{color:#64748b;font-size:.75rem;transition:transform .2s}}
   .disc-row.open .disc-chevron{{transform:rotate(180deg)}}
 
+  /* ── 유형 그룹 헤더 ── */
+  .disc-type-group{{margin-bottom:4px}}
+  .disc-type-header{{display:flex;align-items:center;gap:8px;padding:8px 22px;background:#0f172a;border-top:1px solid #1e293b;border-bottom:1px solid #1e293b;position:sticky;top:0;z-index:1}}
+  .disc-type-dot{{width:8px;height:8px;border-radius:50%;flex-shrink:0}}
+  .disc-type-label{{font-size:.75rem;font-weight:700;color:#94a3b8;letter-spacing:.5px;text-transform:uppercase}}
+  .disc-type-count{{font-size:.7rem;color:#475569;margin-left:auto}}
+
   /* ── 분석 내용 ── */
-  .disc-analysis{{max-height:0;overflow:hidden;transition:max-height .3s ease}}
-  .disc-row.open .disc-analysis{{max-height:2000px}}
-  .disc-analysis-inner{{padding:16px 22px;border-top:1px solid #1e293b;font-size:.81rem;line-height:1.65;color:#cbd5e1}}
-  .disc-analysis-inner p{{margin-bottom:4px}}
-  .disc-analysis-inner .sec{{font-weight:600;margin-top:10px;padding:6px 10px;border-radius:6px}}
-  .disc-analysis-inner .cash{{background:#0c4a1e;color:#86efac}}
-  .disc-analysis-inner .risk{{background:#450a0a;color:#fca5a5}}
-  .disc-analysis-inner .hidden{{background:#1e1b4b;color:#c4b5fd}}
-  .disc-analysis-inner .verdict{{background:#1c1917;color:#fde68a;border-left:3px solid #fbbf24}}
-  .disc-analysis-inner .concept{{background:#0c3443;color:#7dd3fc}}
-  .disc-analysis-inner .bullet{{padding-left:16px;color:#94a3b8}}
+  .disc-analysis{{max-height:0;overflow:hidden;transition:max-height .4s ease}}
+  .disc-row.open .disc-analysis{{max-height:3000px}}
+  .disc-analysis-inner{{padding:0 22px 16px;border-top:1px solid #1e293b;font-size:.82rem;line-height:1.7;color:#cbd5e1}}
+
+  /* 분석 섹션 카드 */
+  .analysis-cards{{display:flex;flex-direction:column;gap:10px;margin:16px 0}}
+  .analysis-card{{border-radius:10px;overflow:hidden}}
+  .analysis-card-header{{display:flex;align-items:center;gap:8px;padding:8px 14px;font-size:.75rem;font-weight:700;letter-spacing:.3px}}
+  .analysis-card-body{{padding:10px 14px;font-size:.81rem;line-height:1.65}}
+  .analysis-card-body p{{margin-bottom:3px}}
+  .analysis-card.cash .analysis-card-header{{background:#0c4a1e;color:#86efac}}
+  .analysis-card.cash .analysis-card-body{{background:#071f0e;color:#bbf7d0}}
+  .analysis-card.risk .analysis-card-header{{background:#450a0a;color:#fca5a5}}
+  .analysis-card.risk .analysis-card-body{{background:#1f0505;color:#fecaca}}
+  .analysis-card.hidden .analysis-card-header{{background:#1e1b4b;color:#c4b5fd}}
+  .analysis-card.hidden .analysis-card-body{{background:#0f0e26;color:#ddd6fe}}
+  .analysis-card.verdict .analysis-card-header{{background:#1c1917;color:#fde68a;border-left:3px solid #fbbf24}}
+  .analysis-card.verdict .analysis-card-body{{background:#0c0a08;color:#fef08a}}
+  .analysis-card.concept .analysis-card-header{{background:#0c3443;color:#7dd3fc}}
+  .analysis-card.concept .analysis-card-body{{background:#061926;color:#bae6fd}}
+
+  .disc-analysis-inner .bullet{{padding-left:14px;color:#94a3b8;margin-bottom:2px}}
   .disc-analysis-inner .uncertain{{color:#f59e0b;font-size:.7rem;font-weight:700;margin-right:4px}}
   .disc-analysis-inner .uncertain-text{{color:#78716c;font-style:italic}}
+
+  /* 원문 보기 버튼 */
+  .dart-btn{{display:inline-flex;align-items:center;gap:5px;margin-top:14px;padding:6px 14px;background:transparent;border:1px solid #334155;border-radius:8px;color:#94a3b8;font-size:.75rem;text-decoration:none;transition:all .15s}}
+  .dart-btn:hover{{border-color:#38bdf8;color:#38bdf8}}
 
   .type-tag{{color:#fff;font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:20px;white-space:nowrap}}
   .badge{{font-size:.65rem;font-weight:700;padding:2px 7px;border-radius:20px;white-space:nowrap}}

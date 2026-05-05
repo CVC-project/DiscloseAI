@@ -17,6 +17,7 @@ import OpenDartReader as odr
 import pandas as pd
 from bs4 import BeautifulSoup
 from groq import Groq
+from google import genai as _genai
 import yfinance as yf
 
 load_dotenv()
@@ -24,10 +25,14 @@ load_dotenv()
 # ─── 설정 ────────────────────────────────────────────────────────────────────
 DART_API_KEY = os.getenv("DART_API_KEY", "")
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 GROQ_MODEL = "llama-3.3-70b-versatile"
+GEMINI_MODEL = "gemini-2.5-flash"
 
 # Groq 클라이언트 (키 없으면 None — 템플릿 분석으로 폴백)
 _groq_client = Groq(api_key=GROQ_API_KEY) if GROQ_API_KEY else None
+# Gemini 클라이언트 (Groq 429 시 폴백)
+_gemini_client = _genai.Client(api_key=GEMINI_API_KEY) if GEMINI_API_KEY else None
 
 TARGET_CORPS = {
     "005930": "삼성전자",
@@ -343,9 +348,28 @@ def _extract_annual_sections(text: str) -> str:
     return "\n\n".join(extracted)
 
 
+_EARNINGS_KEYWORDS = re.compile(r"매출액|영업이익|당기순이익|순이익")
+
+
+def _extract_earnings_table(soup) -> str:
+    """실적 공시 HTML에서 핵심 재무 수치 표를 파싱해 텍스트로 반환."""
+    result = []
+    for table in soup.find_all("table"):
+        rows = table.find_all("tr")
+        for row in rows:
+            cells = [c.get_text(strip=True) for c in row.find_all(["td", "th"])]
+            line = " | ".join(cells)
+            if _EARNINGS_KEYWORDS.search(line):
+                result.append(line)
+    if not result:
+        return ""
+    return "【실적 핵심 수치 (표 직접 추출)】\n" + "\n".join(result[:20])
+
+
 def _fetch_document_text(dart_client, rcept_no: str, report_nm: str = "") -> str:
     """공시 원문 HTML을 가져와 순수 텍스트로 변환한다.
     사업보고서·분기보고서는 핵심 섹션만 추출, 나머지는 전문(최대 10,000자).
+    실적 공시는 표 파싱 결과를 앞에 추가한다.
     """
     import warnings
     from bs4 import XMLParsedAsHTMLWarning
@@ -358,17 +382,18 @@ def _fetch_document_text(dart_client, rcept_no: str, report_nm: str = "") -> str
         soup = BeautifulSoup(html, "html.parser")
         text = re.sub(r"\s+", " ", soup.get_text(separator=" ", strip=True)).strip()
 
-        # 사업보고서·분기보고서: 섹션 추출 3단계
+        # 사업보고서·분기보고서: 섹션 추출
         if _ANNUAL_REPORT_PATTERN.search(report_nm):
-            # Tier1+2: 섹션 추출
             extracted = _extract_annual_sections(text)
-            if extracted:
-                return extracted
-            # Tier3: 재무제표 DB만 사용 (원문 건너뜀)
-            return ""
+            return extracted if extracted else ""
 
-        # 수시공시: 전문 최대 10,000자
-        return text[:10000]
+        # 실적 공시: 표 파싱 결과를 앞에 붙임
+        earnings_table = ""
+        if re.search(r"매출액.*변동|손익.*변동|실적발표|영업실적", report_nm):
+            earnings_table = _extract_earnings_table(soup)
+
+        body = text[:10000]
+        return f"{earnings_table}\n\n{body}".strip() if earnings_table else body
     except Exception:
         return ""
 
@@ -736,6 +761,14 @@ def _analyze_with_groq(
             " ④ PEF라면 단기 구조조정·재매각 시나리오 언급"
             " ⑤ 변동 이유"
         ),
+        "정기보고서": (
+            "【필수 확인】"
+            " ① 매출·영업이익·순이익 전년 대비 증감률과 원인 (업황·환율·원가 중 무엇인지)"
+            " ② 영업이익과 영업현금흐름 괴리 여부 — 이익은 나는데 현금이 안 들어오면 반드시 지적"
+            " ③ 부채비율·이자보상배율 변화 — 재무 건전성이 나빠지고 있는지"
+            " ④ 감사의견: 적정 여부 + 강조 사항·핵심감사사항에 적힌 내용"
+            " ⑤ 경영진이 제시한 리스크 중 가장 실질적인 것 1개만 선별해 구체적으로 설명"
+        ),
         "기타": (
             "【필수 확인】"
             " ① 공시에 등장하는 금액·날짜·조건을 최대한 인용"
@@ -777,6 +810,9 @@ def _analyze_with_groq(
 - 원문에 명시되지 않아 추론하거나 불확실한 내용은 반드시 문장 앞에 [추정] 태그를 붙이세요.
   예: "[추정] 경영진은 이번 자금으로 해외 사업 확장을 노릴 가능성이 있습니다."
 - [추정] 태그 없이 확인되지 않은 내용을 사실처럼 서술하지 마세요.
+- 모든 bullet에는 반드시 구체적인 숫자(금액·%·배율·기간)가 포함되어야 합니다. 숫자 없는 bullet은 작성하지 마세요.
+- "지속적인 성장", "최고 수준", "적극적으로 추진" 같은 IR 홍보 문구를 그대로 인용하지 마세요. 그 뒤에 나오는 실제 수치를 인용하세요.
+- 재무제표 데이터가 제공된 경우, 전년 대비 증감률과 영업이익률을 분석에 반드시 활용하세요.
 
 반드시 한국어로 답하고, 항목 제목([Cash] 등)은 그대로 유지하세요."""
 
@@ -799,6 +835,110 @@ def _analyze_with_groq(
             print(f"  [WARN] Groq 한도 초과 — 오늘 중단")
             raise
         print(f"  [WARN] Groq 분석 실패 (건너뜀): {e}")
+        return None
+
+
+def _analyze_with_gemini(
+    corp_name: str, report_nm: str, disc_type: str, doc_text: str, stock_code: str = ""
+) -> str | None:
+    """Gemini로 공시 원문 분석. Groq 429 시 폴백으로 사용."""
+    if not _gemini_client or not doc_text:
+        return None
+
+    # _analyze_with_groq와 동일한 프롬프트 재사용을 위해 임시 호출
+    # 프롬프트 조립 (groq 함수와 동일 로직)
+    current_price = _fetch_current_price(stock_code) if stock_code else ""
+    price_context = (
+        f"현재 주가: {current_price}" if current_price else "현재 주가: 조회 불가"
+    )
+    fin_context = get_financial_context(stock_code) if stock_code else ""
+    annual_context = get_annual_report_context(corp_name, report_nm)
+
+    _TYPE_FOCUS: dict[str, str] = {
+        "증자": (
+            "【필수 확인】"
+            " ① 신주 수량 ÷ 기발행 주식수 = 희석비율(%) 직접 계산"
+            " ② 발행가액의 현주가 대비 할인율"
+            " ③ 최대주주 참여 여부 — 불참이면 반드시 언급"
+            " ④ 조달 목적: 운영자금·시설투자·채무상환 중 무엇인지"
+            " ⑤ 납입일과 신주 상장 예정일"
+        ),
+        "정기보고서": (
+            "【필수 확인】"
+            " ① 매출·영업이익·순이익 전년 대비 증감률과 원인 (업황·환율·원가 중 무엇인지)"
+            " ② 영업이익과 영업현금흐름 괴리 여부 — 이익은 나는데 현금이 안 들어오면 반드시 지적"
+            " ③ 부채비율·이자보상배율 변화 — 재무 건전성이 나빠지고 있는지"
+            " ④ 감사의견: 적정 여부 + 강조 사항·핵심감사사항에 적힌 내용"
+            " ⑤ 경영진이 제시한 리스크 중 가장 실질적인 것 1개만 선별해 구체적으로 설명"
+        ),
+        "기타": (
+            "【필수 확인】"
+            " ① 공시에 등장하는 금액·날짜·조건을 최대한 인용"
+            " ② 이 공시가 회사 재무·사업에 미치는 직접적 영향"
+            " ③ 유사 사례 대비 규모·조건이 이례적인지"
+        ),
+    }
+    type_focus = _TYPE_FOCUS.get(disc_type, _TYPE_FOCUS["기타"])
+
+    prompt = f"""{price_context}
+{fin_context}
+{f"{annual_context}" + chr(10) if annual_context else ""}{type_focus}
+
+다음은 {corp_name}의 [{disc_type}] 공시 원문입니다:
+
+{doc_text[:12000]}
+
+다음 5가지 항목으로 분석해주세요.
+
+[Cash] 핵심 한 줄 요약 + 근거 bullet 2~3개 (구체적 숫자 필수, 원문 인용)
+[Risk] 핵심 한 줄 요약 + 근거 bullet 2~3개 (동일하게 원문 인용)
+[Hidden Agenda] 핵심 한 줄 요약 + 근거 bullet 2~3개 (동일하게 원문 인용)
+[Verdict] 주주·투자자에게 의미하는 바를 한 줄로
+[오늘의 개념] 공시 원문에 실제로 등장한 단어 중 일반인이 모를 법한 회계·금융 용어 1개 설명
+
+【중요 규칙】
+- 모든 bullet에 구체적인 숫자(금액·%·배율·기간) 필수
+- IR 홍보 문구("지속적인 성장" 등) 인용 금지
+- 재무제표 데이터 제공 시 전년 대비 증감률·영업이익률 반드시 활용
+- [추정] 태그: 원문에 없는 추론 내용에 반드시 표시
+- 반드시 한국어로 답하고 항목 제목([Cash] 등)은 유지"""
+
+    try:
+        from google.genai import types as _gtypes
+
+        resp = _gemini_client.models.generate_content(
+            model=GEMINI_MODEL,
+            contents=prompt,
+            config=_gtypes.GenerateContentConfig(
+                temperature=0.3,
+                max_output_tokens=1200,
+            ),
+        )
+        return resp.text.strip()
+    except Exception as e:
+        err_str = str(e)
+        # 429 분당 한도 → retryDelay 파싱 후 대기 재시도
+        if "429" in err_str or "RESOURCE_EXHAUSTED" in err_str:
+            import time, re as _re
+
+            m = _re.search(r"retryDelay.*?(\d+)s", err_str)
+            wait = int(m.group(1)) + 5 if m else 65
+            print(f"  [Gemini 429] {wait}초 대기 후 재시도...")
+            time.sleep(wait)
+            try:
+                resp2 = _gemini_client.models.generate_content(
+                    model=GEMINI_MODEL,
+                    contents=prompt,
+                    config=_gtypes.GenerateContentConfig(
+                        temperature=0.3,
+                        max_output_tokens=1200,
+                    ),
+                )
+                return resp2.text.strip()
+            except Exception as e2:
+                print(f"  [WARN] Gemini 재시도 실패: {e2}")
+                return None
+        print(f"  [WARN] Gemini 분석 실패 (건너뜀): {e}")
         return None
 
 
@@ -861,119 +1001,130 @@ def collect(stock_codes: list[str] | None = None) -> None:
     session = get_local_session()
     saved, skipped, filtered = 0, 0, 0
 
-    for stock_code, corp_name in targets.items():
-        print(f"▶ [{corp_name}({stock_code})] 공시 목록 조회 중...")
+    try:
+        for stock_code, corp_name in targets.items():
+            print(f"▶ [{corp_name}({stock_code})] 공시 목록 조회 중...")
 
-        try:
-            df: pd.DataFrame = dart.list(stock_code, start_str, end_str)
-        except Exception as e:
-            print(f"  [WARN] API 오류: {e}")
-            continue
-
-        if df is None or len(df) == 0:
-            print(f"  → 최근 {DAYS_BACK}일간 공시 없음\n")
-            continue
-
-        print(f"  → 총 {len(df)}건 수신, 필터링 시작...")
-
-        # 내부자 보고서 날짜별 건수 사전 계산 (배치 판별용)
-        insider_batch_map = _build_insider_batch_map(df)
-
-        for _, row in df.iterrows():
-            report_nm: str = str(row.get("report_nm", ""))
-            rcept_no: str = str(row.get("rcept_no", ""))
-            rcept_dt: str = str(row.get("rcept_dt", ""))
-
-            # 1차: 완전 노이즈 제거
-            if _is_noise(report_nm):
-                filtered += 1
-                print(f"  [SKIP-NOISE] {report_nm}")
+            try:
+                df: pd.DataFrame = dart.list(stock_code, start_str, end_str)
+            except Exception as e:
+                print(f"  [WARN] API 오류: {e}")
                 continue
 
-            # 2차: 내부자 보고서 배치 판별 — 5건 초과 시 정기 신고로 간주
-            if _is_insider_noise(report_nm, rcept_dt, insider_batch_map):
-                filtered += 1
-                print(
-                    f"  [SKIP-BATCH] {report_nm} ({rcept_dt}, {insider_batch_map.get(rcept_dt)}건 중 1)"
-                )
+            if df is None or len(df) == 0:
+                print(f"  → 최근 {DAYS_BACK}일간 공시 없음\n")
                 continue
 
-            # 중복 체크
-            exists = (
-                session.query(DisclosureLocal).filter_by(disclosure_id=rcept_no).first()
-            )
-            if exists:
-                skipped += 1
-                print(f"  [SKIP-DUP]   {report_nm} ({rcept_no})")
-                continue
+            print(f"  → 총 {len(df)}건 수신, 필터링 시작...")
 
-            disc_type = _detect_type(report_nm)
+            # 내부자 보고서 날짜별 건수 사전 계산 (배치 판별용)
+            insider_batch_map = _build_insider_batch_map(df)
 
-            # Groq 사용 티어 결정
-            # Tier 1 (즉시): 사업보고서·증자·M&A 등 핵심 공시 → 즉시 Groq
-            # Tier 2 (백필): 그 외 일반 공시 → 저장만, backfill에서 처리
-            # Tier 3 (스킵): 단순 정기 신고 → Groq 없이 템플릿만
-            groq_skip = _is_groq_skip(report_nm)
-            groq_now = not groq_skip and _is_groq_immediate(report_nm)
+            for _, row in df.iterrows():
+                report_nm: str = str(row.get("report_nm", ""))
+                rcept_no: str = str(row.get("rcept_no", ""))
+                rcept_dt: str = str(row.get("rcept_dt", ""))
 
-            doc_text = ""
-            ai_result = None
+                # 1차: 완전 노이즈 제거
+                if _is_noise(report_nm):
+                    filtered += 1
+                    print(f"  [SKIP-NOISE] {report_nm}")
+                    continue
 
-            if groq_now:
-                print(f"  [즉시분석]   [{disc_type}] {report_nm} ({rcept_dt})")
-                doc_text = _fetch_document_text(dart, rcept_no, report_nm)
-                ai_result = _analyze_with_groq(
-                    corp_name, report_nm, disc_type, doc_text, stock_code
+                # 2차: 내부자 보고서 배치 판별 — 5건 초과 시 정기 신고로 간주
+                if _is_insider_noise(report_nm, rcept_dt, insider_batch_map):
+                    filtered += 1
+                    print(
+                        f"  [SKIP-BATCH] {report_nm} ({rcept_dt}, {insider_batch_map.get(rcept_dt)}건 중 1)"
+                    )
+                    continue
+
+                # 중복 체크
+                exists = (
+                    session.query(DisclosureLocal)
+                    .filter_by(disclosure_id=rcept_no)
+                    .first()
                 )
-            elif groq_skip:
-                print(f"  [SKIP-AI]    [{disc_type}] {report_nm} ({rcept_dt})")
-            else:
-                print(f"  [저장-백필]  [{disc_type}] {report_nm} ({rcept_dt})")
+                if exists:
+                    skipped += 1
+                    print(f"  [SKIP-DUP]   {report_nm} ({rcept_no})")
+                    continue
 
-            ai_ok = ai_result is not None
-            if ai_ok:
-                header = f"[공시] {corp_name} | {report_nm} | {rcept_dt}\n[분류] {disc_type}\n\n"
-                summary = header + ai_result
-            else:
-                summary = build_cpa_summary(
-                    corp_name, report_nm, disc_type, rcept_dt, doc_text
+                disc_type = _detect_type(report_nm)
+
+                # Groq 사용 티어 결정
+                # Tier 1 (즉시): 사업보고서·증자·M&A 등 핵심 공시 → 즉시 Groq
+                # Tier 2 (백필): 그 외 일반 공시 → 저장만, backfill에서 처리
+                # Tier 3 (스킵): 단순 정기 신고 → Groq 없이 템플릿만
+                groq_skip = _is_groq_skip(report_nm)
+                groq_now = not groq_skip and _is_groq_immediate(report_nm)
+
+                doc_text = ""
+                ai_result = None
+
+                if groq_now:
+                    print(f"  [즉시분석]   [{disc_type}] {report_nm} ({rcept_dt})")
+                    doc_text = _fetch_document_text(dart, rcept_no, report_nm)
+                    ai_result = _analyze_with_groq(
+                        corp_name, report_nm, disc_type, doc_text, stock_code
+                    )
+                elif groq_skip:
+                    print(f"  [SKIP-AI]    [{disc_type}] {report_nm} ({rcept_dt})")
+                else:
+                    print(f"  [저장-백필]  [{disc_type}] {report_nm} ({rcept_dt})")
+
+                ai_ok = ai_result is not None
+                if ai_ok:
+                    header = f"[공시] {corp_name} | {report_nm} | {rcept_dt}\n[분류] {disc_type}\n\n"
+                    summary = header + ai_result
+                else:
+                    summary = build_cpa_summary(
+                        corp_name, report_nm, disc_type, rcept_dt, doc_text
+                    )
+
+                # high_impact: 유상증자·CB·BW 무조건, 감사의견 이상 감지
+                is_high_impact = disc_type in ("증자", "전환사채", "BW")
+                if not is_high_impact and _AUDIT_OPINION_BAD.search(doc_text or ""):
+                    is_high_impact = True
+
+                # 희석률: 증자·CB·BW에서 발행금액 파싱 후 시가총액 대비 %
+                dilution = None
+                if (
+                    is_high_impact
+                    and disc_type in ("증자", "전환사채", "BW")
+                    and doc_text
+                ):
+                    dilution = _calc_dilution_ratio(doc_text, stock_code)
+
+                record = DisclosureLocal(
+                    disclosure_id=rcept_no,
+                    corp_code=str(row.get("corp_code", stock_code)),
+                    stock_code=stock_code,
+                    corp_name=corp_name,
+                    disclosure_date=(
+                        datetime.strptime(rcept_dt, "%Y%m%d").date()
+                        if rcept_dt
+                        else None
+                    ),
+                    disclosure_type=disc_type,
+                    title=report_nm,
+                    amount=None,
+                    summary=summary,
+                    ai_analyzed=ai_ok,
+                    high_impact=is_high_impact,
+                    dilution_ratio=dilution,
+                    display_worthy=_is_display_worthy(
+                        disc_type, report_nm, is_high_impact
+                    ),
                 )
+                session.add(record)
+                session.commit()
+                saved += 1
+                print(f"  [저장완료]   rcept_no={rcept_no}")
 
-            # high_impact: 유상증자·CB·BW 무조건, 감사의견 이상 감지
-            is_high_impact = disc_type in ("증자", "전환사채", "BW")
-            if not is_high_impact and _AUDIT_OPINION_BAD.search(doc_text or ""):
-                is_high_impact = True
-
-            # 희석률: 증자·CB·BW에서 발행금액 파싱 후 시가총액 대비 %
-            dilution = None
-            if is_high_impact and disc_type in ("증자", "전환사채", "BW") and doc_text:
-                dilution = _calc_dilution_ratio(doc_text, stock_code)
-
-            record = DisclosureLocal(
-                disclosure_id=rcept_no,
-                corp_code=str(row.get("corp_code", stock_code)),
-                stock_code=stock_code,
-                corp_name=corp_name,
-                disclosure_date=(
-                    datetime.strptime(rcept_dt, "%Y%m%d").date() if rcept_dt else None
-                ),
-                disclosure_type=disc_type,
-                title=report_nm,
-                amount=None,
-                summary=summary,
-                ai_analyzed=ai_ok,
-                high_impact=is_high_impact,
-                dilution_ratio=dilution,
-                display_worthy=_is_display_worthy(disc_type, report_nm, is_high_impact),
-            )
-            session.add(record)
-            session.commit()
-            saved += 1
-            print(f"  [저장완료]   rcept_no={rcept_no}")
-
-        print()
-
-    session.close()
+            print()
+    finally:
+        session.close()
 
     print(f"{'='*60}")
     print(
@@ -1081,14 +1232,16 @@ def get_financial_context(corp_code: str) -> str:
     from modules.disclosure.models import FinancialStatement
 
     session = get_local_session()
-    rows = (
-        session.query(FinancialStatement)
-        .filter_by(corp_code=corp_code)
-        .order_by(FinancialStatement.year.desc(), FinancialStatement.quarter.desc())
-        .limit(8)
-        .all()
-    )
-    session.close()
+    try:
+        rows = (
+            session.query(FinancialStatement)
+            .filter_by(corp_code=corp_code)
+            .order_by(FinancialStatement.year.desc(), FinancialStatement.quarter.desc())
+            .limit(8)
+            .all()
+        )
+    finally:
+        session.close()
 
     if not rows:
         return ""
@@ -1098,11 +1251,28 @@ def get_financial_context(corp_code: str) -> str:
             return "N/A"
         return f"{v/1e8:,.0f}억원"
 
-    lines = ["【최근 분기 재무제표】"]
-    for r in rows:
+    def pct(cur, prev):
+        if cur is None or prev is None or prev == 0:
+            return ""
+        return f" ({(cur-prev)/abs(prev)*100:+.1f}%)"
+
+    lines = ["【최근 분기 재무제표 (전년 동기 대비)】"]
+    for i, r in enumerate(rows):
+        # 전년 동기: 4분기 뒤 (같은 분기)
+        prev = rows[i + 4] if i + 4 < len(rows) else None
+        rev_chg = pct(r.revenue, prev.revenue) if prev else ""
+        op_chg = pct(r.operating_income, prev.operating_income) if prev else ""
+        ni_chg = pct(r.net_income, prev.net_income) if prev else ""
+
+        # 영업이익률
+        op_margin = ""
+        if r.revenue and r.operating_income:
+            op_margin = f" [영업이익률 {r.operating_income/r.revenue*100:.1f}%]"
+
         lines.append(
-            f"{r.year}Q{r.quarter} | 매출 {fmt(r.revenue)} | 영업이익 {fmt(r.operating_income)}"
-            f" | 순이익 {fmt(r.net_income)} | 총자산 {fmt(r.total_assets)} | 부채 {fmt(r.total_debt)}"
+            f"{r.year}Q{r.quarter} | 매출 {fmt(r.revenue)}{rev_chg}"
+            f" | 영업이익 {fmt(r.operating_income)}{op_chg}{op_margin}"
+            f" | 순이익 {fmt(r.net_income)}{ni_chg}"
         )
     return "\n".join(lines)
 
@@ -1117,19 +1287,21 @@ def get_annual_report_context(corp_name: str, current_title: str = "") -> str:
     from modules.disclosure.models import DisclosureLocal
 
     session = get_local_session()
-    rec = (
-        session.query(DisclosureLocal)
-        .filter(
-            DisclosureLocal.corp_name == corp_name,
-            DisclosureLocal.ai_analyzed == True,
-            DisclosureLocal.title.like("%사업보고서%")
-            | DisclosureLocal.title.like("%분기보고서%")
-            | DisclosureLocal.title.like("%반기보고서%"),
+    try:
+        rec = (
+            session.query(DisclosureLocal)
+            .filter(
+                DisclosureLocal.corp_name == corp_name,
+                DisclosureLocal.ai_analyzed == True,
+                DisclosureLocal.title.like("%사업보고서%")
+                | DisclosureLocal.title.like("%분기보고서%")
+                | DisclosureLocal.title.like("%반기보고서%"),
+            )
+            .order_by(DisclosureLocal.disclosure_date.desc())
+            .first()
         )
-        .order_by(DisclosureLocal.disclosure_date.desc())
-        .first()
-    )
-    session.close()
+    finally:
+        session.close()
 
     if not rec or not rec.summary:
         return ""
@@ -1199,40 +1371,82 @@ def backfill_ai(max_records: int = 50) -> int:
     )
 
     print(f"\n[백필] 미분석 {len(pending)}건 처리 시작 (최대 {max_records}건)")
+
     done = 0
+    try:
+        for rec in pending:
+            doc_text = ""
+            if dart and rec.disclosure_id:
+                doc_text = _fetch_document_text(
+                    dart, rec.disclosure_id, rec.title or ""
+                )
 
-    for rec in pending:
-        doc_text = ""
-        if dart and rec.disclosure_id:
-            doc_text = _fetch_document_text(dart, rec.disclosure_id, rec.title or "")
+            # doc_text가 없는 레코드: 템플릿 분석으로 처리 후 analyzed 표시
+            if not doc_text:
+                t = _CPA_TEMPLATES.get(rec.disclosure_type, _CPA_TEMPLATES["기타"])
+                rcept_dt = (
+                    rec.disclosure_date.strftime("%Y%m%d")
+                    if rec.disclosure_date
+                    else ""
+                )
+                header = (
+                    f"[공시] {rec.corp_name} | {rec.title} | {rcept_dt}\n"
+                    f"[분류] {rec.disclosure_type}\n\n"
+                )
+                rec.summary = (
+                    header + f"[Cash]\n{textwrap.fill(t['cash'], width=80)}\n\n"
+                    f"[Risk]\n{textwrap.fill(t['risk'], width=80)}\n\n"
+                    f"[Hidden Agenda]\n{textwrap.fill(t['hidden'], width=80)}\n\n"
+                    f"[Verdict]\n{t['verdict']}"
+                )
+                rec.ai_analyzed = True
+                session.commit()
+                done += 1
+                print(f"  [백필-템플릿] {rec.corp_name} | {rec.title[:50]}")
+                continue
 
-        try:
-            ai_result = _analyze_with_groq(
-                rec.corp_name,
-                rec.title,
-                rec.disclosure_type,
-                doc_text,
-                rec.stock_code or "",
+            groq_exhausted = False
+            try:
+                ai_result = _analyze_with_groq(
+                    rec.corp_name,
+                    rec.title,
+                    rec.disclosure_type,
+                    doc_text,
+                    rec.stock_code or "",
+                )
+            except Exception:
+                # Groq 429 → Gemini로 폴백 시도
+                groq_exhausted = True
+                print(f"  [Groq→Gemini 폴백] {rec.corp_name} | {rec.title[:40]}")
+                ai_result = _analyze_with_gemini(
+                    rec.corp_name,
+                    rec.title,
+                    rec.disclosure_type,
+                    doc_text,
+                    rec.stock_code or "",
+                )
+
+            if ai_result is None:
+                if groq_exhausted:
+                    # Gemini도 실패 → 전체 중단
+                    print(f"  [백필 중단] Groq·Gemini 모두 실패 — {done}건 완료")
+                    break
+                # 단건 Groq 오류 → 건너뛰고 계속
+                print(f"  [백필 스킵] {rec.corp_name} | {rec.title}")
+                continue
+
+            rcept_dt = (
+                rec.disclosure_date.strftime("%Y%m%d") if rec.disclosure_date else ""
             )
-        except Exception:
-            # 429 한도 초과 → 완전 중단
-            print(f"  [백필 중단] Groq 일일 한도 소진 — {done}건 완료")
-            break
+            header = f"[공시] {rec.corp_name} | {rec.title} | {rcept_dt}\n[분류] {rec.disclosure_type}\n\n"
+            rec.summary = header + ai_result
+            rec.ai_analyzed = True
+            session.commit()
+            done += 1
+            print(f"  [백필완료] {rec.corp_name} | {rec.title}")
+    finally:
+        session.close()
 
-        if ai_result is None:
-            # 400 등 단건 오류 → 이 건만 건너뛰고 계속
-            print(f"  [백필 스킵] {rec.corp_name} | {rec.title}")
-            continue
-
-        rcept_dt = rec.disclosure_date.strftime("%Y%m%d") if rec.disclosure_date else ""
-        header = f"[공시] {rec.corp_name} | {rec.title} | {rcept_dt}\n[분류] {rec.disclosure_type}\n\n"
-        rec.summary = header + ai_result
-        rec.ai_analyzed = True
-        session.commit()
-        done += 1
-        print(f"  [백필완료] {rec.corp_name} | {rec.title}")
-
-    session.close()
     print(f"[백필] 완료: {done}건")
     return done
 
