@@ -17,12 +17,13 @@
   <script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
 
   <!-- 데이터 / 비즈니스 로직 layer (Babel 처리 전, 일반 script로 로드).
-       각 IIFE가 window.DiscloseAI에 함수·상수를 export. -->
-  <script src="./data/mock.js"></script>
-  <script src="./data/valuation.js"></script>
-  <script src="./data/narration.js"></script>
-  <script src="./data/loader.js"></script>
+       각 IIFE가 window.DiscloseAI에 함수·상수를 export.
+       ?v= 파라미터는 dev cache-bust용 (수정 후 새로고침). -->
+  <script src="./data/mock.js?v=j5"></script>
+  <script src="./data/valuation.js?v=j5"></script>
+  <script src="./data/narration.js?v=j5"></script>
+  <script src="./data/loader.js?v=j5"></script>
 
-  <script type="text/babel" data-presets="env,react" src="./app.jsx"></script>
+  <script type="text/babel" data-presets="env,react" src="./app.jsx?v=j5"></script>
 </body>
 </html>

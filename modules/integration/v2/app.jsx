@@ -157,11 +157,14 @@ function GalaxyCanvas({ density = 220 }) {
 }
 
 // ====================================================================== //
-// SolarCanvas — 섹터 행성을 두 링으로 분배 + 회전 + 클릭 hit-test
+// SolarStage — stage별 행성을 회전 + 클릭 hit-test.
+//   stage='galaxy'  : sectors 12개
+//   stage='sector'  : 해당 섹터의 회사 노드들
+//   stage='company' : 회사 + rl 관계기업
 // ====================================================================== //
-function SolarCanvas({ sectors, activeSectorId, onPickSector }) {
+function SolarStage({ stage, planets, activeId, accentColor, onPick }) {
   const ref = useRef(null);
-  const planetsRef = useRef([]);
+  const hitsRef = useRef([]);
 
   useEffect(() => {
     const canvas = ref.current;
@@ -184,35 +187,34 @@ function SolarCanvas({ sectors, activeSectorId, onPickSector }) {
       ctx.clearRect(0, 0, W, H);
       const cx = W / 2, cy = H / 2;
       const baseR = Math.min(W, H) * 0.30;
+      const sunRGB = stage === "galaxy" ? [255, 230, 180] : hexToRGB(accentColor || "#5eead4");
 
       // 중심 별
       const sunGrd = ctx.createRadialGradient(cx, cy, 0, cx, cy, 80 * dpr);
-      sunGrd.addColorStop(0, "rgba(255, 230, 180, 0.95)");
-      sunGrd.addColorStop(0.4, "rgba(255, 200, 120, 0.40)");
-      sunGrd.addColorStop(1, "rgba(255, 180, 90, 0)");
+      sunGrd.addColorStop(0, `rgba(${sunRGB[0]}, ${sunRGB[1]}, ${sunRGB[2]}, 0.92)`);
+      sunGrd.addColorStop(0.4, `rgba(${sunRGB[0]}, ${sunRGB[1]}, ${sunRGB[2]}, 0.35)`);
+      sunGrd.addColorStop(1, `rgba(${sunRGB[0]}, ${sunRGB[1]}, ${sunRGB[2]}, 0)`);
       ctx.fillStyle = sunGrd;
       ctx.beginPath();
       ctx.arc(cx, cy, 80 * dpr, 0, Math.PI * 2);
       ctx.fill();
 
-      planetsRef.current = [];
-      const total = sectors.length || 1;
-      const ringSplit = Math.ceil(total / 2);
-      sectors.forEach((s, i) => {
+      hitsRef.current = [];
+      const total = planets.length || 1;
+      const ringSplit = total <= 6 ? total : Math.ceil(total / 2);
+      planets.forEach((p, i) => {
         const ring = i < ringSplit ? 0 : 1;
         const inRing = ring === 0 ? ringSplit : total - ringSplit;
         const idxInRing = ring === 0 ? i : i - ringSplit;
         const ringR = baseR + ring * baseR * 0.55;
-        const ang =
-          (idxInRing / Math.max(1, inRing)) * Math.PI * 2 + t * (ring ? -0.6 : 1);
+        const ang = (idxInRing / Math.max(1, inRing)) * Math.PI * 2 + t * (ring ? -0.6 : 1);
         const x = cx + Math.cos(ang) * ringR;
         const y = cy + Math.sin(ang) * ringR * 0.78;
-        const isActive = s.id === activeSectorId;
-        // 시총 비례 반경 (작은 차이로 작용)
-        const sizeRatio = Math.max(0.6, Math.min(1.4, Math.sqrt((s.memberCount || 1) / 4)));
+        const isActive = p.id === activeId;
+        const sizeRatio = p.sizeRatio || 1;
         const radius = (isActive ? 18 : 12) * dpr * sizeRatio;
 
-        ctx.strokeStyle = isActive ? "rgba(94,234,212,0.22)" : "rgba(148,163,184,0.05)";
+        ctx.strokeStyle = isActive ? hexA(p.color, 0.32) : "rgba(148,163,184,0.05)";
         ctx.lineWidth = 1;
         ctx.setLineDash([2, 6]);
         ctx.beginPath();
@@ -221,15 +223,15 @@ function SolarCanvas({ sectors, activeSectorId, onPickSector }) {
         ctx.setLineDash([]);
 
         const glow = ctx.createRadialGradient(x, y, 0, x, y, radius * 3);
-        glow.addColorStop(0, hexA(s.color, 0.85));
-        glow.addColorStop(0.4, hexA(s.color, 0.30));
-        glow.addColorStop(1, hexA(s.color, 0));
+        glow.addColorStop(0, hexA(p.color, 0.85));
+        glow.addColorStop(0.4, hexA(p.color, 0.30));
+        glow.addColorStop(1, hexA(p.color, 0));
         ctx.fillStyle = glow;
         ctx.beginPath();
         ctx.arc(x, y, radius * 3, 0, Math.PI * 2);
         ctx.fill();
 
-        ctx.fillStyle = s.color;
+        ctx.fillStyle = p.color;
         ctx.beginPath();
         ctx.arc(x, y, radius, 0, Math.PI * 2);
         ctx.fill();
@@ -242,11 +244,20 @@ function SolarCanvas({ sectors, activeSectorId, onPickSector }) {
           ctx.stroke();
         }
 
-        planetsRef.current.push({
-          id: s.id, label: s.ko, en: s.en, x, y, radius: radius + 6 * dpr, color: s.color,
-        });
-      });
+        // 회사 라벨 (sector·company stage)
+        if (stage !== "galaxy" && p.label) {
+          ctx.font = `${(isActive ? 12 : 10) * dpr}px var(--font-body, sans-serif)`;
+          ctx.fillStyle = isActive ? "#ffffff" : "rgba(226,232,240,0.92)";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "top";
+          ctx.shadowColor = "rgba(0,0,0,0.8)";
+          ctx.shadowBlur = 6;
+          ctx.fillText(p.label, x, y + radius + 6 * dpr);
+          ctx.shadowBlur = 0;
+        }
 
+        hitsRef.current.push({ id: p.id, x, y, radius: radius + 6 * dpr });
+      });
       raf = requestAnimationFrame(loop);
     }
     loop();
@@ -255,7 +266,7 @@ function SolarCanvas({ sectors, activeSectorId, onPickSector }) {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", onResize);
     };
-  }, [sectors, activeSectorId]);
+  }, [stage, planets, activeId, accentColor]);
 
   const handleClick = useCallback((e) => {
     const canvas = ref.current;
@@ -266,17 +277,26 @@ function SolarCanvas({ sectors, activeSectorId, onPickSector }) {
     const y = (e.clientY - rect.top) * dpr;
     let best = null;
     let bestD = Infinity;
-    for (const p of planetsRef.current) {
+    for (const p of hitsRef.current) {
       const d = Math.hypot(p.x - x, p.y - y);
       if (d < p.radius + 6 && d < bestD) {
         bestD = d;
         best = p;
       }
     }
-    if (best && onPickSector) onPickSector(best.id);
-  }, [onPickSector]);
+    if (best && onPick) onPick(best.id);
+  }, [onPick]);
 
   return <canvas className="solar-canvas" ref={ref} onClick={handleClick} />;
+}
+
+function hexToRGB(hex) {
+  const h = (hex || "#5eead4").replace("#", "");
+  return [
+    parseInt(h.slice(0, 2), 16),
+    parseInt(h.slice(2, 4), 16),
+    parseInt(h.slice(4, 6), 16),
+  ];
 }
 
 function hexA(hex, a) {
@@ -559,13 +579,13 @@ function LegendPanel() {
 // ====================================================================== //
 // SectorPanel (panel-br) — 12 섹터 chip
 // ====================================================================== //
-function SectorPanel({ sectors, activeSectorId, onPickSector, breadcrumbCount }) {
+function SectorPanel({ sectors, activeSectorId, onPickSector, title }) {
   return (
     <div className="panel panel-br">
       <div className="panel-head">
         <div className="panel-head-l">
           <span className="panel-dot panel-dot-cyan" />
-          <span className="panel-title">SECTOR INDEX</span>
+          <span className="panel-title">{title || "SECTOR INDEX"}</span>
           <span className="panel-sub">섹터 구분 · {sectors.length}</span>
         </div>
         <span className="panel-count">
@@ -598,6 +618,293 @@ function SectorPanel({ sectors, activeSectorId, onPickSector, breadcrumbCount })
 }
 
 // ====================================================================== //
+// SectorOverviewPanel (panel-tl, stage='sector') — DAILY HIGHLIGHTS + SECTOR PULSE
+// ====================================================================== //
+function SectorOverviewPanel({ sector, highlights, onBackToGalaxy }) {
+  // mock SECTOR PULSE — 12개 막대 (1차 mock + 워터마크)
+  const pulseBars = useMemo(() => {
+    const seed = (sector.id || "").length || 1;
+    return Array.from({ length: 12 }, (_, i) => {
+      const v = 0.3 + 0.7 * Math.abs(Math.sin(seed * 13 + i * 1.7));
+      return v;
+    });
+  }, [sector.id]);
+
+  return (
+    <div className="panel panel-tl sector-overview-panel">
+      <div className="panel-head">
+        <div className="panel-head-l">
+          <span className="panel-dot" style={{ background: sector.color, boxShadow: `0 0 8px ${sector.color}` }} />
+          <span className="panel-title">SECTOR OVERVIEW</span>
+          <span className="panel-sub">섹터 개요</span>
+        </div>
+        <button className="back-link" onClick={onBackToGalaxy} type="button">
+          ← GALAXY
+        </button>
+      </div>
+      <div className="panel-body">
+        <div className="sector-ov-body">
+          <div className="sector-ov-hero">
+            <div className="sector-ov-orb" style={{ background: sector.color }} />
+            <div>
+              <div className="sector-ov-en">{sector.en}</div>
+              <div className="sector-ov-ko">{sector.ko}</div>
+            </div>
+          </div>
+
+          <div className="sector-ov-stats">
+            <div className="ov-stat">
+              <div className="ov-k">시가총액</div>
+              <div className="ov-v">{sector.cap}</div>
+            </div>
+            <div className="ov-stat">
+              <div className="ov-k">기업 수</div>
+              <div className="ov-v">{sector.memberCount}</div>
+            </div>
+            <div className="ov-stat">
+              <div className="ov-k">YTD</div>
+              <div
+                className="ov-v"
+                style={{ color: sector.ytdMock >= 0 ? "#4ade80" : "#f87171" }}
+              >
+                {(sector.ytdMock >= 0 ? "+" : "") + sector.ytdMock}%
+              </div>
+            </div>
+            <div className="ov-stat">
+              <div className="ov-k">P / E</div>
+              <div className="ov-v">{sector.perMock}</div>
+            </div>
+          </div>
+
+          <div className="sector-ov-section">
+            <div className="ov-sec-title">DAILY HIGHLIGHTS · 오늘의 시그널</div>
+            <ul className="ov-sec-list">
+              {highlights.length === 0 ? (
+                <li>
+                  <span className="ov-bullet" style={{ background: "#94a3b8" }} />
+                  <span style={{ color: "var(--text-3)", fontSize: 11 }}>
+                    표시할 high_impact 공시가 없습니다.
+                  </span>
+                </li>
+              ) : (
+                highlights.map((h, i) => (
+                  <li key={i}>
+                    <span className="ov-time">{h.time}</span>
+                    <span className="ov-bullet" style={{ background: sector.color }} />
+                    <span>
+                      <strong style={{ color: "#fff" }}>{h.corp_name}</strong>
+                      {" · "}
+                      {h.title.slice(0, 56)}
+                      {h.title.length > 56 ? "…" : ""}
+                    </span>
+                  </li>
+                ))
+              )}
+            </ul>
+          </div>
+
+          <div className="sector-ov-section">
+            <div className="ov-sec-title">
+              SECTOR PULSE · 섹터 지수
+              <span
+                style={{
+                  marginLeft: 8,
+                  fontSize: 8,
+                  color: "var(--text-3)",
+                  opacity: 0.7,
+                  letterSpacing: "0.04em",
+                  fontWeight: 400,
+                }}
+              >
+                · 예시 데이터
+              </span>
+            </div>
+            <div className="ov-bars">
+              {pulseBars.map((v, i) => (
+                <div
+                  key={i}
+                  className="ov-bar"
+                  style={{
+                    height: `${v * 100}%`,
+                    background: sector.color,
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ====================================================================== //
+// CompanyOverviewPanel (panel-tl, stage='company')
+// ====================================================================== //
+function CompanyOverviewPanel({ node, sectorColor, onBackToSector, onEnterCorp }) {
+  const D = window.DiscloseAI || {};
+  const valuation = D.calcValuation ? D.calcValuation(node) : { per: null, pbr: null, roe: null };
+  // 우선순위: percentile.roe → statements[0].roe → calcValuation.roe
+  let roe = node.percentile?.roe;
+  if (roe == null && Array.isArray(node.statements) && node.statements.length > 0) {
+    roe = node.statements[0].roe;
+  }
+  if (roe == null) roe = valuation.roe;
+  // raw 소수점이 길게 들어오는 경우(예: statements.roe) 정규화
+  if (roe != null && Number.isFinite(roe)) roe = +Number(roe).toFixed(1);
+  const fmt = (v, suf = "") => (v == null || !Number.isFinite(v) ? "-" : v + suf);
+  const accent = sectorColor || "#5eead4";
+  const recentDisc = (node.disc || []).slice(0, 3);
+  const rels = (node.rl || []).slice(0, 4);
+
+  const firmCount = 47; // docs/prototype/firm_<ticker>.html 47개 검증됨
+  const FIRM_TICKERS = (window.__V2_FIRM_TICKERS__ ||= new Set());
+
+  return (
+    <div className="panel panel-tl company-overview-panel">
+      <div className="panel-head">
+        <div className="panel-head-l">
+          <span className="panel-dot" style={{ background: accent, boxShadow: `0 0 8px ${accent}` }} />
+          <span className="panel-title">COMPANY DOSSIER</span>
+          <span className="panel-sub">기업 개요</span>
+        </div>
+        <button className="back-link" onClick={onBackToSector} type="button">
+          ← SECTOR
+        </button>
+      </div>
+      <div className="panel-body">
+        <div className="company-ov-body">
+          <div className="company-ov-hero">
+            <div className="company-ov-orb" style={{ background: accent }} />
+            <div>
+              <div className="company-ov-name">{node.n}</div>
+              <div className="company-ov-en">KOSPI · {node.t} · {node.s}</div>
+            </div>
+          </div>
+
+          <div className="company-ov-stats">
+            <div className="ov-stat">
+              <div className="ov-k">시가총액</div>
+              <div className="ov-v">
+                {node.market_cap ? D.trillionLabel(node.market_cap) : "-"}
+              </div>
+            </div>
+            <div className="ov-stat">
+              <div className="ov-k">PER</div>
+              <div className="ov-v">{fmt(valuation.per)}</div>
+            </div>
+            <div className="ov-stat">
+              <div className="ov-k">PBR</div>
+              <div className="ov-v">{fmt(valuation.pbr)}</div>
+            </div>
+            <div className="ov-stat">
+              <div className="ov-k">ROE</div>
+              <div className="ov-v" style={{ color: roe >= 10 ? "#4ade80" : "#fff" }}>
+                {fmt(roe, "%")}
+              </div>
+            </div>
+          </div>
+
+          {/* 현재가 — yfinance 미연결, "데이터 수집 중" 뱃지 */}
+          <div className="company-ov-row" style={{ "--accent": "#94a3b8" }}>
+            <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "var(--text-3)", letterSpacing: "0.16em" }}>
+              현재가
+            </span>
+            <span
+              style={{
+                fontSize: 11,
+                color: "var(--text-3)",
+                background: "rgba(148,163,184,0.10)",
+                border: "1px solid rgba(148,163,184,0.18)",
+                padding: "2px 8px",
+                borderRadius: 2,
+                fontFamily: "var(--font-mono)",
+                letterSpacing: "0.04em",
+              }}
+            >
+              실시간 데이터 수집 중
+            </span>
+          </div>
+
+          <div className="sector-ov-section">
+            <div className="ov-sec-title">RECENT DISCLOSURES · 최근 공시</div>
+            <ul className="ov-sec-list">
+              {recentDisc.length === 0 ? (
+                <li>
+                  <span className="ov-bullet" style={{ background: "#94a3b8" }} />
+                  <span style={{ color: "var(--text-3)", fontSize: 11 }}>
+                    최근 공시가 없습니다.
+                  </span>
+                </li>
+              ) : (
+                recentDisc.map((d, i) => (
+                  <li key={i}>
+                    <span className="ov-time">{(d.date || "").slice(5).replace("-", "/")}</span>
+                    <span
+                      className="ov-bullet"
+                      style={{ background: d.high_impact ? "#f87171" : accent }}
+                    />
+                    <span>{d.title.slice(0, 50)}{d.title.length > 50 ? "…" : ""}</span>
+                  </li>
+                ))
+              )}
+            </ul>
+          </div>
+
+          <div className="sector-ov-section">
+            <div className="ov-sec-title">RELATED ENTITIES · 관계 기업 ({rels.length})</div>
+            <div className="ov-rels">
+              {rels.length === 0 ? (
+                <div style={{ color: "var(--text-3)", fontSize: 11 }}>관계 기업 데이터 없음</div>
+              ) : (
+                rels.map((r, i) => (
+                  <div key={i} className="ov-rel">
+                    <span
+                      className="ov-rel-mark"
+                      style={{ background: relColor(r.t || r.type) }}
+                    />
+                    <span className="ov-rel-code">{r.target_t || r.t || r.code || "-"}</span>
+                    <span className="ov-rel-type" style={{ color: "var(--text-2)" }}>
+                      {r.label || r.type || r.relation || "-"}
+                    </span>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="company-ov-cta-wrap">
+        <button
+          className="enter-corp-cta"
+          style={{ "--accent": accent }}
+          onClick={onEnterCorp}
+          type="button"
+          aria-label="ENTER CORPORATION"
+        >
+          <span>ENTER CORPORATION</span>
+          <span className="enter-corp-arrow">↗</span>
+        </button>
+        <div className="enter-corp-hint">
+          새 창에서 재무정보 상세 열기
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function relColor(typeOrCode) {
+  // 관계 유형별 색상 (k-IFRS legend와 일치)
+  const t = (typeOrCode || "").toString();
+  if (/종속/.test(t)) return "#ef4444";
+  if (/관계/.test(t)) return "#a78bfa";
+  if (/유의/.test(t)) return "#fbbf24";
+  if (/계열/.test(t)) return "#fde047";
+  if (/특수/.test(t)) return "#94a3b8";
+  return "#5eead4";
+}
+
+// ====================================================================== //
 // PlaceholderTab (DISCLOSURES / TIME MACHINE)
 // ====================================================================== //
 function PlaceholderTab({ title, onBack }) {
@@ -618,34 +925,130 @@ function PlaceholderTab({ title, onBack }) {
 }
 
 // ====================================================================== //
-// FinanceTab — Galaxy 단계 (J3 현재). J4·J5에서 Sector·Company 단계 추가.
+// FinanceTab — galaxy → sector → company 3단계
 // ====================================================================== //
 function FinanceTab({
   data,
   activeSectorId,
+  activeCompanyCode,
   onPickSector,
+  onPickCompany,
+  onBackToGalaxy,
+  onBackToSector,
+  onEnterCorp,
 }) {
   const sectors = data.sectors || [];
-  const stage = activeSectorId ? "sector" : "galaxy";
+  const sector = activeSectorId ? sectors.find((s) => s.id === activeSectorId) : null;
+  const node = activeCompanyCode && sector
+    ? (sector.members || []).find((m) => m.t === activeCompanyCode)
+    : null;
+  const stage = node ? "company" : sector ? "sector" : "galaxy";
+
+  // SolarStage planets
+  let planets;
+  let accentColor = "#5eead4";
+  if (stage === "galaxy") {
+    planets = sectors.map((s) => ({
+      id: s.id,
+      label: null,
+      en: s.en,
+      color: s.color,
+      sizeRatio: Math.max(0.6, Math.min(1.4, Math.sqrt((s.memberCount || 1) / 4))),
+    }));
+  } else if (stage === "sector") {
+    accentColor = sector.color;
+    planets = (sector.members || []).map((m) => ({
+      id: m.t,
+      label: m.n,
+      en: m.t,
+      color: sector.color,
+      sizeRatio: Math.max(0.7, Math.min(1.5, Math.sqrt(m.sz || 1))),
+    }));
+  } else {
+    accentColor = sector.color;
+    const rels = (node.rl || []).slice(0, 5);
+    planets = [
+      { id: node.t, label: node.n, en: node.t, color: sector.color, sizeRatio: 1.5 },
+      ...rels.map((r, i) => ({
+        id: r.target_t || r.t || `rel-${i}`,
+        label: r.target_n || r.n || r.label || "",
+        en: "",
+        color: relColor(r.label || r.type),
+        sizeRatio: 0.9,
+      })),
+    ];
+  }
+
+  // SolarStage 클릭: stage별 다른 동작
+  const handlePick = useCallback(
+    (id) => {
+      if (stage === "galaxy") {
+        onPickSector(id);
+      } else if (stage === "sector") {
+        onPickCompany(id);
+      }
+      // company stage: 관계 기업 클릭은 현재 무시 (J6 이후)
+    },
+    [stage, onPickSector, onPickCompany]
+  );
+
+  // BR panel 라벨
+  const brTitle = stage === "galaxy" ? "SECTOR INDEX" : "SECTOR LIST";
+
+  // Highlights for sector
+  const sectorHighlights = useMemo(() => {
+    if (!sector) return [];
+    const D = window.DiscloseAI;
+    if (!D || !D.highlightsForSector) return [];
+    return D.highlightsForSector(data.discAll || [], sector.members || [], 3);
+  }, [sector, data.discAll]);
+
+  // TL panel 분기
+  let tlPanel;
+  if (stage === "galaxy") tlPanel = <MascotPanel stage="galaxy" />;
+  else if (stage === "sector")
+    tlPanel = (
+      <SectorOverviewPanel
+        sector={sector}
+        highlights={sectorHighlights}
+        onBackToGalaxy={onBackToGalaxy}
+      />
+    );
+  else
+    tlPanel = (
+      <CompanyOverviewPanel
+        node={node}
+        sectorColor={sector.color}
+        onBackToSector={onBackToSector}
+        onEnterCorp={() => onEnterCorp(node)}
+      />
+    );
+
   return (
     <>
       <div className="finance-tab">
         <div className="solar-stage">
-          <SolarCanvas
-            sectors={sectors}
-            activeSectorId={activeSectorId}
-            onPickSector={onPickSector}
+          <SolarStage
+            stage={stage}
+            planets={planets}
+            activeId={
+              stage === "galaxy" ? activeSectorId :
+              stage === "sector" ? activeCompanyCode : null
+            }
+            accentColor={accentColor}
+            onPick={handlePick}
           />
           <div className="solar-labels" />
         </div>
       </div>
-      <MascotPanel stage={stage} />
+      {tlPanel}
       <AssistantPanel stage={stage} />
       <LegendPanel />
       <SectorPanel
         sectors={sectors}
         activeSectorId={activeSectorId}
         onPickSector={onPickSector}
+        title={brTitle}
       />
     </>
   );
@@ -693,7 +1096,11 @@ function IntroScreen({ onEnter, session, uplinkMs, utc, tElapsed }) {
 // ====================================================================== //
 function PhaseTab({
   activeTab, onTabChange,
-  data, activeSectorId, onPickSector,
+  data,
+  activeSectorId, activeCompanyCode,
+  onPickSector, onPickCompany,
+  onBackToGalaxy, onBackToSector,
+  onEnterCorp,
   kospi, breadcrumb,
 }) {
   let body;
@@ -702,7 +1109,12 @@ function PhaseTab({
       <FinanceTab
         data={data}
         activeSectorId={activeSectorId}
+        activeCompanyCode={activeCompanyCode}
         onPickSector={onPickSector}
+        onPickCompany={onPickCompany}
+        onBackToGalaxy={onBackToGalaxy}
+        onBackToSector={onBackToSector}
+        onEnterCorp={onEnterCorp}
       />
     );
   } else if (activeTab === "disclosures") {
@@ -796,6 +1208,7 @@ function App() {
   const [phase, setPhase] = useState("intro");
   const [activeTab, setActiveTab] = useState("financials");
   const [activeSectorId, setActiveSectorId] = useState(null);
+  const [activeCompanyCode, setActiveCompanyCode] = useState(null);
   const [tElapsed, setTElapsed] = useState(0);
 
   const sessionId = useRef(`DA-${Math.floor(2000 + Math.random() * 700)}`);
@@ -811,19 +1224,60 @@ function App() {
   const handleEnter = useCallback(() => setPhase("tab"), []);
   const handleTabChange = useCallback((next) => {
     setActiveTab(next);
-    if (next !== "financials") setActiveSectorId(null);
+    if (next !== "financials") {
+      setActiveSectorId(null);
+      setActiveCompanyCode(null);
+    }
   }, []);
-  const handlePickSector = useCallback((sid) => setActiveSectorId(sid), []);
+  const handlePickSector = useCallback((sid) => {
+    setActiveSectorId(sid);
+    setActiveCompanyCode(null);
+  }, []);
+  const handlePickCompany = useCallback((code) => setActiveCompanyCode(code), []);
+  const handleBackToGalaxy = useCallback(() => {
+    setActiveSectorId(null);
+    setActiveCompanyCode(null);
+  }, []);
+  const handleBackToSector = useCallback(() => setActiveCompanyCode(null), []);
+  const handleEnterCorp = useCallback((node) => {
+    if (!node || !node.t) return;
+    // docs/prototype/firm_<ticker>.html — 47개 존재. 미존재 ticker는 404 응답
+    // 새 창에서 열기 (iframe overlay는 후속 phase)
+    const url = `../../../docs/prototype/firm_${node.t}.html`;
+    window.open(url, "_blank", "noopener,noreferrer");
+  }, []);
 
+  // dev/QA hook — 회전 SolarStage hit-test가 어려워 외부 자동화에서 직접 호출.
+  // 안전: read-only로만 노출되며 production 사용자 동작 영향 0.
+  useEffect(() => {
+    window.__v2_dev = {
+      pickSector: handlePickSector,
+      pickCompany: handlePickCompany,
+      backToGalaxy: handleBackToGalaxy,
+      backToSector: handleBackToSector,
+      enterCorp: handleEnterCorp,
+    };
+  }, [handlePickSector, handlePickCompany, handleBackToGalaxy, handleBackToSector, handleEnterCorp]);
+
+  // breadcrumb (FINANCIALS만 의미)
   const breadcrumb = useMemo(() => {
     if (activeTab !== "financials") return [];
-    const crumbs = [{ label: "GALAXY", onClick: () => setActiveSectorId(null) }];
+    const crumbs = [{ label: "GALAXY", onClick: handleBackToGalaxy }];
     if (activeSectorId) {
       const sec = (data.sectors || []).find((s) => s.id === activeSectorId);
-      if (sec) crumbs.push({ label: sec.ko });
+      if (sec) {
+        crumbs.push({
+          label: sec.ko,
+          onClick: activeCompanyCode ? handleBackToSector : undefined,
+        });
+        if (activeCompanyCode) {
+          const node = (sec.members || []).find((m) => m.t === activeCompanyCode);
+          if (node) crumbs.push({ label: node.n });
+        }
+      }
     }
     return crumbs;
-  }, [activeTab, activeSectorId, data.sectors]);
+  }, [activeTab, activeSectorId, activeCompanyCode, data.sectors, handleBackToGalaxy, handleBackToSector]);
 
   if (phase === "intro") {
     return (
@@ -842,7 +1296,12 @@ function App() {
       onTabChange={handleTabChange}
       data={data}
       activeSectorId={activeSectorId}
+      activeCompanyCode={activeCompanyCode}
       onPickSector={handlePickSector}
+      onPickCompany={handlePickCompany}
+      onBackToGalaxy={handleBackToGalaxy}
+      onBackToSector={handleBackToSector}
+      onEnterCorp={handleEnterCorp}
       kospi={kospi}
       breadcrumb={breadcrumb}
     />

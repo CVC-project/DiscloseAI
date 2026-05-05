@@ -17,11 +17,11 @@
     return t.toFixed(2);
   }
 
-  // 큰 단위 시총(원) → "T" 라벨 (예: 980T)
+  // 큰 단위 시총(원) → "T" 라벨 (예: 980T, 1,461T).
   function trillionLabel(won) {
     if (!won) return "-";
     const t = won / 1e12;
-    if (t >= 1000) return Math.round(t / 1000) + "K T";
+    if (t >= 1000) return Math.round(t).toLocaleString() + "T";
     if (t >= 100) return Math.round(t) + "T";
     if (t >= 10) return t.toFixed(0) + "T";
     return t.toFixed(1) + "T";

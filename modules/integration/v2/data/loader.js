@@ -163,20 +163,24 @@
     }));
   }
 
-  // Sector 단위 highlights — 해당 섹터 ticker로 필터
+  // Sector 단위 highlights — 해당 섹터 ticker로 필터.
+  // high_impact 우선, 없으면 최근 공시 fallback (현재 데이터는 high_impact 1건뿐).
   function highlightsForSector(discAll, members, n = 3) {
     if (!Array.isArray(discAll) || !members) return [];
     const tickers = new Set(members.map((m) => m.t));
-    const items = discAll
-      .filter((d) => d && d.high_impact && tickers.has(d.ticker || d.stock_code))
+    const inSector = discAll
+      .filter((d) => d && tickers.has(d.ticker || d.stock_code))
       .slice()
       .sort((a, b) => (b.disclosure_date || "").localeCompare(a.disclosure_date || ""));
+    const high = inSector.filter((d) => d.high_impact);
+    const items = high.length >= n ? high : [...high, ...inSector.filter((d) => !d.high_impact)];
     return items.slice(0, n).map((d) => ({
       time: (d.disclosure_date || "").slice(5).replace("-", "/"),
-      title: d.title || "",
+      title: (d.title || "").trim(),
       corp_name: d.corp_name || "",
       type: d.disclosure_type || "",
       ticker: d.ticker || d.stock_code || "",
+      high_impact: !!d.high_impact,
     }));
   }
 
