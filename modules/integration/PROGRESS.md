@@ -2,6 +2,16 @@
 
 > `/check` skill 실행 시 아래 형식으로 자동 기록됩니다.
 
+## 2026-05-05 (/check — Phase H 리뷰 후속 fix)
+- **작업**: code-reviewer 지적 3건 반영
+  - `closeFullTimemachine`에 `_tmCnIdx = 0` 추가 — `_tmStartScenario`와 리셋 대칭 확보 (유지보수성 ↑)
+  - `_tmChatSend` 키 모달 분기에서 `_tmChatBusy = true` 임시 set + 콜백에서 false 복원 — 빠른 연타 시 중복 모달 race 방지
+  - `_chatInit` 키 안내 메시지 `innerHTML` → `createElement + addEventListener`로 전환 — XSS 패턴 정리
+- **파일**: `modules/integration/dashboard.html` (~25줄 수정)
+- **테스트**: 482/482 통과 (기존 470 + 신규 `tests/test_integration_price_scenarios.py` 12건)
+- **리뷰**: 보안·우선순위·재진입 루프·금융 도메인 면책 모두 OK. 3개 minor 지적 모두 반영
+- **도메인 메모**: `_getGeminiKey()`가 `chat_config.local.js`의 `'YOUR_API_KEY_HERE'` placeholder도 가드 — 부분 설정 케이스 누락 없음 ✓
+
 ## 2026-05-05 (Phase H — Price v2 흡수: DART URL 갱신 + Gemini 키 모달 + 방어적 상태 리셋)
 
 - **작업 범위**: price v2 PR (#20, commit `c9bdd10`)의 3가지 변경을 integration에 흡수:
