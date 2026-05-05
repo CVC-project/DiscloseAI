@@ -5066,7 +5066,9 @@
 
         const recentDisc = discByTicker[t] || [];
         n.has_disclosure = recentDisc.length > 0;
-        n.disc = recentDisc.slice(0, 3).map(d => ({
+        // disclosure v2부터 [오늘의 개념] 5번째 섹션 추가 — 모든 5건 보존하여 overlay에서 노출
+        // (extract_data.py가 per_corp=5로 추출, 우측 mini panel은 별도 slice 적용)
+        n.disc = recentDisc.slice(0, 5).map(d => ({
           title: d.title || '',
           date: d.disclosure_date || '',
           type: d.disclosure_type || '',
