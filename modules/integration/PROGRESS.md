@@ -2,6 +2,45 @@
 
 > `/check` skill 실행 시 아래 형식으로 자동 기록됩니다.
 
+## 2026-05-05 (Phase H — Price v2 흡수: DART URL 갱신 + Gemini 키 모달 + 방어적 상태 리셋)
+
+- **작업 범위**: price v2 PR (#20, commit `c9bdd10`)의 3가지 변경을 integration에 흡수:
+  1. DART URL 교체 (id 2 HD현대중공업·id 11 삼성전자) — `dsaf001/main.do?rcpNo=...` (404) → `dsab007/search.ax?textCrpNm=...` (검색 페이지)
+  2. localStorage 기반 Gemini API 키 입력 모달 — 하드코딩 키 제거 + 사용자 입력 UI (price 측은 timemachine.html에만 적용, 우리는 메인 채팅 + 타임머신 chat-first 모두 적용)
+  3. 토글 버그 수정 정신 차용 — price 측은 quiz.html `startQuiz()`에서 `cardnewsScreen` 숨김 누락 1줄 fix. 우리는 다른 패턴이라 직접 적용 안 되나, 같은 정신으로 4개 잠재 누수 지점에 방어적 리셋
+
+### Stage 1 — DART URL 갱신
+- `git merge origin/dev` 으로 price v2 흡수 (FF merge, 3 files: quiz.html / quiz_data.py / timemachine.html)
+- `python -m modules.integration.extract_data` 재실행 → `data/price_scenarios.json` 갱신 (12 시나리오 그대로, id 2·11의 `dart_url` 교체 확인)
+
+### Stage 2 — localStorage 기반 Gemini 키 모달
+- 신규 헬퍼 (`dashboard.html` ~L5072): `_getGeminiKey()` (chat_config > localStorage 우선순위), `_saveGeminiKey()`, `_clearGeminiKey()`, `_showKeyModal(onSaveCb)`, `_applyGeminiKey()`, `_clearGeminiKeyAndClose()`
+- 모달 UX: price `timemachine.html` v2 디자인 차용. cyan/teal gradient CTA, password input, "키는 브라우저(localStorage)에만 저장" 안내, Google AI Studio 링크. z-index 10200 (기존 fullTimemachine 9999, finalModal 10100 위)
+- 진입점:
+  - 채팅 사이드바 헤더에 🔑 아이콘 버튼 (analyze·disclosure·timemachine 모드 모두 혜택)
+  - 타임머신 chat-first toolbar에 🔑 API 키 버튼
+  - `_chatSubmit` (메인 채팅) / `_tmChatSend` (타임머신) — 키 미존재 시 모달 자동 호출 + 저장 콜백으로 재시도
+  - `_chatInit` 키 미설정 안내 → "키 입력 모달 열기" 클릭 가능 링크
+- `_chatCallGemini` / `_tmGeminiCall` — `window.GEMINI_API_KEY` 직접 참조 → `_getGeminiKey()` 사용
+- chat-first 입력란: 이전 keyMissing 시 disabled → 항상 활성 + 전송 시 모달
+
+### Stage 3 — 방어적 상태 리셋
+- `_tmStartScenario` 시작 부분에 5개 상태 리셋 추가: `_tmChatBusy=false` / `_tmCnIdx=0` / orphan `#tmFinalModal` 제거 / orphan `#geminiKeyModal` 제거 / `__tmIntroTimer` `__tmSystemMsgTimer` clearTimeout
+- `closeFullTimemachine` 에도 동일 리셋 (overlay 닫힘 시 잔재 제거)
+- `_tmRenderChatFirst` 의 `setTimeout` 호출을 `window.__tmIntroTimer` `window.__tmSystemMsgTimer` 로 추적
+
+### 검증
+- pytest 470 passed / black --check clean
+- Playwright E2E:
+  - 키 모달 — sidebar 🔑 클릭 → 모달 → 빈 입력 시 input border 빨강 + 모달 유지 → "AIzaSy_TEST_KEY_..." 입력 → 저장 → localStorage 저장 + 모달 종료 ✅
+  - 카드뉴스 idx 리셋 — 슬라이드 3 이동 → 닫기 → 재오픈 → "1 / 6" 부터 시작 (`_tmCnIdx`: 2 → 0) ✅
+  - Orphan 모달 정리 — 최종예측 모달 열린 상태에서 closeFullTimemachine 호출 → 모달 자동 제거. 재오픈 시 잔재 없음 ✅
+  - chat-first 송신 → 키 모달 자동 호출 + 입력란 항상 활성 ✅
+
+### 명시적 비범위
+- price 모듈 자체 수정 (CLAUDE.md 규약: 리더는 read-only)
+- localStorage 키 암호화 (XSS 위험 안내문으로 대체, price v2 결정 따름)
+
 ## 2026-05-02 (Phase G — 제대로 된 타임머신 MVP: 4-phase quiz UX + Gemini 자유대화 + 탭 전용 UI)
 
 - **작업 범위**: 타임머신 모드를 우측 슬라이드 정적 패널 1장(매수/관망/매도 즉시 정답) → **풀스크린 4-phase quiz UX + Gemini 자유대화 + 탭 전용 하단 3분할 콘텐츠 패널**로 전면 개편. 사용자 직접 지시:
