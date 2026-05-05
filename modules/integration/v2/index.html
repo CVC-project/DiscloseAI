@@ -16,6 +16,13 @@
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
 
+  <!-- 데이터 / 비즈니스 로직 layer (Babel 처리 전, 일반 script로 로드).
+       각 IIFE가 window.DiscloseAI에 함수·상수를 export. -->
+  <script src="./data/mock.js"></script>
+  <script src="./data/valuation.js"></script>
+  <script src="./data/narration.js"></script>
+  <script src="./data/loader.js"></script>
+
   <script type="text/babel" data-presets="env,react" src="./app.jsx"></script>
 </body>
 </html>

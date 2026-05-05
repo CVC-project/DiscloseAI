@@ -1,34 +1,19 @@
 /* DiscloseAI v2 — App entry
  *
- * 단계: J1 IntroScreen 완료 → J2: TopTabs + Galaxy canvas + 3-탭 (FINANCIALS·DISCLOSURES·TIME MACHINE)
- * dashboard.html과 무관 — modules/integration/v2/ 단방향.
+ * 단계:
+ *   J1 IntroScreen 골격 + HUD
+ *   J2 TopTabs · GalaxyCanvas · SolarCanvas · UC placeholder
+ *   J3 data wiring layer (loader/valuation/narration/mock) + 4 패널 추가
+ *      (MascotPanel · AssistantPanel · LegendPanel · SectorPanel)
  *
- * 클래스 네이밍은 styles.css 인벤토리(.app/.phase-intro/.galaxy-canvas/.top-tabs/...)를 그대로 따름.
+ * dashboard.html과 무관 — modules/integration/v2/ 단방향.
+ * window.DiscloseAI에 mock/valuation/narration/loader가 미리 로드돼 있다고 가정.
  */
 
 const { useState, useEffect, useCallback, useRef, useMemo } = React;
 
 // ====================================================================== //
-// MOCK 데이터 (J3에서 graph_top50.json + eqs_summary.json + disclosures.json fetch로 교체 예정)
-// 12 섹터는 top50.csv distinct 결과 기준.
-// ====================================================================== //
-const MOCK_SECTORS = [
-  { id: "semiconductor", en: "SEMICONDUCTOR", ko: "반도체", color: "#5eead4", cap: "980T" },
-  { id: "financials",    en: "FINANCIALS",    ko: "금융",     color: "#fbbf24", cap: "720T" },
-  { id: "platform",      en: "PLATFORM",      ko: "IT/플랫폼", color: "#4ade80", cap: "660T" },
-  { id: "automotive",    en: "AUTOMOTIVE",    ko: "자동차",   color: "#a78bfa", cap: "540T" },
-  { id: "biotech",       en: "BIOTECH",       ko: "바이오",   color: "#f87171", cap: "410T" },
-  { id: "energy",        en: "ENERGY",        ko: "에너지",   color: "#f97316", cap: "380T" },
-  { id: "chemicals",     en: "CHEMICALS",     ko: "화학",     color: "#f472b6", cap: "320T" },
-  { id: "telecom",       en: "TELECOM",       ko: "통신",     color: "#c084fc", cap: "290T" },
-  { id: "shipbuilding",  en: "SHIPBUILDING",  ko: "조선",     color: "#60a5fa", cap: "280T" },
-  { id: "retail",        en: "RETAIL",        ko: "유통/소비재", color: "#fb7185", cap: "260T" },
-  { id: "construction",  en: "CONSTRUCTION",  ko: "건설",     color: "#a3e635", cap: "210T" },
-  { id: "media",         en: "MEDIA",         ko: "미디어",   color: "#fde047", cap: "180T" },
-];
-
-// ====================================================================== //
-// 공통: HUD top + bottom (인트로 전용 — phase-tab에선 TopTabs로 대체)
+// HUD blocks (인트로 전용)
 // ====================================================================== //
 function HudTop({ session, uplinkMs, utc }) {
   return (
@@ -94,11 +79,10 @@ function HudBottom({ sectorCount = 12, planetCount = 50, newDiscTonight = 47 }) 
 }
 
 // ====================================================================== //
-// GalaxyCanvas — 인트로·phase-tab 공통 배경 (Canvas2D 별 + radial 갤럭시 디스크)
+// GalaxyCanvas — Canvas2D 별 + radial 갤럭시 디스크 + dust 회전
 // ====================================================================== //
 function GalaxyCanvas({ density = 220 }) {
   const ref = useRef(null);
-
   useEffect(() => {
     const canvas = ref.current;
     if (!canvas) return;
@@ -107,7 +91,6 @@ function GalaxyCanvas({ density = 220 }) {
     let stars = [];
     let dust = [];
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-
     function resize() {
       canvas.width = canvas.clientWidth * dpr;
       canvas.height = canvas.clientHeight * dpr;
@@ -132,15 +115,12 @@ function GalaxyCanvas({ density = 220 }) {
     resize();
     const onResize = () => resize();
     window.addEventListener("resize", onResize);
-
     let t = 0;
     function loop() {
       t += 0.012;
       const W = canvas.width, H = canvas.height;
       ctx.fillStyle = "#02030a";
       ctx.fillRect(0, 0, W, H);
-
-      // 갤럭시 디스크 — radial gradient (회전감은 dust 점들로)
       const cx = W / 2, cy = H / 2;
       const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.min(W, H) * 0.45);
       grd.addColorStop(0.0, "rgba(94, 234, 212, 0.10)");
@@ -149,8 +129,6 @@ function GalaxyCanvas({ density = 220 }) {
       grd.addColorStop(1.0, "rgba(0, 0, 0, 0)");
       ctx.fillStyle = grd;
       ctx.fillRect(0, 0, W, H);
-
-      // dust (갤럭시 spiral 점)
       for (const d of dust) {
         d.ang += d.spd;
         const x = cx + Math.cos(d.ang) * d.dist + Math.sin(d.ang * 2.1) * d.dist * 0.18;
@@ -160,8 +138,6 @@ function GalaxyCanvas({ density = 220 }) {
         ctx.fillStyle = `rgba(220, 230, 255, ${d.alpha})`;
         ctx.fill();
       }
-
-      // stars (twinkle)
       for (const s of stars) {
         const opa = Math.max(0, s.alpha * (0.55 + 0.45 * Math.sin(t * s.spd + s.tw)));
         ctx.beginPath();
@@ -169,7 +145,6 @@ function GalaxyCanvas({ density = 220 }) {
         ctx.fillStyle = `rgba(255,255,255,${opa})`;
         ctx.fill();
       }
-
       raf = requestAnimationFrame(loop);
     }
     loop();
@@ -178,16 +153,14 @@ function GalaxyCanvas({ density = 220 }) {
       window.removeEventListener("resize", onResize);
     };
   }, [density]);
-
   return <canvas className="galaxy-canvas" ref={ref} />;
 }
 
 // ====================================================================== //
-// SolarCanvas — phase-tab의 12 섹터 회전 시스템 (mock, J3에서 실데이터 wired)
+// SolarCanvas — 섹터 행성을 두 링으로 분배 + 회전 + 클릭 hit-test
 // ====================================================================== //
 function SolarCanvas({ sectors, activeSectorId, onPickSector }) {
   const ref = useRef(null);
-  // 클릭 hit-test를 위한 마지막 좌표 캐시
   const planetsRef = useRef([]);
 
   useEffect(() => {
@@ -196,7 +169,6 @@ function SolarCanvas({ sectors, activeSectorId, onPickSector }) {
     const ctx = canvas.getContext("2d");
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     let raf = 0;
-
     function resize() {
       canvas.width = canvas.clientWidth * dpr;
       canvas.height = canvas.clientHeight * dpr;
@@ -213,31 +185,34 @@ function SolarCanvas({ sectors, activeSectorId, onPickSector }) {
       const cx = W / 2, cy = H / 2;
       const baseR = Math.min(W, H) * 0.30;
 
-      // 중심 별 (Sun)
-      const sunGrd = ctx.createRadialGradient(cx, cy, 0, cx, cy, 60 * dpr);
+      // 중심 별
+      const sunGrd = ctx.createRadialGradient(cx, cy, 0, cx, cy, 80 * dpr);
       sunGrd.addColorStop(0, "rgba(255, 230, 180, 0.95)");
-      sunGrd.addColorStop(0.4, "rgba(255, 200, 120, 0.45)");
+      sunGrd.addColorStop(0.4, "rgba(255, 200, 120, 0.40)");
       sunGrd.addColorStop(1, "rgba(255, 180, 90, 0)");
       ctx.fillStyle = sunGrd;
       ctx.beginPath();
       ctx.arc(cx, cy, 80 * dpr, 0, Math.PI * 2);
       ctx.fill();
 
-      // 12 행성 — 두 링으로 분배
       planetsRef.current = [];
+      const total = sectors.length || 1;
+      const ringSplit = Math.ceil(total / 2);
       sectors.forEach((s, i) => {
-        const ring = i < 7 ? 0 : 1;
-        const inRing = ring === 0 ? sectors.slice(0, 7).length : sectors.slice(7).length;
-        const idxInRing = ring === 0 ? i : i - 7;
+        const ring = i < ringSplit ? 0 : 1;
+        const inRing = ring === 0 ? ringSplit : total - ringSplit;
+        const idxInRing = ring === 0 ? i : i - ringSplit;
         const ringR = baseR + ring * baseR * 0.55;
-        const ang = (idxInRing / inRing) * Math.PI * 2 + t * (ring ? -0.6 : 1);
+        const ang =
+          (idxInRing / Math.max(1, inRing)) * Math.PI * 2 + t * (ring ? -0.6 : 1);
         const x = cx + Math.cos(ang) * ringR;
         const y = cy + Math.sin(ang) * ringR * 0.78;
         const isActive = s.id === activeSectorId;
-        const radius = (isActive ? 18 : 12) * dpr;
+        // 시총 비례 반경 (작은 차이로 작용)
+        const sizeRatio = Math.max(0.6, Math.min(1.4, Math.sqrt((s.memberCount || 1) / 4)));
+        const radius = (isActive ? 18 : 12) * dpr * sizeRatio;
 
-        // 궤도 점선
-        ctx.strokeStyle = isActive ? "rgba(94,234,212,0.20)" : "rgba(148,163,184,0.06)";
+        ctx.strokeStyle = isActive ? "rgba(94,234,212,0.22)" : "rgba(148,163,184,0.05)";
         ctx.lineWidth = 1;
         ctx.setLineDash([2, 6]);
         ctx.beginPath();
@@ -245,17 +220,15 @@ function SolarCanvas({ sectors, activeSectorId, onPickSector }) {
         ctx.stroke();
         ctx.setLineDash([]);
 
-        // 행성 glow
         const glow = ctx.createRadialGradient(x, y, 0, x, y, radius * 3);
         glow.addColorStop(0, hexA(s.color, 0.85));
-        glow.addColorStop(0.4, hexA(s.color, 0.35));
+        glow.addColorStop(0.4, hexA(s.color, 0.30));
         glow.addColorStop(1, hexA(s.color, 0));
         ctx.fillStyle = glow;
         ctx.beginPath();
         ctx.arc(x, y, radius * 3, 0, Math.PI * 2);
         ctx.fill();
 
-        // 행성 본체
         ctx.fillStyle = s.color;
         ctx.beginPath();
         ctx.arc(x, y, radius, 0, Math.PI * 2);
@@ -269,7 +242,9 @@ function SolarCanvas({ sectors, activeSectorId, onPickSector }) {
           ctx.stroke();
         }
 
-        planetsRef.current.push({ id: s.id, x, y, radius: radius + 6 * dpr });
+        planetsRef.current.push({
+          id: s.id, label: s.ko, en: s.en, x, y, radius: radius + 6 * dpr, color: s.color,
+        });
       });
 
       raf = requestAnimationFrame(loop);
@@ -282,34 +257,30 @@ function SolarCanvas({ sectors, activeSectorId, onPickSector }) {
     };
   }, [sectors, activeSectorId]);
 
-  // hit-test: canvas 좌표계로 변환
-  const handleClick = useCallback(
-    (e) => {
-      const canvas = ref.current;
-      if (!canvas) return;
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      const rect = canvas.getBoundingClientRect();
-      const x = (e.clientX - rect.left) * dpr;
-      const y = (e.clientY - rect.top) * dpr;
-      let best = null;
-      let bestD = Infinity;
-      for (const p of planetsRef.current) {
-        const d = Math.hypot(p.x - x, p.y - y);
-        if (d < p.radius + 6 && d < bestD) {
-          bestD = d;
-          best = p;
-        }
+  const handleClick = useCallback((e) => {
+    const canvas = ref.current;
+    if (!canvas) return;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const rect = canvas.getBoundingClientRect();
+    const x = (e.clientX - rect.left) * dpr;
+    const y = (e.clientY - rect.top) * dpr;
+    let best = null;
+    let bestD = Infinity;
+    for (const p of planetsRef.current) {
+      const d = Math.hypot(p.x - x, p.y - y);
+      if (d < p.radius + 6 && d < bestD) {
+        bestD = d;
+        best = p;
       }
-      if (best && onPickSector) onPickSector(best.id);
-    },
-    [onPickSector]
-  );
+    }
+    if (best && onPickSector) onPickSector(best.id);
+  }, [onPickSector]);
 
   return <canvas className="solar-canvas" ref={ref} onClick={handleClick} />;
 }
 
 function hexA(hex, a) {
-  const h = hex.replace("#", "");
+  const h = (hex || "#5eead4").replace("#", "");
   const r = parseInt(h.slice(0, 2), 16);
   const g = parseInt(h.slice(2, 4), 16);
   const b = parseInt(h.slice(4, 6), 16);
@@ -317,7 +288,7 @@ function hexA(hex, a) {
 }
 
 // ====================================================================== //
-// TopTabs (FINANCIALS · DISCLOSURES · TIME MACHINE) + breadcrumb + KOSPI live
+// TopTabs — 3 탭 + breadcrumb + KOSPI live
 // ====================================================================== //
 const TABS = [
   { id: "financials",  en: "FINANCIALS",  ko: "재무정보" },
@@ -365,12 +336,8 @@ function TopTabs({ activeTab, onTabChange, breadcrumb, kospi }) {
       </div>
       <div className="top-tabs-status">
         <span className="hud-dot" />
-        <span style={{ fontSize: 10, color: "var(--text-3)", letterSpacing: "0.16em" }}>
-          KOSPI
-        </span>
-        <span style={{ fontWeight: 600, color: "#fff", fontSize: 13 }}>
-          {kospi.value.toFixed(2)}
-        </span>
+        <span style={{ fontSize: 10, color: "var(--text-3)", letterSpacing: "0.16em" }}>KOSPI</span>
+        <span style={{ fontWeight: 600, color: "#fff", fontSize: 13 }}>{kospi.value.toFixed(2)}</span>
         <span style={{ color: kospi.delta >= 0 ? "#4ade80" : "#f87171", fontSize: 11 }}>
           {(kospi.delta >= 0 ? "+" : "") + kospi.delta.toFixed(2)}%
         </span>
@@ -380,7 +347,258 @@ function TopTabs({ activeTab, onTabChange, breadcrumb, kospi }) {
 }
 
 // ====================================================================== //
-// Placeholder (UNDER CONSTRUCTION) — DISCLOSURES / TIME MACHINE
+// MascotPanel (panel-tl) — 우주인 마스코트 + 모드별 말풍선
+// ====================================================================== //
+const MASCOT_MESSAGES = {
+  galaxy: "섹터를 클릭하면, 기업을 확인할 수 있어요!",
+  sector: "은하 → 섹터 → 기업 순으로 탐색해 보세요.",
+  company: "ENTER CORPORATION으로 재무 상세를 열어보세요.",
+};
+function MascotPanel({ stage }) {
+  const msg = MASCOT_MESSAGES[stage] || MASCOT_MESSAGES.galaxy;
+  const stars = useMemo(
+    () =>
+      Array.from({ length: 7 }, (_, i) => ({
+        top: 8 + Math.random() * 70 + "%",
+        left: 6 + Math.random() * 84 + "%",
+        delay: (Math.random() * 2.4).toFixed(2) + "s",
+      })),
+    []
+  );
+  return (
+    <div className="panel panel-tl mascot-panel">
+      <div className="panel-head">
+        <div className="panel-head-l">
+          <span className="panel-dot" />
+          <span className="panel-title">MISSION GUIDE</span>
+          <span className="panel-sub">우주인 안내자</span>
+        </div>
+        <span className="panel-count">CADET · LV.01</span>
+      </div>
+      <div className="mascot-stage">
+        <div className="mascot-stars">
+          {stars.map((s, i) => (
+            <span
+              key={i}
+              className="mascot-star"
+              style={{ top: s.top, left: s.left, animationDelay: s.delay }}
+            />
+          ))}
+        </div>
+        <div className="mascot-bubble">
+          <div className="mascot-bubble-text">{msg}</div>
+          <div className="mascot-bubble-tail" />
+        </div>
+        <div className="mascot-floater">
+          <img
+            className="mascot-img"
+            src="./assets/astronaut.png"
+            alt="astronaut mascot"
+            draggable="false"
+          />
+        </div>
+        <div className="mascot-shadow" />
+      </div>
+      <div className="mascot-foot">
+        <div className="mascot-foot-row">
+          <span className="mascot-k">TIP</span>
+          <span className="mascot-v">은하 → 섹터 → 기업 순으로 탐색해 보세요.</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ====================================================================== //
+// AssistantPanel (panel-tr) — Mock AI Co-pilot (J3에서 mock 그대로, 후속 phase에 Gemini 연결)
+// ====================================================================== //
+const AI_GREETINGS_BY_STAGE = {
+  galaxy: [
+    "Welcome back, Captain. KOSPI is flowing — Semiconductor leads, Biotech lags.",
+    "Pick any sector to dive in. I'll brief you on what's moving inside.",
+  ],
+  sector: [
+    "We're now inside the sector. Each glowing node is a listed company.",
+    "Click a company — I'll surface its disclosures and related entities.",
+  ],
+  company: [
+    "Tracking this company. Solid lines are equity ties, dashed are group/related-party links.",
+    "Press ENTER CORPORATION for the full financial dossier.",
+  ],
+};
+function AssistantPanel({ stage }) {
+  const msgs = AI_GREETINGS_BY_STAGE[stage] || AI_GREETINGS_BY_STAGE.galaxy;
+  const [draft, setDraft] = useState("");
+  return (
+    <div className="panel panel-tr">
+      <div className="panel-head">
+        <div className="panel-head-l">
+          <span className="panel-dot panel-dot-amber" />
+          <span className="panel-title">AI FINANCIAL CO-PILOT</span>
+          <span className="panel-sub">Gemini · 한·영</span>
+        </div>
+        <span className="panel-count">v2.4</span>
+      </div>
+      <div className="panel-body">
+        <div className="assist-body">
+          {msgs.map((m, i) => (
+            <div key={i} className="chat-msg is-ai">
+              <div className="chat-avatar">AI</div>
+              <div className="chat-bubble">{m}</div>
+            </div>
+          ))}
+          <div
+            style={{
+              fontSize: 10,
+              color: "var(--text-3)",
+              fontFamily: "var(--font-mono)",
+              letterSpacing: "0.06em",
+              padding: "6px 4px",
+              borderTop: "1px dashed rgba(148,163,184,0.10)",
+              marginTop: 6,
+            }}
+          >
+            ⚠ 1차 데모: AI 응답은 미리 작성된 안내문입니다. 본 분석은 과거 통계 기반
+            참고 정보이며 투자 권유가 아닙니다.
+          </div>
+        </div>
+      </div>
+      <div className="assist-input">
+        <input
+          type="text"
+          placeholder="Ask about a sector, disclosure, or company…"
+          value={draft}
+          onChange={(e) => setDraft(e.target.value)}
+          disabled
+          aria-disabled="true"
+        />
+        <button type="button" disabled aria-disabled="true">↗</button>
+      </div>
+    </div>
+  );
+}
+
+// ====================================================================== //
+// LegendPanel (panel-bl) — EDGE TYPOLOGY (K-IFRS + 비-지분)
+// ====================================================================== //
+function LegendLine({ color, style }) {
+  if (style === "dashed") {
+    return (
+      <span
+        className="legend-line"
+        style={{
+          display: "inline-block",
+          width: 36,
+          borderTop: `1px dashed ${color}`,
+          opacity: 0.85,
+        }}
+      />
+    );
+  }
+  return (
+    <span
+      className="legend-line"
+      style={{
+        display: "inline-block",
+        width: 36,
+        height: 0,
+        borderTop: `2px solid ${color}`,
+      }}
+    />
+  );
+}
+
+function LegendPanel() {
+  const L = (window.DiscloseAI && window.DiscloseAI.EDGE_LEGEND) || { solid: [], dashed: [] };
+  return (
+    <div className="panel panel-bl legend-panel">
+      <div className="panel-head">
+        <div className="panel-head-l">
+          <span className="panel-dot panel-dot-violet" />
+          <span className="panel-title">EDGE TYPOLOGY</span>
+          <span className="panel-sub">관계 유형</span>
+        </div>
+        <span className="panel-count">312 LINKS</span>
+      </div>
+      <div className="panel-body">
+        <div className="legend-body">
+          <div className="legend-section">
+            <div className="legend-section-h">━━━ SOLID · 지분율 분류 (K-IFRS)</div>
+            <div className="legend-grid">
+              {L.solid.map((row, i) => (
+                <div key={i} className="legend-row">
+                  <LegendLine color={row.color} style="solid" />
+                  <div>
+                    <div className="legend-label">{row.label}</div>
+                    <div className="legend-sub">{row.sub}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="legend-section">
+            <div className="legend-section-h">┄ ┄ ┄ DASHED · 비-지분 / 공시 기반</div>
+            <div className="legend-grid">
+              {L.dashed.map((row, i) => (
+                <div key={i} className="legend-row">
+                  <LegendLine color={row.color} style="dashed" />
+                  <div>
+                    <div className="legend-label">{row.label}</div>
+                    <div className="legend-sub">{row.sub}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ====================================================================== //
+// SectorPanel (panel-br) — 12 섹터 chip
+// ====================================================================== //
+function SectorPanel({ sectors, activeSectorId, onPickSector, breadcrumbCount }) {
+  return (
+    <div className="panel panel-br">
+      <div className="panel-head">
+        <div className="panel-head-l">
+          <span className="panel-dot panel-dot-cyan" />
+          <span className="panel-title">SECTOR INDEX</span>
+          <span className="panel-sub">섹터 구분 · {sectors.length}</span>
+        </div>
+        <span className="panel-count">
+          {activeSectorId
+            ? "· " + (sectors.find((s) => s.id === activeSectorId)?.ko || "")
+            : "ALL"}
+        </span>
+      </div>
+      <div className="panel-body sector-body">
+        <div className="sector-grid">
+          {sectors.map((s) => (
+            <div
+              key={s.id}
+              className={"sector-chip" + (s.id === activeSectorId ? " is-active" : "")}
+              onClick={() => onPickSector(s.id)}
+              style={{ "--c": s.color }}
+              role="button"
+              tabIndex={0}
+            >
+              <span className="sector-dot" />
+              <span className="sector-en">{s.en}</span>
+              <span className="sector-ko">{s.ko}</span>
+              <span className="sector-cap">{s.cap}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ====================================================================== //
+// PlaceholderTab (DISCLOSURES / TIME MACHINE)
 // ====================================================================== //
 function PlaceholderTab({ title, onBack }) {
   return (
@@ -400,25 +618,41 @@ function PlaceholderTab({ title, onBack }) {
 }
 
 // ====================================================================== //
-// FinanceTab (J2: SolarCanvas + 12 mock 섹터. J3에서 panels + real data 추가 예정)
+// FinanceTab — Galaxy 단계 (J3 현재). J4·J5에서 Sector·Company 단계 추가.
 // ====================================================================== //
-function FinanceTab({ activeSectorId, onPickSector }) {
+function FinanceTab({
+  data,
+  activeSectorId,
+  onPickSector,
+}) {
+  const sectors = data.sectors || [];
+  const stage = activeSectorId ? "sector" : "galaxy";
   return (
-    <div className="finance-tab">
-      <div className="solar-stage">
-        <SolarCanvas
-          sectors={MOCK_SECTORS}
-          activeSectorId={activeSectorId}
-          onPickSector={onPickSector}
-        />
-        <div className="solar-labels" />
+    <>
+      <div className="finance-tab">
+        <div className="solar-stage">
+          <SolarCanvas
+            sectors={sectors}
+            activeSectorId={activeSectorId}
+            onPickSector={onPickSector}
+          />
+          <div className="solar-labels" />
+        </div>
       </div>
-    </div>
+      <MascotPanel stage={stage} />
+      <AssistantPanel stage={stage} />
+      <LegendPanel />
+      <SectorPanel
+        sectors={sectors}
+        activeSectorId={activeSectorId}
+        onPickSector={onPickSector}
+      />
+    </>
   );
 }
 
 // ====================================================================== //
-// IntroScreen — 시적 헤로 + ENTER CTA
+// IntroScreen
 // ====================================================================== //
 function IntroScreen({ onEnter, session, uplinkMs, utc, tElapsed }) {
   return (
@@ -426,24 +660,19 @@ function IntroScreen({ onEnter, session, uplinkMs, utc, tElapsed }) {
       <div className="galaxy-bg">
         <GalaxyCanvas density={260} />
       </div>
-
       <div className="intro-overlay">
         <HudTop session={session} uplinkMs={uplinkMs} utc={utc} />
-
         <main className="intro-center">
           <div className="intro-eyebrow">— TRANSMISSION FROM THE MARKET —</div>
           <h1 className="intro-headline">
             <div className="intro-line-1">What twelve headlines</div>
             <div className="intro-line-2">missed,</div>
             <div className="intro-line-3">a single number</div>
-            <div className="intro-line-4">
-              was already <em>whispering.</em>
-            </div>
+            <div className="intro-line-4">was already <em>whispering.</em></div>
           </h1>
           <div className="intro-sub">
             KOSPI · 1,400 disclosures / day · decoded by AI
-            <br />
-            A spatial atlas of Korea's listed companies.
+            <br />A spatial atlas of Korea's listed companies.
           </div>
           <button className="enter-button" onClick={onEnter} type="button">
             <span className="enter-icon">▷</span>
@@ -451,39 +680,35 @@ function IntroScreen({ onEnter, session, uplinkMs, utc, tElapsed }) {
             <span className="enter-hint">click anywhere</span>
           </button>
         </main>
-
         <HudBottom />
-
         <HudRails tElapsed={tElapsed} />
-
-        <button
-          className="intro-click"
-          aria-label="Enter the galaxy"
-          onClick={onEnter}
-          type="button"
-        />
+        <button className="intro-click" aria-label="Enter the galaxy" onClick={onEnter} type="button" />
       </div>
     </div>
   );
 }
 
 // ====================================================================== //
-// PhaseTab — TopTabs + 활성 탭 본체. FinanceTab은 SolarCanvas, 나머지는 PlaceholderTab.
+// PhaseTab
 // ====================================================================== //
-function PhaseTab({ activeTab, onTabChange, activeSectorId, onPickSector, kospi, breadcrumb }) {
+function PhaseTab({
+  activeTab, onTabChange,
+  data, activeSectorId, onPickSector,
+  kospi, breadcrumb,
+}) {
   let body;
   if (activeTab === "financials") {
     body = (
-      <FinanceTab activeSectorId={activeSectorId} onPickSector={onPickSector} />
+      <FinanceTab
+        data={data}
+        activeSectorId={activeSectorId}
+        onPickSector={onPickSector}
+      />
     );
   } else if (activeTab === "disclosures") {
-    body = (
-      <PlaceholderTab title="DISCLOSURE NETWORK" onBack={() => onTabChange("financials")} />
-    );
+    body = <PlaceholderTab title="DISCLOSURE NETWORK" onBack={() => onTabChange("financials")} />;
   } else {
-    body = (
-      <PlaceholderTab title="TIME MACHINE" onBack={() => onTabChange("financials")} />
-    );
+    body = <PlaceholderTab title="TIME MACHINE" onBack={() => onTabChange("financials")} />;
   }
   return (
     <div className="app phase-tab tone-glass">
@@ -502,8 +727,34 @@ function PhaseTab({ activeTab, onTabChange, activeSectorId, onPickSector, kospi,
 }
 
 // ====================================================================== //
-// useNowUtc + useKospiMock — UI hooks
+// Hooks: data loader + UTC + KOSPI mock
 // ====================================================================== //
+function useDataLoader() {
+  const [state, setState] = useState({
+    loading: true,
+    error: null,
+    data: { nodes: [], sectors: [], scenarios: [], discAll: [], stmtAll: [], usingMock: false, meta: {} },
+  });
+  useEffect(() => {
+    let alive = true;
+    (async () => {
+      try {
+        const D = window.DiscloseAI;
+        if (!D || !D.loadAll) {
+          throw new Error("DiscloseAI.loadAll not available — data scripts not loaded");
+        }
+        const data = await D.loadAll();
+        if (alive) setState({ loading: false, error: null, data });
+      } catch (e) {
+        console.error("[v2] data load failed:", e);
+        if (alive) setState({ loading: false, error: e.message, data: { nodes: [], sectors: [], scenarios: [], discAll: [], stmtAll: [], usingMock: true, meta: {} } });
+      }
+    })();
+    return () => { alive = false; };
+  }, []);
+  return state;
+}
+
 function useNowUtc() {
   const [s, setS] = useState(formatUtc(new Date()));
   useEffect(() => {
@@ -520,9 +771,9 @@ function formatUtc(d) {
   );
 }
 
-// KOSPI mock — 매 5초마다 약간씩 흔들림. 후속 phase에서 yfinance 또는 KRX 캐시로 교체.
 function useKospiMock() {
-  const [val, setVal] = useState({ value: 3142.8, delta: 0.42 });
+  const initial = (window.DiscloseAI && window.DiscloseAI.KOSPI_MOCK) || { value: 3142.8, delta: 0.42 };
+  const [val, setVal] = useState(initial);
   useEffect(() => {
     const id = setInterval(() => {
       setVal((v) => {
@@ -541,8 +792,9 @@ function useKospiMock() {
 // App
 // ====================================================================== //
 function App() {
-  const [phase, setPhase] = useState("intro"); // 'intro' | 'tab'
-  const [activeTab, setActiveTab] = useState("financials"); // 'financials' | 'disclosures' | 'timemachine'
+  const { loading, data, error } = useDataLoader();
+  const [phase, setPhase] = useState("intro");
+  const [activeTab, setActiveTab] = useState("financials");
   const [activeSectorId, setActiveSectorId] = useState(null);
   const [tElapsed, setTElapsed] = useState(0);
 
@@ -550,7 +802,6 @@ function App() {
   const utc = useNowUtc();
   const kospi = useKospiMock();
 
-  // T+초 카운터 (인트로에서만)
   useEffect(() => {
     if (phase !== "intro") return;
     const id = setInterval(() => setTElapsed((t) => t + 1), 1000);
@@ -564,18 +815,15 @@ function App() {
   }, []);
   const handlePickSector = useCallback((sid) => setActiveSectorId(sid), []);
 
-  // breadcrumb (FINANCIALS만 의미 있음)
   const breadcrumb = useMemo(() => {
     if (activeTab !== "financials") return [];
-    const crumbs = [
-      { label: "GALAXY", onClick: () => setActiveSectorId(null) },
-    ];
+    const crumbs = [{ label: "GALAXY", onClick: () => setActiveSectorId(null) }];
     if (activeSectorId) {
-      const sec = MOCK_SECTORS.find((s) => s.id === activeSectorId);
+      const sec = (data.sectors || []).find((s) => s.id === activeSectorId);
       if (sec) crumbs.push({ label: sec.ko });
     }
     return crumbs;
-  }, [activeTab, activeSectorId]);
+  }, [activeTab, activeSectorId, data.sectors]);
 
   if (phase === "intro") {
     return (
@@ -592,6 +840,7 @@ function App() {
     <PhaseTab
       activeTab={activeTab}
       onTabChange={handleTabChange}
+      data={data}
       activeSectorId={activeSectorId}
       onPickSector={handlePickSector}
       kospi={kospi}
