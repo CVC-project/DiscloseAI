@@ -17,6 +17,7 @@ import OpenDartReader as odr
 import pandas as pd
 from bs4 import BeautifulSoup
 from groq import Groq
+from google import genai as _genai
 import yfinance as yf
 
 load_dotenv()
@@ -24,10 +25,14 @@ load_dotenv()
 # ─── 설정 ────────────────────────────────────────────────────────────────────
 DART_API_KEY = os.getenv("DART_API_KEY", "")
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 GROQ_MODEL = "llama-3.3-70b-versatile"
+GEMINI_MODEL = "gemini-2.5-flash"
 
 # Groq 클라이언트 (키 없으면 None — 템플릿 분석으로 폴백)
 _groq_client = Groq(api_key=GROQ_API_KEY) if GROQ_API_KEY else None
+# Gemini 클라이언트 (Groq 429 시 폴백)
+_gemini_client = _genai.Client(api_key=GEMINI_API_KEY) if GEMINI_API_KEY else None
 
 TARGET_CORPS = {
     "005930": "삼성전자",
@@ -833,6 +838,110 @@ def _analyze_with_groq(
         return None
 
 
+def _analyze_with_gemini(
+    corp_name: str, report_nm: str, disc_type: str, doc_text: str, stock_code: str = ""
+) -> str | None:
+    """Gemini로 공시 원문 분석. Groq 429 시 폴백으로 사용."""
+    if not _gemini_client or not doc_text:
+        return None
+
+    # _analyze_with_groq와 동일한 프롬프트 재사용을 위해 임시 호출
+    # 프롬프트 조립 (groq 함수와 동일 로직)
+    current_price = _fetch_current_price(stock_code) if stock_code else ""
+    price_context = (
+        f"현재 주가: {current_price}" if current_price else "현재 주가: 조회 불가"
+    )
+    fin_context = get_financial_context(stock_code) if stock_code else ""
+    annual_context = get_annual_report_context(corp_name, report_nm)
+
+    _TYPE_FOCUS: dict[str, str] = {
+        "증자": (
+            "【필수 확인】"
+            " ① 신주 수량 ÷ 기발행 주식수 = 희석비율(%) 직접 계산"
+            " ② 발행가액의 현주가 대비 할인율"
+            " ③ 최대주주 참여 여부 — 불참이면 반드시 언급"
+            " ④ 조달 목적: 운영자금·시설투자·채무상환 중 무엇인지"
+            " ⑤ 납입일과 신주 상장 예정일"
+        ),
+        "정기보고서": (
+            "【필수 확인】"
+            " ① 매출·영업이익·순이익 전년 대비 증감률과 원인 (업황·환율·원가 중 무엇인지)"
+            " ② 영업이익과 영업현금흐름 괴리 여부 — 이익은 나는데 현금이 안 들어오면 반드시 지적"
+            " ③ 부채비율·이자보상배율 변화 — 재무 건전성이 나빠지고 있는지"
+            " ④ 감사의견: 적정 여부 + 강조 사항·핵심감사사항에 적힌 내용"
+            " ⑤ 경영진이 제시한 리스크 중 가장 실질적인 것 1개만 선별해 구체적으로 설명"
+        ),
+        "기타": (
+            "【필수 확인】"
+            " ① 공시에 등장하는 금액·날짜·조건을 최대한 인용"
+            " ② 이 공시가 회사 재무·사업에 미치는 직접적 영향"
+            " ③ 유사 사례 대비 규모·조건이 이례적인지"
+        ),
+    }
+    type_focus = _TYPE_FOCUS.get(disc_type, _TYPE_FOCUS["기타"])
+
+    prompt = f"""{price_context}
+{fin_context}
+{f"{annual_context}" + chr(10) if annual_context else ""}{type_focus}
+
+다음은 {corp_name}의 [{disc_type}] 공시 원문입니다:
+
+{doc_text[:12000]}
+
+다음 5가지 항목으로 분석해주세요.
+
+[Cash] 핵심 한 줄 요약 + 근거 bullet 2~3개 (구체적 숫자 필수, 원문 인용)
+[Risk] 핵심 한 줄 요약 + 근거 bullet 2~3개 (동일하게 원문 인용)
+[Hidden Agenda] 핵심 한 줄 요약 + 근거 bullet 2~3개 (동일하게 원문 인용)
+[Verdict] 주주·투자자에게 의미하는 바를 한 줄로
+[오늘의 개념] 공시 원문에 실제로 등장한 단어 중 일반인이 모를 법한 회계·금융 용어 1개 설명
+
+【중요 규칙】
+- 모든 bullet에 구체적인 숫자(금액·%·배율·기간) 필수
+- IR 홍보 문구("지속적인 성장" 등) 인용 금지
+- 재무제표 데이터 제공 시 전년 대비 증감률·영업이익률 반드시 활용
+- [추정] 태그: 원문에 없는 추론 내용에 반드시 표시
+- 반드시 한국어로 답하고 항목 제목([Cash] 등)은 유지"""
+
+    try:
+        from google.genai import types as _gtypes
+
+        resp = _gemini_client.models.generate_content(
+            model=GEMINI_MODEL,
+            contents=prompt,
+            config=_gtypes.GenerateContentConfig(
+                temperature=0.3,
+                max_output_tokens=1200,
+            ),
+        )
+        return resp.text.strip()
+    except Exception as e:
+        err_str = str(e)
+        # 429 분당 한도 → retryDelay 파싱 후 대기 재시도
+        if "429" in err_str or "RESOURCE_EXHAUSTED" in err_str:
+            import time, re as _re
+
+            m = _re.search(r"retryDelay.*?(\d+)s", err_str)
+            wait = int(m.group(1)) + 5 if m else 65
+            print(f"  [Gemini 429] {wait}초 대기 후 재시도...")
+            time.sleep(wait)
+            try:
+                resp2 = _gemini_client.models.generate_content(
+                    model=GEMINI_MODEL,
+                    contents=prompt,
+                    config=_gtypes.GenerateContentConfig(
+                        temperature=0.3,
+                        max_output_tokens=1200,
+                    ),
+                )
+                return resp2.text.strip()
+            except Exception as e2:
+                print(f"  [WARN] Gemini 재시도 실패: {e2}")
+                return None
+        print(f"  [WARN] Gemini 분석 실패 (건너뜀): {e}")
+        return None
+
+
 def build_cpa_summary(
     corp_name: str, report_nm: str, disc_type: str, rcept_dt: str, doc_text: str = ""
 ) -> str:
@@ -1263,6 +1372,7 @@ def backfill_ai(max_records: int = 50) -> int:
 
     print(f"\n[백필] 미분석 {len(pending)}건 처리 시작 (최대 {max_records}건)")
 
+    done = 0
     try:
         for rec in pending:
             doc_text = ""
@@ -1271,6 +1381,31 @@ def backfill_ai(max_records: int = 50) -> int:
                     dart, rec.disclosure_id, rec.title or ""
                 )
 
+            # doc_text가 없는 레코드: 템플릿 분석으로 처리 후 analyzed 표시
+            if not doc_text:
+                t = _CPA_TEMPLATES.get(rec.disclosure_type, _CPA_TEMPLATES["기타"])
+                rcept_dt = (
+                    rec.disclosure_date.strftime("%Y%m%d")
+                    if rec.disclosure_date
+                    else ""
+                )
+                header = (
+                    f"[공시] {rec.corp_name} | {rec.title} | {rcept_dt}\n"
+                    f"[분류] {rec.disclosure_type}\n\n"
+                )
+                rec.summary = (
+                    header + f"[Cash]\n{textwrap.fill(t['cash'], width=80)}\n\n"
+                    f"[Risk]\n{textwrap.fill(t['risk'], width=80)}\n\n"
+                    f"[Hidden Agenda]\n{textwrap.fill(t['hidden'], width=80)}\n\n"
+                    f"[Verdict]\n{t['verdict']}"
+                )
+                rec.ai_analyzed = True
+                session.commit()
+                done += 1
+                print(f"  [백필-템플릿] {rec.corp_name} | {rec.title[:50]}")
+                continue
+
+            groq_exhausted = False
             try:
                 ai_result = _analyze_with_groq(
                     rec.corp_name,
@@ -1280,12 +1415,23 @@ def backfill_ai(max_records: int = 50) -> int:
                     rec.stock_code or "",
                 )
             except Exception:
-                # 429 한도 초과 → 완전 중단
-                print(f"  [백필 중단] Groq 일일 한도 소진 — {done}건 완료")
-                break
+                # Groq 429 → Gemini로 폴백 시도
+                groq_exhausted = True
+                print(f"  [Groq→Gemini 폴백] {rec.corp_name} | {rec.title[:40]}")
+                ai_result = _analyze_with_gemini(
+                    rec.corp_name,
+                    rec.title,
+                    rec.disclosure_type,
+                    doc_text,
+                    rec.stock_code or "",
+                )
 
             if ai_result is None:
-                # 400 등 단건 오류 → 이 건만 건너뛰고 계속
+                if groq_exhausted:
+                    # Gemini도 실패 → 전체 중단
+                    print(f"  [백필 중단] Groq·Gemini 모두 실패 — {done}건 완료")
+                    break
+                # 단건 Groq 오류 → 건너뛰고 계속
                 print(f"  [백필 스킵] {rec.corp_name} | {rec.title}")
                 continue
 
