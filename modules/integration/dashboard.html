@@ -1847,6 +1847,7 @@
   <aside id="chatSidebar" aria-label="AI 어시스턴트">
     <div class="chat-header">
       <div class="chat-title"><span class="chat-dot"></span>AI 재무 어시스턴트</div>
+      <button class="chat-icon-btn" onclick="_showKeyModal()" title="Gemini API 키 설정">🔑</button>
       <button class="chat-icon-btn" onclick="_chatClear()" title="대화 초기화">↻</button>
       <button class="chat-icon-btn" onclick="_chatToggle()" title="사이드바 접기">×</button>
     </div>
@@ -4029,6 +4030,12 @@
       const body = document.getElementById('fullTimemachineBody');
       if (body) body.classList.remove('tm-mode-cardnews', 'tm-mode-chat');
       window.__tmChatHistory = [];
+      // === 방어적 상태 리셋 (orphan modal · pending timer · busy flag) ===
+      _tmChatBusy = false;
+      document.getElementById('tmFinalModal')?.remove();
+      // 키 입력 모달은 닫지 않음 — 사용자가 키 등록 중이면 풀스크린 오버레이만 닫고 모달은 유지
+      if (window.__tmIntroTimer) { clearTimeout(window.__tmIntroTimer); window.__tmIntroTimer = null; }
+      if (window.__tmSystemMsgTimer) { clearTimeout(window.__tmSystemMsgTimer); window.__tmSystemMsgTimer = null; }
     }
     function _fullTimemachineEsc(e) {
       if (e.key === 'Escape') closeFullTimemachine();
@@ -4074,6 +4081,14 @@
     let _tmCurrentKind = 'timemachine';
     function _tmStartScenario(sc, opts) {
       opts = opts || {};
+      // === 방어적 상태 리셋 (이전 화면의 잔재 제거 — price v2 토글 버그 fix 정신 차용) ===
+      _tmChatBusy = false;                                    // 채팅 busy 플래그
+      _tmCnIdx = 0;                                           // 카드뉴스 슬라이드 인덱스
+      document.getElementById('tmFinalModal')?.remove();      // orphan 최종예측 모달
+      document.getElementById('geminiKeyModal')?.remove();    // orphan 키 입력 모달
+      if (window.__tmIntroTimer) { clearTimeout(window.__tmIntroTimer); window.__tmIntroTimer = null; }
+      if (window.__tmSystemMsgTimer) { clearTimeout(window.__tmSystemMsgTimer); window.__tmSystemMsgTimer = null; }
+      // === 기존 로직 ===
       _tmCurrent = sc;
       _tmCurrentKind = opts.kind || 'timemachine';
       window.__tmChatHistory = [];
@@ -4256,7 +4271,7 @@
         const m = String(raw || '').match(/^(\d{4})-(\d{2})-(\d{2})/);
         return m ? `${m[1]}년 ${parseInt(m[2], 10)}월 ${parseInt(m[3], 10)}일` : (raw || '');
       };
-      const keyMissing = !window.GEMINI_API_KEY || window.GEMINI_API_KEY === 'YOUR_API_KEY_HERE';
+      const keyMissing = !_getGeminiKey();
       body.classList.add('tm-mode-chat');
       body.innerHTML = `
         <div class="tm-chat-shell">
@@ -4268,20 +4283,20 @@
           <div class="tm-chat-hints" id="tmChatHints" style="display:none"></div>
           <div class="tm-chat-toolbar">
             <button class="tm-tb-btn tm-tb-hint" onclick="_tmToggleHints()">💡 힌트</button>
+            <button class="tm-tb-btn" onclick="_showKeyModal(()=>{ _tmRenderChatFirst(_tmCurrent); })" style="border-color:rgba(94,234,212,0.32);color:#5eead4">🔑 API 키</button>
             <button class="tm-tb-btn tm-tb-final" onclick="_tmShowFinalModal()">🎯 최종 예측</button>
           </div>
           <div class="tm-chat-input-row" id="tmChatInputRow">
-            <textarea id="tmChatInput" rows="1" placeholder="${keyMissing ? 'Gemini API 키 미설정 — 자유대화 비활성. chat_config.local.js를 확인하세요.' : '이 공시에 대해 자유롭게 질문해보세요'}"
-              ${keyMissing ? 'disabled' : ''}
+            <textarea id="tmChatInput" rows="1" placeholder="이 공시에 대해 자유롭게 질문해보세요${keyMissing ? ' (전송 시 API 키 입력 안내)' : ''}"
               onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();_tmChatSend();}"></textarea>
-            <button id="tmChatSend" onclick="_tmChatSend()" ${keyMissing ? 'disabled' : ''}>전송</button>
+            <button id="tmChatSend" onclick="_tmChatSend()">전송</button>
           </div>
         </div>`;
       // 인트로 메시지 — modules/price/timemachine.html buildIntro(sc) 차용
       const intro = `${fmtDate(sc.date)}, 당신은 ${sc.company} 주주입니다.\n\n📄 공시 알림:\n"${sc.title || ''}"\n\n${sc.context || ''}\n\n이 공시에 대해 자유롭게 질문하거나 의견을 말씀해 주세요.\n💡 힌트 버튼을 누르면 참고 질문을 추천해드립니다. 충분히 분석했다면 🎯 최종 예측 버튼을 눌러 결과를 확인하세요.`;
-      setTimeout(() => _tmChatAppend('assistant', intro), 200);
+      window.__tmIntroTimer = setTimeout(() => _tmChatAppend('assistant', intro), 200);
       if (keyMissing) {
-        setTimeout(() => _tmChatAppend('system', 'Gemini API 키가 설정되어 있지 않아 자유대화는 비활성입니다. modules/integration/chat_config.local.js를 설정하면 활성화됩니다. 그대로 🎯 최종 예측 버튼을 눌러 결과 화면으로 진행할 수 있습니다.'), 400);
+        window.__tmSystemMsgTimer = setTimeout(() => _tmChatAppend('system', '🔑 Gemini API 키 미설정 — 자유대화를 사용하려면 상단 "🔑 API 키" 버튼을 눌러 키를 입력하세요. 키 없이도 🎯 최종 예측 버튼으로 결과 화면 진행 가능합니다.'), 400);
       }
     }
     // 힌트 칩 토글 — timemachine.html fetchHints() 차용
@@ -4370,6 +4385,11 @@
       const inp = document.getElementById('tmChatInput');
       const text = (inp && inp.value || '').trim();
       if (!text || !_tmCurrent) return;
+      // 키 없으면 모달 자동 표시 후 저장 시 재시도
+      if (!_getGeminiKey()) {
+        _showKeyModal(() => { _tmChatSend(); });
+        return;
+      }
       _tmChatBusy = true;
       inp.value = '';
       _tmChatAppend('user', text);
@@ -4421,11 +4441,12 @@
     }
 
     async function _tmGeminiCall(sc, history) {
-      if (!window.GEMINI_API_KEY || window.GEMINI_API_KEY === 'YOUR_API_KEY_HERE') {
+      const apiKey = _getGeminiKey();
+      if (!apiKey) {
         throw new Error('API 키 미설정');
       }
       const model = window.GEMINI_MODEL || 'gemini-2.5-flash';
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(window.GEMINI_API_KEY)}`;
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(apiKey)}`;
       const recent = (history || []).slice(-10);
       const contents = recent.map(m => ({ role: m.role, parts: [{ text: m.text }] }));
       const body = {
@@ -5070,6 +5091,83 @@
     window.__chatContext = null;
     window.__chatHistory = [];
 
+    /* === Gemini API 키 우선순위 헬퍼 =====================================
+       price/timemachine.html v2 패턴 차용. 우선순위:
+         1. window.GEMINI_API_KEY (chat_config.local.js, gitignored) — 개발자용
+         2. localStorage['disclose_gemini_key'] — 일반 사용자/심사위원용
+         3. (없음) → 모달로 입력 유도
+       localStorage는 평문 저장이라 XSS 시 노출 — 모달 내 안내문 명시. */
+    const _GEMINI_KEY_LS = 'disclose_gemini_key';
+    function _getGeminiKey() {
+      // 1순위: chat_config.local.js
+      if (window.GEMINI_API_KEY && window.GEMINI_API_KEY !== 'YOUR_API_KEY_HERE') {
+        return window.GEMINI_API_KEY;
+      }
+      // 2순위: localStorage
+      try {
+        const k = localStorage.getItem(_GEMINI_KEY_LS);
+        if (k && k.trim()) return k.trim();
+      } catch (e) { /* private mode etc */ }
+      return null;
+    }
+    function _saveGeminiKey(k) {
+      try { localStorage.setItem(_GEMINI_KEY_LS, (k || '').trim()); } catch (e) { }
+    }
+    function _clearGeminiKey() {
+      try { localStorage.removeItem(_GEMINI_KEY_LS); } catch (e) { }
+    }
+    /* 키 입력 모달 — price/timemachine.html v2 디자인 차용 */
+    function _showKeyModal(onSaveCb) {
+      // 기존 모달 제거 (중복 방지)
+      document.getElementById('geminiKeyModal')?.remove();
+      const m = document.createElement('div');
+      m.id = 'geminiKeyModal';
+      m.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.78);display:flex;align-items:center;justify-content:center;z-index:10200;padding:24px';
+      m.onclick = (e) => { if (e.target === m) m.remove(); };
+      const existingKey = _getGeminiKey() || '';
+      m.innerHTML = `
+        <div style="background:#0f172a;border:1px solid #334155;border-radius:14px;padding:26px 24px;max-width:420px;width:100%">
+          <div style="font-size:32px;text-align:center;margin-bottom:8px">🔑</div>
+          <h3 style="font-size:17px;font-weight:700;margin:0 0 6px;color:#f8fafc;text-align:center">Gemini API 키 입력</h3>
+          <p style="color:#94a3b8;font-size:12.5px;margin:0 0 16px;text-align:center;line-height:1.65">
+            Google AI Studio에서 발급한 API 키를 입력하세요.<br>
+            <span style="color:#fbbf24">키는 브라우저(localStorage)에만 저장됩니다.</span>
+          </p>
+          <input id="geminiKeyInput" type="password" placeholder="AIzaSy..." value="${_escHtmlSafe(existingKey)}"
+            style="width:100%;background:rgba(8,12,28,0.7);border:1px solid #334155;color:#e2e8f0;border-radius:8px;padding:11px 13px;font-size:13.5px;outline:none;margin-bottom:12px;box-sizing:border-box;font-family:monospace"
+            onkeydown="if(event.key==='Enter'){event.preventDefault();_applyGeminiKey();}">
+          <div style="display:flex;gap:8px">
+            <button onclick="_applyGeminiKey()"
+              style="flex:1;background:linear-gradient(135deg,#5eead4,#4da6ff);border:0;color:#0f172a;padding:11px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600">저장 후 시작</button>
+            ${existingKey ? `<button onclick="_clearGeminiKeyAndClose()"
+              style="background:rgba(248,113,113,0.12);border:1px solid rgba(248,113,113,0.32);color:#f87171;padding:11px 14px;border-radius:8px;cursor:pointer;font-size:13px">키 삭제</button>` : ''}
+            <button onclick="document.getElementById('geminiKeyModal')?.remove()"
+              style="background:rgba(148,163,184,0.1);border:1px solid #475569;color:#cbd5e1;padding:11px 14px;border-radius:8px;cursor:pointer;font-size:13px">취소</button>
+          </div>
+          <p style="color:#64748b;font-size:11.5px;margin:12px 0 0;text-align:center">
+            <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener" style="color:#5eead4;text-decoration:none">Google AI Studio</a>에서 무료 발급 가능
+          </p>
+        </div>`;
+      document.body.appendChild(m);
+      window.__geminiKeySaveCb = onSaveCb || null;
+      setTimeout(() => document.getElementById('geminiKeyInput')?.focus(), 50);
+    }
+    function _applyGeminiKey() {
+      const inp = document.getElementById('geminiKeyInput');
+      if (!inp) return;
+      const v = inp.value.trim();
+      if (!v) { inp.style.borderColor = '#f87171'; return; }
+      _saveGeminiKey(v);
+      document.getElementById('geminiKeyModal')?.remove();
+      const cb = window.__geminiKeySaveCb;
+      window.__geminiKeySaveCb = null;
+      if (typeof cb === 'function') cb();
+    }
+    function _clearGeminiKeyAndClose() {
+      _clearGeminiKey();
+      document.getElementById('geminiKeyModal')?.remove();
+    }
+
     function _chatInit() {
       // localStorage 펼침/접힘 상태 복원 — 첫 방문은 펼침
       const collapsed = localStorage.getItem('chatSidebarCollapsed') === 'true';
@@ -5092,11 +5190,15 @@
         }
       });
 
-      // API 키 체크 — 파일 자체가 없는 경우 / 키 미입력 / placeholder 그대로인 경우를 구분.
-      if (window.__chatConfigMissing) {
-        _chatAppend('error', '설정 파일(chat_config.local.js)이 없습니다. chat_config.local.js.example을 복사해 본인 Gemini API 키를 채워주세요.');
-      } else if (!window.GEMINI_API_KEY || window.GEMINI_API_KEY === 'YOUR_API_KEY_HERE') {
-        _chatAppend('error', 'Gemini API 키가 설정되지 않았습니다. modules/integration/chat_config.local.js 를 확인해주세요.');
+      // API 키 체크 — 우선순위: chat_config.local.js > localStorage > 모달 입력 안내
+      if (!_getGeminiKey()) {
+        const wrap = document.getElementById('chatMessages');
+        const div = document.createElement('div');
+        div.className = 'chat-msg system';
+        div.style.cssText = 'background:rgba(94,234,212,0.10);border:1px solid rgba(94,234,212,0.30);color:#5eead4;padding:10px 14px;border-radius:10px';
+        div.innerHTML = `🔑 Gemini API 키 미설정 — <a href="javascript:void(0)" onclick="_showKeyModal(()=>{document.querySelectorAll('.chat-msg.system').forEach(el=>{if(el.textContent.includes('API 키 미설정'))el.remove();});_chatAppend('system','✅ API 키가 등록되었습니다. 이제 자유롭게 질문해주세요.');})" style="color:#5eead4;font-weight:600;text-decoration:underline">키 입력 모달 열기</a>`;
+        wrap.appendChild(div);
+        wrap.scrollTop = wrap.scrollHeight;
       }
     }
 
@@ -5205,6 +5307,11 @@
       const input = document.getElementById('chatInput');
       const text = input.value.trim();
       if (!text) return;
+      // 키 없으면 모달 자동 표시 후 저장 시 재시도
+      if (!_getGeminiKey()) {
+        _showKeyModal(() => { _chatSubmit(); });
+        return;
+      }
       window.__chatSubmitting = true;
       input.value = '';
       input.style.height = 'auto';
@@ -5312,11 +5419,12 @@
     }
 
     async function _chatCallGemini(userText) {
-      if (!window.GEMINI_API_KEY || window.GEMINI_API_KEY === 'YOUR_API_KEY_HERE') {
+      const apiKey = _getGeminiKey();
+      if (!apiKey) {
         throw new Error('API 키가 설정되지 않았습니다');
       }
       const model = window.GEMINI_MODEL || 'gemini-2.5-flash';
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(window.GEMINI_API_KEY)}`;
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(apiKey)}`;
 
       // 직전 대화 5턴까지만 포함 (컨텍스트 비용 절감 + 무료 한도 보호)
       const recentHistory = window.__chatHistory.slice(-10);
