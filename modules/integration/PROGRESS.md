@@ -2,6 +2,22 @@
 
 > `/check` skill 실행 시 아래 형식으로 자동 기록됩니다.
 
+## 2026-05-05 (Phase I — Disclosure v2 흡수: 데이터 갱신 + "오늘의 개념" 5번째 섹션 파싱)
+
+- **작업 범위**: `feat/disclosure-chat-gemini` PR (#23, 5 commits) dev merge 후 integration 흡수
+- **흡수 대상**:
+  - disclosure.db 데이터 갱신 (collector 분석 품질 개선 + 정기보고서 92건 추가)
+  - generate_report.py 의 새 5번째 섹션 `[오늘의 개념]` (collector prompt에 추가됨, 180건 중 31건 보유)
+- **Stage 1 — 데이터 sync**: `git merge origin/dev` 후 `python -m modules.integration.extract_data` 재실행. `disclosures.json` 갱신 (180 disc / 252 stmt 동일 건수, summary 내용 갱신)
+- **Stage 2 — 5섹션 파서 확장** (`_parseDiscSummary`): regex `\[(Cash|Risk|Hidden Agenda|Verdict)\]` → `\[(Cash|Risk|Hidden Agenda|Verdict|오늘의 개념)\]`. `out` 객체에 `concept` 필드 추가. `hasStructured` 판정에 concept 포함
+- **Stage 3 — 카드 렌더 추가** (`_renderDiscSections`): "📖 오늘의 개념" cyan/teal accent (#5eead4) 카드 추가. 큰 폰트(14·15px) + 작은 폰트(10px) 양쪽 버전 자동
+- **명시적 비범위** (PR이 우리에게 강제하지 않음, 후속 phase 검토):
+  - generate_report.py 의 카드 톤 디자인 (배경색 분리 카드)
+  - generate_report.py 의 "💬 질문하기" Gemini 채팅 버튼 차용
+  - 메타그룹 분류 (자금조달·정기보고서·사업이벤트·지배구조) 그룹 헤더
+- **검증**: pytest 482 passed / black clean / Playwright (기아 2026-04-09 IR 공시에서 cash·risk·hidden·verdict·concept 5섹션 모두 정상 렌더링, 후속 추천 "다음엔 이것도 알아보세요" 포함)
+
+
 ## 2026-05-05 (/check — Phase H 리뷰 후속 fix)
 - **작업**: code-reviewer 지적 3건 반영
   - `closeFullTimemachine`에 `_tmCnIdx = 0` 추가 — `_tmStartScenario`와 리셋 대칭 확보 (유지보수성 ↑)

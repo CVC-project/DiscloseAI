@@ -3748,8 +3748,9 @@
     function _parseDiscSummary(raw) {
       const s = (raw || '').trim();
       if (!s) return { hasStructured: false, raw: '' };
-      const sectionRe = /\[(Cash|Risk|Hidden Agenda|Verdict)\]\s*([\s\S]*?)(?=\n\s*\[(?:Cash|Risk|Hidden Agenda|Verdict)\]|$)/g;
-      const out = { hasStructured: false, raw: s, cash: '', risk: '', hidden: '', verdict: '' };
+      // disclosure v2부터 "[오늘의 개념]" 5번째 섹션 추가됨 (180건 중 31건 보유)
+      const sectionRe = /\[(Cash|Risk|Hidden Agenda|Verdict|오늘의 개념)\]\s*([\s\S]*?)(?=\n\s*\[(?:Cash|Risk|Hidden Agenda|Verdict|오늘의 개념)\]|$)/g;
+      const out = { hasStructured: false, raw: s, cash: '', risk: '', hidden: '', verdict: '', concept: '' };
       let m;
       while ((m = sectionRe.exec(s)) !== null) {
         const key = m[1];
@@ -3759,8 +3760,9 @@
         else if (key === 'Risk') out.risk = txt;
         else if (key === 'Hidden Agenda') out.hidden = txt;
         else if (key === 'Verdict') out.verdict = txt;
+        else if (key === '오늘의 개념') out.concept = txt;
       }
-      out.hasStructured = !!(out.cash || out.risk || out.hidden || out.verdict);
+      out.hasStructured = !!(out.cash || out.risk || out.hidden || out.verdict || out.concept);
       return out;
     }
 
@@ -3789,6 +3791,7 @@
         seg('⚠ Risk', '#f87171', parsed.risk),
         seg('🕵 Hidden Agenda', '#a78bfa', parsed.hidden),
         seg('🎯 Verdict', '#fbbf24', parsed.verdict),
+        seg('📖 오늘의 개념', '#5eead4', parsed.concept),
       ].join('');
     }
 
@@ -5063,7 +5066,9 @@
 
         const recentDisc = discByTicker[t] || [];
         n.has_disclosure = recentDisc.length > 0;
-        n.disc = recentDisc.slice(0, 3).map(d => ({
+        // disclosure v2부터 [오늘의 개념] 5번째 섹션 추가 — 모든 5건 보존하여 overlay에서 노출
+        // (extract_data.py가 per_corp=5로 추출, 우측 mini panel은 별도 slice 적용)
+        n.disc = recentDisc.slice(0, 5).map(d => ({
           title: d.title || '',
           date: d.disclosure_date || '',
           type: d.disclosure_type || '',
