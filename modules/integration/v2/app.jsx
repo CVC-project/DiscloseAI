@@ -79,7 +79,7 @@ function HudBottom({ sectorCount = 12, planetCount = 50, newDiscTonight = 47 }) 
 }
 
 // ====================================================================== //
-// GalaxyCanvas — Canvas2D 별 + radial 갤럭시 디스크 + dust 회전
+// GalaxyCanvas — 별 트윙클 + 갤럭시 디스크 + dust 회전 + shooting stars
 // ====================================================================== //
 function GalaxyCanvas({ density = 220 }) {
   const ref = useRef(null);
@@ -90,7 +90,10 @@ function GalaxyCanvas({ density = 220 }) {
     let raf = 0;
     let stars = [];
     let dust = [];
+    let shootingStars = [];
+    let nextShootAt = performance.now() + 1500 + Math.random() * 2500;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
     function resize() {
       canvas.width = canvas.clientWidth * dpr;
       canvas.height = canvas.clientHeight * dpr;
@@ -115,9 +118,31 @@ function GalaxyCanvas({ density = 220 }) {
     resize();
     const onResize = () => resize();
     window.addEventListener("resize", onResize);
+
+    function spawnShootingStar() {
+      const W = canvas.width, H = canvas.height;
+      // 우상단~좌하단 방향 (일반적 별똥별 패턴)
+      const fromX = Math.random() * W * 0.6 + W * 0.4;
+      const fromY = Math.random() * H * 0.4;
+      // 속도 (px/sec) — DPR 보정
+      const speed = (320 + Math.random() * 160) * dpr;
+      const angle = Math.PI * (0.62 + Math.random() * 0.16); // 110~140도
+      shootingStars.push({
+        x: fromX,
+        y: fromY,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        life: 0,
+        ttl: 0.9 + Math.random() * 0.5, // seconds
+      });
+    }
+
     let t = 0;
-    function loop() {
-      t += 0.012;
+    let lastTs = performance.now();
+    function loop(ts) {
+      const dt = Math.min(50, ts - lastTs) / 1000;
+      lastTs = ts;
+      t += dt;
       const W = canvas.width, H = canvas.height;
       ctx.fillStyle = "#02030a";
       ctx.fillRect(0, 0, W, H);
@@ -129,6 +154,7 @@ function GalaxyCanvas({ density = 220 }) {
       grd.addColorStop(1.0, "rgba(0, 0, 0, 0)");
       ctx.fillStyle = grd;
       ctx.fillRect(0, 0, W, H);
+
       for (const d of dust) {
         d.ang += d.spd;
         const x = cx + Math.cos(d.ang) * d.dist + Math.sin(d.ang * 2.1) * d.dist * 0.18;
@@ -145,9 +171,44 @@ function GalaxyCanvas({ density = 220 }) {
         ctx.fillStyle = `rgba(255,255,255,${opa})`;
         ctx.fill();
       }
+
+      // shooting stars
+      if (ts >= nextShootAt && shootingStars.length < 3) {
+        spawnShootingStar();
+        nextShootAt = ts + 1800 + Math.random() * 4000;
+      }
+      shootingStars = shootingStars.filter((s) => s.life < s.ttl);
+      for (const s of shootingStars) {
+        s.x += s.vx * dt;
+        s.y += s.vy * dt;
+        s.life += dt;
+        const lifeRatio = s.life / s.ttl;
+        const alpha = (lifeRatio < 0.15 ? lifeRatio / 0.15 : 1 - (lifeRatio - 0.15) / 0.85) * 0.95;
+        const len = 120 * dpr;
+        const sp = Math.hypot(s.vx, s.vy);
+        const tx = s.x - (s.vx / sp) * len;
+        const ty = s.y - (s.vy / sp) * len;
+        const lg = ctx.createLinearGradient(s.x, s.y, tx, ty);
+        lg.addColorStop(0, `rgba(255,255,255,${alpha})`);
+        lg.addColorStop(0.4, `rgba(225,235,255,${alpha * 0.5})`);
+        lg.addColorStop(1, "rgba(255,255,255,0)");
+        ctx.strokeStyle = lg;
+        ctx.lineWidth = 1.6 * dpr;
+        ctx.lineCap = "round";
+        ctx.beginPath();
+        ctx.moveTo(s.x, s.y);
+        ctx.lineTo(tx, ty);
+        ctx.stroke();
+        // bright head
+        ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, 1.6 * dpr, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
       raf = requestAnimationFrame(loop);
     }
-    loop();
+    raf = requestAnimationFrame(loop);
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", onResize);
@@ -180,84 +241,165 @@ function SolarStage({ stage, planets, activeId, accentColor, onPick }) {
     const onResize = () => resize();
     window.addEventListener("resize", onResize);
 
+    // 행성마다 자기 궤도 — 동일한 메인 ring + 작은 변동 (각 행성당 0.92~1.08 배)
+    // 일관된 변동을 위해 결정적 함수 사용 (planets 변경 시에도 같은 행성에는 같은 비율)
+    const orbitVar = planets.map((p) => {
+      const seed = (p.id || "").split("").reduce((a, c) => a + c.charCodeAt(0), 0);
+      // 0.92 ~ 1.08 (16% 범위)
+      return 0.92 + ((seed * 17) % 17) / 100;
+    });
+
+    // 틸팅 (Y축 squash + 살짝 회전) — 원본 디자인의 "평평한 + 비스듬한" 타원
+    const TILT = 0.16; // ~9.2도, 시계방향
+    const Y_SQUASH = 0.32; // 더 평평하게 (이전 0.78에서 대폭 squash)
+    const ORBIT_SPEED = 0.00065; // 매우 느림 (이전 0.0042에서 약 1/6)
+
     let t = 0;
     function loop() {
-      t += 0.0042;
+      t += ORBIT_SPEED;
       const W = canvas.width, H = canvas.height;
       ctx.clearRect(0, 0, W, H);
       const cx = W / 2, cy = H / 2;
-      const baseR = Math.min(W, H) * 0.30;
-      const sunRGB = stage === "galaxy" ? [255, 230, 180] : hexToRGB(accentColor || "#5eead4");
+      const baseR = Math.min(W, H) * 0.32;
+      const sunRGB = stage === "galaxy" ? [255, 220, 160] : hexToRGB(accentColor || "#5eead4");
 
-      // 중심 별
-      const sunGrd = ctx.createRadialGradient(cx, cy, 0, cx, cy, 80 * dpr);
-      sunGrd.addColorStop(0, `rgba(${sunRGB[0]}, ${sunRGB[1]}, ${sunRGB[2]}, 0.92)`);
-      sunGrd.addColorStop(0.4, `rgba(${sunRGB[0]}, ${sunRGB[1]}, ${sunRGB[2]}, 0.35)`);
+      // 중심 별 — 더 작게, glow 위주
+      const sunR = 36 * dpr;
+      const sunGrd = ctx.createRadialGradient(cx, cy, 0, cx, cy, sunR * 2.5);
+      sunGrd.addColorStop(0, `rgba(${sunRGB[0]}, ${sunRGB[1]}, ${sunRGB[2]}, 0.95)`);
+      sunGrd.addColorStop(0.35, `rgba(${sunRGB[0]}, ${sunRGB[1]}, ${sunRGB[2]}, 0.45)`);
       sunGrd.addColorStop(1, `rgba(${sunRGB[0]}, ${sunRGB[1]}, ${sunRGB[2]}, 0)`);
       ctx.fillStyle = sunGrd;
       ctx.beginPath();
-      ctx.arc(cx, cy, 80 * dpr, 0, Math.PI * 2);
+      ctx.arc(cx, cy, sunR * 2.5, 0, Math.PI * 2);
+      ctx.fill();
+      // sun core
+      ctx.fillStyle = `rgba(${sunRGB[0]}, ${sunRGB[1]}, ${sunRGB[2]}, 0.9)`;
+      ctx.beginPath();
+      ctx.arc(cx, cy, sunR * 0.55, 0, Math.PI * 2);
       ctx.fill();
 
       hitsRef.current = [];
       const total = planets.length || 1;
-      const ringSplit = total <= 6 ? total : Math.ceil(total / 2);
+
+      // ----- 1단계: 모든 비활성 궤도(점선) 먼저 그려서 행성 뒤에 깔리게 -----
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.rotate(TILT);
       planets.forEach((p, i) => {
-        const ring = i < ringSplit ? 0 : 1;
-        const inRing = ring === 0 ? ringSplit : total - ringSplit;
-        const idxInRing = ring === 0 ? i : i - ringSplit;
-        const ringR = baseR + ring * baseR * 0.55;
-        const ang = (idxInRing / Math.max(1, inRing)) * Math.PI * 2 + t * (ring ? -0.6 : 1);
-        const x = cx + Math.cos(ang) * ringR;
-        const y = cy + Math.sin(ang) * ringR * 0.78;
+        const isActive = p.id === activeId;
+        const r = baseR * orbitVar[i];
+        if (!isActive) {
+          ctx.strokeStyle = "rgba(148,163,184,0.10)";
+          ctx.lineWidth = 1;
+          ctx.setLineDash([2, 5]);
+          ctx.beginPath();
+          ctx.ellipse(0, 0, r, r * Y_SQUASH, 0, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+      });
+      ctx.setLineDash([]);
+      ctx.restore();
+
+      // ----- 2단계: 활성 궤도 — 위로 올려 빛나게 -----
+      const activeIdx = planets.findIndex((p) => p.id === activeId);
+      if (activeIdx >= 0) {
+        const ap = planets[activeIdx];
+        const r = baseR * orbitVar[activeIdx];
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(TILT);
+        // glow ellipse: 두 번 그려서 부드러운 외곽
+        ctx.shadowColor = ap.color;
+        ctx.shadowBlur = 18 * dpr;
+        ctx.strokeStyle = hexA(ap.color, 0.55);
+        ctx.lineWidth = 1.4 * dpr;
+        ctx.beginPath();
+        ctx.ellipse(0, 0, r, r * Y_SQUASH, 0, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+        ctx.restore();
+      }
+
+      // ----- 3단계: 행성 본체 + glow -----
+      planets.forEach((p, i) => {
+        const r = baseR * orbitVar[i];
+        // 균등 각도 배치 + 매우 느린 자전. 작은 phase 차이로 행성마다 공전 위상 다름.
+        const phase = (i * 0.7) % (Math.PI * 2);
+        const ang = (i / total) * Math.PI * 2 + t + phase * 0.0;
+        // 회전·squash 변환된 캔버스 좌표
+        const lx = Math.cos(ang) * r;
+        const ly = Math.sin(ang) * r * Y_SQUASH;
+        // TILT 회전 적용 (canvas 절대 좌표)
+        const x = cx + lx * Math.cos(TILT) - ly * Math.sin(TILT);
+        const y = cy + lx * Math.sin(TILT) + ly * Math.cos(TILT);
         const isActive = p.id === activeId;
         const sizeRatio = p.sizeRatio || 1;
-        const radius = (isActive ? 18 : 12) * dpr * sizeRatio;
+        const radius = (isActive ? 16 : 11) * dpr * sizeRatio;
 
-        ctx.strokeStyle = isActive ? hexA(p.color, 0.32) : "rgba(148,163,184,0.05)";
-        ctx.lineWidth = 1;
-        ctx.setLineDash([2, 6]);
-        ctx.beginPath();
-        ctx.ellipse(cx, cy, ringR, ringR * 0.78, 0, 0, Math.PI * 2);
-        ctx.stroke();
-        ctx.setLineDash([]);
-
-        const glow = ctx.createRadialGradient(x, y, 0, x, y, radius * 3);
-        glow.addColorStop(0, hexA(p.color, 0.85));
-        glow.addColorStop(0.4, hexA(p.color, 0.30));
+        // soft glow (radial)
+        const glow = ctx.createRadialGradient(x, y, 0, x, y, radius * 3.5);
+        glow.addColorStop(0, hexA(p.color, 0.9));
+        glow.addColorStop(0.35, hexA(p.color, 0.35));
         glow.addColorStop(1, hexA(p.color, 0));
         ctx.fillStyle = glow;
         ctx.beginPath();
-        ctx.arc(x, y, radius * 3, 0, Math.PI * 2);
+        ctx.arc(x, y, radius * 3.5, 0, Math.PI * 2);
         ctx.fill();
 
+        // 행성 본체
         ctx.fillStyle = p.color;
         ctx.beginPath();
         ctx.arc(x, y, radius, 0, Math.PI * 2);
         ctx.fill();
 
+        // 활성 행성 — 흰 외곽 ring + 작은 self-ring 2개
         if (isActive) {
           ctx.strokeStyle = "#fff";
-          ctx.lineWidth = 2 * dpr;
+          ctx.lineWidth = 1.5 * dpr;
           ctx.beginPath();
-          ctx.arc(x, y, radius + 6 * dpr, 0, Math.PI * 2);
+          ctx.arc(x, y, radius + 4 * dpr, 0, Math.PI * 2);
           ctx.stroke();
+          // 행성 옆 작은 self-orbit ring (cyan dashed)
+          ctx.strokeStyle = hexA(p.color, 0.55);
+          ctx.lineWidth = 1 * dpr;
+          ctx.setLineDash([2, 4]);
+          ctx.beginPath();
+          ctx.ellipse(x, y, radius * 1.9, radius * 0.85, 0, 0, Math.PI * 2);
+          ctx.stroke();
+          ctx.setLineDash([]);
         }
 
-        // 회사 라벨 (sector·company stage)
-        if (stage !== "galaxy" && p.label) {
-          ctx.font = `${(isActive ? 12 : 10) * dpr}px var(--font-body, sans-serif)`;
-          ctx.fillStyle = isActive ? "#ffffff" : "rgba(226,232,240,0.92)";
-          ctx.textAlign = "center";
-          ctx.textBaseline = "top";
-          ctx.shadowColor = "rgba(0,0,0,0.8)";
-          ctx.shadowBlur = 6;
-          ctx.fillText(p.label, x, y + radius + 6 * dpr);
-          ctx.shadowBlur = 0;
+        // 라벨:
+        //   galaxy   — 활성 sector만 (en + ko 두 줄)
+        //   sector   — 모든 회사 (회사명 우선) + 활성은 ticker 같이
+        //   company  — 모든 노드 (회사명)
+        const showLabel = isActive || stage !== "galaxy";
+        if (showLabel) {
+          const primary = stage === "galaxy" ? p.en : p.label;
+          const secondary = stage === "galaxy" ? p.label : (isActive ? p.en : null);
+          if (primary) {
+            ctx.textAlign = "center";
+            ctx.textBaseline = "top";
+            ctx.shadowColor = "rgba(0,0,0,0.85)";
+            ctx.shadowBlur = 6;
+            // 첫 줄
+            ctx.font = `${(isActive ? 12 : 10) * dpr}px var(--font-${stage === "galaxy" ? "mono" : "body"}, sans-serif)`;
+            ctx.fillStyle = isActive ? p.color : "rgba(226,232,240,0.85)";
+            ctx.fillText(primary, x, y + radius + 7 * dpr);
+            // 둘째 줄
+            if (secondary && primary !== secondary) {
+              ctx.font = `${10 * dpr}px var(--font-mono, monospace)`;
+              ctx.fillStyle = "rgba(148,163,184,0.85)";
+              ctx.fillText(secondary, x, y + radius + 7 * dpr + 13 * dpr);
+            }
+            ctx.shadowBlur = 0;
+          }
         }
 
         hitsRef.current.push({ id: p.id, x, y, radius: radius + 6 * dpr });
       });
+
       raf = requestAnimationFrame(loop);
     }
     loop();
@@ -950,8 +1092,8 @@ function FinanceTab({
   if (stage === "galaxy") {
     planets = sectors.map((s) => ({
       id: s.id,
-      label: null,
-      en: s.en,
+      label: s.ko,   // 한글 (활성 sector 두 번째 줄)
+      en: s.en,      // 영문 (활성 sector 첫 번째 줄)
       color: s.color,
       sizeRatio: Math.max(0.6, Math.min(1.4, Math.sqrt((s.memberCount || 1) / 4))),
     }));
