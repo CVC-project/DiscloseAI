@@ -967,29 +967,41 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
       const ax = ai >= 0 ? cx + animPos[ai].x * baseR : cx;
       const ay = ai >= 0 ? cy + animPos[ai].y * baseR : cy;
 
+      // Equity types = solid line + arrowhead; group/non-equity = dashed, no arrow
+      const EQUITY_TYPES = new Set(['subsidiary', 'associate', 'significant']);
+
       // --- Relation lines + arrows ---
       if (activeCompanyCode && ai >= 0) {
         allRelated.forEach((r, i) => {
           const rx = cx + relAnimPos[i].x * baseR;
           const ry = cy + relAnimPos[i].y * baseR;
           const style = REL_STYLES[r.relType] || REL_STYLES.manual;
-          const dash = style.dash.length ? style.dash : [4, 4];
-          ctx.strokeStyle = style.color + 'bb';
-          ctx.lineWidth = 1.5;
-          ctx.setLineDash(dash);
+          const isEquity = EQUITY_TYPES.has(r.relType);
+
+          // Line style: equity → solid (dash=[]), group → dashed
+          ctx.strokeStyle = style.color + 'cc';
+          ctx.lineWidth = isEquity ? 2 : 1.5;
+          ctx.setLineDash(style.dash); // already [] for equity, [6,4] for group etc.
           ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(rx, ry); ctx.stroke();
           ctx.setLineDash([]);
-          // Arrow: outgoing A→B: head at related; incoming A←B: head at active
-          const arrowSz = 7;
-          if (!r.isIncoming) {
-            drawArrowHead(ax, ay, rx, ry, style.color + 'dd', arrowSz);
-          } else {
-            drawArrowHead(rx, ry, ax, ay, style.color + 'dd', arrowSz);
+
+          // Arrowhead ONLY for equity (지분율) relations
+          if (isEquity) {
+            const arrowSz = 8;
+            if (!r.isIncoming) {
+              // A→B: head at related company
+              drawArrowHead(ax, ay, rx, ry, style.color + 'ee', arrowSz);
+            } else {
+              // A←B: head at active company
+              drawArrowHead(rx, ry, ax, ay, style.color + 'ee', arrowSz);
+            }
           }
-          // If both equity AND group: draw a second thin marker line for group
+
+          // If company has BOTH equity AND group (e.g., associate + ftc_group):
+          // overlay a thin dashed line on top to show dual relationship
           if (r.hasGroup && r.hasEquity) {
-            ctx.strokeStyle = REL_STYLES.group.color + '55';
-            ctx.lineWidth = 0.8;
+            ctx.strokeStyle = REL_STYLES.group.color + '44';
+            ctx.lineWidth = 1;
             ctx.setLineDash(REL_STYLES.group.dash);
             ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(rx, ry); ctx.stroke();
             ctx.setLineDash([]);
@@ -1019,7 +1031,9 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
           // Label: rel type + arrow direction indicator
           ctx.fillStyle = '#64748b';
           ctx.font = '8px sans-serif';
-          const dirStr = r.isIncoming ? '← ' : '→ ';
+          // Direction arrow only for equity types; group just shows label
+          const isEq = EQUITY_TYPES.has(r.relType);
+          const dirStr = isEq ? (r.isIncoming ? '← ' : '→ ') : '';
           const typeStr = style.label + (r.hasGroup && r.hasEquity ? '+계열' : '');
           ctx.fillText(dirStr + typeStr, rx, ry + 19);
           ctx.textAlign = 'left';
