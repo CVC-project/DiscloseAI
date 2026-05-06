@@ -843,10 +843,8 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
   const rafRef = _useRef(0);
   const startRef = _useRef(performance.now());
   const sizeRef = _useRef({ w: 0, h: 0, dpr: 1 });
-  const nodesRef = _useRef([]);
-  const ghostNodesRef = _useRef([]);
-  // hoverRef drives the draw loop (no effect re-run on hover);
-  // hoverCode state drives DOM labels only.
+  const nodesRef = _useRef([]);        // active sector company screen positions
+  const relatedNodesRef = _useRef([]); // all related nodes (in-sector + cross-sector)
   const hoverRef = _useRef(null);
   const [hoverCode, setHoverCode] = _useState(null);
   const bgStarsRef = _useRef([]);
@@ -855,67 +853,40 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
   const sec = SECTOR_PALETTE.find(s => s.id === sectorId) || SECTOR_PALETTE[0];
   const companies = COMPANIES[sectorId] || COMPANIES.semi || [];
 
-  // Compute gather positions: when active, ACTIVE stays in place; related ones orbit it
-  const layout = _useMemo(() => {
-    if (!activeCompanyCode) {
-      return companies.map(c => ({ ...c, gx: c.x, gy: c.y }));
-    }
-    const active = companies.find(c => c.code === activeCompanyCode);
-    if (!active) return companies.map(c => ({ ...c, gx: c.x, gy: c.y }));
-    const rels = RELATIONS[activeCompanyCode] || [];
-    const relMap = new Map(rels.map(r => [r.code, r.type]));
-    return companies.map((c, i) => {
-      if (c.code === activeCompanyCode) {
-        // Active stays in its original position
-        return { ...c, gx: c.x, gy: c.y, isActive: true };
-      }
-      if (relMap.has(c.code)) {
-        // In-sector related: gather tightly around the active node
-        const n = [...relMap.keys()].indexOf(c.code);
-        const total = relMap.size;
-        const ang = (n / total) * Math.PI * 2 + 0.4;
-        const r = 0.55; // orbit around active — large enough to clear glow halos
-        return { ...c, gx: active.x + Math.cos(ang) * r, gy: active.y + Math.sin(ang) * r, relType: relMap.get(c.code) };
-      }
-      // un-related: push to the edge & dim
-      // Push faded nodes to outer edge (radius 0.92 from center), keeping their angular direction
-      const ang = Math.atan2(c.y - 0.001, c.x - 0.001);
-      return { ...c, gx: Math.cos(ang) * 0.92, gy: Math.sin(ang) * 0.92, fade: true };
-    });
-  }, [companies, activeCompanyCode]);
+  // Company layout: only position data, no relation-based movement
+  const layout = _useMemo(() =>
+    companies.map(c => ({ ...c, gx: c.x, gy: c.y })),
+  [companies]);
 
-  // Ghost nodes: cross-sector relations orbit around the active company's position
-  const ghostNodes = _useMemo(() => {
+  // ALL related nodes in a polygon around canvas center.
+  // Merges in-sector + cross-sector so lines never overlap and bounds never exceeded.
+  const allRelated = _useMemo(() => {
     if (!activeCompanyCode) return [];
-    const inSectorCodes = new Set(companies.map(c => c.code));
     const rels = RELATIONS[activeCompanyCode] || [];
-    const cross = rels.filter(r => !inSectorCodes.has(r.code));
     const seen = new Map();
-    for (const r of cross) { if (!seen.has(r.code)) seen.set(r.code, r); }
+    for (const r of rels) {
+      if (!r.code || r.code === activeCompanyCode) continue;
+      if (!seen.has(r.code)) seen.set(r.code, r);
+    }
     const arr = Array.from(seen.values());
     const n = arr.length;
     if (!n) return [];
     const RD = window.__realData || {};
-
-    // Ghost nodes orbit the CANVAS CENTER (not the active company).
-    // This guarantees positions are always within bounds regardless of where
-    // the active company sits. Relation lines still draw from active → ghost.
-    // Radius scales up with count to maintain arc-spacing between nodes.
-    const radius = Math.min(0.86, 0.65 + n * 0.025);
-
-    // Starting angle: rotate so first ghost is toward top-right, avoiding
-    // overlap with common active-company positions.
-    const startAng = -Math.PI * 0.6;
-
+    const inSectorCodes = new Set(companies.map(c => c.code));
+    // Radius grows with count to maintain arc-spacing; capped at 0.88
+    const radius = Math.min(0.88, 0.60 + n * 0.032);
+    const startAng = -Math.PI / 2; // first node at top
     return arr.map((r, i) => {
       const ang = startAng + (i / n) * Math.PI * 2;
-      const gx = Math.cos(ang) * radius;
-      const gy = Math.sin(ang) * radius;
       const node = RD.nodeByCode && RD.nodeByCode[r.code];
       const name = (node && node.n) || (RD.nameByCode && RD.nameByCode[r.code]) || r.name || r.code;
       const sector = node ? (window.SECTOR_PALETTE || []).find(s => s.ko === node.s) : null;
-      return { code: r.code, name, cap: 10, gx, gy,
-               relType: r.type, isGhost: true, sectorId: sector ? sector.id : null };
+      return { code: r.code, name, cap: 10,
+               gx: Math.cos(ang) * radius, gy: Math.sin(ang) * radius,
+               relType: r.type || 'group', isIncoming: !!r.isIncoming,
+               hasGroup: !!r.hasGroup, hasEquity: !!r.hasEquity,
+               isGhost: !inSectorCodes.has(r.code),
+               sectorId: sector ? sector.id : null };
     });
   }, [companies, activeCompanyCode]);
 
@@ -932,9 +903,20 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
     resize();
     window.addEventListener('resize', resize);
 
-    // animated positions (sector companies + ghost nodes)
     const animPos = layout.map(c => ({ x: c.x, y: c.y }));
-    const ghostAnimPos = ghostNodes.map(g => ({ x: g.gx * 0.3, y: g.gy * 0.3 }));
+    const relAnimPos = allRelated.map(r => ({ x: r.gx * 0.3, y: r.gy * 0.3 }));
+
+    // Draw arrowhead: from (fx,fy) toward (tx,ty), head placed at target end
+    function drawArrowHead(fx, fy, tx, ty, color, size) {
+      const ang = Math.atan2(ty - fy, tx - fx);
+      ctx.beginPath();
+      ctx.moveTo(tx, ty);
+      ctx.lineTo(tx - size * Math.cos(ang - 0.42), ty - size * Math.sin(ang - 0.42));
+      ctx.lineTo(tx - size * Math.cos(ang + 0.42), ty - size * Math.sin(ang + 0.42));
+      ctx.closePath();
+      ctx.fillStyle = color;
+      ctx.fill();
+    }
 
     const draw = () => {
       const { w, h, dpr } = sizeRef.current;
@@ -967,145 +949,128 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
         ctx.fillRect(s.x, s.y, s.size, s.size);
       }
 
-      // Lerp positions toward target
+      // Lerp
       layout.forEach((c, i) => {
         animPos[i].x += (c.gx - animPos[i].x) * 0.08;
         animPos[i].y += (c.gy - animPos[i].y) * 0.08;
       });
-      ghostNodes.forEach((g, i) => {
-        ghostAnimPos[i].x += (g.gx - ghostAnimPos[i].x) * 0.06;
-        ghostAnimPos[i].y += (g.gy - ghostAnimPos[i].y) * 0.06;
+      allRelated.forEach((r, i) => {
+        relAnimPos[i].x += (r.gx - relAnimPos[i].x) * 0.06;
+        relAnimPos[i].y += (r.gy - relAnimPos[i].y) * 0.06;
       });
 
       const cx = w / 2, cy = h / 2;
-      // Zoom out when a company is active to show ghost nodes in outer ring
       const baseR = Math.min(w, h) * (activeCompanyCode ? 0.27 : 0.34);
 
-      // Draw relationship edges (in-sector + ghost)
-      if (activeCompanyCode) {
-        const ai = layout.findIndex(c => c.code === activeCompanyCode);
-        if (ai >= 0) {
-          const ax = cx + animPos[ai].x * baseR, ay = cy + animPos[ai].y * baseR;
-          // In-sector relations
-          const rels = RELATIONS[activeCompanyCode] || [];
-          rels.forEach(r => {
-            const ti = layout.findIndex(c => c.code === r.code);
-            if (ti < 0) return;
-            const tx = cx + animPos[ti].x * baseR, ty = cy + animPos[ti].y * baseR;
-            const style = REL_STYLES[r.type] || REL_STYLES.manual;
-            ctx.strokeStyle = style.color + 'cc';
-            ctx.lineWidth = 1.5;
-            ctx.setLineDash(style.dash);
-            ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(tx, ty); ctx.stroke();
-            ctx.setLineDash([]);
-          });
-          // Ghost (cross-sector) relations
-          ghostNodes.forEach((g, gi) => {
-            const gx = cx + ghostAnimPos[gi].x * baseR, gy2 = cy + ghostAnimPos[gi].y * baseR;
-            const style = REL_STYLES[g.relType] || REL_STYLES.manual;
-            ctx.strokeStyle = style.color + '99';
-            ctx.lineWidth = 1.2;
-            ctx.setLineDash(style.dash.length ? style.dash : [4, 4]);
-            ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(gx, gy2); ctx.stroke();
-            ctx.setLineDash([]);
-          });
-        }
-      }
+      // Active company screen position
+      const ai = layout.findIndex(c => c.code === activeCompanyCode);
+      const ax = ai >= 0 ? cx + animPos[ai].x * baseR : cx;
+      const ay = ai >= 0 ? cy + animPos[ai].y * baseR : cy;
 
-      // Draw ghost nodes (cross-sector relations, outer ring)
-      if (activeCompanyCode) {
-        ghostNodes.forEach((g, gi) => {
-          const gx = cx + ghostAnimPos[gi].x * baseR, gy2 = cy + ghostAnimPos[gi].y * baseR;
-          const style = REL_STYLES[g.relType] || REL_STYLES.manual;
-          ctx.globalAlpha = 0.65;
-          // Small glow
-          const grd = ctx.createRadialGradient(gx, gy2, 0, gx, gy2, 18);
-          grd.addColorStop(0, style.color + '88'); grd.addColorStop(1, style.color + '00');
-          ctx.fillStyle = grd;
-          ctx.beginPath(); ctx.arc(gx, gy2, 18, 0, Math.PI * 2); ctx.fill();
-          // Core dot
-          ctx.fillStyle = style.color;
-          ctx.beginPath(); ctx.arc(gx, gy2, 5, 0, Math.PI * 2); ctx.fill();
-          ctx.globalAlpha = 1;
-          // Label
-          ctx.fillStyle = style.color;
-          ctx.font = `9px var(--font-mono, monospace)`;
-          ctx.textAlign = 'center';
-          ctx.fillText(g.name, gx, gy2 - 11);
-          ctx.fillStyle = '#64748b';
-          ctx.font = `8px var(--font-mono, monospace)`;
-          ctx.fillText(style.label, gx, gy2 + 18);
-          ctx.textAlign = 'left';
+      // --- Relation lines + arrows ---
+      if (activeCompanyCode && ai >= 0) {
+        allRelated.forEach((r, i) => {
+          const rx = cx + relAnimPos[i].x * baseR;
+          const ry = cy + relAnimPos[i].y * baseR;
+          const style = REL_STYLES[r.relType] || REL_STYLES.manual;
+          const dash = style.dash.length ? style.dash : [4, 4];
+          ctx.strokeStyle = style.color + 'bb';
+          ctx.lineWidth = 1.5;
+          ctx.setLineDash(dash);
+          ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(rx, ry); ctx.stroke();
+          ctx.setLineDash([]);
+          // Arrow: outgoing A→B: head at related; incoming A←B: head at active
+          const arrowSz = 7;
+          if (!r.isIncoming) {
+            drawArrowHead(ax, ay, rx, ry, style.color + 'dd', arrowSz);
+          } else {
+            drawArrowHead(rx, ry, ax, ay, style.color + 'dd', arrowSz);
+          }
+          // If both equity AND group: draw a second thin marker line for group
+          if (r.hasGroup && r.hasEquity) {
+            ctx.strokeStyle = REL_STYLES.group.color + '55';
+            ctx.lineWidth = 0.8;
+            ctx.setLineDash(REL_STYLES.group.dash);
+            ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(rx, ry); ctx.stroke();
+            ctx.setLineDash([]);
+          }
         });
       }
 
-      // Draw company nodes
+      // --- Related nodes ---
+      const relScreenPos = [];
+      if (activeCompanyCode) {
+        allRelated.forEach((r, i) => {
+          const rx = cx + relAnimPos[i].x * baseR;
+          const ry = cy + relAnimPos[i].y * baseR;
+          const style = REL_STYLES[r.relType] || REL_STYLES.manual;
+          ctx.globalAlpha = 0.75;
+          const grd = ctx.createRadialGradient(rx, ry, 0, rx, ry, 20);
+          grd.addColorStop(0, style.color + '99'); grd.addColorStop(1, style.color + '00');
+          ctx.fillStyle = grd;
+          ctx.beginPath(); ctx.arc(rx, ry, 20, 0, Math.PI * 2); ctx.fill();
+          ctx.fillStyle = style.color;
+          ctx.beginPath(); ctx.arc(rx, ry, 5, 0, Math.PI * 2); ctx.fill();
+          ctx.globalAlpha = 1;
+          ctx.textAlign = 'center';
+          ctx.fillStyle = style.color;
+          ctx.font = 'bold 9px sans-serif';
+          ctx.fillText(r.name, rx, ry - 13);
+          // Label: rel type + arrow direction indicator
+          ctx.fillStyle = '#64748b';
+          ctx.font = '8px sans-serif';
+          const dirStr = r.isIncoming ? '← ' : '→ ';
+          const typeStr = style.label + (r.hasGroup && r.hasEquity ? '+계열' : '');
+          ctx.fillText(dirStr + typeStr, rx, ry + 19);
+          ctx.textAlign = 'left';
+          relScreenPos.push({ x: rx, y: ry, r: 18, code: r.code, sectorId: r.sectorId });
+        });
+      }
+      relatedNodesRef.current = relScreenPos;
+
+      // --- Sector company nodes (only active when company selected) ---
       const positions = [];
       layout.forEach((c, i) => {
         const x = cx + animPos[i].x * baseR;
         const y = cy + animPos[i].y * baseR;
-        const radius = 6 + Math.sqrt(c.cap) * 1.5;
         const isActive = c.code === activeCompanyCode;
+        if (activeCompanyCode && !isActive) return; // hide non-active when selected
+        const nodeR = Math.min(40, 6 + Math.sqrt(c.cap) * 1.5);
         const isHover = hoverRef.current === c.code;
-        // When a company is active, hide unrelated sector nodes entirely
-        if (c.fade && activeCompanyCode) return;
-        const fade = c.fade ? 0.08 : 1;
-
-        ctx.globalAlpha = fade;
-        // glow
-        // Shrink glow of non-active nodes when a company is selected
-        const glowMul = isActive ? 9 : isHover ? 6 : (activeCompanyCode ? 2.5 : 4.5);
-        const g = ctx.createRadialGradient(x, y, 0, x, y, radius * glowMul);
+        ctx.globalAlpha = 1;
+        const glowMul = isActive ? 9 : isHover ? 6 : 4.5;
+        const g = ctx.createRadialGradient(x, y, 0, x, y, nodeR * glowMul);
         g.addColorStop(0, sec.color + 'cc');
         g.addColorStop(0.3, sec.color + '55');
         g.addColorStop(1, sec.color + '00');
         ctx.fillStyle = g;
-        ctx.beginPath(); ctx.arc(x, y, radius * glowMul, 0, Math.PI * 2); ctx.fill();
-        // bright core
+        ctx.beginPath(); ctx.arc(x, y, nodeR * glowMul, 0, Math.PI * 2); ctx.fill();
         ctx.fillStyle = '#ffffff';
-        ctx.beginPath(); ctx.arc(x, y, radius * 0.5, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.arc(x, y, nodeR * 0.5, 0, Math.PI * 2); ctx.fill();
         ctx.fillStyle = sec.color;
-        ctx.globalAlpha = fade * 0.9;
-        ctx.beginPath(); ctx.arc(x, y, radius, 0, Math.PI * 2); ctx.fill();
+        ctx.globalAlpha = 0.9;
+        ctx.beginPath(); ctx.arc(x, y, nodeR, 0, Math.PI * 2); ctx.fill();
         ctx.globalAlpha = 1;
-
-        // pulse ring on active
         if (isActive) {
           const p = (Math.sin(t * 2.5) + 1) / 2;
           ctx.strokeStyle = sec.color + 'aa';
           ctx.lineWidth = 1.5;
-          ctx.beginPath();
-          ctx.arc(x, y, radius * (2 + p * 0.5), 0, Math.PI * 2);
-          ctx.stroke();
+          ctx.beginPath(); ctx.arc(x, y, nodeR * (2 + p * 0.5), 0, Math.PI * 2); ctx.stroke();
         }
-
-        positions.push({ x, y, r: radius, c });
+        positions.push({ x, y, r: nodeR, c });
       });
-      // Draw company name labels (always visible, not just on hover)
+      // Labels for sector companies
       ctx.textAlign = 'center';
       positions.forEach(({ x, y, r: nr, c }) => {
         const isActive = c.code === activeCompanyCode;
-        if (c.fade && activeCompanyCode) { ctx.globalAlpha = 1; return; }
-        ctx.globalAlpha = c.fade ? 0.08 : 0.85;
+        ctx.globalAlpha = isActive ? 1 : 0.8;
         ctx.fillStyle = isActive ? sec.color : 'rgba(148,163,184,0.9)';
         ctx.font = `${isActive ? '600 ' : ''}10px sans-serif`;
-        const label = c.name.length > 7 ? c.name.slice(0, 7) + '…' : c.name;
-        ctx.fillText(label, x, y - nr - 5);
+        ctx.fillText(c.name.length > 7 ? c.name.slice(0,7)+'…' : c.name, x, y - nr - 5);
         ctx.globalAlpha = 1;
       });
       ctx.textAlign = 'left';
-
       nodesRef.current = positions;
-
-      // Store ghost screen positions for hit testing
-      const ghostScreenPositions = ghostNodes.map((g, gi) => ({
-        x: cx + ghostAnimPos[gi].x * baseR,
-        y: cy + ghostAnimPos[gi].y * baseR,
-        code: g.code,
-        sectorId: g.sectorId,
-        r: 14,
-      }));
-      ghostNodesRef.current = ghostScreenPositions;
 
       rafRef.current = requestAnimationFrame(draw);
     };
@@ -1119,34 +1084,31 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
         const d = Math.hypot(p.x - mx, p.y - my);
         if (d < bestD) { bestD = d; best = p.c.code; }
       }
-      for (const p of ghostNodesRef.current) {
+      for (const p of relatedNodesRef.current) {
         const d = Math.hypot(p.x - mx, p.y - my);
-        if (d < Math.min(bestD, 20)) { bestD = d; best = '_ghost_'; }
+        if (d < Math.min(bestD, 22)) { bestD = d; best = '_related_'; }
       }
-      hoverRef.current = best;  // drives draw loop without re-run
-      setHoverCode(best);       // drives DOM labels
-      cvs.style.cursor = (best && best !== '_ghost_') ? 'pointer' : (best === '_ghost_' ? 'pointer' : 'default');
+      hoverRef.current = best;
+      setHoverCode(best);
+      cvs.style.cursor = best ? 'pointer' : 'default';
     };
     const onClick = (e) => {
       const rect = cvs.getBoundingClientRect();
       const mx = e.clientX - rect.left, my = e.clientY - rect.top;
-      // Check regular nodes first
       let best = null, bestD = 28;
       for (const p of nodesRef.current) {
         const d = Math.hypot(p.x - mx, p.y - my);
-        if (d < bestD) { bestD = d; best = { code: p.c.code, isGhost: false }; }
+        if (d < bestD) { bestD = d; best = { code: p.c.code, isRelated: false }; }
       }
-      // Check ghost nodes
-      for (const p of ghostNodesRef.current) {
+      for (const p of relatedNodesRef.current) {
         const d = Math.hypot(p.x - mx, p.y - my);
-        if (d < Math.min(bestD, 20)) { bestD = d; best = { code: p.code, isGhost: true, sectorId: p.sectorId }; }
+        if (d < Math.min(bestD, 22)) { bestD = d; best = { code: p.code, isRelated: true, sectorId: p.sectorId }; }
       }
       if (best) {
-        if (best.isGhost) onSelectGhost?.(best.code, best.sectorId);
+        if (best.isRelated) onSelectGhost?.(best.code, best.sectorId);
         else onSelectCompany?.(best.code);
       } else {
-        // Click empty space → deselect company
-        onSelectCompany?.(null);
+        onSelectCompany?.(null); // click empty → deselect
       }
     };
     cvs.addEventListener('mousemove', onMove);
@@ -1157,7 +1119,7 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
       cvs.removeEventListener('mousemove', onMove);
       cvs.removeEventListener('click', onClick);
     };
-  }, [layout, ghostNodes, activeCompanyCode, sectorId]); // hoverCode excluded — uses hoverRef to avoid loop restart on hover
+  }, [layout, allRelated, activeCompanyCode, sectorId]);
 
   return (
     <div className="solar-stage">

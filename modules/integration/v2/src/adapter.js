@@ -48,9 +48,12 @@
     return m;
   }
 
+  // Type priority: lower = more significant (shown first)
+  const TYPE_PRIORITY = { subsidiary: 1, associate: 2, significant: 3, group: 4, related: 5, manual: 6 };
+
   function parseRelations(node, nameMap) {
-    const out = [];
-    const seen = new Set();
+    // Collect all types per target code, then pick highest-priority
+    const byCode = new Map();
     for (const raw of node.rl || []) {
       const parts = String(raw).split(":");
       if (parts.length < 2) continue;
@@ -59,13 +62,17 @@
       if (!type) continue;
       const code = nameMap.get(name);
       if (!code || code === node.t) continue;
-      const key = code + ":" + type;
-      if (seen.has(key)) continue;
-      seen.add(key);
-      // Store the Korean company name alongside code for companies not in top50
-      out.push({ code, type, name });
+      if (!byCode.has(code)) byCode.set(code, { code, name, types: [] });
+      if (!byCode.get(code).types.includes(type)) byCode.get(code).types.push(type);
     }
-    return out;
+    return Array.from(byCode.values()).map(({ code, name, types }) => {
+      // Pick highest-priority type; flag if also has group (공정위 계열사 중복)
+      types.sort((a, b) => (TYPE_PRIORITY[a] || 9) - (TYPE_PRIORITY[b] || 9));
+      const type = types[0];
+      const hasGroup = types.includes("group");
+      const hasEquity = types.some(t => ["subsidiary","associate","significant"].includes(t));
+      return { code, type, name, allTypes: types, hasGroup, hasEquity };
+    });
   }
 
   // Build code→Korean name map from ALL rl strings (covers non-top50 related companies).
@@ -159,17 +166,26 @@
       const rels = parseRelations(n, nameMap);
       if (rels.length) out[n.t] = rels;
     }
-    // Add reverse edges so bidirectional relations are visible.
-    // e.g. 삼성전자→삼성전기 (associate) also adds 삼성전기→삼성전자 (group).
+    // Add reverse edges (isIncoming: true) so A←B is visible when viewing B.
+    // e.g. 삼성전자→삼성전기(associate) adds 삼성전기←삼성전자(associate, incoming).
     const nameByTicker = Object.fromEntries(nodes.map((n) => [n.t, n.n]));
-    for (const [srcCode, rels] of Object.entries(out)) {
+    const forward = JSON.parse(JSON.stringify(out)); // snapshot before adding reverses
+    for (const [srcCode, rels] of Object.entries(forward)) {
       for (const r of rels) {
         const tgt = r.code;
         if (!tgt) continue;
         if (!out[tgt]) out[tgt] = [];
-        // Only add if not already present (by code)
+        // Only add reverse if not already an outgoing edge from tgt→src
         if (!out[tgt].some((x) => x.code === srcCode)) {
-          out[tgt].push({ code: srcCode, type: "group", name: nameByTicker[srcCode] || srcCode });
+          out[tgt].push({
+            code: srcCode,
+            type: r.type,          // keep same type for correct REL_STYLES
+            name: nameByTicker[srcCode] || srcCode,
+            allTypes: r.allTypes || [r.type],
+            hasGroup: r.hasGroup,
+            hasEquity: r.hasEquity,
+            isIncoming: true,      // arrow points TOWARD active (A←B)
+          });
         }
       }
     }
@@ -179,7 +195,7 @@
   async function injectBundleScript() {
     // Babel-standalone auto-transforms <script type="text/babel"> tags only at page load.
     // For dynamic injection we fetch the source ourselves, transform via Babel, then run.
-    const url = "./src/bundle.jsx?v=k3d";
+    const url = "./src/bundle.jsx?v=k3e";
     const src = await fetch(url).then((r) => r.text());
     const out = window.Babel.transform(src, { presets: ["env", "react"] }).code;
     const s = document.createElement("script");
