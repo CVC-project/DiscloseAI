@@ -1852,7 +1852,6 @@ function App() {
   }, []);
 
   const selectGhost = useCallback((code, sectorId) => {
-    // Navigate to ghost company's sector, then select it
     const targetSectorId = sectorId || (() => {
       const RD = window.__realData || {};
       const node = RD.nodeByCode && RD.nodeByCode[code];
@@ -1861,11 +1860,11 @@ function App() {
       return s ? s.id : null;
     })();
     if (!targetSectorId) return;
+    // React 18 automatic batching: all state updates in the same callback are
+    // batched into a single render — no intermediate "empty sector" screen.
     enterSector(targetSectorId);
-    setTimeout(() => {
-      setActiveCompanyCode(code);
-      setPhase('company');
-    }, 1300);
+    setActiveCompanyCode(code);
+    setPhase('company');
   }, [enterSector]);
 
   const [corpOverlayTicker, setCorpOverlayTicker] = useState(null);
