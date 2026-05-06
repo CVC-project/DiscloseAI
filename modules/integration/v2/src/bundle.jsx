@@ -1047,16 +1047,18 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
           const rx = cx + relAnimPos[i].x * baseR;
           const ry = cy + relAnimPos[i].y * baseR;
           const style = REL_STYLES[r.relType] || REL_STYLES.manual;
+          // Node color = related company's SECTOR color; edge color stays as relation type
+          const nodeColor = (r.sectorId && (window.SECTOR_PALETTE || []).find(s => s.id === r.sectorId)?.color) || style.color;
           ctx.globalAlpha = 0.75;
           const grd = ctx.createRadialGradient(rx, ry, 0, rx, ry, 20);
-          grd.addColorStop(0, style.color + '99'); grd.addColorStop(1, style.color + '00');
+          grd.addColorStop(0, nodeColor + '99'); grd.addColorStop(1, nodeColor + '00');
           ctx.fillStyle = grd;
           ctx.beginPath(); ctx.arc(rx, ry, 20, 0, Math.PI * 2); ctx.fill();
-          ctx.fillStyle = style.color;
+          ctx.fillStyle = nodeColor;
           ctx.beginPath(); ctx.arc(rx, ry, 5, 0, Math.PI * 2); ctx.fill();
           ctx.globalAlpha = 1;
           ctx.textAlign = 'center';
-          ctx.fillStyle = style.color;
+          ctx.fillStyle = nodeColor;
           ctx.font = 'bold 9px sans-serif';
           ctx.fillText(r.name, rx, ry - 13);
           // Label: rel type + arrow direction indicator
