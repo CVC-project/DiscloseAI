@@ -969,8 +969,8 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
       const activeNodeR = ai >= 0
         ? Math.min(40, 6 + Math.sqrt(layout[ai].cap || 10) * 1.5)
         : 20;
-      // Incoming arrowhead sits just outside the pulse ring (nodeR * 2.8)
-      const activeHaloR = activeNodeR * 2.8;
+      // Incoming arrowhead: just outside active node solid boundary (nodeR * 1.4)
+      const activeHaloR = activeNodeR * 1.4;
 
       // Equity types = solid line + arrowhead; group/non-equity = dashed, no arrow
       const EQUITY_TYPES = new Set(['subsidiary', 'associate', 'significant']);
@@ -987,7 +987,7 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
             // ── Double parallel lines: equity (solid) + group (dashed), offset 4px ──
             const dx = rx - ax, dy = ry - ay;
             const len = Math.sqrt(dx*dx + dy*dy) || 1;
-            const px = -dy/len * 4, py = dx/len * 4; // perpendicular offset
+            const px = -dy/len * 2, py = dx/len * 2; // perpendicular offset (2px gap)
 
             // Solid equity line (offset +4px perp)
             ctx.strokeStyle = style.color + 'cc';
