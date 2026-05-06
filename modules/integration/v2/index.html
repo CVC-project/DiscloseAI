@@ -6,24 +6,36 @@
   <title>DiscloseAI · Corporate Galaxy Atlas (v2)</title>
   <link rel="icon" href="data:," />
   <link rel="stylesheet" href="./styles.css" />
+  <style>
+    /* Fix 1: PNG is dark-themed — invert to get white suit (alpha channel preserved) */
+    .mascot-img { filter: invert(0.88) brightness(1.15) saturate(0.6) !important; }
+    /* Fix 2: TL panel width matches BL legend-panel (320px) */
+    .panel-tl { width: 320px !important; }
+  </style>
 </head>
 <body>
   <div id="root"></div>
 
-  <!-- React 18 + Babel in-browser. v2 prototype과 동일 스택.
-       빌드 도구 0건 — 직접 JSX를 brower에서 transpile. -->
+  <!-- React 18 + Babel in-browser CDN. v2 standalone과 동일 스택. -->
   <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
 
-  <!-- 데이터 / 비즈니스 로직 layer (Babel 처리 전, 일반 script로 로드).
-       각 IIFE가 window.DiscloseAI에 함수·상수를 export.
-       ?v= 파라미터는 dev cache-bust용 (수정 후 새로고침). -->
-  <script src="./data/mock.js?v=j7a"></script>
-  <script src="./data/valuation.js?v=j7a"></script>
-  <script src="./data/narration.js?v=j7a"></script>
-  <script src="./data/loader.js?v=j7a"></script>
+  <!-- Static asset paths (standalone JSX expects window.__resources for mascot etc.) -->
+  <script>
+    window.__resources = {
+      astronaut: "./assets/astronaut.png",
+    };
+  </script>
 
-  <script type="text/babel" data-presets="env,react" src="./app.jsx?v=j7a"></script>
+  <!-- Data layer: mock + valuation + narration + loader (J3 산출물). -->
+  <script src="./data/mock.js?v=k2a"></script>
+  <script src="./data/valuation.js?v=k2a"></script>
+  <script src="./data/narration.js?v=k2a"></script>
+  <script src="./data/loader.js?v=k2a"></script>
+
+  <!-- Adapter: fetches via DiscloseAI.loadAll, builds standalone-shaped globals
+       (window.__realData), then dynamically injects src/bundle.jsx. -->
+  <script src="./src/adapter.js?v=k2a"></script>
 </body>
 </html>
