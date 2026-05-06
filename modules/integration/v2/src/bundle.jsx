@@ -845,6 +845,9 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
   const sizeRef = _useRef({ w: 0, h: 0, dpr: 1 });
   const nodesRef = _useRef([]);
   const ghostNodesRef = _useRef([]);
+  // hoverRef drives the draw loop (no effect re-run on hover);
+  // hoverCode state drives DOM labels only.
+  const hoverRef = _useRef(null);
   const [hoverCode, setHoverCode] = _useState(null);
   const bgStarsRef = _useRef([]);
   const shootingRef = _useRef([]);
@@ -1030,7 +1033,7 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
         const y = cy + animPos[i].y * baseR;
         const radius = 6 + Math.sqrt(c.cap) * 1.5;
         const isActive = c.code === activeCompanyCode;
-        const isHover = hoverCode === c.code;
+        const isHover = hoverRef.current === c.code;
         const fade = c.fade ? 0.18 : 1;
 
         ctx.globalAlpha = fade;
@@ -1103,7 +1106,8 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
         const d = Math.hypot(p.x - mx, p.y - my);
         if (d < Math.min(bestD, 20)) { bestD = d; best = '_ghost_'; }
       }
-      setHoverCode(best);
+      hoverRef.current = best;  // drives draw loop without re-run
+      setHoverCode(best);       // drives DOM labels
       cvs.style.cursor = (best && best !== '_ghost_') ? 'pointer' : (best === '_ghost_' ? 'pointer' : 'default');
     };
     const onClick = (e) => {
@@ -1136,7 +1140,7 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
       cvs.removeEventListener('mousemove', onMove);
       cvs.removeEventListener('click', onClick);
     };
-  }, [layout, ghostNodes, activeCompanyCode, hoverCode, sectorId]);
+  }, [layout, ghostNodes, activeCompanyCode, sectorId]); // hoverCode excluded — uses hoverRef to avoid loop restart on hover
 
   return (
     <div className="solar-stage">
