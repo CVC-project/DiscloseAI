@@ -1191,6 +1191,612 @@ window.SectorMap = SectorMap;
 // app.jsx — DiscloseAI: Phase 1 Intro → Phase 2 Galaxy → Phase 3 Sector → Phase 4 Company
 // (React hooks already destructured at top of bundle)
 
+// ─── DISCLOSURES tab — TL panels ───────────────────────────────────────────
+
+function SectorDisclosurePanel({ sector, onBack, onSelect }) {
+  if (!sector) return null;
+  const RD = window.__realData || {};
+  const discAll = RD.discAll || [];
+  const tickers = React.useMemo(
+    () => new Set((sector.members || []).map(m => m.t)),
+    [sector.id]
+  );
+  const items = React.useMemo(
+    () => discAll
+      .filter(d => tickers.has(d.ticker || d.stock_code))
+      .sort((a, b) => (b.disclosure_date || '').localeCompare(a.disclosure_date || ''))
+      .slice(0, 10),
+    [tickers, discAll.length]
+  );
+  return (
+    <div className="panel panel-tl sector-overview-panel" style={{'--accent': sector.color}}>
+      <div className="panel-head">
+        <div className="panel-head-l">
+          <span className="panel-dot" style={{background: sector.color, boxShadow: `0 0 8px ${sector.color}`}} />
+          <span className="panel-title">SECTOR DISCLOSURES</span>
+          <span className="panel-sub">공시 피드</span>
+        </div>
+        <button className="back-link" onClick={onBack}>← GALAXY</button>
+      </div>
+      <div className="panel-body">
+        {items.length === 0 && (
+          <div style={{padding: '20px', textAlign: 'center', color: '#475569', fontSize: 11}}>공시 데이터 없음</div>
+        )}
+        {items.map((d, i) => (
+          <div key={i} className={'disc-feed-row' + (!!d.high_impact ? ' hi' : '')} onClick={() => onSelect && onSelect(d)}>
+            <div style={{display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2}}>
+              <span className="disc-feed-date">{(d.disclosure_date || '').slice(5).replace('-', '/')}</span>
+              <span className="disc-feed-corp">{d.corp_name}</span>
+              {!!d.high_impact && <span className="disc-hi-badge">HI</span>}
+              <span className="disc-type-badge">{d.disclosure_type || '기타'}</span>
+            </div>
+            <div className="disc-feed-title">{(d.title || '').slice(0, 36)}{(d.title || '').length > 36 ? '…' : ''}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function CompanyDisclosurePanel({ company, sector, onBack, onSelect, onEnterDisclosures }) {
+  if (!company) return null;
+  const [showRel, setShowRel] = React.useState(false);
+  const RD = window.__realData || {};
+  const ownDiscs = React.useMemo(
+    () => ((RD.discByTicker && RD.discByTicker[company.code]) || []).slice(0, 8),
+    [company.code]
+  );
+  const relDiscs = React.useMemo(() => {
+    if (!showRel) return [];
+    const rels = RELATIONS[company.code] || [];
+    const arr = [];
+    rels.forEach(r => {
+      ((RD.discByTicker && RD.discByTicker[r.code]) || []).slice(0, 2).forEach(d => arr.push({...d, _relType: r.type}));
+    });
+    return arr.sort((a, b) => (b.disclosure_date || '').localeCompare(a.disclosure_date || '')).slice(0, 10);
+  }, [company.code, showRel]);
+  const relCount = React.useMemo(() => {
+    return (RELATIONS[company.code] || []).reduce((acc, r) => acc + ((RD.discByTicker && RD.discByTicker[r.code]) || []).length, 0);
+  }, [company.code]);
+  const accentColor = sector ? sector.color : '#5eead4';
+  return (
+    <div className="panel panel-tl" style={{'--accent': accentColor}}>
+      <div className="panel-head">
+        <div className="panel-head-l">
+          <span className="panel-dot" style={{background: accentColor, boxShadow: `0 0 8px ${accentColor}`}} />
+          <span className="panel-title">{company.name}</span>
+          <span className="panel-sub" style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 9}}>{company.code}</span>
+        </div>
+        <button className="back-link" onClick={onBack}>← SECTOR</button>
+      </div>
+      <div className="panel-body" style={{display: 'flex', flexDirection: 'column'}}>
+        <div style={{padding: '5px 10px 4px', fontFamily: 'var(--font-mono,monospace)', fontSize: 9, letterSpacing: '.08em', color: '#5eead4', borderBottom: '1px solid rgba(94,234,212,0.1)'}}>RECENT DISCLOSURES</div>
+        {ownDiscs.length === 0 && <div style={{padding: '14px 10px', color: '#475569', fontSize: 11}}>수집된 공시 없음</div>}
+        {ownDiscs.map((d, i) => (
+          <div key={i} className={'disc-feed-row' + (!!d.high_impact ? ' hi' : '')} onClick={() => onSelect && onSelect(d)}>
+            <div style={{display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2}}>
+              <span className="disc-feed-date">{(d.disclosure_date || '').slice(5).replace('-', '/')}</span>
+              {!!d.high_impact && <span className="disc-hi-badge">HI</span>}
+              <span className="disc-type-badge">{d.disclosure_type || '기타'}</span>
+            </div>
+            <div className="disc-feed-title">{(d.title || '').slice(0, 32)}{(d.title || '').length > 32 ? '…' : ''}</div>
+          </div>
+        ))}
+        <div className="disc-rel-toggle" onClick={() => setShowRel(v => !v)}>
+          <span>{showRel ? '▾' : '▸'} 관계 기업 공시</span>
+          <span style={{color: '#64748b', fontSize: 9}}>{relCount}건</span>
+        </div>
+        {showRel && (
+          <div className="disc-rel-section">
+            {relDiscs.length === 0 && <div style={{padding: '8px 10px', color: '#475569', fontSize: 11}}>관계 기업 공시 없음</div>}
+            {relDiscs.map((d, i) => (
+              <div key={i} className={'disc-rel-row' + (!!d.high_impact ? ' hi' : '')} onClick={() => onSelect && onSelect(d)}>
+                <div style={{display: 'flex', alignItems: 'center', gap: 4, marginBottom: 2}}>
+                  <span className="disc-rel-name">{d.corp_name}</span>
+                  <span className="disc-type-badge" style={{fontSize: 8}}>{d._relType || ''}</span>
+                  <span className="disc-feed-date">{(d.disclosure_date || '').slice(5).replace('-', '/')}</span>
+                </div>
+                <div className="disc-feed-title">{(d.title || '').slice(0, 28)}{(d.title || '').length > 28 ? '…' : ''}</div>
+              </div>
+            ))}
+          </div>
+        )}
+        <div style={{marginTop: 'auto', padding: '10px', borderTop: '1px solid rgba(94,234,212,0.08)'}}>
+          <button className="disc-enter-btn" onClick={onEnterDisclosures}>ENTER DISCLOSURES ↗</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Disclosure detail helpers ────────────────────────────────────────────
+
+const DISC_SUM_META = {
+  'Cash':          { emoji: '💰', color: '#fbbf24' },
+  'Risk':          { emoji: '⚠️',  color: '#f87171' },
+  'Hidden Agenda': { emoji: '🕵️', color: '#a78bfa' },
+  'Verdict':       { emoji: '🎯', color: '#5eead4' },
+};
+
+function parseDisclosureSummary(summary) {
+  if (!summary) return null;
+  const lines = summary.split('\n');
+  const sections = [];
+  let key = null, buf = [];
+  for (const line of lines) {
+    const m = line.match(/^\[([^\]]+)\]/);
+    if (m && DISC_SUM_META[m[1]]) {
+      if (key) sections.push({ key, text: buf.join(' ').trim() });
+      key = m[1];
+      const rest = line.slice(m[0].length).trim();
+      buf = rest ? [rest] : [];
+    } else if (key && line.trim()) {
+      buf.push(line.trim());
+    }
+  }
+  if (key) sections.push({ key, text: buf.join(' ').trim() });
+  return sections.length > 0 ? sections : null;
+}
+
+function DisclosureSummaryView({ summary }) {
+  const sections = parseDisclosureSummary(summary);
+  if (!sections) return <div className="disc-ov-summary">{summary}</div>;
+  return (
+    <div style={{display: 'flex', flexDirection: 'column', gap: 10}}>
+      {sections.map((s, i) => {
+        const m = DISC_SUM_META[s.key];
+        return (
+          <div key={i} className="disc-sum-section">
+            <div className="disc-sum-label" style={{color: m.color}}>
+              {m.emoji} <b>{s.key}</b>
+            </div>
+            <div className="disc-sum-text">{s.text}</div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function QuarterlyTable({ disc }) {
+  const RD = window.__realData || {};
+  const ticker = disc && (disc.ticker || disc.stock_code);
+  const node = ticker ? (RD.nodeByCode && RD.nodeByCode[ticker]) : null;
+  const stmts = (node && node.statements && node.statements.length) ? node.statements : null;
+  if (!stmts) return null;
+  const sorted = [...stmts]
+    .sort((a, b) => b.year !== a.year ? b.year - a.year : (b.quarter || 0) - (a.quarter || 0))
+    .slice(0, 7);
+  const fmtT = v => v != null ? (v / 1e12).toFixed(1) : '-';
+  const fmtOi = v => v != null ? (v / 1e12).toFixed(2) : '-';
+  return (
+    <div style={{marginTop: 8, paddingTop: 14, borderTop: '1px solid rgba(94,234,212,0.1)'}}>
+      <div style={{fontSize: 13, fontWeight: 700, color: '#f1f5f9', marginBottom: 8}}>
+        📊 분기 재무 추이 (최근 {sorted.length}분기)
+      </div>
+      <table style={{width: '100%', borderCollapse: 'collapse', fontSize: 12}}>
+        <thead>
+          <tr style={{borderBottom: '1px solid rgba(94,234,212,0.2)'}}>
+            {['시점', '매출(조)', '영업이익(조)', 'ROE%'].map(h => (
+              <td key={h} style={{padding: '5px 0', color: '#64748b', fontWeight: 600}}>{h}</td>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {sorted.map((s, i) => {
+            const oiColor = s.operating_income != null ? (s.operating_income >= 0 ? '#4ade80' : '#f87171') : '#94a3b8';
+            return (
+              <tr key={i} style={{borderBottom: '1px solid rgba(94,234,212,0.06)'}}>
+                <td style={{padding: '5px 0', color: '#94a3b8'}}>{s.year}Q{s.quarter}</td>
+                <td style={{padding: '5px 0', color: '#e2e8f0'}}>{fmtT(s.revenue)}</td>
+                <td style={{padding: '5px 0', color: oiColor}}>{fmtOi(s.operating_income)}</td>
+                <td style={{padding: '5px 0', color: '#e2e8f0'}}>{s.roe != null ? s.roe.toFixed(1) : '-'}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function DisclosureDetailOverlay({ disc, onClose }) {
+  if (!disc) return null;
+  const RD = window.__realData || {};
+  const D = window.DiscloseAI || {};
+  const ticker = disc.ticker || disc.stock_code;
+  const node = ticker ? (RD.nodeByCode && RD.nodeByCode[ticker]) : null;
+  const dartDiscUrl = disc.disclosure_id
+    ? `https://dart.fss.or.kr/dsaf001/main.do?rcpNo=${disc.disclosure_id}`
+    : (disc.corp_name && disc.disclosure_date)
+    ? `https://dart.fss.or.kr/dsab007/search.ax?textCrpNm=${encodeURIComponent(disc.corp_name)}&startDay=${(disc.disclosure_date||'').replace(/-/g,'')}&endDay=${(disc.disclosure_date||'').replace(/-/g,'')}`
+    : null;
+  const corpName = (node && node.n) || disc.corp_name;
+  return (
+    <div style={{position: 'fixed', inset: 0, zIndex: 1000, background: 'rgba(2,4,12,0.88)', backdropFilter: 'blur(18px)', display: 'flex', flexDirection: 'column'}}
+      onClick={e => { if (e.target === e.currentTarget) onClose(); }}>
+      {/* Header */}
+      <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 20px', borderBottom: '1px solid rgba(251,191,36,0.2)', background: 'rgba(8,14,26,0.9)', flexShrink: 0}}>
+        <div style={{display: 'flex', alignItems: 'center', gap: 10}}>
+          <span style={{width: 8, height: 8, borderRadius: '50%', background: '#fbbf24', boxShadow: '0 0 8px #fbbf24', display: 'inline-block'}} />
+          <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 11, letterSpacing: '.12em', color: '#fbbf24'}}>{corpName} 공시</span>
+          <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 10, color: '#64748b'}}>· {ticker}</span>
+          {node && node.s && <span style={{fontSize: 10, color: '#475569'}}>· {node.s}</span>}
+        </div>
+        <button onClick={onClose} style={{background: 'transparent', border: '1px solid rgba(251,191,36,0.25)', color: '#94a3b8', fontFamily: 'var(--font-mono,monospace)', fontSize: 11, padding: '4px 14px', cursor: 'pointer', letterSpacing: '.08em', borderRadius: 2}}>✕ CLOSE</button>
+      </div>
+      {/* Body — 2-column: content left, AI chat right */}
+      <div style={{flex: '1 1 0%', display: 'flex', overflow: 'hidden'}}>
+        <div style={{flex: '1 1 0%', overflowY: 'auto', padding: '20px 28px', display: 'flex', flexDirection: 'column', gap: 12}}>
+          <div style={{display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap'}}>
+            <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 11, color: '#e2e8f0'}}>{disc.disclosure_date}</span>
+            <span className="disc-type-badge" style={{padding: '2px 7px'}}>{disc.disclosure_type || '기타'}</span>
+            {!!disc.high_impact && <span className="disc-hi-badge" style={{padding: '2px 7px'}}>⚡ HIGH IMPACT</span>}
+          </div>
+          <div className="disc-ov-title">{disc.title}</div>
+          {(disc.amount != null || disc.dilution_ratio != null) && (
+            <div className="disc-ov-amount">
+              {disc.amount != null && <span>금액: <b style={{color: '#f1f5f9'}}>{Number(disc.amount).toLocaleString()}억원</b></span>}
+              {disc.dilution_ratio != null && <span style={{marginLeft: 16}}>희석률: <b style={{color: '#f87171'}}>{(disc.dilution_ratio * 100).toFixed(1)}%</b></span>}
+            </div>
+          )}
+          {disc.summary
+            ? <DisclosureSummaryView summary={disc.summary} />
+            : <div style={{color: '#475569', fontSize: 12, fontStyle: 'italic'}}>AI 요약 없음 (수집 중)</div>
+          }
+          {dartDiscUrl && <div><a href={dartDiscUrl} target="_blank" rel="noopener" className="disc-dart-btn">📄 DART 원문 보기 ↗</a></div>}
+          <QuarterlyTable disc={disc} />
+        </div>
+        <OverlayAiChat companyName={corpName} context="disclosure" />
+      </div>
+      <div style={{textAlign: 'center', padding: '6px', fontFamily: 'var(--font-mono,monospace)', fontSize: 9, color: '#475569', borderTop: '1px solid rgba(251,191,36,0.1)', background: 'rgba(8,14,26,0.9)', flexShrink: 0}}>
+        ⚠ 과거 통계 기반 참고 정보 — 투자 조언 아님
+      </div>
+    </div>
+  );
+}
+
+function DisclosureFullOverlay({ ticker, onClose }) {
+  const [view, setView] = React.useState('list');
+  const [selectedDisc, setSelectedDisc] = React.useState(null);
+  const RD = window.__realData || {};
+  const D = window.DiscloseAI || {};
+  const discAll = RD.discAll || [];
+  const node = (RD.nodeByCode && RD.nodeByCode[ticker]) || null;
+  const items = React.useMemo(
+    () => discAll
+      .filter(d => (d.ticker || d.stock_code) === ticker)
+      .sort((a, b) => (b.disclosure_date || '').localeCompare(a.disclosure_date || '')),
+    [ticker]
+  );
+  const corpName = node ? node.n : (items[0] && items[0].corp_name) || ticker;
+  const sectorKo = node ? node.s : '';
+  const capLabel = (node && node.market_cap && D.trillionLabel) ? D.trillionLabel(node.market_cap) : '';
+  const dartUrl = selectedDisc
+    ? (selectedDisc.disclosure_id
+        ? `https://dart.fss.or.kr/dsaf001/main.do?rcpNo=${selectedDisc.disclosure_id}`
+        : (selectedDisc.corp_name && selectedDisc.disclosure_date)
+        ? `https://dart.fss.or.kr/dsab007/search.ax?textCrpNm=${encodeURIComponent(selectedDisc.corp_name)}&startDay=${(selectedDisc.disclosure_date||'').replace(/-/g,'')}&endDay=${(selectedDisc.disclosure_date||'').replace(/-/g,'')}`
+        : null)
+    : null;
+  return (
+    <div style={{position: 'fixed', inset: 0, zIndex: 999, background: 'rgba(2,4,12,0.88)', backdropFilter: 'blur(18px)', display: 'flex', flexDirection: 'column'}}>
+      <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 20px', borderBottom: '1px solid rgba(94,234,212,0.2)', background: 'rgba(8,14,26,0.9)', flexShrink: 0}}>
+        <div style={{display: 'flex', alignItems: 'center', gap: 12}}>
+          <span style={{width: 8, height: 8, borderRadius: '50%', background: '#5eead4', boxShadow: '0 0 8px #5eead4', display: 'inline-block'}} />
+          <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 11, letterSpacing: '.12em', color: '#5eead4'}}>DISCLOSURE DOSSIER</span>
+          <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 10, color: '#64748b', letterSpacing: '.06em'}}>· {ticker}</span>
+          {view === 'detail' && <button onClick={() => setView('list')} className="disc-back-link">← 목록</button>}
+        </div>
+        <button onClick={onClose} style={{background: 'transparent', border: '1px solid rgba(94,234,212,0.25)', color: '#94a3b8', fontFamily: 'var(--font-mono,monospace)', fontSize: 11, padding: '4px 14px', cursor: 'pointer', letterSpacing: '.08em', borderRadius: 2}}>✕ CLOSE</button>
+      </div>
+      <div style={{flex: '1 1 0%', display: 'flex', overflow: 'hidden'}}>
+      {/* Left: disclosure content */}
+      <div style={{flex: '1 1 0%', overflowY: 'auto', padding: '20px 28px', display: 'flex', flexDirection: 'column', gap: 10}}>
+        <div style={{display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 6, flexWrap: 'wrap'}}>
+          <span style={{color: '#f1f5f9', fontSize: 20, fontWeight: 700}}>{corpName}</span>
+          {sectorKo && <span style={{color: '#64748b', fontSize: 11}}>{sectorKo}</span>}
+          {capLabel && <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 11, color: '#5eead4'}}>{capLabel}</span>}
+          <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 10, color: '#475569', marginLeft: 'auto'}}>총 {items.length}건</span>
+        </div>
+        {view === 'list' ? (
+          <>
+            {items.length === 0 && <div style={{color: '#475569', fontSize: 12}}>공시 데이터 없음</div>}
+            {items.map((d, i) => (
+              <div key={i} className={'disc-full-list-row' + (!!d.high_impact ? ' hi' : '')} onClick={() => { setSelectedDisc(d); setView('detail'); }}>
+                <div style={{display: 'flex', alignItems: 'center', gap: 8, marginBottom: 3}}>
+                  <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 10, color: '#e2e8f0'}}>{d.disclosure_date}</span>
+                  <span className="disc-type-badge">{d.disclosure_type || '기타'}</span>
+                  {!!d.high_impact && <span className="disc-hi-badge">⚡ HI</span>}
+                </div>
+                <div style={{color: '#e2e8f0', fontSize: 13, lineHeight: 1.4, marginBottom: 6}}>{d.title}</div>
+                {d.summary && parseDisclosureSummary(d.summary) && (
+                  <DisclosureSummaryView summary={d.summary} />
+                )}
+              </div>
+            ))}
+          </>
+        ) : selectedDisc ? (
+          <>
+            <div style={{display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap'}}>
+              <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 11, color: '#e2e8f0'}}>{selectedDisc.disclosure_date}</span>
+              <span className="disc-type-badge" style={{padding: '2px 7px'}}>{selectedDisc.disclosure_type || '기타'}</span>
+              {!!selectedDisc.high_impact && <span className="disc-hi-badge" style={{padding: '2px 7px'}}>⚡ HIGH IMPACT</span>}
+            </div>
+            <div className="disc-ov-title">{selectedDisc.title}</div>
+            {(selectedDisc.amount != null || selectedDisc.dilution_ratio != null) && (
+              <div className="disc-ov-amount">
+                {selectedDisc.amount != null && <span>금액: <b style={{color: '#f1f5f9'}}>{Number(selectedDisc.amount).toLocaleString()}억원</b></span>}
+                {selectedDisc.dilution_ratio != null && <span style={{marginLeft: 16}}>희석률: <b style={{color: '#f87171'}}>{(selectedDisc.dilution_ratio * 100).toFixed(1)}%</b></span>}
+              </div>
+            )}
+            {selectedDisc.summary
+              ? <DisclosureSummaryView summary={selectedDisc.summary} />
+              : <div style={{color: '#475569', fontSize: 12, fontStyle: 'italic'}}>AI 요약 없음</div>
+            }
+            {dartUrl && <div><a href={dartUrl} target="_blank" rel="noopener" className="disc-dart-btn">📄 DART 원문 보기 ↗</a></div>}
+            <QuarterlyTable disc={selectedDisc} />
+          </>
+        ) : null}
+      </div>{/* end left content */}
+      <OverlayAiChat companyName={corpName} context="disclosure" />
+      </div>{/* end flex row */}
+      <div style={{textAlign: 'center', padding: '6px', fontFamily: 'var(--font-mono,monospace)', fontSize: 9, color: '#475569', borderTop: '1px solid rgba(94,234,212,0.1)', background: 'rgba(8,14,26,0.9)', flexShrink: 0}}>
+        ⚠ 과거 통계 기반 참고 정보 — 투자 조언 아님
+      </div>
+    </div>
+  );
+}
+
+// ─── Overlay AI chat sidebar ───────────────────────────────────────────────
+
+const OVERLAY_AI_MSGS = {
+  disclosure: (name) => [
+    { who: 'ai', text: `${name}의 최근 공시를 분석했습니다. 궁금한 점을 질문해 보세요.` },
+    { who: 'ai', text: 'Cash·Risk·Hidden Agenda·Verdict 항목의 의미, 고영향 공시 판단 기준 등을 설명해 드릴게요.' },
+    { who: 'ai', text: '관계 기업에 미치는 파급 영향도 함께 살펴볼 수 있습니다.' },
+  ],
+  finance: (name) => [
+    { who: 'ai', text: `${name}의 재무제표를 분석했습니다. 궁금한 점을 질문해 보세요.` },
+    { who: 'ai', text: 'EQS 5개 모듈(현금이익률·회수건전성·부채·본업·자본) 해석을 도와드립니다.' },
+    { who: 'ai', text: 'Beneish M-score, F-score, 이익의 질 지표에 대해 물어보세요.' },
+  ],
+};
+
+function OverlayAiChat({ companyName, context }) {
+  const name = companyName || '기업';
+  const msgs = (OVERLAY_AI_MSGS[context] || OVERLAY_AI_MSGS.finance)(name);
+  return (
+    <div style={{
+      width: 300, flexShrink: 0,
+      display: 'flex', flexDirection: 'column',
+      borderLeft: '1px solid rgba(94,234,212,0.12)',
+      background: 'rgba(4,7,18,0.72)',
+      backdropFilter: 'blur(12px)',
+    }}>
+      {/* Header */}
+      <div style={{padding: '12px 16px', flexShrink: 0, borderBottom: '1px solid rgba(94,234,212,0.1)', display: 'flex', alignItems: 'center', gap: 8}}>
+        <span style={{width: 7, height: 7, borderRadius: '50%', background: '#fbbf24', boxShadow: '0 0 6px #fbbf24', display: 'inline-block'}} />
+        <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 10, letterSpacing: '.12em', color: '#fbbf24'}}>AI FINANCIAL</span>
+        <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 8, color: '#475569', marginLeft: 4}}>Gemini · v2.4</span>
+      </div>
+      {/* Messages */}
+      <div style={{flex: '1 1 0%', overflowY: 'auto', padding: '14px 16px', display: 'flex', flexDirection: 'column', gap: 12}}>
+        {msgs.map((m, i) => (
+          <div key={i} style={{display: 'flex', gap: 10, alignItems: 'flex-start'}}>
+            <div style={{width: 26, height: 26, borderRadius: '50%', background: 'rgba(251,191,36,0.1)', border: '1px solid rgba(251,191,36,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontFamily: 'var(--font-mono,monospace)', fontSize: 8, color: '#fbbf24', letterSpacing: '.04em'}}>AI</div>
+            <div style={{background: 'rgba(255,255,255,0.04)', borderRadius: 4, padding: '8px 12px', fontSize: 11.5, color: '#94a3b8', lineHeight: 1.65, flex: 1}}>{m.text}</div>
+          </div>
+        ))}
+      </div>
+      {/* Input */}
+      <div style={{padding: '10px 12px', borderTop: '1px solid rgba(94,234,212,0.08)', flexShrink: 0, display: 'flex', gap: 6}}>
+        <input disabled readOnly placeholder="⚠ 1차 데모 — AI 응답 준비 중" style={{flex: 1, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(94,234,212,0.15)', borderRadius: 2, color: '#475569', fontFamily: 'var(--font-mono,monospace)', fontSize: 10, padding: '7px 10px', outline: 'none'}} />
+        <button disabled style={{background: 'rgba(94,234,212,0.08)', border: '1px solid rgba(94,234,212,0.2)', color: '#5eead4', padding: '7px 10px', borderRadius: 2, cursor: 'not-allowed', opacity: 0.45}}>↗</button>
+      </div>
+      <div style={{textAlign: 'center', padding: '4px 14px 6px', fontFamily: 'var(--font-mono,monospace)', fontSize: 8, color: '#334155'}}>
+        과거 통계 기반 참고 · 투자 조언 아님
+      </div>
+    </div>
+  );
+}
+
+// ─── TIME MACHINE tab components ───────────────────────────────────────────
+
+function ScenarioCard({ scenario, phase, choice, onChoose, onNext }) {
+  if (!scenario) {
+    return (
+      <div className="panel panel-tl">
+        <div className="panel-head">
+          <div className="panel-head-l">
+            <span className="panel-dot" style={{background: '#a78bfa', boxShadow: '0 0 8px #a78bfa'}} />
+            <span className="panel-title">TIME MACHINE</span>
+            <span className="panel-sub">과거 공시 시뮬레이터</span>
+          </div>
+        </div>
+        <div className="panel-body" style={{display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#475569', fontSize: 12}}>시나리오 없음</div>
+      </div>
+    );
+  }
+  const isPositive = scenario.change_pct > 0;
+  const answerDir = scenario.answer === '수혜' ? 'good' : scenario.answer === '악재' ? 'bad' : 'neutral';
+  const choiceCorrect = choice === answerDir;
+  return (
+    <div className="panel panel-tl" style={{'--accent': '#a78bfa'}}>
+      <div className="panel-head">
+        <div className="panel-head-l">
+          <span className="panel-dot" style={{background: '#a78bfa', boxShadow: '0 0 8px #a78bfa'}} />
+          <span className="panel-title">TIME MACHINE</span>
+          <span className="panel-sub">과거 공시 시뮬레이터</span>
+        </div>
+      </div>
+      <div className="panel-body" style={{padding: '10px 12px', display: 'flex', flexDirection: 'column', gap: 8, overflowY: 'auto'}}>
+        <div className="tm-corp-head">
+          <span style={{color: '#f1f5f9', fontWeight: 700, fontSize: 14}}>{scenario.company}</span>
+          <span className="disc-type-badge" style={{marginLeft: 8}}>{scenario.ticker}</span>
+          <span className="tm-date-chip">{scenario.date}</span>
+          <span className="tm-cat-badge">{scenario.category}</span>
+        </div>
+        <div className="tm-title">{scenario.title}</div>
+        <div className="tm-context">{scenario.context}</div>
+        {phase === 'question' ? (
+          <div className="tm-answers">
+            <button className="tm-btn tm-btn-bad" onClick={() => onChoose('bad')}>악재 ↓</button>
+            <button className="tm-btn tm-btn-neutral" onClick={() => onChoose('neutral')}>중립 →</button>
+            <button className="tm-btn tm-btn-good" onClick={() => onChoose('good')}>호재 ↑</button>
+          </div>
+        ) : (
+          <div style={{display: 'flex', flexDirection: 'column', gap: 8}}>
+            <span className="tm-verdict" style={{
+              background: choiceCorrect ? 'rgba(74,222,128,.12)' : 'rgba(248,113,113,.12)',
+              borderColor: choiceCorrect ? '#4ade80' : '#f87171',
+              color: choiceCorrect ? '#4ade80' : '#f87171',
+            }}>{choiceCorrect ? '✓ CORRECT' : '✗ INCORRECT'}</span>
+            <div className="tm-result-num" style={{color: isPositive ? '#4ade80' : '#f87171'}}>
+              {isPositive ? '+' : ''}{scenario.change_pct}%
+            </div>
+            <div className="tm-result-sub">{scenario.window} · KOSPI {scenario.kospi_change_pct >= 0 ? '+' : ''}{scenario.kospi_change_pct}%</div>
+            <div className="tm-explanation">{scenario.explanation}</div>
+            <div className="tm-reveal-actions">
+              {scenario.dart_url && <a href={scenario.dart_url} target="_blank" rel="noopener" className="tm-dart-btn">DART ↗</a>}
+              <button className="tm-next-btn" onClick={onNext}>NEXT →</button>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function ScoreBoardPanel({ score }) {
+  const pct = score.total > 0 ? Math.round(score.correct / score.total * 100) : 0;
+  return (
+    <div className="panel panel-tr">
+      <div className="panel-head">
+        <div className="panel-head-l">
+          <span className="panel-dot" />
+          <span className="panel-title">SCORE BOARD</span>
+          <span className="panel-sub">세션 점수</span>
+        </div>
+      </div>
+      <div className="panel-body" style={{padding: '12px 14px'}}>
+        <div style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 32, fontWeight: 700, color: '#5eead4', lineHeight: 1.1, marginBottom: 6}}>
+          {score.correct}<span style={{color: '#475569', fontSize: 18}}>/{score.total}</span>
+        </div>
+        <div style={{fontSize: 10, color: '#64748b', marginBottom: 8}}>정답률 {pct}%</div>
+        <div className="score-acc-bar-wrap"><div className="score-acc-bar" style={{width: pct + '%'}} /></div>
+        <div style={{marginTop: 12, display: 'flex', flexDirection: 'column', gap: 4}}>
+          {[...score.history].reverse().slice(0, 6).map((h, i) => (
+            <div key={i} className="score-hist-row">
+              <span style={{flex: 1, fontSize: 10, color: '#94a3b8', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{h.company}</span>
+              <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 10, color: h.change_pct >= 0 ? '#4ade80' : '#f87171'}}>{h.change_pct >= 0 ? '+' : ''}{h.change_pct}%</span>
+              <span style={{marginLeft: 6, fontSize: 12, color: h.correct ? '#4ade80' : '#f87171'}}>{h.correct ? '✓' : '✗'}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function TmCategoryFilterPanel({ scenarios, activeCategories, onToggle }) {
+  const cats = React.useMemo(() => {
+    const map = {};
+    scenarios.forEach(s => { map[s.category] = (map[s.category] || 0) + 1; });
+    return Object.entries(map).sort((a, b) => b[1] - a[1]);
+  }, [scenarios]);
+  return (
+    <div className="panel panel-bl">
+      <div className="panel-head">
+        <div className="panel-head-l">
+          <span className="panel-dot" style={{background: '#a78bfa', boxShadow: '0 0 8px #a78bfa'}} />
+          <span className="panel-title">SCENARIO TYPE</span>
+          <span className="panel-sub">유형 필터</span>
+        </div>
+        <span className="panel-count">{scenarios.length}건</span>
+      </div>
+      <div className="panel-body" style={{display: 'flex', flexWrap: 'wrap', gap: 6, padding: '8px 10px'}}>
+        {cats.map(([cat, cnt]) => (
+          <button key={cat} className={'tm-cat-chip' + (activeCategories.has(cat) ? ' is-active' : '')} onClick={() => onToggle(cat)}>
+            {cat} <span style={{opacity: .6}}>{cnt}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ScenarioIndexPanel({ scenarios, currentIndex, answeredSet, onJump }) {
+  return (
+    <div className="panel panel-br">
+      <div className="panel-head">
+        <div className="panel-head-l">
+          <span className="panel-dot" />
+          <span className="panel-title">SCENARIO LIST</span>
+          <span className="panel-sub">시나리오 목록</span>
+        </div>
+        <span className="panel-count">{scenarios.length}</span>
+      </div>
+      <div className="panel-body">
+        {scenarios.map((s, i) => (
+          <div key={s.id} className={'sc-idx-row' + (i === currentIndex ? ' is-active' : '')} onClick={() => onJump(i)}>
+            <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 9, color: '#475569', minWidth: 16}}>{i + 1}</span>
+            <span style={{flex: 1, fontSize: 11, color: i === currentIndex ? '#5eead4' : '#94a3b8', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{s.company}</span>
+            <span className="disc-type-badge" style={{fontSize: 8}}>{s.category}</span>
+            <span className={'sc-idx-dot' + (answeredSet.has(s.id) ? ' done' : '')} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function TimeMachineTab({ scenarios, activeTab, onTabChange }) {
+  const allCats = React.useMemo(() => new Set(scenarios.map(s => s.category)), [scenarios]);
+  const [activeCategories, setActiveCategories] = React.useState(allCats);
+  const [currentIndex, setCurrentIndex] = React.useState(0);
+  const [tmPhase, setTmPhase] = React.useState('question');
+  const [tmChoice, setTmChoice] = React.useState(null);
+  const [answeredSet, setAnsweredSet] = React.useState(new Set());
+  const [score, setScore] = React.useState({ correct: 0, total: 0, history: [] });
+  const filtered = React.useMemo(
+    () => scenarios.filter(s => activeCategories.has(s.category)),
+    [scenarios, activeCategories]
+  );
+  const current = filtered[currentIndex] || null;
+  function toggleCategory(cat) {
+    setActiveCategories(prev => {
+      const next = new Set(prev);
+      if (next.has(cat) && next.size > 1) next.delete(cat); else next.add(cat);
+      return next;
+    });
+    setCurrentIndex(0); setTmPhase('question'); setTmChoice(null);
+  }
+  function handleChoose(dir) {
+    if (!current) return;
+    const answerDir = current.answer === '수혜' ? 'good' : current.answer === '악재' ? 'bad' : 'neutral';
+    const correct = dir === answerDir;
+    setTmChoice(dir); setTmPhase('reveal');
+    setAnsweredSet(prev => new Set([...prev, current.id]));
+    setScore(prev => ({
+      correct: prev.correct + (correct ? 1 : 0),
+      total: prev.total + 1,
+      history: [...prev.history, { company: current.company, category: current.category, correct, change_pct: current.change_pct }],
+    }));
+  }
+  function handleNext() { setTmPhase('question'); setTmChoice(null); setCurrentIndex(i => (i + 1) % Math.max(1, filtered.length)); }
+  function handleJump(i) { setCurrentIndex(i); setTmPhase('question'); setTmChoice(null); }
+  return (
+    <div className="finance-tab">
+      <TopTabs active={activeTab} onChange={onTabChange} />
+      <ScenarioCard scenario={current} phase={tmPhase} choice={tmChoice} onChoose={handleChoose} onNext={handleNext} />
+      <ScoreBoardPanel score={score} />
+      <TmCategoryFilterPanel scenarios={scenarios} activeCategories={activeCategories} onToggle={toggleCategory} />
+      <ScenarioIndexPanel scenarios={filtered} currentIndex={currentIndex} answeredSet={answeredSet} onJump={handleJump} />
+    </div>
+  );
+}
+
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "galaxyStyle": "cinematic",
   "transitionStyle": "zoom",
@@ -1472,7 +2078,16 @@ function CompanyOverviewPanel({ company, sector, onBack, onEnter }) {
           <span className="panel-title">COMPANY DOSSIER</span>
           <span className="panel-sub">기업 개요</span>
         </div>
-        <button className="back-link" onClick={onBack}>← SECTOR</button>
+        <div style={{display:'flex', alignItems:'center', gap:6}}>
+          {(() => {
+            const reportUrl = (node && node.dart_url)
+              || `https://dart.fss.or.kr/dsab007/search.ax?textCrpNm=${encodeURIComponent(company.name)}&autoSearch=Y`;
+            return (
+              <a href={reportUrl} target="_blank" rel="noopener" style={{fontFamily:'var(--font-mono,monospace)', fontSize:9, letterSpacing:'.06em', color:'#5eead4', border:'1px solid rgba(94,234,212,0.3)', padding:'3px 7px', borderRadius:2, textDecoration:'none', whiteSpace:'nowrap'}}>📄 사업보고서</a>
+            );
+          })()}
+          <button className="back-link" onClick={onBack}>← SECTOR</button>
+        </div>
       </div>
       <div className="panel-body company-ov-body">
         <div className="company-ov-hero">
@@ -1868,6 +2483,8 @@ function App() {
   }, [enterSector]);
 
   const [corpOverlayTicker, setCorpOverlayTicker] = useState(null);
+  const [discDetailItem, setDiscDetailItem] = useState(null);
+  const [discFullOverlayTicker, setDiscFullOverlayTicker] = useState(null);
 
   const injectV2Theme = useCallback((iframe) => {
     try {
@@ -1989,6 +2606,11 @@ function App() {
     setCorpOverlayTicker(activeCompanyCode);
   }, [activeCompanyCode]);
 
+  const enterDisclosures = useCallback(() => {
+    if (!activeCompanyCode) return;
+    setDiscFullOverlayTicker(activeCompanyCode);
+  }, [activeCompanyCode]);
+
   const sector = activeSectorId ? SECTOR_PALETTE.find(s => s.id === activeSectorId) : null;
   const companies = activeSectorId ? (window.COMPANIES[activeSectorId] || window.COMPANIES.semi) : [];
   const company = activeCompanyCode ? companies.find(c => c.code === activeCompanyCode) : null;
@@ -2014,7 +2636,7 @@ function App() {
 
       {introPhase !== 'tab' && <IntroScreen stage={stage} onEnter={startIntroTransition} />}
 
-      {introPhase === 'tab' && activeTab === 'finance' && (
+      {introPhase === 'tab' && (activeTab === 'finance' || activeTab === 'disclose') && (
         <div className="finance-tab">
           {/* Galaxy phase — full solar system with all sectors */}
           {phase === 'galaxy' && (
@@ -2043,10 +2665,20 @@ function App() {
 
           <TopTabs active={activeTab} onChange={setActiveTab} breadcrumb={crumb} />
 
-          {/* Top-left panel — varies by phase */}
-          {phase === 'galaxy' && <MascotPanel messages={["섹터를 클릭하면, 기업을 확인할 수 있어요!", "오른쪽 아래 섹터 INDEX에서도 선택할 수 있어요.", "AI 코파일럿에게 무엇이든 물어보세요."]} />}
-          {phase === 'sector' && <SectorOverviewPanel sector={sector} companyCount={companies.length} onBack={backToGalaxy} />}
-          {phase === 'company' && <CompanyOverviewPanel company={company} sector={sector} onBack={backToSector} onEnter={enterCorporation} />}
+          {/* Top-left panel — varies by phase and active tab */}
+          {activeTab === 'finance' ? (
+            <>
+              {phase === 'galaxy' && <MascotPanel messages={["섹터를 클릭하면, 기업을 확인할 수 있어요!", "오른쪽 아래 섹터 INDEX에서도 선택할 수 있어요.", "AI 코파일럿에게 무엇이든 물어보세요."]} />}
+              {phase === 'sector' && <SectorOverviewPanel sector={sector} companyCount={companies.length} onBack={backToGalaxy} />}
+              {phase === 'company' && <CompanyOverviewPanel company={company} sector={sector} onBack={backToSector} onEnter={enterCorporation} />}
+            </>
+          ) : (
+            <>
+              {phase === 'galaxy' && <MascotPanel messages={["섹터를 클릭하면 기업 공시를 확인할 수 있어요!", "고영향 공시 발생 시 DAILY HIGHLIGHTS에 즉시 표시됩니다.", "AI 코파일럿에게 공시 내용에 대해 질문해 보세요."]} />}
+              {phase === 'sector' && <SectorDisclosurePanel sector={sector} onBack={backToGalaxy} onSelect={setDiscDetailItem} />}
+              {phase === 'company' && <CompanyDisclosurePanel company={company} sector={sector} onBack={backToSector} onSelect={setDiscDetailItem} onEnterDisclosures={enterDisclosures} />}
+            </>
+          )}
 
           {/* Top-right — AI co-pilot, content varies */}
           <AssistantPanel phase={phase} />
@@ -2082,18 +2714,12 @@ function App() {
         </div>
       )}
 
-      {introPhase === 'tab' && activeTab !== 'finance' && (
-        <div className="finance-tab">
-          <TopTabs active={activeTab} onChange={setActiveTab} />
-          <div className="placeholder-tab">
-            <div>
-              <div className="ph-eyebrow">— UNDER CONSTRUCTION —</div>
-              <div className="ph-title">{activeTab === 'disclose' ? 'DISCLOSURE NETWORK' : 'TIME MACHINE'}</div>
-              <div className="ph-sub">이 탭은 추후 구현 예정. 본 데모는 인트로 + 재무정보 탭에 집중.</div>
-              <button className="ph-back" onClick={() => setActiveTab('finance')}>← BACK TO FINANCIALS</button>
-            </div>
-          </div>
-        </div>
+      {introPhase === 'tab' && activeTab === 'timemach' && (
+        <TimeMachineTab
+          scenarios={(window.__realData && window.__realData.scenarios) || []}
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+        />
       )}
 
       {/* ENTER CORPORATION overlay — v2 design-consistent fullscreen popup */}
@@ -2121,13 +2747,19 @@ function App() {
               borderRadius:2,
             }}>✕ CLOSE</button>
           </div>
-          {/* iframe — firm HTML */}
-          <iframe
-            src={`../../../docs/prototype/firm_${corpOverlayTicker}.html`}
-            style={{flex:'1 1 0%', width:'100%', border:'none', background:'#020408'}}
-            title={`firm-${corpOverlayTicker}`}
-            onLoad={(e) => injectV2Theme(e.target)}
-          />
+          {/* iframe + AI chat sidebar */}
+          <div style={{flex:'1 1 0%', display:'flex', overflow:'hidden'}}>
+            <iframe
+              src={`../../../docs/prototype/firm_${corpOverlayTicker}.html`}
+              style={{flex:'1 1 0%', border:'none', background:'#020408'}}
+              title={`firm-${corpOverlayTicker}`}
+              onLoad={(e) => injectV2Theme(e.target)}
+            />
+            <OverlayAiChat
+              companyName={(window.__realData && window.__realData.nodeByCode && window.__realData.nodeByCode[corpOverlayTicker] && window.__realData.nodeByCode[corpOverlayTicker].n) || corpOverlayTicker}
+              context="finance"
+            />
+          </div>
           {/* Footer disclaimer */}
           <div style={{
             textAlign:'center', padding:'6px', fontFamily:'var(--font-mono,monospace)',
@@ -2137,6 +2769,14 @@ function App() {
             ⚠ 과거 통계 기반 참고 정보 — 투자 조언 아님
           </div>
         </div>
+      )}
+
+      {discDetailItem && (
+        <DisclosureDetailOverlay disc={discDetailItem} onClose={() => setDiscDetailItem(null)} />
+      )}
+
+      {discFullOverlayTicker && (
+        <DisclosureFullOverlay ticker={discFullOverlayTicker} onClose={() => setDiscFullOverlayTicker(null)} />
       )}
 
       <TweaksPanel>
