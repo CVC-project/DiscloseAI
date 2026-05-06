@@ -962,10 +962,15 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
       const cx = w / 2, cy = h / 2;
       const baseR = Math.min(w, h) * (activeCompanyCode ? 0.27 : 0.34);
 
-      // Active company screen position
+      // Active company screen position + node radius (for arrowhead offset)
       const ai = layout.findIndex(c => c.code === activeCompanyCode);
       const ax = ai >= 0 ? cx + animPos[ai].x * baseR : cx;
       const ay = ai >= 0 ? cy + animPos[ai].y * baseR : cy;
+      const activeNodeR = ai >= 0
+        ? Math.min(40, 6 + Math.sqrt(layout[ai].cap || 10) * 1.5)
+        : 20;
+      // Incoming arrowhead sits just outside the pulse ring (nodeR * 2.8)
+      const activeHaloR = activeNodeR * 2.8;
 
       // Equity types = solid line + arrowhead; group/non-equity = dashed, no arrow
       const EQUITY_TYPES = new Set(['subsidiary', 'associate', 'significant']);
@@ -978,33 +983,59 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
           const style = REL_STYLES[r.relType] || REL_STYLES.manual;
           const isEquity = EQUITY_TYPES.has(r.relType);
 
-          // Line style: equity → solid (dash=[]), group → dashed
-          ctx.strokeStyle = style.color + 'cc';
-          ctx.lineWidth = isEquity ? 2 : 1.5;
-          ctx.setLineDash(style.dash); // already [] for equity, [6,4] for group etc.
-          ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(rx, ry); ctx.stroke();
-          ctx.setLineDash([]);
-
-          // Arrowhead ONLY for equity (지분율) relations
-          if (isEquity) {
-            const arrowSz = 8;
-            if (!r.isIncoming) {
-              // A→B: head at related company
-              drawArrowHead(ax, ay, rx, ry, style.color + 'ee', arrowSz);
-            } else {
-              // A←B: head at active company
-              drawArrowHead(rx, ry, ax, ay, style.color + 'ee', arrowSz);
-            }
-          }
-
-          // If company has BOTH equity AND group (e.g., associate + ftc_group):
-          // overlay a thin dashed line on top to show dual relationship
           if (r.hasGroup && r.hasEquity) {
-            ctx.strokeStyle = REL_STYLES.group.color + '44';
-            ctx.lineWidth = 1;
+            // ── Double parallel lines: equity (solid) + group (dashed), offset 4px ──
+            const dx = rx - ax, dy = ry - ay;
+            const len = Math.sqrt(dx*dx + dy*dy) || 1;
+            const px = -dy/len * 4, py = dx/len * 4; // perpendicular offset
+
+            // Solid equity line (offset +4px perp)
+            ctx.strokeStyle = style.color + 'cc';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([]);
+            ctx.beginPath(); ctx.moveTo(ax+px, ay+py); ctx.lineTo(rx+px, ry+py); ctx.stroke();
+
+            // Dashed group line (offset -4px perp)
+            ctx.strokeStyle = REL_STYLES.group.color + 'aa';
+            ctx.lineWidth = 1.2;
             ctx.setLineDash(REL_STYLES.group.dash);
+            ctx.beginPath(); ctx.moveTo(ax-px, ay-py); ctx.lineTo(rx-px, ry-py); ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Equity arrowhead on the solid offset line
+            const arrowSz = 14;
+            if (!r.isIncoming) {
+              drawArrowHead(ax+px, ay+py, rx+px, ry+py, style.color + 'ee', arrowSz);
+            } else {
+              // Incoming: offset arrowhead to activeHaloR from active center
+              const dxn = dx/len, dyn = dy/len;
+              const hx = ax + dxn * activeHaloR, hy = ay + dyn * activeHaloR;
+              drawArrowHead(rx+px, ry+py, hx+px, hy+py, style.color + 'ee', arrowSz);
+            }
+
+          } else {
+            // ── Single line ──
+            ctx.strokeStyle = style.color + 'cc';
+            ctx.lineWidth = isEquity ? 2 : 1.5;
+            ctx.setLineDash(style.dash);
             ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(rx, ry); ctx.stroke();
             ctx.setLineDash([]);
+
+            if (isEquity) {
+              const arrowSz = 14; // Fix 1: larger arrow
+              if (!r.isIncoming) {
+                // Outgoing A→B: arrowhead at related company
+                drawArrowHead(ax, ay, rx, ry, style.color + 'ee', arrowSz);
+              } else {
+                // Incoming A←B: arrowhead outside active node halo (Fix 2)
+                const dx = rx - ax, dy = ry - ay;
+                const len = Math.sqrt(dx*dx + dy*dy) || 1;
+                const dxn = dx/len, dyn = dy/len;
+                // Place arrowhead at activeHaloR from active center toward related
+                const hx = ax + dxn * activeHaloR, hy = ay + dyn * activeHaloR;
+                drawArrowHead(rx, ry, hx, hy, style.color + 'ee', arrowSz);
+              }
+            }
           }
         });
       }
@@ -1031,11 +1062,9 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
           // Label: rel type + arrow direction indicator
           ctx.fillStyle = '#64748b';
           ctx.font = '8px sans-serif';
-          // Direction arrow only for equity types; group just shows label
-          const isEq = EQUITY_TYPES.has(r.relType);
-          const dirStr = isEq ? (r.isIncoming ? '← ' : '→ ') : '';
+          // Label: type only, no direction symbols (arrows on lines are self-explanatory)
           const typeStr = style.label + (r.hasGroup && r.hasEquity ? '+계열' : '');
-          ctx.fillText(dirStr + typeStr, rx, ry + 19);
+          ctx.fillText(typeStr, rx, ry + 19);
           ctx.textAlign = 'left';
           relScreenPos.push({ x: rx, y: ry, r: 18, code: r.code, sectorId: r.sectorId });
         });
