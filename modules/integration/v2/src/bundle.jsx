@@ -1803,6 +1803,122 @@ function App() {
   }, [enterSector]);
 
   const [corpOverlayTicker, setCorpOverlayTicker] = useState(null);
+
+  const injectV2Theme = useCallback((iframe) => {
+    try {
+      const doc = iframe.contentDocument || iframe.contentWindow.document;
+      if (!doc || !doc.head) return;
+      const s = doc.createElement('style');
+      s.id = 'v2-theme-override';
+      if (doc.getElementById('v2-theme-override')) return;
+      s.textContent = `
+        :root {
+          --bg: #020408 !important;
+          --panel: rgba(8,14,26,0.92) !important;
+          --panel-solid: #080e1a !important;
+          --border: rgba(94,234,212,0.18) !important;
+          --border-strong: rgba(94,234,212,0.38) !important;
+          --accent: #5eead4 !important;
+          --accent2: #a78bfa !important;
+          --nebula: #5eead4 !important;
+        }
+        body {
+          background: #020408 !important;
+          background-image: none !important;
+          background-attachment: initial !important;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic", sans-serif !important;
+        }
+        /* Hide animated space decorations */
+        canvas, .stars-canvas, .shooting-star,
+        [class*="nebula"], [class*="planet"], .planet,
+        .milky-way, .starfield { display: none !important; }
+
+        /* Panels */
+        .panel, [class*="panel"], .card, [class*="card"] {
+          background: rgba(8,14,26,0.9) !important;
+          border: 1px solid rgba(94,234,212,0.18) !important;
+          border-radius: 2px !important;
+          box-shadow: rgba(255,255,255,0.04) 0px 1px 0px inset, rgba(0,0,0,0.6) 0px 16px 60px !important;
+          backdrop-filter: blur(24px) saturate(140%) !important;
+          background-image: none !important;
+        }
+
+        /* Score gradient → v2 cyan */
+        .score-big, [class*="score-big"] {
+          background: linear-gradient(135deg, #5eead4 0%, #a78bfa 60%, #f472b6 100%) !important;
+          -webkit-background-clip: text !important; background-clip: text !important;
+          -webkit-text-fill-color: transparent !important;
+          font-family: 'Courier New', Courier, monospace !important;
+        }
+
+        /* Grade badges */
+        .grade-A, .grade-B, .grade-C, .grade-D, [class^="grade-"] {
+          border-radius: 2px !important;
+          font-family: 'Courier New', Courier, monospace !important;
+          font-size: 12px !important;
+          letter-spacing: 0.08em !important;
+        }
+        .grade-A { background: #0f4c35 !important; color: #4ade80 !important; border: 1px solid #4ade8066 !important; }
+        .grade-B { background: #1a3a1a !important; color: #86efac !important; border: 1px solid #86efac55 !important; }
+        .grade-C { background: #3a2a00 !important; color: #fbbf24 !important; border: 1px solid #fbbf2455 !important; }
+        .grade-D { background: #3a1010 !important; color: #f87171 !important; border: 1px solid #f8717155 !important; }
+
+        /* Section titles */
+        h1, h2, h3, .section-title, [class*="title"]:not([class*="panel"]) {
+          color: #e2e8f0 !important;
+          letter-spacing: 0.05em !important;
+        }
+        h1 { font-size: 1.6rem !important; }
+
+        /* Corp name & sub */
+        .corp-name, [class*="corp-name"] { color: #e2e8f0 !important; }
+        .corp-sub, .subtitle, [class*="subtitle"] { color: #5eead4 !important; font-family: 'Courier New', Courier, monospace !important; font-size: 11px !important; letter-spacing: 0.1em !important; }
+
+        /* Module score values → monospace */
+        .module-score, .module-val, [class*="module-score"], [class*="module-val"] {
+          font-family: 'Courier New', Courier, monospace !important;
+          font-size: 1.1rem !important;
+        }
+
+        /* Borders and separators */
+        hr, .divider, [class*="divider"] {
+          border-color: rgba(94,234,212,0.15) !important;
+        }
+
+        /* Analysis period pill */
+        .period, [class*="period"], .badge, [class*="badge"] {
+          background: rgba(94,234,212,0.08) !important;
+          border: 1px solid rgba(94,234,212,0.2) !important;
+          color: #5eead4 !important;
+          border-radius: 2px !important;
+          font-family: 'Courier New', Courier, monospace !important;
+          font-size: 10px !important;
+          letter-spacing: 0.08em !important;
+        }
+
+        /* Module row colors keep but muted bg */
+        .module-row, [class*="module-row"] {
+          border-bottom: 1px solid rgba(94,234,212,0.08) !important;
+          padding: 10px 0 !important;
+        }
+
+        /* Chart.js canvas (not the decorative ones) — keep visible */
+        canvas[id], canvas.chartjs-render-monitor { display: block !important; }
+
+        /* Tooltip/info icon */
+        .info-icon, [class*="info"], .tooltip { color: #5eead4 !important; }
+
+        /* Right column text */
+        .detail, .detail-text, [class*="detail"] { color: #94a3b8 !important; font-size: 11px !important; }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 4px; background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(94,234,212,0.2); border-radius: 2px; }
+      `;
+      doc.head.appendChild(s);
+    } catch(e) { console.warn('[v2 theme] inject failed:', e.message); }
+  }, []);
+
   const enterCorporation = useCallback(() => {
     if (!activeCompanyCode) return;
     setCorpOverlayTicker(activeCompanyCode);
@@ -1945,6 +2061,7 @@ function App() {
             src={`../../../docs/prototype/firm_${corpOverlayTicker}.html`}
             style={{flex:'1 1 0%', width:'100%', border:'none', background:'#020408'}}
             title={`firm-${corpOverlayTicker}`}
+            onLoad={(e) => injectV2Theme(e.target)}
           />
           {/* Footer disclaimer */}
           <div style={{
