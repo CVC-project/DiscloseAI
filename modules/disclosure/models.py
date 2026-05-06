@@ -1,5 +1,15 @@
 """Disclosure 모듈 로컬 테이블 정의"""
-from sqlalchemy import Column, String, Integer, Float, Date, Text
+
+from sqlalchemy import (
+    Column,
+    String,
+    Integer,
+    Float,
+    Date,
+    Text,
+    Boolean,
+    UniqueConstraint,
+)
 from sqlalchemy.orm import declarative_base
 
 Base = declarative_base()
@@ -17,3 +27,38 @@ class DisclosureLocal(Base):
     title = Column(String)
     amount = Column(Float)
     summary = Column(Text)
+    ai_analyzed = Column(Boolean, default=False, nullable=False, server_default="0")
+    stock_code = Column(String)  # 종목코드 (yfinance용) — corp_code와 별도
+    high_impact = Column(
+        Boolean, default=False, server_default="0"
+    )  # 유상증자·CB·BW·감사의견 이상
+    dilution_ratio = Column(Float)  # 발행금액 ÷ 시가총액 (희석률)
+    display_worthy = Column(
+        Boolean, default=False, index=True, server_default="0"
+    )  # 대시보드 기본 뷰 노출 여부 (Tier 1 or high_impact)
+
+
+class FinancialStatement(Base):
+    """기업별 분기 재무제표 히스토리 (최근 8분기 보관)"""
+
+    __tablename__ = "financial_statement"
+    __table_args__ = (
+        UniqueConstraint("corp_code", "year", "quarter", name="uq_corp_period"),
+    )
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    corp_code = Column(String, nullable=False, index=True)
+    corp_name = Column(String)
+    year = Column(Integer, nullable=False)
+    quarter = Column(Integer, nullable=False)  # 1·2·3·4
+    revenue = Column(Float)  # 매출액
+    operating_income = Column(Float)  # 영업이익
+    net_income = Column(Float)  # 당기순이익
+    total_assets = Column(Float)  # 총자산
+    total_debt = Column(Float)  # 총부채
+    equity = Column(Float)  # 자본총계
+    operating_cashflow = Column(Float)  # 영업활동현금흐름
+    fetched_at = Column(Date)  # 수집일
+    roe = Column(Float)  # ROE = 순이익/자본 × 100
+    debt_ratio = Column(Float)  # 부채비율 = 총부채/자본 × 100
+    operating_margin = Column(Float)  # 영업이익률 = 영업이익/매출 × 100

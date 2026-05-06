@@ -3,11 +3,38 @@
 .env.*
 !.env.example
 
+# LLM 채팅 — 사용자별 API 키 (절대 커밋 금지)
+modules/integration/chat_config.local.js
+!modules/integration/chat_config.local.js.example
+
 # Claude Code 개인 설정
 .claude/settings.local.json
 
-# 로컬 DB (개별 모듈 개발용)
-modules/*/data/*.db
+# 디버그 산출물 (비교 리포트, 임시 JSON)
+COMPARISON_REPORT.txt
+comparison_*.txt
+html_data.json
+py_data.json
+modules/price/verify_quiz_prices.py
+
+# 로컬 DB / 산출물 — 팀 공유를 위해 커밋 허용 (2026-04-21 변경)
+#   기존: modules/*/data/*.db·*.json 전부 제외
+#   변경: 각 모듈의 수집·계산 결과 DB와 export JSON은 git에 커밋하여
+#         리더·다른 팀원이 통합 대시보드·분석에 활용 가능하게 함.
+#   제외 대상: 원시 응답 XML, API RAW 캐시, *.tmp (용량·무의미)
+modules/*/data/*.xml
+modules/*/data/*.tmp
+modules/*/data/raw_cache/
+
+# pull 전 로컬 DB 백업 (로컬 전용, 커밋 금지)
+modules/*/data_backup_*/
+docs/prototype/*_backup_*.json
+
+# batch 수집 중간 pickle (임시 캐시)
+docs/prototype/_*.pkl
+
+# UI 검증 스크린샷 (로컬 전용, ui-ux-reviewer agent 생성물)
+modules/*/viewer/screenshots/
 
 # Python
 __pycache__/

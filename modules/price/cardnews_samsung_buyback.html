@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>삼성전자가 14조 원을 '불태운' 진짜 이유</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: #0f1117;
+    color: #e2e8f0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 16px;
+  }
+
+  .container { width: 100%; max-width: 480px; }
+
+  /* ── 슬라이드 뷰포트 ── */
+  .slider-wrap {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 20px;
+  }
+
+  .slider-track {
+    display: flex;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+
+  /* ── 공통 카드 ── */
+  .slide {
+    min-width: 100%;
+    aspect-ratio: 4 / 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 36px 32px 28px;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ── Card 1: 메인 표지 ── */
+  .slide-1 {
+    background: linear-gradient(145deg, #0d1b35 0%, #0f1117 60%, #1a0a2e 100%);
+    border: 1px solid #2d3448;
+  }
+  .slide-1 .deco-circle {
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(59,130,246,0.15) 0%, transparent 70%);
+    top: -80px;
+    right: -80px;
+    pointer-events: none;
+  }
+  .slide-1 .fire-icon {
+    font-size: 3.5rem;
+    margin-bottom: 16px;
+  }
+  .slide-1 h1 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    line-height: 1.35;
+    letter-spacing: -0.5px;
+    color: #f1f5f9;
+    margin-bottom: 14px;
+  }
+  .slide-1 h1 span { color: #60a5fa; }
+  .slide-1 .subtitle {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+  .slide-1 .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .slide-1 .tag {
+    font-size: 0.72rem;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(59,130,246,0.15);
+    color: #60a5fa;
+    border: 1px solid rgba(59,130,246,0.3);
+  }
+  .slide-1 .card-num {
+    position: absolute;
+    top: 28px;
+    right: 28px;
+    font-size: 0.72rem;
+    color: #475569;
+    font-weight: 600;
+  }
+
+  /* ── Card 2: 팩트 체크 ── */
+  .slide-2 {
+    background: linear-gradient(160deg, #0f1c2e 0%, #0f1117 100%);
+    border: 1px solid #2d3448;
+  }
+  .slide-2 .slide-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  .slide-2 .badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: #1e3a5f;
+    color: #60a5fa;
+    letter-spacing: 0.5px;
+  }
+  .slide-2 h2 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #f1f5f9;
+    margin-bottom: 20px;
+    line-height: 1.4;
+  }
+  .fact-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .fact-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #161b27;
+    border-radius: 10px;
+    padding: 12px 16px;
+    border: 1px solid #2d3448;
+  }
+  .fact-row .lbl {
+    font-size: 0.78rem;
+    color: #64748b;
+  }
+  .fact-row .val {
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+  .val-blue  { color: #60a5fa; }
+  .val-fire  { color: #f97316; }
+  .val-green { color: #4ade80; }
+  .highlight-box {
+    background: rgba(59,130,246,0.08);
+    border: 1px solid rgba(59,130,246,0.25);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 0.85rem;
+    color: #93c5fd;
+    line-height: 1.6;
+  }
+  .highlight-box strong { color: #bfdbfe; }
+
+  /* ── Card 3: 시장 반응 ── */
+  .slide-3 {
+    background: linear-gradient(160deg, #1a1500 0%, #0f1117 100%);
+    border: 1px solid #2d3448;
+  }
+  .slide-3 h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #f1f5f9;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .slide-3 .lead {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    line-height: 1.65;
+    margin-bottom: 22px;
+  }
+  .expect-vs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .expect-row {
+    border-radius: 10px;
+    padding: 14px 16px;
+    line-height: 1.55;
+  }
+  .expect-row .label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    margin-bottom: 4px;
+  }
+  .expect-row .content {
+    font-size: 0.88rem;
+  }
+  .expect-market {
+    background: #1e2330;
+    border: 1px solid #374151;
+  }
+  .expect-market .label { color: #9ca3af; }
+  .expect-market .content { color: #d1d5db; }
+  .expect-samsung {
+    background: rgba(34,197,94,0.08);
+    border: 1px solid rgba(34,197,94,0.3);
+  }
+  .expect-samsung .label { color: #86efac; }
+  .expect-samsung .content { color: #bbf7d0; font-weight: 600; }
+  .punchline {
+    background: rgba(251,191,36,0.08);
+    border: 1px solid rgba(251,191,36,0.25);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 0.85rem;
+    color: #fde68a;
+    line-height: 1.6;
+  }
+
+  /* ── Card 4: 5조 vs 14조 ── */
+  .slide-4 {
+    background: linear-gradient(160deg, #0d1b2e 0%, #0f1117 100%);
+    border: 1px solid #2d3448;
+  }
+  .slide-4 h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #f1f5f9;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .slide-4 .lead {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    line-height: 1.65;
+    margin-bottom: 20px;
+  }
+  .value-compare {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .val-box {
+    flex: 1;
+    border-radius: 12px;
+    padding: 16px 14px;
+    text-align: center;
+  }
+  .val-box .amount {
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+  .val-box .desc {
+    font-size: 0.72rem;
+    line-height: 1.4;
+  }
+  .val-box-past {
+    background: #1e2330;
+    border: 1px solid #374151;
+  }
+  .val-box-past .amount { color: #94a3b8; }
+  .val-box-past .desc   { color: #64748b; }
+  .val-box-now {
+    background: rgba(249,115,22,0.1);
+    border: 1px solid rgba(249,115,22,0.35);
+  }
+  .val-box-now .amount { color: #fb923c; }
+  .val-box-now .desc   { color: #fed7aa; }
+  .choice-compare {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .choice-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 9px;
+    padding: 11px 14px;
+    font-size: 0.84rem;
+  }
+  .choice-item.rejected {
+    background: #1e2330;
+    border: 1px solid #374151;
+    color: #6b7280;
+    text-decoration-line: line-through;
+    text-decoration-color: #4b5563;
+  }
+  .choice-item.chosen {
+    background: rgba(34,197,94,0.1);
+    border: 1px solid rgba(34,197,94,0.3);
+    color: #86efac;
+    font-weight: 600;
+  }
+  .choice-item .icon { font-size: 1rem; flex-shrink: 0; }
+  .slide-4 .punchline {
+    background: rgba(167,139,250,0.08);
+    border: 1px solid rgba(167,139,250,0.25);
+    border-radius: 10px;
+    padding: 13px 16px;
+    font-size: 0.84rem;
+    color: #c4b5fd;
+    line-height: 1.6;
+  }
+
+  /* ── Card 5: 투자자 영향 ── */
+  .slide-5 {
+    background: linear-gradient(160deg, #0a1f12 0%, #0f1117 100%);
+    border: 1px solid #2d3448;
+  }
+  .slide-5 h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #f1f5f9;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .pizza-box {
+    background: #161b27;
+    border: 1px solid #2d3448;
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 0.84rem;
+    color: #cbd5e1;
+    line-height: 1.65;
+    margin-bottom: 18px;
+  }
+  .pizza-box .emoji { font-size: 1.4rem; display: block; margin-bottom: 8px; }
+  .effect-list {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    margin-bottom: 16px;
+  }
+  .effect-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: rgba(74,222,128,0.07);
+    border: 1px solid rgba(74,222,128,0.2);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .effect-item .icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+  .effect-item .text { font-size: 0.84rem; line-height: 1.55; }
+  .effect-item .text strong { color: #86efac; display: block; margin-bottom: 2px; font-size: 0.8rem; }
+  .effect-item .text span  { color: #a7f3d0; }
+  .slide-5 .punchline {
+    background: rgba(52,211,153,0.08);
+    border: 1px solid rgba(52,211,153,0.25);
+    border-radius: 10px;
+    padding: 13px 16px;
+    font-size: 0.84rem;
+    color: #6ee7b7;
+    line-height: 1.6;
+  }
+
+  /* ── Card 6: 마무리 ── */
+  .slide-6 {
+    background: linear-gradient(145deg, #0a0f2e 0%, #0f1117 50%, #0d1f0a 100%);
+    border: 1px solid #2d3448;
+    justify-content: center;
+    text-align: center;
+    gap: 0;
+  }
+  .slide-6 .icon-big { font-size: 3rem; margin-bottom: 20px; }
+  .slide-6 h2 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #f1f5f9;
+    margin-bottom: 16px;
+    line-height: 1.4;
+    letter-spacing: -0.3px;
+  }
+  .slide-6 h2 span { color: #4ade80; }
+  .slide-6 .body {
+    font-size: 0.88rem;
+    color: #94a3b8;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+  .stat-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+  .stat-pill {
+    background: #1e2330;
+    border: 1px solid #2d3448;
+    border-radius: 12px;
+    padding: 10px 16px;
+    text-align: center;
+  }
+  .stat-pill .s-val {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #60a5fa;
+  }
+  .stat-pill .s-lbl {
+    font-size: 0.68rem;
+    color: #64748b;
+    margin-top: 2px;
+  }
+  .slide-6 .closing {
+    font-size: 0.88rem;
+    color: #4ade80;
+    font-weight: 600;
+  }
+  .slide-6 .dart-link {
+    margin-top: 16px;
+    font-size: 0.72rem;
+    color: #475569;
+  }
+  .slide-6 .dart-link a {
+    color: #60a5fa;
+    text-decoration: none;
+  }
+  .slide-6 .dart-link a:hover { text-decoration: underline; }
+
+  /* ── 카드 번호 공통 ── */
+  .card-num {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    font-size: 0.7rem;
+    color: #475569;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── 네비게이션 ── */
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .nav-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1.5px solid #2d3448;
+    background: #1e2330;
+    color: #94a3b8;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .nav-btn:hover:not(:disabled) {
+    border-color: #3b82f6;
+    color: #60a5fa;
+  }
+  .nav-btn:disabled { opacity: 0.3; cursor: default; }
+
+  .dots {
+    display: flex;
+    gap: 6px;
+  }
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #2d3448;
+    transition: background 0.2s, width 0.2s;
+    cursor: pointer;
+  }
+  .dot.active {
+    background: #3b82f6;
+    width: 18px;
+    border-radius: 3px;
+  }
+
+  .slide-label {
+    text-align: center;
+    font-size: 0.75rem;
+    color: #475569;
+    margin-top: 10px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="slider-wrap">
+    <div class="slider-track" id="track">
+
+      <!-- ── Card 1: 메인 표지 ── -->
+      <div class="slide slide-1">
+        <div class="deco-circle"></div>
+        <div class="card-num">01 / 06</div>
+        <div>
+          <div class="fire-icon">🔥</div>
+          <h1>삼성전자가 <span>14조 원</span>을<br>'불태운' 진짜 이유</h1>
+          <p class="subtitle">예고된 소각, 그러나 상상을 초월한 '화력'<br>시장이 열광한 숫자의 비밀을 파헤칩니다.</p>
+        </div>
+        <div class="tags">
+          <span class="tag">#삼성전자</span>
+          <span class="tag">#자사주소각</span>
+          <span class="tag">#14조원</span>
+          <span class="tag">#주주환원</span>
+          <span class="tag">#K주식의심장</span>
+        </div>
+      </div>
+
+      <!-- ── Card 2: 공시 팩트 체크 ── -->
+      <div class="slide slide-2">
+        <div class="card-num">02 / 06</div>
+        <div>
+          <div class="slide-header">
+            <span class="badge">공시 팩트 체크</span>
+          </div>
+          <h2>약 8,700만 주, 영원히 사라졌습니다</h2>
+          <div class="fact-grid">
+            <div class="fact-row">
+              <span class="lbl">소각 주식 수</span>
+              <span class="val val-blue">약 8,700만 주</span>
+            </div>
+            <div class="fact-row">
+              <span class="lbl">장부가 (매입 당시)</span>
+              <span class="val val-green">약 5.3조 원</span>
+            </div>
+            <div class="fact-row">
+              <span class="lbl">시가 (현재 기준)</span>
+              <span class="val val-fire">약 14.5조 원 🔥</span>
+            </div>
+            <div class="fact-row">
+              <span class="lbl">공시일</span>
+              <span class="val" style="color:#94a3b8;">2026. 03. 31</span>
+            </div>
+          </div>
+        </div>
+        <div class="highlight-box">
+          <strong>"단순한 서류 작업이 아닙니다."</strong><br>
+          14조 원어치의 주식이 시장에서 영원히 사라졌습니다. 이 주식들은 다시는 시장에 나오지 않습니다.
+        </div>
+      </div>
+
+      <!-- ── Card 3: 시장은 알고 있었다? ── -->
+      <div class="slide slide-3">
+        <div class="card-num">03 / 06</div>
+        <div>
+          <h2>"소각은 알았지만,<br>이 정도 체급일 줄이야"</h2>
+          <p class="lead">
+            시장은 이미 소각을 예상하고 있었습니다.<br>
+            모두의 궁금증은 단 하나였습니다.<br>
+            <strong style="color:#fbbf24;">"과연 얼마나 태울 것인가?"</strong>
+          </p>
+          <div class="expect-vs">
+            <div class="expect-row expect-market">
+              <div class="label">📊 시장의 기대</div>
+              <div class="content">"적당히 생색내기 수준이겠지?<br>5~8조 원이면 선방이다."</div>
+            </div>
+            <div class="expect-row expect-samsung">
+              <div class="label">⚡ 삼성의 대답</div>
+              <div class="content">"장부 가액만 5조, 시가로는 14조!<br>전량 소각한다."</div>
+            </div>
+          </div>
+        </div>
+        <div class="punchline">
+          💡 예상을 뛰어넘은 압도적 규모, 시장의 의구심을 단칼에 잘라냈습니다.
+        </div>
+      </div>
+
+      <!-- ── Card 4: 5조 vs 14조 ── -->
+      <div class="slide slide-4">
+        <div class="card-num">04 / 06</div>
+        <div>
+          <h2>"시간이 만든<br>9조 원의 프리미엄"</h2>
+          <p class="lead">
+            공시에 찍힌 5.3조 원은 삼성전자가<br>예전에 주식을 살 때 쓴 '과거의 돈'입니다.<br>
+            하지만 지금 그 주식의 가치는 14.5조 원.
+          </p>
+          <div class="value-compare">
+            <div class="val-box val-box-past">
+              <div class="amount">5.3조</div>
+              <div class="desc">장부가<br>(매입 당시)</div>
+            </div>
+            <div class="val-box val-box-now">
+              <div class="amount">14.5조 🔥</div>
+              <div class="desc">시가<br>(현재 기준)</div>
+            </div>
+          </div>
+          <div class="choice-compare">
+            <div class="choice-item rejected">
+              <span class="icon">💰</span> 팔아서 현금 챙기기
+            </div>
+            <div class="choice-item chosen">
+              <span class="icon">✅</span> 주주를 위해 14조 원의 가치를 포기하고 소각
+            </div>
+          </div>
+        </div>
+        <div class="punchline">
+          🏆 이것이 진짜 '주주 중심 경영'의 신호입니다.
+        </div>
+      </div>
+
+      <!-- ── Card 5: 투자자 영향 ── -->
+      <div class="slide slide-5">
+        <div class="card-num">05 / 06</div>
+        <div>
+          <h2>"피자 조각은 커지고,<br>내 지분은 단단해진다"</h2>
+          <div class="pizza-box">
+            <span class="emoji">🍕</span>
+            피자 한 판을 <strong>10명</strong>이 나누다가, 갑자기 <strong>2명이 집에</strong> 갔습니다.<br>
+            남은 사람들은 더 <strong>큰 조각</strong>을 먹게 됩니다.
+          </div>
+          <div class="effect-list">
+            <div class="effect-item">
+              <span class="icon">📈</span>
+              <div class="text">
+                <strong>주당순이익(EPS) 상승</strong>
+                <span>주식 수가 줄어들어 주당 가치가 올라갑니다.</span>
+              </div>
+            </div>
+            <div class="effect-item">
+              <span class="icon">💎</span>
+              <div class="text">
+                <strong>배당금 증액 효과</strong>
+                <span>나눌 입이 줄어드니 내 몫은 늘어납니다.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="punchline">
+          ✨ 앉아만 있었는데 내 주식의 '희소성'이 수직 상승했습니다.
+        </div>
+      </div>
+
+      <!-- ── Card 6: 마무리 ── -->
+      <div class="slide slide-6">
+        <div class="card-num">06 / 06</div>
+        <div class="icon-big">🌏</div>
+        <h2>"K-디스카운트 격파의<br><span>신호탄</span>"</h2>
+        <p class="body">
+          단순한 주가 방어를 넘어선<br>삼성전자의 자신감입니다.<br><br>
+          14조 원을 태울 수 있는 재무적 체력,<br>그리고 주주와의 약속 이행.
+        </p>
+        <div class="stat-row">
+          <div class="stat-pill">
+            <div class="s-val">14.5조</div>
+            <div class="s-lbl">소각 시가</div>
+          </div>
+          <div class="stat-pill">
+            <div class="s-val">8,700만</div>
+            <div class="s-lbl">소각 주식 수</div>
+          </div>
+          <div class="stat-pill">
+            <div class="s-val">영구</div>
+            <div class="s-lbl">시장 소멸</div>
+          </div>
+        </div>
+        <p class="closing">이제 삼성은 '글로벌 스탠다드'로 갑니다. 🚀</p>
+        <p class="dart-link">
+          원문 공시 →
+          <a href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260331800004" target="_blank">
+            DART 20260331800004
+          </a>
+        </p>
+      </div>
+
+    </div><!-- /slider-track -->
+  </div><!-- /slider-wrap -->
+
+  <!-- 네비게이션 -->
+  <div class="nav">
+    <button class="nav-btn" id="btnPrev" disabled>&#8592;</button>
+    <div class="dots" id="dots"></div>
+    <button class="nav-btn" id="btnNext">&#8594;</button>
+  </div>
+  <div class="slide-label" id="slideLabel">1 / 6</div>
+
+</div><!-- /container -->
+
+<script>
+  const TOTAL = 6;
+  const track   = document.getElementById('track');
+  const btnPrev = document.getElementById('btnPrev');
+  const btnNext = document.getElementById('btnNext');
+  const dotsEl  = document.getElementById('dots');
+  const labelEl = document.getElementById('slideLabel');
+
+  let cur = 0;
+
+  // 점 생성
+  for (let i = 0; i < TOTAL; i++) {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => goTo(i));
+    dotsEl.appendChild(d);
+  }
+
+  function goTo(n) {
+    cur = n;
+    track.style.transform = `translateX(-${cur * 100}%)`;
+    document.querySelectorAll('.dot').forEach((d, i) => {
+      d.classList.toggle('active', i === cur);
+    });
+    btnPrev.disabled = cur === 0;
+    btnNext.disabled = cur === TOTAL - 1;
+    labelEl.textContent = `${cur + 1} / ${TOTAL}`;
+  }
+
+  btnPrev.addEventListener('click', () => cur > 0 && goTo(cur - 1));
+  btnNext.addEventListener('click', () => cur < TOTAL - 1 && goTo(cur + 1));
+
+  // 스와이프 지원
+  let startX = 0;
+  track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 50) dx < 0 ? goTo(Math.min(cur + 1, TOTAL - 1)) : goTo(Math.max(cur - 1, 0));
+  });
+
+  // 키보드
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') goTo(Math.min(cur + 1, TOTAL - 1));
+    if (e.key === 'ArrowLeft')  goTo(Math.max(cur - 1, 0));
+  });
+</script>
+</body>
+</html>
