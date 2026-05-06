@@ -233,15 +233,22 @@ function SolarStage({ stage, planets, activeId, accentColor, onPick }) {
   propsRef.current = { planets, activeId, accentColor, stage, onPick };
 
   // orbitData도 ref. planets 식별자 시그니처 변경 시에만 재계산.
+  // 기본 정책: 모든 행성이 거의 균일한 큰 단일 ring 위에 골고루 분포.
+  // (시총·관계 비례 분배는 후속 phase에서 도입)
   const orbitRef = useRef([]);
   const orbitSig = planets.map((p, i) => p.id || ("p" + i)).join("|");
   useEffect(() => {
+    const N = planets.length || 1;
     orbitRef.current = planets.map((p, i) => {
       const id = p.id || ("p" + i);
       const seed = id.split("").reduce((a, c) => a + c.charCodeAt(0), 0);
-      const radiusRatio = 0.55 + ((seed * 17) % 100) / 100; // 0.55~1.55
-      const phase = ((seed * 31) % 1000) / 1000 * Math.PI * 2;
-      const speedRatio = 1 / Math.sqrt(radiusRatio);
+      // 매우 좁은 변동 (0.93~1.07) — 거의 한 ring에 정렬되되 자연스러운 미세 차이
+      const radiusRatio = 0.93 + ((seed * 17) % 14) / 100;
+      // 시작 위상은 균등 분포(360/N) + 매우 작은 jitter (균일성 우선)
+      const jitter = (((seed * 7) % 100) / 100 - 0.5) * 0.08; // ±0.04 rad (~2.3도)
+      const phase = (i / N) * Math.PI * 2 + jitter;
+      // 모두 같은 속도 (균일)
+      const speedRatio = 1;
       return { radiusRatio, phase, speedRatio };
     });
   }, [orbitSig]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -263,7 +270,7 @@ function SolarStage({ stage, planets, activeId, accentColor, onPick }) {
     // 틸팅 (Y축 squash + 살짝 회전) — 원본 디자인의 "평평한 + 비스듬한" 타원
     const TILT = 0.16;
     const Y_SQUASH = 0.48;
-    const ORBIT_SPEED = 0.20; // rad/sec — 1바퀴 약 31초
+    const ORBIT_SPEED = 0.06; // rad/sec — 1바퀴 약 105초 (느린 우주적 공전)
 
     let t = 0;
     let lastTs = performance.now();
@@ -307,9 +314,10 @@ function SolarStage({ stage, planets, activeId, accentColor, onPick }) {
         const isActive = p.id === activeId;
         const r = baseR * orbitData[i].radiusRatio;
         if (!isActive) {
-          ctx.strokeStyle = "rgba(148,163,184,0.10)";
+          // 더 밝은 점선 (이전 0.10 → 0.22) + 살짝 cyan tint
+          ctx.strokeStyle = "rgba(148,210,220,0.22)";
           ctx.lineWidth = 1;
-          ctx.setLineDash([2, 5]);
+          ctx.setLineDash([3, 5]);
           ctx.beginPath();
           ctx.ellipse(0, 0, r, r * Y_SQUASH, 0, 0, Math.PI * 2);
           ctx.stroke();
@@ -318,7 +326,7 @@ function SolarStage({ stage, planets, activeId, accentColor, onPick }) {
       ctx.setLineDash([]);
       ctx.restore();
 
-      // ----- 2단계: 활성 궤도 — 위로 올려 빛나게 -----
+      // ----- 2단계: 활성 궤도 — 위로 올려 강하게 빛나게 -----
       const activeIdx = planets.findIndex((p) => p.id === activeId);
       if (activeIdx >= 0) {
         const ap = planets[activeIdx];
@@ -326,15 +334,21 @@ function SolarStage({ stage, planets, activeId, accentColor, onPick }) {
         ctx.save();
         ctx.translate(cx, cy);
         ctx.rotate(TILT);
-        // glow ellipse: 두 번 그려서 부드러운 외곽
+        // 외곽 글로우 (큰 blur)
         ctx.shadowColor = ap.color;
-        ctx.shadowBlur = 18 * dpr;
-        ctx.strokeStyle = hexA(ap.color, 0.55);
-        ctx.lineWidth = 1.4 * dpr;
+        ctx.shadowBlur = 24 * dpr;
+        ctx.strokeStyle = hexA(ap.color, 0.85);
+        ctx.lineWidth = 1.8 * dpr;
         ctx.beginPath();
         ctx.ellipse(0, 0, r, r * Y_SQUASH, 0, 0, Math.PI * 2);
         ctx.stroke();
+        // 두 번째 stroke로 더 또렷하게
         ctx.shadowBlur = 0;
+        ctx.strokeStyle = hexA(ap.color, 0.95);
+        ctx.lineWidth = 1.0 * dpr;
+        ctx.beginPath();
+        ctx.ellipse(0, 0, r, r * Y_SQUASH, 0, 0, Math.PI * 2);
+        ctx.stroke();
         ctx.restore();
       }
 
@@ -1065,6 +1079,73 @@ function relColor(typeOrCode) {
 }
 
 // ====================================================================== //
+// SelectedSectorCard — galaxy 단계에서 sector preview 시 화면 하단 가운데 카드
+// (원본 standalone 디자인 — 활성 후 ENTER SECTOR 누르면 진짜 진입)
+// ====================================================================== //
+function SelectedSectorCard({ sector, onEnter, onClose }) {
+  if (!sector) return null;
+  return (
+    <div
+      className="selected-card"
+      style={{ borderColor: sector.color, "--accent": sector.color }}
+    >
+      <div className="selected-row">
+        <span className="selected-orb" style={{ background: sector.color }} />
+        <div>
+          <div className="selected-en" style={{ color: sector.color }}>{sector.en}</div>
+          <div className="selected-ko">{sector.ko} · 시가총액 {sector.cap}</div>
+        </div>
+        <div className="selected-stats">
+          <div>
+            <div className="ss-k">5Y CAGR</div>
+            <div className="ss-v" style={{ color: "#4ade80" }}>+8.2%</div>
+          </div>
+          <div>
+            <div className="ss-k">P/E</div>
+            <div className="ss-v">14.3</div>
+          </div>
+          <div>
+            <div className="ss-k">YTD</div>
+            <div
+              className="ss-v"
+              style={{ color: sector.ytdMock >= 0 ? "#4ade80" : "#f87171" }}
+            >
+              {(sector.ytdMock >= 0 ? "+" : "") + sector.ytdMock}%
+            </div>
+          </div>
+        </div>
+        <button
+          className="selected-cta"
+          style={{
+            color: sector.color,
+            borderColor: sector.color,
+            background: "transparent",
+          }}
+          onClick={onEnter}
+          type="button"
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = sector.color + "22";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = "transparent";
+          }}
+        >
+          ENTER SECTOR ↗
+        </button>
+        <button
+          className="selected-x"
+          onClick={onClose}
+          type="button"
+          aria-label="Close preview"
+        >
+          ✕
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ====================================================================== //
 // PlaceholderTab (DISCLOSURES / TIME MACHINE)
 // ====================================================================== //
 function PlaceholderTab({ title, onBack }) {
@@ -1090,8 +1171,11 @@ function PlaceholderTab({ title, onBack }) {
 function FinanceTab({
   data,
   activeSectorId,
+  sectorEntered,
   activeCompanyCode,
   onPickSector,
+  onEnterSector,
+  onClosePreview,
   onPickCompany,
   onBackToGalaxy,
   onBackToSector,
@@ -1102,18 +1186,21 @@ function FinanceTab({
   const node = activeCompanyCode && sector
     ? (sector.members || []).find((m) => m.t === activeCompanyCode)
     : null;
-  const stage = node ? "company" : sector ? "sector" : "galaxy";
+  // stage: galaxy(no sector or preview) / sector(entered) / company
+  // galaxy preview는 별도 stage가 아니라 galaxy + activeSectorId로 표현 (selected-card 표시)
+  const stage = node ? "company" : (sector && sectorEntered) ? "sector" : "galaxy";
 
   // SolarStage planets
   let planets;
   let accentColor = "#5eead4";
   if (stage === "galaxy") {
+    // 모든 섹터 동일 크기 (시총·기업수 비례 배치는 후속 phase)
     planets = sectors.map((s) => ({
       id: s.id,
-      label: s.ko,   // 한글 (활성 sector 두 번째 줄)
-      en: s.en,      // 영문 (활성 sector 첫 번째 줄)
+      label: s.ko,
+      en: s.en,
       color: s.color,
-      sizeRatio: Math.max(0.6, Math.min(1.4, Math.sqrt((s.memberCount || 1) / 4))),
+      sizeRatio: 1,
     }));
   } else if (stage === "sector") {
     accentColor = sector.color;
@@ -1122,7 +1209,7 @@ function FinanceTab({
       label: m.n,
       en: m.t,
       color: sector.color,
-      sizeRatio: Math.max(0.7, Math.min(1.5, Math.sqrt(m.sz || 1))),
+      sizeRatio: 1,
     }));
   } else {
     accentColor = sector.color;
@@ -1155,6 +1242,9 @@ function FinanceTab({
   // BR panel 라벨
   const brTitle = stage === "galaxy" ? "SECTOR INDEX" : "SECTOR LIST";
 
+  // galaxy preview 상태 — 섹터 활성됐지만 아직 진입 안 한 상태
+  const isPreview = stage === "galaxy" && sector;
+
   // Highlights for sector
   const sectorHighlights = useMemo(() => {
     if (!sector) return [];
@@ -1163,7 +1253,7 @@ function FinanceTab({
     return D.highlightsForSector(data.discAll || [], sector.members || [], 3);
   }, [sector, data.discAll]);
 
-  // TL panel 분기
+  // TL panel 분기 — galaxy 단계는 preview에서도 MascotPanel 유지 (원본 디자인)
   let tlPanel;
   if (stage === "galaxy") tlPanel = <MascotPanel stage="galaxy" />;
   else if (stage === "sector")
@@ -1210,6 +1300,13 @@ function FinanceTab({
         onPickSector={onPickSector}
         title={brTitle}
       />
+      {isPreview && (
+        <SelectedSectorCard
+          sector={sector}
+          onEnter={() => onEnterSector(sector.id)}
+          onClose={onClosePreview}
+        />
+      )}
     </>
   );
 }
@@ -1257,8 +1354,9 @@ function IntroScreen({ onEnter, session, uplinkMs, utc, tElapsed }) {
 function PhaseTab({
   activeTab, onTabChange,
   data,
-  activeSectorId, activeCompanyCode,
-  onPickSector, onPickCompany,
+  activeSectorId, sectorEntered, activeCompanyCode,
+  onPickSector, onEnterSector, onClosePreview,
+  onPickCompany,
   onBackToGalaxy, onBackToSector,
   onEnterCorp,
   kospi, breadcrumb,
@@ -1269,8 +1367,11 @@ function PhaseTab({
       <FinanceTab
         data={data}
         activeSectorId={activeSectorId}
+        sectorEntered={sectorEntered}
         activeCompanyCode={activeCompanyCode}
         onPickSector={onPickSector}
+        onEnterSector={onEnterSector}
+        onClosePreview={onClosePreview}
         onPickCompany={onPickCompany}
         onBackToGalaxy={onBackToGalaxy}
         onBackToSector={onBackToSector}
@@ -1368,6 +1469,7 @@ function App() {
   const [phase, setPhase] = useState("intro");
   const [activeTab, setActiveTab] = useState("financials");
   const [activeSectorId, setActiveSectorId] = useState(null);
+  const [sectorEntered, setSectorEntered] = useState(false); // false = preview, true = real entry
   const [activeCompanyCode, setActiveCompanyCode] = useState(null);
   const [tElapsed, setTElapsed] = useState(0);
 
@@ -1386,16 +1488,32 @@ function App() {
     setActiveTab(next);
     if (next !== "financials") {
       setActiveSectorId(null);
+      setSectorEntered(false);
       setActiveCompanyCode(null);
     }
   }, []);
+  // 섹터 클릭 — 활성화만 (preview), 진입은 ENTER SECTOR로
   const handlePickSector = useCallback((sid) => {
     setActiveSectorId(sid);
+    setSectorEntered(false);
+    setActiveCompanyCode(null);
+  }, []);
+  // ENTER SECTOR 클릭 — 실제 sector 단계 진입
+  const handleEnterSector = useCallback((sid) => {
+    setActiveSectorId(sid);
+    setSectorEntered(true);
+    setActiveCompanyCode(null);
+  }, []);
+  // preview 닫기 (✕)
+  const handleClosePreview = useCallback(() => {
+    setActiveSectorId(null);
+    setSectorEntered(false);
     setActiveCompanyCode(null);
   }, []);
   const handlePickCompany = useCallback((code) => setActiveCompanyCode(code), []);
   const handleBackToGalaxy = useCallback(() => {
     setActiveSectorId(null);
+    setSectorEntered(false);
     setActiveCompanyCode(null);
   }, []);
   const handleBackToSector = useCallback(() => setActiveCompanyCode(null), []);
@@ -1412,18 +1530,20 @@ function App() {
   useEffect(() => {
     window.__v2_dev = {
       pickSector: handlePickSector,
+      enterSector: handleEnterSector,
+      closePreview: handleClosePreview,
       pickCompany: handlePickCompany,
       backToGalaxy: handleBackToGalaxy,
       backToSector: handleBackToSector,
       enterCorp: handleEnterCorp,
     };
-  }, [handlePickSector, handlePickCompany, handleBackToGalaxy, handleBackToSector, handleEnterCorp]);
+  }, [handlePickSector, handleEnterSector, handleClosePreview, handlePickCompany, handleBackToGalaxy, handleBackToSector, handleEnterCorp]);
 
-  // breadcrumb (FINANCIALS만 의미)
+  // breadcrumb (FINANCIALS만 의미). preview 단계는 GALAXY만 표시 (아직 미진입)
   const breadcrumb = useMemo(() => {
     if (activeTab !== "financials") return [];
     const crumbs = [{ label: "GALAXY", onClick: handleBackToGalaxy }];
-    if (activeSectorId) {
+    if (activeSectorId && sectorEntered) {
       const sec = (data.sectors || []).find((s) => s.id === activeSectorId);
       if (sec) {
         crumbs.push({
@@ -1437,7 +1557,7 @@ function App() {
       }
     }
     return crumbs;
-  }, [activeTab, activeSectorId, activeCompanyCode, data.sectors, handleBackToGalaxy, handleBackToSector]);
+  }, [activeTab, activeSectorId, sectorEntered, activeCompanyCode, data.sectors, handleBackToGalaxy, handleBackToSector]);
 
   if (phase === "intro") {
     return (
@@ -1456,8 +1576,11 @@ function App() {
       onTabChange={handleTabChange}
       data={data}
       activeSectorId={activeSectorId}
+      sectorEntered={sectorEntered}
       activeCompanyCode={activeCompanyCode}
       onPickSector={handlePickSector}
+      onEnterSector={handleEnterSector}
+      onClosePreview={handleClosePreview}
       onPickCompany={handlePickCompany}
       onBackToGalaxy={handleBackToGalaxy}
       onBackToSector={handleBackToSector}
