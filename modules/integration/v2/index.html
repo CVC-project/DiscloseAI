@@ -11,6 +11,13 @@
     .mascot-img { filter: invert(0.88) brightness(1.15) saturate(0.6) !important; }
     /* Fix 2: TL panel width matches BL legend-panel (320px) */
     .panel-tl { width: 320px !important; }
+    /* Fix panel-head text overflow — prevent wrapping */
+    .panel-head { flex-wrap: nowrap !important; gap: 4px !important; }
+    .panel-head-l { flex-shrink: 1; min-width: 0; display: flex; align-items: center; gap: 6px; overflow: hidden; }
+    .panel-title, .panel-sub, .panel-count { white-space: nowrap !important; overflow: hidden; text-overflow: ellipsis; }
+    .panel-count { flex-shrink: 0; }
+    /* Sector chip: ensure space between en and ko */
+    .sector-en { margin-right: 4px; }
   </style>
 </head>
 <body>

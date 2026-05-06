@@ -1330,9 +1330,8 @@ function MascotPanel({ messages = ["섹터를 클릭하면, 기업을 확인할 
         <div className="panel-head-l">
           <span className="panel-dot" />
           <span className="panel-title">MISSION GUIDE</span>
-          <span className="panel-sub">우주인 안내자</span>
         </div>
-        <div className="panel-count">CADET · LV.01</div>
+        <div className="panel-count">우주비행사 · LV.01</div>
       </div>
       <div className="mascot-stage">
         <div className="mascot-stars">
@@ -1543,10 +1542,9 @@ function AssistantPanel({ phase }) {
       <div className="panel-head">
         <div className="panel-head-l">
           <span className="panel-dot panel-dot-amber" />
-          <span className="panel-title">AI FINANCIAL CO-PILOT</span>
-          <span className="panel-sub">Gemini · 한·영</span>
+          <span className="panel-title">AI FINANCIAL</span>
+          <span className="panel-sub">Gemini · 한·영 v2.4</span>
         </div>
-        <div className="panel-count">v2.4</div>
       </div>
       <div className="panel-body assist-body">
         {msgs.map((m, i) => (
@@ -1647,7 +1645,9 @@ function SectorPanel({ activeId, onSelect, mode = 'grid' }) {
           <span className="panel-title">{mode === 'list' ? 'SECTOR LIST' : 'SECTOR INDEX'}</span>
           <span className="panel-sub">{mode === 'list' ? '섹터 list' : '섹터 구분 · 16'}</span>
         </div>
-        <div className="panel-count">{activeId ? `· ${SECTOR_PALETTE.find(s=>s.id===activeId)?.ko ?? ''}` : 'ALL'}</div>
+        <div className="panel-count" style={{maxWidth:80,overflow:'hidden',textOverflow:'ellipsis'}}>
+          {activeId ? `· ${SECTOR_PALETTE.find(s=>s.id===activeId)?.ko ?? ''}` : 'ALL'}
+        </div>
       </div>
       <div className="panel-body sector-body">
         <div className={"sector-grid " + (mode === 'list' ? 'is-list' : '')}>
