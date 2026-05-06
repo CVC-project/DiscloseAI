@@ -16,10 +16,26 @@
     .panel-head-l { flex-shrink: 1; min-width: 0; display: flex; align-items: center; gap: 6px; overflow: hidden; }
     .panel-title, .panel-sub, .panel-count { white-space: nowrap !important; overflow: hidden; text-overflow: ellipsis; }
     .panel-count { flex-shrink: 0; }
-    /* Sector chip: ensure space between en and ko in grid mode */
-    .sector-en { margin-right: 4px; }
-    /* List mode: hide EN label to prevent overlap */
-    .sector-grid.is-list .sector-en { display: none !important; }
+    /* Sector chip: fix EN+KO overlap — both were forced to grid-area 1/2.
+       Stack EN (row1) above KO (row2), sector-cap spans both rows. */
+    .sector-chip {
+      grid-template-rows: auto auto !important;
+    }
+    .sector-chip .sector-en {
+      grid-area: 1 / 2 !important;
+      align-self: end !important;
+      padding-bottom: 1px !important;
+    }
+    .sector-chip .sector-ko {
+      grid-area: 2 / 2 !important;
+      margin-left: 0 !important;
+      margin-top: 0 !important;
+      align-self: start !important;
+      padding-top: 0 !important;
+    }
+    .sector-chip .sector-cap {
+      grid-row: 1 / span 2 !important;
+    }
   </style>
 </head>
 <body>
