@@ -887,23 +887,34 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
   // Ghost nodes: cross-sector relations orbit around the active company's position
   const ghostNodes = _useMemo(() => {
     if (!activeCompanyCode) return [];
-    const active = companies.find(c => c.code === activeCompanyCode);
-    const ax = active ? active.x : 0, ay = active ? active.y : 0;
     const inSectorCodes = new Set(companies.map(c => c.code));
     const rels = RELATIONS[activeCompanyCode] || [];
     const cross = rels.filter(r => !inSectorCodes.has(r.code));
     const seen = new Map();
     for (const r of cross) { if (!seen.has(r.code)) seen.set(r.code, r); }
+    const arr = Array.from(seen.values());
+    const n = arr.length;
+    if (!n) return [];
     const RD = window.__realData || {};
-    return Array.from(seen.values()).map((r, i, arr) => {
-      const ang = (i / arr.length) * Math.PI * 2 - Math.PI / 2;
-      const radius = 0.62;
+
+    // Ghost nodes orbit the CANVAS CENTER (not the active company).
+    // This guarantees positions are always within bounds regardless of where
+    // the active company sits. Relation lines still draw from active → ghost.
+    // Radius scales up with count to maintain arc-spacing between nodes.
+    const radius = Math.min(0.86, 0.65 + n * 0.025);
+
+    // Starting angle: rotate so first ghost is toward top-right, avoiding
+    // overlap with common active-company positions.
+    const startAng = -Math.PI * 0.6;
+
+    return arr.map((r, i) => {
+      const ang = startAng + (i / n) * Math.PI * 2;
+      const gx = Math.cos(ang) * radius;
+      const gy = Math.sin(ang) * radius;
       const node = RD.nodeByCode && RD.nodeByCode[r.code];
-      // Use nameByCode for companies not in top50 (e.g. 삼성전기 009150)
       const name = (node && node.n) || (RD.nameByCode && RD.nameByCode[r.code]) || r.name || r.code;
       const sector = node ? (window.SECTOR_PALETTE || []).find(s => s.ko === node.s) : null;
-      return { code: r.code, name, cap: 10,
-               gx: ax + Math.cos(ang) * radius, gy: ay + Math.sin(ang) * radius,
+      return { code: r.code, name, cap: 10, gx, gy,
                relType: r.type, isGhost: true, sectorId: sector ? sector.id : null };
     });
   }, [companies, activeCompanyCode]);
@@ -1431,6 +1442,21 @@ function CompanyOverviewPanel({ company, sector, onBack, onEnter }) {
   const capLabel = (node && node.market_cap && D.trillionLabel) ? D.trillionLabel(node.market_cap) : (company.cap + 'T');
   const fmtNum = (v, suffix) => (v == null ? '-' : v + (suffix || ''));
   const recentDisc = (node && node.disc) ? node.disc.slice(0, 3) : null;
+
+  // #8: Sparkline (revenue history) + percentile badge
+  const sparkPath = (node && node.history && D.sparklinePath)
+    ? D.sparklinePath(node.history.revenue, {w: 72, h: 16, pad: 1}) : null;
+  const sectorSize = sector && sector.memberCount ? sector.memberCount : null;
+  const pctBadge = (node && D.percentileBadge)
+    ? D.percentileBadge(node.percentile && node.percentile.eqs_total, sectorSize) : null;
+
+  // #9: income / balance / cashflow fields from enrichNode
+  const rv   = node && node.rv   ? node.rv   : null;   // revenue T
+  const oi   = node && node.oi   ? node.oi   : null;   // op.income T
+  const oim  = node && node.oim  ? node.oim  : null;   // op.margin %
+  const dr   = node && node.dr   ? node.dr   : null;   // debt ratio %
+  const ocf  = node && node.ocf  ? node.ocf  : null;   // op.cashflow T
+  const ic   = node && node.icf  ? node.icf  : null;   // inv.cashflow T
   return (
     <div className="panel panel-tl company-overview-panel" style={{'--accent': sector.color}}>
       <div className="panel-head">
@@ -1461,6 +1487,39 @@ function CompanyOverviewPanel({ company, sector, onBack, onEnter }) {
           <div className="ov-v" style={{fontSize:13, color:'#94a3b8', fontFamily:'var(--font-mono)'}}>데이터 수집 중</div>
           <div style={{color:'#64748b', fontFamily:'var(--font-mono)', fontSize:10}}>yfinance pending</div>
         </div>
+        {/* #9: Income / Balance / Cashflow */}
+        {(rv || oi || dr || ocf) && (
+          <div className="sector-ov-section">
+            <div className="ov-sec-title">FINANCIALS · 재무 요약</div>
+            <div className="company-ov-stats" style={{marginTop:6, flexWrap:'wrap'}}>
+              {rv  && <div className="ov-stat"><div className="ov-k">매출</div><div className="ov-v" style={{fontSize:13}}>{rv}T</div></div>}
+              {oi  && <div className="ov-stat"><div className="ov-k">영업이익</div><div className="ov-v" style={{fontSize:13}}>{oi}T</div></div>}
+              {oim && <div className="ov-stat"><div className="ov-k">영업이익률</div><div className="ov-v" style={{fontSize:13, color: parseFloat(oim) > 0 ? '#4ade80' : '#f87171'}}>{oim}%</div></div>}
+              {dr  && <div className="ov-stat"><div className="ov-k">부채비율</div><div className="ov-v" style={{fontSize:13, color: dr > 200 ? '#f87171' : '#e2e8f0'}}>{dr}%</div></div>}
+              {ocf && <div className="ov-stat"><div className="ov-k">영업CF</div><div className="ov-v" style={{fontSize:13}}>{ocf}T</div></div>}
+              {ic  && <div className="ov-stat"><div className="ov-k">투자CF</div><div className="ov-v" style={{fontSize:13}}>{ic}T</div></div>}
+            </div>
+            {/* #8: Revenue sparkline + percentile */}
+            {(sparkPath || pctBadge) && (
+              <div style={{display:'flex', alignItems:'center', gap:10, marginTop:8}}>
+                {sparkPath && (
+                  <svg width={sparkPath.w} height={sparkPath.h} style={{flexShrink:0}}>
+                    <path d={sparkPath.d} fill="none" stroke="#5eead4" strokeWidth="1.5" opacity="0.8" />
+                    <circle cx={sparkPath.dot.x} cy={sparkPath.dot.y} r="2" fill="#5eead4" />
+                  </svg>
+                )}
+                {sparkPath && <span style={{fontSize:9,color:'#64748b',fontFamily:'var(--font-mono)'}}>매출 5년 추이</span>}
+                {pctBadge && (
+                  <span style={{marginLeft:'auto', fontSize:9, fontFamily:'var(--font-mono)',
+                    color: pctBadge.color, border:`1px solid ${pctBadge.color}44`,
+                    padding:'1px 6px', borderRadius:2}}>
+                    {pctBadge.label}
+                  </span>
+                )}
+              </div>
+            )}
+          </div>
+        )}
         {node && node.eqs != null && (
           <div className="sector-ov-section">
             <div className="ov-sec-title">EQS · 재무 건강도 ({node.gr || '-'} · {node.eqs}점)</div>
