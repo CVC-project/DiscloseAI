@@ -874,11 +874,13 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
         const n = [...relMap.keys()].indexOf(c.code);
         const total = relMap.size;
         const ang = (n / total) * Math.PI * 2 + 0.4;
-        const r = 0.2; // tight orbit around active
+        const r = 0.55; // orbit around active — large enough to clear glow halos
         return { ...c, gx: active.x + Math.cos(ang) * r, gy: active.y + Math.sin(ang) * r, relType: relMap.get(c.code) };
       }
       // un-related: push to the edge & dim
-      return { ...c, gx: c.x * 1.08, gy: c.y * 1.08, fade: true };
+      // Push faded nodes to outer edge (radius 0.92 from center), keeping their angular direction
+      const ang = Math.atan2(c.y - 0.001, c.x - 0.001);
+      return { ...c, gx: Math.cos(ang) * 0.92, gy: Math.sin(ang) * 0.92, fade: true };
     });
   }, [companies, activeCompanyCode]);
 
@@ -1034,11 +1036,14 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
         const radius = 6 + Math.sqrt(c.cap) * 1.5;
         const isActive = c.code === activeCompanyCode;
         const isHover = hoverRef.current === c.code;
-        const fade = c.fade ? 0.18 : 1;
+        // When a company is active, hide unrelated sector nodes entirely
+        if (c.fade && activeCompanyCode) return;
+        const fade = c.fade ? 0.08 : 1;
 
         ctx.globalAlpha = fade;
         // glow
-        const glowMul = isActive ? 9 : isHover ? 6 : 4.5;
+        // Shrink glow of non-active nodes when a company is selected
+        const glowMul = isActive ? 9 : isHover ? 6 : (activeCompanyCode ? 2.5 : 4.5);
         const g = ctx.createRadialGradient(x, y, 0, x, y, radius * glowMul);
         g.addColorStop(0, sec.color + 'cc');
         g.addColorStop(0.3, sec.color + '55');
@@ -1069,7 +1074,8 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
       ctx.textAlign = 'center';
       positions.forEach(({ x, y, r: nr, c }) => {
         const isActive = c.code === activeCompanyCode;
-        ctx.globalAlpha = c.fade ? 0.2 : 0.85;
+        if (c.fade && activeCompanyCode) { ctx.globalAlpha = 1; return; }
+        ctx.globalAlpha = c.fade ? 0.08 : 0.85;
         ctx.fillStyle = isActive ? sec.color : 'rgba(148,163,184,0.9)';
         ctx.font = `${isActive ? '600 ' : ''}10px sans-serif`;
         const label = c.name.length > 7 ? c.name.slice(0, 7) + '…' : c.name;
