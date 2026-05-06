@@ -159,13 +159,27 @@
       const rels = parseRelations(n, nameMap);
       if (rels.length) out[n.t] = rels;
     }
+    // Add reverse edges so bidirectional relations are visible.
+    // e.g. 삼성전자→삼성전기 (associate) also adds 삼성전기→삼성전자 (group).
+    const nameByTicker = Object.fromEntries(nodes.map((n) => [n.t, n.n]));
+    for (const [srcCode, rels] of Object.entries(out)) {
+      for (const r of rels) {
+        const tgt = r.code;
+        if (!tgt) continue;
+        if (!out[tgt]) out[tgt] = [];
+        // Only add if not already present (by code)
+        if (!out[tgt].some((x) => x.code === srcCode)) {
+          out[tgt].push({ code: srcCode, type: "group", name: nameByTicker[srcCode] || srcCode });
+        }
+      }
+    }
     return out;
   }
 
   async function injectBundleScript() {
     // Babel-standalone auto-transforms <script type="text/babel"> tags only at page load.
     // For dynamic injection we fetch the source ourselves, transform via Babel, then run.
-    const url = "./src/bundle.jsx?v=k3a";
+    const url = "./src/bundle.jsx?v=k3b";
     const src = await fetch(url).then((r) => r.text());
     const out = window.Babel.transform(src, { presets: ["env", "react"] }).code;
     const s = document.createElement("script");

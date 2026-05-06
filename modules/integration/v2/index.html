@@ -16,8 +16,10 @@
     .panel-head-l { flex-shrink: 1; min-width: 0; display: flex; align-items: center; gap: 6px; overflow: hidden; }
     .panel-title, .panel-sub, .panel-count { white-space: nowrap !important; overflow: hidden; text-overflow: ellipsis; }
     .panel-count { flex-shrink: 0; }
-    /* Sector chip: ensure space between en and ko */
+    /* Sector chip: ensure space between en and ko in grid mode */
     .sector-en { margin-right: 4px; }
+    /* List mode: hide EN label to prevent overlap */
+    .sector-grid.is-list .sector-en { display: none !important; }
   </style>
 </head>
 <body>
