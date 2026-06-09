@@ -3,6 +3,8 @@
 > 원본 프로토타입(`docs/prototype/corporate_universe_v5.html`)의 fork.
 > Canvas 2D API + force-directed simulation. Three.js 미사용 (프로토타입 그대로 계승).
 > 원본은 **수정 금지** (다른 팀원 참고용).
+>
+> **범위**: 이것은 **relation 단독 탐색 도구**(relation 데이터만 시각화)다. 4개 모듈 **교차 분석·통합 대시보드**는 별개로 루트 `integration/`이 소유한다(같은 `graph_top50.json`을 소비하되 financial·disclosure·price와 join). 혼동 금지.
 
 ## 파일 1개
 

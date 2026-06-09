@@ -26,14 +26,19 @@ PRD 상세: docs/PRD.md
 ## 폴더 규칙
 공용 폴더 (프로젝트 리드만 수정):
 - .claude/: Skills, Agents, Settings
-- shared/: DB 스키마, 공용 설정
+- shared/: 환경변수(config.py, 활성) + 미래 운영 DB 스키마(models.py, 현재 미사용)
 - docs/: PRD, 아키텍처, 온보딩 가이드
 
 개별 작업 폴더 (각 담당자만 수정):
 - modules/financial/ (A), modules/disclosure/ (B), modules/relation/ (C), modules/price/ (D)
-- 각 모듈에 로컬 DB(SQLite) 포함 — db.py, models.py, data/
+- 각 모듈에 **로컬 SQLite(정본)** 포함 — db.py, models.py, data/
 
-모듈 간 연결: import 금지 → DB 테이블로만 데이터 공유
+서빙 계층 (리더 소유):
+- integration/: 4개 모듈 산출물 교차 통합 대시보드 (v1/=fallback, v2/=정본, data/=공유 JSON)
+- 미래 백엔드 api/ (FastAPI·RAG·learning)는 현재 미구현 — 구축 시 생성 (docs/AI_DIRECTION_PLAN.md 참조)
+
+데이터 정본은 모듈별 로컬 SQLite. 전체 DB 토폴로지: docs/ARCHITECTURE.md
+모듈 간 연결: 데이터 모듈끼리는 import 금지. integration만 예외(타 모듈 read-only)
 
 ## 보안 규칙
 - .env 파일 절대 커밋 금지
@@ -61,5 +66,5 @@ PRD 상세: docs/PRD.md
 - 예: "feat: Beneish M-score 계산 구현"
 
 ## 면책
-- 모든 AI 분석 결과에 면책 문구 자동 삽입 (api/middleware/safety.py)
+- 모든 AI 분석 결과에 면책 문구 삽입 (면책 로직은 **현재 미구현** — 향후 백엔드 api/ 구축 시 배치 예정)
 - "투자 조언" 표현 사용 금지 → "과거 통계 기반 참고 정보"로 대체

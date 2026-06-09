@@ -10,6 +10,11 @@
 ## 담당 범위
 코스피 시총 상위 50개 기업의 **지분·계열 관계** 수집·분류·시각화. 공급·경쟁은 v2.
 
+## integration과의 경계 (중요)
+- **`graph/export.py` → `data/graph_top50.json`이 integration과의 계약(contract)**이다. 서빙 계층(루트 `integration/`)의 v1 dashboard·v2 loader가 이 파일을 **직접 fetch**한다 (`../../modules/relation/data/graph_top50.json`).
+- **스키마(`[{n, t, s, sz, mc, group, rl:[...]}]`)를 바꾸면 integration이 조용히 깨진다.** 변경 시 [integration/v1/CLAUDE.md](../../integration/v1/CLAUDE.md)의 "데이터 소스 계약" + [docs/ARCHITECTURE.md](../../docs/ARCHITECTURE.md)를 함께 갱신할 것.
+- **역할 구분**: `viewer/`는 **관계 단독 탐색 도구**(relation 데이터만). 4개 모듈 **교차 분석·통합**은 integration 소유(relation은 거기에 그래프 산출물만 공급, 단방향).
+
 ## 데이터 흐름 (파이프라인 = 폴더)
 
 ```
@@ -29,6 +34,8 @@ storage/    → SQLite 로컬 DB (CompanyNode, RelationLocal)
 | [graph/](graph/CLAUDE.md) | NetworkX 그래프 | MultiDiGraph 스키마, 레이어 공존 규칙 |
 | [viewer/](viewer/CLAUDE.md) | Canvas 시각화 | sectors 색상, relation_type별 스타일 표 |
 | [storage/](storage/CLAUDE.md) | SQLite 스키마 | 테이블 정의, Supabase 이전 계획 |
+
+> `skills/`(relation-collect·graph·audit)은 **모듈 로컬 참조 문서**다. 프로젝트 표준 `.claude/skills/` 밖이라 `/명령`으로 자동 호출되지 않음 — 작업 절차 메모로만 사용. 자동 호출이 필요하면 `.claude/skills/relation-*`로 승격(별도 합의).
 
 ## CLI 진입점
 

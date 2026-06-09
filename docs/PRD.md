@@ -234,6 +234,8 @@ AI 판단: 수혜 예상 (확률 78%)
 
 ### 4.4 AI 엔지니어링 환경
 
+> ⚠️ **구현 현황 (2026-06)**: 본 절은 설계 비전이다. 실제 구현과 차이가 있다 — 데이터 정본은 모듈별 로컬 SQLite(Supabase 미적재), 서빙은 루트 `integration/`(v1/v2; `api/`·`frontend/`는 미구현), MCP는 3개(GitHub·Context7·Sequential), sandbox·hooks 미설정. `api/middleware/safety.py` 등 면책 로직도 미구현. **문서↔현실 차이와 DB 토폴로지의 단일 출처는 [docs/ARCHITECTURE.md](ARCHITECTURE.md) "구현 현황" 참조.**
+
 #### 4.4.1 Agent-to-Agent 개발 방식
 
 > 참조: OpenAI "Harness engineering: leveraging Codex in an agent-first world" (2026.02)
