@@ -37,6 +37,8 @@ integration/data_backup_*/
 # 로컬 디버그·세션 산출물 (커밋 금지)
 .playwright-mcp/
 .claude/_session_backup/
+.claude/scripts/
+.gstack/
 integration/v2/_audit/
 
 # batch 수집 중간 pickle (임시 캐시)
@@ -52,6 +54,7 @@ __pycache__/
 .venv/
 venv/
 *.egg-info/
+.pytest_cache/
 
 # Jupyter
 notebooks/.ipynb_checkpoints/
@@ -67,4 +70,3 @@ Thumbs.db
 # Node
 node_modules/
 .next/
-.gstack/
