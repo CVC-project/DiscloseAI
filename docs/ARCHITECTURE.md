@@ -36,7 +36,16 @@
   - `docs/`에는 **PRD·아키텍처·온보딩·순수 디자인 목업만**. 코드가 생성하는 산출물 금지.
   - 표현(HTML)은 데이터 생산자가 아니라 **서빙 계층(integration)**이 소유 (이슈 #2 firm 사례).
 - **이미 이전됨**: firm 상세 → `integration/dossier/`(표현)·`integration/dossier/data/`(데이터). (이슈 #2)
-- **남은 이전(범위 외, A 담당과 협의)**: `_DASHBOARD_DIR`·`_CACHE_DIR` 경로를 `modules/financial/`로 변경 + `eqs_data.json` → `modules/financial/data/` 이전 + `extract_data.py` 읽기 경로([:40](../integration/v1/extract_data.py#L40)) 동기 수정. **그 전까지 `eqs_data.json`·`_sector_stats.json`은 현 위치 유지(삭제 금지)**.
+- **남은 이전 목록 (범위 외, A 담당과 협의)**: 아래 모두 현재 `docs/prototype/`에 있으나 financial 소유 → `modules/financial/` 아래로 이전 대상.
+
+  | 파일 | 성격 | 생성 출처 | 이전 위치 | integration 의존 |
+  |---|---|---|---|---|
+  | `financial_dashboard.html` | 단일 기업 EQS 대시보드(삼성 샘플, 데이터 인라인) | [dashboard.py](../modules/financial/dashboard.py) `build_dashboard`(`_DASHBOARD_DIR`) | `modules/financial/` 출력 폴더 | ✗ (디버그·데모용) |
+  | `kospi50_ranking.html` | KOSPI50 EQS 비교/랭킹 대시보드(데이터 인라인) | [dashboard.py](../modules/financial/dashboard.py) 랭킹 빌더 / [scripts/run_eqs_v2.py](../scripts/run_eqs_v2.py) | `modules/financial/` 출력 폴더 | ✗ |
+  | `_sector_stats.json` | 업종 통계 캐시 | [industry_groups.py](../modules/financial/industry_groups.py) `_CACHE_DIR` | `modules/financial/data/` | ✗ |
+  | `eqs_data.json` | history·percentile·시총 메타 | EQS 배치 | `modules/financial/data/` | ⚠️ `extract_data.py`가 읽음 — 이전 시 읽기 경로([:40](../integration/v1/extract_data.py#L40)) 동기 수정 필수 |
+
+  - 실행: `dashboard.py` `_DASHBOARD_DIR`·`industry_groups.py` `_CACHE_DIR` 출력 경로 변경. **이전 전까지 `eqs_data.json`·`_sector_stats.json`은 현 위치 유지(삭제 금지)**.
 - **보존(진짜 목업)**: `corporate_universe_v5.html`(relation 프로토타입 원본·fork 소스)·`corporate_universe_v6_galaxies.html`(v1 dashboard 원형)은 docs/prototype에 남아도 무방.
 
 ### 4) price 타임머신 데이터가 코드에 하드코딩
