@@ -17,4 +17,5 @@
 ## 데이터 소스
 - yfinance: 일별 종가, 수익률
 - KRX: 종목 목록, 업종 분류
-- DB 저장 테이블: shared/models.py의 PriceData 참조
+- DB 저장 테이블: `modules/price/models.py`의 **`price_local`**(주가) + **`vkospi_local`**(VKOSPI) — 로컬 SQLite 정본.
+- 예외: `linker.py`가 공시-주가 라벨을 **`shared/models.py`의 `PriceData`에도 적재** (현재 shared에서 유일하게 활성). 전체 토폴로지: [docs/ARCHITECTURE.md](../../docs/ARCHITECTURE.md).

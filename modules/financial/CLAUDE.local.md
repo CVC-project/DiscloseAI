@@ -17,4 +17,5 @@
 
 ## 데이터 소스
 - DART OpenAPI: 재무제표 (rate limit: 10,000건/일)
-- DB 저장 테이블: shared/models.py의 FinancialData 참조
+- DB 저장 테이블: `modules/financial/models.py`의 **`financial_local`** (로컬 SQLite 정본, 연간+EQS, corp_code 8자리). `shared/models.py`는 미래 운영 이관용(미사용).
+- ⚠️ **재무 데이터는 disclosure 모듈에도 별도 존재** (`financial_statement`, 분기). 같은 DART를 이중 수집하는 알려진 이슈 — 식별자·소유권 정리는 추후 팀 논의. 상세: [docs/ARCHITECTURE.md](../../docs/ARCHITECTURE.md) "알려진 문제 & 열린 선택지".
