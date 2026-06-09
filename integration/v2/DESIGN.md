@@ -285,9 +285,9 @@ html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden;
 
 ### 진입점
 
-`modules/integration/dashboard.html` 상단에 즉시 redirect:
+`integration/v1/dashboard.html` 상단에 즉시 redirect (+ `integration/index.html` 안정 진입점):
 ```js
-<script>window.location.replace('./v2/index.html');</script>
+<script>window.location.replace('../v2/index.html');</script>
 ```
 
 ---

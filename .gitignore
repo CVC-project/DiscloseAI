@@ -4,8 +4,10 @@
 !.env.example
 
 # LLM 채팅 — 사용자별 API 키 (절대 커밋 금지)
-modules/integration/chat_config.local.js
-!modules/integration/chat_config.local.js.example
+integration/v1/chat_config.local.js
+!integration/v1/chat_config.local.js.example
+integration/v2/config.local.js
+!integration/v2/config.local.js.example
 
 # Claude Code 개인 설정
 .claude/settings.local.json
@@ -29,6 +31,13 @@ modules/*/data/raw_cache/
 # pull 전 로컬 DB 백업 (로컬 전용, 커밋 금지)
 modules/*/data_backup_*/
 docs/prototype/*_backup_*.json
+integration/data/*_backup_*.json
+integration/data_backup_*/
+
+# 로컬 디버그·세션 산출물 (커밋 금지)
+.playwright-mcp/
+.claude/_session_backup/
+integration/v2/_audit/
 
 # batch 수집 중간 pickle (임시 캐시)
 docs/prototype/_*.pkl
@@ -58,3 +67,4 @@ Thumbs.db
 # Node
 node_modules/
 .next/
+.gstack/
