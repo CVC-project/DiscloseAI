@@ -5,6 +5,33 @@
 
 ---
 
+## ⚠️ 알려진 문제 & 열린 선택지 (팀 필독)
+
+> 구조상 손봐야 할 부채 목록. **지금 당장 바꾸지 않되, 관련 작업 전 반드시 인지할 것.** 결정은 팀 논의 후.
+
+### 1) 재무 데이터 이중수집
+- **현상**: `financial_local`(A, 연간+EQS, 8자리)과 `financial_statement`(B, 분기+ROE·부채비율, 6자리)이 **둘 다 DART에서 재무제표를 독립 수집**한다.
+- **왜 단순 중복이 아닌가**: financial은 **연간만** 저장([batch.py](../modules/financial/batch.py)가 분기 제거), disclosure의 분기 재무는 **Groq 공시분석 맥락**([collector.py](../modules/disclosure/collector.py) `get_financial_context`)에 독립적으로 쓰인다 → "financial이 주인"이라 단정 못 함.
+- **진짜 문제 3가지**: ① 식별자 불일치(같은 `corp_code`가 8자리 financial / 6자리 disclosure) ② DART 재무 중복 수집 ③ 컬럼명 발산(`total_liabilities`/`total_equity` vs `total_debt`/`equity`).
+- **열린 선택지**: ⒜ 현행 유지 + **식별자 규칙만 통일**(저비용) / ⒝ **financial을 분기까지 확장 → 단일 소유**(disclosure는 읽기) / ⒞ **shared(Supabase) 이관 시 통합**.
+
+### 2) financial 완성 HTML을 integration이 iframe (서빙 결합 부채)
+- **현상**: `financial/dashboard.py`가 Chart.js로 **데이터를 인라인한 완성 HTML**(`docs/prototype/firm_<ticker>.html` 47개)을 생성하고, integration v1·v2가 이를 **`<iframe>`으로 임베드**한다(DB→자체 렌더가 아님).
+- **문제**: ① 데이터 생산자(financial)가 표현(HTML)까지 생성 — 계층 경계 침범 ② 런타임 자산이 `docs/prototype/`(문서 폴더)에 위치 ③ 같은 financial 데이터인데 EQS 요약은 `DB→JSON→자체 렌더`, 기업 상세는 `완성 HTML→iframe`으로 경로 이원화 ④ iframe 스타일 불일치를 v2가 `injectV2Theme()`로 강제 주입.
+- **범위**: integration은 **리더 소유 → 리더가 별도 과제로 재구조 예정**. (disclosure는 영향 없음 — 깨끗한 DB 기반)
+- **열린 선택지**: ⒜ 현행 + 본 문서 기록만 / ⒝ **위치만 이동**(`docs/prototype/firm_*` → 예: `integration/dossier/`, financial 출력·iframe·scripts 경로 수정) / ⒞ firm 페이지도 **데이터(JSON)로 분리** 후 integration 자체 렌더(iframe 제거, 스타일 통일).
+
+### 3) price 타임머신 데이터가 코드에 하드코딩
+- **현상**: 타임머신 시나리오 12개가 DB가 아니라 `modules/price/quiz_data.py`의 **`QUIZ_LIST` Python 상수**에 하드코딩(손으로 엄선한 과거 사건). integration은 이를 JSON으로 추출해 **inline 렌더**(iframe 아님). 주가·라벨 자체는 `price_local`(DB)에 정상.
+- **열린 선택지**: ⒜ 현행 유지(엄선 교육 콘텐츠라 무방) / ⒝ DB 테이블로 이관해 갱신 가능하게.
+
+### 4) 기타
+- `shared/models.py` 95% 미사용(테스트 fixture만 참조). 미래 운영 이관 시 정리. relation `storage/CLAUDE.md`의 shared 승격 계획도 그때 일괄.
+
+> 참고: disclosure 모듈은 `disclosure.db`(sqlite)에서만 소비되는 **깨끗한 DB 기반** 구조다(손댈 것 없음).
+
+---
+
 ## 0. 구현 현황 (Implementation Status) — 2026-06
 
 | 항목 | 설계 비전(PRD) | **실제 (정본)** |
@@ -99,27 +126,7 @@ D: yfinance 주가 → price_local (price.db);  linker.py가 공시-주가 라�
 
 ---
 
-## 4. 🔴 알려진 문제 & 열린 선택지
-
-### 재무 데이터 이중수집 (추후 팀 논의 — 현재 코드 변경 안 함)
-- **현상**: `financial_local`(A, 연간+EQS, 8자리)과 `financial_statement`(B, 분기+ROE·부채비율, 6자리)이 **둘 다 DART에서 재무제표를 독립 수집**한다.
-- **왜 단순 중복이 아닌가**: financial은 **연간만** 저장([batch.py](../modules/financial/batch.py)가 분기 제거), disclosure의 분기 재무는 **Groq 공시분석 맥락**([collector.py](../modules/disclosure/collector.py) `get_financial_context`)에 독립적으로 쓰인다 → "financial이 주인"이라 단정 못 함.
-- **진짜 문제 3가지**:
-  1. **식별자 불일치** — 같은 `corp_code` 컬럼이 8자리(financial)/6자리(disclosure).
-  2. **DART 재무 중복 수집** — 같은 원천을 두 번 호출.
-  3. **컬럼명 발산** — `total_liabilities`/`total_equity`(financial·shared) vs `total_debt`/`equity`(disclosure).
-- **열린 선택지** (지금 결정·구현 X):
-  - ⒜ 현행 유지 + **식별자 규칙만 통일**(저비용)
-  - ⒝ **financial을 분기까지 확장 → 단일 소유**(disclosure는 읽기)
-  - ⒞ **shared(Supabase) 이관 시 통합**
-- → 팀 논의 후 결정.
-
-### 기타
-- `shared/models.py` 95% 미사용(테스트 fixture만 참조). 미래 운영 이관 시 정리. relation `storage/CLAUDE.md`의 shared 승격 계획도 그때 일괄.
-
----
-
-## 4.5. 모듈 간 연결 규칙
+## 4. 모듈 간 연결 규칙
 
 ### 데이터 생산자끼리는 import 금지 → 로컬 산출물(DB·JSON)로만 공유
 ```python
