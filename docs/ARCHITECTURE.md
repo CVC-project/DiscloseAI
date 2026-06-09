@@ -15,11 +15,15 @@
 - **진짜 문제 3가지**: ① 식별자 불일치(같은 `corp_code`가 8자리 financial / 6자리 disclosure) ② DART 재무 중복 수집 ③ 컬럼명 발산(`total_liabilities`/`total_equity` vs `total_debt`/`equity`).
 - **열린 선택지**: ⒜ 현행 유지 + **식별자 규칙만 통일**(저비용) / ⒝ **financial을 분기까지 확장 → 단일 소유**(disclosure는 읽기) / ⒞ **shared(Supabase) 이관 시 통합**.
 
-### 2) financial 완성 HTML을 integration이 iframe (서빙 결합 부채)
-- **현상**: `financial/dashboard.py`가 Chart.js로 **데이터를 인라인한 완성 HTML**(`docs/prototype/firm_<ticker>.html` 47개)을 생성하고, integration v1·v2가 이를 **`<iframe>`으로 임베드**한다(DB→자체 렌더가 아님).
-- **문제**: ① 데이터 생산자(financial)가 표현(HTML)까지 생성 — 계층 경계 침범 ② 런타임 자산이 `docs/prototype/`(문서 폴더)에 위치 ③ 같은 financial 데이터인데 EQS 요약은 `DB→JSON→자체 렌더`, 기업 상세는 `완성 HTML→iframe`으로 경로 이원화 ④ iframe 스타일 불일치를 v2가 `injectV2Theme()`로 강제 주입.
-- **범위**: integration은 **리더 소유 → 리더가 별도 과제로 재구조 예정**. (disclosure는 영향 없음 — 깨끗한 DB 기반)
-- **열린 선택지**: ⒜ 현행 + 본 문서 기록만 / ⒝ **위치만 이동**(`docs/prototype/firm_*` → 예: `integration/dossier/`, financial 출력·iframe·scripts 경로 수정) / ⒞ firm 페이지도 **데이터(JSON)로 분리** 후 integration 자체 렌더(iframe 제거, 스타일 통일).
+### 2) financial firm 상세 — 데이터 주도 템플릿으로 전환 (✅ 대부분 해소, 2026-06 / option ⒞-lite)
+- **변경 전**: `financial/dashboard.py`가 데이터를 인라인한 완성 HTML(`docs/prototype/firm_<ticker>.html` 48개)을 생성하고 integration v1·v2가 `<iframe>` 임베드.
+- **변경 후 (integration-only, financial 코드 무수정)**: firm 상세 = **데이터(JSON) + 단일 템플릿** 구조.
+  - 데이터: `integration/dossier/data/firm_<ticker>.json` 48개 — 기존 HTML의 `const DATA`를 [extract_firm_json.py](../integration/dossier/extract_firm_json.py)로 **무손실 추출**(원 단위, 슈퍼셋 그대로).
+  - 표현: `integration/dossier/firm.html` 단일 템플릿 — [build_firm_template.py](../integration/dossier/build_firm_template.py)가 financial `_HTML_TEMPLATE`에서 파생(CSS·Chart.js·렌더 로직 **바이트 동일**). `?ticker=`로 해당 JSON fetch.
+  - iframe: v1 `../dossier/firm.html?ticker=<t>&v=`, v2 `../dossier/firm.html?ticker=<t>`. `injectV2Theme()` 그대로 작동.
+- **해소**: ① financial이 표현 생성 → **integration이 표현 소유**(financial은 데이터만) ② 런타임 자산 `docs/prototype/`(문서) → `integration/dossier/`(서빙)로 이동.
+- **의도적 보류**: ③ firm 상세도 데이터 주도가 됐으나 **iframe은 유지** — CSS·JS 격리벽(제거 시 firm 테마 CSS와 v2 `styles.css` 충돌, 시각 변형 위험). ④ `injectV2Theme()` 잔존(iframe 격리 전제).
+- **후속(범위 외)**: `docs/prototype/firm_*.html` 48개는 현재 **앱이 미참조** → dev 머지·검증 후 **삭제 예정**. financial 재batch 시 HTML 재생성을 막으려면 `dashboard.py`에 JSON 출력(`write_firm_json`) 추가 필요(A 담당과 협의). `docs/prototype/eqs_data.json`은 보존(`extract_data.py`가 history·percentile용으로 읽음).
 
 ### 3) price 타임머신 데이터가 코드에 하드코딩
 - **현상**: 타임머신 시나리오 12개가 DB가 아니라 `modules/price/quiz_data.py`의 **`QUIZ_LIST` Python 상수**에 하드코딩(손으로 엄선한 과거 사건). integration은 이를 JSON으로 추출해 **inline 렌더**(iframe 아님). 주가·라벨 자체는 `price_local`(DB)에 정상.

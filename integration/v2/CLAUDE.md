@@ -18,6 +18,13 @@
 - ✅ **v1 dashboard의 함수 포팅 OK** — `_calcValuation`/`_eqsNarration`/`_sparkline`/`_percentileBadge`를 ES module로 분리해 `v2/data/`에 두는 것만 허용
 - ❌ **빌드 도구 도입 금지 (J1~J5 동안)** — Vite/esbuild 등은 5/8 마감 후 검토. 현재는 React-CDN + Babel-in-browser 유지
 
+## firm 상세 iframe (CORPORATION DOSSIER)
+
+ENTER CORPORATION 오버레이의 iframe은 **`../dossier/firm.html?ticker=<t>`** 를 로드한다(bundle.jsx). 과거 `../../docs/prototype/firm_<t>.html`(데이터 인라인 완성본)에서 **데이터 주도 단일 템플릿**으로 전환됨 (ARCHITECTURE 이슈 #2, integration-only). firm.html이 `./data/firm_<t>.json`을 fetch해 렌더.
+
+- **`injectV2Theme()` 무변경** — firm.html은 기존 템플릿과 CSS 클래스(`.score-big`·`.grade-A`·`canvas[id]` 등)가 동일하므로 테마 주입이 그대로 작동. iframe same-origin(둘 다 `integration/` 하위)이라 `contentDocument` 접근 보장.
+- 상세: [../dossier/](../dossier/) 와 [../v1/CLAUDE.md](../v1/CLAUDE.md) "firm 상세 도시에" 참조.
+
 ## 스택
 
 - React 18 (UMD CDN)
