@@ -1,11 +1,12 @@
-# integration/ 모듈 — 통합 대시보드
+# integration/v1/ — 통합 대시보드 (vanilla JS, fallback)
 
-> 이 파일은 `modules/integration/` 아래 파일 작업 시 자동 로드됨 (Progressive Disclosure).
+> 이 파일은 `integration/v1/` 아래 파일 작업 시 자동 로드됨 (Progressive Disclosure).
 > 관련 문서: [PROGRESS.md](PROGRESS.md) — 작업 이력·데이터 스냅샷 일자
+> 상위: `integration/`은 **DiscloseAI 루트의 서빙 계층**(데이터 생산자 `modules/`와 분리). v1=fallback, v2=정본 트랙, `../data/`=공유 산출물.
 
 ## 폴더 성격
 
-**리더 소유 폴더.** 4개 모듈(relation·financial·disclosure·price)의 산출물을 **localhost 단일 대시보드**로 통합한다. 각 담당자가 자기 모듈만으로는 보여줄 수 없는 **교차 시각화·교차 분석**이 이 폴더의 존재 이유.
+**리더 소유 서빙 계층.** 4개 모듈(relation·financial·disclosure·price)의 산출물을 **localhost 단일 대시보드**로 통합한다. 각 담당자가 자기 모듈만으로는 보여줄 수 없는 **교차 시각화·교차 분석**이 이 폴더의 존재 이유. (v1=vanilla JS 대시보드, fallback / v2=React 정본)
 
 ## 모듈 경계 — 예외 규약 (중요)
 
@@ -14,9 +15,9 @@
 - ✅ **타 모듈 코드 `import` 허용** — 예: `from modules.price.quiz_data import QUIZ_LIST`
 - ✅ **타 모듈 DB·JSON 파일 **읽기** 허용** — `sqlite3.connect("modules/financial/data/financial.db")`
 - ❌ **타 모듈 파일 **수정·삭제 금지** — 쓰기 금지. 버그 수정이 필요하면 담당자에게 PR 요청
-- ❌ **타 모듈에 대한 반대 방향 의존 금지** — `modules/{financial,disclosure,price,relation}/`에서 `modules.integration`을 import하지 않음 (단방향 유지)
+- ❌ **타 모듈에 대한 반대 방향 의존 금지** — `modules/{financial,disclosure,price,relation}/`에서 `integration`을 import하지 않음 (단방향 유지)
 
-이 예외는 리더 소유 폴더(= integration, api, frontend)에만 한정된다.
+이 예외는 리더 소유 서빙 계층(= 루트 `integration/`)에만 한정된다. (미래 백엔드 `api/`도 동일 — 현재 미구현)
 
 ## 데이터 흐름
 
@@ -32,14 +33,14 @@ modules/price/quiz_data.py             ─┘                                   
 
 | 파일 | 역할 |
 |---|---|
-| `__init__.py` | 패키지 마커 (`python -m modules.integration.*` 실행용) |
-| `extract_data.py` | 4개 소스 → 3개 통합 JSON 생성하는 배치 스크립트 |
-| `dashboard.html` | v6 galaxies 기반 통합 시각화 (fetch + 패널) |
-| `data/eqs_summary.json` | financial_local 테이블 → 50기업 EQS 5모듈·등급·재무 요약 |
-| `data/disclosures.json` | disclosure_local + financial_statement → 50기업 최근 공시·분기 재무 |
-| `data/price_scenarios.json` | price.quiz_data.QUIZ_LIST → 15개 과거 공시 시나리오 (timemachine 모드용) |
+| `v1/__init__.py` | 패키지 마커 (`python -m integration.v1.*` 실행용) |
+| `v1/extract_data.py` | 4개 소스 → 3개 통합 JSON 생성하는 배치 스크립트 (출력: `../data/`) |
+| `v1/dashboard.html` | v6 galaxies 기반 통합 시각화 (fetch + 패널) |
+| `../data/eqs_summary.json` | financial_local 테이블 → 50기업 EQS 5모듈·등급·재무 요약 (v1·v2 공유) |
+| `../data/disclosures.json` | disclosure_local + financial_statement → 50기업 최근 공시·분기 재무 |
+| `../data/price_scenarios.json` | price.quiz_data.QUIZ_LIST → 15개 과거 공시 시나리오 (timemachine 모드용) |
 
-> **참고**: relation 데이터는 별도 파일 없음. dashboard.html이 `../relation/data/graph_top50.json`을 직접 fetch한다 (relation은 이미 JSON으로 산출물이 나와 있어 변환 불필요).
+> **참고**: relation 데이터는 별도 파일 없음. dashboard.html이 `../../modules/relation/data/graph_top50.json`을 직접 fetch한다 (integration이 루트로 승격돼 relation은 `modules/`에 남으므로 `../../modules/relation/`. relation은 이미 JSON 산출물이라 변환 불필요).
 
 ## 데이터 소스 계약 (각 모듈의 어떤 필드를 뽑는가)
 
@@ -74,14 +75,15 @@ extract_data.py가 의존하는 **테이블·컬럼·Python 상수**. 각 모듈
 ### 전체 재생성
 ```bash
 # 프로젝트 루트에서
-python -m modules.integration.extract_data
+python -m integration.v1.extract_data
 ```
-→ `modules/integration/data/*.json` 3개 덮어쓰기. 기존 파일은 `data/*_backup_YYYYMMDD.json`으로 이동.
+→ `integration/data/*.json` 3개 덮어쓰기.
 
 ### 로컬 시각 확인
 ```bash
 python -m http.server 8000
-# 브라우저: http://localhost:8000/modules/integration/dashboard.html
+# 브라우저(v1): http://localhost:8000/integration/v1/dashboard.html
+# 브라우저(v2): http://localhost:8000/integration/v2/index.html
 ```
 
 ## 🔄 팀원·리더 데이터 업데이트 플로우
@@ -102,7 +104,7 @@ git push -u origin data/<모듈>-<YYYYMMDD>-update
 git checkout dev && git pull                  # 담당자 업데이트 dev에 반영됨
 git checkout feat/integration-dashboard        # integration 작업 브랜치
 git merge origin/dev                           # dev 반영
-python -m modules.integration.extract_data    # JSON 재생성
+python -m integration.v1.extract_data    # JSON 재생성
 # 로컬 확인 → 커밋 → PR
 ```
 
@@ -114,7 +116,7 @@ python -m modules.integration.extract_data    # JSON 재생성
 
 ### 상황 3: 리더가 수동으로 추출만 재실행하고 싶을 때 (dev 업데이트 없이)
 ```bash
-python -m modules.integration.extract_data
+python -m integration.v1.extract_data
 ```
 → 로컬 DB만 읽고 JSON 생성. git은 안 건드림. 브라우저 새로고침으로 즉시 반영.
 
@@ -123,10 +125,10 @@ python -m modules.integration.extract_data
 ### 데이터 로드 (init 초입)
 ```js
 const [relData, eqsData, discData, priceData] = await Promise.all([
-  fetch('../relation/data/graph_top50.json').then(r => r.json()),
-  fetch('./data/eqs_summary.json').then(r => r.ok ? r.json() : []).catch(() => []),
-  fetch('./data/disclosures.json').then(r => r.ok ? r.json() : {}).catch(() => ({})),
-  fetch('./data/price_scenarios.json').then(r => r.ok ? r.json() : []).catch(() => [])
+  fetch('../../modules/relation/data/graph_top50.json').then(r => r.json()),
+  fetch('../data/eqs_summary.json').then(r => r.ok ? r.json() : []).catch(() => []),
+  fetch('../data/disclosures.json').then(r => r.ok ? r.json() : {}).catch(() => ({})),
+  fetch('../data/price_scenarios.json').then(r => r.ok ? r.json() : []).catch(() => [])
 ]);
 ```
 

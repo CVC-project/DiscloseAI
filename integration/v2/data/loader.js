@@ -15,10 +15,10 @@
   const { trillionFmt, trillionLabel } = D;
   const { eqsNarration } = D;
 
-  // 4개 JSON URL — v2/index.html 기준 상대경로.
-  // graph_top50은 sibling 모듈, 나머지 3개는 부모 폴더.
+  // 4개 JSON URL — v2/index.html(integration/v2/) 기준 상대경로.
+  // graph_top50은 modules/relation 산출물(루트 밖), 나머지 3개는 integration/data 공유.
   const URLS = {
-    graph: "../../relation/data/graph_top50.json",
+    graph: "../../modules/relation/data/graph_top50.json",
     eqs:   "../data/eqs_summary.json",
     disc:  "../data/disclosures.json",
     price: "../data/price_scenarios.json",

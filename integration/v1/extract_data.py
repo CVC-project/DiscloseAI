@@ -1,6 +1,6 @@
 """Integration 데이터 통합 추출 스크립트.
 
-각 모듈의 DB·Python 상수에서 데이터를 뽑아 ``modules/integration/data/`` 아래
+각 모듈의 DB·Python 상수에서 데이터를 뽑아 ``integration/data/`` 아래
 통합 JSON을 생성한다. top50(modules/relation/data/top50.csv) 기준으로 필터링.
 
 데이터 소스:
@@ -11,15 +11,15 @@
 
 사용::
 
-    python -m modules.integration.extract_data
+    python -m integration.v1.extract_data
 
 출력::
 
-    modules/integration/data/eqs_summary.json
-    modules/integration/data/disclosures.json
-    modules/integration/data/price_scenarios.json
+    integration/data/eqs_summary.json
+    integration/data/disclosures.json
+    integration/data/price_scenarios.json
 
-자세한 규약은 ``modules/integration/CLAUDE.md`` 참조.
+자세한 규약은 ``integration/v1/CLAUDE.md`` 참조.
 """
 
 from __future__ import annotations
@@ -32,8 +32,8 @@ from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import quote
 
-ROOT = Path(__file__).resolve().parent.parent.parent
-INTEGRATION_DATA = Path(__file__).parent / "data"
+ROOT = Path(__file__).resolve().parent.parent.parent  # v1 → integration → 루트
+INTEGRATION_DATA = Path(__file__).parent.parent / "data"  # v1 → integration/data (공유)
 TOP50_CSV = ROOT / "modules" / "relation" / "data" / "top50.csv"
 FINANCIAL_DB = ROOT / "modules" / "financial" / "data" / "financial.db"
 DISCLOSURE_DB = ROOT / "modules" / "disclosure" / "data" / "disclosure.db"

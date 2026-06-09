@@ -4,8 +4,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Redirect to v2 — DiscloseAI Corporate Galaxy Atlas (new UI) -->
-  <script>window.location.replace('./v2/index.html');</script>
+  <!-- Redirect to v2 on GitHub Pages only; localhost keeps original dashboard -->
+  <!-- (v1/v2 분리 후: dashboard는 integration/v1/, v2는 integration/v2/ → ../v2/) -->
+  <script>
+    var h = location.hostname;
+    if (h !== 'localhost' && h !== '127.0.0.1' && h !== '') {
+      window.location.replace('../v2/index.html');
+    }
+  </script>
   <title>DiscloseAI — Corporate Galaxies (섹터 은하수)</title>
   <style>
     * {
@@ -4820,7 +4826,7 @@
     }
 
     // INIT — relation(base) + financial + disclosure + price (방법 B: 정적 JSON fetch)
-    // 자세한 경로·스키마 규약: modules/integration/CLAUDE.md
+    // 자세한 경로·스키마 규약: integration/v1/CLAUDE.md
     // financial.db의 수치는 억원(= 10^8원) 단위로 저장됨.
     // 1조 = 10,000억 → 억원 → 조원 변환은 /10000.
     // 삼성전자 revenue=3336059(억) / 10000 ≈ 333.6조 (실제치)
@@ -4973,7 +4979,7 @@
       // 1) relation graph — 필수 (없으면 legacy fallback)
       let relData;
       try {
-        const r = await fetch('../relation/data/graph_top50.json');
+        const r = await fetch('../../modules/relation/data/graph_top50.json');
         if (!r.ok) throw new Error('no remote');
         relData = await r.json();
       } catch (e) {
@@ -4983,9 +4989,9 @@
 
       // 2) financial / disclosure / price — graceful degrade (하나 실패해도 나머지 로드)
       const [eqsPayload, discPayload, pricePayload] = await Promise.all([
-        fetch('./data/eqs_summary.json').then(r => r.ok ? r.json() : null).catch(() => null),
-        fetch('./data/disclosures.json').then(r => r.ok ? r.json() : null).catch(() => null),
-        fetch('./data/price_scenarios.json').then(r => r.ok ? r.json() : null).catch(() => null),
+        fetch('../data/eqs_summary.json').then(r => r.ok ? r.json() : null).catch(() => null),
+        fetch('../data/disclosures.json').then(r => r.ok ? r.json() : null).catch(() => null),
+        fetch('../data/price_scenarios.json').then(r => r.ok ? r.json() : null).catch(() => null),
       ]);
 
       // 3) ticker 기준 인덱스 구성

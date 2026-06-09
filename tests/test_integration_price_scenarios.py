@@ -14,7 +14,7 @@ from pathlib import Path
 import pytest
 
 ROOT = Path(__file__).resolve().parent.parent
-PRICE_SCENARIOS_JSON = ROOT / "modules" / "integration" / "data" / "price_scenarios.json"
+PRICE_SCENARIOS_JSON = ROOT / "integration" / "data" / "price_scenarios.json"
 
 
 # --------------------------------------------------------------------------- #

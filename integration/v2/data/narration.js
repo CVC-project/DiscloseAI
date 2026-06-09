@@ -3,7 +3,7 @@
  * dashboard.html의 _eqsNarration·_eqsBucket 포팅.
  * EQS v2 5모듈 × 3단계(good/mid/bad) 텍스트 + 라벨·색상 상수.
  *
- * 참조: modules/integration/dashboard.html L3685(mods 배열) + L4939(_eqsNarration)
+ * 참조: integration/v1/dashboard.html L3685(mods 배열) + L4939(_eqsNarration)
  */
 (function () {
   "use strict";

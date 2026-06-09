@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DiscloseAI — 통합 대시보드</title>
+  <!--
+    integration/ 안정 진입점.
+    v1(dashboard.html)이 자체적으로 localhost=원본 / GitHub Pages=v2 redirect를 처리하므로
+    여기서는 v1 진입점으로만 보낸다. (진입 흐름 보존)
+  -->
+  <script>
+    window.location.replace('./v1/dashboard.html');
+  </script>
+</head>
+<body>
+  <p>통합 대시보드로 이동 중… 자동 이동되지 않으면
+     <a href="./v1/dashboard.html">여기</a>를 클릭하세요.</p>
+</body>
+</html>
