@@ -219,7 +219,7 @@ D.percentileBadge(node.percentile?.eqs_total, sector.memberCount)
 - `position: fixed; inset: 0; z-index: 999`
 - 배경: `rgba(2,4,12,0.88) + backdropFilter: blur(18px)`
 - 헤더: cyan dot + `CORPORATION DOSSIER` + ticker, `✕ CLOSE` 버튼
-- iframe: `../../../docs/prototype/firm_<ticker>.html`
+- iframe: `../../docs/prototype/firm_<ticker>.html` (integration 루트 승격 후 2단계)
 - `onLoad` → `injectV2Theme()` (CSS 주입, same-origin)
 - 푸터 면책: `⚠ 과거 통계 기반 참고 정보 — 투자 조언 아님`
 
