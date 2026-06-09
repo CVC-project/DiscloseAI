@@ -1191,6 +1191,85 @@ window.SectorMap = SectorMap;
 // app.jsx — DiscloseAI: Phase 1 Intro → Phase 2 Galaxy → Phase 3 Sector → Phase 4 Company
 // (React hooks already destructured at top of bundle)
 
+// ─── Gemini AI streaming helper ─────────────────────────────────────────────
+
+async function geminiStream({ apiKey, model, systemPrompt, history, onChunk, onDone, onError }) {
+  const m = model || window.GEMINI_MODEL || 'gemini-2.5-flash';
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${m}:streamGenerateContent?alt=sse&key=${apiKey}`;
+  try {
+    const resp = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        system_instruction: { parts: [{ text: systemPrompt }] },
+        contents: history,
+        generationConfig: { temperature: 0.7, maxOutputTokens: 1024 },
+      }),
+    });
+    if (!resp.ok) {
+      const errText = await resp.text().catch(() => resp.status);
+      throw new Error(`HTTP ${resp.status}: ${String(errText).slice(0, 120)}`);
+    }
+    const reader = resp.body.getReader();
+    const dec = new TextDecoder();
+    let buf = '';
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buf += dec.decode(value, { stream: true });
+      const lines = buf.split('\n');
+      buf = lines.pop();
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue;
+        const raw = line.slice(6).trim();
+        if (!raw || raw === '[DONE]') continue;
+        try {
+          const data = JSON.parse(raw);
+          const chunk = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+          if (chunk) onChunk(chunk);
+        } catch {}
+      }
+    }
+    onDone();
+  } catch (e) {
+    onError(e.message || String(e));
+  }
+}
+
+function buildGeminiSystemPrompt({ context, companyName, ticker, disc, node }) {
+  const name = companyName || '기업';
+  const base = `당신은 DiscloseAI의 AI 코파일럿입니다. CPA(공인회계사) 수준의 한국 주식시장 공시·재무제표 전문 지식을 보유합니다.
+답변 원칙: ① 한국어로 간결하게 (3-5문장) ② 투자 조언 금지 — "과거 통계 기반 참고 정보"로만 표현 ③ 불확실한 내용은 명확히 표시.`;
+
+  if (context === 'disclosure') {
+    const d = disc || {};
+    return `${base}
+
+현재 분석 대상: ${name} (${ticker || ''}) ${node && node.s ? '· ' + node.s : ''}
+공시 유형: ${d.disclosure_type || '-'}  |  공시일: ${d.disclosure_date || '-'}
+공시 제목: ${d.title || '(제목 없음)'}
+AI 분석 요약:
+${d.summary || '(요약 없음)'}`;
+  }
+
+  if (context === 'sector') {
+    const sName = companyName || '섹터';
+    return `${base}
+
+현재 분석 섹터: ${sName}
+섹터 내 기업들의 공시 및 재무 동향에 대해 질문에 답합니다.`;
+  }
+
+  // finance / company context
+  const n = node || {};
+  return `${base}
+
+현재 분석 대상: ${name} (${ticker || ''}) ${n.s ? '· ' + n.s : ''}
+EQS 종합 점수: ${n.eqs != null ? n.eqs + '점 (' + n.gr + '등급)' : '-'}
+EQS 모듈: M1(현금이익률) ${n.m1 ?? '-'} / M2(회수건전성) ${n.m2 ?? '-'} / M3(부채건전성) ${n.m3 ?? '-'} / M4(본업안정성) ${n.m4 ?? '-'} / M5(자본성장성) ${n.m5 ?? '-'}
+매출 ${n.rv ?? '-'}조 / 영업이익 ${n.oi ?? '-'}조 (영업이익률 ${n.oim ?? '-'}%) / 부채비율 ${n.dr ?? '-'}%`;
+}
+
 // ─── DISCLOSURES tab — TL panels ───────────────────────────────────────────
 
 function SectorDisclosurePanel({ sector, onBack, onSelect }) {
@@ -1447,7 +1526,7 @@ function DisclosureDetailOverlay({ disc, onClose }) {
           {dartDiscUrl && <div><a href={dartDiscUrl} target="_blank" rel="noopener" className="disc-dart-btn">📄 DART 원문 보기 ↗</a></div>}
           <QuarterlyTable disc={disc} />
         </div>
-        <OverlayAiChat companyName={corpName} context="disclosure" />
+        <OverlayAiChat companyName={corpName} ticker={ticker} context="disclosure" disc={disc} node={node} />
       </div>
       <div style={{textAlign: 'center', padding: '6px', fontFamily: 'var(--font-mono,monospace)', fontSize: 9, color: '#475569', borderTop: '1px solid rgba(251,191,36,0.1)', background: 'rgba(8,14,26,0.9)', flexShrink: 0}}>
         ⚠ 과거 통계 기반 참고 정보 — 투자 조언 아님
@@ -1539,7 +1618,7 @@ function DisclosureFullOverlay({ ticker, onClose }) {
           </>
         ) : null}
       </div>{/* end left content */}
-      <OverlayAiChat companyName={corpName} context="disclosure" />
+      <OverlayAiChat companyName={corpName} ticker={ticker} context="disclosure" disc={view === 'detail' ? selectedDisc : null} node={node} />
       </div>{/* end flex row */}
       <div style={{textAlign: 'center', padding: '6px', fontFamily: 'var(--font-mono,monospace)', fontSize: 9, color: '#475569', borderTop: '1px solid rgba(94,234,212,0.1)', background: 'rgba(8,14,26,0.9)', flexShrink: 0}}>
         ⚠ 과거 통계 기반 참고 정보 — 투자 조언 아님
@@ -1548,53 +1627,145 @@ function DisclosureFullOverlay({ ticker, onClose }) {
   );
 }
 
-// ─── Overlay AI chat sidebar ───────────────────────────────────────────────
+// ─── Overlay AI chat sidebar (Gemini functional) ──────────────────────────
 
-const OVERLAY_AI_MSGS = {
-  disclosure: (name) => [
-    { who: 'ai', text: `${name}의 최근 공시를 분석했습니다. 궁금한 점을 질문해 보세요.` },
-    { who: 'ai', text: 'Cash·Risk·Hidden Agenda·Verdict 항목의 의미, 고영향 공시 판단 기준 등을 설명해 드릴게요.' },
-    { who: 'ai', text: '관계 기업에 미치는 파급 영향도 함께 살펴볼 수 있습니다.' },
-  ],
-  finance: (name) => [
-    { who: 'ai', text: `${name}의 재무제표를 분석했습니다. 궁금한 점을 질문해 보세요.` },
-    { who: 'ai', text: 'EQS 5개 모듈(현금이익률·회수건전성·부채·본업·자본) 해석을 도와드립니다.' },
-    { who: 'ai', text: 'Beneish M-score, F-score, 이익의 질 지표에 대해 물어보세요.' },
-  ],
-};
-
-function OverlayAiChat({ companyName, context }) {
-  const name = companyName || '기업';
-  const msgs = (OVERLAY_AI_MSGS[context] || OVERLAY_AI_MSGS.finance)(name);
+function AiChatBubble({ msg }) {
+  const isUser = msg.role === 'user';
   return (
-    <div style={{
-      width: 300, flexShrink: 0,
-      display: 'flex', flexDirection: 'column',
-      borderLeft: '1px solid rgba(94,234,212,0.12)',
-      background: 'rgba(4,7,18,0.72)',
-      backdropFilter: 'blur(12px)',
-    }}>
-      {/* Header */}
-      <div style={{padding: '12px 16px', flexShrink: 0, borderBottom: '1px solid rgba(94,234,212,0.1)', display: 'flex', alignItems: 'center', gap: 8}}>
-        <span style={{width: 7, height: 7, borderRadius: '50%', background: '#fbbf24', boxShadow: '0 0 6px #fbbf24', display: 'inline-block'}} />
+    <div style={{display: 'flex', gap: 8, alignItems: 'flex-start', flexDirection: isUser ? 'row-reverse' : 'row'}}>
+      {!isUser && (
+        <div style={{width: 24, height: 24, borderRadius: '50%', background: 'rgba(251,191,36,0.1)', border: '1px solid rgba(251,191,36,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontFamily: 'var(--font-mono,monospace)', fontSize: 8, color: '#fbbf24'}}>AI</div>
+      )}
+      <div style={{
+        background: isUser ? 'rgba(94,234,212,0.08)' : 'rgba(255,255,255,0.04)',
+        border: isUser ? '1px solid rgba(94,234,212,0.15)' : 'none',
+        borderRadius: 4, padding: '7px 10px',
+        fontSize: 11.5, lineHeight: 1.65,
+        color: isUser ? '#5eead4' : (msg.error ? '#f87171' : '#94a3b8'),
+        maxWidth: '88%', wordBreak: 'break-word',
+      }}>
+        {msg.text}
+        {msg.streaming && <span style={{opacity: 0.5, animation: 'pulseDot 0.8s infinite'}}>▍</span>}
+      </div>
+    </div>
+  );
+}
+
+function OverlayAiChat({ companyName, ticker, context, disc, node }) {
+  const name = companyName || '기업';
+  const apiKey = (window.GEMINI_API_KEY && typeof window.GEMINI_API_KEY === 'string') ? window.GEMINI_API_KEY.trim() : null;
+  const hasKey = !!(apiKey && apiKey.length > 20);
+
+  const initText = context === 'disclosure'
+    ? `${name}의 공시를 분석했습니다. 궁금한 점을 질문해 보세요.\n\nTip: "이 공시가 주가에 미치는 영향은?", "Cash 항목 설명해줘" 등`
+    : `${name}의 재무제표를 분석했습니다. 궁금한 점을 질문해 보세요.\n\nTip: "EQS 점수 해석해줘", "부채비율이 높은 이유는?" 등`;
+
+  const [messages, setMessages] = React.useState([{ role: 'ai', text: initText }]);
+  const [input, setInput] = React.useState('');
+  const [loading, setLoading] = React.useState(false);
+  const bodyRef = React.useRef(null);
+
+  React.useEffect(() => {
+    if (bodyRef.current) bodyRef.current.scrollTop = bodyRef.current.scrollHeight;
+  }, [messages]);
+
+  // Reset when disc changes (new disclosure selected)
+  React.useEffect(() => {
+    setMessages([{ role: 'ai', text: initText }]);
+    setInput('');
+  }, [disc && disc.disclosure_id, ticker]);
+
+  async function send() {
+    const text = input.trim();
+    if (!text || loading || !hasKey) return;
+    setInput('');
+    const userMsg = { role: 'user', text };
+    const nextMessages = [...messages, userMsg];
+    setMessages(nextMessages);
+    setLoading(true);
+
+    const history = nextMessages.map(m => ({
+      role: m.role === 'user' ? 'user' : 'model',
+      parts: [{ text: m.text }],
+    }));
+    const placeholder = { role: 'ai', text: '', streaming: true };
+    setMessages(prev => [...prev, placeholder]);
+
+    let accumulated = '';
+    await geminiStream({
+      apiKey,
+      systemPrompt: buildGeminiSystemPrompt({ context, companyName: name, ticker, disc, node }),
+      history,
+      onChunk: (chunk) => {
+        accumulated += chunk;
+        setMessages(prev => {
+          const updated = [...prev];
+          updated[updated.length - 1] = { role: 'ai', text: accumulated, streaming: true };
+          return updated;
+        });
+      },
+      onDone: () => {
+        setMessages(prev => {
+          const updated = [...prev];
+          updated[updated.length - 1] = { role: 'ai', text: accumulated };
+          return updated;
+        });
+        setLoading(false);
+      },
+      onError: (err) => {
+        setMessages(prev => {
+          const updated = [...prev];
+          updated[updated.length - 1] = { role: 'ai', text: `⚠ ${err}`, error: true };
+          return updated;
+        });
+        setLoading(false);
+      },
+    });
+  }
+
+  function onKey(e) {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); }
+  }
+
+  const dotColor = hasKey ? '#4ade80' : '#fbbf24';
+  return (
+    <div style={{width: 300, flexShrink: 0, display: 'flex', flexDirection: 'column', borderLeft: '1px solid rgba(94,234,212,0.12)', background: 'rgba(4,7,18,0.72)', backdropFilter: 'blur(12px)'}}>
+      <div style={{padding: '10px 14px', flexShrink: 0, borderBottom: '1px solid rgba(94,234,212,0.1)', display: 'flex', alignItems: 'center', gap: 8}}>
+        <span style={{width: 7, height: 7, borderRadius: '50%', background: dotColor, boxShadow: `0 0 6px ${dotColor}`, display: 'inline-block'}} />
         <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 10, letterSpacing: '.12em', color: '#fbbf24'}}>AI FINANCIAL</span>
-        <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 8, color: '#475569', marginLeft: 4}}>Gemini · v2.4</span>
+        <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 8, color: '#475569', marginLeft: 4}}>
+          {hasKey ? 'Gemini 2.5 Flash' : '키 미설정'}
+        </span>
       </div>
-      {/* Messages */}
-      <div style={{flex: '1 1 0%', overflowY: 'auto', padding: '14px 16px', display: 'flex', flexDirection: 'column', gap: 12}}>
-        {msgs.map((m, i) => (
-          <div key={i} style={{display: 'flex', gap: 10, alignItems: 'flex-start'}}>
-            <div style={{width: 26, height: 26, borderRadius: '50%', background: 'rgba(251,191,36,0.1)', border: '1px solid rgba(251,191,36,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontFamily: 'var(--font-mono,monospace)', fontSize: 8, color: '#fbbf24', letterSpacing: '.04em'}}>AI</div>
-            <div style={{background: 'rgba(255,255,255,0.04)', borderRadius: 4, padding: '8px 12px', fontSize: 11.5, color: '#94a3b8', lineHeight: 1.65, flex: 1}}>{m.text}</div>
-          </div>
-        ))}
+      {!hasKey && (
+        <div style={{padding: '14px', fontSize: 11, color: '#64748b', lineHeight: 1.7, borderBottom: '1px solid rgba(94,234,212,0.08)'}}>
+          <div style={{color: '#fbbf24', fontFamily: 'var(--font-mono,monospace)', fontSize: 9, marginBottom: 6}}>⚠ API 키 미설정</div>
+          <code style={{fontSize: 10, background: 'rgba(255,255,255,0.05)', padding: '3px 7px', borderRadius: 3, display: 'block', marginBottom: 6}}>v2/config.local.js</code>
+          파일에 Gemini API 키를 설정하면 활성화됩니다.
+        </div>
+      )}
+      <div ref={bodyRef} style={{flex: '1 1 0%', overflowY: 'auto', padding: '12px 12px', display: 'flex', flexDirection: 'column', gap: 10}}>
+        {messages.map((m, i) => <AiChatBubble key={i} msg={m} />)}
+        {loading && messages[messages.length - 1]?.streaming !== true && (
+          <div style={{fontSize: 10, color: '#475569', fontFamily: 'var(--font-mono,monospace)'}}>생성 중…</div>
+        )}
       </div>
-      {/* Input */}
-      <div style={{padding: '10px 12px', borderTop: '1px solid rgba(94,234,212,0.08)', flexShrink: 0, display: 'flex', gap: 6}}>
-        <input disabled readOnly placeholder="⚠ 1차 데모 — AI 응답 준비 중" style={{flex: 1, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(94,234,212,0.15)', borderRadius: 2, color: '#475569', fontFamily: 'var(--font-mono,monospace)', fontSize: 10, padding: '7px 10px', outline: 'none'}} />
-        <button disabled style={{background: 'rgba(94,234,212,0.08)', border: '1px solid rgba(94,234,212,0.2)', color: '#5eead4', padding: '7px 10px', borderRadius: 2, cursor: 'not-allowed', opacity: 0.45}}>↗</button>
+      <div style={{padding: '8px 10px', borderTop: '1px solid rgba(94,234,212,0.08)', flexShrink: 0, display: 'flex', gap: 6}}>
+        <input
+          value={input}
+          onChange={e => setInput(e.target.value)}
+          onKeyDown={onKey}
+          disabled={!hasKey || loading}
+          placeholder={hasKey ? (loading ? 'AI 응답 중…' : '질문 입력 (Enter)') : 'config.local.js 키 설정 필요'}
+          style={{flex: 1, background: 'rgba(255,255,255,0.04)', border: `1px solid ${hasKey ? 'rgba(94,234,212,0.2)' : 'rgba(100,116,139,0.2)'}`, borderRadius: 2, color: hasKey ? '#e2e8f0' : '#475569', fontFamily: 'inherit', fontSize: 11, padding: '6px 9px', outline: 'none'}}
+        />
+        <button
+          onClick={send}
+          disabled={!hasKey || loading || !input.trim()}
+          style={{background: 'rgba(94,234,212,0.1)', border: '1px solid rgba(94,234,212,0.25)', color: '#5eead4', padding: '6px 10px', borderRadius: 2, cursor: hasKey && !loading && input.trim() ? 'pointer' : 'not-allowed', opacity: (!hasKey || loading || !input.trim()) ? 0.35 : 1, transition: 'opacity 150ms'}}
+        >↗</button>
       </div>
-      <div style={{textAlign: 'center', padding: '4px 14px 6px', fontFamily: 'var(--font-mono,monospace)', fontSize: 8, color: '#334155'}}>
+      <div style={{textAlign: 'center', padding: '3px 14px 5px', fontFamily: 'var(--font-mono,monospace)', fontSize: 8, color: '#334155'}}>
         과거 통계 기반 참고 · 투자 조언 아님
       </div>
     </div>
@@ -2202,47 +2373,106 @@ function CompanyOverviewPanel({ company, sector, onBack, onEnter }) {
   );
 }
 
-// ─── AI assistant ─────────────────────────────────────────────────────────
-function AssistantPanel({ phase }) {
-  const [msgs, setMsgs] = useState(AI_GREETINGS[phase] || AI_GREETINGS.galaxy);
-  const [input, setInput] = useState('');
-  useEffect(() => {
-    setMsgs(AI_GREETINGS[phase] || AI_GREETINGS.galaxy);
+// ─── AI assistant (panel-tr — Gemini functional) ──────────────────────────
+function AssistantPanel({ phase, sector, company, activeTab }) {
+  const apiKey = (window.GEMINI_API_KEY && typeof window.GEMINI_API_KEY === 'string') ? window.GEMINI_API_KEY.trim() : null;
+  const hasKey = !!(apiKey && apiKey.length > 20);
+
+  const initGreeting = React.useMemo(() => {
+    const greeting = AI_GREETINGS[phase] || AI_GREETINGS.galaxy;
+    return greeting.map(m => ({ role: 'ai', text: m.text }));
   }, [phase]);
-  const send = () => {
-    if (!input.trim()) return;
-    const q = input.trim();
-    setMsgs(m => [...m, { who:'user', text:q }]);
+
+  const [messages, setMessages] = useState(initGreeting);
+  const [input, setInput] = useState('');
+  const [loading, setLoading] = useState(false);
+  const bodyRef = React.useRef(null);
+
+  useEffect(() => {
+    setMessages(initGreeting);
     setInput('');
-    setTimeout(() => {
-      setMsgs(m => [...m, { who:'ai', text: '분석 중입니다 — 12개월 통계 기반 인사이트를 곧 전달드릴게요.' }]);
-    }, 700);
-  };
+  }, [phase, sector && sector.id, company && company.code]);
+
+  useEffect(() => {
+    if (bodyRef.current) bodyRef.current.scrollTop = bodyRef.current.scrollHeight;
+  }, [messages]);
+
+  async function send() {
+    const text = input.trim();
+    if (!text || loading || !hasKey) return;
+    setInput('');
+    const next = [...messages, { role: 'user', text }];
+    setMessages(next);
+    setLoading(true);
+
+    const RD = window.__realData || {};
+    const node = company ? (RD.nodeByCode && RD.nodeByCode[company.code]) : null;
+    const ctx = phase === 'company' ? 'finance' : phase === 'sector' ? 'sector' : 'galaxy';
+    const systemPrompt = buildGeminiSystemPrompt({
+      context: ctx,
+      companyName: company ? company.name : (sector ? sector.ko : 'DiscloseAI'),
+      ticker: company ? company.code : null,
+      disc: null,
+      node,
+    });
+    const history = next.map(m => ({
+      role: m.role === 'user' ? 'user' : 'model',
+      parts: [{ text: m.text }],
+    }));
+
+    let accumulated = '';
+    setMessages(prev => [...prev, { role: 'ai', text: '', streaming: true }]);
+    await geminiStream({
+      apiKey,
+      systemPrompt,
+      history,
+      onChunk: (chunk) => {
+        accumulated += chunk;
+        setMessages(prev => { const u = [...prev]; u[u.length - 1] = { role: 'ai', text: accumulated, streaming: true }; return u; });
+      },
+      onDone: () => {
+        setMessages(prev => { const u = [...prev]; u[u.length - 1] = { role: 'ai', text: accumulated }; return u; });
+        setLoading(false);
+      },
+      onError: (err) => {
+        setMessages(prev => { const u = [...prev]; u[u.length - 1] = { role: 'ai', text: `⚠ ${err}`, error: true }; return u; });
+        setLoading(false);
+      },
+    });
+  }
+
+  function onKey(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); } }
+
+  const dotColor = hasKey ? '#4ade80' : '#fbbf24';
   return (
     <div className="panel panel-tr">
       <div className="panel-head">
         <div className="panel-head-l">
-          <span className="panel-dot panel-dot-amber" />
+          <span className="panel-dot panel-dot-amber" style={{background: dotColor, boxShadow: `0 0 6px ${dotColor}`}} />
           <span className="panel-title">AI FINANCIAL</span>
-          <span className="panel-sub">Gemini · 한·영 v2.4</span>
+          <span className="panel-sub">{hasKey ? 'Gemini 2.5 Flash' : '키 미설정'}</span>
         </div>
       </div>
-      <div className="panel-body assist-body">
-        {msgs.map((m, i) => (
-          <div key={i} className={"chat-msg " + (m.who === 'ai' ? 'is-ai' : 'is-user')}>
-            {m.who === 'ai' && <div className="chat-avatar">AI</div>}
-            <div className="chat-bubble">{m.text}</div>
+      <div ref={bodyRef} className="panel-body assist-body" style={{overflowY: 'auto'}}>
+        {messages.map((m, i) => (
+          <div key={i} className={"chat-msg " + (m.role === 'ai' ? 'is-ai' : 'is-user')}>
+            {m.role === 'ai' && <div className="chat-avatar">AI</div>}
+            <div className="chat-bubble" style={{color: m.error ? '#f87171' : undefined}}>
+              {m.text}
+              {m.streaming && <span style={{opacity: 0.5}}>▍</span>}
+            </div>
           </div>
         ))}
       </div>
       <div className="assist-input">
         <input
-          placeholder="⚠ 1차 데모: AI 응답은 미리 작성된 안내문"
-          value=""
-          disabled
-          readOnly
+          value={input}
+          onChange={e => setInput(e.target.value)}
+          onKeyDown={onKey}
+          disabled={!hasKey || loading}
+          placeholder={hasKey ? (loading ? 'AI 응답 중…' : '질문 입력 (Enter)') : 'config.local.js 키 설정 필요'}
         />
-        <button disabled style={{opacity:0.4, cursor:'not-allowed'}}>↗</button>
+        <button onClick={send} disabled={!hasKey || loading || !input.trim()} style={{opacity: (!hasKey || loading || !input.trim()) ? 0.35 : 1, cursor: hasKey && !loading && input.trim() ? 'pointer' : 'not-allowed'}}>↗</button>
       </div>
       <div style={{fontSize:9, color:'#64748b', textAlign:'center', padding:'4px 12px 6px', fontFamily:'var(--font-mono)'}}>
         과거 통계 기반 참고 · 투자 조언 아님
@@ -2681,7 +2911,7 @@ function App() {
           )}
 
           {/* Top-right — AI co-pilot, content varies */}
-          <AssistantPanel phase={phase} />
+          <AssistantPanel phase={phase} sector={sector} company={company} activeTab={activeTab} />
 
           {/* Bottom-left — legend (always) */}
           <LegendPanel />
@@ -2757,7 +2987,9 @@ function App() {
             />
             <OverlayAiChat
               companyName={(window.__realData && window.__realData.nodeByCode && window.__realData.nodeByCode[corpOverlayTicker] && window.__realData.nodeByCode[corpOverlayTicker].n) || corpOverlayTicker}
+              ticker={corpOverlayTicker}
               context="finance"
+              node={(window.__realData && window.__realData.nodeByCode && window.__realData.nodeByCode[corpOverlayTicker]) || null}
             />
           </div>
           {/* Footer disclaimer */}
