@@ -18,6 +18,7 @@
 실행 (repo 루트에서):
   python integration/dossier/build_firm_template.py
 """
+
 from __future__ import annotations
 
 import os
@@ -28,7 +29,9 @@ _ROOT = os.path.abspath(os.path.join(_HERE, "..", ".."))
 _OUT = os.path.join(_HERE, "firm.html")
 
 sys.path.insert(0, _ROOT)
-from modules.financial.dashboard import _HTML_TEMPLATE  # noqa: E402  (서빙 계층 read-only import)
+from modules.financial.dashboard import (
+    _HTML_TEMPLATE,
+)  # noqa: E402  (서빙 계층 read-only import)
 
 
 def _replace_once(text: str, old: str, new: str, label: str) -> str:
@@ -138,7 +141,7 @@ def main() -> int:
     idx = html.rfind("</script>")
     if idx == -1:
         raise SystemExit("[build 실패] 닫는 </script> 를 찾지 못함")
-    html = html[:idx] + _BOOTSTRAP_CLOSE + html[idx + len("</script>"):]
+    html = html[:idx] + _BOOTSTRAP_CLOSE + html[idx + len("</script>") :]
 
     with open(_OUT, "w", encoding="utf-8") as fp:
         fp.write(html)

@@ -14,6 +14,7 @@
 실행 (repo 루트에서):
   python integration/dossier/extract_firm_json.py
 """
+
 from __future__ import annotations
 
 import glob
@@ -29,7 +30,16 @@ _OUT_DIR = os.path.join(_HERE, "data")
 
 _DATA_PREFIX = "const DATA = "
 _FNAME_RE = re.compile(r"firm_(\w+)\.html$")
-_REQUIRED_KEYS = {"corp", "years", "eqs", "ratios", "industry", "summary", "highlights", "glossary"}
+_REQUIRED_KEYS = {
+    "corp",
+    "years",
+    "eqs",
+    "ratios",
+    "industry",
+    "summary",
+    "highlights",
+    "glossary",
+}
 
 
 def _extract_data_object(html_path: str) -> dict:
@@ -38,7 +48,7 @@ def _extract_data_object(html_path: str) -> dict:
         for line in fp:
             stripped = line.strip()
             if stripped.startswith(_DATA_PREFIX):
-                payload = stripped[len(_DATA_PREFIX):]
+                payload = stripped[len(_DATA_PREFIX) :]
                 if payload.endswith(";"):
                     payload = payload[:-1]
                 return json.loads(payload)
@@ -54,7 +64,9 @@ def _build_hdr(data: dict) -> dict:
         grade      = eqs.grade or "F"
     """
     corp = data.get("corp") or {}
-    years = [y.get("year") for y in (data.get("years") or []) if y.get("year") is not None]
+    years = [
+        y.get("year") for y in (data.get("years") or []) if y.get("year") is not None
+    ]
     if years:
         year_range = f"{min(years)}~{max(years)} ({len(years)}년)"
     else:
