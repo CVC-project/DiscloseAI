@@ -3481,16 +3481,16 @@
     }
 
     // ===== PANEL: ANALYZE =====
-    // 풀스크린 단독 분석 오버레이 — firm_<ticker>.html 로드.
-    // firm_<ticker>.html은 batch에서 47개 기업분 사전 생성. 자체완결형(데이터 인라인).
-    // ⚠️ Chrome/Edge 보안 정책상 file:// 부모가 file:// iframe 로드 차단 — HTTP 서빙(python -m http.server)
-    //    환경에서만 iframe 동작. file://에서는 안내 메시지 + '새 창' 버튼 fallback (window.open은 동작).
+    // 풀스크린 단독 분석 오버레이 — 데이터 주도 단일 템플릿 ../dossier/firm.html?ticker=<t> 로드.
+    // firm.html이 ../dossier/data/firm_<t>.json 을 fetch해 렌더(기존 firm_<t>.html 인라인 → 데이터 분리).
+    // ⚠️ file:// 부모는 iframe·fetch(JSON) 모두 CORS 차단 — HTTP 서빙(python -m http.server)
+    //    환경에서만 동작. file://에서는 안내 메시지 + '새 창' 버튼 fallback (window.open은 동작).
     window.__fullAnalysisUrl = null;
     function openFullAnalysis(n) {
       const ticker = n.t;
       if (!ticker) return false;
-      // 캐시 버스팅 — firm_*.html 차트 CSS·옵션 변경 시 사용자 새로고침 없이 반영
-      const url = `../../docs/prototype/firm_${ticker}.html?v=${window.__FIRM_VER||'5'}`;
+      // 캐시 버스팅 — firm.html/JSON 변경 시 사용자 새로고침 없이 반영
+      const url = `../dossier/firm.html?ticker=${ticker}&v=${window.__FIRM_VER||'5'}`;
       const overlay = document.getElementById('fullAnalysis');
       const frame = document.getElementById('fullAnalysisFrame');
       const title = document.getElementById('fullAnalysisTitle');

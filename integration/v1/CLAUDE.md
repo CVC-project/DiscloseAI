@@ -42,6 +42,20 @@ modules/price/quiz_data.py             ─┘                                   
 
 > **참고**: relation 데이터는 별도 파일 없음. dashboard.html이 `../../modules/relation/data/graph_top50.json`을 직접 fetch한다 (integration이 루트로 승격돼 relation은 `modules/`에 남으므로 `../../modules/relation/`. relation은 이미 JSON 산출물이라 변환 불필요).
 
+## firm 상세 도시에 (`../dossier/`) — 데이터 주도 단일 템플릿
+
+ENTER CORPORATION 풀스크린 분석은 `openFullAnalysis()`(dashboard.html)가 **iframe으로 `../dossier/firm.html?ticker=<t>&v=`** 를 로드한다. (과거: `../../docs/prototype/firm_<t>.html` 완성본 임베드 → 데이터 주도 전환, ARCHITECTURE 이슈 #2.)
+
+| 파일 | 역할 |
+|---|---|
+| `../dossier/firm.html` | **단일 템플릿**. `?ticker=`로 `./data/firm_<t>.json` fetch해 렌더. financial `_HTML_TEMPLATE`에서 파생(CSS·Chart.js 바이트 동일) |
+| `../dossier/data/firm_<t>.json` | per-firm 데이터(48개). 기존 firm HTML의 `const DATA` 무손실 추출(원 단위 슈퍼셋) |
+| `../dossier/extract_firm_json.py` | 1회성 추출 — `docs/prototype/firm_*.html` → `dossier/data/*.json` |
+| `../dossier/build_firm_template.py` | 템플릿 빌드 — financial `_HTML_TEMPLATE` → `firm.html` |
+
+- **HTTP 서빙 필수**: firm.html이 JSON을 fetch → `file://`에서는 CORS 차단(iframe도 차단). `python -m http.server`에서만 동작(기존 제약과 동일).
+- **재생성**: `python integration/dossier/build_firm_template.py` (템플릿) / `python integration/dossier/extract_firm_json.py` (데이터). 단, 데이터는 기존 HTML에서 추출하므로 financial이 firm HTML을 다시 만들면 그때 재추출.
+
 ## 데이터 소스 계약 (각 모듈의 어떤 필드를 뽑는가)
 
 extract_data.py가 의존하는 **테이블·컬럼·Python 상수**. 각 모듈이 스키마를 바꿀 경우 이 표를 반드시 업데이트하고 extract_data.py를 검증할 것.

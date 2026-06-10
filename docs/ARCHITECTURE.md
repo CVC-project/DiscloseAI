@@ -15,17 +15,44 @@
 - **진짜 문제 3가지**: ① 식별자 불일치(같은 `corp_code`가 8자리 financial / 6자리 disclosure) ② DART 재무 중복 수집 ③ 컬럼명 발산(`total_liabilities`/`total_equity` vs `total_debt`/`equity`).
 - **열린 선택지**: ⒜ 현행 유지 + **식별자 규칙만 통일**(저비용) / ⒝ **financial을 분기까지 확장 → 단일 소유**(disclosure는 읽기) / ⒞ **shared(Supabase) 이관 시 통합**.
 
-### 2) financial 완성 HTML을 integration이 iframe (서빙 결합 부채)
-- **현상**: `financial/dashboard.py`가 Chart.js로 **데이터를 인라인한 완성 HTML**(`docs/prototype/firm_<ticker>.html` 47개)을 생성하고, integration v1·v2가 이를 **`<iframe>`으로 임베드**한다(DB→자체 렌더가 아님).
-- **문제**: ① 데이터 생산자(financial)가 표현(HTML)까지 생성 — 계층 경계 침범 ② 런타임 자산이 `docs/prototype/`(문서 폴더)에 위치 ③ 같은 financial 데이터인데 EQS 요약은 `DB→JSON→자체 렌더`, 기업 상세는 `완성 HTML→iframe`으로 경로 이원화 ④ iframe 스타일 불일치를 v2가 `injectV2Theme()`로 강제 주입.
-- **범위**: integration은 **리더 소유 → 리더가 별도 과제로 재구조 예정**. (disclosure는 영향 없음 — 깨끗한 DB 기반)
-- **열린 선택지**: ⒜ 현행 + 본 문서 기록만 / ⒝ **위치만 이동**(`docs/prototype/firm_*` → 예: `integration/dossier/`, financial 출력·iframe·scripts 경로 수정) / ⒞ firm 페이지도 **데이터(JSON)로 분리** 후 integration 자체 렌더(iframe 제거, 스타일 통일).
+### 2) financial firm 상세 — 데이터 주도 템플릿으로 전환 (✅ 대부분 해소, 2026-06 / option ⒞-lite)
+- **변경 전**: `financial/dashboard.py`가 데이터를 인라인한 완성 HTML(`docs/prototype/firm_<ticker>.html` 48개)을 생성하고 integration v1·v2가 `<iframe>` 임베드.
+- **변경 후 (integration-only, financial 코드 무수정)**: firm 상세 = **데이터(JSON) + 단일 템플릿** 구조.
+  - 데이터: `integration/dossier/data/firm_<ticker>.json` 48개 — 기존 HTML의 `const DATA`를 [extract_firm_json.py](../integration/dossier/extract_firm_json.py)로 **무손실 추출**(원 단위, 슈퍼셋 그대로).
+  - 표현: `integration/dossier/firm.html` 단일 템플릿 — [build_firm_template.py](../integration/dossier/build_firm_template.py)가 financial `_HTML_TEMPLATE`에서 파생(CSS·Chart.js·렌더 로직 **바이트 동일**). `?ticker=`로 해당 JSON fetch.
+  - iframe: v1 `../dossier/firm.html?ticker=<t>&v=`, v2 `../dossier/firm.html?ticker=<t>`. `injectV2Theme()` 그대로 작동.
+- **해소**: ① financial이 표현 생성 → **integration이 표현 소유**(financial은 데이터만) ② 런타임 자산 `docs/prototype/`(문서) → `integration/dossier/`(서빙)로 이동.
+- **의도적 보류**: ③ firm 상세도 데이터 주도가 됐으나 **iframe은 유지** — CSS·JS 격리벽(제거 시 firm 테마 CSS와 v2 `styles.css` 충돌, 시각 변형 위험). ④ `injectV2Theme()` 잔존(iframe 격리 전제).
+- **후속(범위 외)**: `docs/prototype/firm_*.html` 48개는 현재 **앱이 미참조** → dev 머지·검증 후 **삭제 예정**. financial 재batch 시 HTML 재생성을 막으려면 `dashboard.py`에 JSON 출력(`write_firm_json`) 추가 필요(A 담당과 협의). `docs/prototype/eqs_data.json`은 보존(`extract_data.py`가 history·percentile용으로 읽음).
 
-### 3) price 타임머신 데이터가 코드에 하드코딩
+### 3) financial 생성물·데이터·캐시가 docs/에 위치 (위치 부채 — 앞으로의 규칙)
+- **현상**: financial 모듈의 **출력 경로가 `docs/`(문서 폴더)에 박혀 있어**, 빌드 산출물·런타임 데이터·캐시가 문서 폴더로 쏟아진다:
+  - [dashboard.py](../modules/financial/dashboard.py) `_DASHBOARD_DIR` → `docs/prototype/financial_dashboard.html`·`kospi50_ranking.html` (+과거 `firm_*.html` 48개)
+  - [industry_groups.py](../modules/financial/industry_groups.py) `_CACHE_DIR` → `docs/prototype/_sector_stats.json` (업종 통계 캐시)
+  - EQS 배치 → `docs/prototype/eqs_data.json` (history·percentile·시총 메타; `extract_data.py`가 읽음)
+- **왜 문제**: `docs/`는 **문서·디자인 목업 전용**(§2)인데 소유·생명주기가 다른 코드 산출물이 섞여 "문서 폴더 = 덤프장"이 됨.
+- **✅ 앞으로의 규칙 (신규 작업부터 적용)**:
+  - financial **생성물(HTML)·데이터(JSON)·캐시**는 `docs/`가 아니라 **`modules/financial/` 아래**(데이터·캐시 → `modules/financial/data/`)에 둔다.
+  - `docs/`에는 **PRD·아키텍처·온보딩·순수 디자인 목업만**. 코드가 생성하는 산출물 금지.
+  - 표현(HTML)은 데이터 생산자가 아니라 **서빙 계층(integration)**이 소유 (이슈 #2 firm 사례).
+- **이미 이전됨**: firm 상세 → `integration/dossier/`(표현)·`integration/dossier/data/`(데이터). (이슈 #2)
+- **남은 이전 목록 (범위 외, A 담당과 협의)**: 아래 모두 현재 `docs/prototype/`에 있으나 financial 소유 → `modules/financial/` 아래로 이전 대상.
+
+  | 파일 | 성격 | 생성 출처 | 이전 위치 | integration 의존 |
+  |---|---|---|---|---|
+  | `financial_dashboard.html` | 단일 기업 EQS 대시보드(삼성 샘플, 데이터 인라인) | [dashboard.py](../modules/financial/dashboard.py) `build_dashboard`(`_DASHBOARD_DIR`) | `modules/financial/` 출력 폴더 | ✗ (디버그·데모용) |
+  | `kospi50_ranking.html` | KOSPI50 EQS 비교/랭킹 대시보드(데이터 인라인) | [dashboard.py](../modules/financial/dashboard.py) 랭킹 빌더 / [scripts/run_eqs_v2.py](../scripts/run_eqs_v2.py) | `modules/financial/` 출력 폴더 | ✗ |
+  | `_sector_stats.json` | 업종 통계 캐시 | [industry_groups.py](../modules/financial/industry_groups.py) `_CACHE_DIR` | `modules/financial/data/` | ✗ |
+  | `eqs_data.json` | history·percentile·시총 메타 | EQS 배치 | `modules/financial/data/` | ⚠️ `extract_data.py`가 읽음 — 이전 시 읽기 경로([:40](../integration/v1/extract_data.py#L40)) 동기 수정 필수 |
+
+  - 실행: `dashboard.py` `_DASHBOARD_DIR`·`industry_groups.py` `_CACHE_DIR` 출력 경로 변경. **이전 전까지 `eqs_data.json`·`_sector_stats.json`은 현 위치 유지(삭제 금지)**.
+- **보존(진짜 목업)**: `corporate_universe_v5.html`(relation 프로토타입 원본·fork 소스)·`corporate_universe_v6_galaxies.html`(v1 dashboard 원형)은 docs/prototype에 남아도 무방.
+
+### 4) price 타임머신 데이터가 코드에 하드코딩
 - **현상**: 타임머신 시나리오 12개가 DB가 아니라 `modules/price/quiz_data.py`의 **`QUIZ_LIST` Python 상수**에 하드코딩(손으로 엄선한 과거 사건). integration은 이를 JSON으로 추출해 **inline 렌더**(iframe 아님). 주가·라벨 자체는 `price_local`(DB)에 정상.
 - **열린 선택지**: ⒜ 현행 유지(엄선 교육 콘텐츠라 무방) / ⒝ DB 테이블로 이관해 갱신 가능하게.
 
-### 4) 기타
+### 5) 기타
 - `shared/models.py` 95% 미사용(테스트 fixture만 참조). 미래 운영 이관 시 정리. relation `storage/CLAUDE.md`의 shared 승격 계획도 그때 일괄.
 
 > 참고: disclosure 모듈은 `disclosure.db`(sqlite)에서만 소비되는 **깨끗한 DB 기반** 구조다(손댈 것 없음).
@@ -76,7 +103,7 @@ yfinance ─────→  modules/price/       ──→  price.db (price_loc
 |------|----------|
 | `.claude/` | Skills, Agents, 설정 |
 | `shared/` | 환경변수 로드(config.py, **활성**) + 미래 운영 DB 스키마(db.py·models.py, **현재 미사용**) |
-| `docs/` | PRD, 아키텍처(본 문서), 온보딩 |
+| `docs/` | PRD, 아키텍처(본 문서), 온보딩, **순수 디자인 목업**(예: `corporate_universe_v*.html`). ⚠️ **코드 생성 산출물·데이터·캐시 금지** — 모듈 출력은 `modules/<모듈>/` 아래로 (이슈 #3) |
 
 ### 데이터 생산자 (`modules/` 아래, 각 담당자만 수정)
 | 폴더 | 담당 | 역할 | 로컬 테이블 |
@@ -86,12 +113,12 @@ yfinance ─────→  modules/price/       ──→  price.db (price_loc
 | `modules/relation/` | C | 기업 간 관계 (지분·계열) | `company_node`, `relation_raw`, `relation_local` |
 | `modules/price/` | D | 주가 + 공시 후 변동 라벨 | `price_local`, `vkospi_local` |
 
-각 모듈: `db.py`(SQLite 연결), `models.py`(로컬 테이블 = **정본 스키마**), `data/`(DB·JSON, git 커밋됨).
+각 모듈: `db.py`(SQLite 연결), `models.py`(로컬 테이블 = **정본 스키마**), `data/`(DB·JSON, git 커밋됨). **모듈이 생성하는 산출물(HTML·JSON·캐시)도 `docs/`가 아니라 이 폴더 아래**에 둔다 (이슈 #3).
 
 ### 서빙 계층 (리더 소유)
 | 폴더 | 역할 |
 |------|----------|
-| `integration/` | 4개 모듈 산출물 교차 통합. `v1/`(vanilla JS, fallback) · `v2/`(React, 정본) · `data/`(공유 JSON, v1이 생성→v1·v2 fetch) · `index.html`(진입점) |
+| `integration/` | 4개 모듈 산출물 교차 통합. `v1/`(vanilla JS, fallback) · `v2/`(React, 정본) · `data/`(공유 JSON, v1이 생성→v1·v2 fetch) · `dossier/`(firm 상세 = 데이터 주도 단일 템플릿+JSON, v1·v2가 iframe 로드 — 이슈 #2) · `index.html`(진입점) |
 | `api/` *(미구현)* | 미래 백엔드 (FastAPI·RAG·learning). 현재 폴더 없음 — 구축 시 생성 |
 
 ---
@@ -106,7 +133,10 @@ D: yfinance 주가 → price_local (price.db);  linker.py가 공시-주가 라�
 
 → integration/v1/extract_data.py 가 financial.db·disclosure.db·price quiz_data 를 읽어
   integration/data/{eqs_summary,disclosures,price_scenarios}.json 생성
+  (financial.db에 없는 history·percentile·시총은 docs/prototype/eqs_data.json 에서 보강 — 이슈 #3)
 → v1 dashboard.html / v2 index.html 가 위 JSON + modules/relation/data/graph_top50.json 을 fetch
+→ firm 상세(ENTER CORPORATION): v1·v2가 integration/dossier/firm.html?ticker=<t> 를 iframe 로드
+  → firm.html 이 integration/dossier/data/firm_<t>.json 을 fetch 해 렌더 (이슈 #2)
 ```
 
 ---
