@@ -30,7 +30,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse, StreamingResponse
 from pydantic import BaseModel, Field
 
-
 ROOT = Path(__file__).resolve().parents[2]
 load_dotenv(ROOT / ".env")
 
@@ -41,6 +40,8 @@ BEDROCK_DEFAULT_MODEL = os.getenv(
 )
 BEDROCK_DEEP_MODEL = os.getenv("BEDROCK_DEEP_MODEL", "anthropic.claude-sonnet-4-6")
 BEDROCK_TIMEOUT = float(os.getenv("BEDROCK_TIMEOUT", "45"))
+# 시스템 프롬프트가 "8~15문장, 200~400자, 더 길어도 좋음"을 요구하므로 700은 잘림.
+BEDROCK_MAX_TOKENS = int(os.getenv("BEDROCK_MAX_TOKENS", "1800"))
 
 
 disclosure_router = APIRouter(prefix="/disclosure", tags=["disclosure-chat"])
@@ -102,7 +103,9 @@ def _history_to_bedrock(history: list[dict[str, Any]]) -> list[dict[str, Any]]:
             text = item.get("content")
         if text is None and isinstance(item.get("parts"), list):
             parts = item.get("parts") or []
-            text = "\n".join(str(p.get("text", "")) for p in parts if isinstance(p, dict))
+            text = "\n".join(
+                str(p.get("text", "")) for p in parts if isinstance(p, dict)
+            )
         text = str(text or "").strip()
         if not text:
             continue
@@ -111,11 +114,7 @@ def _history_to_bedrock(history: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 
 def _extract_bedrock_text(data: dict[str, Any]) -> str:
-    parts = (
-        data.get("output", {})
-        .get("message", {})
-        .get("content", [])
-    )
+    parts = data.get("output", {}).get("message", {}).get("content", [])
     texts = [p.get("text", "") for p in parts if isinstance(p, dict) and p.get("text")]
     return "\n".join(texts).strip()
 
@@ -126,7 +125,7 @@ def _call_bedrock(
     system_prompt: str,
     history: list[dict[str, Any]] | None = None,
     model: str | None = None,
-    max_tokens: int = 700,
+    max_tokens: int | None = None,
     temperature: float = 0.35,
 ) -> dict[str, Any]:
     if not BEDROCK_API_KEY:
@@ -139,7 +138,7 @@ def _call_bedrock(
         "system": [{"text": system_prompt}],
         "messages": messages,
         "inferenceConfig": {
-            "maxTokens": max_tokens,
+            "maxTokens": max_tokens if max_tokens is not None else BEDROCK_MAX_TOKENS,
             "temperature": temperature,
         },
     }
@@ -260,6 +259,7 @@ def health():
         "deep_model": _bedrock_model_id(BEDROCK_DEEP_MODEL),
         "region": BEDROCK_REGION,
         "key_set": bool(BEDROCK_API_KEY),
+        "max_tokens": BEDROCK_MAX_TOKENS,
     }
 
 

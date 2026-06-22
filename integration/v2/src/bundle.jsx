@@ -1191,12 +1191,40 @@ window.SectorMap = SectorMap;
 // app.jsx — DiscloseAI: Phase 1 Intro → Phase 2 Galaxy → Phase 3 Sector → Phase 4 Company
 // (React hooks already destructured at top of bundle)
 
-// ─── Gemini AI streaming helper ─────────────────────────────────────────────
+// ─── Bedrock chat helper (로컬 프록시 localhost:8001) ────────────────────────
+// Bedrock Converse API는 현재 비스트리밍 JSON. 호환을 위해 단발 onChunk로 전달.
 
-async function geminiStream({ apiKey, model, systemPrompt, history, onChunk, onDone, onError }) {
-  const proxyUrl = window.DISCLOSEAI_CHAT_URL || 'http://localhost:8001/integration/chat';
+const _CHAT_PROXY_URL = window.DISCLOSEAI_CHAT_URL || 'http://localhost:8001/integration/chat';
+const _CHAT_HEALTH_URL = _CHAT_PROXY_URL.replace(/\/chat$/, '/health');
+
+async function bedrockChatHealth() {
   try {
-    const resp = await fetch(proxyUrl, {
+    const ctl = new AbortController();
+    const t = setTimeout(() => ctl.abort(), 3000);
+    const r = await fetch(_CHAT_HEALTH_URL, { signal: ctl.signal });
+    clearTimeout(t);
+    if (!r.ok) return { ok: false, reason: 'HTTP ' + r.status };
+    const j = await r.json();
+    if (!j.key_set) return { ok: false, reason: 'BEDROCK_API_KEY not set' };
+    return { ok: true, model: j.model };
+  } catch (e) {
+    return { ok: false, reason: 'unreachable' };
+  }
+}
+
+function useBedrockHealth() {
+  const [health, setHealth] = React.useState({ ok: null });
+  React.useEffect(() => {
+    let alive = true;
+    bedrockChatHealth().then(h => { if (alive) setHealth(h); });
+    return () => { alive = false; };
+  }, []);
+  return [health, () => bedrockChatHealth().then(setHealth)];
+}
+
+async function bedrockChat({ systemPrompt, history, onChunk, onDone, onError }) {
+  try {
+    const resp = await fetch(_CHAT_PROXY_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -1216,49 +1244,11 @@ async function geminiStream({ apiKey, model, systemPrompt, history, onChunk, onD
     onChunk && onChunk((data.text || '').trim() || '(빈 응답)');
     onDone && onDone();
   } catch (err) {
-    onError && onError(err && err.message ? err.message : String(err));
-  }
-  return;
-
-  const m = model || window.GEMINI_MODEL || 'gemini-2.5-flash';
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${m}:streamGenerateContent?alt=sse&key=${apiKey}`;
-  try {
-    const resp = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        system_instruction: { parts: [{ text: systemPrompt }] },
-        contents: history,
-        generationConfig: { temperature: 0.7, maxOutputTokens: 1024 },
-      }),
-    });
-    if (!resp.ok) {
-      const errText = await resp.text().catch(() => resp.status);
-      throw new Error(`HTTP ${resp.status}: ${String(errText).slice(0, 120)}`);
-    }
-    const reader = resp.body.getReader();
-    const dec = new TextDecoder();
-    let buf = '';
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      buf += dec.decode(value, { stream: true });
-      const lines = buf.split('\n');
-      buf = lines.pop();
-      for (const line of lines) {
-        if (!line.startsWith('data: ')) continue;
-        const raw = line.slice(6).trim();
-        if (!raw || raw === '[DONE]') continue;
-        try {
-          const data = JSON.parse(raw);
-          const chunk = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
-          if (chunk) onChunk(chunk);
-        } catch {}
-      }
-    }
-    onDone();
-  } catch (e) {
-    onError(e.message || String(e));
+    const raw = err && err.message ? err.message : String(err);
+    const friendly = /failed to fetch|networkerror|load failed/i.test(raw)
+      ? '로컬 채팅 서버에 연결할 수 없습니다. 터미널에서 실행: python -m modules.disclosure.chat_server'
+      : raw;
+    onError && onError(friendly);
   }
 }
 
@@ -1679,8 +1669,7 @@ function AiChatBubble({ msg }) {
 
 function OverlayAiChat({ companyName, ticker, context, disc, node }) {
   const name = companyName || '기업';
-  const apiKey = 'bedrock-server-proxy';
-  const hasKey = true;
+  const [health, recheckHealth] = useBedrockHealth();
 
   const initText = context === 'disclosure'
     ? `${name}의 공시를 분석했습니다. 궁금한 점을 질문해 보세요.\n\nTip: "이 공시가 주가에 미치는 영향은?", "Cash 항목 설명해줘" 등`
@@ -1703,7 +1692,7 @@ function OverlayAiChat({ companyName, ticker, context, disc, node }) {
 
   async function send() {
     const text = input.trim();
-    if (!text || loading || !hasKey) return;
+    if (!text || loading) return;
     setInput('');
     const userMsg = { role: 'user', text };
     const nextMessages = [...messages, userMsg];
@@ -1718,8 +1707,7 @@ function OverlayAiChat({ companyName, ticker, context, disc, node }) {
     setMessages(prev => [...prev, placeholder]);
 
     let accumulated = '';
-    await geminiStream({
-      apiKey,
+    await bedrockChat({
       systemPrompt: buildGeminiSystemPrompt({ context, companyName: name, ticker, disc, node }),
       history,
       onChunk: (chunk) => {
@@ -1745,6 +1733,7 @@ function OverlayAiChat({ companyName, ticker, context, disc, node }) {
           return updated;
         });
         setLoading(false);
+        recheckHealth();
       },
     });
   }
@@ -1753,23 +1742,18 @@ function OverlayAiChat({ companyName, ticker, context, disc, node }) {
     if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); }
   }
 
-  const dotColor = hasKey ? '#4ade80' : '#fbbf24';
+  const isOnline = health.ok === true;
+  const isOffline = health.ok === false;
+  const dotColor = isOnline ? '#4ade80' : (isOffline ? '#f87171' : '#94a3b8');
   return (
     <div style={{width: 300, flexShrink: 0, display: 'flex', flexDirection: 'column', borderLeft: '1px solid rgba(94,234,212,0.12)', background: 'rgba(4,7,18,0.72)', backdropFilter: 'blur(12px)'}}>
       <div style={{padding: '10px 14px', flexShrink: 0, borderBottom: '1px solid rgba(94,234,212,0.1)', display: 'flex', alignItems: 'center', gap: 8}}>
         <span style={{width: 7, height: 7, borderRadius: '50%', background: dotColor, boxShadow: `0 0 6px ${dotColor}`, display: 'inline-block'}} />
         <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 10, letterSpacing: '.12em', color: '#fbbf24'}}>AI FINANCIAL</span>
-        <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 8, color: '#475569', marginLeft: 4}}>
-          {hasKey ? 'Gemini 2.5 Flash' : '키 미설정'}
+        <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 8, color: isOffline ? '#f87171' : '#475569', marginLeft: 4}}>
+          {isOffline ? '서버 미연결' : 'Bedrock Claude'}
         </span>
       </div>
-      {!hasKey && (
-        <div style={{padding: '14px', fontSize: 11, color: '#64748b', lineHeight: 1.7, borderBottom: '1px solid rgba(94,234,212,0.08)'}}>
-          <div style={{color: '#fbbf24', fontFamily: 'var(--font-mono,monospace)', fontSize: 9, marginBottom: 6}}>⚠ Bedrock 서버 미연결</div>
-          <code style={{fontSize: 10, background: 'rgba(255,255,255,0.05)', padding: '3px 7px', borderRadius: 3, display: 'block', marginBottom: 6}}>v2/config.local.js</code>
-          로컬 채팅 서버를 실행하면 활성화됩니다.
-        </div>
-      )}
       <div ref={bodyRef} style={{flex: '1 1 0%', overflowY: 'auto', padding: '12px 12px', display: 'flex', flexDirection: 'column', gap: 10}}>
         {messages.map((m, i) => <AiChatBubble key={i} msg={m} />)}
         {loading && messages[messages.length - 1]?.streaming !== true && (
@@ -1781,14 +1765,14 @@ function OverlayAiChat({ companyName, ticker, context, disc, node }) {
           value={input}
           onChange={e => setInput(e.target.value)}
           onKeyDown={onKey}
-          disabled={!hasKey || loading}
-          placeholder={hasKey ? (loading ? 'AI 응답 중…' : '질문 입력 (Enter)') : 'config.local.js 키 설정 필요'}
-          style={{flex: 1, background: 'rgba(255,255,255,0.04)', border: `1px solid ${hasKey ? 'rgba(94,234,212,0.2)' : 'rgba(100,116,139,0.2)'}`, borderRadius: 2, color: hasKey ? '#e2e8f0' : '#475569', fontFamily: 'inherit', fontSize: 11, padding: '6px 9px', outline: 'none'}}
+          disabled={loading}
+          placeholder={loading ? 'AI 응답 중…' : '질문 입력 (Enter)'}
+          style={{flex: 1, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(94,234,212,0.2)', borderRadius: 2, color: '#e2e8f0', fontFamily: 'inherit', fontSize: 11, padding: '6px 9px', outline: 'none'}}
         />
         <button
           onClick={send}
-          disabled={!hasKey || loading || !input.trim()}
-          style={{background: 'rgba(94,234,212,0.1)', border: '1px solid rgba(94,234,212,0.25)', color: '#5eead4', padding: '6px 10px', borderRadius: 2, cursor: hasKey && !loading && input.trim() ? 'pointer' : 'not-allowed', opacity: (!hasKey || loading || !input.trim()) ? 0.35 : 1, transition: 'opacity 150ms'}}
+          disabled={loading || !input.trim()}
+          style={{background: 'rgba(94,234,212,0.1)', border: '1px solid rgba(94,234,212,0.25)', color: '#5eead4', padding: '6px 10px', borderRadius: 2, cursor: !loading && input.trim() ? 'pointer' : 'not-allowed', opacity: (loading || !input.trim()) ? 0.35 : 1, transition: 'opacity 150ms'}}
         >↗</button>
       </div>
       <div style={{textAlign: 'center', padding: '3px 14px 5px', fontFamily: 'var(--font-mono,monospace)', fontSize: 8, color: '#334155'}}>
@@ -2399,10 +2383,9 @@ function CompanyOverviewPanel({ company, sector, onBack, onEnter }) {
   );
 }
 
-// ─── AI assistant (panel-tr — Gemini functional) ──────────────────────────
+// ─── AI assistant (panel-tr — Bedrock Claude) ─────────────────────────────
 function AssistantPanel({ phase, sector, company, activeTab }) {
-  const apiKey = 'bedrock-server-proxy';
-  const hasKey = true;
+  const [health, recheckHealth] = useBedrockHealth();
 
   const initGreeting = React.useMemo(() => {
     const greeting = AI_GREETINGS[phase] || AI_GREETINGS.galaxy;
@@ -2425,7 +2408,7 @@ function AssistantPanel({ phase, sector, company, activeTab }) {
 
   async function send() {
     const text = input.trim();
-    if (!text || loading || !hasKey) return;
+    if (!text || loading) return;
     setInput('');
     const next = [...messages, { role: 'user', text }];
     setMessages(next);
@@ -2448,8 +2431,7 @@ function AssistantPanel({ phase, sector, company, activeTab }) {
 
     let accumulated = '';
     setMessages(prev => [...prev, { role: 'ai', text: '', streaming: true }]);
-    await geminiStream({
-      apiKey,
+    await bedrockChat({
       systemPrompt,
       history,
       onChunk: (chunk) => {
@@ -2463,20 +2445,25 @@ function AssistantPanel({ phase, sector, company, activeTab }) {
       onError: (err) => {
         setMessages(prev => { const u = [...prev]; u[u.length - 1] = { role: 'ai', text: `⚠ ${err}`, error: true }; return u; });
         setLoading(false);
+        recheckHealth();
       },
     });
   }
 
   function onKey(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); } }
 
-  const dotColor = hasKey ? '#4ade80' : '#fbbf24';
+  const isOnline = health.ok === true;
+  const isOffline = health.ok === false;
+  const dotColor = isOnline ? '#4ade80' : (isOffline ? '#f87171' : '#94a3b8');
   return (
     <div className="panel panel-tr">
       <div className="panel-head">
         <div className="panel-head-l">
           <span className="panel-dot panel-dot-amber" style={{background: dotColor, boxShadow: `0 0 6px ${dotColor}`}} />
           <span className="panel-title">AI FINANCIAL</span>
-          <span className="panel-sub">{hasKey ? 'Bedrock Claude' : '서버 미연결'}</span>
+          <span className="panel-sub" style={isOffline ? {color: '#f87171'} : undefined}>
+            {isOffline ? '서버 미연결' : 'Bedrock Claude'}
+          </span>
         </div>
       </div>
       <div ref={bodyRef} className="panel-body assist-body" style={{overflowY: 'auto'}}>
@@ -2495,10 +2482,10 @@ function AssistantPanel({ phase, sector, company, activeTab }) {
           value={input}
           onChange={e => setInput(e.target.value)}
           onKeyDown={onKey}
-          disabled={!hasKey || loading}
-          placeholder={hasKey ? (loading ? 'AI 응답 중…' : '질문 입력 (Enter)') : '로컬 채팅 서버 실행 필요'}
+          disabled={loading}
+          placeholder={loading ? 'AI 응답 중…' : '질문 입력 (Enter)'}
         />
-        <button onClick={send} disabled={!hasKey || loading || !input.trim()} style={{opacity: (!hasKey || loading || !input.trim()) ? 0.35 : 1, cursor: hasKey && !loading && input.trim() ? 'pointer' : 'not-allowed'}}>↗</button>
+        <button onClick={send} disabled={loading || !input.trim()} style={{opacity: (loading || !input.trim()) ? 0.35 : 1, cursor: !loading && input.trim() ? 'pointer' : 'not-allowed'}}>↗</button>
       </div>
       <div style={{fontSize:9, color:'#64748b', textAlign:'center', padding:'4px 12px 6px', fontFamily:'var(--font-mono)'}}>
         과거 통계 기반 참고 · 투자 조언 아님
