@@ -1659,6 +1659,116 @@ function DisclosureFullOverlay({ ticker, onClose }) {
 
 // ─── Overlay AI chat sidebar (Gemini functional) ──────────────────────────
 
+// ─── Glossary 호버 툴팁 (모듈 ① PoC) ──────────────────────────────────────────
+// integration/data/glossary.json 을 fetch → label에서 별칭 추출 → 챗 마크다운 응답에
+// <span class="gloss-term">로 자동 wrap → CSS·document-level mouseover 핸들러로 툴팁.
+// 단일 PoC 영역: 챗 AI 응답. 다른 영역(공시 카드·firm 모달)은 후속 작업.
+let _glossaryEntries = null;     // { key: {label, description, category, ...} }
+let _glossaryAliasMap = null;    // Map<alias, key>
+let _glossaryRegex = null;       // 통합 alternation regex (longest first)
+
+function _initGlossary(payload) {
+  const entries = payload && payload.entries;
+  if (!entries || typeof entries !== 'object') return;
+  _glossaryEntries = entries;
+  const aliases = [];
+  for (const [key, entry] of Object.entries(entries)) {
+    const label = String(entry.label || '');
+    // "PER (주가수익비율)" → ["PER", "주가수익비율"]
+    // "전환사채(CB)" → ["전환사채", "CB"]
+    // 다중 뜻 라벨(" · " 또는 "·" 포함)은 별칭 추출 안 함 — 오매칭 위험 (예: "투자주의·경고·위험")
+    const m = label.match(/\(([^)]+)\)/);
+    const main = label.replace(/\s*\([^)]+\)\s*/g, '').trim();
+    const set = new Set();
+    if (main && main.length >= 2 && !main.includes('·')) set.add(main);
+    if (m && m[1] && m[1].length >= 2 && !m[1].includes('·')) set.add(m[1].trim());
+    for (const a of set) aliases.push({ alias: a, key });
+  }
+  // 긴 별칭이 먼저 매칭되도록 정렬 (정규식 alternation은 leftmost-first)
+  aliases.sort((a, b) => b.alias.length - a.alias.length);
+  // alias → key map (먼저 등록된 별칭이 우선; 정렬 후 처음 항목이 가장 긴 것)
+  _glossaryAliasMap = new Map();
+  for (const { alias, key } of aliases) {
+    if (!_glossaryAliasMap.has(alias)) _glossaryAliasMap.set(alias, key);
+  }
+  const escapedAlts = [..._glossaryAliasMap.keys()]
+    .map(a => a.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+  _glossaryRegex = new RegExp(escapedAlts.join('|'), 'g');
+}
+
+// 마크다운 렌더가 만든 HTML 문자열에서 텍스트 부분에만 별칭을 wrap.
+// 태그 안 (속성 값·태그명)은 건드리지 않기 위해 `<...>` 청크를 split으로 분리.
+function _attachGlossaryTerms(html) {
+  if (!_glossaryRegex || !_glossaryAliasMap || _glossaryAliasMap.size === 0) return html;
+  const parts = html.split(/(<[^>]+>)/);
+  for (let i = 0; i < parts.length; i += 2) {
+    const text = parts[i];
+    if (!text) continue;
+    parts[i] = text.replace(_glossaryRegex, (match) => {
+      const key = _glossaryAliasMap.get(match);
+      if (!key) return match;
+      return `<span class="gloss-term" data-key="${key}">${match}</span>`;
+    });
+  }
+  return parts.join('');
+}
+
+// 모듈 로드 시 한 번만 fetch. 실패해도 챗은 동작(별칭 wrap만 비활성).
+(async () => {
+  try {
+    const r = await fetch('../data/glossary.json');
+    if (!r.ok) return;
+    _initGlossary(await r.json());
+  } catch (e) {
+    console.warn('[glossary] fetch failed', e && e.message);
+  }
+})();
+
+// 호버 시 툴팁 표시 — document-level 위임 (동적으로 추가되는 .gloss-term 모두 커버)
+let _glossTipEl = null;
+function _showGlossTip(termEl, entry) {
+  _hideGlossTip();
+  const tip = document.createElement('div');
+  tip.className = 'gloss-tip';
+  const esc = _escHtml;
+  const parts = [`<div class="gloss-tip-label">${esc(entry.label || '')}</div>`];
+  if (entry.category) parts.push(`<div class="gloss-tip-cat">${esc(entry.category)}</div>`);
+  if (entry.description) parts.push(`<div class="gloss-tip-desc">${esc(entry.description)}</div>`);
+  if (entry.how) parts.push(`<div class="gloss-tip-how"><b>방식:</b> ${esc(entry.how)}</div>`);
+  if (entry.benchmark) parts.push(`<div class="gloss-tip-bench">📏 ${esc(entry.benchmark)}</div>`);
+  if (entry.intuition) parts.push(`<div class="gloss-tip-int">💡 ${esc(entry.intuition)}</div>`);
+  tip.innerHTML = parts.join('');
+  document.body.appendChild(tip);
+  _glossTipEl = tip;
+  // 위치 계산: 용어 위쪽 우선, 공간 부족하면 아래로 flip
+  const r = termEl.getBoundingClientRect();
+  const tipW = Math.min(340, window.innerWidth - 16);
+  tip.style.width = tipW + 'px';
+  const tipH = tip.offsetHeight;
+  let left = r.left + r.width / 2 - tipW / 2;
+  left = Math.max(8, Math.min(window.innerWidth - tipW - 8, left));
+  let top = r.top - tipH - 8;
+  if (top < 8) top = r.bottom + 8;
+  tip.style.left = left + 'px';
+  tip.style.top = top + 'px';
+}
+function _hideGlossTip() {
+  if (_glossTipEl) { _glossTipEl.remove(); _glossTipEl = null; }
+}
+document.addEventListener('mouseover', (e) => {
+  const t = e.target && e.target.closest && e.target.closest('.gloss-term');
+  if (!t) return;
+  const key = t.getAttribute('data-key');
+  const entry = _glossaryEntries && _glossaryEntries[key];
+  if (entry) _showGlossTip(t, entry);
+});
+document.addEventListener('mouseout', (e) => {
+  const t = e.target && e.target.closest && e.target.closest('.gloss-term');
+  if (!t) return;
+  if (e.relatedTarget && t.contains(e.relatedTarget)) return;
+  _hideGlossTip();
+});
+
 // ─── 마크다운 렌더 ─────────────────────────────────────────────────────────
 // Bedrock 응답에 ** ## - 등이 섞여 나오므로 굵게·헤더·리스트로 풀어 렌더한다.
 // 외부 라이브러리 없이 정규식 기반 — XSS 방지를 위해 HTML escape 먼저 수행.
@@ -1704,6 +1814,8 @@ function _renderMarkdownToHTML(text) {
     html += `<div>${line}</div>`;
   }
   closeLists();
+  // 마지막 단계: glossary 용어 자동 wrap (모듈 ① PoC)
+  html = _attachGlossaryTerms(html);
   return html;
 }
 function MarkdownText({ text }) {
@@ -2346,10 +2458,10 @@ function CompanyOverviewPanel({ company, sector, onBack, onEnter }) {
           </div>
         </div>
         <div className="company-ov-stats">
-          <div className="ov-stat"><div className="ov-k">시가총액</div><div className="ov-v">{capLabel}</div></div>
-          <div className="ov-stat"><div className="ov-k">PER</div><div className="ov-v">{fmtNum(valu && valu.per)}</div></div>
-          <div className="ov-stat"><div className="ov-k">PBR</div><div className="ov-v">{fmtNum(valu && valu.pbr)}</div></div>
-          <div className="ov-stat"><div className="ov-k">ROE</div><div className="ov-v" style={{color: (valu && valu.roe != null && valu.roe >= 0) ? '#4ade80' : '#f87171'}}>{fmtNum(valu && valu.roe, '%')}</div></div>
+          <div className="ov-stat"><div className="ov-k"><span className="gloss-term" data-key="market_cap">시가총액</span></div><div className="ov-v">{capLabel}</div></div>
+          <div className="ov-stat"><div className="ov-k"><span className="gloss-term" data-key="per">PER</span></div><div className="ov-v">{fmtNum(valu && valu.per)}</div></div>
+          <div className="ov-stat"><div className="ov-k"><span className="gloss-term" data-key="pbr">PBR</span></div><div className="ov-v">{fmtNum(valu && valu.pbr)}</div></div>
+          <div className="ov-stat"><div className="ov-k"><span className="gloss-term" data-key="roe">ROE</span></div><div className="ov-v" style={{color: (valu && valu.roe != null && valu.roe >= 0) ? '#4ade80' : '#f87171'}}>{fmtNum(valu && valu.roe, '%')}</div></div>
         </div>
         <div className="company-ov-row">
           <div className="ov-k">현재가</div>
@@ -2361,12 +2473,12 @@ function CompanyOverviewPanel({ company, sector, onBack, onEnter }) {
           <div className="sector-ov-section">
             <div className="ov-sec-title">FINANCIALS · 재무 요약</div>
             <div className="company-ov-stats" style={{marginTop:6, flexWrap:'wrap'}}>
-              {rv  && <div className="ov-stat"><div className="ov-k">매출</div><div className="ov-v" style={{fontSize:13}}>{rv}T</div></div>}
-              {oi  && <div className="ov-stat"><div className="ov-k">영업이익</div><div className="ov-v" style={{fontSize:13}}>{oi}T</div></div>}
-              {oim && <div className="ov-stat"><div className="ov-k">영업이익률</div><div className="ov-v" style={{fontSize:13, color: parseFloat(oim) > 0 ? '#4ade80' : '#f87171'}}>{oim}%</div></div>}
-              {dr  && <div className="ov-stat"><div className="ov-k">부채비율</div><div className="ov-v" style={{fontSize:13, color: dr > 200 ? '#f87171' : '#e2e8f0'}}>{dr}%</div></div>}
-              {ocf && <div className="ov-stat"><div className="ov-k">영업CF</div><div className="ov-v" style={{fontSize:13}}>{ocf}T</div></div>}
-              {ic  && <div className="ov-stat"><div className="ov-k">투자CF</div><div className="ov-v" style={{fontSize:13}}>{ic}T</div></div>}
+              {rv  && <div className="ov-stat"><div className="ov-k"><span className="gloss-term" data-key="revenue">매출</span></div><div className="ov-v" style={{fontSize:13}}>{rv}T</div></div>}
+              {oi  && <div className="ov-stat"><div className="ov-k"><span className="gloss-term" data-key="operating_income">영업이익</span></div><div className="ov-v" style={{fontSize:13}}>{oi}T</div></div>}
+              {oim && <div className="ov-stat"><div className="ov-k"><span className="gloss-term" data-key="operating_margin">영업이익률</span></div><div className="ov-v" style={{fontSize:13, color: parseFloat(oim) > 0 ? '#4ade80' : '#f87171'}}>{oim}%</div></div>}
+              {dr  && <div className="ov-stat"><div className="ov-k"><span className="gloss-term" data-key="debt_ratio">부채비율</span></div><div className="ov-v" style={{fontSize:13, color: dr > 200 ? '#f87171' : '#e2e8f0'}}>{dr}%</div></div>}
+              {ocf && <div className="ov-stat"><div className="ov-k"><span className="gloss-term" data-key="operating_cashflow">영업CF</span></div><div className="ov-v" style={{fontSize:13}}>{ocf}T</div></div>}
+              {ic  && <div className="ov-stat"><div className="ov-k"><span className="gloss-term" data-key="investing_cashflow">투자CF</span></div><div className="ov-v" style={{fontSize:13}}>{ic}T</div></div>}
             </div>
             {/* #8: Revenue sparkline + percentile */}
             {(sparkPath || pctBadge) && (
@@ -2578,9 +2690,9 @@ function LegendPanel() {
             <span style={{color:'#5eead4'}}>━━━</span> SOLID · 지분율 분류 (K-IFRS)
           </div>
           <div className="legend-grid">
-            <LegendRow color="#5eead4" kind="solid"   label="종속기업"    sub=">50%" />
-            <LegendRow color="#a78bfa" kind="solid"   label="관계기업"    sub="20–50%" />
-            <LegendRow color="#fbbf24" kind="solid"   label="유의적 투자" sub="5–20%" />
+            <LegendRow color="#5eead4" kind="solid"   label="종속기업"    sub=">50%"   glossKey="subsidiary" />
+            <LegendRow color="#a78bfa" kind="solid"   label="관계기업"    sub="20–50%" glossKey="associate_company" />
+            <LegendRow color="#fbbf24" kind="solid"   label="유의적 투자" sub="5–20%"  glossKey="significant_interest" />
           </div>
         </div>
         <div className="legend-section">
@@ -2598,13 +2710,17 @@ function LegendPanel() {
   );
 }
 
-function LegendRow({ color, kind, label, sub }) {
+function LegendRow({ color, kind, label, sub, glossKey }) {
   // kind: solid / dash / dot / ddash
+  // glossKey: optional — 라벨에 호버 툴팁 부착할 glossary entry key
   const dashAttr =
     kind === 'solid'  ? '0' :
     kind === 'dash'   ? '6 4' :
     kind === 'dot'    ? '2 3' :
     '1 2 6 2'; // ddash
+  const labelNode = glossKey
+    ? <span className="gloss-term" data-key={glossKey}>{label}</span>
+    : label;
   return (
     <div className="legend-row">
       <svg width="44" height="14" viewBox="0 0 44 14" className="legend-svg">
@@ -2617,7 +2733,7 @@ function LegendRow({ color, kind, label, sub }) {
         <circle cx="42" cy="7" r="2.4" fill={color} />
       </svg>
       <div className="legend-text">
-        <div className="legend-label" style={{color}}>{label}</div>
+        <div className="legend-label" style={{color}}>{labelNode}</div>
         <div className="legend-sub">{sub}</div>
       </div>
     </div>

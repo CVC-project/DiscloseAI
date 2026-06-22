@@ -244,6 +244,45 @@ def extract_price_scenarios() -> list[dict]:
 
 
 # --------------------------------------------------------------------------- #
+#  glossary 통합 (financial + disclosure 두 모듈의 Python dict)
+# --------------------------------------------------------------------------- #
+def build_glossary() -> dict:
+    """modules/financial/glossary.GLOSSARY + modules/disclosure/glossary.GLOSSARY를
+    합쳐 단일 dict 리턴. 각 entry는 key를 포함한 평탄화된 dict로 변환.
+
+    출력 스키마 (entries 안):
+        { "<key>": { "key", "label", "description", "category",
+                     "how"?, "benchmark"?, "intuition"? } }
+
+    충돌 시 disclosure가 우선(공시 도메인이 더 광범위).
+    """
+    merged: dict[str, dict] = {}
+    try:
+        from modules.financial.glossary import GLOSSARY as FIN_GLOSS
+
+        for k, entry in FIN_GLOSS.items():
+            d = entry.as_dict()
+            d["key"] = k
+            d.setdefault("category", "financial_ratio")
+            # None 필드 제거 (UI에 빈 값 안 보이게)
+            merged[k] = {kk: vv for kk, vv in d.items() if vv is not None}
+    except Exception as exc:  # pragma: no cover
+        print(f"[WARN] financial.glossary import 실패: {exc}", file=sys.stderr)
+
+    try:
+        from modules.disclosure.glossary import GLOSSARY as DISC_GLOSS
+
+        for k, entry in DISC_GLOSS.items():
+            d = entry.as_dict()
+            d["key"] = k
+            merged[k] = {kk: vv for kk, vv in d.items() if vv is not None}
+    except Exception as exc:  # pragma: no cover
+        print(f"[WARN] disclosure.glossary import 실패: {exc}", file=sys.stderr)
+
+    return merged
+
+
+# --------------------------------------------------------------------------- #
 #  JSON 직렬화 보조
 # --------------------------------------------------------------------------- #
 def _json_default(obj):
@@ -344,6 +383,12 @@ def main() -> int:
         {"meta": meta, "data": scenarios},
     )
 
+    glossary = build_glossary()
+    size_gloss = _write_json(
+        INTEGRATION_DATA / "glossary.json",
+        {"meta": {**meta, "entries": len(glossary)}, "entries": glossary},
+    )
+
     print("[INFO] 추출 완료")
     print(
         f"  eqs_summary.json      : {size_eqs:>8,} bytes  ({meta['coverage']['financial']} rows)"
@@ -353,6 +398,9 @@ def main() -> int:
     )
     print(
         f"  price_scenarios.json  : {size_price:>8,} bytes  ({meta['coverage']['price_scenarios']} scenarios, {meta['coverage']['price_scenarios_matching_top50']} matched)"
+    )
+    print(
+        f"  glossary.json         : {size_gloss:>8,} bytes  ({len(glossary)} entries)"
     )
     return 0
 

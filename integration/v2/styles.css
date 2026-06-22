@@ -712,3 +712,68 @@ html, body, #root { margin: 0px; padding: 0px; width: 100%; height: 100%; backgr
 }
 .disc-full-list-row .disc-sum-label { font-size: 11px; }
 .disc-full-list-row .disc-sum-text  { font-size: 11px; color: #64748b; }
+
+/* ─── Glossary 호버 툴팁 (모듈 ① PoC) ───────────────────────────────────── */
+/* currentColor 기반 — 상위 요소(컬러풀한 legend label, .ov-k 등)의 색을 그대로 따라감. */
+.gloss-term {
+  border-bottom: 1px dotted currentColor;
+  cursor: help;
+  opacity: 0.92;
+  transition: background 120ms, opacity 120ms;
+}
+.gloss-term:hover {
+  opacity: 1;
+  background: rgba(94, 234, 212, 0.08);
+  border-bottom-style: solid;
+}
+.gloss-tip {
+  position: fixed;
+  z-index: 100000;
+  background: rgba(8, 12, 28, 0.97);
+  color: #e2e8f0;
+  border: 1px solid rgba(94, 234, 212, 0.4);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 11.5px;
+  line-height: 1.65;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
+  pointer-events: none;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+.gloss-tip-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #f1f5f9;
+  margin-bottom: 4px;
+}
+.gloss-tip-cat {
+  display: inline-block;
+  font-size: 9px;
+  color: #fbbf24;
+  font-family: var(--font-mono, monospace);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  padding: 1px 6px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+.gloss-tip-desc {
+  color: #cbd5e1;
+  margin-bottom: 6px;
+}
+.gloss-tip-how {
+  color: #94a3b8;
+  margin-bottom: 6px;
+}
+.gloss-tip-how b {
+  color: #cbd5e1;
+}
+.gloss-tip-bench {
+  color: #fbbf24;
+  margin-bottom: 4px;
+}
+.gloss-tip-int {
+  color: #5eead4;
+}
