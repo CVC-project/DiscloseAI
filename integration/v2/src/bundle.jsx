@@ -1194,6 +1194,32 @@ window.SectorMap = SectorMap;
 // ─── Gemini AI streaming helper ─────────────────────────────────────────────
 
 async function geminiStream({ apiKey, model, systemPrompt, history, onChunk, onDone, onError }) {
+  const proxyUrl = window.DISCLOSEAI_CHAT_URL || 'http://localhost:8001/integration/chat';
+  try {
+    const resp = await fetch(proxyUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        question: (((history || []).slice(-1)[0] || {}).parts || [{ text: '' }])[0].text || '',
+        system_prompt: systemPrompt || '',
+        history: (history || []).slice(-10).map(m => ({
+          role: m.role === 'model' ? 'assistant' : m.role,
+          text: ((m.parts || [{ text: '' }])[0] || {}).text || '',
+        })),
+      }),
+    });
+    if (!resp.ok) {
+      const detail = await resp.text().catch(() => '');
+      throw new Error(detail || `HTTP ${resp.status}`);
+    }
+    const data = await resp.json();
+    onChunk && onChunk((data.text || '').trim() || '(빈 응답)');
+    onDone && onDone();
+  } catch (err) {
+    onError && onError(err && err.message ? err.message : String(err));
+  }
+  return;
+
   const m = model || window.GEMINI_MODEL || 'gemini-2.5-flash';
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${m}:streamGenerateContent?alt=sse&key=${apiKey}`;
   try {
@@ -1653,8 +1679,8 @@ function AiChatBubble({ msg }) {
 
 function OverlayAiChat({ companyName, ticker, context, disc, node }) {
   const name = companyName || '기업';
-  const apiKey = (window.GEMINI_API_KEY && typeof window.GEMINI_API_KEY === 'string') ? window.GEMINI_API_KEY.trim() : null;
-  const hasKey = !!(apiKey && apiKey.length > 20);
+  const apiKey = 'bedrock-server-proxy';
+  const hasKey = true;
 
   const initText = context === 'disclosure'
     ? `${name}의 공시를 분석했습니다. 궁금한 점을 질문해 보세요.\n\nTip: "이 공시가 주가에 미치는 영향은?", "Cash 항목 설명해줘" 등`
@@ -1739,9 +1765,9 @@ function OverlayAiChat({ companyName, ticker, context, disc, node }) {
       </div>
       {!hasKey && (
         <div style={{padding: '14px', fontSize: 11, color: '#64748b', lineHeight: 1.7, borderBottom: '1px solid rgba(94,234,212,0.08)'}}>
-          <div style={{color: '#fbbf24', fontFamily: 'var(--font-mono,monospace)', fontSize: 9, marginBottom: 6}}>⚠ API 키 미설정</div>
+          <div style={{color: '#fbbf24', fontFamily: 'var(--font-mono,monospace)', fontSize: 9, marginBottom: 6}}>⚠ Bedrock 서버 미연결</div>
           <code style={{fontSize: 10, background: 'rgba(255,255,255,0.05)', padding: '3px 7px', borderRadius: 3, display: 'block', marginBottom: 6}}>v2/config.local.js</code>
-          파일에 Gemini API 키를 설정하면 활성화됩니다.
+          로컬 채팅 서버를 실행하면 활성화됩니다.
         </div>
       )}
       <div ref={bodyRef} style={{flex: '1 1 0%', overflowY: 'auto', padding: '12px 12px', display: 'flex', flexDirection: 'column', gap: 10}}>
@@ -2375,8 +2401,8 @@ function CompanyOverviewPanel({ company, sector, onBack, onEnter }) {
 
 // ─── AI assistant (panel-tr — Gemini functional) ──────────────────────────
 function AssistantPanel({ phase, sector, company, activeTab }) {
-  const apiKey = (window.GEMINI_API_KEY && typeof window.GEMINI_API_KEY === 'string') ? window.GEMINI_API_KEY.trim() : null;
-  const hasKey = !!(apiKey && apiKey.length > 20);
+  const apiKey = 'bedrock-server-proxy';
+  const hasKey = true;
 
   const initGreeting = React.useMemo(() => {
     const greeting = AI_GREETINGS[phase] || AI_GREETINGS.galaxy;
@@ -2450,7 +2476,7 @@ function AssistantPanel({ phase, sector, company, activeTab }) {
         <div className="panel-head-l">
           <span className="panel-dot panel-dot-amber" style={{background: dotColor, boxShadow: `0 0 6px ${dotColor}`}} />
           <span className="panel-title">AI FINANCIAL</span>
-          <span className="panel-sub">{hasKey ? 'Gemini 2.5 Flash' : '키 미설정'}</span>
+          <span className="panel-sub">{hasKey ? 'Bedrock Claude' : '서버 미연결'}</span>
         </div>
       </div>
       <div ref={bodyRef} className="panel-body assist-body" style={{overflowY: 'auto'}}>
@@ -2470,7 +2496,7 @@ function AssistantPanel({ phase, sector, company, activeTab }) {
           onChange={e => setInput(e.target.value)}
           onKeyDown={onKey}
           disabled={!hasKey || loading}
-          placeholder={hasKey ? (loading ? 'AI 응답 중…' : '질문 입력 (Enter)') : 'config.local.js 키 설정 필요'}
+          placeholder={hasKey ? (loading ? 'AI 응답 중…' : '질문 입력 (Enter)') : '로컬 채팅 서버 실행 필요'}
         />
         <button onClick={send} disabled={!hasKey || loading || !input.trim()} style={{opacity: (!hasKey || loading || !input.trim()) ? 0.35 : 1, cursor: hasKey && !loading && input.trim() ? 'pointer' : 'not-allowed'}}>↗</button>
       </div>

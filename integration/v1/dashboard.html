@@ -1848,7 +1848,6 @@
   </style>
   <!-- 사용자별 Gemini API 키 — chat_config.local.js (gitignored). 없으면 채팅이 graceful fail 한다.
      onerror로 missing 플래그를 세워 _chatInit 단계에서 사용자에게 명확한 안내 표시. -->
-  <script src="chat_config.local.js" onerror="window.__chatConfigMissing=true"></script>
 </head>
 
 <body>
@@ -1881,7 +1880,7 @@
   <aside id="chatSidebar" aria-label="AI 어시스턴트">
     <div class="chat-header">
       <div class="chat-title"><span class="chat-dot"></span>AI 재무 어시스턴트</div>
-      <button class="chat-icon-btn" onclick="_showKeyModal()" title="Gemini API 키 설정">🔑</button>
+      <button class="chat-icon-btn" onclick="_showKeyModal()" title="Bedrock 서버 상태">⚡</button>
       <button class="chat-icon-btn" onclick="_chatClear()" title="대화 초기화">↻</button>
       <button class="chat-icon-btn" onclick="_chatToggle()" title="사이드바 접기">×</button>
     </div>
@@ -4323,7 +4322,7 @@
           <div class="tm-chat-hints" id="tmChatHints" style="display:none"></div>
           <div class="tm-chat-toolbar">
             <button class="tm-tb-btn tm-tb-hint" onclick="_tmToggleHints()">💡 힌트</button>
-            <button class="tm-tb-btn" onclick="_showKeyModal(()=>{ _tmRenderChatFirst(_tmCurrent); })" style="border-color:rgba(94,234,212,0.32);color:#5eead4">🔑 API 키</button>
+            <button class="tm-tb-btn" onclick="_showKeyModal(()=>{ _tmRenderChatFirst(_tmCurrent); })" style="border-color:rgba(94,234,212,0.32);color:#5eead4">⚡ AI 서버</button>
             <button class="tm-tb-btn tm-tb-final" onclick="_tmShowFinalModal()">🎯 최종 예측</button>
           </div>
           <div class="tm-chat-input-row" id="tmChatInputRow">
@@ -4482,6 +4481,30 @@
     }
 
     async function _tmGeminiCall(sc, history) {
+      const proxyRes = await fetch(_CHAT_API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          question: ((history || []).slice(-1)[0] || {}).text || '',
+          system_prompt: _tmBuildSystem(sc),
+          history: (history || []).slice(-10),
+          context: { mode: 'timemachine', scenario: sc },
+        }),
+      });
+      if (!proxyRes.ok) {
+        const errText = await proxyRes.text().catch(() => '');
+        let msg = `HTTP ${proxyRes.status}`;
+        try {
+          const j = JSON.parse(errText);
+          if (j.detail) msg = typeof j.detail === 'string' ? j.detail : JSON.stringify(j.detail);
+          if (j.error && j.error.message) msg = j.error.message;
+        } catch (_) { }
+        throw new Error(msg);
+      }
+      const proxyData = await proxyRes.json();
+      return (proxyData.text || '').trim() || '(빈 응답)';
+      /*
+
       const apiKey = _getGeminiKey();
       if (!apiKey) {
         throw new Error('API 키 미설정');
@@ -4509,6 +4532,7 @@
       }
       const data = await res.json();
       return _tmExtractText(data) || '(빈 응답)';
+      */
     }
 
     // Phase C — 결정 버튼 3개 (수혜·중립·악재) [quiz kind 전용]
@@ -5146,27 +5170,43 @@
          2. localStorage['disclose_gemini_key'] — 일반 사용자/심사위원용
          3. (없음) → 모달로 입력 유도
        localStorage는 평문 저장이라 XSS 시 노출 — 모달 내 안내문 명시. */
+    const _CHAT_API_URL = window.DISCLOSEAI_CHAT_URL || 'http://localhost:8001/integration/chat';
     const _GEMINI_KEY_LS = 'disclose_gemini_key';
     function _getGeminiKey() {
-      // 1순위: chat_config.local.js
-      if (window.GEMINI_API_KEY && window.GEMINI_API_KEY !== 'YOUR_API_KEY_HERE') {
-        return window.GEMINI_API_KEY;
-      }
-      // 2순위: localStorage
-      try {
-        const k = localStorage.getItem(_GEMINI_KEY_LS);
-        if (k && k.trim()) return k.trim();
-      } catch (e) { /* private mode etc */ }
-      return null;
+      return 'bedrock-server-proxy';
     }
     function _saveGeminiKey(k) {
-      try { localStorage.setItem(_GEMINI_KEY_LS, (k || '').trim()); } catch (e) { }
+      return true;
     }
     function _clearGeminiKey() {
-      try { localStorage.removeItem(_GEMINI_KEY_LS); } catch (e) { }
+      return true;
     }
     /* 키 입력 모달 — price/timemachine.html v2 디자인 차용 */
     function _showKeyModal(onSaveCb) {
+      document.getElementById('geminiKeyModal')?.remove();
+      const serverModal = document.createElement('div');
+      serverModal.id = 'geminiKeyModal';
+      serverModal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.78);display:flex;align-items:center;justify-content:center;z-index:10200;padding:24px';
+      serverModal.onclick = (e) => { if (e.target === serverModal) serverModal.remove(); };
+      serverModal.innerHTML = `
+        <div style="background:#0f172a;border:1px solid #334155;border-radius:14px;padding:26px 24px;max-width:460px;width:100%">
+          <div style="font-size:32px;text-align:center;margin-bottom:8px">⚡</div>
+          <h3 style="font-size:17px;font-weight:700;margin:0 0 6px;color:#f8fafc;text-align:center">Bedrock AI 서버 연결</h3>
+          <p style="color:#94a3b8;font-size:12.5px;margin:0 0 16px;text-align:center;line-height:1.65">
+            이제 API 키는 브라우저에 입력하지 않습니다.<br>
+            Bedrock 토큰은 로컬 서버의 <code>.env</code>에만 저장되고, 화면은 로컬 채팅 서버만 호출합니다.
+          </p>
+          <div style="background:rgba(94,234,212,0.08);border:1px solid rgba(94,234,212,0.22);border-radius:10px;padding:12px 14px;color:#cbd5e1;font-size:12.5px;line-height:1.65">
+            실행 필요: <code>python -m modules.disclosure.chat_server</code><br>
+            서버 주소: <code>http://localhost:8001/integration/chat</code>
+          </div>
+          <button onclick="document.getElementById('geminiKeyModal')?.remove()"
+            style="width:100%;margin-top:14px;background:linear-gradient(135deg,#5eead4,#4da6ff);border:0;color:#0f172a;padding:11px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600">확인</button>
+        </div>`;
+      document.body.appendChild(serverModal);
+      if (typeof onSaveCb === 'function') onSaveCb();
+      return;
+
       // 기존 모달 제거 (중복 방지)
       document.getElementById('geminiKeyModal')?.remove();
       const m = document.createElement('div');
@@ -5182,7 +5222,7 @@
             Google AI Studio에서 발급한 API 키를 입력하세요.<br>
             <span style="color:#fbbf24">키는 브라우저(localStorage)에만 저장됩니다.</span>
           </p>
-          <input id="geminiKeyInput" type="password" placeholder="AIzaSy..." value="${_escHtmlSafe(existingKey)}"
+          <input id="geminiKeyInput" type="password" placeholder="브라우저에는 API 키를 입력하지 않습니다" value="${_escHtmlSafe(existingKey)}"
             style="width:100%;background:rgba(8,12,28,0.7);border:1px solid #334155;color:#e2e8f0;border-radius:8px;padding:11px 13px;font-size:13.5px;outline:none;margin-bottom:12px;box-sizing:border-box;font-family:monospace"
             onkeydown="if(event.key==='Enter'){event.preventDefault();_applyGeminiKey();}">
           <div style="display:flex;gap:8px">
@@ -5482,6 +5522,30 @@
     }
 
     async function _chatCallGemini(userText) {
+      const proxyRes = await fetch(_CHAT_API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          question: userText,
+          system_prompt: _chatBuildSystemPrompt(),
+          history: window.__chatHistory.slice(-10),
+          context: window.__chatContext || {},
+        }),
+      });
+      if (!proxyRes.ok) {
+        const errText = await proxyRes.text().catch(() => '');
+        let msg = `HTTP ${proxyRes.status}`;
+        try {
+          const j = JSON.parse(errText);
+          if (j.detail) msg = typeof j.detail === 'string' ? j.detail : JSON.stringify(j.detail);
+          if (j.error && j.error.message) msg = j.error.message;
+        } catch (_) { }
+        throw new Error(msg);
+      }
+      const proxyData = await proxyRes.json();
+      return (proxyData.text || '').trim() || '(빈 응답)';
+      /*
+
       const apiKey = _getGeminiKey();
       if (!apiKey) {
         throw new Error('API 키가 설정되지 않았습니다');
@@ -5517,7 +5581,7 @@
         try {
           const j = JSON.parse(errText);
           if (j.error && j.error.message) msg = j.error.message;
-        } catch (_) { /* keep msg */ }
+        } catch (_) { }
         if (res.status === 429) msg = '요청 한도 초과 — 잠시 후(약 30초~1분) 다시 시도해주세요. 반복되면 chat_config.local.js의 모델을 변경하거나 AI Studio에서 키를 재발급해보세요.';
         throw new Error(msg);
       }
@@ -5529,6 +5593,7 @@
       const parts = cand.content && cand.content.parts;
       if (!parts || !parts.length) throw new Error('응답 형식 오류');
       return parts.map(p => p.text || '').join('').trim() || '(빈 응답)';
+      */
     }
   </script>
 </body>

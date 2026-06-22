@@ -1,154 +1,294 @@
 """
-modules/disclosure/chat_server.py
-공시 분석 챗봇 — Gemini 2.5 Flash 기반
+Local AI chat proxy for DiscloseAI.
 
-단독 실행:
-    python -m modules.disclosure.chat_server   (포트 8001)
+The browser must never call Bedrock directly. This server reads the Bedrock
+Bearer token from the local .env file and exposes safe local endpoints for the
+prototype UI.
 
-메인 앱에 붙이기:
-    from modules.disclosure.chat_server import router as disclosure_chat_router
-    app.include_router(disclosure_chat_router, prefix="/api")
+Run:
+    python -m modules.disclosure.chat_server
+
+Endpoints:
+    POST /disclosure/chat   SSE-compatible disclosure chat
+    POST /integration/chat  JSON chat for integration v1/v2 dashboards
+    GET  /integration/health
+    GET  /disclosure/health
 """
 
-import os
-import sys
+from __future__ import annotations
+
 import json
+import os
+import re
 from pathlib import Path
+from typing import Any
 
-sys.path.insert(0, str(Path(__file__).parent.parent.parent))
-
+import requests
 from dotenv import load_dotenv
-
-load_dotenv()
-
-from google import genai
-from google.genai import types
-from fastapi import FastAPI, APIRouter
+from fastapi import APIRouter, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse, HTMLResponse
-from pydantic import BaseModel
-
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
-GEMINI_MODEL = "gemini-2.5-flash-preview-04-17"
-
-_client = genai.Client(api_key=GEMINI_API_KEY) if GEMINI_API_KEY else None
-
-# 메인 앱에서 include_router()로 붙일 수 있는 라우터
-router = APIRouter(prefix="/disclosure", tags=["disclosure-chat"])
+from fastapi.responses import HTMLResponse, StreamingResponse
+from pydantic import BaseModel, Field
 
 
-class ChatRequest(BaseModel):
+ROOT = Path(__file__).resolve().parents[2]
+load_dotenv(ROOT / ".env")
+
+BEDROCK_API_KEY = os.getenv("BEDROCK_API_KEY", "")
+BEDROCK_REGION = os.getenv("BEDROCK_REGION", "us-east-1")
+BEDROCK_DEFAULT_MODEL = os.getenv(
+    "BEDROCK_DEFAULT_MODEL", "anthropic.claude-haiku-4-5-20251001-v1:0"
+)
+BEDROCK_DEEP_MODEL = os.getenv("BEDROCK_DEEP_MODEL", "anthropic.claude-sonnet-4-6")
+BEDROCK_TIMEOUT = float(os.getenv("BEDROCK_TIMEOUT", "45"))
+
+
+disclosure_router = APIRouter(prefix="/disclosure", tags=["disclosure-chat"])
+integration_router = APIRouter(prefix="/integration", tags=["integration-chat"])
+
+
+class DisclosureChatRequest(BaseModel):
     question: str
     corp_name: str = ""
     disc_title: str = ""
     disc_type: str = ""
     disc_date: str = ""
     summary: str = ""
-    history: list = []
+    history: list[dict[str, Any]] = Field(default_factory=list)
 
 
-def _build_system_prompt(
-    corp_name: str, disc_title: str, disc_type: str, disc_date: str, summary: str
-) -> str:
-    context_block = ""
-    if summary:
-        context_block = f"""
-아래는 이 공시에 대한 AI 사전 분석 요약입니다. 이를 참고하여 답변하세요.
-
---- 사전 분석 ---
-{summary}
---- 끝 ---
-"""
-    return f"""당신은 한국 주식시장 공시 전문 AI 어시스턴트입니다.
-사용자가 특정 공시에 대해 궁금한 점을 질문하면, 쉽고 명확하게 한국어로 답변하세요.
-
-【현재 공시 정보】
-- 기업명: {corp_name}
-- 공시 제목: {disc_title}
-- 공시 유형: {disc_type}
-- 공시 일자: {disc_date}
-{context_block}
-【답변 원칙】
-- 원문이나 분석에 명시된 내용은 근거를 들어 답변하세요.
-- 확인되지 않은 추론은 반드시 "추정컨대" 또는 "~일 가능성이 있습니다"로 시작하세요.
-- 전문 용어는 반드시 쉬운 말로 풀어 설명하세요.
-- 투자 조언이 아닌 정보 제공 목적임을 명심하세요.
-- 답변은 간결하게, 핵심만 3~5문장 이내로 작성하세요."""
+class IntegrationChatRequest(BaseModel):
+    question: str
+    system_prompt: str = ""
+    history: list[dict[str, Any]] = Field(default_factory=list)
+    context: dict[str, Any] = Field(default_factory=dict)
+    model: str = ""
 
 
-async def _stream_gemini(system_prompt: str, history: list, question: str):
-    if not _client:
-        yield "data: GEMINI_API_KEY가 .env에 설정되지 않았습니다.\n\n"
-        yield "data: [DONE]\n\n"
-        return
+def _mask_secret(text: str) -> str:
+    text = re.sub(r"ABSK[A-Za-z0-9+/=]+", "ABSK***MASKED***", text)
+    text = re.sub(r"(AKIA|ASIA)[A-Z0-9]{12,}", r"\1***MASKED***", text)
+    text = re.sub(r"Bearer\s+[A-Za-z0-9+/=._-]+", "Bearer ***MASKED***", text)
+    return text
 
-    gemini_history = []
-    for h in history:
-        role = "user" if h.get("role") == "user" else "model"
-        gemini_history.append(
-            types.Content(role=role, parts=[types.Part(text=h.get("content", ""))])
-        )
 
-    config = types.GenerateContentConfig(
-        system_instruction=system_prompt,
-        temperature=0.3,
+def _bedrock_model_id(model: str | None = None) -> str:
+    model_id = (model or BEDROCK_DEFAULT_MODEL).strip()
+    if model_id.startswith(("us.", "global.", "arn:")):
+        return model_id
+    return f"us.{model_id}"
+
+
+def _bedrock_url(model: str | None = None) -> str:
+    return (
+        f"https://bedrock-runtime.{BEDROCK_REGION}.amazonaws.com"
+        f"/model/{_bedrock_model_id(model)}/converse"
     )
 
-    try:
-        chat = _client.chats.create(
-            model=GEMINI_MODEL, history=gemini_history, config=config
-        )
-        for chunk in chat.send_message_stream(question):
-            if chunk.text:
-                data = json.dumps({"text": chunk.text}, ensure_ascii=False)
-                yield f"data: {data}\n\n"
-    except Exception as e:
-        err = json.dumps({"error": str(e)}, ensure_ascii=False)
-        yield f"data: {err}\n\n"
 
+def _history_to_bedrock(history: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    messages: list[dict[str, Any]] = []
+    for item in history[-12:]:
+        raw_role = str(item.get("role") or item.get("who") or "").lower()
+        if raw_role in {"model", "assistant", "ai"}:
+            role = "assistant"
+        elif raw_role == "user":
+            role = "user"
+        else:
+            continue
+
+        text = item.get("text")
+        if text is None:
+            text = item.get("content")
+        if text is None and isinstance(item.get("parts"), list):
+            parts = item.get("parts") or []
+            text = "\n".join(str(p.get("text", "")) for p in parts if isinstance(p, dict))
+        text = str(text or "").strip()
+        if not text:
+            continue
+        messages.append({"role": role, "content": [{"text": text[:4000]}]})
+    return messages
+
+
+def _extract_bedrock_text(data: dict[str, Any]) -> str:
+    parts = (
+        data.get("output", {})
+        .get("message", {})
+        .get("content", [])
+    )
+    texts = [p.get("text", "") for p in parts if isinstance(p, dict) and p.get("text")]
+    return "\n".join(texts).strip()
+
+
+def _call_bedrock(
+    *,
+    question: str,
+    system_prompt: str,
+    history: list[dict[str, Any]] | None = None,
+    model: str | None = None,
+    max_tokens: int = 700,
+    temperature: float = 0.35,
+) -> dict[str, Any]:
+    if not BEDROCK_API_KEY:
+        raise RuntimeError("BEDROCK_API_KEY is not set in local .env")
+
+    messages = _history_to_bedrock(history or [])
+    messages.append({"role": "user", "content": [{"text": question[:6000]}]})
+
+    body = {
+        "system": [{"text": system_prompt}],
+        "messages": messages,
+        "inferenceConfig": {
+            "maxTokens": max_tokens,
+            "temperature": temperature,
+        },
+    }
+
+    response = requests.post(
+        _bedrock_url(model),
+        headers={
+            "Authorization": f"Bearer {BEDROCK_API_KEY}",
+            "Content-Type": "application/json",
+        },
+        json=body,
+        timeout=BEDROCK_TIMEOUT,
+    )
+
+    if response.status_code >= 400:
+        detail = _mask_secret(response.text[:1500])
+        raise RuntimeError(f"Bedrock HTTP {response.status_code}: {detail}")
+
+    data = response.json()
+    return {
+        "text": _extract_bedrock_text(data),
+        "model": _bedrock_model_id(model),
+        "usage": data.get("usage", {}),
+        "stopReason": data.get("stopReason"),
+    }
+
+
+def _base_system_prompt() -> str:
+    return """당신은 DiscloseAI의 재무 분석 어시스턴트입니다.
+대상 사용자는 주식 투자가 처음인 초보 개인투자자입니다.
+
+답변 원칙:
+- 한국어로 친절하고 천천히 설명합니다.
+- 어려운 재무·회계 용어는 쉬운 말로 한 줄 풀이를 붙입니다.
+- 기업 데이터가 주어지면 그 숫자를 근거로 설명합니다.
+- 모르는 내용은 추측하지 말고 확인이 필요하다고 말합니다.
+- "사세요", "파세요", "매수 추천" 같은 투자 조언은 금지합니다.
+- 항상 과거 공시와 재무정보 기반 참고 정보라고 표현합니다."""
+
+
+def _build_disclosure_prompt(req: DisclosureChatRequest) -> str:
+    context = ""
+    if req.summary:
+        context = f"""
+아래는 이 공시에 대한 사전 분석 요약입니다.
+
+--- 사전 분석 ---
+{req.summary}
+--- 끝 ---
+"""
+    return f"""{_base_system_prompt()}
+
+현재 사용자가 보고 있는 공시:
+- 기업명: {req.corp_name or "-"}
+- 공시 제목: {req.disc_title or "-"}
+- 공시 유형: {req.disc_type or "-"}
+- 공시 일자: {req.disc_date or "-"}
+{context}
+공시 해석 시에는 공시 원문과 사전 분석에서 확인되는 내용만 근거로 삼으세요."""
+
+
+def _build_integration_prompt(req: IntegrationChatRequest) -> str:
+    prompt = _base_system_prompt()
+    if req.system_prompt:
+        prompt += "\n\n화면에서 전달된 현재 맥락:\n" + req.system_prompt[:6000]
+    if req.context:
+        prompt += (
+            "\n\n구조화된 화면 컨텍스트 JSON:\n"
+            + json.dumps(req.context, ensure_ascii=False)[:4000]
+        )
+    return prompt
+
+
+async def _stream_answer(answer_fn):
+    try:
+        result = answer_fn()
+        yield f"data: {json.dumps({'text': result['text']}, ensure_ascii=False)}\n\n"
+        if result.get("usage"):
+            yield f"data: {json.dumps({'usage': result['usage']}, ensure_ascii=False)}\n\n"
+    except Exception as exc:  # pragma: no cover - exercised through integration
+        yield f"data: {json.dumps({'error': _mask_secret(str(exc))}, ensure_ascii=False)}\n\n"
     yield "data: [DONE]\n\n"
 
 
-@router.post("/chat")
-async def chat(req: ChatRequest):
-    system_prompt = _build_system_prompt(
-        req.corp_name, req.disc_title, req.disc_type, req.disc_date, req.summary
-    )
+@disclosure_router.post("/chat")
+async def disclosure_chat(req: DisclosureChatRequest):
     return StreamingResponse(
-        _stream_gemini(system_prompt, req.history, req.question),
+        _stream_answer(
+            lambda: _call_bedrock(
+                question=req.question,
+                system_prompt=_build_disclosure_prompt(req),
+                history=req.history,
+                model=BEDROCK_DEFAULT_MODEL,
+            )
+        ),
         media_type="text/event-stream",
         headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
     )
 
 
-@router.get("/health")
+@integration_router.post("/chat")
+def integration_chat(req: IntegrationChatRequest):
+    return _call_bedrock(
+        question=req.question,
+        system_prompt=_build_integration_prompt(req),
+        history=req.history,
+        model=req.model or BEDROCK_DEFAULT_MODEL,
+    )
+
+
+@disclosure_router.get("/health")
+@integration_router.get("/health")
 def health():
-    return {"status": "ok", "model": GEMINI_MODEL, "key_set": bool(GEMINI_API_KEY)}
+    return {
+        "status": "ok",
+        "provider": "bedrock",
+        "model": _bedrock_model_id(BEDROCK_DEFAULT_MODEL),
+        "deep_model": _bedrock_model_id(BEDROCK_DEEP_MODEL),
+        "region": BEDROCK_REGION,
+        "key_set": bool(BEDROCK_API_KEY),
+    }
 
 
-@router.get("/report", response_class=HTMLResponse)
+@disclosure_router.get("/report", response_class=HTMLResponse)
 def serve_report():
     report_path = Path(__file__).parent / "report_latest.html"
     if report_path.exists():
         return HTMLResponse(content=report_path.read_text(encoding="utf-8"))
     return HTMLResponse(
-        content="<p>report_latest.html 없음. 먼저 generate_report.py를 실행하세요.</p>"
+        content="<p>report_latest.html not found. Run generate_report.py first.</p>"
     )
 
 
-# ── 단독 실행 시 ──────────────────────────────────────────
+def create_app() -> FastAPI:
+    app = FastAPI(title="DiscloseAI Bedrock Chat")
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_methods=["POST", "GET", "OPTIONS"],
+        allow_headers=["*"],
+    )
+    app.include_router(disclosure_router)
+    app.include_router(integration_router)
+    return app
+
+
 if __name__ == "__main__":
     import uvicorn
 
-    _app = FastAPI(title="DiscloseAI Chat")
-    _app.add_middleware(
-        CORSMiddleware,
-        allow_origins=["*"],
-        allow_methods=["POST", "GET"],
-        allow_headers=["*"],
-    )
-    _app.include_router(router)
-
     port = int(os.getenv("CHAT_SERVER_PORT", "8001"))
-    print(f"[DiscloseAI Chat] 서버 시작 → http://localhost:{port}")
-    uvicorn.run(_app, host="0.0.0.0", port=port, log_level="warning")
+    print(f"[DiscloseAI Chat] Bedrock proxy on http://localhost:{port}")
+    uvicorn.run(create_app(), host="0.0.0.0", port=port, log_level="warning")
