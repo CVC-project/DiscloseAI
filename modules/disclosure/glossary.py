@@ -1,0 +1,944 @@
+"""공시 용어 사전 — 초보 개인투자자용.
+
+대시보드 ⓘ 호버 툴팁에서 카드 형태로 표시되며, AI 챗봇 폴백 컨텍스트로도 사용.
+회계사 4인이 추가·교정 PR을 올리는 기본 패턴 — Claude가 시드 ~40개를 깐 상태.
+
+DisclosureGlossaryEntry 구조 (financial/glossary.GlossaryEntry와 동일 shape + category):
+- ``label``: 표시명 (툴팁 헤더, 예: "유상증자")
+- ``description``: 📖 **개념** — 한 줄 정의
+- ``category``: 분류 — capital_raising / treasury_stock / business / audit_report / equity / market_action / general
+- ``how``: 🧮 **방식·발생 경로** — 어떻게 일어나는가 (선택)
+- ``benchmark``: 📏 **주의 기준선** — 호재·악재 판단 임계값 (선택)
+- ``intuition``: 💡 **쉽게 말하면** — 직관적 비유
+
+설명 작성 원칙:
+1. 전문용어는 풀어 쓰기 — "지분"→"회사를 나눠 가진 비율"
+2. **"사세요/파세요/매수 추천" 표현 절대 금지** (자본시장법). 사실·메커니즘만.
+3. 호재·악재 판단은 ``benchmark``에 임계값만 남기고, 단정 금지.
+4. 섹션 하나는 1~2문장, 간결하게.
+
+⚠️ 모듈 경계 준수: financial.glossary와 dataclass shape이 거의 같지만 import 금지
+(CLAUDE.md 규칙 — 데이터 모듈 간 import X). 형태가 같은 건 의도된 중복이며
+integration이 두 파일을 읽어 단일 glossary.json으로 합친다.
+"""
+
+from __future__ import annotations
+
+from dataclasses import asdict, dataclass
+from typing import Dict, Optional
+
+
+@dataclass(frozen=True)
+class DisclosureGlossaryEntry:
+    label: str
+    description: str
+    category: str
+    how: Optional[str] = None
+    benchmark: Optional[str] = None
+    intuition: Optional[str] = None
+
+    def as_dict(self) -> dict:
+        return {k: v for k, v in asdict(self).items() if v is not None}
+
+
+GLOSSARY: Dict[str, DisclosureGlossaryEntry] = {
+    # ─────────────────────────────────────────────────────────────
+    # 자본조달 (capital_raising)
+    # ─────────────────────────────────────────────────────────────
+    "paid_in_capital_increase": DisclosureGlossaryEntry(
+        label="유상증자",
+        description="회사가 새 주식을 발행해 투자자에게 돈을 받고 파는 자금 조달 방식.",
+        category="capital_raising",
+        how="발행 대상에 따라 주주배정·일반공모·제3자배정으로 나뉨. 발행가는 보통 시가보다 할인.",
+        benchmark="발행규모÷시가총액 = 희석률. 10% 초과면 큰 희석, 20% 초과면 매우 큰 희석.",
+        intuition="피자(회사)를 같은 크기로 두면서 조각 수를 늘리는 것 — 한 조각의 몫은 줄어듦(희석).",
+    ),
+    "bonus_issue": DisclosureGlossaryEntry(
+        label="무상증자",
+        description="회사가 보유한 잉여금을 자본금으로 옮기며 주주에게 공짜로 주식을 더 주는 것.",
+        category="capital_raising",
+        how="자본잉여금·이익잉여금을 자본금으로 전입. 주식 수는 늘지만 회사 가치는 그대로.",
+        benchmark="유동성·심리 효과만 있고 본질 가치 변동 없음. 권리락으로 주가 자동 조정.",
+        intuition="피자 크기는 그대로인데 조각 수만 늘리는 것 — 1인당 받는 양은 동일.",
+    ),
+    "convertible_bond": DisclosureGlossaryEntry(
+        label="전환사채(CB)",
+        description="일정 기간 후 주식으로 바꿀 수 있는 채권(= 회사가 발행한 빚 증서). 발행 당시는 회사의 빚이지만, 투자자가 원하면 약속한 가격(전환가)에 주식으로 갈아탈 수 있음.",
+        category="capital_raising",
+        how="발행 시 전환가 결정 → 일정 기간 지나면 주식으로 전환 청구 가능. 주가가 전환가보다 높으면 전환이 이득.",
+        benchmark="전환가 < 현재 주가 = 전환 압력이 크고 곧 [[equity-dilution]] 위험. '리픽싱'(=주가 떨어지면 전환가도 따라 내려주는 조항)이 있으면 희석 압력 더 큼.",
+        intuition="'지금은 이자 받는 빚 증서, 나중에 회사 주식으로 갈아탈 수 있는 옵션 끼움'.",
+    ),
+    "bond_with_warrant": DisclosureGlossaryEntry(
+        label="신주인수권부사채(BW)",
+        description="채권(빚 증서) + '미래에 정해진 가격으로 신주를 살 수 있는 권리(=워런트)'가 한 상품에 묶인 것. [[convertible-bond]](CB)와 달리 빚은 그대로 두고 권리만 따로 행사함.",
+        category="capital_raising",
+        how="투자자는 이자를 계속 받으면서, 따로 정해진 가격(행사가)에 신주를 살 수 있음.",
+        benchmark="행사가 < 현재 주가 차이가 클수록 권리 행사 압력↑ → 새 주식 발행으로 [[equity-dilution]] 위험. '분리형'(권리만 떼어 따로 사고팔 수 있는 형태)이면 시장에 권리만 매물로 나옴.",
+        intuition="'빚으로 이자도 받고 + 미래에 싸게 주식 살 권리도 끼워 받는' 패키지 상품.",
+    ),
+    "third_party_allotment": DisclosureGlossaryEntry(
+        label="제3자배정 유상증자",
+        description="기존 주주는 빼고 회사가 지정한 특정 외부 투자자에게만 신주를 발행해 파는 방식.",
+        category="capital_raising",
+        how="이사회 결의로 누구에게 줄지 정함. 기존 주주는 자기 차례를 받지 못하므로 지분율이 그대로 [[equity-dilution]].",
+        benchmark="대상이 누구냐가 핵심 — '전략적 투자자(=같은 업종 파트너)'면 사업 시너지 기대, '재무적 투자자(=PE펀드 등 돈만 넣는 곳)'면 단기 회수 압력, 최대주주 측이면 경영권 강화 목적일 수도.",
+        intuition="피자 새 조각을 기존 손님 차례 무시하고 새 손님 한 명에게 몰아주는 셈.",
+    ),
+    "rights_offering": DisclosureGlossaryEntry(
+        label="주주배정 유상증자",
+        description="기존 주주가 자기 지분율만큼 새 주식을 '먼저 살 권리'를 받는 증자 방식.",
+        category="capital_raising",
+        how="[[ex-rights-date]](권리락)일에 주가 조정 → 청약기간에 받은 권리만큼 새 주식 신청. 청약 안 하면 권리를 시장에 매도하거나, 그대로 두면 '실권주'(=청약 안 된 주식)로 처리.",
+        benchmark="청약률 낮으면 실권주 다수 발생 → 일반공모로 전환 시 시가 대비 할인폭이 더 커져 [[equity-dilution]] 부담↑.",
+        intuition="단골 손님부터 새 피자 조각을 살 우선권을 주는 방식.",
+    ),
+    # ─────────────────────────────────────────────────────────────
+    # 자기주식 (treasury_stock)
+    # ─────────────────────────────────────────────────────────────
+    "treasury_stock_acquisition": DisclosureGlossaryEntry(
+        label="자기주식 취득",
+        description="회사가 자기 회사 주식을 시장에서 사들이는 것. 유통 주식 수가 줄어 1주당 가치는 상승 압력.",
+        category="treasury_stock",
+        how="직접취득(시장매수·공개매수) 또는 신탁계약. 6개월간 처분 제한 등 규제 적용.",
+        benchmark="취득규모÷시총 > 2~3% 이면 주가 부양 신호로 해석되는 편.",
+        intuition="피자 가게가 자기 피자를 도로 사 와 보관 — 시장에 도는 조각이 줄어듦.",
+    ),
+    "treasury_stock_disposal": DisclosureGlossaryEntry(
+        label="자기주식 처분",
+        description="회사가 보유 중이던 자기주식을 시장에 다시 파는 것. 유통 주식이 늘어 희석 압력.",
+        category="treasury_stock",
+        how="장내매도·블록딜·임직원 보상(스톡옵션·주식보상)·교환사채 발행 등에 사용.",
+        benchmark="처분규모÷시총 > 2% 이면 단기 수급 부담. 처분 가격이 시가 대비 큰 할인이면 추가 부담.",
+        intuition="보관 중이던 피자 조각을 다시 시장에 풀어 파는 것.",
+    ),
+    "treasury_stock_cancellation": DisclosureGlossaryEntry(
+        label="자기주식 소각",
+        description="회사가 보유한 자기주식을 영구히 없애는 것. 주식 수가 실제로 줄어듦.",
+        category="treasury_stock",
+        how="이사회 결의 후 자본금 또는 이익잉여금으로 처리. 취득 후 보관과 달리 되돌릴 수 없음.",
+        benchmark="ROE·EPS 자동 상승. 일반적으로 가장 강한 주주환원 신호로 해석.",
+        intuition="가게가 보관 중이던 피자 조각을 아예 폐기 — 시장에 도는 양이 영구적으로 줄어듦.",
+    ),
+    # ─────────────────────────────────────────────────────────────
+    # 영업·거래 (business)
+    # ─────────────────────────────────────────────────────────────
+    "supply_contract": DisclosureGlossaryEntry(
+        label="단일판매·공급계약체결",
+        description="회사 매출의 일정 비율 이상을 차지하는 큰 계약 한 건을 따냈을 때의 공시.",
+        category="business",
+        how="유가증권시장은 최근 매출의 5%, 코스닥은 10% 초과 시 공시 의무.",
+        benchmark="계약금액÷직전 매출 비율이 클수록 영향 큼. 특수관계자 거래면 별도 검토.",
+        intuition="가게가 '한 손님에게서 1년치 매출의 30%짜리 단골 계약을 따냈다'고 알리는 것.",
+    ),
+    "equity_investment": DisclosureGlossaryEntry(
+        label="타법인 주식 취득",
+        description="다른 회사의 지분을 사는 것. 산 비율에 따라 회계처리·이름이 달라짐.",
+        category="business",
+        how="20% 미만 = '단순 투자'(그 회사 손익과 분리). 20~50% = '관계기업'(=지분법: 그 회사 손익 중 우리 지분 비율만큼만 우리 손익에 반영). 50% 초과 = '종속기업'(=연결재무제표: 그 회사 매출·이익을 통째로 우리 것에 합산).",
+        benchmark="취득금액÷자기자본 비율이 크면 자금 부담↑. 인수 목적이면 시너지·통합 실패 위험을 별도 검토.",
+        intuition="다른 가게의 일부를 사는 것 — 산 비율이 클수록 그 가게 손익이 우리 가게 장부에 더 많이 섞임.",
+    ),
+    "business_transfer": DisclosureGlossaryEntry(
+        label="영업양수도",
+        description="회사의 사업부문(공장·계약·인력 등 한 묶음)을 통째로 사거나(양수) 파는(양도) 거래.",
+        category="business",
+        how="자산·부채·계약을 한꺼번에 옮김. 양수 = 새 사업 확보 신호 / 양도 = 사업 정리·구조조정 신호.",
+        benchmark="거래금액÷자산총계 > 10%면 주요 결정. 30% 초과 시 '주주총회 특별결의'(=참석 주주의 2/3 이상 + 발행주식의 1/3 이상 찬성) 필요.",
+        intuition="가게의 '배달 부서 전체'를 다른 회사에 통째로 넘기거나 받는 셈.",
+    ),
+    "merger": DisclosureGlossaryEntry(
+        label="합병",
+        description="두 회사가 법적으로 하나가 되는 것. 흡수합병(한 회사가 다른 회사를 흡수해 한쪽만 남음)과 신설합병(둘 다 사라지고 새 회사를 만듦)이 있음.",
+        category="business",
+        how="합병비율(1:0.5 같은 식)·합병가액 결정 → 주주총회 특별결의(=참석 주주 2/3 + 발행주식의 1/3 이상 찬성) → 반대 주주의 '주식매수청구'(=합병에 반대하는 주주가 회사에 자기 주식을 정해진 가격에 사가달라 요구할 권리) → 등기로 효력.",
+        benchmark="합병비율이 시장 평가와 크게 다르면 주주 분쟁 위험. 비상장사가 상장사를 흡수하는 [[backdoor-listing]]은 별도 심사.",
+        intuition="두 가게가 합쳐 한 가게가 되는 것. 메뉴·직원·매출이 모두 한 장부로 통합됨.",
+    ),
+    "spinoff": DisclosureGlossaryEntry(
+        label="분할 (물적분할 vs 인적분할)",
+        description="한 회사를 둘 이상으로 쪼개는 것. 쪼갠 부분을 누구에게 주는지에 따라 두 종류로 갈림.",
+        category="business",
+        how="물적분할 = 쪼갠 부분을 '모회사의 100% 자회사'로 둠. 주주는 모회사 주식만 그대로 보유. / 인적분할 = 쪼갠 부분의 주식을 기존 주주에게 지분율대로 새로 나눠 줌. 주주는 두 회사 주식을 갖게 됨.",
+        benchmark="**물적분할 후 자회사를 따로 상장(IPO)하면 기존 주주가 자회사 지분을 직접 못 갖는 구조라 모회사 가치가 깎인다는 우려 빈발** — 시장 부정 반응 다수. 인적분할은 주주가 직접 자회사 주식을 받으므로 이 문제 없음.",
+        intuition="가게의 '제빵부'를 떼어 별도 가게로 만들 때, 물적 = 떼어내 우리 100% 자회사로 두고 주주는 모가게 주식만 / 인적 = 주주들에게 제빵 가게 지분을 똑같이 나눠줘 두 가게 다 주주가 됨.",
+    ),
+    "contingent_liability": DisclosureGlossaryEntry(
+        label="우발채무",
+        description="아직 확정은 아니지만 미래에 빚이 될 가능성이 있는 약속(보증·소송·손해배상 등).",
+        category="business",
+        how="재무제표 본문(자산·부채·자본 표)에는 안 들어가고 '주석'(=재무제표 뒤에 붙는 보충 설명)에만 기재. 발생할 가능성이 커지면 [[provision]](충당부채)으로 옮겨 본문에 비용으로 반영.",
+        benchmark="우발채무÷자기자본 비율이 클수록 잠재 손실 위험. 최근 분기 갑자기 늘면 위험 신호.",
+        intuition="'아직 청구서는 안 왔지만 올 수도 있는 빚' — 안 올 수도, 한 번에 올 수도 있음.",
+    ),
+    "related_party_transaction": DisclosureGlossaryEntry(
+        label="특수관계자 거래",
+        description="최대주주·임원·계열사 등 회사와 이해관계가 얽힌 상대와의 거래.",
+        category="business",
+        how="공정거래법·상법상 일정 규모 초과 시 이사회 승인·공시·감사위원회 검토 필요.",
+        benchmark="비공정 가격 의심·일감몰아주기 사안은 공정위 조사 대상. 거래 규모와 빈도 함께 봄.",
+        intuition="가게 사장이 '내 친척 회사'에서 재료를 사 오는 것 — 공정한 가격인지 따로 검증 필요.",
+    ),
+    # ─────────────────────────────────────────────────────────────
+    # 감사보고서 (audit_report)
+    # ─────────────────────────────────────────────────────────────
+    "audit_opinion_unqualified": DisclosureGlossaryEntry(
+        label="적정 의견",
+        description="외부 회계법인(감사인)이 '재무제표가 회계 규칙에 맞게 잘 작성됐다'고 판단한 가장 일반적인 결과.",
+        category="audit_report",
+        how="감사인이 '중요한 부분에 오류·왜곡이 없다'고 결론. 4가지 의견 중 가장 좋은 결과.",
+        benchmark="**대부분 상장사가 받는 기본 의견**. 다만 '적정'은 회계처리가 맞다는 뜻일 뿐, '회사가 좋다'·'주가 오른다'는 뜻이 전혀 아님.",
+        intuition="시험지에 '오답 없음' 도장 받은 셈 — 합격은 했다는 뜻, 점수가 높다는 뜻은 아님.",
+    ),
+    "audit_opinion_qualified": DisclosureGlossaryEntry(
+        label="한정 의견",
+        description="대체로 적정한데 특정 항목에 한해 문제가 있다고 감사인이 한정한 의견.",
+        category="audit_report",
+        how="감사범위 제한 또는 회계기준 위배가 있으나, 그 영향이 재무제표 전체에 미치지는 않을 때.",
+        benchmark="상장 유지에 영향. 코스닥은 2년 연속 한정 시 상장폐지 사유 검토 가능성.",
+        intuition="'전반적으론 OK인데 이 한 문제에는 답을 쓸 수 없음'이라고 적힌 시험지.",
+    ),
+    "audit_opinion_adverse": DisclosureGlossaryEntry(
+        label="부적정 의견",
+        description="재무제표가 회계기준을 위배하고 그 영향이 매우 크다고 감사인이 판단.",
+        category="audit_report",
+        how="중대한 회계기준 위반이 재무제표 전체에 영향을 미친다고 결론.",
+        benchmark="**상장폐지 사유 즉시 발생.** 매매거래정지·정리매매 절차 진행.",
+        intuition="'시험지 자체가 잘못됐다' — 거의 빵점 처리.",
+    ),
+    "audit_opinion_disclaimer": DisclosureGlossaryEntry(
+        label="의견거절",
+        description="감사인이 '판단할 충분한 자료를 확보하지 못했다'며 의견 표명을 거부한 경우.",
+        category="audit_report",
+        how="감사범위 제한이 매우 크거나 계속기업 가정에 중대한 의문이 있을 때 발생.",
+        benchmark="**상장폐지 사유 즉시 발생.** 부적정과 함께 가장 무거운 감사 결과.",
+        intuition="감사인이 '나는 이걸 채점할 수 없다'고 손을 든 상태 — 시험 자체를 인정하지 않음.",
+    ),
+    "key_audit_matters": DisclosureGlossaryEntry(
+        label="핵심감사사항(KAM)",
+        description="감사인이 '이번 감사에서 가장 신경 써서 본 이슈'라고 별도로 알리는 항목.",
+        category="audit_report",
+        how="2018년부터 도입. 자주 등장하는 KAM 예시 — 매출 인식 시점(언제 매출로 잡을지), 재고자산 평가(못 팔린 재고 가치를 얼마로 볼지), [[goodwill-impairment]](영업권 손상 — 과거 비싸게 산 회사 가치 하락 반영).",
+        benchmark="KAM 자체가 부정 의견은 아님 — 다만 '이 부분은 회사가 계속 신경 써야 한다'는 신호. 같은 KAM이 매년 반복되면 만성 위험.",
+        intuition="시험 채점 후 '이 문제에서 학생들이 가장 많이 헷갈렸다'고 따로 적어두는 빨간펜 메모.",
+    ),
+    "emphasis_of_matter": DisclosureGlossaryEntry(
+        label="강조사항",
+        description="감사의견에는 영향을 주지 않지만, 사용자가 꼭 알아야 할 사실을 감사인이 별도로 강조한 부분.",
+        category="audit_report",
+        how="회계기준 변경, 중대 소송, 계속기업 가정 관련 사항 등이 흔히 기재됨.",
+        benchmark="강조사항=부정 의견 아님. 다만 같은 내용이 다음해까지 반복되면 위험 시그널.",
+        intuition="'합격은 줬지만, 이 부분은 꼭 다시 확인하세요'라는 빨간펜 주석.",
+    ),
+    "going_concern_uncertainty": DisclosureGlossaryEntry(
+        label="계속기업 존속 불확실성",
+        description="회사가 향후 1년간 정상적으로 사업을 이어갈 수 있을지 의심된다고 감사인이 표시한 상태.",
+        category="audit_report",
+        how="자본잠식·차입금 상환 압박·주요 거래처 상실 등이 근거가 됨. 보통 감사보고서 강조사항이나 KAM에 명시.",
+        benchmark="**관리종목 지정·상장폐지 위험 직결.** 다음 분기 흑자전환·자금조달 성사 여부가 핵심.",
+        intuition="의사가 '이 환자는 1년 더 버틸 수 있을지 모르겠다'고 차트에 적은 셈.",
+    ),
+    "internal_control_opinion": DisclosureGlossaryEntry(
+        label="내부회계관리제도 감사의견",
+        description="회계 부정·오류를 막는 회사 내부의 통제 시스템이 잘 작동하는지에 대한 별도 감사 결과.",
+        category="audit_report",
+        how="재무제표 의견과 별도로 산출. 적정·비적정 둘 중 하나. 비적정 사유는 보고서에 명시.",
+        benchmark="비적정이어도 재무제표 의견이 적정일 수 있지만, 회계 부정 위험 신호로 간주.",
+        intuition="시험 결과뿐 아니라 '시험 준비 과정에 부정행위 가능성은 없었나'까지 따로 본 점검표.",
+    ),
+    # ─────────────────────────────────────────────────────────────
+    # 지분·소유 (equity)
+    # ─────────────────────────────────────────────────────────────
+    "largest_shareholder_change": DisclosureGlossaryEntry(
+        label="최대주주 변경",
+        description="회사를 지배하는 1대 주주가 바뀌는 것. 경영권 이동의 핵심 신호.",
+        category="equity",
+        how="지분 양도·증여·M&A·증자 등으로 발생. 잠재 변경(예정)과 확정 변경 모두 공시 대상.",
+        benchmark="신규 최대주주가 사모펀드·SPC면 단기 매각·구조조정 가능성 높음.",
+        intuition="가게 주인이 바뀌는 것 — 메뉴·가격·직원 정책 다 바뀔 수 있음.",
+    ),
+    "mass_holding_report": DisclosureGlossaryEntry(
+        label="주식등의 대량보유보고(5% 룰)",
+        description="누구든 회사 주식을 5% 이상 보유하게 되면 의무적으로 신고해야 하는 제도.",
+        category="equity",
+        how="5% 도달·1%포인트 변동마다 5영업일 내 보고. 보유 목적(단순투자·일반투자·경영참여)도 함께 신고.",
+        benchmark="목적이 '경영참여'로 바뀌면 경영권 분쟁·행동주의 신호. 사모펀드 등장 시 주의.",
+        intuition="'우리 회사 지분 5% 넘게 가진 사람은 모두 신원 공개하세요'라는 규칙.",
+    ),
+    "executive_holding_report": DisclosureGlossaryEntry(
+        label="임원·주요주주 특정증권등 소유상황보고",
+        description="임원이나 10% 이상 보유 주주가 자기 회사의 주식·CB·BW 등(=특정증권등, 주가에 영향 줄 수 있는 증권)을 사고팔 때마다 신고하는 제도.",
+        category="equity",
+        how="변동일로부터 5영업일 안에 신고. '단기매매차익'(=6개월 안에 사고팔아서 번 차익)은 본인이 가질 수 없고 회사에 반환해야 함.",
+        benchmark="실적 발표·M&A 직전 임원의 대량 매도는 [[insider-trading]](미공개정보 이용) 의심 → 거래소·금감원 조사 대상.",
+        intuition="가게 임원이 '내가 우리 가게 지분 좀 팔았다'고 그때그때 공개 보고하는 규칙.",
+    ),
+    "equity_dilution": DisclosureGlossaryEntry(
+        label="지분 희석",
+        description="신주 발행으로 기존 주주의 지분율과 1주당 가치가 줄어드는 현상.",
+        category="equity",
+        how="유상증자·CB 전환·BW 행사·자기주식 처분·임직원 스톡옵션 등이 모두 희석 요인.",
+        benchmark="발행규모÷발행주식총수 = 희석률. 누적 희석률 10%↑면 큰 부담.",
+        intuition="피자 조각 수만 늘어나고 피자 크기는 그대로 — 1인당 받는 크기 감소.",
+    ),
+    # ─────────────────────────────────────────────────────────────
+    # 시장조치 (market_action)
+    # ─────────────────────────────────────────────────────────────
+    "trading_halt": DisclosureGlossaryEntry(
+        label="매매거래 정지",
+        description="거래소가 특정 종목의 매매를 일시적으로 멈추는 조치.",
+        category="market_action",
+        how="주요 공시 전후, 풍문·보도, 시장경보, 감사 의견 비적정 등에서 발동.",
+        benchmark="정지 사유에 따라 재개 시점 천차만별. 상폐 사유 발생이면 장기화 가능.",
+        intuition="신호등을 일단 빨간색으로 고정 — 사람들이 정확한 정보를 알 때까지 거래 금지.",
+    ),
+    "supervisory_designation": DisclosureGlossaryEntry(
+        label="관리종목 지정",
+        description="상장폐지 우려가 큰 종목을 거래소가 따로 분류해 표시하는 제도.",
+        category="market_action",
+        how="자본잠식·매출액 미달·감사 한정·계속기업 불확실성 등이 지정 사유.",
+        benchmark="지정 후 사유 해소 못하면 상장폐지 심사. 신용거래·대용증권 제한 동반.",
+        intuition="가게에 '경영 주의' 노란딱지가 붙은 상태 — 손님(투자자)이 한 발 물러서서 보게 됨.",
+    ),
+    "delisting_risk": DisclosureGlossaryEntry(
+        label="상장폐지 사유 발생",
+        description="회사 주식이 시장에서 더 이상 거래될 수 없게 될 수 있는 사유가 생긴 상태.",
+        category="market_action",
+        how="감사의견 부적정·의견거절, 자본 전액잠식, 2년 연속 매출 미달 등이 직접 사유.",
+        benchmark="개선기간(보통 1년) 부여 후 미해소 시 정리매매 → 상장폐지.",
+        intuition="가게 영업허가가 취소될 위기 — 정상화 못하면 시장에서 퇴출.",
+    ),
+    "unfaithful_disclosure": DisclosureGlossaryEntry(
+        label="불성실공시법인 지정",
+        description="공시를 늦게 하거나 빠뜨리거나 번복한 회사를 거래소가 별도 분류하는 제도.",
+        category="market_action",
+        how="공시불이행·공시번복·공시변경에 부과 점수가 쌓이며, 일정 점수 초과 시 지정.",
+        benchmark="누적 점수 10점 초과 시 매매거래 정지(1일). 반복되면 관리종목 지정.",
+        intuition="가게가 메뉴 변경·휴업을 제때 안 알린 게 쌓여 '신뢰 주의' 마크가 붙은 상태.",
+    ),
+    "investment_caution": DisclosureGlossaryEntry(
+        label="투자주의·투자경고·투자위험",
+        description="과열·이상 거래 종목에 거래소가 단계별로 발동하는 시장 경보.",
+        category="market_action",
+        how="주의(단기 급등) → 경고(추가 급등) → 위험(지속 급등) 3단계. 위험은 매매정지 동반.",
+        benchmark="투자위험 지정은 신용거래 금지·증거금 100%. 작전·테마주에 자주 발동.",
+        intuition="롤러코스터에 '주의/경고/위험' 표지판이 점점 강도 높아지는 것.",
+    ),
+    # ─────────────────────────────────────────────────────────────
+    # 재무 일반 (general)
+    # ─────────────────────────────────────────────────────────────
+    "amendment_disclosure": DisclosureGlossaryEntry(
+        label="정정공시",
+        description="이미 한 공시 내용을 나중에 고쳐 다시 알리는 공시.",
+        category="general",
+        how="단순 오타·수치 정정부터 계약 해지·금액 변경 등 중대한 정정까지 범위 다양.",
+        benchmark="실적·계약금액 하향 정정은 부정 신호. 반복적 정정은 불성실공시 누적 위험.",
+        intuition="'아까 말한 것 일부 잘못됐어요, 이렇게 바꿉니다'라는 정정 메시지.",
+    ),
+    "voluntary_disclosure": DisclosureGlossaryEntry(
+        label="자율공시",
+        description="법적 의무는 아니지만 회사가 투자자에게 알릴 가치가 있다고 판단해 자발적으로 하는 공시.",
+        category="general",
+        how="신제품 출시·수상 내역·ESG 활동·자사주 매입 계획 등.",
+        benchmark="자율공시 자체는 가치 중립. 의무공시 회피 목적이 의심되면 별도 검토.",
+        intuition="시험 점수표에 안 들어가는 자발적 활동을 학교 게시판에 자랑하는 셈.",
+    ),
+    "capital_impairment": DisclosureGlossaryEntry(
+        label="자본잠식",
+        description="누적 적자로 자본이 자본금보다 줄어든 상태. '완전자본잠식'은 자본총계가 음수.",
+        category="general",
+        how="자본총계 ÷ 자본금 < 100% = 부분잠식, < 0% = 완전잠식.",
+        benchmark="50% 이상 잠식 2년 연속 = 관리종목. 완전잠식 = 상장폐지 사유 즉시 발생.",
+        intuition="피자 가게가 누적 적자로 처음 들고 온 자본금까지 까먹은 상태.",
+    ),
+    "stock_split": DisclosureGlossaryEntry(
+        label="액면분할",
+        description="주식 1주를 여러 주로 쪼개 액면가를 낮추는 것. 주식 수↑·1주당 가격↓.",
+        category="general",
+        how="이사회 결의·정관 변경·주총 결의 거쳐 진행. 시가총액·기업가치는 불변.",
+        benchmark="유동성 개선·소액투자 진입 용이. 단기 거래량 증가, 장기 가치엔 중립.",
+        intuition="큰 피자 한 판을 4조각으로 미리 잘라두는 것 — 양은 같지만 사기 편함.",
+    ),
+    "dividend": DisclosureGlossaryEntry(
+        label="현금배당",
+        description="회사가 번 이익의 일부를 주주에게 현금으로 나눠 주는 것.",
+        category="general",
+        how="배당기준일에 주주명부에 등재된 사람에게 지급. 배당락일 이후 매수자는 못 받음.",
+        benchmark="배당수익률(배당금÷주가) 3%+ 양호, 5%+ 고배당. 배당성향(배당÷순이익) 30~50% 가 보통.",
+        intuition="가게가 번 돈을 주인들끼리 나눠 갖는 것. 안 가져가면 회사에 다시 쌓임.",
+    ),
+    "stock_dividend": DisclosureGlossaryEntry(
+        label="주식배당",
+        description="배당을 현금이 아니라 주식으로 지급하는 방식. 주주는 주식 수가 늘어남.",
+        category="general",
+        how="이익잉여금을 자본금으로 전입. 회사는 현금이 안 빠지고, 주주는 새 주식을 받음.",
+        benchmark="회사 현금 보존 + 주주 주식 수 증가. 다만 1주당 가치는 희석.",
+        intuition="피자 가게가 현금 대신 '피자 쿠폰'으로 배당하는 셈 — 가게엔 돈이 남고, 손님은 조각 수만 늘어남.",
+    ),
+    "reverse_stock_split": DisclosureGlossaryEntry(
+        label="액면병합",
+        description="여러 주를 한 주로 합쳐 액면가를 올리는 것. 주식 수↓·1주당 가격↑.",
+        category="general",
+        how="액면분할의 반대. 보통 저가주 이미지 탈피·유통주식수 조정 목적.",
+        benchmark="시가총액·기업가치 불변. 다만 거래 단위가 커져 단기 유동성 감소 가능.",
+        intuition="작은 피자 4조각을 한 조각으로 합치는 것 — 양은 같지만 단가가 커짐.",
+    ),
+    # ─────────────────────────────────────────────────────────────
+    # 자본조달 (capital_raising) — 추가
+    # ─────────────────────────────────────────────────────────────
+    "paid_in_capital_reduction": DisclosureGlossaryEntry(
+        label="유상감자",
+        description="회사가 자본금을 줄이고 그만큼 주주에게 돈을 돌려주는 자본조정.",
+        category="capital_raising",
+        how="주식 수를 줄이거나 액면가를 낮춰 자본금 감소 → 차액을 주주에게 현금 지급.",
+        benchmark="잉여 현금 환원 목적이면 호재 해석. 다만 사업 축소·청산 신호로 읽힐 수도.",
+        intuition="피자 가게가 사업을 줄이며 '남은 자본금 일부를 주주에게 돌려준다'고 결정.",
+    ),
+    "bonus_capital_reduction": DisclosureGlossaryEntry(
+        label="무상감자",
+        description="누적 적자를 메우려고 주식 수나 액면가를 줄여 자본금을 감소시키는 것. 주주는 보상 없음.",
+        category="capital_raising",
+        how="결손금 보전이 주목적. 보통 5:1·10:1 등 비율로 주식 수 축소.",
+        benchmark="**일반적으로 부정 신호** — 자본잠식 해소용이라 본질적 회복 신호는 아님. 무상감자 직후 유상증자 동반이 흔함.",
+        intuition="피자 가게가 누적 적자가 너무 커서 '주주 지분을 일부 없던 일로' 만드는 셈 — 출자한 돈의 일부를 잃음.",
+    ),
+    "corporate_bond_issuance": DisclosureGlossaryEntry(
+        label="회사채 발행",
+        description="회사가 채권을 발행해 시장에서 빚을 내는 자금조달 방식.",
+        category="capital_raising",
+        how="이자율·만기·신용등급에 따라 발행 조건 결정. 일반사채·전환사채·신주인수권부사채 등.",
+        benchmark="발행금액÷자본총계, 이자율 수준, 신용등급 변화를 함께 봄. 고이율·단기 회사채 의존도가 높으면 위험.",
+        intuition="가게가 은행 대신 '여러 손님에게 차용증을 팔아' 돈을 빌리는 것.",
+    ),
+    # ─────────────────────────────────────────────────────────────
+    # 영업·거래 (business) — 추가
+    # ─────────────────────────────────────────────────────────────
+    "short_term_borrowing_increase": DisclosureGlossaryEntry(
+        label="단기차입금 증가 결정",
+        description="회사가 1년 이내 갚아야 할 단기 빚을 크게 늘리기로 결정한 사안.",
+        category="business",
+        how="자기자본의 일정 비율을 넘는 차입은 이사회 결의·공시 의무. 주거래은행·금리 조건 포함.",
+        benchmark="단기차입금÷자기자본 비율 급등, 또는 동일 분기 반복 증가는 유동성 압박 신호.",
+        intuition="가게가 '당장 갚을 단기 빚을 크게 늘리겠다'고 결정 — 자금사정 한 번 확인할 시점.",
+    ),
+    "business_suspension": DisclosureGlossaryEntry(
+        label="영업정지",
+        description="회사 또는 사업부문의 영업이 일시적으로 중단되는 상태.",
+        category="business",
+        how="규제기관 처분·자체 결정·재해 등 사유. 정지 기간·매출 비중·재개 가능성 함께 공시.",
+        benchmark="매출 비중이 큰 사업부 정지가 길어지면 실적 하향·계속기업 우려.",
+        intuition="가게의 핵심 메뉴 판매가 일정 기간 막힘 — 매출에 직접 구멍.",
+    ),
+    # ─────────────────────────────────────────────────────────────
+    # 위험·소송·재무위기 (risk) — 신규 카테고리
+    # ─────────────────────────────────────────────────────────────
+    "default_event": DisclosureGlossaryEntry(
+        label="부도",
+        description="회사가 채무를 약속한 날짜에 갚지 못해 신용을 잃은 상태.",
+        category="risk",
+        how="어음·수표 부도 또는 차입금 만기 미상환. 1차 부도 후 즉시 상환 못하면 최종 부도.",
+        benchmark="**상장폐지 사유 즉시 발생.** 회사 자산 청산 또는 회생 절차로 이어짐.",
+        intuition="가게가 약속한 날 돈을 못 갚아 '돈 못 갚는 가게'라는 도장이 찍힌 상태.",
+    ),
+    "corporate_rehabilitation": DisclosureGlossaryEntry(
+        label="회생절차",
+        description="법원이 주도해 회사를 살리려 채무를 재조정하는 절차.",
+        category="risk",
+        how="회사·채권자 신청 → 법원 개시결정 → 회생계획안 인가 → 변제 진행. 옛 화의·법정관리.",
+        benchmark="개시신청만으로 매매거래 정지 + 관리종목 지정. 인가 후에는 정상화·상장유지 가능성 모색.",
+        intuition="가게에 빨간딱지가 붙고, 법원이 '빚 갚는 일정을 다시 짜자'며 정리에 개입한 상태.",
+    ),
+    "bankruptcy_filing": DisclosureGlossaryEntry(
+        label="파산신청",
+        description="회사 회생이 불가능하다 보고 법원에 청산을 신청하는 것. 회생절차보다 한 단계 더 무거움.",
+        category="risk",
+        how="회생 실패·자산 < 부채일 때 신청. 파산선고 후 관재인이 자산 매각·분배.",
+        benchmark="**상장폐지 사유 즉시 발생.** 잔존 가치는 채권자 우선 변제 후 주주에게 마지막 차례.",
+        intuition="가게가 더 못 살린다 판단되어 '문 닫고 남은 물건 팔아 빚부터 갚자'는 단계.",
+    ),
+    "lawsuit_filing": DisclosureGlossaryEntry(
+        label="소송 등의 제기·신청",
+        description="회사가 원고·피고로 관여된 소송이나 가처분 등 법적 분쟁의 공시.",
+        category="risk",
+        how="자기자본의 일정 비율(보통 5%) 이상 청구금액인 소송은 의무 공시.",
+        benchmark="피소·청구금액÷자기자본 비율, 1심·2심 결과로 위험 갱신. 패소 시 우발채무 → 충당부채 전환.",
+        intuition="가게가 법정에 끌려갔거나, 가게가 누구를 끌어들인 상황 — 결과에 따라 큰돈이 오갈 수 있음.",
+    ),
+    "embezzlement_allegation": DisclosureGlossaryEntry(
+        label="횡령·배임 혐의발생",
+        description="회사 임직원이 회사 돈을 빼돌렸거나 회사에 손해를 끼친 의혹이 제기된 단계.",
+        category="risk",
+        how="검찰·경찰·감사 보고로 인지. 혐의 단계라 확정은 아니지만 즉시 공시 의무.",
+        benchmark="혐의금액÷자기자본 비율이 크면 상장적격성 실질심사 대상. 매매거래 정지 가능.",
+        intuition="가게 직원이 돈을 빼돌렸다는 '의심'이 표면화된 단계 — 아직 확정은 아니지만 시장은 즉시 반응.",
+    ),
+    "embezzlement_confirmed": DisclosureGlossaryEntry(
+        label="횡령·배임 사실확인",
+        description="횡령·배임 사실이 법원·검찰 등을 통해 확정된 단계.",
+        category="risk",
+        how="유죄 판결 또는 회사 자체 조사로 확정. 손해액·관련자 직위 공시.",
+        benchmark="**상장적격성 실질심사 즉시 회부.** 자기자본 대비 비중이 크면 상장폐지로 이어질 수 있음.",
+        intuition="가게의 도난 사건이 '실제로 있었다'고 확정 — 더 무거운 신호.",
+    ),
+    "damage_lawsuit": DisclosureGlossaryEntry(
+        label="손해배상소송",
+        description="회사를 상대로 한 또는 회사가 제기한 금전 배상 청구 소송.",
+        category="risk",
+        how="제품결함·계약위반·환경피해 등이 흔한 사유. 청구금액과 승소 가능성을 함께 공시.",
+        benchmark="청구금액÷자기자본 비율로 노출도 평가. 1심 패소 시 충당부채 인식 가능성↑.",
+        intuition="가게가 '얼마 물어내라'는 청구를 받았거나 제기한 상태 — 결과에 따라 큰 비용 가능.",
+    ),
+    "accounting_error_correction": DisclosureGlossaryEntry(
+        label="회계오류 수정(재무제표 재작성)",
+        description="과거 재무제표에 오류가 있어 다시 작성하는 것.",
+        category="risk",
+        how="감사인 지적 또는 자체 발견으로 시작. 5% 룰 등 양적 기준 초과 오류는 의무.",
+        benchmark="대규모 수정·반복 발생은 내부통제 부실 시그널. 감리·과징금 위험.",
+        intuition="시험지를 다 채점한 뒤 '계산 오류가 있어 점수를 다시 매깁니다'라고 발표하는 셈.",
+    ),
+    # ─────────────────────────────────────────────────────────────
+    # 지배구조 (governance) — 신규 카테고리
+    # ─────────────────────────────────────────────────────────────
+    "ceo_change": DisclosureGlossaryEntry(
+        label="대표이사 변경",
+        description="회사 최고경영자가 바뀌는 것. 경영 방향·전략의 직접 변동 신호.",
+        category="governance",
+        how="이사회 결의 또는 주총. 사임·해임·임기만료 사유, 신임 대표 이력 함께 공시.",
+        benchmark="실적 부진 후 변경·잦은 교체는 부정. 명망 있는 전문경영인 영입은 긍정 해석되는 편.",
+        intuition="가게 사장이 바뀌는 것 — 메뉴·서비스 정책 변동 가능성이 큼.",
+    ),
+    "outside_director_appointment": DisclosureGlossaryEntry(
+        label="사외이사 선임",
+        description="회사 경영진에 속하지 않은 외부 이사를 새로 뽑는 것. 이사회 독립성과 견제 기능 핵심.",
+        category="governance",
+        how="주총 결의로 선임. 자산총액 2조원 이상 상장사는 이사 총수의 과반수가 사외이사 필요.",
+        benchmark="대주주·전현직 임원과의 친분 관계, 회의 출석률, 안건 반대 비율로 독립성 평가.",
+        intuition="가게 운영에 '외부 시선'을 끌어들이는 자리 — 사장이 견제 받게 함.",
+    ),
+    "audit_committee_member": DisclosureGlossaryEntry(
+        label="감사위원 선임",
+        description="회사 회계·내부통제를 감독할 감사위원회 멤버를 뽑는 것.",
+        category="governance",
+        how="주총 결의. 자산 1천억원 이상 회사는 상근감사 1인 이상 또는 감사위원회 의무.",
+        benchmark="회계·법률 전문가 비중, 대주주와의 거리감이 견제 효과를 좌우.",
+        intuition="가게 회계 장부를 점검할 감독관을 새로 임명하는 것.",
+    ),
+    "auditor_change": DisclosureGlossaryEntry(
+        label="감사인 변경",
+        description="회사 외부감사를 맡는 회계법인을 교체하는 것.",
+        category="governance",
+        how="자유선임 만료·지정감사 종료 등 자연 변경과, 갈등으로 인한 중도 교체로 나뉨.",
+        benchmark="중도 교체 또는 직전 의견 비적정 후 교체는 의심 신호. 빈번한 교체는 회계 불투명성 우려.",
+        intuition="가게 회계감사 맡길 외부 회계사를 바꾸는 것 — 이유가 중요.",
+    ),
+    "designated_audit": DisclosureGlossaryEntry(
+        label="지정감사",
+        description="회사가 직접 회계법인을 고르지 못하고 금감원이 지정하는 감사인이 감사하는 제도.",
+        category="governance",
+        how="회계처리 위반·관리종목·6년 자유선임 후 3년 의무 지정 등이 사유. 보통 자유선임보다 엄격.",
+        benchmark="지정감사로 전환되면 일반적으로 회계 검증 강도↑, 감사보수↑. 의견 비적정 발생 빈도도 상승.",
+        intuition="시험 감독관을 학교가 못 고르고 교육청이 지정해 보내는 셈 — 더 엄격한 시험이 됨.",
+    ),
+    # ─────────────────────────────────────────────────────────────
+    # 지분·소유 (equity) — 추가
+    # ─────────────────────────────────────────────────────────────
+    "voluntary_delisting": DisclosureGlossaryEntry(
+        label="자진상장폐지",
+        description="회사가 자발적으로 주식시장에서 빠지기로 결정하는 것.",
+        category="equity",
+        how="공개매수로 소액주주 지분을 매입한 뒤 일정 기준 충족 시 신청. 사모펀드의 PEF 거래 흔함.",
+        benchmark="공개매수 가격이 시가 대비 큰 프리미엄이면 단기 호재. 다만 비상장 전환 후 유동성 사라짐.",
+        intuition="가게가 '동네 시장을 떠나 사적으로 운영하겠다'고 결정 — 손님들은 정해진 가격에 지분 정리 기회.",
+    ),
+    "backdoor_listing": DisclosureGlossaryEntry(
+        label="우회상장",
+        description="비상장사가 상장사와 합병·주식교환 등으로 사실상 상장 효과를 얻는 것.",
+        category="equity",
+        how="합병·주식교환·영업양수도 등이 도구. 거래소 우회상장 심사를 거쳐야 함.",
+        benchmark="피상장사(=껍데기 회사)와의 합병 가격, 신규 사업의 실체가 핵심. 부실 비상장사의 우회상장은 감리 강화 대상.",
+        intuition="가게가 정문(IPO)을 거치지 않고 이미 시장에 있는 다른 가게와 합쳐 그 자리에 들어앉는 것.",
+    ),
+    "stock_swap": DisclosureGlossaryEntry(
+        label="주식교환·이전",
+        description="두 회사 사이에 주식을 교환해 모회사·자회사 또는 지주회사 구조를 만드는 것.",
+        category="equity",
+        how="주식의 포괄적 교환(완전모자회사화)·포괄적 이전(지주회사 설립) 등 유형. 주총 특별결의 필요.",
+        benchmark="교환비율 산정이 시장가와 큰 차이를 보이면 주주 분쟁 위험. 지주사 전환 시 이중 디스카운트 논란 가능.",
+        intuition="두 가게가 '주식 맞교환'으로 한 가게가 다른 가게의 100% 모회사가 되는 셈.",
+    ),
+    # ─────────────────────────────────────────────────────────────
+    # 시장조치 (market_action) — 추가
+    # ─────────────────────────────────────────────────────────────
+    "short_term_overheating": DisclosureGlossaryEntry(
+        label="단기과열종목 지정",
+        description="단기간 거래량·주가가 비정상적으로 급변한 종목을 거래소가 지정해 매매를 제한하는 조치.",
+        category="market_action",
+        how="3거래일간 단일가매매 적용. 지정 사유 해소되면 자동 해제.",
+        benchmark="주의·경고·위험과 함께 진행되는 경우 다수. 작전·테마 광풍 종목에 빈발.",
+        intuition="롤러코스터가 너무 빠르게 도니 잠깐 천천히 움직이게 제한 — 안전판 역할.",
+    ),
+    "volatility_interruption": DisclosureGlossaryEntry(
+        label="변동성완화장치(VI)",
+        description="개별 종목 가격이 단시간에 급변할 때 2분간 단일가로 거래를 전환하는 장치.",
+        category="market_action",
+        how="동적VI(직전 체결가 대비)·정적VI(시가 대비) 두 종류. 가격 안정 후 자동 재개.",
+        benchmark="잦은 VI 발동은 변동성 큰 종목 신호. 단기 매매 위험.",
+        intuition="가격이 너무 급하게 튀면 잠깐 멈추고 '제정신 차리고 다시 거래하자'는 안전장치.",
+    ),
+    "sidecar": DisclosureGlossaryEntry(
+        label="사이드카",
+        description="선물가격이 5% 이상 급변하고 1분 지속 시 현물 프로그램매매를 5분간 정지시키는 조치.",
+        category="market_action",
+        how="선물의 급변이 현물에 연쇄 충격 주는 것을 막기 위한 제도. 1일 1회 발동.",
+        benchmark="자주 발동되는 날은 시장 불안 신호. 통상 폭락·폭등 직전·직후 동반.",
+        intuition="자동차가 너무 빨라지면 '잠시 옆길로 빼서 진정시키자'는 신호.",
+    ),
+    "circuit_breaker": DisclosureGlossaryEntry(
+        label="서킷브레이커(CB)",
+        description="지수가 일정 폭 이상 급락하면 시장 전체 거래를 일정 시간 중단하는 조치.",
+        category="market_action",
+        how="3단계 — 1단계 -8%(20분 정지), 2단계 -15%(20분), 3단계 -20%(당일 종료).",
+        benchmark="3단계 발동은 역사적 위기 신호. 1단계만으로도 시장 패닉 평가.",
+        intuition="시장 전체 전기가 너무 흐르면 '두꺼비집'이 내려가 잠시 거래 자체를 멈춤.",
+    ),
+    "short_selling": DisclosureGlossaryEntry(
+        label="공매도",
+        description="갖고 있지 않은 주식을 빌려서 먼저 팔고, 나중에 사서 갚는 거래.",
+        category="market_action",
+        how="대차 → 매도 → 일정 기간 후 매수 → 상환. 차입 없이 매도하는 무차입 공매도는 한국에서 금지.",
+        benchmark="공매도 잔고÷상장주식수 비율과 평균 상환기간으로 매도 압력 추정. 잔고 급증은 단기 부정 신호.",
+        intuition="'지금 비싸다'고 보고 빌려서 먼저 팔아 차익을 노리는 거래 — 가격이 떨어져야 이익.",
+    ),
+    "ex_rights_date": DisclosureGlossaryEntry(
+        label="권리락",
+        description="유상·무상증자에서 신주를 받을 권리가 없어진 날, 그만큼 주가가 조정되는 것.",
+        category="market_action",
+        how="권리락일 = 권리부일 다음 거래일. 거래소가 이론 권리락 가격을 계산해 시가로 사용.",
+        benchmark="이론가 = (전일 종가 + 증자 시 추가 출자금) ÷ (1 + 증자비율). 시각적으로 큰 갭처럼 보이지만 가치 손실 아님.",
+        intuition="피자 조각 수가 늘어나기로 결정된 다음날, 1조각 가격을 조정해 다시 시작하는 셈.",
+    ),
+    "ex_dividend_date": DisclosureGlossaryEntry(
+        label="배당락",
+        description="배당받을 권리가 없어진 날, 그만큼 주가가 조정되는 것.",
+        category="market_action",
+        how="배당기준일 다음 거래일. 시가에서 배당 예정액만큼 차감해 시작.",
+        benchmark="고배당주는 배당락일 갭이 크게 보임. 실제 부의 손실은 아님(배당으로 보전).",
+        intuition="가게가 곧 나눠줄 배당만큼 1조각 가격에서 미리 빼고 시작하는 것.",
+    ),
+    # ─────────────────────────────────────────────────────────────
+    # 회계 개념 (accounting) — 신규 카테고리
+    # ─────────────────────────────────────────────────────────────
+    "ebitda": DisclosureGlossaryEntry(
+        label="EBITDA (이자·세금·감가상각 전 이익)",
+        description="영업이익에 '감가상각비'(=공장·기계 가치가 매년 줄어드는 만큼 비용으로 잡은 금액. 실제 현금이 나간 건 아님)와 '무형자산상각비'(=특허·소프트웨어 등 만질 수 없는 자산의 가치 감소분)를 더한 값. 회사가 실제로 벌어들이는 현금 창출력에 가까운 지표.",
+        category="accounting",
+        how="EBITDA = 영업이익 + 감가상각비 + 무형자산상각비. 회사마다 다른 감가상각 방식의 영향을 제거해 회사 간 비교에 유리.",
+        benchmark="EBITDA 마진(EBITDA÷매출)을 업종 평균과 비교. EBITDA÷이자비용 = 빚 부담을 본업으로 몇 배 감내 가능한지(높을수록 안정).",
+        intuition="'장부에만 잡힌 비용(감가상각)' 빼고 '실제로 가게 금고에 들어온 돈'에 가까운 숫자.",
+    ),
+    "goodwill_impairment": DisclosureGlossaryEntry(
+        label="영업권 손상차손",
+        description="과거 M&A 때 비싸게 산 회사의 가치가 떨어졌다고 인정해 손실로 반영하는 것.",
+        category="accounting",
+        how="매년 손상검토 → 회수가능액 < 장부가액이면 차액을 손실 처리. 일회성 비용으로 잡힘.",
+        benchmark="대규모 손상은 과거 M&A 실패 시그널. 반복 손상은 인수 가격 책정·통합 능력 의심.",
+        intuition="'예전에 비싸게 산 가게가 알고 보니 그 값어치가 아니더라'고 장부에서 인정하는 것.",
+    ),
+    "intangible_impairment": DisclosureGlossaryEntry(
+        label="무형자산 손상차손",
+        description="특허·소프트웨어·개발비 등 무형자산 가치가 하락했다고 보고 손실로 반영하는 것.",
+        category="accounting",
+        how="시장 환경 변화·기술 노후화로 회수가능액 < 장부가액일 때 인식.",
+        benchmark="개발비 손상이 반복되면 R&D 효율성 문제. 사업부 매각 직전 손상도 흔함.",
+        intuition="'우리 가게의 비법 레시피가 더 이상 안 먹힌다'고 인정하고 장부에서 깎는 것.",
+    ),
+    "provision": DisclosureGlossaryEntry(
+        label="충당부채",
+        description="미래에 거의 확실히 나갈 빚을, 그때 가서 잡지 말고 지금 미리 부채로 잡아두는 회계 처리.",
+        category="accounting",
+        how="제품보증·소송 배상금·구조조정 비용·환경복구 의무 등에 적용. '나갈 가능성이 높다' + '금액을 합리적으로 추정 가능' 두 조건 만족 시 부채로 인식.",
+        benchmark="[[contingent-liability]](우발채무)가 충당부채로 옮겨오면 손익에 비용으로 직접 반영됨 → 그 분기 이익 감소. 분기 갑작스러운 급증은 위험 신호.",
+        intuition="'아직 청구서는 안 왔지만 거의 확실히 나갈 돈'을 미리 장부에 적어두는 것 — 나중에 한 번에 터지지 않게.",
+    ),
+    "deferred_tax": DisclosureGlossaryEntry(
+        label="이연법인세",
+        description="회계장부 이익과 세금 신고용 이익이 시점이 달라서, 미래에 더 내거나 덜 낼 세금을 지금 미리 장부에 표시해두는 계정.",
+        category="accounting",
+        how="자주 발생하는 원인 — 감가상각 방식 차이(회계는 정액법, 세무는 정률법 등), '이월결손금'(=과거 적자를 미래 이익에서 차감해 세금을 줄여주는 권리). 미래에 덜 낼 세금 = '이연법인세자산', 더 낼 세금 = '이연법인세부채'.",
+        benchmark="이연법인세자산이 크면 '미래에 이익 날 거다'를 전제 → 미래 적자 지속 시 자산 실현 못 해 '손상'(가치 감액) 처리, 그 분기 비용으로 잡힘.",
+        intuition="회계 일기장과 세무 일기장이 시점이 달라 생기는 세금 차이를 '나중에 정산할 거니까 일단 적어두자'고 표시한 것.",
+    ),
+    "free_cashflow": DisclosureGlossaryEntry(
+        label="잉여현금흐름(FCF)",
+        description="회사가 본업으로 번 현금에서 설비투자(CAPEX)를 뺀, 자유롭게 쓸 수 있는 현금.",
+        category="accounting",
+        how="FCF = 영업현금흐름 - 자본적지출(CAPEX). 배당·자사주매입·부채상환 재원의 핵심.",
+        benchmark="지속적으로 (+) 면 자체 자금조달 가능 회사. 만성 (-) 는 외부 차입·증자 의존.",
+        intuition="가게가 1년 영업해서 번 돈에서, 가게 보수·기계 사는 데 쓴 돈을 빼고 진짜 남은 현금.",
+    ),
+    "interest_coverage_ratio": DisclosureGlossaryEntry(
+        label="이자보상배율",
+        description="영업이익으로 이자비용을 몇 배 갚을 수 있는지 보는 지표.",
+        category="accounting",
+        how="영업이익 ÷ 이자비용. 1배 미만이면 본업으로 이자도 못 내는 상태.",
+        benchmark="3배 이상 안정, 1.5~3 주의, 1배 미만 3년 연속이면 부실기업 분류.",
+        intuition="'본업으로 번 돈으로 이자 몇 번 낼 수 있나' — 빚 부담 측정의 핵심 자.",
+    ),
+    "capex": DisclosureGlossaryEntry(
+        label="자본적지출(CAPEX)",
+        description="공장·설비·연구개발 시설 등 미래 수익을 위해 쓰는 큰 투자 지출.",
+        category="accounting",
+        how="투자현금흐름의 '유형자산 취득' 항목으로 표시. 감가상각으로 여러 해에 걸쳐 비용 인식.",
+        benchmark="CAPEX÷매출 비율로 투자강도. 매출 성장 없이 CAPEX만 늘면 효율성 의심.",
+        intuition="가게가 새 오븐·매장 인테리어에 쓰는 큰 돈 — 당장 비용이 아니라 미래 매출을 위한 투자.",
+    ),
+    "accounts_receivable": DisclosureGlossaryEntry(
+        label="매출채권",
+        description="물건이나 서비스를 팔았지만 아직 돈을 못 받은 미수금.",
+        category="accounting",
+        how="외상 매출이 자산으로 잡힘. 회수기간이 길어지면 현금 부담↑.",
+        benchmark="매출채권회전일(매출채권÷매출×365) 60일 이내 양호. 증가율이 매출증가율보다 빠르면 회수지연 의심.",
+        intuition="가게가 '오늘 음식 줬는데 돈은 다음달에 받기로 한' 외상장부.",
+    ),
+    "inventory": DisclosureGlossaryEntry(
+        label="재고자산",
+        description="아직 팔리지 않은 상품·원자재·재공품 등의 자산.",
+        category="accounting",
+        how="평가 방법(선입선출·평균법) 따라 손익 다름. 진부화 시 평가손실 인식.",
+        benchmark="재고회전일이 길어지면 판매 부진 신호. 분기 급증 후 평가손실 전환 사례 흔함.",
+        intuition="'아직 팔리지 않은 메뉴 재료가 창고에 쌓여있는' 상태.",
+    ),
+    # ─────────────────────────────────────────────────────────────
+    # 공시제도·규제 (general) — 추가
+    # ─────────────────────────────────────────────────────────────
+    "material_event_report": DisclosureGlossaryEntry(
+        label="주요사항보고서",
+        description="회사 가치에 중대한 영향을 줄 사건이 생겼을 때 의무적으로 내는 공시 서식.",
+        category="general",
+        how="합병·분할·유상증자·감자·CB 발행·소송 등 30여 개 사건이 대상. 사유 발생일 다음날까지 제출.",
+        benchmark="DART에서 가장 중요한 단발성 공시. 이 서식으로 들어온 사안은 우선 검토 대상.",
+        intuition="가게에 '큰 일이 났을 때만' 꺼내는 정식 보고 양식 — 일상공시와는 무게가 다름.",
+    ),
+    "annual_report": DisclosureGlossaryEntry(
+        label="사업보고서",
+        description="회계연도 종료 후 90일 이내 제출하는 연간 종합 보고서.",
+        category="general",
+        how="사업·재무·임원·계열사·지배구조 전반 포함. 외부감사 받은 재무제표가 함께 첨부됨.",
+        benchmark="제출 지연·미제출은 관리종목 사유. 정정 빈도가 잦으면 내부통제 의심.",
+        intuition="가게의 1년 활동을 모두 적은 두꺼운 연차 보고서 — 가장 종합적인 정보.",
+    ),
+    "quarterly_report": DisclosureGlossaryEntry(
+        label="분기보고서·반기보고서",
+        description="분기 또는 반기 종료 후 45일 이내 제출하는 중간 보고서.",
+        category="general",
+        how="분기는 1·3분기, 반기는 2분기 종료 후. 검토(반기·분기) 또는 감사(연간) 형태로 외부 의견.",
+        benchmark="실적 추세를 확인하는 가장 빠른 자료. 직전 분기 대비·전년동기 대비 함께 봄.",
+        intuition="가게가 1년에 4번 내는 '중간 성적표' — 연차 보고서보다 가볍지만 신호는 빠름.",
+    ),
+    "rumor_clarification": DisclosureGlossaryEntry(
+        label="풍문 또는 보도에 대한 해명",
+        description="시장에 도는 풍문이나 언론보도에 대해 회사가 공식적으로 사실 여부를 밝히는 공시.",
+        category="general",
+        how="거래소 요청 또는 자체 판단으로 제출. 사실/사실무근/검토중 등으로 답변.",
+        benchmark="'사실무근'으로 답한 사안이 뒤집히면 불성실공시 누적. '검토중' 답변 후 결정 공시 패턴 흔함.",
+        intuition="가게에 '이런 소문이 돌더라'고 시장이 묻자, 가게가 '예/아니오/검토중'으로 답하는 것.",
+    ),
+    "inquiry_response": DisclosureGlossaryEntry(
+        label="조회공시 답변",
+        description="거래소가 회사에 직접 묻고 답변을 요구하는 공시.",
+        category="general",
+        how="주가·거래량 급변 시 거래소가 조회 요구 → 회사는 1~2거래일 내 답변. 미답변·허위답변은 불성실공시.",
+        benchmark="단기 급등 직후 '중요공시 없음' 답변이 자주 나오는 종목은 작전 의심 대상.",
+        intuition="거래소가 가게에 '왜 갑자기 손님이 몰리는지' 물어보고, 가게는 '특별한 이유 없다' 또는 '실은 이런 일 있다'로 답하는 것.",
+    ),
+    "insider_trading": DisclosureGlossaryEntry(
+        label="미공개 중요정보 이용",
+        description="공시되지 않은 중요정보를 이용해 주식을 사고팔아 부당이익을 얻는 행위. 형사처벌 대상.",
+        category="general",
+        how="자본시장법 제174조 — 임직원·대주주·계약상대방·정보전달받은 자 모두 처벌 가능.",
+        benchmark="실적 발표·M&A 직전 매매가 의심받음. 적발 시 부당이득 반환 + 1년~무기징역.",
+        intuition="시험문제를 미리 본 사람이 답을 적어 점수 받는 것 — 형사범죄.",
+    ),
+    "price_manipulation": DisclosureGlossaryEntry(
+        label="시세조종",
+        description="가짜 매매·허위 정보 등으로 주가를 인위적으로 움직이는 행위. 형사처벌 대상.",
+        category="general",
+        how="통정매매(=짠 사이에 서로 매매)·가장매매(=같은 사람 양쪽 매매)·허수주문(=체결 안 할 주문 띄우기)·풍문 유포 등이 전형적 수법. 자본시장법 제176조 처벌.",
+        benchmark="단기 급등 후 급락 패턴, 호가공백 메우기 등이 의심 시그널. 작전 적발 시 부당이득 반환 + 처벌.",
+        intuition="누군가 가게 앞에 가짜 손님을 줄세워 '인기 가게처럼' 보이게 하는 것 — 적발되면 가게도 처벌.",
+    ),
+    "capital_gains_tax": DisclosureGlossaryEntry(
+        label="주식 양도소득세",
+        description="주식을 팔아서 번 차익(=차익 = 판 가격 - 산 가격)에 매기는 세금.",
+        category="general",
+        how="국내 상장주식은 '대주주'(종목당 50억원 이상 보유 등)에게만 부과. 일반 개인은 현재 비과세. 해외주식은 모두 과세.",
+        benchmark="해외주식: 연간 250만원 초과 차익에 22%(지방세 포함) 과세. 1년 동안 손실 본 종목과 이익 본 종목을 합쳐(=손익통산) 세금 줄일 수 있음.",
+        intuition="'주식 팔아 번 돈에 세금 매기는 것' — 한국 일반 개인은 아직 면제, 해외주식·대주주만 과세.",
+    ),
+    # ─────────────────────────────────────────────────────────────
+    # 주린이 기본 (basics) — 신규 카테고리. 시장·가치평가의 필수 단어들
+    # ─────────────────────────────────────────────────────────────
+    "market_cap": DisclosureGlossaryEntry(
+        label="시가총액",
+        description="회사를 통째로 사려면 얼마 들지를 시장이 매긴 값. = 주가 × 발행된 전체 주식 수.",
+        category="basics",
+        how="예: 주가 5만원, 주식 1억 주 → 시가총액 = 5조원. 발행주식수가 늘면(증자 등) 시총도 늘어남.",
+        benchmark="대형주(1조원↑) / 중형주(1천억~1조) / 소형주(1천억↓). 코스피200·코스닥150 같은 지수 편입 기준도 시총.",
+        intuition="'이 가게 전체를 지금 사려면 얼마 내야 하나' — 회사 크기를 한 숫자로 본 값.",
+    ),
+    "per": DisclosureGlossaryEntry(
+        label="PER (주가수익비율)",
+        description="주가가 그 회사 1년 순이익의 몇 배인지. 회사를 통째로 사면 몇 년 만에 본전이 되는지 어림.",
+        category="basics",
+        how="PER = 주가 ÷ EPS(주당순이익). 예: 주가 10만원, EPS 1만원 → PER 10배(= 10년치 이익).",
+        benchmark="업종 평균과 비교가 핵심. 같은 업종 PER 평균이 15배인데 20배면 비싸게 거래되는 편. 적자회사는 PER 계산 불가(분모가 0 이하).",
+        intuition="'이 가게 사면 매년 버는 돈으로 몇 년 만에 회수되나' — 낮을수록 싸 보임(이익이 진짜라면).",
+    ),
+    "pbr": DisclosureGlossaryEntry(
+        label="PBR (주가순자산비율)",
+        description="주가가 그 회사 1주당 자기자본(=주주 몫)의 몇 배인지. 회사 망하면 받을 돈 대비 주가가 어디 있는지 본 값.",
+        category="basics",
+        how="PBR = 주가 ÷ BPS(주당순자산). PBR 1배 = 주가 = 청산가치. 1배 미만이면 '청산해도 받을 돈보다 더 싸게 거래'.",
+        benchmark="0.7~1.0배 = 저PBR(가치주). 2배+ = 시장이 미래 성장 프리미엄을 얹어 평가. 금융주는 본질적으로 낮음.",
+        intuition="'가게 문 닫고 자산 다 팔면 1조각당 받을 돈에 비해 지금 주가는 어디인가'.",
+    ),
+    "eps": DisclosureGlossaryEntry(
+        label="EPS (주당순이익)",
+        description="1주가 1년 동안 벌어들인 순이익. PER을 계산할 때 분모.",
+        category="basics",
+        how="EPS = 당기순이익 ÷ 발행주식수. 보통 자기주식은 빼고 계산.",
+        benchmark="EPS가 매년 늘면 성장기업. 주가가 그대로인데 EPS만 늘면 PER이 낮아져 '저평가'로 보임.",
+        intuition="'내가 가진 1주가 1년에 얼마 벌어줬는지' — 회사 성적표를 1주 단위로 본 수치.",
+    ),
+    "bps": DisclosureGlossaryEntry(
+        label="BPS (주당순자산)",
+        description="1주에 해당하는 회사 자기자본(=주주 몫). 회사 지금 망하면 이론상 1주당 받을 수 있는 금액.",
+        category="basics",
+        how="BPS = 자본총계 ÷ 발행주식수. PBR을 계산할 때 분모.",
+        benchmark="BPS가 매년 증가 = 자기자본이 쌓이는 회사. BPS > 주가면 PBR < 1.",
+        intuition="'1주의 청산가치' — 가게 망했을 때 1조각당 손에 쥘 수 있는 이론값.",
+    ),
+    "order_book": DisclosureGlossaryEntry(
+        label="호가 (매수호가·매도호가)",
+        description="사려는 사람이 부른 가격(매수호가)과 팔려는 사람이 부른 가격(매도호가)이 줄 서 있는 가격대.",
+        category="basics",
+        how="매수호가는 낮은 가격부터, 매도호가는 높은 가격부터 쌓임. 둘 사이 차이 = 호가스프레드. 차이가 클수록 거래 비효율.",
+        benchmark="호가창에 빈 가격대가 많은 종목은 거래량이 적어(=유동성 낮음) 작은 매매에도 주가가 크게 튐.",
+        intuition="경매장에 '이 가격이면 살게요' 줄과 '이 가격 받으면 팔게요' 줄이 마주 보고 서 있는 모습.",
+    ),
+    "limit_up_down": DisclosureGlossaryEntry(
+        label="상한가·하한가",
+        description="하루 동안 주가가 오를 수 있는 최대선(상한가)과 떨어질 수 있는 최저선(하한가).",
+        category="basics",
+        how="한국 시장은 ±30%로 제한. 신규 상장 첫날은 공모가 기준으로 60~400% 일시 확대(2023년부터).",
+        benchmark="상한가 연속이면 단기과열 종목 지정 가능. 하한가는 큰 악재·반대매매 폭증 신호일 때 다수.",
+        intuition="'롤러코스터가 하루 동안 갈 수 있는 최대 거리' — 그 이상 가려면 다음 거래일에 마저 감.",
+    ),
+    "preferred_stock": DisclosureGlossaryEntry(
+        label="우선주",
+        description="주주총회 투표권(의결권)은 없는 대신, 배당을 보통주보다 먼저·조금 더 받는 주식.",
+        category="basics",
+        how="회사 이름 뒤에 '우' 표기. 예: '삼성전자우'. 배당률이 정관에 정해진 형태도 있음.",
+        benchmark="같은 회사 보통주보다 보통 30~50% 싸게 거래됨. 배당수익률이 보통주보다 높은 경우 다수.",
+        intuition="'경영에는 끼지 않을 테니 배당은 먼저 챙기겠다'는 주식 — 안정적 배당 추구형.",
+    ),
+    "common_stock": DisclosureGlossaryEntry(
+        label="보통주",
+        description="우리가 일반적으로 거래하는 주식. 주주총회 투표권(의결권) 있고, 배당은 우선주 다음 순서.",
+        category="basics",
+        how="회사 이름 그대로 표기. 코스피·코스닥의 거의 모든 종목이 보통주.",
+        benchmark="회사 경영에 한 표 행사 가능. 배당은 회사 정책에 따라 변동(=정해진 배당률 없음).",
+        intuition="'경영에 한 표 + 배당은 우선주 뒤'인 가장 일반적인 주식.",
+    ),
+    "etf": DisclosureGlossaryEntry(
+        label="ETF (상장지수펀드)",
+        description="여러 종목을 묶은 펀드를 주식처럼 거래소에서 사고팔 수 있게 만든 상품.",
+        category="basics",
+        how="코스피200·미국S&P500 같은 지수를 따라가게 만들거나, 특정 업종·테마를 묶음. 거래는 주식 그대로.",
+        benchmark="운용보수(연 0.1~0.5%)와 추적오차가 핵심. 시총·거래량 큰 ETF가 호가 안정적.",
+        intuition="'한 바구니에 여러 종목 담은 묶음 상품' — 한 번에 분산투자 효과.",
+    ),
+    "reit": DisclosureGlossaryEntry(
+        label="리츠 (REITs, 부동산투자신탁)",
+        description="여럿이 돈을 모아 빌딩·상가·물류센터를 사서, 임대수익을 배당으로 나눠주는 상품.",
+        category="basics",
+        how="법적으로 이익의 90% 이상을 의무 배당. 상장 리츠는 주식처럼 사고팔 수 있음.",
+        benchmark="배당수익률 4~7%대 다수. 금리 오르면 차입비용↑·부동산가치↓로 약세 경향.",
+        intuition="'직접 빌딩 못 사니까 여럿이 같이 사서 임대료 나누자'는 상품.",
+    ),
+    "spac": DisclosureGlossaryEntry(
+        label="스팩 (SPAC, 기업인수목적회사)",
+        description="아직 인수할 회사가 없는 '빈 껍데기'로 상장한 뒤, 3년 안에 비상장 회사를 합병해 우회상장시키는 회사.",
+        category="basics",
+        how="보통 공모가 2,000원으로 상장 → 합병 대상 탐색 → 합병 성공 시 그 회사 주식으로 전환. 실패하면 청산해 원금+이자 환급.",
+        benchmark="합병 성공 시 시세차익 크고, 실패해도 원금 손실 위험은 작은 편(이자 포함 환급 구조).",
+        intuition="'아직 안에 들어갈 회사를 못 정한 빈 상자' — 좋은 회사가 들어가면 가격이 뜀.",
+    ),
+    # ─────────────────────────────────────────────────────────────
+    # 실전 거래 (trading) — 신규 카테고리. 사고팔 때 마주치는 메커니즘
+    # ─────────────────────────────────────────────────────────────
+    "lockup_period": DisclosureGlossaryEntry(
+        label="보호예수 (Lock-up)",
+        description="IPO·증자·M&A 등으로 받은 주식을 일정 기간 팔지 못하게 시장이 묶어두는 의무.",
+        category="trading",
+        how="보통 6개월~1년. 최대주주·전략적 투자자는 더 길게(2~3년) 묶이는 경우 다수.",
+        benchmark="보호예수 해제일에 매도 물량이 한꺼번에 풀려 단기 약세 빈발 — '오버행(과잉공급) 우려'라 부름.",
+        intuition="'당장은 팔지 마라'고 시장이 묶어둔 주식 — 풀리는 날 매물 폭탄 가능성.",
+    ),
+    "credit_trading": DisclosureGlossaryEntry(
+        label="신용거래",
+        description="증권사에서 돈을 빌려 자기 돈보다 더 많은 주식을 사는 거래.",
+        category="trading",
+        how="보통 자기자금의 2.5~3배까지 가능. 보통 90일 안에 갚아야 하고, 이자도 붙음.",
+        benchmark="주가가 떨어지면 손실이 자기 자본보다 더 빨리 커짐. 담보율 부족 시 강제로 [[forced-sale]] 발동.",
+        intuition="'내 돈 100만원에 200만원 빌려서 300만원짜리 주식 사기' — 오르면 좋지만 떨어지면 더 빨리 망함.",
+    ),
+    "unpaid_balance": DisclosureGlossaryEntry(
+        label="미수금 (미수거래)",
+        description="주식 산 뒤 결제일(보통 2영업일 후)까지 돈을 다 못 채운 외상 잔액.",
+        category="trading",
+        how="결제일까지 입금 안 하면 다음 거래일 [[forced-sale]]로 강제 청산.",
+        benchmark="반복적 미수는 신용 제한·계좌 정지로 이어짐. 단기 데이트레이딩의 단골 위험.",
+        intuition="'살 때는 외상으로 샀는데 약속한 날 돈이 부족' — 다음날 강제로 팔려나감.",
+    ),
+    "forced_sale": DisclosureGlossaryEntry(
+        label="반대매매",
+        description="신용·미수금을 못 갚을 때 증권사가 강제로 주식을 팔아 빚을 회수하는 것.",
+        category="trading",
+        how="보통 시초가에 하한가 근처 가격으로 매도 주문. 본인 선택 불가, 호가 불리.",
+        benchmark="급락 후 다음날 반대매매 물량이 또 매도 압력으로 작용 → 연쇄 하락. 시장 전체 반대매매 폭증은 패닉 신호.",
+        intuition="'빚 안 갚으니 압류해서 강제로 팔아 회수' — 가장 안 좋은 가격에 처분됨.",
+    ),
+    "average_price": DisclosureGlossaryEntry(
+        label="평단가 (평균매수단가)",
+        description="여러 번에 나눠 산 주식의 1주당 평균 가격.",
+        category="trading",
+        how="평단가 = 총 매수금액 ÷ 총 매수수량. 추가매수할 때마다 갱신.",
+        benchmark="현재가가 평단가보다 위면 수익, 아래면 손실. 평단가 ±5%/10%/20% 등을 손절·익절 기준으로 흔히 씀.",
+        intuition="'내가 산 주식의 1주당 평균 단가' — 수익률 계산의 기준점.",
+    ),
+    "stop_loss": DisclosureGlossaryEntry(
+        label="손절매 (손절)",
+        description="더 큰 손실을 막기 위해, 손해를 보면서도 주식을 파는 것.",
+        category="trading",
+        how="보통 매수가 대비 -5~-10%, 또는 차트의 지지선이 무너졌을 때 실행. 증권사 앱에서 자동 손절(스톱로스) 설정도 가능.",
+        benchmark="손절선 없으면 손실이 끝없이 커질 수 있음. 다만 너무 자주 손절하면 수수료·세금만 누적.",
+        intuition="'지금 손해 보고 끊자' — 더 큰 손실로 가는 걸 막는 안전장치.",
+    ),
+    "take_profit": DisclosureGlossaryEntry(
+        label="익절 (이익실현)",
+        description="수익을 본 상태에서 주식을 팔아 이익을 확정하는 것.",
+        category="trading",
+        how="목표가 도달·기술적 저항선·실적 발표 후 모멘텀 종료 등에서 실행.",
+        benchmark="너무 일찍 익절하면 추가 상승 놓침. 너무 늦으면 되돌림으로 이익 반납. '무릎에 사서 어깨에 팔자'.",
+        intuition="'이 정도면 벌었다 싶을 때 챙기기' — 잡은 물고기를 도망 못 가게 확정하는 것.",
+    ),
+    "averaging_down": DisclosureGlossaryEntry(
+        label="물타기 (분할매수·추가매수)",
+        description="주가가 떨어진 뒤 추가로 사서 평단가를 낮추는 행위.",
+        category="trading",
+        how="처음 매수가 대비 -10%·-20% 등에서 추가 매수. 손실률 자체는 낮아지지만 투입한 돈은 더 늘어남.",
+        benchmark="회사 본질(=펀더멘털)이 변하지 않은 경우에만 유효. 악재 후 물타기는 손실 키우는 사례 다수.",
+        intuition="'물 탄 술이 도수 낮아지듯' 떨어진 주식에 더 사서 1주당 평균을 희석하는 행위.",
+    ),
+}

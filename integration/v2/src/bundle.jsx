@@ -1254,8 +1254,22 @@ async function bedrockChat({ systemPrompt, history, onChunk, onDone, onError }) 
 
 function buildGeminiSystemPrompt({ context, companyName, ticker, disc, node }) {
   const name = companyName || '기업';
-  const base = `당신은 DiscloseAI의 AI 코파일럿입니다. CPA(공인회계사) 수준의 한국 주식시장 공시·재무제표 전문 지식을 보유합니다.
-답변 원칙: ① 한국어로 간결하게 (3-5문장) ② 투자 조언 금지 — "과거 통계 기반 참고 정보"로만 표현 ③ 불확실한 내용은 명확히 표시.`;
+  const base = `당신은 DiscloseAI의 AI 친구·튜터입니다. CPA(공인회계사) 수준의 공시·재무 지식을 갖고 있지만, 대상은 **주식 투자가 처음인 초보 개인 투자자(주린이)** 입니다.
+
+[톤]
+- 친절하고 차분한 선생님·또는 똑똑한 친구처럼 설명합니다. 가르치는 어투(아랫사람 대하듯) 금지.
+- 어려운 용어는 반드시 한 줄로 풀어 설명 — 예: "ROE(자기자본이익률 = 주주 돈으로 회사가 1년에 몇 % 벌었는지)".
+- 답변 분량: 5~10문장(150~300자) 내외. 너무 짧지 않게, 그렇다고 장황하지도 않게.
+
+[형식]
+- 가능하면 핵심 결론을 **굵게** 한 줄로 먼저 보여주고, 이어서 풀이.
+- 적절하게 굵게/불릿(- )/번호 매기기를 써도 됩니다. 다만 \`#\` 헤더는 한 답변에 1개 이하로 절제.
+- 숫자에는 단위(억원/조원/%)를 항상 붙입니다.
+
+[금지]
+- "사세요/파세요/매수 추천" 같은 투자 권유 절대 금지(자본시장법). 대신 "과거 통계 기반 참고 정보"로 표현.
+- 데이터에 없는 사실 창작 금지. 모르면 "현재 데이터로는 답변이 어렵습니다"라고 솔직히.
+- 단정적 미래 예측 금지.`;
 
   if (context === 'disclosure') {
     const d = disc || {};
@@ -1645,6 +1659,57 @@ function DisclosureFullOverlay({ ticker, onClose }) {
 
 // ─── Overlay AI chat sidebar (Gemini functional) ──────────────────────────
 
+// ─── 마크다운 렌더 ─────────────────────────────────────────────────────────
+// Bedrock 응답에 ** ## - 등이 섞여 나오므로 굵게·헤더·리스트로 풀어 렌더한다.
+// 외부 라이브러리 없이 정규식 기반 — XSS 방지를 위해 HTML escape 먼저 수행.
+function _escHtml(s) {
+  return String(s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+function _renderMarkdownToHTML(text) {
+  let s = _escHtml(text || '');
+  // inline: code → strong → em (** 먼저 매칭해 * 와 충돌 방지)
+  s = s.replace(/`([^`\n]+)`/g, '<code style="background:rgba(255,255,255,0.08);padding:1px 5px;border-radius:3px;font-size:0.92em">$1</code>');
+  s = s.replace(/\*\*([^*\n]+?)\*\*/g, '<strong style="color:#e2e8f0;font-weight:600">$1</strong>');
+  s = s.replace(/(^|[^*])\*([^*\n]+?)\*(?!\*)/g, '$1<em>$2</em>');
+  // 줄 단위 처리: 헤더(#/##/###), 불릿(- *), 번호리스트(1.), 빈 줄
+  const lines = s.split('\n');
+  let html = '';
+  let inUL = false, inOL = false;
+  const closeLists = () => {
+    if (inUL) { html += '</ul>'; inUL = false; }
+    if (inOL) { html += '</ol>'; inOL = false; }
+  };
+  for (const raw of lines) {
+    const line = raw.trimEnd();
+    if (line === '') { closeLists(); html += '<div style="height:6px"></div>'; continue; }
+    let m;
+    if ((m = line.match(/^###\s+(.+)$/))) { closeLists(); html += `<div style="font-weight:600;color:#e2e8f0;margin:4px 0 2px">${m[1]}</div>`; continue; }
+    if ((m = line.match(/^##\s+(.+)$/)))  { closeLists(); html += `<div style="font-weight:700;color:#f1f5f9;margin:6px 0 2px">${m[1]}</div>`; continue; }
+    if ((m = line.match(/^#\s+(.+)$/)))   { closeLists(); html += `<div style="font-weight:700;color:#f8fafc;margin:6px 0 4px;font-size:1.05em">${m[1]}</div>`; continue; }
+    if ((m = line.match(/^[-*]\s+(.+)$/))) {
+      if (inOL) { html += '</ol>'; inOL = false; }
+      if (!inUL) { html += '<ul style="margin:3px 0;padding-left:16px">'; inUL = true; }
+      html += `<li>${m[1]}</li>`;
+      continue;
+    }
+    if ((m = line.match(/^\d+\.\s+(.+)$/))) {
+      if (inUL) { html += '</ul>'; inUL = false; }
+      if (!inOL) { html += '<ol style="margin:3px 0;padding-left:18px">'; inOL = true; }
+      html += `<li>${m[1]}</li>`;
+      continue;
+    }
+    closeLists();
+    html += `<div>${line}</div>`;
+  }
+  closeLists();
+  return html;
+}
+function MarkdownText({ text }) {
+  return <div dangerouslySetInnerHTML={{ __html: _renderMarkdownToHTML(text) }} />;
+}
+
 function AiChatBubble({ msg }) {
   const isUser = msg.role === 'user';
   return (
@@ -1660,7 +1725,7 @@ function AiChatBubble({ msg }) {
         color: isUser ? '#5eead4' : (msg.error ? '#f87171' : '#94a3b8'),
         maxWidth: '88%', wordBreak: 'break-word',
       }}>
-        {msg.text}
+        {isUser ? msg.text : <MarkdownText text={msg.text} />}
         {msg.streaming && <span style={{opacity: 0.5, animation: 'pulseDot 0.8s infinite'}}>▍</span>}
       </div>
     </div>
@@ -1989,16 +2054,17 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
 
 const AI_GREETINGS = {
   galaxy: [
-    { who: 'ai', text: "Welcome back, Captain. KOSPI is +0.42% — Semiconductor leads, Biotech lags." },
-    { who: 'ai', text: "Pick any sector to dive in. I'll brief you on what's moving inside." },
+    { who: 'ai', text: "안녕하세요! 저는 어려운 공시·재무 용어를 같이 풀어가는 AI 친구예요. 😊" },
+    { who: 'ai', text: "PER이 뭐예요? 부채비율이 높은 게 위험한가요? 같은 거 편하게 물어보세요. 모르는 단어는 한 줄로 풀어 설명해드릴게요." },
+    { who: 'ai', text: "또는 왼쪽 은하에서 섹터를 골라보세요. 어느 산업이 움직이고 있는지 같이 살펴봐요." },
   ],
   sector: [
-    { who: 'ai', text: "We're now inside the sector. Each glowing node is a listed company." },
-    { who: 'ai', text: "Click a company — I'll surface its disclosures and related entities." },
+    { who: 'ai', text: "이 섹터 안에 들어왔어요. 빛나는 점 하나하나가 상장사예요." },
+    { who: 'ai', text: "기업을 누르면 그 회사 공시·관계사 정보를 같이 봐드릴게요. 궁금한 게 있으면 언제든 질문해주세요!" },
   ],
   company: [
-    { who: 'ai', text: "Tracking this company. Solid lines are equity ties, dashed are group/related-party links." },
-    { who: 'ai', text: "Press ENTER CORPORATION for the full financial dossier." },
+    { who: 'ai', text: "이 기업을 자세히 보고 있어요. 실선은 지분 관계, 점선은 그룹·특수관계예요." },
+    { who: 'ai', text: "ENTER CORPORATION을 누르면 재무 종합 리포트를 보여드려요. 그 사이에 궁금한 거 있으면 편하게 물어보세요." },
   ],
 };
 
@@ -2471,7 +2537,7 @@ function AssistantPanel({ phase, sector, company, activeTab }) {
           <div key={i} className={"chat-msg " + (m.role === 'ai' ? 'is-ai' : 'is-user')}>
             {m.role === 'ai' && <div className="chat-avatar">AI</div>}
             <div className="chat-bubble" style={{color: m.error ? '#f87171' : undefined}}>
-              {m.text}
+              {m.role === 'ai' ? <MarkdownText text={m.text} /> : m.text}
               {m.streaming && <span style={{opacity: 0.5}}>▍</span>}
             </div>
           </div>
