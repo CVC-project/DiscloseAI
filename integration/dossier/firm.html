@@ -350,6 +350,89 @@
     background: rgba(234, 179, 8, 0.08); border: 1px solid rgba(234, 179, 8, 0.3);
     padding: 12px 16px; border-radius: 8px; margin-top: 16px; font-size: 13px;
   }
+  .action-row {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px;
+  }
+  .primary-btn, .ghost-btn {
+    border: 1px solid rgba(77,166,255,0.45); border-radius: 8px;
+    padding: 9px 12px; color: var(--text); cursor: pointer;
+    font: inherit; font-size: 13px; line-height: 1.2;
+    transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+  }
+  .primary-btn {
+    background: linear-gradient(135deg, rgba(77,166,255,0.24), rgba(167,139,250,0.24));
+    box-shadow: 0 0 18px rgba(77,166,255,0.12);
+  }
+  .ghost-btn { background: rgba(15,23,42,0.35); }
+  .primary-btn:hover, .ghost-btn:hover {
+    border-color: rgba(167,139,250,0.8); transform: translateY(-1px);
+  }
+  .custom-panel { display: none; }
+  .custom-panel.open { display: block; }
+  .custom-head {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 16px; margin-bottom: 14px;
+  }
+  .custom-head p { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
+  .custom-grid {
+    display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+    gap: 16px; align-items: start;
+  }
+  .criteria-box, .guru-box, .custom-result {
+    border: 1px solid rgba(148,163,184,0.18); border-radius: 10px;
+    background: rgba(2,6,23,0.28); padding: 14px;
+  }
+  .criteria-row {
+    display: grid; grid-template-columns: 64px minmax(180px, 1fr) minmax(170px, 0.85fr);
+    gap: 10px; align-items: center; padding: 7px 0;
+    border-bottom: 1px solid rgba(148,163,184,0.12);
+  }
+  .criteria-row:last-child { border-bottom: none; }
+  .rank-label { color: var(--muted); font-size: 12px; }
+  .criteria-row select {
+    width: 100%; border: 1px solid rgba(148,163,184,0.25); border-radius: 8px;
+    background: rgba(15,23,42,0.82); color: var(--text); padding: 8px 10px;
+    font: inherit; font-size: 13px;
+  }
+  .criteria-help { color: var(--muted); font-size: 12px; line-height: 1.45; }
+  .preset-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+  .preset-chip {
+    border: 1px solid rgba(167,139,250,0.38); border-radius: 999px;
+    background: rgba(167,139,250,0.10); color: var(--text);
+    padding: 7px 10px; font: inherit; font-size: 12px; cursor: pointer;
+  }
+  .preset-chip:hover { background: rgba(167,139,250,0.20); }
+  .guru-card {
+    padding: 10px 0; border-top: 1px solid rgba(148,163,184,0.12);
+  }
+  .guru-card:first-of-type { border-top: none; padding-top: 0; }
+  .guru-title { font-weight: 700; font-size: 13px; margin-bottom: 4px; }
+  .guru-copy { color: var(--muted); font-size: 12px; line-height: 1.5; }
+  .custom-score {
+    font-size: 46px; font-weight: 800; line-height: 1;
+    background: linear-gradient(135deg, #93c5fd, #c4b5fd, #fbcfe8);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .score-meter {
+    height: 10px; border-radius: 999px; overflow: hidden;
+    background: rgba(148,163,184,0.14); margin: 12px 0;
+  }
+  .score-meter-fill {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, var(--bad), var(--warn), var(--good));
+    transition: width 0.25s ease;
+  }
+  .reason-list { margin: 10px 0 0; padding-left: 18px; color: var(--muted); font-size: 13px; }
+  .metric-pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .metric-pill {
+    border: 1px solid rgba(148,163,184,0.18); border-radius: 999px;
+    padding: 5px 8px; color: var(--muted); font-size: 12px; background: rgba(15,23,42,0.45);
+  }
+  @media (max-width: 900px) {
+    .custom-grid { grid-template-columns: 1fr; }
+    .criteria-row { grid-template-columns: 54px 1fr; }
+    .criteria-help { grid-column: 2; }
+  }
 </style>
 </head>
 <body>
@@ -421,11 +504,62 @@
         <span class="grade" id="fGrade"></span>
       </div>
       <ul class="module-list" id="moduleList"></ul>
+      <div class="action-row">
+        <button class="primary-btn" type="button" id="customScoreBtn">나만의 투자기준 만들기</button>
+        <a class="ghost-btn" id="dartReportBtn" target="_blank" rel="noopener" style="display:none;text-decoration:none;">최근 재무제표</a>
+      </div>
     </div>
 
     <div class="panel">
       <h2>5개 모듈 프로파일</h2>
       <div class="chart-wrap radar"><canvas id="radar"></canvas></div>
+    </div>
+  </div>
+
+  <div class="panel custom-panel" id="customScorePanel" style="margin-top:0;">
+    <div class="custom-head">
+      <div>
+        <h2>나만의 투자기준으로 점수 만들기</h2>
+        <p>중시하는 지표를 1~5순위로 고르면, 선택한 우선순위에 따라 이 종목의 투자 적합도를 다시 계산합니다.</p>
+      </div>
+      <button class="ghost-btn" type="button" id="resetCustomBtn">초기화</button>
+    </div>
+    <div class="custom-grid">
+      <div class="criteria-box">
+        <div class="preset-row">
+          <button class="preset-chip" type="button" data-preset="buffett">버핏형 불러오기</button>
+          <button class="preset-chip" type="button" data-preset="graham">그레이엄형 불러오기</button>
+          <button class="preset-chip" type="button" data-preset="lynch">피터 린치형 불러오기</button>
+          <button class="preset-chip" type="button" data-preset="cashflow">현금흐름형 불러오기</button>
+        </div>
+        <div id="criteriaRows"></div>
+        <div class="custom-result" style="margin-top:14px;">
+          <div style="color:var(--muted);font-size:12px;">내 기준 점수</div>
+          <div><span class="custom-score" id="customScoreValue">—</span><span id="customScoreGrade" class="grade grade-F" style="font-size:14px;margin-left:8px;">—</span></div>
+          <div class="score-meter"><div class="score-meter-fill" id="customScoreFill"></div></div>
+          <ul class="reason-list" id="customReasons"></ul>
+          <div class="metric-pill-row" id="customMetricPills"></div>
+        </div>
+      </div>
+      <div class="guru-box">
+        <h2 style="margin-bottom:10px;">투자구루는 뭘 볼까?</h2>
+        <div class="guru-card">
+          <div class="guru-title">워런 버핏형</div>
+          <div class="guru-copy">장기간 높은 ROE, 안정적인 본업 이익률, 현금흐름, 낮은 부채를 함께 봅니다. 비싸게 사지 않는 것도 중요합니다.</div>
+        </div>
+        <div class="guru-card">
+          <div class="guru-title">벤저민 그레이엄형</div>
+          <div class="guru-copy">낮은 PER/PBR과 재무 안전마진을 중시합니다. “좋은 회사”보다 “충분히 싼 가격”에 더 민감합니다.</div>
+        </div>
+        <div class="guru-card">
+          <div class="guru-title">피터 린치형</div>
+          <div class="guru-copy">매출과 이익이 실제로 성장하는지, 성장률 대비 가격이 과하지 않은지 봅니다. 성장성과 가격의 균형이 핵심입니다.</div>
+        </div>
+        <div class="guru-card">
+          <div class="guru-title">현금흐름형</div>
+          <div class="guru-copy">순이익보다 실제 현금이 들어오는지를 더 봅니다. 영업현금흐름이 약하면 장부상 이익을 보수적으로 해석합니다.</div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -506,6 +640,238 @@ function helpIcon(key) {
     <div class="help-title">${g.label}</div>${body}
   </span></span>`;
 }
+
+// 나만의 투자기준 점수 — 기존 EQS를 덮어쓰지 않고, 선택한 투자 렌즈 점수만 별도 계산
+const latestYear = DATA.years.length ? DATA.years[DATA.years.length - 1] : null;
+const priorYear = DATA.years.length > 1 ? DATA.years[DATA.years.length - 2] : null;
+const marketCap = DATA.market ? DATA.market.market_cap : null;
+const dartUrl = DATA.market ? DATA.market.dart_url : null;
+const dartBtn = document.getElementById('dartReportBtn');
+if (dartUrl) {
+  dartBtn.href = dartUrl;
+  dartBtn.style.display = '';
+}
+
+function safeDiv(num, den) {
+  if (num === null || num === undefined || den === null || den === undefined || den === 0) return null;
+  return num / den;
+}
+function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+function scoreHigh(v, low, high) {
+  if (v === null || v === undefined || !Number.isFinite(v)) return null;
+  return clamp((v - low) / (high - low) * 100, 0, 100);
+}
+function scoreLow(v, good, bad) {
+  if (v === null || v === undefined || !Number.isFinite(v)) return null;
+  return clamp((bad - v) / (bad - good) * 100, 0, 100);
+}
+function gradeFromScore(v) {
+  if (v === null || v === undefined) return '—';
+  if (v >= 80) return 'A';
+  if (v >= 65) return 'B';
+  if (v >= 50) return 'C';
+  if (v >= 35) return 'D';
+  return 'F';
+}
+function fmtPct(v) {
+  return v === null || v === undefined || !Number.isFinite(v) ? 'N/A' : `${v.toFixed(1)}%`;
+}
+function fmtNum(v, suffix='') {
+  return v === null || v === undefined || !Number.isFinite(v) ? 'N/A' : `${v.toFixed(1)}${suffix}`;
+}
+
+function moduleScore(name) {
+  const found = DATA.eqs.modules.find(m => m.name === name);
+  return found && found.score !== null ? found.score : null;
+}
+
+const per = latestYear && marketCap ? safeDiv(marketCap, latestYear.net_income) : null;
+const pbr = latestYear && marketCap ? safeDiv(marketCap, latestYear.total_equity) : null;
+const revenueGrowth = latestYear && priorYear ? safeDiv(latestYear.revenue - priorYear.revenue, priorYear.revenue) : null;
+const ocfNi = latestYear ? safeDiv(latestYear.operating_cashflow, latestYear.net_income) : null;
+const ocfMargin = latestYear ? safeDiv(latestYear.operating_cashflow, latestYear.revenue) : null;
+const debtToEquity = latestYear ? safeDiv(latestYear.total_liabilities, latestYear.total_equity) : null;
+
+const INVEST_METRICS = {
+  roe: {
+    label: 'ROE',
+    help: '주주 자본으로 얼마나 벌었는지 봅니다.',
+    value: DATA.ratios.values.roe,
+    display: fmtPct(DATA.ratios.values.roe),
+    score: scoreHigh(DATA.ratios.values.roe, 0, 20),
+  },
+  per: {
+    label: 'PER',
+    help: '순이익 대비 주가가 비싼지 봅니다. 낮을수록 점수에 유리합니다.',
+    value: per,
+    display: fmtNum(per, '배'),
+    score: scoreLow(per, 8, 35),
+  },
+  pbr: {
+    label: 'PBR',
+    help: '순자산 대비 주가가 비싼지 봅니다. 낮을수록 점수에 유리합니다.',
+    value: pbr,
+    display: fmtNum(pbr, '배'),
+    score: scoreLow(pbr, 0.8, 3.0),
+  },
+  revenue_growth: {
+    label: '매출성장률',
+    help: '전년 대비 매출이 얼마나 늘었는지 봅니다.',
+    value: revenueGrowth === null ? null : revenueGrowth * 100,
+    display: fmtPct(revenueGrowth === null ? null : revenueGrowth * 100),
+    score: scoreHigh(revenueGrowth === null ? null : revenueGrowth * 100, -10, 25),
+  },
+  operating_margin: {
+    label: '영업이익률',
+    help: '본업에서 남기는 이익률입니다.',
+    value: DATA.ratios.values.operating_margin,
+    display: fmtPct(DATA.ratios.values.operating_margin),
+    score: scoreHigh(DATA.ratios.values.operating_margin, 0, 25),
+  },
+  ocf_ni: {
+    label: '영업CF/순이익',
+    help: '장부상 이익이 실제 현금으로 뒷받침되는지 봅니다.',
+    value: ocfNi,
+    display: fmtNum(ocfNi, '배'),
+    score: scoreHigh(ocfNi, 0, 1.2),
+  },
+  ocf_margin: {
+    label: '영업CF/매출',
+    help: '매출에서 실제 현금으로 남는 힘을 봅니다.',
+    value: ocfMargin === null ? null : ocfMargin * 100,
+    display: fmtPct(ocfMargin === null ? null : ocfMargin * 100),
+    score: scoreHigh(ocfMargin === null ? null : ocfMargin * 100, 0, 20),
+  },
+  debt_to_equity: {
+    label: '부채비율',
+    help: '자본 대비 부채 부담입니다. 낮을수록 점수에 유리합니다.',
+    value: debtToEquity === null ? null : debtToEquity * 100,
+    display: fmtPct(debtToEquity === null ? null : debtToEquity * 100),
+    score: scoreLow(debtToEquity === null ? null : debtToEquity * 100, 50, 250),
+  },
+  eqs_quality: {
+    label: '회계신뢰 EQS',
+    help: '기존 M1~M5 재무제표 신뢰 점수입니다.',
+    value: DATA.eqs.total,
+    display: DATA.eqs.total === null ? 'N/A' : `${DATA.eqs.total.toFixed(1)}점`,
+    score: DATA.eqs.total,
+  },
+  earnings_stability: {
+    label: '이익안정',
+    help: 'EQS의 본업 안정성 모듈 점수입니다.',
+    value: moduleScore('M4'),
+    display: moduleScore('M4') === null ? 'N/A' : `${moduleScore('M4').toFixed(1)}점`,
+    score: moduleScore('M4'),
+  },
+  capital_growth: {
+    label: '자본성장',
+    help: 'EQS의 자본 성장성 모듈 점수입니다.',
+    value: moduleScore('M5'),
+    display: moduleScore('M5') === null ? 'N/A' : `${moduleScore('M5').toFixed(1)}점`,
+    score: moduleScore('M5'),
+  },
+};
+
+const PRESETS = {
+  default: ['roe', 'per', 'pbr', 'revenue_growth', 'ocf_ni'],
+  buffett: ['roe', 'operating_margin', 'ocf_ni', 'debt_to_equity', 'earnings_stability'],
+  graham: ['per', 'pbr', 'debt_to_equity', 'eqs_quality', 'capital_growth'],
+  lynch: ['revenue_growth', 'roe', 'per', 'operating_margin', 'eqs_quality'],
+  cashflow: ['ocf_ni', 'ocf_margin', 'eqs_quality', 'debt_to_equity', 'operating_margin'],
+};
+const PRIORITY_WEIGHTS = [5, 4, 3, 2, 1];
+
+function renderCriteriaRows(keys = PRESETS.default) {
+  const wrap = document.getElementById('criteriaRows');
+  wrap.innerHTML = '';
+  PRIORITY_WEIGHTS.forEach((_, idx) => {
+    const selected = keys[idx] || Object.keys(INVEST_METRICS)[idx];
+    const options = Object.entries(INVEST_METRICS).map(([key, metric]) =>
+      `<option value="${key}" ${key === selected ? 'selected' : ''}>${metric.label}</option>`
+    ).join('');
+    const row = document.createElement('div');
+    row.className = 'criteria-row';
+    row.innerHTML = `
+      <div class="rank-label">${idx + 1}순위</div>
+      <select data-rank="${idx}">${options}</select>
+      <div class="criteria-help" data-help="${idx}">${INVEST_METRICS[selected].help}</div>
+    `;
+    wrap.appendChild(row);
+  });
+  wrap.querySelectorAll('select').forEach(sel => sel.addEventListener('change', updateCustomScore));
+  updateCustomScore();
+}
+
+function updateCustomScore() {
+  const selects = [...document.querySelectorAll('#criteriaRows select')];
+  let weighted = 0;
+  let totalWeight = 0;
+  const used = new Set();
+  const reasons = [];
+  const pills = [];
+  selects.forEach((sel, idx) => {
+    const key = sel.value;
+    const metric = INVEST_METRICS[key];
+    const help = document.querySelector(`[data-help="${idx}"]`);
+    if (help) help.textContent = metric.help;
+    if (used.has(key)) {
+      reasons.push(`${idx + 1}순위 ${metric.label}은 중복 선택이라 한 번만 반영했습니다.`);
+      return;
+    }
+    used.add(key);
+    const score = metric.score;
+    if (score === null || score === undefined || !Number.isFinite(score)) {
+      reasons.push(`${metric.label}은 필요한 데이터가 없어 이번 계산에서 제외했습니다.`);
+      pills.push(`<span class="metric-pill">${metric.label} N/A</span>`);
+      return;
+    }
+    const w = PRIORITY_WEIGHTS[idx];
+    weighted += score * w;
+    totalWeight += w;
+    pills.push(`<span class="metric-pill">${metric.label} ${metric.display} · ${score.toFixed(0)}점</span>`);
+  });
+  const score = totalWeight ? weighted / totalWeight : null;
+  const scoreEl = document.getElementById('customScoreValue');
+  const gradeEl = document.getElementById('customScoreGrade');
+  const fillEl = document.getElementById('customScoreFill');
+  const reasonEl = document.getElementById('customReasons');
+  const pillEl = document.getElementById('customMetricPills');
+  if (score === null) {
+    scoreEl.textContent = '—';
+    gradeEl.textContent = '—';
+    gradeEl.className = 'grade grade-F';
+    fillEl.style.width = '0%';
+  } else {
+    const grade = gradeFromScore(score);
+    scoreEl.textContent = score.toFixed(1);
+    gradeEl.textContent = grade;
+    gradeEl.className = `grade grade-${grade}`;
+    fillEl.style.width = `${clamp(score, 0, 100)}%`;
+    const top = [...used].map(k => INVEST_METRICS[k]).filter(m => m.score !== null && m.score !== undefined)
+      .sort((a, b) => b.score - a.score)[0];
+    const bottom = [...used].map(k => INVEST_METRICS[k]).filter(m => m.score !== null && m.score !== undefined)
+      .sort((a, b) => a.score - b.score)[0];
+    if (top) reasons.unshift(`${top.label}이 강점으로 반영됐습니다.`);
+    if (bottom && bottom !== top) reasons.unshift(`${bottom.label}은 상대적으로 낮게 반영됐습니다.`);
+  }
+  reasonEl.innerHTML = reasons.slice(0, 4).map(r => `<li>${r}</li>`).join('');
+  pillEl.innerHTML = pills.join('');
+}
+
+document.getElementById('customScoreBtn').addEventListener('click', () => {
+  const panel = document.getElementById('customScorePanel');
+  panel.classList.toggle('open');
+  if (panel.classList.contains('open') && !document.getElementById('criteriaRows').children.length) {
+    renderCriteriaRows();
+  }
+});
+document.getElementById('resetCustomBtn').addEventListener('click', () => renderCriteriaRows());
+document.querySelectorAll('[data-preset]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.getElementById('customScorePanel').classList.add('open');
+    renderCriteriaRows(PRESETS[btn.dataset.preset]);
+  });
+});
 
 // 모듈 점수 리스트
 const moduleColors = {

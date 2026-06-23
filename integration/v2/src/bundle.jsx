@@ -2555,7 +2555,7 @@ function CompanyOverviewPanel({ company, sector, onBack, onEnter }) {
           <span>ENTER CORPORATION</span>
           <span className="enter-corp-arrow">↗</span>
         </button>
-        <div className="enter-corp-hint">새 창에서 재무정보 열림</div>
+        <div className="enter-corp-hint">새 창에서 재무정보 + 나만의 투자기준 열림</div>
       </div>
     </div>
   );
@@ -3175,7 +3175,7 @@ function App() {
           {/* iframe + AI chat sidebar */}
           <div style={{flex:'1 1 0%', display:'flex', overflow:'hidden'}}>
             <iframe
-              src={`../dossier/firm.html?ticker=${corpOverlayTicker}`}
+              src={`../dossier/firm.html?ticker=${corpOverlayTicker}&v=20260623-cc`}
               style={{flex:'1 1 0%', border:'none', background:'#020408'}}
               title={`firm-${corpOverlayTicker}`}
               onLoad={(e) => injectV2Theme(e.target)}
