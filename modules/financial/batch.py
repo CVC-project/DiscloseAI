@@ -326,6 +326,55 @@ def _history_block(panel: FirmPanel) -> Optional[dict]:
     }
 
 
+def _safe_div(num: Optional[float], den: Optional[float]) -> Optional[float]:
+    if num is None or den is None or den == 0:
+        return None
+    return num / den
+
+
+def _investment_metrics(r: FirmRecord) -> Optional[dict]:
+    """사용자 맞춤 투자기준 UI에서 바로 쓸 수 있는 원천 투자지표."""
+    if r.panel is None:
+        return None
+    latest = r.panel.latest()
+    if latest is None:
+        return None
+    years = [fy for fy in (r.panel.years or []) if fy.quarter is None]
+    prior = years[-2] if len(years) >= 2 else None
+    revenue_growth = (
+        _safe_div(latest.revenue - prior.revenue, prior.revenue) * 100
+        if prior and latest.revenue is not None and prior.revenue is not None
+        else None
+    )
+    market_cap = r.market_cap
+    return {
+        "per": _safe_div(market_cap, latest.net_income),
+        "pbr": _safe_div(market_cap, latest.total_equity),
+        "roe": (
+            _safe_div(latest.net_income, latest.total_equity) * 100
+            if _safe_div(latest.net_income, latest.total_equity) is not None
+            else None
+        ),
+        "operating_margin": (
+            _safe_div(latest.operating_income, latest.revenue) * 100
+            if _safe_div(latest.operating_income, latest.revenue) is not None
+            else None
+        ),
+        "revenue_growth": revenue_growth,
+        "ocf_to_net_income": _safe_div(latest.operating_cashflow, latest.net_income),
+        "ocf_margin": (
+            _safe_div(latest.operating_cashflow, latest.revenue) * 100
+            if _safe_div(latest.operating_cashflow, latest.revenue) is not None
+            else None
+        ),
+        "debt_to_equity": (
+            _safe_div(latest.total_liabilities, latest.total_equity) * 100
+            if _safe_div(latest.total_liabilities, latest.total_equity) is not None
+            else None
+        ),
+    }
+
+
 def _compute_industry_percentiles(records: List[FirmRecord]) -> dict:
     """동종업계(섹터) 내 firm 단위 백분위 산출 — 0(최하)~100(최상).
 
@@ -423,6 +472,7 @@ def export_for_frontend(
     - modules: M1~M5 각 점수 + 한글 라벨 + note(산출 방식)
     - dart_url: 최신 사업보고서 링크
     - latest_year: 최근 재무 데이터(매출, 영업이익, 순이익, 영업CF 등)
+    - investment_metrics: PER/PBR/ROE/매출성장률 등 사용자 맞춤 점수 원천 지표
 
     ⚠️ 단위 컨벤션 (코드 전반에서 가정 — 변경 시 dashboard.html `_marketCapFmt`/
        `_calcValuation` 동시 수정 필요):
@@ -484,6 +534,7 @@ def export_for_frontend(
                 "modules": modules,
                 "dart_url": r.dart_url,
                 "latest_year": latest_year,
+                "investment_metrics": _investment_metrics(r),
                 "industry_code": r.industry_code,
                 "history": _history_block(r.panel) if r.panel else None,
                 "percentile": percentiles.get(
@@ -525,6 +576,8 @@ def build_per_firm_dashboards(records: List[FirmRecord]) -> dict:
                 translate_all(latest),
                 extract_highlights(r.panel),
                 output_name=f"firm_{ticker}.html",
+                market_cap=r.market_cap,
+                dart_url=r.dart_url,
             )
             written += 1
         except Exception:  # noqa: BLE001 — 한 기업 실패가 전체를 막지 않도록

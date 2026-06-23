@@ -55,6 +55,8 @@ def main() -> int:
                 samsung.eqs,
                 translate_all(latest),
                 extract_highlights(samsung.panel),
+                market_cap=samsung.market_cap,
+                dart_url=samsung.dart_url,
             )
             print(f"[firm dashboard] {single_path}")
 

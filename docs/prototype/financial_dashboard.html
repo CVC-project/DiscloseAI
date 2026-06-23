@@ -6,42 +6,188 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
   :root {
-    --bg: #0f172a;
-    --panel: #1e293b;
-    --border: #334155;
+    --bg: #060814;
+    --panel: rgba(15, 23, 42, 0.55);
+    --panel-solid: #0f172a;
+    --border: rgba(99, 102, 241, 0.22);
+    --border-strong: rgba(99, 102, 241, 0.45);
     --text: #e2e8f0;
     --muted: #94a3b8;
-    --good: #22c55e;
-    --warn: #eab308;
-    --bad: #ef4444;
-    --accent: #6366f1;
+    --good: #4ade80;
+    --warn: #fbbf24;
+    --bad: #f87171;
+    --accent: #4da6ff;
+    --accent2: #a78bfa;
+    --nebula: #c084fc;
   }
   * { box-sizing: border-box; }
+  /* 갤럭시 배경 — 깊은 공간 + 강한 nebula + 은하수 대각선 sweep */
   body {
     margin: 0; padding: 24px;
-    background: var(--bg); color: var(--text);
+    color: var(--text);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic", sans-serif;
     line-height: 1.5;
+    min-height: 100vh;
+    background:
+      /* 큰 nebula 구름 4개 — 인디고·마젠타·시안·골드 */
+      radial-gradient(ellipse 55% 45% at 15% 18%, rgba(124, 108, 240, 0.42), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 88% 75%, rgba(244, 114, 182, 0.30), transparent 65%),
+      radial-gradient(ellipse 45% 38% at 50% 100%, rgba(34, 211, 238, 0.22), transparent 65%),
+      radial-gradient(ellipse 28% 22% at 95% 8%, rgba(251, 191, 36, 0.15), transparent 70%),
+      /* 은하수 대각선 — 보라색 옅은 띠 */
+      linear-gradient(135deg, transparent 28%, rgba(167, 139, 250, 0.08) 42%, rgba(196, 181, 253, 0.14) 50%, rgba(167, 139, 250, 0.08) 58%, transparent 72%),
+      var(--bg);
+    background-attachment: fixed;
+    position: relative;
+    overflow-x: hidden;
   }
-  .container { max-width: 1200px; margin: 0 auto; }
+  /* 별빛 레이어 1 — 30개+ 점, 다양한 크기, 슬로우 트윙클 */
+  body::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image:
+      /* 큰 별 (밝은) */
+      radial-gradient(2.2px 2.2px at 7% 11%, #fff, transparent 55%),
+      radial-gradient(2px 2px at 28% 83%, #fff, transparent 55%),
+      radial-gradient(2.4px 2.4px at 52% 31%, #c4b5fd, transparent 55%),
+      radial-gradient(2px 2px at 73% 60%, #fff, transparent 55%),
+      radial-gradient(2.2px 2.2px at 91% 17%, #fbcfe8, transparent 55%),
+      radial-gradient(2px 2px at 11% 71%, #93c5fd, transparent 55%),
+      /* 중간 별 */
+      radial-gradient(1.4px 1.4px at 18% 28%, #ffffffcc, transparent 60%),
+      radial-gradient(1.4px 1.4px at 33% 12%, #ffffffaa, transparent 60%),
+      radial-gradient(1.5px 1.5px at 41% 56%, #c4b5fdcc, transparent 60%),
+      radial-gradient(1.4px 1.4px at 47% 89%, #ffffffaa, transparent 60%),
+      radial-gradient(1.5px 1.5px at 62% 8%, #93c5fdcc, transparent 60%),
+      radial-gradient(1.4px 1.4px at 68% 38%, #ffffffaa, transparent 60%),
+      radial-gradient(1.5px 1.5px at 79% 75%, #fbcfe8cc, transparent 60%),
+      radial-gradient(1.4px 1.4px at 85% 48%, #ffffffaa, transparent 60%),
+      radial-gradient(1.4px 1.4px at 96% 64%, #ffffffaa, transparent 60%),
+      /* 작은 별 다수 */
+      radial-gradient(1px 1px at 4% 35%, #ffffff88, transparent 65%),
+      radial-gradient(1px 1px at 14% 91%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 21% 47%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 26% 22%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 36% 75%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 43% 18%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 49% 50%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 55% 73%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 58% 24%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 65% 92%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 71% 16%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 75% 45%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 81% 24%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 88% 81%, #ffffff77, transparent 65%),
+      radial-gradient(1px 1px at 94% 39%, #ffffff77, transparent 65%);
+    animation: starsTwinkle 7s ease-in-out infinite alternate;
+  }
+  @keyframes starsTwinkle {
+    0%   { opacity: 0.65; }
+    50%  { opacity: 1.0; }
+    100% { opacity: 0.5; }
+  }
+  /* 패널의 cosmic 글로우 가로 라인 (헤더 위 장식) */
+  .container::before {
+    content: ''; display: block; height: 1px; margin: 0 auto 18px;
+    background: linear-gradient(90deg, transparent, var(--accent2), var(--accent), transparent);
+    opacity: 0.6;
+  }
+  /* === 코스믹 장식: 떠다니는 행성 + 슈팅 스타 === */
+  .cosmic-decor { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .planet { position: absolute; opacity: 0.85; filter: drop-shadow(0 0 18px rgba(167,139,250,0.30)); }
+  .planet-1 { top: 5%; right: 4%; width: 140px; height: 120px; animation: floatA 22s ease-in-out infinite; }
+  .planet-2 { bottom: 7%; left: 3%; width: 100px; height: 100px; animation: floatB 28s ease-in-out infinite; }
+  .planet-3 { top: 52%; right: 7%; width: 60px; height: 60px; animation: floatA 25s ease-in-out infinite; opacity: 0.7; }
+  @keyframes floatA {
+    0%, 100% { transform: translateY(0) rotate(0); }
+    50%      { transform: translateY(-14px) rotate(2deg); }
+  }
+  @keyframes floatB {
+    0%, 100% { transform: translateY(0) rotate(0); }
+    50%      { transform: translateY(12px) rotate(-2deg); }
+  }
+  /* 슈팅 스타 — 사선 streak. 18초 주기로 한 번 가로지름 */
+  .shooting-star {
+    position: absolute; top: 14%; left: -10%;
+    width: 140px; height: 1.5px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.95) 60%, rgba(196,181,253,0.9) 90%, transparent);
+    filter: drop-shadow(0 0 8px rgba(255,255,255,0.85));
+    border-radius: 1px;
+    transform: rotate(22deg);
+    animation: shoot 14s linear infinite;
+    opacity: 0;
+  }
+  .shooting-star.delay { animation-delay: 7s; top: 38%; }
+  @keyframes shoot {
+    0%  { opacity: 0; transform: translate(0, 0) rotate(22deg); }
+    2%  { opacity: 1; }
+    9%  { opacity: 1; transform: translate(110vw, 45vh) rotate(22deg); }
+    10% { opacity: 0; transform: translate(110vw, 45vh) rotate(22deg); }
+    100%{ opacity: 0; transform: translate(110vw, 45vh) rotate(22deg); }
+  }
+  /* 헤일로가 있는 밝은 별 — 코어 + 부드러운 후광 */
+  body::after {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image:
+      radial-gradient(4px 4px at 13% 24%, #fff 0%, rgba(255,255,255,0.4) 25%, transparent 70%),
+      radial-gradient(4.5px 4.5px at 76% 13%, #c4b5fd 0%, rgba(196,181,253,0.4) 25%, transparent 70%),
+      radial-gradient(5px 5px at 39% 86%, #93c5fd 0%, rgba(147,197,253,0.35) 25%, transparent 70%),
+      radial-gradient(4px 4px at 89% 67%, #fbcfe8 0%, rgba(251,207,232,0.35) 25%, transparent 70%),
+      radial-gradient(4px 4px at 6% 64%, #fde68a 0%, rgba(253,230,138,0.3) 25%, transparent 70%);
+    animation: starsTwinkle 9s ease-in-out infinite alternate-reverse;
+  }
+  .container { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+  /* 헤더 — 코스믹 그라데이션 라인 + 회사명 글로우 */
   header {
     display: flex; justify-content: space-between; align-items: flex-end;
-    border-bottom: 1px solid var(--border); padding-bottom: 16px; margin-bottom: 24px;
+    padding-bottom: 16px; margin-bottom: 24px;
+    border-bottom: 1px solid transparent;
+    border-image: linear-gradient(90deg, transparent, var(--accent2), var(--accent), transparent) 1;
   }
-  header h1 { margin: 0; font-size: 28px; }
+  header h1 {
+    margin: 0; font-size: 30px; letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #cbd5e1, var(--accent), var(--nebula));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 36px rgba(77,166,255,0.18);
+  }
   header .meta { color: var(--muted); font-size: 14px; }
   .grid { display: grid; gap: 16px; margin-bottom: 16px; }
   .grid-2 { grid-template-columns: 1fr 1fr; }
   .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+  /* 패널 — 글래스(반투명+블러) + 인디고 글로우 보더 + 미세 코스믹 그라디언트 */
   .panel {
-    background: var(--panel); border: 1px solid var(--border);
-    border-radius: 12px; padding: 20px;
+    background:
+      linear-gradient(135deg, rgba(167,139,250,0.04), rgba(77,166,255,0.04) 60%, rgba(244,114,182,0.03)),
+      var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px; padding: 20px;
+    backdrop-filter: blur(12px) saturate(1.3);
+    -webkit-backdrop-filter: blur(12px) saturate(1.3);
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.06) inset,
+      0 0 0 1px rgba(167,139,250,0.08) inset,
+      0 18px 40px rgba(0,0,0,0.4),
+      0 0 24px rgba(77,166,255,0.06);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    position: relative;
   }
-  .panel h2 { margin: 0 0 12px; font-size: 16px; color: var(--muted); font-weight: 500; }
+  .panel:hover {
+    border-color: var(--border-strong);
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.08) inset,
+      0 0 0 1px rgba(167,139,250,0.15) inset,
+      0 22px 50px rgba(77,166,255,0.18),
+      0 0 32px rgba(167,139,250,0.18);
+  }
+  .panel h2 {
+    margin: 0 0 12px; font-size: 16px;
+    color: var(--text); font-weight: 600; letter-spacing: 0.01em;
+  }
   .score-big {
-    font-size: 72px; font-weight: 700; line-height: 1;
-    background: linear-gradient(135deg, var(--accent), #8b5cf6);
+    font-size: 76px; font-weight: 800; line-height: 1;
+    background: linear-gradient(135deg, var(--accent), var(--accent2), var(--nebula));
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 40px rgba(167,139,250,0.25);
+    letter-spacing: -0.03em;
   }
   .grade {
     display: inline-block; padding: 4px 16px; border-radius: 999px;
@@ -74,7 +220,9 @@
   .highlight-card.sev-low { border-left-color: var(--good); }
   .highlight-card .title { font-weight: 700; margin-bottom: 4px; }
   .highlight-card .meta { font-size: 12px; color: var(--muted); margin-left: 8px; }
-  .chart-wrap { position: relative; height: 280px; }
+  .chart-wrap { position: relative; height: 280px; max-width: 800px; margin: 0 auto; }
+  .chart-wrap.radar { aspect-ratio: 1 / 1; height: auto; max-width: 460px; margin: 0 auto; }
+  .chart-wrap canvas { display: block !important; width: 100% !important; height: 100% !important; }
   .ratios-list { margin: 0; padding: 0; }
   .ratio-row {
     display: flex; align-items: center; gap: 12px;
@@ -202,9 +350,140 @@
     background: rgba(234, 179, 8, 0.08); border: 1px solid rgba(234, 179, 8, 0.3);
     padding: 12px 16px; border-radius: 8px; margin-top: 16px; font-size: 13px;
   }
+  .action-row {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px;
+  }
+  .primary-btn, .ghost-btn {
+    border: 1px solid rgba(77,166,255,0.45); border-radius: 8px;
+    padding: 9px 12px; color: var(--text); cursor: pointer;
+    font: inherit; font-size: 13px; line-height: 1.2;
+    transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+  }
+  .primary-btn {
+    background: linear-gradient(135deg, rgba(77,166,255,0.24), rgba(167,139,250,0.24));
+    box-shadow: 0 0 18px rgba(77,166,255,0.12);
+  }
+  .ghost-btn { background: rgba(15,23,42,0.35); }
+  .primary-btn:hover, .ghost-btn:hover {
+    border-color: rgba(167,139,250,0.8); transform: translateY(-1px);
+  }
+  .custom-panel { display: none; }
+  .custom-panel.open { display: block; }
+  .custom-head {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 16px; margin-bottom: 14px;
+  }
+  .custom-head p { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
+  .custom-grid {
+    display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+    gap: 16px; align-items: start;
+  }
+  .criteria-box, .guru-box, .custom-result {
+    border: 1px solid rgba(148,163,184,0.18); border-radius: 10px;
+    background: rgba(2,6,23,0.28); padding: 14px;
+  }
+  .criteria-row {
+    display: grid; grid-template-columns: 64px minmax(180px, 1fr) minmax(170px, 0.85fr);
+    gap: 10px; align-items: center; padding: 7px 0;
+    border-bottom: 1px solid rgba(148,163,184,0.12);
+  }
+  .criteria-row:last-child { border-bottom: none; }
+  .rank-label { color: var(--muted); font-size: 12px; }
+  .criteria-row select {
+    width: 100%; border: 1px solid rgba(148,163,184,0.25); border-radius: 8px;
+    background: rgba(15,23,42,0.82); color: var(--text); padding: 8px 10px;
+    font: inherit; font-size: 13px;
+  }
+  .criteria-help { color: var(--muted); font-size: 12px; line-height: 1.45; }
+  .preset-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+  .preset-chip {
+    border: 1px solid rgba(167,139,250,0.38); border-radius: 999px;
+    background: rgba(167,139,250,0.10); color: var(--text);
+    padding: 7px 10px; font: inherit; font-size: 12px; cursor: pointer;
+  }
+  .preset-chip:hover { background: rgba(167,139,250,0.20); }
+  .guru-card {
+    padding: 10px 0; border-top: 1px solid rgba(148,163,184,0.12);
+  }
+  .guru-card:first-of-type { border-top: none; padding-top: 0; }
+  .guru-title { font-weight: 700; font-size: 13px; margin-bottom: 4px; }
+  .guru-copy { color: var(--muted); font-size: 12px; line-height: 1.5; }
+  .custom-score {
+    font-size: 46px; font-weight: 800; line-height: 1;
+    background: linear-gradient(135deg, #93c5fd, #c4b5fd, #fbcfe8);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .score-meter {
+    height: 10px; border-radius: 999px; overflow: hidden;
+    background: rgba(148,163,184,0.14); margin: 12px 0;
+  }
+  .score-meter-fill {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, var(--bad), var(--warn), var(--good));
+    transition: width 0.25s ease;
+  }
+  .reason-list { margin: 10px 0 0; padding-left: 18px; color: var(--muted); font-size: 13px; }
+  .metric-pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .metric-pill {
+    border: 1px solid rgba(148,163,184,0.18); border-radius: 999px;
+    padding: 5px 8px; color: var(--muted); font-size: 12px; background: rgba(15,23,42,0.45);
+  }
+  @media (max-width: 900px) {
+    .custom-grid { grid-template-columns: 1fr; }
+    .criteria-row { grid-template-columns: 54px 1fr; }
+    .criteria-help { grid-column: 2; }
+  }
 </style>
 </head>
 <body>
+<!-- 갤럭시 장식: 떠다니는 행성 + 슈팅 스타 (배경 레이어, 콘텐츠와 무관) -->
+<div class="cosmic-decor" aria-hidden="true">
+  <!-- Planet 1: 시안/인디고 가스자이언트 with ring (top-right) -->
+  <svg class="planet planet-1" viewBox="0 0 140 120" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="pg1" cx="38%" cy="38%">
+        <stop offset="0%" stop-color="#bae6fd"/>
+        <stop offset="55%" stop-color="#3b82f6"/>
+        <stop offset="100%" stop-color="#0c1b3a"/>
+      </radialGradient>
+      <linearGradient id="pg1ring" x1="0%" y1="50%" x2="100%" y2="50%">
+        <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.05"/>
+        <stop offset="50%" stop-color="#a78bfa" stop-opacity="0.55"/>
+        <stop offset="100%" stop-color="#a78bfa" stop-opacity="0.05"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="70" cy="60" rx="62" ry="9" fill="none" stroke="url(#pg1ring)" stroke-width="2.5" transform="rotate(-18 70 60)"/>
+    <ellipse cx="70" cy="60" rx="62" ry="9" fill="none" stroke="#c4b5fd" stroke-opacity="0.15" stroke-width="6" transform="rotate(-18 70 60)"/>
+    <circle cx="70" cy="60" r="28" fill="url(#pg1)"/>
+    <circle cx="60" cy="52" r="5" fill="#bae6fd" opacity="0.35"/>
+  </svg>
+  <!-- Planet 2: 마젠타/보라 작은 행성 (bottom-left) -->
+  <svg class="planet planet-2" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="pg2" cx="36%" cy="36%">
+        <stop offset="0%" stop-color="#fbcfe8"/>
+        <stop offset="55%" stop-color="#c026d3"/>
+        <stop offset="100%" stop-color="#3b0764"/>
+      </radialGradient>
+    </defs>
+    <circle cx="50" cy="50" r="32" fill="url(#pg2)" filter="drop-shadow(0 0 18px rgba(192,38,211,0.45))"/>
+    <ellipse cx="44" cy="42" rx="6" ry="4" fill="#fbcfe8" opacity="0.4"/>
+  </svg>
+  <!-- Planet 3: 골드/오렌지 작은 행성 with ring (mid-right) -->
+  <svg class="planet planet-3" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="pg3" cx="35%" cy="35%">
+        <stop offset="0%" stop-color="#fef3c7"/>
+        <stop offset="55%" stop-color="#f59e0b"/>
+        <stop offset="100%" stop-color="#451a03"/>
+      </radialGradient>
+    </defs>
+    <ellipse cx="40" cy="40" rx="36" ry="6" fill="none" stroke="#fcd34d" stroke-opacity="0.45" stroke-width="1.6" transform="rotate(15 40 40)"/>
+    <circle cx="40" cy="40" r="16" fill="url(#pg3)"/>
+  </svg>
+  <span class="shooting-star"></span>
+  <span class="shooting-star delay"></span>
+</div>
 <div class="container">
   <header>
     <div>
@@ -225,11 +504,62 @@
         <span class="grade grade-A">A</span>
       </div>
       <ul class="module-list" id="moduleList"></ul>
+      <div class="action-row">
+        <button class="primary-btn" type="button" id="customScoreBtn">나만의 투자기준 만들기</button>
+        <a class="ghost-btn" id="dartReportBtn" target="_blank" rel="noopener" style="display:none;text-decoration:none;">최근 재무제표</a>
+      </div>
     </div>
 
     <div class="panel">
       <h2>5개 모듈 프로파일</h2>
-      <div class="chart-wrap"><canvas id="radar"></canvas></div>
+      <div class="chart-wrap radar"><canvas id="radar"></canvas></div>
+    </div>
+  </div>
+
+  <div class="panel custom-panel" id="customScorePanel" style="margin-top:0;">
+    <div class="custom-head">
+      <div>
+        <h2>나만의 투자기준으로 점수 만들기</h2>
+        <p>중시하는 지표를 1~5순위로 고르면, 선택한 우선순위에 따라 이 종목의 투자 적합도를 다시 계산합니다.</p>
+      </div>
+      <button class="ghost-btn" type="button" id="resetCustomBtn">초기화</button>
+    </div>
+    <div class="custom-grid">
+      <div class="criteria-box">
+        <div class="preset-row">
+          <button class="preset-chip" type="button" data-preset="buffett">버핏형 불러오기</button>
+          <button class="preset-chip" type="button" data-preset="graham">그레이엄형 불러오기</button>
+          <button class="preset-chip" type="button" data-preset="lynch">피터 린치형 불러오기</button>
+          <button class="preset-chip" type="button" data-preset="cashflow">현금흐름형 불러오기</button>
+        </div>
+        <div id="criteriaRows"></div>
+        <div class="custom-result" style="margin-top:14px;">
+          <div style="color:var(--muted);font-size:12px;">내 기준 점수</div>
+          <div><span class="custom-score" id="customScoreValue">—</span><span id="customScoreGrade" class="grade grade-F" style="font-size:14px;margin-left:8px;">—</span></div>
+          <div class="score-meter"><div class="score-meter-fill" id="customScoreFill"></div></div>
+          <ul class="reason-list" id="customReasons"></ul>
+          <div class="metric-pill-row" id="customMetricPills"></div>
+        </div>
+      </div>
+      <div class="guru-box">
+        <h2 style="margin-bottom:10px;">투자구루는 뭘 볼까?</h2>
+        <div class="guru-card">
+          <div class="guru-title">워런 버핏형</div>
+          <div class="guru-copy">장기간 높은 ROE, 안정적인 본업 이익률, 현금흐름, 낮은 부채를 함께 봅니다. 비싸게 사지 않는 것도 중요합니다.</div>
+        </div>
+        <div class="guru-card">
+          <div class="guru-title">벤저민 그레이엄형</div>
+          <div class="guru-copy">낮은 PER/PBR과 재무 안전마진을 중시합니다. “좋은 회사”보다 “충분히 싼 가격”에 더 민감합니다.</div>
+        </div>
+        <div class="guru-card">
+          <div class="guru-title">피터 린치형</div>
+          <div class="guru-copy">매출과 이익이 실제로 성장하는지, 성장률 대비 가격이 과하지 않은지 봅니다. 성장성과 가격의 균형이 핵심입니다.</div>
+        </div>
+        <div class="guru-card">
+          <div class="guru-title">현금흐름형</div>
+          <div class="guru-copy">순이익보다 실제 현금이 들어오는지를 더 봅니다. 영업현금흐름이 약하면 장부상 이익을 보수적으로 해석합니다.</div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -309,6 +639,238 @@ function helpIcon(key) {
   </span></span>`;
 }
 
+// 나만의 투자기준 점수 — 기존 EQS를 덮어쓰지 않고, 선택한 투자 렌즈 점수만 별도 계산
+const latestYear = DATA.years.length ? DATA.years[DATA.years.length - 1] : null;
+const priorYear = DATA.years.length > 1 ? DATA.years[DATA.years.length - 2] : null;
+const marketCap = DATA.market ? DATA.market.market_cap : null;
+const dartUrl = DATA.market ? DATA.market.dart_url : null;
+const dartBtn = document.getElementById('dartReportBtn');
+if (dartUrl) {
+  dartBtn.href = dartUrl;
+  dartBtn.style.display = '';
+}
+
+function safeDiv(num, den) {
+  if (num === null || num === undefined || den === null || den === undefined || den === 0) return null;
+  return num / den;
+}
+function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+function scoreHigh(v, low, high) {
+  if (v === null || v === undefined || !Number.isFinite(v)) return null;
+  return clamp((v - low) / (high - low) * 100, 0, 100);
+}
+function scoreLow(v, good, bad) {
+  if (v === null || v === undefined || !Number.isFinite(v)) return null;
+  return clamp((bad - v) / (bad - good) * 100, 0, 100);
+}
+function gradeFromScore(v) {
+  if (v === null || v === undefined) return '—';
+  if (v >= 80) return 'A';
+  if (v >= 65) return 'B';
+  if (v >= 50) return 'C';
+  if (v >= 35) return 'D';
+  return 'F';
+}
+function fmtPct(v) {
+  return v === null || v === undefined || !Number.isFinite(v) ? 'N/A' : `${v.toFixed(1)}%`;
+}
+function fmtNum(v, suffix='') {
+  return v === null || v === undefined || !Number.isFinite(v) ? 'N/A' : `${v.toFixed(1)}${suffix}`;
+}
+
+function moduleScore(name) {
+  const found = DATA.eqs.modules.find(m => m.name === name);
+  return found && found.score !== null ? found.score : null;
+}
+
+const per = latestYear && marketCap ? safeDiv(marketCap, latestYear.net_income) : null;
+const pbr = latestYear && marketCap ? safeDiv(marketCap, latestYear.total_equity) : null;
+const revenueGrowth = latestYear && priorYear ? safeDiv(latestYear.revenue - priorYear.revenue, priorYear.revenue) : null;
+const ocfNi = latestYear ? safeDiv(latestYear.operating_cashflow, latestYear.net_income) : null;
+const ocfMargin = latestYear ? safeDiv(latestYear.operating_cashflow, latestYear.revenue) : null;
+const debtToEquity = latestYear ? safeDiv(latestYear.total_liabilities, latestYear.total_equity) : null;
+
+const INVEST_METRICS = {
+  roe: {
+    label: 'ROE',
+    help: '주주 자본으로 얼마나 벌었는지 봅니다.',
+    value: DATA.ratios.values.roe,
+    display: fmtPct(DATA.ratios.values.roe),
+    score: scoreHigh(DATA.ratios.values.roe, 0, 20),
+  },
+  per: {
+    label: 'PER',
+    help: '순이익 대비 주가가 비싼지 봅니다. 낮을수록 점수에 유리합니다.',
+    value: per,
+    display: fmtNum(per, '배'),
+    score: scoreLow(per, 8, 35),
+  },
+  pbr: {
+    label: 'PBR',
+    help: '순자산 대비 주가가 비싼지 봅니다. 낮을수록 점수에 유리합니다.',
+    value: pbr,
+    display: fmtNum(pbr, '배'),
+    score: scoreLow(pbr, 0.8, 3.0),
+  },
+  revenue_growth: {
+    label: '매출성장률',
+    help: '전년 대비 매출이 얼마나 늘었는지 봅니다.',
+    value: revenueGrowth === null ? null : revenueGrowth * 100,
+    display: fmtPct(revenueGrowth === null ? null : revenueGrowth * 100),
+    score: scoreHigh(revenueGrowth === null ? null : revenueGrowth * 100, -10, 25),
+  },
+  operating_margin: {
+    label: '영업이익률',
+    help: '본업에서 남기는 이익률입니다.',
+    value: DATA.ratios.values.operating_margin,
+    display: fmtPct(DATA.ratios.values.operating_margin),
+    score: scoreHigh(DATA.ratios.values.operating_margin, 0, 25),
+  },
+  ocf_ni: {
+    label: '영업CF/순이익',
+    help: '장부상 이익이 실제 현금으로 뒷받침되는지 봅니다.',
+    value: ocfNi,
+    display: fmtNum(ocfNi, '배'),
+    score: scoreHigh(ocfNi, 0, 1.2),
+  },
+  ocf_margin: {
+    label: '영업CF/매출',
+    help: '매출에서 실제 현금으로 남는 힘을 봅니다.',
+    value: ocfMargin === null ? null : ocfMargin * 100,
+    display: fmtPct(ocfMargin === null ? null : ocfMargin * 100),
+    score: scoreHigh(ocfMargin === null ? null : ocfMargin * 100, 0, 20),
+  },
+  debt_to_equity: {
+    label: '부채비율',
+    help: '자본 대비 부채 부담입니다. 낮을수록 점수에 유리합니다.',
+    value: debtToEquity === null ? null : debtToEquity * 100,
+    display: fmtPct(debtToEquity === null ? null : debtToEquity * 100),
+    score: scoreLow(debtToEquity === null ? null : debtToEquity * 100, 50, 250),
+  },
+  eqs_quality: {
+    label: '회계신뢰 EQS',
+    help: '기존 M1~M5 재무제표 신뢰 점수입니다.',
+    value: DATA.eqs.total,
+    display: DATA.eqs.total === null ? 'N/A' : `${DATA.eqs.total.toFixed(1)}점`,
+    score: DATA.eqs.total,
+  },
+  earnings_stability: {
+    label: '이익안정',
+    help: 'EQS의 본업 안정성 모듈 점수입니다.',
+    value: moduleScore('M4'),
+    display: moduleScore('M4') === null ? 'N/A' : `${moduleScore('M4').toFixed(1)}점`,
+    score: moduleScore('M4'),
+  },
+  capital_growth: {
+    label: '자본성장',
+    help: 'EQS의 자본 성장성 모듈 점수입니다.',
+    value: moduleScore('M5'),
+    display: moduleScore('M5') === null ? 'N/A' : `${moduleScore('M5').toFixed(1)}점`,
+    score: moduleScore('M5'),
+  },
+};
+
+const PRESETS = {
+  default: ['roe', 'per', 'pbr', 'revenue_growth', 'ocf_ni'],
+  buffett: ['roe', 'operating_margin', 'ocf_ni', 'debt_to_equity', 'earnings_stability'],
+  graham: ['per', 'pbr', 'debt_to_equity', 'eqs_quality', 'capital_growth'],
+  lynch: ['revenue_growth', 'roe', 'per', 'operating_margin', 'eqs_quality'],
+  cashflow: ['ocf_ni', 'ocf_margin', 'eqs_quality', 'debt_to_equity', 'operating_margin'],
+};
+const PRIORITY_WEIGHTS = [5, 4, 3, 2, 1];
+
+function renderCriteriaRows(keys = PRESETS.default) {
+  const wrap = document.getElementById('criteriaRows');
+  wrap.innerHTML = '';
+  PRIORITY_WEIGHTS.forEach((_, idx) => {
+    const selected = keys[idx] || Object.keys(INVEST_METRICS)[idx];
+    const options = Object.entries(INVEST_METRICS).map(([key, metric]) =>
+      `<option value="${key}" ${key === selected ? 'selected' : ''}>${metric.label}</option>`
+    ).join('');
+    const row = document.createElement('div');
+    row.className = 'criteria-row';
+    row.innerHTML = `
+      <div class="rank-label">${idx + 1}순위</div>
+      <select data-rank="${idx}">${options}</select>
+      <div class="criteria-help" data-help="${idx}">${INVEST_METRICS[selected].help}</div>
+    `;
+    wrap.appendChild(row);
+  });
+  wrap.querySelectorAll('select').forEach(sel => sel.addEventListener('change', updateCustomScore));
+  updateCustomScore();
+}
+
+function updateCustomScore() {
+  const selects = [...document.querySelectorAll('#criteriaRows select')];
+  let weighted = 0;
+  let totalWeight = 0;
+  const used = new Set();
+  const reasons = [];
+  const pills = [];
+  selects.forEach((sel, idx) => {
+    const key = sel.value;
+    const metric = INVEST_METRICS[key];
+    const help = document.querySelector(`[data-help="${idx}"]`);
+    if (help) help.textContent = metric.help;
+    if (used.has(key)) {
+      reasons.push(`${idx + 1}순위 ${metric.label}은 중복 선택이라 한 번만 반영했습니다.`);
+      return;
+    }
+    used.add(key);
+    const score = metric.score;
+    if (score === null || score === undefined || !Number.isFinite(score)) {
+      reasons.push(`${metric.label}은 필요한 데이터가 없어 이번 계산에서 제외했습니다.`);
+      pills.push(`<span class="metric-pill">${metric.label} N/A</span>`);
+      return;
+    }
+    const w = PRIORITY_WEIGHTS[idx];
+    weighted += score * w;
+    totalWeight += w;
+    pills.push(`<span class="metric-pill">${metric.label} ${metric.display} · ${score.toFixed(0)}점</span>`);
+  });
+  const score = totalWeight ? weighted / totalWeight : null;
+  const scoreEl = document.getElementById('customScoreValue');
+  const gradeEl = document.getElementById('customScoreGrade');
+  const fillEl = document.getElementById('customScoreFill');
+  const reasonEl = document.getElementById('customReasons');
+  const pillEl = document.getElementById('customMetricPills');
+  if (score === null) {
+    scoreEl.textContent = '—';
+    gradeEl.textContent = '—';
+    gradeEl.className = 'grade grade-F';
+    fillEl.style.width = '0%';
+  } else {
+    const grade = gradeFromScore(score);
+    scoreEl.textContent = score.toFixed(1);
+    gradeEl.textContent = grade;
+    gradeEl.className = `grade grade-${grade}`;
+    fillEl.style.width = `${clamp(score, 0, 100)}%`;
+    const top = [...used].map(k => INVEST_METRICS[k]).filter(m => m.score !== null && m.score !== undefined)
+      .sort((a, b) => b.score - a.score)[0];
+    const bottom = [...used].map(k => INVEST_METRICS[k]).filter(m => m.score !== null && m.score !== undefined)
+      .sort((a, b) => a.score - b.score)[0];
+    if (top) reasons.unshift(`${top.label}이 강점으로 반영됐습니다.`);
+    if (bottom && bottom !== top) reasons.unshift(`${bottom.label}은 상대적으로 낮게 반영됐습니다.`);
+  }
+  reasonEl.innerHTML = reasons.slice(0, 4).map(r => `<li>${r}</li>`).join('');
+  pillEl.innerHTML = pills.join('');
+}
+
+document.getElementById('customScoreBtn').addEventListener('click', () => {
+  const panel = document.getElementById('customScorePanel');
+  panel.classList.toggle('open');
+  if (panel.classList.contains('open') && !document.getElementById('criteriaRows').children.length) {
+    renderCriteriaRows();
+  }
+});
+document.getElementById('resetCustomBtn').addEventListener('click', () => renderCriteriaRows());
+document.querySelectorAll('[data-preset]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.getElementById('customScorePanel').classList.add('open');
+    renderCriteriaRows(PRESETS[btn.dataset.preset]);
+  });
+});
+
 // 모듈 점수 리스트
 const moduleColors = {
   M1: '#06b6d4', M2: '#8b5cf6', M3: '#22c55e', M4: '#eab308', M5: '#ef4444'
@@ -340,20 +902,25 @@ new Chart(document.getElementById('radar'), {
     datasets: [{
       label: 'EQS',
       data: DATA.eqs.modules.map(m => m.score || 0),
-      backgroundColor: 'rgba(99, 102, 241, 0.25)',
-      borderColor: '#6366f1',
+      backgroundColor: 'rgba(77, 166, 255, 0.22)',
+      borderColor: '#4da6ff',
       borderWidth: 2,
-      pointBackgroundColor: '#8b5cf6',
+      pointBackgroundColor: '#a78bfa',
+      pointBorderColor: '#fff',
+      pointHoverRadius: 6,
     }]
   },
   options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    layout: { padding: { top: 4, bottom: 4, left: 4, right: 4 } },
     plugins: { legend: { display: false } },
     scales: {
       r: {
         min: 0, max: 100,
-        grid: { color: 'rgba(148, 163, 184, 0.2)' },
-        angleLines: { color: 'rgba(148, 163, 184, 0.2)' },
-        pointLabels: { color: '#e2e8f0', font: { size: 12 } },
+        grid: { color: 'rgba(167, 139, 250, 0.18)' },
+        angleLines: { color: 'rgba(167, 139, 250, 0.22)' },
+        pointLabels: { color: '#e2e8f0', font: { size: 13 } },
         ticks: { color: '#94a3b8', backdropColor: 'transparent', stepSize: 25 }
       }
     }
@@ -433,12 +1000,15 @@ new Chart(document.getElementById('ts'), {
   data: {
     labels: yrs,
     datasets: [
-      {label: '매출', data: DATA.years.map(y => toEok(y.revenue)), borderColor: '#06b6d4', backgroundColor: 'transparent', tension: 0.3},
-      {label: '영업현금흐름', data: DATA.years.map(y => toEok(y.operating_cashflow)), borderColor: '#22c55e', backgroundColor: 'transparent', tension: 0.3},
-      {label: '순이익', data: DATA.years.map(y => toEok(y.net_income)), borderColor: '#eab308', backgroundColor: 'transparent', tension: 0.3},
+      {label: '매출', data: DATA.years.map(y => toEok(y.revenue)), borderColor: '#4da6ff', backgroundColor: 'rgba(77,166,255,0.08)', tension: 0.35, borderWidth: 2.2, pointBackgroundColor: '#4da6ff', pointRadius: 3, fill: true},
+      {label: '영업현금흐름', data: DATA.years.map(y => toEok(y.operating_cashflow)), borderColor: '#34d399', backgroundColor: 'rgba(52,211,153,0.06)', tension: 0.35, borderWidth: 2.2, pointBackgroundColor: '#34d399', pointRadius: 3, fill: true},
+      {label: '순이익', data: DATA.years.map(y => toEok(y.net_income)), borderColor: '#fbbf24', backgroundColor: 'rgba(251,191,36,0.06)', tension: 0.35, borderWidth: 2.2, pointBackgroundColor: '#fbbf24', pointRadius: 3, fill: true},
     ]
   },
   options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    layout: { padding: { top: 4, bottom: 4, left: 4, right: 8 } },
     plugins: { legend: { labels: { color: '#e2e8f0' } } },
     scales: {
       x: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(148,163,184,0.1)' } },
