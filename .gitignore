@@ -29,6 +29,10 @@ modules/*/data/*.xml
 modules/*/data/*.tmp
 modules/*/data/raw_cache/
 
+# 사업보고서 본문 수집 산출물 (Module ③ 1단계) — 한 회사당 ~2MB
+# 코드(fulltext_collector·fulltext_parser) 실행으로 재생성 가능. 용량 절약 목적 제외.
+modules/*/data/fulltext/
+
 # pull 전 로컬 DB 백업 (로컬 전용, 커밋 금지)
 modules/*/data_backup_*/
 docs/prototype/*_backup_*.json
