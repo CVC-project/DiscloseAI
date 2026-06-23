@@ -1769,6 +1769,108 @@ document.addEventListener('mouseout', (e) => {
   _hideGlossTip();
 });
 
+// ─── Bedrock 폴백 (모듈 ① W2 단계) ─────────────────────────────────────────
+// 사전(glossary.json)에 없는 용어를 AI 챗 응답에서 드래그하면, 작은 액션 버튼을
+// 띄워 Bedrock에게 한 줄 풀이를 요청한다. 결과는 세션 내 캐시.
+const _CC_FALLBACK_CACHE = new Map();  // term → entry
+let _glossSelBtn = null;
+
+function _hideSelBtn() {
+  if (_glossSelBtn) { _glossSelBtn.remove(); _glossSelBtn = null; }
+}
+
+function _showSelBtn(rect, term) {
+  _hideSelBtn();
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'gloss-sel-btn';
+  const display = term.length > 14 ? term.slice(0, 14) + '…' : term;
+  btn.textContent = `✨ "${display}" 풀이 받기`;
+  btn.dataset.term = term;
+  // 위치 — 선택 영역 바로 아래, 화면 경계 클램프
+  const btnW = 220;
+  let left = rect.left + window.scrollX;
+  left = Math.max(8, Math.min(window.innerWidth - btnW - 8, left));
+  let top = rect.bottom + window.scrollY + 6;
+  if (top + 36 > window.scrollY + window.innerHeight) top = rect.top + window.scrollY - 36;
+  btn.style.left = left + 'px';
+  btn.style.top = top + 'px';
+  btn.addEventListener('mousedown', (ev) => ev.stopPropagation());  // 외부 mousedown 핸들러로 사라지지 않게
+  btn.addEventListener('click', () => _fetchFallback(term, btn));
+  document.body.appendChild(btn);
+  _glossSelBtn = btn;
+}
+
+async function _fetchFallback(term, btnEl) {
+  const trimmed = String(term || '').trim();
+  if (!trimmed) return;
+  // 캐시 hit
+  if (_CC_FALLBACK_CACHE.has(trimmed)) {
+    const entry = _CC_FALLBACK_CACHE.get(trimmed);
+    _showGlossTip(btnEl, entry);
+    return;
+  }
+  btnEl.disabled = true;
+  btnEl.textContent = '🔄 풀이 받는 중…';
+  try {
+    const sysp = '당신은 주식 투자 초보(주린이)를 위한 친절한 용어 풀이 도우미입니다. ' +
+      '주어진 용어를 1~3문장(80~150자)으로 쉽게 풀어 설명하세요. ' +
+      '어려운 회계·법률 용어는 한 줄로 더 풀어주고, 가능하면 짧은 비유도 곁들이세요. ' +
+      '"사세요/파세요/매수 추천" 같은 투자 권유는 절대 하지 마세요. ' +
+      '용어가 재무·공시·주식 영역이 아니면 "이 용어는 주식·재무 분야가 아닌 것 같습니다"라고 짧게 답하세요.';
+    const r = await fetch(_CHAT_PROXY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        question: `"${trimmed}"의 뜻을 풀어주세요.`,
+        system_prompt: sysp,
+        history: [],
+        context: {},
+      }),
+    });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const data = await r.json();
+    const text = (data.text || '').trim();
+    if (!text) throw new Error('빈 응답');
+    const entry = {
+      label: trimmed,
+      category: 'AI 풀이',
+      description: text,
+      _fallback: true,
+    };
+    _CC_FALLBACK_CACHE.set(trimmed, entry);
+    _showGlossTip(btnEl, entry);
+  } catch (e) {
+    btnEl.disabled = false;
+    btnEl.textContent = `⚠ 실패 — ${e.message || e}`;
+    setTimeout(() => _hideSelBtn(), 2200);
+  }
+}
+
+// 챗 AI 버블 안에서 텍스트 선택 시에만 버튼 표시
+document.addEventListener('mouseup', () => {
+  setTimeout(() => {
+    const sel = window.getSelection && window.getSelection();
+    if (!sel || sel.isCollapsed) return;
+    const term = sel.toString().trim();
+    if (term.length < 2 || term.length > 50) return;
+    // AI 버블 안인지 확인
+    let node = sel.anchorNode;
+    if (node && node.nodeType === 3) node = node.parentElement;  // text node → element
+    const bubble = node && node.closest && node.closest('.chat-bubble-ai');
+    if (!bubble) return;
+    // 이미 glossary에 있는 단어면 호버로 충분 — 버튼 생략
+    if (_glossaryAliasMap && _glossaryAliasMap.has(term)) return;
+    const range = sel.getRangeAt(0);
+    const rect = range.getBoundingClientRect();
+    if (rect.width === 0 && rect.height === 0) return;
+    _showSelBtn(rect, term);
+  }, 10);
+});
+
+// 다른 곳 클릭 시 버튼 숨김 (단, 버튼 자체 클릭은 mousedown stopPropagation으로 살림)
+document.addEventListener('mousedown', () => _hideSelBtn());
+
 // ─── 마크다운 렌더 ─────────────────────────────────────────────────────────
 // Bedrock 응답에 ** ## - 등이 섞여 나오므로 굵게·헤더·리스트로 풀어 렌더한다.
 // 외부 라이브러리 없이 정규식 기반 — XSS 방지를 위해 HTML escape 먼저 수행.
@@ -1829,14 +1931,16 @@ function AiChatBubble({ msg }) {
       {!isUser && (
         <div style={{width: 24, height: 24, borderRadius: '50%', background: 'rgba(251,191,36,0.1)', border: '1px solid rgba(251,191,36,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontFamily: 'var(--font-mono,monospace)', fontSize: 8, color: '#fbbf24'}}>AI</div>
       )}
-      <div style={{
-        background: isUser ? 'rgba(94,234,212,0.08)' : 'rgba(255,255,255,0.04)',
-        border: isUser ? '1px solid rgba(94,234,212,0.15)' : 'none',
-        borderRadius: 4, padding: '7px 10px',
-        fontSize: 11.5, lineHeight: 1.65,
-        color: isUser ? '#5eead4' : (msg.error ? '#f87171' : '#94a3b8'),
-        maxWidth: '88%', wordBreak: 'break-word',
-      }}>
+      <div
+        className={isUser ? 'chat-bubble chat-bubble-user' : 'chat-bubble chat-bubble-ai'}
+        style={{
+          background: isUser ? 'rgba(94,234,212,0.08)' : 'rgba(255,255,255,0.04)',
+          border: isUser ? '1px solid rgba(94,234,212,0.15)' : 'none',
+          borderRadius: 4, padding: '7px 10px',
+          fontSize: 11.5, lineHeight: 1.65,
+          color: isUser ? '#5eead4' : (msg.error ? '#f87171' : '#94a3b8'),
+          maxWidth: '88%', wordBreak: 'break-word',
+        }}>
         {isUser ? msg.text : <MarkdownText text={msg.text} />}
         {msg.streaming && <span style={{opacity: 0.5, animation: 'pulseDot 0.8s infinite'}}>▍</span>}
       </div>
@@ -2648,7 +2752,7 @@ function AssistantPanel({ phase, sector, company, activeTab }) {
         {messages.map((m, i) => (
           <div key={i} className={"chat-msg " + (m.role === 'ai' ? 'is-ai' : 'is-user')}>
             {m.role === 'ai' && <div className="chat-avatar">AI</div>}
-            <div className="chat-bubble" style={{color: m.error ? '#f87171' : undefined}}>
+            <div className={"chat-bubble " + (m.role === 'ai' ? 'chat-bubble-ai' : 'chat-bubble-user')} style={{color: m.error ? '#f87171' : undefined}}>
               {m.role === 'ai' ? <MarkdownText text={m.text} /> : m.text}
               {m.streaming && <span style={{opacity: 0.5}}>▍</span>}
             </div>
@@ -3175,7 +3279,7 @@ function App() {
           {/* iframe + AI chat sidebar */}
           <div style={{flex:'1 1 0%', display:'flex', overflow:'hidden'}}>
             <iframe
-              src={`../dossier/firm.html?ticker=${corpOverlayTicker}`}
+              src={`../dossier/firm.html?ticker=${corpOverlayTicker}&v=20260623-fallback`}
               style={{flex:'1 1 0%', border:'none', background:'#020408'}}
               title={`firm-${corpOverlayTicker}`}
               onLoad={(e) => injectV2Theme(e.target)}
