@@ -141,6 +141,39 @@ def inspect_dir(d: Path) -> None:
             print(f"  {str(rel):<50s} {size:>12,} bytes")
 
 
+def update_index(
+    corp_code: str,
+    corp_name: str,
+    rcept_no: str,
+    rcept_dt: str,
+    report_nm: str,
+) -> Path:
+    """fulltext/index.json 에 1개 entry 추가·갱신.
+
+    UI(firm.html 본문 뷰어)가 corp_code 로 rcept_no 를 찾을 때 사용.
+    동시성 보장 없음 — PoC 단일 프로세스 가정.
+    """
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    index_path = DATA_DIR / "index.json"
+    data: dict = {}
+    if index_path.exists():
+        try:
+            data = json.loads(index_path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            data = {}
+    data[corp_code] = {
+        "corp_name": corp_name,
+        "rcept_no": rcept_no,
+        "rcept_dt": rcept_dt,
+        "report_nm": report_nm,
+    }
+    index_path.write_text(
+        json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+    print(f"[INFO] index.json 갱신: {corp_code} → {rcept_no}")
+    return index_path
+
+
 def main() -> int:
     if not DART_API_KEY:
         print("[ERROR] DART_API_KEY가 .env에 설정되지 않았습니다.", file=sys.stderr)
@@ -174,6 +207,14 @@ def main() -> int:
         return 1
 
     inspect_dir(save_dir)
+
+    update_index(
+        corp_code=corp_code,
+        corp_name=corp_name,
+        rcept_no=rcept_no,
+        rcept_dt=item.get("rcept_dt", ""),
+        report_nm=item.get("report_nm", ""),
+    )
     return 0
 
 

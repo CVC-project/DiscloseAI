@@ -79,8 +79,12 @@ def _extract_table(table: Tag) -> dict[str, list[list[str]]] | None:
     빈 행·전부 공백 행 제거.
     """
 
+    # DART XML은 표 셀로 ``<TE>`` 를 사용 (HTML의 <td>·<th>가 아님).
+    # 일부 표는 표준 <td>/<th>도 쓰니까 셋 다 허용.
+    _CELL_TAGS = ["th", "td", "te"]
+
     def row_cells(tr: Tag) -> list[str]:
-        cells = tr.find_all(["th", "td"], recursive=False)
+        cells = tr.find_all(_CELL_TAGS, recursive=False)
         out = []
         for c in cells:
             t = _clean_text(c.get_text(" ", strip=True))
