@@ -1478,6 +1478,37 @@ __bootstrapFirm();
   border-radius: 8px;
   color: #94a3b8; font-size: 11.5px; line-height: 1.6;
 }
+.rp-opinion-row {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 12px;
+}
+.rp-opinion-label { color: #94a3b8; font-size: 12px; }
+.rp-opinion-badge {
+  padding: 3px 10px; border-radius: 999px;
+  font-size: 12.5px; font-weight: 700;
+}
+.rp-opinion-badge.ok    { background: rgba(94,234,212,0.18); color: #5eead4; border: 1px solid rgba(94,234,212,0.35); }
+.rp-opinion-badge.warn  { background: rgba(251,191,36,0.18); color: #fbbf24; border: 1px solid rgba(251,191,36,0.35); }
+.rp-opinion-badge.bad   { background: rgba(248,113,113,0.18); color: #f87171; border: 1px solid rgba(248,113,113,0.4); }
+.rp-opinion-badge.muted { background: rgba(255,255,255,0.04); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); }
+.rp-kam-card {
+  background: rgba(8,12,28,0.55);
+  border: 1px solid rgba(167,139,250,0.18);
+  border-radius: 10px; padding: 13px 16px;
+  margin-bottom: 10px;
+}
+.rp-kam-title {
+  color: #a78bfa; font-weight: 700; font-size: 13.5px;
+  margin-bottom: 6px;
+}
+.rp-kam-plain {
+  color: #f1f5f9; font-size: 13px; line-height: 1.55; margin-bottom: 6px;
+}
+.rp-kam-summary {
+  color: #94a3b8; font-size: 12px; line-height: 1.55;
+  border-top: 1px dashed rgba(167,139,250,0.18);
+  padding-top: 6px;
+}
 .rp-error { color: #f87171; padding: 24px; font-size: 13px; line-height: 1.7; }
 .rp-error code {
   background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 3px;
@@ -1556,15 +1587,48 @@ __bootstrapFirm();
     return '<div class="rp-section"><h3>주요 제품·서비스</h3>' +
            '<div class="rp-chips">' + chips + '</div></div>';
   }
-  function renderAudit(kam, emphasis) {
-    var hasContent = (kam && kam.length) || (emphasis && emphasis.length);
-    if (hasContent) {
-      // 향후 감사보고서 수집 PR에서 카드 렌더로 교체. 지금은 placeholder 유지.
+  function opinionBadgeCls(opinion) {
+    if (!opinion) return 'muted';
+    if (opinion.indexOf('적정') === 0) return 'ok';
+    if (opinion.indexOf('한정') === 0) return 'warn';
+    if (opinion.indexOf('부적정') === 0 || opinion.indexOf('의견거절') === 0) return 'bad';
+    return 'muted';
+  }
+  function renderKamCard(item, kind) {
+    var titleCls = kind === 'emphasis' ? 'rp-kam-title' : 'rp-kam-title';
+    return '<div class="rp-kam-card">' +
+      '<div class="' + titleCls + '">' + escHtml(item.title || '') + '</div>' +
+      (item.plain ? '<div class="rp-kam-plain">' + escHtml(item.plain) + '</div>' : '') +
+      (item.summary ? '<div class="rp-kam-summary">' + escHtml(item.summary) + '</div>' : '') +
+      '</div>';
+  }
+  function renderAudit(opinion, kam, emphasis) {
+    var hasContent = (kam && kam.length) || (emphasis && emphasis.length) || opinion;
+    if (!hasContent) {
       return '<div class="rp-section"><h3>감사보고서 풀이</h3>' +
-             '<div class="rp-empty">감사보고서 데이터 표시 — TODO</div></div>';
+             '<div class="rp-empty">감사보고서(KAM·강조사항) 수집은 다음 단계에 추가됩니다.</div></div>';
     }
-    return '<div class="rp-section"><h3>감사보고서 풀이</h3>' +
-           '<div class="rp-empty">감사보고서(KAM·강조사항) 수집은 다음 단계에 추가됩니다.</div></div>';
+    var html = '<div class="rp-section"><h3>감사보고서 풀이</h3>';
+    if (opinion) {
+      html += '<div class="rp-opinion-row">' +
+              '<span class="rp-opinion-label">감사의견</span>' +
+              '<span class="rp-opinion-badge ' + opinionBadgeCls(opinion) + '">' +
+              escHtml(opinion) + '</span></div>';
+    }
+    if (kam && kam.length) {
+      html += '<div style="color:#cbd5e1;font-size:12.5px;margin:8px 0 6px;">' +
+              '핵심감사사항 (KAM) · 감사인이 가장 유의 깊게 본 항목' +
+              '</div>';
+      kam.forEach(function(k) { html += renderKamCard(k, 'kam'); });
+    }
+    if (emphasis && emphasis.length) {
+      html += '<div style="color:#fbbf24;font-size:12.5px;margin:14px 0 6px;">' +
+              '⚠ 강조사항 · 감사의견과 별개로 사용자에게 알리는 사항' +
+              '</div>';
+      emphasis.forEach(function(e) { html += renderKamCard(e, 'emphasis'); });
+    }
+    html += '</div>';
+    return html;
   }
   function renderGlossary(list) {
     if (!list || !list.length) return '';
@@ -1622,7 +1686,7 @@ __bootstrapFirm();
         bodyEl.innerHTML =
           renderNotes(data.investor_notes) +
           renderFinancials(data.financial_highlights) +
-          renderAudit(data.kam, data.emphasis) +
+          renderAudit(data.audit_opinion, data.kam, data.emphasis) +
           renderSegments(data.segments) +
           renderProducts(data.products) +
           renderGlossary(data.glossary_terms) +

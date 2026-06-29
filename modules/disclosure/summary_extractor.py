@@ -31,6 +31,7 @@ import requests
 from dotenv import load_dotenv
 
 from .db import get_local_session, init_local_db
+from .fulltext_parser import extract_audit_text, find_audit_xml
 from .glossary import GLOSSARY
 from .models import CompanySummary
 
@@ -251,6 +252,64 @@ def task_glossary_terms(parsed: dict) -> list[str]:
 
 
 # ──────────────────────────────────────────────────────────────────
+# Task E — audit_opinion · KAM · 강조사항 (연결감사보고서 우선)
+# ──────────────────────────────────────────────────────────────────
+
+_PROMPT_AUDIT = """당신은 한국 상장사 감사보고서를 분석해 초보 투자자가 이해할 수 있는 형태로
+정리합니다. 다음 JSON 스키마를 그대로 출력하세요. 다른 문장·코드펜스 금지.
+
+{
+  "audit_opinion": "적정의견" | "한정의견" | "부적정의견" | "의견거절" | "확인불가",
+  "kam": [
+    {
+      "title": "핵심감사사항 제목 (보고서 표제 그대로)",
+      "summary": "왜 핵심감사사항인지 2~3문장 요약 (재무·회계 용어)",
+      "plain": "초보 투자자용 한 줄 풀이 (50자 내외, 어려운 용어 풀어쓰기)"
+    }
+  ],
+  "emphasis": [
+    {
+      "title": "강조사항 제목",
+      "summary": "어떤 우려·불확실성인지 2~3문장",
+      "plain": "초보 투자자용 한 줄 풀이"
+    }
+  ]
+}
+
+규칙:
+- 감사의견은 본문 첫 단락의 표현을 정확히 매핑 (예: "공정하게 표시" → 적정의견).
+- 핵심감사사항(KAM)은 본문에 "핵심감사사항" 표제 이후 등장하는 항목들 그대로.
+- "강조사항"이 본문에 명시되어 있을 때만 emphasis 배열을 채우고, 없으면 빈 배열 [].
+- plain은 "이게 왜 중요한가" 톤으로 — 예: "공장 짓는 비용을 언제부터 비용 처리할지 판단이 중요해요"."""
+
+
+def task_audit_kam(fulltext_dir: Path) -> dict:
+    """폴더에서 감사보고서 XML을 찾아 KAM·강조사항을 Bedrock으로 구조화.
+
+    감사보고서 본문은 작아서(~2~5K 토큰) 그대로 통째로 보낸다.
+    """
+    audit = find_audit_xml(fulltext_dir)
+    if audit is None:
+        print("[WARN] 감사보고서 XML 없음 → Task E 건너뜀")
+        return {"audit_opinion": "확인불가", "kam": [], "emphasis": []}
+    info = extract_audit_text(audit)
+    if not info.get("text"):
+        print("[WARN] 감사보고서 본문 비어있음 → Task E 건너뜀")
+        return {"audit_opinion": "확인불가", "kam": [], "emphasis": []}
+    body_text = info["text"][:30000]  # 안전 상한
+    res = _call_bedrock(_PROMPT_AUDIT, body_text, max_tokens=2200)
+    print(f"[Task E] usage={res['usage']}  (파일: {audit.name}, 문서명: {info['document_name']})")
+    out = _parse_json_lenient(
+        res["text"], {"audit_opinion": "확인불가", "kam": [], "emphasis": []}
+    )
+    # 방어: 키 누락 시 기본값
+    out.setdefault("audit_opinion", "확인불가")
+    out.setdefault("kam", [])
+    out.setdefault("emphasis", [])
+    return out
+
+
+# ──────────────────────────────────────────────────────────────────
 # Task D — investor_notes (A·B 결과 + 회사명만 합성)
 # ──────────────────────────────────────────────────────────────────
 
@@ -298,6 +357,7 @@ def extract_for_company(corp_code: str, rcept_no: str) -> CompanySummary:
     prods = task_products_segments(parsed)
     fins = task_financial_highlights(parsed)
     terms = task_glossary_terms(parsed)
+    audit = task_audit_kam(parsed_path.parent)
     notes = task_investor_notes(corp_name, prods, fins)
 
     init_local_db()
@@ -313,6 +373,9 @@ def extract_for_company(corp_code: str, rcept_no: str) -> CompanySummary:
     row.segments = json.dumps(prods.get("segments", []), ensure_ascii=False)
     row.financial_highlights = json.dumps(fins, ensure_ascii=False)
     row.glossary_terms = json.dumps(terms, ensure_ascii=False)
+    row.audit_opinion = audit.get("audit_opinion") or None
+    row.kam = json.dumps(audit.get("kam", []), ensure_ascii=False)
+    row.emphasis = json.dumps(audit.get("emphasis", []), ensure_ascii=False)
     row.investor_notes = notes
     row.model_used = EXTRACT_MODEL
     row.source_version = _source_version(parsed_path)
@@ -351,6 +414,7 @@ def export_json(row: CompanySummary, dest_dir: Path) -> Path:
         "products": row.get_products(),
         "segments": row.get_segments(),
         "financial_highlights": row.get_financial_highlights(),
+        "audit_opinion": row.audit_opinion,
         "kam": row.get_kam(),
         "emphasis": row.get_emphasis(),
         "glossary_terms": row.get_glossary_terms(),

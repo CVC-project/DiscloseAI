@@ -239,6 +239,84 @@ def _summarize_tree(node: dict, depth: int = 0) -> tuple[int, int, int]:
     return n, p, t
 
 
+def extract_audit_text(xml_path: Path) -> dict[str, str]:
+    """감사보고서 XML → 본문(plain text) + 메타.
+
+    사업보고서와 달리 감사보고서는 BODY → LIBRARY → SECTION-1("독립된 감사인의 감사보고서")
+    아래 모든 P 태그가 평탄한 흐름으로 나열돼 있다. KAM·강조사항·감사의견 모두 P 단락
+    표제만 다르고 본문 텍스트로만 구분됨.
+
+    반환::
+
+        {
+          "document_name": "연결감사보고서" | "감사보고서",
+          "section_title": "독립된 감사인의 감사보고서",
+          "text": "감사의견\\n우리는 …\\n핵심감사사항\\n…",  # 단락 사이 \\n
+        }
+    """
+    text = xml_path.read_text(encoding="utf-8", errors="replace")
+    soup = BeautifulSoup(text, "html.parser")
+    document = soup.find("document")
+    if document is None:
+        raise ValueError(f"<DOCUMENT> 구조 없음: {xml_path}")
+    doc_name_tag = document.find("document-name")
+    doc_name = _clean_text(doc_name_tag.get_text()) if doc_name_tag else ""
+
+    body = document.find("body")
+    if body is None:
+        raise ValueError(f"<BODY> 없음: {xml_path}")
+
+    # LIBRARY[0] 안의 SECTION-1 (감사보고서 본문). LIBRARY[1]은 보통 내부회계관리제도 의견.
+    libs = body.find_all("library", recursive=False)
+    if not libs:
+        raise ValueError(f"감사보고서 LIBRARY 없음: {xml_path}")
+    audit_sec = libs[0].find("section-1", recursive=False)
+    if audit_sec is None:
+        raise ValueError(f"감사보고서 SECTION-1 없음: {xml_path}")
+
+    title_tag = audit_sec.find("title", recursive=False)
+    sec_title = _clean_text(title_tag.get_text()) if title_tag else ""
+
+    parts: list[str] = []
+    for p in audit_sec.find_all("p", recursive=False):
+        t = _clean_text(p.get_text(" ", strip=True))
+        if t:
+            parts.append(t)
+
+    return {
+        "document_name": doc_name,
+        "section_title": sec_title,
+        "text": "\n".join(parts),
+    }
+
+
+def find_audit_xml(folder: Path) -> Path | None:
+    """폴더에서 가장 적합한 감사보고서 XML 1개 선택.
+
+    document.xml ZIP은 보통 사업보고서 메인 + 첨부서류 N개를 풀어둔다.
+    감사 첨부는 ``<rcept>_007XX.xml`` 형태로 들어 있고, DOCUMENT-NAME으로 구분.
+    연결감사보고서 우선, 없으면 일반 감사보고서.
+    """
+    candidates: list[tuple[str, Path]] = []
+    for p in sorted(folder.glob("*_*.xml")):
+        try:
+            head = p.read_text(encoding="utf-8", errors="replace")[:2000]
+        except OSError:
+            continue
+        m = re.search(r"<DOCUMENT-NAME[^>]*>([^<]+)</DOCUMENT-NAME>", head)
+        name = (m.group(1) if m else "").strip()
+        if "감사보고서" in name:
+            candidates.append((name, p))
+
+    if not candidates:
+        return None
+    # 연결감사보고서 우선
+    for name, p in candidates:
+        if name.startswith("연결"):
+            return p
+    return candidates[0][1]
+
+
 def main() -> int:
     # CLI: corp_code, rcept_no (없으면 삼성전자 PoC 디폴트)
     if len(sys.argv) >= 3:

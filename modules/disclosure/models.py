@@ -105,6 +105,7 @@ class CompanySummary(Base):
 
     # Tab 2 — 재무·감사 풀이
     financial_highlights = Column(Text)  # JSON: [{"item","value","yoy","explain"}, ...]
+    audit_opinion = Column(String)  # 적정의견 | 한정의견 | 부적정의견 | 의견거절 | 확인불가
     kam = Column(Text)        # JSON: [{"title","summary","plain"}, ...]
     emphasis = Column(Text)   # JSON: 감사보고서 강조사항, 동일 구조
 
