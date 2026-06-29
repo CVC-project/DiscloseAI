@@ -3175,7 +3175,7 @@ function App() {
           {/* iframe + AI chat sidebar */}
           <div style={{flex:'1 1 0%', display:'flex', overflow:'hidden'}}>
             <iframe
-              src={`../dossier/firm.html?ticker=${corpOverlayTicker}&v=20260629-ft2`}
+              src={`../dossier/firm.html?ticker=${corpOverlayTicker}&v=20260629-rp`}
               style={{flex:'1 1 0%', border:'none', background:'#020408'}}
               title={`firm-${corpOverlayTicker}`}
               onLoad={(e) => injectV2Theme(e.target)}

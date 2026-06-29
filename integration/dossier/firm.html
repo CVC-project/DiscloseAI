@@ -506,6 +506,7 @@
       <ul class="module-list" id="moduleList"></ul>
       <div class="action-row">
         <button class="primary-btn" type="button" id="customScoreBtn">나만의 투자기준 만들기</button>
+        <button class="ghost-btn" type="button" id="rpBtn" style="border-color:rgba(167,139,250,0.5);color:#a78bfa">📚 회사 참고서</button>
         <button class="ghost-btn" type="button" id="ftBtn" style="border-color:rgba(94,234,212,0.45);color:#5eead4">📄 사업보고서 본문</button>
         <a class="ghost-btn" id="dartReportBtn" target="_blank" rel="noopener" style="display:none;text-decoration:none;">최근 재무제표</a>
       </div>
@@ -1362,6 +1363,288 @@ __bootstrapFirm();
     metaEl = document.getElementById('ftMeta');
     var closeBtn = document.getElementById('ftClose');
     var openBtn = document.getElementById('ftBtn');
+    if (!overlayEl || !openBtn) return;
+    closeBtn.addEventListener('click', hide);
+    overlayEl.addEventListener('click', function(e) { if (e.target === overlayEl) hide(); });
+    openBtn.addEventListener('click', function() { show(); loadData(); });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
+
+<style>
+.rp-overlay {
+  position: fixed; inset: 0; z-index: 99400;
+  background: rgba(2,6,23,0.92); backdrop-filter: blur(6px);
+  display: none; align-items: center; justify-content: center; padding: 24px;
+}
+.rp-overlay.open { display: flex; }
+.rp-modal {
+  background: #0b1224; border: 1px solid rgba(167,139,250,0.3);
+  border-radius: 12px; width: 100%; max-width: 1080px;
+  max-height: 94vh; display: flex; flex-direction: column;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.6); color: #e2e8f0;
+}
+.rp-header {
+  padding: 16px 22px 14px;
+  border-bottom: 1px solid rgba(167,139,250,0.18);
+  display: flex; align-items: center; gap: 12px; flex-shrink: 0;
+}
+.rp-title { font-size: 16px; font-weight: 700; color: #f1f5f9; }
+.rp-meta { font-size: 12px; color: #94a3b8; flex: 1; }
+.rp-close {
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+  color: #e2e8f0; width: 30px; height: 30px; border-radius: 50%;
+  cursor: pointer; font-size: 14px; flex-shrink: 0;
+}
+.rp-close:hover { background: rgba(248,113,113,0.18); border-color: rgba(248,113,113,0.5); color: #f87171; }
+.rp-body {
+  overflow-y: auto; padding: 22px 28px; font-size: 13.5px;
+  line-height: 1.7; color: #cbd5e1; min-height: 0;
+}
+.rp-section { margin: 0 0 24px; }
+.rp-section h3 {
+  margin: 0 0 12px; font-size: 14px; color: #a78bfa;
+  font-weight: 600; letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+.rp-notes {
+  background: rgba(167,139,250,0.06);
+  border: 1px solid rgba(167,139,250,0.15);
+  border-radius: 10px; padding: 16px 18px;
+  font-size: 14px; line-height: 1.85; color: #e2e8f0;
+}
+.rp-fin-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+.rp-fin-card {
+  background: rgba(8,12,28,0.55);
+  border: 1px solid rgba(94,234,212,0.15);
+  border-radius: 10px; padding: 13px 15px;
+}
+.rp-fin-item {
+  color: #94a3b8; font-size: 12px; font-weight: 600;
+  letter-spacing: 0.2px; margin-bottom: 4px;
+}
+.rp-fin-value {
+  color: #f1f5f9; font-size: 19px; font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.rp-fin-yoy { color: #5eead4; font-size: 12.5px; font-weight: 600; margin-left: 6px; }
+.rp-fin-yoy.neg { color: #f87171; }
+.rp-fin-explain { color: #cbd5e1; font-size: 12px; margin-top: 6px; line-height: 1.5; }
+.rp-seg-list {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 10px;
+}
+.rp-seg {
+  background: rgba(8,12,28,0.45);
+  border: 1px solid rgba(94,234,212,0.12);
+  border-radius: 8px; padding: 10px 13px;
+}
+.rp-seg-name {
+  font-weight: 700; color: #5eead4; font-size: 13.5px;
+  display: flex; align-items: baseline; gap: 8px;
+}
+.rp-seg-share {
+  color: #94a3b8; font-size: 11.5px; font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.rp-seg-desc { color: #cbd5e1; font-size: 12px; margin-top: 4px; line-height: 1.5; }
+.rp-chips {
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.rp-chip {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 999px; padding: 4px 11px;
+  font-size: 12px; color: #cbd5e1;
+}
+.rp-empty {
+  color: #64748b; font-size: 12.5px; font-style: italic;
+  padding: 10px 0;
+}
+.rp-disclaimer {
+  margin-top: 18px; padding: 11px 14px;
+  background: rgba(248,113,113,0.05);
+  border: 1px solid rgba(248,113,113,0.15);
+  border-radius: 8px;
+  color: #94a3b8; font-size: 11.5px; line-height: 1.6;
+}
+.rp-error { color: #f87171; padding: 24px; font-size: 13px; line-height: 1.7; }
+.rp-error code {
+  background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 3px;
+  color: #fbbf24; font-family: 'Courier New', monospace; font-size: 11.5px;
+}
+.rp-hint { padding: 24px; color: #94a3b8; font-size: 13px; text-align: center; }
+</style>
+<div class="rp-overlay" id="rpOverlay">
+  <div class="rp-modal">
+    <div class="rp-header">
+      <div class="rp-title">📚 회사 참고서</div>
+      <div class="rp-meta" id="rpMeta">로딩…</div>
+      <button class="rp-close" type="button" id="rpClose">✕</button>
+    </div>
+    <div class="rp-body" id="rpBody"></div>
+  </div>
+</div>
+<script>
+/* 회사 참고서 패널 (모듈 ③ 2c).
+   - DATA._hdr.corp_code → fetch index.json → rcept_no
+   - fetch summary.json → 재무 카드·사업부문·요약 단락 렌더
+   - kam·emphasis는 감사보고서 수집 후속에서 채움 (현재 비어있어 placeholder) */
+(function() {
+  var overlayEl, bodyEl, metaEl;
+
+  function escHtml(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  function show() { overlayEl.classList.add('open'); }
+  function hide() { overlayEl.classList.remove('open'); }
+
+  function renderNotes(notes) {
+    if (!notes) return '';
+    return '<div class="rp-section">' +
+           '<h3>한눈에 보기</h3>' +
+           '<div class="rp-notes">' + escHtml(notes) + '</div>' +
+           '</div>';
+  }
+  function renderFinancials(list) {
+    if (!list || !list.length) {
+      return '<div class="rp-section"><h3>재무 핵심</h3>' +
+             '<div class="rp-empty">재무 정보가 아직 추출되지 않았어요.</div></div>';
+    }
+    var cards = list.map(function(f) {
+      var yoyCls = (f.yoy && /^[-]/.test(String(f.yoy))) ? 'rp-fin-yoy neg' : 'rp-fin-yoy';
+      var yoyHtml = f.yoy ? ' <span class="' + yoyCls + '">' + escHtml(f.yoy) + '</span>' : '';
+      return '<div class="rp-fin-card">' +
+             '<div class="rp-fin-item">' + escHtml(f.item) + '</div>' +
+             '<div class="rp-fin-value">' + escHtml(f.value) + yoyHtml + '</div>' +
+             (f.explain ? '<div class="rp-fin-explain">' + escHtml(f.explain) + '</div>' : '') +
+             '</div>';
+    }).join('');
+    return '<div class="rp-section"><h3>재무 핵심</h3>' +
+           '<div class="rp-fin-grid">' + cards + '</div></div>';
+  }
+  function renderSegments(list) {
+    if (!list || !list.length) return '';
+    var cards = list.map(function(s) {
+      var shareTxt = (s.revenue_share != null) ?
+        '· 매출비중 ' + Math.round(s.revenue_share * 100) + '%' : '';
+      return '<div class="rp-seg">' +
+             '<div class="rp-seg-name">' + escHtml(s.name || '') +
+             '<span class="rp-seg-share">' + shareTxt + '</span></div>' +
+             (s.desc ? '<div class="rp-seg-desc">' + escHtml(s.desc) + '</div>' : '') +
+             '</div>';
+    }).join('');
+    return '<div class="rp-section"><h3>사업 부문</h3>' +
+           '<div class="rp-seg-list">' + cards + '</div></div>';
+  }
+  function renderProducts(list) {
+    if (!list || !list.length) return '';
+    var chips = list.map(function(p) {
+      return '<span class="rp-chip">' + escHtml(p) + '</span>';
+    }).join('');
+    return '<div class="rp-section"><h3>주요 제품·서비스</h3>' +
+           '<div class="rp-chips">' + chips + '</div></div>';
+  }
+  function renderAudit(kam, emphasis) {
+    var hasContent = (kam && kam.length) || (emphasis && emphasis.length);
+    if (hasContent) {
+      // 향후 감사보고서 수집 PR에서 카드 렌더로 교체. 지금은 placeholder 유지.
+      return '<div class="rp-section"><h3>감사보고서 풀이</h3>' +
+             '<div class="rp-empty">감사보고서 데이터 표시 — TODO</div></div>';
+    }
+    return '<div class="rp-section"><h3>감사보고서 풀이</h3>' +
+           '<div class="rp-empty">감사보고서(KAM·강조사항) 수집은 다음 단계에 추가됩니다.</div></div>';
+  }
+  function renderGlossary(list) {
+    if (!list || !list.length) return '';
+    var chips = list.map(function(t) {
+      return '<span class="rp-chip">' + escHtml(t) + '</span>';
+    }).join('');
+    return '<div class="rp-section"><h3>이 보고서에 등장한 공시 용어</h3>' +
+           '<div class="rp-chips">' + chips + '</div></div>';
+  }
+  function renderDisclaimer(meta) {
+    var src = '';
+    if (meta && meta.rcept_dt) {
+      src = '출처: ' + escHtml(meta.rcept_dt.slice(0, 4)) + '년 사업보고서';
+      if (meta.model_used) src += ' · 생성 모델: ' + escHtml(meta.model_used);
+    }
+    return '<div class="rp-disclaimer">' +
+           '⚠ 본 페이지는 과거 공시·재무정보를 AI가 정리한 <b>참고 정보</b>입니다. ' +
+           '투자 조언이 아니며, 수치·해석에 오차가 있을 수 있어요.' +
+           (src ? '<br>' + src : '') +
+           '</div>';
+  }
+
+  function loadData() {
+    var corpCodeEl = document.getElementById('fCorpCode');
+    var corpCode = (corpCodeEl && corpCodeEl.textContent.trim()) || '';
+    if (!corpCode) {
+      bodyEl.innerHTML =
+        '<div class="rp-error">corp_code를 찾을 수 없습니다.</div>';
+      return;
+    }
+    bodyEl.innerHTML = '<div class="rp-hint">참고서를 불러오는 중…</div>';
+    metaEl.textContent = '로딩…';
+
+    var indexUrl = '../../modules/disclosure/data/fulltext/index.json';
+    var entry = null;
+    fetch(indexUrl)
+      .then(function(r) {
+        if (!r.ok) throw new Error('index 없음 (status ' + r.status + ')');
+        return r.json();
+      })
+      .then(function(idx) {
+        entry = idx[corpCode];
+        if (!entry) {
+          throw new Error('이 회사의 참고서는 아직 만들어지지 않았어요.\n(corp_code: ' + corpCode + ')');
+        }
+        return fetch('../../modules/disclosure/data/fulltext/' + corpCode + '/' + entry.rcept_no + '/summary.json');
+      })
+      .then(function(r) {
+        if (!r.ok) throw new Error('summary.json fetch 실패 (status ' + r.status + ')');
+        return r.json();
+      })
+      .then(function(data) {
+        metaEl.textContent =
+          (data.corp_name || entry.corp_name) + ' · ' + entry.report_nm;
+        bodyEl.innerHTML =
+          renderNotes(data.investor_notes) +
+          renderFinancials(data.financial_highlights) +
+          renderAudit(data.kam, data.emphasis) +
+          renderSegments(data.segments) +
+          renderProducts(data.products) +
+          renderGlossary(data.glossary_terms) +
+          renderDisclaimer(data);
+      })
+      .catch(function(e) {
+        metaEl.textContent = '';
+        bodyEl.innerHTML =
+          '<div class="rp-error">⚠ ' + escHtml(e.message) +
+          '<br><br>로컬에서 수집·파싱·요약을 먼저 실행해주세요:' +
+          '<br><code>python -m modules.disclosure.fulltext_collector</code>' +
+          '<br><code>python -m modules.disclosure.fulltext_parser</code>' +
+          '<br><code>python -m modules.disclosure.summary_extractor</code></div>';
+      });
+  }
+
+  function init() {
+    overlayEl = document.getElementById('rpOverlay');
+    bodyEl = document.getElementById('rpBody');
+    metaEl = document.getElementById('rpMeta');
+    var closeBtn = document.getElementById('rpClose');
+    var openBtn = document.getElementById('rpBtn');
     if (!overlayEl || !openBtn) return;
     closeBtn.addEventListener('click', hide);
     overlayEl.addEventListener('click', function(e) { if (e.target === overlayEl) hide(); });

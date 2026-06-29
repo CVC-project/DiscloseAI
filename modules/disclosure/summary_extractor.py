@@ -327,8 +327,42 @@ def extract_for_company(corp_code: str, rcept_no: str) -> CompanySummary:
     print(f"  financials({len(fins)})")
     print(f"  glossary_terms({len(terms)})")
     print(f"\n[investor_notes]\n{notes}")
+
+    # UI(firm.html 참고서 패널)가 fetch하는 JSON 파일도 옆에 둠 — DB는 integration에서
+    # 직접 못 읽음(데이터 모듈 간 import 금지). parsed.json 폴더 안에 summary.json.
+    export_path = export_json(row, parsed_path.parent)
+    print(f"[OK] {export_path} ({export_path.stat().st_size:,} bytes)")
+
     s.close()
     return row
+
+
+def export_json(row: CompanySummary, dest_dir: Path) -> Path:
+    """CompanySummary 1행 → summary.json (UI가 fetch).
+
+    firm.html의 참고서 패널이 ``modules/disclosure/data/fulltext/<corp>/<rcept>/
+    summary.json``을 fetch 해 재무 카드·요약 단락·용어 목록을 렌더한다.
+    """
+    payload = {
+        "corp_code": row.corp_code,
+        "corp_name": row.corp_name,
+        "rcept_no": row.rcept_no,
+        "rcept_dt": row.rcept_dt,
+        "products": row.get_products(),
+        "segments": row.get_segments(),
+        "financial_highlights": row.get_financial_highlights(),
+        "kam": row.get_kam(),
+        "emphasis": row.get_emphasis(),
+        "glossary_terms": row.get_glossary_terms(),
+        "investor_notes": row.investor_notes or "",
+        "model_used": row.model_used,
+        "source_version": row.source_version,
+        "generated_at": row.generated_at.isoformat() if row.generated_at else None,
+    }
+    dest_dir.mkdir(parents=True, exist_ok=True)
+    out = dest_dir / "summary.json"
+    out.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    return out
 
 
 def main() -> int:
