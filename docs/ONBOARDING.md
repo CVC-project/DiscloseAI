@@ -44,21 +44,21 @@ cp .env.example .env
 
 > DART API 키 발급: https://opendart.fss.or.kr → 회원가입 → 인증키 신청
 
-### Step 4. 자기 브랜치로 이동
+### Step 4. 자기 작업 브랜치 만들기
+
+각자 **자신의 작업 브랜치**에서 작업합니다. 브랜치명은 작업 단위로 자유롭게 정하되, `feat/<작업>`·`fix/<작업>`·`chore/<작업>` 관례를 따릅니다.
 
 ```bash
-# A (재무)
-git checkout feat/financial    # modules/financial/ 에서 작업
+# dev에서 새 작업 브랜치 생성 (예시)
+git checkout dev && git pull
+git checkout -b feat/<작업이름>       # 예: feat/eqs-mscore, feat/relation-graph
 
-# B (공시)
-git checkout feat/disclosure   # modules/disclosure/ 에서 작업
-
-# C (관계)
-git checkout feat/relation     # modules/relation/ 에서 작업
-
-# D (주가)
-git checkout feat/price        # modules/price/ 에서 작업
+# 자기 담당 모듈에서 작업:
+#   A → modules/financial/   B → modules/disclosure/
+#   C → modules/relation/    D → modules/price/
 ```
+
+> 완료된 브랜치는 dev 머지 후 삭제합니다. 상세 흐름: [MERGE_PROCESS.md](MERGE_PROCESS.md)
 
 ### Step 5. Claude Code 실행 + 첫 요청
 

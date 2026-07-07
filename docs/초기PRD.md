@@ -1,5 +1,7 @@
 # DiscloseAI — Product Requirements Document
 
+> ⚠️ **역사 스냅샷 (초기 기획서)**: 아래 폴더 구조·프로토타입(`corporate_universe_v5.html` 등)·스택 서술은 **기획 시점 기준**이며 현행과 다를 수 있음. **지금 실제로 돌아가는 구조는 [docs/ARCHITECTURE.md](ARCHITECTURE.md)를 정본으로 참조.**
+>
 > 대회: 2026 AI Rookie (과기부 주최) | 접수 마감: 5월 8일(금) 17시
 > 팀: 4인 (전원 CPA)
 

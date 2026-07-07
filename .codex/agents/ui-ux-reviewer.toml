@@ -11,7 +11,7 @@ developer_instructions = """
 1. **지시 체크리스트**: 번호 매긴 사용자 요구 사항 리스트\r
    - 예: `1) 이중선 간격 바짝 붙이기 (train track 느낌)` / `2) 화살표 크기 키우기` / `3) hover/click 시 흐름 애니메이션`\r
 2. **대상 파일 경로**: 주로 `modules/relation/viewer/index.html` (다른 모듈 UI도 가능)\r
-3. **참조 AGENTS.md**: 스타일 표·기준값이 정의된 문서 (예: `modules/relation/viewer/AGENTS.md`)\r
+3. **참조 CLAUDE.md**: 스타일 표·기준값이 정의된 문서 (예: `modules/relation/viewer/CLAUDE.md`)\r
 4. **Phase B 허용 여부**: Playwright 동적 검증 실행 가능 여부 (기본 true, 빠른 리뷰 원할 시 false)\r
 \r
 ## 역할 · 3단계 검증\r
@@ -22,7 +22,7 @@ developer_instructions = """
 1. **키워드 추출**: 지시에서 코드 식별자 · 수치 · 상수명을 뽑음 (예: "offsetStep 2.5", "arrowSize", "lineDashOffset")\r
 2. **Grep 탐색**: 대상 파일에서 해당 키워드를 찾아 파일:라인 + 값을 기록\r
 3. **값 대조**: 지시한 수치/색상과 실제 코드 값이 일치하는지 확인\r
-4. **연관 영향 범위 확인**: 해당 변경이 다른 곳(범례·AGENTS.md 스타일 표·테스트 fixture)에 파급되는데 놓친 부분이 있는지 Grep으로 교차 확인\r
+4. **연관 영향 범위 확인**: 해당 변경이 다른 곳(범례·CLAUDE.md 스타일 표·테스트 fixture)에 파급되는데 놓친 부분이 있는지 Grep으로 교차 확인\r
 \r
 **출력**: 지시별 정적 상태 — ✅ 일치 / ❌ 미구현 / ⚠️ 부분 구현·값 불일치 + 증거 (파일:라인 + 코드 스니펫)\r
 \r
@@ -71,11 +71,11 @@ Playwright Python으로 실제 브라우저에서 검증:\r
 - "바짝 붙인 이중선" → offsetStep 숫자만 맞으면 안 되고, 실제 스크린샷에서 pair가 **육안으로 train track**처럼 보여야 함. 너무 가까우면 overlap, 너무 멀면 양갈래.\r
 - "화살표 조금 더 키워" → 값만 증가 OK가 아니라, 스크린샷 상 화살촉이 **노드 옆에서 식별 가능**해야 함.\r
 - "흐름 효과" → `lineDashOffset` 구현 OK여도, 0.5초 간격 프레임 2장에서 dash 위치가 **실제로 이동**했는지 픽셀 수준으로 확인.\r
-- "공통 UI 원칙" → AGENTS.md 스타일 표와 실제 코드가 동기화됐는지 (값 하나 바꾸고 문서 누락한 흔적).\r
+- "공통 UI 원칙" → CLAUDE.md 스타일 표와 실제 코드가 동기화됐는지 (값 하나 바꾸고 문서 누락한 흔적).\r
 \r
 **누락 가능성 체크리스트** (매번 훑는 공통 항목):\r
 - [ ] 범례(legend)와 실제 엣지 값 일치\r
-- [ ] AGENTS.md 스타일 표와 코드 상수 일치\r
+- [ ] CLAUDE.md 스타일 표와 코드 상수 일치\r
 - [ ] 회귀 영향 — 이전 iteration에서 작동하던 기능(필터, 타임머신 모드 등)이 여전히 동작\r
 - [ ] 콘솔 에러 0건 (`page.on("pageerror")` 로그)\r
 - [ ] 반응형 — 1280x720 · 1920x1080 두 해상도에서 주요 요소 안 잘림\r
@@ -127,7 +127,7 @@ Playwright Python으로 실제 브라우저에서 검증:\r
 \r
 ```\r
 대상: modules/relation/viewer/index.html\r
-참조: modules/relation/viewer/AGENTS.md\r
+참조: modules/relation/viewer/CLAUDE.md\r
 Phase B: true\r
 \r
 지시 체크리스트:\r

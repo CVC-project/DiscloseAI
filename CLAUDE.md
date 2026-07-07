@@ -73,8 +73,8 @@ PRD 상세: docs/초기PRD.md
 
 ## 브랜치 전략
 - main: 배포용 (직접 push 금지)
-- dev: 개발 통합 (매주 금요일 합침)
-- feat/financial, feat/disclosure, feat/relation, feat/price: 각자 작업
+- dev: 개발 통합
+- 작업 브랜치: 각자 **자신의 작업 브랜치**에서 작업 → dev로 PR. 브랜치명은 작업 단위로 자유롭게(예: `feat/<작업>`·`fix/<작업>`·`chore/<작업>`). 완료된 브랜치는 dev 머지 후 삭제.
 
 ## 커밋 메시지
 - feat: 새 기능 | fix: 버그 수정 | docs: 문서 | test: 테스트
