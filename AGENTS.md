@@ -1,21 +1,26 @@
 # DiscloseAI — Codex 프로젝트 규칙
 
 ## 첫 세션 시 필수 읽기
-이 프로젝트를 처음 접하면 아래 파일을 반드시 읽어 전체 구조를 파악하세요:
-1. docs/PRD.md — 제품 요구사항 전문
-2. docs/ARCHITECTURE.md — 시스템 구조, 데이터 흐름, 기술 용어
-3. shared/models.py — DB 스키마 (테이블 정의)
+이 프로젝트를 처음 접하면 아래 순서로 읽어 전체 구조를 파악하세요:
+1. docs/ARCHITECTURE.md — 지금 실제로 돌아가는 구조·데이터 흐름·DB 토폴로지 (SSOT)
+2. shared/models.py — DB 스키마 (테이블 정의)
+3. docs/초기PRD.md — 제품 비전·요구사항 전문 (전체 맥락이 필요할 때)
 
 ## 프로젝트 개요
 한국 상장사 공시·재무제표를 AI로 분석하여 개인투자자의 금융 문해력을 향상시키는 플랫폼.
-PRD 상세: docs/PRD.md
+PRD 상세: docs/초기PRD.md
 
 ## 기술 스택
-- Backend: Python 3.11, FastAPI, Celery, Redis
-- Frontend: Next.js, Three.js(WebGL), D3.js
-- DB: PostgreSQL (Supabase)
-- ML: CatBoost, scikit-learn
-- 데이터: DART OpenAPI, yfinance, 공정위
+현재 (구현됨):
+- Python 3.11 — 데이터 수집·계산 (DART OpenAPI, yfinance, 공정위, 한국은행 ECOS)
+- 모듈별 로컬 SQLite — 데이터 정본
+- 정적 HTML + Canvas/Three.js(WebGL)·D3.js — viewer·통합 대시보드
+- ML: CatBoost, scikit-learn — price 라벨링·EQS
+
+계획 (미구현 — 향후 api/ 구축·운영 이관 시):
+- Backend: FastAPI, Celery, Redis (docs/AI_DIRECTION_PLAN.md)
+- Frontend: Next.js (SPA 전환 시)
+- DB: PostgreSQL (Supabase) — 현재 shared/models.py는 미사용 타깃 스키마
 
 ## 코딩 컨벤션
 - Python: Black 포매터 사용, type hint 권장
@@ -25,7 +30,7 @@ PRD 상세: docs/PRD.md
 
 ## 폴더 규칙
 공용 폴더 (프로젝트 리드만 수정):
-- .Codex/: Skills, Agents, Settings
+- .codex/ (+ .agents/skills/): Skills, Agents, Settings
 - shared/: 환경변수(config.py, 활성) + 미래 운영 DB 스키마(models.py, 현재 미사용)
 - docs/: PRD, 아키텍처, 온보딩 가이드
 

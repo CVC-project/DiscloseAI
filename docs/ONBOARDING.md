@@ -24,10 +24,10 @@
 cd ~/Desktop
 
 # 2. 프로젝트 다운로드
-git clone https://github.com/팀계정/disclose-ai.git
+git clone https://github.com/CVC-project/DiscloseAI.git
 
 # 3. 프로젝트 폴더로 이동
-cd disclose-ai
+cd DiscloseAI
 ```
 
 ### Step 3. 환경변수 설정

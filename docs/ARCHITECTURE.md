@@ -1,7 +1,7 @@
 # DiscloseAI 시스템 아키텍처
 
 > 이 문서는 팀원이 프로젝트 전체 구조를 이해하기 위한 가이드이자, **데이터·DB 토폴로지의 단일 출처(single source of truth)**입니다.
-> PRD(docs/PRD.md)가 "비전"이라면, 이 문서는 "지금 실제로 돌아가는 구조"입니다.
+> PRD(docs/초기PRD.md)가 "비전"이라면, 이 문서는 "지금 실제로 돌아가는 구조"입니다.
 
 ---
 
@@ -46,7 +46,7 @@
   | `eqs_data.json` | history·percentile·시총 메타 | EQS 배치 | `modules/financial/data/` | ⚠️ `extract_data.py`가 읽음 — 이전 시 읽기 경로([:40](../integration/v1/extract_data.py#L40)) 동기 수정 필수 |
 
   - 실행: `dashboard.py` `_DASHBOARD_DIR`·`industry_groups.py` `_CACHE_DIR` 출력 경로 변경. **이전 전까지 `eqs_data.json`·`_sector_stats.json`은 현 위치 유지(삭제 금지)**.
-- **보존(진짜 목업)**: `corporate_universe_v5.html`(relation 프로토타입 원본·fork 소스)·`corporate_universe_v6_galaxies.html`(v1 dashboard 원형)은 docs/prototype에 남아도 무방.
+- **보존(진짜 목업)**: `corporate_universe_v6_galaxies.html`(v1 dashboard 원형)은 docs/prototype에 남아도 무방. (`corporate_universe_v5.html`은 #28 정리에서 삭제 — relation `viewer/index.html`이 이미 fork 완료. 모듈 문서의 v5 라인 참조는 fork 시점 이력으로만 유효.)
 
 ### 4) price 타임머신 데이터가 코드에 하드코딩
 - **현상**: 타임머신 시나리오 12개가 DB가 아니라 `modules/price/quiz_data.py`의 **`QUIZ_LIST` Python 상수**에 하드코딩(손으로 엄선한 과거 사건). integration은 이를 JSON으로 추출해 **inline 렌더**(iframe 아님). 주가·라벨 자체는 `price_local`(DB)에 정상.
