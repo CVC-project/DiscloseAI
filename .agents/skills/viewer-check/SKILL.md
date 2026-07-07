@@ -1,0 +1,90 @@
+---
+name: viewer-check
+description: viewer(프론트엔드 HTML) 작업에 대해 최근 UI/UX 지시의 구현 완전성과 실제 브라우저 동작을 검증. ui-ux-reviewer agent 오케스트레이션 + 체크리스트 추출.
+auto-invocable: false
+---
+
+# /viewer-check — UI/UX 구현 검증
+
+viewer HTML 수정 후 "지시한 것이 전부 반영·동작하는가"를 **agent 호출**로 자기검증합니다.
+
+## 언제 쓰나
+
+- viewer/index.html (또는 다른 모듈의 프론트엔드)을 수정하고 **브라우저 확인 전에** 누락·미동작 여부를 Codex 쪽에서 먼저 잡고 싶을 때
+- 사용자가 같은 UI에 대해 **2회 이상 재지적**한 상황 (패턴: "아직 ~이 안 고쳐졌다")
+- 여러 iteration 후 "전부 반영됐는지 한 번에 감사"가 필요할 때
+
+## 절차 (메인 세션이 수행)
+
+### 1. 체크리스트 추출
+
+최근 user message에서 UI/UX 관련 지시를 번호 매겨 추출:
+- 수치·색상·동작 요구를 명확한 한 줄로 정리
+- 모호한 표현("바짝 붙여", "거의 안 보여")은 그대로 보존하되 정량 해석을 뒤에 `(→ offsetStep ≤ 3 추정)` 식으로 주석
+- 최근 1~3개 user message를 기본 범위로, 필요 시 사용자에게 "어느 시점 이후 지시를 검증할까요?" 확인
+
+### 2. 대상 파일·참조 결정
+
+- **기본 대상**: `modules/relation/viewer/index.html`
+- **기본 참조**: `modules/relation/viewer/AGENTS.md` (스타일 표)
+- 다른 모듈 UI 검증 시 위 경로만 교체
+
+### 3. Agent 호출
+
+`Agent` 도구로 `ui-ux-reviewer` 호출:
+
+```
+subagent_type: ui-ux-reviewer
+description: viewer UI 지시 N건 검증
+prompt:
+  대상: modules/relation/viewer/index.html
+  참조: modules/relation/viewer/AGENTS.md
+  Phase B: true   (동적 검증 허용)
+
+  지시 체크리스트:
+  1. {지시 1 — 그대로 복사}
+  2. {지시 2}
+  3. ...
+
+  포커스: {최근 커밋 hash or "현 상태 전체"}
+```
+
+중요:
+- **prompt는 self-contained** — agent는 이전 대화를 못 봄. 지시 원문을 모두 포함시킬 것.
+- **Phase B 허용 여부**는 기본 true. 빠른 정적 검토만 필요 시 false로 호출.
+- agent는 새 세션이라 Playwright 환경을 모름 — 서버 포트·viewport·스크린샷 디렉터리 규약은 agent 파일에 이미 명시됨.
+
+### 4. 리포트 수용 및 판단
+
+agent가 반환한 표 형식 리포트를 사용자에게 요약 출력:
+- **통과 N/M건** 한 줄
+- **누락·위험** 항목 복붙 (증거 경로 포함)
+- **다음 수정 제안** 복붙 — 단, **자동 수정하지 말 것**. 사용자가 "수정 진행"이라고 명확히 말하기 전까지 대기.
+
+### 5. 스크린샷 경로 안내
+
+`modules/relation/viewer/screenshots/` 아래 파일은 gitignore됨.
+사용자가 "스크린샷 보여줘"라고 하면 Read 도구로 이미지 출력.
+
+## 체크리스트 추출 예시
+
+**원문** (user message):
+> "이중선 간격이 너무 커. 틈이 거의 없이 바짝 붙인 이중선 디자인을 원해. 그리고 지금 선이 겹쳐보이는 (수정이 안된) 관계들이 있는데 제대로 반영해줘"
+> "화살표는 지금 거의 안 보이는 수준이라 조금 더 키워도 될 것 같아. 그리고 .. 클릭을 하거나 마우스를 올려놨을 때 화살표 방향으로 선을 따라 뭔가가 흐르는 그런 효과를 넣어줘"
+
+**추출**:
+1. 이중선 간격을 train track 느낌으로 좁힘 (→ offsetStep 2~3px, gap 2~3px 추정)
+2. 아직 겹쳐 보이는 엣지 pair 없도록 parallel 그룹핑 재확인
+3. 화살표를 눈에 띄게 확대 (→ 최소 8px 이상, hover 시 더 크게)
+4. hover / click 시 source→target 방향으로 흐르는 애니메이션 (lineDashOffset 기반 예상)
+
+## 승격 후 호출 편의
+
+`.Codex/skills/viewer-check/SKILL.md`는 프로젝트 루트에서 `/viewer-check` 로 호출 가능.
+인자로 "최근 2개 메시지만" 같은 범위 지정도 허용 — 그 경우 체크리스트 추출 단계에서 범위 조정.
+
+## 제약
+
+- **메인 세션은 agent 리포트를 그대로 복붙하지 말 것** — 요약해서 사용자가 스캔 가능한 형태로 제공
+- **agent의 "다음 수정 제안"은 자동 실행 금지** — 사용자 승인 후 메인 세션이 Edit 수행
+- **agent가 Phase B 실패 시** (Playwright 미설치·서버 기동 실패) → Phase A 결과만 리포트. 사용자에게 Phase B 복구 필요 여부 질의
