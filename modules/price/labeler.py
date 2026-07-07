@@ -12,7 +12,7 @@ from modules.price.models import PriceLocal
 
 logger = logging.getLogger(__name__)
 
-# 라벨링 임계값 (CLAUDE.local.md 기준)
+# 라벨링 임계값 (CLAUDE.md 기준)
 POSITIVE_THRESHOLD = 2.0  # +2% 이상 → 수혜
 NEGATIVE_THRESHOLD = -2.0  # -2% 이하 → 악재
 

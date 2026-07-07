@@ -45,7 +45,7 @@ ALIASES = {
 INSTRUMENT_BLACKLIST: set[str] = set()
 
 # 금융업 (KRX 업종코드 064~067) — fnlttSinglAcntAll endpoint가 옛 데이터 미제공.
-# CLAUDE.local.md 규칙대로 M2·M3 자동 제외 + 별도 BIS 모듈 도입 시까지 EQS 보류.
+# CLAUDE.md 규칙대로 M2·M3 자동 제외 + 별도 BIS 모듈 도입 시까지 EQS 보류.
 # KOSPI 50 명단 기준 자동 분류용 — KRX 정식 분류 연동 전까지 하드코딩.
 _FINANCIAL_INDUSTRIES = {
     "KB금융": "064",  # 은행지주

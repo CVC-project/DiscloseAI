@@ -178,8 +178,7 @@
 
 ```
 modules/relation/
-├── CLAUDE.md                        ← 루트(~40줄): 담당 범위, 데이터 흐름, 진입점, 외부 의존
-├── CLAUDE.local.md                  ← 개인 설정 (.gitignore, 기존)
+├── CLAUDE.md                        ← 모듈 도메인 규칙(팀 공유): 담당 범위, 데이터 흐름, 진입점, 외부 의존
 ├── PROGRESS.md                      ← /check가 기록 (기존)
 ├── __init__.py
 ├── __main__.py                      ← CLI 진입점: python -m modules.relation <cmd>
@@ -316,7 +315,7 @@ python -m modules.relation audit                   # 무결성 체크 (도메인
 | 이동 | `modules/relation/db.py` → `modules/relation/storage/db.py` | 책임 분리 |
 | 수정 | `requirements.txt` | `requests>=2.31`, `networkx>=3.2`, `pandas>=2.1`, `beautifulsoup4>=4.12`(주석 HTML 파싱용), `lxml>=5.1` 추가 |
 | 수정 | `.env.example` + `shared/config.py` | `FTC_API_KEY` 추가 — 리더 권한 |
-| 수정 | `modules/relation/CLAUDE.local.md` | 기존 유지, 하위 참조 추가 |
+| 수정 | `modules/relation/CLAUDE.md` | 모듈 도메인 규칙(팀 공유). 서브폴더 CLAUDE.md로 Progressive Disclosure |
 
 ### 건드리지 않음
 - `shared/models.py` (MVP 검증 후 별도 PR로 동기화)
