@@ -436,11 +436,7 @@ def export_for_frontend(
     """
     import json
 
-    out_dir = output_dir or os.path.join(
-        os.path.dirname(os.path.dirname(os.path.dirname(__file__))),
-        "docs",
-        "prototype",
-    )
+    out_dir = output_dir or os.path.join(os.path.dirname(__file__), "data")
     os.makedirs(out_dir, exist_ok=True)
 
     percentiles = _compute_industry_percentiles(records)
@@ -486,9 +482,7 @@ def export_for_frontend(
                 "latest_year": latest_year,
                 "industry_code": r.industry_code,
                 "history": _history_block(r.panel) if r.panel else None,
-                "percentile": percentiles.get(
-                    r.corp.corp_code if r.corp else "", None
-                ),
+                "percentile": percentiles.get(r.corp.corp_code if r.corp else "", None),
             }
         )
 

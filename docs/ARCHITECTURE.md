@@ -25,27 +25,17 @@
 - **의도적 보류**: ③ firm 상세도 데이터 주도가 됐으나 **iframe은 유지** — CSS·JS 격리벽(제거 시 firm 테마 CSS와 v2 `styles.css` 충돌, 시각 변형 위험). ④ `injectV2Theme()` 잔존(iframe 격리 전제).
 - **후속(범위 외)**: `docs/prototype/firm_*.html` 48개는 현재 **앱이 미참조** → dev 머지·검증 후 **삭제 예정**. financial 재batch 시 HTML 재생성을 막으려면 `dashboard.py`에 JSON 출력(`write_firm_json`) 추가 필요(A 담당과 협의). `docs/prototype/eqs_data.json`은 보존(`extract_data.py`가 history·percentile용으로 읽음).
 
-### 3) financial 생성물·데이터·캐시가 docs/에 위치 (위치 부채 — 앞으로의 규칙)
-- **현상**: financial 모듈의 **출력 경로가 `docs/`(문서 폴더)에 박혀 있어**, 빌드 산출물·런타임 데이터·캐시가 문서 폴더로 쏟아진다:
-  - [dashboard.py](../modules/financial/dashboard.py) `_DASHBOARD_DIR` → `docs/prototype/financial_dashboard.html`·`kospi50_ranking.html` (+과거 `firm_*.html` 48개)
-  - [industry_groups.py](../modules/financial/industry_groups.py) `_CACHE_DIR` → `docs/prototype/_sector_stats.json` (업종 통계 캐시)
-  - EQS 배치 → `docs/prototype/eqs_data.json` (history·percentile·시총 메타; `extract_data.py`가 읽음)
-- **왜 문제**: `docs/`는 **문서·디자인 목업 전용**(§2)인데 소유·생명주기가 다른 코드 산출물이 섞여 "문서 폴더 = 덤프장"이 됨.
-- **✅ 앞으로의 규칙 (신규 작업부터 적용)**:
-  - financial **생성물(HTML)·데이터(JSON)·캐시**는 `docs/`가 아니라 **`modules/financial/` 아래**(데이터·캐시 → `modules/financial/data/`)에 둔다.
-  - `docs/`에는 **PRD·아키텍처·온보딩·순수 디자인 목업만**. 코드가 생성하는 산출물 금지.
+### 3) financial 생성물·데이터·캐시 위치 부채 (✅ 해결, 2026-07)
+- **과거 현상**: financial 모듈의 출력 경로(`_DASHBOARD_DIR`·`_CACHE_DIR`·EQS 배치)가 `docs/prototype/`에 박혀 빌드 산출물·런타임 데이터·캐시가 문서 폴더로 쏟아졌다.
+- **왜 문제였나**: `docs/`는 **문서·디자인 목업 전용**(§2)인데 소유·생명주기가 다른 코드 산출물이 섞여 "문서 폴더 = 덤프장"이 됨.
+- **✅ 확정 규칙**:
+  - financial **생성물(HTML)·데이터(JSON)·캐시**는 `docs/`가 아니라 **`modules/financial/data/`** 아래. `docs/`에는 **문서·순수 디자인 목업만**.
   - 표현(HTML)은 데이터 생산자가 아니라 **서빙 계층(integration)**이 소유 (이슈 #2 firm 사례).
-- **이미 이전됨**: firm 상세 → `integration/dossier/`(표현)·`integration/dossier/data/`(데이터). (이슈 #2)
-- **남은 이전 목록 (범위 외, A 담당과 협의)**: 아래 모두 현재 `docs/prototype/`에 있으나 financial 소유 → `modules/financial/` 아래로 이전 대상.
-
-  | 파일 | 성격 | 생성 출처 | 이전 위치 | integration 의존 |
-  |---|---|---|---|---|
-  | `financial_dashboard.html` | 단일 기업 EQS 대시보드(삼성 샘플, 데이터 인라인) | [dashboard.py](../modules/financial/dashboard.py) `build_dashboard`(`_DASHBOARD_DIR`) | `modules/financial/` 출력 폴더 | ✗ (디버그·데모용) |
-  | `kospi50_ranking.html` | KOSPI50 EQS 비교/랭킹 대시보드(데이터 인라인) | [dashboard.py](../modules/financial/dashboard.py) 랭킹 빌더 / [scripts/run_eqs_v2.py](../scripts/run_eqs_v2.py) | `modules/financial/` 출력 폴더 | ✗ |
-  | `_sector_stats.json` | 업종 통계 캐시 | [industry_groups.py](../modules/financial/industry_groups.py) `_CACHE_DIR` | `modules/financial/data/` | ✗ |
-  | `eqs_data.json` | history·percentile·시총 메타 | EQS 배치 | `modules/financial/data/` | ⚠️ `extract_data.py`가 읽음 — 이전 시 읽기 경로([:40](../integration/v1/extract_data.py#L40)) 동기 수정 필수 |
-
-  - 실행: `dashboard.py` `_DASHBOARD_DIR`·`industry_groups.py` `_CACHE_DIR` 출력 경로 변경. **이전 전까지 `eqs_data.json`·`_sector_stats.json`은 현 위치 유지(삭제 금지)**.
+- **해결 내역**:
+  - firm 상세 → `integration/dossier/`(표현)·`integration/dossier/data/`(데이터). (이슈 #2)
+  - [dashboard.py](../modules/financial/dashboard.py) `_DASHBOARD_DIR`·[batch.py](../modules/financial/batch.py)·[industry_groups.py](../modules/financial/industry_groups.py) `_CACHE_DIR` 출력 경로를 `modules/financial/data/`로 변경. 생성 HTML(`financial_dashboard.html`·`kospi50_ranking.html`)은 `.gitignore`의 `modules/*/data/*.html`로 커밋 제외(재생성물).
+  - `eqs_data.json` → `modules/financial/data/eqs_data.json` 이동. integration 읽기 경로([extract_data.py:40](../integration/v1/extract_data.py#L40)) + [scripts/refresh_history_percentile.py](../scripts/refresh_history_percentile.py) 동기 갱신 → `python -m integration.v1.extract_data`로 **48개 메타 로드 검증 완료**.
+  - `_sector_stats.json`(빈 캐시)·`financial_dashboard.html`(재생성물)은 `docs/prototype/`에서 삭제 — 다음 배치 실행 시 새 위치에 재생성.
 - **보존(진짜 목업)**: `corporate_universe_v6_galaxies.html`(v1 dashboard 원형)은 docs/prototype에 남아도 무방. (`corporate_universe_v5.html`은 #28 정리에서 삭제 — relation `viewer/index.html`이 이미 fork 완료. 모듈 문서의 v5 라인 참조는 fork 시점 이력으로만 유효.)
 
 ### 4) price 타임머신 데이터가 코드에 하드코딩
