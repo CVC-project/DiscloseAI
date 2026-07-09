@@ -8,7 +8,7 @@
 해결:
 - KOSPI 50(현재 분석 대상 universe) 한정으로 10개 섹터 하드코딩.
 - ``batch.py`` 결과 + ``translator.ratios`` 로 섹터별 평균 계산.
-- 결과를 JSON 캐시 (``docs/prototype/_sector_stats.json``) 로 저장 → dashboard 로드.
+- 결과를 JSON 캐시 (``modules/financial/data/_sector_stats.json``) 로 저장 → dashboard 로드.
 
 나중에 pykrx가 고쳐지거나 종목 수가 늘면 ``SECTORS`` 딕셔너리만 교체하면 됨.
 """
@@ -200,11 +200,7 @@ def compute_sector_stats(
 # 캐시 I/O — dashboard.py와 batch.py가 공유
 # ---------------------------------------------------------------------------
 
-_CACHE_DIR = os.path.join(
-    os.path.dirname(os.path.dirname(os.path.dirname(__file__))),
-    "docs",
-    "prototype",
-)
+_CACHE_DIR = os.path.join(os.path.dirname(__file__), "data")
 _CACHE_FILE = os.path.join(_CACHE_DIR, "_sector_stats.json")
 
 

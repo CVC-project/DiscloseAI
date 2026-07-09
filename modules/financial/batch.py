@@ -45,7 +45,7 @@ ALIASES = {
 INSTRUMENT_BLACKLIST: set[str] = set()
 
 # 금융업 (KRX 업종코드 064~067) — fnlttSinglAcntAll endpoint가 옛 데이터 미제공.
-# CLAUDE.local.md 규칙대로 M2·M3 자동 제외 + 별도 BIS 모듈 도입 시까지 EQS 보류.
+# CLAUDE.md 규칙대로 M2·M3 자동 제외 + 별도 BIS 모듈 도입 시까지 EQS 보류.
 # KOSPI 50 명단 기준 자동 분류용 — KRX 정식 분류 연동 전까지 하드코딩.
 _FINANCIAL_INDUSTRIES = {
     "KB금융": "064",  # 은행지주
@@ -436,11 +436,7 @@ def export_for_frontend(
     """
     import json
 
-    out_dir = output_dir or os.path.join(
-        os.path.dirname(os.path.dirname(os.path.dirname(__file__))),
-        "docs",
-        "prototype",
-    )
+    out_dir = output_dir or os.path.join(os.path.dirname(__file__), "data")
     os.makedirs(out_dir, exist_ok=True)
 
     percentiles = _compute_industry_percentiles(records)
@@ -486,9 +482,7 @@ def export_for_frontend(
                 "latest_year": latest_year,
                 "industry_code": r.industry_code,
                 "history": _history_block(r.panel) if r.panel else None,
-                "percentile": percentiles.get(
-                    r.corp.corp_code if r.corp else "", None
-                ),
+                "percentile": percentiles.get(r.corp.corp_code if r.corp else "", None),
             }
         )
 

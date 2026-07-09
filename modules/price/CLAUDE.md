@@ -1,0 +1,21 @@
+# Price 모듈 — 도메인 규칙
+
+## 담당 범위
+주가 수집 + 공시 후 주가변동 라벨링 + 공시-주가 연결
+
+## yfinance 규칙
+- KOSPI 종목: 종목코드 + ".KS" (예: "005930.KS")
+- KOSDAQ 종목: 종목코드 + ".KQ" (예: "247540.KQ")
+- 캐싱: 5분 간격 (중복 호출 방지)
+
+## 라벨링 기준
+- 공시 후 5일 주가 변동 기준:
+  - +2% 이상 → 수혜
+  - -2% 이상 → 악재
+  - 그 사이 → 중립
+
+## 데이터 소스
+- yfinance: 일별 종가, 수익률
+- KRX: 종목 목록, 업종 분류
+- DB 저장 테이블: `modules/price/models.py`의 **`price_local`**(주가) + **`vkospi_local`**(VKOSPI) — 로컬 SQLite 정본.
+- 예외: `linker.py`가 공시-주가 라벨을 **`shared/models.py`의 `PriceData`에도 적재** (현재 shared에서 유일하게 활성). 전체 토폴로지: [docs/ARCHITECTURE.md](../../docs/ARCHITECTURE.md).

@@ -2,16 +2,40 @@
 
 대한민국 상장사의 공시·재무제표를 AI로 해부하여, 개인투자자의 금융 문해력을 향상시키는 플랫폼.
 
-## 시작하기
+## 빠른 시작
 
-[docs/ONBOARDING.md](docs/ONBOARDING.md) 참조
+```bash
+# 1. 의존성 설치 (Python 3.11)
+python -m venv .venv
+.venv\Scripts\activate          # Windows PowerShell: .venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+
+# 2. 환경변수 설정 (DART_API_KEY 등 본인 키 입력)
+copy .env.example .env          # macOS/Linux: cp .env.example .env
+
+# 3. 테스트 실행
+python -m pytest tests/ -v
+```
+
+설치 단계별 안내(스크린샷 포함)는 [docs/ONBOARDING.md](docs/ONBOARDING.md) 참조.
+
+## 실행
+
+```bash
+# 로컬 개발 서버 (공시 스케줄러 + 챗서버)
+python run_dev.py
+
+# 통합 대시보드
+python -m integration.v1.extract_data    # 모듈 DB → 통합 JSON 생성
+python -m http.server 8000               # http://localhost:8000/integration/
+```
 
 ## 문서
 
-- [PRD](docs/PRD.md) — 제품 요구사항
-- [아키텍처](docs/ARCHITECTURE.md) — 시스템 구조 + 기술 용어
+- [아키텍처](docs/ARCHITECTURE.md) — 지금 실제로 돌아가는 구조·DB 토폴로지 (SSOT)
+- [PRD](docs/초기PRD.md) — 제품 요구사항·비전
 - [온보딩](docs/ONBOARDING.md) — 팀원 시작 가이드
-- [프로토타입](docs/prototype/corporate_universe_v5.html) — UI 프로토타입
+- [프로토타입](docs/prototype/corporate_universe_v6_galaxies.html) — UI 프로토타입
 
 ## 구조
 
@@ -24,10 +48,3 @@
 | modules/relation/ | C | 기업 관계 (지분·계열) |
 | modules/price/ | D | 주가 + 라벨링 |
 | **integration/** | 리더 | 4개 모듈 교차 통합 대시보드 (v1=fallback, v2=정본) |
-
-## 통합 대시보드 실행
-
-```bash
-python -m integration.v1.extract_data    # 모듈 DB → 통합 JSON 생성
-python -m http.server 8000               # http://localhost:8000/integration/
-```

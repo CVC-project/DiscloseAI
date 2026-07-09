@@ -1,8 +1,8 @@
 # viewer/ — 단계 4: 우주맵 시각화
 
-> 원본 프로토타입(`docs/prototype/corporate_universe_v5.html`)의 fork.
+> 원본 프로토타입 `corporate_universe_v5.html`을 fork해 만든 독립 뷰어.
+> (원본은 #28 정리에서 제거 — 이제 이 `viewer/index.html`이 정본.)
 > Canvas 2D API + force-directed simulation. Three.js 미사용 (프로토타입 그대로 계승).
-> 원본은 **수정 금지** (다른 팀원 참고용).
 >
 > **범위**: 이것은 **relation 단독 탐색 도구**(relation 데이터만 시각화)다. 4개 모듈 **교차 분석·통합 대시보드**는 별개로 루트 `integration/`이 소유한다(같은 `graph_top50.json`을 소비하되 financial·disclosure·price와 join). 혼동 금지.
 
@@ -85,7 +85,7 @@ x.setLineDash([]);  // reset
 
 ## sectors 확장 (기존 8개 + 4개)
 
-기존 sectors 사전([line 145](../../../docs/prototype/corporate_universe_v5.html#L145)) 그대로 계승하고 4개 추가:
+기존 sectors 사전(프로토타입 원본 계승, 현재 `index.html` 내부) 그대로 두고 4개 추가:
 
 ```js
 const sectors = {
@@ -116,11 +116,11 @@ const sectors = {
 - `ftc_group` → "{source}·{target}은 공정위 지정 [{group_name}] 그룹 소속 계열사입니다."
 - `dart_filing` → "{source} → {target}: 사업보고서 주석에 명시된 특수관계자입니다."
 
-## 원본 프로토타입 활용 함수 (수정 없이 재사용)
+## 원본 프로토타입 활용 함수 (fork 시 계승, 현재 `index.html` 내부)
 
-- `init()` ([line 231](../../../docs/prototype/corporate_universe_v5.html#L231)) — 노드 좌표 초기화 + 엣지 파싱
-- `physics()` ([line 232](../../../docs/prototype/corporate_universe_v5.html#L232)) — Force-directed 시뮬레이션
-- `draw()` ([line 233](../../../docs/prototype/corporate_universe_v5.html#L233)) — Canvas 렌더링 (엣지 스타일 부분만 교체)
+- `init()` — 노드 좌표 초기화 + 엣지 파싱
+- `physics()` — Force-directed 시뮬레이션
+- `draw()` — Canvas 렌더링 (엣지 스타일 부분만 교체)
 
 ## 로컬 확인 방법
 

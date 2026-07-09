@@ -37,7 +37,7 @@ INTEGRATION_DATA = Path(__file__).parent.parent / "data"  # v1 → integration/d
 TOP50_CSV = ROOT / "modules" / "relation" / "data" / "top50.csv"
 FINANCIAL_DB = ROOT / "modules" / "financial" / "data" / "financial.db"
 DISCLOSURE_DB = ROOT / "modules" / "disclosure" / "data" / "disclosure.db"
-EQS_PROTOTYPE_JSON = ROOT / "docs" / "prototype" / "eqs_data.json"
+EQS_PROTOTYPE_JSON = ROOT / "modules" / "financial" / "data" / "eqs_data.json"
 
 # KRX 업종코드 중 금융업 식별용 (기타금융·증권·보험)
 FINANCIAL_INDUSTRY_CODES = frozenset({"064", "065", "066", "067"})
@@ -62,7 +62,7 @@ def load_top50() -> list[dict]:
 #  eqs 프로토타입 메타 로드 (market_cap·dart_url·industry_code·latest_year)
 # --------------------------------------------------------------------------- #
 def load_eqs_prototype_meta() -> dict[str, dict]:
-    """``docs/prototype/eqs_data.json``에서 financial.db에 없는 메타 정보 로드.
+    """``modules/financial/data/eqs_data.json``에서 financial.db에 없는 메타 정보 로드.
 
     financial_local 테이블은 EQS 점수·재무수치만 저장하고 시총·DART URL은
     별도 파일(financial 담당자의 프로토타입 산출물)에서만 얻을 수 있다.

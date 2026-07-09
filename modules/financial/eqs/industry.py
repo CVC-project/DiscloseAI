@@ -17,7 +17,7 @@ from __future__ import annotations
 
 from typing import Iterable, Optional, Set
 
-# (CLAUDE.local.md 기준) 금융업으로 간주할 KRX 업종코드 prefix
+# (CLAUDE.md 기준) 금융업으로 간주할 KRX 업종코드 prefix
 _FINANCIAL_PREFIXES: tuple[str, ...] = ("064", "065", "066", "067")
 
 # 지주/투자회사 식별용 내부 코드. KRX 공식 업종코드가 아닌 DiscloseAI 내부 태그.
