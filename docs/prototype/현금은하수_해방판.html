@@ -1,0 +1,1757 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- ===== 해방판 인프라 (편집 불필요) ===== -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap">
+<script>window.__resources={};</script>
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<script src="dc-runtime.js"></script>
+<!-- ===== /인프라 ===== -->
+</head>
+<body>
+
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<style>
+:root{
+  --mint:#74EEC6; --cyan:#5CC7EA; --gold:#E9C46B; --coral:#EC8C6A; --steel:#7590B0;
+  --bg:#05060d; --text:#eef4fb; --dim:#8fa1b6; --dim2:#5c6b80;
+  --panel:rgba(12,17,30,.78); --line:rgba(140,170,210,.13);
+  --col-left:2fr; --col-mid:3fr; --col-right:5fr;
+  --row-h:64px; --row-s:56px;
+  --fs-body:15px; --fade:180ms;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,monospace;
+  --sans:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',sans-serif;
+}
+html,body{margin:0;padding:0;background:#05060d;}
+a{color:var(--cyan);} a:hover{color:var(--mint);}
+[data-jl="1"]{background:rgba(92,199,234,.07)!important;box-shadow:inset 3px 0 0 var(--cyan);}
+[data-hl="1"]{background:rgba(116,238,198,.10)!important;box-shadow:inset 3px 0 0 var(--mint), inset 0 0 26px rgba(116,238,198,.07);}
+@keyframes omfade{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+@keyframes ompulse{0%,100%{opacity:.45;}50%{opacity:1;}}
+::-webkit-scrollbar{width:10px;height:10px;}
+::-webkit-scrollbar-thumb{background:#1c2739;border-radius:5px;}
+::-webkit-scrollbar-track{background:transparent;}
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:var(--fs-body);position:relative;">
+
+  <div style="position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(1100px 700px at 12% 6%, rgba(116,238,198,.055), transparent 62%), radial-gradient(900px 700px at 86% 18%, rgba(124,110,220,.06), transparent 62%), radial-gradient(1100px 800px at 50% 92%, rgba(92,199,234,.05), transparent 62%);"></div>
+  <div style="position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.55;background-image:radial-gradient(1px 1px at 23px 41px, rgba(255,255,255,.38), transparent 51%),radial-gradient(1px 1px at 141px 103px, rgba(255,255,255,.22), transparent 51%),radial-gradient(1.4px 1.4px at 87px 172px, rgba(190,225,255,.30), transparent 51%),radial-gradient(1px 1px at 191px 66px, rgba(255,255,255,.18), transparent 51%);background-size:220px 220px;"></div>
+
+  <div data-screen-label="상단 바" style="position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 28px;border-bottom:1px solid var(--line);">
+    <div style="display:flex;align-items:center;gap:14px;">
+      <span style="width:12px;height:12px;border-radius:50%;background:var(--mint);box-shadow:0 0 14px var(--mint);"></span>
+      <div>
+        <div style="font-family:var(--mono);font-size:14px;font-weight:700;letter-spacing:.3em;">CASH GALAXY</div>
+        <div style="font-size:12px;color:var(--dim);letter-spacing:.05em;">현금 은하수 · 사업보고서 3단 분석</div>
+      </div>
+      <span style="margin-left:10px;font-size:13px;color:var(--text);border:1px solid var(--line);border-radius:6px;padding:5px 12px;background:rgba(255,255,255,.02);">삼성전자 · FY2025 <span style="color:var(--dim);">(2025.1.1 ~ 12.31)</span> · <span style="color:var(--cyan);">연결 기준</span></span>
+    </div>
+    <div style="font-family:var(--mono);font-size:11px;color:var(--dim2);letter-spacing:.08em;">단위: 조 원 · 행 위에 마우스를 올리면 백만 원 원본</div>
+  </div>
+
+  <div data-screen-label="인트로" style="position:relative;z-index:2;display:grid;grid-template-columns:1.1fr 1.6fr;gap:28px;padding:26px 28px 24px;border-bottom:1px solid var(--line);">
+    <div>
+      <div style="font-size:24px;font-weight:800;line-height:1.45;letter-spacing:-.01em;">작년 통장의 <span style="font-family:var(--mono);color:var(--cyan);">53.7조</span>는, 어떻게 올해 <span style="font-family:var(--mono);color:var(--cyan);">57.9조</span>가 됐을까요?</div>
+      <div style="margin-top:12px;font-size:15px;line-height:1.7;">이 이야기의 핵심은 <b>'손익 성적표의 이익'과 '통장의 현금'이 왜 다른가</b>예요.</div>
+      <div style="margin-top:8px;font-size:13px;line-height:1.65;color:var(--dim);">이 숫자들은 삼성전자 혼자가 아니라, 삼성전자와 자회사들을 하나로 합친 '연결' 기준이에요. 그래서 뒤에 '자회사의 다른 주주 몫' 같은 말이 나와요.</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <div style="border:1px solid rgba(116,238,198,.22);border-radius:8px;padding:12px 14px;background:rgba(116,238,198,.04);">
+        <div style="font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--mint);">INCOME STATEMENT · 손익계산서</div>
+        <div style="margin-top:5px;font-size:13px;line-height:1.6;">1년 동안 얼마 벌고 얼마 썼나 — 장사 성적표예요.</div>
+      </div>
+      <div style="border:1px solid rgba(92,199,234,.22);border-radius:8px;padding:12px 14px;background:rgba(92,199,234,.04);">
+        <div style="font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--cyan);">CASH FLOW · 현금흐름표</div>
+        <div style="margin-top:5px;font-size:13px;line-height:1.6;">통장에 실제로 돈이 얼마 들어오고 나갔나 — 입출금 내역이에요.</div>
+      </div>
+      <div style="border:1px solid rgba(233,196,107,.22);border-radius:8px;padding:12px 14px;background:rgba(233,196,107,.04);">
+        <div style="font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--gold);">CHANGES IN EQUITY · 자본변동표</div>
+        <div style="margin-top:5px;font-size:13px;line-height:1.6;">주주의 몫(자본)이 1년 새 어떻게 늘고 줄었나예요.</div>
+      </div>
+      <div style="border:1px solid rgba(117,144,176,.25);border-radius:8px;padding:12px 14px;background:rgba(117,144,176,.05);">
+        <div style="font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--steel);">BALANCE SHEET · 재무상태표</div>
+        <div style="margin-top:5px;font-size:13px;line-height:1.6;">오늘 이 순간 회사가 가진 재산과 빚의 목록이에요.</div>
+      </div>
+    </div>
+  </div>
+
+  <div data-grid="" style="position:relative;z-index:1;display:grid;grid-template-columns:var(--col-left) var(--col-mid) var(--col-right);align-items:stretch;">
+
+    <div data-left="" data-screen-label="세로 현금 은하수" style="position:relative;min-width:0;">{{ galaxySvg }}</div>
+
+    <div data-mid="" data-screen-label="재무제표" style="position:relative;min-width:0;padding:0 20px 55vh 10px;">
+      {{ midOverlay }}
+
+      <div data-zone="zoneA" style="padding:38px 6px 14px;display:flex;align-items:baseline;gap:12px;">
+        <span style="font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--steel);border:1px solid rgba(117,144,176,.4);padding:3px 8px;border-radius:4px;flex-shrink:0;">ZONE A</span>
+        <span style="font-size:19px;font-weight:700;">작년 통장엔 얼마가 있었을까요?</span>
+      </div>
+      <div style="position:relative;background:var(--panel);border:1px solid var(--line);border-radius:10px;margin-bottom:30px;" style-before="content:'';position:absolute;top:-1px;left:-1px;width:14px;height:14px;border-top:2px solid var(--steel);border-left:2px solid var(--steel);border-radius:3px 0 0 0;" style-after="content:'';position:absolute;bottom:-1px;right:-1px;width:14px;height:14px;border-bottom:2px solid var(--steel);border-right:2px solid var(--steel);border-radius:0 0 3px 0;">
+        <div style="display:flex;align-items:center;gap:11px;padding:13px 16px;border-bottom:1px solid var(--line);background:rgba(117,144,176,.05);">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--steel);box-shadow:0 0 10px var(--steel);flex-shrink:0;"></span>
+          <div>
+            <div style="font-family:var(--mono);font-size:11.5px;letter-spacing:.22em;color:var(--steel);">BALANCE SHEET · PREV</div>
+            <div style="font-size:12.5px;color:var(--dim);">전기말 재무상태표 — 이야기의 출발점이라 현금만 간단히 보여드려요.</div>
+          </div>
+        </div>
+        <div data-row="pbs-cash" onclick="{{ onRow }}" title="53,705,579 백만원" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">01</span><span>현금및현금성자산</span></div>
+          <span style="font-family:var(--mono);font-size:16px;font-weight:700;color:var(--cyan);">53.71</span>
+        </div>
+      </div>
+
+      <div data-zone="zoneB" style="padding:30px 6px 14px;display:flex;align-items:baseline;gap:12px;">
+        <span style="font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--mint);border:1px solid rgba(116,238,198,.4);padding:3px 8px;border-radius:4px;flex-shrink:0;">ZONE B</span>
+        <span style="font-size:19px;font-weight:700;">1년 동안 얼마 벌고 얼마 썼을까요?</span>
+      </div>
+      <div style="position:relative;background:var(--panel);border:1px solid var(--line);border-radius:10px;margin-bottom:30px;" style-before="content:'';position:absolute;top:-1px;left:-1px;width:14px;height:14px;border-top:2px solid var(--mint);border-left:2px solid var(--mint);border-radius:3px 0 0 0;" style-after="content:'';position:absolute;bottom:-1px;right:-1px;width:14px;height:14px;border-bottom:2px solid var(--mint);border-right:2px solid var(--mint);border-radius:0 0 3px 0;">
+        <div style="display:flex;align-items:center;gap:11px;padding:13px 16px;border-bottom:1px solid var(--line);background:rgba(116,238,198,.05);">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--mint);box-shadow:0 0 10px var(--mint);flex-shrink:0;"></span>
+          <div>
+            <div style="font-family:var(--mono);font-size:11.5px;letter-spacing:.22em;color:var(--mint);">INCOME STATEMENT</div>
+            <div style="font-size:12.5px;color:var(--dim);">손익계산서 — 1년 동안 얼마 벌고 얼마 썼나, 장사 성적표예요.</div>
+          </div>
+        </div>
+        <div data-row="is-revenue" onclick="{{ onRow }}" title="333,605,938 백만원" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">02</span><span>매출액</span></div>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--mint);">333.6</span>
+        </div>
+        <div data-row="is-cogs" onclick="{{ onRow }}" title="202,235,513 백만원" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">03</span><span>매출원가</span></div>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--coral);">−202.2</span>
+        </div>
+        <div data-row="is-grossprofit" onclick="{{ onRow }}" title="131,370,425 백만원" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;background:rgba(116,238,198,.045);font-weight:700;" style-hover="background:rgba(116,238,198,.09)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">04</span><span>매출총이익</span></div>
+          <span style="font-family:var(--mono);font-size:16.5px;font-weight:700;color:var(--mint);">131.4</span>
+        </div>
+        <div data-row="is-sgna" onclick="{{ onRow }}" title="87,769,374 백만원 (이 중 R&amp;D 37,740,392)" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">05</span><span>판매비와관리비</span><span data-g="sgna" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.sgna }}</span></div>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--coral);">−87.8</span>
+        </div>
+        <sc-if value="{{ exp.sgna }}" hint-placeholder-val="{{ false }}">
+          <div>
+            <div data-row="is-sgna-rnd" onclick="{{ onRow }}" title="37,740,392 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>연구개발비 (R&amp;D)</span><span style="font-family:var(--mono);color:var(--gold);">−37.7</span></div>
+            <div data-row="is-sgna-fee" onclick="{{ onRow }}" title="9,819,555 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>지급수수료</span><span style="font-family:var(--mono);">−9.8</span></div>
+            <div data-row="is-sgna-sal" onclick="{{ onRow }}" title="9,243,455 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>급여</span><span style="font-family:var(--mono);">−9.2</span></div>
+            <div data-row="is-sgna-promo" onclick="{{ onRow }}" title="8,233,462 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>판매촉진비</span><span style="font-family:var(--mono);">−8.2</span></div>
+            <div data-row="is-sgna-ad" onclick="{{ onRow }}" title="6,003,350 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>광고선전비</span><span style="font-family:var(--mono);">−6.0</span></div>
+            <div data-row="is-sgna-svc" onclick="{{ onRow }}" title="3,659,857 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>서비스비</span><span style="font-family:var(--mono);">−3.7</span></div>
+            <div data-row="is-sgna-ship" onclick="{{ onRow }}" title="2,512,121 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>운반비</span><span style="font-family:var(--mono);">−2.5</span></div>
+            <div data-row="is-sgna-etc" onclick="{{ onRow }}" title="10,557,182 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>그 외</span><span style="font-family:var(--mono);">−10.6</span></div>
+          </div>
+        </sc-if>
+        <div data-row="is-opincome" onclick="{{ onRow }}" title="43,601,051 백만원" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;background:rgba(116,238,198,.045);font-weight:700;" style-hover="background:rgba(116,238,198,.09)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">06</span><span>영업이익</span></div>
+          <span style="font-family:var(--mono);font-size:16.5px;font-weight:700;color:var(--mint);">43.6</span>
+        </div>
+        <div data-row="is-nonop" onclick="{{ onRow }}" title="+5,880,420 백만원 (기타수익 2,267,083 − 기타비용 1,575,901 + 지분법 682,700 + 금융수익 16,240,302 − 금융비용 11,733,764)" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">06ᵇ</span><span>영업외·금융손익</span><span data-g="nonop" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.nonop }}</span></div>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--mint);">+5.9</span>
+        </div>
+        <sc-if value="{{ exp.nonop }}" hint-placeholder-val="{{ false }}">
+          <div>
+            <div data-row="is-nonop-fininc" onclick="{{ onRow }}" title="16,240,302 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>금융수익</span><span style="font-family:var(--mono);color:var(--mint);">+16.2</span></div>
+            <div data-row="is-nonop-finexp" onclick="{{ onRow }}" title="11,733,764 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>금융비용</span><span style="font-family:var(--mono);">−11.7</span></div>
+            <div data-row="is-nonop-othinc" onclick="{{ onRow }}" title="2,267,083 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>기타수익</span><span style="font-family:var(--mono);color:var(--mint);">+2.3</span></div>
+            <div data-row="is-nonop-othexp" onclick="{{ onRow }}" title="1,575,901 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>기타비용</span><span style="font-family:var(--mono);">−1.6</span></div>
+            <div data-row="is-nonop-eqm" onclick="{{ onRow }}" title="682,700 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>지분법이익 (삼성전기·삼성SDS 등)</span><span style="font-family:var(--mono);color:var(--mint);">+0.7</span></div>
+          </div>
+        </sc-if>
+        <div data-row="is-pretax" onclick="{{ onRow }}" title="49,481,471 백만원" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;background:rgba(116,238,198,.045);font-weight:700;" style-hover="background:rgba(116,238,198,.09)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">—</span><span>법인세차감전순이익</span></div>
+          <span style="font-family:var(--mono);font-size:16.5px;font-weight:700;color:var(--mint);">49.5</span>
+        </div>
+        <div data-row="is-tax" onclick="{{ onRow }}" title="4,274,666 백만원" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">07</span><span>법인세비용</span></div>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--coral);">−4.3</span>
+        </div>
+        <div data-row="is-netincome" onclick="{{ onRow }}" title="45,206,805 백만원 (지배 44,260,956 · 비지배 945,849)" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid rgba(116,238,198,.35);cursor:pointer;background:rgba(116,238,198,.07);font-weight:700;" style-hover="background:rgba(116,238,198,.12)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--mint);letter-spacing:.08em;">08</span><span>당기순이익</span><span data-g="ni" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.ni }}</span></div>
+          <span style="font-family:var(--mono);font-size:17px;font-weight:700;color:var(--mint);text-shadow:0 0 12px rgba(116,238,198,.5);">45.2</span>
+        </div>
+        <sc-if value="{{ exp.ni }}" hint-placeholder-val="{{ false }}">
+          <div>
+            <div data-row="is-ni-ctrl" onclick="{{ onRow }}" title="44,260,956 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>지배기업 소유주 몫</span><span style="font-family:var(--mono);">44.3</span></div>
+            <div data-row="is-ni-nci" onclick="{{ onRow }}" title="945,849 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>비지배지분 몫 (자회사의 다른 주주)</span><span style="font-family:var(--mono);">0.9</span></div>
+          </div>
+        </sc-if>
+        <div data-row="is-oci" onclick="{{ onRow }}" title="6,083,719 백만원" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">—</span><span>기타포괄손익 (OCI)</span></div>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--gold);">+6.1</span>
+        </div>
+        <div data-row="is-totalcomp" onclick="{{ onRow }}" title="51,290,524 백만원" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;background:rgba(116,238,198,.045);font-weight:700;" style-hover="background:rgba(116,238,198,.09)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">—</span><span>총포괄손익</span></div>
+          <span style="font-family:var(--mono);font-size:16.5px;font-weight:700;color:var(--mint);">51.3</span>
+        </div>
+      </div>
+
+      <div data-zone="zoneC" style="padding:30px 6px 14px;display:flex;align-items:baseline;gap:12px;">
+        <span style="font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--cyan);border:1px solid rgba(92,199,234,.4);padding:3px 8px;border-radius:4px;flex-shrink:0;">ZONE C</span>
+        <span style="font-size:19px;font-weight:700;">계산상 이익은 진짜 현금이 됐을까요?</span>
+      </div>
+      <div style="position:relative;background:var(--panel);border:1px solid var(--line);border-radius:10px;margin-bottom:30px;" style-before="content:'';position:absolute;top:-1px;left:-1px;width:14px;height:14px;border-top:2px solid var(--cyan);border-left:2px solid var(--cyan);border-radius:3px 0 0 0;" style-after="content:'';position:absolute;bottom:-1px;right:-1px;width:14px;height:14px;border-bottom:2px solid var(--cyan);border-right:2px solid var(--cyan);border-radius:0 0 3px 0;">
+        <div style="display:flex;align-items:center;gap:11px;padding:13px 16px;border-bottom:1px solid var(--line);background:rgba(92,199,234,.05);">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan);flex-shrink:0;"></span>
+          <div>
+            <div style="font-family:var(--mono);font-size:11.5px;letter-spacing:.22em;color:var(--cyan);">CASH FLOW STATEMENT</div>
+            <div style="font-size:12.5px;color:var(--dim);">현금흐름표 — 통장에 실제로 돈이 얼마 들어오고 나갔나, 입출금 내역이에요.</div>
+          </div>
+        </div>
+        <div data-row="cf-netincome" onclick="{{ onRow }}" title="45,206,805 백만원 — 손익계산서의 당기순이익과 같은 숫자" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:#63d68e;letter-spacing:.08em;">08</span><span>당기순이익 <span style="font-size:11px;color:#63d68e;">← 손익계산서에서</span></span></div>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:#63d68e;">45.2</span>
+        </div>
+        <div data-row="cf-noncash" onclick="{{ onRow }}" title="52,395,616 백만원 (감가상각 43,605,740 최대)" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">09</span><span>비현금 조정 <span style="font-size:11px;color:var(--dim);font-weight:400;">현금 안 나간 비용을 도로 더해요</span></span><span data-g="noncash" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.noncash }}</span></div>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--cyan);">+52.4</span>
+        </div>
+        <sc-if value="{{ exp.noncash }}" hint-placeholder-val="{{ false }}">
+          <div>
+            <div data-row="cf-noncash-dep" onclick="{{ onRow }}" title="43,605,740 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>감가상각비 (현금 유출 없음)</span><span style="font-family:var(--mono);color:var(--cyan);">+43.6</span></div>
+            <div data-row="cf-noncash-etc" onclick="{{ onRow }}" title="8,789,876 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>기타 조정 (무형상각·충당금 등)</span><span style="font-family:var(--mono);color:var(--cyan);">+8.8</span></div>
+          </div>
+        </sc-if>
+        <div data-row="cf-wc" onclick="{{ onRow }}" title="약 −9.6조 원 (매출채권 −4.6 · 재고 −3.6 · 기타 −1.4)" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">10</span><span>운전자본 변동 <span style="font-size:11px;color:var(--dim);font-weight:400;">아직 현금이 안 된 외상·재고</span></span><span data-g="wc" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.wc }}</span></div>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--coral);">−9.6</span>
+        </div>
+        <sc-if value="{{ exp.wc }}" hint-placeholder-val="{{ false }}">
+          <div>
+            <div data-row="cf-wc-ar" onclick="{{ onRow }}" title="약 −4.6조 원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>매출채권 증가 (못 받은 외상)</span><span style="font-family:var(--mono);">−4.6</span></div>
+            <div data-row="cf-wc-inv" onclick="{{ onRow }}" title="약 −3.6조 원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>재고자산 증가 (안 팔린 재고)</span><span style="font-family:var(--mono);">−3.6</span></div>
+            <div data-row="cf-wc-etc" onclick="{{ onRow }}" title="약 −1.4조 원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>기타 운전자본</span><span style="font-family:var(--mono);">−1.4</span></div>
+          </div>
+        </sc-if>
+        <div data-row="cf-paid" onclick="{{ onRow }}" title="약 −2.7조 원" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">10ᵇ</span><span>이자·법인세 실납부 등</span></div>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--coral);">−2.7</span>
+        </div>
+        <div data-row="cf-op" onclick="{{ onRow }}" title="85,315,148 백만원 (45.2 + 52.4 − 9.6 − 2.7 = 85.3)" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid rgba(92,199,234,.35);cursor:pointer;background:rgba(92,199,234,.07);font-weight:700;" style-hover="background:rgba(92,199,234,.12)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--cyan);letter-spacing:.08em;">11</span><span>Ⅰ. 영업활동 현금흐름</span></div>
+          <span style="font-family:var(--mono);font-size:17px;font-weight:700;color:var(--cyan);text-shadow:0 0 12px rgba(92,199,234,.5);">+85.3</span>
+        </div>
+        <sc-if value="{{ exp.inv }}" hint-placeholder-val="{{ false }}">
+          <div>
+            <div data-row="cf-inv-capex" onclick="{{ onRow }}" title="47,522,179 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>유형자산 취득 (새 공장·장비)</span><span style="font-family:var(--mono);">−47.5</span></div>
+            <div data-row="cf-inv-etc" onclick="{{ onRow }}" title="20,990,027 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>무형자산·관계기업·기타</span><span style="font-family:var(--mono);">−21.0</span></div>
+          </div>
+        </sc-if>
+        <div data-row="cf-inv" onclick="{{ onRow }}" title="−68,512,206 백만원 (유형자산 취득 −47.5 · 무형·관계기업·기타 −21.0)" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;background:rgba(92,199,234,.04);font-weight:700;" style-hover="background:rgba(92,199,234,.09)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">12</span><span>Ⅱ. 투자활동 현금흐름</span><span data-g="inv" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.inv }}</span></div>
+          <span style="font-family:var(--mono);font-size:16.5px;font-weight:700;color:var(--coral);">−68.5</span>
+        </div>
+        <sc-if value="{{ exp.fin }}" hint-placeholder-val="{{ false }}">
+          <div>
+            <div data-row="cf-fin-debt" onclick="{{ onRow }}" title="+4,609,379 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>차입금 순증가</span><span style="font-family:var(--mono);color:var(--cyan);">+4.6</span></div>
+            <div data-row="cf-fin-div" onclick="{{ onRow }}" title="9,897,183 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>배당금 지급 (주주에게)</span><span style="font-family:var(--mono);">−9.9</span></div>
+            <div data-row="cf-fin-tsy" onclick="{{ onRow }}" title="8,189,263 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>자기주식 취득</span><span style="font-family:var(--mono);">−8.2</span></div>
+          </div>
+        </sc-if>
+        <div data-row="cf-fin" onclick="{{ onRow }}" title="−13,478,040 백만원 (배당 −9.9 · 자사주 −8.2 · 차입 +4.6)" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;background:rgba(92,199,234,.04);font-weight:700;" style-hover="background:rgba(92,199,234,.09)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">13</span><span>Ⅲ. 재무활동 현금흐름</span><span data-g="fin" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.fin }}</span></div>
+          <span style="font-family:var(--mono);font-size:16.5px;font-weight:700;color:var(--coral);">−13.5</span>
+        </div>
+        <div data-row="cf-fx" onclick="{{ onRow }}" title="+825,897 백만원" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">14</span><span>외화환산효과</span></div>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--cyan);">+0.8</span>
+        </div>
+        <div data-row="cf-netchange" onclick="{{ onRow }}" title="+4,150,799 백만원" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:.08em;">Δ</span><span>현금의 순증감</span></div>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:700;color:var(--gold);">+4.15</span>
+        </div>
+        <div data-row="cf-begincash" onclick="{{ onRow }}" title="53,705,579 백만원 — 전기말 재무상태표의 현금과 같은 숫자" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">01</span><span>기초의 현금</span></div>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--cyan);">53.71</span>
+        </div>
+        <div data-row="cf-endcash" onclick="{{ onRow }}" title="57,856,378 백만원 — 당기말 재무상태표의 현금과 같은 숫자" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid rgba(92,199,234,.3);cursor:pointer;background:rgba(92,199,234,.06);font-weight:700;" style-hover="background:rgba(92,199,234,.11)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--cyan);letter-spacing:.08em;">15</span><span>기말의 현금</span></div>
+          <span style="font-family:var(--mono);font-size:16.5px;font-weight:700;color:var(--cyan);">57.86</span>
+        </div>
+      </div>
+
+      <div data-zone="zoneD" style="padding:30px 6px 14px;display:flex;align-items:baseline;gap:12px;">
+        <span style="font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--cyan);border:1px solid rgba(92,199,234,.4);padding:3px 8px;border-radius:4px;flex-shrink:0;">ZONE D</span>
+        <span style="font-size:19px;font-weight:700;">그래서 통장엔 얼마가 남았을까요?</span>
+      </div>
+      <div style="position:relative;background:var(--panel);border:1px solid var(--line);border-radius:10px;margin-bottom:30px;" style-before="content:'';position:absolute;top:-1px;left:-1px;width:14px;height:14px;border-top:2px solid var(--steel);border-left:2px solid var(--steel);border-radius:3px 0 0 0;" style-after="content:'';position:absolute;bottom:-1px;right:-1px;width:14px;height:14px;border-bottom:2px solid var(--steel);border-right:2px solid var(--steel);border-radius:0 0 3px 0;">
+        <div style="display:flex;align-items:center;gap:11px;padding:13px 16px;border-bottom:1px solid var(--line);background:rgba(117,144,176,.05);">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--steel);box-shadow:0 0 10px var(--steel);flex-shrink:0;"></span>
+          <div>
+            <div style="font-family:var(--mono);font-size:11.5px;letter-spacing:.22em;color:var(--steel);">BALANCE SHEET · FY2025</div>
+            <div style="font-size:12.5px;color:var(--dim);">당기말 재무상태표 — 오늘 이 순간 회사가 가진 재산과 빚의 목록이에요.</div>
+          </div>
+        </div>
+        <div data-row="bs-cash" onclick="{{ onRow }}" title="57,856,378 백만원" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;cursor:pointer;background:rgba(92,199,234,.06);font-weight:700;" style-hover="background:rgba(92,199,234,.11)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--cyan);letter-spacing:.08em;">15</span><span>현금및현금성자산</span></div>
+          <span style="font-family:var(--mono);font-size:17px;font-weight:700;color:var(--cyan);text-shadow:0 0 12px rgba(92,199,234,.5);">57.86</span>
+        </div>
+        <div data-row="bs-assets" onclick="{{ onRow }}" title="566,942,110 백만원 (전기 514,531,948)" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;background:rgba(117,144,176,.06);font-weight:700;" style-hover="background:rgba(117,144,176,.11)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">Σ</span><span>자산총계</span><span data-g="bsa" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.bsa }}</span></div>
+          <span style="font-family:var(--mono);font-size:16.5px;font-weight:700;color:var(--steel);">566.9</span>
+        </div>
+        <sc-if value="{{ exp.bsa }}" hint-placeholder-val="{{ false }}"><div>
+          <div data-row="bs-ca" onclick="{{ onRow }}" title="247,684,612 백만원" style="display:flex;align-items:center;justify-content:space-between;height:34px;padding:0 16px 0 32px;border-top:1px dashed rgba(140,170,210,.12);cursor:pointer;font-size:12.5px;font-weight:600;" style-hover="background:rgba(140,190,230,.05)"><span>유동자산 (계)</span><span style="font-family:var(--mono);color:var(--steel);">247.7</span></div>
+          <div data-row="bs-cash-d" onclick="{{ onRow }}" title="57,856,378 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>현금및현금성자산 <span style="font-size:10px;color:var(--dim2);">↑ 위 강조 행과 같은 돈</span></span><span style="font-family:var(--mono);color:var(--cyan);">57.9</span></div>
+          <div data-row="bs-sfin" onclick="{{ onRow }}" title="67,965,021 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>단기금융상품</span><span style="font-family:var(--mono);">68.0</span></div>
+          <div data-row="bs-ar" onclick="{{ onRow }}" title="51,127,642 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>매출채권</span><span style="font-family:var(--mono);">51.1</span></div>
+          <div data-row="bs-inv" onclick="{{ onRow }}" title="52,636,828 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>재고자산</span><span style="font-family:var(--mono);">52.6</span></div>
+          <div data-row="bs-oca" onclick="{{ onRow }}" title="18,073,028 백만원 (미수금·선급비용·기타)" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>미수금·선급비용·기타</span><span style="font-family:var(--mono);">18.1</span></div>
+          <div data-row="bs-nca" onclick="{{ onRow }}" title="319,257,498 백만원" style="display:flex;align-items:center;justify-content:space-between;height:34px;padding:0 16px 0 32px;border-top:1px dashed rgba(140,170,210,.12);cursor:pointer;font-size:12.5px;font-weight:600;" style-hover="background:rgba(140,190,230,.05)"><span>비유동자산 (계)</span><span style="font-family:var(--mono);color:var(--steel);">319.3</span></div>
+          <div data-row="bs-ppe" onclick="{{ onRow }}" title="215,304,784 백만원 (전기 205,945,209)" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>유형자산 (공장·장비)</span><span style="font-family:var(--mono);">215.3</span></div>
+          <div data-row="bs-ig" onclick="{{ onRow }}" title="29,480,565 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>무형자산</span><span style="font-family:var(--mono);">29.5</span></div>
+          <div data-row="bs-assoc" onclick="{{ onRow }}" title="13,772,121 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>관계기업·공동기업투자</span><span style="font-family:var(--mono);">13.8</span></div>
+          <div data-row="bs-fvoci" onclick="{{ onRow }}" title="16,295,005 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>FVOCI 금융자산 (오래 보유 주식)</span><span style="font-family:var(--mono);">16.3</span></div>
+          <div data-row="bs-dta" onclick="{{ onRow }}" title="18,840,559 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>이연법인세자산</span><span style="font-family:var(--mono);">18.8</span></div>
+          <div data-row="bs-dba" onclick="{{ onRow }}" title="4,271,547 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>순확정급여자산</span><span style="font-family:var(--mono);">4.3</span></div>
+          <div data-row="bs-onca" onclick="{{ onRow }}" title="21,292,917 백만원 (FVPL·기타비유동)" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>FVPL·기타비유동자산</span><span style="font-family:var(--mono);">21.3</span></div>
+        </div></sc-if>
+        <div data-row="bs-liab" onclick="{{ onRow }}" title="130,621,773 백만원" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;font-weight:700;" style-hover="background:rgba(140,190,230,.06)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--coral);letter-spacing:.08em;">부채</span><span>부채총계 <span style="font-size:11px;color:var(--dim);font-weight:400;">갚아야 할 남의 돈</span></span><span data-g="bsl" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.bsl }}</span></div>
+          <span style="font-family:var(--mono);font-size:15.5px;font-weight:700;color:var(--steel);">130.6</span>
+        </div>
+        <sc-if value="{{ exp.bsl }}" hint-placeholder-val="{{ false }}"><div>
+          <div data-row="bs-cl" onclick="{{ onRow }}" title="106,411,348 백만원" style="display:flex;align-items:center;justify-content:space-between;height:34px;padding:0 16px 0 32px;border-top:1px dashed rgba(140,170,210,.12);cursor:pointer;font-size:12.5px;font-weight:600;" style-hover="background:rgba(140,190,230,.05)"><span>유동부채 (계)</span><span style="font-family:var(--mono);color:var(--steel);">106.4</span></div>
+          <div data-row="bs-payexp" onclick="{{ onRow }}" title="32,707,431 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>미지급비용</span><span style="font-family:var(--mono);">32.7</span></div>
+          <div data-row="bs-pay" onclick="{{ onRow }}" title="21,365,657 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>미지급금</span><span style="font-family:var(--mono);">21.4</span></div>
+          <div data-row="bs-stb" onclick="{{ onRow }}" title="17,574,980 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>단기차입금 <span style="font-size:10px;color:var(--dim2);">(팩토링 포함)</span></span><span style="font-family:var(--mono);">17.6</span></div>
+          <div data-row="bs-ap" onclick="{{ onRow }}" title="13,039,380 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>매입채무</span><span style="font-family:var(--mono);">13.0</span></div>
+          <div data-row="bs-prov" onclick="{{ onRow }}" title="7,690,559 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>충당부채</span><span style="font-family:var(--mono);">7.7</span></div>
+          <div data-row="bs-taxlia" onclick="{{ onRow }}" title="7,037,174 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>당기법인세부채</span><span style="font-family:var(--mono);">7.0</span></div>
+          <div data-row="bs-ocl" onclick="{{ onRow }}" title="6,996,167 백만원 (선수금·예수금·유동성장기부채·기타)" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>선수금·예수금·기타</span><span style="font-family:var(--mono);">7.0</span></div>
+          <div data-row="bs-ncl" onclick="{{ onRow }}" title="24,210,425 백만원" style="display:flex;align-items:center;justify-content:space-between;height:34px;padding:0 16px 0 32px;border-top:1px dashed rgba(140,170,210,.12);cursor:pointer;font-size:12.5px;font-weight:600;" style-hover="background:rgba(140,190,230,.05)"><span>비유동부채 (계)</span><span style="font-family:var(--mono);color:var(--steel);">24.2</span></div>
+          <div data-row="bs-ltb" onclick="{{ onRow }}" title="6,479,517 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>장기차입금</span><span style="font-family:var(--mono);">6.5</span></div>
+          <div data-row="bs-ltpay" onclick="{{ onRow }}" title="5,602,031 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>장기미지급금</span><span style="font-family:var(--mono);">5.6</span></div>
+          <div data-row="bs-ltprov" onclick="{{ onRow }}" title="2,900,411 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>장기충당부채</span><span style="font-family:var(--mono);">2.9</span></div>
+          <div data-row="bs-ndbl" onclick="{{ onRow }}" title="558,520 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>순확정급여부채</span><span style="font-family:var(--mono);">0.6</span></div>
+          <div data-row="bs-dtl" onclick="{{ onRow }}" title="709,226 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>이연법인세부채</span><span style="font-family:var(--mono);">0.7</span></div>
+          <div data-row="bs-bond" onclick="{{ onRow }}" title="7,134 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>사채 <span style="font-size:10px;color:var(--dim2);">(거의 0)</span></span><span style="font-family:var(--mono);">0.01</span></div>
+          <div data-row="bs-oncl" onclick="{{ onRow }}" title="7,953,586 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>기타비유동부채</span><span style="font-family:var(--mono);">8.0</span></div>
+        </div></sc-if>
+        <div data-row="bs-equity" onclick="{{ onRow }}" title="436,320,337 백만원" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;font-weight:700;" style-hover="background:rgba(140,190,230,.06)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:.08em;">자본</span><span>자본총계 <span style="font-size:11px;color:var(--dim);font-weight:400;">주주의 몫 → 존 E</span></span><span data-g="bse" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.bse }}</span></div>
+          <span style="font-family:var(--mono);font-size:15.5px;font-weight:700;color:var(--gold);">436.3</span>
+        </div>
+        <sc-if value="{{ exp.bse }}" hint-placeholder-val="{{ false }}"><div>
+          <div data-row="bs-ctrl" onclick="{{ onRow }}" title="424,313,255 백만원" style="display:flex;align-items:center;justify-content:space-between;height:34px;padding:0 16px 0 32px;border-top:1px dashed rgba(140,170,210,.12);cursor:pointer;font-size:12.5px;font-weight:600;" style-hover="background:rgba(140,190,230,.05)"><span>지배기업 소유주지분 (계)</span><span style="font-family:var(--mono);color:var(--gold);">424.3</span></div>
+          <div data-row="bs-re" onclick="{{ onRow }}" title="402,135,600 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>이익잉여금 <span style="font-size:10px;color:var(--dim2);">(그동안 쌓은 이익)</span></span><span style="font-family:var(--mono);color:var(--gold);">402.1</span></div>
+          <div data-row="bs-oe" onclick="{{ onRow }}" title="16,876,248 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>기타자본항목 (OCI 등)</span><span style="font-family:var(--mono);">16.9</span></div>
+          <div data-row="bs-sp" onclick="{{ onRow }}" title="4,403,893 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>주식발행초과금</span><span style="font-family:var(--mono);">4.4</span></div>
+          <div data-row="bs-capital" onclick="{{ onRow }}" title="897,514 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>자본금 <span style="font-size:10px;color:var(--dim2);">(밑천)</span></span><span style="font-family:var(--mono);">0.9</span></div>
+          <div data-row="bs-nci" onclick="{{ onRow }}" title="12,007,082 백만원" style="display:flex;align-items:center;justify-content:space-between;height:34px;padding:0 16px 0 32px;border-top:1px dashed rgba(140,170,210,.12);cursor:pointer;font-size:12.5px;font-weight:600;" style-hover="background:rgba(140,190,230,.05)"><span>비지배지분 <span style="font-size:10px;color:var(--dim2);font-weight:400;">(자회사의 다른 주주 몫)</span></span><span style="font-family:var(--mono);color:var(--steel);">12.0</span></div>
+        </div></sc-if>
+        <div style="padding:15px 16px 17px;border-top:1px solid var(--line);">
+          <div style="font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--dim2);margin-bottom:11px;">자산 = 부채 + 자본 · 회사의 재산은 어떻게 마련했나</div>
+          <div style="display:flex;align-items:stretch;gap:12px;height:126px;">
+            <div style="flex:1;display:flex;flex-direction:column;">
+              <div style="flex:1;background:linear-gradient(rgba(117,144,176,.32),rgba(117,144,176,.16));border:1px solid rgba(117,144,176,.5);border-radius:5px;display:flex;flex-direction:column;align-items:center;justify-content:center;"><span style="font-size:11px;color:var(--dim);">자산(가진 재산)</span><span style="font-family:var(--mono);font-weight:700;font-size:16px;color:var(--steel);">566.9</span></div>
+            </div>
+            <div style="font-size:22px;color:var(--dim);align-self:center;">=</div>
+            <div style="flex:1;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:5px;overflow:hidden;">
+              <div style="height:23%;background:rgba(236,140,106,.15);border-bottom:1px dashed rgba(236,140,106,.55);display:flex;align-items:center;justify-content:center;gap:6px;"><span style="font-size:10.5px;color:var(--coral);">부채</span><span style="font-family:var(--mono);font-size:12px;color:var(--coral);">130.6</span></div>
+              <div style="height:77%;background:rgba(233,196,107,.14);display:flex;flex-direction:column;align-items:center;justify-content:center;"><span style="font-size:10.5px;color:var(--gold);">자본(주주 몫)</span><span style="font-family:var(--mono);font-weight:700;font-size:15px;color:var(--gold);">436.3</span></div>
+            </div>
+          </div>
+          <div style="font-size:11.5px;color:var(--dim);margin-top:10px;line-height:1.65;">두 기둥의 높이가 똑같아요 — 회사가 가진 재산(자산)은 반드시 <b style="color:var(--coral);">갚아야 할 남의 돈(부채)</b>과 <b style="color:var(--gold);">주주의 몫(자본)</b>을 더한 것과 같아요. 이게 재무상태표의 뼈대예요.</div>
+        </div>
+      </div>
+
+      <div data-zone="zoneE" style="padding:30px 6px 14px;display:flex;align-items:baseline;gap:12px;">
+        <span style="font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--gold);border:1px solid rgba(233,196,107,.4);padding:3px 8px;border-radius:4px;flex-shrink:0;">ZONE E</span>
+        <span style="font-size:19px;font-weight:700;">주주의 몫(자본)은 어떻게 변했을까요?</span>
+      </div>
+      <div style="position:relative;background:var(--panel);border:1px solid var(--line);border-radius:10px;margin-bottom:30px;" style-before="content:'';position:absolute;top:-1px;left:-1px;width:14px;height:14px;border-top:2px solid var(--gold);border-left:2px solid var(--gold);border-radius:3px 0 0 0;" style-after="content:'';position:absolute;bottom:-1px;right:-1px;width:14px;height:14px;border-bottom:2px solid var(--gold);border-right:2px solid var(--gold);border-radius:0 0 3px 0;">
+        <div style="display:flex;align-items:center;gap:11px;padding:13px 16px;border-bottom:1px solid var(--line);background:rgba(233,196,107,.05);">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold);flex-shrink:0;"></span>
+          <div>
+            <div style="font-family:var(--mono);font-size:11.5px;letter-spacing:.22em;color:var(--gold);">CHANGES IN EQUITY</div>
+            <div style="font-size:12.5px;color:var(--dim);">자본변동표(당기만) — 주주의 몫(자본)이 1년 새 어떻게 늘고 줄었나예요.</div>
+          </div>
+        </div>
+        <div data-row="eq-begin" onclick="{{ onRow }}" title="402,192,070 백만원" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;cursor:pointer;" style-hover="background:rgba(233,196,107,.06)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">E0</span><span>기초자본</span></div>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--gold);">402.2</span>
+        </div>
+        <div data-row="eq-netincome" onclick="{{ onRow }}" title="45,206,805 백만원 — 손익계산서의 당기순이익과 같은 숫자" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(233,196,107,.06)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">E1</span><span>당기순이익 적립</span></div>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--gold);">+45.2</span>
+        </div>
+        <div data-row="eq-oci" onclick="{{ onRow }}" title="6,083,719 백만원 — 손익을 거치지 않고 자본으로 직접" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(233,196,107,.06)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">E2</span><span>기타포괄손익 (OCI)</span></div>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--gold);">+6.1</span>
+        </div>
+        <div data-row="eq-div" onclick="{{ onRow }}" title="9,897,183 백만원 — 재무활동 현금흐름에서 실제로 나간 돈" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(233,196,107,.06)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">E3</span><span>배당 <span style="font-size:11px;color:var(--dim);font-weight:400;">⑬ 재무활동과 같은 돈</span></span></div>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--coral);">−9.9</span>
+        </div>
+        <div data-row="eq-buyback" onclick="{{ onRow }}" title="8,189,263 백만원 — 재무활동 현금흐름에서 실제로 나간 돈" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(233,196,107,.06)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">E4</span><span>자기주식 취득 <span style="font-size:11px;color:var(--dim);font-weight:400;">⑬ 재무활동과 같은 돈</span></span></div>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--coral);">−8.2</span>
+        </div>
+        <div data-row="eq-other" onclick="{{ onRow }}" title="923,178 백만원" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(233,196,107,.06)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">E5</span><span>주식보상·기타</span></div>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--gold);">+0.9</span>
+        </div>
+        <div data-row="eq-end" onclick="{{ onRow }}" title="436,320,337 백만원 (402.2 +45.2 +6.1 −9.9 −8.2 +0.9 = 436.3)" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid rgba(233,196,107,.35);cursor:pointer;background:rgba(233,196,107,.06);font-weight:700;" style-hover="background:rgba(233,196,107,.11)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:.08em;">E6</span><span>기말자본</span></div>
+          <span style="font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);text-shadow:0 0 12px rgba(233,196,107,.5);">436.3</span>
+        </div>
+      </div>
+
+      <div data-epilogue="" style="padding:44px 6px 20px;text-align:center;">
+        <div style="font-family:var(--mono);font-size:11px;letter-spacing:.3em;color:var(--dim2);">— 여정의 끝 —</div>
+        <div style="margin-top:10px;font-size:13px;color:var(--dim);">이제 궁금한 항목을 아무거나 눌러보세요 — 왼쪽 매듭도, 가운데 표의 줄도 모두 눌러져요.</div>
+      </div>
+      <div style="margin:8px 6px 0;border:1px dashed var(--line);border-radius:10px;padding:14px 8px 6px;">
+        <div style="font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--dim2);margin:0 8px 8px;">APPENDIX · 별도 주석 (14) — 클릭하면 딥다이브가 열려요</div>
+        <div data-row="apx-ju1" onclick="{{ onRow }}" title="일반사항" style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 10px;border-top:1px dashed rgba(140,170,210,.10);cursor:pointer;" style-hover="background:rgba(140,190,230,.05)"><span style="font-size:12.5px;"><b style="font-family:var(--mono);font-size:9.5px;color:var(--dim2);letter-spacing:.06em;margin-right:7px;">주1</b>일반사항</span><span style="font-family:var(--mono);font-size:11px;color:var(--dim);">종속기업 308개 ›</span></div>
+        <div data-row="apx-ju2" onclick="{{ onRow }}" title="회계처리방침" style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 10px;border-top:1px dashed rgba(140,170,210,.10);cursor:pointer;" style-hover="background:rgba(140,190,230,.05)"><span style="font-size:12.5px;"><b style="font-family:var(--mono);font-size:9.5px;color:var(--dim2);letter-spacing:.06em;margin-right:7px;">주2</b>중요한 회계처리방침</span><span style="font-family:var(--mono);font-size:11px;color:var(--dim);">K-IFRS ›</span></div>
+        <div data-row="apx-ju3" onclick="{{ onRow }}" title="회계추정" style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 10px;border-top:1px dashed rgba(140,170,210,.10);cursor:pointer;" style-hover="background:rgba(140,190,230,.05)"><span style="font-size:12.5px;"><b style="font-family:var(--mono);font-size:9.5px;color:var(--dim2);letter-spacing:.06em;margin-right:7px;">주3</b>중요한 회계추정</span><span style="font-family:var(--mono);font-size:11px;color:var(--dim);">미래 가정 ›</span></div>
+        <div data-row="apx-ju4" onclick="{{ onRow }}" title="범주별 금융상품" style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 10px;border-top:1px dashed rgba(140,170,210,.10);cursor:pointer;" style-hover="background:rgba(140,190,230,.05)"><span style="font-size:12.5px;"><b style="font-family:var(--mono);font-size:9.5px;color:var(--dim2);letter-spacing:.06em;margin-right:7px;">주4</b>범주별 금융상품</span><span style="font-family:var(--mono);font-size:11px;color:var(--cyan);">215.2조 ›</span></div>
+        <div data-row="apx-ju5" onclick="{{ onRow }}" title="매출채권 양도(팩토링)" style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 10px;border-top:1px dashed rgba(140,170,210,.10);cursor:pointer;" style-hover="background:rgba(140,190,230,.05)"><span style="font-size:12.5px;"><b style="font-family:var(--mono);font-size:9.5px;color:var(--dim2);letter-spacing:.06em;margin-right:7px;">주5</b>매출채권 양도(팩토링)</span><span style="font-family:var(--mono);font-size:11px;color:var(--dim);">17.4조 ›</span></div>
+        <div data-row="apx-ju14" onclick="{{ onRow }}" title="순확정급여(퇴직급여)" style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 10px;border-top:1px dashed rgba(140,170,210,.10);cursor:pointer;" style-hover="background:rgba(140,190,230,.05)"><span style="font-size:12.5px;"><b style="font-family:var(--mono);font-size:9.5px;color:var(--dim2);letter-spacing:.06em;margin-right:7px;">주14</b>순확정급여(퇴직급여)</span><span style="font-family:var(--mono);font-size:11px;color:var(--mint);">순 +3.7조 ›</span></div>
+        <div data-row="apx-ju15" onclick="{{ onRow }}" title="충당부채" style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 10px;border-top:1px dashed rgba(140,170,210,.10);cursor:pointer;" style-hover="background:rgba(140,190,230,.05)"><span style="font-size:12.5px;"><b style="font-family:var(--mono);font-size:9.5px;color:var(--dim2);letter-spacing:.06em;margin-right:7px;">주15</b>충당부채</span><span style="font-family:var(--mono);font-size:11px;color:var(--coral);">10.6조 ›</span></div>
+        <div data-row="apx-ju16" onclick="{{ onRow }}" title="우발부채와 약정" style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 10px;border-top:1px dashed rgba(140,170,210,.10);cursor:pointer;" style-hover="background:rgba(140,190,230,.05)"><span style="font-size:12.5px;"><b style="font-family:var(--mono);font-size:9.5px;color:var(--dim2);letter-spacing:.06em;margin-right:7px;">주16</b>우발부채와 약정</span><span style="font-family:var(--mono);font-size:11px;color:var(--dim);">약정 52.9조 ›</span></div>
+        <div data-row="apx-ju18" onclick="{{ onRow }}" title="자본금" style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 10px;border-top:1px dashed rgba(140,170,210,.10);cursor:pointer;" style-hover="background:rgba(140,190,230,.05)"><span style="font-size:12.5px;"><b style="font-family:var(--mono);font-size:9.5px;color:var(--dim2);letter-spacing:.06em;margin-right:7px;">주18</b>자본금</span><span style="font-family:var(--mono);font-size:11px;color:var(--gold);">0.9조 ›</span></div>
+        <div data-row="apx-ju26" onclick="{{ onRow }}" title="주당이익(EPS)" style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 10px;border-top:1px dashed rgba(140,170,210,.10);cursor:pointer;" style-hover="background:rgba(140,190,230,.05)"><span style="font-size:12.5px;"><b style="font-family:var(--mono);font-size:9.5px;color:var(--dim2);letter-spacing:.06em;margin-right:7px;">주26</b>주당이익(EPS)</span><span style="font-family:var(--mono);font-size:11px;color:var(--mint);">6,605원 ›</span></div>
+        <div data-row="apx-ju28" onclick="{{ onRow }}" title="재무위험관리" style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 10px;border-top:1px dashed rgba(140,170,210,.10);cursor:pointer;" style-hover="background:rgba(140,190,230,.05)"><span style="font-size:12.5px;"><b style="font-family:var(--mono);font-size:9.5px;color:var(--dim2);letter-spacing:.06em;margin-right:7px;">주28</b>재무위험관리</span><span style="font-family:var(--mono);font-size:11px;color:var(--dim);">Aa2 / AA− ›</span></div>
+        <div data-row="apx-ju29" onclick="{{ onRow }}" title="공정가치 측정" style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 10px;border-top:1px dashed rgba(140,170,210,.10);cursor:pointer;" style-hover="background:rgba(140,190,230,.05)"><span style="font-size:12.5px;"><b style="font-family:var(--mono);font-size:9.5px;color:var(--dim2);letter-spacing:.06em;margin-right:7px;">주29</b>공정가치 측정</span><span style="font-family:var(--mono);font-size:11px;color:var(--cyan);">레벨 1·2·3 ›</span></div>
+        <div data-row="apx-ju31" onclick="{{ onRow }}" title="특수관계자 거래" style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 10px;border-top:1px dashed rgba(140,170,210,.10);cursor:pointer;" style-hover="background:rgba(140,190,230,.05)"><span style="font-size:12.5px;"><b style="font-family:var(--mono);font-size:9.5px;color:var(--dim2);letter-spacing:.06em;margin-right:7px;">주31</b>특수관계자 거래</span><span style="font-family:var(--mono);font-size:11px;color:var(--dim);">매입 18.2조 ›</span></div>
+        <div data-row="apx-ju34" onclick="{{ onRow }}" title="보고기간후사건" style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 10px;border-top:1px dashed rgba(140,170,210,.10);cursor:pointer;" style-hover="background:rgba(140,190,230,.05)"><span style="font-size:12.5px;"><b style="font-family:var(--mono);font-size:9.5px;color:var(--dim2);letter-spacing:.06em;margin-right:7px;">주34</b>보고기간후사건</span><span style="font-family:var(--mono);font-size:11px;color:var(--gold);">자사주 6.07조 ›</span></div>
+      </div>
+    </div>
+
+    <div data-right="" data-screen-label="설명 인스펙터" style="position:sticky;top:0;height:100vh;display:flex;flex-direction:column;min-width:0;border-left:1px solid var(--line);background:rgba(8,11,20,.62);backdrop-filter:blur(8px);z-index:4;">
+      <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center;padding:12px 30px;border-bottom:1px solid var(--line);">
+        <span style="font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--dim2);">COLOR LEGEND</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--dim);"><span style="width:9px;height:9px;border-radius:50%;background:var(--mint);box-shadow:0 0 8px var(--mint);"></span>손익 (벌고 쓴 것)</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--dim);"><span style="width:9px;height:9px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan);"></span>현금</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--dim);"><span style="width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold);"></span>자본 (주주 몫)</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--dim);"><span style="width:9px;height:9px;border-radius:50%;background:var(--coral);box-shadow:0 0 8px var(--coral);"></span>유출</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--dim);"><span style="width:9px;height:9px;border-radius:50%;background:var(--steel);"></span>잔액·상태 (BS)</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--dim);"><span style="width:12px;height:0;border-top:2px dashed var(--cyan);"></span>비현금 (현금 안 움직임)</span>
+      </div>
+      <sc-if value="{{ isPinned }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:9px 30px;border-bottom:1px solid rgba(233,196,107,.3);background:rgba(233,196,107,.05);">
+          <span style="font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;color:var(--gold);">PINNED · 딥다이브 고정</span>
+          <button onclick="{{ unpin }}" style="font-family:var(--sans);font-size:12.5px;color:var(--text);background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:6px;padding:6px 12px;cursor:pointer;">✕ 흐름으로 돌아가기 <span style="color:var(--dim2);font-size:11px;">Esc</span></button>
+        </div>
+      </sc-if>
+      <sc-if value="{{ isJourney }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 30px;border-bottom:1px solid var(--line);">
+          <span style="font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;color:var(--cyan);">JOURNEY · 여정 모드</span>
+          <span style="font-size:12px;color:var(--dim);">스크롤 = 이야기 진행 · 항목 클릭 = 딥다이브 고정</span>
+        </div>
+      </sc-if>
+      <div data-insp="" style="flex:1;overflow-y:auto;padding:30px 36px 44px;">{{ inspectorCard }}</div>
+    </div>
+  </div>
+
+  {{ runningChip }}
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{
+  &quot;particles&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;은하수&quot; },
+  &quot;glowStrength&quot;: { &quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 1, &quot;min&quot;: 0.4, &quot;max&quot;: 1.6, &quot;step&quot;: 0.1, &quot;tsType&quot;: &quot;number&quot;, &quot;section&quot;: &quot;은하수&quot; },
+  &quot;rowH&quot;: { &quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 64, &quot;min&quot;: 52, &quot;max&quot;: 84, &quot;step&quot;: 2, &quot;unit&quot;: &quot;px&quot;, &quot;tsType&quot;: &quot;number&quot;, &quot;section&quot;: &quot;레이아웃&quot; }
+}">
+class Component extends DCLogic {
+  state = { pos: null, zoneY: null, W: 300, H: 5200, midW: 600, midH: 5200, midPos: null, active: 'overview', pin: null, exp: { sgna: false, nonop: false, ni: false, noncash: false, wc: false, inv: false, fin: false, bsa: false, bsl: false, bse: false } };
+
+  C = { mint:'#74EEC6', cyan:'#5CC7EA', gold:'#E9C46B', coral:'#EC8C6A', steel:'#7590B0', green:'#63d68e', text:'#eef4fb', dim:'#8fa1b6' };
+
+  // ===== CONFIG — 은하수의 모든 튜닝 값 =====
+  CONFIG = {
+    ribbon: { min: 6, max: 44, ref: 333.6, scale: 'sqrt', uniform: true, mainW: 6, branchW: 3.5 },
+    rail: { x: 22 },
+    spineX: 0.48, // 본류 x 위치(0~1). null이면 매듭별 xf 사용(구불구불)
+    band: { lMin: 64, lFrac: 0.26, r: 30 },
+    reservoirs: { begin: 53.71, end: 57.86, deltaJo: 4.15, rBegin: 30, rEnd: 31 },
+    tributary: { outDx: -58, outDy: 44, inDx: 120, inDy: -34 },
+    narration: { centerFrac: 0.44, topReset: 60 },
+  };
+
+  KNOTS = [
+    { id:'k1',  num:'01',  row:'pbs-cash',       xf:.46, kind:'res',    name:'기초현금',        amt:'53.71조', col:'cyan',
+      story:"1년 전, 통장엔 현금 [53.7조]가 있었어요. 여기서 이야기가 시작돼요.\n왼쪽의 큰 원은 '흐름'이 아니라 고여 있는 '잔액'이에요 — 흐르는 강(리본)과는 굵기의 기준 자체가 달라요." },
+    { id:'k2',  num:'02',  row:'is-revenue',     xf:.58, kind:'source', name:'매출',            amt:'333.6조', col:'mint', src:'고객이 낸 돈',
+      story:"1초에 약 [1,000만 원] 꼴로 들어온 셈이에요. 이 돈, 어느 사업부가 벌었을까요?\n강의 발원지예요. 통장(저수지)에서 나오는 게 아니라, 고객에게서 새로 샘솟아요." },
+    { id:'k3',  num:'03',  row:'is-cogs',        xf:.50, kind:'out',    name:'매출원가',        amt:'−202.2조', col:'coral', dest:'협력사·부품·재료로',
+      story:"제품을 만드는 데 든 값이에요. 매출의 약 [61%]가 여기서 빠져나가요.\n대부분은 만들어 창고에 쌓아뒀던 제품이 팔리며 비용으로 바뀐 거랍니다." },
+    { id:'k4',  num:'04',  row:'is-grossprofit', xf:.42, kind:'node',   name:'매출총이익',      amt:'131.4조', col:'mint',
+      story:"매출에서 만드는 값(원가)을 뺀, 회사가 남긴 [첫 번째 이익]이에요." },
+    { id:'k5',  num:'05',  row:'is-sgna',        xf:.52, kind:'out',    name:'판관비',          amt:'−87.8조', col:'coral', dest:'직원·광고·R&D로',
+      story:"물건을 파는 데(광고·영업)와 회사를 굴리는 데(관리·인건비) 쓴 돈이에요.\n놀랍게도 이 중 연구개발(R&D)에만 [37.7조] — 판관비의 [43%]를 썼답니다." },
+    { id:'k6',  num:'06',  row:'is-opincome',    xf:.44, kind:'node',   name:'영업이익',        amt:'43.6조', col:'mint',
+      story:"본업(장사)으로 남긴 이익이에요. 어느 사업부가 중심일까요? (힌트: 반도체)" },
+    { id:'k6b', num:'06ᵇ', row:'is-nonop',       xf:.46, kind:'in',     name:'영업외·금융손익', amt:'+5.9조', col:'mint', src:'이자·환율·지분법',
+      story:"본업 밖에서 생긴 손익이에요. 예금 이자, 환율이 오르내리며 생긴 이익, 지분을 나눠 가진 회사들에서 온 몫 같은 것을 더하고 빼면 순 [+5.9조]가 남아요.\n그래서 세금 내기 전 이익(세전이익)이 [49.5조]가 돼요." },
+    { id:'k7',  num:'07',  row:'is-tax',         xf:.50, kind:'out',    name:'법인세',          amt:'−4.3조', col:'coral', dest:'나라(세금)로',
+      story:"세전 [49.5조]에 비하면 세금이 아주 적어요(이익의 [8.6%]). 왜 이렇게 적을까요?" },
+    { id:'k8',  num:'08',  row:'is-netincome',   xf:.42, kind:'hub',    name:'당기순이익',      amt:'45.2조', col:'mint',
+      story:"세금까지 다 뗀 최종 이익이에요. 삼성전자와 자회사를 합친 '연결' 기준인데, 그중 삼성 본체 몫이 [44.3조], 자회사의 다른 주주 몫이 [0.9조]예요.\n이 이익은 손익·자본·현금 세 곳에 동시에 나타나요." },
+    { id:'k9',  num:'09',  row:'cf-noncash',     xf:.50, kind:'back',   name:'비현금 조정',     amt:'+52.4조', col:'cyan',
+      story:"손익 계산에선 비용으로 뺐지만 실제로는 현금이 나가지 않은 돈들이에요. 가장 큰 건 감가상각 [43.6조]인데, 현금은 예전에 장비를 살 때 이미 나갔고 올해는 그 장비가 낡은 만큼을 장부에 나눠 적은 것뿐이라 올해 나간 현금은 없어요.\n이런 돈들(모두 [52.4조])을 현금 관점에선 도로 더해줘요. 여기서 강의 색이 민트에서 시안으로 바뀌어요 — 진짜 현금 이야기의 시작이에요." },
+    { id:'k10', num:'10',  row:'cf-wc',          xf:.44, kind:'out',    name:'운전자본 변동',   amt:'−9.6조', col:'coral', dest:'외상·재고에 묶임',
+      story:"아직 못 받은 외상값이 [4.6조] 늘고, 현금을 들여 만들었지만 아직 안 팔린 재고가 [3.6조] 쌓였어요.\n이익엔 잡혔어도 그만큼 현금이 아직 안 들어와서, 현금 관점에선 빼줘요." },
+    { id:'k10b',num:'10ᵇ', row:'cf-paid',        xf:.50, kind:'out',    name:'이자·세금 실납부', amt:'−2.7조', col:'coral', dest:'나라·은행으로',
+      story:"손익에 기록한 세금과 올해 실제로 낸 세금은 시점이 조금 달라요.\n현금흐름표는 '실제로 나간 돈' 기준이라, 그 차이와 이자 납부까지 반영하면 영업현금흐름이 딱 맞아떨어져요 ([45.2+52.4−9.6−2.7=85.3])." },
+    { id:'k11', num:'11',  row:'cf-op',          xf:.47, kind:'bright', name:'영업현금흐름',    amt:'85.3조', col:'cyan',
+      story:"이렇게 바꾸니 실제로 들어온 현금은 손익상 이익의 거의 [2배]예요!\n안 나간 비용(감가상각)을 도로 더했기 때문이랍니다. 강의 굵기가 다시 굵어진 게 보이나요?" },
+    { id:'k12', num:'12',  row:'cf-inv',         xf:.54, kind:'out',    name:'투자활동',        amt:'−68.5조', col:'coral', dest:'새 공장·장비로',
+      story:"번 현금의 절반 이상을 새 공장·장비([47.5조])에 다시 투자했어요. 미래를 위한 지출이죠." },
+    { id:'k13', num:'13',  row:'cf-fin',         xf:.47, kind:'out',    name:'재무활동',        amt:'−13.5조', col:'coral', dest:'주주에게',
+      story:"배당 [9.9조]와 자사주 매입 [8.2조]로 주주에게 돌려주고, 새로 빌린 돈 [4.6조]를 도로 더하면 순유출은 [13.5조]예요." },
+    { id:'k14', num:'14',  row:'cf-fx',          xf:.50, kind:'in',     name:'환율효과',        amt:'+0.8조', col:'cyan', src:'환율 변동',
+      story:"해외에서 번 돈을 원화로 바꿀 때 환율이 움직여 생긴 작은 합류예요." },
+    { id:'k15', num:'15',  row:'bs-cash',        xf:.46, kind:'res',    name:'기말현금',        amt:'57.86조', col:'cyan',
+      story:"세 활동과 환율효과를 모두 더하니 통장의 현금이 [4.15조] 늘어, [53.7조]에서 [57.9조]가 됐어요.\n회사 전체 자산도 [566.9조]로 불었고요." },
+  ];
+
+  SEGS = [
+    ['k1','k2',5,'cyan'],
+    ['k2','k3',333.6,'mint'], ['k3','k4',131.4,'mint'], ['k4','k5',131.4,'mint'],
+    ['k5','k6',43.6,'mint'], ['k6','k6b',43.6,'mint'], ['k6b','k7',49.5,'mint'],
+    ['k7','k8',45.2,'mint'], ['k8','k9',45.2,'grad'], ['k9','k10',97.6,'cyan'],
+    ['k10','k10b',88,'cyan'], ['k10b','k11',85.3,'cyan'], ['k11','k12',85.3,'cyan'],
+    ['k12','k13',16.8,'cyan'], ['k13','k14',3.4,'cyan'], ['k14','k15',4.15,'cyan'],
+  ];
+
+  EQE = [
+    { row:'eq-begin',     t:'402.2', big:true },
+    { row:'eq-netincome', t:'+45.2' },
+    { row:'eq-oci',       t:'+6.1', oci:true },
+    { row:'eq-div',       t:'−9.9', neg:true },
+    { row:'eq-buyback',   t:'−8.2', neg:true },
+    { row:'eq-other',     t:'+0.9' },
+    { row:'eq-end',       t:'436.3', big:true },
+  ];
+
+  ZONES = {
+    zoneA:{ l:'A', c:'steel', q:'작년 통장엔 얼마가 있었을까요?', g:"모든 이야기는 작년 말 통장 잔액 [53.71조]에서 시작해요.\n왼쪽의 큰 원이 그 잔액 — 흐르는 강이 아니라 고여 있는 저수지예요." },
+    zoneB:{ l:'B', c:'mint', q:'1년 동안 얼마 벌고 얼마 썼을까요?', g:"여기는 손익계산서, 1년 장사 성적표의 구간이에요.\n민트색 강은 아직 '계산상 이익'의 이야기랍니다 — 통장의 진짜 현금과는 달라요." },
+    zoneC:{ l:'C', c:'cyan', q:'계산상 이익은 진짜 현금이 됐을까요?', g:"이 구간에서 강의 색이 민트에서 시안으로 바뀌어요 — 지금부터는 진짜 통장(현금) 이야기예요.\n이익 [45.2조]가 현금 [85.3조]로 불어나는 과정을 보세요." },
+    zoneD:{ l:'D', c:'cyan', q:'그래서 통장엔 얼마가 남았을까요?', g:"1년의 여정이 아래 큰 저수지(기말현금)로 모여요.\n통장은 [+4.15조] 불었어요 — [53.71 + 4.15 = 57.86]." },
+    zoneE:{ l:'E', c:'gold', q:'주주의 몫(자본)은 어떻게 변했을까요?', g:"당기순이익 매듭(⑧)에서 갈라진 가는 골드 실이 여기 주주의 곳간으로 이어져요.\n순이익과 OCI가 쌓이고, 배당·자사주로 꺼내요." },
+  };
+
+  EQSTORY = {
+    'eq-begin':    { name:'기초자본', amt:'402.2조', story:"작년 말 주주의 곳간(자본)엔 [402.2조]가 쌓여 있었어요. 여기에 올해의 이야기가 더해져요." },
+    'eq-netincome':{ name:'+ 당기순이익 적립', amt:'+45.2조', story:"올해 번 순이익 [45.2조]가 곳간에 새로 쌓여요.\n손익계산서 맨 아래의 그 숫자와 같은 돈이에요 — 하나의 이익이 손익·현금·자본 세 표에 동시에 나타나요." },
+    'eq-oci':      { name:'+ 기타포괄손익 (OCI)', amt:'+6.1조', story:"OCI [+6.1조]는 손익 성적표를 거치지 않고 곧바로 자본으로 들어와요.\n오래 보유한 주식의 평가이익, 해외 자산의 환산차이 같은 것들이라 은하수 밖에서 시안 점선으로 합류해요." },
+    'eq-div':      { name:'− 배당', amt:'−9.9조', story:"배당 [9.9조]는 주주에게 실제 현금으로 돌려준 돈이에요.\n재무활동 현금흐름(⑬)에서 나간 그 돈과 같은 돈이랍니다 — 같은 돈이 두 표에 보여요." },
+    'eq-buyback':  { name:'− 자기주식 취득', amt:'−8.2조', story:"자기주식 [8.2조]어치를 사들였어요. 이것도 재무활동에서 실제 현금이 나간, 배당과 같은 주주 환원이에요.\n2024년부터 다시 시작해 올해 크게 늘렸답니다." },
+    'eq-other':    { name:'+ 주식보상·기타', amt:'+0.9조', story:"주식보상 등 자잘한 증감을 더하면 [+0.9조] — 이걸 빼먹으면 곳간의 합계가 딱 맞지 않아요." },
+    'eq-end':      { name:'기말자본', amt:'436.3조', story:"[402.2 +45.2 +6.1 −9.9 −8.2 +0.9 = 436.3] — 합이 딱 닫혀요.\n주주의 곳간이 1년 새 [34.1조] 두꺼워졌어요. 재무상태표의 자본총계와 같은 숫자예요." },
+  };
+
+  RT = { k8:0, k9:1, k10:2, k10b:3, k11:4 };
+  RTSTEPS = [ ['45.2','mint'], ['+52.4','cyan'], ['−9.6','coral'], ['−2.7','coral'], ['= 85.3','cyan'] ];
+
+  // ---------- lifecycle ----------
+  componentDidMount() {
+    this._raf = null;
+    this._onScroll = () => { if (this._raf) return; this._raf = requestAnimationFrame(() => { this._raf = null; this.updateActive(); }); };
+    this._onResize = () => this.queueMeasure();
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    window.addEventListener('resize', this._onResize);
+    requestAnimationFrame(() => { this.measureNow(); this.attachRO(); });
+    this._onKey = (e) => { if (e.key === 'Escape') this.unpin(); };
+    document.addEventListener('keydown', this._onKey);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => this.queueMeasure());
+    setTimeout(() => this.queueMeasure(), 600);
+    this.applyTokens();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._onScroll);
+    window.removeEventListener('resize', this._onResize);
+    document.removeEventListener('keydown', this._onKey);
+    clearTimeout(this._stepT);
+    clearTimeout(this._syncT);
+    if (this._ro) this._ro.disconnect();
+  }
+  componentDidUpdate() { this.applyTokens(); this.applyJourneyHL(); }
+
+  applyTokens() {
+    document.documentElement.style.setProperty('--row-h', (this.props.rowH ?? 64) + 'px');
+  }
+  get glow() { return Math.max(.2, Math.min(2, this.props.glowStrength ?? 1)); }
+
+  attachRO() {
+    const mid = document.querySelector('[data-mid]');
+    const left = document.querySelector('[data-left]');
+    if (!mid || !left) return;
+    this._ro = new ResizeObserver(() => this.queueMeasure());
+    this._ro.observe(mid); this._ro.observe(left);
+  }
+  queueMeasure() { if (this._mq) return; this._mq = requestAnimationFrame(() => { this._mq = null; this.measureNow(); }); }
+
+  measureNow() {
+    const left = document.querySelector('[data-left]');
+    if (!left) return;
+    const lt = left.getBoundingClientRect();
+    const pos = {}, zoneY = {};
+    document.querySelectorAll('[data-row]').forEach(el => {
+      const r = el.getBoundingClientRect();
+      pos[el.getAttribute('data-row')] = Math.round(r.top - lt.top + r.height / 2);
+    });
+    document.querySelectorAll('[data-zone]').forEach(el => {
+      const r = el.getBoundingClientRect();
+      zoneY[el.getAttribute('data-zone')] = Math.round(r.top - lt.top + 8);
+    });
+    const W = Math.round(left.clientWidth), H = Math.round(left.clientHeight);
+    const mid = document.querySelector('[data-mid]');
+    const midPos = {};
+    let midW = this.state.midW, midH = this.state.midH;
+    if (mid) {
+      const mt = mid.getBoundingClientRect();
+      midW = Math.round(mid.clientWidth); midH = Math.round(mid.clientHeight);
+      document.querySelectorAll('[data-row]').forEach(el => {
+        const r = el.getBoundingClientRect();
+        midPos[el.getAttribute('data-row')] = { y: Math.round(r.top - mt.top + r.height / 2), x1: Math.round(r.left - mt.left), x2: Math.round(r.right - mt.left) };
+      });
+    }
+    const sig = W + '|' + H + '|' + pos['is-revenue'] + '|' + pos['eq-end'] + '|' + pos['bs-cash'] + '|' + pos['cf-op'];
+    if (sig === this._sig) return;
+    this._sig = sig;
+    this.setState({ pos, zoneY, W, H, midPos, midW, midH });
+  }
+
+  // ---------- journey ----------
+  get STATIONS() {
+    const s = [{ id: 'zoneA', sel: '[data-zone="zoneA"]' }];
+    const zoneBefore = { k2: 'zoneB', k9: 'zoneC', k15: 'zoneD' };
+    for (const k of this.KNOTS) {
+      if (zoneBefore[k.id]) s.push({ id: zoneBefore[k.id], sel: `[data-zone="${zoneBefore[k.id]}"]` });
+      s.push({ id: k.id, sel: `[data-row="${k.row}"]` });
+    }
+    s.push({ id: 'zoneE', sel: '[data-zone="zoneE"]' });
+    for (const e of this.EQE) s.push({ id: e.row, sel: `[data-row="${e.row}"]` });
+    s.push({ id: 'epilogue', sel: '[data-epilogue]' });
+    return s;
+  }
+
+  updateActive() {
+    const line = window.innerHeight * this.CONFIG.narration.centerFrac;
+    let cur = 'overview';
+    if (window.scrollY >= this.CONFIG.narration.topReset) {
+      for (const st of this.STATIONS) {
+        const el = document.querySelector(st.sel);
+        if (el && el.getBoundingClientRect().top <= line) cur = st.id;
+      }
+    }
+    // ★ 스크롤 한 칸 = 카드 한 장:
+    //  - 스크롤 제스처가 일어날 때만, 목표 방향으로 정확히 한 칸 이동한다 (타이머 캐치업으로 카드를 스치지 않음)
+    //  - 스크롤이 멈추면(450ms) 화면 중앙의 정거장으로 한 번에 재동기화한다 (중간 카드를 깜빡이며 지나가지 않음)
+    this._target = cur;
+    const order = ['overview', ...this.STATIONS.map(s => s.id)];
+    const ci = order.indexOf(this.state.active), ti = order.indexOf(cur);
+    clearTimeout(this._syncT);
+    if (ci === -1 || ti === -1) { this.setState({ active: cur }); return; }
+    // ★ 제스처 감지: 스크롤 이벤트가 250ms 이상 끊겼다가 다시 시작된 순간만 '새 제스처'로 본다.
+    // 휠 한 칸의 관성 스크롤(수백 ms 지속)은 하나의 제스처 — 그 안에서는 절대 두 번 이동하지 않는다.
+    const now = performance.now();
+    const newGesture = now - (this._lastEvt || 0) > 250;
+    this._lastEvt = now;
+    if (ti !== ci) {
+      if (newGesture) {
+        this._lastStep = now;
+        this.setState({ active: order[ci + Math.sign(ti - ci)] });
+      }
+      // 스크롤이 잠잠해진 뒤, 많이(3칸 초과) 어긋났을 때만 단번에 동기화.
+      // 1~3칸 차이는 그대로 두고 다음 스크롤 제스처 때 한 칸씩 따라간다 —
+      // 방금 보여준 카드를 유휴 타이머가 곧바로 밀어내는 이중 전환(씹힘)을 막는다.
+      this._syncT = setTimeout(() => {
+        if (!this._target || this._target === this.state.active) return;
+        const o2 = ['overview', ...this.STATIONS.map(s => s.id)];
+        const c2 = o2.indexOf(this.state.active), t2 = o2.indexOf(this._target);
+        if (c2 !== -1 && t2 !== -1 && Math.abs(t2 - c2) <= 3) return;
+        this._lastStep = performance.now();
+        this.setState({ active: this._target });
+      }, 450);
+    }
+  }
+
+  applyJourneyHL() {
+    const k = this.KNOTS.find(x => x.id === this.state.active);
+    const row = k ? k.row : (this.EQSTORY[this.state.active] ? this.state.active : null);
+    const hl = new Set(this.HL[this.state.pin] || []);
+    document.querySelectorAll('[data-row]').forEach(el => {
+      const id = el.getAttribute('data-row');
+      if (hl.has(id)) el.setAttribute('data-hl', '1'); else el.removeAttribute('data-hl');
+      if (!this.state.pin && row && id === row) el.setAttribute('data-jl', '1'); else el.removeAttribute('data-jl');
+    });
+  }
+
+  onRow = (e) => {
+    const id = e.currentTarget.getAttribute('data-row');
+    this.pin(this.ROW2DIVE[id] || id);
+  };
+
+  onKnot(id) { this.pin(id); }
+
+  pin = (key) => {
+    if (!this.getDives()[key]) return;
+    const exp = { ...this.state.exp };
+    (this.HL[key] || []).forEach(r => { const g = this.GROUP_OF[r]; if (g) exp[g] = true; });
+    this.setState({ pin: key, exp });
+  };
+  unpin = () => { if (this.state.pin) this.setState({ pin: null }); };
+  onToggle = (e) => {
+    e.stopPropagation();
+    const g = e.currentTarget.getAttribute('data-g');
+    this.setState(s => ({ exp: { ...s.exp, [g]: !s.exp[g] } }));
+  };
+  scrollToRow = (row) => {
+    const el = document.querySelector(`[data-row="${row}"]`);
+    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.44, behavior: 'smooth' });
+  };
+  hoverRow = (row, on) => {
+    const el = document.querySelector(`[data-row="${row}"]`);
+    if (!el) return;
+    if (on) el.setAttribute('data-hl', '1');
+    else if (!(this.HL[this.state.pin] || []).includes(row)) el.removeAttribute('data-hl');
+  };
+
+  // ---------- helpers ----------
+  rgba(hex, a) { const n = parseInt(hex.slice(1), 16); return `rgba(${(n >> 16) & 255},${(n >> 8) & 255},${n & 255},${a})`; }
+  colOf(name) { return this.C[name] || name; }
+
+  rich(text, color) {
+    const h = React.createElement;
+    const parts = String(text).split(/(\[[^\]]*\])/g);
+    return parts.map((p, i) => {
+      if (p.startsWith('[') && p.endsWith(']')) {
+        return h('span', { key: i, style: { fontFamily: 'var(--mono)', fontSize: '.9em', fontWeight: 600, color, background: this.rgba(color, .09), border: `1px solid ${this.rgba(color, .32)}`, borderRadius: '5px', padding: '1px 7px', margin: '0 2px', whiteSpace: 'nowrap' } }, p.slice(1, -1));
+      }
+      return p;
+    });
+  }
+  paras(story, color) {
+    const h = React.createElement;
+    return String(story).split('\n').map((t, i) =>
+      h('p', { key: i, style: { margin: '0 0 15px', fontSize: '17px', lineHeight: 1.85, color: 'var(--text)' } }, ...this.rich(t, color)));
+  }
+
+  // ---------- galaxy ----------
+  buildGalaxy() {
+    const h = React.createElement, C = this.C, st = this.state, CF = this.CONFIG;
+    if (!st.pos) return null;
+    const W = st.W, H = st.H, pos = st.pos, glow = this.glow;
+    const bandL = Math.max(CF.band.lMin, W * CF.band.lFrac), bandR = CF.band.r;
+    const X = f => bandL + (W - bandL - bandR) * f;
+    const K = {};
+    for (const k of this.KNOTS) { const y = pos[k.row]; if (y == null) return null; K[k.id] = { ...k, x: X(CF.spineX != null ? CF.spineX : k.xf), y }; }
+    const wf = v => Math.max(CF.ribbon.min, CF.ribbon.max * Math.sqrt(v / CF.ribbon.ref));
+    const focus = st.pin ? (st.pin in this.PIN2KNOT ? this.PIN2KNOT[st.pin] : st.pin) : st.active;
+    const els = [];
+    const mono = 'IBM Plex Mono,monospace';
+
+    els.push(h('defs', { key: 'defs' },
+      h('linearGradient', { id: 'gm2c', gradientUnits: 'userSpaceOnUse', x1: 0, y1: K.k8.y, x2: 0, y2: K.k9.y },
+        h('stop', { offset: '0%', stopColor: C.mint }), h('stop', { offset: '100%', stopColor: C.cyan })),
+      h('filter', { id: 'fb1', x: '-150%', y: '-150%', width: '400%', height: '400%' }, h('feGaussianBlur', { stdDeviation: 5 })),
+      h('filter', { id: 'fb2', x: '-150%', y: '-150%', width: '400%', height: '400%' }, h('feGaussianBlur', { stdDeviation: 13 }))
+    ));
+
+    Object.entries(st.zoneY || {}).forEach(([z, y]) => {
+      els.push(h('line', { key: 'zd' + z, x1: 6, x2: W - 6, y1: y, y2: y, stroke: 'rgba(117,144,176,.15)', strokeDasharray: '2 6' }));
+    });
+
+    const cv = (a, b, ex, ey) => {
+      const x2 = ex != null ? ex : b.x, y2 = ey != null ? ey : b.y;
+      const dy = Math.max(26, (y2 - a.y) * .45);
+      return `M ${a.x} ${a.y} C ${a.x} ${a.y + dy}, ${x2} ${y2 - dy}, ${x2} ${y2}`;
+    };
+
+    // 직교 라우팅: 직선으로 뻗다가 꺾이는 지점만 곡선(반경 r)으로
+    const ortho = (pts, r = 12) => {
+      let d = `M ${pts[0][0]} ${pts[0][1]}`;
+      for (let i = 1; i < pts.length - 1; i++) {
+        const [x0, y0] = pts[i - 1], [x1, y1] = pts[i], [x2, y2] = pts[i + 1];
+        const l1 = Math.hypot(x1 - x0, y1 - y0), l2 = Math.hypot(x2 - x1, y2 - y1);
+        const rr = Math.min(r, l1 / 2, l2 / 2);
+        const ax = x1 - (x1 - x0) / l1 * rr, ay = y1 - (y1 - y0) / l1 * rr;
+        const bx = x1 + (x2 - x1) / l2 * rr, by = y1 + (y2 - y1) / l2 * rr;
+        d += ` L ${ax} ${ay} Q ${x1} ${y1} ${bx} ${by}`;
+      }
+      d += ` L ${pts[pts.length - 1][0]} ${pts[pts.length - 1][1]}`;
+      return d;
+    };
+
+    const chip = (key, x, y, lines, color, fs = 10) => {
+      const wmax = Math.max(...lines.map(t => t.length));
+      const cw = wmax * fs * .96 + 14, chh = lines.length * 13 + 8;
+      let rx = Math.max(2, Math.min(W - cw - 2, x - cw / 2));
+      return h('g', { key },
+        h('rect', { x: rx, y: y - chh / 2, width: cw, height: chh, rx: 4, fill: 'rgba(8,12,22,.88)', stroke: this.rgba(color, .38) }),
+        ...lines.map((t, i) => h('text', { key: i, x: rx + cw / 2, y: y - chh / 2 + 14 + i * 13 - 2, textAnchor: 'middle', fontSize: fs, fill: color, fontFamily: mono }, t)));
+    };
+
+    // spine segments
+    this.SEGS.forEach(([ia, ib, v, col], i) => {
+      const a0 = K[ia], b = K[ib];
+      const a = a0;
+      const endY = null; // 저수지 중심까지 그린다 — 저수지의 불투명 배경원이 안쪽을 덮어 이격/삐짐이 없다
+      const d = cv(a, b, null, endY);
+      const w = CF.ribbon.uniform ? CF.ribbon.mainW : wf(v);
+      const stroke = col === 'grad' ? 'url(#gm2c)' : (col === 'mint' ? C.mint : C.cyan);
+      els.push(h('path', { key: 'sh' + i, d, stroke, strokeWidth: w * 2.5, fill: 'none', opacity: .09 * glow, strokeLinecap: 'round' }));
+      els.push(h('path', { key: 'sm' + i, d, stroke, strokeWidth: w * 1.4, fill: 'none', opacity: .18 * glow, strokeLinecap: 'round' }));
+      els.push(h('path', { key: 'sc' + i, d, stroke, strokeWidth: w, fill: 'none', opacity: .82, strokeLinecap: 'round' }));
+    });
+
+    // rail
+    const railX = CF.rail.x;
+    els.push(h('line', { key: 'rail', x1: railX, x2: railX, y1: K.k1.y, y2: K.k15.y, stroke: 'rgba(117,144,176,.32)', strokeWidth: 1 }));
+    els.push(h('text', { key: 'railt', x: railX - 4, y: K.k1.y - 44, fontSize: 9, fill: 'var(--dim)', fontFamily: mono }, '작년 통장'));
+    els.push(h('text', { key: 'railb', x: K.k15.x, y: K.k15.y + CF.reservoirs.rEnd + 24, textAnchor: 'middle', fontSize: 9, fill: 'var(--dim)', fontFamily: mono }, '올해 통장'));
+    els.push(chip('raileq', K.k15.x, K.k15.y + CF.reservoirs.rEnd + 44, ['53.71 + 4.15 = 57.86'], C.cyan));
+    for (const k of this.KNOTS) {
+      const p = K[k.id], act = focus === k.id;
+      if (k.kind === 'out') {
+        els.push(h('circle', { key: 'rg' + k.id, cx: railX, cy: p.y, r: act ? 9 : 7, fill: '#12090a', stroke: C.coral, strokeWidth: act ? 1.8 : 1.1, opacity: act ? 1 : .75, style: act ? { animation: 'ompulse 1.8s ease-in-out infinite' } : null }));
+        els.push(h('text', { key: 'rt' + k.id, x: railX, y: p.y + 3.6, textAnchor: 'middle', fontSize: 11, fontWeight: 700, fill: C.coral, fontFamily: mono }, '−'));
+      } else if (k.kind === 'in' || k.kind === 'back' || k.kind === 'source') {
+        const c = k.col === 'mint' ? C.mint : C.cyan;
+        els.push(h('circle', { key: 'rg' + k.id, cx: railX, cy: p.y, r: act ? 9 : 7, fill: '#091114', stroke: c, strokeWidth: act ? 1.8 : 1.1, opacity: act ? 1 : .75, style: act ? { animation: 'ompulse 1.8s ease-in-out infinite' } : null }));
+        els.push(h('text', { key: 'rt' + k.id, x: railX, y: p.y + 3.6, textAnchor: 'middle', fontSize: 11, fontWeight: 700, fill: c, fontFamily: mono }, '+'));
+      } else {
+        els.push(h('circle', { key: 'rg' + k.id, cx: railX, cy: p.y, r: act ? 4 : 2.5, fill: act ? C.cyan : 'rgba(117,144,176,.6)', style: act ? { animation: 'ompulse 1.8s ease-in-out infinite' } : null }));
+      }
+    }
+
+    // depreciation return — 매출원가·판관비 유출 가지에서 분기해 ⑨로 되돌아오는 점선 레일
+    const p3 = K.k3, p5 = K.k5, p9 = K.k9;
+    const depOn = focus === 'k9';
+    const depX = Math.max(44, p3.x + CF.tributary.outDx); // 유출 가지 끝(⊖ 글리프)의 x — k3·k5 공통
+    els.push(h('path', { key: 'depg', d: ortho([[depX, p3.y + CF.tributary.outDy + 9], [depX, p9.y], [p9.x - 9, p9.y]], 14), stroke: C.cyan, strokeWidth: 1.8, strokeDasharray: '4 4', fill: 'none', opacity: depOn ? .9 : .55 }));
+    els.push(h('circle', { key: 'depj', cx: depX, cy: p5.y + CF.tributary.outDy + 9, r: 2.5, fill: C.cyan, opacity: .8 }));
+    els.push(chip('depc', p9.x - 60, p9.y - 34, ['현금은 안 나간 비용', '도로 더해요 +43.6'], C.cyan, 9.5));
+
+    // gold equity thread
+    const gx = W - 16, p8 = K.k8;
+    const yB = pos['eq-begin'], yE = pos['eq-end'], yO = pos['eq-oci'], yD = pos['eq-div'];
+    if (yB && yE) {
+      const yNI = pos['eq-netincome'];
+      const niX = W - 5; // 민트 손익 실 — 우측 맨 끝을 타고 내려간다 (설명·라벨과 안 겹치게)
+      if (yNI) {
+        els.push(h('path', { key: 'gt1', d: ortho([[p8.x + 6, p8.y + 28], [niX, p8.y + 28], [niX, yNI], [gx + 10, yNI]], 14), stroke: C.mint, strokeWidth: 1.8, strokeDasharray: '4 4', fill: 'none', opacity: .45 }));
+        els.push(chip('gtc', p8.x + 96, p8.y + 48, ['이익은 주주 곳간에도 쌓여요'], C.mint, 9));
+      }
+      els.push(h('line', { key: 'gt2h', x1: gx, x2: gx, y1: yB, y2: yE, stroke: C.gold, strokeWidth: 7, opacity: .14 * glow }));
+      els.push(h('line', { key: 'gt2', x1: gx, x2: gx, y1: yB, y2: yE, stroke: C.gold, strokeWidth: 2.4, opacity: .85 }));
+      for (const e of this.EQE) {
+        const y = pos[e.row]; if (y == null) continue;
+        const c = e.neg ? C.coral : C.gold, act = focus === e.row;
+        if (act) els.push(h('circle', { key: 'geh' + e.row, cx: gx, cy: y, r: 15, fill: c, opacity: .4 * glow, filter: 'url(#fb1)' }));
+        els.push(h('circle', { key: 'ge' + e.row, cx: gx, cy: y, r: e.big ? 8.5 : 5.5, fill: '#0a0f1c', stroke: c, strokeWidth: 1.7 }));
+        els.push(h('text', { key: 'get' + e.row, x: gx - 13, y: y + 3.5, textAnchor: 'end', fontSize: 10, fill: c, fontFamily: mono, fontWeight: e.big ? 700 : 500 }, e.t));
+      }
+      if (yO) {
+        els.push(h('path', { key: 'goci', d: ortho([[gx - 56, yO - 21], [gx - 56, yO], [gx - 10, yO]], 10), stroke: C.gold, strokeWidth: 1.8, strokeDasharray: '4 4', fill: 'none', opacity: .55 }));
+        els.push(chip('gocic', gx - 66, yO - 30, ['손익 밖에서 직접 (OCI)'], C.gold, 9));
+      }
+      if (yD) {
+        const linkOn = focus === 'k13' || focus === 'eq-div' || focus === 'eq-buyback';
+        const fx13 = Math.max(44, K.k13.x + CF.tributary.outDx); // ⑬ 유출 가지 끝(주주에게)에서 출발
+        els.push(h('path', { key: 'gdiv', d: ortho([[fx13, K.k13.y + CF.tributary.outDy + 9], [fx13, yD], [gx - 11, yD]], 14), stroke: C.coral, strokeWidth: 1.8, strokeDasharray: '4 4', fill: 'none', opacity: linkOn ? .9 : .55 }));
+        els.push(chip('gdivc', gx - 96, yD + 22, ['재무활동에서 나간 그 돈'], C.coral, 9));
+      }
+    }
+
+    // tributaries
+    for (const k of this.KNOTS) {
+      const p = K[k.id];
+      if (k.kind === 'out') {
+        const v = { k3: 202.2, k5: 87.8, k7: 4.3, k10: 9.6, k10b: 2.7, k12: 68.5, k13: 13.5 }[k.id] || 10;
+        const bw = CF.ribbon.uniform ? CF.ribbon.branchW : Math.max(4, wf(v) * .7);
+        const ex = Math.max(44, p.x + CF.tributary.outDx), ey = p.y + CF.tributary.outDy;
+        const d = `M ${p.x - 4} ${p.y + 4} C ${p.x - 30} ${p.y + 18}, ${ex + 20} ${ey - 22}, ${ex + 4} ${ey - 4}`;
+        els.push(h('path', { key: 'ob' + k.id, d, stroke: C.coral, strokeWidth: bw * 1.9, fill: 'none', opacity: .10 * glow, strokeLinecap: 'round' }));
+        els.push(h('path', { key: 'obc' + k.id, d, stroke: C.coral, strokeWidth: bw, fill: 'none', opacity: .68, strokeLinecap: 'round' }));
+        els.push(h('circle', { key: 'og' + k.id, cx: ex, cy: ey, r: 8, fill: '#160e0d', stroke: C.coral, strokeWidth: 1.4 }));
+        els.push(h('text', { key: 'ogt' + k.id, x: ex, y: ey + 3.8, textAnchor: 'middle', fontSize: 11, fontWeight: 700, fill: C.coral, fontFamily: mono }, '−'));
+        els.push(chip('oc' + k.id, ex + 6, ey + 20, [k.dest], C.coral, 9.5));
+      }
+      if (k.kind === 'in') {
+        const v = { k6b: 5.9, k14: 0.8 }[k.id] || 4;
+        const bw = CF.ribbon.uniform ? CF.ribbon.branchW : Math.max(3.5, wf(v) * .7);
+        const c = k.col === 'mint' ? C.mint : C.cyan;
+        const sx = Math.min(W - 40, p.x + CF.tributary.inDx), sy = p.y + CF.tributary.inDy;
+        const d = `M ${sx} ${sy} C ${sx - 16} ${sy + 22}, ${p.x + 26} ${p.y - 14}, ${p.x + 4} ${p.y - 2}`;
+        els.push(h('path', { key: 'ib' + k.id, d, stroke: c, strokeWidth: bw * 1.9, fill: 'none', opacity: .10 * glow, strokeLinecap: 'round' }));
+        els.push(h('path', { key: 'ibc' + k.id, d, stroke: c, strokeWidth: bw, fill: 'none', opacity: .7, strokeLinecap: 'round' }));
+        els.push(h('circle', { key: 'ig' + k.id, cx: sx, cy: sy, r: 8, fill: '#091114', stroke: c, strokeWidth: 1.4 }));
+        els.push(h('text', { key: 'igt' + k.id, x: sx, y: sy + 3.8, textAnchor: 'middle', fontSize: 11, fontWeight: 700, fill: c, fontFamily: mono }, '+'));
+
+      }
+    }
+
+    // particles
+    if (this.props.particles !== false) {
+      const seq = ['k2','k3','k4','k5','k6','k7','k8','k9','k10','k10b','k11','k12','k13','k14'];
+      let d = `M ${K.k2.x} ${K.k2.y}`;
+      for (let i = 1; i < seq.length; i++) {
+        const a = K[seq[i - 1]], b = K[seq[i]];
+        const dy = Math.max(26, (b.y - a.y) * .45);
+        d += ` C ${a.x} ${a.y + dy}, ${b.x} ${b.y - dy}, ${b.x} ${b.y}`;
+      }
+      const a = K.k14, b = { x: K.k15.x, y: K.k15.y - CF.reservoirs.rEnd - 4 };
+      d += ` C ${a.x} ${a.y + 30}, ${b.x} ${b.y - 30}, ${b.x} ${b.y}`;
+      for (let i = 0; i < 7; i++) {
+        els.push(h('circle', { key: 'pt' + i, r: 1.4 + (i % 3) * .5, fill: i % 2 ? '#bfeee0' : '#bfe4f5', opacity: .8 },
+          h('animateMotion', { dur: `${13 + i * 2.4}s`, begin: `${-i * 3.2}s`, repeatCount: 'indefinite', path: d })));
+      }
+    }
+
+    // source nebula (k2)
+    const p2 = K.k2;
+    els.push(h('circle', { key: 'neb1', cx: p2.x, cy: p2.y, r: 30, fill: C.mint, opacity: .13 * glow, filter: 'url(#fb2)' }));
+    els.push(h('circle', { key: 'neb2', cx: p2.x, cy: p2.y, r: 14, fill: C.mint, opacity: .3 * glow, filter: 'url(#fb1)' }));
+    els.push(chip('srcc', p2.x, p2.y - 46, ['고객이 낸 돈'], C.mint, 9.5));
+
+    // reservoirs
+    const res = (k, r) => {
+      const p = K[k.id], act = focus === k.id;
+      els.push(h('g', { key: 'res' + k.id, style: { cursor: 'pointer' }, onClick: () => this.onKnot(k.id) },
+        h('circle', { cx: p.x, cy: p.y, r: r * 1.9, fill: C.cyan, opacity: (act ? .22 : .13) * glow, filter: 'url(#fb2)' }),
+        h('circle', { cx: p.x, cy: p.y, r: r - 1, fill: '#081019' }),
+        h('circle', { cx: p.x, cy: p.y, r, fill: 'rgba(92,199,234,.08)', stroke: C.cyan, strokeWidth: act ? 2.2 : 1.5 }),
+        h('circle', { cx: p.x, cy: p.y, r: r * .45, fill: '#d9f6ff', opacity: .92, filter: 'url(#fb1)' }),
+        h('text', { x: p.x + r + 11, y: p.y - 3, fontSize: 12, fontWeight: 700, fill: 'var(--text)' }, k.name),
+        h('text', { x: p.x + r + 11, y: p.y + 14, fontSize: 12.5, fontWeight: 700, fill: C.cyan, fontFamily: mono }, k.amt)
+      ));
+    };
+    res(K.k1, CF.reservoirs.rBegin);
+    res(K.k15, CF.reservoirs.rEnd);
+    els.push(chip('delta', K.k15.x, K.k15.y - CF.reservoirs.rEnd - 26, ['+4.15조 늘었어요'], C.gold, 10));
+
+    // knots
+    for (const k of this.KNOTS) {
+      if (k.kind === 'res') continue;
+      const p = K[k.id], act = focus === k.id;
+      const c = k.kind === 'out' ? C.coral : (k.col === 'mint' ? C.mint : C.cyan);
+      const kids = [
+        h('circle', { key: 'h', cx: p.x, cy: p.y, r: k.kind === 'hub' || k.kind === 'bright' ? 22 : 16, fill: c, opacity: (act ? .5 : .2) * glow, filter: 'url(#fb1)', style: act ? { animation: 'ompulse 1.8s ease-in-out infinite' } : null }),
+        h('circle', { key: 'c', cx: p.x, cy: p.y, r: act ? 7 : (k.kind === 'hub' || k.kind === 'bright' ? 6.5 : 5.5), fill: '#eafff6', stroke: c, strokeWidth: 2 }),
+      ];
+      if (act) kids.push(h('circle', { key: 'r', cx: p.x, cy: p.y, r: 12.5, fill: 'none', stroke: c, strokeWidth: 1, strokeDasharray: '3 3' }));
+      const yOff = k.kind === 'in' ? 8 : 0; // 유입 매듭은 라벨 전체를 살짝 내려 지류와 안 겹치게
+      kids.push(h('text', { key: 'n', x: p.x + 15, y: p.y - 3 + yOff, fontSize: 11.5, fill: 'var(--text)', fontWeight: act ? 700 : 500 }, k.name));
+      kids.push(h('text', { key: 'a', x: p.x + 15, y: p.y + 13 + yOff, fontSize: 10.5, fill: c, fontFamily: mono, fontWeight: 600 }, k.amt));
+      if (k.kind === 'in' && k.src) {
+        kids.push(h('text', { key: 's', x: p.x + 15, y: p.y + 36, fontSize: 9.5, fill: this.rgba(c, .75), fontFamily: mono }, '⊕ ' + k.src));
+      }
+      els.push(h('g', { key: 'kn' + k.id, style: { cursor: 'pointer' }, onClick: () => this.onKnot(k.id) }, kids));
+    }
+
+    return h('svg', { width: W, height: H, viewBox: `0 0 ${W} ${H}`, style: { position: 'absolute', inset: 0, overflow: 'visible', display: 'block' } }, els);
+  }
+
+  // ---------- inspector cards ----------
+  badge(text, colName) {
+    const h = React.createElement, c = this.colOf(colName);
+    return h('span', { style: { fontFamily: 'var(--mono)', fontSize: '10px', letterSpacing: '.22em', color: c, border: `1px solid ${this.rgba(c, .4)}`, padding: '3px 9px', borderRadius: '4px' } }, text);
+  }
+
+  overviewCard() {
+    const h = React.createElement, C = this.C;
+    return h('div', { key: 'ov', style: { animation: 'omfade var(--fade) ease both' } },
+      h('div', { style: { display: 'flex', gap: '10px', marginBottom: '18px' } }, this.badge('OVERVIEW · 개요', 'cyan')),
+      h('div', { style: { fontSize: '26px', fontWeight: 800, lineHeight: 1.5, letterSpacing: '-.01em' } }, '삼성전자의 1년을 한 문장으로'),
+      h('p', { style: { margin: '14px 0 18px', fontSize: '18px', lineHeight: 1.85 } },
+        ...this.rich('[333.6조]를 벌어 [45.2조]를 남겼고, 통장 현금은 [4.15조] 늘었어요.', C.mint)),
+      h('p', { style: { margin: '0 0 22px', fontSize: '15px', lineHeight: 1.8, color: 'var(--dim)' } },
+        '그냥 아래로 스크롤하세요 — 왼쪽 은하수의 매듭이 화면 가운데 올 때마다, 이 자리가 그 대목의 이야기를 들려드려요. 더 궁금한 항목은 아무거나 클릭해 보세요: 4단 딥다이브(무엇 → 연결 → 왜 → 5개년)가 고정돼요.'),
+      h('div', { style: { border: '1px solid var(--line)', borderRadius: '10px', padding: '16px 18px' } },
+        h('div', { style: { fontFamily: 'var(--mono)', fontSize: '10px', letterSpacing: '.22em', color: 'var(--dim2)', marginBottom: '12px' } }, 'JOURNEY MAP · 다섯 챕터'),
+        ...Object.entries(this.ZONES).map(([z, v]) =>
+          h('div', { key: z, style: { display: 'flex', alignItems: 'baseline', gap: '10px', padding: '6px 0' } },
+            h('span', { style: { fontFamily: 'var(--mono)', fontSize: '10px', color: this.colOf(v.c), width: '14px' } }, v.l),
+            h('span', { style: { fontSize: '14.5px' } }, v.q)))));
+  }
+
+  zoneCard(z) {
+    const h = React.createElement, v = this.ZONES[z], c = this.colOf(v.c);
+    return h('div', { key: z, style: { animation: 'omfade var(--fade) ease both' } },
+      h('div', { style: { display: 'flex', gap: '10px', marginBottom: '18px' } }, this.badge('ZONE ' + v.l, v.c)),
+      h('div', { style: { fontSize: '27px', fontWeight: 800, lineHeight: 1.5, letterSpacing: '-.01em' } }, v.q),
+      h('div', { style: { margin: '18px 0 0' } }, ...this.paras(v.g, c)),
+      h('div', { style: { marginTop: '10px', fontSize: '13px', color: 'var(--dim2)' } }, '↓ 계속 스크롤하세요'));
+  }
+
+  storyCard(k) {
+    const h = React.createElement;
+    const zone = ['k1'].includes(k.id) ? 'A' : ['k2','k3','k4','k5','k6','k6b','k7','k8'].includes(k.id) ? 'B' : k.id === 'k15' ? 'D' : 'C';
+    const c = k.kind === 'out' ? this.C.coral : (k.col === 'mint' ? this.C.mint : this.C.cyan);
+    const idx = this.KNOTS.findIndex(x => x.id === k.id) + 1;
+    return h('div', { key: k.id, style: { animation: 'omfade var(--fade) ease both' } },
+      h('div', { style: { display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '18px' } },
+        this.badge('ZONE ' + zone, zone === 'B' ? 'mint' : zone === 'A' || zone === 'C' || zone === 'D' ? 'cyan' : 'gold'),
+        h('span', { style: { fontFamily: 'var(--mono)', fontSize: '11px', color: 'var(--dim2)', letterSpacing: '.1em' } }, `KNOT ${k.num} · ${idx}/17`)),
+      h('div', { style: { fontSize: '26px', fontWeight: 800, letterSpacing: '-.01em' } }, k.name),
+      h('div', { style: { fontFamily: 'var(--mono)', fontSize: '46px', fontWeight: 700, color: c, margin: '8px 0 22px', textShadow: `0 0 26px ${this.rgba(c, .4)}` } }, k.amt),
+      ...this.paras(k.story, c),
+      h('button', { onClick: () => this.pin(k.id), style: { marginTop: '8px', fontFamily: 'var(--sans)', fontSize: '14px', color: c, background: this.rgba(c, .07), border: `1px solid ${this.rgba(c, .4)}`, borderRadius: '7px', padding: '9px 16px', cursor: 'pointer' } }, '자세히 보기 ▸'));
+  }
+
+  eqCard(row) {
+    const h = React.createElement, v = this.EQSTORY[row], c = this.C.gold;
+    return h('div', { key: row, style: { animation: 'omfade var(--fade) ease both' } },
+      h('div', { style: { display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '18px' } },
+        this.badge('ZONE E', 'gold'),
+        h('span', { style: { fontFamily: 'var(--mono)', fontSize: '11px', color: 'var(--dim2)', letterSpacing: '.1em' } }, 'GOLD THREAD · 자본변동표')),
+      h('div', { style: { fontSize: '26px', fontWeight: 800, letterSpacing: '-.01em' } }, v.name),
+      h('div', { style: { fontFamily: 'var(--mono)', fontSize: '46px', fontWeight: 700, color: c, margin: '8px 0 22px', textShadow: `0 0 26px ${this.rgba(c, .4)}` } }, v.amt),
+      ...this.paras(v.story, c),
+      h('button', { onClick: () => this.pin(this.ROW2DIVE[row] || row), style: { marginTop: '8px', fontFamily: 'var(--sans)', fontSize: '14px', color: c, background: this.rgba(c, .07), border: `1px solid ${this.rgba(c, .4)}`, borderRadius: '7px', padding: '9px 16px', cursor: 'pointer' } }, '자세히 보기 ▸'));
+  }
+
+  epilogueCard() {
+    const h = React.createElement, C = this.C;
+    return h('div', { key: 'ep', style: { animation: 'omfade var(--fade) ease both' } },
+      h('div', { style: { display: 'flex', gap: '10px', marginBottom: '18px' } }, this.badge('EPILOGUE · 에필로그', 'gold')),
+      h('div', { style: { fontSize: '26px', fontWeight: 800, lineHeight: 1.5 } }, '53.7조가 57.9조가 되기까지'),
+      h('div', { style: { margin: '18px 0 0' } },
+        ...this.paras("[333.6조]를 벌어 원가와 판관비로 [290조]를 쓰고, 세금을 떼고 [45.2조]를 남겼어요.\n현금이 안 나간 비용을 도로 더하니 통장엔 [85.3조]가 들어왔고, 그중 [68.5조]를 미래(공장·장비)에, [13.5조]를 주주에게 보냈어요.\n남은 [4.15조]가 통장에 쌓여 [57.9조] — 그리고 주주의 곳간(자본)은 [436.3조]로 두꺼워졌어요.", C.cyan)),
+      h('p', { style: { marginTop: '14px', fontSize: '14px', color: 'var(--dim)', lineHeight: 1.7 } },
+        '이제 궁금한 항목을 아무거나 눌러보세요 — 왼쪽 매듭도, 가운데 표의 줄도 모두 눌러져요. 4단 딥다이브(무엇 → 연결 → 왜 → 5개년)가 고정되고, Esc나 ✕로 흐름으로 돌아와요.'));
+  }
+
+  buildCard() {
+    if (this.state.pin) return this.diveCard(this.state.pin);
+    const a = this.state.active || 'overview';
+    if (a === 'overview') return this.overviewCard();
+    if (a === 'epilogue') return this.epilogueCard();
+    if (this.ZONES[a]) return this.zoneCard(a);
+    const k = this.KNOTS.find(x => x.id === a);
+    if (k) return this.storyCard(k);
+    if (this.EQSTORY[a]) return this.eqCard(a);
+    return this.overviewCard();
+  }
+
+  buildRunningChip() {
+    const h = React.createElement;
+    const idx = this.RT[this.state.active];
+    if (idx == null || this.state.pin) return null;
+    const parts = [];
+    this.RTSTEPS.forEach(([t, cn], i) => {
+      if (i > 0) parts.push(h('span', { key: 'a' + i, style: { color: 'var(--dim2)' } }, '→'));
+      const c = this.colOf(cn);
+      parts.push(h('span', { key: 's' + i, style: { color: i <= idx ? c : 'var(--dim2)', fontWeight: i === idx ? 700 : 500, textShadow: i === idx ? `0 0 10px ${this.rgba(c, .6)}` : 'none' } }, t));
+    });
+    return h('div', { style: { position: 'fixed', left: '14px', bottom: '14px', zIndex: 6, display: 'flex', gap: '7px', alignItems: 'center', background: 'rgba(8,12,22,.9)', border: '1px solid rgba(92,199,234,.3)', borderRadius: '8px', padding: '8px 13px', fontFamily: 'var(--mono)', fontSize: '12px', animation: 'omfade var(--fade) ease both' } },
+      h('span', { style: { fontSize: '9px', letterSpacing: '.18em', color: 'var(--dim2)', marginRight: '2px' } }, '이익→현금'), ...parts);
+  }
+
+  // ===== Step 2 — 데이터 =====
+  TBL = { IS: ['손익계산서', '#74EEC6'], CF: ['현금흐름표', '#5CC7EA'], BS: ['재무상태표', '#7590B0'], PBS: ['전기말 BS', '#7590B0'], EQ: ['자본변동표', '#E9C46B'], N: ['주석', '#8fa1b6'] };
+  YEARS = ['FY21', 'FY22', 'FY23', 'FY24', 'FY25'];
+  S = {
+    revenue: [279.6, 302.2, 258.9, 300.9, 333.6],
+    cogs: [166.4, 190.0, 180.4, 186.6, 202.2],
+    gross: [113.2, 112.2, 78.5, 114.3, 131.4],
+    sgna: [61.6, 68.8, 72.0, 81.6, 87.8],
+    op: [51.6, 43.4, 6.6, 32.7, 43.6],
+    pretax: [53.4, 46.4, 11.0, 37.5, 49.5],
+    tax: [13.4, -9.2, -4.5, 3.1, 4.3],
+    ni: [39.9, 55.7, 15.5, 34.5, 45.2],
+    oci: [10.0, 4.0, 3.4, 16.8, 6.1],
+    ocf: [65.1, 62.2, 44.1, 73.0, 85.3],
+    icf: [-33.0, -31.6, -16.9, -85.4, -68.5],
+    capex: [47.1, 49.4, 57.6, 51.4, 47.5],
+    fin: [-24.0, -19.4, -8.6, -7.8, -13.5],
+    div: [20.5, 9.8, 9.9, 10.9, 9.9],
+    buyback: [0, 0, 0, 1.8, 8.2],
+    dep: [31.3, 36.0, 35.5, 39.6, 43.6],
+    rnd: [22.6, 24.9, 28.4, 35.0, 37.8],
+    cash: [39.0, 49.7, 69.1, 53.7, 57.9],
+    assets: [426.6, 448.4, 455.9, 514.5, 566.9],
+    debt: [121.7, 93.7, 92.2, 112.3, 130.6],
+    equity: [304.9, 354.7, 363.7, 402.2, 436.3],
+    dsOp: [29.2, 23.8, -14.9, 15.1, 24.9],
+    eps: [5777, 8057, 2131, 4950, 6605],
+    tci: [49.9, 59.7, 18.9, 51.3, 51.3],
+  };
+  ROW2DIVE = {
+    'pbs-cash': 'k1', 'is-revenue': 'k2', 'is-cogs': 'k3', 'is-grossprofit': 'k4',
+    'is-sgna': 'k5', 'is-sgna-rnd': 'k5', 'is-sgna-fee': 'k5', 'is-sgna-sal': 'k5', 'is-sgna-promo': 'k5', 'is-sgna-ad': 'k5', 'is-sgna-svc': 'k5', 'is-sgna-ship': 'k5', 'is-sgna-etc': 'k5',
+    'is-opincome': 'k6', 'is-nonop': 'k6b', 'is-nonop-fininc': 'k6b', 'is-nonop-finexp': 'k6b', 'is-nonop-othinc': 'k6b', 'is-nonop-othexp': 'k6b', 'is-nonop-eqm': 'k6b', 'is-pretax': 'k6b',
+    'is-tax': 'k7', 'is-netincome': 'k8', 'is-ni-ctrl': 'k8', 'is-ni-nci': 'k8', 'is-oci': 'oci', 'is-totalcomp': 'totalcomp',
+    'cf-netincome': 'k8', 'cf-noncash': 'k9', 'cf-noncash-dep': 'k9', 'cf-noncash-etc': 'k9',
+    'cf-wc': 'k10', 'cf-wc-ar': 'k10', 'cf-wc-inv': 'k10', 'cf-wc-etc': 'k10', 'cf-paid': 'k10b', 'cf-op': 'k11',
+    'cf-inv': 'k12', 'cf-inv-capex': 'k12', 'cf-inv-etc': 'k12', 'cf-fin': 'k13', 'cf-fin-debt': 'k13', 'cf-fin-div': 'eq-div', 'cf-fin-tsy': 'eq-buyback',
+    'cf-fx': 'k14', 'cf-netchange': 'k15', 'cf-begincash': 'k1', 'cf-endcash': 'k15',
+    'bs-cash': 'k15', 'bs-ppe': 'ppe', 'bs-assets': 'assets', 'bs-liab': 'liab', 'bs-equity': 'eq-end',
+    'bs-ca': 'assets', 'bs-cash-d': 'k15', 'bs-sfin': 'n4', 'bs-ar': 'k10', 'bs-inv': 'k10', 'bs-oca': 'assets', 'bs-nca': 'assets', 'bs-ig': 'k12', 'bs-assoc': 'k6b', 'bs-fvoci': 'oci', 'bs-dta': 'k7', 'bs-dba': 'n14', 'bs-onca': 'assets',
+    'bs-cl': 'liab', 'bs-payexp': 'liab', 'bs-pay': 'liab', 'bs-stb': 'k13', 'bs-ap': 'k10', 'bs-prov': 'n15', 'bs-taxlia': 'k7', 'bs-ocl': 'liab', 'bs-ncl': 'liab', 'bs-ltb': 'k13', 'bs-ltpay': 'liab', 'bs-ltprov': 'n15', 'bs-ndbl': 'n14', 'bs-dtl': 'k7', 'bs-bond': 'k13', 'bs-oncl': 'liab',
+    'bs-ctrl': 'eq-end', 'bs-re': 'eq-end', 'bs-oe': 'oci', 'bs-sp': 'n18', 'bs-capital': 'n18', 'bs-nci': 'k8',
+    'apx-ju1': 'n1', 'apx-ju2': 'n2', 'apx-ju3': 'n3', 'apx-ju4': 'n4', 'apx-ju5': 'n5', 'apx-ju14': 'n14', 'apx-ju15': 'n15', 'apx-ju16': 'n16', 'apx-ju18': 'n18', 'apx-ju26': 'n26', 'apx-ju28': 'n28', 'apx-ju29': 'n29', 'apx-ju31': 'n31', 'apx-ju34': 'n34',
+    'eq-begin': 'eq-begin', 'eq-netincome': 'k8', 'eq-oci': 'oci', 'eq-div': 'eq-div', 'eq-buyback': 'eq-buyback', 'eq-other': 'eq-other', 'eq-end': 'eq-end',
+  };
+  HL = {
+    k1: ['pbs-cash', 'cf-begincash'], k2: ['is-revenue'], k3: ['is-cogs'], k4: ['is-grossprofit'],
+    k5: ['is-sgna', 'is-sgna-rnd'], k6: ['is-opincome'], k6b: ['is-nonop', 'is-pretax'],
+    k7: ['is-tax', 'cf-paid'], k8: ['is-netincome', 'cf-netincome', 'eq-netincome'],
+    k9: ['cf-noncash', 'cf-noncash-dep', 'bs-ppe', 'is-cogs'], k10: ['cf-wc', 'cf-wc-ar', 'cf-wc-inv'],
+    k10b: ['cf-paid', 'is-tax'], k11: ['cf-op', 'cf-netincome'], k12: ['cf-inv', 'cf-inv-capex', 'bs-ppe'],
+    k13: ['cf-fin', 'eq-div', 'eq-buyback'], k14: ['cf-fx'], k15: ['bs-cash', 'cf-endcash', 'cf-netchange'],
+    oci: ['is-oci', 'eq-oci', 'is-totalcomp'], ppe: ['bs-ppe', 'cf-noncash-dep', 'cf-inv-capex'],
+    assets: ['bs-assets'], liab: ['bs-liab'],
+    'eq-begin': ['eq-begin'], 'eq-div': ['eq-div', 'cf-fin-div', 'cf-fin'], 'eq-buyback': ['eq-buyback', 'cf-fin-tsy', 'cf-fin'],
+    'eq-other': ['eq-other'], 'eq-end': ['eq-end', 'bs-equity'],
+    totalcomp: ['is-totalcomp', 'is-oci', 'is-netincome', 'eq-netincome', 'eq-oci'],
+    n1: ['apx-ju1', 'bs-nci', 'is-ni-nci'], n2: ['apx-ju2', 'cf-noncash-dep'], n3: ['apx-ju3', 'bs-prov'],
+    n4: ['apx-ju4', 'bs-fvoci', 'bs-sfin'], n5: ['apx-ju5', 'bs-ar', 'bs-stb'], n14: ['apx-ju14', 'bs-dba', 'bs-ndbl'],
+    n15: ['apx-ju15', 'bs-prov', 'bs-ltprov'], n16: ['apx-ju16', 'bs-liab'], n18: ['apx-ju18', 'bs-capital', 'bs-sp', 'bs-re'],
+    n26: ['apx-ju26', 'is-ni-ctrl', 'eq-buyback'], n28: ['apx-ju28', 'is-nonop', 'cf-fx'], n29: ['apx-ju29', 'bs-fvoci', 'eq-oci'],
+    n31: ['apx-ju31', 'is-revenue'], n34: ['apx-ju34', 'eq-buyback', 'cf-fin-tsy'],
+  };
+  GROUP_OF = {
+    'is-sgna-rnd': 'sgna', 'cf-noncash-dep': 'noncash', 'cf-wc-ar': 'wc', 'cf-wc-inv': 'wc',
+    'cf-inv-capex': 'inv', 'cf-fin-div': 'fin', 'cf-fin-tsy': 'fin',
+    'bs-ca': 'bsa', 'bs-cash-d': 'bsa', 'bs-sfin': 'bsa', 'bs-ar': 'bsa', 'bs-inv': 'bsa', 'bs-oca': 'bsa', 'bs-nca': 'bsa', 'bs-ppe': 'bsa', 'bs-ig': 'bsa', 'bs-assoc': 'bsa', 'bs-fvoci': 'bsa', 'bs-dta': 'bsa', 'bs-dba': 'bsa', 'bs-onca': 'bsa',
+    'bs-cl': 'bsl', 'bs-payexp': 'bsl', 'bs-pay': 'bsl', 'bs-stb': 'bsl', 'bs-ap': 'bsl', 'bs-prov': 'bsl', 'bs-taxlia': 'bsl', 'bs-ocl': 'bsl', 'bs-ncl': 'bsl', 'bs-ltb': 'bsl', 'bs-ltpay': 'bsl', 'bs-ltprov': 'bsl', 'bs-ndbl': 'bsl', 'bs-dtl': 'bsl', 'bs-bond': 'bsl', 'bs-oncl': 'bsl',
+    'bs-ctrl': 'bse', 'bs-re': 'bse', 'bs-oe': 'bse', 'bs-sp': 'bse', 'bs-capital': 'bse', 'bs-nci': 'bse',
+  };
+  PIN2KNOT = { oci: null, ppe: null, assets: null, liab: null };
+
+  // ===== Step 2 — 차트 =====
+  fmt1(v, plus) { const r = Math.round(v * 10) / 10; return (plus && r > 0 ? '+' : '') + r; }
+
+  vLine({ key, color, valley = -1, zero = false }) {
+    const h = React.createElement, vals = this.S[key];
+    const W = 640, H = 250, L = 46, R = 22, T = 40, ih = H - T - 40, iw = W - L - R;
+    let mn = Math.min(...vals), mx = Math.max(...vals);
+    if (zero) { mn = Math.min(mn, 0); mx = Math.max(mx, 0); }
+    const pad = (mx - mn) * .14 || 1; mn -= pad; mx += pad;
+    const X = i => L + iw * i / (vals.length - 1);
+    const Y = v => T + ih * (1 - (v - mn) / (mx - mn));
+    const els = [];
+    if (mn < 0 && mx > 0) {
+      els.push(h('line', { key: 'z', x1: L - 6, x2: W - R, y1: Y(0), y2: Y(0), stroke: 'rgba(140,170,210,.35)', strokeDasharray: '3 4' }));
+      els.push(h('text', { key: 'zl', x: L - 10, y: Y(0) + 3, textAnchor: 'end', fontSize: 10, fill: '#5c6b80', fontFamily: 'IBM Plex Mono,monospace' }, '0'));
+    }
+    const line = 'M ' + vals.map((v, i) => `${X(i)} ${Y(v)}`).join(' L ');
+    els.push(h('path', { key: 'ar', d: line + ` L ${X(vals.length - 1)} ${T + ih} L ${X(0)} ${T + ih} Z`, fill: this.rgba(color, .07) }));
+    els.push(h('path', { key: 'ln', d: line, stroke: color, strokeWidth: 2.5, fill: 'none', strokeLinejoin: 'round' }));
+    vals.forEach((v, i) => {
+      const last = i === vals.length - 1;
+      if (last) els.push(h('circle', { key: 'g' + i, cx: X(i), cy: Y(v), r: 10, fill: color, opacity: .3 }));
+      els.push(h('circle', { key: 'p' + i, cx: X(i), cy: Y(v), r: last ? 5.5 : 3.5, fill: last ? color : '#0a0f1c', stroke: color, strokeWidth: 1.8 }));
+      els.push(h('text', { key: 'v' + i, x: X(i), y: Y(v) - 12, textAnchor: 'middle', fontSize: 11.5, fontWeight: last ? 700 : 500, fill: last ? color : '#8fa1b6', fontFamily: 'IBM Plex Mono,monospace' }, this.fmt1(v)));
+      if (i > 0) {
+        const d = Math.round((v - vals[i - 1]) * 10) / 10;
+        els.push(h('text', { key: 'd' + i, x: X(i), y: Y(v) + 20, textAnchor: 'middle', fontSize: 9.5, fill: d >= 0 ? this.C.mint : this.C.coral, fontFamily: 'IBM Plex Mono,monospace' }, (d >= 0 ? '▲+' : '▼') + d));
+      }
+      els.push(h('text', { key: 'y' + i, x: X(i), y: H - 8, textAnchor: 'middle', fontSize: 10.5, fill: '#5c6b80', fontFamily: 'IBM Plex Mono,monospace' }, this.YEARS[i]));
+      if (i === valley) {
+        els.push(h('circle', { key: 'vy' + i, cx: X(i), cy: Y(v), r: 9.5, fill: 'none', stroke: this.C.coral, strokeWidth: 1.4, strokeDasharray: '3 3' }));
+        els.push(h('text', { key: 'vt' + i, x: X(i), y: Y(v) + 34, textAnchor: 'middle', fontSize: 10, fill: this.C.coral }, '반도체 한파'));
+      }
+    });
+    return h('svg', { viewBox: `0 0 ${W} ${H}`, style: { width: '100%', height: 'auto', display: 'block' } }, els);
+  }
+
+  vTwin({ a, b }) {
+    const h = React.createElement;
+    const W = 640, H = 250, L = 46, R = 22, T = 40, ih = H - T - 40, iw = W - L - R;
+    let mn = Math.min(0, ...a.vals, ...b.vals), mx = Math.max(...a.vals, ...b.vals);
+    const pad = (mx - mn) * .14 || 1; mx += pad; if (mn < 0) mn -= pad;
+    const Y = v => T + ih * (1 - (v - mn) / (mx - mn));
+    const els = [], bw = 22, gap = 6;
+    if (mn < 0) els.push(h('line', { key: 'z', x1: L - 6, x2: W - R, y1: Y(0), y2: Y(0), stroke: 'rgba(140,170,210,.35)', strokeDasharray: '3 4' }));
+    for (let i = 0; i < 5; i++) {
+      const cx = L + iw * (i + .5) / 5;
+      [[a, cx - bw - gap / 2], [b, cx + gap / 2]].forEach(([s, x], j) => {
+        const v = s.vals[i];
+        const y0 = Y(Math.max(0, v)), y1 = Y(Math.min(0, v));
+        els.push(h('rect', { key: `b${i}${j}`, x, y: y0, width: bw, height: Math.max(1.5, y1 - y0), rx: 2, fill: s.color, opacity: i === 4 ? .95 : .45 }));
+        els.push(h('text', { key: `t${i}${j}`, x: x + bw / 2, y: y0 - 5, textAnchor: 'middle', fontSize: 9.5, fill: i === 4 ? s.color : '#8fa1b6', fontFamily: 'IBM Plex Mono,monospace' }, this.fmt1(v)));
+      });
+      els.push(h('text', { key: 'y' + i, x: cx, y: H - 8, textAnchor: 'middle', fontSize: 10.5, fill: '#5c6b80', fontFamily: 'IBM Plex Mono,monospace' }, this.YEARS[i]));
+    }
+    els.push(h('g', { key: 'lg' },
+      h('circle', { cx: W - 170, cy: 16, r: 5, fill: a.color }), h('text', { x: W - 160, y: 20, fontSize: 11, fill: '#8fa1b6' }, a.name),
+      h('circle', { cx: W - 84, cy: 16, r: 5, fill: b.color }), h('text', { x: W - 74, y: 20, fontSize: 11, fill: '#8fa1b6' }, b.name)));
+    return h('svg', { viewBox: `0 0 ${W} ${H}`, style: { width: '100%', height: 'auto', display: 'block' } }, els);
+  }
+
+  vWater({ steps }) {
+    const h = React.createElement;
+    const W = 640, H = 250, L = 46, R = 22, T = 30, ih = H - T - 44, iw = W - L - R;
+    let cum = 0;
+    const bars = steps.map(s => { if (s.abs) { cum = s.v; return { ...s, a: 0, b: s.v }; } const a = cum; cum += s.v; return { ...s, a, b: cum }; });
+    let mn = Math.min(0, ...bars.map(x => Math.min(x.a, x.b))), mx = Math.max(...bars.map(x => Math.max(x.a, x.b)));
+    const pad = (mx - mn) * .12 || 1; mx += pad; if (mn < 0) mn -= pad;
+    const Y = v => T + ih * (1 - (v - mn) / (mx - mn));
+    const bw = iw / steps.length * .54, els = [];
+    bars.forEach((s, i) => {
+      const cx = L + iw * (i + .5) / steps.length;
+      const yT = Y(Math.max(s.a, s.b)), yB = Y(Math.min(s.a, s.b));
+      const col = s.abs ? this.C.steel : (s.v >= 0 ? (s.up || this.C.cyan) : this.C.coral);
+      els.push(h('rect', { key: 'b' + i, x: cx - bw / 2, y: yT, width: bw, height: Math.max(2, yB - yT), rx: 2, fill: col, opacity: s.abs ? .55 : .8 }));
+      els.push(h('text', { key: 'v' + i, x: cx, y: yT - 6, textAnchor: 'middle', fontSize: 10.5, fill: col, fontFamily: 'IBM Plex Mono,monospace' }, this.fmt1(s.v, !s.abs && s.v > 0)));
+      els.push(h('text', { key: 'l' + i, x: cx, y: H - 10, textAnchor: 'middle', fontSize: 9.5, fill: '#8fa1b6' }, s.l));
+      if (i < bars.length - 1) els.push(h('line', { key: 'c' + i, x1: cx + bw / 2, x2: L + iw * (i + 1.5) / steps.length - bw / 2, y1: Y(bars[i].b), y2: Y(bars[i].b), stroke: 'rgba(140,170,210,.3)', strokeDasharray: '2 3' }));
+    });
+    return h('svg', { viewBox: `0 0 ${W} ${H}`, style: { width: '100%', height: 'auto', display: 'block' } }, els);
+  }
+
+  vHBar({ items }) {
+    const h = React.createElement;
+    const mx = Math.max(...items.map(i => Math.abs(i.v)));
+    return h('div', { style: { display: 'grid', gap: '8px' } }, items.map((it, i) => {
+      const c = it.color || (it.v < 0 ? this.C.coral : this.C.cyan);
+      return h('div', { key: i, style: { display: 'grid', gridTemplateColumns: '150px 1fr 64px', alignItems: 'center', gap: '10px' } },
+        h('span', { style: { fontSize: '13px', color: it.hl ? 'var(--text)' : 'var(--dim)', fontWeight: it.hl ? 700 : 400 } }, it.l),
+        h('div', { style: { height: '16px', background: 'rgba(255,255,255,.04)', borderRadius: '3px', overflow: 'hidden' } },
+          h('div', { style: { width: (Math.abs(it.v) / mx * 100) + '%', height: '100%', background: this.rgba(c, it.hl ? .9 : .55), borderRadius: '3px', transformOrigin: 'left', animation: `omgrow .5s ease ${i * 70}ms both` } })),
+        h('span', { style: { fontFamily: 'var(--mono)', fontSize: '12.5px', color: c, textAlign: 'right' } }, this.fmt1(it.v, it.v > 0 && it.plus)));
+    }));
+  }
+
+  vSteps() {
+    const h = React.createElement;
+    const rows = [
+      { l: '당기순이익', v: 45.2, c: this.C.mint, a: 0 },
+      { l: '+ 비현금 조정', v: 52.4, c: this.C.cyan, a: 45.2, dash: true },
+      { l: '− 운전자본', v: -9.6, c: this.C.coral, a: 97.6 },
+      { l: '− 이자·세금 실납부', v: -2.7, c: this.C.coral, a: 88.0 },
+      { l: '= 영업현금흐름', v: 85.3, c: this.C.cyan, a: 0, strong: true },
+    ];
+    const mx = 97.6;
+    return h('div', { style: { display: 'grid', gap: '9px' } }, rows.map((r, i) => {
+      const start = r.v >= 0 ? r.a : r.a + r.v;
+      return h('div', { key: i, style: { display: 'grid', gridTemplateColumns: '150px 1fr 60px', alignItems: 'center', gap: '10px' } },
+        h('span', { style: { fontSize: '13px', color: r.strong ? 'var(--text)' : 'var(--dim)', fontWeight: r.strong ? 700 : 400 } }, r.l),
+        h('div', { style: { position: 'relative', height: '18px', background: 'rgba(255,255,255,.04)', borderRadius: '3px' } },
+          h('div', { style: { position: 'absolute', left: (start / mx * 100) + '%', width: (Math.abs(r.v) / mx * 100) + '%', top: 0, bottom: 0, background: this.rgba(r.c, r.strong ? .95 : .6), border: r.dash ? `1.5px dashed ${r.c}` : 'none', borderRadius: '3px', transformOrigin: 'left', animation: `omgrow .5s ease ${i * 160}ms both` } })),
+        h('span', { style: { fontFamily: 'var(--mono)', fontSize: '12.5px', color: r.c, textAlign: 'right' } }, this.fmt1(r.v, r.v > 0 && i > 0)));
+    }));
+  }
+
+  vBubbles() {
+    const h = React.createElement;
+    const segs = [
+      { l: 'DX 가전·폰', rev: 188.0, op: 12.9 },
+      { l: 'DS 반도체', rev: 130.1, op: 24.9, hl: true },
+      { l: 'SDC', rev: 29.8, op: 4.1 },
+      { l: 'Harman', rev: 15.8, op: 1.5 },
+    ];
+    const els = []; let x = 40;
+    segs.forEach((s, i) => {
+      const r = 16 + Math.sqrt(s.rev) * 4.2;
+      x += r;
+      els.push(h('circle', { key: 'c' + i, cx: x, cy: 108, r, fill: this.C.mint, opacity: .15 + (s.op / s.rev) * 3.2, stroke: s.hl ? this.C.gold : this.rgba(this.C.mint, .5), strokeWidth: s.hl ? 2 : 1 }));
+      els.push(h('text', { key: 'o' + i, x, y: 112, textAnchor: 'middle', fontSize: 12, fontWeight: 700, fill: '#eafff6', fontFamily: 'IBM Plex Mono,monospace' }, this.fmt1(s.op)));
+      els.push(h('text', { key: 'l' + i, x, y: 108 + r + 16, textAnchor: 'middle', fontSize: 10.5, fill: s.hl ? this.C.gold : '#8fa1b6' }, s.l));
+      els.push(h('text', { key: 'r' + i, x, y: 108 + r + 30, textAnchor: 'middle', fontSize: 9.5, fill: '#5c6b80', fontFamily: 'IBM Plex Mono,monospace' }, '매출 ' + s.rev));
+      x += r + 26;
+    });
+    els.push(h('text', { key: 'nt', x: 620, y: 24, textAnchor: 'end', fontSize: 10.5, fill: '#8fa1b6' }, '원 크기 = 매출 · 밝기 = 이익률 · 숫자 = 영업이익(조)'));
+    els.push(h('text', { key: 'nt2', x: 620, y: 40, textAnchor: 'end', fontSize: 10.5, fill: '#5c6b80', fontFamily: 'IBM Plex Mono,monospace' }, '부문합 364 − 내부거래 30.1 = 333.6'));
+    return h('svg', { viewBox: '0 0 640 240', style: { width: '100%', height: 'auto', display: 'block' } }, els);
+  }
+
+  vPuddle() {
+    const h = React.createElement;
+    const p = (x, r, l, v) => [
+      h('ellipse', { key: 'e' + l, cx: x, cy: 100, rx: r, ry: r * .5, fill: this.C.cyan, opacity: .12 }),
+      h('ellipse', { key: 'f' + l, cx: x, cy: 100, rx: r * .7, ry: r * .34, fill: this.C.cyan, opacity: .2 }),
+      h('text', { key: 't' + l, x, y: 96, textAnchor: 'middle', fontSize: 12, fill: '#eef4fb' }, l),
+      h('text', { key: 'v' + l, x, y: 116, textAnchor: 'middle', fontSize: 13, fill: this.C.cyan, fontFamily: 'IBM Plex Mono,monospace', fontWeight: 700 }, v),
+    ];
+    return h('svg', { viewBox: '0 0 640 185', style: { width: '100%', height: 'auto', display: 'block' } },
+      p(200, 125, '못 받은 외상 (매출채권)', '+4.6조'), p(465, 100, '안 팔린 재고', '+3.6조'),
+      h('text', { key: 'n', x: 320, y: 170, textAnchor: 'middle', fontSize: 10.5, fill: '#8fa1b6' }, '고인 웅덩이 — 사라진 게 아니라 아직 현금이 되지 못한 돈이에요'));
+  }
+
+  vChips(items) {
+    const h = React.createElement;
+    return h('div', { style: { display: 'flex', flexWrap: 'wrap', gap: '10px', alignItems: 'center' } }, items.map((it, i) =>
+      h('span', { key: i, style: { fontFamily: 'var(--mono)', fontSize: '14px', fontWeight: 600, color: it.c, background: this.rgba(it.c, .08), border: `1px solid ${this.rgba(it.c, .35)}`, borderRadius: '7px', padding: '7px 13px' } }, it.t)));
+  }
+
+  // ===== Step 2 — 딥다이브 콘텐츠 =====
+  getDives() {
+    if (this._dives) return this._dives;
+    const C = this.C;
+    const D = {};
+    D.k1 = {
+      z: 'A', zc: 'steel', en: 'CASH · BEGINNING', name: '기초현금', amt: '53.71조', raw: '53,705,579', color: C.cyan, row: 'pbs-cash',
+      what: ["작년 말(전기말) 통장에 남아 있던 현금이에요. 재무제표는 이어달리기라서, 작년의 '기말현금'이 올해의 '기초현금'으로 그대로 배턴 터치돼요.", "올해 이야기의 출발선이 [53.71조]였다는 뜻이에요."],
+      links: [
+        { t: 'PBS', row: 'pbs-cash', txt: '전기말 재무상태표의 현금 잔액이에요', a: '53.71' },
+        { t: 'CF', row: 'cf-begincash', txt: '현금흐름표 맨 아래의 기초현금과 같은 숫자예요', a: '53.71' },
+      ],
+      lnote: '같은 돈이 두 표에 보여요 — 재무제표는 서로 맞물린 톱니예요.',
+      why: { sub: '규정', body: ["왜 이어지냐면 — 재무상태표는 '그 순간의 사진'이고, 현금흐름표는 '두 사진 사이의 동영상'이기 때문이에요. 작년 사진의 잔액에서 올해의 동영상이 시작돼요."], viz: () => this.vChips([{ t: '53.71 기초', c: C.cyan }, { t: '+4.15 한 해의 순증', c: C.gold }, { t: '= 57.86 기말', c: C.cyan }]), cap: '한 해의 현금 이야기는 이 등식 하나로 닫혀요.' },
+      five: { key: 'cash', cap: '2023년 말 [69.1조]까지 불었다가(투자를 아낀 해), 2024년 대규모 투자로 [53.7조]까지 줄고, 2025년 다시 [57.9조]가 됐어요.', so: '현금 잔액은 "얼마나 벌었나"보다 "얼마나 투자했나"에 따라 출렁여요.' },
+    };
+    D.k2 = {
+      z: 'B', zc: 'mint', en: 'REVENUE', name: '매출액', amt: '333.6조', raw: '333,605,938', color: C.mint, row: 'is-revenue',
+      what: ["매출액은 1년 동안 고객에게 제품·서비스를 팔아 받기로 한 돈의 합계예요. 올해 [333.6조] — 1초에 약 [1,000만 원] 꼴이에요.", "미리 받아둔 선수금 중 [1.7조]도 올해 물건을 건네면서 매출로 바뀌었어요(주17)."],
+      links: [
+        { t: 'IS', row: 'is-revenue', txt: '이야기의 출발점 — 여기서 강이 샘솟아요', a: '+333.6' },
+        { t: 'CF', row: 'cf-wc', txt: '외상으로 판 몫은 아직 현금이 아니라서 운전자본에서 빼줘요', a: '−4.6' },
+        { t: 'BS', row: 'bs-assets', txt: '못 받은 외상값(매출채권)은 자산으로 남아 있어요', a: '' },
+      ],
+      lnote: "'받기로 한 돈'이라서, 현금이 언제 들어오는지는 현금흐름표가 따로 답해요.",
+      why: { sub: '시각화 · 주30 부문정보', body: ["이 돈, 어느 사업부가 벌었을까요? 네 부문을 더한 [364조]에서 계열사끼리 사고판 [30.1조]를 빼야 바깥 매출 [333.6조]가 돼요."], viz: () => this.vBubbles(), cap: '매출 1위는 DX(가전·폰)지만, 원의 밝기(이익률)는 DS(반도체)가 가장 밝아요.' },
+      five: { key: 'revenue', valley: 2, cap: '코로나 특수가 이어진 2022년([302조]) 뒤, 2023년 반도체 한파로 [259조]까지 주저앉았다가, 단 2년 만에 사상 최대 [333.6조]를 회복했어요.', so: '불황 골짜기를 지나 2년 만에 사상 최대를 새로 썼어요.' },
+    };
+    D.k3 = {
+      z: 'B', zc: 'mint', en: 'COST OF SALES', name: '매출원가', amt: '−202.2조', raw: '202,235,513', color: C.coral, row: 'is-cogs',
+      what: ["제품을 만드는 데 든 값이에요. 매출의 약 [61%]가 여기서 빠져나가요. 대부분은 만들어 창고에 쌓아뒀던 제품이 팔리며 비용으로 바뀐 거랍니다.", "성격별로 보면 원재료 [103조]가 가장 크고, 그다음이 감가상각 [43.6조], 급여 [37조]예요(주21)."],
+      links: [
+        { t: 'IS', row: 'is-cogs', txt: '매출의 61%가 여기서 빠져나가요', a: '−202.2' },
+        { t: 'CF', row: 'cf-noncash', txt: '원가 속 감가상각은 현금이 안 나간 비용이라 도로 더해요', a: '+43.6' },
+        { t: 'BS', row: 'bs-assets', txt: '아직 안 팔린 제품은 재고자산으로 남아 있어요', a: '' },
+      ],
+      why: { sub: '규정', body: ["왜 '팔릴 때' 비용이 되냐면 — 만들 때 바로 비용으로 잡으면 매출과 비용이 다른 해에 흩어져요. 팔리는 순간 짝을 맞춰야 '이번 장사에서 얼마 남았나'가 보여요(수익·비용 대응)."], viz: () => this.vHBar({ items: [{ l: '원재료', v: 103, hl: true, color: C.coral }, { l: '감가상각', v: 43.6, color: C.cyan }, { l: '급여', v: 37, color: C.coral }] }), cap: '성격별로 보면(주21) 원재료가 절반 — 감가상각이 두 번째로 커요.' },
+      five: { key: 'cogs', color: C.coral, cap: '매출을 따라 [166조]→[202조]로 늘었어요. 관건은 매출보다 빨리 늘지 않는 것이죠.', so: '원가율(61%)이 유지되는 한, 매출 회복은 곧 이익 회복이에요.' },
+    };
+    D.k4 = {
+      z: 'B', zc: 'mint', en: 'GROSS PROFIT', name: '매출총이익', amt: '131.4조', raw: '131,370,425', color: C.mint, row: 'is-grossprofit',
+      what: ["매출에서 만드는 값(원가)을 뺀, 회사가 남긴 첫 번째 이익이에요. [333.6 − 202.2 = 131.4].", "100원어치 팔면 약 [39원]이 첫 이익으로 남는 셈이에요(매출총이익률 39.4%)."],
+      links: [
+        { t: 'IS', row: 'is-revenue', txt: '매출액에서 출발해', a: '333.6' },
+        { t: 'IS', row: 'is-cogs', txt: '매출원가를 빼면', a: '−202.2' },
+        { t: 'IS', row: 'is-grossprofit', txt: '첫 번째 이익이 남아요', a: '= 131.4' },
+      ],
+      why: { sub: '시각화', body: ['마진이 무너지는 해는 원가가 아니라 매출(반도체 가격)이 무너진 해예요.'], viz: () => this.vChips([{ t: '매출 333.6', c: C.mint }, { t: '− 원가 202.2', c: C.coral }, { t: '= 총이익 131.4', c: C.mint }]), cap: '손익계산서 계단의 첫 칸이에요.' },
+      five: { key: 'gross', valley: 2, cap: '2023년 [78.5조]로 급감 — 반도체 가격이 무너지면 마진이 먼저 무너져요.', so: '매출총이익의 골짜기가 곧 반도체 사이클의 골짜기예요.' },
+    };
+    D.k5 = {
+      z: 'B', zc: 'mint', en: 'SG&A', name: '판매비와관리비', amt: '−87.8조', raw: '87,769,374', color: C.coral, row: 'is-sgna',
+      what: ["물건을 파는 데(광고·영업)와 회사를 굴리는 데(관리·인건비) 쓴 돈이에요.", "놀랍게도 이 중 연구개발(R&D)에만 [37.7조] — 판관비의 [43%]를 썼답니다(주22)."],
+      links: [
+        { t: 'IS', row: 'is-sgna', txt: '매출총이익에서 이만큼을 더 빼요', a: '−87.8' },
+        { t: 'IS', row: 'is-sgna-rnd', txt: '가장 큰 항목은 R&D — 판관비의 43%', a: '−37.7' },
+      ],
+      why: { sub: '시각화 · 주22', body: ['큰 항목부터 줄 세우면 이렇게 돼요.'], viz: () => this.vHBar({ items: [{ l: '연구개발 (R&D)', v: 37.7, hl: true, color: C.gold }, { l: '지급수수료', v: 9.8, color: C.coral }, { l: '급여', v: 9.2, color: C.coral }, { l: '판매촉진', v: 8.2, color: C.coral }, { l: '광고선전', v: 6.0, color: C.coral }, { l: '서비스', v: 3.7, color: C.coral }, { l: '운반', v: 2.5, color: C.coral }, { l: '그 외', v: 10.6, color: C.coral }] }), cap: '가장 큰 항목은 광고가 아니라 연구개발이에요.' },
+      five: { twin: { a: { name: '판관비', vals: this.S.sgna, color: C.mint }, b: { name: 'R&D', vals: this.S.rnd, color: C.gold } }, cap: '불황이던 2023년에도 판관비는 늘었어요 — R&D가 5년 내내 한 번도 줄지 않고 [22.6조]→[37.8조]로 늘었기 때문이에요.', so: '비용을 줄일 때도 미래 기술 투자는 멈추지 않았어요.' },
+    };
+    D.k6 = {
+      z: 'B', zc: 'mint', en: 'OPERATING PROFIT', name: '영업이익', amt: '43.6조', raw: '43,601,051', color: C.mint, row: 'is-opincome',
+      what: ["본업(장사)으로 남긴 이익이에요 — 매출총이익에서 판관비까지 뺀 값이죠. 매출 100원당 약 [13원]이에요.", "부문별로는 반도체(DS)가 [24.9조]로 부문합의 [57%]를 벌었어요(주30)."],
+      links: [
+        { t: 'IS', row: 'is-grossprofit', txt: '매출총이익에서', a: '131.4' },
+        { t: 'IS', row: 'is-sgna', txt: '판관비를 빼면', a: '−87.8' },
+        { t: 'IS', row: 'is-opincome', txt: '본업의 이익이 남아요', a: '= 43.6' },
+      ],
+      why: { sub: '시각화 · 주30', body: ["매출 1위는 DX([188조])지만 이익의 중심은 반도체예요 — 삼성은 '매출은 DX, 이익은 DS'의 이원 구도랍니다."], viz: () => this.vHBar({ items: [{ l: 'DS 반도체', v: 24.9, hl: true, color: C.gold }, { l: 'DX 가전·폰', v: 12.9, color: C.mint }, { l: 'SDC 디스플레이', v: 4.1, color: C.mint }, { l: 'Harman 전장', v: 1.5, color: C.mint }] }), cap: '영업이익의 절반 이상이 반도체 한 곳에서 나와요.' },
+      five: { key: 'op', valley: 2, extraKey: 'dsOp', extraZero: true, extraValley: 2, extraColor: C.gold, cap: '2023년 반도체 불황으로 영업이익이 [6.6조]까지 [87%] 급감했다가 2년에 걸쳐 [43.6조]로 되돌아왔어요. 아래 골드 그래프의 DS(반도체)는 그해 [−14.9조] 적자 — 그런데도 DX·SDC·Harman이 떠받쳐 전체는 흑자를 지켰죠.', so: '삼성 실적을 읽으려면 메모리 가격부터 봐야 해요.' },
+    };
+    D.k6b = {
+      z: 'B', zc: 'mint', en: 'NON-OPERATING', name: '영업외·금융손익', amt: '+5.9조', raw: '+5,880,420', color: C.mint, row: 'is-nonop',
+      what: ["본업 밖에서 생긴 손익이에요. 예금 이자, 환율이 오르내리며 생긴 이익, 지분을 나눠 가진 회사들(삼성전기·삼성SDS 등)에서 온 몫 [0.7조] 같은 것들이죠(주9·23·24).", "다 더하고 빼면 순 [+5.9조] — 그래서 세금 내기 전 이익(세전이익)이 [49.5조]가 돼요."],
+      links: [
+        { t: 'IS', row: 'is-nonop', txt: '영업이익 43.6에 이걸 더하면', a: '+5.9' },
+        { t: 'IS', row: 'is-pretax', txt: '세전이익이 돼요 — 이 줄을 빼먹으면 6조가 어긋나요', a: '= 49.5' },
+      ],
+      why: { sub: '시각화 · 주24', body: ['환율이 수익과 비용 양쪽에 [10조]씩 들어 있어 서로 상쇄되고, 실제 순액은 크지 않아요.'], viz: () => this.vHBar({ items: [{ l: '금융수익', v: 16.2, color: C.mint, plus: true }, { l: '금융비용', v: -11.7 }, { l: '기타수익', v: 2.3, color: C.mint, plus: true }, { l: '기타비용', v: -1.6 }, { l: '지분법이익', v: 0.7, color: C.mint, plus: true, hl: true }] }), cap: '커 보이는 금융수익·비용은 대부분 서로 상쇄돼요.' },
+      five: { key: 'pretax', valley: 2, cap: '세전이익은 영업이익과 거의 같이 움직여요 — 영업외 손익은 매년 몇 조 수준의 보조 역할이죠.', so: '본업이 이야기의 주인공이에요.' },
+    };
+    D.k7 = {
+      z: 'B', zc: 'mint', en: 'INCOME TAX', name: '법인세비용', amt: '−4.3조', raw: '4,274,666', color: C.coral, row: 'is-tax',
+      what: ["세전 [49.5조]에 원래 세율(약 [23.3%])을 적용하면 [11.5조]쯤 내야 했어요. 그런데 실제 비용은 [4.3조], 실효세율 [8.6%]뿐이에요.", "반도체 투자 등에 대한 세액공제·감면 [8.4조] 덕분이에요(주25)."],
+      links: [
+        { t: 'IS', row: 'is-tax', txt: '손익에 기록한 세금(발생 기준)', a: '−4.3' },
+        { t: 'CF', row: 'cf-paid', txt: '실제로 낸 세금은 시점이 달라 여기 반영돼요', a: '−2.7' },
+      ],
+      why: { sub: '규정 · 시각화 · 주25', body: ['왜 이런 규칙이 있냐면 — 국가가 반도체 같은 전략 산업의 설비·R&D 투자를 세금으로 돌려주며 장려하기 때문이에요.'], viz: () => this.vWater({ steps: [{ l: '정가 세금', v: 11.5, abs: true }, { l: '세액공제·감면', v: -8.4 }, { l: '실제 비용', v: 4.3, abs: true }] }), cap: '정가 23.3% vs 실제 8.6%.' },
+      five: { key: 'tax', zero: true, color: C.coral, cap: '2022·2023년의 음수는 세금을 오히려 돌려받은 [환입]이에요 — 0선 아래로 내려간 특이 구간이죠.', so: '세금은 이익의 방향을 순간적으로 뒤집을 만큼 커요 — 2022년 순이익이 영업이익보다 컸던 비밀이에요.' },
+    };
+    D.k8 = {
+      z: 'B', zc: 'mint', en: 'NET INCOME', name: '당기순이익', amt: '45.2조', raw: '45,206,805', color: C.mint, row: 'is-netincome',
+      what: ["세금까지 다 뗀 최종 이익이에요. 삼성전자와 자회사를 합친 '연결' 기준인데, 그중 삼성 본체 몫이 [44.3조], 자회사의 다른 주주 몫이 [0.9조]예요(주32).", "이 이익은 손익·현금·자본 세 곳에 동시에 나타나요 — 이 페이지에서 가장 바쁜 숫자죠."],
+      links: [
+        { t: 'IS', row: 'is-netincome', txt: '손익 성적표의 최종 줄이에요', a: '45.2' },
+        { t: 'CF', row: 'cf-netincome', txt: '현금흐름표 영업활동의 출발점이에요', a: '+45.2' },
+        { t: 'EQ', row: 'eq-netincome', txt: '주주 곳간(이익잉여금)에 적립돼요', a: '+45.2' },
+      ],
+      lnote: '한 숫자가 세 표에 동시에 나타나요 — 가운데의 초록 화살표가 그 연결이에요.',
+      why: { sub: '시각화 · 주32', body: ["'연결'은 자회사까지 합친 숫자라, 자회사에 다른 주주가 있으면 그 몫(비지배지분)을 따로 표시해요. EPS(주당이익 [6,605원])는 지배 몫 기준이에요."], viz: () => this.vHBar({ items: [{ l: '지배기업 소유주 몫', v: 44.3, hl: true, color: C.mint }, { l: '비지배지분 몫', v: 0.9, color: C.steel }] }), cap: '45.2조 중 삼성 본체 몫은 44.3조.' },
+      five: { key: 'ni', valley: 2, cap: '2022년엔 순이익([55.7조])이 영업이익([43.4조])보다 큰데, 그해 세금을 [9조] 넘게 돌려받았기(환입) 때문이에요. 2023년엔 [15.5조]로 급감했죠.', so: '순이익만 보면 일회성에 속을 수 있어요 — 영업이익과 같이 봐야 해요.' },
+    };
+    D.k9 = {
+      z: 'C', zc: 'cyan', en: 'NON-CASH ADJUSTMENTS', name: '비현금 조정', amt: '+52.4조', raw: '52,395,616', color: C.cyan, row: 'cf-noncash',
+      what: ["손익 계산에선 비용으로 뺐지만 실제로는 현금이 나가지 않은 돈들이에요. 가장 큰 건 감가상각 [43.6조] — 현금은 예전에 장비를 살 때 이미 나갔고, 올해는 그 장비가 낡은 만큼을 장부에 나눠 적은 것뿐이에요.", "이런 돈들(모두 [52.4조])을 현금 관점에선 도로 더해줘요. 은하수의 색이 여기서 민트→시안으로 바뀌는 이유예요."],
+      links: [
+        { t: 'IS', row: 'is-cogs', txt: '원가·판관비 속에 비용으로 들어가 있어요', a: '−43.6' },
+        { t: 'BS', row: 'bs-ppe', txt: '유형자산 장부값이 그만큼 깎여요', a: '−43.6' },
+        { t: 'CF', row: 'cf-noncash', txt: '현금 관점에선 도로 더해요', a: '+43.6' },
+      ],
+      lnote: '한 숫자, 세 얼굴이에요.',
+      why: { sub: '규정 · 시각화 · 주10', body: ['왜 이런 규칙이 있냐면 — 장비를 산 해에 비용을 다 실으면 그 해만 나빠 보여요. 그래서 장비를 쓰는 기간에 나눠 싣는 게 감가상각이에요.', '유형자산으로 보면: 기초 [205.9조]에 새 장비 [+53.9조], 낡은 만큼 [−43.6조], 처분 등 [−0.4조] → 기말 [215.3조]가 돼요.'], viz: () => this.vWater({ steps: [{ l: '기초', v: 205.9, abs: true }, { l: '+ 취득', v: 53.9 }, { l: '− 감가상각', v: -43.6 }, { l: '− 처분 등', v: -0.4 }, { l: '기말', v: 215.3, abs: true }] }), cap: '장비는 사들인 만큼 늘고, 낡은 만큼 깎여요(주10).' },
+      five: { key: 'dep', cap: '설비를 늘릴수록 감가상각도 매년 커져요 — 5년간 [31.3조]→[43.6조]. 이 중 [87%]가 반도체(DS) 한 곳에서 나와요.', so: '감가상각이 큰 회사일수록 "이익보다 현금"의 격차가 커요.' },
+    };
+    D.k10 = {
+      z: 'C', zc: 'cyan', en: 'WORKING CAPITAL', name: '운전자본 변동', amt: '−9.6조', raw: '약 −9.6조', color: C.coral, row: 'cf-wc',
+      what: ["아직 못 받은 외상값이 [4.6조] 늘고, 현금을 들여 만들었지만 아직 안 팔린 재고가 [3.6조] 쌓였어요. 이익엔 잡혔어도 그만큼 현금이 아직 안 들어와서, 현금 관점에선 빼줘요.", "외상 총액은 [52조]쯤 되는데, 떼일 가능성 [0.57조]를 뺀 순액이 장부에 실려요(주7·8)."],
+      links: [
+        { t: 'CF', row: 'cf-wc-ar', txt: '못 받은 외상(매출채권 증가)', a: '−4.6' },
+        { t: 'CF', row: 'cf-wc-inv', txt: '안 팔린 재고(재고자산 증가)', a: '−3.6' },
+        { t: 'BS', row: 'bs-assets', txt: '외상·재고는 자산으로 묶여 있어요', a: '' },
+      ],
+      why: { sub: '시각화 · 주8', body: ['이익엔 이미 잡혔지만 현금은 아직 안 들어온 돈이라, 현금 관점에서만 빼주는 거예요.'], viz: () => this.vPuddle(), cap: '웅덩이의 돈은 사라진 게 아니라 아직 현금이 되지 못한 돈이에요.' },
+      five: { skip: '이 항목은 매년 증감이 크게 오르내려 5개년 추세가 큰 의미가 없어요 — 올해 구성(외상 +4.6 · 재고 +3.6 · 기타 +1.4)만 보여드려요.' },
+    };
+    D.k10b = {
+      z: 'C', zc: 'cyan', en: 'INTEREST & TAX PAID', name: '이자·법인세 실납부 등', amt: '−2.7조', raw: '약 −2.7조', color: C.coral, row: 'cf-paid',
+      what: ["손익에 기록한 세금과 올해 실제로 낸 세금은 시점이 조금 달라요.", "현금흐름표는 '실제로 나간 돈' 기준이라, 그 차이와 이자 납부까지 반영하면 영업현금흐름이 딱 맞아떨어져요."],
+      links: [
+        { t: 'CF', row: 'cf-paid', txt: '실제로 낸 이자·세금 기준의 조정', a: '−2.7' },
+        { t: 'IS', row: 'is-tax', txt: '손익에 기록한 세금(발생 기준)과 시점이 달라요', a: '−4.3' },
+      ],
+      why: { sub: '규정', body: ["손익계산서는 '발생한' 순간, 현금흐름표는 '실제로 낸' 순간 기준이에요. 같은 세금도 두 표에서 시점이 다르답니다."], viz: () => this.vChips([{ t: '45.2', c: C.mint }, { t: '+52.4', c: C.cyan }, { t: '−9.6', c: C.coral }, { t: '−2.7', c: C.coral }, { t: '= 85.3', c: C.cyan }]), cap: '이 네 걸음이 딱 맞아떨어져요.' },
+      five: { skip: '세금·이자 납부 시점의 잔차 항목이라 5개년 추세 대신 올해 정산만 보여드려요.' },
+    };
+    D.k11 = {
+      z: 'C', zc: 'cyan', en: 'OPERATING CASH FLOW', name: '영업활동 현금흐름', amt: '+85.3조', raw: '85,315,148', color: C.cyan, row: 'cf-op',
+      what: ["1년 동안 본업으로 통장에 실제로 들어온 현금이에요. 손익상 이익([45.2조])의 거의 [2배]죠!", "안 나간 비용(감가상각 등 [52.4조])을 도로 더했기 때문이에요(주27)."],
+      links: [
+        { t: 'IS', row: 'is-netincome', txt: '손익상 이익에서 출발해요', a: '45.2' },
+        { t: 'CF', row: 'cf-op', txt: '현금 관점으로 바꾸면 거의 2배가 돼요', a: '= 85.3' },
+      ],
+      why: { sub: '시각화 · 주27', body: ['이익 → 현금의 4단 정산이에요. 카드를 열 때마다 자동으로 재생돼요.'], viz: () => this.vSteps(), cap: '이익 45.2조가 네 걸음 만에 현금 85.3조가 되는 과정이에요.' },
+      five: { key: 'ocf', cap: '영업이익이 [6.6조]로 무너진 2023년에도 실제 현금은 [44.1조]나 들어왔어요 — "이익보다 현금"이라는 이 페이지의 핵심을 5년치로 보여주는 그래프예요.', so: '이익이 무너져도 현금이 버텨주는 것 — 제조업 삼성의 체력이에요.' },
+    };
+    D.k12 = {
+      z: 'C', zc: 'cyan', en: 'INVESTING', name: '투자활동 현금흐름', amt: '−68.5조', raw: '−68,512,206', color: C.coral, row: 'cf-inv',
+      what: ["번 현금의 절반 이상을 새 공장·장비([47.5조])에 다시 투자했어요. 미래를 위한 지출이죠.", "올해는 로봇(레인보우로보틱스)·오디오·공조 3사 인수에도 현금 [3.1조]를 썼고, 웃돈은 영업권으로 올라가 [23.7조]→[29.5조]가 됐어요(주33·11)."],
+      links: [
+        { t: 'CF', row: 'cf-inv-capex', txt: '새 공장·장비(capex)', a: '−47.5' },
+        { t: 'CF', row: 'cf-inv-etc', txt: '무형자산·관계기업·인수 등', a: '−21.0' },
+        { t: 'BS', row: 'bs-ppe', txt: '산 만큼 유형자산이 늘어요', a: '+' },
+      ],
+      why: { sub: '시각화', body: ['투자 유출의 [70%]가 공장·장비예요 — 반도체는 장비 산업이니까요.'], viz: () => this.vHBar({ items: [{ l: '유형자산 취득', v: 47.5, hl: true, color: C.coral }, { l: '무형·관계기업·기타', v: 21.0, color: C.coral }] }), cap: '투자의 중심은 언제나 공장과 장비예요.' },
+      five: { key: 'capex', cap: '실적이 가장 나빴던 2023년에 오히려 가장 많은 [57.6조]를 공장·장비에 투자했어요. 불황일수록 다음 사이클을 준비하는 반도체 산업의 특징이랍니다.', so: '반도체는 불황에 투자해 호황에 거두는 산업이에요.' },
+    };
+    D.k13 = {
+      z: 'C', zc: 'cyan', en: 'FINANCING', name: '재무활동 현금흐름', amt: '−13.5조', raw: '−13,478,040', color: C.coral, row: 'cf-fin',
+      what: ["배당 [9.9조]와 자사주 매입 [8.2조]로 주주에게 돌려주고, 새로 빌린 돈 [4.6조]를 도로 더하면 순유출은 [13.5조]예요.", "빌린 돈은 단기 [17.6조]·장기 [6.5조]·리스 [5.5조] — 회사 덩치에 비해 아주 적고, 회사채는 거의 없어요(주12·13)."],
+      links: [
+        { t: 'CF', row: 'cf-fin', txt: '주주 환원과 차입의 순액이에요', a: '−13.5' },
+        { t: 'EQ', row: 'eq-div', txt: '자본변동표의 배당과 같은 돈이에요', a: '−9.9' },
+        { t: 'EQ', row: 'eq-buyback', txt: '자기주식 취득도 같은 돈이에요', a: '−8.2' },
+      ],
+      lnote: '주주 환원은 자본변동표(곳간)와 현금흐름표(통장) 두 곳에 같은 금액으로 보여요.',
+      why: { sub: '시각화', body: ['주주에게 [18조]를 돌려주고, [4.6조]를 새로 빌렸어요.'], viz: () => this.vHBar({ items: [{ l: '배당 지급', v: -9.9 }, { l: '자기주식 취득', v: -8.2 }, { l: '차입금 순증가', v: 4.6, color: C.cyan, plus: true }] }), cap: '유출의 대부분이 주주 환원이에요.' },
+      five: { twin: { a: { name: '배당', vals: this.S.div, color: C.gold }, b: { name: '자사주', vals: this.S.buyback, color: C.coral } }, cap: '정기 배당은 매년 약 [10조]로 꾸준하고(2021년 [20.5조]는 특별배당 포함), 2024년부터 자사주 매입을 재개해 2025년 [8.2조]로 크게 늘렸어요.', so: '주주에게 더 많이 돌려주기 시작한 신호예요.' },
+    };
+    D.k14 = {
+      z: 'C', zc: 'cyan', en: 'FX EFFECT', name: '외화환산효과', amt: '+0.8조', raw: '825,897', color: C.cyan, row: 'cf-fx',
+      what: ["해외에서 번 돈을 원화로 바꿀 때 환율이 움직여 생긴 작은 합류예요.", "해외 통장의 달러는 그대로인데, 원화로 환산한 금액이 환율 따라 움직인 차이랍니다."],
+      links: [{ t: 'CF', row: 'cf-fx', txt: '세 활동과 섞지 않고 따로 한 줄로 적어요', a: '+0.8' }],
+      why: { sub: '규정', body: ["왜 따로 적냐면 — 이건 회사가 번 것도 쓴 것도 아니고, 환율이 움직인 결과이기 때문이에요. 섞으면 세 활동의 이야기가 흐려져요."], viz: null, cap: null },
+      five: { skip: '환율효과는 해마다 부호가 바뀌는 잔차 항목이라 5개년 추세를 따로 그리지 않아요.' },
+    };
+    D.k15 = {
+      z: 'D', zc: 'cyan', en: 'CASH · ENDING', name: '기말현금', amt: '57.86조', raw: '57,856,378', color: C.cyan, row: 'bs-cash',
+      what: ["세 활동과 환율효과를 모두 더하니 통장의 현금이 [4.15조] 늘어, [53.7조]에서 [57.9조]가 됐어요.", "회사 전체 자산도 [566.9조]로 불었고요."],
+      links: [
+        { t: 'CF', row: 'cf-endcash', txt: '현금흐름표의 도착점이에요', a: '57.86' },
+        { t: 'BS', row: 'bs-cash', txt: '재무상태표의 현금과 같은 숫자예요', a: '57.86' },
+        { t: 'BS', row: 'bs-assets', txt: '자산총계의 일부예요', a: '566.9' },
+      ],
+      lnote: '같은 돈이 두 표에 — 가운데의 시안 연결선이 그 맞물림이에요.',
+      why: { sub: '시각화', body: ['한 해의 현금 이야기 전체가 이 폭포 하나예요.'], viz: () => this.vWater({ steps: [{ l: '기초', v: 53.71, abs: true }, { l: '영업', v: 85.3 }, { l: '투자', v: -68.5 }, { l: '재무', v: -13.5 }, { l: '환율', v: 0.8 }, { l: '기말', v: 57.86, abs: true }] }), cap: '세 활동과 환율을 모두 더하면 +4.15조.' },
+      five: { key: 'cash', cap: '2023년 말 [69.1조]까지 불었다가 2024년 대규모 투자(투자활동 [−85.4조])로 [53.7조]까지 줄고, 2025년 다시 [57.9조]가 됐어요.', so: '현금 잔액의 출렁임은 투자 사이클의 그림자예요.' },
+    };
+    D.oci = {
+      z: 'B·E', zc: 'gold', en: 'OCI', name: '기타포괄손익 (OCI)', amt: '+6.1조', raw: '6,083,719', color: C.gold, row: 'is-oci',
+      what: ["손익 성적표를 거치지 않고 자본으로 직접 들어가는 손익이에요. 오래 보유하기로 한 주식의 평가이익(주6, 약 [+6조]), 해외 자산의 환산차이 같은 것들이죠.", "올해 [+6.1조]가 곧장 주주 곳간으로 들어갔어요. 순이익과 합친 총포괄손익은 [51.3조]예요."],
+      links: [
+        { t: 'IS', row: 'is-oci', txt: '당기순이익 아래에 별도로 표시돼요', a: '+6.1' },
+        { t: 'EQ', row: 'eq-oci', txt: '자본변동표에 그대로 나타나요 — 골드 파선이 그 길이에요', a: '+6.1' },
+        { t: 'BS', row: 'bs-equity', txt: '자본총계를 불려요', a: '' },
+      ],
+      lnote: 'OCI는 자본(CE)으로 직행하고, 배당·자사주는 재무활동 현금흐름에서 실제 현금이 나간 것과 같은 돈이에요 — 자본은 이렇게 세 갈래(순이익·OCI·주주 환원)로 움직여요.',
+      why: { sub: '규정', body: ["왜 손익을 안 거치냐면 — 아직 팔지 않은 주식의 평가액이나 환율 변동은 '장사 실력'이 아니기 때문이에요. 성적표를 어지럽히지 않게 옆문으로 곳간에 넣는 거죠."], viz: () => this.vChips([{ t: '순이익 45.2', c: C.mint }, { t: '+ OCI 6.1', c: C.gold }, { t: '= 총포괄 51.3', c: C.gold }]), cap: '성적표(손익)와 옆문(OCI)을 더한 것이 총포괄손익이에요.' },
+      five: { key: 'oci', cap: '2024년 [16.8조]로 유독 컸어요 — 환율과 보유 주식 평가가 크게 움직인 해였죠.', so: 'OCI가 큰 해는 환율·시장이 요동친 해라는 신호예요.' },
+    };
+    D.ppe = {
+      z: 'D', zc: 'steel', en: 'PP&E', name: '유형자산 (공장·장비)', amt: '215.3조', raw: '215,304,784', color: C.steel, row: 'bs-ppe',
+      what: ["반도체 공장, 생산 장비, 건물 같은 물리적 자산이에요. 삼성 자산의 [38%]를 차지하는 가장 큰 덩어리죠.", "올해 [53.9조]어치를 새로 사들이고, 낡은 만큼 [43.6조]를 감가상각으로 깎아 [205.9조]→[215.3조]가 됐어요(주10). 사느라 올해 실제 나간 현금은 [47.5조] — 차이는 아직 안 준 외상이에요."],
+      links: [
+        { t: 'BS', row: 'bs-ppe', txt: '재무상태표에서 가장 큰 자산이에요', a: '215.3' },
+        { t: 'CF', row: 'cf-inv-capex', txt: '사느라 나간 현금', a: '−47.5' },
+        { t: 'CF', row: 'cf-noncash-dep', txt: '낡은 만큼은 현금 안 나간 비용', a: '+43.6' },
+      ],
+      why: { sub: '시각화 · 주10', body: ['1년 동안의 입출고를 폭포로 보면 이래요.'], viz: () => this.vWater({ steps: [{ l: '기초', v: 205.9, abs: true }, { l: '+ 취득', v: 53.9 }, { l: '− 감가상각', v: -43.6 }, { l: '− 처분 등', v: -0.4 }, { l: '기말', v: 215.3, abs: true }] }), cap: '사들인 만큼 늘고, 낡은 만큼 깎여요.' },
+      five: { twin: { a: { name: '취득 (capex)', vals: this.S.capex, color: C.cyan }, b: { name: '감가상각', vals: this.S.dep, color: C.coral } }, cap: '매년 [50조] 안팎을 사고 [35~44조]씩 낡아요 — 사는 속도가 낡는 속도보다 빨라 공장이 계속 커져요.', so: '삼성의 미래는 이 두 막대의 간격에 있어요.' },
+    };
+    D.assets = {
+      z: 'D', zc: 'steel', en: 'TOTAL ASSETS', name: '자산총계', amt: '566.9조', raw: '566,942,110', color: C.steel, row: 'bs-assets',
+      what: ["오늘 이 순간 회사가 가진 재산 전부예요. [자산 566.9 = 부채 130.6 + 자본 436.3] — 재무상태표의 항등식이죠.", "부채는 자산의 [23%]뿐이라 재무구조가 아주 단단해요."],
+      links: [
+        { t: 'BS', row: 'bs-liab', txt: '남의 돈(갚아야 할 돈)', a: '130.6' },
+        { t: 'BS', row: 'bs-equity', txt: '주주의 돈(자본)', a: '436.3' },
+        { t: 'EQ', row: 'eq-end', txt: '자본의 1년치 변동은 자본변동표가 설명해요', a: '' },
+      ],
+      why: { sub: '규정', body: ['항등식이 안 맞으면 어딘가 기록이 틀린 거예요 — 복식부기의 자기검증 장치죠.'], viz: () => this.vChips([{ t: '자산 566.9', c: C.steel }, { t: '= 부채 130.6', c: C.coral }, { t: '+ 자본 436.3', c: C.gold }]), cap: '왼쪽(자산)과 오른쪽(부채+자본)은 항상 같아요.' },
+      five: { key: 'assets', color: C.steel, cap: '5년간 [426.6조]→[566.9조]로 꾸준히 커졌어요 — 번 이익을 쌓고(자본) 공장을 늘린(유형자산) 결과예요.', so: '회사의 덩치가 5년 새 33% 두꺼워졌어요.' },
+    };
+    D.liab = {
+      z: 'D', zc: 'steel', en: 'TOTAL LIABILITIES', name: '부채총계', amt: '130.6조', raw: '130,621,773', color: C.steel, row: 'bs-liab',
+      what: ["남에게 갚아야 할 돈이에요 — 협력사 외상값, 빌린 돈, 미리 받은 선수금 같은 것들요.", "자산의 [23%]뿐이라, 삼성은 사실상 남의 돈 없이 굴러가는 회사예요."],
+      links: [
+        { t: 'BS', row: 'bs-liab', txt: '자산의 23%뿐이에요', a: '130.6' },
+        { t: 'CF', row: 'cf-fin-debt', txt: '올해 차입금을 조금 늘렸어요', a: '+4.6' },
+      ],
+      why: { sub: '시각화 · 주12·13', body: ['현금이 넉넉해 회사채는 거의 없어요 — 차입은 대부분 단기 운영용이에요.'], viz: () => this.vChips([{ t: '단기차입 17.6', c: C.steel }, { t: '장기차입 6.5', c: C.steel }, { t: '리스 5.5', c: C.steel }]), cap: '빌린 돈의 구성이에요(주12).' },
+      five: { key: 'debt', color: C.steel, cap: '부채는 [92~131조] 사이를 오가며 낮게 유지돼요 — 이익이 늘 때 자본이 커지는 것과 대비되죠.', so: '불황을 버티는 힘은 낮은 부채에서 나와요.' },
+    };
+    D['eq-begin'] = {
+      z: 'E', zc: 'gold', en: 'EQUITY · BEGINNING', name: '기초자본', amt: '402.2조', raw: '402,192,070', color: C.gold, row: 'eq-begin',
+      what: ["작년 말 주주의 곳간(자본)에 쌓여 있던 몫이에요. 회사가 창립부터 쌓아온 이익과 주주가 넣은 밑천의 합이죠.", "여기에 올해의 순이익·OCI가 쌓이고, 배당·자사주로 꺼내요."],
+      links: [
+        { t: 'EQ', row: 'eq-begin', txt: '곳간의 출발 잔액', a: '402.2' },
+        { t: 'EQ', row: 'eq-end', txt: '올해 말엔 이만큼으로', a: '436.3' },
+      ],
+      why: { sub: '시각화', body: ['자본변동표는 이 곳간의 1년치 입출고 장부예요.'], viz: () => this.vChips([{ t: '402.2', c: C.gold }, { t: '+45.2', c: C.mint }, { t: '+6.1', c: C.gold }, { t: '−9.9', c: C.coral }, { t: '−8.2', c: C.coral }, { t: '+0.9', c: C.gold }, { t: '= 436.3', c: C.gold }]), cap: '여섯 걸음의 합이 딱 닫혀요.' },
+      five: { key: 'equity', color: C.gold, cap: '매년 번 이익을 차곡차곡 쌓아 자본이 5년간 [304.9조]→[436.3조]로 커졌어요.', so: '회사의 순자산이 5년 새 43% 두꺼워졌어요.' },
+    };
+    D['eq-div'] = {
+      z: 'E', zc: 'gold', en: 'DIVIDENDS', name: '배당', amt: '−9.9조', raw: '9,897,183', color: C.gold, row: 'eq-div',
+      what: ["1년 동안 주주에게 현금으로 나눠준 배당이에요. 정기 배당은 매년 약 [10조]로 꾸준해요.", "자본변동표에선 곳간에서 꺼낸 것(−), 현금흐름표에선 실제 나간 현금(−) — 같은 돈이 두 표에 보여요(주19)."],
+      links: [
+        { t: 'EQ', row: 'eq-div', txt: '곳간에서 꺼낸 몫', a: '−9.9' },
+        { t: 'CF', row: 'cf-fin-div', txt: '재무활동에서 실제로 나간 그 돈이에요', a: '−9.9' },
+      ],
+      lnote: '자본(CE) ↔ 재무활동 현금흐름이 이 항목으로 맞물려요.',
+      why: { sub: '시각화', body: ['올해 주주에게 돌아간 돈을 모두 합치면 [18.1조]예요. 자사주 소각 [3.0조]도 배당처럼 주주 환원이랍니다(주19).'], viz: () => this.vChips([{ t: '배당 9.9', c: C.gold }, { t: '자사주 8.2', c: C.coral }, { t: '= 환원 18.1', c: C.gold }]), cap: '올해 주주에게 돌아간 돈.' },
+      five: { twin: { a: { name: '배당', vals: this.S.div, color: C.gold }, b: { name: '자사주', vals: this.S.buyback, color: C.coral } }, cap: '2021년 [20.5조]는 특별배당 포함이에요. 2024년부터 자사주까지 더해 환원이 늘고 있어요.', so: '배당 + 자사주 = 새로운 주주 환원 공식이에요.' },
+    };
+    D['eq-buyback'] = {
+      z: 'E', zc: 'gold', en: 'TREASURY STOCK', name: '자기주식 취득', amt: '−8.2조', raw: '8,189,263', color: C.gold, row: 'eq-buyback',
+      what: ["회사가 자기 주식을 시장에서 사들인 거예요. 유통 주식이 줄어 남은 주주의 몫이 진해지는, 배당과 같은 주주 환원이에요.", "2024년부터 다시 시작해 올해 [8.2조]로 크게 늘렸고, 사들인 주식 중 [3.0조]는 소각했어요(주19·20)."],
+      links: [
+        { t: 'EQ', row: 'eq-buyback', txt: '곳간에서 꺼낸 몫', a: '−8.2' },
+        { t: 'CF', row: 'cf-fin-tsy', txt: '재무활동에서 실제로 나간 그 돈이에요', a: '−8.2' },
+      ],
+      lnote: '자본(CE) ↔ 재무활동 현금흐름이 이 항목으로 맞물려요.',
+      why: { sub: '규정 · 주20', body: ['자사주를 사면 자본이 줄어요(곳간에서 꺼낸 것) — 하지만 주당 가치는 올라가요. 그래서 소각까지 하면 배당과 같은 효과랍니다.'], viz: () => this.vChips([{ t: '취득 −8.2', c: C.coral }, { t: '소각 +3.0', c: C.gold }]), cap: '사서(−) 태우는(소각) 흐름이에요.' },
+      five: { twin: { a: { name: '배당', vals: this.S.div, color: C.gold }, b: { name: '자사주', vals: this.S.buyback, color: C.coral } }, cap: '자사주 매입은 2024년 [1.8조]로 재개돼 2025년 [8.2조]로 껑충 뛰었어요.', so: '배당 + 자사주 = 새로운 주주 환원 공식이에요.' },
+    };
+    D['eq-other'] = {
+      z: 'E', zc: 'gold', en: 'OTHER', name: '주식보상·기타', amt: '+0.9조', raw: '923,178', color: C.gold, row: 'eq-other',
+      what: ["임직원에게 주식으로 주기로 한 보상 등 자잘한 자본 증감의 합이에요.", "작아 보여도 이걸 빼먹으면 곳간의 합계가 [0.9조] 안 맞아요."],
+      links: [{ t: 'EQ', row: 'eq-other', txt: '합계를 닫는 마지막 조각', a: '+0.9' }],
+      why: { sub: '정합성', body: ['[402.2 +45.2 +6.1 −9.9 −8.2 +0.9 = 436.3] — 여섯 항목이 모두 있어야 합이 닫혀요.'], viz: null, cap: null },
+      five: { skip: '금액이 작고 성격이 해마다 달라 5개년 추세를 그리지 않아요.' },
+    };
+    D['eq-end'] = {
+      z: 'E', zc: 'gold', en: 'EQUITY · ENDING', name: '기말자본', amt: '436.3조', raw: '436,320,337', color: C.gold, row: 'eq-end',
+      what: ["기초 [402.2조]에서 순이익·OCI를 쌓고 배당·자사주를 꺼낸, 올해 말 주주의 몫이에요.", "[402.2 +45.2 +6.1 −9.9 −8.2 +0.9 = 436.3] — 합이 딱 닫혀요. 1년 새 [34.1조] 두꺼워졌죠."],
+      links: [
+        { t: 'EQ', row: 'eq-end', txt: '곳간의 기말 잔액', a: '436.3' },
+        { t: 'BS', row: 'bs-equity', txt: '재무상태표 자본총계와 같은 숫자예요', a: '436.3' },
+        { t: 'IS', row: 'is-oci', txt: 'OCI는 손익을 거치지 않고 직행해요', a: '+6.1' },
+        { t: 'CF', row: 'cf-fin', txt: '배당·자사주는 실제 현금 유출과 같은 돈이에요', a: '−18.1' },
+      ],
+      lnote: '자본(CE) ↔ OCI ↔ 재무활동 현금흐름 — 곳간의 세 문이에요: 성적표의 문(순이익), 옆문(OCI), 꺼내는 문(배당·자사주).',
+      why: { sub: '시각화', body: ['곳간의 1년 입출고 전부를 폭포로 보면 이래요.'], viz: () => this.vWater({ steps: [{ l: '기초', v: 402.2, abs: true }, { l: '순이익', v: 45.2, up: C.gold }, { l: 'OCI', v: 6.1, up: C.gold }, { l: '배당', v: -9.9 }, { l: '자사주', v: -8.2 }, { l: '기타', v: 0.9, up: C.gold }, { l: '기말', v: 436.3, abs: true }] }), cap: '여섯 걸음의 합이 딱 닫혀요.' },
+      five: { key: 'equity', color: C.gold, cap: '이익 적립으로 5년간 [304.9조]→[436.3조] 꾸준히 증가 — 골짜기(2023)에도 줄지 않았어요.', so: '자본은 실적의 누적 기록이라, 한 해의 골짜기에도 계속 자라요.' },
+    };
+    D.n1 = { badge: 'APPENDIX', z: '주1', zc: 'steel', en: 'GENERAL · 일반사항', name: '일반사항', amt: '종속기업 308개', color: C.steel,
+      what: ["삼성전자가 어떤 회사인지 여는 첫 장이에요. [1969년] 세워져 [1975년] 상장했고, 본사는 수원, 사업은 DX·DS·SDC·Harman 넷이에요.", "무엇보다 이 숫자들은 삼성전자 혼자가 아니라 연결 대상 종속기업 [308개]와 지분법 관계·공동기업 [33개]를 하나로 합친 '연결' 기준이에요."],
+      links: [{ t: 'BS', row: 'bs-nci', txt: "자회사의 다른 주주 몫이 '비지배지분'으로", a: '12.0조' }, { t: 'IS', row: 'is-ni-nci', txt: '순이익에도 비지배 몫이 갈라져요', a: '0.9조' }],
+      lnote: "'연결'은 삼성전자 + 308개 자회사를 한 지갑처럼 본 숫자예요 — 그래서 곳곳에 '자회사의 다른 주주 몫'이 나와요.",
+      why: { sub: '왜 308개를 합치나요', body: ["지배력(의결권 과반 등)이 있으면 한 몸으로 봐야 진짜 회사 규모가 보이기 때문이에요(K-IFRS 1110호). 자회사의 매출·이익·현금이 모두 이 숫자 안에 들어 있어요."] },
+      five: { skip: '종속기업 수는 인수·청산으로 매년 바뀌는 값이라 5개년 추세 지표가 아니에요.' } };
+    D.n2 = { badge: 'APPENDIX', z: '주2', zc: 'steel', en: 'ACCOUNTING POLICY · 회계처리방침', name: '중요한 회계처리방침', amt: 'K-IFRS', color: C.steel,
+      what: ["숫자를 '어떤 규칙으로' 만들었는지 적은 규칙서예요. 한국이 채택한 국제회계기준(K-IFRS)을 따라요.", "금액은 [원화]로 적고, 재고는 산 값과 팔릴 값 중 낮은 쪽으로(저가법), 공장·장비는 매년 같은 금액씩 나눠 비용 처리해요(정액법 — 건물 15·30년, 기계 5년)."],
+      links: [{ t: 'CF', row: 'cf-noncash-dep', txt: "'정액법' 규칙이 만든 감가상각", a: '43.6조' }],
+      lnote: '이 방침이 앞의 모든 표를 지배해요 — 규칙이 정해져야 회사끼리 비교가 되니까요.',
+      why: { sub: '왜 규칙서가 필요할까요', body: ["회사마다 제멋대로 계산하면 비교가 안 돼요. 그래서 같은 잣대를 정해두고 따라요. 이 재무제표는 2026-01-28 이사회에서 승인됐어요."] },
+      five: { skip: '수치가 아니라 규칙이라 5개년 그래프가 없어요.' } };
+    D.n3 = { badge: 'APPENDIX', z: '주3', zc: 'steel', en: 'ESTIMATES · 회계추정', name: '중요한 회계추정', amt: '추정이 필요한 칸들', color: C.steel,
+      what: ["회계엔 '미래를 미리 가정해야' 하는 칸이 있어요. 반품될 양, 보증수리 비용, 못 받을 외상, 안 팔릴 재고, 퇴직급여 할인율 같은 걸 과거 경험으로 최선을 다해 추정해요.", '이 추정들이 매출차감·충당부채·자산손상·순확정급여 같은 숫자를 좌우해요.'],
+      links: [{ t: 'BS', row: 'bs-prov', txt: '추정으로 잡는 대표 항목 — 충당부채', a: '10.6조' }],
+      why: { sub: '왜 추정하나요', body: ["결산 시점엔 아직 확정 안 된 미래라서예요. 실제와 다르면 다음 해에 조정해요 — 회계는 '정답'만이 아니라 '최선의 추정'이 섞여 있다는 걸 알려주는 장이에요."] },
+      five: { skip: "추정 '영역'을 알리는 정성 주석이에요." } };
+    D.n4 = { badge: 'APPENDIX', z: '주4', zc: 'cyan', en: 'FINANCIAL INSTRUMENTS · 금융상품', name: '범주별 금융상품', amt: '215.2조', color: C.cyan,
+      what: ["돈 관련 자산(현금·예금·주식·채권)을 '보유 목적'에 따라 셋으로 나눈 표예요.", '금융자산 [215.2조] = 만기까지 들고 갈 예금·채권 [197.4조](상각후원가) + 팔지 않고 오래 보유할 주식 [16.3조](FVOCI) + 사고팔 목적 [1.4조](FVPL). 금융부채는 [77.4조]예요.'],
+      links: [{ t: 'BS', row: 'bs-cash', txt: '현금·단기금융상품이 큰 몫', a: '125.8조' }, { t: 'BS', row: 'bs-fvoci', txt: '오래 보유 주식(FVOCI)', a: '16.3조' }],
+      lnote: 'FVOCI 주식의 평가이익은 손익을 안 거치고 곧바로 자본(OCI·주6)으로 가요.',
+      why: { sub: '왜 나눌까요', body: ['팔 목적이면 손익(FVPL)에, 오래 보유면 자본(FVOCI)에 이익을 반영해요. 목적이 달라서 이익이 앉는 자리가 달라지는 거예요.'], viz: () => this.vHBar({ items: [{ l: '상각후원가 (예금·채권)', v: 197.4, hl: true, color: C.cyan }, { l: 'FVOCI (오래 보유 주식)', v: 16.3, color: C.gold }, { l: 'FVPL (사고팔 목적)', v: 1.4, color: C.mint }] }), cap: '대부분은 만기까지 보유하는 예금·채권이에요.' },
+      five: { skip: '구성 비중 주석이라 추세보다 그해 분류를 봐요.' } };
+    D.n5 = { badge: 'APPENDIX', z: '주5', zc: 'coral', en: 'FACTORING · 매출채권 양도', name: '매출채권 양도(팩토링)', amt: '17.4조', color: C.coral,
+      what: ["아직 못 받은 외상값(매출채권)을 은행에 넘겨 미리 현금을 받는 '팩토링'이에요.", '계속 인식하는 매출채권 [17.4조](전기 12.8조)를 자산에서 지우지 않고, 같은 금액을 부채로 함께 잡아요.'],
+      links: [{ t: 'BS', row: 'bs-ar', txt: '매출채권을 자산에 그대로 남겨요', a: '51.1조' }, { t: 'BS', row: 'bs-stb', txt: '관련 부채는 단기차입금으로', a: '17.6조' }],
+      lnote: '형식은 매각이지만 실질은 외상값을 담보로 한 차입에 가까워요.',
+      why: { sub: '왜 자산을 안 지울까요', body: ["되사줄 의무 등 위험·보상을 회사가 그대로 지면, 회계상 '판 것(자산 제거)'으로 인정 안 돼요. 그래서 매출채권을 남기고 빚을 함께 적어요."] },
+      five: { skip: '그해 자금운용 규모라 추세선보다 당기 값을 봐요.' } };
+    D.n14 = { badge: 'APPENDIX', z: '주14', zc: 'mint', en: 'RETIREMENT BENEFIT · 퇴직급여', name: '순확정급여(퇴직급여)', amt: '순 +3.7조', color: C.mint,
+      what: ['직원 퇴직급여를 위해 회사가 질 빚과, 대비해 쌓아둔 돈을 비교한 표예요.', '갚아야 할 채무(확정급여채무)가 [16.9조]인데, 외부에 쌓아둔 돈(사외적립자산)은 [20.6조]라 오히려 [3.7조] 넉넉해요. 올해 퇴직급여비용은 [1.4조]예요.'],
+      links: [{ t: 'BS', row: 'bs-dba', txt: '넉넉한 몫은 순확정급여자산으로', a: '4.3조' }, { t: 'IS', row: 'is-sgna', txt: '퇴직급여비용은 판관비에 포함', a: '1.4조' }],
+      why: { sub: '왜 자산이 되나요', body: ["쌓아둔 돈이 갚을 채무보다 많으면 '자산', 적으면 '부채'예요. 삼성은 넉넉히 적립해 순자산 상태랍니다(채무 만기는 약 9.7년)."], viz: () => this.vHBar({ items: [{ l: '사외적립자산 (쌓아둔 돈)', v: 20.6, hl: true, color: C.mint }, { l: '확정급여채무 (갚을 빚)', v: 16.9, color: C.steel }] }), cap: '쌓아둔 돈이 갚을 빚보다 많아요.' },
+      five: { skip: '단년 잔액 비교가 핵심이라 5개년 추세는 생략해요.' } };
+    D.n15 = { badge: 'APPENDIX', z: '주15', zc: 'coral', en: 'PROVISIONS · 충당부채', name: '충당부채', amt: '10.6조', color: C.coral,
+      what: ['나갈 게 거의 확실하나 금액·시기가 불확실한 미래 지출을 미리 잡은 부채예요.', '기초 [11.3조]에서 새로 [3.4조]를 쌓고 [4.0조]를 실제로 써서 기말 [10.6조]가 됐어요. 판매보증 [2.6조]·기술사용료 [2.2조]·장기성과급 [0.8조]·기타 [5.0조]로 나뉘어요.'],
+      links: [{ t: 'BS', row: 'bs-prov', txt: '유동 충당부채', a: '7.7조' }, { t: 'BS', row: 'bs-ltprov', txt: '비유동 충당부채', a: '2.9조' }, { t: 'IS', row: 'is-sgna', txt: '새로 쌓는 전입액은 비용으로', a: '' }],
+      why: { sub: '왜 미리 잡나요', body: ["예로 판 제품의 A/S 비용은 미래에 나가지만, 판 시점에 이미 원인이 생겼으니 그때 부채로 잡아야 '이번 장사의 진짜 비용'이 보여요."], viz: () => this.vWater({ steps: [{ l: '기초', v: 11.3, abs: true }, { l: '전입', v: 3.4, up: C.coral }, { l: '사용', v: -4.0 }, { l: '기타', v: -0.2 }, { l: '기말', v: 10.6, abs: true }] }), cap: '쌓고(전입) 쓰고(사용) 하며 1년을 지나요.' },
+      five: { skip: '기초→기말 한 해 흐름이 핵심이라 5개년은 생략해요.' } };
+    D.n16 = { badge: 'APPENDIX', z: '주16', zc: 'steel', en: 'CONTINGENCIES · 우발부채·약정', name: '우발부채와 약정', amt: '약정 52.9조', color: C.steel,
+      what: ['아직 확정 안 된 잠재 빚(소송)과, 하기로 약속한 미래 지출(약정)이에요.', '금융·취득 약정 합계 [약 52.9조](은행 금융약정 [21.6조] 등 + 유·무형자산 취득약정 [10.3조]), 독일 ZF ADAS 인수약정(금액 미공시). 소송은 금액 미공시예요.'],
+      links: [{ t: 'BS', row: 'bs-liab', txt: '확정되면 부채로 잡혀요', a: '잠재' }, { t: 'CF', row: 'cf-inv', txt: '취득 약정은 집행되면 투자 유출로', a: '' }],
+      lnote: "우발부채는 '확정 부채'가 아니라 재무상태표 본문이 아닌 [주석]에만 적혀요 — 숫자를 볼 땐 본문과 주석을 함께 읽어야 해요.",
+      why: { sub: '왜 주석에만 있을까요', body: ["돈이 '나갈 가능성이 높고 추정가능'할 때만 본문 부채(충당부채)로 올리고, 그보다 낮으면 주석으로만 알려요. 회사의 '숨은 위험'을 함께 보라는 뜻이에요."], viz: () => this.vHBar({ items: [{ l: '은행 금융약정 한도', v: 42.6, hl: true, color: C.steel }, { l: '유·무형자산 취득약정', v: 10.3, color: C.coral }] }), cap: '대부분은 실제 빚이 아니라 열어둔 한도예요.' },
+      five: { skip: '그해 소송·인수 사건에 따라 크게 변동해 추세선이 맞지 않아요.' } };
+    D.n18 = { badge: 'APPENDIX', z: '주18', zc: 'gold', en: 'CAPITAL STOCK · 자본금', name: '자본금', amt: '0.9조', color: C.gold,
+      what: ["주주가 회사에 처음 넣은 '밑천'의 액면 합계예요. 1년 내내 거의 안 변해요.", '자본금 [897,514백만원](보통주 [778,047] + 우선주 [119,467]), 1주 액면 [100원], 발행 보통주 [59.2억주]예요.'],
+      links: [{ t: 'BS', row: 'bs-capital', txt: '재무상태표 자본금', a: '0.9조' }, { t: 'BS', row: 'bs-re', txt: '번 이익은 이쪽(이익잉여금)에 쌓여요', a: '402.1조' }],
+      why: { sub: '왜 안 변할까요', body: ["자본금은 '액면 × 주식수'라 증자·감자가 없으면 고정돼요. 회사가 번 돈은 자본금이 아니라 이익잉여금에 쌓이기 때문에, 자본금은 작아도 자본총계는 커요."], viz: () => this.vHBar({ items: [{ l: '이익잉여금 (쌓은 이익)', v: 402.1, hl: true, color: C.gold }, { l: '주식발행초과금', v: 4.4, color: C.steel }, { l: '자본금 (밑천)', v: 0.9, color: C.steel }] }), cap: '자본의 대부분은 자본금이 아니라 쌓아온 이익이에요.' },
+      five: { skip: '5년 내내 사실상 불변이라 그래프가 평평해요.' } };
+    D.n26 = { badge: 'APPENDIX', z: '주26', zc: 'mint', en: 'EPS · 주당이익', name: '주당이익(EPS)', amt: '6,605원', color: C.mint,
+      what: ['주식 1주가 1년에 얼마를 벌었나예요. 기본 EPS [6,605원](전기 4,950), 희석 [6,603원]이에요.', '지배주주 순이익(보통주) [38.9조]를 가중평균 유통주식수 [58.9억주]로 나눈 값이에요.'],
+      links: [{ t: 'IS', row: 'is-ni-ctrl', txt: '분자 = 지배주주 순이익', a: '44.3조' }, { t: 'EQ', row: 'eq-buyback', txt: '자사주를 사면 분모가 줄어 EPS↑', a: '−8.2조' }],
+      why: { sub: '왜 중요할까요', body: ["회사 크기가 달라도 '1주 가치'로 비교할 수 있어요. 자사주를 사서 없애면 주식 수가 줄어 남은 1주의 몫이 커지는데, 이게 자사주 소각이 EPS를 높이는 이유예요."] },
+      five: { key: 'eps', color: C.mint, valley: 2, cap: 'EPS도 2023 반도체 한파에 [2,131원] 바닥을 찍고 [6,605원]으로 회복했어요.', so: '주주가 손에 쥐는 1주의 성적표도 결국 반도체 사이클을 따라가요.' } };
+    D.n28 = { badge: 'APPENDIX', z: '주28', zc: 'steel', en: 'RISK MANAGEMENT · 재무위험관리', name: '재무위험관리', amt: 'Aa2 / AA−', color: C.steel,
+      what: ["환율·이자율·주가·부도·자금부족 같은 '돈의 위험'을 어떻게 관리하는지예요.", "달러 환율이 5% 움직이면 세전 이익이 [±4,351억], 이자율이 1%p 변하면 [±426억], 보유 주가가 1% 움직이면 자본(OCI)이 [±1,321억] 출렁여요. 신용등급은 Moody's [Aa2] / S&P [AA−]로 최상위권이에요."],
+      links: [{ t: 'IS', row: 'is-nonop', txt: '환율 손익은 금융수익·비용으로', a: '+5.9조' }, { t: 'CF', row: 'cf-fx', txt: '외화환산은 현금의 환율효과로', a: '+0.8조' }],
+      why: { sub: '왜 관리할까요', body: ["삼성은 매출 대부분이 해외라 환율에 크게 노출돼요. 그래서 통화별 자산·부채를 맞춰 포지션을 줄이고 투기 거래는 금지하며, 최상위 신용등급으로 필요할 때 싸게 돈을 빌려요."], viz: () => this.vHBar({ items: [{ l: '환율 (USD 5%)', v: 4351, hl: true, color: C.coral }, { l: '주가 (지분 1%)', v: 1321, color: C.gold }, { l: '이자율 (1%p)', v: 426, color: C.steel }] }), cap: '단위 억원 — 삼성이 가장 민감한 건 환율이에요.' },
+      five: { skip: '민감도는 그해 포지션 기준이라 추세선으로 보기 어려워요.' } };
+    D.n29 = { badge: 'APPENDIX', z: '주29', zc: 'cyan', en: 'FAIR VALUE · 공정가치', name: '공정가치 측정', amt: '레벨 1·2·3', color: C.cyan,
+      what: ["시장에서 사고파는 '공정가치'로 재는 자산을, 값을 얼마나 믿을 수 있나로 3단계로 나눠요.", '레벨1은 시세가 그대로 있는 것, 레벨2는 시장 자료로 계산한 것, 레벨3은 회사가 모형으로 추정한 것이에요. 오래 보유 주식(FVOCI) [16.3조] 중 레벨1이 [13.2조], 추정에 기댄 레벨3이 [3.1조]예요.'],
+      links: [{ t: 'BS', row: 'bs-fvoci', txt: '주로 FVOCI 주식이 대상', a: '16.3조' }, { t: 'EQ', row: 'eq-oci', txt: '평가이익은 자본(OCI)으로', a: '' }],
+      why: { sub: '왜 나눌까요', body: ["시세가 있으면 믿을 만하고(레벨1), 없으면 회사 추정이라 불확실성이 커요(레벨3). 투자자가 '이 값을 얼마나 믿어야 하나'를 알 수 있게 등급을 매겨요."], viz: () => this.vHBar({ items: [{ l: '레벨1 (시장 시세)', v: 13.2, hl: true, color: C.cyan }, { l: '레벨3 (모형 추정)', v: 3.1, color: C.coral }] }), cap: 'FVOCI 대부분은 시세가 있는 믿을 만한 값이에요.' },
+      five: { skip: '서열 구조를 알리는 주석이라 5개년 추세가 없어요.' } };
+    D.n31 = { badge: 'APPENDIX', z: '주31', zc: 'steel', en: 'RELATED PARTIES · 특수관계자', name: '특수관계자 거래', amt: '매입 18.2조', color: C.steel,
+      what: ["계열사·관계기업 등 '특수관계'인 상대와 주고받은 거래예요.", '매출 등 관계·공동기업 [1.7조], 매입 등 [18.2조]; 남은 채권 [0.5조]·채무 [2.7조]. 주요 경영진 단기보상은 [127억]이에요.'],
+      links: [{ t: 'IS', row: 'is-revenue', txt: '특수관계 매출도 매출액에 포함', a: '333.6조' }],
+      lnote: '가까운 사이의 거래라도 손익·재무상태표에 그대로 반영돼요.',
+      why: { sub: '왜 따로 공시할까요', body: ["가까운 사이의 거래는 값이 시장가와 다르게 왜곡될 수 있어요. 그래서 '이만큼은 특수관계자와 한 거래'라고 투명하게 떼어 알려요(회계기준 1024호)."] },
+      five: { skip: '거래 상대·규모가 매년 달라 추세선이 맞지 않아요.' } };
+    D.n34 = { badge: 'APPENDIX', z: '주34', zc: 'gold', en: 'SUBSEQUENT EVENTS · 보고기간후사건', name: '보고기간후사건', amt: '자사주 6.07조', color: C.gold,
+      what: ["결산일(12/31) '이후'에 생겼지만 투자자가 알아야 할 소식이에요.", '대표적으로 자기주식 매입 계획 [약 6.07조]([4,000만주], 2026-01-07·28 이사회 결의)가 있어요.'],
+      links: [{ t: 'EQ', row: 'eq-buyback', txt: '자사주 매입 = 주주환원 계속', a: '−8.2조' }, { t: 'CF', row: 'cf-fin-tsy', txt: '재무활동 현금유출로 나가요', a: '' }],
+      why: { sub: '왜 결산 뒤 일까지 알릴까요', body: ["결산일이 지났어도 회사 가치에 중요한 일은 투자자의 판단을 바꿀 수 있어요. 그래서 '결산 이후지만 알아둘 소식'으로 미리 알려줘요."] },
+      five: { skip: '그해 이후 개별 사건이라 5개년 추세가 없어요.' } };
+    D.totalcomp = { z: 'B', zc: 'mint', en: 'TOTAL COMPREHENSIVE INCOME · 총포괄손익', name: '총포괄손익', amt: '51.3조', color: C.mint,
+      what: ["회사가 1년에 늘린 '주주 몫 전체'예요.", '손익계산서 맨 아래 [당기순이익 45.2조]에, 손익을 안 거치고 자본으로 간 [기타포괄손익(OCI) 6.1조]까지 더한 [총포괄손익 51.3조]예요.'],
+      links: [{ t: 'IS', row: 'is-netincome', txt: '손익의 결론 — 당기순이익', a: '45.2조' }, { t: 'IS', row: 'is-oci', txt: '손익 밖 평가·환산손익 — OCI', a: '6.1조' }, { t: 'EQ', row: 'eq-netincome', txt: '둘의 합이 자본을 늘려요', a: '' }],
+      lnote: '순이익(⑧)과 OCI(주6·20)의 합이 그해 자본을 늘린 총량으로, 자본변동표와 이어져요.',
+      why: { sub: '왜 순이익과 따로 있을까요', body: ["팔지 않은 자산의 평가이익은 아직 '실현'은 안 됐지만 주주 몫은 이미 늘었어요. 그래서 실현된 순이익과 구분하되, 둘을 더한 총포괄손익으로 '진짜 늘어난 전체'를 함께 보여줘요."] },
+      five: { key: 'tci', color: C.mint, valley: 2, cap: '총포괄손익도 2023 반도체 한파에 [18.9조] 바닥을 찍었어요(= 순이익 + OCI).', so: 'OCI가 섞여 순이익보다 더 출렁이지만, 큰 흐름은 역시 반도체 사이클이에요.' } };
+    this._dives = D;
+    return D;
+  }
+
+  subheadEl(no, q, sub, color) {
+    const h = React.createElement;
+    return h('div', { style: { display: 'flex', alignItems: 'baseline', gap: '10px', margin: '30px 0 12px', paddingTop: '18px', borderTop: '1px solid var(--line)' } },
+      h('span', { style: { fontFamily: 'var(--mono)', fontSize: '12px', color, letterSpacing: '.1em' } }, no),
+      h('span', { style: { fontSize: '17.5px', fontWeight: 700 } }, q),
+      h('span', { style: { fontSize: '11.5px', color: 'var(--dim2)' } }, sub));
+  }
+
+  diveCard(key) {
+    const h = React.createElement, d = this.getDives()[key];
+    if (!d) return this.overviewCard();
+    const c = d.color;
+    const kids = [];
+    kids.push(h('div', { key: 'hd', style: { display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' } },
+      this.badge(d.badge || ('ZONE ' + d.z), d.zc || 'cyan'),
+      h('span', { style: { fontFamily: 'var(--mono)', fontSize: '11px', color: 'var(--dim2)', letterSpacing: '.14em' } }, d.en || '')));
+    kids.push(h('div', { key: 'nm', style: { fontSize: '25px', fontWeight: 800 } }, d.name));
+    kids.push(h('div', { key: 'am', style: { fontFamily: 'var(--mono)', fontSize: '42px', fontWeight: 700, color: c, margin: '6px 0 2px', textShadow: `0 0 24px ${this.rgba(c, .4)}` } }, d.amt));
+    if (d.raw) kids.push(h('div', { key: 'rw', style: { fontFamily: 'var(--mono)', fontSize: '11.5px', color: 'var(--dim2)' } }, '원본 ' + d.raw + ' 백만원'));
+    kids.push(this.subheadEl('①', '무엇인가요', '정의 · 의미', c));
+    d.what.forEach((t, i) => kids.push(h('p', { key: 'w' + i, style: { margin: '0 0 13px', fontSize: '16px', lineHeight: 1.85 } }, ...this.rich(t, c))));
+    kids.push(this.subheadEl('②', '어디와 이어지나요', '연결 지도 — 줄에 마우스를 올리면 가운데 행이 빛나요', c));
+    kids.push(h('div', { key: 'lk', style: { display: 'grid', gap: '7px' } }, d.links.map((l, i) => {
+      const [tn, tc] = this.TBL[l.t];
+      return h('div', {
+        key: i,
+        onMouseEnter: l.row ? () => this.hoverRow(l.row, true) : undefined,
+        onMouseLeave: l.row ? () => this.hoverRow(l.row, false) : undefined,
+        onClick: l.row ? () => this.scrollToRow(l.row) : undefined,
+        style: { display: 'flex', alignItems: 'center', gap: '10px', padding: '9px 12px', border: '1px solid var(--line)', borderRadius: '8px', cursor: l.row ? 'pointer' : 'default', background: 'rgba(255,255,255,.015)' }
+      },
+        h('span', { style: { fontFamily: 'var(--mono)', fontSize: '10px', color: tc, border: `1px solid ${this.rgba(tc, .4)}`, borderRadius: '4px', padding: '2px 7px', flexShrink: 0 } }, tn),
+        h('span', { style: { fontSize: '13.5px', flex: 1 } }, l.txt),
+        l.a ? h('span', { style: { fontFamily: 'var(--mono)', fontSize: '12.5px', color: tc } }, l.a) : null);
+    })));
+    if (d.lnote) kids.push(h('p', { key: 'ln', style: { margin: '10px 0 0', fontSize: '13.5px', color: 'var(--dim)', lineHeight: 1.7 } }, ...this.rich(d.lnote, c)));
+    kids.push(this.subheadEl('③', '왜 그런가요', d.why.sub || '규정 · 시각화', c));
+    (d.why.body || []).forEach((t, i) => kids.push(h('p', { key: 'y' + i, style: { margin: '0 0 13px', fontSize: '15.5px', lineHeight: 1.85 } }, ...this.rich(t, c))));
+    if (d.why.viz) kids.push(h('div', { key: 'vz', style: { margin: '14px 0 8px', border: '1px solid var(--line)', borderRadius: '10px', padding: '16px' } }, d.why.viz()));
+    if (d.why.cap) kids.push(h('p', { key: 'cp', style: { margin: '8px 0 0', fontSize: '13px', color: 'var(--dim)' } }, '이 그림이 말하는 것 — ' + d.why.cap));
+    kids.push(this.subheadEl('④', '5년간 어땠나요', 'FY2021 – FY2025 증감분석', c));
+    const f = d.five || {};
+    if (f.skip) kids.push(h('p', { key: 'fs', style: { fontSize: '14px', color: 'var(--dim)', lineHeight: 1.7 } }, f.skip));
+    else {
+      const charts = [];
+      if (f.twin) charts.push(this.vTwin(f.twin));
+      else if (f.key) charts.push(this.vLine({ key: f.key, color: f.color || c, valley: f.valley != null ? f.valley : -1, zero: !!f.zero }));
+      if (f.extraKey) charts.push(this.vLine({ key: f.extraKey, color: f.extraColor || this.C.gold, valley: f.extraValley != null ? f.extraValley : -1, zero: !!f.extraZero }));
+      charts.forEach((ch2, i) => kids.push(h('div', { key: 'ch' + i, style: { margin: '12px 0 4px', border: '1px solid var(--line)', borderRadius: '10px', padding: '14px 10px 8px' } }, ch2)));
+      if (f.cap) kids.push(h('p', { key: 'fc', style: { margin: '10px 0 0', fontSize: '14.5px', lineHeight: 1.8 } }, ...this.rich(f.cap, c)));
+      if (f.so) kids.push(h('div', { key: 'so', style: { margin: '14px 0 0', padding: '11px 14px', border: `1px solid ${this.rgba(this.C.gold, .35)}`, borderRadius: '8px', background: this.rgba(this.C.gold, .05), fontSize: '14px', lineHeight: 1.7 } }, h('b', { style: { color: this.C.gold } }, '그래서? '), f.so));
+    }
+    if (d.row) kids.push(h('button', { key: 'bk', onClick: () => this.scrollToRow(d.row), style: { marginTop: '24px', fontFamily: 'var(--sans)', fontSize: '13px', color: c, background: this.rgba(c, .07), border: `1px solid ${this.rgba(c, .35)}`, borderRadius: '7px', padding: '8px 14px', cursor: 'pointer' } }, '은하수에서 이 항목 보기 ↥'));
+    return h('div', { key: 'dv' + key, style: { animation: 'omfade var(--fade) ease both', paddingBottom: '30px' } }, kids);
+  }
+
+  buildMidOverlay() {
+    const h = React.createElement, st = this.state, mp = st.midPos;
+    if (!mp || !mp['is-netincome'] || !mp['cf-netincome']) return null;
+    const W = st.midW, H = st.midH;
+    const g = this.C.green, cy = this.C.cyan;
+    const gutter = Math.min(W - 4, mp['is-netincome'].x2 + 12);
+    const els = [
+      h('defs', { key: 'd' },
+        h('marker', { id: 'arrG', viewBox: '0 0 10 10', refX: 8, refY: 5, markerWidth: 7, markerHeight: 7, orient: 'auto' }, h('path', { d: 'M 0 0 L 10 5 L 0 10 z', fill: g })),
+        h('marker', { id: 'arrC', viewBox: '0 0 10 10', refX: 8, refY: 5, markerWidth: 7, markerHeight: 7, orient: 'auto' }, h('path', { d: 'M 0 0 L 10 5 L 0 10 z', fill: cy }))),
+    ];
+    const link = (key, from, to, color, marker, opacity, dash) => {
+      const a = mp[from], b = mp[to]; if (!a || !b) return;
+      const x = gutter;
+      els.push(h('path', { key, d: `M ${a.x2 - 8} ${a.y} L ${x - 10} ${a.y} Q ${x} ${a.y} ${x} ${a.y + 10} L ${x} ${b.y - 10} Q ${x} ${b.y} ${x - 10} ${b.y} L ${b.x2 - 8} ${b.y}`, stroke: color, strokeWidth: 1.8, fill: 'none', opacity, strokeDasharray: dash || 'none', markerEnd: `url(#${marker})` }));
+    };
+    link('gni', 'is-netincome', 'cf-netincome', g, 'arrG', .85);
+    link('cbeg', 'pbs-cash', 'cf-begincash', cy, 'arrC', st.pin === 'k1' ? .8 : .16, '4 4');
+    link('cend', 'cf-endcash', 'bs-cash', cy, 'arrC', st.pin === 'k15' ? .85 : .5, '4 4');
+    return h('svg', { width: W, height: H, viewBox: `0 0 ${W} ${H}`, style: { position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2, overflow: 'visible' } }, els);
+  }
+
+  renderVals() {
+    const exp = this.state.exp;
+    const car = {}; Object.keys(exp).forEach(k => { car[k] = exp[k] ? '▾' : '▸'; });
+    return {
+      galaxySvg: this.buildGalaxy(),
+      midOverlay: this.buildMidOverlay(),
+      inspectorCard: this.buildCard(),
+      runningChip: this.buildRunningChip(),
+      onRow: this.onRow,
+      onToggle: this.onToggle,
+      unpin: this.unpin,
+      isPinned: !!this.state.pin,
+      isJourney: !this.state.pin,
+      exp, car,
+    };
+  }
+}
+</script>
+
+
+</body></html>
