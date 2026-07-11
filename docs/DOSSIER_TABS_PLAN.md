@@ -523,11 +523,11 @@ L0(문체 게이트, §6.7)는 L1 전단 — 실패 필드만 부분 재생성.
 | R3 | dc-runtime의 async 데이터 수용 | Phase 1 첫 반나절 스파이크. 불가 시 폴백: 빌드 스크립트가 ticker별 `<script type="application/json">` 인라인 주입 HTML 생성(최후수단) |
 | R4 | ~~GPU VRAM~~ **확인 완료**: 노트북 Intel Arc 140V(배치 부적합) / **주력 A100 1장 80GB(원격)** | §3·부록 C. **Phase 4 착수 조건 — 리더 지정**: ① SSH·포트·가용 시간대 ② 서버 셋업 주체(vLLM·CUDA·권한) ③ 모델 가중치 HF 리포 + 토큰 ④ 엔드포인트 인증 + env 변수명(`REPORT_LLM_BASE_URL`/`REPORT_LLM_API_KEY`, shared/config.py) |
 | R5 | 주석 HTML 구조 기업별 상이 | **하향(부록 B)**: sub_docs 목차 정형(14산업 실증). 이종 3사 조기 테스트 유지 |
-| R6 | DART 수집 다중화 부채(원문 3중 + fnlttSinglAcntAll×5년) | ARCHITECTURE 부채 등재 + B·C 공유 |
+| R6 | DART 수집 다중화 부채(원문 3중 + fnlttSinglAcntAll×5년) | ARCHITECTURE 부채 등재 + B·C 공유 — [#43](https://github.com/CVC-project/DiscloseAI/issues/43) |
 | R7 | 금융 8사+SK스퀘어·적자/음수흐름은 은하수 부적합 | D10 자동 스코프아웃 — ③만 "준비 중", ①② 정상 |
 | R8 | 대용량 산출물 커밋 사고 | raw_cache/(기존 ignore)·reports.db·review/·docs_cache/ .gitignore 추가, publish JSON만 커밋 |
 | R9 | "kospi50" vs 48사 혼동 | 항상 "48사(dossier 집합)" 표기 |
-| R10 | 기존 데이터 오류: `firm_012450.json`(한화에어로) 2025 revenue 단위 버그 | **financial(A) 소관 — 리더 직접 수정 금지.** A 재수집 요청 + sanity 검증이 자동 차단(D12) |
+| R10 | 기존 데이터 오류: `firm_012450.json`(한화에어로) 2025 revenue 단위 버그 | **financial(A) 소관 — 리더 직접 수정 금지.** A 재수집 요청 + sanity 검증이 자동 차단(D12) — [#42](https://github.com/CVC-project/DiscloseAI/issues/42) |
 | R11 | 프로토타입 DATA rd_chart revenue 비율값 혼입 | Phase S2 extract에서 유효성 게이트 |
 | R12 | **신규 — 해방판 CDN 버전**: React 18.3.1·Babel·dc-runtime.js CDN 로드 → 버전 드리프트 시 렌더 깨짐 | CDN URL 버전 고정. Phase 1에서 로컬 벤더링(assets/) 여부 결정(GitHub Pages 오프라인 안전 vs 캐시 공유) |
 | R13 | **신규 — S 시계열 소스 구멍**: rnd·dsOp 등 일부 키가 fnlttSinglAcntAll에 없을 수 있음 | Phase 3 series.py에서 소스 맵으로 해결(연구개발활동 표·성격별 비용·주석 추출). 5점 미완성 키는 five=skip |
