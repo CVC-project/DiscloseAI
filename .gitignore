@@ -28,6 +28,11 @@ modules/*/data/*.xml
 modules/*/data/*.tmp
 modules/*/data/raw_cache/
 
+# report 모듈: 원문 DB·리뷰 큐는 대용량이라 커밋 제외 (publish/·corps.csv만 커밋) — DOSSIER_TABS_PLAN R8
+modules/report/data/reports.db
+modules/report/data/review/
+docs_cache/
+
 # pull 전 로컬 DB 백업 (로컬 전용, 커밋 금지)
 modules/*/data_backup_*/
 docs/prototype/*_backup_*.json

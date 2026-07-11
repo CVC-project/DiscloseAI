@@ -14,6 +14,7 @@
 - **왜 단순 중복이 아닌가**: financial은 **연간만** 저장([batch.py](../modules/financial/batch.py)가 분기 제거), disclosure의 분기 재무는 **Groq 공시분석 맥락**([collector.py](../modules/disclosure/collector.py) `get_financial_context`)에 독립적으로 쓰인다 → "financial이 주인"이라 단정 못 함.
 - **진짜 문제 3가지**: ① 식별자 불일치(같은 `corp_code`가 8자리 financial / 6자리 disclosure) ② DART 재무 중복 수집 ③ 컬럼명 발산(`total_liabilities`/`total_equity` vs `total_debt`/`equity`).
 - **열린 선택지**: ⒜ 현행 유지 + **식별자 규칙만 통일**(저비용) / ⒝ **financial을 분기까지 확장 → 단일 소유**(disclosure는 읽기) / ⒞ **shared(Supabase) 이관 시 통합**.
+- **(2026-07 확대, R6) report 모듈 신설**: `modules/report/`가 `fnlttSinglAcntAll`(×5개년)로 재무 정형을 추가 수집 → 정형 **3중**(financial·disclosure·report), 원문도 disclosure·relation·report **3중**. galaxy 파이프라인 전용이라 격리(`reports.db`·`raw_cache/` 비커밋), DART 콜 총량은 일일 한도 3%로 무영향(플랜 §6.5). [이슈 #43](https://github.com/CVC-project/DiscloseAI/issues/43) 등재 — 중기 공용 수집 캐시 계층 논의 트리거.
 
 ### 2) financial firm 상세 — 데이터 주도 템플릿으로 전환 (✅ 대부분 해소, 2026-06 / option ⒞-lite)
 - **변경 전**: `financial/dashboard.py`가 데이터를 인라인한 완성 HTML(`docs/prototype/firm_<ticker>.html` 48개)을 생성하고 integration v1·v2가 `<iframe>` 임베드.
@@ -102,6 +103,7 @@ yfinance ─────→  modules/price/       ──→  price.db (price_loc
 | `modules/disclosure/` | B | DART 공시 + 분기 재무 + 쉬운 설명 | `disclosure_local`, `financial_statement` |
 | `modules/relation/` | C | 기업 간 관계 (지분·계열) | `company_node`, `relation_raw`, `relation_local` |
 | `modules/price/` | D | 주가 + 공시 후 변동 라벨 | `price_local`, `vkospi_local` |
+| `modules/report/` | 리더 | 사업보고서 원문·정형계정 5개년 (galaxy 파이프라인, Q1) | `report_raw`, `report_section`, `fs_account`, `pipeline_state` (reports.db, 비커밋) |
 
 각 모듈: `db.py`(SQLite 연결), `models.py`(로컬 테이블 = **정본 스키마**), `data/`(DB·JSON, git 커밋됨). **모듈이 생성하는 산출물(HTML·JSON·캐시)도 `docs/`가 아니라 이 폴더 아래**에 둔다 (이슈 #3).
 

@@ -38,6 +38,7 @@ PRD 상세: docs/초기PRD.md
 
 개별 작업 폴더 (각 담당자만 수정):
 - modules/financial/ (A), modules/disclosure/ (B), modules/relation/ (C), modules/price/ (D)
+- modules/report/ (**리더 소유**, Q1 승인) — 사업보고서 원문·정형계정 5개년 수집 → galaxy 파이프라인 ([modules/report/CLAUDE.md](modules/report/CLAUDE.md))
 - 각 모듈에 **로컬 SQLite(정본)** 포함 — db.py, models.py, data/
 
 서빙 계층 (리더 소유):
