@@ -3026,10 +3026,10 @@ function App() {
                 const active = dossierTab === tab.id;
                 return (
                   <iframe key={tab.id}
-                    src={`../dossier/${tab.src}?ticker=${corpOverlayTicker}`}
+                    src={`../dossier/${tab.src}?ticker=${corpOverlayTicker}${tab.id === 'eqs' ? '&theme=galaxy' : ''}`}
                     title={`${tab.id}-${corpOverlayTicker}`}
                     style={{position:'absolute', inset:0, width:'100%', height:'100%', border:'none', background:'#020408', display: active ? 'block' : 'none'}}
-                    onLoad={tab.id === 'eqs' ? (e) => injectV2Theme(e.target) : undefined}
+                    onLoad={undefined /* firm.html은 ?theme=galaxy 자체 테마 — injectV2Theme 미적용 */}
                   />
                 );
               })}

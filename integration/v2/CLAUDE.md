@@ -33,7 +33,7 @@ const DOSSIER_TABS = [   // 순서 = 화면 탭 순서. 기본 랜딩 = dossierT
 
 - **탭① 사업·기업**: `../dossier/business.html?ticker=<t>` (kospi50_business_tabs 이식·데이터 구동, `business_<t>.json` fetch). **injectV2Theme 미적용** — 자체 `:root`(galaxy 토큰 스왑) + `tokens.css` 정적 link. rail·자체 3탭 제거, industryKey 우선순위 수정.
 - **탭② 현금 은하수**: `../dossier/galaxy.html?ticker=<t>` (해방판 이식·데이터 구동, `galaxy_<t>.json` fetch). **injectV2Theme 미적용** — 자체 `:root`(Mint 표준) + `tokens.css`.
-- **탭③ EQS**: `../dossier/firm.html?ticker=<t>` (데이터 주도 단일 템플릿, ARCHITECTURE 이슈 #2). **현재 `injectV2Theme()` 적용**(v1 공유라 firm.html 자체 CSS 무수정) — ⚠️ 디자인 통일 시 `?theme=galaxy` 방식으로 전환 예정(injectV2Theme 스킵).
+- **탭③ EQS**: `../dossier/firm.html?ticker=<t>&theme=galaxy` (데이터 주도 단일 템플릿, ARCHITECTURE 이슈 #2). **`injectV2Theme()` 미적용**(디자인 통일로 전환 완료) — firm.html이 `?theme=galaxy`면 `<html data-theme="galaxy">` + 자체 스코프 CSS(galaxy 헤더·mint 팔레트·IBM Plex Mono·Chart.js 색)로 셀프 테마. **v1(무파라미터)은 원본 인디고 룩 불변**(모든 오버라이드가 `[data-theme="galaxy"]` 스코프). `injectV2Theme` 함수는 잔존하나 호출 안 함(과거 #5eead4·Courier가 galaxy 표준과 어긋나 폐기).
 - **성능(§8)**: 오버레이 열림 동안 `window.__dossierOpen` 플래그로 배경 캔버스 draw 루프 정지(rAF는 유지해 재개). 딥링크 `?corp=<ticker>`로 오버레이 직접 열기(로컬 테스트).
 - 상세: [../dossier/](../dossier/) · [DOSSIER_TABS_PLAN](../../docs/DOSSIER_TABS_PLAN.md) Phase 2.
 
