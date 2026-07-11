@@ -23,16 +23,17 @@
 ENTER CORPORATION 오버레이는 **`DOSSIER_TABS` 설정 배열이 주도하는 탭바**를 가진다(bundle.jsx). 헤더와 본문 사이에 탭바(언더라인 스타일·mint 토큰), 본문은 활성 탭 iframe(keep-alive `display` 토글), 우측 `OverlayAiChat`(탭별 `context` 갱신)·하단 면책은 유지.
 
 ```js
-const DOSSIER_TABS = [
-  { id:'eqs',    label:'EQS 재무분석', src:'firm.html',   context:'finance', activeWhen:'always'  }, // 탭②
-  { id:'galaxy', label:'현금 은하수',   src:'galaxy.html', context:'galaxy',  activeWhen:'hasData' }, // 탭③
-  // Step 2: { id:'business', label:'사업·기업', src:'business.html', context:'business', activeWhen:'always' }, // 탭①
+const DOSSIER_TABS = [   // 순서 = 화면 탭 순서. 기본 랜딩 = dossierTab 초기값 'business'
+  { id:'business', label:'사업·기업',   src:'business.html', context:'business', activeWhen:'always'  }, // ①
+  { id:'galaxy',   label:'현금 은하수', src:'galaxy.html',   context:'galaxy',   activeWhen:'hasData' }, // ②
+  { id:'eqs',      label:'EQS 재무분석', src:'firm.html',    context:'finance',  activeWhen:'always'  }, // ③
 ];
 ```
-→ **탭 추가 = 배열 한 줄 + `dossier/<id>.html` + `<id>_<ticker>.json`** (bundle.jsx 재수술 불요). `activeWhen:'hasData'`는 `GALAXY_TICKERS`(현재 005930만 — Phase 5에서 `data/` 스캔으로 대체)로 판정, 없으면 "· 준비중" 비활성.
+→ **탭 추가/재정렬 = 배열만 수정** (bundle.jsx 재수술 불요). `activeWhen:'hasData'`는 `GALAXY_TICKERS`(현재 005930만 — Phase 5에서 `data/` 스캔으로 대체)로 판정, 없으면 "· 준비중" 비활성. 기본 탭은 `dossierTab` useState 초기값·`enterCorporation`·딥링크 리셋 3곳(모두 `'business'`).
 
-- **탭② EQS**: `../dossier/firm.html?ticker=<t>` (데이터 주도 단일 템플릿, ARCHITECTURE 이슈 #2). **`injectV2Theme()` 무변경** — firm.html은 CSS 클래스(`.score-big`·`canvas[id]` 등)가 동일해 테마 주입이 그대로 작동. iframe same-origin이라 `contentDocument` 접근 보장.
-- **탭③ 현금 은하수**: `../dossier/galaxy.html?ticker=<t>` (해방판 이식·데이터 구동, `galaxy_<t>.json` fetch). **injectV2Theme 미적용** — galaxy.html은 자체 `:root`(Mint 표준) + `tokens.css` 정적 link이라 주입 불요.
+- **탭① 사업·기업**: `../dossier/business.html?ticker=<t>` (kospi50_business_tabs 이식·데이터 구동, `business_<t>.json` fetch). **injectV2Theme 미적용** — 자체 `:root`(galaxy 토큰 스왑) + `tokens.css` 정적 link. rail·자체 3탭 제거, industryKey 우선순위 수정.
+- **탭② 현금 은하수**: `../dossier/galaxy.html?ticker=<t>` (해방판 이식·데이터 구동, `galaxy_<t>.json` fetch). **injectV2Theme 미적용** — 자체 `:root`(Mint 표준) + `tokens.css`.
+- **탭③ EQS**: `../dossier/firm.html?ticker=<t>` (데이터 주도 단일 템플릿, ARCHITECTURE 이슈 #2). **현재 `injectV2Theme()` 적용**(v1 공유라 firm.html 자체 CSS 무수정) — ⚠️ 디자인 통일 시 `?theme=galaxy` 방식으로 전환 예정(injectV2Theme 스킵).
 - **성능(§8)**: 오버레이 열림 동안 `window.__dossierOpen` 플래그로 배경 캔버스 draw 루프 정지(rAF는 유지해 재개). 딥링크 `?corp=<ticker>`로 오버레이 직접 열기(로컬 테스트).
 - 상세: [../dossier/](../dossier/) · [DOSSIER_TABS_PLAN](../../docs/DOSSIER_TABS_PLAN.md) Phase 2.
 

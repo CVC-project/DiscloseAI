@@ -2718,12 +2718,12 @@ function App() {
   const [corpOverlayTicker, setCorpOverlayTicker] = useState(null);
   const [discDetailItem, setDiscDetailItem] = useState(null);
   const [discFullOverlayTicker, setDiscFullOverlayTicker] = useState(null);
-  const [dossierTab, setDossierTab] = useState('eqs');
+  const [dossierTab, setDossierTab] = useState('business');
   // DOSSIER_TABS (D1) — 탭 추가 = 이 배열 한 줄 + dossier/<id>.html + <id>_<ticker>.json
   const DOSSIER_TABS = [
-    { id: 'eqs',    label: 'EQS 재무분석', src: 'firm.html',   context: 'finance', activeWhen: 'always'  },
-    { id: 'galaxy', label: '현금 은하수',   src: 'galaxy.html', context: 'galaxy',  activeWhen: 'hasData' },
-    // Step 2(kospi50 확정 후): { id:'business', label:'사업·기업', src:'business.html', context:'business', activeWhen:'always' },
+    { id: 'business', label: '사업·기업',   src: 'business.html', context: 'business', activeWhen: 'always'  }, // ① 사업·기업 개요
+    { id: 'galaxy',   label: '현금 은하수', src: 'galaxy.html',   context: 'galaxy',   activeWhen: 'hasData' }, // ② 현금 은하수 (galaxy_<t>.json 티커만)
+    { id: 'eqs',      label: 'EQS 재무분석', src: 'firm.html',    context: 'finance',  activeWhen: 'always'  }, // ③ EQS 재무분석
   ];
   // hasData 판정: galaxy_<ticker>.json 존재 티커 (Phase 5에서 data/ 스캔으로 대체)
   const GALAXY_TICKERS = new Set(['005930']);
@@ -2846,7 +2846,7 @@ function App() {
   const enterCorporation = useCallback(() => {
     if (!activeCompanyCode) return;
     setCorpOverlayTicker(activeCompanyCode);
-    setDossierTab('eqs');
+    setDossierTab('business');
   }, [activeCompanyCode]);
 
   const enterDisclosures = useCallback(() => {
@@ -2857,7 +2857,7 @@ function App() {
   // 딥링크: ?corp=<ticker> 로 CORPORATION DOSSIER 오버레이 바로 열기 (로컬 테스트 편의)
   useEffect(() => {
     const c = new URLSearchParams(window.location.search).get('corp');
-    if (c) { setCorpOverlayTicker(c); setDossierTab('eqs'); }
+    if (c) { setCorpOverlayTicker(c); setDossierTab('business'); }
   }, []);
   // 오버레이 열림 동안 배경 캔버스 draw 정지 (성능 §8)
   useEffect(() => { window.__dossierOpen = !!corpOverlayTicker; }, [corpOverlayTicker]);
