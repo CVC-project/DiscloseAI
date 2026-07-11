@@ -285,6 +285,7 @@ function GalaxyCanvas({ stage }) {
     window.addEventListener('resize', resize);
 
     const draw = () => {
+      if (window.__dossierOpen) { rafRef.current = requestAnimationFrame(draw); return; }
       const w = cvs.width, h = cvs.height;
       const t = (performance.now() - startRef.current) / 1000;
       const s = stageRef.current;
@@ -504,6 +505,7 @@ function SolarSystem({ activeSectorId, onSelectSector, sectorVisual, orbitMotion
     window.addEventListener('resize', resize);
 
     const draw = () => {
+      if (window.__dossierOpen) { rafRef.current = requestAnimationFrame(draw); return; }
       const { w, h, dpr } = sizeRef.current;
       const t = (performance.now() - startRef.current) / 1000;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -919,6 +921,7 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
     }
 
     const draw = () => {
+      if (window.__dossierOpen) { rafRef.current = requestAnimationFrame(draw); return; }
       const { w, h, dpr } = sizeRef.current;
       const t = (performance.now() - startRef.current) / 1000;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -2715,6 +2718,15 @@ function App() {
   const [corpOverlayTicker, setCorpOverlayTicker] = useState(null);
   const [discDetailItem, setDiscDetailItem] = useState(null);
   const [discFullOverlayTicker, setDiscFullOverlayTicker] = useState(null);
+  const [dossierTab, setDossierTab] = useState('eqs');
+  // DOSSIER_TABS (D1) — 탭 추가 = 이 배열 한 줄 + dossier/<id>.html + <id>_<ticker>.json
+  const DOSSIER_TABS = [
+    { id: 'eqs',    label: 'EQS 재무분석', src: 'firm.html',   context: 'finance', activeWhen: 'always'  },
+    { id: 'galaxy', label: '현금 은하수',   src: 'galaxy.html', context: 'galaxy',  activeWhen: 'hasData' },
+    // Step 2(kospi50 확정 후): { id:'business', label:'사업·기업', src:'business.html', context:'business', activeWhen:'always' },
+  ];
+  // hasData 판정: galaxy_<ticker>.json 존재 티커 (Phase 5에서 data/ 스캔으로 대체)
+  const GALAXY_TICKERS = new Set(['005930']);
 
   const injectV2Theme = useCallback((iframe) => {
     try {
@@ -2834,12 +2846,21 @@ function App() {
   const enterCorporation = useCallback(() => {
     if (!activeCompanyCode) return;
     setCorpOverlayTicker(activeCompanyCode);
+    setDossierTab('eqs');
   }, [activeCompanyCode]);
 
   const enterDisclosures = useCallback(() => {
     if (!activeCompanyCode) return;
     setDiscFullOverlayTicker(activeCompanyCode);
   }, [activeCompanyCode]);
+
+  // 딥링크: ?corp=<ticker> 로 CORPORATION DOSSIER 오버레이 바로 열기 (로컬 테스트 편의)
+  useEffect(() => {
+    const c = new URLSearchParams(window.location.search).get('corp');
+    if (c) { setCorpOverlayTicker(c); setDossierTab('eqs'); }
+  }, []);
+  // 오버레이 열림 동안 배경 캔버스 draw 정지 (성능 §8)
+  useEffect(() => { window.__dossierOpen = !!corpOverlayTicker; }, [corpOverlayTicker]);
 
   const sector = activeSectorId ? SECTOR_PALETTE.find(s => s.id === activeSectorId) : null;
   const companies = activeSectorId ? (window.COMPANIES[activeSectorId] || window.COMPANIES.semi) : [];
@@ -2977,18 +2998,46 @@ function App() {
               borderRadius:2,
             }}>✕ CLOSE</button>
           </div>
-          {/* iframe + AI chat sidebar */}
+          {/* Tab bar — DOSSIER_TABS (D1, mint 토큰) */}
+          <div style={{display:'flex', padding:'0 20px', flexShrink:0, background:'rgba(5,6,13,0.95)', borderBottom:'1px solid rgba(140,170,210,0.13)'}}>
+            {DOSSIER_TABS.map((tab) => {
+              const enabled = tab.activeWhen === 'always' || GALAXY_TICKERS.has(corpOverlayTicker);
+              const active = dossierTab === tab.id;
+              return (
+                <button key={tab.id} disabled={!enabled} onClick={() => enabled && setDossierTab(tab.id)}
+                  style={{
+                    fontFamily:"'IBM Plex Mono', var(--font-mono, monospace)", fontSize:12, letterSpacing:'0.06em',
+                    padding:'11px 20px', cursor: enabled ? 'pointer' : 'not-allowed', background:'transparent', border:'none',
+                    color: active ? '#74EEC6' : (enabled ? '#8fa1b6' : '#475569'),
+                    borderBottom: active ? '2px solid #74EEC6' : '2px solid transparent',
+                    textShadow: active ? '0 0 12px rgba(116,238,198,0.5)' : 'none',
+                  }}>
+                  {tab.label}{enabled ? '' : ' · 준비중'}
+                </button>
+              );
+            })}
+          </div>
+          {/* Body — 활성 탭 iframe(keep-alive display 토글) + AI 사이드바 */}
           <div style={{flex:'1 1 0%', display:'flex', overflow:'hidden'}}>
-            <iframe
-              src={`../dossier/firm.html?ticker=${corpOverlayTicker}`}
-              style={{flex:'1 1 0%', border:'none', background:'#020408'}}
-              title={`firm-${corpOverlayTicker}`}
-              onLoad={(e) => injectV2Theme(e.target)}
-            />
+            <div style={{flex:'1 1 0%', position:'relative', minWidth:0}}>
+              {DOSSIER_TABS.map((tab) => {
+                const enabled = tab.activeWhen === 'always' || GALAXY_TICKERS.has(corpOverlayTicker);
+                if (!enabled) return null;
+                const active = dossierTab === tab.id;
+                return (
+                  <iframe key={tab.id}
+                    src={`../dossier/${tab.src}?ticker=${corpOverlayTicker}`}
+                    title={`${tab.id}-${corpOverlayTicker}`}
+                    style={{position:'absolute', inset:0, width:'100%', height:'100%', border:'none', background:'#020408', display: active ? 'block' : 'none'}}
+                    onLoad={tab.id === 'eqs' ? (e) => injectV2Theme(e.target) : undefined}
+                  />
+                );
+              })}
+            </div>
             <OverlayAiChat
               companyName={(window.__realData && window.__realData.nodeByCode && window.__realData.nodeByCode[corpOverlayTicker] && window.__realData.nodeByCode[corpOverlayTicker].n) || corpOverlayTicker}
               ticker={corpOverlayTicker}
-              context="finance"
+              context={(DOSSIER_TABS.find((t) => t.id === dossierTab) || {}).context || 'finance'}
               node={(window.__realData && window.__realData.nodeByCode && window.__realData.nodeByCode[corpOverlayTicker]) || null}
             />
           </div>
