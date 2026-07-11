@@ -25,11 +25,11 @@
 
 v2 기업우주에서 행성 → ENTER CORPORATION 클릭 시 EQS 단일 화면(firm.html iframe)이 뜬다. 이를 **사업보고서 교육 관점의 3탭**으로 개편한다:
 
-| 탭 | 내용 | 원형(프로토타입) | 데이터 |
+| 탭 | 내용 | 원형(프로토타입) | 스텝 |
 |---|---|---|---|
-| ① 사업·기업 개요 | 사업보고서 기준 사업/기업 소개 | `docs/prototype/kospi50_business_tabs.html` | **48개** 기업분 이미 내장 |
-| ② EQS 분석 | 기존 firm 상세 (M1~M5) | `integration/dossier/firm.html` (배포 중) | firm_*.json 48개 존재 |
-| ③ 현금 은하수 (+주석 전체) | 현금흐름 시각화 + getDives 딥다이브 41종(콘텐츠 27 + APPENDIX 강등 14, five=skip 17) + 5개년 차트 | **`docs/prototype/현금은하수_해방판.html` + `dc-runtime.js`** | 삼성전자만 (수작업) |
+| ② EQS 분석 | 기존 firm 상세 (M1~M5) | `integration/dossier/firm.html` (배포 중) | **Step 1** (기존) |
+| ③ 현금 은하수 (+주석 전체) | 현금흐름 시각화 + getDives 딥다이브 41종(콘텐츠 27 + APPENDIX 강등 14, five=skip 17) + 5개년 차트 | **`docs/prototype/현금은하수_해방판.html` + `dc-runtime.js`** | **Step 1** (이식+AI 파이프라인) |
+| ① 사업·기업 개요 | 사업보고서 기준 사업/기업 소개 | `docs/prototype/kospi50_business_tabs.html` (**아직 미확정판**) | **Step 2** (프로토타입 확정 후, §5b) |
 
 **디자인 표준 = 현금 은하수(해방판).** ①②는 이 표준 토큰(색·폰트·배경)으로 맞춘다.
 **이식 원칙 — 시각은 불변, 데이터 흐름만 재작성**: **시각·레이아웃·애니메이션·dc-runtime은 재설계·재작성 금지**(=이식 정신). 그러나 ⚠️ **해방판은 삼성 전용 하드코딩 산출물**이라(부록 A2), 탭③은 "데이터만 교체"가 불가능하고 **정적 마크업 ~90행을 데이터 구동(sc-for/보간)으로 전환 + JS 상수 전량을 데이터 주입으로 리팩터**해야 타사가 렌더된다. 이는 재설계가 아니라 **데이터 흐름의 재배선**(리터럴 → 주입)이다. 허용 범위 ⓐ 디자인 토큰 치환 ⓑ 데이터 외부화 + **마크업 데이터 구동화**(D4) ⓒ 확장 대비 매듭 가드 — 이 셋뿐. **"화면을 다시 그리고 싶다"는 유혹 = 계획 위반**(단 "리터럴을 데이터 바인딩으로 바꾸는" 재배선은 이식의 일부).
@@ -72,9 +72,9 @@ v2 기업우주에서 행성 → ENTER CORPORATION 클릭 시 EQS 단일 화면(
 ### 1.4 데이터·AI 인프라
 - **기업 목록 SSOT = dossier 48사**. `modules/disclosure/collector.py:37 TARGET_CORPS`(49개)는 다른 집합 — 사용 금지. `financial/batch.py:82 KOSPI_TOP_50`(48개)이 일치.
 - **사업보고서 원문 미저장.** disclosure `collector.py`가 매번 메모리 로드 → 평문 슬라이싱(주석 등장 시 중단) → Groq 결과만 저장. 목적이 반대 — **주석 파서 신규 작성**.
-- **정형 재무 숫자 보유 범위**: `firm_<t>.json` = 5개년, 9계정 + cogs·유동자산/부채·장기차입 등 **14필드/년, 단위 원**. `financial_local` = year=2025 단일. **galaxy가 요구하나 없는 계정**(법인세·OCI·비현금조정·운전자본·이자/세금납부·환율·기초/기말현금·배당·자사주·CF 세부) → **DART `fnlttSinglAcntAll`(전 계정)로 5개년 보강 수집**(Phase 5). LLM 아님.
-- **v6 5개년 신규 수요**: S 24키를 5개년 확보해야 vLine/vTwin이 그려진다. firm_*.json이 5개년 14필드를 이미 가지므로 본표계는 커버, 나머지(rnd·dsOp 등)는 fnlttSinglAcntAll·주석 추출 5개년(§2.1·Phase 5 소스 매핑).
-- `requirements.txt`에 pydantic(직접)·openai·playwright 없음 → Phase 5/6에서 추가.
+- **정형 재무 숫자 보유 범위**: `firm_<t>.json` = 5개년, 9계정 + cogs·유동자산/부채·장기차입 등 **14필드/년, 단위 원**. `financial_local` = year=2025 단일. **galaxy가 요구하나 없는 계정**(법인세·OCI·비현금조정·운전자본·이자/세금납부·환율·기초/기말현금·배당·자사주·CF 세부) → **DART `fnlttSinglAcntAll`(전 계정)로 5개년 보강 수집**(Phase 3). LLM 아님.
+- **v6 5개년 신규 수요**: S 24키를 5개년 확보해야 vLine/vTwin이 그려진다. firm_*.json이 5개년 14필드를 이미 가지므로 본표계는 커버, 나머지(rnd·dsOp 등)는 fnlttSinglAcntAll·주석 추출 5개년(§2.1·Phase 3 소스 매핑).
+- `requirements.txt`에 pydantic(직접)·openai·playwright 없음 → Phase 4에서 추가.
 
 ---
 
@@ -103,11 +103,11 @@ v2 기업우주에서 행성 → ENTER CORPORATION 클릭 시 EQS 단일 화면(
 | 데이터 종류 | 출처 | LLM | 검증 |
 |---|---|---|---|
 | **본표 숫자 A** — 기존 확보(firm_*.json 14필드×5년) | firm_*.json | 금지 | 값 그대로 |
-| **본표 숫자 B** — 미확보(법인세·OCI·비현금·운전자본·현금잔액·배당·자사주 등 ×5년) | **DART `fnlttSinglAcntAll`** (Phase 5) | 금지 | API 응답 + 본표 내적 정합 |
+| **본표 숫자 B** — 미확보(법인세·OCI·비현금·운전자본·현금잔액·배당·자사주 등 ×5년) | **DART `fnlttSinglAcntAll`** (Phase 3) | 금지 | API 응답 + 본표 내적 정합 |
 | **주석 세부 표** (유형자산 증감·판관비 구성·부문 실적 등) | 사업보고서 원문 → **LLM 추출** | 추출만 | 3층 검증(§6.3) |
 | **설명 산문 + 5개년 해석** (what·why·five.cap/so) | **LLM 생성** (스토리 탐지 결과 문장화) | 생성 | §6.6~6.7 + 인용 강제 + 골든 |
 
-> 계정→소스 매핑표(계정×연도 전수)는 Phase 5에서 `modules/report/CLAUDE.md`에 작성 — S 24키·딥다이브 각 행이 A/B/추출/파생 중 어디서 오는지 1:1로. §6.3 L2-③ 교차검증 앵커도 이 표가 정의.
+> 계정→소스 매핑표(계정×연도 전수)는 Phase 3에서 `modules/report/CLAUDE.md`에 작성 — S 24키·딥다이브 각 행이 A/B/추출/파생 중 어디서 오는지 1:1로. §6.3 L2-③ 교차검증 앵커도 이 표가 정의.
 
 ### 2.2 역할 분담 확정표 (리더 질의 "GPU의 쓸모는" 답 — 2026-07-10)
 > v6 재설계로 **레이아웃·그래프는 LLM도 사람도 아닌 템플릿 코드가 그린다**(row 기반 결정적 배치·고정 굵기·직교 라우팅·viz 8종은 시계열 배열만 받으면 자동). GPU는 "그리기"가 아니라 **"읽기(비정형 추출)·쓰기(산문 대량 생성)"** 전담.
@@ -139,7 +139,7 @@ v2 기업우주에서 행성 → ENTER CORPORATION 클릭 시 EQS 단일 화면(
 | 구조화 출력 | vLLM `guided_json` / llama.cpp grammar(폴백) + **pydantic 재검증** | 서버측 강제 + 클라 이중 검증 |
 | 하네스 코드 | `story.py`(스토리 탐지 §6.6) · `stylelint.py`(L0 §6.7) · `bank.jsonl`(few-shot §6.8) — 전부 CPU | 발산 통제의 코드 층 |
 | 파이프라인 검증 | pytest (tests/report/) + 골든 회귀 | 프로젝트 표준 |
-| 렌더 검증(L3) | **playwright(파이썬)+chromium** (Phase 6) — 자동 게이트. 시각 검수는 ui-ux-reviewer | 48사 자동화 |
+| 렌더 검증(L3) | **playwright(파이썬)+chromium** (Phase 4) — 자동 게이트. 시각 검수는 ui-ux-reviewer | 48사 자동화 |
 
 ---
 
@@ -150,12 +150,14 @@ v2 기업우주에서 행성 → ENTER CORPORATION 클릭 시 EQS 단일 화면(
 - 오버레이(무명 인라인 JSX)를 개조하되 **탭 목록을 하드코딩하지 않고 설정 배열로** — 오버레이가 이 배열을 `map`으로 렌더(탭 버튼·lazy iframe·keep-alive·활성 판정 전부 필드로):
   ```js
   const DOSSIER_TABS = [
-    { id:'business', label:'사업·기업', src:'business.html', context:'business', activeWhen:'always' },
+    // Step 1: 이 2개만
     { id:'eqs',      label:'EQS',       src:'firm.html',     context:'finance',  activeWhen:'always' },
     { id:'galaxy',   label:'현금 은하수', src:'galaxy.html',   context:'galaxy',   activeWhen:'hasData' },
+    // Step 2(§5b, kospi50 확정 후): 아래 한 줄 추가
+    // { id:'business', label:'사업·기업', src:'business.html', context:'business', activeWhen:'always' },
   ]
   ```
-  → **탭 추가 = ①배열 한 줄 ②dossier/<id>.html ③<id>_<t>.json 파이프라인** 셋으로 규격화(bundle.jsx 재수술 불요). iframe 모델 유지(각 탭 독립 파일·빌드 없음).
+  → **탭 추가 = ①배열 한 줄 ②dossier/<id>.html ③<id>_<t>.json 파이프라인** 셋으로 규격화(bundle.jsx 재수술 불요). iframe 모델 유지(각 탭 독립 파일·빌드 없음). **탭①을 Step 2로 미루는 게 이 설계의 실효 증명** — 나중에 주석 한 줄만 풀면 됨.
 - **토큰 구획**: 탭바·iframe 내부 = 현금 은하수 토큰. 오버레이 외곽 크롬(헤더·OverlayAiChat·면책 푸터) = 기존 v2 토큰 유지.
 - **OverlayAiChat 3탭 공통 우측 사이드바 유지**, 탭 전환 시 `context` prop 갱신(배열의 `context` 필드). **면책은 오버레이 푸터 1곳**(§7.1-7과 합치).
 
@@ -223,7 +225,7 @@ modules/report/                  # 신규 모듈 (Q1, 리더 소유)
 - **부트스트랩 절제 필수(부록 A-2)**: rail DOM만 지우면 `$('#searchInput')` 리스너(L1260-1271)가 null TypeError로 백지 — `listRows`(L1227-1235)·`selectByCode`(L1255-1259)·이벤트 바인딩 함께 삭제, `render(선택 기업)` 호출만. workspace grid 320px(L72)→1fr.
 - **업종 lens 우선순위 수정(부록 A-2)**: `industryKey`(L734-758)에서 통신·건설·소비재를 전력·소재보다 선순위로 — SK텔레콤·현대건설·KT&G power 오분류 버그(현행 배포본에도 존재).
 - `const DATA` → `extract_business_json.py`로 `business_<t>.json` 48개 추출.
-- 색 치환: `#060914→#05060d`, `#41dcff→#5CC7EA`, `#36e5bd→#74EEC6`, `#f7d56f→#E9C46B`, 텍스트 3단 → 표준(Phase 3 시각 검증으로 확정).
+- 색 치환: `#060914→#05060d`, `#41dcff→#5CC7EA`, `#36e5bd→#74EEC6`, `#f7d56f→#E9C46B`, 텍스트 3단 → 표준(Phase S2 시각 검증으로 확정).
 
 ### D6. ⚠️ 사업보고서 파이프라인 = 신규 `modules/report/` (Q1)
 - 경계 규칙: 원문 저장·LLM 추출은 데이터 생산 → integration 불가. disclosure(B 소유) 확장은 리더가 못 함 → 리더 소유 신규 모듈이 유일 경로.
@@ -270,19 +272,23 @@ modules/report/                  # 신규 모듈 (Q1, 리더 소유)
 
 ---
 
-## 5. Phase 계획 (총 7단계 — 4탭→3탭으로 notes Phase 삭제)
+## 5. Phase 계획 — **Step 1(현금 은하수 트랙) 먼저, Step 2(사업 개요 탭) 나중**
 
+> **진행 순서(리더 지시 2026-07-10)**: 하나씩 트래킹하기 위해 두 스텝으로 분리.
+> - **Step 1 = 탭③ 현금 은하수 + AI 파이프라인** (Phase 0~5). 지금 진행. 기존 탭②(EQS)와 함께 2탭으로 배포.
+> - **Step 2 = 탭① 사업 개요** (Phase S2). `kospi50_business_tabs.html`이 **아직 확정판이 아니라** 지금은 이식 안 함 — 프로토타입 확정 후 별도 진행(§5b). D1 설정 배열이라 나중에 저비용으로 끼워 넣음.
+>
 > 공통: 브랜치 `feat/dossier-tabs-p<N>`(dev에서 분기) → Phase 단위 PR → dev. Phase 종료 시 체크박스 + `integration/v2/PROGRESS.md` 갱신.
 > 로컬 구동: 저장소 루트에서 `python -m http.server 8000` → `http://localhost:8000/integration/v2/index.html`.
 
 ### Phase 0 — 준비 (1~1.5일)
-- [ ] **선행 조건(순서 고정)**: ① 계획서 2개(이 문서·스타일 가이드)의 **v6 편집 커밋** + **해방판 2파일(`현금은하수_해방판.html`·`dc-runtime.js`)·v6 md 커밋** — ⚠️ 2026-07-08 커밋(869b8d7)은 **구판 v3 골격만**이고 v6 내용·해방판·v6md는 미커밋이니, 이 커밋이 착수 첫 작업(건너뛰지 말 것). ② 그 브랜치를 dev로 머지 — `scripts/sync_codex.py`·CI·본 문서들이 이 브랜치에 있어, 머지 전 dev 분기 시 D6·Phase 4 실패. 이후 dev 최신화, `feat/dossier-tabs-p1` 분기.
+- [ ] **선행 조건(순서 고정)**: ① 계획서 2개(이 문서·스타일 가이드)의 **v6 편집 커밋** + **해방판 2파일(`현금은하수_해방판.html`·`dc-runtime.js`)·v6 md 커밋** — ⚠️ 2026-07-08 커밋(869b8d7)은 **구판 v3 골격만**이고 v6 내용·해방판·v6md는 미커밋이니, 이 커밋이 착수 첫 작업(건너뛰지 말 것). ② 그 브랜치를 dev로 머지 — `scripts/sync_codex.py`·CI·본 문서들이 이 브랜치에 있어, 머지 전 dev 분기 시 D6·Phase 3 실패. 이후 dev 최신화, `feat/dossier-tabs-p1` 분기.
 - [ ] **타 담당자 공유 이슈 2건**(gh issue): ① R10 `firm_012450.json` revenue 단위 오류 재수집(담당 A) ② R6 DART 수집 다중화 부채(B·C). 링크를 §9에 기입.
 - [ ] 폰트: Pretendard(해방판 CDN과 동일 버전) `web/static`에서 사용 웨이트(400/500/600/**700**)만 복사 → `dossier/assets/fonts/pretendard/`. IBM Plex Mono 웨이트당 latin woff2(총 3~4개). 검증: 임시 `test_fonts.html` → DevTools woff2 200.
 - [ ] `tokens.css`(공유 프리미티브) + `theme-galaxy.css`(dossier Mint/Pretendard 시맨틱 테마) 작성 — D3 2계층.
 - [ ] **스키마 확정(§5.1은 골격 — 실물이 정본)**: 해방판의 `S`·`getDives()`·`KNOTS`·`SEGS`·`CF`·중앙 패널 행·상단바/인트로를 **전수 역산**해 스키마 확정, §5.1 갱신. ⚠️ §5.1 예시를 그대로 베껴 검증 코드 먼저 짜지 말 것.
 - [ ] **골든 데이터**: `dossier/data/galaxy_005930.json` 수작업 작성(주석 전체+APPENDIX 14+5개년 S 포함). 모든 수치 `raw_mn` 병기. **[CASH_GALAXY_STYLE_GUIDE.md](CASH_GALAXY_STYLE_GUIDE.md) Part B(B1 수치·B1-5 시계열·B2 딥다이브·B3 매핑·B4 APPENDIX)와 대조**. **우선순위**: 수치=스타일 가이드 B1 우선 / 카피 자구·links 필드=해방판 실물 우선(B2 문체 기준·B3 개념 지도로 실물을 "교정"하지 말 것). 시각 동등성 비교 텍스트 기준=골든 JSON.
-- [ ] 필수 키 체크 스크립트 `tests/report/check_golden_keys.py`(pydantic 아님 — 키·enum·산술·**시계열 5점 완결** 스모크. pydantic은 Phase 6에서 승격).
+- [ ] 필수 키 체크 스크립트 `tests/report/check_golden_keys.py`(pydantic 아님 — 키·enum·산술·**시계열 5점 완결** 스모크. pydantic은 Phase 4에서 승격).
 - [ ] 골든 정합성 검토 — 교육용 단순화 항목에 `residual`/`overlap`/`skip` 플래그(검증 규칙 §6.3과 모순 없게).
 - DoD: `python tests/report/check_golden_keys.py` 통과 + 골든이 §5.1 확정판·B1-5 시계열과 일치. ⚠️ **골든의 시각 정확성(표시값·색키·amt)은 Phase 1 시각 대조에서 최종 확정** — check_golden_keys는 구조 스모크만이라 Phase 0 통과 ≠ 골든 확정. (Phase 0에서 해방판 값 칩과 골든 표시값 1:1 수동 대조 체크리스트 권장 — Phase 1 재작업 감소.)
 
@@ -318,7 +324,7 @@ modules/report/                  # 신규 모듈 (Q1, 리더 소유)
 ```
 `viz` enum = `vLine|vTwin|vWater|vHBar|vSteps|vBubbles|vPuddle|vChips`. 색은 `color_key` 문자열(코드가 `--var`로 해석). **단위**: series/표시=조(코드 생성), `raw_mn`=백만원. notes_*.json 폐기(주석 전체가 이 스키마 `dives`+`appendix`에).
 
-### Phase 1 — 탭③ 이식: galaxy.html **데이터 구동화 재작성** (3~4일 — 최대 볼륨·재작성 정확성 리스크 R14; Phase 5는 최대 복잡도)
+### Phase 1 — 탭③ 이식: galaxy.html **데이터 구동화 재작성** (3~4일 — 최대 볼륨·재작성 정확성 리스크 R14; Phase 4는 최대 복잡도)
 > 부록 A2가 이 Phase의 정본 목록. **신규 가변성 감사는 완료**(부록 A2) — 남은 것은 재작성 실행.
 - [ ] `현금은하수_해방판.html` + `dc-runtime.js` → `dossier/`. dc-runtime.js는 무변경.
 - [ ] **층 1 (마크업 데이터 구동화, D4)**: 중앙 5패널 ~90행(L110-411) + APPENDIX 14(L419-432)를 `sc-for` + 데이터 배열로 재작성. **시각 결과 불변**(정적 영역 기준 시각 대조 — 아래 검증①).
@@ -329,27 +335,20 @@ modules/report/                  # 신규 모듈 (Q1, 리더 소유)
 - 검증: ① `galaxy.html?ticker=005930` 단독 → **해방판 원본과 시각 동등성**: `particles=false` + 애니메이션 정지 상태에서 정적 영역(패널·은하수 구조·카드·차트) 스크린샷을 ui-ux-reviewer가 대조 — 텍스트·레이아웃·색·수치 동일 판정(파티클·rAF 레이어 제외, 엄밀 픽셀 diff 아님) ② 딥다이브 카드·5개년 차트(vLine/vTwin/vWater/vHBar/vBubbles/vPuddle/vSteps/vChips) 렌더 ③ JOURNEY/PINNED·제스처 스크롤·맞물림 연결선·펼침 동작 ④ 콘솔 에러 0 ⑤ 3열 그리드 반응형(좁은 폭 오버레이−300px).
 - DoD: 시각 동등(①) + `galaxy.html`에서 grep으로 삼성 숫자·'삼성전자'·'반도체 한파'·부문명(DX/DS/SDC/Harman) 리터럴 잔존 **0건**(전부 galaxy_005930.json으로 이동).
 
-### Phase 2 — v2 오버레이 3탭 셸 (1일)
-- [ ] 오버레이(무명 JSX, bundle.jsx L2956) 개조: **`DOSSIER_TABS` 설정 배열 주도 탭바**(D1 — 배열 map, 하드코딩 금지) + iframe 3개 lazy mount + keep-alive. **OverlayAiChat 유지**(context 갱신), **면책 푸터 유지**.
+### Phase 2 — v2 오버레이 셸 (Step 1 = 탭②③ 2탭) (1일)
+- [ ] 오버레이(무명 JSX, bundle.jsx L2956) 개조: **`DOSSIER_TABS` 설정 배열 주도 탭바**(D1 — 배열 map, 하드코딩 금지). **Step 1에서는 배열에 ②EQS·③현금 은하수 2개만**(①business는 Step 2에서 배열 한 줄 추가). iframe lazy mount + keep-alive. **OverlayAiChat 유지**(context 갱신), **면책 푸터 유지**.
 - [ ] **표시 토글 스파이크**: `display:none` vs `visibility:hidden+offscreen` — 재표시 시 ③ 스크롤 위치·sticky·제스처 상태 정상 복원되는 쪽 채택.
 - [ ] **오버레이 열림 동안 셸 rAF 일시정지**(또는 배경 불투명화로 backdrop-filter 제거) — §8.
 - [ ] **injectGalaxyTheme 폐지, 정적 테마 link 전환**(D3): 신규 dossier 페이지는 `tokens.css`+`theme-galaxy.css` 정적 link. firm.html은 `?theme=` 파라미터로 팔레트 선택 — v1 회귀 없음 스파이크 확인(회귀 위험 시 injectV2Theme만 v1용 잔존). corp 오버레이의 주입 호출부 제거.
-- [ ] 탭 활성화: Phase 2 시점 = 전 기업 ② 활성, 삼성만 ③ 활성, ①은 "준비 중".
+- [ ] 탭 활성화: Phase 2 시점 = 전 기업 ② 활성, 삼성만 ③ 활성. (①business는 Step 2 — 탭바에 아직 없음.)
 - [ ] `integration/v2/CLAUDE.md`("injectV2Theme 무변경" → 3탭·tokens.css 2계층·injectGalaxyTheme 폐지) + `DESIGN.md` 갱신.
 - 검증: 탭 전환 왕복 20회 — 재로드 없음·<200ms·콘솔 0·재표시 후 ③ 정상. v2 셸 픽셀 변화 없음.
-- DoD: 삼성 기준 ②③ 완동 + ① 자리, 오버레이 열림 중 셸 rAF 정지 확인.
+- DoD: 삼성 기준 탭②③ 완동(2탭), 오버레이 열림 중 셸 rAF 정지 확인.
 
-### Phase 3 — 탭① 이식: business.html — **이식 마일스톤** (1~1.5일)
-- [ ] `extract_business_json.py`: `const DATA` → `business_<t>.json` 48개.
-- [ ] `kospi50_business_tabs.html` → `dossier/business.html`: rail·자체 탭바 제거(부트스트랩 절제 D5), `?ticker=` 단일 렌더, DATA→fetch, 토큰 스왑, industryKey 우선순위 수정(D5).
-- [ ] 탭① 오버레이 연결 + 48사 활성화.
-- 검증: 48개 ticker 순회 스모크(fetch 200+필수 키+lens 배정표) + 3사 ui-ux-reviewer 시각 검수.
-- DoD: 48사 전부 탭①. **삼성 3탭 완동 — dev 머지 후 배포 URL 확인.** (④·notes 없음 확인 grep.)
-
-### Phase 4 — modules/report/ 수집 파이프라인 (5개년, 2~2.5일) — Q1 승인 완료
+### Phase 3 — modules/report/ 수집 파이프라인 (5개년, 2~2.5일) — Q1 승인 완료
 - [ ] 모듈 뼈대(D2) + `data/corps.csv` 48행(dossier에서 1회 복제, 이후 모듈 SSOT).
 - [ ] `models.py` (reports.db): `report_raw(rcept_no PK, ticker, corp_code8, corp_name, fiscal_year, fetched_at, raw_path)` — **5개년치 다행** · `report_section(id, rcept_no FK, section_key, note_no, title, text_html, text_md, char_len)` · `fs_account(rcept_no, sj_div, account_id, account_nm, amount, currency)` — **fnlttSinglAcntAll ×5년** · `pipeline_state(rcept_no, target, stage, status, attempts, error, updated_at)`.
-- [ ] `collector.py`: corps.csv 순회 → `dart.list`로 **최신 5개 사업보고서** rcept 조회 → `dart.document`/document.xml 수집 → `raw_cache/`. idempotent. **정정공시 stub 폴백(부록 B-2)**: `sub_docs ≥ 30 && has(사업의 내용)` 아니면 직전 보고서 폴백. **최적화: 부문 5개년은 보고서당 당기+전기 2개년 포함 → 2025·2023·2021 3개로 5년 커버**(240→144건, Phase 4에서 확정).
+- [ ] `collector.py`: corps.csv 순회 → `dart.list`로 **최신 5개 사업보고서** rcept 조회 → `dart.document`/document.xml 수집 → `raw_cache/`. idempotent. **정정공시 stub 폴백(부록 B-2)**: `sub_docs ≥ 30 && has(사업의 내용)` 아니면 직전 보고서 폴백. **최적화: 부문 5개년은 보고서당 당기+전기 2개년 포함 → 2025·2023·2021 3개로 5년 커버**(240→144건, Phase 3에서 확정).
 - [ ] `fs_enrich.py`: `fnlttSinglAcntAll` **48사 × 5개년** → fs_account. **계정→소스 매핑표(×5년)를 modules/report/CLAUDE.md에 작성**.
 - [ ] `series.py`: firm_*.json + fs_account + 주석 추출을 **S 24키 × 5점**으로 조립(파생 tci=ni+oci 등, 키별 소스 맵, **5점 완결성 판정 → 미완성은 five=skip 플래그**). **R&D 5개년 소스 미확정(R13)** — fnlttSinglAcntAll에 없으면 '연구개발활동' 표 또는 성격별 비용에서.
 - [ ] `sectioner.py`: **sub_docs 목차 기반**(부록 B). "III.3 연결재무제표 주석" 별도 서브문서를 주석 번호 단위 2차 분할, 표 HTML 보존 + text_md 저장.
@@ -360,7 +359,7 @@ modules/report/                  # 신규 모듈 (Q1, 리더 소유)
 - 검증: 48사 backfill → pipeline_state 전부 ENRICHED, **S 24키 5점 완결률** 리포트(미완성 키·기업 목록).
 - DoD: reports.db에 48사 5개년 원문+섹션+정형계정. DART 키만 있으면 `python -m modules.report.collector`로 재현.
 
-### Phase 5 — LLM 하네스 + 일관성 계층 (3~4일)
+### Phase 4 — LLM 하네스 + 일관성 계층 (3~4일 — 최대 복잡도)
 - [ ] **LLM 백엔드**: A100에 vLLM 기동(Qwen3-32B AWQ + guided_json) → 노트북 base_url 접속. 폴백 llama.cpp 8B 스모크. **첫 작업: 단건 지연 실측(thinking 비활성 확인) → §6.5 갱신.**
 - [ ] `requirements.txt`에 pydantic·openai·playwright 추가 + `playwright install chromium`.
 - [ ] **`story.py`(§6.6)**: 스토리 탐지 11종 + 앵커 클러스터 + vLine 파라미터(valley·zero·twin·skip). **48사 detector 드라이런 → `_STORY_COVERAGE.md`**(기업×유형 분포, S11 비율). S11>40% 기업·패턴 발견 시 규칙 추가 후 재드라이런.
@@ -375,13 +374,25 @@ modules/report/                  # 신규 모듈 (Q1, 리더 소유)
 - 검증: 골든 회귀 통과 + `_STORY_COVERAGE`·`_STYLE_REPORT` 생성 + 무작위 1사 수동.
 - DoD: `python -m modules.report.extract --ticker 005930` 1커맨드로 검증 통과 JSON 재현.
 
-### Phase 6 — 48사 확장 + 성능·QA 마감 (2일)
+### Phase 5 — galaxy 48사 확장 + 성능·QA 마감 (2일) — **Step 1 완료**
 - [ ] 배치 실행: **galaxy = D10 부호 판정 통과 약 30~32사**. resumable(다일 허용).
 - [ ] **`_BATCH_REPORT.md` 리더 검토(D11)** + **`_STYLE_REPORT.md` 48사 병렬 스캔**(§6.7) → MISMATCH 결정(§9 기록) → 리뷰 큐 소화 → publish → `pull_report_json.py`.
 - [ ] 탭 활성화: dossier/data에 JSON 존재하는 ticker만 ③ 활성(스코프아웃은 "준비 중").
 - [ ] 성능 마감(§8 전항목) + 48사 스모크.
 - [ ] 문서 마감: ARCHITECTURE.md(모듈 표·부채·이슈 #2), 이 문서 상태, PROGRESS.md. sync_codex 재실행(CLAUDE.md 재수정 시).
-- DoD: 배포 URL에서 **48사 탭①② + 30~32사 탭③** 완동. dev 머지.
+- DoD: 배포 URL에서 **48사 탭② + 30~32사 탭③** 완동. dev 머지. **← Step 1 마일스톤** (탭①은 Step 2).
+
+---
+
+## 5b. Step 2 — 탭① 사업 개요 이식 (kospi50_business_tabs 프로토타입 **확정 후** 별도 진행)
+> ⚠️ **Step 1과 분리**: `kospi50_business_tabs.html`이 아직 확정판이 아니므로 지금은 이식하지 않는다. 프로토타입 확정 후 착수. **D1의 `DOSSIER_TABS` 설정 배열 덕에 탭 추가가 저비용**(배열 한 줄 + 페이지 + JSON) — 이 분리가 D1 설계의 실효 증명. business는 galaxy/AI 파이프라인과 독립(modules/report·LLM 하네스 무의존)이라 언제든 끼워 넣을 수 있다.
+
+### Phase S2 — 탭① 이식: business.html (프로토타입 확정 후 · 1~1.5일)
+- [ ] `extract_business_json.py`: 확정 프로토타입의 `const DATA` → `business_<t>.json` 48개.
+- [ ] `kospi50_business_tabs.html`(확정판) → `dossier/business.html`: rail·자체 탭바 제거(부트스트랩 절제 D5), `?ticker=` 단일 렌더, DATA→fetch, 토큰 스왑(tokens.css+theme-galaxy.css), industryKey 우선순위 수정(D5).
+- [ ] `DOSSIER_TABS` 배열에 `business` 항목 추가 + 48사 활성화(D1).
+- 검증: 48개 ticker 순회 스모크(fetch 200+필수 키+lens 배정표) + 3사 ui-ux-reviewer 시각 검수.
+- DoD: 48사 전부 탭①. **탭①②③ 3탭 완동 — dev 머지 후 배포 URL 확인.**
 
 ---
 
@@ -427,7 +438,7 @@ L0(문체 게이트, §6.7)는 L1 전단 — 실패 필드만 부분 재생성.
 - **삼성 골든**: 회귀 스모크(raw_mn 100%·금칙 0·스토리 유형 일치). few-shot 뱅크 소스라 **모델 선정 지표로는 안 씀**.
 - **held-out 제2 골든**(타 업종 1사, few-shot 미포함): `benchmark_extract.py`가 raw_mn 일치율·인용 통과율·**스토리 유형 일치**·재시도를 표로 → **모델·프롬프트·detector 임계·lint 규칙 변경을 판정**. 점수 유지·개선 시에만 변경 병합(스킬 `/galaxy-bench` 게이트).
 
-### 6.5 처리량 추정 (v6 5개년 반영 — Phase 5 첫 실측 후 갱신)
+### 6.5 처리량 추정 (v6 5개년 반영 — Phase 4 첫 실측 후 갱신)
 - 슬롯/사: 딥다이브 생성 카드 ~24(five skip 17 제외) × (what+why+cap+so) + 주석 추출 ~10 + 부문 추출 ~3 + 브리프 1 ≈ **호출 ~40/사** (구판 ~30 대비 5개년 해석으로 증가하나 skip 템플릿화가 상쇄).
 - 대상: galaxy 약 30~32사 → **~1,300±300회**, 토큰 ~4~5M.
 - **A100 vLLM 32B(동시 8~16)**: **반나절~1일** 배치(재시도·검증 포함). 노트북 폴백은 다일(스모크 전용).
@@ -464,7 +475,7 @@ L0(문체 게이트, §6.7)는 L1 전단 — 실패 필드만 부분 재생성.
 
 ## 7. LLM 생성 가이드라인 (프롬프트에 전문 포함)
 
-> **정본: [CASH_GALAXY_STYLE_GUIDE.md](CASH_GALAXY_STYLE_GUIDE.md)**(v6 기반 — Part A 일반 문법, Part B 삼성 기준값·few-shot 소스). 아래는 LLM·생성기 규칙 요약 — 충돌 시 스타일 가이드가 우선. Phase 5 프롬프트에 §7.1(산문)·§7.2(카드) 전문 포함.
+> **정본: [CASH_GALAXY_STYLE_GUIDE.md](CASH_GALAXY_STYLE_GUIDE.md)**(v6 기반 — Part A 일반 문법, Part B 삼성 기준값·few-shot 소스). 아래는 LLM·생성기 규칙 요약 — 충돌 시 스타일 가이드가 우선. Phase 4 프롬프트에 §7.1(산문)·§7.2(카드) 전문 포함.
 
 ### 7.1 산문 원칙
 1. 눈높이 중학생. `what[]` 1~2문장 · `why.body` 1~3 · `five.cap` 1~3 · `five.so` **정확히 1**. 자급자족(뒤 카드 전제 금지).
@@ -499,7 +510,7 @@ L0(문체 게이트, §6.7)는 L1 전단 — 실패 필드만 부분 재생성.
 - [ ] JSON 단건 fetch(48개 선로딩 금지). React/Babel/dc-runtime.js CDN은 v2 셸과 캐시 공유(중복 로드 확인).
 - [ ] 손 SVG 차트 다수 — 초기 렌더·리플로우 계측. 3열 그리드+우측 sticky 스크롤 성능.
 - [ ] business.html 382KB → 데이터 분리 후 ~40KB. 이미지 lazy+onerror.
-- [ ] 측정: 탭 전환 <200ms · 최초 로드 <1.5s · ③ 스크롤 55fps↑ · 콘솔 0 — Phase 6 ui-ux-reviewer 계측.
+- [ ] 측정: 탭 전환 <200ms · 최초 로드 <1.5s · ③ 스크롤 55fps↑ · 콘솔 0 — Phase 5 ui-ux-reviewer 계측.
 - [ ] 미달 시(순서): `particles=false` → `glowStrength` 하향 → 파티클 수 축소. **1차 이식에서는 손대지 않는다.**
 
 ---
@@ -508,19 +519,19 @@ L0(문체 게이트, §6.7)는 L1 전단 — 실패 필드만 부분 재생성.
 
 | # | 리스크/미결 | 대응 |
 |---|---|---|
-| R1 | ~~Q1 신규 모듈~~ **승인 완료** | Phase 4 착수 가능. D6 절차 준수 |
+| R1 | ~~Q1 신규 모듈~~ **승인 완료** | Phase 3 착수 가능. D6 절차 준수 |
 | R3 | dc-runtime의 async 데이터 수용 | Phase 1 첫 반나절 스파이크. 불가 시 폴백: 빌드 스크립트가 ticker별 `<script type="application/json">` 인라인 주입 HTML 생성(최후수단) |
-| R4 | ~~GPU VRAM~~ **확인 완료**: 노트북 Intel Arc 140V(배치 부적합) / **주력 A100 1장 80GB(원격)** | §3·부록 C. **Phase 5 착수 조건 — 리더 지정**: ① SSH·포트·가용 시간대 ② 서버 셋업 주체(vLLM·CUDA·권한) ③ 모델 가중치 HF 리포 + 토큰 ④ 엔드포인트 인증 + env 변수명(`REPORT_LLM_BASE_URL`/`REPORT_LLM_API_KEY`, shared/config.py) |
+| R4 | ~~GPU VRAM~~ **확인 완료**: 노트북 Intel Arc 140V(배치 부적합) / **주력 A100 1장 80GB(원격)** | §3·부록 C. **Phase 4 착수 조건 — 리더 지정**: ① SSH·포트·가용 시간대 ② 서버 셋업 주체(vLLM·CUDA·권한) ③ 모델 가중치 HF 리포 + 토큰 ④ 엔드포인트 인증 + env 변수명(`REPORT_LLM_BASE_URL`/`REPORT_LLM_API_KEY`, shared/config.py) |
 | R5 | 주석 HTML 구조 기업별 상이 | **하향(부록 B)**: sub_docs 목차 정형(14산업 실증). 이종 3사 조기 테스트 유지 |
 | R6 | DART 수집 다중화 부채(원문 3중 + fnlttSinglAcntAll×5년) | ARCHITECTURE 부채 등재 + B·C 공유 |
 | R7 | 금융 8사+SK스퀘어·적자/음수흐름은 은하수 부적합 | D10 자동 스코프아웃 — ③만 "준비 중", ①② 정상 |
 | R8 | 대용량 산출물 커밋 사고 | raw_cache/(기존 ignore)·reports.db·review/·docs_cache/ .gitignore 추가, publish JSON만 커밋 |
 | R9 | "kospi50" vs 48사 혼동 | 항상 "48사(dossier 집합)" 표기 |
 | R10 | 기존 데이터 오류: `firm_012450.json`(한화에어로) 2025 revenue 단위 버그 | **financial(A) 소관 — 리더 직접 수정 금지.** A 재수집 요청 + sanity 검증이 자동 차단(D12) |
-| R11 | 프로토타입 DATA rd_chart revenue 비율값 혼입 | Phase 3 extract에서 유효성 게이트 |
+| R11 | 프로토타입 DATA rd_chart revenue 비율값 혼입 | Phase S2 extract에서 유효성 게이트 |
 | R12 | **신규 — 해방판 CDN 버전**: React 18.3.1·Babel·dc-runtime.js CDN 로드 → 버전 드리프트 시 렌더 깨짐 | CDN URL 버전 고정. Phase 1에서 로컬 벤더링(assets/) 여부 결정(GitHub Pages 오프라인 안전 vs 캐시 공유) |
-| R13 | **신규 — S 시계열 소스 구멍**: rnd·dsOp 등 일부 키가 fnlttSinglAcntAll에 없을 수 있음 | Phase 4 series.py에서 소스 맵으로 해결(연구개발활동 표·성격별 비용·주석 추출). 5점 미완성 키는 five=skip |
-| R14 | **⚠️ 재작성 리스크 (부록 A2 확정)**: 해방판이 "데이터 채우는 템플릿"이 아니라 삼성 전용 하드코딩 산출물 — 탭③ 이식이 "데이터 외부화"가 아니라 **템플릿 데이터 구동화 재작성**(중앙 마크업 ~90행 sc-for 전환 + JS 상수 8카테고리 외부화 + 매듭 가드) | **완화**: dc-runtime 무변경·삼성 if 분기 0건·에러바운더리로 하드크래시 없음·viz 수학 안전 → **재작성은 지루하지만 기계적**(재설계 아님, 시각 불변). Phase 1 견적 3~4일(최대 볼륨). **시각 동등성**(정적 영역 대조)이 재작성 정확성의 게이트. (Phase 5는 하네스 다층이라 최대 복잡도 — 별개.) |
+| R13 | **신규 — S 시계열 소스 구멍**: rnd·dsOp 등 일부 키가 fnlttSinglAcntAll에 없을 수 있음 | Phase 3 series.py에서 소스 맵으로 해결(연구개발활동 표·성격별 비용·주석 추출). 5점 미완성 키는 five=skip |
+| R14 | **⚠️ 재작성 리스크 (부록 A2 확정)**: 해방판이 "데이터 채우는 템플릿"이 아니라 삼성 전용 하드코딩 산출물 — 탭③ 이식이 "데이터 외부화"가 아니라 **템플릿 데이터 구동화 재작성**(중앙 마크업 ~90행 sc-for 전환 + JS 상수 8카테고리 외부화 + 매듭 가드) | **완화**: dc-runtime 무변경·삼성 if 분기 0건·에러바운더리로 하드크래시 없음·viz 수학 안전 → **재작성은 지루하지만 기계적**(재설계 아님, 시각 불변). Phase 1 견적 3~4일(최대 볼륨). **시각 동등성**(정적 영역 대조)이 재작성 정확성의 게이트. (Phase 4는 하네스 다층이라 최대 복잡도 — 별개.) |
 
 ---
 
@@ -530,17 +541,20 @@ L0(문체 게이트, §6.7)는 L1 전단 — 실패 필드만 부분 재생성.
 2. Q1·Q3·Q4 **승인 완료**(문서 머리). 남은 리더 지정 = R4(A100 접속 정보 4건)뿐.
 3. `git status` → dev 기준 Phase 브랜치. **타 모듈 소유 미추적 파일 add 금지** — 경로 명시 add(`integration/dossier/`·`modules/report/`·`docs/`·`tests/report/`·`integration/v2/`·`.claude/skills/` 한정).
 4. 진행 상태는 이 문서 체크박스가 정본. Phase 종료 시 체크 + DoD 증거를 PR 본문에.
-5. 검증 없이 다음 Phase 금지(특히 Phase 1 신규 감사·시각 동등성, Phase 5 골든·캘리브레이션).
+5. 검증 없이 다음 Phase 금지(특히 Phase 1 시각 동등성, Phase 4 골든·캘리브레이션).
 6. 막히면: R3 폴백, 이식 원칙(§0 ⓐⓑⓒ). "다시 그리고 싶다" = 계획 위반.
 
 ### 진행 상태
+**Step 1 (현금 은하수 + AI 파이프라인 — 지금)**
 - [ ] Phase 0 준비 (스키마·골든·5개년 시계열)
-- [ ] Phase 1 탭③ galaxy.html + 신규 가변성 감사
-- [ ] Phase 2 3탭 셸
-- [ ] Phase 3 탭① business.html  ← **이식 마일스톤 (dev 머지·배포)**
-- [ ] Phase 4 modules/report 수집 (5개년)
-- [ ] Phase 5 LLM 하네스 + 일관성 계층 (story·lint·bank·skill)
-- [ ] Phase 6 48사 확장·마감
+- [ ] Phase 1 탭③ galaxy.html 데이터 구동화 재작성
+- [ ] Phase 2 오버레이 셸 (탭②③ 2탭)
+- [ ] Phase 3 modules/report 수집 (5개년)
+- [ ] Phase 4 LLM 하네스 + 일관성 계층 (story·lint·bank·skill)
+- [ ] Phase 5 galaxy 48사 확장·마감  ← **Step 1 마일스톤 (dev 머지·배포)**
+
+**Step 2 (사업 개요 탭 — kospi50 프로토타입 확정 후, §5b)**
+- [ ] Phase S2 탭① business.html 이식
 
 ---
 
@@ -609,9 +623,9 @@ L0(문체 게이트, §6.7)는 L1 전단 — 실패 필드만 부분 재생성.
 | SK텔레콤 | 통신 | 57 | 943KB | 931 | 41 | 한화에어로 | 방산 | **2** | — | — | **정정 stub** |
 
 1. **골격 전 산업 동일** → 섹셔너(목차 기반)는 산업 무관 단일 구현.
-2. 금융·보험 차이는 "II. 사업의 내용" 하위 구성(제조 7절 vs 금융 5절) → 탭① 스니펫 매핑 분기 1개(Phase 4). 주석 번호 체계 동일.
+2. 금융·보험 차이는 "II. 사업의 내용" 하위 구성(제조 7절 vs 금융 5절) → 탭① 스니펫 매핑 분기 1개(Phase S2). 주석 번호 체계 동일.
 3. 문서량 3~5배(금융·한전) — 주석 단위 슬라이싱이라 LLM 무영향, 저장 용량만 상향.
-4. **정정공시 stub**(한화에어로 20260319000633, subs 2건) → 수집기 폴백(`sub_docs≥30 && has(사업의 내용)`, Phase 4). KB금융·삼성생명도 정정이나 전체 목차형이라 정상 — 정정 2유형 확인.
+4. **정정공시 stub**(한화에어로 20260319000633, subs 2건) → 수집기 폴백(`sub_docs≥30 && has(사업의 내용)`, Phase 3). KB금융·삼성생명도 정정이나 전체 목차형이라 정상 — 정정 2유형 확인.
 
 ## 부록 C. GPU·기술 전략 (2026-07-10 갱신)
 
@@ -636,7 +650,7 @@ L0(문체 게이트, §6.7)는 L1 전단 — 실패 필드만 부분 재생성.
 llm.py를 OpenAI 호환 클라이언트로 → A100↔노트북↔클라우드 base_url 교체만으로 스왑.
 
 ### C-3. 단계별 GPU 활용
-- **지금 (48사, Phase 5~6)**: A100 32B로 추출·생성·5개년 해석 배치 — ~4~5M 토큰, **반나절~1일**. 골든 벤치(8B/14B/32B)도 A100.
+- **지금 (48사, Phase 4~5)**: A100 32B로 추출·생성·5개년 해석 배치 — ~4~5M 토큰, **반나절~1일**. 골든 벤치(8B/14B/32B)도 A100.
 - **본선 (~2,600사)**: ~10만 호출·1~1.5억 토큰 → A100 연속 배칭 **2~4일**(5개년 슬롯 반영). 검증·파싱은 CPU 수십 분. **A100 1장으로 커버** — 연 1회 배치성이라 상시 점유 불필요. 실패·고난도는 API(Claude/Gemini) 에스컬레이션.
 - **미래 (AI_DIRECTION_PLAN)**: 임베딩(RAG·학습 — 공시·주석 벡터화), 학습 LLM-judge(고빈도·저난도 → 로컬 GPU), QLoRA 도메인 파인튜닝(A100 80GB면 32B 여유 — held-out 골든이 부족 증명 시).
 - price CatBoost GPU는 이득 미미 — CPU 유지.
