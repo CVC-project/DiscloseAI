@@ -85,7 +85,7 @@ v2 기업우주에서 행성 → ENTER CORPORATION 클릭 시 EQS 단일 화면(
   행성 클릭 → ENTER CORPORATION
     → 오버레이(무명 JSX 개조): 탭바 3개 + OverlayAiChat(유지) + 면책 푸터(유지)
         탭① <iframe src="../dossier/business.html?ticker=t">   (lazy mount, keep-alive)
-        탭② <iframe src="../dossier/firm.html?ticker=t">        (기존, injectGalaxyTheme)
+        탭② <iframe src="../dossier/firm.html?ticker=t&theme=galaxy">  (기존, ?theme= 파라미터로 팔레트)
         탭③ <iframe src="../dossier/galaxy.html?ticker=t">       (해방판 이식 + dc-runtime.js)
       · 각 페이지는 dossier/data/<종류>_<ticker>.json 만 fetch (단건)
 
@@ -145,11 +145,19 @@ v2 기업우주에서 행성 → ENTER CORPORATION 클릭 시 EQS 단일 화면(
 
 ## 4. 설계 결정 (D1~D12)
 
-### D1. 탭바는 v2 오버레이(React)에, 탭 내용은 dossier HTML 3개에
+### D1. 탭바는 v2 오버레이(React)에 — **설정 배열(`DOSSIER_TABS`) 주도** (탭 추가 규격화)
 - firm.html 안에 탭을 넣지 않는다 — firm.html 자체가 탭②.
-- 오버레이(무명 인라인 JSX)를 개조해 탭바 3개 + iframe 3개(lazy mount, keep-alive).
+- 오버레이(무명 인라인 JSX)를 개조하되 **탭 목록을 하드코딩하지 않고 설정 배열로** — 오버레이가 이 배열을 `map`으로 렌더(탭 버튼·lazy iframe·keep-alive·활성 판정 전부 필드로):
+  ```js
+  const DOSSIER_TABS = [
+    { id:'business', label:'사업·기업', src:'business.html', context:'business', activeWhen:'always' },
+    { id:'eqs',      label:'EQS',       src:'firm.html',     context:'finance',  activeWhen:'always' },
+    { id:'galaxy',   label:'현금 은하수', src:'galaxy.html',   context:'galaxy',   activeWhen:'hasData' },
+  ]
+  ```
+  → **탭 추가 = ①배열 한 줄 ②dossier/<id>.html ③<id>_<t>.json 파이프라인** 셋으로 규격화(bundle.jsx 재수술 불요). iframe 모델 유지(각 탭 독립 파일·빌드 없음).
 - **토큰 구획**: 탭바·iframe 내부 = 현금 은하수 토큰. 오버레이 외곽 크롬(헤더·OverlayAiChat·면책 푸터) = 기존 v2 토큰 유지.
-- **OverlayAiChat 3탭 공통 우측 사이드바 유지**, 탭 전환 시 `context` prop 갱신(business/finance/galaxy). **면책은 오버레이 푸터 1곳**(§7.1-7과 합치).
+- **OverlayAiChat 3탭 공통 우측 사이드바 유지**, 탭 전환 시 `context` prop 갱신(배열의 `context` 필드). **면책은 오버레이 푸터 1곳**(§7.1-7과 합치).
 
 ### D2. 파일 배치
 ```
@@ -158,7 +166,8 @@ integration/dossier/
 ├── business.html                # 탭① (kospi50_business_tabs 이식)
 ├── galaxy.html                  # 탭③ (현금은하수_해방판 이식)
 ├── dc-runtime.js                # 탭③ 런타임 (해방판과 세트 — 함께 복사)
-├── theme-galaxy.css             # 공유 토큰 (CSS 변수 + 폰트)
+├── tokens.css                   # 공유 프리미티브 (간격·radius·타입 스케일·모션) — 셸+dossier 각자 link
+├── theme-galaxy.css             # dossier 시맨틱 테마 (Mint 팔레트 + Pretendard/IBM Plex Mono)
 ├── extract_business_json.py     # 1회성: DATA → business_*.json 48개
 ├── pull_report_json.py          # publish/ → data/ 복사 (pull, 리더 소유)
 ├── assets/fonts/                # Pretendard·IBM Plex Mono woff2
@@ -182,10 +191,13 @@ modules/report/                  # 신규 모듈 (Q1, 리더 소유)
     └── publish/                 # 검증 통과 JSON (커밋 — integration이 pull)
 ```
 
-### D3. 디자인 표준 적용 방식
-- `theme-galaxy.css`에 팔레트 CSS 변수(`--mint:#74EEC6` 등) + Pretendard/IBM Plex Mono `@font-face`.
-- 탭①: 페이지가 직접 link. 탭②(firm.html): **`injectGalaxyTheme()` 신설**(injectV2Theme 복제 후 팔레트만 표준) — firm.html 원본 CSS 불변(v1 fallback 공유). injectV2Theme 병존(v1 회귀 대비), corp 오버레이 호출부만 교체.
-- 탭③: 해방판 자체가 표준 — 내부 hex(CSS 변수 이미 `:root`)를 그대로 둔다(이식 원칙).
+### D3. 디자인 토큰 = 2계층 SSOT (프리미티브 공유 + 표면별 테마 유지)
+> 목표(리더 지시 2026-07-10): 셸과 dossier가 **프리미티브(공유 규격)만 일치**시키고 **팔레트·폰트는 각 표면 고유 테마 유지** — 셸=Cyan/Inter, dossier=Mint/Pretendard. `injectGalaxyTheme` 주입 해킹은 폐지.
+- **`tokens.css`(신규, 공유 프리미티브만)**: 간격·radius·타입 스케일·모션 duration 등 **표면 무관 원자값**. 셸(styles.css)과 모든 dossier 페이지가 각자 `<link>`. (⚠️ CSS 변수는 iframe 경계를 못 넘으므로 **부모 상속이 아니라 각 페이지가 직접 link** — 이게 정석.)
+- **시맨틱 테마(표면별, 공유 안 함)**: 셸 = Cyan(`--cyan #5eead4`)/Inter — 기존 `styles.css` 유지. dossier = Mint(`--mint #74EEC6`)/Pretendard·IBM Plex Mono — `theme-galaxy.css`(팔레트+폰트).
+- **injectGalaxyTheme 폐지**: 신규 dossier 페이지(business.html·galaxy.html)는 `tokens.css` + `theme-galaxy.css`를 **정적 `<link>`** — 주입 없음. 탭②(firm.html)은 v1 fallback과 공유라 특수: `tokens.css` link + 팔레트는 **`?theme=galaxy|v2` 파라미터**로 시맨틱 레이어 선택(v2=galaxy 민트, v1=기존 v2 룩) → **injectGalaxyTheme·injectV2Theme 둘 다 폐지 가능**(Phase 2 스파이크로 v1 회귀 없음 확인; 회귀 위험 시 injectV2Theme만 v1용으로 잔존 허용).
+- 탭③: 해방판 자체가 표준 — 내부 hex(이미 `:root` CSS 변수)를 그대로. `tokens.css` 프리미티브만 추가 link.
+- **범용성 이점**: 팔레트·폰트 변경이 한 파일(theme-galaxy.css 또는 styles.css)에서 전파, 프리미티브(간격·스케일)는 tokens.css 한 곳. 셸까지 완전 통일(mint/Pretendard로 일원화)은 **하지 않음** — v2 셸 기존 룩 보존(standalone UI 원칙).
 
 ### D4. 해방판 이식 = 템플릿 데이터 구동화 재작성 (부록 A2 확정 — 정본 위계 §1.3)
 > 핵심: 해방판은 삼성 전용 하드코딩 산출물이므로 "데이터만 교체"가 불가. **정적 마크업을 데이터 구동으로 전환 + JS 상수를 데이터 주입으로 리팩터**해야 한다. 시각·dc-runtime은 불변.
@@ -267,7 +279,7 @@ modules/report/                  # 신규 모듈 (Q1, 리더 소유)
 - [ ] **선행 조건(순서 고정)**: ① 계획서 2개(이 문서·스타일 가이드)의 **v6 편집 커밋** + **해방판 2파일(`현금은하수_해방판.html`·`dc-runtime.js`)·v6 md 커밋** — ⚠️ 2026-07-08 커밋(869b8d7)은 **구판 v3 골격만**이고 v6 내용·해방판·v6md는 미커밋이니, 이 커밋이 착수 첫 작업(건너뛰지 말 것). ② 그 브랜치를 dev로 머지 — `scripts/sync_codex.py`·CI·본 문서들이 이 브랜치에 있어, 머지 전 dev 분기 시 D6·Phase 4 실패. 이후 dev 최신화, `feat/dossier-tabs-p1` 분기.
 - [ ] **타 담당자 공유 이슈 2건**(gh issue): ① R10 `firm_012450.json` revenue 단위 오류 재수집(담당 A) ② R6 DART 수집 다중화 부채(B·C). 링크를 §9에 기입.
 - [ ] 폰트: Pretendard(해방판 CDN과 동일 버전) `web/static`에서 사용 웨이트(400/500/600/**700**)만 복사 → `dossier/assets/fonts/pretendard/`. IBM Plex Mono 웨이트당 latin woff2(총 3~4개). 검증: 임시 `test_fonts.html` → DevTools woff2 200.
-- [ ] `theme-galaxy.css` 작성.
+- [ ] `tokens.css`(공유 프리미티브) + `theme-galaxy.css`(dossier Mint/Pretendard 시맨틱 테마) 작성 — D3 2계층.
 - [ ] **스키마 확정(§5.1은 골격 — 실물이 정본)**: 해방판의 `S`·`getDives()`·`KNOTS`·`SEGS`·`CF`·중앙 패널 행·상단바/인트로를 **전수 역산**해 스키마 확정, §5.1 갱신. ⚠️ §5.1 예시를 그대로 베껴 검증 코드 먼저 짜지 말 것.
 - [ ] **골든 데이터**: `dossier/data/galaxy_005930.json` 수작업 작성(주석 전체+APPENDIX 14+5개년 S 포함). 모든 수치 `raw_mn` 병기. **[CASH_GALAXY_STYLE_GUIDE.md](CASH_GALAXY_STYLE_GUIDE.md) Part B(B1 수치·B1-5 시계열·B2 딥다이브·B3 매핑·B4 APPENDIX)와 대조**. **우선순위**: 수치=스타일 가이드 B1 우선 / 카피 자구·links 필드=해방판 실물 우선(B2 문체 기준·B3 개념 지도로 실물을 "교정"하지 말 것). 시각 동등성 비교 텍스트 기준=골든 JSON.
 - [ ] 필수 키 체크 스크립트 `tests/report/check_golden_keys.py`(pydantic 아님 — 키·enum·산술·**시계열 5점 완결** 스모크. pydantic은 Phase 6에서 승격).
@@ -318,12 +330,12 @@ modules/report/                  # 신규 모듈 (Q1, 리더 소유)
 - DoD: 시각 동등(①) + `galaxy.html`에서 grep으로 삼성 숫자·'삼성전자'·'반도체 한파'·부문명(DX/DS/SDC/Harman) 리터럴 잔존 **0건**(전부 galaxy_005930.json으로 이동).
 
 ### Phase 2 — v2 오버레이 3탭 셸 (1일)
-- [ ] 오버레이(무명 JSX, bundle.jsx L2956) 개조: 토큰 탭바 3개(①사업 ②EQS ③현금 은하수) + iframe 3개 lazy mount + keep-alive. **OverlayAiChat 유지**(context 갱신), **면책 푸터 유지**.
+- [ ] 오버레이(무명 JSX, bundle.jsx L2956) 개조: **`DOSSIER_TABS` 설정 배열 주도 탭바**(D1 — 배열 map, 하드코딩 금지) + iframe 3개 lazy mount + keep-alive. **OverlayAiChat 유지**(context 갱신), **면책 푸터 유지**.
 - [ ] **표시 토글 스파이크**: `display:none` vs `visibility:hidden+offscreen` — 재표시 시 ③ 스크롤 위치·sticky·제스처 상태 정상 복원되는 쪽 채택.
 - [ ] **오버레이 열림 동안 셸 rAF 일시정지**(또는 배경 불투명화로 backdrop-filter 제거) — §8.
-- [ ] `injectGalaxyTheme()` 신설, corp 오버레이 호출부만 교체.
+- [ ] **injectGalaxyTheme 폐지, 정적 테마 link 전환**(D3): 신규 dossier 페이지는 `tokens.css`+`theme-galaxy.css` 정적 link. firm.html은 `?theme=` 파라미터로 팔레트 선택 — v1 회귀 없음 스파이크 확인(회귀 위험 시 injectV2Theme만 v1용 잔존). corp 오버레이의 주입 호출부 제거.
 - [ ] 탭 활성화: Phase 2 시점 = 전 기업 ② 활성, 삼성만 ③ 활성, ①은 "준비 중".
-- [ ] `integration/v2/CLAUDE.md`("injectV2Theme 무변경" → 3탭·injectGalaxyTheme) + `DESIGN.md` 갱신.
+- [ ] `integration/v2/CLAUDE.md`("injectV2Theme 무변경" → 3탭·tokens.css 2계층·injectGalaxyTheme 폐지) + `DESIGN.md` 갱신.
 - 검증: 탭 전환 왕복 20회 — 재로드 없음·<200ms·콘솔 0·재표시 후 ③ 정상. v2 셸 픽셀 변화 없음.
 - DoD: 삼성 기준 ②③ 완동 + ① 자리, 오버레이 열림 중 셸 rAF 정지 확인.
 
