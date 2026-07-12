@@ -4979,7 +4979,7 @@
       // 1) relation graph — 필수 (없으면 legacy fallback)
       let relData;
       try {
-        const r = await fetch('../../modules/relation/data/graph_top50.json');
+        const r = await fetch('../data/graph_top50.json');
         if (!r.ok) throw new Error('no remote');
         relData = await r.json();
       } catch (e) {

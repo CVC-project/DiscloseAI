@@ -30,9 +30,27 @@ _DATA_PREFIX = "const DATA = "
 
 # 생성기 계약 (D12·부록 A-2) — kind 21종
 _KNOWN_KINDS = {
-    "factory", "finance", "platform", "energy", "battery", "signal", "shield",
-    "chem", "ship", "card", "bio", "auto", "aero", "lab", "chip", "steel",
-    "sensor", "game", "storage", "display", "device",
+    "factory",
+    "finance",
+    "platform",
+    "energy",
+    "battery",
+    "signal",
+    "shield",
+    "chem",
+    "ship",
+    "card",
+    "bio",
+    "auto",
+    "aero",
+    "lab",
+    "chip",
+    "steel",
+    "sensor",
+    "game",
+    "storage",
+    "display",
+    "device",
 }
 
 
@@ -42,7 +60,7 @@ def _extract_data_array(html_path: str) -> list:
         for line in fp:
             stripped = line.strip()
             if stripped.startswith(_DATA_PREFIX):
-                payload = stripped[len(_DATA_PREFIX):]
+                payload = stripped[len(_DATA_PREFIX) :]
                 if payload.endswith(";"):
                     payload = payload[:-1]
                 data = json.loads(payload)
@@ -70,8 +88,10 @@ def _validate(row: dict) -> list[str]:
     # R11: rd_chart.ratios 가 비율(0~100)로 보이면 경고
     rd = (row.get("snippets") or {}).get("rd_chart") or {}
     ratios = rd.get("ratios")
-    if isinstance(ratios, list) and ratios and all(
-        isinstance(x, (int, float)) and 0 <= x <= 100 for x in ratios
+    if (
+        isinstance(ratios, list)
+        and ratios
+        and all(isinstance(x, (int, float)) and 0 <= x <= 100 for x in ratios)
     ):
         warns.append("rd_chart.ratios 비율값 혼입 의심(R11)")
     return warns
@@ -79,7 +99,9 @@ def _validate(row: dict) -> list[str]:
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--only", default="", help="쉼표구분 stock_code 일부만 (예: 017670,105560)")
+    ap.add_argument(
+        "--only", default="", help="쉼표구분 stock_code 일부만 (예: 017670,105560)"
+    )
     args = ap.parse_args()
     only = {t.strip() for t in args.only.split(",") if t.strip()} if args.only else None
 

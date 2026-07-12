@@ -11,7 +11,7 @@
 코스피 시총 상위 50개 기업의 **지분·계열 관계** 수집·분류·시각화. 공급·경쟁은 v2.
 
 ## integration과의 경계 (중요)
-- **`graph/export.py` → `data/graph_top50.json`이 integration과의 계약(contract)**이다. 서빙 계층(루트 `integration/`)의 v1 dashboard·v2 loader가 이 파일을 **직접 fetch**한다 (`../../modules/relation/data/graph_top50.json`).
+- **`graph/export.py` → `data/graph_top50.json`이 integration과의 계약(contract)**이다. integration의 extract_data.py가 이 파일을 `integration/data/graph_top50.json`으로 **무변환 동기화**하고, v1 dashboard·v2 loader는 그 사본을 fetch한다 (export 재실행 후 `python -m integration.build_data`로 동기화 — 2026-07-12, 과거 직접 fetch).
 - **스키마(`[{n, t, s, sz, mc, group, rl:[...]}]`)를 바꾸면 integration이 조용히 깨진다.** 변경 시 [integration/v1/CLAUDE.md](../../integration/v1/CLAUDE.md)의 "데이터 소스 계약" + [docs/ARCHITECTURE.md](../../docs/ARCHITECTURE.md)를 함께 갱신할 것.
 - **역할 구분**: `viewer/`는 **관계 단독 탐색 도구**(relation 데이터만). 4개 모듈 **교차 분석·통합**은 integration 소유(relation은 거기에 그래프 산출물만 공급, 단방향).
 

@@ -49,7 +49,8 @@
 ### 6) 화면 데이터 소스 일원화 (방향 확정 — 리더, 2026-07-12)
 - **현상**: 화면이 긁어오는 곳이 4갈래 — ① `integration/data/`(v1 extract 생성) ② `modules/relation/data/graph_top50.json` **직접 fetch**(유일한 모듈 폴더 침투) ③ `integration/dossier/data/`(추출 스크립트별 생성) ④ business 데이터의 SSOT가 프로토타입 HTML(`design/prototypes/kospi50_business_tabs.html`의 `const DATA`).
 - **확정 방향**: UIUX 정본=`design/`, 모듈 데이터=`modules/*`(정본), 사업보고서=report DB(`reports.db`→publish). **화면(프론트)이 fetch하는 것은 전부 `integration/` 아래로 통일**(모듈=정본 생산, integration=서빙 사본). **프로토타입 HTML 데이터 의존은 중기 제거.**
-- **단계**: ⑴ relation 그래프를 extract 단계에서 `integration/data/`로 복사 출력, 프론트 fetch 경로 전환 ⑵ 데이터 갱신 오케스트레이터(`integration/build_data.py`) 단일화 ⑶ business SSOT를 프로토타입 HTML → JSON/DB 이관, galaxy 47사는 report 파이프라인(Phase 4)이 채움.
+- **단계**: ⑴ ✅ **완료(2026-07-12)** relation 그래프를 extract 단계에서 `integration/data/graph_top50.json`으로 무변환 동기화, v1 dashboard·v2 loader fetch 경로 전환 ⑵ ✅ **완료(2026-07-12)** 오케스트레이터 `integration/build_data.py` 신설(`python -m integration.build_data`, opt-in `--business`·`--history`) ⑶ business SSOT를 프로토타입 HTML → JSON/DB 이관, galaxy 47사는 report 파이프라인(Phase 4)이 채움 — **중기(Phase 4 착수 후)**.
+- **⚠️ 재생성 함정(A 담당과 협의 필요)**: 현재 `modules/financial/data/eqs_data.json`의 `market_cap`이 **48건 전부 null** — 이 상태에서 extract를 재실행하면 서빙 중인 `eqs_summary.json`의 시총 47건이 null로 덮인다(2026-07-12 실측, 재생성분은 원복함). 커밋된 eqs_summary.json(6/9)이 마지막 정상 시총 보유. **다음 재생성 전에 eqs_data.json 시총 재적재 필요**(financial 배치 또는 refresh_history_percentile의 yfinance 활성 실행).
 
 > 참고: disclosure 모듈은 `disclosure.db`(sqlite)에서만 소비되는 **깨끗한 DB 기반** 구조다(손댈 것 없음).
 
@@ -86,6 +87,7 @@ yfinance ─────→  modules/price/       ──→  price.db (price_loc
                                                                            │   v2 index.html(React)
 공정위/DART ──→  modules/relation/    ──→  relation.db                      │      ↓
 (기업관계)        (C, 지분·계열)            → data/graph_top50.json ────────┘   브라우저
+                                            (extract가 integration/data/로 동기화)
 ```
 
 **핵심**: 각 팀원은 자기 폴더에서 데이터를 로컬 SQLite에 저장. 리더가 `integration/`에서 그 산출물(DB·JSON)을 **읽어** 교차 통합 대시보드로 보여줌. (Supabase 중앙 DB는 미래 운영 단계.)
@@ -132,8 +134,10 @@ D: yfinance 주가 → price_local (price.db);  linker.py가 공시-주가 라�
 
 → integration/v1/extract_data.py 가 financial.db·disclosure.db·price quiz_data 를 읽어
   integration/data/{eqs_summary,disclosures,price_scenarios}.json 생성
+  + modules/relation/data/graph_top50.json 을 integration/data/ 로 무변환 동기화 (§1-6 ⑴)
   (financial.db에 없는 history·percentile·시총은 modules/financial/data/eqs_data.json 에서 보강 — 이슈 #3)
-→ v1 dashboard.html / v2 index.html 가 위 JSON + modules/relation/data/graph_top50.json 을 fetch
+  (단일 진입점: python -m integration.build_data — §1-6 ⑵)
+→ v1 dashboard.html / v2 index.html 가 integration/data/*.json 4종을 fetch (모듈 폴더 직접 fetch 없음)
 → firm 상세(ENTER CORPORATION): v1·v2가 integration/dossier/firm.html?ticker=<t> 를 iframe 로드
   → firm.html 이 integration/dossier/data/firm_<t>.json 을 fetch 해 렌더 (이슈 #2)
 ```
@@ -171,7 +175,7 @@ from modules.financial.models import FinancialLocal      # ✓
 타 모듈 코드 import·DB/JSON **읽기** 허용 (쓰기·수정 금지, 단방향). 상세: [integration/v1/CLAUDE.md](../integration/v1/CLAUDE.md).
 
 ### relation → integration 데이터 계약
-`modules/relation/data/graph_top50.json` (스키마 `[{n, t, s, sz, mc, group, rl:[...]}]`)을 integration v1·v2가 **직접 fetch** (`../../modules/relation/...`). **이 스키마를 바꾸면 integration이 조용히 깨진다** → 변경 시 [integration/v1/CLAUDE.md](../integration/v1/CLAUDE.md) "데이터 소스 계약"과 본 문서를 함께 갱신.
+`modules/relation/data/graph_top50.json` (스키마 `[{n, t, s, sz, mc, group, rl:[...]}]`)이 계약 정본. extract_data.py가 `integration/data/graph_top50.json`으로 **무변환 동기화**하고 v1·v2는 그 사본을 fetch (2026-07-12 — §1-6 ⑴, 과거 직접 fetch). **스키마를 바꾸면 integration이 조용히 깨진다** → 변경 시 [integration/v1/CLAUDE.md](../integration/v1/CLAUDE.md) "데이터 소스 계약"과 본 문서를 함께 갱신하고 재동기화.
 
 ---
 

@@ -16,9 +16,9 @@
   const { eqsNarration } = D;
 
   // 4개 JSON URL — v2/index.html(integration/v2/) 기준 상대경로.
-  // graph_top50은 modules/relation 산출물(루트 밖), 나머지 3개는 integration/data 공유.
+  // 4개 모두 integration/data 공유 (graph_top50은 extract_data.py가 modules/relation에서 동기화한 사본).
   const URLS = {
-    graph: "../../modules/relation/data/graph_top50.json",
+    graph: "../data/graph_top50.json",
     eqs:   "../data/eqs_summary.json",
     disc:  "../data/disclosures.json",
     price: "../data/price_scenarios.json",

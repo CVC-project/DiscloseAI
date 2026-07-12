@@ -7,17 +7,18 @@
   - modules/financial/data/financial.db (financial_local 테이블)
   - modules/disclosure/data/disclosure.db (disclosure_local + financial_statement)
   - modules/price/quiz_data.py (QUIZ_LIST 상수)
-  - modules/relation/data/graph_top50.json (dashboard가 직접 fetch, 여기선 미사용)
+  - modules/relation/data/graph_top50.json (무변환 복사 — 화면 fetch를 integration/ 아래로 통일)
 
 사용::
 
-    python -m integration.v1.extract_data
+    python -m integration.v1.extract_data      # 또는 python -m integration.build_data
 
 출력::
 
     integration/data/eqs_summary.json
     integration/data/disclosures.json
     integration/data/price_scenarios.json
+    integration/data/graph_top50.json  (relation 산출물 동기화 사본 — 정본은 modules/relation/data/)
 
 자세한 규약은 ``integration/v1/CLAUDE.md`` 참조.
 """
@@ -38,6 +39,7 @@ TOP50_CSV = ROOT / "modules" / "relation" / "data" / "top50.csv"
 FINANCIAL_DB = ROOT / "modules" / "financial" / "data" / "financial.db"
 DISCLOSURE_DB = ROOT / "modules" / "disclosure" / "data" / "disclosure.db"
 EQS_PROTOTYPE_JSON = ROOT / "modules" / "financial" / "data" / "eqs_data.json"
+RELATION_GRAPH_JSON = ROOT / "modules" / "relation" / "data" / "graph_top50.json"
 
 # KRX 업종코드 중 금융업 식별용 (기타금융·증권·보험)
 FINANCIAL_INDUSTRY_CODES = frozenset({"064", "065", "066", "067"})
@@ -264,6 +266,17 @@ def _write_json(path: Path, payload: dict | list) -> int:
 # --------------------------------------------------------------------------- #
 def main() -> int:
     INTEGRATION_DATA.mkdir(exist_ok=True)
+
+    # relation 그래프 무변환 동기화 — 화면 fetch 표면을 integration/ 아래로 통일 (ARCHITECTURE §1-6 ⑴)
+    if RELATION_GRAPH_JSON.exists():
+        graph_bytes = RELATION_GRAPH_JSON.read_bytes()
+        (INTEGRATION_DATA / "graph_top50.json").write_bytes(graph_bytes)
+        print(
+            f"[INFO] graph_top50.json 동기화: {len(graph_bytes):,} bytes (modules/relation → integration/data)"
+        )
+    else:
+        print(f"[WARN] relation 그래프 없음: {RELATION_GRAPH_JSON}", file=sys.stderr)
+
     top50 = load_top50()
     corp_to_ticker = {
         row["corp_code"]: row.get("ticker", "") for row in top50 if row.get("corp_code")
