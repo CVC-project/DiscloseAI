@@ -3,7 +3,7 @@
 ## 첫 세션 시 필수 읽기
 이 프로젝트를 처음 접하면 아래 순서로 읽어 전체 구조를 파악하세요:
 1. docs/ARCHITECTURE.md — 지금 실제로 돌아가는 구조·데이터 흐름·DB 토폴로지 (SSOT)
-2. shared/models.py — DB 스키마 (테이블 정의)
+2. 작업할 모듈의 modules/<모듈>/models.py — **로컬 SQLite 정본 스키마** (전체 토폴로지: ARCHITECTURE §3.5. shared/models.py는 미래 운영 이관용 — 현재 미사용)
 3. docs/초기PRD.md — 제품 비전·요구사항 전문 (전체 맥락이 필요할 때)
 
 ## 프로젝트 개요
@@ -25,7 +25,7 @@ PRD 상세: docs/초기PRD.md
 ## 코딩 컨벤션
 - Python: Black 포매터 사용, type hint 권장
 - 함수명: snake_case, 클래스: PascalCase
-- DB 모델: shared/models.py에 정의 (SQLAlchemy ORM)
+- DB 모델: 각 모듈 modules/<모듈>/models.py에 정의 (SQLAlchemy ORM, 로컬 SQLite 정본. shared/models.py는 미래 운영 이관용 — 현재 미사용)
 - 테스트: tests/ 폴더, pytest 사용
 
 ## 폴더 규칙
@@ -40,7 +40,7 @@ PRD 상세: docs/초기PRD.md
 - 각 모듈에 **로컬 SQLite(정본)** 포함 — db.py, models.py, data/
 
 서빙 계층 (리더 소유):
-- integration/: 4개 모듈 산출물 교차 통합 대시보드 (v1/=fallback, v2/=정본, data/=공유 JSON)
+- integration/: 4개 모듈 산출물 교차 통합 대시보드 (v1/=fallback, v2/=정본, dossier/=기업 상세 3탭 iframe, data/=공유 JSON)
 - 미래 백엔드 api/ (FastAPI·RAG·learning)는 현재 미구현 — 구축 시 생성 (docs/AI_DIRECTION_PLAN.md 참조)
 
 데이터 정본은 모듈별 로컬 SQLite. 전체 DB 토폴로지: docs/ARCHITECTURE.md
@@ -66,6 +66,7 @@ PRD 상세: docs/초기PRD.md
 - /check: 리뷰 + 테스트 + PROGRESS.md 기록 (수동 호출)
 - /review: 코드 리뷰만 (자동 호출 가능)
 - /test: 테스트 생성/실행만 (자동 호출 가능)
+- /viewer-check: viewer(프론트엔드 HTML) UI/UX 지시 구현 완전성 + 실제 브라우저 동작 검증 (ui-ux-reviewer 오케스트레이션)
 
 ## Agent
 - code-reviewer: Sonnet, 읽기 전용 리뷰
