@@ -1,9 +1,11 @@
-/* theme-galaxy.css — dossier 시맨틱 테마 (Mint 팔레트 + Pretendard/IBM Plex Mono)
- * D3 2계층 SSOT의 층 2 (표면별, 공유 안 함). business.html·firm.html(?theme=galaxy)이 link.
- * ⚠️ galaxy.html(탭③)은 해방판 자체 :root가 표준이라 이 파일을 link하지 않는다 — tokens.css만 추가.
- *    이 파일은 galaxy 외 dossier 페이지를 해방판 룩에 맞추는 용도다.
- * 팔레트·폰트 값 출처: 현금은하수_해방판.html :root (자구 그대로).
- * 폰트 파일은 Phase 0-B에서 assets/fonts/에 로컬화 예정 — 그전까지는 아래 fallback 스택으로 degrade. */
+/* theme-galaxy.css — dossier 시맨틱 테마 정본 (Mint 팔레트 + Pretendard/IBM Plex Mono)
+ * D3 2계층 SSOT의 층 2 (표면별, 공유 안 함). 규칙 전문: 루트 DESIGN.md.
+ * link 현황 (2026-07-12 정본 승격):
+ *   - business.html: link ✓ — 팔레트·기본색은 이 파일, 페이지 고유 토큰(--panel2·--soft·--muted)만 인라인.
+ *   - galaxy.html: 의도적 미링크 — 해방판 자체 :root가 자구 표준(값은 이 파일과 동일). tokens.css만 link.
+ *   - firm.html: 예외 — v1 인디고/galaxy 이중 룩이라 [data-theme="galaxy"] 스코프 인라인 CSS 사용(link 시 v1 룩 오염).
+ * 팔레트·폰트 값 출처: design/prototypes/현금은하수_해방판.html :root (자구 그대로).
+ * 폰트 파일은 assets/fonts/에 로컬화 완료 — 미배치 환경에서는 아래 fallback 스택으로 degrade. */
 
 /* ── 폰트 (Phase 0-B에서 아래 src 경로에 woff2 배치 시 활성화) ── */
 @font-face {
