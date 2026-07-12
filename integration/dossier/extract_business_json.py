@@ -1,4 +1,4 @@
-"""1회성 추출 — docs/prototype/kospi50_business_tabs.html → integration/dossier/data/business_*.json
+"""1회성 추출 — design/prototypes/kospi50_business_tabs.html → integration/dossier/data/business_*.json
 
 배경 (DOSSIER_TABS_PLAN Phase S2·D5):
   business 프로토타입은 48사 데이터를 `const DATA = [ {...}, ... ]` 배열로 한 파일에 내장한다.
@@ -23,7 +23,7 @@ import sys
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
 _ROOT = os.path.abspath(os.path.join(_HERE, "..", ".."))
-_SRC = os.path.join(_ROOT, "docs", "prototype", "kospi50_business_tabs.html")
+_SRC = os.path.join(_ROOT, "design", "prototypes", "kospi50_business_tabs.html")
 _OUT_DIR = os.path.join(_HERE, "data")
 
 _DATA_PREFIX = "const DATA = "

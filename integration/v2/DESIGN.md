@@ -221,7 +221,7 @@ D.percentileBadge(node.percentile?.eqs_total, sector.memberCount)
 - 헤더: cyan dot + `CORPORATION DOSSIER` + ticker, `✕ CLOSE` 버튼
 - 본문: **`DOSSIER_TABS` 설정 배열 주도 탭바**(bundle.jsx) — ① 사업·기업 `../dossier/business.html?ticker=<t>` ② 현금 은하수 `../dossier/galaxy.html?ticker=<t>`(현재 005930만 데이터) ③ EQS `../dossier/firm.html?ticker=<t>&theme=galaxy`. iframe keep-alive `display` 토글. 우측 `OverlayAiChat`(탭별 context) 고정.
 - 푸터 면책: `⚠ 과거 통계 기반 참고 정보 — 투자 조언 아님`
-- 상세: [CLAUDE.md](CLAUDE.md) "CORPORATION DOSSIER 오버레이" · [docs/DOSSIER_TABS_PLAN.md](../../docs/DOSSIER_TABS_PLAN.md)
+- 상세: [CLAUDE.md](CLAUDE.md) "CORPORATION DOSSIER 오버레이" · [integration/dossier/DOSSIER_TABS_PLAN.md](../dossier/DOSSIER_TABS_PLAN.md)
 
 ### 7-1. iframe CSS 주입 (injectV2Theme) — **폐기(2026-07, 3탭 디자인 통일)**
 

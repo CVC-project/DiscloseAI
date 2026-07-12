@@ -1,7 +1,7 @@
 """check_golden_keys.py — galaxy_<ticker>.json 골든/생성물 구조 스모크 (Phase 0-E).
 
 pydantic 아님 — 키·enum·산술·시계열 5점 완결만 본다(pydantic 승격은 Phase 4 schemas.py).
-스키마 출처: docs/prototype/현금은하수_해방판.html 전수 역산(Phase 0-A) → docs/GALAXY_JSON_SCHEMA.md.
+스키마 출처: design/prototypes/현금은하수_해방판.html 전수 역산(Phase 0-A) → integration/dossier/GALAXY_JSON_SCHEMA.md.
 
 ⚠️ 이 스크립트는 "구조 스모크"다. 골든의 시각 정확성(표시값·색키·amt)은 Phase 1 시각 대조에서
    최종 확정된다(check 통과 ≠ 골든 확정 — DOSSIER_TABS_PLAN §Phase 0 DoD).

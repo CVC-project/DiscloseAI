@@ -151,4 +151,4 @@ SolarCanvas: real-data sectors prop 기반 (memberCount 비례 행성 크기)
 - ENTER CORPORATION: 새 창(`window.open`) → **iframe 오버레이 + `DOSSIER_TABS` 탭바** 전환 완료 — ① 사업·기업(business.html) ② 현금 은하수(galaxy.html, 005930만) ③ EQS(firm.html?theme=galaxy)
 - `injectV2Theme()` 폐기 — firm.html `[data-theme="galaxy"]` 스코프 셀프 테마 + dossier 공용 `tokens.css`
 - 커밋: 46b3e5e(Phase 0 골든·토큰) · 1ff6dab(Phase 1 galaxy 데이터 구동) · 1b534da(Phase 2 탭바) · 890241e(S2 business 이식) · 04a59d5(3탭 디자인 통일) · 472d6cd(로고·AI 사이드바 토글)
-- 상세 계획·설계 결정: [docs/DOSSIER_TABS_PLAN.md](../../docs/DOSSIER_TABS_PLAN.md) (본 파일은 요약만 기록)
+- 상세 계획·설계 결정: [integration/dossier/DOSSIER_TABS_PLAN.md](../dossier/DOSSIER_TABS_PLAN.md) (본 파일은 요약만 기록)

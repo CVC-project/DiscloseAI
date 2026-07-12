@@ -1,7 +1,7 @@
 # galaxy_&lt;ticker&gt;.json 스키마 (확정 — 해방판 전수 역산)
 
 > **상태**: 2026-07-11. DOSSIER_TABS_PLAN Phase 0-A "해방판 실물 역산으로 확정" 산출물.
-> `docs/prototype/현금은하수_해방판.html`(1,756줄) + `dc-runtime.js`를 전수 역산해 확정.
+> `design/prototypes/현금은하수_해방판.html`(1,756줄) + `dc-runtime.js`를 전수 역산해 확정.
 > **이 문서가 galaxy JSON의 SSOT.** 검증 계약은 `tests/report/check_golden_keys.py`, pydantic 승격은 Phase 4.
 > DOSSIER_TABS_PLAN §5.1은 이 문서를 참조(리더가 §5.1 요약을 이 문서로 대체·링크 권장).
 

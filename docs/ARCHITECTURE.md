@@ -37,7 +37,7 @@
   - [dashboard.py](../modules/financial/dashboard.py) `_DASHBOARD_DIR`·[batch.py](../modules/financial/batch.py)·[industry_groups.py](../modules/financial/industry_groups.py) `_CACHE_DIR` 출력 경로를 `modules/financial/data/`로 변경. 생성 HTML(`financial_dashboard.html`·`kospi50_ranking.html`)은 `.gitignore`의 `modules/*/data/*.html`로 커밋 제외(재생성물).
   - `eqs_data.json` → `modules/financial/data/eqs_data.json` 이동. integration 읽기 경로([extract_data.py:40](../integration/v1/extract_data.py#L40)) + [scripts/refresh_history_percentile.py](../scripts/refresh_history_percentile.py) 동기 갱신 → `python -m integration.v1.extract_data`로 **48개 메타 로드 검증 완료**.
   - `_sector_stats.json`(빈 캐시)·`financial_dashboard.html`(재생성물)은 `docs/prototype/`에서 삭제 — 다음 배치 실행 시 새 위치에 재생성.
-- **보존(진짜 목업)**: `corporate_universe_v6_galaxies.html`(v1 dashboard 원형)은 docs/prototype에 남아도 무방. (`corporate_universe_v5.html`은 #28 정리에서 삭제 — relation `viewer/index.html`이 이미 fork 완료. 모듈 문서의 v5 라인 참조는 fork 시점 이력으로만 유효.)
+- **보존(진짜 목업)**: `corporate_universe_v6_galaxies.html`(v1 dashboard 원형)은 `design/prototypes/`로 이동해 보존(2026-07-12, 디자인 정본 폴더 신설). (`corporate_universe_v5.html`은 #28 정리에서 삭제 — relation `viewer/index.html`이 이미 fork 완료. 모듈 문서의 v5 라인 참조는 fork 시점 이력으로만 유효.)
 
 ### 4) price 타임머신 데이터가 코드에 하드코딩
 - **현상**: 타임머신 시나리오 12개가 DB가 아니라 `modules/price/quiz_data.py`의 **`QUIZ_LIST` Python 상수**에 하드코딩(손으로 엄선한 과거 사건). integration은 이를 JSON으로 추출해 **inline 렌더**(iframe 아님). 주가·라벨 자체는 `price_local`(DB)에 정상.
@@ -45,6 +45,11 @@
 
 ### 5) 기타
 - `shared/models.py` 95% 미사용(테스트 fixture만 참조). 미래 운영 이관 시 정리. relation `storage/CLAUDE.md`의 shared 승격 계획도 그때 일괄.
+
+### 6) 화면 데이터 소스 일원화 (방향 확정 — 리더, 2026-07-12)
+- **현상**: 화면이 긁어오는 곳이 4갈래 — ① `integration/data/`(v1 extract 생성) ② `modules/relation/data/graph_top50.json` **직접 fetch**(유일한 모듈 폴더 침투) ③ `integration/dossier/data/`(추출 스크립트별 생성) ④ business 데이터의 SSOT가 프로토타입 HTML(`design/prototypes/kospi50_business_tabs.html`의 `const DATA`).
+- **확정 방향**: UIUX 정본=`design/`, 모듈 데이터=`modules/*`(정본), 사업보고서=report DB(`reports.db`→publish). **화면(프론트)이 fetch하는 것은 전부 `integration/` 아래로 통일**(모듈=정본 생산, integration=서빙 사본). **프로토타입 HTML 데이터 의존은 중기 제거.**
+- **단계**: ⑴ relation 그래프를 extract 단계에서 `integration/data/`로 복사 출력, 프론트 fetch 경로 전환 ⑵ 데이터 갱신 오케스트레이터(`integration/build_data.py`) 단일화 ⑶ business SSOT를 프로토타입 HTML → JSON/DB 이관, galaxy 47사는 report 파이프라인(Phase 4)이 채움.
 
 > 참고: disclosure 모듈은 `disclosure.db`(sqlite)에서만 소비되는 **깨끗한 DB 기반** 구조다(손댈 것 없음).
 
@@ -94,7 +99,9 @@ yfinance ─────→  modules/price/       ──→  price.db (price_loc
 |------|----------|
 | `.claude/` | Skills, Agents, 설정 |
 | `shared/` | 환경변수 로드(config.py, **활성**) + 미래 운영 DB 스키마(db.py·models.py, **현재 미사용**) |
-| `docs/` | PRD, 아키텍처(본 문서), 온보딩, **순수 디자인 목업**(예: `corporate_universe_v*.html`). ⚠️ **코드 생성 산출물·데이터·캐시 금지** — 모듈 출력은 `modules/<모듈>/` 아래로 (이슈 #3) |
+| `docs/` | **기초 뼈대 문서만** — 아키텍처(본 문서)·PRD·온보딩·머지 절차. 실행 계획(plan/spec)은 실행되는 폴더에(예: `integration/dossier/DOSSIER_TABS_PLAN.md`) |
+| `design/` | **디자인 정본** — 프로토타입 원형(`prototypes/`: 해방판·kospi50·corporate_universe·dc-runtime.js)·제작 사양서(프롬프트_v6). 디자인 규칙 SSOT는 루트 `DESIGN.md` |
+| (공통) | ⚠️ docs/·design/ 모두 **코드 생성 산출물·데이터·캐시 금지** — 모듈 출력은 `modules/<모듈>/` 아래로 (이슈 #3) |
 
 ### 데이터 생산자 (`modules/` 아래, 각 담당자만 수정)
 | 폴더 | 담당 | 역할 | 로컬 테이블 |

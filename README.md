@@ -35,7 +35,7 @@ python -m http.server 8000               # http://localhost:8000/integration/
 - [아키텍처](docs/ARCHITECTURE.md) — 지금 실제로 돌아가는 구조·DB 토폴로지 (SSOT)
 - [PRD](docs/초기PRD.md) — 제품 요구사항·비전
 - [온보딩](docs/ONBOARDING.md) — 팀원 시작 가이드
-- [프로토타입](docs/prototype/corporate_universe_v6_galaxies.html) — UI 프로토타입
+- [프로토타입](design/prototypes/corporate_universe_v6_galaxies.html) — UI 프로토타입 원형 (디자인 정본: [DESIGN.md](DESIGN.md))
 
 ## 구조
 

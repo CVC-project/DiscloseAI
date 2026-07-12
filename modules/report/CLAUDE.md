@@ -1,7 +1,7 @@
 # modules/report — 사업보고서 원문·정형계정 수집 파이프라인
 
 > 자동 로드(Progressive Disclosure). 부모 규약: [../../CLAUDE.md](../../CLAUDE.md)
-> 소유: 프로젝트 리더 (Q1 승인 2026-07-08). 실행 계획: [docs/DOSSIER_TABS_PLAN.md](../../docs/DOSSIER_TABS_PLAN.md) Phase 3·§2
+> 소유: 프로젝트 리더 (Q1 승인 2026-07-08). 실행 계획: [integration/dossier/DOSSIER_TABS_PLAN.md](../../integration/dossier/DOSSIER_TABS_PLAN.md) Phase 3·§2
 
 ## 이 모듈의 목적
 
@@ -50,4 +50,4 @@ DART 키 필요: `python -m modules.report.collector` / `.fs_enrich` / `.section
 
 ## 착수 조건 (Phase 4)
 
-R4 **완료(2026-07-12)**: A100(원격) 드라이버 535→580-server 업그레이드 + SGLang(Qwen/Qwen3-32B-AWQ, xgrammar 구조화 출력)을 `report-llm.service`(systemd)로 상시화. 노트북은 SSH 터널(`ssh -N -L 30000:127.0.0.1:30000 <user>@<GPU_IP>`)로 접속, `REPORT_LLM_BASE_URL=http://127.0.0.1:30000/v1`(shared/config.py). 상세: [docs/DOSSIER_TABS_PLAN.md](../../docs/DOSSIER_TABS_PLAN.md) §3·§9 R4. Phase 3(수집)는 DART 키만으로 진행 가능 — 이제 Phase 4 LLM 하네스(story·llm·extract·validate·publish)도 착수 가능.
+R4 **완료(2026-07-12)**: A100(원격) 드라이버 535→580-server 업그레이드 + SGLang(Qwen/Qwen3-32B-AWQ, xgrammar 구조화 출력)을 `report-llm.service`(systemd)로 상시화. 노트북은 SSH 터널(`ssh -N -L 30000:127.0.0.1:30000 <user>@<GPU_IP>`)로 접속, `REPORT_LLM_BASE_URL=http://127.0.0.1:30000/v1`(shared/config.py). 상세: [integration/dossier/DOSSIER_TABS_PLAN.md](../../integration/dossier/DOSSIER_TABS_PLAN.md) §3·§9 R4. Phase 3(수집)는 DART 키만으로 진행 가능 — 이제 Phase 4 LLM 하네스(story·llm·extract·validate·publish)도 착수 가능.

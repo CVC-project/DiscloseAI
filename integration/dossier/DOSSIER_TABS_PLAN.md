@@ -3,7 +3,7 @@
 > **상태**: 2026-07-10. 프로토타입 디자인 세대 **v6**(해방판) 기준으로 전면 재작성 — 짝문서 [CASH_GALAXY_STYLE_GUIDE.md](CASH_GALAXY_STYLE_GUIDE.md)도 v6. 이력: 초안(4탭·editable) → 4렌즈 리뷰 53건 → Q1~Q3·D11·D12 → 가변성 감사·DART 스파이크·A100 → 총점검 37건 → **v6 재설계(3탭·해방판·5개년·일관성 하네스, 이 판)** → v6 정합 리뷰 16건 반영.
 > **소유**: 프로젝트 리더
 > **이 문서만 읽고 새 세션에서 실행 가능해야 한다.** 각 Phase에 완료 기준(DoD)·검증 방법 포함.
-> 선행 필독: [CASH_GALAXY_STYLE_GUIDE.md](CASH_GALAXY_STYLE_GUIDE.md) · [ARCHITECTURE.md](ARCHITECTURE.md) §1·2·3.5 · [integration/v2/CLAUDE.md](../integration/v2/CLAUDE.md)
+> 선행 필독: [CASH_GALAXY_STYLE_GUIDE.md](CASH_GALAXY_STYLE_GUIDE.md) · [ARCHITECTURE.md](../../docs/ARCHITECTURE.md) §1·2·3.5 · [integration/v2/CLAUDE.md](../v2/CLAUDE.md)
 
 ---
 
@@ -28,8 +28,8 @@ v2 기업우주에서 행성 → ENTER CORPORATION 클릭 시 EQS 단일 화면(
 | 탭 | 내용 | 원형(프로토타입) | 스텝 |
 |---|---|---|---|
 | ② EQS 분석 | 기존 firm 상세 (M1~M5) | `integration/dossier/firm.html` (배포 중) | **Step 1** (기존) |
-| ③ 현금 은하수 (+주석 전체) | 현금흐름 시각화 + getDives 딥다이브 41종(콘텐츠 27 + APPENDIX 강등 14, five=skip 17) + 5개년 차트 | **`docs/prototype/현금은하수_해방판.html` + `dc-runtime.js`** | **Step 1** (이식+AI 파이프라인) |
-| ① 사업·기업 개요 | 사업보고서 기준 사업/기업 소개 | `docs/prototype/kospi50_business_tabs.html` (**아직 미확정판**) | **Step 2** (프로토타입 확정 후, §5b) |
+| ③ 현금 은하수 (+주석 전체) | 현금흐름 시각화 + getDives 딥다이브 41종(콘텐츠 27 + APPENDIX 강등 14, five=skip 17) + 5개년 차트 | **`design/prototypes/현금은하수_해방판.html` + `dc-runtime.js`** | **Step 1** (이식+AI 파이프라인) |
+| ① 사업·기업 개요 | 사업보고서 기준 사업/기업 소개 | `design/prototypes/kospi50_business_tabs.html` (**아직 미확정판**) | **Step 2** (프로토타입 확정 후, §5b) |
 
 **디자인 표준 = 현금 은하수(해방판).** ①②는 이 표준 토큰(색·폰트·배경)으로 맞춘다.
 **이식 원칙 — 시각은 불변, 데이터 흐름만 재작성**: **시각·레이아웃·애니메이션·dc-runtime은 재설계·재작성 금지**(=이식 정신). 그러나 ⚠️ **해방판은 삼성 전용 하드코딩 산출물**이라(부록 A2), 탭③은 "데이터만 교체"가 불가능하고 **정적 마크업 ~90행을 데이터 구동(sc-for/보간)으로 전환 + JS 상수 전량을 데이터 주입으로 리팩터**해야 타사가 렌더된다. 이는 재설계가 아니라 **데이터 흐름의 재배선**(리터럴 → 주입)이다. 허용 범위 ⓐ 디자인 토큰 치환 ⓑ 데이터 외부화 + **마크업 데이터 구동화**(D4) ⓒ 확장 대비 매듭 가드 — 이 셋뿐. **"화면을 다시 그리고 싶다"는 유혹 = 계획 위반**(단 "리터럴을 데이터 바인딩으로 바꾸는" 재배선은 이식의 일부).
@@ -53,7 +53,7 @@ v2 기업우주에서 행성 → ENTER CORPORATION 클릭 시 EQS 단일 화면(
 - 색: bg `#060914`, cyan `#41dcff`, teal `#36e5bd` … → 표준과 다르므로 토큰 치환(D5).
 
 ### 1.3 프로토타입 ③: 현금 은하수 해방판 (v6 — 완성본, 1,756줄 + dc-runtime.js 60KB)
-- **정본 위계 (2026-07-10 리더 확정)**: ① 자구·데이터 정본 = **`현금은하수_해방판.html` + `dc-runtime.js`**(v6 md를 입력으로 Claude Design에서 확정한 최종 산출물). 구본(`Cash Galaxy.html` 22MB · `Cash Galaxy.editable.html` 308KB)은 v4 산물 — **삭제 완료(2026-07-12)** ② v6 md(`docs/prototype/프롬프트_v6_현금은하수_구현확정판.md`) = 문법·의도 ③ 스타일 가이드 = 조문화. **자구·데이터 의문 시 해방판 html이 판정 기준.**
+- **정본 위계 (2026-07-10 리더 확정)**: ① 자구·데이터 정본 = **`현금은하수_해방판.html` + `dc-runtime.js`**(v6 md를 입력으로 Claude Design에서 확정한 최종 산출물). 구본(`Cash Galaxy.html` 22MB · `Cash Galaxy.editable.html` 308KB)은 v4 산물 — **삭제 완료(2026-07-12)** ② v6 md(`design/프롬프트_v6_현금은하수_구현확정판.md`) = 문법·의도 ③ 스타일 가이드 = 조문화. **자구·데이터 의문 시 해방판 html이 판정 기준.**
 - 스택: **React 18.3.1(CDN) + Babel standalone(CDN) + `dc-runtime.js`(외부 참조)** — v2 셸과 CDN 캐시 공유. 인라인 SVG. Canvas/Three.js/D3 없음, 외부 차트 라이브러리 없음(전부 손 SVG).
 - **레이아웃 (v6 재설계)**: 3열 그리드 `[data-grid]` = 2fr(은하수 SVG) : 3fr(재무제표 5패널) : 5fr(sticky 딥다이브 카드). 반응형(CSS 변수 `--col-*`) — **구판 1360px 고정폭·zoom 로직 소멸**.
 - **은하수 (v6)**: `buildGalaxy()`(L749) — **일직선 본류 `spineX:0.48`**(L479 CONFIG) + **직교 라우팅 `ortho()`**(L780) + **굵기 2단 고정**(본류 6px/지류 3.5px, 금액 무관). `{{ galaxySvg }}` 바인딩(L1741). 골드 자본실·감가 회귀선·OCI 점선은 직교 좌표(L840·851·864·870).

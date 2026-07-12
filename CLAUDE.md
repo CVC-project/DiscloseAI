@@ -32,7 +32,9 @@ PRD 상세: docs/초기PRD.md
 공용 폴더 (프로젝트 리드만 수정):
 - .claude/: Skills, Agents, Settings
 - shared/: 환경변수(config.py, 활성) + 미래 운영 DB 스키마(models.py, 현재 미사용)
-- docs/: PRD, 아키텍처, 온보딩 가이드
+- docs/: 기초 뼈대 문서만 — 아키텍처·PRD·온보딩·머지 절차 (실행 계획·목업은 두지 않음)
+- design/: 디자인 정본 — 프로토타입 원형(prototypes/)·제작 사양서. 디자인 규칙 SSOT는 루트 DESIGN.md
+- 실행 계획(plan/spec)은 실행되는 폴더에 둔다 (예: integration/dossier/DOSSIER_TABS_PLAN.md, modules/relation/PLAN.md)
 
 개별 작업 폴더 (각 담당자만 수정):
 - modules/financial/ (A), modules/disclosure/ (B), modules/relation/ (C), modules/price/ (D)
@@ -49,7 +51,7 @@ PRD 상세: docs/초기PRD.md
 > Codex 미러(AGENTS.md·.agents/skills/)는 `scripts/sync_codex.py`로 자동 생성 — 미러를 직접 수정하지 말 것. 원본만 고친 뒤 스크립트 재실행.
 
 ## 작업 경계 원칙 (일반 규칙)
-- **각 모듈 작업은 그 모듈 안에서 끝낸다.** 코드뿐 아니라 **산출물·데이터·캐시도 자기 모듈 폴더 안**에 둔다 — 다른 모듈이나 공용 폴더로 새어나가지 않게. (`docs/`는 문서·디자인 목업 전용 — 코드가 생성하는 산출물·데이터·캐시를 두지 않는다.)
+- **각 모듈 작업은 그 모듈 안에서 끝낸다.** 코드뿐 아니라 **산출물·데이터·캐시도 자기 모듈 폴더 안**에 둔다 — 다른 모듈이나 공용 폴더로 새어나가지 않게. (`docs/`=기초 문서 전용, `design/`=디자인 목업·정본 전용 — 코드가 생성하는 산출물·데이터·캐시는 어느 쪽에도 두지 않는다.)
 - **통합·표현은 integration이 한다.** integration이 각 모듈의 산출물(DB·JSON 등)을 **읽어서(read-only)** 교차 구현한다. 즉 **모듈은 데이터를 만들고, 화면·표현은 integration이 소유**한다 (데이터 생산자가 표현까지 만들지 않는다).
 - 데이터 모듈끼리 서로 import 금지(단방향). integration만 타 모듈 read-only 접근 허용.
 

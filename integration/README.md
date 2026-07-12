@@ -22,7 +22,7 @@ integration/
 ```
 
 - **v1 = fallback**, **v2 = 정본 트랙**. `data/`는 둘이 공유(생성 주체는 v1의 `extract_data.py`).
-- 기업 상세는 `dossier/` 3탭(사업·기업 / 현금 은하수 / EQS) — 상세: [docs/DOSSIER_TABS_PLAN.md](../docs/DOSSIER_TABS_PLAN.md).
+- 기업 상세는 `dossier/` 3탭(사업·기업 / 현금 은하수 / EQS) — 상세: [dossier/DOSSIER_TABS_PLAN.md](dossier/DOSSIER_TABS_PLAN.md).
 - relation 그래프(`graph_top50.json`)는 변환 없이 `modules/relation/`에서 직접 fetch.
 
 ## 실행
