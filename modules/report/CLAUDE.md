@@ -48,6 +48,6 @@ DART 키 필요: `python -m modules.report.collector` / `.fs_enrich` / `.section
 원문 수집이 disclosure(B)·relation(C)에 이어 report까지 3중, 재무 정형은 financial + report `fnlttSinglAcntAll` 이중.
 [이슈 #43](https://github.com/CVC-project/DiscloseAI/issues/43)에 등재. ARCHITECTURE.md 부채 표에도 반영.
 
-## 착수 조건 (Phase 4 — 리더 지정 대기)
+## 착수 조건 (Phase 4)
 
-R4: A100 vLLM 접속 정보 4건(SSH·모델·엔드포인트·env `REPORT_LLM_BASE_URL`/`REPORT_LLM_API_KEY`). Phase 3(수집)는 DART 키만으로 진행 가능.
+R4 **완료(2026-07-12)**: A100(원격) 드라이버 535→580-server 업그레이드 + SGLang(Qwen/Qwen3-32B-AWQ, xgrammar 구조화 출력)을 `report-llm.service`(systemd)로 상시화. 노트북은 SSH 터널(`ssh -N -L 30000:127.0.0.1:30000 <user>@<GPU_IP>`)로 접속, `REPORT_LLM_BASE_URL=http://127.0.0.1:30000/v1`(shared/config.py). 상세: [docs/DOSSIER_TABS_PLAN.md](../../docs/DOSSIER_TABS_PLAN.md) §3·§9 R4. Phase 3(수집)는 DART 키만으로 진행 가능 — 이제 Phase 4 LLM 하네스(story·llm·extract·validate·publish)도 착수 가능.

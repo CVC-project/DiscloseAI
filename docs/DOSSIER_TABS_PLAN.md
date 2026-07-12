@@ -34,7 +34,7 @@ v2 기업우주에서 행성 → ENTER CORPORATION 클릭 시 EQS 단일 화면(
 **디자인 표준 = 현금 은하수(해방판).** ①②는 이 표준 토큰(색·폰트·배경)으로 맞춘다.
 **이식 원칙 — 시각은 불변, 데이터 흐름만 재작성**: **시각·레이아웃·애니메이션·dc-runtime은 재설계·재작성 금지**(=이식 정신). 그러나 ⚠️ **해방판은 삼성 전용 하드코딩 산출물**이라(부록 A2), 탭③은 "데이터만 교체"가 불가능하고 **정적 마크업 ~90행을 데이터 구동(sc-for/보간)으로 전환 + JS 상수 전량을 데이터 주입으로 리팩터**해야 타사가 렌더된다. 이는 재설계가 아니라 **데이터 흐름의 재배선**(리터럴 → 주입)이다. 허용 범위 ⓐ 디자인 토큰 치환 ⓑ 데이터 외부화 + **마크업 데이터 구동화**(D4) ⓒ 확장 대비 매듭 가드 — 이 셋뿐. **"화면을 다시 그리고 싶다"는 유혹 = 계획 위반**(단 "리터럴을 데이터 바인딩으로 바꾸는" 재배선은 이식의 일부).
 
-이후 **AI 확장**: 삼성전자 기준으로 만든 "기본 틀(템플릿+JSON 스키마)"에, 사업보고서 **5개년** 원문·정형계정을 저장해 두고 **자체 GPU LLM(원격 A100 80GB + vLLM)** 이 주석 수치·설명·5개년 해석을 추출/생성해 채워 48개 기업으로 확장한다.
+이후 **AI 확장**: 삼성전자 기준으로 만든 "기본 틀(템플릿+JSON 스키마)"에, 사업보고서 **5개년** 원문·정형계정을 저장해 두고 **자체 GPU LLM(원격 A100 80GB + SGLang)** 이 주석 수치·설명·5개년 해석을 추출/생성해 채워 48개 기업으로 확장한다.
 
 ---
 
@@ -91,7 +91,7 @@ v2 기업우주에서 행성 → ENTER CORPORATION 클릭 시 EQS 단일 화면(
 
 [데이터 생산 — 신규 modules/report/ (Q1)]
   DART document API(5개년) + fnlttSinglAcntAll(5개년) → reports.db
-    → 시계열 빌드 → 스토리 탐지(코드) → 회사 브리프(1호출/사) → LLM 문장화 하네스 (vLLM@A100)
+    → 시계열 빌드 → 스토리 탐지(코드) → 회사 브리프(1호출/사) → LLM 문장화 하네스 (SGLang@A100)
     → L0 문체 게이트 + 3층 검증 통과분 → modules/report/data/publish/galaxy_<t>.json
 
 [서빙 — integration (pull, 단방향)]
@@ -141,7 +141,8 @@ v2 기업우주에서 행성 → ENTER CORPORATION 클릭 시 EQS 단일 화면(
 | 파이프라인 검증 | pytest (tests/report/) + 골든 회귀 | 프로젝트 표준 |
 | 렌더 검증(L3) | **playwright(파이썬)+chromium** (Phase 4) — 자동 게이트. 시각 검수는 ui-ux-reviewer | 48사 자동화 |
 
-> **R4 개정(2026-07-12, 커밋 `dfad073`)**: LLM 서빙 엔진을 vLLM → **SGLang**으로 확정(`.env.example`·`shared/config.py` REPORT_LLM_* 슬롯 참조). 본문 §1·§6·부록 C 등에 남은 vLLM 표기는 개정 전 서술 — 실측(Phase 4 착수) 시 §6.5와 함께 일괄 갱신.
+> **R4 개정(2026-07-12, 커밋 `dfad073`)**: LLM 서빙 엔진을 vLLM → **SGLang**으로 확정(`.env.example`·`shared/config.py` REPORT_LLM_* 슬롯 참조).
+> **R4 완료(2026-07-12)**: A100(원격, SSH 접속정보는 문서·코드에 미기재 — 리더 별도 관리) 드라이버 535→**580-server**로 업그레이드(최신 AWQ 커널이 CUDA 12.4+ 드라이버 심볼 `cuGreenCtxDestroy` 요구 — 535/CUDA 12.2로는 로드 불가. NVSwitch 미탑재라 fabricmanager는 비활성이 정상), SGLang 0.4.8.post1 + sgl-kernel 0.1.9 + vllm 0.9.0.1(AWQ 연산자) + torch 2.7.0+cu126 조합으로 **Qwen/Qwen3-32B-AWQ** 기동, `report-llm.service`(systemd)로 상시화. 노트북 접속은 SSH 터널(`ssh -N -L 30000:127.0.0.1:30000 <user>@<GPU_IP>`) → `REPORT_LLM_BASE_URL=http://127.0.0.1:30000/v1`. 구조화 출력(xgrammar)·한국어 생성 스모크 통과, 단건 지연 ~0.84s(§6.5 반영). 본문 §1·§6·부록 C의 vLLM 표기도 이 판에서 일괄 SGLang으로 갱신.
 
 ---
 
@@ -362,12 +363,12 @@ modules/report/                  # 신규 모듈 (Q1, 리더 소유)
 - DoD: reports.db에 48사 5개년 원문+섹션+정형계정. DART 키만 있으면 `python -m modules.report.collector`로 재현.
 
 ### Phase 4 — LLM 하네스 + 일관성 계층 (3~4일 — 최대 복잡도)
-- [ ] **LLM 백엔드**: A100에 vLLM 기동(Qwen3-32B AWQ + guided_json) → 노트북 base_url 접속. 폴백 llama.cpp 8B 스모크. **첫 작업: 단건 지연 실측(thinking 비활성 확인) → §6.5 갱신.**
+- [x] **LLM 백엔드**: A100에 SGLang 기동(Qwen/Qwen3-32B-AWQ + xgrammar) → 노트북 SSH 터널 접속. **완료(2026-07-12)** — 드라이버 535→580-server 업그레이드 후 `report-llm.service`(systemd)로 상시화. 단건 지연 실측 ~0.84s(thinking 비활성 확인 완료) → §6.5 반영. 폴백 llama.cpp 8B 스모크는 미착수(필요 시).
 - [ ] `requirements.txt`에 pydantic·openai·playwright 추가 + `playwright install chromium`.
 - [ ] **`story.py`(§6.6)**: 스토리 탐지 11종 + 앵커 클러스터 + vLine 파라미터(valley·zero·twin·skip). **48사 detector 드라이런 → `_STORY_COVERAGE.md`**(기업×유형 분포, S11 비율). S11>40% 기업·패턴 발견 시 규칙 추가 후 재드라이런.
 - [ ] **`stylelint.py`(§6.7)**: L0 9규칙 + 문체 지문 z-score. 삼성 골든 분포로 p5~p95 캘리브레이션.
 - [ ] **`bank.jsonl`(§6.8)**: 삼성 190필드 자동 유형화(딥다이브 클래스 7 × 필드 9 × 스토리 유형) + 마스킹판. source=005930|synthetic만.
-- [ ] `schemas.py`(pydantic — check_golden_keys 승격) / `llm.py`(guided_json·temp 0·seed·재시도) / `extract.py`(§6.1 루프 — 브리프→카드→lint→3층→publish) / `validate.py`(§6.3) / `publish.py`(부호·스코프아웃 판정 D10 + `data/publish/`) / `benchmark_extract.py`(§6.4).
+- [ ] `schemas.py`(pydantic — check_golden_keys 승격) / `llm.py`(SGLang `response_format=json_schema`(xgrammar)·temp 0·seed·재시도) / `extract.py`(§6.1 루프 — 브리프→카드→lint→3층→publish) / `validate.py`(§6.3) / `publish.py`(부호·스코프아웃 판정 D10 + `data/publish/`) / `benchmark_extract.py`(§6.4).
 - [ ] **회사 브리프 호출**(§6.6): 앵커 이벤트 네이밍(1건/사) → 리더 승인 큐.
 - [ ] **검증기 캘리브레이션**: validate·lint·detector를 골든에 먼저 실행 — 골든 통과할 때까지 임계 조정.
 - [ ] **held-out 제2 골든**: 타 업종 1사(POSCO홀딩스/NAVER) 주석 3~5건 + 5개년 캡션 수작업 → few-shot 미포함 벤치 전용.
@@ -443,7 +444,7 @@ L0(문체 게이트, §6.7)는 L1 전단 — 실패 필드만 부분 재생성.
 ### 6.5 처리량 추정 (v6 5개년 반영 — Phase 4 첫 실측 후 갱신)
 - 슬롯/사: 딥다이브 생성 카드 ~24(five skip 17 제외) × (what+why+cap+so) + 주석 추출 ~10 + 부문 추출 ~3 + 브리프 1 ≈ **호출 ~40/사** (구판 ~30 대비 5개년 해석으로 증가하나 skip 템플릿화가 상쇄).
 - 대상: galaxy 약 30~32사 → **~1,300±300회**, 토큰 ~4~5M.
-- **A100 vLLM 32B(동시 8~16)**: **반나절~1일** 배치(재시도·검증 포함). 노트북 폴백은 다일(스모크 전용).
+- **A100 SGLang 32B-AWQ(동시 8~16)**: **반나절~1일** 배치(재시도·검증 포함). 노트북 폴백은 다일(스모크 전용). **실측(2026-07-12)**: 구조화 출력 포함 단건 ~0.84s — 위 추정과 정합.
 - 2,600사 전망: 슬롯 3배에도 A100 1장 **2~4일** 배치 — 성립(부록 C).
 - **DART API**: 5개년 원문 최대 240건(부문 최적화 시 144) + fnlttSinglAcntAll 48×5=240콜 → 총 ~500-700콜, 일일 한도 20,000의 3% — 무영향. raw_cache 60~120MB.
 
@@ -523,7 +524,7 @@ L0(문체 게이트, §6.7)는 L1 전단 — 실패 필드만 부분 재생성.
 |---|---|---|
 | R1 | ~~Q1 신규 모듈~~ **승인 완료** | Phase 3 착수 가능. D6 절차 준수 |
 | R3 | dc-runtime의 async 데이터 수용 | Phase 1 첫 반나절 스파이크. 불가 시 폴백: 빌드 스크립트가 ticker별 `<script type="application/json">` 인라인 주입 HTML 생성(최후수단) |
-| R4 | ~~GPU VRAM~~ **확인 완료**: 노트북 Intel Arc 140V(배치 부적합) / **주력 A100 1장 80GB(원격)** | §3·부록 C. **Phase 4 착수 조건 — 리더 지정**: ① SSH·포트·가용 시간대 ② 서버 셋업 주체(vLLM·CUDA·권한) ③ 모델 가중치 HF 리포 + 토큰 ④ 엔드포인트 인증 + env 변수명(`REPORT_LLM_BASE_URL`/`REPORT_LLM_API_KEY`, shared/config.py) |
+| R4 | ~~GPU VRAM~~ ~~Phase 4 착수 조건~~ **완료(2026-07-12)**: A100 1장 80GB(원격) 드라이버 535→580-server 업그레이드, SGLang+Qwen3-32B-AWQ를 `report-llm.service`(systemd)로 상시화 | §3·부록 C. `REPORT_LLM_BASE_URL=http://127.0.0.1:30000/v1`(노트북은 SSH 터널) — 구조화 출력(xgrammar)·한국어 생성 스모크 통과 |
 | R5 | 주석 HTML 구조 기업별 상이 | **하향(부록 B)**: sub_docs 목차 정형(14산업 실증). 이종 3사 조기 테스트 유지 |
 | R6 | DART 수집 다중화 부채(원문 3중 + fnlttSinglAcntAll×5년) | ARCHITECTURE 부채 등재 + B·C 공유 — [#43](https://github.com/CVC-project/DiscloseAI/issues/43) |
 | R7 | 금융 8사+SK스퀘어·적자/음수흐름은 은하수 부적합 | D10 자동 스코프아웃 — ③만 "준비 중", ①② 정상 |
@@ -540,7 +541,7 @@ L0(문체 게이트, §6.7)는 L1 전단 — 실패 필드만 부분 재생성.
 ## 10. 새 세션 부트스트랩
 
 1. 이 문서 전체 + [CASH_GALAXY_STYLE_GUIDE.md](CASH_GALAXY_STYLE_GUIDE.md) + `docs/ARCHITECTURE.md` §1·2·3.5 + `integration/v2/CLAUDE.md`를 읽는다.
-2. Q1·Q3·Q4 **승인 완료**(문서 머리). 남은 리더 지정 = R4(A100 접속 정보 4건)뿐.
+2. Q1·Q3·Q4 **승인 완료**(문서 머리). R4도 **완료**(2026-07-12, GPU 서빙 기동 — §9·§3 참조) — Phase 4 착수 가능.
 3. `git status` → dev 기준 Phase 브랜치. **타 모듈 소유 미추적 파일 add 금지** — 경로 명시 add(`integration/dossier/`·`modules/report/`·`docs/`·`tests/report/`·`integration/v2/`·`.claude/skills/` 한정).
 4. 진행 상태는 이 문서 체크박스가 정본. Phase 종료 시 체크 + DoD 증거를 PR 본문에.
 5. 검증 없이 다음 Phase 금지(특히 Phase 1 시각 동등성, Phase 4 골든·캘리브레이션).
@@ -647,7 +648,7 @@ L0(문체 게이트, §6.7)는 L1 전단 — 실패 필드만 부분 재생성.
 | 장비 | 스펙 | 역할 |
 |---|---|---|
 | 로컬 노트북 | Intel Arc 140V(공유 16GB, CUDA 없음) | 개발·하네스 실행·8B 스모크(llama.cpp Vulkan). 배치 부적합 |
-| **A100 1장 (80GB, 원격)** | 데이터센터급 | **배치 주력**: vLLM + Qwen3-32B AWQ + guided_json. 노트북이 원격 호출 |
+| **A100 1장 (80GB, 원격)** | 데이터센터급, 드라이버 580-server | **배치 주력**: SGLang + Qwen3-32B-AWQ + xgrammar. 노트북이 SSH 터널로 호출 |
 
 llm.py를 OpenAI 호환 클라이언트로 → A100↔노트북↔클라우드 base_url 교체만으로 스왑.
 
