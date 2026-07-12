@@ -53,7 +53,7 @@ v2 기업우주에서 행성 → ENTER CORPORATION 클릭 시 EQS 단일 화면(
 - 색: bg `#060914`, cyan `#41dcff`, teal `#36e5bd` … → 표준과 다르므로 토큰 치환(D5).
 
 ### 1.3 프로토타입 ③: 현금 은하수 해방판 (v6 — 완성본, 1,756줄 + dc-runtime.js 60KB)
-- **정본 위계 (2026-07-10 리더 확정)**: ① 자구·데이터 정본 = **`현금은하수_해방판.html` + `dc-runtime.js`**(v6 md를 입력으로 Claude Design에서 확정한 최종 산출물). 구본(`Cash Galaxy.html` 22MB · `Cash Galaxy.editable.html` 308KB)은 v4 산물 — **리더가 직접 삭제 예정** ② v6 md(`docs/프롬프트_v6_현금은하수_구현확정판.md`) = 문법·의도 ③ 스타일 가이드 = 조문화. **자구·데이터 의문 시 해방판 html이 판정 기준.**
+- **정본 위계 (2026-07-10 리더 확정)**: ① 자구·데이터 정본 = **`현금은하수_해방판.html` + `dc-runtime.js`**(v6 md를 입력으로 Claude Design에서 확정한 최종 산출물). 구본(`Cash Galaxy.html` 22MB · `Cash Galaxy.editable.html` 308KB)은 v4 산물 — **삭제 완료(2026-07-12)** ② v6 md(`docs/prototype/프롬프트_v6_현금은하수_구현확정판.md`) = 문법·의도 ③ 스타일 가이드 = 조문화. **자구·데이터 의문 시 해방판 html이 판정 기준.**
 - 스택: **React 18.3.1(CDN) + Babel standalone(CDN) + `dc-runtime.js`(외부 참조)** — v2 셸과 CDN 캐시 공유. 인라인 SVG. Canvas/Three.js/D3 없음, 외부 차트 라이브러리 없음(전부 손 SVG).
 - **레이아웃 (v6 재설계)**: 3열 그리드 `[data-grid]` = 2fr(은하수 SVG) : 3fr(재무제표 5패널) : 5fr(sticky 딥다이브 카드). 반응형(CSS 변수 `--col-*`) — **구판 1360px 고정폭·zoom 로직 소멸**.
 - **은하수 (v6)**: `buildGalaxy()`(L749) — **일직선 본류 `spineX:0.48`**(L479 CONFIG) + **직교 라우팅 `ortho()`**(L780) + **굵기 2단 고정**(본류 6px/지류 3.5px, 금액 무관). `{{ galaxySvg }}` 바인딩(L1741). 골드 자본실·감가 회귀선·OCI 점선은 직교 좌표(L840·851·864·870).
@@ -134,12 +134,14 @@ v2 기업우주에서 행성 → ENTER CORPORATION 클릭 시 EQS 단일 화면(
 | 데이터 포맷 | 탭별 per-ticker JSON (`integration/dossier/data/`) | firm_*.json 전례. 단건 fetch |
 | 수집 | Python 3.11 + OpenDartReader(`document`·`list`·`fnlttSinglAcntAll`) + BeautifulSoup/lxml | disclosure·relation 패턴 참조(복제, import 금지) |
 | 원문 저장 | SQLite `modules/report/data/reports.db` + `raw_cache/` | 모듈 표준. `raw_cache/`는 기존 .gitignore가 자동 제외 |
-| LLM 서빙 | **vLLM on A100 80GB(원격, 주력)** — OpenAI 호환 + `guided_json`. 하네스는 노트북, LLM 호출만 원격. 폴백: llama.cpp Vulkan(Arc 140V) 8B 스모크 | A100 80GB면 32B 배치가 시간 단위(§6.5·부록 C) |
-| 모델 | **기본 Qwen3-32B(AWQ/FP8)**, 대안 EXAONE-3.5-32B(A100 80GB 여유). 비교군 14B·8B. **Qwen3 thinking 비활성 필수**(vLLM `chat_template_kwargs.enable_thinking=false` — 버전별 상이, 착수 시 확인 / 폴백 `/no_think`) | 한국어+표 강점. 최종 선정은 held-out 골든(§6.4) |
-| 구조화 출력 | vLLM `guided_json` / llama.cpp grammar(폴백) + **pydantic 재검증** | 서버측 강제 + 클라 이중 검증 |
+| LLM 서빙 | **SGLang on A100 80GB(원격, 주력)** — OpenAI 호환 서버(기본 포트 30000). 하네스는 노트북, LLM 호출만 원격. 폴백: llama.cpp Vulkan(Arc 140V) 8B 스모크 | A100 80GB면 32B 배치가 시간 단위(§6.5·부록 C) |
+| 모델 | **기본 Qwen3-32B(AWQ/FP8)**, 대안 EXAONE-3.5-32B(A100 80GB 여유). 비교군 14B·8B. **Qwen3 thinking 비활성 필수**(서빙 엔진별 chat template 옵션 상이 — 착수 시 확인 / 폴백 `/no_think`) | 한국어+표 강점. 최종 선정은 held-out 골든(§6.4) |
+| 구조화 출력 | SGLang 구조화 출력(xgrammar) / llama.cpp grammar(폴백) + **pydantic 재검증** | 서버측 강제 + 클라 이중 검증 |
 | 하네스 코드 | `story.py`(스토리 탐지 §6.6) · `stylelint.py`(L0 §6.7) · `bank.jsonl`(few-shot §6.8) — 전부 CPU | 발산 통제의 코드 층 |
 | 파이프라인 검증 | pytest (tests/report/) + 골든 회귀 | 프로젝트 표준 |
 | 렌더 검증(L3) | **playwright(파이썬)+chromium** (Phase 4) — 자동 게이트. 시각 검수는 ui-ux-reviewer | 48사 자동화 |
+
+> **R4 개정(2026-07-12, 커밋 `dfad073`)**: LLM 서빙 엔진을 vLLM → **SGLang**으로 확정(`.env.example`·`shared/config.py` REPORT_LLM_* 슬롯 참조). 본문 §1·§6·부록 C 등에 남은 vLLM 표기는 개정 전 서술 — 실측(Phase 4 착수) 시 §6.5와 함께 일괄 갱신.
 
 ---
 

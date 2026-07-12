@@ -214,18 +214,21 @@ D.percentileBadge(node.percentile?.eqs_total, sector.memberCount)
 
 ---
 
-## 7. ENTER CORPORATION 오버레이
+## 7. ENTER CORPORATION 오버레이 — CORPORATION DOSSIER 3탭 (2026-07 개편)
 
 - `position: fixed; inset: 0; z-index: 999`
 - 배경: `rgba(2,4,12,0.88) + backdropFilter: blur(18px)`
 - 헤더: cyan dot + `CORPORATION DOSSIER` + ticker, `✕ CLOSE` 버튼
-- iframe: `../../docs/prototype/firm_<ticker>.html` (integration 루트 승격 후 2단계)
-- `onLoad` → `injectV2Theme()` (CSS 주입, same-origin)
+- 본문: **`DOSSIER_TABS` 설정 배열 주도 탭바**(bundle.jsx) — ① 사업·기업 `../dossier/business.html?ticker=<t>` ② 현금 은하수 `../dossier/galaxy.html?ticker=<t>`(현재 005930만 데이터) ③ EQS `../dossier/firm.html?ticker=<t>&theme=galaxy`. iframe keep-alive `display` 토글. 우측 `OverlayAiChat`(탭별 context) 고정.
 - 푸터 면책: `⚠ 과거 통계 기반 참고 정보 — 투자 조언 아님`
+- 상세: [CLAUDE.md](CLAUDE.md) "CORPORATION DOSSIER 오버레이" · [docs/DOSSIER_TABS_PLAN.md](../../docs/DOSSIER_TABS_PLAN.md)
 
-### 7-1. iframe CSS 주입 (injectV2Theme)
+### 7-1. iframe CSS 주입 (injectV2Theme) — **폐기(2026-07, 3탭 디자인 통일)**
 
-| 요소 | 변경 |
+구 방식(`../../docs/prototype/firm_<ticker>.html` 임베드 + `onLoad` CSS 주입)은 dossier 3탭 전환으로 폐기.
+firm.html이 `?theme=galaxy` 파라미터로 `<html data-theme="galaxy">` 스코프 CSS 셀프 테마(mint 팔레트·IBM Plex Mono). `injectV2Theme` 함수는 bundle.jsx에 잔존하나 호출되지 않음. 아래 표는 이력 보존용.
+
+| 요소 | (구) 변경 내용 |
 |---|---|
 | `body` 배경 | `#020408` (보라 nebula 제거) |
 | `.panel` | dark glass + cyan 테두리 + border-radius: 2px |

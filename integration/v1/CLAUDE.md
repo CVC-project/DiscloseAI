@@ -50,11 +50,11 @@ ENTER CORPORATION 풀스크린 분석은 `openFullAnalysis()`(dashboard.html)가
 |---|---|
 | `../dossier/firm.html` | **단일 템플릿**. `?ticker=`로 `./data/firm_<t>.json` fetch해 렌더. financial `_HTML_TEMPLATE`에서 파생(CSS·Chart.js 바이트 동일) |
 | `../dossier/data/firm_<t>.json` | per-firm 데이터(48개). 기존 firm HTML의 `const DATA` 무손실 추출(원 단위 슈퍼셋) |
-| `../dossier/extract_firm_json.py` | 1회성 추출 — `docs/prototype/firm_*.html` → `dossier/data/*.json` |
+| ~~`../dossier/extract_firm_json.py`~~ | 1회성 추출(`docs/prototype/firm_*.html` → `dossier/data/*.json`) **완료 후 은퇴·제거** — 원본 HTML 삭제로 재실행 불가, git 이력 보존 |
 | `../dossier/build_firm_template.py` | 템플릿 빌드 — financial `_HTML_TEMPLATE` → `firm.html` |
 
 - **HTTP 서빙 필수**: firm.html이 JSON을 fetch → `file://`에서는 CORS 차단(iframe도 차단). `python -m http.server`에서만 동작(기존 제약과 동일).
-- **재생성**: `python integration/dossier/build_firm_template.py` (템플릿) / `python integration/dossier/extract_firm_json.py` (데이터). 단, 데이터는 기존 HTML에서 추출하므로 financial이 firm HTML을 다시 만들면 그때 재추출.
+- **재생성**: `python integration/dossier/build_firm_template.py` (템플릿). 데이터(`firm_*.json` 48개)는 1회성 추출 완료본 — 추출 스크립트·원본 HTML은 git 이력에만 존재. financial 데이터가 갱신되면 `dashboard.py`에 JSON 직접 출력(`write_firm_json`)을 추가하는 방향(A 담당과 협의, ARCHITECTURE 이슈 #2 후속).
 
 ## 데이터 소스 계약 (각 모듈의 어떤 필드를 뽑는가)
 

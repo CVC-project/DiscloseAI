@@ -65,7 +65,7 @@
 - **삼성 그룹**: 8개사 완전연결 28개 엣지 ✓
 - **현대차→기아 34.53%** (associate) ✓
 - **테스트**: 59/59 통과
-- **시각**: Playwright QA — 페이지 에러 0, 렌더링 정상 ([screenshot](viewer/screenshot_phase2f.png))
+- **시각**: Playwright QA — 페이지 에러 0, 렌더링 정상 (screenshot: `viewer/screenshots/screenshot_phase2f.png` — 로컬 보존, 커밋 제외)
 - **고아 노드 15개** (금융지주·한국전력·한미반도체 등 공정위 미지정 + 지분 관계 無 — 정상)
 
 ### 인프라 변경
@@ -74,7 +74,7 @@
 - **Playwright**: MCP 등록(user scope) + Python `playwright` + chromium 설치
 
 ### 사용자 복귀 시 할 일
-1. **스크린샷 시각 QA** — [viewer/screenshot_phase2f.png](viewer/screenshot_phase2f.png) 확인
+1. **스크린샷 시각 QA** — `viewer/screenshots/screenshot_phase2f.png` 확인 (로컬 보존, 커밋 제외)
 2. 실제 브라우저에서: `python -m http.server 8000` → `http://localhost:8000/modules/relation/viewer/index.html`
 3. **push**: `git push origin feat/relation` (9커밋 push 필요)
 4. **Phase 2h** — `feat/relation` → `dev` PR 생성 (`gh pr create --base dev`)

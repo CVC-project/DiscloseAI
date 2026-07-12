@@ -19,12 +19,12 @@
 ### 2) financial firm 상세 — 데이터 주도 템플릿으로 전환 (✅ 대부분 해소, 2026-06 / option ⒞-lite)
 - **변경 전**: `financial/dashboard.py`가 데이터를 인라인한 완성 HTML(`docs/prototype/firm_<ticker>.html` 48개)을 생성하고 integration v1·v2가 `<iframe>` 임베드.
 - **변경 후 (integration-only, financial 코드 무수정)**: firm 상세 = **데이터(JSON) + 단일 템플릿** 구조.
-  - 데이터: `integration/dossier/data/firm_<ticker>.json` 48개 — 기존 HTML의 `const DATA`를 [extract_firm_json.py](../integration/dossier/extract_firm_json.py)로 **무손실 추출**(원 단위, 슈퍼셋 그대로).
+  - 데이터: `integration/dossier/data/firm_<ticker>.json` 48개 — 기존 HTML의 `const DATA`를 extract_firm_json.py로 **무손실 추출**(원 단위, 슈퍼셋 그대로). (1회성 스크립트 — 원본 HTML 삭제 후 은퇴·제거, git 이력 보존)
   - 표현: `integration/dossier/firm.html` 단일 템플릿 — [build_firm_template.py](../integration/dossier/build_firm_template.py)가 financial `_HTML_TEMPLATE`에서 파생(CSS·Chart.js·렌더 로직 **바이트 동일**). `?ticker=`로 해당 JSON fetch.
   - iframe: v1 `../dossier/firm.html?ticker=<t>&v=`, v2 `../dossier/firm.html?ticker=<t>`. `injectV2Theme()` 그대로 작동.
 - **해소**: ① financial이 표현 생성 → **integration이 표현 소유**(financial은 데이터만) ② 런타임 자산 `docs/prototype/`(문서) → `integration/dossier/`(서빙)로 이동.
 - **의도적 보류**: ③ firm 상세도 데이터 주도가 됐으나 **iframe은 유지** — CSS·JS 격리벽(제거 시 firm 테마 CSS와 v2 `styles.css` 충돌, 시각 변형 위험). ④ `injectV2Theme()` 잔존(iframe 격리 전제).
-- **후속(범위 외)**: `docs/prototype/firm_*.html` 48개는 현재 **앱이 미참조** → dev 머지·검증 후 **삭제 예정**. financial 재batch 시 HTML 재생성을 막으려면 `dashboard.py`에 JSON 출력(`write_firm_json`) 추가 필요(A 담당과 협의). `docs/prototype/eqs_data.json`은 보존(`extract_data.py`가 history·percentile용으로 읽음).
+- **후속(범위 외)**: `docs/prototype/firm_*.html` 48개는 **삭제 완료**(2026-06-10, post-#28 정리). financial 재batch 시 HTML 재생성을 막으려면 `dashboard.py`에 JSON 출력(`write_firm_json`) 추가 필요(A 담당과 협의). `eqs_data.json`은 `modules/financial/data/`로 이동해 보존(`extract_data.py`가 history·percentile용으로 읽음 — 이슈 #3).
 
 ### 3) financial 생성물·데이터·캐시 위치 부채 (✅ 해결, 2026-07)
 - **과거 현상**: financial 모듈의 출력 경로(`_DASHBOARD_DIR`·`_CACHE_DIR`·EQS 배치)가 `docs/prototype/`에 박혀 빌드 산출물·런타임 데이터·캐시가 문서 폴더로 쏟아졌다.
@@ -125,7 +125,7 @@ D: yfinance 주가 → price_local (price.db);  linker.py가 공시-주가 라�
 
 → integration/v1/extract_data.py 가 financial.db·disclosure.db·price quiz_data 를 읽어
   integration/data/{eqs_summary,disclosures,price_scenarios}.json 생성
-  (financial.db에 없는 history·percentile·시총은 docs/prototype/eqs_data.json 에서 보강 — 이슈 #3)
+  (financial.db에 없는 history·percentile·시총은 modules/financial/data/eqs_data.json 에서 보강 — 이슈 #3)
 → v1 dashboard.html / v2 index.html 가 위 JSON + modules/relation/data/graph_top50.json 을 fetch
 → firm 상세(ENTER CORPORATION): v1·v2가 integration/dossier/firm.html?ticker=<t> 를 iframe 로드
   → firm.html 이 integration/dossier/data/firm_<t>.json 을 fetch 해 렌더 (이슈 #2)

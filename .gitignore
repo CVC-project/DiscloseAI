@@ -78,3 +78,9 @@ node_modules/
 
 # 생성된 대시보드 HTML (재생성물, 커밋 금지 — eqs_data.json 등 데이터는 커밋)
 modules/*/data/*.html
+
+# 모듈 재생성 캐시(_ 접두: _sector_stats.json, _*.pkl 등) — 배치 실행 시 재생성
+modules/*/data/_*
+
+# 모듈 루트로 출력되는 생성 리포트 (generate_report.py — data/ 밖이라 별도 지정)
+modules/disclosure/report_*.html
