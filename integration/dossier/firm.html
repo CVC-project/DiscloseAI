@@ -383,8 +383,11 @@
 [data-theme="galaxy"] .grade-B{border-color:var(--cyan);color:var(--cyan);}
 [data-theme="galaxy"] .grade-C{border-color:var(--warn);color:var(--warn);}
 [data-theme="galaxy"] .grade-D,[data-theme="galaxy"] .grade-F{border-color:var(--bad);color:var(--bad);}
-[data-theme="galaxy"] .panel{background:var(--panel);border-color:var(--border);}
-[data-theme="galaxy"] .panel::before{display:none;}
+/* galaxy 표준 패널 엣지 (radius 10 + 코너 브래킷, DESIGN.md §패널 엣지). v1 무테마는 스코프 밖이라 불변. */
+[data-theme="galaxy"] .panel{background:var(--panel);border-color:var(--border);border-radius:10px;}
+[data-theme="galaxy"] .panel::before,[data-theme="galaxy"] .panel::after{content:'';display:block;position:absolute;width:14px;height:14px;border:2px solid var(--mint);}
+[data-theme="galaxy"] .panel::before{top:-1px;left:-1px;border-right:0;border-bottom:0;border-radius:3px 0 0 0;}
+[data-theme="galaxy"] .panel::after{bottom:-1px;right:-1px;border-left:0;border-top:0;border-radius:0 0 3px 0;}
 [data-theme="galaxy"] .module-score{font-family:'IBM Plex Mono',ui-monospace,monospace;}
 [data-theme="galaxy"] .ratio-value,[data-theme="galaxy"] .stmt-table td:last-child{font-family:'IBM Plex Mono',ui-monospace,monospace;}
 </style>
@@ -531,6 +534,13 @@ let DATA = null;
 function __setText(id, t){ var e = document.getElementById(id); if (e) e.textContent = t; }
 function __renderFirm() {
   var __gx = document.documentElement.getAttribute('data-theme') === 'galaxy';
+
+  // Chart.js 전역 폰트 — 미지정 시 Helvetica 기본으로 렌더돼 표면 폰트가 어긋남 (DESIGN.md 폰트 표준)
+  if (window.Chart) {
+    Chart.defaults.font.family = __gx
+      ? "'IBM Plex Mono', ui-monospace, monospace"
+      : "'Pretendard Variable', Pretendard, system-ui, sans-serif";
+  }
 
 // 용어 설명 툴팁 헬퍼 — glossary에 있는 key만 ⓘ 출력 (섹션형 카드)
 function helpIcon(key) {
