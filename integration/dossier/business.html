@@ -82,11 +82,18 @@
     .tab[disabled] { opacity:.48; }
     .workspace { display:grid; grid-template-columns:1fr; gap:16px; align-items:start; }
     .rail, .panel {
+      position:relative;
       border:1px solid var(--line);
-      border-radius:3px;                 /* galaxy 표준 (DESIGN.md §패널 엣지) — 구 16px */
+      border-radius:3px;
       background:var(--panel);            /* galaxy ZONE 카드 동일 */
       box-shadow:0 18px 50px rgba(0,0,0,.26);
     }
+    /* 브래킷 = 바깥 래퍼 패널(#readerPanel)에만 — 얇고 각진 셸 컨셉 (DESIGN.md §패널 엣지) */
+    .panel::before, .panel::after {
+      content:''; position:absolute; width:10px; height:10px; border:1px solid var(--edge-accent, var(--mint)); opacity:.7; pointer-events:none;
+    }
+    .panel::before { top:-1px; left:-1px; border-right:0; border-bottom:0; }
+    .panel::after  { bottom:-1px; right:-1px; border-left:0; border-top:0; }
     .rail { position:sticky; top:14px; max-height:calc(100vh - 28px); overflow:hidden; }
     .rail-head { padding:15px; border-bottom:1px solid var(--line); }
     .rail-head h2 { margin:0 0 10px; font-size:17px; }
@@ -686,12 +693,7 @@
       background:var(--panel);            /* galaxy ZONE 카드 동일 (구 cyan 그라디언트 제거) */
       padding:16px;
     }
-    /* 브래킷은 '부문별 매출비중과 사업 설명'(.segment-breakdown) 한 곳에만 — 얇고 각진 셸 컨셉 (DESIGN.md §패널 엣지) */
-    .segment-breakdown::before, .segment-breakdown::after {
-      content:''; position:absolute; width:10px; height:10px; border:1px solid var(--edge-accent, var(--mint)); opacity:.7; pointer-events:none;
-    }
-    .segment-breakdown::before { top:-1px; left:-1px; border-right:0; border-bottom:0; }
-    .segment-breakdown::after  { bottom:-1px; right:-1px; border-left:0; border-top:0; }
+    /* (부문별 섹션 브래킷 제거 — 브래킷은 바깥 래퍼 패널에만) */
     .detail-head {
       display:flex;
       justify-content:space-between;

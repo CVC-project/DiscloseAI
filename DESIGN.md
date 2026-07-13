@@ -80,12 +80,16 @@ CSS 변수는 iframe 경계를 넘지 못한다 → **각 페이지가 직접 li
 **브래킷 배치 = 탭당 주요 패널에만** (전 패널에 넣으면 산만 — 리더 결정):
 | 표면 | 브래킷 있는 패널 | 나머지 |
 |---|---|---|
-| business(탭①) | `.segment-breakdown`(부문별 매출비중) 1곳 | radius 3px만, 브래킷 없음 |
+| business(탭①) | **바깥 래퍼 패널 `.panel`(#readerPanel)** 1곳 — 탭 전체를 감싸는 프레임 | 내부 섹션(부문별·요약 등) radius 3px만, 브래킷 없음 |
 | EQS firm(탭③) | 상단 2패널 `.panel.gx-edge`(EQS 종합점수·5개 모듈 프로파일) | radius 3px만, 브래킷 없음 |
 | galaxy(탭②) | ZONE 카드(해방판 인라인, 존별 의미색) | — |
 | v2 셸 | HUD·패널 전반 `.panel` | — |
 
-**산업군별 동적 accent**: `--edge-accent`(기본 mint)가 브래킷 색. 셸이 ENTER 시 섹터색을 `&accent=<color>`로 3탭 iframe에 전달 → business·firm은 `--mint`·`--edge-accent` 오버라이드(탭 전체 섹터색 테마), galaxy는 `--edge-accent`만(색=의미 보존). §2의 섹터/관계 의미색 팔레트는 셸 SECTOR_PALETTE.
+**산업군별 동적 테마색 — 오버레이 크롬 + 3탭 전부**: ENTER 시 셸이 섹터색(`SECTOR_PALETTE[활성섹터].color`, 예 중공업·방산=`#c084fc`)을
+- **오버레이 크롬**(bundle.jsx): CORPORATION DOSSIER 헤더·닷·활성 탭 언더라인/텍스트를 `sectorAccent`로 렌더
+- **3탭 iframe**: `&accent=<color>` 전달 → `--edge-accent`(브래킷) + business·firm은 `--mint`도 오버라이드(탭 전체 섹터색), galaxy는 `--edge-accent`만(색=의미 보존)
+- 딥링크 테스트: `?corp=<ticker>&sector=<id>` (예 `?corp=034020&sector=indust` → 전부 보라)
+- §2의 섹터/관계 의미색 팔레트 정본 = 셸 `SECTOR_PALETTE`.
 
 - radius는 각진 3px 기본 — 표면별 독자 값(10·12·14·16px) 금지. 장식 도형(product-visual)은 규칙 밖.
 

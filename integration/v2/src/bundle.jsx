@@ -2742,13 +2742,16 @@ function App() {
 
   // 딥링크: ?corp=<ticker> 로 CORPORATION DOSSIER 오버레이 바로 열기 (로컬 테스트 편의)
   useEffect(() => {
-    const c = new URLSearchParams(window.location.search).get('corp');
-    if (c) { setCorpOverlayTicker(c); setDossierTab('business'); }
+    const q = new URLSearchParams(window.location.search);
+    const c = q.get('corp');
+    if (c) { const s = q.get('sector'); if (s) setActiveSectorId(s); setCorpOverlayTicker(c); setDossierTab('business'); } // ?corp=&sector= 딥링크(테스트·산업군 색 확인)
   }, []);
   // 오버레이 열림 동안 배경 캔버스 draw 정지 (성능 §8)
   useEffect(() => { window.__dossierOpen = !!corpOverlayTicker; }, [corpOverlayTicker]);
 
   const sector = activeSectorId ? SECTOR_PALETTE.find(s => s.id === activeSectorId) : null;
+  // 산업군 테마 액센트 — 오버레이 크롬(헤더·탭바)과 3탭 iframe에 공통 적용 (섹터색)
+  const sectorAccent = (sector && sector.color) || '#74EEC6';
   const companies = activeSectorId ? (window.COMPANIES[activeSectorId] || window.COMPANIES.semi) : [];
   const company = activeCompanyCode ? companies.find(c => c.code === activeCompanyCode) : null;
 
@@ -2866,25 +2869,25 @@ function App() {
           background:'rgba(2,4,12,0.88)', backdropFilter:'blur(18px)',
           display:'flex', flexDirection:'column',
         }}>
-          {/* Header bar */}
+          {/* Header bar — 산업군 색 테마(sectorAccent) */}
           <div style={{
             display:'flex', alignItems:'center', justifyContent:'space-between',
-            padding:'10px 20px', borderBottom:'1px solid rgba(116, 238, 198,0.2)',
+            padding:'10px 20px', borderBottom:'1px solid ' + sectorAccent + '33',
             background:'rgba(8,14,26,0.9)', flexShrink:0,
           }}>
             <div style={{display:'flex', alignItems:'center', gap:12}}>
-              <span style={{width:8,height:8,borderRadius:'50%',background:'#74EEC6',boxShadow:'0 0 8px #74EEC6', display:'inline-block'}} />
-              <span style={{fontFamily:'var(--font-mono,monospace)',fontSize:11,letterSpacing:'0.12em',color:'#74EEC6'}}>CORPORATION DOSSIER</span>
+              <span style={{width:8,height:8,borderRadius:'50%',background:sectorAccent,boxShadow:'0 0 8px '+sectorAccent, display:'inline-block'}} />
+              <span style={{fontFamily:'var(--font-mono,monospace)',fontSize:11,letterSpacing:'0.12em',color:sectorAccent}}>CORPORATION DOSSIER</span>
               <span style={{fontFamily:'var(--font-mono,monospace)',fontSize:10,color:'#64748b',letterSpacing:'0.06em'}}>· {corpOverlayTicker}</span>
             </div>
             <button onClick={() => setCorpOverlayTicker(null)} style={{
-              background:'transparent', border:'1px solid rgba(116, 238, 198,0.25)',
+              background:'transparent', border:'1px solid ' + sectorAccent + '40',
               color:'#94a3b8', fontFamily:'var(--font-mono,monospace)', fontSize:11,
               padding:'4px 14px', cursor:'pointer', letterSpacing:'0.08em',
               borderRadius:2,
             }}>✕ CLOSE</button>
           </div>
-          {/* Tab bar — DOSSIER_TABS (D1, mint 토큰) */}
+          {/* Tab bar — DOSSIER_TABS (D1), 활성 탭 = 산업군 색 */}
           <div style={{display:'flex', padding:'0 20px', flexShrink:0, background:'rgba(5,6,13,0.95)', borderBottom:'1px solid rgba(140,170,210,0.13)'}}>
             {DOSSIER_TABS.map((tab) => {
               const enabled = tab.activeWhen === 'always' || GALAXY_TICKERS.has(corpOverlayTicker);
@@ -2894,9 +2897,9 @@ function App() {
                   style={{
                     fontFamily:"'IBM Plex Mono', var(--font-mono, monospace)", fontSize:12, letterSpacing:'0.06em',
                     padding:'11px 20px', cursor: enabled ? 'pointer' : 'not-allowed', background:'transparent', border:'none',
-                    color: active ? '#74EEC6' : (enabled ? '#8fa1b6' : '#475569'),
-                    borderBottom: active ? '2px solid #74EEC6' : '2px solid transparent',
-                    textShadow: active ? '0 0 12px rgba(116,238,198,0.5)' : 'none',
+                    color: active ? sectorAccent : (enabled ? '#8fa1b6' : '#475569'),
+                    borderBottom: active ? '2px solid ' + sectorAccent : '2px solid transparent',
+                    textShadow: active ? '0 0 12px ' + sectorAccent + '80' : 'none',
                   }}>
                   {tab.label}{enabled ? '' : ' · 준비중'}
                 </button>
@@ -2910,8 +2913,6 @@ function App() {
                 const enabled = tab.activeWhen === 'always' || GALAXY_TICKERS.has(corpOverlayTicker);
                 if (!enabled) return null;
                 const active = dossierTab === tab.id;
-                // 섹터색을 3탭 테마 액센트로 전달 (중공업·방산=보라 등 — 산업군별 동적 테마)
-                const sectorAccent = (sector && sector.color) || '#74EEC6';
                 return (
                   <iframe key={tab.id}
                     src={`../dossier/${tab.src}?ticker=${corpOverlayTicker}${tab.id === 'eqs' ? '&theme=galaxy' : ''}&accent=${encodeURIComponent(sectorAccent)}`}
