@@ -100,7 +100,7 @@ CSS 변수는 iframe 경계를 넘지 못한다 → **각 페이지가 직접 li
 | 탭① [business.html](integration/dossier/business.html) | Pretendard+IPM ✅ | galaxy mint | 표준(10+브래킷) ✅ | tokens + theme-galaxy | 페이지 고유 토큰만 인라인 |
 | 탭② [galaxy.html](integration/dossier/galaxy.html) | Pretendard+IPM ✅ | galaxy mint(원조) | 표준(인라인 브래킷) | tokens (theme는 의도적 미링크) | 해방판 자구가 판정 기준 |
 | 탭③ [firm.html](integration/dossier/firm.html) | Pretendard+IPM ✅ | `[data-theme=galaxy]` 스코프 | 표준(10+브래킷) ✅ | 인라인 스코프 | v1 무테마 룩은 스코프 밖 불변 |
-| v2 셸 [integration/v2/](integration/v2/) | Pretendard+IPM ✅ | **셸 cyan `#5eead4`**(별도 트랙) | 브래킷 정렬 ✅(국소) | tokens + styles.css | **팔레트만 별도**(폰트·엣지는 통일). 전역 팔레트 통일 여부 = 리더 2차 결정 |
+| v2 셸 [integration/v2/](integration/v2/) | Pretendard+IPM ✅ | galaxy mint ✅ | 표준(10+브래킷) ✅ | tokens + styles.css | **전면 통일**(2026-07-13). 섹터·관계 의미색만 셸 고유(amber·violet 등 — 의미 보존) |
 | ~~v1 dashboard~~ | — | — | — | — | 2026-07-13 폐지 |
 | ~~relation viewer~~ | — | — | — | — | 2026-07-13 은퇴 |
 | price standalone (quiz·timemachine) | Apple SD Gothic | 구세대 blue #3b82f6 | 미적용 | — | D 담당 standalone — 신규 스타일 작업 시 galaxy 이관 검토 |
@@ -131,12 +131,11 @@ CSS 변수는 iframe 경계를 넘지 못한다 → **각 페이지가 직접 li
 | [CASH_GALAXY_STYLE_GUIDE.md](integration/dossier/CASH_GALAXY_STYLE_GUIDE.md) | 탭③ 현금 은하수 **도메인 문법**(색=의미·viz 8종·카피·삼성 골든) |
 | [GALAXY_JSON_SCHEMA.md](integration/dossier/GALAXY_JSON_SCHEMA.md) | galaxy JSON 데이터 스키마 (디자인 아님) |
 | [DOSSIER_TABS_PLAN.md](integration/dossier/DOSSIER_TABS_PLAN.md) | 3탭 실행 계획 (디자인 결정 D1~D12) |
-| [integration/v2/DESIGN.md](integration/v2/DESIGN.md) | v2 셸 로직·인터랙션 기록 (셸 별도 트랙 세부) |
+| [integration/v2/DESIGN.md](integration/v2/DESIGN.md) | v2 셸 로직·인터랙션 기록 (렌더 알고리즘·데이터 어댑터) |
 | [design/](design/) | 프로토타입 원형·제작 사양서 — 자구·데이터 판정 기준 |
 
 ## 10. 잔여 격차 (다음 정비 대상)
 
-- **셸 전역 팔레트**: v2 셸은 폰트·엣지는 통일했으나 팔레트(cyan `#5eead4`)는 별도 트랙 유지 중. galaxy mint로 완전 통일할지는 **리더 2차 결정**(theme-galaxy 값 스왑 1곳이면 전환 가능한 구조).
-- **v2 인라인 hex 169개**: styles.css/bundle.jsx의 인라인 색을 `var(--)` 토큰으로 전면 승격(시각 무변화)은 후속 — 현재는 tokens.css link + 폰트·엣지 통일까지 완료.
-- **business rgba 글로우 잔재**: 구 `rgba(65,220,255,…)`(구 #41dcff) 소수 — 다음 작업 시 `--cyan` 기반 정리.
-- **price standalone**: quiz·timemachine의 구세대 팔레트·폰트 — D 담당 영역, 신규 작업 시 galaxy 이관 검토.
+- **v2 인라인 hex → 토큰**: styles.css/bundle.jsx의 인라인 색이 galaxy mint로 시프트 완료(값은 통일)됐으나, 아직 `var(--)` 토큰 참조가 아닌 리터럴이 다수 — 시각 무변화 토큰 승격은 후속 정비.
+- **price standalone**: quiz·timemachine의 구세대 팔레트·폰트(Apple SD Gothic·blue) — D 담당 영역, 신규 작업 시 galaxy 이관 검토.
+- **완료(2026-07-13)**: 3탭·v2 셸 폰트(Pretendard+IBM Plex Mono)·패널 엣지(radius 10+브래킷)·팔레트(mint) 전면 통일. business 구 팔레트(#41dcff·pink·violet) 전역 시프트 완료.
