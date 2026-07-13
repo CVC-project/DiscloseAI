@@ -9,7 +9,22 @@ auto-invocable: false
 # /galaxy-golden <ticker> — 기업 골든 루프 (PHASE4_PLAN R6)
 
 한 기업을 **사업보고서 추출 → 레이아웃 → 산문 → 정확성 → 완전성**의 5단계로 완주시킵니다.
-수렴 조건 = `check_golden PASS` + `completeness-auditor PASS` + 렌더 에러 0.
+
+## 수렴 루프 (골든 품질까지 — 이 의사코드가 실행 계약)
+```
+S1 → S2 → S2.5 → S3(전 카드)
+repeat:
+  gaps = check_golden(ticker)                     # 기계 게이트
+  refuted = accuracy-verifier(변경·신규 카드만)     # 적대 게이트
+  audit = completeness-auditor(ticker)            # 깊이·주석 커버리지 게이트
+  ui = pytest test_galaxy_interaction.py (S6)     # 동작 게이트
+  regress = check_golden(기존 골든 전부)            # 무회귀 게이트(템플릿 건드렸으면 필수)
+  if 전부 PASS: break                              # ← 골든 품질 도달
+  각 실패를 소유 단계로 라우팅해 그 카드/구조만 수리:
+    구조·패널·viz → S2 | 산문·수치·문체 → S3(fix_hint 동봉) | 추출 누락 → S1
+until 카드별 3회 초과 → NEEDS_REVIEW.md(리더 큐)에 적고 계속
+종료 = 5게이트 전부 PASS (하나라도 FAIL이면 절대 publish 금지)
+```
 
 > ⚠️ **subagent 프롬프트는 self-contained** — 에이전트는 이 대화를 못 봅니다. fact-sheet 발췌·골든 견본 원문·series 배열·카드 키를 **프롬프트에 직접 포함**해 호출하세요.
 > ⚠️ **R6.3 규칙 10**이 이 스킬의 헌법입니다(PHASE4_PLAN.md). 특히: 파생수치 암산 금지 · 템플릿 수정 시 컴파일+pv 스모크 · 원자적 쓰기(최종본만 저장).
@@ -47,7 +62,7 @@ auto-invocable: false
 ## S5 — 완전성 (최종 게이트)
 1. **completeness-auditor** 호출(ticker + 골든 기준 명시).
 2. shallow 카드 → S3 재작성, uncovered_notes → S1 추가 추출 후 해당 카드 보강, render 이슈 → S2.
-3. auditor PASS + check_golden PASS + 렌더 0에러가 모두 충족되면 종료.
+3. 종료 판정은 상단 **수렴 루프 의사코드**의 5게이트(check_golden·verifier·auditor·S6 인터랙션·기존 골든 무회귀) 전부 PASS.
 
 ## 루프 규율
 - **카드 루프 상한 3회**: 같은 카드가 3회 재작성에도 실패하면 `modules/report/review/NEEDS_REVIEW.md`에 카드 키·사유·시도 이력을 적고 다음 카드로(리더 큐).

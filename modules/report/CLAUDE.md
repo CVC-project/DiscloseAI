@@ -8,7 +8,7 @@
 ## 이 모듈의 목적
 
 삼성전자 기준으로 만든 "기본 틀(galaxy 템플릿 + JSON 스키마)"에, 사업보고서 **5개년** 원문·정형계정을
-저장해 두고 (Phase 4) 자체 GPU LLM이 주석 수치·설명·5개년 해석을 채워 48사로 확장한다.
+저장해 두고 (Phase 4) **Claude Code 하네스**(스킬 `/galaxy-golden` + 서브에이전트 + 기계 체커)가 주석 수치·설명·5개년 해석을 채워 48사로 확장한다. (GPU LLM 산문은 R6에서 폐기 — PHASE4_PLAN R6 참조)
 
 - **데이터 생산 모듈** — 다른 데이터 모듈과 import 금지(단방향). integration이 `data/publish/`를 read-only pull.
 - **LLM은 숫자를 만들지 않는다(D7)** — 본표·시계열은 코드(collector·fs_enrich·series)가 채우고, LLM은 빈 슬롯(주석 표·산문·5개년 해석)만.
@@ -20,7 +20,8 @@ collector.py   corps.csv → dart.list(정기공시) → 최신 5 사업보고�
 sectioner.py   raw_cache → 목차/주석번호 분할 → report_section (표 HTML 보존 + text_md)
 fs_enrich.py   fnlttSinglAcntAll 48×5 → fs_account (미확보 계정 5개년 보강)
 series.py      firm_json + fs_account + (Phase4)주석추출 → S 24키×5점 (5점 완결 판정)
-[Phase 4]      story.py·llm.py·extract.py·stylelint.py·validate.py·publish.py → data/publish/galaxy_<t>.json
+[Phase 4/R6]   /galaxy-golden 스킬(S1~S5 루프: note-extractor→조립→prose-writer→accuracy-verifier→completeness-auditor)
+               + check_golden.py(기계 게이트) + tests/report/test_galaxy_interaction.py(S6) → integration/dossier/data/galaxy_<t>.json
 ```
 DART 키 필요: `python -m modules.report.collector` / `.fs_enrich` / `.sectioner`.
 
@@ -50,6 +51,6 @@ DART 키 필요: `python -m modules.report.collector` / `.fs_enrich` / `.section
 원문 수집이 disclosure(B)·relation(C)에 이어 report까지 3중, 재무 정형은 financial + report `fnlttSinglAcntAll` 이중.
 [이슈 #43](https://github.com/CVC-project/DiscloseAI/issues/43)에 등재. ARCHITECTURE.md 부채 표에도 반영.
 
-## 착수 조건 (Phase 4)
+## 착수 조건 (Phase 4) — ⚠️ R6로 대체됨
 
-R4 **완료(2026-07-12)**: A100(원격) 드라이버 535→580-server 업그레이드 + SGLang(Qwen/Qwen3-32B-AWQ, xgrammar 구조화 출력)을 `report-llm.service`(systemd)로 상시화. 노트북은 SSH 터널(`ssh -N -L 30000:127.0.0.1:30000 <user>@<GPU_IP>`)로 접속, `REPORT_LLM_BASE_URL=http://127.0.0.1:30000/v1`(shared/config.py). 상세: [integration/dossier/DOSSIER_TABS_PLAN.md](../../integration/dossier/DOSSIER_TABS_PLAN.md) §3·§9 R4. Phase 3(수집)는 DART 키만으로 진행 가능 — 이제 Phase 4 LLM 하네스(story·llm·extract·validate·publish)도 착수 가능.
+R4 **완료(2026-07-12)**: A100(원격) 드라이버 535→580-server 업그레이드 + SGLang(Qwen/Qwen3-32B-AWQ, xgrammar 구조화 출력)을 `report-llm.service`(systemd)로 상시화. 노트북은 SSH 터널(`ssh -N -L 30000:127.0.0.1:30000 <user>@<GPU_IP>`)로 접속, `REPORT_LLM_BASE_URL=http://127.0.0.1:30000/v1`(shared/config.py). 상세: [integration/dossier/DOSSIER_TABS_PLAN.md](../../integration/dossier/DOSSIER_TABS_PLAN.md) §3·§9 R4. Phase 3(수집)는 DART 키만으로 진행 가능 — **2026-07-13 R6 전환**: GPU 산문 폐기(품질 미달 실증) — 하네스는 `/galaxy-golden` 스킬 + `.claude/agents/`(note-extractor·prose-writer·accuracy-verifier·completeness-auditor) + `check_golden.py`. llm.py·터널은 보류(기계 보조 후보). 골든 2본(삼성 005930·SK 000660) = 문체 견본·회귀 기준(구조는 보고서 기반, R6.9).
