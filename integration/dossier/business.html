@@ -420,9 +420,9 @@
       align-items:stretch;
     }
     .report-panel {
-      border:1px solid rgba(92,199,234,.16);
-      border-radius:16px;
-      background:linear-gradient(135deg, rgba(92,199,234,.055), rgba(255,255,255,.025));
+      border:1px solid var(--line);
+      border-radius:10px;
+      background:var(--panel);   /* galaxy 표준 — 구 cyan 틴트 그라디언트 제거 */
       padding:16px;
       min-width:0;
     }
@@ -549,11 +549,9 @@
     }
     .business-finance-panel {
       margin-top:12px;
-      border:1px solid rgba(148,163,184,.15);
-      border-radius:16px;
-      background:
-        radial-gradient(circle at 5% 0%, rgba(92,199,234,.10), transparent 26%),
-        rgba(255,255,255,.035);
+      border:1px solid var(--line);
+      border-radius:10px;
+      background:var(--panel);   /* galaxy 표준 */
       padding:15px;
     }
     .business-finance-panel h3 {
