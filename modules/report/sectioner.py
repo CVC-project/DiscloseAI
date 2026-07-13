@@ -17,13 +17,12 @@ from .models import PipelineState, ReportRaw, ReportSection
 
 _HERE = os.path.dirname(__file__)
 
-# 목차 상위 절 패턴
-_SECTION_HEADS = [
-    (r"II\.\s*사업의\s*내용", "II.사업의내용"),
-    (r"연결재무제표\s*주석", "III.3.연결주석"),
-    (r"재무제표\s*주석", "III.주석"),
-]
-_NOTE_RE = re.compile(r"(?:^|\n)\s*(주\s?\d{1,2})[\.\s]")  # 주16. / 주 16
+# 사업의 내용 절(통짜 저장) 패턴
+_BIZ_HEAD = (r"II\.\s*사업의\s*내용", "II.사업의내용")
+# 연결재무제표 주석 = DART XML의 <TITLE>N. 제목 (연결)</TITLE> 태그로 구분 (주N 아님).
+_NOTE_TITLE_RE = re.compile(
+    r"<TITLE[^>]*>\s*(\d{1,2})\.\s*(.+?)\s*\(\s*연결\s*\)\s*</TITLE>", re.S
+)
 
 
 def _load_raw(raw_path: str) -> str | None:
@@ -39,10 +38,11 @@ def _to_md(html: str) -> str:
 
     soup = BeautifulSoup(html, "html.parser")
     parts = []
+    # DART XML: 표 셀은 <TE>·<TU>(+표준 td/th), 문단은 <P> (html.parser가 소문자화)
     for el in soup.find_all(["p", "table"]):
         if el.name == "table":
             for tr in el.find_all("tr"):
-                cells = [c.get_text(strip=True) for c in tr.find_all(["td", "th"])]
+                cells = [c.get_text(strip=True) for c in tr.find_all(["td", "th", "te", "tu"])]
                 if any(cells):
                     parts.append("| " + " | ".join(cells) + " |")
             parts.append("")
@@ -53,18 +53,29 @@ def _to_md(html: str) -> str:
     return "\n".join(parts)
 
 
-def _split_notes(section_html: str) -> list[tuple[str, str]]:
-    """연결주석 서브문서를 주석 번호 단위로 2차 분할 → [(note_no, html), ...]."""
-    text = section_html
-    hits = list(_NOTE_RE.finditer(text))
+def _split_notes(full_xml: str) -> list[tuple[str, str, str]]:
+    """연결재무제표 주석을 주석 번호 단위로 분할 → [(note_no, title, html), ...].
+
+    DART XML: '연결재무제표 주석' 헤더 이후 <TITLE>N. 제목 (연결)</TITLE>가 각 주석 시작.
+    '(연결)' 접미로 별도재무제표 주석과 구분. 주석 번호가 1로 리셋되면 별도 시작이므로 중단.
+    """
+    h = re.search(r"연결재무제표\s*주석", full_xml)
+    if not h:
+        return []
+    region = full_xml[h.end():]
+    hits = list(_NOTE_TITLE_RE.finditer(region))
     if not hits:
         return []
-    out = []
+    out: list[tuple[str, str, str]] = []
     for i, m in enumerate(hits):
-        note_no = m.group(1).replace(" ", "")
+        no = m.group(1)
+        # 번호가 이전보다 작아지면(1로 리셋 등) 연결 주석 끝 → 중단
+        if out and int(no) <= int(out[-1][0]):
+            break
+        title = re.sub(r"\s+", " ", m.group(2)).strip()
         start = m.start()
-        end = hits[i + 1].start() if i + 1 < len(hits) else len(text)
-        out.append((note_no, text[start:end]))
+        end = hits[i + 1].start() if i + 1 < len(hits) else min(len(region), start + 300_000)
+        out.append((no, title, region[start:end]))
     return out
 
 
@@ -82,41 +93,39 @@ def section_all(tickers: list[str] | None = None) -> None:
         # 기존 섹션 삭제 후 재적재 (idempotent)
         sess.query(ReportSection).filter_by(rcept_no=raw.rcept_no).delete()
         n = 0
-        for pat, key in _SECTION_HEADS:
-            m = re.search(pat, html)
-            if not m:
-                continue
-            seg = html[m.start() : m.start() + 800_000]  # 절 이후 슬라이스
-            if "주석" in key:
-                for note_no, note_html in _split_notes(seg):
-                    md = _to_md(note_html)
-                    sess.add(
-                        ReportSection(
-                            rcept_no=raw.rcept_no,
-                            section_key=key,
-                            note_no=note_no,
-                            title=note_no,
-                            text_html=note_html[:500_000],
-                            text_md=md,
-                            char_len=len(md),
-                        )
-                    )
-                    n += 1
-            else:
-                md = _to_md(seg)
-                sess.add(
-                    ReportSection(
-                        rcept_no=raw.rcept_no,
-                        section_key=key,
-                        note_no=None,
-                        title=key,
-                        text_html=seg[:500_000],
-                        text_md=md,
-                        char_len=len(md),
-                    )
+        # ① II. 사업의 내용 (통짜)
+        mb = re.search(_BIZ_HEAD[0], html)
+        if mb:
+            seg = html[mb.start() : mb.start() + 800_000]
+            md = _to_md(seg)
+            sess.add(
+                ReportSection(
+                    rcept_no=raw.rcept_no,
+                    section_key=_BIZ_HEAD[1],
+                    note_no=None,
+                    title=_BIZ_HEAD[1],
+                    text_html=seg[:500_000],
+                    text_md=md,
+                    char_len=len(md),
                 )
-                n += 1
-        _mark(sess, raw.rcept_no, raw.ticker, "OK" if n else "FAIL")
+            )
+            n += 1
+        # ② 연결재무제표 주석 → 주석 번호 단위
+        for note_no, title, note_html in _split_notes(html):
+            md = _to_md(note_html)
+            sess.add(
+                ReportSection(
+                    rcept_no=raw.rcept_no,
+                    section_key="III.3.연결주석",
+                    note_no=note_no,
+                    title=title,
+                    text_html=note_html[:500_000],
+                    text_md=md,
+                    char_len=len(md),
+                )
+            )
+            n += 1
+        _mark(sess, raw.rcept_no, raw.ticker, "OK" if n > 1 else "FAIL")
         sess.commit()
         print(f"[{raw.ticker}] {raw.fiscal_year} rcept={raw.rcept_no}: {n} 섹션")
     sess.close()
