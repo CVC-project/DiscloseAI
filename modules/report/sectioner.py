@@ -20,8 +20,10 @@ _HERE = os.path.dirname(__file__)
 # 사업의 내용 절(통짜 저장) 패턴
 _BIZ_HEAD = (r"II\.\s*사업의\s*내용", "II.사업의내용")
 # 연결재무제표 주석 = DART XML의 <TITLE>N. 제목 (연결)</TITLE> 태그로 구분 (주N 아님).
+# 제목은 [^<]로 태그 경계를 못 넘게 — '(연결)' 없는 사업내용 제목("6. 주요계약…")에서 시작해
+# 다음 '(연결)'까지 통째로 삼켜 428KB 괴물 블록을 만들던 사고(NAVER) 방지.
 _NOTE_TITLE_RE = re.compile(
-    r"<TITLE[^>]*>\s*(\d{1,2})\.\s*(.+?)\s*\(\s*연결\s*\)\s*</TITLE>", re.S
+    r"<TITLE[^>]*>\s*(\d{1,2})\.\s*([^<]+?)\s*\(\s*연결\s*\)\s*</TITLE>"
 )
 
 
@@ -56,16 +58,16 @@ def _to_md(html: str) -> str:
 def _split_notes(full_xml: str) -> list[tuple[str, str, str]]:
     """연결재무제표 주석을 주석 번호 단위로 분할 → [(note_no, title, html), ...].
 
-    DART XML: '연결재무제표 주석' 헤더 이후 <TITLE>N. 제목 (연결)</TITLE>가 각 주석 시작.
-    '(연결)' 접미로 별도재무제표 주석과 구분. 주석 번호가 1로 리셋되면 별도 시작이므로 중단.
+    각 연결 주석은 <TITLE>N. 제목 (연결)</TITLE>로 시작('(연결)' 접미로 별도 주석과 구분).
+    '연결재무제표 주석' 헤더는 목차·요약에도 반복 등장(NAVER는 11회)해 신뢰 불가 →
+    주석 번호 1(연결)이 처음 나오는 지점을 연결 주석 시작으로 잡는다. 사업의 내용 절 제목엔
+    '(연결)' 접미가 없어 오검출되지 않는다. 번호가 리셋/역행하면(별도 시작 등) 중단.
     """
-    h = re.search(r"연결재무제표\s*주석", full_xml)
-    if not h:
-        return []
-    region = full_xml[h.end():]
-    hits = list(_NOTE_TITLE_RE.finditer(region))
+    hits = list(_NOTE_TITLE_RE.finditer(full_xml))
     if not hits:
         return []
+    start = next((i for i, m in enumerate(hits) if m.group(1) == "1"), 0)
+    hits = hits[start:]
     out: list[tuple[str, str, str]] = []
     for i, m in enumerate(hits):
         no = m.group(1)
@@ -73,9 +75,9 @@ def _split_notes(full_xml: str) -> list[tuple[str, str, str]]:
         if out and int(no) <= int(out[-1][0]):
             break
         title = re.sub(r"\s+", " ", m.group(2)).strip()
-        start = m.start()
-        end = hits[i + 1].start() if i + 1 < len(hits) else min(len(region), start + 300_000)
-        out.append((no, title, region[start:end]))
+        s = m.start()
+        e = hits[i + 1].start() if i + 1 < len(hits) else min(len(full_xml), s + 300_000)
+        out.append((no, title, full_xml[s:e]))
     return out
 
 
