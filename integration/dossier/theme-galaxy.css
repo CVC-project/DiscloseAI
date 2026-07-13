@@ -1,0 +1,61 @@
+/* theme-galaxy.css — dossier 시맨틱 테마 정본 (Mint 팔레트 + Pretendard/IBM Plex Mono)
+ * D3 2계층 SSOT의 층 2 (표면별, 공유 안 함). 규칙 전문: 루트 DESIGN.md.
+ * link 현황 (2026-07-12 정본 승격):
+ *   - business.html: link ✓ — 팔레트·기본색은 이 파일, 페이지 고유 토큰(--panel2·--soft·--muted)만 인라인.
+ *   - galaxy.html: 의도적 미링크 — 해방판 자체 :root가 자구 표준(값은 이 파일과 동일). tokens.css만 link.
+ *   - firm.html: 예외 — v1 인디고/galaxy 이중 룩이라 [data-theme="galaxy"] 스코프 인라인 CSS 사용(link 시 v1 룩 오염).
+ * 팔레트·폰트 값 출처: design/prototypes/현금은하수_해방판.html :root (자구 그대로).
+ * 폰트 파일은 assets/fonts/에 로컬화 완료 — 미배치 환경에서는 아래 fallback 스택으로 degrade. */
+
+/* ── 폰트 (Phase 0-B에서 아래 src 경로에 woff2 배치 시 활성화) ── */
+@font-face {
+  font-family: 'Pretendard Local';
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('assets/fonts/pretendard/PretendardVariable.woff2') format('woff2-variations');
+}
+@font-face {
+  font-family: 'IBM Plex Mono Local';
+  font-weight: 400;
+  font-display: swap;
+  src: url('assets/fonts/ibm-plex-mono/IBMPlexMono-Regular.latin.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Mono Local';
+  font-weight: 500;
+  font-display: swap;
+  src: url('assets/fonts/ibm-plex-mono/IBMPlexMono-Medium.latin.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Mono Local';
+  font-weight: 600;
+  font-display: swap;
+  src: url('assets/fonts/ibm-plex-mono/IBMPlexMono-SemiBold.latin.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Mono Local';
+  font-weight: 700;
+  font-display: swap;
+  src: url('assets/fonts/ibm-plex-mono/IBMPlexMono-Bold.latin.woff2') format('woff2');
+}
+
+:root {
+  /* Mint 팔레트 (해방판 :root 자구 그대로) */
+  --mint: #74EEC6;
+  --cyan: #5CC7EA;
+  --gold: #E9C46B;
+  --coral: #EC8C6A;
+  --steel: #7590B0;
+  --green: #63d68e;
+
+  --bg: #05060d;
+  --text: #eef4fb;
+  --dim: #8fa1b6;
+  --dim2: #5c6b80;
+  --panel: rgba(12, 17, 30, .78);
+  --line: rgba(140, 170, 210, .13);
+
+  /* 폰트 스택 — 로컬 우선, 시스템 fallback (woff2 미배치 시 자동 degrade) */
+  --mono: 'IBM Plex Mono Local', 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
+  --sans: 'Pretendard Local', 'Pretendard Variable', Pretendard, -apple-system, 'Segoe UI', sans-serif;
+}

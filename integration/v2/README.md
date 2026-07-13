@@ -43,7 +43,7 @@ integration/v2/
 
 ## 데이터
 
-`../data/*.json`(= `integration/data/`, v1 `extract_data.py` 산출물) + `../../modules/relation/data/graph_top50.json`을 `data/loader.js`가 fetch. 실패 시 `data/mock.js` fallback.
+`../data/*.json`(= `integration/data/`, v1 `extract_data.py` 산출물 — relation 그래프 동기화 사본 포함 4종)을 `data/loader.js`가 fetch. 실패 시 `data/mock.js` fallback.
 
 ## 절대 규칙
 

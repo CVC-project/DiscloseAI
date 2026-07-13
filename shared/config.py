@@ -20,3 +20,14 @@ SUPABASE_KEY = os.getenv("SUPABASE_KEY", "")
 
 # DB 연결 문자열 (Supabase PostgreSQL)
 DATABASE_URL = os.getenv("DATABASE_URL", "")
+
+# report 모듈 LLM 서빙 (Phase 4 — A100 SGLang, OpenAI 호환). DOSSIER_TABS_PLAN R4 착수 조건.
+#   REPORT_LLM_BASE_URL : SGLang 엔드포인트 URL  (예: http://<GPU_IP>:30000/v1  ← SGLang 기본 포트 30000)
+#   REPORT_LLM_API_KEY  : 엔드포인트 인증키        (기본 임의값 가능, 예: "EMPTY")
+#   REPORT_LLM_MODEL    : 요청 모델명             (배포: Qwen/Qwen3-32B-AWQ ← A100 80GB, AWQ 4bit 가중치 ~18GB. 최종은 /galaxy-bench 판정)
+# 서버(localhost 바인딩): `python -m sglang.launch_server --model-path Qwen/Qwen3-32B-AWQ --host 127.0.0.1 --port 30000 --attention-backend triton` (구조화 출력=xgrammar).
+# 접속: 노트북에서 SSH 터널 `ssh -N -L 30000:127.0.0.1:30000 <user>@<GPU_IP>` → base_url = http://127.0.0.1:30000/v1
+# ⚠️ SSH 접속정보(IP·ID·PW)는 여기 넣지 않는다 — 서버 로그인용일 뿐. 여긴 SGLang 엔드포인트 URL·키만.
+REPORT_LLM_BASE_URL = os.getenv("REPORT_LLM_BASE_URL", "")
+REPORT_LLM_API_KEY = os.getenv("REPORT_LLM_API_KEY", "")
+REPORT_LLM_MODEL = os.getenv("REPORT_LLM_MODEL", "Qwen/Qwen3-32B-AWQ")

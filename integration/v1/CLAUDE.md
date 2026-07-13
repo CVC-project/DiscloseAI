@@ -23,10 +23,10 @@
 
 ```
 [Source 계층 — 각 담당자 소유]            [추출 계층]               [렌더 계층]
-modules/relation/data/graph_top50.json ─┐
+modules/relation/data/graph_top50.json ─┐ (무변환 동기화)
 modules/financial/data/financial.db    ─┤
 modules/disclosure/data/disclosure.db  ─┼──→ extract_data.py ──→ data/*.json ──→ dashboard.html
-modules/price/quiz_data.py             ─┘                                       (fetch + 시각화)
+modules/price/quiz_data.py             ─┘   (또는 -m integration.build_data)     (fetch + 시각화)
 ```
 
 ## 파일 구성
@@ -39,8 +39,10 @@ modules/price/quiz_data.py             ─┘                                   
 | `../data/eqs_summary.json` | financial_local 테이블 → 50기업 EQS 5모듈·등급·재무 요약 (v1·v2 공유) |
 | `../data/disclosures.json` | disclosure_local + financial_statement → 50기업 최근 공시·분기 재무 |
 | `../data/price_scenarios.json` | price.quiz_data.QUIZ_LIST → 15개 과거 공시 시나리오 (timemachine 모드용) |
+| `../data/graph_top50.json` | modules/relation 산출물 **무변환 동기화 사본** (정본은 modules/relation/data/) — v1·v2가 fetch |
+| `../build_data.py` | 데이터 갱신 오케스트레이터 — extract_data + opt-in(--business·--history) 단일 진입점 |
 
-> **참고**: relation 데이터는 별도 파일 없음. dashboard.html이 `../../modules/relation/data/graph_top50.json`을 직접 fetch한다 (integration이 루트로 승격돼 relation은 `modules/`에 남으므로 `../../modules/relation/`. relation은 이미 JSON 산출물이라 변환 불필요).
+> **참고**: relation 그래프는 extract_data.py가 `integration/data/graph_top50.json`으로 동기화하고 dashboard.html·v2 loader가 그 사본을 fetch한다 (2026-07-12 — 화면 fetch 표면을 integration/ 아래로 통일, ARCHITECTURE §1-6 ⑴. 과거: `../../modules/relation/` 직접 fetch).
 
 ## firm 상세 도시에 (`../dossier/`) — 데이터 주도 단일 템플릿
 
@@ -50,11 +52,11 @@ ENTER CORPORATION 풀스크린 분석은 `openFullAnalysis()`(dashboard.html)가
 |---|---|
 | `../dossier/firm.html` | **단일 템플릿**. `?ticker=`로 `./data/firm_<t>.json` fetch해 렌더. financial `_HTML_TEMPLATE`에서 파생(CSS·Chart.js 바이트 동일) |
 | `../dossier/data/firm_<t>.json` | per-firm 데이터(48개). 기존 firm HTML의 `const DATA` 무손실 추출(원 단위 슈퍼셋) |
-| `../dossier/extract_firm_json.py` | 1회성 추출 — `docs/prototype/firm_*.html` → `dossier/data/*.json` |
+| ~~`../dossier/extract_firm_json.py`~~ | 1회성 추출(`docs/prototype/firm_*.html` → `dossier/data/*.json`) **완료 후 은퇴·제거** — 원본 HTML 삭제로 재실행 불가, git 이력 보존 |
 | `../dossier/build_firm_template.py` | 템플릿 빌드 — financial `_HTML_TEMPLATE` → `firm.html` |
 
 - **HTTP 서빙 필수**: firm.html이 JSON을 fetch → `file://`에서는 CORS 차단(iframe도 차단). `python -m http.server`에서만 동작(기존 제약과 동일).
-- **재생성**: `python integration/dossier/build_firm_template.py` (템플릿) / `python integration/dossier/extract_firm_json.py` (데이터). 단, 데이터는 기존 HTML에서 추출하므로 financial이 firm HTML을 다시 만들면 그때 재추출.
+- **재생성**: `python integration/dossier/build_firm_template.py` (템플릿). 데이터(`firm_*.json` 48개)는 1회성 추출 완료본 — 추출 스크립트·원본 HTML은 git 이력에만 존재. financial 데이터가 갱신되면 `dashboard.py`에 JSON 직접 출력(`write_firm_json`)을 추가하는 방향(A 담당과 협의, ARCHITECTURE 이슈 #2 후속).
 
 ## 데이터 소스 계약 (각 모듈의 어떤 필드를 뽑는가)
 
@@ -81,7 +83,7 @@ extract_data.py가 의존하는 **테이블·컬럼·Python 상수**. 각 모듈
 - 기대 레코드: 15건 (top50 중 ~30% 커버)
 
 ### relation 모듈 (Source: `modules/relation/data/graph_top50.json`)
-- **이 폴더에서 변환 안 함.** dashboard.html이 직접 fetch.
+- **변환 없음** — extract_data.py가 `../data/graph_top50.json`으로 **무변환 동기화(byte 복사)**, 화면은 그 사본을 fetch.
 - 스키마: `[{n, t, s, sz, mc, group, rl:[...]}]` (node list with relation list)
 
 ## 실행 방법
@@ -139,7 +141,7 @@ python -m integration.v1.extract_data
 ### 데이터 로드 (init 초입)
 ```js
 const [relData, eqsData, discData, priceData] = await Promise.all([
-  fetch('../../modules/relation/data/graph_top50.json').then(r => r.json()),
+  fetch('../data/graph_top50.json').then(r => r.json()),
   fetch('../data/eqs_summary.json').then(r => r.ok ? r.json() : []).catch(() => []),
   fetch('../data/disclosures.json').then(r => r.ok ? r.json() : {}).catch(() => ({})),
   fetch('../data/price_scenarios.json').then(r => r.ok ? r.json() : []).catch(() => [])

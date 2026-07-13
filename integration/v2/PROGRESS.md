@@ -143,3 +143,12 @@ SolarCanvas: real-data sectors prop 기반 (memberCount 비례 행성 크기)
 - **회사 → 관계기업 행성 클릭 시 그 기업으로 이동** — J6 이후
 - **firm_<ticker>.html iframe 풀스크린 overlay** — 1차는 새 창. iframe overlay는 dashboard 풀스크린 패턴 차용해 후속에 추가
 - **`window.__v2_dev` 디버깅 hook 제거** — 마감 직전 production 빌드에서 정리
+
+---
+
+## 2026-07-11 — CORPORATION DOSSIER 3탭 전환 (DOSSIER_TABS Phase 0~S2 요약)
+
+- ENTER CORPORATION: 새 창(`window.open`) → **iframe 오버레이 + `DOSSIER_TABS` 탭바** 전환 완료 — ① 사업·기업(business.html) ② 현금 은하수(galaxy.html, 005930만) ③ EQS(firm.html?theme=galaxy)
+- `injectV2Theme()` 폐기 — firm.html `[data-theme="galaxy"]` 스코프 셀프 테마 + dossier 공용 `tokens.css`
+- 커밋: 46b3e5e(Phase 0 골든·토큰) · 1ff6dab(Phase 1 galaxy 데이터 구동) · 1b534da(Phase 2 탭바) · 890241e(S2 business 이식) · 04a59d5(3탭 디자인 통일) · 472d6cd(로고·AI 사이드바 토글)
+- 상세 계획·설계 결정: [integration/dossier/DOSSIER_TABS_PLAN.md](../dossier/DOSSIER_TABS_PLAN.md) (본 파일은 요약만 기록)
