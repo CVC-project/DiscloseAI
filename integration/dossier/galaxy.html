@@ -1252,7 +1252,8 @@ class Component extends DCLogic {
     kids.push(h('div', { key: 'am', style: { fontFamily: 'var(--mono)', fontSize: '42px', fontWeight: 700, color: c, margin: '6px 0 2px', textShadow: `0 0 24px ${this.rgba(c, .4)}` } }, d.amt));
     if (d.raw) kids.push(h('div', { key: 'rw', style: { fontFamily: 'var(--mono)', fontSize: '11.5px', color: 'var(--dim2)' } }, '원본 ' + d.raw + ' 백만원'));
     kids.push(this.subheadEl('①', '무엇인가요', '정의 · 의미', c));
-    d.what.forEach((t, i) => kids.push(h('p', { key: 'w' + i, style: { margin: '0 0 13px', fontSize: '16px', lineHeight: 1.85 } }, ...this.rich(t, c))));
+    (d.what || []).forEach((t, i) => kids.push(h('p', { key: 'w' + i, style: { margin: '0 0 13px', fontSize: '16px', lineHeight: 1.85 } }, ...this.rich(t, c))));
+    if (d.links && d.links.length) {
     kids.push(this.subheadEl('②', '어디와 이어지나요', '연결 지도 — 줄에 마우스를 올리면 가운데 행이 빛나요', c));
     kids.push(h('div', { key: 'lk', style: { display: 'grid', gap: '7px' } }, d.links.map((l, i) => {
       const [tn, tc] = this.TBL[l.t];
@@ -1267,6 +1268,7 @@ class Component extends DCLogic {
         h('span', { style: { fontSize: '13.5px', flex: 1 } }, l.txt),
         l.a ? h('span', { style: { fontFamily: 'var(--mono)', fontSize: '12.5px', color: tc } }, l.a) : null);
     })));
+    }
     if (d.lnote) kids.push(h('p', { key: 'ln', style: { margin: '10px 0 0', fontSize: '13.5px', color: 'var(--dim)', lineHeight: 1.7 } }, ...this.rich(d.lnote, c)));
     kids.push(this.subheadEl('③', '왜 그런가요', d.why.sub || '규정 · 시각화', c));
     (d.why.body || []).forEach((t, i) => kids.push(h('p', { key: 'y' + i, style: { margin: '0 0 13px', fontSize: '15.5px', lineHeight: 1.85 } }, ...this.rich(t, c))));
