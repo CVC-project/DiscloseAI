@@ -60,19 +60,19 @@
   --sans: 'Pretendard Local', 'Pretendard Variable', Pretendard, -apple-system, 'Segoe UI', sans-serif;
 }
 
-/* ── 표준 패널 엣지 (DESIGN.md §패널 엣지 — galaxy ZONE 카드 정본) ──
- * radius 10px + ㄱ자 코너 브래킷(14×14·2px·외곽 3px 라운드·top-left+bottom-right).
- * accent는 --gx-accent 오버라이드(존별 색). galaxy.html 인라인·v2 하드코딩과 값 동일. */
+/* ── 표준 패널 엣지 (DESIGN.md §패널 엣지 — 메인 셸 컨셉) ──
+ * 얇고(1px) 각진(샤프 코너) 10px ㄱ자 브래킷, top-left+bottom-right, opacity 0.7.
+ * accent = --edge-accent(기본 --mint) — 섹터색 동적 오버라이드 지점(`[data-accent]` 또는 인라인). */
 .gx-panel {
   position: relative;
   background: var(--panel);
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: 3px;
 }
 .gx-panel::before,
 .gx-panel::after {
-  content: ''; position: absolute; width: 14px; height: 14px;
-  border: 2px solid var(--gx-accent, var(--mint));
+  content: ''; position: absolute; width: 10px; height: 10px;
+  border: 1px solid var(--edge-accent, var(--mint)); opacity: 0.7;
 }
-.gx-panel::before { top: -1px; left: -1px; border-right: 0; border-bottom: 0; border-radius: 3px 0 0 0; }
-.gx-panel::after  { bottom: -1px; right: -1px; border-left: 0; border-top: 0; border-radius: 0 0 3px 0; }
+.gx-panel::before { top: -1px; left: -1px; border-right: 0; border-bottom: 0; }
+.gx-panel::after  { bottom: -1px; right: -1px; border-left: 0; border-top: 0; }

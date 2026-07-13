@@ -6,6 +6,10 @@
 <!-- ===== dossier 인프라 (폰트 로컬화 — Phase 0-B/1, CDN→벤더링 R12) ===== -->
 <!-- 폰트: assets/fonts/ 로컬 벤더링(@font-face는 아래 <style>). GitHub Pages 오프라인 안전 -->
 <link rel="stylesheet" href="tokens.css"><!-- D3 공유 프리미티브 (galaxy는 자체 :root가 표준, 프리미티브만 추가) -->
+<script>
+  /* 산업군 테마 — galaxy(현금은하수)는 색=의미(재무흐름 문법)라 팔레트를 재테마하지 않는다. 프레임 액센트(--edge-accent)만 수용. */
+  (function(){ var a=new URLSearchParams(location.search).get('accent'); if(a) document.documentElement.style.setProperty('--edge-accent',a); })();
+</script>
 <script>window.__resources={};</script>
 <script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>

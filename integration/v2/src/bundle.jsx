@@ -2910,9 +2910,11 @@ function App() {
                 const enabled = tab.activeWhen === 'always' || GALAXY_TICKERS.has(corpOverlayTicker);
                 if (!enabled) return null;
                 const active = dossierTab === tab.id;
+                // 섹터색을 3탭 테마 액센트로 전달 (중공업·방산=보라 등 — 산업군별 동적 테마)
+                const sectorAccent = (sector && sector.color) || '#74EEC6';
                 return (
                   <iframe key={tab.id}
-                    src={`../dossier/${tab.src}?ticker=${corpOverlayTicker}${tab.id === 'eqs' ? '&theme=galaxy' : ''}`}
+                    src={`../dossier/${tab.src}?ticker=${corpOverlayTicker}${tab.id === 'eqs' ? '&theme=galaxy' : ''}&accent=${encodeURIComponent(sectorAccent)}`}
                     title={`${tab.id}-${corpOverlayTicker}`}
                     style={{position:'absolute', inset:0, width:'100%', height:'100%', border:'none', background:'#020408', display: active ? 'block' : 'none'}}
                     onLoad={undefined /* firm.html은 ?theme=galaxy 자체 테마(스코프 CSS) */}
