@@ -12,17 +12,18 @@
 
 ## integration과의 경계 (중요)
 - **`graph/export.py` → `data/graph_top50.json`이 integration과의 계약(contract)**이다. integration의 extract_data.py가 이 파일을 `integration/data/graph_top50.json`으로 **무변환 동기화**하고, v1 dashboard·v2 loader는 그 사본을 fetch한다 (export 재실행 후 `python -m integration.build_data`로 동기화 — 2026-07-12, 과거 직접 fetch).
-- **스키마(`[{n, t, s, sz, mc, group, rl:[...]}]`)를 바꾸면 integration이 조용히 깨진다.** 변경 시 [integration/v1/CLAUDE.md](../../integration/v1/CLAUDE.md)의 "데이터 소스 계약" + [docs/ARCHITECTURE.md](../../docs/ARCHITECTURE.md)를 함께 갱신할 것.
-- **역할 구분**: `viewer/`는 **관계 단독 탐색 도구**(relation 데이터만). 4개 모듈 **교차 분석·통합**은 integration 소유(relation은 거기에 그래프 산출물만 공급, 단방향).
+- **스키마(`[{n, t, s, sz, mc, group, rl:[...]}]`)를 바꾸면 integration이 조용히 깨진다.** 변경 시 [integration/CLAUDE.md](../../integration/CLAUDE.md)의 "데이터 소스 계약" + [docs/ARCHITECTURE.md](../../docs/ARCHITECTURE.md)를 함께 갱신할 것.
+- **역할 구분**: 관계 시각화는 **integration(v2 SectorMap)이 소유**. relation은 `graph/export.py → graph_top50.json` 그래프 산출물만 공급(단방향).
+  - > `viewer/`(관계 단독 탐색 도구)는 **2026-07-13 은퇴** — integration 무참조 + v2가 SectorMap으로 재구현해 이중 존재였음. git 이력 보존(복원 필요 시 이 커밋 이전). 디자인 일원화(트랙 B) 정리.
 
 ## 데이터 흐름 (파이프라인 = 폴더)
 
 ```
 ingest/     → DART + 공정위 OpenAPI + 사업보고서 주석 원천 획득 (순수 I/O)
 transform/  → K-IFRS 지분율 자동분류, 개인·비상장 필터, 중복 제거
-graph/      → NetworkX MultiDiGraph 구축 → JSON export
-viewer/     → 프로토타입 fork + fetch 로더로 Canvas 렌더
+graph/      → NetworkX MultiDiGraph 구축 → JSON export (→ integration이 fetch·시각화)
 storage/    → SQLite 로컬 DB (CompanyNode, RelationLocal)
+(viewer/    → 2026-07-13 은퇴 — 시각화는 integration v2 SectorMap 소유)
 ```
 
 ## 서브폴더별 한 줄 요약
@@ -32,7 +33,7 @@ storage/    → SQLite 로컬 DB (CompanyNode, RelationLocal)
 | [ingest/](ingest/CLAUDE.md) | DART·FTC·주석 API 호출 | 파라미터 표, rate limit, 재시도 |
 | [transform/](transform/CLAUDE.md) | 정제·분류 | K-IFRS 임계값, 필터 규칙, 기업명 정규화 |
 | [graph/](graph/CLAUDE.md) | NetworkX 그래프 | MultiDiGraph 스키마, 레이어 공존 규칙 |
-| [viewer/](viewer/CLAUDE.md) | Canvas 시각화 | sectors 색상, relation_type별 스타일 표 |
+| ~~viewer/~~ | ~~Canvas 시각화~~ | 2026-07-13 은퇴 (integration v2 SectorMap이 대체) |
 | [storage/](storage/CLAUDE.md) | SQLite 스키마 | 테이블 정의, Supabase 이전 계획 |
 
 > `skills/`(relation-collect·graph·audit)은 **모듈 로컬 참조 문서**다. 프로젝트 표준 `.claude/skills/` 밖이라 `/명령`으로 자동 호출되지 않음 — 작업 절차 메모로만 사용. 자동 호출이 필요하면 `.claude/skills/relation-*`로 승격(별도 합의).

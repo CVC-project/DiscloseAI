@@ -1,7 +1,7 @@
 # DiscloseAI v2 — Corporate Galaxy Atlas
 
-> v2 디자인 prototype을 React + Babel(in-browser)로 신규 구축한 UI (정본 트랙).
-> v1(`../v1/dashboard.html`)은 fallback으로 유지.
+> React + Babel(in-browser)로 구축한 **유일 서빙 UI (정본)**.
+> (v1은 2026-07-13 폐지 — git 이력 보존. 파이프라인은 `integration/extract_data.py`.)
 
 ## 구동
 
@@ -17,7 +17,7 @@ python -m http.server 8000
 
 | ID | 상태 | 내용 |
 |---|---|---|
-| J1 | ✅ 완료 | 디코드 + IntroScreen 골격 |
+| J1 | ✅ 완료 | 디코드 + 골격 (IntroScreen은 2026-07-13 제거 — 진입 즉시 galaxy) |
 | J2 | ✅ | TopTabs + Galaxy 진입 화면 |
 | J3 | ✅ | 데이터 wiring layer (loader + valuation + narration + mock) |
 | J4 | ✅ | Sector 단계 (SectorOverviewPanel + DAILY HIGHLIGHTS) |
@@ -33,7 +33,7 @@ python -m http.server 8000
 ```
 integration/v2/
 ├── index.html        # 진입점 (loader → adapter → bundle 로드)
-├── src/              # React 소스 (bundle.jsx 정본 + adapter.js + galaxy/solar/companies/app)
+├── src/              # React 소스 (bundle.jsx 정본 + adapter.js)
 ├── data/             # wiring 모듈 (loader/valuation/narration/mock)
 ├── assets/           # 폰트(16), 이미지(2)
 └── styles.css        # v2 CSS (46.6KB, 298 rules)
@@ -43,10 +43,10 @@ integration/v2/
 
 ## 데이터
 
-`../data/*.json`(= `integration/data/`, v1 `extract_data.py` 산출물 — relation 그래프 동기화 사본 포함 4종)을 `data/loader.js`가 fetch. 실패 시 `data/mock.js` fallback.
+`../data/*.json`(= `integration/data/`, `integration/extract_data.py` 산출물 — relation 그래프 동기화 사본 포함 4종)을 `data/loader.js`가 fetch. 실패 시 `data/mock.js` fallback.
 
 ## 절대 규칙
 
-- `../v1/dashboard.html` **기능** 수정 금지 (fallback 안정성) — 경로 조정만 예외
-- `../v1/extract_data.py` 로직 수정 금지 (JSON 스키마 단일 출처)
+- `../extract_data.py` 로직 수정 금지 (JSON 스키마 단일 출처 — 계약: `../CLAUDE.md`)
 - 빌드 도구 도입 금지 (React-CDN + Babel-in-browser 유지)
+- UI 작업 전 루트 `DESIGN.md` 준수

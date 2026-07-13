@@ -3,7 +3,7 @@
  * dashboard.html의 _calcValuation·_percentileBadge·_trillionFmt·_sparkline 포팅.
  * IIFE + window.DiscloseAI 글로벌로 export (Babel in-browser 환경, 빌드 도구 없음).
  *
- * 참조: integration/v1/dashboard.html L4844-4920
+ * 원본: 구 v1 dashboard.html L4844-4920 — v1 폐지(2026-07-13), 이 포팅본이 정본. 원본은 git 이력
  */
 (function () {
   "use strict";

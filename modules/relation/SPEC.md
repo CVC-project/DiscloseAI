@@ -1,5 +1,7 @@
 # DiscloseAI — Relation 모듈 MVP (지분·계열, 코스피 상위 50개)
 
+> ⚠️ **2026-07-13 갱신 — `viewer/` 은퇴**: 관계 시각화는 integration(v2 SectorMap)이 소유하며 `viewer/`는 삭제됨(git 이력 보존). 아래 §시각화·viewer 관련 서술은 **Phase 2 설계 이력**으로만 유효. 현행 계약은 `graph/export.py → graph_top50.json`(integration이 fetch)까지다.
+
 > **이 문서의 역할 — SPEC (Single Source of Truth)**
 >
 > Relation 모듈의 Phase 1·2 전체 상세 명세. 함수 시그니처·테스트 fixtures·완료 기준·리스크 포함.
