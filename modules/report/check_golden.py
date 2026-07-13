@@ -198,6 +198,33 @@ def check(ticker: str) -> list[str]:
                 key, typ = sch
                 if not isinstance(vd.get(key), typ):
                     gaps.append(f"[{k}] viz_data 스키마: {w['viz']}에 '{key}' 없음/형식 오류")
+    # ── 7) 주석 라우팅 원장 — "모든 실주석이 처리됐는가" (사용자 요구: 전 주석 완전성) ──
+    # reports.db가 있으면: DB 주석 전수가 ledger에 있고, MISSING 0, excluded는 reason 필수,
+    # 본문 주N 인용이 실재 주석인지(유령 인용) 검사.
+    db = os.path.join(_HERE, "data", "reports.db")
+    rcept = (G.get("corp") or {}).get("rcept_no") or {"005930": "20260310002820", "000660": "20260317000635"}.get(ticker)
+    if os.path.exists(db) and rcept:
+        import sqlite3
+        con = sqlite3.connect(db)
+        db_notes = {str(r[0]) for r in con.execute(
+            "select note_no from report_section where rcept_no=? and note_no is not null", (rcept,))}
+        con.close()
+        if db_notes:
+            ledger = (G.get("meta") or {}).get("routing_ledger") or {}
+            if not ledger:
+                gaps.append(f"[원장] routing_ledger 없음 (실주석 {len(db_notes)}개 미처리)")
+            else:
+                for n in sorted(db_notes, key=int):
+                    ent = ledger.get(n)
+                    if not ent:
+                        gaps.append(f"[원장] 주{n} 원장 누락")
+                    elif ent.get("to") == "MISSING":
+                        gaps.append(f"[원장] 주{n} '{ent.get('title','')}' 미라우팅")
+                    elif ent.get("to") == "excluded" and not ent.get("reason"):
+                        gaps.append(f"[원장] 주{n} 제외 사유 없음")
+                ghost = set(re.findall(r"주\s?(\d{1,2})(?=\D|$)", blob_all)) - db_notes
+                for n in sorted(ghost, key=int):
+                    gaps.append(f"[원장] 유령 인용 주{n} — 실주석에 없음")
     return gaps
 
 

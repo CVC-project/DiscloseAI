@@ -184,3 +184,25 @@
 | galaxy.html 데이터 구동(pv·sub·bsbar·appendix) + 방어 렌더 | ✅ | S2 렌더러 |
 | write_sk_golden.py(수작업 스크립트) | ✅ | S3 prose-writer 프롬프트·fact-sheet 계약의 원형 |
 | llm.py·SSH 터널 | 보류 | 산문에서 제외, 기계 보조 후보로만 |
+
+### R6.6 주석 라우팅 원장 — "모든 실주석이 처리됐는가" (구현 완료)
+
+- **원칙**: 그 회사 사업보고서의 **실주석 전수**(reports.db 기준)가 `meta.routing_ledger`에 매핑돼야 한다: `dive:cited`(본문 인용) / `appendix:nX` / `row:<id>`(패널 행 커버) / `excluded`(+reason 필수, 잔액성 소액 등).
+- check_golden §7이 기계 검증: 원장 누락·MISSING·사유 없는 제외·**유령 인용**(본문 주N이 실주석에 없음 — corp.rcept_no 기준) 전부 FAIL.
+- 실증: 도입 즉시 SK 미커버 11건(리스·관계기업·이연법인세 등) 노출 → 정당 인용 5건 추가 + 잔액성 4건 명시 제외, **SK corp.rcept_no가 삼성 것으로 남은 메타 버그**도 유령 인용 검사로 적발·수정. 양 골든 원장 완비 PASS.
+
+### R6.7 S6 인터랙션 QA — UI/UX 동작 검증 (구현 완료)
+
+- `tests/report/test_galaxy_interaction.py` (playwright, GALAXY_TICKER 환경변수): ①A9-② 제스처당 정거장 ≤1칸(**정거장 좌표계=knots 순서**로 측정 — DOM 행 좌표계는 오탐) ②A9-③ 450ms 유휴 후 단번 재동기화는 허용 스펙 ③스크롤 멈춤 없음 ④핀→Esc 해제 ⑤펼침 토글 왕복 ⑥APPENDIX 카드 본문 비지 않음(빈 카드 회귀) ⑦1024px 가로 오버플로 0 ⑧상호작용 전 과정 콘솔 에러 0. 양 골든 7/7 PASS.
+- 교훈: 첫 실행의 "17칸 점프"는 버그가 아니라 A9-③ 정상 동작 — **오라클은 스타일가이드 자구 수준으로 정밀해야** 오탐 없이 진짜 버그(멈춤·씹힘·다중 전환)를 잡는다. /galaxy-golden S5에 이 스위트 통과를 게이트로 편입.
+
+### R6.8 모델 티어링 — 비용 효율화
+
+| 작업 | 실행자 | 모델 | 근거 |
+|---|---|---|---|
+| 수집·분할·series·체커·항등식·렌더 스윕·인터랙션 QA | **코드**(pytest·check_golden) | — | 결정론·무료 — 최대한 코드로 |
+| S1 note-extractor / S5 completeness-auditor | 서브에이전트 | **sonnet** | 표 판독·대조 위주(창의성 불요) |
+| 기존 test-generator | 서브에이전트 | haiku | 유지 |
+| S3 prose-writer / S4 accuracy-verifier | 서브에이전트 | **상속(최상위)** | 골든 깊이 산문·적대 검증 = 품질 병목, 여기만 고급 모델 |
+| 오케스트레이션(/galaxy-golden) | 메인 세션 | 상속 | 판단·라우팅 |
+- 절감 장치: 카드 루프는 **위반 카드만** 재작성(전량 재생성 금지) · fact-sheet 캐시(재추출 불요) · 렌더/문체/정합은 전부 코드 체커가 선차단해 에이전트 호출 수 최소화.
