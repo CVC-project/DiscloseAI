@@ -1,7 +1,9 @@
 # modules/report — 사업보고서 원문·정형계정 수집 파이프라인
 
 > 자동 로드(Progressive Disclosure). 부모 규약: [../../CLAUDE.md](../../CLAUDE.md)
-> 소유: 프로젝트 리더 (Q1 승인 2026-07-08). 실행 계획: [integration/dossier/DOSSIER_TABS_PLAN.md](../../integration/dossier/DOSSIER_TABS_PLAN.md) Phase 3·§2
+> 소유: 프로젝트 리더 (Q1 승인 2026-07-08).
+> **설계 정본**: [integration/dossier/DOSSIER_TABS_PLAN.md](../../integration/dossier/DOSSIER_TABS_PLAN.md) §6 (하네스 설계).
+> **▶ Phase 4 착수 = [PHASE4_PLAN.md](PHASE4_PLAN.md) 먼저 읽기** — 실행 순서(G0~G8)·세션 분할·현재 상태·확정 결정(held-out=NAVER 등). 새 세션 시작점.
 
 ## 이 모듈의 목적
 
