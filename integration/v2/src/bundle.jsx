@@ -18,7 +18,7 @@ function TweakButton() { return null; }
 // galaxy.jsx — Realistic Andromeda-style spiral galaxy + 3D-tilted solar system
 
 const SECTOR_PALETTE = (window.__realData && window.__realData.sectors && window.__realData.sectors.length) ? window.__realData.sectors : [
-  { id: 'semi',    ko: '반도체',     en: 'Semiconductor',   color: '#5eead4', cap: 980 },
+  { id: 'semi',    ko: '반도체',     en: 'Semiconductor',   color: '#74EEC6', cap: 980 },
   { id: 'fin',     ko: '금융',       en: 'Financials',      color: '#fbbf24', cap: 720 },
   { id: 'auto',    ko: '자동차',     en: 'Automotive',      color: '#a78bfa', cap: 540 },
   { id: 'bio',     ko: '바이오',     en: 'Biotech',         color: '#f472b6', cap: 410 },
@@ -605,7 +605,7 @@ function SolarSystem({ activeSectorId, onSelectSector, sectorVisual, orbitMotion
         const ring = orbitRings[i];
         const sec = SECTOR_PALETTE[i];
         const isActive = activeSectorId === sec.id;
-        const useColor = sectorVisual === 'mono' ? '#5eead4' : sec.color;
+        const useColor = sectorVisual === 'mono' ? '#74EEC6' : sec.color;
         ctx.strokeStyle = isActive
           ? useColor + 'b0'
           : useColor + '24';
@@ -825,7 +825,7 @@ const RELATIONS = (window.__realData && window.__realData.relations) ? window.__
 };
 
 const REL_STYLES = {
-  subsidiary:  { color: '#5eead4', dash: [],         label: '종속기업',   sub: 'K-IFRS · >50%' },
+  subsidiary:  { color: '#74EEC6', dash: [],         label: '종속기업',   sub: 'K-IFRS · >50%' },
   associate:   { color: '#a78bfa', dash: [],         label: '관계기업',   sub: '20–50%' },
   significant: { color: '#fbbf24', dash: [],         label: '유의적 투자', sub: '5–20%' },
   group:       { color: '#94a3b8', dash: [6, 4],     label: '계열사',    sub: '공정위 지정' },
@@ -1340,7 +1340,7 @@ function CompanyDisclosurePanel({ company, sector, onBack, onSelect, onEnterDisc
   const relCount = React.useMemo(() => {
     return (RELATIONS[company.code] || []).reduce((acc, r) => acc + ((RD.discByTicker && RD.discByTicker[r.code]) || []).length, 0);
   }, [company.code]);
-  const accentColor = sector ? sector.color : '#5eead4';
+  const accentColor = sector ? sector.color : '#74EEC6';
   return (
     <div className="panel panel-tl" style={{'--accent': accentColor}}>
       <div className="panel-head">
@@ -1352,7 +1352,7 @@ function CompanyDisclosurePanel({ company, sector, onBack, onSelect, onEnterDisc
         <button className="back-link" onClick={onBack}>← SECTOR</button>
       </div>
       <div className="panel-body" style={{display: 'flex', flexDirection: 'column'}}>
-        <div style={{padding: '5px 10px 4px', fontFamily: 'var(--font-mono,monospace)', fontSize: 9, letterSpacing: '.08em', color: '#5eead4', borderBottom: '1px solid rgba(94,234,212,0.1)'}}>RECENT DISCLOSURES</div>
+        <div style={{padding: '5px 10px 4px', fontFamily: 'var(--font-mono,monospace)', fontSize: 9, letterSpacing: '.08em', color: '#74EEC6', borderBottom: '1px solid rgba(116, 238, 198,0.1)'}}>RECENT DISCLOSURES</div>
         {ownDiscs.length === 0 && <div style={{padding: '14px 10px', color: '#475569', fontSize: 11}}>수집된 공시 없음</div>}
         {ownDiscs.map((d, i) => (
           <div key={i} className={'disc-feed-row' + (!!d.high_impact ? ' hi' : '')} onClick={() => onSelect && onSelect(d)}>
@@ -1383,7 +1383,7 @@ function CompanyDisclosurePanel({ company, sector, onBack, onSelect, onEnterDisc
             ))}
           </div>
         )}
-        <div style={{marginTop: 'auto', padding: '10px', borderTop: '1px solid rgba(94,234,212,0.08)'}}>
+        <div style={{marginTop: 'auto', padding: '10px', borderTop: '1px solid rgba(116, 238, 198,0.08)'}}>
           <button className="disc-enter-btn" onClick={onEnterDisclosures}>ENTER DISCLOSURES ↗</button>
         </div>
       </div>
@@ -1397,7 +1397,7 @@ const DISC_SUM_META = {
   'Cash':          { emoji: '💰', color: '#fbbf24' },
   'Risk':          { emoji: '⚠️',  color: '#f87171' },
   'Hidden Agenda': { emoji: '🕵️', color: '#a78bfa' },
-  'Verdict':       { emoji: '🎯', color: '#5eead4' },
+  'Verdict':       { emoji: '🎯', color: '#74EEC6' },
 };
 
 function parseDisclosureSummary(summary) {
@@ -1452,13 +1452,13 @@ function QuarterlyTable({ disc }) {
   const fmtT = v => v != null ? (v / 1e12).toFixed(1) : '-';
   const fmtOi = v => v != null ? (v / 1e12).toFixed(2) : '-';
   return (
-    <div style={{marginTop: 8, paddingTop: 14, borderTop: '1px solid rgba(94,234,212,0.1)'}}>
+    <div style={{marginTop: 8, paddingTop: 14, borderTop: '1px solid rgba(116, 238, 198,0.1)'}}>
       <div style={{fontSize: 13, fontWeight: 700, color: '#f1f5f9', marginBottom: 8}}>
         📊 분기 재무 추이 (최근 {sorted.length}분기)
       </div>
       <table style={{width: '100%', borderCollapse: 'collapse', fontSize: 12}}>
         <thead>
-          <tr style={{borderBottom: '1px solid rgba(94,234,212,0.2)'}}>
+          <tr style={{borderBottom: '1px solid rgba(116, 238, 198,0.2)'}}>
             {['시점', '매출(조)', '영업이익(조)', 'ROE%'].map(h => (
               <td key={h} style={{padding: '5px 0', color: '#64748b', fontWeight: 600}}>{h}</td>
             ))}
@@ -1468,7 +1468,7 @@ function QuarterlyTable({ disc }) {
           {sorted.map((s, i) => {
             const oiColor = s.operating_income != null ? (s.operating_income >= 0 ? '#4ade80' : '#f87171') : '#94a3b8';
             return (
-              <tr key={i} style={{borderBottom: '1px solid rgba(94,234,212,0.06)'}}>
+              <tr key={i} style={{borderBottom: '1px solid rgba(116, 238, 198,0.06)'}}>
                 <td style={{padding: '5px 0', color: '#94a3b8'}}>{s.year}Q{s.quarter}</td>
                 <td style={{padding: '5px 0', color: '#e2e8f0'}}>{fmtT(s.revenue)}</td>
                 <td style={{padding: '5px 0', color: oiColor}}>{fmtOi(s.operating_income)}</td>
@@ -1563,14 +1563,14 @@ function DisclosureFullOverlay({ ticker, onClose }) {
     : null;
   return (
     <div style={{position: 'fixed', inset: 0, zIndex: 999, background: 'rgba(2,4,12,0.88)', backdropFilter: 'blur(18px)', display: 'flex', flexDirection: 'column'}}>
-      <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 20px', borderBottom: '1px solid rgba(94,234,212,0.2)', background: 'rgba(8,14,26,0.9)', flexShrink: 0}}>
+      <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 20px', borderBottom: '1px solid rgba(116, 238, 198,0.2)', background: 'rgba(8,14,26,0.9)', flexShrink: 0}}>
         <div style={{display: 'flex', alignItems: 'center', gap: 12}}>
-          <span style={{width: 8, height: 8, borderRadius: '50%', background: '#5eead4', boxShadow: '0 0 8px #5eead4', display: 'inline-block'}} />
-          <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 11, letterSpacing: '.12em', color: '#5eead4'}}>DISCLOSURE DOSSIER</span>
+          <span style={{width: 8, height: 8, borderRadius: '50%', background: '#74EEC6', boxShadow: '0 0 8px #74EEC6', display: 'inline-block'}} />
+          <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 11, letterSpacing: '.12em', color: '#74EEC6'}}>DISCLOSURE DOSSIER</span>
           <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 10, color: '#64748b', letterSpacing: '.06em'}}>· {ticker}</span>
           {view === 'detail' && <button onClick={() => setView('list')} className="disc-back-link">← 목록</button>}
         </div>
-        <button onClick={onClose} style={{background: 'transparent', border: '1px solid rgba(94,234,212,0.25)', color: '#94a3b8', fontFamily: 'var(--font-mono,monospace)', fontSize: 11, padding: '4px 14px', cursor: 'pointer', letterSpacing: '.08em', borderRadius: 2}}>✕ CLOSE</button>
+        <button onClick={onClose} style={{background: 'transparent', border: '1px solid rgba(116, 238, 198,0.25)', color: '#94a3b8', fontFamily: 'var(--font-mono,monospace)', fontSize: 11, padding: '4px 14px', cursor: 'pointer', letterSpacing: '.08em', borderRadius: 2}}>✕ CLOSE</button>
       </div>
       <div style={{flex: '1 1 0%', display: 'flex', overflow: 'hidden'}}>
       {/* Left: disclosure content */}
@@ -1578,7 +1578,7 @@ function DisclosureFullOverlay({ ticker, onClose }) {
         <div style={{display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 6, flexWrap: 'wrap'}}>
           <span style={{color: '#f1f5f9', fontSize: 20, fontWeight: 700}}>{corpName}</span>
           {sectorKo && <span style={{color: '#64748b', fontSize: 11}}>{sectorKo}</span>}
-          {capLabel && <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 11, color: '#5eead4'}}>{capLabel}</span>}
+          {capLabel && <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 11, color: '#74EEC6'}}>{capLabel}</span>}
           <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 10, color: '#475569', marginLeft: 'auto'}}>총 {items.length}건</span>
         </div>
         {view === 'list' ? (
@@ -1623,7 +1623,7 @@ function DisclosureFullOverlay({ ticker, onClose }) {
       </div>{/* end left content */}
       <OverlayAiChat companyName={corpName} ticker={ticker} context="disclosure" disc={view === 'detail' ? selectedDisc : null} node={node} />
       </div>{/* end flex row */}
-      <div style={{textAlign: 'center', padding: '6px', fontFamily: 'var(--font-mono,monospace)', fontSize: 9, color: '#475569', borderTop: '1px solid rgba(94,234,212,0.1)', background: 'rgba(8,14,26,0.9)', flexShrink: 0}}>
+      <div style={{textAlign: 'center', padding: '6px', fontFamily: 'var(--font-mono,monospace)', fontSize: 9, color: '#475569', borderTop: '1px solid rgba(116, 238, 198,0.1)', background: 'rgba(8,14,26,0.9)', flexShrink: 0}}>
         ⚠ 과거 통계 기반 참고 정보 — 투자 조언 아님
       </div>
     </div>
@@ -1640,11 +1640,11 @@ function AiChatBubble({ msg }) {
         <div style={{width: 24, height: 24, borderRadius: '50%', background: 'rgba(251,191,36,0.1)', border: '1px solid rgba(251,191,36,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontFamily: 'var(--font-mono,monospace)', fontSize: 8, color: '#fbbf24'}}>AI</div>
       )}
       <div style={{
-        background: isUser ? 'rgba(94,234,212,0.08)' : 'rgba(255,255,255,0.04)',
-        border: isUser ? '1px solid rgba(94,234,212,0.15)' : 'none',
+        background: isUser ? 'rgba(116, 238, 198,0.08)' : 'rgba(255,255,255,0.04)',
+        border: isUser ? '1px solid rgba(116, 238, 198,0.15)' : 'none',
         borderRadius: 4, padding: '7px 10px',
         fontSize: 11.5, lineHeight: 1.65,
-        color: isUser ? '#5eead4' : (msg.error ? '#f87171' : '#94a3b8'),
+        color: isUser ? '#74EEC6' : (msg.error ? '#f87171' : '#94a3b8'),
         maxWidth: '88%', wordBreak: 'break-word',
       }}>
         {msg.text}
@@ -1732,8 +1732,8 @@ function OverlayAiChat({ companyName, ticker, context, disc, node }) {
 
   const dotColor = hasKey ? '#4ade80' : '#fbbf24';
   return (
-    <div style={{width: 300, flexShrink: 0, display: 'flex', flexDirection: 'column', borderLeft: '1px solid rgba(94,234,212,0.12)', background: 'rgba(4,7,18,0.72)', backdropFilter: 'blur(12px)'}}>
-      <div style={{padding: '10px 14px', flexShrink: 0, borderBottom: '1px solid rgba(94,234,212,0.1)', display: 'flex', alignItems: 'center', gap: 8}}>
+    <div style={{width: 300, flexShrink: 0, display: 'flex', flexDirection: 'column', borderLeft: '1px solid rgba(116, 238, 198,0.12)', background: 'rgba(4,7,18,0.72)', backdropFilter: 'blur(12px)'}}>
+      <div style={{padding: '10px 14px', flexShrink: 0, borderBottom: '1px solid rgba(116, 238, 198,0.1)', display: 'flex', alignItems: 'center', gap: 8}}>
         <span style={{width: 7, height: 7, borderRadius: '50%', background: dotColor, boxShadow: `0 0 6px ${dotColor}`, display: 'inline-block'}} />
         <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 10, letterSpacing: '.12em', color: '#fbbf24'}}>AI FINANCIAL</span>
         <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 8, color: '#475569', marginLeft: 4}}>
@@ -1741,7 +1741,7 @@ function OverlayAiChat({ companyName, ticker, context, disc, node }) {
         </span>
       </div>
       {!hasKey && (
-        <div style={{padding: '14px', fontSize: 11, color: '#64748b', lineHeight: 1.7, borderBottom: '1px solid rgba(94,234,212,0.08)'}}>
+        <div style={{padding: '14px', fontSize: 11, color: '#64748b', lineHeight: 1.7, borderBottom: '1px solid rgba(116, 238, 198,0.08)'}}>
           <div style={{color: '#fbbf24', fontFamily: 'var(--font-mono,monospace)', fontSize: 9, marginBottom: 6}}>⚠ API 키 미설정</div>
           <code style={{fontSize: 10, background: 'rgba(255,255,255,0.05)', padding: '3px 7px', borderRadius: 3, display: 'block', marginBottom: 6}}>v2/config.local.js</code>
           파일에 Gemini API 키를 설정하면 활성화됩니다.
@@ -1753,19 +1753,19 @@ function OverlayAiChat({ companyName, ticker, context, disc, node }) {
           <div style={{fontSize: 10, color: '#475569', fontFamily: 'var(--font-mono,monospace)'}}>생성 중…</div>
         )}
       </div>
-      <div style={{padding: '8px 10px', borderTop: '1px solid rgba(94,234,212,0.08)', flexShrink: 0, display: 'flex', gap: 6}}>
+      <div style={{padding: '8px 10px', borderTop: '1px solid rgba(116, 238, 198,0.08)', flexShrink: 0, display: 'flex', gap: 6}}>
         <input
           value={input}
           onChange={e => setInput(e.target.value)}
           onKeyDown={onKey}
           disabled={!hasKey || loading}
           placeholder={hasKey ? (loading ? 'AI 응답 중…' : '질문 입력 (Enter)') : 'config.local.js 키 설정 필요'}
-          style={{flex: 1, background: 'rgba(255,255,255,0.04)', border: `1px solid ${hasKey ? 'rgba(94,234,212,0.2)' : 'rgba(100,116,139,0.2)'}`, borderRadius: 2, color: hasKey ? '#e2e8f0' : '#475569', fontFamily: 'inherit', fontSize: 11, padding: '6px 9px', outline: 'none'}}
+          style={{flex: 1, background: 'rgba(255,255,255,0.04)', border: `1px solid ${hasKey ? 'rgba(116, 238, 198,0.2)' : 'rgba(100,116,139,0.2)'}`, borderRadius: 2, color: hasKey ? '#e2e8f0' : '#475569', fontFamily: 'inherit', fontSize: 11, padding: '6px 9px', outline: 'none'}}
         />
         <button
           onClick={send}
           disabled={!hasKey || loading || !input.trim()}
-          style={{background: 'rgba(94,234,212,0.1)', border: '1px solid rgba(94,234,212,0.25)', color: '#5eead4', padding: '6px 10px', borderRadius: 2, cursor: hasKey && !loading && input.trim() ? 'pointer' : 'not-allowed', opacity: (!hasKey || loading || !input.trim()) ? 0.35 : 1, transition: 'opacity 150ms'}}
+          style={{background: 'rgba(116, 238, 198,0.1)', border: '1px solid rgba(116, 238, 198,0.25)', color: '#74EEC6', padding: '6px 10px', borderRadius: 2, cursor: hasKey && !loading && input.trim() ? 'pointer' : 'not-allowed', opacity: (!hasKey || loading || !input.trim()) ? 0.35 : 1, transition: 'opacity 150ms'}}
         >↗</button>
       </div>
       <div style={{textAlign: 'center', padding: '3px 14px 5px', fontFamily: 'var(--font-mono,monospace)', fontSize: 8, color: '#334155'}}>
@@ -1854,7 +1854,7 @@ function ScoreBoardPanel({ score }) {
         </div>
       </div>
       <div className="panel-body" style={{padding: '12px 14px'}}>
-        <div style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 32, fontWeight: 700, color: '#5eead4', lineHeight: 1.1, marginBottom: 6}}>
+        <div style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 32, fontWeight: 700, color: '#74EEC6', lineHeight: 1.1, marginBottom: 6}}>
           {score.correct}<span style={{color: '#475569', fontSize: 18}}>/{score.total}</span>
         </div>
         <div style={{fontSize: 10, color: '#64748b', marginBottom: 8}}>정답률 {pct}%</div>
@@ -1915,7 +1915,7 @@ function ScenarioIndexPanel({ scenarios, currentIndex, answeredSet, onJump }) {
         {scenarios.map((s, i) => (
           <div key={s.id} className={'sc-idx-row' + (i === currentIndex ? ' is-active' : '')} onClick={() => onJump(i)}>
             <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 9, color: '#475569', minWidth: 16}}>{i + 1}</span>
-            <span style={{flex: 1, fontSize: 11, color: i === currentIndex ? '#5eead4' : '#94a3b8', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{s.company}</span>
+            <span style={{flex: 1, fontSize: 11, color: i === currentIndex ? '#74EEC6' : '#94a3b8', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{s.company}</span>
             <span className="disc-type-badge" style={{fontSize: 8}}>{s.category}</span>
             <span className={'sc-idx-dot' + (answeredSet.has(s.id) ? ' done' : '')} />
           </div>
@@ -2015,13 +2015,13 @@ function IntroScreen({ stage, onEnter }) {
         <div className="hud-brand">
           <div className="hud-logo">◉</div>
           <div className="hud-brand-text">
-            <div className="hud-brand-name">DISCLOSE<span style={{color:'#5eead4'}}>AI</span></div>
+            <div className="hud-brand-name">DISCLOSE<span style={{color:'#74EEC6'}}>AI</span></div>
             <div className="hud-brand-sub">CORPORATE GALAXY ATLAS · v2.4</div>
           </div>
         </div>
         <div className="hud-meta">
           <div className="hud-meta-row"><span className="hud-meta-k">SESSION</span><span className="hud-meta-v">DA-{(2604 + Math.floor(pulse)).toString().padStart(4,'0')}</span></div>
-          <div className="hud-meta-row"><span className="hud-meta-k">UPLINK</span><span className="hud-meta-v" style={{color:'#5eead4'}}>● STABLE · 42ms</span></div>
+          <div className="hud-meta-row"><span className="hud-meta-k">UPLINK</span><span className="hud-meta-v" style={{color:'#74EEC6'}}>● STABLE · 42ms</span></div>
           <div className="hud-meta-row"><span className="hud-meta-k">UTC</span><span className="hud-meta-v">{new Date().toISOString().slice(11,19)}Z</span></div>
         </div>
       </div>
@@ -2084,7 +2084,7 @@ function TopTabs({ active, onChange, breadcrumb }) {
     <div className="top-tabs">
       <div className="top-tabs-brand">
         <div className="top-brand-mark">◉</div>
-        <div className="top-brand-name">DISCLOSE<span style={{color:'#5eead4'}}>AI</span></div>
+        <div className="top-brand-name">DISCLOSE<span style={{color:'#74EEC6'}}>AI</span></div>
         {breadcrumb && (
           <div className="top-breadcrumb">
             {breadcrumb.map((b, i) => (
@@ -2107,7 +2107,7 @@ function TopTabs({ active, onChange, breadcrumb }) {
       <div className="top-tabs-status">
         <span className="hud-dot" />
         <span style={{color:'#94a3b8',fontSize:11,letterSpacing:'.08em'}}>KOSPI</span>
-        <span style={{color:'#5eead4',fontSize:13,fontWeight:600}}>3,142.80</span>
+        <span style={{color:'#74EEC6',fontSize:13,fontWeight:600}}>3,142.80</span>
         <span style={{color:'#4ade80',fontSize:11}}>+0.42%</span>
       </div>
     </div>
@@ -2257,7 +2257,7 @@ function CompanyOverviewPanel({ company, sector, onBack, onEnter }) {
             const reportUrl = (node && node.dart_url)
               || `https://dart.fss.or.kr/dsab007/search.ax?textCrpNm=${encodeURIComponent(company.name)}&autoSearch=Y`;
             return (
-              <a href={reportUrl} target="_blank" rel="noopener" style={{fontFamily:'var(--font-mono,monospace)', fontSize:9, letterSpacing:'.06em', color:'#5eead4', border:'1px solid rgba(94,234,212,0.3)', padding:'3px 7px', borderRadius:2, textDecoration:'none', whiteSpace:'nowrap'}}>📄 사업보고서</a>
+              <a href={reportUrl} target="_blank" rel="noopener" style={{fontFamily:'var(--font-mono,monospace)', fontSize:9, letterSpacing:'.06em', color:'#74EEC6', border:'1px solid rgba(116, 238, 198,0.3)', padding:'3px 7px', borderRadius:2, textDecoration:'none', whiteSpace:'nowrap'}}>📄 사업보고서</a>
             );
           })()}
           <button className="back-link" onClick={onBack}>← SECTOR</button>
@@ -2300,8 +2300,8 @@ function CompanyOverviewPanel({ company, sector, onBack, onEnter }) {
               <div style={{display:'flex', alignItems:'center', gap:10, marginTop:8}}>
                 {sparkPath && (
                   <svg width={sparkPath.w} height={sparkPath.h} style={{flexShrink:0}}>
-                    <path d={sparkPath.d} fill="none" stroke="#5eead4" strokeWidth="1.5" opacity="0.8" />
-                    <circle cx={sparkPath.dot.x} cy={sparkPath.dot.y} r="2" fill="#5eead4" />
+                    <path d={sparkPath.d} fill="none" stroke="#74EEC6" strokeWidth="1.5" opacity="0.8" />
+                    <circle cx={sparkPath.dot.x} cy={sparkPath.dot.y} r="2" fill="#74EEC6" />
                   </svg>
                 )}
                 {sparkPath && <span style={{fontSize:9,color:'#64748b',fontFamily:'var(--font-mono)'}}>매출 5년 추이</span>}
@@ -2499,10 +2499,10 @@ function LegendPanel() {
       <div className="panel-body legend-body">
         <div className="legend-section">
           <div className="legend-section-h">
-            <span style={{color:'#5eead4'}}>━━━</span> SOLID · 지분율 분류 (K-IFRS)
+            <span style={{color:'#74EEC6'}}>━━━</span> SOLID · 지분율 분류 (K-IFRS)
           </div>
           <div className="legend-grid">
-            <LegendRow color="#5eead4" kind="solid"   label="종속기업"    sub=">50%" />
+            <LegendRow color="#74EEC6" kind="solid"   label="종속기업"    sub=">50%" />
             <LegendRow color="#a78bfa" kind="solid"   label="관계기업"    sub="20–50%" />
             <LegendRow color="#fbbf24" kind="solid"   label="유의적 투자" sub="5–20%" />
           </div>
@@ -2869,16 +2869,16 @@ function App() {
           {/* Header bar */}
           <div style={{
             display:'flex', alignItems:'center', justifyContent:'space-between',
-            padding:'10px 20px', borderBottom:'1px solid rgba(94,234,212,0.2)',
+            padding:'10px 20px', borderBottom:'1px solid rgba(116, 238, 198,0.2)',
             background:'rgba(8,14,26,0.9)', flexShrink:0,
           }}>
             <div style={{display:'flex', alignItems:'center', gap:12}}>
-              <span style={{width:8,height:8,borderRadius:'50%',background:'#5eead4',boxShadow:'0 0 8px #5eead4', display:'inline-block'}} />
-              <span style={{fontFamily:'var(--font-mono,monospace)',fontSize:11,letterSpacing:'0.12em',color:'#5eead4'}}>CORPORATION DOSSIER</span>
+              <span style={{width:8,height:8,borderRadius:'50%',background:'#74EEC6',boxShadow:'0 0 8px #74EEC6', display:'inline-block'}} />
+              <span style={{fontFamily:'var(--font-mono,monospace)',fontSize:11,letterSpacing:'0.12em',color:'#74EEC6'}}>CORPORATION DOSSIER</span>
               <span style={{fontFamily:'var(--font-mono,monospace)',fontSize:10,color:'#64748b',letterSpacing:'0.06em'}}>· {corpOverlayTicker}</span>
             </div>
             <button onClick={() => setCorpOverlayTicker(null)} style={{
-              background:'transparent', border:'1px solid rgba(94,234,212,0.25)',
+              background:'transparent', border:'1px solid rgba(116, 238, 198,0.25)',
               color:'#94a3b8', fontFamily:'var(--font-mono,monospace)', fontSize:11,
               padding:'4px 14px', cursor:'pointer', letterSpacing:'0.08em',
               borderRadius:2,
@@ -2925,10 +2925,10 @@ function App() {
               style={{
                 position:'absolute', top:'50%', right: aiOpen ? '300px' : '0', transform:'translateY(-50%)',
                 zIndex:12, writingMode:'vertical-rl', textOrientation:'mixed',
-                background:'rgba(8,14,26,0.96)', border:'1px solid rgba(94,234,212,0.35)', borderRight:'none',
-                color:'#5eead4', fontFamily:"'IBM Plex Mono', var(--font-mono, monospace)", fontSize:11, letterSpacing:'0.14em',
+                background:'rgba(8,14,26,0.96)', border:'1px solid rgba(116, 238, 198,0.35)', borderRight:'none',
+                color:'#74EEC6', fontFamily:"'IBM Plex Mono', var(--font-mono, monospace)", fontSize:11, letterSpacing:'0.14em',
                 padding:'16px 7px', cursor:'pointer', borderRadius:'8px 0 0 8px',
-                boxShadow:'0 0 18px rgba(94,234,212,0.14)', transition:'right .18s ease',
+                boxShadow:'0 0 18px rgba(116, 238, 198,0.14)', transition:'right .18s ease',
               }}>
               {aiOpen ? '접기 ▶' : '◀ AI 어시스턴트'}
             </button>
@@ -2944,7 +2944,7 @@ function App() {
           {/* Footer disclaimer */}
           <div style={{
             textAlign:'center', padding:'6px', fontFamily:'var(--font-mono,monospace)',
-            fontSize:9, color:'#475569', borderTop:'1px solid rgba(94,234,212,0.1)',
+            fontSize:9, color:'#475569', borderTop:'1px solid rgba(116, 238, 198,0.1)',
             background:'rgba(8,14,26,0.9)', flexShrink:0,
           }}>
             ⚠ 과거 통계 기반 참고 정보 — 투자 조언 아님
