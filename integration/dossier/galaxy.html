@@ -491,7 +491,7 @@ class Component extends DCLogic {
   };
 
   // ===== 데이터 구동 (galaxy_<ticker>.json 주입) — 삼성 하드코딩 외부화 (Phase 1 D4-층2) =====
-  get KNOTS() { return this._G ? this._G.knots : []; }
+  get KNOTS() { return (this._G && this._G.knots) ? this._G.knots : []; }
   // SEGS = 본류 구간 위상·색 (구조적·범용). 3번째(굵기)는 uniform 모드에서 미사용 → 0
   SEGS = [
     ['k1','k2',0,'cyan'],
@@ -502,11 +502,11 @@ class Component extends DCLogic {
     ['k12','k13',0,'cyan'], ['k13','k14',0,'cyan'], ['k14','k15',0,'cyan'],
   ];
   get EQE() { return (this._G && this._G.panels && this._G.panels.E ? this._G.panels.E : []).map(r => ({ row: r.row, t: r.v, big: r.row === 'eq-begin' || r.row === 'eq-end', oci: r.row === 'eq-oci', neg: (r.v || '').startsWith('−') })); }
-  get ZONES() { return this._G ? this._G.strings.zones : {}; }
-  get EQSTORY() { return this._G ? this._G.eqstory : {}; }
+  get ZONES() { return (this._G && this._G.strings && this._G.strings.zones) ? this._G.strings.zones : {}; }
+  get EQSTORY() { return (this._G && this._G.eqstory) ? this._G.eqstory : {}; }
 
   RT = { k8:0, k9:1, k10:2, k10b:3, k11:4 };
-  get RTSTEPS() { return this._G ? this._G.rtsteps : []; }
+  get RTSTEPS() { return (this._G && this._G.rtsteps) ? this._G.rtsteps : []; }
 
   // ---------- lifecycle ----------
   _loadData() {
@@ -1321,14 +1321,16 @@ class Component extends DCLogic {
       pv[k] = (r.v == null || r.v === '') ? '—' : r.v;
       pt[k] = (r.raw_mn != null) ? r.raw_mn.toLocaleString() + ' 백만원' : '';
     }
+    // 빌더는 개별 try/catch — 한 섹션(예: 불완전 JSON의 SVG)이 깨져도 전체 페이지가 죽지 않게(우아한 degrade).
+    const safe = (fn, fb) => { try { return fn.call(this); } catch (e) { console.warn('galaxy 빌더 오류(' + fn.name + '): ' + e.message); return fb; } };
     return {
       pv, pt,
       corp: this._G ? this._G.corp : { name: '', fiscal_year: '', period: '', basis: '', cash_begin: '', cash_end: '' },
       strings: this._G ? this._G.strings : { intro_lines: ['', ''] },
-      galaxySvg: this.buildGalaxy(),
-      midOverlay: this.buildMidOverlay(),
-      inspectorCard: this.buildCard(),
-      runningChip: this.buildRunningChip(),
+      galaxySvg: safe(this.buildGalaxy, null),
+      midOverlay: safe(this.buildMidOverlay, null),
+      inspectorCard: safe(this.buildCard, null),
+      runningChip: safe(this.buildRunningChip, null),
       onRow: this.onRow,
       onToggle: this.onToggle,
       unpin: this.unpin,
