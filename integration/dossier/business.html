@@ -477,12 +477,13 @@
       font-weight:950;
     }
     .segment-breakdown {
+      position:relative;
       margin-top:12px;
-      border:1px solid rgba(65,220,255,.18);
-      border-radius:16px;
+      border:1px solid var(--line);
+      border-radius:10px;
       background:
-        radial-gradient(circle at 10% 0%, rgba(65,220,255,.10), transparent 28%),
-        linear-gradient(135deg, rgba(65,220,255,.055), rgba(255,79,126,.035));
+        radial-gradient(circle at 10% 0%, rgba(92,199,234,.10), transparent 28%),
+        linear-gradient(135deg, rgba(92,199,234,.055), rgba(236,140,106,.035));
       padding:16px;
     }
     .segment-breakdown-head {
@@ -589,12 +590,13 @@
       margin-top:10px;
     }
     .custom-report-cards {
+      position:relative;
       margin-top:12px;
-      border:1px solid rgba(65,220,255,.18);
-      border-radius:16px;
+      border:1px solid var(--line);
+      border-radius:10px;
       background:
-        radial-gradient(circle at 8% 0%, rgba(65,220,255,.11), transparent 28%),
-        linear-gradient(135deg, rgba(65,220,255,.045), rgba(255,79,126,.025));
+        radial-gradient(circle at 8% 0%, rgba(92,199,234,.11), transparent 28%),
+        linear-gradient(135deg, rgba(92,199,234,.045), rgba(236,140,106,.025));
       padding:16px;
     }
     .custom-report-grid {
@@ -683,13 +685,29 @@
     }
     .utilization-detail,
     .segment-financial-detail {
+      position:relative;
       margin-top:12px;
-      border:1px solid rgba(65,220,255,.18);
-      border-radius:16px;
+      border:1px solid var(--line);
+      border-radius:10px;
       background:
-        radial-gradient(circle at 8% 0%, rgba(65,220,255,.10), transparent 28%),
+        radial-gradient(circle at 8% 0%, rgba(92,199,234,.10), transparent 28%),
         rgba(255,255,255,.035);
       padding:16px;
+    }
+    /* 주요 콘텐츠 패널 = galaxy 표준 코너 브래킷 (DESIGN.md §패널 엣지). .section과 동일 처리로 통일 */
+    .segment-breakdown::before, .segment-breakdown::after,
+    .custom-report-cards::before, .custom-report-cards::after,
+    .utilization-detail::before, .utilization-detail::after,
+    .segment-financial-detail::before, .segment-financial-detail::after {
+      content:''; position:absolute; width:14px; height:14px; border:2px solid var(--mint); pointer-events:none;
+    }
+    .segment-breakdown::before, .custom-report-cards::before,
+    .utilization-detail::before, .segment-financial-detail::before {
+      top:-1px; left:-1px; border-right:0; border-bottom:0; border-radius:3px 0 0 0;
+    }
+    .segment-breakdown::after, .custom-report-cards::after,
+    .utilization-detail::after, .segment-financial-detail::after {
+      bottom:-1px; right:-1px; border-left:0; border-top:0; border-radius:0 0 3px 0;
     }
     .detail-head {
       display:flex;
