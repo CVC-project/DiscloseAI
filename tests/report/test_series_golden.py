@@ -1,4 +1,4 @@
-"""G2 series.py 회귀 — 삼성 골든 대조 (PHASE4_PLAN G2 DoD).
+"""series.py 회귀 — 삼성 골든 대조 (MILKYWAY_GENERATOR S1 숫자 게이트).
 
 코드 파생 가능 키(A|B|D)는 galaxy_005930.json series와 ±0.06조(eps ±1원) 일치해야 한다.
 N(주석 의존: rnd·dsOp)·영year 결측(buyback·dep)은 의도적 미완성이라 제외.

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """check_golden.py — galaxy_<ticker>.json 완전성·정확성 기계 체커 (R6 S4·S5의 코드 검증층).
 
-PHASE4_PLAN R6.3 규칙 내장: 항등식(암산 금지)·잔재 스캔(회사 파라미터화)·격식체·연도오인·
+MILKYWAY_GENERATOR §5(R6.3) 규칙 내장: 항등식(암산 금지)·잔재 스캔(회사 파라미터화)·격식체·연도오인·
 빈 브래킷·viz_data 스키마·링크=패널 정합·깊이 지표·서브행 합=부모.
 
 실행: python -m modules.report.check_golden 000660

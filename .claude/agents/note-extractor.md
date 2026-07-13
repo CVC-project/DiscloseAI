@@ -22,7 +22,7 @@ tools:
 python -c "import sqlite3,sys; c=sqlite3.connect('modules/report/data/reports.db'); print(c.execute('select text_md from report_section where rcept_no=? and note_no=?',(sys.argv[1],sys.argv[2])).fetchone()[0])" <rcept> <note>
 ```
 
-## 절대 규칙 (PHASE4_PLAN R6.3)
+## 절대 규칙 (MILKYWAY_GENERATOR R6.3)
 1. **원문에 있는 값만.** 계산·단위변환·반올림 금지 — 백만원 정수 그대로 `amount_mn`.
 2. **모든 값에 `source_quote`** — 원문 text_md에서 그 숫자가 나온 15~40자를 **그대로 복사**(체커가 substring-match로 기계 검증하므로, 자구를 바꾸면 FAIL).
 3. 원문에 없으면 **누락으로 두고 `missing`에 기록** — 추정·보간 금지.
