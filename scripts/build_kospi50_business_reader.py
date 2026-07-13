@@ -1,38 +1,564 @@
-<!doctype html>
+"""Build a static KOSPI top-company business report first-tab prototype.
+
+The page is intentionally self-contained so it can be opened directly from
+docs/prototype without a local server. It combines local DART-derived data with
+a cached yfinance market snapshot for market-cap and PER sorting.
+"""
+
+from __future__ import annotations
+
+import json
+import os
+import re
+import sqlite3
+from datetime import datetime
+from pathlib import Path
+from typing import Any, Iterable
+
+
+ROOT = Path(__file__).resolve().parents[1]
+EQS_PATH = ROOT / "docs" / "prototype" / "eqs_data.json"
+FULLTEXT_INDEX = ROOT / "modules" / "disclosure" / "data" / "fulltext" / "index.json"
+OUT_PATH = ROOT / "docs" / "prototype" / "kospi50_business_tabs.html"
+MARKET_SNAPSHOT_PATH = ROOT / "docs" / "prototype" / "kospi50_market_snapshot.json"
+DISCLOSURE_DB_PATH = ROOT / "modules" / "disclosure" / "data" / "disclosure.db"
+
+
+def _idea(title: str, value: str, fact: str, view: str) -> dict[str, str]:
+    return {"title": title, "value": value, "fact": fact, "view": view}
+
+
+# Company-specific reading notes based on the collected annual-report business
+# sections. Product lists remain in the orbit cards; these entries explain the
+# change, operating structure, or business implication behind those products.
+CUSTOM_REPORT_IDEAS: dict[str, list[dict[str, str]]] = {
+    "005930": [
+        _idea("DS 부문 이익 회복", "영업이익 24.9조원", "DS 부문은 2023년 영업손실에서 2024년 흑자로 돌아섰고, 2025년에는 영업이익 약 24.9조원까지 회복했습니다.", "메모리 가격과 AI 서버 수요, HBM 같은 고부가 제품 비중이 회복세를 이어 가는지 확인할 필요가 있습니다."),
+        _idea("원재료 가격과 가동률", "Wafer -10% · Cover Glass +12%", "사업보고서에는 부문별 원재료 가격 변화와 TV·모니터 78.8%, 스마트폰 79.3%, 메모리·SDC 100%의 가동률이 함께 제시됩니다.", "DX의 가격 방어력과 원가 전가, 가동률이 낮은 부문의 고정비 부담을 함께 봐야 합니다."),
+    ],
+    "000660": [
+        _idea("AI 수요가 메모리 전반으로 확산", "HBM · 일반 DRAM · 기업용 SSD", "2025년 사업보고서는 AI 확산으로 HBM뿐 아니라 일반 DRAM 수요도 커졌고, NAND는 데이터센터용 고용량 기업용 SSD가 수요 증가를 이끌었다고 설명합니다.", "메모리 가격과 AI 서버 수요, HBM·기업용 SSD의 제품 비중이 다음 실적에서도 유지되는지 확인할 필요가 있습니다."),
+        _idea("공장 풀가동", "평균 가동률 100%", "SK하이닉스는 4조 3교대와 연중 365일 운영을 기준으로 2025년 생산능력과 생산실적을 각각 41조 2,165억원으로 집계했고, 평균 가동률 100%를 공시했습니다.", "수요 회복이 실제 생산라인 가동으로 이어졌는지 보여주는 지표이며, 추가 설비 투자에 따른 비용 부담도 함께 확인해야 합니다."),
+        _idea("NAND·SSD의 데이터센터 확장", "Intel NAND 인수 최종 종결", "사업보고서에는 Intel NAND 사업 인수가 2025년 3월 최종 종결됐고, 데이터센터용 PCIe Gen5 SSD와 CMM-DDR5 개발이 제시됩니다.", "HBM뿐 아니라 기업용 SSD와 서버 메모리까지 포트폴리오가 넓어지는지를 보는 것이 좋습니다."),
+    ],
+    "005380": [
+        _idea("여러 동력원을 병행하는 전환", "전기차 · 하이브리드 · 수소전기차", "사업보고서는 전기차, 하이브리드차, 수소전기차를 모두 주요 제품으로 제시합니다.", "한 가지 동력원보다 지역별 충전 환경과 소비자 수요에 맞춘 제품 구성이 어떻게 바뀌는지 봐야 합니다."),
+        _idea("차량 판매와 금융의 연결", "할부금융 · 리스 · 신용카드", "차량 제조·판매 외에 자동차할부금융, 리스, 신용카드가 별도 금융부문으로 운영됩니다.", "완성차 판매가 금융 계약과 고객 유지로 얼마나 이어지는지를 함께 읽는 것이 좋습니다."),
+    ],
+    "373220": [
+        _idea("수요처가 다른 배터리 포트폴리오", "EV · ESS · IT기기", "사업보고서는 EV, ESS, IT기기 등 다양한 분야에 쓰이는 2차전지 제조·판매를 단일 사업으로 설명합니다.", "전기차 수요 변화가 ESS와 소형전지 수요로 얼마나 보완되는지를 확인할 필요가 있습니다."),
+        _idea("제품 형태와 고객 수요의 차이", "파우치형 · 원통형 · 소형전지", "IT기기용 파우치형, 원통형 전지, 전동공구와 e-mobility용 전지가 함께 제시됩니다.", "같은 배터리라도 어떤 제품군이 성장하는지에 따라 생산과 수익성의 방향이 달라질 수 있습니다."),
+    ],
+    "012450": [
+        _idea("수주부터 납품까지의 시간", "항공 · 방산 · 해양", "항공기 엔진·부품, 자주포·유도무기, 선박·해양플랜트가 장기 프로젝트 성격의 사업으로 함께 제시됩니다.", "수주 증가가 실제 매출로 반영되는 시점과 납품 일정의 안정성을 따로 봐야 합니다."),
+        _idea("방산 수출의 확장", "자주포 · 장갑차 · 유도무기", "방산 부문은 자주포, 장갑차, 유도무기, 탄약 등 군수장비 생산을 중심으로 구성됩니다.", "수출 계약 이후 생산·정비·부품 공급까지 이어지는 사업의 지속성을 확인할 필요가 있습니다."),
+    ],
+    "402340": [
+        _idea("제조사가 아닌 투자 포트폴리오", "투자 · 커머스 · 플랫폼 · 모빌리티", "사업보고서에는 투자사업과 11번가 커머스, 플랫폼, 모빌리티 사업이 함께 구분되어 있습니다.", "각 자회사의 매출과 지주회사 자체의 성과를 구분해 읽는 것이 중요합니다."),
+        _idea("자회사마다 다른 성장 방식", "커머스 · TMAP · 앱 플랫폼", "커머스는 거래액, 모빌리티는 이동·데이터 서비스, 플랫폼은 이용자 기반이 사업의 핵심이 됩니다.", "포트폴리오 전체가 어떤 사업에 투자하고 재편되는지를 중심으로 볼 필요가 있습니다."),
+    ],
+    "207940": [
+        _idea("생산과 개발을 함께 맡는 CDMO", "위탁생산 · 위탁개발", "바이오의약품 위탁생산뿐 아니라 세포주와 제형, 공정 개발 서비스를 함께 제공합니다.", "고객과의 관계가 생산 물량과 개발 서비스로 길게 이어지는지 확인하는 것이 좋습니다."),
+        _idea("생산 품목의 확장", "mRNA · ADC · 세포·유전자 치료제", "항체의약품 외에 mRNA, ADC, 세포·유전자 치료제 등이 사업보고서의 주요 서비스로 제시됩니다.", "새로운 의약품 형태를 실제 생산 서비스로 얼마나 빠르게 확장하는지가 다음 성장 축입니다."),
+    ],
+    "034020": [
+        _idea("발전원 전환을 아우르는 설비", "원전 · 가스터빈 · 해상풍력", "원자력·복합화력 발전설비 제작과 EPC, 해상풍력 기자재, 연료전지 사업이 함께 제시됩니다.", "국가별 전력 수요와 에너지 정책 변화가 어느 사업으로 연결되는지 나눠 봐야 합니다."),
+        _idea("EPC 사업의 긴 매출 경로", "설계 · 제작 · 설치", "발전설비 EPC는 계약 이후 설계와 제작, 설치 과정을 거쳐 매출이 발생합니다.", "수주 금액뿐 아니라 프로젝트의 진행과 납품 단계가 안정적인지 확인할 필요가 있습니다."),
+    ],
+    "105560": [
+        _idea("은행 밖의 수익원", "증권 · 보험 · 카드", "은행의 여신·수신 업무 외에 증권, 손해보험, 신용카드가 주요 사업부문으로 구성됩니다.", "이자수익과 수수료, 보험·투자 수익이 각각 어떻게 움직이는지 구분해 봐야 합니다."),
+        _idea("하나의 고객 접점", "예금 · 대출 · 카드 · 보험 · 증권", "KB스타뱅킹과 은행·카드·보험·증권 서비스가 그룹 안에서 함께 제공됩니다.", "고객이 한 서비스를 이용한 뒤 다른 금융상품으로 얼마나 확장되는지를 보는 것이 좋습니다."),
+    ],
+    "000270": [
+        _idea("차종 구성이 수익성을 바꾼다", "승용 · RV · 상용 · 전기차", "승용차, RV, 상용차에 전기차와 하이브리드 제품이 더해지는 완성차 사업으로 제시됩니다.", "전체 판매 대수보다 수익성이 높은 차종의 비중이 어떻게 바뀌는지를 확인할 필요가 있습니다."),
+        _idea("판매 뒤까지 이어지는 책임", "판매보증", "완성차 판매 뒤에는 품질보증과 리콜 관련 책임이 뒤따를 수 있습니다.", "판매 확대와 별개로 보증 부담이 이익률을 누르지 않는지 함께 봐야 합니다."),
+    ],
+    "329180": [
+        _idea("선박과 엔진이 함께 움직이는 구조", "조선 · 해양플랜트 · 엔진기계", "LNG선·컨테이너선·유조선 건조, 해양플랜트, 선박용 엔진과 발전설비 사업이 함께 구성됩니다.", "어떤 선종의 수주가 늘고 있는지와 엔진 수요가 어떻게 따라오는지를 나눠 볼 필요가 있습니다."),
+        _idea("장기 프로젝트의 원가 관리", "선가 · 기자재 · 납기", "조선 사업은 계약 후 건조 기간이 길고, 원가와 납품 일정이 수익성에 영향을 줍니다.", "고부가 선종의 비중과 프로젝트 원가 관리가 안정적인지 확인하는 것이 중요합니다."),
+    ],
+    "032830": [
+        _idea("보험 판매와 자산 운용", "생명 · 건강 · 연금 · 저축", "생명·건강·연금·저축성 보험을 판매하고, 장기 보험 자산을 운용하는 구조입니다.", "보험 계약에서 나오는 수익과 자산 운용 성과를 한쪽만 보지 않는 것이 좋습니다."),
+        _idea("장기 고객 기반", "보장성 보험 · 연금", "보험 상품은 단기 판매량보다 계약이 장기간 유지되며 보험료가 계속 들어오는 구조가 중요합니다.", "보장성 보험과 연금보험의 비중 변화가 고객 기반의 질을 보여줄 수 있습니다."),
+    ],
+    "028260": [
+        _idea("서로 다른 경기 사이클", "건설 · 상사 · 패션 · 리조트", "건설은 수주 산업, 상사는 원자재·에너지 거래, 패션은 소비, 리조트는 방문객 수요에 영향을 받는 사업으로 구성됩니다.", "전체 매출보다 어느 부문이 실적을 움직였는지 나눠 읽어야 합니다."),
+        _idea("건설 수주의 실행력", "건축 · 토목 · 플랜트 · 주택", "건설 부문은 계약을 맺은 뒤 공사를 진행하며 매출을 인식합니다.", "신규 수주뿐 아니라 진행 중인 프로젝트의 원가와 회수 가능성도 함께 확인해야 합니다."),
+    ],
+    "055550": [
+        _idea("금융 수익원의 분산", "은행 · 카드 · 증권 · 보험", "여신·수신을 맡는 은행 외에 카드, 증권, 생명·손해보험 사업이 함께 제시됩니다.", "은행 실적만으로 그룹 전체를 판단하지 말고 사업부문별 이익원을 나눠 봐야 합니다."),
+        _idea("대손충당금의 의미", "대출 성장 · 신용손실 관리", "대출채권에 대한 신용손실충당금 측정이 사업보고서의 주요 감사사항으로 제시됩니다.", "대출이 늘어도 차주의 상환 능력이 악화되면 충당금이 증가할 수 있다는 점을 함께 봐야 합니다."),
+    ],
+    "068270": [
+        _idea("현재 매출과 다음 제품", "바이오시밀러 · 신약", "항체 바이오시밀러와 신약 개발·판매, 케미컬 의약품 판매가 함께 사업을 이룹니다.", "판매 중인 제품의 현금 창출력과 신제품 개발의 성과를 구분해 보는 것이 좋습니다."),
+        _idea("개발비의 불확실성", "개발비 인식 · 손상", "내부창출 개발비의 인식과 손상이 주요 감사사항으로 제시됩니다.", "연구개발 투자가 미래 제품으로 이어지는지와 비용 부담을 함께 확인할 필요가 있습니다."),
+    ],
+    "009150": [
+        _idea("고객 산업이 다른 세 부품", "MLCC · 패키지기판 · 카메라모듈", "컴포넌트, 반도체 패키지기판, 광학솔루션이 서로 다른 고객 산업에 공급됩니다.", "스마트폰·자동차·AI 서버 수요가 각 부문에 다르게 반영된다는 점을 봐야 합니다."),
+        _idea("고사양 제품의 비중", "고용량 MLCC · 고난도 기판", "수동소자와 기판, 카메라모듈은 범용 제품과 고사양 제품이 함께 존재합니다.", "매출 증가보다 어떤 부품의 제품 구성이 좋아지는지가 수익성에 더 중요할 수 있습니다."),
+    ],
+    "006400": [
+        _idea("서로 다른 배터리 수요", "EV · ESS · 전자재료", "전기차와 ESS, IT기기용 전지 및 반도체·디스플레이 소재가 함께 사업부문으로 제시됩니다.", "전기차 수요 변화가 전자재료와 다른 배터리 제품군으로 얼마나 보완되는지 봐야 합니다."),
+        _idea("고객 생산계획과 배터리 주문", "생산능력 · 고객 수요", "배터리 판매는 고객사의 전기차·ESS 생산 계획과 연결됩니다.", "증설 자체보다 실제 가동과 판매까지 이어지는지를 확인하는 것이 중요합니다."),
+    ],
+    "042660": [
+        _idea("세 가지 수주 시장", "상선 · 해양 · 특수선", "LNG·원유·컨테이너선 같은 상선, 해양플랜트, 잠수함·구축함 같은 특수선 사업이 함께 구성됩니다.", "해운·에너지·방산 수요가 각각 어느 부문에 반영되는지 나눠 봐야 합니다."),
+        _idea("고부가 선종의 비중", "LNG선 · FPSO · 특수선", "기술 난도가 높은 LNG선과 FPSO, 특수선은 일반 상선과 계약과 수익 구조가 다릅니다.", "단순 수주 금액보다 어떤 선종이 늘어나는지를 중심으로 읽는 것이 좋습니다."),
+    ],
+    "267260": [
+        _idea("전력망을 구성하는 장비", "변압기 · 차단기 · 배전기기", "변압기, 차단기, 회전기, 배전기기 등 전력기기를 제조·공급합니다.", "전력망 확장과 교체, 산업단지·데이터센터 투자가 장비 수요로 이어지는지 확인할 필요가 있습니다."),
+        _idea("해외 수주와 납품의 시간", "사양 · 제작 · 납품", "대형 전력기기는 고객별 사양과 인증, 제작 기간이 중요한 사업입니다.", "수주 증가가 매출과 이익으로 넘어오는 속도를 함께 봐야 합니다."),
+    ],
+    "006800": [
+        _idea("서로 다른 증권사 수익원", "WM · IB · 트레이딩 · PI", "고객자산 관리, 기업금융, 주식·채권 매매, 자기자본투자가 함께 사업부문으로 제시됩니다.", "고객 거래에서 나오는 수수료와 시장 가격 변동에 민감한 운용수익을 구분해야 합니다."),
+        _idea("장기 투자와 기업금융", "IPO · M&A · 인수금융", "IB는 IPO와 인수금융, M&A 등 기업 거래를 지원하고 PI는 자체 자본으로 투자합니다.", "거래 환경과 투자자산 가치 변화가 이익에 어떤 영향을 주는지 확인할 필요가 있습니다."),
+    ],
+    "012330": [
+        _idea("완성차와 A/S의 두 축", "모듈·부품 · A/S 부품", "자동차 핵심모듈과 제동·조향·전장 부품을 공급하는 사업, 판매된 차량의 보수용 부품을 공급하는 사업이 함께 있습니다.", "완성차 생산에 민감한 모듈과 반복 수요가 있는 A/S 부품을 구분해 봐야 합니다."),
+        _idea("전동화로 바뀌는 부품 구성", "전장 · 전동화 부품", "기존 제동·조향·램프 부품에 전장과 전동화 부품이 더해지고 있습니다.", "어떤 부품이 성장하고 기존 부품 수요가 어떻게 바뀌는지 보는 것이 중요합니다."),
+    ],
+    "010130": [
+        _idea("여러 금속을 함께 회수하는 제련", "아연 · 연 · 금 · 은 · 동", "아연과 연을 제련하면서 금·은·동 같은 금속도 회수해 판매하는 사업입니다.", "한 금속 가격보다 여러 금속 가격과 제련 수수료가 함께 실적에 영향을 준다는 점을 봐야 합니다."),
+        _idea("자원순환과 배터리 원료", "전자폐기물 · 황산니켈", "전자폐기물과 제강분진을 처리하는 자원순환, 황산니켈 등 2차전지 원료 사업이 함께 제시됩니다.", "원료 확보와 재활용 능력이 신규 소재 사업으로 이어지는지 확인할 필요가 있습니다."),
+    ],
+    "086790": [
+        _idea("은행과 비은행의 조합", "은행 · 증권 · 카드 · 캐피탈", "예금·대출·외환을 맡는 은행 외에 증권, 카드, 캐피탈, 보험이 함께 운영됩니다.", "순이자이익과 비은행 수수료 수익이 각각 어떻게 움직이는지 구분해 봐야 합니다."),
+        _idea("대출 성장의 질", "충당금 · 연체 관리", "상각후원가측정 대출채권의 신용손실충당금 측정이 주요 감사사항으로 제시됩니다.", "대출 성장과 건전성 관리가 함께 유지되는지를 확인해야 합니다."),
+    ],
+    "035420": [
+        _idea("검색에서 거래로 이어지는 플랫폼", "서치 · 커머스 · 핀테크", "검색광고와 디스플레이 광고, 쇼핑·라이브커머스, 간편결제와 금융 비교 서비스가 함께 운영됩니다.", "이용자 트래픽이 광고·거래·결제로 얼마나 수익화되는지 보는 것이 좋습니다."),
+        _idea("콘텐츠 IP의 확장", "웹툰 · 웹소설 · 카메라앱", "웹툰·웹소설과 카메라앱 등 디지털 콘텐츠 사업이 별도 부문으로 제시됩니다.", "이용자 기반이 구독·광고·해외 유통과 2차 사업으로 어떻게 연결되는지 확인할 필요가 있습니다."),
+    ],
+    "005490": [
+        _idea("고객 산업이 다른 철강 제품", "자동차 · 조선 · 가전 · 건설", "열연·냉연·후판·스테인리스 등 철강 제품은 자동차, 조선, 가전, 건설 등 서로 다른 산업에 공급됩니다.", "전체 철강 수요보다 어떤 고객 산업의 수요가 변하는지 나눠 봐야 합니다."),
+        _idea("철강 밖의 인프라 사업", "무역 · LNG · 건설 · 물류", "철강 외에 무역과 LNG, 건설, 물류 등 인프라 사업이 함께 구성됩니다.", "철강 본업과 인프라 자회사가 각각 어떤 역할을 하는지 구분해 읽는 것이 좋습니다."),
+    ],
+    "298040": [
+        _idea("전력기기와 건설의 다른 시장", "변압기 · 차단기 · 건설", "전력기기·산업설비 제조와 주택·상업시설·SOC 건설이 함께 사업부문으로 제시됩니다.", "전력기기 호조가 건설 부문의 변동성을 얼마나 보완하는지 볼 필요가 있습니다."),
+        _idea("전력망 투자 수요", "변압기 · STATCOM · ESS", "변압기, 차단기, 전동기와 STATCOM·ESS 등 전력 시스템 제품을 제공합니다.", "해외 전력망 투자와 신재생에너지 확장이 실제 수주와 납품으로 이어지는지 확인해야 합니다."),
+    ],
+    "009540": [
+        _idea("여러 자회사가 나누는 조선 사업", "조선 · 해양 · 엔진 · 그린에너지", "선박 건조와 해양플랜트, 선박용 엔진, 태양광·연료전지·수전해 사업이 함께 제시됩니다.", "어느 자회사가 수주와 이익을 이끄는지 구분해 보는 것이 좋습니다."),
+        _idea("선종별 수주의 질", "LNG선 · 컨테이너선 · 유조선", "LNG선, 컨테이너선, 원유운반선과 해양플랜트는 건조 난도와 계약 기간이 서로 다릅니다.", "고부가 선종의 비중과 프로젝트 원가 관리가 안정적인지 확인할 필요가 있습니다."),
+    ],
+    "015760": [
+        _idea("판매가격과 발전원가의 차이", "전기요금 · 연료비", "전력 판매와 원자력·화력 발전, 발전소 설계·정비 사업이 함께 구성됩니다.", "전기 판매가격과 연료비가 얼마나 벌어져 있는지가 사업의 핵심입니다."),
+        _idea("발전원 구성의 변화", "원전 · 화력 · 신재생", "원전, 화력, 신재생 발전은 설비와 연료비 구조가 다릅니다.", "발전량보다 어떤 발전원이 전기를 생산했는지를 함께 봐야 비용 구조를 이해할 수 있습니다."),
+    ],
+    "010120": [
+        _idea("전력망과 공장을 함께 겨냥", "전력기기 · 자동화 · IT", "전력기기·전력시스템, PLC·인버터 자동화, 데이터센터·스마트팩토리 IT 사업이 함께 운영됩니다.", "전력 인프라 투자와 제조업 자동화가 각각 어느 부문에 반영되는지 구분해 봐야 합니다."),
+        _idea("데이터센터와 신재생 수요", "전력 시스템 · 스마트팩토리", "전력을 안정적으로 공급하고 제어하는 제품과 시스템을 제공합니다.", "데이터센터와 신재생에너지 확장이 기기 판매를 넘어 시스템·IT 서비스로 이어지는지 확인할 필요가 있습니다."),
+    ],
+    "042700": [
+        _idea("AI 메모리 공정의 장비", "HBM TC 본더 · 검사장비", "HBM TC 본더와 하이브리드 본더, 검사장비 등 반도체 제조용 장비를 주요 제품으로 제시합니다.", "메모리 업체의 HBM 투자 계획이 장비 주문으로 얼마나 연결되는지가 핵심입니다."),
+        _idea("고객 설비투자의 시간차", "수주 · 제작 · 납품", "장비 매출은 고객사가 증설하거나 공정 세대 전환을 결정하는 시점에 영향을 받습니다.", "수주가 늘어난 뒤 실제 납품과 매출로 이어지는 시점을 함께 봐야 합니다."),
+    ],
+    "034730": [
+        _idea("지주회사 안의 여러 업황", "IT · 정유화학 · 배터리", "지주·투자사업 외에 IT서비스, 석유·화학, 배터리, 에너지·전력 사업이 함께 제시됩니다.", "단일 제품 실적보다 자회사별 업황이 그룹 전체에 어떻게 반영되는지 봐야 합니다."),
+        _idea("에너지 사업의 서로 다른 논리", "정유 · 화학 · 배터리", "정유는 유가와 정제마진, 화학은 제품 스프레드, 배터리는 전기차 수요와 설비투자에 영향을 받습니다.", "사업별 회복 속도가 다를 수 있으므로 하나의 에너지 지표로 묶어 보지 않는 것이 좋습니다."),
+    ],
+    "316140": [
+        _idea("은행 중심에서 비은행 확장", "보험 · 카드 · 캐피탈 · 증권", "은행 외에 보험, 신용카드, 자동차·기업금융 캐피탈, 증권 사업이 함께 구성됩니다.", "순이자이익과 비은행 수수료·보험 수익이 각각 어떤 역할을 하는지 볼 필요가 있습니다."),
+        _idea("대출과 건전성의 균형", "순이자이익 · 충당금", "은행 사업은 예금과 대출에서 이자수익을 만들고, 대출채권의 신용손실충당금 측정이 주요 감사사항으로 제시됩니다.", "대출 성장과 충당금 부담이 함께 관리되는지 확인해야 합니다."),
+    ],
+    "272210": [
+        _idea("방산전자와 ICT의 다른 계약", "레이다 · 전투체계 · IT서비스", "감시정찰·지휘통제통신·항공전자·해양시스템 등 방산과 IT 아웃소싱·SI·디지털 플랫폼이 함께 운영됩니다.", "수주형 방산 매출과 반복 서비스 성격의 ICT 매출을 나눠 봐야 합니다."),
+        _idea("위성과 방산 전자기술", "위성 탑재체 · 감시정찰", "위성 탑재체와 레이다, 전자광학 장비가 주요 제품으로 제시됩니다.", "개발 단계와 실제 납품 단계가 어디인지 구분해 보는 것이 중요합니다."),
+    ],
+    "010140": [
+        _idea("고부가 선박과 해양플랫폼", "LNG선 · 컨테이너선 · LNG-FPSO", "LNG선과 초대형 컨테이너선, 유조선, LNG-FPSO와 FPU가 주요 제품으로 제시됩니다.", "수주 금액보다 고부가 프로젝트의 비중이 어떻게 바뀌는지 보는 것이 좋습니다."),
+        _idea("수주 뒤의 원가와 납기", "기자재 · 공정 관리", "조선해양 사업은 계약 이후 원가와 일정 변화가 수익성에 영향을 줄 수 있습니다.", "복잡한 공정률 산식보다 원가 상승과 납기 지연 위험이 줄고 있는지 확인하는 편이 이해하기 쉽습니다."),
+    ],
+    "051910": [
+        _idea("네 가지 사업의 다른 사이클", "석유화학 · 첨단소재 · 생명과학 · 배터리", "석유화학, 첨단소재, 생명과학과 LG에너지솔루션이 함께 연결되어 있습니다.", "전통 화학 경기와 배터리 소재·의약품 사업이 같은 방향으로 움직이지 않는다는 점을 봐야 합니다."),
+        _idea("첨단소재의 고객 산업", "전지소재 · 전자소재", "양극재·분리막·전자소재는 자동차, 반도체, 디스플레이 산업과 연결됩니다.", "화학 제품 가격뿐 아니라 고객 산업의 투자와 수요 변화도 함께 확인할 필요가 있습니다."),
+    ],
+    "064350": [
+        _idea("방산과 철도의 장기 수주", "K2전차 · 철도차량", "K2전차·장갑차 등 방산과 고속철·전동차 등 레일 사업이 함께 제시됩니다.", "수주가 늘어도 매출은 생산과 납품을 거쳐 여러 해에 걸쳐 나타날 수 있습니다."),
+        _idea("새 사업의 확장 단계", "수소 · 로봇 · 스마트물류", "에코플랜트 부문에서 수소 인프라, 산업용 로봇, 스마트물류 사업을 추진합니다.", "초기 사업은 수주와 실적 전환 단계를 구분해 보는 것이 좋습니다."),
+    ],
+    "000810": [
+        _idea("보험마다 다른 손익 구조", "자동차 · 일반 · 장기보험", "자동차보험, 화재·해상 등 일반보험, 장기손해보험이 함께 주요 사업으로 제시됩니다.", "보험료 수입만 보지 말고 사고율·수리비·계약 유지에 따라 달라지는 손익을 나눠 봐야 합니다."),
+        _idea("해외 보험의 역할", "해외 손해보험", "인도네시아·베트남·유럽 등 해외 보험 사업이 함께 운영됩니다.", "해외 매출 확대가 현지 손해율과 규제, 환율을 감안해 이익으로 이어지는지 확인할 필요가 있습니다."),
+    ],
+    "000150": [
+        _idea("자회사 포트폴리오", "전자소재 · IT · 발전 · 건설기계", "CCL 전자소재, IT 시스템·클라우드, 발전플랜트, 건설기계 등 서로 다른 사업이 함께 구성됩니다.", "특정 자회사의 성과를 그룹 전체 실적과 구분해 보는 것이 중요합니다."),
+        _idea("반도체와 전자기기용 소재", "CCL", "전자BG는 PCB 기판소재인 CCL을 생산·공급합니다.", "서버·통신·자동차 전장 수요 변화가 전자소재 사업에 어떻게 반영되는지 확인할 필요가 있습니다."),
+    ],
+    "035720": [
+        _idea("카카오톡에서 거래로", "광고 · 커머스 · 모빌리티 · 결제", "카카오톡 기반의 광고·커머스·모빌리티·결제 서비스가 플랫폼 부문에 함께 제시됩니다.", "이용자 기반이 광고, 거래, 결제로 얼마나 수익화되는지 보는 것이 좋습니다."),
+        _idea("콘텐츠 IP의 확장", "게임 · 음악 · 웹툰 · 영상", "게임, 음악, 웹툰, 영상 콘텐츠 제작과 유통이 별도 콘텐츠 부문으로 구성됩니다.", "플랫폼과 달리 흥행 변동성이 큰 콘텐츠가 해외 유통과 2차 사업으로 이어지는지 확인할 필요가 있습니다."),
+    ],
+    "079550": [
+        _idea("방산 전자 체계", "유도무기 · 레이다 · C4I", "유도무기, 감시정찰 레이다·센서, 지휘통제·통신 체계가 주요 사업 카드로 분류됩니다.", "무기 한 종류보다 체계별 수주가 어떻게 늘어나는지 구분해 보는 것이 좋습니다."),
+        _idea("수주 이후의 양산", "생산능력 · 납품 일정", "방산 사업은 수주 뒤 생산능력을 확보하고 장기간에 걸쳐 납품하는 구조입니다.", "해외 수출 계약이 실제 양산과 납품으로 이어지는지를 확인해야 합니다."),
+    ],
+    "096770": [
+        _idea("같은 에너지 안의 다른 사업", "정유 · 화학 · LNG · 배터리", "원유 정제와 화학소재, LNG·전력, 전기차·ESS용 배터리 사업이 함께 구성됩니다.", "유가와 정제마진, 화학 스프레드, 전기차 수요를 각각 나눠 봐야 합니다."),
+        _idea("배터리의 성장 투자", "생산능력 · 고객 수요", "배터리 사업은 생산능력을 미리 확보해야 하지만 고객 수요가 기대보다 늦어지면 투자 부담이 커질 수 있습니다.", "기존 정유·에너지 사업이 배터리 투자 부담을 얼마나 보완하는지 확인할 필요가 있습니다."),
+    ],
+    "011200": [
+        _idea("두 가지 해운 운임", "컨테이너 · 벌크", "컨테이너 수송과 유조선·건화물선 등 벌크 운송, 터미널 운영이 함께 사업을 이룹니다.", "소비재·제조업 물동량에 민감한 컨테이너와 원자재·에너지 수송에 연결된 벌크를 구분해 봐야 합니다."),
+        _idea("선대와 터미널의 경쟁력", "운항 · 항만 · 연료", "선박 운송 외에 터미널 운영과 LNG 연료선 등도 사업에 포함됩니다.", "운임이 약해지는 국면에는 선대 운영과 항만·연료 효율이 비용 경쟁력으로 이어지는지 확인할 필요가 있습니다."),
+    ],
+    "017670": [
+        _idea("반복 매출의 통신 기반", "5G · 초고속인터넷 · IPTV", "이동통신과 유선통신, IPTV, 데이터센터 서비스가 함께 운영됩니다.", "가입자 기반에서 나오는 반복 매출과 신규 서비스의 성장을 구분해 보는 것이 좋습니다."),
+        _idea("통신망 위의 데이터센터", "AI · 데이터센터", "통신 네트워크 역량을 바탕으로 데이터센터와 기업용 서비스로 사업을 넓히고 있습니다.", "신규 사업은 기존 통신 서비스와 달리 투자와 초기 비용이 함께 발생한다는 점을 봐야 합니다."),
+    ],
+    "000720": [
+        _idea("서로 다른 건설 수주", "주택 · 토목 · 플랜트 · 원전", "국내 주택과 토목, 석유화학 플랜트, 원전·SMR, 신재생에너지·송변전 사업이 함께 제시됩니다.", "부동산 경기, 해외 에너지 투자, 장기 정책 수요가 어느 부문에 반영되는지 나눠 봐야 합니다."),
+        _idea("수주보다 실행력", "원가 · 일정 · 회수", "건설업은 계약 뒤 공사를 진행하는 동안 원가와 일정이 바뀔 수 있습니다.", "신규 수주와 별개로 진행 중인 프로젝트의 원가와 납기, 대금 회수가 안정적인지 확인해야 합니다."),
+    ],
+    "267250": [
+        _idea("서로 다른 업황의 그룹", "조선 · 정유 · 전력기기 · 건설기계", "선박·해양플랜트, 석유제품, 전력기기, 건설기계가 한 그룹 안에 함께 제시됩니다.", "한 사업의 부진을 다른 사업이 보완할 수 있지만, 사업별 업황이 동시에 움직이지 않는다는 점을 봐야 합니다."),
+        _idea("사업별로 다른 실적 변수", "선가 · 정제마진 · 전력망 · 인프라", "조선은 장기 수주, 정유는 유가·정제마진, 전력기기는 전력망 투자, 건설기계는 경기와 인프라 투자에 영향을 받습니다.", "그룹 전체 수치보다 어떤 사업이 성과를 이끌었는지 구분해 보는 것이 좋습니다."),
+    ],
+    "138040": [
+        _idea("금융 자회사별 이익 원리", "손해보험 · 증권 · 여신금융", "손해보험, 증권중개·자산관리·기업금융, 리스·할부금융·대출이 함께 사업부문으로 제시됩니다.", "보험의 손해율, 증권의 거래·운용 성과, 여신의 신용위험을 나눠 봐야 합니다."),
+        _idea("보험과 투자 성과의 구분", "보험금 · 운용손익", "보험은 사고와 보험금 지급, 금융투자는 시장 가격과 운용 성과에 영향을 받습니다.", "금융시장 호조만으로 그룹 이익을 설명하지 말고 어느 부문에서 이익이 났는지 확인할 필요가 있습니다."),
+    ],
+    "003670": [
+        _idea("배터리 소재와 기존 소재", "양극재 · 음극재 · 내화물", "양극재·음극재 등 에너지소재와 내화물·라임화성 사업이 함께 구성됩니다.", "배터리 소재 수요가 약할 때 기존 철강 관련 소재 사업이 어떤 역할을 하는지 봐야 합니다."),
+        _idea("증설과 실제 판매의 차이", "생산능력 · 고객 수요", "양극재와 음극재 공장 확대는 고객사의 배터리 주문과 연결되어야 실적으로 이어집니다.", "생산능력 증가뿐 아니라 실제 가동과 판매가 따라오는지 확인하는 것이 중요합니다."),
+    ],
+    "033780": [
+        _idea("본업과 별도 성장 축", "담배 · 차세대담배 · 건강기능식품", "궐련과 HNB가 담배사업의 중심이고, 홍삼 등 건강기능식품이 별도 사업부문으로 구성됩니다.", "담배와 건강기능식품은 고객 수요와 유통 구조가 다르므로 따로 봐야 합니다."),
+        _idea("차세대담배의 직접 판매", "온라인몰 전환", "사업보고서에는 위탁 방식의 HNB 디바이스 온라인 판매를 직접 사업 방식으로 전환한 내용이 제시됩니다.", "단순 판매지역 확대가 아니라 고객 접점과 유통 효율을 높이는 변화로 읽는 편이 적절합니다."),
+    ],
+}
+
+
+def _flatten_strings(value: Any) -> Iterable[str]:
+    if isinstance(value, str):
+        yield value
+    elif isinstance(value, list):
+        for item in value:
+            yield from _flatten_strings(item)
+    elif isinstance(value, dict):
+        for item in value.values():
+            yield from _flatten_strings(item)
+
+
+def _clean(text: str) -> str:
+    text = re.sub(r"<[^>]+>", " ", text)
+    text = re.sub(r"\s+", " ", text)
+    return text.strip()
+
+
+def _truncate(text: str | None, limit: int = 360) -> str | None:
+    if not text:
+        return None
+    text = _clean(text)
+    if len(text) <= limit:
+        return text
+    cut = text[:limit].rstrip()
+    last = max(cut.rfind("."), cut.rfind("다."), cut.rfind("니다."))
+    if last > limit * 0.55:
+        return cut[: last + 1]
+    return text
+
+
+def _first_snippet(strings: list[str], patterns: list[str], limit: int = 380) -> str | None:
+    lowered_patterns = [p.lower() for p in patterns]
+    for raw in strings:
+        text = _clean(raw)
+        if len(text) < 45:
+            continue
+        lower = text.lower()
+        if any(pattern in lower for pattern in lowered_patterns):
+            return _truncate(text, limit)
+    return None
+
+
+def _extract_raw_moves(text: str | None) -> list[dict[str, Any]]:
+    if not text:
+        return []
+    moves: list[dict[str, Any]] = []
+    clauses = re.split(r"[.。,;]", _clean(text).replace("하였고", "하였고.").replace("하였으며", "하였으며."))
+    pattern = re.compile(r"([가-힣A-Za-z0-9·ㆍ\-\s]{2,36}?)\s*가격(?:은|이)?\s*[^.]{0,42}?약\s*([0-9.]+)%\s*(상승|하락)")
+    for clause in clauses:
+        match = pattern.search(clause)
+        if not match:
+            continue
+        name, pct, direction = match.groups()
+        name = re.sub(r"^(및|중|부문의|원재료인|주요 원재료인)\s*", "", _clean(name))
+        name = re.sub(r"^.*?(DX 부문|DS 부문|SDC|Harman)의\s+", "", name)
+        if not name or len(name) > 30 or "유사한 수준" in name:
+            continue
+        signed = float(pct) * (1 if direction == "상승" else -1)
+        moves.append({"name": name, "pct": signed, "direction": direction})
+    return moves[:8]
+
+
+def _extract_utilization(text: str | None) -> list[dict[str, Any]]:
+    if not text:
+        return []
+    items: list[dict[str, Any]] = []
+    pattern = re.compile(r"([가-힣A-Za-z0-9·ㆍ,\s]{2,24}?)(?:은|는)\s*([0-9.]+)%")
+    for name, pct in pattern.findall(text):
+        value = float(pct)
+        if value <= 0 or value > 100:
+            continue
+        name = _clean(name).strip(" ,")
+        if len(name) < 2 or "년" in name:
+            continue
+        items.append({"name": name, "rate": value})
+    deduped: list[dict[str, Any]] = []
+    seen = set()
+    for item in items:
+        key = (item["name"], item["rate"])
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append(item)
+    return deduped[:6]
+
+
+def _load_report_snippets(corp_code: str, report_index: dict[str, Any]) -> dict[str, Any]:
+    meta = report_index.get(corp_code) or {}
+    rcept_no = meta.get("rcept_no")
+    parsed_path = ROOT / "modules" / "disclosure" / "data" / "fulltext" / corp_code / str(rcept_no) / "parsed.json"
+    summary_path = ROOT / "modules" / "disclosure" / "data" / "fulltext" / corp_code / str(rcept_no) / "summary.json"
+    snippets = {
+        "overview": None,
+        "raw_material": None,
+        "capacity": None,
+        "segment_finance": None,
+        "segment_breakdown": [],
+        "investor_note": None,
+        "products": [],
+        "raw_moves": [],
+        "utilization": [],
+    }
+    if not parsed_path.exists():
+        return snippets
+    try:
+        parsed = json.loads(parsed_path.read_text(encoding="utf-8"))
+    except Exception:
+        return snippets
+
+    strings = [_clean(s) for s in _flatten_strings(parsed)]
+    snippets["overview"] = _first_snippet(
+        strings,
+        ["사업별로 보면", "사업의 개요", "주요 제품 및 서비스", "제품을 생산", "서비스를 제공"],
+        420,
+    )
+    snippets["raw_material"] = _first_snippet(
+        strings,
+        ["주요 원재료 가격 변동", "원재료 가격", "주요 원재료"],
+        460,
+    )
+    snippets["capacity"] = _first_snippet(
+        strings,
+        ["생산능력, 생산실적, 가동률", "가동률", "생산능력"],
+        460,
+    )
+    snippets["segment_finance"] = _first_snippet(
+        strings,
+        ["사업부문별 요약 재무 현황", "부문별 요약 재무", "부문별 매출"],
+        460,
+    )
+    if summary_path.exists():
+        try:
+            summary = json.loads(summary_path.read_text(encoding="utf-8"))
+            snippets["segment_breakdown"] = [
+                {
+                    "name": _clean(segment.get("name")),
+                    "desc": _clean(segment.get("desc")),
+                    "revenue_share": float(segment.get("revenue_share")),
+                }
+                for segment in summary.get("segments", [])
+                if segment.get("name") and segment.get("revenue_share") is not None
+            ]
+            snippets["investor_note"] = _clean(summary.get("investor_notes"))
+            snippets["products"] = [
+                _clean(product)
+                for product in summary.get("products", [])
+                if _clean(product)
+            ]
+        except Exception:
+            pass
+    snippets["raw_moves"] = _extract_raw_moves(snippets["raw_material"])
+    snippets["utilization"] = _extract_utilization(snippets["capacity"])
+    return snippets
+
+
+def _to_krw_from_eok(value: Any) -> float | None:
+    try:
+        number = float(value)
+    except (TypeError, ValueError):
+        return None
+    if number == 0:
+        return None
+    return number * 100_000_000
+
+
+def _load_market_snapshot(rows: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    today = datetime.now().strftime("%Y-%m-%d")
+    if MARKET_SNAPSHOT_PATH.exists():
+        try:
+            cached = json.loads(MARKET_SNAPSHOT_PATH.read_text(encoding="utf-8"))
+            if cached.get("date") == today and isinstance(cached.get("items"), dict):
+                return cached["items"]
+        except Exception:
+            pass
+
+    items: dict[str, dict[str, Any]] = {}
+    try:
+        import yfinance as yf  # type: ignore
+    except Exception as exc:
+        print(f"market snapshot skipped: yfinance import failed ({exc})")
+        return items
+
+    for row in rows:
+        code = str(row.get("stock_code") or "").zfill(6)
+        if not code or not code.isdigit():
+            continue
+        ticker = f"{code}.KS"
+        try:
+            info = yf.Ticker(ticker).fast_info
+            market_cap = getattr(info, "market_cap", None)
+            last_price = getattr(info, "last_price", None)
+            if market_cap:
+                items[code] = {
+                    "ticker": ticker,
+                    "market_cap": float(market_cap),
+                    "last_price": float(last_price) if last_price else None,
+                }
+        except Exception:
+            continue
+
+    try:
+        MARKET_SNAPSHOT_PATH.write_text(
+            json.dumps({"date": today, "items": items}, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
+    except Exception:
+        pass
+    return items
+
+
+def _load_business_cards() -> dict[str, list[dict[str, Any]]]:
+    """Restore the archived orbit-card visuals for the static reader."""
+    if not DISCLOSURE_DB_PATH.exists():
+        return {}
+
+    cards_by_stock: dict[str, list[dict[str, Any]]] = {}
+    try:
+        with sqlite3.connect(DISCLOSURE_DB_PATH) as conn:
+            rows = conn.execute(
+                """
+                SELECT stock_code, card_title, card_caption, card_kind, visual_label,
+                       image_url, image_source, local_path
+                FROM business_card_visual
+                ORDER BY stock_code, id
+                """
+            ).fetchall()
+    except sqlite3.Error:
+        return {}
+
+    for (
+        stock_code,
+        title,
+        caption,
+        kind,
+        visual,
+        image_url,
+        image_source,
+        local_path,
+    ) in rows:
+        code = str(stock_code or "").zfill(6)
+        image = image_url
+        if local_path:
+            local_file = ROOT / str(local_path)
+            if local_file.exists():
+                image = os.path.relpath(local_file, OUT_PATH.parent).replace("\\", "/")
+        cards_by_stock.setdefault(code, []).append(
+            {
+                "title": title,
+                "caption": caption,
+                "kind": kind,
+                "visual": visual,
+                "image": image,
+                "image_source": image_source,
+            }
+        )
+    return cards_by_stock
+
+
+def _simplify_row(
+    row: dict[str, Any],
+    rank: int,
+    report_index: dict[str, Any],
+    market_snapshot: dict[str, dict[str, Any]],
+    business_cards: dict[str, list[dict[str, Any]]],
+) -> dict[str, Any]:
+    corp_code = row.get("corp_code") or ""
+    report_meta = report_index.get(corp_code) or {}
+    stock_code = str(row.get("stock_code") or "").zfill(6)
+    latest_year = row.get("latest_year") or {}
+    snapshot = market_snapshot.get(stock_code) or {}
+    market_cap = snapshot.get("market_cap") or row.get("market_cap")
+    net_income_krw = _to_krw_from_eok(latest_year.get("net_income"))
+    ttm_per = None
+    if market_cap and net_income_krw and net_income_krw > 0:
+        ttm_per = float(market_cap) / net_income_krw
+    return {
+        "rank": rank,
+        "name": row.get("name"),
+        "stock_code": stock_code,
+        "corp_code": corp_code,
+        "grade": row.get("grade"),
+        "total": row.get("total"),
+        "market_cap": market_cap,
+        "last_price": snapshot.get("last_price"),
+        "ttm_per": ttm_per,
+        "dart_url": row.get("dart_url"),
+        "latest_year": latest_year,
+        "history": row.get("history") or {},
+        "modules": row.get("modules") or {},
+        "percentile": row.get("percentile") or {},
+        "report": {
+            "name": report_meta.get("report_nm"),
+            "date": report_meta.get("rcept_dt"),
+            "rcept_no": report_meta.get("rcept_no"),
+        },
+        "snippets": _load_report_snippets(corp_code, report_index),
+        "business_cards": business_cards.get(stock_code, []),
+    }
+
+
+HTML_TEMPLATE = r"""<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>국내상장기업 사업보고서 reader</title>
-  <link rel="stylesheet" href="tokens.css"><!-- D3 공유 프리미티브 -->
-  <link rel="stylesheet" href="theme-galaxy.css"><!-- D3 표면 테마 — mint 팔레트·기본색 정본 (--mint·--cyan·--gold·--coral·--steel·--bg·--text·--panel·--line) -->
-  <script>
-    /* 산업군별 동적 테마 — 셸이 넘긴 ?accent=<섹터색>으로 주 액센트 오버라이드 (브래킷·헤더·강조). 없으면 mint 기본. */
-    (function(){ var a=new URLSearchParams(location.search).get('accent'); if(a){ var r=document.documentElement.style; r.setProperty('--edge-accent',a); r.setProperty('--mint',a); } })();
-  </script>
   <style>
-    /* 로컬 폰트 (galaxy와 일치 — Phase 0-B 벤더링) */
-    @font-face{font-family:'Pretendard Variable';font-weight:400 700;font-display:swap;src:url('assets/fonts/pretendard/PretendardVariable.woff2') format('woff2-variations');}
-    @font-face{font-family:'IBM Plex Mono';font-weight:400;font-display:swap;src:url('assets/fonts/ibm-plex-mono/IBMPlexMono-Regular.latin.woff2') format('woff2');}
-    @font-face{font-family:'IBM Plex Mono';font-weight:600;font-display:swap;src:url('assets/fonts/ibm-plex-mono/IBMPlexMono-SemiBold.latin.woff2') format('woff2');}
-    @font-face{font-family:'IBM Plex Mono';font-weight:700;font-display:swap;src:url('assets/fonts/ibm-plex-mono/IBMPlexMono-Bold.latin.woff2') format('woff2');}
     :root {
       color-scheme: dark;
-      /* 팔레트·기본색은 theme-galaxy.css(정본)에서 — 여기엔 페이지 고유 토큰만 */
+      --bg:#060914;
+      --panel:#0c1222;
       --panel2:#11182b;
+      --line:rgba(148,163,184,.18);
+      --text:#edf6ff;
       --soft:#b8c6d9;
       --muted:#7d8ba3;
-      font-family: 'Pretendard Variable', Pretendard, "Noto Sans KR", system-ui, -apple-system, sans-serif;
+      --cyan:#41dcff;
+      --teal:#36e5bd;
+      --pink:#ff4f7e;
+      --gold:#f7d56f;
+      --violet:#9d81ff;
+      font-family: Inter, Pretendard, "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     }
     * { box-sizing: border-box; }
     body {
       margin:0;
       min-height:100vh;
-      /* 앰비언트 = galaxy 팔레트 토큰만 (구 violet rgba(117,144,176) 오프팔레트 제거 → steel) */
       background:
-        radial-gradient(1100px 700px at 12% 6%, rgba(116,238,198,.05), transparent 62%),
-        radial-gradient(900px 700px at 86% 18%, rgba(117,144,176,.05), transparent 62%),
-        radial-gradient(1100px 800px at 50% 92%, rgba(92,199,234,.05), transparent 62%),
+        radial-gradient(circle at 15% 4%, rgba(65,220,255,.18), transparent 28%),
+        radial-gradient(circle at 86% 0%, rgba(255,79,126,.18), transparent 30%),
+        radial-gradient(circle at 54% 74%, rgba(157,129,255,.14), transparent 38%),
         var(--bg);
       color:var(--text);
     }
@@ -43,7 +569,7 @@
       pointer-events:none;
       background-image:
         radial-gradient(circle, rgba(255,255,255,.35) 0 1px, transparent 1.6px),
-        radial-gradient(circle, rgba(116,238,198,.20) 0 1px, transparent 1.5px);
+        radial-gradient(circle, rgba(65,220,255,.25) 0 1px, transparent 1.5px);
       background-size: 92px 92px, 137px 137px;
       background-position: 0 0, 42px 24px;
       opacity:.16;
@@ -51,13 +577,6 @@
     a { color: inherit; }
     button, input { font: inherit; }
     .page { position:relative; z-index:1; width:min(1440px, calc(100% - 32px)); margin:0 auto; padding:22px 0 30px; }
-    .dsr-hd { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:6px 0 18px; margin-bottom:16px; border-bottom:1px solid var(--line); }
-    .dsr-hl { display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
-    .dsr-dot { width:12px; height:12px; border-radius:50%; background:var(--mint); box-shadow:0 0 14px var(--mint); flex-shrink:0; }
-    .dsr-logo { font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:14px; font-weight:700; letter-spacing:.3em; }
-    .dsr-sub { font-size:12px; color:var(--muted); letter-spacing:.05em; margin-top:2px; }
-    .dsr-badge { font-size:13px; color:var(--text); border:1px solid var(--line); border-radius:6px; padding:5px 12px; background:rgba(255,255,255,.02); margin-left:6px; }
-    .dsr-unit { font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:11px; color:var(--muted); letter-spacing:.08em; text-align:right; }
     .hero {
       display:grid;
       grid-template-columns:minmax(0, 1fr) auto;
@@ -78,29 +597,22 @@
     .hero-badge { color:var(--soft); font-size:12px; font-weight:850; white-space:nowrap; }
     .tabs { display:flex; gap:8px; border:1px solid var(--line); border-radius:18px; background:rgba(6,10,20,.74); padding:8px; margin-bottom:16px; }
     .tab { border:0; border-radius:999px; padding:10px 16px; background:transparent; color:var(--muted); font-size:12px; font-weight:950; }
-    .tab.active { background:linear-gradient(135deg, var(--cyan), var(--mint)); color:#031018; box-shadow:0 0 28px rgba(92,199,234,.25); }
+    .tab.active { background:linear-gradient(135deg, var(--cyan), var(--teal)); color:#031018; box-shadow:0 0 28px rgba(65,220,255,.25); }
     .tab[disabled] { opacity:.48; }
-    .workspace { display:grid; grid-template-columns:1fr; gap:16px; align-items:start; }
+    .workspace { display:grid; grid-template-columns:320px minmax(0,1fr); gap:16px; align-items:start; }
     .rail, .panel {
-      position:relative;
       border:1px solid var(--line);
-      border-radius:3px;
-      background:var(--panel);            /* galaxy ZONE 카드 동일 */
+      border-radius:16px;
+      background:rgba(8,13,27,.78);
       box-shadow:0 18px 50px rgba(0,0,0,.26);
     }
-    /* 브래킷 = 바깥 래퍼 패널(#readerPanel)에만 — 얇고 각진 셸 컨셉 (DESIGN.md §패널 엣지) */
-    .panel::before, .panel::after {
-      content:''; position:absolute; width:10px; height:10px; border:1px solid var(--edge-accent, var(--mint)); opacity:.7; pointer-events:none;
-    }
-    .panel::before { top:-1px; left:-1px; border-right:0; border-bottom:0; }
-    .panel::after  { bottom:-1px; right:-1px; border-left:0; border-top:0; }
     .rail { position:sticky; top:14px; max-height:calc(100vh - 28px); overflow:hidden; }
     .rail-head { padding:15px; border-bottom:1px solid var(--line); }
     .rail-head h2 { margin:0 0 10px; font-size:17px; }
     .search { width:100%; border:1px solid rgba(255,255,255,.12); border-radius:12px; background:rgba(255,255,255,.05); color:var(--text); padding:10px 11px; outline:0; }
     .sorts { display:grid; grid-template-columns:repeat(2, 1fr); gap:6px; margin-top:9px; }
-    .sort-btn { border:1px solid rgba(255,255,255,.10); border-radius:3px; background:rgba(255,255,255,.04); color:var(--soft); padding:7px 6px; font-size:11px; font-weight:900; cursor:pointer; }
-    .sort-btn.active { border-color:rgba(92,199,234,.58); color:var(--cyan); background:rgba(92,199,234,.10); }
+    .sort-btn { border:1px solid rgba(255,255,255,.10); border-radius:10px; background:rgba(255,255,255,.04); color:var(--soft); padding:7px 6px; font-size:11px; font-weight:900; cursor:pointer; }
+    .sort-btn.active { border-color:rgba(65,220,255,.58); color:var(--cyan); background:rgba(65,220,255,.10); }
     .company-list { max-height:calc(100vh - 166px); overflow:auto; padding:8px; }
     .company-btn {
       width:100%;
@@ -116,7 +628,7 @@
       gap:9px;
       align-items:center;
     }
-    .company-btn:hover, .company-btn.active { border-color:rgba(92,199,234,.28); background:rgba(92,199,234,.08); }
+    .company-btn:hover, .company-btn.active { border-color:rgba(65,220,255,.28); background:rgba(65,220,255,.08); }
     .rank { color:var(--muted); font-size:11px; font-weight:950; }
     .cname { color:var(--text); font-size:13px; font-weight:950; overflow:visible; white-space:normal; text-overflow:clip; line-height:1.3; }
     .cticker { color:var(--muted); font-size:10px; margin-top:2px; }
@@ -125,9 +637,9 @@
       overflow:visible;
       text-overflow:clip;
       white-space:normal;
-      border:1px solid rgba(92,199,234,.18);
+      border:1px solid rgba(65,220,255,.18);
       border-radius:999px;
-      background:rgba(92,199,234,.08);
+      background:rgba(65,220,255,.08);
       color:var(--cyan);
       padding:5px 8px;
       font-size:10px;
@@ -139,16 +651,15 @@
       position:relative;
       min-height:430px;
       border-bottom:1px solid var(--line);
-      /* 오빗 히어로 배경 = galaxy 팔레트 토큰만 (구 magenta rgba(236,140,106)·violet 제거 → cyan/coral) */
       background:
-        radial-gradient(ellipse at 50% 46%, rgba(92,199,234,.12), transparent 40%),
-        radial-gradient(ellipse at 74% 72%, rgba(236,140,106,.08), transparent 36%),
-        var(--panel);
+        radial-gradient(ellipse at 50% 46%, rgba(65,220,255,.14), transparent 40%),
+        radial-gradient(ellipse at 74% 72%, rgba(255,79,126,.11), transparent 36%),
+        linear-gradient(135deg, rgba(8,15,34,.96), rgba(18,11,32,.92));
       padding:28px 32px;
       overflow:hidden;
     }
     .orbit-lines, .planet, .planet-ring { position:absolute; left:50%; top:50%; transform:translate(-50%, -50%); }
-    .orbit-lines { width:720px; height:300px; border:1px solid rgba(92,199,234,.10); border-radius:50%; transform:translate(-50%, -50%) rotate(-9deg); animation:orbitDrift 18s ease-in-out infinite; }
+    .orbit-lines { width:720px; height:300px; border:1px solid rgba(65,220,255,.10); border-radius:50%; transform:translate(-50%, -50%) rotate(-9deg); animation:orbitDrift 18s ease-in-out infinite; }
     .orbit-lines::before, .orbit-lines::after {
       content:""; position:absolute; inset:38px 70px; border:1px solid rgba(157,129,255,.10); border-radius:50%;
     }
@@ -159,15 +670,15 @@
       background:
         radial-gradient(circle at 34% 26%, rgba(255,255,255,.86) 0 5px, transparent 8px),
         radial-gradient(circle at 36% 30%, rgba(255,255,255,.16), transparent 18%),
-        radial-gradient(circle at 62% 65%, rgba(3,8,16,.92), rgba(16,79,96,.75) 45%, rgba(92,199,234,.22) 100%);
-      border:1px solid rgba(92,199,234,.42);
-      box-shadow:0 0 42px rgba(92,199,234,.18), inset -34px -36px 45px rgba(0,0,0,.46);
+        radial-gradient(circle at 62% 65%, rgba(3,8,16,.92), rgba(16,79,96,.75) 45%, rgba(65,220,255,.22) 100%);
+      border:1px solid rgba(65,220,255,.42);
+      box-shadow:0 0 42px rgba(65,220,255,.18), inset -34px -36px 45px rgba(0,0,0,.46);
       z-index:3;
       animation:planetFloat 5.8s ease-in-out infinite;
       will-change:transform;
     }
     .planet-ring {
-      width:310px; height:80px; border-radius:50%; border:13px solid rgba(247,213,111,.32); border-left-color:rgba(92,199,234,.22); border-right-color:rgba(236,140,106,.26); transform:translate(-50%, -50%) rotate(-10deg); z-index:2;
+      width:310px; height:80px; border-radius:50%; border:13px solid rgba(247,213,111,.32); border-left-color:rgba(65,220,255,.22); border-right-color:rgba(255,79,126,.26); transform:translate(-50%, -50%) rotate(-10deg); z-index:2;
       mask-image:linear-gradient(to bottom, transparent 0 42%, #000 43% 100%);
       animation:planetRingFloat 5.8s ease-in-out infinite;
       will-change:transform;
@@ -184,7 +695,7 @@
     .hero-grid.cards-2 .orbit-card:nth-child(2) { grid-column:2; }
     .orbit-card {
       width:260px; min-height:205px;
-      border:1px solid rgba(92,199,234,.20);
+      border:1px solid rgba(65,220,255,.20);
       border-radius:16px;
       background:rgba(5,10,22,.75);
       padding:12px;
@@ -193,10 +704,10 @@
     }
     .orbit-card:hover {
       transform:translateY(-4px);
-      border-color:rgba(92,199,234,.45);
-      box-shadow:0 22px 44px rgba(0,0,0,.32), 0 0 28px rgba(92,199,234,.10);
+      border-color:rgba(65,220,255,.45);
+      box-shadow:0 22px 44px rgba(0,0,0,.32), 0 0 28px rgba(65,220,255,.10);
     }
-    .orbit-card:nth-child(2), .orbit-card:nth-child(4) { border-color:rgba(236,140,106,.22); }
+    .orbit-card:nth-child(2), .orbit-card:nth-child(4) { border-color:rgba(255,79,126,.22); }
     .orbit-card h3 { margin:12px 2px 7px; font-size:14px; }
     .orbit-card p { margin:0 2px; color:var(--soft); font-size:12px; line-height:1.5; }
     .product-visual {
@@ -206,7 +717,7 @@
       border:1px solid rgba(255,255,255,.10);
       border-radius:11px;
       background:
-        radial-gradient(circle at 72% 24%, rgba(92,199,234,.22), transparent 22%),
+        radial-gradient(circle at 72% 24%, rgba(65,220,255,.22), transparent 22%),
         linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.02));
     }
     .product-visual.has-image {
@@ -269,10 +780,10 @@
       bottom:10px;
       width:58px;
       height:40px;
-      border-radius:3px;
+      border-radius:10px;
       border:2px solid rgba(255,255,255,.26);
       background:rgba(0,0,0,.20);
-      box-shadow:0 0 22px rgba(92,199,234,.18);
+      box-shadow:0 0 22px rgba(65,220,255,.18);
     }
     .product-visual .art {
       position:absolute;
@@ -280,18 +791,18 @@
       display:block;
       border:2px solid rgba(255,255,255,.22);
       background:rgba(3,8,18,.42);
-      box-shadow:0 0 24px rgba(92,199,234,.16);
+      box-shadow:0 0 24px rgba(65,220,255,.16);
     }
-    .product-visual.device .art.a { right:38px; bottom:14px; width:34px; height:58px; border-radius:13px; border-color:rgba(92,199,234,.72); }
+    .product-visual.device .art.a { right:38px; bottom:14px; width:34px; height:58px; border-radius:13px; border-color:rgba(65,220,255,.72); }
     .product-visual.device .art.b { right:82px; bottom:22px; width:70px; height:44px; border-radius:12px; border-color:rgba(54,229,189,.55); }
     .product-visual.device .art.c { right:18px; bottom:20px; width:22px; height:42px; border-radius:8px; border-color:rgba(255,255,255,.28); }
     .product-visual.chip .art.a,
     .product-visual.storage .art.a,
     .product-visual.sensor .art.a {
       right:34px; bottom:15px; width:58px; height:58px; border-radius:12px;
-      background:linear-gradient(135deg, rgba(236,140,106,.38), rgba(7,10,23,.86));
-      border-color:rgba(236,140,106,.68);
-      box-shadow:inset 0 0 0 8px rgba(255,255,255,.04), 0 0 26px rgba(236,140,106,.22);
+      background:linear-gradient(135deg, rgba(255,79,126,.38), rgba(7,10,23,.86));
+      border-color:rgba(255,79,126,.68);
+      box-shadow:inset 0 0 0 8px rgba(255,255,255,.04), 0 0 26px rgba(255,79,126,.22);
     }
     .product-visual.chip .art.b,
     .product-visual.storage .art.b {
@@ -299,22 +810,22 @@
       transform:skewX(-15deg);
       border-color:rgba(247,213,111,.48);
     }
-    .product-visual.sensor .art.b { right:104px; bottom:28px; width:44px; height:44px; border-radius:50%; border-color:rgba(92,199,234,.55); }
-    .product-visual.display .art.a { right:36px; bottom:18px; width:86px; height:50px; border-radius:3px; border-color:rgba(157,129,255,.78); background:linear-gradient(135deg, rgba(157,129,255,.26), rgba(92,199,234,.12)); }
-    .product-visual.display .art.b { right:16px; bottom:26px; width:52px; height:34px; border-radius:8px; transform:rotate(6deg); border-color:rgba(92,199,234,.40); }
+    .product-visual.sensor .art.b { right:104px; bottom:28px; width:44px; height:44px; border-radius:50%; border-color:rgba(65,220,255,.55); }
+    .product-visual.display .art.a { right:36px; bottom:18px; width:86px; height:50px; border-radius:10px; border-color:rgba(157,129,255,.78); background:linear-gradient(135deg, rgba(157,129,255,.26), rgba(65,220,255,.12)); }
+    .product-visual.display .art.b { right:16px; bottom:26px; width:52px; height:34px; border-radius:8px; transform:rotate(6deg); border-color:rgba(65,220,255,.40); }
     .product-visual.auto .art.a { right:30px; bottom:24px; width:96px; height:34px; border-radius:20px 20px 10px 10px; border-color:rgba(247,213,111,.78); }
     .product-visual.auto .art.b { right:47px; bottom:19px; width:12px; height:12px; border-radius:50%; background:var(--gold); border:0; }
     .product-visual.auto .art.c { right:104px; bottom:19px; width:12px; height:12px; border-radius:50%; background:var(--gold); border:0; }
-    .product-visual.finance .art.a { right:35px; bottom:18px; width:86px; height:54px; border-radius:8px; border-color:rgba(92,199,234,.52); }
-    .product-visual.finance .art.a::before { content:""; position:absolute; left:12px; right:12px; top:10px; height:6px; border-radius:99px; background:rgba(92,199,234,.55); box-shadow:0 14px 0 rgba(92,199,234,.35), 0 28px 0 rgba(92,199,234,.25); }
-    .product-visual.card .art.a { right:28px; bottom:22px; width:98px; height:56px; border-radius:13px; border-color:rgba(92,199,234,.55); background:linear-gradient(135deg, rgba(92,199,234,.24), rgba(54,229,189,.10)); }
+    .product-visual.finance .art.a { right:35px; bottom:18px; width:86px; height:54px; border-radius:8px; border-color:rgba(65,220,255,.52); }
+    .product-visual.finance .art.a::before { content:""; position:absolute; left:12px; right:12px; top:10px; height:6px; border-radius:99px; background:rgba(65,220,255,.55); box-shadow:0 14px 0 rgba(65,220,255,.35), 0 28px 0 rgba(65,220,255,.25); }
+    .product-visual.card .art.a { right:28px; bottom:22px; width:98px; height:56px; border-radius:13px; border-color:rgba(65,220,255,.55); background:linear-gradient(135deg, rgba(65,220,255,.24), rgba(54,229,189,.10)); }
     .product-visual.card .art.a::before { content:""; position:absolute; left:10px; top:13px; width:24px; height:16px; border-radius:5px; background:rgba(247,213,111,.55); }
-    .product-visual.shield .art.a { right:52px; bottom:14px; width:58px; height:66px; border-radius:30px 30px 14px 14px; border-color:rgba(54,229,189,.58); background:linear-gradient(180deg, rgba(54,229,189,.22), rgba(92,199,234,.08)); }
+    .product-visual.shield .art.a { right:52px; bottom:14px; width:58px; height:66px; border-radius:30px 30px 14px 14px; border-color:rgba(54,229,189,.58); background:linear-gradient(180deg, rgba(54,229,189,.22), rgba(65,220,255,.08)); }
     .product-visual.bio .art.a { right:44px; bottom:15px; width:22px; height:62px; border-radius:12px 12px 8px 8px; border-color:rgba(54,229,189,.62); }
     .product-visual.bio .art.b { right:78px; bottom:16px; width:22px; height:58px; border-radius:12px 12px 8px 8px; border-color:rgba(157,129,255,.58); }
     .product-visual.battery .art.a { right:30px; bottom:24px; width:100px; height:48px; border-radius:12px; border-color:rgba(54,229,189,.62); }
     .product-visual.battery .art.a::before { content:""; position:absolute; inset:10px 12px; background:repeating-linear-gradient(90deg, rgba(54,229,189,.50) 0 10px, transparent 10px 16px); }
-    .product-visual.ship .art.a { right:26px; bottom:20px; width:118px; height:38px; border-radius:4px 4px 26px 26px; border-color:rgba(92,199,234,.48); transform:skewX(-12deg); }
+    .product-visual.ship .art.a { right:26px; bottom:20px; width:118px; height:38px; border-radius:4px 4px 26px 26px; border-color:rgba(65,220,255,.48); transform:skewX(-12deg); }
     .product-visual.aero .art.a { right:40px; bottom:28px; width:98px; height:24px; border-radius:50%; border-color:rgba(247,213,111,.55); transform:rotate(-8deg); }
     .product-visual.energy .art.a { right:56px; bottom:14px; width:42px; height:70px; border-radius:9px; border-color:rgba(247,213,111,.60); }
     .product-visual.platform .art.a,
@@ -325,7 +836,7 @@
     .product-visual.steel .art.a,
     .product-visual.signal .art.a {
       right:34px; bottom:16px; width:82px; height:56px; border-radius:16px;
-      border-color:rgba(92,199,234,.48);
+      border-color:rgba(65,220,255,.48);
     }
     .product-visual.platform .art.a::before,
     .product-visual.game .art.a::before,
@@ -340,15 +851,15 @@
     .product-visual.storage::after,
     .product-visual.sensor::after {
       width:58px; height:58px; border-radius:12px;
-      background:linear-gradient(135deg, rgba(236,140,106,.36), rgba(6,10,20,.82));
-      box-shadow:inset 0 0 0 8px rgba(255,255,255,.04), 0 0 26px rgba(236,140,106,.22);
+      background:linear-gradient(135deg, rgba(255,79,126,.36), rgba(6,10,20,.82));
+      box-shadow:inset 0 0 0 8px rgba(255,255,255,.04), 0 0 26px rgba(255,79,126,.22);
     }
     .product-visual.finance::after,
     .product-visual.card::after,
     .product-visual.shield::after {
       width:76px; height:42px; border-radius:12px;
-      background:linear-gradient(135deg, rgba(92,199,234,.28), rgba(54,229,189,.14));
-      border-color:rgba(92,199,234,.38);
+      background:linear-gradient(135deg, rgba(65,220,255,.28), rgba(54,229,189,.14));
+      border-color:rgba(65,220,255,.38);
     }
     .product-visual.auto::after { width:82px; height:32px; border-radius:18px 18px 8px 8px; border-color:rgba(247,213,111,.58); }
     .product-visual.display::after { width:78px; height:48px; border-radius:12px; border-color:rgba(157,129,255,.60); }
@@ -378,7 +889,7 @@
     .summary-list li {
       position:relative;
       border:1px solid rgba(148,163,184,.12);
-      border-radius:3px;
+      border-radius:10px;
       background:rgba(255,255,255,.035);
       color:var(--soft);
       padding:10px 12px 10px 30px;
@@ -393,33 +904,35 @@
       width:7px;
       height:7px;
       border-radius:50%;
-      background:linear-gradient(135deg, var(--cyan), var(--mint));
-      box-shadow:0 0 14px rgba(92,199,234,.42);
+      background:linear-gradient(135deg, var(--cyan), var(--teal));
+      box-shadow:0 0 14px rgba(65,220,255,.42);
     }
     .check-row { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:10px; margin-top:12px; }
     .check-card {
-      border:1px solid rgba(92,199,234,.16);
+      border:1px solid rgba(65,220,255,.16);
       border-radius:13px;
-      background:linear-gradient(135deg, rgba(92,199,234,.07), rgba(255,255,255,.025));
+      background:linear-gradient(135deg, rgba(65,220,255,.07), rgba(255,255,255,.025));
       padding:12px;
     }
     .check-card b { display:block; color:var(--text); font-size:13px; margin-bottom:6px; }
     .check-card span { display:block; color:var(--soft); font-size:11px; line-height:1.5; }
     .check-row + .grid-2 { margin-top:12px; }
     .content { padding:18px; display:grid; gap:16px; }
-    /* 콘텐츠 패널 = 각진 3px, 브래킷 없음 (브래킷은 '부문별' 섹션에만 — 아래 규칙) */
-    .section { position:relative; border:1px solid var(--line); border-radius:3px; background:var(--panel); padding:16px; }
+    .section { border:1px solid var(--line); border-radius:14px; background:rgba(4,8,19,.64); padding:16px; }
     .section-head { display:flex; justify-content:space-between; gap:12px; align-items:start; margin-bottom:12px; }
     .section-head h2 { margin:0; font-size:20px; }
     .section-head p { margin:0; max-width:620px; color:var(--soft); font-size:12px; line-height:1.55; }
     .grid-2 { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px; }
     .grid-3 { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:10px; }
     .grid-4 { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:10px; }
-    .card { min-width:0; border:1px solid rgba(148,163,184,.14); border-radius:3px; background:rgba(255,255,255,.04); padding:13px; }
+    .card { min-width:0; border:1px solid rgba(148,163,184,.14); border-radius:12px; background:rgba(255,255,255,.04); padding:13px; }
     .card h3 { margin:0 0 9px; font-size:14px; }
     .card p { margin:0; color:var(--soft); font-size:12px; line-height:1.55; }
     .report-map {
-      background:var(--panel);   /* galaxy ZONE 카드 동일 (구 cyan/magenta 그라디언트 제거) — .section 배경 오버라이드 해제 */
+      background:
+        radial-gradient(circle at 10% 0%, rgba(65,220,255,.10), transparent 30%),
+        radial-gradient(circle at 86% 4%, rgba(255,79,126,.10), transparent 30%),
+        rgba(4,8,19,.70);
     }
     .report-grid {
       display:grid;
@@ -428,9 +941,9 @@
       align-items:stretch;
     }
     .report-panel {
-      border:1px solid var(--line);
-      border-radius:3px;
-      background:var(--panel);   /* galaxy 표준 — 구 cyan 틴트 그라디언트 제거 */
+      border:1px solid rgba(65,220,255,.16);
+      border-radius:16px;
+      background:linear-gradient(135deg, rgba(65,220,255,.055), rgba(255,255,255,.025));
       padding:16px;
       min-width:0;
     }
@@ -478,17 +991,18 @@
       display:grid;
       place-items:center;
       border-radius:50%;
-      background:linear-gradient(135deg, var(--cyan), var(--mint));
+      background:linear-gradient(135deg, var(--cyan), var(--teal));
       color:#031018;
       font-size:11px;
       font-weight:950;
     }
     .segment-breakdown {
-      position:relative;
       margin-top:12px;
-      border:1px solid var(--line);
-      border-radius:3px;
-      background:var(--panel);            /* galaxy ZONE 카드 동일 (구 cyan 그라디언트 제거) */
+      border:1px solid rgba(65,220,255,.18);
+      border-radius:16px;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(65,220,255,.10), transparent 28%),
+        linear-gradient(135deg, rgba(65,220,255,.055), rgba(255,79,126,.035));
       padding:16px;
     }
     .segment-breakdown-head {
@@ -526,8 +1040,8 @@
       width:var(--w);
       height:100%;
       border-radius:999px;
-      background:linear-gradient(90deg, var(--cyan), var(--mint), var(--gold));
-      box-shadow:0 0 18px rgba(92,199,234,.26);
+      background:linear-gradient(90deg, var(--cyan), var(--teal), var(--gold));
+      box-shadow:0 0 18px rgba(65,220,255,.26);
     }
     .segment-tip {
       margin-top:10px;
@@ -557,9 +1071,11 @@
     }
     .business-finance-panel {
       margin-top:12px;
-      border:1px solid var(--line);
-      border-radius:3px;
-      background:var(--panel);   /* galaxy 표준 */
+      border:1px solid rgba(148,163,184,.15);
+      border-radius:16px;
+      background:
+        radial-gradient(circle at 5% 0%, rgba(65,220,255,.10), transparent 26%),
+        rgba(255,255,255,.035);
       padding:15px;
     }
     .business-finance-panel h3 {
@@ -593,50 +1109,86 @@
       margin-top:10px;
     }
     .custom-report-cards {
-      position:relative;
       margin-top:12px;
-      border:1px solid var(--line);
-      border-radius:3px;
-      background:var(--panel);            /* galaxy ZONE 카드 동일 (구 cyan 그라디언트 제거) */
+      border:1px solid rgba(65,220,255,.18);
+      border-radius:16px;
+      background:
+        radial-gradient(circle at 8% 0%, rgba(65,220,255,.11), transparent 28%),
+        linear-gradient(135deg, rgba(65,220,255,.045), rgba(255,79,126,.025));
       padding:16px;
     }
     .custom-report-grid {
       display:grid;
-      grid-template-columns:repeat(3, minmax(0,1fr));
-      gap:10px;
+      gap:14px;
     }
     .custom-report-card {
       border:1px solid rgba(255,255,255,.12);
       border-radius:14px;
       background:rgba(5,10,22,.64);
-      padding:13px;
+      padding:17px 18px;
       min-width:0;
     }
     .custom-report-card strong {
       display:block;
-      font-size:13.5px;
-      margin-bottom:6px;
-    }
-    .custom-report-card .value {
-      display:block;
-      color:var(--cyan);
-      font-size:16.5px;
-      font-weight:950;
-      line-height:1.32;
+      color:var(--text);
+      font-size:17px;
       margin-bottom:8px;
     }
-    .custom-report-card p {
+    .report-reading-intro {
+      margin:0 0 13px;
+      color:var(--soft);
+      font-size:13px;
+      line-height:1.6;
+    }
+    .report-reading-list {
+      display:grid;
+      gap:0;
+      margin:0;
+      padding:0;
+      list-style:none;
+    }
+    .report-reading-item {
+      position:relative;
+      padding:13px 0 13px 18px;
+      border-top:1px solid rgba(148,163,184,.13);
+    }
+    .report-reading-item::before {
+      content:'';
+      position:absolute;
+      left:0;
+      top:20px;
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:var(--cyan);
+      box-shadow:0 0 12px rgba(65,220,255,.8);
+    }
+    .report-reading-item:first-child { border-top:0; }
+    .report-reading-item h4 {
+      margin:0 0 6px;
+      color:var(--text);
+      font-size:14px;
+      line-height:1.42;
+    }
+    .report-reading-item h4 span {
+      color:var(--cyan);
+      font-weight:950;
+    }
+    .report-reading-item p {
       margin:0;
       color:var(--soft);
-      font-size:12px;
-      line-height:1.58;
+      font-size:13px;
+      line-height:1.65;
     }
-    .custom-report-card b { color:rgba(232,247,255,.92); }
+    .report-reading-item p b {
+      color:var(--cyan);
+      font-size:14px;
+    }
     .term-note {
       position:relative;
       display:inline;
       color:#dff8ff;
-      border-bottom:1px dotted rgba(92,199,234,.78);
+      border-bottom:1px dotted rgba(65,220,255,.78);
       cursor:help;
       font-weight:850;
       line-height:1.25;
@@ -653,10 +1205,10 @@
       max-width:min(320px, calc(100vw - 28px));
       padding:10px 12px;
       border-radius:12px;
-      border:1px solid rgba(92,199,234,.34);
+      border:1px solid rgba(65,220,255,.34);
       background:linear-gradient(135deg, rgba(5,10,22,.98), rgba(18,28,50,.98));
       color:rgba(232,247,255,.96);
-      box-shadow:0 18px 40px rgba(0,0,0,.50), 0 0 24px rgba(92,199,234,.14);
+      box-shadow:0 18px 40px rgba(0,0,0,.50), 0 0 24px rgba(65,220,255,.14);
       font-size:11.5px;
       font-weight:750;
       line-height:1.55;
@@ -676,24 +1228,24 @@
       align-items:center;
       gap:5px;
       margin-top:10px;
-      border:1px solid rgba(92,199,234,.22);
+      border:1px solid rgba(65,220,255,.22);
       border-radius:999px;
       color:var(--cyan);
-      background:rgba(92,199,234,.07);
+      background:rgba(65,220,255,.07);
       padding:4px 8px;
       font-size:10.5px;
       font-weight:900;
     }
     .utilization-detail,
     .segment-financial-detail {
-      position:relative;
       margin-top:12px;
-      border:1px solid var(--line);
-      border-radius:3px;
-      background:var(--panel);            /* galaxy ZONE 카드 동일 (구 cyan 그라디언트 제거) */
+      border:1px solid rgba(65,220,255,.18);
+      border-radius:16px;
+      background:
+        radial-gradient(circle at 8% 0%, rgba(65,220,255,.10), transparent 28%),
+        rgba(255,255,255,.035);
       padding:16px;
     }
-    /* (부문별 섹션 브래킷 제거 — 브래킷은 바깥 래퍼 패널에만) */
     .detail-head {
       display:flex;
       justify-content:space-between;
@@ -783,16 +1335,16 @@
       height:var(--h);
       min-height:4px;
       border-radius:6px 6px 0 0;
-      background:linear-gradient(180deg, var(--cyan), var(--mint));
+      background:linear-gradient(180deg, var(--cyan), var(--teal));
     }
     .mini-bars.pink span {
-      background:linear-gradient(180deg, var(--coral), rgba(247,213,111,.62));
+      background:linear-gradient(180deg, var(--pink), rgba(247,213,111,.62));
     }
     .mini-bars.gold span {
-      background:linear-gradient(180deg, var(--gold), var(--steel));
+      background:linear-gradient(180deg, var(--gold), var(--violet));
     }
     .mini-bars span.neg {
-      background:linear-gradient(180deg, rgba(236,140,106,.95), rgba(236,140,106,.32));
+      background:linear-gradient(180deg, rgba(255,79,126,.95), rgba(255,79,126,.32));
     }
     .metric-values {
       display:block;
@@ -826,8 +1378,8 @@
       width:8px;
       height:8px;
       border-radius:50%;
-      background:var(--coral);
-      box-shadow:0 0 16px rgba(236,140,106,.50);
+      background:var(--pink);
+      box-shadow:0 0 16px rgba(255,79,126,.50);
     }
     .impact-lanes {
       display:grid;
@@ -851,7 +1403,7 @@
       top:38px;
       height:3px;
       border-radius:999px;
-      background:linear-gradient(90deg, var(--cyan), var(--mint), var(--gold));
+      background:linear-gradient(90deg, var(--cyan), var(--teal), var(--gold));
       opacity:.42;
     }
     .impact-lane h3 { position:relative; margin:0 0 17px; font-size:13px; }
@@ -862,9 +1414,9 @@
       gap:12px;
     }
     .signal-card {
-      border:1px solid rgba(92,199,234,.15);
+      border:1px solid rgba(65,220,255,.15);
       border-radius:13px;
-      background:linear-gradient(135deg, rgba(92,199,234,.06), rgba(255,255,255,.025));
+      background:linear-gradient(135deg, rgba(65,220,255,.06), rgba(255,255,255,.025));
       padding:13px;
     }
     .signal-card h3 { margin:0 0 8px; font-size:14px; }
@@ -885,24 +1437,24 @@
     .track { height:8px; border-radius:999px; background:rgba(255,255,255,.08); overflow:hidden; position:relative; }
     .track::before { content:""; position:absolute; left:50%; top:-3px; bottom:-3px; width:1px; background:rgba(255,255,255,.24); }
     .bar { position:absolute; top:0; bottom:0; border-radius:999px; }
-    .bar.up { left:50%; background:linear-gradient(90deg, var(--mint), var(--gold)); }
-    .bar.down { right:50%; background:linear-gradient(90deg, var(--coral), var(--cyan)); }
+    .bar.up { left:50%; background:linear-gradient(90deg, var(--teal), var(--gold)); }
+    .bar.down { right:50%; background:linear-gradient(90deg, var(--pink), var(--cyan)); }
     .util-row { margin-top:9px; }
     .util-head { display:flex; justify-content:space-between; gap:8px; color:var(--soft); font-size:11px; font-weight:900; margin-bottom:5px; }
-    .util-fill { display:block; height:9px; border-radius:999px; background:linear-gradient(90deg, var(--cyan), var(--mint), var(--gold)); }
+    .util-fill { display:block; height:9px; border-radius:999px; background:linear-gradient(90deg, var(--cyan), var(--teal), var(--gold)); }
     .metric { display:grid; gap:5px; }
     .metric-label { color:var(--muted); font-size:11px; font-weight:900; }
     .metric-value { color:var(--text); font-size:22px; font-weight:950; }
     .metric-note { color:var(--soft); font-size:11px; line-height:1.4; }
     .trend { display:flex; align-items:end; gap:8px; height:82px; border-bottom:1px solid rgba(255,255,255,.14); padding:0 2px 4px; }
     .trend span { flex:1; min-width:0; min-height:3px; border-radius:7px 7px 2px 2px; background:linear-gradient(180deg, var(--cyan), rgba(54,229,189,.55)); position:relative; height:var(--h); }
-    .trend.pink span { background:linear-gradient(180deg, var(--coral), rgba(247,213,111,.52)); }
+    .trend.pink span { background:linear-gradient(180deg, var(--pink), rgba(247,213,111,.52)); }
     .trend.gold span { background:linear-gradient(180deg, var(--gold), rgba(157,129,255,.50)); }
-    .trend span.neg { background:linear-gradient(180deg, rgba(236,140,106,.80), rgba(236,140,106,.30)); }
+    .trend span.neg { background:linear-gradient(180deg, rgba(255,79,126,.80), rgba(255,79,126,.30)); }
     .trend span::after { content:attr(data-y); position:absolute; left:50%; bottom:-20px; transform:translateX(-50%); color:var(--muted); font-size:9px; font-weight:900; }
     .trend-value { display:block; margin-top:22px; color:var(--soft); font-size:11px; line-height:1.4; }
     .source-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
-    .source-link { display:inline-flex; align-items:center; min-height:30px; border:1px solid rgba(92,199,234,.30); border-radius:999px; padding:0 12px; color:var(--cyan); text-decoration:none; font-size:12px; font-weight:950; background:rgba(92,199,234,.08); }
+    .source-link { display:inline-flex; align-items:center; min-height:30px; border:1px solid rgba(65,220,255,.30); border-radius:999px; padding:0 12px; color:var(--cyan); text-decoration:none; font-size:12px; font-weight:950; background:rgba(65,220,255,.08); }
     .mini-label { display:inline-flex; border:1px solid rgba(255,255,255,.12); border-radius:999px; padding:4px 8px; color:var(--muted); font-size:10px; font-weight:950; }
     @media (max-width: 1100px) {
       .workspace { grid-template-columns:1fr; }
@@ -911,7 +1463,7 @@
       .hero-grid { grid-template-columns:repeat(2, minmax(0, 240px)); }
       .grid-4 { grid-template-columns:repeat(2, minmax(0,1fr)); }
       .report-grid, .evidence-board, .business-evidence { grid-template-columns:1fr; }
-      .driver-radar, .impact-lanes, .segment-grid, .business-finance-grid, .util-grid, .segment-finance-grid, .custom-report-grid { grid-template-columns:repeat(2, minmax(0,1fr)); }
+      .driver-radar, .impact-lanes, .segment-grid, .business-finance-grid, .util-grid, .segment-finance-grid { grid-template-columns:repeat(2, minmax(0,1fr)); }
     }
     @media (max-width: 720px) {
       .page { width:min(100% - 20px, 680px); padding-top:16px; }
@@ -935,27 +1487,49 @@
 </head>
 <body>
   <main class="page">
-    <header class="dsr-hd">
-      <div class="dsr-hl">
-        <span class="dsr-dot"></span>
-        <div>
-          <div class="dsr-logo">BUSINESS REPORT</div>
-          <div class="dsr-sub">사업·기업 개요 · 사업보고서 reader</div>
+    <header class="hero">
+      <div>
+        <div class="eyebrow">DiscloseAI Galaxy Annual Report Reader</div>
+        <h1>국내상장기업 사업보고서 reader</h1>
+        <div class="subtitle">
+          <span>DART 사업보고서 기반으로 각 회사가 무엇을 팔고 만드는지 먼저 보여줍니다</span>
+          <span>행성 주변 사업·제품 카드는 사업보고서 문구와 업종 키워드로 구성</span>
+          <span>원문 스니펫은 로컬 수집된 사업보고서에서 추출</span>
         </div>
-        <span class="dsr-badge" id="bhBadge"></span>
       </div>
-      <div class="dsr-unit">단위: 억원/조원 · 출처 DART 사업보고서</div>
+      <div class="hero-actions">
+        <span class="hero-badge" id="coverageBadge">수집 기업</span>
+        <span class="hero-badge">2025 연결 기준</span>
+        <span class="hero-badge">단위: 억원/조원</span>
+      </div>
     </header>
 
+    <nav class="tabs" aria-label="prototype tabs">
+      <button class="tab active" type="button">사업 우주지도</button>
+      <button class="tab" type="button" disabled>재무제표 갤럭시 맵</button>
+      <button class="tab" type="button" disabled>주석 달린 사업보고서</button>
+    </nav>
+
     <section class="workspace">
+      <aside class="rail" aria-label="company selector">
+        <div class="rail-head">
+          <h2>기업 선택</h2>
+          <input class="search" id="searchInput" type="search" placeholder="종목명 또는 티커 검색">
+          <div class="sorts">
+            <button class="sort-btn active" type="button" data-sort="market_cap">시총순</button>
+            <button class="sort-btn" type="button" data-sort="ttm_per">TTM PER순</button>
+          </div>
+        </div>
+        <div class="company-list" id="companyList"></div>
+      </aside>
       <section class="panel" id="readerPanel" aria-live="polite"></section>
     </section>
   </main>
   <script>
-    const TICKER = new URLSearchParams(location.search).get('ticker') || '005930';
-    let COMPANY = null;
-    const GENERATED_AT = "2026-07-13 13:16";
-    let selected = null;
+    const DATA = __APP_DATA__;
+    const CUSTOM_REPORT_IDEAS = __CUSTOM_REPORT_IDEAS__;
+    const GENERATED_AT = "__GENERATED_AT__";
+    let selected = DATA[0] ? DATA[0].stock_code : null;
     let sortMode = "market_cap";
     const $ = (sel) => document.querySelector(sel);
     const esc = (value) => String(value ?? "").replace(/[&<>"']/g, (m) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
@@ -1083,6 +1657,7 @@
     const TERM_SKIP_AFTER = {
       '리스': ['크'],
     };
+    let renderedTermNotes = new Set();
     function isAsciiWordChar(value) {
       return /^[A-Za-z0-9]$/.test(value || '');
     }
@@ -1091,7 +1666,6 @@
       const endsLatin = /[A-Za-z0-9]$/.test(term);
       return (startsLatin && isAsciiWordChar(previous)) || (endsLatin && isAsciiWordChar(next));
     }
-    let renderedTermNotes = new Set();
     function rich(value) {
       const text = esc(value);
       return text.replace(TERM_PATTERN, (term, _match, offset, source) => {
@@ -1311,12 +1885,12 @@
       if (/조선|해운/.test(text)) return /해운/.test(text) ? 'shipping' : 'shipbuilding';
       if (/방산|항공우주|철도/.test(text)) return 'defense';
       if (/바이오|CDMO|의약품/.test(text)) return 'bio';
-      if (/통신/.test(text)) return 'telecom';
-      if (/건설/.test(text)) return 'construction';
-      if (/담배|건기식/.test(text)) return 'consumer';
       if (/전력|발전|유틸리티/.test(text)) return 'power';
       if (/화학|철강|금속|소재|정유|에너지/.test(text)) return 'materials';
       if (/인터넷|플랫폼/.test(text)) return 'platform';
+      if (/통신/.test(text)) return 'telecom';
+      if (/건설/.test(text)) return 'construction';
+      if (/담배|건기식/.test(text)) return 'consumer';
       return 'general';
     }
     const LENS = {
@@ -2026,9 +2600,9 @@
     function customReportIdeas(row) {
       const data = {
         '005930': [
-          { title:'사업 구조', value:'DX · DS · SDC · Harman', fact:'사업보고서는 삼성전자를 완제품 DX, 반도체 DS, 디스플레이 SDC, 전장·오디오 Harman으로 나누어 설명합니다.', view:'투자자는 완제품 수요와 반도체 사이클이 동시에 실적을 움직인다는 점을 같이 봐야 합니다.' },
-          { title:'글로벌 운영', value:'308개 종속기업', fact:'본사와 해외 지역총괄, 생산·판매법인, SDC 및 Harman 산하 종속기업으로 구성된 글로벌 전자 기업이라고 공시되어 있습니다.', view:'지역별 생산·판매망이 넓어 환율, 공급망, 지역 수요가 실적에 함께 반영됩니다.' },
-          { title:'제품 포트폴리오', value:'스마트폰 · TV · 메모리 · OLED', fact:'사업보고서의 주요 제품은 스마트폰, TV, 냉장고, DRAM, NAND Flash, 모바일AP, OLED 패널, 디지털 콕핏 등입니다.', view:'한 제품만 보는 것보다 부문별 비중과 이익 회복 강도를 나눠 보는 편이 좋습니다.' },
+          { title:'2025 변화', value:'DS 부문 영업이익 24.9조원', fact:'DS 부문은 2023년에 영업손실을 냈지만 2024년에 흑자 전환했고, 2025년에는 영업이익이 약 24.9조원까지 회복되었습니다.', view:'삼성전자는 전체 매출보다 반도체 업황 회복이 이익에 얼마나 반영되는지가 중요한 회사입니다.' },
+          { title:'원가와 가동률', value:'Wafer -10% · Cover Glass +12% · 메모리 가동률 100%', fact:'사업보고서에는 모바일AP +4%, TV·모니터 패널 -3%, 반도체 Wafer -10%, FPCA +6%, Cover Glass +12%, DS 메모리와 SDC 가동률 100%가 표시됩니다.', view:'같은 삼성전자 안에서도 원가 부담과 공장 가동 상황이 부문별로 다르므로 부문별 이익률을 나눠 읽어야 합니다.' },
+          { title:'투자자 확인 포인트', value:'DS 회복 · DX 수익성 · 원가 전가 · 가동률', fact:'사업보고서의 부문별 매출, 원재료 가격 변동, 생산능력·가동률 표를 함께 보면 다음 실적에서 확인할 질문이 정리됩니다.', view:'삼성전자는 매출 규모만 보는 회사가 아니라 DS 반도체 회복 속도와 DX 완제품 수익성, 부문별 원가·가동률 변화를 함께 봐야 합니다.' },
         ],
         '000660': [
           { title:'사업 구조', value:'반도체 부문 100%', fact:'사업보고서 요약 기준 SK하이닉스는 DRAM, NAND Flash 등 메모리 반도체 제조·판매를 단일 반도체 부문으로 표시합니다.', view:'사업이 메모리에 집중되어 있어 업황 회복기에는 탄력이 크지만 가격 하락기에는 이익 변동도 커질 수 있습니다.' },
@@ -2071,8 +2645,7 @@
           { title:'현금화 포인트', value:'계약자산 · 미청구수익', fact:'요약 데이터에는 진행 중인 선박 건조와 관련한 미청구수익이 향후 현금화될 예정이라는 설명이 포함되어 있습니다.', view:'조선사는 수주가 바로 현금이 되는 구조가 아니므로, 매출 증가와 실제 현금 회수가 같이 따라오는지 보는 것이 중요합니다.' },
         ],
       };
-      const custom = Array.isArray(row.custom_report_ideas) ? row.custom_report_ideas : [];
-      return custom.length ? custom : (data[String(row.stock_code || '')] || dynamicReportIdeas(row));
+      return CUSTOM_REPORT_IDEAS[String(row.stock_code || '')] || data[String(row.stock_code || '')] || dynamicReportIdeas(row);
     }
     function reportSummaryTone(text) {
       return String(text || '')
@@ -2108,21 +2681,18 @@
     function customReportIdeasHtml(row) {
       const ideas = customReportIdeas(row);
       if (!ideas.length) return '';
-      const cards = ideas.map((idea) => {
-        const value = reportSummaryTone(idea.value);
-        const fact = reportSummaryTone(idea.fact);
-        const view = reportSummaryTone(idea.view);
-        return '<article class="custom-report-card">' +
-          '<strong>' + esc(idea.title) + '</strong>' +
-          '<span class="value">' + rich(value) + '</span>' +
-          '<p><b>사업보고서 근거</b><br>' + rich(fact) + '</p>' +
-          '<p style="margin-top:8px"><b>쉽게 풀면</b><br>' + rich(view) + '</p>' +
-          '<span class="source-chip">DART II. 사업의 내용 기반</span>' +
-        '</article>';
-      }).join('');
+      const summaryItems = ideas.map((idea) =>
+        '<li class="report-reading-item"><h4>' + esc(idea.title) + '</h4><p><b>' + rich(reportSummaryTone(idea.value)) + '</b><br>' + rich(reportSummaryTone(idea.fact)) + '</p></li>'
+      ).join('');
+      const investorItems = ideas.map((idea) =>
+        '<li class="report-reading-item"><h4>' + esc(idea.title) + '</h4><p>' + rich(reportSummaryTone(idea.view)) + '</p></li>'
+      ).join('');
       return '<div class="custom-report-cards">' +
-        '<div class="detail-head"><div><h3>우리가 읽고 요약한 사업보고서 핵심</h3><p>제품 목록을 다시 반복하지 않고, 사업보고서에서 회사 이해에 필요한 문장만 골라 쉬운 해석을 붙였습니다.</p></div><div class="mini-label">회사별 직접 요약</div></div>' +
-        '<div class="custom-report-grid">' + cards + '</div>' +
+        '<div class="detail-head"><div><h3>우리가 읽고 요약한 사업보고서 핵심</h3><p>위에서 사업 구조와 제품을 봤으므로, 여기서는 사업보고서가 말하는 변화와 그 의미를 문단으로 풀어썼습니다.</p></div><div class="mini-label">회사별 직접 요약</div></div>' +
+        '<div class="custom-report-grid">' +
+          '<article class="custom-report-card"><strong>1. 사업보고서에서 확인된 변화</strong><p class="report-reading-intro">사업보고서의 수치와 서술을 바탕으로, 이 회사의 사업 환경이 최근 어떻게 움직였는지 정리했습니다.</p><ul class="report-reading-list">' + summaryItems + '</ul></article>' +
+          '<article class="custom-report-card"><strong>2. 투자자가 확인해야 할 포인트</strong><p class="report-reading-intro">위 변화가 다음 실적에서 어떤 질문으로 이어지는지, 사업별 특성에 맞춰 풀어 설명합니다.</p><ul class="report-reading-list">' + investorItems + '</ul></article>' +
+        '</div>' +
       '</div>';
     }
     function reportDetailData(row) {
@@ -2400,24 +2970,56 @@
       window.addEventListener('scroll', () => active ? place(active) : null, true);
       window.addEventListener('resize', () => active ? place(active) : null);
     }
+    $('#searchInput').addEventListener('input', listRows);
+    document.querySelectorAll('.sort-btn').forEach((btn) => btn.addEventListener('click', () => {
+      sortMode = btn.dataset.sort;
+      document.querySelectorAll('.sort-btn').forEach((b) => b.classList.toggle('active', b === btn));
+      listRows();
+    }));
+    $('#companyList').addEventListener('click', (event) => {
+      const btn = event.target.closest('.company-btn');
+      if (btn) selectByCode(btn.dataset.code);
+    });
+    $('#coverageBadge').textContent = '수집 완료 ' + DATA.length + '개 기업';
     setupTermTooltip();
-    // 데이터 로드 — ?ticker= 회사 JSON fetch 후 render (galaxy 패턴, 실패 시 '준비 중' 폴백)
-    fetch('data/business_' + TICKER + '.json')
-      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
-      .then(function (c) {
-        COMPANY = c; selected = TICKER;
-        var badge = document.getElementById('bhBadge');
-        if (badge) {
-          var yr = (c.latest_year && c.latest_year.year) || '';
-          var rep = (((c.report || {}).name) || '').match(/\(([^)]+)\)/);
-          var period = rep ? rep[1] : yr;
-          badge.innerHTML = esc(c.name) + ' · FY' + yr + ' <span style="color:var(--muted)">(' + esc(period) + ')</span> · <span style="color:var(--cyan)">연결 기준</span>';
-        }
-        render(c);
-      })
-      .catch(function () {
-        $('#readerPanel').innerHTML = '<div style="padding:48px 8px;color:var(--muted);font-size:15px;line-height:1.9"><div style="font-family:monospace;font-size:11px;letter-spacing:.2em;color:var(--muted);margin-bottom:12px">NO DATA</div>이 기업의 사업 개요는 아직 준비 중이에요.</div>';
-      });
+    listRows();
+    render(DATA[0]);
   </script>
 </body>
 </html>
+"""
+
+
+def main() -> int:
+    rows = json.loads(EQS_PATH.read_text(encoding="utf-8"))
+    report_index = {}
+    if FULLTEXT_INDEX.exists():
+        report_index = json.loads(FULLTEXT_INDEX.read_text(encoding="utf-8"))
+
+    market_snapshot = _load_market_snapshot(rows)
+    business_cards = _load_business_cards()
+    simplified = [
+        _simplify_row(row, idx + 1, report_index, market_snapshot, business_cards)
+        for idx, row in enumerate(rows)
+    ]
+    generated_at = datetime.now().strftime("%Y-%m-%d %H:%M")
+    html = HTML_TEMPLATE.replace(
+        "__APP_DATA__",
+        json.dumps(simplified, ensure_ascii=False, separators=(",", ":")),
+    ).replace(
+        "__CUSTOM_REPORT_IDEAS__",
+        json.dumps(CUSTOM_REPORT_IDEAS, ensure_ascii=False, separators=(",", ":")),
+    ).replace("__GENERATED_AT__", generated_at)
+    OUT_PATH.write_text(html, encoding="utf-8")
+    print(f"wrote {OUT_PATH}")
+    print(f"companies {len(simplified)}")
+    print(
+        "snippets",
+        sum(1 for row in simplified if any(row["snippets"].get(k) for k in ("overview", "raw_material", "capacity", "segment_finance"))),
+    )
+    print("business cards", sum(len(row["business_cards"]) for row in simplified))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
