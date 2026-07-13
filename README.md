@@ -26,7 +26,7 @@ python -m pytest tests/ -v
 python run_dev.py
 
 # 통합 대시보드
-python -m integration.v1.extract_data    # 모듈 DB → 통합 JSON 생성
+python -m integration.build_data          # 모듈 DB → 통합 JSON 생성 (개별: -m integration.extract_data)
 python -m http.server 8000               # http://localhost:8000/integration/
 ```
 

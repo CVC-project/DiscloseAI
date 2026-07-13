@@ -6,17 +6,16 @@
 
 ## 폴더 성격
 
-`integration/v2/`는 v2 디자인 prototype을 React + Babel(in-browser)로 신규 구축하는 폴더.
-**v1(`../v1/dashboard.html`)은 fallback으로 유지**, v2/는 정본 트랙으로 진행.
+`integration/v2/`는 React + Babel(in-browser)로 구축한 **유일 서빙 UI(정본)**.
+(v1 vanilla 대시보드는 2026-07-13 폐지 — 파이프라인은 `../extract_data.py`로 승격, 원본은 git 이력 보존.)
 
 ## 절대 규칙
 
-- ❌ **`../v1/dashboard.html` 기능 수정 금지** — fallback 안정성 우선. v2 작업이 어떤 단계에서 실패해도 v1 dashboard는 살아있어야 함
-- ✅ **상대경로 수정만 허용** — 폴더 승격(`integration/` 루트화)·v1/v2 분리에 따른 경로 조정은 필수 (예: redirect·relation fetch·data fetch). 기능·렌더 로직은 불변
-- ❌ **`../v1/extract_data.py` 로직 수정 금지** — JSON 스키마 단일 출처 (경로 조정은 예외)
+- ❌ **`../extract_data.py` 로직 수정 금지** — JSON 스키마 단일 출처 (경로 조정은 예외). 계약: [../CLAUDE.md](../CLAUDE.md)
 - ✅ **공유 `data/*.json` 직접 fetch는 OK** — `../data/eqs_summary.json`(= `integration/data/`) 그대로 사용
-- ✅ **v1 dashboard의 함수 포팅 OK** — `_calcValuation`/`_eqsNarration`/`_sparkline`/`_percentileBadge`를 ES module로 분리해 `v2/data/`에 두는 것만 허용
-- ❌ **빌드 도구 도입 금지 (J1~J5 동안)** — Vite/esbuild 등은 5/8 마감 후 검토. 현재는 React-CDN + Babel-in-browser 유지
+- ✅ `v2/data/`의 `valuation.js`·`narration.js`는 구 v1 dashboard 함수의 포팅본(정본은 이제 이 폴더 — 원본은 git 이력)
+- ❌ **빌드 도구 도입 금지** — Vite/esbuild 등은 추후 검토. 현재는 React-CDN + Babel-in-browser 유지
+- ✅ **UI 작업 전 루트 [DESIGN.md](../../DESIGN.md) 준수** — 팔레트·토큰·폰트·엣지 규칙
 
 ## CORPORATION DOSSIER 오버레이 — DOSSIER_TABS 탭바 (Phase 2, D1)
 
@@ -87,9 +86,9 @@ integration/v2/
 | DAILY HIGHLIGHTS | `disclosures.json` `high_impact=true` 최신 3건 (즉시 wiring) | — |
 | 16 → 12 섹터 | top50.csv `sector` distinct count 자동 축소 | — |
 
-## 향후 승격 경로
+## 승격 완료 (2026-07-13)
 
-J5 안정화 후, dashboard.html을 `dashboard_legacy.html`로 archive하고 `v2/index.html`을 새 메인으로 승격. 빌드 파이프라인(Vite·esbuild) 도입은 그 이후.
+v2/index.html이 유일 메인으로 승격 — `integration/index.html`이 직행 라우팅, v1 폴더는 삭제(git 이력 보존). 빌드 파이프라인(Vite·esbuild) 도입은 추후 검토.
 
 ## 마스코트 결정 보류
 

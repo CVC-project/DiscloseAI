@@ -286,12 +286,13 @@ html {
 html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; }
 ```
 
-### 진입점
+### 진입점 (2026-07-13 v1 폐지 후)
 
-`integration/v1/dashboard.html` 상단에 즉시 redirect (+ `integration/index.html` 안정 진입점):
+`integration/index.html`이 v2로 직행 redirect:
 ```js
-<script>window.location.replace('../v2/index.html');</script>
+<script>window.location.replace('./v2/index.html');</script>
 ```
+(과거: index → v1/dashboard.html → 비localhost면 v2 — v1 폐지로 단순화)
 
 ---
 

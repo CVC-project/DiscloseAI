@@ -11,7 +11,7 @@
 
 사용::
 
-    python -m integration.v1.extract_data      # 또는 python -m integration.build_data
+    python -m integration.extract_data      # 또는 python -m integration.build_data
 
 출력::
 
@@ -20,7 +20,7 @@
     integration/data/price_scenarios.json
     integration/data/graph_top50.json  (relation 산출물 동기화 사본 — 정본은 modules/relation/data/)
 
-자세한 규약은 ``integration/v1/CLAUDE.md`` 참조.
+자세한 규약(데이터 소스 계약)은 ``integration/CLAUDE.md`` 참조.
 """
 
 from __future__ import annotations
@@ -33,8 +33,8 @@ from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import quote
 
-ROOT = Path(__file__).resolve().parent.parent.parent  # v1 → integration → 루트
-INTEGRATION_DATA = Path(__file__).parent.parent / "data"  # v1 → integration/data (공유)
+ROOT = Path(__file__).resolve().parent.parent  # integration → 루트
+INTEGRATION_DATA = Path(__file__).parent / "data"  # integration/data (공유)
 TOP50_CSV = ROOT / "modules" / "relation" / "data" / "top50.csv"
 FINANCIAL_DB = ROOT / "modules" / "financial" / "data" / "financial.db"
 DISCLOSURE_DB = ROOT / "modules" / "disclosure" / "data" / "disclosure.db"

@@ -6,7 +6,7 @@
 기본 실행 (안전·결정적 — 부수효과 없음)::
 
     python -m integration.build_data
-      1) integration.v1.extract_data
+      1) integration.extract_data
          → data/{eqs_summary,disclosures,price_scenarios}.json
          → data/graph_top50.json (modules/relation 산출물 무변환 동기화)
 
@@ -57,7 +57,7 @@ def main() -> int:
     steps: list[tuple[str, list[str]]] = [
         (
             "공유 JSON + relation 그래프 동기화 (extract_data)",
-            ["-m", "integration.v1.extract_data"],
+            ["-m", "integration.extract_data"],
         ),
     ]
     if opts.history:
