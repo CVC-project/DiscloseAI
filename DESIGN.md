@@ -19,8 +19,10 @@ fonts:
   sans: "Pretendard Variable" # 한글 본문·제목 (로컬: integration/dossier/assets/fonts/pretendard/)
   mono: "IBM Plex Mono"       # 숫자·금액·영문 라벨·로고·디스플레이 (로컬: integration/dossier/assets/fonts/ibm-plex-mono/)
 panel_edge:
-  radius: "10px"      # = --r-5
-  bracket: "14x14, 2px solid accent, 외곽 모서리 3px 라운드, top-left+bottom-right"
+  radius: "3px"       # 각진(angular) — 메인 셸 컨셉
+  bracket: "10x10, 1px solid var(--edge-accent), 샤프 코너, opacity 0.7, top-left+bottom-right"
+  placement: "탭당 주요 패널에만 (business=부문별, EQS=상단 2패널). 나머지는 브래킷 없이 radius만"
+sector_theme: "ENTER 시 셸이 섹터색을 &accent=<color>로 3탭 iframe에 전달 → --edge-accent·--mint 오버라이드(galaxy는 색=의미 보존, edge-accent만)"
 verify: "변경 시 Playwright 전후 스크린샷 or ui-ux-reviewer — DESIGN.md와 다른 렌더는 버그"
 ---
 
@@ -71,19 +73,21 @@ CSS 변수는 iframe 경계를 넘지 못한다 → **각 페이지가 직접 li
 - **Chart.js**: `Chart.defaults.font.family`를 반드시 지정(미지정 시 Helvetica로 렌더돼 표면 폰트 어긋남). galaxy 테마=IBM Plex Mono / 기본=Pretendard.
 - **금지**: Inter·JetBrains Mono·Space Grotesk 등 라틴 서브셋(한글 글리프 0 → 한글이 시스템 폰트로 깨짐) · CDN 폰트 · 인라인 `font-family` 리터럴(변수 사용).
 
-## 4. 패널 엣지 표준
+## 4. 패널 엣지 표준 (메인 셸 컨셉 — 얇고 각진)
 
-**galaxy ZONE 카드 = 표준 엣지**: radius **10px**(`--r-5`) + **ㄱ자 코너 브래킷**(14×14px · 2px solid accent · 외곽 모서리만 3px 라운드 · top-left + bottom-right). 재사용 클래스 `.gx-panel`(theme-galaxy.css, accent는 `--gx-accent` 오버라이드).
+**표준 엣지**: 패널 radius **3px**(각진) + **ㄱ자 코너 브래킷**(10×10px · **1px** solid `var(--edge-accent)` · **샤프 코너**(라운드 없음) · opacity 0.7 · top-left + bottom-right). 재사용 클래스 `.gx-panel`(theme-galaxy.css).
 
-| 박스 종류 | radius | 브래킷 | 예 |
-|---|---|---|---|
-| 주요 콘텐츠 패널·존 카드 | 10px (`--r-5`) | **있음** (accent=의미색) | galaxy ZONE, business `.section`, firm `.panel`(galaxy), v2 `.panel` |
-| 인트로 정보박스 | 8px (`--r-4`) | 없음 | galaxy 인트로 |
-| 소형 카드·배지 | 4~6px (`--r-1`~`--r-2`) | 없음 | 존 배지, 상단 배지 |
-| pill 탭·둥근 버튼 | 999px | 없음 | 도메인 요소(유지) |
+**브래킷 배치 = 탭당 주요 패널에만** (전 패널에 넣으면 산만 — 리더 결정):
+| 표면 | 브래킷 있는 패널 | 나머지 |
+|---|---|---|
+| business(탭①) | `.segment-breakdown`(부문별 매출비중) 1곳 | radius 3px만, 브래킷 없음 |
+| EQS firm(탭③) | 상단 2패널 `.panel.gx-edge`(EQS 종합점수·5개 모듈 프로파일) | radius 3px만, 브래킷 없음 |
+| galaxy(탭②) | ZONE 카드(해방판 인라인, 존별 의미색) | — |
+| v2 셸 | HUD·패널 전반 `.panel` | — |
 
-- radius는 **tokens.css 스케일(`--r-*`)만** 사용 — 표면별 독자 값(12·14·16px 등) 금지.
-- 장식 도형(product-visual 일러스트 등)은 이 규칙 밖 — 콘텐츠 컨테이너에만 적용.
+**산업군별 동적 accent**: `--edge-accent`(기본 mint)가 브래킷 색. 셸이 ENTER 시 섹터색을 `&accent=<color>`로 3탭 iframe에 전달 → business·firm은 `--mint`·`--edge-accent` 오버라이드(탭 전체 섹터색 테마), galaxy는 `--edge-accent`만(색=의미 보존). §2의 섹터/관계 의미색 팔레트는 셸 SECTOR_PALETTE.
+
+- radius는 각진 3px 기본 — 표면별 독자 값(10·12·14·16px) 금지. 장식 도형(product-visual)은 규칙 밖.
 
 ## 5. 레이아웃·간격·모션
 
