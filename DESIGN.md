@@ -16,28 +16,32 @@ base:
   panel: "rgba(12,17,30,.78)"
   line: "rgba(140,170,210,.13)"
 fonts:
-  sans: "Pretendard (로컬 벤더링: integration/dossier/assets/fonts/pretendard/)"
-  mono: "IBM Plex Mono (로컬 벤더링: integration/dossier/assets/fonts/ibm-plex-mono/)"
+  sans: "Pretendard Variable" # 한글 본문·제목 (로컬: integration/dossier/assets/fonts/pretendard/)
+  mono: "IBM Plex Mono"       # 숫자·금액·영문 라벨·로고·디스플레이 (로컬: integration/dossier/assets/fonts/ibm-plex-mono/)
+panel_edge:
+  radius: "10px"      # = --r-5
+  bracket: "14x14, 2px solid accent, 외곽 모서리 3px 라운드, top-left+bottom-right"
+verify: "변경 시 Playwright 전후 스크린샷 or ui-ux-reviewer — DESIGN.md와 다른 렌더는 버그"
 ---
 
 # DESIGN.md — DiscloseAI 디자인 정본
 
-> **목적**: 화면이 늘어나도 디자인이 흔들리지 않게 하는 단일 규칙 문서. UI·화면 작업 전 반드시 읽는다.
-> **기준(리더 확정)**: **현금 은하수(milky way) 표준** — 원형은 [design/prototypes/현금은하수_해방판.html](design/prototypes/현금은하수_해방판.html). 탭①(business)·탭②(EQS)는 이 표준에 맞춰 통일한다.
-> **구현 SSOT는 코드**: 값의 정본은 CSS 2계층이고, 이 문서는 그 지도와 규칙이다. 문서와 CSS가 다르면 CSS를 고치든 문서를 고치든 **같은 커밋에서** 정합시킨다.
+> **목적**: 화면·탭·모듈이 늘어나도 일관된 디자인·레이아웃이 나오도록 하는 단일 규칙 문서. **모든 UI 작업(사람·Claude·GPU 산출 포함) 전 반드시 읽고 준수**한다 (CLAUDE.md가 이를 강제).
+> **기준(리더 확정)**: **현금 은하수(milky way) 표준** — 원형 [design/prototypes/현금은하수_해방판.html](design/prototypes/현금은하수_해방판.html). 3탭·v2 셸을 이 표준으로 수렴.
+> **구현 SSOT는 코드**: 값의 정본은 CSS 2계층. 이 문서는 그 지도·규칙이다. 문서와 CSS가 다르면 **같은 커밋에서** 정합시킨다.
 
-## 1. 토큰 2계층 (D3)
+## 1. 토큰 2계층
 
 | 층 | 파일 | 내용 | 사용 |
 |---|---|---|---|
-| 층1 프리미티브 | [integration/dossier/tokens.css](integration/dossier/tokens.css) | 간격(--sp-*)·radius(--r-*)·타입 스케일(--t-*)·자간·모션·행높이 — **표면 무관** | 모든 dossier 페이지가 `<link>` |
-| 층2 시맨틱 테마 | [integration/dossier/theme-galaxy.css](integration/dossier/theme-galaxy.css) | mint 팔레트·기본색·폰트 스택 — **galaxy 표준 룩** | 아래 표면 매트릭스 참조 |
+| 층1 프리미티브 | [integration/dossier/tokens.css](integration/dossier/tokens.css) | 간격 `--sp-1~8`(4~38px)·radius `--r-1~5`(4~10px)·타입 스케일 `--t-*`·자간 `--ls-*`·모션 `--dur-*`·행높이 `--row-*` — **표면 무관 원자값** | 모든 화면이 `<link>` (v2 셸 포함, 2026-07-13~) |
+| 층2 시맨틱 테마 | [integration/dossier/theme-galaxy.css](integration/dossier/theme-galaxy.css) | mint 팔레트·기본색·폰트 스택·표준 패널(`.gx-panel`) — **galaxy 표준 룩** | §4 표면 매트릭스 참조 |
 
-CSS 변수는 iframe 경계를 넘지 못한다 → 각 페이지가 **직접 link**한다 (부모 상속 금지).
+CSS 변수는 iframe 경계를 넘지 못한다 → **각 페이지가 직접 link**한다 (부모 상속 금지). 새 표면은 이 두 파일을 재사용하고, 독자 토큰 세트를 만들지 않는다.
 
 ## 2. 색 = 의미 (미학적 선택 금지)
 
-색은 재무적 의미에 고정된다 — 예쁘다고 바꾸지 않는다. 전문: [CASH_GALAXY_STYLE_GUIDE.md](integration/dossier/CASH_GALAXY_STYLE_GUIDE.md) A2.
+색은 재무적 의미에 고정 — 예쁘다고 바꾸지 않는다. 도메인 문법 전문: [CASH_GALAXY_STYLE_GUIDE.md](integration/dossier/CASH_GALAXY_STYLE_GUIDE.md) A2.
 
 | 토큰 | 색 | 의미 |
 |---|---|---|
@@ -46,39 +50,93 @@ CSS 변수는 iframe 경계를 넘지 못한다 → 각 페이지가 **직접 li
 | `--gold` | #E9C46B | 자본(주주 몫) |
 | `--coral` | #EC8C6A | 유출(비용·투자·주주환원) |
 | `--steel` | #7590B0 | 잔액(재무상태표) |
+| `--green` | #63d68e | 보조(증가·긍정 델타) |
 
-**토큰 명명 규칙**: 위 이름만 사용한다. 별칭(`--teal`·`--pink`·`--violet` 등) 금지 — 2026-07-12 business.html에서 표준화 완료.
+기본색: 배경 `--bg #05060d` · 본문 `--text #eef4fb` · 보조 `--dim #8fa1b6` · 희미 `--dim2 #5c6b80` · 패널 `--panel rgba(12,17,30,.78)` · 경계 `--line rgba(140,170,210,.13)`.
 
-## 3. 표면별 적용 매트릭스
+**토큰 명명 규칙**: 위 이름만. 별칭(`--teal`·`--pink`·`--violet` 등) 금지 — 2026-07 표준화 완료.
 
-| 표면 | 룩 | 팔레트 출처 | 비고 |
+## 3. 폰트 시스템 (2026-07-13 전면 통일)
+
+**두 벌만 쓴다** — 한글은 Pretendard, 그 외 모두 IBM Plex Mono. 로컬 벤더링만(CDN 금지).
+
+| 용도 | 패밀리 | weight | 비고 |
 |---|---|---|---|
-| dossier 탭① [business.html](integration/dossier/business.html) | galaxy 표준 | **theme-galaxy.css link** | 페이지 고유 토큰(--panel2·--soft·--muted)만 인라인 |
-| dossier 탭② [galaxy.html](integration/dossier/galaxy.html) | galaxy 표준(원조) | 자체 `:root` (해방판 자구 — 값은 theme-galaxy.css와 동일) | **의도적 미링크**: 해방판 자구가 판정 기준이라 인라인 유지 |
-| dossier 탭③ [firm.html](integration/dossier/firm.html) | 이중 룩 | `[data-theme="galaxy"]` 스코프 인라인 | **예외**: v1은 원본 인디고 룩 불변, v2 오버레이(`?theme=galaxy`)만 galaxy 룩. link하면 v1 룩이 오염되므로 스코프 방식 유지 |
-| v2 셸(기업 우주) [integration/v2/](integration/v2/) | **별도 트랙(의도적)** | styles.css (#5eead4 cyan · Inter/JetBrains Mono/Space Grotesk) | 우주 지도 셸은 galaxy 표준으로 통일하지 **않는다**(기존 룩 보존 — D3). 기록: [integration/v2/DESIGN.md](integration/v2/DESIGN.md) |
-| legacy (v1 dashboard · relation viewer · price HTML) | 구세대(#4da6ff / #3b82f6 계열) | 각자 인라인 | 신규 스타일 작업 금지 — 손댈 일이 생기면 galaxy 표준 이관을 먼저 검토 |
+| 한글 본문·제목 | **Pretendard Variable** (`--sans`/`--font-body`) | 300–800 가변 | 한글 글리프 보유(2MB variable) |
+| 숫자·금액 | **IBM Plex Mono** (`--mono`/`--font-mono`) | 400/500/600/700 | 표·수치·라벨 |
+| 영문 라벨(ZONE·SECTOR 등) | IBM Plex Mono | 400–700 | letter-spacing `--ls-label .22em` |
+| 로고·디스플레이·히어로 | IBM Plex Mono (`--font-display`) | 700 | 셸 데이터 톤과 일관 |
 
-## 4. 새 표면(탭·페이지) 추가 체크리스트
+- **@font-face 경로**: `integration/dossier/assets/fonts/{pretendard/PretendardVariable.woff2, ibm-plex-mono/IBMPlexMono-*.latin.woff2}`. v2 셸은 `../dossier/assets/fonts/…` 상대경로로 재사용(복사 없음, 같은 오리진).
+- **Chart.js**: `Chart.defaults.font.family`를 반드시 지정(미지정 시 Helvetica로 렌더돼 표면 폰트 어긋남). galaxy 테마=IBM Plex Mono / 기본=Pretendard.
+- **금지**: Inter·JetBrains Mono·Space Grotesk 등 라틴 서브셋(한글 글리프 0 → 한글이 시스템 폰트로 깨짐) · CDN 폰트 · 인라인 `font-family` 리터럴(변수 사용).
+
+## 4. 패널 엣지 표준
+
+**galaxy ZONE 카드 = 표준 엣지**: radius **10px**(`--r-5`) + **ㄱ자 코너 브래킷**(14×14px · 2px solid accent · 외곽 모서리만 3px 라운드 · top-left + bottom-right). 재사용 클래스 `.gx-panel`(theme-galaxy.css, accent는 `--gx-accent` 오버라이드).
+
+| 박스 종류 | radius | 브래킷 | 예 |
+|---|---|---|---|
+| 주요 콘텐츠 패널·존 카드 | 10px (`--r-5`) | **있음** (accent=의미색) | galaxy ZONE, business `.section`, firm `.panel`(galaxy), v2 `.panel` |
+| 인트로 정보박스 | 8px (`--r-4`) | 없음 | galaxy 인트로 |
+| 소형 카드·배지 | 4~6px (`--r-1`~`--r-2`) | 없음 | 존 배지, 상단 배지 |
+| pill 탭·둥근 버튼 | 999px | 없음 | 도메인 요소(유지) |
+
+- radius는 **tokens.css 스케일(`--r-*`)만** 사용 — 표면별 독자 값(12·14·16px 등) 금지.
+- 장식 도형(product-visual 일러스트 등)은 이 규칙 밖 — 콘텐츠 컨테이너에만 적용.
+
+## 5. 레이아웃·간격·모션
+
+- **간격**: `--sp-1~8`(4·8·12·16·20·26·30·38px)만. 임의 px 금지.
+- **패널 조합**: 배경 `--panel` + 경계 `1px solid --line` + radius `--r-5` + 브래킷(주요 패널). 패딩은 `--sp-4~5`.
+- **타입 스케일**: `--t-mono-micro`(10) ~ `--t-amt`(42px) 계단값 사용.
+- **모션**: `--dur-fast`(180ms, 페이드) · `--dur-mid`(250ms, 게이트) · `--dur-slow`(450ms, 재동기화). 커스텀 duration 지양.
+- **행높이**: 재무제표 패널 `--row-h`(64px)·`--row-s`(56px).
+
+## 6. 표면별 적용 매트릭스
+
+| 표면 | 폰트 | 팔레트 | 패널 엣지 | link | 비고 |
+|---|---|---|---|---|---|
+| 탭① [business.html](integration/dossier/business.html) | Pretendard+IPM ✅ | galaxy mint | 표준(10+브래킷) ✅ | tokens + theme-galaxy | 페이지 고유 토큰만 인라인 |
+| 탭② [galaxy.html](integration/dossier/galaxy.html) | Pretendard+IPM ✅ | galaxy mint(원조) | 표준(인라인 브래킷) | tokens (theme는 의도적 미링크) | 해방판 자구가 판정 기준 |
+| 탭③ [firm.html](integration/dossier/firm.html) | Pretendard+IPM ✅ | `[data-theme=galaxy]` 스코프 | 표준(10+브래킷) ✅ | 인라인 스코프 | v1 무테마 룩은 스코프 밖 불변 |
+| v2 셸 [integration/v2/](integration/v2/) | Pretendard+IPM ✅ | **셸 cyan `#5eead4`**(별도 트랙) | 브래킷 정렬 ✅(국소) | tokens + styles.css | **팔레트만 별도**(폰트·엣지는 통일). 전역 팔레트 통일 여부 = 리더 2차 결정 |
+| ~~v1 dashboard~~ | — | — | — | — | 2026-07-13 폐지 |
+| ~~relation viewer~~ | — | — | — | — | 2026-07-13 은퇴 |
+| price standalone (quiz·timemachine) | Apple SD Gothic | 구세대 blue #3b82f6 | 미적용 | — | D 담당 standalone — 신규 스타일 작업 시 galaxy 이관 검토 |
+
+## 7. 새 표면(탭·페이지) 추가 체크리스트
 
 1. `tokens.css` link (층1 프리미티브)
-2. 룩 결정 — 전면 galaxy 룩이면 `theme-galaxy.css` link, 기존 룩과 공존해야 하면 firm.html처럼 `[data-theme]` 스코프
-3. 폰트는 **로컬 벤더링만** (`integration/dossier/assets/fonts/` — CDN 금지, GitHub Pages 오프라인 안전)
-4. 색은 §2 의미에 맞는 토큰만 — hex 하드코딩·별칭 토큰 금지
-5. 완료 후 **ui-ux-reviewer(또는 Playwright 스크린샷)로 시각 검증** — 특히 v2 오버레이 iframe 안에서 확인
+2. 룩 결정 — 전면 galaxy면 `theme-galaxy.css` link, 기존 룩과 공존해야 하면 firm.html처럼 `[data-theme]` 스코프
+3. 폰트: `../dossier/assets/fonts/`의 Pretendard+IBM Plex Mono만 (§3 금지 목록 준수)
+4. 색: §2 의미 토큰만 (hex 하드코딩·별칭 금지)
+5. 패널: `.gx-panel` 또는 §4 스펙(radius `--r-5` + 브래킷). 간격은 `--sp-*`
+6. Chart.js 쓰면 `Chart.defaults.font.family` 지정
+7. **검증**: Playwright 전후 스크린샷 or ui-ux-reviewer — v2 오버레이 iframe 안에서도 확인. **DESIGN.md와 다른 렌더는 버그.**
 
-## 5. 관련 문서 지도
+## 8. 금지 목록 (하나라도 어기면 리뷰 반려)
+
+- ❌ hex/rgba 하드코딩 (색은 토큰, 위치는 `--sp-*`/`--r-*`)
+- ❌ 별칭 토큰(`--teal`/`--pink`/`--violet` 등)
+- ❌ 인라인 `font-family` 리터럴 (변수 사용) · Inter/JetBrains/Space Grotesk · CDN 폰트/CSS
+- ❌ 표면별 독자 radius(12·14·16px) — `--r-*` 스케일만
+- ❌ 목업을 서빙 폴더(integration/)에 두기 — 원형은 `design/prototypes/`
+
+## 9. 관련 문서 지도
 
 | 문서 | 역할 |
 |---|---|
 | 이 파일 (루트 DESIGN.md) | 프로젝트 전체 디자인 규칙·표면 지도 (SSOT) |
-| [integration/dossier/CASH_GALAXY_STYLE_GUIDE.md](integration/dossier/CASH_GALAXY_STYLE_GUIDE.md) | 탭③ 현금 은하수 **도메인 문법** 전문(색=의미·viz 8종·카피 규칙·삼성 골든) |
-| [integration/dossier/GALAXY_JSON_SCHEMA.md](integration/dossier/GALAXY_JSON_SCHEMA.md) | galaxy_&lt;ticker&gt;.json 데이터 스키마 (디자인 아님) |
-| [integration/dossier/DOSSIER_TABS_PLAN.md](integration/dossier/DOSSIER_TABS_PLAN.md) | 3탭 실행 계획 (디자인 결정 D1~D12 포함) |
-| [integration/v2/DESIGN.md](integration/v2/DESIGN.md) | v2 셸 전용 디자인·로직 기록 (셸 별도 트랙의 정본) |
-| [design/](design/) | 프로토타입 원형·제작 사양서(프롬프트_v6) — 자구·데이터 판정 기준 |
+| [CASH_GALAXY_STYLE_GUIDE.md](integration/dossier/CASH_GALAXY_STYLE_GUIDE.md) | 탭③ 현금 은하수 **도메인 문법**(색=의미·viz 8종·카피·삼성 골든) |
+| [GALAXY_JSON_SCHEMA.md](integration/dossier/GALAXY_JSON_SCHEMA.md) | galaxy JSON 데이터 스키마 (디자인 아님) |
+| [DOSSIER_TABS_PLAN.md](integration/dossier/DOSSIER_TABS_PLAN.md) | 3탭 실행 계획 (디자인 결정 D1~D12) |
+| [integration/v2/DESIGN.md](integration/v2/DESIGN.md) | v2 셸 로직·인터랙션 기록 (셸 별도 트랙 세부) |
+| [design/](design/) | 프로토타입 원형·제작 사양서 — 자구·데이터 판정 기준 |
 
-## 6. 알려진 잔여 격차 (다음 정비 대상)
+## 10. 잔여 격차 (다음 정비 대상)
 
-- business.html에 구세대 액센트의 rgba 하드코딩 잔재(`rgba(65,220,255,…)` = 구 #41dcff 글로우) 소수 존재 — 시각 위험이 낮아 보류, 다음 스타일 작업 시 `--cyan` 기반으로 정리.
-- v2 셸 폰트 3종(Inter·JetBrains Mono·Space Grotesk)은 라틴 서브셋 — 한글 본문은 시스템 폴백. 셸은 별도 트랙이므로 허용.
+- **셸 전역 팔레트**: v2 셸은 폰트·엣지는 통일했으나 팔레트(cyan `#5eead4`)는 별도 트랙 유지 중. galaxy mint로 완전 통일할지는 **리더 2차 결정**(theme-galaxy 값 스왑 1곳이면 전환 가능한 구조).
+- **v2 인라인 hex 169개**: styles.css/bundle.jsx의 인라인 색을 `var(--)` 토큰으로 전면 승격(시각 무변화)은 후속 — 현재는 tokens.css link + 폰트·엣지 통일까지 완료.
+- **business rgba 글로우 잔재**: 구 `rgba(65,220,255,…)`(구 #41dcff) 소수 — 다음 작업 시 `--cyan` 기반 정리.
+- **price standalone**: quiz·timemachine의 구세대 팔레트·폰트 — D 담당 영역, 신규 작업 시 galaxy 이관 검토.
