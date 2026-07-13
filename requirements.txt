@@ -21,6 +21,11 @@ lxml>=5.1                 # XML 파서
 pykrx>=1.0                # KRX 데이터
 networkx>=3.2             # 그래프(관계 분석)
 
+# --- Report 모듈 (Phase 4 LLM 하네스) ---
+pydantic>=2.0            # galaxy JSON 스키마 검증 (schemas.py)
+openai>=1.0              # SGLang OpenAI 호환 클라이언트 (llm.py)
+playwright>=1.40         # L3 렌더 검증·디자인 스크린샷 (validate.py)
+
 # --- 테스트 / 포매터 ---
 pytest==8.3.3             # 테스트 실행기
 black==24.10.0            # 코드 포매터 (CI에서 요구)
