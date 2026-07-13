@@ -27,7 +27,12 @@ auto-invocable: false
 2. 렌더 스모크: fresh playwright로 콘솔 에러 0 + `is-revenue`에 실값 표시(pv 생존 확인) + **삼성(005930) 무회귀**.
 3. galaxy.html을 만졌다면: 수정 직후 반드시 스모크(괄호 1개가 클래스 eval 전체를 죽인 전례).
 
-## S3 — 산문 (41장: 콘텐츠 27 + APPENDIX 14)
+## S2.5 — 보고서 기반 구조 확정 (R6.9, 골든 흉내 금지)
+카드 목록은 **골든이 아니라 그 회사 데이터**가 정의합니다 (check_golden §1이 강제):
+- **골든에 있는데 이 회사에 없음**(series·주석 근거 부재) → 카드·매듭·행 **생략** — 0/— placeholder 절대 금지.
+- **이 회사에만 있음**(원장 MISSING으로 노출) → 원장에 `new-dive:<key>` 라우팅 후 **신규 카드 생성**: 패널 행 추가(S2) + prose-writer에 견본 없이 A7·A8 문법으로 작성 지시(S3) + 데이터가 받쳐주면 viz 배정. 신규 매듭이 필요하면 은하수 SEGS 위상은 kind 규칙(R2 side 결정)으로 파생.
+
+## S3 — 산문 (카드 수는 S2.5가 확정 — 골든 41장은 상한이 아니라 참고)
 1. 카드마다 **prose-writer** 호출 — 프롬프트에 ⓐ그 카드의 fact 발췌(화이트리스트) ⓑseries 배열 ⓒ골든 같은 카드 원문(견본) ⓓ카드 키·row·주번호를 포함. 독립 카드는 병렬 호출 가능.
 2. 반환 JSON을 galaxy_<ticker>.json의 dives/appendix에 병합. knots.story = 해당 dive what[0] 동기화.
 3. viz는 코드가 배정: 데이터가 받쳐주는 것만(vHBar=세부표 있음, vSteps=정산 검산 완료, vWater=기초→기말 roll, vChips=등식). viz_data는 렌더러 실형식(vSteps=rows·vWater=steps·vPuddle=ar/inv).

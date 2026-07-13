@@ -63,19 +63,34 @@ def check(ticker: str) -> list[str]:
     if not os.path.exists(path):
         return [f"galaxy_{ticker}.json 없음"]
     G = json.load(open(path, encoding="utf-8"))
-    ref = json.load(open(os.path.join(_DATA, f"galaxy_{GOLDEN_REF}.json"), encoding="utf-8")) \
-        if ticker != GOLDEN_REF else G
 
     dives, apx, S = G.get("dives", {}), G.get("appendix", []), G.get("series", {})
     panels = G.get("panels", {})
     row2v = {r.get("row"): r.get("v") for z in panels for r in panels.get(z, [])}
 
-    # ── 1) 구조 커버리지 (골든 레지스트리 대비) ──
-    missing = set(ref.get("dives", {})) - set(dives)
-    if missing:
-        gaps.append(f"[커버리지] 콘텐츠 dive 누락 {len(missing)}: {sorted(missing)}")
-    if len(apx) < len(ref.get("appendix", [])):
-        gaps.append(f"[커버리지] appendix {len(apx)}/{len(ref.get('appendix', []))}")
+    # ── 1) 구조 커버리지 — ⚠️ 보고서 기반 원칙(R6.9): 골든이 아니라 그 회사 데이터가 기대 집합을 정의한다.
+    #  방향A: 회사 데이터(series 완결·패널 행)에 근거 있는 dive만 요구 — 골든에 있어도 근거 없으면 요구 금지.
+    #  방향B: 근거 없는 dive가 존재하면(골든 따라 0/—로 만든 것) FAIL — "없는 항목은 아예 없어야 한다".
+    def _complete(key):
+        v = S.get(key)
+        return isinstance(v, list) and len(v) >= 5 and all(isinstance(x, (int, float)) for x in v)
+
+    REQ_SERIES = {"k1": "cash", "k2": "revenue", "k3": "cogs", "k4": "gross", "k5": "sgna",
+                  "k6": "op", "k6b": "pretax", "k7": "tax", "k8": "ni", "k9": "ocf", "k11": "ocf",
+                  "k12": "icf", "k13": "fin", "k15": "cash", "oci": "oci", "totalcomp": "tci",
+                  "assets": "assets", "liab": "debt", "eq-begin": "equity", "eq-end": "equity",
+                  "eq-div": "div", "ppe": "capex"}
+    COND_ROW = {"k10": "cf-wc", "k10b": "cf-paid", "k14": "cf-fx",
+                "eq-buyback": "eq-buyback", "eq-other": "eq-other"}
+    expected = {k for k, sk in REQ_SERIES.items() if _complete(sk)}
+    expected |= {k for k, row in COND_ROW.items() if row in row2v}
+    universe = set(REQ_SERIES) | set(COND_ROW)
+    for k in sorted(expected - set(dives)):
+        gaps.append(f"[커버리지] dive '{k}' 누락 — 회사 데이터에 근거 있음(series/행 존재)")
+    for k in sorted((set(dives) & universe) - expected):
+        gaps.append(f"[커버리지] dive '{k}' 근거 없음 — 보고서에 없는 항목은 0/— 표시가 아니라 생략(R6.9)")
+    # 회사 고유 신규 dive(universe 밖)는 허용 — 원장 §7의 new-dive 라우팅과 짝.
+    # appendix는 개수 강제 없음 — 원장(§7)이 '그 회사 실주석' 기준으로 전수 라우팅을 강제한다.
 
     # ── 2) 카드 4절 채움 + 깊이 지표 (R6.1 S5) ──
     # 깊이 지표는 생성물 검증용 — 골든 레퍼런스(기준 그 자체, 재생성 없음)는 공란 검사만.
@@ -214,14 +229,22 @@ def check(ticker: str) -> list[str]:
             if not ledger:
                 gaps.append(f"[원장] routing_ledger 없음 (실주석 {len(db_notes)}개 미처리)")
             else:
+                apx_ids = {a.get("n") for a in apx}
                 for n in sorted(db_notes, key=int):
                     ent = ledger.get(n)
+                    to = (ent or {}).get("to", "")
                     if not ent:
                         gaps.append(f"[원장] 주{n} 원장 누락")
-                    elif ent.get("to") == "MISSING":
-                        gaps.append(f"[원장] 주{n} '{ent.get('title','')}' 미라우팅")
-                    elif ent.get("to") == "excluded" and not ent.get("reason"):
+                    elif to == "MISSING":
+                        gaps.append(f"[원장] 주{n} '{ent.get('title','')}' 미라우팅 — 회사 고유 항목이면 new-dive로 신규 생성(R6.9)")
+                    elif to == "excluded" and not ent.get("reason"):
                         gaps.append(f"[원장] 주{n} 제외 사유 없음")
+                    elif to.startswith("appendix:") and to.split(":", 1)[1] not in apx_ids:
+                        gaps.append(f"[원장] 주{n} → {to} — appendix에 실존하지 않음")
+                    elif to.startswith("new-dive:") and to.split(":", 1)[1] not in dives:
+                        gaps.append(f"[원장] 주{n} → {to} — 신규 dive 미생성")
+                    elif to not in ("dive:cited", "excluded") and not to.startswith(("appendix:", "row:", "new-dive:")):
+                        gaps.append(f"[원장] 주{n} 미지의 라우팅 '{to}'")
                 ghost = set(re.findall(r"주\s?(\d{1,2})(?=\D|$)", blob_all)) - db_notes
                 for n in sorted(ghost, key=int):
                     gaps.append(f"[원장] 유령 인용 주{n} — 실주석에 없음")
