@@ -95,7 +95,7 @@ def check(ticker: str) -> list[str]:
             gaps.append(f"[{k}] why.body 공란")
         if not (fv.get("cap") or fv.get("skip")):
             gaps.append(f"[{k}] five 공란")
-        if fv.get("cap") and not re.search(r"\d", fv["cap"]):
+        if depth_scan and fv.get("cap") and not re.search(r"\d", fv["cap"]):
             gaps.append(f"[{k}] five.cap 숫자 0개")
         if fv.get("key") and fv["key"] not in S:
             gaps.append(f"[{k}] five.key '{fv['key']}' series에 없음")
