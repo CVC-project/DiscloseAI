@@ -17,7 +17,7 @@ python -m http.server 8000
 
 | ID | 상태 | 내용 |
 |---|---|---|
-| J1 | ✅ 완료 | 디코드 + IntroScreen 골격 |
+| J1 | ✅ 완료 | 디코드 + 골격 (IntroScreen은 2026-07-13 제거 — 진입 즉시 galaxy) |
 | J2 | ✅ | TopTabs + Galaxy 진입 화면 |
 | J3 | ✅ | 데이터 wiring layer (loader + valuation + narration + mock) |
 | J4 | ✅ | Sector 단계 (SectorOverviewPanel + DAILY HIGHLIGHTS) |

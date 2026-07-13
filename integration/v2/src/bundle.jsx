@@ -1996,83 +1996,6 @@ const AI_GREETINGS = {
 };
 
 // ─── Intro screen ──────────────────────────────────────────────────────────
-function IntroScreen({ stage, onEnter }) {
-  const [pulse, setPulse] = useState(0);
-  useEffect(() => {
-    let raf, t0 = performance.now();
-    const tick = () => {
-      setPulse((performance.now() - t0) / 1000);
-      raf = requestAnimationFrame(tick);
-    };
-    tick();
-    return () => cancelAnimationFrame(raf);
-  }, []);
-  const fade = stage > 0.3 ? Math.max(0, 1 - (stage - 0.3) * 2.2) : 1;
-
-  return (
-    <div className="intro-overlay" style={{ opacity: fade, pointerEvents: stage > 0.05 ? 'none' : 'auto' }}>
-      <div className="hud-top">
-        <div className="hud-brand">
-          <div className="hud-logo">◉</div>
-          <div className="hud-brand-text">
-            <div className="hud-brand-name">DISCLOSE<span style={{color:'#74EEC6'}}>AI</span></div>
-            <div className="hud-brand-sub">CORPORATE GALAXY ATLAS · v2.4</div>
-          </div>
-        </div>
-        <div className="hud-meta">
-          <div className="hud-meta-row"><span className="hud-meta-k">SESSION</span><span className="hud-meta-v">DA-{(2604 + Math.floor(pulse)).toString().padStart(4,'0')}</span></div>
-          <div className="hud-meta-row"><span className="hud-meta-k">UPLINK</span><span className="hud-meta-v" style={{color:'#74EEC6'}}>● STABLE · 42ms</span></div>
-          <div className="hud-meta-row"><span className="hud-meta-k">UTC</span><span className="hud-meta-v">{new Date().toISOString().slice(11,19)}Z</span></div>
-        </div>
-      </div>
-      <div className="intro-center">
-        <div className="intro-eyebrow">— TRANSMISSION FROM THE MARKET —</div>
-        <h1 className="intro-headline">
-          <span className="intro-line-1">What twelve headlines</span>
-          <span className="intro-line-2">missed,</span>
-          <span className="intro-line-3">a single number</span>
-          <span className="intro-line-4">was already <em>whispering.</em></span>
-        </h1>
-        <div className="intro-sub">
-          KOSPI · 1,400 disclosures / day · decoded by AI<br/>
-          A spatial atlas of Korea's listed companies.
-        </div>
-        <button className="enter-button" onClick={onEnter}>
-          <span className="enter-icon">▷</span>
-          <span className="enter-label">ENTER THE GALAXY</span>
-          <span className="enter-hint">click anywhere</span>
-        </button>
-      </div>
-      <div className="hud-rail hud-rail-left">
-        <div className="rail-tick">SECTORS · 16</div>
-        <div className="rail-tick">PLANETS · 50</div>
-        <div className="rail-tick">EDGES · 312</div>
-        <div className="rail-tick">LIVE PULSES · 8</div>
-      </div>
-      <div className="hud-rail hud-rail-right">
-        <div className="rail-tick">RA  04h 32m</div>
-        <div className="rail-tick">DEC +21° 18′</div>
-        <div className="rail-tick">Z   0.000142</div>
-        <div className="rail-tick">T+0{Math.floor(pulse).toString().padStart(3,'0')}s</div>
-      </div>
-      <div className="hud-bottom">
-        <div className="hud-bottom-l">
-          <span className="hud-dot" />
-          <span>OBSERVATORY ONLINE</span>
-          <span className="hud-sep">/</span>
-          <span>16 SECTORS · 50 PLANETS</span>
-          <span className="hud-sep">/</span>
-          <span>NEW DISCLOSURES TONIGHT · 47</span>
-        </div>
-        <div className="hud-bottom-r">
-          <span>2026 AI ROOKIE · MSIT</span>
-        </div>
-      </div>
-      <div className="intro-click" onClick={onEnter} />
-    </div>
-  );
-}
-
 // ─── Top tabs ──────────────────────────────────────────────────────────────
 function TopTabs({ active, onChange, breadcrumb }) {
   const tabs = [
@@ -2630,8 +2553,8 @@ function SectorZoomFrame({ progress, sector, children }) {
 // ─── Main app ──────────────────────────────────────────────────────────────
 function App() {
   const [tweaks, setTweak] = useTweaks(TWEAK_DEFAULTS);
-  const [introPhase, setIntroPhase] = useState('intro'); // intro | transitioning | tab
-  const [stage, setStage] = useState(0);
+  const [introPhase, setIntroPhase] = useState('tab'); // 인트로 제거(2026-07-13) — 진입 즉시 기업 우주(galaxy)
+  const [stage, setStage] = useState(1);
   const [activeTab, setActiveTab] = useState('finance');
 
   // Phase within finance tab: galaxy | sector | company
@@ -2643,20 +2566,6 @@ function App() {
   const [zoomProgress, setZoomProgress] = useState(0);
   const zoomAnimRef = useRef(0);
 
-  const startIntroTransition = useCallback(() => {
-    if (introPhase !== 'intro') return;
-    setIntroPhase('transitioning');
-    const t0 = performance.now();
-    const dur = 2400;
-    const tick = () => {
-      const k = Math.min(1, (performance.now() - t0) / dur);
-      const eased = k < 0.5 ? 4*k*k*k : 1 - Math.pow(-2*k+2, 3) / 2;
-      setStage(eased);
-      if (k < 1) requestAnimationFrame(tick);
-      else setIntroPhase('tab');
-    };
-    requestAnimationFrame(tick);
-  }, [introPhase]);
 
   // ENTER SECTOR — animate galaxy → sector
   const enterSector = useCallback((sectorId) => {
@@ -2774,9 +2683,7 @@ function App() {
         <GalaxyCanvas stage={stage} />
       </div>
 
-      {introPhase !== 'tab' && <IntroScreen stage={stage} onEnter={startIntroTransition} />}
-
-      {introPhase === 'tab' && (activeTab === 'finance' || activeTab === 'disclose') && (
+      {(activeTab === 'finance' || activeTab === 'disclose') && (
         <div className="finance-tab">
           {/* Galaxy phase — full solar system with all sectors */}
           {phase === 'galaxy' && (
