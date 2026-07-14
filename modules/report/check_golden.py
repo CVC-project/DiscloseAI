@@ -230,7 +230,11 @@ def check(ticker: str) -> list[str]:
                 gaps.append(f"[원장] routing_ledger 없음 (실주석 {len(db_notes)}개 미처리)")
             else:
                 apx_ids = {a.get("n") for a in apx}
-                for n in sorted(db_notes, key=int):
+                # 하위번호 주석('24-1'·'11.1') 안전 정렬 (V-031: 주번호는 문자열, int 캐스팅 금지)
+                def _nkey(n):
+                    parts = re.split(r"[.\-]", str(n))
+                    return tuple(int(p) if p.isdigit() else 0 for p in parts)
+                for n in sorted(db_notes, key=_nkey):
                     ent = ledger.get(n)
                     to = (ent or {}).get("to", "")
                     if not ent:
@@ -245,8 +249,12 @@ def check(ticker: str) -> list[str]:
                         gaps.append(f"[원장] 주{n} → {to} — 신규 dive 미생성")
                     elif to not in ("dive:cited", "excluded") and not to.startswith(("appendix:", "row:", "new-dive:")):
                         gaps.append(f"[원장] 주{n} 미지의 라우팅 '{to}'")
-                ghost = set(re.findall(r"주\s?(\d{1,2})(?=\D|$)", blob_all)) - db_notes
-                for n in sorted(ghost, key=int):
+                # 주요번호만 포착(소수값 오포착 방지). '주2'는 실주석 '2' 또는 하위번호 '2-1'·'2.1'이
+                # 있으면 유령 아님 (V-031: 하위번호 주석 대응, 삼성 소수값 6.07 오탐 방지).
+                cited = set(re.findall(r"주\s?(\d{1,2})(?=\D|$)", blob_all))
+                ghost = {n for n in cited
+                         if not any(d == n or d.startswith(n + "-") or d.startswith(n + ".") for d in db_notes)}
+                for n in sorted(ghost, key=_nkey):
                     gaps.append(f"[원장] 유령 인용 주{n} — 실주석에 없음")
     return gaps
 
