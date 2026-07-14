@@ -96,16 +96,16 @@ def check(ticker: str) -> list[str]:
     # 깊이 지표는 생성물 검증용 — 골든 레퍼런스(기준 그 자체, 재생성 없음)는 공란 검사만.
     depth_scan = ticker != GOLDEN_REF
     for k, d in list(dives.items()) + [("apx:" + a.get("n", "?"), a) for a in apx]:
-        is_apx = (not depth_scan) or k.startswith("apx:")
+        is_apx = k.startswith("apx:")
+        skip_depth = not depth_scan  # 골든 레퍼런스(삼성)는 깊이 기준 그 자체 — 면제
         fv = d.get("five", {})
-        # five=skip 카드는 보조 매듭(골든 자체가 얇음) — 완화 임계(links≥1·브래킷≥1)
-        min_links, min_br = (1, 1) if fv.get("skip") else (2, 2)
+        blob = " ".join(_texts({"w": d.get("what"), "b": d.get("why", {}).get("body")}))
+        nbr = len(re.findall(r"\[[^\[\]]{1,24}\]", blob))              # 브래킷 칩 수
+        ndigit = len(re.findall(r"\[[^\[\]]*\d[^\[\]]*\]", blob))       # 숫자 든 브래킷 수
         if not d.get("what") or not [w for w in d["what"] if w.strip()]:
             gaps.append(f"[{k}] what 공란")
-        elif not is_apx and len(d["what"]) < 2:
+        elif not skip_depth and len(d["what"]) < 2:
             gaps.append(f"[{k}] 깊이: what {len(d['what'])}문장(<2)")
-        if not is_apx and len(d.get("links") or []) < min_links:
-            gaps.append(f"[{k}] 깊이: links {len(d.get('links') or [])}(<{min_links})")
         if not (d.get("why", {}).get("body") or []):
             gaps.append(f"[{k}] why.body 공란")
         if not (fv.get("cap") or fv.get("skip")):
@@ -114,9 +114,25 @@ def check(ticker: str) -> list[str]:
             gaps.append(f"[{k}] five.cap 숫자 0개")
         if fv.get("key") and fv["key"] not in S:
             gaps.append(f"[{k}] five.key '{fv['key']}' series에 없음")
-        blob = " ".join(_texts({"w": d.get("what"), "b": d.get("why", {}).get("body")}))
-        if not is_apx and len(re.findall(r"\[[^\[\]]{1,24}\]", blob)) < min_br:
-            gaps.append(f"[{k}] 깊이: 브래킷 칩 <{min_br}")
+        if skip_depth:
+            continue
+        if is_apx:
+            # APPENDIX도 '실주석 기반 리치 카드' — 삼성 골든 수준 하한(V-048): 링크·수치·용어.
+            # 일반론(개념 설명만·숫자 없음·링크 없음) 금지. amt도 실값이어야.
+            if len(d.get("links") or []) < 1:
+                gaps.append(f"[{k}] APPENDIX 링크 0 — 재무제표 연결 필요(일반론 금지)")
+            if nbr < 2:
+                gaps.append(f"[{k}] APPENDIX 브래킷 <2 — 주석 실수치·용어 부족(일반론 금지)")
+            if ndigit < 1:
+                gaps.append(f"[{k}] APPENDIX 숫자 브래킷 0 — 그 주석의 실제 수치 필요(일반론 금지)")
+            if not re.search(r"\d", str(d.get("amt", ""))):
+                gaps.append(f"[{k}] APPENDIX amt에 실수치 없음('{d.get('amt','')}')")
+        else:
+            min_links, min_br = (1, 1) if fv.get("skip") else (2, 2)
+            if len(d.get("links") or []) < min_links:
+                gaps.append(f"[{k}] 깊이: links {len(d.get('links') or [])}(<{min_links})")
+            if nbr < min_br:
+                gaps.append(f"[{k}] 깊이: 브래킷 칩 <{min_br}")
 
     # ── 3) 텍스트 규율: 격식체·연도오인·빈 브래킷·금칙어·잔재 ──
     # 골든 레퍼런스는 문체 기준 그 자체(리더 수작업 정본) — 문체 스캔 면제, 구조·항등식·잔재는 검사.
