@@ -167,5 +167,51 @@ def _mark(sess, rcept_no, ticker, status):
     st.attempts = (st.attempts or 0) + 1
 
 
+def sectioning_health(ticker: str) -> list[str]:
+    """빌드 전 프리플라이트(S0) — 최신 사업보고서 주석이 제대로 분할됐는지 검증.
+    이번 세션 3종 사고(1주석 붕괴·괴물블록·하위번호 조용한 누락)를 자동 포착.
+    반환: 문제 목록(빈 리스트=정상). /galaxy-golden이 착수 전 게이트로 호출.
+    """
+    sess = get_local_session()
+    raw = (
+        sess.query(ReportRaw)
+        .filter(ReportRaw.ticker == ticker)
+        .order_by(ReportRaw.fiscal_year.desc())
+        .first()
+    )
+    if not raw:
+        sess.close()
+        return [f"[{ticker}] 수집된 보고서 없음 — collector 먼저"]
+    secs = (
+        sess.query(ReportSection)
+        .filter(ReportSection.rcept_no == raw.rcept_no, ReportSection.note_no.isnot(None))
+        .all()
+    )
+    notes = [(s.note_no, s.char_len or 0) for s in secs]
+    sess.close()
+    issues: list[str] = []
+    n = len(notes)
+    if n < 12:  # 제조·플랫폼 표준 보고서는 30+; <12 = 붕괴/포맷 미지원(금융·지주는 스코프아웃)
+        issues.append(f"주석 {n}개(<12) — 분할 붕괴/포맷 미지원(금융·지주면 스코프아웃)")
+    big = [no for no, cl in notes if cl > 200_000]
+    if big:
+        issues.append(f"괴물블록(>20만자) 주{big} — 별도FS 유입/미분할 의심")
+    majors = sorted({_note_key(no)[0] for no, _ in notes}) if notes else []
+    if majors:
+        gaps = [m for m in range(1, majors[-1] + 1) if m not in majors]
+        if len(gaps) > majors[-1] * 0.3:
+            issues.append(f"번호 결번 과다 {gaps} — 하위번호/포맷 누락 의심")
+    return issues
+
+
 if __name__ == "__main__":
+    import sys
+
+    if len(sys.argv) >= 3 and sys.argv[1] == "--health":
+        tk = sys.argv[2]
+        probs = sectioning_health(tk)
+        print(f"[{tk}] sectioning health:", "OK ✅" if not probs else "FAIL ❌")
+        for p in probs:
+            print("  -", p)
+        sys.exit(1 if probs else 0)
     section_all()
