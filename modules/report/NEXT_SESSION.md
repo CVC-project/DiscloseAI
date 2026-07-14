@@ -26,9 +26,10 @@
 - 조립 스크립트는 scratchpad(세션 소멸). 재현 재료 = 커밋된 골든 JSON + facts_*.json + VARIATIONS.
 
 ## 남은 후속(우선순위 낮음 — 회귀 아님)
-1. **viz 보강(배치 전반)**: dive `why.viz`가 삼성만 완비, 나머지 5본 대부분 null. '빈 박스'는 아님(falsy면 미렌더)이나, vHBar/vSteps/vWater 시각화를 채우면 정보 축 하나가 살아남. completeness-auditor가 배치 공통으로 지목. 데이터 받쳐주는 카드부터(세부표=vHBar, 정산 검산=vSteps).
-2. **좁은행 토글 히트박스**: `bs-liab`·`bs-equity`(400px 중앙 패널)에서 행 정중앙 클릭이 펼침 토글과 겹침(우측 값 클릭 시 정상). 템플릿 공통, 참고.
-3. **다음 확장**: 금융·지주(D10 스코프아웃) 별도 템플릿 검토 or 제조/플랫폼 클러스터 추가 기업(기아·카카오 등) 자동 확장.
+1. ~~viz 보강~~ **완료(V-052)**: `viz_fill.py`로 5본 dive `why.viz` 코드 배정(SK 21·NAVER 15·셀트 12·현대 17·LG 17). vHBar/vSteps/vChips/vWater/vBubbles 렌더 실측. → **assemble 모듈로 정식 편입** 권장(현재 scratch).
+2. **segment new-dive 미도달(V-052 후속)**: 부문 산문 dive가 row=is-revenue 공유로 k2에 가려 미도달. 부문 vBubbles는 k2로 옮겨 노출했으나, 전용 산문은 고유 앵커(전용 row/knot) 필요.
+3. **좁은행 토글 히트박스**: `bs-liab`·`bs-equity`(400px 중앙 패널)에서 행 정중앙 클릭이 펼침 토글과 겹침(우측 값 클릭 시 정상). 템플릿 공통, 참고.
+4. **다음 확장**: 금융·지주(D10 스코프아웃) 별도 템플릿 검토 or 제조/플랫폼 클러스터 추가 기업(기아·카카오 등) 자동 확장.
 
 ## 검증(완주 게이트, 회사마다)
 `check_golden <t>` 갭 0 · `GALAXY_TICKER=<t> pytest tests/report/test_galaxy_interaction.py` · 기존 골든 무회귀 · 렌더 콘솔에러 0(favicon 제외) · **딥다이브 전수 열림**(evaluate-click, **클릭 사이 Esc로 카드 해제 필수** — 없으면 이전 카드 잔존→오탐, V-049 교훈).
