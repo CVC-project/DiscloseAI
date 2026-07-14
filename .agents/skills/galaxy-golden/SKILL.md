@@ -30,6 +30,7 @@ until 카드별 3회 초과 → NEEDS_REVIEW.md(리더 큐)에 적고 계속
 > ⚠️ **R6.3 규칙 10**이 이 스킬의 헌법입니다([MILKYWAY_GENERATOR.md](../../../modules/report/MILKYWAY_GENERATOR.md) §5). 특히: 파생수치 암산 금지 · 템플릿 수정 시 컴파일+pv 스모크 · 원자적 쓰기(최종본만 저장).
 
 ## S0 프리플라이트 게이트 (먼저 통과해야 착수)
+- **[VARIATIONS.md](../../../modules/report/VARIATIONS.md) 먼저 읽기** — 기존 채록(수집 버그·산업 구조·기업 고유·포맷)을 이번 회사에 선제 적용. 예: 하위번호 주석(V-002)·단위 혼재(V-030)·플랫폼 손익(V-010).
 - **`python -m modules.report.sectioner --health <ticker>` PASS 필수** — 주석 분할 붕괴·괴물블록·번호 결번(하위번호 누락)을 빌드 전 차단. FAIL이면 sectioner 보강 후 `section_all([ticker])` 재섹션. (이번 세션 3종 조용한 사고의 자동 게이트 — MILKYWAY_GENERATOR §0.)
 
 ## 사전 조건 (아니면 먼저 해결)
@@ -67,10 +68,13 @@ until 카드별 3회 초과 → NEEDS_REVIEW.md(리더 큐)에 적고 계속
 2. shallow 카드 → S3 재작성, uncovered_notes → S1 추가 추출 후 해당 카드 보강, render 이슈 → S2.
 3. 종료 판정은 상단 **수렴 루프 의사코드**의 5게이트(check_golden·verifier·auditor·S6 인터랙션·기존 골든 무회귀) 전부 PASS.
 
+## S7 — 변형 채록 (완주의 마지막 의무)
+완주마다 `modules/report/VARIATIONS.md`에 ① 새 편차 V-### 항목(증상→원인→처리→적용 범위, 2회 반복 패턴은 코드로 승격) ② 채록 로그 표 1줄 — **신규 없어도 '신규 변형 없음' 명시**. 채록 없이는 완주 보고 금지. VARIATIONS.md는 galaxy JSON과 같은 커밋에 포함.
+
 ## 루프 규율
 - **카드 루프 상한 3회**: 같은 카드가 3회 재작성에도 실패하면 `modules/report/review/NEEDS_REVIEW.md`에 카드 키·사유·시도 이력을 적고 다음 카드로(리더 큐).
 - 중간본을 galaxy_<ticker>.json에 두지 말 것 — 스크래치에서 조립해 **검증 통과본만** 저장(브라우저 캐시 오인 사고 방지).
-- 완료 시: PASS 리포트(체커 결과·항등식·스크린샷 경로) 요약 + git 커밋은 galaxy_<ticker>.json만(fact·review는 비커밋 — .gitignore 확인).
+- 완료 시: PASS 리포트(체커 결과·항등식·스크린샷 경로) 요약 + git 커밋은 galaxy_<ticker>.json + **VARIATIONS.md(S7 채록)**(fact·review는 비커밋 — .gitignore 확인).
 
 ## 산업 확장 (별도 호출)
 새 산업(주석 구조가 다른 클러스터)의 **첫 회사**는 완주 후 리더 DL 게이트(contact-sheet 승인)를 거쳐 산업 골든으로 승격 — 이후 같은 클러스터는 그 골든을 견본으로 이 스킬을 반복.
