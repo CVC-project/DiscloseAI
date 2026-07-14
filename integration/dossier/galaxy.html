@@ -511,8 +511,30 @@ class Component extends DCLogic {
 
   _diveKey(row) {
     // 행→dive 키: 하드코딩 ROW2DIVE 우선, 없으면 dives의 .row에서 파생(V-043: 회사별 신규 행 자동 수용).
-    if (this.ROW2DIVE[row]) return this.ROW2DIVE[row];
-    if (!this._r2d) { this._r2d = {}; const D = this.getDives(); for (const k in D) if (D[k] && D[k].row) this._r2d[D[k].row] = k; }
+    const D0 = this.getDives();
+    if (this.ROW2DIVE[row]) {
+      const k = this.ROW2DIVE[row];
+      if (D0[k]) return k;
+      // 정적 요약행(cf-wc·eq-div·eq-buyback 등)이 이 회사에 해당 dive가 없으면 같은 존 요약 dive로 폴백 (V-049)
+      const FB = { eq: ['eq-other', 'eq-end'], cf: ['k11', 'k15'], is: ['k8'], bs: ['assets'] };
+      for (const cand of (FB[row.slice(0, 2)] || [])) if (D0[cand]) return cand;
+      return k;
+    }
+    if (!this._r2d) {
+      this._r2d = {}; const D = this.getDives(); for (const k in D) if (D[k] && D[k].row) this._r2d[D[k].row] = k;
+      // 서브행(grp)은 부모 행의 dive로 폴백 (V-049): ROW2DIVE는 삼성 subrow id만 하드코딩이라
+      // 셀트리온·현대차·LG 등 회사별 subrow id(bs-l-1·is-sgna-warr…)가 죽은 클릭이 됨 → grp→부모행 매핑으로 자동 수용.
+      const GP = { sgna: 'is-sgna', nonop: 'is-nonop', ni: 'is-netincome', opex: 'is-opex',
+                   noncash: 'cf-noncash', wc: 'cf-wc', inv: 'cf-inv', fin: 'cf-fin',
+                   bsa: 'bs-assets', bsl: 'bs-liab', bse: 'bs-equity' };
+      const P = (this._G && this._G.panels) || {};
+      for (const z in P) for (const r of (P[z] || [])) {
+        if (r.grp && !this._r2d[r.row]) {
+          const pr = GP[r.grp]; const pd = pr && (this._r2d[pr] || this.ROW2DIVE[pr]);
+          if (pd && D[pd]) this._r2d[r.row] = pd;   // 부모행 dive를 _r2d·ROW2DIVE 양쪽에서 해석(bse→bs-equity→eq-end 등)
+        }
+      }
+    }
     return this._r2d[row] || row;
   }
   onRow = (e) => { this.pin(this._diveKey(e.currentTarget.getAttribute('data-row'))); };
