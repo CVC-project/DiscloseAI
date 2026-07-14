@@ -25,11 +25,15 @@
 - **V-049 (galaxy.html)**: 서브행·정적 요약행 죽은 클릭 → grp·prefix 폴백. 6티커 죽은 클릭 0.
 - 조립 스크립트는 scratchpad(세션 소멸). 재현 재료 = 커밋된 골든 JSON + facts_*.json + VARIATIONS.
 
+## 제품 연결 (V-054 완료)
+6본이 **v2 3탭에 연결됨**. 진입: `http://localhost:8000/integration/v2/index.html` → 행성 클릭 → ENTER CORPORATION → **현금 은하수** 탭(6본 활성, 나머지 "· 준비중"). 딥링크: `?corp=<ticker>`. 탭 활성은 `dossier/data/galaxy_index.json` 매니페스트(생성기 `build_galaxy_index.py`)가 판정 — **새 골든 = 생성기 재실행만으로 자동 등록**.
+
 ## 남은 후속(우선순위 낮음 — 회귀 아님)
-1. ~~viz 보강~~ **완료(V-052)**: `viz_fill.py`로 5본 dive `why.viz` 코드 배정(SK 21·NAVER 15·셀트 12·현대 17·LG 17). vHBar/vSteps/vChips/vWater/vBubbles 렌더 실측. → **assemble 모듈로 정식 편입** 권장(현재 scratch).
-2. **segment new-dive 미도달(V-052 후속)**: 부문 산문 dive가 row=is-revenue 공유로 k2에 가려 미도달. 부문 vBubbles는 k2로 옮겨 노출했으나, 전용 산문은 고유 앵커(전용 row/knot) 필요.
-3. **좁은행 토글 히트박스**: `bs-liab`·`bs-equity`(400px 중앙 패널)에서 행 정중앙 클릭이 펼침 토글과 겹침(우측 값 클릭 시 정상). 템플릿 공통, 참고.
-4. **다음 확장**: 금융·지주(D10 스코프아웃) 별도 템플릿 검토 or 제조/플랫폼 클러스터 추가 기업(기아·카카오 등) 자동 확장.
+1. ~~viz 보강~~ **완료(V-052)** · ~~segment 미도달~~ **완료(V-053: k2 병합 + 그림자 가드 코드화)** · ~~골든→제품 연결~~ **완료(V-054: 매니페스트)**.
+2. **assemble 모듈화**(잔여 최대): `build_hmc·build_lgc·viz_fill·build_galaxy_index` 등이 scratch/1회성 — `modules/report/assemble.py`로 정식 편입하면 배치 재현 비용↓(현재 golden JSON 커밋본이 유일 재현 재료).
+3. **좁은행 토글 히트박스**(참고): `bs-liab`·`bs-equity`(400px) 행 정중앙 클릭이 펼침 토글과 겹침(우측 값 클릭 시 정상). 템플릿 공통.
+4. **business 탭 데이터 커버리지**(별개 트랙): `business_<t>.json`이 4개(005930·017670·035420·105560)만 — 골든 6본과 불일치. 사업 개요 탭 확장 시 보강.
+5. **다음 확장**: 금융·지주(D10 스코프아웃) 별도 템플릿 or 제조/플랫폼 클러스터 추가 기업(기아·카카오 등) 자동 확장.
 
 ## 검증(완주 게이트, 회사마다)
 `check_golden <t>` 갭 0 · `GALAXY_TICKER=<t> pytest tests/report/test_galaxy_interaction.py` · 기존 골든 무회귀 · 렌더 콘솔에러 0(favicon 제외) · **딥다이브 전수 열림**(evaluate-click, **클릭 사이 Esc로 카드 해제 필수** — 없으면 이전 카드 잔존→오탐, V-049 교훈).
