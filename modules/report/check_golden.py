@@ -91,6 +91,16 @@ def check(ticker: str) -> list[str]:
         gaps.append(f"[커버리지] dive '{k}' 근거 없음 — 보고서에 없는 항목은 0/— 표시가 아니라 생략(R6.9)")
     # 회사 고유 신규 dive(universe 밖)는 허용 — 원장 §7의 new-dive 라우팅과 짝.
     # appendix는 개수 강제 없음 — 원장(§7)이 '그 회사 실주석' 기준으로 전수 라우팅을 강제한다.
+    # ── 그림자 dive 방지(V-053): 두 dive가 같은 row 참조 시 뒤엣것은 클릭 미도달(_diveKey가 한 row→한 dive).
+    #  부문(segment)류 new-dive가 k2(is-revenue) 등과 row 공유하면 산문이 렌더 불가 → 고유 앵커 부여 or k2로 병합.
+    _rowdive: dict = {}
+    for k, d in dives.items():
+        r = d.get("row")
+        if r:
+            _rowdive.setdefault(r, []).append(k)
+    for r, ks in sorted(_rowdive.items()):
+        if len(ks) > 1:
+            gaps.append(f"[그림자] dive {sorted(ks)} 가 row '{r}' 공유 — 뒤엣것 클릭 미도달(고유 앵커 필요/병합)")
 
     # ── 2) 카드 4절 채움 + 깊이 지표 (R6.1 S5) ──
     # 깊이 지표는 생성물 검증용 — 골든 레퍼런스(기준 그 자체, 재생성 없음)는 공란 검사만.
