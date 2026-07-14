@@ -132,53 +132,7 @@ a{color:var(--cyan);} a:hover{color:var(--mint);}
             <div style="font-size:12.5px;color:var(--dim);">손익계산서 — 1년 동안 얼마 벌고 얼마 썼나, 장사 성적표예요.</div>
           </div>
         </div>
-        <div data-row="is-revenue" onclick="{{ onRow }}" title="{{ pt.is_revenue }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">02</span><span>매출액</span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--mint);">{{ pv.is_revenue }}</span>
-        </div>
-        <div data-row="is-cogs" onclick="{{ onRow }}" title="{{ pt.is_cogs }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">03</span><span>매출원가</span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--coral);">{{ pv.is_cogs }}</span>
-        </div>
-        <div data-row="is-grossprofit" onclick="{{ onRow }}" title="{{ pt.is_grossprofit }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;background:rgba(116,238,198,.045);font-weight:700;" style-hover="background:rgba(116,238,198,.09)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">04</span><span>매출총이익</span></div>
-          <span style="font-family:var(--mono);font-size:16.5px;font-weight:700;color:var(--mint);">{{ pv.is_grossprofit }}</span>
-        </div>
-        <div data-row="is-sgna" onclick="{{ onRow }}" title="{{ pt.is_sgna }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">05</span><span>판매비와관리비</span><span data-g="sgna" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.sgna }}</span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--coral);">{{ pv.is_sgna }}</span>
-        </div>
-        <sc-if value="{{ exp.sgna }}" hint-placeholder-val="{{ false }}"><div>{{ sub.sgna }}</div></sc-if>
-        <div data-row="is-opincome" onclick="{{ onRow }}" title="{{ pt.is_opincome }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;background:rgba(116,238,198,.045);font-weight:700;" style-hover="background:rgba(116,238,198,.09)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">06</span><span>영업이익</span></div>
-          <span style="font-family:var(--mono);font-size:16.5px;font-weight:700;color:var(--mint);">{{ pv.is_opincome }}</span>
-        </div>
-        <div data-row="is-nonop" onclick="{{ onRow }}" title="{{ pt.is_nonop }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">06ᵇ</span><span>영업외·금융손익</span><span data-g="nonop" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.nonop }}</span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--mint);">{{ pv.is_nonop }}</span>
-        </div>
-        <sc-if value="{{ exp.nonop }}" hint-placeholder-val="{{ false }}"><div>{{ sub.nonop }}</div></sc-if>
-        <div data-row="is-pretax" onclick="{{ onRow }}" title="{{ pt.is_pretax }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;background:rgba(116,238,198,.045);font-weight:700;" style-hover="background:rgba(116,238,198,.09)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">—</span><span>법인세차감전순이익</span></div>
-          <span style="font-family:var(--mono);font-size:16.5px;font-weight:700;color:var(--mint);">{{ pv.is_pretax }}</span>
-        </div>
-        <div data-row="is-tax" onclick="{{ onRow }}" title="{{ pt.is_tax }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">07</span><span>법인세비용</span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--coral);">{{ pv.is_tax }}</span>
-        </div>
-        <div data-row="is-netincome" onclick="{{ onRow }}" title="{{ pt.is_netincome }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid rgba(116,238,198,.35);cursor:pointer;background:rgba(116,238,198,.07);font-weight:700;" style-hover="background:rgba(116,238,198,.12)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--mint);letter-spacing:.08em;">08</span><span>당기순이익</span><span data-g="ni" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.ni }}</span></div>
-          <span style="font-family:var(--mono);font-size:17px;font-weight:700;color:var(--mint);text-shadow:0 0 12px rgba(116,238,198,.5);">{{ pv.is_netincome }}</span>
-        </div>
-        <sc-if value="{{ exp.ni }}" hint-placeholder-val="{{ false }}"><div>{{ sub.ni }}</div></sc-if>
-        <div data-row="is-oci" onclick="{{ onRow }}" title="{{ pt.is_oci }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">—</span><span>기타포괄손익 (OCI)</span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--gold);">{{ pv.is_oci }}</span>
-        </div>
-        <div data-row="is-totalcomp" onclick="{{ onRow }}" title="{{ pt.is_totalcomp }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;background:rgba(116,238,198,.045);font-weight:700;" style-hover="background:rgba(116,238,198,.09)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">—</span><span>총포괄손익</span></div>
-          <span style="font-family:var(--mono);font-size:16.5px;font-weight:700;color:var(--mint);">{{ pv.is_totalcomp }}</span>
-        </div>
+        {{ panelB }}
       </div>
 
       <div data-zone="zoneC" style="padding:30px 6px 14px;display:flex;align-items:baseline;gap:12px;">
@@ -1236,6 +1190,42 @@ class Component extends DCLogic {
     }));
   }
 
+  buildPanelB() {
+    // 패널 B 헤드라인을 panels.B(grp 없는 행)에서 데이터 구동 렌더 — 회사별 손익 구조 차이 흡수(V-040:
+    // 플랫폼=영업비용 단일, 제조=원가/총이익/판관비). 색·강조·매듭번호는 row-id 규칙으로 파생해
+    // 골든 정적 렌더와 동일, 신규 행(is-opex 등)만 데이터 색.
+    const h = React.createElement;
+    const P = (this._G && this._G.panels) || {};
+    const B = P.B || [];
+    const knots = (this._G && this._G.knots) || [];
+    const numOf = (row) => { const k = knots.find((x) => x.row === row); return k ? k.num : '—'; };
+    const VCOL = { 'is-revenue': 'mint', 'is-cogs': 'coral', 'is-grossprofit': 'mint', 'is-sgna': 'coral', 'is-opex': 'coral', 'is-opincome': 'mint', 'is-nonop': 'mint', 'is-pretax': 'mint', 'is-tax': 'coral', 'is-netincome': 'mint', 'is-oci': 'gold', 'is-totalcomp': 'mint' };
+    const EMPH = { 'is-grossprofit': 1, 'is-opincome': 1, 'is-pretax': 1, 'is-totalcomp': 1 };
+    const CARET = { 'is-sgna': 'sgna', 'is-opex': 'opex', 'is-nonop': 'nonop', 'is-netincome': 'ni' };
+    const exp = this.state.exp;
+    const head = B.filter((r) => !r.grp);
+    const out = [];
+    head.forEach((r, i) => {
+      const em = !!EMPH[r.row], isNI = r.row === 'is-netincome';
+      const cg = CARET[r.row]; const hasSub = cg && B.some((x) => x.grp === cg);
+      const vc = this.colOf(VCOL[r.row] || r.color || 'mint');
+      out.push(h('div', { key: r.row, 'data-row': r.row, onClick: this.onRow,
+        title: (r.raw_mn != null ? r.raw_mn.toLocaleString() + ' 백만원' : r.name),
+        style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          height: 'var(--row-h)', padding: '0 16px', cursor: 'pointer',
+          borderTop: i === 0 ? 'none' : (isNI ? '1px solid rgba(116,238,198,.35)' : '1px solid var(--line)'),
+          background: isNI ? 'rgba(116,238,198,.07)' : (em ? 'rgba(116,238,198,.045)' : 'transparent'),
+          fontWeight: (em || isNI) ? 700 : 400 } },
+        h('div', { style: { display: 'flex', alignItems: 'center', gap: '10px' } },
+          h('span', { style: { fontFamily: 'var(--mono)', fontSize: '10px', color: isNI ? 'var(--mint)' : 'var(--dim2)', letterSpacing: '.08em' } }, numOf(r.row)),
+          h('span', null, r.name),
+          hasSub ? h('span', { 'data-g': cg, onClick: this.onToggle, style: { width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid var(--line)', borderRadius: '4px', fontSize: '9px', color: 'var(--dim)', cursor: 'pointer', flexShrink: 0 } }, exp[cg] ? '▾' : '▸') : null),
+        h('span', { style: { fontFamily: 'var(--mono)', fontSize: isNI ? '17px' : (em ? '16.5px' : '15px'), fontWeight: (em || isNI) ? 700 : 600, color: vc, textShadow: isNI ? '0 0 12px rgba(116,238,198,.5)' : 'none' } }, (r.v == null || r.v === '') ? '—' : r.v)));
+      if (hasSub && exp[cg]) out.push(this.buildSub(cg));
+    });
+    return h('div', { key: 'panelB' }, out);
+  }
+
   buildAppendix() {
     const h = React.createElement;
     const items = (this._G && this._G.appendix) || [];
@@ -1270,6 +1260,7 @@ class Component extends DCLogic {
       inspectorCard: safe(this.buildCard, null),
       runningChip: safe(this.buildRunningChip, null),
       appendixList: safe(this.buildAppendix, null),
+      panelB: safe(this.buildPanelB, null),
       bsbar: (() => { const f = (r) => { const x = (this._G && this._G.panels && this._G.panels.D || []).find(q => q.row === r); return x && x.raw_mn ? x.raw_mn : null; }; const a = f('bs-assets'), l = f('bs-liab'), e = f('bs-equity'); if (a && l && e) return { l: Math.round(l / a * 100), e: Math.round(e / a * 100) }; return { l: 23, e: 77 }; })(),
       sub: (() => { try { const o = {}; for (const g of ['sgna','nonop','ni','noncash','wc','inv','fin','bsa','bsl','bse']) o[g] = this.buildSub(g); return o; } catch (e) { console.warn('sub 빌더 오류: ' + e.message); return {}; } })(),
       onRow: this.onRow,
