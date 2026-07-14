@@ -32,7 +32,7 @@ tools:
 - `why.body`: 1~2문장 — 회계 원리("왜 그렇게 처리하나")
 - `five.cap`: 1문장, 숫자 ≥1 (5개년의 스토리 — 골짜기·회복·연증 등) / `five.so`: 정확히 1문장 통찰
 - 5점 미완성·비추세 지표는 `five: {skip: "사유 한 문장"}`
-- APPENDIX(n*)는 what 1~2문장·why 1문장, five=skip
+- APPENDIX(n*)는 what 2문장·**why 2문장(회계원리 + 함의/시사점, 각 ~45자)**·five=skip — 콘텐츠 dive 못지않은 깊이(V-044). 얕은 한 문장 why 금지.
 
 ## 출력
 카드 JSON만 (dive 스키마: z/zc/en/name/amt/raw_mn/color_key/row/what/links/lnote/why/five — 골든과 동형).

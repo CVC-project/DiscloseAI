@@ -371,7 +371,7 @@ class Component extends DCLogic {
     const t = new URLSearchParams(location.search).get('ticker') || '005930';
     fetch('data/galaxy_' + t + '.json')
       .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-      .then(G => { this._G = G; this._dives = null; this.setState({ dataReady: true }); this.queueMeasure(); })
+      .then(G => { this._G = G; this._dives = null; this._r2d = null; this.setState({ dataReady: true }); this.queueMeasure(); })
       .catch(() => this.setState({ dataError: true }));
   }
   componentDidMount() {
@@ -509,10 +509,13 @@ class Component extends DCLogic {
     });
   }
 
-  onRow = (e) => {
-    const id = e.currentTarget.getAttribute('data-row');
-    this.pin(this.ROW2DIVE[id] || id);
-  };
+  _diveKey(row) {
+    // 행→dive 키: 하드코딩 ROW2DIVE 우선, 없으면 dives의 .row에서 파생(V-043: 회사별 신규 행 자동 수용).
+    if (this.ROW2DIVE[row]) return this.ROW2DIVE[row];
+    if (!this._r2d) { this._r2d = {}; const D = this.getDives(); for (const k in D) if (D[k] && D[k].row) this._r2d[D[k].row] = k; }
+    return this._r2d[row] || row;
+  }
+  onRow = (e) => { this.pin(this._diveKey(e.currentTarget.getAttribute('data-row'))); };
 
   onKnot(id) { this.pin(id); }
 
@@ -540,7 +543,7 @@ class Component extends DCLogic {
   };
 
   // ---------- helpers ----------
-  rgba(hex, a) { const n = parseInt(hex.slice(1), 16); return `rgba(${(n >> 16) & 255},${(n >> 8) & 255},${n & 255},${a})`; }
+  rgba(hex, a) { if (!hex || hex[0] !== '#') return 'transparent'; const n = parseInt(hex.slice(1), 16); return `rgba(${(n >> 16) & 255},${(n >> 8) & 255},${n & 255},${a})`; }
   colOf(name) { return this.C[name] || name; }
 
   rich(text, color) {
@@ -835,7 +838,7 @@ class Component extends DCLogic {
       h('div', { style: { fontSize: '26px', fontWeight: 800, letterSpacing: '-.01em' } }, v.name),
       h('div', { style: { fontFamily: 'var(--mono)', fontSize: '46px', fontWeight: 700, color: c, margin: '8px 0 22px', textShadow: `0 0 26px ${this.rgba(c, .4)}` } }, v.amt),
       ...this.paras(v.story, c),
-      h('button', { onClick: () => this.pin(this.ROW2DIVE[row] || row), style: { marginTop: '8px', fontFamily: 'var(--sans)', fontSize: '14px', color: c, background: this.rgba(c, .07), border: `1px solid ${this.rgba(c, .4)}`, borderRadius: '7px', padding: '9px 16px', cursor: 'pointer' } }, '자세히 보기 ▸'));
+      h('button', { onClick: () => this.pin(this._diveKey(row)), style: { marginTop: '8px', fontFamily: 'var(--sans)', fontSize: '14px', color: c, background: this.rgba(c, .07), border: `1px solid ${this.rgba(c, .4)}`, borderRadius: '7px', padding: '9px 16px', cursor: 'pointer' } }, '자세히 보기 ▸'));
   }
 
   epilogueCard() {
@@ -1114,7 +1117,7 @@ class Component extends DCLogic {
     kids.push(h('div', { key: 'am', style: { fontFamily: 'var(--mono)', fontSize: '42px', fontWeight: 700, color: c, margin: '6px 0 2px', textShadow: `0 0 24px ${this.rgba(c, .4)}` } }, d.amt));
     if (d.raw) kids.push(h('div', { key: 'rw', style: { fontFamily: 'var(--mono)', fontSize: '11.5px', color: 'var(--dim2)' } }, '원본 ' + d.raw + ' 백만원'));
     kids.push(this.subheadEl('①', '무엇인가요', '정의 · 의미', c));
-    (d.what || []).forEach((t, i) => kids.push(h('p', { key: 'w' + i, style: { margin: '0 0 13px', fontSize: '16px', lineHeight: 1.85 } }, ...this.rich(t, c))));
+    (Array.isArray(d.what) ? d.what : [d.what].filter(Boolean)).forEach((t, i) => kids.push(h('p', { key: 'w' + i, style: { margin: '0 0 13px', fontSize: '16px', lineHeight: 1.85 } }, ...this.rich(t, c))));
     if (d.links && d.links.length) {
     kids.push(this.subheadEl('②', '어디와 이어지나요', '연결 지도 — 줄에 마우스를 올리면 가운데 행이 빛나요', c));
     kids.push(h('div', { key: 'lk', style: { display: 'grid', gap: '7px' } }, d.links.map((l, i) => {
@@ -1133,7 +1136,7 @@ class Component extends DCLogic {
     }
     if (d.lnote) kids.push(h('p', { key: 'ln', style: { margin: '10px 0 0', fontSize: '13.5px', color: 'var(--dim)', lineHeight: 1.7 } }, ...this.rich(d.lnote, c)));
     kids.push(this.subheadEl('③', '왜 그런가요', d.why.sub || '규정 · 시각화', c));
-    (d.why.body || []).forEach((t, i) => kids.push(h('p', { key: 'y' + i, style: { margin: '0 0 13px', fontSize: '15.5px', lineHeight: 1.85 } }, ...this.rich(t, c))));
+    (Array.isArray(d.why.body) ? d.why.body : [d.why.body].filter(Boolean)).forEach((t, i) => kids.push(h('p', { key: 'y' + i, style: { margin: '0 0 13px', fontSize: '15.5px', lineHeight: 1.85 } }, ...this.rich(t, c))));
     if (d.why.viz) kids.push(h('div', { key: 'vz', style: { margin: '14px 0 8px', border: '1px solid var(--line)', borderRadius: '10px', padding: '16px' } }, this._viz(d.why.viz, d.why.viz_data)));
     if (d.why.cap) kids.push(h('p', { key: 'cp', style: { margin: '8px 0 0', fontSize: '13px', color: 'var(--dim)' } }, '이 그림이 말하는 것 — ' + d.why.cap));
     kids.push(this.subheadEl('④', '5년간 어땠나요', 'FY2021 – FY2025 증감분석', c));
