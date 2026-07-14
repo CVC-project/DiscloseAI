@@ -36,5 +36,5 @@ tools:
 
 ## 출력
 카드 JSON만 (dive 스키마: z/zc/en/name/amt/raw_mn/color_key/row/what/links/lnote/why/five — 골든과 동형).
-links의 `a`는 제공된 패널 값에서만. viz는 지정받은 것만 사용(viz 선택은 코드 소관).
+links의 `a`는 제공된 패널 값에서만. viz는 지정받은 것만(선택은 코드 소관) — **viz_data의 v는 숫자(조), 문자열 금지**(NaN 방지, V-047). 링크 `t`는 IS/CF/BS/EQ/N만(V-043).
 최종 메시지 = 그 JSON (설명 불필요 — 호출자가 파싱).

@@ -934,7 +934,7 @@ class Component extends DCLogic {
   PIN2KNOT = { oci: null, ppe: null, assets: null, liab: null };
 
   // ===== Step 2 — 차트 =====
-  fmt1(v, plus) { const r = Math.round(v * 10) / 10; return (plus && r > 0 ? '+' : '') + r; }
+  fmt1(v, plus) { const r = Math.round((parseFloat(v)||0) * 10) / 10; return (plus && r > 0 ? '+' : '') + r; }
 
   vLine({ key, color, valley = -1, zero = false, valleyLabel }) {
     const h = React.createElement, vals = this.S[key]; color = this.colOf(color);
