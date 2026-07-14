@@ -112,17 +112,23 @@ def test_pin_and_escape(page):
 
 
 def test_expand_toggle(page):
-    """펼침 캐럿 토글 — 서브행 등장/소멸."""
+    """펼침 캐럿 토글 — 서브행 등장/소멸. 그룹 키(sgna/opex 등)는 회사 구조 따라 달라
+    구조 무관하게 첫 캐럿을 잡아 행 수 증감으로 검증(제조=sgna, 플랫폼=opex)."""
     page.evaluate("window.scrollTo(0, 400)")
     time.sleep(0.5)
-    car = page.query_selector('[data-g="sgna"]')
-    assert car, "sgna 캐럿 없음"
+    car = page.query_selector("[data-g]")
+    assert car, "펼침 캐럿 없음"
+    g = car.get_attribute("data-g")
+    car.scroll_into_view_if_needed()
+    time.sleep(0.3)
+    before = len(page.query_selector_all("[data-row]"))
     car.click()
     time.sleep(0.8)
-    assert page.query_selector('[data-row^="is-sgna-"]'), "펼침 후 서브행 미등장"
+    after = len(page.query_selector_all("[data-row]"))
+    assert after > before, f"펼침 후 서브행 미등장 (g={g}: {before}→{after})"
     car.click()
     time.sleep(0.8)
-    assert not page.query_selector('[data-row^="is-sgna-"]'), "접기 후 서브행 잔존"
+    assert len(page.query_selector_all("[data-row]")) == before, f"접기 후 서브행 잔존 (g={g})"
 
 
 def test_appendix_card_opens(page):

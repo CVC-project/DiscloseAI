@@ -349,14 +349,16 @@ class Component extends DCLogic {
   // ===== 데이터 구동 (galaxy_<ticker>.json 주입) — 삼성 하드코딩 외부화 (Phase 1 D4-층2) =====
   get KNOTS() { return (this._G && this._G.knots) ? this._G.knots : []; }
   // SEGS = 본류 구간 위상·색 (구조적·범용). 3번째(굵기)는 uniform 모드에서 미사용 → 0
-  SEGS = [
-    ['k1','k2',0,'cyan'],
-    ['k2','k3',0,'mint'], ['k3','k4',0,'mint'], ['k4','k5',0,'mint'],
-    ['k5','k6',0,'mint'], ['k6','k6b',0,'mint'], ['k6b','k7',0,'mint'],
-    ['k7','k8',0,'mint'], ['k8','k9',0,'grad'], ['k9','k10',0,'cyan'],
-    ['k10','k10b',0,'cyan'], ['k10b','k11',0,'cyan'], ['k11','k12',0,'cyan'],
-    ['k12','k13',0,'cyan'], ['k13','k14',0,'cyan'], ['k14','k15',0,'cyan'],
-  ];
+  // SEGS = 본류 구간 위상·색 — KNOTS 순서에서 파생(V-041: 회사별 매듭 구조 수용, k3~k5 고정 제거).
+  get SEGS() {
+    const ks = this.KNOTS, out = [];
+    for (let i = 0; i < ks.length - 1; i++) {
+      const a = ks[i];
+      const col = a.kind === 'hub' ? 'grad' : (a.z === 'B' ? 'mint' : 'cyan');
+      out.push([a.id, ks[i + 1].id, 0, col]);
+    }
+    return out;
+  }
   get EQE() { return (this._G && this._G.panels && this._G.panels.E ? this._G.panels.E : []).map(r => ({ row: r.row, t: r.v, big: r.row === 'eq-begin' || r.row === 'eq-end', oci: r.row === 'eq-oci', neg: (r.v || '').startsWith('−') })); }
   get ZONES() { return (this._G && this._G.strings && this._G.strings.zones) ? this._G.strings.zones : {}; }
   get EQSTORY() { return (this._G && this._G.eqstory) ? this._G.eqstory : {}; }
@@ -604,7 +606,7 @@ class Component extends DCLogic {
     };
 
     const chip = (key, x, y, lines, color, fs = 10) => {
-      const wmax = Math.max(...lines.map(t => t.length));
+      lines = lines.filter(Boolean); const wmax = Math.max(1, ...lines.map(t => t.length));
       const cw = wmax * fs * .96 + 14, chh = lines.length * 13 + 8;
       let rx = Math.max(2, Math.min(W - cw - 2, x - cw / 2));
       return h('g', { key },
@@ -630,7 +632,8 @@ class Component extends DCLogic {
     els.push(h('line', { key: 'rail', x1: railX, x2: railX, y1: K.k1.y, y2: K.k15.y, stroke: 'rgba(117,144,176,.32)', strokeWidth: 1 }));
     els.push(h('text', { key: 'railt', x: railX - 4, y: K.k1.y - 44, fontSize: 9, fill: 'var(--dim)', fontFamily: mono }, '작년 통장'));
     els.push(h('text', { key: 'railb', x: K.k15.x, y: K.k15.y + CF.reservoirs.rEnd + 24, textAnchor: 'middle', fontSize: 9, fill: 'var(--dim)', fontFamily: mono }, '올해 통장'));
-    els.push(chip('raileq', K.k15.x, K.k15.y + CF.reservoirs.rEnd + 44, ['53.71 + 4.15 = 57.86'], C.cyan));
+    const _cb = K.k1.raw_mn / 1e6, _ce = K.k15.raw_mn / 1e6, _cd = _ce - _cb;
+    els.push(chip('raileq', K.k15.x, K.k15.y + CF.reservoirs.rEnd + 44, [`${_cb.toFixed(1)} ${_cd >= 0 ? '+' : '−'} ${Math.abs(_cd).toFixed(1)} = ${_ce.toFixed(1)}`], C.cyan));
     for (const k of this.KNOTS) {
       const p = K[k.id], act = focus === k.id;
       if (k.kind === 'out') {
@@ -646,12 +649,14 @@ class Component extends DCLogic {
     }
 
     // depreciation return — 매출원가·판관비 유출 가지에서 분기해 ⑨로 되돌아오는 점선 레일
-    const p3 = K.k3, p5 = K.k5, p9 = K.k9;
-    const depOn = focus === 'k9';
-    const depX = Math.max(44, p3.x + CF.tributary.outDx); // 유출 가지 끝(⊖ 글리프)의 x — k3·k5 공통
-    els.push(h('path', { key: 'depg', d: ortho([[depX, p3.y + CF.tributary.outDy + 9], [depX, p9.y], [p9.x - 9, p9.y]], 14), stroke: C.cyan, strokeWidth: 1.8, strokeDasharray: '4 4', fill: 'none', opacity: depOn ? .9 : .55 }));
-    els.push(h('circle', { key: 'depj', cx: depX, cy: p5.y + CF.tributary.outDy + 9, r: 2.5, fill: C.cyan, opacity: .8 }));
-    els.push(chip('depc', p9.x - 60, p9.y - 34, ['현금은 안 나간 비용', '도로 더해요 +43.6'], C.cyan, 9.5));
+    const _outIS = this.KNOTS.filter(k => k.kind === 'out' && k.z === 'B'), p9 = K.k9;
+    if (_outIS.length && p9) {
+      const p3 = K[_outIS[0].id], depOn = focus === 'k9';
+      const depX = Math.max(44, p3.x + CF.tributary.outDx); // 유출 가지 끝(⊖ 글리프)의 x
+      els.push(h('path', { key: 'depg', d: ortho([[depX, p3.y + CF.tributary.outDy + 9], [depX, p9.y], [p9.x - 9, p9.y]], 14), stroke: C.cyan, strokeWidth: 1.8, strokeDasharray: '4 4', fill: 'none', opacity: depOn ? .9 : .55 }));
+      els.push(h('circle', { key: 'depj', cx: depX, cy: p3.y + CF.tributary.outDy + 9, r: 2.5, fill: C.cyan, opacity: .8 }));
+      els.push(chip('depc', p9.x - 60, p9.y - 34, ['현금은 안 나간 비용', '도로 더해요 ' + p9.amt], C.cyan, 9.5));
+    }
 
     // gold equity thread
     const gx = W - 16, p8 = K.k8;
@@ -688,7 +693,7 @@ class Component extends DCLogic {
     for (const k of this.KNOTS) {
       const p = K[k.id];
       if (k.kind === 'out') {
-        const v = { k3: 202.2, k5: 87.8, k7: 4.3, k10: 9.6, k10b: 2.7, k12: 68.5, k13: 13.5 }[k.id] || 10;
+        const v = Math.abs((k.raw_mn || 0) / 1e6) || 10;
         const bw = CF.ribbon.uniform ? CF.ribbon.branchW : Math.max(4, wf(v) * .7);
         const ex = Math.max(44, p.x + CF.tributary.outDx), ey = p.y + CF.tributary.outDy;
         const d = `M ${p.x - 4} ${p.y + 4} C ${p.x - 30} ${p.y + 18}, ${ex + 20} ${ey - 22}, ${ex + 4} ${ey - 4}`;
@@ -696,10 +701,10 @@ class Component extends DCLogic {
         els.push(h('path', { key: 'obc' + k.id, d, stroke: C.coral, strokeWidth: bw, fill: 'none', opacity: .68, strokeLinecap: 'round' }));
         els.push(h('circle', { key: 'og' + k.id, cx: ex, cy: ey, r: 8, fill: '#160e0d', stroke: C.coral, strokeWidth: 1.4 }));
         els.push(h('text', { key: 'ogt' + k.id, x: ex, y: ey + 3.8, textAnchor: 'middle', fontSize: 11, fontWeight: 700, fill: C.coral, fontFamily: mono }, '−'));
-        els.push(chip('oc' + k.id, ex + 6, ey + 20, [k.dest], C.coral, 9.5));
+        if (k.dest) els.push(chip('oc' + k.id, ex + 6, ey + 20, [k.dest], C.coral, 9.5));
       }
       if (k.kind === 'in') {
-        const v = { k6b: 5.9, k14: 0.8 }[k.id] || 4;
+        const v = Math.abs((k.raw_mn || 0) / 1e6) || 4;
         const bw = CF.ribbon.uniform ? CF.ribbon.branchW : Math.max(3.5, wf(v) * .7);
         const c = k.col === 'mint' ? C.mint : C.cyan;
         const sx = Math.min(W - 40, p.x + CF.tributary.inDx), sy = p.y + CF.tributary.inDy;
@@ -714,7 +719,7 @@ class Component extends DCLogic {
 
     // particles
     if (this.props.particles !== false) {
-      const seq = ['k2','k3','k4','k5','k6','k7','k8','k9','k10','k10b','k11','k12','k13','k14'];
+      const seq = this.KNOTS.map(k => k.id).filter(id => id !== 'k1' && id !== 'k15');
       let d = `M ${K.k2.x} ${K.k2.y}`;
       for (let i = 1; i < seq.length; i++) {
         const a = K[seq[i - 1]], b = K[seq[i]];
@@ -749,7 +754,8 @@ class Component extends DCLogic {
     };
     res(K.k1, CF.reservoirs.rBegin);
     res(K.k15, CF.reservoirs.rEnd);
-    els.push(chip('delta', K.k15.x, K.k15.y - CF.reservoirs.rEnd - 26, ['+4.15조 늘었어요'], C.gold, 10));
+    const _dd = (K.k15.raw_mn - K.k1.raw_mn) / 1e6;
+    els.push(chip('delta', K.k15.x, K.k15.y - CF.reservoirs.rEnd - 26, [(_dd >= 0 ? '+' : '−') + Math.abs(_dd).toFixed(1) + '조 ' + (_dd >= 0 ? '늘었어요' : '줄었어요')], C.gold, 10));
 
     // knots
     for (const k of this.KNOTS) {
