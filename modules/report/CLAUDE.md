@@ -53,4 +53,6 @@ DART 키 필요: `python -m modules.report.collector` / `.fs_enrich` / `.section
 
 ## galaxy 생성기 (galaxy_<t>.json 확장)
 
-하네스 정본 = [MILKYWAY_GENERATOR.md](MILKYWAY_GENERATOR.md). **산문은 Claude가 주석 원문을 직접 판독·작성**(외부 LLM 미사용). `/galaxy-golden <ticker>` 한 호출로 S1~S5 파이프라인 + 수렴 루프(체커·감사·인터랙션·무회귀 5게이트)가 돈다. 골든 2본(삼성 005930·SK 000660) = 문체 견본·회귀 기준이며, **구조는 언제나 그 회사 사업보고서가 정의**한다(보고서 기반 원칙, MILKYWAY_GENERATOR §4).
+하네스 정본 = [MILKYWAY_GENERATOR.md](MILKYWAY_GENERATOR.md). **산문은 Claude가 주석 원문을 직접 판독·작성**(외부 LLM 미사용). `/galaxy-golden <ticker>` 한 호출로 S1~S5 파이프라인 + 수렴 루프(체커·감사·인터랙션·무회귀 5게이트)가 돈다. **구조는 언제나 그 회사 사업보고서가 정의**한다(보고서 기반 원칙, MILKYWAY_GENERATOR §4).
+
+> **정본 계층(R8) = MILKYWAY §8.5**: 완주 골든 6본(삼성 T0 · SK·현대차·LG화학·셀트리온·NAVER T1). 수정·확장은 **T0→T1→T2 하향 캐스케이드**로 전파, 티어 SSOT는 `data/corps.csv`의 `tier` 열(check_golden이 tier=0을 GOLDEN_REF로 파생). T0·체커·렌더러 수정 시 전 티어 회귀는 `python -m modules.report.check_golden --all`.

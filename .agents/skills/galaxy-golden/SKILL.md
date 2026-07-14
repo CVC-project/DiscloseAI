@@ -30,6 +30,7 @@ until 카드별 3회 초과 → NEEDS_REVIEW.md(리더 큐)에 적고 계속
 > ⚠️ **R6.3 규칙 10**이 이 스킬의 헌법입니다([MILKYWAY_GENERATOR.md](../../../modules/report/MILKYWAY_GENERATOR.md) §5). 특히: 파생수치 암산 금지 · 템플릿 수정 시 컴파일+pv 스모크 · 원자적 쓰기(최종본만 저장).
 
 ## S0 프리플라이트 게이트 (먼저 통과해야 착수)
+- **정본 계층 확인(R8, MILKYWAY §8.5)** — `modules/report/data/corps.csv`에서 이 티커의 `cluster`·`tier`를 본다. **T2면 같은 클러스터 T1(산업 골든)을 구조·주석맵 견본으로** 삼고(T0 삼성은 문체 기준), `tier=scope-out`(금융·지주)이면 중단·보고. T1 착수(리더 DL 게이트)면 그 클러스터의 견본을 새로 세우는 것.
 - **[VARIATIONS.md](../../../modules/report/VARIATIONS.md) 먼저 읽기** — 기존 채록(수집 버그·산업 구조·기업 고유·포맷)을 이번 회사에 선제 적용. 예: 하위번호 주석(V-002)·단위 혼재(V-030)·플랫폼 손익(V-010).
 - **`python -m modules.report.sectioner --health <ticker>` PASS 필수** — 주석 분할 붕괴·괴물블록·번호 결번(하위번호 누락)을 빌드 전 차단. FAIL이면 sectioner 보강 후 `section_all([ticker])` 재섹션. (이번 세션 3종 조용한 사고의 자동 게이트 — MILKYWAY_GENERATOR §0.)
 

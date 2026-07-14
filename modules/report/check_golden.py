@@ -10,6 +10,7 @@ MILKYWAY_GENERATOR §5(R6.3) 규칙 내장: 항등식(암산 금지)·잔재 스
 
 from __future__ import annotations
 
+import csv
 import json
 import os
 import re
@@ -19,7 +20,19 @@ _HERE = os.path.dirname(os.path.abspath(__file__))
 _ROOT = os.path.abspath(os.path.join(_HERE, "..", ".."))
 _DATA = os.path.join(_ROOT, "integration", "dossier", "data")
 
-GOLDEN_REF = "005930"  # 구조 레지스트리 기준(콘텐츠 dive 27키·APPENDIX 14건)
+def _golden_ref(default="005930"):
+    """corps.csv의 tier==0(T0 최상위 정본) 티커를 GOLDEN_REF로 파생(R8 정본 계층) — 파싱 실패 시 default로 무회귀."""
+    try:
+        with open(os.path.join(_HERE, "data", "corps.csv"), encoding="utf-8-sig") as f:
+            for row in csv.DictReader(f):
+                if (row.get("tier") or "").strip() == "0":
+                    return (row.get("ticker") or default).strip()
+    except (OSError, csv.Error):
+        pass
+    return default
+
+
+GOLDEN_REF = _golden_ref()  # T0 최상위 정본(문체·깊이·회귀 기준) — corps.csv tier=0에서 파생(하드코딩 폴백 005930)
 
 # 잔재 스캔: 다른 골든의 고유 토큰 (검사 대상 회사에 나타나면 누출)
 LEAK_TOKENS: dict[str, list[str]] = {
@@ -286,7 +299,19 @@ def check(ticker: str) -> list[str]:
 
 
 def main() -> int:
-    t = sys.argv[1] if len(sys.argv) > 1 else "000660"
+    args = sys.argv[1:]
+    if args and args[0] == "--all":  # 전 골든 회귀 게이트 (galaxy_*.json 전수 — R8)
+        import glob
+        tickers = sorted(os.path.basename(p)[7:-5] for p in glob.glob(os.path.join(_DATA, "galaxy_*.json"))
+                         if os.path.basename(p) != "galaxy_index.json")
+        total = 0
+        for t in tickers:
+            n = len(check(t))
+            total += n
+            print(f"  {t}: 갭 {n}건" + ("" if not n else "  ← FAIL"))
+        print(f"=== 전체 {len(tickers)}본: 갭 {total}건 — {'PASS ✅' if total == 0 else 'FAIL'} (GOLDEN_REF={GOLDEN_REF})")
+        return 0 if total == 0 else 1
+    t = args[0] if args else "000660"
     gaps = check(t)
     print(f"=== check_golden {t}: 갭 {len(gaps)}건 ===")
     for g in gaps:

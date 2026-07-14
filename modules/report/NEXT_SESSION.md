@@ -28,6 +28,9 @@
 ## 제품 연결 (V-054 완료)
 6본이 **v2 3탭에 연결됨**. 진입: `http://localhost:8000/integration/v2/index.html` → 행성 클릭 → ENTER CORPORATION → **현금 은하수** 탭(6본 활성, 나머지 "· 준비중"). 딥링크: `?corp=<ticker>`. 탭 활성은 `dossier/data/galaxy_index.json` 매니페스트(생성기 `build_galaxy_index.py`)가 판정 — **새 골든 = 생성기 재실행만으로 자동 등록**.
 
+## 정본 계층(R8, V-055) — 다음 배치 = T1 후보 6본 완주
+`corps.csv`의 `cluster,tier`가 티어 SSOT. 완주 T1 5 + T0 삼성. **미완주 T1 후보 6**(클러스터 크기·우선순위 순): 한화에어로 012450(중공업방산) → 고려아연 010130(에너지소재) → 현대건설 000720(건설) → SKT 017670(통신) → HMM 011200(해운) → KT&G 033780(소비재). 각 착수 = `/galaxy-golden <ticker>` + S0에서 corps.csv 티어·구조 확인. 전 골든 회귀 = `python -m modules.report.check_golden --all`. 상세 규약 = MILKYWAY §8.5.
+
 ## 남은 후속(우선순위 낮음 — 회귀 아님)
 1. ~~viz 보강~~ **완료(V-052)** · ~~segment 미도달~~ **완료(V-053: k2 병합 + 그림자 가드 코드화)** · ~~골든→제품 연결~~ **완료(V-054: 매니페스트)**.
 2. **assemble 모듈화**(잔여 최대): `build_hmc·build_lgc·viz_fill·build_galaxy_index` 등이 scratch/1회성 — `modules/report/assemble.py`로 정식 편입하면 배치 재현 비용↓(현재 golden JSON 커밋본이 유일 재현 재료).
