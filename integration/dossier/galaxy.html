@@ -1343,16 +1343,22 @@ class Component extends DCLogic {
     return h('svg', { width: W, height: H, viewBox: `0 0 ${W} ${H}`, style: { position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2, overflow: 'visible' } }, els);
   }
 
+  // 그룹 서브행의 '기본 폴백 dive'(전용 카드 없이 부모/컨테이너로 가는 행) — 이와 다르면 전용 딥다이브 있음.
+  GRP_FALLBACK = { bsa: 'assets', bsl: 'liab', bse: 'eq-end', sgna: 'k5', nonop: 'k6b', ni: 'k8',
+                   noncash: 'k9', wc: 'k10', inv: 'k12', fin: 'k13', opex: 'k5' };
   buildSub(g) {
     // 펼침 서브행을 panels JSON(grp 필드)에서 렌더 — D4-층1 마감(서브행 하드코딩 제거).
     const h = React.createElement;
     const P = (this._G && this._G.panels) || {};
+    const D = this.getDives();
     const rows = [];
     for (const z in P) for (const r of (P[z] || [])) if (r.grp === g) rows.push(r);
     const isBS = g === 'bsa' || g === 'bsl' || g === 'bse';
     return h('div', { key: 'sub-' + g }, rows.map((r) => {
       const sub = (r.name || '').indexOf('(계)') >= 0;
       const vc = r.color ? this.colOf(r.color) : 'var(--dim)';
+      const dk = this._diveKey(r.row);
+      const hasDive = !!(D[dk] && !sub && dk !== this.GRP_FALLBACK[g]);   // 전용 딥다이브 있는 행만 표시
       return h('div', { key: r.row, 'data-row': r.row, onClick: this.onRow,
         title: (r.raw_mn != null ? r.raw_mn.toLocaleString() + ' 백만원' : (r.name || '')),
         style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between',
@@ -1360,7 +1366,7 @@ class Component extends DCLogic {
           padding: (isBS && sub) ? '0 16px 0 32px' : '0 16px 0 48px',
           borderTop: '1px dashed rgba(140,170,210,' + (sub ? '.12' : '.08') + ')', cursor: 'pointer',
           fontSize: isBS ? '12.5px' : '13px', color: 'var(--dim)', fontWeight: sub ? 600 : 400 } },
-        h('span', null, r.name),
+        h('span', { style: hasDive ? { textDecoration: 'underline dotted', textDecorationColor: 'rgba(130,160,200,.45)', textUnderlineOffset: '3px' } : null }, r.name),
         h('span', { style: { fontFamily: 'var(--mono)', color: vc } }, r.v));
     }));
   }
