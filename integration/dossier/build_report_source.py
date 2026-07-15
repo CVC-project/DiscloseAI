@@ -10,6 +10,7 @@ integration/dossier/data/report_<t>.json + report_index.json(매니페스트)을
   python integration/dossier/build_report_source.py --all        # galaxy_*.json 전 기업
 문서: modules/report/REPORT_SOURCE.md
 """
+
 from __future__ import annotations
 
 import glob
@@ -37,16 +38,29 @@ def build(ticker: str) -> None:
 
 def write_index() -> None:
     """report_*.json 스캔 → report_index.json(원문 지원 티커 — galaxy.html이 fetch, 404 방지)."""
-    ts = sorted(os.path.basename(p)[7:-5] for p in glob.glob(os.path.join(_OUT_DIR, "report_*.json"))
-                if os.path.basename(p) != "report_index.json")
+    ts = sorted(
+        os.path.basename(p)[7:-5]
+        for p in glob.glob(os.path.join(_OUT_DIR, "report_*.json"))
+        if os.path.basename(p) != "report_index.json"
+    )
     with open(os.path.join(_OUT_DIR, "report_index.json"), "w", encoding="utf-8") as f:
-        json.dump({"tickers": ts, "note": "사업보고서 원문 지원 티커 — build_report_source.py 생성"}, f, ensure_ascii=False)
+        json.dump(
+            {
+                "tickers": ts,
+                "note": "사업보고서 원문 지원 티커 — build_report_source.py 생성",
+            },
+            f,
+            ensure_ascii=False,
+        )
     print(f"  report_index.json — {len(ts)}개: {ts}")
 
 
 def _golden_tickers() -> list[str]:
-    return sorted(os.path.basename(p)[7:-5] for p in glob.glob(os.path.join(_OUT_DIR, "galaxy_*.json"))
-                  if os.path.basename(p) != "galaxy_index.json")
+    return sorted(
+        os.path.basename(p)[7:-5]
+        for p in glob.glob(os.path.join(_OUT_DIR, "galaxy_*.json"))
+        if os.path.basename(p) != "galaxy_index.json"
+    )
 
 
 if __name__ == "__main__":

@@ -6,6 +6,7 @@ v2 오버레이(bundle.jsx)가 이 매니페스트를 fetch해 '현금 은하수
 
 실행: python -m integration.dossier.build_galaxy_index   (또는 이 파일 직접)
 """
+
 from __future__ import annotations
 
 import glob
@@ -23,7 +24,7 @@ def build() -> list[str]:
         base = os.path.basename(p)
         if base == "galaxy_index.json":
             continue
-        t = base[len("galaxy_"):-len(".json")]
+        t = base[len("galaxy_") : -len(".json")]
         # 실제 렌더 가능한지 최소 확인(corp.ticker 존재)
         try:
             G = json.load(open(p, encoding="utf-8"))
@@ -31,8 +32,11 @@ def build() -> list[str]:
                 tickers.append(t)
         except (ValueError, OSError):
             continue
-    manifest = {"tickers": tickers, "count": len(tickers),
-                "note": "galaxy 탭 활성 티커 — build_galaxy_index.py가 생성. 새 골든 추가 시 재실행."}
+    manifest = {
+        "tickers": tickers,
+        "count": len(tickers),
+        "note": "galaxy 탭 활성 티커 — build_galaxy_index.py가 생성. 새 골든 추가 시 재실행.",
+    }
     json.dump(manifest, open(_OUT, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     return tickers
 
