@@ -36,6 +36,10 @@ _TITLE_RE = re.compile(r"<TITLE[^>]*>[^<]*</TITLE>")
 _CELL_TAGS = ["td", "th", "te", "tu"]
 # 초장문 표(종속기업/계열사 목록 등 수백 행)는 원문 학습 목적상 상위 N행만 — 파일 비대 방지.
 _ROW_CAP = 60
+# 비정형 표 가드: DART 종속기업/계열사 목록 등은 마크업이 뭉개져 격자 전개 시 수백 열·거대 셀이
+# 됨(삼성 주1: 60행×1486열·23,752자 셀). 재무 표는 열≤~12·셀 짧음 → 아래 임계 초과면 표 생략.
+_COL_CAP = 18
+_CELL_CAP = 600
 
 
 def _table_grid(table) -> list[list[str]]:
@@ -66,7 +70,9 @@ def _table_grid(table) -> list[list[str]]:
     rows = [[cellmap.get((r, c), "") for c in range(maxc)] for r in range(nrows)]
     # 완전 빈 열 제거(병합 전개 부산물) — 열 정렬 유지하며 폭 축소
     keep = [c for c in range(maxc) if any(rows[r][c] for r in range(nrows))]
-    return [[row[c] for c in keep] for row in rows] if keep else rows
+    rows = [[row[c] for c in keep] for row in rows] if keep else rows
+    # 완전 빈 행 제거 (rowspan 전개로 생긴 성긴 행 — 세로 여백 낭비)
+    return [r for r in rows if any(c.strip() for c in r)]
 
 
 def _html_to_blocks(html: str) -> list[dict]:
@@ -85,13 +91,20 @@ def _html_to_blocks(html: str) -> list[dict]:
                 blocks.append({"t": "p", "v": t})
         else:  # table
             rows = _table_grid(el)
+            if not rows:
+                continue
+            ncols = max((len(r) for r in rows), default=0)
+            maxcell = max((len(c) for r in rows for c in r), default=0)
+            # 비정형 표(종속기업 목록 등) — 격자가 뭉개진 경우 표 대신 안내 문단
+            if ncols > _COL_CAP or maxcell > _CELL_CAP:
+                blocks.append({"t": "p", "v": "(종속기업 목록 등 대형·비정형 표는 여기선 생략했어요 — 전체는 DART 원문에서 확인)"})
+                continue
             n = len(rows)
             if n > _ROW_CAP:
                 rows = rows[:_ROW_CAP]
-            if any(any(c for c in r) for r in rows):
-                blocks.append({"t": "table", "rows": rows})
-                if n > _ROW_CAP:
-                    blocks.append({"t": "p", "v": f"… (표가 길어 상위 {_ROW_CAP}행만 표시했어요 · 원문 총 {n}행)"})
+            blocks.append({"t": "table", "rows": rows})
+            if n > _ROW_CAP:
+                blocks.append({"t": "p", "v": f"… (표가 길어 상위 {_ROW_CAP}행만 표시했어요 · 원문 총 {n}행)"})
     return blocks
 
 

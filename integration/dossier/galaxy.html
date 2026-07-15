@@ -1242,9 +1242,13 @@ class Component extends DCLogic {
   // ===== 사업보고서 원문 팝업 (좌측 50% · 목차+원문) =====
   _srcTable(rows, key) {
     const h = React.createElement;
-    return h('table', { key: 't' + key, style: { borderCollapse: 'collapse', margin: '11px 0', fontSize: '12px', fontFamily: 'var(--mono)', maxWidth: '100%' } },
+    const isNum = (s) => /^[\(\-−]?[\d.,]+\%?\)?$/.test(s);
+    return h('table', { key: 't' + key, style: { borderCollapse: 'collapse', margin: '11px 0', fontSize: '12px', fontFamily: 'var(--mono)', width: 'auto', maxWidth: '100%' } },
       h('tbody', null, rows.map((cells, ri) => h('tr', { key: ri },
-        cells.map((cc, ci) => h(ri === 0 ? 'th' : 'td', { key: ci, style: { border: '1px solid var(--line)', padding: '4px 9px', textAlign: /^[\(\-−]?[\d.,]+%?\)?$/.test(cc) ? 'right' : 'left', color: ri === 0 ? 'var(--text)' : 'var(--dim)', whiteSpace: 'nowrap', background: ri === 0 ? 'rgba(255,255,255,.03)' : 'transparent', fontWeight: ri === 0 ? 600 : 400 } }, cc))))));
+        cells.map((cc, ci) => {
+          const num = isNum(cc);
+          return h(ri === 0 ? 'th' : 'td', { key: ci, style: { border: '1px solid var(--line)', padding: '4px 9px', textAlign: num ? 'right' : 'left', color: ri === 0 ? 'var(--text)' : 'var(--dim)', fontWeight: ri === 0 ? 600 : 400, background: ri === 0 ? 'rgba(255,255,255,.03)' : 'transparent', verticalAlign: 'top', whiteSpace: num ? 'nowrap' : 'normal', wordBreak: 'keep-all', overflowWrap: 'anywhere', minWidth: num ? 'auto' : '84px', maxWidth: num ? 'none' : '320px', lineHeight: 1.5 } }, cc);
+        })))));
   }
   _srcBlocks(blocks) {
     const h = React.createElement, out = [];
@@ -1290,7 +1294,7 @@ class Component extends DCLogic {
       // 본문 (목차 + 원문)
       h('div', { key: 'bd', style: { display: 'flex', flex: 1, minHeight: 0 } },
         tocOpen ? tocEl() : null,
-        h('div', { style: { flex: 1, overflowY: 'auto', padding: '10px 26px 60px', minWidth: 0 } }, bodyKids)));
+        h('div', { style: { flex: 1, overflow: 'auto', padding: '10px 26px 60px', minWidth: 0 } }, bodyKids)));
   }
 
   buildMidOverlay() {
