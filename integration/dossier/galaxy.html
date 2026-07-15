@@ -322,6 +322,7 @@ a{color:var(--cyan);} a:hover{color:var(--mint);}
     </div>
   </div>
 
+  {{ srcPanel }}
   {{ runningChip }}
 </div>
 </x-dc>
@@ -331,7 +332,7 @@ a{color:var(--cyan);} a:hover{color:var(--mint);}
   &quot;rowH&quot;: { &quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 64, &quot;min&quot;: 52, &quot;max&quot;: 84, &quot;step&quot;: 2, &quot;unit&quot;: &quot;px&quot;, &quot;tsType&quot;: &quot;number&quot;, &quot;section&quot;: &quot;레이아웃&quot; }
 }">
 class Component extends DCLogic {
-  state = { pos: null, zoneY: null, W: 300, H: 5200, midW: 600, midH: 5200, midPos: null, active: 'overview', pin: null, exp: { sgna: false, nonop: false, ni: false, noncash: false, wc: false, inv: false, fin: false, bsa: false, bsl: false, bse: false } };
+  state = { pos: null, zoneY: null, W: 300, H: 5200, midW: 600, midH: 5200, midPos: null, active: 'overview', pin: null, src: null, srcToc: true, exp: { sgna: false, nonop: false, ni: false, noncash: false, wc: false, inv: false, fin: false, bsa: false, bsl: false, bse: false } };
 
   C = { mint:'#74EEC6', cyan:'#5CC7EA', gold:'#E9C46B', coral:'#EC8C6A', steel:'#7590B0', green:'#63d68e', text:'#eef4fb', dim:'#8fa1b6' };
 
@@ -369,6 +370,7 @@ class Component extends DCLogic {
   // ---------- lifecycle ----------
   _loadData() {
     const t = new URLSearchParams(location.search).get('ticker') || '005930';
+    this._ticker = t;  // 사업보고서 원문 팝업 지연로드용
     fetch('data/galaxy_' + t + '.json')
       .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
       .then(G => { this._G = G; this._dives = null; this._r2d = null; this.setState({ dataReady: true }); this.queueMeasure(); })
@@ -382,7 +384,7 @@ class Component extends DCLogic {
     window.addEventListener('scroll', this._onScroll, { passive: true });
     window.addEventListener('resize', this._onResize);
     requestAnimationFrame(() => { this.measureNow(); this.attachRO(); });
-    this._onKey = (e) => { if (e.key === 'Escape') this.unpin(); };
+    this._onKey = (e) => { if (e.key === 'Escape') { if (this.state.src) this.closeSrc(); else this.unpin(); } };
     document.addEventListener('keydown', this._onKey);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => this.queueMeasure());
     setTimeout(() => this.queueMeasure(), 600);
@@ -548,6 +550,63 @@ class Component extends DCLogic {
     this.setState({ pin: key, exp });
   };
   unpin = () => { if (this.state.pin) this.setState({ pin: null }); };
+
+  // ===== 사업보고서 원문 팝업 (report_<t>.json 지연로드) =====
+  _STMT_DIVE = { bs: 'assets', is: 'k2', cis: 'totalcomp', cf: 'k11', eq: 'eq-end' };
+  // dive 키/행 → 초기 원문 뷰: APPENDIX(nX)→주석, new-dive→역원장 주석, 흐름 dive→재무제표(행 접두)
+  _srcForDive(key) {
+    const D = this.getDives(), d = D[key];
+    if (/^n\d/.test(key)) return { type: 'note', id: key.slice(1) };
+    const led = (this._G && this._G.meta && this._G.meta.routing_ledger) || {};
+    for (const nn in led) { const to = led[nn].to || ''; if (to === 'new-dive:' + key || to === 'appendix:' + key) return { type: 'note', id: nn }; }
+    const row = (d && d.row) || key;
+    if (row === 'is-oci' || row === 'is-totalcomp') return { type: 'stmt', id: 'cis' };
+    if (row.indexOf('bs-') === 0 || row.indexOf('pbs-') === 0) return { type: 'stmt', id: 'bs' };
+    if (row.indexOf('is-') === 0) return { type: 'stmt', id: 'is' };
+    if (row.indexOf('cf-') === 0) return { type: 'stmt', id: 'cf' };
+    if (row.indexOf('eq-') === 0) return { type: 'stmt', id: 'eq' };
+    return { type: 'stmt', id: 'bs' };
+  }
+  // 목차의 주석 클릭 → 원장(routing_ledger)으로 대응 딥다이브 동기 핀
+  _pinForNote(nn) {
+    const led = (this._G && this._G.meta && this._G.meta.routing_ledger) || {};
+    const ent = led[nn]; if (!ent) return;
+    const to = ent.to || '', D = this.getDives();
+    if (to.indexOf('appendix:') === 0 || to.indexOf('new-dive:') === 0) { const k = to.split(':')[1]; if (D[k]) this.pin(k); return; }
+    if (to.indexOf('row:') === 0) { const k = this._diveKey(to.slice(4)); if (D[k]) this.pin(k); return; }
+    if (to === 'dive:cited') {
+      const re = new RegExp('주\\s?' + String(nn).replace('.', '\\.') + '(?=\\D|$)');
+      for (const k in D) { if (re.test(JSON.stringify([D[k].what, D[k].why, D[k].lnote]))) { this.pin(k); return; } }
+    }
+  }
+  openSrc = (key) => {
+    const view = this._srcForDive(key);
+    // 매니페스트(report_index.json) 미로드 → 먼저 로드 후 재시도 (원문 없는 티커 fetch 404 방지)
+    if (!this._reportIdx) {
+      fetch('data/report_index.json')
+        .then(r => r.ok ? r.json() : { tickers: [] })
+        .then(J => { this._reportIdx = new Set(J.tickers || []); this._afterIdx(view); })
+        .catch(() => { this._reportIdx = new Set(); this._afterIdx(view); });
+      return;
+    }
+    this._afterIdx(view);
+  };
+  _afterIdx = (view) => {
+    const t = this._ticker || '005930';
+    if (this._report) { this.setState({ src: view }); return; }
+    if (!this._reportIdx.has(t)) { this._reportErr = true; this.setState({ src: view }); return; }  // 지원 티커 아님 → 준비중(fetch 안 함)
+    fetch('data/report_' + t + '.json')
+      .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(J => { this._report = J; this.setState({ src: view }); })
+      .catch(() => { this._reportErr = true; this.setState({ src: view }); });
+  };
+  srcGoto = (view) => {
+    this.setState({ src: view });
+    if (view.type === 'note') this._pinForNote(view.id);
+    else { const k = this._STMT_DIVE[view.id]; if (k && this.getDives()[k]) this.pin(k); }
+  };
+  closeSrc = () => { if (this.state.src) this.setState({ src: null }); };
+  toggleSrcToc = () => this.setState(s => ({ srcToc: !s.srcToc }));
   onToggle = (e) => {
     e.stopPropagation();
     const g = e.currentTarget.getAttribute('data-g');
@@ -1138,6 +1197,7 @@ class Component extends DCLogic {
     kids.push(h('div', { key: 'nm', style: { fontSize: '25px', fontWeight: 800 } }, d.name));
     kids.push(h('div', { key: 'am', style: { fontFamily: 'var(--mono)', fontSize: '42px', fontWeight: 700, color: c, margin: '6px 0 2px', textShadow: `0 0 24px ${this.rgba(c, .4)}` } }, d.amt));
     if (d.raw) kids.push(h('div', { key: 'rw', style: { fontFamily: 'var(--mono)', fontSize: '11.5px', color: 'var(--dim2)' } }, '원본 ' + d.raw + ' 백만원'));
+    kids.push(h('button', { key: 'src', onClick: () => this.openSrc(key), title: '이 카드가 유래한 사업보고서 원문을 왼쪽에 띄워요', style: { marginTop: '12px', fontFamily: 'var(--sans)', fontSize: '12.5px', fontWeight: 600, color: 'var(--cyan)', background: this.rgba(this.C.cyan, .08), border: `1px solid ${this.rgba(this.C.cyan, .4)}`, borderRadius: '7px', padding: '8px 14px', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '7px' } }, '⧉ 사업보고서 원문 보기'));
     kids.push(this.subheadEl('①', '무엇인가요', '정의 · 의미', c));
     (Array.isArray(d.what) ? d.what : [d.what].filter(Boolean)).forEach((t, i) => kids.push(h('p', { key: 'w' + i, style: { margin: '0 0 13px', fontSize: '16px', lineHeight: 1.85 } }, ...this.rich(t, c))));
     if (d.links && d.links.length) {
@@ -1175,6 +1235,64 @@ class Component extends DCLogic {
     }
     if (d.row) kids.push(h('button', { key: 'bk', onClick: () => this.scrollToRow(d.row), style: { marginTop: '24px', fontFamily: 'var(--sans)', fontSize: '13px', color: c, background: this.rgba(c, .07), border: `1px solid ${this.rgba(c, .35)}`, borderRadius: '7px', padding: '8px 14px', cursor: 'pointer' } }, '은하수에서 이 항목 보기 ↥'));
     return h('div', { key: 'dv' + key, style: { animation: 'omfade var(--fade) ease both', paddingBottom: '30px' } }, kids);
+  }
+
+  // ===== 사업보고서 원문 팝업 (좌측 50% · 목차+원문) =====
+  _srcTable(rows, key) {
+    const h = React.createElement;
+    return h('table', { key: 't' + key, style: { borderCollapse: 'collapse', margin: '11px 0', fontSize: '12px', fontFamily: 'var(--mono)', maxWidth: '100%' } },
+      h('tbody', null, rows.map((cells, ri) => h('tr', { key: ri },
+        cells.map((cc, ci) => h(ri === 0 ? 'th' : 'td', { key: ci, style: { border: '1px solid var(--line)', padding: '4px 9px', textAlign: /^[\(\-−]?[\d.,]+%?\)?$/.test(cc) ? 'right' : 'left', color: ri === 0 ? 'var(--text)' : 'var(--dim)', whiteSpace: 'nowrap', background: ri === 0 ? 'rgba(255,255,255,.03)' : 'transparent', fontWeight: ri === 0 ? 600 : 400 } }, cc))))));
+  }
+  _srcMdEl(md) {
+    const h = React.createElement, lines = String(md).split('\n'), out = [];
+    let tbl = null, key = 0;
+    const flush = () => { if (tbl && tbl.length) out.push(this._srcTable(tbl, key++)); tbl = null; };
+    for (const ln of lines) {
+      const s = ln.trim();
+      if (s.charAt(0) === '|') { const cells = s.replace(/^\||\|$/g, '').split('|').map(x => x.trim()); (tbl || (tbl = [])).push(cells); }
+      else { flush(); if (s) out.push(h('p', { key: key++, style: { margin: '9px 0', fontSize: '13px', lineHeight: 1.7, color: 'var(--dim)' } }, s)); }
+    }
+    flush();
+    return out;
+  }
+  buildSrcPanel() {
+    if (!this.state.src) return null;
+    const h = React.createElement, view = this.state.src, R = this._report;
+    const tocOpen = this.state.srcToc !== false;
+    let title = '사업보고서 원문', bodyKids;
+    if (!R) {
+      bodyKids = h('div', { style: { padding: '48px 30px', color: 'var(--dim)', fontSize: '15px', lineHeight: 1.85 } },
+        this._reportErr ? '이 기업의 사업보고서 원문 데이터는 아직 준비 중이에요.\n(현재 삼성전자부터 지원해요.)' : '원문을 불러오는 중이에요…');
+    } else {
+      const item = (view.type === 'stmt' ? R.statements[view.id] : R.notes[view.id]) || {};
+      title = (view.type === 'stmt' ? (item.title || '재무제표') : ('주' + view.id + ' ' + (item.title || ''))) + ' · 원문';
+      bodyKids = this._srcMdEl(item.md || '(원문을 찾지 못했어요)');
+    }
+    // 목차(슬림)
+    const tocEl = () => {
+      if (!R) return null;
+      const head = (t) => h('div', { key: 'h' + t, style: { fontFamily: 'var(--mono)', fontSize: '9.5px', letterSpacing: '.14em', color: 'var(--dim2)', padding: '10px 8px 4px' } }, t);
+      const item = (type, id, label, active) => h('div', { key: type + id, onClick: () => this.srcGoto({ type, id }), title: label, style: { padding: '4px 8px', fontSize: '11px', lineHeight: 1.3, cursor: 'pointer', color: active ? 'var(--cyan)' : 'var(--dim)', background: active ? this.rgba(this.C.cyan, .1) : 'transparent', borderLeft: '2px solid ' + (active ? 'var(--cyan)' : 'transparent'), whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' } }, label);
+      const rows = [head('재무제표')];
+      ['bs', 'is', 'cis', 'eq', 'cf'].forEach(k => { if (R.statements[k]) rows.push(item('stmt', k, R.statements[k].title, view.type === 'stmt' && view.id === k)); });
+      rows.push(head('주석'));
+      for (const nn in R.notes) rows.push(item('note', nn, '주' + nn + ' ' + R.notes[nn].title, view.type === 'note' && view.id === nn));
+      return h('div', { style: { width: '138px', flexShrink: 0, borderRight: '1px solid var(--line)', overflowY: 'auto', padding: '4px 0 30px' } }, rows);
+    };
+    return h('div', { key: 'srcp', style: { position: 'fixed', top: 0, left: 0, width: '50%', height: '100vh', zIndex: 5, background: 'rgba(8,11,20,.94)', backdropFilter: 'blur(10px)', borderRight: '1px solid var(--line)', display: 'flex', flexDirection: 'column', animation: 'omfade var(--fade) ease both' } },
+      // 헤더
+      h('div', { key: 'hd', style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px', padding: '11px 18px', borderBottom: '1px solid var(--line)', flexShrink: 0 } },
+        h('div', { style: { display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0 } },
+          h('span', { style: { fontFamily: 'var(--mono)', fontSize: '10px', letterSpacing: '.18em', color: 'var(--gold)', flexShrink: 0 } }, '사업보고서 원문'),
+          h('span', { style: { fontSize: '13.5px', fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' } }, title)),
+        h('div', { style: { display: 'flex', gap: '8px', flexShrink: 0 } },
+          h('button', { onClick: this.toggleSrcToc, title: '목차 접기/펼치기', style: { fontFamily: 'var(--sans)', fontSize: '12px', color: 'var(--dim)', background: 'rgba(255,255,255,.04)', border: '1px solid var(--line)', borderRadius: '6px', padding: '5px 9px', cursor: 'pointer' } }, tocOpen ? '◂ 목차' : '▸ 목차'),
+          h('button', { onClick: this.closeSrc, style: { fontFamily: 'var(--sans)', fontSize: '12.5px', color: 'var(--text)', background: 'rgba(255,255,255,.04)', border: '1px solid var(--line)', borderRadius: '6px', padding: '5px 11px', cursor: 'pointer' } }, '✕ 닫기 ', h('span', { style: { color: 'var(--dim2)', fontSize: '11px' } }, 'Esc')))),
+      // 본문 (목차 + 원문)
+      h('div', { key: 'bd', style: { display: 'flex', flex: 1, minHeight: 0 } },
+        tocOpen ? tocEl() : null,
+        h('div', { style: { flex: 1, overflowY: 'auto', padding: '10px 26px 60px', minWidth: 0 } }, bodyKids)));
   }
 
   buildMidOverlay() {
@@ -1289,6 +1407,7 @@ class Component extends DCLogic {
       galaxySvg: safe(this.buildGalaxy, null),
       midOverlay: safe(this.buildMidOverlay, null),
       inspectorCard: safe(this.buildCard, null),
+      srcPanel: safe(this.buildSrcPanel, null),
       runningChip: safe(this.buildRunningChip, null),
       appendixList: safe(this.buildAppendix, null),
       panelB: safe(this.buildPanelB, null),
