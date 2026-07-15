@@ -571,6 +571,8 @@ class Component extends DCLogic {
   _pinForNote(nn) {
     const D = this.getDives();
     if (D['n' + nn]) { this.pin('n' + nn); return; }  // 그 주석 자체의 APPENDIX 카드 우선(원장이 dive:cited여도 동기 — 버그 수정)
+    const nd = (this._G && this._G.meta && this._G.meta.note_dive) || {};  // 코어 dive로 매핑된 주석(주10→ppe·주27→k11 등)
+    if (nd[nn] && D[nd[nn]]) { this.pin(nd[nn]); return; }
     const led = (this._G && this._G.meta && this._G.meta.routing_ledger) || {};
     const ent = led[nn]; if (!ent) return;
     const to = ent.to || '';
@@ -976,16 +978,16 @@ class Component extends DCLogic {
     ROW2DIVE = {
     'pbs-cash': 'k1', 'is-revenue': 'k2', 'is-cogs': 'k3', 'is-grossprofit': 'k4',
     'is-sgna': 'k5', 'is-sgna-rnd': 'k5', 'is-sgna-fee': 'k5', 'is-sgna-sal': 'k5', 'is-sgna-promo': 'k5', 'is-sgna-ad': 'k5', 'is-sgna-svc': 'k5', 'is-sgna-ship': 'k5', 'is-sgna-etc': 'k5',
-    'is-opincome': 'k6', 'is-nonop': 'k6b', 'is-nonop-fininc': 'k6b', 'is-nonop-finexp': 'k6b', 'is-nonop-othinc': 'k6b', 'is-nonop-othexp': 'k6b', 'is-nonop-eqm': 'k6b', 'is-pretax': 'k6b',
+    'is-opincome': 'k6', 'is-nonop': 'k6b', 'is-nonop-fininc': 'n24', 'is-nonop-finexp': 'n24', 'is-nonop-othinc': 'n23', 'is-nonop-othexp': 'n23', 'is-nonop-eqm': 'n9', 'is-pretax': 'k6b',
     'is-tax': 'k7', 'is-netincome': 'k8', 'is-ni-ctrl': 'k8', 'is-ni-nci': 'k8', 'is-oci': 'oci', 'is-totalcomp': 'totalcomp',
     'cf-netincome': 'k8', 'cf-noncash': 'k9', 'cf-noncash-dep': 'k9', 'cf-noncash-etc': 'k9',
     'cf-wc': 'k10', 'cf-wc-ar': 'k10', 'cf-wc-inv': 'k10', 'cf-wc-etc': 'k10', 'cf-paid': 'k10b', 'cf-op': 'k11',
     'cf-inv': 'k12', 'cf-inv-capex': 'k12', 'cf-inv-etc': 'k12', 'cf-fin': 'k13', 'cf-fin-debt': 'k13', 'cf-fin-div': 'eq-div', 'cf-fin-tsy': 'eq-buyback',
     'cf-fx': 'k14', 'cf-netchange': 'k15', 'cf-begincash': 'k1', 'cf-endcash': 'k15',
     'bs-cash': 'k15', 'bs-ppe': 'ppe', 'bs-assets': 'assets', 'bs-liab': 'liab', 'bs-equity': 'eq-end',
-    'bs-ca': 'assets', 'bs-cash-d': 'k15', 'bs-sfin': 'n4', 'bs-ar': 'k10', 'bs-inv': 'k10', 'bs-oca': 'assets', 'bs-nca': 'assets', 'bs-ig': 'k12', 'bs-assoc': 'k6b', 'bs-fvoci': 'oci', 'bs-dta': 'k7', 'bs-dba': 'n14', 'bs-onca': 'assets',
-    'bs-cl': 'liab', 'bs-payexp': 'liab', 'bs-pay': 'liab', 'bs-stb': 'k13', 'bs-ap': 'k10', 'bs-prov': 'n15', 'bs-taxlia': 'k7', 'bs-ocl': 'liab', 'bs-ncl': 'liab', 'bs-ltb': 'k13', 'bs-ltpay': 'liab', 'bs-ltprov': 'n15', 'bs-ndbl': 'n14', 'bs-dtl': 'k7', 'bs-bond': 'k13', 'bs-oncl': 'liab',
-    'bs-ctrl': 'eq-end', 'bs-re': 'eq-end', 'bs-oe': 'oci', 'bs-sp': 'n18', 'bs-capital': 'n18', 'bs-nci': 'k8',
+    'bs-ca': 'assets', 'bs-cash-d': 'k15', 'bs-sfin': 'n4', 'bs-ar': 'n7', 'bs-inv': 'n8', 'bs-oca': 'assets', 'bs-nca': 'assets', 'bs-ig': 'n11', 'bs-assoc': 'n9', 'bs-fvoci': 'n6', 'bs-dta': 'k7', 'bs-dba': 'n14', 'bs-onca': 'assets',
+    'bs-cl': 'liab', 'bs-payexp': 'liab', 'bs-pay': 'liab', 'bs-stb': 'n12', 'bs-ap': 'k10', 'bs-prov': 'n15', 'bs-taxlia': 'k7', 'bs-ocl': 'n17', 'bs-ncl': 'liab', 'bs-ltb': 'n12', 'bs-ltpay': 'liab', 'bs-ltprov': 'n15', 'bs-ndbl': 'n14', 'bs-dtl': 'k7', 'bs-bond': 'n13', 'bs-oncl': 'liab',
+    'bs-ctrl': 'eq-end', 'bs-re': 'n19', 'bs-oe': 'n20', 'bs-sp': 'n18', 'bs-capital': 'n18', 'bs-nci': 'n32',
     'apx-ju1': 'n1', 'apx-ju2': 'n2', 'apx-ju3': 'n3', 'apx-ju4': 'n4', 'apx-ju5': 'n5', 'apx-ju14': 'n14', 'apx-ju15': 'n15', 'apx-ju16': 'n16', 'apx-ju18': 'n18', 'apx-ju26': 'n26', 'apx-ju28': 'n28', 'apx-ju29': 'n29', 'apx-ju31': 'n31', 'apx-ju34': 'n34',
     'eq-begin': 'eq-begin', 'eq-netincome': 'k8', 'eq-oci': 'oci', 'eq-div': 'eq-div', 'eq-buyback': 'eq-buyback', 'eq-other': 'eq-other', 'eq-end': 'eq-end',
   };
@@ -1006,6 +1008,11 @@ class Component extends DCLogic {
     n15: ['apx-ju15', 'bs-prov', 'bs-ltprov'], n16: ['apx-ju16', 'bs-liab'], n18: ['apx-ju18', 'bs-capital', 'bs-sp', 'bs-re'],
     n26: ['apx-ju26', 'is-ni-ctrl', 'eq-buyback'], n28: ['apx-ju28', 'is-nonop', 'cf-fx'], n29: ['apx-ju29', 'bs-fvoci', 'eq-oci'],
     n31: ['apx-ju31', 'is-revenue'], n34: ['apx-ju34', 'eq-buyback', 'cf-fin-tsy'],
+    n6: ['bs-fvoci'], n7: ['bs-ar', 'cf-wc-ar'], n8: ['bs-inv', 'cf-wc-inv'], n9: ['bs-assoc', 'is-nonop-eqm'],
+    n11: ['bs-ig', 'cf-noncash-etc'], n12: ['bs-stb', 'bs-ltb'], n13: ['bs-bond'], n17: ['bs-ocl', 'is-revenue'],
+    n19: ['bs-re', 'eq-netincome'], n20: ['bs-oe', 'is-oci'], n21: ['is-cogs', 'is-sgna'],
+    n23: ['is-nonop-othinc', 'is-nonop-othexp'], n24: ['is-nonop-fininc', 'is-nonop-finexp'],
+    n32: ['bs-nci', 'is-ni-nci'], n33: ['bs-ig', 'is-netincome'],
   };
   GROUP_OF = {
     'is-sgna-rnd': 'sgna', 'cf-noncash-dep': 'noncash', 'cf-wc-ar': 'wc', 'cf-wc-inv': 'wc',

@@ -49,6 +49,9 @@ repeat:
 until 카드별 3회 초과 → NEEDS_REVIEW.md(리더 큐)에 적고 다음 카드로
 S7(채록): 이번 완주에서 발견한 편차를 VARIATIONS.md에 기록 — 신규 없으면 '신규 변형 없음' 1줄.
           publish는 5게이트 PASS + S7 채록까지 끝나야 완료로 친다.
+S8(원문 동반 생성): publish 직후 `python integration/dossier/build_report_source.py <ticker>`로
+          사업보고서 원문 JSON(`report_<t>.json`)과 매니페스트(`report_index.json`)를 함께 낸다 —
+          galaxy의 §6 note↔dive 3-way 매핑이 원문 목차 링크와 곧바로 동기되도록. (렌더러 갱신 시 `--all`로 전 골든 재빌드)
 ```
 
 - **루프 3층**(R6.2): ① 카드 루프(S3↔S4·S5, 위반 카드만) ② 기업 루프(`/galaxy-golden` 1호출 = 전 단계 완주) ③ 산업 확장 루프(§8).
@@ -98,6 +101,13 @@ S7(채록): 이번 완주에서 발견한 편차를 VARIATIONS.md에 기록 — 
 ## 6. 주석 라우팅 원장(R6.6) · 인터랙션 QA(R6.7)
 
 **주석 라우팅 원장** — "모든 실주석이 처리됐는가": 그 회사 사업보고서의 **실주석 전수**(reports.db 기준)가 `meta.routing_ledger`에 매핑돼야 한다 — `dive:cited`(본문 인용)·`appendix:nX`·`row:<id>`(패널 행)·`new-dive:<key>`(고유 항목 신규)·`excluded`(+reason 필수). check_golden §7이 원장 누락·MISSING·사유 없는 제외·**유령 인용**(실주석에 없는 주N — corp.rcept_no 기준)·appendix 미실존·new-dive 미생성을 전부 FAIL로 잡는다.
+
+**주석 전수 ↔ 딥다이브 연결(R6.6a, V-062)** — 원장이 "처리됐는가"라면, 이 규약은 "**클릭하면 그 주석의 딥다이브에 실제로 닿는가**"다. 사용자가 ① 사업보고서 **원문 목차의 주N**을 누르거나 ② 재무제표 **패널 서브행**(예 매출채권·재고자산)을 누를 때, 그 주석 고유의 설명 카드로 동기·핀돼야 한다 — 운전자본(k10) 같은 상위 흐름 dive에 뭉뚱그려지지 않게. 세 경로 중 하나로 **전 주석을 반드시** 연결한다:
+- **(A) 실체 주석 → APPENDIX n카드 + row 앵커** — 계정 잔액·구성이 있는 주석(매출채권 주7·재고 주8·차입금 주12…)은 `appendix`에 `nX` 카드를 두고 `card.links[].row`로 패널 행에 앵커. 렌더러 `ROW2DIVE`(그 티커 SSOT)에 `bs-ar→n7`처럼 행→카드를 등재하고 `HL`에 상호 하이라이트 행을 넣는다.
+- **(B) 코어 dive 주석 → `meta.note_dive` 매핑** — 이미 리치한 흐름 dive가 그 주석의 사실상 카드인 경우(유형자산 주10→`ppe`, 리스 주22→`k5`…) 카드 중복 생성 대신 `meta.note_dive = {"10":"ppe", …}`로 명시 매핑. `_pinForNote`가 n카드 우선 → `note_dive` → 원장 순으로 조회한다.
+- **(C) 본문 인용 주석 → `dive:cited`** — 서사에 녹아든 주석은 해당 dive 본문에서 주N을 인용(원장 `dive:cited`)하면 족하다.
+
+원장(§7)이 세 경로를 이미 검사하므로 **전수 연결 = 원장 커버리지 100%**와 등가다 — 별도 게이트 불요. **점검**: 원문 TOC 주1~N 전부 클릭 → 동기핀 키 = 기대값, 패널 전 서브행 클릭 → 기대 카드 키 일치(스윕 스크립트, §검증). ▶ 골든 아닌 다음 단계부터는 galaxy와 **사업보고서 원문(`build_report_source.py`)을 한 번에 생성**하므로, S2 조립 때 이 3-way 분류를 확정해 두면 원문 목차 링크가 곧바로 동기된다.
 
 **S6 인터랙션 QA** — `tests/report/test_galaxy_interaction.py`(playwright, `GALAXY_TICKER` 환경변수): ①A9-② 제스처당 정거장 ≤1칸(**정거장 좌표계=knots 순서**로 측정 — DOM 행 좌표계는 오탐) ②A9-③ 450ms 유휴 후 단번 재동기화 허용 ③스크롤 멈춤 없음 ④핀→Esc 해제 ⑤펼침 토글 왕복 ⑥APPENDIX 카드 본문 비지 않음 ⑦1024px 가로 오버플로 0 ⑧콘솔 에러 0. 오라클은 스타일가이드 자구 수준으로 정밀해야 오탐 없이 진짜 버그(멈춤·씹힘·다중 전환)를 잡는다.
 

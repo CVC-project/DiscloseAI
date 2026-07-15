@@ -44,7 +44,7 @@ DART 표는 병합 셀(colspan/rowspan)이 많아 셀을 좌→우로 단순 평
 - **버튼**: `diveCard()` amt 아래 "⧉ 사업보고서 원문 보기" → `openSrc(key)`.
 - **dive → 원문 매핑**(`_srcForDive`): APPENDIX(`nX`)→주석 X · new-dive→역-원장 주석 · 흐름 dive→재무제표(행 접두 `bs-`→bs, `is-oci/is-totalcomp`→cis, `is-`→is, `cf-`→cf, `eq-`→eq).
 - **목차 클릭 = 원문 이동 + 딥다이브 동기 핀**(`srcGoto`→`_pinForNote`/`_STMT_DIVE`):
-  - 주석 → **그 주석의 APPENDIX 카드 `n<no>` 우선 핀**(원장이 `dive:cited`여도), 없으면 `routing_ledger`(appendix:/new-dive:/row:/dive:cited 산문검색).
+  - 주석 → **APPENDIX 카드 `n<no>` 우선 핀** → 없으면 **`meta.note_dive` 매핑**(주10→ppe 등 코어 dive 주석) → 없으면 `routing_ledger`(appendix:/new-dive:/row:/dive:cited 산문검색). 이 3단 조회가 **주석 전수 ↔ 딥다이브 연결 규약**(정본 = [MILKYWAY_GENERATOR.md](MILKYWAY_GENERATOR.md) §6 R6.6a·V-062)의 원문측 절반이다 — 반대편(패널 서브행 클릭→카드)은 `ROW2DIVE`.
   - 재무제표 → 대표 dive(bs→assets·is→k2·cis→totalcomp·cf→k11·eq→eq-end).
 - **매니페스트 게이팅**: `report_index.json`을 로드해 지원 티커만 `report_<t>.json` fetch → 미지원 티커는 "준비 중"(404 콘솔에러 0).
 - **Esc**: 팝업 열림 시 팝업만 닫고, 아니면 딥다이브 unpin.
