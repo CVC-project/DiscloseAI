@@ -371,9 +371,9 @@ class Component extends DCLogic {
   _loadData() {
     const t = new URLSearchParams(location.search).get('ticker') || '005930';
     this._ticker = t;  // 사업보고서 원문 팝업 지연로드용
-    fetch('data/galaxy_' + t + '.json')
+    fetch('data/galaxy_' + t + '.json', { cache: 'no-store' })
       .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-      .then(G => { this._G = G; this._dives = null; this._r2d = null; this.setState({ dataReady: true }); this.queueMeasure(); })
+      .then(G => { this._G = G; this._dives = null; this._r2d = null; this._ndv = null; this.setState({ dataReady: true }); this.queueMeasure(); })
       .catch(() => this.setState({ dataError: true }));
   }
   componentDidMount() {
@@ -587,7 +587,7 @@ class Component extends DCLogic {
     const view = this._srcForDive(key);
     // 매니페스트(report_index.json) 미로드 → 먼저 로드 후 재시도 (원문 없는 티커 fetch 404 방지)
     if (!this._reportIdx) {
-      fetch('data/report_index.json')
+      fetch('data/report_index.json', { cache: 'no-store' })
         .then(r => r.ok ? r.json() : { tickers: [] })
         .then(J => { this._reportIdx = new Set(J.tickers || []); this._afterIdx(view); })
         .catch(() => { this._reportIdx = new Set(); this._afterIdx(view); });
@@ -599,7 +599,7 @@ class Component extends DCLogic {
     const t = this._ticker || '005930';
     if (this._report) { this.setState({ src: view }); return; }
     if (!this._reportIdx.has(t)) { this._reportErr = true; this.setState({ src: view }); return; }  // 지원 티커 아님 → 준비중(fetch 안 함)
-    fetch('data/report_' + t + '.json')
+    fetch('data/report_' + t + '.json', { cache: 'no-store' })
       .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
       .then(J => { this._report = J; this.setState({ src: view }); })
       .catch(() => { this._reportErr = true; this.setState({ src: view }); });
@@ -1247,14 +1247,31 @@ class Component extends DCLogic {
   }
 
   // ===== 사업보고서 원문 팝업 (좌측 50% · 목차+원문) =====
+  // 계정명 → dive 키 색인 (원문 표 계정행 클릭용). 괄호·공백 제거 정규화, 노트카드(nX) 우선(비지배지분 등 동명 행 구체 채택).
+  _nameDive() {
+    if (this._ndv) return this._ndv;
+    const D = this.getDives(), m = {};
+    const norm = (s) => String(s || '').split('(')[0].replace(/[\s·:]/g, '');
+    const P = (this._G && this._G.panels) || {};
+    for (const z in P) for (const r of (P[z] || [])) {
+      const base = norm(r.name); if (base.length < 2) continue;
+      const k = this._diveKey(r.row); if (!D[k]) continue;
+      if (!m[base] || (/^n\d/.test(k) && !/^n\d/.test(m[base]))) m[base] = k;
+    }
+    this._ndv = m; return m;
+  }
   _srcTable(rows, key) {
     const h = React.createElement;
     const isNum = (s) => /^[\(\-−]?[\d.,]+\%?\)?$/.test(s);
+    const dmap = this._nameDive();
+    const norm = (s) => String(s || '').split('(')[0].replace(/[\s·:]/g, '');
     return h('table', { key: 't' + key, style: { borderCollapse: 'collapse', margin: '11px 0', fontSize: '12px', fontFamily: 'var(--mono)', width: 'auto', maxWidth: '100%' } },
       h('tbody', null, rows.map((cells, ri) => h('tr', { key: ri },
         cells.map((cc, ci) => {
           const num = isNum(cc);
-          return h(ri === 0 ? 'th' : 'td', { key: ci, style: { border: '1px solid var(--line)', padding: '4px 9px', textAlign: num ? 'right' : 'left', color: ri === 0 ? 'var(--text)' : 'var(--dim)', fontWeight: ri === 0 ? 600 : 400, background: ri === 0 ? 'rgba(255,255,255,.03)' : 'transparent', verticalAlign: 'top', whiteSpace: num ? 'nowrap' : 'normal', wordBreak: 'keep-all', overflowWrap: 'anywhere', minWidth: num ? 'auto' : '84px', maxWidth: num ? 'none' : '320px', lineHeight: 1.5 } }, cc);
+          const dk = (ri > 0 && ci === 0 && !num) ? dmap[norm(cc)] : null;   // 계정명 행 → 딥다이브 동기
+          const style = { border: '1px solid var(--line)', padding: '4px 9px', textAlign: num ? 'right' : 'left', color: dk ? 'var(--cyan)' : (ri === 0 ? 'var(--text)' : 'var(--dim)'), fontWeight: ri === 0 ? 600 : 400, background: ri === 0 ? 'rgba(255,255,255,.03)' : 'transparent', verticalAlign: 'top', whiteSpace: num ? 'nowrap' : 'normal', wordBreak: 'keep-all', overflowWrap: 'anywhere', minWidth: num ? 'auto' : '84px', maxWidth: num ? 'none' : '320px', lineHeight: 1.5, cursor: dk ? 'pointer' : 'default', textDecoration: dk ? 'underline dotted' : 'none', textUnderlineOffset: '3px' };
+          return h(ri === 0 ? 'th' : 'td', { key: ci, style, onClick: dk ? () => this.pin(dk) : undefined, title: dk ? '이 계정의 딥다이브로 이동' : undefined }, cc);
         })))));
   }
   _srcBlocks(blocks) {
