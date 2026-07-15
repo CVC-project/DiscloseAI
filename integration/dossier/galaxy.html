@@ -114,9 +114,9 @@ a{color:var(--cyan);} a:hover{color:var(--mint);}
             <div style="font-size:12.5px;color:var(--dim);">전기말 재무상태표 — 이야기의 출발점이라 현금만 간단히 보여드려요.</div>
           </div>
         </div>
-        <div data-row="pbs-cash" onclick="{{ onRow }}" title="53,705,579 백만원" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
+        <div data-row="pbs-cash" onclick="{{ onRow }}" title="{{ pt.pbs_cash }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
           <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">01</span><span>현금및현금성자산</span></div>
-          <span style="font-family:var(--mono);font-size:16px;font-weight:700;color:var(--cyan);">53.71</span>
+          <span style="font-family:var(--mono);font-size:16px;font-weight:700;color:var(--cyan);">{{ pv.pbs_cash }}</span>
         </div>
       </div>
 
@@ -132,77 +132,7 @@ a{color:var(--cyan);} a:hover{color:var(--mint);}
             <div style="font-size:12.5px;color:var(--dim);">손익계산서 — 1년 동안 얼마 벌고 얼마 썼나, 장사 성적표예요.</div>
           </div>
         </div>
-        <div data-row="is-revenue" onclick="{{ onRow }}" title="333,605,938 백만원" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">02</span><span>매출액</span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--mint);">333.6</span>
-        </div>
-        <div data-row="is-cogs" onclick="{{ onRow }}" title="202,235,513 백만원" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">03</span><span>매출원가</span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--coral);">−202.2</span>
-        </div>
-        <div data-row="is-grossprofit" onclick="{{ onRow }}" title="131,370,425 백만원" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;background:rgba(116,238,198,.045);font-weight:700;" style-hover="background:rgba(116,238,198,.09)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">04</span><span>매출총이익</span></div>
-          <span style="font-family:var(--mono);font-size:16.5px;font-weight:700;color:var(--mint);">131.4</span>
-        </div>
-        <div data-row="is-sgna" onclick="{{ onRow }}" title="87,769,374 백만원 (이 중 R&amp;D 37,740,392)" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">05</span><span>판매비와관리비</span><span data-g="sgna" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.sgna }}</span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--coral);">−87.8</span>
-        </div>
-        <sc-if value="{{ exp.sgna }}" hint-placeholder-val="{{ false }}">
-          <div>
-            <div data-row="is-sgna-rnd" onclick="{{ onRow }}" title="37,740,392 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>연구개발비 (R&amp;D)</span><span style="font-family:var(--mono);color:var(--gold);">−37.7</span></div>
-            <div data-row="is-sgna-fee" onclick="{{ onRow }}" title="9,819,555 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>지급수수료</span><span style="font-family:var(--mono);">−9.8</span></div>
-            <div data-row="is-sgna-sal" onclick="{{ onRow }}" title="9,243,455 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>급여</span><span style="font-family:var(--mono);">−9.2</span></div>
-            <div data-row="is-sgna-promo" onclick="{{ onRow }}" title="8,233,462 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>판매촉진비</span><span style="font-family:var(--mono);">−8.2</span></div>
-            <div data-row="is-sgna-ad" onclick="{{ onRow }}" title="6,003,350 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>광고선전비</span><span style="font-family:var(--mono);">−6.0</span></div>
-            <div data-row="is-sgna-svc" onclick="{{ onRow }}" title="3,659,857 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>서비스비</span><span style="font-family:var(--mono);">−3.7</span></div>
-            <div data-row="is-sgna-ship" onclick="{{ onRow }}" title="2,512,121 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>운반비</span><span style="font-family:var(--mono);">−2.5</span></div>
-            <div data-row="is-sgna-etc" onclick="{{ onRow }}" title="10,557,182 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>그 외</span><span style="font-family:var(--mono);">−10.6</span></div>
-          </div>
-        </sc-if>
-        <div data-row="is-opincome" onclick="{{ onRow }}" title="43,601,051 백만원" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;background:rgba(116,238,198,.045);font-weight:700;" style-hover="background:rgba(116,238,198,.09)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">06</span><span>영업이익</span></div>
-          <span style="font-family:var(--mono);font-size:16.5px;font-weight:700;color:var(--mint);">43.6</span>
-        </div>
-        <div data-row="is-nonop" onclick="{{ onRow }}" title="+5,880,420 백만원 (기타수익 2,267,083 − 기타비용 1,575,901 + 지분법 682,700 + 금융수익 16,240,302 − 금융비용 11,733,764)" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">06ᵇ</span><span>영업외·금융손익</span><span data-g="nonop" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.nonop }}</span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--mint);">+5.9</span>
-        </div>
-        <sc-if value="{{ exp.nonop }}" hint-placeholder-val="{{ false }}">
-          <div>
-            <div data-row="is-nonop-fininc" onclick="{{ onRow }}" title="16,240,302 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>금융수익</span><span style="font-family:var(--mono);color:var(--mint);">+16.2</span></div>
-            <div data-row="is-nonop-finexp" onclick="{{ onRow }}" title="11,733,764 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>금융비용</span><span style="font-family:var(--mono);">−11.7</span></div>
-            <div data-row="is-nonop-othinc" onclick="{{ onRow }}" title="2,267,083 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>기타수익</span><span style="font-family:var(--mono);color:var(--mint);">+2.3</span></div>
-            <div data-row="is-nonop-othexp" onclick="{{ onRow }}" title="1,575,901 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>기타비용</span><span style="font-family:var(--mono);">−1.6</span></div>
-            <div data-row="is-nonop-eqm" onclick="{{ onRow }}" title="682,700 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>지분법이익 (삼성전기·삼성SDS 등)</span><span style="font-family:var(--mono);color:var(--mint);">+0.7</span></div>
-          </div>
-        </sc-if>
-        <div data-row="is-pretax" onclick="{{ onRow }}" title="49,481,471 백만원" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;background:rgba(116,238,198,.045);font-weight:700;" style-hover="background:rgba(116,238,198,.09)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">—</span><span>법인세차감전순이익</span></div>
-          <span style="font-family:var(--mono);font-size:16.5px;font-weight:700;color:var(--mint);">49.5</span>
-        </div>
-        <div data-row="is-tax" onclick="{{ onRow }}" title="4,274,666 백만원" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">07</span><span>법인세비용</span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--coral);">−4.3</span>
-        </div>
-        <div data-row="is-netincome" onclick="{{ onRow }}" title="45,206,805 백만원 (지배 44,260,956 · 비지배 945,849)" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid rgba(116,238,198,.35);cursor:pointer;background:rgba(116,238,198,.07);font-weight:700;" style-hover="background:rgba(116,238,198,.12)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--mint);letter-spacing:.08em;">08</span><span>당기순이익</span><span data-g="ni" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.ni }}</span></div>
-          <span style="font-family:var(--mono);font-size:17px;font-weight:700;color:var(--mint);text-shadow:0 0 12px rgba(116,238,198,.5);">45.2</span>
-        </div>
-        <sc-if value="{{ exp.ni }}" hint-placeholder-val="{{ false }}">
-          <div>
-            <div data-row="is-ni-ctrl" onclick="{{ onRow }}" title="44,260,956 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>지배기업 소유주 몫</span><span style="font-family:var(--mono);">44.3</span></div>
-            <div data-row="is-ni-nci" onclick="{{ onRow }}" title="945,849 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>비지배지분 몫 (자회사의 다른 주주)</span><span style="font-family:var(--mono);">0.9</span></div>
-          </div>
-        </sc-if>
-        <div data-row="is-oci" onclick="{{ onRow }}" title="6,083,719 백만원" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">—</span><span>기타포괄손익 (OCI)</span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--gold);">+6.1</span>
-        </div>
-        <div data-row="is-totalcomp" onclick="{{ onRow }}" title="51,290,524 백만원" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;background:rgba(116,238,198,.045);font-weight:700;" style-hover="background:rgba(116,238,198,.09)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">—</span><span>총포괄손익</span></div>
-          <span style="font-family:var(--mono);font-size:16.5px;font-weight:700;color:var(--mint);">51.3</span>
-        </div>
+        {{ panelB }}
       </div>
 
       <div data-zone="zoneC" style="padding:30px 6px 14px;display:flex;align-items:baseline;gap:12px;">
@@ -217,75 +147,53 @@ a{color:var(--cyan);} a:hover{color:var(--mint);}
             <div style="font-size:12.5px;color:var(--dim);">현금흐름표 — 통장에 실제로 돈이 얼마 들어오고 나갔나, 입출금 내역이에요.</div>
           </div>
         </div>
-        <div data-row="cf-netincome" onclick="{{ onRow }}" title="45,206,805 백만원 — 손익계산서의 당기순이익과 같은 숫자" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
+        <div data-row="cf-netincome" onclick="{{ onRow }}" title="{{ pt.cf_netincome }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
           <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:#63d68e;letter-spacing:.08em;">08</span><span>당기순이익 <span style="font-size:11px;color:#63d68e;">← 손익계산서에서</span></span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:#63d68e;">45.2</span>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:#63d68e;">{{ pv.cf_netincome }}</span>
         </div>
-        <div data-row="cf-noncash" onclick="{{ onRow }}" title="52,395,616 백만원 (감가상각 43,605,740 최대)" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
+        <div data-row="cf-noncash" onclick="{{ onRow }}" title="{{ pt.cf_noncash }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
           <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">09</span><span>비현금 조정 <span style="font-size:11px;color:var(--dim);font-weight:400;">현금 안 나간 비용을 도로 더해요</span></span><span data-g="noncash" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.noncash }}</span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--cyan);">+52.4</span>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--cyan);">{{ pv.cf_noncash }}</span>
         </div>
-        <sc-if value="{{ exp.noncash }}" hint-placeholder-val="{{ false }}">
-          <div>
-            <div data-row="cf-noncash-dep" onclick="{{ onRow }}" title="43,605,740 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>감가상각비 (현금 유출 없음)</span><span style="font-family:var(--mono);color:var(--cyan);">+43.6</span></div>
-            <div data-row="cf-noncash-etc" onclick="{{ onRow }}" title="8,789,876 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>기타 조정 (무형상각·충당금 등)</span><span style="font-family:var(--mono);color:var(--cyan);">+8.8</span></div>
-          </div>
-        </sc-if>
-        <div data-row="cf-wc" onclick="{{ onRow }}" title="약 −9.6조 원 (매출채권 −4.6 · 재고 −3.6 · 기타 −1.4)" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
+        <sc-if value="{{ exp.noncash }}" hint-placeholder-val="{{ false }}"><div>{{ sub.noncash }}</div></sc-if>
+        <div data-row="cf-wc" onclick="{{ onRow }}" title="{{ pt.cf_wc }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
           <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">10</span><span>운전자본 변동 <span style="font-size:11px;color:var(--dim);font-weight:400;">아직 현금이 안 된 외상·재고</span></span><span data-g="wc" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.wc }}</span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--coral);">−9.6</span>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--coral);">{{ pv.cf_wc }}</span>
         </div>
-        <sc-if value="{{ exp.wc }}" hint-placeholder-val="{{ false }}">
-          <div>
-            <div data-row="cf-wc-ar" onclick="{{ onRow }}" title="약 −4.6조 원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>매출채권 증가 (못 받은 외상)</span><span style="font-family:var(--mono);">−4.6</span></div>
-            <div data-row="cf-wc-inv" onclick="{{ onRow }}" title="약 −3.6조 원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>재고자산 증가 (안 팔린 재고)</span><span style="font-family:var(--mono);">−3.6</span></div>
-            <div data-row="cf-wc-etc" onclick="{{ onRow }}" title="약 −1.4조 원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>기타 운전자본</span><span style="font-family:var(--mono);">−1.4</span></div>
-          </div>
-        </sc-if>
-        <div data-row="cf-paid" onclick="{{ onRow }}" title="약 −2.7조 원" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
+        <sc-if value="{{ exp.wc }}" hint-placeholder-val="{{ false }}"><div>{{ sub.wc }}</div></sc-if>
+        <div data-row="cf-paid" onclick="{{ onRow }}" title="{{ pt.cf_paid }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
           <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">10ᵇ</span><span>이자·법인세 실납부 등</span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--coral);">−2.7</span>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--coral);">{{ pv.cf_paid }}</span>
         </div>
-        <div data-row="cf-op" onclick="{{ onRow }}" title="85,315,148 백만원 (45.2 + 52.4 − 9.6 − 2.7 = 85.3)" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid rgba(92,199,234,.35);cursor:pointer;background:rgba(92,199,234,.07);font-weight:700;" style-hover="background:rgba(92,199,234,.12)">
+        <div data-row="cf-op" onclick="{{ onRow }}" title="{{ pt.cf_op }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid rgba(92,199,234,.35);cursor:pointer;background:rgba(92,199,234,.07);font-weight:700;" style-hover="background:rgba(92,199,234,.12)">
           <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--cyan);letter-spacing:.08em;">11</span><span>Ⅰ. 영업활동 현금흐름</span></div>
-          <span style="font-family:var(--mono);font-size:17px;font-weight:700;color:var(--cyan);text-shadow:0 0 12px rgba(92,199,234,.5);">+85.3</span>
+          <span style="font-family:var(--mono);font-size:17px;font-weight:700;color:var(--cyan);text-shadow:0 0 12px rgba(92,199,234,.5);">{{ pv.cf_op }}</span>
         </div>
-        <sc-if value="{{ exp.inv }}" hint-placeholder-val="{{ false }}">
-          <div>
-            <div data-row="cf-inv-capex" onclick="{{ onRow }}" title="47,522,179 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>유형자산 취득 (새 공장·장비)</span><span style="font-family:var(--mono);">−47.5</span></div>
-            <div data-row="cf-inv-etc" onclick="{{ onRow }}" title="20,990,027 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>무형자산·관계기업·기타</span><span style="font-family:var(--mono);">−21.0</span></div>
-          </div>
-        </sc-if>
-        <div data-row="cf-inv" onclick="{{ onRow }}" title="−68,512,206 백만원 (유형자산 취득 −47.5 · 무형·관계기업·기타 −21.0)" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;background:rgba(92,199,234,.04);font-weight:700;" style-hover="background:rgba(92,199,234,.09)">
+        <sc-if value="{{ exp.inv }}" hint-placeholder-val="{{ false }}"><div>{{ sub.inv }}</div></sc-if>
+        <div data-row="cf-inv" onclick="{{ onRow }}" title="{{ pt.cf_inv }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;background:rgba(92,199,234,.04);font-weight:700;" style-hover="background:rgba(92,199,234,.09)">
           <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">12</span><span>Ⅱ. 투자활동 현금흐름</span><span data-g="inv" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.inv }}</span></div>
-          <span style="font-family:var(--mono);font-size:16.5px;font-weight:700;color:var(--coral);">−68.5</span>
+          <span style="font-family:var(--mono);font-size:16.5px;font-weight:700;color:var(--coral);">{{ pv.cf_inv }}</span>
         </div>
-        <sc-if value="{{ exp.fin }}" hint-placeholder-val="{{ false }}">
-          <div>
-            <div data-row="cf-fin-debt" onclick="{{ onRow }}" title="+4,609,379 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>차입금 순증가</span><span style="font-family:var(--mono);color:var(--cyan);">+4.6</span></div>
-            <div data-row="cf-fin-div" onclick="{{ onRow }}" title="9,897,183 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>배당금 지급 (주주에게)</span><span style="font-family:var(--mono);">−9.9</span></div>
-            <div data-row="cf-fin-tsy" onclick="{{ onRow }}" title="8,189,263 백만원" style="display:flex;align-items:center;justify-content:space-between;height:38px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:13px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>자기주식 취득</span><span style="font-family:var(--mono);">−8.2</span></div>
-          </div>
-        </sc-if>
-        <div data-row="cf-fin" onclick="{{ onRow }}" title="−13,478,040 백만원 (배당 −9.9 · 자사주 −8.2 · 차입 +4.6)" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;background:rgba(92,199,234,.04);font-weight:700;" style-hover="background:rgba(92,199,234,.09)">
+        <sc-if value="{{ exp.fin }}" hint-placeholder-val="{{ false }}"><div>{{ sub.fin }}</div></sc-if>
+        <div data-row="cf-fin" onclick="{{ onRow }}" title="{{ pt.cf_fin }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;background:rgba(92,199,234,.04);font-weight:700;" style-hover="background:rgba(92,199,234,.09)">
           <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">13</span><span>Ⅲ. 재무활동 현금흐름</span><span data-g="fin" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.fin }}</span></div>
-          <span style="font-family:var(--mono);font-size:16.5px;font-weight:700;color:var(--coral);">−13.5</span>
+          <span style="font-family:var(--mono);font-size:16.5px;font-weight:700;color:var(--coral);">{{ pv.cf_fin }}</span>
         </div>
-        <div data-row="cf-fx" onclick="{{ onRow }}" title="+825,897 백만원" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
+        <div data-row="cf-fx" onclick="{{ onRow }}" title="{{ pt.cf_fx }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
           <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">14</span><span>외화환산효과</span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--cyan);">+0.8</span>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--cyan);">{{ pv.cf_fx }}</span>
         </div>
-        <div data-row="cf-netchange" onclick="{{ onRow }}" title="+4,150,799 백만원" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
+        <div data-row="cf-netchange" onclick="{{ onRow }}" title="{{ pt.cf_netchange }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
           <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:.08em;">Δ</span><span>현금의 순증감</span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:700;color:var(--gold);">+4.15</span>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:700;color:var(--gold);">{{ pv.cf_netchange }}</span>
         </div>
-        <div data-row="cf-begincash" onclick="{{ onRow }}" title="53,705,579 백만원 — 전기말 재무상태표의 현금과 같은 숫자" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
+        <div data-row="cf-begincash" onclick="{{ onRow }}" title="{{ pt.cf_begincash }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
           <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">01</span><span>기초의 현금</span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--cyan);">53.71</span>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--cyan);">{{ pv.cf_begincash }}</span>
         </div>
-        <div data-row="cf-endcash" onclick="{{ onRow }}" title="57,856,378 백만원 — 당기말 재무상태표의 현금과 같은 숫자" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid rgba(92,199,234,.3);cursor:pointer;background:rgba(92,199,234,.06);font-weight:700;" style-hover="background:rgba(92,199,234,.11)">
+        <div data-row="cf-endcash" onclick="{{ onRow }}" title="{{ pt.cf_endcash }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid rgba(92,199,234,.3);cursor:pointer;background:rgba(92,199,234,.06);font-weight:700;" style-hover="background:rgba(92,199,234,.11)">
           <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--cyan);letter-spacing:.08em;">15</span><span>기말의 현금</span></div>
-          <span style="font-family:var(--mono);font-size:16.5px;font-weight:700;color:var(--cyan);">57.86</span>
+          <span style="font-family:var(--mono);font-size:16.5px;font-weight:700;color:var(--cyan);">{{ pv.cf_endcash }}</span>
         </div>
       </div>
 
@@ -301,74 +209,35 @@ a{color:var(--cyan);} a:hover{color:var(--mint);}
             <div style="font-size:12.5px;color:var(--dim);">당기말 재무상태표 — 오늘 이 순간 회사가 가진 재산과 빚의 목록이에요.</div>
           </div>
         </div>
-        <div data-row="bs-cash" onclick="{{ onRow }}" title="57,856,378 백만원" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;cursor:pointer;background:rgba(92,199,234,.06);font-weight:700;" style-hover="background:rgba(92,199,234,.11)">
+        <div data-row="bs-cash" onclick="{{ onRow }}" title="{{ pt.bs_cash }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;cursor:pointer;background:rgba(92,199,234,.06);font-weight:700;" style-hover="background:rgba(92,199,234,.11)">
           <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--cyan);letter-spacing:.08em;">15</span><span>현금및현금성자산</span></div>
-          <span style="font-family:var(--mono);font-size:17px;font-weight:700;color:var(--cyan);text-shadow:0 0 12px rgba(92,199,234,.5);">57.86</span>
+          <span style="font-family:var(--mono);font-size:17px;font-weight:700;color:var(--cyan);text-shadow:0 0 12px rgba(92,199,234,.5);">{{ pv.bs_cash }}</span>
         </div>
-        <div data-row="bs-assets" onclick="{{ onRow }}" title="566,942,110 백만원 (전기 514,531,948)" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;background:rgba(117,144,176,.06);font-weight:700;" style-hover="background:rgba(117,144,176,.11)">
+        <div data-row="bs-assets" onclick="{{ onRow }}" title="{{ pt.bs_assets }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;background:rgba(117,144,176,.06);font-weight:700;" style-hover="background:rgba(117,144,176,.11)">
           <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">Σ</span><span>자산총계</span><span data-g="bsa" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.bsa }}</span></div>
-          <span style="font-family:var(--mono);font-size:16.5px;font-weight:700;color:var(--steel);">566.9</span>
+          <span style="font-family:var(--mono);font-size:16.5px;font-weight:700;color:var(--steel);">{{ pv.bs_assets }}</span>
         </div>
-        <sc-if value="{{ exp.bsa }}" hint-placeholder-val="{{ false }}"><div>
-          <div data-row="bs-ca" onclick="{{ onRow }}" title="247,684,612 백만원" style="display:flex;align-items:center;justify-content:space-between;height:34px;padding:0 16px 0 32px;border-top:1px dashed rgba(140,170,210,.12);cursor:pointer;font-size:12.5px;font-weight:600;" style-hover="background:rgba(140,190,230,.05)"><span>유동자산 (계)</span><span style="font-family:var(--mono);color:var(--steel);">247.7</span></div>
-          <div data-row="bs-cash-d" onclick="{{ onRow }}" title="57,856,378 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>현금및현금성자산 <span style="font-size:10px;color:var(--dim2);">↑ 위 강조 행과 같은 돈</span></span><span style="font-family:var(--mono);color:var(--cyan);">57.9</span></div>
-          <div data-row="bs-sfin" onclick="{{ onRow }}" title="67,965,021 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>단기금융상품</span><span style="font-family:var(--mono);">68.0</span></div>
-          <div data-row="bs-ar" onclick="{{ onRow }}" title="51,127,642 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>매출채권</span><span style="font-family:var(--mono);">51.1</span></div>
-          <div data-row="bs-inv" onclick="{{ onRow }}" title="52,636,828 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>재고자산</span><span style="font-family:var(--mono);">52.6</span></div>
-          <div data-row="bs-oca" onclick="{{ onRow }}" title="18,073,028 백만원 (미수금·선급비용·기타)" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>미수금·선급비용·기타</span><span style="font-family:var(--mono);">18.1</span></div>
-          <div data-row="bs-nca" onclick="{{ onRow }}" title="319,257,498 백만원" style="display:flex;align-items:center;justify-content:space-between;height:34px;padding:0 16px 0 32px;border-top:1px dashed rgba(140,170,210,.12);cursor:pointer;font-size:12.5px;font-weight:600;" style-hover="background:rgba(140,190,230,.05)"><span>비유동자산 (계)</span><span style="font-family:var(--mono);color:var(--steel);">319.3</span></div>
-          <div data-row="bs-ppe" onclick="{{ onRow }}" title="215,304,784 백만원 (전기 205,945,209)" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>유형자산 (공장·장비)</span><span style="font-family:var(--mono);">215.3</span></div>
-          <div data-row="bs-ig" onclick="{{ onRow }}" title="29,480,565 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>무형자산</span><span style="font-family:var(--mono);">29.5</span></div>
-          <div data-row="bs-assoc" onclick="{{ onRow }}" title="13,772,121 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>관계기업·공동기업투자</span><span style="font-family:var(--mono);">13.8</span></div>
-          <div data-row="bs-fvoci" onclick="{{ onRow }}" title="16,295,005 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>FVOCI 금융자산 (오래 보유 주식)</span><span style="font-family:var(--mono);">16.3</span></div>
-          <div data-row="bs-dta" onclick="{{ onRow }}" title="18,840,559 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>이연법인세자산</span><span style="font-family:var(--mono);">18.8</span></div>
-          <div data-row="bs-dba" onclick="{{ onRow }}" title="4,271,547 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>순확정급여자산</span><span style="font-family:var(--mono);">4.3</span></div>
-          <div data-row="bs-onca" onclick="{{ onRow }}" title="21,292,917 백만원 (FVPL·기타비유동)" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>FVPL·기타비유동자산</span><span style="font-family:var(--mono);">21.3</span></div>
-        </div></sc-if>
-        <div data-row="bs-liab" onclick="{{ onRow }}" title="130,621,773 백만원" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;font-weight:700;" style-hover="background:rgba(140,190,230,.06)">
+        <sc-if value="{{ exp.bsa }}" hint-placeholder-val="{{ false }}"><div>{{ sub.bsa }}</div></sc-if>
+        <div data-row="bs-liab" onclick="{{ onRow }}" title="{{ pt.bs_liab }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;font-weight:700;" style-hover="background:rgba(140,190,230,.06)">
           <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--coral);letter-spacing:.08em;">부채</span><span>부채총계 <span style="font-size:11px;color:var(--dim);font-weight:400;">갚아야 할 남의 돈</span></span><span data-g="bsl" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.bsl }}</span></div>
-          <span style="font-family:var(--mono);font-size:15.5px;font-weight:700;color:var(--steel);">130.6</span>
+          <span style="font-family:var(--mono);font-size:15.5px;font-weight:700;color:var(--steel);">{{ pv.bs_liab }}</span>
         </div>
-        <sc-if value="{{ exp.bsl }}" hint-placeholder-val="{{ false }}"><div>
-          <div data-row="bs-cl" onclick="{{ onRow }}" title="106,411,348 백만원" style="display:flex;align-items:center;justify-content:space-between;height:34px;padding:0 16px 0 32px;border-top:1px dashed rgba(140,170,210,.12);cursor:pointer;font-size:12.5px;font-weight:600;" style-hover="background:rgba(140,190,230,.05)"><span>유동부채 (계)</span><span style="font-family:var(--mono);color:var(--steel);">106.4</span></div>
-          <div data-row="bs-payexp" onclick="{{ onRow }}" title="32,707,431 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>미지급비용</span><span style="font-family:var(--mono);">32.7</span></div>
-          <div data-row="bs-pay" onclick="{{ onRow }}" title="21,365,657 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>미지급금</span><span style="font-family:var(--mono);">21.4</span></div>
-          <div data-row="bs-stb" onclick="{{ onRow }}" title="17,574,980 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>단기차입금 <span style="font-size:10px;color:var(--dim2);">(팩토링 포함)</span></span><span style="font-family:var(--mono);">17.6</span></div>
-          <div data-row="bs-ap" onclick="{{ onRow }}" title="13,039,380 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>매입채무</span><span style="font-family:var(--mono);">13.0</span></div>
-          <div data-row="bs-prov" onclick="{{ onRow }}" title="7,690,559 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>충당부채</span><span style="font-family:var(--mono);">7.7</span></div>
-          <div data-row="bs-taxlia" onclick="{{ onRow }}" title="7,037,174 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>당기법인세부채</span><span style="font-family:var(--mono);">7.0</span></div>
-          <div data-row="bs-ocl" onclick="{{ onRow }}" title="6,996,167 백만원 (선수금·예수금·유동성장기부채·기타)" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>선수금·예수금·기타</span><span style="font-family:var(--mono);">7.0</span></div>
-          <div data-row="bs-ncl" onclick="{{ onRow }}" title="24,210,425 백만원" style="display:flex;align-items:center;justify-content:space-between;height:34px;padding:0 16px 0 32px;border-top:1px dashed rgba(140,170,210,.12);cursor:pointer;font-size:12.5px;font-weight:600;" style-hover="background:rgba(140,190,230,.05)"><span>비유동부채 (계)</span><span style="font-family:var(--mono);color:var(--steel);">24.2</span></div>
-          <div data-row="bs-ltb" onclick="{{ onRow }}" title="6,479,517 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>장기차입금</span><span style="font-family:var(--mono);">6.5</span></div>
-          <div data-row="bs-ltpay" onclick="{{ onRow }}" title="5,602,031 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>장기미지급금</span><span style="font-family:var(--mono);">5.6</span></div>
-          <div data-row="bs-ltprov" onclick="{{ onRow }}" title="2,900,411 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>장기충당부채</span><span style="font-family:var(--mono);">2.9</span></div>
-          <div data-row="bs-ndbl" onclick="{{ onRow }}" title="558,520 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>순확정급여부채</span><span style="font-family:var(--mono);">0.6</span></div>
-          <div data-row="bs-dtl" onclick="{{ onRow }}" title="709,226 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>이연법인세부채</span><span style="font-family:var(--mono);">0.7</span></div>
-          <div data-row="bs-bond" onclick="{{ onRow }}" title="7,134 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>사채 <span style="font-size:10px;color:var(--dim2);">(거의 0)</span></span><span style="font-family:var(--mono);">0.01</span></div>
-          <div data-row="bs-oncl" onclick="{{ onRow }}" title="7,953,586 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>기타비유동부채</span><span style="font-family:var(--mono);">8.0</span></div>
-        </div></sc-if>
-        <div data-row="bs-equity" onclick="{{ onRow }}" title="436,320,337 백만원" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;font-weight:700;" style-hover="background:rgba(140,190,230,.06)">
+        <sc-if value="{{ exp.bsl }}" hint-placeholder-val="{{ false }}"><div>{{ sub.bsl }}</div></sc-if>
+        <div data-row="bs-equity" onclick="{{ onRow }}" title="{{ pt.bs_equity }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;font-weight:700;" style-hover="background:rgba(140,190,230,.06)">
           <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:.08em;">자본</span><span>자본총계 <span style="font-size:11px;color:var(--dim);font-weight:400;">주주의 몫 → 존 E</span></span><span data-g="bse" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.bse }}</span></div>
-          <span style="font-family:var(--mono);font-size:15.5px;font-weight:700;color:var(--gold);">436.3</span>
+          <span style="font-family:var(--mono);font-size:15.5px;font-weight:700;color:var(--gold);">{{ pv.bs_equity }}</span>
         </div>
-        <sc-if value="{{ exp.bse }}" hint-placeholder-val="{{ false }}"><div>
-          <div data-row="bs-ctrl" onclick="{{ onRow }}" title="424,313,255 백만원" style="display:flex;align-items:center;justify-content:space-between;height:34px;padding:0 16px 0 32px;border-top:1px dashed rgba(140,170,210,.12);cursor:pointer;font-size:12.5px;font-weight:600;" style-hover="background:rgba(140,190,230,.05)"><span>지배기업 소유주지분 (계)</span><span style="font-family:var(--mono);color:var(--gold);">424.3</span></div>
-          <div data-row="bs-re" onclick="{{ onRow }}" title="402,135,600 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>이익잉여금 <span style="font-size:10px;color:var(--dim2);">(그동안 쌓은 이익)</span></span><span style="font-family:var(--mono);color:var(--gold);">402.1</span></div>
-          <div data-row="bs-oe" onclick="{{ onRow }}" title="16,876,248 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>기타자본항목 (OCI 등)</span><span style="font-family:var(--mono);">16.9</span></div>
-          <div data-row="bs-sp" onclick="{{ onRow }}" title="4,403,893 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>주식발행초과금</span><span style="font-family:var(--mono);">4.4</span></div>
-          <div data-row="bs-capital" onclick="{{ onRow }}" title="897,514 백만원" style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 16px 0 48px;border-top:1px dashed rgba(140,170,210,.08);cursor:pointer;font-size:12.5px;color:var(--dim);" style-hover="background:rgba(140,190,230,.05)"><span>자본금 <span style="font-size:10px;color:var(--dim2);">(밑천)</span></span><span style="font-family:var(--mono);">0.9</span></div>
-          <div data-row="bs-nci" onclick="{{ onRow }}" title="12,007,082 백만원" style="display:flex;align-items:center;justify-content:space-between;height:34px;padding:0 16px 0 32px;border-top:1px dashed rgba(140,170,210,.12);cursor:pointer;font-size:12.5px;font-weight:600;" style-hover="background:rgba(140,190,230,.05)"><span>비지배지분 <span style="font-size:10px;color:var(--dim2);font-weight:400;">(자회사의 다른 주주 몫)</span></span><span style="font-family:var(--mono);color:var(--steel);">12.0</span></div>
-        </div></sc-if>
+        <sc-if value="{{ exp.bse }}" hint-placeholder-val="{{ false }}"><div>{{ sub.bse }}</div></sc-if>
         <div style="padding:15px 16px 17px;border-top:1px solid var(--line);">
           <div style="font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--dim2);margin-bottom:11px;">자산 = 부채 + 자본 · 회사의 재산은 어떻게 마련했나</div>
           <div style="display:flex;align-items:stretch;gap:12px;height:126px;">
             <div style="flex:1;display:flex;flex-direction:column;">
-              <div style="flex:1;background:linear-gradient(rgba(117,144,176,.32),rgba(117,144,176,.16));border:1px solid rgba(117,144,176,.5);border-radius:5px;display:flex;flex-direction:column;align-items:center;justify-content:center;"><span style="font-size:11px;color:var(--dim);">자산(가진 재산)</span><span style="font-family:var(--mono);font-weight:700;font-size:16px;color:var(--steel);">566.9</span></div>
+              <div style="flex:1;background:linear-gradient(rgba(117,144,176,.32),rgba(117,144,176,.16));border:1px solid rgba(117,144,176,.5);border-radius:5px;display:flex;flex-direction:column;align-items:center;justify-content:center;"><span style="font-size:11px;color:var(--dim);">자산(가진 재산)</span><span style="font-family:var(--mono);font-weight:700;font-size:16px;color:var(--steel);">{{ pv.bs_assets }}</span></div>
             </div>
             <div style="font-size:22px;color:var(--dim);align-self:center;">=</div>
             <div style="flex:1;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:5px;overflow:hidden;">
-              <div style="height:23%;background:rgba(236,140,106,.15);border-bottom:1px dashed rgba(236,140,106,.55);display:flex;align-items:center;justify-content:center;gap:6px;"><span style="font-size:10.5px;color:var(--coral);">부채</span><span style="font-family:var(--mono);font-size:12px;color:var(--coral);">130.6</span></div>
-              <div style="height:77%;background:rgba(233,196,107,.14);display:flex;flex-direction:column;align-items:center;justify-content:center;"><span style="font-size:10.5px;color:var(--gold);">자본(주주 몫)</span><span style="font-family:var(--mono);font-weight:700;font-size:15px;color:var(--gold);">436.3</span></div>
+              <div style="height:{{ bsbar.l }}%;background:rgba(236,140,106,.15);border-bottom:1px dashed rgba(236,140,106,.55);display:flex;align-items:center;justify-content:center;gap:6px;"><span style="font-size:10.5px;color:var(--coral);">부채</span><span style="font-family:var(--mono);font-size:12px;color:var(--coral);">{{ pv.bs_liab }}</span></div>
+              <div style="height:{{ bsbar.e }}%;background:rgba(233,196,107,.14);display:flex;flex-direction:column;align-items:center;justify-content:center;"><span style="font-size:10.5px;color:var(--gold);">자본(주주 몫)</span><span style="font-family:var(--mono);font-weight:700;font-size:15px;color:var(--gold);">{{ pv.bs_equity }}</span></div>
             </div>
           </div>
           <div style="font-size:11.5px;color:var(--dim);margin-top:10px;line-height:1.65;">두 기둥의 높이가 똑같아요 — 회사가 가진 재산(자산)은 반드시 <b style="color:var(--coral);">갚아야 할 남의 돈(부채)</b>과 <b style="color:var(--gold);">주주의 몫(자본)</b>을 더한 것과 같아요. 이게 재무상태표의 뼈대예요.</div>
@@ -387,33 +256,33 @@ a{color:var(--cyan);} a:hover{color:var(--mint);}
             <div style="font-size:12.5px;color:var(--dim);">자본변동표(당기만) — 주주의 몫(자본)이 1년 새 어떻게 늘고 줄었나예요.</div>
           </div>
         </div>
-        <div data-row="eq-begin" onclick="{{ onRow }}" title="402,192,070 백만원" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;cursor:pointer;" style-hover="background:rgba(233,196,107,.06)">
+        <div data-row="eq-begin" onclick="{{ onRow }}" title="{{ pt.eq_begin }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;cursor:pointer;" style-hover="background:rgba(233,196,107,.06)">
           <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">E0</span><span>기초자본</span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--gold);">402.2</span>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--gold);">{{ pv.eq_begin }}</span>
         </div>
-        <div data-row="eq-netincome" onclick="{{ onRow }}" title="45,206,805 백만원 — 손익계산서의 당기순이익과 같은 숫자" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(233,196,107,.06)">
+        <div data-row="eq-netincome" onclick="{{ onRow }}" title="{{ pt.eq_netincome }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(233,196,107,.06)">
           <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">E1</span><span>당기순이익 적립</span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--gold);">+45.2</span>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--gold);">{{ pv.eq_netincome }}</span>
         </div>
-        <div data-row="eq-oci" onclick="{{ onRow }}" title="6,083,719 백만원 — 손익을 거치지 않고 자본으로 직접" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(233,196,107,.06)">
+        <div data-row="eq-oci" onclick="{{ onRow }}" title="{{ pt.eq_oci }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(233,196,107,.06)">
           <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">E2</span><span>기타포괄손익 (OCI)</span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--gold);">+6.1</span>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--gold);">{{ pv.eq_oci }}</span>
         </div>
-        <div data-row="eq-div" onclick="{{ onRow }}" title="9,897,183 백만원 — 재무활동 현금흐름에서 실제로 나간 돈" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(233,196,107,.06)">
+        <div data-row="eq-div" onclick="{{ onRow }}" title="{{ pt.eq_div }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(233,196,107,.06)">
           <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">E3</span><span>배당 <span style="font-size:11px;color:var(--dim);font-weight:400;">⑬ 재무활동과 같은 돈</span></span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--coral);">−9.9</span>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--coral);">{{ pv.eq_div }}</span>
         </div>
-        <div data-row="eq-buyback" onclick="{{ onRow }}" title="8,189,263 백만원 — 재무활동 현금흐름에서 실제로 나간 돈" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(233,196,107,.06)">
+        <div data-row="eq-buyback" onclick="{{ onRow }}" title="{{ pt.eq_buyback }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(233,196,107,.06)">
           <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">E4</span><span>자기주식 취득 <span style="font-size:11px;color:var(--dim);font-weight:400;">⑬ 재무활동과 같은 돈</span></span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--coral);">−8.2</span>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--coral);">{{ pv.eq_buyback }}</span>
         </div>
-        <div data-row="eq-other" onclick="{{ onRow }}" title="923,178 백만원" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(233,196,107,.06)">
+        <div data-row="eq-other" onclick="{{ onRow }}" title="{{ pt.eq_other }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(233,196,107,.06)">
           <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">E5</span><span>주식보상·기타</span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--gold);">+0.9</span>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--gold);">{{ pv.eq_other }}</span>
         </div>
-        <div data-row="eq-end" onclick="{{ onRow }}" title="436,320,337 백만원 (402.2 +45.2 +6.1 −9.9 −8.2 +0.9 = 436.3)" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid rgba(233,196,107,.35);cursor:pointer;background:rgba(233,196,107,.06);font-weight:700;" style-hover="background:rgba(233,196,107,.11)">
+        <div data-row="eq-end" onclick="{{ onRow }}" title="{{ pt.eq_end }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid rgba(233,196,107,.35);cursor:pointer;background:rgba(233,196,107,.06);font-weight:700;" style-hover="background:rgba(233,196,107,.11)">
           <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:.08em;">E6</span><span>기말자본</span></div>
-          <span style="font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);text-shadow:0 0 12px rgba(233,196,107,.5);">436.3</span>
+          <span style="font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);text-shadow:0 0 12px rgba(233,196,107,.5);">{{ pv.eq_end }}</span>
         </div>
       </div>
 
@@ -422,21 +291,8 @@ a{color:var(--cyan);} a:hover{color:var(--mint);}
         <div style="margin-top:10px;font-size:13px;color:var(--dim);">이제 궁금한 항목을 아무거나 눌러보세요 — 왼쪽 매듭도, 가운데 표의 줄도 모두 눌러져요.</div>
       </div>
       <div style="margin:8px 6px 0;border:1px dashed var(--line);border-radius:10px;padding:14px 8px 6px;">
-        <div style="font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--dim2);margin:0 8px 8px;">APPENDIX · 별도 주석 (14) — 클릭하면 딥다이브가 열려요</div>
-        <div data-row="apx-ju1" onclick="{{ onRow }}" title="일반사항" style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 10px;border-top:1px dashed rgba(140,170,210,.10);cursor:pointer;" style-hover="background:rgba(140,190,230,.05)"><span style="font-size:12.5px;"><b style="font-family:var(--mono);font-size:9.5px;color:var(--dim2);letter-spacing:.06em;margin-right:7px;">주1</b>일반사항</span><span style="font-family:var(--mono);font-size:11px;color:var(--dim);">종속기업 308개 ›</span></div>
-        <div data-row="apx-ju2" onclick="{{ onRow }}" title="회계처리방침" style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 10px;border-top:1px dashed rgba(140,170,210,.10);cursor:pointer;" style-hover="background:rgba(140,190,230,.05)"><span style="font-size:12.5px;"><b style="font-family:var(--mono);font-size:9.5px;color:var(--dim2);letter-spacing:.06em;margin-right:7px;">주2</b>중요한 회계처리방침</span><span style="font-family:var(--mono);font-size:11px;color:var(--dim);">K-IFRS ›</span></div>
-        <div data-row="apx-ju3" onclick="{{ onRow }}" title="회계추정" style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 10px;border-top:1px dashed rgba(140,170,210,.10);cursor:pointer;" style-hover="background:rgba(140,190,230,.05)"><span style="font-size:12.5px;"><b style="font-family:var(--mono);font-size:9.5px;color:var(--dim2);letter-spacing:.06em;margin-right:7px;">주3</b>중요한 회계추정</span><span style="font-family:var(--mono);font-size:11px;color:var(--dim);">미래 가정 ›</span></div>
-        <div data-row="apx-ju4" onclick="{{ onRow }}" title="범주별 금융상품" style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 10px;border-top:1px dashed rgba(140,170,210,.10);cursor:pointer;" style-hover="background:rgba(140,190,230,.05)"><span style="font-size:12.5px;"><b style="font-family:var(--mono);font-size:9.5px;color:var(--dim2);letter-spacing:.06em;margin-right:7px;">주4</b>범주별 금융상품</span><span style="font-family:var(--mono);font-size:11px;color:var(--cyan);">215.2조 ›</span></div>
-        <div data-row="apx-ju5" onclick="{{ onRow }}" title="매출채권 양도(팩토링)" style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 10px;border-top:1px dashed rgba(140,170,210,.10);cursor:pointer;" style-hover="background:rgba(140,190,230,.05)"><span style="font-size:12.5px;"><b style="font-family:var(--mono);font-size:9.5px;color:var(--dim2);letter-spacing:.06em;margin-right:7px;">주5</b>매출채권 양도(팩토링)</span><span style="font-family:var(--mono);font-size:11px;color:var(--dim);">17.4조 ›</span></div>
-        <div data-row="apx-ju14" onclick="{{ onRow }}" title="순확정급여(퇴직급여)" style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 10px;border-top:1px dashed rgba(140,170,210,.10);cursor:pointer;" style-hover="background:rgba(140,190,230,.05)"><span style="font-size:12.5px;"><b style="font-family:var(--mono);font-size:9.5px;color:var(--dim2);letter-spacing:.06em;margin-right:7px;">주14</b>순확정급여(퇴직급여)</span><span style="font-family:var(--mono);font-size:11px;color:var(--mint);">순 +3.7조 ›</span></div>
-        <div data-row="apx-ju15" onclick="{{ onRow }}" title="충당부채" style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 10px;border-top:1px dashed rgba(140,170,210,.10);cursor:pointer;" style-hover="background:rgba(140,190,230,.05)"><span style="font-size:12.5px;"><b style="font-family:var(--mono);font-size:9.5px;color:var(--dim2);letter-spacing:.06em;margin-right:7px;">주15</b>충당부채</span><span style="font-family:var(--mono);font-size:11px;color:var(--coral);">10.6조 ›</span></div>
-        <div data-row="apx-ju16" onclick="{{ onRow }}" title="우발부채와 약정" style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 10px;border-top:1px dashed rgba(140,170,210,.10);cursor:pointer;" style-hover="background:rgba(140,190,230,.05)"><span style="font-size:12.5px;"><b style="font-family:var(--mono);font-size:9.5px;color:var(--dim2);letter-spacing:.06em;margin-right:7px;">주16</b>우발부채와 약정</span><span style="font-family:var(--mono);font-size:11px;color:var(--dim);">약정 52.9조 ›</span></div>
-        <div data-row="apx-ju18" onclick="{{ onRow }}" title="자본금" style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 10px;border-top:1px dashed rgba(140,170,210,.10);cursor:pointer;" style-hover="background:rgba(140,190,230,.05)"><span style="font-size:12.5px;"><b style="font-family:var(--mono);font-size:9.5px;color:var(--dim2);letter-spacing:.06em;margin-right:7px;">주18</b>자본금</span><span style="font-family:var(--mono);font-size:11px;color:var(--gold);">0.9조 ›</span></div>
-        <div data-row="apx-ju26" onclick="{{ onRow }}" title="주당이익(EPS)" style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 10px;border-top:1px dashed rgba(140,170,210,.10);cursor:pointer;" style-hover="background:rgba(140,190,230,.05)"><span style="font-size:12.5px;"><b style="font-family:var(--mono);font-size:9.5px;color:var(--dim2);letter-spacing:.06em;margin-right:7px;">주26</b>주당이익(EPS)</span><span style="font-family:var(--mono);font-size:11px;color:var(--mint);">6,605원 ›</span></div>
-        <div data-row="apx-ju28" onclick="{{ onRow }}" title="재무위험관리" style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 10px;border-top:1px dashed rgba(140,170,210,.10);cursor:pointer;" style-hover="background:rgba(140,190,230,.05)"><span style="font-size:12.5px;"><b style="font-family:var(--mono);font-size:9.5px;color:var(--dim2);letter-spacing:.06em;margin-right:7px;">주28</b>재무위험관리</span><span style="font-family:var(--mono);font-size:11px;color:var(--dim);">Aa2 / AA− ›</span></div>
-        <div data-row="apx-ju29" onclick="{{ onRow }}" title="공정가치 측정" style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 10px;border-top:1px dashed rgba(140,170,210,.10);cursor:pointer;" style-hover="background:rgba(140,190,230,.05)"><span style="font-size:12.5px;"><b style="font-family:var(--mono);font-size:9.5px;color:var(--dim2);letter-spacing:.06em;margin-right:7px;">주29</b>공정가치 측정</span><span style="font-family:var(--mono);font-size:11px;color:var(--cyan);">레벨 1·2·3 ›</span></div>
-        <div data-row="apx-ju31" onclick="{{ onRow }}" title="특수관계자 거래" style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 10px;border-top:1px dashed rgba(140,170,210,.10);cursor:pointer;" style-hover="background:rgba(140,190,230,.05)"><span style="font-size:12.5px;"><b style="font-family:var(--mono);font-size:9.5px;color:var(--dim2);letter-spacing:.06em;margin-right:7px;">주31</b>특수관계자 거래</span><span style="font-family:var(--mono);font-size:11px;color:var(--dim);">매입 18.2조 ›</span></div>
-        <div data-row="apx-ju34" onclick="{{ onRow }}" title="보고기간후사건" style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 10px;border-top:1px dashed rgba(140,170,210,.10);cursor:pointer;" style-hover="background:rgba(140,190,230,.05)"><span style="font-size:12.5px;"><b style="font-family:var(--mono);font-size:9.5px;color:var(--dim2);letter-spacing:.06em;margin-right:7px;">주34</b>보고기간후사건</span><span style="font-family:var(--mono);font-size:11px;color:var(--gold);">자사주 6.07조 ›</span></div>
+        <div style="font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--dim2);margin:0 8px 8px;">APPENDIX · 별도 주석 — 클릭하면 딥다이브가 열려요</div>
+        {{ appendixList }}
       </div>
     </div>
 
@@ -466,6 +322,7 @@ a{color:var(--cyan);} a:hover{color:var(--mint);}
     </div>
   </div>
 
+  {{ srcPanel }}
   {{ runningChip }}
 </div>
 </x-dc>
@@ -475,7 +332,7 @@ a{color:var(--cyan);} a:hover{color:var(--mint);}
   &quot;rowH&quot;: { &quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 64, &quot;min&quot;: 52, &quot;max&quot;: 84, &quot;step&quot;: 2, &quot;unit&quot;: &quot;px&quot;, &quot;tsType&quot;: &quot;number&quot;, &quot;section&quot;: &quot;레이아웃&quot; }
 }">
 class Component extends DCLogic {
-  state = { pos: null, zoneY: null, W: 300, H: 5200, midW: 600, midH: 5200, midPos: null, active: 'overview', pin: null, exp: { sgna: false, nonop: false, ni: false, noncash: false, wc: false, inv: false, fin: false, bsa: false, bsl: false, bse: false } };
+  state = { pos: null, zoneY: null, W: 300, H: 5200, midW: 600, midH: 5200, midPos: null, active: 'overview', pin: null, src: null, srcToc: true, exp: { sgna: false, nonop: false, ni: false, noncash: false, wc: false, inv: false, fin: false, bsa: false, bsl: false, bse: false } };
 
   C = { mint:'#74EEC6', cyan:'#5CC7EA', gold:'#E9C46B', coral:'#EC8C6A', steel:'#7590B0', green:'#63d68e', text:'#eef4fb', dim:'#8fa1b6' };
 
@@ -491,29 +348,32 @@ class Component extends DCLogic {
   };
 
   // ===== 데이터 구동 (galaxy_<ticker>.json 주입) — 삼성 하드코딩 외부화 (Phase 1 D4-층2) =====
-  get KNOTS() { return this._G ? this._G.knots : []; }
+  get KNOTS() { return (this._G && this._G.knots) ? this._G.knots : []; }
   // SEGS = 본류 구간 위상·색 (구조적·범용). 3번째(굵기)는 uniform 모드에서 미사용 → 0
-  SEGS = [
-    ['k1','k2',0,'cyan'],
-    ['k2','k3',0,'mint'], ['k3','k4',0,'mint'], ['k4','k5',0,'mint'],
-    ['k5','k6',0,'mint'], ['k6','k6b',0,'mint'], ['k6b','k7',0,'mint'],
-    ['k7','k8',0,'mint'], ['k8','k9',0,'grad'], ['k9','k10',0,'cyan'],
-    ['k10','k10b',0,'cyan'], ['k10b','k11',0,'cyan'], ['k11','k12',0,'cyan'],
-    ['k12','k13',0,'cyan'], ['k13','k14',0,'cyan'], ['k14','k15',0,'cyan'],
-  ];
+  // SEGS = 본류 구간 위상·색 — KNOTS 순서에서 파생(V-041: 회사별 매듭 구조 수용, k3~k5 고정 제거).
+  get SEGS() {
+    const ks = this.KNOTS, out = [];
+    for (let i = 0; i < ks.length - 1; i++) {
+      const a = ks[i];
+      const col = a.kind === 'hub' ? 'grad' : (a.z === 'B' ? 'mint' : 'cyan');
+      out.push([a.id, ks[i + 1].id, 0, col]);
+    }
+    return out;
+  }
   get EQE() { return (this._G && this._G.panels && this._G.panels.E ? this._G.panels.E : []).map(r => ({ row: r.row, t: r.v, big: r.row === 'eq-begin' || r.row === 'eq-end', oci: r.row === 'eq-oci', neg: (r.v || '').startsWith('−') })); }
-  get ZONES() { return this._G ? this._G.strings.zones : {}; }
-  get EQSTORY() { return this._G ? this._G.eqstory : {}; }
+  get ZONES() { return (this._G && this._G.strings && this._G.strings.zones) ? this._G.strings.zones : {}; }
+  get EQSTORY() { return (this._G && this._G.eqstory) ? this._G.eqstory : {}; }
 
   RT = { k8:0, k9:1, k10:2, k10b:3, k11:4 };
-  get RTSTEPS() { return this._G ? this._G.rtsteps : []; }
+  get RTSTEPS() { return (this._G && this._G.rtsteps) ? this._G.rtsteps : []; }
 
   // ---------- lifecycle ----------
   _loadData() {
     const t = new URLSearchParams(location.search).get('ticker') || '005930';
-    fetch('data/galaxy_' + t + '.json')
+    this._ticker = t;  // 사업보고서 원문 팝업 지연로드용
+    fetch('data/galaxy_' + t + '.json', { cache: 'no-store' })
       .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-      .then(G => { this._G = G; this._dives = null; this.setState({ dataReady: true }); this.queueMeasure(); })
+      .then(G => { this._G = G; this._dives = null; this._r2d = null; this._ndv = null; this.setState({ dataReady: true }); this.queueMeasure(); })
       .catch(() => this.setState({ dataError: true }));
   }
   componentDidMount() {
@@ -524,7 +384,7 @@ class Component extends DCLogic {
     window.addEventListener('scroll', this._onScroll, { passive: true });
     window.addEventListener('resize', this._onResize);
     requestAnimationFrame(() => { this.measureNow(); this.attachRO(); });
-    this._onKey = (e) => { if (e.key === 'Escape') this.unpin(); };
+    this._onKey = (e) => { if (e.key === 'Escape') { if (this.state.src) this.closeSrc(); else this.unpin(); } };
     document.addEventListener('keydown', this._onKey);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => this.queueMeasure());
     setTimeout(() => this.queueMeasure(), 600);
@@ -651,10 +511,35 @@ class Component extends DCLogic {
     });
   }
 
-  onRow = (e) => {
-    const id = e.currentTarget.getAttribute('data-row');
-    this.pin(this.ROW2DIVE[id] || id);
-  };
+  _diveKey(row) {
+    // 행→dive 키: 하드코딩 ROW2DIVE 우선, 없으면 dives의 .row에서 파생(V-043: 회사별 신규 행 자동 수용).
+    const D0 = this.getDives();
+    if (this.ROW2DIVE[row]) {
+      const k = this.ROW2DIVE[row];
+      if (D0[k]) return k;
+      // 정적 요약행(cf-wc·eq-div·eq-buyback 등)이 이 회사에 해당 dive가 없으면 같은 존 요약 dive로 폴백 (V-049)
+      const FB = { eq: ['eq-other', 'eq-end'], cf: ['k11', 'k15'], is: ['k8'], bs: ['assets'] };
+      for (const cand of (FB[row.slice(0, 2)] || [])) if (D0[cand]) return cand;
+      return k;
+    }
+    if (!this._r2d) {
+      this._r2d = {}; const D = this.getDives(); for (const k in D) if (D[k] && D[k].row) this._r2d[D[k].row] = k;
+      // 서브행(grp)은 부모 행의 dive로 폴백 (V-049): ROW2DIVE는 삼성 subrow id만 하드코딩이라
+      // 셀트리온·현대차·LG 등 회사별 subrow id(bs-l-1·is-sgna-warr…)가 죽은 클릭이 됨 → grp→부모행 매핑으로 자동 수용.
+      const GP = { sgna: 'is-sgna', nonop: 'is-nonop', ni: 'is-netincome', opex: 'is-opex',
+                   noncash: 'cf-noncash', wc: 'cf-wc', inv: 'cf-inv', fin: 'cf-fin',
+                   bsa: 'bs-assets', bsl: 'bs-liab', bse: 'bs-equity' };
+      const P = (this._G && this._G.panels) || {};
+      for (const z in P) for (const r of (P[z] || [])) {
+        if (r.grp && !this._r2d[r.row]) {
+          const pr = GP[r.grp]; const pd = pr && (this._r2d[pr] || this.ROW2DIVE[pr]);
+          if (pd && D[pd]) this._r2d[r.row] = pd;   // 부모행 dive를 _r2d·ROW2DIVE 양쪽에서 해석(bse→bs-equity→eq-end 등)
+        }
+      }
+    }
+    return this._r2d[row] || row;
+  }
+  onRow = (e) => { this.pin(this._diveKey(e.currentTarget.getAttribute('data-row'))); };
 
   onKnot(id) { this.pin(id); }
 
@@ -665,6 +550,67 @@ class Component extends DCLogic {
     this.setState({ pin: key, exp });
   };
   unpin = () => { if (this.state.pin) this.setState({ pin: null }); };
+
+  // ===== 사업보고서 원문 팝업 (report_<t>.json 지연로드) =====
+  _STMT_DIVE = { bs: 'assets', is: 'k2', cis: 'totalcomp', cf: 'k11', eq: 'eq-end' };
+  // dive 키/행 → 초기 원문 뷰: APPENDIX(nX)→주석, new-dive→역원장 주석, 흐름 dive→재무제표(행 접두)
+  _srcForDive(key) {
+    const D = this.getDives(), d = D[key];
+    if (/^n\d/.test(key)) return { type: 'note', id: key.slice(1) };
+    const led = (this._G && this._G.meta && this._G.meta.routing_ledger) || {};
+    for (const nn in led) { const to = led[nn].to || ''; if (to === 'new-dive:' + key || to === 'appendix:' + key) return { type: 'note', id: nn }; }
+    const row = (d && d.row) || key;
+    if (row === 'is-oci' || row === 'is-totalcomp') return { type: 'stmt', id: 'cis' };
+    if (row.indexOf('bs-') === 0 || row.indexOf('pbs-') === 0) return { type: 'stmt', id: 'bs' };
+    if (row.indexOf('is-') === 0) return { type: 'stmt', id: 'is' };
+    if (row.indexOf('cf-') === 0) return { type: 'stmt', id: 'cf' };
+    if (row.indexOf('eq-') === 0) return { type: 'stmt', id: 'eq' };
+    return { type: 'stmt', id: 'bs' };
+  }
+  // 목차의 주석 클릭 → 원장(routing_ledger)으로 대응 딥다이브 동기 핀
+  _pinForNote(nn) {
+    const D = this.getDives();
+    if (D['n' + nn]) { this.pin('n' + nn); return; }  // 그 주석 자체의 APPENDIX 카드 우선(원장이 dive:cited여도 동기 — 버그 수정)
+    const nd = (this._G && this._G.meta && this._G.meta.note_dive) || {};  // 코어 dive로 매핑된 주석(주10→ppe·주27→k11 등)
+    if (nd[nn] && D[nd[nn]]) { this.pin(nd[nn]); return; }
+    const led = (this._G && this._G.meta && this._G.meta.routing_ledger) || {};
+    const ent = led[nn]; if (!ent) return;
+    const to = ent.to || '';
+    if (to.indexOf('appendix:') === 0 || to.indexOf('new-dive:') === 0) { const k = to.split(':')[1]; if (D[k]) this.pin(k); return; }
+    if (to.indexOf('row:') === 0) { const k = this._diveKey(to.slice(4)); if (D[k]) this.pin(k); return; }
+    if (to === 'dive:cited') {
+      const re = new RegExp('주\\s?' + String(nn).replace('.', '\\.') + '(?=\\D|$)');
+      for (const k in D) { if (re.test(JSON.stringify([D[k].what, D[k].why, D[k].lnote]))) { this.pin(k); return; } }
+    }
+  }
+  openSrc = (key) => {
+    const view = this._srcForDive(key);
+    // 매니페스트(report_index.json) 미로드 → 먼저 로드 후 재시도 (원문 없는 티커 fetch 404 방지)
+    if (!this._reportIdx) {
+      fetch('data/report_index.json', { cache: 'no-store' })
+        .then(r => r.ok ? r.json() : { tickers: [] })
+        .then(J => { this._reportIdx = new Set(J.tickers || []); this._afterIdx(view); })
+        .catch(() => { this._reportIdx = new Set(); this._afterIdx(view); });
+      return;
+    }
+    this._afterIdx(view);
+  };
+  _afterIdx = (view) => {
+    const t = this._ticker || '005930';
+    if (this._report) { this.setState({ src: view }); return; }
+    if (!this._reportIdx.has(t)) { this._reportErr = true; this.setState({ src: view }); return; }  // 지원 티커 아님 → 준비중(fetch 안 함)
+    fetch('data/report_' + t + '.json', { cache: 'no-store' })
+      .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(J => { this._report = J; this.setState({ src: view }); })
+      .catch(() => { this._reportErr = true; this.setState({ src: view }); });
+  };
+  srcGoto = (view) => {
+    this.setState({ src: view });
+    if (view.type === 'note') this._pinForNote(view.id);
+    else { const k = this._STMT_DIVE[view.id]; if (k && this.getDives()[k]) this.pin(k); }
+  };
+  closeSrc = () => { if (this.state.src) this.setState({ src: null }); };
+  toggleSrcToc = () => this.setState(s => ({ srcToc: !s.srcToc }));
   onToggle = (e) => {
     e.stopPropagation();
     const g = e.currentTarget.getAttribute('data-g');
@@ -682,7 +628,7 @@ class Component extends DCLogic {
   };
 
   // ---------- helpers ----------
-  rgba(hex, a) { const n = parseInt(hex.slice(1), 16); return `rgba(${(n >> 16) & 255},${(n >> 8) & 255},${n & 255},${a})`; }
+  rgba(hex, a) { if (!hex || hex[0] !== '#') return 'transparent'; const n = parseInt(hex.slice(1), 16); return `rgba(${(n >> 16) & 255},${(n >> 8) & 255},${n & 255},${a})`; }
   colOf(name) { return this.C[name] || name; }
 
   rich(text, color) {
@@ -748,7 +694,7 @@ class Component extends DCLogic {
     };
 
     const chip = (key, x, y, lines, color, fs = 10) => {
-      const wmax = Math.max(...lines.map(t => t.length));
+      lines = lines.filter(Boolean); const wmax = Math.max(1, ...lines.map(t => t.length));
       const cw = wmax * fs * .96 + 14, chh = lines.length * 13 + 8;
       let rx = Math.max(2, Math.min(W - cw - 2, x - cw / 2));
       return h('g', { key },
@@ -774,7 +720,8 @@ class Component extends DCLogic {
     els.push(h('line', { key: 'rail', x1: railX, x2: railX, y1: K.k1.y, y2: K.k15.y, stroke: 'rgba(117,144,176,.32)', strokeWidth: 1 }));
     els.push(h('text', { key: 'railt', x: railX - 4, y: K.k1.y - 44, fontSize: 9, fill: 'var(--dim)', fontFamily: mono }, '작년 통장'));
     els.push(h('text', { key: 'railb', x: K.k15.x, y: K.k15.y + CF.reservoirs.rEnd + 24, textAnchor: 'middle', fontSize: 9, fill: 'var(--dim)', fontFamily: mono }, '올해 통장'));
-    els.push(chip('raileq', K.k15.x, K.k15.y + CF.reservoirs.rEnd + 44, ['53.71 + 4.15 = 57.86'], C.cyan));
+    const _cb = K.k1.raw_mn / 1e6, _ce = K.k15.raw_mn / 1e6, _cd = _ce - _cb;
+    els.push(chip('raileq', K.k15.x, K.k15.y + CF.reservoirs.rEnd + 44, [`${_cb.toFixed(1)} ${_cd >= 0 ? '+' : '−'} ${Math.abs(_cd).toFixed(1)} = ${_ce.toFixed(1)}`], C.cyan));
     for (const k of this.KNOTS) {
       const p = K[k.id], act = focus === k.id;
       if (k.kind === 'out') {
@@ -790,12 +737,14 @@ class Component extends DCLogic {
     }
 
     // depreciation return — 매출원가·판관비 유출 가지에서 분기해 ⑨로 되돌아오는 점선 레일
-    const p3 = K.k3, p5 = K.k5, p9 = K.k9;
-    const depOn = focus === 'k9';
-    const depX = Math.max(44, p3.x + CF.tributary.outDx); // 유출 가지 끝(⊖ 글리프)의 x — k3·k5 공통
-    els.push(h('path', { key: 'depg', d: ortho([[depX, p3.y + CF.tributary.outDy + 9], [depX, p9.y], [p9.x - 9, p9.y]], 14), stroke: C.cyan, strokeWidth: 1.8, strokeDasharray: '4 4', fill: 'none', opacity: depOn ? .9 : .55 }));
-    els.push(h('circle', { key: 'depj', cx: depX, cy: p5.y + CF.tributary.outDy + 9, r: 2.5, fill: C.cyan, opacity: .8 }));
-    els.push(chip('depc', p9.x - 60, p9.y - 34, ['현금은 안 나간 비용', '도로 더해요 +43.6'], C.cyan, 9.5));
+    const _outIS = this.KNOTS.filter(k => k.kind === 'out' && k.z === 'B'), p9 = K.k9;
+    if (_outIS.length && p9) {
+      const p3 = K[_outIS[0].id], depOn = focus === 'k9';
+      const depX = Math.max(44, p3.x + CF.tributary.outDx); // 유출 가지 끝(⊖ 글리프)의 x
+      els.push(h('path', { key: 'depg', d: ortho([[depX, p3.y + CF.tributary.outDy + 9], [depX, p9.y], [p9.x - 9, p9.y]], 14), stroke: C.cyan, strokeWidth: 1.8, strokeDasharray: '4 4', fill: 'none', opacity: depOn ? .9 : .55 }));
+      els.push(h('circle', { key: 'depj', cx: depX, cy: p3.y + CF.tributary.outDy + 9, r: 2.5, fill: C.cyan, opacity: .8 }));
+      els.push(chip('depc', p9.x - 60, p9.y - 34, ['현금은 안 나간 비용', '도로 더해요 ' + p9.amt], C.cyan, 9.5));
+    }
 
     // gold equity thread
     const gx = W - 16, p8 = K.k8;
@@ -832,7 +781,7 @@ class Component extends DCLogic {
     for (const k of this.KNOTS) {
       const p = K[k.id];
       if (k.kind === 'out') {
-        const v = { k3: 202.2, k5: 87.8, k7: 4.3, k10: 9.6, k10b: 2.7, k12: 68.5, k13: 13.5 }[k.id] || 10;
+        const v = Math.abs((k.raw_mn || 0) / 1e6) || 10;
         const bw = CF.ribbon.uniform ? CF.ribbon.branchW : Math.max(4, wf(v) * .7);
         const ex = Math.max(44, p.x + CF.tributary.outDx), ey = p.y + CF.tributary.outDy;
         const d = `M ${p.x - 4} ${p.y + 4} C ${p.x - 30} ${p.y + 18}, ${ex + 20} ${ey - 22}, ${ex + 4} ${ey - 4}`;
@@ -840,10 +789,10 @@ class Component extends DCLogic {
         els.push(h('path', { key: 'obc' + k.id, d, stroke: C.coral, strokeWidth: bw, fill: 'none', opacity: .68, strokeLinecap: 'round' }));
         els.push(h('circle', { key: 'og' + k.id, cx: ex, cy: ey, r: 8, fill: '#160e0d', stroke: C.coral, strokeWidth: 1.4 }));
         els.push(h('text', { key: 'ogt' + k.id, x: ex, y: ey + 3.8, textAnchor: 'middle', fontSize: 11, fontWeight: 700, fill: C.coral, fontFamily: mono }, '−'));
-        els.push(chip('oc' + k.id, ex + 6, ey + 20, [k.dest], C.coral, 9.5));
+        if (k.dest) els.push(chip('oc' + k.id, ex + 6, ey + 20, [k.dest], C.coral, 9.5));
       }
       if (k.kind === 'in') {
-        const v = { k6b: 5.9, k14: 0.8 }[k.id] || 4;
+        const v = Math.abs((k.raw_mn || 0) / 1e6) || 4;
         const bw = CF.ribbon.uniform ? CF.ribbon.branchW : Math.max(3.5, wf(v) * .7);
         const c = k.col === 'mint' ? C.mint : C.cyan;
         const sx = Math.min(W - 40, p.x + CF.tributary.inDx), sy = p.y + CF.tributary.inDy;
@@ -858,7 +807,7 @@ class Component extends DCLogic {
 
     // particles
     if (this.props.particles !== false) {
-      const seq = ['k2','k3','k4','k5','k6','k7','k8','k9','k10','k10b','k11','k12','k13','k14'];
+      const seq = this.KNOTS.map(k => k.id).filter(id => id !== 'k1' && id !== 'k15');
       let d = `M ${K.k2.x} ${K.k2.y}`;
       for (let i = 1; i < seq.length; i++) {
         const a = K[seq[i - 1]], b = K[seq[i]];
@@ -893,7 +842,8 @@ class Component extends DCLogic {
     };
     res(K.k1, CF.reservoirs.rBegin);
     res(K.k15, CF.reservoirs.rEnd);
-    els.push(chip('delta', K.k15.x, K.k15.y - CF.reservoirs.rEnd - 26, ['+4.15조 늘었어요'], C.gold, 10));
+    const _dd = (K.k15.raw_mn - K.k1.raw_mn) / 1e6;
+    els.push(chip('delta', K.k15.x, K.k15.y - CF.reservoirs.rEnd - 26, [(_dd >= 0 ? '+' : '−') + Math.abs(_dd).toFixed(1) + '조 ' + (_dd >= 0 ? '늘었어요' : '줄었어요')], C.gold, 10));
 
     // knots
     for (const k of this.KNOTS) {
@@ -973,7 +923,7 @@ class Component extends DCLogic {
       h('div', { style: { fontSize: '26px', fontWeight: 800, letterSpacing: '-.01em' } }, v.name),
       h('div', { style: { fontFamily: 'var(--mono)', fontSize: '46px', fontWeight: 700, color: c, margin: '8px 0 22px', textShadow: `0 0 26px ${this.rgba(c, .4)}` } }, v.amt),
       ...this.paras(v.story, c),
-      h('button', { onClick: () => this.pin(this.ROW2DIVE[row] || row), style: { marginTop: '8px', fontFamily: 'var(--sans)', fontSize: '14px', color: c, background: this.rgba(c, .07), border: `1px solid ${this.rgba(c, .4)}`, borderRadius: '7px', padding: '9px 16px', cursor: 'pointer' } }, '자세히 보기 ▸'));
+      h('button', { onClick: () => this.pin(this._diveKey(row)), style: { marginTop: '8px', fontFamily: 'var(--sans)', fontSize: '14px', color: c, background: this.rgba(c, .07), border: `1px solid ${this.rgba(c, .4)}`, borderRadius: '7px', padding: '9px 16px', cursor: 'pointer' } }, '자세히 보기 ▸'));
   }
 
   epilogueCard() {
@@ -1028,16 +978,16 @@ class Component extends DCLogic {
     ROW2DIVE = {
     'pbs-cash': 'k1', 'is-revenue': 'k2', 'is-cogs': 'k3', 'is-grossprofit': 'k4',
     'is-sgna': 'k5', 'is-sgna-rnd': 'k5', 'is-sgna-fee': 'k5', 'is-sgna-sal': 'k5', 'is-sgna-promo': 'k5', 'is-sgna-ad': 'k5', 'is-sgna-svc': 'k5', 'is-sgna-ship': 'k5', 'is-sgna-etc': 'k5',
-    'is-opincome': 'k6', 'is-nonop': 'k6b', 'is-nonop-fininc': 'k6b', 'is-nonop-finexp': 'k6b', 'is-nonop-othinc': 'k6b', 'is-nonop-othexp': 'k6b', 'is-nonop-eqm': 'k6b', 'is-pretax': 'k6b',
+    'is-opincome': 'k6', 'is-nonop': 'k6b', 'is-nonop-fininc': 'n24', 'is-nonop-finexp': 'n24', 'is-nonop-othinc': 'n23', 'is-nonop-othexp': 'n23', 'is-nonop-eqm': 'n9', 'is-pretax': 'k6b',
     'is-tax': 'k7', 'is-netincome': 'k8', 'is-ni-ctrl': 'k8', 'is-ni-nci': 'k8', 'is-oci': 'oci', 'is-totalcomp': 'totalcomp',
     'cf-netincome': 'k8', 'cf-noncash': 'k9', 'cf-noncash-dep': 'k9', 'cf-noncash-etc': 'k9',
     'cf-wc': 'k10', 'cf-wc-ar': 'k10', 'cf-wc-inv': 'k10', 'cf-wc-etc': 'k10', 'cf-paid': 'k10b', 'cf-op': 'k11',
     'cf-inv': 'k12', 'cf-inv-capex': 'k12', 'cf-inv-etc': 'k12', 'cf-fin': 'k13', 'cf-fin-debt': 'k13', 'cf-fin-div': 'eq-div', 'cf-fin-tsy': 'eq-buyback',
     'cf-fx': 'k14', 'cf-netchange': 'k15', 'cf-begincash': 'k1', 'cf-endcash': 'k15',
     'bs-cash': 'k15', 'bs-ppe': 'ppe', 'bs-assets': 'assets', 'bs-liab': 'liab', 'bs-equity': 'eq-end',
-    'bs-ca': 'assets', 'bs-cash-d': 'k15', 'bs-sfin': 'n4', 'bs-ar': 'k10', 'bs-inv': 'k10', 'bs-oca': 'assets', 'bs-nca': 'assets', 'bs-ig': 'k12', 'bs-assoc': 'k6b', 'bs-fvoci': 'oci', 'bs-dta': 'k7', 'bs-dba': 'n14', 'bs-onca': 'assets',
-    'bs-cl': 'liab', 'bs-payexp': 'liab', 'bs-pay': 'liab', 'bs-stb': 'k13', 'bs-ap': 'k10', 'bs-prov': 'n15', 'bs-taxlia': 'k7', 'bs-ocl': 'liab', 'bs-ncl': 'liab', 'bs-ltb': 'k13', 'bs-ltpay': 'liab', 'bs-ltprov': 'n15', 'bs-ndbl': 'n14', 'bs-dtl': 'k7', 'bs-bond': 'k13', 'bs-oncl': 'liab',
-    'bs-ctrl': 'eq-end', 'bs-re': 'eq-end', 'bs-oe': 'oci', 'bs-sp': 'n18', 'bs-capital': 'n18', 'bs-nci': 'k8',
+    'bs-ca': 'assets', 'bs-cash-d': 'k15', 'bs-sfin': 'n4', 'bs-ar': 'n7', 'bs-inv': 'n8', 'bs-oca': 'assets', 'bs-nca': 'assets', 'bs-ig': 'n11', 'bs-assoc': 'n9', 'bs-fvoci': 'n6', 'bs-dta': 'k7', 'bs-dba': 'n14', 'bs-onca': 'assets',
+    'bs-cl': 'liab', 'bs-payexp': 'liab', 'bs-pay': 'liab', 'bs-stb': 'n12', 'bs-ap': 'k10', 'bs-prov': 'n15', 'bs-taxlia': 'k7', 'bs-ocl': 'n17', 'bs-ncl': 'liab', 'bs-ltb': 'n12', 'bs-ltpay': 'liab', 'bs-ltprov': 'n15', 'bs-ndbl': 'n14', 'bs-dtl': 'k7', 'bs-bond': 'n13', 'bs-oncl': 'liab',
+    'bs-ctrl': 'eq-end', 'bs-re': 'n19', 'bs-oe': 'n20', 'bs-sp': 'n18', 'bs-capital': 'n18', 'bs-nci': 'n32',
     'apx-ju1': 'n1', 'apx-ju2': 'n2', 'apx-ju3': 'n3', 'apx-ju4': 'n4', 'apx-ju5': 'n5', 'apx-ju14': 'n14', 'apx-ju15': 'n15', 'apx-ju16': 'n16', 'apx-ju18': 'n18', 'apx-ju26': 'n26', 'apx-ju28': 'n28', 'apx-ju29': 'n29', 'apx-ju31': 'n31', 'apx-ju34': 'n34',
     'eq-begin': 'eq-begin', 'eq-netincome': 'k8', 'eq-oci': 'oci', 'eq-div': 'eq-div', 'eq-buyback': 'eq-buyback', 'eq-other': 'eq-other', 'eq-end': 'eq-end',
   };
@@ -1058,6 +1008,11 @@ class Component extends DCLogic {
     n15: ['apx-ju15', 'bs-prov', 'bs-ltprov'], n16: ['apx-ju16', 'bs-liab'], n18: ['apx-ju18', 'bs-capital', 'bs-sp', 'bs-re'],
     n26: ['apx-ju26', 'is-ni-ctrl', 'eq-buyback'], n28: ['apx-ju28', 'is-nonop', 'cf-fx'], n29: ['apx-ju29', 'bs-fvoci', 'eq-oci'],
     n31: ['apx-ju31', 'is-revenue'], n34: ['apx-ju34', 'eq-buyback', 'cf-fin-tsy'],
+    n6: ['bs-fvoci'], n7: ['bs-ar', 'cf-wc-ar'], n8: ['bs-inv', 'cf-wc-inv'], n9: ['bs-assoc', 'is-nonop-eqm'],
+    n11: ['bs-ig', 'cf-noncash-etc'], n12: ['bs-stb', 'bs-ltb'], n13: ['bs-bond'], n17: ['bs-ocl', 'is-revenue'],
+    n19: ['bs-re', 'eq-netincome'], n20: ['bs-oe', 'is-oci'], n21: ['is-cogs', 'is-sgna'],
+    n23: ['is-nonop-othinc', 'is-nonop-othexp'], n24: ['is-nonop-fininc', 'is-nonop-finexp'],
+    n32: ['bs-nci', 'is-ni-nci'], n33: ['bs-ig', 'is-netincome'],
   };
   GROUP_OF = {
     'is-sgna-rnd': 'sgna', 'cf-noncash-dep': 'noncash', 'cf-wc-ar': 'wc', 'cf-wc-inv': 'wc',
@@ -1069,7 +1024,7 @@ class Component extends DCLogic {
   PIN2KNOT = { oci: null, ppe: null, assets: null, liab: null };
 
   // ===== Step 2 — 차트 =====
-  fmt1(v, plus) { const r = Math.round(v * 10) / 10; return (plus && r > 0 ? '+' : '') + r; }
+  fmt1(v, plus) { const r = Math.round((parseFloat(v)||0) * 10) / 10; return (plus && r > 0 ? '+' : '') + r; }
 
   vLine({ key, color, valley = -1, zero = false, valleyLabel }) {
     const h = React.createElement, vals = this.S[key]; color = this.colOf(color);
@@ -1251,8 +1206,10 @@ class Component extends DCLogic {
     kids.push(h('div', { key: 'nm', style: { fontSize: '25px', fontWeight: 800 } }, d.name));
     kids.push(h('div', { key: 'am', style: { fontFamily: 'var(--mono)', fontSize: '42px', fontWeight: 700, color: c, margin: '6px 0 2px', textShadow: `0 0 24px ${this.rgba(c, .4)}` } }, d.amt));
     if (d.raw) kids.push(h('div', { key: 'rw', style: { fontFamily: 'var(--mono)', fontSize: '11.5px', color: 'var(--dim2)' } }, '원본 ' + d.raw + ' 백만원'));
+    kids.push(h('button', { key: 'src', onClick: () => this.openSrc(key), title: '이 카드가 유래한 사업보고서 원문을 왼쪽에 띄워요', style: { marginTop: '12px', fontFamily: 'var(--sans)', fontSize: '12.5px', fontWeight: 600, color: 'var(--cyan)', background: this.rgba(this.C.cyan, .08), border: `1px solid ${this.rgba(this.C.cyan, .4)}`, borderRadius: '7px', padding: '8px 14px', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '7px' } }, '⧉ 사업보고서 원문 보기'));
     kids.push(this.subheadEl('①', '무엇인가요', '정의 · 의미', c));
-    d.what.forEach((t, i) => kids.push(h('p', { key: 'w' + i, style: { margin: '0 0 13px', fontSize: '16px', lineHeight: 1.85 } }, ...this.rich(t, c))));
+    (Array.isArray(d.what) ? d.what : [d.what].filter(Boolean)).forEach((t, i) => kids.push(h('p', { key: 'w' + i, style: { margin: '0 0 13px', fontSize: '16px', lineHeight: 1.85 } }, ...this.rich(t, c))));
+    if (d.links && d.links.length) {
     kids.push(this.subheadEl('②', '어디와 이어지나요', '연결 지도 — 줄에 마우스를 올리면 가운데 행이 빛나요', c));
     kids.push(h('div', { key: 'lk', style: { display: 'grid', gap: '7px' } }, d.links.map((l, i) => {
       const [tn, tc] = this.TBL[l.t];
@@ -1267,9 +1224,10 @@ class Component extends DCLogic {
         h('span', { style: { fontSize: '13.5px', flex: 1 } }, l.txt),
         l.a ? h('span', { style: { fontFamily: 'var(--mono)', fontSize: '12.5px', color: tc } }, l.a) : null);
     })));
+    }
     if (d.lnote) kids.push(h('p', { key: 'ln', style: { margin: '10px 0 0', fontSize: '13.5px', color: 'var(--dim)', lineHeight: 1.7 } }, ...this.rich(d.lnote, c)));
     kids.push(this.subheadEl('③', '왜 그런가요', d.why.sub || '규정 · 시각화', c));
-    (d.why.body || []).forEach((t, i) => kids.push(h('p', { key: 'y' + i, style: { margin: '0 0 13px', fontSize: '15.5px', lineHeight: 1.85 } }, ...this.rich(t, c))));
+    (Array.isArray(d.why.body) ? d.why.body : [d.why.body].filter(Boolean)).forEach((t, i) => kids.push(h('p', { key: 'y' + i, style: { margin: '0 0 13px', fontSize: '15.5px', lineHeight: 1.85 } }, ...this.rich(t, c))));
     if (d.why.viz) kids.push(h('div', { key: 'vz', style: { margin: '14px 0 8px', border: '1px solid var(--line)', borderRadius: '10px', padding: '16px' } }, this._viz(d.why.viz, d.why.viz_data)));
     if (d.why.cap) kids.push(h('p', { key: 'cp', style: { margin: '8px 0 0', fontSize: '13px', color: 'var(--dim)' } }, '이 그림이 말하는 것 — ' + d.why.cap));
     kids.push(this.subheadEl('④', '5년간 어땠나요', 'FY2021 – FY2025 증감분석', c));
@@ -1286,6 +1244,81 @@ class Component extends DCLogic {
     }
     if (d.row) kids.push(h('button', { key: 'bk', onClick: () => this.scrollToRow(d.row), style: { marginTop: '24px', fontFamily: 'var(--sans)', fontSize: '13px', color: c, background: this.rgba(c, .07), border: `1px solid ${this.rgba(c, .35)}`, borderRadius: '7px', padding: '8px 14px', cursor: 'pointer' } }, '은하수에서 이 항목 보기 ↥'));
     return h('div', { key: 'dv' + key, style: { animation: 'omfade var(--fade) ease both', paddingBottom: '30px' } }, kids);
+  }
+
+  // ===== 사업보고서 원문 팝업 (좌측 50% · 목차+원문) =====
+  // 계정명 → dive 키 색인 (원문 표 계정행 클릭용). 괄호·공백 제거 정규화, 노트카드(nX) 우선(비지배지분 등 동명 행 구체 채택).
+  _nameDive() {
+    if (this._ndv) return this._ndv;
+    const D = this.getDives(), m = {};
+    const norm = (s) => String(s || '').split('(')[0].replace(/[\s·:]/g, '');
+    const P = (this._G && this._G.panels) || {};
+    for (const z in P) for (const r of (P[z] || [])) {
+      const base = norm(r.name); if (base.length < 2) continue;
+      const k = this._diveKey(r.row); if (!D[k]) continue;
+      if (!m[base] || (/^n\d/.test(k) && !/^n\d/.test(m[base]))) m[base] = k;
+    }
+    this._ndv = m; return m;
+  }
+  _srcTable(rows, key) {
+    const h = React.createElement;
+    const isNum = (s) => /^[\(\-−]?[\d.,]+\%?\)?$/.test(s);
+    const dmap = this._nameDive();
+    const norm = (s) => String(s || '').split('(')[0].replace(/[\s·:]/g, '');
+    return h('table', { key: 't' + key, style: { borderCollapse: 'collapse', margin: '11px 0', fontSize: '12px', fontFamily: 'var(--mono)', width: 'auto', maxWidth: '100%' } },
+      h('tbody', null, rows.map((cells, ri) => h('tr', { key: ri },
+        cells.map((cc, ci) => {
+          const num = isNum(cc);
+          const dk = (ri > 0 && ci === 0 && !num) ? dmap[norm(cc)] : null;   // 계정명 행 → 딥다이브 동기
+          const style = { border: '1px solid var(--line)', padding: '4px 9px', textAlign: num ? 'right' : 'left', color: dk ? 'var(--cyan)' : (ri === 0 ? 'var(--text)' : 'var(--dim)'), fontWeight: ri === 0 ? 600 : 400, background: ri === 0 ? 'rgba(255,255,255,.03)' : 'transparent', verticalAlign: 'top', whiteSpace: num ? 'nowrap' : 'normal', wordBreak: 'keep-all', overflowWrap: 'anywhere', minWidth: num ? 'auto' : '84px', maxWidth: num ? 'none' : '320px', lineHeight: 1.5, cursor: dk ? 'pointer' : 'default', textDecoration: dk ? 'underline dotted' : 'none', textUnderlineOffset: '3px' };
+          return h(ri === 0 ? 'th' : 'td', { key: ci, style, onClick: dk ? () => this.pin(dk) : undefined, title: dk ? '이 계정의 딥다이브로 이동' : undefined }, cc);
+        })))));
+  }
+  _srcBlocks(blocks) {
+    const h = React.createElement, out = [];
+    (blocks || []).forEach((b, i) => {
+      if (b.t === 'table') out.push(this._srcTable(b.rows || [], i));
+      else if (b.v) out.push(h('p', { key: 'p' + i, style: { margin: '9px 0', fontSize: '13px', lineHeight: 1.7, color: 'var(--dim)' } }, b.v));
+    });
+    return out.length ? out : [h('div', { key: 'no', style: { padding: '30px 4px', color: 'var(--dim)' } }, '(원문을 찾지 못했어요)')];
+  }
+  buildSrcPanel() {
+    if (!this.state.src) return null;
+    const h = React.createElement, view = this.state.src, R = this._report;
+    const tocOpen = this.state.srcToc !== false;
+    let title = '사업보고서 원문', bodyKids;
+    if (!R) {
+      bodyKids = h('div', { style: { padding: '48px 30px', color: 'var(--dim)', fontSize: '15px', lineHeight: 1.85 } },
+        this._reportErr ? '이 기업의 사업보고서 원문 데이터는 아직 준비 중이에요.\n(현재 삼성전자부터 지원해요.)' : '원문을 불러오는 중이에요…');
+    } else {
+      const item = (view.type === 'stmt' ? R.statements[view.id] : R.notes[view.id]) || {};
+      title = (view.type === 'stmt' ? (item.title || '재무제표') : ('주' + view.id + ' ' + (item.title || ''))) + ' · 원문';
+      bodyKids = this._srcBlocks(item.blocks);
+    }
+    // 목차(슬림)
+    const tocEl = () => {
+      if (!R) return null;
+      const head = (t) => h('div', { key: 'h' + t, style: { fontFamily: 'var(--mono)', fontSize: '9.5px', letterSpacing: '.14em', color: 'var(--dim2)', padding: '10px 8px 4px' } }, t);
+      const item = (type, id, label, active) => h('div', { key: type + id, onClick: () => this.srcGoto({ type, id }), title: label, style: { padding: '4px 8px', fontSize: '11px', lineHeight: 1.3, cursor: 'pointer', color: active ? 'var(--cyan)' : 'var(--dim)', background: active ? this.rgba(this.C.cyan, .1) : 'transparent', borderLeft: '2px solid ' + (active ? 'var(--cyan)' : 'transparent'), whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' } }, label);
+      const rows = [head('재무제표')];
+      ['bs', 'is', 'cis', 'eq', 'cf'].forEach(k => { if (R.statements[k]) rows.push(item('stmt', k, R.statements[k].title, view.type === 'stmt' && view.id === k)); });
+      rows.push(head('주석'));
+      for (const nn in R.notes) rows.push(item('note', nn, '주' + nn + ' ' + R.notes[nn].title, view.type === 'note' && view.id === nn));
+      return h('div', { style: { width: '138px', flexShrink: 0, borderRight: '1px solid var(--line)', overflowY: 'auto', padding: '4px 0 30px' } }, rows);
+    };
+    return h('div', { key: 'srcp', style: { position: 'fixed', top: 0, left: 0, width: '50%', height: '100vh', zIndex: 5, background: 'rgba(8,11,20,.94)', backdropFilter: 'blur(10px)', borderRight: '1px solid var(--line)', display: 'flex', flexDirection: 'column', animation: 'omfade var(--fade) ease both' } },
+      // 헤더
+      h('div', { key: 'hd', style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px', padding: '11px 18px', borderBottom: '1px solid var(--line)', flexShrink: 0 } },
+        h('div', { style: { display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0 } },
+          h('span', { style: { fontFamily: 'var(--mono)', fontSize: '10px', letterSpacing: '.18em', color: 'var(--gold)', flexShrink: 0 } }, '사업보고서 원문'),
+          h('span', { style: { fontSize: '13.5px', fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' } }, title)),
+        h('div', { style: { display: 'flex', gap: '8px', flexShrink: 0 } },
+          h('button', { onClick: this.toggleSrcToc, title: '목차 접기/펼치기', style: { fontFamily: 'var(--sans)', fontSize: '12px', color: 'var(--dim)', background: 'rgba(255,255,255,.04)', border: '1px solid var(--line)', borderRadius: '6px', padding: '5px 9px', cursor: 'pointer' } }, tocOpen ? '◂ 목차' : '▸ 목차'),
+          h('button', { onClick: this.closeSrc, style: { fontFamily: 'var(--sans)', fontSize: '12.5px', color: 'var(--text)', background: 'rgba(255,255,255,.04)', border: '1px solid var(--line)', borderRadius: '6px', padding: '5px 11px', cursor: 'pointer' } }, '✕ 닫기 ', h('span', { style: { color: 'var(--dim2)', fontSize: '11px' } }, 'Esc')))),
+      // 본문 (목차 + 원문)
+      h('div', { key: 'bd', style: { display: 'flex', flex: 1, minHeight: 0 } },
+        tocOpen ? tocEl() : null,
+        h('div', { style: { flex: 1, overflow: 'auto', padding: '10px 26px 60px', minWidth: 0 } }, bodyKids)));
   }
 
   buildMidOverlay() {
@@ -1310,16 +1343,108 @@ class Component extends DCLogic {
     return h('svg', { width: W, height: H, viewBox: `0 0 ${W} ${H}`, style: { position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2, overflow: 'visible' } }, els);
   }
 
+  // 그룹 서브행의 '기본 폴백 dive'(전용 카드 없이 부모/컨테이너로 가는 행) — 이와 다르면 전용 딥다이브 있음.
+  GRP_FALLBACK = { bsa: 'assets', bsl: 'liab', bse: 'eq-end', sgna: 'k5', nonop: 'k6b', ni: 'k8',
+                   noncash: 'k9', wc: 'k10', inv: 'k12', fin: 'k13', opex: 'k5' };
+  buildSub(g) {
+    // 펼침 서브행을 panels JSON(grp 필드)에서 렌더 — D4-층1 마감(서브행 하드코딩 제거).
+    const h = React.createElement;
+    const P = (this._G && this._G.panels) || {};
+    const D = this.getDives();
+    const rows = [];
+    for (const z in P) for (const r of (P[z] || [])) if (r.grp === g) rows.push(r);
+    const isBS = g === 'bsa' || g === 'bsl' || g === 'bse';
+    return h('div', { key: 'sub-' + g }, rows.map((r) => {
+      const sub = (r.name || '').indexOf('(계)') >= 0;
+      const vc = r.color ? this.colOf(r.color) : 'var(--dim)';
+      const dk = this._diveKey(r.row);
+      const hasDive = !!(D[dk] && !sub && dk !== this.GRP_FALLBACK[g]);   // 전용 딥다이브 있는 행만 표시
+      return h('div', { key: r.row, 'data-row': r.row, onClick: this.onRow,
+        title: (r.raw_mn != null ? r.raw_mn.toLocaleString() + ' 백만원' : (r.name || '')),
+        style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          height: isBS ? (sub ? '34px' : '32px') : '38px',
+          padding: (isBS && sub) ? '0 16px 0 32px' : '0 16px 0 48px',
+          borderTop: '1px dashed rgba(140,170,210,' + (sub ? '.12' : '.08') + ')', cursor: 'pointer',
+          fontSize: isBS ? '12.5px' : '13px', color: 'var(--dim)', fontWeight: sub ? 600 : 400 } },
+        h('span', { style: hasDive ? { textDecoration: 'underline dotted', textDecorationColor: 'rgba(130,160,200,.45)', textUnderlineOffset: '3px' } : null }, r.name),
+        h('span', { style: { fontFamily: 'var(--mono)', color: vc } }, r.v));
+    }));
+  }
+
+  buildPanelB() {
+    // 패널 B 헤드라인을 panels.B(grp 없는 행)에서 데이터 구동 렌더 — 회사별 손익 구조 차이 흡수(V-040:
+    // 플랫폼=영업비용 단일, 제조=원가/총이익/판관비). 색·강조·매듭번호는 row-id 규칙으로 파생해
+    // 골든 정적 렌더와 동일, 신규 행(is-opex 등)만 데이터 색.
+    const h = React.createElement;
+    const P = (this._G && this._G.panels) || {};
+    const B = P.B || [];
+    const knots = (this._G && this._G.knots) || [];
+    const numOf = (row) => { const k = knots.find((x) => x.row === row); return k ? k.num : '—'; };
+    const VCOL = { 'is-revenue': 'mint', 'is-cogs': 'coral', 'is-grossprofit': 'mint', 'is-sgna': 'coral', 'is-opex': 'coral', 'is-opincome': 'mint', 'is-nonop': 'mint', 'is-pretax': 'mint', 'is-tax': 'coral', 'is-netincome': 'mint', 'is-oci': 'gold', 'is-totalcomp': 'mint' };
+    const EMPH = { 'is-grossprofit': 1, 'is-opincome': 1, 'is-pretax': 1, 'is-totalcomp': 1 };
+    const CARET = { 'is-sgna': 'sgna', 'is-opex': 'opex', 'is-nonop': 'nonop', 'is-netincome': 'ni' };
+    const exp = this.state.exp;
+    const head = B.filter((r) => !r.grp);
+    const out = [];
+    head.forEach((r, i) => {
+      const em = !!EMPH[r.row], isNI = r.row === 'is-netincome';
+      const cg = CARET[r.row]; const hasSub = cg && B.some((x) => x.grp === cg);
+      const vc = this.colOf(VCOL[r.row] || r.color || 'mint');
+      out.push(h('div', { key: r.row, 'data-row': r.row, onClick: this.onRow,
+        title: (r.raw_mn != null ? r.raw_mn.toLocaleString() + ' 백만원' : r.name),
+        style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          height: 'var(--row-h)', padding: '0 16px', cursor: 'pointer',
+          borderTop: i === 0 ? 'none' : (isNI ? '1px solid rgba(116,238,198,.35)' : '1px solid var(--line)'),
+          background: isNI ? 'rgba(116,238,198,.07)' : (em ? 'rgba(116,238,198,.045)' : 'transparent'),
+          fontWeight: (em || isNI) ? 700 : 400 } },
+        h('div', { style: { display: 'flex', alignItems: 'center', gap: '10px' } },
+          h('span', { style: { fontFamily: 'var(--mono)', fontSize: '10px', color: isNI ? 'var(--mint)' : 'var(--dim2)', letterSpacing: '.08em' } }, numOf(r.row)),
+          h('span', null, r.name),
+          hasSub ? h('span', { 'data-g': cg, onClick: this.onToggle, style: { width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid var(--line)', borderRadius: '4px', fontSize: '9px', color: 'var(--dim)', cursor: 'pointer', flexShrink: 0 } }, exp[cg] ? '▾' : '▸') : null),
+        h('span', { style: { fontFamily: 'var(--mono)', fontSize: isNI ? '17px' : (em ? '16.5px' : '15px'), fontWeight: (em || isNI) ? 700 : 600, color: vc, textShadow: isNI ? '0 0 12px rgba(116,238,198,.5)' : 'none' } }, (r.v == null || r.v === '') ? '—' : r.v)));
+      if (hasSub && exp[cg]) out.push(this.buildSub(cg));
+    });
+    return h('div', { key: 'panelB' }, out);
+  }
+
+  buildAppendix() {
+    const h = React.createElement;
+    const items = (this._G && this._G.appendix) || [];
+    return h('div', { key: 'apxlist' }, items.map((a) =>
+      h('div', { key: a.n, 'data-row': a.n, onClick: this.onRow,
+        style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '10px', padding: '8px 10px', borderTop: '1px dashed rgba(140,170,210,.10)', cursor: 'pointer' } },
+        h('span', { style: { fontSize: '12.5px' } },
+          h('b', { style: { fontFamily: 'var(--mono)', fontSize: '9.5px', color: 'var(--dim2)', letterSpacing: '.06em', marginRight: '7px' } }, a.note_no || ''),
+          a.tag || a.name),
+        h('span', { style: { fontFamily: 'var(--mono)', fontSize: '11px', color: this.colOf(a.color_key || 'steel') } }, (a.amt || '') + ' ›'))));
+  }
+
   renderVals() {
     const exp = this.state.exp;
     const car = {}; Object.keys(exp).forEach(k => { car[k] = exp[k] ? '▾' : '▸'; });
+    // 중앙 패널 헤드라인 값·툴팁을 panels JSON에서 (D4-층1 데이터 구동). 키는 row-id의 '-'→'_'.
+    const pv = {}, pt = {};
+    const P = this._G && this._G.panels;
+    if (P) for (const z in P) for (const r of (P[z] || [])) {
+      const k = (r.row || '').replace(/-/g, '_');
+      pv[k] = (r.v == null || r.v === '') ? '—' : r.v;
+      pt[k] = (r.raw_mn != null) ? r.raw_mn.toLocaleString() + ' 백만원' : '';
+    }
+    // 빌더는 개별 try/catch — 한 섹션(예: 불완전 JSON의 SVG)이 깨져도 전체 페이지가 죽지 않게(우아한 degrade).
+    const safe = (fn, fb) => { try { return fn.call(this); } catch (e) { console.warn('galaxy 빌더 오류(' + fn.name + '): ' + e.message); return fb; } };
     return {
+      pv, pt,
       corp: this._G ? this._G.corp : { name: '', fiscal_year: '', period: '', basis: '', cash_begin: '', cash_end: '' },
       strings: this._G ? this._G.strings : { intro_lines: ['', ''] },
-      galaxySvg: this.buildGalaxy(),
-      midOverlay: this.buildMidOverlay(),
-      inspectorCard: this.buildCard(),
-      runningChip: this.buildRunningChip(),
+      galaxySvg: safe(this.buildGalaxy, null),
+      midOverlay: safe(this.buildMidOverlay, null),
+      inspectorCard: safe(this.buildCard, null),
+      srcPanel: safe(this.buildSrcPanel, null),
+      runningChip: safe(this.buildRunningChip, null),
+      appendixList: safe(this.buildAppendix, null),
+      panelB: safe(this.buildPanelB, null),
+      bsbar: (() => { const f = (r) => { const x = (this._G && this._G.panels && this._G.panels.D || []).find(q => q.row === r); return x && x.raw_mn ? x.raw_mn : null; }; const a = f('bs-assets'), l = f('bs-liab'), e = f('bs-equity'); if (a && l && e) return { l: Math.round(l / a * 100), e: Math.round(e / a * 100) }; return { l: 23, e: 77 }; })(),
+      sub: (() => { try { const o = {}; for (const g of ['sgna','nonop','ni','noncash','wc','inv','fin','bsa','bsl','bse']) o[g] = this.buildSub(g); return o; } catch (e) { console.warn('sub 빌더 오류: ' + e.message); return {}; } })(),
       onRow: this.onRow,
       onToggle: this.onToggle,
       unpin: this.unpin,

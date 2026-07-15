@@ -2629,14 +2629,24 @@ function App() {
   const [discFullOverlayTicker, setDiscFullOverlayTicker] = useState(null);
   const [dossierTab, setDossierTab] = useState('business');
   const [aiOpen, setAiOpen] = useState(false); // AI 사이드바 접기/펼치기 (기본 접힘)
+  // 현금 은하수 탭 활성 티커 — dossier/data/galaxy_index.json 매니페스트 로드(build_galaxy_index.py 생성).
+  // 하드코딩 대신 매니페스트라 새 골든 추가 시 스크립트 재실행만으로 UI 자동 반영(V-054).
+  const [galaxyTickers, setGalaxyTickers] = useState(() => new Set(['005930']));
+  useEffect(() => {
+    let alive = true;
+    fetch('../dossier/data/galaxy_index.json')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((m) => { if (alive && m && Array.isArray(m.tickers)) setGalaxyTickers(new Set(m.tickers)); })
+      .catch(() => {});
+    return () => { alive = false; };
+  }, []);
   // DOSSIER_TABS (D1) — 탭 추가 = 이 배열 한 줄 + dossier/<id>.html + <id>_<ticker>.json
   const DOSSIER_TABS = [
     { id: 'business', label: '사업·기업',   src: 'business.html', context: 'business', activeWhen: 'always'  }, // ① 사업·기업 개요
     { id: 'galaxy',   label: '현금 은하수', src: 'galaxy.html',   context: 'galaxy',   activeWhen: 'hasData' }, // ② 현금 은하수 (galaxy_<t>.json 티커만)
     { id: 'eqs',      label: 'EQS 재무분석', src: 'firm.html',    context: 'finance',  activeWhen: 'always'  }, // ③ EQS 재무분석
   ];
-  // hasData 판정: galaxy_<ticker>.json 존재 티커 (Phase 5에서 data/ 스캔으로 대체)
-  const GALAXY_TICKERS = new Set(['005930']);
+  // hasData 판정 = 위 galaxyTickers(매니페스트). (구 하드코딩 GALAXY_TICKERS 제거 — V-054)
 
   const enterCorporation = useCallback(() => {
     if (!activeCompanyCode) return;
@@ -2797,7 +2807,7 @@ function App() {
           {/* Tab bar — DOSSIER_TABS (D1), 활성 탭 = 산업군 색 */}
           <div style={{display:'flex', padding:'0 20px', flexShrink:0, background:'rgba(5,6,13,0.95)', borderBottom:'1px solid rgba(140,170,210,0.13)'}}>
             {DOSSIER_TABS.map((tab) => {
-              const enabled = tab.activeWhen === 'always' || GALAXY_TICKERS.has(corpOverlayTicker);
+              const enabled = tab.activeWhen === 'always' || galaxyTickers.has(corpOverlayTicker);
               const active = dossierTab === tab.id;
               return (
                 <button key={tab.id} disabled={!enabled} onClick={() => enabled && setDossierTab(tab.id)}
@@ -2817,7 +2827,7 @@ function App() {
           <div style={{flex:'1 1 0%', display:'flex', overflow:'hidden', position:'relative'}}>
             <div style={{flex:'1 1 0%', position:'relative', minWidth:0}}>
               {DOSSIER_TABS.map((tab) => {
-                const enabled = tab.activeWhen === 'always' || GALAXY_TICKERS.has(corpOverlayTicker);
+                const enabled = tab.activeWhen === 'always' || galaxyTickers.has(corpOverlayTicker);
                 if (!enabled) return null;
                 const active = dossierTab === tab.id;
                 return (

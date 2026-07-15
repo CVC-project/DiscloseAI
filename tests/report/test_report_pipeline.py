@@ -14,13 +14,18 @@ from modules.report.models import FsAccount, ReportRaw
 
 # ── 섹셔닝: 주석 번호 분할 ──
 def test_split_notes_basic():
-    html = "머리말\n주1. 일반사항 내용\n주16. 우발부채 내용\n주34. 후속사건"
+    # 실 DART XML 형태: <TITLE>N. 제목 (연결)</TITLE> — '(연결)' 접미로 별도재무제표 주석과 구분(V-045 이후 계약).
+    html = (
+        "<TITLE>1. 일반사항 (연결)</TITLE>일반사항 내용"
+        "<TITLE>16. 우발부채 (연결)</TITLE>우발부채 내용"
+        "<TITLE>34. 후속사건 (연결)</TITLE>후속사건 내용"
+    )
     notes = sectioner._split_notes(html)
-    keys = [n for n, _ in notes]
-    assert keys == ["주1", "주16", "주34"]
+    keys = [no for no, _, _ in notes]
+    assert keys == ["1", "16", "34"]
     # 각 조각이 다음 주석 전까지
-    assert "일반사항" in notes[0][1]
-    assert "우발부채" in notes[1][1]
+    assert "일반사항" in notes[0][2]
+    assert "우발부채" in notes[1][2]
 
 
 def test_split_notes_none():
