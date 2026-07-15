@@ -26,7 +26,10 @@ pytestmark = pytest.mark.skipif(sync_playwright is None, reason="playwright 미�
 @pytest.fixture(scope="module")
 def page():
     with sync_playwright() as p:
-        browser = p.chromium.launch()
+        try:
+            browser = p.chromium.launch()
+        except Exception:
+            pytest.skip("playwright 브라우저 미설치 — `playwright install chromium` 필요(CI 등)")
         pg = browser.new_page(viewport={"width": 1440, "height": 1000})
         errs = []
         pg.on("console", lambda m: errs.append(m.text) if m.type == "error" else None)
