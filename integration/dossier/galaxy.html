@@ -569,9 +569,11 @@ class Component extends DCLogic {
   }
   // 목차의 주석 클릭 → 원장(routing_ledger)으로 대응 딥다이브 동기 핀
   _pinForNote(nn) {
+    const D = this.getDives();
+    if (D['n' + nn]) { this.pin('n' + nn); return; }  // 그 주석 자체의 APPENDIX 카드 우선(원장이 dive:cited여도 동기 — 버그 수정)
     const led = (this._G && this._G.meta && this._G.meta.routing_ledger) || {};
     const ent = led[nn]; if (!ent) return;
-    const to = ent.to || '', D = this.getDives();
+    const to = ent.to || '';
     if (to.indexOf('appendix:') === 0 || to.indexOf('new-dive:') === 0) { const k = to.split(':')[1]; if (D[k]) this.pin(k); return; }
     if (to.indexOf('row:') === 0) { const k = this._diveKey(to.slice(4)); if (D[k]) this.pin(k); return; }
     if (to === 'dive:cited') {
@@ -1244,17 +1246,13 @@ class Component extends DCLogic {
       h('tbody', null, rows.map((cells, ri) => h('tr', { key: ri },
         cells.map((cc, ci) => h(ri === 0 ? 'th' : 'td', { key: ci, style: { border: '1px solid var(--line)', padding: '4px 9px', textAlign: /^[\(\-−]?[\d.,]+%?\)?$/.test(cc) ? 'right' : 'left', color: ri === 0 ? 'var(--text)' : 'var(--dim)', whiteSpace: 'nowrap', background: ri === 0 ? 'rgba(255,255,255,.03)' : 'transparent', fontWeight: ri === 0 ? 600 : 400 } }, cc))))));
   }
-  _srcMdEl(md) {
-    const h = React.createElement, lines = String(md).split('\n'), out = [];
-    let tbl = null, key = 0;
-    const flush = () => { if (tbl && tbl.length) out.push(this._srcTable(tbl, key++)); tbl = null; };
-    for (const ln of lines) {
-      const s = ln.trim();
-      if (s.charAt(0) === '|') { const cells = s.replace(/^\||\|$/g, '').split('|').map(x => x.trim()); (tbl || (tbl = [])).push(cells); }
-      else { flush(); if (s) out.push(h('p', { key: key++, style: { margin: '9px 0', fontSize: '13px', lineHeight: 1.7, color: 'var(--dim)' } }, s)); }
-    }
-    flush();
-    return out;
+  _srcBlocks(blocks) {
+    const h = React.createElement, out = [];
+    (blocks || []).forEach((b, i) => {
+      if (b.t === 'table') out.push(this._srcTable(b.rows || [], i));
+      else if (b.v) out.push(h('p', { key: 'p' + i, style: { margin: '9px 0', fontSize: '13px', lineHeight: 1.7, color: 'var(--dim)' } }, b.v));
+    });
+    return out.length ? out : [h('div', { key: 'no', style: { padding: '30px 4px', color: 'var(--dim)' } }, '(원문을 찾지 못했어요)')];
   }
   buildSrcPanel() {
     if (!this.state.src) return null;
@@ -1267,7 +1265,7 @@ class Component extends DCLogic {
     } else {
       const item = (view.type === 'stmt' ? R.statements[view.id] : R.notes[view.id]) || {};
       title = (view.type === 'stmt' ? (item.title || '재무제표') : ('주' + view.id + ' ' + (item.title || ''))) + ' · 원문';
-      bodyKids = this._srcMdEl(item.md || '(원문을 찾지 못했어요)');
+      bodyKids = this._srcBlocks(item.blocks);
     }
     // 목차(슬림)
     const tocEl = () => {
