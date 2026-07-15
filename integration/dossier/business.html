@@ -954,7 +954,7 @@
   <script>
     const TICKER = new URLSearchParams(location.search).get('ticker') || '005930';
     let COMPANY = null;
-    const GENERATED_AT = "2026-07-11 19:07";
+    const GENERATED_AT = "2026-07-13 13:16";
     let selected = null;
     let sortMode = "market_cap";
     const $ = (sel) => document.querySelector(sel);
@@ -1083,11 +1083,21 @@
     const TERM_SKIP_AFTER = {
       '리스': ['크'],
     };
+    function isAsciiWordChar(value) {
+      return /^[A-Za-z0-9]$/.test(value || '');
+    }
+    function isEmbeddedLatinTerm(term, previous, next) {
+      const startsLatin = /^[A-Za-z0-9]/.test(term);
+      const endsLatin = /[A-Za-z0-9]$/.test(term);
+      return (startsLatin && isAsciiWordChar(previous)) || (endsLatin && isAsciiWordChar(next));
+    }
     let renderedTermNotes = new Set();
     function rich(value) {
       const text = esc(value);
       return text.replace(TERM_PATTERN, (term, _match, offset, source) => {
+        const previous = source.slice(Math.max(0, offset - 1), offset);
         const next = source.slice(offset + term.length, offset + term.length + 1);
+        if (isEmbeddedLatinTerm(term, previous, next)) return term;
         if ((TERM_SKIP_AFTER[term] || []).includes(next)) return term;
         const tip = BUSINESS_GLOSSARY[term];
         if (!tip) return term;
@@ -2061,7 +2071,8 @@
           { title:'현금화 포인트', value:'계약자산 · 미청구수익', fact:'요약 데이터에는 진행 중인 선박 건조와 관련한 미청구수익이 향후 현금화될 예정이라는 설명이 포함되어 있습니다.', view:'조선사는 수주가 바로 현금이 되는 구조가 아니므로, 매출 증가와 실제 현금 회수가 같이 따라오는지 보는 것이 중요합니다.' },
         ],
       };
-      return data[String(row.stock_code || '')] || dynamicReportIdeas(row);
+      const custom = Array.isArray(row.custom_report_ideas) ? row.custom_report_ideas : [];
+      return custom.length ? custom : (data[String(row.stock_code || '')] || dynamicReportIdeas(row));
     }
     function reportSummaryTone(text) {
       return String(text || '')

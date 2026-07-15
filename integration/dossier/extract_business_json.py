@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import copy
 import os
 import sys
 
@@ -27,6 +28,9 @@ _SRC = os.path.join(_ROOT, "design", "prototypes", "kospi50_business_tabs.html")
 _OUT_DIR = os.path.join(_HERE, "data")
 
 _DATA_PREFIX = "const DATA = "
+_CUSTOM_REPORT_IDEAS = "CUSTOM_REPORT_IDEAS"
+_LOCAL_IMAGE_PREFIX = "../../integration/data/business_images/"
+_DEPLOYED_IMAGE_PREFIX = "../data/business_images/"
 
 # 생성기 계약 (D12·부록 A-2) — kind 21종
 _KNOWN_KINDS = {
@@ -54,20 +58,28 @@ _KNOWN_KINDS = {
 }
 
 
-def _extract_data_array(html_path: str) -> list:
-    """HTML 내 `const DATA = [...];` 한 줄에서 JSON 배열을 파싱."""
-    with open(html_path, "r", encoding="utf-8") as fp:
-        for line in fp:
-            stripped = line.strip()
-            if stripped.startswith(_DATA_PREFIX):
-                payload = stripped[len(_DATA_PREFIX) :]
-                if payload.endswith(";"):
-                    payload = payload[:-1]
-                data = json.loads(payload)
-                if not isinstance(data, list):
-                    raise ValueError("const DATA 가 배열이 아님")
-                return data
-    raise ValueError(f"`const DATA = ` 라인을 찾지 못함: {html_path}")
+def _extract_json_constant(html_path: str, constant_name: str) -> object:
+    """HTML의 `const NAME = <JSON>;` 값을 JSON으로 읽는다."""
+    source = open(html_path, "r", encoding="utf-8").read()
+    marker = f"const {constant_name} = "
+    start = source.find(marker)
+    if start < 0:
+        raise ValueError(f"`{marker}`를 찾지 못함: {html_path}")
+    payload = source[start + len(marker) :].lstrip()
+    value, _ = json.JSONDecoder().raw_decode(payload)
+    return value
+
+
+def _prepare_for_dossier(row: dict, custom_ideas: dict[str, list]) -> dict:
+    """프로토타입 행을 dossier 단일 기업 JSON 계약으로 변환한다."""
+    prepared = copy.deepcopy(row)
+    code = str(prepared.get("stock_code", "")).zfill(6)
+    prepared["custom_report_ideas"] = custom_ideas.get(code, [])
+    for card in prepared.get("business_cards") or []:
+        image = card.get("image")
+        if isinstance(image, str) and image.startswith(_LOCAL_IMAGE_PREFIX):
+            card["image"] = _DEPLOYED_IMAGE_PREFIX + os.path.basename(image)
+    return prepared
 
 
 def _validate(row: dict) -> list[str]:
@@ -105,7 +117,12 @@ def main() -> int:
     args = ap.parse_args()
     only = {t.strip() for t in args.only.split(",") if t.strip()} if args.only else None
 
-    data = _extract_data_array(_SRC)
+    data = _extract_json_constant(_SRC, "DATA")
+    custom_ideas = _extract_json_constant(_SRC, _CUSTOM_REPORT_IDEAS)
+    if not isinstance(data, list):
+        raise ValueError("const DATA 가 배열이 아님")
+    if not isinstance(custom_ideas, dict):
+        raise ValueError("const CUSTOM_REPORT_IDEAS 가 객체가 아님")
     print(f"const DATA: {len(data)}사 파싱")
     os.makedirs(_OUT_DIR, exist_ok=True)
 
@@ -117,13 +134,14 @@ def main() -> int:
             continue
         if only and code not in only:
             continue
-        warns = _validate(row)
+        prepared = _prepare_for_dossier(row, custom_ideas)
+        warns = _validate(prepared)
         if warns:
             warned += 1
             print(f"  [{code}] {row.get('name','?')}: " + " · ".join(warns))
         out = os.path.join(_OUT_DIR, f"business_{code}.json")
         with open(out, "w", encoding="utf-8") as fp:
-            json.dump(row, fp, ensure_ascii=False, separators=(",", ":"))
+            json.dump(prepared, fp, ensure_ascii=False, separators=(",", ":"))
         written += 1
 
     scope = f"{len(only)}사 지정" if only else "전체"
