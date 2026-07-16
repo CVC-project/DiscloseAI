@@ -52,6 +52,9 @@ S7(채록): 이번 완주에서 발견한 편차를 VARIATIONS.md에 기록 — 
 S8(원문 동반 생성): publish 직후 `python integration/dossier/build_report_source.py <ticker>`로
           사업보고서 원문 JSON(`report_<t>.json`)과 매니페스트(`report_index.json`)를 함께 낸다 —
           galaxy의 §6 note↔dive 3-way 매핑이 원문 목차 링크와 곧바로 동기되도록. (렌더러 갱신 시 `--all`로 전 골든 재빌드)
+          재무제표는 raw XML `<TITLE>` **명칭 매칭**으로 추출(V-068 — 번호 하드코딩 금지: 단일 포괄손익계산서
+          회사는 5본이 아니라 4본이고 번호가 밀림). 완주 게이트에 `check_golden <t> --strict`(§8-1 원문 정합:
+          cf 필수·오라벨 검출) 포함 — 원문 없거나 재무제표 오라벨이면 FAIL.
 ```
 
 - **루프 3층**(R6.2): ① 카드 루프(S3↔S4·S5, 위반 카드만) ② 기업 루프(`/galaxy-golden` 1호출 = 전 단계 완주) ③ 산업 확장 루프(§8).
@@ -103,7 +106,7 @@ S8(원문 동반 생성): publish 직후 `python integration/dossier/build_repor
 **주석 라우팅 원장** — "모든 실주석이 처리됐는가": 그 회사 사업보고서의 **실주석 전수**(reports.db 기준)가 `meta.routing_ledger`에 매핑돼야 한다 — `dive:cited`(본문 인용)·`appendix:nX`·`row:<id>`(패널 행)·`new-dive:<key>`(고유 항목 신규)·`excluded`(+reason 필수). check_golden §7이 원장 누락·MISSING·사유 없는 제외·**유령 인용**(실주석에 없는 주N — corp.rcept_no 기준)·appendix 미실존·new-dive 미생성을 전부 FAIL로 잡는다.
 
 **주석 전수 ↔ 딥다이브 연결(R6.6a, V-062·V-063)** — 원장이 "처리됐는가"라면, 이 규약은 "**클릭하면 그 주석의 딥다이브에 실제로 닿는가**"다. 사용자가 ① 사업보고서 **원문 목차의 주N** ② 재무제표 **패널 서브행**(매출채권·재고자산…) ③ **원문 재무제표 표의 계정명 셀**(`_srcTable`, 계정명→dive 색인 `_nameDive`) 중 무엇을 눌러도, 그 주석 고유의 설명 카드로 동기·핀돼야 한다 — 운전자본(k10) 같은 상위 흐름 dive에 뭉뚱그려지지 않게. 세 경로 중 하나로 **전 주석을 반드시** 연결한다:
-- **(A) 실체 주석 → 정규 dive(`dives{}`) + row 앵커** — 계정 잔액·구성이 **패널 행으로 존재**하는 주석(매출채권 주7·재고 주8·차입금 주12·충당부채·자본금…)은 **`appendix`가 아니라 `dives`에 둔다**(은하수에서 이미 설명되는 항목이라 별도 부록이 아님). 카드 키는 `nX` 유지, `badge`는 유래 재무제표(`재무상태표 · 주N`/`손익계산서 · 주N`). 렌더러 `ROW2DIVE`(그 티커 SSOT)에 `bs-ar→n7`처럼 행→카드를 등재, `HL`에 상호 하이라이트, 원장은 `new-dive:nX`. **APPENDIX(`appendix[]`)는 무앵커 주석 전용** — 총칙(주1~3)·우발/약정·재무위험·공정가치측정·특수관계자·성격별비용·EPS·사업결합·후속사건처럼 **패널에 고유 행이 없는** 주석만 하단 부록에 남긴다.
+- **(A) 실체 주석 → 정규 dive(`dives{}`) + row 앵커** — 계정 잔액·구성이 **패널 행으로 존재**하는 주석(매출채권·재고·차입금·충당부채·자본금…)은 **`appendix`가 아니라 `dives`에 둔다**(은하수에서 이미 설명되는 항목이라 별도 부록이 아님). **카드 키 = 그 회사 주번호 `n<주N>`**(주번호는 회사마다 다르다 — SK 매출채권=`n8`, 삼성=`n7`. 삼성 키 재사용 금지), `badge`는 유래 재무제표(`재무상태표 · 주N`/`손익계산서 · 주N`), 원장은 `new-dive:nX`. **라우팅·하이라이트는 카드 JSON의 `row`(주 앵커 1개)+`hl`(발광 행 배열)로 선언한다(V-069)** — 렌더러 `_diveKey`가 `.row`를 최우선 해석(`ROW2DIVE` 정적 테이블보다 우선)하므로 그 회사 주번호로 정확 라우팅. ⚠️ **삼성 nX는 레거시**로 `galaxy.html`의 정적 `ROW2DIVE`/`HL`에 삼성 주번호가 하드코딩돼 있으나(무회귀 위해 유지), **신규 티커는 정적 테이블을 건드리지 않고 `.row`/`.hl`만 선언**하면 된다. **APPENDIX(`appendix[]`)는 무앵커 주석 전용** — 총칙(주1~3)·우발/약정·재무위험·공정가치측정·특수관계자·성격별비용·EPS·사업결합·후속사건처럼 **패널에 고유 행이 없는** 주석만 하단 부록에 남긴다.
 - **(B) 코어 dive 주석 → `meta.note_dive` 매핑** — 이미 리치한 흐름 dive가 그 주석의 사실상 카드인 경우(유형자산 주10→`ppe`, 리스 주22→`k5`…) 카드 중복 생성 대신 `meta.note_dive = {"10":"ppe", …}`로 명시 매핑. `_pinForNote`가 n카드 우선 → `note_dive` → 원장 순으로 조회한다.
 - **(C) 본문 인용 주석 → `dive:cited`** — 서사에 녹아든 주석은 해당 dive 본문에서 주N을 인용(원장 `dive:cited`)하면 족하다.
 
@@ -186,6 +189,29 @@ S8(원문 동반 생성): publish 직후 `python integration/dossier/build_repor
 **회귀 범위 규칙(비용 절제)**: T0·체커·렌더러(`galaxy.html`) 수정 → **전 티어 회귀**(`python -m modules.report.check_golden --all`, V-049 전례) · T1 수정 → **그 클러스터만** · T2 → 자신만. 기업 고유 사건(VARIATIONS ③층)은 전파 대상 아님.
 
 > **실증**: 이번 배치 V-048(APPENDIX 전수 재작성)이 이 캐스케이드 그 자체 — 삼성(T0) 기준을 체커에 코드화하니 SK·NAVER·셀트리온이 자동 FAIL로 드러났고 재작성→갭 0 수렴. **전파의 동력은 문서가 아니라 체커**다.
+
+## 8.6 원문 동반 + 신계약 패리티 캐스케이드 레시피 (V-062~069) — 티커 1본 완주 절차
+
+삼성 T0에 V-062~067(전 주석 딥다이브·원문 3중 링크·APPENDIX 무앵커 전용·amt 6칙·값색 4칙·라우팅)가 반영됐고, V-068·069로 **원문 생성기·렌더러가 전 티커 일반화**됐다. 남은 T1 골든(SK·현대차·LG·셀트리온·NAVER)과 신규는 아래 D1~D5로 삼성 패리티까지 끌어올린다. **인프라(Phase A/B/C)는 이미 코드에 있어 재작업 불요** — 티커별 데이터 작업만.
+
+**이미 자동(확인만)**: `report_<t>.json`(원문)·`report_index.json`은 8본 존재(신규 티커는 `python integration/dossier/build_report_source.py <t>` — 로컬 reports.db 필요). 렌더러 공통분(원문 팝업·계정셀 링크·어포던스·파선·`pin(key,via)` 라우팅·`.row`/`.hl` 해석·자산총계 라벨)은 `galaxy.html` 공용이라 자동.
+
+**D1 준비** — reports.db 주석 목록·현행 원장·`facts_<t>.json`·panels 서브행을 대조해 **승격 매핑표**를 만든다: 각 실체 주석(패널 행 앵커 있음)이 그 회사에서 몇 번 주석인지(주번호는 회사마다 다름), 어느 패널 행에 앵커할지. ⚠️ **회사별 집계 차이** — SK는 `bs-borrow`(차입금+사채 통합)·`bs-oetc`(무형+이연법인세 통합)처럼 삼성과 행 구성이 달라 앵커가 회사별로 다르다. 승격 주석의 검증 수치가 facts에 없으면 note-extractor 서브에이전트로 보강.
+
+**D2 구조** — (a) **appendix→dives 승격**: 실체 주석 카드를 `appendix[]`→`dives{}`로 이동, **키 = 그 회사 주번호 `n<주N>`**(삼성 키 재사용 금지 — SK 매출채권은 `n8`, 삼성 `n7` 아님), `badge`=`재무상태표/손익계산서 · 주N`, **`row`(주 앵커 1개)+`hl`(발광 행 배열)** 선언(V-069 — 이게 클릭·하이라이트의 per-ticker 정본). (b) `dive:cited`였던 실체 주석(카드 없던 것)은 **신규 카드 생성**. (c) **`meta.note_dive`** 신설: 코어 dive로 흡수된 주석(유형자산→ppe·리스→k5·이연법인세/법인세→k7·매출액→k2·연결현금흐름표→k11) 매핑. (d) **원장 3-way 갱신**(`appendix:`→`new-dive:` 승격분). (e) **행 라벨 원문 계정명화**(영문 약어 제거). (f) **amt 6칙**(R6.6c) 전 카드. (g) **값색 4칙**(A5): 서브행 무채 기본(SK는 현재 전부 steel → dim), 의미 앵커만.
+
+**D3 산문** — 승격·신규 카드를 골든 깊이로: what 2문장+실수치 브래킷·links≥1(a=패널 실값)·why 1문장·five(series 있으면 key, 없으면 skip). Claude 직접 작성(GPU 폐기), 근거는 facts/주석 원문만(D7: LLM은 숫자 안 만듦). prose-writer 서브에이전트 활용 가능(프롬프트 self-contained).
+
+**D4 수렴 루프** (지적 0까지 D2~D4 반복):
+1. `check_golden <t> --strict` 0 — §8 원문 정합(cf 필수·오라벨)·amt 표기·승격 구조(.row·note_dive) 포함.
+2. `check_golden --all` 0 — 전 골든 무회귀(렌더러 안 건드렸으면 데이터만).
+3. **accuracy-verifier**(서브에이전트): 신규·수정 브래킷 전수 원문 재도출 — REFUTED 0.
+4. **completeness-auditor**(서브에이전트): **삼성 T0 패리티 감사** — note_dive·승격 잔존 0·amt·라벨·값색·원문 정오·3-way 연결.
+5. `GALAXY_TICKER=<t> pytest tests/report/test_galaxy_interaction.py` + **라이브 스윕**(Playwright): 원문 TOC 전 주석 클릭→기대 dive 핀(**클릭 사이 Esc**), 승격 행 클릭→그 회사 주N 카드, BS행→코어 dive 진입 시 원문=주석(R6.6d), `(주N)` 계정셀→원문 이동, 파선+칩, 콘솔 에러 0.
+
+**D5 채록·커밋** — VARIATIONS 티커 변형 채록(신규 없어도 명시), **티커당 1커밋**(전 골든 무회귀 확인 후). 커밋 패턴 `feat(golden): <회사> 캐스케이드 — 원문 3-way·V-062~069 패리티 (V-0xx)`.
+
+> **주의**: check_golden `--strict`·§7 원장은 로컬 `reports.db`(gitignore·비커밋) 있을 때만 유효 — 이 머신 OK, CI는 skip. **캐스케이드는 골든 1본 = 1세션**(D2~D4가 컨텍스트 큼) — 새 세션 시작 = 이 §8.6 + VARIATIONS V-062~069 + `git log` + 진행 티커 JSON.
 
 ## 9. 변형 레지스트리 — 자기 기록으로 전 기업 커버 ([VARIATIONS.md](VARIATIONS.md))
 
