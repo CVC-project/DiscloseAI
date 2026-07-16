@@ -214,7 +214,7 @@ a{color:var(--cyan);} a:hover{color:var(--mint);}
           <span style="font-family:var(--mono);font-size:17px;font-weight:700;color:var(--cyan);text-shadow:0 0 12px rgba(92,199,234,.5);">{{ pv.bs_cash }}</span>
         </div>
         <div data-row="bs-assets" onclick="{{ onRow }}" title="{{ pt.bs_assets }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;background:rgba(117,144,176,.06);font-weight:700;" style-hover="background:rgba(117,144,176,.11)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">Σ</span><span>자산총계</span><span data-g="bsa" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.bsa }}</span></div>
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--steel);letter-spacing:.08em;">자산</span><span>자산총계</span><span data-g="bsa" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.bsa }}</span></div>
           <span style="font-family:var(--mono);font-size:16.5px;font-weight:700;color:var(--steel);">{{ pv.bs_assets }}</span>
         </div>
         <sc-if value="{{ exp.bsa }}" hint-placeholder-val="{{ false }}"><div>{{ sub.bsa }}</div></sc-if>
@@ -539,15 +539,16 @@ class Component extends DCLogic {
     }
     return this._r2d[row] || row;
   }
-  onRow = (e) => { this.pin(this._diveKey(e.currentTarget.getAttribute('data-row'))); };
+  onRow = (e) => { const row = e.currentTarget.getAttribute('data-row'); this.pin(this._diveKey(row), row); };
 
   onKnot(id) { this.pin(id); }
 
-  pin = (key) => {
+  pin = (key, via) => {
     if (!this.getDives()[key]) return;
     const exp = { ...this.state.exp };
     (this.HL[key] || []).forEach(r => { const g = this.GROUP_OF[r]; if (g) exp[g] = true; });
-    this.setState({ pin: key, exp });
+    // via = 진입한 패널 행(V-067): 다른 재무제표의 행에서 코어 dive로 온 경우 원문 뷰가 주석으로 라우팅하는 근거.
+    this.setState({ pin: key, exp, pinVia: via || null });
   };
   unpin = () => { if (this.state.pin) this.setState({ pin: null }); };
 
@@ -559,6 +560,14 @@ class Component extends DCLogic {
     if (/^n\d/.test(key)) return { type: 'note', id: key.slice(1) };
     const led = (this._G && this._G.meta && this._G.meta.routing_ledger) || {};
     for (const nn in led) { const to = led[nn].to || ''; if (to === 'new-dive:' + key || to === 'appendix:' + key) return { type: 'note', id: nn }; }
+    // V-067: 다른 재무제표의 행에서 진입한 코어 dive는 그 dive의 주석 원문이 정답 —
+    // 예) BS 이연법인세자산(bs-dta)→k7(row=is-tax): 원문은 손익계산서가 아니라 주25 법인세비용.
+    //     dive 자기 행(is-tax) 진입이면 기존대로 그 재무제표(손익계산서)로 간다.
+    const via = this.state.pinVia;
+    if (via && d && d.row && via.split('-')[0] !== d.row.split('-')[0]) {
+      const nd = (this._G && this._G.meta && this._G.meta.note_dive) || {};
+      for (const nn in nd) if (nd[nn] === key) return { type: 'note', id: nn };
+    }
     const row = (d && d.row) || key;
     if (row === 'is-oci' || row === 'is-totalcomp') return { type: 'stmt', id: 'cis' };
     if (row.indexOf('bs-') === 0 || row.indexOf('pbs-') === 0) return { type: 'stmt', id: 'bs' };
@@ -736,10 +745,14 @@ class Component extends DCLogic {
       }
     }
 
-    // depreciation return — 매출원가·판관비 유출 가지에서 분기해 ⑨로 되돌아오는 점선 레일
-    const _outIS = this.KNOTS.filter(k => k.kind === 'out' && k.z === 'B'), p9 = K.k9;
+    // depreciation return — 매출원가·판관비 유출 가지에서 분기해 비현금 조정(back)으로 되돌아오는 점선 레일
+    // V-066: knots JSON엔 z(존) 필드가 없어 k.z==='B' 필터가 항상 빈 배열 → 파선 전사 소실 회귀.
+    //        존 대신 순서로 파생: 첫 back(비현금 조정) 매듭 앞의 out 매듭 = 손익 유출 가지.
+    const _ks = this.KNOTS, _bi = _ks.findIndex(k => k.kind === 'back');
+    const _outIS = _bi > 0 ? _ks.slice(0, _bi).filter(k => k.kind === 'out') : [];
+    const p9 = _bi > 0 ? K[_ks[_bi].id] : null;
     if (_outIS.length && p9) {
-      const p3 = K[_outIS[0].id], depOn = focus === 'k9';
+      const p3 = K[_outIS[0].id], depOn = focus === _ks[_bi].id;
       const depX = Math.max(44, p3.x + CF.tributary.outDx); // 유출 가지 끝(⊖ 글리프)의 x
       els.push(h('path', { key: 'depg', d: ortho([[depX, p3.y + CF.tributary.outDy + 9], [depX, p9.y], [p9.x - 9, p9.y]], 14), stroke: C.cyan, strokeWidth: 1.8, strokeDasharray: '4 4', fill: 'none', opacity: depOn ? .9 : .55 }));
       els.push(h('circle', { key: 'depj', cx: depX, cy: p3.y + CF.tributary.outDy + 9, r: 2.5, fill: C.cyan, opacity: .8 }));
@@ -994,11 +1007,11 @@ class Component extends DCLogic {
   HL = {
     k1: ['pbs-cash', 'cf-begincash'], k2: ['is-revenue'], k3: ['is-cogs'], k4: ['is-grossprofit'],
     k5: ['is-sgna', 'is-sgna-rnd'], k6: ['is-opincome'], k6b: ['is-nonop', 'is-pretax'],
-    k7: ['is-tax', 'cf-paid'], k8: ['is-netincome', 'cf-netincome', 'eq-netincome'],
+    k7: ['is-tax', 'cf-paid', 'bs-dta', 'bs-dtl', 'bs-taxlia'], k8: ['is-netincome', 'cf-netincome', 'eq-netincome'],
     k9: ['cf-noncash', 'cf-noncash-dep', 'bs-ppe', 'is-cogs'], k10: ['cf-wc', 'cf-wc-ar', 'cf-wc-inv'],
     k10b: ['cf-paid', 'is-tax'], k11: ['cf-op', 'cf-netincome'], k12: ['cf-inv', 'cf-inv-capex', 'bs-ppe'],
     k13: ['cf-fin', 'eq-div', 'eq-buyback'], k14: ['cf-fx'], k15: ['bs-cash', 'cf-endcash', 'cf-netchange'],
-    oci: ['is-oci', 'eq-oci', 'is-totalcomp'], ppe: ['bs-ppe', 'cf-noncash-dep', 'cf-inv-capex'],
+    oci: ['is-oci', 'eq-oci'], ppe: ['bs-ppe', 'cf-noncash-dep', 'cf-inv-capex'],
     assets: ['bs-assets'], liab: ['bs-liab'],
     'eq-begin': ['eq-begin'], 'eq-div': ['eq-div', 'cf-fin-div', 'cf-fin'], 'eq-buyback': ['eq-buyback', 'cf-fin-tsy', 'cf-fin'],
     'eq-other': ['eq-other'], 'eq-end': ['eq-end', 'bs-equity'],
@@ -1270,8 +1283,15 @@ class Component extends DCLogic {
         cells.map((cc, ci) => {
           const num = isNum(cc);
           const dk = (ri > 0 && ci === 0 && !num) ? dmap[norm(cc)] : null;   // 계정명 행 → 딥다이브 동기
+          // V-067: 계정셀에 (주N) 참조가 있으면 원문 뷰도 그 주석으로 함께 이동(딥다이브 핀은 srcGoto→_pinForNote가 담당).
+          //        복수 참조(주21,22)는 주석 제목이 계정명과 일치하는 것 우선, 없으면 첫 번째.
+          let nref = null;
+          if (dk && this._report && this._report.notes) {
+            const refs = (String(cc).match(/주\s?([\d.]+)/g) || []).map(s => s.replace(/주\s?/, '')).filter(nn => this._report.notes[nn]);
+            if (refs.length) nref = refs.find(nn => norm(this._report.notes[nn].title) === norm(cc)) || refs[0];
+          }
           const style = { border: '1px solid var(--line)', padding: '4px 9px', textAlign: num ? 'right' : 'left', color: dk ? 'var(--cyan)' : (ri === 0 ? 'var(--text)' : 'var(--dim)'), fontWeight: ri === 0 ? 600 : 400, background: ri === 0 ? 'rgba(255,255,255,.03)' : 'transparent', verticalAlign: 'top', whiteSpace: num ? 'nowrap' : 'normal', wordBreak: 'keep-all', overflowWrap: 'anywhere', minWidth: num ? 'auto' : '84px', maxWidth: num ? 'none' : '320px', lineHeight: 1.5, cursor: dk ? 'pointer' : 'default', textDecoration: dk ? 'underline dotted' : 'none', textUnderlineOffset: '3px' };
-          return h(ri === 0 ? 'th' : 'td', { key: ci, style, onClick: dk ? () => this.pin(dk) : undefined, title: dk ? '이 계정의 딥다이브로 이동' : undefined }, cc);
+          return h(ri === 0 ? 'th' : 'td', { key: ci, style, onClick: dk ? () => (nref ? this.srcGoto({ type: 'note', id: nref }) : this.pin(dk)) : undefined, title: dk ? (nref ? '주' + nref + ' 원문과 딥다이브로 이동' : '이 계정의 딥다이브로 이동') : undefined }, cc);
         })))));
   }
   _srcBlocks(blocks) {
