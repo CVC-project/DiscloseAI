@@ -15,6 +15,7 @@
 
 문서: modules/report/REPORT_SOURCE.md
 """
+
 from __future__ import annotations
 
 import os
@@ -24,14 +25,20 @@ import sqlite3
 _HERE = os.path.dirname(os.path.abspath(__file__))
 _DB = os.path.join(_HERE, "data", "reports.db")
 
-# 연결재무제표 5본: raw XML <TITLE> 접두 → 키·표시명
-_STMTS = [
-    (r"2-1\.", "bs", "연결 재무상태표"),
-    (r"2-2\.", "is", "연결 손익계산서"),
-    (r"2-3\.", "cis", "연결 포괄손익계산서"),
-    (r"2-4\.", "eq", "연결 자본변동표"),
-    (r"2-5\.", "cf", "연결 현금흐름표"),
+# 연결재무제표 최대 5본: raw XML <TITLE> **명칭 매칭** → 키. (V-068)
+# 번호 접두(2-1…)는 회사마다 다르다 — 단일 포괄손익계산서 회사(SK·NAVER·고려아연·현대건설)는
+# 손익계산서가 없어 2-1~2-4로 밀린다. 번호 하드코딩(구 2-1~2-5)은 이들의 is/cis/eq를 한 칸씩
+# 오라벨하고 cf를 결손시켰다. 명칭으로 매칭하면 5본/4본 레이아웃을 모두 정합 추출한다.
+# 주석도 2-x 접두를 갖는 회사(셀트리온)가 있으나 주석 명칭은 재무제표명과 겹치지 않고, 재무제표가
+# 주석보다 문서상 앞서므로 키별 first-wins가 실제 재무제표를 집는다.
+_STMT_MATCH = [
+    ("bs", lambda s: "재무상태표" in s),
+    ("is", lambda s: "손익계산서" in s and "포괄" not in s),
+    ("cis", lambda s: "포괄손익" in s),
+    ("eq", lambda s: "자본변동" in s),
+    ("cf", lambda s: "현금흐름" in s),
 ]
+_STMT_NUMPREFIX = re.compile(r"^\d+-\d+\.?\s*")
 _TITLE_RE = re.compile(r"<TITLE[^>]*>[^<]*</TITLE>")
 _CELL_TAGS = ["td", "th", "te", "tu"]
 # 초장문 표(종속기업/계열사 목록 등 수백 행)는 원문 학습 목적상 상위 N행만 — 파일 비대 방지.
@@ -97,29 +104,43 @@ def _html_to_blocks(html: str) -> list[dict]:
             maxcell = max((len(c) for r in rows for c in r), default=0)
             # 비정형 표(종속기업 목록 등) — 격자가 뭉개진 경우 표 대신 안내 문단
             if ncols > _COL_CAP or maxcell > _CELL_CAP:
-                blocks.append({"t": "p", "v": "(종속기업 목록 등 대형·비정형 표는 여기선 생략했어요 — 전체는 DART 원문에서 확인)"})
+                blocks.append(
+                    {
+                        "t": "p",
+                        "v": "(종속기업 목록 등 대형·비정형 표는 여기선 생략했어요 — 전체는 DART 원문에서 확인)",
+                    }
+                )
                 continue
             n = len(rows)
             if n > _ROW_CAP:
                 rows = rows[:_ROW_CAP]
             blocks.append({"t": "table", "rows": rows})
             if n > _ROW_CAP:
-                blocks.append({"t": "p", "v": f"… (표가 길어 상위 {_ROW_CAP}행만 표시했어요 · 원문 총 {n}행)"})
+                blocks.append(
+                    {
+                        "t": "p",
+                        "v": f"… (표가 길어 상위 {_ROW_CAP}행만 표시했어요 · 원문 총 {n}행)",
+                    }
+                )
     return blocks
 
 
 def _extract_statements(doc: str) -> dict:
-    """raw XML에서 재무제표 5본 블록(TITLE→다음 TITLE)을 잘라 blocks로."""
+    """raw XML에서 재무제표 블록(TITLE→다음 TITLE)을 **명칭 매칭**으로 잘라 blocks로.
+    title은 XML 실제 제목에서 번호 접두만 제거해 사용(회사별 번호 차이 흡수). 재무제표가
+    주석보다 앞서므로 키별 first-wins가 실제 재무제표를 집는다(주석 2-x 오매칭 방지)."""
     titles = [(m.start(), m.group(0)) for m in _TITLE_RE.finditer(doc)]
     out: dict[str, dict] = {}
     for i, (pos, tag) in enumerate(titles):
         txt = re.sub(r"\s+", " ", re.sub("<[^>]+>", "", tag)).strip()
-        for pat, key, name in _STMTS:
+        for key, match in _STMT_MATCH:
             if key in out:
                 continue
-            if re.match(pat, txt):
+            if match(txt):
                 end = titles[i + 1][0] if i + 1 < len(titles) else len(doc)
-                out[key] = {"title": name, "blocks": _html_to_blocks(doc[pos:end])}
+                disp = _STMT_NUMPREFIX.sub("", txt)
+                out[key] = {"title": disp, "blocks": _html_to_blocks(doc[pos:end])}
+                break
     return out
 
 
@@ -136,7 +157,10 @@ def _extract_notes(cur, rcept: str) -> dict:
         return tuple(int(x) if x.strip().isdigit() else 0 for x in p)
 
     rows.sort(key=lambda r: nk(r[0]))
-    return {no: {"title": title or "", "blocks": _html_to_blocks(html or "")} for no, title, html in rows}
+    return {
+        no: {"title": title or "", "blocks": _html_to_blocks(html or "")}
+        for no, title, html in rows
+    }
 
 
 def build_report_data(ticker: str, db_path: str = _DB) -> dict:
