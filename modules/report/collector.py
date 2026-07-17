@@ -1,7 +1,8 @@
 """collector.py — DART 사업보고서 5개년 원문 수집.
 
 corps.csv 순회 → dart.list(정기공시)에서 최신 5개 사업보고서 → dart.document로 원문 → raw_cache/.
-idempotent(이미 있으면 스킵). 정정공시 stub 폴백(sub_docs<30 또는 '사업의 내용' 없으면 직전 보고서).
+idempotent(이미 있으면 스킵). 정정공시 stub 폴백: final=False 로 원본까지 조회 →
+연도별 최신 rcept부터 유효성 검사(sub_docs<30 또는 '사업의 내용' 없으면 스텁) → 첫 유효본(첨부정정이면 원본) 채택.
 
 ⚠️ disclosure/relation의 DART 패턴을 복제(import 금지). 데이터 생산 모듈 경계.
 실행: python -m modules.report.collector   (DART_API_KEY 필요)
@@ -61,31 +62,47 @@ def _is_valid_business_report(dart, rcept_no: str) -> bool:
 
 
 def _fetch_annual_reports(dart, ticker: str) -> list[dict]:
-    """최신 5개 사업연도의 사업보고서 rcept 목록 (정정 stub은 직전 정상본으로 폴백)."""
+    """최신 5개 사업연도의 사업보고서 rcept 목록.
+
+    ⚠️ final=False 로 정정에 가려진 원본까지 조회한 뒤, **연도별로 최신 rcept부터**
+    유효성(_is_valid_business_report)을 검사해 첫 유효본을 채택한다. 리스트 반환 순서에
+    의존하지 않는다.
+    - [기재정정](본문 정정): 최신본이 유효 → 정정 반영본 채택.
+    - [첨부정정](첨부만 정정, 본문은 스텁): 최신본이 스텁 → 같은 연도 원본으로 폴백.
+      예: 012450 FY2025 [첨부정정](20260319000633, 영업보고서만 정정) → 원본(20260316001112) 채택.
+      final=True(기본)면 원본이 리스트에서 가려져 그 연도가 통째로 누락됐다.
+    """
     this_year = datetime.now().year
     start = f"{this_year - REPORT_YEARS - 1}-01-01"
     end = f"{this_year}-12-31"
-    df = dart.list(ticker, start=start, end=end, kind="A")  # A = 정기공시
+    # final=False: 정정에 가려진 원본까지 노출 (첨부정정 폴백에 필수)
+    df = dart.list(ticker, start=start, end=end, kind="A", final=False)  # A = 정기공시
     if df is None or len(df) == 0:
         return []
     # 사업보고서만 (반기·분기보고서 제외)
     biz = df[df["report_nm"].astype(str).str.contains("사업보고서", na=False)]
-    picked: dict[int, dict] = {}  # fiscal_year -> row
+    # 연도별 후보 수집 (보고서명에서 사업연도 추출: "사업보고서 (2025.12)")
+    by_fy: dict[int, list[tuple[str, str]]] = {}
     for _, row in biz.iterrows():
         rcept_no = str(row.get("rcept_no", ""))
         report_nm = str(row.get("report_nm", ""))
-        # 보고서명에서 사업연도 추출: "사업보고서 (2025.12)"
         m = re.search(r"\((\d{4})\.\d{2}\)", report_nm)
-        fy = int(m.group(1)) if m else None
-        if fy is None:
+        if not m:
             continue
-        if fy in picked:
-            continue  # 같은 연도 최초(최신 정정)만
-        if not _is_valid_business_report(dart, rcept_no):
-            continue  # 정정 stub → 이 rcept 스킵, 다음(직전 정상) 후보로
-        picked[fy] = {"rcept_no": rcept_no, "fiscal_year": fy, "report_nm": report_nm}
+        by_fy.setdefault(int(m.group(1)), []).append((rcept_no, report_nm))
+    # 최신 연도부터, 연도 안에서는 최신 rcept부터 첫 유효본 채택 (스텁이면 원본으로 폴백)
+    picked: dict[int, dict] = {}
+    for fy in sorted(by_fy, reverse=True):
         if len(picked) >= REPORT_YEARS:
             break
+        for rcept_no, report_nm in sorted(by_fy[fy], key=lambda x: x[0], reverse=True):
+            if _is_valid_business_report(dart, rcept_no):
+                picked[fy] = {
+                    "rcept_no": rcept_no,
+                    "fiscal_year": fy,
+                    "report_nm": report_nm,
+                }
+                break  # 이 연도 확정
     return sorted(picked.values(), key=lambda r: -r["fiscal_year"])
 
 
