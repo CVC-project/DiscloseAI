@@ -156,6 +156,70 @@ def test_no_horizontal_scroll_1024(page):
     assert over <= 2, f"가로 오버플로 {over}px"
 
 
+def test_toc_note_reachability(page):
+    """bottom-up 주석 커버리지(V-075): 원장의 전 실주석이 _pinForNote로 어떤 카드든 도달(dead click 0).
+
+    pin을 가로채 기록만 하므로(상태 무변경) setState 비동기와 무관하게 결정적."""
+    import json
+
+    g = json.load(open(f"integration/dossier/data/galaxy_{TICKER}.json", encoding="utf-8"))
+    notes = list((g.get("meta") or {}).get("routing_ledger", {}).keys())
+    assert notes, "routing_ledger 비어있음"
+    dead = page.evaluate(
+        """(notes) => {
+      const el = document.querySelector('[data-row]');
+      let inst = null;
+      for (const k in el) if (k.startsWith('__reactFiber$')) {
+        let f = el[k];
+        while (f) {
+          const s = f.stateNode;
+          if (s && s._pinForNote) { inst = s; break; }
+          if (s && s.logic && s.logic._pinForNote) { inst = s.logic; break; }  // dc-runtime: 래퍼.logic
+          f = f.return;
+        }
+      }
+      if (!inst) return ['NO_INSTANCE'];
+      const orig = inst.pin; const calls = [];
+      inst.pin = (key) => { calls.push(key); };
+      const dead = [];
+      try {
+        for (const n of notes) { calls.length = 0; inst._pinForNote(n); if (!calls.length) dead.push(n); }
+      } finally { inst.pin = orig; }
+      return dead;
+    }""",
+        notes,
+    )
+    assert dead == [], f"dead click 주석 {len(dead)}건: {dead}"
+
+
+def test_identity_highlight(page):
+    """항등식 HL(V-075, A9 합계→구성): 합계 행 클릭 시 구성 행 동반 발광 + Esc 잔광 0."""
+    cases = [
+        ("is-grossprofit", ["is-revenue", "is-cogs"]),
+        ("is-pretax", ["is-opincome", "is-nonop"]),
+    ]
+    ran = False
+    for via, comps in cases:
+        el = page.query_selector(f'[data-row="{via}"]')
+        if not el:
+            continue  # 플랫폼(cogs 결측) 등 행 없는 티커는 해당 케이스 없음
+        ran = True
+        el.scroll_into_view_if_needed()
+        time.sleep(0.3)
+        el.click()
+        time.sleep(0.7)
+        for c in comps:
+            ce = page.query_selector(f'[data-row="{c}"]')
+            if ce:
+                assert ce.get_attribute("data-hl") == "1", f"{via} 클릭 시 {c} 미발광"
+        page.keyboard.press("Escape")
+        time.sleep(0.4)
+        ce = page.query_selector(f'[data-row="{via}"]')
+        assert not (ce and ce.get_attribute("data-hl")), f"Esc 후 {via} 잔광"
+    if not ran:
+        pytest.skip("항등식 대상 행 없음(이 티커 레이아웃)")
+
+
 def test_zero_console_errors(page):
     """상호작용 전 과정 콘솔 에러 0."""
     assert not page._errs, f"콘솔 에러 {len(page._errs)}: {page._errs[:2]}"

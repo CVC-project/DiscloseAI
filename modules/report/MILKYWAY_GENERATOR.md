@@ -103,7 +103,7 @@ S8(원문 동반 생성): publish 직후 `python integration/dossier/build_repor
 
 ## 6. 주석 라우팅 원장(R6.6) · 인터랙션 QA(R6.7)
 
-**주석 라우팅 원장** — "모든 실주석이 처리됐는가": 그 회사 사업보고서의 **실주석 전수**(reports.db 기준)가 `meta.routing_ledger`에 매핑돼야 한다 — `dive:cited`(본문 인용)·`appendix:nX`·`row:<id>`(패널 행)·`new-dive:<key>`(고유 항목 신규)·`excluded`(+reason 필수). check_golden §7이 원장 누락·MISSING·사유 없는 제외·**유령 인용**(실주석에 없는 주N — corp.rcept_no 기준)·appendix 미실존·new-dive 미생성을 전부 FAIL로 잡는다.
+**주석 라우팅 원장** — "모든 실주석이 처리됐는가": 그 회사 사업보고서의 **실주석 전수**(reports.db 기준)가 `meta.routing_ledger`에 매핑돼야 한다 — `dive:cited`(본문 인용)·`appendix:nX`·`row:<id>`(패널 행)·`new-dive:<key>`(고유 항목 신규)·`excluded`(+reason 필수). check_golden §7이 원장 누락·MISSING·사유 없는 제외·**유령 인용**(실주석에 없는 주N — corp.rcept_no 기준)·appendix 미실존·new-dive 미생성을 전부 FAIL로 잡는다. ⚠️ **V-075: `excluded`는 사실상 폐기** — 도달 경로 없는 주석은 strict §9(bottom-up 커버리지)가 dead click으로 FAIL. 정성·소액 주석도 관련 카드에 `(주N)` 인용 한 구절(dive:cited)로 연결한다(삼성 T0=excluded 0이 기준).
 
 **주석 전수 ↔ 딥다이브 연결(R6.6a, V-062·V-063)** — 원장이 "처리됐는가"라면, 이 규약은 "**클릭하면 그 주석의 딥다이브에 실제로 닿는가**"다. 사용자가 ① 사업보고서 **원문 목차의 주N** ② 재무제표 **패널 서브행**(매출채권·재고자산…) ③ **원문 재무제표 표의 계정명 셀**(`_srcTable`, 계정명→dive 색인 `_nameDive`) 중 무엇을 눌러도, 그 주석 고유의 설명 카드로 동기·핀돼야 한다 — 운전자본(k10) 같은 상위 흐름 dive에 뭉뚱그려지지 않게. 세 경로 중 하나로 **전 주석을 반드시** 연결한다:
 - **(A) 실체 주석 → 정규 dive(`dives{}`) + row 앵커** — 계정 잔액·구성이 **패널 행으로 존재**하는 주석(매출채권·재고·차입금·충당부채·자본금…)은 **`appendix`가 아니라 `dives`에 둔다**(은하수에서 이미 설명되는 항목이라 별도 부록이 아님). **카드 키 = 그 회사 주번호 `n<주N>`**(주번호는 회사마다 다르다 — SK 매출채권=`n8`, 삼성=`n7`. 삼성 키 재사용 금지), `badge`는 유래 재무제표(`재무상태표 · 주N`/`손익계산서 · 주N`), 원장은 `new-dive:nX`. **라우팅·하이라이트는 카드 JSON의 `row`(주 앵커 1개)+`hl`(발광 행 배열)로 선언한다(V-069)** — 렌더러 `_diveKey`가 `.row`를 최우선 해석(`ROW2DIVE` 정적 테이블보다 우선)하므로 그 회사 주번호로 정확 라우팅. ⚠️ **삼성 nX는 레거시**로 `galaxy.html`의 정적 `ROW2DIVE`/`HL`에 삼성 주번호가 하드코딩돼 있으나(무회귀 위해 유지), **신규 티커는 정적 테이블을 건드리지 않고 `.row`/`.hl`만 선언**하면 된다. **APPENDIX(`appendix[]`)는 무앵커 주석 전용** — 총칙(주1~3)·우발/약정·재무위험·공정가치측정·특수관계자·성격별비용·EPS·사업결합·후속사건처럼 **패널에 고유 행이 없는** 주석만 하단 부록에 남긴다.
@@ -203,11 +203,12 @@ S8(원문 동반 생성): publish 직후 `python integration/dossier/build_repor
 **D3 산문** — 승격·신규 카드를 골든 깊이로: what 2문장+실수치 브래킷·links≥1(a=패널 실값)·why 1문장·five(series 있으면 key, 없으면 skip). Claude 직접 작성(GPU 폐기), 근거는 facts/주석 원문만(D7: LLM은 숫자 안 만듦). prose-writer 서브에이전트 활용 가능(프롬프트 self-contained).
 
 **D4 수렴 루프** (지적 0까지 D2~D4 반복):
-1. `check_golden <t> --strict` 0 — §8 원문 정합(cf 필수·오라벨)·amt 표기·승격 구조(.row·note_dive) 포함.
+1. `check_golden <t> --strict` 0 — §8 원문 정합(cf 필수·오라벨)·amt 표기·승격 구조(.row·note_dive) + **§9 bottom-up 커버리지(V-075)** 포함.
 2. `check_golden --all` 0 — 전 골든 무회귀(렌더러 안 건드렸으면 데이터만).
 3. **accuracy-verifier**(서브에이전트): 신규·수정 브래킷 전수 원문 재도출 — REFUTED 0.
 4. **completeness-auditor**(서브에이전트): **삼성 T0 패리티 감사** — note_dive·승격 잔존 0·amt·라벨·값색·원문 정오·3-way 연결.
 5. `GALAXY_TICKER=<t> pytest tests/report/test_galaxy_interaction.py` + **라이브 스윕**(Playwright): 원문 TOC 전 주석 클릭→기대 dive 핀(**클릭 사이 Esc**), 승격 행 클릭→그 회사 주N 카드, BS행→코어 dive 진입 시 원문=주석(R6.6d), `(주N)` 계정셀→원문 이동, 파선+칩, 콘솔 에러 0.
+6. **bottom-up 주석 커버리지(V-075)** — top-down 빌드가 흘린 주석의 기계 검출 루프: 실주석 전수가 ①n카드 ②note_dive ③원장(appendix:/new-dive:/row:/dive:cited 인용) 중 하나로 **도달 가능**해야 한다(dead click 0, 삼성 T0=excluded 0이 기준). `excluded`는 §9가 FAIL로 잡으므로 사실상 폐기 — 정성·소액 주석도 관련 카드 산문에 `(주N)` 한 구절로 인용(dive:cited)하면 족하다. note_dive 대상 카드도 `주N` 리터럴 인용 필수(내용 검증 가능성, V-070·071 교훈). pytest `test_toc_note_reachability`(renderer `_pinForNote` 실호출)가 라이브 게이트.
 
 **D5 채록·커밋** — VARIATIONS 티커 변형 채록(신규 없어도 명시), **티커당 1커밋**(전 골든 무회귀 확인 후). 커밋 패턴 `feat(golden): <회사> 캐스케이드 — 원문 3-way·V-062~069 패리티 (V-0xx)`.
 

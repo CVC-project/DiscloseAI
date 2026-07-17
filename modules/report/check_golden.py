@@ -512,6 +512,49 @@ def _check_strict(ticker: str, G: dict, dives: dict) -> list[str]:
     for n, key in (meta.get("note_dive") or {}).items():
         if key not in dives:
             gaps.append(f"[note_dive] 주{n}→{key} 대상 dive 없음")
+
+    # ── 9) (strict) bottom-up 주석 커버리지 — dead click 0 (V-075) ──
+    # 원칙: 실주석은 어떤 경로로든 도달해야 한다(T0 삼성 = excluded 0). top-down 빌드가
+    # 흘린 주석을 기계 검출: (a) excluded 금지 (b) row: 타깃 행 실존 (c) note_dive·cited 인용 실존.
+    panels_rows = {
+        r.get("row")
+        for z, rs in (G.get("panels") or {}).items()
+        for r in (rs or [])
+    }
+    merged = dict(dives)
+    for a in G.get("appendix") or []:
+        merged.setdefault(a.get("n"), a)
+    blob_merged = json.dumps(
+        [[d.get("what"), d.get("why"), d.get("lnote")] for d in merged.values()],
+        ensure_ascii=False,
+    )
+
+    def _cited(n):  # 렌더러 _pinForNote dive:cited 정규식과 동일 계열
+        return re.search(r"주\s?" + re.escape(str(n)) + r"(?=\D|$)", blob_merged)
+
+    note_dive = meta.get("note_dive") or {}
+    for n, ent in (meta.get("routing_ledger") or {}).items():
+        to = (ent or {}).get("to", "")
+        # 렌더러 _pinForNote 도달성 재현: ① n<주번호> 카드 → ② note_dive → ③ 원장 경로
+        if ("n" + str(n)) in merged or (n in note_dive and note_dive[n] in merged):
+            continue
+        if to.startswith(("appendix:", "new-dive:")):
+            continue  # 실존 검사는 §7이 담당
+        if to.startswith("row:"):
+            if to.split(":", 1)[1] not in panels_rows:
+                gaps.append(f"[커버리지] 주{n} → {to} — 패널에 행 없음")
+            continue
+        if to == "dive:cited" and _cited(n):
+            continue
+        gaps.append(
+            f"[커버리지] 주{n} '{ent.get('title','')}' ({to or '?'}) — 도달 경로 없음(dead click). "
+            f"n카드/note_dive/row:/인용(dive:cited) 중 하나 필요(V-075)"
+        )
+    for n, key in note_dive.items():
+        if key in dives and not _cited(n):
+            gaps.append(
+                f"[커버리지] note_dive 주{n}→{key} — 대상 카드에 '주{n}' 인용 없음(내용 검증 불가, V-070 교훈)"
+            )
     return gaps
 
 
