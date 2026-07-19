@@ -587,21 +587,22 @@ class Component extends DCLogic {
     if (row.indexOf('eq-') === 0) return { type: 'stmt', id: 'eq' };
     return { type: 'stmt', id: 'bs' };
   }
-  // 목차의 주석 클릭 → 원장(routing_ledger)으로 대응 딥다이브 동기 핀
+  // 목차의 주석 클릭 → 저작된 라우팅(전용카드·note_dive·원장 명시타깃)으로만 동기 핀.
+  // ⚠️ R6.10(V-084): 산문 "(주N)" 상호참조 스캔(fuzzy) 폐기 — 상호참조는 목적지 근거가 아니다(주20 공정가치→위험관리 오핀 근절).
+  //     저작된 경로가 없으면(dive:cited 미저작·excluded 등) 무핀 = 원문만 표시(삼성 T0 계약과 동일).
   _pinForNote(nn) {
     const D = this.getDives();
-    if (D['n' + nn]) { this.pin('n' + nn); return; }  // 그 주석 자체의 APPENDIX 카드 우선(원장이 dive:cited여도 동기 — 버그 수정)
-    const nd = (this._G && this._G.meta && this._G.meta.note_dive) || {};  // 코어 dive로 매핑된 주석(주10→ppe·주27→k11 등)
+    if (D['n' + nn]) { this.pin('n' + nn); return; }  // ① 그 주석 자체의 APPENDIX/new-dive 카드
+    const nd = (this._G && this._G.meta && this._G.meta.note_dive) || {};  // ② 코어 dive로 저작된 홈(주10→ppe·주27→k11 등)
     if (nd[nn] && D[nd[nn]]) { this.pin(nd[nn]); return; }
     const led = (this._G && this._G.meta && this._G.meta.routing_ledger) || {};
-    const ent = led[nn]; if (!ent) return;
-    const to = ent.to || '';
-    if (to.indexOf('appendix:') === 0 || to.indexOf('new-dive:') === 0) { const k = to.split(':')[1]; if (D[k]) this.pin(k); return; }
-    if (to.indexOf('row:') === 0) { const k = this._diveKey(to.slice(4)); if (D[k]) this.pin(k); return; }
-    if (to === 'dive:cited') {
-      const re = new RegExp('주\\s?' + String(nn).replace('.', '\\.') + '(?=\\D|$)');
-      for (const k in D) { if (re.test(JSON.stringify([D[k].what, D[k].why, D[k].lnote]))) { this.pin(k); return; } }
+    const ent = led[nn];
+    if (ent) {  // ③ 원장 명시 타깃(appendix:/new-dive:/row:)
+      const to = ent.to || '';
+      if (to.indexOf('appendix:') === 0 || to.indexOf('new-dive:') === 0) { const k = to.split(':')[1]; if (D[k]) { this.pin(k); return; } }
+      else if (to.indexOf('row:') === 0) { const k = this._diveKey(to.slice(4)); if (D[k]) { this.pin(k); return; } }
     }
+    this.unpin();  // 저작된 홈 없음 → 무핀(원문만)
   }
   openSrc = (key) => {
     const view = this._srcForDive(key);

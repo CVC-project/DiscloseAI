@@ -625,6 +625,33 @@ def _check_strict(ticker: str, G: dict, dives: dict) -> list[str]:
                     gaps.append(
                         f"[BS앵커] '{lab}' 실계정 {tot:.2f}조·전용 주석 있음인데 재무상태표(패널) 행 없음(잔차 흡수) — 행 신설+승격 필요(V-082)"
                     )
+
+    # ── 11) (strict) 주석 착지 결정론 (V-084 · R6.10) ──
+    # 원칙: 주석 클릭의 착지 카드는 '저작된 경로'(전용카드 n{N}·meta.note_dive·원장 명시타깃)로만 결정된다.
+    # 렌더러의 산문 "(주N)" fuzzy 스캔은 폐기(상호참조를 목적지로 오인 → 주20 공정가치→위험관리 오핀). 저작 없으면 무핀=원문만(삼성 T0 계약).
+    # 게이트: note_dive[N]=key는 그 카드 '자신의' 산문(what/why/lnote/story)이 주N을 인용해야 한다.
+    #   (§9는 blob_merged=전 카드 합쳐 검사 → 타 카드가 인용해도 통과하는 약점. §11이 카드별로 좁혀 오핀 저작 차단.)
+    # 캘리브레이션: 삼성 T0(주10→ppe·22→k5·25→k7·27→k11·30→k2)는 전부 자기 산문에서 인용 → 0갭.
+    merged11 = dict(dives)
+    for a in G.get("appendix") or []:
+        merged11.setdefault(a.get("n"), a)
+
+    def _cites_self(card, n):
+        blob = json.dumps(
+            [card.get("what"), card.get("why"), card.get("lnote"), card.get("story")],
+            ensure_ascii=False,
+        )
+        return re.search(r"주\s?" + re.escape(str(n)) + r"(?=\D|$)", blob)
+
+    for n, key in (meta.get("note_dive") or {}).items():
+        card = merged11.get(key)
+        if card is None:
+            continue  # dangling은 §8-3이 검출
+        if not _cites_self(card, n):
+            gaps.append(
+                f"[착지] note_dive 주{n}→{key} — 카드 '{key}' 자신의 산문에 '주{n}' 인용 없음 "
+                f"(오핀 저작 위험·홈 아님 의심 — 인용 추가 또는 무핀 처리, R6.10/V-084)"
+            )
     return gaps
 
 

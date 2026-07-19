@@ -9,6 +9,11 @@
   - **구표준→T0 패리티 uplift 2본**: 고려아연(제련·유상증자·파생헤지)·현대건설(건설 진행기준·계약자산/부채 양면·PF보증). **uplift 레시피 확립**: 기존 산문 유지 + 승격 dive `.row/.hl`·note_dive·excluded 인용 → `--strict` 커버리지 갭 0.
 - 각 5게이트 PASS(check_golden --strict 0·--all 12본 0·accuracy REFUTED 0·completeness T0 패리티·pytest 9/9). corps.csv tier·galaxy_index(12본)·report_*.json(SKT/HMM/KT&G 신규) 갱신.
 
+## 리더 검수 반영 (2026-07-19~20, 완주 후)
+- **V-082 BS 실계정-행-앵커 게이트(§10)** — 충당부채·순확정급여·이연법인세·재고·무형·관계기업 등 fs_account 재무상태표 실계정이 잔차 흡수·부록 잔류하던 것 근절. `check_golden --strict §10`이 강제(삼성 T0 캘리브레이션). T1 전본 행 신설+승격. V-070 오선례 폐기.
+- **V-083 Zone E 데이터 구동화** — `buildPanelE` 신설로 자본변동표 정적 7행 템플릿(라벨-값 불일치) 해소. `panels.E` 데이터 구동.
+- **V-084 주석 착지 결정론(R6.10·§11)** — `_pinForNote` fuzzy 산문 스캔 폐기(주20 공정가치→위험관리 오핀 근절). 착지는 저작 경로(n{N}·note_dive·원장 명시타깃)로만, 없으면 무핀(삼성 계약). note_dive 11건 저작. `check_golden --strict §11`(note_dive 자기인용)·pytest 2종 신설. **새 골든/수정 시 R6.10 준수 — dive:cited는 note_dive 동반 또는 무핀, fuzzy 매칭 금지.**
+
 ## 남은 일 (다음 세션)
 1. **리더 DL 시각승인** — T1 신규 5본(017670·011200·033780·010130·000720)은 리더 contact-sheet 스크린샷 시각 승인 대상(하네스 자동 완주는 끝, DL 게이트만 대기). 서버 `python -m http.server 8000` → `galaxy.html?ticker=<t>`.
 2. **3교훈 코드·체커 승격 검토(리더 판단)** — 5회+ 반복돼 안정: ①note-extractor 후속사건/사업결합 표 열 매핑 ②prose 배치 패널 행라벨 정확 전달 ③부문합>매출 내부거래 정산. §9 규칙상 승격 후보(현재 프롬프트 규율로 관리 중, 이미지 논의건).
@@ -17,7 +22,8 @@
 
 ## 렌더러 미결(우선순위 낮음, 리더 트랙)
 - **dead-click 2~3행**(is-nonop/bs-liab/bs-equity 합계행 토글 좌표 충돌) — 골든 공통 렌더러 버그(V-059), 전 골든 동형. 콘텐츠 무관.
-- **Zone E 정적 템플릿**(eq-buyback 7행) vs 6행 회사 라벨 불일치 — 계열 공통, 신규 결함 아님.
+- ~~Zone E 정적 템플릿 라벨 불일치~~ — **해소(V-083 buildPanelE)**.
+- ~~주석 클릭 오핀(fuzzy)~~ — **해소(V-084 R6.10)**.
 
 ## 주의
 - 인코딩 `PYTHONUTF8=1`. `reports.db`·`facts/`·`raw_cache/`는 gitignore(로컬 전용). main 직접 push·force push 금지.

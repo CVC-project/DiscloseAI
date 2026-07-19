@@ -156,16 +156,20 @@ def test_no_horizontal_scroll_1024(page):
     assert over <= 2, f"가로 오버플로 {over}px"
 
 
-def test_toc_note_reachability(page):
-    """bottom-up 주석 커버리지(V-075): 원장의 전 실주석이 _pinForNote로 어떤 카드든 도달(dead click 0).
+def test_toc_note_pin_authored_only(page):
+    """주석 착지 결정론(V-084 · R6.10): 주석 클릭은 '저작된 경로'로만 착지한다.
 
-    pin을 가로채 기록만 하므로(상태 무변경) setState 비동기와 무관하게 결정적."""
+    계약: 각 주석 클릭 시 _pinForNote는 (a) 저작된 카드에 핀(전용카드 n{N}·note_dive[N]·
+    원장 명시타깃 appendix:/new-dive:/row:) 하거나 (b) 무핀(원문만 — 저작된 홈 없음)이다.
+    ⚠️ 산문 "(주N)" 상호참조 fuzzy 스캔으로 착지하는 '오핀'은 금지(주20 공정가치→위험관리 버그).
+    pin/unpin을 가로채 기록만 하므로(상태 무변경) setState 비동기와 무관하게 결정적."""
     import json
 
     g = json.load(open(f"integration/dossier/data/galaxy_{TICKER}.json", encoding="utf-8"))
-    notes = list((g.get("meta") or {}).get("routing_ledger", {}).keys())
+    meta = g.get("meta") or {}
+    notes = list(meta.get("routing_ledger", {}).keys())
     assert notes, "routing_ledger 비어있음"
-    dead = page.evaluate(
+    bad = page.evaluate(
         """(notes) => {
       const el = document.querySelector('[data-row]');
       let inst = null;
@@ -179,17 +183,55 @@ def test_toc_note_reachability(page):
         }
       }
       if (!inst) return ['NO_INSTANCE'];
-      const orig = inst.pin; const calls = [];
-      inst.pin = (key) => { calls.push(key); };
-      const dead = [];
+      const G = inst._G || {}; const meta = G.meta || {};
+      const nd = meta.note_dive || {}, led = meta.routing_ledger || {};
+      const D = inst.getDives();
+      // 저작된 착지 키인지 판정 (fuzzy 아님)
+      const authorized = (n, key) => {
+        if (key === 'n' + n) return true;
+        if (nd[n] === key) return true;
+        const to = (led[n] || {}).to || '';
+        if (to === 'appendix:' + key || to === 'new-dive:' + key) return true;
+        if (to.indexOf('row:') === 0) return true;  // row 타깃(§9가 실존 검증)
+        return false;
+      };
+      const origP = inst.pin, origU = inst.unpin; const rec = [];
+      inst.pin = (key) => { rec.push(key); };
+      inst.unpin = () => { rec.push(null); };
+      const bad = [];
       try {
-        for (const n of notes) { calls.length = 0; inst._pinForNote(n); if (!calls.length) dead.push(n); }
-      } finally { inst.pin = orig; }
-      return dead;
+        for (const n of notes) {
+          rec.length = 0; inst._pinForNote(n);
+          const key = rec.length ? rec[rec.length - 1] : null;
+          if (key !== null && !authorized(n, key)) bad.push(n + '→' + key);  // 오핀(fuzzy)
+        }
+      } finally { inst.pin = origP; inst.unpin = origU; }
+      return bad;
     }""",
         notes,
     )
-    assert dead == [], f"dead click 주석 {len(dead)}건: {dead}"
+    assert bad == [], f"저작되지 않은 오핀(fuzzy) 착지 {len(bad)}건: {bad}"
+
+
+def test_no_fuzzy_scan_in_renderer(page):
+    """R6.10 회귀 방지: _pinForNote에 산문 스캔 fuzzy 폴백('for (const k in D)' + re.test)이 재도입되지 않았는지."""
+    src = page.evaluate(
+        """() => {
+      const el = document.querySelector('[data-row]');
+      for (const k in el) if (k.startsWith('__reactFiber$')) {
+        let f = el[k];
+        while (f) {
+          const s = f.stateNode;
+          const inst = (s && s._pinForNote) ? s : (s && s.logic && s.logic._pinForNote ? s.logic : null);
+          if (inst) return inst._pinForNote.toString();
+          f = f.return;
+        }
+      }
+      return 'NO_INSTANCE';
+    }"""
+    )
+    assert src != "NO_INSTANCE", "인스턴스 못 찾음"
+    assert "for (const k in D)" not in src, "fuzzy 산문 스캔 폴백이 _pinForNote에 재도입됨(R6.10 위반)"
 
 
 def test_identity_highlight(page):
