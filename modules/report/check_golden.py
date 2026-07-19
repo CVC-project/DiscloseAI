@@ -555,6 +555,69 @@ def _check_strict(ticker: str, G: dict, dives: dict) -> list[str]:
             gaps.append(
                 f"[커버리지] note_dive 주{n}→{key} — 대상 카드에 '주{n}' 인용 없음(내용 검증 불가, V-070 교훈)"
             )
+
+    # ── 10) (strict) BS 실계정-행-앵커 정합 (V-082) ──
+    # 원칙(삼성 T0 계약): fs_account 재무상태표에 전용 실주석이 있는 실계정(충당부채·확정급여·이연법인세·
+    # 투자부동산·사용권자산·관계기업 등)이 material로 있으면 → 패널 '재무상태표'에 그 계정 행이 있어야 한다
+    # (잔차 bs-*-etc 흡수 금지). 있으면 카드가 APPENDIX 하단에만 남지 않고 승격(.row) 도달해야 한다.
+    # 근거: 삼성은 bs-prov 충당부채·bs-dba 순확정급여·bs-dta 이연법인세 등 전 실계정이 행으로 존재.
+    # V-070의 "패널 전용행 없으면 무앵커=부록 정답" 판단을 폐기(잘못된 선례가 T1에 전파됨).
+    db10 = os.path.join(_HERE, "data", "reports.db")
+    corp = G.get("corp") or {}
+    fy = corp.get("fiscal_year")
+    if os.path.exists(db10) and fy:
+        import sqlite3
+
+        con = sqlite3.connect(db10)
+        bs_acc = [
+            (r[0], r[1])
+            for r in con.execute(
+                "select account_nm, amount from fs_account where ticker=? and fiscal_year=? and sj_div='BS'",
+                (ticker, fy),
+            )
+            if r[1] is not None
+        ]
+        con.close()
+        if bs_acc:
+            # (account_kw[패널/계정 매칭], note_kw[전용 주석 존재 확인])
+            BS_ANCHOR = [
+                (["충당부채", "환불부채"], ["충당부채", "환불부채"]),
+                (["확정급여"], ["종업원급여", "퇴직급여", "확정급여"]),
+                (["이연법인세"], ["이연법인세", "법인세"]),
+                (["투자부동산"], ["투자부동산"]),
+                (["사용권자산"], ["사용권자산", "리스"]),
+                (["관계기업", "공동기업"], ["관계기업", "공동기업", "지분법"]),
+            ]
+            ledger10 = (G.get("meta") or {}).get("routing_ledger") or {}
+            note_titles = " ".join(
+                (e or {}).get("title", "") for e in ledger10.values()
+            )
+            panel_names = " ".join(
+                r.get("name", "")
+                for z, rs in (G.get("panels") or {}).items()
+                for r in (rs or [])
+            )
+            apx_names = {a.get("n"): a.get("name", "") for a in (G.get("appendix") or [])}
+            MAT = 0.05  # 조 — 이 미만 계정은 잔차/인용 허용(placeholder 방지)
+            for akw, nkw in BS_ANCHOR:
+                tot = sum(
+                    abs(a) / 1e12 for nm, a in bs_acc if any(k in nm for k in akw)
+                )
+                if tot < MAT:
+                    continue
+                if not any(k in note_titles for k in nkw):
+                    continue  # 전용 실주석 없으면 앵커 강제 안 함(범주별·공정가치 등 메타주석 자동 예외)
+                lab = akw[0]
+                in_panel = any(k in panel_names for k in akw)
+                if not in_panel:
+                    gaps.append(
+                        f"[BS앵커] '{lab}' 실계정 {tot:.2f}조·전용 주석 있음인데 패널 재무상태표 행 없음(잔차 흡수) — 행 신설 필요(V-082)"
+                    )
+                apx_hit = [n for n, anm in apx_names.items() if any(k in anm for k in akw)]
+                if apx_hit and in_panel:
+                    gaps.append(
+                        f"[BS앵커] '{lab}' 패널 행 있는데 카드가 APPENDIX({apx_hit}) — dives 승격(.row 앵커) 필요(V-082)"
+                    )
     return gaps
 
 

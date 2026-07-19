@@ -256,34 +256,7 @@ a{color:var(--cyan);} a:hover{color:var(--mint);}
             <div style="font-size:12.5px;color:var(--dim);">자본변동표(당기만) — 주주의 몫(자본)이 1년 새 어떻게 늘고 줄었나예요.</div>
           </div>
         </div>
-        <div data-row="eq-begin" onclick="{{ onRow }}" title="{{ pt.eq_begin }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;cursor:pointer;" style-hover="background:rgba(233,196,107,.06)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">E0</span><span>기초자본</span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--gold);">{{ pv.eq_begin }}</span>
-        </div>
-        <div data-row="eq-netincome" onclick="{{ onRow }}" title="{{ pt.eq_netincome }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(233,196,107,.06)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">E1</span><span>당기순이익 적립</span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--gold);">{{ pv.eq_netincome }}</span>
-        </div>
-        <div data-row="eq-oci" onclick="{{ onRow }}" title="{{ pt.eq_oci }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(233,196,107,.06)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">E2</span><span>기타포괄손익 (OCI)</span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--gold);">{{ pv.eq_oci }}</span>
-        </div>
-        <div data-row="eq-div" onclick="{{ onRow }}" title="{{ pt.eq_div }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(233,196,107,.06)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">E3</span><span>배당 <span style="font-size:11px;color:var(--dim);font-weight:400;">⑬ 재무활동과 같은 돈</span></span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--coral);">{{ pv.eq_div }}</span>
-        </div>
-        <div data-row="eq-buyback" onclick="{{ onRow }}" title="{{ pt.eq_buyback }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(233,196,107,.06)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">E4</span><span>자기주식 취득 <span style="font-size:11px;color:var(--dim);font-weight:400;">⑬ 재무활동과 같은 돈</span></span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--coral);">{{ pv.eq_buyback }}</span>
-        </div>
-        <div data-row="eq-other" onclick="{{ onRow }}" title="{{ pt.eq_other }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(233,196,107,.06)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">E5</span><span>주식보상·기타</span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--gold);">{{ pv.eq_other }}</span>
-        </div>
-        <div data-row="eq-end" onclick="{{ onRow }}" title="{{ pt.eq_end }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid rgba(233,196,107,.35);cursor:pointer;background:rgba(233,196,107,.06);font-weight:700;" style-hover="background:rgba(233,196,107,.11)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:.08em;">E6</span><span>기말자본</span></div>
-          <span style="font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);text-shadow:0 0 12px rgba(233,196,107,.5);">{{ pv.eq_end }}</span>
-        </div>
+        {{ eqRows }}
       </div>
 
       <div data-epilogue="" style="padding:44px 6px 20px;text-align:center;">
@@ -1474,6 +1447,34 @@ class Component extends DCLogic {
     return h('div', { key: 'panelB' }, out);
   }
 
+  buildPanelE() {
+    // 패널 E(자본변동)를 panels.E에서 데이터 구동 렌더 — 회사별 자본거래 차이 흡수(V-083:
+    // eq-buyback 없는 회사에서 정적 'E4 자기주식취득' 공란·'E5 주식보상·기타' 라벨 불일치 사고).
+    // 라벨은 panels.E 각 행의 실제 name, 없는 행은 자동 생략(placeholder 금지). buildPanelB와 동식.
+    const h = React.createElement;
+    const E = (this._G && this._G.panels && this._G.panels.E) || [];
+    const OUT = { 'eq-div': 1, 'eq-buyback': 1 };  // 유출 = coral
+    const FIN = { 'eq-div': 1, 'eq-buyback': 1 };   // 재무활동과 같은 돈 힌트
+    const out = [];
+    E.forEach((r, i) => {
+      const isEnd = r.row === 'eq-end';
+      const vc = this.colOf(r.color || (OUT[r.row] ? 'coral' : 'gold'));
+      out.push(h('div', { key: r.row, 'data-row': r.row, onClick: this.onRow,
+        title: (r.raw_mn != null ? r.raw_mn.toLocaleString() + ' 백만원' : r.name),
+        style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          height: 'var(--row-s)', padding: '0 16px', cursor: 'pointer',
+          borderTop: i === 0 ? 'none' : (isEnd ? '1px solid rgba(233,196,107,.35)' : '1px solid var(--line)'),
+          background: isEnd ? 'rgba(233,196,107,.06)' : 'transparent',
+          fontWeight: isEnd ? 700 : 400 } },
+        h('div', { style: { display: 'flex', alignItems: 'center', gap: '10px' } },
+          h('span', { style: { fontFamily: 'var(--mono)', fontSize: '10px', color: isEnd ? 'var(--gold)' : 'var(--dim2)', letterSpacing: '.08em' } }, 'E' + i),
+          h('span', null, r.name),
+          FIN[r.row] ? h('span', { style: { fontSize: '11px', color: 'var(--dim)', fontWeight: 400 } }, '⑬ 재무활동과 같은 돈') : null),
+        h('span', { style: { fontFamily: 'var(--mono)', fontSize: isEnd ? '17px' : '15px', fontWeight: isEnd ? 700 : 600, color: vc, textShadow: isEnd ? '0 0 12px rgba(233,196,107,.5)' : 'none' } }, (r.v == null || r.v === '') ? '—' : r.v)));
+    });
+    return h('div', { key: 'panelE' }, out);
+  }
+
   buildAppendix() {
     const h = React.createElement;
     const items = (this._G && this._G.appendix) || [];
@@ -1510,6 +1511,7 @@ class Component extends DCLogic {
       runningChip: safe(this.buildRunningChip, null),
       appendixList: safe(this.buildAppendix, null),
       panelB: safe(this.buildPanelB, null),
+      eqRows: safe(this.buildPanelE, null),
       bsbar: (() => { const f = (r) => { const x = (this._G && this._G.panels && this._G.panels.D || []).find(q => q.row === r); return x && x.raw_mn ? x.raw_mn : null; }; const a = f('bs-assets'), l = f('bs-liab'), e = f('bs-equity'); if (a && l && e) return { l: Math.round(l / a * 100), e: Math.round(e / a * 100) }; return { l: 23, e: 77 }; })(),
       sub: (() => { try { const o = {}; for (const g of ['sgna','nonop','ni','noncash','wc','inv','fin','bsa','bsl','bse']) o[g] = this.buildSub(g); return o; } catch (e) { console.warn('sub 빌더 오류: ' + e.message); return {}; } })(),
       onRow: this.onRow,
