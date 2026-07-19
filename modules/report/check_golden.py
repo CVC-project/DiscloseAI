@@ -579,44 +579,51 @@ def _check_strict(ticker: str, G: dict, dives: dict) -> list[str]:
         ]
         con.close()
         if bs_acc:
-            # (account_kw[패널/계정 매칭], note_kw[전용 주석 존재 확인])
+            # (account_kw[BS 실계정·패널D 행 매칭], note_kw[전용 주석 존재], card_kw[부록 카드명 매칭])
+            # ⚠️ 계정명 변이 대응: 순확정급여↔퇴직급여제도(카드), 관계기업투자↔지분법적용투자자산.
             BS_ANCHOR = [
-                (["충당부채", "환불부채"], ["충당부채", "환불부채"]),
-                (["확정급여"], ["종업원급여", "퇴직급여", "확정급여"]),
-                (["이연법인세"], ["이연법인세", "법인세"]),
-                (["투자부동산"], ["투자부동산"]),
-                (["사용권자산"], ["사용권자산", "리스"]),
-                (["관계기업", "공동기업"], ["관계기업", "공동기업", "지분법"]),
+                (["충당부채", "환불부채"], ["충당부채", "환불부채"], ["충당부채", "환불부채"]),
+                (["순확정급여", "확정급여"], ["종업원급여", "퇴직급여", "확정급여"], ["확정급여", "순확정급여", "퇴직급여", "종업원급여"]),
+                (["이연법인세"], ["이연법인세", "법인세"], ["이연법인세"]),
+                (["투자부동산"], ["투자부동산"], ["투자부동산"]),
+                (["사용권자산"], ["사용권자산", "리스"], ["사용권자산"]),
+                (["관계기업", "공동기업", "지분법적용투자"], ["관계기업", "공동기업", "지분법"], ["관계기업", "공동기업", "지분법적용투자"]),
+                (["재고자산"], ["재고자산"], ["재고자산"]),
+                (["무형자산"], ["무형자산"], ["무형자산"]),
             ]
             ledger10 = (G.get("meta") or {}).get("routing_ledger") or {}
             note_titles = " ".join(
                 (e or {}).get("title", "") for e in ledger10.values()
             )
-            panel_names = " ".join(
-                r.get("name", "")
-                for z, rs in (G.get("panels") or {}).items()
-                for r in (rs or [])
+            # ⚠️ 패널 행 매칭은 '재무상태표(zone D)'만 — is-*/cf-* 행으로 오면제 방지(V-082 재개정).
+            bs_panel_names = " ".join(
+                r.get("name", "") for r in (G.get("panels") or {}).get("D", [])
             )
+            # 부록 승격 예외: 잔액 주석이 아니라 '과정/메타' 주석(팩토링·담보제공·범주별·공정가치·위험·약정·중단영업).
+            PROC = ("양도", "팩토링", "담보", "제공", "범주별", "공정가치", "위험", "약정", "중단영업", "성격별", "현금흐름")
             apx_names = {a.get("n"): a.get("name", "") for a in (G.get("appendix") or [])}
-            MAT = 0.05  # 조 — 이 미만 계정은 잔차/인용 허용(placeholder 방지)
-            for akw, nkw in BS_ANCHOR:
-                tot = sum(
-                    abs(a) / 1e12 for nm, a in bs_acc if any(k in nm for k in akw)
-                )
-                if tot < MAT:
-                    continue
+            MAT_A = 0.05  # 조 — 행 신설 강제 임계(잔차 흡수 금지)
+            for akw, nkw, ckw in BS_ANCHOR:
                 if not any(k in note_titles for k in nkw):
                     continue  # 전용 실주석 없으면 앵커 강제 안 함(범주별·공정가치 등 메타주석 자동 예외)
                 lab = akw[0]
-                in_panel = any(k in panel_names for k in akw)
-                if not in_panel:
+                # (B) 잔액 주석 카드가 APPENDIX면 승격 — 카드명 매칭·과정주석 제외·**무임계**(카드 자체가 실체 근거).
+                apx_hit = [
+                    n
+                    for n, anm in apx_names.items()
+                    if any(k in anm for k in ckw) and not any(p in anm for p in PROC)
+                ]
+                if apx_hit:
                     gaps.append(
-                        f"[BS앵커] '{lab}' 실계정 {tot:.2f}조·전용 주석 있음인데 패널 재무상태표 행 없음(잔차 흡수) — 행 신설 필요(V-082)"
+                        f"[BS앵커] '{lab}' 잔액 주석 카드가 APPENDIX({apx_hit}) — dives 승격(.row 앵커) 필요(V-082)"
                     )
-                apx_hit = [n for n, anm in apx_names.items() if any(k in anm for k in akw)]
-                if apx_hit and in_panel:
+                # (A) material 실계정인데 재무상태표(패널D) 행 없음 → 행 신설.
+                tot = sum(
+                    abs(a) / 1e12 for nm, a in bs_acc if any(k in nm for k in akw)
+                )
+                if tot >= MAT_A and not any(k in bs_panel_names for k in akw):
                     gaps.append(
-                        f"[BS앵커] '{lab}' 패널 행 있는데 카드가 APPENDIX({apx_hit}) — dives 승격(.row 앵커) 필요(V-082)"
+                        f"[BS앵커] '{lab}' 실계정 {tot:.2f}조·전용 주석 있음인데 재무상태표(패널) 행 없음(잔차 흡수) — 행 신설+승격 필요(V-082)"
                     )
     return gaps
 
