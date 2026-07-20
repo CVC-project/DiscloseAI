@@ -72,7 +72,10 @@ def _module_score(record: dict, module_id: str):
         return module.get("score") if isinstance(module, dict) else None
     if isinstance(modules, list):
         for module in modules:
-            if isinstance(module, dict) and module.get("id", module.get("name")) == module_id:
+            if (
+                isinstance(module, dict)
+                and module.get("id", module.get("name")) == module_id
+            ):
                 return module.get("score")
     return None
 
