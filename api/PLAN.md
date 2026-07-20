@@ -110,7 +110,7 @@
 
 | 계층 | 선택 | 이유 | 고정비 |
 |---|---|---|---|
-| 프론트(정적) | GitHub Pages 유지 | 이미 자동 배포 가동 중. 무료. 나중에 Cloudflare Pages로 이사해도 정적 파일이라 이사=업로드 | 0원 |
+| 프론트(정적) | **GitHub Pages(dev, 무변경) + Vercel(main, 신설) 병행** | dev는 무료·기존 그대로 팀 개발 확인용. main은 Vercel 연결로 실서비스 프로덕션 — 서로 완전히 독립된 서비스라 각자 다른 브랜치를 봐도 충돌하지 않는다(§7) | 0원(둘 다 무료 티어) |
 | api 서버 | GPU 서버에 FastAPI 동거 + Cloudflare Tunnel로 외부 노출 | 코퍼스·GPU와 같은 곳 = 데이터 이동 없음. 이미 임차 중. Tunnel은 포트 개방 없이 HTTPS 자동 | 0원(+도메인 ~1.5만원/년 권장) |
 | 벡터 인덱스·코퍼스 | GPU 서버 `/data` = 운영 정본 + 로컬 = 야간 자동 백업 | §5 | 0원 |
 | 사용자·학습 DB | 지금 도입 안 함 → 학습 레이어 단계에 Supabase 무료 티어 | 챗봇 MVP는 로그인 없음. shared/models.py가 이미 Supabase 타깃 스키마 | 0원 |
@@ -121,6 +121,8 @@
 **주의사항**: GPU 서버는 재부팅 시 수동 재기동 필요(systemd 미영속화, §4.1) — api·Tunnel 기동 스크립트에 재기동 로직 포함 필요.
 
 ### 6.2 검토한 대안 — Supabase + Vercel (승격 경로로 병기)
+
+> §7에서 프론트 실서비스 호스팅으로 이미 Vercel을 병행 채택했으므로, 이 대안으로 승격할 때는 **같은 Vercel 프로젝트에 api 서버리스 함수를 추가**하는 것만으로 충분하다(신규 계정·연결 불필요) — 프론트 정적 서빙과 api 미들웨어를 같은 배포 단위로 합치는 자연스러운 확장.
 
 | 구성 요소 | 역할 |
 |---|---|
@@ -149,31 +151,27 @@
 
 ## 7. CD(자동 배포) 설계
 
-원리: **머지 = 배포**가 되려면 배포 과정 전체가 GitHub Actions 워크플로로 적혀 있고 사람 손 단계가 0이어야 한다.
+원리: **머지 = 배포**가 되려면 배포 과정 전체가 자동 트리거로 적혀 있고 사람 손 단계가 0이어야 한다. **GitHub Pages와 Vercel은 완전히 독립된 서비스라, 서로 다른 브랜치를 각자 트리거로 삼아 동시에 운용해도 충돌하지 않는다** — "사이트 1개당 브랜치 1개" 제약은 GitHub Pages *내부*의 제약일 뿐, 다른 서비스를 추가로 붙이는 것까지 막지 않는다. 순차 이관(하나를 버리고 다른 것으로 갈아탐)이 아니라 **병행 운용**(둘 다 켜둠)이 정답.
 
-| 계층 | 지금 | 설계(파이프라인 정의만 — §7.1) |
+| 계층 | 지금 | 설계 (§7.1) |
 |---|---|---|
-| 프론트(정적 파일) | dev push → Pages 자동 게시([pages.yml](../.github/workflows/pages.yml)) | main push → Pages 자동 게시로 전환(§7.1). dev push는 기존 [ci.yml](../.github/workflows/ci.yml)이 자동 검증(black·sync_codex·pytest) |
-| api 서버 | 없음 | main 머지 시 Actions가 GPU 서버로 SSH 접속 → 코드 갱신 → 재기동(§7.1 3단계). Render 등으로 이사해도 접속 대상만 교체 |
+| 프론트 — 개발 확인용 | dev push → GitHub Pages 자동 게시([pages.yml](../.github/workflows/pages.yml)) | **무변경.** dev 커밋마다 팀 내부 확인 URL로 계속 사용 |
+| 프론트 — 실서비스 | 없음 | **신설**: main push → Vercel 자동 배포(§7.1). GitHub Pages와 나란히 병행 운용, 서로 간섭 없음 |
+| api 서버 | 없음 | main 머지 시 Actions가 GPU 서버로 SSH 접속 → 코드 갱신 → 재기동(§7.1). Render 등으로 이사해도 접속 대상만 교체 |
 | 데이터 JSON | build_data 실행 후 커밋 → 프론트 배포에 자연히 포함 | 현행 유지 |
 | 코퍼스·인덱스(대용량) | git 밖 | git·자동 배포 대상 아님 — §5 동기화 스크립트로 관리 |
 
-### 7.1 브랜치 배포 흐름 — 파이프라인 정의 (⚠️ 실제 main 병합은 미실행)
+### 7.1 브랜치 배포 흐름 — 병행 모델 (GitHub Pages=dev, Vercel=main)
 
-> 이번 세션은 **파이프라인 정의(설정 변경)까지만** 수행한다. `pages.yml` 트리거를 `main`으로 바꿔 두더라도, dev→main 병합 자체는 별도 명시적 결정 없이는 실행하지 않는다 — main 병합 = 실서비스 최초 발행이라는 큰 액션이므로 리더가 별도 시점에 판단.
+**GitHub Pages (dev) — 무변경, 되돌림 완료:** `pages.yml` 트리거는 그대로 `dev` 유지한다(1차 작성 시 `main`으로 바꿨다가, "서비스를 병행하면 되지 굳이 갈아탈 필요가 없다"는 지적으로 원복 — 되돌림 완료). dev에 머지될 때마다 자동 갱신되는 팀 내부 개발 확인용 URL 역할을 계속한다.
 
-전제: GitHub Pages는 저장소당 사이트 1개라 dev·main 두 주소를 GitHub만으로 만들 수 없다. 단계적으로 구현한다.
+**Vercel (main) — 신설, 사용자 계정 작업 필요:**
+1. Vercel 가입 → GitHub 저장소(`CVC-project/DiscloseAI`) 연결(브라우저 OAuth — 사용자만 가능)
+2. 프로젝트 설정: Root Directory = `integration/`(정적 사이트라 빌드 커맨드 불필요, Framework Preset = Other), Production Branch = `main`
+3. 연결 즉시 main push마다 자동 프로덕션 배포 시작. Vercel은 기본적으로 다른 브랜치 push에도 자동 프리뷰 URL을 주므로, 원한다면 dev도 Vercel 프리뷰로 추가 확인 가능(선택, GitHub Pages와 중복이라도 무해)
+4. 프론트 코드 변경 0 — 정적 파일이라 호스팅 추가는 설정만으로 끝남
 
-**1단계 (설정 변경 — 이번 세션에 반영, 실행은 보류):**
-- `pages.yml`의 발동 조건을 `dev` → `main`으로 변경 → 이후 **main 머지 시점에** "실서비스 자동 배포"가 성립하도록 준비. 수동 실행 버튼(workflow_dispatch)은 유지.
-- dev는 Pages를 더 이상 발행하지 않되, 기존 `ci.yml`이 push마다 자동 검증(black·sync_codex·pytest)하므로 "머지 확인은 GitHub Action으로 가능"은 유지된다.
-- **부작용 고지**: 이 설정이 dev에 머지되는 순간부터, 지금까지 dev push마다 갱신되던 라이브 Pages 사이트는 **다음 main 병합 전까지 더 이상 갱신되지 않는다** (직전 상태로 고정). 실서비스 첫 발행(= dev→main 병합)은 리더가 별도로 결정·실행.
-
-**2단계 — 스테이징 URL이 필요해지면 (사용자 계정 작업 필요):**
-- Cloudflare Pages에 저장소 연결: production branch = main, 그 외 브랜치는 자동 프리뷰 주소 — "dev=스테이징 / main=실서비스"가 계정 연결만으로 완성.
-- 완료되면 `pages.yml`은 삭제(중복 배포 방지). §6.2 Supabase+Vercel 승격 시엔 Vercel 프리뷰가 이 역할을 대신함.
-
-**3단계 — api 서버의 자동 배포 (api/ 코드가 생기는 후속 P1에서):**
+**api 서버의 자동 배포 (api/ 코드가 생기는 후속 P1에서):**
 - `.github/workflows/deploy-api.yml` 신설: main 머지 시 Actions가 GPU 서버로 SSH 접속(저장소 Secrets에 키 보관) → 코드 갱신 → 재기동 스크립트 실행.
 
 ## 8. 후속 구현 로드맵 (이번 세션 범위 밖)
@@ -181,6 +179,6 @@
 1. **P1 — api/ 스켈레톤**: FastAPI 앱, `/api/health`, 면책 미들웨어(C5), `/api/chat`이 우선 외부 LLM 프록시로만 동작(검색 없이) — GPU 없이도 로컬에서 E2E 동작 확인 가능
 2. **P2 — RAG 연결**: 팀원 벡터 인덱스 실물 확인 → C2 계약과 대조·확정 → api가 검색 결과를 인용 강제 프롬프트에 결합
 3. **P3 — 코퍼스 확장 동조**: `/data/discloseai/fulltext/`(§4.1) 정체 확인 후 report 파이프라인과 정합 또는 재수집. valuechain D11(reports.db shared 승격)과 시점 조율
-4. **P4 — 호스팅 실행·공개**: §6 결정에 따라 Cloudflare Tunnel·도메인 연결, `pages.yml` main 트리거 실제 발동(=dev→main 병합), Gemini 키 로테이션 후 서버측 주입
+4. **P4 — 호스팅 실행·공개**: §6 결정에 따라 Cloudflare Tunnel·도메인 연결, Vercel 계정 연결(§7.1 — main 프로덕션 브랜치 지정), Gemini 키 로테이션 후 서버측 주입
 
 기존 로컬 데모용 FastAPI 2종(`modules/disclosure/chat_server.py`, `modules/price/api.py`)은 api/ 안정화 후 각 담당자와 협의해 통합 또는 은퇴 결정 — 리더가 임의로 수정하지 않는다(모듈 경계 원칙).
