@@ -28,6 +28,7 @@
 
 from __future__ import annotations
 
+from .calibration import CalibrationResult, profile_for_panel, score_against_peers
 from .industry_v2 import classify, m3_thresholds
 from .types import FirmPanel, ModuleScore
 
@@ -60,7 +61,7 @@ def _piecewise_score(de: float, t: tuple) -> float:
     return 0.0
 
 
-def score_m3(panel: FirmPanel) -> ModuleScore:
+def score_m3(panel: FirmPanel, calibration: CalibrationResult | None = None) -> ModuleScore:
     curr = panel.latest()
     if curr is None:
         return ModuleScore(name="M3", score=None, note="최신 연도 데이터 없음")
@@ -77,13 +78,31 @@ def score_m3(panel: FirmPanel) -> ModuleScore:
         )
 
     de = curr.total_liabilities / curr.total_equity
-    cls = classify(panel.corp_name)
-    thr = m3_thresholds(cls.m3_bucket)
-    score = _piecewise_score(de, thr)
-    bucket_label = cls.m3_bucket
+    if calibration is not None:
+        profile = profile_for_panel(calibration, panel, "m3_debt_to_equity")
+        if profile is None:
+            return ModuleScore(
+                name="M3",
+                score=None,
+                raw=de,
+                note="동종업계 유효 표본 부족 — M3 보류",
+            )
+        score = score_against_peers(de, profile, higher_is_better=False)
+        note = (
+            f"부채비율={de*100:.0f}% (동종업계 {profile.group} {profile.sample_size}개사, "
+            f"P10/P50/P90={profile.p10*100:.0f}/{profile.p50*100:.0f}/{profile.p90*100:.0f}%)"
+        )
+    else:
+        cls = classify(panel.corp_name)
+        thr = m3_thresholds(cls.m3_bucket)
+        score = _piecewise_score(de, thr)
+        note = (
+            f"부채비율={de*100:.0f}% (업종 {cls.m3_bucket}, "
+            f"양호선={thr[1]*100:.0f}% / 위험선={thr[3]*100:.0f}%)"
+        )
     return ModuleScore(
         name="M3",
         score=round(score, 1),
         raw=de,
-        note=f"부채비율={de*100:.0f}% (업종 {bucket_label}, 양호선={thr[1]*100:.0f}% / 위험선={thr[3]*100:.0f}%)",
+        note=note,
     )

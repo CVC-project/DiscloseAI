@@ -22,6 +22,7 @@ from __future__ import annotations
 
 from typing import List, Tuple
 
+from .calibration import CalibrationResult, profile_for_panel, score_against_peers
 from .industry_v2 import classify, m4_mean_thresholds, m4_vol_thresholds
 from .types import FirmPanel, ModuleScore
 
@@ -65,33 +66,72 @@ def _operating_margins(panel: FirmPanel, n: int = 3) -> List[float]:
     return out
 
 
-def score_m4(panel: FirmPanel) -> ModuleScore:
+def score_m4(panel: FirmPanel, calibration: CalibrationResult | None = None) -> ModuleScore:
     oms = _operating_margins(panel, 3)
     n = len(oms)
-    if n < 2:
+    if n < 1:
         return ModuleScore(
             name="M4",
             score=None,
-            note=f"유효 영업이익률 {n}년 — 최소 2년 필요",
+            note="영업이익률 결측",
         )
 
     avg = sum(oms) / n
     vol = max(oms) - min(oms)
 
+    if calibration is not None:
+        mean_profile = profile_for_panel(calibration, panel, "m4_average_margin")
+        vol_profile = profile_for_panel(calibration, panel, "m4_margin_volatility")
+        if mean_profile is None or (n >= 2 and vol_profile is None):
+            return ModuleScore(
+                name="M4",
+                score=None,
+                raw=avg,
+                note="동종업계 유효 표본 부족 — M4 보류",
+            )
+        s_mean = score_against_peers(avg, mean_profile, higher_is_better=True)
+        if n == 1:
+            confidence = 0.40
+            score = 50.0 + (s_mean - 50.0) * confidence
+            note = (
+                f"1년 영업이익률 {avg*100:+.1f}% — 변동성은 확인할 수 없어 "
+                f"신뢰도 {confidence:.0%} 보정"
+            )
+        else:
+            s_vol = score_against_peers(vol, vol_profile, higher_is_better=False)
+            base_score = s_mean * 0.7 + s_vol * 0.3
+            confidence = 1.00 if n >= 3 else 0.70
+            score = 50.0 + (base_score - 50.0) * confidence
+            note = (
+                f"{n}년 평균 영업이익률 {avg*100:+.1f}%, 변동폭 {vol*100:.1f}%p "
+                f"— 수익성 70% + 안정성 30%"
+            )
+            if n < 3:
+                note += f", 이력 신뢰도 {confidence:.0%} 보정"
+        return ModuleScore(
+            name="M4",
+            score=round(score, 1),
+            raw=avg,
+            note=note,
+            weight=confidence,
+        )
+
+    if n < 2:
+        return ModuleScore(name="M4", score=None, raw=avg, note="유효 영업이익률 1년 — 최소 2년 필요")
     cls = classify(panel.corp_name)
     mean_thr = m4_mean_thresholds(cls.m4_mean_bucket)
     vol_thr = m4_vol_thresholds(cls.m4_vol_bucket)
-
     s_mean = _mean_score(avg, mean_thr)
     s_vol = _vol_score(vol, vol_thr)
     score = round(s_mean * 0.6 + s_vol * 0.4, 1)
+    note = (
+        f"3년 평균 영업이익률 {avg*100:+.1f}%, 변동폭 {vol*100:.1f}%p "
+        f"(업종 {cls.m4_mean_bucket}/{cls.m4_vol_bucket})"
+    )
     n_tag = "" if n == 3 else f" — n={n} 단축"
     return ModuleScore(
         name="M4",
         score=score,
         raw=avg,
-        note=(
-            f"3년 평균 영업이익률 {avg*100:+.1f}%, 변동폭 {vol*100:.1f}%p "
-            f"(업종 {cls.m4_mean_bucket}/{cls.m4_vol_bucket}){n_tag}"
-        ),
+        note=f"{note}{n_tag}",
     )

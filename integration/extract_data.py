@@ -41,8 +41,9 @@ DISCLOSURE_DB = ROOT / "modules" / "disclosure" / "data" / "disclosure.db"
 EQS_PROTOTYPE_JSON = ROOT / "modules" / "financial" / "data" / "eqs_data.json"
 RELATION_GRAPH_JSON = ROOT / "modules" / "relation" / "data" / "graph_top50.json"
 
-# KRX 업종코드 중 금융업 식별용 (기타금융·증권·보험)
+# KRX 구분 코드와 KSIC 코드 모두 지원한다. KSIC는 64~66(금융·보험)을 쓴다.
 FINANCIAL_INDUSTRY_CODES = frozenset({"064", "065", "066", "067"})
+FINANCIAL_KSIC_PREFIXES = ("64", "65", "66")
 
 
 # --------------------------------------------------------------------------- #
@@ -61,16 +62,49 @@ def load_top50() -> list[dict]:
 
 
 # --------------------------------------------------------------------------- #
-#  eqs 프로토타입 메타 로드 (market_cap·dart_url·industry_code·latest_year)
+#  EQS 메타·V3 점수 로드
 # --------------------------------------------------------------------------- #
+def _module_score(record: dict, module_id: str):
+    """EQS 데이터의 dict/list 모듈 표현을 모두 지원한다."""
+    modules = record.get("modules", {})
+    if isinstance(modules, dict):
+        module = modules.get(module_id, {})
+        return module.get("score") if isinstance(module, dict) else None
+    if isinstance(modules, list):
+        for module in modules:
+            if (
+                isinstance(module, dict)
+                and module.get("id", module.get("name")) == module_id
+            ):
+                return module.get("score")
+    return None
+
+
+def _module_notes(record: dict) -> dict[str, str]:
+    """V3 모듈별 산출 근거를 통합 UI에 전달한다."""
+    modules = record.get("modules", {})
+    if not isinstance(modules, dict):
+        return {}
+    return {
+        module_id: module.get("note", "")
+        for module_id, module in modules.items()
+        if isinstance(module, dict) and module.get("note")
+    }
+
+
+def _is_financial_industry(industry: object) -> bool:
+    code = str(industry or "")
+    return code in FINANCIAL_INDUSTRY_CODES or code.startswith(FINANCIAL_KSIC_PREFIXES)
+
+
 def load_eqs_prototype_meta() -> dict[str, dict]:
-    """``modules/financial/data/eqs_data.json``에서 financial.db에 없는 메타 정보 로드.
+    """``eqs_data.json``에서 메타와 V3 재계산 점수를 로드한다.
 
     financial_local 테이블은 EQS 점수·재무수치만 저장하고 시총·DART URL은
     별도 파일(financial 담당자의 프로토타입 산출물)에서만 얻을 수 있다.
 
     Returns:
-        {corp_code: {market_cap, dart_url, industry_code, is_financial, latest_year}}
+        {corp_code: {market_cap, dart_url, industry_code, V3 EQS module notes, ...}}
     """
     if not EQS_PROTOTYPE_JSON.exists():
         print(f"[WARN] eqs_data.json 없음: {EQS_PROTOTYPE_JSON}", file=sys.stderr)
@@ -92,11 +126,26 @@ def load_eqs_prototype_meta() -> dict[str, dict]:
             "market_cap": r.get("market_cap"),
             "dart_url": r.get("dart_url"),
             "industry_code": industry,
-            "is_financial": industry in FINANCIAL_INDUSTRY_CODES,
+            "is_financial": _is_financial_industry(industry),
             "latest_year": latest.get("year") if isinstance(latest, dict) else latest,
             "history": r.get("history"),
             "percentile": r.get("percentile"),
         }
+        if r.get("eqs_method"):
+            meta_map[cc].update(
+                {
+                    "eqs_m1": _module_score(r, "M1"),
+                    "eqs_m2": _module_score(r, "M2"),
+                    "eqs_m3": _module_score(r, "M3"),
+                    "eqs_m4": _module_score(r, "M4"),
+                    "eqs_m5": _module_score(r, "M5"),
+                    "eqs_total": r.get("total"),
+                    "eqs_grade": r.get("grade"),
+                    "eqs_method": r.get("eqs_method"),
+                    "eqs_module_notes": _module_notes(r),
+                    "eqs_excluded": r.get("eqs_excluded", []),
+                }
+            )
     return meta_map
 
 
