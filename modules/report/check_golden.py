@@ -652,6 +652,32 @@ def _check_strict(ticker: str, G: dict, dives: dict) -> list[str]:
                 f"[착지] note_dive 주{n}→{key} — 카드 '{key}' 자신의 산문에 '주{n}' 인용 없음 "
                 f"(오핀 저작 위험·홈 아님 의심 — 인용 추가 또는 무핀 처리, R6.10/V-084)"
             )
+
+    # ── 12) (strict) 무핀 0 — 삼성 T0 패리티 (V-085, 리더 지시) ──
+    # 원칙: 삼성 T0는 전 주석(34개)이 카드/딥다이브로 착지(무핀 0). 주석 클릭이 원문만 뜨고 착지 카드가
+    # 없는 '무핀'은 깊이 갭이다 — 전용 카드 승격(원장 new-dive:n{N}) 또는 코어 dive 연결(note_dive)로 해소한다.
+    # (fuzzy 폐기 전에는 오핀으로 '착지되는 척'했을 뿐. R6.10으로 무핀이 정직하게 드러남.)
+    # 렌더러 _pinForNote(개정판) 착지를 재현: 전용카드 n{N} / note_dive[N] / 원장 명시타깃(appendix:·new-dive:·row:) 없으면 무핀.
+    ndive12 = meta.get("note_dive") or {}
+    unpinned = []
+    for n, ent in (meta.get("routing_ledger") or {}).items():
+        to = (ent or {}).get("to", "")
+        if ("n" + str(n)) in merged11:
+            continue
+        if n in ndive12 and ndive12[n] in merged11:
+            continue
+        if to.startswith(("appendix:", "new-dive:")) and to.split(":", 1)[1] in merged11:
+            continue
+        if to.startswith("row:"):
+            continue
+        unpinned.append((n, (ent or {}).get("title", "")))
+    if unpinned:
+        lst = ", ".join(f"주{n}" for n, _ in unpinned[:10])
+        gaps.append(
+            f"[무핀] {len(unpinned)}건 착지 카드 없음 — 삼성 T0 패리티(무핀 0) 위반, "
+            f"전용카드 승격(new-dive:n{{N}})·note_dive 연결 필요(V-085): "
+            f"{lst}{'…' if len(unpinned) > 10 else ''}"
+        )
     return gaps
 
 
