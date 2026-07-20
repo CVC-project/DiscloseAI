@@ -45,7 +45,7 @@ PRD 상세: docs/초기PRD.md
 
 서빙 계층 (리더 소유):
 - integration/: 4개 모듈 산출물 교차 통합 대시보드 (v1/=fallback, v2/=정본, dossier/=기업 상세 3탭 iframe, data/=공유 JSON)
-- 미래 백엔드 api/ (FastAPI·RAG·learning)는 현재 미구현 — 구축 시 생성 (docs/AI_DIRECTION_PLAN.md 참조)
+- 미래 백엔드 api/ (FastAPI·RAG·learning)는 현재 코드 미구현 — 서빙 아키텍처 실행 계획은 [api/PLAN.md](api/PLAN.md) 정본 (docs/AI_DIRECTION_PLAN.md 참조)
 
 데이터 정본은 모듈별 로컬 SQLite. 전체 DB 토폴로지: docs/ARCHITECTURE.md
 모듈 간 연결: 데이터 모듈끼리는 import 금지. integration만 예외(타 모듈 read-only)
