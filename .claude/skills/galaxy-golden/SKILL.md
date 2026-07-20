@@ -10,19 +10,21 @@ auto-invocable: false
 
 ## 수렴 루프 (골든 품질까지 — 이 의사코드가 실행 계약)
 ```
-S1 → S2 → S2.5 → S3(전 카드)
+S1 → S2 → S2.5 → S3(전 카드) → S8(원문 동반 — build_report_source.py <t>)
 repeat:
-  gaps = check_golden(ticker)                     # 기계 게이트
+  gaps = check_golden(ticker) --strict            # 기계 게이트(§8 원문 정합·amt·승격 .row 포함, V-068·069)
   refuted = accuracy-verifier(변경·신규 카드만)     # 적대 게이트
-  audit = completeness-auditor(ticker)            # 깊이·주석 커버리지 게이트
+  audit = completeness-auditor(ticker)            # 깊이·주석 커버리지 + 삼성 T0 패리티 게이트
   ui = pytest test_galaxy_interaction.py (S6)     # 동작 게이트
   regress = check_golden(기존 골든 전부)            # 무회귀 게이트(템플릿 건드렸으면 필수)
   if 전부 PASS: break                              # ← 골든 품질 도달
   각 실패를 소유 단계로 라우팅해 그 카드/구조만 수리:
-    구조·패널·viz → S2 | 산문·수치·문체 → S3(fix_hint 동봉) | 추출 누락 → S1
+    구조·패널·viz → S2 | 산문·수치·문체 → S3(fix_hint 동봉) | 추출 누락 → S1 | 원문 오라벨 → S8(생성기)
 until 카드별 3회 초과 → NEEDS_REVIEW.md(리더 큐)에 적고 계속
 종료 = 5게이트 전부 PASS (하나라도 FAIL이면 절대 publish 금지)
 ```
+
+> **V-062~069 캐스케이드 계약(신규·T1 필수)** — 골든은 **사업보고서 원문 포함**이 기본이다. 실체 주석(패널 행 있음)은 `appendix`가 아니라 `dives{}`에 **키 `n<그회사 주번호>`**로 승격하고 **`row`(주 앵커)+`hl`(발광 행)**을 선언(V-069 — 삼성 정적 테이블 건드리지 말 것). 코어 dive 흡수 주석은 `meta.note_dive`. amt는 **6칙**(R6.6c), 서브행 색은 **무채 기본**(A5 값색 4칙). ⚠️ **승격 판정 = fs_account BS 실계정 유무(V-082)** — 충당부채·순확정급여·이연법인세·투자부동산·사용권자산·관계기업 등 실계정(material ≥0.05조·전용 주석)은 **패널 행을 신설해서라도** 앵커하고 승격(잔차 흡수·부록 잔류 금지). ⚠️ **주석 라우팅 = R6.10(V-084)** — 클릭 착지는 저작된 경로(n{N}·note_dive·원장 명시타깃)로만 결정된다. **산문 "(주N)" fuzzy 스캔 폐기**(오핀 근절): `dive:cited`는 진짜 홈이면 `note_dive` 저작(대상 카드 자기 산문이 주N 인용), 포인터성이면 **무핀**(원문만, 삼성 T0 계약). 절차 상세 = **MILKYWAY §8.6**(D1~D5). `check_golden --strict`가 원문 정합·amt·승격 구조·**§10 BS 실계정-행-앵커·§11 주석 착지 결정론·§12 무핀 0(삼성 T0 패리티)**을 기계 검출한다. ⚠️ **§12: 전 주석이 카드/딥다이브로 착지해야 완주**(무핀=원문만 뜨는 주석 0). 무핀은 전용 카드 승격(new-dive:n{N}+산문) 또는 note_dive 연결로 해소(V-085).
 
 > ⚠️ **subagent 프롬프트는 self-contained** — 에이전트는 이 대화를 못 봅니다. fact-sheet 발췌·골든 견본 원문·series 배열·카드 키를 **프롬프트에 직접 포함**해 호출하세요.
 > ⚠️ **R6.3 규칙 10**이 이 스킬의 헌법입니다([MILKYWAY_GENERATOR.md](../../../modules/report/MILKYWAY_GENERATOR.md) §5). 특히: 파생수치 암산 금지 · 템플릿 수정 시 컴파일+pv 스모크 · 원자적 쓰기(최종본만 저장).

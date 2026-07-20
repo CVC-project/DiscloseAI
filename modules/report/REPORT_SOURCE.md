@@ -4,9 +4,11 @@
 
 ## 데이터 흐름
 
+> **재무제표 추출 = 명칭 매칭(V-068)**: `_STMT_MATCH`가 raw XML `<TITLE>`을 명칭으로 매칭(`재무상태표`→bs·`손익계산서`∧¬`포괄`→is·`포괄손익`→cis·`자본변동`→eq·`현금흐름`→cf). 번호 접두(2-1…)는 회사마다 다르다 — **단일 포괄손익계산서 회사(SK·NAVER·고려아연·현대건설)는 손익계산서가 없어 4본**(bs/cis/eq/cf), 나머지는 5본. 구 번호 하드코딩은 이들을 오라벨·cf 결손시켰다. galaxy.html은 단일 CIS 회사의 `is` 요청을 `cis`로 폴백(`_stmtId`). `check_golden <t> --strict` §8-1이 원문 정합(cf 필수·오라벨) 검사.
+
 ```
 reports.db report_section(주석 text_html) ─┐
-raw_cache/<t>/<rcept>.xml(재무제표 2-1~2-5)─┴─▶ modules/report/report_source.py         (로직 정본)
+raw_cache/<t>/<rcept>.xml(재무제표, 명칭 매칭)─┴─▶ modules/report/report_source.py         (로직 정본)
                                                  build_report_data(ticker) → dict
                                                         │  integration이 read-only import
                                                         ▼

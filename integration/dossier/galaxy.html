@@ -214,7 +214,7 @@ a{color:var(--cyan);} a:hover{color:var(--mint);}
           <span style="font-family:var(--mono);font-size:17px;font-weight:700;color:var(--cyan);text-shadow:0 0 12px rgba(92,199,234,.5);">{{ pv.bs_cash }}</span>
         </div>
         <div data-row="bs-assets" onclick="{{ onRow }}" title="{{ pt.bs_assets }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;background:rgba(117,144,176,.06);font-weight:700;" style-hover="background:rgba(117,144,176,.11)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">Σ</span><span>자산총계</span><span data-g="bsa" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.bsa }}</span></div>
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--steel);letter-spacing:.08em;">자산</span><span>자산총계</span><span data-g="bsa" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.bsa }}</span></div>
           <span style="font-family:var(--mono);font-size:16.5px;font-weight:700;color:var(--steel);">{{ pv.bs_assets }}</span>
         </div>
         <sc-if value="{{ exp.bsa }}" hint-placeholder-val="{{ false }}"><div>{{ sub.bsa }}</div></sc-if>
@@ -256,34 +256,7 @@ a{color:var(--cyan);} a:hover{color:var(--mint);}
             <div style="font-size:12.5px;color:var(--dim);">자본변동표(당기만) — 주주의 몫(자본)이 1년 새 어떻게 늘고 줄었나예요.</div>
           </div>
         </div>
-        <div data-row="eq-begin" onclick="{{ onRow }}" title="{{ pt.eq_begin }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;cursor:pointer;" style-hover="background:rgba(233,196,107,.06)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">E0</span><span>기초자본</span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--gold);">{{ pv.eq_begin }}</span>
-        </div>
-        <div data-row="eq-netincome" onclick="{{ onRow }}" title="{{ pt.eq_netincome }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(233,196,107,.06)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">E1</span><span>당기순이익 적립</span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--gold);">{{ pv.eq_netincome }}</span>
-        </div>
-        <div data-row="eq-oci" onclick="{{ onRow }}" title="{{ pt.eq_oci }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(233,196,107,.06)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">E2</span><span>기타포괄손익 (OCI)</span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--gold);">{{ pv.eq_oci }}</span>
-        </div>
-        <div data-row="eq-div" onclick="{{ onRow }}" title="{{ pt.eq_div }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(233,196,107,.06)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">E3</span><span>배당 <span style="font-size:11px;color:var(--dim);font-weight:400;">⑬ 재무활동과 같은 돈</span></span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--coral);">{{ pv.eq_div }}</span>
-        </div>
-        <div data-row="eq-buyback" onclick="{{ onRow }}" title="{{ pt.eq_buyback }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(233,196,107,.06)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">E4</span><span>자기주식 취득 <span style="font-size:11px;color:var(--dim);font-weight:400;">⑬ 재무활동과 같은 돈</span></span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--coral);">{{ pv.eq_buyback }}</span>
-        </div>
-        <div data-row="eq-other" onclick="{{ onRow }}" title="{{ pt.eq_other }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(233,196,107,.06)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">E5</span><span>주식보상·기타</span></div>
-          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--gold);">{{ pv.eq_other }}</span>
-        </div>
-        <div data-row="eq-end" onclick="{{ onRow }}" title="{{ pt.eq_end }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid rgba(233,196,107,.35);cursor:pointer;background:rgba(233,196,107,.06);font-weight:700;" style-hover="background:rgba(233,196,107,.11)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:.08em;">E6</span><span>기말자본</span></div>
-          <span style="font-family:var(--mono);font-size:17px;font-weight:700;color:var(--gold);text-shadow:0 0 12px rgba(233,196,107,.5);">{{ pv.eq_end }}</span>
-        </div>
+        {{ eqRows }}
       </div>
 
       <div data-epilogue="" style="padding:44px 6px 20px;text-align:center;">
@@ -373,7 +346,7 @@ class Component extends DCLogic {
     this._ticker = t;  // 사업보고서 원문 팝업 지연로드용
     fetch('data/galaxy_' + t + '.json', { cache: 'no-store' })
       .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-      .then(G => { this._G = G; this._dives = null; this._r2d = null; this._ndv = null; this.setState({ dataReady: true }); this.queueMeasure(); })
+      .then(G => { this._G = G; this._dives = null; this._rowDive = null; this._grpDive = null; this._ndv = null; this.setState({ dataReady: true }); this.queueMeasure(); })
       .catch(() => this.setState({ dataError: true }));
   }
   componentDidMount() {
@@ -503,7 +476,7 @@ class Component extends DCLogic {
   applyJourneyHL() {
     const k = this.KNOTS.find(x => x.id === this.state.active);
     const row = k ? k.row : (this.EQSTORY[this.state.active] ? this.state.active : null);
-    const hl = new Set(this.HL[this.state.pin] || []);
+    const hl = this._pinHl();
     document.querySelectorAll('[data-row]').forEach(el => {
       const id = el.getAttribute('data-row');
       if (hl.has(id)) el.setAttribute('data-hl', '1'); else el.removeAttribute('data-hl');
@@ -512,42 +485,81 @@ class Component extends DCLogic {
   }
 
   _diveKey(row) {
-    // 행→dive 키: 하드코딩 ROW2DIVE 우선, 없으면 dives의 .row에서 파생(V-043: 회사별 신규 행 자동 수용).
+    // 행→dive 키 (V-069→V-075 재편): ① 이 티커 dives의 .row 앵커(per-ticker 정본) →
+    // ② 정적 ROW2DIVE — 보편 값(k*·eq*·집계)은 전 티커, 삼성 nX 레거시 값은 005930 전용
+    //    (카드 키=그 회사 주번호라 타 티커에서 같은 키가 다른 주석 — blind-pin 차단, V-075) →
+    // ③ 이 티커 dive.hl 역인덱스(_hlDive — 승격 카드가 hl로만 참조하는 행) → ④ grp 서브행→부모행 폴백 →
+    // ⑤ 존 요약 폴백(V-049, 정적 매핑이 있던 행 한정 — 기존 표면 보존) → ⑥ 정적 키 or row.
     const D0 = this.getDives();
-    if (this.ROW2DIVE[row]) {
-      const k = this.ROW2DIVE[row];
-      if (D0[k]) return k;
-      // 정적 요약행(cf-wc·eq-div·eq-buyback 등)이 이 회사에 해당 dive가 없으면 같은 존 요약 dive로 폴백 (V-049)
+    this._ensureRowMaps();
+    if (this._rowDive[row] && D0[this._rowDive[row]]) return this._rowDive[row];     // ① .row 앵커
+    const sk = this.ROW2DIVE[row];
+    if (sk && D0[sk] && (!/^n\d/.test(sk) || this._ticker === '005930')) return sk;   // ② 정적(보편 + 삼성 전용 nX)
+    if (this._hlDive[row] && D0[this._hlDive[row]]) return this._hlDive[row];         // ③ hl 역인덱스
+    if (this._grpDive[row] && D0[this._grpDive[row]]) return this._grpDive[row];      // ④ grp 폴백
+    if (sk) {                                                                          // ⑤ 존 요약 폴백
       const FB = { eq: ['eq-other', 'eq-end'], cf: ['k11', 'k15'], is: ['k8'], bs: ['assets'] };
       for (const cand of (FB[row.slice(0, 2)] || [])) if (D0[cand]) return cand;
-      return k;
     }
-    if (!this._r2d) {
-      this._r2d = {}; const D = this.getDives(); for (const k in D) if (D[k] && D[k].row) this._r2d[D[k].row] = k;
-      // 서브행(grp)은 부모 행의 dive로 폴백 (V-049): ROW2DIVE는 삼성 subrow id만 하드코딩이라
-      // 셀트리온·현대차·LG 등 회사별 subrow id(bs-l-1·is-sgna-warr…)가 죽은 클릭이 됨 → grp→부모행 매핑으로 자동 수용.
-      const GP = { sgna: 'is-sgna', nonop: 'is-nonop', ni: 'is-netincome', opex: 'is-opex',
-                   noncash: 'cf-noncash', wc: 'cf-wc', inv: 'cf-inv', fin: 'cf-fin',
-                   bsa: 'bs-assets', bsl: 'bs-liab', bse: 'bs-equity' };
-      const P = (this._G && this._G.panels) || {};
-      for (const z in P) for (const r of (P[z] || [])) {
-        if (r.grp && !this._r2d[r.row]) {
-          const pr = GP[r.grp]; const pd = pr && (this._r2d[pr] || this.ROW2DIVE[pr]);
-          if (pd && D[pd]) this._r2d[r.row] = pd;   // 부모행 dive를 _r2d·ROW2DIVE 양쪽에서 해석(bse→bs-equity→eq-end 등)
-        }
+    return sk || row;                                                                  // ⑥
+  }
+  _ensureRowMaps() {
+    if (this._rowDive) return;
+    const D = this.getDives();
+    this._rowDive = {}; for (const k in D) if (D[k] && D[k].row) this._rowDive[D[k].row] = k;
+    // dive.hl 역인덱스(V-075): 승격 카드가 hl로만 참조하는 행(예: SK is-nonop-eqm→n11·bs-sp→n22)의 정확 라우팅.
+    // ② 보편 정적 매핑이 우선하므로 hl 안의 보편 행(eq-netincome·cf-fin-debt 등)은 여기 안 닿는다. 선점 우선.
+    this._hlDive = {};
+    for (const k in D) for (const r of ((D[k] && D[k].hl) || [])) {
+      if (!this._rowDive[r] && !this._hlDive[r]) this._hlDive[r] = k;
+    }
+    // 서브행(grp)은 부모 행의 dive로 폴백 (V-049): 회사별 subrow id(bs-l-1·is-sgna-warr…) 자동 수용.
+    this._grpDive = {};
+    const GP = { sgna: 'is-sgna', nonop: 'is-nonop', ni: 'is-netincome', opex: 'is-opex',
+                 noncash: 'cf-noncash', wc: 'cf-wc', inv: 'cf-inv', fin: 'cf-fin',
+                 bsa: 'bs-assets', bsl: 'bs-liab', bse: 'bs-equity' };
+    const P = (this._G && this._G.panels) || {};
+    for (const z in P) for (const r of (P[z] || [])) {
+      if (r.grp && !this._rowDive[r.row]) {
+        const pr = GP[r.grp]; const pd = pr && (this._rowDive[pr] || this.ROW2DIVE[pr]);
+        if (pd && D[pd]) this._grpDive[r.row] = pd;
       }
     }
-    return this._r2d[row] || row;
   }
-  onRow = (e) => { this.pin(this._diveKey(e.currentTarget.getAttribute('data-row'))); };
+  // pin 시 동시 발광할 행들 (V-069): dive.hl(per-ticker) → 정적 HL(삼성·보편) → links[].row+.row 파생.
+  _hlRows(key) {
+    if (!key) return [];
+    const d = this.getDives()[key];
+    if (d && d.hl) return d.hl;
+    if (this.HL[key]) return this.HL[key];
+    if (!d) return [];
+    const rows = (d.links || []).map(l => l.row).filter(Boolean);
+    if (d.row) rows.push(d.row);
+    return rows;
+  }
+  // 항등식 HL(V-075, A9 합계→구성): 합계 행 클릭 시 구성 행 동반 발광 — 클릭 행(pinVia) 기준.
+  // 행 id는 보편(없는 티커는 DOM 미존재로 무해). 역방향(구성→합계)은 켜지 않는다.
+  VIA_HL = {
+    'is-grossprofit': ['is-grossprofit', 'is-revenue', 'is-cogs'],
+    'is-opincome': ['is-opincome', 'is-grossprofit', 'is-sgna', 'is-opother'],
+    'is-pretax': ['is-pretax', 'is-opincome', 'is-nonop'],
+  };
+  _pinHl() {
+    if (!this.state.pin) return new Set();
+    const s = new Set(this._hlRows(this.state.pin));
+    for (const r of (this.VIA_HL[this.state.pinVia] || [])) s.add(r);
+    return s;
+  }
+  onRow = (e) => { const row = e.currentTarget.getAttribute('data-row'); this.pin(this._diveKey(row), row); };
 
   onKnot(id) { this.pin(id); }
 
-  pin = (key) => {
+  pin = (key, via) => {
     if (!this.getDives()[key]) return;
     const exp = { ...this.state.exp };
-    (this.HL[key] || []).forEach(r => { const g = this.GROUP_OF[r]; if (g) exp[g] = true; });
-    this.setState({ pin: key, exp });
+    this._hlRows(key).forEach(r => { const g = this.GROUP_OF[r]; if (g) exp[g] = true; });
+    // via = 진입한 패널 행(V-067): 다른 재무제표의 행에서 코어 dive로 온 경우 원문 뷰가 주석으로 라우팅하는 근거.
+    this.setState({ pin: key, exp, pinVia: via || null });
   };
   unpin = () => { if (this.state.pin) this.setState({ pin: null }); };
 
@@ -559,6 +571,14 @@ class Component extends DCLogic {
     if (/^n\d/.test(key)) return { type: 'note', id: key.slice(1) };
     const led = (this._G && this._G.meta && this._G.meta.routing_ledger) || {};
     for (const nn in led) { const to = led[nn].to || ''; if (to === 'new-dive:' + key || to === 'appendix:' + key) return { type: 'note', id: nn }; }
+    // V-067: 다른 재무제표의 행에서 진입한 코어 dive는 그 dive의 주석 원문이 정답 —
+    // 예) BS 이연법인세자산(bs-dta)→k7(row=is-tax): 원문은 손익계산서가 아니라 주25 법인세비용.
+    //     dive 자기 행(is-tax) 진입이면 기존대로 그 재무제표(손익계산서)로 간다.
+    const via = this.state.pinVia;
+    if (via && d && d.row && via.split('-')[0] !== d.row.split('-')[0]) {
+      const nd = (this._G && this._G.meta && this._G.meta.note_dive) || {};
+      for (const nn in nd) if (nd[nn] === key) return { type: 'note', id: nn };
+    }
     const row = (d && d.row) || key;
     if (row === 'is-oci' || row === 'is-totalcomp') return { type: 'stmt', id: 'cis' };
     if (row.indexOf('bs-') === 0 || row.indexOf('pbs-') === 0) return { type: 'stmt', id: 'bs' };
@@ -567,21 +587,22 @@ class Component extends DCLogic {
     if (row.indexOf('eq-') === 0) return { type: 'stmt', id: 'eq' };
     return { type: 'stmt', id: 'bs' };
   }
-  // 목차의 주석 클릭 → 원장(routing_ledger)으로 대응 딥다이브 동기 핀
+  // 목차의 주석 클릭 → 저작된 라우팅(전용카드·note_dive·원장 명시타깃)으로만 동기 핀.
+  // ⚠️ R6.10(V-084): 산문 "(주N)" 상호참조 스캔(fuzzy) 폐기 — 상호참조는 목적지 근거가 아니다(주20 공정가치→위험관리 오핀 근절).
+  //     저작된 경로가 없으면(dive:cited 미저작·excluded 등) 무핀 = 원문만 표시(삼성 T0 계약과 동일).
   _pinForNote(nn) {
     const D = this.getDives();
-    if (D['n' + nn]) { this.pin('n' + nn); return; }  // 그 주석 자체의 APPENDIX 카드 우선(원장이 dive:cited여도 동기 — 버그 수정)
-    const nd = (this._G && this._G.meta && this._G.meta.note_dive) || {};  // 코어 dive로 매핑된 주석(주10→ppe·주27→k11 등)
+    if (D['n' + nn]) { this.pin('n' + nn); return; }  // ① 그 주석 자체의 APPENDIX/new-dive 카드
+    const nd = (this._G && this._G.meta && this._G.meta.note_dive) || {};  // ② 코어 dive로 저작된 홈(주10→ppe·주27→k11 등)
     if (nd[nn] && D[nd[nn]]) { this.pin(nd[nn]); return; }
     const led = (this._G && this._G.meta && this._G.meta.routing_ledger) || {};
-    const ent = led[nn]; if (!ent) return;
-    const to = ent.to || '';
-    if (to.indexOf('appendix:') === 0 || to.indexOf('new-dive:') === 0) { const k = to.split(':')[1]; if (D[k]) this.pin(k); return; }
-    if (to.indexOf('row:') === 0) { const k = this._diveKey(to.slice(4)); if (D[k]) this.pin(k); return; }
-    if (to === 'dive:cited') {
-      const re = new RegExp('주\\s?' + String(nn).replace('.', '\\.') + '(?=\\D|$)');
-      for (const k in D) { if (re.test(JSON.stringify([D[k].what, D[k].why, D[k].lnote]))) { this.pin(k); return; } }
+    const ent = led[nn];
+    if (ent) {  // ③ 원장 명시 타깃(appendix:/new-dive:/row:)
+      const to = ent.to || '';
+      if (to.indexOf('appendix:') === 0 || to.indexOf('new-dive:') === 0) { const k = to.split(':')[1]; if (D[k]) { this.pin(k); return; } }
+      else if (to.indexOf('row:') === 0) { const k = this._diveKey(to.slice(4)); if (D[k]) { this.pin(k); return; } }
     }
+    this.unpin();  // 저작된 홈 없음 → 무핀(원문만)
   }
   openSrc = (key) => {
     const view = this._srcForDive(key);
@@ -624,7 +645,7 @@ class Component extends DCLogic {
     const el = document.querySelector(`[data-row="${row}"]`);
     if (!el) return;
     if (on) el.setAttribute('data-hl', '1');
-    else if (!(this.HL[this.state.pin] || []).includes(row)) el.removeAttribute('data-hl');
+    else if (!this._pinHl().has(row)) el.removeAttribute('data-hl');
   };
 
   // ---------- helpers ----------
@@ -736,10 +757,14 @@ class Component extends DCLogic {
       }
     }
 
-    // depreciation return — 매출원가·판관비 유출 가지에서 분기해 ⑨로 되돌아오는 점선 레일
-    const _outIS = this.KNOTS.filter(k => k.kind === 'out' && k.z === 'B'), p9 = K.k9;
+    // depreciation return — 매출원가·판관비 유출 가지에서 분기해 비현금 조정(back)으로 되돌아오는 점선 레일
+    // V-066: knots JSON엔 z(존) 필드가 없어 k.z==='B' 필터가 항상 빈 배열 → 파선 전사 소실 회귀.
+    //        존 대신 순서로 파생: 첫 back(비현금 조정) 매듭 앞의 out 매듭 = 손익 유출 가지.
+    const _ks = this.KNOTS, _bi = _ks.findIndex(k => k.kind === 'back');
+    const _outIS = _bi > 0 ? _ks.slice(0, _bi).filter(k => k.kind === 'out') : [];
+    const p9 = _bi > 0 ? K[_ks[_bi].id] : null;
     if (_outIS.length && p9) {
-      const p3 = K[_outIS[0].id], depOn = focus === 'k9';
+      const p3 = K[_outIS[0].id], depOn = focus === _ks[_bi].id;
       const depX = Math.max(44, p3.x + CF.tributary.outDx); // 유출 가지 끝(⊖ 글리프)의 x
       els.push(h('path', { key: 'depg', d: ortho([[depX, p3.y + CF.tributary.outDy + 9], [depX, p9.y], [p9.x - 9, p9.y]], 14), stroke: C.cyan, strokeWidth: 1.8, strokeDasharray: '4 4', fill: 'none', opacity: depOn ? .9 : .55 }));
       els.push(h('circle', { key: 'depj', cx: depX, cy: p3.y + CF.tributary.outDy + 9, r: 2.5, fill: C.cyan, opacity: .8 }));
@@ -993,12 +1018,12 @@ class Component extends DCLogic {
   };
   HL = {
     k1: ['pbs-cash', 'cf-begincash'], k2: ['is-revenue'], k3: ['is-cogs'], k4: ['is-grossprofit'],
-    k5: ['is-sgna', 'is-sgna-rnd'], k6: ['is-opincome'], k6b: ['is-nonop', 'is-pretax'],
-    k7: ['is-tax', 'cf-paid'], k8: ['is-netincome', 'cf-netincome', 'eq-netincome'],
+    k5: ['is-sgna', 'is-sgna-rnd'], k6: ['is-opincome'], k6b: ['is-nonop'],
+    k7: ['is-tax', 'cf-paid', 'bs-dta', 'bs-dtl', 'bs-taxlia'], k8: ['is-netincome', 'cf-netincome', 'eq-netincome'],
     k9: ['cf-noncash', 'cf-noncash-dep', 'bs-ppe', 'is-cogs'], k10: ['cf-wc', 'cf-wc-ar', 'cf-wc-inv'],
     k10b: ['cf-paid', 'is-tax'], k11: ['cf-op', 'cf-netincome'], k12: ['cf-inv', 'cf-inv-capex', 'bs-ppe'],
     k13: ['cf-fin', 'eq-div', 'eq-buyback'], k14: ['cf-fx'], k15: ['bs-cash', 'cf-endcash', 'cf-netchange'],
-    oci: ['is-oci', 'eq-oci', 'is-totalcomp'], ppe: ['bs-ppe', 'cf-noncash-dep', 'cf-inv-capex'],
+    oci: ['is-oci', 'eq-oci'], ppe: ['bs-ppe', 'cf-noncash-dep', 'cf-inv-capex'],
     assets: ['bs-assets'], liab: ['bs-liab'],
     'eq-begin': ['eq-begin'], 'eq-div': ['eq-div', 'cf-fin-div', 'cf-fin'], 'eq-buyback': ['eq-buyback', 'cf-fin-tsy', 'cf-fin'],
     'eq-other': ['eq-other'], 'eq-end': ['eq-end', 'bs-equity'],
@@ -1270,8 +1295,15 @@ class Component extends DCLogic {
         cells.map((cc, ci) => {
           const num = isNum(cc);
           const dk = (ri > 0 && ci === 0 && !num) ? dmap[norm(cc)] : null;   // 계정명 행 → 딥다이브 동기
+          // V-067: 계정셀에 (주N) 참조가 있으면 원문 뷰도 그 주석으로 함께 이동(딥다이브 핀은 srcGoto→_pinForNote가 담당).
+          //        복수 참조(주21,22)는 주석 제목이 계정명과 일치하는 것 우선, 없으면 첫 번째.
+          let nref = null;
+          if (dk && this._report && this._report.notes) {
+            const refs = (String(cc).match(/주\s?([\d.]+)/g) || []).map(s => s.replace(/주\s?/, '')).filter(nn => this._report.notes[nn]);
+            if (refs.length) nref = refs.find(nn => norm(this._report.notes[nn].title) === norm(cc)) || refs[0];
+          }
           const style = { border: '1px solid var(--line)', padding: '4px 9px', textAlign: num ? 'right' : 'left', color: dk ? 'var(--cyan)' : (ri === 0 ? 'var(--text)' : 'var(--dim)'), fontWeight: ri === 0 ? 600 : 400, background: ri === 0 ? 'rgba(255,255,255,.03)' : 'transparent', verticalAlign: 'top', whiteSpace: num ? 'nowrap' : 'normal', wordBreak: 'keep-all', overflowWrap: 'anywhere', minWidth: num ? 'auto' : '84px', maxWidth: num ? 'none' : '320px', lineHeight: 1.5, cursor: dk ? 'pointer' : 'default', textDecoration: dk ? 'underline dotted' : 'none', textUnderlineOffset: '3px' };
-          return h(ri === 0 ? 'th' : 'td', { key: ci, style, onClick: dk ? () => this.pin(dk) : undefined, title: dk ? '이 계정의 딥다이브로 이동' : undefined }, cc);
+          return h(ri === 0 ? 'th' : 'td', { key: ci, style, onClick: dk ? () => (nref ? this.srcGoto({ type: 'note', id: nref }) : this.pin(dk)) : undefined, title: dk ? (nref ? '주' + nref + ' 원문과 딥다이브로 이동' : '이 계정의 딥다이브로 이동') : undefined }, cc);
         })))));
   }
   _srcBlocks(blocks) {
@@ -1282,6 +1314,13 @@ class Component extends DCLogic {
     });
     return out.length ? out : [h('div', { key: 'no', style: { padding: '30px 4px', color: 'var(--dim)' } }, '(원문을 찾지 못했어요)')];
   }
+  // 단일 포괄손익계산서 회사(SK·NAVER·고려아연·현대건설)는 별도 손익계산서(is)가 없다(V-068).
+  // is- 행 dive에서 온 원문 요청('is')을 그 회사에 실재하는 포괄손익계산서(cis)로 폴백 해석.
+  _stmtId(id) {
+    const R = this._report; if (!R) return id;
+    if (id === 'is' && !R.statements.is && R.statements.cis) return 'cis';
+    return id;
+  }
   buildSrcPanel() {
     if (!this.state.src) return null;
     const h = React.createElement, view = this.state.src, R = this._report;
@@ -1291,7 +1330,8 @@ class Component extends DCLogic {
       bodyKids = h('div', { style: { padding: '48px 30px', color: 'var(--dim)', fontSize: '15px', lineHeight: 1.85 } },
         this._reportErr ? '이 기업의 사업보고서 원문 데이터는 아직 준비 중이에요.\n(현재 삼성전자부터 지원해요.)' : '원문을 불러오는 중이에요…');
     } else {
-      const item = (view.type === 'stmt' ? R.statements[view.id] : R.notes[view.id]) || {};
+      const sid = view.type === 'stmt' ? this._stmtId(view.id) : view.id;
+      const item = (view.type === 'stmt' ? R.statements[sid] : R.notes[view.id]) || {};
       title = (view.type === 'stmt' ? (item.title || '재무제표') : ('주' + view.id + ' ' + (item.title || ''))) + ' · 원문';
       bodyKids = this._srcBlocks(item.blocks);
     }
@@ -1301,7 +1341,8 @@ class Component extends DCLogic {
       const head = (t) => h('div', { key: 'h' + t, style: { fontFamily: 'var(--mono)', fontSize: '9.5px', letterSpacing: '.14em', color: 'var(--dim2)', padding: '10px 8px 4px' } }, t);
       const item = (type, id, label, active) => h('div', { key: type + id, onClick: () => this.srcGoto({ type, id }), title: label, style: { padding: '4px 8px', fontSize: '11px', lineHeight: 1.3, cursor: 'pointer', color: active ? 'var(--cyan)' : 'var(--dim)', background: active ? this.rgba(this.C.cyan, .1) : 'transparent', borderLeft: '2px solid ' + (active ? 'var(--cyan)' : 'transparent'), whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' } }, label);
       const rows = [head('재무제표')];
-      ['bs', 'is', 'cis', 'eq', 'cf'].forEach(k => { if (R.statements[k]) rows.push(item('stmt', k, R.statements[k].title, view.type === 'stmt' && view.id === k)); });
+      const activeStmt = view.type === 'stmt' ? this._stmtId(view.id) : null;
+      ['bs', 'is', 'cis', 'eq', 'cf'].forEach(k => { if (R.statements[k]) rows.push(item('stmt', k, R.statements[k].title, activeStmt === k)); });
       rows.push(head('주석'));
       for (const nn in R.notes) rows.push(item('note', nn, '주' + nn + ' ' + R.notes[nn].title, view.type === 'note' && view.id === nn));
       return h('div', { style: { width: '138px', flexShrink: 0, borderRight: '1px solid var(--line)', overflowY: 'auto', padding: '4px 0 30px' } }, rows);
@@ -1407,6 +1448,34 @@ class Component extends DCLogic {
     return h('div', { key: 'panelB' }, out);
   }
 
+  buildPanelE() {
+    // 패널 E(자본변동)를 panels.E에서 데이터 구동 렌더 — 회사별 자본거래 차이 흡수(V-083:
+    // eq-buyback 없는 회사에서 정적 'E4 자기주식취득' 공란·'E5 주식보상·기타' 라벨 불일치 사고).
+    // 라벨은 panels.E 각 행의 실제 name, 없는 행은 자동 생략(placeholder 금지). buildPanelB와 동식.
+    const h = React.createElement;
+    const E = (this._G && this._G.panels && this._G.panels.E) || [];
+    const OUT = { 'eq-div': 1, 'eq-buyback': 1 };  // 유출 = coral
+    const FIN = { 'eq-div': 1, 'eq-buyback': 1 };   // 재무활동과 같은 돈 힌트
+    const out = [];
+    E.forEach((r, i) => {
+      const isEnd = r.row === 'eq-end';
+      const vc = this.colOf(r.color || (OUT[r.row] ? 'coral' : 'gold'));
+      out.push(h('div', { key: r.row, 'data-row': r.row, onClick: this.onRow,
+        title: (r.raw_mn != null ? r.raw_mn.toLocaleString() + ' 백만원' : r.name),
+        style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          height: 'var(--row-s)', padding: '0 16px', cursor: 'pointer',
+          borderTop: i === 0 ? 'none' : (isEnd ? '1px solid rgba(233,196,107,.35)' : '1px solid var(--line)'),
+          background: isEnd ? 'rgba(233,196,107,.06)' : 'transparent',
+          fontWeight: isEnd ? 700 : 400 } },
+        h('div', { style: { display: 'flex', alignItems: 'center', gap: '10px' } },
+          h('span', { style: { fontFamily: 'var(--mono)', fontSize: '10px', color: isEnd ? 'var(--gold)' : 'var(--dim2)', letterSpacing: '.08em' } }, 'E' + i),
+          h('span', null, r.name),
+          FIN[r.row] ? h('span', { style: { fontSize: '11px', color: 'var(--dim)', fontWeight: 400 } }, '⑬ 재무활동과 같은 돈') : null),
+        h('span', { style: { fontFamily: 'var(--mono)', fontSize: isEnd ? '17px' : '15px', fontWeight: isEnd ? 700 : 600, color: vc, textShadow: isEnd ? '0 0 12px rgba(233,196,107,.5)' : 'none' } }, (r.v == null || r.v === '') ? '—' : r.v)));
+    });
+    return h('div', { key: 'panelE' }, out);
+  }
+
   buildAppendix() {
     const h = React.createElement;
     const items = (this._G && this._G.appendix) || [];
@@ -1443,6 +1512,7 @@ class Component extends DCLogic {
       runningChip: safe(this.buildRunningChip, null),
       appendixList: safe(this.buildAppendix, null),
       panelB: safe(this.buildPanelB, null),
+      eqRows: safe(this.buildPanelE, null),
       bsbar: (() => { const f = (r) => { const x = (this._G && this._G.panels && this._G.panels.D || []).find(q => q.row === r); return x && x.raw_mn ? x.raw_mn : null; }; const a = f('bs-assets'), l = f('bs-liab'), e = f('bs-equity'); if (a && l && e) return { l: Math.round(l / a * 100), e: Math.round(e / a * 100) }; return { l: 23, e: 77 }; })(),
       sub: (() => { try { const o = {}; for (const g of ['sgna','nonop','ni','noncash','wc','inv','fin','bsa','bsl','bse']) o[g] = this.buildSub(g); return o; } catch (e) { console.warn('sub 빌더 오류: ' + e.message); return {}; } })(),
       onRow: this.onRow,

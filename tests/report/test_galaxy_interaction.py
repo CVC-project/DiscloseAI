@@ -156,6 +156,112 @@ def test_no_horizontal_scroll_1024(page):
     assert over <= 2, f"가로 오버플로 {over}px"
 
 
+def test_toc_note_pin_authored_only(page):
+    """주석 착지 결정론(V-084 · R6.10): 주석 클릭은 '저작된 경로'로만 착지한다.
+
+    계약: 각 주석 클릭 시 _pinForNote는 (a) 저작된 카드에 핀(전용카드 n{N}·note_dive[N]·
+    원장 명시타깃 appendix:/new-dive:/row:) 하거나 (b) 무핀(원문만 — 저작된 홈 없음)이다.
+    ⚠️ 산문 "(주N)" 상호참조 fuzzy 스캔으로 착지하는 '오핀'은 금지(주20 공정가치→위험관리 버그).
+    pin/unpin을 가로채 기록만 하므로(상태 무변경) setState 비동기와 무관하게 결정적."""
+    import json
+
+    g = json.load(open(f"integration/dossier/data/galaxy_{TICKER}.json", encoding="utf-8"))
+    meta = g.get("meta") or {}
+    notes = list(meta.get("routing_ledger", {}).keys())
+    assert notes, "routing_ledger 비어있음"
+    bad = page.evaluate(
+        """(notes) => {
+      const el = document.querySelector('[data-row]');
+      let inst = null;
+      for (const k in el) if (k.startsWith('__reactFiber$')) {
+        let f = el[k];
+        while (f) {
+          const s = f.stateNode;
+          if (s && s._pinForNote) { inst = s; break; }
+          if (s && s.logic && s.logic._pinForNote) { inst = s.logic; break; }  // dc-runtime: 래퍼.logic
+          f = f.return;
+        }
+      }
+      if (!inst) return ['NO_INSTANCE'];
+      const G = inst._G || {}; const meta = G.meta || {};
+      const nd = meta.note_dive || {}, led = meta.routing_ledger || {};
+      const D = inst.getDives();
+      // 저작된 착지 키인지 판정 (fuzzy 아님)
+      const authorized = (n, key) => {
+        if (key === 'n' + n) return true;
+        if (nd[n] === key) return true;
+        const to = (led[n] || {}).to || '';
+        if (to === 'appendix:' + key || to === 'new-dive:' + key) return true;
+        if (to.indexOf('row:') === 0) return true;  // row 타깃(§9가 실존 검증)
+        return false;
+      };
+      const origP = inst.pin, origU = inst.unpin; const rec = [];
+      inst.pin = (key) => { rec.push(key); };
+      inst.unpin = () => { rec.push(null); };
+      const bad = [];
+      try {
+        for (const n of notes) {
+          rec.length = 0; inst._pinForNote(n);
+          const key = rec.length ? rec[rec.length - 1] : null;
+          if (key !== null && !authorized(n, key)) bad.push(n + '→' + key);  // 오핀(fuzzy)
+        }
+      } finally { inst.pin = origP; inst.unpin = origU; }
+      return bad;
+    }""",
+        notes,
+    )
+    assert bad == [], f"저작되지 않은 오핀(fuzzy) 착지 {len(bad)}건: {bad}"
+
+
+def test_no_fuzzy_scan_in_renderer(page):
+    """R6.10 회귀 방지: _pinForNote에 산문 스캔 fuzzy 폴백('for (const k in D)' + re.test)이 재도입되지 않았는지."""
+    src = page.evaluate(
+        """() => {
+      const el = document.querySelector('[data-row]');
+      for (const k in el) if (k.startsWith('__reactFiber$')) {
+        let f = el[k];
+        while (f) {
+          const s = f.stateNode;
+          const inst = (s && s._pinForNote) ? s : (s && s.logic && s.logic._pinForNote ? s.logic : null);
+          if (inst) return inst._pinForNote.toString();
+          f = f.return;
+        }
+      }
+      return 'NO_INSTANCE';
+    }"""
+    )
+    assert src != "NO_INSTANCE", "인스턴스 못 찾음"
+    assert "for (const k in D)" not in src, "fuzzy 산문 스캔 폴백이 _pinForNote에 재도입됨(R6.10 위반)"
+
+
+def test_identity_highlight(page):
+    """항등식 HL(V-075, A9 합계→구성): 합계 행 클릭 시 구성 행 동반 발광 + Esc 잔광 0."""
+    cases = [
+        ("is-grossprofit", ["is-revenue", "is-cogs"]),
+        ("is-pretax", ["is-opincome", "is-nonop"]),
+    ]
+    ran = False
+    for via, comps in cases:
+        el = page.query_selector(f'[data-row="{via}"]')
+        if not el:
+            continue  # 플랫폼(cogs 결측) 등 행 없는 티커는 해당 케이스 없음
+        ran = True
+        el.scroll_into_view_if_needed()
+        time.sleep(0.3)
+        el.click()
+        time.sleep(0.7)
+        for c in comps:
+            ce = page.query_selector(f'[data-row="{c}"]')
+            if ce:
+                assert ce.get_attribute("data-hl") == "1", f"{via} 클릭 시 {c} 미발광"
+        page.keyboard.press("Escape")
+        time.sleep(0.4)
+        ce = page.query_selector(f'[data-row="{via}"]')
+        assert not (ce and ce.get_attribute("data-hl")), f"Esc 후 {via} 잔광"
+    if not ran:
+        pytest.skip("항등식 대상 행 없음(이 티커 레이아웃)")
+
+
 def test_zero_console_errors(page):
     """상호작용 전 과정 콘솔 에러 0."""
     assert not page._errs, f"콘솔 에러 {len(page._errs)}: {page._errs[:2]}"
