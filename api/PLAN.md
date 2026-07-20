@@ -12,7 +12,7 @@
 2. **GPU 밸류체인** — 사업보고서 문장에서 공급·고객 관계를 추출하는 QLoRA 학습·배치 추론([valuechain/PLAN.md](../modules/relation/valuechain/PLAN.md), 리더 담당·미착수).
 3. **사업보고서 원문 DB 성장** — 48개사 649MB → 전 상장사 확장 시 ~35GB(valuechain D11 추정). 브라우저로 보낼 수 있는 크기가 아니다.
 
-이 문서는 프론트(화면) / 미들웨어(`api/`) / 백엔드(데이터·GPU)를 어떻게 나누고 연결할지의 **정본**이다. 호스팅 서비스 선택은 §6에서 확정안을 제시하되, 어느 계층이든 이사 가능하게 설계한다(계약 기반 분리).
+이 문서는 프론트(화면) / 미들웨어(`api/`) / 서빙 저장소(Supabase) / 배치 연산(GPU)을 어떻게 나누고 연결할지의 **정본**이다. 호스팅은 §6에서 **Supabase+Vercel을 처음부터 쓰는 것으로 확정**하되(사용자 결정 2026-07-20), 계약 기반 분리로 어느 계층이든 이사 가능하게 설계한다.
 
 ## 1. 현재 상태 — 조사로 확인한 사실
 
@@ -25,39 +25,44 @@
 | 사업보고서 원문 DB(`modules/report/data/reports.db` 649MB)·원시 캐시(1.5GB)는 git 밖 로컬 파일. 화면은 잘게 잘라 커밋한 `report_<ticker>.json`(회사당 ~300KB)만 사용 | .gitignore:31-34, du 실측 |
 | GitHub Pages 배포([pages.yml](../.github/workflows/pages.yml))가 dev push마다 자동 게시 중. CI([ci.yml](../.github/workflows/ci.yml))는 dev·main push 및 PR마다 black·sync_codex·pytest 실행 | 워크플로 파일 실측 |
 
-## 2. 목표 구조 — 3계층
+## 2. 목표 구조 — 서빙은 전부 클라우드, GPU는 서빙 경로 밖
+
+**핵심 결정(사용자, 2026-07-20): 처음부터 Supabase를 쓴다.** GPU 서버는 RAW 원문 보관 + 배치 연산(임베딩·밸류체인 추출/학습)에만 쓰고, 그 **가공물(임베딩 벡터·밸류체인 데이터 등)만 Supabase에 적재**한다. 사용자 질문 처리(서빙)는 전부 클라우드(Vercel 함수 + Supabase)에서 일어나고 **GPU는 서빙 경로에 들어오지 않는다** → 챗봇이 GPU IP 고정·가동 여부에 묶이지 않는다(§6.3의 IP 제약 해소).
 
 ```
 [사용자 브라우저]
-   │ 화면·데이터 파일 (정적)              │ AI 질문 등 실시간 요청
-   ▼                                      ▼
-① 프론트 (현행 유지, integration/)   ② 미들웨어 api/ (신설 예정, 리더 소유)
-   HTML·CSS·JS + 미리 만든 JSON          FastAPI — /api/chat, /api/health
-   변경은 딱 1곳: 코파일럿 호출처를      + 모든 AI 답변에 면책 문구 자동 부착
-   Gemini 직통 → /api/chat 으로           + rate limit + LLM 키 서버 보관
-                                           │
-                                           ▼
-                                    ③ 백엔드 (데이터·계산)
-                                       - 사업보고서 원문 DB (reports.db)
-                                       - 벡터 인덱스 (팀원 임베딩 산출물 — §4 C2)
-                                       - GPU 서버(A100): 임베딩 배치·밸류체인 학습(시분할)
-                                       - (미래) 사용자·학습 기록 DB (PostgreSQL, shared/models.py 타깃)
+   │ 화면·정적 JSON (기존 대시보드)        │ AI 질문 (실시간)
+   ▼                                       ▼
+① 프론트 (현행 유지, integration/)    ② 미들웨어 api/ = Vercel 서버리스 함수 (신설, 리더 소유)
+   HTML·CSS·JS + 미리 만든 JSON           /api/chat, /api/health
+   변경 딱 1곳: 코파일럿 호출처            + 면책 문구 강제 + rate limit + 키(Supabase·LLM) 은닉
+   Gemini 직통 → /api/chat                  │  질문 임베딩 → 검색 → 인용 강제 → 생성
+                                            ├──→ ③a Supabase (관리형 클라우드 DB)
+                                            │       - pgvector 임베딩 벡터 + 청크 원문·메타(인용 앵커)
+                                            │       - (이후) valuechain 엣지 · 사용자·학습 데이터
+                                            └──→ ③b 외부 LLM API (Gemini/Claude-Bedrock) — 답변 생성
+                                                     │  (Supabase·LLM 어느 쪽도 GPU 불필요)
+   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─
+   ④ GPU 서버(A100) — 서빙 경로 밖, 오프라인 배치 전용
+      RAW 원문 코퍼스(/data) 보관 + 청킹·임베딩 배치 + 밸류체인 QLoRA 학습/추론
+      → 가공물(임베딩 벡터·엣지)을 Supabase로 업로드(push, 아웃바운드만)
 ```
 
 - **① 프론트는 화면·모양·동작 전부 불변.** 유일한 변경은 코파일럿 호출처(Gemini 직통 → `/api/chat`). 디자인 정본([DESIGN.md](../DESIGN.md))·구조 불변 원칙 준수.
-- **② 미들웨어(`api/`)가 신설되는 층.** 역할: (a) LLM 키를 서버에 은닉 (b) 챗봇 질문을 검색→인용 강제→답변으로 처리 (c) 모든 AI 응답에 면책 문구를 기계적으로 부착 — CLAUDE.md의 "면책 로직 미구현" 항목이 여기서 해소됨.
-- **③ 백엔드는 대부분 기존 자산의 재배치.** reports.db(있음), GPU 서버(세팅 있음, §4 실사 결과 참조), 벡터 인덱스(팀원 작업물 — 계약 C2로 정의, 실물 확인 전).
+- **② 미들웨어(`api/`) = Vercel 서버리스 함수.** 역할: (a) Supabase·LLM 키를 서버(환경변수)에 은닉 (b) 질문 임베딩→pgvector 검색→인용 강제→LLM 생성 (c) 모든 AI 응답에 면책 문구를 기계적으로 부착 — CLAUDE.md "면책 로직 미구현" 해소. 상주 서버·고정 IP 불필요.
+- **③ 서빙 백엔드 = Supabase + 외부 LLM API.** 둘 다 관리형 클라우드라 GPU 가동과 무관. Supabase는 이미 프로젝트가 전제(.env `SUPABASE_URL`·`SUPABASE_KEY`·`DATABASE_URL`, `shared/db.py` lazy 엔진, `shared/models.py` 타깃 스키마)라 스캐폴딩이 갖춰져 있음.
+- **④ GPU는 "가공 공장".** RAW 원문 보관 + 대량 임베딩·밸류체인 연산만. 산출물을 Supabase로 밀어 넣고 빠진다 — 서빙엔 관여 안 함.
 
-**AI 역할 분담**([AI_DIRECTION_PLAN §3.1](../docs/AI_DIRECTION_PLAN.md) 라우팅 원칙의 시작 형태): 문장을 검색 가능한 벡터로 바꾸는 **임베딩은 GPU가 배치 처리**(비용 흡수), **최종 인용 답변 생성은 외부 API**(Claude/Gemini — 서비스 품질이 첫인상을 결정). 질문 1건의 임베딩 변환은 api 서버 CPU로도 충분해, GPU가 꺼진 시간(학습 시간대)에도 챗봇은 생존하도록 설계.
+**AI 역할 분담**([AI_DIRECTION_PLAN §3.1](../docs/AI_DIRECTION_PLAN.md) 라우팅 원칙의 시작 형태): **대량 인덱싱 임베딩은 GPU가 배치 처리**(비용 흡수), **최종 인용 답변 생성은 외부 API**(Claude/Gemini). 관건은 "질문 1건의 임베딩을 누가 하느냐" — GPU 없이 되도록 **소형 임베딩 모델을 인덱싱·질의 양쪽에 공용**한다(§6.3). 그래야 GPU가 꺼져 있어도 챗봇 검색이 살아있다.
 
 ## 3. 연결 계약 (Interface Contracts) C1~C5
 
 | # | 무엇 ↔ 무엇 | 계약 내용 |
 |---|---|---|
 | **C1** | 프론트 ↔ api | `/api/chat` 요청 `{question, corp_code?, history?}` / 응답 `{answer, citations:[{rcept_no, section_key, quote}], disclaimer}` (SSE 스트리밍). api 주소는 `window.DISCLOSE_API_BASE`로 주입(기본 = same-origin `/api`) → 호스팅 조합이 바뀌어도 프론트 무수정. **폴백 규약 포함**(§4): report 데이터는 정적 커밋본 재시도, 챗봇은 "일시 중지" 안내로 우아한 저하 |
-| **C2** | api ↔ 벡터 인덱스 (팀원 계약) | 청크 단위 필수 필드: `corp_code·rcept_no·section_key·char_span·원문text`(인용 앵커 역추적용). 임베딩 모델명·차원·버전 태깅, 질의-인덱스 동일 모델 원칙. **인덱스 파일의 정본 위치·백업 포함**(§4 생존 정책). 팀원 작업물 실사 후 확정 — 현재 실사 결과 인덱스 자체가 미존재(§4.1) |
-| **C3** | api ↔ GPU 서버(SGLang) | OpenAI 호환 엔드포인트 호출 — `modules/report/llm.py`의 기존 클라이언트 패턴 재사용. GPU 다운 감지 시 외부 API·CPU로 자동 폴백 |
-| **C4** | api ↔ reports.db | 읽기 전용(integration과 동일한 리더 소유 예외 — [integration/CLAUDE.md](../integration/CLAUDE.md) 모듈 경계 규약 준용). DB 경로는 상수 1곳 — valuechain D11 승격(`shared/data/reports.db`) 시 1곳만 변경 |
+| **C2** | api ↔ Supabase pgvector | 청크 = Supabase 테이블 1행, 필수 필드: `corp_code·rcept_no·section_key·char_span·원문text·embedding(vector)`. 인용 문장(quote)은 이 행의 `원문text`에서 나오므로 **인용에 GPU 원문 접근 불필요**. 임베딩 모델명·차원·버전을 행/테이블 메타로 태깅, **질의-인덱스 동일 모델**(§6.3). GPU 배치가 이 테이블에 멱등 upsert(재실행 중복 0 — valuechain D12 정신). 실사(§4.1) 결과 인덱스 미존재 → 백지에서 이 계약대로 구축 |
+| **C3** | GPU 배치 → Supabase (서빙 아님) | GPU는 서빙 경로 밖. RAW 원문을 청킹·임베딩(배치)해 C2 테이블로 **아웃바운드 업로드만**. 질의 임베딩은 GPU가 아니라 소형 모델(Supabase Edge/api 함수, §6.3)이 담당 → GPU 다운과 무관하게 검색 생존. (SGLang은 밸류체인 학습·배치 추론용으로만 계속 사용 — `modules/report/llm.py` 클라이언트 패턴) |
+| **C4** | api ↔ RAW 원문 | 서빙에는 원문 원본이 불필요(인용은 C2 청크에 있음). 원문 원본이 필요한 경우(재인덱싱·`report_<ticker>` 상세)는 GPU 배치나 사전 가공으로 처리 — 서빙 요청 경로에서 GPU/원본 DB를 직접 읽지 않는다 |
 | **C5** | 면책 | 모든 AI 생성 응답에 면책 필드를 미들웨어가 강제 부착. "과거 통계·공시 기반 참고 정보" 문구, "투자 조언" 표현 금지(루트 CLAUDE.md 면책 규칙) |
 
 ## 4. 백엔드 현황 — GPU 서버 실사 결과 (2026-07-20)
@@ -79,75 +84,76 @@
 
 ### 4.2 결론 및 후속 조치
 
-- **"코퍼스 인덱스까지 이미 준비돼 있다"는 전제로 세운 계획은 없다** — 원래 §6 결정표도 "인덱스 미완" 분기를 이미 포함하고 있었으므로 설계 자체의 변경은 불필요. 다만 시작점이 예상보다 이르다(코퍼스도 부분적, 인덱스는 0).
-- **필수 확인 사항 (팀원 협의 — 실행 착수 전 선행)**: `/data/discloseai/fulltext/`(394사, corp_code 키)의 정체 — ① 누가 언제 무슨 목적으로 수집했는지 ② report 모듈 정본과의 관계(독자 수집이면 이중 정본 리스크 — 데이터 정본 원칙 위반 소지) ③ 재사용 가능하면 report 파이프라인 스키마로 정합, 아니면 참고용으로만 두고 정본은 report 수집기로 재수집.
-- **디스크 예산 재확인**: `/data`(197GB, 187GB 여유)를 코퍼스·인덱스·어댑터 저장 공간으로 사용. valuechain 계획의 "200GB" 표현은 실측상 `/data` 마운트를 가리키는 것으로 정정.
+- **서빙은 GPU와 분리(§2 결정) → 이 실사 결과가 서빙을 막지 않는다.** 코퍼스·인덱스가 GPU에 부분적이거나 없다는 사실은 **인덱싱(오프라인 준비)**의 시작점 문제일 뿐, **서빙(Supabase+Vercel)**과는 독립. 인덱스는 백지(0건)라 §6.3 임베딩 모델을 지금 자유롭게 고를 수 있는 **오히려 좋은 타이밍**.
+- **필수 확인 사항 (팀원 협의 — 인덱싱 착수 전 선행)**: `/data/discloseai/fulltext/`(394사, corp_code 키)의 정체 — ① 누가 언제 무슨 목적으로 수집했는지 ② report 모듈 정본과의 관계(독자 수집이면 이중 정본 리스크 — 데이터 정본 원칙 위반 소지) ③ 재사용 가능하면 임베딩 인덱싱의 입력으로 활용, 아니면 report 수집기로 재수집. (이 코퍼스는 **인덱싱 입력**일 뿐 서빙 저장소가 아니므로, 정체 확인이 서빙 착수를 막지는 않음)
+- **디스크 예산 재확인**: `/data`(197GB, 187GB 여유)를 RAW 코퍼스·배치 작업·어댑터 공간으로 사용. valuechain 계획의 "200GB" 표현은 실측상 `/data` 마운트를 가리키는 것으로 정정. (서빙 벡터는 GPU가 아니라 Supabase에 적재 — §5)
 
-## 5. 데이터 생존 정책 — 정본 위치와 백업
+## 5. 데이터 정본·저장 계층 (2계층)
 
-**결정: 운영 정본 = GPU 서버 디스크(`/data`), 로컬 = 자동 백업.**
+**결정: RAW 정본 = GPU `/data`(+로컬 백업), 서빙 저장소 = Supabase(RAW에서 파생·재생성 가능).** 오늘의 `integration/data/*.json`(모듈 DB에서 파생된 서빙 사본)과 정확히 같은 사상 — 정본은 따로, 서빙용 파생물은 별도 계층.
 
-- **운영 정본 = GPU 서버 `/data`**. 데이터가 실제로 쓰이는 곳(RAG 검색·밸류체인 추출·api 서빙 동거)에 정본을 둔다. 수집기·인덱서만 여기 쓴다(쓰기 소유 단일화 — valuechain D11 원칙과 동일 사상, 위치만 로컬→GPU로 이동).
-- **로컬 = 자동 백업본**: GPU→로컬 **야간 자동 동기화**(rsync 증분). 백업 대상 = 코퍼스(reports.db 상당)·벡터 인덱스·QLoRA 어댑터 가중치(+config)·CPA 검수 골드셋·라벨셋 — 재현 불가하거나 비싼 자산 전부. 사업보고서 원문 자체는 DART 재수집 가능(3~5일)하지만 백업이 훨씬 저렴.
-- **계약 종료·서버 소멸 시**: 로컬 백업 → 신규 서버(Render 영구 디스크·VPS 등)로 복원. 로컬 백업본의 역할은 방문자 서빙이 아니라 **복구용**(개인 PC는 공개 서버가 아님).
-- **원칙 예외 명문화**: "데이터 정본은 모듈별 로컬 SQLite" 원칙(루트 CLAUDE.md)의 공식 예외로 "운영 코퍼스 정본 = GPU 서버, 로컬 = 자동 백업"을 리더 결정으로 기록(valuechain D11의 shared 승격 예외와 같은 방식). 루트 CLAUDE.md·docs/ARCHITECTURE.md 반영은 api/ 구현 착수(P1) 시 D11 명문화와 함께 진행.
+| 계층 | 무엇 | 위치 | 백업·복구 |
+|---|---|---|---|
+| **RAW 정본** | 사업보고서 원문 코퍼스, CPA 골드셋·라벨셋, QLoRA 어댑터 가중치 | GPU `/data` | 로컬로 **야간 자동 동기화**(rsync 증분). 재현 불가·고비용 자산이라 백업 필수(원문 자체는 DART 재수집 가능하나 3~5일) |
+| **서빙 저장소(파생)** | 임베딩 벡터+청크(pgvector), valuechain 엣지, (이후)사용자·학습 | Supabase | Supabase 관리형 백업(Pro는 자동 PITR; 무료 티어는 주기적 `pg_dump` export 자체 운영). **손실돼도 RAW에서 재인덱싱해 복원 가능** |
 
-**GPU 서버가 끊겼을 때 — 화면별 폴백 체인 (C1에 포함):**
-- 대시보드·갤럭시·3탭: 애초에 정적 파일(Pages 서버)에서 fetch → GPU와 무관, 항상 동작
-- 사업보고서 데이터: 핵심 기업 N개의 JSON은 정적으로 계속 커밋 → `/api/reports/...` 실패 시 정적 커밋본으로 자동 폴백
-- 챗봇: api까지 내려간 경우 "챗봇 일시 중지" 안내로 우아한 저하 — 사이트 나머지는 정상
+- **쓰기 소유 단일화**: RAW는 수집기·인덱서만, Supabase 서빙 테이블은 GPU 배치 업로더만 upsert(멱등). 읽기는 api가 Supabase에서.
+- **GPU/서버 계약 종료 시**: 서빙(Vercel+Supabase)은 GPU와 무관하므로 **챗봇은 계속 산다.** 배치 연산(재인덱싱·밸류체인 학습)만 새 GPU/Render/VPS로 옮기면 됨 — 로컬 RAW 백업이 이사 소스.
+- **원칙 예외 명문화**: "데이터 정본은 모듈별 로컬 SQLite" 원칙(루트 CLAUDE.md)의 공식 예외로 "RAW 코퍼스 정본 = GPU `/data`+로컬 백업 / 서빙 파생 저장소 = Supabase"를 리더 결정으로 기록. 루트 CLAUDE.md·docs/ARCHITECTURE.md 반영은 api/ 구현 착수(P1) 시 valuechain D11 명문화와 함께.
+
+**서빙 경로엔 GPU가 없다 → 폴백은 "저장소/생성 실패" 기준 (C1):**
+- 대시보드·갤럭시·3탭: 정적 파일(Pages/Vercel)에서 fetch → api·Supabase·GPU 전부와 무관, 항상 동작
+- 챗봇: Supabase 검색 실패 또는 LLM API 오류 시 "챗봇 일시 중지" 안내로 우아한 저하 — 사이트 나머지는 정상. **GPU 다운은 챗봇 서빙에 영향 없음**(GPU는 서빙 경로 밖 — §2)
 
 **회사 수가 늘면 — `report_<ticker>.json` 정적→동적 전환:**
-- 지금: 회사별 조각 JSON을 커밋 → GitHub Actions가 GitHub Pages에 게시(배포) → 브라우저가 그 서버에서 파일을 내려받음(서빙). 현재 12사 × ~300KB.
-- 전환 임계: 커밋 용량 리포 +100MB 수준(≈300사 안팎)이 되면 파일 커밋을 멈추고 `/api/reports/<ticker>` 동적 서빙으로 전환 — 현재 `build_report_source.py`(`modules/report/report_source.py`) 로직을 api 핸들러로 이전, 응답 캐시 가능.
-- 프론트가 고칠 곳은 "가져오는 주소" 1곳뿐 — C1이 이를 보장.
+- 지금: 회사별 조각 JSON을 커밋 → 정적 서빙(12사 × ~300KB).
+- 전환 임계(커밋 용량 리포 +100MB 수준, ≈300사): 파일 커밋을 멈추고 **가공된 report 표시 데이터도 Supabase 테이블로 적재** → `/api/reports/<ticker>`가 Supabase에서 조회(`build_report_source.py` 로직을 인덱싱 배치로 이전). 프론트는 fetch 주소 1곳만 교체(C1). 이때도 서빙은 GPU 무관.
 
-## 6. 호스팅 확정안 + 검토한 대안
+## 6. 호스팅 확정안 — Supabase + Vercel (처음부터)
 
-**원칙: 이미 가진 것으로 시작(추가 고정비 0원), 각 계층은 언제든 이사 가능하게(계약 기반 분리).**
+**결정(사용자, 2026-07-20):** 나중에 이관하지 않고 **처음부터 Supabase를 쓴다.** 이유: (1) 이관 비용·정본 재정의를 피하고 한 저장 타깃으로 일관 (2) 챗봇 서빙 경로에서 GPU를 완전히 빼 **GPU IP 고정·가동 여부에 챗봇이 안 묶임**(§6.4의 IP 제약이 근본 해소) (3) 프로젝트가 이미 Supabase 전제로 스캐폴딩됨(.env `SUPABASE_URL`·`SUPABASE_KEY`·`DATABASE_URL`, `shared/db.py`, `shared/models.py`).
 
-### 6.1 확정안 — GPU 동거
+### 6.1 계층별 확정 구성
 
 | 계층 | 선택 | 이유 | 고정비 |
 |---|---|---|---|
-| 프론트(정적) | **GitHub Pages(dev, 무변경) + Vercel(main, 신설) 병행** | dev는 무료·기존 그대로 팀 개발 확인용. main은 Vercel 연결로 실서비스 프로덕션 — 서로 완전히 독립된 서비스라 각자 다른 브랜치를 봐도 충돌하지 않는다(§7) | 0원(둘 다 무료 티어) |
-| api 서버 | GPU 서버에 FastAPI 동거 + Cloudflare Tunnel로 외부 노출 | 코퍼스·GPU와 같은 곳 = 데이터 이동 없음. 이미 임차 중. Tunnel은 포트 개방 없이 HTTPS 자동 | 0원(+도메인 ~1.5만원/년 권장) |
-| 벡터 인덱스·코퍼스 | GPU 서버 `/data` = 운영 정본 + 로컬 = 야간 자동 백업 | §5 | 0원 |
-| 사용자·학습 DB | 지금 도입 안 함 → 학습 레이어 단계에 Supabase 무료 티어 | 챗봇 MVP는 로그인 없음. shared/models.py가 이미 Supabase 타깃 스키마 | 0원 |
-| LLM(답변 생성) | 외부 API(Gemini 무료 티어 시작, 품질 필요 시 Claude) | C1~C5 설계 그대로 | 사용량 과금 |
+| 프론트(정적) | **GitHub Pages(dev) + Vercel(main) 병행** | dev=팀 개발 확인용(무변경), main=실서비스. 독립 서비스라 병행 무충돌(§7) | 0원 |
+| api 미들웨어 | **Vercel 서버리스 함수**(`api/*.py`=엔드포인트) | 프론트와 같은 배포 단위, 상주 서버·고정 IP 불필요. 키는 Vercel 환경변수 | 0원(무료 티어) |
+| 서빙 저장소(검색) | **Supabase pgvector** | 관리형·원격 조회·백업 내장. 임베딩 벡터+청크 원문·메타 | 0원(무료 500MB DB) → 전 상장사 규모 시 Pro $25/mo |
+| RAW 코퍼스 + 배치 연산 | **GPU 서버 `/data`(+로컬 백업)** | 원문 보관·임베딩·QLoRA — 서빙 경로 밖(§2·§5) | 0원(임차 중) |
+| LLM(답변 생성) | 외부 API(Gemini 무료 시작, 품질 필요 시 Claude/Bedrock) | 키는 Vercel 환경변수 | 사용량 과금 |
 
-**Render의 역할 — 이사 후보 1순위(지금 사용 안 함):** 유일한 상시 서버가 임차 GPU라는 리스크(계약 종료 = api 소멸)의 대비책. api를 Docker/기동 스크립트로 이식 가능하게 만들면, 계약 종료 시 [로컬 백업(§5) + git의 api 코드] → Render(영구 디스크) 또는 저가 VPS로 재기동. 프론트는 `DISCLOSE_API_BASE` 1개만 교체(C1 보장).
+규모 감각: 임베딩 벡터+청크는 48사 ≈0.3GB(무료 티어 내), 전 상장사(~200만 청크) ≈10~20GB(Pro). 원문 35GB는 **Supabase에 안 올림**(GPU에만).
 
-**주의사항**: GPU 서버는 재부팅 시 수동 재기동 필요(systemd 미영속화, §4.1) — api·Tunnel 기동 스크립트에 재기동 로직 포함 필요.
+### 6.2 무엇을 어디에 두나 — 과잉 이관 금지
 
-### 6.2 검토한 대안 — Supabase + Vercel (승격 경로로 병기)
+Supabase로 옮기는 건 **새로 생기는 크고 자라는 데이터**뿐. 이미 잘 도는 작은 정적 JSON은 그대로 둔다.
 
-> §7에서 프론트 실서비스 호스팅으로 이미 Vercel을 병행 채택했으므로, 이 대안으로 승격할 때는 **같은 Vercel 프로젝트에 api 서버리스 함수를 추가**하는 것만으로 충분하다(신규 계정·연결 불필요) — 프론트 정적 서빙과 api 미들웨어를 같은 배포 단위로 합치는 자연스러운 확장.
+| 데이터 | 위치 | 비고 |
+|---|---|---|
+| 기존 대시보드 JSON (eqs_summary·disclosures·price_scenarios·graph_top50·firm_*·business_*·galaxy_*) | **정적 커밋 유지** | 작고 안정적 — 정적이 최적. **변경 0** |
+| RAG 임베딩 벡터 + 청크(원문·메타) | **Supabase pgvector** | 처음부터 |
+| valuechain 엣지(ValueChainEdge — valuechain PLAN §2.2 스키마) | **Supabase** | valuechain 착수 시 |
+| 사용자·학습 데이터 | **Supabase** | 학습 레이어 착수 시 (RLS로 브라우저 직접 접근 가능) |
+| RAW 원문 코퍼스·QLoRA 어댑터 | **GPU `/data`(+로컬 백업)** | 서빙 경로 밖 |
 
-| 구성 요소 | 역할 |
-|---|---|
-| 미들웨어 | Vercel 서버리스 함수(`api/chat.py` 파일 = 엔드포인트, 파일 기반 라우팅) |
-| 벡터 검색 | Supabase pgvector |
-| 코퍼스 | **가공물만 적재** — 원문 전체(35GB)는 올리지 않음 |
+### 6.3 ⚠️ 핵심 설계 제약 — 임베딩 모델 (C2에서 팀원과 확정)
 
-**적재 전략 — "GPU는 가공 공장, Supabase엔 가공물만":** GPU에서 청킹·임베딩을 배치 처리해 JSONL(청크 텍스트+벡터+메타데이터)로 export → Supabase에 멱등 upsert. 규모: 48사 ≈0.3GB(무료 티어 내), 전 상장사(~200만 청크) ≈10~20GB(Pro ~$25/mo+).
+RAG 성패를 가르는 단 하나의 제약: **인덱싱 임베딩 모델 = 질의 임베딩 모델**이어야 검색이 성립한다. Supabase-우선 구조에선 이게 곧 "서빙이 GPU에 안 묶이려면 질의 임베딩이 GPU 없이 가능해야 한다"로 직결된다.
 
-**왜 이 조합에선 GPU 디스크를 그대로 못 쓰는가**: Vercel 함수는 Vercel 데이터센터에서 실행되고 GPU 디스크는 물리적으로 다른 컴퓨터에 있다. SQLite·인덱스 파일은 같은 컴퓨터의 프로그램이 직접 여는 방식이라 네트워크 너머에서 읽을 수 없다(원격 조회가 되는 건 Postgres 같은 "접속형" DB). 데이터 위치가 조합을 결정한다: 정본=GPU 디스크 → GPU 동거 / Vercel+Supabase → 정본을 Supabase로 이사(공식 개정 필요, 로컬 백업본이 이사 소스).
+- **권장: CPU/엣지에서도 도는 소형 다국어 임베딩 모델**(예: multilingual-e5-small·bge-small·gte-small 급). 인덱싱은 GPU가 배치로 빠르게(임베딩=GPU 원칙 유지), 질의 1건은 **Supabase Edge Function(gte-small 내장) 또는 경량 호스팅 임베딩**으로 — GPU 미관여.
+- **피해야 할 것**: GPU 전용 대형 임베딩 모델로 인덱싱하면 질의도 GPU가 필요 → 서빙이 GPU 가동에 다시 종속(IP·가동 제약 부활). 이 경우가 사용자가 우려한 "정해진 IP 하에서만 챗봇 가능" 상황인데, **소형 공용 모델을 고르면 애초에 발생하지 않는다.**
+- **Vercel 함수 제약**: torch 등 무거운 ML 의존성은 서버리스(용량 한도)에 안 맞음 → 질의 임베딩은 Supabase Edge나 호스팅 임베딩으로 빼고 Vercel 함수는 가볍게(supabase 클라이언트 + HTTP 호출만). 이게 부담되면 api만 Render(소형 상주)로 빼도 C1 계약상 프론트 무변경.
+- 실사(§4.1)에서 **인덱스 0건** 확인 → 백지라 이 선택을 지금 자유롭게. 팀원이 이미 다른 모델로 임베딩했다면 C2 실사에서 정합/재인덱싱 판단.
 
-**장점**: GPU 서버가 죽거나 계약이 끝나도 챗봇 완전 생존. git push 자동 배포 + 브랜치 프리뷰 내장. 학습 레이어(로그인·사용자 DB) 도입 시 Supabase가 어차피 필요.
+### 6.4 IP 고정 문제 — 이 구조에선 발생 안 함
 
-**남는 마찰 — 질의 임베딩**: 질의 임베딩 모델은 인덱스를 만든 모델과 같아야 하는데 서버리스엔 대형 모델을 못 올린다. 완화: (a) Supabase 내장 소형 모델(gte-small)로 통일 (b) 소형 모델을 GPU 인덱싱·함수 질의 양쪽에 사용 (c) 질의만 GPU 호출(GPU 다운 시 검색 불능). 팀원 임베딩 모델 확인(C2) 후 결정.
+사용자 우려: "GPU를 매 질문마다 호출하면 GPU 고정 IP에서만 챗봇이 된다." → **이 구조에선 매 질문에 GPU를 호출하지 않는다.** 서빙 경로 = 브라우저 → Vercel 함수 → Supabase(검색) → LLM API(생성), 전부 클라우드 고정 주소. GPU는 오프라인 배치로 Supabase에 벡터를 밀어 넣을 뿐(아웃바운드), 서빙 요청이 GPU로 들어갈 일이 없다. 따라서 GPU의 IP가 무엇이든·켜져 있든 챗봇 서빙과 무관.
 
-**"코드 몇 줄로 미들웨어 없이 완결" 주장의 검증 — 절반 참**: 사용자 데이터(로그인·학습 기록)는 Supabase RLS(행 단위 보안 규칙)로 브라우저 직접 접근이 정말 가능 — 학습 레이어 승격 시 그 부분 백엔드 공수가 거의 소멸. 그러나 AI 챗봇은 LLM 키 은닉·인용 강제 검증·면책 강제·rate limit이 브라우저에 둘 수 없어 서버측 코드가 여전히 필요 — 다만 Vercel에서는 "상주 서버 운영"이 사라지고 "미들웨어 코드"만 함수 파일로 남는다. C1~C5 계약은 함수 형태로도 동일하게 이식 가능(계약은 호스팅 형태 무관).
+### 6.5 대안·폴백 (지금 주력 아님)
 
-### 6.3 확정안 vs 대안 — 전환 트리거
-
-| 상황 | 선택 |
-|---|---|
-| 지금 (GPU 임차 중, 팀원 인덱스 미완 — §4.1 실사 확인) | **GPU 동거로 시작** (0원, 코퍼스 이동 없음) |
-| 학습 레이어(로그인·사용자 데이터) 도입 시점 | Supabase 승격 검토 — RLS 덕에 사용자 데이터 백엔드 공수 최소 |
-| GPU 서버 계약 종료 임박 | §5 로컬 백업에서 Render 또는 Supabase 승격 중 택1 |
-| 어느 쪽이든 | C1~C5 계약은 불변 — 호스팅 형태와 무관하게 설계됨 |
+- **api를 GPU에 FastAPI로 동거 + Cloudflare Tunnel**: Supabase-우선안에선 불필요. 굳이 대형 GPU 임베딩 모델을 질의에도 쓰고 싶을 때만 고려하되, 챗봇 가용성이 GPU 가동에 묶이는 단점(그래서 비권장).
+- **Render/VPS**: GPU 계약 종료 시 **배치 연산**(재인덱싱·밸류체인 학습)을 옮길 곳. 서빙(Vercel+Supabase)은 GPU와 무관하므로 이 이사에도 챗봇은 안 멈춤.
 
 ## 7. CD(자동 배포) 설계
 
@@ -157,9 +163,10 @@
 |---|---|---|
 | 프론트 — 개발 확인용 | dev push → GitHub Pages 자동 게시([pages.yml](../.github/workflows/pages.yml)) | **무변경.** dev 커밋마다 팀 내부 확인 URL로 계속 사용 |
 | 프론트 — 실서비스 | 없음 | **신설**: main push → Vercel 자동 배포(§7.1). GitHub Pages와 나란히 병행 운용, 서로 간섭 없음 |
-| api 서버 | 없음 | main 머지 시 Actions가 GPU 서버로 SSH 접속 → 코드 갱신 → 재기동(§7.1). Render 등으로 이사해도 접속 대상만 교체 |
+| api 미들웨어 | 없음 | **신설**: Vercel 서버리스 함수 — main push 시 프론트와 함께 자동 배포(별도 SSH·서버 관리 없음). Supabase·LLM 키는 Vercel 환경변수(§7.1) |
 | 데이터 JSON | build_data 실행 후 커밋 → 프론트 배포에 자연히 포함 | 현행 유지 |
-| 코퍼스·인덱스(대용량) | git 밖 | git·자동 배포 대상 아님 — §5 동기화 스크립트로 관리 |
+| 서빙 벡터(Supabase) | 없음 | GPU 배치가 Supabase로 upsert — git·프론트 배포와 무관(§5·§6.2) |
+| RAW 코퍼스(대용량) | git 밖 | git·자동 배포 대상 아님 — §5 로컬 백업으로 관리 |
 
 ### 7.1 브랜치 배포 흐름 — 병행 모델 (GitHub Pages=dev, Vercel=main)
 
@@ -171,14 +178,16 @@
 3. 연결 즉시 main push마다 자동 프로덕션 배포 시작. Vercel은 기본적으로 다른 브랜치 push에도 자동 프리뷰 URL을 주므로, 원한다면 dev도 Vercel 프리뷰로 추가 확인 가능(선택, GitHub Pages와 중복이라도 무해)
 4. 프론트 코드 변경 0 — 정적 파일이라 호스팅 추가는 설정만으로 끝남
 
-**api 서버의 자동 배포 (api/ 코드가 생기는 후속 P1에서):**
-- `.github/workflows/deploy-api.yml` 신설: main 머지 시 Actions가 GPU 서버로 SSH 접속(저장소 Secrets에 키 보관) → 코드 갱신 → 재기동 스크립트 실행.
+**api 미들웨어의 자동 배포 = Vercel 함수 (api/ 코드가 생기는 P2에서):**
+- api/를 Vercel 서버리스 함수로 배치(`api/chat.py` 등 파일=엔드포인트). Vercel이 저장소를 이미 배포 중이므로 **별도 배포 워크플로 불필요** — main push = 프론트+api 함께 자동 배포. Supabase URL·키, LLM 키는 Vercel 프로젝트 Environment Variables에 등록(리포 하드코딩 금지 — 루트 CLAUDE.md 보안 규칙).
+- **GPU 서버는 서빙 경로에 없으므로 SSH 자동배포 워크플로가 필요 없다.** GPU의 배치 작업(인덱싱·학습)은 수동 또는 크론으로 실행 — 서빙 배포와 완전히 분리.
 
 ## 8. 후속 구현 로드맵 (이번 세션 범위 밖)
 
-1. **P1 — api/ 스켈레톤**: FastAPI 앱, `/api/health`, 면책 미들웨어(C5), `/api/chat`이 우선 외부 LLM 프록시로만 동작(검색 없이) — GPU 없이도 로컬에서 E2E 동작 확인 가능
-2. **P2 — RAG 연결**: 팀원 벡터 인덱스 실물 확인 → C2 계약과 대조·확정 → api가 검색 결과를 인용 강제 프롬프트에 결합
-3. **P3 — 코퍼스 확장 동조**: `/data/discloseai/fulltext/`(§4.1) 정체 확인 후 report 파이프라인과 정합 또는 재수집. valuechain D11(reports.db shared 승격)과 시점 조율
-4. **P4 — 호스팅 실행·공개**: §6 결정에 따라 Cloudflare Tunnel·도메인 연결, Vercel 계정 연결(§7.1 — main 프로덕션 브랜치 지정), Gemini 키 로테이션 후 서버측 주입
+1. **P1 — Supabase 기반 세팅**: Supabase 프로젝트 생성 → pgvector 확장 켜기 → 청크 테이블(C2 필드: corp_code·rcept_no·section_key·char_span·원문text·embedding) 생성. .env/`shared/db.py`가 이미 Supabase 연결 준비됨.
+2. **P1 — api/ 스켈레톤(Vercel 함수)**: `/api/health`, 면책 미들웨어(C5), `/api/chat`이 우선 외부 LLM 프록시로만(검색 없이) — Supabase·GPU 없이도 로컬 E2E 확인.
+3. **P2 — 임베딩 파이프라인 + RAG 연결**: §6.3 임베딩 모델 확정(팀원 C2) → GPU 배치 인덱싱 → Supabase upsert → api가 pgvector 검색 결과를 인용 강제 프롬프트로 결합 → LLM 생성. Vercel 배포.
+4. **P3 — 코퍼스 확장·valuechain**: `/data/discloseai/fulltext/`(§4.1) 정체 확인 후 인덱싱 입력으로 정합 또는 재수집. valuechain 엣지 Supabase 적재(valuechain PLAN §2.2 스키마) — D11 시점 조율.
+5. **P4 — 공개**: Vercel 계정 연결(§7.1, main 프로덕션), 도메인, Gemini 키 로테이션 후 Vercel 환경변수 주입.
 
 기존 로컬 데모용 FastAPI 2종(`modules/disclosure/chat_server.py`, `modules/price/api.py`)은 api/ 안정화 후 각 담당자와 협의해 통합 또는 은퇴 결정 — 리더가 임의로 수정하지 않는다(모듈 경계 원칙).
