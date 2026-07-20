@@ -2167,6 +2167,10 @@ function CompanyOverviewPanel({ company, sector, onBack, onEnter }) {
   const dr   = node && node.dr   ? node.dr   : null;   // debt ratio %
   const ocf  = node && node.ocf  ? node.ocf  : null;   // op.cashflow T
   const ic   = node && node.icf  ? node.icf  : null;   // inv.cashflow T
+  const eqsNotes = (node && node.eqs_module_notes) || {};
+  const eqsMethod = node && node.eqs_method && node.eqs_method.startsWith('v3_')
+    ? 'V3 · 2021~2025 · 동종업계 비교 보정'
+    : null;
   return (
     <div className="panel panel-tl company-overview-panel" style={{'--accent': sector.color}}>
       <div className="panel-head">
@@ -2242,12 +2246,13 @@ function CompanyOverviewPanel({ company, sector, onBack, onEnter }) {
         {node && node.eqs != null && (
           <div className="sector-ov-section">
             <div className="ov-sec-title">EQS · 재무 건강도 ({node.gr || '-'} · {node.eqs}점)</div>
+            {eqsMethod && <div style={{fontSize:9, color:'#5eead4', marginTop:4}}>{eqsMethod}</div>}
             <div className="company-ov-stats" style={{marginTop:6}}>
-              <div className="ov-stat"><div className="ov-k">M1 현금</div><div className="ov-v" style={{fontSize:14}}>{fmtNum(node.m1)}</div></div>
-              <div className="ov-stat"><div className="ov-k">M2 매출</div><div className="ov-v" style={{fontSize:14}}>{fmtNum(node.m2)}</div></div>
-              <div className="ov-stat"><div className="ov-k">M3 부채</div><div className="ov-v" style={{fontSize:14}}>{fmtNum(node.m3)}</div></div>
-              <div className="ov-stat"><div className="ov-k">M4 본업</div><div className="ov-v" style={{fontSize:14}}>{fmtNum(node.m4)}</div></div>
-              <div className="ov-stat"><div className="ov-k">M5 자본</div><div className="ov-v" style={{fontSize:14}}>{fmtNum(node.m5)}</div></div>
+              <div className="ov-stat" title={eqsNotes.M1 || ''}><div className="ov-k">M1 현금</div><div className="ov-v" style={{fontSize:14}}>{fmtNum(node.m1)}</div></div>
+              <div className="ov-stat" title={eqsNotes.M2 || ''}><div className="ov-k">M2 매출</div><div className="ov-v" style={{fontSize:14}}>{fmtNum(node.m2)}</div></div>
+              <div className="ov-stat" title={eqsNotes.M3 || ''}><div className="ov-k">M3 부채</div><div className="ov-v" style={{fontSize:14}}>{fmtNum(node.m3)}</div></div>
+              <div className="ov-stat" title={eqsNotes.M4 || ''}><div className="ov-k">M4 본업</div><div className="ov-v" style={{fontSize:14}}>{fmtNum(node.m4)}</div></div>
+              <div className="ov-stat" title={eqsNotes.M5 || ''}><div className="ov-k">M5 자본</div><div className="ov-v" style={{fontSize:14}}>{fmtNum(node.m5)}</div></div>
             </div>
             <div style={{fontSize:10, color:'#64748b', marginTop:6, fontFamily:'var(--font-mono)'}}>
               ⚠ AI 산출 — 투자 조언 아님, 과거 통계 기반 참고

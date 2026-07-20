@@ -15,6 +15,7 @@ from __future__ import annotations
 
 from typing import List, Optional
 
+from .calibration import CalibrationResult
 from .m1_accruals import score_m1
 from .m2_beneish import score_m2
 from .m3_cashflow import score_m3
@@ -39,21 +40,24 @@ def grade_from_score(score: Optional[float]) -> Optional[str]:
 
 
 def _aggregate(modules: List[ModuleScore]) -> Optional[float]:
-    """단순 평균. score=None 모듈은 제외."""
-    valid = [m.score for m in modules if m.score is not None]
+    """이력 신뢰도를 반영한 가중 평균. score=None 모듈은 제외."""
+    valid = [(m.score, m.weight) for m in modules if m.score is not None]
     if not valid:
         return None
-    return round(sum(valid) / len(valid), 1)
+    weight_total = sum(weight for _, weight in valid)
+    return round(sum(score * weight for score, weight in valid) / weight_total, 1)
 
 
-def compute_eqs(panel: FirmPanel) -> EQSResult:
-    """단일 기업 패널에 대한 v2 EQS 산출."""
+def compute_eqs(
+    panel: FirmPanel, calibration: CalibrationResult | None = None
+) -> EQSResult:
+    """단일 기업 EQS 산출. calibration이 있으면 v3 업종분포 기준을 쓴다."""
     modules: List[ModuleScore] = [
-        score_m1(panel),
-        score_m2(panel),
-        score_m3(panel),
-        score_m4(panel),
-        score_m5(panel),
+        score_m1(panel, short_history_weighting=calibration is not None),
+        score_m2(panel, calibration),
+        score_m3(panel, calibration),
+        score_m4(panel, calibration),
+        score_m5(panel, calibration),
     ]
     excluded = [m.name for m in modules if m.score is None]
     total = _aggregate(modules)

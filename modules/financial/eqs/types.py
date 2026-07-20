@@ -77,6 +77,7 @@ class ModuleScore:
     score: Optional[float]  # 0~100, None이면 산출 불가/제외
     raw: Optional[float] = None  # 원시 통계량 (DA, M-score, F-score 등)
     note: str = ""  # 사람이 읽을 한 줄 요약
+    weight: float = 1.0  # 종합점수 반영 가중치 (단기 이력은 신뢰도만큼 축소)
 
 
 @dataclass

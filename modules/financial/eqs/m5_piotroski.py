@@ -24,19 +24,22 @@
 
 from __future__ import annotations
 
+from .calibration import CalibrationResult, profile_for_panel, score_against_peers
 from .types import FirmPanel, ModuleScore
 
 
-def score_m5(panel: FirmPanel) -> ModuleScore:
-    if len(panel.years) < 3:
+def score_m5(panel: FirmPanel, calibration: CalibrationResult | None = None) -> ModuleScore:
+    if len(panel.years) < 2:
         return ModuleScore(
             name="M5",
             score=None,
-            note=f"패널 {len(panel.years)}년 — t와 t-2 자본 필요(최소 3년)",
+            note=f"패널 {len(panel.years)}년 — 전년 자본 필요(최소 2년)",
         )
 
-    curr = panel.years[-1]
-    base = panel.years[-3]  # t-2
+    years = panel.years[-3:]
+    curr = years[-1]
+    base = years[0]
+    n = len(years)
 
     if curr.total_equity is None or base.total_equity is None:
         return ModuleScore(name="M5", score=None, note="자본총계 결측")
@@ -57,24 +60,43 @@ def score_m5(panel: FirmPanel) -> ModuleScore:
         )
 
     ratio = curr.total_equity / base.total_equity
-    cagr = ratio ** 0.5 - 1
+    cagr = ratio ** 0.5 - 1 if n >= 3 else ratio - 1
+    confidence = 1.00 if n >= 3 else 0.60
+    period_label = "자본 CAGR" if n >= 3 else "1년 자본 증가율"
 
-    # 5단계 선형 보간: -10%→0, 0%→50, +10%→80, +20%→95, +30%+→100
-    if cagr <= -0.10:
-        score = 0.0
-    elif cagr <= 0.0:
-        score = (cagr + 0.10) / 0.10 * 50.0  # -10%~0% → 0~50
-    elif cagr <= 0.10:
-        score = 50.0 + (cagr / 0.10) * 30.0  # 0%~+10% → 50~80
-    elif cagr <= 0.20:
-        score = 80.0 + ((cagr - 0.10) / 0.10) * 15.0  # +10%~+20% → 80~95
-    elif cagr <= 0.30:
-        score = 95.0 + ((cagr - 0.20) / 0.10) * 5.0  # +20%~+30% → 95~100
+    if calibration is not None:
+        profile = profile_for_panel(calibration, panel, "m5_equity_cagr")
+        if profile is None:
+            return ModuleScore(
+                name="M5",
+                score=None,
+                raw=cagr,
+                note="동종업계 유효 표본 부족 — M5 보류",
+            )
+        base_score = score_against_peers(cagr, profile, higher_is_better=True)
+        score = 50.0 + (base_score - 50.0) * confidence
+        note = f"{period_label} {cagr*100:+.1f}%/yr"
+        if n < 3:
+            note += f" — 2년 이력 신뢰도 {confidence:.0%} 보정"
     else:
-        score = 100.0
+        # 보정 테이블이 없는 단독 기업 분석의 호환용 절대 기준.
+        if cagr <= -0.10:
+            score = 0.0
+        elif cagr <= 0.0:
+            score = (cagr + 0.10) / 0.10 * 50.0
+        elif cagr <= 0.10:
+            score = 50.0 + (cagr / 0.10) * 30.0
+        elif cagr <= 0.20:
+            score = 80.0 + ((cagr - 0.10) / 0.10) * 15.0
+        elif cagr <= 0.30:
+            score = 95.0 + ((cagr - 0.20) / 0.10) * 5.0
+        else:
+            score = 100.0
+        note = f"자본 CAGR {cagr*100:+.1f}%/yr ({base.year}→{curr.year}, 자본 ×{ratio:.2f})"
     return ModuleScore(
         name="M5",
         score=round(score, 1),
         raw=cagr,
-        note=f"자본 CAGR {cagr*100:+.1f}%/yr ({base.year}→{curr.year}, 자본 ×{ratio:.2f})",
+        note=note,
+        weight=confidence if calibration is not None else 1.0,
     )

@@ -30,6 +30,12 @@ from __future__ import annotations
 
 from typing import Optional
 
+from .calibration import (
+    CalibrationResult,
+    is_financial_ksic,
+    profile_for_panel,
+    score_against_peers,
+)
 from .industry_v2 import classify, includes_contract_assets
 from .types import FirmPanel, FirmYear, ModuleScore
 
@@ -57,9 +63,11 @@ def _D_to_score(D: float) -> float:
     return 0.0
 
 
-def score_m2(panel: FirmPanel) -> ModuleScore:
+def score_m2(panel: FirmPanel, calibration: CalibrationResult | None = None) -> ModuleScore:
     cls = classify(panel.corp_name)
-    if cls.m2_excluded:
+    if is_financial_ksic(panel.industry_code) or (
+        not panel.industry_code and cls.m2_excluded
+    ):
         return ModuleScore(
             name="M2",
             score=None,
@@ -74,7 +82,11 @@ def score_m2(panel: FirmPanel) -> ModuleScore:
     if not curr.revenue or not prev.revenue:
         return ModuleScore(name="M2", score=None, note="매출 결측")
 
-    with_contract = includes_contract_assets(panel.corp_name)
+    # V3 uses reported contract assets only. The old name list is kept for
+    # legacy scoring calls without a calibration table.
+    with_contract = curr.contract_assets is not None and prev.contract_assets is not None
+    if calibration is None:
+        with_contract = with_contract or includes_contract_assets(panel.corp_name)
     rc_curr = _receivable(curr, with_contract)
     rc_prev = _receivable(prev, with_contract)
     if rc_curr is None or rc_prev is None or rc_prev == 0:
@@ -83,7 +95,23 @@ def score_m2(panel: FirmPanel) -> ModuleScore:
     g_R = curr.revenue / prev.revenue - 1
     g_RC = rc_curr / rc_prev - 1
     D = g_RC - g_R
-    score = _D_to_score(D)
+    if calibration is not None:
+        profile = profile_for_panel(calibration, panel, "m2_receivable_gap")
+        if profile is None:
+            return ModuleScore(
+                name="M2",
+                score=None,
+                raw=D,
+                note="동종업계 유효 표본 부족 — M2 보류",
+            )
+        score = score_against_peers(D, profile, higher_is_better=False)
+        method_note = (
+            f"동종업계 {profile.group} {profile.sample_size}개사 "
+            f"P50={profile.p50*100:+.1f}%p"
+        )
+    else:
+        score = _D_to_score(D)
+        method_note = "v2 절대기준"
 
     rc_label = "매출채권+계약자산" if (with_contract and curr.contract_assets is not None) else "매출채권"
     contract_warn = (
@@ -97,6 +125,6 @@ def score_m2(panel: FirmPanel) -> ModuleScore:
         raw=D,
         note=(
             f"매출증가율 {g_R*100:+.1f}%, {rc_label}증가율 {g_RC*100:+.1f}%, "
-            f"차이 D={D*100:+.1f}%p{contract_warn}"
+            f"차이 D={D*100:+.1f}%p ({method_note}){contract_warn}"
         ),
     )

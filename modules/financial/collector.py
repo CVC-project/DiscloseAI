@@ -14,6 +14,7 @@ Rate limit: 10,000건/일. 배치 호출 시 일별 사용량을 ``DART_DAILY_LI
 from __future__ import annotations
 
 import io
+import json
 import os
 import time
 import zipfile
@@ -34,6 +35,9 @@ from .eqs.types import FirmPanel, FirmYear
 _BASE = "https://opendart.fss.or.kr/api"
 _TIMEOUT = 30
 _USER_AGENT = "DiscloseAI/0.1 (financial collector)"
+_MAX_RETRIES = 3
+_RETRY_BACKOFF_SECONDS = 1.0
+_RETRYABLE_HTTP_STATUS = {429, 500, 502, 503, 504}
 
 # 사업보고서(연간) — fnlttSinglAcntAll의 reprt_code
 REPRT_ANNUAL = "11011"
@@ -149,11 +153,27 @@ def _require_key() -> str:
 def _get(url: str, params: Optional[dict] = None) -> requests.Response:
     p = dict(params or {})
     p["crtfc_key"] = _require_key()
-    r = requests.get(
-        url, params=p, timeout=_TIMEOUT, headers={"User-Agent": _USER_AGENT}
-    )
-    r.raise_for_status()
-    return r
+    last_error: Optional[requests.RequestException] = None
+    for attempt in range(_MAX_RETRIES):
+        try:
+            response = requests.get(
+                url, params=p, timeout=_TIMEOUT, headers={"User-Agent": _USER_AGENT}
+            )
+            response.raise_for_status()
+            return response
+        except (requests.Timeout, requests.ConnectionError) as exc:
+            retryable = True
+            last_error = exc
+        except requests.HTTPError as exc:
+            status_code = exc.response.status_code if exc.response is not None else None
+            retryable = status_code in _RETRYABLE_HTTP_STATUS
+            last_error = exc
+
+        if not retryable or attempt == _MAX_RETRIES - 1:
+            raise last_error
+        time.sleep(_RETRY_BACKOFF_SECONDS * (2**attempt))
+
+    raise RuntimeError("Unreachable retry loop")
 
 
 # ---------------------------------------------------------------------------
@@ -169,8 +189,14 @@ class CorpInfo:
     modify_date: str
 
 
-_CORP_CACHE_DIR = os.path.join(os.path.dirname(__file__), "data")
+# 대규모 배치에서는 서버 영구 disk를 캐시로 지정할 수 있다.
+# 미지정 시에는 기존 로컬 모듈 data 폴더를 그대로 사용한다.
+_CORP_CACHE_DIR = os.getenv(
+    "DISCLOSEAI_FINANCIAL_DATA_DIR",
+    os.path.join(os.path.dirname(__file__), "data"),
+)
 _CORP_CACHE_XML = os.path.join(_CORP_CACHE_DIR, "CORPCODE.xml")
+_COMPANY_PROFILE_CACHE = os.path.join(_CORP_CACHE_DIR, "company_profiles.json")
 
 
 def fetch_corp_codes(force_refresh: bool = False) -> List[CorpInfo]:
@@ -218,6 +244,34 @@ def find_corp(name_or_stock: str) -> Optional[CorpInfo]:
     # 부분 일치 (상장사 한정)
     matches = [c for c in corps if c.stock_code and needle in c.corp_name]
     return matches[0] if matches else None
+
+
+def fetch_company_industry(corp_code: str, *, force_refresh: bool = False) -> Optional[str]:
+    """DART company.json의 KSIC 산업코드를 조회하고 로컬 캐시에 저장한다.
+
+    CORPCODE.xml에는 업종이 없으므로 전 상장사 EQS 보정에는 이 별도 조회가
+    필요하다. API 호출을 최소화하기 위해 기업코드별로 한 번만 캐시한다.
+    """
+    os.makedirs(_CORP_CACHE_DIR, exist_ok=True)
+    cache: dict[str, str] = {}
+    if os.path.exists(_COMPANY_PROFILE_CACHE):
+        try:
+            with open(_COMPANY_PROFILE_CACHE, "r", encoding="utf-8") as fp:
+                cache = json.load(fp)
+        except (OSError, json.JSONDecodeError):
+            cache = {}
+
+    if not force_refresh and corp_code in cache:
+        return cache[corp_code] or None
+
+    data = _get(f"{_BASE}/company.json", {"corp_code": corp_code}).json()
+    if data.get("status") != "000":
+        return None
+    code = "".join(ch for ch in (data.get("induty_code") or "") if ch.isdigit())
+    cache[corp_code] = code
+    with open(_COMPANY_PROFILE_CACHE, "w", encoding="utf-8") as fp:
+        json.dump(cache, fp, ensure_ascii=False, indent=2, sort_keys=True)
+    return code or None
 
 
 # ---------------------------------------------------------------------------

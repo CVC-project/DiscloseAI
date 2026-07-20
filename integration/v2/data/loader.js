@@ -15,6 +15,12 @@
   const { trillionFmt, trillionLabel } = D;
   const { eqsNarration } = D;
 
+  // 보정의 재현 가능한 원문은 JSON과 문서에 남기되, 화면에는 초보 투자자가
+  // 읽기 쉬운 지표 설명만 표시한다.
+  function publicEqsNote(note) {
+    return (note || "").replace(/\s*\(동종업계[^)]*\)/g, "");
+  }
+
   // 4개 JSON URL — v2/index.html(integration/v2/) 기준 상대경로.
   // 4개 모두 integration/data 공유 (graph_top50은 extract_data.py가 modules/relation에서 동기화한 사본).
   const URLS = {
@@ -55,11 +61,19 @@
       out.m3 = fin.eqs_m3 != null ? Math.round(fin.eqs_m3) : null;
       out.m4 = fin.eqs_m4 != null ? Math.round(fin.eqs_m4) : null;
       out.m5 = fin.eqs_m5 != null ? Math.round(fin.eqs_m5) : null;
-      out.m1t = eqsNarration(1, out.m1);
-      out.m2t = eqsNarration(2, out.m2);
-      out.m3t = eqsNarration(3, out.m3);
-      out.m4t = eqsNarration(4, out.m4);
-      out.m5t = eqsNarration(5, out.m5);
+      out.eqs_method = fin.eqs_method || null;
+      out.eqs_excluded = fin.eqs_excluded || [];
+      out.eqs_module_notes = Object.fromEntries(
+        Object.entries(fin.eqs_module_notes || {}).map(([key, note]) => [
+          key,
+          publicEqsNote(note),
+        ])
+      );
+      out.m1t = out.eqs_module_notes.M1 || eqsNarration(1, out.m1);
+      out.m2t = out.eqs_module_notes.M2 || eqsNarration(2, out.m2);
+      out.m3t = out.eqs_module_notes.M3 || eqsNarration(3, out.m3);
+      out.m4t = out.eqs_module_notes.M4 || eqsNarration(4, out.m4);
+      out.m5t = out.eqs_module_notes.M5 || eqsNarration(5, out.m5);
       out.rv = trillionFmt(fin.revenue);
       out.oi = trillionFmt(fin.operating_income);
       out.ni = trillionFmt(fin.net_income);

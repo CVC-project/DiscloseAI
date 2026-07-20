@@ -9,6 +9,7 @@ from __future__ import annotations
 from unittest.mock import MagicMock, patch
 
 import pytest
+import requests
 
 from modules.financial import collector
 from modules.financial.collector import (
@@ -202,3 +203,17 @@ def test_require_key_raises_when_missing(monkeypatch):
     monkeypatch.setattr(collector, "DART_API_KEY", "")
     with pytest.raises(DartError, match="DART_API_KEY"):
         collector._require_key()
+
+
+def test_get_retries_after_connect_timeout(monkeypatch):
+    monkeypatch.setattr(collector, "DART_API_KEY", "test-key")
+    response = _mock_resp({"status": "000"})
+    with patch.object(
+        collector.requests,
+        "get",
+        side_effect=[requests.ConnectTimeout(), requests.ConnectTimeout(), response],
+    ) as get, patch.object(collector.time, "sleep") as sleep:
+        assert collector._get("https://example.test").json() == {"status": "000"}
+
+    assert get.call_count == 3
+    assert [call.args[0] for call in sleep.call_args_list] == [1.0, 2.0]
