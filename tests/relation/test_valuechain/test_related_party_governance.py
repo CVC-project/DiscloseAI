@@ -12,6 +12,7 @@ from pathlib import Path
 from modules.relation.storage.models import CompanyRegistry, RelationLocal
 from modules.relation.valuechain.extract.related_party import (
     apply_governance,
+    parse_governance_carryforward,
     parse_governance_categories,
     parse_governance_html_rows,
     parse_governance_transaction_header,
@@ -42,6 +43,11 @@ FIXTURE_SAMSUNG_ELEC = (
     Path(__file__).parent.parent
     / "fixtures"
     / "valuechain_related_party_governance_samsung_electronics.html"
+)
+FIXTURE_DOOSAN = (
+    Path(__file__).parent.parent
+    / "fixtures"
+    / "valuechain_related_party_governance_doosan.html"
 )
 
 
@@ -175,6 +181,30 @@ def test_parses_transaction_header_variant():
 def test_transaction_header_returns_empty_when_no_matching_table():
     assert parse_governance_transaction_header("<table><tr><th>foo</th></tr></table>") == []
     assert parse_governance_transaction_header(None) == []
+
+
+def test_parses_carryforward_variant():
+    """두산 실제 공시(2026-07-22 수집, rcept 20260323000945) — 구분/당기말/전기말/
+    비고 4컬럼, 카테고리가 ROWSPAN으로 그룹 첫 행에만 붙는 캐리포워드형. 당기말
+    컬럼만 채택하고(스냅샷 원칙) "-"(당기 중 이탈) 행은 스킵해야 한다."""
+    results = parse_governance_carryforward(
+        FIXTURE_DOOSAN.read_text(encoding="utf-8")
+    )
+    by_name = {r["counterparty"]: r["category"] for r in results}
+    assert by_name["PT. SEGARA AKASA"] == "관계기업"
+    assert by_name["마스턴일반사모부동산투자신탁제98호"] == "관계기업"  # ROWSPAN 캐리포워드
+    assert by_name["Sichuan Kelun-Doosan Biotechnology Company Limited"] == "공동기업"
+    assert by_name["두산연강재단"] == "기타특수관계자"
+    assert by_name["중앙대학교 등"] == "기타특수관계자"
+    # 당기말="-"(당기 중 이탈, 전기말에만 존재)인 하이창원㈜은 스킵돼야 함
+    assert "하이창원㈜" not in by_name
+    # 전기말="-"(당기 신규 취득)인 우리지붕형태양광일반사모특별자산투자신탁 1호는 당기말 기준 포함
+    assert "우리지붕형태양광일반사모특별자산투자신탁 1호" in by_name
+
+
+def test_carryforward_returns_empty_when_no_matching_table():
+    assert parse_governance_carryforward("<table><tr><th>foo</th></tr></table>") == []
+    assert parse_governance_carryforward(None) == []
 
 
 def _seed_registry(session):

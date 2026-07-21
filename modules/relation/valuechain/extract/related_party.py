@@ -367,6 +367,22 @@ def _html_table_grid(table) -> list[list[str]]:
     return grid
 
 
+def _find_header_row(grid: list[list[str]], required_labels: set[str]) -> int | None:
+    """required_labels가 모두 셀 값으로(부분일치 아님) 존재하는 첫 행의 인덱스.
+
+    ★ 2026-07-22 실측(두산): sectioner의 평문 중복 렌더링이 markdown뿐 아니라
+    원본 text_html 안에도 <TABLE>의 첫 <TR>에 통째로 뭉친 단일 셀로 끼어드는
+    경우가 있음(예: `<TD>1) 주요...구분당기말전기말...` 하나의 셀에 표 전체
+    텍스트가 이어붙음) — grid[0]을 무조건 헤더로 가정하면 이 오염 행을 헤더로
+    잘못 읽는다. 정확히 일치하는 셀 값만 인정해 이 오염 행(라벨이 부분 문자열로만
+    존재)을 자연스럽게 걸러낸다.
+    """
+    for i, row in enumerate(grid):
+        if required_labels <= set(row):
+            return i
+    return None
+
+
 def parse_governance_html_rows(text_html: str | None) -> list[dict]:
     """행=개별회사형 거버넌스 표(KT&G류) → [{category, counterparty}].
 
@@ -392,18 +408,17 @@ def parse_governance_html_rows(text_html: str | None) -> list[dict]:
         return results
 
     grid = _html_table_grid(target_table)
-    if not grid:
+    header_idx = _find_header_row(grid, {"소재지", "소유지분율"})
+    if header_idx is None:
         return results
-    header_row = grid[0]
-    if "소재지" not in header_row:
-        return results
+    header_row = grid[header_idx]
     loc_col = header_row.index("소재지")
     name_col = loc_col - 1
     category_col = name_col - 1
     if category_col < 0:
         return results
 
-    for row in grid[1:]:
+    for row in grid[header_idx + 1 :]:
         if len(row) <= name_col:
             continue
         category = row[category_col].strip()
@@ -462,6 +477,50 @@ def parse_governance_transaction_header(text_html: str | None) -> list[dict]:
         if not category or not name or name.startswith("기타"):
             continue
         results.append({"category": category, "counterparty": name})
+    return results
+
+
+# ★ 2026-07-22 두산 캐리포워드형 — "구분/당기말/전기말/비고" 4컬럼, 카테고리가
+# ROWSPAN으로 그룹 첫 행에만 붙고 이후 행은 라벨 없이 이어진다(KT&G와 같은
+# ROWSPAN 캐리포워드 유형, 컬럼 구성만 다름). 스냅샷 원칙(latest_relation_local_
+# edges와 동일 사상)에 따라 **당기말 컬럼만** 채택 — 전기말은 그 회사 전년도
+# 보고서 자체의 당기말 블록에서 이미 잡히므로 중복(module docstring 상단 참조).
+def parse_governance_carryforward(text_html: str | None) -> list[dict]:
+    """당기말/전기말 캐리포워드형 거버넌스 표(두산류) → [{category, counterparty}].
+
+    당기말 값이 "-"(당기 중 이탈, 전기말에만 존재)인 행은 현재 유효한 관계가
+    아니므로 스킵한다.
+    """
+    results: list[dict] = []
+    if not text_html:
+        return results
+
+    soup = BeautifulSoup(text_html, "html.parser")
+    target_table = None
+    for table in soup.find_all("table"):
+        ths = {th.get_text(strip=True) for th in table.find_all("th")}
+        if {"구분", "당기말", "전기말"} <= ths:
+            target_table = table
+            break
+    if target_table is None:
+        return results
+
+    grid = _html_table_grid(target_table)
+    header_idx = _find_header_row(grid, {"구분", "당기말"})
+    if header_idx is None:
+        return results
+    header_row = grid[header_idx]
+    category_col = header_row.index("구분")
+    current_col = header_row.index("당기말")
+
+    for row in grid[header_idx + 1 :]:
+        if len(row) <= max(category_col, current_col):
+            continue
+        category = row[category_col].strip()
+        counterparty = row[current_col].strip()
+        if not category or not counterparty or counterparty in {"-", category}:
+            continue
+        results.append({"category": category, "counterparty": counterparty})
     return results
 
 
@@ -607,6 +666,7 @@ def apply_governance(session=None, sections: list[dict] | None = None) -> dict:
                 parse_governance_categories(row["text_md"])
                 + parse_governance_wide_row(row["text_md"])
                 + parse_governance_html_rows(row.get("text_html"))
+                + parse_governance_carryforward(row.get("text_html"))
             )
             if not governance_items:
                 # 별도 거버넌스 리스팅 표가 아예 없는 노트(삼성전자류)에 한해서만
