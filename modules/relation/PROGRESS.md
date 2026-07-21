@@ -2,6 +2,29 @@
 
 > `/check` skill 실행 시 아래 형식으로 자동 기록됩니다.
 
+## 2026-07-21 (7) — U2 착수: universe/export.py + filters.py prune 버그 발견·수정
+- **작업**: V0 마무리(CompanyAlias 시드 재시도 성공, 21건) → V1 T1 파서(특수관계자 주석)
+  실 코퍼스 전량 실행(109 노트 → 69 ValueChainEdge, 123 LinkFailQueue) → U2 착수:
+  `universe/export.py` 신규 구현.
+- **실측 버그 발견·수정 (3번째)**: `universe/export.py`로 삼성전자 ego 파일을 만들어
+  교차검증하던 중, `ftc_group` 엣지가 dir=in/out 뒤섞여 28쌍(C(8,2) 클리크) + 8개
+  신규 스타가 **공존**하는 것을 발견 — U1에서 FTC를 클리크→스타로 바꿨는데도 2026-04
+  MVP 시절 클리크 엣지가 그대로 남아있었음. 원인: `filters.apply()`가 upsert만 하고,
+  RelationRaw에서 이미 사라진 관계에 대응하는 RelationLocal 행을 지우는 로직이
+  없었음(ftc.py의 collect()는 RelationRaw를 지우고 다시 채우지만 RelationLocal은
+  손대지 않는 설계라 상류 변경이 하류에 전파 안 됨). 수정: 이 함수가 관리하는 4개
+  source_type 전체에 대해 이번 실행에서 touch된 자연키를 추적, 끝에 미touch 행을
+  prune. 재실행 결과 48건 정리 → relation_local 3,508→**3,460행**(U1 게이트
+  ≥3,000 여전히 충족). 회귀 테스트 추가(클리크→스타 전환 재현). 전체 189/189 PASS.
+- **universe/export.py 구현 + 실행**: universe.json(400 named/2,651 total, 섹터
+  25종 집계+dots 좌표) · ego/`<ticker>`.json ×2,651(governance+valuechain 레이어
+  통합, U-D10) · sectors.json · companies_index.json — 4종 전부 실제 생성(8.1MB,
+  계획 추정 ~5MB와 같은 자릿수). 삼성전자 ego로 정합성 확인(지분·FTC 스타 정상).
+- **다음 세션**: DART 할당량 리셋 후 단일판매공급계약 파서 실 코퍼스 실행 →
+  U2 계속(SectorMap dots·셸 EgoView·SECTOR_DEF/PALETTE 정합화는 integration
+  프론트엔드 작업, 리더 담당) → U3(주석 파서 governance 소비) → V2(GPU 모델
+  재선정) 순.
+
 ## 2026-07-21 (6) — U1 게이트 최종 PASS (dedupe.py 연도 오삭제 버그 발견·수정)
 - **작업**: DART 5개년 백필 완주(2020 부분 5,657행 + 2021~2024 전량, 백필 전체
   68,021+86,988행 신규) 확인 후 relation.db 커밋 → filters→kifrs→dedupe 재실행 →
