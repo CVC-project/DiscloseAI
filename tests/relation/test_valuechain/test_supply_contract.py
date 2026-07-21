@@ -11,13 +11,45 @@ from __future__ import annotations
 from pathlib import Path
 
 from modules.relation.storage.models import CompanyRegistry, LinkFailQueue, ValueChainEdge
-from modules.relation.valuechain.extract.supply_contract import apply, parse_filing_html
+from modules.relation.valuechain.extract.supply_contract import (
+    _split_date_windows,
+    apply,
+    parse_filing_html,
+)
 
 FIXTURES = Path(__file__).parent.parent / "fixtures"
 ANONYMOUS_HTML = (FIXTURES / "valuechain_supply_contract_anonymous.html").read_text(
     encoding="utf-8"
 )
 NAMED_HTML = (FIXTURES / "valuechain_supply_contract_named.html").read_text(encoding="utf-8")
+
+
+def test_split_date_windows_respects_max_days_and_covers_full_range():
+    """DART list.json 조회기간 상한(실측 status=100 유발) 회피용 분할 — 경계·전체 커버리지 확인."""
+    windows = _split_date_windows("20200101", "20241231", max_days=89)
+
+    # 전체 범위를 빠짐없이, 겹치지 않게 커버해야 함
+    assert windows[0][0] == "20200101"
+    assert windows[-1][1] == "20241231"
+    for (a_bgn, a_end), (b_bgn, _b_end) in zip(windows, windows[1:]):
+        assert a_end < b_bgn  # 인접 구간 사이 공백·중복 없이 다음 날부터 이어짐
+
+    from datetime import date
+
+    for bgn, end in windows:
+        span = (
+            date(int(end[:4]), int(end[4:6]), int(end[6:8]))
+            - date(int(bgn[:4]), int(bgn[4:6]), int(bgn[6:8]))
+        ).days
+        assert span <= 89
+
+
+def test_split_date_windows_single_day_range():
+    assert _split_date_windows("20260101", "20260101") == [("20260101", "20260101")]
+
+
+def test_split_date_windows_inverted_range_returns_empty():
+    assert _split_date_windows("20260201", "20260101") == []
 
 
 def test_parse_named_filing_extracts_counterparty_amount_and_year():

@@ -57,6 +57,14 @@ _UNIT_MULTIPLIERS = {"원": 1, "천원": 1_000, "백만원": 1_000_000, "억원"
 
 _EXCLUDE_LABEL_SUBSTR = ("채권", "채무", "잔액")
 
+# 회사별 표기 편차 실측(2026-07-22, 109노트 전수) — "매출 등"/"매입 등"(삼성 계열)만으로는
+# 13/109만 커버. "수익거래"/"비용거래"(현대차 계열 등)를 추가해 41/109로 확대.
+# ★ 여전히 커버 못 하는 다수(하나금융지주 계열·LIG넥스원 등)는 **행=상대회사명**인
+# 전치(transposed) 표 구조 — 이 함수가 가정하는 "행=거래유형·열=상대회사명"의 반대라
+# 별도 파서가 필요(후속 과제, PROGRESS.md에 정직하게 기록). 억지 매칭 금지.
+_SALES_LABEL_PREFIXES = ("매출", "수익거래")
+_PURCHASE_LABEL_PREFIXES = ("매입", "비용거래")
+
 
 def _split_row(line: str) -> list[str]:
     """마크다운 표 한 행 → 셀 리스트 (앞뒤 파이프 제거, strip)."""
@@ -85,7 +93,12 @@ def _extract_period_blocks(text_md: str) -> list[tuple[str, str, int, list[str]]
     """text_md → [(title, period, multiplier, table_lines), ...].
 
     title은 직전에 나온 단일 셀 `| ... |` 행(당기/전기 마커가 아닌 것) — "합계" 표
-    스킵 판단용. 당기/전기 마커 라인 다음, "|"로 시작하지 않는 첫 줄에서 블록이 끝난다.
+    스킵 판단용. 마커 라인과 실제 표(|로 시작하는 행) 사이에는 회사마다 편차가 있다
+    (실측: 빈 줄 한 줄만 있는 경우 vs 제목·기간·단위를 파이프 없이 그대로 반복하는
+    평문 몇 줄이 끼는 경우 — sectioner가 원문 `<P>` 문단과 `<TABLE>`을 각각 렌더링해
+    중복 생김). 그래서 "|"로 시작하지 않는 줄은 전부 건너뛰되, **다음 마커·제목 줄과
+    만나면 그 자리에서 멈춘다**(표가 아예 없는 블록을 다음 마커까지 통째로 삼켜버리는
+    사고 방지).
     """
     lines = text_md.splitlines()
     blocks: list[tuple[str, str, int, list[str]]] = []
@@ -103,8 +116,13 @@ def _extract_period_blocks(text_md: str) -> list[tuple[str, str, int, list[str]]
         period, unit_raw = m.group(1), m.group(2).strip()
         multiplier = _UNIT_MULTIPLIERS.get(unit_raw, 1)
         i += 1
-        while i < len(lines) and lines[i].strip() == "":
-            i += 1  # 마커 직후 빈 줄(실측 고정 패턴) — 표 시작 전 스킵
+        while i < len(lines):
+            s = lines[i].strip()
+            if s.startswith("|"):
+                break
+            if _PERIOD_MARKER_RE.match(s) or _TITLE_LINE_RE.match(s):
+                break  # 표 없는 블록 — 다음 마커/제목에서 멈추고 그대로 넘김
+            i += 1  # 평문 중복(제목·기간·단위 재진술) 또는 빈 줄 — 스킵
         table_lines: list[str] = []
         while i < len(lines) and lines[i].strip().startswith("|"):
             table_lines.append(lines[i])
@@ -136,12 +154,18 @@ def parse_note(text_md: str | None) -> list[dict]:
         leaf_columns = header_rows[-1]  # 첫 칸이 빈 마지막 행 = 개별 상대회사명
 
         for row in data_rows:
+            # rowspan 하위분류 행(예: "수익거래"/"매출거래" 2단 라벨)은 라벨 셀이
+            # 1개 더 많아 값 위치가 한 칸씩 밀린다 — 잘못된 상대회사에 금액을 붙이는
+            # 사고를 막기 위해 라벨 1개(=leaf_columns와 정확히 같은 셀 수)인 행만
+            # 처리한다. 하위분류 세부금액은 스킵되지만(총계 행만 반영) 오귀속보다 안전.
+            if len(row) != len(leaf_columns):
+                continue
             label = row[0]
             if any(x in label for x in _EXCLUDE_LABEL_SUBSTR):
                 continue
-            if label.startswith("매출"):
+            if label.startswith(_SALES_LABEL_PREFIXES):
                 direction = "customer"
-            elif label.startswith("매입"):
+            elif label.startswith(_PURCHASE_LABEL_PREFIXES):
                 direction = "supply"
             else:
                 continue

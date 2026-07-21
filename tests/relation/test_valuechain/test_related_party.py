@@ -14,10 +14,19 @@ from modules.relation.valuechain.extract.related_party import parse_note
 FIXTURE = (
     Path(__file__).parent.parent / "fixtures" / "valuechain_related_party_sample.txt"
 )
+HYUNDAI_ROTEM_FIXTURE = (
+    Path(__file__).parent.parent
+    / "fixtures"
+    / "valuechain_related_party_hyundai_rotem.txt"
+)
 
 
 def _parse_fixture() -> list[dict]:
     return parse_note(FIXTURE.read_text(encoding="utf-8"))
+
+
+def _parse_hyundai_rotem_fixture() -> list[dict]:
+    return parse_note(HYUNDAI_ROTEM_FIXTURE.read_text(encoding="utf-8"))
 
 
 def test_extracts_current_period_sales_amount():
@@ -81,5 +90,51 @@ def test_excludes_non_trade_sections():
 
 def test_empty_or_none_input_returns_empty_list():
     assert parse_note(None) == []
+    assert parse_note("") == []
+
+
+# --- 회귀: 현대로템(2026-07-22 실측) — "수익거래"/"비용거래" 라벨 + 마커 직후 평문 중복 ---
+
+
+def test_hyundai_rotem_skips_plaintext_duplicate_between_marker_and_table():
+    """마커 직후 빈 줄 대신 제목·기간·단위를 평문으로 반복하는 회사 — 결과가 0건이면 안 됨.
+
+    실측 버그: _extract_period_blocks가 빈 줄만 스킵하고 평문 중복 줄은 스킵하지
+    못해 전 회사 표가 0줄로 파싱되던 사고의 회귀 테스트.
+    """
+    results = _parse_hyundai_rotem_fixture()
+    assert len(results) > 0
+
+
+def test_hyundai_rotem_recognizes_suik_biyong_georae_labels():
+    """"매출 등"/"매입 등"이 아니라 "수익거래"/"비용거래" 라벨도 customer/supply로 인식."""
+    results = _parse_hyundai_rotem_fixture()
+    directions = {r["direction"] for r in results}
+    assert directions == {"customer", "supply"}
+
+
+def test_hyundai_rotem_amounts_attributed_to_correct_counterparty():
+    """2단 rowspan 하위분류 행(라벨 2개)에 의한 열 밀림으로 엉뚱한 상대에 금액이
+    붙지 않아야 한다 — 헤더·데이터 셀 수가 정확히 일치하는 행만 채택하는 가드 확인.
+    """
+    results = _parse_hyundai_rotem_fixture()
+    by_counterparty = {
+        (r["counterparty"], r["direction"]): r["amount"] for r in results
+    }
+    # 현대제철 매출: 185,960,596천원 — 총계/매출거래 두 행 모두 이 값이 같아 가드
+    # 통과 여부와 무관하게 항상 검증되지만, 기아(자릿수 편차 있는 행)로 오귀속되지
+    # 않았는지가 핵심 — 기아 매출은 49,426,735천원(같은 열 순서 유지 확인)
+    assert by_counterparty[("현대제철㈜", "customer")] == 185_960_596_000
+    assert by_counterparty[("기아㈜", "customer")] == 49_426_735_000
+    assert by_counterparty[("현대건설㈜", "supply")] == 34_279_000
+
+
+def test_hyundai_rotem_zero_values_excluded():
+    """0원 거래(예: 동북선도시철도 비용거래)는 엣지를 만들지 않는다."""
+    results = _parse_hyundai_rotem_fixture()
+    counterparties_supply = {
+        r["counterparty"] for r in results if r["direction"] == "supply"
+    }
+    assert "동북선도시철도㈜" not in counterparties_supply
     assert parse_note("") == []
     assert parse_note("아무 표도 없는 일반 서술문입니다.") == []

@@ -4,6 +4,10 @@ DART 엔드포인트 조사 결과(2026-07-21, 실측):
   - 전용 구조화 API(fnlttSinglAcntAll류)는 없음 — KRX 수시공시 문서(document.xml)뿐.
   - `list.json`(corp_code 생략 시 전 상장사 대상) + `pblntf_detail_ty="I001"`(거래소 공시)로
     검색 후, `report_nm`에 "단일판매"가 포함된 건만 클라이언트에서 필터링.
+    - ★2026-07-22 실측 추가: `list.json`은 조회기간 상한이 있다(1년 범위로 호출 시
+      `status="100"`(파라미터 오류) 즉시 반환 — 문서화 안 된 제약을 에러로 발견). 분기
+      단위(3개월) 호출은 정상 동작 확인(2024 Q1 I001 19,434건/195페이지). `discover_filings()`가
+      내부적으로 ≤89일 구간으로 자동 분할해 호출자는 이 제약을 몰라도 됨.
     - 실측: report_nm 정확 표기는 "단일판매ㆍ공급계약체결"(가운뎃점이 U+318D 한글
       아래아, 일반 U+00B7 middle dot 아님) — "단일판매" 부분 문자열 매칭이 표기 변형에
       안전(별표·기재정정 접두어와 무관하게 항상 포함).
@@ -53,43 +57,76 @@ _COUNTERPARTY_LABEL = "계약상대방"
 _CONTRACT_DATE_LABEL = "계약(수주)일자"
 
 
+_MAX_WINDOW_DAYS = 89  # DART list.json 조회기간 상한 실측 ~3개월 — 안전 마진으로 89일 사용
+_STATUS_NO_DATA = "013"
+_STATUS_OK = "000"
+
+
+def _split_date_windows(bgn_de: str, end_de: str, max_days: int = _MAX_WINDOW_DAYS) -> list[tuple[str, str]]:
+    """"YYYYMMDD" 범위 → ≤max_days 연속 구간 리스트 (DART 조회기간 상한 준수)."""
+    from datetime import date, timedelta
+
+    start = date(int(bgn_de[:4]), int(bgn_de[4:6]), int(bgn_de[6:8]))
+    end = date(int(end_de[:4]), int(end_de[4:6]), int(end_de[6:8]))
+    if start > end:
+        return []
+
+    windows: list[tuple[str, str]] = []
+    cur = start
+    step = timedelta(days=max_days)
+    while cur <= end:
+        window_end = min(cur + step, end)
+        windows.append((cur.strftime("%Y%m%d"), window_end.strftime("%Y%m%d")))
+        cur = window_end + timedelta(days=1)
+    return windows
+
+
 def discover_filings(bgn_de: str, end_de: str, page_count: int = 100) -> list[dict]:
     """list.json 전 상장사 검색 → "단일판매ㆍ공급계약체결" 원본(정정 제외) 건 목록.
 
-    bgn_de/end_de: "YYYYMMDD". 반환: [{"rcept_no", "corp_code", "corp_name", "rcept_dt"}, ...]
+    bgn_de/end_de: "YYYYMMDD". DART list.json은 조회기간 상한(실측 ~3개월, 초과 시
+    status="100" 파라미터 오류)이 있어 내부적으로 ≤89일 구간으로 쪼개 순차 조회한다 —
+    호출자가 이 제약을 알 필요 없음. 반환: [{"rcept_no","corp_code","corp_name","rcept_dt"}, ...]
     """
     results: list[dict] = []
-    page_no = 1
-    while True:
-        data = dart_get(
-            "list.json",
-            {
-                "bgn_de": bgn_de,
-                "end_de": end_de,
-                "pblntf_detail_ty": _PBLNTF_DETAIL_TY,
-                "page_count": page_count,
-                "page_no": page_no,
-            },
-        )
-        if data.get("status") != "000":
-            break
-        items = data.get("list", []) or []
-        for item in items:
-            report_nm = item.get("report_nm", "")
-            if _REPORT_NM_MARKER not in report_nm or _CORRECTION_MARKER in report_nm:
-                continue
-            results.append(
+    for window_bgn, window_end in _split_date_windows(bgn_de, end_de):
+        page_no = 1
+        while True:
+            data = dart_get(
+                "list.json",
                 {
-                    "rcept_no": item["rcept_no"],
-                    "corp_code": item["corp_code"],
-                    "corp_name": item.get("corp_name"),
-                    "rcept_dt": item.get("rcept_dt"),
-                }
+                    "bgn_de": window_bgn,
+                    "end_de": window_end,
+                    "pblntf_detail_ty": _PBLNTF_DETAIL_TY,
+                    "page_count": page_count,
+                    "page_no": page_no,
+                },
             )
-        total_page = int(data.get("total_page", 1) or 1)
-        if page_no >= total_page:
-            break
-        page_no += 1
+            status = data.get("status")
+            if status == _STATUS_NO_DATA:
+                break  # 이 구간엔 해당 유형 공시 없음 — 정상, 다음 구간으로
+            if status != _STATUS_OK:
+                raise RuntimeError(
+                    f"DART list.json 오류(구간 {window_bgn}~{window_end}, "
+                    f"page {page_no}): status={status} message={data.get('message')}"
+                )
+            items = data.get("list", []) or []
+            for item in items:
+                report_nm = item.get("report_nm", "")
+                if _REPORT_NM_MARKER not in report_nm or _CORRECTION_MARKER in report_nm:
+                    continue
+                results.append(
+                    {
+                        "rcept_no": item["rcept_no"],
+                        "corp_code": item["corp_code"],
+                        "corp_name": item.get("corp_name"),
+                        "rcept_dt": item.get("rcept_dt"),
+                    }
+                )
+            total_page = int(data.get("total_page", 1) or 1)
+            if page_no >= total_page:
+                break
+            page_no += 1
     return results
 
 
