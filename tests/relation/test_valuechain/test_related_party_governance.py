@@ -13,6 +13,7 @@ from modules.relation.storage.models import CompanyRegistry, RelationLocal
 from modules.relation.valuechain.extract.related_party import (
     apply_governance,
     parse_governance_categories,
+    parse_governance_wide_row,
 )
 
 FIXTURE = (
@@ -24,6 +25,11 @@ FIXTURE_HYNIX = (
     Path(__file__).parent.parent
     / "fixtures"
     / "valuechain_related_party_governance_sk_hynix.txt"
+)
+FIXTURE_ROTEM = (
+    Path(__file__).parent.parent
+    / "fixtures"
+    / "valuechain_related_party_governance_hyundai_rotem.txt"
 )
 
 
@@ -83,6 +89,35 @@ def test_parses_hoesamyeong_label_variant():
     sk_china = [r for r in results if r["counterparty"] == "SK China Company Limited"]
     assert len(sk_china) == 1
     assert sk_china[0]["category"] == "관계기업"
+
+
+def test_parses_wide_row_variant():
+    """현대로템 실제 공시(2026-07-22 수집, rcept 20250321001612) — 카테고리가
+    컬럼 헤더, 상대회사명이 그 아래 단일 데이터 행인 와이드 1행형."""
+    results = parse_governance_wide_row(FIXTURE_ROTEM.read_text(encoding="utf-8"))
+    assert {"category": "지배기업", "counterparty": "현대자동차㈜"} in results
+    assert {"category": "관계기업", "counterparty": "하이스테이션㈜"} in results
+    assert {"category": "그 밖의 특수관계자", "counterparty": "기아㈜"} in results
+    assert {"category": "그 밖의 특수관계자", "counterparty": "현대제철㈜"} in results
+    # "전체 특수관계자"/"특수관계자" 보일러플레이트 행은 카테고리로 오인되지 않아야 함
+    categories = {r["category"] for r in results}
+    assert "전체 특수관계자" not in categories
+    assert categories == {"지배기업", "관계기업", "그 밖의 특수관계자"}
+
+
+def test_wide_row_returns_empty_when_title_absent():
+    assert parse_governance_wide_row("아무 관련 없는 텍스트") == []
+    assert parse_governance_wide_row(None) == []
+
+
+def test_wide_row_bails_out_safely_on_unexpected_shape():
+    """LIG디펜스앤에어로스페이스류 — 제목은 같지만 표 구조가 달라(카테고리 헤더 행이
+    아예 없음) 억지 매칭하지 않고 빈 결과를 반환해야 한다."""
+    malformed = (
+        "| 회사와 주요 거래 또는 채권ㆍ채무가 있는 특수관계자 현황에 대한 공시 |\n"
+        "| 전체 특수관계자 | 특수관계자 | 지배기업 | (주)엘아이지 |  |\n"
+    )
+    assert parse_governance_wide_row(malformed) == []
 
 
 def _seed_registry(session):

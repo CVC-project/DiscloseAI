@@ -244,6 +244,81 @@ def parse_governance_categories(text_md: str | None) -> list[dict]:
     return results
 
 
+# ★ 2026-07-22 와이드 1행형(현대로템류) — DART taxonomy 표준 공시항목 제목
+# "회사와 주요 거래 또는 채권ㆍ채무가 있는 특수관계자 현황에 대한 공시" 직후에
+# 카테고리가 컬럼 헤더, 상대회사명이 그 아래 단일 데이터 행인 표가 온다.
+# 한계(정직하게 기록): LIG디펜스앤에어로스페이스 등 일부 회사는 제목 문구는 같지만
+# 표 형태가 전혀 달라(같은 셀 안에 회사명 여러 개가 구분자 없이 붙어 렌더링됨 —
+# 원본 마크다운 변환 단계에서 이미 구분자가 유실된 것으로 보임, 텍스트만으로
+# 복구 불가) 이 파서로 커버할 수 없다 — **억지 매칭 금지**: 기대한 정확한 표
+# 형태(전체 특수관계자/특수관계자 보일러플레이트 2행 + 카테고리 헤더 행 + 데이터
+# 행, 셀 수 일치)가 아니면 조용히 빈 결과를 반환한다.
+_WIDE_ROW_TITLE_RE = re.compile(
+    r"^\|\s*회사와\s*주요\s*거래\s*또는\s*채권.\s*채무가\s*있는\s*특수관계자\s*현황에\s*대한\s*공시\s*\|\s*$"
+)
+_WIDE_ROW_BOILERPLATE_LABELS = {"전체 특수관계자", "특수관계자"}
+
+
+def parse_governance_wide_row(text_md: str | None) -> list[dict]:
+    """와이드 1행형 거버넌스 표(현대로템류) → [{category, counterparty}].
+
+    카테고리가 컬럼 헤더인 표를 찾아 바로 아래 단일 데이터 행과 위치로 짝짓는다.
+    "전체 특수관계자"/"특수관계자" 보일러플레이트 행(모든 회사의 거래금액 표에도
+    반복 등장하는 고정 상위 계층 라벨)은 카테고리 헤더로 오인하지 않도록 건너뛴다.
+    """
+    results: list[dict] = []
+    if not text_md:
+        return results
+
+    lines = text_md.splitlines()
+    for i, ln in enumerate(lines):
+        if not _WIDE_ROW_TITLE_RE.match(ln.strip()):
+            continue
+        header_row: list[str] | None = None
+        header_idx: int | None = None
+        j = i + 1
+        # 제목과 표 사이에 빈 줄·sectioner 평문 중복 렌더링이 끼어들 수 있음 — 첫
+        # 파이프 행이 나올 때까지 건너뛴다(무관한 먼 표까지 건너뛰지 않도록 상한).
+        lookahead_limit = min(len(lines), i + 1 + 10)
+        while j < lookahead_limit and not lines[j].strip().startswith("|"):
+            j += 1
+        while j < len(lines) and lines[j].strip().startswith("|"):
+            row = _split_row(lines[j])
+            if (
+                len(row) > 2
+                and row[0] == ""
+                and all(c.strip() for c in row[1:])
+            ):
+                header_row = row
+                header_idx = j
+                break
+            if not (
+                len(row) == 2
+                and row[0] == ""
+                and row[1].strip() in _WIDE_ROW_BOILERPLATE_LABELS
+            ):
+                break  # 예상 밖 행 — 안전하게 중단(억지 매칭 금지)
+            j += 1
+        if header_row is None or header_idx is None:
+            break
+        data_idx = header_idx + 1
+        if data_idx >= len(lines) or not lines[data_idx].strip().startswith("|"):
+            break
+        data_row = _split_row(lines[data_idx])
+        if len(data_row) != len(header_row):
+            break  # 셀 수 불일치 — 안전하게 중단
+        for category, value in zip(header_row[1:], data_row[1:]):
+            category = category.strip()
+            if not category:
+                continue
+            for name in value.split(","):
+                name = name.strip()
+                if name:
+                    results.append({"category": category, "counterparty": name})
+        break  # 첫 매칭 표만
+    return results
+
+
 def _upsert_edge(session, **fields) -> None:
     """UNIQUE(src_corp, dst_corp, edge_type, as_of, rcept_no) upsert (D12 멱등)."""
     key = {
@@ -344,7 +419,8 @@ def _upsert_relation_local_dart_filing(session, **fields) -> None:
 
 
 def apply_governance(session=None, sections: list[dict] | None = None) -> dict:
-    """특수관계자 주석의 "구분/특수관계자명" 카테고리 표 → RelationLocal(dart_filing) upsert.
+    """특수관계자 주석의 거버넌스 카테고리 표(2-컬럼 나열형 + 와이드 1행형) →
+    RelationLocal(dart_filing) upsert.
 
     U-D2 "파서 1벌, 소비자 2곳" — apply()와 같은 sections 입력을 받아 같은 노트에서
     다른 표(거래금액이 아니라 카테고리 리스팅)를 뽑아 거버넌스 레이어에 반영한다.
@@ -381,7 +457,10 @@ def apply_governance(session=None, sections: list[dict] | None = None) -> dict:
             rcept_no = row["rcept_no"]
             as_of = row["fiscal_year"]
 
-            for item in parse_governance_categories(row["text_md"]):
+            governance_items = parse_governance_categories(
+                row["text_md"]
+            ) + parse_governance_wide_row(row["text_md"])
+            for item in governance_items:
                 corp_code = resolve_corp(
                     item["counterparty"], name_to_corp, session, sample_chunk_id=rcept_no
                 )
