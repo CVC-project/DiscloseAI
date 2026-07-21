@@ -44,16 +44,20 @@ def classify_ownership(ratio: float | None) -> str | None:
     return None
 
 
-def apply() -> dict:
+def apply(session=None) -> dict:
     """RelationLocal의 지분 엣지(source_type=hyslrSttus/otrCprInvstmntSttus)에 대해
     ratio로 relation_type 재분류.
 
     ftc_group·dart_filing·manual 엣지는 건드리지 않음.
     <5% 지분은 엣지 자체를 삭제.
 
+    session: 주입 시 그 세션 사용(테스트용 — 닫지 않음). None이면 로컬 relation.db.
+
     Returns: {'classified': int, 'dropped_below_5pct': int}
     """
-    session = get_local_session()
+    owns_session = session is None
+    if owns_session:
+        session = get_local_session()
     classified = 0
     dropped = 0
     try:
@@ -74,6 +78,7 @@ def apply() -> dict:
                 classified += 1
         session.commit()
     finally:
-        session.close()
+        if owns_session:
+            session.close()
     logger.info(f"K-IFRS 분류: {classified}개 (dropped<5%: {dropped}개)")
     return {"classified": classified, "dropped_below_5pct": dropped}

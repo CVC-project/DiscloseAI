@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 _OWNERSHIP_TYPES = {"subsidiary", "associate", "investment", "ownership"}
 
 
-def apply() -> dict:
+def apply(session=None) -> dict:
     """RelationLocal의 K-IFRS 지분 엣지에 대해 양방향 중복 제거.
 
     규칙:
@@ -29,9 +29,13 @@ def apply() -> dict:
       2. 같은 쌍에 여러 ratio → higher ratio만 유지
       3. ftc_group·dart_filing·manual 엣지는 건드리지 않음 (공존)
 
+    session: 주입 시 그 세션 사용(테스트용 — 닫지 않음). None이면 로컬 relation.db.
+
     Returns: {'kept': int, 'removed': int}
     """
-    session = get_local_session()
+    owns_session = session is None
+    if owns_session:
+        session = get_local_session()
     kept = 0
     removed = 0
     try:
@@ -65,7 +69,8 @@ def apply() -> dict:
 
         session.commit()
     finally:
-        session.close()
+        if owns_session:
+            session.close()
 
     logger.info(f"dedupe 결과: kept {kept}쌍, removed {removed}건")
     return {"kept": kept, "removed": removed}

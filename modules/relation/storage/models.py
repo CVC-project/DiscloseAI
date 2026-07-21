@@ -131,16 +131,24 @@ class RelationLocal(Base):
       - dart_filing: 사업보고서 주석 (공정위 미포함 기업 한정)
       - manual: 수동 보정
 
-    ★V0(U-D13): 멱등 upsert 키 UNIQUE(source_corp, target_corp, relation_type, bsns_year) +
-    정정공시 supersede용 status/superseded_by/rcept_no 추가. relation_type이 유니크 키에
-    포함되므로 같은 (source, target)에 다른 relation_type이 공존하는 기존 원칙(레이어 공존,
-    storage/CLAUDE.md)은 유지된다 — 막는 것은 "완전히 같은 엣지의 중복 삽입"뿐.
+    ★V0(U-D13): 멱등 upsert 키 UNIQUE(source_corp, target_corp, source_type, bsns_year) +
+    정정공시 supersede용 status/superseded_by/rcept_no 추가.
+
+    ★U1 실측 수정(2026-07-21): 최초 설계는 relation_type을 키에 포함했으나, kifrs.apply()가
+    relation_type을 사후 재분류("ownership"→"subsidiary"/"associate"/"investment")하므로
+    relation_type은 **파생 필드**이지 안정적 식별자가 아니다 — 그 값을 유니크 키에 넣으면
+    kifrs 재분류 UPDATE 자체가 제약 위반으로 즉시 깨진다(재현 확인됨). source_type
+    (hyslrSttus/otrCprInvstmntSttus/ftc/dart_filing/manual)은 kifrs가 건드리지 않는
+    안정적 "이 raw 사실이 어디서 왔는가" 식별자라 이걸로 교체. 레이어 공존 원칙(storage/
+    CLAUDE.md)은 그대로 유지 — 같은 (source, target) 쌍에 다른 source_type(예: ftc vs
+    hyslrSttus)이면 여전히 별도 행으로 공존한다. 막는 것은 "완전히 같은 raw 사실의 중복
+    삽입"뿐.
     """
 
     __tablename__ = "relation_local"
     __table_args__ = (
         UniqueConstraint(
-            "source_corp", "target_corp", "relation_type", "bsns_year",
+            "source_corp", "target_corp", "source_type", "bsns_year",
             name="uq_relation_local_edge",
         ),
     )

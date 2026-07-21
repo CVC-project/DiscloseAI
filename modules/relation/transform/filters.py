@@ -1,6 +1,6 @@
-"""개인·공익재단·비상장 필터 + top50 target 매칭.
+"""개인·공익재단·비상장 필터 + 전 상장사 target 매칭 (★U1: top50 → Registry).
 
-동작: RelationRaw 전체 스캔 → 필터 통과한 레코드만 RelationLocal에 마이그레이션.
+동작: RelationRaw 전체 스캔 → 필터 통과한 레코드만 RelationLocal에 upsert.
 ticker 기반 source_corp/target_corp로 변환.
 
 상세 규칙은 modules/relation/transform/CLAUDE.md 참조.
@@ -8,17 +8,21 @@ ticker 기반 source_corp/target_corp로 변환.
 
 from __future__ import annotations
 
+import csv
 import logging
 import re
 from pathlib import Path
 
-from modules.relation.common.names import build_ticker_map, normalize_company_name
+from modules.relation.common.names import (
+    build_ticker_map_from_registry,
+    normalize_company_name,
+)
 from modules.relation.storage.db import get_local_session
 from modules.relation.storage.models import RelationLocal, RelationRaw
 
 logger = logging.getLogger(__name__)
 
-_TOP50_CSV = Path(__file__).parent.parent / "data" / "top50.csv"
+_MANUAL_OVERRIDES_CSV = Path(__file__).parent.parent / "data" / "manual_overrides.csv"
 
 PERSONAL_RELATIONS = {
     "본인",
@@ -83,23 +87,74 @@ def match_to_top50(normalized_name: str, ticker_map: dict[str, str]) -> str | No
     return ticker_map.get(normalized_name)
 
 
-def apply() -> dict:
-    """RelationRaw 전체 스캔 → 필터·정규화·ticker 매칭 후 RelationLocal에 INSERT.
+def load_manual_overrides() -> dict[str, str]:
+    """manual_overrides.csv → {ticker: group_name} (★U1 구현 — 이전엔 스캐폴드만 존재).
+
+    CPA가 공정위·K-IFRS·주석 파싱을 거치고도 group_name이 비거나 보정이 필요한
+    경우만 채우는 소수 파일(실전 0~2건 예상). `#`로 시작하는 줄은 주석으로 무시.
+    """
+    if not _MANUAL_OVERRIDES_CSV.exists():
+        return {}
+    overrides: dict[str, str] = {}
+    with open(_MANUAL_OVERRIDES_CSV, encoding="utf-8") as f:
+        lines = [ln for ln in f if not ln.lstrip().startswith("#")]
+    for row in csv.DictReader(lines):
+        ticker = (row.get("ticker") or "").strip()
+        group_name = (row.get("group_name") or "").strip()
+        if ticker and group_name:
+            overrides[ticker] = group_name
+    return overrides
+
+
+def _upsert_relation_local(session, **fields) -> None:
+    """UNIQUE(source_corp, target_corp, source_type, bsns_year) 키로 upsert (★U1 멱등, U-D13).
+
+    relation_type이 아니라 source_type이 키다 — kifrs.apply()가 relation_type을
+    사후 재분류(ownership→subsidiary 등)하므로 relation_type은 안정적 식별자가
+    아니다(models.py RelationLocal 주석 참조, 재현 확인됨). 기존 행이 있으면 갱신,
+    없으면 삽입 — 재실행 시 중복·유실 없음(D12).
+    """
+    key = {
+        "source_corp": fields["source_corp"],
+        "target_corp": fields["target_corp"],
+        "source_type": fields["source_type"],
+        "bsns_year": fields.get("bsns_year"),
+    }
+    existing = session.query(RelationLocal).filter_by(**key).one_or_none()
+    if existing:
+        for k, v in fields.items():
+            setattr(existing, k, v)
+        existing.status = "active"
+    else:
+        session.add(RelationLocal(**fields, status="active"))
+
+
+def apply(session=None) -> dict:
+    """RelationRaw 전체 스캔 → 필터·정규화·ticker 매칭 후 RelationLocal에 upsert.
 
     - hyslrSttus / otrCprInvstmntSttus: 개인·재단·미매칭 제외
-    - ftc: 이미 ticker로 저장됐으므로 그대로 복사 (relation_type=ftc_group)
+    - ftc: 이미 ticker로 저장됐으므로 그대로 복사 (relation_type=ftc_group) +
+      manual_overrides.csv의 group_name 보정 적용
     - dart_filing: ticker 형태, 그대로 복사 (relation_type=dart_filing)
-    - manual: 대상 없음 (향후 별도 로딩)
+
+    ★U1: ticker_map을 top50.csv가 아니라 CompanyRegistry(전 상장사)에서 구축 —
+    top50 자연 필터가 E2E 단절 지점이었음(universe/PLAN.md U-D1). 삭제 후 재삽입이
+    아니라 UNIQUE 키 upsert(U-D13) — 재실행해도 중복 없음.
+
+    session: 주입 시 그 세션 사용(테스트용 — 닫지 않음, 커밋은 호출). None이면 로컬 relation.db.
 
     Returns:
         {'kept_ownership', 'kept_ftc', 'kept_filing',
          'dropped_personal', 'dropped_foundation', 'dropped_unmatched'}
     """
-    ticker_map = build_ticker_map(_TOP50_CSV)
+    owns_session = session is None
+    if owns_session:
+        session = get_local_session()
+    ticker_map = build_ticker_map_from_registry(session)
     # ticker → ticker 매핑 (ftc/dart_filing은 이미 ticker로 저장됨)
     valid_tickers = set(ticker_map.values())
+    manual_overrides = load_manual_overrides()
 
-    session = get_local_session()
     counters = {
         "kept_ownership": 0,
         "kept_ftc": 0,
@@ -110,9 +165,6 @@ def apply() -> dict:
     }
 
     try:
-        # 기존 RelationLocal 전체 삭제 후 재생성 (idempotent)
-        session.query(RelationLocal).delete()
-
         raws = session.query(RelationRaw).all()
         for r in raws:
             if r.source_type == "hyslrSttus":
@@ -133,16 +185,15 @@ def apply() -> dict:
                 if not source_ticker:
                     counters["dropped_unmatched"] += 1
                     continue
-                session.add(
-                    RelationLocal(
-                        source_corp=source_ticker,
-                        target_corp=target_ticker,
-                        relation_type="ownership",  # kifrs.apply()에서 재분류
-                        ratio=r.ratio,
-                        detail=f"{r.source_name} {r.ratio}% ({r.relate or ''})".strip(),
-                        source_type=r.source_type,
-                        bsns_year=r.bsns_year,
-                    )
+                _upsert_relation_local(
+                    session,
+                    source_corp=source_ticker,
+                    target_corp=target_ticker,
+                    relation_type="ownership",  # kifrs.apply()에서 재분류
+                    ratio=r.ratio,
+                    detail=f"{r.source_name} {r.ratio}% ({r.relate or ''})".strip(),
+                    source_type=r.source_type,
+                    bsns_year=r.bsns_year,
                 )
                 counters["kept_ownership"] += 1
 
@@ -162,33 +213,34 @@ def apply() -> dict:
                 # 자기 자신 출자 무시
                 if source_ticker == target_ticker:
                     continue
-                session.add(
-                    RelationLocal(
-                        source_corp=source_ticker,
-                        target_corp=target_ticker,
-                        relation_type="ownership",
-                        ratio=r.ratio,
-                        detail=f"{r.target_name} {r.ratio}%",
-                        source_type=r.source_type,
-                        bsns_year=r.bsns_year,
-                    )
+                _upsert_relation_local(
+                    session,
+                    source_corp=source_ticker,
+                    target_corp=target_ticker,
+                    relation_type="ownership",
+                    ratio=r.ratio,
+                    detail=f"{r.target_name} {r.ratio}%",
+                    source_type=r.source_type,
+                    bsns_year=r.bsns_year,
                 )
                 counters["kept_ownership"] += 1
 
             elif r.source_type == "ftc":
-                # ftc 엣지는 이미 ticker. 그대로 복사
+                # ftc 엣지는 이미 ticker. 그대로 복사 (manual_overrides로 group_name 보정)
                 if r.source_name in valid_tickers and r.target_name in valid_tickers:
-                    session.add(
-                        RelationLocal(
-                            source_corp=r.source_name,
-                            target_corp=r.target_name,
-                            relation_type="ftc_group",
-                            ratio=None,
-                            detail=r.raw_response,
-                            source_type="ftc",
-                            bsns_year=r.bsns_year,
-                            group_name=_extract_group_from_raw(r.raw_response),
-                        )
+                    group_name = manual_overrides.get(r.target_name) or _extract_group_from_raw(
+                        r.raw_response
+                    )
+                    _upsert_relation_local(
+                        session,
+                        source_corp=r.source_name,
+                        target_corp=r.target_name,
+                        relation_type="ftc_group",
+                        ratio=None,
+                        detail=r.raw_response,
+                        source_type="ftc",
+                        bsns_year=r.bsns_year,
+                        group_name=group_name,
                     )
                     counters["kept_ftc"] += 1
                 else:
@@ -196,22 +248,22 @@ def apply() -> dict:
 
             elif r.source_type == "dart_filing":
                 if r.source_name in valid_tickers and r.target_name in valid_tickers:
-                    session.add(
-                        RelationLocal(
-                            source_corp=r.source_name,
-                            target_corp=r.target_name,
-                            relation_type="dart_filing",
-                            ratio=None,
-                            detail=f"사업보고서 주석: {r.relate or ''}",
-                            source_type="dart_filing",
-                            bsns_year=r.bsns_year,
-                        )
+                    _upsert_relation_local(
+                        session,
+                        source_corp=r.source_name,
+                        target_corp=r.target_name,
+                        relation_type="dart_filing",
+                        ratio=None,
+                        detail=f"사업보고서 주석: {r.relate or ''}",
+                        source_type="dart_filing",
+                        bsns_year=r.bsns_year,
                     )
                     counters["kept_filing"] += 1
 
         session.commit()
     finally:
-        session.close()
+        if owns_session:
+            session.close()
 
     logger.info(f"filters.apply 결과: {counters}")
     return counters

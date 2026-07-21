@@ -124,6 +124,9 @@ def normalize_company_name(name: str | None) -> str:
 def build_ticker_map(top50_csv_path) -> dict[str, str]:
     """top50.csv의 corp_name을 정규화하여 ticker로 매핑한 dict 반환.
 
+    ★U1: 신규 코드는 build_ticker_map_from_registry()를 쓸 것 — 이 함수는
+    top50.csv 기반 레거시 경로 호환용으로 유지(과도기, universe/PLAN.md U-D5).
+
     Returns: {normalized_name: ticker, ...}
     """
     import csv
@@ -136,4 +139,20 @@ def build_ticker_map(top50_csv_path) -> dict[str, str]:
             ticker = row.get("ticker", "").strip()
             if name and ticker:
                 ticker_map[normalize_company_name(name)] = ticker
+    return ticker_map
+
+
+def build_ticker_map_from_registry(session) -> dict[str, str]:
+    """CompanyRegistry(전 상장사) 기준 {normalized_name: ticker} 매핑 (★U1).
+
+    build_ticker_map()과 동일한 정규화 규칙을 전 상장사 규모로 확장 —
+    top50.csv 자연 필터를 대체(universe/PLAN.md U-D1 실측: E2E 단절 지점).
+    """
+    from modules.relation.storage.models import CompanyRegistry
+
+    ticker_map: dict[str, str] = {}
+    rows = session.query(CompanyRegistry.name_current, CompanyRegistry.ticker).all()
+    for name, ticker in rows:
+        if name and ticker:
+            ticker_map[normalize_company_name(name)] = ticker
     return ticker_map
