@@ -20,6 +20,11 @@ FIXTURE = (
     / "fixtures"
     / "valuechain_related_party_governance_sk_innovation.txt"
 )
+FIXTURE_HYNIX = (
+    Path(__file__).parent.parent
+    / "fixtures"
+    / "valuechain_related_party_governance_sk_hynix.txt"
+)
 
 
 def _parse_fixture() -> list[dict]:
@@ -64,6 +69,20 @@ def test_footnote_row_not_treated_as_category():
 def test_empty_or_none_input_returns_empty_list():
     assert parse_governance_categories(None) == []
     assert parse_governance_categories("") == []
+
+
+def test_parses_hoesamyeong_label_variant():
+    """SK하이닉스 실제 공시(2026-07-22 수집, rcept 20260317000635) — 헤더가
+    "특수관계자명"이 아니라 "회사명"인 라벨 변형. 구조(카테고리별 콤마 구분
+    나열)는 동일하므로 같은 파서가 흡수해야 한다."""
+    results = parse_governance_categories(FIXTURE_HYNIX.read_text(encoding="utf-8"))
+    categories = {r["category"] for r in results}
+    assert "관계기업" in categories
+    assert "공동기업" in categories
+    assert "기타특수관계자" in categories
+    sk_china = [r for r in results if r["counterparty"] == "SK China Company Limited"]
+    assert len(sk_china) == 1
+    assert sk_china[0]["category"] == "관계기업"
 
 
 def _seed_registry(session):

@@ -194,7 +194,13 @@ def parse_note(text_md: str | None) -> list[dict]:
 # 표를 추출해 RelationLocal(거버넌스 레이어, source_type=dart_filing)도 채운다.
 # ★ 다른 두 변형(현대로템·LIG넥스원류의 와이드 1행형, KT&G류의 행=개별회사+상세
 # 메타데이터형)은 구조가 크게 달라 이번엔 손대지 않는다 — 억지 매칭 금지, 후속 과제.
-_CATEGORY_HEADER_RE = re.compile(r"^\|\s*구\s*분\s*\|\s*특수관계자명\s*\|\s*$")
+# ★ 2026-07-22 추가 실측: 구조는 동일하나 두 번째 컬럼 라벨이 "특수관계자명"이
+# 아니라 "회사명"(SK하이닉스·SK텔레콤)인 회사가 있음 — 카카오는 "회사명(주1)"처럼
+# 각주 마커가 라벨에 붙기도 함. 라벨 문자열만 다르고 표 구조(카테고리별 콤마 구분
+# 나열)는 동일해 같은 정규식으로 흡수.
+_CATEGORY_HEADER_RE = re.compile(
+    r"^\|\s*구\s*분\s*\|\s*(?:특수관계자명|회사명)\s*(?:\([^)]*\))?\s*\|\s*$"
+)
 _FOOTNOTE_LABEL_RE = re.compile(r"^\(주\d*\)$")
 
 
