@@ -96,6 +96,16 @@ def cmd_valuechain(args):
 
         result = related_party.apply()
         print(f"특수관계자 주석 파싱 결과: {result}")
+    elif step == "parse-supply-contracts":
+        from modules.relation.valuechain.extract import supply_contract
+
+        if not args.bgn or not args.end:
+            raise ValueError("parse-supply-contracts는 --bgn/--end(YYYYMMDD) 필수")
+        found = supply_contract.discover_filings(args.bgn, args.end)
+        for f in found:
+            f["html"] = supply_contract.fetch_filing_html(f["rcept_no"])
+        result = supply_contract.apply(filings=found)
+        print(f"단일판매·공급계약체결 파싱 결과: {result}")
     elif step == "export":
         from modules.relation.valuechain import export
 
@@ -145,7 +155,13 @@ def build_parser() -> argparse.ArgumentParser:
 
     p_valuechain = sub.add_parser("valuechain", help="밸류체인 레이어(T1) 파이프라인")
     p_valuechain.add_argument(
-        "step", choices=["parse-related-party", "export"]
+        "step", choices=["parse-related-party", "parse-supply-contracts", "export"]
+    )
+    p_valuechain.add_argument(
+        "--bgn", help="parse-supply-contracts 조회 시작일 YYYYMMDD"
+    )
+    p_valuechain.add_argument(
+        "--end", help="parse-supply-contracts 조회 종료일 YYYYMMDD"
     )
     p_valuechain.set_defaults(func=cmd_valuechain)
 

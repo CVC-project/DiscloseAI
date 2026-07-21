@@ -2,6 +2,46 @@
 
 > `/check` skill 실행 시 아래 형식으로 자동 기록됩니다.
 
+## 2026-07-21 (4) — V1 속행 (T1 파서 2/3: 단일판매·공급계약 수시공시)
+- **DART 엔드포인트 조사 결과**(신규 investigate 완료): 전용 구조화 API(fnlttSinglAcntAll류)
+  없음 — KRX 수시공시 문서(`document.xml`)뿐. `list.json`을 corp_code 생략(전 상장사 대상)
+  + `pblntf_detail_ty="I001"`(거래소 공시)로 검색 → `report_nm`에 "단일판매" 포함 건만
+  클라이언트 필터(정확 표기 "단일판매ㆍ공급계약체결"의 가운뎃점은 일반 middle dot이
+  아니라 한글 아래아 U+318D — "단일판매" 부분 매칭이 표기 변형에 안전). 실측: 2026년 6월
+  한 달 I001 공시 3,602건 중 실제 원본(정정 제외) 6건 확인.
+- **document.xml 인코딩 함정 발견**: 응답의 meta 태그가 `charset=euc-kr`이라 명시하지만
+  실제 바이트는 UTF-8(euc-kr/cp949로 디코드 시 즉시 "illegal multibyte sequence" 에러) —
+  meta 태그를 신뢰하지 않고 UTF-8 우선 시도로 처리.
+  문서는 고정 라벨 HTML 표이나 **행 번호·rowspan 그룹 구성이 회사·연도별로 다름**(실측:
+  샘플 간 항목 수 7~10개 편차) — 위치 기반이 아니라 라벨 문자열 포함 매칭으로 파싱.
+- **실측 발견 — 상대방 비공개 다수**: 계약상대방 필드가 ① 실제 상장사명 ② 업종 설명
+  등 비고유명사(영업기밀 보호 사유로 비공개, 실 사례: "방산 솔루션 공급 업체") ③ "-"
+  세 갈래로 나뉨. valuechain/PLAN.md §7 리스크("공급계약 공시 상대방 '비공개' 다수 —
+  익명 엣지로만 카운트 기여")가 실측으로 그대로 적중.
+- **설계 판단 보류(의도적, 리더 검토 필요)**: §7이 말하는 "익명 엣지"를 만들려면
+  `ValueChainEdge.dst_corp`가 NOT NULL인 현 스키마로는 표현 불가 — nullable 전환 또는
+  별도 익명 카운터 테이블이 필요한 **구조적 결정**이라 이 세션에서 단독으로 스키마를
+  바꾸지 않았다. 현재는 링킹 성공분만 엣지화, 실패분(익명 포함)은 카운트만 반환하고
+  엣지를 만들지 않는다 — 과소집계이지만 안전한 기본값(다음 세션 리더 판단 대상).
+  같은 이유로 **타법인출자현황(RelationRaw 재사용) 파서도 보류** — edge_type이
+  supply/customer/raw_material/competition인데 지분투자가 이 중 무엇에도 자연히
+  대응하지 않고, RelationLocal(governance investment)과의 중복 표현 위험도 있어
+  edge_type 의미론 자체를 리더가 정하기 전엔 구현하지 않기로 함(추측 구현 금지).
+  M3 정정공시 처리("[기재정정]" 건)도 원본 rcept_no 참조 파싱이 필요해 이번엔 스킵
+  (원본만 처리, 정정 건은 후속 과제로 정직하게 기록).
+- **구현**: `extract/supply_contract.py` — `discover_filings()`(list.json 페이지네이션
+  검색) / `fetch_filing_html()`(document.xml ZIP → UTF-8) / `parse_filing_html()`(bs4로
+  라벨 매칭 파싱) / `apply()`(entity linking + 멱등 upsert, related_party.py와 동일
+  linking.py 재사용). CLI: `python -m modules.relation valuechain parse-supply-contracts
+  --bgn --end`.
+- **테스트**: 실제 DART 공시 문서 2건(그린광학·아티스트스튜디오, 2026-06-30 수집)을
+  fixture로 저장 — `tests/relation/test_valuechain/test_supply_contract.py` 5건
+  (파싱 단위 2 + apply 통합 3: 링킹 성공/실패·멱등) 전부 PASS. 전체 회귀 140/140 PASS.
+- **다음 세션**: (1) 리더에게 익명 엣지 스키마 확장 여부·타법인출자현황 edge_type 의미론
+  질문 후 처리 (2) DART 백필 완료 확인 후 U1 재처리 + 특수관계자 주석·단일판매공급계약
+  실 코퍼스 실행(현재 둘 다 fixture/샘플 검증만, 전량 실행은 relation.db 쓰기 락 회피로
+  보류 중).
+
 ## 2026-07-21 (3) — V1 착수 (valuechain 패키지 스켈레톤 + T1 파서 1/3: 특수관계자 주석)
 - **작업**: universe/valuechain PLAN.md §6.0 순서 속행. DART 5개년 백필(bfv901a08)·report
   5개년 수집(boocv2xax) 둘 다 백그라운드 실행 중임을 확인(프로세스 alive, 2021년치 수집 중 /

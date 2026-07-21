@@ -483,8 +483,15 @@ report 수집기(shared)가 신규 연도 적재 → 하네스 C 증분 실행(�
 ### Phase V1 — T1 엣지 + 뷰 v1 (GPU 무관 · 화면 검증 선행)
 - [ ] 정형 파서 3종: **특수관계자 주석(금액) 완료**(`extract/related_party.py`, 2026-07-21 —
       매출/매입 거래금액, 당기만, 실제 삼성전자 공시 샘플 기반 pytest 13건 PASS) /
-      단일판매·공급계약 수시공시(DART 엔드포인트 미조사 — 신규 investigate 필요) /
-      타법인출자현황(U1 `otrCprInvstmntSttus` RelationRaw 재사용 가능, 미착수)
+      **단일판매·공급계약 수시공시 완료**(`extract/supply_contract.py`, 2026-07-21 — DART
+      엔드포인트 조사 결과: 전용 구조화 API 없음, `list.json`(pblntf_detail_ty=I001) +
+      `document.xml` 파싱. 실측 발견: 계약상대방 다수가 영업기밀로 비공개(§7 리스크 기적중 —
+      "익명 엣지"는 현 스키마(dst_corp NOT NULL)로 표현 불가해 링킹 성공분만 엣지화,
+      실패분은 카운트만. 실제 공시 2건 fixture 기반 pytest 5건 PASS) /
+      타법인출자현황(U1 `otrCprInvstmntSttus` RelationRaw 재사용 가능 — **설계 보류**:
+      ValueChainEdge.edge_type이 supply/customer/raw_material/competition인데 지분투자는
+      이 중 어디에도 자연히 대응 안 됨, RelationLocal의 governance investment 레이어와의
+      중복 표현 위험도 있어 리더 판단 필요. 다음 세션 재검토)
 - [x] `ValueChainEdge` T1 적재(멱등 upsert) + `export.py` → valuechain.json — 코드·pytest 완료
       (특수관계자 주석 1종 기준). **실 코퍼스 전량 실행은 보류** — DART 5개년 백필이 relation.db에
       장기 트랜잭션 쓰기 중이라 §2.1 "장기 배치 직렬 실행 원칙" 위반 회피, 백필 완료 후 실행
