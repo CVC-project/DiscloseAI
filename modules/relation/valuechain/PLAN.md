@@ -5,8 +5,11 @@
 > ③ 튜닝 하네스 정밀화(청킹·검증 2패스·운영점 튜닝) ④ 기업 추가·변경 증분 메커니즘 신설
 > 개정: v1.2 (2026-07-15) — ⑤ 실행 주체 분담 명시(§0.5) ⑥ 기준점·성공/중단 판정 정본화(§3.7)
 > ⑦ 루프 경계 요약표(§4.6) — 재현율 하한·최대 라운드 등 무인 루프 완주 조건 확정
+> 개정: v1.3 (2026-07-21) — ⑧ universe(전 상장사 지배구조 확장) 계획과 상호 참조:
+> V0 CompanyRegistry에 universe 컬럼 동시 반영, §5 엣지 문법의 레이어 분리 명시
 > 소유: relation 모듈 (리더). 실행 시 이 문서의 Phase 체크박스를 세션마다 갱신.
-> 관련: [../PLAN.md](../PLAN.md)(지배구조 v1), [../CLAUDE.md](../CLAUDE.md)(모듈 규칙),
+> 관련: [../PLAN.md](../PLAN.md)(지배구조 v1), [../universe/PLAN.md](../universe/PLAN.md)(전 상장사 지배구조 확장 · universe 시각화),
+> [../CLAUDE.md](../CLAUDE.md)(모듈 규칙),
 > [../../../docs/ARCHITECTURE.md](../../../docs/ARCHITECTURE.md), 루트 [DESIGN.md](../../../DESIGN.md)
 
 ---
@@ -436,6 +439,7 @@ report 수집기(shared)가 신규 연도 적재 → 하네스 C 증분 실행(�
 | 잔여 처리 | 묶음 노드 "○○ 외 n사" → 클릭 시 사이드 패널 리스트 (그래프 확장 금지) |
 | 탐색 | 노드 클릭 = 앵커 재구성(re-root) + 상단 브레드크럼(삼성전자 › 솔브레인 › …) |
 | 엣지 스타일 | T1 실선 / T2 옅은 실선 / T3 점선 — 기존 EDGE TYPOLOGY 범례 문법에 등급 추가 |
+| 레이어 문법 분리 ★v1.3 | 지배구조 레이어와 **문법 축 분리**([../universe/PLAN.md](../universe/PLAN.md) U-D14): 밸류체인은 화살표=물자 흐름(화살촉 모양을 지배구조 지분 화살촉과 다르게), 선 스타일=신뢰등급, 색=흐름색(관계유형 6색과 미충돌). 두 레이어 동시 렌더 금지 — 토글 전환 시 전용 범례로 교체 |
 | 2-hop 힌트 | 이웃 노드에 "상장사 n곳 납품" 배지만 (엣지 렌더 금지) |
 | 필터 | 상대 업종 칩(소재/장비/전방…) — 제한이 아닌 탐색 도구 |
 | 근거 노출 | 엣지 hover/클릭 시 provenance(공시명·원문 문장) 표시 — 교육 목적의 핵심 |
@@ -452,6 +456,8 @@ report 수집기(shared)가 신규 연도 적재 → 하네스 C 증분 실행(�
 - [ ] report 수집기 전 상장사 확장 → 우선 섹션(사업의내용·연결주석) 전량 수집 개시 (3~5일 배치)
 - [ ] `valuechain/` 패키지 스켈레톤 (`chunker/ extract/ train/ evaluate.py export.py`) + storage 스키마(§2.2 — UNIQUE 제약·멱등 테스트 포함)
 - [ ] CompanyRegistry 전 상장사 적재 + KSIC↔산업연관표 매핑(auto) + M1 동기화 루프 가동
+      — **universe 컬럼(market_cap_krw·cap_asof·sector_id·universe_tier·universe_rank) 동시 반영**
+      ([../universe/PLAN.md](../universe/PLAN.md) U-D5 — 스키마 합의 후 마이그레이션 1회로 완결)
 - [ ] CompanyAlias 초기 구축 (DART 사명변경 이력 자동 이관)
 
 ### Phase V1 — T1 엣지 + 뷰 v1 (GPU 무관 · 화면 검증 선행)
