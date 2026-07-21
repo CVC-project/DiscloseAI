@@ -30,6 +30,8 @@ from __future__ import annotations
 import logging
 import re
 
+from bs4 import BeautifulSoup
+
 from modules.relation.storage.db import get_local_session
 from modules.relation.storage.models import CompanyRegistry, RelationLocal, ValueChainEdge
 from modules.relation.valuechain.extract import reports_source
@@ -319,6 +321,99 @@ def parse_governance_wide_row(text_md: str | None) -> list[dict]:
     return results
 
 
+# ★ 2026-07-22 행=개별회사형(KT&G류) — text_md(markdown 평탄화)에서는 카테고리
+# 라벨의 rowspan 캐리포워드 정보가 유실돼 행마다 셀 개수가 11/9/8로 달라지고
+# 위치 추론이 안전하지 않았다(investigate 기록). 원본 text_html(sectioner 변환
+# 이전, ROWSPAN 속성 보존)을 직접 파싱하면 이 모호성이 해소된다 — rowspan을
+# 반영한 완전한 셀 그리드를 복원하면 카테고리/회사명 컬럼 위치가 항상 고정된다.
+def _html_table_grid(table) -> list[list[str]]:
+    """<TABLE> → ROWSPAN/COLSPAN을 반영해 셀 위치를 완전히 채운 2차원 그리드.
+
+    DART XML 표는 <TE>(데이터)·<TH>(헤더) 태그를 쓴다(html.parser가 소문자화).
+    """
+    grid: list[list[str]] = []
+    carry: dict[int, list] = {}  # col_idx -> [remaining_rows, text]
+    for tr in table.find_all("tr"):
+        cells = tr.find_all(["th", "te", "td"], recursive=False)
+        row: list[str] = []
+        col = 0
+
+        def _consume_carry() -> bool:
+            nonlocal col
+            if col not in carry:
+                return False
+            entry = carry[col]
+            row.append(entry[1])
+            entry[0] -= 1
+            if entry[0] <= 0:
+                del carry[col]
+            col += 1
+            return True
+
+        for cell in cells:
+            while _consume_carry():
+                pass
+            text = cell.get_text(strip=True)
+            colspan = int(cell.get("colspan", 1) or 1)
+            rowspan = int(cell.get("rowspan", 1) or 1)
+            for _ in range(colspan):
+                row.append(text)
+                if rowspan > 1:
+                    carry[col] = [rowspan - 1, text]
+                col += 1
+        while _consume_carry():
+            pass
+        grid.append(row)
+    return grid
+
+
+def parse_governance_html_rows(text_html: str | None) -> list[dict]:
+    """행=개별회사형 거버넌스 표(KT&G류) → [{category, counterparty}].
+
+    IFRS 표준 공시항목 컬럼("소재지"·"소유지분율")이 모두 있는 표를 앵커로 찾아
+    ROWSPAN을 반영한 그리드로 복원한 뒤, 소재지 컬럼 바로 왼쪽 2칸(카테고리/
+    회사명)을 읽는다. 카테고리 라벨이 rowspan 캐리포워드로 채워질 때, 실제
+    회사명이 없고 카테고리 자체가 회사명 칸에도 그대로 들어간 행(예: KT&G의
+    "기타" 캐치올 행)은 category == counterparty로 식별해 스킵한다(실제 회사가
+    아님, 억지 매칭 금지).
+    """
+    results: list[dict] = []
+    if not text_html:
+        return results
+
+    soup = BeautifulSoup(text_html, "html.parser")
+    target_table = None
+    for table in soup.find_all("table"):
+        headers = {th.get_text(strip=True) for th in table.find_all("th")}
+        if "소재지" in headers and "소유지분율" in headers:
+            target_table = table
+            break
+    if target_table is None:
+        return results
+
+    grid = _html_table_grid(target_table)
+    if not grid:
+        return results
+    header_row = grid[0]
+    if "소재지" not in header_row:
+        return results
+    loc_col = header_row.index("소재지")
+    name_col = loc_col - 1
+    category_col = name_col - 1
+    if category_col < 0:
+        return results
+
+    for row in grid[1:]:
+        if len(row) <= name_col:
+            continue
+        category = row[category_col].strip()
+        counterparty = row[name_col].strip()
+        if not category or not counterparty or counterparty == category:
+            continue
+        results.append({"category": category, "counterparty": counterparty})
+    return results
+
+
 def _upsert_edge(session, **fields) -> None:
     """UNIQUE(src_corp, dst_corp, edge_type, as_of, rcept_no) upsert (D12 멱등)."""
     key = {
@@ -457,9 +552,11 @@ def apply_governance(session=None, sections: list[dict] | None = None) -> dict:
             rcept_no = row["rcept_no"]
             as_of = row["fiscal_year"]
 
-            governance_items = parse_governance_categories(
-                row["text_md"]
-            ) + parse_governance_wide_row(row["text_md"])
+            governance_items = (
+                parse_governance_categories(row["text_md"])
+                + parse_governance_wide_row(row["text_md"])
+                + parse_governance_html_rows(row.get("text_html"))
+            )
             for item in governance_items:
                 corp_code = resolve_corp(
                     item["counterparty"], name_to_corp, session, sample_chunk_id=rcept_no

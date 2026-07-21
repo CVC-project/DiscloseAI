@@ -24,7 +24,9 @@ def _connect_readonly() -> sqlite3.Connection:
 def fetch_sections_by_title(titles: set[str]) -> list[dict]:
     """report_section ⋈ report_raw — title이 titles에 속하는 행 전량.
 
-    Returns: [{"rcept_no", "title", "text_md", "corp_code8", "fiscal_year"}, ...]
+    Returns: [{"rcept_no", "title", "text_md", "text_html", "corp_code8", "fiscal_year"}, ...]
+    text_html은 sectioner의 markdown 변환 이전 원본 HTML(ROWSPAN 등 보존) — U3
+    행=개별회사형처럼 markdown 평탄화로 유실되는 표 구조를 복원해야 할 때 사용.
     """
     if not titles:
         return []
@@ -33,7 +35,7 @@ def fetch_sections_by_title(titles: set[str]) -> list[dict]:
         placeholders = ",".join("?" for _ in titles)
         cur = conn.execute(
             f"""
-            SELECT rs.rcept_no, rs.title, rs.text_md, rr.corp_code8, rr.fiscal_year
+            SELECT rs.rcept_no, rs.title, rs.text_md, rs.text_html, rr.corp_code8, rr.fiscal_year
             FROM report_section rs
             JOIN report_raw rr ON rs.rcept_no = rr.rcept_no
             WHERE rs.title IN ({placeholders})

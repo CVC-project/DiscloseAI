@@ -13,6 +13,7 @@ from modules.relation.storage.models import CompanyRegistry, RelationLocal
 from modules.relation.valuechain.extract.related_party import (
     apply_governance,
     parse_governance_categories,
+    parse_governance_html_rows,
     parse_governance_wide_row,
 )
 
@@ -30,6 +31,11 @@ FIXTURE_ROTEM = (
     Path(__file__).parent.parent
     / "fixtures"
     / "valuechain_related_party_governance_hyundai_rotem.txt"
+)
+FIXTURE_KTNG = (
+    Path(__file__).parent.parent
+    / "fixtures"
+    / "valuechain_related_party_governance_ktng.html"
 )
 
 
@@ -118,6 +124,29 @@ def test_wide_row_bails_out_safely_on_unexpected_shape():
         "| 전체 특수관계자 | 특수관계자 | 지배기업 | (주)엘아이지 |  |\n"
     )
     assert parse_governance_wide_row(malformed) == []
+
+
+def test_parses_html_rows_variant():
+    """KT&G 실제 공시(2026-07-22 수집, rcept 20260318001422) — text_md 평탄화로는
+    rowspan 정보가 유실돼 안전하게 못 읽던 행=개별회사형. 원본 text_html(ROWSPAN
+    보존)을 직접 파싱하면 카테고리/회사명 위치가 항상 고정돼 모호성이 없다."""
+    results = parse_governance_html_rows(
+        FIXTURE_KTNG.read_text(encoding="utf-8")
+    )
+    by_name = {r["counterparty"]: r["category"] for r in results}
+    assert by_name["(주)라이트팜텍"] == "관계기업"
+    assert by_name["코람코반포프로젝트금융투자(주)"] == "관계기업"  # rowspan 캐리포워드
+    assert by_name["케이비KT&G신성장1호펀드"] == "관계기업"  # 관계기업 그룹 마지막 행
+    assert by_name["코람코유럽코어전문투자형사모부동산투자신탁제3-2호"] == "공동기업"
+    assert by_name["지엘광진도시개발(주)"] == "기타"
+    assert by_name["(주)코크렙제36호위탁관리부동산투자회사"] == "기타"
+    # 회사명 칸에 카테고리 라벨("기타")이 그대로 들어간 캐치올 행은 스킵돼야 함
+    assert "기타" not in by_name
+
+
+def test_html_rows_returns_empty_when_no_matching_table():
+    assert parse_governance_html_rows("<table><tr><th>foo</th></tr></table>") == []
+    assert parse_governance_html_rows(None) == []
 
 
 def _seed_registry(session):
