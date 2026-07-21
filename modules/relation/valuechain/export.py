@@ -18,7 +18,7 @@ from pathlib import Path
 from modules.relation.storage.db import get_local_session
 from modules.relation.storage.models import CompanyRegistry, SectorIOEdge, ValueChainEdge
 
-_OUTPUT_PATH = Path(__file__).parent / "data" / "valuechain.json"
+_OUTPUT_PATH = Path(__file__).parent.parent / "data" / "valuechain.json"
 
 
 def export_json(output_path: Path | None = None, session=None) -> dict:
