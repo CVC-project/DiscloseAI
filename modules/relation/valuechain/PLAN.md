@@ -478,7 +478,11 @@ report 수집기(shared)가 신규 연도 적재 → 하네스 C 증분 실행(�
       — **universe 컬럼(market_cap_krw·cap_asof·sector_id·universe_tier·universe_rank) 동시 반영** 완료.
       M1 정기 동기화 루프(월 1회 스케줄러)는 **미가동** — 지금까지는 1회성 sync 실행뿐
       ([../universe/PLAN.md](../universe/PLAN.md) U-D5 — 스키마 합의 후 마이그레이션 1회로 완결)
-- [ ] CompanyAlias 초기 구축 (DART 사명변경 이력 자동 이관) — 미착수(0행)
+- [x] CompanyAlias 초기 구축 — 2026-07-21 완료: 자동(dart_history) 파생은 report_raw
+      corp_name 이력 창(2021~2025)에 실제 사명변경 사례가 0건이라 불발(수집 97.7%
+      시점 기준) — top50 시절 큐레이션된 NAME_ALIASES 21건(현대차·SK·LG·HD현대·삼성
+      그룹 DART 정식명↔KRX 약칭)을 manual 소스로 전량 이관(21/21 매칭). **Phase V0
+      5개 항목 전부 완료.**
 
 ### Phase V1 — T1 엣지 + 뷰 v1 (GPU 무관 · 화면 검증 선행)
 - [x] **정형 파서 2종으로 확정**(리더 결정, 2026-07-21 — 아래 두 결정 참조):
