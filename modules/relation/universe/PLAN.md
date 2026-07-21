@@ -218,10 +218,10 @@ CLI: `python -m modules.relation universe {sync|select|export}` (기존 `__main_
 
 | 순서 | Phase | 핵심 내용 | 브랜치 | GPU | 게이트 |
 |---|---|---|---|---|---|
-| 0 | 보안 fix | llm.py IP·계정 제거(env 이동) | `fix/report-llm-secrets` → dev | ✗ | 저장소 grep 0건 |
-| 1 | **V0+U0** | shared/data/ 신설·reports.db 승격(경로 10곳) · CompanyRegistry+universe 5컬럼 1회 마이그레이션 · corps.csv 2,600 확장 → 수집 배치 개시(3~5일, 병행) · 시총(pykrx)·KSIC 섹터·top-400 | `feat/relation-universe-v0` | ✗ | U0 게이트(§6 표) + galaxy 회귀 무손상 |
-| 2 | **U1** | DART 2종 전수 + FTC 스타 전환 + filters Registry 교체 + 멱등 upsert + **V-1 계약 체커** — V0 수집 배치와 병행 | `feat/relation-universe-edges` | ✗ | U1 게이트 + V-1 통과 |
-| 3 | **V1** | T1 정형 파서 3종 + valuechain.json(+V-1 확장) — 48사 코퍼스 선검증 → 수집 완료분 증분 | `feat/valuechain-t1` | ✗ | 반도체 앵커 3사 QA + V-1 |
+| 0 | 보안 fix | ✅ 완료 — llm.py·monitor_eqs_batch.ps1 GPU IP·계정 제거 | `feat/relation-universe-v0`(당초 계획한 별도 브랜치 대신 한 브랜치에서 연속 진행) | ✗ | 저장소 grep 0건 확인 |
+| 1 | **V0+U0** | ✅ 완료 — shared/data/ 승격(경로 10곳)·스키마 마이그레이션·registry 2,651사·시총·KSIC 25섹터·top-400 | 〃 | ✗ | U0 하드 게이트 5/5 PASS(§6 표, KOSPI200 프록시는 정보용으로 재정의) + galaxy 회귀 무손상 |
+| 2 | **U1** | ✅ 완료 — DART 2종 5개년(2020 부분+2021~2024)·FTC 스타 전환·filters Registry 교체·멱등 upsert. **실측 버그 2건 발견·수정**(RelationLocal UNIQUE 키 relation_type→source_type, dedupe.py 연도 스냅샷 오삭제) | 〃 | ✗ | 엣지 3,508(≥3,000)·M4·링킹실패~0%·V-1 전부 PASS |
+| 3 | **V1** | ✅ 코드 완료(리더 결정으로 **정형 파서 2종** 확정 — 특수관계자 주석·단일판매공급계약. 타법인출자현황은 U1 거버넌스 레이어와 중복이라 미채택) + valuechain.json export + V-1 확장. ⏳ 실 코퍼스 전량 실행은 미착수(fixture 검증만) | 〃 | ✗ | 코드·pytest(18건) PASS. 반도체 앵커 3사 QA는 실 코퍼스 실행 후 |
 | 4 | **U2** | export 4종 + extract_data 동기화(+**V-2 assert**) + dots + 셸 EgoView(governance) + SECTOR_DEF/PALETTE 정합화 + DESIGN.md 절차 신설 + **V-3 렌더 하네스** | `feat/relation-universe-viz` (리더) | ✗ | U2 게이트(V-3로 실행) |
 | 5 | **U3** | 특수관계자 주석 파서(V1 공용 1벌) → dart_filing 확장 + EgoView 밸류체인 토글 활성 | V1 브랜치 편승 | ✗ | 스팟 30건 ≥0.85 |
 | 6 | **V2** | B0 모델 후보군 조사·재선정(valuechain §3.4 ★v1.4) → 청킹 + 하네스 A·B → 봉인 평가 | `feat/valuechain-ml` | ✓(복구됨) | G-A·G-B·S1∧S2 |
