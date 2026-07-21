@@ -131,14 +131,30 @@ def discover_filings(bgn_de: str, end_de: str, page_count: int = 100) -> list[di
 
 
 def fetch_filing_html(rcept_no: str) -> str:
-    """document.xml(ZIP) 다운로드 → 단일 XML 파일 UTF-8 디코드 텍스트."""
+    """document.xml(ZIP) 다운로드 → 단일 XML 파일 텍스트.
+
+    ★2026-07-22 실측 추가: 인코딩은 회사·연도에 따라 다르다 — 2026년 표본(그린광학·
+    아티스트스튜디오)은 UTF-8이었으나, 2020~2021년치 다수는 실제로 **cp949**(meta
+    태그의 "euc-kr" 주장과도 다름 — 2026년 표본처럼 meta 태그를 신뢰할 수 없는 건
+    같지만, 실제 바이트가 어느 인코딩인지는 그때그때 다름). UTF-8 우선 시도 후
+    cp949로 폴백 — 배치 실행(2020~2026 전량) 중 2020년 1,912건 중 6건, 2021년
+    2,216건 전량이 이 인코딩 문제로 fetch 실패했던 것을 발견 후 수정.
+    """
     import io
     import zipfile
 
     content = dart_get_binary("document.xml", {"rcept_no": rcept_no})
     z = zipfile.ZipFile(io.BytesIO(content))
     raw = z.read(z.namelist()[0])
-    return raw.decode("utf-8")
+    return _decode_document_bytes(raw)
+
+
+def _decode_document_bytes(raw: bytes) -> str:
+    """document.xml 원본 바이트 → 텍스트. UTF-8 우선, 실패 시 cp949 폴백."""
+    try:
+        return raw.decode("utf-8")
+    except UnicodeDecodeError:
+        return raw.decode("cp949")
 
 
 def _row_cells(tr) -> list[str]:

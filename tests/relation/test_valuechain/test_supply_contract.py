@@ -10,8 +10,11 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import pytest
+
 from modules.relation.storage.models import CompanyRegistry, LinkFailQueue, ValueChainEdge
 from modules.relation.valuechain.extract.supply_contract import (
+    _decode_document_bytes,
     _split_date_windows,
     apply,
     parse_filing_html,
@@ -42,6 +45,24 @@ def test_split_date_windows_respects_max_days_and_covers_full_range():
             - date(int(bgn[:4]), int(bgn[4:6]), int(bgn[6:8]))
         ).days
         assert span <= 89
+
+
+def test_decode_document_bytes_prefers_utf8():
+    text = "단일판매ㆍ공급계약체결"
+    assert _decode_document_bytes(text.encode("utf-8")) == text
+
+
+def test_decode_document_bytes_falls_back_to_cp949():
+    """2020~2021년치 실 배치에서 발견된 실제 사고: 일부 연도 document.xml은
+    UTF-8이 아니라 cp949였다(meta 태그의 euc-kr 주장과도 다름) — UTF-8 디코드
+    실패 시 cp949로 폴백해야 한다. 폴백 없을 때 2020년 1,912건 중 6건, 2021년
+    2,216건 전량이 fetch 실패로 소실됐었다(회귀 테스트).
+    """
+    text = "단일판매ㆍ공급계약체결"
+    cp949_bytes = text.encode("cp949")
+    with pytest.raises(UnicodeDecodeError):
+        cp949_bytes.decode("utf-8")  # 폴백이 필요한 전제 확인
+    assert _decode_document_bytes(cp949_bytes) == text
 
 
 def test_split_date_windows_single_day_range():
