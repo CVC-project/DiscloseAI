@@ -22,29 +22,30 @@
         "dir": "in",
         "s": "전기전자부품",
         "tier": "named400"
-      },
-      {
-        "t": "227950",
-        "n": "엔투텍",
-        "type": "investment",
-        "detail": "12.77%",
-        "dir": "in",
-        "s": "기계·장비",
-        "tier": "dot"
-      },
-      {
-        "t": "227950",
-        "n": "엔투텍",
-        "type": "investment",
-        "detail": "11.18%",
-        "dir": "in",
-        "s": "기계·장비",
-        "tier": "dot"
       }
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "t": "000880",
+          "n": "한화",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4600000000.0,
+          "as_of": 2023,
+          "prov": "단일판매ㆍ공급계약체결 · (주)한화"
+        },
+        {
+          "t": "000720",
+          "n": "현대건설",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3606000000.0,
+          "as_of": 2024,
+          "prov": "단일판매ㆍ공급계약체결 · 현대건설㈜"
+        }
+      ]
     }
   }
 }

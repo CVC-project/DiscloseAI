@@ -40,64 +40,83 @@
         "dir": "out",
         "s": "전기전자부품",
         "tier": "named400"
-      },
-      {
-        "t": "373220",
-        "n": "LG에너지솔루션",
-        "type": "subsidiary",
-        "detail": "82.0%",
-        "dir": "out",
-        "s": "전기전자부품",
-        "tier": "named400"
-      },
-      {
-        "t": "003550",
-        "n": "LG",
-        "type": "associate",
-        "detail": "33.0%",
-        "dir": "in",
-        "s": "금융",
-        "tier": "named400"
-      },
-      {
-        "t": "373220",
-        "n": "LG에너지솔루션",
-        "type": "subsidiary",
-        "detail": "82.0%",
-        "dir": "out",
-        "s": "전기전자부품",
-        "tier": "named400"
-      },
-      {
-        "t": "003550",
-        "n": "LG",
-        "type": "associate",
-        "detail": "33.0%",
-        "dir": "in",
-        "s": "금융",
-        "tier": "named400"
-      },
-      {
-        "t": "003550",
-        "n": "LG",
-        "type": "associate",
-        "detail": "33.0%",
-        "dir": "in",
-        "s": "금융",
-        "tier": "named400"
-      },
-      {
-        "t": "373220",
-        "n": "LG에너지솔루션",
-        "type": "subsidiary",
-        "detail": "100.0%",
-        "dir": "out",
-        "s": "전기전자부품",
-        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "391710",
+          "n": "코닉오토메이션",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1430000000.0,
+          "as_of": 2022,
+          "prov": "단일판매ㆍ공급계약체결 · LG화학"
+        },
+        {
+          "t": "079810",
+          "n": "APS이노베이션",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3150000000.0,
+          "as_of": 2020,
+          "prov": "단일판매ㆍ공급계약체결 · 엘지화학"
+        },
+        {
+          "t": "281740",
+          "n": "레이크머티리얼즈",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4560000000.0,
+          "as_of": 2020,
+          "prov": "단일판매ㆍ공급계약체결 · LG화학"
+        },
+        {
+          "t": "079810",
+          "n": "APS이노베이션",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3110000000.0,
+          "as_of": 2020,
+          "prov": "단일판매ㆍ공급계약체결 · 엘지화학"
+        },
+        {
+          "t": "104460",
+          "n": "디와이피엔에프",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 6440000000.0,
+          "as_of": 2020,
+          "prov": "단일판매ㆍ공급계약체결 · LG화학"
+        },
+        {
+          "t": "104460",
+          "n": "디와이피엔에프",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 15300092011.0,
+          "as_of": 2021,
+          "prov": "단일판매ㆍ공급계약체결 · (주)LG화학"
+        },
+        {
+          "t": "056730",
+          "n": "CNT85",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 968000000.0,
+          "as_of": 2021,
+          "prov": "단일판매ㆍ공급계약체결 · LG화학"
+        },
+        {
+          "t": "104460",
+          "n": "디와이피엔에프",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 9700000000.0,
+          "as_of": 2022,
+          "prov": "단일판매ㆍ공급계약체결 · (주)LG화학"
+        }
+      ],
       "down": []
     }
   }

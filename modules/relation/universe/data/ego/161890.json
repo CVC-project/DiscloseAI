@@ -24,15 +24,6 @@
         "tier": "dot"
       },
       {
-        "t": "195940",
-        "n": "HK이노엔",
-        "type": "subsidiary",
-        "detail": "50.7%",
-        "dir": "out",
-        "s": "제약바이오",
-        "tier": "named400"
-      },
-      {
         "t": "024720",
         "n": "콜마홀딩스",
         "type": "associate",
@@ -40,55 +31,20 @@
         "dir": "in",
         "s": "금융",
         "tier": "dot"
-      },
-      {
-        "t": "195940",
-        "n": "HK이노엔",
-        "type": "associate",
-        "detail": "43.01%",
-        "dir": "out",
-        "s": "제약바이오",
-        "tier": "named400"
-      },
-      {
-        "t": "195940",
-        "n": "HK이노엔",
-        "type": "associate",
-        "detail": "42.16%",
-        "dir": "out",
-        "s": "제약바이오",
-        "tier": "named400"
-      },
-      {
-        "t": "024720",
-        "n": "콜마홀딩스",
-        "type": "associate",
-        "detail": "27.14%",
-        "dir": "in",
-        "s": "금융",
-        "tier": "dot"
-      },
-      {
-        "t": "195940",
-        "n": "HK이노엔",
-        "type": "associate",
-        "detail": "42.16%",
-        "dir": "out",
-        "s": "제약바이오",
-        "tier": "named400"
-      },
-      {
-        "t": "024720",
-        "n": "콜마홀딩스",
-        "type": "associate",
-        "detail": "27.14%",
-        "dir": "in",
-        "s": "금융",
-        "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "319400",
+          "n": "현대무벡스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 55900000000.0,
+          "as_of": 2025,
+          "prov": "단일판매ㆍ공급계약체결 · 한국콜마 주식회사"
+        }
+      ],
       "down": []
     }
   }

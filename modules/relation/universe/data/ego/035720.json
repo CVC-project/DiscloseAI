@@ -72,7 +72,7 @@
         "t": "377300",
         "n": "카카오페이",
         "type": "associate",
-        "detail": "47.28%",
+        "detail": "46.31%",
         "dir": "out",
         "s": "금융",
         "tier": "named400"
@@ -80,8 +80,8 @@
       {
         "t": "377300",
         "n": "카카오페이",
-        "type": "subsidiary",
-        "detail": "55.0%",
+        "type": "associate",
+        "detail": "46.9%",
         "dir": "out",
         "s": "금융",
         "tier": "named400"
@@ -90,7 +90,7 @@
         "t": "301300",
         "n": "바이브컴퍼니",
         "type": "investment",
-        "detail": "9.3%",
+        "detail": "8.1%",
         "dir": "out",
         "s": "플랫폼",
         "tier": "dot"
@@ -99,7 +99,7 @@
         "t": "323410",
         "n": "카카오뱅크",
         "type": "associate",
-        "detail": "31.78%",
+        "detail": "27.17%",
         "dir": "out",
         "s": "금융",
         "tier": "named400"
@@ -111,15 +111,6 @@
         "detail": "45.51%",
         "dir": "out",
         "s": "플랫폼",
-        "tier": "named400"
-      },
-      {
-        "t": "377300",
-        "n": "카카오페이",
-        "type": "associate",
-        "detail": "46.31%",
-        "dir": "out",
-        "s": "금융",
         "tier": "named400"
       },
       {
@@ -139,109 +130,29 @@
         "dir": "out",
         "s": "플랫폼",
         "tier": "named400"
-      },
-      {
-        "t": "301300",
-        "n": "바이브컴퍼니",
-        "type": "investment",
-        "detail": "8.1%",
-        "dir": "out",
-        "s": "플랫폼",
-        "tier": "dot"
-      },
-      {
-        "t": "377300",
-        "n": "카카오페이",
-        "type": "associate",
-        "detail": "46.44%",
-        "dir": "out",
-        "s": "금융",
-        "tier": "named400"
-      },
-      {
-        "t": "323410",
-        "n": "카카오뱅크",
-        "type": "associate",
-        "detail": "27.2%",
-        "dir": "out",
-        "s": "금융",
-        "tier": "named400"
-      },
-      {
-        "t": "293490",
-        "n": "카카오게임즈",
-        "type": "associate",
-        "detail": "41.3%",
-        "dir": "out",
-        "s": "플랫폼",
-        "tier": "named400"
-      },
-      {
-        "t": "301300",
-        "n": "바이브컴퍼니",
-        "type": "investment",
-        "detail": "8.1%",
-        "dir": "out",
-        "s": "플랫폼",
-        "tier": "dot"
-      },
-      {
-        "t": "041510",
-        "n": "에스엠",
-        "type": "associate",
-        "detail": "20.76%",
-        "dir": "out",
-        "s": "미디어",
-        "tier": "named400"
-      },
-      {
-        "t": "323410",
-        "n": "카카오뱅크",
-        "type": "associate",
-        "detail": "27.17%",
-        "dir": "out",
-        "s": "금융",
-        "tier": "named400"
-      },
-      {
-        "t": "377300",
-        "n": "카카오페이",
-        "type": "associate",
-        "detail": "46.9%",
-        "dir": "out",
-        "s": "금융",
-        "tier": "named400"
-      },
-      {
-        "t": "293490",
-        "n": "카카오게임즈",
-        "type": "associate",
-        "detail": "41.4%",
-        "dir": "out",
-        "s": "플랫폼",
-        "tier": "named400"
-      },
-      {
-        "t": "323410",
-        "n": "카카오뱅크",
-        "type": "associate",
-        "detail": "27.3%",
-        "dir": "out",
-        "s": "금융",
-        "tier": "named400"
-      },
-      {
-        "t": "293490",
-        "n": "카카오게임즈",
-        "type": "associate",
-        "detail": "43.6%",
-        "dir": "out",
-        "s": "플랫폼",
-        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "052460",
+          "n": "아이크래프트",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 15859280000.0,
+          "as_of": 2023,
+          "prov": "단일판매ㆍ공급계약체결 · 주식회사 카카오"
+        },
+        {
+          "t": "052460",
+          "n": "아이크래프트",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 35553577047.0,
+          "as_of": 2025,
+          "prov": "단일판매ㆍ공급계약체결 · 주식회사 카카오"
+        }
+      ],
       "down": []
     }
   }

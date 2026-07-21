@@ -22,29 +22,21 @@
         "dir": "in",
         "s": "철강·금속",
         "tier": "dot"
-      },
-      {
-        "t": "024880",
-        "n": "케이피에프",
-        "type": "associate",
-        "detail": "37.59%",
-        "dir": "in",
-        "s": "철강·금속",
-        "tier": "dot"
-      },
-      {
-        "t": "024880",
-        "n": "케이피에프",
-        "type": "associate",
-        "detail": "36.1%",
-        "dir": "in",
-        "s": "철강·금속",
-        "tier": "dot"
       }
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "t": "012200",
+          "n": "계양전기",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 665444700.0,
+          "as_of": 2025,
+          "prov": "단일판매ㆍ공급계약체결 · 계양전기 주식회사"
+        }
+      ]
     }
   }
 }

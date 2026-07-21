@@ -58,46 +58,65 @@
         "dir": "in",
         "s": "화학",
         "tier": "named400"
-      },
-      {
-        "t": "006110",
-        "n": "삼아알미늄",
-        "type": "investment",
-        "detail": "10.0%",
-        "dir": "out",
-        "s": "철강·금속",
-        "tier": "dot"
-      },
-      {
-        "t": "051910",
-        "n": "LG화학",
-        "type": "subsidiary",
-        "detail": "82.0%",
-        "dir": "in",
-        "s": "화학",
-        "tier": "named400"
-      },
-      {
-        "t": "051910",
-        "n": "LG화학",
-        "type": "subsidiary",
-        "detail": "82.0%",
-        "dir": "in",
-        "s": "화학",
-        "tier": "named400"
-      },
-      {
-        "t": "051910",
-        "n": "LG화학",
-        "type": "subsidiary",
-        "detail": "100.0%",
-        "dir": "in",
-        "s": "화학",
-        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "079810",
+          "n": "APS이노베이션",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2460000000.0,
+          "as_of": 2022,
+          "prov": "단일판매ㆍ공급계약체결 · (주)엘지에너지솔루션"
+        },
+        {
+          "t": "079810",
+          "n": "APS이노베이션",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2040000000.0,
+          "as_of": 2022,
+          "prov": "단일판매ㆍ공급계약체결 · (주)LG에너지솔루션"
+        },
+        {
+          "t": "262260",
+          "n": "에이프로",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 12430000000.0,
+          "as_of": 2023,
+          "prov": "단일판매ㆍ공급계약체결 · 주식회사 엘지에너지솔루션"
+        },
+        {
+          "t": "262260",
+          "n": "에이프로",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 15502000000.0,
+          "as_of": 2023,
+          "prov": "단일판매ㆍ공급계약체결 · 주식회사 엘지에너지솔루션"
+        },
+        {
+          "t": "196490",
+          "n": "디에이테크놀로지",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 9781000000.0,
+          "as_of": 2023,
+          "prov": "단일판매ㆍ공급계약체결 · LG에너지솔루션"
+        },
+        {
+          "t": "262260",
+          "n": "에이프로",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": null,
+          "as_of": 2021,
+          "prov": "단일판매ㆍ공급계약체결 · 주식회사 엘지에너지솔루션"
+        }
+      ],
       "down": []
     }
   }

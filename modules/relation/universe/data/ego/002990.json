@@ -13,37 +13,38 @@
         "dir": "out",
         "s": "운송·물류",
         "tier": "named400"
-      },
-      {
-        "t": "020560",
-        "n": "아시아나항공",
-        "type": "associate",
-        "detail": "31.0%",
-        "dir": "out",
-        "s": "운송·물류",
-        "tier": "named400"
-      },
-      {
-        "t": "020560",
-        "n": "아시아나항공",
-        "type": "associate",
-        "detail": "30.8%",
-        "dir": "out",
-        "s": "운송·물류",
-        "tier": "named400"
-      },
-      {
-        "t": "020560",
-        "n": "아시아나항공",
-        "type": "associate",
-        "detail": "30.8%",
-        "dir": "out",
-        "s": "운송·물류",
-        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "046940",
+          "n": "우원개발",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 16614000000.0,
+          "as_of": 2022,
+          "prov": "단일판매ㆍ공급계약체결 · 금호건설(주)"
+        },
+        {
+          "t": "046940",
+          "n": "우원개발",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 110899000000.0,
+          "as_of": 2024,
+          "prov": "단일판매ㆍ공급계약체결 · 금호건설(주)"
+        },
+        {
+          "t": "046940",
+          "n": "우원개발",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 49100000000.0,
+          "as_of": 2024,
+          "prov": "단일판매ㆍ공급계약체결 · 금호건설(주)"
+        }
+      ],
       "down": []
     }
   }

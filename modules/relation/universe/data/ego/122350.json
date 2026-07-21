@@ -9,24 +9,6 @@
         "t": "419050",
         "n": "삼기에너지솔루션즈",
         "type": "subsidiary",
-        "detail": "75.0%",
-        "dir": "out",
-        "s": "자동차",
-        "tier": "dot"
-      },
-      {
-        "t": "419050",
-        "n": "삼기에너지솔루션즈",
-        "type": "subsidiary",
-        "detail": "51.34%",
-        "dir": "out",
-        "s": "자동차",
-        "tier": "dot"
-      },
-      {
-        "t": "419050",
-        "n": "삼기에너지솔루션즈",
-        "type": "subsidiary",
         "detail": "51.34%",
         "dir": "out",
         "s": "자동차",
@@ -34,7 +16,17 @@
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "317830",
+          "n": "에스피시스템스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 8900000000.0,
+          "as_of": 2025,
+          "prov": "단일판매ㆍ공급계약체결 · ㈜삼기"
+        }
+      ],
       "down": []
     }
   }

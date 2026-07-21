@@ -27,48 +27,12 @@
         "t": "004000",
         "n": "롯데정밀화학",
         "type": "associate",
-        "detail": "44.06%",
-        "dir": "out",
-        "s": "화학",
-        "tier": "dot"
-      },
-      {
-        "t": "004990",
-        "n": "롯데지주",
-        "type": "associate",
-        "detail": "25.59%",
-        "dir": "in",
-        "s": "금융",
-        "tier": "named400"
-      },
-      {
-        "t": "004990",
-        "n": "롯데지주",
-        "type": "associate",
-        "detail": "25.31%",
-        "dir": "in",
-        "s": "금융",
-        "tier": "named400"
-      },
-      {
-        "t": "004000",
-        "n": "롯데정밀화학",
-        "type": "associate",
         "detail": "43.5%",
         "dir": "out",
         "s": "화학",
         "tier": "dot"
       },
       {
-        "t": "020150",
-        "n": "롯데에너지머티리얼즈",
-        "type": "subsidiary",
-        "detail": "53.3%",
-        "dir": "out",
-        "s": "반도체",
-        "tier": "named400"
-      },
-      {
         "t": "004990",
         "n": "롯데지주",
         "type": "associate",
@@ -76,37 +40,29 @@
         "dir": "in",
         "s": "금융",
         "tier": "named400"
-      },
-      {
-        "t": "004000",
-        "n": "롯데정밀화학",
-        "type": "associate",
-        "detail": "44.06%",
-        "dir": "out",
-        "s": "화학",
-        "tier": "dot"
-      },
-      {
-        "t": "004990",
-        "n": "롯데지주",
-        "type": "associate",
-        "detail": "25.59%",
-        "dir": "in",
-        "s": "금융",
-        "tier": "named400"
-      },
-      {
-        "t": "004000",
-        "n": "롯데정밀화학",
-        "type": "associate",
-        "detail": "32.64%",
-        "dir": "out",
-        "s": "화학",
-        "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "418550",
+          "n": "제이오",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 15300000000.0,
+          "as_of": 2023,
+          "prov": "단일판매ㆍ공급계약체결 · 롯데케미칼(주)"
+        },
+        {
+          "t": "418550",
+          "n": "제이오",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 9350000000.0,
+          "as_of": 2023,
+          "prov": "단일판매ㆍ공급계약체결 · 롯데케미칼(주)"
+        }
+      ],
       "down": []
     }
   }

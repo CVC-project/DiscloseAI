@@ -13,29 +13,40 @@
         "dir": "in",
         "s": "철강·금속",
         "tier": "named400"
-      },
-      {
-        "t": "005490",
-        "n": "POSCO홀딩스",
-        "type": "subsidiary",
-        "detail": "65.38%",
-        "dir": "in",
-        "s": "철강·금속",
-        "tier": "named400"
-      },
-      {
-        "t": "005490",
-        "n": "POSCO홀딩스",
-        "type": "subsidiary",
-        "detail": "65.38%",
-        "dir": "in",
-        "s": "철강·금속",
-        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "391710",
+          "n": "코닉오토메이션",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4300000000.0,
+          "as_of": 2024,
+          "prov": "단일판매ㆍ공급계약체결 · 포스코DX"
+        }
+      ],
+      "down": [
+        {
+          "t": "003670",
+          "n": "포스코퓨처엠",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 116000000000.0,
+          "as_of": 2023,
+          "prov": "단일판매ㆍ공급계약체결 · (주)포스코퓨처엠"
+        },
+        {
+          "t": "002320",
+          "n": "한진",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 106990000000.0,
+          "as_of": 2020,
+          "prov": "단일판매ㆍ공급계약체결 · (주)한진"
+        }
+      ]
     }
   }
 }

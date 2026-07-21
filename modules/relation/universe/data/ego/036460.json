@@ -13,37 +13,29 @@
         "dir": "in",
         "s": "에너지",
         "tier": "named400"
-      },
-      {
-        "t": "015760",
-        "n": "한국전력공사",
-        "type": "associate",
-        "detail": "20.47%",
-        "dir": "in",
-        "s": "에너지",
-        "tier": "named400"
-      },
-      {
-        "t": "015760",
-        "n": "한국전력공사",
-        "type": "associate",
-        "detail": "20.47%",
-        "dir": "in",
-        "s": "에너지",
-        "tier": "named400"
-      },
-      {
-        "t": "015760",
-        "n": "한국전력공사",
-        "type": "associate",
-        "detail": "20.47%",
-        "dir": "in",
-        "s": "에너지",
-        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "039610",
+          "n": "화성밸브",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3870000000.0,
+          "as_of": 2023,
+          "prov": "단일판매ㆍ공급계약체결 · 한국가스공사"
+        },
+        {
+          "t": "039610",
+          "n": "화성밸브",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3695656000.0,
+          "as_of": 2022,
+          "prov": "단일판매ㆍ공급계약체결 · 한국가스공사"
+        }
+      ],
       "down": []
     }
   }

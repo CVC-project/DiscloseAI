@@ -26,60 +26,52 @@
       {
         "t": "003090",
         "n": "대웅",
-        "type": "associate",
-        "detail": "49.94%",
-        "dir": "in",
-        "s": "제약바이오",
-        "tier": "dot"
-      },
-      {
-        "t": "003090",
-        "n": "대웅",
         "type": "subsidiary",
         "detail": "52.29%",
-        "dir": "in",
-        "s": "제약바이오",
-        "tier": "dot"
-      },
-      {
-        "t": "009420",
-        "n": "한올바이오파마",
-        "type": "associate",
-        "detail": "31.79%",
-        "dir": "out",
-        "s": "제약바이오",
-        "tier": "named400"
-      },
-      {
-        "t": "009420",
-        "n": "한올바이오파마",
-        "type": "associate",
-        "detail": "31.79%",
-        "dir": "out",
-        "s": "제약바이오",
-        "tier": "named400"
-      },
-      {
-        "t": "009420",
-        "n": "한올바이오파마",
-        "type": "associate",
-        "detail": "31.0%",
-        "dir": "out",
-        "s": "제약바이오",
-        "tier": "named400"
-      },
-      {
-        "t": "003090",
-        "n": "대웅",
-        "type": "associate",
-        "detail": "48.0%",
         "dir": "in",
         "s": "제약바이오",
         "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "187660",
+          "n": "페니트리움바이오",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1742000000.0,
+          "as_of": 2023,
+          "prov": "단일판매ㆍ공급계약체결 · (주)대웅제약"
+        },
+        {
+          "t": "359090",
+          "n": "씨엔알리서치",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 11509463000.0,
+          "as_of": 2026,
+          "prov": "단일판매ㆍ공급계약체결 · (주)대웅제약"
+        },
+        {
+          "t": "228760",
+          "n": "지노믹트리",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 41552000.0,
+          "as_of": 2020,
+          "prov": "단일판매ㆍ공급계약체결 · (주)대웅제약"
+        },
+        {
+          "t": "322510",
+          "n": "제이엘케이",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 100000000.0,
+          "as_of": 2021,
+          "prov": "단일판매ㆍ공급계약체결 · (주)대웅제약"
+        }
+      ],
       "down": []
     }
   }

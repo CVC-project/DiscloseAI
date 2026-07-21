@@ -19,7 +19,8 @@ from collections import defaultdict
 from pathlib import Path
 
 from modules.relation.storage.db import get_local_session
-from modules.relation.storage.models import CompanyRegistry, RelationLocal, ValueChainEdge
+from modules.relation.storage.models import CompanyRegistry, ValueChainEdge
+from modules.relation.storage.queries import latest_relation_local_edges
 
 logger = logging.getLogger(__name__)
 
@@ -113,15 +114,11 @@ def export_universe_json(session, output_path: Path | None = None) -> dict:
     # named 상호 간 rl (governance만 — RelationLocal, ticker 기준)
     named_tickers = {c.ticker for c in named}
     rl_by_ticker: dict[str, list[tuple]] = defaultdict(list)
-    edges = (
-        session.query(RelationLocal)
-        .filter(
-            RelationLocal.source_corp.in_(named_tickers),
-            RelationLocal.target_corp.in_(named_tickers),
-            RelationLocal.status == "active",
-        )
-        .all()
-    )
+    edges = [
+        e
+        for e in latest_relation_local_edges(session)
+        if e.source_corp in named_tickers and e.target_corp in named_tickers
+    ]
     for e in edges:
         target = by_ticker.get(e.target_corp)
         if not target:
@@ -193,7 +190,7 @@ def export_companies_index_json(session, output_path: Path | None = None) -> lis
 
 def _build_ego_payload(
     company: CompanyRegistry,
-    gov_edges: list[RelationLocal],
+    gov_edges: list,
     vc_up: list[ValueChainEdge],
     vc_down: list[ValueChainEdge],
     by_ticker: dict[str, CompanyRegistry],
@@ -263,7 +260,7 @@ def export_ego_files(session, output_dir: Path | None = None) -> dict:
     ego_dir = output_dir or _EGO_DIR
     ego_dir.mkdir(parents=True, exist_ok=True)
 
-    gov_edges = session.query(RelationLocal).filter(RelationLocal.status == "active").all()
+    gov_edges = latest_relation_local_edges(session)
     gov_by_ticker: dict[str, list] = defaultdict(list)
     for e in gov_edges:
         gov_by_ticker[e.source_corp].append(e)

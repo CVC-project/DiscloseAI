@@ -35,33 +35,6 @@
       {
         "t": "086520",
         "n": "에코프로",
-        "type": "subsidiary",
-        "detail": "52.2%",
-        "dir": "in",
-        "s": "금융",
-        "tier": "named400"
-      },
-      {
-        "t": "086520",
-        "n": "에코프로",
-        "type": "associate",
-        "detail": "46.0%",
-        "dir": "in",
-        "s": "금융",
-        "tier": "named400"
-      },
-      {
-        "t": "086520",
-        "n": "에코프로",
-        "type": "associate",
-        "detail": "46.0%",
-        "dir": "in",
-        "s": "금융",
-        "tier": "named400"
-      },
-      {
-        "t": "086520",
-        "n": "에코프로",
         "type": "associate",
         "detail": "46.0%",
         "dir": "in",
@@ -70,8 +43,28 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "290670",
+          "n": "대보마그네틱",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1590000000.0,
+          "as_of": 2021,
+          "prov": "단일판매ㆍ공급계약체결 · 에코프로비엠"
+        }
+      ],
+      "down": [
+        {
+          "t": "096770",
+          "n": "SK이노베이션",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2741283000000.0,
+          "as_of": 2020,
+          "prov": "단일판매ㆍ공급계약체결 · 에스케이이노베이션"
+        }
+      ]
     }
   }
 }

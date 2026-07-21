@@ -33,15 +33,6 @@
         "tier": "named400"
       },
       {
-        "t": "036830",
-        "n": "솔브레인홀딩스",
-        "type": "associate",
-        "detail": "31.0%",
-        "dir": "in",
-        "s": "기계·장비",
-        "tier": "named400"
-      },
-      {
         "t": "092070",
         "n": "디엔에프",
         "type": "associate",
@@ -49,46 +40,29 @@
         "dir": "out",
         "s": "화학",
         "tier": "dot"
-      },
-      {
-        "t": "005930",
-        "n": "삼성전자",
-        "type": "investment",
-        "detail": "5.6%",
-        "dir": "in",
-        "s": "반도체",
-        "tier": "named400"
-      },
-      {
-        "t": "036830",
-        "n": "솔브레인홀딩스",
-        "type": "associate",
-        "detail": "31.0%",
-        "dir": "in",
-        "s": "기계·장비",
-        "tier": "named400"
-      },
-      {
-        "t": "036830",
-        "n": "솔브레인홀딩스",
-        "type": "associate",
-        "detail": "31.0%",
-        "dir": "in",
-        "s": "기계·장비",
-        "tier": "named400"
-      },
-      {
-        "t": "036830",
-        "n": "솔브레인홀딩스",
-        "type": "associate",
-        "detail": "31.0%",
-        "dir": "in",
-        "s": "기계·장비",
-        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "056730",
+          "n": "CNT85",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 200000000.0,
+          "as_of": 2021,
+          "prov": "단일판매ㆍ공급계약체결 · 솔브레인(주)"
+        },
+        {
+          "t": "140860",
+          "n": "파크시스템스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1484272727.0,
+          "as_of": 2021,
+          "prov": "단일판매ㆍ공급계약체결 · 솔브레인 주식회사"
+        }
+      ],
       "down": []
     }
   }

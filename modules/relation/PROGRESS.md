@@ -2,6 +2,39 @@
 
 > `/check` skill 실행 시 아래 형식으로 자동 기록됩니다.
 
+## 2026-07-22 (4) — graph/build.py + universe/export.py 연도별 rl 중복 버그 수정 (전 세션 발견분)
+- **작업**: 전 세션(아래 (3))이 발견·기록만 하고 넘긴 회귀를 수정. `graph/build.py`가
+  `RelationLocal`을 `session.query(...).all()`로 전부 읽어 MultiDiGraph 엣지로 넣고
+  있었는데, U1 5개년 백필(2021~2024) 이후 같은 (source_corp, target_corp,
+  source_type) 쌍이 bsns_year별로 별개 행으로 존재하는 게 정상(UNIQUE 키, U-D13)이라
+  `graph_top50.json`의 `rl` 배열에 같은 관계가 최대 34번까지 중복 표기되고 있었음.
+- **원인 확인 중 2번째 소비자도 동일 버그임을 발견**: `universe/export.py`의
+  `export_universe_json`(named 400 상호 rl)과 `export_ego_files`(governance 레이어,
+  U2의 실제 정본 산출물 — `graph_top50.json`은 U4까지의 fallback 경로일 뿐)가 같은
+  패턴으로 `RelationLocal`을 연도 dedupe 없이 소비하고 있었음 — 실측(HD현대 ego 파일)
+  으로 재현 확인, 9개 governance 엔트리 중 3개가 같은 관계의 연도별 중복이었음.
+  둘 다 살아있는 산출물이라(ego 파일은 dossier 지연 fetch 패턴으로 실사용 예정)
+  graph/build.py만 고치면 같은 버그가 U2 정본에 남는 상태였음.
+- **수정**: `storage/queries.py` 신설 — `latest_relation_local_edges(session,
+  status="active")` 공용 헬퍼(U-D2 "파서 1벌, 소비자 여러 곳" 원칙을 쿼리에도 준용).
+  (source_corp, target_corp, source_type)별 최신 bsns_year 1건만 반환. **다른
+  source_type(예: hyslrSttus vs otrCprInvstmntSttus)이 같은 쌍에 공존하는 것은
+  손대지 않음** — storage/CLAUDE.md 레이어 공존 원칙 그대로 유지(같은 관계를 서로
+  다른 DART API가 독립 보고해 ratio가 근소하게 다른 경우가 실제로 있음, 예:
+  HD현대→HD한국조선해양 hyslrSttus 35.05% vs otrCprInvstmntSttus 35.05% — 이건
+  버그가 아니라 설계대로의 결과라 그대로 둠). `graph/build.py`·`universe/export.py`
+  양쪽에서 이 헬퍼로 교체.
+- **재생성 결과**: `graph_top50.json`(최대 중복 34회→2회, 남은 2회는 전부 서로 다른
+  source_type 레이어 공존 확인) · `universe.json`(named rl) · `ego/*.json` 2,651개 중
+  1,345개 갱신(총 -13,005줄, 연도 중복 제거) 전부 재생성·커밋 대상.
+- **테스트**: `test_graph/test_build_export.py`에 4개년 중복 시드 → 최신 연도 1건만
+  남는지 검증하는 회귀 테스트 신설. `test_universe/test_export.py` 신규 파일 —
+  `export_universe_json`·`export_ego_files` 양쪽 동일 회귀 테스트 2건. 전체
+  166/166 PASS(기존 164 + 신규 2).
+- **다음 세션**: (1) 나머지 거버넌스 표 변형(와이드 1행형·행=개별회사형) investigate
+  계속 (2) U3 게이트 판정 — CPA 스팟 30건 검수 필요(사람 개입, 아래 참조) (3)
+  integration §5 명세 전달해 밸류체인 토글 뷰 v1 착수(§6.0 다음 순서, 리더 담당).
+
 ## 2026-07-22 (3) — U3 착수: 거버넌스 카테고리 표 파서 (RelationLocal 소비, U-D2)
 - **작업**: 앞선 항목(U3 investigate, 3개 회사 표본)을 15~20개로 확장 — 자동 구조
   분류 시도가 두 번 실패(정규식이 "구  분"(2칸 공백)만 매칭해 "구    분"(4칸 공백)

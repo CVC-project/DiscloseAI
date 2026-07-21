@@ -22,37 +22,20 @@
         "dir": "out",
         "s": "전기전자부품",
         "tier": "named400"
-      },
-      {
-        "t": "006260",
-        "n": "LS",
-        "type": "associate",
-        "detail": "47.47%",
-        "dir": "in",
-        "s": "금융",
-        "tier": "named400"
-      },
-      {
-        "t": "006260",
-        "n": "LS",
-        "type": "associate",
-        "detail": "47.47%",
-        "dir": "in",
-        "s": "금융",
-        "tier": "named400"
-      },
-      {
-        "t": "006260",
-        "n": "LS",
-        "type": "associate",
-        "detail": "46.0%",
-        "dir": "in",
-        "s": "금융",
-        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "313760",
+          "n": "캐리",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4376200000.0,
+          "as_of": 2021,
+          "prov": "단일판매ㆍ공급계약체결 · 엘에스일렉트릭 주식회사"
+        }
+      ],
       "down": []
     }
   }
