@@ -96,6 +96,11 @@ def cmd_valuechain(args):
 
         result = related_party.apply()
         print(f"특수관계자 주석 파싱 결과: {result}")
+    elif step == "parse-related-party-governance":
+        from modules.relation.valuechain.extract import related_party
+
+        result = related_party.apply_governance()
+        print(f"특수관계자 거버넌스 카테고리 파싱 결과: {result}")
     elif step == "parse-supply-contracts":
         from modules.relation.valuechain.extract import supply_contract
 
@@ -155,7 +160,13 @@ def build_parser() -> argparse.ArgumentParser:
 
     p_valuechain = sub.add_parser("valuechain", help="밸류체인 레이어(T1) 파이프라인")
     p_valuechain.add_argument(
-        "step", choices=["parse-related-party", "parse-supply-contracts", "export"]
+        "step",
+        choices=[
+            "parse-related-party",
+            "parse-related-party-governance",
+            "parse-supply-contracts",
+            "export",
+        ],
     )
     p_valuechain.add_argument(
         "--bgn", help="parse-supply-contracts 조회 시작일 YYYYMMDD"

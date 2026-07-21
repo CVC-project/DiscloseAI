@@ -31,7 +31,7 @@ import logging
 import re
 
 from modules.relation.storage.db import get_local_session
-from modules.relation.storage.models import ValueChainEdge
+from modules.relation.storage.models import CompanyRegistry, RelationLocal, ValueChainEdge
 from modules.relation.valuechain.extract import reports_source
 from modules.relation.valuechain.extract.linking import build_name_to_corp_map, resolve_corp
 
@@ -188,6 +188,56 @@ def parse_note(text_md: str | None) -> list[dict]:
     return results
 
 
+# 2026-07-22 실측(109노트 표본 조사): "구분/특수관계자명" 2-컬럼 카테고리 나열형이
+# 여러 회사에서 동일하게 확인됨(삼성바이오로직스·SK이노베이션·HD현대·HD현대중공업·
+# HD한국조선해양 등) — U-D2 "파서 1벌, 소비자 2곳" 원칙에 따라 같은 노트에서 이
+# 표를 추출해 RelationLocal(거버넌스 레이어, source_type=dart_filing)도 채운다.
+# ★ 다른 두 변형(현대로템·LIG넥스원류의 와이드 1행형, KT&G류의 행=개별회사+상세
+# 메타데이터형)은 구조가 크게 달라 이번엔 손대지 않는다 — 억지 매칭 금지, 후속 과제.
+_CATEGORY_HEADER_RE = re.compile(r"^\|\s*구\s*분\s*\|\s*특수관계자명\s*\|\s*$")
+_FOOTNOTE_LABEL_RE = re.compile(r"^\(주\d*\)$")
+
+
+def parse_governance_categories(text_md: str | None) -> list[dict]:
+    """특수관계자 "구분/특수관계자명" 카테고리 표 → [{category, counterparty}].
+
+    지배기업/관계기업/공동기업/기타/대규모기업집단 등 카테고리별로 콤마 구분된
+    회사명 나열을 개별 상대회사로 분해한다. sectioner가 원문 문단을 평문으로도
+    중복 렌더링하므로(관련 없는 문장에 우연히 "구분...특수관계자명..." 텍스트가
+    이어붙어 나타남) **파이프 표 형태로 정확히 일치하는 헤더 행만** 인식하고,
+    첫 매칭 표만 처리한다(사업연도당 표는 논리적으로 1개뿐 — 뒤이은 평문/재렌더
+    중복 스킵).
+
+    한계(정직하게 기록): 외국법인명이 "Ltd.," 처럼 콤마를 포함한 법인 접미어를
+    쓰는 경우 콤마 분리 시 잘못 쪼개질 수 있다 — 다만 그런 이름은 대부분
+    CompanyRegistry(국내 상장사)에 없어 entity linking 단계에서 자연히 걸러지므로
+    (링킹 실패로 소실될 뿐 잘못된 엣지가 생기지는 않음) 실질적 정확도 영향은 적다.
+    """
+    results: list[dict] = []
+    if not text_md:
+        return results
+
+    lines = text_md.splitlines()
+    for i, ln in enumerate(lines):
+        if not _CATEGORY_HEADER_RE.match(ln.strip()):
+            continue
+        j = i + 1
+        while j < len(lines) and lines[j].strip().startswith("|"):
+            row = _split_row(lines[j])
+            j += 1
+            if len(row) < 2 or not row[0]:
+                continue
+            category = row[0].strip()
+            if _FOOTNOTE_LABEL_RE.match(category):
+                continue  # "(주1)" 각주 행 — 카테고리 아님
+            for name in row[1].split(","):
+                name = name.strip()
+                if name:
+                    results.append({"category": category, "counterparty": name})
+        break  # 첫 매칭 표만 — 평문/재렌더 중복 스킵
+    return results
+
+
 def _upsert_edge(session, **fields) -> None:
     """UNIQUE(src_corp, dst_corp, edge_type, as_of, rcept_no) upsert (D12 멱등)."""
     key = {
@@ -269,8 +319,98 @@ def apply(session=None, sections: list[dict] | None = None) -> dict:
     return counters
 
 
+def _upsert_relation_local_dart_filing(session, **fields) -> None:
+    """UNIQUE(source_corp, target_corp, source_type, bsns_year) upsert — transform/filters.py
+    의 동일 패턴 준용(U-D13 멱등 키). source_type은 항상 "dart_filing"."""
+    key = {
+        "source_corp": fields["source_corp"],
+        "target_corp": fields["target_corp"],
+        "source_type": "dart_filing",
+        "bsns_year": fields.get("bsns_year"),
+    }
+    existing = session.query(RelationLocal).filter_by(**key).one_or_none()
+    if existing:
+        for k, v in fields.items():
+            setattr(existing, k, v)
+        existing.status = "active"
+    else:
+        session.add(RelationLocal(**fields, source_type="dart_filing", status="active"))
+
+
+def apply_governance(session=None, sections: list[dict] | None = None) -> dict:
+    """특수관계자 주석의 "구분/특수관계자명" 카테고리 표 → RelationLocal(dart_filing) upsert.
+
+    U-D2 "파서 1벌, 소비자 2곳" — apply()와 같은 sections 입력을 받아 같은 노트에서
+    다른 표(거래금액이 아니라 카테고리 리스팅)를 뽑아 거버넌스 레이어에 반영한다.
+    U1(DART hyslrSttus/otrCprInvstmntSttus)가 이미 포착한 지분관계와 다른 source_type
+    (dart_filing)이라 레이어 공존 원칙(같은 쌍이라도 source_type이 다르면 별도 행)에
+    따라 중복 없이 공존한다 — U1 미포착분(지분 없는 "기타" 특수관계 등)을 보완.
+
+    RelationLocal.source_corp/target_corp는 ticker(6자리)라 corp_code(8자리)를 변환
+    해야 한다 — CompanyRegistry에서 corp_code→ticker 매핑을 구축.
+
+    Returns: {'notes_scanned', 'edges_kept', 'link_failed', 'no_ticker'}
+    """
+    owns_session = session is None
+    if owns_session:
+        session = get_local_session()
+
+    if sections is None:
+        sections = reports_source.fetch_sections_by_title(NOTE_TITLES)
+
+    counters = {"notes_scanned": 0, "edges_kept": 0, "link_failed": 0, "no_ticker": 0}
+    try:
+        name_to_corp = build_name_to_corp_map(session)
+        ticker_by_corp_code = {
+            c.corp_code: c.ticker for c in session.query(CompanyRegistry).all() if c.ticker
+        }
+
+        for row in sections:
+            counters["notes_scanned"] += 1
+            self_corp_code = row["corp_code8"]
+            self_ticker = ticker_by_corp_code.get(self_corp_code)
+            if not self_ticker:
+                counters["no_ticker"] += 1
+                continue
+            rcept_no = row["rcept_no"]
+            as_of = row["fiscal_year"]
+
+            for item in parse_governance_categories(row["text_md"]):
+                corp_code = resolve_corp(
+                    item["counterparty"], name_to_corp, session, sample_chunk_id=rcept_no
+                )
+                if not corp_code:
+                    counters["link_failed"] += 1
+                    continue
+                if corp_code == self_corp_code:
+                    continue
+                target_ticker = ticker_by_corp_code.get(corp_code)
+                if not target_ticker:
+                    counters["no_ticker"] += 1
+                    continue
+
+                _upsert_relation_local_dart_filing(
+                    session,
+                    source_corp=self_ticker,
+                    target_corp=target_ticker,
+                    relation_type="dart_filing",
+                    ratio=None,
+                    detail=f"사업보고서 주석: {item['category']}",
+                    bsns_year=as_of,
+                )
+                counters["edges_kept"] += 1
+        session.commit()
+    finally:
+        if owns_session:
+            session.close()
+
+    logger.info(f"related_party.apply_governance 결과: {counters}")
+    return counters
+
+
 if __name__ == "__main__":
     import json
 
     logging.basicConfig(level=logging.INFO, format="%(message)s")
     print(json.dumps(apply(), ensure_ascii=False, indent=2))
+    print(json.dumps(apply_governance(), ensure_ascii=False, indent=2))

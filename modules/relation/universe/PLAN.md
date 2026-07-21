@@ -244,6 +244,7 @@ CLI: `python -m modules.relation universe {sync|select|export}` (기존 `__main_
 | **U1 엣지 전수** | DART 2종 전 상장사 수집(최신 연도 1일 + 5개년 백필 3일) + FTC 전 집단(스타) + **`transform/filters.py`의 top50 자연 필터 → CompanyRegistry 필터 교체**(미교체 시 2,600사를 수집해도 엣지는 top50 간만 생성 — E2E 단절 지점) + 멱등 upsert 전환. `dedupe.py`·`kifrs.py`는 그대로 스케일 | 지분 엣지 ≥ 3,000 · M4 멱등 pytest 통과 · 링킹 실패율 < 5% (초과분 LinkFailQueue) | `feat/relation-universe-edges` — GPU 불요 |
 | **U2 export + 화면 v1** | 산출물 4종 + extract_data 동기화 등록 + SectorMap dots + EgoView(governance) + 팔레트 확장(SECTOR_DEF+SECTOR_PALETTE 동시) | 최대 섹터 60fps · 화면 QA 3시나리오(대기업 계열 / 비계열 중견 / 코스닥 소형)를 **/viewer-check**(정적+Playwright 동적 검증)로 실행 · graph_top50 경로 회귀 무손상 | `feat/relation-universe-viz` (integration 측 포함 — 리더 소유) |
 | **U3 주석 엣지** | 특수관계자 주석 파서(valuechain V1 T1 공용) → dart_filing 확장 + EgoView 밸류체인 토글 wiring | 주석 엣지 스팟 30건 정밀도 ≥ 0.85 (G-C 준용) | valuechain V1 브랜치에 편승 (파서 1벌 원칙) |
+|   ↳ 진행상황(2026-07-22) | `related_party.parse_governance_categories()`/`apply_governance()` 구현 완료 — "구분/특수관계자명" 2-컬럼 카테고리 표(삼성바이오로직스·SK이노베이션·HD현대 계열 확인, 최소 5개사) → RelationLocal(dart_filing) 109노트→43엣지. 나머지 표 변형(와이드 1행형·행=개별회사형)은 미구현 | **게이트 미판정 — CPA 스팟 30건 검수 대기**(사람 개입 지점, §6.1 4곳 중 하나 — 코드가 자체 PASS 선언 불가) | 〃 |
 | **U4 이연** | T2 서술 추출 지배구조 엣지(GPU) · 섹터 간 집계 흐름선 · 연도 스냅샷 타임머신 · graph_top50 은퇴 | — | **GPU 서버 복구 선행** (임차처 콘솔에서 허용 IP·가동 상태 확인) |
 
 병행(전 Phase): PROGRESS.md에 phase별 엣지 수·게이트 결과 누적 기록. 완료 브랜치는 dev 머지 후 삭제.
