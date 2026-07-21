@@ -7,6 +7,11 @@
 > ⑦ 루프 경계 요약표(§4.6) — 재현율 하한·최대 라운드 등 무인 루프 완주 조건 확정
 > 개정: v1.3 (2026-07-21) — ⑧ universe(전 상장사 지배구조 확장) 계획과 상호 참조:
 > V0 CompanyRegistry에 universe 컬럼 동시 반영, §5 엣지 문법의 레이어 분리 명시
+> 개정: v1.4 (2026-07-21) — 착수 전 코드 실측 재검토 반영: ⑨ 진입 위치를 v2 셸 EgoView로
+> 확정(리더 결정 — "FINANCIALS 탭"은 실재하지 않음) ⑩ reports.db 경로 상수 실측(1곳 아님 —
+> 코드 4곳+테스트 1곳+문서 5곳) ⑪ GPU 서버 접속 복구(2026-07-21) 반영 — V2+ 차단 해제
+> ⑫ 학생 베이스 모델 "Qwen3 고정" 해제 — B0에서 최신 릴리스 포함 4기준 재선정(§3.4·§4.2)
+> ⑬ 시각화 엣지 검증 하네스 V 신설([../universe/PLAN.md](../universe/PLAN.md) §5.5 — V-1 계약 체커는 V1 export와 동시 작성)
 > 소유: relation 모듈 (리더). 실행 시 이 문서의 Phase 체크박스를 세션마다 갱신.
 > 관련: [../PLAN.md](../PLAN.md)(지배구조 v1), [../universe/PLAN.md](../universe/PLAN.md)(전 상장사 지배구조 확장 · universe 시각화),
 > [../CLAUDE.md](../CLAUDE.md)(모듈 규칙),
@@ -17,8 +22,11 @@
 ## 0. 목표
 
 ### 제품 목표
-기업 상세 FINANCIALS 탭에 **지배구조 / 밸류체인 토글**을 신설하고, 앵커 기업 중심의
-전방(공급처)·후방(고객사) 흐름을 공시 근거와 함께 시각화한다.
+v2 셸 EgoView(기업 클릭 상세 관계망, [../universe/PLAN.md](../universe/PLAN.md) LOD-2)에
+**지배구조 / 밸류체인 레이어 토글**을 두고, 앵커 기업 중심의 전방(공급처)·후방(고객사)
+흐름을 공시 근거와 함께 시각화한다. ★v1.4: 진입 위치를 셸 단일로 확정 — dossier 탭
+진입은 비목표(구 "FINANCIALS 탭" 전제는 실재하지 않는 탭이었음. dossier 3탭 =
+business/galaxy/eqs, 지배구조 시각화는 셸 bundle.jsx에만 존재).
 갤럭시 → 섹터 클러스터 → 기업 진입 동선은 현행 유지.
 **대상은 처음부터 전 상장사(코스피+코스닥, ~2,600사)** — 밸류체인 엣지는 을(乙) 쪽
 중소형사 공시에서 흘러나오므로(비대칭 공시) 코스닥 소재·부품·장비사가 빠지면
@@ -90,11 +98,20 @@ shared/data/reports.db          ← modules/report/data/reports.db 이동(승격
   읽기: relation(밸류체인 추출) · 기타 모듈 read-only
 ```
 
-- **승격 마이그레이션 태스크** (V0):
-  1. 파일 이동 + `modules/report/db.py` 경로 상수 변경 (galaxy 파이프라인 회귀 확인 필수)
+- **승격 마이그레이션 태스크** (V0): ★v1.4 실측 — 경로 변경 지점은 "1곳"이 아니라 아래 전부.
+  0. `shared/data/` 디렉터리 **신규 생성** (현재 미존재)
+  1. 파일 이동 + 경로 참조 일괄 변경:
+     - 코드 4곳: `modules/report/db.py:8` · `series.py:89` · `report_source.py:26` ·
+       `check_golden.py` 373·565행 (db.py 외 3파일은 각자 경로를 재정의 — import 미경유)
+     - 테스트 1곳: `tests/report/test_series_golden.py:17`
+     - 에이전트·스킬 문서 5곳: `.claude/agents/note-extractor.md` ·
+       `accuracy-verifier.md` · `completeness-auditor.md` · galaxy-golden `SKILL.md`
+       (`.claude/`·`.agents/` 미러 양쪽 — 미러는 sync_codex 재실행으로)
+     - 변경 후 **galaxy 파이프라인 회귀 확인 필수** + `grep -r "report/data/reports.db"` 잔존 0건
   2. 루트 CLAUDE.md "데이터 정본은 모듈별 로컬 SQLite"에 예외 명문화:
      *"shared/data/ = 리더 승인 공유 코퍼스. 쓰기 소유 모듈 1개 명시, 그 외 read-only"*
-  3. docs/ARCHITECTURE.md DB 토폴로지(§3.5) 갱신
+  3. docs/ARCHITECTURE.md DB 토폴로지(§3.5) 갱신 — reports.db는 현재 §3.5 표에
+     행 자체가 없음 → **행 신설**(위치=shared/data/, 쓰기=report 단독) + §2 폴더 표 갱신
   4. `scripts/sync_codex.py` 재실행 (미러 갱신)
 - **수집 확장**: report 모듈 수집기를 전 상장사 × 5개년으로 확장. 우선 섹션 =
   `II.사업의내용` + 연결주석(특수관계자 포함). 실측 기반 추정: 48사 646MB → 2,600사 ~35GB,
@@ -227,7 +244,7 @@ v1의 "섹션 통째 입력"은 작동하지 않는다 — `II.사업의내용`�
 
 | 항목 | 값 (초기) | 비고 |
 |---|---|---|
-| 베이스 | Qwen3-14B (1순위) / 32B(비교군) | B0에서 제로샷 비교 후 확정 |
+| 베이스 | Qwen3-14B / 32B + **실행 시점 최신 오픈 릴리스**(예: Qwen3.5·Qwen3-Next 계열 등장 시 후보 포함) ★v1.4 | "Qwen3 고정" 해제 — B0에서 4기준 재선정: ⓐ SGLang 서빙+xgrammar 지원 ⓑ LLaMA-Factory QLoRA 지원(신형 아키텍처는 툴체인 지원 지연 리스크) ⓒ val 제로샷 F1 ⓓ A100 80GB 서빙·학습 동시 수용. 메모: galaxy에서 본 GPU 오류는 **열린 산문 생성** 실패 — 본 과제는 스키마 강제 좁은 추출+2패스 검증+τ 운영점이라 실패 양상이 다름. 다만 베이스 업그레이드는 B0 비용이 낮으므로 항상 후보군에 포함 |
 | 방식 | QLoRA 4-bit NF4, LoRA r=32 α=64, all-linear target | LLaMA-Factory config 커밋 |
 | 손실 | **completion-only** (출력 토큰만 loss — 프롬프트 마스킹) | 추출 SFT 표준 |
 | 시퀀스 | 2K (청크 ≤1.5K자 전제) | 청킹 덕에 짧다 — 처리량↑ |
@@ -332,8 +349,10 @@ A5  골드 분리  : val·test 배정분 CPA 검수(test 100%) 후 봉인
 ### 4.2 하네스 B — 학습 루프 (A100, F1 게이트 수렴까지 반복)
 
 ```
-B0  베이스라인 : 제로샷 Qwen 14B·32B + Claude를 val로 평가 → 비교표 1·2행
-                + 학생 크기 확정 (기본 가설: 14B 튜닝 > 32B 제로샷)
+B0  베이스라인 : ★v1.4 선행 스텝 — 최신 오픈 릴리스 웹 조사 → 후보 매트릭스(§3.4 4기준)
+                작성 → 제로샷 평가 대상 확정 (교사는 Claude 유지 — 변경 없음).
+                이후 제로샷 후보군 + Claude를 val로 평가 → 비교표 1·2행
+                + 학생 베이스 확정 (기본 가설: 중형 튜닝 > 대형 제로샷)
 ┌─ 반복 (라운드 r) ─────────────────────────────────────────┐
 │ B1  컴파일   : train → LLaMA-Factory 포맷, dataset_v{r} 태깅            │
 │ B2  학습     : §3.4 레시피. GPU 시분할(§4.0). config·seed 커밋          │
@@ -433,7 +452,7 @@ report 수집기(shared)가 신규 연도 적재 → 하네스 C 증분 실행(�
 
 | 항목 | 정책 |
 |---|---|
-| 진입 | FINANCIALS 탭 내 `지배구조 / 밸류체인` 토글 (갤럭시→섹터→기업 동선 불변) |
+| 진입 ★v1.4 | v2 셸 EgoView(LOD-2) 상단 `지배구조 / 밸류체인` 레이어 토글([../universe/PLAN.md](../universe/PLAN.md) §5) — dossier 탭 진입은 비목표. 갤럭시→섹터→기업 동선 불변 |
 | 레이아웃 | 앵커 중앙 고정, 상류(공급처) 상단 / 하류(고객) 하단 — 물자 흐름 위→아래 |
 | 표시 한도 | 1-hop만. 사이드당 Top-N(기본 6, 5~8 튜닝) — 랭킹: tier → amount → as_of |
 | 잔여 처리 | 묶음 노드 "○○ 외 n사" → 클릭 시 사이드 패널 리스트 (그래프 확장 금지) |
@@ -463,6 +482,8 @@ report 수집기(shared)가 신규 연도 적재 → 하네스 C 증분 실행(�
 ### Phase V1 — T1 엣지 + 뷰 v1 (GPU 무관 · 화면 검증 선행)
 - [ ] 정형 파서 3종: 특수관계자 주석(금액) / 단일판매·공급계약 수시공시 / 타법인출자현황
 - [ ] `ValueChainEdge` T1 적재(멱등 upsert) + `export.py` → valuechain.json
+- [ ] ★v1.4 하네스 V-1 계약 체커를 valuechain.json에 확장 (스키마·참조 무결·멱등 —
+      [../universe/PLAN.md](../universe/PLAN.md) §5.5, export 구현과 같은 브랜치에서 동시 작성)
 - [ ] integration에 §5 명세 전달 → 밸류체인 토글 뷰 v1 (T1만으로 렌더 검증)
 - [ ] 게이트: 반도체 앵커 3사(삼성전자·SK하이닉스·소재주 1) 화면 QA 통과
 
@@ -493,7 +514,8 @@ report 수집기(shared)가 신규 연도 적재 → 하네스 C 증분 실행(�
 
 | 리스크 | 대응 |
 |---|---|
-| shared 승격이 galaxy 파이프라인을 깨뜨림 | V0 마이그레이션에 회귀 확인 명시. 경로 상수 1곳(modules/report/db.py) 집중 관리 |
+| shared 승격이 galaxy 파이프라인을 깨뜨림 | V0 마이그레이션에 회귀 확인 명시. ★v1.4 실측: 경로 참조는 1곳이 아니라 코드 4곳+테스트 1곳+문서 5곳(§2.1 목록) — 일괄 변경 + grep 잔존 0건 게이트 |
+| GPU 접속 정보가 공개 저장소에 노출 (★v1.4 발견) | `modules/report/llm.py`의 docstring·오류 메시지에 서버 IP·계정 평문 하드코딩 — V0 이전 별도 브랜치(`fix/report-llm-secrets`)에서 환경변수로 이전·제거 (shared/config.py:30 "SSH 접속정보 기재 금지" 원칙 위반 해소) |
 | "정본=모듈 로컬" 원칙과의 충돌 | 리더 결정(D11)으로 공식 예외 — ARCHITECTURE·루트 CLAUDE.md 명문화가 V0 선행 조건 |
 | 코스닥 중소형사 공시 품질(서술 부실·비표준 표기) | 하드 네거티브에 코스닥 표기 과표집 + LinkFailQueue 수동 보정 루프(M2)로 흡수 |
 | 공급계약 공시 상대방 "비공개" 다수 | 익명 엣지로만(카운트 기여). T1 한계는 T2가 보완 |
