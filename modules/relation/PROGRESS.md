@@ -2,6 +2,53 @@
 
 > `/check` skill 실행 시 아래 형식으로 자동 기록됩니다.
 
+## 2026-07-21 — V0+U0 착수 (전 상장사 확장 · 브랜치 feat/relation-universe-v0)
+- **작업**: universe/valuechain PLAN.md 재검토(코드 실측 보정, v1.4/v1.1) 승인 후
+  V0(shared 승격+스키마)·U0(레지스트리+시총+섹터) 연속 실행. §6.1 드라이버 절차대로
+  체크박스 이어달리기.
+- **파일**:
+  - 보안: `modules/report/llm.py`, `scripts/monitor_eqs_batch.ps1` — GPU 서버 IP·계정 평문 제거
+  - V0 shared 승격: `shared/data/reports.db`(이동) + 경로 10곳(`modules/report/db.py` 외
+    3파일, 테스트 1, 에이전트/스킬 문서 4+미러) + 루트 `CLAUDE.md`·`docs/ARCHITECTURE.md`
+    §2·§3.5 예외 명문화
+  - V0 스키마: `storage/models.py` — CompanyRegistry·CompanyAlias·ValueChainEdge·
+    SectorIOEdge·VcChunk·VcPipelineState·LinkFailQueue 7테이블 신설 +
+    RelationLocal에 status/superseded_by/rcept_no + UNIQUE 인덱스 (추가식,
+    기존 50노드/93엣지 무손실)
+  - U0 신규: `universe/registry.py`, `universe/marketcap.py`, `universe/sectors.py`,
+    `universe/data/ksic_sector_map.csv`
+  - `modules/relation/ingest/dart.py` — `fetch_dart_stock_to_corp_map()` 분리(재사용)
+  - `modules/report/data/corps.csv` — 48→2,651행 확장(기존 48행 tier/cluster 보존)
+  - `tests/report/test_report_pipeline.py` — `test_corps_csv_48`→`_full_universe` 개정
+- **테스트**: report 43/43 · relation 114/114 PASS (전부 회귀, 신규 유닛테스트는 후속)
+- **U0 게이트 판정**:
+  - ✅ registry ≥ 2,500 → **2,651사** (KOSPI 833 + KOSDAQ 1,818)
+  - ✅ 섹터 미매핑 0 → **0건** (528 고유 KSIC 코드 → 25섹터, 전량 매핑)
+  - ⚠️ KOSPI 상위 200 vs KOSPI200 지수 교집합 ≥90% → **수치 미검증**: pykrx·Naver
+    지수 페이지 둘 다 이 환경에서 접근 실패(외부 서비스 제약, 아래 참조).
+    대신 상위 40개 수기 대조 — 전부 실제 잘 알려진 블루칩(삼성전자·SK하이닉스·
+    현대차·KB금융 등)이고 ETN/이상치 혼입 없음 확인. **정량 게이트는 열린 채로 둠**
+    — 추후 접근 가능한 지수 소스 확보 시 재검증 필요.
+  - ✅ galaxy 파이프라인 회귀 무손상 → PASS (43/43 + check_golden 005930 PASS)
+- **도메인 메모**:
+  - **pykrx 전면 미작동**: OTP/세션 기반 KRX 호출이 이 환경에서 전부 `LOGOUT`/빈
+    응답으로 실패(티커목록·시총·지수 구성종목 전부). 원인은 세션 흐름 문제로 추정
+    (기본 홈페이지는 200 응답). **대체 경로 확정**: 상장목록=KIND 정적 다운로드
+    (`kind.krx.co.kr/corpgeneral/corpList.do`), 시총=네이버금융 시가총액순 페이지
+    (정렬·페이지네이션, 인증 불요) — 둘 다 실측 100% 매칭률로 검증됨.
+  - **KIND 원본 데이터에 중복 행 37건**(동일 종목코드 2회 등장) — corp_code 기준
+    upsert로 자연 해소, 별道 처리 불필요.
+  - **KSIC 매핑 v1의 알려진 단순화**: 2차전지·디스플레이는 KSIC 고유 division이
+    아니라 각각 26(전자부품)·20(화학)에 흡수됨 — 필요시 U2에서 상품명 휴리스틱
+    보강 검토.
+  - **report 수집 배치**: 2,651사 5개년 원문 수집을 백그라운드 개시(idempotent,
+    DART 일 1만 건 한도 내 3~5일 예상). 이 세션 종료 시점 진행 상황은 `shared/data/
+    reports.db`의 `report_raw` 행 수·distinct ticker로 확인(다음 세션이 자동 이어감
+    — corps.csv 순회 로직 자체가 already-collected 스킵).
+  - **다음 세션**: report 수집 배치 진행 확인 → U1(DART 2종 전수 확장·FTC 스타
+    전환·filters Registry 교체·V-1 계약 체커) 착수. universe/valuechain PLAN.md
+    §6.0 순서 그대로 이어감(계획 재수립 불필요).
+
 ## 2026-04-20 (오후 — viewer iteration 최종 /check)
 - **작업**: 최근 5커밋(viewer 평행 엣지 offset·동적 계산·multi-layer 버그픽스·UI/UX agent) 누적 리뷰 + Critical/Suggestion 반영
 - **파일**:
