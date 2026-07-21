@@ -86,7 +86,7 @@ import os
 import sqlite3
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
-_DB = os.path.join(_HERE, "data", "reports.db")
+_DB = os.path.join(os.path.dirname(os.path.dirname(_HERE)), "shared", "data", "reports.db")
 JO = 1_000_000_000_000  # 원 → 조 환산
 WINDOW = 5  # 최근 5개년
 

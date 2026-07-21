@@ -33,7 +33,7 @@ PRD 상세: docs/초기PRD.md
 ## 폴더 규칙
 공용 폴더 (프로젝트 리드만 수정):
 - .codex/: Skills, Agents, Settings
-- shared/: 환경변수(config.py, 활성) + 미래 운영 DB 스키마(models.py, 현재 미사용)
+- shared/: 환경변수(config.py, 활성) + 미래 운영 DB 스키마(models.py, 현재 미사용) + `data/reports.db`(2026-07-21 승격 — 아래 예외 참조)
 - docs/: 기초 뼈대 문서만 — 아키텍처·PRD·온보딩·머지 절차 (실행 계획·목업은 두지 않음)
 - design/: 디자인 정본 — 프로토타입 원형(prototypes/)·제작 사양서. 디자인 규칙 SSOT는 루트 DESIGN.md
 - 실행 계획(plan/spec)은 실행되는 폴더에 둔다 (예: integration/dossier/DOSSIER_TABS_PLAN.md, modules/relation/PLAN.md)
@@ -48,6 +48,13 @@ PRD 상세: docs/초기PRD.md
 - 미래 백엔드 api/ (FastAPI·RAG·learning)는 현재 미구현 — 구축 시 생성 (docs/AI_DIRECTION_PLAN.md 참조)
 
 데이터 정본은 모듈별 로컬 SQLite. 전체 DB 토폴로지: docs/ARCHITECTURE.md
+
+> ⚠️ **공식 예외 (2026-07-21, 리더 결정)**: `reports.db`만 `shared/data/`가 정본이다 —
+> relation 모듈의 밸류체인·지배구조 확장이 report의 사업보고서 원문을 read-only로 읽어야
+> 하는데, 자체 재수집은 3중 수집 부채(이슈 #43)를 반복하기 때문. 쓰기 소유는 report
+> 모듈 단독, 그 외는 read-only. 다른 모듈의 로컬 SQLite는 이 예외와 무관 — 여전히
+> 각자 모듈 폴더 안이 정본. 상세: docs/ARCHITECTURE.md §2 예외 노트.
+
 모듈 간 연결: 데이터 모듈끼리는 import 금지. integration만 예외(타 모듈 read-only)
 
 > Codex 미러(AGENTS.md·.agents/skills/)는 `scripts/sync_codex.py`로 자동 생성 — 미러를 직접 수정하지 말 것. 원본만 고친 뒤 스크립트 재실행.

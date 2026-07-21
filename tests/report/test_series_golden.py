@@ -14,7 +14,7 @@ from modules.report.series import build_series
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
 _ROOT = os.path.abspath(os.path.join(_HERE, "..", ".."))
-_DB = os.path.join(_ROOT, "modules", "report", "data", "reports.db")
+_DB = os.path.join(_ROOT, "shared", "data", "reports.db")
 _GOLDEN = os.path.join(_ROOT, "integration", "dossier", "data", "galaxy_005930.json")
 
 # 코드가 채워야 하는 키(주석·영year 의존 제외)

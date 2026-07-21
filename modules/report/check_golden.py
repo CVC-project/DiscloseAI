@@ -370,7 +370,7 @@ def check(ticker: str, strict: bool = False) -> list[str]:
     # ── 7) 주석 라우팅 원장 — "모든 실주석이 처리됐는가" (사용자 요구: 전 주석 완전성) ──
     # reports.db가 있으면: DB 주석 전수가 ledger에 있고, MISSING 0, excluded는 reason 필수,
     # 본문 주N 인용이 실재 주석인지(유령 인용) 검사.
-    db = os.path.join(_HERE, "data", "reports.db")
+    db = os.path.join(os.path.dirname(os.path.dirname(_HERE)), "shared", "data", "reports.db")
     rcept = (G.get("corp") or {}).get("rcept_no") or {
         "005930": "20260310002820",
         "000660": "20260317000635",
@@ -562,7 +562,7 @@ def _check_strict(ticker: str, G: dict, dives: dict) -> list[str]:
     # (잔차 bs-*-etc 흡수 금지). 있으면 카드가 APPENDIX 하단에만 남지 않고 승격(.row) 도달해야 한다.
     # 근거: 삼성은 bs-prov 충당부채·bs-dba 순확정급여·bs-dta 이연법인세 등 전 실계정이 행으로 존재.
     # V-070의 "패널 전용행 없으면 무앵커=부록 정답" 판단을 폐기(잘못된 선례가 T1에 전파됨).
-    db10 = os.path.join(_HERE, "data", "reports.db")
+    db10 = os.path.join(os.path.dirname(os.path.dirname(_HERE)), "shared", "data", "reports.db")
     corp = G.get("corp") or {}
     fy = corp.get("fiscal_year")
     if os.path.exists(db10) and fy:
