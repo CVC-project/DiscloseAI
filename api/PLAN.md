@@ -66,7 +66,7 @@
 | **C4** | api ↔ RAW 원문 | 서빙에는 원문 원본이 불필요(인용은 C2 청크에 있음). 원문 원본이 필요한 경우(재인덱싱·`report_<ticker>` 상세)는 GPU 배치나 사전 가공으로 처리 — 서빙 요청 경로에서 GPU/원본 DB를 직접 읽지 않는다 |
 | **C5** | 면책 | 모든 AI 생성 응답에 면책 필드를 미들웨어가 강제 부착. "과거 통계·공시 기반 참고 정보" 문구, "투자 조언" 표현 금지(루트 CLAUDE.md 면책 규칙) |
 
-## 4. 백엔드 현황 — GPU 서버 실사 결과 (2026-07-20)
+## 4. 백엔드 현황 — GPU 서버 실사 결과 (2026-07-20, 2026-07-21 재실사로 일부 정정)
 
 읽기 전용 SSH로 실측(리더 개인 임차 GPU 서버, A100-SXM4-80GB — 접속 정보는 로컬 세션 메모리에만 보관, 공개 저장소엔 미기재).
 
@@ -74,20 +74,20 @@
 
 | 항목 | 실측 | 계획 문서 가정과의 차이 |
 |---|---|---|
-| 디스크 구성 | **2개 분리**: 루트 96GB(49GB 사용·43GB 여유) + `/data` 197GB(857MB 사용·**187GB 여유**) | [AI_DIRECTION_PLAN §9.2](../docs/AI_DIRECTION_PLAN.md)의 "200GB" 가정은 루트(96GB)와 불일치 — `/data`가 그 여유분에 해당하는 별도 마운트로 확인됨. 합산 가용량은 가정과 유사하되 단일 디스크 아님 |
-| 사업보고서 코퍼스 | `/data/discloseai/fulltext/` **683MB, 394개 폴더**(8자리 DART `corp_code` 키) | **"전 상장사 5개년치가 이미 올라가 있다"는 전제는 사실과 다름.** 394사는 전 상장사(~2,600사)에 크게 못 미치고, 폴더 키 체계(corp_code 8자리)가 로컬 `reports.db`/`raw_cache`(ticker 6자리 키)와 달라 **report 모듈 정본 파이프라인 산출물이 아닌 별도 수집분**으로 추정. 소유자·목적 미상 — 팀원 확인 필요 |
-| `reports.db` 자체 | GPU 서버에 **없음** (`find`로 미검출) | 정본은 여전히 로컬(`modules/report/data/reports.db`, 649MB, gitignored) 1곳뿐 |
-| 벡터 인덱스·임베딩 산출물 | **없음** (`*embed*`·`*vector*`·`*.faiss`·`chroma`·`qdrant` 전부 0건) | RAG 임베딩 작업은 아직 착수되지 않은 상태로 확인됨 — C2 계약은 실물 대조 없이 설계만 확정 |
-| `/data/discloseai/workspace/` | 98MB, git 저장소 아님. relation·disclosure·financial DB 사본 포함 | origin에 새로 확인된 `feat/eqs-v3-calibration-integration` 브랜치 관련 임시 작업공간으로 추정(미검증) |
-| `/data/discloseai/profiles/` | `CORPCODE.xml`(29MB)·`company_profiles.json`·`krx_listed_tickers.json` | 기업 마스터 데이터 일부 — valuechain `CompanyRegistry`(§2.2) 준비 자산일 가능성 |
-| SGLang 서빙 상태 | **가동 중** — `Qwen/Qwen3-32B-AWQ`, port 30000, PID 4896, 부팅 이후(Jul12) 연속 추정 | [메모 기록](../.claude 세션 메모 — GPU 서버 세팅)의 "재부팅 시 수동 재기동 필요"와 별개로 현재는 살아있음. 재기동 스크립트는 여전히 systemd 미영속화 상태로 확인 필요 |
-| 홈 백업 | `~/backups/discloseai/discloseai_fulltext_20260713_145428.tar.gz` — `/data/discloseai/fulltext/`와 동일 백업으로 추정(2026-07-13) | fulltext 컬렉션이 최소 1회 백업된 이력은 있음 |
+| 디스크 구성 | **2개 분리**: 루트 96GB(2026-07-20 49GB → 2026-07-21 57GB 사용) + `/data` 197GB(856MB 사용·**187GB 여유**, 변동 없음) | [AI_DIRECTION_PLAN §9.2](../docs/AI_DIRECTION_PLAN.md)의 "200GB" 가정은 루트(96GB)와 불일치 — `/data`가 그 여유분에 해당하는 별도 마운트로 확인됨. 합산 가용량은 가정과 유사하되 단일 디스크 아님. 루트 사용량 증가는 §4.1 후속 정정 참조 |
+| 사업보고서 코퍼스 ⚠️정정 | `/data/discloseai/fulltext/` **683MB, 95개 폴더**(8자리 DART `corp_code` 키) — 2026-07-20 실사 시점엔 394개 폴더였으나 **2026-07-21 재실사에서 95개로 확인**. 원인: `/data/discloseai/manifests/eqs_v3_raw_recovery_95.log`에 "raw recovery targets=95 years=2021~2025"로 명시된, 95개사 목록과 정확히 일치 | **"전 상장사 5개년치가 이미 올라가 있다"는 전제는 여전히 사실과 다름.** 나아가 이 폴더는 **고정 코퍼스가 아니라 `/data/discloseai/workspace/DiscloseAI-eqs-v3`(EQS v3 보정 워크스페이스)가 실시간으로 수집·재구성 중인 임시 산출물**로 확인됨 — 394라는 수치는 그 작업 도중의 스냅샷이었을 뿐. 폴더 키 체계(corp_code 8자리)도 로컬 `reports.db`/`raw_cache`(ticker 6자리 키)와 달라 report 모듈 정본 파이프라인 산출물이 아님. **relation/universe 계획(전 상장사 지배구조·밸류체인 원문 원천)의 데이터 소스로 이 디렉터리를 재사용할 수 없음** — 목적이 다르고(EQS 보정용) 개수가 유동적 |
+| `reports.db` 자체 | GPU 서버에 **없음** (`find`로 미검출, 2026-07-21 재확인) | 정본은 여전히 로컬(`modules/report/data/reports.db`, 649MB, gitignored) 1곳뿐 |
+| 벡터 인덱스·임베딩 산출물 | **없음** (`*embed*`·`*vector*`·`*.faiss`·`chroma`·`qdrant` 전부 0건, 2026-07-21 재확인) | RAG 임베딩 작업은 아직 착수되지 않은 상태로 확인됨 — C2 계약은 실물 대조 없이 설계만 확정 |
+| `/data/discloseai/workspace/` 및 신규 하위 산출물 | `DiscloseAI-eqs-v3/`(98MB, git 저장소 아님) + 2026-07-21 재실사에서 추가 확인된 `/data/discloseai/eqs/`(calibration json)·`financial/`(panels json, 최대 11MB)·`fulltext_external/`(1개사, 540KB)·`manifests/`(배치 로그·pid) | `feat/eqs-v3-calibration-integration` 브랜치의 EQS v3 보정 파이프라인 산출물로 확인(2026-07-16~20 배치 로그 다수). fulltext의 394→95 변화도 이 파이프라인 활동의 결과 — relation/valuechain과 무관한 별도 목적 워크스페이스 |
+| `/data/discloseai/profiles/` | `CORPCODE.xml`(29MB)·`company_profiles.json`·`krx_listed_tickers.json` | 기업 마스터 데이터 일부 — valuechain `CompanyRegistry`(§2.2) 준비 자산일 가능성 (미변경) |
+| SGLang 서빙 상태 | **가동 중** — `Qwen/Qwen3-32B-AWQ`, port 30000, PID 4896, 부팅(Jul12) 이후 2026-07-21 재확인 시점까지 연속 가동 확인 | [메모 기록](../.claude 세션 메모 — GPU 서버 세팅)의 "재부팅 시 수동 재기동 필요"와 별개로 현재는 살아있음. 재기동 스크립트는 여전히 systemd 미영속화 상태로 확인 필요 |
+| 홈 백업 | `~/backups/discloseai/discloseai_fulltext_20260713_145428.tar.gz` — `/data/discloseai/fulltext/`와 동일 백업으로 추정(2026-07-13) | fulltext 컬렉션이 최소 1회 백업된 이력은 있음(단, 위 정정대로 이 컬렉션 자체가 EQS 임시 산출물) |
 
 ### 4.2 결론 및 후속 조치
 
 - **서빙은 GPU와 분리(§2 결정) → 이 실사 결과가 서빙을 막지 않는다.** 코퍼스·인덱스가 GPU에 부분적이거나 없다는 사실은 **인덱싱(오프라인 준비)**의 시작점 문제일 뿐, **서빙(Supabase+Vercel)**과는 독립. 인덱스는 백지(0건)라 §6.3 임베딩 모델을 지금 자유롭게 고를 수 있는 **오히려 좋은 타이밍**.
-- **필수 확인 사항 (팀원 협의 — 인덱싱 착수 전 선행)**: `/data/discloseai/fulltext/`(394사, corp_code 키)의 정체 — ① 누가 언제 무슨 목적으로 수집했는지 ② report 모듈 정본과의 관계(독자 수집이면 이중 정본 리스크 — 데이터 정본 원칙 위반 소지) ③ 재사용 가능하면 임베딩 인덱싱의 입력으로 활용, 아니면 report 수집기로 재수집. (이 코퍼스는 **인덱싱 입력**일 뿐 서빙 저장소가 아니므로, 정체 확인이 서빙 착수를 막지는 않음)
-- **디스크 예산 재확인**: `/data`(197GB, 187GB 여유)를 RAW 코퍼스·배치 작업·어댑터 공간으로 사용. valuechain 계획의 "200GB" 표현은 실측상 `/data` 마운트를 가리키는 것으로 정정. (서빙 벡터는 GPU가 아니라 Supabase에 적재 — §5)
+- **`/data/discloseai/fulltext/`(및 형제 산출물 eqs·financial·fulltext_external·manifests) 정체는 2026-07-21 재실사로 해소됨** — EQS v3 보정 워크스페이스의 임시 산출물로 확인, report 모듈 정본과 무관. **인덱싱·relation/universe 확장의 입력으로 재사용하지 않는다** — report 수집기로 전 상장사를 새로 수집한다(valuechain PLAN V0 / [relation/universe/PLAN.md](../modules/relation/universe/PLAN.md) U0).
+- **디스크 예산 재확인**: `/data`(197GB, 187GB 여유, 변동 없음)를 RAW 코퍼스·배치 작업·어댑터 공간으로 사용. valuechain 계획의 "200GB" 표현은 실측상 `/data` 마운트를 가리키는 것으로 정정. (서빙 벡터는 GPU가 아니라 Supabase에 적재 — §5). 루트 디스크(49→57GB)는 EQS v3 워크스페이스 활동으로 증가 중이라 여유(43→34GB)가 줄고 있음 — 지속 증가 시 워크스페이스 소유자에게 정리 확인 필요.
 
 ## 5. 데이터 정본·저장 계층 (2계층)
 
