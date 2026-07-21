@@ -481,24 +481,35 @@ report 수집기(shared)가 신규 연도 적재 → 하네스 C 증분 실행(�
 - [ ] CompanyAlias 초기 구축 (DART 사명변경 이력 자동 이관) — 미착수(0행)
 
 ### Phase V1 — T1 엣지 + 뷰 v1 (GPU 무관 · 화면 검증 선행)
-- [ ] 정형 파서 3종: **특수관계자 주석(금액) 완료**(`extract/related_party.py`, 2026-07-21 —
+- [x] **정형 파서 2종으로 확정**(리더 결정, 2026-07-21 — 아래 두 결정 참조):
+      **특수관계자 주석(금액) 완료**(`extract/related_party.py`, 2026-07-21 —
       매출/매입 거래금액, 당기만, 실제 삼성전자 공시 샘플 기반 pytest 13건 PASS) /
       **단일판매·공급계약 수시공시 완료**(`extract/supply_contract.py`, 2026-07-21 — DART
       엔드포인트 조사 결과: 전용 구조화 API 없음, `list.json`(pblntf_detail_ty=I001) +
-      `document.xml` 파싱. 실측 발견: 계약상대방 다수가 영업기밀로 비공개(§7 리스크 기적중 —
-      "익명 엣지"는 현 스키마(dst_corp NOT NULL)로 표현 불가해 링킹 성공분만 엣지화,
-      실패분은 카운트만. 실제 공시 2건 fixture 기반 pytest 5건 PASS) /
-      타법인출자현황(U1 `otrCprInvstmntSttus` RelationRaw 재사용 가능 — **설계 보류**:
-      ValueChainEdge.edge_type이 supply/customer/raw_material/competition인데 지분투자는
-      이 중 어디에도 자연히 대응 안 됨, RelationLocal의 governance investment 레이어와의
-      중복 표현 위험도 있어 리더 판단 필요. 다음 세션 재검토)
+      `document.xml` 파싱. 실측 발견: 계약상대방 다수가 영업기밀로 비공개(§7 리스크 기적중).
+      실제 공시 2건 fixture 기반 pytest 5건 PASS)
+  - **리더 결정 A — 타법인출자현황은 3번째 T1 파서로 만들지 않는다.** 지분투자
+    데이터는 U1에서 이미 RelationLocal(거버넌스 레이어)로 완전히 표현됨.
+    ValueChainEdge.edge_type(supply/customer/raw_material/competition)은 거래관계용이라
+    지분율이 자연히 대응하지 않고, 억지로 끼워 넣으면 U-D14가 지키려는 "거버넌스 vs
+    밸류체인 문법 분리"를 파서 레벨에서 다시 깨뜨림. RelationRaw 재사용 아이디어 폐기
+    — 밸류체인 T1은 정형 파서 2종이 최종 스코프.
+  - **리더 결정 B — 익명 엣지 스키마 확장은 T2로 이연, 지금은 안 함.** T1의 가치는
+    정밀·고신뢰(§0 기술 목표)인데 익명 항목은 그 반대라 스키마를 넓혀 T1에 섞으면
+    등급의 의미가 흐려짐. §7 리스크의 "카운트 기여" 취지는 현재도 LinkFailQueue
+    누적 + apply() 카운터(`link_failed`/`no_counterparty`)로 약하게 충족됨(어떤
+    표기가 실패했는지 빈도까지 추적 가능). T2는 confidence·운영점(τ) 스키마를
+    어차피 새로 설계해야 하므로, 익명 표현은 그때 한 번에 설계해 마이그레이션
+    중복을 피한다. `dst_corp NOT NULL` 유지.
 - [x] `ValueChainEdge` T1 적재(멱등 upsert) + `export.py` → valuechain.json — 코드·pytest 완료
       (특수관계자 주석 1종 기준). **실 코퍼스 전량 실행은 보류** — DART 5개년 백필이 relation.db에
       장기 트랜잭션 쓰기 중이라 §2.1 "장기 배치 직렬 실행 원칙" 위반 회피, 백필 완료 후 실행
-- [ ] ★v1.4 하네스 V-1 계약 체커를 valuechain.json에 확장 (스키마·참조 무결·멱등 —
-      [../universe/PLAN.md](../universe/PLAN.md) §5.5, export 구현과 같은 브랜치에서 동시 작성) —
-      `test_export_json_contract_shape`가 스키마 형태 검증의 출발점(참조 무결성·멱등 export
-      diff 0은 아직 미구현, 파서 3종 완료 후 정식 V-1 스위트로 승격)
+- [x] ★v1.4 하네스 V-1 계약 체커를 valuechain.json에 확장 완료
+      (`test_v1_contract_checker.py`, 2026-07-21) — 스키마 형태(`test_export_json_contract_shape`)
+      + 참조 무결성(엣지 src/dst 전원 CompanyRegistry 실존) + 자연키 중복 0(3회 재실행) +
+      멱등 export(연속 호출 바이트 단위 diff 0, 파서 재실행 후에도 불변) + 근거 노출
+      (provenance·rcept_no 전 엣지 필수) = pytest 4건 전부 PASS. 파서 2종 확정(위 참조)에
+      맞춘 정식 V-1 스위트 완성 — [../universe/PLAN.md](../universe/PLAN.md) §5.5 준용
 - [ ] integration에 §5 명세 전달 → 밸류체인 토글 뷰 v1 (T1만으로 렌더 검증)
 - [ ] 게이트: 반도체 앵커 3사(삼성전자·SK하이닉스·소재주 1) 화면 QA 통과
 
