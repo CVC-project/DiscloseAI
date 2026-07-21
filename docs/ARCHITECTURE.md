@@ -67,7 +67,7 @@
 | Sandbox / Hooks | 활성 | 미설정 (Permissions만) |
 | 면책 로직 | `api/middleware/safety.py` | **미구현** (향후 백엔드 구축 시) |
 
-> `shared/models.py`는 **미래 운영(Supabase) 이관 타깃**이며 현재 미사용(`PriceData`만 활성). 미래 백엔드 `api/`(RAG·learning 포함)는 [docs/AI_DIRECTION_PLAN.md](AI_DIRECTION_PLAN.md) 참조.
+> `shared/models.py`는 **미래 운영(Supabase) 이관 타깃**이며 현재 미사용(`PriceData`만 활성). 미래 백엔드 `api/`(RAG·learning 포함)는 [docs/AI_DIRECTION_PLAN.md](AI_DIRECTION_PLAN.md) 참조 — 서빙 아키텍처(프론트·미들웨어·백엔드 3계층·연결 계약·호스팅·CD 파이프라인)의 실행 계획 정본은 [api/PLAN.md](../api/PLAN.md)(2026-07-20, 문서화 완료·코드 미착수).
 
 ---
 
@@ -119,7 +119,7 @@ yfinance ─────→  modules/price/       ──→  price.db (price_loc
 | 폴더 | 역할 |
 |------|----------|
 | `integration/` | 4개 모듈 산출물 교차 통합. `extract_data.py`+`build_data.py`(데이터 파이프라인) · `v2/`(React, **유일 서빙 UI**) · `data/`(공유 JSON 4종) · `dossier/`(기업 상세 3탭 — 이슈 #2) · `index.html`(진입점→v2) · 규약 `integration/CLAUDE.md`. (v1은 2026-07-13 폐지 — git 이력 보존) |
-| `api/` *(미구현)* | 미래 백엔드 (FastAPI·RAG·learning). 현재 폴더 없음 — 구축 시 생성 |
+| `api/` *(코드 미구현)* | 미래 백엔드 (FastAPI·RAG·learning). 실행 계획 정본은 [api/PLAN.md](../api/PLAN.md) — 코드 구현은 후속 세션 |
 
 ---
 
