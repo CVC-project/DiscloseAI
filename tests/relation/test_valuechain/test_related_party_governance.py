@@ -14,6 +14,7 @@ from modules.relation.valuechain.extract.related_party import (
     apply_governance,
     parse_governance_categories,
     parse_governance_html_rows,
+    parse_governance_transaction_header,
     parse_governance_wide_row,
 )
 
@@ -36,6 +37,11 @@ FIXTURE_KTNG = (
     Path(__file__).parent.parent
     / "fixtures"
     / "valuechain_related_party_governance_ktng.html"
+)
+FIXTURE_SAMSUNG_ELEC = (
+    Path(__file__).parent.parent
+    / "fixtures"
+    / "valuechain_related_party_governance_samsung_electronics.html"
 )
 
 
@@ -147,6 +153,28 @@ def test_parses_html_rows_variant():
 def test_html_rows_returns_empty_when_no_matching_table():
     assert parse_governance_html_rows("<table><tr><th>foo</th></tr></table>") == []
     assert parse_governance_html_rows(None) == []
+
+
+def test_parses_transaction_header_variant():
+    """삼성전자 실제 공시(2026-07-22 수집, rcept 20260310002820) — 별도 거버넌스
+    리스팅 표가 없고, 거래금액 표의 COLSPAN 카테고리 헤더 + 리프 회사명 헤더에
+    정보가 인코딩돼 있는 경우. text_html의 COLSPAN을 grid로 복원해 짝짓는다."""
+    results = parse_governance_transaction_header(
+        FIXTURE_SAMSUNG_ELEC.read_text(encoding="utf-8")
+    )
+    by_name = {r["counterparty"]: r["category"] for r in results}
+    assert by_name["삼성에스디에스㈜"] == "관계기업 및 공동기업"
+    assert by_name["삼성전기㈜"] == "관계기업 및 공동기업"
+    assert by_name["삼성물산㈜"] == "그 밖의 특수관계자"
+    assert by_name["삼성이앤에이㈜"] == "대규모기업집단"
+    assert by_name["㈜에스원"] == "대규모기업집단"
+    # "기타 관계기업 및 공동기업" 같은 집계 컬럼은 특정 법인이 아니므로 제외
+    assert not any(name.startswith("기타") for name in by_name)
+
+
+def test_transaction_header_returns_empty_when_no_matching_table():
+    assert parse_governance_transaction_header("<table><tr><th>foo</th></tr></table>") == []
+    assert parse_governance_transaction_header(None) == []
 
 
 def _seed_registry(session):

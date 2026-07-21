@@ -414,6 +414,57 @@ def parse_governance_html_rows(text_html: str | None) -> list[dict]:
     return results
 
 
+# ★ 2026-07-22 삼성전자형 — 별도 거버넌스 리스팅 표 자체가 없고, 거래금액 표의
+# 컬럼 헤더(카테고리가 COLSPAN, 리프가 개별 회사명)에 카테고리 정보가 인코딩돼
+# 있다. text_md 평탄화는 COLSPAN을 셀 반복으로 뭉개 위치가 흔들리므로, 마찬가지로
+# text_html을 rowspan/colspan 그리드로 복원해 읽는다.
+def parse_governance_transaction_header(text_html: str | None) -> list[dict]:
+    """거래금액 표 컬럼 헤더에 인코딩된 카테고리(삼성전자류) → [{category, counterparty}].
+
+    "전체 특수관계자"/"특수관계자" 보일러플레이트 헤더 행을 건너뛰고, 그 다음
+    (카테고리 행, 개별회사명 행) 한 쌍을 위치로 짝짓는다. "기타 관계기업 및
+    공동기업"처럼 "기타"로 시작하는 리프 컬럼은 특정 법인이 아닌 집계 컬럼이라
+    제외(related_party.py 거래금액 파서의 기존 관례와 동일).
+    """
+    results: list[dict] = []
+    if not text_html:
+        return results
+
+    soup = BeautifulSoup(text_html, "html.parser")
+    target_table = None
+    for table in soup.find_all("table"):
+        ths = [th.get_text(strip=True) for th in table.find_all("th")]
+        if "전체 특수관계자" in ths and "특수관계자" in ths:
+            target_table = table
+            break
+    if target_table is None:
+        return results
+
+    grid = _html_table_grid(target_table)
+    idx = 0
+    while idx < len(grid):
+        row = grid[idx]
+        non_empty = [c for c in row if c]
+        if non_empty and len(set(non_empty)) == 1 and non_empty[0] in _WIDE_ROW_BOILERPLATE_LABELS:
+            idx += 1
+            continue
+        break
+    if idx + 1 >= len(grid):
+        return results
+    category_row = grid[idx]
+    name_row = grid[idx + 1]
+    if len(category_row) != len(name_row):
+        return results
+
+    for category, name in zip(category_row[1:], name_row[1:]):
+        category = category.strip()
+        name = name.strip()
+        if not category or not name or name.startswith("기타"):
+            continue
+        results.append({"category": category, "counterparty": name})
+    return results
+
+
 def _upsert_edge(session, **fields) -> None:
     """UNIQUE(src_corp, dst_corp, edge_type, as_of, rcept_no) upsert (D12 멱등)."""
     key = {
@@ -557,6 +608,13 @@ def apply_governance(session=None, sections: list[dict] | None = None) -> dict:
                 + parse_governance_wide_row(row["text_md"])
                 + parse_governance_html_rows(row.get("text_html"))
             )
+            if not governance_items:
+                # 별도 거버넌스 리스팅 표가 아예 없는 노트(삼성전자류)에 한해서만
+                # 거래금액 표 컬럼 헤더에서 폴백 추출 — 이미 위에서 잡힌 노트에
+                # 같은 표를 이중으로 다시 읽어 detail을 덮어쓰지 않도록 방지.
+                governance_items = parse_governance_transaction_header(
+                    row.get("text_html")
+                )
             for item in governance_items:
                 corp_code = resolve_corp(
                     item["counterparty"], name_to_corp, session, sample_chunk_id=rcept_no
