@@ -89,6 +89,22 @@ def cmd_audit(args):
     raise NotImplementedError("audit: Phase 2 이후 구현")
 
 
+def cmd_valuechain(args):
+    step = args.step
+    if step == "parse-related-party":
+        from modules.relation.valuechain.extract import related_party
+
+        result = related_party.apply()
+        print(f"특수관계자 주석 파싱 결과: {result}")
+    elif step == "export":
+        from modules.relation.valuechain import export
+
+        result = export.export_json()
+        print(f"valuechain.json 생성: {len(result['edges'])}건 엣지 (as_of={result['as_of']})")
+    else:
+        raise ValueError(f"unknown valuechain step: {step}")
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="python -m modules.relation",
@@ -126,6 +142,12 @@ def build_parser() -> argparse.ArgumentParser:
     sub.add_parser("audit", help="무결성 체크 (도메인 검증)").set_defaults(
         func=cmd_audit
     )
+
+    p_valuechain = sub.add_parser("valuechain", help="밸류체인 레이어(T1) 파이프라인")
+    p_valuechain.add_argument(
+        "step", choices=["parse-related-party", "export"]
+    )
+    p_valuechain.set_defaults(func=cmd_valuechain)
 
     return parser
 

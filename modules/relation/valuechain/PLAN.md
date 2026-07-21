@@ -471,19 +471,27 @@ report 수집기(shared)가 신규 연도 적재 → 하네스 C 증분 실행(�
 ## 6. 실행 로드맵 (수집 전량 선행 · 추출은 섹터 증분 — D3·D10)
 
 ### Phase V0 — 기반 + shared 승격
-- [ ] **reports.db → shared/data/ 승격 마이그레이션** (§2.1 체크리스트 4항 — galaxy 회귀 확인 포함)
-- [ ] report 수집기 전 상장사 확장 → 우선 섹션(사업의내용·연결주석) 전량 수집 개시 (3~5일 배치)
-- [ ] `valuechain/` 패키지 스켈레톤 (`chunker/ extract/ train/ evaluate.py export.py`) + storage 스키마(§2.2 — UNIQUE 제약·멱등 테스트 포함)
-- [ ] CompanyRegistry 전 상장사 적재 + KSIC↔산업연관표 매핑(auto) + M1 동기화 루프 가동
-      — **universe 컬럼(market_cap_krw·cap_asof·sector_id·universe_tier·universe_rank) 동시 반영**
+- [x] **reports.db → shared/data/ 승격 마이그레이션** (§2.1 체크리스트 4항 — galaxy 회귀 확인 포함) — 2026-07-21 완료(PROGRESS.md)
+- [x] report 수집기 전 상장사 확장 → 우선 섹션(사업의내용·연결주석) 전량 수집 개시 (3~5일 배치) — 개시함(진행 중, 2026-07-21 기준 2,259/2,651 tickers)
+- [x] `valuechain/` 패키지 스켈레톤 (`chunker/ extract/ train/ evaluate.py export.py`) + storage 스키마(§2.2 — UNIQUE 제약·멱등 테스트 포함) — 2026-07-21: storage 스키마는 V0에서 선완료, 패키지 스켈레톤(chunker/train/evaluate.py 뼈대 + extract/export.py 실구현)은 이번 세션 완료
+- [x] CompanyRegistry 전 상장사 적재 + KSIC↔산업연관표 매핑(auto) — 2,651사(U0 게이트 PASS)
+      — **universe 컬럼(market_cap_krw·cap_asof·sector_id·universe_tier·universe_rank) 동시 반영** 완료.
+      M1 정기 동기화 루프(월 1회 스케줄러)는 **미가동** — 지금까지는 1회성 sync 실행뿐
       ([../universe/PLAN.md](../universe/PLAN.md) U-D5 — 스키마 합의 후 마이그레이션 1회로 완결)
-- [ ] CompanyAlias 초기 구축 (DART 사명변경 이력 자동 이관)
+- [ ] CompanyAlias 초기 구축 (DART 사명변경 이력 자동 이관) — 미착수(0행)
 
 ### Phase V1 — T1 엣지 + 뷰 v1 (GPU 무관 · 화면 검증 선행)
-- [ ] 정형 파서 3종: 특수관계자 주석(금액) / 단일판매·공급계약 수시공시 / 타법인출자현황
-- [ ] `ValueChainEdge` T1 적재(멱등 upsert) + `export.py` → valuechain.json
+- [ ] 정형 파서 3종: **특수관계자 주석(금액) 완료**(`extract/related_party.py`, 2026-07-21 —
+      매출/매입 거래금액, 당기만, 실제 삼성전자 공시 샘플 기반 pytest 13건 PASS) /
+      단일판매·공급계약 수시공시(DART 엔드포인트 미조사 — 신규 investigate 필요) /
+      타법인출자현황(U1 `otrCprInvstmntSttus` RelationRaw 재사용 가능, 미착수)
+- [x] `ValueChainEdge` T1 적재(멱등 upsert) + `export.py` → valuechain.json — 코드·pytest 완료
+      (특수관계자 주석 1종 기준). **실 코퍼스 전량 실행은 보류** — DART 5개년 백필이 relation.db에
+      장기 트랜잭션 쓰기 중이라 §2.1 "장기 배치 직렬 실행 원칙" 위반 회피, 백필 완료 후 실행
 - [ ] ★v1.4 하네스 V-1 계약 체커를 valuechain.json에 확장 (스키마·참조 무결·멱등 —
-      [../universe/PLAN.md](../universe/PLAN.md) §5.5, export 구현과 같은 브랜치에서 동시 작성)
+      [../universe/PLAN.md](../universe/PLAN.md) §5.5, export 구현과 같은 브랜치에서 동시 작성) —
+      `test_export_json_contract_shape`가 스키마 형태 검증의 출발점(참조 무결성·멱등 export
+      diff 0은 아직 미구현, 파서 3종 완료 후 정식 V-1 스위트로 승격)
 - [ ] integration에 §5 명세 전달 → 밸류체인 토글 뷰 v1 (T1만으로 렌더 검증)
 - [ ] 게이트: 반도체 앵커 3사(삼성전자·SK하이닉스·소재주 1) 화면 QA 통과
 

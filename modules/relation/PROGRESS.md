@@ -2,6 +2,49 @@
 
 > `/check` skill 실행 시 아래 형식으로 자동 기록됩니다.
 
+## 2026-07-21 (3) — V1 착수 (valuechain 패키지 스켈레톤 + T1 파서 1/3: 특수관계자 주석)
+- **작업**: universe/valuechain PLAN.md §6.0 순서 속행. DART 5개년 백필(bfv901a08)·report
+  5개년 수집(boocv2xax) 둘 다 백그라운드 실행 중임을 확인(프로세스 alive, 2021년치 수집 중 /
+  2,259·2,651 tickers) — 계획서 지시대로 두 배치는 그대로 두고 병행 가능한 다음 항목(V1)으로 이동.
+- **정리**: `relation.db.pre-v0-backup` 삭제 — V0 마이그레이션 실측 검증 끝난 지 오래됐고
+  git 이력에 원본 보존(복구 가능 확인 후 삭제).
+- **신규 패키지**: `modules/relation/valuechain/`
+  - `__init__.py`·`chunker/__init__.py`·`train/__init__.py`·`evaluate.py` — Phase V2(GPU 착수) 전까지의
+    스켈레톤(docstring만, 착수 시점·의존관계 명시)
+  - `extract/reports_source.py` — shared/data/reports.db 읽기 전용 접근. **`modules.report` 패키지를
+    import하지 않고 sqlite3 read-only URI로 직결** — "데이터 모듈끼리 import 금지" 원칙과 D11
+    reports.db read-only 예외를 동시에 만족시키는 설계(문서화된 전례 없어 신규 결정)
+  - `extract/linking.py` — CompanyRegistry+CompanyAlias 기반 엔티티 링킹 공용 유틸(정규화는
+    common/names.py 재사용), 실패분 LinkFailQueue 빈도 누적(M2 루프 입력)
+  - `extract/related_party.py` — **T1 파서 1/3: 특수관계자 주석**. 실측 확인 10종 제목으로
+    report_section 필터 → 마크다운 표 파싱(당기만) → 매출="customer"/매입="supply" 엣지 →
+    `ValueChainEdge` 멱등 upsert(UNIQUE src/dst/type/as_of/rcept_no)
+  - `export.py` — `ValueChainEdge`(status=active) → `data/valuechain.json`(§2.3 계약. edge별
+    as_of 포함 — 최상위 단일 as_of로는 연도 스냅샷 다중 active를 표현 못 하는 실측 보정)
+  - `python -m modules.relation valuechain {parse-related-party|export}` CLI 서브커맨드 추가
+- **표 구조 실측(삼성전자 5개년 샘플)**: DART XBRL→마크다운 변환이 계층형 컬럼 헤더의 콜스팬
+  정보를 소실시켜, 상위 그룹 헤더 행(예: "관계기업 및 공동기업")이 리프 헤더보다 셀 수가 적다 —
+  "이 표 블록에서 첫 칸이 빈 마지막 행"을 리프(개별 상대회사명) 헤더로 식별하는 규칙으로 해결.
+  "...공시, 합계" 표는 리프 헤더 자체가 카테고리명이라(개별 법인명 아님) 제목으로 통째 스킵.
+  "기타 OO" 컬럼은 미상 다수의 집계라 상대회사로 취급하지 않음. "비유동자산 매입"처럼 "매입"을
+  포함하되 상거래가 아닌 라벨은 `startswith` 판정으로 오분류 방지(포함 매치 금지).
+- **실제 발견한 버그·수정**: 최초 구현은 당기/전기 마커 행 바로 다음에 표 행이 온다고 가정했으나
+  실제로는 마커 행과 헤더 행 사이에 빈 줄이 하나 끼어 있어(실측 고정 패턴) 모든 블록이 0줄로
+  파싱되는 버그 발생 — pytest 8건 중 3건이 결과 0건으로 실패해 발견, 마커 직후 빈 줄 스킵 로직
+  추가로 수정. 회귀 방지용 pytest가 이미 이 케이스를 커버(모든 assertion이 실제 값 대조).
+- **테스트**: `tests/relation/test_valuechain/` 신설 — 파서 단위 8건(실제 삼성전자 공시 샘플
+  fixture) + apply/export 통합 5건(in_memory_session, 엔티티 링킹·LinkFailQueue·멱등·export
+  계약 형태·superseded 제외) = 13건 전부 PASS. 전체 회귀 135/135(기존 122 + 신규 13) PASS.
+- **보류(의도적)**: 실 코퍼스 전량 `parse-related-party` 실행은 이번 세션에 하지 않음 — DART
+  5개년 백필이 relation.db에 장기 트랜잭션 쓰기 중이라 §2.1 "장기 배치 직렬 실행 원칙" 위반
+  회피(SQLite 단일 쓰기 락 재현 이력 있음, U1 세션 기록 참조). 백필 완료 후 실행.
+- **미완료(정직하게 기록)**: T1 파서 나머지 2종(단일판매·공급계약 수시공시는 DART 엔드포인트
+  미조사, 타법인출자현황은 미착수) — 다음 세션 계속. V-1 계약 체커는 스키마 형태 테스트만
+  있고 참조 무결성·멱등 export diff 0 검증은 파서 3종 완료 후 정식화 예정.
+- **다음 세션**: DART 백필 완료 확인(2020년치까지) → U1 재처리(filters→kifrs→dedupe) +
+  게이트 재판정 + 특수관계자 주석 실 코퍼스 실행. 병행 가능: T1 파서 2/3(단일판매·공급계약
+  수시공시 DART 엔드포인트 조사) 또는 3/3(타법인출자현황, RelationRaw 재사용 설계).
+
 ## 2026-07-21 (2) — U1 착수 (전 상장사 확장 · 스타 토폴로지 · 멱등 upsert)
 - **작업**: universe/PLAN.md §6.0 순서대로 U0 다음 U1 연속 실행 (드라이버 절차, 계획
   재수립 없음).
