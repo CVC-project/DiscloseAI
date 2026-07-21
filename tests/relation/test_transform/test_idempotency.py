@@ -89,3 +89,50 @@ def test_manual_overrides_empty_file_is_noop():
     """실제 manual_overrides.csv(주석뿐, 데이터 0행)를 로드해도 에러 없이 빈 dict."""
     overrides = filters.load_manual_overrides()
     assert overrides == {}
+
+
+def test_stale_relation_local_pruned_when_raw_source_disappears(in_memory_session):
+    """★U1 실측 버그 회귀: RelationRaw에서 사라진 관계는 RelationLocal에서도 정리(prune)돼야 한다.
+
+    재현 경위: FTC를 클리크→스타 토폴로지로 바꾼 뒤(ftc.py 수정), 예전 클리크 시절
+    RelationLocal 행(예: B↔C 직접 엣지)이 새 스타 데이터(허브 A→B, A→C)와 함께
+    영구히 남아있었다 — filters.apply()가 upsert만 하고 삭제는 하지 않았기 때문.
+    """
+    session = in_memory_session
+    session.add(CompanyRegistry(corp_code="00000001", ticker="000001", name_current="A", market="KOSPI"))
+    session.add(CompanyRegistry(corp_code="00000002", ticker="000002", name_current="B", market="KOSPI"))
+    session.add(CompanyRegistry(corp_code="00000003", ticker="000003", name_current="C", market="KOSPI"))
+
+    # 1차: "클리크" 시절 — B→C 직접 ftc 관계가 raw에 존재
+    session.add(
+        RelationRaw(source_name="000002", target_name="000003", source_type="ftc", bsns_year=2025)
+    )
+    session.commit()
+    filters.apply(session=session)
+
+    stale = (
+        session.query(RelationLocal)
+        .filter_by(source_corp="000002", target_corp="000003", source_type="ftc")
+        .one_or_none()
+    )
+    assert stale is not None, "테스트 전제 붕괴 — 1차 실행에서 B→C가 생성되지 않음"
+
+    # 2차: "스타" 시절 — B→C raw 레코드가 사라지고 A→B, A→C(허브 기준)로 교체됨
+    session.query(RelationRaw).filter_by(source_type="ftc").delete()
+    session.add(
+        RelationRaw(source_name="000001", target_name="000002", source_type="ftc", bsns_year=2025)
+    )
+    session.add(
+        RelationRaw(source_name="000001", target_name="000003", source_type="ftc", bsns_year=2025)
+    )
+    session.commit()
+    filters.apply(session=session)
+
+    # B→C(구 클리크 잔재)는 정리되고, 허브 기준 A→B/A→C만 남아야 함
+    remaining = {
+        (r.source_corp, r.target_corp)
+        for r in session.query(RelationLocal).filter_by(source_type="ftc").all()
+    }
+    assert remaining == {("000001", "000002"), ("000001", "000003")}, (
+        f"prune 실패 — 예전 관계가 남아있거나 새 관계가 누락됨: {remaining}"
+    )

@@ -106,13 +106,18 @@ def load_manual_overrides() -> dict[str, str]:
     return overrides
 
 
-def _upsert_relation_local(session, **fields) -> None:
+_MANAGED_SOURCE_TYPES = ("hyslrSttus", "otrCprInvstmntSttus", "ftc", "dart_filing")
+
+
+def _upsert_relation_local(session, **fields) -> tuple:
     """UNIQUE(source_corp, target_corp, source_type, bsns_year) 키로 upsert (★U1 멱등, U-D13).
 
     relation_type이 아니라 source_type이 키다 — kifrs.apply()가 relation_type을
     사후 재분류(ownership→subsidiary 등)하므로 relation_type은 안정적 식별자가
     아니다(models.py RelationLocal 주석 참조, 재현 확인됨). 기존 행이 있으면 갱신,
     없으면 삽입 — 재실행 시 중복·유실 없음(D12).
+
+    Returns: 이 행의 자연키 튜플(apply()가 prune 대상 판별에 사용).
     """
     key = {
         "source_corp": fields["source_corp"],
@@ -127,6 +132,7 @@ def _upsert_relation_local(session, **fields) -> None:
         existing.status = "active"
     else:
         session.add(RelationLocal(**fields, status="active"))
+    return (key["source_corp"], key["target_corp"], key["source_type"], key["bsns_year"])
 
 
 def apply(session=None) -> dict:
@@ -141,11 +147,20 @@ def apply(session=None) -> dict:
     top50 자연 필터가 E2E 단절 지점이었음(universe/PLAN.md U-D1). 삭제 후 재삽입이
     아니라 UNIQUE 키 upsert(U-D13) — 재실행해도 중복 없음.
 
+    ★U1 실측 버그 수정(2026-07-21): upsert만으로는 "예전엔 있었는데 지금 RelationRaw엔
+    없는" 행이 영원히 남는다 — 재현: FTC를 클리크→스타로 바꾼 뒤에도 예전 클리크 시절
+    RelationLocal 행(예: 006400↔009150 직접 엣지)이 새 스타 데이터와 함께 남아있었음
+    (RelationRaw는 collect()가 지우고 다시 채우지만, RelationLocal은 upsert-only라
+    원본에서 사라진 관계를 그대로 들고 있었던 것). 이번 실행에서 실제로 upsert된
+    키 집합을 추적해, 이 함수가 관리하는 4개 source_type(hyslrSttus·
+    otrCprInvstmntSttus·ftc·dart_filing) 중 RelationRaw에 더 이상 없는 행은
+    실행 끝에 정리(prune)한다.
+
     session: 주입 시 그 세션 사용(테스트용 — 닫지 않음, 커밋은 호출). None이면 로컬 relation.db.
 
     Returns:
         {'kept_ownership', 'kept_ftc', 'kept_filing',
-         'dropped_personal', 'dropped_foundation', 'dropped_unmatched'}
+         'dropped_personal', 'dropped_foundation', 'dropped_unmatched', 'pruned_stale'}
     """
     owns_session = session is None
     if owns_session:
@@ -162,7 +177,9 @@ def apply(session=None) -> dict:
         "dropped_personal": 0,
         "dropped_foundation": 0,
         "dropped_unmatched": 0,
+        "pruned_stale": 0,
     }
+    touched_keys: set[tuple] = set()
 
     try:
         raws = session.query(RelationRaw).all()
@@ -185,15 +202,17 @@ def apply(session=None) -> dict:
                 if not source_ticker:
                     counters["dropped_unmatched"] += 1
                     continue
-                _upsert_relation_local(
-                    session,
-                    source_corp=source_ticker,
-                    target_corp=target_ticker,
-                    relation_type="ownership",  # kifrs.apply()에서 재분류
-                    ratio=r.ratio,
-                    detail=f"{r.source_name} {r.ratio}% ({r.relate or ''})".strip(),
-                    source_type=r.source_type,
-                    bsns_year=r.bsns_year,
+                touched_keys.add(
+                    _upsert_relation_local(
+                        session,
+                        source_corp=source_ticker,
+                        target_corp=target_ticker,
+                        relation_type="ownership",  # kifrs.apply()에서 재분류
+                        ratio=r.ratio,
+                        detail=f"{r.source_name} {r.ratio}% ({r.relate or ''})".strip(),
+                        source_type=r.source_type,
+                        bsns_year=r.bsns_year,
+                    )
                 )
                 counters["kept_ownership"] += 1
 
@@ -213,15 +232,17 @@ def apply(session=None) -> dict:
                 # 자기 자신 출자 무시
                 if source_ticker == target_ticker:
                     continue
-                _upsert_relation_local(
-                    session,
-                    source_corp=source_ticker,
-                    target_corp=target_ticker,
-                    relation_type="ownership",
-                    ratio=r.ratio,
-                    detail=f"{r.target_name} {r.ratio}%",
-                    source_type=r.source_type,
-                    bsns_year=r.bsns_year,
+                touched_keys.add(
+                    _upsert_relation_local(
+                        session,
+                        source_corp=source_ticker,
+                        target_corp=target_ticker,
+                        relation_type="ownership",
+                        ratio=r.ratio,
+                        detail=f"{r.target_name} {r.ratio}%",
+                        source_type=r.source_type,
+                        bsns_year=r.bsns_year,
+                    )
                 )
                 counters["kept_ownership"] += 1
 
@@ -231,16 +252,18 @@ def apply(session=None) -> dict:
                     group_name = manual_overrides.get(r.target_name) or _extract_group_from_raw(
                         r.raw_response
                     )
-                    _upsert_relation_local(
-                        session,
-                        source_corp=r.source_name,
-                        target_corp=r.target_name,
-                        relation_type="ftc_group",
-                        ratio=None,
-                        detail=r.raw_response,
-                        source_type="ftc",
-                        bsns_year=r.bsns_year,
-                        group_name=group_name,
+                    touched_keys.add(
+                        _upsert_relation_local(
+                            session,
+                            source_corp=r.source_name,
+                            target_corp=r.target_name,
+                            relation_type="ftc_group",
+                            ratio=None,
+                            detail=r.raw_response,
+                            source_type="ftc",
+                            bsns_year=r.bsns_year,
+                            group_name=group_name,
+                        )
                     )
                     counters["kept_ftc"] += 1
                 else:
@@ -248,17 +271,33 @@ def apply(session=None) -> dict:
 
             elif r.source_type == "dart_filing":
                 if r.source_name in valid_tickers and r.target_name in valid_tickers:
-                    _upsert_relation_local(
-                        session,
-                        source_corp=r.source_name,
-                        target_corp=r.target_name,
-                        relation_type="dart_filing",
-                        ratio=None,
-                        detail=f"사업보고서 주석: {r.relate or ''}",
-                        source_type="dart_filing",
-                        bsns_year=r.bsns_year,
+                    touched_keys.add(
+                        _upsert_relation_local(
+                            session,
+                            source_corp=r.source_name,
+                            target_corp=r.target_name,
+                            relation_type="dart_filing",
+                            ratio=None,
+                            detail=f"사업보고서 주석: {r.relate or ''}",
+                            source_type="dart_filing",
+                            bsns_year=r.bsns_year,
+                        )
                     )
                     counters["kept_filing"] += 1
+
+        # ★U1 실측 버그 수정: RelationRaw에서 사라진(더 이상 어떤 raw 레코드도 만들지
+        # 않는) 행을 prune — 이 함수가 관리하는 4개 source_type 전체를 스캔해 이번 실행
+        # 에서 touched_keys에 없는 것만 삭제(다른 source_type·manual은 건드리지 않음).
+        stale = (
+            session.query(RelationLocal)
+            .filter(RelationLocal.source_type.in_(_MANAGED_SOURCE_TYPES))
+            .all()
+        )
+        for row in stale:
+            key = (row.source_corp, row.target_corp, row.source_type, row.bsns_year)
+            if key not in touched_keys:
+                session.delete(row)
+                counters["pruned_stale"] += 1
 
         session.commit()
     finally:
