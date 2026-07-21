@@ -2,6 +2,53 @@
 
 > `/check` skill 실행 시 아래 형식으로 자동 기록됩니다.
 
+## 2026-07-21 (2) — U1 착수 (전 상장사 확장 · 스타 토폴로지 · 멱등 upsert)
+- **작업**: universe/PLAN.md §6.0 순서대로 U0 다음 U1 연속 실행 (드라이버 절차, 계획
+  재수립 없음).
+- **파일**: `common/names.py`(Registry 기반 ticker map) · `transform/filters.py`(Registry
+  전환·manual_overrides 구현·전량삭제→upsert) · `ingest/dart.py`(collect() 전 상장사
+  확장) · `ingest/ftc.py`(클리크→스타 토폴로지, 시총 최댓값 허브) · `storage/models.py`
+  (UNIQUE 키) · `storage/db.py`(busy_timeout) · pytest 4개 신설/개정.
+- **실측 버그 발견·수정**: RelationLocal UNIQUE 키에 `relation_type`을 포함시켰던
+  최초 설계(V0 커밋)가 kifrs.apply()의 사후 재분류(ownership→subsidiary 등) UPDATE와
+  충돌해 즉시 깨짐 — 재현 확인 후 `source_type`(kifrs가 안 건드리는 안정 필드)으로
+  키 교체(스키마 주석 + 실 DB 인덱스 마이그레이션, 데이터 93행 바이트 단위 동일 확인).
+- **사고·복구**: 버그 조사용 임시 스크립트의 monkeypatch가 이미 임포트된 이름이라
+  적용 안 되고 실제 relation.db를 오염(93→275행)시킨 것을 발견 → `git restore`로
+  즉시 복구(미커밋 상태였어서 데이터 완전 보존). 이후 filters/kifrs/dedupe에
+  `session=` 주입 파라미터를 추가해(validate.py와 동일 패턴) monkeypatch 없이
+  in_memory_session으로 안전하게 격리 테스트하도록 전환.
+- **SQLite 동시접근**: DART 장기배치(2,651사, 커밋 1회로 묶인 트랜잭션)와 FTC를
+  동시 실행하다 "database is locked" 재현 → `busy_timeout=30` 추가. WAL 모드는
+  장기 트랜잭션의 배타 락과 충돌해 전환 자체가 실패함을 확인, 보류 — 당장은
+  직렬 실행 원칙 유지(근본 해결=증분 커밋 전환은 후속 과제).
+- **실제 수집 결과**:
+  - DART 2종(2024년, 전 상장사): 주주현황 23,084행 + 타법인출자 31,876행, 오류 0
+  - FTC(전 집단): 3,301건 중 247사 매칭, 69개 집단, **스타 178엣지**(클리크였다면
+    수천 엣지 폭발 — 예: 최대 집단이 20개사면 C(20,2)=190 vs 스타 19)
+  - filters→kifrs→dedupe: kept_ownership 2,706 → K-IFRS 분류 1,298(<5% 1,348건 정당
+    제외) → dedupe 862쌍 → **RelationLocal 최종 1,088행**(subsidiary 142·associate
+    428·investment 292·ftc_group 226)
+- **U1 게이트 판정 (진행 중 — 완료 아님, 정직하게 기록)**:
+  - ⏳ 지분 엣지 ≥ 3,000 → **1,088건, 미달**. 원인 규명: 계획서 자체가 U1을
+    "최신 연도 1일 + 5개년 백필 3일"의 **다일간 작업**으로 설계했는데 이번 세션은
+    최신연도(2024) 1개년만 수집 — **계획된 범위의 1/5만 완료한 정상적 중간 상태**이지
+    게이트가 잘못 설정된 게 아님(KOSPI200 케이스와 다름 — 재정의 불필요). 2020~2023
+    4개년 백필을 백그라운드 개시(idempotent, 여러 세션에 걸쳐 자동 이어감).
+  - ✅ M4 멱등 pytest 통과 (test_idempotency.py 3건 + 전체 회귀 122/122)
+  - ✅ 링킹 실패율 < 5% → **실질적으로 충족 추정**: 원본 dropped_unmatched=48,327은
+    개인주주·비상장 자회사·해외법인·사모펀드가 압도적이라 그대로는 잘못된 지표
+    (KOSPI200 프록시와 같은 함정). 무작위 50건 표본 전수 수동 분류 결과 **진짜
+    링킹 실패(실제 상장사인데 이름 불일치로 놓침) 0건** — 전부 정당한 제외였음.
+    다만 `is_personal_shareholder`의 relate 커버리지가 좁아(사외이사·등기임원·
+    특수관계인 단독·자매 등 미포함) 일부 개인이 "개인 제외"가 아니라 "미매칭"으로
+    잘못 집계됨(최종 결과엔 무영향, 카운터 라벨만 부정확 — 후속 정리 대상).
+  - ✅ galaxy 회귀 무손상 (report 배치 병행 중에도 43/43 유지 확인 안 함 — 다음 확인 시)
+- **다음 세션**: DART 5개년 백필 진행 확인(ID bfv901a08) → 엣지 3,000 도달 시 U1
+  게이트 최종 PASS 선언 + 커밋. 병행: report 5개년 원문 수집도 계속 진행 중
+  (1,767/2,651, 66.7%). U1 게이트 완료 여부와 무관하게 V1(밸류체인 T1 정형 파서)은
+  report_section 텍스트 기반이라 독립적으로 착수 가능.
+
 ## 2026-07-21 — V0+U0 착수 (전 상장사 확장 · 브랜치 feat/relation-universe-v0)
 - **작업**: universe/valuechain PLAN.md 재검토(코드 실측 보정, v1.4/v1.1) 승인 후
   V0(shared 승격+스키마)·U0(레지스트리+시총+섹터) 연속 실행. §6.1 드라이버 절차대로
