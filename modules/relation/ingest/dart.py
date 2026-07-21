@@ -41,17 +41,11 @@ _TOP50_CSV = Path(__file__).parent.parent / "data" / "top50.csv"
 # ============================================================
 
 
-def map_corp_codes() -> dict:
-    """DART corpCode.xml 전체 다운 → top50.csv의 corp_code 컬럼 갱신.
+def fetch_dart_stock_to_corp_map() -> dict[str, tuple[str, str]]:
+    """DART corpCode.xml 전체 다운 → {ticker(6자리): (corp_code(8자리), corp_name)}.
 
-    동작:
-      1. DART `corpCode.xml` 호출 → ZIP 바이너리
-      2. ZIP 내부 CORPCODE.xml 파싱 → {stock_code: corp_code} 맵
-      3. top50.csv 읽어 ticker별 corp_code 채움
-      4. top50.csv 저장 (corp_code 컬럼 갱신)
-      5. storage/CompanyNode에도 UPSERT
-
-    Returns: {'matched': int, 'unmatched_tickers': [...], 'total': int}
+    ★V0: map_corp_codes()(top50 전용)과 universe/registry.py(전 상장사) 양쪽이
+    공유하는 단일 구현 — corpCode.xml 파싱 이중 구현 금지.
     """
     logger.info("DART corpCode.xml 전체 다운로드 중...")
     zip_bytes = dart_get_binary("corpCode.xml", {})
@@ -71,6 +65,21 @@ def map_corp_codes() -> dict:
             stock_to_corp[stock_code] = (corp_code, corp_name)
 
     logger.info(f"DART 전체 기업 수: {len(stock_to_corp):,} (상장사)")
+    return stock_to_corp
+
+
+def map_corp_codes() -> dict:
+    """DART corpCode.xml 전체 다운 → top50.csv의 corp_code 컬럼 갱신.
+
+    동작:
+      1. fetch_dart_stock_to_corp_map()으로 {stock_code: corp_code} 맵 획득
+      2. top50.csv 읽어 ticker별 corp_code 채움
+      3. top50.csv 저장 (corp_code 컬럼 갱신)
+      4. storage/CompanyNode에도 UPSERT
+
+    Returns: {'matched': int, 'unmatched_tickers': [...], 'total': int}
+    """
+    stock_to_corp = fetch_dart_stock_to_corp_map()
 
     # top50.csv 읽기
     rows: list[dict] = []
