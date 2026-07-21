@@ -2,6 +2,35 @@
 
 > `/check` skill 실행 시 아래 형식으로 자동 기록됩니다.
 
+## 2026-07-21 (5) — V1 마무리 (리더 결정 2건 + V-1 계약 체커 완성)
+- **작업**: 별도 세션(동일 저장소, 사용자가 이 세션을 열어둔 채 다른 터미널에서 이어
+  실행한 것으로 추정)이 만든 V1 T1 파서 2종(related_party.py·supply_contract.py)이
+  다음 세션으로 넘긴 두 열린 질문("타법인출자현황 파서 여부", "익명 엣지 스키마 확장
+  여부")을 리더로서 처리.
+- **리더 결정 A**: 타법인출자현황은 3번째 T1 파서로 만들지 않음 — U1의 RelationLocal
+  (거버넌스)에 이미 완전히 표현돼 있고, ValueChainEdge.edge_type(supply/customer/
+  raw_material/competition)에 자연히 대응하지 않음. 억지 구현 시 U-D14의 거버넌스/
+  밸류체인 문법 분리를 파서 레벨에서 재차 위반. → **valuechain T1 = 정형 파서 2종
+  확정**(특수관계자 주석·단일판매공급계약).
+- **리더 결정 B**: 익명 엣지 스키마 확장(`dst_corp` nullable)은 지금 안 하고 T2로
+  이연 — T1의 존재 이유는 정밀·고신뢰인데 익명 항목은 정반대. §7 "카운트 기여" 취지는
+  LinkFailQueue 누적 + apply() 카운터(`link_failed`/`no_counterparty`)로 이미 약하게
+  충족. T2가 confidence·운영점(τ) 스키마를 새로 설계할 시점에 함께 다뤄 마이그레이션
+  중복 회피.
+- **하네스 V-1 계약 체커 완성**: `test_v1_contract_checker.py` 4건(전부 in_memory_session,
+  실 DB 미접촉) — 참조 무결성(엣지 endpoint 전원 Registry 실존) · 자연키 중복 0(3회
+  재실행) · 멱등 export(연속 호출 + 파서 재실행 후 재호출 모두 바이트 단위 diff 0) ·
+  근거 노출(provenance·rcept_no 필수). universe/PLAN.md §5.5 밸류체인 확장분 완료.
+- **회귀**: relation+report 전체 187/187 PASS.
+- **관찰(개입 안 함)**: DART 5개년 백필의 2020년치가 이 시점 DART 일일 할당량 소진
+  (status=020)으로 전량 실패 스핀 중(1시간 반+ 경과) — 강제 종료 시 그 회차 전체
+  트랜잭션(부분 성공분 포함)이 롤백되므로 자연 완주 대기. report 5개년 수집은
+  2,590/2,651(97.7%)로 사실상 완료.
+- **다음 세션**: 백필 완주 확인(2020년치는 할당량 소진으로 거의 빈 상태 예상 —
+  정상, 다음날 재실행으로 보강 가능) → filters→kifrs→dedupe 재실행 → U1 게이트
+  최종 재판정(엣지≥3,000) → 커밋. relation.db 락 해제 후: CompanyAlias 시드
+  재시도, T1 파서 2종 실 코퍼스 전량 실행(현재 fixture 검증만).
+
 ## 2026-07-21 (4) — V1 속행 (T1 파서 2/3: 단일판매·공급계약 수시공시)
 - **DART 엔드포인트 조사 결과**(신규 investigate 완료): 전용 구조화 API(fnlttSinglAcntAll류)
   없음 — KRX 수시공시 문서(`document.xml`)뿐. `list.json`을 corp_code 생략(전 상장사 대상)
