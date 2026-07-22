@@ -190,54 +190,18 @@
     return out;
   }
 
-  // ── U2 시장별 성운 레이아웃 ─────────────────────────────────────────
-  // 섹터를 KOSPI(좌)/KOSDAQ(우) 두 성운으로 나눠, 각 시장 시총 상위 N개만 named
-  // (노드+라벨), 나머지(캡 초과 named + 전량 dot 기업)는 배경 dots로 배치.
-  // "한 화면에 named 50여개 라벨" 밀도(=헤어볼) 문제를 시장 분할 + top-N 캡으로 해소.
-  const KOSPI_NAMED_CAP = 10, KOSDAQ_NAMED_CAP = 5;
-  const NEBULA = {
-    KOSPI:  { cx: -0.46, cy: 0, r: 0.40 },
-    KOSDAQ: { cx:  0.46, cy: 0, r: 0.40 },
-  };
-
+  // ── U2 시장별 데이터 (드릴인 LOD) ──────────────────────────────────
+  // 섹터 → KOSPI/KOSDAQ 성운(두 덩이) → 성운 클릭 드릴인 → 시장별 상위 ~10 named + dots.
+  // 위치(레이아웃)는 모드(성운 개요 vs 드릴인)에 따라 SectorMap이 계산 — adapter는 원자료만 공급.
+  const MARKET_NAMED_CAP = 10;   // 드릴인 시 시장별 최대 named 노드 수
   function _capJo(m) {
     if (m.market_cap) return Math.min(600, m.market_cap / 1e12);
     if (typeof m.mc === "number") return Math.min(600, m.mc / 1e12);
     return Math.max(1, (m.sz || 1) * 5);
   }
-  function _cbFromNode(m) { return Math.min(3, Math.max(0, Math.round(_capJo(m) / 6))); }
 
-  // 성운 sub-disk 안에 named phyllotaxis 배치(시총 desc, 큰 것이 성운 중심).
-  function _layoutNamed(members, neb) {
-    const sorted = members.slice().sort((a, b) => _capJo(b) - _capJo(a));
-    const n = sorted.length, out = [];
-    for (let i = 0; i < n; i++) {
-      const m = sorted[i];
-      let x = neb.cx, y = neb.cy;
-      if (i > 0) {
-        const ang = i * 2.39996;
-        const rr = neb.r * (0.30 + ((i - 1) / Math.max(1, n - 1)) * 0.66);
-        x = neb.cx + Math.cos(ang) * rr; y = neb.cy + Math.sin(ang) * rr;
-      }
-      out.push({ code: m.t, name: m.n, en: m.n, cap: Math.max(1, Math.round(_capJo(m))), market: m.mkt || null, x, y });
-    }
-    return out;
-  }
-
-  function _srng(seed) { let s = ((seed * 9301 + 49297) % 233280 + 233280) % 233280; return () => { s = (s * 9301 + 49297) % 233280; return s / 233280; }; }
-
-  // dots: 성운 sub-disk 안에 면적 균등(sqrt) 산포. buckets[i]=capBucket(점 크기).
-  function _scatterDots(neb, seed, buckets) {
-    const rng = _srng(seed), out = [];
-    for (let i = 0; i < buckets.length; i++) {
-      const a = rng() * Math.PI * 2, rr = neb.r * Math.sqrt(rng());
-      out.push([neb.cx + Math.cos(a) * rr, neb.cy + Math.sin(a) * rr, buckets[i] || 0]);
-    }
-    return out;
-  }
-
-  // 섹터별 두 성운 → {companies:{id:[named]}, dots:{id:[[x,y,b]]}, markets:{id:{kospiTotal,kosdaqTotal}}}
-  function buildSectorNebulae(palette, nodes, companiesIndex) {
+  // {id: {KOSPI:{named:[{code,name,cap,market}...cap desc], dotBuckets:[cb...], total}, KOSDAQ:{...}}}
+  function buildSectorMarketData(palette, nodes, companiesIndex) {
     const koToId = new Map(palette.map((p) => [p.ko, p.id]));
     const namedBySector = new Map();
     for (const n of nodes) {
@@ -246,39 +210,42 @@
       if (!namedBySector.has(id)) namedBySector.set(id, []);
       namedBySector.get(id).push(n);
     }
-    // dot 기업 capBucket by sector ko × market (companies_index tier==='dot')
-    const dotInfo = new Map();
+    const dotInfo = new Map();  // ko → {KOSPI:[cb], KOSDAQ:[cb]} (tier==='dot' 기업)
     for (const c of (companiesIndex || [])) {
       if (c.tier !== "dot") continue;
       if (!dotInfo.has(c.s)) dotInfo.set(c.s, { KOSPI: [], KOSDAQ: [] });
       const g = dotInfo.get(c.s);
       (g[c.mkt] || g.KOSDAQ).push(c.cb || 0);
     }
-    const companies = {}, dots = {}, markets = {};
-    let seed = 1;
+    const out = {};
     for (const p of palette) {
-      const id = p.id, ko = p.ko;
-      const named = namedBySector.get(id) || [];
-      const kospiN = named.filter((n) => n.mkt === "KOSPI").sort((a, b) => _capJo(b) - _capJo(a));
-      const kosdaqN = named.filter((n) => n.mkt === "KOSDAQ").sort((a, b) => _capJo(b) - _capJo(a));
-      const di = dotInfo.get(ko) || { KOSPI: [], KOSDAQ: [] };
-      // 캡 초과 named → dots(살짝 큰 버킷). + companies_index dot 기업.
-      const kospiDotBuckets = [...di.KOSPI, ...kospiN.slice(KOSPI_NAMED_CAP).map(_cbFromNode)];
-      const kosdaqDotBuckets = [...di.KOSDAQ, ...kosdaqN.slice(KOSDAQ_NAMED_CAP).map(_cbFromNode)];
-      companies[id] = [
-        ..._layoutNamed(kospiN.slice(0, KOSPI_NAMED_CAP), NEBULA.KOSPI),
-        ..._layoutNamed(kosdaqN.slice(0, KOSDAQ_NAMED_CAP), NEBULA.KOSDAQ),
-      ];
-      dots[id] = [
-        ..._scatterDots(NEBULA.KOSPI, seed++, kospiDotBuckets),
-        ..._scatterDots(NEBULA.KOSDAQ, seed++, kosdaqDotBuckets),
-      ];
-      markets[id] = {
-        kospiTotal: kospiN.length + di.KOSPI.length,
-        kosdaqTotal: kosdaqN.length + di.KOSDAQ.length,
-      };
+      const named = namedBySector.get(p.id) || [];
+      const di = dotInfo.get(p.ko) || { KOSPI: [], KOSDAQ: [] };
+      const mk = {};
+      for (const M of ["KOSPI", "KOSDAQ"]) {
+        const mnamed = named
+          .filter((n) => n.mkt === M)
+          .sort((a, b) => _capJo(b) - _capJo(a))
+          .map((n) => ({ code: n.t, name: n.n, cap: Math.max(1, Math.round(_capJo(n))), market: M }));
+        // 캡 초과 named도 배경 dot으로(살짝 큰 버킷)
+        const overflow = mnamed.slice(MARKET_NAMED_CAP).map((x) => Math.min(3, Math.max(1, Math.round(x.cap / 6))));
+        mk[M] = { named: mnamed, dotBuckets: [...di[M], ...overflow], total: mnamed.length + di[M].length };
+      }
+      out[p.id] = mk;
     }
-    return { companies, dots, markets };
+    return out;
+  }
+
+  // App의 company lookup(activeCompanyCode→company)용 — 시장별 top-N named 평탄화(위치 무관).
+  function flattenNamed(marketData) {
+    const out = {};
+    for (const [id, mk] of Object.entries(marketData)) {
+      out[id] = [
+        ...mk.KOSPI.named.slice(0, MARKET_NAMED_CAP),
+        ...mk.KOSDAQ.named.slice(0, MARKET_NAMED_CAP),
+      ];
+    }
+    return out;
   }
 
   function buildRelations(nodes) {
@@ -317,7 +284,7 @@
   async function injectBundleScript() {
     // Babel-standalone auto-transforms <script type="text/babel"> tags only at page load.
     // For dynamic injection we fetch the source ourselves, transform via Babel, then run.
-    const url = "./src/bundle.jsx?v=k4e";
+    const url = "./src/bundle.jsx?v=k5b";
     const src = await fetch(url).then((r) => r.text());
     const out = window.Babel.transform(src, { presets: ["env", "react"] }).code;
     const s = document.createElement("script");
@@ -337,14 +304,12 @@
       const palette = buildPalette(result.sectors);
       const relations = buildRelations(result.nodes);
 
-      // universe 경로(U2): 시장별 두 성운 레이아웃(top-N named + dots). top50 fallback이면 기존 단일 클러스터.
-      let companies, sectorMarkets = {};
-      let nebulaDots = null;
+      // universe 경로(U2): 시장별 드릴인 데이터(성운 개요 → KOSPI/KOSDAQ 드릴인).
+      // top50 fallback이면 기존 단일 클러스터 레이아웃.
+      let companies, sectorMarketData = null;
       if (result.usingUniverse) {
-        const neb = buildSectorNebulae(palette, result.nodes, result.companiesIndex);
-        companies = neb.companies;
-        nebulaDots = neb.dots;
-        sectorMarkets = neb.markets;
+        sectorMarketData = buildSectorMarketData(palette, result.nodes, result.companiesIndex);
+        companies = flattenNamed(sectorMarketData);  // App company lookup용
       } else {
         companies = buildCompaniesByPaletteId(palette, result.nodes);
       }
@@ -359,13 +324,9 @@
         (discByTicker[t] = discByTicker[t] || []).push(d);
       }
 
-      // dots: sector id → [[x,y,capBucket], ...]
-      //  universe면 시장별 성운 산포 dots, top50 fallback이면 export 단일 클러스터 dots.
-      let dots;
-      if (nebulaDots) {
-        dots = nebulaDots;
-      } else {
-        dots = {};
+      // top50 fallback 전용 dots(export 단일 클러스터). universe는 sectorMarketData로 렌더.
+      let dots = {};
+      if (!sectorMarketData) {
         for (const p of palette) if (p.dots && p.dots.length) dots[p.id] = p.dots;
       }
 
@@ -382,7 +343,7 @@
         usingMock: result.usingMock,
         usingUniverse: result.usingUniverse,
         dots,
-        sectorMarkets,
+        sectorMarketData,   // universe 드릴인 원자료: {id:{KOSPI:{named,dotBuckets,total},KOSDAQ:{...}}}
         companiesIndex: result.companiesIndex || [],
         universeMeta: result.universeMeta || null,
       };

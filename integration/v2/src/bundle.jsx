@@ -851,7 +851,7 @@ window.REL_STYLES = REL_STYLES;
 // ─── Sector map: companies as glowing nodes inside the chosen sector ────
 const { useRef: _useRef, useEffect: _useEffect, useState: _useState, useMemo: _useMemo } = React;
 
-function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost }) {
+function SectorMap({ sectorId, activeMarket, activeCompanyCode, onSelectMarket, onSelectCompany, onSelectGhost }) {
   const canvasRef = _useRef(null);
   const rafRef = _useRef(0);
   const startRef = _useRef(performance.now());
@@ -865,12 +865,56 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
   const dotsCanvasRef = _useRef(null);   // LOD-1 배경 dots 오프스크린 (섹터 진입 시 1회 빌드)
 
   const sec = SECTOR_PALETTE.find(s => s.id === sectorId) || SECTOR_PALETTE[0];
-  const companies = COMPANIES[sectorId] || COMPANIES.semi || [];
 
-  // Company layout: only position data, no relation-based movement
-  const layout = _useMemo(() =>
-    companies.map(c => ({ ...c, gx: c.x, gy: c.y })),
-  [companies]);
+  // U2 드릴인 LOD: sectorMarketData가 있으면 모드별 레이아웃 계산
+  //   - 개요(activeMarket 없음): KOSPI/KOSDAQ 성운 프록시 2노드 + 양쪽 dots
+  //   - 드릴인(activeMarket): 그 시장 상위 ~10 named 중앙 배치 + 나머지 dots
+  // 없으면(top50 fallback) 기존 COMPANIES/dots 단일 클러스터.
+  const _md = (window.__realData && window.__realData.sectorMarketData && window.__realData.sectorMarketData[sectorId]) || null;
+  const MARKET_CAP = 10;
+
+  const { layout, dotsData } = _useMemo(() => {
+    const srng = (seed) => { let s = ((seed * 9301 + 49297) % 233280 + 233280) % 233280; return () => { s = (s * 9301 + 49297) % 233280; return s / 233280; }; };
+    const scatter = (cx, cy, r, seed, buckets) => {
+      const rng = srng(seed), o = [];
+      for (let i = 0; i < buckets.length; i++) { const a = rng() * Math.PI * 2, rr = r * Math.sqrt(rng()); o.push([cx + Math.cos(a) * rr, cy + Math.sin(a) * rr, buckets[i] || 0]); }
+      return o;
+    };
+    const phyllo = (items, cx, cy, r) => items.map((m, i) => {
+      if (i === 0) return { ...m, x: cx, y: cy, gx: cx, gy: cy };
+      const ang = i * 2.39996, rr = r * (0.28 + ((i - 1) / Math.max(1, items.length - 1)) * 0.68);
+      const gx = cx + Math.cos(ang) * rr, gy = cy + Math.sin(ang) * rr;
+      return { ...m, x: gx, y: gy, gx, gy };
+    });
+
+    if (!_md) {
+      const comp = COMPANIES[sectorId] || COMPANIES.semi || [];
+      const dd = (window.__realData && window.__realData.dots && window.__realData.dots[sectorId]) || [];
+      return { layout: comp.map(c => ({ ...c, gx: c.x, gy: c.y })), dotsData: dd };
+    }
+    if (!activeMarket) {
+      // 개요: 두 성운 프록시 노드(클릭 시 드릴인) + 양쪽 dots 성운
+      const nodes = [], dots = [];
+      const specs = [{ M: 'KOSPI', cx: -0.85, seed: 11 }, { M: 'KOSDAQ', cx: 0.85, seed: 22 }];
+      for (const sp of specs) {
+        const m = _md[sp.M]; if (!m) continue;
+        nodes.push({ code: '__mkt_' + sp.M, name: sp.M, en: sp.M, isMarket: true, market: sp.M, count: m.total,
+                     cap: Math.min(90, 26 + m.total * 0.16), x: sp.cx, y: 0, gx: sp.cx, gy: 0 });
+        const buckets = [...m.dotBuckets, ...m.named.map(() => 1)];
+        dots.push(...scatter(sp.cx, 0, 0.42, sp.seed, buckets));
+      }
+      return { layout: nodes, dotsData: dots };
+    }
+    // 드릴인: 단일 시장 중앙, 상위 ~10 named + 나머지 dots
+    const m = _md[activeMarket] || { named: [], dotBuckets: [] };
+    const shown = m.named.slice(0, MARKET_CAP).map(c => ({ code: c.code, name: c.name, en: c.name, cap: c.cap, market: c.market }));
+    const named = phyllo(shown, 0, 0, 0.72);
+    const restBuckets = [...m.dotBuckets, ...m.named.slice(MARKET_CAP).map(() => 1)];
+    const dots = scatter(0, 0, 0.9, activeMarket === 'KOSPI' ? 31 : 32, restBuckets);
+    return { layout: named, dotsData: dots };
+  }, [_md, sectorId, activeMarket]);
+
+  const companies = layout;
 
   // ALL related nodes in a polygon around canvas center.
   // Merges in-sector + cross-sector so lines never overlap and bounds never exceeded.
@@ -911,7 +955,7 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
     // 오프스크린 캔버스에 1회 렌더. 프레임마다 drawImage로 합성만 하고 재도장하지 않음
     // (universe/PLAN.md §5 "오프스크린 캔버스 1회 렌더 후 합성 — 프레임당 재도장 금지").
     const buildDotsLayer = (w, h, dpr) => {
-      const dots = (window.__realData && window.__realData.dots && window.__realData.dots[sectorId]) || [];
+      const dots = dotsData || [];
       if (!dots.length) { dotsCanvasRef.current = null; return; }
       const off = document.createElement('canvas');
       off.width = w * dpr; off.height = h * dpr;
@@ -988,38 +1032,42 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
       ctx.fillRect(0, 0, w, h);
       ctx.restore();
 
-      // U2 시장별 두 성운(KOSPI 좌 / KOSDAQ 우) 헤일로 + 라벨.
-      // dots/named가 좌우 sub-disk에 나뉘어 배치되므로, 각 덩이를 옅은 성운으로 감싸 시장 경계를 시각화.
-      const mkts = (window.__realData && window.__realData.sectorMarkets && window.__realData.sectorMarkets[sectorId]) || null;
-      if (mkts) {
-        const haloR = Math.min(w, h) * 0.34;
-        const halos = [
-          { key: 'KOSPI',  cx: w / 2 + (-0.46) * haloR, total: mkts.kospiTotal },
-          { key: 'KOSDAQ', cx: w / 2 + (0.46) * haloR,  total: mkts.kosdaqTotal },
-        ];
-        for (const nb of halos) {
-          const cyN = h / 2;
+      // U2 성운 헤일로 + 라벨 (드릴인 LOD).
+      //  개요: KOSPI(좌)/KOSDAQ(우) 두 성운 헤일로 + "KOSPI · N사" 라벨(클릭 유도).
+      //  드릴인: 해당 시장 단일 중앙 헤일로.
+      if (_md) {
+        const baseRh = Math.min(w, h) * 0.34;
+        const cyN = h / 2;
+        const drawHalo = (cxN, R) => {
           ctx.save();
           ctx.globalCompositeOperation = 'screen';
-          const g = ctx.createRadialGradient(nb.cx, cyN, 0, nb.cx, cyN, haloR * 0.62);
-          g.addColorStop(0, sec.color + '14');
-          g.addColorStop(0.6, sec.color + '08');
+          const g = ctx.createRadialGradient(cxN, cyN, 0, cxN, cyN, R);
+          g.addColorStop(0, sec.color + '16');
+          g.addColorStop(0.6, sec.color + '0a');
           g.addColorStop(1, sec.color + '00');
           ctx.fillStyle = g;
-          ctx.beginPath(); ctx.arc(nb.cx, cyN, haloR * 0.62, 0, Math.PI * 2); ctx.fill();
+          ctx.beginPath(); ctx.arc(cxN, cyN, R, 0, Math.PI * 2); ctx.fill();
           ctx.restore();
-          // 라벨(기업 선택 중이 아닐 때만) — 성운 상단
-          if (!activeCompanyCode) {
+        };
+        if (!activeMarket) {
+          const specs = [
+            { key: 'KOSPI',  cxN: w / 2 + (-0.85) * baseRh, total: (_md.KOSPI && _md.KOSPI.total) || 0 },
+            { key: 'KOSDAQ', cxN: w / 2 + (0.85) * baseRh,  total: (_md.KOSDAQ && _md.KOSDAQ.total) || 0 },
+          ];
+          for (const nb of specs) {
+            drawHalo(nb.cxN, baseRh * 0.6);
             ctx.save();
-            ctx.font = '600 11px "IBM Plex Mono", ui-monospace, monospace';
             ctx.textAlign = 'center';
-            ctx.fillStyle = sec.color + 'cc';
-            ctx.fillText(nb.key, nb.cx, cyN - haloR * 0.66);
-            ctx.fillStyle = 'rgba(143,161,182,0.7)';
-            ctx.font = '400 10px "IBM Plex Mono", ui-monospace, monospace';
-            ctx.fillText(nb.total + '사', nb.cx, cyN - haloR * 0.66 + 14);
+            ctx.font = '600 13px "IBM Plex Mono", ui-monospace, monospace';
+            ctx.fillStyle = sec.color + 'dd';
+            ctx.fillText(nb.key, nb.cxN, cyN - baseRh * 0.72);
+            ctx.fillStyle = 'rgba(143,161,182,0.85)';
+            ctx.font = '400 11px "IBM Plex Mono", ui-monospace, monospace';
+            ctx.fillText(nb.total + '사 · 클릭', nb.cxN, cyN - baseRh * 0.72 + 16);
             ctx.restore();
           }
+        } else {
+          drawHalo(w / 2, baseRh * 0.95);
         }
       }
 
@@ -1231,20 +1279,23 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
     const onClick = (e) => {
       const rect = cvs.getBoundingClientRect();
       const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+      // 개요 모드: 성운 프록시 노드는 히트 반경을 크게(덩이 전체) 잡아 드릴인.
       let best = null, bestD = 28;
       for (const p of nodesRef.current) {
+        const hitR = p.c.isMarket ? 90 : 28;
         const d = Math.hypot(p.x - mx, p.y - my);
-        if (d < bestD) { bestD = d; best = { code: p.c.code, isRelated: false }; }
+        if (d < hitR && d < bestD + (p.c.isMarket ? 70 : 0)) { bestD = d; best = { node: p.c, isRelated: false }; }
       }
       for (const p of relatedNodesRef.current) {
         const d = Math.hypot(p.x - mx, p.y - my);
-        if (d < Math.min(bestD, 22)) { bestD = d; best = { code: p.code, isRelated: true, sectorId: p.sectorId }; }
+        if (d < Math.min(bestD, 22)) { bestD = d; best = { node: { code: p.code }, isRelated: true, sectorId: p.sectorId }; }
       }
       if (best) {
-        if (best.isRelated) onSelectGhost?.(best.code, best.sectorId);
-        else onSelectCompany?.(best.code);
-      } else {
-        onSelectCompany?.(null); // click empty → deselect
+        if (best.node.isMarket) onSelectMarket?.(best.node.market);
+        else if (best.isRelated) onSelectGhost?.(best.node.code, best.sectorId);
+        else onSelectCompany?.(best.node.code);
+      } else if (activeMarket) {
+        onSelectCompany?.(null); // 드릴인에서 빈 곳 클릭 → 기업 선택 해제
       }
     };
     cvs.addEventListener('mousemove', onMove);
@@ -1255,7 +1306,7 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
       cvs.removeEventListener('mousemove', onMove);
       cvs.removeEventListener('click', onClick);
     };
-  }, [layout, allRelated, activeCompanyCode, sectorId]);
+  }, [layout, dotsData, allRelated, activeCompanyCode, activeMarket, sectorId]);
 
   return (
     <div className="solar-stage">
@@ -2654,6 +2705,7 @@ function App() {
   const [phase, setPhase] = useState('galaxy');
   const [activeSectorId, setActiveSectorId] = useState(null);
   const [activeCompanyCode, setActiveCompanyCode] = useState(null);
+  const [activeMarket, setActiveMarket] = useState(null);  // U2 드릴인: null=성운 개요, 'KOSPI'|'KOSDAQ'=드릴인
 
   // sector zoom-in transition
   const [zoomProgress, setZoomProgress] = useState(0);
@@ -2664,6 +2716,7 @@ function App() {
   const enterSector = useCallback((sectorId) => {
     cancelAnimationFrame(zoomAnimRef.current);
     setActiveSectorId(sectorId);
+    setActiveMarket(null);   // 진입 시 성운 개요부터
     setPhase('sector');
     const t0 = performance.now();
     const dur = 1100;
@@ -2680,12 +2733,27 @@ function App() {
   const backToGalaxy = useCallback(() => {
     cancelAnimationFrame(zoomAnimRef.current);
     setActiveCompanyCode(null);
+    setActiveMarket(null);
     setPhase('galaxy');
     setActiveSectorId(null);
     setZoomProgress(0);
   }, []);
 
+  // 성운 개요로(드릴인·기업 해제)
+  const backToSectorOverview = useCallback(() => {
+    setActiveCompanyCode(null);
+    setActiveMarket(null);
+    setPhase('sector');
+  }, []);
+
+  // 기업 → 시장 드릴인 뷰로 (activeMarket 유지)
   const backToSector = useCallback(() => {
+    setActiveCompanyCode(null);
+    setPhase('sector');
+  }, []);
+
+  const enterMarket = useCallback((market) => {
+    setActiveMarket(market);
     setActiveCompanyCode(null);
     setPhase('sector');
   }, []);
@@ -2767,12 +2835,13 @@ function App() {
   const companies = activeSectorId ? (window.COMPANIES[activeSectorId] || window.COMPANIES.semi) : [];
   const company = activeCompanyCode ? companies.find(c => c.code === activeCompanyCode) : null;
 
-  // breadcrumb
+  // breadcrumb — GALAXY › 섹터 › [KOSPI|KOSDAQ] › 기업 (U2 드릴인)
   const crumb = [];
   if (phase === 'galaxy') crumb.push({ label: 'GALAXY' });
   if (phase === 'sector' || phase === 'company') {
     crumb.push({ label: 'GALAXY', onClick: backToGalaxy });
-    if (sector) crumb.push({ label: sector.ko, onClick: phase === 'company' ? backToSector : null });
+    if (sector) crumb.push({ label: sector.ko, onClick: activeMarket ? backToSectorOverview : null });
+    if (activeMarket) crumb.push({ label: activeMarket, onClick: phase === 'company' ? backToSector : null });
   }
   if (phase === 'company' && company) crumb.push({ label: company.name });
 
@@ -2806,7 +2875,9 @@ function App() {
             }}>
               <SectorMap
                 sectorId={activeSectorId}
+                activeMarket={activeMarket}
                 activeCompanyCode={activeCompanyCode}
+                onSelectMarket={enterMarket}
                 onSelectCompany={selectCompany}
                 onSelectGhost={selectGhost}
               />
