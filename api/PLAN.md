@@ -1,6 +1,6 @@
 # api/ — 서빙 아키텍처 실행 계획 (프론트·미들웨어·백엔드)
 
-> **상태**: 2026-07-20. 아키텍처 정본화 완료 — 문서·CD 파이프라인 정의까지. **api/ 코드 구현은 미착수**(후속 세션).
+> **상태**: 2026-07-20 아키텍처 정본화 → **2026-07-22 개정**: DartChatbot 실사(§4.3) 반영, 로드맵을 챗봇 가동 보장형 M0~M5로 교체(§8). **api/ 코드 구현은 미착수**.
 > **소유**: 프로젝트 리더
 > 관련 문서: [docs/ARCHITECTURE.md](../docs/ARCHITECTURE.md) §0·§3.5(현 데이터 토폴로지) · [docs/AI_DIRECTION_PLAN.md](../docs/AI_DIRECTION_PLAN.md) §3.1(GPU/Bedrock 라우팅 원칙) · [modules/relation/valuechain/PLAN.md](../modules/relation/valuechain/PLAN.md)(D11 reports.db 승격, GPU 시분할)
 
@@ -89,6 +89,22 @@
 - **`/data/discloseai/fulltext/`(및 형제 산출물 eqs·financial·fulltext_external·manifests) 정체는 2026-07-21 재실사로 해소됨** — EQS v3 보정 워크스페이스의 임시 산출물로 확인, report 모듈 정본과 무관. **인덱싱·relation/universe 확장의 입력으로 재사용하지 않는다** — report 수집기로 전 상장사를 새로 수집한다(valuechain PLAN V0 / [relation/universe/PLAN.md](../modules/relation/universe/PLAN.md) U0).
 - **디스크 예산 재확인**: `/data`(197GB, 187GB 여유, 변동 없음)를 RAW 코퍼스·배치 작업·어댑터 공간으로 사용. valuechain 계획의 "200GB" 표현은 실측상 `/data` 마운트를 가리키는 것으로 정정. (서빙 벡터는 GPU가 아니라 Supabase에 적재 — §5). 루트 디스크(49→57GB)는 EQS v3 워크스페이스 활동으로 증가 중이라 여유(43→34GB)가 줄고 있음 — 지속 증가 시 워크스페이스 소유자에게 정리 확인 필요.
 
+### 4.3 DartChatbot 실사 (2026-07-22) — RAG 챗봇 실물이 이미 GPU 서버에서 가동 중
+
+PR #57(v2 코파일럿 연결)·#46(disclosure 어댑터)이 호출하는 **DartChatbot의 실물을 GPU 서버에서 읽기 전용 SSH로 실측**(접속 정보는 공개 저장소 미기재 원칙 유지). §4.1의 "벡터 인덱스 없음" 판정은 `/data` 기준이었고, **홈 디렉터리에 완결된 RAG 챗봇이 별도로 존재**함이 확인됨.
+
+| 항목 | 실측 (2026-07-22) |
+|---|---|
+| 위치·상태 | GPU 서버 홈 `~/dartchatbot`(전체 6.8GB). uvicorn(포트 8000) + ngrok 무료 터널이 프로세스로 가동 중(2026-07-21 기동). `APP_MODE=bedrock`, `/api/health` = `status: ready` 실측 |
+| 답변 생성 | **Amazon Bedrock** `us.anthropic.claude-sonnet-4-6`(us-east-1, Bearer 토큰 — 키는 서버 `.env`에만 존재). converse 호출 정상 응답 실측 |
+| 임베딩 | **`intfloat/multilingual-e5-small`**(revision 고정, **CPU 실행** — health 실측 `device: cpu`). 오픈·소형 모델이라 질의 임베딩을 어디서든 재현 가능 — **서빙에 GPU 불필요** |
+| 벡터 저장 | 벡터 DB 아님 — **회사별 NumPy float32 인덱스**(runtime data 릴리스에 포함). pgvector 이식은 기계적 변환으로 가능 |
+| 데이터 | `releases/dart-runtime-2023-2025-v1` 1.2GB — 2023~2025 정기보고서 파싱 청크 + OpenDART 정형 JSONL + 매니페스트·체크섬. 정형 지표(EPS 등)는 LLM이 아닌 JSONL 직접 조회 |
+| CORS | `https://cvc-project.github.io` 이미 허용 → dev(GitHub Pages)에서 즉시 동작 가능. **Vercel 프로덕션 도메인은 미포함** — §8 M1에서 추가 |
+| 영속화 | **systemd 미등록**(uvicorn·ngrok 모두) → 재부팅 시 챗봇 다운. ngrok 무료 터널은 재기동 시 URL 변경 |
+
+**시사점**: §0의 "코파일럿 키 노출" 문제는 PR #57 구조(키는 서버측)로 해소 방향. 남은 리스크는 (a) 프론트에 ngrok 임시 URL 하드코딩 — 터널 재기동마다 프론트 수정 필요 (b) systemd 미영속 (c) 서빙이 GPU 박스 동거 — §2 "서빙 경로에 GPU 없음" 원칙과 **임시** 충돌. 셋 다 §8 개정 로드맵(M0·M1·M4)에서 해소한다. §6.3의 "확인할 것(C2) — 문서 임베딩 모델"은 이 실사로 해소됨.
+
 ## 5. 데이터 정본·저장 계층 (2계층)
 
 **결정: RAW 정본 = GPU `/data`(+로컬 백업), 서빙 저장소 = Supabase(RAW에서 파생·재생성 가능).** 오늘의 `integration/data/*.json`(모듈 DB에서 파생된 서빙 사본)과 정확히 같은 사상 — 정본은 따로, 서빙용 파생물은 별도 계층.
@@ -157,6 +173,7 @@ Supabase로 옮기는 건 **새로 생기는 크고 자라는 데이터**뿐. �
 - 둘 다 팀원 GPU 서버 IP와 무관 → 챗봇이 GPU 가동에 안 묶임. (질의를 GPU 서버 엔드포인트로 직접 보내면 GPU 상시가동 필요 → 비권장.)
 
 **확인할 것(C2, 팀원)**: 문서를 **어떤 모델**로 임베딩했는지 → 오픈 모델이면 (a)/(b) 자유, 커스텀 파인튜닝이면 그 가중치 파일을 질의 쪽에도 배치. 어느 쪽이든 GPU 상시가동은 서빙에 불필요.
+→ **해소(2026-07-22, §4.3 실사)**: `intfloat/multilingual-e5-small`(오픈·소형·revision 고정, CPU 실행 실측) — (a) 방식 그대로 가능. 질의 임베딩의 GPU 의존 없음 확정.
 
 ### 6.4 IP 고정 문제 — 이 구조에선 발생 안 함
 
@@ -194,12 +211,17 @@ Supabase로 옮기는 건 **새로 생기는 크고 자라는 데이터**뿐. �
 - api/를 Vercel 서버리스 함수로 배치(`api/chat.py` 등 파일=엔드포인트). Vercel이 저장소를 이미 배포 중이므로 **별도 배포 워크플로 불필요** — main push = 프론트+api 함께 자동 배포. Supabase URL·키, LLM 키는 Vercel 프로젝트 Environment Variables에 등록(리포 하드코딩 금지 — 루트 CLAUDE.md 보안 규칙).
 - **GPU 서버는 서빙 경로에 없으므로 SSH 자동배포 워크플로가 필요 없다.** GPU의 배치 작업(인덱싱·학습)은 수동 또는 크론으로 실행 — 서빙 배포와 완전히 분리.
 
-## 8. 후속 구현 로드맵 (이번 세션 범위 밖)
+## 8. 구현 로드맵 — 챗봇 가동 보장형 (2026-07-22 개정)
 
-1. **P1 — Supabase 기반 세팅**: Supabase 프로젝트 생성 → pgvector 확장 켜기 → 청크 테이블(C2 필드: corp_code·rcept_no·section_key·char_span·원문text·embedding) 생성. .env/`shared/db.py`가 이미 Supabase 연결 준비됨.
-2. **P1 — api/ 스켈레톤(Vercel 함수)**: `/api/health`, 면책 미들웨어(C5), `/api/chat`이 우선 외부 LLM 프록시로만(검색 없이) — Supabase·GPU 없이도 로컬 E2E 확인.
-3. **P2 — 임베딩 파이프라인 + RAG 연결**: 팀원이 문서를 임베딩한 모델 확정(C2) → 문서 벡터를 디스크→Supabase pgvector 적재 → 질의 임베딩을 같은 모델로 안정된 곳에 배치(§6.3) → api가 pgvector 검색 결과를 인용 강제 프롬프트로 결합 → LLM 생성. Vercel 배포.
-4. **P3 — 코퍼스 확장·valuechain**: `/data/discloseai/fulltext/`(§4.1) 정체 확인 후 인덱싱 입력으로 정합 또는 재수집. valuechain 엣지 Supabase 적재(valuechain PLAN §2.2 스키마) — D11 시점 조율.
-5. **P4 — 공개**: Vercel 계정 연결(§7.1, main 프로덕션), 도메인, Gemini 키 로테이션 후 Vercel 환경변수 주입.
+> **개정 배경**: DartChatbot 실사(§4.3)로 "RAG 챗봇 실물 + Bedrock + 1.2GB runtime data"가 이미 GPU 서버에서 가동 중임이 확인됨. 로드맵을 "백지에서 P1~P4 구축"에서 **"기존 실물을 dev→main 승격 게이트에 태우고, 정본 구조(Supabase+Vercel)로 단계 이식"** 으로 개정. **불변 원칙: main 머지로 배포된 사이트에서는 챗봇이 반드시 동작해야 한다(M3 게이트).**
 
-기존 로컬 데모용 FastAPI 2종(`modules/disclosure/chat_server.py`, `modules/price/api.py`)은 api/ 안정화 후 각 담당자와 협의해 통합 또는 은퇴 결정 — 리더가 임의로 수정하지 않는다(모듈 경계 원칙).
+- **M0 — dev 머지 게이트 (PR #57 보완)**: 프론트 호출 주소를 ngrok URL 하드코딩에서 **기본 same-origin `/api/chat` + `window.__DART_CHAT_URL` 주입 폴백**(C1 사상)으로 수정. dev(GitHub Pages)에서는 주입값(현 터널 URL)으로 동작 — CORS는 이미 허용됨(§4.3). 이 상태로 dev 머지. 이후 백엔드가 어떻게 바뀌어도 프론트 재수정 불필요.
+- **M1 — 챗봇 서버 상시화 (GPU 서버, PR 작성자와 협의)**: uvicorn·터널을 systemd 등록해 재부팅 생존(§4.3 미영속 리스크 해소). CORS 허용 목록에 Vercel 프로덕션 도메인 추가.
+- **M2 — Vercel 1차 연결 (api/ 최초 코드 = 얇은 프록시)**: `api/chat.py` Vercel 함수 = DartChatbot 프록시. 오리진 주소는 **Vercel 환경변수 `DART_CHAT_ORIGIN`에만** 둔다(리포·프론트에 서버 주소·터널 URL 미기재 — 보안 규칙). 이 함수가 C5 면책 문구 부착 + rate limit 담당. 프론트는 M0 덕에 무수정(same-origin `/api/chat`). Vercel 프로젝트 연결은 §7.1 절차.
+- **M3 — main 머지 게이트 (배포 = 챗봇 가동 확인)**: Vercel 배포 URL에서 챗봇 실질문→실응답(출처 포함) 확인을 **main 머지 통과 조건으로 명문화**. 실패 시 머지 중단. 이 게이트가 "배포 사이트의 챗봇은 반드시 동적"을 보증하는 장치.
+- **M4 — 정본 이행 (구 P1~P2 통합)**: DartChatbot 자산을 Supabase+Vercel로 이식 — ① NumPy 인덱스+청크 → Supabase pgvector(C2, 기계적 변환 — §4.3) ② 정형 JSONL → Supabase 테이블 ③ 질의 임베딩 `multilingual-e5-small`을 api層/호스팅으로(§6.3 (a)) ④ Bedrock 키를 Vercel 환경변수로. 완료 시 `api/chat`이 프록시에서 자체 RAG로 교체되고 **서빙이 GPU 박스에서 완전 이탈**(§2 원칙 충족) — M2의 프록시·`DART_CHAT_ORIGIN` 제거.
+- **M5 — 코퍼스 확장·valuechain (구 P3~P4)**: 49사 → 전 상장사 확장 시 GPU가 문서 임베딩 배치(C3, 동일 모델 유지), valuechain 엣지 Supabase 적재(valuechain PLAN §2.2), 도메인·키 로테이션.
+
+**M2~M4의 임시 상태 명시**: M2 완료~M4 완료 사이에는 서빙이 GPU 박스(DartChatbot 동거)에 의존한다 — §2 "서빙 경로에 GPU 없음" 원칙의 **의도된 임시 예외**(리더 결정 2026-07-22). GPU 다운 시 챗봇만 우아한 저하(C1 폴백), 사이트 나머지는 정적이라 무영향.
+
+기존 로컬 데모용 FastAPI 2종(`modules/disclosure/chat_server.py`, `modules/price/api.py`)은 api/ 안정화 후 각 담당자와 협의해 통합 또는 은퇴 결정 — 리더가 임의로 수정하지 않는다(모듈 경계 원칙). PR #46(disclosure 어댑터)은 배포 서빙 경로 밖이므로 M 게이트와 무관하게 독립 판단.
