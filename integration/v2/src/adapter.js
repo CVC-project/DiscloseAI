@@ -17,20 +17,48 @@
 (function () {
   "use strict";
 
-  // sector ko → {id, en, color}. Covers the 12 distinct sectors in top50.csv.
+  // sector ko → {id, en, color}. universe 25 섹터 전량 등록 (universe/PLAN.md U-D7·§5.5 V-2).
+  // 색 = 패밀리(계열) 그룹핑 — 관련 산업끼리 인접 색상. 배정 절차는 DESIGN.md §2.5 참조.
+  // ⚠️ 신규 색 추가·변경은 DESIGN.md 절차 준수 + extract_data.py V-2 assert 통과 필수.
+  // (구 12종 중 sectors.json에 없는 바이오/2차전지/디스플레이는 하위호환용으로 유지 — 미사용.)
   const SECTOR_DEF = {
-    "반도체":         { id: "semi",    en: "Semiconductor", color: "#5eead4" },
-    "금융":           { id: "fin",     en: "Financials",    color: "#fbbf24" },
-    "플랫폼":         { id: "it",      en: "Platform",      color: "#60a5fa" },
-    "자동차":         { id: "auto",    en: "Automotive",    color: "#a78bfa" },
-    "바이오":         { id: "bio",     en: "Biotech",       color: "#f472b6" },
-    "에너지":         { id: "energy",  en: "Energy",        color: "#f97316" },
-    "2차전지":        { id: "battery", en: "Battery",       color: "#22d3ee" },
-    "중공업·방산":    { id: "indust",  en: "Industrials",   color: "#c084fc" },
-    "디스플레이":     { id: "display", en: "Display",       color: "#fde047" },
-    "건설":           { id: "cons",    en: "Construction",  color: "#fb923c" },
-    "통신":           { id: "tele",    en: "Telecom",       color: "#818cf8" },
-    "기타":           { id: "etc",     en: "Other",         color: "#94a3b8" },
+    // 테크·전자 (teal→cyan→blue)
+    "반도체":         { id: "semi",       en: "Semiconductor",   color: "#5eead4" },
+    "전기전자부품":   { id: "elec_parts", en: "Electronic Parts", color: "#2dd4bf" },
+    "소재":           { id: "materials",  en: "Materials",       color: "#67e8f9" },
+    "플랫폼":         { id: "it",         en: "Platform",        color: "#60a5fa" },
+    "통신":           { id: "tele",       en: "Telecom",         color: "#818cf8" },
+    // 모빌리티·중공업 (violet→purple)
+    "자동차":         { id: "auto",       en: "Automotive",      color: "#a78bfa" },
+    "기계·장비":      { id: "machinery",  en: "Machinery",       color: "#c4b5fd" },
+    "중공업·방산":    { id: "indust",     en: "Industrials",     color: "#c084fc" },
+    "철강·금속":      { id: "steel",      en: "Steel & Metal",   color: "#a5b4fc" },
+    // 금융 (amber→gold)
+    "금융":           { id: "fin",        en: "Financials",      color: "#fbbf24" },
+    "지주":           { id: "holding",    en: "Holdings",        color: "#fcd34d" },
+    // 에너지·화학 (orange)
+    "에너지":         { id: "energy",     en: "Energy",          color: "#f97316" },
+    "건설":           { id: "cons",       en: "Construction",    color: "#fb923c" },
+    "화학":           { id: "chem",       en: "Chemicals",       color: "#fdba74" },
+    // 소비 (lime→green)
+    "유통":           { id: "retail",     en: "Retail",          color: "#a3e635" },
+    "식음료":         { id: "food",       en: "F&B",             color: "#bef264" },
+    "레저·교육":      { id: "leisure",    en: "Leisure & Edu",   color: "#86efac" },
+    // 헬스·뷰티 (pink→rose)
+    "제약바이오":     { id: "pharma",     en: "Pharma & Bio",    color: "#f472b6" },
+    "화장품":         { id: "cosmetics",  en: "Cosmetics",       color: "#f9a8d4" },
+    "섬유·의류":      { id: "textile",    en: "Textile",         color: "#fda4af" },
+    // 미디어 (magenta)
+    "미디어":         { id: "media",      en: "Media",           color: "#e879f9" },
+    // 서비스·중립
+    "운송·물류":      { id: "logistics",  en: "Logistics",       color: "#7dd3fc" },
+    "부동산":         { id: "realestate", en: "Real Estate",     color: "#d6bfa8" },
+    "전문서비스":     { id: "prof_svc",   en: "Prof. Services",  color: "#cbd5e1" },
+    "기타":           { id: "etc",        en: "Other",           color: "#94a3b8" },
+    // 하위호환(구 top50 taxonomy, sectors.json 미포함 — 미사용)
+    "바이오":         { id: "bio",        en: "Biotech",         color: "#f472b6" },
+    "2차전지":        { id: "battery",    en: "Battery",         color: "#22d3ee" },
+    "디스플레이":     { id: "display",    en: "Display",         color: "#fde047" },
   };
 
   // graph_top50 rl type → standalone REL_STYLES key.

@@ -439,17 +439,17 @@ def main() -> int:
         if missing:
             v2_gate_failed = True
             print(
-                f"[ERROR] V-2 핸드오프 assert 실패 — SECTOR_DEF(adapter.js) 미등록 섹터 "
+                f"[ERROR] V-2 핸드오프 assert 실패 - SECTOR_DEF(adapter.js) 미등록 섹터 "
                 f"{len(missing)}건: {missing}",
                 file=sys.stderr,
             )
             print(
                 "[ERROR] 이 섹터들은 adapter.js buildPalette()가 필터링해 화면에서 조용히 "
-                "사라진다 — SECTOR_DEF + bundle.jsx 사용 시 SECTOR_PALETTE 양쪽에 등록 필요.",
+                "사라진다 - SECTOR_DEF + bundle.jsx 사용 시 SECTOR_PALETTE 양쪽에 등록 필요.",
                 file=sys.stderr,
             )
         else:
-            print("[INFO] V-2 핸드오프 assert 통과 — sectors.json 전 섹터가 SECTOR_DEF에 등록됨")
+            print("[INFO] V-2 핸드오프 assert 통과 - sectors.json 전 섹터가 SECTOR_DEF에 등록됨")
 
     top50 = load_top50()
     corp_to_ticker = {
@@ -543,7 +543,7 @@ def main() -> int:
     )
     if v2_gate_failed:
         print(
-            "[ERROR] 동기화는 완료됐지만 V-2 게이트 실패로 빌드 실패 처리(exit 1) — "
+            "[ERROR] 동기화는 완료됐지만 V-2 게이트 실패로 빌드 실패 처리(exit 1) - "
             "위 미등록 섹터 목록 참조.",
             file=sys.stderr,
         )

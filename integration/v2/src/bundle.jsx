@@ -17,23 +17,34 @@ function TweakButton() { return null; }
 
 // galaxy.jsx — Realistic Andromeda-style spiral galaxy + 3D-tilted solar system
 
+// fallback 팔레트 = adapter.js SECTOR_DEF와 정합(universe 25 섹터, id·ko·color 동일).
+// 실 데이터 로드 실패 시에만 사용. cap은 대략치(mock) — 색·id 정합이 목적(U2 이중 소스 해소).
 const SECTOR_PALETTE = (window.__realData && window.__realData.sectors && window.__realData.sectors.length) ? window.__realData.sectors : [
-  { id: 'semi',    ko: '반도체',     en: 'Semiconductor',   color: '#74EEC6', cap: 980 },
-  { id: 'fin',     ko: '금융',       en: 'Financials',      color: '#fbbf24', cap: 720 },
-  { id: 'auto',    ko: '자동차',     en: 'Automotive',      color: '#a78bfa', cap: 540 },
-  { id: 'bio',     ko: '바이오',     en: 'Biotech',         color: '#f472b6', cap: 410 },
-  { id: 'energy',  ko: '에너지',     en: 'Energy',          color: '#f97316', cap: 380 },
-  { id: 'it',      ko: 'IT/플랫폼',  en: 'Platform',        color: '#60a5fa', cap: 660 },
-  { id: 'chem',    ko: '화학',       en: 'Chemicals',       color: '#facc15', cap: 320 },
-  { id: 'steel',   ko: '철강',       en: 'Steel',           color: '#94a3b8', cap: 240 },
-  { id: 'ship',    ko: '조선',       en: 'Shipbuilding',    color: '#22d3ee', cap: 280 },
-  { id: 'cons',    ko: '건설',       en: 'Construction',    color: '#fb923c', cap: 210 },
-  { id: 'retail',  ko: '유통/소비재', en: 'Retail',         color: '#fb7185', cap: 260 },
-  { id: 'tele',    ko: '통신',       en: 'Telecom',         color: '#818cf8', cap: 290 },
-  { id: 'media',   ko: '미디어',     en: 'Media',           color: '#e879f9', cap: 180 },
-  { id: 'food',    ko: '식음료',     en: 'F&B',             color: '#a3e635', cap: 200 },
-  { id: 'logi',    ko: '운송/물류',  en: 'Logistics',       color: '#34d399', cap: 230 },
-  { id: 'mat',     ko: '소재',       en: 'Materials',       color: '#fcd34d', cap: 220 },
+  { id: 'semi',       ko: '반도체',       en: 'Semiconductor',    color: '#5eead4', cap: 3088 },
+  { id: 'it',         ko: '플랫폼',       en: 'Platform',         color: '#60a5fa', cap: 1600 },
+  { id: 'machinery',  ko: '기계·장비',    en: 'Machinery',        color: '#c4b5fd', cap: 900 },
+  { id: 'fin',        ko: '금융',         en: 'Financials',       color: '#fbbf24', cap: 1400 },
+  { id: 'pharma',     ko: '제약바이오',   en: 'Pharma & Bio',     color: '#f472b6', cap: 800 },
+  { id: 'elec_parts', ko: '전기전자부품', en: 'Electronic Parts', color: '#2dd4bf', cap: 720 },
+  { id: 'retail',     ko: '유통',         en: 'Retail',           color: '#a3e635', cap: 520 },
+  { id: 'chem',       ko: '화학',         en: 'Chemicals',        color: '#fdba74', cap: 640 },
+  { id: 'steel',      ko: '철강·금속',    en: 'Steel & Metal',    color: '#a5b4fc', cap: 480 },
+  { id: 'materials',  ko: '소재',         en: 'Materials',        color: '#67e8f9', cap: 440 },
+  { id: 'auto',       ko: '자동차',       en: 'Automotive',       color: '#a78bfa', cap: 1100 },
+  { id: 'food',       ko: '식음료',       en: 'F&B',              color: '#bef264', cap: 360 },
+  { id: 'holding',    ko: '지주',         en: 'Holdings',         color: '#fcd34d', cap: 700 },
+  { id: 'cons',       ko: '건설',         en: 'Construction',     color: '#fb923c', cap: 340 },
+  { id: 'media',      ko: '미디어',       en: 'Media',            color: '#e879f9', cap: 260 },
+  { id: 'textile',    ko: '섬유·의류',    en: 'Textile',          color: '#fda4af', cap: 180 },
+  { id: 'leisure',    ko: '레저·교육',    en: 'Leisure & Edu',    color: '#86efac', cap: 200 },
+  { id: 'etc',        ko: '기타',         en: 'Other',            color: '#94a3b8', cap: 150 },
+  { id: 'indust',     ko: '중공업·방산',  en: 'Industrials',      color: '#c084fc', cap: 620 },
+  { id: 'logistics',  ko: '운송·물류',    en: 'Logistics',        color: '#7dd3fc', cap: 300 },
+  { id: 'realestate', ko: '부동산',       en: 'Real Estate',      color: '#d6bfa8', cap: 170 },
+  { id: 'cosmetics',  ko: '화장품',       en: 'Cosmetics',        color: '#f9a8d4', cap: 190 },
+  { id: 'prof_svc',   ko: '전문서비스',   en: 'Prof. Services',   color: '#cbd5e1', cap: 130 },
+  { id: 'energy',     ko: '에너지',       en: 'Energy',           color: '#f97316', cap: 420 },
+  { id: 'tele',       ko: '통신',         en: 'Telecom',          color: '#818cf8', cap: 380 },
 ];
 
 // Seeded RNG factory
