@@ -9,7 +9,10 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from modules.relation.valuechain.extract.related_party import parse_note
+from modules.relation.valuechain.extract.related_party import (
+    parse_note,
+    parse_note_transposed,
+)
 
 FIXTURE = (
     Path(__file__).parent.parent / "fixtures" / "valuechain_related_party_sample.txt"
@@ -18,6 +21,11 @@ HYUNDAI_ROTEM_FIXTURE = (
     Path(__file__).parent.parent
     / "fixtures"
     / "valuechain_related_party_hyundai_rotem.txt"
+)
+LIG_TRANSPOSED_FIXTURE = (
+    Path(__file__).parent.parent
+    / "fixtures"
+    / "valuechain_related_party_transposed_lig.html"
 )
 
 
@@ -138,3 +146,52 @@ def test_hyundai_rotem_zero_values_excluded():
     assert "동북선도시철도㈜" not in counterparties_supply
     assert parse_note("") == []
     assert parse_note("아무 표도 없는 일반 서술문입니다.") == []
+
+
+# --- 전치(transposed)형: LIG디펜스앤에어로스페이스(2026-07-22 실측) ---
+# parse_note()가 가정하는 "행=거래유형·열=상대회사명"의 정반대(행=상대회사명,
+# 열=거래유형) — text_html의 ROWSPAN 카테고리를 그리드로 복원해 읽는다.
+
+
+def _parse_lig_transposed_fixture() -> list[dict]:
+    return parse_note_transposed(LIG_TRANSPOSED_FIXTURE.read_text(encoding="utf-8"))
+
+
+def test_transposed_parses_correct_amounts():
+    results = _parse_lig_transposed_fixture()
+    by_counterparty = {
+        (r["counterparty"], r["direction"]): r["amount"] for r in results
+    }
+    assert by_counterparty[("(주)엘아이지", "supply")] == 4_768_630_000
+    assert by_counterparty[("엘아이지풍산프로테크(주)", "customer")] == 730_547_000
+    assert by_counterparty[("엘아이지풍산프로테크(주)", "supply")] == 8_861_657_000
+
+
+def test_transposed_excludes_receivable_payable_balance_columns():
+    """"매출채권"/"매입채무"는 거래금액이 아니라 잔액이므로 제외돼야 한다."""
+    results = _parse_lig_transposed_fixture()
+    labels = {r["label"] for r in results}
+    assert "매출채권" not in labels
+    assert "매입채무" not in labels
+    assert "기타채권" not in labels
+    assert "기타채무" not in labels
+
+
+def test_transposed_excludes_summary_row():
+    """"전체 특수관계자" 합계 행은 개별 법인이 아니므로 counterparty로 잡히면 안 된다."""
+    results = _parse_lig_transposed_fixture()
+    counterparties = {r["counterparty"] for r in results}
+    assert "전체 특수관계자" not in counterparties
+
+
+def test_transposed_zero_amounts_excluded():
+    """(주)엘아이지의 매출 등=0원은 엣지를 만들지 않는다."""
+    results = _parse_lig_transposed_fixture()
+    assert ("(주)엘아이지", "customer") not in {
+        (r["counterparty"], r["direction"]) for r in results
+    }
+
+
+def test_transposed_returns_empty_when_no_matching_table():
+    assert parse_note_transposed("<table><tr><th>foo</th></tr></table>") == []
+    assert parse_note_transposed(None) == []

@@ -190,6 +190,104 @@ def parse_note(text_md: str | None) -> list[dict]:
     return results
 
 
+# ★ 2026-07-22 전치(transposed)형 거래금액 표(하나금융지주 계열·LIG디펜스앤에어로
+# 스페이스 등, 위 parse_note() 주석에서 후속 과제로 남겼던 것) — parse_note()가
+# 가정하는 "행=거래유형·열=상대회사명"의 정반대로 "행=상대회사명(ROWSPAN
+# 카테고리)·열=거래유형"이다. text_md 평탄화는 이 표의 ROWSPAN도 뭉개므로
+# U3에서 구축한 text_html + rowspan 그리드 복원 경로(_html_table_grid,
+# _find_header_row)를 그대로 재사용한다(U-D2 준용 — 표 파싱 인프라 1벌).
+_UNIT_RE = re.compile(r"\(단위\s*[:：]\s*([^)]+)\)")
+
+
+def parse_note_transposed(text_html: str | None) -> list[dict]:
+    """전치형 거래금액 표(하나금융지주·LIG디펜스앤에어로스페이스류) →
+    parse_note()와 동일 스키마 [{counterparty, direction, amount, label}].
+
+    "당기"/"(단위 : ...)" 소표를 순서대로 만나 상태를 갱신하고, "매출 등"·
+    "매입 등" 열 헤더가 있는 본표를 만나면 그 상태로 처리한다. 전기 표는
+    parse_note()와 동일하게 스킵(그 회사 전년도 보고서의 당기 블록에서 이미
+    잡힘, 중복 방지).
+    """
+    results: list[dict] = []
+    if not text_html:
+        return results
+
+    soup = BeautifulSoup(text_html, "html.parser")
+    period = None
+    multiplier = 1
+    for table in soup.find_all("table"):
+        text = table.get_text(" ", strip=True)
+        # "당기"/"(단위 : 천원)"가 별도 소표이거나 한 소표 안에 같이 있는 경우 둘 다
+        # 대응(회사마다 렌더링 편차, ★2026-07-22 실측: LIG는 한 표에 같이 있음).
+        if text.startswith(("당기", "전기")) and len(text) < 30:
+            period = "당기" if text.startswith("당기") else "전기"
+            unit_m = _UNIT_RE.search(text)
+            if unit_m:
+                multiplier = _UNIT_MULTIPLIERS.get(unit_m.group(1).strip(), 1)
+            continue
+        unit_m = _UNIT_RE.search(text)
+        if unit_m and len(text) < 30:
+            multiplier = _UNIT_MULTIPLIERS.get(unit_m.group(1).strip(), 1)
+            continue
+
+        ths = [th.get_text(strip=True) for th in table.find_all("th")]
+        sales_present = "매출 등" in ths
+        purchase_present = "매입 등" in ths
+        if not (sales_present or purchase_present):
+            continue
+        if period != "당기":
+            continue  # 전기 표(또는 기간 마커를 못 만난 표) — 스킵
+
+        grid = _html_table_grid(table)
+        header_idx = _find_header_row(
+            grid, {"매출 등"} if sales_present else {"매입 등"}
+        )
+        if header_idx is None:
+            continue
+        header_row = grid[header_idx]
+        amount_cols = [
+            (idx, "customer")
+            for idx, h in enumerate(header_row)
+            if h.startswith(_SALES_LABEL_PREFIXES)
+            and not any(x in h for x in _EXCLUDE_LABEL_SUBSTR)
+        ] + [
+            (idx, "supply")
+            for idx, h in enumerate(header_row)
+            if h.startswith(_PURCHASE_LABEL_PREFIXES)
+            and not any(x in h for x in _EXCLUDE_LABEL_SUBSTR)
+        ]
+        if not amount_cols:
+            continue
+        name_col = min(idx for idx, _ in amount_cols) - 1
+        category_col = name_col - 1
+        if name_col < 0:
+            continue
+
+        for row in grid[header_idx + 1 :]:
+            if len(row) <= name_col:
+                continue
+            counterparty = row[name_col].strip()
+            if not counterparty or counterparty.startswith("기타"):
+                continue
+            if category_col >= 0 and counterparty == row[category_col].strip():
+                continue  # "전체 특수관계자" 같은 합계 행 — 개별 법인 아님
+            for idx, direction in amount_cols:
+                if idx >= len(row):
+                    continue
+                amount = _parse_amount(row[idx], multiplier)
+                if amount is None:
+                    continue
+                results.append(
+                    {
+                        "counterparty": counterparty,
+                        "direction": direction,
+                        "amount": amount,
+                        "label": header_row[idx],
+                    }
+                )
+    return results
+
+
 # 2026-07-22 실측(109노트 표본 조사): "구분/특수관계자명" 2-컬럼 카테고리 나열형이
 # 여러 회사에서 동일하게 확인됨(삼성바이오로직스·SK이노베이션·HD현대·HD현대중공업·
 # HD한국조선해양 등) — U-D2 "파서 1벌, 소비자 2곳" 원칙에 따라 같은 노트에서 이
@@ -568,7 +666,13 @@ def apply(session=None, sections: list[dict] | None = None) -> dict:
             rcept_no = row["rcept_no"]
             as_of = row["fiscal_year"]
 
-            for item in parse_note(row["text_md"]):
+            note_items = parse_note(row["text_md"])
+            if not note_items:
+                # 행=거래유형 구조가 아예 없는 노트(전치형, 하나금융지주·
+                # LIG디펜스앤에어로스페이스류)에 한해서만 폴백 — 이미 잡힌
+                # 노트를 이중으로 다시 읽지 않도록 방지(U3와 동일 관례).
+                note_items = parse_note_transposed(row.get("text_html"))
+            for item in note_items:
                 corp_code = resolve_corp(
                     item["counterparty"], name_to_corp, session, sample_chunk_id=rcept_no
                 )
