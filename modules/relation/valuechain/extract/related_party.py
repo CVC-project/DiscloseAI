@@ -64,8 +64,13 @@ _EXCLUDE_LABEL_SUBSTR = ("채권", "채무", "잔액")
 # ★ 여전히 커버 못 하는 다수(하나금융지주 계열·LIG넥스원 등)는 **행=상대회사명**인
 # 전치(transposed) 표 구조 — 이 함수가 가정하는 "행=거래유형·열=상대회사명"의 반대라
 # 별도 파서가 필요(후속 과제, PROGRESS.md에 정직하게 기록). 억지 매칭 금지.
-_SALES_LABEL_PREFIXES = ("매출", "수익거래")
-_PURCHASE_LABEL_PREFIXES = ("매입", "비용거래")
+# ★ 2026-07-22 추가 실측(기아·현대모비스·한화시스템 investigate): "재화의 판매로 인한
+# 수익, 특수관계자거래"/"재화의 매입, 특수관계자거래"(한화시스템 컬럼 헤더) 라벨도
+# 동일 어휘군 — startswith 접두어에 추가(기아의 "특수관계자 기타매출"/"특수관계자
+# 기타매입" 같은 비상거래 컬럼은 "특수관계자"로 시작해 이 접두어와 자연히 불일치,
+# 오분류 위험 없음 확인).
+_SALES_LABEL_PREFIXES = ("매출", "수익거래", "재화의 판매로 인한 수익")
+_PURCHASE_LABEL_PREFIXES = ("매입", "비용거래", "재화의 매입")
 
 
 def _split_row(line: str) -> list[str]:
@@ -199,14 +204,19 @@ def parse_note(text_md: str | None) -> list[dict]:
 _UNIT_RE = re.compile(r"\(단위\s*[:：]\s*([^)]+)\)")
 
 
+def _label_match(h: str, prefixes: tuple[str, ...]) -> bool:
+    return h.startswith(prefixes) and not any(x in h for x in _EXCLUDE_LABEL_SUBSTR)
+
+
 def parse_note_transposed(text_html: str | None) -> list[dict]:
-    """전치형 거래금액 표(하나금융지주·LIG디펜스앤에어로스페이스류) →
+    """전치형 거래금액 표(하나금융지주·LIG디펜스앤에어로스페이스·기아·한화시스템류) →
     parse_note()와 동일 스키마 [{counterparty, direction, amount, label}].
 
-    "당기"/"(단위 : ...)" 소표를 순서대로 만나 상태를 갱신하고, "매출 등"·
-    "매입 등" 열 헤더가 있는 본표를 만나면 그 상태로 처리한다. 전기 표는
-    parse_note()와 동일하게 스킵(그 회사 전년도 보고서의 당기 블록에서 이미
-    잡힘, 중복 방지).
+    "당기"/"(단위 : ...)" 소표를 순서대로 만나 상태를 갱신하고, 매출/매입 계열
+    열 헤더(_SALES_LABEL_PREFIXES/_PURCHASE_LABEL_PREFIXES — "매출 등"·"매출"·
+    "재화의 판매로 인한 수익..." 등 회사별 표기 편차 전부 포함)가 있는 본표를
+    만나면 그 상태로 처리한다. 전기 표는 parse_note()와 동일하게 스킵(그 회사
+    전년도 보고서의 당기 블록에서 이미 잡힘, 중복 방지).
     """
     results: list[dict] = []
     if not text_html:
@@ -217,44 +227,45 @@ def parse_note_transposed(text_html: str | None) -> list[dict]:
     multiplier = 1
     for table in soup.find_all("table"):
         text = table.get_text(" ", strip=True)
-        # "당기"/"(단위 : 천원)"가 별도 소표이거나 한 소표 안에 같이 있는 경우 둘 다
-        # 대응(회사마다 렌더링 편차, ★2026-07-22 실측: LIG는 한 표에 같이 있음).
-        if text.startswith(("당기", "전기")) and len(text) < 30:
-            period = "당기" if text.startswith("당기") else "전기"
-            unit_m = _UNIT_RE.search(text)
-            if unit_m:
-                multiplier = _UNIT_MULTIPLIERS.get(unit_m.group(1).strip(), 1)
-            continue
-        unit_m = _UNIT_RE.search(text)
-        if unit_m and len(text) < 30:
-            multiplier = _UNIT_MULTIPLIERS.get(unit_m.group(1).strip(), 1)
-            continue
+        ths_probe = table.find_all("th")
+        # 제목/기간/단위 소표(회사마다 렌더링 편차 — 별도 표이거나 한 표 안에 같이
+        # 있거나, ★2026-07-22 추가 실측(기아·한화시스템): "제목 행 + 당기·단위 행"
+        # 2행짜리 한 표인 경우도 있음)는 전부 `<th>`가 없는 작은 표라는 공통점으로
+        # 식별한다 — 본 데이터 표는 항상 `<thead><th>`를 쓰므로 구분에 안전하다.
+        if not ths_probe:
+            cell_texts = [c.get_text(strip=True) for c in table.find_all(["td", "te"])]
+            if len(cell_texts) <= 4:
+                if "당기" in cell_texts:
+                    period = "당기"
+                elif "전기" in cell_texts:
+                    period = "전기"
+                unit_m = _UNIT_RE.search(text)
+                if unit_m:
+                    multiplier = _UNIT_MULTIPLIERS.get(unit_m.group(1).strip(), 1)
+                continue
 
-        ths = [th.get_text(strip=True) for th in table.find_all("th")]
-        sales_present = "매출 등" in ths
-        purchase_present = "매입 등" in ths
-        if not (sales_present or purchase_present):
+        ths = [th.get_text(strip=True) for th in ths_probe]
+        sales_ths = [h for h in ths if _label_match(h, _SALES_LABEL_PREFIXES)]
+        purchase_ths = [h for h in ths if _label_match(h, _PURCHASE_LABEL_PREFIXES)]
+        if not (sales_ths or purchase_ths):
             continue
         if period != "당기":
             continue  # 전기 표(또는 기간 마커를 못 만난 표) — 스킵
 
         grid = _html_table_grid(table)
-        header_idx = _find_header_row(
-            grid, {"매출 등"} if sales_present else {"매입 등"}
-        )
+        anchor_label = sales_ths[0] if sales_ths else purchase_ths[0]
+        header_idx = _find_header_row(grid, {anchor_label})
         if header_idx is None:
             continue
         header_row = grid[header_idx]
         amount_cols = [
             (idx, "customer")
             for idx, h in enumerate(header_row)
-            if h.startswith(_SALES_LABEL_PREFIXES)
-            and not any(x in h for x in _EXCLUDE_LABEL_SUBSTR)
+            if _label_match(h, _SALES_LABEL_PREFIXES)
         ] + [
             (idx, "supply")
             for idx, h in enumerate(header_row)
-            if h.startswith(_PURCHASE_LABEL_PREFIXES)
-            and not any(x in h for x in _EXCLUDE_LABEL_SUBSTR)
+            if _label_match(h, _PURCHASE_LABEL_PREFIXES)
         ]
         if not amount_cols:
             continue
@@ -267,7 +278,12 @@ def parse_note_transposed(text_html: str | None) -> list[dict]:
             if len(row) <= name_col:
                 continue
             counterparty = row[name_col].strip()
-            if not counterparty or counterparty.startswith("기타"):
+            if (
+                not counterparty
+                or counterparty.startswith("기타")
+                or counterparty.endswith("기타")  # ★기아 실측: "유의적인 영향력을 행사하는 기타" 등 집계 캐치올
+                or "합계" in counterparty
+            ):
                 continue
             if category_col >= 0 and counterparty == row[category_col].strip():
                 continue  # "전체 특수관계자" 같은 합계 행 — 개별 법인 아님

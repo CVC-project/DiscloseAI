@@ -27,6 +27,16 @@ LIG_TRANSPOSED_FIXTURE = (
     / "fixtures"
     / "valuechain_related_party_transposed_lig.html"
 )
+KIA_TRANSPOSED_FIXTURE = (
+    Path(__file__).parent.parent
+    / "fixtures"
+    / "valuechain_related_party_transposed_kia.html"
+)
+HANWHA_SYSTEMS_TRANSPOSED_FIXTURE = (
+    Path(__file__).parent.parent
+    / "fixtures"
+    / "valuechain_related_party_transposed_hanwha_systems.html"
+)
 
 
 def _parse_fixture() -> list[dict]:
@@ -195,3 +205,101 @@ def test_transposed_zero_amounts_excluded():
 def test_transposed_returns_empty_when_no_matching_table():
     assert parse_note_transposed("<table><tr><th>foo</th></tr></table>") == []
     assert parse_note_transposed(None) == []
+
+
+# --- 전치형 회귀: 기아(2026-07-22 실측) — 열 헤더가 "매출 등"이 아니라 "매출"
+# (bare, 접미어 없음) 단독 라벨 + 제목·기간·단위가 한 표 2행에 함께 있는 형태 ---
+
+
+def _parse_kia_transposed_fixture() -> list[dict]:
+    return parse_note_transposed(KIA_TRANSPOSED_FIXTURE.read_text(encoding="utf-8"))
+
+
+def test_kia_transposed_recognizes_bare_sale_purchase_labels():
+    """"매출 등"이 아니라 "매출"(bare) 단독 라벨도 customer/supply로 인식해야 한다."""
+    results = _parse_kia_transposed_fixture()
+    by_counterparty = {
+        (r["counterparty"], r["direction"]): r["amount"] for r in results
+    }
+    assert by_counterparty[("현대자동차㈜", "customer")] == 559_775 * 1_000_000
+    assert by_counterparty[("현대자동차㈜", "supply")] == 653_348 * 1_000_000
+    assert by_counterparty[("Hyundai Motor America", "customer")] == 191_408 * 1_000_000
+
+
+def test_kia_transposed_excludes_other_income_and_purchase_columns():
+    """"기타수익"/"기타매입"은 상거래 매출/매입이 아니므로 제외돼야 한다."""
+    results = _parse_kia_transposed_fixture()
+    labels = {r["label"] for r in results}
+    assert "기타수익" not in labels
+    assert "기타매입" not in labels
+
+
+def test_kia_transposed_excludes_catchall_aggregate_row():
+    """"유의적인 영향력을 행사하는 기타"처럼 "기타"로 끝나는 집계 캐치올 행은
+    개별 법인이 아니므로 상대회사로 잡히면 안 된다."""
+    results = _parse_kia_transposed_fixture()
+    counterparties = {r["counterparty"] for r in results}
+    assert "유의적인 영향력을 행사하는 기타" not in counterparties
+
+
+def test_kia_transposed_handles_title_and_period_marker_in_one_table():
+    """제목("특수관계자거래에 대한 공시")과 기간·단위("당기"/"(단위 : 백만원)")가
+    별도 표가 아니라 한 표 2행에 같이 있는 경우도 기간 마커로 인식해야 한다
+    (실측 버그: 이 경우 period가 끝내 설정되지 않아 결과가 항상 0건이었음)."""
+    results = _parse_kia_transposed_fixture()
+    assert len(results) > 0
+
+
+def test_kia_transposed_zero_amounts_excluded():
+    """Hyundai Motor Manufacturing Alabama,LLC의 매출=0원은 엣지를 만들지 않는다."""
+    results = _parse_kia_transposed_fixture()
+    assert ("Hyundai Motor Manufacturing Alabama,LLC", "customer") not in {
+        (r["counterparty"], r["direction"]) for r in results
+    }
+
+
+# --- 전치형 회귀: 한화시스템(2026-07-22 실측) — 열 헤더가 "재화의 판매로 인한
+# 수익, 특수관계자거래"/"재화의 매입, 특수관계자거래"(현대모비스 서술형 라벨과
+# 동일 어휘군, 컬럼 헤더로 인코딩) ---
+
+
+def _parse_hanwha_systems_transposed_fixture() -> list[dict]:
+    return parse_note_transposed(
+        HANWHA_SYSTEMS_TRANSPOSED_FIXTURE.read_text(encoding="utf-8")
+    )
+
+
+def test_hanwha_systems_transposed_recognizes_descriptive_labels():
+    results = _parse_hanwha_systems_transposed_fixture()
+    by_counterparty = {
+        (r["counterparty"], r["direction"]): r["amount"] for r in results
+    }
+    assert by_counterparty[("한화에어로스페이스(주)", "customer")] == 148_447_645_000
+    assert by_counterparty[("한화에어로스페이스(주)", "supply")] == 4_691_370_000
+
+
+def test_hanwha_systems_transposed_excludes_other_sale_purchase_and_asset_columns():
+    """"특수관계자 기타매출"/"특수관계자 기타매입"/"특수관계자거래, 자산증감"은
+    상거래 매출/매입이 아니므로 제외돼야 한다."""
+    results = _parse_hanwha_systems_transposed_fixture()
+    labels = {r["label"] for r in results}
+    assert "특수관계자 기타매출" not in labels
+    assert "특수관계자 기타매입" not in labels
+    assert "특수관계자거래, 자산증감" not in labels
+
+
+def test_hanwha_systems_transposed_excludes_catchall_and_summary_rows():
+    """"기타" 단독 행과 "전체 특수관계자 합계" 합계 행은 개별 법인이 아니다."""
+    results = _parse_hanwha_systems_transposed_fixture()
+    counterparties = {r["counterparty"] for r in results}
+    assert "기타" not in counterparties
+    assert "전체 특수관계자  합계" not in counterparties
+    assert not any("합계" in c for c in counterparties)
+
+
+def test_hanwha_systems_transposed_zero_sales_excluded():
+    """㈜한화의 매출(재화의 판매로 인한 수익)=0원은 엣지를 만들지 않는다."""
+    results = _parse_hanwha_systems_transposed_fixture()
+    assert ("㈜한화", "customer") not in {
+        (r["counterparty"], r["direction"]) for r in results
+    }
