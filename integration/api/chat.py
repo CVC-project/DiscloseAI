@@ -1,9 +1,11 @@
 """
-api/chat.py — Vercel 서버리스 함수: DartChatbot(OpenDART RAG · Amazon Bedrock) 프록시.
+integration/api/chat.py — Vercel 서버리스 함수: DartChatbot(OpenDART RAG · Amazon Bedrock) 프록시.
 
-api/PLAN.md M2. 브라우저(same-origin `/api/chat`) -> 이 함수 -> DartChatbot(GPU 서버)
-순서로 중계한다. DartChatbot의 실제 주소(DART_CHAT_ORIGIN)는 Vercel 환경변수에만
-존재 — 저장소·프론트 소스 어디에도 하드코딩하지 않는다(보안 규칙, api/PLAN.md M2).
+Vercel Root Directory=integration이라 함수도 이 폴더 밑에 있어야 인식된다
+(2026-07-22 배포 실측 — 루트 api/는 Root Directory 밖이라 404). api/PLAN.md M2.
+브라우저(same-origin `/api/chat`) -> 이 함수 -> DartChatbot(GPU 서버) 순서로 중계한다.
+DartChatbot의 실제 주소(DART_CHAT_ORIGIN)는 Vercel 환경변수에만 존재 — 저장소·프론트
+소스 어디에도 하드코딩하지 않는다(보안 규칙, api/PLAN.md M2).
 
 계약(C1, api/PLAN.md): POST /api/chat {"messages":[{"role","content"}]}
 -> {"answer", "disclaimer", "sources"?}

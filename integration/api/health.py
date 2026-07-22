@@ -1,6 +1,6 @@
 """
-api/health.py — Vercel 배포 자체(및 DART_CHAT_ORIGIN 배선)가 살아있는지 확인하는 헬스체크.
-DartChatbot을 직접 호출하지 않는다 — 이 함수·환경변수 배선만 확인(api/PLAN.md M2).
+integration/api/health.py — Vercel 배포 자체(및 DART_CHAT_ORIGIN 배선)가 살아있는지 확인하는
+헬스체크. DartChatbot을 직접 호출하지 않는다 — 이 함수·환경변수 배선만 확인(api/PLAN.md M2).
 """
 
 import json
