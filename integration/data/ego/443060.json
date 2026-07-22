@@ -1,0 +1,51 @@
+{
+  "t": "443060",
+  "n": "HD현대마린솔루션",
+  "s": "제약바이오",
+  "tier": "named400",
+  "layers": {
+    "governance": [
+      {
+        "t": "267250",
+        "n": "HD현대",
+        "type": "subsidiary",
+        "detail": "62.0%",
+        "dir": "in",
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
+        "t": "267250",
+        "n": "HD현대",
+        "type": "subsidiary",
+        "detail": "55.32%",
+        "dir": "in",
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
+        "t": "009540",
+        "n": "HD한국조선해양",
+        "type": "dart_filing",
+        "detail": "",
+        "dir": "in",
+        "s": "금융",
+        "tier": "named400"
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "009540",
+          "n": "HD한국조선해양",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 40568000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        }
+      ],
+      "down": []
+    }
+  }
+}

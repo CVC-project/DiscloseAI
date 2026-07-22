@@ -1,0 +1,124 @@
+{
+  "t": "000810",
+  "n": "삼성화재해상보험",
+  "s": "금융",
+  "tier": "named400",
+  "layers": {
+    "governance": [
+      {
+        "t": "032830",
+        "n": "삼성생명",
+        "type": "investment",
+        "detail": "14.98%",
+        "dir": "in",
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
+        "t": "448730",
+        "n": "삼성FN리츠",
+        "type": "investment",
+        "detail": "18.73%",
+        "dir": "out",
+        "s": "부동산",
+        "tier": "dot"
+      },
+      {
+        "t": "005930",
+        "n": "삼성전자",
+        "type": "ftc_group",
+        "detail": "삼성",
+        "dir": "in",
+        "s": "반도체",
+        "tier": "named400"
+      },
+      {
+        "t": "207940",
+        "n": "삼성바이오로직스",
+        "type": "dart_filing",
+        "detail": "",
+        "dir": "in",
+        "s": "제약바이오",
+        "tier": "named400"
+      },
+      {
+        "t": "028260",
+        "n": "삼성물산",
+        "type": "dart_filing",
+        "detail": "",
+        "dir": "in",
+        "s": "유통",
+        "tier": "named400"
+      },
+      {
+        "t": "005930",
+        "n": "삼성전자",
+        "type": "dart_filing",
+        "detail": "",
+        "dir": "out",
+        "s": "반도체",
+        "tier": "named400"
+      },
+      {
+        "t": "006400",
+        "n": "삼성SDI",
+        "type": "dart_filing",
+        "detail": "",
+        "dir": "out",
+        "s": "전기전자부품",
+        "tier": "named400"
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "296640",
+          "n": "이노에이엑스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2317000000.0,
+          "as_of": 2024,
+          "prov": "단일판매ㆍ공급계약체결 · 삼성화재해상보험 주식회사"
+        },
+        {
+          "t": "010140",
+          "n": "삼성중공업",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 8613979000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출 등"
+        },
+        {
+          "t": "010140",
+          "n": "삼성중공업",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 12594977000.0,
+          "as_of": 2024,
+          "prov": "특수관계자와의 거래 · 매출 등"
+        }
+      ],
+      "down": [
+        {
+          "t": "010140",
+          "n": "삼성중공업",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 21681377000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입 등"
+        },
+        {
+          "t": "010140",
+          "n": "삼성중공업",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 18867654000.0,
+          "as_of": 2024,
+          "prov": "특수관계자와의 거래 · 매입 등"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "t": "210980",
+  "n": "SK디앤디",
+  "s": "부동산",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "006120",
+        "n": "SK디스커버리",
+        "type": "associate",
+        "detail": "31.27%",
+        "dir": "in",
+        "s": "금융",
+        "tier": "dot"
+      },
+      {
+        "t": "096770",
+        "n": "SK이노베이션",
+        "type": "dart_filing",
+        "detail": "",
+        "dir": "in",
+        "s": "에너지",
+        "tier": "named400"
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "034730",
+          "n": "SK",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 6652000000.0,
+          "as_of": 2023,
+          "prov": "연결실체와 특수관계자간의 거래 · 매출 등"
+        }
+      ],
+      "down": [
+        {
+          "t": "034730",
+          "n": "SK",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1246000000.0,
+          "as_of": 2023,
+          "prov": "연결실체와 특수관계자간의 거래 · 매입 등"
+        }
+      ]
+    }
+  }
+}

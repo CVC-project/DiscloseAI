@@ -1,0 +1,52 @@
+{
+  "t": "452260",
+  "n": "한화갤러리아",
+  "s": "유통",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "000880",
+        "n": "한화",
+        "type": "associate",
+        "detail": "36.15%",
+        "dir": "in",
+        "s": "화학",
+        "tier": "named400"
+      },
+      {
+        "t": "012450",
+        "n": "한화에어로스페이스",
+        "type": "ftc_group",
+        "detail": "한화",
+        "dir": "in",
+        "s": "중공업·방산",
+        "tier": "named400"
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "012450",
+          "n": "한화에어로스페이스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 12506963000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 등"
+        }
+      ],
+      "down": [
+        {
+          "t": "012450",
+          "n": "한화에어로스페이스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 145677000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입 등"
+        }
+      ]
+    }
+  }
+}

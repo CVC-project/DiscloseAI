@@ -1,0 +1,60 @@
+{
+  "t": "489790",
+  "n": "한화비전",
+  "s": "반도체",
+  "tier": "named400",
+  "layers": {
+    "governance": [
+      {
+        "t": "000880",
+        "n": "한화",
+        "type": "associate",
+        "detail": "33.95%",
+        "dir": "in",
+        "s": "화학",
+        "tier": "named400"
+      },
+      {
+        "t": "012450",
+        "n": "한화에어로스페이스",
+        "type": "ftc_group",
+        "detail": "한화",
+        "dir": "in",
+        "s": "중공업·방산",
+        "tier": "named400"
+      },
+      {
+        "t": "012450",
+        "n": "한화에어로스페이스",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "in",
+        "s": "중공업·방산",
+        "tier": "named400"
+      },
+      {
+        "t": "012450",
+        "n": "한화에어로스페이스",
+        "type": "dart_filing",
+        "detail": "",
+        "dir": "in",
+        "s": "중공업·방산",
+        "tier": "named400"
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "012450",
+          "n": "한화에어로스페이스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 15610027000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 등"
+        }
+      ],
+      "down": []
+    }
+  }
+}

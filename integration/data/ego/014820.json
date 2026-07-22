@@ -1,0 +1,51 @@
+{
+  "t": "014820",
+  "n": "동원시스템즈",
+  "s": "소재",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "006040",
+        "n": "동원산업",
+        "type": "associate",
+        "detail": "30.91%",
+        "dir": "in",
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
+        "t": "006040",
+        "n": "동원산업",
+        "type": "subsidiary",
+        "detail": "71.04%",
+        "dir": "in",
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
+        "t": "006040",
+        "n": "동원산업",
+        "type": "ftc_group",
+        "detail": "동원",
+        "dir": "in",
+        "s": "금융",
+        "tier": "named400"
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "317830",
+          "n": "에스피시스템스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 6700000000.0,
+          "as_of": 2022,
+          "prov": "단일판매ㆍ공급계약체결 · 동원시스템즈(주)"
+        }
+      ],
+      "down": []
+    }
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "t": "267250",
+  "n": "HD현대",
+  "s": "금융",
+  "tier": "named400",
+  "layers": {
+    "governance": [
+      {
+        "t": "009540",
+        "n": "HD한국조선해양",
+        "type": "associate",
+        "detail": "35.05%",
+        "dir": "out",
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
+        "t": "329180",
+        "n": "HD현대중공업",
+        "type": "ftc_group",
+        "detail": "HD현대",
+        "dir": "in",
+        "s": "중공업·방산",
+        "tier": "named400"
+      },
+      {
+        "t": "267260",
+        "n": "HD현대일렉트릭",
+        "type": "associate",
+        "detail": "37.18%",
+        "dir": "out",
+        "s": "전기전자부품",
+        "tier": "named400"
+      },
+      {
+        "t": "443060",
+        "n": "HD현대마린솔루션",
+        "type": "subsidiary",
+        "detail": "62.0%",
+        "dir": "out",
+        "s": "제약바이오",
+        "tier": "named400"
+      },
+      {
+        "t": "443060",
+        "n": "HD현대마린솔루션",
+        "type": "subsidiary",
+        "detail": "55.32%",
+        "dir": "out",
+        "s": "제약바이오",
+        "tier": "named400"
+      },
+      {
+        "t": "009540",
+        "n": "HD한국조선해양",
+        "type": "associate",
+        "detail": "35.05%",
+        "dir": "out",
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
+        "t": "267260",
+        "n": "HD현대일렉트릭",
+        "type": "associate",
+        "detail": "37.22%",
+        "dir": "out",
+        "s": "전기전자부품",
+        "tier": "named400"
+      },
+      {
+        "t": "009540",
+        "n": "HD한국조선해양",
+        "type": "dart_filing",
+        "detail": "",
+        "dir": "in",
+        "s": "금융",
+        "tier": "named400"
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "329180",
+          "n": "HD현대중공업",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 600000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "t": "009540",
+          "n": "HD한국조선해양",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 44283000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        }
+      ],
+      "down": [
+        {
+          "t": "460930",
+          "n": "현대힘스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 7652000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등, 특수관계자거래(*1)"
+        }
+      ]
+    }
+  }
+}

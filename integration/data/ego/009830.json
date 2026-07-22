@@ -1,0 +1,69 @@
+{
+  "t": "009830",
+  "n": "한화솔루션",
+  "s": "화학",
+  "tier": "named400",
+  "layers": {
+    "governance": [
+      {
+        "t": "012450",
+        "n": "한화에어로스페이스",
+        "type": "ftc_group",
+        "detail": "한화",
+        "dir": "in",
+        "s": "중공업·방산",
+        "tier": "named400"
+      },
+      {
+        "t": "000880",
+        "n": "한화",
+        "type": "associate",
+        "detail": "36.66%",
+        "dir": "in",
+        "s": "화학",
+        "tier": "named400"
+      },
+      {
+        "t": "000880",
+        "n": "한화",
+        "type": "associate",
+        "detail": "36.15%",
+        "dir": "in",
+        "s": "화학",
+        "tier": "named400"
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "255440",
+          "n": "야스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2300000000.0,
+          "as_of": 2022,
+          "prov": "단일판매ㆍ공급계약체결 · 한화솔루션 주식회사"
+        },
+        {
+          "t": "041590",
+          "n": "플래스크",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2379000000.0,
+          "as_of": 2025,
+          "prov": "단일판매ㆍ공급계약체결 · 한화솔루션 주식회사"
+        },
+        {
+          "t": "012450",
+          "n": "한화에어로스페이스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 72446870000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 등"
+        }
+      ],
+      "down": []
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "t": "029780",
+  "n": "삼성카드",
+  "s": "금융",
+  "tier": "named400",
+  "layers": {
+    "governance": [
+      {
+        "t": "005930",
+        "n": "삼성전자",
+        "type": "ftc_group",
+        "detail": "삼성",
+        "dir": "in",
+        "s": "반도체",
+        "tier": "named400"
+      },
+      {
+        "t": "032830",
+        "n": "삼성생명",
+        "type": "subsidiary",
+        "detail": "71.86%",
+        "dir": "in",
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
+        "t": "207940",
+        "n": "삼성바이오로직스",
+        "type": "dart_filing",
+        "detail": "",
+        "dir": "in",
+        "s": "제약바이오",
+        "tier": "named400"
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "064480",
+          "n": "브리지텍",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1875700000.0,
+          "as_of": 2021,
+          "prov": "단일판매ㆍ공급계약체결 · 삼성카드 주식회사"
+        },
+        {
+          "t": "115500",
+          "n": "케이씨에스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 8250000000.0,
+          "as_of": 2022,
+          "prov": "단일판매ㆍ공급계약체결 · 삼성카드주식회사"
+        }
+      ],
+      "down": []
+    }
+  }
+}

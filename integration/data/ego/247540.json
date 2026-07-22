@@ -1,0 +1,70 @@
+{
+  "t": "247540",
+  "n": "에코프로비엠",
+  "s": "전기전자부품",
+  "tier": "named400",
+  "layers": {
+    "governance": [
+      {
+        "t": "086520",
+        "n": "에코프로",
+        "type": "ftc_group",
+        "detail": "에코프로",
+        "dir": "out",
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
+        "t": "383310",
+        "n": "에코프로에이치엔",
+        "type": "ftc_group",
+        "detail": "에코프로",
+        "dir": "out",
+        "s": "화학",
+        "tier": "named400"
+      },
+      {
+        "t": "086520",
+        "n": "에코프로",
+        "type": "associate",
+        "detail": "46.04%",
+        "dir": "in",
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
+        "t": "086520",
+        "n": "에코프로",
+        "type": "associate",
+        "detail": "46.0%",
+        "dir": "in",
+        "s": "금융",
+        "tier": "named400"
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "290670",
+          "n": "대보마그네틱",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1590000000.0,
+          "as_of": 2021,
+          "prov": "단일판매ㆍ공급계약체결 · 에코프로비엠"
+        }
+      ],
+      "down": [
+        {
+          "t": "096770",
+          "n": "SK이노베이션",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2741283000000.0,
+          "as_of": 2020,
+          "prov": "단일판매ㆍ공급계약체결 · 에스케이이노베이션"
+        }
+      ]
+    }
+  }
+}

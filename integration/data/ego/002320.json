@@ -1,0 +1,42 @@
+{
+  "t": "002320",
+  "n": "한진",
+  "s": "운송·물류",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "180640",
+        "n": "한진칼",
+        "type": "associate",
+        "detail": "30.78%",
+        "dir": "in",
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
+        "t": "003490",
+        "n": "대한항공",
+        "type": "ftc_group",
+        "detail": "한진",
+        "dir": "in",
+        "s": "운송·물류",
+        "tier": "named400"
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "022100",
+          "n": "포스코DX",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 106990000000.0,
+          "as_of": 2020,
+          "prov": "단일판매ㆍ공급계약체결 · (주)한진"
+        }
+      ],
+      "down": []
+    }
+  }
+}

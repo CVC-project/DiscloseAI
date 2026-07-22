@@ -1,0 +1,69 @@
+{
+  "t": "000100",
+  "n": "유한양행",
+  "s": "제약바이오",
+  "tier": "named400",
+  "layers": {
+    "governance": [
+      {
+        "t": "424870",
+        "n": "이뮨온시아",
+        "type": "subsidiary",
+        "detail": "76.9%",
+        "dir": "out",
+        "s": "지주",
+        "tier": "dot"
+      },
+      {
+        "t": "066700",
+        "n": "테라젠이텍스",
+        "type": "investment",
+        "detail": "7.8%",
+        "dir": "out",
+        "s": "제약바이오",
+        "tier": "dot"
+      },
+      {
+        "t": "168330",
+        "n": "내츄럴엔도텍",
+        "type": "investment",
+        "detail": "5.0%",
+        "dir": "out",
+        "s": "지주",
+        "tier": "dot"
+      },
+      {
+        "t": "110020",
+        "n": "전진바이오팜",
+        "type": "investment",
+        "detail": "5.5%",
+        "dir": "out",
+        "s": "화학",
+        "tier": "dot"
+      },
+      {
+        "t": "397030",
+        "n": "에이프릴바이오",
+        "type": "investment",
+        "detail": "10.0%",
+        "dir": "out",
+        "s": "지주",
+        "tier": "named400"
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "110020",
+          "n": "전진바이오팜",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1771000000.0,
+          "as_of": 2022,
+          "prov": "단일판매ㆍ공급계약체결 · (주)유한양행"
+        }
+      ],
+      "down": []
+    }
+  }
+}

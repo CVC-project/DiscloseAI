@@ -1,0 +1,70 @@
+{
+  "t": "319400",
+  "n": "현대무벡스",
+  "s": "기계·장비",
+  "tier": "named400",
+  "layers": {
+    "governance": [
+      {
+        "t": "017800",
+        "n": "현대엘리베이터",
+        "type": "subsidiary",
+        "detail": "52.94%",
+        "dir": "in",
+        "s": "기계·장비",
+        "tier": "named400"
+      },
+      {
+        "t": "017800",
+        "n": "현대엘리베이터",
+        "type": "subsidiary",
+        "detail": "52.9%",
+        "dir": "in",
+        "s": "기계·장비",
+        "tier": "named400"
+      },
+      {
+        "t": "011200",
+        "n": "HMM",
+        "type": "investment",
+        "detail": "12.31%",
+        "dir": "in",
+        "s": "운송·물류",
+        "tier": "named400"
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "475400",
+          "n": "씨메스로보틱스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2065000000.0,
+          "as_of": 2024,
+          "prov": "단일판매ㆍ공급계약체결 · 현대무벡스 주식회사"
+        }
+      ],
+      "down": [
+        {
+          "t": "271560",
+          "n": "오리온",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 41600000000.0,
+          "as_of": 2025,
+          "prov": "단일판매ㆍ공급계약체결 · 주식회사 오리온"
+        },
+        {
+          "t": "161890",
+          "n": "한국콜마",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 55900000000.0,
+          "as_of": 2025,
+          "prov": "단일판매ㆍ공급계약체결 · 한국콜마 주식회사"
+        }
+      ]
+    }
+  }
+}

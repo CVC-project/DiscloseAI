@@ -8,6 +8,8 @@
   - modules/disclosure/data/disclosure.db (disclosure_local + financial_statement)
   - modules/price/quiz_data.py (QUIZ_LIST 상수)
   - modules/relation/data/graph_top50.json (무변환 복사 — 화면 fetch를 integration/ 아래로 통일)
+  - modules/relation/universe/data/{universe,sectors,companies_index}.json + ego/*.json
+    (universe/PLAN.md U-D9 — LOD-0/1/2 시각화 원천, 무변환 동기화 + V-2 핸드오프 assert)
 
 사용::
 
@@ -19,6 +21,8 @@
     integration/data/disclosures.json
     integration/data/price_scenarios.json
     integration/data/graph_top50.json  (relation 산출물 동기화 사본 — 정본은 modules/relation/data/)
+    integration/data/universe.json · sectors.json · companies_index.json (동기화 사본)
+    integration/data/ego/<ticker>.json ×2,651 (해시 기반 diff 동기화 — 변경분만 재작성)
 
 자세한 규약(데이터 소스 계약)은 ``integration/CLAUDE.md`` 참조.
 """
@@ -26,7 +30,9 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import json
+import re
 import sqlite3
 import sys
 from datetime import date, datetime, timedelta, timezone
@@ -40,6 +46,9 @@ FINANCIAL_DB = ROOT / "modules" / "financial" / "data" / "financial.db"
 DISCLOSURE_DB = ROOT / "modules" / "disclosure" / "data" / "disclosure.db"
 EQS_PROTOTYPE_JSON = ROOT / "modules" / "financial" / "data" / "eqs_data.json"
 RELATION_GRAPH_JSON = ROOT / "modules" / "relation" / "data" / "graph_top50.json"
+UNIVERSE_DATA_DIR = ROOT / "modules" / "relation" / "universe" / "data"
+UNIVERSE_JSON_FILES = ("universe.json", "sectors.json", "companies_index.json")
+ADAPTER_JS = Path(__file__).parent / "v2" / "src" / "adapter.js"
 
 # KRX 구분 코드와 KSIC 코드 모두 지원한다. KSIC는 64~66(금융·보험)을 쓴다.
 FINANCIAL_INDUSTRY_CODES = frozenset({"064", "065", "066", "067"})
@@ -295,6 +304,92 @@ def extract_price_scenarios() -> list[dict]:
 
 
 # --------------------------------------------------------------------------- #
+#  universe 동기화 (U-D9) — relation universe/export.py 산출물 → integration/data
+# --------------------------------------------------------------------------- #
+def sync_universe_json_files() -> dict:
+    """universe.json·sectors.json·companies_index.json 무변환 byte 복사.
+
+    graph_top50.json과 동일 관례(변환 없음, relation이 정본). 소스 없으면 스킵(경고만).
+    Returns: {filename: bytes_written}
+    """
+    written: dict[str, int] = {}
+    for name in UNIVERSE_JSON_FILES:
+        src = UNIVERSE_DATA_DIR / name
+        if not src.exists():
+            print(f"[WARN] universe 산출물 없음: {src}", file=sys.stderr)
+            continue
+        data = src.read_bytes()
+        (INTEGRATION_DATA / name).write_bytes(data)
+        written[name] = len(data)
+    return written
+
+
+def sync_ego_files() -> dict:
+    """ego/<ticker>.json 디렉터리 동기화 — SHA-256 해시로 변경분만 재작성(§4 diff 노이즈 억제).
+
+    integration/data/ego/에 없거나 내용이 다른 파일만 쓰고, 소스에서 사라진 티커의
+    잔존 파일은 삭제(상장폐지·재선정 등으로 ego 파일이 더는 생성되지 않는 경우 대응).
+    Returns: {"written": n, "unchanged": n, "removed": n, "total_src": n}
+    """
+    src_dir = UNIVERSE_DATA_DIR / "ego"
+    dst_dir = INTEGRATION_DATA / "ego"
+    if not src_dir.exists():
+        print(f"[WARN] universe ego 디렉터리 없음: {src_dir}", file=sys.stderr)
+        return {"written": 0, "unchanged": 0, "removed": 0, "total_src": 0}
+    dst_dir.mkdir(parents=True, exist_ok=True)
+
+    written = unchanged = 0
+    src_names: set[str] = set()
+    for src_file in src_dir.glob("*.json"):
+        src_names.add(src_file.name)
+        data = src_file.read_bytes()
+        dst_file = dst_dir / src_file.name
+        if dst_file.exists() and hashlib.sha256(dst_file.read_bytes()).digest() == hashlib.sha256(data).digest():
+            unchanged += 1
+            continue
+        dst_file.write_bytes(data)
+        written += 1
+
+    removed = 0
+    for dst_file in dst_dir.glob("*.json"):
+        if dst_file.name not in src_names:
+            dst_file.unlink()
+            removed += 1
+
+    return {"written": written, "unchanged": unchanged, "removed": removed, "total_src": len(src_names)}
+
+
+_SECTOR_DEF_KEY_RE = re.compile(r'"([^"]+)"\s*:\s*\{\s*id\s*:')
+
+
+def registered_sector_def_names() -> set[str]:
+    """adapter.js의 SECTOR_DEF 객체 리터럴에서 등록된 한글 섹터명(키) 추출.
+
+    JS AST 파서 없이 정규식으로 추출(신규 의존성 회피) — SECTOR_DEF 블록 포맷이
+    ``"한글명": { id: ..., ... },`` 형태로 안정적이라는 전제(adapter.js 실측 확인).
+    """
+    if not ADAPTER_JS.exists():
+        return set()
+    text = ADAPTER_JS.read_text(encoding="utf-8")
+    m = re.search(r"const\s+SECTOR_DEF\s*=\s*\{(.*?)\n\s*\};", text, re.S)
+    if not m:
+        return set()
+    return set(_SECTOR_DEF_KEY_RE.findall(m.group(1)))
+
+
+def assert_sector_palette_registered(sectors: list[dict]) -> list[str]:
+    """V-2 핸드오프 assert(universe/PLAN.md §5.5) — sectors.json의 모든 섹터가
+    adapter.js SECTOR_DEF에 등록됐는지 확인. 미등록 섹터 한글명 리스트 반환(빈 리스트=통과).
+
+    "섹터 조용한 소실"(§5) 차단 — SECTOR_DEF 미등록 섹터는 adapter.js buildPalette()가
+    필터링해 화면에서 아예 사라지므로, 동기화 시점에 기계적으로 잡아 실패 처리한다.
+    """
+    registered = registered_sector_def_names()
+    missing = [s["ko"] for s in sectors if s.get("ko") not in registered]
+    return missing
+
+
+# --------------------------------------------------------------------------- #
 #  JSON 직렬화 보조
 # --------------------------------------------------------------------------- #
 def _json_default(obj):
@@ -325,6 +420,36 @@ def main() -> int:
         )
     else:
         print(f"[WARN] relation 그래프 없음: {RELATION_GRAPH_JSON}", file=sys.stderr)
+
+    # universe 동기화 (U-D9) — universe.json·sectors.json·companies_index.json + ego/
+    universe_written = sync_universe_json_files()
+    for name, size in universe_written.items():
+        print(f"[INFO] {name} 동기화: {size:,} bytes (modules/relation/universe → integration/data)")
+    ego_result = sync_ego_files()
+    print(
+        f"[INFO] ego/ 동기화: {ego_result['written']} written · "
+        f"{ego_result['unchanged']} unchanged · {ego_result['removed']} removed "
+        f"(총 {ego_result['total_src']}건)"
+    )
+
+    v2_gate_failed = False
+    if "sectors.json" in universe_written:
+        sectors = json.loads((INTEGRATION_DATA / "sectors.json").read_text(encoding="utf-8"))
+        missing = assert_sector_palette_registered(sectors)
+        if missing:
+            v2_gate_failed = True
+            print(
+                f"[ERROR] V-2 핸드오프 assert 실패 — SECTOR_DEF(adapter.js) 미등록 섹터 "
+                f"{len(missing)}건: {missing}",
+                file=sys.stderr,
+            )
+            print(
+                "[ERROR] 이 섹터들은 adapter.js buildPalette()가 필터링해 화면에서 조용히 "
+                "사라진다 — SECTOR_DEF + bundle.jsx 사용 시 SECTOR_PALETTE 양쪽에 등록 필요.",
+                file=sys.stderr,
+            )
+        else:
+            print("[INFO] V-2 핸드오프 assert 통과 — sectors.json 전 섹터가 SECTOR_DEF에 등록됨")
 
     top50 = load_top50()
     corp_to_ticker = {
@@ -416,6 +541,13 @@ def main() -> int:
     print(
         f"  price_scenarios.json  : {size_price:>8,} bytes  ({meta['coverage']['price_scenarios']} scenarios, {meta['coverage']['price_scenarios_matching_top50']} matched)"
     )
+    if v2_gate_failed:
+        print(
+            "[ERROR] 동기화는 완료됐지만 V-2 게이트 실패로 빌드 실패 처리(exit 1) — "
+            "위 미등록 섹터 목록 참조.",
+            file=sys.stderr,
+        )
+        return 1
     return 0
 
 

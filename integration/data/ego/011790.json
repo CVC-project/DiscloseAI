@@ -1,0 +1,70 @@
+{
+  "t": "011790",
+  "n": "SKC",
+  "s": "화학",
+  "tier": "named400",
+  "layers": {
+    "governance": [
+      {
+        "t": "034730",
+        "n": "SK",
+        "type": "associate",
+        "detail": "40.64%",
+        "dir": "in",
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
+        "t": "096770",
+        "n": "SK이노베이션",
+        "type": "dart_filing",
+        "detail": "",
+        "dir": "in",
+        "s": "에너지",
+        "tier": "named400"
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "096770",
+          "n": "SK이노베이션",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 175000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등과의 거래 · 매출 등"
+        },
+        {
+          "t": "096770",
+          "n": "SK이노베이션",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 231000000.0,
+          "as_of": 2024,
+          "prov": "특수관계자와의 거래 · 매출 등"
+        },
+        {
+          "t": "096770",
+          "n": "SK이노베이션",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 323000000.0,
+          "as_of": 2023,
+          "prov": "특수관계자 등과의 거래 · 매출 등 (주1,2)"
+        }
+      ],
+      "down": [
+        {
+          "t": "096770",
+          "n": "SK이노베이션",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 115000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등과의 거래 · 매입 등"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "t": "003490",
+  "n": "대한항공",
+  "s": "운송·물류",
+  "tier": "named400",
+  "layers": {
+    "governance": [
+      {
+        "t": "272450",
+        "n": "진에어",
+        "type": "subsidiary",
+        "detail": "54.91%",
+        "dir": "out",
+        "s": "운송·물류",
+        "tier": "dot"
+      },
+      {
+        "t": "020560",
+        "n": "아시아나항공",
+        "type": "subsidiary",
+        "detail": "63.88%",
+        "dir": "out",
+        "s": "운송·물류",
+        "tier": "named400"
+      },
+      {
+        "t": "005430",
+        "n": "한국공항",
+        "type": "subsidiary",
+        "detail": "59.54%",
+        "dir": "out",
+        "s": "운송·물류",
+        "tier": "dot"
+      },
+      {
+        "t": "002320",
+        "n": "한진",
+        "type": "ftc_group",
+        "detail": "한진",
+        "dir": "out",
+        "s": "운송·물류",
+        "tier": "dot"
+      },
+      {
+        "t": "005430",
+        "n": "한국공항",
+        "type": "ftc_group",
+        "detail": "한진",
+        "dir": "out",
+        "s": "운송·물류",
+        "tier": "dot"
+      },
+      {
+        "t": "020560",
+        "n": "아시아나항공",
+        "type": "ftc_group",
+        "detail": "한진",
+        "dir": "out",
+        "s": "운송·물류",
+        "tier": "named400"
+      },
+      {
+        "t": "180640",
+        "n": "한진칼",
+        "type": "ftc_group",
+        "detail": "한진",
+        "dir": "out",
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
+        "t": "272450",
+        "n": "진에어",
+        "type": "ftc_group",
+        "detail": "한진",
+        "dir": "out",
+        "s": "운송·물류",
+        "tier": "dot"
+      },
+      {
+        "t": "298690",
+        "n": "에어부산",
+        "type": "ftc_group",
+        "detail": "한진",
+        "dir": "out",
+        "s": "운송·물류",
+        "tier": "dot"
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "056730",
+          "n": "CNT85",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4412000000.0,
+          "as_of": 2023,
+          "prov": "단일판매ㆍ공급계약체결 · (주)대한항공"
+        },
+        {
+          "t": "221840",
+          "n": "하이즈항공",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 9968628888.0,
+          "as_of": 2026,
+          "prov": "단일판매ㆍ공급계약체결 · 대한항공"
+        },
+        {
+          "t": "322180",
+          "n": "LS티라유텍",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2947000000.0,
+          "as_of": 2020,
+          "prov": "단일판매ㆍ공급계약체결 · 주식회사 대한항공"
+        }
+      ],
+      "down": []
+    }
+  }
+}
