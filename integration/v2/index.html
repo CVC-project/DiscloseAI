@@ -71,11 +71,11 @@
       astronaut: "./assets/astronaut.png",
     };
     // AI 코파일럿이 호출할 DartChatbot(OpenDART RAG) 서버 주소.
-    // 비워두면(주석 처리) same-origin `/api/chat`로 기본 호출된다(api/PLAN.md C1 계약,
-    // Vercel api/ 프록시 대상 — §8 M2). 아래 줄은 그 프록시가 서기 전까지 GitHub Pages(dev)에서
-    // DartChatbot을 임시 직결하기 위한 override — main/Vercel 배포 시점엔 반드시 제거한다
-    // (api/PLAN.md §8 M0). ngrok 터널이 재기동돼 주소가 바뀌면 이 한 줄만 교체.
-    window.__DART_CHAT_URL = "https://etching-earthly-hexagram.ngrok-free.dev";
+    // same-origin `/api/chat`로 호출한다(api/PLAN.md C1 계약, Vercel api/ 프록시 — §8 M2).
+    // GitHub Pages(dev)는 서버리스 함수가 없어 이 경로가 없으므로 dev의 챗봇은
+    // "서버 연결 실패"로 우아하게 저하된다(C1 폴백) — 사이트 나머지는 정상.
+    // 임시 직결이 필요하면(팀 확인용) 아래 줄의 주석을 풀고 현재 ngrok 주소를 채운다.
+    // window.__DART_CHAT_URL = "https://<ngrok-주소>";
   </script>
 
   <!-- Data layer: mock + valuation + narration + loader (J3 산출물). -->
