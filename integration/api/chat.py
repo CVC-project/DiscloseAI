@@ -1,9 +1,11 @@
 """
-api/chat.py — Vercel 서버리스 함수: DartChatbot(OpenDART RAG · Amazon Bedrock) 프록시.
+integration/api/chat.py — Vercel 서버리스 함수: DartChatbot(OpenDART RAG · Amazon Bedrock) 프록시.
 
-api/PLAN.md M2. 브라우저(same-origin `/api/chat`) -> 이 함수 -> DartChatbot(GPU 서버)
-순서로 중계한다. DartChatbot의 실제 주소(DART_CHAT_ORIGIN)는 Vercel 환경변수에만
-존재 — 저장소·프론트 소스 어디에도 하드코딩하지 않는다(보안 규칙, api/PLAN.md M2).
+Vercel Root Directory=integration이라 함수도 이 폴더 밑에 있어야 인식된다
+(2026-07-22 배포 실측 — 루트 api/는 Root Directory 밖이라 404). api/PLAN.md M2.
+브라우저(same-origin `/api/chat`) -> 이 함수 -> DartChatbot(GPU 서버) 순서로 중계한다.
+DartChatbot의 실제 주소(DART_CHAT_ORIGIN)는 Vercel 환경변수에만 존재 — 저장소·프론트
+소스 어디에도 하드코딩하지 않는다(보안 규칙, api/PLAN.md M2).
 
 계약(C1, api/PLAN.md): POST /api/chat {"messages":[{"role","content"}]}
 -> {"answer", "disclaimer", "sources"?}
@@ -47,16 +49,26 @@ class handler(BaseHTTPRequestHandler):
         self.wfile.write(payload)
 
     def do_GET(self) -> None:
-        self._send_json(200, {"status": "ok", "origin_configured": bool(DART_CHAT_ORIGIN)})
+        self._send_json(
+            200, {"status": "ok", "origin_configured": bool(DART_CHAT_ORIGIN)}
+        )
 
     def do_POST(self) -> None:
         if not DART_CHAT_ORIGIN:
-            self._send_json(500, {"detail": "DART_CHAT_ORIGIN 환경변수가 설정되지 않았습니다."})
+            self._send_json(
+                500, {"detail": "DART_CHAT_ORIGIN 환경변수가 설정되지 않았습니다."}
+            )
             return
 
-        client_ip = self.headers.get("x-forwarded-for", self.client_address[0]).split(",")[0].strip()
+        client_ip = (
+            self.headers.get("x-forwarded-for", self.client_address[0])
+            .split(",")[0]
+            .strip()
+        )
         if _rate_limited(client_ip):
-            self._send_json(429, {"detail": "요청이 너무 많습니다. 잠시 후 다시 시도해주세요."})
+            self._send_json(
+                429, {"detail": "요청이 너무 많습니다. 잠시 후 다시 시도해주세요."}
+            )
             return
 
         length = int(self.headers.get("Content-Length", 0) or 0)
@@ -81,7 +93,9 @@ class handler(BaseHTTPRequestHandler):
             detail = e.read().decode("utf-8", "replace") if e.fp else e.reason
             self._send_json(e.code, {"detail": f"DartChatbot 오류: {detail}"[:300]})
             return
-        except Exception as e:  # noqa: BLE001 — 업스트림 장애는 그대로 우아한 저하로 전달(C1)
+        except (
+            Exception
+        ) as e:  # noqa: BLE001 — 업스트림 장애는 그대로 우아한 저하로 전달(C1)
             self._send_json(502, {"detail": f"챗봇 서버 연결 실패: {e}"})
             return
 
