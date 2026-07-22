@@ -988,6 +988,41 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
       ctx.fillRect(0, 0, w, h);
       ctx.restore();
 
+      // U2 시장별 두 성운(KOSPI 좌 / KOSDAQ 우) 헤일로 + 라벨.
+      // dots/named가 좌우 sub-disk에 나뉘어 배치되므로, 각 덩이를 옅은 성운으로 감싸 시장 경계를 시각화.
+      const mkts = (window.__realData && window.__realData.sectorMarkets && window.__realData.sectorMarkets[sectorId]) || null;
+      if (mkts) {
+        const haloR = Math.min(w, h) * 0.34;
+        const halos = [
+          { key: 'KOSPI',  cx: w / 2 + (-0.46) * haloR, total: mkts.kospiTotal },
+          { key: 'KOSDAQ', cx: w / 2 + (0.46) * haloR,  total: mkts.kosdaqTotal },
+        ];
+        for (const nb of halos) {
+          const cyN = h / 2;
+          ctx.save();
+          ctx.globalCompositeOperation = 'screen';
+          const g = ctx.createRadialGradient(nb.cx, cyN, 0, nb.cx, cyN, haloR * 0.62);
+          g.addColorStop(0, sec.color + '14');
+          g.addColorStop(0.6, sec.color + '08');
+          g.addColorStop(1, sec.color + '00');
+          ctx.fillStyle = g;
+          ctx.beginPath(); ctx.arc(nb.cx, cyN, haloR * 0.62, 0, Math.PI * 2); ctx.fill();
+          ctx.restore();
+          // 라벨(기업 선택 중이 아닐 때만) — 성운 상단
+          if (!activeCompanyCode) {
+            ctx.save();
+            ctx.font = '600 11px "IBM Plex Mono", ui-monospace, monospace';
+            ctx.textAlign = 'center';
+            ctx.fillStyle = sec.color + 'cc';
+            ctx.fillText(nb.key, nb.cx, cyN - haloR * 0.66);
+            ctx.fillStyle = 'rgba(143,161,182,0.7)';
+            ctx.font = '400 10px "IBM Plex Mono", ui-monospace, monospace';
+            ctx.fillText(nb.total + '사', nb.cx, cyN - haloR * 0.66 + 14);
+            ctx.restore();
+          }
+        }
+      }
+
       // bg stars
       for (const s of bgStarsRef.current) {
         const tw = 0.6 + Math.sin(t * s.tf + s.phase) * 0.4;
@@ -2784,7 +2819,7 @@ function App() {
           {activeTab === 'finance' ? (
             <>
               {phase === 'galaxy' && <MascotPanel messages={["섹터를 클릭하면, 기업을 확인할 수 있어요!", "오른쪽 아래 섹터 INDEX에서도 선택할 수 있어요.", "AI 코파일럿에게 무엇이든 물어보세요."]} />}
-              {phase === 'sector' && <SectorOverviewPanel sector={sector} companyCount={companies.length} onBack={backToGalaxy} />}
+              {phase === 'sector' && <SectorOverviewPanel sector={sector} companyCount={sector.count || companies.length} onBack={backToGalaxy} />}
               {phase === 'company' && <CompanyOverviewPanel company={company} sector={sector} onBack={backToSector} onEnter={enterCorporation} />}
             </>
           ) : (

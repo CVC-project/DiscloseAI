@@ -190,6 +190,97 @@
     return out;
   }
 
+  // ── U2 시장별 성운 레이아웃 ─────────────────────────────────────────
+  // 섹터를 KOSPI(좌)/KOSDAQ(우) 두 성운으로 나눠, 각 시장 시총 상위 N개만 named
+  // (노드+라벨), 나머지(캡 초과 named + 전량 dot 기업)는 배경 dots로 배치.
+  // "한 화면에 named 50여개 라벨" 밀도(=헤어볼) 문제를 시장 분할 + top-N 캡으로 해소.
+  const KOSPI_NAMED_CAP = 10, KOSDAQ_NAMED_CAP = 5;
+  const NEBULA = {
+    KOSPI:  { cx: -0.46, cy: 0, r: 0.40 },
+    KOSDAQ: { cx:  0.46, cy: 0, r: 0.40 },
+  };
+
+  function _capJo(m) {
+    if (m.market_cap) return Math.min(600, m.market_cap / 1e12);
+    if (typeof m.mc === "number") return Math.min(600, m.mc / 1e12);
+    return Math.max(1, (m.sz || 1) * 5);
+  }
+  function _cbFromNode(m) { return Math.min(3, Math.max(0, Math.round(_capJo(m) / 6))); }
+
+  // 성운 sub-disk 안에 named phyllotaxis 배치(시총 desc, 큰 것이 성운 중심).
+  function _layoutNamed(members, neb) {
+    const sorted = members.slice().sort((a, b) => _capJo(b) - _capJo(a));
+    const n = sorted.length, out = [];
+    for (let i = 0; i < n; i++) {
+      const m = sorted[i];
+      let x = neb.cx, y = neb.cy;
+      if (i > 0) {
+        const ang = i * 2.39996;
+        const rr = neb.r * (0.30 + ((i - 1) / Math.max(1, n - 1)) * 0.66);
+        x = neb.cx + Math.cos(ang) * rr; y = neb.cy + Math.sin(ang) * rr;
+      }
+      out.push({ code: m.t, name: m.n, en: m.n, cap: Math.max(1, Math.round(_capJo(m))), market: m.mkt || null, x, y });
+    }
+    return out;
+  }
+
+  function _srng(seed) { let s = ((seed * 9301 + 49297) % 233280 + 233280) % 233280; return () => { s = (s * 9301 + 49297) % 233280; return s / 233280; }; }
+
+  // dots: 성운 sub-disk 안에 면적 균등(sqrt) 산포. buckets[i]=capBucket(점 크기).
+  function _scatterDots(neb, seed, buckets) {
+    const rng = _srng(seed), out = [];
+    for (let i = 0; i < buckets.length; i++) {
+      const a = rng() * Math.PI * 2, rr = neb.r * Math.sqrt(rng());
+      out.push([neb.cx + Math.cos(a) * rr, neb.cy + Math.sin(a) * rr, buckets[i] || 0]);
+    }
+    return out;
+  }
+
+  // 섹터별 두 성운 → {companies:{id:[named]}, dots:{id:[[x,y,b]]}, markets:{id:{kospiTotal,kosdaqTotal}}}
+  function buildSectorNebulae(palette, nodes, companiesIndex) {
+    const koToId = new Map(palette.map((p) => [p.ko, p.id]));
+    const namedBySector = new Map();
+    for (const n of nodes) {
+      const id = koToId.get(n.s);
+      if (!id) continue;
+      if (!namedBySector.has(id)) namedBySector.set(id, []);
+      namedBySector.get(id).push(n);
+    }
+    // dot 기업 capBucket by sector ko × market (companies_index tier==='dot')
+    const dotInfo = new Map();
+    for (const c of (companiesIndex || [])) {
+      if (c.tier !== "dot") continue;
+      if (!dotInfo.has(c.s)) dotInfo.set(c.s, { KOSPI: [], KOSDAQ: [] });
+      const g = dotInfo.get(c.s);
+      (g[c.mkt] || g.KOSDAQ).push(c.cb || 0);
+    }
+    const companies = {}, dots = {}, markets = {};
+    let seed = 1;
+    for (const p of palette) {
+      const id = p.id, ko = p.ko;
+      const named = namedBySector.get(id) || [];
+      const kospiN = named.filter((n) => n.mkt === "KOSPI").sort((a, b) => _capJo(b) - _capJo(a));
+      const kosdaqN = named.filter((n) => n.mkt === "KOSDAQ").sort((a, b) => _capJo(b) - _capJo(a));
+      const di = dotInfo.get(ko) || { KOSPI: [], KOSDAQ: [] };
+      // 캡 초과 named → dots(살짝 큰 버킷). + companies_index dot 기업.
+      const kospiDotBuckets = [...di.KOSPI, ...kospiN.slice(KOSPI_NAMED_CAP).map(_cbFromNode)];
+      const kosdaqDotBuckets = [...di.KOSDAQ, ...kosdaqN.slice(KOSDAQ_NAMED_CAP).map(_cbFromNode)];
+      companies[id] = [
+        ..._layoutNamed(kospiN.slice(0, KOSPI_NAMED_CAP), NEBULA.KOSPI),
+        ..._layoutNamed(kosdaqN.slice(0, KOSDAQ_NAMED_CAP), NEBULA.KOSDAQ),
+      ];
+      dots[id] = [
+        ..._scatterDots(NEBULA.KOSPI, seed++, kospiDotBuckets),
+        ..._scatterDots(NEBULA.KOSDAQ, seed++, kosdaqDotBuckets),
+      ];
+      markets[id] = {
+        kospiTotal: kospiN.length + di.KOSPI.length,
+        kosdaqTotal: kosdaqN.length + di.KOSDAQ.length,
+      };
+    }
+    return { companies, dots, markets };
+  }
+
   function buildRelations(nodes) {
     const nameMap = buildNameTickerMap(nodes);
     const out = {};
@@ -226,7 +317,7 @@
   async function injectBundleScript() {
     // Babel-standalone auto-transforms <script type="text/babel"> tags only at page load.
     // For dynamic injection we fetch the source ourselves, transform via Babel, then run.
-    const url = "./src/bundle.jsx?v=k4c";
+    const url = "./src/bundle.jsx?v=k4e";
     const src = await fetch(url).then((r) => r.text());
     const out = window.Babel.transform(src, { presets: ["env", "react"] }).code;
     const s = document.createElement("script");
@@ -244,8 +335,19 @@
     try {
       const result = await D.loadAll();
       const palette = buildPalette(result.sectors);
-      const companies = buildCompaniesByPaletteId(palette, result.nodes);
       const relations = buildRelations(result.nodes);
+
+      // universe 경로(U2): 시장별 두 성운 레이아웃(top-N named + dots). top50 fallback이면 기존 단일 클러스터.
+      let companies, sectorMarkets = {};
+      let nebulaDots = null;
+      if (result.usingUniverse) {
+        const neb = buildSectorNebulae(palette, result.nodes, result.companiesIndex);
+        companies = neb.companies;
+        nebulaDots = neb.dots;
+        sectorMarkets = neb.markets;
+      } else {
+        companies = buildCompaniesByPaletteId(palette, result.nodes);
+      }
 
       // Index by ticker for fast lookup in dossier panels.
       const nodeByCode = Object.fromEntries(result.nodes.map((n) => [n.t, n]));
@@ -257,9 +359,15 @@
         (discByTicker[t] = discByTicker[t] || []).push(d);
       }
 
-      // dots: sector id → [[x,y,capBucket], ...] (LOD-1 배경 dots, U2 full 이전)
-      const dots = {};
-      for (const p of palette) if (p.dots && p.dots.length) dots[p.id] = p.dots;
+      // dots: sector id → [[x,y,capBucket], ...]
+      //  universe면 시장별 성운 산포 dots, top50 fallback이면 export 단일 클러스터 dots.
+      let dots;
+      if (nebulaDots) {
+        dots = nebulaDots;
+      } else {
+        dots = {};
+        for (const p of palette) if (p.dots && p.dots.length) dots[p.id] = p.dots;
+      }
 
       window.__realData = {
         sectors: palette,
@@ -274,6 +382,7 @@
         usingMock: result.usingMock,
         usingUniverse: result.usingUniverse,
         dots,
+        sectorMarkets,
         companiesIndex: result.companiesIndex || [],
         universeMeta: result.universeMeta || null,
       };

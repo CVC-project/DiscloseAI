@@ -138,6 +138,7 @@ def export_universe_json(session, output_path: Path | None = None) -> dict:
                 "n": c.name_current,
                 "t": c.ticker,
                 "s": _sector_ko(c.sector_id),
+                "mkt": c.market,  # KOSPI|KOSDAQ — U2 시장별 성운 분할용(integration LOD)
                 "sz": round((c.market_cap_krw or 0) / max_cap, 4),
                 "mc": f"{round((c.market_cap_krw or 0) / 1_000_000_000_000, 1)}조",
                 "group": None,  # FTC 집단명은 ego 파일의 governance layer에서 확인 (U2 시각화 시 파생 가능)
@@ -178,7 +179,15 @@ def export_companies_index_json(session, output_path: Path | None = None) -> lis
     """companies_index.json — 전 상장사 검색 타이프어헤드 경량 인덱스."""
     companies, _, _ = _load_all(session)
     payload = [
-        {"t": c.ticker, "n": c.name_current, "s": _sector_ko(c.sector_id), "tier": c.universe_tier}
+        {
+            "t": c.ticker,
+            "n": c.name_current,
+            "s": _sector_ko(c.sector_id),
+            "tier": c.universe_tier,
+            "mkt": c.market,  # KOSPI|KOSDAQ — U2 시장별 성운 분할 dots 배치용
+            # capBucket: 시총 조원 규모(0~) — dot 크기용. named는 universe.json에서 상세 확보.
+            "cb": _cap_bucket(c.market_cap_krw),
+        }
         for c in companies
         if c.ticker
     ]
