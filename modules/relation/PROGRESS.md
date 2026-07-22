@@ -37,11 +37,18 @@
 - **회귀**: 신규 fixture(LIG 실제 공시 text_html) + 테스트 5건, 전체 project
   603/603 PASS(8 skip, 무관). `valuechain.json` 재생성(1,403건 — V-1 계약
   체커: 참조 무결성·자연키 중복 0·멱등 export 전부 PASS로 무결성 확인).
-- **다음 세션**: (1) 전치형 표도 다른 회사(하나금융지주 등)에서 구조 편차가
-  있을 수 있음 — 500,000자 text_html 트렁케이션(아래 참조) 때문에 하나금융
-  지주 자체는 검증 불가했으므로 다른 전치형 표본으로 재검증 권장 (2) U3처럼
-  parse_note_transposed()도 아직 CPA 스팟체크 전 — 필요시 리더 판단 (3)
-  integration §5 명세 전달(리더 담당).
+- **추가 검증(같은 세션, 커밋 직후)**: LIG 외 다른 전치형 표본으로 일반화
+  재확인 — 109노트 중 **LG에너지솔루션·SK·LG화학·HMM 4개사도 이 파서로 신규
+  커버**됨(SK는 65건으로 최다). SK 결과 표본 확인 결과 회사명·금액이 이번
+  세션 초반 SK이노베이션 investigate에서 이미 본 계열사명(SABIC SK Nexlene·
+  Sinopec-SK Wuhan·㈜대한송유관공사 등)과 일치해 신뢰도 확인. `apply()`
+  재실행 결과 rp_note 소스 ValueChainEdge 총 **164건**(SK·SK케미칼·SK바이오
+  사이언스 등 실제 상장 계열사 링킹 확인) — 1개사(LIG) 표본만으로 일반화한
+  것이 최소 4개사 추가로 재현돼 파서 신뢰도 보강.
+- **다음 세션**: (1) 500,000자 text_html 트렁케이션(위 report 모듈 보고 참조)
+  때문에 하나금융지주 자체는 여전히 검증 불가 — report 모듈이 상한을 올리면
+  재검증 (2) U3처럼 parse_note_transposed()도 아직 CPA 스팟체크 전 — 필요시
+  리더 판단 (3) integration §5 명세 전달(리더 담당).
 - **★ report 모듈에 보고할 사항(제 담당 밖, read-only라 직접 수정 불가)**:
   `shared/data/reports.db`의 `report_section.text_html` 중 **335건이 정확히
   500,000자에서 잘려 있음**(MAX(length)=500000, 정확히 500000인 행 335건).
