@@ -11,7 +11,10 @@ from http.server import BaseHTTPRequestHandler
 class handler(BaseHTTPRequestHandler):
     def do_GET(self) -> None:
         body = json.dumps(
-            {"status": "ok", "origin_configured": bool(os.environ.get("DART_CHAT_ORIGIN"))},
+            {
+                "status": "ok",
+                "origin_configured": bool(os.environ.get("DART_CHAT_ORIGIN")),
+            },
             ensure_ascii=False,
         ).encode("utf-8")
         self.send_response(200)
