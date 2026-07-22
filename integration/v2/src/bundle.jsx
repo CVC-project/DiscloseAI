@@ -1196,43 +1196,55 @@ window.SectorMap = SectorMap;
 
 // ─── Gemini AI streaming helper ─────────────────────────────────────────────
 
-async function geminiStream({ apiKey, model, systemPrompt, history, onChunk, onDone, onError }) {
-  const m = model || window.GEMINI_MODEL || 'gemini-2.5-flash';
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${m}:streamGenerateContent?alt=sse&key=${apiKey}`;
-  try {
-    const resp = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        system_instruction: { parts: [{ text: systemPrompt }] },
-        contents: history,
-        generationConfig: { temperature: 0.7, maxOutputTokens: 1024 },
-      }),
-    });
-    if (!resp.ok) {
-      const errText = await resp.text().catch(() => resp.status);
-      throw new Error(`HTTP ${resp.status}: ${String(errText).slice(0, 120)}`);
-    }
-    const reader = resp.body.getReader();
-    const dec = new TextDecoder();
-    let buf = '';
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      buf += dec.decode(value, { stream: true });
-      const lines = buf.split('\n');
-      buf = lines.pop();
-      for (const line of lines) {
-        if (!line.startsWith('data: ')) continue;
-        const raw = line.slice(6).trim();
-        if (!raw || raw === '[DONE]') continue;
-        try {
-          const data = JSON.parse(raw);
-          const chunk = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
-          if (chunk) onChunk(chunk);
-        } catch {}
+// DartChatbot(OpenDART RAG · Amazon Bedrock) 연동.
+// 기존 UI가 기대하는 geminiStream 시그니처(onChunk/onDone/onError)를 그대로 유지하므로
+// 호출부(send)와 화면은 수정하지 않는다. 서버 주소는 window.__DART_CHAT_URL 로 주입한다.
+async function geminiStream({ systemPrompt, history, onChunk, onDone, onError }) {
+  const base = (window.__DART_CHAT_URL || '').replace(/\/+$/, '');
+  if (!base) { onError('챗봇 서버 주소(window.__DART_CHAT_URL)가 설정되지 않았습니다.'); return; }
+
+  // Gemini 형식 history({role:'user'|'model', parts:[{text}]}) → DartChatbot 형식({role, content})
+  const msgs = (history || [])
+    .map(h => ({
+      role: h.role === 'model' ? 'assistant' : 'user',
+      content: (h.parts && h.parts[0] && h.parts[0].text) ? h.parts[0].text.trim() : '',
+    }))
+    .filter(m => m.content);
+  if (!msgs.length) { onError('질문이 비어 있습니다.'); return; }
+
+  // 화면에서 선택된 회사·종목코드를 마지막 질문 앞에 붙여 회사 인식을 돕는다.
+  // systemPrompt의 "현재 분석 대상: 이름 (종목코드)" 한 줄만 사용한다.
+  const ctxLine = ((systemPrompt || '').match(/현재 분석 대상:.*/) || [''])[0].trim();
+  if (ctxLine) {
+    for (let i = msgs.length - 1; i >= 0; i--) {
+      if (msgs[i].role === 'user') {
+        msgs[i] = { role: 'user', content: `${ctxLine}\n\n${msgs[i].content}` };
+        break;
       }
     }
+  }
+
+  try {
+    const resp = await fetch(`${base}/api/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'ngrok-skip-browser-warning': 'true' },
+      body: JSON.stringify({ messages: msgs.slice(-20) }),
+    });
+    const data = await resp.json().catch(() => null);
+    if (!resp.ok) {
+      throw new Error((data && data.detail) || `HTTP ${resp.status}`);
+    }
+    let answer = (data && data.answer) || '(빈 응답)';
+    // 출처가 있으면 답변 아래에 붙인다 (공시 근거 명시).
+    if (data && Array.isArray(data.sources) && data.sources.length) {
+      const src = data.sources
+        .filter(s => s && s.dart_url)
+        .map(s => `[${s.source_id}] ${s.corp_name} ${s.report_name || ''} — ${s.dart_url}`)
+        .join('\n');
+      if (src) answer += `\n\n─ 출처 ─\n${src}`;
+    }
+    // DartChatbot은 스트리밍이 아니므로 완성된 답변을 한 번에 전달한다.
+    onChunk(answer);
     onDone();
   } catch (e) {
     onError(e.message || String(e));
@@ -1656,8 +1668,9 @@ function AiChatBubble({ msg }) {
 
 function OverlayAiChat({ companyName, ticker, context, disc, node }) {
   const name = companyName || '기업';
-  const apiKey = (window.GEMINI_API_KEY && typeof window.GEMINI_API_KEY === 'string') ? window.GEMINI_API_KEY.trim() : null;
-  const hasKey = !!(apiKey && apiKey.length > 20);
+  // DartChatbot 연동: Gemini 키 대신 챗봇 서버 주소(window.__DART_CHAT_URL) 유무로 활성화 판정.
+  const apiKey = null;
+  const hasKey = !!(window.__DART_CHAT_URL && String(window.__DART_CHAT_URL).trim());
 
   const initText = context === 'disclosure'
     ? `${name}의 공시를 분석했습니다. 궁금한 점을 질문해 보세요.\n\nTip: "이 공시가 주가에 미치는 영향은?", "Cash 항목 설명해줘" 등`
@@ -1737,14 +1750,14 @@ function OverlayAiChat({ companyName, ticker, context, disc, node }) {
         <span style={{width: 7, height: 7, borderRadius: '50%', background: dotColor, boxShadow: `0 0 6px ${dotColor}`, display: 'inline-block'}} />
         <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 10, letterSpacing: '.12em', color: '#fbbf24'}}>AI FINANCIAL</span>
         <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 8, color: '#475569', marginLeft: 4}}>
-          {hasKey ? 'Gemini 2.5 Flash' : '키 미설정'}
+          {hasKey ? 'DartChatbot · OpenDART RAG' : '서버 미설정'}
         </span>
       </div>
       {!hasKey && (
         <div style={{padding: '14px', fontSize: 11, color: '#64748b', lineHeight: 1.7, borderBottom: '1px solid rgba(116, 238, 198,0.08)'}}>
-          <div style={{color: '#fbbf24', fontFamily: 'var(--font-mono,monospace)', fontSize: 9, marginBottom: 6}}>⚠ API 키 미설정</div>
-          <code style={{fontSize: 10, background: 'rgba(255,255,255,0.05)', padding: '3px 7px', borderRadius: 3, display: 'block', marginBottom: 6}}>v2/config.local.js</code>
-          파일에 Gemini API 키를 설정하면 활성화됩니다.
+          <div style={{color: '#fbbf24', fontFamily: 'var(--font-mono,monospace)', fontSize: 9, marginBottom: 6}}>⚠ 챗봇 서버 미설정</div>
+          <code style={{fontSize: 10, background: 'rgba(255,255,255,0.05)', padding: '3px 7px', borderRadius: 3, display: 'block', marginBottom: 6}}>window.__DART_CHAT_URL</code>
+          을 index.html에 설정하면 활성화됩니다.
         </div>
       )}
       <div ref={bodyRef} style={{flex: '1 1 0%', overflowY: 'auto', padding: '12px 12px', display: 'flex', flexDirection: 'column', gap: 10}}>
@@ -1759,7 +1772,7 @@ function OverlayAiChat({ companyName, ticker, context, disc, node }) {
           onChange={e => setInput(e.target.value)}
           onKeyDown={onKey}
           disabled={!hasKey || loading}
-          placeholder={hasKey ? (loading ? 'AI 응답 중…' : '질문 입력 (Enter)') : 'config.local.js 키 설정 필요'}
+          placeholder={hasKey ? (loading ? 'AI 응답 중…' : '질문 입력 (Enter)') : '챗봇 서버 설정 필요'}
           style={{flex: 1, background: 'rgba(255,255,255,0.04)', border: `1px solid ${hasKey ? 'rgba(116, 238, 198,0.2)' : 'rgba(100,116,139,0.2)'}`, borderRadius: 2, color: hasKey ? '#e2e8f0' : '#475569', fontFamily: 'inherit', fontSize: 11, padding: '6px 9px', outline: 'none'}}
         />
         <button
@@ -2306,8 +2319,9 @@ function CompanyOverviewPanel({ company, sector, onBack, onEnter }) {
 
 // ─── AI assistant (panel-tr — Gemini functional) ──────────────────────────
 function AssistantPanel({ phase, sector, company, activeTab }) {
-  const apiKey = (window.GEMINI_API_KEY && typeof window.GEMINI_API_KEY === 'string') ? window.GEMINI_API_KEY.trim() : null;
-  const hasKey = !!(apiKey && apiKey.length > 20);
+  // DartChatbot 연동: Gemini 키 대신 챗봇 서버 주소(window.__DART_CHAT_URL) 유무로 활성화 판정.
+  const apiKey = null;
+  const hasKey = !!(window.__DART_CHAT_URL && String(window.__DART_CHAT_URL).trim());
 
   const initGreeting = React.useMemo(() => {
     const greeting = AI_GREETINGS[phase] || AI_GREETINGS.galaxy;
@@ -2381,7 +2395,7 @@ function AssistantPanel({ phase, sector, company, activeTab }) {
         <div className="panel-head-l">
           <span className="panel-dot panel-dot-amber" style={{background: dotColor, boxShadow: `0 0 6px ${dotColor}`}} />
           <span className="panel-title">AI FINANCIAL</span>
-          <span className="panel-sub">{hasKey ? 'Gemini 2.5 Flash' : '키 미설정'}</span>
+          <span className="panel-sub">{hasKey ? 'DartChatbot · OpenDART RAG' : '서버 미설정'}</span>
         </div>
       </div>
       <div ref={bodyRef} className="panel-body assist-body" style={{overflowY: 'auto'}}>
@@ -2401,7 +2415,7 @@ function AssistantPanel({ phase, sector, company, activeTab }) {
           onChange={e => setInput(e.target.value)}
           onKeyDown={onKey}
           disabled={!hasKey || loading}
-          placeholder={hasKey ? (loading ? 'AI 응답 중…' : '질문 입력 (Enter)') : 'config.local.js 키 설정 필요'}
+          placeholder={hasKey ? (loading ? 'AI 응답 중…' : '질문 입력 (Enter)') : '챗봇 서버 설정 필요'}
         />
         <button onClick={send} disabled={!hasKey || loading || !input.trim()} style={{opacity: (!hasKey || loading || !input.trim()) ? 0.35 : 1, cursor: hasKey && !loading && input.trim() ? 'pointer' : 'not-allowed'}}>↗</button>
       </div>

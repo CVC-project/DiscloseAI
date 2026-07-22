@@ -70,6 +70,9 @@
     window.__resources = {
       astronaut: "./assets/astronaut.png",
     };
+    // AI 코파일럿이 호출할 DartChatbot(OpenDART RAG) 서버 주소.
+    // 서버(ngrok 등) 주소가 바뀌면 이 값만 교체하면 된다. 빈 값이면 채팅이 "서버 미설정"으로 표시된다.
+    window.__DART_CHAT_URL = "https://etching-earthly-hexagram.ngrok-free.dev";
   </script>
 
   <!-- Data layer: mock + valuation + narration + loader (J3 산출물). -->
