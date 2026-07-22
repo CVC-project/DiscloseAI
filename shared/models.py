@@ -1,14 +1,19 @@
 """
-DB 스키마 정의 — 이 파일이 곧 DB 설계도입니다.
+미래 운영(Supabase PostgreSQL) DB 스키마 — **현재 운영 미사용**.
 
-엑셀 비유:
-- 각 class = 엑셀 시트 하나
-- 각 Column = 엑셀 열(헤더) 하나
-- 각 행 = 데이터 1건
+⚠️ 정본은 모듈별 로컬 SQLite입니다 (개발 단계 합의).
+   각 모듈은 자기 폴더의 로컬 테이블을 쓴다:
+     financial → modules/financial   (financial_local)
+     disclosure → modules/disclosure (disclosure_local, financial_statement)
+     price → modules/price            (price_local, vkospi_local)
+     relation → modules/relation      (company_node, relation_raw, relation_local)
+   전체 DB 토폴로지·식별자 규칙은 docs/ARCHITECTURE.md 참조.
 
-사용 예:
-    from shared.models import FinancialData
-    session.query(FinancialData).filter_by(corp_code="005930").all()
+이 파일의 테이블은 **미래 운영 이관(Supabase) 시점에 통합·정렬할 타깃 스키마**다.
+relation storage/CLAUDE.md의 승격 계획(CompanyNode·RelationLocal 동기화)도 그때 일괄 반영.
+현재 활성: PriceData만 (modules/price/linker.py가 실제로 적재). 나머지는 STATUS 주석 참조.
+
+엑셀 비유: 각 class = 시트, 각 Column = 열(헤더), 각 행 = 데이터 1건.
 """
 
 from sqlalchemy import Column, String, Integer, Float, Date, Text, DateTime
@@ -21,6 +26,7 @@ from shared.db import Base
 class FinancialData(Base):
     """재무제표 + EQS 점수"""
 
+    # STATUS: 미사용 (미래 운영 타깃). 정본=modules/financial/ financial_local
     __tablename__ = "financial_data"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -60,6 +66,7 @@ class FinancialData(Base):
 class DisclosureData(Base):
     """DART 공시 데이터"""
 
+    # STATUS: 미사용 (미래 운영 타깃). 정본=modules/disclosure/ disclosure_local
     __tablename__ = "disclosure_data"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -79,6 +86,8 @@ class DisclosureData(Base):
 class RelationData(Base):
     """기업 간 관계 (그래프 엣지)"""
 
+    # STATUS: 미사용 (미래 운영 타깃). 정본=modules/relation/ relation_local (ticker 6자리)
+    # 승격 시 storage/CLAUDE.md의 CompanyNode·RelationLocal 동기화 계획 반영
     __tablename__ = "relation_data"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -94,6 +103,7 @@ class RelationData(Base):
 class PriceData(Base):
     """주가 + 공시 후 변동 라벨"""
 
+    # STATUS: 활성 — modules/price/linker.py가 실제로 적재하는 유일한 shared 테이블
     __tablename__ = "price_data"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -112,6 +122,7 @@ class PriceData(Base):
 class PredictionData(Base):
     """CatBoost 모델 추론 결과"""
 
+    # STATUS: 미사용 (정의만 — CatBoost 파이프라인 미구현)
     __tablename__ = "prediction_data"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -130,6 +141,7 @@ class PredictionData(Base):
 class NewsData(Base):
     """뉴스 헤드라인 (타임머신용)"""
 
+    # STATUS: 미사용 (정의만 — 뉴스 수집 파이프라인 미구현)
     __tablename__ = "news_data"
 
     id = Column(Integer, primary_key=True, autoincrement=True)

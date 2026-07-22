@@ -24,7 +24,7 @@ from modules.financial.batch import (
 )
 from modules.financial.dashboard import build_ranking_dashboard
 
-EQS_JSON = Path("docs/prototype/eqs_data.json")
+EQS_JSON = Path("modules/financial/data/eqs_data.json")
 
 
 def _load_market_caps() -> dict:
@@ -70,7 +70,9 @@ def main() -> int:
     print(f"\n[export] {out_path}")
 
     db_info = persist_to_db(records)
-    print(f"[db persist] financial_local: written={db_info['written']} skipped={db_info['skipped']}")
+    print(
+        f"[db persist] financial_local: written={db_info['written']} skipped={db_info['skipped']}"
+    )
 
     sector_info = build_sector_stats(records)
     print(f"[sectors] {sector_info}")
@@ -80,7 +82,9 @@ def main() -> int:
 
     # 47개 기업 단독 dashboard (firm_<ticker>.html) — 통합 대시보드 오버레이용
     dash_info = build_per_firm_dashboards(records)
-    print(f"[per-firm dashboards] written={dash_info['written']} skipped={dash_info['skipped']}")
+    print(
+        f"[per-firm dashboards] written={dash_info['written']} skipped={dash_info['skipped']}"
+    )
 
     return 0
 

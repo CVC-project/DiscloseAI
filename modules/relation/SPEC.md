@@ -1,5 +1,7 @@
 # DiscloseAI — Relation 모듈 MVP (지분·계열, 코스피 상위 50개)
 
+> ⚠️ **2026-07-13 갱신 — `viewer/` 은퇴**: 관계 시각화는 integration(v2 SectorMap)이 소유하며 `viewer/`는 삭제됨(git 이력 보존). 아래 §시각화·viewer 관련 서술은 **Phase 2 설계 이력**으로만 유효. 현행 계약은 `graph/export.py → graph_top50.json`(integration이 fetch)까지다.
+
 > **이 문서의 역할 — SPEC (Single Source of Truth)**
 >
 > Relation 모듈의 Phase 1·2 전체 상세 명세. 함수 시그니처·테스트 fixtures·완료 기준·리스크 포함.
@@ -141,7 +143,7 @@
 ## 우주맵 시각화 (`modules/relation/viewer/index.html`)
 
 ### 전략: "프로토타입 스키마 호환 JSON"
-기존 `docs/prototype/corporate_universe_v5.html`의 `raw=[]` 구조를 유지하되 `rl:['대상명:타입:상세']` 3-필드로 확장. 기존 `physics()`, `draw()`는 거의 그대로 재사용.
+기존 프로토타입 원본의 `raw=[]` 구조를 유지하되 `rl:['대상명:타입:상세']` 3-필드로 확장. 기존 `physics()`, `draw()`는 거의 그대로 재사용.
 
 ### `viewer/index.html` — 프로토타입 fork 시 3곳만 변경
 1. `const raw=[...]` → `let raw=[]; fetch('../data/graph_top50.json').then(r=>r.json()).then(d=>{raw=d; init(); tick();});`
@@ -154,7 +156,7 @@
    - `dart_filing`: 점선 `[6,2]`, `#facc15`, 1px
    - `manual`: 점선 `[2,2]`, `#a78bfa`, 0.8px
 
-원본 `docs/prototype/corporate_universe_v5.html`은 건드리지 않음 (다른 팀원 참고용).
+원본 프로토타입은 #28 정리에서 제거 — 현재 정본은 `viewer/index.html`.
 
 ### sectors 확장
 기존 8개(반도체/디스플레이/2차전지/바이오/자동차/금융/플랫폼/에너지)에 50개 기업 분포를 보고 4개 추가:
@@ -178,8 +180,7 @@
 
 ```
 modules/relation/
-├── CLAUDE.md                        ← 루트(~40줄): 담당 범위, 데이터 흐름, 진입점, 외부 의존
-├── CLAUDE.local.md                  ← 개인 설정 (.gitignore, 기존)
+├── CLAUDE.md                        ← 모듈 도메인 규칙(팀 공유): 담당 범위, 데이터 흐름, 진입점, 외부 의존
 ├── PROGRESS.md                      ← /check가 기록 (기존)
 ├── __init__.py
 ├── __main__.py                      ← CLI 진입점: python -m modules.relation <cmd>
@@ -316,11 +317,10 @@ python -m modules.relation audit                   # 무결성 체크 (도메인
 | 이동 | `modules/relation/db.py` → `modules/relation/storage/db.py` | 책임 분리 |
 | 수정 | `requirements.txt` | `requests>=2.31`, `networkx>=3.2`, `pandas>=2.1`, `beautifulsoup4>=4.12`(주석 HTML 파싱용), `lxml>=5.1` 추가 |
 | 수정 | `.env.example` + `shared/config.py` | `FTC_API_KEY` 추가 — 리더 권한 |
-| 수정 | `modules/relation/CLAUDE.local.md` | 기존 유지, 하위 참조 추가 |
+| 수정 | `modules/relation/CLAUDE.md` | 모듈 도메인 규칙(팀 공유). 서브폴더 CLAUDE.md로 Progressive Disclosure |
 
 ### 건드리지 않음
 - `shared/models.py` (MVP 검증 후 별도 PR로 동기화)
-- `docs/prototype/corporate_universe_v5.html` (원본 보존, viewer/index.html이 fork)
 - 타 팀원 모듈 (`modules/financial`, `disclosure`, `price`)
 
 ---
@@ -331,7 +331,7 @@ python -m modules.relation audit                   # 무결성 체크 (도메인
 - **로컬 DB 패턴**: [modules/relation/db.py:7-22](modules/relation/db.py#L7-L22)의 `init_local_db()` / `get_local_session()`을 `storage/db.py`로 이동 후 그대로 사용
 - **dart-fss 라이브러리**: `get_corp_list()` → corp_code 8자리 매핑에만 활용 (ingest/dart.py 내부). 지분 엔드포인트는 지원 빈약하므로 `requests` 직접 호출
 - **NetworkX API**: `nx.MultiDiGraph`(같은 쌍에 relation_type 다른 엣지 공존), `G.add_edge(u, v, relation_type=..., ratio=..., detail=...)`, `nx.node_link_data(G)` → D3/Canvas 바로 호환 JSON
-- **프로토타입 엔진**: `init()`, `physics()`, `draw()` ([docs/prototype/corporate_universe_v5.html:231-233](docs/prototype/corporate_universe_v5.html#L231-L233)) 로직을 viewer/index.html로 fork. 원본은 보존.
+- **프로토타입 엔진**: `init()`, `physics()`, `draw()` (프로토타입 원본 231-233행) 로직을 viewer/index.html로 fork.
 - **Harness 템플릿**: 이 폴더 구조(ingest/transform/graph/viewer/storage)는 `financial/`·`disclosure/`·`price/` 팀원이 동일 패턴으로 차용 가능 — 팀 표준 참조 구현
 
 ---
@@ -653,7 +653,7 @@ def export_json(output_path: Path | None = None) -> Path: ...
 **산출물**: `modules/relation/viewer/index.html` — 프로토타입 fork + fetch 로더 + 6가지 relation_type 스타일 + K-IFRS 툴팁
 
 **하위 Step**
-1. **2f.1 — 프로토타입 fork**: `cp docs/prototype/corporate_universe_v5.html modules/relation/viewer/index.html`
+1. **2f.1 — 프로토타입 fork**: `cp docs/prototype/corporate_universe_v5.html modules/relation/viewer/index.html` (fork 완료 — 원본은 이후 #28에서 제거)
 2. **2f.2 — 데이터 로딩 교체**: line ~141-188의 `const raw=[...]` → `let raw=[]; fetch('../data/graph_top50.json').then(...)`
 3. **2f.3 — init() 파서 수정**: `r.split(':', 2)` → `r.split(':', 3)` + edges에 type/ratio/detail 저장
 4. **2f.4 — draw() 스타일 분기**: `EDGE_STYLES` 객체 정의 + 엣지 루프에 `setLineDash`/`strokeStyle`/`lineWidth` 분기

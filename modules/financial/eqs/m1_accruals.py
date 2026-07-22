@@ -2,22 +2,22 @@
 
 "본업에서 번 영업이익이 진짜 영업현금으로 돌아왔는가?"
 
-설계: ``modules/financial/EQS_V2_DESIGN.md`` §M1 (+ 2026-04-27 보정: 100점 캡 1.0→2.0).
+설계: ``docs/EQS_V3_CALIBRATION.md`` §M1.
 
 산출:
     R = (3년 누적 OCF) ÷ (3년 누적 영업이익)
     점수 변환 (선형 보간):
       R ≤ 0      → 0
-      R = 1.0    → 75   (영업이익만큼 현금 유입)
-      R = 2.0    → 100  (영업이익의 2배 현금 유입 — 매우 우량)
-      R > 2.0    → 100
+      R = 0.5    → 25   (이익의 절반만 현금 전환)
+      R = 0.8    → 50   (현금 전환 부족)
+      R = 1.0    → 80   (영업이익만큼 현금 유입)
+      R ≥ 1.2    → 100  (이익보다 20% 이상 많은 현금 유입)
 
 OCF의 "O"가 Operating(영업)이므로 분모도 영업단계 이익(operating_income)으로 맞춰
 영업외 일회성 손익(자산처분·외화환산·법인세 변동)에 의한 비율 왜곡을 제거.
 
-100점 캡을 1.0→2.0으로 늦춘 이유: KOSPI 우량주 다수가 R≥1.0이라 1.0 캡으로는
-변별력 부족 (이전 분포에서 100점이 25/48). R=2.0 캡 + R=1.0=75점 anchor로
-"이익만큼 들어왔으면 75점, 두 배 들어왔으면 100점" 단계적 평가.
+R=1.0은 회계이익과 영업현금이 일치한 기준점이며 80점이다. 1.2 이상은 매출채권·
+재고의 현금 회수까지 양호한 상태로 보아 100점으로 캡을 둔다.
 
 예외:
 - 3년 누적 영업이익 ≤ 0: 산출 보류 ("3년 누적 영업적자")
@@ -36,7 +36,12 @@ def _recent_years(panel: FirmPanel, n: int = 3) -> List[FirmYear]:
     return panel.years[-n:] if panel.years else []
 
 
-def score_m1(panel: FirmPanel) -> ModuleScore:
+def score_m1(
+    panel: FirmPanel,
+    *,
+    require_three_years: bool = False,
+    short_history_weighting: bool = False,
+) -> ModuleScore:
     years = _recent_years(panel, 3)
     valid = [
         y for y in years
@@ -44,6 +49,9 @@ def score_m1(panel: FirmPanel) -> ModuleScore:
     ]
     if not valid:
         return ModuleScore(name="M1", score=None, note="영업이익/OCF 결측 — 산출 불가")
+
+    if require_three_years and len(valid) < 3:
+        return ModuleScore(name="M1", score=None, note="V3 비교에는 3개 사업연도 영업이익/OCF 필요")
 
     sum_ocf = sum(y.operating_cashflow for y in valid)
     sum_oi = sum(y.operating_income for y in valid)
@@ -60,16 +68,24 @@ def score_m1(panel: FirmPanel) -> ModuleScore:
     R = sum_ocf / sum_oi
     if R <= 0:
         score = 0.0
+    elif R <= 0.5:
+        score = R * 50.0  # 0~25
+    elif R <= 0.8:
+        score = 25.0 + (R - 0.5) / 0.3 * 25.0  # 25~50
     elif R <= 1.0:
-        score = R * 75.0  # 0~75 선형 (R=1.0 → 75)
-    elif R <= 2.0:
-        score = 75.0 + (R - 1.0) * 25.0  # 75~100 선형 (R=2.0 → 100)
+        score = 50.0 + (R - 0.8) / 0.2 * 30.0  # 50~80
+    elif R <= 1.2:
+        score = 80.0 + (R - 1.0) / 0.2 * 20.0  # 80~100
     else:
         score = 100.0
-    n_tag = "" if n == 3 else f" — n={n} 단축"
+    confidence = {1: 0.40, 2: 0.70, 3: 1.00}[min(n, 3)]
+    if short_history_weighting and n < 3:
+        score = 50.0 + (score - 50.0) * confidence
+    n_tag = "" if n == 3 else f" — {n}년 이력 신뢰도 {confidence:.0%}"
     return ModuleScore(
         name="M1",
         score=round(score, 1),
         raw=R,
-        note=f"3년 누적 OCF/영업이익={R:.2f}{n_tag}",
+        note=f"{n}년 누적 OCF/영업이익={R:.2f}{n_tag}",
+        weight=confidence if short_history_weighting else 1.0,
     )

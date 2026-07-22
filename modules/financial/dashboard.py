@@ -1,6 +1,6 @@
 """EQSResult + FirmPanel → 단일 HTML 대시보드 생성.
 
-생성된 파일은 docs/prototype/financial_dashboard.html에 저장되며 더블클릭으로
+생성된 파일은 modules/financial/data/financial_dashboard.html에 저장되며 더블클릭으로
 브라우저에서 바로 열린다. 모든 데이터는 inline embed (file:// 환경에서 CORS
 없이 동작). Chart.js만 CDN 로드.
 
@@ -31,9 +31,7 @@ from .industry_groups import get_sector, load_sector_stats
 from .translator.highlights import Highlight
 from .translator.ratios import LABELS as RATIO_LABELS, compute_ratios
 
-_DASHBOARD_DIR = os.path.join(
-    os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "docs", "prototype"
-)
+_DASHBOARD_DIR = os.path.join(os.path.dirname(__file__), "data")
 
 
 def _firm_year_to_dict(y) -> dict:

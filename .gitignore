@@ -4,8 +4,10 @@
 !.env.example
 
 # LLM 채팅 — 사용자별 API 키 (절대 커밋 금지)
-modules/integration/chat_config.local.js
-!modules/integration/chat_config.local.js.example
+integration/v1/chat_config.local.js
+!integration/v1/chat_config.local.js.example
+integration/v2/config.local.js
+!integration/v2/config.local.js.example
 
 # Claude Code 개인 설정
 .claude/settings.local.json
@@ -24,14 +26,29 @@ modules/price/verify_quiz_prices.py
 #   제외 대상: 원시 응답 XML, API RAW 캐시, *.tmp (용량·무의미)
 modules/*/data/*.xml
 modules/*/data/*.tmp
+modules/*/data/company_profiles.json
 modules/*/data/raw_cache/
+
+# report 모듈: 원문 DB·리뷰 큐는 대용량이라 커밋 제외 (publish/·corps.csv만 커밋) — DOSSIER_TABS_PLAN R8
+modules/report/data/reports.db
+modules/report/data/review/
+docs_cache/
 
 # pull 전 로컬 DB 백업 (로컬 전용, 커밋 금지)
 modules/*/data_backup_*/
-docs/prototype/*_backup_*.json
+design/prototypes/*_backup_*.json
+integration/data/*_backup_*.json
+integration/data_backup_*/
 
-# batch 수집 중간 pickle (임시 캐시)
-docs/prototype/_*.pkl
+# 로컬 디버그·세션 산출물 (커밋 금지)
+.playwright-mcp/
+.claude/_session_backup/
+.claude/scripts/
+.gstack/
+integration/v2/_audit/
+
+# batch 수집 중간 pickle (임시 캐시 — 현 출력 위치는 modules/*/data/_* 규칙이 커버)
+design/prototypes/_*.pkl
 
 # UI 검증 스크린샷 (로컬 전용, ui-ux-reviewer agent 생성물)
 modules/*/viewer/screenshots/
@@ -43,6 +60,7 @@ __pycache__/
 .venv/
 venv/
 *.egg-info/
+.pytest_cache/
 
 # Jupyter
 notebooks/.ipynb_checkpoints/
@@ -58,3 +76,14 @@ Thumbs.db
 # Node
 node_modules/
 .next/
+
+# 생성된 대시보드 HTML (재생성물, 커밋 금지 — eqs_data.json 등 데이터는 커밋)
+modules/*/data/*.html
+
+# 모듈 재생성 캐시(_ 접두: _sector_stats.json, _*.pkl 등) — 배치 실행 시 재생성
+modules/*/data/_*
+
+# 모듈 루트로 출력되는 생성 리포트 (generate_report.py — data/ 밖이라 별도 지정)
+modules/disclosure/report_*.html
+modules/report/data/facts/
+modules/report/review/

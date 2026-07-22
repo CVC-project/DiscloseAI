@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- ===== dossier 인프라 (폰트 로컬화 — Phase 0-B/1, CDN→벤더링 R12) ===== -->
+<!-- 폰트: assets/fonts/ 로컬 벤더링(@font-face는 아래 <style>). GitHub Pages 오프라인 안전 -->
+<link rel="stylesheet" href="tokens.css"><!-- D3 공유 프리미티브 (galaxy는 자체 :root가 표준, 프리미티브만 추가) -->
+<script>
+  /* 산업군 테마 — galaxy(현금은하수)는 색=의미(재무흐름 문법)라 팔레트를 재테마하지 않는다. 프레임 액센트(--edge-accent)만 수용. */
+  (function(){ var a=new URLSearchParams(location.search).get('accent'); if(a) document.documentElement.style.setProperty('--edge-accent',a); })();
+</script>
+<script>window.__resources={};</script>
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<script src="dc-runtime.js"></script>
+<!-- ===== /인프라 ===== -->
+</head>
+<body>
+
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+/* 로컬 폰트 (Phase 0-B 벤더링 — :root의 --sans/--mono 패밀리명과 일치) */
+@font-face{font-family:'Pretendard Variable';font-weight:400 700;font-display:swap;src:url('assets/fonts/pretendard/PretendardVariable.woff2') format('woff2-variations');}
+@font-face{font-family:'IBM Plex Mono';font-weight:400;font-display:swap;src:url('assets/fonts/ibm-plex-mono/IBMPlexMono-Regular.latin.woff2') format('woff2');}
+@font-face{font-family:'IBM Plex Mono';font-weight:500;font-display:swap;src:url('assets/fonts/ibm-plex-mono/IBMPlexMono-Medium.latin.woff2') format('woff2');}
+@font-face{font-family:'IBM Plex Mono';font-weight:600;font-display:swap;src:url('assets/fonts/ibm-plex-mono/IBMPlexMono-SemiBold.latin.woff2') format('woff2');}
+@font-face{font-family:'IBM Plex Mono';font-weight:700;font-display:swap;src:url('assets/fonts/ibm-plex-mono/IBMPlexMono-Bold.latin.woff2') format('woff2');}
+:root{
+  --mint:#74EEC6; --cyan:#5CC7EA; --gold:#E9C46B; --coral:#EC8C6A; --steel:#7590B0;
+  --bg:#05060d; --text:#eef4fb; --dim:#8fa1b6; --dim2:#5c6b80;
+  --panel:rgba(12,17,30,.78); --line:rgba(140,170,210,.13);
+  --col-left:2fr; --col-mid:3fr; --col-right:5fr;
+  --row-h:64px; --row-s:56px;
+  --fs-body:15px; --fade:180ms;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,monospace;
+  --sans:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',sans-serif;
+}
+html,body{margin:0;padding:0;background:#05060d;}
+a{color:var(--cyan);} a:hover{color:var(--mint);}
+[data-jl="1"]{background:rgba(92,199,234,.07)!important;box-shadow:inset 3px 0 0 var(--cyan);}
+[data-hl="1"]{background:rgba(116,238,198,.10)!important;box-shadow:inset 3px 0 0 var(--mint), inset 0 0 26px rgba(116,238,198,.07);}
+@keyframes omfade{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+@keyframes ompulse{0%,100%{opacity:.45;}50%{opacity:1;}}
+::-webkit-scrollbar{width:10px;height:10px;}
+::-webkit-scrollbar-thumb{background:#1c2739;border-radius:5px;}
+::-webkit-scrollbar-track{background:transparent;}
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:var(--fs-body);position:relative;">
+
+  <div style="position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(1100px 700px at 12% 6%, rgba(116,238,198,.055), transparent 62%), radial-gradient(900px 700px at 86% 18%, rgba(124,110,220,.06), transparent 62%), radial-gradient(1100px 800px at 50% 92%, rgba(92,199,234,.05), transparent 62%);"></div>
+  <div style="position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.55;background-image:radial-gradient(1px 1px at 23px 41px, rgba(255,255,255,.38), transparent 51%),radial-gradient(1px 1px at 141px 103px, rgba(255,255,255,.22), transparent 51%),radial-gradient(1.4px 1.4px at 87px 172px, rgba(190,225,255,.30), transparent 51%),radial-gradient(1px 1px at 191px 66px, rgba(255,255,255,.18), transparent 51%);background-size:220px 220px;"></div>
+
+  <div data-screen-label="상단 바" style="position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 28px;border-bottom:1px solid var(--line);">
+    <div style="display:flex;align-items:center;gap:14px;">
+      <span style="width:12px;height:12px;border-radius:50%;background:var(--mint);box-shadow:0 0 14px var(--mint);"></span>
+      <div>
+        <div style="font-family:var(--mono);font-size:14px;font-weight:700;letter-spacing:.3em;">CASH MILKY WAY</div>
+        <div style="font-size:12px;color:var(--dim);letter-spacing:.05em;">현금 은하수 · 사업보고서 3단 분석</div>
+      </div>
+      <span style="margin-left:10px;font-size:13px;color:var(--text);border:1px solid var(--line);border-radius:6px;padding:5px 12px;background:rgba(255,255,255,.02);">{{ corp.name }} · FY{{ corp.fiscal_year }} <span style="color:var(--dim);">{{ corp.period }}</span> · <span style="color:var(--cyan);">{{ corp.basis }}</span></span>
+    </div>
+    <div style="font-family:var(--mono);font-size:11px;color:var(--dim2);letter-spacing:.08em;">단위: 조 원 · 행 위에 마우스를 올리면 백만 원 원본</div>
+  </div>
+
+  <div data-screen-label="인트로" style="position:relative;z-index:2;display:grid;grid-template-columns:1.1fr 1.6fr;gap:28px;padding:26px 28px 24px;border-bottom:1px solid var(--line);">
+    <div>
+      <div style="font-size:24px;font-weight:800;line-height:1.45;letter-spacing:-.01em;">작년 통장의 <span style="font-family:var(--mono);color:var(--cyan);">{{ corp.cash_begin }}</span>는, 어떻게 올해 <span style="font-family:var(--mono);color:var(--cyan);">{{ corp.cash_end }}</span>가 됐을까요?</div>
+      <div style="margin-top:12px;font-size:15px;line-height:1.7;">이 이야기의 핵심은 <b>'손익 성적표의 이익'과 '통장의 현금'이 왜 다른가</b>예요.</div>
+      <div style="margin-top:8px;font-size:13px;line-height:1.65;color:var(--dim);">{{ strings.intro_lines.1 }}</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <div style="border:1px solid rgba(116,238,198,.22);border-radius:8px;padding:12px 14px;background:rgba(116,238,198,.04);">
+        <div style="font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--mint);">INCOME STATEMENT · 손익계산서</div>
+        <div style="margin-top:5px;font-size:13px;line-height:1.6;">1년 동안 얼마 벌고 얼마 썼나 — 장사 성적표예요.</div>
+      </div>
+      <div style="border:1px solid rgba(92,199,234,.22);border-radius:8px;padding:12px 14px;background:rgba(92,199,234,.04);">
+        <div style="font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--cyan);">CASH FLOW · 현금흐름표</div>
+        <div style="margin-top:5px;font-size:13px;line-height:1.6;">통장에 실제로 돈이 얼마 들어오고 나갔나 — 입출금 내역이에요.</div>
+      </div>
+      <div style="border:1px solid rgba(233,196,107,.22);border-radius:8px;padding:12px 14px;background:rgba(233,196,107,.04);">
+        <div style="font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--gold);">CHANGES IN EQUITY · 자본변동표</div>
+        <div style="margin-top:5px;font-size:13px;line-height:1.6;">주주의 몫(자본)이 1년 새 어떻게 늘고 줄었나예요.</div>
+      </div>
+      <div style="border:1px solid rgba(117,144,176,.25);border-radius:8px;padding:12px 14px;background:rgba(117,144,176,.05);">
+        <div style="font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--steel);">BALANCE SHEET · 재무상태표</div>
+        <div style="margin-top:5px;font-size:13px;line-height:1.6;">오늘 이 순간 회사가 가진 재산과 빚의 목록이에요.</div>
+      </div>
+    </div>
+  </div>
+
+  <div data-grid="" style="position:relative;z-index:1;display:grid;grid-template-columns:var(--col-left) var(--col-mid) var(--col-right);align-items:stretch;">
+
+    <div data-left="" data-screen-label="세로 현금 은하수" style="position:relative;min-width:0;">{{ galaxySvg }}</div>
+
+    <div data-mid="" data-screen-label="재무제표" style="position:relative;min-width:0;padding:0 20px 55vh 10px;">
+      {{ midOverlay }}
+
+      <div data-zone="zoneA" style="padding:38px 6px 14px;display:flex;align-items:baseline;gap:12px;">
+        <span style="font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--steel);border:1px solid rgba(117,144,176,.4);padding:3px 8px;border-radius:4px;flex-shrink:0;">ZONE A</span>
+        <span style="font-size:19px;font-weight:700;">작년 통장엔 얼마가 있었을까요?</span>
+      </div>
+      <div style="position:relative;background:var(--panel);border:1px solid var(--line);border-radius:10px;margin-bottom:30px;" style-before="content:'';position:absolute;top:-1px;left:-1px;width:14px;height:14px;border-top:2px solid var(--steel);border-left:2px solid var(--steel);border-radius:3px 0 0 0;" style-after="content:'';position:absolute;bottom:-1px;right:-1px;width:14px;height:14px;border-bottom:2px solid var(--steel);border-right:2px solid var(--steel);border-radius:0 0 3px 0;">
+        <div style="display:flex;align-items:center;gap:11px;padding:13px 16px;border-bottom:1px solid var(--line);background:rgba(117,144,176,.05);">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--steel);box-shadow:0 0 10px var(--steel);flex-shrink:0;"></span>
+          <div>
+            <div style="font-family:var(--mono);font-size:11.5px;letter-spacing:.22em;color:var(--steel);">BALANCE SHEET · PREV</div>
+            <div style="font-size:12.5px;color:var(--dim);">전기말 재무상태표 — 이야기의 출발점이라 현금만 간단히 보여드려요.</div>
+          </div>
+        </div>
+        <div data-row="pbs-cash" onclick="{{ onRow }}" title="{{ pt.pbs_cash }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">01</span><span>현금및현금성자산</span></div>
+          <span style="font-family:var(--mono);font-size:16px;font-weight:700;color:var(--cyan);">{{ pv.pbs_cash }}</span>
+        </div>
+      </div>
+
+      <div data-zone="zoneB" style="padding:30px 6px 14px;display:flex;align-items:baseline;gap:12px;">
+        <span style="font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--mint);border:1px solid rgba(116,238,198,.4);padding:3px 8px;border-radius:4px;flex-shrink:0;">ZONE B</span>
+        <span style="font-size:19px;font-weight:700;">1년 동안 얼마 벌고 얼마 썼을까요?</span>
+      </div>
+      <div style="position:relative;background:var(--panel);border:1px solid var(--line);border-radius:10px;margin-bottom:30px;" style-before="content:'';position:absolute;top:-1px;left:-1px;width:14px;height:14px;border-top:2px solid var(--mint);border-left:2px solid var(--mint);border-radius:3px 0 0 0;" style-after="content:'';position:absolute;bottom:-1px;right:-1px;width:14px;height:14px;border-bottom:2px solid var(--mint);border-right:2px solid var(--mint);border-radius:0 0 3px 0;">
+        <div style="display:flex;align-items:center;gap:11px;padding:13px 16px;border-bottom:1px solid var(--line);background:rgba(116,238,198,.05);">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--mint);box-shadow:0 0 10px var(--mint);flex-shrink:0;"></span>
+          <div>
+            <div style="font-family:var(--mono);font-size:11.5px;letter-spacing:.22em;color:var(--mint);">INCOME STATEMENT</div>
+            <div style="font-size:12.5px;color:var(--dim);">손익계산서 — 1년 동안 얼마 벌고 얼마 썼나, 장사 성적표예요.</div>
+          </div>
+        </div>
+        {{ panelB }}
+      </div>
+
+      <div data-zone="zoneC" style="padding:30px 6px 14px;display:flex;align-items:baseline;gap:12px;">
+        <span style="font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--cyan);border:1px solid rgba(92,199,234,.4);padding:3px 8px;border-radius:4px;flex-shrink:0;">ZONE C</span>
+        <span style="font-size:19px;font-weight:700;">계산상 이익은 진짜 현금이 됐을까요?</span>
+      </div>
+      <div style="position:relative;background:var(--panel);border:1px solid var(--line);border-radius:10px;margin-bottom:30px;" style-before="content:'';position:absolute;top:-1px;left:-1px;width:14px;height:14px;border-top:2px solid var(--cyan);border-left:2px solid var(--cyan);border-radius:3px 0 0 0;" style-after="content:'';position:absolute;bottom:-1px;right:-1px;width:14px;height:14px;border-bottom:2px solid var(--cyan);border-right:2px solid var(--cyan);border-radius:0 0 3px 0;">
+        <div style="display:flex;align-items:center;gap:11px;padding:13px 16px;border-bottom:1px solid var(--line);background:rgba(92,199,234,.05);">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan);flex-shrink:0;"></span>
+          <div>
+            <div style="font-family:var(--mono);font-size:11.5px;letter-spacing:.22em;color:var(--cyan);">CASH FLOW STATEMENT</div>
+            <div style="font-size:12.5px;color:var(--dim);">현금흐름표 — 통장에 실제로 돈이 얼마 들어오고 나갔나, 입출금 내역이에요.</div>
+          </div>
+        </div>
+        <div data-row="cf-netincome" onclick="{{ onRow }}" title="{{ pt.cf_netincome }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:#63d68e;letter-spacing:.08em;">08</span><span>당기순이익 <span style="font-size:11px;color:#63d68e;">← 손익계산서에서</span></span></div>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:#63d68e;">{{ pv.cf_netincome }}</span>
+        </div>
+        <div data-row="cf-noncash" onclick="{{ onRow }}" title="{{ pt.cf_noncash }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">09</span><span>비현금 조정 <span style="font-size:11px;color:var(--dim);font-weight:400;">현금 안 나간 비용을 도로 더해요</span></span><span data-g="noncash" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.noncash }}</span></div>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--cyan);">{{ pv.cf_noncash }}</span>
+        </div>
+        <sc-if value="{{ exp.noncash }}" hint-placeholder-val="{{ false }}"><div>{{ sub.noncash }}</div></sc-if>
+        <div data-row="cf-wc" onclick="{{ onRow }}" title="{{ pt.cf_wc }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">10</span><span>운전자본 변동 <span style="font-size:11px;color:var(--dim);font-weight:400;">아직 현금이 안 된 외상·재고</span></span><span data-g="wc" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.wc }}</span></div>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--coral);">{{ pv.cf_wc }}</span>
+        </div>
+        <sc-if value="{{ exp.wc }}" hint-placeholder-val="{{ false }}"><div>{{ sub.wc }}</div></sc-if>
+        <div data-row="cf-paid" onclick="{{ onRow }}" title="{{ pt.cf_paid }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">10ᵇ</span><span>이자·법인세 실납부 등</span></div>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--coral);">{{ pv.cf_paid }}</span>
+        </div>
+        <div data-row="cf-op" onclick="{{ onRow }}" title="{{ pt.cf_op }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid rgba(92,199,234,.35);cursor:pointer;background:rgba(92,199,234,.07);font-weight:700;" style-hover="background:rgba(92,199,234,.12)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--cyan);letter-spacing:.08em;">11</span><span>Ⅰ. 영업활동 현금흐름</span></div>
+          <span style="font-family:var(--mono);font-size:17px;font-weight:700;color:var(--cyan);text-shadow:0 0 12px rgba(92,199,234,.5);">{{ pv.cf_op }}</span>
+        </div>
+        <sc-if value="{{ exp.inv }}" hint-placeholder-val="{{ false }}"><div>{{ sub.inv }}</div></sc-if>
+        <div data-row="cf-inv" onclick="{{ onRow }}" title="{{ pt.cf_inv }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;background:rgba(92,199,234,.04);font-weight:700;" style-hover="background:rgba(92,199,234,.09)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">12</span><span>Ⅱ. 투자활동 현금흐름</span><span data-g="inv" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.inv }}</span></div>
+          <span style="font-family:var(--mono);font-size:16.5px;font-weight:700;color:var(--coral);">{{ pv.cf_inv }}</span>
+        </div>
+        <sc-if value="{{ exp.fin }}" hint-placeholder-val="{{ false }}"><div>{{ sub.fin }}</div></sc-if>
+        <div data-row="cf-fin" onclick="{{ onRow }}" title="{{ pt.cf_fin }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;background:rgba(92,199,234,.04);font-weight:700;" style-hover="background:rgba(92,199,234,.09)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">13</span><span>Ⅲ. 재무활동 현금흐름</span><span data-g="fin" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.fin }}</span></div>
+          <span style="font-family:var(--mono);font-size:16.5px;font-weight:700;color:var(--coral);">{{ pv.cf_fin }}</span>
+        </div>
+        <div data-row="cf-fx" onclick="{{ onRow }}" title="{{ pt.cf_fx }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-h);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">14</span><span>외화환산효과</span></div>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--cyan);">{{ pv.cf_fx }}</span>
+        </div>
+        <div data-row="cf-netchange" onclick="{{ onRow }}" title="{{ pt.cf_netchange }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:.08em;">Δ</span><span>현금의 순증감</span></div>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:700;color:var(--gold);">{{ pv.cf_netchange }}</span>
+        </div>
+        <div data-row="cf-begincash" onclick="{{ onRow }}" title="{{ pt.cf_begincash }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;" style-hover="background:rgba(140,190,230,.06)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--dim2);letter-spacing:.08em;">01</span><span>기초의 현금</span></div>
+          <span style="font-family:var(--mono);font-size:15px;font-weight:600;color:var(--cyan);">{{ pv.cf_begincash }}</span>
+        </div>
+        <div data-row="cf-endcash" onclick="{{ onRow }}" title="{{ pt.cf_endcash }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid rgba(92,199,234,.3);cursor:pointer;background:rgba(92,199,234,.06);font-weight:700;" style-hover="background:rgba(92,199,234,.11)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--cyan);letter-spacing:.08em;">15</span><span>기말의 현금</span></div>
+          <span style="font-family:var(--mono);font-size:16.5px;font-weight:700;color:var(--cyan);">{{ pv.cf_endcash }}</span>
+        </div>
+      </div>
+
+      <div data-zone="zoneD" style="padding:30px 6px 14px;display:flex;align-items:baseline;gap:12px;">
+        <span style="font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--cyan);border:1px solid rgba(92,199,234,.4);padding:3px 8px;border-radius:4px;flex-shrink:0;">ZONE D</span>
+        <span style="font-size:19px;font-weight:700;">그래서 통장엔 얼마가 남았을까요?</span>
+      </div>
+      <div style="position:relative;background:var(--panel);border:1px solid var(--line);border-radius:10px;margin-bottom:30px;" style-before="content:'';position:absolute;top:-1px;left:-1px;width:14px;height:14px;border-top:2px solid var(--steel);border-left:2px solid var(--steel);border-radius:3px 0 0 0;" style-after="content:'';position:absolute;bottom:-1px;right:-1px;width:14px;height:14px;border-bottom:2px solid var(--steel);border-right:2px solid var(--steel);border-radius:0 0 3px 0;">
+        <div style="display:flex;align-items:center;gap:11px;padding:13px 16px;border-bottom:1px solid var(--line);background:rgba(117,144,176,.05);">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--steel);box-shadow:0 0 10px var(--steel);flex-shrink:0;"></span>
+          <div>
+            <div style="font-family:var(--mono);font-size:11.5px;letter-spacing:.22em;color:var(--steel);">BALANCE SHEET · FY2025</div>
+            <div style="font-size:12.5px;color:var(--dim);">당기말 재무상태표 — 오늘 이 순간 회사가 가진 재산과 빚의 목록이에요.</div>
+          </div>
+        </div>
+        <div data-row="bs-cash" onclick="{{ onRow }}" title="{{ pt.bs_cash }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;cursor:pointer;background:rgba(92,199,234,.06);font-weight:700;" style-hover="background:rgba(92,199,234,.11)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--cyan);letter-spacing:.08em;">15</span><span>현금및현금성자산</span></div>
+          <span style="font-family:var(--mono);font-size:17px;font-weight:700;color:var(--cyan);text-shadow:0 0 12px rgba(92,199,234,.5);">{{ pv.bs_cash }}</span>
+        </div>
+        <div data-row="bs-assets" onclick="{{ onRow }}" title="{{ pt.bs_assets }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;background:rgba(117,144,176,.06);font-weight:700;" style-hover="background:rgba(117,144,176,.11)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--steel);letter-spacing:.08em;">자산</span><span>자산총계</span><span data-g="bsa" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.bsa }}</span></div>
+          <span style="font-family:var(--mono);font-size:16.5px;font-weight:700;color:var(--steel);">{{ pv.bs_assets }}</span>
+        </div>
+        <sc-if value="{{ exp.bsa }}" hint-placeholder-val="{{ false }}"><div>{{ sub.bsa }}</div></sc-if>
+        <div data-row="bs-liab" onclick="{{ onRow }}" title="{{ pt.bs_liab }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;font-weight:700;" style-hover="background:rgba(140,190,230,.06)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--coral);letter-spacing:.08em;">부채</span><span>부채총계 <span style="font-size:11px;color:var(--dim);font-weight:400;">갚아야 할 남의 돈</span></span><span data-g="bsl" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.bsl }}</span></div>
+          <span style="font-family:var(--mono);font-size:15.5px;font-weight:700;color:var(--steel);">{{ pv.bs_liab }}</span>
+        </div>
+        <sc-if value="{{ exp.bsl }}" hint-placeholder-val="{{ false }}"><div>{{ sub.bsl }}</div></sc-if>
+        <div data-row="bs-equity" onclick="{{ onRow }}" title="{{ pt.bs_equity }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;font-weight:700;" style-hover="background:rgba(140,190,230,.06)">
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:.08em;">자본</span><span>자본총계 <span style="font-size:11px;color:var(--dim);font-weight:400;">주주의 몫 → 존 E</span></span><span data-g="bse" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.bse }}</span></div>
+          <span style="font-family:var(--mono);font-size:15.5px;font-weight:700;color:var(--gold);">{{ pv.bs_equity }}</span>
+        </div>
+        <sc-if value="{{ exp.bse }}" hint-placeholder-val="{{ false }}"><div>{{ sub.bse }}</div></sc-if>
+        <div style="padding:15px 16px 17px;border-top:1px solid var(--line);">
+          <div style="font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--dim2);margin-bottom:11px;">자산 = 부채 + 자본 · 회사의 재산은 어떻게 마련했나</div>
+          <div style="display:flex;align-items:stretch;gap:12px;height:126px;">
+            <div style="flex:1;display:flex;flex-direction:column;">
+              <div style="flex:1;background:linear-gradient(rgba(117,144,176,.32),rgba(117,144,176,.16));border:1px solid rgba(117,144,176,.5);border-radius:5px;display:flex;flex-direction:column;align-items:center;justify-content:center;"><span style="font-size:11px;color:var(--dim);">자산(가진 재산)</span><span style="font-family:var(--mono);font-weight:700;font-size:16px;color:var(--steel);">{{ pv.bs_assets }}</span></div>
+            </div>
+            <div style="font-size:22px;color:var(--dim);align-self:center;">=</div>
+            <div style="flex:1;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:5px;overflow:hidden;">
+              <div style="height:{{ bsbar.l }}%;background:rgba(236,140,106,.15);border-bottom:1px dashed rgba(236,140,106,.55);display:flex;align-items:center;justify-content:center;gap:6px;"><span style="font-size:10.5px;color:var(--coral);">부채</span><span style="font-family:var(--mono);font-size:12px;color:var(--coral);">{{ pv.bs_liab }}</span></div>
+              <div style="height:{{ bsbar.e }}%;background:rgba(233,196,107,.14);display:flex;flex-direction:column;align-items:center;justify-content:center;"><span style="font-size:10.5px;color:var(--gold);">자본(주주 몫)</span><span style="font-family:var(--mono);font-weight:700;font-size:15px;color:var(--gold);">{{ pv.bs_equity }}</span></div>
+            </div>
+          </div>
+          <div style="font-size:11.5px;color:var(--dim);margin-top:10px;line-height:1.65;">두 기둥의 높이가 똑같아요 — 회사가 가진 재산(자산)은 반드시 <b style="color:var(--coral);">갚아야 할 남의 돈(부채)</b>과 <b style="color:var(--gold);">주주의 몫(자본)</b>을 더한 것과 같아요. 이게 재무상태표의 뼈대예요.</div>
+        </div>
+      </div>
+
+      <div data-zone="zoneE" style="padding:30px 6px 14px;display:flex;align-items:baseline;gap:12px;">
+        <span style="font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--gold);border:1px solid rgba(233,196,107,.4);padding:3px 8px;border-radius:4px;flex-shrink:0;">ZONE E</span>
+        <span style="font-size:19px;font-weight:700;">주주의 몫(자본)은 어떻게 변했을까요?</span>
+      </div>
+      <div style="position:relative;background:var(--panel);border:1px solid var(--line);border-radius:10px;margin-bottom:30px;" style-before="content:'';position:absolute;top:-1px;left:-1px;width:14px;height:14px;border-top:2px solid var(--gold);border-left:2px solid var(--gold);border-radius:3px 0 0 0;" style-after="content:'';position:absolute;bottom:-1px;right:-1px;width:14px;height:14px;border-bottom:2px solid var(--gold);border-right:2px solid var(--gold);border-radius:0 0 3px 0;">
+        <div style="display:flex;align-items:center;gap:11px;padding:13px 16px;border-bottom:1px solid var(--line);background:rgba(233,196,107,.05);">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold);flex-shrink:0;"></span>
+          <div>
+            <div style="font-family:var(--mono);font-size:11.5px;letter-spacing:.22em;color:var(--gold);">CHANGES IN EQUITY</div>
+            <div style="font-size:12.5px;color:var(--dim);">자본변동표(당기만) — 주주의 몫(자본)이 1년 새 어떻게 늘고 줄었나예요.</div>
+          </div>
+        </div>
+        {{ eqRows }}
+      </div>
+
+      <div data-epilogue="" style="padding:44px 6px 20px;text-align:center;">
+        <div style="font-family:var(--mono);font-size:11px;letter-spacing:.3em;color:var(--dim2);">— 여정의 끝 —</div>
+        <div style="margin-top:10px;font-size:13px;color:var(--dim);">이제 궁금한 항목을 아무거나 눌러보세요 — 왼쪽 매듭도, 가운데 표의 줄도 모두 눌러져요.</div>
+      </div>
+      <div style="margin:8px 6px 0;border:1px dashed var(--line);border-radius:10px;padding:14px 8px 6px;">
+        <div style="font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--dim2);margin:0 8px 8px;">APPENDIX · 별도 주석 — 클릭하면 딥다이브가 열려요</div>
+        {{ appendixList }}
+      </div>
+    </div>
+
+    <div data-right="" data-screen-label="설명 인스펙터" style="position:sticky;top:0;height:100vh;display:flex;flex-direction:column;min-width:0;border-left:1px solid var(--line);background:rgba(8,11,20,.62);backdrop-filter:blur(8px);z-index:4;">
+      <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center;padding:12px 30px;border-bottom:1px solid var(--line);">
+        <span style="font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--dim2);">COLOR LEGEND</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--dim);"><span style="width:9px;height:9px;border-radius:50%;background:var(--mint);box-shadow:0 0 8px var(--mint);"></span>손익 (벌고 쓴 것)</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--dim);"><span style="width:9px;height:9px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan);"></span>현금</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--dim);"><span style="width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold);"></span>자본 (주주 몫)</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--dim);"><span style="width:9px;height:9px;border-radius:50%;background:var(--coral);box-shadow:0 0 8px var(--coral);"></span>유출</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--dim);"><span style="width:9px;height:9px;border-radius:50%;background:var(--steel);"></span>잔액·상태 (BS)</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--dim);"><span style="width:12px;height:0;border-top:2px dashed var(--cyan);"></span>비현금 (현금 안 움직임)</span>
+      </div>
+      <sc-if value="{{ isPinned }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:9px 30px;border-bottom:1px solid rgba(233,196,107,.3);background:rgba(233,196,107,.05);">
+          <span style="font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;color:var(--gold);">PINNED · 딥다이브 고정</span>
+          <button onclick="{{ unpin }}" style="font-family:var(--sans);font-size:12.5px;color:var(--text);background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:6px;padding:6px 12px;cursor:pointer;">✕ 흐름으로 돌아가기 <span style="color:var(--dim2);font-size:11px;">Esc</span></button>
+        </div>
+      </sc-if>
+      <sc-if value="{{ isJourney }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 30px;border-bottom:1px solid var(--line);">
+          <span style="font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;color:var(--cyan);">JOURNEY · 여정 모드</span>
+          <span style="font-size:12px;color:var(--dim);">스크롤 = 이야기 진행 · 항목 클릭 = 딥다이브 고정</span>
+        </div>
+      </sc-if>
+      <div data-insp="" style="flex:1;overflow-y:auto;padding:30px 36px 44px;">{{ inspectorCard }}</div>
+    </div>
+  </div>
+
+  {{ srcPanel }}
+  {{ runningChip }}
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{
+  &quot;particles&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;은하수&quot; },
+  &quot;glowStrength&quot;: { &quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 1, &quot;min&quot;: 0.4, &quot;max&quot;: 1.6, &quot;step&quot;: 0.1, &quot;tsType&quot;: &quot;number&quot;, &quot;section&quot;: &quot;은하수&quot; },
+  &quot;rowH&quot;: { &quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 64, &quot;min&quot;: 52, &quot;max&quot;: 84, &quot;step&quot;: 2, &quot;unit&quot;: &quot;px&quot;, &quot;tsType&quot;: &quot;number&quot;, &quot;section&quot;: &quot;레이아웃&quot; }
+}">
+class Component extends DCLogic {
+  state = { pos: null, zoneY: null, W: 300, H: 5200, midW: 600, midH: 5200, midPos: null, active: 'overview', pin: null, src: null, srcToc: true, exp: { sgna: false, nonop: false, ni: false, noncash: false, wc: false, inv: false, fin: false, bsa: false, bsl: false, bse: false } };
+
+  C = { mint:'#74EEC6', cyan:'#5CC7EA', gold:'#E9C46B', coral:'#EC8C6A', steel:'#7590B0', green:'#63d68e', text:'#eef4fb', dim:'#8fa1b6' };
+
+  // ===== CONFIG — 은하수의 모든 튜닝 값 =====
+  CONFIG = {
+    ribbon: { min: 6, max: 44, ref: 333.6, scale: 'sqrt', uniform: true, mainW: 6, branchW: 3.5 },
+    rail: { x: 22 },
+    spineX: 0.48, // 본류 x 위치(0~1). null이면 매듭별 xf 사용(구불구불)
+    band: { lMin: 64, lFrac: 0.26, r: 30 },
+    reservoirs: { begin: 53.71, end: 57.86, deltaJo: 4.15, rBegin: 30, rEnd: 31 },
+    tributary: { outDx: -58, outDy: 44, inDx: 120, inDy: -34 },
+    narration: { centerFrac: 0.44, topReset: 60 },
+  };
+
+  // ===== 데이터 구동 (galaxy_<ticker>.json 주입) — 삼성 하드코딩 외부화 (Phase 1 D4-층2) =====
+  get KNOTS() { return (this._G && this._G.knots) ? this._G.knots : []; }
+  // SEGS = 본류 구간 위상·색 (구조적·범용). 3번째(굵기)는 uniform 모드에서 미사용 → 0
+  // SEGS = 본류 구간 위상·색 — KNOTS 순서에서 파생(V-041: 회사별 매듭 구조 수용, k3~k5 고정 제거).
+  get SEGS() {
+    const ks = this.KNOTS, out = [];
+    for (let i = 0; i < ks.length - 1; i++) {
+      const a = ks[i];
+      const col = a.kind === 'hub' ? 'grad' : (a.z === 'B' ? 'mint' : 'cyan');
+      out.push([a.id, ks[i + 1].id, 0, col]);
+    }
+    return out;
+  }
+  get EQE() { return (this._G && this._G.panels && this._G.panels.E ? this._G.panels.E : []).map(r => ({ row: r.row, t: r.v, big: r.row === 'eq-begin' || r.row === 'eq-end', oci: r.row === 'eq-oci', neg: (r.v || '').startsWith('−') })); }
+  get ZONES() { return (this._G && this._G.strings && this._G.strings.zones) ? this._G.strings.zones : {}; }
+  get EQSTORY() { return (this._G && this._G.eqstory) ? this._G.eqstory : {}; }
+
+  RT = { k8:0, k9:1, k10:2, k10b:3, k11:4 };
+  get RTSTEPS() { return (this._G && this._G.rtsteps) ? this._G.rtsteps : []; }
+
+  // ---------- lifecycle ----------
+  _loadData() {
+    const t = new URLSearchParams(location.search).get('ticker') || '005930';
+    this._ticker = t;  // 사업보고서 원문 팝업 지연로드용
+    fetch('data/galaxy_' + t + '.json', { cache: 'no-store' })
+      .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(G => { this._G = G; this._dives = null; this._rowDive = null; this._grpDive = null; this._ndv = null; this.setState({ dataReady: true }); this.queueMeasure(); })
+      .catch(() => this.setState({ dataError: true }));
+  }
+  componentDidMount() {
+    this._loadData();
+    this._raf = null;
+    this._onScroll = () => { if (this._raf) return; this._raf = requestAnimationFrame(() => { this._raf = null; this.updateActive(); }); };
+    this._onResize = () => this.queueMeasure();
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    window.addEventListener('resize', this._onResize);
+    requestAnimationFrame(() => { this.measureNow(); this.attachRO(); });
+    this._onKey = (e) => { if (e.key === 'Escape') { if (this.state.src) this.closeSrc(); else this.unpin(); } };
+    document.addEventListener('keydown', this._onKey);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => this.queueMeasure());
+    setTimeout(() => this.queueMeasure(), 600);
+    this.applyTokens();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._onScroll);
+    window.removeEventListener('resize', this._onResize);
+    document.removeEventListener('keydown', this._onKey);
+    clearTimeout(this._stepT);
+    clearTimeout(this._syncT);
+    if (this._ro) this._ro.disconnect();
+  }
+  componentDidUpdate() { this.applyTokens(); this.applyJourneyHL(); }
+
+  applyTokens() {
+    document.documentElement.style.setProperty('--row-h', (this.props.rowH ?? 64) + 'px');
+  }
+  get glow() { return Math.max(.2, Math.min(2, this.props.glowStrength ?? 1)); }
+
+  attachRO() {
+    const mid = document.querySelector('[data-mid]');
+    const left = document.querySelector('[data-left]');
+    if (!mid || !left) return;
+    this._ro = new ResizeObserver(() => this.queueMeasure());
+    this._ro.observe(mid); this._ro.observe(left);
+  }
+  queueMeasure() { if (this._mq) return; this._mq = requestAnimationFrame(() => { this._mq = null; this.measureNow(); }); }
+
+  measureNow() {
+    const left = document.querySelector('[data-left]');
+    if (!left) return;
+    const lt = left.getBoundingClientRect();
+    const pos = {}, zoneY = {};
+    document.querySelectorAll('[data-row]').forEach(el => {
+      const r = el.getBoundingClientRect();
+      pos[el.getAttribute('data-row')] = Math.round(r.top - lt.top + r.height / 2);
+    });
+    document.querySelectorAll('[data-zone]').forEach(el => {
+      const r = el.getBoundingClientRect();
+      zoneY[el.getAttribute('data-zone')] = Math.round(r.top - lt.top + 8);
+    });
+    const W = Math.round(left.clientWidth), H = Math.round(left.clientHeight);
+    const mid = document.querySelector('[data-mid]');
+    const midPos = {};
+    let midW = this.state.midW, midH = this.state.midH;
+    if (mid) {
+      const mt = mid.getBoundingClientRect();
+      midW = Math.round(mid.clientWidth); midH = Math.round(mid.clientHeight);
+      document.querySelectorAll('[data-row]').forEach(el => {
+        const r = el.getBoundingClientRect();
+        midPos[el.getAttribute('data-row')] = { y: Math.round(r.top - mt.top + r.height / 2), x1: Math.round(r.left - mt.left), x2: Math.round(r.right - mt.left) };
+      });
+    }
+    const sig = W + '|' + H + '|' + pos['is-revenue'] + '|' + pos['eq-end'] + '|' + pos['bs-cash'] + '|' + pos['cf-op'];
+    if (sig === this._sig) return;
+    this._sig = sig;
+    this.setState({ pos, zoneY, W, H, midPos, midW, midH });
+  }
+
+  // ---------- journey ----------
+  get STATIONS() {
+    const s = [{ id: 'zoneA', sel: '[data-zone="zoneA"]' }];
+    const zoneBefore = { k2: 'zoneB', k9: 'zoneC', k15: 'zoneD' };
+    for (const k of this.KNOTS) {
+      if (zoneBefore[k.id]) s.push({ id: zoneBefore[k.id], sel: `[data-zone="${zoneBefore[k.id]}"]` });
+      s.push({ id: k.id, sel: `[data-row="${k.row}"]` });
+    }
+    s.push({ id: 'zoneE', sel: '[data-zone="zoneE"]' });
+    for (const e of this.EQE) s.push({ id: e.row, sel: `[data-row="${e.row}"]` });
+    s.push({ id: 'epilogue', sel: '[data-epilogue]' });
+    return s;
+  }
+
+  updateActive() {
+    const line = window.innerHeight * this.CONFIG.narration.centerFrac;
+    let cur = 'overview';
+    if (window.scrollY >= this.CONFIG.narration.topReset) {
+      for (const st of this.STATIONS) {
+        const el = document.querySelector(st.sel);
+        if (el && el.getBoundingClientRect().top <= line) cur = st.id;
+      }
+    }
+    // ★ 스크롤 한 칸 = 카드 한 장:
+    //  - 스크롤 제스처가 일어날 때만, 목표 방향으로 정확히 한 칸 이동한다 (타이머 캐치업으로 카드를 스치지 않음)
+    //  - 스크롤이 멈추면(450ms) 화면 중앙의 정거장으로 한 번에 재동기화한다 (중간 카드를 깜빡이며 지나가지 않음)
+    this._target = cur;
+    const order = ['overview', ...this.STATIONS.map(s => s.id)];
+    const ci = order.indexOf(this.state.active), ti = order.indexOf(cur);
+    clearTimeout(this._syncT);
+    if (ci === -1 || ti === -1) { this.setState({ active: cur }); return; }
+    // ★ 제스처 감지: 스크롤 이벤트가 250ms 이상 끊겼다가 다시 시작된 순간만 '새 제스처'로 본다.
+    // 휠 한 칸의 관성 스크롤(수백 ms 지속)은 하나의 제스처 — 그 안에서는 절대 두 번 이동하지 않는다.
+    const now = performance.now();
+    const newGesture = now - (this._lastEvt || 0) > 250;
+    this._lastEvt = now;
+    if (ti !== ci) {
+      if (newGesture) {
+        this._lastStep = now;
+        this.setState({ active: order[ci + Math.sign(ti - ci)] });
+      }
+      // 스크롤이 잠잠해진 뒤, 많이(3칸 초과) 어긋났을 때만 단번에 동기화.
+      // 1~3칸 차이는 그대로 두고 다음 스크롤 제스처 때 한 칸씩 따라간다 —
+      // 방금 보여준 카드를 유휴 타이머가 곧바로 밀어내는 이중 전환(씹힘)을 막는다.
+      this._syncT = setTimeout(() => {
+        if (!this._target || this._target === this.state.active) return;
+        const o2 = ['overview', ...this.STATIONS.map(s => s.id)];
+        const c2 = o2.indexOf(this.state.active), t2 = o2.indexOf(this._target);
+        if (c2 !== -1 && t2 !== -1 && Math.abs(t2 - c2) <= 3) return;
+        this._lastStep = performance.now();
+        this.setState({ active: this._target });
+      }, 450);
+    }
+  }
+
+  applyJourneyHL() {
+    const k = this.KNOTS.find(x => x.id === this.state.active);
+    const row = k ? k.row : (this.EQSTORY[this.state.active] ? this.state.active : null);
+    const hl = this._pinHl();
+    document.querySelectorAll('[data-row]').forEach(el => {
+      const id = el.getAttribute('data-row');
+      if (hl.has(id)) el.setAttribute('data-hl', '1'); else el.removeAttribute('data-hl');
+      if (!this.state.pin && row && id === row) el.setAttribute('data-jl', '1'); else el.removeAttribute('data-jl');
+    });
+  }
+
+  _diveKey(row) {
+    // 행→dive 키 (V-069→V-075 재편): ① 이 티커 dives의 .row 앵커(per-ticker 정본) →
+    // ② 정적 ROW2DIVE — 보편 값(k*·eq*·집계)은 전 티커, 삼성 nX 레거시 값은 005930 전용
+    //    (카드 키=그 회사 주번호라 타 티커에서 같은 키가 다른 주석 — blind-pin 차단, V-075) →
+    // ③ 이 티커 dive.hl 역인덱스(_hlDive — 승격 카드가 hl로만 참조하는 행) → ④ grp 서브행→부모행 폴백 →
+    // ⑤ 존 요약 폴백(V-049, 정적 매핑이 있던 행 한정 — 기존 표면 보존) → ⑥ 정적 키 or row.
+    const D0 = this.getDives();
+    this._ensureRowMaps();
+    if (this._rowDive[row] && D0[this._rowDive[row]]) return this._rowDive[row];     // ① .row 앵커
+    const sk = this.ROW2DIVE[row];
+    if (sk && D0[sk] && (!/^n\d/.test(sk) || this._ticker === '005930')) return sk;   // ② 정적(보편 + 삼성 전용 nX)
+    if (this._hlDive[row] && D0[this._hlDive[row]]) return this._hlDive[row];         // ③ hl 역인덱스
+    if (this._grpDive[row] && D0[this._grpDive[row]]) return this._grpDive[row];      // ④ grp 폴백
+    if (sk) {                                                                          // ⑤ 존 요약 폴백
+      const FB = { eq: ['eq-other', 'eq-end'], cf: ['k11', 'k15'], is: ['k8'], bs: ['assets'] };
+      for (const cand of (FB[row.slice(0, 2)] || [])) if (D0[cand]) return cand;
+    }
+    return sk || row;                                                                  // ⑥
+  }
+  _ensureRowMaps() {
+    if (this._rowDive) return;
+    const D = this.getDives();
+    this._rowDive = {}; for (const k in D) if (D[k] && D[k].row) this._rowDive[D[k].row] = k;
+    // dive.hl 역인덱스(V-075): 승격 카드가 hl로만 참조하는 행(예: SK is-nonop-eqm→n11·bs-sp→n22)의 정확 라우팅.
+    // ② 보편 정적 매핑이 우선하므로 hl 안의 보편 행(eq-netincome·cf-fin-debt 등)은 여기 안 닿는다. 선점 우선.
+    this._hlDive = {};
+    for (const k in D) for (const r of ((D[k] && D[k].hl) || [])) {
+      if (!this._rowDive[r] && !this._hlDive[r]) this._hlDive[r] = k;
+    }
+    // 서브행(grp)은 부모 행의 dive로 폴백 (V-049): 회사별 subrow id(bs-l-1·is-sgna-warr…) 자동 수용.
+    this._grpDive = {};
+    const GP = { sgna: 'is-sgna', nonop: 'is-nonop', ni: 'is-netincome', opex: 'is-opex',
+                 noncash: 'cf-noncash', wc: 'cf-wc', inv: 'cf-inv', fin: 'cf-fin',
+                 bsa: 'bs-assets', bsl: 'bs-liab', bse: 'bs-equity' };
+    const P = (this._G && this._G.panels) || {};
+    for (const z in P) for (const r of (P[z] || [])) {
+      if (r.grp && !this._rowDive[r.row]) {
+        const pr = GP[r.grp]; const pd = pr && (this._rowDive[pr] || this.ROW2DIVE[pr]);
+        if (pd && D[pd]) this._grpDive[r.row] = pd;
+      }
+    }
+  }
+  // pin 시 동시 발광할 행들 (V-069): dive.hl(per-ticker) → 정적 HL(삼성·보편) → links[].row+.row 파생.
+  _hlRows(key) {
+    if (!key) return [];
+    const d = this.getDives()[key];
+    if (d && d.hl) return d.hl;
+    if (this.HL[key]) return this.HL[key];
+    if (!d) return [];
+    const rows = (d.links || []).map(l => l.row).filter(Boolean);
+    if (d.row) rows.push(d.row);
+    return rows;
+  }
+  // 항등식 HL(V-075, A9 합계→구성): 합계 행 클릭 시 구성 행 동반 발광 — 클릭 행(pinVia) 기준.
+  // 행 id는 보편(없는 티커는 DOM 미존재로 무해). 역방향(구성→합계)은 켜지 않는다.
+  VIA_HL = {
+    'is-grossprofit': ['is-grossprofit', 'is-revenue', 'is-cogs'],
+    'is-opincome': ['is-opincome', 'is-grossprofit', 'is-sgna', 'is-opother'],
+    'is-pretax': ['is-pretax', 'is-opincome', 'is-nonop'],
+  };
+  _pinHl() {
+    if (!this.state.pin) return new Set();
+    const s = new Set(this._hlRows(this.state.pin));
+    for (const r of (this.VIA_HL[this.state.pinVia] || [])) s.add(r);
+    return s;
+  }
+  onRow = (e) => { const row = e.currentTarget.getAttribute('data-row'); this.pin(this._diveKey(row), row); };
+
+  onKnot(id) { this.pin(id); }
+
+  pin = (key, via) => {
+    if (!this.getDives()[key]) return;
+    const exp = { ...this.state.exp };
+    this._hlRows(key).forEach(r => { const g = this.GROUP_OF[r]; if (g) exp[g] = true; });
+    // via = 진입한 패널 행(V-067): 다른 재무제표의 행에서 코어 dive로 온 경우 원문 뷰가 주석으로 라우팅하는 근거.
+    this.setState({ pin: key, exp, pinVia: via || null });
+  };
+  unpin = () => { if (this.state.pin) this.setState({ pin: null }); };
+
+  // ===== 사업보고서 원문 팝업 (report_<t>.json 지연로드) =====
+  _STMT_DIVE = { bs: 'assets', is: 'k2', cis: 'totalcomp', cf: 'k11', eq: 'eq-end' };
+  // dive 키/행 → 초기 원문 뷰: APPENDIX(nX)→주석, new-dive→역원장 주석, 흐름 dive→재무제표(행 접두)
+  _srcForDive(key) {
+    const D = this.getDives(), d = D[key];
+    if (/^n\d/.test(key)) return { type: 'note', id: key.slice(1) };
+    const led = (this._G && this._G.meta && this._G.meta.routing_ledger) || {};
+    for (const nn in led) { const to = led[nn].to || ''; if (to === 'new-dive:' + key || to === 'appendix:' + key) return { type: 'note', id: nn }; }
+    // V-067: 다른 재무제표의 행에서 진입한 코어 dive는 그 dive의 주석 원문이 정답 —
+    // 예) BS 이연법인세자산(bs-dta)→k7(row=is-tax): 원문은 손익계산서가 아니라 주25 법인세비용.
+    //     dive 자기 행(is-tax) 진입이면 기존대로 그 재무제표(손익계산서)로 간다.
+    const via = this.state.pinVia;
+    if (via && d && d.row && via.split('-')[0] !== d.row.split('-')[0]) {
+      const nd = (this._G && this._G.meta && this._G.meta.note_dive) || {};
+      for (const nn in nd) if (nd[nn] === key) return { type: 'note', id: nn };
+    }
+    const row = (d && d.row) || key;
+    if (row === 'is-oci' || row === 'is-totalcomp') return { type: 'stmt', id: 'cis' };
+    if (row.indexOf('bs-') === 0 || row.indexOf('pbs-') === 0) return { type: 'stmt', id: 'bs' };
+    if (row.indexOf('is-') === 0) return { type: 'stmt', id: 'is' };
+    if (row.indexOf('cf-') === 0) return { type: 'stmt', id: 'cf' };
+    if (row.indexOf('eq-') === 0) return { type: 'stmt', id: 'eq' };
+    return { type: 'stmt', id: 'bs' };
+  }
+  // 목차의 주석 클릭 → 저작된 라우팅(전용카드·note_dive·원장 명시타깃)으로만 동기 핀.
+  // ⚠️ R6.10(V-084): 산문 "(주N)" 상호참조 스캔(fuzzy) 폐기 — 상호참조는 목적지 근거가 아니다(주20 공정가치→위험관리 오핀 근절).
+  //     저작된 경로가 없으면(dive:cited 미저작·excluded 등) 무핀 = 원문만 표시(삼성 T0 계약과 동일).
+  _pinForNote(nn) {
+    const D = this.getDives();
+    if (D['n' + nn]) { this.pin('n' + nn); return; }  // ① 그 주석 자체의 APPENDIX/new-dive 카드
+    const nd = (this._G && this._G.meta && this._G.meta.note_dive) || {};  // ② 코어 dive로 저작된 홈(주10→ppe·주27→k11 등)
+    if (nd[nn] && D[nd[nn]]) { this.pin(nd[nn]); return; }
+    const led = (this._G && this._G.meta && this._G.meta.routing_ledger) || {};
+    const ent = led[nn];
+    if (ent) {  // ③ 원장 명시 타깃(appendix:/new-dive:/row:)
+      const to = ent.to || '';
+      if (to.indexOf('appendix:') === 0 || to.indexOf('new-dive:') === 0) { const k = to.split(':')[1]; if (D[k]) { this.pin(k); return; } }
+      else if (to.indexOf('row:') === 0) { const k = this._diveKey(to.slice(4)); if (D[k]) { this.pin(k); return; } }
+    }
+    this.unpin();  // 저작된 홈 없음 → 무핀(원문만)
+  }
+  openSrc = (key) => {
+    const view = this._srcForDive(key);
+    // 매니페스트(report_index.json) 미로드 → 먼저 로드 후 재시도 (원문 없는 티커 fetch 404 방지)
+    if (!this._reportIdx) {
+      fetch('data/report_index.json', { cache: 'no-store' })
+        .then(r => r.ok ? r.json() : { tickers: [] })
+        .then(J => { this._reportIdx = new Set(J.tickers || []); this._afterIdx(view); })
+        .catch(() => { this._reportIdx = new Set(); this._afterIdx(view); });
+      return;
+    }
+    this._afterIdx(view);
+  };
+  _afterIdx = (view) => {
+    const t = this._ticker || '005930';
+    if (this._report) { this.setState({ src: view }); return; }
+    if (!this._reportIdx.has(t)) { this._reportErr = true; this.setState({ src: view }); return; }  // 지원 티커 아님 → 준비중(fetch 안 함)
+    fetch('data/report_' + t + '.json', { cache: 'no-store' })
+      .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(J => { this._report = J; this.setState({ src: view }); })
+      .catch(() => { this._reportErr = true; this.setState({ src: view }); });
+  };
+  srcGoto = (view) => {
+    this.setState({ src: view });
+    if (view.type === 'note') this._pinForNote(view.id);
+    else { const k = this._STMT_DIVE[view.id]; if (k && this.getDives()[k]) this.pin(k); }
+  };
+  closeSrc = () => { if (this.state.src) this.setState({ src: null }); };
+  toggleSrcToc = () => this.setState(s => ({ srcToc: !s.srcToc }));
+  onToggle = (e) => {
+    e.stopPropagation();
+    const g = e.currentTarget.getAttribute('data-g');
+    this.setState(s => ({ exp: { ...s.exp, [g]: !s.exp[g] } }));
+  };
+  scrollToRow = (row) => {
+    const el = document.querySelector(`[data-row="${row}"]`);
+    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.44, behavior: 'smooth' });
+  };
+  hoverRow = (row, on) => {
+    const el = document.querySelector(`[data-row="${row}"]`);
+    if (!el) return;
+    if (on) el.setAttribute('data-hl', '1');
+    else if (!this._pinHl().has(row)) el.removeAttribute('data-hl');
+  };
+
+  // ---------- helpers ----------
+  rgba(hex, a) { if (!hex || hex[0] !== '#') return 'transparent'; const n = parseInt(hex.slice(1), 16); return `rgba(${(n >> 16) & 255},${(n >> 8) & 255},${n & 255},${a})`; }
+  colOf(name) { return this.C[name] || name; }
+
+  rich(text, color) {
+    const h = React.createElement;
+    const parts = String(text).split(/(\[[^\]]*\])/g);
+    return parts.map((p, i) => {
+      if (p.startsWith('[') && p.endsWith(']')) {
+        return h('span', { key: i, style: { fontFamily: 'var(--mono)', fontSize: '.9em', fontWeight: 600, color, background: this.rgba(color, .09), border: `1px solid ${this.rgba(color, .32)}`, borderRadius: '5px', padding: '1px 7px', margin: '0 2px', whiteSpace: 'nowrap' } }, p.slice(1, -1));
+      }
+      return p;
+    });
+  }
+  paras(story, color) {
+    const h = React.createElement;
+    return String(story).split('\n').map((t, i) =>
+      h('p', { key: i, style: { margin: '0 0 15px', fontSize: '17px', lineHeight: 1.85, color: 'var(--text)' } }, ...this.rich(t, color)));
+  }
+
+  // ---------- galaxy ----------
+  buildGalaxy() {
+    const h = React.createElement, C = this.C, st = this.state, CF = this.CONFIG;
+    if (!st.pos || !this._G) return null;
+    const W = st.W, H = st.H, pos = st.pos, glow = this.glow;
+    const bandL = Math.max(CF.band.lMin, W * CF.band.lFrac), bandR = CF.band.r;
+    const X = f => bandL + (W - bandL - bandR) * f;
+    const K = {};
+    for (const k of this.KNOTS) { const y = pos[k.row]; if (y == null) return null; K[k.id] = { ...k, x: X(CF.spineX != null ? CF.spineX : k.xf), y }; }
+    const wf = v => Math.max(CF.ribbon.min, CF.ribbon.max * Math.sqrt(v / CF.ribbon.ref));
+    const focus = st.pin ? (st.pin in this.PIN2KNOT ? this.PIN2KNOT[st.pin] : st.pin) : st.active;
+    const els = [];
+    const mono = 'IBM Plex Mono,monospace';
+
+    els.push(h('defs', { key: 'defs' },
+      h('linearGradient', { id: 'gm2c', gradientUnits: 'userSpaceOnUse', x1: 0, y1: K.k8.y, x2: 0, y2: K.k9.y },
+        h('stop', { offset: '0%', stopColor: C.mint }), h('stop', { offset: '100%', stopColor: C.cyan })),
+      h('filter', { id: 'fb1', x: '-150%', y: '-150%', width: '400%', height: '400%' }, h('feGaussianBlur', { stdDeviation: 5 })),
+      h('filter', { id: 'fb2', x: '-150%', y: '-150%', width: '400%', height: '400%' }, h('feGaussianBlur', { stdDeviation: 13 }))
+    ));
+
+    Object.entries(st.zoneY || {}).forEach(([z, y]) => {
+      els.push(h('line', { key: 'zd' + z, x1: 6, x2: W - 6, y1: y, y2: y, stroke: 'rgba(117,144,176,.15)', strokeDasharray: '2 6' }));
+    });
+
+    const cv = (a, b, ex, ey) => {
+      const x2 = ex != null ? ex : b.x, y2 = ey != null ? ey : b.y;
+      const dy = Math.max(26, (y2 - a.y) * .45);
+      return `M ${a.x} ${a.y} C ${a.x} ${a.y + dy}, ${x2} ${y2 - dy}, ${x2} ${y2}`;
+    };
+
+    // 직교 라우팅: 직선으로 뻗다가 꺾이는 지점만 곡선(반경 r)으로
+    const ortho = (pts, r = 12) => {
+      let d = `M ${pts[0][0]} ${pts[0][1]}`;
+      for (let i = 1; i < pts.length - 1; i++) {
+        const [x0, y0] = pts[i - 1], [x1, y1] = pts[i], [x2, y2] = pts[i + 1];
+        const l1 = Math.hypot(x1 - x0, y1 - y0), l2 = Math.hypot(x2 - x1, y2 - y1);
+        const rr = Math.min(r, l1 / 2, l2 / 2);
+        const ax = x1 - (x1 - x0) / l1 * rr, ay = y1 - (y1 - y0) / l1 * rr;
+        const bx = x1 + (x2 - x1) / l2 * rr, by = y1 + (y2 - y1) / l2 * rr;
+        d += ` L ${ax} ${ay} Q ${x1} ${y1} ${bx} ${by}`;
+      }
+      d += ` L ${pts[pts.length - 1][0]} ${pts[pts.length - 1][1]}`;
+      return d;
+    };
+
+    const chip = (key, x, y, lines, color, fs = 10) => {
+      lines = lines.filter(Boolean); const wmax = Math.max(1, ...lines.map(t => t.length));
+      const cw = wmax * fs * .96 + 14, chh = lines.length * 13 + 8;
+      let rx = Math.max(2, Math.min(W - cw - 2, x - cw / 2));
+      return h('g', { key },
+        h('rect', { x: rx, y: y - chh / 2, width: cw, height: chh, rx: 4, fill: 'rgba(8,12,22,.88)', stroke: this.rgba(color, .38) }),
+        ...lines.map((t, i) => h('text', { key: i, x: rx + cw / 2, y: y - chh / 2 + 14 + i * 13 - 2, textAnchor: 'middle', fontSize: fs, fill: color, fontFamily: mono }, t)));
+    };
+
+    // spine segments
+    this.SEGS.forEach(([ia, ib, v, col], i) => {
+      const a0 = K[ia], b = K[ib];
+      const a = a0;
+      const endY = null; // 저수지 중심까지 그린다 — 저수지의 불투명 배경원이 안쪽을 덮어 이격/삐짐이 없다
+      const d = cv(a, b, null, endY);
+      const w = CF.ribbon.uniform ? CF.ribbon.mainW : wf(v);
+      const stroke = col === 'grad' ? 'url(#gm2c)' : (col === 'mint' ? C.mint : C.cyan);
+      els.push(h('path', { key: 'sh' + i, d, stroke, strokeWidth: w * 2.5, fill: 'none', opacity: .09 * glow, strokeLinecap: 'round' }));
+      els.push(h('path', { key: 'sm' + i, d, stroke, strokeWidth: w * 1.4, fill: 'none', opacity: .18 * glow, strokeLinecap: 'round' }));
+      els.push(h('path', { key: 'sc' + i, d, stroke, strokeWidth: w, fill: 'none', opacity: .82, strokeLinecap: 'round' }));
+    });
+
+    // rail
+    const railX = CF.rail.x;
+    els.push(h('line', { key: 'rail', x1: railX, x2: railX, y1: K.k1.y, y2: K.k15.y, stroke: 'rgba(117,144,176,.32)', strokeWidth: 1 }));
+    els.push(h('text', { key: 'railt', x: railX - 4, y: K.k1.y - 44, fontSize: 9, fill: 'var(--dim)', fontFamily: mono }, '작년 통장'));
+    els.push(h('text', { key: 'railb', x: K.k15.x, y: K.k15.y + CF.reservoirs.rEnd + 24, textAnchor: 'middle', fontSize: 9, fill: 'var(--dim)', fontFamily: mono }, '올해 통장'));
+    const _cb = K.k1.raw_mn / 1e6, _ce = K.k15.raw_mn / 1e6, _cd = _ce - _cb;
+    els.push(chip('raileq', K.k15.x, K.k15.y + CF.reservoirs.rEnd + 44, [`${_cb.toFixed(1)} ${_cd >= 0 ? '+' : '−'} ${Math.abs(_cd).toFixed(1)} = ${_ce.toFixed(1)}`], C.cyan));
+    for (const k of this.KNOTS) {
+      const p = K[k.id], act = focus === k.id;
+      if (k.kind === 'out') {
+        els.push(h('circle', { key: 'rg' + k.id, cx: railX, cy: p.y, r: act ? 9 : 7, fill: '#12090a', stroke: C.coral, strokeWidth: act ? 1.8 : 1.1, opacity: act ? 1 : .75, style: act ? { animation: 'ompulse 1.8s ease-in-out infinite' } : null }));
+        els.push(h('text', { key: 'rt' + k.id, x: railX, y: p.y + 3.6, textAnchor: 'middle', fontSize: 11, fontWeight: 700, fill: C.coral, fontFamily: mono }, '−'));
+      } else if (k.kind === 'in' || k.kind === 'back' || k.kind === 'source') {
+        const c = k.col === 'mint' ? C.mint : C.cyan;
+        els.push(h('circle', { key: 'rg' + k.id, cx: railX, cy: p.y, r: act ? 9 : 7, fill: '#091114', stroke: c, strokeWidth: act ? 1.8 : 1.1, opacity: act ? 1 : .75, style: act ? { animation: 'ompulse 1.8s ease-in-out infinite' } : null }));
+        els.push(h('text', { key: 'rt' + k.id, x: railX, y: p.y + 3.6, textAnchor: 'middle', fontSize: 11, fontWeight: 700, fill: c, fontFamily: mono }, '+'));
+      } else {
+        els.push(h('circle', { key: 'rg' + k.id, cx: railX, cy: p.y, r: act ? 4 : 2.5, fill: act ? C.cyan : 'rgba(117,144,176,.6)', style: act ? { animation: 'ompulse 1.8s ease-in-out infinite' } : null }));
+      }
+    }
+
+    // depreciation return — 매출원가·판관비 유출 가지에서 분기해 비현금 조정(back)으로 되돌아오는 점선 레일
+    // V-066: knots JSON엔 z(존) 필드가 없어 k.z==='B' 필터가 항상 빈 배열 → 파선 전사 소실 회귀.
+    //        존 대신 순서로 파생: 첫 back(비현금 조정) 매듭 앞의 out 매듭 = 손익 유출 가지.
+    const _ks = this.KNOTS, _bi = _ks.findIndex(k => k.kind === 'back');
+    const _outIS = _bi > 0 ? _ks.slice(0, _bi).filter(k => k.kind === 'out') : [];
+    const p9 = _bi > 0 ? K[_ks[_bi].id] : null;
+    if (_outIS.length && p9) {
+      const p3 = K[_outIS[0].id], depOn = focus === _ks[_bi].id;
+      const depX = Math.max(44, p3.x + CF.tributary.outDx); // 유출 가지 끝(⊖ 글리프)의 x
+      els.push(h('path', { key: 'depg', d: ortho([[depX, p3.y + CF.tributary.outDy + 9], [depX, p9.y], [p9.x - 9, p9.y]], 14), stroke: C.cyan, strokeWidth: 1.8, strokeDasharray: '4 4', fill: 'none', opacity: depOn ? .9 : .55 }));
+      els.push(h('circle', { key: 'depj', cx: depX, cy: p3.y + CF.tributary.outDy + 9, r: 2.5, fill: C.cyan, opacity: .8 }));
+      els.push(chip('depc', p9.x - 60, p9.y - 34, ['현금은 안 나간 비용', '도로 더해요 ' + p9.amt], C.cyan, 9.5));
+    }
+
+    // gold equity thread
+    const gx = W - 16, p8 = K.k8;
+    const yB = pos['eq-begin'], yE = pos['eq-end'], yO = pos['eq-oci'], yD = pos['eq-div'];
+    if (yB && yE) {
+      const yNI = pos['eq-netincome'];
+      const niX = W - 5; // 민트 손익 실 — 우측 맨 끝을 타고 내려간다 (설명·라벨과 안 겹치게)
+      if (yNI) {
+        els.push(h('path', { key: 'gt1', d: ortho([[p8.x + 6, p8.y + 28], [niX, p8.y + 28], [niX, yNI], [gx + 10, yNI]], 14), stroke: C.mint, strokeWidth: 1.8, strokeDasharray: '4 4', fill: 'none', opacity: .45 }));
+        els.push(chip('gtc', p8.x + 96, p8.y + 48, ['이익은 주주 곳간에도 쌓여요'], C.mint, 9));
+      }
+      els.push(h('line', { key: 'gt2h', x1: gx, x2: gx, y1: yB, y2: yE, stroke: C.gold, strokeWidth: 7, opacity: .14 * glow }));
+      els.push(h('line', { key: 'gt2', x1: gx, x2: gx, y1: yB, y2: yE, stroke: C.gold, strokeWidth: 2.4, opacity: .85 }));
+      for (const e of this.EQE) {
+        const y = pos[e.row]; if (y == null) continue;
+        const c = e.neg ? C.coral : C.gold, act = focus === e.row;
+        if (act) els.push(h('circle', { key: 'geh' + e.row, cx: gx, cy: y, r: 15, fill: c, opacity: .4 * glow, filter: 'url(#fb1)' }));
+        els.push(h('circle', { key: 'ge' + e.row, cx: gx, cy: y, r: e.big ? 8.5 : 5.5, fill: '#0a0f1c', stroke: c, strokeWidth: 1.7 }));
+        els.push(h('text', { key: 'get' + e.row, x: gx - 13, y: y + 3.5, textAnchor: 'end', fontSize: 10, fill: c, fontFamily: mono, fontWeight: e.big ? 700 : 500 }, e.t));
+      }
+      if (yO) {
+        els.push(h('path', { key: 'goci', d: ortho([[gx - 56, yO - 21], [gx - 56, yO], [gx - 10, yO]], 10), stroke: C.gold, strokeWidth: 1.8, strokeDasharray: '4 4', fill: 'none', opacity: .55 }));
+        els.push(chip('gocic', gx - 66, yO - 30, ['손익 밖에서 직접 (OCI)'], C.gold, 9));
+      }
+      if (yD) {
+        const linkOn = focus === 'k13' || focus === 'eq-div' || focus === 'eq-buyback';
+        const fx13 = Math.max(44, K.k13.x + CF.tributary.outDx); // ⑬ 유출 가지 끝(주주에게)에서 출발
+        els.push(h('path', { key: 'gdiv', d: ortho([[fx13, K.k13.y + CF.tributary.outDy + 9], [fx13, yD], [gx - 11, yD]], 14), stroke: C.coral, strokeWidth: 1.8, strokeDasharray: '4 4', fill: 'none', opacity: linkOn ? .9 : .55 }));
+        els.push(chip('gdivc', gx - 96, yD + 22, ['재무활동에서 나간 그 돈'], C.coral, 9));
+      }
+    }
+
+    // tributaries
+    for (const k of this.KNOTS) {
+      const p = K[k.id];
+      if (k.kind === 'out') {
+        const v = Math.abs((k.raw_mn || 0) / 1e6) || 10;
+        const bw = CF.ribbon.uniform ? CF.ribbon.branchW : Math.max(4, wf(v) * .7);
+        const ex = Math.max(44, p.x + CF.tributary.outDx), ey = p.y + CF.tributary.outDy;
+        const d = `M ${p.x - 4} ${p.y + 4} C ${p.x - 30} ${p.y + 18}, ${ex + 20} ${ey - 22}, ${ex + 4} ${ey - 4}`;
+        els.push(h('path', { key: 'ob' + k.id, d, stroke: C.coral, strokeWidth: bw * 1.9, fill: 'none', opacity: .10 * glow, strokeLinecap: 'round' }));
+        els.push(h('path', { key: 'obc' + k.id, d, stroke: C.coral, strokeWidth: bw, fill: 'none', opacity: .68, strokeLinecap: 'round' }));
+        els.push(h('circle', { key: 'og' + k.id, cx: ex, cy: ey, r: 8, fill: '#160e0d', stroke: C.coral, strokeWidth: 1.4 }));
+        els.push(h('text', { key: 'ogt' + k.id, x: ex, y: ey + 3.8, textAnchor: 'middle', fontSize: 11, fontWeight: 700, fill: C.coral, fontFamily: mono }, '−'));
+        if (k.dest) els.push(chip('oc' + k.id, ex + 6, ey + 20, [k.dest], C.coral, 9.5));
+      }
+      if (k.kind === 'in') {
+        const v = Math.abs((k.raw_mn || 0) / 1e6) || 4;
+        const bw = CF.ribbon.uniform ? CF.ribbon.branchW : Math.max(3.5, wf(v) * .7);
+        const c = k.col === 'mint' ? C.mint : C.cyan;
+        const sx = Math.min(W - 40, p.x + CF.tributary.inDx), sy = p.y + CF.tributary.inDy;
+        const d = `M ${sx} ${sy} C ${sx - 16} ${sy + 22}, ${p.x + 26} ${p.y - 14}, ${p.x + 4} ${p.y - 2}`;
+        els.push(h('path', { key: 'ib' + k.id, d, stroke: c, strokeWidth: bw * 1.9, fill: 'none', opacity: .10 * glow, strokeLinecap: 'round' }));
+        els.push(h('path', { key: 'ibc' + k.id, d, stroke: c, strokeWidth: bw, fill: 'none', opacity: .7, strokeLinecap: 'round' }));
+        els.push(h('circle', { key: 'ig' + k.id, cx: sx, cy: sy, r: 8, fill: '#091114', stroke: c, strokeWidth: 1.4 }));
+        els.push(h('text', { key: 'igt' + k.id, x: sx, y: sy + 3.8, textAnchor: 'middle', fontSize: 11, fontWeight: 700, fill: c, fontFamily: mono }, '+'));
+
+      }
+    }
+
+    // particles
+    if (this.props.particles !== false) {
+      const seq = this.KNOTS.map(k => k.id).filter(id => id !== 'k1' && id !== 'k15');
+      let d = `M ${K.k2.x} ${K.k2.y}`;
+      for (let i = 1; i < seq.length; i++) {
+        const a = K[seq[i - 1]], b = K[seq[i]];
+        const dy = Math.max(26, (b.y - a.y) * .45);
+        d += ` C ${a.x} ${a.y + dy}, ${b.x} ${b.y - dy}, ${b.x} ${b.y}`;
+      }
+      const a = K.k14, b = { x: K.k15.x, y: K.k15.y - CF.reservoirs.rEnd - 4 };
+      d += ` C ${a.x} ${a.y + 30}, ${b.x} ${b.y - 30}, ${b.x} ${b.y}`;
+      for (let i = 0; i < 7; i++) {
+        els.push(h('circle', { key: 'pt' + i, r: 1.4 + (i % 3) * .5, fill: i % 2 ? '#bfeee0' : '#bfe4f5', opacity: .8 },
+          h('animateMotion', { dur: `${13 + i * 2.4}s`, begin: `${-i * 3.2}s`, repeatCount: 'indefinite', path: d })));
+      }
+    }
+
+    // source nebula (k2)
+    const p2 = K.k2;
+    els.push(h('circle', { key: 'neb1', cx: p2.x, cy: p2.y, r: 30, fill: C.mint, opacity: .13 * glow, filter: 'url(#fb2)' }));
+    els.push(h('circle', { key: 'neb2', cx: p2.x, cy: p2.y, r: 14, fill: C.mint, opacity: .3 * glow, filter: 'url(#fb1)' }));
+    els.push(chip('srcc', p2.x, p2.y - 46, ['고객이 낸 돈'], C.mint, 9.5));
+
+    // reservoirs
+    const res = (k, r) => {
+      const p = K[k.id], act = focus === k.id;
+      els.push(h('g', { key: 'res' + k.id, style: { cursor: 'pointer' }, onClick: () => this.onKnot(k.id) },
+        h('circle', { cx: p.x, cy: p.y, r: r * 1.9, fill: C.cyan, opacity: (act ? .22 : .13) * glow, filter: 'url(#fb2)' }),
+        h('circle', { cx: p.x, cy: p.y, r: r - 1, fill: '#081019' }),
+        h('circle', { cx: p.x, cy: p.y, r, fill: 'rgba(92,199,234,.08)', stroke: C.cyan, strokeWidth: act ? 2.2 : 1.5 }),
+        h('circle', { cx: p.x, cy: p.y, r: r * .45, fill: '#d9f6ff', opacity: .92, filter: 'url(#fb1)' }),
+        h('text', { x: p.x + r + 11, y: p.y - 3, fontSize: 12, fontWeight: 700, fill: 'var(--text)' }, k.name),
+        h('text', { x: p.x + r + 11, y: p.y + 14, fontSize: 12.5, fontWeight: 700, fill: C.cyan, fontFamily: mono }, k.amt)
+      ));
+    };
+    res(K.k1, CF.reservoirs.rBegin);
+    res(K.k15, CF.reservoirs.rEnd);
+    const _dd = (K.k15.raw_mn - K.k1.raw_mn) / 1e6;
+    els.push(chip('delta', K.k15.x, K.k15.y - CF.reservoirs.rEnd - 26, [(_dd >= 0 ? '+' : '−') + Math.abs(_dd).toFixed(1) + '조 ' + (_dd >= 0 ? '늘었어요' : '줄었어요')], C.gold, 10));
+
+    // knots
+    for (const k of this.KNOTS) {
+      if (k.kind === 'res') continue;
+      const p = K[k.id], act = focus === k.id;
+      const c = k.kind === 'out' ? C.coral : (k.col === 'mint' ? C.mint : C.cyan);
+      const kids = [
+        h('circle', { key: 'h', cx: p.x, cy: p.y, r: k.kind === 'hub' || k.kind === 'bright' ? 22 : 16, fill: c, opacity: (act ? .5 : .2) * glow, filter: 'url(#fb1)', style: act ? { animation: 'ompulse 1.8s ease-in-out infinite' } : null }),
+        h('circle', { key: 'c', cx: p.x, cy: p.y, r: act ? 7 : (k.kind === 'hub' || k.kind === 'bright' ? 6.5 : 5.5), fill: '#eafff6', stroke: c, strokeWidth: 2 }),
+      ];
+      if (act) kids.push(h('circle', { key: 'r', cx: p.x, cy: p.y, r: 12.5, fill: 'none', stroke: c, strokeWidth: 1, strokeDasharray: '3 3' }));
+      const yOff = k.kind === 'in' ? 8 : 0; // 유입 매듭은 라벨 전체를 살짝 내려 지류와 안 겹치게
+      kids.push(h('text', { key: 'n', x: p.x + 15, y: p.y - 3 + yOff, fontSize: 11.5, fill: 'var(--text)', fontWeight: act ? 700 : 500 }, k.name));
+      kids.push(h('text', { key: 'a', x: p.x + 15, y: p.y + 13 + yOff, fontSize: 10.5, fill: c, fontFamily: mono, fontWeight: 600 }, k.amt));
+      if (k.kind === 'in' && k.src) {
+        kids.push(h('text', { key: 's', x: p.x + 15, y: p.y + 36, fontSize: 9.5, fill: this.rgba(c, .75), fontFamily: mono }, '⊕ ' + k.src));
+      }
+      els.push(h('g', { key: 'kn' + k.id, style: { cursor: 'pointer' }, onClick: () => this.onKnot(k.id) }, kids));
+    }
+
+    return h('svg', { width: W, height: H, viewBox: `0 0 ${W} ${H}`, style: { position: 'absolute', inset: 0, overflow: 'visible', display: 'block' } }, els);
+  }
+
+  // ---------- inspector cards ----------
+  badge(text, colName) {
+    const h = React.createElement, c = this.colOf(colName);
+    return h('span', { style: { fontFamily: 'var(--mono)', fontSize: '10px', letterSpacing: '.22em', color: c, border: `1px solid ${this.rgba(c, .4)}`, padding: '3px 9px', borderRadius: '4px' } }, text);
+  }
+
+  overviewCard() {
+    const h = React.createElement, C = this.C;
+    return h('div', { key: 'ov', style: { animation: 'omfade var(--fade) ease both' } },
+      h('div', { style: { display: 'flex', gap: '10px', marginBottom: '18px' } }, this.badge('OVERVIEW · 개요', 'cyan')),
+      h('div', { style: { fontSize: '26px', fontWeight: 800, lineHeight: 1.5, letterSpacing: '-.01em' } }, this._G.corp.name + '의 1년을 한 문장으로'),
+      h('p', { style: { margin: '14px 0 18px', fontSize: '18px', lineHeight: 1.85 } },
+        ...this.rich(this._G.strings.overview, C.mint)),
+      h('p', { style: { margin: '0 0 22px', fontSize: '15px', lineHeight: 1.8, color: 'var(--dim)' } },
+        '그냥 아래로 스크롤하세요 — 왼쪽 은하수의 매듭이 화면 가운데 올 때마다, 이 자리가 그 대목의 이야기를 들려드려요. 더 궁금한 항목은 아무거나 클릭해 보세요: 4단 딥다이브(무엇 → 연결 → 왜 → 5개년)가 고정돼요.'),
+      h('div', { style: { border: '1px solid var(--line)', borderRadius: '10px', padding: '16px 18px' } },
+        h('div', { style: { fontFamily: 'var(--mono)', fontSize: '10px', letterSpacing: '.22em', color: 'var(--dim2)', marginBottom: '12px' } }, 'JOURNEY MAP · 다섯 챕터'),
+        ...Object.entries(this.ZONES).map(([z, v]) =>
+          h('div', { key: z, style: { display: 'flex', alignItems: 'baseline', gap: '10px', padding: '6px 0' } },
+            h('span', { style: { fontFamily: 'var(--mono)', fontSize: '10px', color: this.colOf(v.c), width: '14px' } }, v.l),
+            h('span', { style: { fontSize: '14.5px' } }, v.q)))));
+  }
+
+  zoneCard(z) {
+    const h = React.createElement, v = this.ZONES[z], c = this.colOf(v.c);
+    return h('div', { key: z, style: { animation: 'omfade var(--fade) ease both' } },
+      h('div', { style: { display: 'flex', gap: '10px', marginBottom: '18px' } }, this.badge('ZONE ' + v.l, v.c)),
+      h('div', { style: { fontSize: '27px', fontWeight: 800, lineHeight: 1.5, letterSpacing: '-.01em' } }, v.q),
+      h('div', { style: { margin: '18px 0 0' } }, ...this.paras(v.g, c)),
+      h('div', { style: { marginTop: '10px', fontSize: '13px', color: 'var(--dim2)' } }, '↓ 계속 스크롤하세요'));
+  }
+
+  storyCard(k) {
+    const h = React.createElement;
+    const zone = ['k1'].includes(k.id) ? 'A' : ['k2','k3','k4','k5','k6','k6b','k7','k8'].includes(k.id) ? 'B' : k.id === 'k15' ? 'D' : 'C';
+    const c = k.kind === 'out' ? this.C.coral : (k.col === 'mint' ? this.C.mint : this.C.cyan);
+    const idx = this.KNOTS.findIndex(x => x.id === k.id) + 1;
+    return h('div', { key: k.id, style: { animation: 'omfade var(--fade) ease both' } },
+      h('div', { style: { display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '18px' } },
+        this.badge('ZONE ' + zone, zone === 'B' ? 'mint' : zone === 'A' || zone === 'C' || zone === 'D' ? 'cyan' : 'gold'),
+        h('span', { style: { fontFamily: 'var(--mono)', fontSize: '11px', color: 'var(--dim2)', letterSpacing: '.1em' } }, `KNOT ${k.num} · ${idx}/17`)),
+      h('div', { style: { fontSize: '26px', fontWeight: 800, letterSpacing: '-.01em' } }, k.name),
+      h('div', { style: { fontFamily: 'var(--mono)', fontSize: '46px', fontWeight: 700, color: c, margin: '8px 0 22px', textShadow: `0 0 26px ${this.rgba(c, .4)}` } }, k.amt),
+      ...this.paras(k.story, c),
+      h('button', { onClick: () => this.pin(k.id), style: { marginTop: '8px', fontFamily: 'var(--sans)', fontSize: '14px', color: c, background: this.rgba(c, .07), border: `1px solid ${this.rgba(c, .4)}`, borderRadius: '7px', padding: '9px 16px', cursor: 'pointer' } }, '자세히 보기 ▸'));
+  }
+
+  eqCard(row) {
+    const h = React.createElement, v = this.EQSTORY[row], c = this.C.gold;
+    return h('div', { key: row, style: { animation: 'omfade var(--fade) ease both' } },
+      h('div', { style: { display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '18px' } },
+        this.badge('ZONE E', 'gold'),
+        h('span', { style: { fontFamily: 'var(--mono)', fontSize: '11px', color: 'var(--dim2)', letterSpacing: '.1em' } }, 'GOLD THREAD · 자본변동표')),
+      h('div', { style: { fontSize: '26px', fontWeight: 800, letterSpacing: '-.01em' } }, v.name),
+      h('div', { style: { fontFamily: 'var(--mono)', fontSize: '46px', fontWeight: 700, color: c, margin: '8px 0 22px', textShadow: `0 0 26px ${this.rgba(c, .4)}` } }, v.amt),
+      ...this.paras(v.story, c),
+      h('button', { onClick: () => this.pin(this._diveKey(row)), style: { marginTop: '8px', fontFamily: 'var(--sans)', fontSize: '14px', color: c, background: this.rgba(c, .07), border: `1px solid ${this.rgba(c, .4)}`, borderRadius: '7px', padding: '9px 16px', cursor: 'pointer' } }, '자세히 보기 ▸'));
+  }
+
+  epilogueCard() {
+    const h = React.createElement, C = this.C;
+    return h('div', { key: 'ep', style: { animation: 'omfade var(--fade) ease both' } },
+      h('div', { style: { display: 'flex', gap: '10px', marginBottom: '18px' } }, this.badge('EPILOGUE · 에필로그', 'gold')),
+      h('div', { style: { fontSize: '26px', fontWeight: 800, lineHeight: 1.5 } }, this._G.corp.cash_begin + '가 ' + this._G.corp.cash_end + '가 되기까지'),
+      h('div', { style: { margin: '18px 0 0' } },
+        ...this.paras(this._G.strings.epilogue, C.cyan)),
+      h('p', { style: { marginTop: '14px', fontSize: '14px', color: 'var(--dim)', lineHeight: 1.7 } },
+        '이제 궁금한 항목을 아무거나 눌러보세요 — 왼쪽 매듭도, 가운데 표의 줄도 모두 눌러져요. 4단 딥다이브(무엇 → 연결 → 왜 → 5개년)가 고정되고, Esc나 ✕로 흐름으로 돌아와요.'));
+  }
+
+  _fallbackCard() {
+    const h = React.createElement;
+    if (!this.state.dataError) return null;
+    return h('div', { style: { padding: '48px 8px', color: 'var(--dim)', fontSize: '15px', lineHeight: 1.9 } },
+      h('div', { style: { fontFamily: 'var(--mono)', fontSize: '11px', letterSpacing: '.2em', color: 'var(--dim2)', marginBottom: '12px' } }, 'NO DATA'),
+      '이 기업의 현금 은하수는 아직 준비 중이에요.');
+  }
+  buildCard() {
+    if (!this._G) return this._fallbackCard();
+    if (this.state.pin) return this.diveCard(this.state.pin);
+    const a = this.state.active || 'overview';
+    if (a === 'overview') return this.overviewCard();
+    if (a === 'epilogue') return this.epilogueCard();
+    if (this.ZONES[a]) return this.zoneCard(a);
+    const k = this.KNOTS.find(x => x.id === a);
+    if (k) return this.storyCard(k);
+    if (this.EQSTORY[a]) return this.eqCard(a);
+    return this.overviewCard();
+  }
+
+  buildRunningChip() {
+    const h = React.createElement;
+    const idx = this.RT[this.state.active];
+    if (idx == null || this.state.pin) return null;
+    const parts = [];
+    this.RTSTEPS.forEach(([t, cn], i) => {
+      if (i > 0) parts.push(h('span', { key: 'a' + i, style: { color: 'var(--dim2)' } }, '→'));
+      const c = this.colOf(cn);
+      parts.push(h('span', { key: 's' + i, style: { color: i <= idx ? c : 'var(--dim2)', fontWeight: i === idx ? 700 : 500, textShadow: i === idx ? `0 0 10px ${this.rgba(c, .6)}` : 'none' } }, t));
+    });
+    return h('div', { style: { position: 'fixed', left: '14px', bottom: '14px', zIndex: 6, display: 'flex', gap: '7px', alignItems: 'center', background: 'rgba(8,12,22,.9)', border: '1px solid rgba(92,199,234,.3)', borderRadius: '8px', padding: '8px 13px', fontFamily: 'var(--mono)', fontSize: '12px', animation: 'omfade var(--fade) ease both' } },
+      h('span', { style: { fontSize: '9px', letterSpacing: '.18em', color: 'var(--dim2)', marginRight: '2px' } }, '이익→현금'), ...parts);
+  }
+
+  // ===== Step 2 — 데이터 =====
+  TBL = { IS: ['손익계산서', '#74EEC6'], CF: ['현금흐름표', '#5CC7EA'], BS: ['재무상태표', '#7590B0'], PBS: ['전기말 BS', '#7590B0'], EQ: ['자본변동표', '#E9C46B'], N: ['주석', '#8fa1b6'] };
+  get YEARS() { return this._G ? this._G.years : []; }
+  get S() { return this._G ? this._G.series : {}; }
+    ROW2DIVE = {
+    'pbs-cash': 'k1', 'is-revenue': 'k2', 'is-cogs': 'k3', 'is-grossprofit': 'k4',
+    'is-sgna': 'k5', 'is-sgna-rnd': 'k5', 'is-sgna-fee': 'k5', 'is-sgna-sal': 'k5', 'is-sgna-promo': 'k5', 'is-sgna-ad': 'k5', 'is-sgna-svc': 'k5', 'is-sgna-ship': 'k5', 'is-sgna-etc': 'k5',
+    'is-opincome': 'k6', 'is-nonop': 'k6b', 'is-nonop-fininc': 'n24', 'is-nonop-finexp': 'n24', 'is-nonop-othinc': 'n23', 'is-nonop-othexp': 'n23', 'is-nonop-eqm': 'n9', 'is-pretax': 'k6b',
+    'is-tax': 'k7', 'is-netincome': 'k8', 'is-ni-ctrl': 'k8', 'is-ni-nci': 'k8', 'is-oci': 'oci', 'is-totalcomp': 'totalcomp',
+    'cf-netincome': 'k8', 'cf-noncash': 'k9', 'cf-noncash-dep': 'k9', 'cf-noncash-etc': 'k9',
+    'cf-wc': 'k10', 'cf-wc-ar': 'k10', 'cf-wc-inv': 'k10', 'cf-wc-etc': 'k10', 'cf-paid': 'k10b', 'cf-op': 'k11',
+    'cf-inv': 'k12', 'cf-inv-capex': 'k12', 'cf-inv-etc': 'k12', 'cf-fin': 'k13', 'cf-fin-debt': 'k13', 'cf-fin-div': 'eq-div', 'cf-fin-tsy': 'eq-buyback',
+    'cf-fx': 'k14', 'cf-netchange': 'k15', 'cf-begincash': 'k1', 'cf-endcash': 'k15',
+    'bs-cash': 'k15', 'bs-ppe': 'ppe', 'bs-assets': 'assets', 'bs-liab': 'liab', 'bs-equity': 'eq-end',
+    'bs-ca': 'assets', 'bs-cash-d': 'k15', 'bs-sfin': 'n4', 'bs-ar': 'n7', 'bs-inv': 'n8', 'bs-oca': 'assets', 'bs-nca': 'assets', 'bs-ig': 'n11', 'bs-assoc': 'n9', 'bs-fvoci': 'n6', 'bs-dta': 'k7', 'bs-dba': 'n14', 'bs-onca': 'assets',
+    'bs-cl': 'liab', 'bs-payexp': 'liab', 'bs-pay': 'liab', 'bs-stb': 'n12', 'bs-ap': 'k10', 'bs-prov': 'n15', 'bs-taxlia': 'k7', 'bs-ocl': 'n17', 'bs-ncl': 'liab', 'bs-ltb': 'n12', 'bs-ltpay': 'liab', 'bs-ltprov': 'n15', 'bs-ndbl': 'n14', 'bs-dtl': 'k7', 'bs-bond': 'n13', 'bs-oncl': 'liab',
+    'bs-ctrl': 'eq-end', 'bs-re': 'n19', 'bs-oe': 'n20', 'bs-sp': 'n18', 'bs-capital': 'n18', 'bs-nci': 'n32',
+    'apx-ju1': 'n1', 'apx-ju2': 'n2', 'apx-ju3': 'n3', 'apx-ju4': 'n4', 'apx-ju5': 'n5', 'apx-ju14': 'n14', 'apx-ju15': 'n15', 'apx-ju16': 'n16', 'apx-ju18': 'n18', 'apx-ju26': 'n26', 'apx-ju28': 'n28', 'apx-ju29': 'n29', 'apx-ju31': 'n31', 'apx-ju34': 'n34',
+    'eq-begin': 'eq-begin', 'eq-netincome': 'k8', 'eq-oci': 'oci', 'eq-div': 'eq-div', 'eq-buyback': 'eq-buyback', 'eq-other': 'eq-other', 'eq-end': 'eq-end',
+  };
+  HL = {
+    k1: ['pbs-cash', 'cf-begincash'], k2: ['is-revenue'], k3: ['is-cogs'], k4: ['is-grossprofit'],
+    k5: ['is-sgna', 'is-sgna-rnd'], k6: ['is-opincome'], k6b: ['is-nonop'],
+    k7: ['is-tax', 'cf-paid', 'bs-dta', 'bs-dtl', 'bs-taxlia'], k8: ['is-netincome', 'cf-netincome', 'eq-netincome'],
+    k9: ['cf-noncash', 'cf-noncash-dep', 'bs-ppe', 'is-cogs'], k10: ['cf-wc', 'cf-wc-ar', 'cf-wc-inv'],
+    k10b: ['cf-paid', 'is-tax'], k11: ['cf-op', 'cf-netincome'], k12: ['cf-inv', 'cf-inv-capex', 'bs-ppe'],
+    k13: ['cf-fin', 'eq-div', 'eq-buyback'], k14: ['cf-fx'], k15: ['bs-cash', 'cf-endcash', 'cf-netchange'],
+    oci: ['is-oci', 'eq-oci'], ppe: ['bs-ppe', 'cf-noncash-dep', 'cf-inv-capex'],
+    assets: ['bs-assets'], liab: ['bs-liab'],
+    'eq-begin': ['eq-begin'], 'eq-div': ['eq-div', 'cf-fin-div', 'cf-fin'], 'eq-buyback': ['eq-buyback', 'cf-fin-tsy', 'cf-fin'],
+    'eq-other': ['eq-other'], 'eq-end': ['eq-end', 'bs-equity'],
+    totalcomp: ['is-totalcomp', 'is-oci', 'is-netincome', 'eq-netincome', 'eq-oci'],
+    n1: ['apx-ju1', 'bs-nci', 'is-ni-nci'], n2: ['apx-ju2', 'cf-noncash-dep'], n3: ['apx-ju3', 'bs-prov'],
+    n4: ['apx-ju4', 'bs-fvoci', 'bs-sfin'], n5: ['apx-ju5', 'bs-ar', 'bs-stb'], n14: ['apx-ju14', 'bs-dba', 'bs-ndbl'],
+    n15: ['apx-ju15', 'bs-prov', 'bs-ltprov'], n16: ['apx-ju16', 'bs-liab'], n18: ['apx-ju18', 'bs-capital', 'bs-sp', 'bs-re'],
+    n26: ['apx-ju26', 'is-ni-ctrl', 'eq-buyback'], n28: ['apx-ju28', 'is-nonop', 'cf-fx'], n29: ['apx-ju29', 'bs-fvoci', 'eq-oci'],
+    n31: ['apx-ju31', 'is-revenue'], n34: ['apx-ju34', 'eq-buyback', 'cf-fin-tsy'],
+    n6: ['bs-fvoci'], n7: ['bs-ar', 'cf-wc-ar'], n8: ['bs-inv', 'cf-wc-inv'], n9: ['bs-assoc', 'is-nonop-eqm'],
+    n11: ['bs-ig', 'cf-noncash-etc'], n12: ['bs-stb', 'bs-ltb'], n13: ['bs-bond'], n17: ['bs-ocl', 'is-revenue'],
+    n19: ['bs-re', 'eq-netincome'], n20: ['bs-oe', 'is-oci'], n21: ['is-cogs', 'is-sgna'],
+    n23: ['is-nonop-othinc', 'is-nonop-othexp'], n24: ['is-nonop-fininc', 'is-nonop-finexp'],
+    n32: ['bs-nci', 'is-ni-nci'], n33: ['bs-ig', 'is-netincome'],
+  };
+  GROUP_OF = {
+    'is-sgna-rnd': 'sgna', 'cf-noncash-dep': 'noncash', 'cf-wc-ar': 'wc', 'cf-wc-inv': 'wc',
+    'cf-inv-capex': 'inv', 'cf-fin-div': 'fin', 'cf-fin-tsy': 'fin',
+    'bs-ca': 'bsa', 'bs-cash-d': 'bsa', 'bs-sfin': 'bsa', 'bs-ar': 'bsa', 'bs-inv': 'bsa', 'bs-oca': 'bsa', 'bs-nca': 'bsa', 'bs-ppe': 'bsa', 'bs-ig': 'bsa', 'bs-assoc': 'bsa', 'bs-fvoci': 'bsa', 'bs-dta': 'bsa', 'bs-dba': 'bsa', 'bs-onca': 'bsa',
+    'bs-cl': 'bsl', 'bs-payexp': 'bsl', 'bs-pay': 'bsl', 'bs-stb': 'bsl', 'bs-ap': 'bsl', 'bs-prov': 'bsl', 'bs-taxlia': 'bsl', 'bs-ocl': 'bsl', 'bs-ncl': 'bsl', 'bs-ltb': 'bsl', 'bs-ltpay': 'bsl', 'bs-ltprov': 'bsl', 'bs-ndbl': 'bsl', 'bs-dtl': 'bsl', 'bs-bond': 'bsl', 'bs-oncl': 'bsl',
+    'bs-ctrl': 'bse', 'bs-re': 'bse', 'bs-oe': 'bse', 'bs-sp': 'bse', 'bs-capital': 'bse', 'bs-nci': 'bse',
+  };
+  PIN2KNOT = { oci: null, ppe: null, assets: null, liab: null };
+
+  // ===== Step 2 — 차트 =====
+  fmt1(v, plus) { const r = Math.round((parseFloat(v)||0) * 10) / 10; return (plus && r > 0 ? '+' : '') + r; }
+
+  vLine({ key, color, valley = -1, zero = false, valleyLabel }) {
+    const h = React.createElement, vals = this.S[key]; color = this.colOf(color);
+    if (valleyLabel == null) valleyLabel = (this._G && this._G.anchor ? this._G.anchor.label : '');
+    const W = 640, H = 250, L = 46, R = 22, T = 40, ih = H - T - 40, iw = W - L - R;
+    let mn = Math.min(...vals), mx = Math.max(...vals);
+    if (zero) { mn = Math.min(mn, 0); mx = Math.max(mx, 0); }
+    const pad = (mx - mn) * .14 || 1; mn -= pad; mx += pad;
+    const X = i => L + iw * i / (vals.length - 1);
+    const Y = v => T + ih * (1 - (v - mn) / (mx - mn));
+    const els = [];
+    if (mn < 0 && mx > 0) {
+      els.push(h('line', { key: 'z', x1: L - 6, x2: W - R, y1: Y(0), y2: Y(0), stroke: 'rgba(140,170,210,.35)', strokeDasharray: '3 4' }));
+      els.push(h('text', { key: 'zl', x: L - 10, y: Y(0) + 3, textAnchor: 'end', fontSize: 10, fill: '#5c6b80', fontFamily: 'IBM Plex Mono,monospace' }, '0'));
+    }
+    const line = 'M ' + vals.map((v, i) => `${X(i)} ${Y(v)}`).join(' L ');
+    els.push(h('path', { key: 'ar', d: line + ` L ${X(vals.length - 1)} ${T + ih} L ${X(0)} ${T + ih} Z`, fill: this.rgba(color, .07) }));
+    els.push(h('path', { key: 'ln', d: line, stroke: color, strokeWidth: 2.5, fill: 'none', strokeLinejoin: 'round' }));
+    vals.forEach((v, i) => {
+      const last = i === vals.length - 1;
+      if (last) els.push(h('circle', { key: 'g' + i, cx: X(i), cy: Y(v), r: 10, fill: color, opacity: .3 }));
+      els.push(h('circle', { key: 'p' + i, cx: X(i), cy: Y(v), r: last ? 5.5 : 3.5, fill: last ? color : '#0a0f1c', stroke: color, strokeWidth: 1.8 }));
+      els.push(h('text', { key: 'v' + i, x: X(i), y: Y(v) - 12, textAnchor: 'middle', fontSize: 11.5, fontWeight: last ? 700 : 500, fill: last ? color : '#8fa1b6', fontFamily: 'IBM Plex Mono,monospace' }, this.fmt1(v)));
+      if (i > 0) {
+        const d = Math.round((v - vals[i - 1]) * 10) / 10;
+        els.push(h('text', { key: 'd' + i, x: X(i), y: Y(v) + 20, textAnchor: 'middle', fontSize: 9.5, fill: d >= 0 ? this.C.mint : this.C.coral, fontFamily: 'IBM Plex Mono,monospace' }, (d >= 0 ? '▲+' : '▼') + d));
+      }
+      els.push(h('text', { key: 'y' + i, x: X(i), y: H - 8, textAnchor: 'middle', fontSize: 10.5, fill: '#5c6b80', fontFamily: 'IBM Plex Mono,monospace' }, this.YEARS[i]));
+      if (i === valley) {
+        els.push(h('circle', { key: 'vy' + i, cx: X(i), cy: Y(v), r: 9.5, fill: 'none', stroke: this.C.coral, strokeWidth: 1.4, strokeDasharray: '3 3' }));
+        els.push(h('text', { key: 'vt' + i, x: X(i), y: Y(v) + 34, textAnchor: 'middle', fontSize: 10, fill: this.C.coral }, valleyLabel));
+      }
+    });
+    return h('svg', { viewBox: `0 0 ${W} ${H}`, style: { width: '100%', height: 'auto', display: 'block' } }, els);
+  }
+
+  vTwin({ a, b }) {
+    const h = React.createElement;
+    a = { ...a, vals: a.vals || this.S[a.key], color: this.colOf(a.color) };
+    b = { ...b, vals: b.vals || this.S[b.key], color: this.colOf(b.color) };
+    const W = 640, H = 250, L = 46, R = 22, T = 40, ih = H - T - 40, iw = W - L - R;
+    let mn = Math.min(0, ...a.vals, ...b.vals), mx = Math.max(...a.vals, ...b.vals);
+    const pad = (mx - mn) * .14 || 1; mx += pad; if (mn < 0) mn -= pad;
+    const Y = v => T + ih * (1 - (v - mn) / (mx - mn));
+    const els = [], bw = 22, gap = 6;
+    if (mn < 0) els.push(h('line', { key: 'z', x1: L - 6, x2: W - R, y1: Y(0), y2: Y(0), stroke: 'rgba(140,170,210,.35)', strokeDasharray: '3 4' }));
+    for (let i = 0; i < 5; i++) {
+      const cx = L + iw * (i + .5) / 5;
+      [[a, cx - bw - gap / 2], [b, cx + gap / 2]].forEach(([s, x], j) => {
+        const v = s.vals[i];
+        const y0 = Y(Math.max(0, v)), y1 = Y(Math.min(0, v));
+        els.push(h('rect', { key: `b${i}${j}`, x, y: y0, width: bw, height: Math.max(1.5, y1 - y0), rx: 2, fill: s.color, opacity: i === 4 ? .95 : .45 }));
+        els.push(h('text', { key: `t${i}${j}`, x: x + bw / 2, y: y0 - 5, textAnchor: 'middle', fontSize: 9.5, fill: i === 4 ? s.color : '#8fa1b6', fontFamily: 'IBM Plex Mono,monospace' }, this.fmt1(v)));
+      });
+      els.push(h('text', { key: 'y' + i, x: cx, y: H - 8, textAnchor: 'middle', fontSize: 10.5, fill: '#5c6b80', fontFamily: 'IBM Plex Mono,monospace' }, this.YEARS[i]));
+    }
+    els.push(h('g', { key: 'lg' },
+      h('circle', { cx: W - 170, cy: 16, r: 5, fill: a.color }), h('text', { x: W - 160, y: 20, fontSize: 11, fill: '#8fa1b6' }, a.name),
+      h('circle', { cx: W - 84, cy: 16, r: 5, fill: b.color }), h('text', { x: W - 74, y: 20, fontSize: 11, fill: '#8fa1b6' }, b.name)));
+    return h('svg', { viewBox: `0 0 ${W} ${H}`, style: { width: '100%', height: 'auto', display: 'block' } }, els);
+  }
+
+  vWater({ steps }) {
+    const h = React.createElement;
+    const W = 640, H = 250, L = 46, R = 22, T = 30, ih = H - T - 44, iw = W - L - R;
+    let cum = 0;
+    const bars = steps.map(s => { if (s.abs) { cum = s.v; return { ...s, a: 0, b: s.v }; } const a = cum; cum += s.v; return { ...s, a, b: cum }; });
+    let mn = Math.min(0, ...bars.map(x => Math.min(x.a, x.b))), mx = Math.max(...bars.map(x => Math.max(x.a, x.b)));
+    const pad = (mx - mn) * .12 || 1; mx += pad; if (mn < 0) mn -= pad;
+    const Y = v => T + ih * (1 - (v - mn) / (mx - mn));
+    const bw = iw / steps.length * .54, els = [];
+    bars.forEach((s, i) => {
+      const cx = L + iw * (i + .5) / steps.length;
+      const yT = Y(Math.max(s.a, s.b)), yB = Y(Math.min(s.a, s.b));
+      const col = s.abs ? this.C.steel : (s.v >= 0 ? (this.colOf(s.up) || this.C.cyan) : this.C.coral);
+      els.push(h('rect', { key: 'b' + i, x: cx - bw / 2, y: yT, width: bw, height: Math.max(2, yB - yT), rx: 2, fill: col, opacity: s.abs ? .55 : .8 }));
+      els.push(h('text', { key: 'v' + i, x: cx, y: yT - 6, textAnchor: 'middle', fontSize: 10.5, fill: col, fontFamily: 'IBM Plex Mono,monospace' }, this.fmt1(s.v, !s.abs && s.v > 0)));
+      els.push(h('text', { key: 'l' + i, x: cx, y: H - 10, textAnchor: 'middle', fontSize: 9.5, fill: '#8fa1b6' }, s.l));
+      if (i < bars.length - 1) els.push(h('line', { key: 'c' + i, x1: cx + bw / 2, x2: L + iw * (i + 1.5) / steps.length - bw / 2, y1: Y(bars[i].b), y2: Y(bars[i].b), stroke: 'rgba(140,170,210,.3)', strokeDasharray: '2 3' }));
+    });
+    return h('svg', { viewBox: `0 0 ${W} ${H}`, style: { width: '100%', height: 'auto', display: 'block' } }, els);
+  }
+
+  vHBar({ items }) {
+    const h = React.createElement;
+    const mx = Math.max(...items.map(i => Math.abs(i.v)));
+    return h('div', { style: { display: 'grid', gap: '8px' } }, items.map((it, i) => {
+      const c = this.colOf(it.color) || (it.v < 0 ? this.C.coral : this.C.cyan);
+      return h('div', { key: i, style: { display: 'grid', gridTemplateColumns: '150px 1fr 64px', alignItems: 'center', gap: '10px' } },
+        h('span', { style: { fontSize: '13px', color: it.hl ? 'var(--text)' : 'var(--dim)', fontWeight: it.hl ? 700 : 400 } }, it.l),
+        h('div', { style: { height: '16px', background: 'rgba(255,255,255,.04)', borderRadius: '3px', overflow: 'hidden' } },
+          h('div', { style: { width: (Math.abs(it.v) / mx * 100) + '%', height: '100%', background: this.rgba(c, it.hl ? .9 : .55), borderRadius: '3px', transformOrigin: 'left', animation: `omgrow .5s ease ${i * 70}ms both` } })),
+        h('span', { style: { fontFamily: 'var(--mono)', fontSize: '12.5px', color: c, textAlign: 'right' } }, this.fmt1(it.v, it.v > 0 && it.plus)));
+    }));
+  }
+
+  vSteps(vd) {
+    const h = React.createElement;
+    const rows = (vd && vd.rows ? vd.rows : []).map(r => ({ ...r, c: this.colOf(r.c) }));
+    const mx = Math.max(...rows.map(r => r.a + Math.max(0, r.v)), 1);
+    return h('div', { style: { display: 'grid', gap: '9px' } }, rows.map((r, i) => {
+      const start = r.v >= 0 ? r.a : r.a + r.v;
+      return h('div', { key: i, style: { display: 'grid', gridTemplateColumns: '150px 1fr 60px', alignItems: 'center', gap: '10px' } },
+        h('span', { style: { fontSize: '13px', color: r.strong ? 'var(--text)' : 'var(--dim)', fontWeight: r.strong ? 700 : 400 } }, r.l),
+        h('div', { style: { position: 'relative', height: '18px', background: 'rgba(255,255,255,.04)', borderRadius: '3px' } },
+          h('div', { style: { position: 'absolute', left: (start / mx * 100) + '%', width: (Math.abs(r.v) / mx * 100) + '%', top: 0, bottom: 0, background: this.rgba(r.c, r.strong ? .95 : .6), border: r.dash ? `1.5px dashed ${r.c}` : 'none', borderRadius: '3px', transformOrigin: 'left', animation: `omgrow .5s ease ${i * 160}ms both` } })),
+        h('span', { style: { fontFamily: 'var(--mono)', fontSize: '12.5px', color: r.c, textAlign: 'right' } }, this.fmt1(r.v, r.v > 0 && i > 0)));
+    }));
+  }
+
+  vBubbles(vd) {
+    const h = React.createElement;
+    const segs = (vd && vd.segs ? vd.segs : []);
+    const note = (vd && vd.note ? vd.note : '');
+    const els = []; let x = 40;
+    segs.forEach((s, i) => {
+      const r = 16 + Math.sqrt(s.rev) * 4.2;
+      x += r;
+      els.push(h('circle', { key: 'c' + i, cx: x, cy: 108, r, fill: this.C.mint, opacity: .15 + (s.op / s.rev) * 3.2, stroke: s.hl ? this.C.gold : this.rgba(this.C.mint, .5), strokeWidth: s.hl ? 2 : 1 }));
+      els.push(h('text', { key: 'o' + i, x, y: 112, textAnchor: 'middle', fontSize: 12, fontWeight: 700, fill: '#eafff6', fontFamily: 'IBM Plex Mono,monospace' }, this.fmt1(s.op)));
+      els.push(h('text', { key: 'l' + i, x, y: 108 + r + 16, textAnchor: 'middle', fontSize: 10.5, fill: s.hl ? this.C.gold : '#8fa1b6' }, s.l));
+      els.push(h('text', { key: 'r' + i, x, y: 108 + r + 30, textAnchor: 'middle', fontSize: 9.5, fill: '#5c6b80', fontFamily: 'IBM Plex Mono,monospace' }, '매출 ' + s.rev));
+      x += r + 26;
+    });
+    els.push(h('text', { key: 'nt', x: 620, y: 24, textAnchor: 'end', fontSize: 10.5, fill: '#8fa1b6' }, '원 크기 = 매출 · 밝기 = 이익률 · 숫자 = 영업이익(조)'));
+    els.push(h('text', { key: 'nt2', x: 620, y: 40, textAnchor: 'end', fontSize: 10.5, fill: '#5c6b80', fontFamily: 'IBM Plex Mono,monospace' }, note));
+    return h('svg', { viewBox: '0 0 640 240', style: { width: '100%', height: 'auto', display: 'block' } }, els);
+  }
+
+  vPuddle(vd) {
+    const h = React.createElement;
+    const p = (x, r, l, v) => [
+      h('ellipse', { key: 'e' + l, cx: x, cy: 100, rx: r, ry: r * .5, fill: this.C.cyan, opacity: .12 }),
+      h('ellipse', { key: 'f' + l, cx: x, cy: 100, rx: r * .7, ry: r * .34, fill: this.C.cyan, opacity: .2 }),
+      h('text', { key: 't' + l, x, y: 96, textAnchor: 'middle', fontSize: 12, fill: '#eef4fb' }, l),
+      h('text', { key: 'v' + l, x, y: 116, textAnchor: 'middle', fontSize: 13, fill: this.C.cyan, fontFamily: 'IBM Plex Mono,monospace', fontWeight: 700 }, v),
+    ];
+    return h('svg', { viewBox: '0 0 640 185', style: { width: '100%', height: 'auto', display: 'block' } },
+      p(200, 125, '못 받은 외상 (매출채권)', (vd && vd.ar) || ''), p(465, 100, '안 팔린 재고', (vd && vd.inv) || ''),
+      h('text', { key: 'n', x: 320, y: 170, textAnchor: 'middle', fontSize: 10.5, fill: '#8fa1b6' }, '고인 웅덩이 — 사라진 게 아니라 아직 현금이 되지 못한 돈이에요'));
+  }
+
+  vChips(vd) {
+    const h = React.createElement;
+    const items = ((vd && vd.chips) ? vd.chips : []).map(it => ({ ...it, c: this.colOf(it.c) }));
+    return h('div', { style: { display: 'flex', flexWrap: 'wrap', gap: '10px', alignItems: 'center' } }, items.map((it, i) =>
+      h('span', { key: i, style: { fontFamily: 'var(--mono)', fontSize: '14px', fontWeight: 600, color: it.c, background: this.rgba(it.c, .08), border: `1px solid ${this.rgba(it.c, .35)}`, borderRadius: '7px', padding: '7px 13px' } }, it.t)));
+  }
+
+  // ===== Step 2 — 딥다이브 콘텐츠 =====
+  getDives() {
+    if (this._dives) return this._dives;
+    if (!this._G) return {};
+    const D = {};
+    for (const k in this._G.dives) D[k] = this._normDive(this._G.dives[k]);
+    for (const a of (this._G.appendix || [])) D[a.n] = this._normDive(a);
+    this._dives = D;
+    return D;
+  }
+  _normDive(v) { return { ...v, color: this.colOf(v.color_key || 'cyan') }; }
+  _viz(name, vd) { const fn = this[name]; return typeof fn === 'function' ? fn.call(this, vd) : null; }
+
+  subheadEl(no, q, sub, color) {
+    const h = React.createElement;
+    return h('div', { style: { display: 'flex', alignItems: 'baseline', gap: '10px', margin: '30px 0 12px', paddingTop: '18px', borderTop: '1px solid var(--line)' } },
+      h('span', { style: { fontFamily: 'var(--mono)', fontSize: '12px', color, letterSpacing: '.1em' } }, no),
+      h('span', { style: { fontSize: '17.5px', fontWeight: 700 } }, q),
+      h('span', { style: { fontSize: '11.5px', color: 'var(--dim2)' } }, sub));
+  }
+
+  diveCard(key) {
+    const h = React.createElement, d = this.getDives()[key];
+    if (!d) return this.overviewCard();
+    const c = d.color;
+    const kids = [];
+    kids.push(h('div', { key: 'hd', style: { display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' } },
+      this.badge(d.badge || ('ZONE ' + d.z), d.zc || 'cyan'),
+      h('span', { style: { fontFamily: 'var(--mono)', fontSize: '11px', color: 'var(--dim2)', letterSpacing: '.14em' } }, d.en || '')));
+    kids.push(h('div', { key: 'nm', style: { fontSize: '25px', fontWeight: 800 } }, d.name));
+    kids.push(h('div', { key: 'am', style: { fontFamily: 'var(--mono)', fontSize: '42px', fontWeight: 700, color: c, margin: '6px 0 2px', textShadow: `0 0 24px ${this.rgba(c, .4)}` } }, d.amt));
+    if (d.raw) kids.push(h('div', { key: 'rw', style: { fontFamily: 'var(--mono)', fontSize: '11.5px', color: 'var(--dim2)' } }, '원본 ' + d.raw + ' 백만원'));
+    kids.push(h('button', { key: 'src', onClick: () => this.openSrc(key), title: '이 카드가 유래한 사업보고서 원문을 왼쪽에 띄워요', style: { marginTop: '12px', fontFamily: 'var(--sans)', fontSize: '12.5px', fontWeight: 600, color: 'var(--cyan)', background: this.rgba(this.C.cyan, .08), border: `1px solid ${this.rgba(this.C.cyan, .4)}`, borderRadius: '7px', padding: '8px 14px', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '7px' } }, '⧉ 사업보고서 원문 보기'));
+    kids.push(this.subheadEl('①', '무엇인가요', '정의 · 의미', c));
+    (Array.isArray(d.what) ? d.what : [d.what].filter(Boolean)).forEach((t, i) => kids.push(h('p', { key: 'w' + i, style: { margin: '0 0 13px', fontSize: '16px', lineHeight: 1.85 } }, ...this.rich(t, c))));
+    if (d.links && d.links.length) {
+    kids.push(this.subheadEl('②', '어디와 이어지나요', '연결 지도 — 줄에 마우스를 올리면 가운데 행이 빛나요', c));
+    kids.push(h('div', { key: 'lk', style: { display: 'grid', gap: '7px' } }, d.links.map((l, i) => {
+      const [tn, tc] = this.TBL[l.t];
+      return h('div', {
+        key: i,
+        onMouseEnter: l.row ? () => this.hoverRow(l.row, true) : undefined,
+        onMouseLeave: l.row ? () => this.hoverRow(l.row, false) : undefined,
+        onClick: l.row ? () => this.scrollToRow(l.row) : undefined,
+        style: { display: 'flex', alignItems: 'center', gap: '10px', padding: '9px 12px', border: '1px solid var(--line)', borderRadius: '8px', cursor: l.row ? 'pointer' : 'default', background: 'rgba(255,255,255,.015)' }
+      },
+        h('span', { style: { fontFamily: 'var(--mono)', fontSize: '10px', color: tc, border: `1px solid ${this.rgba(tc, .4)}`, borderRadius: '4px', padding: '2px 7px', flexShrink: 0 } }, tn),
+        h('span', { style: { fontSize: '13.5px', flex: 1 } }, l.txt),
+        l.a ? h('span', { style: { fontFamily: 'var(--mono)', fontSize: '12.5px', color: tc } }, l.a) : null);
+    })));
+    }
+    if (d.lnote) kids.push(h('p', { key: 'ln', style: { margin: '10px 0 0', fontSize: '13.5px', color: 'var(--dim)', lineHeight: 1.7 } }, ...this.rich(d.lnote, c)));
+    kids.push(this.subheadEl('③', '왜 그런가요', d.why.sub || '규정 · 시각화', c));
+    (Array.isArray(d.why.body) ? d.why.body : [d.why.body].filter(Boolean)).forEach((t, i) => kids.push(h('p', { key: 'y' + i, style: { margin: '0 0 13px', fontSize: '15.5px', lineHeight: 1.85 } }, ...this.rich(t, c))));
+    if (d.why.viz) kids.push(h('div', { key: 'vz', style: { margin: '14px 0 8px', border: '1px solid var(--line)', borderRadius: '10px', padding: '16px' } }, this._viz(d.why.viz, d.why.viz_data)));
+    if (d.why.cap) kids.push(h('p', { key: 'cp', style: { margin: '8px 0 0', fontSize: '13px', color: 'var(--dim)' } }, '이 그림이 말하는 것 — ' + d.why.cap));
+    kids.push(this.subheadEl('④', '5년간 어땠나요', 'FY2021 – FY2025 증감분석', c));
+    const f = d.five || {};
+    if (f.skip) kids.push(h('p', { key: 'fs', style: { fontSize: '14px', color: 'var(--dim)', lineHeight: 1.7 } }, f.skip));
+    else {
+      const charts = [];
+      if (f.twin) charts.push(this.vTwin(f.twin));
+      else if (f.key) charts.push(this.vLine({ key: f.key, color: f.color || c, valley: f.valley != null ? f.valley : -1, zero: !!f.zero }));
+      if (f.extraKey) charts.push(this.vLine({ key: f.extraKey, color: f.extraColor || this.C.gold, valley: f.extraValley != null ? f.extraValley : -1, zero: !!f.extraZero }));
+      charts.forEach((ch2, i) => kids.push(h('div', { key: 'ch' + i, style: { margin: '12px 0 4px', border: '1px solid var(--line)', borderRadius: '10px', padding: '14px 10px 8px' } }, ch2)));
+      if (f.cap) kids.push(h('p', { key: 'fc', style: { margin: '10px 0 0', fontSize: '14.5px', lineHeight: 1.8 } }, ...this.rich(f.cap, c)));
+      if (f.so) kids.push(h('div', { key: 'so', style: { margin: '14px 0 0', padding: '11px 14px', border: `1px solid ${this.rgba(this.C.gold, .35)}`, borderRadius: '8px', background: this.rgba(this.C.gold, .05), fontSize: '14px', lineHeight: 1.7 } }, h('b', { style: { color: this.C.gold } }, '그래서? '), f.so));
+    }
+    if (d.row) kids.push(h('button', { key: 'bk', onClick: () => this.scrollToRow(d.row), style: { marginTop: '24px', fontFamily: 'var(--sans)', fontSize: '13px', color: c, background: this.rgba(c, .07), border: `1px solid ${this.rgba(c, .35)}`, borderRadius: '7px', padding: '8px 14px', cursor: 'pointer' } }, '은하수에서 이 항목 보기 ↥'));
+    return h('div', { key: 'dv' + key, style: { animation: 'omfade var(--fade) ease both', paddingBottom: '30px' } }, kids);
+  }
+
+  // ===== 사업보고서 원문 팝업 (좌측 50% · 목차+원문) =====
+  // 계정명 → dive 키 색인 (원문 표 계정행 클릭용). 괄호·공백 제거 정규화, 노트카드(nX) 우선(비지배지분 등 동명 행 구체 채택).
+  _nameDive() {
+    if (this._ndv) return this._ndv;
+    const D = this.getDives(), m = {};
+    const norm = (s) => String(s || '').split('(')[0].replace(/[\s·:]/g, '');
+    const P = (this._G && this._G.panels) || {};
+    for (const z in P) for (const r of (P[z] || [])) {
+      const base = norm(r.name); if (base.length < 2) continue;
+      const k = this._diveKey(r.row); if (!D[k]) continue;
+      if (!m[base] || (/^n\d/.test(k) && !/^n\d/.test(m[base]))) m[base] = k;
+    }
+    this._ndv = m; return m;
+  }
+  _srcTable(rows, key) {
+    const h = React.createElement;
+    const isNum = (s) => /^[\(\-−]?[\d.,]+\%?\)?$/.test(s);
+    const dmap = this._nameDive();
+    const norm = (s) => String(s || '').split('(')[0].replace(/[\s·:]/g, '');
+    return h('table', { key: 't' + key, style: { borderCollapse: 'collapse', margin: '11px 0', fontSize: '12px', fontFamily: 'var(--mono)', width: 'auto', maxWidth: '100%' } },
+      h('tbody', null, rows.map((cells, ri) => h('tr', { key: ri },
+        cells.map((cc, ci) => {
+          const num = isNum(cc);
+          const dk = (ri > 0 && ci === 0 && !num) ? dmap[norm(cc)] : null;   // 계정명 행 → 딥다이브 동기
+          // V-067: 계정셀에 (주N) 참조가 있으면 원문 뷰도 그 주석으로 함께 이동(딥다이브 핀은 srcGoto→_pinForNote가 담당).
+          //        복수 참조(주21,22)는 주석 제목이 계정명과 일치하는 것 우선, 없으면 첫 번째.
+          let nref = null;
+          if (dk && this._report && this._report.notes) {
+            const refs = (String(cc).match(/주\s?([\d.]+)/g) || []).map(s => s.replace(/주\s?/, '')).filter(nn => this._report.notes[nn]);
+            if (refs.length) nref = refs.find(nn => norm(this._report.notes[nn].title) === norm(cc)) || refs[0];
+          }
+          const style = { border: '1px solid var(--line)', padding: '4px 9px', textAlign: num ? 'right' : 'left', color: dk ? 'var(--cyan)' : (ri === 0 ? 'var(--text)' : 'var(--dim)'), fontWeight: ri === 0 ? 600 : 400, background: ri === 0 ? 'rgba(255,255,255,.03)' : 'transparent', verticalAlign: 'top', whiteSpace: num ? 'nowrap' : 'normal', wordBreak: 'keep-all', overflowWrap: 'anywhere', minWidth: num ? 'auto' : '84px', maxWidth: num ? 'none' : '320px', lineHeight: 1.5, cursor: dk ? 'pointer' : 'default', textDecoration: dk ? 'underline dotted' : 'none', textUnderlineOffset: '3px' };
+          return h(ri === 0 ? 'th' : 'td', { key: ci, style, onClick: dk ? () => (nref ? this.srcGoto({ type: 'note', id: nref }) : this.pin(dk)) : undefined, title: dk ? (nref ? '주' + nref + ' 원문과 딥다이브로 이동' : '이 계정의 딥다이브로 이동') : undefined }, cc);
+        })))));
+  }
+  _srcBlocks(blocks) {
+    const h = React.createElement, out = [];
+    (blocks || []).forEach((b, i) => {
+      if (b.t === 'table') out.push(this._srcTable(b.rows || [], i));
+      else if (b.v) out.push(h('p', { key: 'p' + i, style: { margin: '9px 0', fontSize: '13px', lineHeight: 1.7, color: 'var(--dim)' } }, b.v));
+    });
+    return out.length ? out : [h('div', { key: 'no', style: { padding: '30px 4px', color: 'var(--dim)' } }, '(원문을 찾지 못했어요)')];
+  }
+  // 단일 포괄손익계산서 회사(SK·NAVER·고려아연·현대건설)는 별도 손익계산서(is)가 없다(V-068).
+  // is- 행 dive에서 온 원문 요청('is')을 그 회사에 실재하는 포괄손익계산서(cis)로 폴백 해석.
+  _stmtId(id) {
+    const R = this._report; if (!R) return id;
+    if (id === 'is' && !R.statements.is && R.statements.cis) return 'cis';
+    return id;
+  }
+  buildSrcPanel() {
+    if (!this.state.src) return null;
+    const h = React.createElement, view = this.state.src, R = this._report;
+    const tocOpen = this.state.srcToc !== false;
+    let title = '사업보고서 원문', bodyKids;
+    if (!R) {
+      bodyKids = h('div', { style: { padding: '48px 30px', color: 'var(--dim)', fontSize: '15px', lineHeight: 1.85 } },
+        this._reportErr ? '이 기업의 사업보고서 원문 데이터는 아직 준비 중이에요.\n(현재 삼성전자부터 지원해요.)' : '원문을 불러오는 중이에요…');
+    } else {
+      const sid = view.type === 'stmt' ? this._stmtId(view.id) : view.id;
+      const item = (view.type === 'stmt' ? R.statements[sid] : R.notes[view.id]) || {};
+      title = (view.type === 'stmt' ? (item.title || '재무제표') : ('주' + view.id + ' ' + (item.title || ''))) + ' · 원문';
+      bodyKids = this._srcBlocks(item.blocks);
+    }
+    // 목차(슬림)
+    const tocEl = () => {
+      if (!R) return null;
+      const head = (t) => h('div', { key: 'h' + t, style: { fontFamily: 'var(--mono)', fontSize: '9.5px', letterSpacing: '.14em', color: 'var(--dim2)', padding: '10px 8px 4px' } }, t);
+      const item = (type, id, label, active) => h('div', { key: type + id, onClick: () => this.srcGoto({ type, id }), title: label, style: { padding: '4px 8px', fontSize: '11px', lineHeight: 1.3, cursor: 'pointer', color: active ? 'var(--cyan)' : 'var(--dim)', background: active ? this.rgba(this.C.cyan, .1) : 'transparent', borderLeft: '2px solid ' + (active ? 'var(--cyan)' : 'transparent'), whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' } }, label);
+      const rows = [head('재무제표')];
+      const activeStmt = view.type === 'stmt' ? this._stmtId(view.id) : null;
+      ['bs', 'is', 'cis', 'eq', 'cf'].forEach(k => { if (R.statements[k]) rows.push(item('stmt', k, R.statements[k].title, activeStmt === k)); });
+      rows.push(head('주석'));
+      for (const nn in R.notes) rows.push(item('note', nn, '주' + nn + ' ' + R.notes[nn].title, view.type === 'note' && view.id === nn));
+      return h('div', { style: { width: '138px', flexShrink: 0, borderRight: '1px solid var(--line)', overflowY: 'auto', padding: '4px 0 30px' } }, rows);
+    };
+    return h('div', { key: 'srcp', style: { position: 'fixed', top: 0, left: 0, width: '50%', height: '100vh', zIndex: 5, background: 'rgba(8,11,20,.94)', backdropFilter: 'blur(10px)', borderRight: '1px solid var(--line)', display: 'flex', flexDirection: 'column', animation: 'omfade var(--fade) ease both' } },
+      // 헤더
+      h('div', { key: 'hd', style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px', padding: '11px 18px', borderBottom: '1px solid var(--line)', flexShrink: 0 } },
+        h('div', { style: { display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0 } },
+          h('span', { style: { fontFamily: 'var(--mono)', fontSize: '10px', letterSpacing: '.18em', color: 'var(--gold)', flexShrink: 0 } }, '사업보고서 원문'),
+          h('span', { style: { fontSize: '13.5px', fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' } }, title)),
+        h('div', { style: { display: 'flex', gap: '8px', flexShrink: 0 } },
+          h('button', { onClick: this.toggleSrcToc, title: '목차 접기/펼치기', style: { fontFamily: 'var(--sans)', fontSize: '12px', color: 'var(--dim)', background: 'rgba(255,255,255,.04)', border: '1px solid var(--line)', borderRadius: '6px', padding: '5px 9px', cursor: 'pointer' } }, tocOpen ? '◂ 목차' : '▸ 목차'),
+          h('button', { onClick: this.closeSrc, style: { fontFamily: 'var(--sans)', fontSize: '12.5px', color: 'var(--text)', background: 'rgba(255,255,255,.04)', border: '1px solid var(--line)', borderRadius: '6px', padding: '5px 11px', cursor: 'pointer' } }, '✕ 닫기 ', h('span', { style: { color: 'var(--dim2)', fontSize: '11px' } }, 'Esc')))),
+      // 본문 (목차 + 원문)
+      h('div', { key: 'bd', style: { display: 'flex', flex: 1, minHeight: 0 } },
+        tocOpen ? tocEl() : null,
+        h('div', { style: { flex: 1, overflow: 'auto', padding: '10px 26px 60px', minWidth: 0 } }, bodyKids)));
+  }
+
+  buildMidOverlay() {
+    const h = React.createElement, st = this.state, mp = st.midPos;
+    if (!mp || !mp['is-netincome'] || !mp['cf-netincome']) return null;
+    const W = st.midW, H = st.midH;
+    const g = this.C.green, cy = this.C.cyan;
+    const gutter = Math.min(W - 4, mp['is-netincome'].x2 + 12);
+    const els = [
+      h('defs', { key: 'd' },
+        h('marker', { id: 'arrG', viewBox: '0 0 10 10', refX: 8, refY: 5, markerWidth: 7, markerHeight: 7, orient: 'auto' }, h('path', { d: 'M 0 0 L 10 5 L 0 10 z', fill: g })),
+        h('marker', { id: 'arrC', viewBox: '0 0 10 10', refX: 8, refY: 5, markerWidth: 7, markerHeight: 7, orient: 'auto' }, h('path', { d: 'M 0 0 L 10 5 L 0 10 z', fill: cy }))),
+    ];
+    const link = (key, from, to, color, marker, opacity, dash) => {
+      const a = mp[from], b = mp[to]; if (!a || !b) return;
+      const x = gutter;
+      els.push(h('path', { key, d: `M ${a.x2 - 8} ${a.y} L ${x - 10} ${a.y} Q ${x} ${a.y} ${x} ${a.y + 10} L ${x} ${b.y - 10} Q ${x} ${b.y} ${x - 10} ${b.y} L ${b.x2 - 8} ${b.y}`, stroke: color, strokeWidth: 1.8, fill: 'none', opacity, strokeDasharray: dash || 'none', markerEnd: `url(#${marker})` }));
+    };
+    link('gni', 'is-netincome', 'cf-netincome', g, 'arrG', .85);
+    link('cbeg', 'pbs-cash', 'cf-begincash', cy, 'arrC', st.pin === 'k1' ? .8 : .16, '4 4');
+    link('cend', 'cf-endcash', 'bs-cash', cy, 'arrC', st.pin === 'k15' ? .85 : .5, '4 4');
+    return h('svg', { width: W, height: H, viewBox: `0 0 ${W} ${H}`, style: { position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2, overflow: 'visible' } }, els);
+  }
+
+  // 그룹 서브행의 '기본 폴백 dive'(전용 카드 없이 부모/컨테이너로 가는 행) — 이와 다르면 전용 딥다이브 있음.
+  GRP_FALLBACK = { bsa: 'assets', bsl: 'liab', bse: 'eq-end', sgna: 'k5', nonop: 'k6b', ni: 'k8',
+                   noncash: 'k9', wc: 'k10', inv: 'k12', fin: 'k13', opex: 'k5' };
+  buildSub(g) {
+    // 펼침 서브행을 panels JSON(grp 필드)에서 렌더 — D4-층1 마감(서브행 하드코딩 제거).
+    const h = React.createElement;
+    const P = (this._G && this._G.panels) || {};
+    const D = this.getDives();
+    const rows = [];
+    for (const z in P) for (const r of (P[z] || [])) if (r.grp === g) rows.push(r);
+    const isBS = g === 'bsa' || g === 'bsl' || g === 'bse';
+    return h('div', { key: 'sub-' + g }, rows.map((r) => {
+      const sub = (r.name || '').indexOf('(계)') >= 0;
+      const vc = r.color ? this.colOf(r.color) : 'var(--dim)';
+      const dk = this._diveKey(r.row);
+      const hasDive = !!(D[dk] && !sub && dk !== this.GRP_FALLBACK[g]);   // 전용 딥다이브 있는 행만 표시
+      return h('div', { key: r.row, 'data-row': r.row, onClick: this.onRow,
+        title: (r.raw_mn != null ? r.raw_mn.toLocaleString() + ' 백만원' : (r.name || '')),
+        style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          height: isBS ? (sub ? '34px' : '32px') : '38px',
+          padding: (isBS && sub) ? '0 16px 0 32px' : '0 16px 0 48px',
+          borderTop: '1px dashed rgba(140,170,210,' + (sub ? '.12' : '.08') + ')', cursor: 'pointer',
+          fontSize: isBS ? '12.5px' : '13px', color: 'var(--dim)', fontWeight: sub ? 600 : 400 } },
+        h('span', { style: hasDive ? { textDecoration: 'underline dotted', textDecorationColor: 'rgba(130,160,200,.45)', textUnderlineOffset: '3px' } : null }, r.name),
+        h('span', { style: { fontFamily: 'var(--mono)', color: vc } }, r.v));
+    }));
+  }
+
+  buildPanelB() {
+    // 패널 B 헤드라인을 panels.B(grp 없는 행)에서 데이터 구동 렌더 — 회사별 손익 구조 차이 흡수(V-040:
+    // 플랫폼=영업비용 단일, 제조=원가/총이익/판관비). 색·강조·매듭번호는 row-id 규칙으로 파생해
+    // 골든 정적 렌더와 동일, 신규 행(is-opex 등)만 데이터 색.
+    const h = React.createElement;
+    const P = (this._G && this._G.panels) || {};
+    const B = P.B || [];
+    const knots = (this._G && this._G.knots) || [];
+    const numOf = (row) => { const k = knots.find((x) => x.row === row); return k ? k.num : '—'; };
+    const VCOL = { 'is-revenue': 'mint', 'is-cogs': 'coral', 'is-grossprofit': 'mint', 'is-sgna': 'coral', 'is-opex': 'coral', 'is-opincome': 'mint', 'is-nonop': 'mint', 'is-pretax': 'mint', 'is-tax': 'coral', 'is-netincome': 'mint', 'is-oci': 'gold', 'is-totalcomp': 'mint' };
+    const EMPH = { 'is-grossprofit': 1, 'is-opincome': 1, 'is-pretax': 1, 'is-totalcomp': 1 };
+    const CARET = { 'is-sgna': 'sgna', 'is-opex': 'opex', 'is-nonop': 'nonop', 'is-netincome': 'ni' };
+    const exp = this.state.exp;
+    const head = B.filter((r) => !r.grp);
+    const out = [];
+    head.forEach((r, i) => {
+      const em = !!EMPH[r.row], isNI = r.row === 'is-netincome';
+      const cg = CARET[r.row]; const hasSub = cg && B.some((x) => x.grp === cg);
+      const vc = this.colOf(VCOL[r.row] || r.color || 'mint');
+      out.push(h('div', { key: r.row, 'data-row': r.row, onClick: this.onRow,
+        title: (r.raw_mn != null ? r.raw_mn.toLocaleString() + ' 백만원' : r.name),
+        style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          height: 'var(--row-h)', padding: '0 16px', cursor: 'pointer',
+          borderTop: i === 0 ? 'none' : (isNI ? '1px solid rgba(116,238,198,.35)' : '1px solid var(--line)'),
+          background: isNI ? 'rgba(116,238,198,.07)' : (em ? 'rgba(116,238,198,.045)' : 'transparent'),
+          fontWeight: (em || isNI) ? 700 : 400 } },
+        h('div', { style: { display: 'flex', alignItems: 'center', gap: '10px' } },
+          h('span', { style: { fontFamily: 'var(--mono)', fontSize: '10px', color: isNI ? 'var(--mint)' : 'var(--dim2)', letterSpacing: '.08em' } }, numOf(r.row)),
+          h('span', null, r.name),
+          hasSub ? h('span', { 'data-g': cg, onClick: this.onToggle, style: { width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid var(--line)', borderRadius: '4px', fontSize: '9px', color: 'var(--dim)', cursor: 'pointer', flexShrink: 0 } }, exp[cg] ? '▾' : '▸') : null),
+        h('span', { style: { fontFamily: 'var(--mono)', fontSize: isNI ? '17px' : (em ? '16.5px' : '15px'), fontWeight: (em || isNI) ? 700 : 600, color: vc, textShadow: isNI ? '0 0 12px rgba(116,238,198,.5)' : 'none' } }, (r.v == null || r.v === '') ? '—' : r.v)));
+      if (hasSub && exp[cg]) out.push(this.buildSub(cg));
+    });
+    return h('div', { key: 'panelB' }, out);
+  }
+
+  buildPanelE() {
+    // 패널 E(자본변동)를 panels.E에서 데이터 구동 렌더 — 회사별 자본거래 차이 흡수(V-083:
+    // eq-buyback 없는 회사에서 정적 'E4 자기주식취득' 공란·'E5 주식보상·기타' 라벨 불일치 사고).
+    // 라벨은 panels.E 각 행의 실제 name, 없는 행은 자동 생략(placeholder 금지). buildPanelB와 동식.
+    const h = React.createElement;
+    const E = (this._G && this._G.panels && this._G.panels.E) || [];
+    const OUT = { 'eq-div': 1, 'eq-buyback': 1 };  // 유출 = coral
+    const FIN = { 'eq-div': 1, 'eq-buyback': 1 };   // 재무활동과 같은 돈 힌트
+    const out = [];
+    E.forEach((r, i) => {
+      const isEnd = r.row === 'eq-end';
+      const vc = this.colOf(r.color || (OUT[r.row] ? 'coral' : 'gold'));
+      out.push(h('div', { key: r.row, 'data-row': r.row, onClick: this.onRow,
+        title: (r.raw_mn != null ? r.raw_mn.toLocaleString() + ' 백만원' : r.name),
+        style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          height: 'var(--row-s)', padding: '0 16px', cursor: 'pointer',
+          borderTop: i === 0 ? 'none' : (isEnd ? '1px solid rgba(233,196,107,.35)' : '1px solid var(--line)'),
+          background: isEnd ? 'rgba(233,196,107,.06)' : 'transparent',
+          fontWeight: isEnd ? 700 : 400 } },
+        h('div', { style: { display: 'flex', alignItems: 'center', gap: '10px' } },
+          h('span', { style: { fontFamily: 'var(--mono)', fontSize: '10px', color: isEnd ? 'var(--gold)' : 'var(--dim2)', letterSpacing: '.08em' } }, 'E' + i),
+          h('span', null, r.name),
+          FIN[r.row] ? h('span', { style: { fontSize: '11px', color: 'var(--dim)', fontWeight: 400 } }, '⑬ 재무활동과 같은 돈') : null),
+        h('span', { style: { fontFamily: 'var(--mono)', fontSize: isEnd ? '17px' : '15px', fontWeight: isEnd ? 700 : 600, color: vc, textShadow: isEnd ? '0 0 12px rgba(233,196,107,.5)' : 'none' } }, (r.v == null || r.v === '') ? '—' : r.v)));
+    });
+    return h('div', { key: 'panelE' }, out);
+  }
+
+  buildAppendix() {
+    const h = React.createElement;
+    const items = (this._G && this._G.appendix) || [];
+    return h('div', { key: 'apxlist' }, items.map((a) =>
+      h('div', { key: a.n, 'data-row': a.n, onClick: this.onRow,
+        style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '10px', padding: '8px 10px', borderTop: '1px dashed rgba(140,170,210,.10)', cursor: 'pointer' } },
+        h('span', { style: { fontSize: '12.5px' } },
+          h('b', { style: { fontFamily: 'var(--mono)', fontSize: '9.5px', color: 'var(--dim2)', letterSpacing: '.06em', marginRight: '7px' } }, a.note_no || ''),
+          a.tag || a.name),
+        h('span', { style: { fontFamily: 'var(--mono)', fontSize: '11px', color: this.colOf(a.color_key || 'steel') } }, (a.amt || '') + ' ›'))));
+  }
+
+  renderVals() {
+    const exp = this.state.exp;
+    const car = {}; Object.keys(exp).forEach(k => { car[k] = exp[k] ? '▾' : '▸'; });
+    // 중앙 패널 헤드라인 값·툴팁을 panels JSON에서 (D4-층1 데이터 구동). 키는 row-id의 '-'→'_'.
+    const pv = {}, pt = {};
+    const P = this._G && this._G.panels;
+    if (P) for (const z in P) for (const r of (P[z] || [])) {
+      const k = (r.row || '').replace(/-/g, '_');
+      pv[k] = (r.v == null || r.v === '') ? '—' : r.v;
+      pt[k] = (r.raw_mn != null) ? r.raw_mn.toLocaleString() + ' 백만원' : '';
+    }
+    // 빌더는 개별 try/catch — 한 섹션(예: 불완전 JSON의 SVG)이 깨져도 전체 페이지가 죽지 않게(우아한 degrade).
+    const safe = (fn, fb) => { try { return fn.call(this); } catch (e) { console.warn('galaxy 빌더 오류(' + fn.name + '): ' + e.message); return fb; } };
+    return {
+      pv, pt,
+      corp: this._G ? this._G.corp : { name: '', fiscal_year: '', period: '', basis: '', cash_begin: '', cash_end: '' },
+      strings: this._G ? this._G.strings : { intro_lines: ['', ''] },
+      galaxySvg: safe(this.buildGalaxy, null),
+      midOverlay: safe(this.buildMidOverlay, null),
+      inspectorCard: safe(this.buildCard, null),
+      srcPanel: safe(this.buildSrcPanel, null),
+      runningChip: safe(this.buildRunningChip, null),
+      appendixList: safe(this.buildAppendix, null),
+      panelB: safe(this.buildPanelB, null),
+      eqRows: safe(this.buildPanelE, null),
+      bsbar: (() => { const f = (r) => { const x = (this._G && this._G.panels && this._G.panels.D || []).find(q => q.row === r); return x && x.raw_mn ? x.raw_mn : null; }; const a = f('bs-assets'), l = f('bs-liab'), e = f('bs-equity'); if (a && l && e) return { l: Math.round(l / a * 100), e: Math.round(e / a * 100) }; return { l: 23, e: 77 }; })(),
+      sub: (() => { try { const o = {}; for (const g of ['sgna','nonop','ni','noncash','wc','inv','fin','bsa','bsl','bse']) o[g] = this.buildSub(g); return o; } catch (e) { console.warn('sub 빌더 오류: ' + e.message); return {}; } })(),
+      onRow: this.onRow,
+      onToggle: this.onToggle,
+      unpin: this.unpin,
+      isPinned: !!this.state.pin,
+      isJourney: !this.state.pin,
+      exp, car,
+    };
+  }
+}
+</script>
+
+
+</body></html>

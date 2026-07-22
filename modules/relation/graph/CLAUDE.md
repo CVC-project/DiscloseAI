@@ -50,7 +50,7 @@ G.add_edge(
 
 ## JSON export 스키마 (프로토타입 호환)
 
-목표: `docs/prototype/corporate_universe_v5.html`의 `raw=[]` 형식과 드롭인 호환.
+목표: 프로토타입 원본(corporate_universe_v5.html, #28 제거)의 `raw=[]` 형식과 드롭인 호환. 현재 정본은 viewer/index.html.
 
 ```js
 // graph_top50.json 출력 예시

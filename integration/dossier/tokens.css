@@ -1,0 +1,50 @@
+/* tokens.css — 공유 프리미티브 (표면 무관 원자값)
+ * D3 2계층 SSOT의 층 1. 셸(styles.css)·모든 dossier 페이지(galaxy/business/firm)가 각자 <link>.
+ * ⚠️ CSS 변수는 iframe 경계를 못 넘으므로 부모 상속이 아니라 각 페이지가 직접 link 한다.
+ * ⚠️ 여기엔 팔레트·폰트를 두지 않는다 — 그건 표면별 시맨틱 테마(theme-galaxy.css / styles.css).
+ * 값 출처: 현금은하수_해방판.html 실측(간격·radius·모션)을 원자화. */
+
+:root {
+  /* 간격 스케일 (8px 그리드 기반) */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 26px;
+  --sp-7: 30px;
+  --sp-8: 38px;
+
+  /* radius 스케일 (해방판 마크업 실측: 4/6/7/8/10px) */
+  --r-1: 4px;
+  --r-2: 6px;
+  --r-3: 7px;
+  --r-4: 8px;
+  --r-5: 10px;
+  --r-round: 50%;
+
+  /* 타입 스케일 (해방판 실측 폰트사이즈 → 계단화) */
+  --t-mono-micro: 10px;    /* 인덱스·라벨 캡션 */
+  --t-caption: 11.5px;
+  --t-body-sm: 13px;
+  --t-body: 15px;          /* --fs-body */
+  --t-body-lg: 16px;
+  --t-title: 19px;         /* 존 헤더 */
+  --t-hero: 24px;          /* 인트로 히어로 */
+  --t-amt: 42px;           /* 딥다이브 금액 */
+
+  /* letter-spacing 프리미티브 */
+  --ls-tight: -.01em;
+  --ls-mono: .08em;        /* 모노 수치 */
+  --ls-label: .22em;       /* 대문자 라벨 */
+
+  /* 모션 duration/easing */
+  --dur-fast: 180ms;       /* --fade */
+  --dur-mid: 250ms;        /* 제스처 게이트 */
+  --dur-slow: 450ms;       /* 재동기화 */
+  --ease-std: ease;
+
+  /* 행 높이 (재무제표 패널 — 표면 무관 레이아웃 프리미티브) */
+  --row-h: 64px;
+  --row-s: 56px;
+}
