@@ -1198,10 +1198,12 @@ window.SectorMap = SectorMap;
 
 // DartChatbot(OpenDART RAG · Amazon Bedrock) 연동.
 // 기존 UI가 기대하는 geminiStream 시그니처(onChunk/onDone/onError)를 그대로 유지하므로
-// 호출부(send)와 화면은 수정하지 않는다. 서버 주소는 window.__DART_CHAT_URL 로 주입한다.
+// 호출부(send)와 화면은 수정하지 않는다.
+// 서버 주소: 기본값 = same-origin `/api/chat`(api/PLAN.md C1 계약 — Vercel api/ 프록시 대상).
+// window.__DART_CHAT_URL이 주입돼 있으면 그 값으로 오버라이드(dev/GitHub Pages 임시 직결용,
+// api/PLAN.md §8 M0~M2 — Vercel 프록시가 서면 index.html에서 이 주입을 제거하면 된다).
 async function geminiStream({ systemPrompt, history, onChunk, onDone, onError }) {
   const base = (window.__DART_CHAT_URL || '').replace(/\/+$/, '');
-  if (!base) { onError('챗봇 서버 주소(window.__DART_CHAT_URL)가 설정되지 않았습니다.'); return; }
 
   // Gemini 형식 history({role:'user'|'model', parts:[{text}]}) → DartChatbot 형식({role, content})
   const msgs = (history || [])
@@ -1668,9 +1670,10 @@ function AiChatBubble({ msg }) {
 
 function OverlayAiChat({ companyName, ticker, context, disc, node }) {
   const name = companyName || '기업';
-  // DartChatbot 연동: Gemini 키 대신 챗봇 서버 주소(window.__DART_CHAT_URL) 유무로 활성화 판정.
+  // DartChatbot 연동: 서버 주소는 always-on 기본값(same-origin `/api/chat`, api/PLAN.md C1) —
+  // 실패는 사전 비활성화가 아니라 onError로 채팅창에 우아하게 표시한다(C1 폴백 규약).
   const apiKey = null;
-  const hasKey = !!(window.__DART_CHAT_URL && String(window.__DART_CHAT_URL).trim());
+  const hasKey = true;
 
   const initText = context === 'disclosure'
     ? `${name}의 공시를 분석했습니다. 궁금한 점을 질문해 보세요.\n\nTip: "이 공시가 주가에 미치는 영향은?", "Cash 항목 설명해줘" 등`
@@ -2319,9 +2322,10 @@ function CompanyOverviewPanel({ company, sector, onBack, onEnter }) {
 
 // ─── AI assistant (panel-tr — Gemini functional) ──────────────────────────
 function AssistantPanel({ phase, sector, company, activeTab }) {
-  // DartChatbot 연동: Gemini 키 대신 챗봇 서버 주소(window.__DART_CHAT_URL) 유무로 활성화 판정.
+  // DartChatbot 연동: 서버 주소는 always-on 기본값(same-origin `/api/chat`, api/PLAN.md C1) —
+  // 실패는 사전 비활성화가 아니라 onError로 채팅창에 우아하게 표시한다(C1 폴백 규약).
   const apiKey = null;
-  const hasKey = !!(window.__DART_CHAT_URL && String(window.__DART_CHAT_URL).trim());
+  const hasKey = true;
 
   const initGreeting = React.useMemo(() => {
     const greeting = AI_GREETINGS[phase] || AI_GREETINGS.galaxy;
