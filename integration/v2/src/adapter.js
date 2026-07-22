@@ -167,6 +167,9 @@
           cap: Math.max(1, Math.round(totalJo)),
           memberCount: s.memberCount,
           members: s.members,
+          // universe(U2): 전량 기업 수 + LOD-1 배경 dots 좌표. top50 경로면 없음.
+          count: s.count != null ? s.count : s.memberCount,
+          dots: s.dots || [],
         };
       });
   }
@@ -223,7 +226,7 @@
   async function injectBundleScript() {
     // Babel-standalone auto-transforms <script type="text/babel"> tags only at page load.
     // For dynamic injection we fetch the source ourselves, transform via Babel, then run.
-    const url = "./src/bundle.jsx?v=k3j";
+    const url = "./src/bundle.jsx?v=k4c";
     const src = await fetch(url).then((r) => r.text());
     const out = window.Babel.transform(src, { presets: ["env", "react"] }).code;
     const s = document.createElement("script");
@@ -254,6 +257,10 @@
         (discByTicker[t] = discByTicker[t] || []).push(d);
       }
 
+      // dots: sector id → [[x,y,capBucket], ...] (LOD-1 배경 dots, U2 full 이전)
+      const dots = {};
+      for (const p of palette) if (p.dots && p.dots.length) dots[p.id] = p.dots;
+
       window.__realData = {
         sectors: palette,
         companies,
@@ -265,6 +272,10 @@
         scenarios: result.scenarios,
         meta: result.meta,
         usingMock: result.usingMock,
+        usingUniverse: result.usingUniverse,
+        dots,
+        companiesIndex: result.companiesIndex || [],
+        universeMeta: result.universeMeta || null,
       };
       console.log("[adapter] sectors:", palette.length,
                   "companies:", Object.values(companies).reduce((a, c) => a + c.length, 0),

@@ -862,6 +862,7 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
   const [hoverCode, setHoverCode] = _useState(null);
   const bgStarsRef = _useRef([]);
   const shootingRef = _useRef([]);
+  const dotsCanvasRef = _useRef(null);   // LOD-1 배경 dots 오프스크린 (섹터 진입 시 1회 빌드)
 
   const sec = SECTOR_PALETTE.find(s => s.id === sectorId) || SECTOR_PALETTE[0];
   const companies = COMPANIES[sectorId] || COMPANIES.semi || [];
@@ -906,12 +907,44 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
   _useEffect(() => {
     const cvs = canvasRef.current;
     const ctx = cvs.getContext('2d');
+    // LOD-1 배경 dots: universe.json sectors[].dots([-1,1] 디스크 좌표)를 섹터색 옅은 점으로
+    // 오프스크린 캔버스에 1회 렌더. 프레임마다 drawImage로 합성만 하고 재도장하지 않음
+    // (universe/PLAN.md §5 "오프스크린 캔버스 1회 렌더 후 합성 — 프레임당 재도장 금지").
+    const buildDotsLayer = (w, h, dpr) => {
+      const dots = (window.__realData && window.__realData.dots && window.__realData.dots[sectorId]) || [];
+      if (!dots.length) { dotsCanvasRef.current = null; return; }
+      const off = document.createElement('canvas');
+      off.width = w * dpr; off.height = h * dpr;
+      const octx = off.getContext('2d');
+      octx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const cx = w / 2, cy = h / 2;
+      const baseR = Math.min(w, h) * 0.34;   // 섹터 뷰 named 레이어와 동일 스케일
+      // dots는 named 클러스터와 같은 디스크를 채우되(잔여 기업 배경), named보다 훨씬
+      // 작고 균일해 "성긴 별먼지"처럼 읽히게 한다. 소량 지터로 격자감 제거.
+      octx.globalCompositeOperation = 'screen';
+      for (let i = 0; i < dots.length; i++) {
+        const d = dots[i];
+        const dx = d[0], dy = d[1], bucket = d[2] || 0;
+        const px = cx + dx * baseR, py = cy + dy * baseR;
+        const r = 1.1 + bucket * 0.5;         // capBucket(0~) → 점 크기(named보다 작게)
+        const glow = octx.createRadialGradient(px, py, 0, px, py, r * 3);
+        glow.addColorStop(0, sec.color + '55');
+        glow.addColorStop(1, sec.color + '00');
+        octx.fillStyle = glow;
+        octx.beginPath(); octx.arc(px, py, r * 3, 0, Math.PI * 2); octx.fill();
+        octx.fillStyle = sec.color + 'ee';
+        octx.beginPath(); octx.arc(px, py, r, 0, Math.PI * 2); octx.fill();
+      }
+      dotsCanvasRef.current = off;
+    };
+
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const w = cvs.clientWidth, h = cvs.clientHeight;
       cvs.width = w * dpr; cvs.height = h * dpr;
       sizeRef.current = { w, h, dpr };
       bgStarsRef.current = window.__galaxyHelpers.buildBgStars(53, w, h, 700);
+      buildDotsLayer(w, h, dpr);
     };
     resize();
     window.addEventListener('resize', resize);
@@ -961,6 +994,15 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
         const a = s.alpha * tw;
         ctx.fillStyle = `rgba(${s.r},${s.g},${s.b},${a})`;
         ctx.fillRect(s.x, s.y, s.size, s.size);
+      }
+
+      // LOD-1 배경 dots (named 아닌 잔여 기업) — 프레임당 재도장 없이 합성만.
+      // 미세 호흡(0.5~0.75) 외 정적. 기업 선택 시엔 초점 흐리지 않게 더 옅게.
+      if (dotsCanvasRef.current) {
+        ctx.save();
+        ctx.globalAlpha = activeCompanyCode ? 0.35 : (0.72 + Math.sin(t * 0.6) * 0.08);
+        ctx.drawImage(dotsCanvasRef.current, 0, 0, w, h);
+        ctx.restore();
       }
 
       // Lerp
