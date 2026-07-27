@@ -2855,7 +2855,7 @@ function App() {
                 const active = dossierTab === tab.id;
                 return (
                   <iframe key={tab.id}
-                    src={`../dossier/${tab.src}?ticker=${corpOverlayTicker}${tab.id === 'eqs' ? '&theme=galaxy' : ''}&accent=${encodeURIComponent(sectorAccent)}`}
+                    src={`../dossier/${tab.src}?ticker=${corpOverlayTicker}${tab.id === 'eqs' ? '&theme=galaxy&v=eqs-feqs-m4-20260728' : ''}&accent=${encodeURIComponent(sectorAccent)}`}
                     title={`${tab.id}-${corpOverlayTicker}`}
                     style={{position:'absolute', inset:0, width:'100%', height:'100%', border:'none', background:'#020408', display: active ? 'block' : 'none'}}
                     onLoad={undefined /* firm.html은 ?theme=galaxy 자체 테마(스코프 CSS) */}

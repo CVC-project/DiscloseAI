@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-07-20T05:57:15+00:00",
+    "generated_at": "2026-07-27T15:58:31+00:00",
     "top50_count": 50,
     "coverage": {
       "financial": 47,
@@ -33,7 +33,7 @@
       "eqs_m4": 100.0,
       "eqs_m5": 79.5,
       "eqs_total": 64.9,
-      "eqs_grade": "C",
+      "eqs_grade": "B",
       "ticker": "010130",
       "market_cap": null,
       "dart_url": "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260325000008",
@@ -91,15 +91,43 @@
         "ocf_to_revenue": 0,
         "eqs_total": 0
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 13.5,
+          "note": "3년 누적 OCF/영업이익=0.27"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": 73.8,
+          "note": "매출증가율 +37.6%, 매출채권증가율 +29.0%, 차이 D=-8.6%p (동종업계 KSIC-242 23개사 P50=+4.1%p)"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 57.7,
+          "note": "부채비율=82% (동종업계 KSIC-242 23개사, P10/P50/P90=30/96/200%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 100.0,
+          "note": "3년 가중평균 영업이익률 +6.8%, 변동폭 1.4%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 79.5,
+          "note": "자본 CAGR +7.7%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=0.27",
         "M2": "매출증가율 +37.6%, 매출채권증가율 +29.0%, 차이 D=-8.6%p (동종업계 KSIC-242 23개사 P50=+4.1%p)",
         "M3": "부채비율=82% (동종업계 KSIC-242 23개사, P10/P50/P90=30/96/200%)",
-        "M4": "3년 평균 영업이익률 +6.7% (동종업계 P50=+2.6%), 변동폭 1.4%p (P50=3.3%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +7.7%/yr (동종업계 KSIC-242 22개사, P50=+4.4%/yr)"
+        "M4": "3년 가중평균 영업이익률 +6.8%, 변동폭 1.4%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +7.7%/yr"
       },
-      "eqs_excluded": []
+      "eqs_excluded": [],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "00105855",
@@ -118,9 +146,9 @@
       "eqs_m1": 37.7,
       "eqs_m2": 45.0,
       "eqs_m3": 32.6,
-      "eqs_m4": 82.1,
+      "eqs_m4": 81.4,
       "eqs_m5": 54.7,
-      "eqs_total": 50.4,
+      "eqs_total": 50.3,
       "eqs_grade": "C",
       "ticker": "010120",
       "market_cap": null,
@@ -179,15 +207,43 @@
         "ocf_to_revenue": 43,
         "eqs_total": 71
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 37.7,
+          "note": "3년 누적 OCF/영업이익=0.65"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": 45.0,
+          "note": "매출증가율 +9.1%, 매출채권+계약자산증가율 +4.5%, 차이 D=-4.6%p (동종업계 KSIC-281 36개사 P50=-8.6%p)"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 32.6,
+          "note": "부채비율=131% (동종업계 KSIC-281 36개사, P10/P50/P90=18/93/235%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 81.4,
+          "note": "3년 가중평균 영업이익률 +8.4%, 변동폭 0.9%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 54.7,
+          "note": "자본 CAGR +11.4%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=0.65",
         "M2": "매출증가율 +9.1%, 매출채권+계약자산증가율 +4.5%, 차이 D=-4.6%p (동종업계 KSIC-281 36개사 P50=-8.6%p)",
         "M3": "부채비율=131% (동종업계 KSIC-281 36개사, P10/P50/P90=18/93/235%)",
-        "M4": "3년 평균 영업이익률 +8.3% (동종업계 P50=+0.5%), 변동폭 0.9%p (P50=13.1%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +11.4%/yr (동종업계 KSIC-281 34개사, P50=+9.0%/yr)"
+        "M4": "3년 가중평균 영업이익률 +8.4%, 변동폭 0.9%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +11.4%/yr"
       },
-      "eqs_excluded": []
+      "eqs_excluded": [],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "00106641",
@@ -267,15 +323,43 @@
         "ocf_to_revenue": 100,
         "eqs_total": 100
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 78.0,
+          "note": "3년 누적 OCF/영업이익=0.99"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": 53.7,
+          "note": "매출증가율 +6.2%, 매출채권증가율 -0.3%, 차이 D=-6.5%p (동종업계 KSIC-30 107개사 P50=-4.9%p)"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 72.4,
+          "note": "부채비율=62% (동종업계 KSIC-30 110개사, P10/P50/P90=22/134/316%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 80.7,
+          "note": "3년 가중평균 영업이익률 +9.8%, 변동폭 3.8%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 74.9,
+          "note": "자본 CAGR +14.6%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=0.99",
         "M2": "매출증가율 +6.2%, 매출채권증가율 -0.3%, 차이 D=-6.5%p (동종업계 KSIC-30 107개사 P50=-4.9%p)",
         "M3": "부채비율=62% (동종업계 KSIC-30 110개사, P10/P50/P90=22/134/316%)",
-        "M4": "3년 평균 영업이익률 +10.5% (동종업계 P50=+3.6%), 변동폭 3.8%p (P50=2.4%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +14.6%/yr (동종업계 KSIC-30 106개사, P50=+8.8%/yr)"
+        "M4": "3년 가중평균 영업이익률 +9.8%, 변동폭 3.8%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +14.6%/yr"
       },
-      "eqs_excluded": []
+      "eqs_excluded": [],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "00111704",
@@ -294,9 +378,9 @@
       "eqs_m1": 0.0,
       "eqs_m2": 56.6,
       "eqs_m3": 21.5,
-      "eqs_m4": 40.8,
+      "eqs_m4": 42.5,
       "eqs_m5": 57.2,
-      "eqs_total": 35.2,
+      "eqs_total": 35.6,
       "eqs_grade": "D",
       "ticker": "042660",
       "market_cap": null,
@@ -355,15 +439,43 @@
         "ocf_to_revenue": 0,
         "eqs_total": 0
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 0.0,
+          "note": "3년 누적 OCF/영업이익=-2.92"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": 56.6,
+          "note": "매출증가율 +18.6%, 매출채권+계약자산증가율 +10.0%, 차이 D=-8.6%p (동종업계 KSIC-31 27개사 P50=-1.6%p)"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 21.5,
+          "note": "부채비율=226% (동종업계 KSIC-31 30개사, P10/P50/P90=19/65/386%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 42.5,
+          "note": "3년 가중평균 영업이익률 +4.9%, 변동폭 11.8%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 57.2,
+          "note": "자본 CAGR +19.7%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=-2.92",
         "M2": "매출증가율 +18.6%, 매출채권+계약자산증가율 +10.0%, 차이 D=-8.6%p (동종업계 KSIC-31 27개사 P50=-1.6%p)",
         "M3": "부채비율=226% (동종업계 KSIC-31 30개사, P10/P50/P90=19/65/386%)",
-        "M4": "3년 평균 영업이익률 +2.9% (동종업계 P50=+5.7%), 변동폭 11.8%p (P50=10.0%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +19.7%/yr (동종업계 KSIC-31 26개사, P50=+13.3%/yr)"
+        "M4": "3년 가중평균 영업이익률 +4.9%, 변동폭 11.8%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +19.7%/yr"
       },
-      "eqs_excluded": []
+      "eqs_excluded": [],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "00111722",
@@ -379,18 +491,18 @@
       "operating_cashflow": -68610.0,
       "investing_cashflow": 57867.0,
       "financing_cashflow": 8621.0,
-      "eqs_m1": 0.0,
+      "eqs_m1": null,
       "eqs_m2": null,
-      "eqs_m3": 0.0,
+      "eqs_m3": null,
       "eqs_m4": null,
-      "eqs_m5": 50.8,
-      "eqs_total": 16.9,
-      "eqs_grade": "F",
+      "eqs_m5": null,
+      "eqs_total": 60.7,
+      "eqs_grade": "B",
       "ticker": "006800",
       "market_cap": null,
       "dart_url": "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260317000237",
       "industry_code": "66121",
-      "is_financial": false,
+      "is_financial": true,
       "latest_year": 2025,
       "history": {
         "years": [
@@ -433,18 +545,43 @@
         "ocf_to_revenue": 29,
         "eqs_total": 0
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
-      "eqs_module_notes": {
-        "M1": "3년 누적 OCF/영업이익=-5.85",
-        "M2": "금융업 — 매출채권 개념 부적합으로 적용 제외",
-        "M3": "부채비율=1015% (동종업계 KSIC-661 65개사, P10/P50/P90=12/19/926%)",
-        "M4": "동종업계 유효 표본 부족 — M4 보류",
-        "M5": "자본 CAGR +9.5%/yr (동종업계 KSIC-661 32개사, P50=+9.3%/yr)"
+      "eqs_method": "feqs_v1_financial_peer_percentile_2021_2025",
+      "eqs_modules": {
+        "F1": {
+          "label": "주주환원",
+          "score": 69.3,
+          "note": "3년 가중평균 배당수익률과 DPS 유지·성장 점수를 금융업 안에서 비교"
+        },
+        "F2": {
+          "label": "ROE 품질",
+          "score": 100.0,
+          "note": "3년 가중평균 ROE를 금융업 동료와 비교"
+        },
+        "F3": {
+          "label": "자본 완충력",
+          "score": 0.0,
+          "note": "최근 자본총계/자산총계로 손실 완충력을 비교"
+        },
+        "F4": {
+          "label": "이익 전환",
+          "score": 83.4,
+          "note": "순이익/영업이익 비율로 영업이익이 최종 이익으로 남는 정도를 비교"
+        },
+        "F5": {
+          "label": "자본 성장성",
+          "score": 50.8,
+          "note": "최근 자본총계 CAGR로 주주의 몫 성장성을 비교"
+        }
       },
-      "eqs_excluded": [
-        "M2",
-        "M4"
-      ]
+      "eqs_module_notes": {
+        "F1": "3년 가중평균 배당수익률과 DPS 유지·성장 점수를 금융업 안에서 비교",
+        "F2": "3년 가중평균 ROE를 금융업 동료와 비교",
+        "F3": "최근 자본총계/자산총계로 손실 완충력을 비교",
+        "F4": "순이익/영업이익 비율로 영업이익이 최종 이익으로 남는 정도를 비교",
+        "F5": "최근 자본총계 CAGR로 주주의 몫 성장성을 비교"
+      },
+      "eqs_excluded": [],
+      "eqs_profile_note": "금융사는 일반기업과 재무제표 구조가 달라 별도 기준으로 평가합니다. 배당, ROE, 자본 여력, 이익 전환, 자본 성장성을 금융업 안에서 비교합니다."
     },
     {
       "corp_code": "00117212",
@@ -463,9 +600,9 @@
       "eqs_m1": 67.0,
       "eqs_m2": 26.8,
       "eqs_m3": 11.6,
-      "eqs_m4": 80.7,
+      "eqs_m4": 79.3,
       "eqs_m5": 47.5,
-      "eqs_total": 46.7,
+      "eqs_total": 46.4,
       "eqs_grade": "D",
       "ticker": "000150",
       "market_cap": null,
@@ -524,15 +661,43 @@
         "ocf_to_revenue": 0,
         "eqs_total": 0
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 67.0,
+          "note": "3년 누적 OCF/영업이익=0.91"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": 26.8,
+          "note": "매출증가율 +9.1%, 매출채권+계약자산증가율 +20.2%, 차이 D=+11.1%p (동종업계 KSIC-262 130개사 P50=-1.7%p)"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 11.6,
+          "note": "부채비율=169% (동종업계 KSIC-262 134개사, P10/P50/P90=19/70/211%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 79.3,
+          "note": "3년 가중평균 영업이익률 +5.8%, 변동폭 2.1%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 47.5,
+          "note": "자본 CAGR +4.5%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=0.91",
         "M2": "매출증가율 +9.1%, 매출채권+계약자산증가율 +20.2%, 차이 D=+11.1%p (동종업계 KSIC-262 130개사 P50=-1.7%p)",
         "M3": "부채비율=169% (동종업계 KSIC-262 134개사, P10/P50/P90=19/70/211%)",
-        "M4": "3년 평균 영업이익률 +6.1% (동종업계 P50=+2.8%), 변동폭 2.1%p (P50=6.8%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +4.5%/yr (동종업계 KSIC-262 124개사, P50=+5.4%/yr)"
+        "M4": "3년 가중평균 영업이익률 +5.8%, 변동폭 2.1%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +4.5%/yr"
       },
-      "eqs_excluded": []
+      "eqs_excluded": [],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "00126256",
@@ -548,18 +713,18 @@
       "operating_cashflow": 52563.0,
       "investing_cashflow": -71236.0,
       "financing_cashflow": 22287.0,
-      "eqs_m1": 100.0,
+      "eqs_m1": null,
       "eqs_m2": null,
       "eqs_m3": null,
       "eqs_m4": null,
       "eqs_m5": null,
-      "eqs_total": 100.0,
-      "eqs_grade": "A",
+      "eqs_total": 71.4,
+      "eqs_grade": "B",
       "ticker": "032830",
       "market_cap": null,
       "dart_url": "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260331004244",
       "industry_code": "65110",
-      "is_financial": false,
+      "is_financial": true,
       "latest_year": 2025,
       "history": {
         "years": [
@@ -602,20 +767,43 @@
         "ocf_to_revenue": 86,
         "eqs_total": 100
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
-      "eqs_module_notes": {
-        "M1": "3년 누적 OCF/영업이익=1.57",
-        "M2": "금융업 — 매출채권 개념 부적합으로 적용 제외",
-        "M3": "동종업계 유효 표본 부족 — M3 보류",
-        "M4": "동종업계 유효 표본 부족 — M4 보류",
-        "M5": "동종업계 유효 표본 부족 — M5 보류"
+      "eqs_method": "feqs_v1_financial_peer_percentile_2021_2025",
+      "eqs_modules": {
+        "F1": {
+          "label": "주주환원",
+          "score": 87.7,
+          "note": "3년 가중평균 배당수익률과 DPS 유지·성장 점수를 금융업 안에서 비교"
+        },
+        "F2": {
+          "label": "ROE 품질",
+          "score": 56.6,
+          "note": "3년 가중평균 ROE를 금융업 동료와 비교"
+        },
+        "F3": {
+          "label": "자본 완충력",
+          "score": 27.8,
+          "note": "최근 자본총계/자산총계로 손실 완충력을 비교"
+        },
+        "F4": {
+          "label": "이익 전환",
+          "score": 96.3,
+          "note": "순이익/영업이익 비율로 영업이익이 최종 이익으로 남는 정도를 비교"
+        },
+        "F5": {
+          "label": "자본 성장성",
+          "score": 88.4,
+          "note": "최근 자본총계 CAGR로 주주의 몫 성장성을 비교"
+        }
       },
-      "eqs_excluded": [
-        "M2",
-        "M3",
-        "M4",
-        "M5"
-      ]
+      "eqs_module_notes": {
+        "F1": "3년 가중평균 배당수익률과 DPS 유지·성장 점수를 금융업 안에서 비교",
+        "F2": "3년 가중평균 ROE를 금융업 동료와 비교",
+        "F3": "최근 자본총계/자산총계로 손실 완충력을 비교",
+        "F4": "순이익/영업이익 비율로 영업이익이 최종 이익으로 남는 정도를 비교",
+        "F5": "최근 자본총계 CAGR로 주주의 몫 성장성을 비교"
+      },
+      "eqs_excluded": [],
+      "eqs_profile_note": "금융사는 일반기업과 재무제표 구조가 달라 별도 기준으로 평가합니다. 배당, ROE, 자본 여력, 이익 전환, 자본 성장성을 금융업 안에서 비교합니다."
     },
     {
       "corp_code": "00126362",
@@ -634,10 +822,10 @@
       "eqs_m1": 100.0,
       "eqs_m2": 52.9,
       "eqs_m3": 65.5,
-      "eqs_m4": 41.7,
+      "eqs_m4": 40.9,
       "eqs_m5": 50.0,
-      "eqs_total": 62.0,
-      "eqs_grade": "C",
+      "eqs_total": 61.9,
+      "eqs_grade": "B",
       "ticker": "006400",
       "market_cap": null,
       "dart_url": "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260310002954",
@@ -695,15 +883,43 @@
         "ocf_to_revenue": 50,
         "eqs_total": 0
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 100.0,
+          "note": "3년 누적 OCF/영업이익=10.06"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": 52.9,
+          "note": "매출증가율 -20.0%, 매출채권증가율 -23.8%, 차이 D=-3.8%p (동종업계 KSIC-282 20개사 P50=-2.4%p)"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 65.5,
+          "note": "부채비율=79% (동종업계 KSIC-282 20개사, P10/P50/P90=19/106/179%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 40.9,
+          "note": "3년 가중평균 영업이익률 -4.6%, 변동폭 20.2%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 50.0,
+          "note": "자본 CAGR +8.8%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=10.06",
         "M2": "매출증가율 -20.0%, 매출채권증가율 -23.8%, 차이 D=-3.8%p (동종업계 KSIC-282 20개사 P50=-2.4%p)",
         "M3": "부채비율=79% (동종업계 KSIC-282 20개사, P10/P50/P90=19/106/179%)",
-        "M4": "3년 평균 영업이익률 -1.2% (동종업계 P50=+0.5%), 변동폭 20.2%p (P50=12.7%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +8.8%/yr (동종업계 KSIC-28 83개사, P50=+8.8%/yr)"
+        "M4": "3년 가중평균 영업이익률 -4.6%, 변동폭 20.2%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +8.8%/yr"
       },
-      "eqs_excluded": []
+      "eqs_excluded": [],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "00126371",
@@ -722,9 +938,9 @@
       "eqs_m1": 100.0,
       "eqs_m2": 21.5,
       "eqs_m3": 64.2,
-      "eqs_m4": 86.4,
+      "eqs_m4": 86.8,
       "eqs_m5": 66.3,
-      "eqs_total": 67.7,
+      "eqs_total": 67.8,
       "eqs_grade": "B",
       "ticker": "009150",
       "market_cap": null,
@@ -783,15 +999,43 @@
         "ocf_to_revenue": 0,
         "eqs_total": 0
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 100.0,
+          "note": "3년 누적 OCF/영업이익=1.79"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": 21.5,
+          "note": "매출증가율 +9.9%, 매출채권증가율 +25.0%, 차이 D=+15.1%p (동종업계 KSIC-262 130개사 P50=-1.7%p)"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 64.2,
+          "note": "부채비율=49% (동종업계 KSIC-262 134개사, P10/P50/P90=19/70/211%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 86.8,
+          "note": "3년 가중평균 영업이익률 +7.6%, 변동폭 0.9%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 66.3,
+          "note": "자본 CAGR +10.5%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=1.79",
         "M2": "매출증가율 +9.9%, 매출채권증가율 +25.0%, 차이 D=+15.1%p (동종업계 KSIC-262 130개사 P50=-1.7%p)",
         "M3": "부채비율=49% (동종업계 KSIC-262 134개사, P10/P50/P90=19/70/211%)",
-        "M4": "3년 평균 영업이익률 +7.5% (동종업계 P50=+2.8%), 변동폭 0.9%p (P50=6.8%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +10.5%/yr (동종업계 KSIC-262 124개사, P50=+5.4%/yr)"
+        "M4": "3년 가중평균 영업이익률 +7.6%, 변동폭 0.9%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +10.5%/yr"
       },
-      "eqs_excluded": []
+      "eqs_excluded": [],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "00126380",
@@ -810,9 +1054,9 @@
       "eqs_m1": 100.0,
       "eqs_m2": 44.0,
       "eqs_m3": 64.7,
-      "eqs_m4": 82.0,
+      "eqs_m4": 83.0,
       "eqs_m5": 69.4,
-      "eqs_total": 72.0,
+      "eqs_total": 72.2,
       "eqs_grade": "B",
       "ticker": "005930",
       "market_cap": null,
@@ -871,15 +1115,43 @@
         "ocf_to_revenue": 33,
         "eqs_total": 33
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 100.0,
+          "note": "3년 누적 OCF/영업이익=2.44"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": 44.0,
+          "note": "매출증가율 +10.9%, 매출채권증가율 +17.2%, 차이 D=+6.3%p (동종업계 KSIC-264 60개사 P50=+0.6%p)"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 64.7,
+          "note": "부채비율=30% (동종업계 KSIC-264 64개사, P10/P50/P90=12/43/209%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 83.0,
+          "note": "3년 가중평균 영업이익률 +10.6%, 변동폭 10.5%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 69.4,
+          "note": "자본 CAGR +9.5%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=2.44",
         "M2": "매출증가율 +10.9%, 매출채권증가율 +17.2%, 차이 D=+6.3%p (동종업계 KSIC-264 60개사 P50=+0.6%p)",
         "M3": "부채비율=30% (동종업계 KSIC-264 64개사, P10/P50/P90=12/43/209%)",
-        "M4": "3년 평균 영업이익률 +8.8% (동종업계 P50=+0.9%), 변동폭 10.5%p (P50=10.2%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +9.5%/yr (동종업계 KSIC-264 60개사, P50=+3.9%/yr)"
+        "M4": "3년 가중평균 영업이익률 +10.6%, 변동폭 10.5%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +9.5%/yr"
       },
-      "eqs_excluded": []
+      "eqs_excluded": [],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "00126478",
@@ -898,9 +1170,9 @@
       "eqs_m1": 86.4,
       "eqs_m2": 78.5,
       "eqs_m3": 16.2,
-      "eqs_m4": 58.7,
+      "eqs_m4": 57.0,
       "eqs_m5": 38.5,
-      "eqs_total": 55.7,
+      "eqs_total": 55.3,
       "eqs_grade": "C",
       "ticker": "010140",
       "market_cap": null,
@@ -959,15 +1231,43 @@
         "ocf_to_revenue": 33,
         "eqs_total": 33
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 86.4,
+          "note": "3년 누적 OCF/영업이익=1.06"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": 78.5,
+          "note": "매출증가율 +7.5%, 매출채권+계약자산증가율 -24.3%, 차이 D=-31.8%p (동종업계 KSIC-31 27개사 P50=-1.6%p)"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 16.2,
+          "note": "부채비율=265% (동종업계 KSIC-31 30개사, P10/P50/P90=19/65/386%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 57.0,
+          "note": "3년 가중평균 영업이익률 +6.2%, 변동폭 5.2%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 38.5,
+          "note": "자본 CAGR +9.6%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=1.06",
         "M2": "매출증가율 +7.5%, 매출채권+계약자산증가율 -24.3%, 차이 D=-31.8%p (동종업계 KSIC-31 27개사 P50=-1.6%p)",
         "M3": "부채비율=265% (동종업계 KSIC-31 30개사, P10/P50/P90=19/65/386%)",
-        "M4": "3년 평균 영업이익률 +5.4% (동종업계 P50=+5.7%), 변동폭 5.2%p (P50=10.0%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +9.6%/yr (동종업계 KSIC-31 26개사, P50=+13.3%/yr)"
+        "M4": "3년 가중평균 영업이익률 +6.2%, 변동폭 5.2%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +9.6%/yr"
       },
-      "eqs_excluded": []
+      "eqs_excluded": [],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "00126566",
@@ -989,7 +1289,7 @@
       "eqs_m4": 70.0,
       "eqs_m5": 100.0,
       "eqs_total": 62.1,
-      "eqs_grade": "C",
+      "eqs_grade": "B",
       "ticker": "012450",
       "market_cap": null,
       "dart_url": "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260319000633",
@@ -1047,15 +1347,43 @@
         "ocf_to_revenue": 100,
         "eqs_total": 14
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 100.0,
+          "note": "3년 누적 OCF/영업이익=1.24"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": 18.4,
+          "note": "매출증가율 -98.0%, 매출채권증가율 -58.0%, 차이 D=+40.0%p (동종업계 KSIC-31 27개사 P50=-1.6%p)"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 22.1,
+          "note": "부채비율=221% (동종업계 KSIC-31 30개사, P10/P50/P90=19/65/386%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 70.0,
+          "note": "3년 가중평균 영업이익률 +699.0%, 변동폭 1377.9%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 100.0,
+          "note": "자본 CAGR +89.3%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=1.24",
         "M2": "매출증가율 -98.0%, 매출채권증가율 -58.0%, 차이 D=+40.0%p (동종업계 KSIC-31 27개사 P50=-1.6%p)",
         "M3": "부채비율=221% (동종업계 KSIC-31 30개사, P10/P50/P90=19/65/386%)",
-        "M4": "3년 평균 영업이익률 +469.3% (동종업계 P50=+5.7%), 변동폭 1377.9%p (P50=10.0%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +89.3%/yr (동종업계 KSIC-31 26개사, P50=+13.3%/yr)"
+        "M4": "3년 가중평균 영업이익률 +699.0%, 변동폭 1377.9%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +89.3%/yr"
       },
-      "eqs_excluded": []
+      "eqs_excluded": [],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "00139214",
@@ -1071,18 +1399,18 @@
       "operating_cashflow": 34132.0,
       "investing_cashflow": -20442.0,
       "financing_cashflow": -9092.0,
-      "eqs_m1": 48.3,
+      "eqs_m1": null,
       "eqs_m2": null,
       "eqs_m3": null,
       "eqs_m4": null,
       "eqs_m5": null,
-      "eqs_total": 48.3,
-      "eqs_grade": "D",
+      "eqs_total": 68.3,
+      "eqs_grade": "B",
       "ticker": "000810",
       "market_cap": null,
       "dart_url": "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260313001226",
       "industry_code": "65121",
-      "is_financial": false,
+      "is_financial": true,
       "latest_year": 2025,
       "history": {
         "years": [
@@ -1125,20 +1453,43 @@
         "ocf_to_revenue": 57,
         "eqs_total": 86
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
-      "eqs_module_notes": {
-        "M1": "3년 누적 OCF/영업이익=0.78",
-        "M2": "금융업 — 매출채권 개념 부적합으로 적용 제외",
-        "M3": "동종업계 유효 표본 부족 — M3 보류",
-        "M4": "동종업계 유효 표본 부족 — M4 보류",
-        "M5": "동종업계 유효 표본 부족 — M5 보류"
+      "eqs_method": "feqs_v1_financial_peer_percentile_2021_2025",
+      "eqs_modules": {
+        "F1": {
+          "label": "주주환원",
+          "score": 72.5,
+          "note": "3년 가중평균 배당수익률과 DPS 유지·성장 점수를 금융업 안에서 비교"
+        },
+        "F2": {
+          "label": "ROE 품질",
+          "score": 94.3,
+          "note": "3년 가중평균 ROE를 금융업 동료와 비교"
+        },
+        "F3": {
+          "label": "자본 완충력",
+          "score": 29.2,
+          "note": "최근 자본총계/자산총계로 손실 완충력을 비교"
+        },
+        "F4": {
+          "label": "이익 전환",
+          "score": 66.6,
+          "note": "순이익/영업이익 비율로 영업이익이 최종 이익으로 남는 정도를 비교"
+        },
+        "F5": {
+          "label": "자본 성장성",
+          "score": 78.8,
+          "note": "최근 자본총계 CAGR로 주주의 몫 성장성을 비교"
+        }
       },
-      "eqs_excluded": [
-        "M2",
-        "M3",
-        "M4",
-        "M5"
-      ]
+      "eqs_module_notes": {
+        "F1": "3년 가중평균 배당수익률과 DPS 유지·성장 점수를 금융업 안에서 비교",
+        "F2": "3년 가중평균 ROE를 금융업 동료와 비교",
+        "F3": "최근 자본총계/자산총계로 손실 완충력을 비교",
+        "F4": "순이익/영업이익 비율로 영업이익이 최종 이익으로 남는 정도를 비교",
+        "F5": "최근 자본총계 CAGR로 주주의 몫 성장성을 비교"
+      },
+      "eqs_excluded": [],
+      "eqs_profile_note": "금융사는 일반기업과 재무제표 구조가 달라 별도 기준으로 평가합니다. 배당, ROE, 자본 여력, 이익 전환, 자본 성장성을 금융업 안에서 비교합니다."
     },
     {
       "corp_code": "00149655",
@@ -1218,15 +1569,43 @@
         "ocf_to_revenue": 50,
         "eqs_total": 100
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 79.7,
+          "note": "3년 누적 OCF/영업이익=1.00"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": 36.9,
+          "note": "매출증가율 -3.2%, 매출채권증가율 +0.8%, 차이 D=+4.0%p (동종업계 KSIC-467 36개사 P50=-7.3%p)"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 47.6,
+          "note": "부채비율=50% (동종업계 KSIC-467 36개사, P10/P50/P90=6/41/160%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 93.7,
+          "note": "3년 가중평균 영업이익률 +7.5%, 변동폭 1.2%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 96.0,
+          "note": "자본 CAGR +20.0%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=1.00",
         "M2": "매출증가율 -3.2%, 매출채권증가율 +0.8%, 차이 D=+4.0%p (동종업계 KSIC-467 36개사 P50=-7.3%p)",
         "M3": "부채비율=50% (동종업계 KSIC-467 36개사, P10/P50/P90=6/41/160%)",
-        "M4": "3년 평균 영업이익률 +7.3% (동종업계 P50=-0.1%), 변동폭 1.2%p (P50=4.2%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +20.0%/yr (동종업계 KSIC-467 36개사, P50=+1.3%/yr)"
+        "M4": "3년 가중평균 영업이익률 +7.5%, 변동폭 1.2%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +20.0%/yr"
       },
-      "eqs_excluded": []
+      "eqs_excluded": [],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "00155276",
@@ -1245,9 +1624,9 @@
       "eqs_m1": 100.0,
       "eqs_m2": 35.7,
       "eqs_m3": 52.0,
-      "eqs_m4": 65.6,
+      "eqs_m4": 73.1,
       "eqs_m5": 90.6,
-      "eqs_total": 68.8,
+      "eqs_total": 70.3,
       "eqs_grade": "B",
       "ticker": "003670",
       "market_cap": null,
@@ -1306,15 +1685,43 @@
         "ocf_to_revenue": 0,
         "eqs_total": 50
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 100.0,
+          "note": "3년 누적 OCF/영업이익=2.77"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": 35.7,
+          "note": "매출증가율 -20.6%, 매출채권+계약자산증가율 -12.1%, 차이 D=+8.5%p (동종업계 KSIC-282 20개사 P50=-2.4%p)"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 52.0,
+          "note": "부채비율=103% (동종업계 KSIC-282 20개사, P10/P50/P90=19/106/179%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 73.1,
+          "note": "3년 가중평균 영업이익률 +0.7%, 변동폭 1.1%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 90.6,
+          "note": "자본 CAGR +31.4%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=2.77",
         "M2": "매출증가율 -20.6%, 매출채권+계약자산증가율 -12.1%, 차이 D=+8.5%p (동종업계 KSIC-282 20개사 P50=-2.4%p)",
         "M3": "부채비율=103% (동종업계 KSIC-282 20개사, P10/P50/P90=19/106/179%)",
-        "M4": "3년 평균 영업이익률 +0.6% (동종업계 P50=+0.5%), 변동폭 1.1%p (P50=12.7%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +31.4%/yr (동종업계 KSIC-28 83개사, P50=+8.8%/yr)"
+        "M4": "3년 가중평균 영업이익률 +0.7%, 변동폭 1.1%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +31.4%/yr"
       },
-      "eqs_excluded": []
+      "eqs_excluded": [],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "00155319",
@@ -1333,9 +1740,9 @@
       "eqs_m1": 100.0,
       "eqs_m2": 24.9,
       "eqs_m3": 48.2,
-      "eqs_m4": 68.1,
+      "eqs_m4": 70.4,
       "eqs_m5": 51.3,
-      "eqs_total": 58.5,
+      "eqs_total": 59.0,
       "eqs_grade": "C",
       "ticker": "005490",
       "market_cap": null,
@@ -1394,15 +1801,43 @@
         "ocf_to_revenue": 67,
         "eqs_total": 33
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 100.0,
+          "note": "3년 누적 OCF/영업이익=2.31"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": 24.9,
+          "note": "매출증가율 -4.9%, 매출채권증가율 +3.5%, 차이 D=+8.4%p (동종업계 KSIC-241 59개사 P50=-0.3%p)"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 48.2,
+          "note": "부채비율=69% (동종업계 KSIC-241 59개사, P10/P50/P90=12/65/159%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 70.4,
+          "note": "3년 가중평균 영업이익률 +3.1%, 변동폭 1.9%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 51.3,
+          "note": "자본 CAGR +2.2%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=2.31",
         "M2": "매출증가율 -4.9%, 매출채권증가율 +3.5%, 차이 D=+8.4%p (동종업계 KSIC-241 59개사 P50=-0.3%p)",
         "M3": "부채비율=69% (동종업계 KSIC-241 59개사, P10/P50/P90=12/65/159%)",
-        "M4": "3년 평균 영업이익률 +3.4% (동종업계 P50=+1.8%), 변동폭 1.9%p (P50=3.3%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +2.2%/yr (동종업계 KSIC-241 59개사, P50=+2.1%/yr)"
+        "M4": "3년 가중평균 영업이익률 +3.1%, 변동폭 1.9%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +2.2%/yr"
       },
-      "eqs_excluded": []
+      "eqs_excluded": [],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "00159023",
@@ -1420,10 +1855,10 @@
       "financing_cashflow": -27118.0,
       "eqs_m1": 100.0,
       "eqs_m2": 43.6,
-      "eqs_m3": 25.7,
-      "eqs_m4": 75.4,
-      "eqs_m5": 43.8,
-      "eqs_total": 57.7,
+      "eqs_m3": 24.6,
+      "eqs_m4": 75.1,
+      "eqs_m5": 44.8,
+      "eqs_total": 57.6,
       "eqs_grade": "C",
       "ticker": "017670",
       "market_cap": null,
@@ -1482,15 +1917,43 @@
         "ocf_to_revenue": 75,
         "eqs_total": 25
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 100.0,
+          "note": "3년 누적 OCF/영업이익=3.00"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": 43.6,
+          "note": "매출증가율 -4.7%, 매출채권+계약자산증가율 -1.7%, 차이 D=+2.9%p (동종업계 MARKET 2356개사 P50=-1.4%p)"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 24.6,
+          "note": "부채비율=132% (동종업계 MARKET 2450개사, P10/P50/P90=14/67/227%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 75.1,
+          "note": "3년 가중평균 영업이익률 +8.2%, 변동폭 3.9%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 44.8,
+          "note": "자본 CAGR +2.9%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=3.00",
         "M2": "매출증가율 -4.7%, 매출채권+계약자산증가율 -1.7%, 차이 D=+2.9%p (동종업계 MARKET 2356개사 P50=-1.4%p)",
-        "M3": "부채비율=132% (동종업계 MARKET 2644개사, P10/P50/P90=14/66/243%)",
-        "M4": "3년 평균 영업이익률 +8.8% (동종업계 P50=+2.7%), 변동폭 3.9%p (P50=7.1%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +2.9%/yr (동종업계 MARKET 2426개사, P50=+4.6%/yr)"
+        "M3": "부채비율=132% (동종업계 MARKET 2450개사, P10/P50/P90=14/67/227%)",
+        "M4": "3년 가중평균 영업이익률 +8.2%, 변동폭 3.9%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +2.9%/yr"
       },
-      "eqs_excluded": []
+      "eqs_excluded": [],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "00159193",
@@ -1509,9 +1972,9 @@
       "eqs_m1": 100.0,
       "eqs_m2": 49.5,
       "eqs_m3": 0.0,
-      "eqs_m4": 53.4,
-      "eqs_m5": 80.9,
-      "eqs_total": 56.8,
+      "eqs_m4": 63.7,
+      "eqs_m5": 80.6,
+      "eqs_total": 58.8,
       "eqs_grade": "C",
       "ticker": "015760",
       "market_cap": null,
@@ -1570,15 +2033,43 @@
         "ocf_to_revenue": 50,
         "eqs_total": 50
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 100.0,
+          "note": "3년 누적 OCF/영업이익=2.21"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": 49.5,
+          "note": "매출증가율 +4.3%, 매출채권증가율 +3.3%, 차이 D=-1.0%p (동종업계 MARKET 2356개사 P50=-1.4%p)"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 0.0,
+          "note": "부채비율=417% (동종업계 MARKET 2450개사, P10/P50/P90=14/67/227%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 63.7,
+          "note": "3년 가중평균 영업이익률 +9.1%, 변동폭 19.0%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 80.6,
+          "note": "자본 CAGR +15.0%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=2.21",
         "M2": "매출증가율 +4.3%, 매출채권증가율 +3.3%, 차이 D=-1.0%p (동종업계 MARKET 2356개사 P50=-1.4%p)",
-        "M3": "부채비율=417% (동종업계 MARKET 2644개사, P10/P50/P90=14/66/243%)",
-        "M4": "3년 평균 영업이익률 +5.9% (동종업계 P50=+2.7%), 변동폭 19.0%p (P50=7.1%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +15.0%/yr (동종업계 MARKET 2426개사, P50=+4.6%/yr)"
+        "M3": "부채비율=417% (동종업계 MARKET 2450개사, P10/P50/P90=14/67/227%)",
+        "M4": "3년 가중평균 영업이익률 +9.1%, 변동폭 19.0%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +15.0%/yr"
       },
-      "eqs_excluded": []
+      "eqs_excluded": [],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "00159616",
@@ -1597,9 +2088,9 @@
       "eqs_m1": 71.5,
       "eqs_m2": 35.7,
       "eqs_m3": 33.6,
-      "eqs_m4": 75.7,
+      "eqs_m4": 67.9,
       "eqs_m5": 51.8,
-      "eqs_total": 53.7,
+      "eqs_total": 52.1,
       "eqs_grade": "C",
       "ticker": "034020",
       "market_cap": null,
@@ -1658,15 +2149,43 @@
         "ocf_to_revenue": 29,
         "eqs_total": 57
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 71.5,
+          "note": "3년 누적 OCF/영업이익=0.94"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": 35.7,
+          "note": "매출증가율 +5.1%, 매출채권+계약자산증가율 +15.4%, 차이 D=+10.4%p (동종업계 KSIC-291 47개사 P50=+3.9%p)"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 33.6,
+          "note": "부채비율=129% (동종업계 KSIC-291 51개사, P10/P50/P90=23/74/213%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 67.9,
+          "note": "3년 가중평균 영업이익률 +5.7%, 변동폭 3.9%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 51.8,
+          "note": "자본 CAGR +5.2%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=0.94",
         "M2": "매출증가율 +5.1%, 매출채권+계약자산증가율 +15.4%, 차이 D=+10.4%p (동종업계 KSIC-291 47개사 P50=+3.9%p)",
         "M3": "부채비율=129% (동종업계 KSIC-291 51개사, P10/P50/P90=23/74/213%)",
-        "M4": "3년 평균 영업이익률 +6.4% (동종업계 P50=+3.3%), 변동폭 3.9%p (P50=6.5%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +5.2%/yr (동종업계 KSIC-291 45개사, P50=+4.3%/yr)"
+        "M4": "3년 가중평균 영업이익률 +5.7%, 변동폭 3.9%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +5.2%/yr"
       },
-      "eqs_excluded": []
+      "eqs_excluded": [],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "00161383",
@@ -1688,7 +2207,7 @@
       "eqs_m4": 79.5,
       "eqs_m5": 65.7,
       "eqs_total": 76.5,
-      "eqs_grade": "B",
+      "eqs_grade": "A",
       "ticker": "042700",
       "market_cap": null,
       "dart_url": "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260312001230",
@@ -1746,15 +2265,43 @@
         "ocf_to_revenue": 67,
         "eqs_total": 67
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 47.2,
+          "note": "3년 누적 OCF/영업이익=0.77"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": 93.6,
+          "note": "매출증가율 +3.2%, 매출채권증가율 -57.5%, 차이 D=-60.7%p (동종업계 KSIC-292 158개사 P50=+3.0%p)"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 96.3,
+          "note": "부채비율=18% (동종업계 KSIC-292 163개사, P10/P50/P90=16/52/185%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 79.5,
+          "note": "3년 가중평균 영업이익률 +40.7%, 변동폭 24.0%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 65.7,
+          "note": "자본 CAGR +9.9%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=0.77",
         "M2": "매출증가율 +3.2%, 매출채권증가율 -57.5%, 차이 D=-60.7%p (동종업계 KSIC-292 158개사 P50=+3.0%p)",
         "M3": "부채비율=18% (동종업계 KSIC-292 163개사, P10/P50/P90=16/52/185%)",
-        "M4": "3년 평균 영업이익률 +37.0% (동종업계 P50=+1.8%), 변동폭 24.0%p (P50=13.2%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +9.9%/yr (동종업계 KSIC-292 148개사, P50=+4.2%/yr)"
+        "M4": "3년 가중평균 영업이익률 +40.7%, 변동폭 24.0%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +9.9%/yr"
       },
-      "eqs_excluded": []
+      "eqs_excluded": [],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "00164478",
@@ -1773,10 +2320,10 @@
       "eqs_m1": 0.0,
       "eqs_m2": 25.8,
       "eqs_m3": 47.9,
-      "eqs_m4": 53.1,
+      "eqs_m4": 50.5,
       "eqs_m5": 31.2,
-      "eqs_total": 31.6,
-      "eqs_grade": "F",
+      "eqs_total": 31.1,
+      "eqs_grade": "D",
       "ticker": "000720",
       "market_cap": null,
       "dart_url": "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260318001395",
@@ -1834,15 +2381,43 @@
         "ocf_to_revenue": 0,
         "eqs_total": 0
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 0.0,
+          "note": "3년 누적 OCF/영업이익=-9.04"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": 25.8,
+          "note": "매출증가율 -4.9%, 매출채권+계약자산증가율 +22.6%, 차이 D=+27.6%p (동종업계 KSIC-41 40개사 P50=+9.8%p)"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 47.9,
+          "note": "부채비율=175% (동종업계 KSIC-41 39개사, P10/P50/P90=44/165/475%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 50.5,
+          "note": "3년 가중평균 영업이익률 +0.2%, 변동폭 6.5%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 31.2,
+          "note": "자본 CAGR -1.7%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=-9.04",
         "M2": "매출증가율 -4.9%, 매출채권+계약자산증가율 +22.6%, 차이 D=+27.6%p (동종업계 KSIC-41 40개사 P50=+9.8%p)",
         "M3": "부채비율=175% (동종업계 KSIC-41 39개사, P10/P50/P90=44/165/475%)",
-        "M4": "3년 평균 영업이익률 +0.3% (동종업계 P50=+0.7%), 변동폭 6.5%p (P50=10.8%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR -1.7%/yr (동종업계 KSIC-41 37개사, P50=+5.1%/yr)"
+        "M4": "3년 가중평균 영업이익률 +0.2%, 변동폭 6.5%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR -1.7%/yr"
       },
-      "eqs_excluded": []
+      "eqs_excluded": [],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "00164645",
@@ -1860,11 +2435,11 @@
       "financing_cashflow": -40331.0,
       "eqs_m1": 100.0,
       "eqs_m2": 68.4,
-      "eqs_m3": 78.8,
+      "eqs_m3": 81.0,
       "eqs_m4": 76.8,
-      "eqs_m5": 73.0,
-      "eqs_total": 79.4,
-      "eqs_grade": "B",
+      "eqs_m5": 72.6,
+      "eqs_total": 79.8,
+      "eqs_grade": "A",
       "ticker": "011200",
       "market_cap": null,
       "dart_url": "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260318001444",
@@ -1922,15 +2497,43 @@
         "ocf_to_revenue": 100,
         "eqs_total": 100
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 100.0,
+          "note": "3년 누적 OCF/영업이익=1.83"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": 68.4,
+          "note": "매출증가율 -6.9%, 매출채권증가율 -19.5%, 차이 D=-12.6%p (동종업계 MARKET 2356개사 P50=-1.4%p)"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 81.0,
+          "note": "부채비율=26% (동종업계 MARKET 2450개사, P10/P50/P90=14/67/227%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 76.8,
+          "note": "3년 가중평균 영업이익률 +17.9%, 변동폭 23.1%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 72.6,
+          "note": "자본 CAGR +11.3%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=1.83",
         "M2": "매출증가율 -6.9%, 매출채권증가율 -19.5%, 차이 D=-12.6%p (동종업계 MARKET 2356개사 P50=-1.4%p)",
-        "M3": "부채비율=26% (동종업계 MARKET 2644개사, P10/P50/P90=14/66/243%)",
-        "M4": "3년 평균 영업이익률 +16.8% (동종업계 P50=+2.7%), 변동폭 23.1%p (P50=7.1%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +11.3%/yr (동종업계 MARKET 2426개사, P50=+4.6%/yr)"
+        "M3": "부채비율=26% (동종업계 MARKET 2450개사, P10/P50/P90=14/67/227%)",
+        "M4": "3년 가중평균 영업이익률 +17.9%, 변동폭 23.1%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +11.3%/yr"
       },
-      "eqs_excluded": []
+      "eqs_excluded": [],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "00164742",
@@ -2010,15 +2613,43 @@
         "ocf_to_revenue": 0,
         "eqs_total": 0
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 0.0,
+          "note": "3년 누적 OCF/영업이익=-0.35"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": 0.0,
+          "note": "매출증가율 +6.3%, 매출채권증가율 +45.6%, 차이 D=+39.3%p (동종업계 KSIC-30 107개사 P50=-4.9%p)"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 33.8,
+          "note": "부채비율=189% (동종업계 KSIC-30 110개사, P10/P50/P90=22/134/316%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 82.8,
+          "note": "3년 가중평균 영업이익률 +7.3%, 변동폭 3.1%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 63.5,
+          "note": "자본 CAGR +12.0%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=-0.35",
         "M2": "매출증가율 +6.3%, 매출채권증가율 +45.6%, 차이 D=+39.3%p (동종업계 KSIC-30 107개사 P50=-4.9%p)",
         "M3": "부채비율=189% (동종업계 KSIC-30 110개사, P10/P50/P90=22/134/316%)",
-        "M4": "3년 평균 영업이익률 +7.9% (동종업계 P50=+3.6%), 변동폭 3.1%p (P50=2.4%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +12.0%/yr (동종업계 KSIC-30 106개사, P50=+8.8%/yr)"
+        "M4": "3년 가중평균 영업이익률 +7.3%, 변동폭 3.1%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +12.0%/yr"
       },
-      "eqs_excluded": []
+      "eqs_excluded": [],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "00164779",
@@ -2037,9 +2668,9 @@
       "eqs_m1": 100.0,
       "eqs_m2": 73.7,
       "eqs_m3": 64.6,
-      "eqs_m4": 71.7,
+      "eqs_m4": 70.0,
       "eqs_m5": 100.0,
-      "eqs_total": 82.0,
+      "eqs_total": 81.7,
       "eqs_grade": "A",
       "ticker": "000660",
       "market_cap": null,
@@ -2098,15 +2729,43 @@
         "ocf_to_revenue": 100,
         "eqs_total": 100
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 100.0,
+          "note": "3년 누적 OCF/영업이익=1.39"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": 73.7,
+          "note": "매출증가율 +46.8%, 매출채권증가율 +39.8%, 차이 D=-7.0%p (동종업계 KSIC-261 72개사 P50=+9.8%p)"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 64.6,
+          "note": "부채비율=46% (동종업계 KSIC-261 73개사, P10/P50/P90=13/64/197%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 70.0,
+          "note": "3년 가중평균 영업이익률 +32.2%, 변동폭 72.2%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 100.0,
+          "note": "자본 CAGR +50.2%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=1.39",
         "M2": "매출증가율 +46.8%, 매출채권증가율 +39.8%, 차이 D=-7.0%p (동종업계 KSIC-261 72개사 P50=+9.8%p)",
         "M3": "부채비율=46% (동종업계 KSIC-261 73개사, P10/P50/P90=13/64/197%)",
-        "M4": "3년 평균 영업이익률 +20.2% (동종업계 P50=-4.6%), 변동폭 72.2%p (P50=14.8%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +50.2%/yr (동종업계 KSIC-261 68개사, P50=+2.5%/yr)"
+        "M4": "3년 가중평균 영업이익률 +32.2%, 변동폭 72.2%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +50.2%/yr"
       },
-      "eqs_excluded": []
+      "eqs_excluded": [],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "00164788",
@@ -2125,9 +2784,9 @@
       "eqs_m1": 100.0,
       "eqs_m2": 41.3,
       "eqs_m3": 81.3,
-      "eqs_m4": 65.9,
+      "eqs_m4": 70.1,
       "eqs_m5": 55.2,
-      "eqs_total": 68.7,
+      "eqs_total": 69.6,
       "eqs_grade": "B",
       "ticker": "012330",
       "market_cap": null,
@@ -2186,15 +2845,43 @@
         "ocf_to_revenue": 50,
         "eqs_total": 50
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 100.0,
+          "note": "3년 누적 OCF/영업이익=1.61"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": 41.3,
+          "note": "매출증가율 +6.8%, 매출채권증가율 +5.3%, 차이 D=-1.5%p (동종업계 KSIC-303 101개사 P50=-4.9%p)"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 81.3,
+          "note": "부채비율=43% (동종업계 KSIC-303 104개사, P10/P50/P90=20/134/334%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 70.1,
+          "note": "3년 가중평균 영업이익률 +5.2%, 변동폭 1.6%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 55.2,
+          "note": "자본 CAGR +10.0%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=1.61",
         "M2": "매출증가율 +6.8%, 매출채권증가율 +5.3%, 차이 D=-1.5%p (동종업계 KSIC-303 101개사 P50=-4.9%p)",
         "M3": "부채비율=43% (동종업계 KSIC-303 104개사, P10/P50/P90=20/134/334%)",
-        "M4": "3년 평균 영업이익률 +4.9% (동종업계 P50=+3.6%), 변동폭 1.6%p (P50=2.4%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +10.0%/yr (동종업계 KSIC-303 100개사, P50=+8.8%/yr)"
+        "M4": "3년 가중평균 영업이익률 +5.2%, 변동폭 1.6%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +10.0%/yr"
       },
-      "eqs_excluded": []
+      "eqs_excluded": [],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "00164830",
@@ -2213,15 +2900,15 @@
       "eqs_m1": 100.0,
       "eqs_m2": null,
       "eqs_m3": 29.1,
-      "eqs_m4": 43.0,
+      "eqs_m4": 48.8,
       "eqs_m5": 100.0,
-      "eqs_total": 68.0,
+      "eqs_total": 69.5,
       "eqs_grade": "B",
       "ticker": "009540",
       "market_cap": null,
       "dart_url": "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260320001032",
       "industry_code": "64992",
-      "is_financial": false,
+      "is_financial": true,
       "latest_year": 2025,
       "history": {
         "years": [
@@ -2274,17 +2961,45 @@
         "ocf_to_revenue": 67,
         "eqs_total": 100
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 100.0,
+          "note": "3년 누적 OCF/영업이익=1.92"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": null,
+          "note": "금융업 — 매출채권 개념 부적합으로 적용 제외"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 29.1,
+          "note": "부채비율=134% (동종업계 KSIC-649 99개사, P10/P50/P90=9/66/672%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 48.8,
+          "note": "3년 가중평균 영업이익률 +8.6%, 변동폭 11.7%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 100.0,
+          "note": "자본 CAGR +16.9%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=1.92",
         "M2": "금융업 — 매출채권 개념 부적합으로 적용 제외",
         "M3": "부채비율=134% (동종업계 KSIC-649 99개사, P10/P50/P90=9/66/672%)",
-        "M4": "3년 평균 영업이익률 +6.7% (동종업계 P50=+7.2%), 변동폭 11.7%p (P50=5.6%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +16.9%/yr (동종업계 KSIC-649 92개사, P50=+6.3%/yr)"
+        "M4": "3년 가중평균 영업이익률 +8.6%, 변동폭 11.7%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +16.9%/yr"
       },
       "eqs_excluded": [
         "M2"
-      ]
+      ],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "00181712",
@@ -2303,15 +3018,15 @@
       "eqs_m1": 100.0,
       "eqs_m2": null,
       "eqs_m3": 24.9,
-      "eqs_m4": 31.8,
+      "eqs_m4": 32.3,
       "eqs_m5": 39.1,
-      "eqs_total": 49.0,
+      "eqs_total": 49.1,
       "eqs_grade": "D",
       "ticker": "034730",
       "market_cap": null,
       "dart_url": "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260318001157",
       "industry_code": "64992",
-      "is_financial": false,
+      "is_financial": true,
       "latest_year": 2025,
       "history": {
         "years": [
@@ -2364,17 +3079,45 @@
         "ocf_to_revenue": 25,
         "eqs_total": 50
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 100.0,
+          "note": "3년 누적 OCF/영업이익=2.77"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": null,
+          "note": "금융업 — 매출채권 개념 부적합으로 적용 제외"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 24.9,
+          "note": "부채비율=149% (동종업계 KSIC-649 99개사, P10/P50/P90=9/66/672%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 32.3,
+          "note": "3년 가중평균 영업이익률 +2.0%, 변동폭 2.4%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 39.1,
+          "note": "자본 CAGR +4.9%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=2.77",
         "M2": "금융업 — 매출채권 개념 부적합으로 적용 제외",
         "M3": "부채비율=149% (동종업계 KSIC-649 99개사, P10/P50/P90=9/66/672%)",
-        "M4": "3년 평균 영업이익률 +2.4% (동종업계 P50=+7.2%), 변동폭 2.4%p (P50=5.6%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +4.9%/yr (동종업계 KSIC-649 92개사, P50=+6.3%/yr)"
+        "M4": "3년 가중평균 영업이익률 +2.0%, 변동폭 2.4%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +4.9%/yr"
       },
       "eqs_excluded": [
         "M2"
-      ]
+      ],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "00244455",
@@ -2392,10 +3135,10 @@
       "financing_cashflow": -9479.0,
       "eqs_m1": 43.5,
       "eqs_m2": 52.7,
-      "eqs_m3": 59.5,
+      "eqs_m3": 60.0,
       "eqs_m4": 100.0,
-      "eqs_m5": 33.7,
-      "eqs_total": 57.9,
+      "eqs_m5": 34.9,
+      "eqs_total": 58.2,
       "eqs_grade": "C",
       "ticker": "033780",
       "market_cap": null,
@@ -2454,15 +3197,43 @@
         "ocf_to_revenue": 25,
         "eqs_total": 75
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 43.5,
+          "note": "3년 누적 OCF/영업이익=0.72"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": 52.7,
+          "note": "매출증가율 +11.4%, 매출채권증가율 +8.3%, 차이 D=-3.0%p (동종업계 MARKET 2356개사 P50=-1.4%p)"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 60.0,
+          "note": "부채비율=52% (동종업계 MARKET 2450개사, P10/P50/P90=14/67/227%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 100.0,
+          "note": "3년 가중평균 영업이익률 +20.2%, 변동폭 0.5%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 34.9,
+          "note": "자본 CAGR +0.2%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=0.72",
         "M2": "매출증가율 +11.4%, 매출채권증가율 +8.3%, 차이 D=-3.0%p (동종업계 MARKET 2356개사 P50=-1.4%p)",
-        "M3": "부채비율=52% (동종업계 MARKET 2644개사, P10/P50/P90=14/66/243%)",
-        "M4": "3년 평균 영업이익률 +20.2% (동종업계 P50=+2.7%), 변동폭 0.5%p (P50=7.1%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +0.2%/yr (동종업계 MARKET 2426개사, P50=+4.6%/yr)"
+        "M3": "부채비율=52% (동종업계 MARKET 2450개사, P10/P50/P90=14/67/227%)",
+        "M4": "3년 가중평균 영업이익률 +20.2%, 변동폭 0.5%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +0.2%/yr"
       },
-      "eqs_excluded": []
+      "eqs_excluded": [],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "00258801",
@@ -2532,15 +3303,43 @@
         "_sector": "인터넷/IT서비스",
         "_size": 2
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 100.0,
+          "note": "3년 누적 OCF/영업이익=2.42"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": 100.0,
+          "note": "매출증가율 +3824.2%, 매출채권증가율 +5.9%, 차이 D=-3818.3%p (동종업계 KSIC-63 33개사 P50=-3.3%p)"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 28.2,
+          "note": "부채비율=82% (동종업계 KSIC-63 34개사, P10/P50/P90=22/45/126%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 70.0,
+          "note": "3년 가중평균 영업이익률 +119.2%, 변동폭 233.3%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 40.4,
+          "note": "자본 CAGR +4.8%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=2.42",
         "M2": "매출증가율 +3824.2%, 매출채권증가율 +5.9%, 차이 D=-3818.3%p (동종업계 KSIC-63 33개사 P50=-3.3%p)",
         "M3": "부채비율=82% (동종업계 KSIC-63 34개사, P10/P50/P90=22/45/126%)",
-        "M4": "3년 평균 영업이익률 +158.1% (동종업계 P50=+7.5%), 변동폭 233.3%p (P50=5.6%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +4.8%/yr (동종업계 KSIC-63 32개사, P50=+8.1%/yr)"
+        "M4": "3년 가중평균 영업이익률 +119.2%, 변동폭 233.3%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +4.8%/yr"
       },
-      "eqs_excluded": []
+      "eqs_excluded": [],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "00266961",
@@ -2559,9 +3358,9 @@
       "eqs_m1": 100.0,
       "eqs_m2": 69.0,
       "eqs_m3": 55.1,
-      "eqs_m4": 75.6,
+      "eqs_m4": 76.8,
       "eqs_m5": 54.1,
-      "eqs_total": 70.8,
+      "eqs_total": 71.0,
       "eqs_grade": "B",
       "ticker": "035420",
       "market_cap": null,
@@ -2610,15 +3409,43 @@
         "_sector": "인터넷/IT서비스",
         "_size": 2
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 100.0,
+          "note": "3년 누적 OCF/영업이익=1.35"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": 69.0,
+          "note": "매출증가율 +12.1%, 매출채권증가율 +2.1%, 차이 D=-10.0%p (동종업계 KSIC-63 33개사 P50=-3.3%p)"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 55.1,
+          "note": "부채비율=42% (동종업계 KSIC-63 34개사, P10/P50/P90=22/45/126%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 76.8,
+          "note": "3년 가중평균 영업이익률 +17.9%, 변동폭 3.0%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 54.1,
+          "note": "자본 CAGR +9.3%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=1.35",
         "M2": "매출증가율 +12.1%, 매출채권증가율 +2.1%, 차이 D=-10.0%p (동종업계 KSIC-63 33개사 P50=-3.3%p)",
         "M3": "부채비율=42% (동종업계 KSIC-63 34개사, P10/P50/P90=22/45/126%)",
-        "M4": "3년 평균 영업이익률 +17.4% (동종업계 P50=+7.5%), 변동폭 3.0%p (P50=5.6%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +9.3%/yr (동종업계 KSIC-63 32개사, P50=+8.1%/yr)"
+        "M4": "3년 가중평균 영업이익률 +17.9%, 변동폭 3.0%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +9.3%/yr"
       },
-      "eqs_excluded": []
+      "eqs_excluded": [],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "00302926",
@@ -2637,9 +3464,9 @@
       "eqs_m1": 86.5,
       "eqs_m2": 0.0,
       "eqs_m3": 24.1,
-      "eqs_m4": 68.1,
+      "eqs_m4": 70.8,
       "eqs_m5": 75.4,
-      "eqs_total": 50.8,
+      "eqs_total": 51.4,
       "eqs_grade": "C",
       "ticker": "064350",
       "market_cap": null,
@@ -2698,15 +3525,43 @@
         "ocf_to_revenue": 71,
         "eqs_total": 29
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 86.5,
+          "note": "3년 누적 OCF/영업이익=1.07"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": 0.0,
+          "note": "매출증가율 +33.4%, 매출채권+계약자산증가율 +157.4%, 차이 D=+124.0%p (동종업계 KSIC-31 27개사 P50=-1.6%p)"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 24.1,
+          "note": "부채비율=206% (동종업계 KSIC-31 30개사, P10/P50/P90=19/65/386%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 70.8,
+          "note": "3년 가중평균 영업이익률 +13.1%, 변동폭 11.4%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 75.4,
+          "note": "자본 CAGR +35.9%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=1.07",
         "M2": "매출증가율 +33.4%, 매출채권+계약자산증가율 +157.4%, 차이 D=+124.0%p (동종업계 KSIC-31 27개사 P50=-1.6%p)",
         "M3": "부채비율=206% (동종업계 KSIC-31 30개사, P10/P50/P90=19/65/386%)",
-        "M4": "3년 평균 영업이익률 +11.2% (동종업계 P50=+5.7%), 변동폭 11.4%p (P50=10.0%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +35.9%/yr (동종업계 KSIC-31 26개사, P50=+13.3%/yr)"
+        "M4": "3년 가중평균 영업이익률 +13.1%, 변동폭 11.4%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +35.9%/yr"
       },
-      "eqs_excluded": []
+      "eqs_excluded": [],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "00339391",
@@ -2725,9 +3580,9 @@
       "eqs_m1": 40.2,
       "eqs_m2": 21.7,
       "eqs_m3": 32.1,
-      "eqs_m4": 65.3,
+      "eqs_m4": 65.0,
       "eqs_m5": 100.0,
-      "eqs_total": 51.9,
+      "eqs_total": 51.8,
       "eqs_grade": "C",
       "ticker": "272210",
       "market_cap": null,
@@ -2786,15 +3641,43 @@
         "ocf_to_revenue": 14,
         "eqs_total": 43
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 40.2,
+          "note": "3년 누적 OCF/영업이익=0.68"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": 21.7,
+          "note": "매출증가율 +30.7%, 매출채권증가율 +45.6%, 차이 D=+14.9%p (동종업계 KSIC-262 130개사 P50=-1.7%p)"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 32.1,
+          "note": "부채비율=107% (동종업계 KSIC-262 134개사, P10/P50/P90=19/70/211%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 65.0,
+          "note": "3년 가중평균 영업이익률 +4.9%, 변동폭 4.6%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 100.0,
+          "note": "자본 CAGR +52.4%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=0.68",
         "M2": "매출증가율 +30.7%, 매출채권증가율 +45.6%, 차이 D=+14.9%p (동종업계 KSIC-262 130개사 P50=-1.7%p)",
         "M3": "부채비율=107% (동종업계 KSIC-262 134개사, P10/P50/P90=19/70/211%)",
-        "M4": "3년 평균 영업이익률 +5.0% (동종업계 P50=+2.8%), 변동폭 4.6%p (P50=6.8%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +52.4%/yr (동종업계 KSIC-262 124개사, P50=+5.4%/yr)"
+        "M4": "3년 가중평균 영업이익률 +4.9%, 변동폭 4.6%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +52.4%/yr"
       },
-      "eqs_excluded": []
+      "eqs_excluded": [],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "00356361",
@@ -2813,10 +3696,10 @@
       "eqs_m1": 100.0,
       "eqs_m2": 75.3,
       "eqs_m3": 33.0,
-      "eqs_m4": 57.5,
+      "eqs_m4": 54.6,
       "eqs_m5": 53.9,
-      "eqs_total": 63.9,
-      "eqs_grade": "C",
+      "eqs_total": 63.4,
+      "eqs_grade": "B",
       "ticker": "051910",
       "market_cap": null,
       "dart_url": "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260313001195",
@@ -2874,15 +3757,43 @@
         "ocf_to_revenue": 100,
         "eqs_total": 100
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 100.0,
+          "note": "3년 누적 OCF/영업이익=4.92"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": 75.3,
+          "note": "매출증가율 -6.1%, 매출채권증가율 -17.6%, 차이 D=-11.5%p (동종업계 KSIC-201 50개사 P50=-3.5%p)"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 33.0,
+          "note": "부채비율=115% (동종업계 KSIC-201 51개사, P10/P50/P90=21/74/215%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 54.6,
+          "note": "3년 가중평균 영업이익률 +2.7%, 변동폭 2.7%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 53.9,
+          "note": "자본 CAGR +7.3%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=4.92",
         "M2": "매출증가율 -6.1%, 매출채권증가율 -17.6%, 차이 D=-11.5%p (동종업계 KSIC-201 50개사 P50=-3.5%p)",
         "M3": "부채비율=115% (동종업계 KSIC-201 51개사, P10/P50/P90=21/74/215%)",
-        "M4": "3년 평균 영업이익률 +3.0% (동종업계 P50=+3.3%), 변동폭 2.7%p (P50=5.4%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +7.3%/yr (동종업계 KSIC-201 49개사, P50=+5.9%/yr)"
+        "M4": "3년 가중평균 영업이익률 +2.7%, 변동폭 2.7%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +7.3%/yr"
       },
-      "eqs_excluded": []
+      "eqs_excluded": [],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "00382199",
@@ -2898,18 +3809,18 @@
       "operating_cashflow": 97309.0,
       "investing_cashflow": -109038.0,
       "financing_cashflow": 12506.0,
-      "eqs_m1": 46.7,
+      "eqs_m1": null,
       "eqs_m2": null,
-      "eqs_m3": 0.0,
+      "eqs_m3": null,
       "eqs_m4": null,
-      "eqs_m5": 28.6,
-      "eqs_total": 25.1,
-      "eqs_grade": "F",
+      "eqs_m5": null,
+      "eqs_total": 58.3,
+      "eqs_grade": "C",
       "ticker": "055550",
       "market_cap": null,
       "dart_url": "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260318000826",
       "industry_code": "64992",
-      "is_financial": false,
+      "is_financial": true,
       "latest_year": 2025,
       "history": {
         "years": [
@@ -2952,18 +3863,43 @@
         "ocf_to_revenue": 71,
         "eqs_total": 71
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
-      "eqs_module_notes": {
-        "M1": "3년 누적 OCF/영업이익=0.76",
-        "M2": "금융업 — 매출채권 개념 부적합으로 적용 제외",
-        "M3": "부채비율=1202% (동종업계 KSIC-649 99개사, P10/P50/P90=9/66/672%)",
-        "M4": "V3 비교에는 3개 사업연도 영업이익률 필요",
-        "M5": "자본 CAGR +3.5%/yr (동종업계 KSIC-649 92개사, P50=+6.3%/yr)"
+      "eqs_method": "feqs_v1_financial_peer_percentile_2021_2025",
+      "eqs_modules": {
+        "F1": {
+          "label": "주주환원",
+          "score": 79.0,
+          "note": "3년 가중평균 배당수익률과 DPS 유지·성장 점수를 금융업 안에서 비교"
+        },
+        "F2": {
+          "label": "ROE 품질",
+          "score": 76.3,
+          "note": "3년 가중평균 ROE를 금융업 동료와 비교"
+        },
+        "F3": {
+          "label": "자본 완충력",
+          "score": 52.1,
+          "note": "최근 자본총계/자산총계로 손실 완충력을 비교"
+        },
+        "F4": {
+          "label": "이익 전환",
+          "score": 50.0,
+          "note": "순이익/영업이익 비율로 영업이익이 최종 이익으로 남는 정도를 비교"
+        },
+        "F5": {
+          "label": "자본 성장성",
+          "score": 34.1,
+          "note": "최근 자본총계 CAGR로 주주의 몫 성장성을 비교"
+        }
       },
-      "eqs_excluded": [
-        "M2",
-        "M4"
-      ]
+      "eqs_module_notes": {
+        "F1": "3년 가중평균 배당수익률과 DPS 유지·성장 점수를 금융업 안에서 비교",
+        "F2": "3년 가중평균 ROE를 금융업 동료와 비교",
+        "F3": "최근 자본총계/자산총계로 손실 완충력을 비교",
+        "F4": "순이익/영업이익 비율로 영업이익이 최종 이익으로 남는 정도를 비교",
+        "F5": "최근 자본총계 CAGR로 주주의 몫 성장성을 비교"
+      },
+      "eqs_excluded": [],
+      "eqs_profile_note": "금융사는 일반기업과 재무제표 구조가 달라 별도 기준으로 평가합니다. 배당, ROE, 자본 여력, 이익 전환, 자본 성장성을 금융업 안에서 비교합니다."
     },
     {
       "corp_code": "00413046",
@@ -2982,9 +3918,9 @@
       "eqs_m1": 65.3,
       "eqs_m2": 13.8,
       "eqs_m3": 65.5,
-      "eqs_m4": 85.1,
+      "eqs_m4": 86.3,
       "eqs_m5": 46.3,
-      "eqs_total": 55.2,
+      "eqs_total": 55.4,
       "eqs_grade": "C",
       "ticker": "068270",
       "market_cap": null,
@@ -3033,15 +3969,43 @@
         "_sector": "바이오/제약",
         "_size": 2
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 65.3,
+          "note": "3년 누적 OCF/영업이익=0.90"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": 13.8,
+          "note": "매출증가율 +17.0%, 매출채권증가율 +47.3%, 차이 D=+30.3%p (동종업계 KSIC-211 43개사 P50=-13.1%p)"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 65.5,
+          "note": "부채비율=29% (동종업계 KSIC-211 45개사, P10/P50/P90=8/46/200%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 86.3,
+          "note": "3년 가중평균 영업이익률 +23.6%, 변동폭 16.1%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 46.3,
+          "note": "자본 CAGR +0.7%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=0.90",
         "M2": "매출증가율 +17.0%, 매출채권증가율 +47.3%, 차이 D=+30.3%p (동종업계 KSIC-211 43개사 P50=-13.1%p)",
         "M3": "부채비율=29% (동종업계 KSIC-211 45개사, P10/P50/P90=8/46/200%)",
-        "M4": "3년 평균 영업이익률 +23.9% (동종업계 P50=-21.8%), 변동폭 16.1%p (P50=43.2%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +0.7%/yr (동종업계 KSIC-211 39개사, P50=+2.8%/yr)"
+        "M4": "3년 가중평균 영업이익률 +23.6%, 변동폭 16.1%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +0.7%/yr"
       },
-      "eqs_excluded": []
+      "eqs_excluded": [],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "00547583",
@@ -3057,18 +4021,18 @@
       "operating_cashflow": -19625.0,
       "investing_cashflow": -39461.0,
       "financing_cashflow": 95278.0,
-      "eqs_m1": 0.0,
+      "eqs_m1": null,
       "eqs_m2": null,
-      "eqs_m3": 0.0,
-      "eqs_m4": 70.0,
-      "eqs_m5": 51.9,
-      "eqs_total": 30.5,
-      "eqs_grade": "F",
+      "eqs_m3": null,
+      "eqs_m4": null,
+      "eqs_m5": null,
+      "eqs_total": 63.9,
+      "eqs_grade": "B",
       "ticker": "086790",
       "market_cap": null,
       "dart_url": "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260316001292",
       "industry_code": "64992",
-      "is_financial": false,
+      "is_financial": true,
       "latest_year": 2025,
       "history": {
         "years": [
@@ -3111,17 +4075,43 @@
         "ocf_to_revenue": 14,
         "eqs_total": 14
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
-      "eqs_module_notes": {
-        "M1": "3년 누적 OCF/영업이익=-0.94",
-        "M2": "금융업 — 매출채권 개념 부적합으로 적용 제외",
-        "M3": "부채비율=1378% (동종업계 KSIC-649 99개사, P10/P50/P90=9/66/672%)",
-        "M4": "3년 평균 영업이익률 +594.6% (동종업계 P50=+7.2%), 변동폭 716.3%p (P50=5.6%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +6.6%/yr (동종업계 KSIC-649 92개사, P50=+6.3%/yr)"
+      "eqs_method": "feqs_v1_financial_peer_percentile_2021_2025",
+      "eqs_modules": {
+        "F1": {
+          "label": "주주환원",
+          "score": 100.0,
+          "note": "3년 가중평균 배당수익률과 DPS 유지·성장 점수를 금융업 안에서 비교"
+        },
+        "F2": {
+          "label": "ROE 품질",
+          "score": 80.2,
+          "note": "3년 가중평균 ROE를 금융업 동료와 비교"
+        },
+        "F3": {
+          "label": "자본 완충력",
+          "score": 25.0,
+          "note": "최근 자본총계/자산총계로 손실 완충력을 비교"
+        },
+        "F4": {
+          "label": "이익 전환",
+          "score": 63.0,
+          "note": "순이익/영업이익 비율로 영업이익이 최종 이익으로 남는 정도를 비교"
+        },
+        "F5": {
+          "label": "자본 성장성",
+          "score": 51.4,
+          "note": "최근 자본총계 CAGR로 주주의 몫 성장성을 비교"
+        }
       },
-      "eqs_excluded": [
-        "M2"
-      ]
+      "eqs_module_notes": {
+        "F1": "3년 가중평균 배당수익률과 DPS 유지·성장 점수를 금융업 안에서 비교",
+        "F2": "3년 가중평균 ROE를 금융업 동료와 비교",
+        "F3": "최근 자본총계/자산총계로 손실 완충력을 비교",
+        "F4": "순이익/영업이익 비율로 영업이익이 최종 이익으로 남는 정도를 비교",
+        "F5": "최근 자본총계 CAGR로 주주의 몫 성장성을 비교"
+      },
+      "eqs_excluded": [],
+      "eqs_profile_note": "금융사는 일반기업과 재무제표 구조가 달라 별도 기준으로 평가합니다. 배당, ROE, 자본 여력, 이익 전환, 자본 성장성을 금융업 안에서 비교합니다."
     },
     {
       "corp_code": "00631518",
@@ -3139,11 +4129,11 @@
       "financing_cashflow": 23457.0,
       "eqs_m1": 100.0,
       "eqs_m2": 79.5,
-      "eqs_m3": 12.1,
-      "eqs_m4": 58.0,
-      "eqs_m5": 68.8,
-      "eqs_total": 63.7,
-      "eqs_grade": "C",
+      "eqs_m3": 9.5,
+      "eqs_m4": 58.7,
+      "eqs_m5": 68.6,
+      "eqs_total": 63.3,
+      "eqs_grade": "B",
       "ticker": "096770",
       "market_cap": null,
       "dart_url": "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260316000827",
@@ -3201,15 +4191,43 @@
         "ocf_to_revenue": 33,
         "eqs_total": 67
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 100.0,
+          "note": "3년 누적 OCF/영업이익=3.70"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": 79.5,
+          "note": "매출증가율 +7.5%, 매출채권증가율 -13.3%, 차이 D=-20.7%p (동종업계 MARKET 2356개사 P50=-1.4%p)"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 9.5,
+          "note": "부채비율=190% (동종업계 MARKET 2450개사, P10/P50/P90=14/67/227%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 58.7,
+          "note": "3년 가중평균 영업이익률 +0.8%, 변동폭 2.0%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 68.6,
+          "note": "자본 CAGR +10.1%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=3.70",
         "M2": "매출증가율 +7.5%, 매출채권증가율 -13.3%, 차이 D=-20.7%p (동종업계 MARKET 2356개사 P50=-1.4%p)",
-        "M3": "부채비율=190% (동종업계 MARKET 2644개사, P10/P50/P90=14/66/243%)",
-        "M4": "3년 평균 영업이익률 +1.1% (동종업계 P50=+2.7%), 변동폭 2.0%p (P50=7.1%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +10.1%/yr (동종업계 MARKET 2426개사, P50=+4.6%/yr)"
+        "M3": "부채비율=190% (동종업계 MARKET 2450개사, P10/P50/P90=14/67/227%)",
+        "M4": "3년 가중평균 영업이익률 +0.8%, 변동폭 2.0%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +10.1%/yr"
       },
-      "eqs_excluded": []
+      "eqs_excluded": [],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "00688996",
@@ -3225,18 +4243,18 @@
       "operating_cashflow": 42264.0,
       "investing_cashflow": -55379.0,
       "financing_cashflow": 57979.0,
-      "eqs_m1": 28.1,
+      "eqs_m1": null,
       "eqs_m2": null,
-      "eqs_m3": 0.0,
-      "eqs_m4": 67.0,
-      "eqs_m5": 17.0,
-      "eqs_total": 28.0,
-      "eqs_grade": "F",
+      "eqs_m3": null,
+      "eqs_m4": null,
+      "eqs_m5": null,
+      "eqs_total": 56.5,
+      "eqs_grade": "C",
       "ticker": "105560",
       "market_cap": null,
       "dart_url": "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260324000835",
       "industry_code": "64992",
-      "is_financial": false,
+      "is_financial": true,
       "latest_year": 2025,
       "history": {
         "years": [
@@ -3279,17 +4297,43 @@
         "ocf_to_revenue": 43,
         "eqs_total": 43
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
-      "eqs_module_notes": {
-        "M1": "3년 누적 OCF/영업이익=0.54",
-        "M2": "금융업 — 매출채권 개념 부적합으로 적용 제외",
-        "M3": "부채비율=1212% (동종업계 KSIC-649 99개사, P10/P50/P90=9/66/672%)",
-        "M4": "3년 평균 영업이익률 +65.9% (동종업계 P50=+7.2%), 변동폭 11.6%p (P50=5.6%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +1.6%/yr (동종업계 KSIC-649 92개사, P50=+6.3%/yr)"
+      "eqs_method": "feqs_v1_financial_peer_percentile_2021_2025",
+      "eqs_modules": {
+        "F1": {
+          "label": "주주환원",
+          "score": 78.2,
+          "note": "3년 가중평균 배당수익률과 DPS 유지·성장 점수를 금융업 안에서 비교"
+        },
+        "F2": {
+          "label": "ROE 품질",
+          "score": 81.1,
+          "note": "3년 가중평균 ROE를 금융업 동료와 비교"
+        },
+        "F3": {
+          "label": "자본 완충력",
+          "score": 50.0,
+          "note": "최근 자본총계/자산총계로 손실 완충력을 비교"
+        },
+        "F4": {
+          "label": "이익 전환",
+          "score": 49.6,
+          "note": "순이익/영업이익 비율로 영업이익이 최종 이익으로 남는 정도를 비교"
+        },
+        "F5": {
+          "label": "자본 성장성",
+          "score": 23.4,
+          "note": "최근 자본총계 CAGR로 주주의 몫 성장성을 비교"
+        }
       },
-      "eqs_excluded": [
-        "M2"
-      ]
+      "eqs_module_notes": {
+        "F1": "3년 가중평균 배당수익률과 DPS 유지·성장 점수를 금융업 안에서 비교",
+        "F2": "3년 가중평균 ROE를 금융업 동료와 비교",
+        "F3": "최근 자본총계/자산총계로 손실 완충력을 비교",
+        "F4": "순이익/영업이익 비율로 영업이익이 최종 이익으로 남는 정도를 비교",
+        "F5": "최근 자본총계 CAGR로 주주의 몫 성장성을 비교"
+      },
+      "eqs_excluded": [],
+      "eqs_profile_note": "금융사는 일반기업과 재무제표 구조가 달라 별도 기준으로 평가합니다. 배당, ROE, 자본 여력, 이익 전환, 자본 성장성을 금융업 안에서 비교합니다."
     },
     {
       "corp_code": "00860332",
@@ -3305,18 +4349,18 @@
       "operating_cashflow": -64720.0,
       "investing_cashflow": -65523.0,
       "financing_cashflow": 138244.0,
-      "eqs_m1": 0.0,
+      "eqs_m1": null,
       "eqs_m2": null,
-      "eqs_m3": 0.0,
-      "eqs_m4": 70.0,
-      "eqs_m5": 44.5,
-      "eqs_total": 28.6,
-      "eqs_grade": "F",
+      "eqs_m3": null,
+      "eqs_m4": null,
+      "eqs_m5": null,
+      "eqs_total": 68.3,
+      "eqs_grade": "B",
       "ticker": "138040",
       "market_cap": null,
       "dart_url": "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260406004144",
       "industry_code": "64992",
-      "is_financial": false,
+      "is_financial": true,
       "latest_year": 2025,
       "history": {
         "years": [
@@ -3359,17 +4403,43 @@
         "ocf_to_revenue": 0,
         "eqs_total": 29
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
-      "eqs_module_notes": {
-        "M1": "3년 누적 OCF/영업이익=-1.30",
-        "M2": "금융업 — 매출채권 개념 부적합으로 적용 제외",
-        "M3": "부채비율=1103% (동종업계 KSIC-649 99개사, P10/P50/P90=9/66/672%)",
-        "M4": "3년 평균 영업이익률 +261.4% (동종업계 P50=+7.2%), 변동폭 424.9%p (P50=5.6%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +5.6%/yr (동종업계 KSIC-649 92개사, P50=+6.3%/yr)"
+      "eqs_method": "feqs_v1_financial_peer_percentile_2021_2025",
+      "eqs_modules": {
+        "F1": {
+          "label": "주주환원",
+          "score": 52.5,
+          "note": "3년 가중평균 배당수익률과 DPS 유지·성장 점수를 금융업 안에서 비교"
+        },
+        "F2": {
+          "label": "ROE 품질",
+          "score": 100.0,
+          "note": "3년 가중평균 ROE를 금융업 동료와 비교"
+        },
+        "F3": {
+          "label": "자본 완충력",
+          "score": 75.0,
+          "note": "최근 자본총계/자산총계로 손실 완충력을 비교"
+        },
+        "F4": {
+          "label": "이익 전환",
+          "score": 67.8,
+          "note": "순이익/영업이익 비율로 영업이익이 최종 이익으로 남는 정도를 비교"
+        },
+        "F5": {
+          "label": "자본 성장성",
+          "score": 46.3,
+          "note": "최근 자본총계 CAGR로 주주의 몫 성장성을 비교"
+        }
       },
-      "eqs_excluded": [
-        "M2"
-      ]
+      "eqs_module_notes": {
+        "F1": "3년 가중평균 배당수익률과 DPS 유지·성장 점수를 금융업 안에서 비교",
+        "F2": "3년 가중평균 ROE를 금융업 동료와 비교",
+        "F3": "최근 자본총계/자산총계로 손실 완충력을 비교",
+        "F4": "순이익/영업이익 비율로 영업이익이 최종 이익으로 남는 정도를 비교",
+        "F5": "최근 자본총계 CAGR로 주주의 몫 성장성을 비교"
+      },
+      "eqs_excluded": [],
+      "eqs_profile_note": "금융사는 일반기업과 재무제표 구조가 달라 별도 기준으로 평가합니다. 배당, ROE, 자본 여력, 이익 전환, 자본 성장성을 금융업 안에서 비교합니다."
     },
     {
       "corp_code": "00877059",
@@ -3439,15 +4509,43 @@
         "_sector": "바이오/제약",
         "_size": 2
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 100.0,
+          "note": "3년 누적 OCF/영업이익=1.24"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": 79.7,
+          "note": "매출증가율 +0.2%, 매출채권+계약자산증가율 -37.4%, 차이 D=-37.6%p (동종업계 KSIC-211 43개사 P50=-13.1%p)"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 49.1,
+          "note": "부채비율=48% (동종업계 KSIC-211 45개사, P10/P50/P90=8/46/200%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 91.2,
+          "note": "3년 가중평균 영업이익률 +37.4%, 변동폭 16.4%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 16.4,
+          "note": "자본 CAGR -12.9%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=1.24",
         "M2": "매출증가율 +0.2%, 매출채권+계약자산증가율 -37.4%, 차이 D=-37.6%p (동종업계 KSIC-211 43개사 P50=-13.1%p)",
         "M3": "부채비율=48% (동종업계 KSIC-211 45개사, P10/P50/P90=8/46/200%)",
-        "M4": "3년 평균 영업이익률 +34.9% (동종업계 P50=-21.8%), 변동폭 16.4%p (P50=43.2%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR -12.9%/yr (동종업계 KSIC-211 39개사, P50=+2.8%/yr)"
+        "M4": "3년 가중평균 영업이익률 +37.4%, 변동폭 16.4%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR -12.9%/yr"
       },
-      "eqs_excluded": []
+      "eqs_excluded": [],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "01205709",
@@ -3466,15 +4564,15 @@
       "eqs_m1": 100.0,
       "eqs_m2": null,
       "eqs_m3": 24.4,
-      "eqs_m4": 42.6,
+      "eqs_m4": 47.3,
       "eqs_m5": 91.1,
-      "eqs_total": 64.5,
-      "eqs_grade": "C",
+      "eqs_total": 65.7,
+      "eqs_grade": "B",
       "ticker": "267250",
       "market_cap": null,
       "dart_url": "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260320000872",
       "industry_code": "64992",
-      "is_financial": false,
+      "is_financial": true,
       "latest_year": 2025,
       "history": {
         "years": [
@@ -3527,17 +4625,45 @@
         "ocf_to_revenue": 75,
         "eqs_total": 75
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 100.0,
+          "note": "3년 누적 OCF/영업이익=1.69"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": null,
+          "note": "금융업 — 매출채권 개념 부적합으로 적용 제외"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 24.4,
+          "note": "부채비율=159% (동종업계 KSIC-649 99개사, P10/P50/P90=9/66/672%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 47.3,
+          "note": "3년 가중평균 영업이익률 +6.3%, 변동폭 5.2%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 91.1,
+          "note": "자본 CAGR +14.3%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=1.69",
         "M2": "금융업 — 매출채권 개념 부적합으로 적용 제외",
         "M3": "부채비율=159% (동종업계 KSIC-649 99개사, P10/P50/P90=9/66/672%)",
-        "M4": "3년 평균 영업이익률 +5.4% (동종업계 P50=+7.2%), 변동폭 5.2%p (P50=5.6%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +14.3%/yr (동종업계 KSIC-649 92개사, P50=+6.3%/yr)"
+        "M4": "3년 가중평균 영업이익률 +6.3%, 변동폭 5.2%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +14.3%/yr"
       },
       "eqs_excluded": [
         "M2"
-      ]
+      ],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "01205851",
@@ -3556,9 +4682,9 @@
       "eqs_m1": 79.3,
       "eqs_m2": 60.5,
       "eqs_m3": 31.2,
-      "eqs_m4": 85.3,
+      "eqs_m4": 85.0,
       "eqs_m5": 100.0,
-      "eqs_total": 71.3,
+      "eqs_total": 71.2,
       "eqs_grade": "B",
       "ticker": "267260",
       "market_cap": null,
@@ -3617,15 +4743,43 @@
         "ocf_to_revenue": 86,
         "eqs_total": 100
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 79.3,
+          "note": "3년 누적 OCF/영업이익=1.00"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": 60.5,
+          "note": "매출증가율 +22.8%, 매출채권+계약자산증가율 +8.8%, 차이 D=-14.0%p (동종업계 KSIC-281 36개사 P50=-8.6%p)"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 31.2,
+          "note": "부채비율=135% (동종업계 KSIC-281 36개사, P10/P50/P90=18/93/235%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 85.0,
+          "note": "3년 가중평균 영업이익률 +20.9%, 변동폭 12.7%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 100.0,
+          "note": "자본 CAGR +38.7%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=1.00",
         "M2": "매출증가율 +22.8%, 매출채권+계약자산증가율 +8.8%, 차이 D=-14.0%p (동종업계 KSIC-281 36개사 P50=-8.6%p)",
         "M3": "부채비율=135% (동종업계 KSIC-281 36개사, P10/P50/P90=18/93/235%)",
-        "M4": "3년 평균 영업이익률 +18.7% (동종업계 P50=+0.5%), 변동폭 12.7%p (P50=13.1%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +38.7%/yr (동종업계 KSIC-281 34개사, P50=+9.0%/yr)"
+        "M4": "3년 가중평균 영업이익률 +20.9%, 변동폭 12.7%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +38.7%/yr"
       },
-      "eqs_excluded": []
+      "eqs_excluded": [],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "01316245",
@@ -3644,10 +4798,10 @@
       "eqs_m1": 79.2,
       "eqs_m2": 48.7,
       "eqs_m3": 12.8,
-      "eqs_m4": 74.5,
+      "eqs_m4": 74.7,
       "eqs_m5": 100.0,
-      "eqs_total": 63.0,
-      "eqs_grade": "C",
+      "eqs_total": 63.1,
+      "eqs_grade": "B",
       "ticker": "298040",
       "market_cap": null,
       "dart_url": "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260323001004",
@@ -3705,15 +4859,43 @@
         "ocf_to_revenue": 57,
         "eqs_total": 86
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 79.2,
+          "note": "3년 누적 OCF/영업이익=0.99"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": 48.7,
+          "note": "매출증가율 +21.9%, 매출채권+계약자산증가율 +14.4%, 차이 D=-7.5%p (동종업계 KSIC-281 36개사 P50=-8.6%p)"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 12.8,
+          "note": "부채비율=190% (동종업계 KSIC-281 36개사, P10/P50/P90=18/93/235%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 74.7,
+          "note": "3년 가중평균 영업이익률 +9.7%, 변동폭 6.5%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 100.0,
+          "note": "자본 CAGR +42.6%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=0.99",
         "M2": "매출증가율 +21.9%, 매출채권+계약자산증가율 +14.4%, 차이 D=-7.5%p (동종업계 KSIC-281 36개사 P50=-8.6%p)",
         "M3": "부채비율=190% (동종업계 KSIC-281 36개사, P10/P50/P90=18/93/235%)",
-        "M4": "3년 평균 영업이익률 +8.6% (동종업계 P50=+0.5%), 변동폭 6.5%p (P50=13.1%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +42.6%/yr (동종업계 KSIC-281 34개사, P50=+9.0%/yr)"
+        "M4": "3년 가중평균 영업이익률 +9.7%, 변동폭 6.5%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +42.6%/yr"
       },
-      "eqs_excluded": []
+      "eqs_excluded": [],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "01350869",
@@ -3729,18 +4911,18 @@
       "operating_cashflow": 136424.0,
       "investing_cashflow": -98806.0,
       "financing_cashflow": 76853.0,
-      "eqs_m1": 49.9,
+      "eqs_m1": null,
       "eqs_m2": null,
-      "eqs_m3": 0.0,
-      "eqs_m4": 68.7,
-      "eqs_m5": 51.1,
-      "eqs_total": 42.4,
-      "eqs_grade": "D",
+      "eqs_m3": null,
+      "eqs_m4": null,
+      "eqs_m5": null,
+      "eqs_total": 61.5,
+      "eqs_grade": "B",
       "ticker": "316140",
       "market_cap": null,
       "dart_url": "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260313001235",
       "industry_code": "64992",
-      "is_financial": false,
+      "is_financial": true,
       "latest_year": 2025,
       "history": {
         "years": [
@@ -3783,17 +4965,43 @@
         "ocf_to_revenue": 100,
         "eqs_total": 57
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
-      "eqs_module_notes": {
-        "M1": "3년 누적 OCF/영업이익=0.80",
-        "M2": "금융업 — 매출채권 개념 부적합으로 적용 제외",
-        "M3": "부채비율=1489% (동종업계 KSIC-649 99개사, P10/P50/P90=9/66/672%)",
-        "M4": "3년 평균 영업이익률 +212.3% (동종업계 P50=+7.2%), 변동폭 216.1%p (P50=5.6%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +6.5%/yr (동종업계 KSIC-649 92개사, P50=+6.3%/yr)"
+      "eqs_method": "feqs_v1_financial_peer_percentile_2021_2025",
+      "eqs_modules": {
+        "F1": {
+          "label": "주주환원",
+          "score": 100.0,
+          "note": "3년 가중평균 배당수익률과 DPS 유지·성장 점수를 금융업 안에서 비교"
+        },
+        "F2": {
+          "label": "ROE 품질",
+          "score": 78.8,
+          "note": "3년 가중평균 ROE를 금융업 동료와 비교"
+        },
+        "F3": {
+          "label": "자본 완충력",
+          "score": 0.0,
+          "note": "최근 자본총계/자산총계로 손실 완충력을 비교"
+        },
+        "F4": {
+          "label": "이익 전환",
+          "score": 78.0,
+          "note": "순이익/영업이익 비율로 영업이익이 최종 이익으로 남는 정도를 비교"
+        },
+        "F5": {
+          "label": "자본 성장성",
+          "score": 50.9,
+          "note": "최근 자본총계 CAGR로 주주의 몫 성장성을 비교"
+        }
       },
-      "eqs_excluded": [
-        "M2"
-      ]
+      "eqs_module_notes": {
+        "F1": "3년 가중평균 배당수익률과 DPS 유지·성장 점수를 금융업 안에서 비교",
+        "F2": "3년 가중평균 ROE를 금융업 동료와 비교",
+        "F3": "최근 자본총계/자산총계로 손실 완충력을 비교",
+        "F4": "순이익/영업이익 비율로 영업이익이 최종 이익으로 남는 정도를 비교",
+        "F5": "최근 자본총계 CAGR로 주주의 몫 성장성을 비교"
+      },
+      "eqs_excluded": [],
+      "eqs_profile_note": "금융사는 일반기업과 재무제표 구조가 달라 별도 기준으로 평가합니다. 배당, ROE, 자본 여력, 이익 전환, 자본 성장성을 금융업 안에서 비교합니다."
     },
     {
       "corp_code": "01390344",
@@ -3812,9 +5020,9 @@
       "eqs_m1": 100.0,
       "eqs_m2": 40.1,
       "eqs_m3": 28.7,
-      "eqs_m4": 50.9,
+      "eqs_m4": 54.4,
       "eqs_m5": 73.3,
-      "eqs_total": 58.6,
+      "eqs_total": 59.3,
       "eqs_grade": "C",
       "ticker": "329180",
       "market_cap": null,
@@ -3873,15 +5081,43 @@
         "ocf_to_revenue": 100,
         "eqs_total": 67
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 100.0,
+          "note": "3년 누적 OCF/영업이익=2.25"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": 40.1,
+          "note": "매출증가율 +21.4%, 매출채권+계약자산증가율 +30.8%, 차이 D=+9.5%p (동종업계 KSIC-31 27개사 P50=-1.6%p)"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 28.7,
+          "note": "부채비율=180% (동종업계 KSIC-31 30개사, P10/P50/P90=19/65/386%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 54.4,
+          "note": "3년 가중평균 영업이익률 +7.7%, 변동폭 10.1%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 73.3,
+          "note": "자본 CAGR +33.9%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=2.25",
         "M2": "매출증가율 +21.4%, 매출채권+계약자산증가율 +30.8%, 차이 D=+9.5%p (동종업계 KSIC-31 27개사 P50=-1.6%p)",
         "M3": "부채비율=180% (동종업계 KSIC-31 30개사, P10/P50/P90=19/65/386%)",
-        "M4": "3년 평균 영업이익률 +6.0% (동종업계 P50=+5.7%), 변동폭 10.1%p (P50=10.0%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +33.9%/yr (동종업계 KSIC-31 26개사, P50=+13.3%/yr)"
+        "M4": "3년 가중평균 영업이익률 +7.7%, 변동폭 10.1%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +33.9%/yr"
       },
-      "eqs_excluded": []
+      "eqs_excluded": [],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "01515323",
@@ -3900,10 +5136,10 @@
       "eqs_m1": 100.0,
       "eqs_m2": 55.8,
       "eqs_m3": 28.2,
-      "eqs_m4": 72.6,
+      "eqs_m4": 82.7,
       "eqs_m5": 51.7,
-      "eqs_total": 61.7,
-      "eqs_grade": "C",
+      "eqs_total": 63.7,
+      "eqs_grade": "B",
       "ticker": "373220",
       "market_cap": null,
       "dart_url": "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260312000217",
@@ -3961,15 +5197,43 @@
         "ocf_to_revenue": 100,
         "eqs_total": 100
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 100.0,
+          "note": "3년 누적 OCF/영업이익=3.42"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": 55.8,
+          "note": "매출증가율 -7.6%, 매출채권증가율 -12.8%, 차이 D=-5.2%p (동종업계 KSIC-282 20개사 P50=-2.4%p)"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 28.2,
+          "note": "부채비율=129% (동종업계 KSIC-282 20개사, P10/P50/P90=19/106/179%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 82.7,
+          "note": "3년 가중평균 영업이익률 +4.7%, 변동폭 4.2%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 51.7,
+          "note": "자본 CAGR +9.7%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=3.42",
         "M2": "매출증가율 -7.6%, 매출채권증가율 -12.8%, 차이 D=-5.2%p (동종업계 KSIC-282 20개사 P50=-2.4%p)",
         "M3": "부채비율=129% (동종업계 KSIC-282 20개사, P10/P50/P90=19/106/179%)",
-        "M4": "3년 평균 영업이익률 +4.8% (동종업계 P50=+0.5%), 변동폭 4.2%p (P50=12.7%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +9.7%/yr (동종업계 KSIC-28 83개사, P50=+8.8%/yr)"
+        "M4": "3년 가중평균 영업이익률 +4.7%, 변동폭 4.2%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +9.7%/yr"
       },
-      "eqs_excluded": []
+      "eqs_excluded": [],
+      "eqs_profile_note": null
     },
     {
       "corp_code": "01596425",
@@ -3996,7 +5260,7 @@
       "market_cap": null,
       "dart_url": "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260317000830",
       "industry_code": "64992",
-      "is_financial": false,
+      "is_financial": true,
       "latest_year": 2025,
       "history": {
         "years": [
@@ -4039,17 +5303,45 @@
         "ocf_to_revenue": 100,
         "eqs_total": 25
       },
-      "eqs_method": "v3_all_krx_ksic_percentile_rawaugmented_2021_2025",
+      "eqs_method": "v3_all_krx_percentile_m4_weighted_margin_2021_2025",
+      "eqs_modules": {
+        "M1": {
+          "label": "현금이익률",
+          "score": 4.1,
+          "note": "3년 누적 OCF/영업이익=0.08"
+        },
+        "M2": {
+          "label": "매출 회수 건전성",
+          "score": null,
+          "note": "금융업 — 매출채권 개념 부적합으로 적용 제외"
+        },
+        "M3": {
+          "label": "부채 건전성",
+          "score": 100.0,
+          "note": "부채비율=9% (동종업계 KSIC-649 99개사, P10/P50/P90=9/66/672%)"
+        },
+        "M4": {
+          "label": "본업 안정성",
+          "score": 70.0,
+          "note": "3년 가중평균 영업이익률 +362.9%, 변동폭 726.0%p — 수익성 70% + 안정성 30%"
+        },
+        "M5": {
+          "label": "자본 성장성",
+          "score": 100.0,
+          "note": "자본 CAGR +33.0%/yr"
+        }
+      },
       "eqs_module_notes": {
         "M1": "3년 누적 OCF/영업이익=0.08",
         "M2": "금융업 — 매출채권 개념 부적합으로 적용 제외",
         "M3": "부채비율=9% (동종업계 KSIC-649 99개사, P10/P50/P90=9/66/672%)",
-        "M4": "3년 평균 영업이익률 +241.9% (동종업계 P50=+7.2%), 변동폭 726.0%p (P50=5.6%p), 수익성 70% + 안정성 30%",
-        "M5": "자본 CAGR +33.0%/yr (동종업계 KSIC-649 92개사, P50=+6.3%/yr)"
+        "M4": "3년 가중평균 영업이익률 +362.9%, 변동폭 726.0%p — 수익성 70% + 안정성 30%",
+        "M5": "자본 CAGR +33.0%/yr"
       },
       "eqs_excluded": [
         "M2"
-      ]
+      ],
+      "eqs_profile_note": null
     }
   ]
 }

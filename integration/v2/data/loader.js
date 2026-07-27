@@ -56,11 +56,18 @@
       out.latest_year = fin.latest_year ?? null;
       out.eqs = fin.eqs_total != null ? Math.round(fin.eqs_total) : null;
       out.gr = fin.eqs_grade || "-";
+      out.eqs_modules = fin.eqs_modules || {};
+      out.eqs_profile_note = fin.eqs_profile_note || null;
       out.m1 = fin.eqs_m1 != null ? Math.round(fin.eqs_m1) : null;
       out.m2 = fin.eqs_m2 != null ? Math.round(fin.eqs_m2) : null;
       out.m3 = fin.eqs_m3 != null ? Math.round(fin.eqs_m3) : null;
       out.m4 = fin.eqs_m4 != null ? Math.round(fin.eqs_m4) : null;
       out.m5 = fin.eqs_m5 != null ? Math.round(fin.eqs_m5) : null;
+      out.f1 = fin.eqs_modules && fin.eqs_modules.F1 && fin.eqs_modules.F1.score != null ? Math.round(fin.eqs_modules.F1.score) : null;
+      out.f2 = fin.eqs_modules && fin.eqs_modules.F2 && fin.eqs_modules.F2.score != null ? Math.round(fin.eqs_modules.F2.score) : null;
+      out.f3 = fin.eqs_modules && fin.eqs_modules.F3 && fin.eqs_modules.F3.score != null ? Math.round(fin.eqs_modules.F3.score) : null;
+      out.f4 = fin.eqs_modules && fin.eqs_modules.F4 && fin.eqs_modules.F4.score != null ? Math.round(fin.eqs_modules.F4.score) : null;
+      out.f5 = fin.eqs_modules && fin.eqs_modules.F5 && fin.eqs_modules.F5.score != null ? Math.round(fin.eqs_modules.F5.score) : null;
       out.eqs_method = fin.eqs_method || null;
       out.eqs_excluded = fin.eqs_excluded || [];
       out.eqs_module_notes = Object.fromEntries(
