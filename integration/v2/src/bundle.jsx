@@ -950,7 +950,7 @@ function fmtVcAmount(v) {
 // UX-013: 상/하는 up/down 배열 소속이 아니라 type에서 파생 — 배열은 미러 기록이라
 // (실측: up/down 완전 대칭 1,378/1,378·143/143) 신호가 아니다. supply(상대가 공급자)=위,
 // customer(상대가 고객)=아래. 같은 (상대,type) 다연도 엣지는 최신 as_of로 병합.
-function splitVcSides(vc, topN) {
+function splitVcSides(vc, topN, opts) {
   const _idxV = (window.__realData && window.__realData.indexByCode) || {};
   const byKey = new Map();
   for (const side of ['up', 'down']) {
@@ -969,13 +969,52 @@ function splitVcSides(vc, topN) {
   const bySort = (arr) => arr.sort((a, b) => cmpTuple(rank(a), rank(b)));
   const above = bySort([...byKey.values()].filter(n => n.type === 'supply'));
   const below = bySort([...byKey.values()].filter(n => n.type !== 'supply'));
+  if (opts && opts.grouped) {
+    // UX-015 산업군 묶음 모드 — shown = 그룹에 실제로 표시되는 기업 전부
+    const pack = (arr) => {
+      const g = groupVcSide(arr, VC_MAX_GROUPS, VC_MAX_PER_GROUP);
+      const shown = g.groups.flatMap(x => x.items);
+      const hidden = g.groups.reduce((a, x) => a + x.hidden, 0);
+      return { shown, rest: [...g.restItems], groups: g.groups,
+               restGroupCount: g.restGroupCount, hiddenInGroups: hidden };
+    };
+    return { above: pack(above), below: pack(below) };
+  }
   const cut = (arr) => ({ shown: arr.slice(0, topN), rest: arr.slice(topN) });
   return { above: cut(above), below: cut(below) };
+}
+
+// UX-015: 밸류체인은 기업 나열이 아니라 **산업군 묶음**으로 읽는다 — "어느 산업에서 사와서
+// 어느 산업에 파는가". 랭킹 순서를 유지한 채 섹터로 접고(그룹 순서 = 최상위 멤버 순위),
+// 그룹 캡 5 · 그룹당 4를 넘으면 각각 묶음으로. 실측: 산업 수 위 최대 7·아래 최대 11·중앙값 1.
+const VC_MAX_GROUPS = 5;
+const VC_MAX_PER_GROUP = 4;
+
+function groupVcSide(items, maxGroups, maxPerGroup) {
+  const order = [];
+  const byKo = new Map();
+  for (const it of items) {           // items는 이미 rank 정렬됨
+    const ko = it.sectorKo || '기타';
+    if (!byKo.has(ko)) { byKo.set(ko, []); order.push(ko); }
+    byKo.get(ko).push(it);
+  }
+  const groups = order.slice(0, maxGroups).map(ko => {
+    const all = byKo.get(ko);
+    const pal = (window.SECTOR_PALETTE || []).find(s => s.ko === ko);
+    return { sectorKo: ko, color: (pal && pal.color) || VC_FLOW_COLOR,
+             items: all.slice(0, maxPerGroup), hidden: Math.max(0, all.length - maxPerGroup),
+             count: all.length,
+             amount: all.reduce((a, b) => a + (b.amount || 0), 0) };
+  });
+  const restKos = order.slice(maxGroups);
+  const restItems = restKos.flatMap(ko => byKo.get(ko));
+  return { groups, restGroupCount: restKos.length, restItems };
 }
 
 window.mergeEgoNeighbors = mergeEgoNeighbors;
 window.splitEgoSides = splitEgoSides;   // V-3 렌더 하네스가 페이지 내 분할 로직을 직접 조회
 window.splitVcSides = splitVcSides;
+window.groupVcSide = groupVcSide;
 
 // ─── Sector map: companies as glowing nodes inside the chosen sector ────
 const { useRef: _useRef, useEffect: _useEffect, useState: _useState, useMemo: _useMemo } = React;
@@ -1562,13 +1601,50 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
 
   const { above, below, left, right } = _useMemo(() => {
     if (isVc) {
-      const s = splitVcSides(vcData, TOP_N);
+      const s = splitVcSides(vcData, TOP_N, { grouped: true });
       // 밸류체인은 상하(흐름)만 — 가로축 없음(U-D14 문법 축 분리)
       return { above: s.above, below: s.below,
                left: { shown: [], rest: [] }, right: { shown: [], rest: [] } };
     }
     return splitEgoSides((anchor.layers && anchor.layers.governance) || [], TOP_N, SIDE_N);
   }, [anchor, isVc]);
+
+  // UX-015 레일 레이아웃 — 그룹(산업군)을 x축에 분배, 그룹 안에서 기업을 다시 분배.
+  //   sign<0: 공급처(위) / sign>0: 고객사(아래).  라벨=최외곽 · 기업=중간 · 레일=앵커쪽.
+  // 레일(앵커쪽) → 산업 라벨 → 기업 세로 스택(바깥). 그룹 내 기업을 수평으로 뿌리면
+  // 세그먼트 폭(≈95px)에 이름이 안 들어가 라벨이 뭉갠다(실측) — 세로 1행 1사로 고정.
+  const VC_RAIL_Y = 0.34, VC_LABEL_Y = 0.46, VC_NODE_Y = 0.60, VC_ROW_GAP = 0.115, VC_HALF = 0.88;
+  const buildVcSide = (side, sign) => {
+    const gs = side.groups || [];
+    const withBundleG = gs.length + ((side.restGroupCount || 0) > 0 ? 1 : 0);
+    if (!withBundleG) return { nodes: [], groups: [] };
+    const segW = (2 * VC_HALF) / withBundleG;
+    const nodes = [], groups = [];
+    for (let gi = 0; gi < withBundleG; gi++) {
+      const cxg = -VC_HALF + segW * (gi + 0.5);
+      const isRestGroup = gi >= gs.length;
+      if (isRestGroup) {
+        groups.push({ cx: cxg, label: '외 ' + side.restGroupCount + '개 산업',
+                      color: '#94a3b8', sign, isRest: true, count: side.rest.length });
+        nodes.push({ isBundle: true, side: sign < 0 ? 'above' : 'below', rest: side.rest,
+                     code: '__bundle_vc_' + (sign < 0 ? 'above' : 'below'),
+                     gx: cxg, gy: sign * VC_NODE_Y });
+        continue;
+      }
+      const g = gs[gi];
+      groups.push({ cx: cxg, label: g.sectorKo, color: g.color, sign,
+                    count: g.count, hidden: g.hidden, amount: g.amount, half: segW * 0.38,
+                    rows: g.items.length });
+      // 세로 스택 — 노드는 세그먼트 왼쪽 정렬, 이름은 그 오른쪽에 배치(겹침 0)
+      g.items.forEach((it, i) => {
+        nodes.push({ ...it, gx: cxg - segW * 0.34, gy: sign * (VC_NODE_Y + i * VC_ROW_GAP),
+                     isVcNode: true, groupIdx: gi, labelRight: true });
+      });
+    }
+    return { nodes, groups };
+  };
+  const vcAbove = _useMemo(() => (isVc ? buildVcSide(above, -1) : { nodes: [], groups: [] }), [isVc, above]);
+  const vcBelow = _useMemo(() => (isVc ? buildVcSide(below, 1) : { nodes: [], groups: [] }), [isVc, below]);
 
   // 세로 사이드: 가로로 펼친 행. 가로 사이드: 앵커 높이 좌우로 세로 살짝 퍼진 열.
   const layoutRow = (items, y) => {
@@ -1595,8 +1671,9 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
   const leftNodes  = _useMemo(() => layoutCol(withBundle(left, 'left'), -0.86), [left]);
   const rightNodes = _useMemo(() => layoutCol(withBundle(right, 'right'), 0.86), [right]);
   const allNodes = _useMemo(
-    () => [...aboveNodes, ...belowNodes, ...leftNodes, ...rightNodes],
-    [aboveNodes, belowNodes, leftNodes, rightNodes]
+    () => (isVc ? [...vcAbove.nodes, ...vcBelow.nodes]
+                : [...aboveNodes, ...belowNodes, ...leftNodes, ...rightNodes]),
+    [isVc, vcAbove, vcBelow, aboveNodes, belowNodes, leftNodes, rightNodes]
   );
 
   // V-3 렌더 하네스 훅 — 화면이 실제 채택한 분할 상태를 기계 검증용으로 노출(무해·읽기 전용).
@@ -1608,6 +1685,13 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
       below: below.shown.map(n => n.code), belowRest: below.rest.length,
       left:  left.shown.map(n => n.code),  leftRest:  left.rest.length,
       right: right.shown.map(n => n.code), rightRest: right.rest.length,
+      // UX-015 산업군 묶음 상태 (VC 전용)
+      vcGroups: isVc ? {
+        above: (above.groups || []).map(g => ({ ko: g.sectorKo, n: g.count, shown: g.items.length })),
+        below: (below.groups || []).map(g => ({ ko: g.sectorKo, n: g.count, shown: g.items.length })),
+        aboveRestGroups: above.restGroupCount || 0,
+        belowRestGroups: below.restGroupCount || 0,
+      } : null,
     };
   }, [anchor, isVc, hasVc, above, below, left, right]);
 
@@ -1683,8 +1767,61 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
       const EQUITY = new Set(['subsidiary', 'associate', 'significant']);
       const hits = [{ x: cx, y: cy, r: anchorR, isAnchor: true }];
 
+      // UX-015 밸류체인 레일: 앵커 ↔ 레일 트렁크 + 산업군 세그먼트 + 그룹 드롭.
+      // (기업마다 앵커까지 선을 뽑지 않는다 — 산업 단위로 읽히게)
+      if (isVc) {
+        const drawRailSide = (sideObj, sign, trunkLabel) => {
+          if (!sideObj.groups.length) return;
+          const railY = cy + sign * VC_RAIL_Y * baseR;
+          const ts0 = VC_TIER_STYLES.T1;
+          // 트렁크 (앵커 ↔ 레일 중앙)
+          ctx.strokeStyle = VC_FLOW_COLOR + 'cc'; ctx.lineWidth = 2; ctx.setLineDash([]);
+          ctx.beginPath(); ctx.moveTo(cx, cy + sign * haloR); ctx.lineTo(cx, railY); ctx.stroke();
+          if (sign < 0) drawChevron(cx, railY, cx, cy - haloR, VC_FLOW_COLOR + 'ee', 11, 2);
+          else drawChevron(cx, cy + haloR, cx, railY, VC_FLOW_COLOR + 'ee', 11, 2);
+          ctx.save();
+          ctx.font = '600 10px "IBM Plex Mono", ui-monospace, monospace';
+          ctx.textAlign = 'left'; ctx.fillStyle = VC_FLOW_COLOR + 'cc';
+          ctx.fillText(trunkLabel, cx + 8, cy + sign * (haloR + 22));
+          ctx.restore();
+          // 레일 본선
+          const xs = sideObj.groups.map(g => cx + g.cx * baseR);
+          const x0 = Math.min(...xs), x1 = Math.max(...xs);
+          ctx.strokeStyle = VC_FLOW_COLOR + '99'; ctx.lineWidth = 1.6;
+          ctx.beginPath(); ctx.moveTo(x0, railY); ctx.lineTo(x1, railY); ctx.stroke();
+          // 그룹별 드롭 + 세그먼트 캡 + 산업 라벨
+          sideObj.groups.forEach((g) => {
+            const gx = cx + g.cx * baseR;
+            const lastRowY = cy + sign * (VC_NODE_Y + Math.max(0, (g.rows || 1) - 1) * VC_ROW_GAP) * baseR;
+            // 레일 → 그룹 마지막 행까지 수직 스파인(세로 스택을 하나로 묶어 보이게)
+            ctx.strokeStyle = (g.isRest ? '#94a3b8' : g.color) + (g.isRest ? '66' : '55');
+            ctx.lineWidth = g.isRest ? 1 : 1.2;
+            ctx.setLineDash(g.isRest ? [2, 3] : []);
+            ctx.beginPath();
+            ctx.moveTo(g.isRest ? gx : gx - g.half * baseR * 0.9, railY);
+            ctx.lineTo(g.isRest ? gx : gx - g.half * baseR * 0.9, lastRowY);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            // 산업 라벨(레일 바로 바깥) + 집계
+            const ly = cy + sign * VC_LABEL_Y * baseR;
+            ctx.textAlign = g.isRest ? 'center' : 'left';
+            const lx = g.isRest ? gx : gx - g.half * baseR * 0.9;
+            ctx.fillStyle = (g.isRest ? '#94a3b8' : g.color) + 'ee';
+            ctx.font = '600 11px "IBM Plex Mono", ui-monospace, monospace';
+            ctx.fillText(g.label, lx, ly);
+            ctx.fillStyle = '#64748b'; ctx.font = '9px sans-serif';
+            const sub = g.isRest ? (g.count + '사')
+              : (g.count + '사' + (g.amount ? ' · ' + fmtVcAmount(g.amount) : ''));
+            ctx.fillText(sub, lx, ly + 11);
+          });
+        };
+        drawRailSide(vcAbove, -1, '공급처');
+        drawRailSide(vcBelow, 1, '고객사');
+      }
+
       // 관계선 + 화살표 (묶음 노드는 신원 없는 얇은 점선만)
       allNodes.forEach((n, i) => {
+        if (isVc) return;   // VC는 위 레일이 대신함
         const nx = cx + animPos[i].x * baseR, ny = cy + animPos[i].y * baseR;
         if (n.isBundle) {
           ctx.strokeStyle = 'rgba(148,163,184,0.35)';
@@ -1777,24 +1914,38 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
         const nodeColor = (n.sectorKo && (window.SECTOR_PALETTE || []).find(s => s.ko === n.sectorKo)?.color)
           || (isVc ? VC_FLOW_COLOR : (REL_STYLES[n.relType] || REL_STYLES.manual).color);
         const isHover = hoverCode === n.code;
+        // UX-015: 밸류체인은 노드 크기 = 신뢰등급 (T1 정형 공시 크게 / T2 서술 추출 작게)
+        const coreR = isVc ? ((n.tier === 'T1') ? 6.5 : (n.tier === 'T2') ? 4 : 3) : 5;
         ctx.globalAlpha = 0.8;
-        const r0 = isHover ? 26 : 20;
+        const r0 = (isHover ? 26 : 20) * (isVc ? (coreR / 5) : 1);
         const grd = ctx.createRadialGradient(nx, ny, 0, nx, ny, r0);
         grd.addColorStop(0, nodeColor + '99'); grd.addColorStop(1, nodeColor + '00');
         ctx.fillStyle = grd; ctx.beginPath(); ctx.arc(nx, ny, r0, 0, Math.PI * 2); ctx.fill();
         ctx.globalAlpha = 1;
-        ctx.fillStyle = nodeColor; ctx.beginPath(); ctx.arc(nx, ny, 5, 0, Math.PI * 2); ctx.fill();
-        // 가로축(비지분) 노드는 라벨을 위쪽으로 — 앵커와 같은 높이라 아래로 두면 겹친다.
-        const labelUp = n.isSide || n.gy < 0;
-        ctx.textAlign = 'center'; ctx.fillStyle = nodeColor; ctx.font = 'bold 9px sans-serif';
-        ctx.fillText(n.name, nx, labelUp ? ny - 13 : ny + 18);
-        ctx.fillStyle = '#64748b'; ctx.font = '8px sans-serif';
-        const subLabel = isVc
-          ? (n.type === 'supply' ? '공급처' : '고객사')
-            + (n.amount ? ' · ' + fmtVcAmount(n.amount) : '') + (n.as_of ? ' · ' + n.as_of : '')
-          : (REL_STYLES[n.relType] || REL_STYLES.manual).label + (n.detail ? ' · ' + n.detail : '');
-        ctx.fillText(subLabel, nx, labelUp ? ny - 4 : ny + 29);
-        hits.push({ x: nx, y: ny, r: 20, code: n.code, name: n.name, sectorKo: n.sectorKo });
+        ctx.fillStyle = nodeColor; ctx.beginPath(); ctx.arc(nx, ny, coreR, 0, Math.PI * 2); ctx.fill();
+        if (isVc && n.tier === 'T2') {   // 서술 추출은 테두리를 비워 '추정' 뉘앙스
+          ctx.strokeStyle = nodeColor; ctx.lineWidth = 1.2;
+          ctx.beginPath(); ctx.arc(nx, ny, coreR + 2, 0, Math.PI * 2); ctx.stroke();
+        }
+        if (n.labelRight) {
+          // UX-015 세로 스택: 노드 오른쪽에 이름 + 금액 한 줄씩(왼쪽 정렬)
+          ctx.textAlign = 'left';
+          ctx.fillStyle = nodeColor; ctx.font = 'bold 9px sans-serif';
+          ctx.fillText(n.name.length > 8 ? n.name.slice(0, 8) + '…' : n.name, nx + 10, ny - 1);
+          if (n.amount) {
+            ctx.fillStyle = '#64748b'; ctx.font = '8px sans-serif';
+            ctx.fillText(fmtVcAmount(n.amount) + (n.as_of ? ' · ' + n.as_of : ''), nx + 10, ny + 9);
+          }
+        } else {
+          const labelUp = n.isSide || n.gy < 0;
+          ctx.textAlign = 'center'; ctx.fillStyle = nodeColor; ctx.font = 'bold 9px sans-serif';
+          const nameY = labelUp ? ny - 13 : ny + 18;
+          ctx.fillText(n.name, nx, nameY);
+          ctx.fillStyle = '#64748b'; ctx.font = '8px sans-serif';
+          const s = REL_STYLES[n.relType] || REL_STYLES.manual;
+          ctx.fillText(s.label + (n.detail ? ' · ' + n.detail : ''), nx, labelUp ? nameY + 9 : nameY + 11);
+        }
+        hits.push({ x: nx, y: ny, r: isVc ? 14 : 20, code: n.code, name: n.name, sectorKo: n.sectorKo });
       });
 
       hitRef.current = hits;

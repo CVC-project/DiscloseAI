@@ -69,9 +69,13 @@ def oracle_merge(gov: list[dict]) -> list[dict]:
     return out
 
 
-def oracle_vc_split(vc: dict) -> dict:
-    """UX-013 계약의 독립 재구현 — 상/하는 up/down 배열이 아니라 type에서 파생.
-    (t,type) 병합 시 최신 as_of 채택. supply=위(공급처)/customer=아래(고객사)."""
+VC_MAX_GROUPS, VC_MAX_PER_GROUP = 5, 4  # bundle.jsx와 동일 상수
+
+
+def oracle_vc_split(vc: dict, sector_of) -> dict:
+    """UX-013 + UX-015 계약의 독립 재구현.
+    상/하 = up/down 배열이 아니라 type에서 파생((t,type) 병합 시 최신 as_of).
+    그 뒤 산업군으로 접는다 — 그룹 순서 = 최상위 멤버 랭킹, 그룹 캡 5·그룹당 4."""
     by: dict[tuple, dict] = {}
     for side in ("up", "down"):
         for e in (vc or {}).get(side) or []:
@@ -81,14 +85,31 @@ def oracle_vc_split(vc: dict) -> dict:
             prev = by.get(k)
             if not prev or (e.get("as_of") or 0) > (prev.get("as_of") or 0):
                 by[k] = e
-    above = [e["t"] for e in by.values() if e["type"] == "supply"]
-    below = [e["t"] for e in by.values() if e["type"] != "supply"]
-    out = {}
-    for k, arr in (("above", above), ("below", below)):
-        out[k] = {"shown": set(arr[:TOP_N]) if len(arr) <= TOP_N else None,
-                  "shown_count": min(len(arr), TOP_N), "rest": max(0, len(arr) - TOP_N),
-                  "all": set(arr)}
-    return out
+
+    def rank(e):
+        return ({"T1": 1, "T2": 2, "T3": 3}.get(e.get("tier_grade") or "T1", 9),
+                -(e.get("amount") or 0), -(e.get("as_of") or 0))
+
+    def pack(arr):
+        arr = sorted(arr, key=rank)
+        order, byko = [], {}
+        for e in arr:
+            ko = sector_of(e["t"]) or "기타"
+            if ko not in byko:
+                byko[ko] = []
+                order.append(ko)
+            byko[ko].append(e)
+        shown_kos = order[:VC_MAX_GROUPS]
+        shown = [e["t"] for ko in shown_kos for e in byko[ko][:VC_MAX_PER_GROUP]]
+        rest = [e["t"] for ko in order[VC_MAX_GROUPS:] for e in byko[ko]]
+        groups = [{"ko": ko, "n": len(byko[ko]),
+                   "shown": min(len(byko[ko]), VC_MAX_PER_GROUP)} for ko in shown_kos]
+        return {"shown": set(shown), "shown_count": len(shown), "rest": len(rest),
+                "all": set(shown), "groups": groups,
+                "rest_groups": max(0, len(order) - VC_MAX_GROUPS)}
+
+    return {"above": pack([e for e in by.values() if e["type"] == "supply"]),
+            "below": pack([e for e in by.values() if e["type"] != "supply"])}
 
 
 def oracle_split(gov: list[dict]) -> dict:
@@ -302,16 +323,23 @@ def run_scenario(browser, scenario: dict) -> dict:
                       dbg2.get("layer"))
                 check("VC: 범례 교체(FLOW TYPOLOGY, U-D14)",
                       got2.get("legendTitle") == "FLOW TYPOLOGY", got2.get("legendTitle"))
-                vexp = oracle_vc_split(vc)
+                index_all = json.loads(INDEX_PATH.read_text(encoding="utf-8"))
+                sec_by_t = {c["t"]: c.get("s") for c in index_all}
+                vexp = oracle_vc_split(vc, lambda tk: sec_by_t.get(tk))
+                vg = dbg2.get("vcGroups") or {}
                 for side in ("above", "below"):
                     actual = dbg2.get(side) or []
                     e = vexp[side]
                     ok_cnt = len(actual) == e["shown_count"] and dbg2.get(side + "Rest") == e["rest"]
-                    ok_set = (set(actual) == e["shown"]) if e["shown"] is not None \
-                        else set(actual).issubset(e["all"])
+                    ok_set = set(actual) == e["shown"]
                     check(f"VC-O: {side} 흐름 분할 (개수 {e['shown_count']}·잔여 {e['rest']}, UX-013)",
                           ok_cnt and ok_set,
                           f"actual={sorted(actual)} rest={dbg2.get(side + 'Rest')}")
+                    # UX-015 산업군 묶음 — 그룹 순서·산업명·소속 기업 수까지 대조
+                    gact = vg.get(side) or []
+                    check(f"VC-G: {side} 산업군 묶음 {[g['ko'] for g in e['groups']]}",
+                          gact == e["groups"] and vg.get(side + "RestGroups") == e["rest_groups"],
+                          f"actual={gact} restGroups={vg.get(side + 'RestGroups')}")
                 check("VC: 가로축 없음(문법 축 분리)",
                       not (dbg2.get("left") or []) and not (dbg2.get("right") or []),
                       f"left={dbg2.get('left')} right={dbg2.get('right')}")
