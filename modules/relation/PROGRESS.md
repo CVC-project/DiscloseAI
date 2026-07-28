@@ -983,3 +983,16 @@
   — 자동 삭제 금지, 수동 판정 대상.
 - **검증**: transform 관련 pytest 51 passed · V-3 렌더 하네스 61/61 PASS ·
   HMM ego 재확인(잔여 = 현대무벡스 investment 12.31%만 — 사실 관계).
+
+## 2026-07-28 (후속 2) — CPA 검수 1차 반영: 오링킹 15쌍 블록리스트 (FN-013 M2)
+
+- **검수**: review_otrcpr_50plus_crosscheck.csv 54건 → TRUE 39 / FALSE 15 (리더 검수표 재검증 수용).
+  재검증 중 반전 1건: 298060은 registry상 "풍전약품"이지만 이는 에스씨엠생명과학이 비상장
+  풍전약품 인수 후 개명한 **현재 사명** — 2022~24 금호에이치티 엣지는 구사명 충돌 오링킹 확정(웹 검증).
+- **처리**: `data/link_blocklist.csv` 신설(15쌍, 사유 병기: 동명비상장 12·수치오류 2·구사명충돌 1)
+  + filters.py `load_link_blocklist()` 적용 → transform 재실행 → prune 자동 정리. active 3,448→3,415.
+- **알려진 손실**: 영풍→시그네틱스는 ftc 엣지도 없어 관계가 통째로 빠짐(원본 수치 오류라 불가피)
+  — 시그네틱스 측 hyslrSttus 수집 보완 시 정상 지분율로 복구 예정.
+- **구조 과제(V2+)**: registry name_current는 현재 사명만 보유 — 과거 연도 링킹은 그 시점
+  사명과 어긋날 수 있음. 구사명 이력(name history) 테이블이 근본 해법.
+- **검증**: transform pytest 50 passed · V-3 61/61 PASS · ego 30건 변경 동기화.

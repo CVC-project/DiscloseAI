@@ -101,6 +101,27 @@ def is_ambiguous_abbrev(raw_name: str) -> bool:
     return bool(raw_name) and bool(AMBIGUOUS_ABBREV_RE.fullmatch(raw_name.strip()))
 
 
+_LINK_BLOCKLIST_CSV = Path(__file__).parent.parent / "data" / "link_blocklist.csv"
+
+
+def load_link_blocklist() -> set[tuple[str, str]]:
+    """오링킹 확정 (source,target) 쌍 — otrCpr 링킹에서 차단 (FN-013 M2 수동 보정).
+
+    한글 동명 비상장 자회사(예: DS단석의 '하이브 주식회사')는 약칭 게이트로 못 막는다 —
+    CPA 검수로 확정된 쌍을 여기 등재하면 transform 재실행 시 prune이 기존 행도 정리한다.
+    """
+    if not _LINK_BLOCKLIST_CSV.exists():
+        return set()
+    pairs: set[tuple[str, str]] = set()
+    with open(_LINK_BLOCKLIST_CSV, encoding="utf-8") as f:
+        reader = csv.DictReader(ln for ln in f if not ln.lstrip().startswith("#"))
+        for row in reader:
+            s, t = (row.get("source_ticker") or "").strip(), (row.get("target_ticker") or "").strip()
+            if s and t:
+                pairs.add((s, t))
+    return pairs
+
+
 def _enqueue_link_fail(session, surface_form: str, sample: str) -> None:
     """모호 표기를 LinkFailQueue에 적재(있으면 freq+1) — M2 수동 별칭 루프의 입력."""
     row = (
@@ -198,6 +219,7 @@ def apply(session=None) -> dict:
     # ticker → ticker 매핑 (ftc/dart_filing은 이미 ticker로 저장됨)
     valid_tickers = set(ticker_map.values())
     manual_overrides = load_manual_overrides()
+    link_blocklist = load_link_blocklist()
 
     counters = {
         "kept_ownership": 0,
@@ -207,6 +229,7 @@ def apply(session=None) -> dict:
         "dropped_foundation": 0,
         "dropped_unmatched": 0,
         "queued_ambiguous": 0,
+        "dropped_blocklist": 0,
         "pruned_stale": 0,
     }
     touched_keys: set[tuple] = set()
@@ -263,6 +286,10 @@ def apply(session=None) -> dict:
                 target_ticker = ticker_map.get(normalize_company_name(r.target_name))
                 if not target_ticker:
                     counters["dropped_unmatched"] += 1
+                    continue
+                # FN-013 M2: CPA 검수로 확정된 오링킹 쌍 차단 (동명 비상장·구사명 충돌·수치 오류)
+                if (source_ticker, target_ticker) in link_blocklist:
+                    counters["dropped_blocklist"] += 1
                     continue
                 # 자기 자신 출자 무시
                 if source_ticker == target_ticker:
