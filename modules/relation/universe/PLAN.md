@@ -168,12 +168,14 @@ CLI: `python -m modules.relation universe {sync|select|export}` (기존 `__main_
 ## 5. 시각화 계약 (integration에 넘길 렌더링 정책 명세)
 
 > 구현은 integration 소유(§0.5). relation은 데이터 + 이 정책 명세만 공급.
-> UI 착수 시 루트 DESIGN.md 선행 준수.
+> UI 착수 시 루트 DESIGN.md 선행 준수. **UI/UX 결정·기각 이력은
+> [integration/v2/UX_DECISIONS.md](../../../integration/v2/UX_DECISIONS.md)(UX-### 원장)가 정본** —
+> 착수 전 필독(기각된 접근 재제안 방지).
 
 | 항목 | 정책 |
 |---|---|
 | LOD-0 Universe | 섹터 은하 + 섹터별 named 노드 대표 표시. 엣지 없음 |
-| LOD-1 섹터 진입 | named 노드(라벨 포함) 현행 SectorMap 방식 + **배경 dots**(오프스크린 캔버스 1회 렌더 후 합성 — 프레임당 재도장 금지). dot hover 시 이름 툴팁, 클릭 시 ego 진입 |
+| LOD-1 섹터 진입 | ★2026-07-22 리더 확정(UX-001~003)으로 **드릴인 2단**으로 개정: ⓐ 성운 개요 — KOSPI/KOSDAQ 프록시 노드 2개(`시장명 · N사 · 클릭`) + 시장별 dots 성운 ⓑ 시장 드릴인 — 그 시장 시총 상위 ~10 named + 배경 dots. **한 화면 = 한 초점**(named 전량 라벨 도포 기각=UX-001, 두 시장 병렬 병치 기각=UX-002). dots는 오프스크린 캔버스 1회 렌더 후 합성(프레임당 재도장 금지). 데이터: export가 named·companies_index에 `mkt`(KOSPI\|KOSDAQ)·`cb`(capBucket) 공급. dot hover 시 이름 툴팁, 클릭 시 ego 진입(후속) |
 | LOD-2 Ego | **EgoView 단일 컴포넌트** — valuechain §5 계약 그대로(앵커 중앙, 사이드당 Top-N 6, "외 n사" 묶음 노드, re-root + 브레드크럼) + 상단 `지배구조 / 밸류체인` 레이어 토글. 지배구조 레이어의 상/하 배치는 **출자(들어옴) 위 / 피출자(나감) 아래**로 방향 의미 재사용 |
 | 레이어 문법 | U-D14 — 토글 전환 시 엣지 문법·범례 함께 교체 (혼합 범례 금지) |
 | 엣지 예산 | 활성(클릭 선택) 노드의 엣지만 (U-D11 ★v1.1 정정). 상시 전체 엣지 금지. hover 엣지 표시는 U2 선택 과제 |

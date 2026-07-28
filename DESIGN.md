@@ -164,6 +164,7 @@ SectorMap 은하의 **카테고리 식별색**(반도체=teal 등, 그 자체로
 | [GALAXY_JSON_SCHEMA.md](integration/dossier/GALAXY_JSON_SCHEMA.md) | galaxy JSON 데이터 스키마 (디자인 아님) |
 | [DOSSIER_TABS_PLAN.md](integration/dossier/DOSSIER_TABS_PLAN.md) | 3탭 실행 계획 (디자인 결정 D1~D12) |
 | [integration/v2/DESIGN.md](integration/v2/DESIGN.md) | v2 셸 로직·인터랙션 기록 (렌더 알고리즘·데이터 어댑터) |
+| [integration/v2/UX_DECISIONS.md](integration/v2/UX_DECISIONS.md) | v2 셸 **UX 결정 원장**(UX-### — 리더 피드백·기각·재설계 채록, VARIATIONS 선례) |
 | [design/](design/) | 프로토타입 원형·제작 사양서 — 자구·데이터 판정 기준 |
 
 ## 10. 잔여 격차 (다음 정비 대상)
