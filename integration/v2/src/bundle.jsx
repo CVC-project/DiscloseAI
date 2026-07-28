@@ -1614,18 +1614,22 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
   // 레일(앵커쪽) → 산업 라벨 → 기업 세로 스택(바깥). 그룹 내 기업을 수평으로 뿌리면
   // 세그먼트 폭(≈95px)에 이름이 안 들어가 라벨이 뭉갠다(실측) — 세로 1행 1사로 고정.
   const VC_RAIL_Y = 0.34, VC_LABEL_Y = 0.46, VC_NODE_Y = 0.60, VC_ROW_GAP = 0.115, VC_HALF = 0.88;
+  const VC_SEG_MAX = 0.42;  // 세그먼트 폭 상한 — 그룹 1~2개일 때 화면 전체로 퍼져
+                            // 스파인·노드가 중심에서 밀려나는 버그 방지(그룹들을 중앙 정렬)
   const buildVcSide = (side, sign) => {
     const gs = side.groups || [];
     const withBundleG = gs.length + ((side.restGroupCount || 0) > 0 ? 1 : 0);
     if (!withBundleG) return { nodes: [], groups: [] };
-    const segW = (2 * VC_HALF) / withBundleG;
+    const segW = Math.min(VC_SEG_MAX, (2 * VC_HALF) / withBundleG);
+    const totalW = segW * withBundleG;
     const nodes = [], groups = [];
     for (let gi = 0; gi < withBundleG; gi++) {
-      const cxg = -VC_HALF + segW * (gi + 0.5);
+      const cxg = -totalW / 2 + segW * (gi + 0.5);
       const isRestGroup = gi >= gs.length;
       if (isRestGroup) {
         groups.push({ cx: cxg, label: '외 ' + side.restGroupCount + '개 산업',
-                      color: '#94a3b8', sign, isRest: true, count: side.rest.length });
+                      color: '#94a3b8', sign, isRest: true, count: side.rest.length,
+                      segHalf: segW / 2 });
         nodes.push({ isBundle: true, side: sign < 0 ? 'above' : 'below', rest: side.rest,
                      code: '__bundle_vc_' + (sign < 0 ? 'above' : 'below'),
                      gx: cxg, gy: sign * VC_NODE_Y });
@@ -1634,7 +1638,7 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
       const g = gs[gi];
       groups.push({ cx: cxg, label: g.sectorKo, color: g.color, sign,
                     count: g.count, hidden: g.hidden, amount: g.amount, half: segW * 0.38,
-                    rows: g.items.length });
+                    segHalf: segW / 2, rows: g.items.length });
       // 세로 스택 — 노드는 세그먼트 왼쪽 정렬, 이름은 그 오른쪽에 배치(겹침 0)
       g.items.forEach((it, i) => {
         nodes.push({ ...it, gx: cxg - segW * 0.34, gy: sign * (VC_NODE_Y + i * VC_ROW_GAP),
@@ -1774,28 +1778,34 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
           if (!sideObj.groups.length) return;
           const railY = cy + sign * VC_RAIL_Y * baseR;
           const ts0 = VC_TIER_STYLES.T1;
-          // 트렁크 (앵커 ↔ 레일 중앙)
+          // 트렁크 (앵커 ↔ 레일 중앙) — 라벨은 트렁크 "중간 높이"에 배경 백킹과 함께
           ctx.strokeStyle = VC_FLOW_COLOR + 'cc'; ctx.lineWidth = 2; ctx.setLineDash([]);
           ctx.beginPath(); ctx.moveTo(cx, cy + sign * haloR); ctx.lineTo(cx, railY); ctx.stroke();
           if (sign < 0) drawChevron(cx, railY, cx, cy - haloR, VC_FLOW_COLOR + 'ee', 11, 2);
           else drawChevron(cx, cy + haloR, cx, railY, VC_FLOW_COLOR + 'ee', 11, 2);
           ctx.save();
-          ctx.font = '600 10px "IBM Plex Mono", ui-monospace, monospace';
-          ctx.textAlign = 'left'; ctx.fillStyle = VC_FLOW_COLOR + 'cc';
-          ctx.fillText(trunkLabel, cx + 8, cy + sign * (haloR + 22));
+          ctx.font = '600 11px "IBM Plex Mono", ui-monospace, monospace';
+          const midY = (cy + sign * haloR + railY) / 2;
+          const tlw = ctx.measureText(trunkLabel).width;
+          ctx.fillStyle = 'rgba(4,8,16,0.8)';
+          ctx.fillRect(cx + 7, midY - 9, tlw + 10, 17);
+          ctx.textAlign = 'left'; ctx.fillStyle = VC_FLOW_COLOR;
+          ctx.fillText(trunkLabel, cx + 12, midY + 4);
           ctx.restore();
-          // 레일 본선
-          const xs = sideObj.groups.map(g => cx + g.cx * baseR);
-          const x0 = Math.min(...xs), x1 = Math.max(...xs);
-          ctx.strokeStyle = VC_FLOW_COLOR + '99'; ctx.lineWidth = 1.6;
-          ctx.beginPath(); ctx.moveTo(x0, railY); ctx.lineTo(x1, railY); ctx.stroke();
+          // 레일 본선 — 산업군 세그먼트별로 그 섹터색(구간이 곧 산업 구분).
+          // 전 그룹 스파인·묶음 위치까지 반드시 닿도록 세그먼트 전체 폭을 칠한다(끊김 방지).
+          sideObj.groups.forEach((g) => {
+            const gx = cx + g.cx * baseR, hw = (g.segHalf || 0) * baseR;
+            ctx.strokeStyle = (g.isRest ? '#94a3b8' : g.color) + 'bb'; ctx.lineWidth = 2;
+            ctx.beginPath(); ctx.moveTo(gx - hw, railY); ctx.lineTo(gx + hw, railY); ctx.stroke();
+          });
           // 그룹별 드롭 + 세그먼트 캡 + 산업 라벨
           sideObj.groups.forEach((g) => {
             const gx = cx + g.cx * baseR;
             const lastRowY = cy + sign * (VC_NODE_Y + Math.max(0, (g.rows || 1) - 1) * VC_ROW_GAP) * baseR;
-            // 레일 → 그룹 마지막 행까지 수직 스파인(세로 스택을 하나로 묶어 보이게)
-            ctx.strokeStyle = (g.isRest ? '#94a3b8' : g.color) + (g.isRest ? '66' : '55');
-            ctx.lineWidth = g.isRest ? 1 : 1.2;
+            // 레일 → 그룹 마지막 행까지 수직 스파인(세로 스택을 하나로 묶어 보이게) — 섹터색 뚜렷하게
+            ctx.strokeStyle = (g.isRest ? '#94a3b8' : g.color) + (g.isRest ? '88' : 'aa');
+            ctx.lineWidth = g.isRest ? 1 : 1.4;
             ctx.setLineDash(g.isRest ? [2, 3] : []);
             ctx.beginPath();
             ctx.moveTo(g.isRest ? gx : gx - g.half * baseR * 0.9, railY);
@@ -2025,13 +2035,8 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
             </div>
           </div>
           <div className="panel-body">
-            {overflowList.map(n => {
-              const style = isVc
-                ? { color: VC_FLOW_COLOR, dash: (VC_TIER_STYLES[n.tier] || VC_TIER_STYLES.T1).dash,
-                    label: (n.type === 'supply' ? '공급처' : '고객사') + (n.amount ? ' · ' + fmtVcAmount(n.amount) : '') }
-                : (() => { const s = REL_STYLES[n.relType] || REL_STYLES.manual;
-                           return { color: s.color, dash: s.dash, label: s.label + (n.detail ? ' · ' + n.detail : '') }; })();
-              return (
+            {(() => {
+              const row = (n, style) => (
                 <div key={n.code + ':' + (n.type || n.relType)} className="ego-overflow-row"
                   onClick={() => { setOverflowSide(null); onReRoot(n.code, n.name, n.sectorKo); }}>
                   <span className="ov-rel-mark" style={{
@@ -2042,7 +2047,36 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
                   <span className="ego-overflow-type" style={{color: style.color}}>{style.label}</span>
                 </div>
               );
-            })}
+              if (!isVc) {
+                return overflowList.map(n => {
+                  const s = REL_STYLES[n.relType] || REL_STYLES.manual;
+                  return row(n, { color: s.color, dash: s.dash, label: s.label + (n.detail ? ' · ' + n.detail : '') });
+                });
+              }
+              // UX-016: VC 팝오버는 산업별 섹션으로 — "유통 ── / 삼성물산 / …" (리더 지시 형식)
+              const order = [], byKo = new Map();
+              for (const n of overflowList) {
+                const ko = n.sectorKo || '기타';
+                if (!byKo.has(ko)) { byKo.set(ko, []); order.push(ko); }
+                byKo.get(ko).push(n);
+              }
+              return order.map(ko => {
+                const pal = (window.SECTOR_PALETTE || []).find(s => s.ko === ko);
+                const c = (pal && pal.color) || '#94a3b8';
+                return (
+                  <React.Fragment key={'sec_' + ko}>
+                    <div className="ego-overflow-sec" style={{color: c, borderColor: c + '44'}}>
+                      <span className="ego-overflow-sec-dot" style={{background: c, boxShadow: `0 0 6px ${c}`}} />
+                      {ko} <span style={{color: '#64748b'}}>· {byKo.get(ko).length}사</span>
+                    </div>
+                    {byKo.get(ko).map(n => row(n, {
+                      color: c, dash: (VC_TIER_STYLES[n.tier] || VC_TIER_STYLES.T1).dash,
+                      label: (n.type === 'supply' ? '공급처' : '고객사') + (n.amount ? ' · ' + fmtVcAmount(n.amount) : ''),
+                    }))}
+                  </React.Fragment>
+                );
+              });
+            })()}
           </div>
         </div>
       )}
