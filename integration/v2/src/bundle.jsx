@@ -978,7 +978,19 @@ function splitVcSides(vc, topN, opts) {
       return { shown, rest: [...g.restItems], groups: g.groups,
                restGroupCount: g.restGroupCount, hiddenInGroups: hidden };
     };
-    return { above: pack(above), below: pack(below) };
+    const A = pack(above), B = pack(below);
+    // UX-019: 양쪽에 공통으로 나오는 섹터는 같은 상대 순서 — 공급처의 플랫폼이 왼쪽
+    // 1번이면 고객사의 플랫폼도 왼쪽 1번(세로 비교가 쉬워짐). 그룹 "선정"은 랭킹
+    // 그대로, "표시 순서"만 공급처 순서를 기준으로 재배열.
+    const aOrder = A.groups.map(g => g.sectorKo);
+    B.groups.sort((x, y) => {
+      const xi = aOrder.indexOf(x.sectorKo), yi = aOrder.indexOf(y.sectorKo);
+      if (xi >= 0 && yi >= 0) return xi - yi;
+      if (xi >= 0) return -1;
+      if (yi >= 0) return 1;
+      return 0;   // 둘 다 공급처에 없으면 원래 랭킹 순 유지(안정 정렬)
+    });
+    return { above: A, below: B };
   }
   const cut = (arr) => ({ shown: arr.slice(0, topN), rest: arr.slice(topN) });
   return { above: cut(above), below: cut(below) };
@@ -1612,9 +1624,10 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
   // UX-015 레일 레이아웃 — 그룹(산업군)을 x축에 분배, 그룹 안에서 기업을 다시 분배.
   //   sign<0: 공급처(위) / sign>0: 고객사(아래).  라벨=최외곽 · 기업=중간 · 레일=앵커쪽.
   // 레일(앵커쪽) → 산업 라벨 → 기업 세로 스택(바깥). 그룹 내 기업을 수평으로 뿌리면
-  // 세그먼트 폭(≈95px)에 이름이 안 들어가 라벨이 뭉갠다(실측) — 세로 1행 1사로 고정.
-  const VC_RAIL_Y = 0.34, VC_LABEL_Y = 0.46, VC_NODE_Y = 0.60, VC_ROW_GAP = 0.115, VC_HALF = 0.88;
-  const VC_SEG_MAX = 0.42;  // 세그먼트 폭 상한 — 그룹 1~2개일 때 화면 전체로 퍼져
+  // 세그먼트 폭에 이름이 안 들어가 라벨이 뭉갠다(실측) — 세로 1행 1사로 고정.
+  // UX-019: 스파인·노드·라벨 전부 세그먼트 "중앙" 정렬 + 좌우 폭 확대(HALF 0.88→1.22).
+  const VC_RAIL_Y = 0.34, VC_LABEL_Y = 0.46, VC_NODE_Y = 0.60, VC_ROW_GAP = 0.115, VC_HALF = 1.22;
+  const VC_SEG_MAX = 0.50;  // 세그먼트 폭 상한 — 그룹 1~2개일 때 화면 전체로 퍼져
                             // 스파인·노드가 중심에서 밀려나는 버그 방지(그룹들을 중앙 정렬)
   const buildVcSide = (side, sign) => {
     const gs = side.groups || [];
@@ -1637,11 +1650,11 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
       }
       const g = gs[gi];
       groups.push({ cx: cxg, label: g.sectorKo, color: g.color, sign,
-                    count: g.count, hidden: g.hidden, amount: g.amount, half: segW * 0.38,
+                    count: g.count, hidden: g.hidden, amount: g.amount,
                     segHalf: segW / 2, rows: g.items.length });
-      // 세로 스택 — 노드는 세그먼트 왼쪽 정렬, 이름은 그 오른쪽에 배치(겹침 0)
+      // 세로 스택 — 노드·스파인 = 세그먼트 중앙, 이름은 노드 오른쪽
       g.items.forEach((it, i) => {
-        nodes.push({ ...it, gx: cxg - segW * 0.34, gy: sign * (VC_NODE_Y + i * VC_ROW_GAP),
+        nodes.push({ ...it, gx: cxg, gy: sign * (VC_NODE_Y + i * VC_ROW_GAP),
                      isVcNode: true, groupIdx: gi, labelRight: true, segW });
       });
     }
@@ -1732,6 +1745,16 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
       while (s.length > 1 && ctx.measureText(s + '…').width > maxW) s = s.slice(0, -1);
       return s + '…';
     }
+    // UX-019: 잘라내기 전에 폰트를 줄여서 전부 보이게 — 안 들어가면 px를 낮추고,
+    // 최소 크기에서도 초과할 때만 축약. 반환값은 실제 적용된 font 문자열.
+    function fitText(text, maxW, px, minPx, weight, family) {
+      for (let p = px; p >= minPx; p -= 0.5) {
+        ctx.font = `${weight} ${p}px ${family}`;
+        if (ctx.measureText(text).width <= maxW) return { text, font: ctx.font };
+      }
+      ctx.font = `${weight} ${minPx}px ${family}`;
+      return { text: clipText(text, maxW), font: ctx.font };
+    }
 
     // U-D14: 밸류체인 화살촉 = 오픈 셰브런(스트로크 V자) — 지배구조 삼각 촉과 모양 자체를 다르게
     function drawChevron(fx, fy, tx, ty, color, size, width) {
@@ -1802,8 +1825,7 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
           ctx.restore();
           // 레일 본선 — 앵커 섹터색 한 줄. 범위는 스파인·묶음 x + 트렁크 x(cx)의 min~max
           // (UX-018: 그룹 1개면 스파인 min==max라 레일이 사라져 트렁크와 끊겨 보였음 — KCC건설).
-          const spineXs = sideObj.groups.map(g =>
-            g.isRest ? cx + g.cx * baseR : cx + g.cx * baseR - g.half * baseR * 0.9);
+          const spineXs = sideObj.groups.map(g => cx + g.cx * baseR);  // UX-019: 스파인=세그 중앙
           const railX0 = Math.min(...spineXs, cx), railX1 = Math.max(...spineXs, cx);
           ctx.strokeStyle = skel + 'bb'; ctx.lineWidth = 2;
           ctx.beginPath(); ctx.moveTo(railX0, railY); ctx.lineTo(railX1, railY); ctx.stroke();
@@ -1811,28 +1833,25 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
           sideObj.groups.forEach((g) => {
             const gx = cx + g.cx * baseR;
             const lastRowY = cy + sign * (VC_NODE_Y + Math.max(0, (g.rows || 1) - 1) * VC_ROW_GAP) * baseR;
-            // 레일 → 그룹 마지막 행까지 수직 스파인(세로 스택을 하나로 묶어 보이게) — 섹터색 뚜렷하게
+            // 레일 → 그룹 마지막 행까지 수직 스파인(세그 중앙, UX-019) — 섹터색 뚜렷하게
             ctx.strokeStyle = (g.isRest ? '#94a3b8' : g.color) + (g.isRest ? '88' : 'aa');
             ctx.lineWidth = g.isRest ? 1 : 1.4;
             ctx.setLineDash(g.isRest ? [2, 3] : []);
-            ctx.beginPath();
-            ctx.moveTo(g.isRest ? gx : gx - g.half * baseR * 0.9, railY);
-            ctx.lineTo(g.isRest ? gx : gx - g.half * baseR * 0.9, lastRowY);
-            ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(gx, railY); ctx.lineTo(gx, lastRowY); ctx.stroke();
             ctx.setLineDash([]);
-            // 산업 라벨(레일 바로 바깥) + 집계 — 세그먼트 폭 내로 축약(이웃 라벨과 붙지 않게)
+            // 산업 라벨(레일 바로 바깥) + 집계 — 세그 중앙 정렬, 폰트 자동 축소로 전부 표시(UX-019)
             const ly = cy + sign * VC_LABEL_Y * baseR;
-            ctx.textAlign = g.isRest ? 'center' : 'left';
-            const lx = g.isRest ? gx : gx - g.half * baseR * 0.9;
-            const maxW = Math.max(30, (g.segHalf || 0.2) * 2 * baseR - 14);
-            ctx.font = '600 11px "IBM Plex Mono", ui-monospace, monospace';
+            ctx.textAlign = 'center';
+            const maxW = Math.max(30, (g.segHalf || 0.2) * 2 * baseR - 8);
+            const lab = fitText(g.label, maxW, 11, 8.5, '600', '"IBM Plex Mono", ui-monospace, monospace');
             ctx.fillStyle = (g.isRest ? '#94a3b8' : g.color) + 'ee';
-            ctx.fillText(clipText(g.label, maxW), lx, ly);
-            ctx.font = '9px sans-serif';
-            ctx.fillStyle = '#64748b';
+            ctx.font = lab.font;
+            ctx.fillText(lab.text, gx, ly);
             const sub = g.isRest ? (g.count + '사')
               : (g.count + '사' + (g.amount ? '·' + fmtVcAmount(g.amount) : ''));
-            ctx.fillText(clipText(sub, maxW), lx, ly + 11);
+            const subFit = fitText(sub, maxW, 9, 8, '400', 'sans-serif');
+            ctx.fillStyle = '#64748b'; ctx.font = subFit.font;
+            ctx.fillText(subFit.text, gx, ly + 11);
           });
         };
         drawRailSide(vcAbove, -1, '공급처');
@@ -1947,19 +1966,24 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
         }
         if (n.labelRight) {
           // UX-015 세로 스택: 노드 오른쪽에 이름 + 금액 한 줄씩(왼쪽 정렬).
-          // UX-017: 세그먼트 폭 내로 측정 축약 — 옆 그룹 라벨과 붙지 않게.
-          const nMaxW = Math.max(30, (n.segW || 0.3) * baseR - 18);
+          // UX-019: 노드=세그 중앙 → 이름 가용폭 = 세그 오른쪽 절반. 폰트 축소 우선, 축약은 최후.
+          const nMaxW = Math.max(30, (n.segW || 0.3) * 0.5 * baseR - 12);
           ctx.textAlign = 'left';
-          ctx.fillStyle = nodeColor; ctx.font = 'bold 9px sans-serif';
-          const nm = ctx.measureText(n.name).width <= nMaxW ? n.name
-            : (() => { let s = n.name; while (s.length > 1 && ctx.measureText(s + '…').width > nMaxW) s = s.slice(0, -1); return s + '…'; })();
-          ctx.fillText(nm, nx + 10, ny - 1);
+          const fitLocal = (text, maxW, px, minPx, weight) => {
+            for (let p = px; p >= minPx; p -= 0.5) {
+              ctx.font = `${weight} ${p}px sans-serif`;
+              if (ctx.measureText(text).width <= maxW) return text;
+            }
+            let s = String(text);
+            while (s.length > 1 && ctx.measureText(s + '…').width > maxW) s = s.slice(0, -1);
+            return s + '…';
+          };
+          ctx.fillStyle = nodeColor;
+          ctx.fillText(fitLocal(n.name, nMaxW, 9, 7.5, 'bold'), nx + 10, ny - 1);
           if (n.amount) {
-            ctx.fillStyle = '#64748b'; ctx.font = '8px sans-serif';
+            ctx.fillStyle = '#64748b';
             const am = fmtVcAmount(n.amount) + (n.as_of ? '·' + n.as_of : '');
-            const am2 = ctx.measureText(am).width <= nMaxW ? am
-              : (() => { let s = am; while (s.length > 1 && ctx.measureText(s + '…').width > nMaxW) s = s.slice(0, -1); return s + '…'; })();
-            ctx.fillText(am2, nx + 10, ny + 9);
+            ctx.fillText(fitLocal(am, nMaxW, 8, 7, '400'), nx + 10, ny + 9);
           }
         } else {
           const labelUp = n.isSide || n.gy < 0;

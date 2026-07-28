@@ -108,8 +108,12 @@ def oracle_vc_split(vc: dict, sector_of) -> dict:
                 "all": set(shown), "groups": groups,
                 "rest_groups": max(0, len(order) - VC_MAX_GROUPS)}
 
-    return {"above": pack([e for e in by.values() if e["type"] == "supply"]),
-            "below": pack([e for e in by.values() if e["type"] != "supply"])}
+    out_a = pack([e for e in by.values() if e["type"] == "supply"])
+    out_b = pack([e for e in by.values() if e["type"] != "supply"])
+    # UX-019: 아래(고객사) 그룹 표시 순서 = 위(공급처)와 공통 섹터 우선 동일 순서
+    a_order = [g["ko"] for g in out_a["groups"]]
+    out_b["groups"].sort(key=lambda g: (a_order.index(g["ko"]) if g["ko"] in a_order else len(a_order)))
+    return {"above": out_a, "below": out_b}
 
 
 def oracle_split(gov: list[dict]) -> dict:
