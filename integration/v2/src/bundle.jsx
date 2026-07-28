@@ -1015,6 +1015,7 @@ function groupVcSide(items, maxGroups, maxPerGroup) {
     const pal = (window.SECTOR_PALETTE || []).find(s => s.ko === ko);
     return { sectorKo: ko, color: (pal && pal.color) || VC_FLOW_COLOR,
              items: all.slice(0, maxPerGroup), hidden: Math.max(0, all.length - maxPerGroup),
+             hiddenItems: all.slice(maxPerGroup),   // UX-022: 그룹 내 초과분 — "+N사" 노드·팝업용
              count: all.length,
              amount: all.reduce((a, b) => a + (b.amount || 0), 0) };
   });
@@ -1649,14 +1650,23 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
         continue;
       }
       const g = gs[gi];
+      const extraRow = g.hidden > 0 ? 1 : 0;
       groups.push({ cx: cxg, label: g.sectorKo, color: g.color, sign,
                     count: g.count, hidden: g.hidden, amount: g.amount,
-                    segHalf: segW / 2, rows: g.items.length });
+                    segHalf: segW / 2, rows: g.items.length + extraRow });
       // 세로 스택 — 노드·스파인 = 세그먼트 중앙, 이름은 노드 오른쪽
       g.items.forEach((it, i) => {
         nodes.push({ ...it, gx: cxg, gy: sign * (VC_NODE_Y + i * VC_ROW_GAP),
                      isVcNode: true, groupIdx: gi, labelRight: true, segW });
       });
+      // UX-022: 그룹당 4사 초과분 = 스택 맨 아래 같은 섹터색 "+N사" 노드 (클릭 → 팝업)
+      if (g.hidden > 0) {
+        nodes.push({ isBundle: true, isGroupBundle: true, bundleColor: g.color,
+                     rest: g.hiddenItems, restLabel: '+' + g.hidden + '사',
+                     customTitle: g.sectorKo + ' ' + (sign < 0 ? '공급처' : '고객사'),
+                     code: '__gb_' + (sign < 0 ? 'a' : 'b') + '_' + gi,
+                     gx: cxg, gy: sign * (VC_NODE_Y + g.items.length * VC_ROW_GAP), segW });
+      }
     }
     return { nodes, groups };
   };
@@ -1930,6 +1940,19 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
       // 이웃 + 묶음 노드
       allNodes.forEach((n, i) => {
         const nx = cx + animPos[i].x * baseR, ny = cy + animPos[i].y * baseR;
+        if (n.isBundle && n.isGroupBundle) {
+          // UX-022: 그룹 내 초과분 — 스택 맨 아래 같은 섹터색 "+N사" 노드 (클릭 → 팝업)
+          const bc = n.bundleColor || '#94a3b8';
+          ctx.fillStyle = bc + '2e';
+          ctx.beginPath(); ctx.arc(nx, ny, 9, 0, Math.PI * 2); ctx.fill();
+          ctx.strokeStyle = bc + 'aa'; ctx.lineWidth = 1.2;
+          ctx.beginPath(); ctx.arc(nx, ny, 9, 0, Math.PI * 2); ctx.stroke();
+          ctx.textAlign = 'left'; ctx.fillStyle = bc; ctx.font = 'bold 9px sans-serif';
+          ctx.fillText(n.restLabel, nx + 13, ny + 3);
+          hits.push({ x: nx, y: ny, r: 12, isBundle: true,
+                      custom: { title: n.customTitle, items: n.rest } });
+          return;
+        }
         if (n.isBundle) {
           ctx.fillStyle = 'rgba(148,163,184,0.18)';
           ctx.beginPath(); ctx.arc(nx, ny, 16, 0, Math.PI * 2); ctx.fill();
@@ -2016,7 +2039,8 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
   const handleClick = (e) => {
     const h = hitTest(e);
     if (!h || h.isAnchor) return;
-    if (h.isBundle) { setOverflowSide(h.side); return; }
+    // UX-022: 그룹 내 "+N사" 번들은 자체 리스트를 들고 있다(custom) — 사이드 묶음과 구분
+    if (h.isBundle) { setOverflowSide(h.custom ? { custom: h.custom } : h.side); return; }
     onReRoot(h.code, h.name, h.sectorKo);
   };
   const handleMove = (e) => {
@@ -2028,9 +2052,13 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
   const OVERFLOW_TITLE = isVc
     ? { above: '공급처', below: '고객사' }
     : { above: '출자사', below: '피출자사', left: '계열사', right: '특수관계자' };
-  const overflowList = overflowSide
-    ? ({ above, below, left, right }[overflowSide] || {}).rest || null
-    : null;
+  const isCustomOverflow = !!(overflowSide && typeof overflowSide === 'object' && overflowSide.custom);
+  const overflowList = !overflowSide ? null
+    : isCustomOverflow ? overflowSide.custom.items
+    : ({ above, below, left, right }[overflowSide] || {}).rest || null;
+  const overflowTitle = isCustomOverflow
+    ? overflowSide.custom.title
+    : (OVERFLOW_TITLE[overflowSide] || '') + ' 전체';
 
   return (
     // FN-009: 캔버스 사이징(position/inset·100%)은 인라인으로 고정한다 — styles.css가
@@ -2066,7 +2094,7 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
           <div className="panel-head">
             <div className="panel-head-l">
               <span className="panel-dot" style={{background: sec.color, boxShadow: `0 0 8px ${sec.color}`}} />
-              <span className="panel-title">{OVERFLOW_TITLE[overflowSide] || ''} 전체</span>
+              <span className="panel-title">{overflowTitle}</span>
             </div>
             <div style={{display:'flex', alignItems:'center', gap:8}}>
               <span className="panel-count">{overflowList.length}사</span>
