@@ -111,6 +111,11 @@ def cmd_valuechain(args):
             f["html"] = supply_contract.fetch_filing_html(f["rcept_no"])
         result = supply_contract.apply(filings=found)
         print(f"단일판매·공급계약체결 파싱 결과: {result}")
+    elif step == "chunk":
+        from modules.relation.valuechain.chunker import pipeline
+
+        result = pipeline.run()
+        print(f"청킹 결과: {result}")
     elif step == "export":
         from modules.relation.valuechain import export
 
@@ -165,6 +170,7 @@ def build_parser() -> argparse.ArgumentParser:
             "parse-related-party",
             "parse-related-party-governance",
             "parse-supply-contracts",
+            "chunk",
             "export",
         ],
     )

@@ -1012,3 +1012,17 @@
   `tests/relation/test_transform/test_linking_guards.py` 회귀 박제(삭제·완화 금지).
 - **검증**: test_transform 58 passed(신규 가드 테스트 포함) · V-3 61/61 PASS ·
   active 3,423 · ego 4건 재동기화.
+
+## 2026-07-28 (후속 4) — V2 비GPU 선행분 완료: 청킹 파이프라인 + B0 예비표
+
+- **청커 구현·실행** (`valuechain/chunker/pipeline.py`, CLI `valuechain chunk`):
+  reports.db `II.사업의내용` 247섹션 → 후보 게이트(관계 어휘 24종 + 레지스트리·별칭
+  타사명, 자기 회사 제외) → ±2문장 윈도우 병합 → ≤1.5K자 → **vc_chunk 22,274건**
+  (평균 979자·최대 1,500) + extract 대기 큐 22,274. 재실행 동일 카운트(멱등 D12 확인).
+  단위 테스트 5건 추가(`test_chunker.py` — 오프셋 왕복·게이트·병합·캡·결정적 id).
+- **B0 예비표** (`valuechain/B0_CANDIDATES.md`): ⓐⓑⓓ 문서 기준 예비 판정 —
+  파일럿=서버 탑재 Qwen3-32B 제로샷, 학습 1순위 후보=Qwen3-14B. ⓒ F1은 GPU 실측.
+- **⚠️ 병목 실측**: `II.사업의내용` 보유 코퍼스가 **48사뿐**(247섹션=48사×다개년) —
+  T2 커버리지 확장의 선행 병목은 GPU가 아니라 report 모듈 수집 확장(리더 소유 판단 사안).
+- 다음(GPU): SGLang 헬스체크 → Qwen3-32B 제로샷 파일럿(10사) → 방어 5층 통과 →
+  tier=T2 적재 → EgoView 실화면. 프롬프트는 세션 재개용으로 리더 보유.
