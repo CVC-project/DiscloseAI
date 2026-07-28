@@ -1026,3 +1026,34 @@
   T2 커버리지 확장의 선행 병목은 GPU가 아니라 report 모듈 수집 확장(리더 소유 판단 사안).
 - 다음(GPU): SGLang 헬스체크 → Qwen3-32B 제로샷 파일럿(10사) → 방어 5층 통과 →
   tier=T2 적재 → EgoView 실화면. 프롬프트는 세션 재개용으로 리더 보유.
+
+## 2026-07-28 (후속 5) — V2 GPU 착수: 서버 실측 + 32B 제로샷 파일럿 + T2 첫 적재
+
+- **터널 자동화**: `~/.ssh/config`에 `gpu` 별칭 저장(키 인증 — 비밀번호 미저장, 접속정보
+  저장소 외부). SGLang 헬스체크 PASS — 탑재 모델 `Qwen/Qwen3-32B-AWQ` 확인.
+- **서버 "전 상장사 DB" 3기준 실측 (1-b)**: ① dartchatbot 릴리스 dart-runtime-2023-2025-v1
+  = **49사**·2023~25·201,344청크(receipt_number·dart_url 완비, 원문 텍스트 렌더)
+  ② /data fulltext(eqs-v3 임시 산출물) = **95사**·5개년 DART 원문 XML(rcept_no 경로 내장,
+  7/20 이후 변경 없음). **판정: ②원문성·③provenance 통과, ①커버리지 결정적 미달 →
+  T2 코퍼스 승격 불가.** 커버리지 해소 유일 경로 = report 수집 확장(~1.2만 건·~2일, 리더 판단).
+- **T2 추출기 신설** (`valuechain/extract/llm_extract.py`): §3.2 스키마 xgrammar 강제 +
+  `enable_thinking=False` + greedy → §3.5 2패스 검증 → 후처리 검문(evidence exact-match /
+  L1 약칭 게이트+화이트리스트 / L2 쌍 블록리스트 / L5 LinkFailQueue / 익명·past 제외 /
+  자기참조 무시 — L3·L4는 지분율 전용이라 T2 비대상) → `_upsert_edge` 멱등 upsert(T1 준용).
+  파일럿 드라이버 `pilot_b0.py`(seed=42 결정적 표본, 큐 비소비).
+- **32B 제로샷 파일럿 (B0 ⓒ 감각치)**: 10사 100청크 56초(8병렬, ~1초/청크 — 전량도
+  시간 단위 가능). 깔때기: 98관계 → ev불일치 9·패스2 기각 41·익명 7·past 2·링킹 33 →
+  **T2 엣지 6**(육안 4 견고/2 경계). 1차 실행에서 max_tokens=1024 JSON 절단 3건 발견
+  → 2048 상향 후 재실행 0건. 오류 유형 4종(표 조각 과잉 기각=재현율 킬러 1순위,
+  evidence "..." 재구성, 일반명사 counterparty, `&cr` 아티팩트) — B0_CANDIDATES.md ⓒ절 상세.
+  전 레코드(기각 사유 포함) `data/vc_pilot_zeroshot.jsonl` 보존(CPA 스팟체크 입력).
+- **후보군 최신화**: Qwen3.6-27B(dense)·Qwen3.6-35B-A3B(MoE) 신규 릴리스 확인(HF) —
+  ⓑ 툴체인 확인 후 A/B 편입 검토(B0 표 갱신).
+- **T2 실화면 도달**: 적재 → export(1,559 active·T2 6) → ego 재export(2,651) → build_data →
+  EgoView 삼성SDI 밸류체인 레이어에서 **T2 노드(작은 원+빈 테두리) 렌더 확인**
+  (상류: 삼성전자 T1 채움원+금액 vs 솔브레인·파워로직스 T2 빈 테두리·산업군 묶음 정상).
+  ⚠️ 발견: FLOW TYPOLOGY 범례 "T2 서술 추출"에 "(준비 중)" 표기 잔존 — 제거 대상(리더 UI).
+- **검증**: test_linking_guards + test_valuechain **pytest 84 passed** · V-3 **61/61 PASS** ·
+  캐시버스트 5종 변경 없음(JS·CSS 무수정 — 데이터 JSON만 갱신).
+- **대기(리더 결정)**: B0 확정(학생=14B vs 3.6-27B A/B) / 전량 추출 여부 /
+  report 수집 확장 착수 / 파일럿 엣지 6건 CPA 판정.
