@@ -863,18 +863,24 @@ function mergeEgoNeighbors(rawList) {
   for (const r of (rawList || [])) {
     if (!r.t) continue;
     if (!byCode.has(r.t)) {
-      byCode.set(r.t, { code: r.t, name: r.n, sectorKo: r.s, tier: r.tier, dir: r.dir, types: [], detailByType: {} });
+      byCode.set(r.t, { code: r.t, name: r.n, sectorKo: r.s, tier: r.tier, types: [], detailByType: {}, dirByType: {} });
     }
     const e = byCode.get(r.t);
     if (r.tier === 'named400') e.tier = 'named400';
     if (!e.types.includes(r.type)) e.types.push(r.type);
     e.detailByType[r.type] = r.detail;
+    e.dirByType[r.type] = r.dir;
   }
   return Array.from(byCode.values()).map(e => {
     e.types.sort((a, b) => (EGO_TYPE_PRIORITY[a] || 9) - (EGO_TYPE_PRIORITY[b] || 9));
     const primary = e.types[0];
+    // isIncoming은 반드시 primary(최우선) 타입의 dir로 — "처음 만난 엣지"의 dir을 쓰면
+    // 삼성물산처럼 investment(in)+ftc_group(out) 혼재 시 JSON 순서에 따라 위/아래가
+    // 뒤바뀌는 순서 종속이 생긴다(V-3 오라클 설계 중 발견). hasEquity면 primary는
+    // 항상 지분 타입(우선순위 1~3 < 4~6)이라 UX-011 "지분 엣지의 출자 방향" 계약과 일치.
     return {
-      code: e.code, name: e.name, sectorKo: e.sectorKo, tier: e.tier, isIncoming: e.dir === 'in',
+      code: e.code, name: e.name, sectorKo: e.sectorKo, tier: e.tier,
+      isIncoming: e.dirByType[primary] === 'in',
       relType: EGO_TYPE_MAP[primary] || 'manual',
       hasGroup: e.types.includes('ftc_group'),
       hasEquity: e.types.some(t => t === 'subsidiary' || t === 'associate' || t === 'investment'),
@@ -924,6 +930,7 @@ function splitEgoSides(governance, topN, sideN) {
   };
 }
 window.mergeEgoNeighbors = mergeEgoNeighbors;
+window.splitEgoSides = splitEgoSides;   // V-3 렌더 하네스가 페이지 내 분할 로직을 직접 조회
 
 // ─── Sector map: companies as glowing nodes inside the chosen sector ────
 const { useRef: _useRef, useEffect: _useEffect, useState: _useState, useMemo: _useMemo } = React;
@@ -1536,6 +1543,17 @@ function EgoView({ anchor, chain, onReRoot, onChainJump }) {
     [aboveNodes, belowNodes, leftNodes, rightNodes]
   );
 
+  // V-3 렌더 하네스 훅 — 화면이 실제 채택한 분할 상태를 기계 검증용으로 노출(무해·읽기 전용).
+  _useEffect(() => {
+    window.__egoDebug = {
+      anchor: anchor.t,
+      above: above.shown.map(n => n.code), aboveRest: above.rest.length,
+      below: below.shown.map(n => n.code), belowRest: below.rest.length,
+      left:  left.shown.map(n => n.code),  leftRest:  left.rest.length,
+      right: right.shown.map(n => n.code), rightRest: right.rest.length,
+    };
+  }, [anchor, above, below, left, right]);
+
   _useEffect(() => {
     const cvs = canvasRef.current;
     const ctx = cvs.getContext('2d');
@@ -1685,6 +1703,7 @@ function EgoView({ anchor, chain, onReRoot, onChainJump }) {
       });
 
       hitRef.current = hits;
+      if (window.__egoDebug) window.__egoDebug.renderedCodes = hits.filter(h => h.code).map(h => h.code);
       rafRef.current = requestAnimationFrame(draw);
     };
     rafRef.current = requestAnimationFrame(draw);
