@@ -2122,7 +2122,7 @@ function useKospiQuote() {
 
 // ─── Intro screen ──────────────────────────────────────────────────────────
 // ─── Top tabs ──────────────────────────────────────────────────────────────
-function TopTabs({ active, onChange, breadcrumb }) {
+function TopTabs({ active, onChange, breadcrumb, onBack, canGoBack }) {
   const kospi = useKospiQuote();
   const isUp = Number(kospi.changePct) >= 0;
   const tabs = [
@@ -2146,13 +2146,21 @@ function TopTabs({ active, onChange, breadcrumb }) {
           </div>
         )}
       </div>
-      <div className="top-tabs-row">
-        {tabs.map(t => (
-          <div key={t.id} className={"top-tab " + (active === t.id ? 'is-active' : '')} onClick={() => onChange(t.id)}>
-            <div className="top-tab-en">{t.en}</div>
-            <div className="top-tab-ko">{t.ko}</div>
-          </div>
-        ))}
+      <div className="top-tabs-center">
+        <div className="top-tabs-row">
+          {tabs.map(t => (
+            <div key={t.id} className={"top-tab " + (active === t.id ? 'is-active' : '')} onClick={() => onChange(t.id)}>
+              <div className="top-tab-en">{t.en}</div>
+              <div className="top-tab-ko">{t.ko}</div>
+            </div>
+          ))}
+        </div>
+        {canGoBack && (
+          <button className="top-back-btn" onClick={onBack} title="뒤로가기 (ESC)">
+            <span className="top-back-arrow">←</span>
+            <span>BACK</span>
+          </button>
+        )}
       </div>
       <div className="top-tabs-status">
         <span className="hud-dot" />
@@ -2803,6 +2811,34 @@ function App() {
   // 오버레이 열림 동안 배경 캔버스 draw 정지 (성능 §8)
   useEffect(() => { window.__dossierOpen = !!corpOverlayTicker; }, [corpOverlayTicker]);
 
+  // 단계별 뒤로가기 — 우선순위: 공시 상세/전체 오버레이 → CORPORATION DOSSIER 오버레이 → company → sector → (galaxy에서 섹터 선택만 된 상태) 해제
+  const goBack = useCallback(() => {
+    if (discDetailItem) { setDiscDetailItem(null); return; }
+    if (discFullOverlayTicker) { setDiscFullOverlayTicker(null); return; }
+    if (corpOverlayTicker) { setCorpOverlayTicker(null); return; }
+    if (phase === 'company') { backToSector(); return; }
+    if (phase === 'sector') { backToGalaxy(); return; }
+    if (activeSectorId) { setActiveSectorId(null); return; }
+  }, [discDetailItem, discFullOverlayTicker, corpOverlayTicker, phase, activeSectorId, backToSector, backToGalaxy]);
+  const canGoBack = !!(discDetailItem || discFullOverlayTicker || corpOverlayTicker || phase !== 'galaxy' || activeSectorId);
+
+  // ESC / Backspace 키 → goBack. Backspace는 채팅 입력창 등 텍스트 편집 중엔 원래 동작(글자 삭제)을 그대로 두고,
+  // 포커스가 입력 요소가 아닐 때만 뒤로가기로 취급한다 (ESC는 입력 포커스와 무관하게 항상 뒤로가기).
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') { goBack(); return; }
+      if (e.key === 'Backspace') {
+        const t = e.target;
+        const isEditable = t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable);
+        if (isEditable) return;
+        e.preventDefault(); // 편집 요소 밖 Backspace의 브라우저 기본 "뒤로가기" 동작 방지
+        goBack();
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [goBack]);
+
   const sector = activeSectorId ? SECTOR_PALETTE.find(s => s.id === activeSectorId) : null;
   // 산업군 테마 액센트 — 오버레이 크롬(헤더·탭바)과 3탭 iframe에 공통 적용 (섹터색)
   const sectorAccent = (sector && sector.color) || '#74EEC6';
@@ -2855,7 +2891,7 @@ function App() {
             </div>
           )}
 
-          <TopTabs active={activeTab} onChange={setActiveTab} breadcrumb={crumb} />
+          <TopTabs active={activeTab} onChange={setActiveTab} breadcrumb={crumb} onBack={goBack} canGoBack={canGoBack} />
 
           {/* Top-left panel — varies by phase and active tab */}
           {activeTab === 'finance' ? (
