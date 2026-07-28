@@ -2011,6 +2011,14 @@ const KOSPI_FALLBACK = {
   source: 'mock',
 };
 
+const KOSDAQ_FALLBACK = {
+  value: 850.32,
+  previousClose: 845.11,
+  changePct: 0.62,
+  updatedAt: null,
+  source: 'mock',
+};
+
 function formatKospiValue(value) {
   if (!Number.isFinite(value)) return '---';
   return value.toLocaleString('ko-KR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -2076,37 +2084,41 @@ function readKospiApi(payload) {
   };
 }
 
-async function fetchKospiQuote() {
-  const endpoints = [
-    { url: '/api/kospi', reader: readKospiApi },
-    { url: 'https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?range=1d&interval=1m&_=' + Date.now(), reader: readKospiChart },
-  ];
+// 지수(KOSPI/KOSDAQ)·개별 종목 공통 fetch — 서버리스(/api/quote) 우선,
+// 실패 시(GitHub Pages 등 정적 호스팅) Yahoo Finance 직접 호출로 폴백.
+async function fetchQuote(endpoints) {
   let lastError = null;
   for (const endpoint of endpoints) {
     try {
       const response = await fetch(endpoint.url, { cache: 'no-store' });
-      if (!response.ok) throw new Error('KOSPI fetch failed: ' + response.status);
+      if (!response.ok) throw new Error('quote fetch failed: ' + response.status);
       return endpoint.reader(await response.json());
     } catch (error) {
       lastError = error;
     }
   }
-  throw lastError || new Error('KOSPI fetch failed');
+  throw lastError || new Error('quote fetch failed');
 }
 
-function useKospiQuote() {
-  const [quote, setQuote] = useState({ ...KOSPI_FALLBACK, loading: true });
+// buildEndpoints가 null을 반환하면(예: 티커 미확정) 조회를 건너뛰고 fallback만 유지한다.
+function useQuote(buildEndpoints, fallback, deps) {
+  const [quote, setQuote] = useState({ ...fallback, loading: true });
   useEffect(() => {
+    const endpoints = buildEndpoints();
+    if (!endpoints) {
+      setQuote({ ...fallback, loading: false });
+      return;
+    }
     let alive = true;
     async function refresh() {
       try {
-        const next = await fetchKospiQuote();
+        const next = await fetchQuote(endpoints);
         if (alive) setQuote({ ...next, loading: false, error: null });
       } catch (error) {
         if (alive) setQuote(prev => ({
           ...prev,
           loading: false,
-          error: error && error.message ? error.message : 'KOSPI fetch failed',
+          error: error && error.message ? error.message : 'quote fetch failed',
         }));
       }
     }
@@ -2116,15 +2128,47 @@ function useKospiQuote() {
       alive = false;
       clearInterval(timer);
     };
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, deps);
   return quote;
+}
+
+function useKospiQuote() {
+  return useQuote(() => [
+    { url: '/api/quote?symbol=%5EKS11', reader: readKospiApi },
+    { url: 'https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?range=1d&interval=1m&_=' + Date.now(), reader: readKospiChart },
+  ], KOSPI_FALLBACK, []);
+}
+
+function useKosdaqQuote() {
+  return useQuote(() => [
+    { url: '/api/quote?symbol=%5EKQ11', reader: readKospiApi },
+    { url: 'https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?range=1d&interval=1m&_=' + Date.now(), reader: readKospiChart },
+  ], KOSDAQ_FALLBACK, []);
+}
+
+// 개별 종목 현재가 — 상장 시장(코스피/코스닥)을 모르므로 .KS 먼저, 실패하면 .KQ 순으로 시도.
+// 두 시도 다 실패하면(신규/비상장·API 장애) 절대 가짜 숫자를 보여주지 않고 "데이터 수집 중"만 표시한다.
+const STOCK_QUOTE_FALLBACK = { value: null, previousClose: null, changePct: null, updatedAt: null, source: null };
+function useStockQuote(ticker) {
+  return useQuote(() => {
+    if (!ticker) return null;
+    return [
+      { url: `/api/quote?symbol=${ticker}.KS`, reader: readKospiApi },
+      { url: `/api/quote?symbol=${ticker}.KQ`, reader: readKospiApi },
+      { url: `https://query1.finance.yahoo.com/v8/finance/chart/${ticker}.KS?range=1d&interval=1m&_=` + Date.now(), reader: readKospiChart },
+      { url: `https://query1.finance.yahoo.com/v8/finance/chart/${ticker}.KQ?range=1d&interval=1m&_=` + Date.now(), reader: readKospiChart },
+    ];
+  }, STOCK_QUOTE_FALLBACK, [ticker]);
 }
 
 // ─── Intro screen ──────────────────────────────────────────────────────────
 // ─── Top tabs ──────────────────────────────────────────────────────────────
 function TopTabs({ active, onChange, breadcrumb, onBack, canGoBack }) {
   const kospi = useKospiQuote();
+  const kosdaq = useKosdaqQuote();
   const isUp = Number(kospi.changePct) >= 0;
+  const isKqUp = Number(kosdaq.changePct) >= 0;
   const tabs = [
     { id: 'finance',   en: 'FINANCIALS',  ko: '재무정보' },
     { id: 'disclose',  en: 'DISCLOSURES', ko: '공시' },
@@ -2163,11 +2207,20 @@ function TopTabs({ active, onChange, breadcrumb, onBack, canGoBack }) {
         )}
       </div>
       <div className="top-tabs-status">
-        <span className="hud-dot" />
-        <span className="kospi-label">KOSPI</span>
-        <span className="kospi-value">{formatKospiValue(kospi.value)}</span>
-        <span className={"kospi-delta " + (isUp ? 'up' : 'down')}>{formatKospiPct(kospi.changePct)}</span>
-        <span className="kospi-time">{kospi.loading ? '갱신 중' : formatKospiTime(kospi.updatedAt)}</span>
+        <div className="index-row">
+          <span className="hud-dot" />
+          <span className="kospi-label">KOSPI</span>
+          <span className="kospi-value">{formatKospiValue(kospi.value)}</span>
+          <span className={"kospi-delta " + (isUp ? 'up' : 'down')}>{formatKospiPct(kospi.changePct)}</span>
+          <span className="kospi-time">{kospi.loading ? '갱신 중' : formatKospiTime(kospi.updatedAt)}</span>
+        </div>
+        <div className="index-row">
+          <span className="hud-dot" />
+          <span className="kospi-label">KOSDAQ</span>
+          <span className="kospi-value">{formatKospiValue(kosdaq.value)}</span>
+          <span className={"kospi-delta " + (isKqUp ? 'up' : 'down')}>{formatKospiPct(kosdaq.changePct)}</span>
+          <span className="kospi-time">{kosdaq.loading ? '갱신 중' : formatKospiTime(kosdaq.updatedAt)}</span>
+        </div>
       </div>
     </div>
   );
@@ -2279,6 +2332,13 @@ function SectorOverviewPanel({ sector, companyCount, onBack }) {
 }
 
 // ─── PHASE 4: Company overview panel (top-left) ────────────────────────────
+const METRIC_TIPS = {
+  cap: '시가총액 = 발행주식수 × 현재 주가. 시장이 평가하는 회사 전체의 가치예요.',
+  per: 'PER(주가수익비율) = 시가총액 ÷ 당기순이익. 낮을수록 이익 대비 주가가 저렴하다는 뜻이에요.',
+  pbr: 'PBR(주가순자산비율) = 시가총액 ÷ 자기자본. 1보다 낮으면 장부상 순자산보다 싸게 거래되고 있어요.',
+  roe: 'ROE(자기자본이익률) = 당기순이익 ÷ 자기자본 × 100. 회사가 자기 돈으로 얼마나 효율적으로 이익을 냈는지 보여줘요.',
+};
+
 function CompanyOverviewPanel({ company, sector, onBack, onEnter }) {
   if (!company) return null;
   const rels = (window.RELATIONS[company.code] || []);
@@ -2288,6 +2348,8 @@ function CompanyOverviewPanel({ company, sector, onBack, onEnter }) {
   const capLabel = (node && node.market_cap && D.trillionLabel) ? D.trillionLabel(node.market_cap) : (company.cap + 'T');
   const fmtNum = (v, suffix) => (v == null ? '-' : v + (suffix || ''));
   const recentDisc = (node && node.disc) ? node.disc.slice(0, 3) : null;
+  const quote = useStockQuote(company.code);
+  const quoteUp = Number(quote.changePct) >= 0;
 
   // #8: Sparkline (revenue history) + percentile badge
   const sparkPath = (node && node.history && D.sparklinePath)
@@ -2336,16 +2398,32 @@ function CompanyOverviewPanel({ company, sector, onBack, onEnter }) {
           </div>
         </div>
         <div className="company-ov-stats">
-          <div className="ov-stat"><div className="ov-k">시가총액</div><div className="ov-v">{capLabel}</div></div>
-          <div className="ov-stat"><div className="ov-k">PER</div><div className="ov-v">{fmtNum(valu && valu.per)}</div></div>
-          <div className="ov-stat"><div className="ov-k">PBR</div><div className="ov-v">{fmtNum(valu && valu.pbr)}</div></div>
-          <div className="ov-stat"><div className="ov-k">ROE</div><div className="ov-v" style={{color: (valu && valu.roe != null && valu.roe >= 0) ? '#4ade80' : '#f87171'}}>{fmtNum(valu && valu.roe, '%')}</div></div>
+          <div className="ov-stat"><div className="ov-k" data-tip={METRIC_TIPS.cap}>시가총액</div><div className="ov-v">{capLabel}</div></div>
+          <div className="ov-stat"><div className="ov-k" data-tip={METRIC_TIPS.per}>PER</div><div className="ov-v">{fmtNum(valu && valu.per)}</div></div>
+          <div className="ov-stat"><div className="ov-k" data-tip={METRIC_TIPS.pbr}>PBR</div><div className="ov-v">{fmtNum(valu && valu.pbr)}</div></div>
+          <div className="ov-stat"><div className="ov-k" data-tip={METRIC_TIPS.roe}>ROE</div><div className="ov-v" style={{color: (valu && valu.roe != null && valu.roe >= 0) ? '#4ade80' : '#f87171'}}>{fmtNum(valu && valu.roe, '%')}</div></div>
         </div>
+        {node && node.latest_year && (
+          <div style={{textAlign:'right', fontSize:9, color:'#64748b', fontFamily:'var(--font-mono)', marginTop:2}}>
+            FY{node.latest_year} 사업보고서 기준 (시가총액은 최근 수집치)
+          </div>
+        )}
         <div className="company-ov-row">
           <div className="ov-k">현재가</div>
-          <div className="ov-v" style={{fontSize:13, color:'#94a3b8', fontFamily:'var(--font-mono)'}}>데이터 수집 중</div>
-          <div style={{color:'#64748b', fontFamily:'var(--font-mono)', fontSize:10}}>yfinance pending</div>
+          {quote.value != null ? (
+            <>
+              <div className="ov-v" style={{fontSize:13, fontFamily:'var(--font-mono)'}}>{quote.value.toLocaleString('ko-KR')}원</div>
+              <div style={{color: quoteUp ? '#4ade80' : '#f87171', fontFamily:'var(--font-mono)', fontSize:11, fontWeight:700}}>{formatKospiPct(quote.changePct)}</div>
+            </>
+          ) : (
+            <div className="ov-v" style={{fontSize:13, color:'#94a3b8', fontFamily:'var(--font-mono)'}}>데이터 수집 중</div>
+          )}
         </div>
+        {quote.value != null && (
+          <div style={{textAlign:'right', fontSize:9, color:'#64748b', fontFamily:'var(--font-mono)', marginTop:-4}}>
+            {quote.loading ? '갱신 중' : formatKospiTime(quote.updatedAt)}
+          </div>
+        )}
         {/* #9: Income / Balance / Cashflow */}
         {(rv || oi || dr || ocf) && (
           <div className="sector-ov-section">
