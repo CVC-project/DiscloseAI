@@ -195,8 +195,12 @@
   async function injectBundleScript() {
     // Babel-standalone auto-transforms <script type="text/babel"> tags only at page load.
     // For dynamic injection we fetch the source ourselves, transform via Babel, then run.
-    const url = "./src/bundle.jsx?v=k3l";
-    const src = await fetch(url).then((r) => r.text());
+    // cache: 'no-store' — bundle.jsx changes on every feature PR; a manually-bumped
+    // ?v= query here kept getting forgotten (see #67, #68 cache-bust incidents),
+    // leaving browsers stuck on stale bundles after deploy. no-store makes that
+    // whole class of bug impossible instead of relying on someone remembering.
+    const url = "./src/bundle.jsx";
+    const src = await fetch(url, { cache: "no-store" }).then((r) => r.text());
     const out = window.Babel.transform(src, { presets: ["env", "react"] }).code;
     const s = document.createElement("script");
     s.text = out;
