@@ -1642,7 +1642,7 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
       // 세로 스택 — 노드는 세그먼트 왼쪽 정렬, 이름은 그 오른쪽에 배치(겹침 0)
       g.items.forEach((it, i) => {
         nodes.push({ ...it, gx: cxg - segW * 0.34, gy: sign * (VC_NODE_Y + i * VC_ROW_GAP),
-                     isVcNode: true, groupIdx: gi, labelRight: true });
+                     isVcNode: true, groupIdx: gi, labelRight: true, segW });
       });
     }
     return { nodes, groups };
@@ -1725,6 +1725,14 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
       ctx.fill();
     }
 
+    // UX-017: 라벨이 세그먼트 폭을 넘어 이웃과 붙지 않게 — 측정 후 문자 단위 축약
+    function clipText(text, maxW) {
+      if (ctx.measureText(text).width <= maxW) return text;
+      let s = String(text);
+      while (s.length > 1 && ctx.measureText(s + '…').width > maxW) s = s.slice(0, -1);
+      return s + '…';
+    }
+
     // U-D14: 밸류체인 화살촉 = 오픈 셰브런(스트로크 V자) — 지배구조 삼각 촉과 모양 자체를 다르게
     function drawChevron(fx, fy, tx, ty, color, size, width) {
       const ang = Math.atan2(ty - fy, tx - fx);
@@ -1778,27 +1786,29 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
           if (!sideObj.groups.length) return;
           const railY = cy + sign * VC_RAIL_Y * baseR;
           const ts0 = VC_TIER_STYLES.T1;
-          // 트렁크 (앵커 ↔ 레일 중앙) — 라벨은 트렁크 "중간 높이"에 배경 백킹과 함께
-          ctx.strokeStyle = VC_FLOW_COLOR + 'cc'; ctx.lineWidth = 2; ctx.setLineDash([]);
+          // UX-017: 골격(트렁크+레일) = 앵커 섹터색 — "삼성전자의 공급처·고객사 연결선은
+          // 반도체 색". 산업별 색은 스파인이 맡는다.
+          const skel = sec.color;
+          ctx.strokeStyle = skel + 'cc'; ctx.lineWidth = 2; ctx.setLineDash([]);
           ctx.beginPath(); ctx.moveTo(cx, cy + sign * haloR); ctx.lineTo(cx, railY); ctx.stroke();
-          if (sign < 0) drawChevron(cx, railY, cx, cy - haloR, VC_FLOW_COLOR + 'ee', 11, 2);
-          else drawChevron(cx, cy + haloR, cx, railY, VC_FLOW_COLOR + 'ee', 11, 2);
+          if (sign < 0) drawChevron(cx, railY, cx, cy - haloR, skel + 'ee', 11, 2);
+          else drawChevron(cx, cy + haloR, cx, railY, skel + 'ee', 11, 2);
           ctx.save();
           ctx.font = '600 11px "IBM Plex Mono", ui-monospace, monospace';
           const midY = (cy + sign * haloR + railY) / 2;
           const tlw = ctx.measureText(trunkLabel).width;
           ctx.fillStyle = 'rgba(4,8,16,0.8)';
           ctx.fillRect(cx + 7, midY - 9, tlw + 10, 17);
-          ctx.textAlign = 'left'; ctx.fillStyle = VC_FLOW_COLOR;
+          ctx.textAlign = 'left'; ctx.fillStyle = skel;
           ctx.fillText(trunkLabel, cx + 12, midY + 4);
           ctx.restore();
-          // 레일 본선 — 산업군 세그먼트별로 그 섹터색(구간이 곧 산업 구분).
-          // 전 그룹 스파인·묶음 위치까지 반드시 닿도록 세그먼트 전체 폭을 칠한다(끊김 방지).
-          sideObj.groups.forEach((g) => {
-            const gx = cx + g.cx * baseR, hw = (g.segHalf || 0) * baseR;
-            ctx.strokeStyle = (g.isRest ? '#94a3b8' : g.color) + 'bb'; ctx.lineWidth = 2;
-            ctx.beginPath(); ctx.moveTo(gx - hw, railY); ctx.lineTo(gx + hw, railY); ctx.stroke();
-          });
+          // 레일 본선 — 앵커 섹터색 한 줄. 범위는 스파인·묶음 x의 min~max로 클램프
+          // (UX-017: 세그먼트 절반이 스파인 밖으로 튀어나오던 문제 제거).
+          const spineXs = sideObj.groups.map(g =>
+            g.isRest ? cx + g.cx * baseR : cx + g.cx * baseR - g.half * baseR * 0.9);
+          const railX0 = Math.min(...spineXs), railX1 = Math.max(...spineXs);
+          ctx.strokeStyle = skel + 'bb'; ctx.lineWidth = 2;
+          ctx.beginPath(); ctx.moveTo(railX0, railY); ctx.lineTo(railX1, railY); ctx.stroke();
           // 그룹별 드롭 + 세그먼트 캡 + 산업 라벨
           sideObj.groups.forEach((g) => {
             const gx = cx + g.cx * baseR;
@@ -1812,17 +1822,19 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
             ctx.lineTo(g.isRest ? gx : gx - g.half * baseR * 0.9, lastRowY);
             ctx.stroke();
             ctx.setLineDash([]);
-            // 산업 라벨(레일 바로 바깥) + 집계
+            // 산업 라벨(레일 바로 바깥) + 집계 — 세그먼트 폭 내로 축약(이웃 라벨과 붙지 않게)
             const ly = cy + sign * VC_LABEL_Y * baseR;
             ctx.textAlign = g.isRest ? 'center' : 'left';
             const lx = g.isRest ? gx : gx - g.half * baseR * 0.9;
-            ctx.fillStyle = (g.isRest ? '#94a3b8' : g.color) + 'ee';
+            const maxW = Math.max(30, (g.segHalf || 0.2) * 2 * baseR - 14);
             ctx.font = '600 11px "IBM Plex Mono", ui-monospace, monospace';
-            ctx.fillText(g.label, lx, ly);
-            ctx.fillStyle = '#64748b'; ctx.font = '9px sans-serif';
+            ctx.fillStyle = (g.isRest ? '#94a3b8' : g.color) + 'ee';
+            ctx.fillText(clipText(g.label, maxW), lx, ly);
+            ctx.font = '9px sans-serif';
+            ctx.fillStyle = '#64748b';
             const sub = g.isRest ? (g.count + '사')
-              : (g.count + '사' + (g.amount ? ' · ' + fmtVcAmount(g.amount) : ''));
-            ctx.fillText(sub, lx, ly + 11);
+              : (g.count + '사' + (g.amount ? '·' + fmtVcAmount(g.amount) : ''));
+            ctx.fillText(clipText(sub, maxW), lx, ly + 11);
           });
         };
         drawRailSide(vcAbove, -1, '공급처');
@@ -1938,13 +1950,20 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
           ctx.beginPath(); ctx.arc(nx, ny, coreR + 2, 0, Math.PI * 2); ctx.stroke();
         }
         if (n.labelRight) {
-          // UX-015 세로 스택: 노드 오른쪽에 이름 + 금액 한 줄씩(왼쪽 정렬)
+          // UX-015 세로 스택: 노드 오른쪽에 이름 + 금액 한 줄씩(왼쪽 정렬).
+          // UX-017: 세그먼트 폭 내로 측정 축약 — 옆 그룹 라벨과 붙지 않게.
+          const nMaxW = Math.max(30, (n.segW || 0.3) * baseR - 18);
           ctx.textAlign = 'left';
           ctx.fillStyle = nodeColor; ctx.font = 'bold 9px sans-serif';
-          ctx.fillText(n.name.length > 8 ? n.name.slice(0, 8) + '…' : n.name, nx + 10, ny - 1);
+          const nm = ctx.measureText(n.name).width <= nMaxW ? n.name
+            : (() => { let s = n.name; while (s.length > 1 && ctx.measureText(s + '…').width > nMaxW) s = s.slice(0, -1); return s + '…'; })();
+          ctx.fillText(nm, nx + 10, ny - 1);
           if (n.amount) {
             ctx.fillStyle = '#64748b'; ctx.font = '8px sans-serif';
-            ctx.fillText(fmtVcAmount(n.amount) + (n.as_of ? ' · ' + n.as_of : ''), nx + 10, ny + 9);
+            const am = fmtVcAmount(n.amount) + (n.as_of ? '·' + n.as_of : '');
+            const am2 = ctx.measureText(am).width <= nMaxW ? am
+              : (() => { let s = am; while (s.length > 1 && ctx.measureText(s + '…').width > nMaxW) s = s.slice(0, -1); return s + '…'; })();
+            ctx.fillText(am2, nx + 10, ny + 9);
           }
         } else {
           const labelUp = n.isSide || n.gy < 0;
