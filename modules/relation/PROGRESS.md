@@ -969,3 +969,17 @@
   제거하고 방어적으로 콜론을 한 번 더 지운다. **구분자 교체 과제는 여전히 열려 있음.**
 - **재실행**: `python -m modules.relation.universe.export` (CLI에 `universe` 서브커맨드 없음 — 모듈 직접 실행)
   → named 400 · total 2,651 · ego 2,651본. 이후 `python -m integration.build_data`로 동기화(61건 변경).
+
+## 2026-07-28 (후속) — HMM 오링킹 사고: 모호 약칭 게이트 신설 (FN-013)
+
+- **사고**: "현대차 → HMM 종속 99.99%" 허위 엣지(리더 발견). 원인 = otrCpr 대상 원문
+  "HMM"(해외 생산법인 약칭 — 같은 보고서의 HMA·HMI·HMD·GMC·GMI 무리로 물증 확정)이
+  corp_code 없는 이름-only 링킹에서 상장 해운사 HMM(011200)에 정확 일치 오링킹.
+- **수리**: filters.py에 `is_ambiguous_abbrev()` 게이트(영문 2~5자 단독 → 자동 링킹 금지,
+  LinkFailQueue 적재) + transform 재실행 → prune이 오염 4행 자동 정리. active 3,508→3,448
+  (KT·NAVER·POSCO 등 진짜였을 소액 엣지도 큐로 — 정밀도 우선, M2 별칭 확정 시 복구).
+- **검수 과제(CPA)**: 50%+ 엣지 hyslrSttus 교차검증 실패 54건
+  → `data/review_otrcpr_50plus_crosscheck.csv`. 오탐 다수 확인(하림지주→팬오션 등 사실)
+  — 자동 삭제 금지, 수동 판정 대상.
+- **검증**: transform 관련 pytest 51 passed · V-3 렌더 하네스 61/61 PASS ·
+  HMM ego 재확인(잔여 = 현대무벡스 investment 12.31%만 — 사실 관계).

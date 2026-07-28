@@ -18,7 +18,7 @@ from modules.relation.common.names import (
     normalize_company_name,
 )
 from modules.relation.storage.db import get_local_session
-from modules.relation.storage.models import RelationLocal, RelationRaw
+from modules.relation.storage.models import LinkFailQueue, RelationLocal, RelationRaw
 
 logger = logging.getLogger(__name__)
 
@@ -85,6 +85,35 @@ def is_foundation(name: str) -> bool:
 def match_to_top50(normalized_name: str, ticker_map: dict[str, str]) -> str | None:
     """정규화된 이름 → ticker (매칭 실패 시 None)."""
     return ticker_map.get(normalized_name)
+
+
+# ★2026-07-28 (FN-013): 타법인출자(otrCpr) 대상명이 짧은 영문 약칭 단독이면 상장사
+# 자동 링킹을 금지한다. 실제 사고: 현대차 사업보고서의 출자 대상 "HMM"(해외 생산법인
+# HMMA/HMMC류 축약 표기)이 상장 해운사 HMM(011200)에 정확 일치로 오링킹 →
+# "현대차가 HMM 99.99% 종속" 허위 엣지 4개년치 생성(리더 발견). 영문 2~5자 단독
+# 표기는 동명 충돌 위험이 구조적으로 높아 자동 매칭 대신 LinkFailQueue로 보내
+# 수동 확정(M2 루프)한다. 한글 포함·정식 법인 표기는 게이트 대상이 아님.
+AMBIGUOUS_ABBREV_RE = re.compile(r"^[A-Za-z&.\- ]{2,5}$")
+
+
+def is_ambiguous_abbrev(raw_name: str) -> bool:
+    """원문 표기가 영문 약칭 단독(공백·기호 포함 5자 이하)인지 — 자동 링킹 금지 대상."""
+    return bool(raw_name) and bool(AMBIGUOUS_ABBREV_RE.fullmatch(raw_name.strip()))
+
+
+def _enqueue_link_fail(session, surface_form: str, sample: str) -> None:
+    """모호 표기를 LinkFailQueue에 적재(있으면 freq+1) — M2 수동 별칭 루프의 입력."""
+    row = (
+        session.query(LinkFailQueue)
+        .filter(LinkFailQueue.surface_form == surface_form)
+        .first()
+    )
+    if row:
+        row.freq = (row.freq or 1) + 1
+    else:
+        session.add(
+            LinkFailQueue(surface_form=surface_form, freq=1, sample_chunk_id=sample)
+        )
 
 
 def load_manual_overrides() -> dict[str, str]:
@@ -177,6 +206,7 @@ def apply(session=None) -> dict:
         "dropped_personal": 0,
         "dropped_foundation": 0,
         "dropped_unmatched": 0,
+        "queued_ambiguous": 0,
         "pruned_stale": 0,
     }
     touched_keys: set[tuple] = set()
@@ -224,6 +254,11 @@ def apply(session=None) -> dict:
                     continue
                 if is_foundation(r.target_name):
                     counters["dropped_foundation"] += 1
+                    continue
+                # FN-013: 영문 약칭 단독 대상명은 자동 링킹 금지 → LinkFailQueue (HMM 오링킹 재발 방지)
+                if is_ambiguous_abbrev(r.target_name):
+                    _enqueue_link_fail(session, r.target_name, f"otrCpr:{r.source_name}:{r.bsns_year}")
+                    counters["queued_ambiguous"] += 1
                     continue
                 target_ticker = ticker_map.get(normalize_company_name(r.target_name))
                 if not target_ticker:
