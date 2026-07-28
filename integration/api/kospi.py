@@ -50,7 +50,11 @@ def _normalize_yahoo(payload: dict[str, Any]) -> dict[str, Any]:
         raise ValueError("missing KOSPI previous close")
 
     updated_at = meta.get("regularMarketTime")
-    if not isinstance(updated_at, (int, float)) and last_index is not None and last_index < len(timestamps):
+    if (
+        not isinstance(updated_at, (int, float))
+        and last_index is not None
+        and last_index < len(timestamps)
+    ):
         updated_at = timestamps[last_index]
     if not isinstance(updated_at, (int, float)):
         updated_at = int(time.time())
@@ -93,5 +97,12 @@ class handler(BaseHTTPRequestHandler):
             with urllib.request.urlopen(request, timeout=8) as response:
                 payload = json.loads(response.read().decode("utf-8"))
             self._send_json(200, _normalize_yahoo(payload))
-        except (urllib.error.URLError, TimeoutError, ValueError, json.JSONDecodeError) as exc:
-            self._send_json(502, {"detail": "KOSPI quote fetch failed", "error": str(exc)})
+        except (
+            urllib.error.URLError,
+            TimeoutError,
+            ValueError,
+            json.JSONDecodeError,
+        ) as exc:
+            self._send_json(
+                502, {"detail": "KOSPI quote fetch failed", "error": str(exc)}
+            )
