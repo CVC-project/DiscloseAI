@@ -1236,15 +1236,7 @@ async function geminiStream({ systemPrompt, history, onChunk, onDone, onError })
     if (!resp.ok) {
       throw new Error((data && data.detail) || `HTTP ${resp.status}`);
     }
-    let answer = (data && data.answer) || '(빈 응답)';
-    // 출처가 있으면 답변 아래에 붙인다 (공시 근거 명시).
-    if (data && Array.isArray(data.sources) && data.sources.length) {
-      const src = data.sources
-        .filter(s => s && s.dart_url)
-        .map(s => `[${s.source_id}] ${s.corp_name} ${s.report_name || ''} — ${s.dart_url}`)
-        .join('\n');
-      if (src) answer += `\n\n─ 출처 ─\n${src}`;
-    }
+    const answer = (data && data.answer) || '(빈 응답)';
     // DartChatbot은 스트리밍이 아니므로 완성된 답변을 한 번에 전달한다.
     onChunk(answer);
     onDone();
@@ -1659,7 +1651,7 @@ function AiChatBubble({ msg }) {
         borderRadius: 4, padding: '7px 10px',
         fontSize: 11.5, lineHeight: 1.65,
         color: isUser ? '#74EEC6' : (msg.error ? '#f87171' : '#94a3b8'),
-        maxWidth: '88%', wordBreak: 'break-word',
+        maxWidth: '88%', wordBreak: 'break-word', whiteSpace: 'pre-wrap',
       }}>
         {msg.text}
         {msg.streaming && <span style={{opacity: 0.5, animation: 'pulseDot 0.8s infinite'}}>▍</span>}
@@ -1998,7 +1990,7 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
 
 const AI_GREETINGS = {
   galaxy: [
-    { who: 'ai', text: "Welcome back, Captain. KOSPI is +0.42% — Semiconductor leads, Biotech lags." },
+    { who: 'ai', text: "Welcome back, Captain. The KOSPI status panel is updating live market data." },
     { who: 'ai', text: "Pick any sector to dive in. I'll brief you on what's moving inside." },
   ],
   sector: [
@@ -2011,9 +2003,128 @@ const AI_GREETINGS = {
   ],
 };
 
+const KOSPI_FALLBACK = {
+  value: 3142.8,
+  previousClose: 3129.65,
+  changePct: 0.42,
+  updatedAt: null,
+  source: 'mock',
+};
+
+function formatKospiValue(value) {
+  if (!Number.isFinite(value)) return '---';
+  return value.toLocaleString('ko-KR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function formatKospiPct(value) {
+  if (!Number.isFinite(value)) return '--';
+  const sign = value > 0 ? '+' : '';
+  return sign + value.toFixed(2) + '%';
+}
+
+function formatKospiTime(timestamp) {
+  if (!timestamp) return 'mock';
+  const date = new Date(timestamp);
+  return new Intl.DateTimeFormat('ko-KR', {
+    timeZone: 'Asia/Seoul',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  }).format(date) + ' 기준';
+}
+
+function readKospiChart(payload) {
+  const result = payload && payload.chart && payload.chart.result && payload.chart.result[0];
+  if (!result) throw new Error('KOSPI chart payload is empty');
+  const meta = result.meta || {};
+  const timestamps = result.timestamp || [];
+  const quote = (((result.indicators || {}).quote || [])[0] || {});
+  const closes = quote.close || [];
+  const validIndexes = closes
+    .map((value, index) => Number.isFinite(value) ? index : -1)
+    .filter(index => index >= 0);
+  const lastIndex = validIndexes.length ? validIndexes[validIndexes.length - 1] : null;
+  const value = Number(meta.regularMarketPrice || (lastIndex !== null ? closes[lastIndex] : NaN));
+  const previousClose = Number(meta.previousClose || meta.chartPreviousClose);
+  const updatedAtSec = Number(meta.regularMarketTime || (lastIndex !== null ? timestamps[lastIndex] : 0));
+  const changePct = Number.isFinite(value) && Number.isFinite(previousClose) && previousClose !== 0
+    ? ((value - previousClose) / previousClose) * 100
+    : NaN;
+  return {
+    value,
+    previousClose,
+    changePct,
+    updatedAt: updatedAtSec ? updatedAtSec * 1000 : Date.now(),
+    source: 'Yahoo Finance',
+  };
+}
+
+function readKospiApi(payload) {
+  const value = Number(payload && payload.value);
+  const previousClose = Number(payload && payload.previousClose);
+  const changePct = Number(payload && payload.changePct);
+  const updatedAt = Number(payload && payload.updatedAt);
+  if (!Number.isFinite(value)) throw new Error('KOSPI API payload is invalid');
+  return {
+    value,
+    previousClose,
+    changePct,
+    updatedAt: Number.isFinite(updatedAt) ? updatedAt : Date.now(),
+    source: (payload && payload.source) || 'KOSPI API',
+  };
+}
+
+async function fetchKospiQuote() {
+  const endpoints = [
+    { url: '/api/kospi', reader: readKospiApi },
+    { url: 'https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?range=1d&interval=1m&_=' + Date.now(), reader: readKospiChart },
+  ];
+  let lastError = null;
+  for (const endpoint of endpoints) {
+    try {
+      const response = await fetch(endpoint.url, { cache: 'no-store' });
+      if (!response.ok) throw new Error('KOSPI fetch failed: ' + response.status);
+      return endpoint.reader(await response.json());
+    } catch (error) {
+      lastError = error;
+    }
+  }
+  throw lastError || new Error('KOSPI fetch failed');
+}
+
+function useKospiQuote() {
+  const [quote, setQuote] = useState({ ...KOSPI_FALLBACK, loading: true });
+  useEffect(() => {
+    let alive = true;
+    async function refresh() {
+      try {
+        const next = await fetchKospiQuote();
+        if (alive) setQuote({ ...next, loading: false, error: null });
+      } catch (error) {
+        if (alive) setQuote(prev => ({
+          ...prev,
+          loading: false,
+          error: error && error.message ? error.message : 'KOSPI fetch failed',
+        }));
+      }
+    }
+    refresh();
+    const timer = setInterval(refresh, 60000);
+    return () => {
+      alive = false;
+      clearInterval(timer);
+    };
+  }, []);
+  return quote;
+}
+
 // ─── Intro screen ──────────────────────────────────────────────────────────
 // ─── Top tabs ──────────────────────────────────────────────────────────────
 function TopTabs({ active, onChange, breadcrumb }) {
+  const kospi = useKospiQuote();
+  const isUp = Number(kospi.changePct) >= 0;
   const tabs = [
     { id: 'finance',   en: 'FINANCIALS',  ko: '재무정보' },
     { id: 'disclose',  en: 'DISCLOSURES', ko: '공시' },
@@ -2045,9 +2156,10 @@ function TopTabs({ active, onChange, breadcrumb }) {
       </div>
       <div className="top-tabs-status">
         <span className="hud-dot" />
-        <span style={{color:'#94a3b8',fontSize:11,letterSpacing:'.08em'}}>KOSPI</span>
-        <span style={{color:'#74EEC6',fontSize:13,fontWeight:600}}>3,142.80</span>
-        <span style={{color:'#4ade80',fontSize:11}}>+0.42%</span>
+        <span className="kospi-label">KOSPI</span>
+        <span className="kospi-value">{formatKospiValue(kospi.value)}</span>
+        <span className={"kospi-delta " + (isUp ? 'up' : 'down')}>{formatKospiPct(kospi.changePct)}</span>
+        <span className="kospi-time">{kospi.loading ? '갱신 중' : formatKospiTime(kospi.updatedAt)}</span>
       </div>
     </div>
   );
