@@ -17,14 +17,14 @@
     return t.toFixed(2);
   }
 
-  // 큰 단위 시총(원) → "T" 라벨 (예: 980T, 1,461T).
+  // 큰 단위 시총(원) → "조원" 라벨 (예: 980조원, 1,461조원).
   function trillionLabel(won) {
     if (!won) return "-";
     const t = won / 1e12;
-    if (t >= 1000) return Math.round(t).toLocaleString() + "T";
-    if (t >= 100) return Math.round(t) + "T";
-    if (t >= 10) return t.toFixed(0) + "T";
-    return t.toFixed(1) + "T";
+    if (t >= 1000) return Math.round(t).toLocaleString() + "조원";
+    if (t >= 100) return Math.round(t) + "조원";
+    if (t >= 10) return t.toFixed(0) + "조원";
+    return t.toFixed(1) + "조원";
   }
 
   // "1262조"·"850억" 같은 표시용 문자열 시총을 원(KRW) 단위 숫자로 변환.

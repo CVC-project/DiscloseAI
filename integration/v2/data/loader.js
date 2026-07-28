@@ -142,8 +142,6 @@
     const SM = D.SECTOR_META || {};
     const sectors = Array.from(map.values()).map((e) => {
       const meta = SM[e.name] || { en: e.name.toUpperCase(), color: "#94a3b8" };
-      const ytd = +(((e.members.length * 0.7) + Math.random() * 4) - 2).toFixed(1);
-      const per = +(8 + Math.random() * 12).toFixed(1);
       return {
         id: slugify(e.name),
         ko: e.name,
@@ -153,9 +151,6 @@
         cap: trillionLabel(e.totalCapWon),
         memberCount: e.members.length,
         members: e.members,
-        // YTD/PER은 mock — 후속 phase에서 price_scenarios·실거래로 계산
-        ytdMock: ytd,
-        perMock: per,
       };
     });
     sectors.sort((a, b) => b.capWon - a.capWon);
