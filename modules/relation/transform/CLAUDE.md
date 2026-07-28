@@ -42,6 +42,28 @@ def classify_ownership(ratio: float) -> str | None:
 - 기업명에 `"재단"`, `"공익"`, `"장학회"` 포함
 - 예: "삼성생명공익재단", "삼성문화재단" → 제외
 
+## 엔티티 링킹 방어 5층 (2026-07-28 조문화 — FN-013, 교육 서비스의 Key 요건)
+
+> **배경 사고**: 현대차 사업보고서 타법인출자의 "HMM"(해외 생산법인 약칭)이 상장 해운사
+> HMM(011200)에 이름 정확 일치로 오링킹 → "현대차가 HMM 99.99% 종속" 허위 관계가
+> 4개년 노출(리더 발견). 잘못된 지배구조는 교육 서비스의 신뢰를 직접 훼손한다 —
+> **이름 정확 일치는 신원 증명이 아니다.** 아래 5층은 회귀 테스트
+> (`tests/relation/test_transform/test_linking_guards.py`)로 박제 — 삭제·완화 금지.
+> 다음 확장(재수집·T2·신규 원천 추가) 때도 이 5층을 통과해야 한다.
+
+| 층 | 방어 | 구현 | 잡는 것 |
+|---|---|---|---|
+| L1 | **모호 약칭 게이트** — 대상명이 영문 2~5자 단독이면 자동 링킹 금지 → LinkFailQueue. 단 **실존 상장사 정식명**(NAVER·KT 등 — ticker_map에 정확 존재)은 통과 | `filters.is_ambiguous_abbrev()` | HMA·HMI·GMC류 해외법인 약칭 |
+| L2 | **쌍 블록리스트** — CPA 검수로 확정된 오링킹 (source,target) 차단. 사유 병기 필수 | `data/link_blocklist.csv` + `load_link_blocklist()` | 화이트리스트 통과분(현대차→HMM)·한글 동명 비상장(DS단석 '하이브')·구사명 충돌 |
+| L3 | **ratio sanity** — 지분율 >100%는 오파싱(주식수 혼입) drop. 정확히 100%는 유효(상장 前) | `filters.apply()` otrCpr 분기 | 영풍→시그네틱스 710651% |
+| L4 | **50%+ 교차검증** — otrCpr 50%+인데 상대 hyslrSttus에 출자사 부재=모순 → CPA 검수 리스트 산출(자동 삭제 금지 — 오탐 다수) | 스캔 스크립트 → `data/review_*.csv` | "상장사 100% 보유"류 모순 |
+| L5 | **LinkFailQueue → M2 수동 루프** — 큐 상위 표기를 CPA가 별칭(구사명 포함) 또는 블록으로 확정 | `NAME_ALIASES`·blocklist 갱신 후 transform 재실행 | 잔여 전부 |
+
+- **구사명 시차**: registry `name_current`는 현재 사명만 보유 — 과거 연도 공시의 구사명은
+  `NAME_ALIASES`에 "구사명→현재사명"으로 흡수(예: 에스씨엠생명과학→풍전약품).
+  근본 해법(사명 이력 테이블)은 V2+ 과제.
+- transform 재실행만으로 오염이 정리된다(prune) — RelationLocal 수동 DELETE 금지.
+
 ## 기업명 정규화 (`filters.py` 또는 공통 유틸)
 
 매칭 실패를 줄이기 위한 전처리:

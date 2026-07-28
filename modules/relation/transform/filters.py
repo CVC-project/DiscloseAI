@@ -230,6 +230,7 @@ def apply(session=None) -> dict:
         "dropped_unmatched": 0,
         "queued_ambiguous": 0,
         "dropped_blocklist": 0,
+        "dropped_ratio_invalid": 0,
         "pruned_stale": 0,
     }
     touched_keys: set[tuple] = set()
@@ -278,8 +279,16 @@ def apply(session=None) -> dict:
                 if is_foundation(r.target_name):
                     counters["dropped_foundation"] += 1
                     continue
-                # FN-013: 영문 약칭 단독 대상명은 자동 링킹 금지 → LinkFailQueue (HMM 오링킹 재발 방지)
-                if is_ambiguous_abbrev(r.target_name):
+                # FN-013: ratio sanity — 지분율에 주식수가 들어온 오파싱(영풍→시그네틱스 710651%) 차단
+                if r.ratio is not None and r.ratio > 100:
+                    counters["dropped_ratio_invalid"] += 1
+                    continue
+                # FN-013: 영문 약칭 단독 대상명 게이트. 단 NAVER·KT·SK·HMM처럼 **정식 사명
+                # 자체가 약칭 형태인 실존 상장사**(ticker_map에 정확 존재)는 통과 —
+                # 이 경우의 오링킹(현대차→HMM)은 쌍 단위 블록리스트가 최종 방어한다.
+                if is_ambiguous_abbrev(r.target_name) and not ticker_map.get(
+                    normalize_company_name(r.target_name)
+                ):
                     _enqueue_link_fail(session, r.target_name, f"otrCpr:{r.source_name}:{r.bsns_year}")
                     counters["queued_ambiguous"] += 1
                     continue

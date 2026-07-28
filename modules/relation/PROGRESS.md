@@ -996,3 +996,19 @@
 - **구조 과제(V2+)**: registry name_current는 현재 사명만 보유 — 과거 연도 링킹은 그 시점
   사명과 어긋날 수 있음. 구사명 이력(name history) 테이블이 근본 해법.
 - **검증**: transform pytest 50 passed · V-3 61/61 PASS · ego 30건 변경 동기화.
+
+## 2026-07-28 (후속 3) — 잔여 전부 해소 + 방어 5층 조문화·코드화 (리더 Key 요건)
+
+- **영풍→시그네틱스 종결**: RelationRaw 원문 추적 — 시그네틱스 최대주주=비상장 테라닉스
+  35.3%, 상장 영풍의 실지분 **0.83%**(5% 기준 미달). 710651%는 오파싱 행. 즉 "엣지 없음"이
+  정답 — 복구할 것이 없음을 원문으로 증명. ratio sanity 게이트(>100% drop) 신설로 유형 차단.
+- **LinkFailQueue 별칭 소진**: 게이트에 화이트리스트 추가 — NAVER·KT·SK·E1처럼 **정식
+  사명이 약칭 형태인 실존 상장사**(ticker_map 정확 존재)는 통과. 재실행 결과 5%+ 진짜
+  엣지 +8 복구, 현대차 해외법인 약칭(GMC·HMMC·HMMEA…)은 전량 큐 잔류(정답),
+  KT·NAVER 소액 지분은 K-IFRS 5% 임계값 제외(정책상 정답). 현대차→HMM은 블록리스트
+  등재로 화이트리스트 통과 후에도 0 확인.
+- **구사명 시차**: NAME_ALIASES에 "에스씨엠생명과학→풍전약품" — 과거 공시 링킹 흡수.
+- **조문화·코드화(리더 지정 Key)**: transform/CLAUDE.md "엔티티 링킹 방어 5층" 조문 신설 +
+  `tests/relation/test_transform/test_linking_guards.py` 회귀 박제(삭제·완화 금지).
+- **검증**: test_transform 58 passed(신규 가드 테스트 포함) · V-3 61/61 PASS ·
+  active 3,423 · ego 4건 재동기화.
