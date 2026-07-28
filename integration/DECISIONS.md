@@ -27,6 +27,8 @@
 - **FN-005** (07-22, 와이어링) — **데이터 소스 전환은 graceful fallback 사다리로**: universe.json 도입 시 기존 graph_top50 경로를 제거하지 않고 `usingUniverse` 분기(universe → top50 → mock 순 폴백)로 공존시킴 — 소스 파일이 없거나 브랜치가 달라도 화면이 죽지 않는다(실측: universe 없는 브랜치에서 top50으로 자동 폴백). **재발 방지**: 새 데이터 소스로 갈아탈 때 구 경로를 즉시 삭제하지 말고 폴백 사다리에 편입, 은퇴는 안정화 후 별도 커밋으로.
 - **FN-006** (07-22, 와이어링) — **캔버스 레이아웃 노드는 x/y·gx/gy 쌍 필수**: SectorMap 애니메이션이 `c.x/c.y`(초기 위치)와 `c.gx/c.gy`(목표 위치)를 모두 읽는다 — 새 레이아웃 빌더가 gx/gy만 넣으면 animPos 초기화가 NaN → `createRadialGradient non-finite` 크래시(실제 발생, 드릴인 구현 중). **재발 방지**: layout 배열에 노드를 만드는 코드는 네 필드 전부 채울 것.
 
+- **FN-008** (07-28, 와이어링) — **드릴인 상태 리셋이 기업 진입을 붕괴시킴** `→ 코드화`: ghost 관계 노드로 타 섹터 기업에 진입(SK하이닉스→SK류)하면 `selectGhost`→`enterSector()`가 `activeMarket`을 null로 리셋 → SectorMap이 성운 개요 모드(시장 프록시 노드 2개)로 렌더되는데 활성 기업은 layout에 없어(ai=-1) **중앙에 안 나타나고 배경은 개요 dots로 남음**(전 기업 공통, 리더 보고). **처리 2중**: ① App — selectCompany/selectGhost가 `indexByCode[code].mkt`로 그 기업의 시장을 즉시 설정 ② SectorMap — `effectiveMarket = activeMarket || 활성기업의 mkt` 방어(상태 불일치여도 개요 모드로 안 떨어짐). **재발 방지**: LOD 상태(activeSectorId·activeMarket·activeCompanyCode)를 바꾸는 새 진입 경로(딥링크·검색·목록 클릭 등)를 추가할 땐 **세 상태가 정합인지**(기업이 있으면 그 기업의 섹터·시장) 반드시 확인 — 하위 상태만 세팅하고 상위를 리셋하면 같은 붕괴 재발.
+
 ## ③ 배포·환경 층
 
 - **FN-007** (07-22, 환경) — **로컬 검증 서버는 브랜치 상태에 종속**: `integration/data/*.json`은 커밋 대상 파생물이라 **브랜치를 바꾸면 서빙 데이터도 바뀐다** — universe 데이터가 없는 브랜치에서 404가 나 "구현이 사라졌다"로 오진 가능(실제 발생: fix/vercel-* 브랜치에서 universe.json 404). **재발 방지**: localhost 검증 전 `git branch --show-current` 확인 + 대상 브랜치 체크아웃. 검증 흐름: `python -m http.server 8777` → `http://localhost:8777/integration/v2/index.html` → 하드 리로드(Ctrl+Shift+R).

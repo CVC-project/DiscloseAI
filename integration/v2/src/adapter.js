@@ -200,7 +200,7 @@
     return Math.max(1, (m.sz || 1) * 5);
   }
 
-  // {id: {KOSPI:{named:[{code,name,cap,market}...cap desc], dotBuckets:[cb...], total}, KOSDAQ:{...}}}
+  // {id: {KOSPI:{named:[{code,name,cap,market}...cap desc], dotItems:[{cb,t,n}...], total}, KOSDAQ:{...}}}
   function buildSectorMarketData(palette, nodes, companiesIndex) {
     const koToId = new Map(palette.map((p) => [p.ko, p.id]));
     const namedBySector = new Map();
@@ -210,12 +210,13 @@
       if (!namedBySector.has(id)) namedBySector.set(id, []);
       namedBySector.get(id).push(n);
     }
-    const dotInfo = new Map();  // ko → {KOSPI:[cb], KOSDAQ:[cb]} (tier==='dot' 기업)
+    // dot 기업에 신원(t·n) 유지 — UX-009: dot hover 툴팁·클릭 진입에 필요
+    const dotInfo = new Map();  // ko → {KOSPI:[{cb,t,n}], KOSDAQ:[{cb,t,n}]} (tier==='dot' 기업)
     for (const c of (companiesIndex || [])) {
       if (c.tier !== "dot") continue;
       if (!dotInfo.has(c.s)) dotInfo.set(c.s, { KOSPI: [], KOSDAQ: [] });
       const g = dotInfo.get(c.s);
-      (g[c.mkt] || g.KOSDAQ).push(c.cb || 0);
+      (g[c.mkt] || g.KOSDAQ).push({ cb: c.cb || 0, t: c.t, n: c.n });
     }
     const out = {};
     for (const p of palette) {
@@ -227,9 +228,11 @@
           .filter((n) => n.mkt === M)
           .sort((a, b) => _capJo(b) - _capJo(a))
           .map((n) => ({ code: n.t, name: n.n, cap: Math.max(1, Math.round(_capJo(n))), market: M }));
-        // 캡 초과 named도 배경 dot으로(살짝 큰 버킷)
-        const overflow = mnamed.slice(MARKET_NAMED_CAP).map((x) => Math.min(3, Math.max(1, Math.round(x.cap / 6))));
-        mk[M] = { named: mnamed, dotBuckets: [...di[M], ...overflow], total: mnamed.length + di[M].length };
+        // 캡 초과 named도 배경 dot으로(살짝 큰 버킷) — 신원 보존
+        const overflow = mnamed.slice(MARKET_NAMED_CAP).map((x) => ({
+          cb: Math.min(3, Math.max(1, Math.round(x.cap / 6))), t: x.code, n: x.name,
+        }));
+        mk[M] = { named: mnamed, dotItems: [...di[M], ...overflow], total: mnamed.length + di[M].length };
       }
       out[p.id] = mk;
     }
@@ -284,7 +287,7 @@
   async function injectBundleScript() {
     // Babel-standalone auto-transforms <script type="text/babel"> tags only at page load.
     // For dynamic injection we fetch the source ourselves, transform via Babel, then run.
-    const url = "./src/bundle.jsx?v=k5b";
+    const url = "./src/bundle.jsx?v=k6b";
     const src = await fetch(url).then((r) => r.text());
     const out = window.Babel.transform(src, { presets: ["env", "react"] }).code;
     const s = document.createElement("script");
@@ -343,7 +346,9 @@
         usingMock: result.usingMock,
         usingUniverse: result.usingUniverse,
         dots,
-        sectorMarketData,   // universe 드릴인 원자료: {id:{KOSPI:{named,dotBuckets,total},KOSDAQ:{...}}}
+        sectorMarketData,   // universe 드릴인 원자료: {id:{KOSPI:{named,dotItems,total},KOSDAQ:{...}}}
+        // 티커 → {n,s,tier,mkt,cb} 신원 맵 (FN-008 시장 유도·UX-009 dot 기업 진입용)
+        indexByCode: Object.fromEntries((result.companiesIndex || []).map((c) => [c.t, c])),
         companiesIndex: result.companiesIndex || [],
         universeMeta: result.universeMeta || null,
       };

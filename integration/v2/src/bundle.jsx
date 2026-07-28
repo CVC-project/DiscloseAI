@@ -863,36 +863,72 @@ function SectorMap({ sectorId, activeMarket, activeCompanyCode, onSelectMarket, 
   const bgStarsRef = _useRef([]);
   const shootingRef = _useRef([]);
   const dotsCanvasRef = _useRef(null);   // LOD-1 배경 dots 오프스크린 (섹터 진입 시 1회 빌드)
+  const dotsScreenRef = _useRef([]);     // UX-009: dot 화면 좌표+신원 [{x,y,r,t,n}] — hover/클릭 히트테스트
+  const [hoverDot, setHoverDot] = _useState(null);  // {x,y,n} — DOM 툴팁 (⚠ effect deps에 넣지 말 것, DESIGN §9-1)
 
   const sec = SECTOR_PALETTE.find(s => s.id === sectorId) || SECTOR_PALETTE[0];
 
   // U2 드릴인 LOD: sectorMarketData가 있으면 모드별 레이아웃 계산
-  //   - 개요(activeMarket 없음): KOSPI/KOSDAQ 성운 프록시 2노드 + 양쪽 dots
-  //   - 드릴인(activeMarket): 그 시장 상위 ~10 named 중앙 배치 + 나머지 dots
+  //   - 개요(시장 미선택): KOSPI/KOSDAQ 성운 프록시 2노드 + 양쪽 dots
+  //   - 드릴인(시장 선택): 그 시장 상위 ~10 named 중앙 배치 + 나머지 dots
   // 없으면(top50 fallback) 기존 COMPANIES/dots 단일 클러스터.
   const _md = (window.__realData && window.__realData.sectorMarketData && window.__realData.sectorMarketData[sectorId]) || null;
   const MARKET_CAP = 10;
 
+  // FN-008: 활성 기업이 있으면 그 기업의 시장이 곧 렌더 시장 — ghost 진입·딥링크로
+  // activeMarket이 리셋/불일치여도 개요 모드(프록시 노드)로 떨어지지 않게 방어.
+  const _idx = (window.__realData && window.__realData.indexByCode) || {};
+  const effectiveMarket = activeMarket ||
+    (activeCompanyCode && _idx[activeCompanyCode] && _idx[activeCompanyCode].mkt) || null;
+
   const { layout, dotsData } = _useMemo(() => {
     const srng = (seed) => { let s = ((seed * 9301 + 49297) % 233280 + 233280) % 233280; return () => { s = (s * 9301 + 49297) % 233280; return s / 233280; }; };
-    const scatter = (cx, cy, r, seed, buckets) => {
+    // dots 항목: [x, y, capBucket, ticker, name] — UX-009 hover 툴팁·클릭 진입용 신원 보존
+    const scatter = (cx, cy, r, seed, items) => {
       const rng = srng(seed), o = [];
-      for (let i = 0; i < buckets.length; i++) { const a = rng() * Math.PI * 2, rr = r * Math.sqrt(rng()); o.push([cx + Math.cos(a) * rr, cy + Math.sin(a) * rr, buckets[i] || 0]); }
+      for (let i = 0; i < items.length; i++) {
+        const a = rng() * Math.PI * 2, rr = r * Math.sqrt(rng());
+        const it = items[i] || {};
+        o.push([cx + Math.cos(a) * rr, cy + Math.sin(a) * rr, it.cb || 0, it.t || null, it.n || null]);
+      }
       return o;
     };
     const phyllo = (items, cx, cy, r) => items.map((m, i) => {
       if (i === 0) return { ...m, x: cx, y: cy, gx: cx, gy: cy };
-      const ang = i * 2.39996, rr = r * (0.28 + ((i - 1) / Math.max(1, items.length - 1)) * 0.68);
+      const ang = i * 2.39996, rr = r * (0.34 + ((i - 1) / Math.max(1, items.length - 1)) * 0.62);
       const gx = cx + Math.cos(ang) * rr, gy = cy + Math.sin(ang) * rr;
       return { ...m, x: gx, y: gy, gx, gy };
     });
+    // UX-007: 구(노드) 겹침 해소 — 노드 반경(draw와 동일 공식)을 정규 좌표로 환산해
+    // 겹치는 쌍을 서로 밀어내는 완화(relaxation) 패스. 결정적(난수 없음).
+    const relax = (nodes, baseRpx) => {
+      const rn = nodes.map(n => (Math.min(40, 6 + Math.sqrt(n.cap || 10) * 1.5) * 1.6) / baseRpx);
+      for (let iter = 0; iter < 40; iter++) {
+        let moved = false;
+        for (let i = 0; i < nodes.length; i++) for (let j = i + 1; j < nodes.length; j++) {
+          const a = nodes[i], b = nodes[j];
+          const dx = b.gx - a.gx, dy = b.gy - a.gy;
+          const d = Math.sqrt(dx * dx + dy * dy) || 0.0001;
+          const min = rn[i] + rn[j];
+          if (d < min) {
+            const push = (min - d) / 2, ux = dx / d, uy = dy / d;
+            a.gx -= ux * push; a.gy -= uy * push;
+            b.gx += ux * push; b.gy += uy * push;
+            moved = true;
+          }
+        }
+        if (!moved) break;
+      }
+      for (const n of nodes) { n.x = n.gx; n.y = n.gy; }
+      return nodes;
+    };
 
     if (!_md) {
       const comp = COMPANIES[sectorId] || COMPANIES.semi || [];
       const dd = (window.__realData && window.__realData.dots && window.__realData.dots[sectorId]) || [];
       return { layout: comp.map(c => ({ ...c, gx: c.x, gy: c.y })), dotsData: dd };
     }
-    if (!activeMarket) {
+    if (!effectiveMarket) {
       // 개요: 두 성운 프록시 노드(클릭 시 드릴인) + 양쪽 dots 성운
       const nodes = [], dots = [];
       const specs = [{ M: 'KOSPI', cx: -0.85, seed: 11 }, { M: 'KOSDAQ', cx: 0.85, seed: 22 }];
@@ -900,19 +936,27 @@ function SectorMap({ sectorId, activeMarket, activeCompanyCode, onSelectMarket, 
         const m = _md[sp.M]; if (!m) continue;
         nodes.push({ code: '__mkt_' + sp.M, name: sp.M, en: sp.M, isMarket: true, market: sp.M, count: m.total,
                      cap: Math.min(90, 26 + m.total * 0.16), x: sp.cx, y: 0, gx: sp.cx, gy: 0 });
-        const buckets = [...m.dotBuckets, ...m.named.map(() => 1)];
-        dots.push(...scatter(sp.cx, 0, 0.42, sp.seed, buckets));
+        const items = [...m.dotItems, ...m.named.map(c => ({ cb: 1, t: c.code, n: c.name }))];
+        dots.push(...scatter(sp.cx, 0, 0.42, sp.seed, items));
       }
       return { layout: nodes, dotsData: dots };
     }
     // 드릴인: 단일 시장 중앙, 상위 ~10 named + 나머지 dots
-    const m = _md[activeMarket] || { named: [], dotBuckets: [] };
+    const m = _md[effectiveMarket] || { named: [], dotItems: [] };
     const shown = m.named.slice(0, MARKET_CAP).map(c => ({ code: c.code, name: c.name, en: c.name, cap: c.cap, market: c.market }));
-    const named = phyllo(shown, 0, 0, 0.72);
-    const restBuckets = [...m.dotBuckets, ...m.named.slice(MARKET_CAP).map(() => 1)];
-    const dots = scatter(0, 0, 0.9, activeMarket === 'KOSPI' ? 31 : 32, restBuckets);
+    // FN-008: 활성 기업이 top-N 밖(dot 기업·캡 초과 named)이면 노드로 승격해 중앙에 표시
+    if (activeCompanyCode && !shown.some(c => c.code === activeCompanyCode)) {
+      const over = m.named.find(c => c.code === activeCompanyCode);
+      const di = _idx[activeCompanyCode];
+      if (over) shown.push({ code: over.code, name: over.name, en: over.name, cap: over.cap, market: over.market });
+      else if (di) shown.push({ code: activeCompanyCode, name: di.n, en: di.n, cap: Math.max(2, (di.cb || 0) * 6 + 2), market: di.mkt });
+    }
+    const named = relax(phyllo(shown, 0, 0, 0.72), Math.min(window.innerWidth || 1200, window.innerHeight || 740) * 0.34);
+    const restItems = [...m.dotItems, ...m.named.slice(MARKET_CAP).map(c => ({ cb: 1, t: c.code, n: c.name }))]
+      .filter(it => it.t !== activeCompanyCode);
+    const dots = scatter(0, 0, 0.9, effectiveMarket === 'KOSPI' ? 31 : 32, restItems);
     return { layout: named, dotsData: dots };
-  }, [_md, sectorId, activeMarket]);
+  }, [_md, sectorId, effectiveMarket, activeCompanyCode]);
 
   const companies = layout;
 
@@ -956,6 +1000,7 @@ function SectorMap({ sectorId, activeMarket, activeCompanyCode, onSelectMarket, 
     // (universe/PLAN.md §5 "오프스크린 캔버스 1회 렌더 후 합성 — 프레임당 재도장 금지").
     const buildDotsLayer = (w, h, dpr) => {
       const dots = dotsData || [];
+      dotsScreenRef.current = [];
       if (!dots.length) { dotsCanvasRef.current = null; return; }
       const off = document.createElement('canvas');
       off.width = w * dpr; off.height = h * dpr;
@@ -978,6 +1023,8 @@ function SectorMap({ sectorId, activeMarket, activeCompanyCode, onSelectMarket, 
         octx.beginPath(); octx.arc(px, py, r * 3, 0, Math.PI * 2); octx.fill();
         octx.fillStyle = sec.color + 'ee';
         octx.beginPath(); octx.arc(px, py, r, 0, Math.PI * 2); octx.fill();
+        // UX-009: 신원 있는 dot만 히트테스트 대상으로 등록
+        if (d[3]) dotsScreenRef.current.push({ x: px, y: py, r, t: d[3], n: d[4] || d[3] });
       }
       dotsCanvasRef.current = off;
     };
@@ -1049,7 +1096,7 @@ function SectorMap({ sectorId, activeMarket, activeCompanyCode, onSelectMarket, 
           ctx.beginPath(); ctx.arc(cxN, cyN, R, 0, Math.PI * 2); ctx.fill();
           ctx.restore();
         };
-        if (!activeMarket) {
+        if (!effectiveMarket) {
           const specs = [
             { key: 'KOSPI',  cxN: w / 2 + (-0.85) * baseRh, total: (_md.KOSPI && _md.KOSPI.total) || 0 },
             { key: 'KOSDAQ', cxN: w / 2 + (0.85) * baseRh,  total: (_md.KOSDAQ && _md.KOSDAQ.total) || 0 },
@@ -1274,7 +1321,17 @@ function SectorMap({ sectorId, activeMarket, activeCompanyCode, onSelectMarket, 
       }
       hoverRef.current = best;
       setHoverCode(best);
-      cvs.style.cursor = best ? 'pointer' : 'default';
+      // UX-009: named/관계 노드 히트가 없으면 배경 dot 히트테스트 → 이름 툴팁
+      let dotHit = null;
+      if (!best) {
+        let dBest = 9;  // 최소 9px 히트 반경 (작은 dot도 잡히게)
+        for (const d of dotsScreenRef.current) {
+          const dist = Math.hypot(d.x - mx, d.y - my);
+          if (dist < Math.max(9, d.r * 3) && dist < dBest + d.r * 3) { dBest = dist; dotHit = d; }
+        }
+      }
+      setHoverDot(dotHit ? { x: dotHit.x, y: dotHit.y, n: dotHit.n } : null);
+      cvs.style.cursor = (best || dotHit) ? 'pointer' : 'default';
     };
     const onClick = (e) => {
       const rect = cvs.getBoundingClientRect();
@@ -1294,19 +1351,31 @@ function SectorMap({ sectorId, activeMarket, activeCompanyCode, onSelectMarket, 
         if (best.node.isMarket) onSelectMarket?.(best.node.market);
         else if (best.isRelated) onSelectGhost?.(best.node.code, best.sectorId);
         else onSelectCompany?.(best.node.code);
-      } else if (activeMarket) {
+        return;
+      }
+      // UX-009: 배경 dot 클릭 → 그 기업으로 진입 (개요·드릴인 양쪽)
+      let dotHit = null, dBest = 9;
+      for (const d of dotsScreenRef.current) {
+        const dist = Math.hypot(d.x - mx, d.y - my);
+        if (dist < Math.max(9, d.r * 3) && dist < dBest + d.r * 3) { dBest = dist; dotHit = d; }
+      }
+      if (dotHit) { onSelectCompany?.(dotHit.t); return; }
+      if (effectiveMarket) {
         onSelectCompany?.(null); // 드릴인에서 빈 곳 클릭 → 기업 선택 해제
       }
     };
+    const onLeave = () => { setHoverDot(null); hoverRef.current = null; setHoverCode(null); cvs.style.cursor = 'default'; };
     cvs.addEventListener('mousemove', onMove);
     cvs.addEventListener('click', onClick);
+    cvs.addEventListener('mouseleave', onLeave);
     return () => {
       cancelAnimationFrame(rafRef.current);
       window.removeEventListener('resize', resize);
       cvs.removeEventListener('mousemove', onMove);
       cvs.removeEventListener('click', onClick);
+      cvs.removeEventListener('mouseleave', onLeave);
     };
-  }, [layout, dotsData, allRelated, activeCompanyCode, activeMarket, sectorId]);
+  }, [layout, dotsData, allRelated, activeCompanyCode, effectiveMarket, sectorId]);
 
   return (
     <div className="solar-stage">
@@ -1324,6 +1393,12 @@ function SectorMap({ sectorId, activeMarket, activeCompanyCode, onSelectMarket, 
             </div>
           );
         })}
+        {/* UX-009: 배경 dot hover 이름 툴팁 */}
+        {hoverDot && (
+          <div className="company-label" style={{ left: hoverDot.x, top: hoverDot.y - 16, color: sec.color }}>
+            <div className="company-label-name">{hoverDot.n}</div>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -2223,12 +2298,28 @@ function MascotPanel({ messages = ["섹터를 클릭하면, 기업을 확인할 
 }
 
 // ─── PHASE 3: Sector overview panel (top-left) ─────────────────────────────
-function SectorOverviewPanel({ sector, companyCount, onBack }) {
+// UX-008: 모드별 콘텐츠 — 성운 개요(activeMarket 없음)=DAILY HIGHLIGHTS+SECTOR PULSE,
+// 시장 드릴인(activeMarket)=그 시장 기업 목록(시총순, 클릭 시 기업 선택).
+function SectorOverviewPanel({ sector, companyCount, activeMarket, onBack, onSelectCompany }) {
   if (!sector) return null;
   const D = window.DiscloseAI || {};
   const realData = window.__realData;
   const members = (sector.members || []).map(n => n);
   const highlights = (D.highlightsForSector && realData) ? D.highlightsForSector(realData.discAll, members, 3) : null;
+  // 드릴인 기업 목록: named(시총 정확) 먼저 cap desc → dot 기업 cb desc·이름순
+  const marketList = React.useMemo(() => {
+    if (!activeMarket || !realData || !realData.sectorMarketData) return null;
+    const md = realData.sectorMarketData[sector.id];
+    const m = md && md[activeMarket];
+    if (!m) return null;
+    const namedRows = m.named.map(c => ({ code: c.code, name: c.name, capT: c.cap, isNamed: true }));
+    const namedCodes = new Set(namedRows.map(r => r.code));
+    const dotRows = m.dotItems
+      .filter(d => d.t && !namedCodes.has(d.t))
+      .sort((a, b) => (b.cb - a.cb) || String(a.n).localeCompare(String(b.n), 'ko'))
+      .map(d => ({ code: d.t, name: d.n, capT: null, isNamed: false }));
+    return [...namedRows, ...dotRows];
+  }, [activeMarket, sector.id, realData]);
   return (
     <div className="panel panel-tl sector-overview-panel" style={{'--accent': sector.color}}>
       <div className="panel-head">
@@ -2253,29 +2344,48 @@ function SectorOverviewPanel({ sector, companyCount, onBack }) {
           <div className="ov-stat"><div className="ov-k">YTD</div><div className="ov-v" style={{color:'#4ade80'}}>+12.4%</div></div>
           <div className="ov-stat"><div className="ov-k">P / E</div><div className="ov-v">14.3</div></div>
         </div>
-        <div className="sector-ov-section">
-          <div className="ov-sec-title">DAILY HIGHLIGHTS · 오늘의 시그널</div>
-          <ul className="ov-sec-list">
-            {highlights && highlights.length ? highlights.map((h, i) => (
-              <li key={i}>
-                <span className="ov-bullet" style={{background: h.high_impact ? '#f87171' : sector.color}} />
-                {h.high_impact && <span style={{color:'#f87171', fontFamily:'var(--font-mono)', fontSize:9, marginRight:4}}>HIGH</span>}
-                <span style={{fontFamily:'var(--font-mono)', fontSize:10, color:'#94a3b8', marginRight:6}}>{h.time}</span>
-                {(h.title || '').slice(0, 30)} — {h.corp_name}
-              </li>
-            )) : (
-              <li style={{color:'#64748b'}}>최근 공시 데이터 없음</li>
-            )}
-          </ul>
-        </div>
-        <div className="sector-ov-section">
-          <div className="ov-sec-title">SECTOR PULSE · 섹터 지수</div>
-          <div className="ov-bars">
-            {[0.3, 0.5, 0.4, 0.7, 0.6, 0.8, 0.9, 0.75, 0.85, 0.95].map((v, i) => (
-              <div key={i} className="ov-bar" style={{height: `${v*100}%`, background: sector.color}} />
-            ))}
+        {!marketList && (<>
+          <div className="sector-ov-section">
+            <div className="ov-sec-title">DAILY HIGHLIGHTS · 오늘의 시그널</div>
+            <ul className="ov-sec-list">
+              {highlights && highlights.length ? highlights.map((h, i) => (
+                <li key={i}>
+                  <span className="ov-bullet" style={{background: h.high_impact ? '#f87171' : sector.color}} />
+                  {h.high_impact && <span style={{color:'#f87171', fontFamily:'var(--font-mono)', fontSize:9, marginRight:4}}>HIGH</span>}
+                  <span style={{fontFamily:'var(--font-mono)', fontSize:10, color:'#94a3b8', marginRight:6}}>{h.time}</span>
+                  {(h.title || '').slice(0, 30)} — {h.corp_name}
+                </li>
+              )) : (
+                <li style={{color:'#64748b'}}>최근 공시 데이터 없음</li>
+              )}
+            </ul>
           </div>
-        </div>
+          <div className="sector-ov-section">
+            <div className="ov-sec-title">SECTOR PULSE · 섹터 지수</div>
+            <div className="ov-bars">
+              {[0.3, 0.5, 0.4, 0.7, 0.6, 0.8, 0.9, 0.75, 0.85, 0.95].map((v, i) => (
+                <div key={i} className="ov-bar" style={{height: `${v*100}%`, background: sector.color}} />
+              ))}
+            </div>
+          </div>
+        </>)}
+        {marketList && (
+          <div className="sector-ov-section">
+            <div className="ov-sec-title">{activeMarket} COMPANIES · 시총순 {marketList.length}사</div>
+            <ul className="ov-sec-list" style={{maxHeight: 300, overflowY: 'auto'}}>
+              {marketList.map((r) => (
+                <li key={r.code} onClick={() => onSelectCompany && onSelectCompany(r.code)}
+                    style={{cursor: 'pointer', display:'flex', alignItems:'baseline', gap:6}}>
+                  <span className="ov-bullet" style={{background: sector.color, opacity: r.isNamed ? 1 : 0.4}} />
+                  <span style={{flex:1, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap'}}>{r.name}</span>
+                  <span style={{fontFamily:'var(--font-mono)', fontSize:10, color:'#94a3b8'}}>
+                    {r.capT != null ? r.capT + 'T' : ''}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -2758,6 +2868,12 @@ function App() {
     setPhase('sector');
   }, []);
 
+  // FN-008: 기업 코드 → 소속 시장(KOSPI|KOSDAQ). named·dot 전 기업 커버(indexByCode).
+  const marketOf = useCallback((code) => {
+    const RD = window.__realData || {};
+    return (RD.indexByCode && RD.indexByCode[code] && RD.indexByCode[code].mkt) || null;
+  }, []);
+
   const selectCompany = useCallback((code) => {
     if (!code) {
       // null → deselect, return to sector view
@@ -2766,8 +2882,10 @@ function App() {
       return;
     }
     setActiveCompanyCode(code);
+    // FN-008: 시장 미설정(개요에서 dot 클릭 등)이면 그 기업의 시장으로 자동 드릴인
+    setActiveMarket(prev => prev || marketOf(code));
     setPhase('company');
-  }, []);
+  }, [marketOf]);
 
   const selectGhost = useCallback((code, sectorId) => {
     const targetSectorId = sectorId || (() => {
@@ -2782,8 +2900,12 @@ function App() {
     // batched into a single render — no intermediate "empty sector" screen.
     enterSector(targetSectorId);
     setActiveCompanyCode(code);
+    // FN-008: enterSector가 activeMarket을 null로 리셋 — 그대로 두면 SectorMap이
+    // 개요 모드(시장 프록시 노드)로 렌더돼 활성 기업이 화면에서 사라짐(SK 진입 붕괴).
+    // ghost 기업의 소속 시장으로 즉시 드릴인 설정.
+    setActiveMarket(marketOf(code));
     setPhase('company');
-  }, [enterSector]);
+  }, [enterSector, marketOf]);
 
   const [corpOverlayTicker, setCorpOverlayTicker] = useState(null);
   const [discDetailItem, setDiscDetailItem] = useState(null);
@@ -2833,7 +2955,16 @@ function App() {
   // 산업군 테마 액센트 — 오버레이 크롬(헤더·탭바)과 3탭 iframe에 공통 적용 (섹터색)
   const sectorAccent = (sector && sector.color) || '#74EEC6';
   const companies = activeSectorId ? (window.COMPANIES[activeSectorId] || window.COMPANIES.semi) : [];
-  const company = activeCompanyCode ? companies.find(c => c.code === activeCompanyCode) : null;
+  // UX-009: dot 기업(top-N 밖)은 COMPANIES 평탄 목록에 없음 → indexByCode 신원으로 폴백
+  // (CompanyOverviewPanel은 node 데이터 없으면 기본 정보만 렌더 — null-safe 확인됨)
+  const company = activeCompanyCode
+    ? (companies.find(c => c.code === activeCompanyCode)
+       || (() => {
+            const RD = window.__realData || {};
+            const di = RD.indexByCode && RD.indexByCode[activeCompanyCode];
+            return di ? { code: activeCompanyCode, name: di.n, en: di.n, cap: Math.max(1, (di.cb || 0) * 6 + 1) } : null;
+          })())
+    : null;
 
   // breadcrumb — GALAXY › 섹터 › [KOSPI|KOSDAQ] › 기업 (U2 드릴인)
   const crumb = [];
@@ -2890,7 +3021,7 @@ function App() {
           {activeTab === 'finance' ? (
             <>
               {phase === 'galaxy' && <MascotPanel messages={["섹터를 클릭하면, 기업을 확인할 수 있어요!", "오른쪽 아래 섹터 INDEX에서도 선택할 수 있어요.", "AI 코파일럿에게 무엇이든 물어보세요."]} />}
-              {phase === 'sector' && <SectorOverviewPanel sector={sector} companyCount={sector.count || companies.length} onBack={backToGalaxy} />}
+              {phase === 'sector' && <SectorOverviewPanel sector={sector} companyCount={sector.count || companies.length} activeMarket={activeMarket} onSelectCompany={selectCompany} onBack={activeMarket ? backToSectorOverview : backToGalaxy} />}
               {phase === 'company' && <CompanyOverviewPanel company={company} sector={sector} onBack={backToSector} onEnter={enterCorporation} />}
             </>
           ) : (
