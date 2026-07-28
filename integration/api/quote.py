@@ -24,8 +24,9 @@ import urllib.request
 from http.server import BaseHTTPRequestHandler
 from typing import Any
 
-
-YAHOO_CHART_URL = "https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?range=1d&interval=1m"
+YAHOO_CHART_URL = (
+    "https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?range=1d&interval=1m"
+)
 
 # 지수(^KS11)·개별 종목(005930.KS) 심볼만 허용 — 임의 경로 프록시로 악용되는 것을 방지.
 _SYMBOL_RE = re.compile(r"^\^?[A-Za-z0-9]{1,10}(\.[A-Za-z]{1,4})?$")
@@ -124,6 +125,4 @@ class handler(BaseHTTPRequestHandler):
             ValueError,
             json.JSONDecodeError,
         ) as exc:
-            self._send_json(
-                502, {"detail": "quote fetch failed", "error": str(exc)}
-            )
+            self._send_json(502, {"detail": "quote fetch failed", "error": str(exc)})
