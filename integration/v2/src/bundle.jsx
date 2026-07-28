@@ -1236,15 +1236,7 @@ async function geminiStream({ systemPrompt, history, onChunk, onDone, onError })
     if (!resp.ok) {
       throw new Error((data && data.detail) || `HTTP ${resp.status}`);
     }
-    let answer = (data && data.answer) || '(빈 응답)';
-    // 출처가 있으면 답변 아래에 붙인다 (공시 근거 명시).
-    if (data && Array.isArray(data.sources) && data.sources.length) {
-      const src = data.sources
-        .filter(s => s && s.dart_url)
-        .map(s => `[${s.source_id}] ${s.corp_name} ${s.report_name || ''} — ${s.dart_url}`)
-        .join('\n');
-      if (src) answer += `\n\n─ 출처 ─\n${src}`;
-    }
+    const answer = (data && data.answer) || '(빈 응답)';
     // DartChatbot은 스트리밍이 아니므로 완성된 답변을 한 번에 전달한다.
     onChunk(answer);
     onDone();
@@ -1659,7 +1651,7 @@ function AiChatBubble({ msg }) {
         borderRadius: 4, padding: '7px 10px',
         fontSize: 11.5, lineHeight: 1.65,
         color: isUser ? '#74EEC6' : (msg.error ? '#f87171' : '#94a3b8'),
-        maxWidth: '88%', wordBreak: 'break-word',
+        maxWidth: '88%', wordBreak: 'break-word', whiteSpace: 'pre-wrap',
       }}>
         {msg.text}
         {msg.streaming && <span style={{opacity: 0.5, animation: 'pulseDot 0.8s infinite'}}>▍</span>}
@@ -1998,7 +1990,7 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
 
 const AI_GREETINGS = {
   galaxy: [
-    { who: 'ai', text: "Welcome back, Captain. KOSPI is +0.42% — Semiconductor leads, Biotech lags." },
+    { who: 'ai', text: "Welcome back, Captain. The KOSPI status panel is updating live market data." },
     { who: 'ai', text: "Pick any sector to dive in. I'll brief you on what's moving inside." },
   ],
   sector: [
@@ -2011,9 +2003,128 @@ const AI_GREETINGS = {
   ],
 };
 
+const KOSPI_FALLBACK = {
+  value: 3142.8,
+  previousClose: 3129.65,
+  changePct: 0.42,
+  updatedAt: null,
+  source: 'mock',
+};
+
+function formatKospiValue(value) {
+  if (!Number.isFinite(value)) return '---';
+  return value.toLocaleString('ko-KR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function formatKospiPct(value) {
+  if (!Number.isFinite(value)) return '--';
+  const sign = value > 0 ? '+' : '';
+  return sign + value.toFixed(2) + '%';
+}
+
+function formatKospiTime(timestamp) {
+  if (!timestamp) return 'mock';
+  const date = new Date(timestamp);
+  return new Intl.DateTimeFormat('ko-KR', {
+    timeZone: 'Asia/Seoul',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  }).format(date) + ' 기준';
+}
+
+function readKospiChart(payload) {
+  const result = payload && payload.chart && payload.chart.result && payload.chart.result[0];
+  if (!result) throw new Error('KOSPI chart payload is empty');
+  const meta = result.meta || {};
+  const timestamps = result.timestamp || [];
+  const quote = (((result.indicators || {}).quote || [])[0] || {});
+  const closes = quote.close || [];
+  const validIndexes = closes
+    .map((value, index) => Number.isFinite(value) ? index : -1)
+    .filter(index => index >= 0);
+  const lastIndex = validIndexes.length ? validIndexes[validIndexes.length - 1] : null;
+  const value = Number(meta.regularMarketPrice || (lastIndex !== null ? closes[lastIndex] : NaN));
+  const previousClose = Number(meta.previousClose || meta.chartPreviousClose);
+  const updatedAtSec = Number(meta.regularMarketTime || (lastIndex !== null ? timestamps[lastIndex] : 0));
+  const changePct = Number.isFinite(value) && Number.isFinite(previousClose) && previousClose !== 0
+    ? ((value - previousClose) / previousClose) * 100
+    : NaN;
+  return {
+    value,
+    previousClose,
+    changePct,
+    updatedAt: updatedAtSec ? updatedAtSec * 1000 : Date.now(),
+    source: 'Yahoo Finance',
+  };
+}
+
+function readKospiApi(payload) {
+  const value = Number(payload && payload.value);
+  const previousClose = Number(payload && payload.previousClose);
+  const changePct = Number(payload && payload.changePct);
+  const updatedAt = Number(payload && payload.updatedAt);
+  if (!Number.isFinite(value)) throw new Error('KOSPI API payload is invalid');
+  return {
+    value,
+    previousClose,
+    changePct,
+    updatedAt: Number.isFinite(updatedAt) ? updatedAt : Date.now(),
+    source: (payload && payload.source) || 'KOSPI API',
+  };
+}
+
+async function fetchKospiQuote() {
+  const endpoints = [
+    { url: '/api/kospi', reader: readKospiApi },
+    { url: 'https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?range=1d&interval=1m&_=' + Date.now(), reader: readKospiChart },
+  ];
+  let lastError = null;
+  for (const endpoint of endpoints) {
+    try {
+      const response = await fetch(endpoint.url, { cache: 'no-store' });
+      if (!response.ok) throw new Error('KOSPI fetch failed: ' + response.status);
+      return endpoint.reader(await response.json());
+    } catch (error) {
+      lastError = error;
+    }
+  }
+  throw lastError || new Error('KOSPI fetch failed');
+}
+
+function useKospiQuote() {
+  const [quote, setQuote] = useState({ ...KOSPI_FALLBACK, loading: true });
+  useEffect(() => {
+    let alive = true;
+    async function refresh() {
+      try {
+        const next = await fetchKospiQuote();
+        if (alive) setQuote({ ...next, loading: false, error: null });
+      } catch (error) {
+        if (alive) setQuote(prev => ({
+          ...prev,
+          loading: false,
+          error: error && error.message ? error.message : 'KOSPI fetch failed',
+        }));
+      }
+    }
+    refresh();
+    const timer = setInterval(refresh, 60000);
+    return () => {
+      alive = false;
+      clearInterval(timer);
+    };
+  }, []);
+  return quote;
+}
+
 // ─── Intro screen ──────────────────────────────────────────────────────────
 // ─── Top tabs ──────────────────────────────────────────────────────────────
-function TopTabs({ active, onChange, breadcrumb }) {
+function TopTabs({ active, onChange, breadcrumb, onBack, canGoBack }) {
+  const kospi = useKospiQuote();
+  const isUp = Number(kospi.changePct) >= 0;
   const tabs = [
     { id: 'finance',   en: 'FINANCIALS',  ko: '재무정보' },
     { id: 'disclose',  en: 'DISCLOSURES', ko: '공시' },
@@ -2035,19 +2146,28 @@ function TopTabs({ active, onChange, breadcrumb }) {
           </div>
         )}
       </div>
-      <div className="top-tabs-row">
-        {tabs.map(t => (
-          <div key={t.id} className={"top-tab " + (active === t.id ? 'is-active' : '')} onClick={() => onChange(t.id)}>
-            <div className="top-tab-en">{t.en}</div>
-            <div className="top-tab-ko">{t.ko}</div>
-          </div>
-        ))}
+      <div className="top-tabs-center">
+        <div className="top-tabs-row">
+          {tabs.map(t => (
+            <div key={t.id} className={"top-tab " + (active === t.id ? 'is-active' : '')} onClick={() => onChange(t.id)}>
+              <div className="top-tab-en">{t.en}</div>
+              <div className="top-tab-ko">{t.ko}</div>
+            </div>
+          ))}
+        </div>
+        {canGoBack && (
+          <button className="top-back-btn" onClick={onBack} title="뒤로가기 (ESC)">
+            <span className="top-back-arrow">←</span>
+            <span>BACK</span>
+          </button>
+        )}
       </div>
       <div className="top-tabs-status">
         <span className="hud-dot" />
-        <span style={{color:'#94a3b8',fontSize:11,letterSpacing:'.08em'}}>KOSPI</span>
-        <span style={{color:'#74EEC6',fontSize:13,fontWeight:600}}>3,142.80</span>
-        <span style={{color:'#4ade80',fontSize:11}}>+0.42%</span>
+        <span className="kospi-label">KOSPI</span>
+        <span className="kospi-value">{formatKospiValue(kospi.value)}</span>
+        <span className={"kospi-delta " + (isUp ? 'up' : 'down')}>{formatKospiPct(kospi.changePct)}</span>
+        <span className="kospi-time">{kospi.loading ? '갱신 중' : formatKospiTime(kospi.updatedAt)}</span>
       </div>
     </div>
   );
@@ -2589,9 +2709,20 @@ function App() {
   const [zoomProgress, setZoomProgress] = useState(0);
   const zoomAnimRef = useRef(0);
 
+  // 뒤로가기 히스토리 — "관련 기업(ghost)" 클릭처럼 sector/company를 한번에 건너뛰는 이동을
+  // ESC/BACK이 한 단계씩 되돌릴 수 있도록, 그런 이동 직전 상태를 스택에 남겨둔다.
+  // (매 렌더마다 최신값으로 갱신되는 ref라서 콜백 안에서 항상 "이동 직전" 스냅샷을 정확히 읽는다.)
+  const navStateRef = useRef({ phase, activeSectorId, activeCompanyCode });
+  navStateRef.current = { phase, activeSectorId, activeCompanyCode };
+  const navHistoryRef = useRef([]);
 
   // ENTER SECTOR — animate galaxy → sector
   const enterSector = useCallback((sectorId) => {
+    // galaxy에서 처음 섹터로 들어가는 정상 드릴다운은 히스토리에 남기지 않는다(기존 3단계 ESC 동작 유지).
+    // sector/company 단계에서 다른 섹터로 바로 건너뛸 때만(관련 기업 클릭, 섹터 리스트 직접 전환) 이전 상태를 남긴다.
+    if (navStateRef.current.phase !== 'galaxy') {
+      navHistoryRef.current.push({ ...navStateRef.current });
+    }
     cancelAnimationFrame(zoomAnimRef.current);
     setActiveSectorId(sectorId);
     setPhase('sector');
@@ -2608,6 +2739,7 @@ function App() {
   }, []);
 
   const backToGalaxy = useCallback(() => {
+    navHistoryRef.current = []; // 루트로 명시 리셋 — 남은 이동 히스토리는 더 이상 의미 없음
     cancelAnimationFrame(zoomAnimRef.current);
     setActiveCompanyCode(null);
     setPhase('galaxy');
@@ -2616,6 +2748,7 @@ function App() {
   }, []);
 
   const backToSector = useCallback(() => {
+    navHistoryRef.current = []; // 명시적 "섹터로" 이동 — 이전 이동 히스토리는 폐기
     setActiveCompanyCode(null);
     setPhase('sector');
   }, []);
@@ -2691,6 +2824,45 @@ function App() {
   // 오버레이 열림 동안 배경 캔버스 draw 정지 (성능 §8)
   useEffect(() => { window.__dossierOpen = !!corpOverlayTicker; }, [corpOverlayTicker]);
 
+  // 단계별 뒤로가기 — 우선순위: 공시 상세/전체 오버레이 → CORPORATION DOSSIER 오버레이
+  // → (관련 기업 클릭 등으로 섹터를 건너뛴 히스토리가 있으면 그 직전 상태로 복원)
+  // → company → sector → (galaxy에서 섹터 선택만 된 상태) 해제
+  const goBack = useCallback(() => {
+    if (discDetailItem) { setDiscDetailItem(null); return; }
+    if (discFullOverlayTicker) { setDiscFullOverlayTicker(null); return; }
+    if (corpOverlayTicker) { setCorpOverlayTicker(null); return; }
+    if (navHistoryRef.current.length > 0) {
+      const prev = navHistoryRef.current.pop();
+      cancelAnimationFrame(zoomAnimRef.current);
+      setPhase(prev.phase);
+      setActiveSectorId(prev.activeSectorId);
+      setActiveCompanyCode(prev.activeCompanyCode);
+      setZoomProgress(1); // 되돌아간 섹터는 이미 봤던 화면이라 줌 애니메이션 재생 없이 바로 표시
+      return;
+    }
+    if (phase === 'company') { backToSector(); return; }
+    if (phase === 'sector') { backToGalaxy(); return; }
+    if (activeSectorId) { setActiveSectorId(null); return; }
+  }, [discDetailItem, discFullOverlayTicker, corpOverlayTicker, phase, activeSectorId, backToSector, backToGalaxy]);
+  const canGoBack = !!(discDetailItem || discFullOverlayTicker || corpOverlayTicker || phase !== 'galaxy' || activeSectorId);
+
+  // ESC / Backspace 키 → goBack. Backspace는 채팅 입력창 등 텍스트 편집 중엔 원래 동작(글자 삭제)을 그대로 두고,
+  // 포커스가 입력 요소가 아닐 때만 뒤로가기로 취급한다 (ESC는 입력 포커스와 무관하게 항상 뒤로가기).
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') { goBack(); return; }
+      if (e.key === 'Backspace') {
+        const t = e.target;
+        const isEditable = t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable);
+        if (isEditable) return;
+        e.preventDefault(); // 편집 요소 밖 Backspace의 브라우저 기본 "뒤로가기" 동작 방지
+        goBack();
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [goBack]);
+
   const sector = activeSectorId ? SECTOR_PALETTE.find(s => s.id === activeSectorId) : null;
   // 산업군 테마 액센트 — 오버레이 크롬(헤더·탭바)과 3탭 iframe에 공통 적용 (섹터색)
   const sectorAccent = (sector && sector.color) || '#74EEC6';
@@ -2743,7 +2915,7 @@ function App() {
             </div>
           )}
 
-          <TopTabs active={activeTab} onChange={setActiveTab} breadcrumb={crumb} />
+          <TopTabs active={activeTab} onChange={setActiveTab} breadcrumb={crumb} onBack={goBack} canGoBack={canGoBack} />
 
           {/* Top-left panel — varies by phase and active tab */}
           {activeTab === 'finance' ? (
@@ -2855,7 +3027,7 @@ function App() {
                 const active = dossierTab === tab.id;
                 return (
                   <iframe key={tab.id}
-                    src={`../dossier/${tab.src}?ticker=${corpOverlayTicker}${tab.id === 'eqs' ? '&theme=galaxy' : ''}&accent=${encodeURIComponent(sectorAccent)}`}
+                    src={`../dossier/${tab.src}?ticker=${corpOverlayTicker}${tab.id === 'eqs' ? '&theme=galaxy&v=eqs-feqs-m4-20260728' : ''}&accent=${encodeURIComponent(sectorAccent)}`}
                     title={`${tab.id}-${corpOverlayTicker}`}
                     style={{position:'absolute', inset:0, width:'100%', height:'100%', border:'none', background:'#020408', display: active ? 'block' : 'none'}}
                     onLoad={undefined /* firm.html은 ?theme=galaxy 자체 테마(스코프 CSS) */}

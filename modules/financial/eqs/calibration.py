@@ -124,6 +124,13 @@ def _valid_years(panel: FirmPanel) -> list:
     return panel.years[-3:]
 
 
+def _recent_weighted_average(values: list[float]) -> float:
+    """최근값일수록 높은 1:2:3 가중평균. 입력은 과거->최근 순서."""
+    tail = values[-3:]
+    weights = list(range(1, len(tail) + 1))
+    return sum(value * weight for value, weight in zip(tail, weights)) / sum(weights)
+
+
 def metric_values(panel: FirmPanel) -> dict[str, float]:
     """v3 보정에 쓰는 원시 지표.
 
@@ -157,8 +164,8 @@ def metric_values(panel: FirmPanel) -> dict[str, float]:
         for y in years
         if y.revenue not in (None, 0) and y.operating_income is not None
     ]
-    if len(margins) >= 3:
-        out["m4_average_margin"] = sum(margins) / len(margins)
+    if len(margins) >= 2:
+        out["m4_average_margin"] = _recent_weighted_average(margins)
         out["m4_margin_volatility"] = max(margins) - min(margins)
 
     if len(years) >= 3:
