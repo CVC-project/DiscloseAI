@@ -117,7 +117,7 @@ def test_m4_uses_peer_margin_and_stability_scores():
     assert high.score > low.score
 
 
-def test_v3_two_year_history_uses_reliability_weighted_modules():
+def test_v3_two_year_history_uses_raw_computable_modules():
     peers = [make_panel(index) for index in range(25)]
     calibration = build_calibration(peers, min_peers=20)
     panel = make_panel(2)
@@ -129,9 +129,9 @@ def test_v3_two_year_history_uses_reliability_weighted_modules():
     assert modules["M1"].score is not None
     assert modules["M4"].score is not None
     assert modules["M5"].score is not None
-    assert modules["M1"].weight == 0.70
-    assert modules["M4"].weight == 0.70
-    assert modules["M5"].weight == 0.60
+    assert modules["M1"].weight == 1.0
+    assert modules["M4"].weight == 1.0
+    assert modules["M5"].weight == 1.0
     assert result.total is not None
 
 
@@ -144,10 +144,9 @@ def test_v3_one_year_history_uses_only_interpretable_modules():
     result = compute_eqs(panel, calibration)
     modules = {module.name: module for module in result.modules}
 
-    assert modules["M1"].score is not None
+    assert modules["M1"].score is None
     assert modules["M3"].score is not None
-    assert modules["M4"].score is not None
+    assert modules["M4"].score is None
     assert modules["M2"].score is None
     assert modules["M5"].score is None
-    assert modules["M1"].weight == 0.40
-    assert modules["M4"].weight == 0.40
+    assert result.total == modules["M3"].score

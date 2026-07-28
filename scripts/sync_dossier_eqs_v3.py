@@ -26,6 +26,13 @@ def _load_json(path: Path) -> dict | list:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def _module_order(modules: dict) -> list[str]:
+    names = list(modules)
+    if all(name.startswith("F") for name in names):
+        return sorted(names, key=lambda name: int(name[1:]) if name[1:].isdigit() else 99)
+    return sorted(names, key=lambda name: int(name[1:]) if name[:1] == "M" and name[1:].isdigit() else 99)
+
+
 def _v3_eqs(record: dict, existing: dict) -> dict:
     """Retain historical raw metrics, but replace the user-facing V3 result."""
     old_modules = {
@@ -34,7 +41,8 @@ def _v3_eqs(record: dict, existing: dict) -> dict:
         if isinstance(module, dict)
     }
     modules = []
-    for name in ("M1", "M2", "M3", "M4", "M5"):
+    current_modules = record.get("modules") or {}
+    for name in _module_order(current_modules):
         current = record["modules"].get(name, {})
         previous = old_modules.get(name, {})
         modules.append(

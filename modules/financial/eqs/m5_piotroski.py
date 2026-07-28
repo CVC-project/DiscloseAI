@@ -61,7 +61,6 @@ def score_m5(panel: FirmPanel, calibration: CalibrationResult | None = None) -> 
 
     ratio = curr.total_equity / base.total_equity
     cagr = ratio ** 0.5 - 1 if n >= 3 else ratio - 1
-    confidence = 1.00 if n >= 3 else 0.60
     period_label = "자본 CAGR" if n >= 3 else "1년 자본 증가율"
 
     if calibration is not None:
@@ -73,11 +72,10 @@ def score_m5(panel: FirmPanel, calibration: CalibrationResult | None = None) -> 
                 raw=cagr,
                 note="동종업계 유효 표본 부족 — M5 보류",
             )
-        base_score = score_against_peers(cagr, profile, higher_is_better=True)
-        score = 50.0 + (base_score - 50.0) * confidence
+        score = score_against_peers(cagr, profile, higher_is_better=True)
         note = f"{period_label} {cagr*100:+.1f}%/yr"
         if n < 3:
-            note += f" — 2년 이력 신뢰도 {confidence:.0%} 보정"
+            note += " — 2년 이력"
     else:
         # 보정 테이블이 없는 단독 기업 분석의 호환용 절대 기준.
         if cagr <= -0.10:
@@ -98,5 +96,5 @@ def score_m5(panel: FirmPanel, calibration: CalibrationResult | None = None) -> 
         score=round(score, 1),
         raw=cagr,
         note=note,
-        weight=confidence if calibration is not None else 1.0,
+        weight=1.0,
     )
