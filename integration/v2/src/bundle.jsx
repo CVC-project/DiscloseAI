@@ -2086,13 +2086,8 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
                   <span className="ego-overflow-type" style={{color: style.color}}>{style.label}</span>
                 </div>
               );
-              if (!isVc) {
-                return overflowList.map(n => {
-                  const s = REL_STYLES[n.relType] || REL_STYLES.manual;
-                  return row(n, { color: s.color, dash: s.dash, label: s.label + (n.detail ? ' · ' + n.detail : '') });
-                });
-              }
-              // UX-016: VC 팝오버는 산업별 섹션으로 — "유통 ── / 삼성물산 / …" (리더 지시 형식)
+              // UX-016·020: 팝오버는 두 레이어 모두 산업별 섹션 — "유통 ── / 삼성물산 / …".
+              // 헤더=섹터색, 행 스타일은 레이어 문법 유지(지배구조=관계유형 색·대시 / VC=섹터색+등급 대시).
               const order = [], byKo = new Map();
               for (const n of overflowList) {
                 const ko = n.sectorKo || '기타';
@@ -2108,10 +2103,16 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
                       <span className="ego-overflow-sec-dot" style={{background: c, boxShadow: `0 0 6px ${c}`}} />
                       {ko} <span style={{color: '#64748b'}}>· {byKo.get(ko).length}사</span>
                     </div>
-                    {byKo.get(ko).map(n => row(n, {
-                      color: c, dash: (VC_TIER_STYLES[n.tier] || VC_TIER_STYLES.T1).dash,
-                      label: (n.type === 'supply' ? '공급처' : '고객사') + (n.amount ? ' · ' + fmtVcAmount(n.amount) : ''),
-                    }))}
+                    {byKo.get(ko).map(n => {
+                      if (isVc) {
+                        return row(n, {
+                          color: c, dash: (VC_TIER_STYLES[n.tier] || VC_TIER_STYLES.T1).dash,
+                          label: (n.type === 'supply' ? '공급처' : '고객사') + (n.amount ? ' · ' + fmtVcAmount(n.amount) : ''),
+                        });
+                      }
+                      const s = REL_STYLES[n.relType] || REL_STYLES.manual;
+                      return row(n, { color: s.color, dash: s.dash, label: s.label + (n.detail ? ' · ' + n.detail : '') });
+                    })}
                   </React.Fragment>
                 );
               });
