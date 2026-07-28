@@ -62,6 +62,7 @@ PRD 상세: docs/초기PRD.md
 - **통합·표현은 integration이 한다.** integration이 각 모듈의 산출물(DB·JSON 등)을 **읽어서(read-only)** 교차 구현한다. 즉 **모듈은 데이터를 만들고, 화면·표현은 integration이 소유**한다 (데이터 생산자가 표현까지 만들지 않는다).
 - 데이터 모듈끼리 서로 import 금지(단방향). integration만 타 모듈 read-only 접근 허용.
 - **화면·UI 작업은 루트 [DESIGN.md](DESIGN.md)(디자인 정본)를 먼저 읽고 준수한다** — 팔레트(색=의미)·토큰 명명·표면별 적용 규칙.
+- **결정 원장 관례 (2026-07-22)**: 반복 실수 방지를 위해 리더 피드백·버그 패턴을 번호 원장에 채록한다 — 착수 전 필독, 작업 후 기록, 같은 패턴 2회 = 코드·조문 승격. **리더가 수정을 지시하면 작업자가 성격을 판단해 라우팅**: UI/UX → [integration/v2/UX_DECISIONS.md](integration/v2/UX_DECISIONS.md)(UX-###) · 서빙 기능 → [integration/DECISIONS.md](integration/DECISIONS.md)(FN-###) · galaxy 파이프라인 → [modules/report/VARIATIONS.md](modules/report/VARIATIONS.md)(V-###). 데이터 모듈은 각자 PLAN 결정번호·PROGRESS가 동일 역할.
 
 ### ⚠️ 위반 시 경고
 위 경계·폴더 규칙에 어긋나는 작업(예: 한 모듈이 다른 모듈이나 `docs/`에 산출물을 쓰기, 모듈 간 직접 import, 데이터 생산자가 표현까지 생성)을 **요청받거나 발견하면, 그대로 진행하지 말고 먼저 사용자에게 경고**하고 올바른 위치·방식을 제안할 것.
