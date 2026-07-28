@@ -134,8 +134,10 @@
       if (!map.has(s)) map.set(s, { name: s, members: [], totalCapWon: 0 });
       const e = map.get(s);
       e.members.push(n);
-      if (n.market_cap) e.totalCapWon += n.market_cap;
-      else if (n.mc && typeof n.mc === "number") e.totalCapWon += n.mc;
+      // graph_top50의 mc는 항상 문자열("1262조")이라 예전의 `typeof n.mc === "number"`
+      // 폴백은 한 번도 참이 될 수 없었다 — resolveMarketCap이 그 문자열까지 파싱한다.
+      const mc = D.resolveMarketCap ? D.resolveMarketCap(n) : n.market_cap;
+      if (mc) e.totalCapWon += mc;
     });
     const SM = D.SECTOR_META || {};
     const sectors = Array.from(map.values()).map((e) => {
