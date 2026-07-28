@@ -2709,9 +2709,20 @@ function App() {
   const [zoomProgress, setZoomProgress] = useState(0);
   const zoomAnimRef = useRef(0);
 
+  // 뒤로가기 히스토리 — "관련 기업(ghost)" 클릭처럼 sector/company를 한번에 건너뛰는 이동을
+  // ESC/BACK이 한 단계씩 되돌릴 수 있도록, 그런 이동 직전 상태를 스택에 남겨둔다.
+  // (매 렌더마다 최신값으로 갱신되는 ref라서 콜백 안에서 항상 "이동 직전" 스냅샷을 정확히 읽는다.)
+  const navStateRef = useRef({ phase, activeSectorId, activeCompanyCode });
+  navStateRef.current = { phase, activeSectorId, activeCompanyCode };
+  const navHistoryRef = useRef([]);
 
   // ENTER SECTOR — animate galaxy → sector
   const enterSector = useCallback((sectorId) => {
+    // galaxy에서 처음 섹터로 들어가는 정상 드릴다운은 히스토리에 남기지 않는다(기존 3단계 ESC 동작 유지).
+    // sector/company 단계에서 다른 섹터로 바로 건너뛸 때만(관련 기업 클릭, 섹터 리스트 직접 전환) 이전 상태를 남긴다.
+    if (navStateRef.current.phase !== 'galaxy') {
+      navHistoryRef.current.push({ ...navStateRef.current });
+    }
     cancelAnimationFrame(zoomAnimRef.current);
     setActiveSectorId(sectorId);
     setPhase('sector');
@@ -2728,6 +2739,7 @@ function App() {
   }, []);
 
   const backToGalaxy = useCallback(() => {
+    navHistoryRef.current = []; // 루트로 명시 리셋 — 남은 이동 히스토리는 더 이상 의미 없음
     cancelAnimationFrame(zoomAnimRef.current);
     setActiveCompanyCode(null);
     setPhase('galaxy');
@@ -2736,6 +2748,7 @@ function App() {
   }, []);
 
   const backToSector = useCallback(() => {
+    navHistoryRef.current = []; // 명시적 "섹터로" 이동 — 이전 이동 히스토리는 폐기
     setActiveCompanyCode(null);
     setPhase('sector');
   }, []);
@@ -2811,11 +2824,22 @@ function App() {
   // 오버레이 열림 동안 배경 캔버스 draw 정지 (성능 §8)
   useEffect(() => { window.__dossierOpen = !!corpOverlayTicker; }, [corpOverlayTicker]);
 
-  // 단계별 뒤로가기 — 우선순위: 공시 상세/전체 오버레이 → CORPORATION DOSSIER 오버레이 → company → sector → (galaxy에서 섹터 선택만 된 상태) 해제
+  // 단계별 뒤로가기 — 우선순위: 공시 상세/전체 오버레이 → CORPORATION DOSSIER 오버레이
+  // → (관련 기업 클릭 등으로 섹터를 건너뛴 히스토리가 있으면 그 직전 상태로 복원)
+  // → company → sector → (galaxy에서 섹터 선택만 된 상태) 해제
   const goBack = useCallback(() => {
     if (discDetailItem) { setDiscDetailItem(null); return; }
     if (discFullOverlayTicker) { setDiscFullOverlayTicker(null); return; }
     if (corpOverlayTicker) { setCorpOverlayTicker(null); return; }
+    if (navHistoryRef.current.length > 0) {
+      const prev = navHistoryRef.current.pop();
+      cancelAnimationFrame(zoomAnimRef.current);
+      setPhase(prev.phase);
+      setActiveSectorId(prev.activeSectorId);
+      setActiveCompanyCode(prev.activeCompanyCode);
+      setZoomProgress(1); // 되돌아간 섹터는 이미 봤던 화면이라 줌 애니메이션 재생 없이 바로 표시
+      return;
+    }
     if (phase === 'company') { backToSector(); return; }
     if (phase === 'sector') { backToGalaxy(); return; }
     if (activeSectorId) { setActiveSectorId(null); return; }
