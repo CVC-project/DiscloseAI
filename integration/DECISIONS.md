@@ -35,4 +35,6 @@
 
 ## ③ 배포·환경 층
 
+- **FN-011** (07-28, 환경) — **DB가 100MB를 넘으면 push가 통째로 막힌다 → 대용량 DB는 추적 제외가 원칙**: relation.db가 U1~U3 전 상장사 수집으로 156MB가 되어 `git push`가 GitHub 100MB 한도에 거부됨(미푸시 60커밋 중 25개가 이 파일 포함 — 커밋 시점엔 아무 경고 없음). **처리**: reports.db 선례(2026-07-21 gitignore 승격)와 동일 취급 — ① `.gitignore` 등록 + `git rm --cached` ② 미푸시 구간(origin/dev..HEAD) `filter-branch --index-filter`로 이력에서 blob 제거(빈 커밋은 보존 — 메시지가 작업 원장 역할). 재작성 전 `backup/pre-filter-relation-db-20260728` 태그. 조상 브랜치 feat/relation-universe-v0도 동일 체인이라 재작성본으로 재지정. **팀 공유 경로**: DB가 아니라 export 산출물(universe.json·ego/ 등 커밋 유지) — DB는 파이프라인 재실행으로 재현 가능. **재발 방지**: 수집 DB가 커지는 모듈은 50MB 넘기 전에 gitignore 여부를 결정할 것 — 100MB는 커밋이 아니라 **push에서 터지므로** 발견이 항상 늦다.
+
 - **FN-007** (07-22, 환경) — **로컬 검증 서버는 브랜치 상태에 종속**: `integration/data/*.json`은 커밋 대상 파생물이라 **브랜치를 바꾸면 서빙 데이터도 바뀐다** — universe 데이터가 없는 브랜치에서 404가 나 "구현이 사라졌다"로 오진 가능(실제 발생: fix/vercel-* 브랜치에서 universe.json 404). **재발 방지**: localhost 검증 전 `git branch --show-current` 확인 + 대상 브랜치 체크아웃. 검증 흐름: `python -m http.server 8777` → `http://localhost:8777/integration/v2/index.html` → 하드 리로드(Ctrl+Shift+R).
