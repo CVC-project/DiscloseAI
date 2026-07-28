@@ -243,6 +243,12 @@ html, body, #root { margin: 0px; padding: 0px; width: 100%; height: 100%; backgr
   text-transform: none; padding: 8px 10px; border-radius: 3px; white-space: normal;
   width: 200px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5); z-index: 30; pointer-events: none;
 }
+/* 4칸 스탯 행의 마지막 칸(ROE)은 패널 오른쪽 끝에 붙어 있어 왼쪽 기준(left:0)으로 펼치면
+   패널 밖으로 나가 스크롤 컨테이너에 잘린다 — 오른쪽 기준으로 왼쪽으로 펼치게 뒤집는다. */
+.company-ov-stats .ov-stat:last-child .ov-k[data-tip]:hover::after {
+  left: auto;
+  right: 0;
+}
 .ov-v { font-family: var(--font-display); font-size: 16px; color: rgb(255, 255, 255); margin-top: 3px; font-weight: 500; word-break: keep-all; }
 .sector-ov-section { display: flex; flex-direction: column; gap: 8px; }
 .ov-sec-title { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.2em; color: var(--text-3); }
