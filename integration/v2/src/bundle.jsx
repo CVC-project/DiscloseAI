@@ -1236,15 +1236,7 @@ async function geminiStream({ systemPrompt, history, onChunk, onDone, onError })
     if (!resp.ok) {
       throw new Error((data && data.detail) || `HTTP ${resp.status}`);
     }
-    let answer = (data && data.answer) || '(빈 응답)';
-    // 출처가 있으면 답변 아래에 붙인다 (공시 근거 명시).
-    if (data && Array.isArray(data.sources) && data.sources.length) {
-      const src = data.sources
-        .filter(s => s && s.dart_url)
-        .map(s => `[${s.source_id}] ${s.corp_name} ${s.report_name || ''} — ${s.dart_url}`)
-        .join('\n');
-      if (src) answer += `\n\n─ 출처 ─\n${src}`;
-    }
+    const answer = (data && data.answer) || '(빈 응답)';
     // DartChatbot은 스트리밍이 아니므로 완성된 답변을 한 번에 전달한다.
     onChunk(answer);
     onDone();
@@ -1659,7 +1651,7 @@ function AiChatBubble({ msg }) {
         borderRadius: 4, padding: '7px 10px',
         fontSize: 11.5, lineHeight: 1.65,
         color: isUser ? '#74EEC6' : (msg.error ? '#f87171' : '#94a3b8'),
-        maxWidth: '88%', wordBreak: 'break-word',
+        maxWidth: '88%', wordBreak: 'break-word', whiteSpace: 'pre-wrap',
       }}>
         {msg.text}
         {msg.streaming && <span style={{opacity: 0.5, animation: 'pulseDot 0.8s infinite'}}>▍</span>}
