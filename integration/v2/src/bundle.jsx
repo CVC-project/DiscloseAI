@@ -2075,15 +2075,16 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
           </div>
           <div className="panel-body">
             {(() => {
+              // UX-021: 도트=기업의 섹터색(신원), 라벨=관계유형 색(관계) — 두 축 분리
               const row = (n, style) => (
                 <div key={n.code + ':' + (n.type || n.relType)} className="ego-overflow-row"
                   onClick={() => { setOverflowSide(null); onReRoot(n.code, n.name, n.sectorKo); }}>
                   <span className="ov-rel-mark" style={{
-                    background: style.dash.length === 0 ? style.color : 'transparent',
-                    border: style.dash.length === 0 ? 'none' : `1.5px dashed ${style.color}`,
+                    background: style.dash.length === 0 ? style.markColor : 'transparent',
+                    border: style.dash.length === 0 ? 'none' : `1.5px dashed ${style.markColor}`,
                   }} />
                   <span className="ego-overflow-name">{n.name}</span>
-                  <span className="ego-overflow-type" style={{color: style.color}}>{style.label}</span>
+                  <span className="ego-overflow-type" style={{color: style.labelColor}}>{style.label}</span>
                 </div>
               );
               // UX-016·020: 팝오버는 두 레이어 모두 산업별 섹션 — "유통 ── / 삼성물산 / …".
@@ -2106,12 +2107,14 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
                     {byKo.get(ko).map(n => {
                       if (isVc) {
                         return row(n, {
-                          color: c, dash: (VC_TIER_STYLES[n.tier] || VC_TIER_STYLES.T1).dash,
+                          markColor: c, labelColor: c,
+                          dash: (VC_TIER_STYLES[n.tier] || VC_TIER_STYLES.T1).dash,
                           label: (n.type === 'supply' ? '공급처' : '고객사') + (n.amount ? ' · ' + fmtVcAmount(n.amount) : ''),
                         });
                       }
                       const s = REL_STYLES[n.relType] || REL_STYLES.manual;
-                      return row(n, { color: s.color, dash: s.dash, label: s.label + (n.detail ? ' · ' + n.detail : '') });
+                      return row(n, { markColor: c, labelColor: s.color, dash: [],
+                                      label: s.label + (n.detail ? ' · ' + n.detail : '') });
                     })}
                   </React.Fragment>
                 );
