@@ -81,6 +81,9 @@ def build() -> dict[str, dict]:
     feqs_scores = {r["corp_code"]: r for r in _load_json(_FEQS_SCORES_PATH)["results"]}
     master = _load_json(_MASTER_PATH)
     ticker_by_corp = {c["corp_code"]: c["ticker"] for c in master["companies"]}
+    industry_name_by_corp = {
+        c["corp_code"]: c["industry_name"] for c in master["companies"] if c["industry_name"]
+    }
 
     panels: dict[str, FirmPanel] = {}
     for row in panels_raw:
@@ -215,7 +218,8 @@ def build() -> dict[str, dict]:
                 "labels": RATIO_LABELS,
             },
             "industry": {
-                "sector": f"KSIC {group}" if group else None,
+                "sector": industry_name_by_corp.get(corp_code)
+                or (f"KSIC {group}" if group else None),
                 "n_companies": len(group_members.get(group, [])) if group else 0,
                 "averages": group_averages.get(group) if group else None,
                 "members": group_members.get(group, [])[:50] if group else [],

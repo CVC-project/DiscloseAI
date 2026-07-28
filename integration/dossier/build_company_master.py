@@ -53,6 +53,7 @@ _ROOT = os.path.abspath(os.path.join(_HERE, "..", ".."))
 _CORPCODE_XML = os.path.join(_ROOT, "modules", "financial", "data", "CORPCODE.xml")
 _UNIVERSE_DIR = os.path.join(_ROOT, "modules", "financial", "data", "universe")
 _KRX_TICKERS = os.path.join(_UNIVERSE_DIR, "krx_listed_tickers.json")
+_KRX_MARKET_INDUSTRY = os.path.join(_UNIVERSE_DIR, "krx_market_industry.json")
 _KSIC_MAP = os.path.join(_UNIVERSE_DIR, "company_ksic.json")
 _EQS_SCORES = os.path.join(_UNIVERSE_DIR, "eqs_v3_scores_2021_2025.json")
 _FEQS_SCORES = os.path.join(_UNIVERSE_DIR, "financial_feqs_scores_2021_2025.json")
@@ -124,6 +125,11 @@ def build() -> dict:
 
     ksic_map: dict[str, str] = _load_json(_KSIC_MAP)
 
+    market_industry_by_ticker: dict[str, dict] = {}
+    if os.path.exists(_KRX_MARKET_INDUSTRY):
+        for row in _load_json(_KRX_MARKET_INDUSTRY)["rows"]:
+            market_industry_by_ticker[row["ticker"]] = row
+
     eqs_data = _load_json(_EQS_SCORES)
     eqs_by_corp: dict[str, dict] = {r["corp_code"]: r for r in eqs_data["results"]}
 
@@ -147,6 +153,7 @@ def build() -> dict:
         corp_name = info["corp_name"]
 
         industry_code = ksic_map.get(corp_code)
+        mi = market_industry_by_ticker.get(ticker)
         feqs_row = feqs_by_corp.get(corp_code)
         eqs_row = eqs_by_corp.get(corp_code)
         is_financial = feqs_row is not None
@@ -170,9 +177,9 @@ def build() -> dict:
                 "ticker": ticker,
                 "corp_code": corp_code,
                 "company_name": corp_name,
-                "market": None,
+                "market": mi["market"] if mi else None,
                 "industry_code": industry_code,
-                "industry_name": None,
+                "industry_name": mi["industry_desc"] if mi else None,
                 "is_financial": is_financial,
                 "is_etf": None,
                 "is_reit": bool(_REIT_RE.search(corp_name)),
@@ -204,10 +211,12 @@ def build() -> dict:
             "financial_feqs_scores": "modules/financial/data/universe/financial_feqs_scores_2021_2025.json",
         },
         "known_gaps": [
-            "market (KOSPI/KOSDAQ) 미확보",
-            "industry_name (KSIC 코드->한글명) 매핑 테이블 미확보",
+            "industry_name은 KIND(kind.krx.co.kr)의 자유서술 업종설명이다 — DART KSIC 숫자코드"
+            "(industry_code)와 공식 1:1 매핑표가 아니라 사람이 읽기 좋은 보조 라벨일 뿐이다.",
             "is_etf 미판정 (ETF는 대부분 DART corp_code 자체가 없어 이 마스터에 안 잡힐 가능성)",
             "listing_status는 krx_listed_tickers 스냅샷 기준 전원 'listed' (폐지 종목 없음)",
+            "market 미확보 3건(057050 현대홈쇼핑, 060240 스타코링크, 467930 IBKS제23호스팩) "
+            "— KIND·CORPCODE 간 사명 불일치 추정, 영향 미미해 보류",
         ],
         "ticker_count": len(tickers),
         "matched_count": len(companies),
