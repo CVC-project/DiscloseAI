@@ -1766,16 +1766,7 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
       return { text: clipText(text, maxW), font: ctx.font };
     }
 
-    // U-D14: 밸류체인 화살촉 = 오픈 셰브런(스트로크 V자) — 지배구조 삼각 촉과 모양 자체를 다르게
-    function drawChevron(fx, fy, tx, ty, color, size, width) {
-      const ang = Math.atan2(ty - fy, tx - fx);
-      ctx.strokeStyle = color; ctx.lineWidth = width; ctx.setLineDash([]);
-      ctx.beginPath();
-      ctx.moveTo(tx - size * Math.cos(ang - 0.5), ty - size * Math.sin(ang - 0.5));
-      ctx.lineTo(tx, ty);
-      ctx.lineTo(tx - size * Math.cos(ang + 0.5), ty - size * Math.sin(ang + 0.5));
-      ctx.stroke();
-    }
+    // (구 drawChevron은 UX-023에서 폐기 — 화살촉은 지배구조와 동일한 drawArrowHead로 통일)
 
     const draw = () => {
       if (window.__dossierOpen) { rafRef.current = requestAnimationFrame(draw); return; }
@@ -1821,17 +1812,23 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
           const ts0 = VC_TIER_STYLES.T1;
           // UX-017: 골격(트렁크+레일) = 앵커 섹터색 — "삼성전자의 공급처·고객사 연결선은
           // 반도체 색". 산업별 색은 스파인이 맡는다.
+          // UX-023: 라벨은 트렁크 "중심"에 — 라벨 구간만 선을 끊어(갭) 글자가 선에 안 묻히게.
+          //         화살촉은 지배구조와 동일한 채운 삼각형(셰브런 폐기 — 레이어 구분은
+          //         토글·전용 범례·색 문법이 이미 담당).
           const skel = sec.color;
+          const midY = (cy + sign * haloR + railY) / 2;
+          const yTop = Math.min(cy + sign * haloR, railY), yBot = Math.max(cy + sign * haloR, railY);
           ctx.strokeStyle = skel + 'cc'; ctx.lineWidth = 2; ctx.setLineDash([]);
-          ctx.beginPath(); ctx.moveTo(cx, cy + sign * haloR); ctx.lineTo(cx, railY); ctx.stroke();
-          if (sign < 0) drawChevron(cx, railY, cx, cy - haloR, skel + 'ee', 11, 2);
-          else drawChevron(cx, cy + haloR, cx, railY, skel + 'ee', 11, 2);
-          // UX-018: 트렁크 라벨 = 백킹 박스 없이 섹터색 글씨만 — 산업 라벨과 같은 문법
+          ctx.beginPath();
+          ctx.moveTo(cx, yTop); ctx.lineTo(cx, midY - 11);
+          ctx.moveTo(cx, midY + 11); ctx.lineTo(cx, yBot);
+          ctx.stroke();
+          if (sign < 0) drawArrowHead(cx, railY, cx, cy - haloR, skel + 'ee', 14);
+          else drawArrowHead(cx, cy + haloR, cx, railY, skel + 'ee', 14);
           ctx.save();
           ctx.font = '600 11px "IBM Plex Mono", ui-monospace, monospace';
-          const midY = (cy + sign * haloR + railY) / 2;
-          ctx.textAlign = 'left'; ctx.fillStyle = skel + 'ee';
-          ctx.fillText(trunkLabel, cx + 10, midY + 4);
+          ctx.textAlign = 'center'; ctx.fillStyle = skel + 'ee';
+          ctx.fillText(trunkLabel, cx, midY + 4);
           ctx.restore();
           // 레일 본선 — 앵커 섹터색 한 줄. 범위는 스파인·묶음 x + 트렁크 x(cx)의 min~max
           // (UX-018: 그룹 1개면 스파인 min==max라 레일이 사라져 트렁크와 끊겨 보였음 — KCC건설).
@@ -1879,24 +1876,7 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
           ctx.setLineDash([]);
           return;
         }
-        if (isVc) {
-          // U-D14 밸류체인 문법: 색=흐름 단일색(은백), 선=신뢰등급, 셰브런=물자 흐름 위→아래.
-          const ts = VC_TIER_STYLES[n.tier] || VC_TIER_STYLES.T1;
-          ctx.strokeStyle = VC_FLOW_COLOR + ts.alpha;
-          ctx.lineWidth = ts.width; ctx.setLineDash(ts.dash);
-          ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(nx, ny); ctx.stroke(); ctx.setLineDash([]);
-          const chevColor = VC_FLOW_COLOR + ts.alpha;
-          if (n.gy < 0) {
-            // 공급처(위) → 앵커: 흐름이 아래로 들어옴 — 촉은 앵커 halo 바깥
-            const dx = cx - nx, dy = cy - ny, len = Math.hypot(dx, dy) || 1;
-            drawChevron(nx, ny, cx - dx / len * haloR, cy - dy / len * haloR, chevColor, 11, ts.width);
-          } else {
-            // 앵커 → 고객(아래): 촉은 상대 노드 표면 앞
-            const dx = nx - cx, dy = ny - cy, len = Math.hypot(dx, dy) || 1;
-            drawChevron(cx, cy, nx - dx / len * 9, ny - dy / len * 9, chevColor, 11, ts.width);
-          }
-          return;
-        }
+        // (구 방사형 VC 엣지 경로는 UX-015 레일 전환으로 제거 — 레일은 위 drawRailSide가 전담)
         const style = REL_STYLES[n.relType] || REL_STYLES.manual;
         const isEquity = EQUITY.has(n.relType);
         if (n.hasGroup && n.hasEquity) {
@@ -3443,7 +3423,7 @@ function LegendPanel({ mode }) {
           </div>
           <div className="legend-section">
             <div className="legend-section-h">
-              <span style={{color:'#e8f1ff'}}>﹀</span> CHEVRON · 물자 흐름 방향
+              <span style={{color:'#e8f1ff'}}>▼</span> ARROW · 물자 흐름 방향
             </div>
             <div style={{fontSize: 10.5, color: '#94a3b8', lineHeight: 1.7, padding: '2px 2px 0'}}>
               위 = <span style={{color:'#e8f1ff'}}>공급처</span> (매입·조달) → 앵커 →
