@@ -69,6 +69,28 @@ def oracle_merge(gov: list[dict]) -> list[dict]:
     return out
 
 
+def oracle_vc_split(vc: dict) -> dict:
+    """UX-013 계약의 독립 재구현 — 상/하는 up/down 배열이 아니라 type에서 파생.
+    (t,type) 병합 시 최신 as_of 채택. supply=위(공급처)/customer=아래(고객사)."""
+    by: dict[tuple, dict] = {}
+    for side in ("up", "down"):
+        for e in (vc or {}).get(side) or []:
+            if not e.get("t"):
+                continue
+            k = (e["t"], e["type"])
+            prev = by.get(k)
+            if not prev or (e.get("as_of") or 0) > (prev.get("as_of") or 0):
+                by[k] = e
+    above = [e["t"] for e in by.values() if e["type"] == "supply"]
+    below = [e["t"] for e in by.values() if e["type"] != "supply"]
+    out = {}
+    for k, arr in (("above", above), ("below", below)):
+        out[k] = {"shown": set(arr[:TOP_N]) if len(arr) <= TOP_N else None,
+                  "shown_count": min(len(arr), TOP_N), "rest": max(0, len(arr) - TOP_N),
+                  "all": set(arr)}
+    return out
+
+
 def oracle_split(gov: list[dict]) -> dict:
     merged = oracle_merge(gov)
     vertical = [n for n in merged if n["has_equity"]]
@@ -193,8 +215,18 @@ COLLECT_JS = """() => {
     canvasBox: c ? (({width,height}) => ({w: Math.round(width), h: Math.round(height)}))(c.getBoundingClientRect()) : null,
     stageBox: stage ? (({width,height}) => ({w: Math.round(width), h: Math.round(height)}))(stage.getBoundingClientRect()) : null,
     topbarButtons: [...document.querySelectorAll('.ego-topbar button')].map(b => b.textContent.trim()),
+    legendTitle: (document.querySelector('.legend-panel .panel-title') || {}).textContent || null,
+    vcBtnDisabled: (() => { const b = [...document.querySelectorAll('.ego-layer-btn')].find(x => x.textContent.includes('밸류체인')); return b ? b.disabled : null; })(),
     dbg,
   };
+}"""
+
+TOGGLE_VC_JS = """async (target) => {
+  const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+  const b = [...document.querySelectorAll('.ego-layer-btn')].find(x => x.textContent.includes(target));
+  if (!b || b.disabled) return {err: 'toggle not clickable: ' + target};
+  b.click(); await sleep(500);
+  return {ok: true};
 }"""
 
 
@@ -249,6 +281,48 @@ def run_scenario(browser, scenario: dict) -> dict:
             rendered = set(dbg.get("renderedCodes") or [])
             check("R: shown 전원 실제 렌더(히트 타깃)", shown_all <= rendered,
                   f"missing={sorted(shown_all - rendered)}")
+        check("R: 지배구조 범례(EDGE TYPOLOGY)", got.get("legendTitle") == "EDGE TYPOLOGY",
+              got.get("legendTitle"))
+
+        # ── U3: 밸류체인 레이어 — 토글·UX-013 오라클·범례 교체(U-D14) ──
+        ego = load_ego(t)
+        vc = (ego.get("layers") or {}).get("valuechain") or {}
+        has_vc = bool((vc.get("up") or []) or (vc.get("down") or []))
+        check("R: 밸류체인 토글 활성 상태 = 데이터 유무 일치",
+              got.get("vcBtnDisabled") == (not has_vc),
+              f"disabled={got.get('vcBtnDisabled')} hasVc={has_vc}")
+        if has_vc:
+            tog = page.evaluate(TOGGLE_VC_JS, "밸류체인")
+            if not tog.get("ok"):
+                check("VC: 토글 클릭", False, tog)
+            else:
+                got2 = page.evaluate(COLLECT_JS)
+                dbg2 = got2.get("dbg") or {}
+                check("VC: __egoDebug.layer 전환", dbg2.get("layer") == "valuechain",
+                      dbg2.get("layer"))
+                check("VC: 범례 교체(FLOW TYPOLOGY, U-D14)",
+                      got2.get("legendTitle") == "FLOW TYPOLOGY", got2.get("legendTitle"))
+                vexp = oracle_vc_split(vc)
+                for side in ("above", "below"):
+                    actual = dbg2.get(side) or []
+                    e = vexp[side]
+                    ok_cnt = len(actual) == e["shown_count"] and dbg2.get(side + "Rest") == e["rest"]
+                    ok_set = (set(actual) == e["shown"]) if e["shown"] is not None \
+                        else set(actual).issubset(e["all"])
+                    check(f"VC-O: {side} 흐름 분할 (개수 {e['shown_count']}·잔여 {e['rest']}, UX-013)",
+                          ok_cnt and ok_set,
+                          f"actual={sorted(actual)} rest={dbg2.get(side + 'Rest')}")
+                check("VC: 가로축 없음(문법 축 분리)",
+                      not (dbg2.get("left") or []) and not (dbg2.get("right") or []),
+                      f"left={dbg2.get('left')} right={dbg2.get('right')}")
+                shot_vc = OUT_DIR / f"{scenario['label'].split()[0]}_{t}_vc.png"
+                page.screenshot(path=str(shot_vc))
+                # 지배구조 복귀 — 범례 되돌아오는지까지
+                page.evaluate(TOGGLE_VC_JS, "지배구조")
+                got3 = page.evaluate(COLLECT_JS)
+                check("VC: 지배구조 복귀 시 범례 원복",
+                      got3.get("legendTitle") == "EDGE TYPOLOGY", got3.get("legendTitle"))
+
         check("R: JS 페이지 에러 0건", not errors, errors[:2])
 
         shot = OUT_DIR / f"{scenario['label'].split()[0]}_{t}.png"

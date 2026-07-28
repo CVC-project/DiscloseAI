@@ -929,8 +929,53 @@ function splitEgoSides(governance, topN, sideN) {
     left: cut(left, sideN), right: cut(right, sideN),
   };
 }
+// ─── 밸류체인 레이어 (U3, U-D14·UX-013) ─────────────────────────────────────
+// 문법 축 분리: 색=흐름 단일색(은백 — 관계 6색·시맨틱 6색·섹터 25색 어느 축과도 미충돌,
+// integration 배정), 선 스타일=신뢰등급(T1/T2/T3), 화살촉=오픈 셰브런(물자 흐름 위→아래).
+const VC_FLOW_COLOR = '#e8f1ff';
+const VC_TIER_STYLES = {
+  T1: { alpha: 'dd', width: 2,   dash: [],     label: 'T1 · 정형 공시' },
+  T2: { alpha: '77', width: 1.5, dash: [],     label: 'T2 · 서술 추출' },
+  T3: { alpha: '66', width: 1.2, dash: [3, 4], label: 'T3 · 산업연관표' },
+};
+const _TIER_RANK = { T1: 1, T2: 2, T3: 3 };
+
+function fmtVcAmount(v) {
+  if (v == null || !isFinite(v)) return '';
+  if (v >= 1e12) return (v / 1e12).toFixed(1) + '조';
+  if (v >= 1e8) return Math.round(v / 1e8).toLocaleString() + '억';
+  return Math.round(v / 1e4).toLocaleString() + '만';
+}
+
+// UX-013: 상/하는 up/down 배열 소속이 아니라 type에서 파생 — 배열은 미러 기록이라
+// (실측: up/down 완전 대칭 1,378/1,378·143/143) 신호가 아니다. supply(상대가 공급자)=위,
+// customer(상대가 고객)=아래. 같은 (상대,type) 다연도 엣지는 최신 as_of로 병합.
+function splitVcSides(vc, topN) {
+  const _idxV = (window.__realData && window.__realData.indexByCode) || {};
+  const byKey = new Map();
+  for (const side of ['up', 'down']) {
+    for (const e of (vc && vc[side]) || []) {
+      if (!e.t) continue;
+      const key = e.t + ':' + e.type;
+      const prev = byKey.get(key);
+      if (!prev || (e.as_of || 0) > (prev.as_of || 0)) {
+        byKey.set(key, { code: e.t, name: e.n, type: e.type,
+                         sectorKo: (_idxV[e.t] || {}).s || null,  // 노드색=섹터색 유지(엣지 문법만 교체)
+                         tier: e.tier_grade || 'T1', amount: e.amount, as_of: e.as_of, prov: e.prov });
+      }
+    }
+  }
+  const rank = (n) => [_TIER_RANK[n.tier] || 9, -(n.amount || 0), -(n.as_of || 0)];
+  const bySort = (arr) => arr.sort((a, b) => cmpTuple(rank(a), rank(b)));
+  const above = bySort([...byKey.values()].filter(n => n.type === 'supply'));
+  const below = bySort([...byKey.values()].filter(n => n.type !== 'supply'));
+  const cut = (arr) => ({ shown: arr.slice(0, topN), rest: arr.slice(topN) });
+  return { above: cut(above), below: cut(below) };
+}
+
 window.mergeEgoNeighbors = mergeEgoNeighbors;
 window.splitEgoSides = splitEgoSides;   // V-3 렌더 하네스가 페이지 내 분할 로직을 직접 조회
+window.splitVcSides = splitVcSides;
 
 // ─── Sector map: companies as glowing nodes inside the chosen sector ────
 const { useRef: _useRef, useEffect: _useEffect, useState: _useState, useMemo: _useMemo } = React;
@@ -1495,7 +1540,7 @@ window.SectorMap = SectorMap;
 // 상(dir=in·출자 들어옴) / 하(dir=out·피출자·나감) 배치 — valuechain §5 D5 상/하 문법을
 // 지배구조 의미로 재사용(U2 진행 시나리오). 사이드당 Top-N 6 + "외 n사" 묶음 노드(D6).
 // 시각 문법(REL_STYLES 색·이중 평행선·화살표=출자 방향)은 allRelated와 동일 — U-D12 불변.
-function EgoView({ anchor, chain, onReRoot, onChainJump }) {
+function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump }) {
   const canvasRef = _useRef(null);
   const rafRef = _useRef(0);
   const startRef = _useRef(performance.now());
@@ -1509,10 +1554,21 @@ function EgoView({ anchor, chain, onReRoot, onChainJump }) {
   const SIDE_N = 4;   // 가로(비지분) 사이드당 — 실측상 대부분 0~2개
   const sec = (window.SECTOR_PALETTE || []).find(s => s.ko === anchor.s) || (window.SECTOR_PALETTE || [])[0] || { color: '#74EEC6' };
 
-  const { above, below, left, right } = _useMemo(
-    () => splitEgoSides((anchor.layers && anchor.layers.governance) || [], TOP_N, SIDE_N),
-    [anchor]
-  );
+  // U3: 밸류체인 레이어 — 데이터가 있는 기업만 활성(현재 T1 509사). hasVc가 false면
+  // layer state가 'valuechain'이어도 지배구조로 렌더(re-root로 무데이터 기업 이동 시 안전).
+  const vcData = (anchor.layers && anchor.layers.valuechain) || null;
+  const hasVc = !!(vcData && (((vcData.up || []).length) || ((vcData.down || []).length)));
+  const isVc = layer === 'valuechain' && hasVc;
+
+  const { above, below, left, right } = _useMemo(() => {
+    if (isVc) {
+      const s = splitVcSides(vcData, TOP_N);
+      // 밸류체인은 상하(흐름)만 — 가로축 없음(U-D14 문법 축 분리)
+      return { above: s.above, below: s.below,
+               left: { shown: [], rest: [] }, right: { shown: [], rest: [] } };
+    }
+    return splitEgoSides((anchor.layers && anchor.layers.governance) || [], TOP_N, SIDE_N);
+  }, [anchor, isVc]);
 
   // 세로 사이드: 가로로 펼친 행. 가로 사이드: 앵커 높이 좌우로 세로 살짝 퍼진 열.
   const layoutRow = (items, y) => {
@@ -1547,12 +1603,13 @@ function EgoView({ anchor, chain, onReRoot, onChainJump }) {
   _useEffect(() => {
     window.__egoDebug = {
       anchor: anchor.t,
+      layer: isVc ? 'valuechain' : 'governance', hasVc,
       above: above.shown.map(n => n.code), aboveRest: above.rest.length,
       below: below.shown.map(n => n.code), belowRest: below.rest.length,
       left:  left.shown.map(n => n.code),  leftRest:  left.rest.length,
       right: right.shown.map(n => n.code), rightRest: right.rest.length,
     };
-  }, [anchor, above, below, left, right]);
+  }, [anchor, isVc, hasVc, above, below, left, right]);
 
   _useEffect(() => {
     const cvs = canvasRef.current;
@@ -1578,6 +1635,17 @@ function EgoView({ anchor, chain, onReRoot, onChainJump }) {
       ctx.closePath();
       ctx.fillStyle = color;
       ctx.fill();
+    }
+
+    // U-D14: 밸류체인 화살촉 = 오픈 셰브런(스트로크 V자) — 지배구조 삼각 촉과 모양 자체를 다르게
+    function drawChevron(fx, fy, tx, ty, color, size, width) {
+      const ang = Math.atan2(ty - fy, tx - fx);
+      ctx.strokeStyle = color; ctx.lineWidth = width; ctx.setLineDash([]);
+      ctx.beginPath();
+      ctx.moveTo(tx - size * Math.cos(ang - 0.5), ty - size * Math.sin(ang - 0.5));
+      ctx.lineTo(tx, ty);
+      ctx.lineTo(tx - size * Math.cos(ang + 0.5), ty - size * Math.sin(ang + 0.5));
+      ctx.stroke();
     }
 
     const draw = () => {
@@ -1625,6 +1693,24 @@ function EgoView({ anchor, chain, onReRoot, onChainJump }) {
           ctx.setLineDash([]);
           return;
         }
+        if (isVc) {
+          // U-D14 밸류체인 문법: 색=흐름 단일색(은백), 선=신뢰등급, 셰브런=물자 흐름 위→아래.
+          const ts = VC_TIER_STYLES[n.tier] || VC_TIER_STYLES.T1;
+          ctx.strokeStyle = VC_FLOW_COLOR + ts.alpha;
+          ctx.lineWidth = ts.width; ctx.setLineDash(ts.dash);
+          ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(nx, ny); ctx.stroke(); ctx.setLineDash([]);
+          const chevColor = VC_FLOW_COLOR + ts.alpha;
+          if (n.gy < 0) {
+            // 공급처(위) → 앵커: 흐름이 아래로 들어옴 — 촉은 앵커 halo 바깥
+            const dx = cx - nx, dy = cy - ny, len = Math.hypot(dx, dy) || 1;
+            drawChevron(nx, ny, cx - dx / len * haloR, cy - dy / len * haloR, chevColor, 11, ts.width);
+          } else {
+            // 앵커 → 고객(아래): 촉은 상대 노드 표면 앞
+            const dx = nx - cx, dy = ny - cy, len = Math.hypot(dx, dy) || 1;
+            drawChevron(cx, cy, nx - dx / len * 9, ny - dy / len * 9, chevColor, 11, ts.width);
+          }
+          return;
+        }
         const style = REL_STYLES[n.relType] || REL_STYLES.manual;
         const isEquity = EQUITY.has(n.relType);
         if (n.hasGroup && n.hasEquity) {
@@ -1659,7 +1745,12 @@ function EgoView({ anchor, chain, onReRoot, onChainJump }) {
       ctx.fillStyle = sec.color; ctx.beginPath(); ctx.arc(cx, cy, anchorR * 0.5, 0, Math.PI * 2); ctx.fill();
       ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(cx, cy, anchorR * 0.5, 0, Math.PI * 2); ctx.stroke();
       ctx.textAlign = 'center';
-      ctx.fillStyle = '#fff'; ctx.font = 'bold 12px sans-serif';
+      ctx.font = 'bold 12px sans-serif';
+      // 라벨 백킹 — 엣지가 위로 몰리는 레이어(특히 VC 공급처 다발)에서 앵커명이 묻히지 않게
+      const _tw = ctx.measureText(anchor.n).width;
+      ctx.fillStyle = 'rgba(4,8,16,0.72)';
+      ctx.fillRect(cx - _tw / 2 - 6, cy - anchorR * 0.5 - 23, _tw + 12, 17);
+      ctx.fillStyle = '#fff';
       ctx.fillText(anchor.n, cx, cy - anchorR * 0.5 - 10);
 
       // 이웃 + 묶음 노드
@@ -1683,7 +1774,8 @@ function EgoView({ anchor, chain, onReRoot, onChainJump }) {
           hits.push({ x: nx, y: ny, r: 16, isBundle: true, side: n.side });
           return;
         }
-        const nodeColor = (n.sectorKo && (window.SECTOR_PALETTE || []).find(s => s.ko === n.sectorKo)?.color) || (REL_STYLES[n.relType] || REL_STYLES.manual).color;
+        const nodeColor = (n.sectorKo && (window.SECTOR_PALETTE || []).find(s => s.ko === n.sectorKo)?.color)
+          || (isVc ? VC_FLOW_COLOR : (REL_STYLES[n.relType] || REL_STYLES.manual).color);
         const isHover = hoverCode === n.code;
         ctx.globalAlpha = 0.8;
         const r0 = isHover ? 26 : 20;
@@ -1697,8 +1789,11 @@ function EgoView({ anchor, chain, onReRoot, onChainJump }) {
         ctx.textAlign = 'center'; ctx.fillStyle = nodeColor; ctx.font = 'bold 9px sans-serif';
         ctx.fillText(n.name, nx, labelUp ? ny - 13 : ny + 18);
         ctx.fillStyle = '#64748b'; ctx.font = '8px sans-serif';
-        const style = REL_STYLES[n.relType] || REL_STYLES.manual;
-        ctx.fillText(style.label + (n.detail ? ' · ' + n.detail : ''), nx, labelUp ? ny - 4 : ny + 29);
+        const subLabel = isVc
+          ? (n.type === 'supply' ? '공급처' : '고객사')
+            + (n.amount ? ' · ' + fmtVcAmount(n.amount) : '') + (n.as_of ? ' · ' + n.as_of : '')
+          : (REL_STYLES[n.relType] || REL_STYLES.manual).label + (n.detail ? ' · ' + n.detail : '');
+        ctx.fillText(subLabel, nx, labelUp ? ny - 4 : ny + 29);
         hits.push({ x: nx, y: ny, r: 20, code: n.code, name: n.name, sectorKo: n.sectorKo });
       });
 
@@ -1708,7 +1803,7 @@ function EgoView({ anchor, chain, onReRoot, onChainJump }) {
     };
     rafRef.current = requestAnimationFrame(draw);
     return () => { cancelAnimationFrame(rafRef.current); window.removeEventListener('resize', resize); };
-  }, [allNodes, anchor, sec.color]);
+  }, [allNodes, anchor, sec.color, isVc]);
 
   const hitTest = (e) => {
     const rect = canvasRef.current.getBoundingClientRect();
@@ -1730,7 +1825,9 @@ function EgoView({ anchor, chain, onReRoot, onChainJump }) {
     canvasRef.current.style.cursor = (h && !h.isAnchor) ? 'pointer' : 'default';
   };
 
-  const OVERFLOW_TITLE = { above: '출자사', below: '피출자사', left: '계열사', right: '특수관계자' };
+  const OVERFLOW_TITLE = isVc
+    ? { above: '공급처', below: '고객사' }
+    : { above: '출자사', below: '피출자사', left: '계열사', right: '특수관계자' };
   const overflowList = overflowSide
     ? ({ above, below, left, right }[overflowSide] || {}).rest || null
     : null;
@@ -1755,8 +1852,13 @@ function EgoView({ anchor, chain, onReRoot, onChainJump }) {
           </button>
         )}
         <div className="ego-layer-toggle">
-          <button className="ego-layer-btn is-active">지배구조</button>
-          <button className="ego-layer-btn is-disabled" disabled title="밸류체인 레이어 — U3 예정">밸류체인</button>
+          <button className={"ego-layer-btn" + (!isVc ? " is-active" : "")}
+            onClick={() => onLayerChange && onLayerChange('governance')}>지배구조</button>
+          <button
+            className={"ego-layer-btn" + (isVc ? " is-active" : hasVc ? "" : " is-disabled")}
+            disabled={!hasVc}
+            title={hasVc ? '밸류체인 레이어 — 공시 기반 물자 흐름' : '밸류체인 공시 데이터 없음'}
+            onClick={() => hasVc && onLayerChange && onLayerChange('valuechain')}>밸류체인</button>
         </div>
       </div>
       {overflowList && (
@@ -1773,15 +1875,20 @@ function EgoView({ anchor, chain, onReRoot, onChainJump }) {
           </div>
           <div className="panel-body">
             {overflowList.map(n => {
-              const style = REL_STYLES[n.relType] || REL_STYLES.manual;
+              const style = isVc
+                ? { color: VC_FLOW_COLOR, dash: (VC_TIER_STYLES[n.tier] || VC_TIER_STYLES.T1).dash,
+                    label: (n.type === 'supply' ? '공급처' : '고객사') + (n.amount ? ' · ' + fmtVcAmount(n.amount) : '') }
+                : (() => { const s = REL_STYLES[n.relType] || REL_STYLES.manual;
+                           return { color: s.color, dash: s.dash, label: s.label + (n.detail ? ' · ' + n.detail : '') }; })();
               return (
-                <div key={n.code} className="ego-overflow-row" onClick={() => { setOverflowSide(null); onReRoot(n.code, n.name, n.sectorKo); }}>
+                <div key={n.code + ':' + (n.type || n.relType)} className="ego-overflow-row"
+                  onClick={() => { setOverflowSide(null); onReRoot(n.code, n.name, n.sectorKo); }}>
                   <span className="ov-rel-mark" style={{
                     background: style.dash.length === 0 ? style.color : 'transparent',
                     border: style.dash.length === 0 ? 'none' : `1.5px dashed ${style.color}`,
                   }} />
                   <span className="ego-overflow-name">{n.name}</span>
-                  <span className="ego-overflow-type" style={{color: style.color}}>{style.label}{n.detail ? ' · ' + n.detail : ''}</span>
+                  <span className="ego-overflow-type" style={{color: style.color}}>{style.label}</span>
                 </div>
               );
             })}
@@ -3053,7 +3160,45 @@ function AssistantPanel({ phase, sector, company, activeTab }) {
 }
 
 // ─── Edge legend (bottom-left) — clearer differentiation ─────────────────
-function LegendPanel() {
+function LegendPanel({ mode }) {
+  // U-D14: 레이어 전환 시 범례도 통째로 교체 — 혼합 범례 금지. mode='valuechain'이면
+  // 흐름 문법 전용 범례(색=은백 단일, 선=신뢰등급, 셰브런=물자 흐름 위→아래).
+  if (mode === 'valuechain') {
+    return (
+      <div className="panel panel-bl legend-panel">
+        <div className="panel-head">
+          <div className="panel-head-l">
+            <span className="panel-dot" style={{background: '#e8f1ff', boxShadow: '0 0 8px #e8f1ff'}} />
+            <span className="panel-title">FLOW TYPOLOGY</span>
+            <span className="panel-sub">물자 흐름</span>
+          </div>
+          <div className="panel-count">VALUE CHAIN</div>
+        </div>
+        <div className="panel-body legend-body">
+          <div className="legend-section">
+            <div className="legend-section-h">
+              <span style={{color:'#e8f1ff'}}>━━━</span> LINE · 신뢰등급 (원천별)
+            </div>
+            <div className="legend-grid">
+              <LegendRow color="#e8f1ff" kind="solid" label="T1 정형 공시" sub="특수관계자 거래·공급계약" />
+              <LegendRow color="#e8f1ff77" kind="solid" label="T2 서술 추출" sub="사업보고서 서술 (준비 중)" />
+              <LegendRow color="#e8f1ff88" kind="dot" label="T3 산업연관표" sub="섹터 백본 (준비 중)" />
+            </div>
+          </div>
+          <div className="legend-section">
+            <div className="legend-section-h">
+              <span style={{color:'#e8f1ff'}}>﹀</span> CHEVRON · 물자 흐름 방향
+            </div>
+            <div style={{fontSize: 10.5, color: '#94a3b8', lineHeight: 1.7, padding: '2px 2px 0'}}>
+              위 = <span style={{color:'#e8f1ff'}}>공급처</span> (매입·조달) → 앵커 →
+              아래 = <span style={{color:'#e8f1ff'}}>고객사</span> (매출·공급계약).<br/>
+              금액은 최신 공시 연도 기준 · 공시 기반 참고 정보 — 투자 조언 아님.
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="panel panel-bl legend-panel">
       <div className="panel-head">
@@ -3215,6 +3360,13 @@ function App() {
   const [egoStatus, setEgoStatus] = useState('idle'); // idle | loading | ok | error
   const [egoChain, setEgoChain] = useState([]); // [{code,name,sectorKo}] re-root 브레드크럼
   const egoCacheRef = useRef(new Map());
+  // U3: 레이어 토글 상태 — re-root로 기업이 바뀌어도 유지(레이어 비교 탐색 흐름).
+  // 데이터 없는 기업에선 EgoView가 지배구조로 안전 폴백(hasVc 가드).
+  const [egoLayer, setEgoLayer] = useState('governance');
+  const egoHasVc = !!(egoAnchor && egoAnchor.layers && egoAnchor.layers.valuechain
+    && (((egoAnchor.layers.valuechain.up || []).length) || ((egoAnchor.layers.valuechain.down || []).length)));
+  // 범례(U-D14 전용 범례 교체)는 화면이 실제 그리는 유효 레이어를 따른다
+  const effectiveEgoLayer = (egoLayer === 'valuechain' && egoHasVc) ? 'valuechain' : 'governance';
 
   // sector zoom-in transition
   const [zoomProgress, setZoomProgress] = useState(0);
@@ -3461,6 +3613,8 @@ function App() {
                 <EgoView
                   anchor={egoAnchor}
                   chain={egoChain}
+                  layer={egoLayer}
+                  onLayerChange={setEgoLayer}
                   onReRoot={reRootEgo}
                   onChainJump={jumpEgoChain}
                 />
@@ -3497,8 +3651,8 @@ function App() {
           {/* Top-right — AI co-pilot, content varies */}
           <AssistantPanel phase={phase} sector={sector} company={company} activeTab={activeTab} />
 
-          {/* Bottom-left — legend (always) */}
-          <LegendPanel />
+          {/* Bottom-left — legend. company phase + EgoView일 땐 유효 레이어의 전용 범례(U-D14) */}
+          <LegendPanel mode={phase === 'company' && egoStatus === 'ok' ? effectiveEgoLayer : 'governance'} />
 
           {/* Bottom-right — sector index (galaxy) / sector list (sector/company) */}
           <SectorPanel

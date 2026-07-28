@@ -224,8 +224,8 @@ CLI: `python -m modules.relation universe {sync|select|export}` (기존 `__main_
 | 1 | **V0+U0** | ✅ 완료 — shared/data/ 승격(경로 10곳)·스키마 마이그레이션·registry 2,651사·시총·KSIC 25섹터·top-400 | 〃 | ✗ | U0 하드 게이트 5/5 PASS(§6 표, KOSPI200 프록시는 정보용으로 재정의) + galaxy 회귀 무손상 |
 | 2 | **U1** | ✅ 완료 — DART 2종 5개년(2020 부분+2021~2024)·FTC 스타 전환·filters Registry 교체·멱등 upsert. **실측 버그 2건 발견·수정**(RelationLocal UNIQUE 키 relation_type→source_type, dedupe.py 연도 스냅샷 오삭제) | 〃 | ✗ | 엣지 3,508(≥3,000)·M4·링킹실패~0%·V-1 전부 PASS |
 | 3 | **V1** | ✅ 코드 완료(리더 결정으로 **정형 파서 2종** 확정 — 특수관계자 주석·단일판매공급계약. 타법인출자현황은 U1 거버넌스 레이어와 중복이라 미채택) + valuechain.json export + V-1 확장. ⏳ 실 코퍼스 전량 실행은 미착수(fixture 검증만) | 〃 | ✗ | 코드·pytest(18건) PASS. 반도체 앵커 3사 QA는 실 코퍼스 실행 후 |
-| 4 | **U2** | export 4종 + extract_data 동기화(+**V-2 assert**) + dots + 셸 EgoView(governance) + SECTOR_DEF/PALETTE 정합화 + DESIGN.md 절차 신설 + **V-3 렌더 하네스** | `feat/relation-universe-viz` (리더) | ✗ | U2 게이트(V-3로 실행) |
-| 5 | **U3** | 특수관계자 주석 파서(V1 공용 1벌) → dart_filing 확장 + EgoView 밸류체인 토글 활성 | V1 브랜치 편승 | ✗ | 스팟 30건 ≥0.85 |
+| 4 | **U2** | ✅ 완료(2026-07-28) — export 4종·extract_data 동기화(+V-2 assert)·dots·셸 EgoView(governance — 축 문법 UX-011: 세로=지분 위계/가로=비지분 좌 계열·우 특관)·SECTOR_DEF/PALETTE 정합화·v2/DESIGN.md 현행화·**V-3 렌더 하네스**(시나리오 3종 자동선정·오라클 대조·뮤테이션 캘리브레이션). 60fps 실측만 잔여(비차단) | `feat/relation-universe-viz` (리더) | ✗ | V-3 31/31 PASS·graph_top50 폴백 무손상(강제 404 검증) |
+| 5 | **U3** | ✅ 완료(2026-07-28) — 특수관계자 주석 파서 dart_filing 확장(07-22, 115엣지) + **EgoView 밸류체인 토글 활성**(07-28: UX-013 상하=type 파생·U-D14 문법 — 은백 단일색·신뢰등급 선·셰브런·FLOW 범례 교체). 신규 4파서 93건 CPA 스팟체크는 선택 잔여(리더 판단) | V1 브랜치 편승 → 토글은 `feat/relation-universe-viz` | ✗ | 스팟 30건 ≥0.85(G-C PASS 07-22) · V-3 VC 확장 55/55 PASS |
 | 6 | **V2** | B0 모델 후보군 조사·재선정(valuechain §3.4 ★v1.4) → 청킹 + 하네스 A·B → 봉인 평가 | `feat/valuechain-ml` | ✓(복구됨) | G-A·G-B·S1∧S2 |
 | 7 | **V3** | 하네스 C 섹터 확산 + M2 별칭 루프 | 〃 | ✓ | G-C 섹터당 |
 | 8 | **V4+U4** | ECOS 산업연관표 T3 백본 · 섹터 간 흐름선 · graph_top50 은퇴 | `feat/valuechain-t3` | ✓ | — |
