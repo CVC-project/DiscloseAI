@@ -134,14 +134,14 @@
       if (!map.has(s)) map.set(s, { name: s, members: [], totalCapWon: 0 });
       const e = map.get(s);
       e.members.push(n);
-      if (n.market_cap) e.totalCapWon += n.market_cap;
-      else if (n.mc && typeof n.mc === "number") e.totalCapWon += n.mc;
+      // graph_top50의 mc는 항상 문자열("1262조")이라 예전의 `typeof n.mc === "number"`
+      // 폴백은 한 번도 참이 될 수 없었다 — resolveMarketCap이 그 문자열까지 파싱한다.
+      const mc = D.resolveMarketCap ? D.resolveMarketCap(n) : n.market_cap;
+      if (mc) e.totalCapWon += mc;
     });
     const SM = D.SECTOR_META || {};
     const sectors = Array.from(map.values()).map((e) => {
       const meta = SM[e.name] || { en: e.name.toUpperCase(), color: "#94a3b8" };
-      const ytd = +(((e.members.length * 0.7) + Math.random() * 4) - 2).toFixed(1);
-      const per = +(8 + Math.random() * 12).toFixed(1);
       return {
         id: slugify(e.name),
         ko: e.name,
@@ -151,9 +151,6 @@
         cap: trillionLabel(e.totalCapWon),
         memberCount: e.members.length,
         members: e.members,
-        // YTD/PER은 mock — 후속 phase에서 price_scenarios·실거래로 계산
-        ytdMock: ytd,
-        perMock: per,
       };
     });
     sectors.sort((a, b) => b.capWon - a.capWon);

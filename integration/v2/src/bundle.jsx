@@ -1181,7 +1181,7 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
             <div key={p.c.code} className={"company-label " + (isActive ? 'is-active' : '')}
               style={{ left: p.x, top: p.y - p.r - 14, color: sec.color }}>
               <div className="company-label-name">{p.c.name}</div>
-              <div className="company-label-code">{p.c.code} · {p.c.cap}T</div>
+              <div className="company-label-code">{p.c.code} · {p.c.cap}조원</div>
             </div>
           );
         })}
@@ -1559,7 +1559,7 @@ function DisclosureFullOverlay({ ticker, onClose }) {
   );
   const corpName = node ? node.n : (items[0] && items[0].corp_name) || ticker;
   const sectorKo = node ? node.s : '';
-  const capLabel = (node && node.market_cap && D.trillionLabel) ? D.trillionLabel(node.market_cap) : '';
+  const capLabel = (node && D.resolveMarketCap && D.trillionLabel) ? D.trillionLabel(D.resolveMarketCap(node)) : '';
   const dartUrl = selectedDisc
     ? (selectedDisc.disclosure_id
         ? `https://dart.fss.or.kr/dsaf001/main.do?rcpNo=${selectedDisc.disclosure_id}`
@@ -2279,6 +2279,7 @@ function SectorOverviewPanel({ sector, companyCount, onBack }) {
   const realData = window.__realData;
   const members = (sector.members || []).map(n => n);
   const highlights = (D.highlightsForSector && realData) ? D.highlightsForSector(realData.discAll, members, 3) : null;
+  const sectorPE = D.computeSectorPE ? D.computeSectorPE(members) : null;
   return (
     <div className="panel panel-tl sector-overview-panel" style={{'--accent': sector.color}}>
       <div className="panel-head">
@@ -2298,10 +2299,9 @@ function SectorOverviewPanel({ sector, companyCount, onBack }) {
           </div>
         </div>
         <div className="sector-ov-stats">
-          <div className="ov-stat"><div className="ov-k">시가총액</div><div className="ov-v">{sector.cap}T</div></div>
+          <div className="ov-stat"><div className="ov-k">시가총액</div><div className="ov-v">{sector.cap}조원</div></div>
           <div className="ov-stat"><div className="ov-k">기업 수</div><div className="ov-v">{companyCount}</div></div>
-          <div className="ov-stat"><div className="ov-k">YTD</div><div className="ov-v" style={{color:'#4ade80'}}>+12.4%</div></div>
-          <div className="ov-stat"><div className="ov-k">P / E</div><div className="ov-v">14.3</div></div>
+          <div className="ov-stat"><div className="ov-k">P / E</div><div className="ov-v">{sectorPE != null ? sectorPE : '-'}</div></div>
         </div>
         <div className="sector-ov-section">
           <div className="ov-sec-title">DAILY HIGHLIGHTS · 오늘의 시그널</div>
@@ -2345,7 +2345,10 @@ function CompanyOverviewPanel({ company, sector, onBack, onEnter }) {
   const node = window.__realData && window.__realData.nodeByCode && window.__realData.nodeByCode[company.code];
   const D = window.DiscloseAI || {};
   const valu = node && D.calcValuation ? D.calcValuation(node) : null;
-  const capLabel = (node && node.market_cap && D.trillionLabel) ? D.trillionLabel(node.market_cap) : (company.cap + 'T');
+  // company.cap은 노드 반경용으로 600(조)에서 잘려 있어(레이아웃 캔버스 제약) 표시값으로 못 쓴다 —
+  // resolveMarketCap으로 시총을 안 잘린 실제 값으로 다시 구해 표기한다.
+  const resolvedCap = D.resolveMarketCap ? D.resolveMarketCap(node) : (node && node.market_cap);
+  const capLabel = (resolvedCap && D.trillionLabel) ? D.trillionLabel(resolvedCap) : (company.cap + '조원');
   const fmtNum = (v, suffix) => (v == null ? '-' : v + (suffix || ''));
   const recentDisc = (node && node.disc) ? node.disc.slice(0, 3) : null;
   const quote = useStockQuote(company.code);
@@ -2429,12 +2432,12 @@ function CompanyOverviewPanel({ company, sector, onBack, onEnter }) {
           <div className="sector-ov-section">
             <div className="ov-sec-title">FINANCIALS · 재무 요약</div>
             <div className="company-ov-stats" style={{marginTop:6, flexWrap:'wrap'}}>
-              {rv  && <div className="ov-stat"><div className="ov-k">매출</div><div className="ov-v" style={{fontSize:13}}>{rv}T</div></div>}
-              {oi  && <div className="ov-stat"><div className="ov-k">영업이익</div><div className="ov-v" style={{fontSize:13}}>{oi}T</div></div>}
+              {rv  && <div className="ov-stat"><div className="ov-k">매출</div><div className="ov-v" style={{fontSize:13}}>{rv}조원</div></div>}
+              {oi  && <div className="ov-stat"><div className="ov-k">영업이익</div><div className="ov-v" style={{fontSize:13}}>{oi}조원</div></div>}
               {oim && <div className="ov-stat"><div className="ov-k">영업이익률</div><div className="ov-v" style={{fontSize:13, color: parseFloat(oim) > 0 ? '#4ade80' : '#f87171'}}>{oim}%</div></div>}
               {dr  && <div className="ov-stat"><div className="ov-k">부채비율</div><div className="ov-v" style={{fontSize:13, color: dr > 200 ? '#f87171' : '#e2e8f0'}}>{dr}%</div></div>}
-              {ocf && <div className="ov-stat"><div className="ov-k">영업CF</div><div className="ov-v" style={{fontSize:13}}>{ocf}T</div></div>}
-              {ic  && <div className="ov-stat"><div className="ov-k">투자CF</div><div className="ov-v" style={{fontSize:13}}>{ic}T</div></div>}
+              {ocf && <div className="ov-stat"><div className="ov-k">영업CF</div><div className="ov-v" style={{fontSize:13}}>{ocf}조원</div></div>}
+              {ic  && <div className="ov-stat"><div className="ov-k">투자CF</div><div className="ov-v" style={{fontSize:13}}>{ic}조원</div></div>}
             </div>
             {/* #8: Revenue sparkline + percentile */}
             {(sparkPath || pctBadge) && (
@@ -2719,7 +2722,7 @@ function SectorPanel({ activeId, onSelect, mode = 'grid' }) {
               <span className="sector-dot" />
               <span className="sector-en">{s.en}</span>
               <span className="sector-ko">{s.ko}</span>
-              <span className="sector-cap">{s.cap}T</span>
+              <span className="sector-cap">{s.cap}조원</span>
             </div>
           ))}
         </div>
@@ -2733,18 +2736,18 @@ function SelectedSectorCard({ id, onClose, onEnter }) {
   if (!id) return null;
   const sec = SECTOR_PALETTE.find(s => s.id === id);
   if (!sec) return null;
+  const D = window.DiscloseAI || {};
+  const sectorPE = D.computeSectorPE ? D.computeSectorPE(sec.members) : null;
   return (
     <div className="selected-card" style={{ borderColor: sec.color + '88' }}>
       <div className="selected-row">
         <div className="selected-orb" style={{ background: sec.color, boxShadow: `0 0 24px ${sec.color}` }} />
         <div className="selected-title">
           <div className="selected-en">{sec.en.toUpperCase()}</div>
-          <div className="selected-ko">{sec.ko} · 시가총액 {sec.cap}T</div>
+          <div className="selected-ko">{sec.ko} · 시가총액 {sec.cap}조원</div>
         </div>
         <div className="selected-stats">
-          <div className="ss"><div className="ss-k">5Y CAGR</div><div className="ss-v">+8.2%</div></div>
-          <div className="ss"><div className="ss-k">P/E</div><div className="ss-v">14.3</div></div>
-          <div className="ss"><div className="ss-k">YTD</div><div className="ss-v" style={{color:'#4ade80'}}>+12.4%</div></div>
+          <div className="ss"><div className="ss-k">P/E</div><div className="ss-v">{sectorPE != null ? sectorPE : '-'}</div></div>
         </div>
         <button className="selected-cta" style={{ color: sec.color, borderColor: sec.color }} onClick={onEnter}>ENTER SECTOR ↗</button>
         <button className="selected-x" onClick={onClose}>✕</button>
