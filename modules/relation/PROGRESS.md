@@ -948,3 +948,24 @@
   - **고아 노드 15개** — 금융지주(KB/신한/하나/우리/메리츠)·공기업(한국전력)·독립(HMM·KT&G·한미반도체·LIG) 등 예상 범위
   - **NAME_ALIASES 전략**: 공정위 정식 법인명("삼성에스디아이") → KRX 약칭("삼성SDI"), normalize 후 소문자·공백제거 키로 비교
   - **레이어 공존**: 같은 기업 쌍에 ftc_group(공정위)과 K-IFRS 지분 엣지 **공존 유지** — 학습자가 "공정위 계열 vs K-IFRS 특수관계자" 정의 차이를 시각적으로 대조 가능
+
+---
+
+## 2026-07-28 — universe export: 주석 카테고리 유실 수리 (integration FN-010 연계)
+
+- **증상**: `ego/<ticker>.json`의 dart_filing 엣지 `detail`이 124건 전부 빈 문자열 → integration EgoView가
+  특수관계자의 구분(지배기업/관계기업/대규모기업집단)을 화면에 못 띄움.
+- **원인**: `universe/export.py`가 `detail = ratio% if ratio else (group_name or "")`로만 조립 —
+  dart_filing은 ratio·group_name이 둘 다 없어 빈 값이 됐다. **정작 카테고리가 든 `RelationLocal.detail`
+  컬럼을 안 읽었다.** 파서(`related_party.parse_governance_categories`)는 정상 작동 중이었고
+  DB에는 `사업보고서 주석: 지배기업` 등이 그대로 있었다 — **수집·파싱이 아니라 export 단계 누락**.
+- **처리**: `_edge_detail()`(지분율 > 계열 그룹명 > 주석 구분 폴백) + `_normalize_filing_category()` 신설.
+  정규화: `사업보고서 주석: ` 접두 제거 · `(주1)`/`(*1)`/`(*)` 주석기호 제거 · 공백 정규화(`기  타`→`기타`) ·
+  변형 통합(`유의한 영향력을행사하는 회사`→`유의적 영향력`, `관계기업 및 공동기업`→`관계기업`,
+  `대규모기업집단계열회사`→`대규모기업집단`). 두 호출부(universe.json rl-string, ego governance) 공통 적용.
+- **결과**: 6종으로 수렴 — 대규모기업집단 50 · 관계기업 36 · 기타 20 · 지배기업 12 · 유의적 영향력 4 · 최상위 지배기업 2.
+- **같이 막은 것**: rl-string은 `이름:타입:detail` 3분할 계약이라 원문 콜론이 그대로 나갔으면 adapter 파싱이
+  깨졌다(PROGRESS 상단 "rl 콜론 구분자 — 대응 보류" 항목이 여기서 현실화될 뻔함). 정규화가 접두어와 함께
+  제거하고 방어적으로 콜론을 한 번 더 지운다. **구분자 교체 과제는 여전히 열려 있음.**
+- **재실행**: `python -m modules.relation.universe.export` (CLI에 `universe` 서브커맨드 없음 — 모듈 직접 실행)
+  → named 400 · total 2,651 · ego 2,651본. 이후 `python -m integration.build_data`로 동기화(61건 변경).

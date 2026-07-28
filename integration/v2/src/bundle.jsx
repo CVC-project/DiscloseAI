@@ -848,6 +848,83 @@ window.COMPANIES = COMPANIES;
 window.RELATIONS = RELATIONS;
 window.REL_STYLES = REL_STYLES;
 
+// ─── EgoView 데이터 헬퍼 (universe/PLAN.md §5 LOD-2 — ego/<ticker>.json governance 레이어) ──
+// ego 원시 relation_type → 기존 REL_STYLES 키(시각 문법 U-D12 불변, allRelated와 동일 재사용).
+const EGO_TYPE_MAP = {
+  subsidiary: 'subsidiary', associate: 'associate', investment: 'significant',
+  ftc_group: 'group', dart_filing: 'related', manual: 'manual',
+};
+const EGO_TYPE_PRIORITY = { subsidiary: 1, associate: 2, investment: 3, ftc_group: 4, dart_filing: 5, manual: 6 };
+
+// 같은 이웃(t)에 다중 type 엣지가 있으면(예: investment+ftc_group) 하나로 병합 —
+// allRelated의 hasGroup/hasEquity 이중 평행선 병합과 동일 패턴(bundle.jsx parseRelations 대응).
+function mergeEgoNeighbors(rawList) {
+  const byCode = new Map();
+  for (const r of (rawList || [])) {
+    if (!r.t) continue;
+    if (!byCode.has(r.t)) {
+      byCode.set(r.t, { code: r.t, name: r.n, sectorKo: r.s, tier: r.tier, dir: r.dir, types: [], detailByType: {} });
+    }
+    const e = byCode.get(r.t);
+    if (r.tier === 'named400') e.tier = 'named400';
+    if (!e.types.includes(r.type)) e.types.push(r.type);
+    e.detailByType[r.type] = r.detail;
+  }
+  return Array.from(byCode.values()).map(e => {
+    e.types.sort((a, b) => (EGO_TYPE_PRIORITY[a] || 9) - (EGO_TYPE_PRIORITY[b] || 9));
+    const primary = e.types[0];
+    return {
+      code: e.code, name: e.name, sectorKo: e.sectorKo, tier: e.tier, isIncoming: e.dir === 'in',
+      relType: EGO_TYPE_MAP[primary] || 'manual',
+      hasGroup: e.types.includes('ftc_group'),
+      hasEquity: e.types.some(t => t === 'subsidiary' || t === 'associate' || t === 'investment'),
+      detail: e.detailByType[primary], rawType: primary,
+    };
+  });
+}
+
+// 랭킹: tier(named400 우선) → type 중요도 → 지분율(숫자 파싱 가능하면 큰 값 우선) — valuechain §5 D6 "tier→amount" 준용.
+function rankEgoNeighbor(n) {
+  const tierRank = n.tier === 'named400' ? 0 : 1;
+  const typeRank = EGO_TYPE_PRIORITY[n.rawType] || 9;
+  const pct = parseFloat(n.detail);
+  const amtRank = Number.isFinite(pct) ? -pct : 0;
+  return [tierRank, typeRank, amtRank];
+}
+function cmpTuple(a, b) {
+  for (let i = 0; i < a.length; i++) { if (a[i] !== b[i]) return a[i] - b[i]; }
+  return 0;
+}
+
+// UX-011 축 재정의 — 세로축 = 위계 있음(지분), 가로축 = 위계 없음(순수 비지분).
+//
+//   기존엔 dir(in/out)만으로 위/아래를 갈랐는데, 계열사·특수관계자의 dir은 "DB에 어느
+//   방향으로 기록됐나"일 뿐 위계가 아니다. 그걸 위에 두면 "지배한다"로 오독된다
+//   (리더 지적: 삼성SDI 화면의 삼성화재해상보험).
+//
+//   규칙: 지분 엣지가 하나라도 있으면 세로축(위=출자 들어옴 / 아래=피출자).
+//         계열·특수관계는 기존 이중 평행선으로 같은 엣지에 얹는다(현행 유지).
+//         순수 비지분만인 상대만 가로축 — 좌=계열사, 우=특수관계자.
+//   실측 근거: 순수 비지분 이웃은 2,651사 중 2,496사가 0개, 최대 10개 — 가로축 혼잡 없음.
+//   지배기업 특수관계자 12건은 전부 지분 엣지를 동반해 자동으로 세로축에 남는다.
+function splitEgoSides(governance, topN, sideN) {
+  const merged = mergeEgoNeighbors(governance);
+  const bySort = (arr) => arr.sort((a, b) => cmpTuple(rankEgoNeighbor(a), rankEgoNeighbor(b)));
+  const vertical = merged.filter(n => n.hasEquity);
+  const horizontal = merged.filter(n => !n.hasEquity);
+  const above = bySort(vertical.filter(n => n.isIncoming));
+  const below = bySort(vertical.filter(n => !n.isIncoming));
+  // 좌=계열사(파선) / 우=특수관계자(점선). 둘 다 아닌 잔여(manual 등)는 우측에 붙인다.
+  const left = bySort(horizontal.filter(n => n.relType === 'group'));
+  const right = bySort(horizontal.filter(n => n.relType !== 'group'));
+  const cut = (arr, n) => ({ shown: arr.slice(0, n), rest: arr.slice(n) });
+  return {
+    above: cut(above, topN), below: cut(below, topN),
+    left: cut(left, sideN), right: cut(right, sideN),
+  };
+}
+window.mergeEgoNeighbors = mergeEgoNeighbors;
+
 // ─── Sector map: companies as glowing nodes inside the chosen sector ────
 const { useRef: _useRef, useEffect: _useEffect, useState: _useState, useMemo: _useMemo } = React;
 
@@ -1405,6 +1482,298 @@ function SectorMap({ sectorId, activeMarket, activeCompanyCode, onSelectMarket, 
 }
 
 window.SectorMap = SectorMap;
+
+// ─── EgoView (③ 셸, universe/PLAN.md §5 LOD-2) ──────────────────────────────
+// 앵커 기업 중앙 고정 + ego/<ticker>.json governance 1-hop 재구성 뷰.
+// 상(dir=in·출자 들어옴) / 하(dir=out·피출자·나감) 배치 — valuechain §5 D5 상/하 문법을
+// 지배구조 의미로 재사용(U2 진행 시나리오). 사이드당 Top-N 6 + "외 n사" 묶음 노드(D6).
+// 시각 문법(REL_STYLES 색·이중 평행선·화살표=출자 방향)은 allRelated와 동일 — U-D12 불변.
+function EgoView({ anchor, chain, onReRoot, onChainJump }) {
+  const canvasRef = _useRef(null);
+  const rafRef = _useRef(0);
+  const startRef = _useRef(performance.now());
+  const sizeRef = _useRef({ w: 0, h: 0, dpr: 1 });
+  const bgStarsRef = _useRef([]);
+  const hitRef = _useRef([]);
+  const [hoverCode, setHoverCode] = _useState(null);
+  const [overflowSide, setOverflowSide] = _useState(null); // 'above' | 'below' | null
+
+  const TOP_N = 6;    // 세로(지분) 사이드당
+  const SIDE_N = 4;   // 가로(비지분) 사이드당 — 실측상 대부분 0~2개
+  const sec = (window.SECTOR_PALETTE || []).find(s => s.ko === anchor.s) || (window.SECTOR_PALETTE || [])[0] || { color: '#74EEC6' };
+
+  const { above, below, left, right } = _useMemo(
+    () => splitEgoSides((anchor.layers && anchor.layers.governance) || [], TOP_N, SIDE_N),
+    [anchor]
+  );
+
+  // 세로 사이드: 가로로 펼친 행. 가로 사이드: 앵커 높이 좌우로 세로 살짝 퍼진 열.
+  const layoutRow = (items, y) => {
+    const n = items.length;
+    if (!n) return [];
+    if (n === 1) return [{ ...items[0], gx: 0, gy: y }];
+    const span = 0.82;
+    return items.map((it, i) => ({ ...it, gx: -span + (2 * span) * (i / (n - 1)), gy: y }));
+  };
+  const layoutCol = (items, x) => {
+    const n = items.length;
+    if (!n) return [];
+    if (n === 1) return [{ ...items[0], gx: x, gy: 0, isSide: true }];
+    const span = 0.3;
+    return items.map((it, i) => ({ ...it, gx: x, gy: -span + (2 * span) * (i / (n - 1)), isSide: true }));
+  };
+  const withBundle = (side, key) => {
+    const items = side.shown.slice();
+    if (side.rest.length) items.push({ isBundle: true, side: key, rest: side.rest, code: '__bundle_' + key });
+    return items;
+  };
+  const aboveNodes = _useMemo(() => layoutRow(withBundle(above, 'above'), -0.62), [above]);
+  const belowNodes = _useMemo(() => layoutRow(withBundle(below, 'below'), 0.62), [below]);
+  const leftNodes  = _useMemo(() => layoutCol(withBundle(left, 'left'), -0.86), [left]);
+  const rightNodes = _useMemo(() => layoutCol(withBundle(right, 'right'), 0.86), [right]);
+  const allNodes = _useMemo(
+    () => [...aboveNodes, ...belowNodes, ...leftNodes, ...rightNodes],
+    [aboveNodes, belowNodes, leftNodes, rightNodes]
+  );
+
+  _useEffect(() => {
+    const cvs = canvasRef.current;
+    const ctx = cvs.getContext('2d');
+    const resize = () => {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const w = cvs.clientWidth, h = cvs.clientHeight;
+      cvs.width = w * dpr; cvs.height = h * dpr;
+      sizeRef.current = { w, h, dpr };
+      bgStarsRef.current = window.__galaxyHelpers.buildBgStars(53, w, h, 700);
+    };
+    resize();
+    window.addEventListener('resize', resize);
+
+    const animPos = allNodes.map(n => ({ x: n.gx, y: n.gy }));
+
+    function drawArrowHead(fx, fy, tx, ty, color, size) {
+      const ang = Math.atan2(ty - fy, tx - fx);
+      ctx.beginPath();
+      ctx.moveTo(tx, ty);
+      ctx.lineTo(tx - size * Math.cos(ang - 0.42), ty - size * Math.sin(ang - 0.42));
+      ctx.lineTo(tx - size * Math.cos(ang + 0.42), ty - size * Math.sin(ang + 0.42));
+      ctx.closePath();
+      ctx.fillStyle = color;
+      ctx.fill();
+    }
+
+    const draw = () => {
+      if (window.__dossierOpen) { rafRef.current = requestAnimationFrame(draw); return; }
+      const { w, h, dpr } = sizeRef.current;
+      const t = (performance.now() - startRef.current) / 1000;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      const bg = ctx.createRadialGradient(w / 2, h / 2, 0, w / 2, h / 2, Math.max(w, h) * 0.85);
+      bg.addColorStop(0, '#0a0e1c'); bg.addColorStop(0.5, '#04060e'); bg.addColorStop(1, '#000003');
+      ctx.fillStyle = bg; ctx.fillRect(0, 0, w, h);
+
+      ctx.save();
+      ctx.globalCompositeOperation = 'screen';
+      const tint = ctx.createRadialGradient(w / 2, h / 2, 0, w / 2, h / 2, w * 0.5);
+      tint.addColorStop(0, sec.color + '22'); tint.addColorStop(1, sec.color + '00');
+      ctx.fillStyle = tint; ctx.fillRect(0, 0, w, h);
+      ctx.restore();
+
+      for (const s of bgStarsRef.current) {
+        const tw = 0.6 + Math.sin(t * s.tf + s.phase) * 0.4;
+        ctx.fillStyle = `rgba(${s.r},${s.g},${s.b},${s.alpha * tw})`;
+        ctx.fillRect(s.x, s.y, s.size, s.size);
+      }
+
+      allNodes.forEach((n, i) => {
+        animPos[i].x += (n.gx - animPos[i].x) * 0.09;
+        animPos[i].y += (n.gy - animPos[i].y) * 0.09;
+      });
+
+      const cx = w / 2, cy = h / 2;
+      const baseR = Math.min(w, h) * 0.36;
+      const anchorR = Math.min(44, 10 + Math.sqrt(30) * 1.5);
+      const haloR = anchorR * 1.4;
+      const EQUITY = new Set(['subsidiary', 'associate', 'significant']);
+      const hits = [{ x: cx, y: cy, r: anchorR, isAnchor: true }];
+
+      // 관계선 + 화살표 (묶음 노드는 신원 없는 얇은 점선만)
+      allNodes.forEach((n, i) => {
+        const nx = cx + animPos[i].x * baseR, ny = cy + animPos[i].y * baseR;
+        if (n.isBundle) {
+          ctx.strokeStyle = 'rgba(148,163,184,0.35)';
+          ctx.lineWidth = 1; ctx.setLineDash([2, 3]);
+          ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(nx, ny); ctx.stroke();
+          ctx.setLineDash([]);
+          return;
+        }
+        const style = REL_STYLES[n.relType] || REL_STYLES.manual;
+        const isEquity = EQUITY.has(n.relType);
+        if (n.hasGroup && n.hasEquity) {
+          const dx = nx - cx, dy = ny - cy, len = Math.sqrt(dx * dx + dy * dy) || 1;
+          const px = -dy / len * 2, py = dx / len * 2;
+          ctx.strokeStyle = style.color + 'cc'; ctx.lineWidth = 2; ctx.setLineDash([]);
+          ctx.beginPath(); ctx.moveTo(cx + px, cy + py); ctx.lineTo(nx + px, ny + py); ctx.stroke();
+          ctx.strokeStyle = REL_STYLES.group.color + 'aa'; ctx.lineWidth = 1.2; ctx.setLineDash(REL_STYLES.group.dash);
+          ctx.beginPath(); ctx.moveTo(cx - px, cy - py); ctx.lineTo(nx - px, ny - py); ctx.stroke();
+          ctx.setLineDash([]);
+          const dxn = dx / len, dyn = dy / len;
+          if (!n.isIncoming) drawArrowHead(cx + px, cy + py, nx + px, ny + py, style.color + 'ee', 14);
+          else { const hx = cx + dxn * haloR, hy = cy + dyn * haloR; drawArrowHead(nx + px, ny + py, hx + px, hy + py, style.color + 'ee', 14); }
+        } else {
+          ctx.strokeStyle = style.color + 'cc'; ctx.lineWidth = isEquity ? 2 : 1.5; ctx.setLineDash(style.dash);
+          ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(nx, ny); ctx.stroke(); ctx.setLineDash([]);
+          if (isEquity) {
+            if (!n.isIncoming) drawArrowHead(cx, cy, nx, ny, style.color + 'ee', 14);
+            else {
+              const dx = nx - cx, dy = ny - cy, len = Math.sqrt(dx * dx + dy * dy) || 1, dxn = dx / len, dyn = dy / len;
+              const hx = cx + dxn * haloR, hy = cy + dyn * haloR;
+              drawArrowHead(nx, ny, hx, hy, style.color + 'ee', 14);
+            }
+          }
+        }
+      });
+
+      // 앵커 노드
+      const aGrd = ctx.createRadialGradient(cx, cy, 0, cx, cy, anchorR * 1.8);
+      aGrd.addColorStop(0, sec.color + 'aa'); aGrd.addColorStop(1, sec.color + '00');
+      ctx.fillStyle = aGrd; ctx.beginPath(); ctx.arc(cx, cy, anchorR * 1.8, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = sec.color; ctx.beginPath(); ctx.arc(cx, cy, anchorR * 0.5, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(cx, cy, anchorR * 0.5, 0, Math.PI * 2); ctx.stroke();
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#fff'; ctx.font = 'bold 12px sans-serif';
+      ctx.fillText(anchor.n, cx, cy - anchorR * 0.5 - 10);
+
+      // 이웃 + 묶음 노드
+      allNodes.forEach((n, i) => {
+        const nx = cx + animPos[i].x * baseR, ny = cy + animPos[i].y * baseR;
+        if (n.isBundle) {
+          ctx.fillStyle = 'rgba(148,163,184,0.18)';
+          ctx.beginPath(); ctx.arc(nx, ny, 16, 0, Math.PI * 2); ctx.fill();
+          ctx.strokeStyle = 'rgba(148,163,184,0.6)'; ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.arc(nx, ny, 16, 0, Math.PI * 2); ctx.stroke();
+          ctx.fillStyle = '#cbd5e1'; ctx.font = '9px sans-serif'; ctx.textAlign = 'center';
+          ctx.fillText('+' + n.rest.length, nx, ny + 3);
+          const firstName = (n.rest[0] && n.rest[0].name) || '';
+          // 잔여가 1개면 "외 0사"가 되어버린다 - 그땐 이름만 (오프바이원 방지).
+          const clip = (s, n2) => (s.length > n2 ? s.slice(0, n2) + '…' : s);
+          const label = n.rest.length === 1
+            ? clip(firstName, 9)
+            : clip(firstName, 6) + ' 외 ' + (n.rest.length - 1) + '사';
+          ctx.fillStyle = '#94a3b8'; ctx.font = '8px sans-serif';
+          ctx.fillText(label, nx, ny + (n.side === 'below' ? 30 : -22));
+          hits.push({ x: nx, y: ny, r: 16, isBundle: true, side: n.side });
+          return;
+        }
+        const nodeColor = (n.sectorKo && (window.SECTOR_PALETTE || []).find(s => s.ko === n.sectorKo)?.color) || (REL_STYLES[n.relType] || REL_STYLES.manual).color;
+        const isHover = hoverCode === n.code;
+        ctx.globalAlpha = 0.8;
+        const r0 = isHover ? 26 : 20;
+        const grd = ctx.createRadialGradient(nx, ny, 0, nx, ny, r0);
+        grd.addColorStop(0, nodeColor + '99'); grd.addColorStop(1, nodeColor + '00');
+        ctx.fillStyle = grd; ctx.beginPath(); ctx.arc(nx, ny, r0, 0, Math.PI * 2); ctx.fill();
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = nodeColor; ctx.beginPath(); ctx.arc(nx, ny, 5, 0, Math.PI * 2); ctx.fill();
+        // 가로축(비지분) 노드는 라벨을 위쪽으로 — 앵커와 같은 높이라 아래로 두면 겹친다.
+        const labelUp = n.isSide || n.gy < 0;
+        ctx.textAlign = 'center'; ctx.fillStyle = nodeColor; ctx.font = 'bold 9px sans-serif';
+        ctx.fillText(n.name, nx, labelUp ? ny - 13 : ny + 18);
+        ctx.fillStyle = '#64748b'; ctx.font = '8px sans-serif';
+        const style = REL_STYLES[n.relType] || REL_STYLES.manual;
+        ctx.fillText(style.label + (n.detail ? ' · ' + n.detail : ''), nx, labelUp ? ny - 4 : ny + 29);
+        hits.push({ x: nx, y: ny, r: 20, code: n.code, name: n.name, sectorKo: n.sectorKo });
+      });
+
+      hitRef.current = hits;
+      rafRef.current = requestAnimationFrame(draw);
+    };
+    rafRef.current = requestAnimationFrame(draw);
+    return () => { cancelAnimationFrame(rafRef.current); window.removeEventListener('resize', resize); };
+  }, [allNodes, anchor, sec.color]);
+
+  const hitTest = (e) => {
+    const rect = canvasRef.current.getBoundingClientRect();
+    const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+    for (const h of hitRef.current) {
+      if (Math.hypot(mx - h.x, my - h.y) <= h.r + 4) return h;
+    }
+    return null;
+  };
+  const handleClick = (e) => {
+    const h = hitTest(e);
+    if (!h || h.isAnchor) return;
+    if (h.isBundle) { setOverflowSide(h.side); return; }
+    onReRoot(h.code, h.name, h.sectorKo);
+  };
+  const handleMove = (e) => {
+    const h = hitTest(e);
+    setHoverCode(h && !h.isBundle && !h.isAnchor ? h.code : null);
+    canvasRef.current.style.cursor = (h && !h.isAnchor) ? 'pointer' : 'default';
+  };
+
+  const OVERFLOW_TITLE = { above: '출자사', below: '피출자사', left: '계열사', right: '특수관계자' };
+  const overflowList = overflowSide
+    ? ({ above, below, left, right }[overflowSide] || {}).rest || null
+    : null;
+
+  return (
+    // FN-009: 캔버스 사이징(position/inset·100%)은 인라인으로 고정한다 — styles.css가
+    // 캐시된 구버전이면 .ego-stage/.ego-canvas 규칙이 없어 캔버스가 기본 300x150으로
+    // 붕괴하고 그림이 좌상단에 박힌다(실제 발생·재현). 레이아웃은 스타일시트 캐시에 의존 금지.
+    <div className="ego-stage" style={{position:'absolute', inset:0}}>
+      <canvas ref={canvasRef} className="ego-canvas"
+        style={{width:'100%', height:'100%', display:'block'}}
+        onClick={handleClick} onMouseMove={handleMove}
+        onMouseLeave={() => setHoverCode(null)} />
+      {/* UX-012: 상단 중앙 바는 레이어 토글 2개 전용. 재구성 이력을 여기에 나열하니
+          탐색할수록 무한 증식해 토글이 밀렸다(리더 지적) — 이력은 한 단계 뒤로 버튼으로 축약.
+          현재 위치는 좌상단 전역 브레드크럼(GALAXY › 섹터 › 시장 › 기업)이 이미 보여준다. */}
+      <div className="ego-topbar">
+        {chain.length > 1 && (
+          <button className="ego-back-btn" title={chain[chain.length - 2].name + '(으)로'}
+            onClick={() => onChainJump(chain.length - 2)}>
+            ← {chain[chain.length - 2].name}
+          </button>
+        )}
+        <div className="ego-layer-toggle">
+          <button className="ego-layer-btn is-active">지배구조</button>
+          <button className="ego-layer-btn is-disabled" disabled title="밸류체인 레이어 — U3 예정">밸류체인</button>
+        </div>
+      </div>
+      {overflowList && (
+        <div className="panel ego-overflow-panel">
+          <div className="panel-head">
+            <div className="panel-head-l">
+              <span className="panel-dot" style={{background: sec.color, boxShadow: `0 0 8px ${sec.color}`}} />
+              <span className="panel-title">{OVERFLOW_TITLE[overflowSide] || ''} 전체</span>
+            </div>
+            <div style={{display:'flex', alignItems:'center', gap:8}}>
+              <span className="panel-count">{overflowList.length}사</span>
+              <button className="back-link" onClick={() => setOverflowSide(null)}>✕</button>
+            </div>
+          </div>
+          <div className="panel-body">
+            {overflowList.map(n => {
+              const style = REL_STYLES[n.relType] || REL_STYLES.manual;
+              return (
+                <div key={n.code} className="ego-overflow-row" onClick={() => { setOverflowSide(null); onReRoot(n.code, n.name, n.sectorKo); }}>
+                  <span className="ov-rel-mark" style={{
+                    background: style.dash.length === 0 ? style.color : 'transparent',
+                    border: style.dash.length === 0 ? 'none' : `1.5px dashed ${style.color}`,
+                  }} />
+                  <span className="ego-overflow-name">{n.name}</span>
+                  <span className="ego-overflow-type" style={{color: style.color}}>{style.label}{n.detail ? ' · ' + n.detail : ''}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+window.EgoView = EgoView;
+
 // app.jsx — DiscloseAI: Phase 1 Intro → Phase 2 Galaxy → Phase 3 Sector → Phase 4 Company
 // (React hooks already destructured at top of bundle)
 
@@ -2392,9 +2761,12 @@ function SectorOverviewPanel({ sector, companyCount, activeMarket, onBack, onSel
 }
 
 // ─── PHASE 4: Company overview panel (top-left) ────────────────────────────
-function CompanyOverviewPanel({ company, sector, onBack, onEnter }) {
+function CompanyOverviewPanel({ company, sector, onBack, onEnter, egoAnchor }) {
   if (!company) return null;
-  const rels = (window.RELATIONS[company.code] || []);
+  // ③ ego 데이터 있으면 우선(universe 전량 커버) — 없으면 기존 top50-scoped RELATIONS 폴백.
+  const rels = (egoAnchor && egoAnchor.layers)
+    ? mergeEgoNeighbors(egoAnchor.layers.governance).map(n => ({ code: n.code, type: n.relType }))
+    : (window.RELATIONS[company.code] || []);
   const node = window.__realData && window.__realData.nodeByCode && window.__realData.nodeByCode[company.code];
   const D = window.DiscloseAI || {};
   const valu = node && D.calcValuation ? D.calcValuation(node) : null;
@@ -2817,6 +3189,14 @@ function App() {
   const [activeCompanyCode, setActiveCompanyCode] = useState(null);
   const [activeMarket, setActiveMarket] = useState(null);  // U2 드릴인: null=성운 개요, 'KOSPI'|'KOSDAQ'=드릴인
 
+  // ③ EgoView (universe/PLAN.md §5 LOD-2) — ego/<ticker>.json 지연 fetch 상태 + re-root 체인.
+  // 실패(404 등) 시 egoStatus='error' → 렌더 분기가 기존 SectorMap(allRelated 폴리곤)으로
+  // 폴백한다(FN-005 사다리 패턴, graph_top50 경로 회귀 무손상 — UX-010).
+  const [egoAnchor, setEgoAnchor] = useState(null);
+  const [egoStatus, setEgoStatus] = useState('idle'); // idle | loading | ok | error
+  const [egoChain, setEgoChain] = useState([]); // [{code,name,sectorKo}] re-root 브레드크럼
+  const egoCacheRef = useRef(new Map());
+
   // sector zoom-in transition
   const [zoomProgress, setZoomProgress] = useState(0);
   const zoomAnimRef = useRef(0);
@@ -2879,12 +3259,14 @@ function App() {
       // null → deselect, return to sector view
       setActiveCompanyCode(null);
       setPhase('sector');
+      setEgoChain([]);
       return;
     }
     setActiveCompanyCode(code);
     // FN-008: 시장 미설정(개요에서 dot 클릭 등)이면 그 기업의 시장으로 자동 드릴인
     setActiveMarket(prev => prev || marketOf(code));
     setPhase('company');
+    setEgoChain([]); // 새 진입 — ego fetch effect가 로드 성공 시 [{anchor}]로 시딩
   }, [marketOf]);
 
   const selectGhost = useCallback((code, sectorId) => {
@@ -2905,7 +3287,57 @@ function App() {
     // ghost 기업의 소속 시장으로 즉시 드릴인 설정.
     setActiveMarket(marketOf(code));
     setPhase('company');
+    setEgoChain([]); // 새 진입(재구성 아님) — 체인 리셋
   }, [enterSector, marketOf]);
+
+  // ③ EgoView ego/<ticker>.json 지연 fetch — activeCompanyCode 변경마다(재구성 포함) 재실행.
+  // 세션 캐시로 재방문 시 재요청 없이 즉시 반영(성능 게이트 <300ms, universe/PLAN.md §5).
+  useEffect(() => {
+    if (phase !== 'company' || !activeCompanyCode) { setEgoStatus('idle'); return; }
+    let alive = true;
+    const cached = egoCacheRef.current.get(activeCompanyCode);
+    const apply = (json) => {
+      if (!alive) return;
+      if (json) {
+        setEgoAnchor(json);
+        setEgoStatus('ok');
+        setEgoChain(prev => prev.length ? prev : [{ code: json.t, name: json.n, sectorKo: json.s }]);
+      } else {
+        setEgoAnchor(null);
+        setEgoStatus('error'); // → 렌더 분기가 SectorMap(allRelated)으로 폴백
+      }
+    };
+    if (cached) { apply(cached); return; }
+    setEgoStatus('loading');
+    fetch(`../data/ego/${activeCompanyCode}.json`)
+      .then(r => (r.ok ? r.json() : null))
+      .then(json => { if (json) egoCacheRef.current.set(activeCompanyCode, json); apply(json); })
+      .catch(() => apply(null));
+    return () => { alive = false; };
+  }, [phase, activeCompanyCode]);
+
+  // 이웃 노드 클릭 = 앵커 재구성(re-root) — valuechain §5 D5. 섹터·시장이 바뀌면 함께 갱신
+  // (selectGhost와 동일한 크로스섹터 점프 패턴 — 어느 진입로든 전 상장사 도달 불변식).
+  const reRootEgo = useCallback((code, name, sectorKo) => {
+    const targetSector = SECTOR_PALETTE.find(s => s.ko === sectorKo);
+    if (targetSector && targetSector.id !== activeSectorId) setActiveSectorId(targetSector.id);
+    setActiveCompanyCode(code);
+    setActiveMarket(marketOf(code));
+    setPhase('company');
+    setEgoChain(prev => [...prev, { code, name, sectorKo }]);
+  }, [activeSectorId, marketOf]);
+
+  // 브레드크럼 클릭 = 그 지점까지 체인 절단 후 재구성(추가 아님)
+  const jumpEgoChain = useCallback((index) => {
+    const entry = egoChain[index];
+    if (!entry) return;
+    const targetSector = SECTOR_PALETTE.find(s => s.ko === entry.sectorKo);
+    if (targetSector && targetSector.id !== activeSectorId) setActiveSectorId(targetSector.id);
+    setActiveCompanyCode(entry.code);
+    setActiveMarket(marketOf(entry.code));
+    setPhase('company');
+    setEgoChain(prev => prev.slice(0, index + 1));
+  }, [egoChain, activeSectorId, marketOf]);
 
   const [corpOverlayTicker, setCorpOverlayTicker] = useState(null);
   const [discDetailItem, setDiscDetailItem] = useState(null);
@@ -2998,20 +3430,31 @@ function App() {
             />
           )}
 
-          {/* Sector / company phase — sector map */}
+          {/* Sector / company phase — sector map, 또는 ③ EgoView(지배구조 셸, LOD-2) */}
           {(phase === 'sector' || phase === 'company') && sector && (
             <div className="sector-map-stage" style={{
               opacity: Math.max(0, (zoomProgress - 0.3) * 1.6),
               transform: `scale(${0.7 + zoomProgress * 0.3})`,
             }}>
-              <SectorMap
-                sectorId={activeSectorId}
-                activeMarket={activeMarket}
-                activeCompanyCode={activeCompanyCode}
-                onSelectMarket={enterMarket}
-                onSelectCompany={selectCompany}
-                onSelectGhost={selectGhost}
-              />
+              {phase === 'company' && egoStatus === 'loading' ? (
+                <div className="ego-loading"><div className="ego-loading-spinner" /></div>
+              ) : phase === 'company' && egoStatus === 'ok' && egoAnchor ? (
+                <EgoView
+                  anchor={egoAnchor}
+                  chain={egoChain}
+                  onReRoot={reRootEgo}
+                  onChainJump={jumpEgoChain}
+                />
+              ) : (
+                <SectorMap
+                  sectorId={activeSectorId}
+                  activeMarket={activeMarket}
+                  activeCompanyCode={activeCompanyCode}
+                  onSelectMarket={enterMarket}
+                  onSelectCompany={selectCompany}
+                  onSelectGhost={selectGhost}
+                />
+              )}
             </div>
           )}
 
@@ -3022,7 +3465,7 @@ function App() {
             <>
               {phase === 'galaxy' && <MascotPanel messages={["섹터를 클릭하면, 기업을 확인할 수 있어요!", "오른쪽 아래 섹터 INDEX에서도 선택할 수 있어요.", "AI 코파일럿에게 무엇이든 물어보세요."]} />}
               {phase === 'sector' && <SectorOverviewPanel sector={sector} companyCount={sector.count || companies.length} activeMarket={activeMarket} onSelectCompany={selectCompany} onBack={activeMarket ? backToSectorOverview : backToGalaxy} />}
-              {phase === 'company' && <CompanyOverviewPanel company={company} sector={sector} onBack={backToSector} onEnter={enterCorporation} />}
+              {phase === 'company' && <CompanyOverviewPanel company={company} sector={sector} onBack={backToSector} onEnter={enterCorporation} egoAnchor={egoStatus === 'ok' ? egoAnchor : null} />}
             </>
           ) : (
             <>

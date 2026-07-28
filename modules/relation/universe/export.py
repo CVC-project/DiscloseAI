@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import json
 import logging
+import re
 from collections import defaultdict
 from pathlib import Path
 
@@ -26,6 +27,53 @@ logger = logging.getLogger(__name__)
 
 _DATA_DIR = Path(__file__).parent / "data"
 _EGO_DIR = _DATA_DIR / "ego"
+
+# dart_filing(사업보고서 주석) 엣지의 원문 구분값 정규화.
+# RelationLocal.detail에 "사업보고서 주석: 지배기업"·"대규모기업집단(*1)"·"기  타"처럼
+# 접두어·주석기호·공백 변형이 섞여 들어온다. 화면 라벨로 쓰려면 표준 카테고리로 접어야 한다.
+# ⚠️ rl-string은 "이름:타입:detail" 3분할 계약이라 detail에 콜론이 남으면 파싱이 깨진다 -
+# 접두어 제거로 대부분 사라지지만 방어적으로 콜론을 제거한다.
+_FILING_CATEGORY_RULES = [
+    (("최상위", "지배기업"), "최상위 지배기업"),
+    (("지배기업",), "지배기업"),
+    (("종속기업",), "종속기업"),
+    (("관계기업",), "관계기업"),
+    (("공동기업",), "관계기업"),
+    (("영향력",), "유의적 영향력"),
+    (("대규모기업집단",), "대규모기업집단"),
+    (("계열회사",), "대규모기업집단"),
+]
+
+
+def _normalize_filing_category(raw: str | None) -> str:
+    if not raw:
+        return ""
+    s = str(raw)
+    if ":" in s:
+        s = s.split(":", 1)[1]
+    s = re.sub(r"\((?:주|\*)[^)]*\)|\(\*\)", " ", s)  # (주1)·(*1)·(*) 주석기호 제거
+    s = re.sub(r"\s+", " ", s).strip().strip(",")
+    s = s.replace(":", " ").strip()
+    compact = s.replace(" ", "")
+    for needles, label in _FILING_CATEGORY_RULES:
+        if all(n in compact for n in needles):
+            return label
+    if "기타" in compact or "그밖" in compact:
+        return "기타"
+    return s
+
+
+def _edge_detail(e) -> str:
+    """엣지 1건의 화면용 detail. 지분율 > 계열 그룹명 > 주석 구분 순.
+
+    FN-010: 과거엔 ratio·group_name만 보고 없으면 빈 문자열을 내보내 dart_filing의
+    '지배기업/관계기업/대규모기업집단' 구분이 통째로 유실됐다(DB에는 있었음).
+    """
+    if e.ratio is not None:
+        return f"{e.ratio}%"
+    if e.group_name:
+        return str(e.group_name).replace(":", " ")
+    return _normalize_filing_category(e.detail)
 
 _SECTOR_ID_TO_KO = {
     "semi": "반도체", "fin": "금융", "it": "플랫폼", "auto": "자동차",
@@ -123,7 +171,7 @@ def export_universe_json(session, output_path: Path | None = None) -> dict:
         target = by_ticker.get(e.target_corp)
         if not target:
             continue
-        detail = f"{e.ratio}%" if e.ratio is not None else (e.group_name or "")
+        detail = _edge_detail(e)
         ratio_sort = -(e.ratio if e.ratio is not None else -1)
         rl_by_ticker[e.source_corp].append(
             (ratio_sort, f"{target.name_current}:{e.relation_type}:{detail}".replace("\n", " "))
@@ -212,7 +260,7 @@ def _build_ego_payload(
         neighbor = by_ticker.get(neighbor_ticker)
         if not neighbor:
             continue
-        detail = f"{e.ratio}%" if e.ratio is not None else (e.group_name or "")
+        detail = _edge_detail(e)
         governance.append(
             {
                 "t": neighbor.ticker,

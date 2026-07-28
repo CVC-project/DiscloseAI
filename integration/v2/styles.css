@@ -661,3 +661,51 @@ html, body, #root { margin: 0px; padding: 0px; width: 100%; height: 100%; backgr
 }
 .disc-full-list-row .disc-sum-label { font-size: 11px; }
 .disc-full-list-row .disc-sum-text  { font-size: 11px; color: #64748b; }
+
+/* ===== EGOVIEW (③ 셸, universe/PLAN.md §5 LOD-2) ===== */
+.ego-stage { position: absolute; inset: 0; }
+.ego-canvas { width: 100%; height: 100%; display: block; }
+.ego-topbar {
+  position: absolute; top: 84px; left: 50%; transform: translateX(-50%);
+  z-index: 6; display: flex; align-items: center; gap: 14px;
+  background: rgba(8, 12, 24, 0.55); backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid var(--line); border-radius: 3px; padding: 8px 14px;
+  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.06em;
+  max-width: min(720px, calc(100vw - 700px));
+}
+/* UX-012: 재구성 이력은 한 단계 뒤로 버튼으로만 (구 .ego-chain 무한 증식 제거) */
+.ego-back-btn {
+  background: transparent; border: 1px solid var(--line); color: var(--text-3);
+  font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.08em;
+  padding: 4px 9px; border-radius: 2px; cursor: pointer; flex-shrink: 0;
+  max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.ego-back-btn:hover { color: var(--cyan); border-color: rgba(116, 238, 198, 0.5); }
+.ego-layer-toggle { display: flex; gap: 4px; flex-shrink: 0; }
+.ego-topbar > .ego-back-btn + .ego-layer-toggle { border-left: 1px solid var(--line-soft); padding-left: 12px; }
+.ego-layer-btn {
+  background: transparent; border: 1px solid var(--line); color: var(--text-3);
+  font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.1em;
+  padding: 4px 9px; border-radius: 2px; cursor: pointer;
+}
+.ego-layer-btn.is-active { color: var(--cyan); border-color: rgba(116, 238, 198, 0.5); background: rgba(116, 238, 198, 0.08); }
+.ego-layer-btn.is-disabled { opacity: 0.4; cursor: not-allowed; }
+.ego-overflow-panel {
+  position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+  width: 300px; height: auto; max-height: 260px; z-index: 7;
+}
+.ego-overflow-row {
+  display: flex; align-items: center; gap: 7px; padding: 6px 4px;
+  cursor: pointer; border-bottom: 1px solid var(--line-soft); font-size: 10.5px;
+}
+.ego-overflow-row:hover { background: rgba(116, 238, 198, 0.06); }
+.ego-overflow-row:last-child { border-bottom: none; }
+.ego-overflow-name { color: var(--text-1); flex: 1 1 auto; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ego-overflow-type { font-family: var(--font-mono); font-size: 9px; flex-shrink: 0; }
+.ego-loading { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.ego-loading-spinner {
+  width: 28px; height: 28px; border-radius: 50%;
+  border: 2px solid rgba(116, 238, 198, 0.2); border-top-color: var(--cyan);
+  animation: egoSpin 0.8s linear infinite;
+}
+@keyframes egoSpin { to { transform: rotate(360deg); } }

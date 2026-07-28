@@ -5,8 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
   <title>DiscloseAI · Corporate Galaxy Atlas (v2)</title>
   <link rel="icon" href="data:," />
-  <link rel="stylesheet" href="../dossier/tokens.css" /><!-- 층1 공유 프리미티브(간격·radius·타입 스케일) — DESIGN.md 단일 토큰 체계 -->
-  <link rel="stylesheet" href="./styles.css" />
+  <!-- FN-004/FN-009: CSS도 캐시버스트 대상 — 버전 없이 두면 브라우저가 구버전 스타일시트를
+       계속 써서 "고쳤는데 안 고쳐짐"이 된다(EgoView 캔버스 붕괴로 실제 발생). 수정 시 함께 올릴 것. -->
+  <link rel="stylesheet" href="../dossier/tokens.css?v=k1a" /><!-- 층1 공유 프리미티브(간격·radius·타입 스케일) — DESIGN.md 단일 토큰 체계 -->
+  <link rel="stylesheet" href="./styles.css?v=k1b" />
   <style>
     /* Cross-env layout normalization — prevents zoom/scale differences on GitHub Pages */
     html {
@@ -84,6 +86,6 @@
 
   <!-- Adapter: fetches via DiscloseAI.loadAll, builds standalone-shaped globals
        (window.__realData), then dynamically injects src/bundle.jsx. -->
-  <script src="./src/adapter.js?v=k4a"></script>
+  <script src="./src/adapter.js?v=k4e"></script>
 </body>
 </html>
