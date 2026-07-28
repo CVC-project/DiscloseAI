@@ -1793,20 +1793,18 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
           ctx.beginPath(); ctx.moveTo(cx, cy + sign * haloR); ctx.lineTo(cx, railY); ctx.stroke();
           if (sign < 0) drawChevron(cx, railY, cx, cy - haloR, skel + 'ee', 11, 2);
           else drawChevron(cx, cy + haloR, cx, railY, skel + 'ee', 11, 2);
+          // UX-018: 트렁크 라벨 = 백킹 박스 없이 섹터색 글씨만 — 산업 라벨과 같은 문법
           ctx.save();
           ctx.font = '600 11px "IBM Plex Mono", ui-monospace, monospace';
           const midY = (cy + sign * haloR + railY) / 2;
-          const tlw = ctx.measureText(trunkLabel).width;
-          ctx.fillStyle = 'rgba(4,8,16,0.8)';
-          ctx.fillRect(cx + 7, midY - 9, tlw + 10, 17);
-          ctx.textAlign = 'left'; ctx.fillStyle = skel;
-          ctx.fillText(trunkLabel, cx + 12, midY + 4);
+          ctx.textAlign = 'left'; ctx.fillStyle = skel + 'ee';
+          ctx.fillText(trunkLabel, cx + 10, midY + 4);
           ctx.restore();
-          // 레일 본선 — 앵커 섹터색 한 줄. 범위는 스파인·묶음 x의 min~max로 클램프
-          // (UX-017: 세그먼트 절반이 스파인 밖으로 튀어나오던 문제 제거).
+          // 레일 본선 — 앵커 섹터색 한 줄. 범위는 스파인·묶음 x + 트렁크 x(cx)의 min~max
+          // (UX-018: 그룹 1개면 스파인 min==max라 레일이 사라져 트렁크와 끊겨 보였음 — KCC건설).
           const spineXs = sideObj.groups.map(g =>
             g.isRest ? cx + g.cx * baseR : cx + g.cx * baseR - g.half * baseR * 0.9);
-          const railX0 = Math.min(...spineXs), railX1 = Math.max(...spineXs);
+          const railX0 = Math.min(...spineXs, cx), railX1 = Math.max(...spineXs, cx);
           ctx.strokeStyle = skel + 'bb'; ctx.lineWidth = 2;
           ctx.beginPath(); ctx.moveTo(railX0, railY); ctx.lineTo(railX1, railY); ctx.stroke();
           // 그룹별 드롭 + 세그먼트 캡 + 산업 라벨
@@ -1903,13 +1901,11 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
       ctx.fillStyle = aGrd; ctx.beginPath(); ctx.arc(cx, cy, anchorR * 1.8, 0, Math.PI * 2); ctx.fill();
       ctx.fillStyle = sec.color; ctx.beginPath(); ctx.arc(cx, cy, anchorR * 0.5, 0, Math.PI * 2); ctx.fill();
       ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(cx, cy, anchorR * 0.5, 0, Math.PI * 2); ctx.stroke();
+      // UX-018: 앵커명 = 백킹 박스 없이 섹터색 글씨 — 이웃 노드 라벨과 같은 문법
+      // (구 백킹은 방사형 VC의 엣지 다발 대응이었음 — 레일 전환으로 불필요)
       ctx.textAlign = 'center';
       ctx.font = 'bold 12px sans-serif';
-      // 라벨 백킹 — 엣지가 위로 몰리는 레이어(특히 VC 공급처 다발)에서 앵커명이 묻히지 않게
-      const _tw = ctx.measureText(anchor.n).width;
-      ctx.fillStyle = 'rgba(4,8,16,0.72)';
-      ctx.fillRect(cx - _tw / 2 - 6, cy - anchorR * 0.5 - 23, _tw + 12, 17);
-      ctx.fillStyle = '#fff';
+      ctx.fillStyle = sec.color;
       ctx.fillText(anchor.n, cx, cy - anchorR * 0.5 - 10);
 
       // 이웃 + 묶음 노드
