@@ -69,15 +69,6 @@
         "tier": "dot"
       },
       {
-        "t": "079950",
-        "n": "인베니아",
-        "type": "investment",
-        "detail": "5.0%",
-        "dir": "out",
-        "s": "기계·장비",
-        "tier": "dot"
-      },
-      {
         "t": "455900",
         "n": "엔젤로보틱스",
         "type": "investment",
@@ -85,15 +76,6 @@
         "dir": "out",
         "s": "기계·장비",
         "tier": "dot"
-      },
-      {
-        "t": "003550",
-        "n": "LG",
-        "type": "associate",
-        "detail": "34.0%",
-        "dir": "in",
-        "s": "금융",
-        "tier": "named400"
       },
       {
         "t": "011070",
@@ -118,15 +100,6 @@
         "n": "LG이노텍",
         "type": "associate",
         "detail": "40.8%",
-        "dir": "out",
-        "s": "반도체",
-        "tier": "named400"
-      },
-      {
-        "t": "034220",
-        "n": "LG디스플레이",
-        "type": "associate",
-        "detail": "38.0%",
         "dir": "out",
         "s": "반도체",
         "tier": "named400"
@@ -470,13 +443,6 @@
         "dir": "out"
       },
       {
-        "n": "Moodify",
-        "kind": "private_corp",
-        "type": "subsidiary",
-        "detail": "100.0%",
-        "dir": "out"
-      },
-      {
         "n": "OSO Group AS",
         "kind": "private_corp",
         "type": "subsidiary",
@@ -547,17 +513,24 @@
         "dir": "out"
       },
       {
-        "n": "LGENB",
-        "kind": "private_corp",
-        "type": "subsidiary",
-        "detail": "91.0%",
-        "dir": "out"
-      },
-      {
         "n": "LGETR",
         "kind": "private_corp",
         "type": "subsidiary",
         "detail": "90.0%",
+        "dir": "out"
+      },
+      {
+        "n": "NOVA WAVE FUND",
+        "kind": "coop_fund",
+        "type": "subsidiary",
+        "detail": "87.5%",
+        "dir": "out"
+      },
+      {
+        "n": "LGEIL",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "85.0%",
         "dir": "out"
       }
     ],
@@ -744,6 +717,15 @@
           "prov": "특수관계자 · 매입"
         },
         {
+          "n": "Hitachi-LG Data Storage Inc.(HLDS) 및 그 종속기업",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 21173000000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 매입"
+        },
+        {
           "n": "LG-MRI LLC",
           "kind": "private_corp",
           "type": "supply",
@@ -753,11 +735,29 @@
           "prov": "특수관계자 · 매입"
         },
         {
+          "n": "㈜에스앤아이코퍼레이션 및 그 종속기업",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1103000000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 매입"
+        },
+        {
           "n": "㈜LG스포츠",
           "kind": "private_corp",
           "type": "supply",
           "tier_grade": "T1",
           "amount": 280000000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 매입"
+        },
+        {
+          "n": "㈜디앤오 및 그 종속기업",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 147000000.0,
           "as_of": 2024,
           "prov": "특수관계자 · 매입"
         },
@@ -877,6 +877,42 @@
           "type": "customer",
           "tier_grade": "T1",
           "amount": 93366000000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "㈜에스앤아이코퍼레이션 및 그 종속기업",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4355000000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "자이씨앤에이㈜ 및 그 종속기업",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1113000000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "㈜디앤오 및 그 종속기업",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 373000000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "Hitachi-LG Data Storage Inc.(HLDS) 및 그 종속기업",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 202000000.0,
           "as_of": 2024,
           "prov": "특수관계자 · 매출"
         },

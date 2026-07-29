@@ -265,3 +265,162 @@ def test_rp_note_l2_blocklist_blocks_confirmed_pair(in_memory_session):
     assert result["edges_kept"] == 0
     assert result["l2_blocklisted"] == 1
     assert session.query(ValueChainEdge).count() == 0
+
+
+# ══ 2026-07-29 전수 검증에서 잡은 파이프라인 오류 — 회귀 박제 (반복 금지) ══════
+
+def test_upsert_keeps_higher_ratio_on_key_collision(in_memory_session):
+    """⚠️ order-dependent 사고 박제: DART hyslrSttus는 **주식 종류마다 별도 행**을 준다.
+    무조건 덮어쓰면 응답 순서에 따라 우선주(0.71%)가 보통주(34.0%)를 이기고,
+    이어 kifrs가 5% 미만으로 판정해 **최대주주 엣지를 통째로 삭제**한다
+    (실측: 계양전기←해성산업 34%, DL←㈜대림 48.27%가 화면에서 사라짐)."""
+    from modules.relation.storage.models import RelationRaw
+
+    session = in_memory_session
+    session.add(CompanyRegistry(corp_code="00000001", ticker="012200",
+                                name_current="계양전기", market="KOSPI"))
+    session.add(CompanyRegistry(corp_code="00000002", ticker="004890",
+                                name_current="해성산업", market="KOSPI"))
+    # 보통주 34.0% 먼저, 우선주 0.71% 나중 — 순서대로 들어와도 34.0이 남아야 한다
+    for ratio in (34.0, 0.71):
+        session.add(RelationRaw(
+            source_name="해성산업", target_name="계양전기", relate="최대주주",
+            ratio=ratio, source_type="hyslrSttus", bsns_year=2025,
+        ))
+    session.commit()
+
+    transform_filters.apply(session=session)
+    edge = (session.query(RelationLocal)
+            .filter_by(source_corp="004890", target_corp="012200").one())
+    assert edge.ratio == 34.0, "우선주 행이 보통주 최대주주 지분을 덮어씀"
+
+
+def test_self_loop_edges_are_dropped(in_memory_session):
+    """⚠️ 회귀 박제: 자사주·최대주주 본인 행이 A→A 엣지가 되면
+    "KG스틸의 관계기업 = KG스틸 39.97%"가 화면에 뜬다(실측 36건)."""
+    from modules.relation.storage.models import RelationRaw
+
+    session = in_memory_session
+    session.add(CompanyRegistry(corp_code="00000003", ticker="016380",
+                                name_current="KG스틸", market="KOSPI"))
+    session.add(RelationRaw(
+        source_name="KG스틸", target_name="KG스틸", relate="최대주주",
+        ratio=39.97, source_type="hyslrSttus", bsns_year=2025,
+    ))
+    session.commit()
+
+    result = transform_filters.apply(session=session)
+    assert session.query(RelationLocal).count() == 0
+    assert result["dropped_self_loop"] == 1
+
+
+def test_stock_kind_in_name_column_is_rejected(in_memory_session):
+    """⚠️ 회귀 박제: DART 응답 컬럼 밀림(445090 에이직랜드) — 주주명 칸에 '보통주'가
+    들어온다. 노드로 만들면 '보통주'라는 주주가 생긴다."""
+    from modules.relation.storage.models import RelationRaw
+
+    session = in_memory_session
+    session.add(CompanyRegistry(corp_code="00000004", ticker="445090",
+                                name_current="에이직랜드", market="KOSDAQ"))
+    session.add(RelationRaw(
+        source_name="보통주", target_name="에이직랜드", relate="최대주주",
+        ratio=23.67, source_type="hyslrSttus", bsns_year=2025,
+    ))
+    session.commit()
+
+    result = transform_filters.apply(session=session)
+    assert result["dropped_stock_kind_row"] == 1
+    assert session.query(RelationLocal).count() == 0
+
+
+def test_equity_lineages_are_deduped_into_one_edge(in_memory_session):
+    """⚠️ 회귀 박제: 지분 2원천(hyslr·otrCpr)은 **같은 사실의 두 기록**이다.
+    source_type을 dedupe 키에 그대로 두면 둘 다 살아남아 같은 관계에 서로 다른
+    지분율·연도가 한 화면에 뜬다(실측 366건 — 유한양행→이뮨온시아 76.9% + 65.93%)."""
+    from modules.relation.storage.queries import latest_relation_local_edges
+
+    session = in_memory_session
+    session.add(RelationLocal(source_corp="000100", target_corp="424870",
+                              relation_type="subsidiary", ratio=76.9,
+                              source_type="otrCprInvstmntSttus", bsns_year=2024,
+                              status="active"))
+    session.add(RelationLocal(source_corp="000100", target_corp="424870",
+                              relation_type="subsidiary", ratio=65.93,
+                              source_type="hyslrSttus", bsns_year=2025,
+                              status="active"))
+    session.commit()
+
+    edges = latest_relation_local_edges(session)
+    pair = [e for e in edges if e.source_corp == "000100"]
+    assert len(pair) == 1, "같은 관계가 두 번 표시됨"
+    assert pair[0].bsns_year == 2025, "최신 연도가 채택돼야 함"
+
+
+def test_layer_coexistence_still_holds(in_memory_session):
+    """⚠️ 위 dedupe가 과하면 안 된다 — ftc(계열)와 지분은 **다른 계보**라 공존한다
+    (storage/CLAUDE.md 레이어 공존 원칙)."""
+    from modules.relation.storage.queries import latest_relation_local_edges
+
+    session = in_memory_session
+    session.add(RelationLocal(source_corp="005930", target_corp="006400",
+                              relation_type="investment", ratio=19.6,
+                              source_type="otrCprInvstmntSttus", bsns_year=2025,
+                              status="active"))
+    session.add(RelationLocal(source_corp="005930", target_corp="006400",
+                              relation_type="ftc_group", ratio=None,
+                              source_type="ftc", bsns_year=2025, status="active"))
+    session.commit()
+
+    edges = latest_relation_local_edges(session)
+    assert len({e.source_type for e in edges}) == 2, "레이어 공존이 깨짐"
+
+
+def test_common_shares_win_over_preferred(in_memory_session):
+    """⚠️ 회귀 박제(적대적 검증): K-IFRS 지배력 판정은 **의결권** 기준이다.
+    'higher ratio 채택'만 쓰면 우선주 29.91%가 보통주 7.55%를 이겨 지배력을
+    과대표시한다(실측 428건 — 레이←㈜레이홀딩스)."""
+    from modules.relation.storage.models import RelationRaw
+
+    session = in_memory_session
+    session.add(CompanyRegistry(corp_code="00000005", ticker="228670",
+                                name_current="레이", market="KOSDAQ"))
+    session.add(CompanyRegistry(corp_code="00000006", ticker="999001",
+                                name_current="레이홀딩스", market="KOSDAQ"))
+    for ratio, knd in ((7.55, "보통주"), (29.91, "우선주")):
+        session.add(RelationRaw(source_name="레이홀딩스", target_name="레이",
+                                relate="최대주주", ratio=ratio, stock_knd=knd,
+                                source_type="hyslrSttus", bsns_year=2025))
+    session.commit()
+
+    transform_filters.apply(session=session)
+    edge = (session.query(RelationLocal)
+            .filter_by(source_corp="999001", target_corp="228670").one())
+    assert edge.ratio == 7.55, "우선주가 의결권 지분을 덮어씀"
+
+
+def test_disposed_stake_does_not_resurrect(in_memory_session):
+    """⚠️ 회귀 박제(적대적 검증, 최중대): 지분을 처분해 최신 연도가 <5%가 되면
+    그 관계는 **끝난 것**이다. <5%를 삭제하면 최신 행이 사라져 D13 신선도 규칙이
+    **처분 직전 연도**를 최신으로 골라 끝난 관계를 현재처럼 되살린다
+    (실측: SK→에스케이머티리얼즈그룹포틴 화면 75% 종속 / 2025 공시 0.0%)."""
+    from modules.relation.storage.queries import latest_relation_local_edges
+    from modules.relation.transform import kifrs
+
+    session = in_memory_session
+    session.add(RelationLocal(source_corp="034730", target_corp="x_abc",
+                              relation_type="ownership", ratio=75.0,
+                              source_type="otrCprInvstmntSttus", bsns_year=2024,
+                              status="active"))
+    session.add(RelationLocal(source_corp="034730", target_corp="x_abc",
+                              relation_type="ownership", ratio=0.0,
+                              source_type="otrCprInvstmntSttus", bsns_year=2025,
+                              status="active"))
+    session.commit()
+
+    kifrs.apply(session=session)
+    # 2025 행은 종료로 기록되고(삭제 아님), 그 쌍은 화면에서 빠진다
+    assert (session.query(RelationLocal)
+            .filter_by(bsns_year=2025).one().status == "terminated")
+    shown = [e for e in latest_relation_local_edges(session)
+             if e.source_corp == "034730"]
+    assert shown == [], "처분한 지분이 화면에 부활함"

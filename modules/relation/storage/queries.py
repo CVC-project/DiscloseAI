@@ -11,20 +11,47 @@ from __future__ import annotations
 from modules.relation.storage.models import RelationLocal
 
 
-def latest_relation_local_edges(session, status: str = "active") -> list[RelationLocal]:
-    """(source_corp, target_corp, source_type)별 최신 bsns_year 행만 반환.
+# ★2026-07-29 수정(전수 불변식 검사에서 발견): 지분 2원천은 **같은 사실의 두 기록**이다.
+# hyslrSttus(상대의 최대주주 현황에서 본 것)와 otrCprInvstmntSttus(자사의 타법인출자에서
+# 본 것)는 같은 지분 관계를 양쪽에서 적은 것이라, source_type을 키에 그대로 두면 둘 다
+# 살아남는다. 실제 사고: 유한양행→이뮨온시아가 **76.9%(otrCpr 2024)와 65.93%(hyslr 2025)로
+# 한 화면에 동시 표기**됐다(366건). 연도가 다른데 화면엔 연도가 없어 사용자가 구분할 방법이
+# 없다 — 같은 관계에 두 숫자를 보여주는 건 교육 서비스의 신뢰를 직접 깎는다.
+#
+# docstring이 말하던 "레이어 공존"은 **ftc(계열) vs 지분 vs dart_filing(주석)** 사이의
+# 이야기지 지분 원천 2종 사이가 아니다. 그래서 지분 계보만 하나로 접는다.
+# 채택 규칙: 최신 연도 우선 → 같은 연도면 higher ratio(transform/dedupe.py의 양방향
+# 중복 관례와 동일).
+_EQUITY_SOURCE_TYPES = {"hyslrSttus", "otrCprInvstmntSttus"}
 
-    다른 source_type(예: hyslrSttus vs ftc)이 같은 쌍에 공존하는 것은 레이어
-    공존 원칙(storage/CLAUDE.md)대로 그대로 유지 — dedupe하는 것은 "완전히 같은
-    (pair, source_type)의 연도별 중복"뿐.
+
+def _lineage(source_type: str | None) -> str:
+    """dedupe 계보 — 지분 2원천은 한 계보로 접고, 나머지는 source_type 그대로."""
+    return "equity" if source_type in _EQUITY_SOURCE_TYPES else (source_type or "")
+
+
+def latest_relation_local_edges(session, status: str = "active") -> list[RelationLocal]:
+    """(source_corp, target_corp, 계보)별 대표 1건만 반환.
+
+    계보 = 지분(hyslrSttus+otrCprInvstmntSttus 통합) / ftc / dart_filing / manual.
+    레이어 공존 원칙(storage/CLAUDE.md)은 **계보 사이**에서 유지된다 — 같은 쌍에
+    ftc_group과 지분 엣지가 함께 남는 것은 의도된 동작.
     """
-    latest_by_key: dict[tuple[str, str, str | None], RelationLocal] = {}
-    query = session.query(RelationLocal)
-    if status is not None:
-        query = query.filter(RelationLocal.status == status)
-    for e in query.all():
-        key = (e.source_corp, e.target_corp, e.source_type)
+    # ★2026-07-29: status 필터를 **먼저 걸면 안 된다**. 최신 연도 행이 terminated
+    # (지분 처분)일 때 그 행이 빠지면 직전 연도 행이 "최신"이 되어 **끝난 관계가
+    # 현재 관계로 부활**한다(적대적 검증에서 실측 1,985건). 그래서 전 status를 놓고
+    # 쌍별 최신을 먼저 정한 뒤, 그 대표가 terminated면 그 쌍을 통째로 뺀다.
+    latest_by_key: dict[tuple[str, str, str], RelationLocal] = {}
+    for e in session.query(RelationLocal).all():
+        key = (e.source_corp, e.target_corp, _lineage(e.source_type))
         current = latest_by_key.get(key)
-        if current is None or (e.bsns_year or 0) > (current.bsns_year or 0):
+        if current is None:
             latest_by_key[key] = e
-    return list(latest_by_key.values())
+            continue
+        cy, ey = (current.bsns_year or 0), (e.bsns_year or 0)
+        if ey > cy or (ey == cy and (e.ratio or 0) > (current.ratio or 0)):
+            latest_by_key[key] = e
+    if status is None:
+        return list(latest_by_key.values())
+    # 쌍의 **최신 상태**가 요청 status가 아니면 그 쌍은 화면에 없다(처분·정정 반영)
+    return [e for e in latest_by_key.values() if e.status == status]

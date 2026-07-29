@@ -285,6 +285,9 @@ class UnlistedNode(Base):
     anchor_corp = Column(String(6), nullable=False, index=True)  # 등장 상장사 ticker
     name_raw = Column(String, nullable=False)      # 공시 원문 표기 (화면 라벨)
     kind = Column(String(16), nullable=False)      # entity_kind.ALL_KINDS
+    # ★분류 입력 보존(2026-07-29) — relate 없이는 kind를 사후 재현·감사할 수 없다.
+    # 전수 검사에서 "kind 재현 불가 890건"이 뜬 원인이 이 미저장이었다.
+    relate_raw = Column(String)                    # hyslrSttus.relate 원문 (nullable)
     first_seen = Column(String)                    # provenance (rcept_no·source_type)
     status = Column(String(10), default="active")
 

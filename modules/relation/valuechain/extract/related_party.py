@@ -1047,6 +1047,7 @@ def apply_governance(
         "no_ticker": 0,
         "pruned_stale": 0,
         "pruned_orphan_nodes": 0,
+        "kind_reconciled": 0,
     }
     touched_keys: set[tuple] = set()
     try:
@@ -1162,6 +1163,7 @@ def apply_governance(
         # ★U5: 엣지가 사라진 비상장 노드 정리 (참조 무결성 기준)
         session.flush()
         counters["pruned_orphan_nodes"] = entity_kind.prune_orphan_unlisted_nodes(session)
+        counters["kind_reconciled"] = entity_kind.reconcile_unlisted_kinds(session)
 
         session.commit()
     finally:

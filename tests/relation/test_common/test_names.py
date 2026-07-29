@@ -278,3 +278,41 @@ class TestAnnotationStripping:
         """법인격 '(주)'는 기존 접미어 규칙이 계속 처리한다(주석 규칙과 무관)."""
         assert normalize_company_name("(주)삼성전자") == "삼성전자"
         assert normalize_company_name("삼성전자(주)") == "삼성전자"
+
+
+class TestTrailingFootnoteAnnotations:
+    """후위 각주 제거 (2026-07-29 2차 검증 — 잉여 노드 624건·상장사 누락 13건).
+
+    괄호로 닫히지 않은 각주가 미처리라 같은 회사가 2~5개 노드로 갈라졌다.
+    """
+
+    @pytest.mark.parametrize(
+        "variants",
+        [
+            ["파이코일바이오텍코리아", "파이코일바이오텍코리아*", "파이코일바이오텍코리아**"],
+            ["㈜시메이션 (*1)", "㈜시메이션 (비상장) 주6,7)", "㈜시메이션 주3)"],
+            ["(주)햄프킹", "햄프킹 주3)", "햄프킹(비상장) 주6,9)"],
+            ["HanyangENG USA Inc.", "HanyangENG USA Inc. 주3", "HanyangENG USA Inc., 주2"],
+        ],
+    )
+    def test_footnote_variants_collapse_to_one_key(self, variants):
+        keys = {normalize_company_name(v) for v in variants}
+        assert len(keys) == 1, f"같은 회사가 {len(keys)}개 노드로 분열: {keys}"
+
+    @pytest.mark.parametrize(
+        "raw,expected",
+        [
+            ("㈜한진 *1)", "한진"),
+            ("주식회사 민테크 주2)", "민테크"),
+            ("㈜위메이드맥스 주3)", "위메이드맥스"),
+            ("*위츠", "위츠"),
+            ("한화엔진 주4", "한화엔진"),
+        ],
+    )
+    def test_listed_affiliates_are_recovered(self, raw, expected):
+        """⚠️ 각주 때문에 상장 계열사가 비상장 노드로 떨어져 그룹 지배구조가 끊겼다."""
+        assert normalize_company_name(raw) == expected
+
+    def test_general_parentheses_still_preserved(self):
+        """⚠️ 후위 각주 규칙이 원칙 ②(일반 괄호 보존)를 깨면 안 된다."""
+        assert normalize_company_name("DB(Philippines) Inc.") not in {"db", ""}

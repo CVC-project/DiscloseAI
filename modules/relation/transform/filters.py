@@ -35,6 +35,20 @@ PERSONAL_RELATIONS = {
     "최대주주 본인",
 }
 FOUNDATION_KEYWORDS = ("재단", "공익", "장학회", "문화재단")
+# 주주명 칸에 잘못 들어오는 주식 종류 어휘 (DART 응답 컬럼 밀림 — 445090 실측)
+_STOCK_KIND_TOKENS = {"보통주", "우선주", "종류주", "전환우선주", "상환우선주", "기타주"}
+
+
+def _stock_kind_rank(stock_knd: str | None) -> int:
+    """의결권 우선순위 — 작을수록 우선. K-IFRS 지배력은 **의결권** 기준이다."""
+    s = (stock_knd or "").strip()
+    if not s:
+        return 1          # 미상 — 보통주보다 뒤, 우선주보다 앞
+    if "보통" in s:
+        return 0
+    if "우선" in s or "종류" in s:
+        return 2
+    return 1
 RRN_PATTERN = re.compile(r"\d{6}-\d{7}")  # 주민번호
 
 
@@ -177,6 +191,8 @@ def _upsert_relation_local(session, **fields) -> tuple:
 
     Returns: 이 행의 자연키 튜플(apply()가 prune 대상 판별에 사용).
     """
+    stock_knd = fields.pop("_stock_knd", None)
+    fields["_stock_knd"] = stock_knd            # 아래 비교용(모델 컬럼 아님 — 마지막에 제거)
     key = {
         "source_corp": fields["source_corp"],
         "target_corp": fields["target_corp"],
@@ -185,11 +201,41 @@ def _upsert_relation_local(session, **fields) -> tuple:
     }
     existing = session.query(RelationLocal).filter_by(**key).one_or_none()
     if existing:
-        for k, v in fields.items():
-            setattr(existing, k, v)
+        # ★2026-07-29 order-dependent 사고 수정: DART hyslrSttus는 **주식 종류마다
+        # 별도 행**을 내려준다(보통주 34.0% + 우선주 0.71%). 무조건 덮어쓰면 응답
+        # 순서에 따라 우선주 값이 이겨 지분율이 0.71%가 되고, 이어 kifrs가 5% 미만으로
+        # 판정해 **엣지를 통째로 삭제**했다(실측: 계양전기←해성산업 34%, DL←㈜대림
+        # 48.27%, JW중외제약←JW홀딩스 40.25% 등 최대주주 다수가 화면에서 사라짐).
+        #
+        # ★2차 수정(적대적 검증): 1차의 "higher ratio 채택"은 **우선주를 고르는**
+        # 오류를 낳았다(428건 — 레이←㈜레이홀딩스 보통주 7.55% / 우선주 29.91% →
+        # 29.91% associate). K-IFRS 지배력 판정의 기준은 **의결권**이므로 비율 크기가
+        # 아니라 **주식 종류**가 우선이다: 보통주 > 종류주 > 미상. 같은 종류일 때만
+        # higher ratio(= dedupe.py 양방향 중복 관례).
+        incoming_ratio = fields.get("ratio")
+        rank_in = _stock_kind_rank(fields.get("_stock_knd"))
+        rank_ex = _stock_kind_rank(getattr(existing, "_stock_knd_cache", None))
+        if rank_in != rank_ex:
+            keep_existing = rank_in > rank_ex      # 숫자가 작을수록 우선(보통주=0)
+        else:
+            keep_existing = (
+                incoming_ratio is None and existing.ratio is not None
+            ) or (
+                incoming_ratio is not None
+                and existing.ratio is not None
+                and incoming_ratio < existing.ratio
+            )
+        if not keep_existing:
+            for k, v in fields.items():
+                if k != "_stock_knd":
+                    setattr(existing, k, v)
+            existing._stock_knd_cache = stock_knd
         existing.status = "active"
     else:
-        session.add(RelationLocal(**fields, status="active"))
+        row = RelationLocal(**{k: v for k, v in fields.items() if k != "_stock_knd"},
+                            status="active")
+        row._stock_knd_cache = stock_knd
+        session.add(row)
     return (key["source_corp"], key["target_corp"], key["source_type"], key["bsns_year"])
 
 
@@ -243,6 +289,9 @@ def apply(session=None) -> dict:
         "pruned_stale": 0,
         "unlisted_nodes": 0,       # ★U5: 비상장·개인 노드로 살린 상대 (과거엔 drop)
         "pruned_orphan_nodes": 0,
+        "dropped_self_loop": 0,
+        "dropped_stock_kind_row": 0,
+        "kind_reconciled": 0,
     }
     touched_keys: set[tuple] = set()
 
@@ -250,6 +299,12 @@ def apply(session=None) -> dict:
         raws = session.query(RelationRaw).all()
         for r in raws:
             if r.source_type == "hyslrSttus":
+                # ★DART 응답 컬럼 밀림 방어(실측 445090 에이직랜드): 주주명 칸에
+                # 주식 종류가 들어온 원문 오류 — nm='보통주', stock_knd='최대주주'.
+                # 이런 행을 노드로 만들면 '보통주'라는 주주가 생긴다.
+                if (r.source_name or "").strip() in _STOCK_KIND_TOKENS:
+                    counters["dropped_stock_kind_row"] += 1
+                    continue
                 # source = 주주, target = 자기 기업명 (자기 ticker는 알 수 없으나
                 # target_name을 정규화해서 top50 ticker 조회 가능)
                 target_ticker = ticker_map.get(normalize_company_name(r.target_name))
@@ -266,11 +321,18 @@ def apply(session=None) -> dict:
                         name_raw=r.source_name,
                         relate=r.relate,
                         provenance=f"hyslrSttus:{r.bsns_year}",
+                        surname_fallback=True,   # 최대주주 현황 = 사람 명부
                     )
                     if not source_ticker:
                         counters["dropped_unmatched"] += 1
                         continue
                     counters["unlisted_nodes"] += 1
+                # ★2026-07-29: 자사주·최대주주 본인 행은 A→A 자기 엣지가 된다
+                # (실측 36건 — "KG스틸의 관계기업 = KG스틸 39.97%"가 화면에 떴다).
+                # hyslrSttus에는 '자기주식'·본인 지분이 함께 기재되므로 여기서 막는다.
+                if source_ticker == target_ticker:
+                    counters["dropped_self_loop"] += 1
+                    continue
                 touched_keys.add(
                     _upsert_relation_local(
                         session,
@@ -281,6 +343,7 @@ def apply(session=None) -> dict:
                         detail=f"{r.source_name} {r.ratio}% ({r.relate or ''})".strip(),
                         source_type=r.source_type,
                         bsns_year=r.bsns_year,
+                        _stock_knd=r.stock_knd,
                     )
                 )
                 counters["kept_ownership"] += 1
@@ -320,6 +383,7 @@ def apply(session=None) -> dict:
                         name_raw=r.target_name,
                         relate=None,
                         provenance=f"otrCprInvstmntSttus:{r.bsns_year}",
+                        allow_person=False,   # 타법인출자 대상은 정의상 법인
                     )
                     if not target_ticker:
                         counters["dropped_unmatched"] += 1
@@ -403,6 +467,7 @@ def apply(session=None) -> dict:
         # ★U5: 엣지가 사라진 비상장 노드 정리 (참조 무결성 기준 — entity_kind 주석 참조)
         session.flush()
         counters["pruned_orphan_nodes"] = entity_kind.prune_orphan_unlisted_nodes(session)
+        counters["kind_reconciled"] = entity_kind.reconcile_unlisted_kinds(session)
 
         session.commit()
     finally:

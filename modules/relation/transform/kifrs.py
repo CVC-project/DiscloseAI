@@ -49,7 +49,16 @@ def apply(session=None) -> dict:
     ratio로 relation_type 재분류.
 
     ftc_group·dart_filing·manual 엣지는 건드리지 않음.
-    <5% 지분은 엣지 자체를 삭제.
+
+    ★2026-07-29 수정(적대적 검증에서 발견): <5% 지분을 **삭제**하면 "지분을 처분했다"는
+    사실 자체가 사라진다. 그러면 최신 연도 행이 없어져 D13 신선도 규칙이 **처분 직전
+    연도**를 최신으로 골라 **끝난 관계를 현재 관계로 부활**시킨다.
+      실측: SK→에스케이머티리얼즈그룹포틴 화면 75% 종속 / 2025 공시 0.0%
+            윤성에프앤씨→프라이믹스윤성 화면 45% 관계기업 / 2025 공시 0.0%
+      규모: 화면 지분엣지의 31.2%(10,383건)가 앵커 최신 공시연도보다 오래됐고,
+            그중 1,985건은 더 최신 공시가 <5%(사실상 처분)를 명시했다.
+    → 삭제 대신 **status='terminated'로 기록**한다(D7 "저장은 전 연도 보존" 원칙과도
+      부합). 화면 제외는 queries.latest_relation_local_edges가 담당한다.
 
     session: 주입 시 그 세션 사용(테스트용 — 닫지 않음). None이면 로컬 relation.db.
 
@@ -71,7 +80,8 @@ def apply(session=None) -> dict:
         for r in rows:
             rtype = classify_ownership(r.ratio)
             if rtype is None:
-                session.delete(r)
+                # 삭제가 아니라 "관계 종료" 기록 — 위 docstring 참조
+                r.status = "terminated"
                 dropped += 1
             else:
                 r.relation_type = rtype
