@@ -832,7 +832,12 @@ def apply(session=None, sections: list[dict] | None = None) -> dict:
     if sections is None:
         sections = reports_source.fetch_rp_note_sections()
 
-    counters = {"notes_scanned": 0, "notes_unparsed": 0, "edges_kept": 0}
+    counters = {
+        "notes_scanned": 0,
+        "notes_unparsed": 0,
+        "edges_kept": 0,
+        "group_aggregate": 0,
+    }
     try:
         ctx = build_guard_context(session)
 
@@ -863,6 +868,16 @@ def apply(session=None, sections: list[dict] | None = None) -> dict:
                 corp_code = link_counterparty(
                     session, ctx, item["counterparty"], chunk_id=rcept_no
                 )
+                # 원문이 안 붙으면 그룹 집계 표현인지 보고 대표사로 재시도
+                # (리더 판정 — 붙이되 provenance에 "그룹 합산" 명시)
+                is_aggregate = False
+                if not corp_code:
+                    base = strip_group_aggregate(item["counterparty"])
+                    if base:
+                        corp_code = link_counterparty(
+                            session, ctx, base, chunk_id=rcept_no
+                        )
+                        is_aggregate = bool(corp_code)
                 if not corp_code:
                     continue  # L1 큐행 또는 링킹 실패 — ctx.counters에 집계됨
                 if corp_code == self_corp:
@@ -877,6 +892,10 @@ def apply(session=None, sections: list[dict] | None = None) -> dict:
                     ctx.counters["l2_blocklisted"] += 1
                     continue
 
+                provenance = f"{row['title']} · {item['label']}"
+                if is_aggregate:
+                    provenance += f" · {GROUP_AGGREGATE_MARK}"
+                    counters["group_aggregate"] += 1
                 _upsert_edge(
                     session,
                     src_corp=src_corp,
@@ -885,7 +904,7 @@ def apply(session=None, sections: list[dict] | None = None) -> dict:
                     tier="T1",
                     source_kind="rp_note",
                     rcept_no=rcept_no,
-                    provenance=f"{row['title']} · {item['label']}",
+                    provenance=provenance,
                     amount=item["amount"],
                     as_of=as_of,
                 )
@@ -921,6 +940,34 @@ def split_multi_counterparties(name: str) -> list[str]:
         return []
     parts = [p.strip(" ()") for p in _MULTI_SEP_RE.split(name)]
     return [p for p in parts if len(p) >= 2]
+
+
+# ★ 2026-07-29 리더(CPA) 판정: 그룹 집계 표현도 대표사 엣지로 붙이되 **"그룹 합산"을
+# 명시**한다. 근거: "지배기업이 회사 단일로 지배하는 것은 아니다" — 관계 자체는 사실이고,
+# 금액이 그룹 합산이라는 점을 표기로 밝히면 오해가 없다. 지배구조·밸류체인 양쪽 공통 적용.
+#
+# 원문 형태(LG화학 2025 주석 실측): 회사명 칸에 꼬리가 붙어 통째로 링킹 실패했다.
+#   | 대규모기업집단 | 엘지디스플레이㈜와 종속기업 | 340,980 | …   ← 매출 3,409억
+#   | 그 밖의 특수관계자 | ㈜엘지씨엔에스와 그 종속기업 | 43,632 | …
+# 같은 표의 "㈜테크윈"·"한국전구체 주식회사"는 평이한 사명이라 정상 링킹된다 —
+# 즉 `와 종속기업` 꼬리 하나가 유일한 차단 요인이었다.
+_GROUP_AGGREGATE_RE = re.compile(
+    r"\s*(?:(?:및|와|과)\s*(?:그\s*)?[^,]*?(?:종속|계열|자회사|공동기업|관계기업)[^,]*"
+    r"|등(?:\s+[^,]*?(?:기업집단|계열회사|소속회사|소속)[^,]*)?)\s*$"
+)
+GROUP_AGGREGATE_MARK = "그룹 합산"
+
+
+def strip_group_aggregate(name: str) -> str | None:
+    """'X와 그 종속기업' → 'X'. 집계 꼬리가 없으면 None(변형 없음).
+
+    꼬리는 **연결어(및·와·과·등) 뒤**에 올 때만 인정한다 — '현대종속기업개발' 같은
+    정상 사명을 깎아내지 않기 위함(실측 확인).
+    """
+    if not name:
+        return None
+    base = _GROUP_AGGREGATE_RE.sub("", name).strip(" ,·")
+    return base if base and base != name.strip() else None
 
 
 def _upsert_relation_local_dart_filing(session, **fields) -> None:
@@ -980,6 +1027,7 @@ def apply_governance(
         "notes_scanned": 0,
         "notes_unparsed": 0,
         "edges_kept": 0,
+        "group_aggregate": 0,
         "no_ticker": 0,
         "pruned_stale": 0,
     }
@@ -1018,16 +1066,27 @@ def apply_governance(
                 corp_code = link_counterparty(
                     session, ctx, item["counterparty"], chunk_id=rcept_no
                 )
-                # 원문이 안 붙으면 콤마 나열형인지 보고 분할 재시도 (금액 없는
-                # 거버넌스 전용 — 위 split_multi_counterparties 주석 참조)
+                # 원문이 안 붙으면 ① 콤마 나열 분할 ② 그룹 집계 대표사 순으로 재시도.
+                # 콤마 분할이 우선인 이유: 개별 법인을 각각 잡는 쪽이 집계 대표사
+                # 하나로 뭉뚱그리는 것보다 정보량이 많다.
                 surfaces = [corp_code] if corp_code else []
+                is_aggregate = False
                 if not corp_code:
                     for piece in split_multi_counterparties(item["counterparty"]):
                         got = link_counterparty(session, ctx, piece, chunk_id=rcept_no)
                         if got:
                             surfaces.append(got)
                 if not surfaces:
+                    base = strip_group_aggregate(item["counterparty"])
+                    if base:
+                        got = link_counterparty(session, ctx, base, chunk_id=rcept_no)
+                        if got:
+                            surfaces.append(got)
+                            is_aggregate = True
+                if not surfaces:
                     continue  # L1 큐행 또는 링킹 실패 — ctx.counters에 집계됨
+                if is_aggregate:
+                    counters["group_aggregate"] += 1
 
                 for corp in dict.fromkeys(surfaces):  # 순서 보존 중복 제거
                     if corp == self_corp_code:
@@ -1040,13 +1099,18 @@ def apply_governance(
                         ctx.counters["l2_blocklisted"] += 1
                         continue
 
+                    detail = f"사업보고서 주석: {item['category']}"
+                    if is_aggregate:
+                        # ⚠️ rl-string은 `이름:타입:detail` 3분할 계약(FN-010) —
+                        # 마커에 콜론을 쓰지 않는다.
+                        detail += f" ({GROUP_AGGREGATE_MARK})"
                     _upsert_relation_local_dart_filing(
                         session,
                         source_corp=self_ticker,
                         target_corp=target_ticker,
                         relation_type="dart_filing",
                         ratio=None,
-                        detail=f"사업보고서 주석: {item['category']}",
+                        detail=detail,
                         bsns_year=as_of,
                     )
                     touched_keys.add((self_ticker, target_ticker, "dart_filing", as_of))

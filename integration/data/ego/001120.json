@@ -31,6 +31,33 @@
         "dir": "in",
         "s": "반도체",
         "tier": "dot"
+      },
+      {
+        "t": "383800",
+        "n": "LX홀딩스",
+        "type": "dart_filing",
+        "detail": "유의적 영향력 (그룹 합산)",
+        "dir": "out",
+        "s": "금융",
+        "tier": "dot"
+      },
+      {
+        "t": "108670",
+        "n": "LX하우시스",
+        "type": "dart_filing",
+        "detail": "기타 (그룹 합산)",
+        "dir": "out",
+        "s": "소재",
+        "tier": "dot"
+      },
+      {
+        "t": "108320",
+        "n": "LX세미콘",
+        "type": "dart_filing",
+        "detail": "기타 (그룹 합산)",
+        "dir": "out",
+        "s": "반도체",
+        "tier": "dot"
       }
     ],
     "valuechain": {
@@ -56,15 +83,6 @@
       ],
       "down": [
         {
-          "t": "383800",
-          "n": "LX홀딩스",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 4000000.0,
-          "as_of": 2023,
-          "prov": "특수관계자 · 매출거래 등"
-        },
-        {
           "t": "108670",
           "n": "LX하우시스",
           "type": "supply",
@@ -72,6 +90,33 @@
           "amount": 1452000000.0,
           "as_of": 2025,
           "prov": "특수관계자와의 거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "t": "383800",
+          "n": "LX홀딩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 37000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출거래 · 그룹 합산"
+        },
+        {
+          "t": "108670",
+          "n": "LX하우시스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 160820000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출거래 · 그룹 합산"
+        },
+        {
+          "t": "108320",
+          "n": "LX세미콘",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4577000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출거래 · 그룹 합산"
         }
       ]
     }

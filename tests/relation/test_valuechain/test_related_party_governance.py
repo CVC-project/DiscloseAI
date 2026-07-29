@@ -9,6 +9,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import pytest
+
 from modules.relation.storage.models import CompanyRegistry, RelationLocal
 from modules.relation.valuechain.extract.related_party import (
     apply_governance,
@@ -357,3 +359,72 @@ def test_apply_governance_prefers_whole_string_over_split(in_memory_session):
 
     rows = session.query(RelationLocal).filter_by(source_type="dart_filing").all()
     assert [r.target_corp for r in rows] == ["999999"], "원문 링킹을 우선해야 함"
+
+
+# ── 그룹 집계 표현 (2026-07-29 리더 판정: 붙이되 "그룹 합산" 명시) ──────────
+
+@pytest.mark.parametrize(
+    "raw,expected",
+    [
+        ("엘지디스플레이㈜와 종속기업", "엘지디스플레이㈜"),
+        ("㈜엘지씨엔에스와 그 종속기업", "㈜엘지씨엔에스"),
+        ("엘지전자㈜와 그 종속 및 공동기업", "엘지전자㈜"),
+        ("삼성전자(주) 및 그 종속기업", "삼성전자(주)"),
+        ("삼성물산㈜ 등", "삼성물산㈜"),
+        ("SK바이오사이언스(주) 등 SK기업집단 계열회사", "SK바이오사이언스(주)"),
+    ],
+)
+def test_strip_group_aggregate(raw, expected):
+    from modules.relation.valuechain.extract.related_party import strip_group_aggregate
+    assert strip_group_aggregate(raw) == expected
+
+
+@pytest.mark.parametrize("name", ["삼성전자", "한국전구체 주식회사", "㈜씨텍", "현대종속기업개발"])
+def test_normal_names_are_not_stripped(name):
+    """⚠️ 회귀 박제: 집계 꼬리는 연결어(및·와·과·등) 뒤에 올 때만 인정한다.
+    '현대종속기업개발'처럼 '종속기업'을 품은 정상 사명을 깎으면 안 된다."""
+    from modules.relation.valuechain.extract.related_party import strip_group_aggregate
+    assert strip_group_aggregate(name) is None
+
+
+def test_apply_governance_marks_group_aggregate(in_memory_session):
+    """집계 표현은 대표사로 붙되 detail에 '그룹 합산'이 명시돼야 한다."""
+    session = in_memory_session
+    session.add(CompanyRegistry(corp_code="00073570", ticker="096770",
+                                name_current="SK이노베이션", market="KOSPI"))
+    session.add(CompanyRegistry(corp_code="00126380", ticker="005930",
+                                name_current="삼성전자", market="KOSPI"))
+    session.commit()
+
+    sections = [{
+        "rcept_no": "20990101000005", "title": "특수관계자",
+        "text_md": "", "text_html": _html_rows_note("삼성전자(주) 및 그 종속기업"),
+        "corp_code8": "00073570", "fiscal_year": 2025,
+    }]
+    result = apply_governance(session=session, sections=sections, prune=False)
+
+    row = session.query(RelationLocal).filter_by(source_type="dart_filing").one()
+    assert row.target_corp == "005930"
+    assert "그룹 합산" in row.detail
+    assert ":" not in row.detail.split("사업보고서 주석:")[1], "rl-string 3분할 계약 보호"
+    assert result["group_aggregate"] == 1
+
+
+def test_apply_governance_no_mark_for_plain_name(in_memory_session):
+    """평이한 사명은 마커가 붙지 않는다(집계로 오인 금지)."""
+    session = in_memory_session
+    session.add(CompanyRegistry(corp_code="00073570", ticker="096770",
+                                name_current="SK이노베이션", market="KOSPI"))
+    session.add(CompanyRegistry(corp_code="00126380", ticker="005930",
+                                name_current="삼성전자", market="KOSPI"))
+    session.commit()
+
+    sections = [{
+        "rcept_no": "20990101000006", "title": "특수관계자",
+        "text_md": "", "text_html": _html_rows_note("삼성전자"),
+        "corp_code8": "00073570", "fiscal_year": 2025,
+    }]
+    result = apply_governance(session=session, sections=sections, prune=False)
+    row = session.query(RelationLocal).filter_by(source_type="dart_filing").one()
+    assert "그룹 합산" not in row.detail
+    assert result["group_aggregate"] == 0

@@ -22,6 +22,7 @@ from pathlib import Path
 from modules.relation.storage.db import get_local_session
 from modules.relation.storage.models import CompanyRegistry, ValueChainEdge
 from modules.relation.storage.queries import latest_relation_local_edges
+from modules.relation.valuechain.extract.related_party import GROUP_AGGREGATE_MARK
 
 logger = logging.getLogger(__name__)
 
@@ -68,12 +69,22 @@ def _edge_detail(e) -> str:
 
     FN-010: 과거엔 ratio·group_name만 보고 없으면 빈 문자열을 내보내 dart_filing의
     '지배기업/관계기업/대규모기업집단' 구분이 통째로 유실됐다(DB에는 있었음).
+
+    ★2026-07-29: "그룹 합산" 마커는 **정규화 뒤에** 다시 붙인다 —
+    _normalize_filing_category는 표준 카테고리로 접는 함수라 마커를 그냥 두면
+    규칙 매칭 과정에서 사라진다(예: "대규모기업집단 (그룹 합산)" → "대규모기업집단").
+    원문이 단일 회사가 아니라 그룹 전체를 가리킨다는 사실은 화면에 남아야 한다
+    (리더 판정: "지배기업이 회사 단일로 지배하는 것은 아니다").
+    ⚠️ 마커에 콜론을 쓰지 않는다 — rl-string "이름:타입:detail" 3분할 계약.
     """
     if e.ratio is not None:
         return f"{e.ratio}%"
     if e.group_name:
         return str(e.group_name).replace(":", " ")
-    return _normalize_filing_category(e.detail)
+    label = _normalize_filing_category(e.detail)
+    if GROUP_AGGREGATE_MARK in (e.detail or ""):
+        label = f"{label} ({GROUP_AGGREGATE_MARK})".strip()
+    return label
 
 _SECTOR_ID_TO_KO = {
     "semi": "반도체", "fin": "금융", "it": "플랫폼", "auto": "자동차",
