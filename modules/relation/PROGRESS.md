@@ -1075,3 +1075,28 @@
 - 트러블 2건 기록: 백그라운드 러너 오류가 grep 필터에 삼켜짐(필터 제거로 가시화) /
   절대경로 실행 시 sys.path[0]=스크립트 폴더라 modules 임포트 실패(루트 주입으로 해결).
 - 다음(리더 결정 대기 불변): B0 학생 확정 → 하네스 A(교사 라벨) 착수.
+
+## 2026-07-29 (후속 7) — 하네스 A 완주: 교사 라벨링 900청크 × 2회수 → CPA 검수 대기
+
+- **evaluate.py 실장**(§3.7 정본): 튜플 (counterparty·direction·status) micro P/R/F1 +
+  청크 단위 부트스트랩 95% CI + 방향/현재성 혼동행렬. 익명은 `∅anon` 토큰으로 채점 편입.
+  pytest 8건 신설(정규화 등가·중복 접기·gold 밖 청크 무시·방향 스왑 검출).
+- **층화 샘플러**(`train/dataset.py`): 시장×섹터×패턴(named_kw/named_only/kw_only) 비례
+  배분, seed=7 결정적. 815K 전량 부하 회피용 해시 프리풀(15K) 도입. 파일럿 100청크 제외.
+  → **val 400 + test 500**(겹침 0), 배치 31파일(30청크/배치) + split_snapshot.json 정본화.
+- **교사 = Claude Code 서브에이전트**(계획상 Claude API였으나 키 부재 — galaxy 선례 준용,
+  학생 채점 비관여 §0.5 불변). 62런(31배치 × 2패스) 완주, "파일 존재=완료" 규약으로
+  세션 한도 중단(12:30 리셋) 후에도 누락분만 정확히 재발사.
+- **결과**: **자기일치율 val 95.75%(383/400) · test 96.2%(481/500)** — G-A ≥85% 충족.
+  **스키마·evidence exact-match 오류 0건**(900×2 전량 검증).
+  하드 네거티브 val 87.2%·test 87.7%(§3.3 목표 ≥30% 상회).
+  라벨: val 118관계 / test 216관계, status는 active 압도(past·planned 희소).
+- **⚠️ 발견 — train 설계 보정 필요**: 관계 보유 청크가 희소(val 49·test 59 = ~12%)라
+  현 샘플링대로 train 3,000청크를 뽑으면 관계 보유가 ~390청크뿐. **A6 표적 증강**
+  (관계 어휘 강한 층 과표집)이 B 착수 전 선행 과제.
+- **사람 지점 도달**: CPA 검수 큐 산출 — `data/vc_dataset/cpa_review_{val,test}.jsonl`
+  (val 17 · test 19, 불일치 폭 순). 불일치 유형 3종: 표기 변이(법인 접미 유무) /
+  status 경계(past·planned) / 익명 관계 추출 여부. 상세·다음 절차 = valuechain/A_RESUME.md.
+- **검증**: pytest 92 passed(test_valuechain + test_linking_guards 포함).
+- 다음(리더 결정): ① CPA 검수 2건(val 17 → val 확정, test 19 + test 500 전량 → 봉인)
+  ② B0 학생 모델 확정 → 하네스 B 착수 ③ 파일럿 T2 엣지 6건 판정(기존 대기).
