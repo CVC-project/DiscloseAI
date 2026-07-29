@@ -156,7 +156,14 @@ def load_manual_overrides() -> dict[str, str]:
     return overrides
 
 
-_MANAGED_SOURCE_TYPES = ("hyslrSttus", "otrCprInvstmntSttus", "ftc", "dart_filing")
+# ★ 2026-07-29 소실 사고: dart_filing을 이 튜플에서 제외 — U3부터 dart_filing의
+# 정본 생산자는 valuechain related_party.apply_governance()(RelationLocal 직접 적재)
+# 인데, 이 prune 스코프에 남아 있어 "RelationRaw에 없다"는 이유로 transform 재실행
+# 때마다 전량(115엣지·7개사) 오인 삭제됐다. prune은 생산자 소관 원칙: 이 함수는
+# RelationRaw에서 복사하는 3종만 관리하고, dart_filing stale 정리는 apply_governance
+# 전량 실행이 담당한다. (ingest/filing.py의 RelationRaw dart_filing 경로는 top50
+# 시절 legacy — 아래 복사 분기는 하위호환으로만 유지, prune 소유권은 없음.)
+_MANAGED_SOURCE_TYPES = ("hyslrSttus", "otrCprInvstmntSttus", "ftc")
 
 
 def _upsert_relation_local(session, **fields) -> tuple:
@@ -202,9 +209,10 @@ def apply(session=None) -> dict:
     RelationLocal 행(예: 006400↔009150 직접 엣지)이 새 스타 데이터와 함께 남아있었음
     (RelationRaw는 collect()가 지우고 다시 채우지만, RelationLocal은 upsert-only라
     원본에서 사라진 관계를 그대로 들고 있었던 것). 이번 실행에서 실제로 upsert된
-    키 집합을 추적해, 이 함수가 관리하는 4개 source_type(hyslrSttus·
-    otrCprInvstmntSttus·ftc·dart_filing) 중 RelationRaw에 더 이상 없는 행은
-    실행 끝에 정리(prune)한다.
+    키 집합을 추적해, 이 함수가 관리하는 3개 source_type(hyslrSttus·
+    otrCprInvstmntSttus·ftc) 중 RelationRaw에 더 이상 없는 행은 실행 끝에
+    정리(prune)한다. ★dart_filing은 2026-07-29부터 prune 스코프 제외 —
+    _MANAGED_SOURCE_TYPES 주석 참조(생산자 apply_governance 소관).
 
     session: 주입 시 그 세션 사용(테스트용 — 닫지 않음, 커밋은 호출). None이면 로컬 relation.db.
 
@@ -357,8 +365,9 @@ def apply(session=None) -> dict:
                     counters["kept_filing"] += 1
 
         # ★U1 실측 버그 수정: RelationRaw에서 사라진(더 이상 어떤 raw 레코드도 만들지
-        # 않는) 행을 prune — 이 함수가 관리하는 4개 source_type 전체를 스캔해 이번 실행
-        # 에서 touched_keys에 없는 것만 삭제(다른 source_type·manual은 건드리지 않음).
+        # 않는) 행을 prune — 이 함수가 관리하는 3개 source_type 전체를 스캔해 이번 실행
+        # 에서 touched_keys에 없는 것만 삭제(dart_filing·manual 등 다른 생산자의
+        # source_type은 건드리지 않음 — _MANAGED_SOURCE_TYPES 주석 참조).
         stale = (
             session.query(RelationLocal)
             .filter(RelationLocal.source_type.in_(_MANAGED_SOURCE_TYPES))

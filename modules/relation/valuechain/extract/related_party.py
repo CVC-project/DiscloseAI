@@ -33,9 +33,13 @@ import re
 from bs4 import BeautifulSoup
 
 from modules.relation.storage.db import get_local_session
-from modules.relation.storage.models import CompanyRegistry, RelationLocal, ValueChainEdge
+from modules.relation.storage.models import RelationLocal, ValueChainEdge
 from modules.relation.valuechain.extract import reports_source
-from modules.relation.valuechain.extract.linking import build_name_to_corp_map, resolve_corp
+from modules.relation.valuechain.extract.linking import (
+    blocked_pair,
+    build_guard_context,
+    link_counterparty,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -299,6 +303,157 @@ def parse_note_transposed(text_html: str | None) -> list[dict]:
                         "direction": direction,
                         "amount": amount,
                         "label": header_row[idx],
+                    }
+                )
+    return results
+
+
+# ★ 2026-07-29 U-확대 실측: 전 상장사 1,550노트 중 거래금액 파서가 0건인 856노트를
+# 분해한 결과 **464노트(54%)가 "라벨은 인식되는데 셀 수가 안 맞아" 스킵된 것**이었다
+# (나머지: 라벨 어휘 미등록 32 · 더 깊은 구조 변형 357). 원인은 parse_note()의
+# 한계로 이미 적혀 있던 그것 — markdown 평탄화가 계층 헤더의 COLSPAN을 뭉개
+# 열 정렬 자체가 불가능해진다. 표 자체는 정상이고, 원본 text_html을 ROWSPAN/COLSPAN
+# 복원(_html_table_grid)하면 **모든 행이 균일 폭으로 완벽 정렬**된다(포스코퓨처엠 21열·
+# 현대차 계열 27열·삼성전자 16열 실측). 즉 새 표 변형이 아니라 **같은 표를 온전한
+# 소스로 다시 읽는 것** — 거버넌스 파서 3종이 이미 쓰는 검증된 경로를 거래금액에 적용.
+_GROUP_TOTAL_SKIP = True  # 그룹 합계 행(라벨 셀 전부 동일) 이중계상 방지
+
+# K-IFRS 1024호 특수관계자 공시의 **구분(카테고리) 어휘** — 리프 헤더 칸에 이 말이
+# 들어 있으면 개별 법인이 아니라 집계 컬럼이다. 실측 근거(2026-07-29): 카테고리
+# 하위에 개별 분해가 없는 컬럼은 상위 카테고리명이 ROWSPAN으로 리프 행까지 내려온다
+# (현대차 계열의 "그 밖의 특수관계자"·"대규모기업집단 계열회사"가 회사명 칸에 그대로).
+# ⚠️ "캐리다운이면 집계"로 판정하면 안 된다 — 삼성전자 표의 삼성엔지니어링㈜·㈜에스원은
+# 하위 분해가 없어 똑같이 캐리다운되지만 **실제 법인**이라 4건이 통째로 소실됐다
+# (구현 중 실측·수정). 그래서 구조가 아니라 **어휘**로 판정한다. 법인격 표기(㈜·(주)·
+# Ltd. 등)를 쓰는 실제 사명과 이 어휘군은 겹치지 않는다.
+_CATEGORY_COLUMN_VOCAB = (
+    "특수관계자", "관계기업", "공동기업", "종속기업", "지배기업", "기업집단",
+    "계열회사", "경영진", "영향력", "공동지배", "합계",
+)
+
+
+def _is_category_column(name: str) -> bool:
+    """리프 헤더 값이 개별 법인이 아니라 K-IFRS 구분(집계 컬럼)인가."""
+    return any(v in name for v in _CATEGORY_COLUMN_VOCAB)
+
+
+def _leaf_header_index(grid: list[list[str]]) -> int | None:
+    """첫 칸이 빈 마지막 헤더 행 = 개별 상대회사명 행 (parse_note와 같은 규칙).
+
+    데이터 행은 첫 칸에 항목명이 있고 헤더 행은 첫 칸이 비므로, "첫 칸이 빈 행이
+    연속되다 처음 안 비는 행이 나오는 경계"의 직전이 리프 헤더다.
+    """
+    last_empty = None
+    for i, row in enumerate(grid):
+        if not row:
+            continue
+        if row[0].strip() == "":
+            last_empty = i
+        elif last_empty is not None:
+            return last_empty
+    return None
+
+
+def parse_note_html_grid(text_html: str | None) -> list[dict]:
+    """계층 헤더 거래금액 표 → parse_note()와 동일 스키마.
+
+    markdown 경로가 COLSPAN 유실로 열 정렬에 실패하는 표를 원본 HTML 그리드로
+    읽는다. 리프 헤더의 선행 빈 칸 개수 = 라벨 컬럼 수이며(현대차 계열은 2단
+    라벨이라 2, 포스코·삼성은 1), 금액은 그 다음 칸부터 리프 회사명과 1:1 대응한다.
+
+    이중계상 방지: 2단 라벨 표의 그룹 합계 행(라벨 셀이 전부 같은 값 — 현대차의
+    "수익거래|수익거래|…")은 같은 그룹에 세부 행이 따로 있으면 스킵한다.
+    억지 매칭 금지: 리프 헤더를 못 찾거나 라벨 컬럼이 0이면 조용히 건너뛴다.
+    """
+    results: list[dict] = []
+    if not text_html:
+        return results
+
+    soup = BeautifulSoup(text_html, "html.parser")
+    period: str | None = None
+    multiplier = 1
+
+    for table in soup.find_all("table"):
+        if not table.find_all("th"):
+            # 제목/기간/단위 소표 — parse_note_transposed와 동일한 식별 규칙
+            cell_texts = [c.get_text(strip=True) for c in table.find_all(["td", "te"])]
+            if len(cell_texts) <= 4:
+                if "당기" in cell_texts:
+                    period = "당기"
+                elif "전기" in cell_texts:
+                    period = "전기"
+                unit_m = _UNIT_RE.search(table.get_text(" ", strip=True))
+                if unit_m:
+                    multiplier = _UNIT_MULTIPLIERS.get(unit_m.group(1).strip(), 1)
+                continue
+        if period != "당기":
+            continue  # 전기 표(또는 기간 마커 미확인) — parse_note와 같은 중복 방지
+
+        grid = _html_table_grid(table)
+        if len(grid) < 2:
+            continue
+        header_idx = _leaf_header_index(grid)
+        if header_idx is None:
+            continue
+        leaf = grid[header_idx]
+        label_cols = 0
+        for cell in leaf:
+            if cell.strip() == "":
+                label_cols += 1
+            else:
+                break
+        if label_cols == 0 or label_cols >= len(leaf):
+            continue
+
+
+        # 1차 수집 — 그룹 합계 판정을 위해 행 단위로 모은 뒤 확정
+        staged: list[tuple[str, str, list[str]]] = []  # (group, label, row)
+        for row in grid[header_idx + 1 :]:
+            if len(row) != len(leaf):
+                continue  # 그리드 복원 후에도 폭이 다른 행 — 표 밖 잔재, 스킵
+            label = row[label_cols - 1].strip()
+            if not label:
+                continue
+            staged.append((row[0].strip(), label, row))
+
+        sublabels_by_group: dict[str, set[str]] = {}
+        for group, label, _row in staged:
+            sublabels_by_group.setdefault(group, set()).add(label)
+
+        for group, label, row in staged:
+            if (
+                _GROUP_TOTAL_SKIP
+                and label_cols > 1
+                and label == group
+                and len(sublabels_by_group.get(group, set())) > 1
+            ):
+                continue  # 그룹 합계 행 — 세부 행이 따로 있으므로 이중계상
+            if any(x in label for x in _EXCLUDE_LABEL_SUBSTR):
+                continue
+            if label.startswith(_SALES_LABEL_PREFIXES):
+                direction = "customer"
+            elif label.startswith(_PURCHASE_LABEL_PREFIXES):
+                direction = "supply"
+            else:
+                continue
+
+            for idx in range(label_cols, len(leaf)):
+                counterparty = leaf[idx].strip()
+                if (
+                    not counterparty
+                    or counterparty.startswith("기타")
+                    or _is_category_column(counterparty)
+                ):
+                    continue  # 집계 컬럼 — 특정 법인 아님
+                amount = _parse_amount(row[idx], multiplier)
+                if amount is None:
+                    continue
+                results.append(
+                    {
+                        "counterparty": counterparty,
+                        "direction": direction,
+                        "amount": amount,
+                        "label": label,
                     }
                 )
     return results
@@ -661,20 +816,25 @@ def apply(session=None, sections: list[dict] | None = None) -> dict:
 
     session: 주입 시 그 세션 사용(테스트용 — 닫지 않음, 커밋은 호출). None이면 로컬 relation.db.
     sections: 주입 시 reports.db 대신 이 리스트 사용(테스트용 — 실 파일 접근 회피).
-              None이면 reports_source.fetch_sections_by_title(NOTE_TITLES) 호출.
+              None이면 reports_source.fetch_rp_note_sections() 전량(U-확대 접두 규칙).
 
-    Returns: {'notes_scanned', 'edges_kept', 'link_failed'}
+    링킹은 방어 5층 중 L1(약칭 게이트+화이트리스트)·L2(쌍 블록리스트)·L5(LinkFailQueue)
+    적용 — corp_code 없는 이름-only 원천의 공통 요건(transform/CLAUDE.md, 2026-07-29
+    전 상장사 확대 시 연결). L3·L4는 지분율 원천 전용이라 비대상.
+
+    Returns: {'notes_scanned', 'notes_unparsed', 'edges_kept', 'link_failed',
+              'l1_ambiguous_queued', 'l2_blocklisted'}
     """
     owns_session = session is None
     if owns_session:
         session = get_local_session()
 
     if sections is None:
-        sections = reports_source.fetch_sections_by_title(NOTE_TITLES)
+        sections = reports_source.fetch_rp_note_sections()
 
-    counters = {"notes_scanned": 0, "edges_kept": 0, "link_failed": 0}
+    counters = {"notes_scanned": 0, "notes_unparsed": 0, "edges_kept": 0}
     try:
-        name_to_corp = build_name_to_corp_map(session)
+        ctx = build_guard_context(session)
 
         for row in sections:
             counters["notes_scanned"] += 1
@@ -688,13 +848,23 @@ def apply(session=None, sections: list[dict] | None = None) -> dict:
                 # LIG디펜스앤에어로스페이스류)에 한해서만 폴백 — 이미 잡힌
                 # 노트를 이중으로 다시 읽지 않도록 방지(U3와 동일 관례).
                 note_items = parse_note_transposed(row.get("text_html"))
+            if not note_items:
+                # ★2026-07-29 U-확대: markdown COLSPAN 유실로 열 정렬이 깨진
+                # 계층 헤더 표(전체 미파싱의 54%) — 원본 HTML 그리드로 재독.
+                # markdown 경로가 성공한 노트는 그 결과를 유지한다(G-C 검수를
+                # 통과한 기존 동작 보존, 두 경로 불일치 84건은 후속 조사 과제).
+                note_items = parse_note_html_grid(row.get("text_html"))
+            if not note_items:
+                # 미지원 표 구조 — 억지 매칭 금지, 스킵 집계만(유형 분류는
+                # 별도 조사 스크립트 소관, 파서 분기 신설은 fixture 필수)
+                counters["notes_unparsed"] += 1
+                continue
             for item in note_items:
-                corp_code = resolve_corp(
-                    item["counterparty"], name_to_corp, session, sample_chunk_id=rcept_no
+                corp_code = link_counterparty(
+                    session, ctx, item["counterparty"], chunk_id=rcept_no
                 )
                 if not corp_code:
-                    counters["link_failed"] += 1
-                    continue
+                    continue  # L1 큐행 또는 링킹 실패 — ctx.counters에 집계됨
                 if corp_code == self_corp:
                     continue  # 자기 자신 표기(연결실체 자기 참조) 무시
 
@@ -702,6 +872,10 @@ def apply(session=None, sections: list[dict] | None = None) -> dict:
                     src_corp, dst_corp = self_corp, corp_code
                 else:
                     src_corp, dst_corp = corp_code, self_corp
+
+                if blocked_pair(ctx, src_corp, dst_corp):
+                    ctx.counters["l2_blocklisted"] += 1
+                    continue
 
                 _upsert_edge(
                     session,
@@ -721,6 +895,9 @@ def apply(session=None, sections: list[dict] | None = None) -> dict:
         if owns_session:
             session.close()
 
+    counters["link_failed"] = ctx.counters["link_failed"]
+    counters["l1_ambiguous_queued"] = ctx.counters["l1_ambiguous_queued"]
+    counters["l2_blocklisted"] = ctx.counters["l2_blocklisted"]
     logger.info(f"related_party.apply 결과: {counters}")
     return counters
 
@@ -743,7 +920,9 @@ def _upsert_relation_local_dart_filing(session, **fields) -> None:
         session.add(RelationLocal(**fields, source_type="dart_filing", status="active"))
 
 
-def apply_governance(session=None, sections: list[dict] | None = None) -> dict:
+def apply_governance(
+    session=None, sections: list[dict] | None = None, prune: bool | None = None
+) -> dict:
     """특수관계자 주석의 거버넌스 카테고리 표(2-컬럼 나열형 + 와이드 1행형) →
     RelationLocal(dart_filing) upsert.
 
@@ -756,21 +935,37 @@ def apply_governance(session=None, sections: list[dict] | None = None) -> dict:
     RelationLocal.source_corp/target_corp는 ticker(6자리)라 corp_code(8자리)를 변환
     해야 한다 — CompanyRegistry에서 corp_code→ticker 매핑을 구축.
 
-    Returns: {'notes_scanned', 'edges_kept', 'link_failed', 'no_ticker'}
+    ★ prune (2026-07-29, 소실 사고 후 신설): dart_filing 행의 stale 정리는 **이
+    함수(생산자)의 소관**이다 — filters.apply()의 prune 스코프에 dart_filing이
+    들어 있던 시절, 이 함수가 적재한 행 전체(115엣지·7개사)가 RelationRaw에 없다는
+    이유로 transform 재실행 때마다 오인 삭제됐다(발견 2026-07-29). 전량 스캔
+    (sections=None)일 때만 이번 실행에서 안 만져진 dart_filing 행을 정리한다 —
+    부분 주입 실행(테스트 등)은 스캔 밖 행을 지우면 안 되므로 기본 미정리
+    (prune=True로 강제 가능, 테스트용).
+
+    Returns: {'notes_scanned', 'notes_unparsed', 'edges_kept', 'link_failed',
+              'l1_ambiguous_queued', 'l2_blocklisted', 'no_ticker', 'pruned_stale'}
     """
     owns_session = session is None
     if owns_session:
         session = get_local_session()
 
+    if prune is None:
+        prune = sections is None
     if sections is None:
-        sections = reports_source.fetch_sections_by_title(NOTE_TITLES)
+        sections = reports_source.fetch_rp_note_sections()
 
-    counters = {"notes_scanned": 0, "edges_kept": 0, "link_failed": 0, "no_ticker": 0}
+    counters = {
+        "notes_scanned": 0,
+        "notes_unparsed": 0,
+        "edges_kept": 0,
+        "no_ticker": 0,
+        "pruned_stale": 0,
+    }
+    touched_keys: set[tuple] = set()
     try:
-        name_to_corp = build_name_to_corp_map(session)
-        ticker_by_corp_code = {
-            c.corp_code: c.ticker for c in session.query(CompanyRegistry).all() if c.ticker
-        }
+        ctx = build_guard_context(session)
+        ticker_by_corp_code = ctx.ticker_by_corp
 
         for row in sections:
             counters["notes_scanned"] += 1
@@ -795,18 +990,23 @@ def apply_governance(session=None, sections: list[dict] | None = None) -> dict:
                 governance_items = parse_governance_transaction_header(
                     row.get("text_html")
                 )
+            if not governance_items:
+                counters["notes_unparsed"] += 1
+                continue
             for item in governance_items:
-                corp_code = resolve_corp(
-                    item["counterparty"], name_to_corp, session, sample_chunk_id=rcept_no
+                corp_code = link_counterparty(
+                    session, ctx, item["counterparty"], chunk_id=rcept_no
                 )
                 if not corp_code:
-                    counters["link_failed"] += 1
-                    continue
+                    continue  # L1 큐행 또는 링킹 실패 — ctx.counters에 집계됨
                 if corp_code == self_corp_code:
                     continue
                 target_ticker = ticker_by_corp_code.get(corp_code)
                 if not target_ticker:
                     counters["no_ticker"] += 1
+                    continue
+                if blocked_pair(ctx, self_corp_code, corp_code):
+                    ctx.counters["l2_blocklisted"] += 1
                     continue
 
                 _upsert_relation_local_dart_filing(
@@ -818,12 +1018,27 @@ def apply_governance(session=None, sections: list[dict] | None = None) -> dict:
                     detail=f"사업보고서 주석: {item['category']}",
                     bsns_year=as_of,
                 )
+                touched_keys.add((self_ticker, target_ticker, "dart_filing", as_of))
                 counters["edges_kept"] += 1
+
+        if prune:
+            stale = (
+                session.query(RelationLocal).filter_by(source_type="dart_filing").all()
+            )
+            for r in stale:
+                key = (r.source_corp, r.target_corp, r.source_type, r.bsns_year)
+                if key not in touched_keys:
+                    session.delete(r)
+                    counters["pruned_stale"] += 1
+
         session.commit()
     finally:
         if owns_session:
             session.close()
 
+    counters["link_failed"] = ctx.counters["link_failed"]
+    counters["l1_ambiguous_queued"] = ctx.counters["l1_ambiguous_queued"]
+    counters["l2_blocklisted"] = ctx.counters["l2_blocklisted"]
     logger.info(f"related_party.apply_governance 결과: {counters}")
     return counters
 

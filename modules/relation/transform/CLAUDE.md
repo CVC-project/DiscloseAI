@@ -63,6 +63,14 @@ def classify_ownership(ratio: float) -> str | None:
   `NAME_ALIASES`에 "구사명→현재사명"으로 흡수(예: 에스씨엠생명과학→풍전약품).
   근본 해법(사명 이력 테이블)은 V2+ 과제.
 - transform 재실행만으로 오염이 정리된다(prune) — RelationLocal 수동 DELETE 금지.
+- **prune은 생산자 소관 (2026-07-29 조문화 — dart_filing 소실 사고)**: filters.apply()의
+  prune 스코프는 자신이 RelationRaw에서 복사하는 3종(hyslrSttus·otrCprInvstmntSttus·ftc)만.
+  dart_filing은 valuechain `related_party.apply_governance()`(RelationLocal 직접 적재)가
+  생산·prune 둘 다 소유 — 과거 filters prune 스코프에 dart_filing이 남아 있어 transform
+  재실행 때마다 U3 적재분 전량(115엣지·7개사)이 "RelationRaw에 없음=stale"로 오인
+  삭제됐다. **새 source_type을 추가할 때는 "누가 만들고 누가 지우는가"를 한 곳으로**
+  — 생산자가 아닌 코드의 prune 스코프에 넣으면 같은 소실이 재발한다. 회귀 테스트:
+  `test_linking_guards.py::test_filters_prune_leaves_dart_filing_intact`.
 
 ## 기업명 정규화 (`filters.py` 또는 공통 유틸)
 

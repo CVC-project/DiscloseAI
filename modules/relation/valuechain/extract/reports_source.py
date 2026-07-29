@@ -21,6 +21,35 @@ def _connect_readonly() -> sqlite3.Connection:
     return sqlite3.connect(uri, uri=True)
 
 
+def fetch_rp_note_sections() -> list[dict]:
+    """특수관계자 주석 노트 전량 — 제목 접두 규칙(U-확대 2026-07-29).
+
+    NOTE_TITLES 정확 일치(실측 10종)는 867사만 커버 — 전 상장사 코퍼스(2,590사
+    섹셔닝)에서 제목 변형이 ~40종·120여사 추가 실측됨('특수관계자 공시'·
+    '특수관계자 등'·'특수관계자와의 거래내역'…). 변형을 일일이 열거하는 대신
+    접두 규칙으로 잡는다 — 정밀도는 파서가 표 형태 앵커로 지키므로(억지 매칭
+    금지 원칙) 제목망 확대는 재현율만 올린다. 제외 2종은 제목이 '특수관계'로
+    시작하지 않는 무관 주석(담보제공자산·지급보증)이라 접두 규칙이 자연 배제.
+    section_key는 전량 'III.3.연결주석' 실측 — 별도재무제표 혼입 없음.
+    """
+    conn = _connect_readonly()
+    try:
+        cur = conn.execute(
+            """
+            SELECT rs.rcept_no, rs.title, rs.text_md, rs.text_html, rr.corp_code8, rr.fiscal_year
+            FROM report_section rs
+            JOIN report_raw rr ON rs.rcept_no = rr.rcept_no
+            WHERE rs.title LIKE '특수관계%'
+               OR rs.title LIKE '연결실체와 특수관계자%'
+               OR rs.title = '중요한 특수관계자 거래'
+            """
+        )
+        cols = [d[0] for d in cur.description]
+        return [dict(zip(cols, row)) for row in cur.fetchall()]
+    finally:
+        conn.close()
+
+
 def fetch_sections_by_title(titles: set[str]) -> list[dict]:
     """report_section ⋈ report_raw — title이 titles에 속하는 행 전량.
 

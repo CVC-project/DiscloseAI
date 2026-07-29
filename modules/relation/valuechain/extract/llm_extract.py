@@ -20,14 +20,16 @@ from __future__ import annotations
 import json
 import logging
 from concurrent.futures import ThreadPoolExecutor
-from dataclasses import dataclass, field
 
 import requests
 
-from modules.relation.common.names import normalize_company_name
-from modules.relation.storage.models import CompanyRegistry, LinkFailQueue, VcChunk
-from modules.relation.transform.filters import is_ambiguous_abbrev, load_link_blocklist
-from modules.relation.valuechain.extract.linking import build_name_to_corp_map
+from modules.relation.storage.models import VcChunk
+from modules.relation.valuechain.extract.linking import (  # noqa: F401 — 하위호환 재노출
+    GuardContext,
+    blocked_pair,
+    build_guard_context,
+    link_counterparty,
+)
 from modules.relation.valuechain.extract.related_party import _upsert_edge
 from shared.config import REPORT_LLM_BASE_URL, REPORT_LLM_MODEL
 
@@ -152,62 +154,8 @@ def verify_relation(rel: dict) -> dict | None:
     return _call_llm(_VERIFY_SYSTEM, user, VERIFY_SCHEMA, "vc_verify", 128)
 
 
-@dataclass
-class GuardContext:
-    """링킹 방어층 실행 컨텍스트 — 세션 스코프 1회 구축."""
-
-    name_to_corp: dict[str, str]
-    registry_official: set[str]            # L1 화이트리스트: 정식명 정확 존재
-    blocklist: set[tuple[str, str]]        # L2: (source_ticker, target_ticker)
-    ticker_by_corp: dict[str, str]
-    counters: dict = field(default_factory=lambda: {
-        "chunks": 0, "extracted": 0, "evidence_mismatch": 0, "verify_rejected": 0,
-        "anonymous": 0, "not_active": 0, "l1_ambiguous_queued": 0,
-        "l2_blocklisted": 0, "link_failed": 0, "self_ref": 0,
-        "edges_kept": 0, "llm_error": 0,
-    })
-
-
-def build_guard_context(session) -> GuardContext:
-    official = set()
-    ticker_by_corp = {}
-    for r in session.query(CompanyRegistry).all():
-        norm = normalize_company_name(r.name_current or "")
-        if norm:
-            official.add(norm)
-        if r.ticker:
-            ticker_by_corp[r.corp_code] = r.ticker
-    return GuardContext(
-        name_to_corp=build_name_to_corp_map(session),
-        registry_official=official,
-        blocklist=load_link_blocklist(),
-        ticker_by_corp=ticker_by_corp,
-    )
-
-
-def _enqueue(session, surface: str, chunk_id: str) -> None:
-    existing = session.query(LinkFailQueue).filter_by(surface_form=surface).one_or_none()
-    if existing:
-        existing.freq += 1
-    else:
-        session.add(LinkFailQueue(surface_form=surface, freq=1, sample_chunk_id=chunk_id))
-
-
-def link_counterparty(session, ctx: GuardContext, surface: str,
-                      chunk_id: str) -> str | None:
-    """방어층 통과 링킹 — 실패·차단 시 None (사유는 ctx.counters에 집계)."""
-    norm = normalize_company_name(surface)
-    # L1: 영문 2~5자 단독 약칭 — 정식명 정확 존재(화이트리스트) 아니면 큐로
-    if is_ambiguous_abbrev(surface) and norm not in ctx.registry_official:
-        ctx.counters["l1_ambiguous_queued"] += 1
-        _enqueue(session, surface, chunk_id)
-        return None
-    corp = ctx.name_to_corp.get(norm)
-    if not corp:
-        ctx.counters["link_failed"] += 1
-        _enqueue(session, surface, chunk_id)
-        return None
-    return corp
+# GuardContext·build_guard_context·link_counterparty는 linking.py로 이관(2026-07-29
+# U-확대 — T1 주석 파서와 공용). 이 모듈의 기존 참조·테스트는 상단 재노출 import로 유지.
 
 
 def apply_relations(session, ctx: GuardContext, chunk: VcChunk, anchor_name: str,
@@ -260,9 +208,8 @@ def apply_relations(session, ctx: GuardContext, chunk: VcChunk, anchor_name: str
         edge_type, anchor_first = _EDGE_MAP[rel["direction"]]
         src, dst = ((chunk.corp_code, corp) if anchor_first else (corp, chunk.corp_code))
 
-        # L2: 쌍 블록리스트 (ticker 기준 — filters.apply와 동일 키, 양방향 검사)
-        s_t, d_t = ctx.ticker_by_corp.get(src, ""), ctx.ticker_by_corp.get(dst, "")
-        if (s_t, d_t) in ctx.blocklist or (d_t, s_t) in ctx.blocklist:
+        # L2: 쌍 블록리스트 (linking.blocked_pair — filters.apply와 동일 키, 양방향)
+        if blocked_pair(ctx, src, dst):
             ctx.counters["l2_blocklisted"] += 1
             rec["verdict"] = "l2_blocklisted"
             continue
