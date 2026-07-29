@@ -280,3 +280,80 @@ def test_apply_governance_skips_notes_for_unregistered_filer(in_memory_session):
     result = apply_governance(session=in_memory_session, sections=_one_section())
     assert result["no_ticker"] == 1
     assert result["edges_kept"] == 0
+
+
+# ── 콤마 나열형 회사명 분할 (2026-07-29 실측 — 71표기에 상장사 116건 묻힘) ──
+
+def test_split_multi_counterparties_basic():
+    from modules.relation.valuechain.extract.related_party import (
+        split_multi_counterparties,
+    )
+    assert split_multi_counterparties("기아㈜, 현대제철㈜, 현대글로비스㈜") == [
+        "기아㈜", "현대제철㈜", "현대글로비스㈜",
+    ]
+    # 분리 지점이 없으면 빈 리스트 (원문 링킹을 그대로 쓰게)
+    assert split_multi_counterparties("삼성전자") == []
+    assert split_multi_counterparties("") == []
+
+
+# ⚠️ 아래 두 테스트는 **HTML 기반 파서 경로**(행=개별회사형)를 쓴다.
+# text_md의 "구분/특수관계자명" 경로는 parse_governance_categories가 이미 콤마를
+# 분리하므로 apply_governance의 신규 분할 코드를 타지 않는다 — 실제로 놓치고 있던
+# 건 HTML 파서 3종이 통째로 넘기는 칸이므로 그 경로로 검증해야 의미가 있다.
+def _html_rows_note(company_cell: str) -> str:
+    """parse_governance_html_rows가 인식하는 최소 표(소재지·소유지분율 앵커)."""
+    return (
+        "<TABLE><TR><TH>구분</TH><TH>회사명</TH><TH>소재지</TH><TH>소유지분율</TH></TR>"
+        f"<TR><TE>관계기업</TE><TE>{company_cell}</TE><TE>한국</TE><TE>20%</TE></TR>"
+        "</TABLE>"
+    )
+
+
+def test_apply_governance_recovers_companies_from_comma_list(in_memory_session):
+    """HTML 파서가 통째로 넘긴 콤마 나열 칸에서 개별 상장사를 회수한다."""
+    session = in_memory_session
+    session.add(CompanyRegistry(corp_code="00073570", ticker="096770",
+                                name_current="SK이노베이션", market="KOSPI"))
+    session.add(CompanyRegistry(corp_code="00164779", ticker="000660",
+                                name_current="SK하이닉스", market="KOSPI"))
+    session.add(CompanyRegistry(corp_code="00126380", ticker="005930",
+                                name_current="삼성전자", market="KOSPI"))
+    session.commit()
+
+    sections = [{
+        "rcept_no": "20990101000003", "title": "특수관계자",
+        "text_md": "", "text_html": _html_rows_note("SK하이닉스, 삼성전자"),
+        "corp_code8": "00073570", "fiscal_year": 2025,
+    }]
+    result = apply_governance(session=session, sections=sections, prune=False)
+
+    targets = {r.target_corp for r in session.query(RelationLocal)
+               .filter_by(source_type="dart_filing").all()}
+    assert targets == {"000660", "005930"}
+    assert result["edges_kept"] == 2
+
+
+def test_apply_governance_prefers_whole_string_over_split(in_memory_session):
+    """⚠️ 원문이 링킹되면 분할하지 않는다 — 콤마를 품은 사명을 쪼개 잃지 않기 위함.
+
+    '가나, 다라 주식회사'가 그대로 registry에 있으면 분할 없이 그 회사로 붙어야 한다
+    (분할하면 '가나'·'다라'가 되어 원 회사를 잃는다).
+    """
+    session = in_memory_session
+    session.add(CompanyRegistry(corp_code="00073570", ticker="096770",
+                                name_current="SK이노베이션", market="KOSPI"))
+    session.add(CompanyRegistry(corp_code="00999999", ticker="999999",
+                                name_current="가나, 다라 주식회사", market="KOSPI"))
+    session.add(CompanyRegistry(corp_code="00888888", ticker="888888",
+                                name_current="가나", market="KOSPI"))
+    session.commit()
+
+    sections = [{
+        "rcept_no": "20990101000004", "title": "특수관계자",
+        "text_md": "", "text_html": _html_rows_note("가나, 다라 주식회사"),
+        "corp_code8": "00073570", "fiscal_year": 2025,
+    }]
+    apply_governance(session=session, sections=sections, prune=False)
+
+    rows = session.query(RelationLocal).filter_by(source_type="dart_filing").all()
+    assert [r.target_corp for r in rows] == ["999999"], "원문 링킹을 우선해야 함"

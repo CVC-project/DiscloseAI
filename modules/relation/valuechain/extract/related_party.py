@@ -902,6 +902,27 @@ def apply(session=None, sections: list[dict] | None = None) -> dict:
     return counters
 
 
+# ★ 2026-07-29 실측: 거버넌스 표의 회사명 칸에 여러 법인이 콤마로 나열되는 경우가 있다
+# ("한국수력원자력(주), 한국남동발전(주), …", "기아㈜, 현대제철㈜, 현대글로비스㈜ 등").
+# parse_governance_categories()는 콤마 분리를 하지만 **HTML 기반 3종(html_rows·
+# carryforward·transaction_header)과 wide_row는 안 해서** 통째로 링킹 실패했다 —
+# 71표기 안에 상장사 116건이 묻혀 있었다.
+#
+# ⚠️ 거래금액 파서(apply)에는 적용하지 않는다 — 금액이 딸린 항목을 쪼개면 같은 금액이
+# 여러 상대에 중복 귀속된다(과대계상). 거버넌스는 금액이 없어 분할이 안전하다.
+# ⚠️ 외국 법인명의 "Co., Ltd." 콤마를 잘못 쪼갤 수 있으므로 **원문 링킹을 먼저 시도**하고
+# 실패했을 때만 분할한다(기존 파서 폴백 관례와 동일 — 이미 잡힌 것을 흔들지 않는다).
+_MULTI_SEP_RE = re.compile(r"[,、·]")
+
+
+def split_multi_counterparties(name: str) -> list[str]:
+    """콤마 나열형 회사명 칸 → 개별 법인 후보. 분리 지점이 없으면 빈 리스트."""
+    if not name or not _MULTI_SEP_RE.search(name):
+        return []
+    parts = [p.strip(" ()") for p in _MULTI_SEP_RE.split(name)]
+    return [p for p in parts if len(p) >= 2]
+
+
 def _upsert_relation_local_dart_filing(session, **fields) -> None:
     """UNIQUE(source_corp, target_corp, source_type, bsns_year) upsert — transform/filters.py
     의 동일 패턴 준용(U-D13 멱등 키). source_type은 항상 "dart_filing"."""
@@ -997,29 +1018,39 @@ def apply_governance(
                 corp_code = link_counterparty(
                     session, ctx, item["counterparty"], chunk_id=rcept_no
                 )
+                # 원문이 안 붙으면 콤마 나열형인지 보고 분할 재시도 (금액 없는
+                # 거버넌스 전용 — 위 split_multi_counterparties 주석 참조)
+                surfaces = [corp_code] if corp_code else []
                 if not corp_code:
+                    for piece in split_multi_counterparties(item["counterparty"]):
+                        got = link_counterparty(session, ctx, piece, chunk_id=rcept_no)
+                        if got:
+                            surfaces.append(got)
+                if not surfaces:
                     continue  # L1 큐행 또는 링킹 실패 — ctx.counters에 집계됨
-                if corp_code == self_corp_code:
-                    continue
-                target_ticker = ticker_by_corp_code.get(corp_code)
-                if not target_ticker:
-                    counters["no_ticker"] += 1
-                    continue
-                if blocked_pair(ctx, self_corp_code, corp_code):
-                    ctx.counters["l2_blocklisted"] += 1
-                    continue
 
-                _upsert_relation_local_dart_filing(
-                    session,
-                    source_corp=self_ticker,
-                    target_corp=target_ticker,
-                    relation_type="dart_filing",
-                    ratio=None,
-                    detail=f"사업보고서 주석: {item['category']}",
-                    bsns_year=as_of,
-                )
-                touched_keys.add((self_ticker, target_ticker, "dart_filing", as_of))
-                counters["edges_kept"] += 1
+                for corp in dict.fromkeys(surfaces):  # 순서 보존 중복 제거
+                    if corp == self_corp_code:
+                        continue
+                    target_ticker = ticker_by_corp_code.get(corp)
+                    if not target_ticker:
+                        counters["no_ticker"] += 1
+                        continue
+                    if blocked_pair(ctx, self_corp_code, corp):
+                        ctx.counters["l2_blocklisted"] += 1
+                        continue
+
+                    _upsert_relation_local_dart_filing(
+                        session,
+                        source_corp=self_ticker,
+                        target_corp=target_ticker,
+                        relation_type="dart_filing",
+                        ratio=None,
+                        detail=f"사업보고서 주석: {item['category']}",
+                        bsns_year=as_of,
+                    )
+                    touched_keys.add((self_ticker, target_ticker, "dart_filing", as_of))
+                    counters["edges_kept"] += 1
 
         if prune:
             stale = (
