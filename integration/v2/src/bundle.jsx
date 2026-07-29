@@ -1914,7 +1914,8 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
         const isEquity = EQUITY.has(n.relType);
         // U5: 비상장 상대는 **중요도 강등**. 선 스타일 축(파선=계열·점선=특관·
         // 빈테두리=T2)은 이미 점유돼 있어 건드리지 않고 **투명도**로만 낮춘다.
-        const uAlpha = n.isUnlisted ? 0.42 : 1;
+        // 0.42는 실화면에서 너무 안 보였다(리더) — 강등은 유지하되 가독 우선으로 상향.
+        const uAlpha = n.isUnlisted ? 0.68 : 1;
         ctx.save(); ctx.globalAlpha = uAlpha;
         if (n.hasGroup && n.hasEquity) {
           const dx = nx - cx, dy = ny - cy, len = Math.sqrt(dx * dx + dy * dy) || 1;
