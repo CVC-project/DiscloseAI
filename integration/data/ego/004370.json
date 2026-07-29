@@ -34,8 +34,46 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "008730",
+          "n": "율촌화학",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 37266000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등"
+        },
+        {
+          "t": "072710",
+          "n": "농심홀딩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1435710000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출원가"
+        }
+      ],
+      "down": [
+        {
+          "t": "072710",
+          "n": "농심홀딩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2619000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "t": "008730",
+          "n": "율촌화학",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 293679000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        }
+      ]
     }
   }
 }

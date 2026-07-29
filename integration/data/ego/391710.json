@@ -9,15 +9,35 @@
         "t": "054620",
         "n": "APS",
         "type": "associate",
-        "detail": "42.34%",
+        "detail": "41.78%",
         "dir": "in",
         "s": "금융",
         "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "265520",
+          "n": "AP시스템",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 332830000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        }
+      ],
+      "down": [
+        {
+          "t": "265520",
+          "n": "AP시스템",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 496500000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등"
+        }
+      ]
     }
   }
 }

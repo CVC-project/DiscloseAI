@@ -13,11 +13,30 @@
         "dir": "in",
         "s": "에너지",
         "tier": "named400"
+      },
+      {
+        "t": "015760",
+        "n": "한국전력공사",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "out",
+        "s": "에너지",
+        "tier": "named400"
       }
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "t": "130660",
+          "n": "한전산업",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 7650000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 주요 거래 · 매입등 비용"
+        }
+      ]
     }
   }
 }

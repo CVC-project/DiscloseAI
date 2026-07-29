@@ -8,16 +8,126 @@
       {
         "t": "035810",
         "n": "이지홀딩스",
-        "type": "associate",
-        "detail": "47.03%",
+        "type": "subsidiary",
+        "detail": "50.05%",
         "dir": "in",
         "s": "식음료",
         "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "035810",
+          "n": "이지홀딩스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 225253681.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        },
+        {
+          "t": "153710",
+          "n": "옵티팜",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 504001790.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        },
+        {
+          "t": "353810",
+          "n": "이지바이오",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 8766602527.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        },
+        {
+          "t": "027710",
+          "n": "팜스토리",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 37133365918.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        },
+        {
+          "t": "195500",
+          "n": "마니커에프앤지",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 24279091.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        },
+        {
+          "t": "027740",
+          "n": "마니커",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2407358745.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        },
+        {
+          "t": "208140",
+          "n": "정다운",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 5761818.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "t": "035810",
+          "n": "이지홀딩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 968000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "t": "153710",
+          "n": "옵티팜",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 15057750.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "t": "353810",
+          "n": "이지바이오",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 446057200.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "t": "027710",
+          "n": "팜스토리",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 98846789333.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "t": "027740",
+          "n": "마니커",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 23398653784.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        }
+      ]
     }
   }
 }

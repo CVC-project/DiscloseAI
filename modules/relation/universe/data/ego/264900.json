@@ -4,10 +4,40 @@
   "s": "식음료",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "t": "101530",
+        "n": "해태제과식품",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "in",
+        "s": "식음료",
+        "tier": "dot"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "101530",
+          "n": "해태제과식품",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 13647115000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "101530",
+          "n": "해태제과식품",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 81757000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        }
+      ]
     }
   }
 }

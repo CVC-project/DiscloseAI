@@ -9,15 +9,62 @@
         "t": "151860",
         "n": "KG에코솔루션",
         "type": "subsidiary",
-        "detail": "56.01%",
+        "detail": "54.35%",
         "dir": "in",
         "s": "자동차",
+        "tier": "dot"
+      },
+      {
+        "t": "016380",
+        "n": "KG스틸",
+        "type": "dart_filing",
+        "detail": "최상위 지배기업",
+        "dir": "in",
+        "s": "철강·금속",
         "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "001390",
+          "n": "KG케미칼",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 147926000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입"
+        },
+        {
+          "t": "046440",
+          "n": "KG파이낸셜",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 221989000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등 · 매출，특수관계자거래"
+        },
+        {
+          "t": "016380",
+          "n": "KG스틸",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 8323313532.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        }
+      ],
+      "down": [
+        {
+          "t": "016380",
+          "n": "KG스틸",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 5126449160.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        }
+      ]
     }
   }
 }

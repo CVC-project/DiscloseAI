@@ -9,7 +9,7 @@
         "t": "475150",
         "n": "SK이터닉스",
         "type": "associate",
-        "detail": "31.03%",
+        "detail": "30.98%",
         "dir": "out",
         "s": "건설",
         "tier": "named400"
@@ -18,7 +18,7 @@
         "t": "285130",
         "n": "SK케미칼",
         "type": "associate",
-        "detail": "40.9%",
+        "detail": "40.79%",
         "dir": "out",
         "s": "화학",
         "tier": "dot"
@@ -36,7 +36,7 @@
         "t": "018670",
         "n": "SK가스",
         "type": "subsidiary",
-        "detail": "72.2%",
+        "detail": "72.08%",
         "dir": "out",
         "s": "유통",
         "tier": "named400"
@@ -49,11 +49,103 @@
         "dir": "out",
         "s": "부동산",
         "tier": "dot"
+      },
+      {
+        "t": "096770",
+        "n": "SK이노베이션",
+        "type": "dart_filing",
+        "detail": "대규모기업집단",
+        "dir": "in",
+        "s": "에너지",
+        "tier": "named400"
+      },
+      {
+        "t": "018670",
+        "n": "SK가스",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "in",
+        "s": "유통",
+        "tier": "named400"
+      },
+      {
+        "t": "302440",
+        "n": "SK바이오사이언스",
+        "type": "dart_filing",
+        "detail": "최상위 지배기업",
+        "dir": "in",
+        "s": "제약바이오",
+        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "079980",
+          "n": "휴비스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 17306688000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "t": "210980",
+          "n": "SK디앤디",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 85079190.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "079980",
+          "n": "휴비스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1259434000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출, 특수관계자거래"
+        },
+        {
+          "t": "210980",
+          "n": "SK디앤디",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 164200000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출, 특수관계자거래"
+        },
+        {
+          "t": "001740",
+          "n": "SK네트웍스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 147117000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출, 특수관계자거래"
+        },
+        {
+          "t": "017670",
+          "n": "SK텔레콤",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4800000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출, 특수관계자거래"
+        },
+        {
+          "t": "475150",
+          "n": "SK이터닉스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 466190416.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등, 특수관계자거래"
+        }
+      ]
     }
   }
 }

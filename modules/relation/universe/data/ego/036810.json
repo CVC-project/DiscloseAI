@@ -22,11 +22,40 @@
         "dir": "out",
         "s": "기계·장비",
         "tier": "dot"
+      },
+      {
+        "t": "322310",
+        "n": "오로스테크놀로지",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out",
+        "s": "기계·장비",
+        "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "322310",
+          "n": "오로스테크놀로지",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 62162000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등"
+        }
+      ],
+      "down": [
+        {
+          "t": "322310",
+          "n": "오로스테크놀로지",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1286192000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        }
+      ]
     }
   }
 }

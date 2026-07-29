@@ -22,11 +22,75 @@
         "dir": "in",
         "s": "유통",
         "tier": "dot"
+      },
+      {
+        "t": "017940",
+        "n": "E1",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "out",
+        "s": "유통",
+        "tier": "dot"
+      },
+      {
+        "t": "006260",
+        "n": "LS",
+        "type": "dart_filing",
+        "detail": "대규모기업집단",
+        "dir": "out",
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
+        "t": "000500",
+        "n": "가온전선",
+        "type": "dart_filing",
+        "detail": "대규모기업집단",
+        "dir": "out",
+        "s": "전기전자부품",
+        "tier": "named400"
+      },
+      {
+        "t": "015360",
+        "n": "INVENI",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "in",
+        "s": "기계·장비",
+        "tier": "dot"
       }
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "t": "017940",
+          "n": "E1",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4367375000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "t": "000500",
+          "n": "가온전선",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 63616000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "t": "060370",
+          "n": "LS마린솔루션",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 7141000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입, 특수관계자거래"
+        }
+      ]
     }
   }
 }

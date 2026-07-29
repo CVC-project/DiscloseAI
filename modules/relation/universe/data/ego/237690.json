@@ -13,11 +13,67 @@
         "dir": "in",
         "s": "금융",
         "tier": "dot"
+      },
+      {
+        "t": "000640",
+        "n": "동아쏘시오홀딩스",
+        "type": "associate",
+        "detail": "29.46%",
+        "dir": "in",
+        "s": "금융",
+        "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "000640",
+          "n": "동아쏘시오홀딩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 25503220000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "t": "170900",
+          "n": "동아에스티",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 128854000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        }
+      ],
+      "down": [
+        {
+          "t": "000640",
+          "n": "동아쏘시오홀딩스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1760000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        },
+        {
+          "t": "170900",
+          "n": "동아에스티",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 21069524000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        },
+        {
+          "t": "170900",
+          "n": "동아에스티",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 22982981000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        }
+      ]
     }
   }
 }

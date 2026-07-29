@@ -22,10 +22,47 @@
         "dir": "out",
         "s": "반도체",
         "tier": "named400"
+      },
+      {
+        "t": "213420",
+        "n": "덕산네오룩스",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out",
+        "s": "반도체",
+        "tier": "named400"
+      },
+      {
+        "t": "317330",
+        "n": "덕산테코피아",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "in",
+        "s": "화학",
+        "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "213420",
+          "n": "덕산네오룩스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 210054000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "t": "213420",
+          "n": "덕산네오룩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 237624000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 수익거래, 특수관계자거래"
+        }
+      ],
       "down": []
     }
   }

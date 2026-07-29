@@ -13,10 +13,29 @@
         "dir": "out",
         "s": "유통",
         "tier": "named400"
+      },
+      {
+        "t": "031330",
+        "n": "에스에이엠티",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "in",
+        "s": "유통",
+        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "031330",
+          "n": "에스에이엠티",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 159095000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        }
+      ],
       "down": []
     }
   }

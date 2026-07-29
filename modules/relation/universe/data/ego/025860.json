@@ -4,7 +4,17 @@
   "s": "화학",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "t": "054050",
+        "n": "NH농우바이오",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "in",
+        "s": "기타",
+        "tier": "dot"
+      }
+    ],
     "valuechain": {
       "up": [
         {
@@ -17,7 +27,17 @@
           "prov": "단일판매ㆍ공급계약체결 · 남해화학주식회사"
         }
       ],
-      "down": []
+      "down": [
+        {
+          "t": "054050",
+          "n": "NH농우바이오",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 137000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        }
+      ]
     }
   }
 }

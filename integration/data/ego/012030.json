@@ -9,7 +9,7 @@
         "t": "000990",
         "n": "DB하이텍",
         "type": "associate",
-        "detail": "20.25%",
+        "detail": "20.13%",
         "dir": "out",
         "s": "반도체",
         "tier": "named400"
@@ -18,15 +18,71 @@
         "t": "000990",
         "n": "DB하이텍",
         "type": "investment",
-        "detail": "18.68%",
+        "detail": "19.52%",
         "dir": "out",
         "s": "반도체",
         "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "000990",
+          "n": "DB하이텍",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 20067000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출, 특수관계자거래"
+        },
+        {
+          "t": "000990",
+          "n": "DB하이텍",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 31245000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매입 등, 특수관계자거래"
+        },
+        {
+          "t": "005830",
+          "n": "DB손해보험",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 5280059000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매입 등, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "000990",
+          "n": "DB하이텍",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 18140461000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매출, 특수관계자거래"
+        },
+        {
+          "t": "005830",
+          "n": "DB손해보험",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 106623071000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매출, 특수관계자거래"
+        },
+        {
+          "t": "016610",
+          "n": "DB증권",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 23285023000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매출, 특수관계자거래"
+        }
+      ]
     }
   }
 }

@@ -18,15 +18,35 @@
         "t": "029460",
         "n": "케이씨",
         "type": "associate",
-        "detail": "29.8%",
+        "detail": "34.35%",
         "dir": "in",
         "s": "전기전자부품",
         "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "029460",
+          "n": "케이씨",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 18049635000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "029460",
+          "n": "케이씨",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 17914000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        }
+      ]
     }
   }
 }

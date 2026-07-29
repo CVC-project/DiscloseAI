@@ -31,10 +31,29 @@
         "dir": "in",
         "s": "화학",
         "tier": "named400"
+      },
+      {
+        "t": "357780",
+        "n": "솔브레인",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "in",
+        "s": "화학",
+        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "036830",
+          "n": "솔브레인홀딩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 38590000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        }
+      ],
       "down": []
     }
   }

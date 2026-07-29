@@ -85,11 +85,40 @@
         "dir": "out",
         "s": "화학",
         "tier": "dot"
+      },
+      {
+        "t": "298020",
+        "n": "효성티앤씨",
+        "type": "associate",
+        "detail": "21.0%",
+        "dir": "out",
+        "s": "화학",
+        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "298020",
+          "n": "효성티앤씨",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 24000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등 (주1)"
+        }
+      ],
+      "down": [
+        {
+          "t": "298020",
+          "n": "효성티앤씨",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 45635000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등(주1)"
+        }
+      ]
     }
   }
 }

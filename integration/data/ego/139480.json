@@ -17,8 +17,8 @@
       {
         "t": "031440",
         "n": "신세계푸드",
-        "type": "associate",
-        "detail": "46.87%",
+        "type": "subsidiary",
+        "detail": "55.47%",
         "dir": "out",
         "s": "식음료",
         "tier": "dot"
@@ -27,7 +27,7 @@
         "t": "035510",
         "n": "신세계I&C",
         "type": "associate",
-        "detail": "40.16%",
+        "detail": "43.86%",
         "dir": "out",
         "s": "플랫폼",
         "tier": "dot"
@@ -40,11 +40,67 @@
         "dir": "in",
         "s": "유통",
         "tier": "named400"
+      },
+      {
+        "t": "031430",
+        "n": "신세계인터내셔날",
+        "type": "dart_filing",
+        "detail": "대규모기업집단",
+        "dir": "in",
+        "s": "유통",
+        "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "031430",
+          "n": "신세계인터내셔날",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1518171000.0,
+          "as_of": 2025,
+          "prov": "특수관계자등과의 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "031440",
+          "n": "신세계푸드",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 270274137000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출 등"
+        },
+        {
+          "t": "035510",
+          "n": "신세계I&C",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 172081922000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등, 특수관계자거래 (주2)"
+        }
+      ],
+      "down": [
+        {
+          "t": "031440",
+          "n": "신세계푸드",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 24220163000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입 등"
+        },
+        {
+          "t": "035510",
+          "n": "신세계I&C",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2502179000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등, 특수관계자거래 (주3)"
+        }
+      ]
     }
   }
 }

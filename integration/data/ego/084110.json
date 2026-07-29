@@ -18,7 +18,7 @@
         "t": "243070",
         "n": "휴온스",
         "type": "associate",
-        "detail": "41.33%",
+        "detail": "41.89%",
         "dir": "out",
         "s": "제약바이오",
         "tier": "dot"
@@ -27,7 +27,7 @@
         "t": "200670",
         "n": "휴메딕스",
         "type": "associate",
-        "detail": "39.29%",
+        "detail": "36.51%",
         "dir": "out",
         "s": "제약바이오",
         "tier": "dot"
@@ -40,10 +40,29 @@
         "dir": "out",
         "s": "제약바이오",
         "tier": "dot"
+      },
+      {
+        "t": "263920",
+        "n": "휴엠앤씨",
+        "type": "subsidiary",
+        "detail": "59.01%",
+        "dir": "out",
+        "s": "기타",
+        "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "243070",
+          "n": "휴온스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 74142000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        }
+      ],
       "down": []
     }
   }

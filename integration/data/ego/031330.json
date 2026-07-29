@@ -13,11 +13,30 @@
         "dir": "in",
         "s": "반도체",
         "tier": "named400"
+      },
+      {
+        "t": "037460",
+        "n": "삼지전자",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "out",
+        "s": "반도체",
+        "tier": "named400"
       }
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "t": "037460",
+          "n": "삼지전자",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 159095000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        }
+      ]
     }
   }
 }

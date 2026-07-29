@@ -31,11 +31,30 @@
         "dir": "out",
         "s": "금융",
         "tier": "named400"
+      },
+      {
+        "t": "009970",
+        "n": "영원무역홀딩스",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "out",
+        "s": "금융",
+        "tier": "named400"
       }
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "t": "009970",
+          "n": "영원무역홀딩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 442719000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        }
+      ]
     }
   }
 }

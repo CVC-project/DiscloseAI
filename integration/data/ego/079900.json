@@ -13,11 +13,30 @@
         "dir": "in",
         "s": "자동차",
         "tier": "dot"
+      },
+      {
+        "t": "118990",
+        "n": "모트렉스",
+        "type": "subsidiary",
+        "detail": "77.33%",
+        "dir": "in",
+        "s": "자동차",
+        "tier": "dot"
       }
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "t": "118990",
+          "n": "모트렉스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 730600000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

@@ -9,15 +9,44 @@
         "t": "094840",
         "n": "슈프리마에이치큐",
         "type": "associate",
-        "detail": "28.33%",
+        "detail": "28.08%",
         "dir": "in",
+        "s": "반도체",
+        "tier": "dot"
+      },
+      {
+        "t": "203450",
+        "n": "유니온바이오메트릭스",
+        "type": "investment",
+        "detail": "9.0%",
+        "dir": "out",
         "s": "반도체",
         "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "094840",
+          "n": "슈프리마에이치큐",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 6101479552.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등"
+        }
+      ],
+      "down": [
+        {
+          "t": "094840",
+          "n": "슈프리마에이치큐",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4801520102.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        }
+      ]
     }
   }
 }

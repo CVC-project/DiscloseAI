@@ -22,10 +22,29 @@
         "dir": "in",
         "s": "유통",
         "tier": "named400"
+      },
+      {
+        "t": "111770",
+        "n": "영원무역",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "in",
+        "s": "유통",
+        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "111770",
+          "n": "영원무역",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 442719000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        }
+      ],
       "down": []
     }
   }

@@ -31,11 +31,49 @@
         "dir": "in",
         "s": "식음료",
         "tier": "named400"
+      },
+      {
+        "t": "008730",
+        "n": "율촌화학",
+        "type": "dart_filing",
+        "detail": "유의적 영향력",
+        "dir": "in",
+        "s": "소재",
+        "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "004370",
+          "n": "농심",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2619000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        }
+      ],
+      "down": [
+        {
+          "t": "004370",
+          "n": "농심",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1435710000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출원가"
+        },
+        {
+          "t": "008730",
+          "n": "율촌화학",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 11682243000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출원가"
+        }
+      ]
     }
   }
 }

@@ -27,7 +27,7 @@
         "t": "000150",
         "n": "두산",
         "type": "subsidiary",
-        "detail": "68.2%",
+        "detail": "68.11%",
         "dir": "in",
         "s": "반도체",
         "tier": "named400"
@@ -35,7 +35,17 @@
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "t": "000150",
+          "n": "두산",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 640000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        }
+      ]
     }
   }
 }

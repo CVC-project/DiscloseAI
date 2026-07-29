@@ -13,11 +13,58 @@
         "dir": "in",
         "s": "화학",
         "tier": "dot"
+      },
+      {
+        "t": "005090",
+        "n": "SGC에너지",
+        "type": "dart_filing",
+        "detail": "대규모기업집단",
+        "dir": "in",
+        "s": "에너지",
+        "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "005090",
+          "n": "SGC에너지",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 125438600.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "010060",
+          "n": "OCI홀딩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 17573000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "014830",
+          "n": "유니드",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 13058000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등"
+        },
+        {
+          "t": "005090",
+          "n": "SGC에너지",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 16681000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 재화의 매입, 특수관계자거래"
+        }
+      ]
     }
   }
 }

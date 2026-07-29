@@ -9,7 +9,7 @@
         "t": "151860",
         "n": "KG에코솔루션",
         "type": "associate",
-        "detail": "41.34%",
+        "detail": "42.64%",
         "dir": "out",
         "s": "자동차",
         "tier": "dot"
@@ -18,7 +18,7 @@
         "t": "035600",
         "n": "KG이니시스",
         "type": "associate",
-        "detail": "39.58%",
+        "detail": "40.09%",
         "dir": "out",
         "s": "플랫폼",
         "tier": "dot"
@@ -31,11 +31,76 @@
         "dir": "out",
         "s": "철강·금속",
         "tier": "dot"
+      },
+      {
+        "t": "151860",
+        "n": "KG에코솔루션",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "in",
+        "s": "자동차",
+        "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "046440",
+          "n": "KG파이낸셜",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 18985000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등 · 매출，특수관계자거래"
+        },
+        {
+          "t": "151860",
+          "n": "KG에코솔루션",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1304788000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 및 주요거래의 내용 · 매출 등"
+        },
+        {
+          "t": "016380",
+          "n": "KG스틸",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1304788261.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        }
+      ],
+      "down": [
+        {
+          "t": "003620",
+          "n": "KG모빌리티",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 147926000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입"
+        },
+        {
+          "t": "151860",
+          "n": "KG에코솔루션",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 9543009000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 및 주요거래의 내용 · 매입 등"
+        },
+        {
+          "t": "016380",
+          "n": "KG스틸",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 19050000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        }
+      ]
     }
   }
 }

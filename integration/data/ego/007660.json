@@ -4,10 +4,30 @@
   "s": "반도체",
   "tier": "named400",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "t": "457190",
+        "n": "이수스페셜티케미컬",
+        "type": "dart_filing",
+        "detail": "이수페타시스",
+        "dir": "in",
+        "s": "화학",
+        "tier": "named400"
+      }
+    ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "t": "005950",
+          "n": "이수화학",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2799560000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 - 연결 · 재화의 매입, 특수관계자거래"
+        }
+      ]
     }
   }
 }

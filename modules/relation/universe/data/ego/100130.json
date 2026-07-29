@@ -31,11 +31,30 @@
         "dir": "in",
         "s": "철강·금속",
         "tier": "dot"
+      },
+      {
+        "t": "075970",
+        "n": "동국알앤에스",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out",
+        "s": "소재",
+        "tier": "dot"
       }
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "t": "005160",
+          "n": "동국산업",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 310940000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출, 특수관계자거래"
+        }
+      ]
     }
   }
 }

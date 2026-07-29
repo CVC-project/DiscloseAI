@@ -13,11 +13,40 @@
         "dir": "in",
         "s": "섬유·의류",
         "tier": "dot"
+      },
+      {
+        "t": "069640",
+        "n": "한세엠케이",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out",
+        "s": "유통",
+        "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "069640",
+          "n": "한세엠케이",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 61744000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        }
+      ],
+      "down": [
+        {
+          "t": "069640",
+          "n": "한세엠케이",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1314345000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        }
+      ]
     }
   }
 }

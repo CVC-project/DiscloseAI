@@ -9,7 +9,7 @@
         "t": "002020",
         "n": "코오롱",
         "type": "associate",
-        "detail": "26.09%",
+        "detail": "25.11%",
         "dir": "in",
         "s": "금융",
         "tier": "dot"
@@ -36,15 +36,89 @@
         "t": "950160",
         "n": "코오롱티슈진",
         "type": "investment",
-        "detail": "9.64%",
+        "detail": "9.22%",
         "dir": "out",
         "s": "제약바이오",
+        "tier": "named400"
+      },
+      {
+        "t": "003070",
+        "n": "코오롱글로벌",
+        "type": "dart_filing",
+        "detail": "대규모기업집단",
+        "dir": "in",
+        "s": "건설",
+        "tier": "dot"
+      },
+      {
+        "t": "120110",
+        "n": "코오롱인더",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "in",
+        "s": "화학",
         "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "003070",
+          "n": "코오롱글로벌",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 138000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "t": "120110",
+          "n": "코오롱인더",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2093497000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        },
+        {
+          "t": "002020",
+          "n": "코오롱",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4329738000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등 거래, 특수관계자거래 합계"
+        }
+      ],
+      "down": [
+        {
+          "t": "120110",
+          "n": "코오롱인더",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 50662235000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등"
+        },
+        {
+          "t": "002020",
+          "n": "코오롱",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 57475000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등 거래, 특수관계자거래 합계"
+        },
+        {
+          "t": "950160",
+          "n": "코오롱티슈진",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3722284000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출, 특수관계자거래"
+        }
+      ]
     }
   }
 }

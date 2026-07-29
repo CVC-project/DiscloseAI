@@ -6,8 +6,37 @@
   "layers": {
     "governance": [],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "034730",
+          "n": "SK",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1252536000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "t": "017670",
+          "n": "SK텔레콤",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 8154408000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "017670",
+          "n": "SK텔레콤",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 5200000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

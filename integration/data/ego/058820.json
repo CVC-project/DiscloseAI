@@ -9,15 +9,34 @@
         "t": "085660",
         "n": "차바이오텍",
         "type": "associate",
-        "detail": "25.84%",
+        "detail": "24.38%",
         "dir": "in",
+        "s": "제약바이오",
+        "tier": "named400"
+      },
+      {
+        "t": "085660",
+        "n": "차바이오텍",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "out",
         "s": "제약바이오",
         "tier": "named400"
       }
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "t": "085660",
+          "n": "차바이오텍",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 88174530.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출액"
+        }
+      ]
     }
   }
 }

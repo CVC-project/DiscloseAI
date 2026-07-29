@@ -130,11 +130,121 @@
         "dir": "out",
         "s": "화학",
         "tier": "named400"
+      },
+      {
+        "t": "032940",
+        "n": "원익",
+        "type": "dart_filing",
+        "detail": "유의적 영향력",
+        "dir": "out",
+        "s": "유통",
+        "tier": "dot"
+      },
+      {
+        "t": "217820",
+        "n": "원익피앤이",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out",
+        "s": "기계·장비",
+        "tier": "dot"
+      },
+      {
+        "t": "263700",
+        "n": "케어랩스",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out",
+        "s": "기계·장비",
+        "tier": "dot"
+      },
+      {
+        "t": "074600",
+        "n": "원익QnC",
+        "type": "dart_filing",
+        "detail": "유의적 영향력",
+        "dir": "in",
+        "s": "소재",
+        "tier": "named400"
+      },
+      {
+        "t": "104830",
+        "n": "원익머트리얼즈",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "in",
+        "s": "화학",
+        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "240810",
+          "n": "원익IPS",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4350000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매출, 특수관계자거래"
+        },
+        {
+          "t": "104830",
+          "n": "원익머트리얼즈",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1669274000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "032940",
+          "n": "원익",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1216165000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "014190",
+          "n": "원익큐브",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4256211000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "263700",
+          "n": "케어랩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 24353886000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "217820",
+          "n": "원익피앤이",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 303213000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "240810",
+          "n": "원익IPS",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 43400000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매입, 특수관계자거래"
+        }
+      ]
     }
   }
 }

@@ -22,11 +22,30 @@
         "dir": "out",
         "s": "전기전자부품",
         "tier": "dot"
+      },
+      {
+        "t": "068790",
+        "n": "DMS",
+        "type": "associate",
+        "detail": "22.0%",
+        "dir": "in",
+        "s": "기계·장비",
+        "tier": "dot"
       }
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "t": "068790",
+          "n": "DMS",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 874500000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
+        }
+      ]
     }
   }
 }

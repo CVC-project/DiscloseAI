@@ -31,11 +31,30 @@
         "dir": "in",
         "s": "금융",
         "tier": "named400"
+      },
+      {
+        "t": "006040",
+        "n": "동원산업",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "out",
+        "s": "금융",
+        "tier": "named400"
       }
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "t": "006040",
+          "n": "동원산업",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 108856000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        }
+      ]
     }
   }
 }

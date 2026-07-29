@@ -9,15 +9,34 @@
         "t": "003550",
         "n": "LG",
         "type": "associate",
-        "detail": "35.0%",
+        "detail": "35.78%",
         "dir": "in",
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
+        "t": "003550",
+        "n": "LG",
+        "type": "dart_filing",
+        "detail": "유의적 영향력",
+        "dir": "out",
         "s": "금융",
         "tier": "named400"
       }
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "t": "003550",
+          "n": "LG",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 26311203000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        }
+      ]
     }
   }
 }

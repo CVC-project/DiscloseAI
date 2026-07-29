@@ -9,7 +9,7 @@
         "t": "222110",
         "n": "팬젠",
         "type": "associate",
-        "detail": "30.88%",
+        "detail": "36.67%",
         "dir": "out",
         "s": "제약바이오",
         "tier": "dot"
@@ -18,7 +18,7 @@
         "t": "084110",
         "n": "휴온스글로벌",
         "type": "associate",
-        "detail": "41.33%",
+        "detail": "41.89%",
         "dir": "in",
         "s": "제약바이오",
         "tier": "dot"
@@ -26,7 +26,44 @@
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "t": "084110",
+          "n": "휴온스글로벌",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 74142000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "t": "222110",
+          "n": "팬젠",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4099000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "t": "200670",
+          "n": "휴메딕스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3164603000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "t": "263920",
+          "n": "휴엠앤씨",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 19994000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        }
+      ]
     }
   }
 }

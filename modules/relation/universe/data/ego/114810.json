@@ -22,10 +22,56 @@
         "dir": "in",
         "s": "화학",
         "tier": "named400"
+      },
+      {
+        "t": "004150",
+        "n": "한솔홀딩스",
+        "type": "dart_filing",
+        "detail": "경영서비스 계약",
+        "dir": "out",
+        "s": "금융",
+        "tier": "dot"
+      },
+      {
+        "t": "004710",
+        "n": "한솔테크닉스",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "out",
+        "s": "반도체",
+        "tier": "dot"
+      },
+      {
+        "t": "213500",
+        "n": "한솔제지",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "in",
+        "s": "소재",
+        "tier": "dot"
+      },
+      {
+        "t": "004710",
+        "n": "한솔테크닉스",
+        "type": "associate",
+        "detail": "36.0%",
+        "dir": "in",
+        "s": "반도체",
+        "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "004150",
+          "n": "한솔홀딩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2747000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ],
       "down": []
     }
   }

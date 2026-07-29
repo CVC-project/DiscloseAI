@@ -22,11 +22,58 @@
         "dir": "out",
         "s": "소재",
         "tier": "dot"
+      },
+      {
+        "t": "001810",
+        "n": "무림SP",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "in",
+        "s": "소재",
+        "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "001810",
+          "n": "무림SP",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2271375000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "t": "009580",
+          "n": "무림P&P",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 66578395000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        }
+      ],
+      "down": [
+        {
+          "t": "001810",
+          "n": "무림SP",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1500079000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등"
+        },
+        {
+          "t": "009580",
+          "n": "무림P&P",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3361373000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등"
+        }
+      ]
     }
   }
 }

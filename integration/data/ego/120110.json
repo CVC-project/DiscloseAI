@@ -13,11 +13,121 @@
         "dir": "in",
         "s": "금융",
         "tier": "dot"
+      },
+      {
+        "t": "002020",
+        "n": "코오롱",
+        "type": "dart_filing",
+        "detail": "유의적 영향력",
+        "dir": "out",
+        "s": "금융",
+        "tier": "dot"
+      },
+      {
+        "t": "003070",
+        "n": "코오롱글로벌",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out",
+        "s": "건설",
+        "tier": "dot"
+      },
+      {
+        "t": "102940",
+        "n": "코오롱생명과학",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out",
+        "s": "제약바이오",
+        "tier": "dot"
+      },
+      {
+        "t": "950160",
+        "n": "코오롱티슈진",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out",
+        "s": "제약바이오",
+        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "002020",
+          "n": "코오롱",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 24439764000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등"
+        },
+        {
+          "t": "003070",
+          "n": "코오롱글로벌",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 15931193000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등"
+        },
+        {
+          "t": "102940",
+          "n": "코오롱생명과학",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 50662235000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등"
+        },
+        {
+          "t": "950160",
+          "n": "코오롱티슈진",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 748982000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등"
+        }
+      ],
+      "down": [
+        {
+          "t": "002020",
+          "n": "코오롱",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 192371000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        },
+        {
+          "t": "003070",
+          "n": "코오롱글로벌",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 6810223000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        },
+        {
+          "t": "102940",
+          "n": "코오롱생명과학",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2093497000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        },
+        {
+          "t": "950160",
+          "n": "코오롱티슈진",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 75539000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        }
+      ]
     }
   }
 }

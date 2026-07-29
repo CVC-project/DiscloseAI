@@ -6,8 +6,37 @@
   "layers": {
     "governance": [],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "015760",
+          "n": "한국전력공사",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3899768182.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 주요 거래 · 매입등 비용"
+        },
+        {
+          "t": "051600",
+          "n": "한전KPS",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 7650000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 주요 거래 · 매입등 비용"
+        }
+      ],
+      "down": [
+        {
+          "t": "015760",
+          "n": "한국전력공사",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 227928.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 주요 거래 · 매출등 수익"
+        }
+      ]
     }
   }
 }

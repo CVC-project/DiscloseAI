@@ -9,15 +9,34 @@
         "t": "008250",
         "n": "이건산업",
         "type": "associate",
-        "detail": "36.6%",
+        "detail": "34.19%",
         "dir": "out",
+        "s": "소재",
+        "tier": "dot"
+      },
+      {
+        "t": "008250",
+        "n": "이건산업",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "in",
         "s": "소재",
         "tier": "dot"
       }
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "t": "008250",
+          "n": "이건산업",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2431984000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        }
+      ]
     }
   }
 }

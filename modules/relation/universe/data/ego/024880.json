@@ -27,15 +27,53 @@
         "t": "389500",
         "n": "에스비비테크",
         "type": "associate",
-        "detail": "37.59%",
+        "detail": "36.65%",
         "dir": "out",
         "s": "기계·장비",
+        "tier": "dot"
+      },
+      {
+        "t": "217590",
+        "n": "티엠씨",
+        "type": "associate",
+        "detail": "48.76%",
+        "dir": "out",
+        "s": "전기전자부품",
         "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "217590",
+          "n": "티엠씨",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 7190000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "389500",
+          "n": "에스비비테크",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 71879000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "t": "217590",
+          "n": "티엠씨",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 157097000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입, 특수관계자거래"
+        }
+      ]
     }
   }
 }

@@ -9,7 +9,7 @@
         "t": "001390",
         "n": "KG케미칼",
         "type": "associate",
-        "detail": "41.34%",
+        "detail": "42.64%",
         "dir": "in",
         "s": "화학",
         "tier": "dot"
@@ -18,7 +18,7 @@
         "t": "151860",
         "n": "KG에코솔루션",
         "type": "investment",
-        "detail": "14.55%",
+        "detail": "11.86%",
         "dir": "out",
         "s": "자동차",
         "tier": "dot"
@@ -27,7 +27,7 @@
         "t": "003620",
         "n": "KG모빌리티",
         "type": "subsidiary",
-        "detail": "56.01%",
+        "detail": "54.35%",
         "dir": "out",
         "s": "자동차",
         "tier": "dot"
@@ -40,11 +40,85 @@
         "dir": "out",
         "s": "철강·금속",
         "tier": "dot"
+      },
+      {
+        "t": "001390",
+        "n": "KG케미칼",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "out",
+        "s": "화학",
+        "tier": "dot"
+      },
+      {
+        "t": "035600",
+        "n": "KG이니시스",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out",
+        "s": "플랫폼",
+        "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "046440",
+          "n": "KG파이낸셜",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 11338000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등 · 매출，특수관계자거래"
+        },
+        {
+          "t": "001390",
+          "n": "KG케미칼",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 9543009000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 및 주요거래의 내용 · 매입 등"
+        },
+        {
+          "t": "035600",
+          "n": "KG이니시스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 18254917000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 및 주요거래의 내용 · 매입 등"
+        },
+        {
+          "t": "016380",
+          "n": "KG스틸",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 6398885.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        }
+      ],
+      "down": [
+        {
+          "t": "001390",
+          "n": "KG케미칼",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1304788000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 및 주요거래의 내용 · 매출 등"
+        },
+        {
+          "t": "035600",
+          "n": "KG이니시스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 8709000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 및 주요거래의 내용 · 매출 등"
+        }
+      ]
     }
   }
 }

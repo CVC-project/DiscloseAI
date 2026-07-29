@@ -22,6 +22,42 @@
         "dir": "in",
         "s": "금융",
         "tier": "dot"
+      },
+      {
+        "t": "002020",
+        "n": "코오롱",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "out",
+        "s": "금융",
+        "tier": "dot"
+      },
+      {
+        "t": "102940",
+        "n": "코오롱생명과학",
+        "type": "dart_filing",
+        "detail": "대규모기업집단",
+        "dir": "out",
+        "s": "제약바이오",
+        "tier": "dot"
+      },
+      {
+        "t": "950160",
+        "n": "코오롱티슈진",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out",
+        "s": "제약바이오",
+        "tier": "named400"
+      },
+      {
+        "t": "120110",
+        "n": "코오롱인더",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "in",
+        "s": "화학",
+        "tier": "named400"
       }
     ],
     "valuechain": {
@@ -34,9 +70,55 @@
           "amount": 57800000000.0,
           "as_of": 2022,
           "prov": "단일판매ㆍ공급계약체결 · 코오롱글로벌(주)"
+        },
+        {
+          "t": "120110",
+          "n": "코오롱인더",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 6810223000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
         }
       ],
-      "down": []
+      "down": [
+        {
+          "t": "002020",
+          "n": "코오롱",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 6148000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "t": "102940",
+          "n": "코오롱생명과학",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 138000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "t": "950160",
+          "n": "코오롱티슈진",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "t": "120110",
+          "n": "코오롱인더",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 15931193000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등"
+        }
+      ]
     }
   }
 }

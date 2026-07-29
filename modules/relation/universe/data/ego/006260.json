@@ -13,11 +13,48 @@
         "dir": "out",
         "s": "전기전자부품",
         "tier": "named400"
+      },
+      {
+        "t": "010120",
+        "n": "엘에스일렉트릭",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "in",
+        "s": "전기전자부품",
+        "tier": "named400"
+      },
+      {
+        "t": "000680",
+        "n": "LS네트웍스",
+        "type": "dart_filing",
+        "detail": "대규모기업집단",
+        "dir": "in",
+        "s": "유통",
+        "tier": "dot"
+      },
+      {
+        "t": "229640",
+        "n": "LS에코에너지",
+        "type": "dart_filing",
+        "detail": "최상위 지배기업",
+        "dir": "in",
+        "s": "금융",
+        "tier": "named400"
       }
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "t": "060370",
+          "n": "LS마린솔루션",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 560984000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입, 특수관계자거래"
+        }
+      ]
     }
   }
 }

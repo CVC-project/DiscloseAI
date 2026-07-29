@@ -22,10 +22,47 @@
         "dir": "out",
         "s": "전기전자부품",
         "tier": "named400"
+      },
+      {
+        "t": "006260",
+        "n": "LS",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "out",
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
+        "t": "017940",
+        "n": "E1",
+        "type": "dart_filing",
+        "detail": "대규모기업집단",
+        "dir": "out",
+        "s": "유통",
+        "tier": "dot"
+      },
+      {
+        "t": "229640",
+        "n": "LS에코에너지",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "in",
+        "s": "금융",
+        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "000500",
+          "n": "가온전선",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1584535000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매출"
+        }
+      ],
       "down": []
     }
   }

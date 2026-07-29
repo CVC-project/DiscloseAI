@@ -13,10 +13,29 @@
         "dir": "in",
         "s": "금융",
         "tier": "named400"
+      },
+      {
+        "t": "005830",
+        "n": "DB손해보험",
+        "type": "associate",
+        "detail": "26.83%",
+        "dir": "in",
+        "s": "금융",
+        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "012030",
+          "n": "DB",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 23285023000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매출, 특수관계자거래"
+        }
+      ],
       "down": []
     }
   }

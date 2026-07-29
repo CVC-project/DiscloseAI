@@ -9,7 +9,7 @@
         "t": "086890",
         "n": "이수앱지스",
         "type": "associate",
-        "detail": "31.27%",
+        "detail": "32.19%",
         "dir": "out",
         "s": "제약바이오",
         "tier": "dot"
@@ -18,15 +18,53 @@
         "t": "067370",
         "n": "선바이오",
         "type": "investment",
-        "detail": "5.18%",
+        "detail": "5.0%",
         "dir": "out",
         "s": "제약바이오",
         "tier": "dot"
+      },
+      {
+        "t": "457190",
+        "n": "이수스페셜티케미컬",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "in",
+        "s": "화학",
+        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "007660",
+          "n": "이수페타시스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2799560000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 - 연결 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "t": "457190",
+          "n": "이수스페셜티케미컬",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 12296028000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        }
+      ],
+      "down": [
+        {
+          "t": "457190",
+          "n": "이수스페셜티케미컬",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 77415262000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등"
+        }
+      ]
     }
   }
 }

@@ -9,7 +9,7 @@
         "t": "183190",
         "n": "아세아시멘트",
         "type": "subsidiary",
-        "detail": "55.54%",
+        "detail": "56.91%",
         "dir": "out",
         "s": "소재",
         "tier": "dot"
@@ -22,10 +22,29 @@
         "dir": "out",
         "s": "소재",
         "tier": "dot"
+      },
+      {
+        "t": "002310",
+        "n": "아세아제지",
+        "type": "subsidiary",
+        "detail": "52.2%",
+        "dir": "out",
+        "s": "소재",
+        "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "183190",
+          "n": "아세아시멘트",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3433773000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ],
       "down": []
     }
   }

@@ -8,8 +8,8 @@
       {
         "t": "109960",
         "n": "앱토크롬",
-        "type": "associate",
-        "detail": "48.78%",
+        "type": "subsidiary",
+        "detail": "71.66%",
         "dir": "out",
         "s": "유통",
         "tier": "dot"
@@ -31,11 +31,49 @@
         "dir": "out",
         "s": "제약바이오",
         "tier": "dot"
+      },
+      {
+        "t": "003060",
+        "n": "에이프로젠바이오로직스",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "in",
+        "s": "제약바이오",
+        "tier": "dot"
+      },
+      {
+        "t": "270520",
+        "n": "앱튼",
+        "type": "associate",
+        "detail": "31.61%",
+        "dir": "out",
+        "s": "제약바이오",
+        "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "003060",
+          "n": "에이프로젠바이오로직스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 295923196.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "270520",
+          "n": "앱튼",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2015938059.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        }
+      ]
     }
   }
 }

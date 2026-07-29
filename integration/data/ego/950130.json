@@ -9,7 +9,7 @@
         "t": "004720",
         "n": "팜젠사이언스",
         "type": "associate",
-        "detail": "25.22%",
+        "detail": "24.31%",
         "dir": "in",
         "s": "제약바이오",
         "tier": "dot"
@@ -22,11 +22,30 @@
         "dir": "in",
         "s": "제약바이오",
         "tier": "dot"
+      },
+      {
+        "t": "004720",
+        "n": "팜젠사이언스",
+        "type": "dart_filing",
+        "detail": "최대주주",
+        "dir": "out",
+        "s": "제약바이오",
+        "tier": "dot"
       }
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "t": "004720",
+          "n": "팜젠사이언스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 45550.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

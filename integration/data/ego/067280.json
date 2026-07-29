@@ -8,8 +8,8 @@
       {
         "t": "018260",
         "n": "삼성에스디에스",
-        "type": "associate",
-        "detail": "47.24%",
+        "type": "subsidiary",
+        "detail": "62.4%",
         "dir": "in",
         "s": "플랫폼",
         "tier": "named400"
@@ -22,11 +22,103 @@
         "dir": "in",
         "s": "반도체",
         "tier": "named400"
+      },
+      {
+        "t": "207940",
+        "n": "삼성바이오로직스",
+        "type": "dart_filing",
+        "detail": "대규모기업집단",
+        "dir": "in",
+        "s": "제약바이오",
+        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "018260",
+          "n": "삼성에스디에스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 10680570000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등"
+        },
+        {
+          "t": "005930",
+          "n": "삼성전자",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 128470000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등"
+        },
+        {
+          "t": "032830",
+          "n": "삼성생명",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 195085000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등"
+        },
+        {
+          "t": "000810",
+          "n": "삼성화재해상보험",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1420403000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등"
+        }
+      ],
+      "down": [
+        {
+          "t": "018260",
+          "n": "삼성에스디에스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 15402596000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        },
+        {
+          "t": "005930",
+          "n": "삼성전자",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 78286256000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        },
+        {
+          "t": "032830",
+          "n": "삼성생명",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 13992996000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        },
+        {
+          "t": "000810",
+          "n": "삼성화재해상보험",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 8091545000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        },
+        {
+          "t": "006400",
+          "n": "삼성SDI",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4365907000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        }
+      ]
     }
   }
 }

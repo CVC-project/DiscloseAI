@@ -9,7 +9,7 @@
         "t": "175330",
         "n": "JB금융지주",
         "type": "investment",
-        "detail": "14.28%",
+        "detail": "14.5%",
         "dir": "out",
         "s": "금융",
         "tier": "named400"
@@ -72,15 +72,62 @@
         "t": "272550",
         "n": "삼양패키징",
         "type": "subsidiary",
-        "detail": "59.4%",
+        "detail": "72.72%",
         "dir": "out",
         "s": "소재",
+        "tier": "dot"
+      },
+      {
+        "t": "036670",
+        "n": "삼양케이씨아이",
+        "type": "subsidiary",
+        "detail": "50.02%",
+        "dir": "out",
+        "s": "화학",
         "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "079980",
+          "n": "휴비스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 8439291000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "000070",
+          "n": "삼양홀딩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 7374000000.0,
+          "as_of": 2023,
+          "prov": "특수관계자 공시 · 매출"
+        },
+        {
+          "t": "079980",
+          "n": "휴비스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 77000000.0,
+          "as_of": 2023,
+          "prov": "특수관계자 공시 · 매출"
+        },
+        {
+          "t": "079980",
+          "n": "휴비스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3900000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 재화의 매입, 특수관계자거래"
+        }
+      ]
     }
   }
 }

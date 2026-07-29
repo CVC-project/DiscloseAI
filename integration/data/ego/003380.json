@@ -49,11 +49,94 @@
         "dir": "in",
         "s": "운송·물류",
         "tier": "named400"
+      },
+      {
+        "t": "028670",
+        "n": "팬오션",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "in",
+        "s": "운송·물류",
+        "tier": "named400"
+      },
+      {
+        "t": "036580",
+        "n": "팜스코",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "in",
+        "s": "식음료",
+        "tier": "dot"
+      },
+      {
+        "t": "136480",
+        "n": "하림",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "in",
+        "s": "식음료",
+        "tier": "dot"
+      },
+      {
+        "t": "136490",
+        "n": "선진",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "in",
+        "s": "식음료",
+        "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "136480",
+          "n": "하림",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 298119000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "136490",
+          "n": "선진",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 58000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "036580",
+          "n": "팜스코",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 59200000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입, 특수관계자거래"
+        },
+        {
+          "t": "028670",
+          "n": "팬오션",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3513000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 매입 및 기타비용, 특수관계자거래"
+        },
+        {
+          "t": "136490",
+          "n": "선진",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 144727000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        }
+      ]
     }
   }
 }

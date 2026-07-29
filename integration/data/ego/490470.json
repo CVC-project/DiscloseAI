@@ -4,9 +4,29 @@
   "s": "제약바이오",
   "tier": "named400",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "t": "000150",
+        "n": "두산",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "in",
+        "s": "반도체",
+        "tier": "named400"
+      }
+    ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "131970",
+          "n": "두산테스나",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1417857000.0,
+          "as_of": 2024,
+          "prov": "특수관계자와의 거래내역 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ],
       "down": [
         {
           "t": "000150",

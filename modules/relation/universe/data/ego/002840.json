@@ -9,7 +9,7 @@
         "t": "023450",
         "n": "동남합성",
         "type": "investment",
-        "detail": "8.58%",
+        "detail": "8.79%",
         "dir": "out",
         "s": "화학",
         "tier": "dot"
@@ -43,8 +43,100 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "023450",
+          "n": "동남합성",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 12068040000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        },
+        {
+          "t": "134380",
+          "n": "미원화학",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 927244000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        },
+        {
+          "t": "107590",
+          "n": "미원홀딩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 14086125121.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매출 등"
+        },
+        {
+          "t": "268280",
+          "n": "미원에스씨",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3995866.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출기타"
+        }
+      ],
+      "down": [
+        {
+          "t": "107590",
+          "n": "미원홀딩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 171181000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "t": "023450",
+          "n": "동남합성",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 564654000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "t": "134380",
+          "n": "미원화학",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 465609000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "t": "049550",
+          "n": "잉크테크",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 178672000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "t": "107590",
+          "n": "미원홀딩스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2610651315.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매입 등"
+        },
+        {
+          "t": "268280",
+          "n": "미원에스씨",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1700000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입기타"
+        }
+      ]
     }
   }
 }

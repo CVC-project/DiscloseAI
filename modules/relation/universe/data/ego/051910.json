@@ -9,7 +9,7 @@
         "t": "003550",
         "n": "LG",
         "type": "associate",
-        "detail": "34.0%",
+        "detail": "35.0%",
         "dir": "in",
         "s": "금융",
         "tier": "named400"
@@ -27,7 +27,7 @@
         "t": "373220",
         "n": "LG에너지솔루션",
         "type": "subsidiary",
-        "detail": "100.0%",
+        "detail": "79.38%",
         "dir": "out",
         "s": "전기전자부품",
         "tier": "named400"
@@ -39,6 +39,15 @@
         "detail": "82.0%",
         "dir": "out",
         "s": "전기전자부품",
+        "tier": "named400"
+      },
+      {
+        "t": "064400",
+        "n": "LG씨엔에스",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "in",
+        "s": "플랫폼",
         "tier": "named400"
       }
     ],
@@ -52,9 +61,46 @@
           "amount": 5946000000.0,
           "as_of": 2025,
           "prov": "특수관계자 거래 · 매출 등"
+        },
+        {
+          "t": "003550",
+          "n": "LG",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1431614000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등과의 거래 · 매출 등"
+        },
+        {
+          "t": "032640",
+          "n": "LG유플러스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1021000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        },
+        {
+          "t": "064400",
+          "n": "LG씨엔에스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1222973920000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등과의 거래 · 매출 등"
         }
       ],
-      "down": []
+      "down": [
+        {
+          "t": "032640",
+          "n": "LG유플러스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 92000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등"
+        }
+      ]
     }
   }
 }

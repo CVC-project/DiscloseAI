@@ -9,7 +9,7 @@
         "t": "069640",
         "n": "한세엠케이",
         "type": "subsidiary",
-        "detail": "72.04%",
+        "detail": "69.15%",
         "dir": "out",
         "s": "유통",
         "tier": "dot"
@@ -34,8 +34,28 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "069640",
+          "n": "한세엠케이",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 28855000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        }
+      ],
+      "down": [
+        {
+          "t": "069640",
+          "n": "한세엠케이",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 21680316000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        }
+      ]
     }
   }
 }

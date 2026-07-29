@@ -31,11 +31,40 @@
         "dir": "in",
         "s": "철강·금속",
         "tier": "named400"
+      },
+      {
+        "t": "010130",
+        "n": "고려아연",
+        "type": "dart_filing",
+        "detail": "대규모기업집단",
+        "dir": "in",
+        "s": "철강·금속",
+        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "051370",
+          "n": "인터플렉스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2995514000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "000670",
+          "n": "영풍",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 414273524.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        }
+      ]
     }
   }
 }

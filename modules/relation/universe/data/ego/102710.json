@@ -4,10 +4,58 @@
   "s": "화학",
   "tier": "named400",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "t": "445180",
+        "n": "퓨릿",
+        "type": "dart_filing",
+        "detail": "㈜퓨릿",
+        "dir": "out",
+        "s": "화학",
+        "tier": "dot"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "445180",
+          "n": "퓨릿",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1737416000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "t": "017890",
+          "n": "한국알콜",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 118251456000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "445180",
+          "n": "퓨릿",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 408942000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "017890",
+          "n": "한국알콜",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 836085000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        }
+      ]
     }
   }
 }

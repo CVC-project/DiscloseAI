@@ -9,7 +9,7 @@
         "t": "010060",
         "n": "OCI홀딩스",
         "type": "investment",
-        "detail": "11.32%",
+        "detail": "17.11%",
         "dir": "in",
         "s": "금융",
         "tier": "named400"
@@ -34,8 +34,64 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "010060",
+          "n": "OCI홀딩스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 20024480.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입 등"
+        },
+        {
+          "t": "456040",
+          "n": "OCI",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 25215860.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입 등"
+        },
+        {
+          "t": "010060",
+          "n": "OCI홀딩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 325458000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "t": "456040",
+          "n": "OCI",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 27451000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "010060",
+          "n": "OCI홀딩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 27752925.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 등"
+        },
+        {
+          "t": "456040",
+          "n": "OCI",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 43741862.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 등"
+        }
+      ]
     }
   }
 }

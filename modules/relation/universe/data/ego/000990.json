@@ -9,7 +9,7 @@
         "t": "012030",
         "n": "DB",
         "type": "associate",
-        "detail": "20.25%",
+        "detail": "20.13%",
         "dir": "in",
         "s": "플랫폼",
         "tier": "dot"
@@ -18,15 +18,53 @@
         "t": "012030",
         "n": "DB",
         "type": "investment",
-        "detail": "18.68%",
+        "detail": "19.52%",
         "dir": "in",
         "s": "플랫폼",
         "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "012030",
+          "n": "DB",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 18140461000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매출, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "012030",
+          "n": "DB",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 20067000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출, 특수관계자거래"
+        },
+        {
+          "t": "005830",
+          "n": "DB손해보험",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2004000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출, 특수관계자거래"
+        },
+        {
+          "t": "012030",
+          "n": "DB",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 31245000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매입 등, 특수관계자거래"
+        }
+      ]
     }
   }
 }

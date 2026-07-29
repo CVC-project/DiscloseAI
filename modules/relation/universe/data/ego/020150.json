@@ -8,8 +8,8 @@
       {
         "t": "011170",
         "n": "롯데케미칼",
-        "type": "subsidiary",
-        "detail": "53.3%",
+        "type": "associate",
+        "detail": "46.94%",
         "dir": "in",
         "s": "화학",
         "tier": "named400"
@@ -25,8 +25,37 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "280360",
+          "n": "롯데웰푸드",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 53339000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입"
+        },
+        {
+          "t": "004990",
+          "n": "롯데지주",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 8401000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "t": "005300",
+          "n": "롯데칠성음료",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 17662954000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출"
+        }
+      ]
     }
   }
 }

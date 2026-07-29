@@ -13,11 +13,58 @@
         "dir": "in",
         "s": "전기전자부품",
         "tier": "named400"
+      },
+      {
+        "t": "078020",
+        "n": "LS증권",
+        "type": "dart_filing",
+        "detail": "대규모기업집단",
+        "dir": "out",
+        "s": "금융",
+        "tier": "dot"
+      },
+      {
+        "t": "000680",
+        "n": "LS네트웍스",
+        "type": "dart_filing",
+        "detail": "대규모기업집단",
+        "dir": "in",
+        "s": "유통",
+        "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "000680",
+          "n": "LS네트웍스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 63616000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "t": "417200",
+          "n": "LS머트리얼즈",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 299382684.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        }
+      ],
+      "down": [
+        {
+          "t": "010120",
+          "n": "엘에스일렉트릭",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1584535000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매출"
+        }
+      ]
     }
   }
 }

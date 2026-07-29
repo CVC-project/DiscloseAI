@@ -18,15 +18,79 @@
         "t": "054800",
         "n": "아이디스홀딩스",
         "type": "associate",
-        "detail": "40.08%",
+        "detail": "38.47%",
         "dir": "in",
         "s": "기계·장비",
+        "tier": "dot"
+      },
+      {
+        "t": "054800",
+        "n": "아이디스홀딩스",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "out",
+        "s": "기계·장비",
+        "tier": "dot"
+      },
+      {
+        "t": "143160",
+        "n": "아이디스",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out",
+        "s": "반도체",
+        "tier": "dot"
+      },
+      {
+        "t": "093190",
+        "n": "빅솔론",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out",
+        "s": "반도체",
+        "tier": "dot"
+      },
+      {
+        "t": "332370",
+        "n": "아이디피",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out",
+        "s": "반도체",
+        "tier": "dot"
+      },
+      {
+        "t": "219420",
+        "n": "링크제니시스",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out",
+        "s": "플랫폼",
+        "tier": "dot"
+      },
+      {
+        "t": "143160",
+        "n": "아이디스",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "in",
+        "s": "반도체",
         "tier": "dot"
       }
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "t": "143160",
+          "n": "아이디스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 44000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

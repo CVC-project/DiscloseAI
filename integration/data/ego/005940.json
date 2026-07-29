@@ -40,10 +40,29 @@
         "dir": "out",
         "s": "전기전자부품",
         "tier": "dot"
+      },
+      {
+        "t": "054050",
+        "n": "NH농우바이오",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "in",
+        "s": "기타",
+        "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "054050",
+          "n": "NH농우바이오",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 27000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        }
+      ],
       "down": []
     }
   }

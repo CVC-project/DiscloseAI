@@ -22,11 +22,49 @@
         "dir": "in",
         "s": "전기전자부품",
         "tier": "named400"
+      },
+      {
+        "t": "064400",
+        "n": "LG씨엔에스",
+        "type": "dart_filing",
+        "detail": "대규모기업집단",
+        "dir": "in",
+        "s": "플랫폼",
+        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "003550",
+          "n": "LG",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 12000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등과의 거래 · 매출 등"
+        },
+        {
+          "t": "064400",
+          "n": "LG씨엔에스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 12092000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등과의 거래 · 매출 등"
+        }
+      ],
+      "down": [
+        {
+          "t": "011070",
+          "n": "LG이노텍",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 11000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입액"
+        }
+      ]
     }
   }
 }

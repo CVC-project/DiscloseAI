@@ -13,11 +13,49 @@
         "dir": "out",
         "s": "레저·교육",
         "tier": "dot"
+      },
+      {
+        "t": "284740",
+        "n": "쿠쿠홈시스",
+        "type": "dart_filing",
+        "detail": "유의적 영향력",
+        "dir": "in",
+        "s": "레저·교육",
+        "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "284740",
+          "n": "쿠쿠홈시스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3317667000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등"
+        }
+      ],
+      "down": [
+        {
+          "t": "284740",
+          "n": "쿠쿠홈시스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 9097905000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        },
+        {
+          "t": "284740",
+          "n": "쿠쿠홈시스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 4995188000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등"
+        }
+      ]
     }
   }
 }

@@ -31,10 +31,29 @@
         "dir": "in",
         "s": "미디어",
         "tier": "named400"
+      },
+      {
+        "t": "035720",
+        "n": "카카오",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "in",
+        "s": "플랫폼",
+        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "094480",
+          "n": "갤럭시아머니트리",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4331000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등, 특수관계자거래"
+        }
+      ],
       "down": []
     }
   }

@@ -13,11 +13,49 @@
         "dir": "in",
         "s": "반도체",
         "tier": "named400"
+      },
+      {
+        "t": "066570",
+        "n": "LG전자",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "out",
+        "s": "반도체",
+        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "066570",
+          "n": "LG전자",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 18899000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입액"
+        },
+        {
+          "t": "090360",
+          "n": "로보스타",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 11000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입액"
+        }
+      ],
+      "down": [
+        {
+          "t": "066570",
+          "n": "LG전자",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 75923000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출액 등"
+        }
+      ]
     }
   }
 }

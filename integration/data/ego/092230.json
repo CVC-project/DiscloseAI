@@ -18,15 +18,80 @@
         "t": "025000",
         "n": "KPX케미칼",
         "type": "subsidiary",
-        "detail": "50.8%",
+        "detail": "52.28%",
         "dir": "out",
         "s": "화학",
+        "tier": "dot"
+      },
+      {
+        "t": "114450",
+        "n": "그린생명과학",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out",
+        "s": "제약바이오",
+        "tier": "dot"
+      },
+      {
+        "t": "083420",
+        "n": "그린케미칼",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out",
+        "s": "화학",
+        "tier": "dot"
+      },
+      {
+        "t": "100250",
+        "n": "진양홀딩스",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "in",
+        "s": "소재",
         "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "083420",
+          "n": "그린케미칼",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1269648000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "t": "025000",
+          "n": "KPX케미칼",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 41651845577.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입"
+        },
+        {
+          "t": "083420",
+          "n": "그린케미칼",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2800723965.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        },
+        {
+          "t": "100250",
+          "n": "진양홀딩스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3019398930.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        }
+      ]
     }
   }
 }

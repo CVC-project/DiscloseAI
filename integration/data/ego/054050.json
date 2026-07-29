@@ -4,10 +4,49 @@
   "s": "기타",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "t": "005940",
+        "n": "NH투자증권",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out",
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
+        "t": "025860",
+        "n": "남해화학",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out",
+        "s": "화학",
+        "tier": "dot"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "025860",
+          "n": "남해화학",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 137000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "t": "005940",
+          "n": "NH투자증권",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 27000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        }
+      ]
     }
   }
 }

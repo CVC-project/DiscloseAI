@@ -8,8 +8,8 @@
       {
         "t": "139480",
         "n": "이마트",
-        "type": "associate",
-        "detail": "46.87%",
+        "type": "subsidiary",
+        "detail": "55.47%",
         "dir": "in",
         "s": "유통",
         "tier": "named400"
@@ -22,11 +22,103 @@
         "dir": "in",
         "s": "유통",
         "tier": "named400"
+      },
+      {
+        "t": "031430",
+        "n": "신세계인터내셔날",
+        "type": "dart_filing",
+        "detail": "대규모기업집단",
+        "dir": "in",
+        "s": "유통",
+        "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "139480",
+          "n": "이마트",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 24220163000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입 등"
+        },
+        {
+          "t": "004170",
+          "n": "신세계",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3353663000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입 등"
+        },
+        {
+          "t": "037710",
+          "n": "광주신세계",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 16775000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입 등"
+        },
+        {
+          "t": "035510",
+          "n": "신세계I&C",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 9496944000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등, 특수관계자거래 (주2)"
+        }
+      ],
+      "down": [
+        {
+          "t": "139480",
+          "n": "이마트",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 270274137000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출 등"
+        },
+        {
+          "t": "004170",
+          "n": "신세계",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 25009825000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출 등"
+        },
+        {
+          "t": "031430",
+          "n": "신세계인터내셔날",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1742460000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출 등"
+        },
+        {
+          "t": "037710",
+          "n": "광주신세계",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1034723000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출 등"
+        },
+        {
+          "t": "035510",
+          "n": "신세계I&C",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 303121000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등, 특수관계자거래 (주3)"
+        }
+      ]
     }
   }
 }

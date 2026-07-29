@@ -22,10 +22,29 @@
         "dir": "in",
         "s": "화학",
         "tier": "named400"
+      },
+      {
+        "t": "030530",
+        "n": "원익홀딩스",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "in",
+        "s": "화학",
+        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "030530",
+          "n": "원익홀딩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 24353886000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ],
       "down": []
     }
   }

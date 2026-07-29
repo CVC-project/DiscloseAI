@@ -22,11 +22,40 @@
         "dir": "in",
         "s": "철강·금속",
         "tier": "dot"
+      },
+      {
+        "t": "021050",
+        "n": "서원",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "out",
+        "s": "철강·금속",
+        "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "021050",
+          "n": "서원",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 23830948961.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "t": "021050",
+          "n": "서원",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 6012987420.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출"
+        }
+      ]
     }
   }
 }

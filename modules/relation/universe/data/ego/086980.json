@@ -13,11 +13,40 @@
         "dir": "in",
         "s": "금융",
         "tier": "named400"
+      },
+      {
+        "t": "271560",
+        "n": "오리온",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "in",
+        "s": "식음료",
+        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "271560",
+          "n": "오리온",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1336849000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 매출 등, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "271560",
+          "n": "오리온",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 17003152000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 매입 등, 특수관계자거래"
+        }
+      ]
     }
   }
 }

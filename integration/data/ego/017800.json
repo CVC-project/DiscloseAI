@@ -17,16 +17,45 @@
       {
         "t": "319400",
         "n": "현대무벡스",
-        "type": "subsidiary",
-        "detail": "52.9%",
+        "type": "associate",
+        "detail": "48.9%",
         "dir": "out",
         "s": "기계·장비",
         "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "319400",
+          "n": "현대무벡스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 18485953000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "319400",
+          "n": "현대무벡스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 6031261000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등, 특수관계자거래"
+        },
+        {
+          "t": "319400",
+          "n": "현대무벡스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 810501000.0,
+          "as_of": 2023,
+          "prov": "특수관계자 - 연결 · 매출, 특수관계자거래"
+        }
+      ]
     }
   }
 }

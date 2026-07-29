@@ -4,10 +4,58 @@
   "s": "화학",
   "tier": "named400",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "t": "005950",
+        "n": "이수화학",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out",
+        "s": "화학",
+        "tier": "dot"
+      },
+      {
+        "t": "086890",
+        "n": "이수앱지스",
+        "type": "dart_filing",
+        "detail": "이수앱지스",
+        "dir": "out",
+        "s": "제약바이오",
+        "tier": "dot"
+      },
+      {
+        "t": "007660",
+        "n": "이수페타시스",
+        "type": "dart_filing",
+        "detail": "이수페타시스",
+        "dir": "out",
+        "s": "반도체",
+        "tier": "named400"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "005950",
+          "n": "이수화학",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 77415262000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등"
+        }
+      ],
+      "down": [
+        {
+          "t": "005950",
+          "n": "이수화학",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 12296028000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        }
+      ]
     }
   }
 }

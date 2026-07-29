@@ -18,7 +18,7 @@
         "t": "066700",
         "n": "테라젠이텍스",
         "type": "investment",
-        "detail": "7.8%",
+        "detail": "6.7%",
         "dir": "out",
         "s": "제약바이오",
         "tier": "dot"
@@ -49,10 +49,29 @@
         "dir": "out",
         "s": "지주",
         "tier": "named400"
+      },
+      {
+        "t": "424870",
+        "n": "이뮨온시아",
+        "type": "subsidiary",
+        "detail": "65.93%",
+        "dir": "out",
+        "s": "지주",
+        "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "066700",
+          "n": "테라젠이텍스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 67489000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입"
+        }
+      ],
       "down": []
     }
   }

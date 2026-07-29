@@ -8,15 +8,34 @@
       {
         "t": "011230",
         "n": "삼화전자공업",
-        "type": "investment",
-        "detail": "17.78%",
+        "type": "associate",
+        "detail": "23.06%",
         "dir": "out",
         "s": "반도체",
         "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "011230",
+          "n": "삼화전자공업",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1200463000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "t": "009470",
+          "n": "삼화전기",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 10462032000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 매입, 특수관계자거래"
+        }
+      ],
       "down": []
     }
   }

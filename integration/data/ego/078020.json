@@ -13,11 +13,30 @@
         "dir": "in",
         "s": "유통",
         "tier": "dot"
+      },
+      {
+        "t": "000500",
+        "n": "가온전선",
+        "type": "dart_filing",
+        "detail": "대규모기업집단",
+        "dir": "in",
+        "s": "전기전자부품",
+        "tier": "named400"
       }
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "t": "060370",
+          "n": "LS마린솔루션",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 120000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입, 특수관계자거래"
+        }
+      ]
     }
   }
 }

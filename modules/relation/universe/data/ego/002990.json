@@ -8,8 +8,8 @@
       {
         "t": "020560",
         "n": "아시아나항공",
-        "type": "associate",
-        "detail": "31.0%",
+        "type": "investment",
+        "detail": "11.0%",
         "dir": "out",
         "s": "운송·물류",
         "tier": "named400"
@@ -43,9 +43,64 @@
           "amount": 49100000000.0,
           "as_of": 2024,
           "prov": "단일판매ㆍ공급계약체결 · 금호건설(주)"
+        },
+        {
+          "t": "000120",
+          "n": "CJ대한통운",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 366061000.0,
+          "as_of": 2023,
+          "prov": "특수관계자와의 거래 · 매출 등"
+        },
+        {
+          "t": "001040",
+          "n": "CJ",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 139577000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출 등"
+        },
+        {
+          "t": "097950",
+          "n": "CJ제일제당",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1495000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
         }
       ],
-      "down": []
+      "down": [
+        {
+          "t": "000120",
+          "n": "CJ대한통운",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 206143000.0,
+          "as_of": 2023,
+          "prov": "특수관계자와의 거래 · 매입 등"
+        },
+        {
+          "t": "001040",
+          "n": "CJ",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 5592118000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입 등"
+        },
+        {
+          "t": "097950",
+          "n": "CJ제일제당",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 5592118000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입"
+        }
+      ]
     }
   }
 }

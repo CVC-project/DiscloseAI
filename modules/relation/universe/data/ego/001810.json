@@ -13,11 +13,40 @@
         "dir": "out",
         "s": "소재",
         "tier": "dot"
+      },
+      {
+        "t": "009200",
+        "n": "무림페이퍼",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out",
+        "s": "소재",
+        "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "009200",
+          "n": "무림페이퍼",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1500079000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등"
+        }
+      ],
+      "down": [
+        {
+          "t": "009200",
+          "n": "무림페이퍼",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2271375000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        }
+      ]
     }
   }
 }

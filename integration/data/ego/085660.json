@@ -9,7 +9,7 @@
         "t": "058820",
         "n": "CMG제약",
         "type": "associate",
-        "detail": "25.84%",
+        "detail": "24.38%",
         "dir": "out",
         "s": "제약바이오",
         "tier": "dot"
@@ -18,7 +18,7 @@
         "t": "261780",
         "n": "아리바이오LAB",
         "type": "associate",
-        "detail": "38.36%",
+        "detail": "38.3%",
         "dir": "out",
         "s": "지주",
         "tier": "dot"
@@ -27,14 +27,33 @@
         "t": "476040",
         "n": "오가노이드사이언스",
         "type": "investment",
-        "detail": "9.27%",
+        "detail": "7.42%",
         "dir": "out",
         "s": "지주",
+        "tier": "dot"
+      },
+      {
+        "t": "058820",
+        "n": "CMG제약",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "in",
+        "s": "제약바이오",
         "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "058820",
+          "n": "CMG제약",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 88174530.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출액"
+        }
+      ],
       "down": []
     }
   }

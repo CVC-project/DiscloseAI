@@ -9,14 +9,33 @@
         "t": "005720",
         "n": "넥센",
         "type": "associate",
-        "detail": "44.95%",
+        "detail": "46.48%",
         "dir": "in",
         "s": "소재",
         "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "005720",
+          "n": "넥센",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 126000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입거래 등, 특수관계자거래"
+        },
+        {
+          "t": "058400",
+          "n": "KNN",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1294365000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입거래 등, 특수관계자거래"
+        }
+      ],
       "down": []
     }
   }

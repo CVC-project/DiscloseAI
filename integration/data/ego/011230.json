@@ -9,7 +9,7 @@
         "t": "009470",
         "n": "삼화전기",
         "type": "investment",
-        "detail": "7.72%",
+        "detail": "11.24%",
         "dir": "in",
         "s": "반도체",
         "tier": "dot"
@@ -17,8 +17,8 @@
       {
         "t": "001820",
         "n": "삼화콘덴서공업",
-        "type": "investment",
-        "detail": "17.78%",
+        "type": "associate",
+        "detail": "23.06%",
         "dir": "in",
         "s": "반도체",
         "tier": "dot"
@@ -26,7 +26,17 @@
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "t": "001820",
+          "n": "삼화콘덴서공업",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1200463000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 매입, 특수관계자거래"
+        }
+      ]
     }
   }
 }

@@ -58,11 +58,76 @@
         "dir": "out",
         "s": "제약바이오",
         "tier": "dot"
+      },
+      {
+        "t": "340450",
+        "n": "지씨지놈",
+        "type": "investment",
+        "detail": "9.54%",
+        "dir": "out",
+        "s": "전문서비스",
+        "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "0082N0",
+          "n": "카나프테라퓨틱스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1500000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입 등"
+        },
+        {
+          "t": "340450",
+          "n": "지씨지놈",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 258000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입 등"
+        },
+        {
+          "t": "006280",
+          "n": "녹십자",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 525000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매출 등"
+        }
+      ],
+      "down": [
+        {
+          "t": "340450",
+          "n": "지씨지놈",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 909000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 등"
+        },
+        {
+          "t": "006280",
+          "n": "녹십자",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 33726000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매입 등"
+        },
+        {
+          "t": "144510",
+          "n": "지씨셀",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 5135642000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등"
+        }
+      ]
     }
   }
 }

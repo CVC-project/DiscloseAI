@@ -13,11 +13,40 @@
         "dir": "in",
         "s": "반도체",
         "tier": "named400"
+      },
+      {
+        "t": "036810",
+        "n": "에프에스티",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "in",
+        "s": "반도체",
+        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "036810",
+          "n": "에프에스티",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1286192000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        }
+      ],
+      "down": [
+        {
+          "t": "036810",
+          "n": "에프에스티",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 62162000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등"
+        }
+      ]
     }
   }
 }

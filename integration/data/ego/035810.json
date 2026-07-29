@@ -8,8 +8,8 @@
       {
         "t": "353810",
         "n": "이지바이오",
-        "type": "associate",
-        "detail": "48.53%",
+        "type": "subsidiary",
+        "detail": "50.16%",
         "dir": "out",
         "s": "식음료",
         "tier": "dot"
@@ -26,8 +26,8 @@
       {
         "t": "073560",
         "n": "우리손에프앤지",
-        "type": "associate",
-        "detail": "47.03%",
+        "type": "subsidiary",
+        "detail": "50.05%",
         "dir": "out",
         "s": "식음료",
         "tier": "dot"
@@ -54,7 +54,7 @@
         "t": "027710",
         "n": "팜스토리",
         "type": "associate",
-        "detail": "45.66%",
+        "detail": "49.0%",
         "dir": "out",
         "s": "식음료",
         "tier": "dot"
@@ -63,7 +63,7 @@
         "t": "208140",
         "n": "정다운",
         "type": "associate",
-        "detail": "49.5%",
+        "detail": "50.0%",
         "dir": "out",
         "s": "식음료",
         "tier": "dot"
@@ -72,15 +72,80 @@
         "t": "153710",
         "n": "옵티팜",
         "type": "associate",
-        "detail": "30.91%",
+        "detail": "35.0%",
         "dir": "out",
         "s": "제약바이오",
+        "tier": "dot"
+      },
+      {
+        "t": "353810",
+        "n": "이지바이오",
+        "type": "associate",
+        "detail": "50.0%",
+        "dir": "out",
+        "s": "식음료",
+        "tier": "dot"
+      },
+      {
+        "t": "027740",
+        "n": "마니커",
+        "type": "associate",
+        "detail": "30.0%",
+        "dir": "out",
+        "s": "식음료",
         "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "073560",
+          "n": "우리손에프앤지",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 968000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "t": "208140",
+          "n": "정다운",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 12399999.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "073560",
+          "n": "우리손에프앤지",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 225253681.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        },
+        {
+          "t": "208140",
+          "n": "정다운",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 5000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "t": "353810",
+          "n": "이지바이오",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 4925923720.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래내역 · 매입"
+        }
+      ]
     }
   }
 }

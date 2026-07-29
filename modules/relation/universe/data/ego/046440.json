@@ -9,15 +9,71 @@
         "t": "035600",
         "n": "KG이니시스",
         "type": "subsidiary",
-        "detail": "50.37%",
+        "detail": "51.45%",
         "dir": "in",
         "s": "플랫폼",
         "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "035600",
+          "n": "KG이니시스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 45861000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등 · 매입，특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "001390",
+          "n": "KG케미칼",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 18985000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등 · 매출，특수관계자거래"
+        },
+        {
+          "t": "035600",
+          "n": "KG이니시스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4502115000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등 · 매출，특수관계자거래"
+        },
+        {
+          "t": "151860",
+          "n": "KG에코솔루션",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 11338000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등 · 매출，특수관계자거래"
+        },
+        {
+          "t": "016380",
+          "n": "KG스틸",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 59558000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등 · 매출，특수관계자거래"
+        },
+        {
+          "t": "003620",
+          "n": "KG모빌리티",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 221989000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등 · 매출，특수관계자거래"
+        }
+      ]
     }
   }
 }

@@ -31,11 +31,94 @@
         "dir": "out",
         "s": "화학",
         "tier": "dot"
+      },
+      {
+        "t": "004800",
+        "n": "효성",
+        "type": "associate",
+        "detail": "21.0%",
+        "dir": "in",
+        "s": "금융",
+        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "004800",
+          "n": "효성",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 45635000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등(주1)"
+        },
+        {
+          "t": "298040",
+          "n": "효성중공업",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 8355000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등(주1)"
+        },
+        {
+          "t": "298050",
+          "n": "HS효성첨단소재",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 15279.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등(주1)"
+        },
+        {
+          "t": "487570",
+          "n": "HS효성",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 46199000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등(주1)"
+        }
+      ],
+      "down": [
+        {
+          "t": "004800",
+          "n": "효성",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 24000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등 (주1)"
+        },
+        {
+          "t": "298040",
+          "n": "효성중공업",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 9398000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등 (주1)"
+        },
+        {
+          "t": "298050",
+          "n": "HS효성첨단소재",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 288487.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등(주1)"
+        },
+        {
+          "t": "487570",
+          "n": "HS효성",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 79334000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등(주1)"
+        }
+      ]
     }
   }
 }

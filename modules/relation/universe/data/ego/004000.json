@@ -22,11 +22,76 @@
         "dir": "in",
         "s": "화학",
         "tier": "named400"
+      },
+      {
+        "t": "011170",
+        "n": "롯데케미칼",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "out",
+        "s": "화학",
+        "tier": "named400"
+      },
+      {
+        "t": "336370",
+        "n": "솔루스첨단소재",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out",
+        "s": "반도체",
+        "tier": "dot"
+      },
+      {
+        "t": "004990",
+        "n": "롯데지주",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out",
+        "s": "금융",
+        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "011170",
+          "n": "롯데케미칼",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 38340121000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입"
+        },
+        {
+          "t": "004990",
+          "n": "롯데지주",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 18717000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        }
+      ],
+      "down": [
+        {
+          "t": "011170",
+          "n": "롯데케미칼",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 11136286000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        },
+        {
+          "t": "004990",
+          "n": "롯데지주",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 337000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입"
+        }
+      ]
     }
   }
 }
