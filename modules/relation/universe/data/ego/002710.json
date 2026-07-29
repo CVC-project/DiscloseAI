@@ -13,11 +13,196 @@
         "dir": "out",
         "s": "철강·금속",
         "tier": "dot"
+      },
+      {
+        "n": "T A C",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜TCC강판",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜TCC개발",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜TCC한진",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜TCC아이엔에스",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "63.51%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜제주메이리조트",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "58.82%",
+        "dir": "out"
+      },
+      {
+        "n": "TCC엔지니어링㈜",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "40.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜TCC메탈",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "35.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜우노메탈",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "19.97%",
+        "dir": "out"
+      },
+      {
+        "n": "TCC로지스㈜",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "19.75%",
+        "dir": "out"
+      },
+      {
+        "n": "손봉락",
+        "kind": "person",
+        "type": "investment",
+        "detail": "11.2%",
+        "dir": "in"
+      },
+      {
+        "n": "㈜TCC통상",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "9.89%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜원알로이",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "9.08%",
+        "dir": "out"
+      },
+      {
+        "n": "손기영",
+        "kind": "person",
+        "type": "investment",
+        "detail": "7.43%",
+        "dir": "in"
+      },
+      {
+        "n": "오제이씨㈜",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "6.11%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜오제이씨커머스",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "6.1%",
+        "dir": "out"
+      },
+      {
+        "n": "Ohio Coatings Co.",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      },
+      {
+        "n": "㈜원알로이",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "㈜티씨씨통상",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      },
+      {
+        "n": "대표이사",
+        "kind": "person",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "out"
+      },
+      {
+        "n": "티씨씨로지스㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "Ohio Coatings Co.",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 58127154360.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등, 특수관계자거래"
+        },
+        {
+          "n": "㈜티씨씨통상",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 22981300241.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "Ohio Coatings Co.",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 117971273034.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등, 특수관계자거래"
+        },
+        {
+          "n": "㈜티씨씨통상",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 5672233894.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등, 특수관계자거래"
+        }
+      ]
     }
   }
 }

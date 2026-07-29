@@ -58,6 +58,167 @@
         "dir": "out",
         "s": "자동차",
         "tier": "dot"
+      },
+      {
+        "n": "DAEWON EUROPE CO., LTD.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "DAEWON INDIA AUTOPARTS\nPRIVATE LIMITED",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "DAEWON SPRING & SEAT LLC.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "DAEWON MEXICO, S. DE R.L. DE C.V",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "86.55%",
+        "dir": "out"
+      },
+      {
+        "n": "DAEWON AMERICA,\n  INC.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "82.05%",
+        "dir": "out"
+      },
+      {
+        "n": "DAEWON AMERICA, INC.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "82.05%",
+        "dir": "out"
+      },
+      {
+        "n": "대원정밀공업",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "59.38%",
+        "dir": "out"
+      },
+      {
+        "n": "콘티테크대원에어 스프링시스템즈(유)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "49.0%",
+        "dir": "out"
+      },
+      {
+        "n": "강소대원아시아기차탄황유한공사",
+        "kind": "public_org",
+        "type": "associate",
+        "detail": "30.0%",
+        "dir": "out"
+      },
+      {
+        "n": "강소미력대원탄황유한공사(*5)(*6)",
+        "kind": "public_org",
+        "type": "associate",
+        "detail": "30.0%",
+        "dir": "out"
+      },
+      {
+        "n": "북경대원아시아기차과기유한공사",
+        "kind": "public_org",
+        "type": "associate",
+        "detail": "30.0%",
+        "dir": "out"
+      },
+      {
+        "n": "북경미력대원탄황유한공사(*3)(*4)",
+        "kind": "public_org",
+        "type": "associate",
+        "detail": "30.0%",
+        "dir": "out"
+      },
+      {
+        "n": "대원제강(주)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "28.73%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)현대지에프홀딩스\n(분할 전 회사명:\n(주)현대그린푸드)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "22.7%",
+        "dir": "in"
+      },
+      {
+        "n": "(주)현대지에프홀딩스\n(분할 전 회사명:\n(주)현대그린푸드)\n(1)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "22.7%",
+        "dir": "in"
+      },
+      {
+        "n": "강소미력대원아시아\n 기차탄황유한공사",
+        "kind": "public_org",
+        "type": "investment",
+        "detail": "19.9%",
+        "dir": "out"
+      },
+      {
+        "n": "북경미력대원아시아\n 기차과기유한공사",
+        "kind": "public_org",
+        "type": "investment",
+        "detail": "19.9%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)대코",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "14.29%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)대원총업",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "11.38%",
+        "dir": "out"
+      },
+      {
+        "n": "허재철\n(1)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "9.38%",
+        "dir": "in"
+      },
+      {
+        "n": "(주)현대홈쇼핑",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "7.67%",
+        "dir": "in"
+      },
+      {
+        "n": "(주)현대홈쇼핑\n(2)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "7.67%",
+        "dir": "in"
+      },
+      {
+        "n": "허승호\n(11)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "5.72%",
+        "dir": "in"
       }
     ],
     "valuechain": {
@@ -88,9 +249,46 @@
           "amount": 2116157000.0,
           "as_of": 2025,
           "prov": "특수관계자 공시 · 매출"
+        },
+        {
+          "n": "콘티테크대원",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 5138533000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
         }
       ],
-      "down": []
+      "down": [
+        {
+          "n": "콘티테크대원",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2081456000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "강소미력대원",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 826565000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "북경미력대원",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 480801000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

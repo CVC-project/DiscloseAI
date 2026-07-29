@@ -4,102 +4,133 @@
   "s": "기계·장비",
   "tier": "named400",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "HD CE Africa Co., Ltd.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "HD Hyundai (China) Investment Co., Ltd.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "HD Hyundai Construction\nEquipment Europe N.V.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "HD Hyundai Construction\nEquipment India Private. Ltd.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "HD Hyundai Construction\nEquipment North America Inc.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "HD Hyundai Construction Equipment Brasil\n - Manufacturing and Trading of Construction Equipment S.A",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Hyundai Construction \nEquipment Americas, Inc.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Hyundai Construction \nEquipment Europe N.V.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Hyundai Construction \nEquipment India Private. Ltd.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Hyundai Construction Equipment Brasil\n       - Manufacturing and Trading of Construction Equipment S.A",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Hyundai Heavy Industries Brasil-Manufacturing and Trading of Construction Equipment (비상장)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "현대중공(중국)투자유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "PT HD Hyundai Construction Equipment Indonesia",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "69.97%",
+        "dir": "out"
+      },
+      {
+        "n": "PT. Hyundai Construction Equipment Asia",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "69.96%",
+        "dir": "out"
+      },
+      {
+        "n": "HD현대사이트솔루션㈜",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "37.59%",
+        "dir": "in"
+      },
+      {
+        "n": "현대제뉴인㈜",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "33.12%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
       "up": [
         {
-          "t": "009540",
-          "n": "HD한국조선해양",
+          "n": "공시금액",
+          "kind": "person",
           "type": "supply",
           "tier_grade": "T1",
-          "amount": 961000000.0,
-          "as_of": 2024,
-          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
-        },
-        {
-          "t": "329180",
-          "n": "HD현대중공업",
-          "type": "supply",
-          "tier_grade": "T1",
-          "amount": 8608000000.0,
-          "as_of": 2024,
-          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
-        },
-        {
-          "t": "267260",
-          "n": "HD현대일렉트릭",
-          "type": "supply",
-          "tier_grade": "T1",
-          "amount": 210000000.0,
-          "as_of": 2024,
-          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
-        },
-        {
-          "t": "322000",
-          "n": "HD현대에너지솔루션",
-          "type": "supply",
-          "tier_grade": "T1",
-          "amount": 663000000.0,
-          "as_of": 2024,
-          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+          "amount": 3538000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입거래에 포함된 지급리스료"
         }
       ],
-      "down": [
-        {
-          "t": "267250",
-          "n": "HD현대",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 130000000.0,
-          "as_of": 2024,
-          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래(*)"
-        },
-        {
-          "t": "009540",
-          "n": "HD한국조선해양",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 1034000000.0,
-          "as_of": 2024,
-          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래(*)"
-        },
-        {
-          "t": "329180",
-          "n": "HD현대중공업",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 2924000000.0,
-          "as_of": 2024,
-          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래(*)"
-        },
-        {
-          "t": "267260",
-          "n": "HD현대일렉트릭",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 44000000.0,
-          "as_of": 2024,
-          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래(*)"
-        },
-        {
-          "t": "443060",
-          "n": "HD현대마린솔루션",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 387000000.0,
-          "as_of": 2024,
-          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래(*)"
-        },
-        {
-          "t": "322000",
-          "n": "HD현대에너지솔루션",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 242000000.0,
-          "as_of": 2024,
-          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래(*)"
-        }
-      ]
+      "down": []
     }
   }
 }

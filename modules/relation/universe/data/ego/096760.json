@@ -31,6 +31,127 @@
         "dir": "in",
         "s": "제약바이오",
         "tier": "dot"
+      },
+      {
+        "t": "318060",
+        "n": "그래피",
+        "type": "investment",
+        "detail": "7.35%",
+        "dir": "out",
+        "s": "화학",
+        "tier": "dot"
+      },
+      {
+        "n": "Core Hamony INC\n(비상장)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "JW Healthcare\nPhilippines\n(비상장)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "JW Healthcare\nVietnam\n(비상장)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "JW메디칼\n(비상장)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "JW생활건강\n(비상장)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)JW이노스퀘어PFV\n(비상장)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "47.37%",
+        "dir": "out"
+      },
+      {
+        "n": "JW생명과학\n(유가증권시장상장)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "42.98%",
+        "dir": "out"
+      },
+      {
+        "n": "JW중외제약\n보통주\n(유가증권시장상장)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "40.16%",
+        "dir": "out"
+      },
+      {
+        "n": "JW신약\n(코스닥시장상장)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "30.72%",
+        "dir": "out"
+      },
+      {
+        "n": "코람코전문투자형\n사모부동산투자신탁\n제78호\n(비상장)",
+        "kind": "coop_fund",
+        "type": "associate",
+        "detail": "30.44%",
+        "dir": "out"
+      },
+      {
+        "n": "이경하",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "28.43%",
+        "dir": "in"
+      },
+      {
+        "n": "제이더블유이종호재단",
+        "kind": "public_org",
+        "type": "investment",
+        "detail": "7.48%",
+        "dir": "in"
+      },
+      {
+        "n": "중외학술복지재단",
+        "kind": "public_org",
+        "type": "investment",
+        "detail": "7.47%",
+        "dir": "in"
+      },
+      {
+        "n": "(주)생명누리",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "7.0%",
+        "dir": "out"
+      },
+      {
+        "n": "JW중외제약\n2우선주\n(유가증권시장상장)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "6.97%",
+        "dir": "out"
+      },
+      {
+        "n": "디알텍\n(코스닥시장상장)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "5.13%",
+        "dir": "out"
       }
     ],
     "valuechain": {
@@ -43,9 +164,46 @@
           "amount": 15041704000.0,
           "as_of": 2025,
           "prov": "특수관계자 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "㈜중외정보기술",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 9141504000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "재단법인 제이더블유이종호재단",
+          "kind": "public_org",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 11451000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 매입, 특수관계자거래"
         }
       ],
-      "down": []
+      "down": [
+        {
+          "n": "재단법인 제이더블유이종호재단",
+          "kind": "public_org",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 433038000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "㈜중외정보기술",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 48315000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

@@ -4,10 +4,117 @@
   "s": "철강·금속",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "에이스스틸",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "진방스틸",
+        "kind": "person",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "진방스틸재팬",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "한국강재",
+        "kind": "person",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "엔프라니",
+        "kind": "person",
+        "type": "subsidiary",
+        "detail": "79.7%",
+        "dir": "out"
+      },
+      {
+        "n": "부산MBC",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "18.5%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)마천캐스트",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "15.2%",
+        "dir": "in"
+      },
+      {
+        "n": "(재)김전",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "9.81%",
+        "dir": "in"
+      },
+      {
+        "n": "김길출",
+        "kind": "person",
+        "type": "investment",
+        "detail": "9.64%",
+        "dir": "in"
+      },
+      {
+        "n": "김태형",
+        "kind": "person",
+        "type": "investment",
+        "detail": "8.29%",
+        "dir": "in"
+      },
+      {
+        "n": "동양야금공업(주)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "5.44%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "(주)마천캐스트",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 11604274000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등"
+        },
+        {
+          "n": "동양야금공업(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2141710000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등"
+        }
+      ],
+      "down": [
+        {
+          "n": "(주)마천캐스트",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 57523000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        }
+      ]
     }
   }
 }

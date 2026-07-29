@@ -4,9 +4,78 @@
   "s": "레저·교육",
   "tier": "named400",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "㈜하이원엔터테인먼트",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜하이원파트너스",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜하이원추추파크",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "99.64%",
+        "dir": "out"
+      },
+      {
+        "n": "한국광해광업공단",
+        "kind": "public_org",
+        "type": "associate",
+        "detail": "36.27%",
+        "dir": "in"
+      },
+      {
+        "n": "㈜키즈라라",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "30.54%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜문경레저타운",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "27.27%",
+        "dir": "out"
+      },
+      {
+        "n": "블랙밸리C.C.㈜",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "16.55%",
+        "dir": "out"
+      }
+    ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "n": "㈜키즈라라",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 45454536.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입 등"
+        },
+        {
+          "n": "㈜문경레저타운",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 10909092.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입 등"
+        }
+      ],
       "down": []
     }
   }

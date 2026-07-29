@@ -4,10 +4,105 @@
   "s": "기타",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "㈜썰타코리아",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜스포츠토토코리아",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "38.0%",
+        "dir": "out"
+      },
+      {
+        "n": "골든틱스(주)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "38.0%",
+        "dir": "out"
+      },
+      {
+        "n": "안성호",
+        "kind": "person",
+        "type": "associate",
+        "detail": "34.56%",
+        "dir": "in"
+      },
+      {
+        "n": "안승환",
+        "kind": "person",
+        "type": "associate",
+        "detail": "20.0%",
+        "dir": "in"
+      },
+      {
+        "n": "안진환",
+        "kind": "person",
+        "type": "associate",
+        "detail": "20.0%",
+        "dir": "in"
+      },
+      {
+        "n": "한국디엠비(주)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "7.0%",
+        "dir": "out"
+      },
+      {
+        "n": "안유수",
+        "kind": "person",
+        "type": "investment",
+        "detail": "5.0%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "후렉스코리아",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1201910000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "㈜리오벨라",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1009071000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "후렉스코리아",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 32401000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "㈜리오벨라",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 8400000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

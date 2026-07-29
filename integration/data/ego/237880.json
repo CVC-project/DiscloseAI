@@ -4,10 +4,91 @@
   "s": "화장품",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "주식회사 클리오 재팬",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "주식회사 키와미",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "클리오(상해)화장품\n유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "주식회사\n클리오라이프케어",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "62.5%",
+        "dir": "out"
+      },
+      {
+        "n": "한현옥",
+        "kind": "person",
+        "type": "associate",
+        "detail": "48.57%",
+        "dir": "in"
+      },
+      {
+        "n": "광주공야클리오화장품유한회사",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "40.0%",
+        "dir": "out"
+      },
+      {
+        "n": "주식회사 이피엔스",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "12.2%",
+        "dir": "out"
+      },
+      {
+        "n": "홍명하",
+        "kind": "person",
+        "type": "investment",
+        "detail": "11.81%",
+        "dir": "in"
+      },
+      {
+        "n": "광주공야클리오화장품유한회사",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      },
+      {
+        "n": "한현옥",
+        "kind": "person",
+        "type": "dart_filing",
+        "detail": "최상위지배자",
+        "dir": "out"
+      }
+    ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "광주공야클리오화장품유한회사",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 687819000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

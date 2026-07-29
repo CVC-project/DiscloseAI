@@ -31,6 +31,83 @@
         "dir": "out",
         "s": "철강·금속",
         "tier": "dot"
+      },
+      {
+        "n": "DK AMERICA., INC.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "동국산업(상해)\n무역 유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "주식회사동국산업재팬",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "디케이동신㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "82.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜동국에스엔씨",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "50.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜불이",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "45.0%",
+        "dir": "out"
+      },
+      {
+        "n": "장세희",
+        "kind": "person",
+        "type": "associate",
+        "detail": "26.91%",
+        "dir": "in"
+      },
+      {
+        "n": "장상건",
+        "kind": "person",
+        "type": "investment",
+        "detail": "7.04%",
+        "dir": "in"
+      },
+      {
+        "n": "㈜동국R&S",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "7.0%",
+        "dir": "out"
+      },
+      {
+        "n": "240,415",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "임직원 및 우리사주조합",
+        "dir": "out"
+      },
+      {
+        "n": "245,080",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "임직원 및 우리사주조합",
+        "dir": "out"
       }
     ],
     "valuechain": {
@@ -52,9 +129,73 @@
           "amount": 310940000.0,
           "as_of": 2025,
           "prov": "특수관계자 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "(주)동연에스엔티",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2134682000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "㈜불이",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1152028000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "경주풍력발전(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 29300000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
         }
       ],
-      "down": []
+      "down": [
+        {
+          "n": "경주풍력발전(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 570926000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "㈜불이",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 169380000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "(주)동연에스엔티",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 31239000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "재단법인 불이원",
+          "kind": "public_org",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4560000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        }
+      ]
     }
   }
 }

@@ -67,10 +67,83 @@
         "dir": "out",
         "s": "기계·장비",
         "tier": "dot"
+      },
+      {
+        "n": "하이엑시움모터스㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "두산중공업㈜",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "12.47%",
+        "dir": "in"
+      },
+      {
+        "n": "대산그린에너지㈜",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "10.0%",
+        "dir": "out"
+      },
+      {
+        "n": "두산연강재단",
+        "kind": "public_org",
+        "type": "investment",
+        "detail": "7.4%",
+        "dir": "in"
+      },
+      {
+        "n": "대산그린에너지㈜한화 클린수소에너지 일반사모특별자산투자신탁1호(*1)",
+        "kind": "coop_fund",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      },
+      {
+        "n": "두산건설㈜, 삼척블루파워㈜ 등",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "out"
+      },
+      {
+        "n": "두산건설㈜, 삼척블루파워㈜, 하이창원㈜ 등",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "out"
+      },
+      {
+        "n": "두산큐벡스㈜, 두산밥캣㈜ 및 그의 종속회사 등",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "out"
+      },
+      {
+        "n": "중앙대학교, 중앙대학교병원, (재)두산연강재단 등",
+        "kind": "public_org",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "n": "임차료",
+          "kind": "person",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 109444000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등"
+        }
+      ],
       "down": []
     }
   }

@@ -4,10 +4,171 @@
   "s": "기계·장비",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "(주)루트",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)지엠티",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)티와이엠아이씨티",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "BRANSON Machinery, LLC",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "TYM EUROPE B.V.(*)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "TYM North America, Inc.(*)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "TYM-North America, Inc.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "TYM-USA Inc.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "국제종합기계(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "72.88%",
+        "dir": "out"
+      },
+      {
+        "n": "안휘국제경전기계(유)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "51.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)케이에이엠홀딩스",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "27.12%",
+        "dir": "out"
+      },
+      {
+        "n": "김   식",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "22.09%",
+        "dir": "in"
+      },
+      {
+        "n": "셀파씨엔씨(주)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "16.46%",
+        "dir": "out"
+      },
+      {
+        "n": "세일공업(주)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "10.59%",
+        "dir": "out"
+      },
+      {
+        "n": "김희용",
+        "kind": "person",
+        "type": "investment",
+        "detail": "9.62%",
+        "dir": "in"
+      },
+      {
+        "n": "(주)아크도",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "9.09%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)아크플래닛",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "9.09%",
+        "dir": "out"
+      },
+      {
+        "n": "엔티게임즈",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "7.37%",
+        "dir": "out"
+      },
+      {
+        "n": "한빛인베스트먼트",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "7.2%",
+        "dir": "out"
+      },
+      {
+        "n": "김태식",
+        "kind": "person",
+        "type": "investment",
+        "detail": "5.81%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "세일공업(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 12457034000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "세일공업(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 13155000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

@@ -4,10 +4,207 @@
   "s": "유통",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "NOODLE J1, INC",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "THE BORN AMERICA INC.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "THE BORN JAPAN Co., Ltd.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜디에스아이시스템",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜성림쓰리에이통상",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜쿡솔루션",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜티엠씨엔터",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜푸드인큐",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "청도더본음식문화유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "백종원",
+        "kind": "person",
+        "type": "subsidiary",
+        "detail": "59.5%",
+        "dir": "in"
+      },
+      {
+        "n": "위한더본국제무역유한공사",
+        "kind": "public_org",
+        "type": "associate",
+        "detail": "25.0%",
+        "dir": "out"
+      },
+      {
+        "n": "농업회사법인 ㈜시트러스",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "22.0%",
+        "dir": "out"
+      },
+      {
+        "n": "강석원",
+        "kind": "person",
+        "type": "investment",
+        "detail": "14.1%",
+        "dir": "in"
+      },
+      {
+        "n": "-(주1)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      },
+      {
+        "n": "㈜백술상회",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "㈜지니도가",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "㈜피앤홀딩스",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "농업회사법인 ㈜시트러스",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      },
+      {
+        "n": "농업회사법인 백술도가㈜(구, 농업회사법인 ㈜예산도가)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "농업회사법인 주로㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "농업회사법인 백술도가㈜(구, 농업회사법인 ㈜예산도가)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 142579000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "농업회사법인 ㈜시트러스",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 12327000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "㈜피앤홀딩스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 106866000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "㈜백술상회",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 57324000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "농업회사법인 백술도가㈜(구, 농업회사법인 ㈜예산도가)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 200000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "㈜지니도가",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 144000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

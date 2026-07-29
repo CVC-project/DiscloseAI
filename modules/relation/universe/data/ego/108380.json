@@ -4,9 +4,52 @@
   "s": "중공업·방산",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "한국특수전지(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "서영우",
+        "kind": "person",
+        "type": "subsidiary",
+        "detail": "59.34%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "n": "(주)대양계기",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1136700000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "(주)데코",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 196477428.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "(주)대양전장",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 22101600.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        }
+      ],
       "down": [
         {
           "t": "272210",
@@ -16,6 +59,15 @@
           "amount": 19136160000.0,
           "as_of": 2023,
           "prov": "단일판매ㆍ공급계약체결 · 한화시스템(주)"
+        },
+        {
+          "n": "(주)대양전장",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 9252831039.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
         }
       ]
     }

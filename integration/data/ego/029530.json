@@ -4,10 +4,138 @@
   "s": "반도체",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "SINDOH VINA",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "SINDOH VINA\nMARKETING",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "SINDOH(HONG\nKONG)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "sindoh japan",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "sindoh property japan",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "신도(청도)전자\n유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "신도(청도)판공시통유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "신도디엑스",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "신도에이스",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "신도SDR",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "22.63%",
+        "dir": "in"
+      },
+      {
+        "n": "신도에스디알",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "22.63%",
+        "dir": "in"
+      },
+      {
+        "n": "우석형",
+        "kind": "person",
+        "type": "investment",
+        "detail": "11.78%",
+        "dir": "in"
+      },
+      {
+        "n": "우자형",
+        "kind": "person",
+        "type": "investment",
+        "detail": "6.41%",
+        "dir": "in"
+      },
+      {
+        "n": "신도시스템",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "6.05%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "(주)휴스템",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1630000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "n": "(주)휴스템",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 11500000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        },
+        {
+          "n": "신도SDR",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 400000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        }
+      ]
     }
   }
 }

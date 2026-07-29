@@ -13,6 +13,55 @@
         "dir": "in",
         "s": "자동차",
         "tier": "dot"
+      },
+      {
+        "n": "ECOPLASTIC\nAmerica",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "ECOPLASTIC\nAutomotive\nAmerica",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "아이아",
+        "kind": "person",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "진원",
+        "kind": "person",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "코모스",
+        "kind": "person",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "DH오토모티브",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "30.0%",
+        "dir": "out"
+      },
+      {
+        "n": "동호오토모티브",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "30.0%",
+        "dir": "out"
       }
     ],
     "valuechain": {
@@ -25,6 +74,33 @@
           "amount": 5149831000.0,
           "as_of": 2025,
           "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "(주)연합",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3612493000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "(유)두리",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 266847000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "서진산업(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
         }
       ],
       "down": [
@@ -34,6 +110,24 @@
           "type": "customer",
           "tier_grade": "T1",
           "amount": 683945000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "서진산업(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1179634000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "(주)서진캠",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 247152000.0,
           "as_of": 2025,
           "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
         }

@@ -49,10 +49,174 @@
         "dir": "in",
         "s": "화학",
         "tier": "dot"
+      },
+      {
+        "n": "KLBV1 S.A",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "60.0%",
+        "dir": "out"
+      },
+      {
+        "n": "코리아엘엔지트레이딩",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "36.0%",
+        "dir": "out"
+      },
+      {
+        "n": "경남기업㈜",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "28.24%",
+        "dir": "out"
+      },
+      {
+        "n": "세계로선박금융㈜",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "26.36%",
+        "dir": "out"
+      },
+      {
+        "n": "에스엠상선㈜",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "23.58%",
+        "dir": "in"
+      },
+      {
+        "n": "㈜우방",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "21.38%",
+        "dir": "in"
+      },
+      {
+        "n": "화천병영사랑㈜",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "20.9%",
+        "dir": "out"
+      },
+      {
+        "n": "에스엠하이플러스㈜",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "20.56%",
+        "dir": "in"
+      },
+      {
+        "n": "㈜케이엘홀딩스",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "15.74%",
+        "dir": "in"
+      },
+      {
+        "n": "통영예선",
+        "kind": "person",
+        "type": "investment",
+        "detail": "14.5%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜대양해군",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "8.13%",
+        "dir": "out"
+      },
+      {
+        "n": "양구관사관리㈜",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "7.28%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜삼라",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "최상위 지배기업",
+        "dir": "out"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "n": "㈜우방",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 14581935000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "동아건설산업 ㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 186192000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "에스엠상선㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 85451000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "코리아엘엔지트레이딩",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 56572000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "에스엠하이플러스㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 14242000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "삼환기업(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3950000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "호텔탑스텐 주식회사",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3549000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "탑스텐빌라드애월제주",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1833000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        }
+      ],
       "down": [
         {
           "t": "008350",
@@ -71,6 +235,60 @@
           "amount": 168785000.0,
           "as_of": 2025,
           "prov": "특수관계자 등과의 거래 · 매입 등"
+        },
+        {
+          "n": "코리아엘엔지트레이딩",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 69732302000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "에스엠상선㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 11442925000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "KLBV1 S.A.",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3178078000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "에스엠하이플러스㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 131460000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "에스엠신용정보㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 59904000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "㈜에스엠바로코사부산",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 48000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출, 특수관계자거래"
         }
       ]
     }

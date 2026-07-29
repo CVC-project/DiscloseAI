@@ -22,11 +22,108 @@
         "dir": "out",
         "s": "소재",
         "tier": "dot"
+      },
+      {
+        "n": "(주)한텍\n(국내 - 비상장)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "소주후성화공유한공사\n(중국 - 비상장)",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "후성글로벌(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)한텍\n(국내 - 상장)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "66.3%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)에프씨스페셜티",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "51.0%",
+        "dir": "out"
+      },
+      {
+        "n": "김용민",
+        "kind": "person",
+        "type": "associate",
+        "detail": "20.85%",
+        "dir": "in"
+      },
+      {
+        "n": "한국내화(주)\n(국내 - 상장)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "16.31%",
+        "dir": "out"
+      },
+      {
+        "n": "후성정공(주)\n(국내 - 비상장)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "11.72%",
+        "dir": "out"
+      },
+      {
+        "n": "김근수",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "11.69%",
+        "dir": "in"
+      },
+      {
+        "n": "후성홀딩스(주)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "11.33%",
+        "dir": "in"
+      },
+      {
+        "n": "후성HDS(주)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "6.68%",
+        "dir": "in"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "후성코퍼레이션(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 7915861000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "후성코퍼레이션(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 46938000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

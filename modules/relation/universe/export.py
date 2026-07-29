@@ -82,6 +82,11 @@ def _edge_detail(e) -> str:
     if e.group_name:
         return str(e.group_name).replace(":", " ")
     label = _normalize_filing_category(e.detail)
+    # ★U5: 구분 칸이 각주 기호뿐인 표가 있다(원문 '사업보고서 주석: (*3)') — 정규화하면
+    # 빈 문자열이 된다. FN-010의 교훈("폴백 사다리의 마지막 칸을 비워두지 말 것")대로
+    # 마지막 칸을 채운다. 이 엣지는 특수관계자 주석에서 왔다는 사실 자체가 정보다.
+    if not label and e.relation_type == "dart_filing":
+        label = "특수관계자"
     if GROUP_AGGREGATE_MARK in (e.detail or ""):
         label = f"{label} ({GROUP_AGGREGATE_MARK})".strip()
     return label
@@ -256,6 +261,28 @@ def export_companies_index_json(session, output_path: Path | None = None) -> lis
     return payload
 
 
+# ★U5: 비상장 이웃 상한 (앵커당·레이어당). 실측 최대 730건(키움증권 — 펀드·조합
+# 출자 다수)이라 상한이 없으면 ego 파일과 화면 팝오버가 모두 감당하지 못한다.
+# 화면 컷(TOP_N/SIDE_N)은 이 위에서 다시 걸리므로 여기는 "팝오버에서도 볼 수 있는
+# 최대치"를 정하는 자리 — p95가 54라 대부분 회사는 손실 없이 통과한다.
+UNLISTED_PER_EGO_CAP = 60
+
+
+def _unlisted_sort_key(item: dict):
+    """비상장 이웃 표시 우선순위 — 지분율 큰 순 → 이름.
+
+    지분율(`detail`이 'NN.N%')이 있으면 그 값이 관계의 크기이자 중요도다.
+    없는 관계(계열·주석)는 뒤로 보내고 이름 순으로 안정 정렬(재실행 diff 0 유지)."""
+    detail = item.get("detail") or ""
+    ratio = -1.0
+    if detail.endswith("%"):
+        try:
+            ratio = float(detail[:-1])
+        except ValueError:
+            ratio = -1.0
+    return (-ratio, item.get("n") or "")
+
+
 def _build_ego_payload(
     company: CompanyRegistry,
     gov_edges: list,
@@ -263,15 +290,35 @@ def _build_ego_payload(
     vc_down: list[ValueChainEdge],
     by_ticker: dict[str, CompanyRegistry],
     by_corp_code: dict[str, CompanyRegistry],
+    unlisted_nodes: dict | None = None,
 ) -> dict:
+    unlisted_nodes = unlisted_nodes or {}
     governance = []
+    unlisted_gov: list[dict] = []
     for e in gov_edges:
         is_source = e.source_corp == company.ticker
         neighbor_ticker = e.target_corp if is_source else e.source_corp
+        detail = _edge_detail(e)
+        # ★U5: 비상장·개인 이웃 — `t`(티커) 없이 이름·kind만 실어 보낸다.
+        # `t` 유무가 상장/비상장 판별자이며, companies_index 조회가 필요 없으므로
+        # 클릭 이동(re-root) 대상에서도 자연히 배제된다(UNLISTED_PLAN §5).
+        if neighbor_ticker.startswith("x_"):
+            node = unlisted_nodes.get(neighbor_ticker)
+            if not node:
+                continue
+            unlisted_gov.append(
+                {
+                    "n": node.name_raw,
+                    "kind": node.kind,
+                    "type": e.relation_type,
+                    "detail": detail,
+                    "dir": "out" if is_source else "in",
+                }
+            )
+            continue
         neighbor = by_ticker.get(neighbor_ticker)
         if not neighbor:
             continue
-        detail = _edge_detail(e)
         governance.append(
             {
                 "t": neighbor.ticker,
@@ -283,25 +330,37 @@ def _build_ego_payload(
                 "tier": neighbor.universe_tier or "dot",
             }
         )
+    # 상장 이웃 우선·비상장 후순위(UNLISTED_PLAN §6.1 컷 규칙). 상한 초과분은
+    # 화면 팝오버에서도 못 보므로 export에서 자른다 — 앵커당 최대 730건 실측(키움증권).
+    if unlisted_gov:
+        unlisted_gov.sort(key=_unlisted_sort_key)
+        governance.extend(unlisted_gov[:UNLISTED_PER_EGO_CAP])
 
     def _vc_side(edges: list[ValueChainEdge], other_attr: str) -> list[dict]:
-        out = []
+        out, unlisted = [], []
         for e in edges:
             other_code = getattr(e, other_attr)
+            base = {
+                "type": e.edge_type,
+                "tier_grade": e.tier,
+                "amount": e.amount,
+                "as_of": e.as_of,
+                "prov": e.provenance,
+            }
+            # ★U5: 비상장 상대 — `t` 없이 이름·kind만 (governance와 동일 계약)
+            if other_code.startswith("x_"):
+                node = unlisted_nodes.get(other_code)
+                if not node:
+                    continue
+                unlisted.append({"n": node.name_raw, "kind": node.kind, **base})
+                continue
             other = by_corp_code.get(other_code)
             if not other:
                 continue
-            out.append(
-                {
-                    "t": other.ticker,
-                    "n": other.name_current,
-                    "type": e.edge_type,
-                    "tier_grade": e.tier,
-                    "amount": e.amount,
-                    "as_of": e.as_of,
-                    "prov": e.provenance,
-                }
-            )
+            out.append({"t": other.ticker, "n": other.name_current, **base})
+        # 상장 우선·비상장 후순위 + 상한 (금액 큰 순 — 밸류체인의 중요도는 거래 규모)
+        unlisted.sort(key=lambda x: (-(x.get("amount") or 0), x.get("n") or ""))
+        out.extend(unlisted[:UNLISTED_PER_EGO_CAP])
         return out
 
     return {
@@ -327,6 +386,9 @@ def export_ego_files(session, output_dir: Path | None = None) -> dict:
     companies, by_ticker, by_corp_code = _load_all(session)
     ego_dir = output_dir or _EGO_DIR
     ego_dir.mkdir(parents=True, exist_ok=True)
+
+    from modules.relation.storage.models import UnlistedNode
+    unlisted_nodes = {u.uid: u for u in session.query(UnlistedNode).all()}
 
     gov_edges = latest_relation_local_edges(session)
     gov_by_ticker: dict[str, list] = defaultdict(list)
@@ -356,6 +418,7 @@ def export_ego_files(session, output_dir: Path | None = None) -> dict:
             vc_down_by_corp.get(c.corp_code, []),
             by_ticker,
             by_corp_code,
+            unlisted_nodes,
         )
         path = ego_dir / f"{c.ticker}.json"
         path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")

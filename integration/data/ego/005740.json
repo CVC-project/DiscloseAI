@@ -40,6 +40,48 @@
         "dir": "out",
         "s": "식음료",
         "tier": "dot"
+      },
+      {
+        "n": "(주)씨에이치테크",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)영그린",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)아트밸리",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "96.5%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)두라푸드",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "최대주주",
+        "dir": "out"
+      },
+      {
+        "n": "글리코해태(주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      },
+      {
+        "n": "해태가루비(주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
       }
     ],
     "valuechain": {
@@ -52,9 +94,64 @@
           "amount": 730841000.0,
           "as_of": 2025,
           "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "해태가루비(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 58282390000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "글리코해태(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 20111186000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "(주)두라푸드",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 12374764000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
         }
       ],
-      "down": []
+      "down": [
+        {
+          "n": "글리코해태(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 13820775000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "해태가루비(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 199179000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "(주)두라푸드",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 41409000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

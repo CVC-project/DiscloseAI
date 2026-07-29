@@ -196,9 +196,21 @@ def data_checks() -> list[dict]:
             if ":" in (e.get("detail") or ""):
                 fails.append({"check": "detail에 콜론 금지(rl-string 3분할 보호)",
                               "file": f.name, "edge": e.get("t")})
+            # ★U5(2026-07-29) 규칙 개정: 이웃은 이제 두 종류다 —
+            #   · `t` 있는 이웃 = 상장사 → companies_index에 존재해야 함(기존 계약)
+            #   · `t` 없는 이웃 = 비상장·개인 → ego 파일이 이름·kind를 자급하므로
+            #     index 조회 대상이 아니다(앵커-로컬, UNLISTED_PLAN §5).
+            # 불변식의 의도(dangling 참조 금지)는 유지하고 적용 범위만 좁힌다.
             if e.get("t") and e["t"] not in known:
                 fails.append({"check": "이웃 티커 참조 무결성(companies_index)",
                               "file": f.name, "edge": e.get("t")})
+            if not e.get("t"):
+                if not e.get("kind"):
+                    fails.append({"check": "U5: 비상장 이웃은 kind 필수",
+                                  "file": f.name, "edge": e.get("n")})
+                if not e.get("n"):
+                    fails.append({"check": "U5: 비상장 이웃은 표기(n) 필수",
+                                  "file": f.name, "edge": repr(e)[:60]})
     return [{"name": "data", "files": n_files, "dart_filing_edges": n_filing,
              "failures": fails, "ok": not fails}]
 

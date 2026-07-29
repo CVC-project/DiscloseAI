@@ -4,10 +4,98 @@
   "s": "기계·장비",
   "tier": "named400",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "GIGAVIS VIETNAM COMPANY LIMITED",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜디엠티",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "50.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜픽셀",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "50.0%",
+        "dir": "out"
+      },
+      {
+        "n": "김종준",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "18.05%",
+        "dir": "in"
+      },
+      {
+        "n": "강해철",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "13.85%",
+        "dir": "in"
+      },
+      {
+        "n": "오제환",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "12.52%",
+        "dir": "in"
+      },
+      {
+        "n": "이재곤",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "12.47%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "㈜디엠티",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1116092826.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등, 특수관계자거래"
+        },
+        {
+          "n": "㈜픽셀",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 938214862.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "㈜디엠티",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 243000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등, 특수관계자 거래"
+        },
+        {
+          "n": "㈜픽셀",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 43100000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등, 특수관계자 거래"
+        }
+      ]
     }
   }
 }

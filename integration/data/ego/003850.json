@@ -22,10 +22,134 @@
         "dir": "out",
         "s": "지주",
         "tier": "dot"
+      },
+      {
+        "n": "BORYUNG HONGKONG Ltd.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Boryung Inc.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "HAYAN HEALTH NETWORK Inc.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜보령컨슈머헬스케어",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "리큐온㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "북경보령의약과기유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "HAYAN I, L.P.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "98.0%",
+        "dir": "out"
+      },
+      {
+        "n": "보령디헬스커버리 합자조합1호",
+        "kind": "coop_fund",
+        "type": "subsidiary",
+        "detail": "93.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜브랙스스페이스",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "51.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜보령홀딩스",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "29.71%",
+        "dir": "in"
+      },
+      {
+        "n": "㈜보령파트너스",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "21.1%",
+        "dir": "in"
+      },
+      {
+        "n": "ExoRenal Inc.",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "19.0%",
+        "dir": "out"
+      },
+      {
+        "n": "금정프로젝트금융투자㈜",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "10.0%",
+        "dir": "out"
+      },
+      {
+        "n": "에이치피금정㈜",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "10.0%",
+        "dir": "out"
+      },
+      {
+        "n": "김은선",
+        "kind": "person",
+        "type": "investment",
+        "detail": "8.33%",
+        "dir": "in"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "n": "㈜위팩앤프린팅",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2934623000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        },
+        {
+          "n": "㈜지영피엘씨",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1292644000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        }
+      ],
       "down": [
         {
           "t": "308080",
@@ -33,6 +157,60 @@
           "type": "customer",
           "tier_grade": "T1",
           "amount": 57881000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "㈜보령홀딩스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 8232000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "㈜브랙스스페이스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3720000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "엘아이케이리얼티㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1650000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "㈜보령파트너스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1344000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "㈜신패스홀딩스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1344000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "사회복지법인 보령중보재단",
+          "kind": "public_org",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 476000.0,
           "as_of": 2025,
           "prov": "특수관계자 · 매출"
         }

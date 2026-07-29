@@ -4,10 +4,101 @@
   "s": "자동차",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "(주)이송",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "SCC\nVietnam",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "삼성다이나",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "삼성다이나에이치백",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "SCC\nMeters",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "94.6%",
+        "dir": "out"
+      },
+      {
+        "n": "태일테크",
+        "kind": "person",
+        "type": "subsidiary",
+        "detail": "70.0%",
+        "dir": "out"
+      },
+      {
+        "n": "PT.T S I",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "55.0%",
+        "dir": "out"
+      },
+      {
+        "n": "삼성발레오",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "50.0%",
+        "dir": "out"
+      },
+      {
+        "n": "고 호 곤",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "34.73%",
+        "dir": "in"
+      },
+      {
+        "n": "고 태 일",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "13.95%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "삼성발레오써멀시스템스(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 4636898993.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "삼성발레오써멀시스템스(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4318169783.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

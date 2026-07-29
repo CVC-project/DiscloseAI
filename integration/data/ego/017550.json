@@ -22,11 +22,70 @@
         "dir": "in",
         "s": "건설",
         "tier": "dot"
+      },
+      {
+        "n": "(주)수산씨에스엠",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "SOOSAN VINA MOTOR",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Soosan USA Inc.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "수산기계청도유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜두성특장차",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "34.0%",
+        "dir": "out"
+      },
+      {
+        "n": "SOOSAN AMERICA LLC",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "19.0%",
+        "dir": "out"
+      },
+      {
+        "n": "정석현",
+        "kind": "person",
+        "type": "investment",
+        "detail": "15.68%",
+        "dir": "in"
       }
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "SOOSAN AMERICA LLC",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 5500691759.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        }
+      ]
     }
   }
 }

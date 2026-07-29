@@ -4,10 +4,135 @@
   "s": "자동차",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "(주)씨티알에코포징",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜센트랄디티에스",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜신암(비상장)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "42.0%",
+        "dir": "out"
+      },
+      {
+        "n": "강상우",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "25.81%",
+        "dir": "in"
+      },
+      {
+        "n": "Central Automotive\nparts Northamerica\nSA DE CV(비상장)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "18.4%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)센트랄",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "17.1%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜티앤지",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "16.8%",
+        "dir": "out"
+      },
+      {
+        "n": "정익규",
+        "kind": "person",
+        "type": "investment",
+        "detail": "14.63%",
+        "dir": "in"
+      },
+      {
+        "n": "(주)씨티알(구. (주)센트랄)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "13.4%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)씨티알",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "12.7%",
+        "dir": "out"
+      },
+      {
+        "n": "강태룡",
+        "kind": "person",
+        "type": "investment",
+        "detail": "8.18%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "(주)산양화학",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 9180000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매입, 특수관계자와의 거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "(주)씨티알",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 61629166000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매출, 특수관계자와의 거래"
+        },
+        {
+          "n": "제트에프렘페더샤시(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 47228289000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매출, 특수관계자와의 거래"
+        },
+        {
+          "n": "Central Automotive Components(ZHANGJAGANG)Co., Ltd",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1570144000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매출, 특수관계자와의 거래"
+        },
+        {
+          "n": "씨티알에너지㈜(구. 에너리스)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 61796000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매출, 특수관계자와의 거래"
+        }
+      ]
     }
   }
 }

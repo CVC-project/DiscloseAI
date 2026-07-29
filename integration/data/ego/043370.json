@@ -13,11 +13,225 @@
         "dir": "out",
         "s": "자동차",
         "tier": "dot"
+      },
+      {
+        "n": "(주)에이에스티",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "PHA America Inc",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "PHA Czech s.r.o.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "PHA India Pvt. Ltd.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "PHA Slovakia s.r.o.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "PHA VIETNAM Co., LTD",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "평화정공기차배건(염성)유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "평화정공기차부건(북경)유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "평화정공기차부건(태창)유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "피에이치에이기차배건(북경)유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "피에이치에이기차배건(염성)유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "피에이치에이기차배건(태창)유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "PHA R&D CENTRE EUROPE LTD.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "75.0%",
+        "dir": "out"
+      },
+      {
+        "n": "북경평화부오기차부건",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "55.0%",
+        "dir": "out"
+      },
+      {
+        "n": "북경평화부오기차부건유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "55.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)피에이치씨",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "51.63%",
+        "dir": "in"
+      },
+      {
+        "n": "PHA Edscha(유)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "50.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)아이테드",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "20.4%",
+        "dir": "out"
+      },
+      {
+        "n": "와이파워원(주)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "11.8%",
+        "dir": "out"
+      },
+      {
+        "n": "아이탑스오토모티브",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "7.9%",
+        "dir": "out"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "PHA Edscha",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 102907123000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 주요거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "아이탑스오토모티브",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 24122753000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 주요거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "브이피에이치메탈(유)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 96427000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 주요거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "㈜평화발레오",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 13722000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 주요거래 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "㈜브이피에이치씨",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 521372000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 주요거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "㈜카펙발레오",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 262522000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 주요거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "㈜평화발레오",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 107619000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 주요거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "PHA R&D CENTRE EUROPE LTD.",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 49404000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 주요거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

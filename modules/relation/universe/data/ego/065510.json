@@ -4,10 +4,88 @@
   "s": "전기전자부품",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "(주)오스비스",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)휴비츠레이어세븐",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "에이치에스파트너스",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Changsha Charops Precision Instrument Co., Ltd",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "67.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Shanghai Huvitz Co., Ltd.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "67.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Verno Co.,Ltd.",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "42.0%",
+        "dir": "out"
+      },
+      {
+        "n": "김현수",
+        "kind": "person",
+        "type": "associate",
+        "detail": "21.2%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "Ossvis USA Inc.",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1112310000.0,
+          "as_of": 2025,
+          "prov": "특수관계자간의 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "Shanghai Supore Instruments Co., Ltd",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 584123000.0,
+          "as_of": 2025,
+          "prov": "특수관계자간의 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "(주)오스비스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 263897000.0,
+          "as_of": 2025,
+          "prov": "특수관계자간의 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

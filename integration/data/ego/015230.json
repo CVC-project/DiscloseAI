@@ -4,10 +4,105 @@
   "s": "자동차",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "Trek Inc.\n(해외투자법인)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "나전금속(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "봉림금속(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Track Design India\nPrivate Limited\n(해외투자법인)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "66.67%",
+        "dir": "out"
+      },
+      {
+        "n": "SUNWAY \nDAECHANG\n FORGING (ANHUI)\n CO., LTD.\n(해외투자법인)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "50.0%",
+        "dir": "out"
+      },
+      {
+        "n": "박권일",
+        "kind": "person",
+        "type": "associate",
+        "detail": "20.05%",
+        "dir": "in"
+      },
+      {
+        "n": "박권욱",
+        "kind": "person",
+        "type": "investment",
+        "detail": "12.86%",
+        "dir": "in"
+      },
+      {
+        "n": "(주)DCF TREK",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "5.88%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "(주)DCF TREK",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 19364866889.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "SUNWAY DAECHANG FORGING(ANHUI) CO., LTD.",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 60415935.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "(주)DCF TREK",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1046888670.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "SUNWAY DAECHANG FORGING(ANHUI) CO., LTD.",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 624725732.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

@@ -22,11 +22,102 @@
         "dir": "in",
         "s": "금융",
         "tier": "named400"
+      },
+      {
+        "n": "SK Life Science, Inc.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "SK생물의약과기(상해)유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Mentis Care, Inc.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "80.0%",
+        "dir": "out"
+      },
+      {
+        "n": "SK Life Science Labs, Inc.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "60.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Kinisi Therapeutics Limited\n(舊, GlySK Ltd.)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "49.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Kinisi Therapeutics Limited\n(舊, GlySK Ltd.).",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "49.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Ignis Therapeutics",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "41.0%",
+        "dir": "out"
+      },
+      {
+        "n": "LifeSci Venture Partners III",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "19.0%",
+        "dir": "out"
+      },
+      {
+        "n": "LifeSci Venture Partners II",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "18.0%",
+        "dir": "out"
       }
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "Mentis Care, Inc.",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 10893600000.0,
+          "as_of": 2025,
+          "prov": "특수관계자간의 거래 · 매출 등, 특수관계자거래"
+        },
+        {
+          "n": "Ignis Therapeutics",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4174787000.0,
+          "as_of": 2025,
+          "prov": "특수관계자간의 거래 · 매출 등, 특수관계자거래"
+        },
+        {
+          "n": "Eurofarma Laboratorios S.A.",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 354174000.0,
+          "as_of": 2025,
+          "prov": "특수관계자간의 거래 · 매출 등, 특수관계자거래"
+        }
+      ]
     }
   }
 }

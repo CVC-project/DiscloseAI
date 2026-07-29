@@ -4,10 +4,73 @@
   "s": "소재",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "(주)대림씨앤비",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "류창승",
+        "kind": "person",
+        "type": "associate",
+        "detail": "31.57%",
+        "dir": "in"
+      },
+      {
+        "n": "(주)고려제지",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "14.24%",
+        "dir": "out"
+      },
+      {
+        "n": "권혁준",
+        "kind": "person",
+        "type": "investment",
+        "detail": "12.85%",
+        "dir": "in"
+      },
+      {
+        "n": "권지영",
+        "kind": "person",
+        "type": "investment",
+        "detail": "11.65%",
+        "dir": "in"
+      },
+      {
+        "n": "대림제지 사내근로복지기금",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "5.12%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "(주)동진판지",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 762659000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "(주)동진판지",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 16158784000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

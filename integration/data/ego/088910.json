@@ -4,10 +4,125 @@
   "s": "식음료",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "농업회사법인\n우농(유)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "90.0%",
+        "dir": "out"
+      },
+      {
+        "n": "농업회사법인다농(유)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "48.0%",
+        "dir": "out"
+      },
+      {
+        "n": "농업회사법인\n나농(유)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "45.0%",
+        "dir": "out"
+      },
+      {
+        "n": "농업회사법인가농(유)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "45.0%",
+        "dir": "out"
+      },
+      {
+        "n": "참프레",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "27.0%",
+        "dir": "out"
+      },
+      {
+        "n": "군산도시가스(주)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "25.44%",
+        "dir": "in"
+      },
+      {
+        "n": "김동수",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "17.49%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "참프레",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 22343404000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입"
+        },
+        {
+          "n": "농업회사법인가농(유)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 9397661000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입"
+        },
+        {
+          "n": "군산도시가스(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2043607000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입(수도광열비)"
+        },
+        {
+          "n": "농업회사법인다농(유)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 958009000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "n": "참프레",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 34175513000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        },
+        {
+          "n": "농업회사법인다농(유)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 465483000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출(병아리)"
+        },
+        {
+          "n": "농업회사법인가농(유)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1570000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출(임부화)"
+        }
+      ]
     }
   }
 }

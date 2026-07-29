@@ -13,6 +13,118 @@
         "dir": "out",
         "s": "소재",
         "tier": "dot"
+      },
+      {
+        "n": "하늘목장㈜(*1)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "한일L&C(*1)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "한일VC㈜(*1)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "한일건재(*1)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "한일산업(*1)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "한일인터내셔널㈜(*1)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Amass Star V.C. corp(*1)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "98.35%",
+        "dir": "out"
+      },
+      {
+        "n": "에이치스마트테크신기술투자조합1호(*1)",
+        "kind": "coop_fund",
+        "type": "subsidiary",
+        "detail": "83.33%",
+        "dir": "out"
+      },
+      {
+        "n": "서울랜드(*1)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "65.75%",
+        "dir": "out"
+      },
+      {
+        "n": "한일네트웍스(*2)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "50.1%",
+        "dir": "out"
+      },
+      {
+        "n": "스타트업 코리아 에이치 알파플러스펀드(*1)",
+        "kind": "coop_fund",
+        "type": "associate",
+        "detail": "33.3%",
+        "dir": "out"
+      },
+      {
+        "n": "허기호",
+        "kind": "person",
+        "type": "associate",
+        "detail": "31.23%",
+        "dir": "in"
+      },
+      {
+        "n": "Hanil Development(*1)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "30.31%",
+        "dir": "out"
+      },
+      {
+        "n": "에이치 경남지역혁신 지브릿지펀드(*1)",
+        "kind": "coop_fund",
+        "type": "associate",
+        "detail": "20.5%",
+        "dir": "out"
+      },
+      {
+        "n": "허정섭",
+        "kind": "person",
+        "type": "investment",
+        "detail": "16.33%",
+        "dir": "in"
+      },
+      {
+        "n": "㈜크레센트훅(*2)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "7.66%",
+        "dir": "out"
       }
     ],
     "valuechain": {
@@ -25,9 +137,100 @@
           "amount": 8305000.0,
           "as_of": 2025,
           "prov": "특수관계자와의 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "㈜충무화학",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 909004000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "한덕개발(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 197285000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "(주)세우리",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 162592000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 매입, 특수관계자거래"
         }
       ],
-      "down": []
+      "down": [
+        {
+          "n": "(주)세우리",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 363358000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "(주)필라넷",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 361072000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "한덕개발(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 348852000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "(주)중산기업",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 268973000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "(재)우덕재단",
+          "kind": "public_org",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 7046000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "미디어그룹테이크투㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 5500000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "㈜충무화학",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4030000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출, 특수관계자거래"
+        }
+      ]
     }
   }
 }

@@ -40,10 +40,146 @@
         "dir": "out",
         "s": "제약바이오",
         "tier": "dot"
+      },
+      {
+        "n": "에이프로젠파마㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "몬타나 신기술조합\n제72호",
+        "kind": "coop_fund",
+        "type": "subsidiary",
+        "detail": "99.99%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜에이프로젠메디신\n(구 ㈜에이프로젠케이아이씨)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "45.0%",
+        "dir": "in"
+      },
+      {
+        "n": "㈜에이프로젠\n헬스케어앤게임즈",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "39.7%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜에이피헬스케어",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "20.1%",
+        "dir": "out"
+      },
+      {
+        "n": "2)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      },
+      {
+        "n": "㈜넥스코닉스",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "㈜아이벤트러스",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "㈜앱토크롬(구",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      },
+      {
+        "n": "㈜에이피헬스케어(구.㈜에이프로젠헬스케어앤게임즈)(*1",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      },
+      {
+        "n": "㈜에이피헬스케어)(*)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      },
+      {
+        "n": "㈜엔피다즈",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "㈜제3글로브",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "㈜지베이스",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "out"
+      },
+      {
+        "n": "㈜지비피에스",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "에이프로젠아이앤씨㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "지비티㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "케이아이씨공업기계(장가항)유한공사",
+        "kind": "public_org",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "n": "㈜에이피헬스케어",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 48913682.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 재화의 매입, 특수관계자거래"
+        }
+      ],
       "down": [
         {
           "t": "007460",
@@ -51,6 +187,15 @@
           "type": "customer",
           "tier_grade": "T1",
           "amount": 295923196.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "㈜에이피헬스케어",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4786521761.0,
           "as_of": 2024,
           "prov": "특수관계자거래 · 재화의 판매로 인한 수익, 특수관계자거래"
         }

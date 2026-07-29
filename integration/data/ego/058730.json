@@ -4,10 +4,217 @@
   "s": "철강·금속",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "(유)퍼플신안태양광",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)명지3호에너지",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)영암나눔태양광",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "군포희망에너지(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "다스코개발㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "다스코산업㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "동아쏠라(유)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "동아에스지(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "디에스솔라㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "디에스파트너스(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "쏠에코㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "에코솔라에너지㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Dong-A Steel Technology\n(B) Sdn Bhd",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "99.9%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)쏠리스장흥",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "98.7%",
+        "dir": "out"
+      },
+      {
+        "n": "스틸코㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "58.0%",
+        "dir": "out"
+      },
+      {
+        "n": "세라코㈜",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "47.7%",
+        "dir": "out"
+      },
+      {
+        "n": "한상원",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "23.01%",
+        "dir": "in"
+      },
+      {
+        "n": "(주)에스에이바이오",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "20.0%",
+        "dir": "out"
+      },
+      {
+        "n": "박일선",
+        "kind": "person",
+        "type": "investment",
+        "detail": "8.51%",
+        "dir": "in"
+      },
+      {
+        "n": "(주)에스에이바이오",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      },
+      {
+        "n": "(주)제이에스에이치",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      },
+      {
+        "n": "가스코(주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "세라코㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      },
+      {
+        "n": "홍인(주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "세라코㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 101873000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "가스코(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 23268000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "가스코(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4105810000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "세라코㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 150153000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

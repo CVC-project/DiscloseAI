@@ -4,10 +4,136 @@
   "s": "전기전자부품",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "(주)센소허브",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "VIEWORKS \nSOUTH AMERICA LIMITADA",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "VWTK",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Vieworks America, Ltd",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Vieworks EU GmbH",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "신의과기(상해)유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "New Medical Imaging Co., Ltd.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "94.3%",
+        "dir": "out"
+      },
+      {
+        "n": "씨에스아이시스템(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "60.1%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)소노텍",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "60.0%",
+        "dir": "out"
+      },
+      {
+        "n": "JAPAN VIEWORKS CO., LTD",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "60.0%",
+        "dir": "out"
+      },
+      {
+        "n": "XERA MEDIKAL SISTEMLER VE TEKNOLOJI LTD. STI",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "40.0%",
+        "dir": "out"
+      },
+      {
+        "n": "김후식",
+        "kind": "person",
+        "type": "investment",
+        "detail": "15.56%",
+        "dir": "in"
+      },
+      {
+        "n": "모던밸류(주)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "15.27%",
+        "dir": "out"
+      },
+      {
+        "n": "브라보비버(인천)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "10.0%",
+        "dir": "out"
+      },
+      {
+        "n": "서경열",
+        "kind": "person",
+        "type": "investment",
+        "detail": "5.26%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "XERA MEDIKAL SISTEMLER VE TEKNOLOJI LTD. STI",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 133806670.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "XERA MEDIKAL SISTEMLER VE TEKNOLOJI LTD. STI",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 7840947807.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

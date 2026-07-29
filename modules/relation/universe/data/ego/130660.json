@@ -4,7 +4,57 @@
   "s": "제약바이오",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "HSI(주)\n(비상장)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "주식회사 하암태양광발전소\n(비상장)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "한산기전(주)\n(비상장)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "PT.Kepid Technology\n(비상장)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "99.0%",
+        "dir": "out"
+      },
+      {
+        "n": "금광아일랜드(*4)\n(비상장)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "99.0%",
+        "dir": "out"
+      },
+      {
+        "n": "한국자유총연맹",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "31.0%",
+        "dir": "in"
+      },
+      {
+        "n": "(주)에스티(*1)\n(비상장)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "29.0%",
+        "dir": "out"
+      }
+    ],
     "valuechain": {
       "up": [
         {
@@ -24,6 +74,60 @@
           "amount": 7650000.0,
           "as_of": 2025,
           "prov": "특수관계자와의 주요 거래 · 매입등 비용"
+        },
+        {
+          "n": "한국동서발전㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 219616070.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 주요 거래 · 매입등 비용"
+        },
+        {
+          "n": "한국서부발전㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 60701126.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 주요 거래 · 매입등 비용"
+        },
+        {
+          "n": "한국남동발전㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 38622801.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 주요 거래 · 매입등 비용"
+        },
+        {
+          "n": "한국수력원자력",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 9393187.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 주요 거래 · 매입등 비용"
+        },
+        {
+          "n": "한국남부발전㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 298182.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 주요 거래 · 매입등 비용"
+        },
+        {
+          "n": "한국중부발전㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 22567.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 주요 거래 · 매입등 비용"
         }
       ],
       "down": [
@@ -33,6 +137,78 @@
           "type": "customer",
           "tier_grade": "T1",
           "amount": 227928.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 주요 거래 · 매출등 수익"
+        },
+        {
+          "n": "한국남동발전㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 80534139792.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 주요 거래 · 매출등 수익"
+        },
+        {
+          "n": "한국남부발전㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 56048587395.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 주요 거래 · 매출등 수익"
+        },
+        {
+          "n": "한국수력원자력",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 9431573052.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 주요 거래 · 매출등 수익"
+        },
+        {
+          "n": "켑코이에스㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 82350000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 주요 거래 · 매출등 수익"
+        },
+        {
+          "n": "(주)상공에너지",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 35623000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 주요 거래 · 매출등 수익"
+        },
+        {
+          "n": "한국중부발전㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 주요 거래 · 매출등 수익"
+        },
+        {
+          "n": "한국동서발전㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 425000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 주요 거래 · 매출등 수익"
+        },
+        {
+          "n": "한국서부발전㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 175000.0,
           "as_of": 2025,
           "prov": "특수관계자와의 주요 거래 · 매출등 수익"
         }

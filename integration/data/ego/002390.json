@@ -13,10 +13,146 @@
         "dir": "out",
         "s": "지주",
         "tier": "dot"
+      },
+      {
+        "n": "Theravalues\n Corporation",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Unins(H.K.)\n International\n Limited(*1)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜한독헬스케어(*7)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)이노큐브",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "72.97%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)칼로스메디칼",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "49.96%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)한독소비",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "49.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)한독테바",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "49.0%",
+        "dir": "out"
+      },
+      {
+        "n": "이노헬스펀드1호",
+        "kind": "coop_fund",
+        "type": "associate",
+        "detail": "33.33%",
+        "dir": "out"
+      },
+      {
+        "n": "세브란스-이노큐브 벤처투자조합",
+        "kind": "coop_fund",
+        "type": "associate",
+        "detail": "21.98%",
+        "dir": "out"
+      },
+      {
+        "n": "RMGP Bio-Pharma\n Investment Fund L.P",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "18.86%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜엔비포스텍",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "18.45%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)와이앤에스인터내셔날",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "17.69%",
+        "dir": "in"
+      },
+      {
+        "n": "김영진",
+        "kind": "person",
+        "type": "investment",
+        "detail": "13.65%",
+        "dir": "in"
+      },
+      {
+        "n": "Mac Fund, L.P.(*4)",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "10.6%",
+        "dir": "out"
+      },
+      {
+        "n": "웰트㈜",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "9.37%",
+        "dir": "out"
+      },
+      {
+        "n": "Rezolute, INC.(*3)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "8.82%",
+        "dir": "out"
+      },
+      {
+        "n": "인터베스트오픈\n이노베이션\n사모투자합작회사",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "6.25%",
+        "dir": "out"
+      },
+      {
+        "n": "김석진",
+        "kind": "person",
+        "type": "investment",
+        "detail": "5.13%",
+        "dir": "in"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "n": "(주)한독소비",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 317343000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        }
+      ],
       "down": [
         {
           "t": "095700",
@@ -24,6 +160,42 @@
           "type": "customer",
           "tier_grade": "T1",
           "amount": 10268000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "(주)한독테바",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1306285000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "(주)한독소비",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 774819000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "㈜엔비포스텍",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 11055000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "(주)와이앤에스인터내셔날",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4968000.0,
           "as_of": 2025,
           "prov": "특수관계자 · 매출"
         }

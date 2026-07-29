@@ -4,10 +4,91 @@
   "s": "자동차",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "DONGWON CZ, s.r.o.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "DONGWON SK, s.r.o.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "동원파이프㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Dongwon Metal Do Brasil",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "92.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Dongwon Mexico Inc.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "89.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Dongwon Autopart Technology Inc.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "81.0%",
+        "dir": "out"
+      },
+      {
+        "n": "디에이케이㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "80.0%",
+        "dir": "out"
+      },
+      {
+        "n": "북경링윈동원유한과기공사",
+        "kind": "public_org",
+        "type": "associate",
+        "detail": "30.0%",
+        "dir": "out"
+      },
+      {
+        "n": "이은우",
+        "kind": "person",
+        "type": "investment",
+        "detail": "14.51%",
+        "dir": "in"
+      },
+      {
+        "n": "이승재",
+        "kind": "person",
+        "type": "investment",
+        "detail": "7.17%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "북경링윈동원유한과기공사",
+          "kind": "public_org",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 616193316.0,
+          "as_of": 2026,
+          "prov": "특수관계자 거래 · 매출"
+        }
+      ]
     }
   }
 }

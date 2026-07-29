@@ -4,10 +4,129 @@
   "s": "반도체",
   "tier": "named400",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "DAEJOO EMV CO.,LTD",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "QINGDAO DAEJOO ELECTRONIC MATERIALS CO., LTD.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "QINGDAO ELECTRONIC MATERIALS CO., LTD.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "INDIA DAEJOO ELECTRONIC MATERIALS CO., LTD.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "99.6%",
+        "dir": "out"
+      },
+      {
+        "n": "DONGGUAN DAEJOO ELECTRONIC MATERIALS CO., LTD.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "98.31%",
+        "dir": "out"
+      },
+      {
+        "n": "DAEJOO US LLC",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "90.0%",
+        "dir": "out"
+      },
+      {
+        "n": "SHANGHAI DAEJOO ELECTRONIC MATERIALS CO., LTD.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "83.31%",
+        "dir": "out"
+      },
+      {
+        "n": "FZJ (Shanghai) New Energy Co., Ltd",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "69.23%",
+        "dir": "out"
+      },
+      {
+        "n": "이엠디 주식회사",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "50.16%",
+        "dir": "out"
+      },
+      {
+        "n": "실나노 머티리얼즈",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "35.0%",
+        "dir": "out"
+      },
+      {
+        "n": "FZJ",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "20.0%",
+        "dir": "out"
+      },
+      {
+        "n": "임중규",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "7.24%",
+        "dir": "in"
+      },
+      {
+        "n": "임일지",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "6.8%",
+        "dir": "in"
+      },
+      {
+        "n": "임무현",
+        "kind": "person",
+        "type": "investment",
+        "detail": "5.21%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "ShangHai ZJ Electronic Technology Co.,Ltd",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1927336000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "ShangHai ZJ Electronic Technology Co.,Ltd",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2281646000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

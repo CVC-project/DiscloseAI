@@ -4,10 +4,202 @@
   "s": "자동차",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "(주)대유합금",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)스마트홀딩스",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)딤채홀딩스(*1)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "89.13%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)대유금형",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "69.0%",
+        "dir": "out"
+      },
+      {
+        "n": "위니아전자 중국(demojin)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "51.0%",
+        "dir": "out"
+      },
+      {
+        "n": "MIP혁신 M&A투자조합",
+        "kind": "coop_fund",
+        "type": "associate",
+        "detail": "40.0%",
+        "dir": "out"
+      },
+      {
+        "n": "위니아홀딩스(RCPS)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "39.0%",
+        "dir": "out"
+      },
+      {
+        "n": "수피위니아PEF",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "29.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)대유이피",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "28.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜대유홀딩스",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "24.37%",
+        "dir": "in"
+      },
+      {
+        "n": "(주)대유에이피",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "23.76%",
+        "dir": "out"
+      },
+      {
+        "n": "Dayou America, Inc",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "21.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Winia Electronics America, Inc.",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "21.0%",
+        "dir": "out"
+      },
+      {
+        "n": "박영우",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "18.05%",
+        "dir": "in"
+      },
+      {
+        "n": "(주)위니아",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "17.38%",
+        "dir": "out"
+      },
+      {
+        "n": "위니아홀딩스",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "14.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜대유홀딩스",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "10.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜대유플러스",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "9.92%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜동강홀딩스",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "8.0%",
+        "dir": "out"
+      },
+      {
+        "n": "WINIA SingaporePTE.LTD",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "7.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)영일이",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "6.0%",
+        "dir": "in"
+      },
+      {
+        "n": "박은진",
+        "kind": "person",
+        "type": "investment",
+        "detail": "5.0%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "㈜동강홀딩스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1084163000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출 등, 특수관계자거래"
+        },
+        {
+          "n": "(주)TPC",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 840000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출 등, 특수관계자거래"
+        },
+        {
+          "n": "위니아홀딩스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 700000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출 등, 특수관계자거래"
+        },
+        {
+          "n": "㈜대유홀딩스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 630000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출 등, 특수관계자거래"
+        }
+      ]
     }
   }
 }

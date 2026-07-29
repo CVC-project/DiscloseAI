@@ -4,10 +4,63 @@
   "s": "제약바이오",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "SAMIL PHARMACEUTICAL\n NORTH AMERICA CO., LTD\n(해외).",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "SAMIL PHARMACEUTICAL \nCOMPANY LIMITED\n(해외)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "삼일메디칼(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Mon Samil\n(해외)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "49.9%",
+        "dir": "out"
+      },
+      {
+        "n": "허승범",
+        "kind": "person",
+        "type": "investment",
+        "detail": "8.2%",
+        "dir": "in"
+      },
+      {
+        "n": "허 강",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "6.56%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "삼일웰니스㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 52272000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

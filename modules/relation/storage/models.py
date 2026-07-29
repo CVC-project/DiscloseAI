@@ -154,8 +154,9 @@ class RelationLocal(Base):
     )
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    source_corp = Column(String(6), nullable=False, index=True)  # ticker
-    target_corp = Column(String(6), nullable=False, index=True)  # ticker
+    # ★U5: ticker(6) 또는 비상장 노드 uid("x_"+12) — 폭 16 (UnlistedNode 주석 참조)
+    source_corp = Column(String(16), nullable=False, index=True)
+    target_corp = Column(String(16), nullable=False, index=True)
     relation_type = Column(String, nullable=False)
     ratio = Column(Float)  # 지분율 %. 계열·수동은 null
     detail = Column(String)  # "삼성물산 5.01% (계열사)" 등
@@ -187,8 +188,9 @@ class ValueChainEdge(Base):
     )
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    src_corp = Column(String(8), nullable=False, index=True)  # corp_code
-    dst_corp = Column(String(8), nullable=False, index=True)  # corp_code
+    # ★U5: corp_code(8) 또는 비상장 노드 uid("x_"+12) — 폭 16
+    src_corp = Column(String(16), nullable=False, index=True)
+    dst_corp = Column(String(16), nullable=False, index=True)
     edge_type = Column(String, nullable=False)  # supply | customer | raw_material | competition
     tier = Column(String, nullable=False)  # T1 | T2 | T3
     source_kind = Column(String)  # rp_note | supply_contract | equity_inv | biz_prose | io_table
@@ -257,3 +259,50 @@ class LinkFailQueue(Base):
     freq = Column(Integer, default=1)  # 등장 빈도 (M2 우선순위)
     sample_chunk_id = Column(String)  # 대표 예시 청크
     resolved_corp = Column(String(8))  # 수동 보정 후 매칭된 corp_code (nullable)
+
+
+class UnlistedNode(Base):
+    """비상장 상대방 노드 — **앵커-로컬**(U5, universe/UNLISTED_PLAN.md §2·§3).
+
+    ⚠️ 이 테이블의 행은 **전역 실체가 아니다.** 같은 이름이 여러 상장사 공시에 나와도
+    앵커마다 별개 행으로 존재하며 병합하지 않는다(리더 확정: "별개 노드로 처리하고
+    연관성을 찾지 말 것"). 그래서 동명이인·동명법인 판정 문제가 발생하지 않는다 —
+    원안의 최대 리스크(FN-013 계열 오링킹)가 설계상 소멸한 지점.
+
+    - `name_raw`는 **공시 원문 문자열 그대로**(트림만). 표기 통합·정규화를 하지 않는다.
+      정규화는 상장사 링킹 '시도' 단계에서만 쓰고, 실패해 여기로 떨어지면 원문을 보존한다.
+    - `uid`는 upsert·prune용 **내부 키**일 뿐 화면에 노출되지 않고 앵커 밖에서 재사용되지
+      않는다. RelationLocal/ValueChainEdge의 source/target 컬럼에 이 값이 들어간다
+      (6자리 ticker와 'x_' 프리픽스로 형태 충돌 없음 — 기존 스키마 불변).
+    """
+
+    __tablename__ = "unlisted_node"
+    __table_args__ = (
+        UniqueConstraint("anchor_corp", "name_raw", name="uq_unlisted_anchor_name"),
+    )
+
+    uid = Column(String(16), primary_key=True)     # x_<sha1(anchor|raw)[:12]>
+    anchor_corp = Column(String(6), nullable=False, index=True)  # 등장 상장사 ticker
+    name_raw = Column(String, nullable=False)      # 공시 원문 표기 (화면 라벨)
+    kind = Column(String(16), nullable=False)      # entity_kind.ALL_KINDS
+    first_seen = Column(String)                    # provenance (rcept_no·source_type)
+    status = Column(String(10), default="active")
+
+
+def unlisted_uid(anchor_corp: str, name_raw: str) -> str:
+    """앵커 스코프 결정적 키 — 멱등 upsert용.
+
+    ★키는 **정규화 이름**으로 잡는다(표시는 원문 그대로). 한 회사 공시 안에서 같은
+    법인이 각주·상태 표기 차이로 여러 번 적히기 때문이다(실측: `㈜하이원파트너스`와
+    `㈜하이원파트너스\\n(비상장)`, `Caregen Biopharma Inc.`·`Inc.(*1)`·`Inc.(*2)`가
+    각각 별개 노드가 돼 한 화면에 같은 회사가 2~3번 나왔다).
+    ⚠️ 이건 "연관성 탐색"이 아니다 — **앵커 안에서의 중복 정리**일 뿐이고,
+    다른 회사의 같은 이름과는 여전히 절대 병합하지 않는다(앵커가 키에 들어감).
+    """
+    import hashlib
+
+    from modules.relation.common.names import normalize_company_name
+
+    key = normalize_company_name(name_raw) or (name_raw or "").strip()
+    digest = hashlib.sha1(f"{anchor_corp}|{key}".encode("utf-8")).hexdigest()
+    return f"x_{digest[:12]}"

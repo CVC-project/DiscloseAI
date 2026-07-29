@@ -22,10 +22,83 @@
         "dir": "in",
         "s": "소재",
         "tier": "dot"
+      },
+      {
+        "n": "(주)이건그린텍",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)이건창호",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Eagon USA Corp.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Eagon Windows&\n Doors Canada CO.,Ltd",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "박승준",
+        "kind": "person",
+        "type": "associate",
+        "detail": "31.07%",
+        "dir": "in"
+      },
+      {
+        "n": "뉴텍화이브",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "19.4%",
+        "dir": "out"
+      },
+      {
+        "n": "박영주",
+        "kind": "person",
+        "type": "investment",
+        "detail": "13.42%",
+        "dir": "in"
+      },
+      {
+        "n": "박은정",
+        "kind": "person",
+        "type": "investment",
+        "detail": "9.27%",
+        "dir": "in"
+      },
+      {
+        "n": "(재)이건박영주문화재단",
+        "kind": "public_org",
+        "type": "investment",
+        "detail": "5.0%",
+        "dir": "in"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "n": "(주)아키페이스",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 629147000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        }
+      ],
       "down": [
         {
           "t": "008250",
@@ -35,6 +108,24 @@
           "amount": 2431984000.0,
           "as_of": 2025,
           "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "뉴텍화이브",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 905820000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "(주)아키페이스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 39000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
         }
       ]
     }

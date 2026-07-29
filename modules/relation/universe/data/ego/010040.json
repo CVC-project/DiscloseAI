@@ -22,10 +22,112 @@
         "dir": "in",
         "s": "화학",
         "tier": "dot"
+      },
+      {
+        "n": "新일광이앤씨㈜舊㈜케이앤엑스",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "일광이앤씨(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "영구신동내화재료유한공사",
+        "kind": "public_org",
+        "type": "associate",
+        "detail": "24.0%",
+        "dir": "out"
+      },
+      {
+        "n": "김근수",
+        "kind": "person",
+        "type": "investment",
+        "detail": "16.88%",
+        "dir": "in"
+      },
+      {
+        "n": "후성HDS(주)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "15.94%",
+        "dir": "in"
+      },
+      {
+        "n": "후성에이치디에스(주)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "15.94%",
+        "dir": "in"
+      },
+      {
+        "n": "후성홀딩스(주)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "15.94%",
+        "dir": "in"
+      },
+      {
+        "n": "김용민",
+        "kind": "person",
+        "type": "investment",
+        "detail": "8.57%",
+        "dir": "in"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "n": "후성코퍼레이션(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 17974996000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "영구신동내화재료유한공사",
+          "kind": "public_org",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 5712364000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "후성홀딩스(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1879457000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "㈜트래닛",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 246431000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "후성정공(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 92000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        }
+      ],
       "down": [
         {
           "t": "098070",
@@ -44,6 +146,33 @@
           "amount": 49150000.0,
           "as_of": 2025,
           "prov": "특수관계자 등 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "후성정공(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 5589651000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "㈜트래닛",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2456985000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "(주)에프씨스페셜티",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 650000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
         }
       ]
     }

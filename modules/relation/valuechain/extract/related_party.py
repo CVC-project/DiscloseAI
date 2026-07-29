@@ -34,6 +34,7 @@ from bs4 import BeautifulSoup
 
 from modules.relation.storage.db import get_local_session
 from modules.relation.storage.models import RelationLocal, ValueChainEdge
+from modules.relation.transform import entity_kind
 from modules.relation.valuechain.extract import reports_source
 from modules.relation.valuechain.extract.linking import (
     blocked_pair,
@@ -837,6 +838,7 @@ def apply(session=None, sections: list[dict] | None = None) -> dict:
         "notes_unparsed": 0,
         "edges_kept": 0,
         "group_aggregate": 0,
+        "unlisted_nodes": 0,
     }
     try:
         ctx = build_guard_context(session)
@@ -879,7 +881,20 @@ def apply(session=None, sections: list[dict] | None = None) -> dict:
                         )
                         is_aggregate = bool(corp_code)
                 if not corp_code:
-                    continue  # L1 큐행 또는 링킹 실패 — ctx.counters에 집계됨
+                    # ★U5: 상장사로 못 붙으면 비상장 노드로 (앵커-로컬, 원문 그대로)
+                    self_ticker = ctx.ticker_by_corp.get(self_corp)
+                    if self_ticker:
+                        corp_code = entity_kind.upsert_unlisted_node(
+                            session,
+                            anchor_corp=self_ticker,
+                            name_raw=item["counterparty"],
+                            relate=None,
+                            provenance=f"rp_note:{rcept_no}",
+                        )
+                        if corp_code:
+                            counters["unlisted_nodes"] += 1
+                if not corp_code:
+                    continue  # 잡음이거나 앵커 미상 — ctx.counters에 집계됨
                 if corp_code == self_corp:
                     continue  # 자기 자신 표기(연결실체 자기 참조) 무시
 
@@ -1028,8 +1043,10 @@ def apply_governance(
         "notes_unparsed": 0,
         "edges_kept": 0,
         "group_aggregate": 0,
+        "unlisted_nodes": 0,
         "no_ticker": 0,
         "pruned_stale": 0,
+        "pruned_orphan_nodes": 0,
     }
     touched_keys: set[tuple] = set()
     try:
@@ -1084,14 +1101,30 @@ def apply_governance(
                             surfaces.append(got)
                             is_aggregate = True
                 if not surfaces:
-                    continue  # L1 큐행 또는 링킹 실패 — ctx.counters에 집계됨
+                    # ★U5: 상장사로 못 붙으면 비상장 노드로 (앵커-로컬, 원문 그대로)
+                    uid = entity_kind.upsert_unlisted_node(
+                        session,
+                        anchor_corp=self_ticker,
+                        name_raw=item["counterparty"],
+                        relate=None,
+                        provenance=f"dart_filing:{rcept_no}",
+                    )
+                    if uid:
+                        surfaces.append(uid)
+                        counters["unlisted_nodes"] += 1
+                if not surfaces:
+                    continue  # 잡음 — ctx.counters에 집계됨
                 if is_aggregate:
                     counters["group_aggregate"] += 1
 
                 for corp in dict.fromkeys(surfaces):  # 순서 보존 중복 제거
                     if corp == self_corp_code:
                         continue
-                    target_ticker = ticker_by_corp_code.get(corp)
+                    # 비상장 노드 uid는 그대로 target, 상장사는 corp_code→ticker 변환
+                    if corp.startswith("x_"):
+                        target_ticker = corp
+                    else:
+                        target_ticker = ticker_by_corp_code.get(corp)
                     if not target_ticker:
                         counters["no_ticker"] += 1
                         continue
@@ -1125,6 +1158,10 @@ def apply_governance(
                 if key not in touched_keys:
                     session.delete(r)
                     counters["pruned_stale"] += 1
+
+        # ★U5: 엣지가 사라진 비상장 노드 정리 (참조 무결성 기준)
+        session.flush()
+        counters["pruned_orphan_nodes"] = entity_kind.prune_orphan_unlisted_nodes(session)
 
         session.commit()
     finally:

@@ -13,11 +13,157 @@
         "dir": "out",
         "s": "소재",
         "tier": "dot"
+      },
+      {
+        "n": "신대양제지반월(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "대양제지공업(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "60.2%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)광신판지",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "59.9%",
+        "dir": "out"
+      },
+      {
+        "n": "신대한판지(주)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "18.91%",
+        "dir": "in"
+      },
+      {
+        "n": "권혁홍",
+        "kind": "person",
+        "type": "investment",
+        "detail": "16.41%",
+        "dir": "in"
+      },
+      {
+        "n": "대양판지(주)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "15.0%",
+        "dir": "out"
+      },
+      {
+        "n": "권택환",
+        "kind": "person",
+        "type": "investment",
+        "detail": "8.62%",
+        "dir": "in"
+      },
+      {
+        "n": "권우정",
+        "kind": "person",
+        "type": "investment",
+        "detail": "8.02%",
+        "dir": "in"
+      },
+      {
+        "n": "권지혜",
+        "kind": "person",
+        "type": "investment",
+        "detail": "7.08%",
+        "dir": "in"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "대양통운(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 9141474385.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 매입 등, 특수관계자거래"
+        },
+        {
+          "n": "신대한판지(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 5893557054.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 매입 등, 특수관계자거래"
+        },
+        {
+          "n": "안촌인베스트먼트(주)",
+          "kind": "coop_fund",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1421905460.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 매입 등, 특수관계자거래"
+        },
+        {
+          "n": "세원후렉소(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 643867560.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 매입 등, 특수관계자거래"
+        },
+        {
+          "n": "신대한인쇄(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 41758740.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 매입 등, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "신대한판지(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 46815858853.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 매출 등, 특수관계자거래"
+        },
+        {
+          "n": "신대한인쇄(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 764577701.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 매출 등, 특수관계자거래"
+        },
+        {
+          "n": "안촌인베스트먼트(주)",
+          "kind": "coop_fund",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 298052840.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 매출 등, 특수관계자거래"
+        },
+        {
+          "n": "대양통운(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 275550.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 매출 등, 특수관계자거래"
+        }
+      ]
     }
   }
 }

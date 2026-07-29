@@ -22,6 +22,125 @@
         "dir": "out",
         "s": "반도체",
         "tier": "dot"
+      },
+      {
+        "n": "(주)에비오시스 테크놀러지스",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Korea Aero space F.W lnc",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Korea Aerospace Industries EUROPE SP. Z. O. O.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "에스앤케이항공(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "한국항공서비스(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "66.41%",
+        "dir": "out"
+      },
+      {
+        "n": "한국표면처리(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "55.77%",
+        "dir": "out"
+      },
+      {
+        "n": "메이사플래닛 주식회사",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "46.0%",
+        "dir": "out"
+      },
+      {
+        "n": "주식회사 디브레인(*2)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "37.04%",
+        "dir": "out"
+      },
+      {
+        "n": "엘씨에이치감항센터(주)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "35.0%",
+        "dir": "out"
+      },
+      {
+        "n": "주식회사 시스노바",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "29.9%",
+        "dir": "out"
+      },
+      {
+        "n": "주식회사 아이엠피컨설팅",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "29.9%",
+        "dir": "out"
+      },
+      {
+        "n": "한국수출입은행",
+        "kind": "public_org",
+        "type": "associate",
+        "detail": "26.41%",
+        "dir": "in"
+      },
+      {
+        "n": "방위산업공제조합",
+        "kind": "coop_fund",
+        "type": "associate",
+        "detail": "22.05%",
+        "dir": "out"
+      },
+      {
+        "n": "주식회사 메이사(*2,3)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "22.02%",
+        "dir": "out"
+      },
+      {
+        "n": "주식회사 펀진(*4)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "20.27%",
+        "dir": "out"
+      },
+      {
+        "n": "주식회사 메이사",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "18.94%",
+        "dir": "out"
+      },
+      {
+        "n": "주식회사 젠젠에이아이(*2)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "9.87%",
+        "dir": "out"
       }
     ],
     "valuechain": {
@@ -106,9 +225,28 @@
           "amount": 3400090909.0,
           "as_of": 2026,
           "prov": "단일판매ㆍ공급계약체결 · 한국항공우주산업"
+        },
+        {
+          "n": "한국표면처리(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 7020682000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입액"
         }
       ],
-      "down": []
+      "down": [
+        {
+          "n": "한국표면처리(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 813300000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출액"
+        }
+      ]
     }
   }
 }

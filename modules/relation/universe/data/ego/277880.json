@@ -4,10 +4,129 @@
   "s": "기계·장비",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "SI-EURO-HU KFT",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "TSI America INC",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "TSI FRANCE SAS",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "TSI MICHIGAN INC",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "TSI OHIO",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "TSI Sweden AB",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "TSI-EURO-HU KFT",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "TSI Europe Sp.z.o.o.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "70.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Wuxi TSI Technology Co,.Ltd *주4)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "45.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Wuxi TSI Technology Co,.Ltd(*주5)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "45.0%",
+        "dir": "out"
+      },
+      {
+        "n": "표인식",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "41.9%",
+        "dir": "in"
+      },
+      {
+        "n": "TSI-안다H 일반사모투자신탁 제6호",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "18.8%",
+        "dir": "in"
+      },
+      {
+        "n": "씨아이솔리드 주식회사",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "5.5%",
+        "dir": "out"
+      },
+      {
+        "n": "Wuxi TSI Technology Co., Ltd.",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "Wuxi TSI Technology Co., Ltd.",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 619591429.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "Wuxi TSI Technology Co., Ltd.",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 32738208.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

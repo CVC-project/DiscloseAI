@@ -4,10 +4,227 @@
   "s": "기계·장비",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "MATZ (Nanjing) Automation \nEquipment Co., Ltd",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "MATZ AMERICA, LLC",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "MATZ Nanjing",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "MATZ POLAND SP. Z O.O",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "삼익매츠벤처스(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "매츠 ABB 테크 제1호\n벤처투자조합",
+        "kind": "coop_fund",
+        "type": "subsidiary",
+        "detail": "99.5%",
+        "dir": "out"
+      },
+      {
+        "n": "메이슨큐브투자조합",
+        "kind": "coop_fund",
+        "type": "associate",
+        "detail": "48.48%",
+        "dir": "out"
+      },
+      {
+        "n": "삼익키리우㈜",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "37.41%",
+        "dir": "out"
+      },
+      {
+        "n": "THK",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "33.82%",
+        "dir": "in"
+      },
+      {
+        "n": "삼익SDT㈜",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "18.0%",
+        "dir": "out"
+      },
+      {
+        "n": "진영환",
+        "kind": "person",
+        "type": "investment",
+        "detail": "7.1%",
+        "dir": "in"
+      },
+      {
+        "n": "LTD. - THK MANUFACTURING OF CHINA - DALIAN THK CO.",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "유의적 영향력",
+        "dir": "out"
+      },
+      {
+        "n": "THK",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "유의적 영향력",
+        "dir": "out"
+      },
+      {
+        "n": "메이슨큐브투자조합",
+        "kind": "coop_fund",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      },
+      {
+        "n": "삼익SDT㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "삼익에이디엠(주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "삼익에이치디에스㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "삼익정공㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "삼익키리우㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "THK",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 31160320154.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "삼익SDT㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 6737124930.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "삼익정공㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2684581390.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "삼익에이치디에스㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1365139800.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "THK",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2444891948.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "삼익SDT㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 100961440.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "삼익에이치디에스㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 47930700.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "삼익정공㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 39632200.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "삼익키리우㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

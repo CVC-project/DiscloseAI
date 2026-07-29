@@ -40,11 +40,98 @@
         "dir": "in",
         "s": "반도체",
         "tier": "dot"
+      },
+      {
+        "n": "동시테크㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "67.79%",
+        "dir": "out"
+      },
+      {
+        "n": "페이잇㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "65.02%",
+        "dir": "out"
+      },
+      {
+        "n": "이룸디자인스킨㈜",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "41.11%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜유비벨록스모바일",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "39.56%",
+        "dir": "out"
+      },
+      {
+        "n": "이흥복",
+        "kind": "person",
+        "type": "investment",
+        "detail": "19.32%",
+        "dir": "in"
+      },
+      {
+        "n": "팅크웨어모바일㈜",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "16.35%",
+        "dir": "out"
+      },
+      {
+        "n": "GOLDENAPP.Ltd.",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "9.3%",
+        "dir": "out"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "㈜루트17",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2931961000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "헬스앤바이오㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1364000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "헵톤㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 54330000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "㈜솔드라이브",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 18545000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

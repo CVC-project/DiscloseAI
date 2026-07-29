@@ -4,10 +4,271 @@
   "s": "소재",
   "tier": "named400",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "골든자원개발",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "동양시멘트",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "삼척에너지",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "삼표레미콘",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "삼표에스앤씨",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "삼표자원개발",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "삼표해운",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "삼표농원",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "89.3%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)삼표",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "54.68%",
+        "dir": "in"
+      },
+      {
+        "n": "(주)삼표산업",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "54.68%",
+        "dir": "in"
+      },
+      {
+        "n": "동양인터내셔널",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "14.32%",
+        "dir": "out"
+      },
+      {
+        "n": "한일대우시멘트",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "11.34%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)에스피네이처",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "(주)엔알씨",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "최상위 지배기업",
+        "dir": "out"
+      },
+      {
+        "n": "(주)팬트랙",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "최상위 지배기업",
+        "dir": "out"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "(주)삼표산업",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 30992000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입 등"
+        },
+        {
+          "n": "(주)에스피에스엔에이",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 5205000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입 등"
+        },
+        {
+          "n": "(주)에스피네이처",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3439000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입 등"
+        },
+        {
+          "n": "(주)에스피레미콘",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 15000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입 등"
+        },
+        {
+          "n": "에프티에스(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 11000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입 등"
+        }
+      ],
+      "down": [
+        {
+          "n": "(주)삼표산업",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 77756000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 등"
+        },
+        {
+          "n": "(주)에스피에스엔에이",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 21416000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 등"
+        },
+        {
+          "n": "삼표피앤씨(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4458000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 등"
+        },
+        {
+          "n": "(주)에스피레미콘",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3080000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 등"
+        },
+        {
+          "n": "(주)청암",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 953000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 등"
+        },
+        {
+          "n": "(주)에스피네이처",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 477000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 등"
+        },
+        {
+          "n": "(주)에스피환경",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 166000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 등"
+        },
+        {
+          "n": "삼표레일웨이(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 36000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 등"
+        },
+        {
+          "n": "(주)팬트랙",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 등"
+        },
+        {
+          "n": "(주)홍명산업",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 등"
+        },
+        {
+          "n": "에프티에스(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 등"
+        },
+        {
+          "n": "(주)엔알씨",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 등"
+        }
+      ]
     }
   }
 }

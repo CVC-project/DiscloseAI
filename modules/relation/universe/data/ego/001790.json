@@ -4,10 +4,178 @@
   "s": "식음료",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "㈜티에스\n개발",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜티에스\n신용투자대부",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜티에스우인",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "대한에프\n에쓰에쓰㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "대한제당홍콩\n유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "델리치\n푸드(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "티에스\n유업㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "티에스사료㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)티에스\n푸드앤시스템",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "95.29%",
+        "dir": "out"
+      },
+      {
+        "n": "공주개발㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "93.75%",
+        "dir": "out"
+      },
+      {
+        "n": "농업회사법인\n(주)알앤에프",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "90.0%",
+        "dir": "out"
+      },
+      {
+        "n": "농업회사법인\n㈜알앤에프",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "90.0%",
+        "dir": "out"
+      },
+      {
+        "n": "천진채홍사료\n유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "80.0%",
+        "dir": "out"
+      },
+      {
+        "n": "청도채홍사료\n유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "80.0%",
+        "dir": "out"
+      },
+      {
+        "n": "HK바이오\n이노베이션",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "43.0%",
+        "dir": "out"
+      },
+      {
+        "n": "SUPREME\nARK MEDIA",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "25.0%",
+        "dir": "out"
+      },
+      {
+        "n": "설윤호",
+        "kind": "person",
+        "type": "associate",
+        "detail": "23.28%",
+        "dir": "in"
+      },
+      {
+        "n": "㈜미트\n코리아닷컴",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "18.94%",
+        "dir": "out"
+      },
+      {
+        "n": "박선영",
+        "kind": "person",
+        "type": "investment",
+        "detail": "14.16%",
+        "dir": "in"
+      },
+      {
+        "n": "하남채홍사료\n유한공사",
+        "kind": "public_org",
+        "type": "investment",
+        "detail": "10.9%",
+        "dir": "out"
+      },
+      {
+        "n": "설혜정",
+        "kind": "person",
+        "type": "investment",
+        "detail": "9.52%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "지팜얼라이언스농업회사법인",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3563476000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "n": "지팜얼라이언스농업회사법인",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1240603000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        }
+      ]
     }
   }
 }

@@ -40,11 +40,192 @@
         "dir": "in",
         "s": "철강·금속",
         "tier": "dot"
+      },
+      {
+        "n": "금강 미국",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "금강 베트남",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "금강 인도",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "금강 케냐",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "금강말레이시아",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "금강인도네시아",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "95.9%",
+        "dir": "out"
+      },
+      {
+        "n": "그린랜드AI",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "35.5%",
+        "dir": "out"
+      },
+      {
+        "n": "액시스피아이",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "24.4%",
+        "dir": "out"
+      },
+      {
+        "n": "금강비겐드",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "19.4%",
+        "dir": "out"
+      },
+      {
+        "n": "엠디엘이앤씨",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "19.4%",
+        "dir": "out"
+      },
+      {
+        "n": "중원엔지니어링㈜",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "12.05%",
+        "dir": "in"
+      },
+      {
+        "n": "안영순",
+        "kind": "person",
+        "type": "investment",
+        "detail": "10.83%",
+        "dir": "in"
+      },
+      {
+        "n": "전재범",
+        "kind": "person",
+        "type": "investment",
+        "detail": "7.18%",
+        "dir": "in"
+      },
+      {
+        "n": "전호준",
+        "kind": "person",
+        "type": "investment",
+        "detail": "7.18%",
+        "dir": "in"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "중원엔지니어링㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 5482206683.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "대양흥업(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1581134728.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "동서화학공업(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 5022182.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "(주)에버코스",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2734000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "중원엔지니어링㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3730756857.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "금강비겐드(주) (구, (주)엠디엘이앤씨)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1968504036.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "동서화학공업(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 347751767.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "(주)에버코스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 102343377.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "금강티엘(주) (구, 이현배쓰(주))",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 91764701.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

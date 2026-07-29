@@ -67,11 +67,58 @@
         "dir": "in",
         "s": "반도체",
         "tier": "dot"
+      },
+      {
+        "n": "김영달",
+        "kind": "person",
+        "type": "associate",
+        "detail": "34.05%",
+        "dir": "in"
+      },
+      {
+        "n": "씨앤에이코리아",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "8.91%",
+        "dir": "in"
+      },
+      {
+        "n": "IDP Japan Co Ltd",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      },
+      {
+        "n": "Revo America Corporation",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
       }
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "Revo America Corporation",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 133266240.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "IDP Japan Co Ltd",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 57524733.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

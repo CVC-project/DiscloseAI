@@ -4,10 +4,149 @@
   "s": "화학",
   "tier": "named400",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "(주)천보비엘에이(*1)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)천보비엘에스",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "92.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Changzhou Chunbao",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "90.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)천보신소재",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "88.51%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜중원신소재",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "86.5%",
+        "dir": "out"
+      },
+      {
+        "n": "솔리크인베스트먼트(주)",
+        "kind": "coop_fund",
+        "type": "associate",
+        "detail": "49.1%",
+        "dir": "out"
+      },
+      {
+        "n": "이상율",
+        "kind": "person",
+        "type": "associate",
+        "detail": "28.23%",
+        "dir": "in"
+      },
+      {
+        "n": "Ningxia Hengtai\nBiological Technology",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "20.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Yingkou Changcheng\nNew Material Technology",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "10.0%",
+        "dir": "out"
+      },
+      {
+        "n": "서자원",
+        "kind": "person",
+        "type": "investment",
+        "detail": "8.87%",
+        "dir": "in"
+      },
+      {
+        "n": "(주)온코빅스",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "6.0%",
+        "dir": "out"
+      },
+      {
+        "n": "이슬지",
+        "kind": "person",
+        "type": "investment",
+        "detail": "5.35%",
+        "dir": "in"
+      },
+      {
+        "n": "이현지",
+        "kind": "person",
+        "type": "investment",
+        "detail": "5.15%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "(주)오에이",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 410000000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "(주)에이스케미칼",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 396000000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "천보정밀",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 312856476.0,
+          "as_of": 2024,
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "(주)에스제이글로벌",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 10020000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "천보정밀",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1249492147.0,
+          "as_of": 2024,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

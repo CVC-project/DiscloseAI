@@ -13,11 +13,117 @@
         "dir": "in",
         "s": "금융",
         "tier": "dot"
+      },
+      {
+        "n": "(주)에이치티엠솔루션",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "SMEC AMERICA Co.,Ltd",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "SMEC EUROPE GmbH",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "SMEC VINA Co.,Ltd",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "SMTV",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "테크센",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "최영섭",
+        "kind": "person",
+        "type": "investment",
+        "detail": "8.78%",
+        "dir": "in"
+      },
+      {
+        "n": "최평규",
+        "kind": "person",
+        "type": "investment",
+        "detail": "7.54%",
+        "dir": "in"
+      },
+      {
+        "n": "케이씨엔씨 주식회사",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "5.8%",
+        "dir": "out"
+      },
+      {
+        "n": "이다원",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "5.01%",
+        "dir": "in"
+      },
+      {
+        "n": "이지운",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "5.01%",
+        "dir": "in"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "주식회사 에스엠에스테크",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 6271971396.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "주식회사 에스엠에스테크",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1014842302.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "임직원",
+          "kind": "person",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 22210981.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

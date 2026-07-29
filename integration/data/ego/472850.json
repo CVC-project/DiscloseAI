@@ -4,7 +4,92 @@
   "s": "유통",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "㈜올그레이스",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "씨오더블유㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "엘엔피브랜즈㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "윌패션㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "폰드에프엔㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "피디스페이스㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "대명화학",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "53.7%",
+        "dir": "in"
+      },
+      {
+        "n": "㈜골든피쉬크리에이티브",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "50.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜모스트",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "50.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜퀸라이브",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "50.0%",
+        "dir": "out"
+      },
+      {
+        "n": "브랜드유니버스㈜",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "50.0%",
+        "dir": "out"
+      },
+      {
+        "n": "이순섭",
+        "kind": "person",
+        "type": "associate",
+        "detail": "22.34%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
       "up": [
         {
@@ -15,9 +100,55 @@
           "amount": 2112579047.0,
           "as_of": 2025,
           "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "주식회사 누텍스처",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 554849000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입 등, 특수관계자거래"
+        },
+        {
+          "n": "하고하우스",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 28557000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입 등, 특수관계자거래"
+        },
+        {
+          "n": "주식회사 드리머스컴퍼니",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 9164000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입 등, 특수관계자거래"
         }
       ],
-      "down": []
+      "down": [
+        {
+          "n": "큐앤드비인터내셔날",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 978552000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출 등, 특수관계자거래"
+        },
+        {
+          "n": "하고하우스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 350287000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출 등, 특수관계자거래"
+        }
+      ]
     }
   }
 }

@@ -22,11 +22,153 @@
         "dir": "out",
         "s": "소재",
         "tier": "dot"
+      },
+      {
+        "n": "DRB유니온벨티노(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "DRB헬스케어(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "66.05%",
+        "dir": "out"
+      },
+      {
+        "n": "와이어드 기업재무안정(PEF)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "46.6%",
+        "dir": "out"
+      },
+      {
+        "n": "김세연",
+        "kind": "person",
+        "type": "investment",
+        "detail": "15.58%",
+        "dir": "in"
+      },
+      {
+        "n": "DRB America",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "종속기업",
+        "dir": "out"
+      },
+      {
+        "n": "DRB Japan",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "종속기업",
+        "dir": "out"
+      },
+      {
+        "n": "DRB Qingdao",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "종속기업",
+        "dir": "out"
+      },
+      {
+        "n": "DRB Vietnam",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "종속기업",
+        "dir": "out"
+      },
+      {
+        "n": "DRB 오토모티브(주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "종속기업",
+        "dir": "out"
+      },
+      {
+        "n": "DRB 인터내셔널(주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "종속기업",
+        "dir": "out"
+      },
+      {
+        "n": "주주",
+        "kind": "person",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "DRB Vietnam",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 181879444000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "DRB Qingdao",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 29970644000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "DRB America",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 141670118000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "DRB Japan",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 46541622000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "DRB 오토모티브(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1574417000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "DRB Vietnam",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1379899000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "DRB Qingdao",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1147212000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

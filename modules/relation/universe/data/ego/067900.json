@@ -4,10 +4,70 @@
   "s": "기타",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "박용하",
+        "kind": "person",
+        "type": "associate",
+        "detail": "33.0%",
+        "dir": "in"
+      },
+      {
+        "n": "박지영",
+        "kind": "person",
+        "type": "investment",
+        "detail": "9.26%",
+        "dir": "in"
+      },
+      {
+        "n": "(재)우종문화재단, (주)성광기업, (주)신도아스콘(주)호남진흥, (주)비에스마린, 비에스탱커(주)",
+        "kind": "public_org",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "(주)성광기업 외",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 179682000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등, 특수관계자거래"
+        },
+        {
+          "n": "(재)우종문화재단",
+          "kind": "public_org",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 98400000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "(주)성광기업 외",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 60682000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등, 특수관계자거래"
+        },
+        {
+          "n": "(재)우종문화재단",
+          "kind": "public_org",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 54000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등, 특수관계자거래"
+        }
+      ]
     }
   }
 }

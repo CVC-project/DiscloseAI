@@ -4,10 +4,42 @@
   "s": "에너지",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "한일레저",
+        "kind": "person",
+        "type": "subsidiary",
+        "detail": "99.99%",
+        "dir": "out"
+      },
+      {
+        "n": "대륜E&S",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "91.08%",
+        "dir": "out"
+      },
+      {
+        "n": "조남호",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "46.5%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "신한종합건축사사무소",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2040000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

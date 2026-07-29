@@ -4,10 +4,105 @@
   "s": "소재",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "주식회사 보노아",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "주식회사 케이앤이",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)케이엔티",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "48.55%",
+        "dir": "out"
+      },
+      {
+        "n": "(\n주)서일물산",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "48.0%",
+        "dir": "out"
+      },
+      {
+        "n": "서일물산",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "48.0%",
+        "dir": "out"
+      },
+      {
+        "n": "최병민",
+        "kind": "person",
+        "type": "associate",
+        "detail": "21.0%",
+        "dir": "in"
+      },
+      {
+        "n": "최윤수",
+        "kind": "person",
+        "type": "investment",
+        "detail": "7.7%",
+        "dir": "in"
+      },
+      {
+        "n": "최현수",
+        "kind": "person",
+        "type": "investment",
+        "detail": "7.7%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "(주)케이엔티",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1657251000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입 등"
+        }
+      ],
+      "down": [
+        {
+          "n": "(주)케이엔티",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 110784000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 등"
+        },
+        {
+          "n": "희성전자(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 16728000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 등"
+        },
+        {
+          "n": "(주)희성피브이씨",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 5589000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 등"
+        }
+      ]
     }
   }
 }

@@ -4,9 +4,62 @@
   "s": "건설",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "Cong Ty Tnhh Sebomec Vietnam\n(베트남법인)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "SEBOMEC PHILLIPINES\n(필리핀법인) (주1)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "39.98%",
+        "dir": "out"
+      },
+      {
+        "n": "김우영",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "34.62%",
+        "dir": "in"
+      },
+      {
+        "n": "김재영",
+        "kind": "person",
+        "type": "investment",
+        "detail": "10.0%",
+        "dir": "in"
+      },
+      {
+        "n": "(주)에스비테크\n(외감법인)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "8.3%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜에스비테크SBTA,INC.SB TECH SHANGHAI CO.,LTDSB TECH VINA CO.,Ltd개인(기타주주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      }
+    ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "n": "㈜에스비테크",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3369613000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        }
+      ],
       "down": [
         {
           "t": "028260",
@@ -25,6 +78,24 @@
           "amount": 41540000000.0,
           "as_of": 2026,
           "prov": "단일판매ㆍ공급계약체결 · 삼성물산 주식회사"
+        },
+        {
+          "n": "SB TECH SHANGHAI CO.,LTD",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 345610000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "㈜에스비테크",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 39369000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
         }
       ]
     }

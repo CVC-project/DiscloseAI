@@ -13,11 +13,182 @@
         "dir": "in",
         "s": "반도체",
         "tier": "dot"
+      },
+      {
+        "n": "(주)몽태랑게임즈",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "DALIAN HYUNDAI\nLCD",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "DONGGUAN\nTOVIS",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "TOVIS NORTH\nAMERICA",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)나노티에스",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "99.85%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)세일하이텍",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "83.52%",
+        "dir": "out"
+      },
+      {
+        "n": "주)글로쿼드텍",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "52.82%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)글로쿼드텍",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "36.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)네오씨엠",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "35.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜엘토브",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "35.0%",
+        "dir": "out"
+      },
+      {
+        "n": "성신이노텍",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "35.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜엠앤엠네트웍스",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "34.0%",
+        "dir": "out"
+      },
+      {
+        "n": "김용범",
+        "kind": "person",
+        "type": "investment",
+        "detail": "10.32%",
+        "dir": "in"
+      },
+      {
+        "n": "(사)토비스 트리거재단",
+        "kind": "public_org",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "㈜엘토브",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      },
+      {
+        "n": "㈜엠앤엠네트웍스",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      },
+      {
+        "n": "성신이노텍",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      },
+      {
+        "n": "우리사주조합",
+        "kind": "coop_fund",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "임직원",
+        "kind": "person",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "성신이노텍",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1557009000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "㈜엠앤엠네트웍스",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 11760000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "성신이노텍",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 105361000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "㈜엘토브",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2100000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

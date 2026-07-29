@@ -49,10 +49,57 @@
         "dir": "in",
         "s": "철강·금속",
         "tier": "named400"
+      },
+      {
+        "n": "INTERFLEX VINA CO.,LTD.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "화하선로판(천진)유한공사",
+        "kind": "public_org",
+        "type": "associate",
+        "detail": "49.9%",
+        "dir": "out"
+      },
+      {
+        "n": "테라닉스",
+        "kind": "person",
+        "type": "investment",
+        "detail": "11.14%",
+        "dir": "in"
+      },
+      {
+        "n": "영풍전자",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "9.72%",
+        "dir": "in"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "n": "YOUNG POONG JAPAN",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1347745000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "영풍전자",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 30846000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        }
+      ],
       "down": [
         {
           "t": "007810",
@@ -60,6 +107,15 @@
           "type": "customer",
           "tier_grade": "T1",
           "amount": 2995514000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "테라닉스",
+          "kind": "person",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 356469000.0,
           "as_of": 2025,
           "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
         }

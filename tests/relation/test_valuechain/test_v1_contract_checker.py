@@ -51,27 +51,57 @@ def _one_section():
 
 
 def test_v1_referential_integrity_all_edge_endpoints_exist_in_registry(in_memory_session):
-    """모든 ValueChainEdge.src_corp/dst_corp가 CompanyRegistry에 실존해야 한다.
+    """모든 ValueChainEdge endpoint가 **실존 노드**를 가리켜야 한다.
 
-    링킹 실패분(레지스트리에 없는 상대)은 애초에 엣지를 만들지 않으므로(LinkFailQueue로만
-    적재) 이 불변식이 파서 설계상 자동으로 성립 — 이 테스트는 그 설계가 실제로 지켜지는지
-    회귀 확인한다.
+    ★U5 개정(2026-07-29): endpoint는 이제 두 종류다 —
+      · corp_code(8자리) → CompanyRegistry에 존재해야 함
+      · uid("x_" 접두) → UnlistedNode에 존재해야 함 (비상장·개인, 앵커-로컬)
+    개정 전에는 "링킹 실패분은 엣지를 안 만든다"가 전제였으나, U5부터 실패분이
+    비상장 노드로 살아난다. 불변식의 **의도**(dangling endpoint 금지)는 그대로 유지하고
+    참조 대상만 두 테이블로 넓힌다.
     """
+    from modules.relation.storage.models import UnlistedNode
+
     _seed_registry(in_memory_session)
     related_party.apply(session=in_memory_session, sections=_one_section())
 
     registry_codes = {
         c for (c,) in in_memory_session.query(CompanyRegistry.corp_code).all()
     }
+    unlisted_uids = {u for (u,) in in_memory_session.query(UnlistedNode.uid).all()}
+    known = registry_codes | unlisted_uids
+
     edges = in_memory_session.query(ValueChainEdge).all()
     assert len(edges) > 0, "테스트 전제 붕괴 — 엣지가 생성되지 않음"
 
     dangling = [
         (e.id, e.src_corp, e.dst_corp)
         for e in edges
-        if e.src_corp not in registry_codes or e.dst_corp not in registry_codes
+        if e.src_corp not in known or e.dst_corp not in known
     ]
-    assert dangling == [], f"참조 무결성 위반 — Registry에 없는 endpoint: {dangling}"
+    assert dangling == [], f"참조 무결성 위반 — 실존하지 않는 endpoint: {dangling}"
+
+
+def test_v1_unlisted_endpoints_are_anchor_scoped(in_memory_session):
+    """⚠️ U5 회귀 박제: 비상장 endpoint는 uid 형태여야 하고, 그 노드의 anchor_corp는
+    엣지의 상장 쪽 당사자여야 한다 — 앵커-로컬이 깨지면 전역 병합이 되살아난다."""
+    from modules.relation.storage.models import UnlistedNode
+
+    _seed_registry(in_memory_session)
+    related_party.apply(session=in_memory_session, sections=_one_section())
+
+    nodes = {u.uid: u for u in in_memory_session.query(UnlistedNode).all()}
+    tickers = {
+        c.corp_code: c.ticker
+        for c in in_memory_session.query(CompanyRegistry).all()
+    }
+    for e in in_memory_session.query(ValueChainEdge).all():
+        for endpoint, other in ((e.src_corp, e.dst_corp), (e.dst_corp, e.src_corp)):
+            if endpoint.startswith("x_"):
+                assert endpoint in nodes, f"uid인데 UnlistedNode 없음: {endpoint}"
+                assert nodes[endpoint].anchor_corp == tickers.get(other), (
+                    "앵커-로컬 위반 — 노드의 앵커가 상대 당사자와 불일치"
+                )
 
 
 def test_v1_no_duplicate_edges_on_same_natural_key(in_memory_session):

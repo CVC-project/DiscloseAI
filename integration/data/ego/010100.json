@@ -4,10 +4,215 @@
   "s": "자동차",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "*오토메탈글로벌",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "KOFCO USA",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "SEOHAN AMERICA",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "북경서한",
+        "kind": "person",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "오토메탈글로벌",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "*서한오토USA",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "80.0%",
+        "dir": "out"
+      },
+      {
+        "n": "서한오토USA",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "80.0%",
+        "dir": "out"
+      },
+      {
+        "n": "서한오토멕시코",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "68.24%",
+        "dir": "out"
+      },
+      {
+        "n": "서한오토조지아",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "66.67%",
+        "dir": "out"
+      },
+      {
+        "n": "서한엔티엔베어링",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "33.39%",
+        "dir": "out"
+      },
+      {
+        "n": "서한워너터보시스템즈",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "29.0%",
+        "dir": "out"
+      },
+      {
+        "n": "김윤수",
+        "kind": "person",
+        "type": "associate",
+        "detail": "23.49%",
+        "dir": "in"
+      },
+      {
+        "n": "서한산업",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "13.89%",
+        "dir": "out"
+      },
+      {
+        "n": "서한이노빌리티",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "13.89%",
+        "dir": "out"
+      },
+      {
+        "n": "김용석",
+        "kind": "person",
+        "type": "investment",
+        "detail": "11.16%",
+        "dir": "in"
+      },
+      {
+        "n": "서한이앤피",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "10.94%",
+        "dir": "out"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "서한이노빌리티",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 149222869296.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "서한글로비즈(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 93427477614.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "서한엔티엔베어링",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 15987514433.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "서한이엔피(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 13240379184.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "케이앤에이(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2016211794.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "SEOHAN NTN USA",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 327712632.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "SEOHAN NTN USA",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 159169727847.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "서한이노빌리티",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 28241601355.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "서한엔티엔베어링",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1650756178.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "케이앤에이(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 17789709.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

@@ -13,11 +13,58 @@
         "dir": "in",
         "s": "자동차",
         "tier": "named400"
+      },
+      {
+        "n": "새론(북경)기차부건유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "새론(연태)기차부건유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Nisshinbo\nHoldings INC",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "65.0%",
+        "dir": "in"
+      },
+      {
+        "n": "닛신보새론(상숙)기차부건유한공사",
+        "kind": "public_org",
+        "type": "associate",
+        "detail": "50.0%",
+        "dir": "out"
       }
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "Nisshinbo Automotive Manufacturing Inc.",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 16510280.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출액"
+        },
+        {
+          "n": "Nisshinbo Brake Inc",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1733194.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출액"
+        }
+      ]
     }
   }
 }

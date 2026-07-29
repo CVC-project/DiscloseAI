@@ -4,10 +4,129 @@
   "s": "반도체",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "MECARO CHINA CO. LTD.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "메카로에너지",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "케이브이티에스(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "케이에프알엔디",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "58.07%",
+        "dir": "out"
+      },
+      {
+        "n": "MS Tech\n(주1)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "48.94%",
+        "dir": "out"
+      },
+      {
+        "n": "이재정",
+        "kind": "person",
+        "type": "associate",
+        "detail": "27.8%",
+        "dir": "in"
+      },
+      {
+        "n": "IT혁신장비조합",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "19.8%",
+        "dir": "out"
+      },
+      {
+        "n": "비엔케이-모자이크-리딩에이스 \nIT혁신장비조합 제1호",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "19.8%",
+        "dir": "out"
+      },
+      {
+        "n": "이재홍",
+        "kind": "person",
+        "type": "investment",
+        "detail": "19.32%",
+        "dir": "in"
+      },
+      {
+        "n": "와이피루센트로드1호 사모투자 합자회사",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "9.09%",
+        "dir": "out"
+      },
+      {
+        "n": "지유과학기술일자리창출투자조합",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "6.25%",
+        "dir": "out"
+      },
+      {
+        "n": "메타솔",
+        "kind": "person",
+        "type": "investment",
+        "detail": "5.88%",
+        "dir": "out"
+      },
+      {
+        "n": "인터밸류2호 혁신창업 투자조합",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "5.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Chip Core Technology",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "Chip Core Technology",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 162988000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 (연결) · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "Chip Core Technology",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 41893276000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 (연결) · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

@@ -13,19 +13,31 @@
         "dir": "in",
         "s": "금융",
         "tier": "named400"
+      },
+      {
+        "n": "HD HYUNDAI ENERGY SOLUTIONS\nAMERICA INC.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "HYUNDAI ENERGY SOLUTIONS\nAMERICA INC.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "한국조선해양㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "53.57%",
+        "dir": "in"
       }
     ],
     "valuechain": {
       "up": [
-        {
-          "t": "267270",
-          "n": "HD건설기계",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 242000000.0,
-          "as_of": 2024,
-          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래(*)"
-        },
         {
           "t": "460930",
           "n": "현대힘스",
@@ -56,15 +68,6 @@
       ],
       "down": [
         {
-          "t": "267270",
-          "n": "HD건설기계",
-          "type": "supply",
-          "tier_grade": "T1",
-          "amount": 663000000.0,
-          "as_of": 2024,
-          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
-        },
-        {
           "t": "267250",
           "n": "HD현대",
           "type": "customer",
@@ -79,6 +82,33 @@
           "type": "customer",
           "tier_grade": "T1",
           "amount": 1050000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "HD현대건설기계㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 783808000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "HD현대로보틱스㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 607500000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "HD현대사이트솔루션㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 123754000.0,
           "as_of": 2025,
           "prov": "특수관계자 · 매출"
         }

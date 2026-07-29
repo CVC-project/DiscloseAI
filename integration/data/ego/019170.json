@@ -4,10 +4,133 @@
   "s": "제약바이오",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "SP International",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "미얀마신풍파마",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "신풍USA",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "필리핀신풍파마",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "신풍대우베트남파마(유)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "96.58%",
+        "dir": "out"
+      },
+      {
+        "n": "천진신풍제약유한공사",
+        "kind": "public_org",
+        "type": "associate",
+        "detail": "45.0%",
+        "dir": "out"
+      },
+      {
+        "n": "General Medicine Company Ltd",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "33.33%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)송암사",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "24.2%",
+        "dir": "in"
+      },
+      {
+        "n": "주)송암사",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "24.2%",
+        "dir": "in"
+      },
+      {
+        "n": "헬리오스제6호 PEF",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "17.61%",
+        "dir": "out"
+      },
+      {
+        "n": "오정자",
+        "kind": "person",
+        "type": "investment",
+        "detail": "11.95%",
+        "dir": "in"
+      },
+      {
+        "n": "씨바이오멕스",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "11.63%",
+        "dir": "out"
+      },
+      {
+        "n": "알리아드바이오파마㈜",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "11.63%",
+        "dir": "out"
+      },
+      {
+        "n": "주식회사 에아스텍",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "9.23%",
+        "dir": "out"
+      },
+      {
+        "n": "주식회사 이플라스크",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "5.26%",
+        "dir": "out"
+      },
+      {
+        "n": "장원준",
+        "kind": "person",
+        "type": "investment",
+        "detail": "5.12%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "General Medicine Co., Ltd.",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1627937000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        }
+      ]
     }
   }
 }

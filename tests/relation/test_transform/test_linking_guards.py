@@ -210,7 +210,14 @@ def _rp_note_md(counterparty: str) -> str:
 
 
 def test_rp_note_l1_gate_queues_ambiguous_abbrev(in_memory_session):
-    """영문 2~5자 단독 약칭(해외법인류)은 주석 경로에서도 자동 링킹 금지 → 큐."""
+    """영문 2~5자 단독 약칭(해외법인류)은 **상장사로 링킹되지 않는다** → 큐 + 비상장 노드.
+
+    ★U5 개정(2026-07-29): 게이트에 걸린 표기를 이제 버리지 않고 **공시에 적힌 그대로**
+    비상장 노드로 살린다('HMA'는 'HMA'로 표시). 지켜야 하는 본질은 그대로다 —
+    **상장사에 붙지 않을 것**. 사고(FN-013)는 차단하면서 정보는 잃지 않는다.
+    """
+    from modules.relation.storage.models import UnlistedNode
+
     _seed_two_companies(in_memory_session)
     # 'HMA'가 등록사명과 정확 일치하는 회사는 registry에 없음 — 화이트리스트 미통과
     sections = [{
@@ -220,10 +227,20 @@ def test_rp_note_l1_gate_queues_ambiguous_abbrev(in_memory_session):
     }]
     result = rp_apply(session=in_memory_session, sections=sections)
 
-    assert result["edges_kept"] == 0
     assert result["l1_ambiguous_queued"] == 1
     queued = in_memory_session.query(LinkFailQueue).filter_by(surface_form="HMA").one()
     assert queued.freq == 1
+
+    # 핵심 불변식: 어떤 상장사에도 붙지 않았다
+    listed_codes = {"00073570", "00164779"}
+    for e in in_memory_session.query(ValueChainEdge).all():
+        endpoints = {e.src_corp, e.dst_corp}
+        assert endpoints & listed_codes == {"00073570"}, "약칭이 상장사에 오링킹됨"
+
+    # 정보는 살아 있다 — 원문 그대로 비상장 노드
+    node = in_memory_session.query(UnlistedNode).filter_by(name_raw="HMA").one()
+    assert node.anchor_corp == "096770"  # 앵커=보고사 SK이노베이션
+    assert result["unlisted_nodes"] == 1
 
 
 def test_rp_note_l2_blocklist_blocks_confirmed_pair(in_memory_session):

@@ -4,10 +4,126 @@
   "s": "반도체",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "(주)우주에이엠에프",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)우주에이치앤비",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "UJU ELECTRONICS USA.,INC",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "UJU JAPAN CO.,LTD(*1)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "우주쏠라㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "청도우결의무역유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "청도우결의전자유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "UJU VINA CO., LTD",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "98.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)아이에이엠(*5)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "68.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)우주에너테크(*)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "52.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)헵틸와이(*)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "43.0%",
+        "dir": "out"
+      },
+      {
+        "n": "UJU ELEC. INT.",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "28.0%",
+        "dir": "out"
+      },
+      {
+        "n": "노영백",
+        "kind": "person",
+        "type": "associate",
+        "detail": "22.84%",
+        "dir": "in"
+      },
+      {
+        "n": "(주)헵틸와이(*) 등",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      },
+      {
+        "n": "UJU ELECTRONICS INTERNATIONAL",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      }
+    ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "UJU ELECTRONICS INTERNATIONAL",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 57148000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

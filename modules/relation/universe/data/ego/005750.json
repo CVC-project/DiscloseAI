@@ -4,10 +4,98 @@
   "s": "소재",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "아도바이오(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "63.1%",
+        "dir": "out"
+      },
+      {
+        "n": "대림바토스(주)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "47.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)파인우드리빙",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "46.8%",
+        "dir": "out"
+      },
+      {
+        "n": "이해영",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "33.35%",
+        "dir": "in"
+      },
+      {
+        "n": "파인우드캐피탈(유)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "27.5%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)광주일보사",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "10.0%",
+        "dir": "out"
+      },
+      {
+        "n": "이해서",
+        "kind": "person",
+        "type": "investment",
+        "detail": "9.76%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "이수인(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 13405801000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 주요 거래 · 매입, 특수관계자거래"
+        },
+        {
+          "n": "대림바토스(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 12191129000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 주요 거래 · 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "대림바토스(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 937567000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 주요 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "이수인(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 27886000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 주요 거래 · 매출, 특수관계자거래"
+        }
+      ]
     }
   }
 }

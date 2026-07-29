@@ -58,11 +58,98 @@
         "dir": "out",
         "s": "기계·장비",
         "tier": "dot"
+      },
+      {
+        "n": "(주)SNT로보틱스",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)운해연구원",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "SNT솔루션(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "70.0%",
+        "dir": "out"
+      },
+      {
+        "n": "최평규",
+        "kind": "person",
+        "type": "subsidiary",
+        "detail": "50.76%",
+        "dir": "in"
+      },
+      {
+        "n": "SNT중공업(주)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "42.27%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜SNT저축은행",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "운해장학재단",
+        "kind": "public_org",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "유일디펜스이노베이션제１호신기술투자조합",
+        "kind": "coop_fund",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      },
+      {
+        "n": "유일성장기술구조혁신신기술투자조합",
+        "kind": "coop_fund",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      },
+      {
+        "n": "유일커리어신기술투자조합",
+        "kind": "coop_fund",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      },
+      {
+        "n": "최평규",
+        "kind": "person",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "out"
       }
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "㈜SNT저축은행",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 60019000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등, 특수관계자거래"
+        }
+      ]
     }
   }
 }

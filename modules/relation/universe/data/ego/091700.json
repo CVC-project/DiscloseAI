@@ -31,11 +31,152 @@
         "dir": "out",
         "s": "반도체",
         "tier": "dot"
+      },
+      {
+        "n": "연태파트론전자유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "PARTRON VINA",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "97.87%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜파트론이에스엘",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "44.88%",
+        "dir": "out"
+      },
+      {
+        "n": "Olive Union Inc",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "36.29%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜넥스모",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "33.9%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜씨알지테크놀로지",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "25.7%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜지오엠",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "20.0%",
+        "dir": "out"
+      },
+      {
+        "n": "하가전자",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "19.71%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜에스모바일텍",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "18.18%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜지오",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "18.18%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜켐스",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "17.94%",
+        "dir": "out"
+      },
+      {
+        "n": "김종구",
+        "kind": "person",
+        "type": "investment",
+        "detail": "16.89%",
+        "dir": "in"
+      },
+      {
+        "n": "AGM",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "16.6%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜에이치지 에버",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "10.43%",
+        "dir": "out"
+      },
+      {
+        "n": "주식회사 아이큐랩",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "7.11%",
+        "dir": "out"
+      },
+      {
+        "n": "엠텍비젼 주식회사",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "6.21%",
+        "dir": "out"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "㈜지오엠",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 240096000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "n": "Olive Union Inc",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 170857000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        },
+        {
+          "n": "올리브유니온(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 47728000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        }
+      ]
     }
   }
 }

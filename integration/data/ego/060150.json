@@ -22,10 +22,76 @@
         "dir": "in",
         "s": "소재",
         "tier": "dot"
+      },
+      {
+        "n": "㈜영흥산업환경",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜파주비앤알",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "아이앤에스㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "인선기업㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "인선모터스㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "노앤그린ESG 제2호 사모투자 합자회사\n (구, 씨에이씨그린성장 제1호 사모투자 합자회사)",
+        "kind": "coop_fund",
+        "type": "associate",
+        "detail": "39.4%",
+        "dir": "out"
+      },
+      {
+        "n": "씨에이씨그린성장제1호사모투자합자회사",
+        "kind": "coop_fund",
+        "type": "associate",
+        "detail": "39.37%",
+        "dir": "out"
+      },
+      {
+        "n": "이앤에프다이아몬드사모투자합자회사",
+        "kind": "coop_fund",
+        "type": "associate",
+        "detail": "20.66%",
+        "dir": "out"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "n": "(주)코엔텍",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 642550000.0,
+          "as_of": 2025,
+          "prov": "특수관계자공시 · 매입"
+        }
+      ],
       "down": [
         {
           "t": "010780",
@@ -33,6 +99,33 @@
           "type": "customer",
           "tier_grade": "T1",
           "amount": 196240000.0,
+          "as_of": 2025,
+          "prov": "특수관계자공시 · 매출"
+        },
+        {
+          "n": "아이에스에코솔루션㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 472321000.0,
+          "as_of": 2025,
+          "prov": "특수관계자공시 · 매출"
+        },
+        {
+          "n": "(주)코엔텍",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 333134000.0,
+          "as_of": 2025,
+          "prov": "특수관계자공시 · 매출"
+        },
+        {
+          "n": "골든에코㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3600000.0,
           "as_of": 2025,
           "prov": "특수관계자공시 · 매출"
         }

@@ -4,9 +4,110 @@
   "s": "반도체",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "엘비리텍",
+        "kind": "person",
+        "type": "subsidiary",
+        "detail": "60.0%",
+        "dir": "out"
+      },
+      {
+        "n": "엘비루셈",
+        "kind": "person",
+        "type": "associate",
+        "detail": "48.8%",
+        "dir": "out"
+      },
+      {
+        "n": "LB루셈",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "48.78%",
+        "dir": "out"
+      },
+      {
+        "n": "엘비엠케이솔루션",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "20.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜세미파워렉스",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "18.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜LB",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "11.02%",
+        "dir": "in"
+      },
+      {
+        "n": "㈜엘비",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "8.31%",
+        "dir": "in"
+      },
+      {
+        "n": "구본천",
+        "kind": "person",
+        "type": "investment",
+        "detail": "7.67%",
+        "dir": "in"
+      },
+      {
+        "n": "구본완",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "5.5%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "n": "엘비유세스(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1589437800.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "㈜엘비",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1255358873.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "엘비휴넷",
+          "kind": "person",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 348635000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "엘비엠케이솔루션",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 186962440.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        }
+      ],
       "down": []
     }
   }

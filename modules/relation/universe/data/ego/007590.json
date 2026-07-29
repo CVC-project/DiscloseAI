@@ -4,9 +4,50 @@
   "s": "화학",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "(주)동방\n그린팜\n(비상장)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "65.07%",
+        "dir": "out"
+      },
+      {
+        "n": "염병만",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "18.71%",
+        "dir": "in"
+      },
+      {
+        "n": "염병진",
+        "kind": "person",
+        "type": "investment",
+        "detail": "11.25%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "n": "스미토모화학아그로서울(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 25546618341.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "SUMMIT AGRO INT.",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 64297740.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입장려금, 특수관계자거래"
+        }
+      ],
       "down": []
     }
   }

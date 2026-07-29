@@ -4,9 +4,76 @@
   "s": "기계·장비",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "DY P&F USA Corp",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜창우엠앤디",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "동양가복북경분체\n수송설비유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "조좌진",
+        "kind": "person",
+        "type": "associate",
+        "detail": "37.69%",
+        "dir": "in"
+      },
+      {
+        "n": "디와이피엔(주)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "9.03%",
+        "dir": "in"
+      },
+      {
+        "n": "㈜스마트올리브",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "5.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)더이한에스티이",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      },
+      {
+        "n": "디와이피엔씨(주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      }
+    ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "n": "최대주주 및 임직원",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 12402581000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등, 특수관계자 거래"
+        }
+      ],
       "down": [
         {
           "t": "025860",
@@ -16,6 +83,24 @@
           "amount": 58400000000.0,
           "as_of": 2025,
           "prov": "단일판매ㆍ공급계약체결 · 남해화학주식회사"
+        },
+        {
+          "n": "최대주주 및 임직원",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 396363000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등, 특수관계자 거래"
+        },
+        {
+          "n": "디와이피엔씨(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 7011000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등, 특수관계자 거래"
         }
       ]
     }

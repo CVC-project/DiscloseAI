@@ -31,11 +31,139 @@
         "dir": "out",
         "s": "전기전자부품",
         "tier": "named400"
+      },
+      {
+        "n": "일진디앤코(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "일진다이아몬드(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "50.1%",
+        "dir": "out"
+      },
+      {
+        "n": "알피니언메디칼시스템(주)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "49.8%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)전주방송",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "40.0%",
+        "dir": "out"
+      },
+      {
+        "n": "허정석",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "29.1%",
+        "dir": "in"
+      },
+      {
+        "n": "일진파트너스 유한책임회사",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "24.6%",
+        "dir": "in"
+      },
+      {
+        "n": "Life Science Enterprises",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "15.8%",
+        "dir": "out"
+      },
+      {
+        "n": "파인트리4호 벤처투자조합",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "15.4%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)에이펫",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "10.3%",
+        "dir": "out"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "일진씨앤에스㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 239000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "일진제강(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 901000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "일진씨앤에스㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 386000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "일진디스플레이(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 184000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "㈜일진에스앤티",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 133000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "일진반도체㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 15000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "일진지엘에스㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 15000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

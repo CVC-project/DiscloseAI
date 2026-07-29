@@ -4,10 +4,153 @@
   "s": "기계·장비",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "동강풍력발전(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "울산풍력발전(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "윈앤피(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "육백산풍력발전(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)아이오",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "84.0%",
+        "dir": "out"
+      },
+      {
+        "n": "의령풍력발전(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "74.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Makambako Energy",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "55.0%",
+        "dir": "out"
+      },
+      {
+        "n": "강릉풍력발전(주)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "49.0%",
+        "dir": "out"
+      },
+      {
+        "n": "구룡풍력발전(주)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "49.0%",
+        "dir": "out"
+      },
+      {
+        "n": "오미산풍력발전(주)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "43.0%",
+        "dir": "out"
+      },
+      {
+        "n": "영광백수풍력발전(주)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "32.0%",
+        "dir": "out"
+      },
+      {
+        "n": "유니슨엔지니어링(주)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "12.0%",
+        "dir": "out"
+      },
+      {
+        "n": "정암풍력발전㈜",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "10.0%",
+        "dir": "out"
+      },
+      {
+        "n": "명운산업개발(주)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "9.55%",
+        "dir": "in"
+      },
+      {
+        "n": "주식회사 아네모이",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "9.21%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "오미산풍력발전(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1991322000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        },
+        {
+          "n": "정암풍력발전㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1746273000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        },
+        {
+          "n": "영광백수풍력발전(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 986680000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        },
+        {
+          "n": "의령풍력발전(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 363482000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        }
+      ]
     }
   }
 }

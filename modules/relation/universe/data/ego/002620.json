@@ -22,11 +22,63 @@
         "dir": "in",
         "s": "제약바이오",
         "tier": "dot"
+      },
+      {
+        "n": "한승수",
+        "kind": "person",
+        "type": "subsidiary",
+        "detail": "57.8%",
+        "dir": "in"
+      },
+      {
+        "n": "Jeil YaoPhama.Co., Ltd.",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "50.0%",
+        "dir": "out"
+      },
+      {
+        "n": "제일야오",
+        "kind": "person",
+        "type": "associate",
+        "detail": "50.0%",
+        "dir": "out"
+      },
+      {
+        "n": "에스앤피혁신기술1호\n조합",
+        "kind": "coop_fund",
+        "type": "associate",
+        "detail": "35.7%",
+        "dir": "out"
+      },
+      {
+        "n": "한국오츠카제약",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "22.5%",
+        "dir": "out"
+      },
+      {
+        "n": "한상철",
+        "kind": "person",
+        "type": "investment",
+        "detail": "9.7%",
+        "dir": "in"
       }
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "한국오츠카제약",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3963130000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출, 특수관계자거래"
+        }
+      ]
     }
   }
 }

@@ -19,6 +19,7 @@ from modules.relation.common.names import (
 )
 from modules.relation.storage.db import get_local_session
 from modules.relation.storage.models import LinkFailQueue, RelationLocal, RelationRaw
+from modules.relation.transform import entity_kind
 
 logger = logging.getLogger(__name__)
 
@@ -240,6 +241,8 @@ def apply(session=None) -> dict:
         "dropped_blocklist": 0,
         "dropped_ratio_invalid": 0,
         "pruned_stale": 0,
+        "unlisted_nodes": 0,       # ★U5: 비상장·개인 노드로 살린 상대 (과거엔 drop)
+        "pruned_orphan_nodes": 0,
     }
     touched_keys: set[tuple] = set()
 
@@ -253,17 +256,21 @@ def apply(session=None) -> dict:
                 if not target_ticker:
                     counters["dropped_unmatched"] += 1
                     continue
-                # source 판별: 개인/재단/top50이 아닌 법인 → drop
-                if is_personal_shareholder(r.source_name, r.relate):
-                    counters["dropped_personal"] += 1
-                    continue
-                if is_foundation(r.source_name):
-                    counters["dropped_foundation"] += 1
-                    continue
+                # source 판별: 상장사면 그대로, 아니면 U5 비상장 노드로 적재
+                # (개인·재단·비상장 전부 — 과거엔 여기서 drop돼 화면이 비었다)
                 source_ticker = ticker_map.get(normalize_company_name(r.source_name))
                 if not source_ticker:
-                    counters["dropped_unmatched"] += 1
-                    continue
+                    source_ticker = entity_kind.upsert_unlisted_node(
+                        session,
+                        anchor_corp=target_ticker,
+                        name_raw=r.source_name,
+                        relate=r.relate,
+                        provenance=f"hyslrSttus:{r.bsns_year}",
+                    )
+                    if not source_ticker:
+                        counters["dropped_unmatched"] += 1
+                        continue
+                    counters["unlisted_nodes"] += 1
                 touched_keys.add(
                     _upsert_relation_local(
                         session,
@@ -284,9 +291,6 @@ def apply(session=None) -> dict:
                 if not source_ticker:
                     counters["dropped_unmatched"] += 1
                     continue
-                if is_foundation(r.target_name):
-                    counters["dropped_foundation"] += 1
-                    continue
                 # FN-013: ratio sanity — 지분율에 주식수가 들어온 오파싱(영풍→시그네틱스 710651%) 차단
                 if r.ratio is not None and r.ratio > 100:
                     counters["dropped_ratio_invalid"] += 1
@@ -294,16 +298,33 @@ def apply(session=None) -> dict:
                 # FN-013: 영문 약칭 단독 대상명 게이트. 단 NAVER·KT·SK·HMM처럼 **정식 사명
                 # 자체가 약칭 형태인 실존 상장사**(ticker_map에 정확 존재)는 통과 —
                 # 이 경우의 오링킹(현대차→HMM)은 쌍 단위 블록리스트가 최종 방어한다.
-                if is_ambiguous_abbrev(r.target_name) and not ticker_map.get(
+                # ★U5: 게이트에 걸려도 이제 버리지 않는다 — 상장사로 붙이지 않을 뿐
+                # **공시에 적힌 그대로 비상장 노드**가 된다('HMA'는 'HMA'로 표시).
+                # 사고(FN-013)는 그대로 차단하면서 정보는 살린다.
+                target_ticker = None
+                gated = is_ambiguous_abbrev(r.target_name) and not ticker_map.get(
                     normalize_company_name(r.target_name)
-                ):
-                    _enqueue_link_fail(session, r.target_name, f"otrCpr:{r.source_name}:{r.bsns_year}")
+                )
+                if gated:
+                    _enqueue_link_fail(
+                        session, r.target_name, f"otrCpr:{r.source_name}:{r.bsns_year}"
+                    )
                     counters["queued_ambiguous"] += 1
-                    continue
-                target_ticker = ticker_map.get(normalize_company_name(r.target_name))
+                else:
+                    target_ticker = ticker_map.get(normalize_company_name(r.target_name))
                 if not target_ticker:
-                    counters["dropped_unmatched"] += 1
-                    continue
+                    # 재단도 비상장 노드로 표시(공익재단 출자는 지배구조상 유의미)
+                    target_ticker = entity_kind.upsert_unlisted_node(
+                        session,
+                        anchor_corp=source_ticker,
+                        name_raw=r.target_name,
+                        relate=None,
+                        provenance=f"otrCprInvstmntSttus:{r.bsns_year}",
+                    )
+                    if not target_ticker:
+                        counters["dropped_unmatched"] += 1
+                        continue
+                    counters["unlisted_nodes"] += 1
                 # FN-013 M2: CPA 검수로 확정된 오링킹 쌍 차단 (동명 비상장·구사명 충돌·수치 오류)
                 if (source_ticker, target_ticker) in link_blocklist:
                     counters["dropped_blocklist"] += 1
@@ -378,6 +399,10 @@ def apply(session=None) -> dict:
             if key not in touched_keys:
                 session.delete(row)
                 counters["pruned_stale"] += 1
+
+        # ★U5: 엣지가 사라진 비상장 노드 정리 (참조 무결성 기준 — entity_kind 주석 참조)
+        session.flush()
+        counters["pruned_orphan_nodes"] = entity_kind.prune_orphan_unlisted_nodes(session)
 
         session.commit()
     finally:

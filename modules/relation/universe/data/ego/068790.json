@@ -13,6 +13,146 @@
         "dir": "out",
         "s": "반도체",
         "tier": "dot"
+      },
+      {
+        "n": "(유)정본메디컬",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)디엠에스테크놀로지",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜디엠에스에이치",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "영천풍력발전㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "위해전미세광기전유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "전미(위해)국제무역유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "농업회사법인 신토불이",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "90.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)비엔나투자목적회사",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "45.4%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜디엠에스이",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "40.0%",
+        "dir": "out"
+      },
+      {
+        "n": "디엠에스지㈜",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "40.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜비올",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "35.2%",
+        "dir": "out"
+      },
+      {
+        "n": "호남풍력발전주식회사",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "30.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)엔디스",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "29.9%",
+        "dir": "out"
+      },
+      {
+        "n": "박용석",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "23.57%",
+        "dir": "in"
+      },
+      {
+        "n": "김천풍력발전(주)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "23.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(유)정본메디컬",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "8.73%",
+        "dir": "in"
+      },
+      {
+        "n": "정본글로벌",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "8.06%",
+        "dir": "in"
+      },
+      {
+        "n": "(주)바이오티엔에스",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "7.1%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜엔디스, 호남풍력발전㈜, ㈜비엔나투자목적회사(*1)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      },
+      {
+        "n": "김천풍력발전㈜, (유)씨더블유, 씨더블유(동관시)국제무역유한공사(*3)",
+        "kind": "public_org",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
       }
     ],
     "valuechain": {
@@ -25,9 +165,37 @@
           "amount": 874500000.0,
           "as_of": 2025,
           "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "(유)씨더블유",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3892628000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
         }
       ],
-      "down": []
+      "down": [
+        {
+          "n": "(유)씨더블유",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2015578000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "(유)정본메디컬",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 6200000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

@@ -13,11 +13,110 @@
         "dir": "out",
         "s": "금융",
         "tier": "dot"
+      },
+      {
+        "n": "BC F&B Australia Pty Ltd.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "BC F&B Shanghai Co., Ltd.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "BC F&B USA Corp.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "BC F&B Vietnam Co., Ltd.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "해태아이스크림㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "김호연",
+        "kind": "person",
+        "type": "associate",
+        "detail": "37.89%",
+        "dir": "in"
+      },
+      {
+        "n": "빙그레 농식품 투자조합 1호",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "18.9%",
+        "dir": "out"
+      },
+      {
+        "n": "빙그레 농식품 투자조합 2호",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "18.5%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)셀프스토리지",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "(주)제때",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "(주)제때",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 133419000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등, 특수관계자거래"
+        },
+        {
+          "n": "(주)셀프스토리지",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 46000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "(주)제때",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1058000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등, 특수관계자거래"
+        }
+      ]
     }
   }
 }

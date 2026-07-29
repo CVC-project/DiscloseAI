@@ -4,10 +4,112 @@
   "s": "레저·교육",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "(주)LT크루즈홀리데이",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)엘티엔터테인먼트",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "용산역세권개발(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "70.1%",
+        "dir": "out"
+      },
+      {
+        "n": "마이데일리(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "58.53%",
+        "dir": "out"
+      },
+      {
+        "n": "코레일관광개발㈜",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "39.2%",
+        "dir": "out"
+      },
+      {
+        "n": "김기병",
+        "kind": "person",
+        "type": "associate",
+        "detail": "22.72%",
+        "dir": "in"
+      },
+      {
+        "n": "드림허브프로젝트(주)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "15.1%",
+        "dir": "out"
+      },
+      {
+        "n": "동화투자개발㈜",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "11.09%",
+        "dir": "in"
+      },
+      {
+        "n": "동화투자개발㈜",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "6.31%",
+        "dir": "out"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "동화투자개발㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 936441000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입 등, 특수관계자거래"
+        },
+        {
+          "n": "㈜동화면세점",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 8874000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입 등, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "코레일관광개발㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 313600000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 등, 특수관계자거래"
+        },
+        {
+          "n": "롯데관광㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 130856000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 등, 특수관계자거래"
+        }
+      ]
     }
   }
 }

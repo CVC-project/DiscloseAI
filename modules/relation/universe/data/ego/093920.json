@@ -4,10 +4,87 @@
   "s": "반도체",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "서원(남경)전자유한공사\n(비상장)",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "서원(천진)전자유한공사\n(비상장)",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "하노이 서원인텍\n(비상장)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "99.0%",
+        "dir": "out"
+      },
+      {
+        "n": "코론 주식회사\n(비상장)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "70.0%",
+        "dir": "out"
+      },
+      {
+        "n": "김재윤",
+        "kind": "person",
+        "type": "associate",
+        "detail": "30.9%",
+        "dir": "in"
+      },
+      {
+        "n": "최영애",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "8.6%",
+        "dir": "in"
+      },
+      {
+        "n": "김지현",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "6.94%",
+        "dir": "in"
+      },
+      {
+        "n": "김재희",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "5.32%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "엑스오테크놀러지(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 94599700.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "엑스오테크놀러지(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4800000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

@@ -4,10 +4,156 @@
   "s": "자동차",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "KB AUTOSYS AMERICA, INC.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "KB Autosys India Private Ltd.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "KB Autosys Manufacturing America, Inc.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "KB Autosys Zhangjiagang Co., Ltd.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "뉴머티리얼스(주)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "19.9%",
+        "dir": "out"
+      },
+      {
+        "n": "뉴메탈리얼스㈜",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "19.9%",
+        "dir": "out"
+      },
+      {
+        "n": "김용웅",
+        "kind": "person",
+        "type": "investment",
+        "detail": "13.7%",
+        "dir": "in"
+      },
+      {
+        "n": "김신완",
+        "kind": "person",
+        "type": "investment",
+        "detail": "12.13%",
+        "dir": "in"
+      },
+      {
+        "n": "김신욱",
+        "kind": "person",
+        "type": "investment",
+        "detail": "8.7%",
+        "dir": "in"
+      },
+      {
+        "n": "김신영",
+        "kind": "person",
+        "type": "investment",
+        "detail": "6.0%",
+        "dir": "in"
+      },
+      {
+        "n": "김신관",
+        "kind": "person",
+        "type": "investment",
+        "detail": "5.78%",
+        "dir": "in"
+      },
+      {
+        "n": "(주)뉴엠티 (*2)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "(주)화인트로 (*1)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "뉴메탈리얼스㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "(주)화인트로 (*1)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 21737076000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "(주)뉴엠티 (*2)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3056687000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "뉴메탈리얼스㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 481600000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "(주)뉴엠티 (*2)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 686605000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "뉴메탈리얼스㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 43800000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출, 특수관계자거래"
+        }
+      ]
     }
   }
 }

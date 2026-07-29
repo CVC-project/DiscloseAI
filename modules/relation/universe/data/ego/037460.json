@@ -22,6 +22,78 @@
         "dir": "in",
         "s": "유통",
         "tier": "named400"
+      },
+      {
+        "t": "031330",
+        "n": "에스에이엠티",
+        "type": "subsidiary",
+        "detail": "51.09%",
+        "dir": "out",
+        "s": "유통",
+        "tier": "named400"
+      },
+      {
+        "n": "SAMJI ELECTRONICS JAPAN(해외 비상장)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "세일이엔에스㈜(비상장)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "58.5%",
+        "dir": "out"
+      },
+      {
+        "n": "아이큐스타(비상장)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "48.89%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜에스제이일레콤",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "48.43%",
+        "dir": "out"
+      },
+      {
+        "n": "삼일씨앤씨㈜(비상장)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "48.0%",
+        "dir": "out"
+      },
+      {
+        "n": "아이비에스넷(비상장)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "45.45%",
+        "dir": "out"
+      },
+      {
+        "n": "삼지자원개발(비상장)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "40.0%",
+        "dir": "out"
+      },
+      {
+        "n": "이기남",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "22.11%",
+        "dir": "in"
+      },
+      {
+        "n": "이용준",
+        "kind": "person",
+        "type": "investment",
+        "detail": "9.19%",
+        "dir": "in"
       }
     ],
     "valuechain": {
@@ -34,9 +106,28 @@
           "amount": 159095000.0,
           "as_of": 2025,
           "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "n": "㈜에스제이일레콤",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 886663000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 재화의 매입, 특수관계자거래"
         }
       ],
-      "down": []
+      "down": [
+        {
+          "n": "㈜에스제이일레콤",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 114511000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

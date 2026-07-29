@@ -13,11 +13,163 @@
         "dir": "in",
         "s": "철강·금속",
         "tier": "dot"
+      },
+      {
+        "n": "D&A㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "부산청과㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "코리아로지스(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "코리아로지스(주) \n(구.김해물류터미널(주))",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "코리아캐피탈대부㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "농업회사법인여물㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "90.0%",
+        "dir": "out"
+      },
+      {
+        "n": "농업회사법인고려㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "75.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)김해물류터미널",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "50.0%",
+        "dir": "out"
+      },
+      {
+        "n": "대양개발㈜",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "31.6%",
+        "dir": "out"
+      },
+      {
+        "n": "동서화학공업㈜",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "19.61%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜엠디엘이앤씨",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "10.01%",
+        "dir": "out"
+      },
+      {
+        "n": "금강비겐드㈜",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "10.01%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)참품한우",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "8.98%",
+        "dir": "out"
+      },
+      {
+        "n": "대양흥업㈜",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "7.79%",
+        "dir": "out"
+      },
+      {
+        "n": "그린랜드 AI 투자조합",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "7.09%",
+        "dir": "out"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "대양흥업㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1581134728.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "(주)에버코스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 18000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "동서화학공업㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 15335688.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "중원엔지니어링㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 10800000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "금강비겐드(주)(구. (주)엠디엘이앤씨)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 6000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

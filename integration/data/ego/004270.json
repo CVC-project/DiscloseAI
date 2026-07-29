@@ -4,10 +4,121 @@
   "s": "유통",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "(주)남성\n에이엠디",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "NAMSUNG\nAMERICA",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "99.77%",
+        "dir": "out"
+      },
+      {
+        "n": "남풍과학기술\n유한공사",
+        "kind": "public_org",
+        "type": "associate",
+        "detail": "50.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜남성인프라넷",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "49.9%",
+        "dir": "out"
+      },
+      {
+        "n": "윤남철",
+        "kind": "person",
+        "type": "investment",
+        "detail": "12.43%",
+        "dir": "in"
+      },
+      {
+        "n": "윤성호",
+        "kind": "person",
+        "type": "investment",
+        "detail": "9.33%",
+        "dir": "in"
+      },
+      {
+        "n": "윤종호",
+        "kind": "person",
+        "type": "investment",
+        "detail": "9.06%",
+        "dir": "in"
+      },
+      {
+        "n": "N.S.I",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "㈜남성인프라넷",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      },
+      {
+        "n": "㈜드리머",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "㈜드리머앤드멤버스",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "남풍과학기술\n유한공사",
+        "kind": "public_org",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      },
+      {
+        "n": "애니포인트미디어㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      }
+    ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "㈜드리머",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2380000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 매출거래등"
+        },
+        {
+          "n": "㈜드리머앤드멤버스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2380000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 매출거래등"
+        }
+      ]
     }
   }
 }

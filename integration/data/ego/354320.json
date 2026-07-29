@@ -4,10 +4,95 @@
   "s": "철강·금속",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "Almac America\nCorporation",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜알멕\n코리아",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜에이알\n알루미늄",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "58.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜다이엑스",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "27.38%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "(주)디에스아이",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 435963000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등, 특수관계자거래"
+        },
+        {
+          "n": "㈜다이엑스",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 197494000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등, 특수관계자거래"
+        },
+        {
+          "n": "대신금속(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 78468000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "대신금속(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 534470000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등, 특수관계자거래"
+        },
+        {
+          "n": "㈜다이엑스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 475360000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등, 특수관계자거래"
+        },
+        {
+          "n": "(주)디에스아이",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 12875000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등, 특수관계자거래"
+        }
+      ]
     }
   }
 }

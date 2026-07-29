@@ -4,10 +4,199 @@
   "s": "건설",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "남광엔케이㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)세운건설",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "22.37%",
+        "dir": "in"
+      },
+      {
+        "n": "백령배움터 주식회사",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "20.72%",
+        "dir": "out"
+      },
+      {
+        "n": "금광기업(주)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "20.34%",
+        "dir": "in"
+      },
+      {
+        "n": "건진건설(주)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "11.19%",
+        "dir": "in"
+      },
+      {
+        "n": "기명철",
+        "kind": "person",
+        "type": "investment",
+        "detail": "8.44%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "극동건설(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 38164241000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 매입 및 기타비용, 특수관계자거래"
+        },
+        {
+          "n": "정품건설산업(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 15488003000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 매입 및 기타비용, 특수관계자거래"
+        },
+        {
+          "n": "금광기업(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 14956500000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 매입 및 기타비용, 특수관계자거래"
+        },
+        {
+          "n": "다온기술(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 11340891000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 매입 및 기타비용, 특수관계자거래"
+        },
+        {
+          "n": "(주)내경엔지니어링",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 9812982000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 매입 및 기타비용, 특수관계자거래"
+        },
+        {
+          "n": "건진건설(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3847056000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 매입 및 기타비용, 특수관계자거래"
+        },
+        {
+          "n": "정건(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2212719000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 매입 및 기타비용, 특수관계자거래"
+        },
+        {
+          "n": "(주)세운건설",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 38987000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 매입 및 기타비용, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "정품건설산업(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 16455136000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 매출 및 기타수익, 특수관계자거래"
+        },
+        {
+          "n": "극동건설(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 12964901000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 매출 및 기타수익, 특수관계자거래"
+        },
+        {
+          "n": "금광기업(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 11762717000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 매출 및 기타수익, 특수관계자거래"
+        },
+        {
+          "n": "다온기술(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1301850000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 매출 및 기타수익, 특수관계자거래"
+        },
+        {
+          "n": "(주)세운건설",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1134214000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 매출 및 기타수익, 특수관계자거래"
+        },
+        {
+          "n": "(주)내경엔지니어링",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 332450000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 매출 및 기타수익, 특수관계자거래"
+        },
+        {
+          "n": "정건(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 21780000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 매출 및 기타수익, 특수관계자거래"
+        },
+        {
+          "n": "건진건설(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2120000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 매출 및 기타수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

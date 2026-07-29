@@ -4,9 +4,94 @@
   "s": "자동차",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "청도유니크부건(유)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "안영구",
+        "kind": "person",
+        "type": "associate",
+        "detail": "21.02%",
+        "dir": "in"
+      },
+      {
+        "n": "포워드-키움-씨앤티\n신기술투자조합",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "19.09%",
+        "dir": "out"
+      },
+      {
+        "n": "포워드-메리츠\n글로벌바이오\n신기술투자조합 제1호",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "10.64%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜아이마스",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "9.8%",
+        "dir": "out"
+      },
+      {
+        "n": "안정구",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "9.51%",
+        "dir": "in"
+      },
+      {
+        "n": "㈜아이엠에스모빌리티\n[(구)아이엠에스커넥트]",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "7.34%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜아이엠에스커넥트[(구)아이마스]",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "7.34%",
+        "dir": "out"
+      }
+    ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "n": "아넥스통상(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 6152297000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "신영산업",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 6096775000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "(주)보텍산업",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3182834000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        }
+      ],
       "down": []
     }
   }

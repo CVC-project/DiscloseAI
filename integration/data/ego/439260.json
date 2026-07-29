@@ -13,10 +13,41 @@
         "dir": "in",
         "s": "중공업·방산",
         "tier": "named400"
+      },
+      {
+        "n": "㈜대한위드엔젤스",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜해남화원산업단지개발",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜케이에이치아이",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "46.1%",
+        "dir": "in"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "n": "(주)포스텍",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 15615080000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        }
+      ],
       "down": []
     }
   }

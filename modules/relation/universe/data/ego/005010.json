@@ -4,10 +4,195 @@
   "s": "철강·금속",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "HUSTEEL\nCANADA",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "HUSTEEL USA",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "HUSTEEL\nAMERICA",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "50.0%",
+        "dir": "out"
+      },
+      {
+        "n": "신안종합리조트",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "26.0%",
+        "dir": "out"
+      },
+      {
+        "n": "박순석",
+        "kind": "person",
+        "type": "associate",
+        "detail": "23.8%",
+        "dir": "in"
+      },
+      {
+        "n": "SSP",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "16.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜신안",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "5.33%",
+        "dir": "in"
+      },
+      {
+        "n": "(주)관악",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "(주)신안관광",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "(주)신안코스메틱",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "㈜신안",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "신안개발(주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "신안관광개발(주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "신안종합레져(주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "신안종합리조트",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      },
+      {
+        "n": "에스더블유엠(주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "테헤란로 신안빌딩",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "(주)신안코스메틱",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 12211399000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입거래, 특수관계자거래"
+        },
+        {
+          "n": "㈜신안",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 5180000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입거래, 특수관계자거래"
+        },
+        {
+          "n": "에스더블유엠(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1128520000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입거래, 특수관계자거래"
+        },
+        {
+          "n": "씨앤티85 주식회사",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 590784000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입거래, 특수관계자거래"
+        },
+        {
+          "n": "테헤란로 신안빌딩",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 484704000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입거래, 특수관계자거래"
+        },
+        {
+          "n": "신안종합리조트",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 61173000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입거래, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "(주)신안코스메틱",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1320000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출거래, 특수관계자거래"
+        }
+      ]
     }
   }
 }

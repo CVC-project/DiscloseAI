@@ -13,11 +13,140 @@
         "dir": "out",
         "s": "화학",
         "tier": "dot"
+      },
+      {
+        "n": "글로벌아그로(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "99.0%",
+        "dir": "out"
+      },
+      {
+        "n": "동오라이프\n 사이언스(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "77.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)동오홀딩스",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "30.64%",
+        "dir": "in"
+      },
+      {
+        "n": "(주)비바엔에스",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "25.0%",
+        "dir": "out"
+      },
+      {
+        "n": "파이오니아",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "21.0%",
+        "dir": "out"
+      },
+      {
+        "n": "이용진",
+        "kind": "person",
+        "type": "investment",
+        "detail": "17.3%",
+        "dir": "in"
+      },
+      {
+        "n": "이병만",
+        "kind": "person",
+        "type": "investment",
+        "detail": "15.53%",
+        "dir": "in"
+      },
+      {
+        "n": "(주)탑프레쉬",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "15.0%",
+        "dir": "out"
+      },
+      {
+        "n": "인섹트바이오텍",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "10.0%",
+        "dir": "out"
+      },
+      {
+        "n": "대유",
+        "kind": "person",
+        "type": "investment",
+        "detail": "8.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)다산이앤이",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "7.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)동오홀딩스, (주)리더스케미컬, 파인아그로케미칼(주), (주)동오네트웍스, 재단법인 동오농촌재단, (주)탑프레쉬",
+        "kind": "public_org",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "(주)파이오니아, (주)비바엔에스",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "(주)리더스케미컬",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 409538000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등과의 거래 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "파인아그로케미칼(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2144541000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등과의 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "(주)리더스케미컬",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 416527000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등과의 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "(주)탑프레쉬",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 158000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등과의 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

@@ -4,10 +4,233 @@
   "s": "반도체",
   "tier": "named400",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "에스엠에이치㈜",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "50.0%",
+        "dir": "out"
+      },
+      {
+        "n": "미시간밸류파트너스㈜",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "49.97%",
+        "dir": "out"
+      },
+      {
+        "n": "미시간투자자문(주)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "49.97%",
+        "dir": "out"
+      },
+      {
+        "n": "빌랑스신기술조합제9호",
+        "kind": "coop_fund",
+        "type": "associate",
+        "detail": "49.02%",
+        "dir": "out"
+      },
+      {
+        "n": "바른창호(주)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "44.44%",
+        "dir": "out"
+      },
+      {
+        "n": "서룡전자㈜",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "38.35%",
+        "dir": "in"
+      },
+      {
+        "n": "머카바-에스앤에스 에프앤비 1호",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "33.33%",
+        "dir": "out"
+      },
+      {
+        "n": "뉴비전오비트 신기술사업투자조합 1호",
+        "kind": "coop_fund",
+        "type": "associate",
+        "detail": "30.51%",
+        "dir": "out"
+      },
+      {
+        "n": "IPEC INDIA  PRIVATE LIMITED",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "26.06%",
+        "dir": "out"
+      },
+      {
+        "n": "그래비티 K-아이언돔 투자조합 제1호",
+        "kind": "coop_fund",
+        "type": "associate",
+        "detail": "24.73%",
+        "dir": "out"
+      },
+      {
+        "n": "에스앤에스라이프스타일투자조합1호",
+        "kind": "coop_fund",
+        "type": "associate",
+        "detail": "22.8%",
+        "dir": "out"
+      },
+      {
+        "n": "비전-디에이신기술투자조합 제3호",
+        "kind": "coop_fund",
+        "type": "associate",
+        "detail": "21.74%",
+        "dir": "out"
+      },
+      {
+        "n": "에스앤에스-레드우드인디아헬스케어펀드",
+        "kind": "coop_fund",
+        "type": "associate",
+        "detail": "21.6%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜파이어넷",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "20.59%",
+        "dir": "out"
+      },
+      {
+        "n": "엠아이(MIP)혁신M&A투자조합",
+        "kind": "coop_fund",
+        "type": "associate",
+        "detail": "20.0%",
+        "dir": "out"
+      },
+      {
+        "n": "박성재",
+        "kind": "person",
+        "type": "investment",
+        "detail": "5.26%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "서룡전자㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 829097000.0,
+          "as_of": 2025,
+          "prov": "특수관계회사 현황 및 거래내용 · 매입거래, 특수관계자거래"
+        },
+        {
+          "n": "오영전자㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 64460000.0,
+          "as_of": 2025,
+          "prov": "특수관계회사 현황 및 거래내용 · 매입거래, 특수관계자거래"
+        },
+        {
+          "n": "㈜파이어넷",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 38993000.0,
+          "as_of": 2025,
+          "prov": "특수관계회사 현황 및 거래내용 · 매입거래, 특수관계자거래"
+        },
+        {
+          "n": "(주)디에스프레시",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 8570000.0,
+          "as_of": 2025,
+          "prov": "특수관계회사 현황 및 거래내용 · 매입거래, 특수관계자거래"
+        },
+        {
+          "n": "(주)에이치키친",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 775000.0,
+          "as_of": 2025,
+          "prov": "특수관계회사 현황 및 거래내용 · 매입거래, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "서룡전자㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2969142000.0,
+          "as_of": 2025,
+          "prov": "특수관계회사 현황 및 거래내용 · 매출거래, 특수관계자 거래"
+        },
+        {
+          "n": "(주)에이치키친",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 204528000.0,
+          "as_of": 2025,
+          "prov": "특수관계회사 현황 및 거래내용 · 매출거래, 특수관계자 거래"
+        },
+        {
+          "n": "(주)에이비즈파트너스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 109184000.0,
+          "as_of": 2025,
+          "prov": "특수관계회사 현황 및 거래내용 · 매출거래, 특수관계자 거래"
+        },
+        {
+          "n": "왓츠키친",
+          "kind": "person",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 60012000.0,
+          "as_of": 2025,
+          "prov": "특수관계회사 현황 및 거래내용 · 매출거래, 특수관계자 거래"
+        },
+        {
+          "n": "오영전자㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 37330000.0,
+          "as_of": 2025,
+          "prov": "특수관계회사 현황 및 거래내용 · 매출거래, 특수관계자 거래"
+        },
+        {
+          "n": "김태훈",
+          "kind": "person",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 32404000.0,
+          "as_of": 2025,
+          "prov": "특수관계회사 현황 및 거래내용 · 매출거래, 특수관계자 거래"
+        },
+        {
+          "n": "(주)두성테크",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 8822000.0,
+          "as_of": 2025,
+          "prov": "특수관계회사 현황 및 거래내용 · 매출거래, 특수관계자 거래"
+        }
+      ]
     }
   }
 }

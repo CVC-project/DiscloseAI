@@ -22,10 +22,129 @@
         "dir": "out",
         "s": "기계·장비",
         "tier": "dot"
+      },
+      {
+        "n": "(주)나우종합건설",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)서연씨엔에프",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Beijing SEOYON Co., Ltd.(구, Seoyon China Co., Ltd.)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "SEOYON INDIA PRIVATE LIMITED",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "SEOYON SINGAPORE PTE. LTD.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Seoyon America Corporation",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Seoyon China Co., Ltd.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Seoyon Europe GmbH",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Seoyon Europe s.r.o",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)서연인테크",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "84.0%",
+        "dir": "out"
+      },
+      {
+        "n": "유양석",
+        "kind": "person",
+        "type": "associate",
+        "detail": "44.44%",
+        "dir": "in"
+      },
+      {
+        "n": "㈜지산소프트",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "40.0%",
+        "dir": "out"
+      },
+      {
+        "n": "지역",
+        "kind": "person",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "n": "㈜지산소프트",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2458610000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        },
+        {
+          "n": "ASSAN HANIL OTOMOTIV SANAYI VE TICARET ANONIM SIRKETI",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 97738000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        },
+        {
+          "n": "BEIJING SEOYON E-HWA AUTOMOTIVE PARTS CO., LTD.",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2925000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        }
+      ],
       "down": [
         {
           "t": "200880",
@@ -35,6 +154,33 @@
           "amount": 27613000.0,
           "as_of": 2025,
           "prov": "특수관계자와의 거래 · 매입"
+        },
+        {
+          "n": "ASSAN HANIL OTOMOTIV SANAYI VE TICARET ANONIM SIRKETI",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 71317750000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "PT. SUMMIT SEOYON AUTOMOTIVE INDONESIA",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 6979742000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "BEIJING SEOYON E-HWA AUTOMOTIVE PARTS CO., LTD.",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 5979531000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
         }
       ]
     }

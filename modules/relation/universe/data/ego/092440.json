@@ -4,10 +4,105 @@
   "s": "기계·장비",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "(주)원진정공",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)원진정공\n[비상장]",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "KISHIN VIETNAM\nCOMPANY LIMITED",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "KISHIN VIETNAM\nCOMPANY LIMITED\n[비상장]",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "기신메가텍(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "기신메가텍(주)\n[비상장]",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "후다바전자공업(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "60.89%",
+        "dir": "in"
+      },
+      {
+        "n": "후타바전자공업(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "60.89%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "FUTABA (Vietnam) Co , Ltd",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2900824000.0,
+          "as_of": 2026,
+          "prov": "특수관계자와의 거래 · 매입"
+        },
+        {
+          "n": "FUTABA Corporation",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 488317000.0,
+          "as_of": 2026,
+          "prov": "특수관계자와의 거래 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "n": "FUTABA (Vietnam) Co , Ltd",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 36501000.0,
+          "as_of": 2026,
+          "prov": "특수관계자와의 거래 · 매출"
+        },
+        {
+          "n": "FUTABA Corporation",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 7977000.0,
+          "as_of": 2026,
+          "prov": "특수관계자와의 거래 · 매출"
+        }
+      ]
     }
   }
 }

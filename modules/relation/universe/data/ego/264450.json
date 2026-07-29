@@ -13,6 +13,27 @@
         "dir": "in",
         "s": "금융",
         "tier": "dot"
+      },
+      {
+        "n": "UBIQUOSS JANPAN Inc.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "UI벤처투자조합10호",
+        "kind": "coop_fund",
+        "type": "subsidiary",
+        "detail": "98.0%",
+        "dir": "out"
+      },
+      {
+        "n": "UI벤처투자조합11호",
+        "kind": "coop_fund",
+        "type": "subsidiary",
+        "detail": "95.0%",
+        "dir": "out"
       }
     ],
     "valuechain": {
@@ -25,9 +46,37 @@
           "amount": 6173035542.0,
           "as_of": 2025,
           "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "㈜넥싸이트",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 105379520.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "㈜유비쿼스인베스트먼트",
+          "kind": "coop_fund",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 78379520.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
         }
       ],
-      "down": []
+      "down": [
+        {
+          "n": "UBIQUOSS USA, LLC",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 950759867.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

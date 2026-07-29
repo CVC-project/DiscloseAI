@@ -4,10 +4,89 @@
   "s": "중공업·방산",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "한라선박기전유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "한라엔엠티(주)(*1)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "해강하이테크 (주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "60.0%",
+        "dir": "out"
+      },
+      {
+        "n": "블루싸이언스(주)\n(*2)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "31.4%",
+        "dir": "out"
+      },
+      {
+        "n": "김영구",
+        "kind": "person",
+        "type": "investment",
+        "detail": "16.53%",
+        "dir": "in"
+      },
+      {
+        "n": "지석준",
+        "kind": "person",
+        "type": "investment",
+        "detail": "16.53%",
+        "dir": "in"
+      },
+      {
+        "n": "(주)미래하이테크",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "9.18%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "(주)미래하이테크",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 7083259233.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "(주)미래하이테크",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 8171076603.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "한라이엔에스㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3600000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

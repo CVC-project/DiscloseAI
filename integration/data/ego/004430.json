@@ -4,10 +4,52 @@
   "s": "화학",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "Songwon\nGroup\nHolding AG",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "송원물산㈜",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "23.88%",
+        "dir": "in"
+      },
+      {
+        "n": "경신실업㈜",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "9.15%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "Songwon Baifu Chemicals (Tangshan) Co., Ltd",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 28482000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "n": "Songwon Baifu Chemicals (Tangshan) Co., Ltd",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 304000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        }
+      ]
     }
   }
 }

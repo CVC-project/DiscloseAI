@@ -4,10 +4,102 @@
   "s": "화학",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "(주)코리아에어텍",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)한주",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "50.13%",
+        "dir": "out"
+      },
+      {
+        "n": "KPIC DAWN(SHANGHAI)\nPOLYMER",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "50.0%",
+        "dir": "out"
+      },
+      {
+        "n": "오드펠터미널코리아㈜",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "43.59%",
+        "dir": "out"
+      },
+      {
+        "n": "(주)케이피아이씨코포레이션",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "31.01%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "(주)에이원상사",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 23777062000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입"
+        },
+        {
+          "n": "(주)케이피아이씨코포레이션",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 12512686000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "n": "(주)케이피아이씨코포레이션",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1537970066000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        },
+        {
+          "n": "KPIC DAWN POLYMER",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 7319499000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        },
+        {
+          "n": "오드펠터미널코리아㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1403499000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        },
+        {
+          "n": "(재)삼일문화재단",
+          "kind": "public_org",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 40500000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        }
+      ]
     }
   }
 }

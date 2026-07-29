@@ -4,10 +4,157 @@
   "s": "철강·금속",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "C2i s.r.o.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "HAM VINA",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "HANKUK COMPOSITE\n USD INC",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "HANKUK COMPOSITE\nUK LTD (비상장)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "HANKUK COMPOSITE US INC (비상장)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "HCM VINA\n(비상장)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜블루캐스트인베스트먼트",
+        "kind": "coop_fund",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜에이치씨네트웍스\n(비상장)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜한국글로벌솔루션",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "립스",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "한국복합소재㈜\n(비상장)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "한국항공기술케이에이티㈜ (비상장)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "Engineered Textile Solutions & Associates, LLC",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "39.0%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜그리드스페이스\n (비상장)(주1)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "35.11%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜용비에이티\n(비상장)(주1)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "34.78%",
+        "dir": "out"
+      },
+      {
+        "n": "조연호",
+        "kind": "person",
+        "type": "associate",
+        "detail": "22.86%",
+        "dir": "in"
+      },
+      {
+        "n": "㈜나라썸\n(비상장)(주1)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "10.1%",
+        "dir": "out"
+      },
+      {
+        "n": "조문수",
+        "kind": "person",
+        "type": "investment",
+        "detail": "6.19%",
+        "dir": "in"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "Engineered Textile Solutions & Associates, LLC",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 108379000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "Engineered Textile Solutions & Associates, LLC",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 5148608000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

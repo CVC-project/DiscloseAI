@@ -4,10 +4,98 @@
   "s": "중공업·방산",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "Kencoa Group LLC",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "켄코아시스템㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "50.001%",
+        "dir": "out"
+      },
+      {
+        "n": "LEE KENNETH MINKYU",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "27.75%",
+        "dir": "in"
+      },
+      {
+        "n": "케플러 주식회사",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "27.08%",
+        "dir": "in"
+      },
+      {
+        "n": "동우켄코아",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "20.0%",
+        "dir": "out"
+      },
+      {
+        "n": "켄코아에너텍㈜",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "12.3%",
+        "dir": "out"
+      },
+      {
+        "n": "켄코아에비에이션㈜",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "8.38%",
+        "dir": "out"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "켄코아에너텍㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1555618000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등"
+        },
+        {
+          "n": "동우켄코아",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 321362000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등"
+        }
+      ],
+      "down": [
+        {
+          "n": "켄코아에너텍㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 67262000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "n": "동우켄코아",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1724000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        }
+      ]
     }
   }
 }

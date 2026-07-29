@@ -4,10 +4,49 @@
   "s": "철강·금속",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "n": "문창복",
+        "kind": "person",
+        "type": "associate",
+        "detail": "32.69%",
+        "dir": "in"
+      },
+      {
+        "n": "김복녀",
+        "kind": "person",
+        "type": "associate",
+        "detail": "20.67%",
+        "dir": "in"
+      },
+      {
+        "n": "안다모빌리티인프라투자조합2호",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "8.06%",
+        "dir": "out"
+      },
+      {
+        "n": "주식회사 루트17(*1)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "5.54%",
+        "dir": "out"
+      }
+    ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "교하개발(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 454274000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등, 특수관계자거래"
+        }
+      ]
     }
   }
 }

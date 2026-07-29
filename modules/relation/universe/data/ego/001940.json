@@ -13,6 +13,34 @@
         "dir": "out",
         "s": "철강·금속",
         "tier": "dot"
+      },
+      {
+        "n": "대흥산업(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "88.7%",
+        "dir": "out"
+      },
+      {
+        "n": "환영철강공업(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "83.5%",
+        "dir": "out"
+      },
+      {
+        "n": "장세홍",
+        "kind": "person",
+        "type": "associate",
+        "detail": "45.58%",
+        "dir": "in"
+      },
+      {
+        "n": "JINIL INTERNATIONAL, INC.",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "19.0%",
+        "dir": "out"
       }
     ],
     "valuechain": {
@@ -25,9 +53,37 @@
           "amount": 58071000.0,
           "as_of": 2025,
           "prov": "특수관계자 거래 · 매입, 특수관계자거래"
+        },
+        {
+          "n": "(주)대유코아",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 6196023000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입, 특수관계자거래"
+        },
+        {
+          "n": "(주)라보JAPAN",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 116629000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입, 특수관계자거래"
         }
       ],
-      "down": []
+      "down": [
+        {
+          "n": "(주)대유코아",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 6287943000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        }
+      ]
     }
   }
 }

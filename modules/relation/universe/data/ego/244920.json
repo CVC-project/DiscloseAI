@@ -13,11 +13,133 @@
         "dir": "out",
         "s": "전기전자부품",
         "tier": "dot"
+      },
+      {
+        "n": "㈜파인랩",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out"
+      },
+      {
+        "n": "에이플러스리얼티㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "88.11%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜에이플러스라이프",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "52.23%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜에이에이아이헬스케어",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "35.05%",
+        "dir": "out"
+      },
+      {
+        "n": "㈜디디아이브이씨제2호\n위탁관리부동산투자회사",
+        "kind": "coop_fund",
+        "type": "associate",
+        "detail": "34.48%",
+        "dir": "out"
+      },
+      {
+        "n": "곽근호",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "20.2%",
+        "dir": "in"
+      },
+      {
+        "n": "㈜코크렙제31호위탁관리\n부동산투자회사",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "10.1%",
+        "dir": "out"
+      },
+      {
+        "n": "스카이에이플러스\n유한회사",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "9.78%",
+        "dir": "in"
+      },
+      {
+        "n": "스카이에이플러스(유)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "9.78%",
+        "dir": "in"
+      },
+      {
+        "n": "(주)케이보그",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      },
+      {
+        "n": "Biofootprints Healthcare Pvt.Ltd.",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      },
+      {
+        "n": "주식회사 에이드랩",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "콘캣주식회사",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 425010000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 현황 및 거래내용 · 매입 등, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "(주)케이보그",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 5000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 현황 및 거래내용 · 매출 등, 특수관계자거래"
+        },
+        {
+          "n": "주식회사 에이드랩",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1100000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 현황 및 거래내용 · 매출 등, 특수관계자거래"
+        },
+        {
+          "n": "콘캣주식회사",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1100000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 현황 및 거래내용 · 매출 등, 특수관계자거래"
+        }
+      ]
     }
   }
 }
