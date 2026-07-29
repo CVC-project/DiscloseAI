@@ -46,12 +46,14 @@ EQUITY_RAW = {"subsidiary", "associate", "investment"}
 
 
 def oracle_merge(gov: list[dict]) -> list[dict]:
+    # ★U5: 비상장·개인 이웃은 `t`가 없다 — 키는 `u:<표기>`(bundle.mergeEgoNeighbors와 동일).
     by: dict[str, dict] = {}
     for r in gov:
-        t = r.get("t")
+        t = r.get("t") or ("u:" + r["n"] if r.get("kind") else None)
         if not t:
             continue
-        e = by.setdefault(t, {"code": t, "types": [], "dir_by_type": {}})
+        e = by.setdefault(t, {"code": t, "types": [], "dir_by_type": {},
+                              "unlisted": bool(r.get("kind")), "tier": r.get("tier")})
         if r["type"] not in e["types"]:
             e["types"].append(r["type"])
         e["dir_by_type"][r["type"]] = r.get("dir")
@@ -61,6 +63,7 @@ def oracle_merge(gov: list[dict]) -> list[dict]:
         primary = e["types"][0]
         out.append({
             "code": e["code"],
+            "unlisted": e["unlisted"], "tier": e.get("tier"),
             # UX-011: 세로 방향은 지분 엣지의 dir — primary는 hasEquity면 항상 지분 타입
             "incoming": e["dir_by_type"][primary] == "in",
             "rel_type": EGO_TYPE_MAP.get(primary, "manual"),

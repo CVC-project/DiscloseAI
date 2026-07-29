@@ -858,14 +858,44 @@ const EGO_TYPE_PRIORITY = { subsidiary: 1, associate: 2, investment: 3, ftc_grou
 
 // 같은 이웃(t)에 다중 type 엣지가 있으면(예: investment+ftc_group) 하나로 병합 —
 // allRelated의 hasGroup/hasEquity 이중 평행선 병합과 동일 패턴(bundle.jsx parseRelations 대응).
+// U5(2026-07-29): 비상장·개인 이웃은 `t`(티커)가 없다 — ego 파일이 이름·kind를 자급한다.
+// 키는 `u:<표기>`(앵커 안에서 고유, 이미 export가 중복 정리), code는 살아 있지만
+// **companies_index에 없으므로 클릭 re-root 대상이 아니다**(selectNeighbor에서 차단).
+const UNLISTED_KINDS = new Set(['private_corp', 'person', 'coop_fund', 'public_org']);
+const UNLISTED_COLOR = '#5c6b80';   // --dim2 · 무채(신원 미상장) — 새 색 토큰 추가 없음
+const UNLISTED_KIND_LABEL = { private_corp: '비상장법인', person: '개인',
+                              coop_fund: '조합·펀드', public_org: '공공기관' };
+
+// kind별 노드 형태 — 색이 아니라 형태로 유형을 가른다(색은 무채 고정).
+function drawUnlistedNode(ctx, x, y, kind, r, color) {
+  ctx.save();
+  ctx.fillStyle = color; ctx.strokeStyle = color; ctx.lineWidth = 1.5;
+  ctx.setLineDash([]);
+  if (kind === 'person') {
+    ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.stroke();
+  } else if (kind === 'coop_fund') {
+    ctx.setLineDash([2.5, 2.5]);
+    ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.stroke();
+  } else if (kind === 'public_org') {
+    ctx.lineWidth = 1.2;
+    ctx.beginPath(); ctx.arc(x, y, r * 1.3, 0, Math.PI * 2); ctx.stroke();
+    ctx.beginPath(); ctx.arc(x, y, r * 0.55, 0, Math.PI * 2); ctx.stroke();
+  } else {                       // private_corp (기본)
+    ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+  }
+  ctx.restore();
+}
+
 function mergeEgoNeighbors(rawList) {
   const byCode = new Map();
   for (const r of (rawList || [])) {
-    if (!r.t) continue;
-    if (!byCode.has(r.t)) {
-      byCode.set(r.t, { code: r.t, name: r.n, sectorKo: r.s, tier: r.tier, types: [], detailByType: {}, dirByType: {} });
+    const key = r.t || (r.kind ? 'u:' + r.n : null);
+    if (!key) continue;
+    if (!byCode.has(key)) {
+      byCode.set(key, { code: key, name: r.n, sectorKo: r.s, tier: r.tier,
+                        kind: r.kind || null, types: [], detailByType: {}, dirByType: {} });
     }
-    const e = byCode.get(r.t);
+    const e = byCode.get(key);
     if (r.tier === 'named400') e.tier = 'named400';
     if (!e.types.includes(r.type)) e.types.push(r.type);
     e.detailByType[r.type] = r.detail;
@@ -880,6 +910,7 @@ function mergeEgoNeighbors(rawList) {
     // 항상 지분 타입(우선순위 1~3 < 4~6)이라 UX-011 "지분 엣지의 출자 방향" 계약과 일치.
     return {
       code: e.code, name: e.name, sectorKo: e.sectorKo, tier: e.tier,
+      kind: e.kind, isUnlisted: !!e.kind,
       isIncoming: e.dirByType[primary] === 'in',
       relType: EGO_TYPE_MAP[primary] || 'manual',
       hasGroup: e.types.includes('ftc_group'),
@@ -891,7 +922,8 @@ function mergeEgoNeighbors(rawList) {
 
 // 랭킹: tier(named400 우선) → type 중요도 → 지분율(숫자 파싱 가능하면 큰 값 우선) — valuechain §5 D6 "tier→amount" 준용.
 function rankEgoNeighbor(n) {
-  const tierRank = n.tier === 'named400' ? 0 : 1;
+  // U5: 상장 우선 · 비상장 후순위 — TOP_N 컷에서 상장 이웃이 먼저 자리를 잡는다.
+  const tierRank = n.isUnlisted ? 2 : (n.tier === 'named400' ? 0 : 1);
   const typeRank = EGO_TYPE_PRIORITY[n.rawType] || 9;
   const pct = parseFloat(n.detail);
   const amtRank = Number.isFinite(pct) ? -pct : 0;
@@ -1601,6 +1633,7 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
   const hitRef = _useRef([]);
   const [hoverCode, setHoverCode] = _useState(null);
   const [overflowSide, setOverflowSide] = _useState(null); // 'above' | 'below' | null
+  const [unlistedInfo, setUnlistedInfo] = _useState(null); // U5: 비상장 노드 정보 팝오버
 
   const TOP_N = 6;    // 세로(지분) 사이드당
   const SIDE_N = 4;   // 가로(비지분) 사이드당 — 실측상 대부분 0~2개
@@ -1879,6 +1912,10 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
         // (구 방사형 VC 엣지 경로는 UX-015 레일 전환으로 제거 — 레일은 위 drawRailSide가 전담)
         const style = REL_STYLES[n.relType] || REL_STYLES.manual;
         const isEquity = EQUITY.has(n.relType);
+        // U5: 비상장 상대는 **중요도 강등**. 선 스타일 축(파선=계열·점선=특관·
+        // 빈테두리=T2)은 이미 점유돼 있어 건드리지 않고 **투명도**로만 낮춘다.
+        const uAlpha = n.isUnlisted ? 0.42 : 1;
+        ctx.save(); ctx.globalAlpha = uAlpha;
         if (n.hasGroup && n.hasEquity) {
           const dx = nx - cx, dy = ny - cy, len = Math.sqrt(dx * dx + dy * dy) || 1;
           const px = -dy / len * 2, py = dx / len * 2;
@@ -1902,6 +1939,7 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
             }
           }
         }
+        ctx.restore();
       });
 
       // 앵커 노드
@@ -1951,8 +1989,10 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
           hits.push({ x: nx, y: ny, r: 16, isBundle: true, side: n.side });
           return;
         }
-        const nodeColor = (n.sectorKo && (window.SECTOR_PALETTE || []).find(s => s.ko === n.sectorKo)?.color)
-          || (isVc ? VC_FLOW_COLOR : (REL_STYLES[n.relType] || REL_STYLES.manual).color);
+        // U5: 비상장류는 섹터가 없다 — 무채 단일색으로 그린다(신원 미상장의 표식).
+        const nodeColor = n.isUnlisted ? UNLISTED_COLOR
+          : ((n.sectorKo && (window.SECTOR_PALETTE || []).find(s => s.ko === n.sectorKo)?.color)
+          || (isVc ? VC_FLOW_COLOR : (REL_STYLES[n.relType] || REL_STYLES.manual).color));
         const isHover = hoverCode === n.code;
         // UX-015: 밸류체인은 노드 크기 = 신뢰등급 (T1 정형 공시 크게 / T2 서술 추출 작게)
         const coreR = isVc ? ((n.tier === 'T1') ? 6.5 : (n.tier === 'T2') ? 4 : 3) : 5;
@@ -1962,7 +2002,14 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
         grd.addColorStop(0, nodeColor + '99'); grd.addColorStop(1, nodeColor + '00');
         ctx.fillStyle = grd; ctx.beginPath(); ctx.arc(nx, ny, r0, 0, Math.PI * 2); ctx.fill();
         ctx.globalAlpha = 1;
-        ctx.fillStyle = nodeColor; ctx.beginPath(); ctx.arc(nx, ny, coreR, 0, Math.PI * 2); ctx.fill();
+        if (n.isUnlisted) {
+          // 형태 = 유형(NODE TYPOLOGY): 법인 채운 원 / 개인 링 / 조합·펀드 점선 링 /
+          // 공공기관 이중 링. 상장 최소(5)보다 한 단계 작게 그려 위계를 낮춘다.
+          drawUnlistedNode(ctx, nx, ny, n.kind, 4.2, nodeColor);
+        } else {
+          ctx.fillStyle = nodeColor;
+          ctx.beginPath(); ctx.arc(nx, ny, coreR, 0, Math.PI * 2); ctx.fill();
+        }
         if (isVc && n.tier === 'T2') {   // 서술 추출은 테두리를 비워 '추정' 뉘앙스
           ctx.strokeStyle = nodeColor; ctx.lineWidth = 1.2;
           ctx.beginPath(); ctx.arc(nx, ny, coreR + 2, 0, Math.PI * 2); ctx.stroke();
@@ -1997,7 +2044,9 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
           const s = REL_STYLES[n.relType] || REL_STYLES.manual;
           ctx.fillText(s.label + (n.detail ? ' · ' + n.detail : ''), nx, labelUp ? nameY + 9 : nameY + 11);
         }
-        hits.push({ x: nx, y: ny, r: isVc ? 14 : 20, code: n.code, name: n.name, sectorKo: n.sectorKo });
+        hits.push({ x: nx, y: ny, r: isVc ? 14 : 20, code: n.code, name: n.name,
+                    sectorKo: n.sectorKo, isUnlisted: n.isUnlisted, kind: n.kind,
+                    detail: n.detail, relType: n.relType });
       });
 
       hitRef.current = hits;
@@ -2021,6 +2070,8 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
     if (!h || h.isAnchor) return;
     // UX-022: 그룹 내 "+N사" 번들은 자체 리스트를 들고 있다(custom) — 사이드 묶음과 구분
     if (h.isBundle) { setOverflowSide(h.custom ? { custom: h.custom } : h.side); return; }
+    // U5: 비상장·개인은 companies_index에 없다 — 이동하지 않고 정보만 보여준다.
+    if (h.isUnlisted) { setUnlistedInfo(h); return; }
     onReRoot(h.code, h.name, h.sectorKo);
   };
   const handleMove = (e) => {
@@ -2069,6 +2120,31 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
             onClick={() => hasVc && onLayerChange && onLayerChange('valuechain')}>밸류체인</button>
         </div>
       </div>
+      {unlistedInfo && (
+        <div className="panel ego-overflow-panel">
+          <div className="panel-head">
+            <div className="panel-head-l">
+              <span className="panel-dot" style={{background: UNLISTED_COLOR}} />
+              <span className="panel-title">{UNLISTED_KIND_LABEL[unlistedInfo.kind] || '비상장'}</span>
+            </div>
+            <button className="back-link" onClick={() => setUnlistedInfo(null)}>✕</button>
+          </div>
+          <div className="panel-body">
+            <div style={{fontSize: 13, color: '#e2e8f0', fontWeight: 600, marginBottom: 6,
+                         wordBreak: 'break-all'}}>{unlistedInfo.name}</div>
+            <div style={{fontSize: 11, color: '#94a3b8', lineHeight: 1.8}}>
+              관계 · <span style={{color: (REL_STYLES[unlistedInfo.relType] || REL_STYLES.manual).color}}>
+                {(REL_STYLES[unlistedInfo.relType] || REL_STYLES.manual).label}</span>
+              {unlistedInfo.detail ? <> · {unlistedInfo.detail}</> : null}
+            </div>
+            <div style={{fontSize: 10.5, color: '#5c6b80', lineHeight: 1.7, marginTop: 10,
+                         paddingTop: 8, borderTop: '1px solid rgba(140,170,210,.13)'}}>
+              사업보고서에 기재된 표기 그대로입니다. 비상장이라 별도 기업 정보가 없어
+              이동하지 않습니다.
+            </div>
+          </div>
+        </div>
+      )}
       {overflowList && (
         <div className="panel ego-overflow-panel">
           <div className="panel-head">
@@ -2086,7 +2162,10 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
               // UX-021: 도트=기업의 섹터색(신원), 라벨=관계유형 색(관계) — 두 축 분리
               const row = (n, style) => (
                 <div key={n.code + ':' + (n.type || n.relType)} className="ego-overflow-row"
-                  onClick={() => { setOverflowSide(null); onReRoot(n.code, n.name, n.sectorKo); }}>
+                  onClick={() => {
+                    if (n.isUnlisted) { setOverflowSide(null); setUnlistedInfo(n); return; }
+                    setOverflowSide(null); onReRoot(n.code, n.name, n.sectorKo);
+                  }}>
                   <span className="ov-rel-mark" style={{
                     background: style.dash.length === 0 ? style.markColor : 'transparent',
                     border: style.dash.length === 0 ? 'none' : `1.5px dashed ${style.markColor}`,
@@ -3395,6 +3474,44 @@ function AssistantPanel({ phase, sector, company, activeTab }) {
   );
 }
 
+
+// U5: 노드 유형 범례 — 두 레이어 공통(비상장 노드는 양쪽 다 나타난다).
+// 색은 무채 고정이고 **형태**가 유형을 가른다(DESIGN.md §2 색=의미 보존 — 새 색 없음).
+function NodeTypologySection() {
+  const mark = (kind) => {
+    const c = UNLISTED_COLOR;
+    if (kind === 'listed') return <circle cx="11" cy="9" r="5.5" fill="#5eead4" />;
+    if (kind === 'person') return <circle cx="11" cy="9" r="4.5" fill="none" stroke={c} strokeWidth="1.5" />;
+    if (kind === 'coop_fund') return <circle cx="11" cy="9" r="4.5" fill="none" stroke={c} strokeWidth="1.5" strokeDasharray="2.5 2.5" />;
+    if (kind === 'public_org') return <g><circle cx="11" cy="9" r="5.8" fill="none" stroke={c} strokeWidth="1.2" />
+      <circle cx="11" cy="9" r="2.6" fill="none" stroke={c} strokeWidth="1.2" /></g>;
+    return <circle cx="11" cy="9" r="4.2" fill={c} />;
+  };
+  const row = (kind, label, note) => (
+    <div className="legend-row" key={kind}>
+      <svg width="22" height="18" className="legend-svg">{mark(kind)}</svg>
+      <div className="legend-text">
+        <div className="legend-label">{label}</div>
+        <div className="legend-sub">{note}</div>
+      </div>
+    </div>
+  );
+  return (
+    <div className="legend-section">
+      <div className="legend-section-h">
+        <span style={{color: UNLISTED_COLOR}}>◌</span> NODE · 노드 유형
+      </div>
+      <div className="legend-grid">
+        {row('listed', '상장사', '섹터색 · 클릭 시 이동')}
+        {row('private_corp', '비상장법인', '무채 · 이동 없음')}
+        {row('person', '개인', '링')}
+        {row('coop_fund', '조합·펀드', '점선 링')}
+        {row('public_org', '공공기관', '이중 링')}
+      </div>
+    </div>
+  );
+}
+
 // ─── Edge legend (bottom-left) — clearer differentiation ─────────────────
 function LegendPanel({ mode }) {
   // U-D14: 레이어 전환 시 범례도 통째로 교체 — 혼합 범례 금지. mode='valuechain'이면
@@ -3421,6 +3538,7 @@ function LegendPanel({ mode }) {
               <LegendRow color="#e8f1ff88" kind="dot" label="T3 산업연관표" sub="섹터 백본 (준비 중)" />
             </div>
           </div>
+          <NodeTypologySection />
           <div className="legend-section">
             <div className="legend-section-h">
               <span style={{color:'#e8f1ff'}}>▼</span> ARROW · 물자 흐름 방향
@@ -3466,6 +3584,7 @@ function LegendPanel({ mode }) {
             <LegendRow color="#64748b" kind="ddash"  label="수동 보정"  sub="manual override" />
           </div>
         </div>
+        <NodeTypologySection />
       </div>
     </div>
   );
