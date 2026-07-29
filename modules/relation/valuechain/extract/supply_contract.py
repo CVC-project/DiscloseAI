@@ -55,6 +55,7 @@ _CORRECTION_MARKER = "기재정정"
 _AMOUNT_LABELS = ("계약금액 총액", "확정 계약금액")
 _COUNTERPARTY_LABEL = "계약상대방"
 _CONTRACT_DATE_LABEL = "계약(수주)일자"
+_CONTRACT_END_LABEL = "종료일"  # "계약기간" 블록의 종료일 행 (★2026-07-29 신선도 정책)
 
 
 _MAX_WINDOW_DAYS = 89  # DART list.json 조회기간 상한 실측 ~3개월 — 안전 마진으로 89일 사용
@@ -185,12 +186,15 @@ def _parse_amount(value: str | None) -> float | None:
 
 
 _YEAR_RE = re.compile(r"(\d{4})-\d{2}-\d{2}")
+_DATE_RE = re.compile(r"\d{4}-\d{2}-\d{2}")
 
 
 def parse_filing_html(html: str, fallback_year: int) -> dict:
-    """단일판매ㆍ공급계약체결 문서 HTML → {counterparty, amount, as_of}.
+    """단일판매ㆍ공급계약체결 문서 HTML → {counterparty, amount, as_of, contract_end}.
 
     fallback_year: 계약(수주)일자를 못 찾으면 rcept_no 접수연도로 대체.
+    contract_end: "계약기간" 블록의 종료일 "YYYY-MM-DD" (없으면 None —
+    ★2026-07-29 리더 결정: export 신선도 필터가 종료일 기준 유효 판정에 사용).
     """
     soup = BeautifulSoup(html, "lxml")
     rows = [_row_cells(tr) for tr in soup.find_all("tr")]
@@ -211,7 +215,15 @@ def parse_filing_html(html: str, fallback_year: int) -> dict:
         if m:
             as_of = int(m.group(1))
 
-    return {"counterparty": counterparty, "amount": amount, "as_of": as_of}
+    end_value = _find_value(rows, _CONTRACT_END_LABEL)
+    contract_end = None
+    if end_value:
+        m = _DATE_RE.search(end_value)
+        if m:
+            contract_end = m.group(0)
+
+    return {"counterparty": counterparty, "amount": amount, "as_of": as_of,
+            "contract_end": contract_end}
 
 
 def _upsert_edge(session, **fields) -> None:
@@ -292,6 +304,7 @@ def apply(session=None, filings: list[dict] | None = None) -> dict:
                 provenance=f"단일판매ㆍ공급계약체결 · {parsed['counterparty']}",
                 amount=parsed["amount"],
                 as_of=parsed["as_of"],
+                valid_until=parsed["contract_end"],
             )
             counters["edges_kept"] += 1
         session.commit()

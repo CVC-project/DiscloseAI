@@ -324,7 +324,9 @@ def export_ego_files(session, output_dir: Path | None = None) -> dict:
         if e.target_corp != e.source_corp:
             gov_by_ticker[e.target_corp].append(e)
 
-    vc_edges = session.query(ValueChainEdge).filter(ValueChainEdge.status == "active").all()
+    # ★2026-07-29 신선도 필터(리더 결정, valuechain/freshness.py 정본) — 상세는 그 모듈 docstring
+    from modules.relation.valuechain.freshness import fresh_edges
+    vc_edges, _fresh_counters = fresh_edges(session)
     vc_up_by_corp: dict[str, list] = defaultdict(list)  # 이 회사가 dst(수요자) — 상류=공급처
     vc_down_by_corp: dict[str, list] = defaultdict(list)  # 이 회사가 src(공급자) — 하류=고객
     for e in vc_edges:

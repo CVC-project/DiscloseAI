@@ -196,6 +196,9 @@ class ValueChainEdge(Base):
     provenance = Column(Text)  # 섹션key + 청크id + 원문 문장 (T2 필수)
     amount = Column(Float)  # 거래금액 (있으면 — 엣지 가중치)
     as_of = Column(Integer)  # 사업연도 (연도 스냅샷 — 삭제 대신 보존)
+    valid_until = Column(String)  # 계약 종료일 "YYYY-MM-DD" (supply_contract 전용, nullable)
+    #   ★2026-07-29 리더 결정(신선도 정책): 공급계약은 종료일 기준 유효 판정, 없으면 2년 컷.
+    #   저장은 전 연도 보존(D7) — 필터는 export 단계(valuechain/freshness.py)에서만.
     extractor_ver = Column(String)  # T2: 어댑터·프롬프트·임계값 버전
     confidence = Column(Float)  # T2: 보정된 모델 신뢰도 (§3.6 운영점)
     status = Column(String, default="active")  # active | superseded

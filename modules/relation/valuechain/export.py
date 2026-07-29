@@ -16,7 +16,7 @@ import json
 from pathlib import Path
 
 from modules.relation.storage.db import get_local_session
-from modules.relation.storage.models import CompanyRegistry, SectorIOEdge, ValueChainEdge
+from modules.relation.storage.models import CompanyRegistry, SectorIOEdge
 
 _OUTPUT_PATH = Path(__file__).parent.parent / "data" / "valuechain.json"
 
@@ -31,9 +31,13 @@ def export_json(output_path: Path | None = None, session=None) -> dict:
         sector_map = dict(
             session.query(CompanyRegistry.corp_code, CompanyRegistry.sector_id).all()
         )
+        # ★2026-07-29 신선도 필터(리더 결정, freshness.py 정본) — 저장은 전 연도, export만 자름
+        from modules.relation.valuechain.freshness import fresh_edges
+        kept, fresh_counters = fresh_edges(session)
+
         edges = []
         max_as_of = None
-        for e in session.query(ValueChainEdge).filter_by(status="active").all():
+        for e in kept:
             edges.append(
                 {
                     "src": e.src_corp,
