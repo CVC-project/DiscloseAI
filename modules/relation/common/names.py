@@ -70,22 +70,39 @@ _LEGAL_SUFFIXES = (
 
 _WHITESPACE_RE = re.compile(r"\s+")
 
+# ── 주석성 병기 제거 (2026-07-29 U-확대 전수 재훑기에서 발견) ────────────────
+# 공시 표의 회사명 칸에는 각주 기호와 구사명이 함께 적히는 관행이 있다:
+#   "한화오션 주식회사(주1)" · "삼성전자(주)(*1)" · "㈜포스코퓨처엠(구, ㈜포스코케미칼)"
+# 이들은 **같은 법인을 가리키는 주석**이라 떼어내도 신원이 바뀌지 않는다(38표기·117회 실측).
+#
+# ⚠️ 일반 괄호는 절대 떼지 않는다 — 실측에서 `DB(Philippines) Inc.`가 괄호 제거 시
+# 상장사 DB(012030)에 붙는 것을 확인했다. 필리핀 자회사를 한국 상장 모회사로 만드는
+# HMM 사고(FN-013)와 같은 유형이다. 괄호 안이 **신원을 가르는 정보**일 수 있으므로
+# 아래처럼 주석임이 형태로 확실한 것만 대상으로 한다.
+_ANNOTATION_RE = re.compile(
+    r"\(\s*주\s*\d+\s*\)"          # (주1) (주 6)
+    r"|\(\s*\*+\s*\d*\s*\)"        # (*) (*1) (**)
+    r"|※\s*\d*"                    # ※ ※1
+    r"|\(\s*구[,.\s][^)]*\)",      # (구, ㈜포스코케미칼) (구. ㈜지투알)
+)
+
 
 def normalize_company_name(name: str | None) -> str:
     """(주)·주식회사·공백·영문 법인 접미어 제거 후 별칭 매핑 적용.
 
     규칙 (순서대로):
       1. 양끝 공백 제거
-      2. 법인 접미어/접두어 제거 (대소문자 무관, 공백 무관)
-      3. 모든 공백 제거
-      4. NAME_ALIASES 적용
+      2. 주석성 병기 제거 (각주 기호·구사명 병기 — _ANNOTATION_RE, 일반 괄호는 유지)
+      3. 법인 접미어/접두어 제거 (대소문자 무관, 공백 무관)
+      4. 모든 공백 제거
+      5. NAME_ALIASES 적용
 
     None/빈 문자열 → 빈 문자열 반환.
     """
     if not name:
         return ""
 
-    s = name.strip()
+    s = _ANNOTATION_RE.sub("", name).strip()
     lower = s.lower()
 
     # 법인 접미어/접두어 제거
@@ -124,6 +141,56 @@ def normalize_company_name(name: str | None) -> str:
     return s_norm
 
 
+# ── 한글 음차 별칭 규칙 생성 (2026-07-29 U-확대 조사에서 발견) ──────────────
+# registry는 영문 이니셜 사명(CJ제일제당·SK하이닉스·LG전자)을 쓰는데 공시 원문은
+# 한글 음차(씨제이제일제당)를 쓰는 경우가 많다. NAME_ALIASES가 수기 22건이라
+# SK·LG·HD만 커버했고 CJ·GS·KT·BGF·HLB·HDC 등은 통째로 링킹 실패했다
+# (실측: 실패 표기 120종·누적 807회 — CJ 222·LG 144·GS 58).
+#
+# ⚠️ normalize_company_name()에 음차 변환을 직접 넣으면 안 된다 — "이마트"→"e마트",
+# "에스원"→"s원", "케이카"→"k카", "티웨이항공"→"t웨이항공"처럼 **실제 사명이 깨진다**.
+# 안전한 방향은 그 반대: registry의 실제 사명에서 음차 변형을 **생성**해 별칭 키로만
+# 등록한다. 생성된 키는 실존 사명에서 나온 것이므로 허위 노드를 만들 수 없다.
+_LETTER_TO_KO = {
+    "A": "에이", "B": "비", "C": "씨", "D": "디", "E": "이", "F": "에프", "G": "지",
+    "H": "에이치", "I": "아이", "J": "제이", "K": "케이", "L": "엘", "M": "엠",
+    "N": "엔", "O": "오", "P": "피", "Q": "큐", "R": "알", "S": "에스", "T": "티",
+    "U": "유", "V": "브이", "W": "더블유", "X": "엑스", "Y": "와이", "Z": "제트",
+}
+_ASCII_RUN_RE = re.compile(r"[A-Za-z]+")
+_MAX_INITIALISM_LEN = 4  # 5자 이상 영문 덩어리는 이니셜이 아니라 단어(Global·Motor…)
+
+
+def korean_phonetic_variants(name: str | None) -> set[str]:
+    """사명의 영문 이니셜 덩어리를 한글 음차로 바꾼 변형들(정규화 전 문자열).
+
+    "CJ제일제당" → {"씨제이제일제당"} · "LG에너지솔루션" → {"엘지에너지솔루션"}
+    영문 덩어리가 없거나 너무 길면 빈 집합(변형 없음).
+    """
+    if not name:
+        return set()
+    runs = [r for r in _ASCII_RUN_RE.findall(name) if len(r) <= _MAX_INITIALISM_LEN]
+    if not runs:
+        return set()
+    variant = name
+    for run in runs:
+        variant = variant.replace(run, "".join(_LETTER_TO_KO[c] for c in run.upper()))
+    return {variant} if variant != name else set()
+
+
+def add_phonetic_aliases(mapping: dict[str, str], name: str, value: str) -> None:
+    """name의 음차 변형을 mapping에 보강 등록 (실존 사명 키는 절대 덮지 않음).
+
+    호출 측 규약: 실제 사명 키를 **먼저 전부 넣은 뒤** 이 함수를 돌릴 것.
+    충돌(다른 회사가 이미 그 변형을 점유)이면 조용히 건너뛴다 — 모호한 표기를
+    임의로 한쪽에 붙이는 것이 링킹 사고의 원인이므로(FN-013).
+    """
+    for variant in korean_phonetic_variants(name):
+        key = normalize_company_name(variant)
+        if key and key not in mapping:
+            mapping[key] = value
+
+
 def build_ticker_map(top50_csv_path) -> dict[str, str]:
     """top50.csv의 corp_name을 정규화하여 ticker로 매핑한 dict 반환.
 
@@ -158,4 +225,8 @@ def build_ticker_map_from_registry(session) -> dict[str, str]:
     for name, ticker in rows:
         if name and ticker:
             ticker_map[normalize_company_name(name)] = ticker
+    # 실제 사명 키를 전부 채운 뒤 음차 변형 보강 (실존 키 우선 — 덮어쓰기 없음)
+    for name, ticker in rows:
+        if name and ticker:
+            add_phonetic_aliases(ticker_map, name, ticker)
     return ticker_map

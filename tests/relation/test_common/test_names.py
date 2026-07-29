@@ -9,6 +9,8 @@ from pathlib import Path
 import pytest
 
 from modules.relation.common.names import (
+    add_phonetic_aliases,
+    korean_phonetic_variants,
     build_ticker_map,
     normalize_company_name,
 )
@@ -173,3 +175,106 @@ class TestBuildTickerMap:
             assert result["삼성전자"] == "005930"
         finally:
             Path(csv_path).unlink()
+
+
+class TestKoreanPhoneticAliases:
+    """한글 음차 별칭 규칙 (2026-07-29 U-확대 — NAME_ALIASES 수기 22건의 구조적 한계).
+
+    공시 원문은 '씨제이제일제당', registry는 'CJ제일제당' — 이 불일치로 상장사가
+    비상장으로 오분류돼 링킹 실패 큐에 쌓였다(120표기·807회 실측).
+    """
+
+    @pytest.mark.parametrize(
+        "name,expected_variant",
+        [
+            ("CJ제일제당", "씨제이제일제당"),
+            ("LG전자", "엘지전자"),
+            ("GS건설", "지에스건설"),
+            ("KT", "케이티"),
+            ("CJ CGV", "씨제이 씨지브이"),
+            ("HDC현대산업개발", "에이치디씨현대산업개발"),
+        ],
+    )
+    def test_generates_phonetic_variant(self, name, expected_variant):
+        assert expected_variant in korean_phonetic_variants(name)
+
+    @pytest.mark.parametrize(
+        "name",
+        ["삼성전자", "현대차", "포스코퓨처엠", "카카오"],
+    )
+    def test_no_variant_when_no_ascii_initials(self, name):
+        assert korean_phonetic_variants(name) == set()
+
+    def test_long_english_word_is_not_an_initialism(self):
+        """5자 이상 영문 덩어리는 이니셜이 아니라 단어 — 음차 대상 아님."""
+        assert korean_phonetic_variants("Hyundai Motor") == set()
+
+    def test_alias_lookup_resolves_phonetic_form(self):
+        """생성된 별칭으로 '씨제이제일제당' 표기가 CJ제일제당 티커에 링킹된다."""
+        mapping = {normalize_company_name("CJ제일제당"): "097950"}
+        add_phonetic_aliases(mapping, "CJ제일제당", "097950")
+        assert mapping[normalize_company_name("씨제이제일제당(주)")] == "097950"
+
+    # ── ⚠️ 회귀 박제: 실제 사명을 깨뜨리면 안 된다 ────────────────────────
+    # normalize_company_name()에 음차 변환을 직접 넣으면 아래가 전부 깨진다
+    # ("이마트"→"e마트", "에스원"→"s원"). 그래서 변환은 registry 사명에서
+    # 생성하는 방향으로만 적용한다 — 이 테스트가 그 설계를 박제한다.
+    @pytest.mark.parametrize(
+        "listed_name", ["이마트", "에스원", "케이카", "티웨이항공", "비에이치"]
+    )
+    def test_real_names_that_look_phonetic_are_untouched(self, listed_name):
+        assert normalize_company_name(listed_name) == listed_name
+
+    def test_generated_alias_never_overwrites_real_name(self):
+        """실존 사명 키가 이미 있으면 음차 별칭이 덮지 않는다(모호성 우선 회피)."""
+        mapping = {normalize_company_name("에스원"): "012750"}
+        add_phonetic_aliases(mapping, "SW", "999999")  # SW → '에스더블유'... 충돌 없음
+        add_phonetic_aliases(mapping, "S1", "888888")  # S1 → '에스1'
+        assert mapping[normalize_company_name("에스원")] == "012750"
+
+
+class TestAnnotationStripping:
+    """주석성 병기 제거 (2026-07-29 U-확대 전수 재훑기 — 38표기·117회 회수).
+
+    공시 표는 회사명 칸에 각주 기호와 구사명을 함께 적는다. 같은 법인을 가리키는
+    주석이므로 떼어도 신원이 안 바뀐다.
+    """
+
+    @pytest.mark.parametrize(
+        "raw,expected",
+        [
+            ("한화오션 주식회사(주1)", "한화오션"),
+            ("삼성전자(주)(*1)", "삼성전자"),
+            ("삼성전자(주)  (*)", "삼성전자"),
+            ("한화투자증권㈜ (주6)", "한화투자증권"),
+            # 음차 변환은 normalize가 아니라 별칭 맵 계층 소관 — 여기선 각주만 떨어진다
+            ("㈜엘지씨엔에스(주2)", "엘지씨엔에스"),
+            # 구사명 병기 — 현재 사명이 앞에 있으므로 떼면 현재 사명으로 링킹된다
+            ("㈜포스코퓨처엠(구, ㈜포스코케미칼)", "포스코퓨처엠"),
+            ("롯데이노베이트㈜ (구, 롯데정보통신㈜)", "롯데이노베이트"),
+            ("㈜에이치에스애드 (구. ㈜지투알)(주4)", "에이치에스애드"),
+        ],
+    )
+    def test_strips_annotation(self, raw, expected):
+        assert normalize_company_name(raw) == expected
+
+    # ── ⚠️ 회귀 박제: 일반 괄호는 절대 떼지 않는다 (FN-013 계열) ───────────
+    @pytest.mark.parametrize(
+        "raw",
+        [
+            "DB(Philippines) Inc.",          # 괄호 떼면 상장 DB(012030)에 오링킹
+            "SK이노베이션 [SK battery America]",  # 미국 배터리 법인
+            "INHEE(VIETNAM)",
+        ],
+    )
+    def test_general_parentheses_are_preserved(self, raw):
+        """괄호 안이 신원을 가르는 정보일 수 있다 — 떼면 해외 자회사가 상장 모회사가 된다."""
+        norm = normalize_company_name(raw)
+        assert norm not in {"db", "sk이노베이션", "inhee"}, (
+            f"{raw!r} -> {norm!r}: 일반 괄호가 제거돼 상장사로 오링킹될 수 있음"
+        )
+
+    def test_bare_legal_suffix_paren_still_removed(self):
+        """법인격 '(주)'는 기존 접미어 규칙이 계속 처리한다(주석 규칙과 무관)."""
+        assert normalize_company_name("(주)삼성전자") == "삼성전자"
+        assert normalize_company_name("삼성전자(주)") == "삼성전자"

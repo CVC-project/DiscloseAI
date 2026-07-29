@@ -13,20 +13,40 @@
         "dir": "in",
         "s": "식음료",
         "tier": "named400"
-      },
-      {
-        "t": "097950",
-        "n": "CJ제일제당",
-        "type": "associate",
-        "detail": "46.26%",
-        "dir": "in",
-        "s": "식음료",
-        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "000120",
+          "n": "CJ대한통운",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 7001438000.0,
+          "as_of": 2024,
+          "prov": "특수관계자와의 거래 · 매출"
+        },
+        {
+          "t": "051500",
+          "n": "CJ프레시웨이",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 15299981000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출 등"
+        }
+      ],
+      "down": [
+        {
+          "t": "051500",
+          "n": "CJ프레시웨이",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 4704410000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입 등"
+        }
+      ]
     }
   }
 }

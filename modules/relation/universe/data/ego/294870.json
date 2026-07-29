@@ -4,10 +4,85 @@
   "s": "건설",
   "tier": "named400",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "t": "012630",
+        "n": "HDC",
+        "type": "associate",
+        "detail": "41.52%",
+        "dir": "in",
+        "s": "금융",
+        "tier": "dot"
+      },
+      {
+        "t": "012630",
+        "n": "HDC",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "out",
+        "s": "금융",
+        "tier": "dot"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "012630",
+          "n": "HDC",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 88000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입, 특수관계자거래"
+        },
+        {
+          "t": "089470",
+          "n": "HDC현대EP",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 190000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입, 특수관계자거래"
+        },
+        {
+          "t": "039570",
+          "n": "HDC랩스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 182878000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "012630",
+          "n": "HDC",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 10000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "t": "089470",
+          "n": "HDC현대EP",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "t": "039570",
+          "n": "HDC랩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 527000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        }
+      ]
     }
   }
 }

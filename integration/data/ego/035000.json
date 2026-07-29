@@ -9,7 +9,7 @@
         "t": "003550",
         "n": "LG",
         "type": "associate",
-        "detail": "35.78%",
+        "detail": "35.0%",
         "dir": "in",
         "s": "금융",
         "tier": "named400"
@@ -22,10 +22,56 @@
         "dir": "out",
         "s": "금융",
         "tier": "named400"
+      },
+      {
+        "t": "003550",
+        "n": "LG",
+        "type": "associate",
+        "detail": "36.0%",
+        "dir": "in",
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
+        "t": "064400",
+        "n": "LG씨엔에스",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "in",
+        "s": "플랫폼",
+        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "003550",
+          "n": "LG",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 17588000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등과의 거래 · 매출 등"
+        },
+        {
+          "t": "032640",
+          "n": "LG유플러스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 545000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        },
+        {
+          "t": "064400",
+          "n": "LG씨엔에스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 13979216000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등과의 거래 · 매출 등"
+        }
+      ],
       "down": [
         {
           "t": "003550",
@@ -33,6 +79,24 @@
           "type": "customer",
           "tier_grade": "T1",
           "amount": 26311203000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "t": "032640",
+          "n": "LG유플러스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 23626000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등"
+        },
+        {
+          "t": "064400",
+          "n": "LG씨엔에스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1407096000.0,
           "as_of": 2025,
           "prov": "특수관계자 · 매출"
         }

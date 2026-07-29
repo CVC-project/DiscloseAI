@@ -22,6 +22,15 @@
         "dir": "in",
         "s": "미디어",
         "tier": "named400"
+      },
+      {
+        "t": "035760",
+        "n": "CJ ENM",
+        "type": "subsidiary",
+        "detail": "54.46%",
+        "dir": "in",
+        "s": "미디어",
+        "tier": "named400"
       }
     ],
     "valuechain": {
@@ -63,7 +72,35 @@
           "prov": "특수관계자와의 거래 · 매출"
         }
       ],
-      "down": []
+      "down": [
+        {
+          "t": "035760",
+          "n": "CJ ENM",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 40182626000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출원가, 특수관계자거래"
+        },
+        {
+          "t": "097950",
+          "n": "CJ제일제당",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 17630000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출원가, 특수관계자거래"
+        },
+        {
+          "t": "079160",
+          "n": "CJ CGV",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 8361000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출원가, 특수관계자거래"
+        }
+      ]
     }
   }
 }

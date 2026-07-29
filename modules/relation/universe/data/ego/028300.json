@@ -76,11 +76,211 @@
         "dir": "out",
         "s": "제약바이오",
         "tier": "dot"
+      },
+      {
+        "t": "187420",
+        "n": "HLB제넥스",
+        "type": "investment",
+        "detail": "8.96%",
+        "dir": "out",
+        "s": "제약바이오",
+        "tier": "dot"
+      },
+      {
+        "t": "278650",
+        "n": "HLB바이오스텝",
+        "type": "investment",
+        "detail": "16.09%",
+        "dir": "out",
+        "s": "지주",
+        "tier": "dot"
+      },
+      {
+        "t": "046210",
+        "n": "HLB파나진",
+        "type": "investment",
+        "detail": "9.37%",
+        "dir": "out",
+        "s": "제약바이오",
+        "tier": "dot"
+      },
+      {
+        "t": "196300",
+        "n": "HLB펩",
+        "type": "dart_filing",
+        "detail": "종속기업",
+        "dir": "out",
+        "s": "제약바이오",
+        "tier": "dot"
+      },
+      {
+        "t": "047920",
+        "n": "HLB제약",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out",
+        "s": "지주",
+        "tier": "dot"
+      },
+      {
+        "t": "003580",
+        "n": "HLB글로벌",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out",
+        "s": "유통",
+        "tier": "dot"
+      },
+      {
+        "t": "067630",
+        "n": "HLB생명과학",
+        "type": "dart_filing",
+        "detail": "유의적 영향력",
+        "dir": "in",
+        "s": "제약바이오",
+        "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "067630",
+          "n": "HLB생명과학",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 13978000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "t": "187420",
+          "n": "HLB제넥스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 7388000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "t": "003580",
+          "n": "HLB글로벌",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 45716000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "t": "047920",
+          "n": "HLB제약",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 179961000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "t": "067630",
+          "n": "HLB생명과학",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 926079000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "024850",
+          "n": "HLB이노베이션",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 458908000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        },
+        {
+          "t": "067630",
+          "n": "HLB생명과학",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 506151000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "278650",
+          "n": "HLB바이오스텝",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 127446000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "046210",
+          "n": "HLB파나진",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 32898000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "115450",
+          "n": "HLB테라퓨틱스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 100068000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "187420",
+          "n": "HLB제넥스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 119604000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "024850",
+          "n": "HLB이노베이션",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 135103000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "196300",
+          "n": "HLB펩",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 66376000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "003580",
+          "n": "HLB글로벌",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 697960000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "047920",
+          "n": "HLB제약",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 201667000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

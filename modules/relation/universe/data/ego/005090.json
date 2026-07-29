@@ -31,6 +31,33 @@
         "dir": "out",
         "s": "소재",
         "tier": "dot"
+      },
+      {
+        "t": "016250",
+        "n": "SGC E&C",
+        "type": "associate",
+        "detail": "49.6%",
+        "dir": "out",
+        "s": "건설",
+        "tier": "dot"
+      },
+      {
+        "t": "010060",
+        "n": "OCI홀딩스",
+        "type": "dart_filing",
+        "detail": "대규모기업집단",
+        "dir": "out",
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
+        "t": "456040",
+        "n": "OCI",
+        "type": "dart_filing",
+        "detail": "대규모기업집단",
+        "dir": "out",
+        "s": "화학",
+        "tier": "dot"
       }
     ],
     "valuechain": {
@@ -70,6 +97,15 @@
           "amount": 11299000.0,
           "as_of": 2025,
           "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "t": "456040",
+          "n": "OCI",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 13270853853.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 재화의 매입, 특수관계자거래"
         }
       ],
       "down": [
@@ -88,6 +124,15 @@
           "type": "customer",
           "tier_grade": "T1",
           "amount": 125438600.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "456040",
+          "n": "OCI",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 32525010600.0,
           "as_of": 2025,
           "prov": "특수관계자 - 연결 · 재화의 판매로 인한 수익, 특수관계자거래"
         }

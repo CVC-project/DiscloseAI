@@ -11,16 +11,21 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
-from modules.relation.common.names import normalize_company_name
+from modules.relation.common.names import add_phonetic_aliases, normalize_company_name
 from modules.relation.storage.models import CompanyAlias, CompanyRegistry, LinkFailQueue
 
 
 def build_name_to_corp_map(session) -> dict[str, str]:
-    """{정규화된 이름: corp_code} — CompanyRegistry.name_current 우선, CompanyAlias로 보충."""
-    mapping: dict[str, str] = {}
-    for name, corp_code in session.query(
+    """{정규화된 이름: corp_code} — CompanyRegistry.name_current 우선, CompanyAlias로 보충.
+
+    보강 순서(2026-07-29): 실제 사명 → CompanyAlias → 한글 음차 변형.
+    음차는 마지막이라 실존 사명·수동 별칭을 절대 덮지 않는다(names.add_phonetic_aliases).
+    """
+    registry_rows = session.query(
         CompanyRegistry.name_current, CompanyRegistry.corp_code
-    ).all():
+    ).all()
+    mapping: dict[str, str] = {}
+    for name, corp_code in registry_rows:
         norm = normalize_company_name(name)
         if norm:
             mapping[norm] = corp_code
@@ -28,6 +33,9 @@ def build_name_to_corp_map(session) -> dict[str, str]:
         norm = normalize_company_name(alias)
         if norm and norm not in mapping:
             mapping[norm] = corp_code
+    for name, corp_code in registry_rows:
+        if name:
+            add_phonetic_aliases(mapping, name, corp_code)
     return mapping
 
 

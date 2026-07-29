@@ -6,6 +6,15 @@
   "layers": {
     "governance": [
       {
+        "t": "089470",
+        "n": "HDC현대EP",
+        "type": "associate",
+        "detail": "48.3%",
+        "dir": "out",
+        "s": "화학",
+        "tier": "dot"
+      },
+      {
         "t": "039570",
         "n": "HDC랩스",
         "type": "associate",
@@ -15,18 +24,65 @@
         "tier": "dot"
       },
       {
-        "t": "089470",
-        "n": "HDC현대EP",
+        "t": "294870",
+        "n": "IPARK현대산업개발",
         "type": "associate",
-        "detail": "48.3%",
+        "detail": "41.52%",
         "dir": "out",
-        "s": "화학",
+        "s": "건설",
+        "tier": "named400"
+      },
+      {
+        "t": "039570",
+        "n": "HDC랩스",
+        "type": "associate",
+        "detail": "39.53%",
+        "dir": "out",
+        "s": "건설",
         "tier": "dot"
+      },
+      {
+        "t": "294870",
+        "n": "IPARK현대산업개발",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "in",
+        "s": "건설",
+        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "039570",
+          "n": "HDC랩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4921459000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출, 특수관계자거래"
+        },
+        {
+          "t": "294870",
+          "n": "IPARK현대산업개발",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 10000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "294870",
+          "n": "IPARK현대산업개발",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 88000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입, 특수관계자거래"
+        }
+      ]
     }
   }
 }

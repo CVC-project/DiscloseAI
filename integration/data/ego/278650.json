@@ -22,11 +22,49 @@
         "dir": "out",
         "s": "제약바이오",
         "tier": "dot"
+      },
+      {
+        "t": "028300",
+        "n": "HLB",
+        "type": "investment",
+        "detail": "16.09%",
+        "dir": "in",
+        "s": "제약바이오",
+        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "028300",
+          "n": "HLB",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 127446000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "067630",
+          "n": "HLB생명과학",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 12259000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "024850",
+          "n": "HLB이노베이션",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 38880000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        }
+      ]
     }
   }
 }

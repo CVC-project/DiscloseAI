@@ -22,6 +22,33 @@
         "dir": "out",
         "s": "제약바이오",
         "tier": "dot"
+      },
+      {
+        "t": "003000",
+        "n": "부광약품",
+        "type": "investment",
+        "detail": "10.9%",
+        "dir": "out",
+        "s": "제약바이오",
+        "tier": "dot"
+      },
+      {
+        "t": "005090",
+        "n": "SGC에너지",
+        "type": "dart_filing",
+        "detail": "대규모기업집단",
+        "dir": "in",
+        "s": "에너지",
+        "tier": "dot"
+      },
+      {
+        "t": "456040",
+        "n": "OCI",
+        "type": "dart_filing",
+        "detail": "최상위 지배기업",
+        "dir": "in",
+        "s": "화학",
+        "tier": "dot"
       }
     ],
     "valuechain": {
@@ -34,6 +61,15 @@
           "amount": 27752925.0,
           "as_of": 2025,
           "prov": "특수관계자거래 · 매출 등"
+        },
+        {
+          "t": "456040",
+          "n": "OCI",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 5469243000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
         }
       ],
       "down": [
@@ -70,6 +106,15 @@
           "type": "customer",
           "tier_grade": "T1",
           "amount": 136745000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "t": "014830",
+          "n": "유니드",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 78214000.0,
           "as_of": 2025,
           "prov": "특수관계자 거래 · 매출, 특수관계자거래"
         }

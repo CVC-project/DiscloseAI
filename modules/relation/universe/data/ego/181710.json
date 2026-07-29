@@ -22,10 +22,56 @@
         "dir": "out",
         "s": "플랫폼",
         "tier": "dot"
+      },
+      {
+        "t": "010120",
+        "n": "엘에스일렉트릭",
+        "type": "investment",
+        "detail": "19.0%",
+        "dir": "in",
+        "s": "전기전자부품",
+        "tier": "named400"
+      },
+      {
+        "t": "104200",
+        "n": "NHN벅스",
+        "type": "associate",
+        "detail": "45.26%",
+        "dir": "out",
+        "s": "플랫폼",
+        "tier": "dot"
+      },
+      {
+        "t": "104200",
+        "n": "NHN벅스",
+        "type": "associate",
+        "detail": "45.26%",
+        "dir": "out",
+        "s": "플랫폼",
+        "tier": "dot"
+      },
+      {
+        "t": "060250",
+        "n": "NHN KCP",
+        "type": "dart_filing",
+        "detail": "최상위지배회사",
+        "dir": "in",
+        "s": "금융",
+        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "060250",
+          "n": "NHN KCP",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2772759000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출, 특수관계자거래"
+        }
+      ],
       "down": []
     }
   }

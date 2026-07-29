@@ -4,10 +4,49 @@
   "s": "금융",
   "tier": "dot",
   "layers": {
-    "governance": [],
+    "governance": [
+      {
+        "t": "204320",
+        "n": "HL만도",
+        "type": "associate",
+        "detail": "30.25%",
+        "dir": "out",
+        "s": "자동차",
+        "tier": "named400"
+      },
+      {
+        "t": "014790",
+        "n": "HL D&I",
+        "type": "subsidiary",
+        "detail": "100.0%",
+        "dir": "out",
+        "s": "건설",
+        "tier": "dot"
+      }
+    ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "014790",
+          "n": "HL D&I",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 301043000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        }
+      ],
+      "down": [
+        {
+          "t": "014790",
+          "n": "HL D&I",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1652965000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등"
+        }
+      ]
     }
   }
 }

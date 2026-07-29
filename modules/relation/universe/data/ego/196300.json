@@ -13,10 +13,47 @@
         "dir": "in",
         "s": "기타",
         "tier": "dot"
+      },
+      {
+        "t": "187420",
+        "n": "HLB제넥스",
+        "type": "investment",
+        "detail": "14.16%",
+        "dir": "in",
+        "s": "제약바이오",
+        "tier": "dot"
+      },
+      {
+        "t": "028300",
+        "n": "HLB",
+        "type": "dart_filing",
+        "detail": "종속기업",
+        "dir": "in",
+        "s": "제약바이오",
+        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "028300",
+          "n": "HLB",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 66376000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "067630",
+          "n": "HLB생명과학",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1402000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ],
       "down": []
     }
   }

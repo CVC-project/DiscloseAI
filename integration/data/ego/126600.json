@@ -13,11 +13,85 @@
         "dir": "out",
         "s": "자동차",
         "tier": "dot"
+      },
+      {
+        "t": "027410",
+        "n": "BGF",
+        "type": "subsidiary",
+        "detail": "69.95%",
+        "dir": "in",
+        "s": "금융",
+        "tier": "dot"
+      },
+      {
+        "t": "027410",
+        "n": "BGF",
+        "type": "subsidiary",
+        "detail": "65.1%",
+        "dir": "in",
+        "s": "금융",
+        "tier": "dot"
+      },
+      {
+        "t": "027410",
+        "n": "BGF",
+        "type": "dart_filing",
+        "detail": "지배회사",
+        "dir": "out",
+        "s": "금융",
+        "tier": "dot"
+      },
+      {
+        "t": "282330",
+        "n": "BGF리테일",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out",
+        "s": "유통",
+        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "027410",
+          "n": "BGF",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 253191000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "t": "282330",
+          "n": "BGF리테일",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 5105000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "t": "282330",
+          "n": "BGF리테일",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 188000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "282330",
+          "n": "BGF리테일",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 113340000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

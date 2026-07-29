@@ -13,11 +13,58 @@
         "dir": "in",
         "s": "금융",
         "tier": "dot"
+      },
+      {
+        "t": "012630",
+        "n": "HDC",
+        "type": "associate",
+        "detail": "39.53%",
+        "dir": "in",
+        "s": "금융",
+        "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "294870",
+          "n": "IPARK현대산업개발",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 527000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "012630",
+          "n": "HDC",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4921459000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출, 특수관계자거래"
+        },
+        {
+          "t": "089470",
+          "n": "HDC현대EP",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 303264000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출, 특수관계자거래"
+        },
+        {
+          "t": "294870",
+          "n": "IPARK현대산업개발",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 182878000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입, 특수관계자거래"
+        }
+      ]
     }
   }
 }

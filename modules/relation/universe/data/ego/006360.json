@@ -22,11 +22,112 @@
         "dir": "out",
         "s": "부동산",
         "tier": "dot"
+      },
+      {
+        "t": "317400",
+        "n": "자이에스앤디",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "in",
+        "s": "부동산",
+        "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "001250",
+          "n": "GS글로벌",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 13200000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 및 특수관계자와의 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "007070",
+          "n": "GS리테일",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2543000000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 거래 · 매입"
+        },
+        {
+          "t": "001250",
+          "n": "GS글로벌",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2257000000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 거래 · 매입"
+        },
+        {
+          "t": "317400",
+          "n": "자이에스앤디",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 127242000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 등 · 매출, 특수관계자거래"
+        },
+        {
+          "t": "499790",
+          "n": "GS피앤엘",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 120399000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        }
+      ],
+      "down": [
+        {
+          "t": "078930",
+          "n": "GS",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 114000000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 거래 · 매출"
+        },
+        {
+          "t": "007070",
+          "n": "GS리테일",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1245000000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 거래 · 매출"
+        },
+        {
+          "t": "001250",
+          "n": "GS글로벌",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 134000000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 거래 · 매출"
+        },
+        {
+          "t": "317400",
+          "n": "자이에스앤디",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 104000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 등 · 매입, 특수관계자거래"
+        },
+        {
+          "t": "499790",
+          "n": "GS피앤엘",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 9604000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등"
+        }
+      ]
     }
   }
 }

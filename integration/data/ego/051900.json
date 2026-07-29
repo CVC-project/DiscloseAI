@@ -9,7 +9,7 @@
         "t": "003550",
         "n": "LG",
         "type": "associate",
-        "detail": "34.74%",
+        "detail": "34.03%",
         "dir": "in",
         "s": "금융",
         "tier": "named400"
@@ -22,11 +22,67 @@
         "dir": "out",
         "s": "금융",
         "tier": "named400"
+      },
+      {
+        "t": "003550",
+        "n": "LG",
+        "type": "associate",
+        "detail": "35.0%",
+        "dir": "in",
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
+        "t": "064400",
+        "n": "LG씨엔에스",
+        "type": "dart_filing",
+        "detail": "지배기업",
+        "dir": "in",
+        "s": "플랫폼",
+        "tier": "named400"
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "003550",
+          "n": "LG",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 117077000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등과의 거래 · 매출 등"
+        },
+        {
+          "t": "032640",
+          "n": "LG유플러스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1562000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        },
+        {
+          "t": "064400",
+          "n": "LG씨엔에스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 85972955000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등과의 거래 · 매출 등"
+        }
+      ],
+      "down": [
+        {
+          "t": "032640",
+          "n": "LG유플러스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 998000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등"
+        }
+      ]
     }
   }
 }

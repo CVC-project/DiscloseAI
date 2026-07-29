@@ -22,6 +22,24 @@
         "dir": "out",
         "s": "제약바이오",
         "tier": "dot"
+      },
+      {
+        "t": "005090",
+        "n": "SGC에너지",
+        "type": "dart_filing",
+        "detail": "대규모기업집단",
+        "dir": "in",
+        "s": "에너지",
+        "tier": "dot"
+      },
+      {
+        "t": "010060",
+        "n": "OCI홀딩스",
+        "type": "dart_filing",
+        "detail": "최상위 지배기업",
+        "dir": "out",
+        "s": "금융",
+        "tier": "named400"
       }
     ],
     "valuechain": {
@@ -43,6 +61,15 @@
           "amount": 43741862.0,
           "as_of": 2025,
           "prov": "특수관계자거래 · 매출 등"
+        },
+        {
+          "t": "005090",
+          "n": "SGC에너지",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 32525010600.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 재화의 판매로 인한 수익, 특수관계자거래"
         }
       ],
       "down": [
@@ -88,6 +115,24 @@
           "type": "customer",
           "tier_grade": "T1",
           "amount": 11299000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "t": "005090",
+          "n": "SGC에너지",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 13270853853.0,
+          "as_of": 2025,
+          "prov": "특수관계자 - 연결 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "t": "010060",
+          "n": "OCI홀딩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 5469243000.0,
           "as_of": 2025,
           "prov": "특수관계자 거래 · 매출, 특수관계자거래"
         }

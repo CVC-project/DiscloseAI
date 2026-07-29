@@ -13,10 +13,65 @@
         "dir": "in",
         "s": "통신",
         "tier": "named400"
+      },
+      {
+        "t": "418470",
+        "n": "KT밀리의서재",
+        "type": "associate",
+        "detail": "38.41%",
+        "dir": "out",
+        "s": "플랫폼",
+        "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "001040",
+          "n": "CJ",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 38329279000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출 등"
+        },
+        {
+          "t": "032640",
+          "n": "LG유플러스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 82000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        },
+        {
+          "t": "035760",
+          "n": "CJ ENM",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 38319196000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출"
+        },
+        {
+          "t": "035760",
+          "n": "CJ ENM",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 43610317000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 주요거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "t": "089600",
+          "n": "KT나스미디어",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1469000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ],
       "down": [
         {
           "t": "030200",
@@ -51,6 +106,60 @@
           "type": "customer",
           "tier_grade": "T1",
           "amount": 21653660000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 주요거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "001040",
+          "n": "CJ",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 8671851000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입 등"
+        },
+        {
+          "t": "032640",
+          "n": "LG유플러스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 16000000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등"
+        },
+        {
+          "t": "035760",
+          "n": "CJ ENM",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 8671851000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입"
+        },
+        {
+          "t": "089600",
+          "n": "KT나스미디어",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1080000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 주요거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "058850",
+          "n": "KTcs",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4636000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 주요거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "035760",
+          "n": "CJ ENM",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 6783763000.0,
           "as_of": 2025,
           "prov": "특수관계자와의 주요거래 · 재화의 판매로 인한 수익, 특수관계자거래"
         }
