@@ -64,3 +64,23 @@ def test_t2_two_year_cut():
 
 def test_unknown_kind_passes():
     assert keep_edge(_edge("io_table", 2020), {}, TODAY)
+
+
+# ── 재발 방지 트립와이어: 모든 ValueChainEdge exporter는 신선도 필터를 경유해야 한다 ──
+
+def test_all_exporters_route_through_freshness():
+    """D13 조문화 가드 — export 코드가 fresh_edges 경유를 버리면(리팩터 등) 즉시 FAIL.
+
+    배경(2026-07-29 리더 결정): 만료 계약 937건·구연도 주석 168건이 현재 관계처럼
+    노출됐던 사고. 필터는 export 단계 단일 관문 — 새 exporter 추가 시에도 이 목록에
+    등록하고 fresh_edges를 쓸 것.
+    """
+    from pathlib import Path
+    root = Path(__file__).resolve().parents[3] / "modules" / "relation"
+    exporters = [
+        root / "valuechain" / "export.py",
+        root / "universe" / "export.py",
+    ]
+    for p in exporters:
+        src = p.read_text(encoding="utf-8")
+        assert "fresh_edges" in src, f"{p.name}: 신선도 필터(fresh_edges) 미경유 — D13 위반"
