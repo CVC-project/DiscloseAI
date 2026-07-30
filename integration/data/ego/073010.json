@@ -336,7 +336,7 @@
         "as_of": 2025
       },
       {
-        "n": "중원엔지니어링(주)",
+        "n": "중원엔지니어링㈜",
         "kind": "private_corp",
         "type": "dart_filing",
         "detail": "기타 · 2025",
@@ -361,8 +361,55 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "014280",
+          "n": "금강공업",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1838007000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매  입"
+        },
+        {
+          "t": "012210",
+          "n": "삼미금속",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 561553000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매  입"
+        },
+        {
+          "n": "중원엔지니어링㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 4157189000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매  입"
+        }
+      ],
+      "down": [
+        {
+          "t": "014280",
+          "n": "금강공업",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 198689000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매  출"
+        },
+        {
+          "t": "012210",
+          "n": "삼미금속",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4317914000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매  출"
+        }
+      ]
     }
   }
 }

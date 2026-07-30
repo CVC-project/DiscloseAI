@@ -127,8 +127,37 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "상원상공(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 73378000.0,
+          "as_of": 2022,
+          "prov": "특수관계자 거래 · 매입액"
+        }
+      ],
+      "down": [
+        {
+          "n": "상원상공(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 285074000.0,
+          "as_of": 2022,
+          "prov": "특수관계자 거래 · 매출액"
+        },
+        {
+          "n": "(주)진한",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 84000000.0,
+          "as_of": 2022,
+          "prov": "특수관계자 거래 · 매출액"
+        }
+      ]
     }
   }
 }

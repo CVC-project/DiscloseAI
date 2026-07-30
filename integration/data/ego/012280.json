@@ -6,7 +6,7 @@
   "layers": {
     "governance": [
       {
-        "n": "삼신정밀(주)",
+        "n": "삼신정밀㈜",
         "kind": "private_corp",
         "type": "investment",
         "detail": "13.38% · 2025",
@@ -23,8 +23,28 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "삼신정밀㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 58538859000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매입 등 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "n": "삼신정밀㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 35478049000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매출 등 · 별도"
+        }
+      ]
     }
   }
 }

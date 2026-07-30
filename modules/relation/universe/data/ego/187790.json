@@ -97,8 +97,46 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "0004V0",
+          "n": "엔비알모션",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 102200000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등"
+        },
+        {
+          "n": "나노엔지니어링",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2749690000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등"
+        }
+      ],
+      "down": [
+        {
+          "t": "0004V0",
+          "n": "엔비알모션",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 12192032000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        },
+        {
+          "n": "나노엔지니어링",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 43000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        }
+      ]
     }
   }
 }

@@ -22,7 +22,7 @@
         "as_of": 2025
       },
       {
-        "n": "에이치티씨코리아 주식회사",
+        "n": "에이치티씨코리아㈜",
         "kind": "private_corp",
         "type": "investment",
         "detail": "7.18% · 2025",
@@ -78,7 +78,7 @@
         "as_of": 2025
       },
       {
-        "n": "키스톤프라이빗에쿼티(주)",
+        "n": "키스톤프라이빗에쿼티㈜",
         "kind": "private_corp",
         "type": "investment",
         "detail": "9.9% · 2025",
@@ -87,8 +87,55 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "키스톤프라이빗에쿼티㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 709800000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등"
+        },
+        {
+          "n": "㈜아시아경제 우리사주조합",
+          "kind": "coop_fund",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 103330000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등"
+        }
+      ],
+      "down": [
+        {
+          "n": "키스톤프라이빗에쿼티㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 270287000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        },
+        {
+          "n": "㈜아시아경제 우리사주조합",
+          "kind": "coop_fund",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 103330000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        },
+        {
+          "n": "에이치티씨코리아㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 240000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        }
+      ]
     }
   }
 }

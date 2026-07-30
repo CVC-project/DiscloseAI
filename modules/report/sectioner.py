@@ -45,8 +45,12 @@ _SEC_SEP = "III.5.별도주석"
 # 주석 절 블록이 실체를 가졌다고 볼 최소 길이. 연결 미작성사의 '해당사항 없음' 절은
 # 실측 190~800자라 2만자면 넉넉히 가른다(전수에서 오탐 0 · 경계 표본 없음).
 _MIN_NOTE_BLOCK = 20_000
-# F2 노트 1건의 저장 상한 — text_html 저장 상한과 맞춰 md 변환 비용도 함께 묶는다.
-_INBODY_NOTE_CAP = 500_000
+# F2 노트 1건의 상한. ⚠️ 2026-07-31 정정: 이 값으로 **md 변환 전에** 잘랐더니 F1과
+# 비대칭이 됐다 — F1은 `md = _to_md(note_html)`를 캡 이전 원문에서 만들고 text_html만
+# 자른다. 그 결과 F2 노트의 text_md가 표 중간에서 끊겨(실측 특수관계 노트 86건 전부
+# 표 태그 불균형·82건이 거래 라벨 보유) 파서가 뒷부분 상대를 통째로 못 본다.
+# → 캡을 md 변환 뒤 저장 단계로 옮긴다(section_all의 text_html 슬라이스가 담당).
+_INBODY_NOTE_CAP = 3_000_000
 
 # 사업의 내용 절(통짜 저장) 패턴
 _BIZ_HEAD = (r"II\.\s*사업의\s*내용", "II.사업의내용")
@@ -214,6 +218,8 @@ def _split_inbody(block: str) -> list[tuple[str, str, str]]:
     for i, (no, title, s) in enumerate(chain):
         e = chain[i + 1][2] if i + 1 < len(chain) else len(block)
         out.append((str(no), title, block[s : min(e, s + _INBODY_NOTE_CAP)]))
+        # ↑ 상한은 폭주 방어용 안전판일 뿐 — 실제 저장 절단은 section_all의
+        #   text_html[:500_000]이 하고, text_md는 F1과 같이 **온전한 원문**에서 만든다.
     return out
 
 

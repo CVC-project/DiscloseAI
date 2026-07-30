@@ -26,22 +26,6 @@
         "tier": "named400"
       },
       {
-        "n": "(주)얼반웍스",
-        "kind": "private_corp",
-        "type": "associate",
-        "detail": "25.0% · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
-        "n": "(주)플럭서스",
-        "kind": "private_corp",
-        "type": "investment",
-        "detail": "19.3% · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
         "n": "RBW JAPAN Inc.",
         "kind": "private_corp",
         "type": "subsidiary",
@@ -66,6 +50,22 @@
         "as_of": 2025
       },
       {
+        "n": "㈜얼반웍스",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "25.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜플럭서스",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "19.3% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
         "n": "김도훈",
         "kind": "person",
         "type": "investment",
@@ -83,8 +83,46 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "㈜플럭서스",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1417803000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등"
+        },
+        {
+          "n": "㈜얼반웍스",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1098893000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등"
+        }
+      ],
+      "down": [
+        {
+          "n": "㈜플럭서스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3455120000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "n": "㈜얼반웍스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 50424000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        }
+      ]
     }
   }
 }
