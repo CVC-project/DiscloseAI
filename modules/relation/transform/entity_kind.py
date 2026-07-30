@@ -66,6 +66,17 @@ _CORP_MARKS = re.compile(
 _KOREAN_PERSON_RE = re.compile(r"^[가-힣]{2,4}$")
 _RRN_RE = re.compile(r"\d{6}\s*-\s*\d{7}")
 
+
+def _looks_like_person_name(surface: str) -> bool:
+    """2~4자 한글 인명 형태인가 — **공백을 제거하고** 본다.
+
+    ★2026-07-30: 공시는 이름 칸에도 정렬용 공백을 넣는다(`이   진`·`박 효 정`·
+    `주 홍`). 공백을 그대로 두면 정규식이 안 맞아 사람이 비상장법인으로 분류됐다
+    (실측 310건). 이 판정은 여전히 **relate가 개인을 가리킬 때만** 쓰이므로
+    (classify의 signal == 'person' 조건) 사명이 개인으로 뒤집히는 경로가 아니다.
+    """
+    return bool(_KOREAN_PERSON_RE.match(re.sub(r"\s+", "", surface or "")))
+
 # hyslrSttus `relate` 필드 판정 어휘.
 #
 # ★2026-07-29 2차 수정(검증 에이전트가 잡음): 1차 수정에서 1자 관계어를 substring으로
@@ -103,19 +114,33 @@ _KOREAN_SURNAMES = (
 _PERSON_HEADS = (
     "임원", "이사", "감사", "본인", "친인척", "친족", "인척", "배우자", "자녀",
     "특수관계인", "며느리", "사위", "조카", "친척", "형제", "자매", "부인", "최대주주",
+    # ★2026-07-30 CPA 표본 검수에서 실측 추가 — 전부 사람의 직함·촌수다.
+    "대표", "회장", "사장", "전무", "상무", "제수", "형수", "숙부", "숙모",
+    "직계비속", "직계존속", "임직원",
 )
 _CORP_HEADS = ("회사", "법인", "계열", "조합", "펀드", "재단", "단체")
+
+# ★2026-07-30: 일부 공시는 촌수를 **한자**로 적는다(`子`·`妻`·`兄`·`父`·`姉`).
+# 실측 92건 — 다자(多字) 한글 어휘에 걸린 84건은 우연히 맞았고 8건은 법인으로 샜다.
+_CJK_KINSHIP_RE = re.compile(r"[子女夫妻父母兄弟姉妹姊孫叔伯姪甥媤壻]")
 
 
 def _relate_signal(relate: str | None) -> str:
     """relate 필드가 가리키는 것 — 'corp' | 'person' | 'neutral'.
 
-    판정 순서: ① 끝 명사(주체) → ② 명시적 법인 어휘 → ③ 1자 완전일치 → ④ 개인 어휘.
+    판정 순서: ① 한자 촌수 → ② 끝 명사(주체) → ③ 명시적 법인 어휘 → ④ 1자 완전일치
+    → ⑤ 개인 어휘.
     """
     # ★개행·닫는 괄호가 끝 명사 판정을 막는다: 원문이 '특수관계인' + 개행 +
     # '(계열회사 임원)'이면 끝이 '임원)'이라 endswith에 안 걸리고, 앞의 '계열회사'가
-    # 먼저 잡혀 사람이 법인으로 뒤집혔다(실측). 공백 접기 + 닫는 괄호 제거로 해소.
-    r = re.sub(r"\s+", " ", (relate or "")).strip().rstrip(")]） ")
+    # 먼저 잡혀 사람이 법인으로 뒤집혔다(실측).
+    # ★2026-07-30 **공백을 전부 제거**한다(접기로는 부족): 공시는 칸 폭을 맞추려
+    # 글자 사이에 공백을 넣는다 — `본     인`·`최 대 주 주`·`친 인 척`·`등 기 임 원`.
+    # 접기만 하면 `본 인` ≠ `본인`이라 **어휘 전체가 불일치**해 사람이 법인이 됐다
+    # (실측: 공백 낀 2~4자 한글 이름 310건이 private_corp).
+    r = re.sub(r"\s+", "", (relate or "")).strip().rstrip(")]） ")
+    if _CJK_KINSHIP_RE.search(r):
+        return "person"
     if not r:
         return "neutral"
     # ① 끝 명사 — 가장 강한 신호
@@ -148,7 +173,10 @@ _FOOTNOTE_PREFIX_RE = re.compile(r"^(?:주|\*|note)\s*\d*\s*\)")   # '주1) (주
 _GROUP_TOTAL_RE = re.compile(r"등\s*(?:기타\s*)?\d+\s*개\s*사")     # '㈜A 등 기타 104개사'
 _UNIT_HEADER_RE = re.compile(r"^\(?\s*단위\s*[:：]")                # '(단위: 원)' — 표 머리글
 _AGGREGATE_TOKENS = {"자기주식", "자사주", "기타개인", "우리사주조합", "소액주주",
-                     "기타주주", "국민연금", "기타법인"}
+                     "기타주주", "국민연금", "기타법인",
+                     # ★2026-07-30 CPA 표본 검수 실측 — 특정 실체가 아닌 묶음 라벨
+                     "주요주주", "임원등", "임직원등", "임원", "임직원", "주주",
+                     "특수관계인등", "우리사주", "기타주식"}
 
 
 def is_noise(surface: str) -> str | None:
@@ -168,7 +196,8 @@ def is_noise(surface: str) -> str | None:
         return "unit_header"           # '(단위: 원)' — 표 머리글
     if _FOOTNOTE_PREFIX_RE.match(s):
         return "footnote_prefix"       # '주1) ...' — 각주 번호가 이름 앞에 붙은 행
-    if s in _AGGREGATE_TOKENS:
+    # ★2026-07-30 공백 제거 후 비교 — 공시는 '주요 주주'·'임직원 등'처럼 띄어 쓴다
+    if re.sub(r"\s+", "", s) in _AGGREGATE_TOKENS:
         return "aggregate_token"       # 자기주식·기타개인 등 — 특정 실체가 아님
     if _GROUP_TOTAL_RE.search(s):
         return "group_total"           # '등 기타 104개사' — 개별 법인이 아닌 집계
@@ -332,7 +361,7 @@ def classify(
     ):
         return KIND_PERSON
 
-    if allow_person and signal == "person" and not has_corp_mark and _KOREAN_PERSON_RE.match(s):
+    if allow_person and signal == "person" and not has_corp_mark and _looks_like_person_name(s):
         return KIND_PERSON
 
     if any(w in s for w in _COOP_FUND_WORDS) or any(
@@ -345,13 +374,16 @@ def classify(
     # 보조 신호: **최대주주 명부(hyslrSttus)에서만**, relate가 중립일 때, 3자+성씨.
     # ⚠️ 경로를 안 가르면 '오뚜기'·'하이브'처럼 성씨로 시작하는 3자 사명이 개인이 된다.
     # 최대주주 현황은 애초에 '사람 명부'라 이 폴백이 성립하지만, 주석·출자 경로는 아니다.
+    # ★2026-07-30: 길이·성씨 판정도 **공백 제거 후** 본다 — '주 홍'은 len 3이지만
+    # 실제로는 2자 이름이라 3자 폴백에 우연히 걸렸다(형태 판정 기준을 한 곳으로).
+    bare = re.sub(r"\s+", "", s)
     if (
         allow_person
         and surname_fallback
         and signal == "neutral"
         and not has_corp_mark
-        and _KOREAN_PERSON_RE.match(s)
-        and (len(s) == 3 and s[0] in _KOREAN_SURNAMES)
+        and _looks_like_person_name(s)
+        and (len(bare) == 3 and bare[0] in _KOREAN_SURNAMES)
     ):
         return KIND_PERSON
     return KIND_PRIVATE_CORP

@@ -475,6 +475,84 @@ _CATEGORY_HEADER_RE = re.compile(
 )
 _FOOTNOTE_LABEL_RE = re.compile(r"^\(주\d*\)$")
 
+# ★ 2026-07-30 열 밀림 수리에서 함께 발견 — 콤마 분할이 **두 가지로** 틀렸다.
+# 전수 실측(1,550노트): parse_governance_categories 산출 3,882건 중 잡음 326건,
+# 그 **261건이 `suffix_fragment`** — `Co., Ltd.`의 콤마를 쪼개 `Ltd.` 조각만 남은 것이고,
+# 나머지는 `㈜에이피헬스케어(구.㈜...)(*1, 2)`처럼 **괄호 안 콤마**를 쪼개 사명이
+# 두 동으로 갈린 것이다(에이프로젠바이오로직스 실측: `...(*1` + `2)`).
+#
+# 원칙 ②("괄호는 신원 정보다")의 분할판 — 괄호 안은 한 덩어리다. 그리고 법인격
+# 접미어만 남는 조각은 앞 조각의 일부이므로 되붙인다.
+_LIST_SEP_RE = re.compile(r"[,、·]")
+_OPEN_BRACKETS = "([{（［｛"
+_CLOSE_BRACKETS = ")]}）］｝"
+# 되붙임 대상 — 이 토큰만으로 이루어진 조각은 독립 법인명이 될 수 없다.
+_LEGAL_TAIL_TOKENS = frozenset({
+    "ltd", "inc", "llc", "llp", "co", "corp", "gmbh", "sa", "sas", "sarl",
+    "bv", "nv", "pte", "plc", "ag", "kk", "lp", "sro", "srl", "pty", "spa",
+    "limited", "company", "corporation", "sdnbhd", "bhd", "ltda", "cv", "kg",
+})
+_ASCII_TAIL_MAX = 8  # 'SAdeCV'(6)·'SdnBhd'(6)·'GmbHCoKG'(8) 등 약어 길이 상한
+
+
+def _is_legal_tail(piece: str) -> bool:
+    """조각이 **법인격 접미어만**인가 — 그렇다면 앞 조각의 일부다.
+
+    ⚠️ 토큰 열거로는 못 막는다(실측: `Kia Mexico, S.A. de C.V.`가 `S.A. de C.V.`를
+    미등록 토큰이라 쪼갰다). 그래서 형태 규칙을 쓴다 —
+      ① 알파벳만 남겼을 때 8자 이하(약어 길이) **그리고**
+      ② 점(.)을 포함하거나 알려진 접미어 토큰 — 점이 없는 짧은 토큰까지 접미어로
+         보면 `HMM`·`KT` 같은 **실존 단독 사명이 앞 조각에 흡수**된다.
+    한글이 섞인 조각은 대상이 아니다('다라 주식회사'를 '가나'에 붙이면 안 됨).
+    """
+    p = piece.strip()
+    if not p or re.search(r"[가-힣]", p):
+        return False
+    letters = re.sub(r"[^A-Za-z]", "", p)
+    if not letters or len(letters) > _ASCII_TAIL_MAX:
+        return False
+    return "." in p or letters.lower() in _LEGAL_TAIL_TOKENS
+
+
+def split_company_list(name: str | None) -> list[str]:
+    """콤마·중점 나열 회사명 칸 → 개별 법인 조각 (분리 지점 없으면 빈 리스트).
+
+    ⚠️ 두 가지 함정을 회귀 박제로 막는다:
+      ① **괄호 안 콤마는 분리하지 않는다** — `㈜앱토크롬(구, ㈜에이피헬스케어)`·
+         `...(*1, 2)`가 두 동으로 갈린다(표기 정규화 원칙 ② 분할판).
+      ② **법인격 접미어만 남는 조각은 앞으로 되붙인다** — `Co., Ltd.`를 쪼개면
+         `Ltd.` 조각이 노드 후보로 남는다(실측 261건).
+    """
+    if not name:
+        return []
+    depth = 0
+    parts: list[str] = []
+    buf: list[str] = []
+    for ch in name:
+        if ch in _OPEN_BRACKETS:
+            depth += 1
+        elif ch in _CLOSE_BRACKETS:
+            depth = max(0, depth - 1)
+        if depth == 0 and _LIST_SEP_RE.match(ch):
+            parts.append("".join(buf))
+            buf = []
+            continue
+        buf.append(ch)
+    parts.append("".join(buf))
+    if len(parts) < 2:
+        return []
+
+    merged: list[str] = []
+    for raw in parts:
+        piece = raw.strip()
+        if not piece:
+            continue
+        if merged and _is_legal_tail(piece):
+            merged[-1] = f"{merged[-1]}, {piece}"  # 'Co.' + 'Ltd.' → 'Co., Ltd.'
+            continue
+        merged.append(piece)
+    return merged if len(merged) >= 2 else []
+
 
 def parse_governance_categories(text_md: str | None) -> list[dict]:
     """특수관계자 "구분/특수관계자명" 카테고리 표 → [{category, counterparty}].
@@ -508,7 +586,9 @@ def parse_governance_categories(text_md: str | None) -> list[dict]:
             category = row[0].strip()
             if _FOOTNOTE_LABEL_RE.match(category):
                 continue  # "(주1)" 각주 행 — 카테고리 아님
-            for name in row[1].split(","):
+            # 괄호 안 콤마 보존 + 법인격 접미어 되붙임 (split_company_list)
+            names = split_company_list(row[1]) or [row[1]]
+            for name in names:
                 name = name.strip()
                 if name:
                     results.append({"category": category, "counterparty": name})
@@ -653,15 +733,74 @@ def _find_header_row(grid: list[list[str]], required_labels: set[str]) -> int | 
     return None
 
 
+# ★ 2026-07-30 열 밀림 수리 — 회사명 칸 위치를 **헤더 어휘로** 찾는다.
+# 기존 구현은 "소재지 컬럼 바로 왼쪽 = 회사명"이라는 **위치 가정**에 의존했다.
+# KT&G(헤더 4칸이 공백 + 소재지가 5번째)에서는 맞지만, 아이센스 실측
+# (rcept 20260318001657)의 표는 `회사명 | 소유지분율(당기말·전기말) | 소재지 |
+# 결산월 | 업종` 순서라 회사명이 소재지 **왼쪽 3칸**이다 — 결과가 한 칸도 아니고
+# 통째로 밀려 `{category:'5.51%', counterparty:'5.56%'}`가 나왔다(지분율 2칸).
+# → 회사명 헤더가 **있으면 그 위치**를, 없으면(KT&G) 기존 소재지-상대 위치를 쓴다.
+_NAME_HEADER_VOCAB = (
+    "특수관계자명", "특수관계자의 명칭", "특수관계자의명칭",
+    "회사명", "기업명", "법인명", "상호", "명칭",
+)
+_PERIOD_SUBHEADERS = {"당기말", "전기말", "당기", "전기", "당기초", "기초", "기말"}
+
+
+def _collapse(cell: str) -> str:
+    return re.sub(r"\s+", "", (cell or "").strip())
+
+
+def _header_col_by_vocab(header_row: list[str], vocab: tuple[str, ...]) -> int | None:
+    """헤더 행에서 vocab 중 하나를 값으로 가진 첫 컬럼 인덱스 (공백 무시)."""
+    for idx, cell in enumerate(header_row):
+        c = _collapse(cell)
+        if c and any(v in c for v in vocab):
+            return idx
+    return None
+
+
+def _category_col_by_vocab(header_row: list[str]) -> int | None:
+    """'구분'류 카테고리 컬럼. ⚠️ '특수관계자명'을 카테고리로 오인하지 않도록
+    '구분'만 본다(부분일치 '특수관계'를 쓰면 회사명 칸이 카테고리가 된다)."""
+    for idx, cell in enumerate(header_row):
+        if "구분" in _collapse(cell):
+            return idx
+    return None
+
+
+# ★ 2026-07-30: 계층 나열 표는 하위 법인 앞에 들여쓰기 불릿을 찍는다(HL D&I 실측
+# 13건 — `- HL Transportation, LLC.`·`- 신한벽지 주식회사`). 불릿은 표 레이아웃이지
+# 사명이 아니다 — 원문 충실 원칙은 **문자**에 대한 것이고, 개행·연속공백을 접는 것과
+# 같은 층의 정리다(upsert_unlisted_node의 공백 정규화 선례).
+_LIST_MARKER_RE = re.compile(r"^[-−–—ㆍ·•*※]+\s+")
+
+
+def _strip_list_marker(name: str) -> str:
+    return _LIST_MARKER_RE.sub("", name or "").strip()
+
+
+def _is_full_width_label(row: list[str]) -> str | None:
+    """모든 칸이 같은 값인 행 = 표 안의 전폭 카테고리 머리행(아이센스 '관계기업:').
+
+    COLSPAN 복원 결과 같은 문자열이 행 전체를 채운다 — 회사 데이터 행이 아니다.
+    """
+    values = {c.strip() for c in row if c.strip()}
+    if len(values) == 1 and len(row) > 1:
+        return values.pop().strip(" :：")
+    return None
+
+
 def parse_governance_html_rows(text_html: str | None) -> list[dict]:
-    """행=개별회사형 거버넌스 표(KT&G류) → [{category, counterparty}].
+    """행=개별회사형 거버넌스 표(KT&G·아이센스류) → [{category, counterparty}].
 
     IFRS 표준 공시항목 컬럼("소재지"·"소유지분율")이 모두 있는 표를 앵커로 찾아
-    ROWSPAN을 반영한 그리드로 복원한 뒤, 소재지 컬럼 바로 왼쪽 2칸(카테고리/
-    회사명)을 읽는다. 카테고리 라벨이 rowspan 캐리포워드로 채워질 때, 실제
-    회사명이 없고 카테고리 자체가 회사명 칸에도 그대로 들어간 행(예: KT&G의
-    "기타" 캐치올 행)은 category == counterparty로 식별해 스킵한다(실제 회사가
-    아님, 억지 매칭 금지).
+    ROWSPAN/COLSPAN을 반영한 그리드로 복원한 뒤,
+      · 회사명 컬럼 = 헤더 어휘(회사명·특수관계자명…)가 있으면 그 위치, 없으면
+        소재지 바로 왼쪽(KT&G류 — 헤더가 공백인 표)
+      · 카테고리 = '구분' 컬럼, 없으면 전폭 머리행(아이센스 '관계기업:')을 누적
+    으로 읽는다. 카테고리 자체가 회사명 칸에 그대로 들어간 캐치올 행(KT&G "기타")·
+    하위 기간 헤더 행(당기말/전기말)·전폭 머리행은 회사로 만들지 않는다.
     """
     results: list[dict] = []
     if not text_html:
@@ -682,18 +821,42 @@ def parse_governance_html_rows(text_html: str | None) -> list[dict]:
     if header_idx is None:
         return results
     header_row = grid[header_idx]
-    loc_col = header_row.index("소재지")
-    name_col = loc_col - 1
-    category_col = name_col - 1
-    if category_col < 0:
-        return results
 
+    name_col = _header_col_by_vocab(header_row, _NAME_HEADER_VOCAB)
+    if name_col is None:
+        # KT&G류 — 헤더 칸이 공백이라 어휘로 못 찾는다. 기존 위치 규칙 유지.
+        name_col = header_row.index("소재지") - 1
+    if name_col < 0:
+        return results
+    category_col = _category_col_by_vocab(header_row)
+    if category_col is None and name_col - 1 >= 0:
+        category_col = name_col - 1
+    header_name_value = _collapse(header_row[name_col]) if name_col < len(header_row) else ""
+
+    running_category = ""
     for row in grid[header_idx + 1 :]:
         if len(row) <= name_col:
             continue
-        category = row[category_col].strip()
+        full = _is_full_width_label(row)
+        if full is not None:
+            running_category = full  # 전폭 머리행 — 이후 행의 카테고리
+            continue
         counterparty = row[name_col].strip()
-        if not category or not counterparty or counterparty == category:
+        if not counterparty:
+            continue
+        if _collapse(counterparty) == header_name_value:
+            continue  # 헤더 rowspan 캐리다운(회사명) — 데이터 아님
+        if _collapse(counterparty) in _PERIOD_SUBHEADERS:
+            continue  # 하위 기간 헤더 행(당기말/전기말)
+        counterparty = _strip_list_marker(counterparty)
+        if not counterparty:
+            continue
+        category = (
+            row[category_col].strip()
+            if category_col is not None and category_col < len(row)
+            else ""
+        ) or running_category
+        if not category or counterparty == category:
             continue
         results.append({"category": category, "counterparty": counterparty})
     return results
@@ -726,18 +889,59 @@ def parse_governance_transaction_header(text_html: str | None) -> list[dict]:
         return results
 
     grid = _html_table_grid(target_table)
-    idx = 0
-    while idx < len(grid):
-        row = grid[idx]
-        non_empty = [c for c in row if c]
-        if non_empty and len(set(non_empty)) == 1 and non_empty[0] in _WIDE_ROW_BOILERPLATE_LABELS:
-            idx += 1
-            continue
-        break
-    if idx + 1 >= len(grid):
+    # ★ 2026-07-30 열 밀림 수리 (최대 산출원 — 실측 4,140건 중 3,261건이 잡음).
+    # 기존 구현은 "보일러플레이트(전체 특수관계자/특수관계자) 행을 위에서부터
+    # 건너뛴 첫 행 = 카테고리 행, 그 다음 = 회사명 행"으로 잡았다. 두 방향으로 깨진다:
+    #   ① 합계 컬럼이 있으면(`전체 특수관계자  합계`) 그 행의 값이 2종이 되어
+    #      "전부 같은 값"이라는 보일러플레이트 판정에 실패 → **한 층 위에서 멈춘다**
+    #      (JW중외제약 2024: category='전체 특수관계자', counterparty='지배기업').
+    #   ② 반대로 카테고리 층이 전부 보일러플레이트면 **한 층 아래로 지나쳐** 회사명
+    #      행이 카테고리가 되고 데이터 행이 회사명이 된다(JW중외제약 2025 실측:
+    #      category='JW홀딩스㈜', counterparty='(4,891,807)' — 리더가 본 그 화면).
+    # → 위에서 세는 대신 **아래에서 잡는다**: 리프 헤더 행(첫 칸이 빈 마지막 행,
+    #   parse_note_html_grid와 같은 규칙)이 회사명 행이고 그 직상단이 카테고리 행이다.
+    #   층 수·합계 컬럼 유무와 무관하게 성립한다.
+    # ★ 두 배치가 공존한다(실측). 마지막 헤더 층(첫 칸이 빈 마지막 행)이
+    #   ① **회사명 층**인 표 — 삼성전자·JW중외제약. 그 아래는 금액 데이터 행.
+    #   ② **카테고리 층**인 표 — 유한양행·롯데지주·SK리츠·하림. 회사명은 **그 아래
+    #      데이터 행**에 오고(콤마 나열이 흔함), 첫 칸은 `특수관계자명`·`특수관계의
+    #      성격에 대한 기술` 같은 라벨이다.
+    # 라벨 어휘로 ②를 식별하려 하면 놓친다(라벨 표기가 회사마다 제각각 —
+    # 실측 상장타깃 114엣지 소실). → **마지막 헤더 층의 값이 전부 K-IFRS 구분이면
+    # 그 층은 카테고리 행**이라는 내용 기준으로 가른다. 회사명 층에는 반드시
+    # 법인격 표기를 쓰는 실제 사명이 섞여 있으므로 "전부 구분"이 성립하지 않는다.
+    # ⚠️ "마지막 헤더 층 = 회사명"도 틀린다: 회사명 층 **아래로 소항목 층이 더 쌓이는**
+    # 표가 있다(JW생명과학 rcept 20260318001371 — 회사명은 3층인데 그 아래 '지급보증의
+    # 구분'·'제공한 지급보증'이 더 있어 마지막 층은 6층. 제일약품은 '자산'·'토지와 건물').
+    # 위치로는 어느 층인지 알 수 없으므로 **법인격 표기가 있는 마지막 헤더 층**을 고른다.
+    hdr_idx = _leaf_header_index(grid)
+    if hdr_idx is None:
         return results
-    category_row = grid[idx]
-    name_row = grid[idx + 1]
+    header_idxs = [i for i in range(hdr_idx + 1) if grid[i] and grid[i][0].strip() == ""]
+    if not header_idxs:
+        return results
+    # ⚠️ **가장 얕은** 층을 고른다 — 소항목 층에도 법인격 표기가 나올 수 있다
+    # (제일약품 실측: 회사명 층은 3층 '제일파마홀딩스(주)'인데 그 아래 담보 소항목
+    # 층에 '비아트리스코리아㈜'·'신한은행'이 있어 가장 깊은 층을 고르면 담보제공처가
+    # 상대회사가 된다). 특수관계자 계층은 카테고리 → 회사명 → 소항목 순이므로
+    # 법인격 표기가 처음 나타나는 층이 회사명 층이다.
+    name_idx = None
+    for i in header_idxs:
+        if any(entity_kind._CORP_MARKS.search(c) for c in grid[i][1:] if c.strip()):
+            name_idx = i
+            break
+    if name_idx is not None and name_idx >= 1:
+        category_row, name_row = grid[name_idx - 1], grid[name_idx]  # ① 회사명=헤더 층
+    elif hdr_idx + 1 < len(grid):
+        # ② 어느 헤더 층에도 사명이 없다 → 회사명은 **그 아래 데이터 행**에 있다
+        #    (유한양행·롯데지주·SK리츠·하림·퍼시스·아시아나항공 — 콤마 나열이 흔함).
+        # ⚠️ 카테고리 어휘로 "이 층이 카테고리인가"를 판정하려 했더니 표기 편차에
+        #    걸려 통째로 0이 됐다(실측: '지배력이 있는 개인'·'기타(*1)'가 어휘 미등록).
+        #    회사명 층이 없다는 사실 자체가 곧 "회사명은 아래에 있다"이므로 어휘를
+        #    보지 않는다 — 숫자만인 칸은 아래 필터·잡음 게이트가 막는다.
+        category_row, name_row = grid[hdr_idx], grid[hdr_idx + 1]
+    else:
+        return results
     if len(category_row) != len(name_row):
         return results
 
@@ -746,6 +950,16 @@ def parse_governance_transaction_header(text_html: str | None) -> list[dict]:
         name = name.strip()
         if not category or not name or name.startswith("기타"):
             continue
+        # 개별 법인이 아니라 K-IFRS 구분/서술이면 회사가 아니다. 단 두 가지는 실제 사명:
+        #   · 법인격 표기가 있는 것(entity_kind.is_noise의 category_label 판정과 같은 규칙)
+        #   · **집계 꼬리를 뗀 나머지가 사명인 것** — `LX 하우시스 및 그 종속기업`은
+        #     '종속기업'을 품어 구분처럼 보이지만 대표사가 실존 상장사다(실측: 이 조건을
+        #     빼면 LX인터내셔널→LX하우시스·LX세미콘 2엣지가 소실).
+        probe = strip_group_aggregate(name) or name
+        if _is_category_column(probe) and not entity_kind._CORP_MARKS.search(probe):
+            continue
+        if _DASH_ONLY_RE.match(name) or _RATIO_ONLY_RE.match(name):
+            continue  # 금액·지분율 칸 — 회사명 층이 아니다
         results.append({"category": category, "counterparty": name})
     return results
 
@@ -755,11 +969,25 @@ def parse_governance_transaction_header(text_html: str | None) -> list[dict]:
 # ROWSPAN 캐리포워드 유형, 컬럼 구성만 다름). 스냅샷 원칙(latest_relation_local_
 # edges와 동일 사상)에 따라 **당기말 컬럼만** 채택 — 전기말은 그 회사 전년도
 # 보고서 자체의 당기말 블록에서 이미 잡히므로 중복(module docstring 상단 참조).
-def parse_governance_carryforward(text_html: str | None) -> list[dict]:
-    """당기말/전기말 캐리포워드형 거버넌스 표(두산류) → [{category, counterparty}].
+_DASH_ONLY_RE = re.compile(r"^[-−―–—\s]+$")
+_RATIO_ONLY_RE = re.compile(r"^[\d,.\s%]+$")
 
-    당기말 값이 "-"(당기 중 이탈, 전기말에만 존재)인 행은 현재 유효한 관계가
-    아니므로 스킵한다.
+
+def parse_governance_carryforward(text_html: str | None) -> list[dict]:
+    """당기말/전기말형 거버넌스 표(두산·일신방직류) → [{category, counterparty}].
+
+    ★ 2026-07-30 열 밀림 수리 — **두 가지 표가 같은 헤더를 쓴다.**
+      · 두산류: `구분 | 당기말 | 전기말 | 비고` — 당기말 칸에 **회사명**이 들어간다.
+      · 일신방직·현대코퍼레이션홀딩스·HL D&I류: `구분 | 특수관계자명 | … | 당기말 |
+        전기말` — 당기말/전기말은 **지분율 컬럼의 하위 헤더**이고 회사명은 별도 칸이다.
+    기존 구현은 전자만 가정해 후자에서 지분율을 회사명으로 읽었다(실측: `48.54%`·
+    `23.99%`·`23.78`이 노드 후보로, 진짜 회사명 `㈜지오다노`·`현대코퍼레이션(주)`·
+    `에이치엘홀딩스 주식회사`는 detail에만 남음). → 회사명 컬럼이 헤더에 **있으면
+    그것을 쓰고**, 당기말은 신선도 판정(처분 여부)에만 쓴다.
+
+    신선도(D13·후속14 오류1 "처분 부활"과 같은 사상): 당기말이 비었/대시인데
+    전기말에 값이 있으면 **당기 중 이탈**이므로 스킵한다. 양쪽 다 대시인 행은
+    지분율이 공시되지 않은 것일 뿐이므로(HL D&I의 계열 종속기업 나열) 유지한다.
     """
     results: list[dict] = []
     if not text_html:
@@ -782,13 +1010,42 @@ def parse_governance_carryforward(text_html: str | None) -> list[dict]:
     header_row = grid[header_idx]
     category_col = header_row.index("구분")
     current_col = header_row.index("당기말")
+    prev_col = header_row.index("전기말") if "전기말" in header_row else None
+
+    # 회사명 전용 컬럼이 있으면 그쪽이 상대회사다(당기말은 지분율).
+    name_col = _header_col_by_vocab(header_row, _NAME_HEADER_VOCAB)
+    if name_col == category_col:
+        name_col = None
+    ratio_style = name_col is not None
+    if name_col is None:
+        name_col = current_col  # 두산류 — 당기말 칸이 회사명
 
     for row in grid[header_idx + 1 :]:
-        if len(row) <= max(category_col, current_col):
+        needed = [c for c in (category_col, name_col, current_col) if c is not None]
+        if len(row) <= max(needed):
             continue
         category = row[category_col].strip()
-        counterparty = row[current_col].strip()
-        if not category or not counterparty or counterparty in {"-", category}:
+        counterparty = row[name_col].strip()
+        if not category or not counterparty or counterparty == category:
+            continue
+        if _is_full_width_label(row) is not None:
+            continue  # 전폭 머리행 — 회사 데이터 아님
+        current = row[current_col].strip()
+        prev = row[prev_col].strip() if prev_col is not None and prev_col < len(row) else ""
+        if ratio_style:
+            # 회사명은 별도 칸에서 읽었으므로 당기말은 신선도 판정에만 쓴다.
+            if (not current or _DASH_ONLY_RE.match(current)) and _RATIO_ONLY_RE.match(
+                prev or ""
+            ) and any(ch.isdigit() for ch in prev):
+                continue  # 당기 중 처분 — 끝난 관계를 현재처럼 노출하지 않는다
+            if counterparty == current:
+                continue  # COLSPAN 캐리(그룹 머리행)
+        else:
+            # 두산류 — 당기말 칸 자체가 회사명. 대시/숫자만이면 회사가 아니다.
+            if _DASH_ONLY_RE.match(counterparty) or _RATIO_ONLY_RE.match(counterparty):
+                continue
+        counterparty = _strip_list_marker(counterparty)
+        if not counterparty:
             continue
         results.append({"category": category, "counterparty": counterparty})
     return results
@@ -812,24 +1069,34 @@ def _upsert_edge(session, **fields) -> None:
         session.add(ValueChainEdge(**fields, status="active"))
 
 
-def apply(session=None, sections: list[dict] | None = None) -> dict:
+def apply(
+    session=None, sections: list[dict] | None = None, prune: bool | None = None
+) -> dict:
     """특수관계자 주석 전량 스캔 → ValueChainEdge(T1) upsert.
 
     session: 주입 시 그 세션 사용(테스트용 — 닫지 않음, 커밋은 호출). None이면 로컬 relation.db.
     sections: 주입 시 reports.db 대신 이 리스트 사용(테스트용 — 실 파일 접근 회피).
               None이면 reports_source.fetch_rp_note_sections() 전량(U-확대 접두 규칙).
+    prune: **이 함수가 만드는 rp_note VCE의 stale 정리는 생산자인 이 함수 소관**
+      (transform/CLAUDE.md "prune은 생산자 소관"의 rp_note 판 — 2026-07-30 신설).
+      없던 시절 과거 코드 세대가 만든 행이 그대로 남아 **이미 삭제된 비상장 노드
+      uid를 가리키는 dangling 참조 112건**이 누적돼 있었다(전수 검증에서 발견,
+      전부 rp_note·T1·과거연도). apply_governance와 동일 규율 — 전량 스캔일 때만
+      이번 파스에 없는 rp_note 행을 정리하고, 부분 주입(테스트)은 미정리.
 
     링킹은 방어 5층 중 L1(약칭 게이트+화이트리스트)·L2(쌍 블록리스트)·L5(LinkFailQueue)
     적용 — corp_code 없는 이름-only 원천의 공통 요건(transform/CLAUDE.md, 2026-07-29
     전 상장사 확대 시 연결). L3·L4는 지분율 원천 전용이라 비대상.
 
     Returns: {'notes_scanned', 'notes_unparsed', 'edges_kept', 'link_failed',
-              'l1_ambiguous_queued', 'l2_blocklisted'}
+              'l1_ambiguous_queued', 'l2_blocklisted', 'pruned_stale'}
     """
     owns_session = session is None
     if owns_session:
         session = get_local_session()
 
+    if prune is None:
+        prune = sections is None
     if sections is None:
         sections = reports_source.fetch_rp_note_sections()
 
@@ -839,7 +1106,9 @@ def apply(session=None, sections: list[dict] | None = None) -> dict:
         "edges_kept": 0,
         "group_aggregate": 0,
         "unlisted_nodes": 0,
+        "pruned_stale": 0,
     }
+    touched_vce: set[tuple] = set()
     try:
         ctx = build_guard_context(session)
 
@@ -923,7 +1192,21 @@ def apply(session=None, sections: list[dict] | None = None) -> dict:
                     amount=item["amount"],
                     as_of=as_of,
                 )
+                touched_vce.add(
+                    (src_corp, dst_corp, item["direction"], as_of, rcept_no)
+                )
                 counters["edges_kept"] += 1
+
+        if prune:
+            # 생산자 소관 prune — 이번 전량 파스에 없는 rp_note 행은 stale이다.
+            # (없던 시절 누적된 dangling uid 참조 112건이 이 정리로 사라진다)
+            for e in session.query(ValueChainEdge).filter_by(source_kind="rp_note").all():
+                key = (e.src_corp, e.dst_corp, e.edge_type, e.as_of, e.rcept_no)
+                if key not in touched_vce:
+                    session.delete(e)
+                    counters["pruned_stale"] += 1
+            session.flush()
+            entity_kind.prune_orphan_unlisted_nodes(session)
         session.commit()
     finally:
         if owns_session:
@@ -946,15 +1229,13 @@ def apply(session=None, sections: list[dict] | None = None) -> dict:
 # 여러 상대에 중복 귀속된다(과대계상). 거버넌스는 금액이 없어 분할이 안전하다.
 # ⚠️ 외국 법인명의 "Co., Ltd." 콤마를 잘못 쪼갤 수 있으므로 **원문 링킹을 먼저 시도**하고
 # 실패했을 때만 분할한다(기존 파서 폴백 관례와 동일 — 이미 잡힌 것을 흔들지 않는다).
-_MULTI_SEP_RE = re.compile(r"[,、·]")
-
-
 def split_multi_counterparties(name: str) -> list[str]:
-    """콤마 나열형 회사명 칸 → 개별 법인 후보. 분리 지점이 없으면 빈 리스트."""
-    if not name or not _MULTI_SEP_RE.search(name):
-        return []
-    parts = [p.strip(" ()") for p in _MULTI_SEP_RE.split(name)]
-    return [p for p in parts if len(p) >= 2]
+    """콤마 나열형 회사명 칸 → 개별 법인 후보. 분리 지점이 없으면 빈 리스트.
+
+    ★ 2026-07-30: 자체 정규식 분할을 `split_company_list`로 교체 — 괄호 안 콤마를
+    쪼개거나 `Co., Ltd.`를 조각내던 문제를 한 곳에서 해소한다(분할 규칙 1벌).
+    """
+    return [p for p in split_company_list(name) if len(p.strip(" ()")) >= 2]
 
 
 # ★ 2026-07-29 리더(CPA) 판정: 그룹 집계 표현도 대표사 엣지로 붙이되 **"그룹 합산"을
@@ -1081,44 +1362,61 @@ def apply_governance(
                 counters["notes_unparsed"] += 1
                 continue
             for item in governance_items:
-                corp_code = link_counterparty(
-                    session, ctx, item["counterparty"], chunk_id=rcept_no
-                )
-                # 원문이 안 붙으면 ① 콤마 나열 분할 ② 그룹 집계 대표사 순으로 재시도.
-                # 콤마 분할이 우선인 이유: 개별 법인을 각각 잡는 쪽이 집계 대표사
-                # 하나로 뭉뚱그리는 것보다 정보량이 많다.
-                surfaces = [corp_code] if corp_code else []
-                is_aggregate = False
-                if not corp_code:
-                    for piece in split_multi_counterparties(item["counterparty"]):
-                        got = link_counterparty(session, ctx, piece, chunk_id=rcept_no)
-                        if got:
-                            surfaces.append(got)
-                if not surfaces:
-                    base = strip_group_aggregate(item["counterparty"])
+                # ★2026-07-30 순서 변경 (후속14 잔여 2): 분할을 **비상장 노드 생성
+                # 前으로** 당긴다. 이전에는 분할 조각 중 **상장사만** 회수하고 나머지는
+                # 버렸고, 하나도 안 붙으면 칸 전체가 노드 1개가 됐다 — 한 칸에 최대
+                # 114개사가 뭉쳐(한국전력공사 3,662자·OCI 127표지) **노드 하나가 계열
+                # 전체를 대표하고 kind도 오분류**됐다(실측 뭉침 후보 1,565·콤마형 1,282).
+                # 이제 조각별로 상장 링킹 → 그룹집계 대표사 → 비상장 노드를 각각 시도한다.
+                # ⚠️ 거버넌스 전용 — 거래금액 경로(apply)에는 적용하지 않는다(원칙 ③:
+                #    금액이 딸린 칸을 쪼개면 같은 금액이 여러 상대에 중복 귀속된다).
+                # ⚠️ 원문 우선 불변 — 원문이 링킹되면 분할하지 않는다('가나, 다라 주식회사').
+                surfaces: list[tuple[str, bool]] = []  # (corp_or_uid, is_aggregate)
+
+                def _resolve(surface: str, allow_unlisted: bool) -> None:
+                    got = link_counterparty(session, ctx, surface, chunk_id=rcept_no)
+                    if got:
+                        surfaces.append((got, False))
+                        return
+                    base = strip_group_aggregate(surface)
                     if base:
                         got = link_counterparty(session, ctx, base, chunk_id=rcept_no)
                         if got:
-                            surfaces.append(got)
-                            is_aggregate = True
-                if not surfaces:
+                            surfaces.append((got, True))
+                            return
+                    if not allow_unlisted:
+                        return
                     # ★U5: 상장사로 못 붙으면 비상장 노드로 (앵커-로컬, 원문 그대로)
                     uid = entity_kind.upsert_unlisted_node(
                         session,
                         anchor_corp=self_ticker,
-                        name_raw=item["counterparty"],
+                        name_raw=surface,
                         relate=None,
                         provenance=f"dart_filing:{rcept_no}",
                     )
                     if uid:
-                        surfaces.append(uid)
+                        surfaces.append((uid, False))
                         counters["unlisted_nodes"] += 1
+
+                whole = item["counterparty"]
+                pieces = split_multi_counterparties(whole)
+                if pieces:
+                    # 분리 지점이 있으면 원문 링킹을 먼저 시도(원문 우선), 실패 시 조각별
+                    _resolve(whole, allow_unlisted=False)
+                    if not surfaces:
+                        for piece in pieces:
+                            _resolve(piece, allow_unlisted=True)
+                if not surfaces:
+                    _resolve(whole, allow_unlisted=True)
                 if not surfaces:
                     continue  # 잡음 — ctx.counters에 집계됨
-                if is_aggregate:
-                    counters["group_aggregate"] += 1
+                counters["group_aggregate"] += sum(1 for _, agg in surfaces if agg)
 
-                for corp in dict.fromkeys(surfaces):  # 순서 보존 중복 제거
+                seen_surfaces: set[str] = set()
+                for corp, is_aggregate in surfaces:
+                    if corp in seen_surfaces:
+                        continue  # 순서 보존 중복 제거
+                    seen_surfaces.add(corp)
                     if corp == self_corp_code:
                         continue
                     # 비상장 노드 uid는 그대로 target, 상장사는 corp_code→ticker 변환

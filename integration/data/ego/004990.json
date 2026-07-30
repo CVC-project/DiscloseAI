@@ -90,6 +90,24 @@
         "t": "023530",
         "n": "롯데쇼핑",
         "type": "dart_filing",
+        "detail": "주요 주주",
+        "dir": "in",
+        "s": "유통",
+        "tier": "named400"
+      },
+      {
+        "t": "089860",
+        "n": "롯데렌탈",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "in",
+        "s": "레저·교육",
+        "tier": "named400"
+      },
+      {
+        "t": "023530",
+        "n": "롯데쇼핑",
+        "type": "dart_filing",
         "detail": "관계기업",
         "dir": "out",
         "s": "유통",
@@ -103,6 +121,15 @@
         "dir": "out",
         "s": "화학",
         "tier": "named400"
+      },
+      {
+        "t": "071840",
+        "n": "롯데하이마트",
+        "type": "dart_filing",
+        "detail": "관계기업 (그룹 합산)",
+        "dir": "out",
+        "s": "유통",
+        "tier": "dot"
       },
       {
         "t": "089860",
@@ -289,8 +316,8 @@
         "dir": "out"
       },
       {
-        "n": "㈜호텔롯데",
-        "kind": "private_corp",
+        "n": "호텔롯데",
+        "kind": "person",
         "type": "investment",
         "detail": "11.1%",
         "dir": "in"
@@ -310,29 +337,71 @@
         "dir": "out"
       },
       {
-        "n": "롯데알미늄㈜",
+        "n": "롯데알미늄",
         "kind": "private_corp",
         "type": "investment",
         "detail": "5.1%",
         "dir": "in"
       },
       {
-        "n": "롯데물산㈜",
-        "kind": "private_corp",
+        "n": "롯데물산",
+        "kind": "person",
         "type": "investment",
         "detail": "5.0%",
         "dir": "in"
       },
       {
-        "n": "호텔롯데, 롯데알미늄, 롯데물산, 부산롯데호텔",
+        "n": "롯데건설",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "롯데글로벌로지스",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      },
+      {
+        "n": "롯데물산",
+        "kind": "person",
+        "type": "dart_filing",
+        "detail": "주요 주주",
+        "dir": "out"
+      },
+      {
+        "n": "롯데알미늄",
         "kind": "private_corp",
         "type": "dart_filing",
         "detail": "주요 주주",
         "dir": "out"
       },
       {
-        "n": "호텔롯데, 롯데알미늄, 부산롯데호텔",
+        "n": "롯데캐피탈 등",
         "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타",
+        "dir": "out"
+      },
+      {
+        "n": "부산롯데호텔",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "주요 주주",
+        "dir": "out"
+      },
+      {
+        "n": "우리홈쇼핑",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업",
+        "dir": "out"
+      },
+      {
+        "n": "호텔롯데",
+        "kind": "person",
         "type": "dart_filing",
         "detail": "주요 주주",
         "dir": "out"
@@ -449,8 +518,8 @@
           "prov": "특수관계자와의 거래 · 매입"
         },
         {
-          "n": "롯데물산㈜",
-          "kind": "private_corp",
+          "n": "롯데물산",
+          "kind": "person",
           "type": "supply",
           "tier_grade": "T1",
           "amount": 3556000000.0,
@@ -458,8 +527,8 @@
           "prov": "특수관계자와의 거래 · 매입"
         },
         {
-          "n": "㈜호텔롯데",
-          "kind": "private_corp",
+          "n": "호텔롯데",
+          "kind": "person",
           "type": "supply",
           "tier_grade": "T1",
           "amount": 1273000000.0,
@@ -476,7 +545,7 @@
           "prov": "특수관계자와의 거래 · 매입"
         },
         {
-          "n": "롯데건설(주)",
+          "n": "롯데건설",
           "kind": "private_corp",
           "type": "supply",
           "tier_grade": "T1",
@@ -494,7 +563,7 @@
           "prov": "특수관계자와의 거래 · 매입"
         },
         {
-          "n": "롯데알미늄㈜",
+          "n": "롯데알미늄",
           "kind": "private_corp",
           "type": "supply",
           "tier_grade": "T1",
@@ -503,7 +572,7 @@
           "prov": "특수관계자와의 거래 · 매입"
         },
         {
-          "n": "(주)우리홈쇼핑",
+          "n": "우리홈쇼핑",
           "kind": "private_corp",
           "type": "supply",
           "tier_grade": "T1",
@@ -595,8 +664,8 @@
           "prov": "특수관계자거래 · 매입 등"
         },
         {
-          "n": "㈜호텔롯데",
-          "kind": "private_corp",
+          "n": "호텔롯데",
+          "kind": "person",
           "type": "customer",
           "tier_grade": "T1",
           "amount": 131953000000.0,
@@ -604,7 +673,7 @@
           "prov": "특수관계자와의 거래 · 매출"
         },
         {
-          "n": "롯데건설(주)",
+          "n": "롯데건설",
           "kind": "private_corp",
           "type": "customer",
           "tier_grade": "T1",
@@ -622,7 +691,7 @@
           "prov": "특수관계자와의 거래 · 매출"
         },
         {
-          "n": "(주)우리홈쇼핑",
+          "n": "우리홈쇼핑",
           "kind": "private_corp",
           "type": "customer",
           "tier_grade": "T1",
@@ -640,8 +709,8 @@
           "prov": "특수관계자와의 거래 · 매출"
         },
         {
-          "n": "롯데물산㈜",
-          "kind": "private_corp",
+          "n": "롯데물산",
+          "kind": "person",
           "type": "customer",
           "tier_grade": "T1",
           "amount": 20273000000.0,
@@ -667,7 +736,7 @@
           "prov": "특수관계자와의 거래 · 매출"
         },
         {
-          "n": "롯데알미늄㈜",
+          "n": "롯데알미늄",
           "kind": "private_corp",
           "type": "customer",
           "tier_grade": "T1",
@@ -685,7 +754,7 @@
           "prov": "특수관계자와의 거래 · 매출"
         },
         {
-          "n": "㈜부산롯데호텔",
+          "n": "부산롯데호텔",
           "kind": "private_corp",
           "type": "customer",
           "tier_grade": "T1",

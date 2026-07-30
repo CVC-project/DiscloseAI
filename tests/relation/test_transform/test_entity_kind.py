@@ -272,3 +272,57 @@ def test_corporate_registration_number_is_not_rrn():
 )
 def test_relate_head_noun_decides_subject(relate, expected):
     assert classify("김철수", relate) == expected
+
+
+# ── 공백 패딩·한자 촌수 (2026-07-30, CPA 표본 검수에서 발견) ──────────────────
+#
+# 공시는 표 칸 폭을 맞추려 **이름과 relate 양쪽에 글자 사이 공백**을 넣는다
+# (`이   진` / `본     인` / `최 대 주 주` / `등 기 임 원`). 공백을 접기만 하면
+# `본 인` != `본인`이라 어휘 전체가 불일치해 **사람이 비상장법인으로** 분류됐다 —
+# 실측 310건. 일부 공시는 촌수를 한자로 적는다(`子`·`妻`·`兄`) — 실측 92건.
+
+@pytest.mark.parametrize(
+    "surface,relate",
+    [
+        ("이   진", "(子)"),              # 양지사 실측 — CPA 표본 28번
+        ("주 홍", "최대주주"),
+        ("박 효 정", "본     인"),
+        ("이 천 기", "미등기 임원"),
+        ("최 원", "본     인"),
+        ("최 석", "친 인 척"),
+        ("남 지 현", "제 수"),
+        ("류 시 영", "회      장"),
+        ("이 혁", "계열사 대표"),
+        ("손 욱", "등 기 임 원"),
+        ("김정태", "최대주주 兄"),          # 한자 촌수
+        ("이혜리", "자(姉)"),
+        ("이효원", "부(父)"),
+        ("노영희", "최대주주 妻"),
+    ],
+)
+def test_space_padded_and_cjk_kinship_are_person(surface, relate):
+    """⚠️ 회귀 박제: 공백 패딩된 이름·relate와 한자 촌수를 사람으로 인식해야 한다.
+    판정은 여전히 relate가 개인을 가리킬 때만 성립한다(사명 뒤집기 경로 아님)."""
+    assert classify(surface, relate, surname_fallback=True) == KIND_PERSON
+
+
+@pytest.mark.parametrize(
+    "surface,relate",
+    [
+        ("롯데물산", "자회사"),
+        ("티모넷", "매출처"),
+        ("어떤법인", "임원이 지배하는 법인"),
+        ("성우물산", "모회사"),
+    ],
+)
+def test_space_strip_does_not_flip_corporations(surface, relate):
+    """⚠️ 공백 제거를 넣어도 법인 신호 우선(후속14 오류 8)이 깨지지 않아야 한다."""
+    assert classify(surface, relate, surname_fallback=True) == KIND_PRIVATE_CORP
+
+
+@pytest.mark.parametrize(
+    "label", ["주요 주주", "임원 등", "임직원 등", "주 주", "임 직 원"],
+)
+def test_space_padded_aggregate_labels_are_noise(label):
+    """묶음 라벨은 특정 실체가 아니다 — 공백을 넣어 적어도 잡음으로 걸러야 한다."""
+    assert is_noise(label) == "aggregate_token"
