@@ -1967,6 +1967,36 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
       ctx.fillStyle = sec.color;
       ctx.fillText(anchor.n, cx, cy - anchorR * 0.5 - 10);
 
+      // ★2026-07-30 (UX-027) 라벨 겹침 방지 — **중앙 정렬 라벨에는 폭 제약이 아예
+      // 없었다**(VC 세로 스택만 UX-019의 segW 제약을 받고 있었다). 지배구조 하단처럼
+      // 한 행에 노드가 6~7개 오고 이름이 길면(`IPEC INDIA PRIVATE LIMITED` ·
+      // `머카바-에스앤에스 에프앤비 1호`) 이웃 라벨과 글자가 겹쳐 읽을 수 없다(리더 보고).
+      // 같은 행(수평 밴드) 이웃과의 **중심간 거리**로 가용폭을 정한다 — 중앙 정렬이므로
+      // 두 라벨 폭이 각각 거리의 0.95배 이내면 겹치지 않는다(w1/2+w2/2 ≤ 0.95d < d).
+      // 바깥쪽 이웃이 없으면 캔버스 가장자리까지를 한계로 쓴다.
+      const labelMaxW = (() => {
+        const rows = new Map();
+        allNodes.forEach((n, i) => {
+          if (n.labelRight) return;   // VC 세로 스택 — segW 기반 제약(UX-019) 유지
+          const nx = cx + animPos[i].x * baseR, ny = cy + animPos[i].y * baseR;
+          const up = n.isSide || n.gy < 0;
+          const key = (up ? 'u' : 'd') + '|' + Math.round(ny / 16);
+          if (!rows.has(key)) rows.set(key, []);
+          rows.get(key).push({ i, nx });
+        });
+        const out = new Map();
+        const W = sizeRef.current.w || 1200;
+        rows.forEach((list) => {
+          list.sort((a, b) => a.nx - b.nx);
+          list.forEach((it, k) => {
+            const dL = k > 0 ? it.nx - list[k - 1].nx : it.nx * 2;
+            const dR = k < list.length - 1 ? list[k + 1].nx - it.nx : (W - it.nx) * 2;
+            out.set(it.i, Math.max(28, Math.min(dL, dR) * 0.95));
+          });
+        });
+        return out;
+      })();
+
       // 이웃 + 묶음 노드
       allNodes.forEach((n, i) => {
         const nx = cx + animPos[i].x * baseR, ny = cy + animPos[i].y * baseR;
@@ -1996,8 +2026,11 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
           const label = n.rest.length === 1
             ? clip(firstName, 9)
             : clip(firstName, 6) + ' 외 ' + (n.rest.length - 1) + '사';
-          ctx.fillStyle = '#94a3b8'; ctx.font = '8px sans-serif';
-          ctx.fillText(label, nx, ny + (n.side === 'below' ? 30 : -22));
+          ctx.fillStyle = '#94a3b8';
+          // UX-027: 묶음 라벨도 같은 행에 있으므로 동일한 가용폭 제약을 받는다
+          const bf = fitText(label, labelMaxW.get(i) || 9999, 8, 6.5, '400', 'sans-serif');
+          ctx.font = bf.font;
+          ctx.fillText(bf.text, nx, ny + (n.side === 'below' ? 30 : -22));
           hits.push({ x: nx, y: ny, r: 16, isBundle: true, side: n.side });
           return;
         }
@@ -2049,12 +2082,18 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
           }
         } else {
           const labelUp = n.isSide || n.gy < 0;
-          ctx.textAlign = 'center'; ctx.fillStyle = nodeColor; ctx.font = 'bold 9px sans-serif';
+          // UX-027: 가용폭 안에서 **폰트를 줄여 전부 보이게**, 최소 크기에서도 넘칠 때만
+          // 축약(UX-019 "잘라내지 말고 줄여서 다 보여라"와 같은 규율).
+          const maxW = labelMaxW.get(i) || 9999;
+          ctx.textAlign = 'center'; ctx.fillStyle = nodeColor;
           const nameY = labelUp ? ny - 13 : ny + 18;
-          ctx.fillText(n.name, nx, nameY);
-          ctx.fillStyle = '#64748b'; ctx.font = '8px sans-serif';
+          const nf = fitText(n.name, maxW, 9, 7, 'bold', 'sans-serif');
+          ctx.font = nf.font; ctx.fillText(nf.text, nx, nameY);
+          ctx.fillStyle = '#64748b';
           const s = REL_STYLES[n.relType] || REL_STYLES.manual;
-          ctx.fillText(s.label + (n.detail ? ' · ' + n.detail : ''), nx, labelUp ? nameY + 9 : nameY + 11);
+          const sub = s.label + (n.detail ? ' · ' + n.detail : '');
+          const sf = fitText(sub, maxW, 8, 6.5, '400', 'sans-serif');
+          ctx.font = sf.font; ctx.fillText(sf.text, nx, labelUp ? nameY + 9 : nameY + 11);
         }
         hits.push({ x: nx, y: ny, r: isVc ? 14 : 20, code: n.code, name: n.name,
                     sectorKo: n.sectorKo, isUnlisted: n.isUnlisted, kind: n.kind,
