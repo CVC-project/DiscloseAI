@@ -1105,6 +1105,7 @@ def apply(
         "notes_unparsed": 0,
         "edges_kept": 0,
         "group_aggregate": 0,
+        "separate_fs": 0,
         "unlisted_nodes": 0,
         "pruned_stale": 0,
     }
@@ -1180,6 +1181,9 @@ def apply(
                 if is_aggregate:
                     provenance += f" · {GROUP_AGGREGATE_MARK}"
                     counters["group_aggregate"] += 1
+                if is_separate_fs_section(row):
+                    provenance += f" · {SEPARATE_FS_MARK}"
+                    counters["separate_fs"] += 1
                 _upsert_edge(
                     session,
                     src_corp=src_corp,
@@ -1252,6 +1256,21 @@ _GROUP_AGGREGATE_RE = re.compile(
     r"|등(?:\s+[^,]*?(?:기업집단|계열회사|소속회사|소속)[^,]*)?)\s*$"
 )
 GROUP_AGGREGATE_MARK = "그룹 합산"
+
+# ★ 2026-07-30 리더(CPA) 판정: **연결재무제표를 작성하지 않는 회사**의 개별재무제표
+# 주석에서 나온 관계는 붙이되 표기에 `별도`를 명시한다(후속12 "그룹 합산" 선례 준용).
+# 근거: 연결 미작성사는 종속기업이 없어 내부거래 제거 문제가 성립하지 않지만, 금액의
+# 근거가 연결 기준이 아니라는 사실은 화면에 남아야 한다. 연결 보유사의 별도주석은
+# report 섹셔너가 애초에 담지 않으므로(section_key 'III.5.별도주석'은 연결 미작성사
+# 전용) 한 회사에 연결·별도 두 판이 공존하는 일은 없다.
+# ⚠️ 마커에 콜론 금지 — rl-string "이름:타입:detail" 3분할 계약(FN-010).
+SEPARATE_FS_MARK = "별도"
+SEPARATE_FS_SECTION_KEY = "III.5.별도주석"
+
+
+def is_separate_fs_section(row: dict) -> bool:
+    """이 주석 행이 별도(개별)재무제표 주석에서 왔는가."""
+    return row.get("section_key") == SEPARATE_FS_SECTION_KEY
 
 
 def strip_group_aggregate(name: str) -> str | None:
@@ -1443,6 +1462,7 @@ def apply_governance(
         "notes_unparsed": 0,
         "edges_kept": 0,
         "group_aggregate": 0,
+        "separate_fs": 0,
         "unlisted_nodes": 0,
         "no_ticker": 0,
         "pruned_stale": 0,
@@ -1555,6 +1575,9 @@ def apply_governance(
                         # ⚠️ rl-string은 `이름:타입:detail` 3분할 계약(FN-010) —
                         # 마커에 콜론을 쓰지 않는다.
                         detail += f" ({GROUP_AGGREGATE_MARK})"
+                    if is_separate_fs_section(row):
+                        detail += f" ({SEPARATE_FS_MARK})"
+                        counters["separate_fs"] += 1
                     _upsert_relation_local_dart_filing(
                         session,
                         source_corp=self_ticker,
@@ -1584,9 +1607,12 @@ def apply_governance(
         counters["note_termination"] = terminate_absent_note_relations(session, sections)
 
         # ★U5: 엣지가 사라진 비상장 노드 정리 (참조 무결성 기준)
+        # ⚠️ 순서: reconcile → prune (filters.apply와 동일 — reconcile이 만든 끊어진
+        #    참조를 prune이 마무리한다).
+        session.flush()
+        counters["kind_reconciled"] = entity_kind.reconcile_unlisted_kinds(session)
         session.flush()
         counters["pruned_orphan_nodes"] = entity_kind.prune_orphan_unlisted_nodes(session)
-        counters["kind_reconciled"] = entity_kind.reconcile_unlisted_kinds(session)
 
         session.commit()
     finally:

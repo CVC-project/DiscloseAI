@@ -465,9 +465,12 @@ def apply(session=None) -> dict:
                 counters["pruned_stale"] += 1
 
         # ★U5: 엣지가 사라진 비상장 노드 정리 (참조 무결성 기준 — entity_kind 주석 참조)
+        # ⚠️ 순서: reconcile → prune. reconcile이 노드를 **병합·삭제**하므로 prune을
+        #    먼저 돌리면 그 결과로 생긴 끊어진 참조를 못 잡는다(2026-07-30 실측 1건).
+        session.flush()
+        counters["kind_reconciled"] = entity_kind.reconcile_unlisted_kinds(session)
         session.flush()
         counters["pruned_orphan_nodes"] = entity_kind.prune_orphan_unlisted_nodes(session)
-        counters["kind_reconciled"] = entity_kind.reconcile_unlisted_kinds(session)
 
         session.commit()
     finally:

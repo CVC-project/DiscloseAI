@@ -38,6 +38,8 @@ modules/*/data/remote_eqs_cache/
 # report 모듈: 원문 DB·리뷰 큐는 대용량이라 커밋 제외 (publish/·corps.csv만 커밋) — DOSSIER_TABS_PLAN R8
 # reports.db는 2026-07-21 shared/data/로 승격(valuechain D11) — 쓰기는 report 모듈 단독
 shared/data/reports.db
+# 재섹셔닝 전 스냅샷 등 파생 파일도 함께 제외 — 20GB짜리가 실수로 스테이징되지 않게
+shared/data/reports.db.*
 # relation.db는 2026-07-28 U1~U3 전 상장사 수집으로 156MB — GitHub 100MB 초과라 reports.db와
 # 동일 취급(추적 제외, FN-011). 팀 공유는 export JSON(universe.json·ego/)으로 — DB는 재수집 재현 가능.
 modules/relation/data/relation.db
