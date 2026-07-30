@@ -1737,6 +1737,17 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
   );
 
   // V-3 렌더 하네스 훅 — 화면이 실제 채택한 분할 상태를 기계 검증용으로 노출(무해·읽기 전용).
+  // ★2026-07-30 (UX-026) 레이어 전환·re-root 시 **일시 팝오버를 닫는다**.
+  // 리더 실사용 버그 — 지배구조에서 비상장 노드 팝오버(조합·펀드 등)를 열고 밸류체인으로
+  // 토글하면 그 팝오버가 **다른 레이어 화면 위에 그대로 남았다**(반대 방향도 동일).
+  // 팝오버 내용은 "그 레이어·그 앵커의 그 노드"에서 온 것이라 컨텍스트가 바뀌면 무효다.
+  // hover 하이라이트도 같은 이유로 초기화한다(포인터가 다른 노드 위에 있게 된다).
+  _useEffect(() => {
+    setUnlistedInfo(null);
+    setOverflowSide(null);
+    setHoverCode(null);
+  }, [layer, isVc, anchor.t]);
+
   _useEffect(() => {
     window.__egoDebug = {
       anchor: anchor.t,
