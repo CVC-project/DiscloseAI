@@ -6,6 +6,14 @@
   "layers": {
     "governance": [
       {
+        "n": "(주)메디브",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "40.18% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
         "n": "(주)알에프산업",
         "kind": "private_corp",
         "type": "associate",
@@ -46,22 +54,6 @@
         "as_of": 2025
       },
       {
-        "n": "주식회사 메디브",
-        "kind": "private_corp",
-        "type": "associate",
-        "detail": "40.18% · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
-        "n": "주식회사 메디브",
-        "kind": "private_corp",
-        "type": "dart_filing",
-        "detail": "관계기업 · 2024",
-        "dir": "out",
-        "as_of": 2024
-      },
-      {
         "n": "진평전자 주식회사",
         "kind": "private_corp",
         "type": "dart_filing",
@@ -72,7 +64,17 @@
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "(주)메디브",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 277875000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매출"
+        }
+      ]
     }
   }
 }

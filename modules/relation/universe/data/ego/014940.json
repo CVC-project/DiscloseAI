@@ -6,19 +6,19 @@
   "layers": {
     "governance": [
       {
-        "n": "연태동방정공 선박배투유한공사",
-        "kind": "public_org",
-        "type": "associate",
-        "detail": "49.9% · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
-        "n": "주식회사 오리엔탈검사개발",
+        "n": "㈜오리엔탈검사개발",
         "kind": "private_corp",
         "type": "associate",
         "detail": "45.77% · 2025",
         "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "연태동방정공선박배투유한공사",
+        "kind": "public_org",
+        "type": "associate",
+        "detail": "49.9% · 2025",
+        "dir": "out",
         "as_of": 2025
       },
       {
@@ -31,8 +31,55 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "연태동방정공선박배투유한공사",
+          "kind": "public_org",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 20213544000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 (주1)+매입 등의 합계"
+        },
+        {
+          "n": "(주)오리엔탈정밀기계",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 6442275000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "n": "연태동방정공선박배투유한공사",
+          "kind": "public_org",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 9420707000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등의 합계"
+        },
+        {
+          "n": "(주)오리엔탈정밀기계",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2235737000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "㈜오리엔탈검사개발",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2045483000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        }
+      ]
     }
   }
 }

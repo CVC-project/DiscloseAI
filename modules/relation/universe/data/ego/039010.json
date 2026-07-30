@@ -143,8 +143,46 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "주식회사 에이치티비욘드",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 9104617000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입액"
+        },
+        {
+          "n": "에이치티액세스주식회사",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 9091675000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입액"
+        }
+      ],
+      "down": [
+        {
+          "n": "에이치티액세스주식회사",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 114181000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출액"
+        },
+        {
+          "n": "주식회사 에이치티비욘드",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 20856000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출액"
+        }
+      ]
     }
   }
 }

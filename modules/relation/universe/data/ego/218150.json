@@ -39,8 +39,46 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "현대수산사료",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1971943200.0,
+          "as_of": 2025,
+          "prov": "특수관계자간 거래 · 매입"
+        },
+        {
+          "n": "현대특수사료",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 425091900.0,
+          "as_of": 2025,
+          "prov": "특수관계자간 거래 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "n": "현대특수사료",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2738858530.0,
+          "as_of": 2025,
+          "prov": "특수관계자간 거래 · 매출"
+        },
+        {
+          "n": "현대수산사료",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1887710960.0,
+          "as_of": 2025,
+          "prov": "특수관계자간 거래 · 매출"
+        }
+      ]
     }
   }
 }

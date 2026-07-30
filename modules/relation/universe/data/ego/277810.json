@@ -25,8 +25,55 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "005930",
+          "n": "삼성전자",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2580000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입"
+        },
+        {
+          "n": "삼성전자판매 주식회사",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 130909000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입"
+        },
+        {
+          "n": "삼성전자서비스 주식회사",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 333000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "t": "005930",
+          "n": "삼성전자",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 348833000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        },
+        {
+          "n": "Samsung Research America,Inc.",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 193613000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        }
+      ]
     }
   }
 }

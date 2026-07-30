@@ -30,22 +30,6 @@
         "as_of": 2025
       },
       {
-        "n": "(주)이든",
-        "kind": "private_corp",
-        "type": "investment",
-        "detail": "18.6% · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
-        "n": "(주)이든",
-        "kind": "private_corp",
-        "type": "dart_filing",
-        "detail": "관계기업 · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
         "n": "2019 얼머스 세컨더리 투자조합",
         "kind": "coop_fund",
         "type": "investment",
@@ -71,6 +55,22 @@
       },
       {
         "n": "BEIJING XINYUN SEMICONDUCTOR TECHNOLOGY CO.,LTD",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜이든",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "18.6% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜이든",
         "kind": "private_corp",
         "type": "dart_filing",
         "detail": "관계기업 · 2025",
@@ -136,7 +136,26 @@
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "㈜이든",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 284900000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 매출(*)"
+        },
+        {
+          "n": "㈜금강쿼츠",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 134000000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 매출"
+        }
+      ]
     }
   }
 }

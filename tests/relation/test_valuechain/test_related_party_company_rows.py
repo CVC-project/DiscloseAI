@@ -88,6 +88,37 @@ def test_same_company_direction_rows_are_summed(nhn):
     assert len(keys) == len(set(keys)), "(회사,방향) 중복 방출 금지"
 
 
+# ── 모드 T: 2단 헤더(거래유형 × 기간) ──────────────────────────────────────
+
+def test_two_tier_header_maps_transaction_type_to_current_period():
+    """원문(에쓰비씨 2026): 상위 헤더가 거래유형, 다음 행이 전부 기간 토큰이다.
+
+        | 특수관계구분 | 회사명 | 매출 | 기타수익 | 기타비용 | 자산취득 |
+        | 당기 | 전기 | 당기 | 전기 | 당기 | 전기 | 당기 |
+        | 기타 | 제일호…자산대부 | - | 540 | 61,941 | 19,671 | - | 2,926 | - |
+        | 청림양계 | 300,385 | - | - | - | 9,786 | - | - |
+
+    ⚠️ 회귀 박제: 라벨 열 수는 `데이터폭 − 서브헤더폭`으로, 거래유형 수는 서브헤더의
+    `당기` 등장 횟수로 **결정적으로 역산**한다. 추측으로 열을 맞추면 금액이 엉뚱한
+    상대·거래유형에 붙는다. 여기서는 매출(당기)만 어휘에 걸리므로 청림양계 1건.
+    """
+    items = parse_note_company_rows(_load("valuechain_rp_company_rows_twotier_sbc.txt"))
+    assert len(items) == 1
+    assert items[0] == {
+        "counterparty": "청림양계",
+        "direction": "customer",
+        "amount": 300_385 * 1_000,
+        "label": "매출",
+    }
+
+
+def test_two_tier_total_row_with_padded_spaces_is_dropped():
+    """⚠️ 회귀 박제: `| 합  계 | 300,385 | … |` — 공시는 칸 폭을 맞추려 글자 사이를
+    벌린다. 원문 그대로만 잡음 판정하면 `_EMPTY_TOKENS`(합계)를 빠져나간다."""
+    items = parse_note_company_rows(_load("valuechain_rp_company_rows_twotier_sbc.txt"))
+    assert not {i["counterparty"] for i in items} & {"합계", "합  계"}
+
+
 # ── 잡음·배제 ──────────────────────────────────────────────────────────────
 
 def test_shifted_total_rows_produce_no_noise_nodes():

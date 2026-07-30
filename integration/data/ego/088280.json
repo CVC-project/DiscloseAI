@@ -6,7 +6,7 @@
   "layers": {
     "governance": [
       {
-        "n": "(주)에스엔티 아이엔시",
+        "n": "(주)에스엔티아이엔시",
         "kind": "private_corp",
         "type": "associate",
         "detail": "50.0% · 2025",
@@ -23,8 +23,37 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "TAI-SAW TECHNOLOGY CO., LTD",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 720226000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "n": "TAI-SAW TECHNOLOGY CO., LTD",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3240019000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출 · 별도"
+        },
+        {
+          "n": "(주)에스엔티아이엔시",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1657079000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출 · 별도"
+        }
+      ]
     }
   }
 }

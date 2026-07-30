@@ -33,8 +33,73 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "020400",
+          "n": "대동금속",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1337205000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매입액 · 별도"
+        },
+        {
+          "t": "000490",
+          "n": "대동",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 8099142000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매입액 · 별도"
+        },
+        {
+          "n": "하이드로텍㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 6133674000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매입액 · 별도"
+        },
+        {
+          "n": "㈜대동모빌리티",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 221035000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매입액 · 별도"
+        },
+        {
+          "n": "대동농기(안휘)유한공사",
+          "kind": "public_org",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 94496000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매입액 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "t": "000490",
+          "n": "대동",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 147549440000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매출액 · 별도"
+        },
+        {
+          "n": "㈜대동모빌리티",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2226369000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매출액 · 별도"
+        }
+      ]
     }
   }
 }

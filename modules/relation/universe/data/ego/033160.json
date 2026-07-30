@@ -85,8 +85,55 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "097230",
+          "n": "HJ중공업",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 80473000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매입"
+        },
+        {
+          "t": "005960",
+          "n": "동부건설",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 61899000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매입"
+        },
+        {
+          "n": "동부자산관리㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 83534000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "t": "097230",
+          "n": "HJ중공업",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 28203241000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매출"
+        },
+        {
+          "t": "005960",
+          "n": "동부건설",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 47249651000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매출"
+        }
+      ]
     }
   }
 }

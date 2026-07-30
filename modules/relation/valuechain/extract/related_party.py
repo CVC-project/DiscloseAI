@@ -583,7 +583,9 @@ def _company_rows_name(row: list[str], company_col: int, carry: str | None) -> s
         name = carry or ""
     if not name or name.startswith("기타") or _is_category_column(name):
         return None
-    if entity_kind.is_noise(name):
+    # ⚠️ 공시는 칸 폭을 맞추려 `합  계`처럼 글자 사이를 벌린다 — 원문 그대로만 검사하면
+    #   `_EMPTY_TOKENS`(합계·소계) 판정을 빠져나간다(모드 T 실측). 공백 제거본도 함께.
+    if entity_kind.is_noise(name) or entity_kind.is_noise(_norm_ws(name)):
         return None
     return name
 
@@ -692,6 +694,19 @@ def _consume_company_rows_table(
         return multiplier
 
     body = rows[body_start:]
+
+    # ④-0 모드 T — **2단 헤더(거래유형 × 기간)**. 상위 행은 거래유형, 다음 행은 전부
+    #     기간 토큰이다(스윕 4회차 실측 425건).
+    #       | 특수관계구분 | 회사명 | 매출 | 기타수익 | 기타비용 | 자산취득 |
+    #       | 당기 | 전기 | 당기 | 전기 | 당기 | 전기 | 당기 |
+    #       | 기타 | 제일호…대부 | - | 540 | 61,941 | 19,671 | - | 2,926 | - |
+    #     라벨 열 수는 `데이터폭 − 서브헤더폭`으로 **결정적으로 역산**되고, 서브헤더의
+    #     `당기` 등장 횟수 = 거래유형 수이므로 상위 헤더 뒤쪽과 1:1로 붙는다.
+    if body and dg_col is None:
+        t = _company_rows_two_tier(header, body, multiplier, out)
+        if t:
+            return multiplier
+
     if dg_col is not None:
         label_col = _find_vocab_col(header_norm, _TXN_LABEL_HEADER_VOCAB)
         if label_col in (company_col, dg_col):
@@ -718,6 +733,73 @@ def _consume_company_rows_table(
         body, header, company_col, dir_cols, label_col, amount_col, multiplier, out
     )
     return multiplier
+
+
+_PERIOD_TOKENS = ("당기", "전기", "당기말", "전기말", "당분기", "전분기", "당반기", "전반기")
+
+
+def _company_rows_two_tier(
+    header: list[str], body: list[list[str]], multiplier: int, out: list
+) -> bool:
+    """모드 T — 2단 헤더(거래유형 × 기간). 처리했으면 True.
+
+    ⚠️ 열 매핑을 **추측하지 않는다**: 라벨 열 수 = 데이터폭 − 서브헤더폭,
+    거래유형 수 = 서브헤더의 `당기` 등장 횟수. 둘 중 하나라도 앞뒤가 안 맞으면
+    표를 포기한다(금액이 엉뚱한 상대에 붙느니 안 뽑는 편이 낫다).
+    """
+    sub = body[0]
+    sub_norm = [_norm_ws(c) for c in sub]
+    live = [c for c in sub_norm if c]
+    if len(live) < 2 or not all(c in _PERIOD_TOKENS for c in live):
+        return False
+    cur_idx = [j for j, c in enumerate(sub_norm) if c == "당기"]
+    if not cur_idx:
+        return False
+    n_groups = len(cur_idx)
+    if n_groups >= len(header):
+        return False
+    txn_labels = header[len(header) - n_groups:]
+    label_head = header[: len(header) - n_groups]
+
+    data = [r for r in body[1:] if len(r) == label_head.__len__() + len(sub_norm)]
+    if not data:
+        return False
+    label_cols = len(label_head)
+
+    company_col = _find_vocab_col(
+        [_norm_header(c) for c in label_head], _COMPANY_HEADER_STRONG
+    )
+    if company_col is None:
+        company_col = label_cols - 1  # 회사명은 라벨 계층의 가장 안쪽
+
+    dirs: list[tuple[int, str, str]] = []  # (데이터 열, 방향, 라벨)
+    for g, j in enumerate(cur_idx):
+        lab = _norm_ws(txn_labels[g])
+        if _label_match(lab, _SALES_LABEL_PREFIXES):
+            dirs.append((label_cols + j, "customer", txn_labels[g].strip()))
+        elif _label_match(lab, _PURCHASE_LABEL_PREFIXES):
+            dirs.append((label_cols + j, "supply", txn_labels[g].strip()))
+    if not dirs:
+        return False
+
+    carry: str | None = None
+    for row in body[1:]:
+        padded = _pad_left(row, label_cols + len(sub_norm), carry)
+        if padded is None:
+            continue
+        own = padded[company_col].strip() if company_col < len(padded) else ""
+        name = _company_rows_name(padded, company_col, carry)
+        if own and name == own:
+            carry = own
+        if not name:
+            continue
+        for col, direction, lab in dirs:
+            if col >= len(padded):
+                continue
+            amount = _parse_amount(padded[col], multiplier)
+            if amount is not None:
+                out.append((name, direction, amount, lab))
+    return True
 
 
 def _pad_left(row: list[str], header_len: int, carry: str | None) -> list[str] | None:

@@ -17,8 +17,37 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "092600",
+          "n": "앤씨앤",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 237600000.0,
+          "as_of": 2024,
+          "prov": "특수관계자와의 거래 · 매입 · 별도"
+        },
+        {
+          "n": "(주)앤씨비아이티",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 14890000.0,
+          "as_of": 2024,
+          "prov": "특수관계자와의 거래 · 매입 등 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "t": "092600",
+          "n": "앤씨앤",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 118290000.0,
+          "as_of": 2024,
+          "prov": "특수관계자와의 거래 · 매출 · 별도"
+        }
+      ]
     }
   }
 }
