@@ -565,12 +565,20 @@ function helpIcon(key) {
 
 // 모듈 점수 리스트
 const moduleColors = __gx
-  ? { M1: '#5CC7EA', M2: '#7590B0', M3: '#74EEC6', M4: '#E9C46B', M5: '#EC8C6A' }
-  : { M1: '#06b6d4', M2: '#8b5cf6', M3: '#22c55e', M4: '#eab308', M5: '#ef4444' };
+  ? { M1: '#5CC7EA', M2: '#7590B0', M3: '#74EEC6', M4: '#E9C46B', M5: '#EC8C6A', F1: '#5CC7EA', F2: '#74EEC6', F3: '#E9C46B', F4: '#EC8C6A', F5: '#A78BFA' }
+  : { M1: '#06b6d4', M2: '#8b5cf6', M3: '#22c55e', M4: '#eab308', M5: '#ef4444', F1: '#06b6d4', F2: '#22c55e', F3: '#eab308', F4: '#ef4444', F5: '#8b5cf6' };
 const moduleLabels = {
   M1: '현금이익률', M2: '매출 회수 건전성', M3: '부채 건전성',
   M4: '본업 안정성', M5: '자본 성장성'
 };
+
+Object.assign(moduleLabels, {
+  F1: '주주환원',
+  F2: 'ROE 품질',
+  F3: '자본 완충력',
+  F4: '이익 전환',
+  F5: '자본 성장성'
+});
 
 const ml = document.getElementById('moduleList');
 DATA.eqs.modules.forEach(m => {
@@ -579,7 +587,7 @@ DATA.eqs.modules.forEach(m => {
   li.innerHTML = `
     <div>
       <span class="module-score" style="color:${moduleColors[m.name]}">${score}</span>
-      <span class="module-name" style="margin-left:12px;">${moduleLabels[m.name]}${helpIcon(m.name)}</span>
+      <span class="module-name" style="margin-left:12px;">${moduleLabels[m.name] || m.name}${helpIcon(m.name)}</span>
     </div>
     <span class="module-name" style="font-size:11px;text-align:right;max-width:200px;">${m.note}</span>
   `;
@@ -590,7 +598,7 @@ DATA.eqs.modules.forEach(m => {
 new Chart(document.getElementById('radar'), {
   type: 'radar',
   data: {
-    labels: DATA.eqs.modules.map(m => moduleLabels[m.name]),
+    labels: DATA.eqs.modules.map(m => moduleLabels[m.name] || m.name),
     datasets: [{
       label: 'EQS',
       data: DATA.eqs.modules.map(m => m.score || 0),

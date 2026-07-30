@@ -126,7 +126,13 @@
   // Phyllotaxis layout in [-1, 1] disk, largest cap at center.
   function layoutCompanies(members) {
     if (!members.length) return [];
-    const sorted = members.slice().sort((a, b) => (b.market_cap || b.mc || 0) - (a.market_cap || a.mc || 0));
+    const D = window.DiscloseAI || {};
+    // graph_top50's `mc` is always a formatted string ("1262조"), never a number, so the
+    // old `a.mc || 0` sort key and `typeof m.mc === "number"` cap fallback below never
+    // actually matched it — every company silently fell through to the synthetic
+    // `sz * 5` placeholder. resolveMarketCap() parses that string properly.
+    const capOf = (m) => (D.resolveMarketCap ? D.resolveMarketCap(m) : m.market_cap) || 0;
+    const sorted = members.slice().sort((a, b) => capOf(b) - capOf(a));
     const out = [];
     const n = sorted.length;
     for (let i = 0; i < n; i++) {
@@ -140,7 +146,8 @@
         y = Math.sin(ang) * r;
       }
       // Cap value capped at 600 to prevent node radius from exceeding canvas.
-      const capJo = m.market_cap ? Math.min(600, m.market_cap / 1e12) : (typeof m.mc === "number" ? Math.min(600, m.mc / 1e12) : Math.max(1, (m.sz || 1) * 5));
+      const resolvedMc = capOf(m);
+      const capJo = resolvedMc ? Math.min(600, resolvedMc / 1e12) : Math.max(1, (m.sz || 1) * 5);
       out.push({
         code: m.t,
         name: m.n,
@@ -287,8 +294,12 @@
   async function injectBundleScript() {
     // Babel-standalone auto-transforms <script type="text/babel"> tags only at page load.
     // For dynamic injection we fetch the source ourselves, transform via Babel, then run.
-    const url = "./src/bundle.jsx?v=k6x";
-    const src = await fetch(url).then((r) => r.text());
+    // cache: 'no-store' — bundle.jsx changes on every feature PR; a manually-bumped
+    // ?v= query here kept getting forgotten (see #67, #68 cache-bust incidents),
+    // leaving browsers stuck on stale bundles after deploy. no-store makes that
+    // whole class of bug impossible instead of relying on someone remembering.
+    const url = "./src/bundle.jsx";
+    const src = await fetch(url, { cache: "no-store" }).then((r) => r.text());
     const out = window.Babel.transform(src, { presets: ["env", "react"] }).code;
     const s = document.createElement("script");
     s.text = out;

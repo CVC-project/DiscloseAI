@@ -1602,7 +1602,7 @@ function SectorMap({ sectorId, activeMarket, activeCompanyCode, onSelectMarket, 
             <div key={p.c.code} className={"company-label " + (isActive ? 'is-active' : '')}
               style={{ left: p.x, top: p.y - p.r - 14, color: sec.color }}>
               <div className="company-label-name">{p.c.name}</div>
-              <div className="company-label-code">{p.c.code} · {p.c.cap}T</div>
+              <div className="company-label-code">{p.c.code} · {p.c.cap}조원</div>
             </div>
           );
         })}
@@ -2271,43 +2271,49 @@ window.EgoView = EgoView;
 
 // ─── Gemini AI streaming helper ─────────────────────────────────────────────
 
-async function geminiStream({ apiKey, model, systemPrompt, history, onChunk, onDone, onError }) {
-  const m = model || window.GEMINI_MODEL || 'gemini-2.5-flash';
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${m}:streamGenerateContent?alt=sse&key=${apiKey}`;
-  try {
-    const resp = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        system_instruction: { parts: [{ text: systemPrompt }] },
-        contents: history,
-        generationConfig: { temperature: 0.7, maxOutputTokens: 1024 },
-      }),
-    });
-    if (!resp.ok) {
-      const errText = await resp.text().catch(() => resp.status);
-      throw new Error(`HTTP ${resp.status}: ${String(errText).slice(0, 120)}`);
-    }
-    const reader = resp.body.getReader();
-    const dec = new TextDecoder();
-    let buf = '';
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      buf += dec.decode(value, { stream: true });
-      const lines = buf.split('\n');
-      buf = lines.pop();
-      for (const line of lines) {
-        if (!line.startsWith('data: ')) continue;
-        const raw = line.slice(6).trim();
-        if (!raw || raw === '[DONE]') continue;
-        try {
-          const data = JSON.parse(raw);
-          const chunk = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
-          if (chunk) onChunk(chunk);
-        } catch {}
+// DartChatbot(OpenDART RAG · Amazon Bedrock) 연동.
+// 기존 UI가 기대하는 geminiStream 시그니처(onChunk/onDone/onError)를 그대로 유지하므로
+// 호출부(send)와 화면은 수정하지 않는다.
+// 서버 주소: 기본값 = same-origin `/api/chat`(api/PLAN.md C1 계약 — Vercel api/ 프록시 대상).
+// window.__DART_CHAT_URL이 주입돼 있으면 그 값으로 오버라이드(dev/GitHub Pages 임시 직결용,
+// api/PLAN.md §8 M0~M2 — Vercel 프록시가 서면 index.html에서 이 주입을 제거하면 된다).
+async function geminiStream({ systemPrompt, history, onChunk, onDone, onError }) {
+  const base = (window.__DART_CHAT_URL || '').replace(/\/+$/, '');
+
+  // Gemini 형식 history({role:'user'|'model', parts:[{text}]}) → DartChatbot 형식({role, content})
+  const msgs = (history || [])
+    .map(h => ({
+      role: h.role === 'model' ? 'assistant' : 'user',
+      content: (h.parts && h.parts[0] && h.parts[0].text) ? h.parts[0].text.trim() : '',
+    }))
+    .filter(m => m.content);
+  if (!msgs.length) { onError('질문이 비어 있습니다.'); return; }
+
+  // 화면에서 선택된 회사·종목코드를 마지막 질문 앞에 붙여 회사 인식을 돕는다.
+  // systemPrompt의 "현재 분석 대상: 이름 (종목코드)" 한 줄만 사용한다.
+  const ctxLine = ((systemPrompt || '').match(/현재 분석 대상:.*/) || [''])[0].trim();
+  if (ctxLine) {
+    for (let i = msgs.length - 1; i >= 0; i--) {
+      if (msgs[i].role === 'user') {
+        msgs[i] = { role: 'user', content: `${ctxLine}\n\n${msgs[i].content}` };
+        break;
       }
     }
+  }
+
+  try {
+    const resp = await fetch(`${base}/api/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'ngrok-skip-browser-warning': 'true' },
+      body: JSON.stringify({ messages: msgs.slice(-20) }),
+    });
+    const data = await resp.json().catch(() => null);
+    if (!resp.ok) {
+      throw new Error((data && data.detail) || `HTTP ${resp.status}`);
+    }
+    const answer = (data && data.answer) || '(빈 응답)';
+    // DartChatbot은 스트리밍이 아니므로 완성된 답변을 한 번에 전달한다.
+    onChunk(answer);
     onDone();
   } catch (e) {
     onError(e.message || String(e));
@@ -2628,7 +2634,7 @@ function DisclosureFullOverlay({ ticker, onClose }) {
   );
   const corpName = node ? node.n : (items[0] && items[0].corp_name) || ticker;
   const sectorKo = node ? node.s : '';
-  const capLabel = (node && node.market_cap && D.trillionLabel) ? D.trillionLabel(node.market_cap) : '';
+  const capLabel = (node && D.resolveMarketCap && D.trillionLabel) ? D.trillionLabel(D.resolveMarketCap(node)) : '';
   const dartUrl = selectedDisc
     ? (selectedDisc.disclosure_id
         ? `https://dart.fss.or.kr/dsaf001/main.do?rcpNo=${selectedDisc.disclosure_id}`
@@ -2720,7 +2726,7 @@ function AiChatBubble({ msg }) {
         borderRadius: 4, padding: '7px 10px',
         fontSize: 11.5, lineHeight: 1.65,
         color: isUser ? '#74EEC6' : (msg.error ? '#f87171' : '#94a3b8'),
-        maxWidth: '88%', wordBreak: 'break-word',
+        maxWidth: '88%', wordBreak: 'break-word', whiteSpace: 'pre-wrap',
       }}>
         {msg.text}
         {msg.streaming && <span style={{opacity: 0.5, animation: 'pulseDot 0.8s infinite'}}>▍</span>}
@@ -2731,8 +2737,10 @@ function AiChatBubble({ msg }) {
 
 function OverlayAiChat({ companyName, ticker, context, disc, node }) {
   const name = companyName || '기업';
-  const apiKey = (window.GEMINI_API_KEY && typeof window.GEMINI_API_KEY === 'string') ? window.GEMINI_API_KEY.trim() : null;
-  const hasKey = !!(apiKey && apiKey.length > 20);
+  // DartChatbot 연동: 서버 주소는 always-on 기본값(same-origin `/api/chat`, api/PLAN.md C1) —
+  // 실패는 사전 비활성화가 아니라 onError로 채팅창에 우아하게 표시한다(C1 폴백 규약).
+  const apiKey = null;
+  const hasKey = true;
 
   const initText = context === 'disclosure'
     ? `${name}의 공시를 분석했습니다. 궁금한 점을 질문해 보세요.\n\nTip: "이 공시가 주가에 미치는 영향은?", "Cash 항목 설명해줘" 등`
@@ -2812,14 +2820,14 @@ function OverlayAiChat({ companyName, ticker, context, disc, node }) {
         <span style={{width: 7, height: 7, borderRadius: '50%', background: dotColor, boxShadow: `0 0 6px ${dotColor}`, display: 'inline-block'}} />
         <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 10, letterSpacing: '.12em', color: '#fbbf24'}}>AI FINANCIAL</span>
         <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 8, color: '#475569', marginLeft: 4}}>
-          {hasKey ? 'Gemini 2.5 Flash' : '키 미설정'}
+          {hasKey ? 'DartChatbot · OpenDART RAG' : '서버 미설정'}
         </span>
       </div>
       {!hasKey && (
         <div style={{padding: '14px', fontSize: 11, color: '#64748b', lineHeight: 1.7, borderBottom: '1px solid rgba(116, 238, 198,0.08)'}}>
-          <div style={{color: '#fbbf24', fontFamily: 'var(--font-mono,monospace)', fontSize: 9, marginBottom: 6}}>⚠ API 키 미설정</div>
-          <code style={{fontSize: 10, background: 'rgba(255,255,255,0.05)', padding: '3px 7px', borderRadius: 3, display: 'block', marginBottom: 6}}>v2/config.local.js</code>
-          파일에 Gemini API 키를 설정하면 활성화됩니다.
+          <div style={{color: '#fbbf24', fontFamily: 'var(--font-mono,monospace)', fontSize: 9, marginBottom: 6}}>⚠ 챗봇 서버 미설정</div>
+          <code style={{fontSize: 10, background: 'rgba(255,255,255,0.05)', padding: '3px 7px', borderRadius: 3, display: 'block', marginBottom: 6}}>window.__DART_CHAT_URL</code>
+          을 index.html에 설정하면 활성화됩니다.
         </div>
       )}
       <div ref={bodyRef} style={{flex: '1 1 0%', overflowY: 'auto', padding: '12px 12px', display: 'flex', flexDirection: 'column', gap: 10}}>
@@ -2834,7 +2842,7 @@ function OverlayAiChat({ companyName, ticker, context, disc, node }) {
           onChange={e => setInput(e.target.value)}
           onKeyDown={onKey}
           disabled={!hasKey || loading}
-          placeholder={hasKey ? (loading ? 'AI 응답 중…' : '질문 입력 (Enter)') : 'config.local.js 키 설정 필요'}
+          placeholder={hasKey ? (loading ? 'AI 응답 중…' : '질문 입력 (Enter)') : '챗봇 서버 설정 필요'}
           style={{flex: 1, background: 'rgba(255,255,255,0.04)', border: `1px solid ${hasKey ? 'rgba(116, 238, 198,0.2)' : 'rgba(100,116,139,0.2)'}`, borderRadius: 2, color: hasKey ? '#e2e8f0' : '#475569', fontFamily: 'inherit', fontSize: 11, padding: '6px 9px', outline: 'none'}}
         />
         <button
@@ -3057,7 +3065,7 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
 
 const AI_GREETINGS = {
   galaxy: [
-    { who: 'ai', text: "Welcome back, Captain. KOSPI is +0.42% — Semiconductor leads, Biotech lags." },
+    { who: 'ai', text: "Welcome back, Captain. The KOSPI status panel is updating live market data." },
     { who: 'ai', text: "Pick any sector to dive in. I'll brief you on what's moving inside." },
   ],
   sector: [
@@ -3070,9 +3078,172 @@ const AI_GREETINGS = {
   ],
 };
 
+const KOSPI_FALLBACK = {
+  value: 3142.8,
+  previousClose: 3129.65,
+  changePct: 0.42,
+  updatedAt: null,
+  source: 'mock',
+};
+
+const KOSDAQ_FALLBACK = {
+  value: 850.32,
+  previousClose: 845.11,
+  changePct: 0.62,
+  updatedAt: null,
+  source: 'mock',
+};
+
+function formatKospiValue(value) {
+  if (!Number.isFinite(value)) return '---';
+  return value.toLocaleString('ko-KR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function formatKospiPct(value) {
+  if (!Number.isFinite(value)) return '--';
+  const sign = value > 0 ? '+' : '';
+  return sign + value.toFixed(2) + '%';
+}
+
+function formatKospiTime(timestamp) {
+  if (!timestamp) return 'mock';
+  const date = new Date(timestamp);
+  return new Intl.DateTimeFormat('ko-KR', {
+    timeZone: 'Asia/Seoul',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  }).format(date) + ' 기준';
+}
+
+function readKospiChart(payload) {
+  const result = payload && payload.chart && payload.chart.result && payload.chart.result[0];
+  if (!result) throw new Error('KOSPI chart payload is empty');
+  const meta = result.meta || {};
+  const timestamps = result.timestamp || [];
+  const quote = (((result.indicators || {}).quote || [])[0] || {});
+  const closes = quote.close || [];
+  const validIndexes = closes
+    .map((value, index) => Number.isFinite(value) ? index : -1)
+    .filter(index => index >= 0);
+  const lastIndex = validIndexes.length ? validIndexes[validIndexes.length - 1] : null;
+  const value = Number(meta.regularMarketPrice || (lastIndex !== null ? closes[lastIndex] : NaN));
+  const previousClose = Number(meta.previousClose || meta.chartPreviousClose);
+  const updatedAtSec = Number(meta.regularMarketTime || (lastIndex !== null ? timestamps[lastIndex] : 0));
+  const changePct = Number.isFinite(value) && Number.isFinite(previousClose) && previousClose !== 0
+    ? ((value - previousClose) / previousClose) * 100
+    : NaN;
+  return {
+    value,
+    previousClose,
+    changePct,
+    updatedAt: updatedAtSec ? updatedAtSec * 1000 : Date.now(),
+    source: 'Yahoo Finance',
+  };
+}
+
+function readKospiApi(payload) {
+  const value = Number(payload && payload.value);
+  const previousClose = Number(payload && payload.previousClose);
+  const changePct = Number(payload && payload.changePct);
+  const updatedAt = Number(payload && payload.updatedAt);
+  if (!Number.isFinite(value)) throw new Error('KOSPI API payload is invalid');
+  return {
+    value,
+    previousClose,
+    changePct,
+    updatedAt: Number.isFinite(updatedAt) ? updatedAt : Date.now(),
+    source: (payload && payload.source) || 'KOSPI API',
+  };
+}
+
+// 지수(KOSPI/KOSDAQ)·개별 종목 공통 fetch — 서버리스(/api/quote) 우선,
+// 실패 시(GitHub Pages 등 정적 호스팅) Yahoo Finance 직접 호출로 폴백.
+async function fetchQuote(endpoints) {
+  let lastError = null;
+  for (const endpoint of endpoints) {
+    try {
+      const response = await fetch(endpoint.url, { cache: 'no-store' });
+      if (!response.ok) throw new Error('quote fetch failed: ' + response.status);
+      return endpoint.reader(await response.json());
+    } catch (error) {
+      lastError = error;
+    }
+  }
+  throw lastError || new Error('quote fetch failed');
+}
+
+// buildEndpoints가 null을 반환하면(예: 티커 미확정) 조회를 건너뛰고 fallback만 유지한다.
+function useQuote(buildEndpoints, fallback, deps) {
+  const [quote, setQuote] = useState({ ...fallback, loading: true });
+  useEffect(() => {
+    const endpoints = buildEndpoints();
+    if (!endpoints) {
+      setQuote({ ...fallback, loading: false });
+      return;
+    }
+    let alive = true;
+    async function refresh() {
+      try {
+        const next = await fetchQuote(endpoints);
+        if (alive) setQuote({ ...next, loading: false, error: null });
+      } catch (error) {
+        if (alive) setQuote(prev => ({
+          ...prev,
+          loading: false,
+          error: error && error.message ? error.message : 'quote fetch failed',
+        }));
+      }
+    }
+    refresh();
+    const timer = setInterval(refresh, 60000);
+    return () => {
+      alive = false;
+      clearInterval(timer);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, deps);
+  return quote;
+}
+
+function useKospiQuote() {
+  return useQuote(() => [
+    { url: '/api/quote?symbol=%5EKS11', reader: readKospiApi },
+    { url: 'https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?range=1d&interval=1m&_=' + Date.now(), reader: readKospiChart },
+  ], KOSPI_FALLBACK, []);
+}
+
+function useKosdaqQuote() {
+  return useQuote(() => [
+    { url: '/api/quote?symbol=%5EKQ11', reader: readKospiApi },
+    { url: 'https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?range=1d&interval=1m&_=' + Date.now(), reader: readKospiChart },
+  ], KOSDAQ_FALLBACK, []);
+}
+
+// 개별 종목 현재가 — 상장 시장(코스피/코스닥)을 모르므로 .KS 먼저, 실패하면 .KQ 순으로 시도.
+// 두 시도 다 실패하면(신규/비상장·API 장애) 절대 가짜 숫자를 보여주지 않고 "데이터 수집 중"만 표시한다.
+const STOCK_QUOTE_FALLBACK = { value: null, previousClose: null, changePct: null, updatedAt: null, source: null };
+function useStockQuote(ticker) {
+  return useQuote(() => {
+    if (!ticker) return null;
+    return [
+      { url: `/api/quote?symbol=${ticker}.KS`, reader: readKospiApi },
+      { url: `/api/quote?symbol=${ticker}.KQ`, reader: readKospiApi },
+      { url: `https://query1.finance.yahoo.com/v8/finance/chart/${ticker}.KS?range=1d&interval=1m&_=` + Date.now(), reader: readKospiChart },
+      { url: `https://query1.finance.yahoo.com/v8/finance/chart/${ticker}.KQ?range=1d&interval=1m&_=` + Date.now(), reader: readKospiChart },
+    ];
+  }, STOCK_QUOTE_FALLBACK, [ticker]);
+}
+
 // ─── Intro screen ──────────────────────────────────────────────────────────
 // ─── Top tabs ──────────────────────────────────────────────────────────────
-function TopTabs({ active, onChange, breadcrumb }) {
+function TopTabs({ active, onChange, breadcrumb, onBack, canGoBack }) {
+  const kospi = useKospiQuote();
+  const kosdaq = useKosdaqQuote();
+  const isUp = Number(kospi.changePct) >= 0;
+  const isKqUp = Number(kosdaq.changePct) >= 0;
   const tabs = [
     { id: 'finance',   en: 'FINANCIALS',  ko: '재무정보' },
     { id: 'disclose',  en: 'DISCLOSURES', ko: '공시' },
@@ -3094,19 +3265,37 @@ function TopTabs({ active, onChange, breadcrumb }) {
           </div>
         )}
       </div>
-      <div className="top-tabs-row">
-        {tabs.map(t => (
-          <div key={t.id} className={"top-tab " + (active === t.id ? 'is-active' : '')} onClick={() => onChange(t.id)}>
-            <div className="top-tab-en">{t.en}</div>
-            <div className="top-tab-ko">{t.ko}</div>
-          </div>
-        ))}
+      <div className="top-tabs-center">
+        <div className="top-tabs-row">
+          {tabs.map(t => (
+            <div key={t.id} className={"top-tab " + (active === t.id ? 'is-active' : '')} onClick={() => onChange(t.id)}>
+              <div className="top-tab-en">{t.en}</div>
+              <div className="top-tab-ko">{t.ko}</div>
+            </div>
+          ))}
+        </div>
+        {canGoBack && (
+          <button className="top-back-btn" onClick={onBack} title="뒤로가기 (ESC)">
+            <span className="top-back-arrow">←</span>
+            <span>BACK</span>
+          </button>
+        )}
       </div>
       <div className="top-tabs-status">
-        <span className="hud-dot" />
-        <span style={{color:'#94a3b8',fontSize:11,letterSpacing:'.08em'}}>KOSPI</span>
-        <span style={{color:'#74EEC6',fontSize:13,fontWeight:600}}>3,142.80</span>
-        <span style={{color:'#4ade80',fontSize:11}}>+0.42%</span>
+        <div className="index-row">
+          <span className="hud-dot" />
+          <span className="kospi-label">KOSPI</span>
+          <span className="kospi-value">{formatKospiValue(kospi.value)}</span>
+          <span className={"kospi-delta " + (isUp ? 'up' : 'down')}>{formatKospiPct(kospi.changePct)}</span>
+          <span className="kospi-time">{kospi.loading ? '갱신 중' : formatKospiTime(kospi.updatedAt)}</span>
+        </div>
+        <div className="index-row">
+          <span className="hud-dot" />
+          <span className="kospi-label">KOSDAQ</span>
+          <span className="kospi-value">{formatKospiValue(kosdaq.value)}</span>
+          <span className={"kospi-delta " + (isKqUp ? 'up' : 'down')}>{formatKospiPct(kosdaq.changePct)}</span>
+          <span className="kospi-time">{kosdaq.loading ? '갱신 중' : formatKospiTime(kosdaq.updatedAt)}</span>
+        </div>
       </div>
     </div>
   );
@@ -3181,6 +3370,7 @@ function SectorOverviewPanel({ sector, companyCount, activeMarket, onBack, onSel
       .map(d => ({ code: d.t, name: d.n, capT: null, isNamed: false }));
     return [...namedRows, ...dotRows];
   }, [activeMarket, sector.id, realData]);
+  const sectorPE = D.computeSectorPE ? D.computeSectorPE(members) : null;
   return (
     <div className="panel panel-tl sector-overview-panel" style={{'--accent': sector.color}}>
       <div className="panel-head">
@@ -3200,10 +3390,9 @@ function SectorOverviewPanel({ sector, companyCount, activeMarket, onBack, onSel
           </div>
         </div>
         <div className="sector-ov-stats">
-          <div className="ov-stat"><div className="ov-k">시가총액</div><div className="ov-v">{sector.cap}T</div></div>
+          <div className="ov-stat"><div className="ov-k">시가총액</div><div className="ov-v">{sector.cap}조원</div></div>
           <div className="ov-stat"><div className="ov-k">기업 수</div><div className="ov-v">{companyCount}</div></div>
-          <div className="ov-stat"><div className="ov-k">YTD</div><div className="ov-v" style={{color:'#4ade80'}}>+12.4%</div></div>
-          <div className="ov-stat"><div className="ov-k">P / E</div><div className="ov-v">14.3</div></div>
+          <div className="ov-stat"><div className="ov-k">P / E</div><div className="ov-v">{sectorPE != null ? sectorPE : '-'}</div></div>
         </div>
         {!marketList && (<>
           <div className="sector-ov-section">
@@ -3253,6 +3442,13 @@ function SectorOverviewPanel({ sector, companyCount, activeMarket, onBack, onSel
 }
 
 // ─── PHASE 4: Company overview panel (top-left) ────────────────────────────
+const METRIC_TIPS = {
+  cap: '시가총액 = 발행주식수 × 현재 주가. 시장이 평가하는 회사 전체의 가치예요.',
+  per: 'PER(주가수익비율) = 시가총액 ÷ 당기순이익. 낮을수록 이익 대비 주가가 저렴하다는 뜻이에요.',
+  pbr: 'PBR(주가순자산비율) = 시가총액 ÷ 자기자본. 1보다 낮으면 장부상 순자산보다 싸게 거래되고 있어요.',
+  roe: 'ROE(자기자본이익률) = 당기순이익 ÷ 자기자본 × 100. 회사가 자기 돈으로 얼마나 효율적으로 이익을 냈는지 보여줘요.',
+};
+
 function CompanyOverviewPanel({ company, sector, onBack, onEnter, egoAnchor }) {
   if (!company) return null;
   // ③ ego 데이터 있으면 우선(universe 전량 커버) — 없으면 기존 top50-scoped RELATIONS 폴백.
@@ -3262,9 +3458,14 @@ function CompanyOverviewPanel({ company, sector, onBack, onEnter, egoAnchor }) {
   const node = window.__realData && window.__realData.nodeByCode && window.__realData.nodeByCode[company.code];
   const D = window.DiscloseAI || {};
   const valu = node && D.calcValuation ? D.calcValuation(node) : null;
-  const capLabel = (node && node.market_cap && D.trillionLabel) ? D.trillionLabel(node.market_cap) : (company.cap + 'T');
+  // company.cap은 노드 반경용으로 600(조)에서 잘려 있어(레이아웃 캔버스 제약) 표시값으로 못 쓴다 —
+  // resolveMarketCap으로 시총을 안 잘린 실제 값으로 다시 구해 표기한다.
+  const resolvedCap = D.resolveMarketCap ? D.resolveMarketCap(node) : (node && node.market_cap);
+  const capLabel = (resolvedCap && D.trillionLabel) ? D.trillionLabel(resolvedCap) : (company.cap + '조원');
   const fmtNum = (v, suffix) => (v == null ? '-' : v + (suffix || ''));
   const recentDisc = (node && node.disc) ? node.disc.slice(0, 3) : null;
+  const quote = useStockQuote(company.code);
+  const quoteUp = Number(quote.changePct) >= 0;
 
   // #8: Sparkline (revenue history) + percentile badge
   const sparkPath = (node && node.history && D.sparklinePath)
@@ -3313,27 +3514,43 @@ function CompanyOverviewPanel({ company, sector, onBack, onEnter, egoAnchor }) {
           </div>
         </div>
         <div className="company-ov-stats">
-          <div className="ov-stat"><div className="ov-k">시가총액</div><div className="ov-v">{capLabel}</div></div>
-          <div className="ov-stat"><div className="ov-k">PER</div><div className="ov-v">{fmtNum(valu && valu.per)}</div></div>
-          <div className="ov-stat"><div className="ov-k">PBR</div><div className="ov-v">{fmtNum(valu && valu.pbr)}</div></div>
-          <div className="ov-stat"><div className="ov-k">ROE</div><div className="ov-v" style={{color: (valu && valu.roe != null && valu.roe >= 0) ? '#4ade80' : '#f87171'}}>{fmtNum(valu && valu.roe, '%')}</div></div>
+          <div className="ov-stat"><div className="ov-k" data-tip={METRIC_TIPS.cap}>시가총액</div><div className="ov-v">{capLabel}</div></div>
+          <div className="ov-stat"><div className="ov-k" data-tip={METRIC_TIPS.per}>PER</div><div className="ov-v">{fmtNum(valu && valu.per)}</div></div>
+          <div className="ov-stat"><div className="ov-k" data-tip={METRIC_TIPS.pbr}>PBR</div><div className="ov-v">{fmtNum(valu && valu.pbr)}</div></div>
+          <div className="ov-stat"><div className="ov-k" data-tip={METRIC_TIPS.roe}>ROE</div><div className="ov-v" style={{color: (valu && valu.roe != null && valu.roe >= 0) ? '#4ade80' : '#f87171'}}>{fmtNum(valu && valu.roe, '%')}</div></div>
         </div>
+        {node && node.latest_year && (
+          <div style={{textAlign:'right', fontSize:9, color:'#64748b', fontFamily:'var(--font-mono)', marginTop:2}}>
+            FY{node.latest_year} 사업보고서 기준 (시가총액은 최근 수집치)
+          </div>
+        )}
         <div className="company-ov-row">
           <div className="ov-k">현재가</div>
-          <div className="ov-v" style={{fontSize:13, color:'#94a3b8', fontFamily:'var(--font-mono)'}}>데이터 수집 중</div>
-          <div style={{color:'#64748b', fontFamily:'var(--font-mono)', fontSize:10}}>yfinance pending</div>
+          {quote.value != null ? (
+            <>
+              <div className="ov-v" style={{fontSize:13, fontFamily:'var(--font-mono)'}}>{quote.value.toLocaleString('ko-KR')}원</div>
+              <div style={{color: quoteUp ? '#4ade80' : '#f87171', fontFamily:'var(--font-mono)', fontSize:11, fontWeight:700}}>{formatKospiPct(quote.changePct)}</div>
+            </>
+          ) : (
+            <div className="ov-v" style={{fontSize:13, color:'#94a3b8', fontFamily:'var(--font-mono)'}}>데이터 수집 중</div>
+          )}
         </div>
+        {quote.value != null && (
+          <div style={{textAlign:'right', fontSize:9, color:'#64748b', fontFamily:'var(--font-mono)', marginTop:-4}}>
+            {quote.loading ? '갱신 중' : formatKospiTime(quote.updatedAt)}
+          </div>
+        )}
         {/* #9: Income / Balance / Cashflow */}
         {(rv || oi || dr || ocf) && (
           <div className="sector-ov-section">
             <div className="ov-sec-title">FINANCIALS · 재무 요약</div>
             <div className="company-ov-stats" style={{marginTop:6, flexWrap:'wrap'}}>
-              {rv  && <div className="ov-stat"><div className="ov-k">매출</div><div className="ov-v" style={{fontSize:13}}>{rv}T</div></div>}
-              {oi  && <div className="ov-stat"><div className="ov-k">영업이익</div><div className="ov-v" style={{fontSize:13}}>{oi}T</div></div>}
+              {rv  && <div className="ov-stat"><div className="ov-k">매출</div><div className="ov-v" style={{fontSize:13}}>{rv}조원</div></div>}
+              {oi  && <div className="ov-stat"><div className="ov-k">영업이익</div><div className="ov-v" style={{fontSize:13}}>{oi}조원</div></div>}
               {oim && <div className="ov-stat"><div className="ov-k">영업이익률</div><div className="ov-v" style={{fontSize:13, color: parseFloat(oim) > 0 ? '#4ade80' : '#f87171'}}>{oim}%</div></div>}
               {dr  && <div className="ov-stat"><div className="ov-k">부채비율</div><div className="ov-v" style={{fontSize:13, color: dr > 200 ? '#f87171' : '#e2e8f0'}}>{dr}%</div></div>}
-              {ocf && <div className="ov-stat"><div className="ov-k">영업CF</div><div className="ov-v" style={{fontSize:13}}>{ocf}T</div></div>}
-              {ic  && <div className="ov-stat"><div className="ov-k">투자CF</div><div className="ov-v" style={{fontSize:13}}>{ic}T</div></div>}
+              {ocf && <div className="ov-stat"><div className="ov-k">영업CF</div><div className="ov-v" style={{fontSize:13}}>{ocf}조원</div></div>}
+              {ic  && <div className="ov-stat"><div className="ov-k">투자CF</div><div className="ov-v" style={{fontSize:13}}>{ic}조원</div></div>}
             </div>
             {/* #8: Revenue sparkline + percentile */}
             {(sparkPath || pctBadge) && (
@@ -3419,8 +3636,10 @@ function CompanyOverviewPanel({ company, sector, onBack, onEnter, egoAnchor }) {
 
 // ─── AI assistant (panel-tr — Gemini functional) ──────────────────────────
 function AssistantPanel({ phase, sector, company, activeTab }) {
-  const apiKey = (window.GEMINI_API_KEY && typeof window.GEMINI_API_KEY === 'string') ? window.GEMINI_API_KEY.trim() : null;
-  const hasKey = !!(apiKey && apiKey.length > 20);
+  // DartChatbot 연동: 서버 주소는 always-on 기본값(same-origin `/api/chat`, api/PLAN.md C1) —
+  // 실패는 사전 비활성화가 아니라 onError로 채팅창에 우아하게 표시한다(C1 폴백 규약).
+  const apiKey = null;
+  const hasKey = true;
 
   const initGreeting = React.useMemo(() => {
     const greeting = AI_GREETINGS[phase] || AI_GREETINGS.galaxy;
@@ -3494,7 +3713,7 @@ function AssistantPanel({ phase, sector, company, activeTab }) {
         <div className="panel-head-l">
           <span className="panel-dot panel-dot-amber" style={{background: dotColor, boxShadow: `0 0 6px ${dotColor}`}} />
           <span className="panel-title">AI FINANCIAL</span>
-          <span className="panel-sub">{hasKey ? 'Gemini 2.5 Flash' : '키 미설정'}</span>
+          <span className="panel-sub">{hasKey ? 'DartChatbot · OpenDART RAG' : '서버 미설정'}</span>
         </div>
       </div>
       <div ref={bodyRef} className="panel-body assist-body" style={{overflowY: 'auto'}}>
@@ -3514,7 +3733,7 @@ function AssistantPanel({ phase, sector, company, activeTab }) {
           onChange={e => setInput(e.target.value)}
           onKeyDown={onKey}
           disabled={!hasKey || loading}
-          placeholder={hasKey ? (loading ? 'AI 응답 중…' : '질문 입력 (Enter)') : 'config.local.js 키 설정 필요'}
+          placeholder={hasKey ? (loading ? 'AI 응답 중…' : '질문 입력 (Enter)') : '챗봇 서버 설정 필요'}
         />
         <button onClick={send} disabled={!hasKey || loading || !input.trim()} style={{opacity: (!hasKey || loading || !input.trim()) ? 0.35 : 1, cursor: hasKey && !loading && input.trim() ? 'pointer' : 'not-allowed'}}>↗</button>
       </div>
@@ -3694,7 +3913,7 @@ function SectorPanel({ activeId, onSelect, mode = 'grid' }) {
               <span className="sector-dot" />
               <span className="sector-en">{s.en}</span>
               <span className="sector-ko">{s.ko}</span>
-              <span className="sector-cap">{s.cap}T</span>
+              <span className="sector-cap">{s.cap}조원</span>
             </div>
           ))}
         </div>
@@ -3708,18 +3927,18 @@ function SelectedSectorCard({ id, onClose, onEnter }) {
   if (!id) return null;
   const sec = SECTOR_PALETTE.find(s => s.id === id);
   if (!sec) return null;
+  const D = window.DiscloseAI || {};
+  const sectorPE = D.computeSectorPE ? D.computeSectorPE(sec.members) : null;
   return (
     <div className="selected-card" style={{ borderColor: sec.color + '88' }}>
       <div className="selected-row">
         <div className="selected-orb" style={{ background: sec.color, boxShadow: `0 0 24px ${sec.color}` }} />
         <div className="selected-title">
           <div className="selected-en">{sec.en.toUpperCase()}</div>
-          <div className="selected-ko">{sec.ko} · 시가총액 {sec.cap}T</div>
+          <div className="selected-ko">{sec.ko} · 시가총액 {sec.cap}조원</div>
         </div>
         <div className="selected-stats">
-          <div className="ss"><div className="ss-k">5Y CAGR</div><div className="ss-v">+8.2%</div></div>
-          <div className="ss"><div className="ss-k">P/E</div><div className="ss-v">14.3</div></div>
-          <div className="ss"><div className="ss-k">YTD</div><div className="ss-v" style={{color:'#4ade80'}}>+12.4%</div></div>
+          <div className="ss"><div className="ss-k">P/E</div><div className="ss-v">{sectorPE != null ? sectorPE : '-'}</div></div>
         </div>
         <button className="selected-cta" style={{ color: sec.color, borderColor: sec.color }} onClick={onEnter}>ENTER SECTOR ↗</button>
         <button className="selected-x" onClick={onClose}>✕</button>
@@ -3778,9 +3997,20 @@ function App() {
   const [zoomProgress, setZoomProgress] = useState(0);
   const zoomAnimRef = useRef(0);
 
+  // 뒤로가기 히스토리 — "관련 기업(ghost)" 클릭처럼 sector/company를 한번에 건너뛰는 이동을
+  // ESC/BACK이 한 단계씩 되돌릴 수 있도록, 그런 이동 직전 상태를 스택에 남겨둔다.
+  // (매 렌더마다 최신값으로 갱신되는 ref라서 콜백 안에서 항상 "이동 직전" 스냅샷을 정확히 읽는다.)
+  const navStateRef = useRef({ phase, activeSectorId, activeCompanyCode });
+  navStateRef.current = { phase, activeSectorId, activeCompanyCode };
+  const navHistoryRef = useRef([]);
 
   // ENTER SECTOR — animate galaxy → sector
   const enterSector = useCallback((sectorId) => {
+    // galaxy에서 처음 섹터로 들어가는 정상 드릴다운은 히스토리에 남기지 않는다(기존 3단계 ESC 동작 유지).
+    // sector/company 단계에서 다른 섹터로 바로 건너뛸 때만(관련 기업 클릭, 섹터 리스트 직접 전환) 이전 상태를 남긴다.
+    if (navStateRef.current.phase !== 'galaxy') {
+      navHistoryRef.current.push({ ...navStateRef.current });
+    }
     cancelAnimationFrame(zoomAnimRef.current);
     setActiveSectorId(sectorId);
     setActiveMarket(null);   // 진입 시 성운 개요부터
@@ -3798,6 +4028,7 @@ function App() {
   }, []);
 
   const backToGalaxy = useCallback(() => {
+    navHistoryRef.current = []; // 루트로 명시 리셋 — 남은 이동 히스토리는 더 이상 의미 없음
     cancelAnimationFrame(zoomAnimRef.current);
     setActiveCompanyCode(null);
     setActiveMarket(null);
@@ -3815,6 +4046,7 @@ function App() {
 
   // 기업 → 시장 드릴인 뷰로 (activeMarket 유지)
   const backToSector = useCallback(() => {
+    navHistoryRef.current = []; // 명시적 "섹터로" 이동 — 이전 이동 히스토리는 폐기
     setActiveCompanyCode(null);
     setPhase('sector');
   }, []);
@@ -3960,6 +4192,45 @@ function App() {
   // 오버레이 열림 동안 배경 캔버스 draw 정지 (성능 §8)
   useEffect(() => { window.__dossierOpen = !!corpOverlayTicker; }, [corpOverlayTicker]);
 
+  // 단계별 뒤로가기 — 우선순위: 공시 상세/전체 오버레이 → CORPORATION DOSSIER 오버레이
+  // → (관련 기업 클릭 등으로 섹터를 건너뛴 히스토리가 있으면 그 직전 상태로 복원)
+  // → company → sector → (galaxy에서 섹터 선택만 된 상태) 해제
+  const goBack = useCallback(() => {
+    if (discDetailItem) { setDiscDetailItem(null); return; }
+    if (discFullOverlayTicker) { setDiscFullOverlayTicker(null); return; }
+    if (corpOverlayTicker) { setCorpOverlayTicker(null); return; }
+    if (navHistoryRef.current.length > 0) {
+      const prev = navHistoryRef.current.pop();
+      cancelAnimationFrame(zoomAnimRef.current);
+      setPhase(prev.phase);
+      setActiveSectorId(prev.activeSectorId);
+      setActiveCompanyCode(prev.activeCompanyCode);
+      setZoomProgress(1); // 되돌아간 섹터는 이미 봤던 화면이라 줌 애니메이션 재생 없이 바로 표시
+      return;
+    }
+    if (phase === 'company') { backToSector(); return; }
+    if (phase === 'sector') { backToGalaxy(); return; }
+    if (activeSectorId) { setActiveSectorId(null); return; }
+  }, [discDetailItem, discFullOverlayTicker, corpOverlayTicker, phase, activeSectorId, backToSector, backToGalaxy]);
+  const canGoBack = !!(discDetailItem || discFullOverlayTicker || corpOverlayTicker || phase !== 'galaxy' || activeSectorId);
+
+  // ESC / Backspace 키 → goBack. Backspace는 채팅 입력창 등 텍스트 편집 중엔 원래 동작(글자 삭제)을 그대로 두고,
+  // 포커스가 입력 요소가 아닐 때만 뒤로가기로 취급한다 (ESC는 입력 포커스와 무관하게 항상 뒤로가기).
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') { goBack(); return; }
+      if (e.key === 'Backspace') {
+        const t = e.target;
+        const isEditable = t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable);
+        if (isEditable) return;
+        e.preventDefault(); // 편집 요소 밖 Backspace의 브라우저 기본 "뒤로가기" 동작 방지
+        goBack();
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [goBack]);
+
   const sector = activeSectorId ? SECTOR_PALETTE.find(s => s.id === activeSectorId) : null;
   // 산업군 테마 액센트 — 오버레이 크롬(헤더·탭바)과 3탭 iframe에 공통 적용 (섹터색)
   const sectorAccent = (sector && sector.color) || '#74EEC6';
@@ -4037,7 +4308,7 @@ function App() {
             </div>
           )}
 
-          <TopTabs active={activeTab} onChange={setActiveTab} breadcrumb={crumb} />
+          <TopTabs active={activeTab} onChange={setActiveTab} breadcrumb={crumb} onBack={goBack} canGoBack={canGoBack} />
 
           {/* Top-left panel — varies by phase and active tab */}
           {activeTab === 'finance' ? (
@@ -4149,7 +4420,7 @@ function App() {
                 const active = dossierTab === tab.id;
                 return (
                   <iframe key={tab.id}
-                    src={`../dossier/${tab.src}?ticker=${corpOverlayTicker}${tab.id === 'eqs' ? '&theme=galaxy' : ''}&accent=${encodeURIComponent(sectorAccent)}`}
+                    src={`../dossier/${tab.src}?ticker=${corpOverlayTicker}${tab.id === 'eqs' ? '&theme=galaxy&v=eqs-feqs-m4-20260728' : ''}&accent=${encodeURIComponent(sectorAccent)}`}
                     title={`${tab.id}-${corpOverlayTicker}`}
                     style={{position:'absolute', inset:0, width:'100%', height:'100%', border:'none', background:'#020408', display: active ? 'block' : 'none'}}
                     onLoad={undefined /* firm.html은 ?theme=galaxy 자체 테마(스코프 CSS) */}

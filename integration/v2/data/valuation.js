@@ -17,33 +17,62 @@
     return t.toFixed(2);
   }
 
-  // 큰 단위 시총(원) → "T" 라벨 (예: 980T, 1,461T).
+  // 큰 단위 시총(원) → "조원" 라벨 (예: 980조원, 1,461조원).
   function trillionLabel(won) {
     if (!won) return "-";
     const t = won / 1e12;
-    if (t >= 1000) return Math.round(t).toLocaleString() + "T";
-    if (t >= 100) return Math.round(t) + "T";
-    if (t >= 10) return t.toFixed(0) + "T";
-    return t.toFixed(1) + "T";
+    if (t >= 1000) return Math.round(t).toLocaleString() + "조원";
+    if (t >= 100) return Math.round(t) + "조원";
+    if (t >= 10) return t.toFixed(0) + "조원";
+    return t.toFixed(1) + "조원";
+  }
+
+  // "1262조"·"850억" 같은 표시용 문자열 시총을 원(KRW) 단위 숫자로 변환.
+  // graph_top50.json의 `mc` 필드(모든 노드 문자열)가 이 형식이라, eqs 파이프라인의
+  // 정식 market_cap이 없는 노드(현재 다수)의 유일한 시총 출처다.
+  function parseMcString(s) {
+    if (typeof s !== "string" || s === "-") return null;
+    const m = s.match(/([0-9.]+)\s*(조|억|만)?/);
+    if (!m) return null;
+    const num = parseFloat(m[1]);
+    if (!Number.isFinite(num)) return null;
+    const unit = m[2];
+    if (unit === "억") return num * 1e8;
+    if (unit === "만") return num * 1e4;
+    return num * 1e12;
+  }
+
+  // 노드 하나의 시총(원) — 정식 market_cap 우선, 없으면 mc 문자열 파싱.
+  function resolveMarketCap(n) {
+    if (n && n.market_cap) return n.market_cap;
+    return n ? parseMcString(n.mc) : null;
+  }
+
+  // 섹터 집계 PER — Σ시총 ÷ Σ당기순이익(흑자 기업만). 지수 제공사들이 쓰는 표준 방식.
+  // 표본이 없거나 결과가 통계적으로 무의미할 정도로 크면(적자에 가까운 소수 기업이
+  // 왜곡) null 반환 — 초보 투자자에게 혼란만 주는 숫자를 보여주지 않는다.
+  function computeSectorPE(members) {
+    if (!Array.isArray(members) || !members.length) return null;
+    let capSum = 0;
+    let niSum = 0;
+    for (const m of members) {
+      const mc = resolveMarketCap(m);
+      const ni = m && m.net_income_raw;
+      if (mc && ni != null && ni > 0) {
+        capSum += mc;
+        niSum += ni;
+      }
+    }
+    if (!capSum || !niSum) return null;
+    const per = capSum / 1e8 / niSum;
+    return Number.isFinite(per) && per > 0 && per < 200 ? +per.toFixed(1) : null;
   }
 
   // PER·PBR·ROE 계산 — dashboard L4883
   function calcValuation(n) {
-    let mc = n.market_cap;
+    let mc = resolveMarketCap(n);
     let ni = n.net_income_raw;
     let eq = n.equity_raw;
-    if (mc == null && typeof n.mc === "string" && n.mc !== "-") {
-      const m = n.mc.match(/([0-9.]+)\s*(조|억|만)?/);
-      if (m) {
-        const num = parseFloat(m[1]);
-        const unit = m[2];
-        if (Number.isFinite(num)) {
-          if (unit === "억") mc = num * 1e8;
-          else if (unit === "만") mc = num * 1e4;
-          else mc = num * 1e12;
-        }
-      }
-    }
     if (ni == null && n.ni != null && n.ni !== "-") {
       const v = parseFloat(n.ni);
       if (!isNaN(v)) ni = v * 10000;
@@ -103,6 +132,9 @@
   Object.assign(window.DiscloseAI, {
     trillionFmt,
     trillionLabel,
+    parseMcString,
+    resolveMarketCap,
+    computeSectorPE,
     calcValuation,
     percentileBadge,
     sparklinePath,

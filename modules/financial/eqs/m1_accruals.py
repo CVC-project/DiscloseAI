@@ -21,7 +21,8 @@ R=1.0은 회계이익과 영업현금이 일치한 기준점이며 80점이다. 
 
 예외:
 - 3년 누적 영업이익 ≤ 0: 산출 보류 ("3년 누적 영업적자")
-- 데이터 3년 미만: 가능한 연도(최소 1년)로 단축 산출, note에 n=2 등 표기
+- 데이터 2년: 가능한 2개년 누적 기준으로 단축 산출
+- 데이터 1년: 단년도 현금흐름 왜곡 가능성이 커 산출 보류
 """
 
 from __future__ import annotations
@@ -49,6 +50,13 @@ def score_m1(
     ]
     if not valid:
         return ModuleScore(name="M1", score=None, note="영업이익/OCF 결측 — 산출 불가")
+
+    if len(valid) < 2:
+        return ModuleScore(
+            name="M1",
+            score=None,
+            note="1년 이력 — 단년도 OCF/영업이익은 변동성이 커 M1 제외",
+        )
 
     if require_three_years and len(valid) < 3:
         return ModuleScore(name="M1", score=None, note="V3 비교에는 3개 사업연도 영업이익/OCF 필요")
@@ -78,14 +86,11 @@ def score_m1(
         score = 80.0 + (R - 1.0) / 0.2 * 20.0  # 80~100
     else:
         score = 100.0
-    confidence = {1: 0.40, 2: 0.70, 3: 1.00}[min(n, 3)]
-    if short_history_weighting and n < 3:
-        score = 50.0 + (score - 50.0) * confidence
-    n_tag = "" if n == 3 else f" — {n}년 이력 신뢰도 {confidence:.0%}"
+    n_tag = "" if n == 3 else f" — {n}년 이력"
     return ModuleScore(
         name="M1",
         score=round(score, 1),
         raw=R,
         note=f"{n}년 누적 OCF/영업이익={R:.2f}{n_tag}",
-        weight=confidence if short_history_weighting else 1.0,
+        weight=1.0,
     )

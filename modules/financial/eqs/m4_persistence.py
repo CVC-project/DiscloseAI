@@ -6,12 +6,12 @@
 
 산출:
     OM[y] = OperatingIncome[y] ÷ Revenue[y]   (y = t-2, t-1, t)
-    3년 평균 OM     = mean(OM)
-    3년 변동폭      = max(OM) - min(OM)
+    평균 OM         = 최근값일수록 높은 1:2:3 가중평균(2년이면 1:2)
+    변동폭          = max(OM) - min(OM)
 
-    평균점수    = 선형보간(평균 OM, 평균임계값[업종])      # 5단계: 0/20/50/80/100
-    변동폭점수  = 선형보간(변동폭, 변동폭임계값[업종군])    # 4단계: 100/70/50/0
-    M4         = 평균점수 × 0.6 + 변동폭점수 × 0.4
+    수익성점수  = 업종 분위수 보간(평균 OM, 높을수록 양호)  # P10/P25/P50/P75/P90 = 0/25/50/75/100
+    안정성점수  = 업종 분위수 보간(변동폭, 낮을수록 양호)   # P10/P25/P50/P75/P90 = 100/75/50/25/0
+    M4         = 수익성점수 × 0.7 + 안정성점수 × 0.3
 
 예외:
 - 매출=0/결측 해 제외, 유효 연도 < 2년이면 산출 보류
@@ -66,6 +66,13 @@ def _operating_margins(panel: FirmPanel, n: int = 3) -> List[float]:
     return out
 
 
+def _recent_weighted_average(values: List[float]) -> float:
+    """최근값일수록 높은 1:2:3 가중평균. 입력은 과거->최근 순서."""
+    tail = values[-3:]
+    weights = list(range(1, len(tail) + 1))
+    return sum(value * weight for value, weight in zip(tail, weights)) / sum(weights)
+
+
 def score_m4(panel: FirmPanel, calibration: CalibrationResult | None = None) -> ModuleScore:
     oms = _operating_margins(panel, 3)
     n = len(oms)
@@ -76,13 +83,21 @@ def score_m4(panel: FirmPanel, calibration: CalibrationResult | None = None) -> 
             note="영업이익률 결측",
         )
 
-    avg = sum(oms) / n
+    if n < 2:
+        return ModuleScore(
+            name="M4",
+            score=None,
+            raw=oms[0] if oms else None,
+            note="유효 영업이익률 1년 — 안정성 판단에는 최소 2년 필요",
+        )
+
+    avg = _recent_weighted_average(oms)
     vol = max(oms) - min(oms)
 
     if calibration is not None:
         mean_profile = profile_for_panel(calibration, panel, "m4_average_margin")
         vol_profile = profile_for_panel(calibration, panel, "m4_margin_volatility")
-        if mean_profile is None or (n >= 2 and vol_profile is None):
+        if mean_profile is None or vol_profile is None:
             return ModuleScore(
                 name="M4",
                 score=None,
@@ -90,30 +105,20 @@ def score_m4(panel: FirmPanel, calibration: CalibrationResult | None = None) -> 
                 note="동종업계 유효 표본 부족 — M4 보류",
             )
         s_mean = score_against_peers(avg, mean_profile, higher_is_better=True)
-        if n == 1:
-            confidence = 0.40
-            score = 50.0 + (s_mean - 50.0) * confidence
-            note = (
-                f"1년 영업이익률 {avg*100:+.1f}% — 변동성은 확인할 수 없어 "
-                f"신뢰도 {confidence:.0%} 보정"
-            )
-        else:
-            s_vol = score_against_peers(vol, vol_profile, higher_is_better=False)
-            base_score = s_mean * 0.7 + s_vol * 0.3
-            confidence = 1.00 if n >= 3 else 0.70
-            score = 50.0 + (base_score - 50.0) * confidence
-            note = (
-                f"{n}년 평균 영업이익률 {avg*100:+.1f}%, 변동폭 {vol*100:.1f}%p "
-                f"— 수익성 70% + 안정성 30%"
-            )
-            if n < 3:
-                note += f", 이력 신뢰도 {confidence:.0%} 보정"
+        s_vol = score_against_peers(vol, vol_profile, higher_is_better=False)
+        score = s_mean * 0.7 + s_vol * 0.3
+        note = (
+            f"{n}년 가중평균 영업이익률 {avg*100:+.1f}%, 변동폭 {vol*100:.1f}%p "
+            f"— 수익성 70% + 안정성 30%"
+        )
+        if n < 3:
+            note += " — 2년 이력"
         return ModuleScore(
             name="M4",
             score=round(score, 1),
             raw=avg,
             note=note,
-            weight=confidence,
+            weight=1.0,
         )
 
     if n < 2:
@@ -123,9 +128,9 @@ def score_m4(panel: FirmPanel, calibration: CalibrationResult | None = None) -> 
     vol_thr = m4_vol_thresholds(cls.m4_vol_bucket)
     s_mean = _mean_score(avg, mean_thr)
     s_vol = _vol_score(vol, vol_thr)
-    score = round(s_mean * 0.6 + s_vol * 0.4, 1)
+    score = round(s_mean * 0.7 + s_vol * 0.3, 1)
     note = (
-        f"3년 평균 영업이익률 {avg*100:+.1f}%, 변동폭 {vol*100:.1f}%p "
+        f"{n}년 가중평균 영업이익률 {avg*100:+.1f}%, 변동폭 {vol*100:.1f}%p "
         f"(업종 {cls.m4_mean_bucket}/{cls.m4_vol_bucket})"
     )
     n_tag = "" if n == 3 else f" — n={n} 단축"

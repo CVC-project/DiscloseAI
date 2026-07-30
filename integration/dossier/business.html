@@ -959,6 +959,10 @@
     let sortMode = "market_cap";
     const $ = (sel) => document.querySelector(sel);
     const esc = (value) => String(value ?? "").replace(/[&<>"']/g, (m) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+    const categoryOf = (row, fallback = '업종 미분류') =>
+      row.display_category || row.sector || (row.percentile && row.percentile._sector) || fallback;
+    const sectorOf = (row) => row.sector || (row.percentile && row.percentile._sector) || categoryOf(row);
+    const badgeOf = (row, fallback = '사업') => row.badge_label || row.display_category || row.sector || fallback;
     const BUSINESS_GLOSSARY = {
       'DRAM':'전원이 켜져 있을 때 데이터를 빠르게 읽고 쓰는 메모리 반도체. 서버·PC·스마트폰 성능에 중요합니다.',
       'NAND Flash':'전원이 꺼져도 데이터가 남는 저장용 메모리. SSD와 스마트폰 저장공간에 쓰입니다.',
@@ -1300,7 +1304,7 @@
       if (['032830','000810'].includes(code)) return 'insurance';
       if (['006800'].includes(code)) return 'securities';
       if (['138040'].includes(code)) return 'holding';
-      const text = [row.name, row.display_category, row.badge_label, row.sector].join(' ');
+      const text = [row.name, categoryOf(row, ''), badgeOf(row, ''), sectorOf(row)].join(' ');
       if (/금융업/.test(text)) return 'bank';
       if (/증권업|증권/.test(text)) return 'securities';
       if (/지주|복합/.test(text)) return 'holding';
@@ -1687,7 +1691,7 @@
     function whatSellsText(row) {
       const names = cardTitles(row);
       const captions = cardCaptions(row);
-      const category = row.display_category || row.sector || '핵심 사업';
+      const category = categoryOf(row, '핵심 사업');
       const asSentence = (text) => {
         const value = String(text || '').trim();
         if (!value) return '';
@@ -1785,7 +1789,7 @@
     }
     function reportFocusFor(row) {
       const key = industryKey(row);
-      const category = row.display_category || row.sector || '사업';
+      const category = categoryOf(row, '사업');
       const map = {
         bank: ['예대마진, 수수료, 충당금', '은행은 대출 성장보다 순이자마진, 연체율, 충당금, 자본비율이 이익의 질을 좌우합니다.'],
         insurance: ['손해율, 운용자산, 지급여력', '보험사는 보험영업 손해율과 투자자산 운용수익, 지급여력 비율을 같이 봐야 합니다.'],
@@ -1981,7 +1985,7 @@
         return [
           {
             title: '수집 필요',
-            value: row.display_category || row.sector || '사업보고서',
+            value: categoryOf(row, '사업보고서'),
             fact: '이 회사는 로컬에 구조화된 사업보고서 요약이 충분히 저장되어 있지 않습니다.',
             view: 'DART 사업보고서를 다시 수집하면 사업개요와 사업현황을 직접 요약한 카드로 채울 수 있습니다.'
           },
@@ -2244,7 +2248,7 @@
       return '<div class="business-finance-panel"><h3>전체 회사 재무 흐름: 사업이 숫자로 이어지는 길</h3><div class="business-finance-grid">' + cards + '</div></div>';
     }
     function reportMapHtml(row) {
-      return '<section class="section report-map"><div class="section-head"><div><h2>DART II. 사업의 내용 요약</h2><div class="mini-label">' + esc(row.display_category || row.sector || '사업') + '</div></div><p>우리가 사업보고서의 사업개요와 사업현황을 읽고, 초보 투자자가 바로 이해할 수 있게 요약했습니다.</p></div>' +
+      return '<section class="section report-map"><div class="section-head"><div><h2>DART II. 사업의 내용 요약</h2><div class="mini-label">' + esc(categoryOf(row, '사업')) + '</div></div><p>우리가 사업보고서의 사업개요와 사업현황을 읽고, 초보 투자자가 바로 이해할 수 있게 요약했습니다.</p></div>' +
         '<div class="report-grid" style="grid-template-columns:1fr">' +
           '<article class="report-panel"><h3>요약 한눈에</h3>' + compactList(whatSellsText(row), 3) + sourceSentence(row.snippets && row.snippets.overview) + '</article>' +
         '</div>' +
@@ -2266,7 +2270,7 @@
       const signalCards = lens.signals.map((item) =>
         '<article class="signal-card"><h3>' + rich(item[0]) + '</h3><p>' + rich(item[1]) + '</p></article>'
       ).join('');
-      return '<section class="section"><div class="section-head"><div><h2>사업현황 체크포인트</h2><p>사업보고서의 사업현황을 읽을 때 업종별로 먼저 눈에 들어와야 하는 변수만 추렸습니다.</p></div><span class="mini-label">' + esc(row.badge_label || row.display_category || '맞춤') + ' 맞춤</span></div>' +
+      return '<section class="section"><div class="section-head"><div><h2>사업현황 체크포인트</h2><p>사업보고서의 사업현황을 읽을 때 업종별로 먼저 눈에 들어와야 하는 변수만 추렸습니다.</p></div><span class="mini-label">' + esc(badgeOf(row, '맞춤')) + ' 맞춤</span></div>' +
         '<div class="grid-4">' + signalCards + '</div>' +
         (rawBlock || utilBlock ? '<div class="evidence-board" style="margin-top:12px">' + rawBlock + utilBlock + '</div>' : '') +
       '</section>';
@@ -2327,14 +2331,14 @@
       });
       $('#companyList').innerHTML = rows.map((r, index) => {
         const metric = sortMode === "ttm_per" ? perText(r.ttm_per) : marketCapText(r.market_cap);
-        return '<button class="company-btn ' + (r.stock_code === selected ? 'active' : '') + '" type="button" data-code="' + esc(r.stock_code) + '"><span class="rank">#' + esc(index + 1) + '</span><span><span class="cname">' + esc(r.name) + '</span><span class="cticker">' + esc(r.stock_code) + ' · ' + esc(r.display_category || r.sector || '업종 미분류') + '<br>' + esc(metric) + '</span></span><span class="sector-pill">' + esc(r.badge_label || r.display_category || '사업') + '</span></button>';
+        return '<button class="company-btn ' + (r.stock_code === selected ? 'active' : '') + '" type="button" data-code="' + esc(r.stock_code) + '"><span class="rank">#' + esc(index + 1) + '</span><span><span class="cname">' + esc(r.name) + '</span><span class="cticker">' + esc(r.stock_code) + ' · ' + esc(categoryOf(r)) + '<br>' + esc(metric) + '</span></span><span class="sector-pill">' + esc(badgeOf(r)) + '</span></button>';
       }).join("");
     }
     function render(row) {
       if (!row) return;
       renderedTermNotes = new Set();
-      const category = row.display_category || row.sector || '업종 미분류';
-      const sector = row.sector || category;
+      const category = categoryOf(row);
+      const sector = sectorOf(row);
       const reportLabel = row.report && row.report.name ? row.report.name : '최근 사업보고서';
       const dart = row.dart_url || (row.report && row.report.rcept_no ? 'https://dart.fss.or.kr/dsaf001/main.do?rcpNo=' + row.report.rcept_no : '#');
       $('#readerPanel').innerHTML =

@@ -101,6 +101,22 @@ def _module_notes(record: dict) -> dict[str, str]:
     }
 
 
+def _module_payload(record: dict) -> dict[str, dict]:
+    """Pass through arbitrary module ids such as M1~M5 or F1~F5."""
+    modules = record.get("modules", {})
+    if not isinstance(modules, dict):
+        return {}
+    return {
+        module_id: {
+            "label": module.get("label"),
+            "score": module.get("score"),
+            "note": module.get("note", ""),
+        }
+        for module_id, module in modules.items()
+        if isinstance(module, dict)
+    }
+
+
 def _is_financial_industry(industry: object) -> bool:
     code = str(industry or "")
     return code in FINANCIAL_INDUSTRY_CODES or code.startswith(FINANCIAL_KSIC_PREFIXES)
@@ -151,8 +167,10 @@ def load_eqs_prototype_meta() -> dict[str, dict]:
                     "eqs_total": r.get("total"),
                     "eqs_grade": r.get("grade"),
                     "eqs_method": r.get("eqs_method"),
+                    "eqs_modules": _module_payload(r),
                     "eqs_module_notes": _module_notes(r),
                     "eqs_excluded": r.get("eqs_excluded", []),
+                    "eqs_profile_note": r.get("eqs_profile_note"),
                 }
             )
     return meta_map
