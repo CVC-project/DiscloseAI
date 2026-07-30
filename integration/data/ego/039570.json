@@ -16,6 +16,26 @@
         "tier": "dot"
       },
       {
+        "t": "012630",
+        "n": "HDC",
+        "type": "ftc_group",
+        "detail": "에이치디씨 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "금융",
+        "tier": "dot"
+      },
+      {
+        "t": "089470",
+        "n": "HDC현대EP",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "화학",
+        "tier": "dot"
+      },
+      {
         "n": "Icontrols Vietnam",
         "kind": "private_corp",
         "type": "subsidiary",
@@ -74,6 +94,15 @@
     ],
     "valuechain": {
       "up": [
+        {
+          "t": "089470",
+          "n": "HDC현대EP",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 303264000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출원가 및 판매관리비, 특수관계자거래"
+        },
         {
           "t": "294870",
           "n": "IPARK현대산업개발",

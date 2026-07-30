@@ -6,6 +6,16 @@
   "layers": {
     "governance": [
       {
+        "t": "145990",
+        "n": "삼양사",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "식음료",
+        "tier": "dot"
+      },
+      {
         "n": "김 원",
         "kind": "person",
         "type": "investment",
@@ -23,7 +33,26 @@
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "000070",
+          "n": "삼양홀딩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1336000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "t": "145990",
+          "n": "삼양사",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 398000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매출"
+        }
+      ],
       "down": []
     }
   }

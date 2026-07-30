@@ -6,6 +6,16 @@
   "layers": {
     "governance": [
       {
+        "t": "003000",
+        "n": "부광약품",
+        "type": "investment",
+        "detail": "17.11% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "제약바이오",
+        "tier": "dot"
+      },
+      {
         "t": "456040",
         "n": "OCI",
         "type": "associate",
@@ -18,11 +28,51 @@
       {
         "t": "003000",
         "n": "부광약품",
-        "type": "investment",
-        "detail": "17.11% · 2025",
+        "type": "ftc_group",
+        "detail": "오씨아이 · 2025",
         "dir": "out",
         "as_of": 2025,
         "s": "제약바이오",
+        "tier": "dot"
+      },
+      {
+        "t": "005090",
+        "n": "SGC에너지",
+        "type": "ftc_group",
+        "detail": "오씨아이 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "에너지",
+        "tier": "dot"
+      },
+      {
+        "t": "014830",
+        "n": "유니드",
+        "type": "ftc_group",
+        "detail": "오씨아이 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "화학",
+        "tier": "dot"
+      },
+      {
+        "t": "446070",
+        "n": "유니드비티플러스",
+        "type": "ftc_group",
+        "detail": "오씨아이 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "소재",
+        "tier": "dot"
+      },
+      {
+        "t": "456040",
+        "n": "OCI",
+        "type": "ftc_group",
+        "detail": "오씨아이 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "화학",
         "tier": "dot"
       },
       {
@@ -136,6 +186,14 @@
         "as_of": 2025
       },
       {
+        "n": "Contera Pharma A/S",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2022",
+        "dir": "out",
+        "as_of": 2022
+      },
+      {
         "n": "OCI Enterprise Inc.",
         "kind": "private_corp",
         "type": "subsidiary",
@@ -240,6 +298,14 @@
         "as_of": 2025
       },
       {
+        "n": "SGC디벨롭먼트(주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2022",
+        "dir": "out",
+        "as_of": 2022
+      },
+      {
         "n": "SGC솔루션(주)",
         "kind": "private_corp",
         "type": "dart_filing",
@@ -256,6 +322,14 @@
         "as_of": 2025
       },
       {
+        "n": "SGC파트너스(주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2022",
+        "dir": "out",
+        "as_of": 2022
+      },
+      {
         "n": "Sun Action Trackers LLC",
         "kind": "private_corp",
         "type": "dart_filing",
@@ -270,6 +344,14 @@
         "detail": "관계기업 · 2025",
         "dir": "out",
         "as_of": 2025
+      },
+      {
+        "n": "부광메디카(주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2022",
+        "dir": "out",
+        "as_of": 2022
       },
       {
         "n": "시너지 바이오 헬스케어 벤처펀드",
@@ -328,6 +410,14 @@
         "as_of": 2025
       },
       {
+        "n": "한강수소충전소 전문투자형 사모특별자산투자신탁",
+        "kind": "coop_fund",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2022",
+        "dir": "out",
+        "as_of": 2022
+      },
+      {
         "n": "행복도시태양광발전소(주)",
         "kind": "private_corp",
         "type": "associate",
@@ -342,6 +432,14 @@
         "detail": "관계기업 · 2025",
         "dir": "out",
         "as_of": 2025
+      },
+      {
+        "n": "현대오씨아이㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2022",
+        "dir": "out",
+        "as_of": 2022
       }
     ],
     "valuechain": {
@@ -385,6 +483,15 @@
           "prov": "특수관계자 거래 · 매출, 특수관계자거래"
         },
         {
+          "t": "014830",
+          "n": "유니드",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 78214000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        },
+        {
           "t": "446070",
           "n": "유니드비티플러스",
           "type": "customer",
@@ -399,15 +506,6 @@
           "type": "customer",
           "tier_grade": "T1",
           "amount": 136745000.0,
-          "as_of": 2025,
-          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
-        },
-        {
-          "t": "014830",
-          "n": "유니드",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 78214000.0,
           "as_of": 2025,
           "prov": "특수관계자 거래 · 매출, 특수관계자거래"
         },

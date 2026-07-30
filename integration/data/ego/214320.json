@@ -6,6 +6,16 @@
   "layers": {
     "governance": [
       {
+        "t": "023530",
+        "n": "롯데쇼핑",
+        "type": "investment",
+        "detail": "5.15% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "유통",
+        "tier": "named400"
+      },
+      {
         "t": "004990",
         "n": "롯데지주",
         "type": "investment",
@@ -23,16 +33,6 @@
         "dir": "in",
         "as_of": 2025,
         "s": "자동차",
-        "tier": "named400"
-      },
-      {
-        "t": "023530",
-        "n": "롯데쇼핑",
-        "type": "investment",
-        "detail": "5.15% · 2025",
-        "dir": "in",
-        "as_of": 2025,
-        "s": "유통",
         "tier": "named400"
       },
       {
@@ -220,6 +220,14 @@
         "as_of": 2025
       },
       {
+        "n": "㈜스튜디오어빗",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "40.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
         "n": "㈜이노션에스 (INNS)",
         "kind": "private_corp",
         "type": "subsidiary",
@@ -284,14 +292,6 @@
         "as_of": 2025
       },
       {
-        "n": "주식회사 스튜디오어빗",
-        "kind": "private_corp",
-        "type": "associate",
-        "detail": "40.0% · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
         "n": "케이디비에이치엠지제로원신기술사업투자조합",
         "kind": "coop_fund",
         "type": "investment",
@@ -309,8 +309,46 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "㈜스튜디오어빗",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 924200000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 등 · 비용거래 (매입 등)"
+        }
+      ],
+      "down": [
+        {
+          "n": "Hyundai Motor America",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 332369419000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 등 · 수익거래 (매출 등)"
+        },
+        {
+          "n": "Kia America, Inc.",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 164521964000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 등 · 수익거래 (매출 등)"
+        },
+        {
+          "n": "㈜스튜디오어빗",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 44462000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 등 · 수익거래 (매출 등)"
+        }
+      ]
     }
   }
 }

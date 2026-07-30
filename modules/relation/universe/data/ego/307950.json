@@ -6,6 +6,16 @@
   "layers": {
     "governance": [
       {
+        "t": "005380",
+        "n": "현대자동차",
+        "type": "associate",
+        "detail": "31.59% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "자동차",
+        "tier": "named400"
+      },
+      {
         "t": "000270",
         "n": "기아",
         "type": "investment",
@@ -28,21 +38,21 @@
       {
         "t": "005380",
         "n": "현대자동차",
-        "type": "associate",
-        "detail": "31.59% · 2025",
+        "type": "ftc_group",
+        "detail": "현대자동차 · 2025",
         "dir": "in",
         "as_of": 2025,
         "s": "자동차",
         "tier": "named400"
       },
       {
-        "t": "005380",
-        "n": "현대자동차",
-        "type": "ftc_group",
-        "detail": "현대자동차 · 2025",
+        "t": "000720",
+        "n": "현대건설",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
         "dir": "in",
         "as_of": 2025,
-        "s": "자동차",
+        "s": "건설",
         "tier": "named400"
       },
       {
@@ -96,16 +106,6 @@
         "tier": "named400"
       },
       {
-        "t": "000720",
-        "n": "현대건설",
-        "type": "dart_filing",
-        "detail": "기타 · 2025",
-        "dir": "in",
-        "as_of": 2025,
-        "s": "건설",
-        "tier": "named400"
-      },
-      {
         "n": "Autoever Systems America, Inc.",
         "kind": "private_corp",
         "type": "subsidiary",
@@ -138,15 +138,7 @@
         "as_of": 2025
       },
       {
-        "n": "HYUNDAI AUTOEVER MEXICO,S. DE R.L. DE C.V",
-        "kind": "private_corp",
-        "type": "subsidiary",
-        "detail": "100.0% · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
-        "n": "Hyundai Autoever Brasil Tecnologiada Informacao Ltda",
+        "n": "Hyundai Autoever Brasil Tecnologia da Informacao Ltda.",
         "kind": "private_corp",
         "type": "subsidiary",
         "detail": "100.0% · 2025",
@@ -162,12 +154,36 @@
         "as_of": 2025
       },
       {
-        "n": "Hyundai Autoever India Pvt. Ltd",
+        "n": "Hyundai Autoever India Pvt. Ltd.",
         "kind": "private_corp",
         "type": "subsidiary",
         "detail": "100.0% · 2025",
         "dir": "out",
         "as_of": 2025
+      },
+      {
+        "n": "Hyundai Autoever Mexico, S. DE R.L. DE C.V",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "Hyundai Motor America",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "대규모기업집단 · 2022",
+        "dir": "out",
+        "as_of": 2022
+      },
+      {
+        "n": "Hyundai Motor Europe GmbH",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "대규모기업집단 · 2022",
+        "dir": "out",
+        "as_of": 2022
       },
       {
         "n": "Hyundai Motor Group Innovation Center In Singapore Pte. Ltd.",
@@ -250,12 +266,28 @@
         "as_of": 2025
       },
       {
-        "n": "현대캐피탈(주)",
+        "n": "현대캐피탈㈜",
         "kind": "private_corp",
         "type": "dart_filing",
         "detail": "기타 · 2025",
         "dir": "out",
         "as_of": 2025
+      },
+      {
+        "n": "현대케피코(주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "대규모기업집단 · 2022",
+        "dir": "out",
+        "as_of": 2022
+      },
+      {
+        "n": "회사명",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "구분 · 2022",
+        "dir": "out",
+        "as_of": 2022
       }
     ],
     "valuechain": {
@@ -268,33 +300,6 @@
           "amount": 14803000000.0,
           "as_of": 2025,
           "prov": "특수관계자 등과의 거래 · 매출 및 기타 수익, 특수관계자거래"
-        },
-        {
-          "t": "086960",
-          "n": "MDS테크",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 28270000000.0,
-          "as_of": 2023,
-          "prov": "단일판매ㆍ공급계약체결 · 현대오토에버(주)"
-        },
-        {
-          "t": "367000",
-          "n": "플래티어",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 2446740000.0,
-          "as_of": 2026,
-          "prov": "단일판매ㆍ공급계약체결 · 현대오토에버(주)"
-        },
-        {
-          "t": "367000",
-          "n": "플래티어",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 2167110000.0,
-          "as_of": 2026,
-          "prov": "단일판매ㆍ공급계약체결 · 현대오토에버(주)"
         },
         {
           "t": "005380",
@@ -333,6 +338,33 @@
           "prov": "특수관계자 · 매입"
         },
         {
+          "t": "367000",
+          "n": "플래티어",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2446740000.0,
+          "as_of": 2026,
+          "prov": "단일판매ㆍ공급계약체결 · 현대오토에버(주)"
+        },
+        {
+          "t": "367000",
+          "n": "플래티어",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2167110000.0,
+          "as_of": 2026,
+          "prov": "단일판매ㆍ공급계약체결 · 현대오토에버(주)"
+        },
+        {
+          "t": "086960",
+          "n": "MDS테크",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 28270000000.0,
+          "as_of": 2023,
+          "prov": "단일판매ㆍ공급계약체결 · 현대오토에버(주)"
+        },
+        {
           "n": "현대카드(주)",
           "kind": "private_corp",
           "type": "supply",
@@ -360,7 +392,7 @@
           "prov": "특수관계자 · 매입"
         },
         {
-          "n": "현대캐피탈(주)",
+          "n": "현대캐피탈㈜",
           "kind": "private_corp",
           "type": "supply",
           "tier_grade": "T1",
@@ -378,6 +410,15 @@
           "amount": 117964000000.0,
           "as_of": 2025,
           "prov": "특수관계자 등과의 거래 · 매입 및 기타 비용, 특수관계자거래"
+        },
+        {
+          "t": "012330",
+          "n": "현대모비스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 70591000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등과의 거래 · 재화의 매입, 특수관계자거래"
         },
         {
           "t": "005380",
@@ -443,16 +484,7 @@
           "prov": "특수관계자 · 매출"
         },
         {
-          "t": "012330",
-          "n": "현대모비스",
-          "type": "supply",
-          "tier_grade": "T1",
-          "amount": 70591000000.0,
-          "as_of": 2025,
-          "prov": "특수관계자 등과의 거래 · 재화의 매입, 특수관계자거래"
-        },
-        {
-          "n": "현대캐피탈(주)",
+          "n": "현대캐피탈㈜",
           "kind": "private_corp",
           "type": "customer",
           "tier_grade": "T1",

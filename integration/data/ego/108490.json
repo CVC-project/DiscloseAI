@@ -16,6 +16,16 @@
         "tier": "named400"
       },
       {
+        "t": "066570",
+        "n": "LG전자",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "반도체",
+        "tier": "named400"
+      },
+      {
         "n": "(주)로보티즈AI",
         "kind": "private_corp",
         "type": "subsidiary",
@@ -50,7 +60,17 @@
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "t": "066570",
+          "n": "LG전자",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 24000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입, 특수관계자거래"
+        }
+      ]
     }
   }
 }

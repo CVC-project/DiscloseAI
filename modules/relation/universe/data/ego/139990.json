@@ -6,20 +6,20 @@
   "layers": {
     "governance": [
       {
-        "t": "460860",
-        "n": "동국제강",
-        "type": "ftc_group",
-        "detail": "동국제강 · 2025",
+        "t": "460850",
+        "n": "동국씨엠",
+        "type": "subsidiary",
+        "detail": "58.29% · 2025",
         "dir": "in",
         "as_of": 2025,
         "s": "철강·금속",
         "tier": "dot"
       },
       {
-        "t": "460850",
-        "n": "동국씨엠",
-        "type": "subsidiary",
-        "detail": "58.29% · 2025",
+        "t": "460860",
+        "n": "동국제강",
+        "type": "ftc_group",
+        "detail": "동국제강 · 2025",
         "dir": "in",
         "as_of": 2025,
         "s": "철강·금속",
@@ -46,7 +46,7 @@
         "tier": "dot"
       },
       {
-        "n": "AJU STEEL USA, INC.",
+        "n": "AJU POLAND Sp. Z o.o.",
         "kind": "private_corp",
         "type": "subsidiary",
         "detail": "100.0% · 2025",
@@ -54,7 +54,7 @@
         "as_of": 2025
       },
       {
-        "n": "Aju Poland Sp. Z o.o.",
+        "n": "AJU STEEL USA, INC.",
         "kind": "private_corp",
         "type": "subsidiary",
         "detail": "100.0% · 2025",
@@ -81,15 +81,6 @@
     "valuechain": {
       "up": [
         {
-          "t": "460850",
-          "n": "동국씨엠",
-          "type": "supply",
-          "tier_grade": "T1",
-          "amount": 230157430713.0,
-          "as_of": 2025,
-          "prov": "특수관계자와의 주요거래 · 매입"
-        },
-        {
           "t": "001230",
           "n": "동국홀딩스",
           "type": "customer",
@@ -97,6 +88,15 @@
           "amount": 7266000000.0,
           "as_of": 2025,
           "prov": "특수관계자 등과의 거래 · 매출 등"
+        },
+        {
+          "t": "460850",
+          "n": "동국씨엠",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 230157430713.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 주요거래 · 매입"
         },
         {
           "n": "Dongkuk Corporation",
@@ -119,6 +119,15 @@
       ],
       "down": [
         {
+          "t": "001230",
+          "n": "동국홀딩스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 11742000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등과의 거래 · 매입 등"
+        },
+        {
           "t": "460850",
           "n": "동국씨엠",
           "type": "customer",
@@ -135,15 +144,6 @@
           "amount": 2506347230.0,
           "as_of": 2025,
           "prov": "특수관계자와의 주요거래 · 매출"
-        },
-        {
-          "t": "001230",
-          "n": "동국홀딩스",
-          "type": "supply",
-          "tier_grade": "T1",
-          "amount": 11742000000.0,
-          "as_of": 2025,
-          "prov": "특수관계자 등과의 거래 · 매입 등"
         },
         {
           "n": "Dongkuk Steel Thailand Ltd.",

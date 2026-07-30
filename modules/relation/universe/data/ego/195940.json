@@ -16,16 +16,6 @@
         "tier": "named400"
       },
       {
-        "t": "024720",
-        "n": "콜마홀딩스",
-        "type": "dart_filing",
-        "detail": "관계기업 · 2025",
-        "dir": "in",
-        "as_of": 2025,
-        "s": "금융",
-        "tier": "dot"
-      },
-      {
         "t": "200130",
         "n": "콜마비앤에이치",
         "type": "dart_filing",
@@ -33,6 +23,16 @@
         "dir": "in",
         "as_of": 2025,
         "s": "제약바이오",
+        "tier": "dot"
+      },
+      {
+        "t": "024720",
+        "n": "콜마홀딩스",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "금융",
         "tier": "dot"
       },
       {
@@ -71,20 +71,20 @@
     "valuechain": {
       "up": [
         {
-          "t": "024720",
-          "n": "콜마홀딩스",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 8378059000.0,
-          "as_of": 2025,
-          "prov": "특수관계자와의 거래 · 매출"
-        },
-        {
           "t": "200130",
           "n": "콜마비앤에이치",
           "type": "customer",
           "tier_grade": "T1",
           "amount": 860859000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        },
+        {
+          "t": "024720",
+          "n": "콜마홀딩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 8378059000.0,
           "as_of": 2025,
           "prov": "특수관계자와의 거래 · 매출"
         }

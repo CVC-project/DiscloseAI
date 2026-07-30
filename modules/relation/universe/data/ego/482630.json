@@ -24,10 +24,30 @@
         "as_of": 2025,
         "s": "식음료",
         "tier": "dot"
+      },
+      {
+        "t": "145990",
+        "n": "삼양사",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "식음료",
+        "tier": "dot"
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "145990",
+          "n": "삼양사",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1734000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매출"
+        }
+      ],
       "down": []
     }
   }

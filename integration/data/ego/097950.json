@@ -16,16 +16,6 @@
         "tier": "dot"
       },
       {
-        "t": "000120",
-        "n": "CJ대한통운",
-        "type": "associate",
-        "detail": "40.16% · 2025",
-        "dir": "out",
-        "as_of": 2025,
-        "s": "운송·물류",
-        "tier": "named400"
-      },
-      {
         "t": "011150",
         "n": "CJ씨푸드",
         "type": "associate",
@@ -36,10 +26,30 @@
         "tier": "dot"
       },
       {
+        "t": "000120",
+        "n": "CJ대한통운",
+        "type": "associate",
+        "detail": "40.16% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "운송·물류",
+        "tier": "named400"
+      },
+      {
         "t": "001040",
         "n": "CJ",
         "type": "associate",
         "detail": "45.6% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
+        "t": "001040",
+        "n": "CJ",
+        "type": "ftc_group",
+        "detail": "씨제이 · 2025",
         "dir": "in",
         "as_of": 2025,
         "s": "금융",
@@ -94,7 +104,7 @@
         "as_of": 2025
       },
       {
-        "n": "CJ CHINA CONSULTING, LTD.",
+        "n": "CJ CHINA CONSULTING., LTD",
         "kind": "private_corp",
         "type": "subsidiary",
         "detail": "100.0% · 2025",
@@ -521,24 +531,6 @@
     "valuechain": {
       "up": [
         {
-          "t": "002990",
-          "n": "금호건설",
-          "type": "supply",
-          "tier_grade": "T1",
-          "amount": 5592118000.0,
-          "as_of": 2025,
-          "prov": "특수관계자와의 거래 · 매입"
-        },
-        {
-          "t": "000120",
-          "n": "CJ대한통운",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 430791128000.0,
-          "as_of": 2024,
-          "prov": "특수관계자와의 거래 · 매출"
-        },
-        {
           "t": "035760",
           "n": "CJ ENM",
           "type": "customer",
@@ -557,6 +549,24 @@
           "prov": "특수관계자와의 거래 · 매출 등"
         },
         {
+          "t": "253450",
+          "n": "스튜디오드래곤",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 17630000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출원가, 특수관계자거래"
+        },
+        {
+          "t": "000120",
+          "n": "CJ대한통운",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 391293072000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        },
+        {
           "t": "079160",
           "n": "CJ CGV",
           "type": "customer",
@@ -571,6 +581,15 @@
           "type": "supply",
           "tier_grade": "T1",
           "amount": 2975686000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입"
+        },
+        {
+          "t": "002990",
+          "n": "금호건설",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 5592118000.0,
           "as_of": 2025,
           "prov": "특수관계자와의 거래 · 매입"
         },
@@ -600,15 +619,6 @@
           "amount": 42574000.0,
           "as_of": 2025,
           "prov": "특수관계자와의 거래 · 매입"
-        },
-        {
-          "t": "253450",
-          "n": "스튜디오드래곤",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 17630000.0,
-          "as_of": 2025,
-          "prov": "특수관계자와의 거래 · 매출원가, 특수관계자거래"
         },
         {
           "n": "CJ INTERNATIONAL ASIA PTE. LTD.",
@@ -820,33 +830,6 @@
       ],
       "down": [
         {
-          "t": "002990",
-          "n": "금호건설",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 1495000.0,
-          "as_of": 2025,
-          "prov": "특수관계자와의 거래 · 매출"
-        },
-        {
-          "t": "253450",
-          "n": "스튜디오드래곤",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 84203000.0,
-          "as_of": 2025,
-          "prov": "특수관계자와의 거래 · 매출"
-        },
-        {
-          "t": "000120",
-          "n": "CJ대한통운",
-          "type": "supply",
-          "tier_grade": "T1",
-          "amount": 2865989000.0,
-          "as_of": 2024,
-          "prov": "특수관계자와의 거래 · 매입"
-        },
-        {
           "t": "035760",
           "n": "CJ ENM",
           "type": "supply",
@@ -865,6 +848,15 @@
           "prov": "특수관계자와의 거래 · 매입 등"
         },
         {
+          "t": "000120",
+          "n": "CJ대한통운",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2814979000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입"
+        },
+        {
           "t": "079160",
           "n": "CJ CGV",
           "type": "supply",
@@ -879,6 +871,15 @@
           "type": "customer",
           "tier_grade": "T1",
           "amount": 2451693000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        },
+        {
+          "t": "002990",
+          "n": "금호건설",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1495000.0,
           "as_of": 2025,
           "prov": "특수관계자와의 거래 · 매출"
         },
@@ -906,6 +907,15 @@
           "type": "customer",
           "tier_grade": "T1",
           "amount": 1310098000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        },
+        {
+          "t": "253450",
+          "n": "스튜디오드래곤",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 84203000.0,
           "as_of": 2025,
           "prov": "특수관계자와의 거래 · 매출"
         },

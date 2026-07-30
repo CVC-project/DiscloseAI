@@ -6,6 +6,16 @@
   "layers": {
     "governance": [
       {
+        "t": "051910",
+        "n": "LG화학",
+        "type": "subsidiary",
+        "detail": "79.38% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "화학",
+        "tier": "named400"
+      },
+      {
         "t": "006110",
         "n": "삼아알미늄",
         "type": "investment",
@@ -16,6 +26,76 @@
         "tier": "dot"
       },
       {
+        "t": "003550",
+        "n": "LG",
+        "type": "ftc_group",
+        "detail": "엘지 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
+        "t": "011070",
+        "n": "LG이노텍",
+        "type": "ftc_group",
+        "detail": "엘지 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "반도체",
+        "tier": "named400"
+      },
+      {
+        "t": "032640",
+        "n": "LG유플러스",
+        "type": "ftc_group",
+        "detail": "엘지 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "통신",
+        "tier": "named400"
+      },
+      {
+        "t": "034220",
+        "n": "LG디스플레이",
+        "type": "ftc_group",
+        "detail": "엘지 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "반도체",
+        "tier": "named400"
+      },
+      {
+        "t": "035000",
+        "n": "HS애드",
+        "type": "ftc_group",
+        "detail": "엘지 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "기계·장비",
+        "tier": "dot"
+      },
+      {
+        "t": "037560",
+        "n": "LG헬로비전",
+        "type": "ftc_group",
+        "detail": "엘지 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "미디어",
+        "tier": "dot"
+      },
+      {
+        "t": "051900",
+        "n": "LG생활건강",
+        "type": "ftc_group",
+        "detail": "엘지 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "화학",
+        "tier": "named400"
+      },
+      {
         "t": "051910",
         "n": "LG화학",
         "type": "ftc_group",
@@ -23,6 +103,16 @@
         "dir": "out",
         "as_of": 2025,
         "s": "화학",
+        "tier": "named400"
+      },
+      {
+        "t": "064400",
+        "n": "LG씨엔에스",
+        "type": "ftc_group",
+        "detail": "엘지 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "플랫폼",
         "tier": "named400"
       },
       {
@@ -46,13 +136,13 @@
         "tier": "named400"
       },
       {
-        "t": "051910",
-        "n": "LG화학",
-        "type": "subsidiary",
-        "detail": "79.38% · 2025",
+        "t": "090360",
+        "n": "로보스타",
+        "type": "dart_filing",
+        "detail": "기타 · 2024",
         "dir": "in",
-        "as_of": 2025,
-        "s": "화학",
+        "as_of": 2024,
+        "s": "기계·장비",
         "tier": "named400"
       },
       {
@@ -333,6 +423,15 @@
     "valuechain": {
       "up": [
         {
+          "t": "006110",
+          "n": "삼아알미늄",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 25247994000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 · 그룹 합산"
+        },
+        {
           "t": "032640",
           "n": "LG유플러스",
           "type": "customer",
@@ -353,15 +452,6 @@
           "prov": "특수관계자 거래 · 매출 등"
         },
         {
-          "t": "032640",
-          "n": "LG유플러스",
-          "type": "supply",
-          "tier_grade": "T1",
-          "amount": 29000000.0,
-          "as_of": 2025,
-          "prov": "특수관계자 거래 · 매입 등"
-        },
-        {
           "t": "064400",
           "n": "LG씨엔에스",
           "type": "customer",
@@ -378,6 +468,15 @@
           "amount": 159696000000.0,
           "as_of": 2025,
           "prov": "특수관계자 거래 · 매출 등 · 그룹 합산"
+        },
+        {
+          "t": "032640",
+          "n": "LG유플러스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 29000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등"
         },
         {
           "n": "PT LBM Energi Baru Indonesia",

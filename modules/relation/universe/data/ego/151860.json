@@ -16,6 +16,16 @@
         "tier": "dot"
       },
       {
+        "t": "016380",
+        "n": "KG스틸",
+        "type": "associate",
+        "detail": "45.0% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "철강·금속",
+        "tier": "dot"
+      },
+      {
         "t": "003620",
         "n": "KG모빌리티",
         "type": "subsidiary",
@@ -28,9 +38,9 @@
       {
         "t": "016380",
         "n": "KG스틸",
-        "type": "associate",
-        "detail": "45.0% · 2025",
-        "dir": "out",
+        "type": "ftc_group",
+        "detail": "KG · 2025",
+        "dir": "in",
         "as_of": 2025,
         "s": "철강·금속",
         "tier": "dot"
@@ -53,6 +63,16 @@
         "dir": "out",
         "as_of": 2025,
         "s": "플랫폼",
+        "tier": "dot"
+      },
+      {
+        "t": "007280",
+        "n": "한국특강",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2023",
+        "dir": "out",
+        "as_of": 2023,
+        "s": "철강·금속",
         "tier": "dot"
       },
       {
@@ -80,12 +100,20 @@
         "as_of": 2025
       },
       {
-        "n": "KG캐피탈㈜",
+        "n": "KG캐피탈",
         "kind": "private_corp",
         "type": "dart_filing",
         "detail": "기타 · 2025",
         "dir": "out",
         "as_of": 2025
+      },
+      {
+        "n": "KG할리스에프앤비㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2023",
+        "dir": "out",
+        "as_of": 2023
       },
       {
         "n": "LB전문투자형사모부동산투자신탁9호",
@@ -102,6 +130,14 @@
         "detail": "기타 · 2025",
         "dir": "out",
         "as_of": 2025
+      },
+      {
+        "n": "㈜KG써닝라이프",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2023",
+        "dir": "out",
+        "as_of": 2023
       },
       {
         "n": "㈜KG에듀원",
@@ -176,12 +212,44 @@
         "as_of": 2025
       },
       {
+        "n": "장가항동부고신금속제품유한공사",
+        "kind": "public_org",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2023",
+        "dir": "out",
+        "as_of": 2023
+      },
+      {
         "n": "재단법인 곽재선 문화재단",
         "kind": "public_org",
         "type": "dart_filing",
         "detail": "기타 · 2025",
         "dir": "out",
         "as_of": 2025
+      },
+      {
+        "n": "제2차모빌리티홀딩스㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2023",
+        "dir": "out",
+        "as_of": 2023
+      },
+      {
+        "n": "크라운에프앤비㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2023",
+        "dir": "out",
+        "as_of": 2023
+      },
+      {
+        "n": "할리스에프앤비㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2021",
+        "dir": "out",
+        "as_of": 2021
       }
     ],
     "valuechain": {
@@ -223,7 +291,7 @@
           "prov": "특수관계자 · 매출"
         },
         {
-          "n": "KG캐피탈㈜",
+          "n": "KG캐피탈",
           "kind": "private_corp",
           "type": "supply",
           "tier_grade": "T1",
@@ -351,7 +419,7 @@
           "prov": "특수관계자 및 주요거래의 내용 · 매출 등"
         },
         {
-          "n": "KG캐피탈㈜",
+          "n": "KG캐피탈",
           "kind": "private_corp",
           "type": "customer",
           "tier_grade": "T1",

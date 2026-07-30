@@ -6,17 +6,43 @@
   "layers": {
     "governance": [
       {
+        "n": "㈜에듀에이아이",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
         "n": "김다산",
         "kind": "person",
         "type": "associate",
         "detail": "25.18% · 2025",
         "dir": "in",
         "as_of": 2025
+      },
+      {
+        "n": "회사명",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "구분 · 2024",
+        "dir": "out",
+        "as_of": 2024
       }
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "t": "064400",
+          "n": "LG씨엔에스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3925800000.0,
+          "as_of": 2026,
+          "prov": "단일판매ㆍ공급계약체결 · (주)엘지씨엔에스"
+        }
+      ]
     }
   }
 }

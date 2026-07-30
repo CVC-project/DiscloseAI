@@ -6,6 +6,16 @@
   "layers": {
     "governance": [
       {
+        "t": "025820",
+        "n": "이구산업",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2024",
+        "dir": "in",
+        "as_of": 2024,
+        "s": "철강·금속",
+        "tier": "dot"
+      },
+      {
         "n": "손인국",
         "kind": "person",
         "type": "associate",
@@ -15,8 +25,28 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "025820",
+          "n": "이구산업",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3108426000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "t": "025820",
+          "n": "이구산업",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 142457000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래 · 별도"
+        }
+      ]
     }
   }
 }

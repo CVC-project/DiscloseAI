@@ -6,13 +6,13 @@
   "layers": {
     "governance": [
       {
-        "t": "036570",
-        "n": "NC",
+        "t": "352820",
+        "n": "하이브",
         "type": "investment",
-        "detail": "6.9% · 2025",
-        "dir": "in",
+        "detail": "9.23% · 2025",
+        "dir": "out",
         "as_of": 2025,
-        "s": "플랫폼",
+        "s": "미디어",
         "tier": "named400"
       },
       {
@@ -36,6 +36,26 @@
         "tier": "named400"
       },
       {
+        "t": "193250",
+        "n": "링크드",
+        "type": "investment",
+        "detail": "9.27% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "반도체",
+        "tier": "dot"
+      },
+      {
+        "t": "036570",
+        "n": "NC",
+        "type": "investment",
+        "detail": "6.9% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "플랫폼",
+        "tier": "named400"
+      },
+      {
         "t": "021240",
         "n": "코웨이",
         "type": "ftc_group",
@@ -56,22 +76,12 @@
         "tier": "named400"
       },
       {
-        "t": "193250",
-        "n": "링크드",
-        "type": "investment",
-        "detail": "9.27% · 2025",
-        "dir": "out",
-        "as_of": 2025,
-        "s": "반도체",
-        "tier": "dot"
-      },
-      {
         "t": "352820",
         "n": "하이브",
-        "type": "investment",
-        "detail": "9.23% · 2025",
-        "dir": "out",
-        "as_of": 2025,
+        "type": "dart_filing",
+        "detail": "유의적 영향력 · 2022",
+        "dir": "in",
+        "as_of": 2022,
         "s": "미디어",
         "tier": "named400"
       },
@@ -124,18 +134,18 @@
         "as_of": 2025
       },
       {
-        "n": "NETMARBLE HONGKONG LIMITED",
-        "kind": "private_corp",
-        "type": "subsidiary",
-        "detail": "100.0% · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
         "n": "Netmarble (Thailand) Co., Ltd.",
         "kind": "private_corp",
         "type": "subsidiary",
         "detail": "99.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "Netmarble Hongkong Limited",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
         "dir": "out",
         "as_of": 2025
       },
@@ -455,15 +465,6 @@
     "valuechain": {
       "up": [
         {
-          "t": "001040",
-          "n": "CJ",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 6606218000.0,
-          "as_of": 2025,
-          "prov": "특수관계자와의 거래 · 매출 등"
-        },
-        {
           "t": "035760",
           "n": "CJ ENM",
           "type": "customer",
@@ -471,6 +472,15 @@
           "amount": 580000000.0,
           "as_of": 2025,
           "prov": "특수관계자거래 · 매출"
+        },
+        {
+          "t": "001040",
+          "n": "CJ",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 6606218000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출 등"
         },
         {
           "t": "021240",
@@ -484,15 +494,6 @@
       ],
       "down": [
         {
-          "t": "001040",
-          "n": "CJ",
-          "type": "supply",
-          "tier_grade": "T1",
-          "amount": 17399000.0,
-          "as_of": 2025,
-          "prov": "특수관계자와의 거래 · 매입 등"
-        },
-        {
           "t": "035760",
           "n": "CJ ENM",
           "type": "supply",
@@ -500,6 +501,15 @@
           "amount": 17399000.0,
           "as_of": 2025,
           "prov": "특수관계자거래 · 매입"
+        },
+        {
+          "t": "001040",
+          "n": "CJ",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 17399000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입 등"
         },
         {
           "t": "021240",

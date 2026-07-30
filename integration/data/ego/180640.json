@@ -18,9 +18,9 @@
       {
         "t": "003490",
         "n": "대한항공",
-        "type": "ftc_group",
-        "detail": "한진 · 2025",
-        "dir": "in",
+        "type": "associate",
+        "detail": "26.13% · 2025",
+        "dir": "out",
         "as_of": 2025,
         "s": "운송·물류",
         "tier": "named400"
@@ -28,9 +28,9 @@
       {
         "t": "003490",
         "n": "대한항공",
-        "type": "associate",
-        "detail": "26.13% · 2025",
-        "dir": "out",
+        "type": "ftc_group",
+        "detail": "한진 · 2025",
+        "dir": "in",
         "as_of": 2025,
         "s": "운송·물류",
         "tier": "named400"
@@ -50,6 +50,16 @@
         "n": "대한항공",
         "type": "dart_filing",
         "detail": "유의적 영향력 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "운송·물류",
+        "tier": "named400"
+      },
+      {
+        "t": "020560",
+        "n": "아시아나항공",
+        "type": "dart_filing",
+        "detail": "지배기업 · 2025",
         "dir": "in",
         "as_of": 2025,
         "s": "운송·물류",
@@ -126,14 +136,14 @@
         "tier": "dot"
       },
       {
-        "t": "020560",
-        "n": "아시아나항공",
+        "t": "267850",
+        "n": "아시아나IDT",
         "type": "dart_filing",
-        "detail": "지배기업 · 2025",
+        "detail": "최상위 지배기업 (별도) · 2025",
         "dir": "in",
         "as_of": 2025,
-        "s": "운송·물류",
-        "tier": "named400"
+        "s": "플랫폼",
+        "tier": "dot"
       },
       {
         "n": "Hanjin Int'l Japan",
@@ -608,6 +618,15 @@
           "amount": 2434467000.0,
           "as_of": 2025,
           "prov": "특수관계자거래 · 매출 등"
+        },
+        {
+          "t": "267850",
+          "n": "아시아나IDT",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 57129000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등, 특수관계자거래 · 별도"
         },
         {
           "n": "한진정보통신㈜",

@@ -6,6 +6,16 @@
   "layers": {
     "governance": [
       {
+        "t": "012330",
+        "n": "현대모비스",
+        "type": "investment",
+        "detail": "9.0% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "자동차",
+        "tier": "named400"
+      },
+      {
         "t": "005380",
         "n": "현대자동차",
         "type": "associate",
@@ -26,16 +36,6 @@
         "tier": "named400"
       },
       {
-        "t": "012330",
-        "n": "현대모비스",
-        "type": "investment",
-        "detail": "9.0% · 2025",
-        "dir": "in",
-        "as_of": 2025,
-        "s": "자동차",
-        "tier": "named400"
-      },
-      {
         "t": "005380",
         "n": "현대자동차",
         "type": "ftc_group",
@@ -43,36 +43,6 @@
         "dir": "in",
         "as_of": 2025,
         "s": "자동차",
-        "tier": "named400"
-      },
-      {
-        "t": "004020",
-        "n": "현대제철",
-        "type": "dart_filing",
-        "detail": "대규모기업집단 · 2025",
-        "dir": "in",
-        "as_of": 2025,
-        "s": "철강·금속",
-        "tier": "named400"
-      },
-      {
-        "t": "064350",
-        "n": "현대로템",
-        "type": "dart_filing",
-        "detail": "기타 (그룹 합산) · 2025",
-        "dir": "in",
-        "as_of": 2025,
-        "s": "중공업·방산",
-        "tier": "named400"
-      },
-      {
-        "t": "307950",
-        "n": "현대오토에버",
-        "type": "dart_filing",
-        "detail": "기타 (그룹 합산) · 2025",
-        "dir": "in",
-        "as_of": 2025,
-        "s": "플랫폼",
         "tier": "named400"
       },
       {
@@ -156,6 +126,26 @@
         "tier": "named400"
       },
       {
+        "t": "064350",
+        "n": "현대로템",
+        "type": "dart_filing",
+        "detail": "기타 (그룹 합산) · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "중공업·방산",
+        "tier": "named400"
+      },
+      {
+        "t": "004020",
+        "n": "현대제철",
+        "type": "dart_filing",
+        "detail": "대규모기업집단 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "철강·금속",
+        "tier": "named400"
+      },
+      {
         "t": "004560",
         "n": "현대비앤지스틸",
         "type": "dart_filing",
@@ -164,6 +154,16 @@
         "as_of": 2024,
         "s": "철강·금속",
         "tier": "dot"
+      },
+      {
+        "t": "307950",
+        "n": "현대오토에버",
+        "type": "dart_filing",
+        "detail": "기타 (그룹 합산) · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "플랫폼",
+        "tier": "named400"
       },
       {
         "n": "ACI(필리핀)",
@@ -278,22 +278,6 @@
         "as_of": 2025
       },
       {
-        "n": "HYUNDAI DIAMOND CEMENT CORPORATION",
-        "kind": "private_corp",
-        "type": "subsidiary",
-        "detail": "70.0% · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
-        "n": "HYUNDAI E&C VINA CO., LTD.",
-        "kind": "private_corp",
-        "type": "subsidiary",
-        "detail": "100.0% · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
         "n": "HYUNDAI E&C VINA SONG GIA(베트남)",
         "kind": "private_corp",
         "type": "subsidiary",
@@ -330,6 +314,22 @@
         "kind": "private_corp",
         "type": "dart_filing",
         "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "Hyundai Diamond Cement Corporation",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "70.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "Hyundai E&C Vina CO., LTD.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
         "dir": "out",
         "as_of": 2025
       },
@@ -470,7 +470,7 @@
         "as_of": 2025
       },
       {
-        "n": "SUBIC CLEAN ENERGY & INFRA, INC.",
+        "n": "Subic Clean Energy & Infra, Inc.",
         "kind": "private_corp",
         "type": "associate",
         "detail": "40.0% · 2025",
@@ -530,6 +530,14 @@
         "kind": "private_corp",
         "type": "investment",
         "detail": "17.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜안양아삼파워",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "30.7% · 2025",
         "dir": "out",
         "as_of": 2025
       },
@@ -636,14 +644,6 @@
         "detail": "44.0% · 2025",
         "dir": "out",
         "as_of": 2025
-      },
-      {
-        "n": "새만금 세빛발전소",
-        "kind": "private_corp",
-        "type": "investment",
-        "detail": "16.0% · 2025",
-        "dir": "out",
-        "as_of": 2025
       }
     ],
     "valuechain": {
@@ -721,49 +721,22 @@
           "prov": "특수관계자 등과의 거래 · 매입 및 기타 비용, 특수관계자거래"
         },
         {
-          "t": "046940",
-          "n": "우원개발",
+          "t": "004020",
+          "n": "현대제철",
           "type": "customer",
           "tier_grade": "T1",
-          "amount": 33158000000.0,
-          "as_of": 2023,
-          "prov": "단일판매ㆍ공급계약체결 · 현대건설(주)"
-        },
-        {
-          "t": "282720",
-          "n": "금양그린파워",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 29200000000.0,
-          "as_of": 2024,
-          "prov": "단일판매ㆍ공급계약체결 · 현대건설(주)"
-        },
-        {
-          "t": "036190",
-          "n": "금화피에스시",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 42400000000.0,
-          "as_of": 2024,
-          "prov": "단일판매ㆍ공급계약체결 · 현대건설주식회사"
-        },
-        {
-          "t": "270520",
-          "n": "앱튼",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 3606000000.0,
-          "as_of": 2024,
-          "prov": "단일판매ㆍ공급계약체결 · 현대건설㈜"
-        },
-        {
-          "t": "036190",
-          "n": "금화피에스시",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 58900000000.0,
+          "amount": 401522292000.0,
           "as_of": 2025,
-          "prov": "단일판매ㆍ공급계약체결 · 현대건설(주)"
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "t": "307950",
+          "n": "현대오토에버",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 103602268000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
         },
         {
           "t": "206400",
@@ -802,22 +775,49 @@
           "prov": "단일판매ㆍ공급계약체결 · 현대건설(주)"
         },
         {
-          "t": "004020",
-          "n": "현대제철",
+          "t": "036190",
+          "n": "금화피에스시",
           "type": "customer",
           "tier_grade": "T1",
-          "amount": 401522292000.0,
+          "amount": 58900000000.0,
           "as_of": 2025,
-          "prov": "특수관계자 · 매출"
+          "prov": "단일판매ㆍ공급계약체결 · 현대건설(주)"
         },
         {
-          "t": "307950",
-          "n": "현대오토에버",
+          "t": "282720",
+          "n": "금양그린파워",
           "type": "customer",
           "tier_grade": "T1",
-          "amount": 103602268000.0,
-          "as_of": 2025,
-          "prov": "특수관계자 · 매출"
+          "amount": 29200000000.0,
+          "as_of": 2024,
+          "prov": "단일판매ㆍ공급계약체결 · 현대건설(주)"
+        },
+        {
+          "t": "036190",
+          "n": "금화피에스시",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 42400000000.0,
+          "as_of": 2024,
+          "prov": "단일판매ㆍ공급계약체결 · 현대건설주식회사"
+        },
+        {
+          "t": "270520",
+          "n": "앱튼",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3606000000.0,
+          "as_of": 2024,
+          "prov": "단일판매ㆍ공급계약체결 · 현대건설㈜"
+        },
+        {
+          "t": "046940",
+          "n": "우원개발",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 33158000000.0,
+          "as_of": 2023,
+          "prov": "단일판매ㆍ공급계약체결 · 현대건설(주)"
         },
         {
           "n": "현대카드(주)",

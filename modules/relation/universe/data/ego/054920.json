@@ -7,33 +7,23 @@
     "governance": [
       {
         "t": "030520",
-        "n": "한글과컴퓨터",
+        "n": "한컴",
         "type": "associate",
         "detail": "26.73% · 2025",
         "dir": "out",
         "as_of": 2025,
         "s": "플랫폼",
-        "tier": "dot"
+        "tier": "named400"
       },
       {
         "t": "030520",
-        "n": "한글과컴퓨터",
+        "n": "한컴",
         "type": "dart_filing",
         "detail": "유의적 영향력 · 2025",
         "dir": "in",
         "as_of": 2025,
         "s": "플랫폼",
-        "tier": "dot"
-      },
-      {
-        "t": "030520",
-        "n": "한글과컴퓨터",
-        "type": "dart_filing",
-        "detail": "관계기업 · 2025",
-        "dir": "out",
-        "as_of": 2025,
-        "s": "플랫폼",
-        "tier": "dot"
+        "tier": "named400"
       },
       {
         "t": "372910",
@@ -41,6 +31,16 @@
         "type": "dart_filing",
         "detail": "기타 · 2025",
         "dir": "out",
+        "as_of": 2025,
+        "s": "전기전자부품",
+        "tier": "dot"
+      },
+      {
+        "t": "372910",
+        "n": "한컴라이프케어",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "in",
         "as_of": 2025,
         "s": "전기전자부품",
         "tier": "dot"
@@ -94,6 +94,22 @@
         "as_of": 2025
       },
       {
+        "n": "㈜다토즈파트너스",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
+        "n": "㈜매드엑스컴퍼니",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
         "n": "㈜순돌이드론",
         "kind": "private_corp",
         "type": "dart_filing",
@@ -116,6 +132,14 @@
         "detail": "기타 · 2025",
         "dir": "out",
         "as_of": 2025
+      },
+      {
+        "n": "㈜어썸텍",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2022",
+        "dir": "out",
+        "as_of": 2022
       },
       {
         "n": "㈜에이비랩스",
@@ -170,6 +194,22 @@
         "kind": "private_corp",
         "type": "dart_filing",
         "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜한글과컴퓨터",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "26.73% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜한글과컴퓨터",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
         "dir": "out",
         "as_of": 2025
       },
@@ -270,6 +310,14 @@
         "as_of": 2025
       },
       {
+        "n": "다토즈㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
         "n": "다토즈에이티유글로벌사스기술성장사모투자 합자회사",
         "kind": "coop_fund",
         "type": "dart_filing",
@@ -342,6 +390,14 @@
         "as_of": 2025
       },
       {
+        "n": "프라움박물관",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
         "n": "한컴금거래소",
         "kind": "private_corp",
         "type": "subsidiary",
@@ -402,7 +458,7 @@
       "up": [
         {
           "t": "030520",
-          "n": "한글과컴퓨터",
+          "n": "한컴",
           "type": "customer",
           "tier_grade": "T1",
           "amount": 441142000.0,
@@ -410,8 +466,8 @@
           "prov": "특수관계자 공시 · 매출 등"
         },
         {
-          "t": "030520",
-          "n": "한글과컴퓨터",
+          "n": "㈜한글과컴퓨터",
+          "kind": "private_corp",
           "type": "supply",
           "tier_grade": "T1",
           "amount": 381916000.0,
@@ -475,20 +531,20 @@
       ],
       "down": [
         {
-          "t": "030520",
-          "n": "한글과컴퓨터",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 3682951000.0,
-          "as_of": 2025,
-          "prov": "특수관계자 · 매출 등, 특수관계자거래"
-        },
-        {
           "t": "372910",
           "n": "한컴라이프케어",
           "type": "customer",
           "tier_grade": "T1",
           "amount": 20155000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등, 특수관계자거래"
+        },
+        {
+          "n": "㈜한글과컴퓨터",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3682951000.0,
           "as_of": 2025,
           "prov": "특수관계자 · 매출 등, 특수관계자거래"
         },

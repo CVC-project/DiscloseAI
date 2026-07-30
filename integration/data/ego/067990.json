@@ -124,10 +124,36 @@
         "detail": "51.11% · 2025",
         "dir": "out",
         "as_of": 2025
+      },
+      {
+        "n": "최대주주와 대표이사",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "한국투자혁신성장스케일업사모투자합자회사",
+        "kind": "coop_fund",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "n": "최대주주",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 80869870.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등"
+        }
+      ],
       "down": []
     }
   }

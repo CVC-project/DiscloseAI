@@ -6,16 +6,6 @@
   "layers": {
     "governance": [
       {
-        "t": "079810",
-        "n": "APS이노베이션",
-        "type": "investment",
-        "detail": "10.64% · 2025",
-        "dir": "out",
-        "as_of": 2025,
-        "s": "전기전자부품",
-        "tier": "dot"
-      },
-      {
         "t": "054620",
         "n": "APS",
         "type": "associate",
@@ -26,12 +16,42 @@
         "tier": "dot"
       },
       {
+        "t": "079810",
+        "n": "APS이노베이션",
+        "type": "investment",
+        "detail": "10.64% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "전기전자부품",
+        "tier": "dot"
+      },
+      {
         "t": "348210",
         "n": "넥스틴",
         "type": "investment",
         "detail": "9.33% · 2025",
         "dir": "out",
         "as_of": 2025,
+        "s": "기계·장비",
+        "tier": "dot"
+      },
+      {
+        "t": "054620",
+        "n": "APS",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "금융",
+        "tier": "dot"
+      },
+      {
+        "t": "391710",
+        "n": "코닉오토메이션",
+        "type": "dart_filing",
+        "detail": "지배기업 (별도) · 2024",
+        "dir": "in",
+        "as_of": 2024,
         "s": "기계·장비",
         "tier": "dot"
       },
@@ -87,6 +107,15 @@
     "valuechain": {
       "up": [
         {
+          "t": "054620",
+          "n": "APS",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 7875266000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등"
+        },
+        {
           "t": "391710",
           "n": "코닉오토메이션",
           "type": "supply",
@@ -105,15 +134,6 @@
           "prov": "특수관계자 거래 · 매입 등"
         },
         {
-          "t": "054620",
-          "n": "APS",
-          "type": "supply",
-          "tier_grade": "T1",
-          "amount": 7875266000.0,
-          "as_of": 2025,
-          "prov": "특수관계자 거래 · 매입 등"
-        },
-        {
           "n": "(주)코닉세미텍",
           "kind": "private_corp",
           "type": "supply",
@@ -124,6 +144,15 @@
         }
       ],
       "down": [
+        {
+          "t": "054620",
+          "n": "APS",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 189572000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        },
         {
           "t": "391710",
           "n": "코닉오토메이션",
@@ -139,15 +168,6 @@
           "type": "customer",
           "tier_grade": "T1",
           "amount": 1140249000.0,
-          "as_of": 2025,
-          "prov": "특수관계자 거래 · 매출 등"
-        },
-        {
-          "t": "054620",
-          "n": "APS",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 189572000.0,
           "as_of": 2025,
           "prov": "특수관계자 거래 · 매출 등"
         },

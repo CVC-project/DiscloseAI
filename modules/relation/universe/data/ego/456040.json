@@ -16,6 +16,26 @@
         "tier": "named400"
       },
       {
+        "t": "010060",
+        "n": "OCI홀딩스",
+        "type": "ftc_group",
+        "detail": "오씨아이 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
+        "t": "200470",
+        "n": "에이팩트",
+        "type": "dart_filing",
+        "detail": "기타 (그룹 합산) (별도) · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "반도체",
+        "tier": "dot"
+      },
+      {
         "t": "005090",
         "n": "SGC에너지",
         "type": "dart_filing",
@@ -406,6 +426,14 @@
         "as_of": 2025
       },
       {
+        "n": "Ma Steel OCI Chemical Co., Ltd.",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "종속기업 (별도) · 2023",
+        "dir": "out",
+        "as_of": 2023
+      },
+      {
         "n": "Main Horn Solar LLC",
         "kind": "private_corp",
         "type": "dart_filing",
@@ -510,6 +538,14 @@
         "as_of": 2025
       },
       {
+        "n": "OCI China Co.,Ltd",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "종속기업 (별도) · 2023",
+        "dir": "out",
+        "as_of": 2023
+      },
+      {
         "n": "OCI Construction LLC",
         "kind": "private_corp",
         "type": "dart_filing",
@@ -548,35 +584,10 @@
         "detail": "최상위 지배기업 · 2025",
         "dir": "out",
         "as_of": 2025
-      },
-      {
-        "n": "OCI Enterprises Inc.",
-        "kind": "private_corp",
-        "type": "dart_filing",
-        "detail": "최상위 지배기업 · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
-        "n": "OCI Global Ltd.",
-        "kind": "private_corp",
-        "type": "dart_filing",
-        "detail": "최상위 지배기업 · 2025",
-        "dir": "out",
-        "as_of": 2025
       }
     ],
     "valuechain": {
       "up": [
-        {
-          "t": "014830",
-          "n": "유니드",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 547350000.0,
-          "as_of": 2025,
-          "prov": "특수관계자 · 매출 등"
-        },
         {
           "t": "003000",
           "n": "부광약품",
@@ -593,10 +604,37 @@
           "tier_grade": "T1",
           "amount": 32525010600.0,
           "as_of": 2025,
-          "prov": "특수관계자 - 연결 · 재화의 판매로 인한 수익, 특수관계자거래"
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "014830",
+          "n": "유니드",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 547350000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
         }
       ],
       "down": [
+        {
+          "t": "003000",
+          "n": "부광약품",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 25215860.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입 등"
+        },
+        {
+          "t": "005090",
+          "n": "SGC에너지",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 13270853853.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
         {
           "t": "014830",
           "n": "유니드",
@@ -607,13 +645,13 @@
           "prov": "특수관계자 · 매입 등"
         },
         {
-          "t": "003000",
-          "n": "부광약품",
-          "type": "supply",
+          "t": "010060",
+          "n": "OCI홀딩스",
+          "type": "customer",
           "tier_grade": "T1",
-          "amount": 25215860.0,
+          "amount": 5469243000.0,
           "as_of": 2025,
-          "prov": "특수관계자거래 · 매입 등"
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
         },
         {
           "t": "003000",
@@ -639,24 +677,6 @@
           "type": "customer",
           "tier_grade": "T1",
           "amount": 11299000.0,
-          "as_of": 2025,
-          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
-        },
-        {
-          "t": "005090",
-          "n": "SGC에너지",
-          "type": "supply",
-          "tier_grade": "T1",
-          "amount": 13270853853.0,
-          "as_of": 2025,
-          "prov": "특수관계자 - 연결 · 재화의 매입, 특수관계자거래"
-        },
-        {
-          "t": "010060",
-          "n": "OCI홀딩스",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 5469243000.0,
           "as_of": 2025,
           "prov": "특수관계자 거래 · 매출, 특수관계자거래"
         },

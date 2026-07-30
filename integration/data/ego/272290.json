@@ -16,18 +16,20 @@
         "tier": "dot"
       },
       {
+        "t": "088390",
+        "n": "이녹스",
+        "type": "dart_filing",
+        "detail": "유의적 영향력 · 2023",
+        "dir": "out",
+        "as_of": 2023,
+        "s": "중공업·방산",
+        "tier": "dot"
+      },
+      {
         "n": "(주)아이넥스",
         "kind": "private_corp",
         "type": "subsidiary",
         "detail": "100.0% · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
-        "n": "(주)위든",
-        "kind": "private_corp",
-        "type": "associate",
-        "detail": "36.0% · 2025",
         "dir": "out",
         "as_of": 2025
       },
@@ -54,11 +56,83 @@
         "detail": "100.0% · 2025",
         "dir": "out",
         "as_of": 2025
+      },
+      {
+        "n": "㈜아이베스트",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2023",
+        "dir": "out",
+        "as_of": 2023
+      },
+      {
+        "n": "㈜위든",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "36.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "088390",
+          "n": "이녹스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 4086571000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매입 등, 특수관계자거래"
+        },
+        {
+          "t": "123750",
+          "n": "알톤",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 16414000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매입 등, 특수관계자거래"
+        },
+        {
+          "n": "㈜위든",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 758209000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매입 등, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "088390",
+          "n": "이녹스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 92550000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매출 등, 특수관계자거래"
+        },
+        {
+          "t": "123750",
+          "n": "알톤",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 78900000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매출 등, 특수관계자거래"
+        },
+        {
+          "n": "㈜이녹스에코엠",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 543700000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매출 등, 특수관계자거래"
+        }
+      ]
     }
   }
 }

@@ -6,20 +6,20 @@
   "layers": {
     "governance": [
       {
-        "t": "018250",
-        "n": "애경산업",
-        "type": "associate",
-        "detail": "47.26% · 2025",
+        "t": "161000",
+        "n": "애경케미칼",
+        "type": "subsidiary",
+        "detail": "60.77% · 2025",
         "dir": "out",
         "as_of": 2025,
         "s": "화학",
         "tier": "dot"
       },
       {
-        "t": "161000",
-        "n": "애경케미칼",
-        "type": "subsidiary",
-        "detail": "60.77% · 2025",
+        "t": "018250",
+        "n": "애경산업",
+        "type": "associate",
+        "detail": "47.26% · 2025",
         "dir": "out",
         "as_of": 2025,
         "s": "화학",
@@ -33,6 +33,16 @@
         "dir": "out",
         "as_of": 2025,
         "s": "운송·물류",
+        "tier": "dot"
+      },
+      {
+        "t": "161000",
+        "n": "애경케미칼",
+        "type": "ftc_group",
+        "detail": "애경 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "화학",
         "tier": "dot"
       },
       {
@@ -64,7 +74,15 @@
         "as_of": 2025
       },
       {
-        "n": "애경자산관리(주)",
+        "n": "㈜에이텍 외",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2021",
+        "dir": "out",
+        "as_of": 2021
+      },
+      {
+        "n": "애경자산관리㈜",
         "kind": "private_corp",
         "type": "investment",
         "detail": "18.91% · 2025",
@@ -72,7 +90,7 @@
         "as_of": 2025
       },
       {
-        "n": "애경자산관리(주)",
+        "n": "애경자산관리㈜",
         "kind": "private_corp",
         "type": "dart_filing",
         "detail": "유의적 영향력 · 2024",
@@ -80,12 +98,20 @@
         "as_of": 2024
       },
       {
-        "n": "에이엠플러스자산개발(주)",
+        "n": "에이엠플러스자산개발㈜",
         "kind": "private_corp",
         "type": "subsidiary",
         "detail": "57.14% · 2025",
         "dir": "out",
         "as_of": 2025
+      },
+      {
+        "n": "에이엠플러스자산개발㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2021",
+        "dir": "out",
+        "as_of": 2021
       },
       {
         "n": "에이케이플라자(주)",
@@ -222,7 +248,7 @@
           "prov": "특수관계자 거래 · 매출, 특수관계자거래"
         },
         {
-          "n": "애경자산관리(주)",
+          "n": "애경자산관리㈜",
           "kind": "private_corp",
           "type": "customer",
           "tier_grade": "T1",
@@ -231,7 +257,7 @@
           "prov": "특수관계자 거래 · 매출, 특수관계자거래"
         },
         {
-          "n": "에이엠플러스자산개발(주)",
+          "n": "에이엠플러스자산개발㈜",
           "kind": "private_corp",
           "type": "customer",
           "tier_grade": "T1",
