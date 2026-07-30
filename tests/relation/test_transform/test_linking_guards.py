@@ -424,3 +424,109 @@ def test_disposed_stake_does_not_resurrect(in_memory_session):
     shown = [e for e in latest_relation_local_edges(session)
              if e.source_corp == "034730"]
     assert shown == [], "처분한 지분이 화면에 부활함"
+
+
+# ── D13 신선도 지배구조 확장 (2026-07-30, 리더 지적) ─────────────────────────
+#
+# 후속 8의 D13 채록·구현이 **밸류체인 원천 3종에서 끝나** 있었고 지배구조에는 절대
+# 연도 컷이 없었다. `latest_relation_local_edges`는 쌍별 최신만 고르므로 그 쌍을
+# 마지막으로 공시한 해가 2020이면 2020 행이 그대로 "현재 관계"로 렌더됐다
+# (실측: 화면 지배구조 36,321건 중 2023년 이하 4,320건 = 11.9%.
+#  예 — 넥스틴→Nextin Solutions LTD. 100%가 2020년 공시 기준으로 노출).
+
+def test_governance_cut_drops_pair_the_reporter_stopped_disclosing(in_memory_session):
+    """⚠️ 회귀 박제: 보고사가 최신 공시에서 더 언급하지 않은 상대는 화면에서 빠진다.
+
+    넥스틴 실측 재현 — 타법인출자 명세(보고사=출자사)의 최신 연도는 2025인데
+    Nextin Solutions는 2020에만 있다 = 처분·청산. 2020 행이 현재 관계가 되면 안 된다.
+    """
+    from modules.relation.storage.queries import current_governance_edges
+
+    session = in_memory_session
+    # 보고사 넥스틴(348210)의 최신 타법인출자 = 2025 (다른 상대)
+    session.add(RelationLocal(source_corp="348210", target_corp="005930",
+                              relation_type="investment", ratio=6.0,
+                              source_type="otrCprInvstmntSttus", bsns_year=2025,
+                              status="active"))
+    # 2020에만 있는 상대 — 그 후 명세에서 사라짐
+    session.add(RelationLocal(source_corp="348210", target_corp="x_nextinsol",
+                              relation_type="subsidiary", ratio=100.0,
+                              source_type="otrCprInvstmntSttus", bsns_year=2020,
+                              status="active"))
+    session.commit()
+
+    shown = {(e.target_corp, e.bsns_year) for e in current_governance_edges(session)}
+    assert ("005930", 2025) in shown
+    assert ("x_nextinsol", 2020) not in shown, "보고사가 더 안 올린 상대 = 현재 관계 아님"
+
+
+def test_governance_cut_is_per_reporter_not_global_year(in_memory_session):
+    """⚠️ 전역 연도 컷이 아니다(리더 승인) — 아직 2025 공시가 없는 회사의 지배구조가
+    통째로 비면 안 된다. D13이 rp_note에 쓴 '2025 미제출사 불이익 없음'과 같은 사상."""
+    from modules.relation.storage.queries import current_governance_edges
+
+    session = in_memory_session
+    session.add(RelationLocal(source_corp="111111", target_corp="005930",
+                              relation_type="investment", ratio=6.0,
+                              source_type="otrCprInvstmntSttus", bsns_year=2025,
+                              status="active"))
+    # 최신이 2024인 별개 보고사 — 전역 2025 컷이면 사라진다
+    session.add(RelationLocal(source_corp="222222", target_corp="000660",
+                              relation_type="associate", ratio=25.0,
+                              source_type="otrCprInvstmntSttus", bsns_year=2024,
+                              status="active"))
+    session.commit()
+
+    shown = {(e.source_corp, e.bsns_year) for e in current_governance_edges(session)}
+    assert ("222222", 2024) in shown, "2025 미제출사 불이익 금지"
+    assert ("111111", 2025) in shown
+
+
+def test_governance_cut_reporter_is_target_for_hyslr(in_memory_session):
+    """⚠️ 보고사가 원천마다 다르다 — hyslrSttus(최대주주 현황)는 **피출자사가 보고사**다
+    (자기 주주를 공시). source_corp(주주)를 보고사로 보면 컷이 엉뚱하게 걸린다."""
+    from modules.relation.storage.queries import current_governance_edges
+
+    session = in_memory_session
+    # 회사 333333이 2025에 주주 A를, 2020에 주주 B를 공시했다 → B는 이미 이탈
+    session.add(RelationLocal(source_corp="x_holderA", target_corp="333333",
+                              relation_type="subsidiary", ratio=55.0,
+                              source_type="hyslrSttus", bsns_year=2025, status="active"))
+    session.add(RelationLocal(source_corp="x_holderB", target_corp="333333",
+                              relation_type="subsidiary", ratio=51.0,
+                              source_type="hyslrSttus", bsns_year=2020, status="active"))
+    session.commit()
+
+    shown = {e.source_corp for e in current_governance_edges(session)}
+    assert "x_holderA" in shown
+    assert "x_holderB" not in shown
+
+
+def test_governance_cut_exempts_ftc(in_memory_session):
+    """공정위 계열 엣지는 보고 주체가 기업이 아니다(공정위 발표) → 연도 컷 비대상."""
+    from modules.relation.storage.queries import current_governance_edges
+
+    session = in_memory_session
+    session.add(RelationLocal(source_corp="005930", target_corp="006400",
+                              relation_type="ftc_group", group_name="삼성",
+                              source_type="ftc", bsns_year=2025, status="active"))
+    session.add(RelationLocal(source_corp="005930", target_corp="000660",
+                              relation_type="investment", ratio=5.0,
+                              source_type="otrCprInvstmntSttus", bsns_year=2020,
+                              status="active"))
+    session.commit()
+    shown = {(e.target_corp, e.source_type) for e in current_governance_edges(session)}
+    assert ("006400", "ftc") in shown
+
+
+def test_edge_detail_carries_disclosure_year(in_memory_session):
+    """지배구조 detail에 공시 연도가 붙는다(리더 지시). ⚠️ 콜론 금지 —
+    rl-string '이름:타입:detail' 3분할 계약(FN-010)."""
+    from modules.relation.universe.export import _edge_detail_with_year
+
+    e = RelationLocal(source_corp="005930", target_corp="006400",
+                      relation_type="subsidiary", ratio=19.9,
+                      source_type="otrCprInvstmntSttus", bsns_year=2025)
+    d = _edge_detail_with_year(e)
+    assert d == "19.9% · 2025"
+    assert ":" not in d

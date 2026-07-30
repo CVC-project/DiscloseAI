@@ -55,3 +55,63 @@ def latest_relation_local_edges(session, status: str = "active") -> list[Relatio
         return list(latest_by_key.values())
     # 쌍의 **최신 상태**가 요청 status가 아니면 그 쌍은 화면에 없다(처분·정정 반영)
     return [e for e in latest_by_key.values() if e.status == status]
+
+
+# ★2026-07-30 D13 신선도를 **지배구조로 확장** (리더 지적: "관계·밸류체인은 최근 기준 /
+# 지배구조는 2025 기준"). 후속 8의 D13 채록·구현이 **밸류체인 원천 3종에서 끝나** 있었고
+# (valuechain/freshness.py는 valuechain export 2곳에만 걸림) 지배구조에는 절대 연도 컷이
+# 없었다 — `latest_relation_local_edges`는 **쌍별 최신**만 고르므로, 그 쌍을 마지막으로
+# 공시한 해가 2020이면 2020 행이 그대로 "현재 관계"로 렌더됐다.
+#   실측(2026-07-30): 화면 지배구조 대표엣지 36,321건 중 2023년 이하 4,320건(11.9%).
+#   예) 넥스틴→Nextin Solutions LTD. 100%가 **2020년 공시 기준**으로 노출
+#       (넥스틴의 최신 타법인출자 명세는 2025인데 그 법인이 더는 안 올라온다 = 처분·청산).
+#
+# 규칙 = **보고사별 최신 연도**(전역 연도 컷이 아니다). D13이 rp_note에 쓴 사상과 동일 —
+# "2025 미제출사 불이익 없음". 실측상 상장 앵커 2,609사 중 2,605사가 최신 2025라
+# 하드 2025 컷과 결과가 99.8% 같으면서, 아직 2025 공시가 없는 4개사의 지배구조 레이어가
+# 통째로 비는 부작용만 피한다(리더 승인).
+#
+# **보고사(공시 주체)가 원천마다 다르다** — 여기가 틀리기 쉬운 지점:
+#   · otrCprInvstmntSttus(타법인출자 명세) → **출자사 = source_corp**
+#   · hyslrSttus(최대주주 현황)           → **피출자사 = target_corp** (자기 주주를 공시)
+#   · dart_filing(사업보고서 주석)         → **보고사 = source_corp** (apply_governance가 그렇게 적재)
+#   · ftc(공정위 지정)                    → 보고사가 기업이 아님(공정위 발표) → **컷 제외**
+_REPORTER_IS_TARGET = {"hyslrSttus"}
+_NO_REPORTER_CUT = {"ftc", "manual"}
+
+
+def _reporter_of(e: RelationLocal) -> str | None:
+    if e.source_type in _NO_REPORTER_CUT:
+        return None
+    corp = e.target_corp if e.source_type in _REPORTER_IS_TARGET else e.source_corp
+    return None if (corp or "").startswith("x_") else corp   # 비상장은 보고 주체가 아님
+
+
+def current_governance_edges(session, status: str = "active") -> list[RelationLocal]:
+    """화면용 지배구조 엣지 — 쌍별 최신(위) + **보고사별 최신 연도** 컷.
+
+    보고사가 그 해 공시에서 더 언급하지 않은 상대는 관계가 끝난 것으로 본다
+    (처분·청산·특수관계 해소). 저장은 전 연도 보존(D7) — 컷은 **조회/export 단계만**.
+    """
+    edges = latest_relation_local_edges(session, status=status)
+
+    # 보고사별 최신 연도는 **전 status·전 연도**를 놓고 구한다 — active만 보면 그 보고사가
+    # 올해 공시를 했는데 전량 terminated인 경우 최신 연도가 과거로 내려가 컷이 무력해진다.
+    reporter_latest: dict[str, int] = {}
+    for e in session.query(RelationLocal).all():
+        r = _reporter_of(e)
+        if r is None:
+            continue
+        y = e.bsns_year or 0
+        if y > reporter_latest.get(r, 0):
+            reporter_latest[r] = y
+
+    out = []
+    for e in edges:
+        r = _reporter_of(e)
+        if r is None:
+            out.append(e)                      # ftc·manual — 연도 컷 비대상
+            continue
+        if (e.bsns_year or 0) >= reporter_latest.get(r, 0):
+            out.append(e)
+    return out

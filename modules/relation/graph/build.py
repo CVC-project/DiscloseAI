@@ -15,7 +15,7 @@ import networkx as nx
 
 from modules.relation.storage.db import get_local_session
 from modules.relation.storage.models import CompanyNode
-from modules.relation.storage.queries import latest_relation_local_edges
+from modules.relation.storage.queries import current_governance_edges
 
 logger = logging.getLogger(__name__)
 
@@ -80,7 +80,7 @@ def build_graph() -> nx.MultiDiGraph:
         # 엣지 추가 — MultiDiGraph에서 key=relation_type으로 멀티엣지
         # 스냅샷 그래프인 graph_top50.json에는 (pair, source_type)당 최신 연도
         # 1건만 반영 — 2026-07-22 발견 회귀(연도별 rl 중복) 수정.
-        for e in latest_relation_local_edges(session):
+        for e in current_governance_edges(session):
             if e.source_corp not in G or e.target_corp not in G:
                 continue  # 노드 없으면 스킵 (안전장치)
             G.add_edge(

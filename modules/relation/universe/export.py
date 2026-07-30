@@ -21,7 +21,7 @@ from pathlib import Path
 
 from modules.relation.storage.db import get_local_session
 from modules.relation.storage.models import CompanyRegistry, ValueChainEdge
-from modules.relation.storage.queries import latest_relation_local_edges
+from modules.relation.storage.queries import current_governance_edges
 from modules.relation.valuechain.extract.related_party import GROUP_AGGREGATE_MARK
 
 logger = logging.getLogger(__name__)
@@ -90,6 +90,20 @@ def _edge_detail(e) -> str:
     if GROUP_AGGREGATE_MARK in (e.detail or ""):
         label = f"{label} ({GROUP_AGGREGATE_MARK})".strip()
     return label
+
+
+# ★2026-07-30 리더 지시 — 지배구조 detail에도 **공시 연도**를 표기한다.
+# 배경: 지배구조 엣지에는 연도 필드도 표기도 없어서(밸류체인은 UX-014 ④로 라벨에
+# 연도를 찍는다) 사용자가 2020년 관계와 2025년 관계를 **구분할 방법이 없었다**.
+# 보고사별 최신 연도 컷(queries.current_governance_edges)을 넣어도 회사마다 최신
+# 연도가 다르므로(실측 2,605사 2025 · 4사 2024 이하) 표기가 여전히 정보다.
+# ⚠️ 콜론 금지 — rl-string "이름:타입:detail" 3분할 계약(FN-010). ` · YYYY`만 붙인다.
+def _edge_detail_with_year(e) -> str:
+    label = _edge_detail(e)
+    year = e.bsns_year
+    if not year:
+        return label
+    return f"{label} · {year}" if label else str(year)
 
 _SECTOR_ID_TO_KO = {
     "semi": "반도체", "fin": "금융", "it": "플랫폼", "auto": "자동차",
@@ -180,14 +194,14 @@ def export_universe_json(session, output_path: Path | None = None) -> dict:
     rl_by_ticker: dict[str, list[tuple]] = defaultdict(list)
     edges = [
         e
-        for e in latest_relation_local_edges(session)
+        for e in current_governance_edges(session)
         if e.source_corp in named_tickers and e.target_corp in named_tickers
     ]
     for e in edges:
         target = by_ticker.get(e.target_corp)
         if not target:
             continue
-        detail = _edge_detail(e)
+        detail = _edge_detail_with_year(e)
         ratio_sort = -(e.ratio if e.ratio is not None else -1)
         rl_by_ticker[e.source_corp].append(
             (ratio_sort, f"{target.name_current}:{e.relation_type}:{detail}".replace("\n", " "))
@@ -298,7 +312,7 @@ def _build_ego_payload(
     for e in gov_edges:
         is_source = e.source_corp == company.ticker
         neighbor_ticker = e.target_corp if is_source else e.source_corp
-        detail = _edge_detail(e)
+        detail = _edge_detail_with_year(e)
         # ★U5: 비상장·개인 이웃 — `t`(티커) 없이 이름·kind만 실어 보낸다.
         # `t` 유무가 상장/비상장 판별자이며, companies_index 조회가 필요 없으므로
         # 클릭 이동(re-root) 대상에서도 자연히 배제된다(UNLISTED_PLAN §5).
@@ -313,6 +327,7 @@ def _build_ego_payload(
                     "type": e.relation_type,
                     "detail": detail,
                     "dir": "out" if is_source else "in",
+                    "as_of": e.bsns_year,
                 }
             )
             continue
@@ -326,6 +341,7 @@ def _build_ego_payload(
                 "type": e.relation_type,
                 "detail": detail,
                 "dir": "out" if is_source else "in",
+                "as_of": e.bsns_year,
                 "s": _sector_ko(neighbor.sector_id),
                 "tier": neighbor.universe_tier or "dot",
             }
@@ -390,7 +406,8 @@ def export_ego_files(session, output_dir: Path | None = None) -> dict:
     from modules.relation.storage.models import UnlistedNode
     unlisted_nodes = {u.uid: u for u in session.query(UnlistedNode).all()}
 
-    gov_edges = latest_relation_local_edges(session)
+    # ★2026-07-30 D13 신선도 지배구조 확장 — 보고사별 최신 연도 컷(queries.py docstring)
+    gov_edges = current_governance_edges(session)
     gov_by_ticker: dict[str, list] = defaultdict(list)
     for e in gov_edges:
         gov_by_ticker[e.source_corp].append(e)

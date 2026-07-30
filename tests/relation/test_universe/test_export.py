@@ -43,7 +43,10 @@ def test_export_universe_json_dedupes_multi_year_named_rl(in_memory_session, tmp
         in_memory_session, output_path=tmp_path / "universe.json"
     )
     hd = next(n for n in payload["named"] if n["t"] == "267250")
-    assert hd["rl"] == ["HD한국조선해양:associate:37.18%"]
+    # ★2026-07-30: detail에 공시 연도가 붙는다(리더 지시) — 최신 연도(2024)가 채택된
+    # 것이 라벨로도 확인된다. 콜론 금지 계약(FN-010)은 3분할이 유지되는 것으로 보장.
+    assert hd["rl"] == ["HD한국조선해양:associate:37.18% · 2024"]
+    assert hd["rl"][0].count(":") == 2
 
 
 def test_export_ego_files_dedupes_multi_year_governance(in_memory_session, tmp_path):
@@ -55,4 +58,5 @@ def test_export_ego_files_dedupes_multi_year_governance(in_memory_session, tmp_p
     ego = json.loads((tmp_path / "267250.json").read_text("utf-8"))
     gov = ego["layers"]["governance"]
     assert len(gov) == 1
-    assert gov[0]["detail"] == "37.18%"
+    assert gov[0]["detail"] == "37.18% · 2024"
+    assert gov[0]["as_of"] == 2024, "연도 필드가 실려야 화면이 관계의 나이를 안다"

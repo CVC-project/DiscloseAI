@@ -86,6 +86,7 @@ business/galaxy/eqs, 지배구조 시각화는 셸 bundle.jsx에만 존재).
 | D11 | **reports.db를 `shared/data/`로 승격** (리더 결정, v1.1). 쓰기 소유는 report 모듈 수집기 단독, 타 모듈은 read-only. relation의 자체 원문 수집(구 VcSectionCache) 폐기 | 이중 수집 해소. "정본=모듈 로컬" 원칙의 공식 예외 → ARCHITECTURE·루트 CLAUDE.md 명문화 필수 |
 | D12 | **모든 증분 처리는 멱등(idempotent)** — 자연키 unique 제약 + upsert, 재실행이 중복·유실을 만들지 않아야 함 | 기업 추가·변경 시 실수 없는 확장 (§4.5) |
 | D13 ★2026-07-29 | **신선도 정책(리더 결정)** — 화면은 현재 관계만: rp_note=보고사별 최신 주석 연도만 / supply_contract=계약 종료일(valid_until) 미경과만, 종료일 없으면 2년 컷 / biz_prose(T2)=2년 컷. 저장은 전 연도 보존(D7), **필터는 export 단계만**(`freshness.py` 정본). 실측: active 1,559 중 만료 계약 937·구연도 주석 168 등 71%가 비현재였음 | "가장 최근 기준이 논리상 맞다"(리더) — 일회성 수시공시가 수년간 현재처럼 노출되는 왜곡 차단 |
+| D13-G ★2026-07-30 | **⚠️ D13 적용 범위가 밸류체인에서 끝나 있었다 — 지배구조로 확장**: 위 D13 구현(`freshness.py`)은 valuechain export 2곳에만 걸렸고 지배구조(RelationLocal)에는 절대 연도 컷이 **없었다**. `latest_relation_local_edges`가 **쌍별 최신**만 고르므로 그 쌍을 마지막으로 공시한 해가 2020이면 그대로 현재 관계로 렌더(실측 화면 36,321건 중 2023년 이하 **4,320건=11.9%**, 넥스틴→Nextin Solutions 100%가 2020 기준). → `storage/queries.py:current_governance_edges` 신설 = 쌍별 최신 + **보고사별 최신 연도** 컷. **보고사가 원천마다 다르다**: otrCpr=출자사(source) / hyslr=피출자사(target) / dart_filing=보고사(source) / ftc=공정위라 비대상. detail에 ` · YYYY` 표기 동반. 화면 36,321 → **29,364** | 리더 지적("지배구조는 2025 기준인데 왜 2020이 있나"). 전역 하드컷이 아니라 보고사별인 이유 = D13 rp_note와 같은 "미제출사 불이익 없음"(4개사 보호). 화면 결정 = [UX-025](../../../integration/v2/UX_DECISIONS.md) |
 
 ---
 
