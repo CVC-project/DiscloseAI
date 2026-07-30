@@ -5,6 +5,29 @@
 
 ⚠️ DART 문서 구조는 기업별 편차가 있어 backfill(실데이터)에서 임계 조정 필요.
 실행: python -m modules.report.sectioner
+
+## 주석 머리글 마크업 4변종 (2026-07-30 전수 실측 — V-070)
+
+최신연도 2,570사를 전수 계측한 결과, 주석 제목 마크업이 **회사마다 4가지로 갈린다**.
+초기 구현은 F1만 알고 있었고 나머지는 통째로 미섹셔닝이었다(1,559사).
+
+| 변종 | 형태 | 사수 | 처리 |
+|---|---|---|---|
+| F1  | `<TITLE>N. 제목 (연결)</TITLE>` | 1,007 | `_split_notes` (원본 유지) |
+| F1b | `<TITLE>주석N - 제목 (연결)</TITLE>` XBRL TABLE-GROUP형 | 4 | `_NOTE_TITLE_RE` 접두·구분자 확장 |
+| F2  | 주석 절 블록 안 `<P>`/`<SPAN>`/`<TITLE>`의 `N. 제목…` | 1,545 | `_split_inbody` (신설) |
+| —   | 주석 자체가 원문에 없음(첨부 분리) | 15 | 섹션 없음 |
+
+**F1 로직은 건드리지 않는다** — 별도FS 경계 캡(`_SEP_BOUNDARY_RE`)을 잃으면 마지막
+연결주석이 문서 끝까지 삼켜 괴물블록이 된다(프로토타입에서 1,019건 재현). 새 경로는
+**F1이 아무것도 못 찾았을 때만** 폴백으로 탄다.
+
+## 별도(개별)재무제표 주석 = 연결 미작성사만 (리더 판정 2026-07-30)
+
+연결재무제표를 작성하지 않는 회사(종속기업 없음)는 개별재무제표가 유일한 재무제표라
+내부거래 미제거 문제가 성립하지 않는다 → `III.5.별도주석`으로 섹셔닝한다.
+**연결을 보유한 회사의 별도주석은 섹셔닝하지 않는다** — 같은 회사에 연결·별도 두 판의
+특수관계자 거래가 공존하면 금액 의미가 섞인다. 소비 측 표기는 relation 소관(별도 PR).
 """
 
 from __future__ import annotations
@@ -17,15 +40,37 @@ from .models import PipelineState, ReportRaw, ReportSection
 
 _HERE = os.path.dirname(__file__)
 
+_SEC_CONN = "III.3.연결주석"
+_SEC_SEP = "III.5.별도주석"
+# 주석 절 블록이 실체를 가졌다고 볼 최소 길이. 연결 미작성사의 '해당사항 없음' 절은
+# 실측 190~800자라 2만자면 넉넉히 가른다(전수에서 오탐 0 · 경계 표본 없음).
+_MIN_NOTE_BLOCK = 20_000
+# F2 노트 1건의 저장 상한 — text_html 저장 상한과 맞춰 md 변환 비용도 함께 묶는다.
+_INBODY_NOTE_CAP = 500_000
+
 # 사업의 내용 절(통짜 저장) 패턴
 _BIZ_HEAD = (r"II\.\s*사업의\s*내용", "II.사업의내용")
 # 연결재무제표 주석 = DART XML의 <TITLE>N. 제목 (연결)</TITLE> 태그로 구분 (주N 아님).
 #  · 번호는 하위번호 허용: "N", "N-M"(셀트리온), "N.M"(LG엔솔) — 구분자 [.-] 둘 다.
 #  · 제목은 tempered dot로 </TITLE>를 못 넘게 — '(연결)' 없는 사업내용 제목("6. 주요계약…")에서
 #    시작해 다음 '(연결)'까지 통째로 삼켜 428KB 괴물 블록을 만들던 사고(NAVER) 방지.
+#  · F1b: 번호 앞에 '주석' 접두가 붙는 XBRL TABLE-GROUP형도 같은 식으로 받는다 —
+#    '주석33 - 특수관계자 (연결)'(영풍)·'주석 - 38. 특수관계자거래 - 연결 (연결)'(롯데칠성·
+#    이마트) 두 표기가 실측된다. 접두를 안 받으면 F1이 0을 내고 F2 폴백이 3~4개짜리
+#    엉터리 사슬을 만든다(실측 005300·139480).
+#    A/B 전수 대조: 기존 2,559사 산출 동일 · 7사는 제목 앞 구분자('-A'→'A')만 정리되고
+#    노트 수 불변 · 신규 획득만 발생 — 경계를 옮기지 않으므로 회귀 없음.
 _NOTE_TITLE_RE = re.compile(
-    r"<TITLE[^>]*>\s*(\d{1,2}(?:[.\-]\d{1,2})?)\.?\s*"
+    r"<TITLE[^>]*>\s*(?:주\s*석\s*[-–—]?\s*)?\[?\s*"
+    r"(\d{1,2}(?:\s*[.\-]\s*(?:\d{1,2}|[A-Za-z])(?![A-Za-z]))?)\s*\]?\s*[.\-]?\s*"
     r"((?:(?!</TITLE>).)+?)\s*\(\s*연결\s*\)\s*</TITLE>",
+    re.S,
+)
+# (별도)/(개별) 접미 — 연결 미작성사에서 F1과 같은 형태를 쓰는 경우.
+_SEP_NOTE_TITLE_RE = re.compile(
+    r"<TITLE[^>]*>\s*(?:주\s*석\s*[-–—]?\s*)?\[?\s*"
+    r"(\d{1,2}(?:\s*[.\-]\s*(?:\d{1,2}|[A-Za-z])(?![A-Za-z]))?)\s*\]?\s*[.\-]?\s*"
+    r"((?:(?!</TITLE>).)+?)\s*\(\s*(?:별도|개별)\s*\)\s*</TITLE>",
     re.S,
 )
 # 연결 주석 영역의 끝 = 별도/개별 재무제표 섹션 시작(제목이 딱 '(N.) (별도/개별)?재무제표'로 끝나는 것).
@@ -35,6 +80,158 @@ _SEP_BOUNDARY_RE = re.compile(
     r"<TITLE[^>]*>\s*(?:\d+(?:[.\-]\d+)?\.?\s*)?(?:별도|개별)?재무제표\s*"
     r"(?:\(\s*별도\s*\))?\s*</TITLE>"
 )
+
+# ── F2(본문 머리글형) 지원 ─────────────────────────────────────────────
+# 목차의 주석 절 머리. 실측 절 번호는 연결='3.' 1,053사 / 별도='5.' 491사로 전량 일정.
+_TITLE_ITER_RE = re.compile(r"<TITLE[^>]*>(.{0,200}?)</TITLE>", re.S)
+_CONN_SECT_RE = re.compile(r"^\s*(?:[\d.\-]+\s*)?연결\s*재무제표\s*(?:에\s*대한\s*)?주석\s*$")
+_SEP_SECT_RE = re.compile(r"^\s*(?:[\d.\-]+\s*)?(?:별도|개별)?\s*재무제표\s*(?:에\s*대한\s*)?주석\s*$")
+# 절 블록의 끝 = 다음 목차 절. 주석 제목 자체가 <TITLE>인 변종(금융사 다수)이 있어
+# '다음 TITLE'을 경계로 삼으면 블록이 190자로 측정된다 — 목차 절만 경계로 인정한다.
+_SECT_BOUND_RE = re.compile(
+    r"^\s*(?:[IVX]+\s*\.|【)"
+    r"|^\s*[\d.\-]+\s*(?:요약재무정보|연결재무제표|재무제표|배당에\s*관한\s*사항"
+    r"|증권의\s*발행|기타\s*재무에\s*관한\s*사항|대손충당금|재고자산)\s*(?:\(.*\))?\s*$"
+)
+# 블록 안 주석 머리글 — 원소 첫머리의 'N. 제목'. 머리글 원소가 본문까지 품는 공시가
+# 많아(`<P>33. 특수관계자 거래(1) 보고기간종료일 현재…</P>`) 닫는 태그를 요구하지 않고
+# 제목은 _clean_note_title이 자른다. 뒤에 숫자·점·닫는 괄호가 오면 하위번호(2.1)·
+# 열거((1))라 제외.
+_INBODY_HDR_RE = re.compile(
+    r"<(SPAN|P|TITLE)\b[^>]*>\s*(\d{1,2})\s*\.\s*(?![\d\s.)])([^<]{1,200})", re.I
+)
+# 같은 <P> 안에서 앞 주석 본문이 끝나고 다음 머리글이 이어 붙는 공시가 있다
+# (`…희석주당이익과 동일합니다. 28. 특수관계자 (1) 지배회사는…`). 원소 첫머리만 보면
+# 그 주석이 통째로 사라진다 — 실측 28사가 이 유형이고 전부 특수관계자 주석을 잃었다.
+# 한국어 종결어미 뒤(`다.`/`요.`)만 인정해 표 셀의 번호 나열과 섞이지 않게 한다.
+# 선행 형태 실측 4종 — 공백 없이 바로 붙는 쪽이 오히려 흔하다.
+#   `…없습니다.18. 특수관계자와의 거래(1)…`   종결어미+마침표
+#   `…동일합니다32. 특수관계자`               마침표 없음
+#   `…(주석9참조).35. 특수관계자 등`          괄호+마침표
+#   `</SPAN>38. 특수관계자 거래`              강조 태그 종료 직후
+# 잡음이 섞여도 아래 최장 증가 사슬이 걸러낸다(후보가 늘어 사슬이 짧아지는 일은 없다).
+_INBODY_MID_RE = re.compile(
+    r"(?:</(?:SPAN|B|U|I|EM|STRONG)>|[다요]\.|니다|\)\.)\s{0,4}"
+    r"(\d{1,2})\s*\.\s*(?![\d\s.)])([^<]{1,200})",
+    re.I,
+)
+# 제목이 본문으로 흘러갈 때의 절단점. 소비 측 계약(relation의 title LIKE '특수관계%')이
+# 제목 접두에 걸려 있으므로 절단 규칙이 곧 재현율이다.
+_TITLE_CUT_RE = re.compile(
+    r"\(\s*\d+\s*\)|\(\s*단위|보고기간|당기말|전기말|당기와|당기\s*중|당사의|회사의\s*|"
+    r"연결회사|연결기업|다음과\s*같"
+)
+
+
+# 합본 주석 제목('10, 11. 매출채권…' · '7,8,9,22. 당기손익…')의 잔여 번호와,
+# XBRL 표기의 꼬리표('… - 연결')를 걷어낸다. 소비 측이 제목 접두로 필터하므로
+# 제목 머리에 번호가 남으면 그 노트는 도달하지 못한다.
+_TITLE_LEAD_NUM_RE = re.compile(r"^\s*\d{1,2}\s*[.,]\s*")
+_TITLE_TAIL_RE = re.compile(r"\s*[-–—]\s*(?:연결|별도|개별)\s*$")
+
+
+def _tidy_title(t: str) -> str:
+    t = _TITLE_TAIL_RE.sub("", t.strip(" :·-—.,"))
+    for _ in range(4):
+        new = _TITLE_LEAD_NUM_RE.sub("", t)
+        if new == t:
+            break
+        t = new
+    return t.strip(" :·-—.,")
+
+
+def _clean_note_title(raw: str) -> str:
+    t = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", raw)).strip()
+    cut = _TITLE_CUT_RE.split(t)[0]
+    return (_tidy_title(cut) or _tidy_title(t))[:60]
+
+
+def _find_note_section(full_xml: str, kind: str) -> str:
+    """목차의 주석 절 블록(최장) 반환 — kind in {'conn','sep'}. 없으면 ''."""
+    titles = [
+        (m.start(), re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", m.group(1))).strip())
+        for m in _TITLE_ITER_RE.finditer(full_xml)
+    ]
+
+    def is_head(t: str) -> bool:
+        if kind == "conn":
+            return bool(_CONN_SECT_RE.match(t))
+        return bool(_SEP_SECT_RE.match(t)) and "연결" not in t
+
+    best = ""
+    for i, (pos, t) in enumerate(titles):
+        if not is_head(t):
+            continue
+        end = len(full_xml)
+        for pos2, t2 in titles[i + 1 :]:
+            if (
+                _SECT_BOUND_RE.match(t2)
+                or _CONN_SECT_RE.match(t2)
+                or (_SEP_SECT_RE.match(t2) and "연결" not in t2)
+            ):
+                end = pos2
+                break
+        if end - pos > len(best):
+            best = full_xml[pos:end]
+    return best
+
+
+def _split_inbody(block: str) -> list[tuple[str, str, str]]:
+    """F2 — 절 블록 안 머리글로 주석 분할 → [(note_no, title, html), ...].
+
+    머리글 후보에는 표 본문의 '1. …' 같은 잡음이 섞이므로, **번호가 증가하는 가장 긴
+    사슬**만 채택한다(간격 4 이하). 첫 히트를 무조건 시작점으로 삼으면 절 머리 TITLE의
+    번호('3. 연결재무제표 주석')나 결번 때문에 사슬이 통째로 무너진다 — 실측 310사가
+    이 방식에서 0건이었다.
+    """
+    hits: list[tuple[int, str, int]] = []
+    for m in _INBODY_HDR_RE.finditer(block):
+        if m.start() == 0:  # 절 머리 TITLE 자신
+            continue
+        body = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", m.group(3))).strip()
+        if _CONN_SECT_RE.match(body) or _SEP_SECT_RE.match(body):
+            continue
+        hits.append((int(m.group(2)), _clean_note_title(m.group(3)), m.start()))
+    for m in _INBODY_MID_RE.finditer(block):
+        hits.append((int(m.group(1)), _clean_note_title(m.group(2)), m.start()))
+    hits.sort(key=lambda h: h[2])
+    if not hits:
+        return []
+    n = len(hits)
+    length = [1] * n
+    prev = [-1] * n
+    for i in range(n):
+        for j in range(i):
+            if hits[j][0] < hits[i][0] <= hits[j][0] + 4 and length[j] + 1 > length[i]:
+                length[i], prev[i] = length[j] + 1, j
+    idx = max(range(n), key=lambda i: length[i])
+    chain: list[tuple[int, str, int]] = []
+    while idx != -1:
+        chain.append(hits[idx])
+        idx = prev[idx]
+    chain.reverse()
+    out: list[tuple[str, str, str]] = []
+    for i, (no, title, s) in enumerate(chain):
+        e = chain[i + 1][2] if i + 1 < len(chain) else len(block)
+        out.append((str(no), title, block[s : min(e, s + _INBODY_NOTE_CAP)]))
+    return out
+
+
+def _split_sep_notes(full_xml: str) -> list[tuple[str, str, str]]:
+    """별도(개별)재무제표 주석 — 접미 (별도) 우선, 없으면 절 블록 F2."""
+    hits = list(_SEP_NOTE_TITLE_RE.finditer(full_xml))
+    if len(hits) >= 5:
+        out = []
+        for i, m in enumerate(hits):
+            if out and _note_key(m.group(1)) <= _note_key(out[-1][0]):
+                break
+            e = hits[i + 1].start() if i + 1 < len(hits) else min(len(full_xml), m.start() + 300_000)
+            title = _tidy_title(re.sub(r"\s+", " ", m.group(2)))[:60]
+            out.append((m.group(1), title, full_xml[m.start() : e]))
+        if len(out) >= 5:
+            return out
+    block = _find_note_section(full_xml, "sep")
+    return _split_inbody(block) if len(block) > _MIN_NOTE_BLOCK else []
 
 
 def _load_raw(raw_path: str) -> str | None:
@@ -66,9 +263,20 @@ def _to_md(html: str) -> str:
 
 
 def _note_key(no: str) -> tuple[int, int]:
-    """'2-1'·'11.1'·'3' → (주번호, 하위번호) 정렬키. 하위번호 없으면 0."""
-    parts = re.split(r"[.\-]", no, maxsplit=1)
-    return (int(parts[0]), int(parts[1]) if len(parts) > 1 and parts[1].isdigit() else 0)
+    """'2-1'·'11.1'·'3'·'6-A' → (주번호, 하위번호) 정렬키. 하위번호 없으면 0.
+
+    ⚠️ 알파벳 하위번호(`6-A`·`6-B`)를 못 읽으면 둘 다 주번호 6이 되어 "번호 역행 =
+    주석 끝"으로 오판하고 그 뒤 전부를 버린다 — 유안타증권은 34개 중 6개만 남고
+    특수관계자 주석(35)이 통째로 사라져 있었다(실측). A→1, B→2로 읽는다.
+    """
+    parts = [p.strip() for p in re.split(r"[.\-]", no, maxsplit=1)]
+    minor = 0
+    if len(parts) > 1 and parts[1]:
+        if parts[1].isdigit():
+            minor = int(parts[1])
+        elif parts[1][:1].isalpha():
+            minor = ord(parts[1][:1].upper()) - 64
+    return (int(parts[0]), minor)
 
 
 def _split_notes(full_xml: str) -> list[tuple[str, str, str]]:
@@ -87,19 +295,50 @@ def _split_notes(full_xml: str) -> list[tuple[str, str, str]]:
     # 연결 주석 영역 뒤에 오는 별도재무제표 섹션 시작 = 마지막 주석의 상한(과다 포획 방지)
     sb = _SEP_BOUNDARY_RE.search(full_xml, hits[0].start())
     sep = sb.start() if sb else len(full_xml)
-    out: list[tuple[str, str, str]] = []
-    for i, m in enumerate(hits):
-        no = m.group(1)
+    # ① 채택할 히트를 먼저 고르고 ② 그 다음에 구간을 자른다.
+    #    한 단계로 하면 '건너뛴 히트'의 위치가 앞 주석의 끝이 되어 본문이 잘려나간다.
+    kept: list[tuple[str, str, int]] = []
+    stop_at = sep  # 마지막 주석의 상한 — 중단 지점을 넘어 별도 주석을 삼키지 않게
+    for m in hits:
+        no = re.sub(r"\s+", "", m.group(1))  # '26. 27' → '26.27' (합본 제목)
         s = m.start()
         if s >= sep:  # 별도재무제표 섹션 진입 → 연결 주석 끝
             break
-        # 번호가 이전보다 작아지면(1로 리셋 등) 연결 주석 끝 → 중단 (N.M/N-M 하위번호 정렬)
-        if out and _note_key(no) <= _note_key(out[-1][0]):
-            break
-        title = re.sub(r"\s+", " ", m.group(2)).strip()
-        e = hits[i + 1].start() if i + 1 < len(hits) else min(len(full_xml), s + 300_000)
-        out.append((no, title, full_xml[s:min(e, sep)]))
+        if kept:
+            k, last = _note_key(no), _note_key(kept[-1][0])
+            # 번호가 1~2로 **리셋**되면 별도 주석 진입 = 연결 주석 끝(NAVER 주37 사고 방어).
+            if k[0] <= 2 and last[0] >= 5:
+                stop_at = s
+                break
+            # 리셋이 아닌 역행·중복은 종료 신호가 아니다. 종료로 오판해 버린 실측:
+            #  · 같은 번호 재등장(신세계 주16이 표별로 TITLE 2회) → 뒤 33개 소실(주42 특수관계자)
+            #  · 원문 자체의 순서 뒤바뀜(동양생명 19-A→20-A→19-B) → 뒤 15개 소실(주39 특수관계자)
+            if k == last:
+                continue
+        kept.append((no, _tidy_title(re.sub(r"\s+", " ", m.group(2))), s))
+    out: list[tuple[str, str, str]] = []
+    for i, (no, title, s) in enumerate(kept):
+        # 다음 채택 주석까지가 한 주석 — 건너뛴 중복 히트에서 끊으면 본문이 잘린다.
+        # 마지막 주석만은 중단 지점(stop_at)이 상한이다.
+        e = kept[i + 1][2] if i + 1 < len(kept) else min(len(full_xml), s + 300_000)
+        out.append((no, title, full_xml[s : min(e, stop_at)]))
     return out
+
+
+def _split_conn_notes(full_xml: str) -> list[tuple[str, str, str]]:
+    """연결주석 — F1/F1b(접미 TITLE) 우선, 아무것도 못 잡으면 F2(절 블록 본문 머리글).
+
+    F1 결과를 그대로 믿는 조건은 **주1에서 시작하거나 충분히 많을 때**다. 주석과 무관한
+    자리에 '(연결)' 접미 제목이 딱 하나 있는 공시가 있어(제이알글로벌리츠의 증권 발행 절
+    `<TITLE>5-1) 회사채 미상환 잔액(연결)</TITLE>`), 그 한 줄 때문에 F1이 1건을 돌려주고
+    폴백이 막혀 진짜 주석 33개가 통째로 사라졌다.
+    """
+    notes = _split_notes(full_xml)
+    if notes and (_note_key(notes[0][0])[0] == 1 or len(notes) >= 12):
+        return notes
+    block = _find_note_section(full_xml, "conn")
+    alt = _split_inbody(block) if len(block) > _MIN_NOTE_BLOCK else []
+    return alt if len(alt) > len(notes) else notes
 
 
 def section_all(tickers: list[str] | None = None) -> None:
@@ -133,13 +372,20 @@ def section_all(tickers: list[str] | None = None) -> None:
                 )
             )
             n += 1
-        # ② 연결재무제표 주석 → 주석 번호 단위
-        for note_no, title, note_html in _split_notes(html):
+        # ② 연결재무제표 주석 → 주석 번호 단위 (F1/F1b → F2 폴백)
+        notes = _split_conn_notes(html)
+        section_key = _SEC_CONN
+        # ③ 연결주석이 아예 없는 회사(= 연결재무제표 미작성)만 별도·개별 주석을 채운다.
+        #    연결 보유사의 별도주석은 담지 않는다(리더 판정 2026-07-30, 모듈 docstring 참조).
+        if not notes:
+            notes = _split_sep_notes(html)
+            section_key = _SEC_SEP
+        for note_no, title, note_html in notes:
             md = _to_md(note_html)
             sess.add(
                 ReportSection(
                     rcept_no=raw.rcept_no,
-                    section_key="III.3.연결주석",
+                    section_key=section_key,
                     note_no=note_no,
                     title=title,
                     text_html=note_html[:500_000],
