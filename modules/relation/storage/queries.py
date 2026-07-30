@@ -77,7 +77,31 @@ def latest_relation_local_edges(session, status: str = "active") -> list[Relatio
 #   · dart_filing(사업보고서 주석)         → **보고사 = source_corp** (apply_governance가 그렇게 적재)
 #   · ftc(공정위 지정)                    → 보고사가 기업이 아님(공정위 발표) → **컷 제외**
 _REPORTER_IS_TARGET = {"hyslrSttus"}
-_NO_REPORTER_CUT = {"ftc", "manual"}
+
+# ★2026-07-30 표본 대조 결과 dart_filing을 컷 대상에서 **제외**한다.
+#
+# 왜: 연도 컷의 전제는 "최신 공시에 없으면 관계가 끝났다"인데, 이 전제는 **원천의
+# 커버리지가 균일할 때만** 성립한다.
+#   · 지분(hyslr·otrCpr) = DART 정형 API. 전 상장사·전 연도를 에러 0으로 수집했고
+#     명세에서 빠지면 실제로 처분·해소다 → 전제 성립, 컷 유효.
+#   · dart_filing(사업보고서 주석) = **파서 커버리지가 불균일**하다. 1,550노트 중
+#     824노트가 미파싱이고, 파싱된 노트도 부분 성공이 흔하다. 그래서 "최신 연도에
+#     없음"이 종료 근거가 되지 못한다.
+# 실측(2026-07-30 표본 대조): 컷된 주석 엣지 1,374건 중 **746건(54%)이 최신 주석
+# 본문에 상대가 그대로 있는데 파싱만 놓친 것**이었다 — 롯데이노베이트→롯데지주
+# (지배기업!)·경동도시가스→경동나비엔·엘에스일렉트릭→E1 등 현재 관계 다수.
+# **우리 커버리지 공백을 데이터 사실로 오독**하는 구조 — dart_filing 소실 사고(prune
+# 소유권)·처분 부활과 같은 계열의 실수다.
+#
+# 프로젝트 원칙과의 정합: 후속14 오류1은 처분을 **명시적 근거**(최신 공시의 0%)로
+# `status='terminated'` 기록해 처리했다 — **부재는 종료의 근거가 아니다**가 이미
+# 확립된 선례다. 주석에 그 선례를 지키면 부재만으로 지울 수 없다.
+# 대신 이제 detail에 연도가 찍히므로(UX-025) 낡은 근거는 `· 2023`으로 드러난다.
+#
+# 후속 과제: 주석 종료 판정은 **최신 주석 본문 확인**으로 해야 정확하다(부재 420건은
+# 실제 종료). `apply_governance`가 노트 본문을 이미 들고 있으므로 생산자 단계에서
+# `status='terminated'`를 기록하는 것이 옳은 위치 — 후속15의 prune 조문과 같은 사상.
+_NO_REPORTER_CUT = {"ftc", "manual", "dart_filing"}
 
 
 def _reporter_of(e: RelationLocal) -> str | None:
@@ -95,16 +119,29 @@ def current_governance_edges(session, status: str = "active") -> list[RelationLo
     """
     edges = latest_relation_local_edges(session, status=status)
 
-    # 보고사별 최신 연도는 **전 status·전 연도**를 놓고 구한다 — active만 보면 그 보고사가
+    # ★2026-07-30 표본 대조에서 수정 — 최신 연도는 **(보고사, 계보)별**로 구한다.
+    # 1차 구현은 보고사별로만 구해 **원천을 섞었고**, 그 결과 자기 원천 기준으로는
+    # 최신인 엣지가 다른 원천이 더 최신이라는 이유로 잘렸다(실측 376건):
+    #   · LG이노텍 — 주석 최신 2023인데 지분이 2025 → 주석 2023 엣지 전량 컷
+    #   · 에스디바이오센서 — 주석 2024(→바이오노트)가 지분 2025에 밀려 컷
+    #   · SK리츠 — 주석 2026(비12월 결산)이 지분 2025보다 최신 → **지분 2025가** 컷
+    # 원천마다 커버리지가 다르다(주석은 파서가 못 읽은 연도가 있고, 결산월이 다르면
+    # 회계연도 자체가 어긋난다) — 한 원천의 최신 연도를 다른 원천의 기준으로 쓰면
+    # **파서 커버리지 공백을 "관계 종료"로 오독**한다. D13 원문도 "보고사별 최신
+    # **주석** 연도"로 원천을 명시하고 있다(계보별이 곧 조문 그대로의 해석).
+    # 지분 2원천(hyslr·otrCpr)은 같은 사업보고서의 두 표이므로 한 계보로 묶는다.
+    #
+    # 최신 연도는 **전 status·전 연도**를 놓고 구한다 — active만 보면 그 보고사가
     # 올해 공시를 했는데 전량 terminated인 경우 최신 연도가 과거로 내려가 컷이 무력해진다.
-    reporter_latest: dict[str, int] = {}
+    reporter_latest: dict[tuple[str, str], int] = {}
     for e in session.query(RelationLocal).all():
         r = _reporter_of(e)
         if r is None:
             continue
+        key = (r, _lineage(e.source_type))
         y = e.bsns_year or 0
-        if y > reporter_latest.get(r, 0):
-            reporter_latest[r] = y
+        if y > reporter_latest.get(key, 0):
+            reporter_latest[key] = y
 
     out = []
     for e in edges:
@@ -112,6 +149,6 @@ def current_governance_edges(session, status: str = "active") -> list[RelationLo
         if r is None:
             out.append(e)                      # ftc·manual — 연도 컷 비대상
             continue
-        if (e.bsns_year or 0) >= reporter_latest.get(r, 0):
+        if (e.bsns_year or 0) >= reporter_latest.get((r, _lineage(e.source_type)), 0):
             out.append(e)
     return out

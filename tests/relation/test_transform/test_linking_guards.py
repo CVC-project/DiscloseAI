@@ -530,3 +530,87 @@ def test_edge_detail_carries_disclosure_year(in_memory_session):
     d = _edge_detail_with_year(e)
     assert d == "19.9% · 2025"
     assert ":" not in d
+
+
+def test_governance_cut_is_per_lineage_not_per_company(in_memory_session):
+    """⚠️ 회귀 박제: 최신 연도는 **(보고사, 계보)별**로 구한다.
+
+    1차 구현이 보고사별로만 구해 원천을 섞었고, 자기 원천 기준으론 최신인 엣지가
+    다른 원천이 더 최신이라는 이유로 잘렸다(실측 376건 — LG이노텍 주석 2023이
+    지분 2025에 밀려 컷, SK리츠는 반대로 주석 2026이 지분 2025를 컷).
+    원천마다 커버리지가 다르므로(주석 파서 공백·결산월 차이) 섞으면 **커버리지
+    공백을 '관계 종료'로 오독**한다.
+    """
+    from modules.relation.storage.queries import current_governance_edges
+
+    session = in_memory_session
+    # 보고사 011070: 지분은 2025까지, 주석은 2023이 최신
+    session.add(RelationLocal(source_corp="011070", target_corp="005930",
+                              relation_type="investment", ratio=5.0,
+                              source_type="otrCprInvstmntSttus", bsns_year=2025,
+                              status="active"))
+    session.add(RelationLocal(source_corp="011070", target_corp="034220",
+                              relation_type="dart_filing", detail="사업보고서 주석: 기타",
+                              source_type="dart_filing", bsns_year=2023, status="active"))
+    session.commit()
+
+    shown = {(e.target_corp, e.source_type) for e in current_governance_edges(session)}
+    assert ("034220", "dart_filing") in shown, "주석 계보의 최신(2023)은 지분 2025에 밀리면 안 됨"
+    assert ("005930", "otrCprInvstmntSttus") in shown
+
+
+def test_governance_cut_note_year_ahead_does_not_cut_equity(in_memory_session):
+    """SK리츠 실측 재현 — 비12월 결산으로 주석 회계연도(2026)가 지분(2025)보다
+    앞서면, 섞어 계산하면 **지분이 잘린다**. 계보별이면 둘 다 살아야 한다."""
+    from modules.relation.storage.queries import current_governance_edges
+
+    session = in_memory_session
+    session.add(RelationLocal(source_corp="395400", target_corp="000660",
+                              relation_type="dart_filing", detail="사업보고서 주석: 기타",
+                              source_type="dart_filing", bsns_year=2026, status="active"))
+    session.add(RelationLocal(source_corp="x_skholder", target_corp="395400",
+                              relation_type="subsidiary", ratio=50.0,
+                              source_type="hyslrSttus", bsns_year=2025, status="active"))
+    session.commit()
+
+    shown = {(e.source_corp, e.target_corp) for e in current_governance_edges(session)}
+    assert ("395400", "000660") in shown
+    assert ("x_skholder", "395400") in shown, "주석 2026이 지분 2025를 컷하면 안 됨"
+
+
+def test_governance_cut_exempts_dart_filing_note_edges(in_memory_session):
+    """⚠️ 회귀 박제: 주석(dart_filing)은 연도 컷 **비대상**이다.
+
+    컷의 전제("최신 공시에 없으면 종료")는 원천 커버리지가 균일할 때만 성립한다.
+    주석 파서는 1,550노트 중 824노트 미파싱 + 부분 성공이 흔해 전제가 깨진다 —
+    실측: 컷된 주석 엣지 1,374건 중 **746건(54%)이 최신 주석 본문에 상대가 그대로
+    있는데 파싱만 놓친 것**(롯데이노베이트→롯데지주=지배기업 등). 우리 커버리지
+    공백을 데이터 사실로 오독하는 구조.
+    지분(API·커버리지 균일)은 컷 유지 — 두 원천을 같이 취급하면 안 된다.
+    """
+    from modules.relation.storage.queries import current_governance_edges
+
+    session = in_memory_session
+    # 같은 보고사: 주석은 2023이 마지막 파싱, 2025 주석도 일부 파싱됨
+    session.add(RelationLocal(source_corp="286940", target_corp="004990",
+                              relation_type="dart_filing", detail="사업보고서 주석: 지배기업",
+                              source_type="dart_filing", bsns_year=2024, status="active"))
+    session.add(RelationLocal(source_corp="286940", target_corp="005930",
+                              relation_type="dart_filing", detail="사업보고서 주석: 기타",
+                              source_type="dart_filing", bsns_year=2025, status="active"))
+    # 지분은 2025가 최신 → 2023 지분은 잘려야 한다(대조군)
+    session.add(RelationLocal(source_corp="286940", target_corp="000660",
+                              relation_type="investment", ratio=6.0,
+                              source_type="otrCprInvstmntSttus", bsns_year=2025,
+                              status="active"))
+    session.add(RelationLocal(source_corp="286940", target_corp="035420",
+                              relation_type="investment", ratio=7.0,
+                              source_type="otrCprInvstmntSttus", bsns_year=2023,
+                              status="active"))
+    session.commit()
+
+    shown = {(e.target_corp, e.source_type) for e in current_governance_edges(session)}
+    assert ("004990", "dart_filing") in shown, "주석 구연도는 파싱 공백일 수 있어 컷 금지"
+    assert ("005930", "dart_filing") in shown
+    assert ("000660", "otrCprInvstmntSttus") in shown
+    assert ("035420", "otrCprInvstmntSttus") not in shown, "지분 구연도는 컷 유지"
