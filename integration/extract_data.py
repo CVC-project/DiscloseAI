@@ -362,7 +362,11 @@ def sync_ego_files() -> dict:
         src_names.add(src_file.name)
         data = src_file.read_bytes()
         dst_file = dst_dir / src_file.name
-        if dst_file.exists() and hashlib.sha256(dst_file.read_bytes()).digest() == hashlib.sha256(data).digest():
+        if (
+            dst_file.exists()
+            and hashlib.sha256(dst_file.read_bytes()).digest()
+            == hashlib.sha256(data).digest()
+        ):
             unchanged += 1
             continue
         dst_file.write_bytes(data)
@@ -374,7 +378,12 @@ def sync_ego_files() -> dict:
             dst_file.unlink()
             removed += 1
 
-    return {"written": written, "unchanged": unchanged, "removed": removed, "total_src": len(src_names)}
+    return {
+        "written": written,
+        "unchanged": unchanged,
+        "removed": removed,
+        "total_src": len(src_names),
+    }
 
 
 _SECTOR_DEF_KEY_RE = re.compile(r'"([^"]+)"\s*:\s*\{\s*id\s*:')
@@ -442,7 +451,9 @@ def main() -> int:
     # universe 동기화 (U-D9) — universe.json·sectors.json·companies_index.json + ego/
     universe_written = sync_universe_json_files()
     for name, size in universe_written.items():
-        print(f"[INFO] {name} 동기화: {size:,} bytes (modules/relation/universe → integration/data)")
+        print(
+            f"[INFO] {name} 동기화: {size:,} bytes (modules/relation/universe → integration/data)"
+        )
     ego_result = sync_ego_files()
     print(
         f"[INFO] ego/ 동기화: {ego_result['written']} written · "
@@ -452,7 +463,9 @@ def main() -> int:
 
     v2_gate_failed = False
     if "sectors.json" in universe_written:
-        sectors = json.loads((INTEGRATION_DATA / "sectors.json").read_text(encoding="utf-8"))
+        sectors = json.loads(
+            (INTEGRATION_DATA / "sectors.json").read_text(encoding="utf-8")
+        )
         missing = assert_sector_palette_registered(sectors)
         if missing:
             v2_gate_failed = True
@@ -467,7 +480,9 @@ def main() -> int:
                 file=sys.stderr,
             )
         else:
-            print("[INFO] V-2 핸드오프 assert 통과 - sectors.json 전 섹터가 SECTOR_DEF에 등록됨")
+            print(
+                "[INFO] V-2 핸드오프 assert 통과 - sectors.json 전 섹터가 SECTOR_DEF에 등록됨"
+            )
 
     top50 = load_top50()
     corp_to_ticker = {

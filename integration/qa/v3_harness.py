@@ -37,11 +37,22 @@ TOP_N, SIDE_N = 6, 4  # bundle.jsx EgoView와 동일 상수 — 변경 시 양�
 # bundle.jsx를 이식하지 않고 원장 조문(UX-011)에서 다시 구현한다. 두 구현이 갈리면
 # 어느 한쪽이 계약을 어긴 것 — 그 갈림 자체가 이 하네스의 검출 대상.
 
-EGO_TYPE_MAP = {"subsidiary": "subsidiary", "associate": "associate",
-                "investment": "significant", "ftc_group": "group",
-                "dart_filing": "related", "manual": "manual"}
-PRIO = {"subsidiary": 1, "associate": 2, "investment": 3,
-        "ftc_group": 4, "dart_filing": 5, "manual": 6}
+EGO_TYPE_MAP = {
+    "subsidiary": "subsidiary",
+    "associate": "associate",
+    "investment": "significant",
+    "ftc_group": "group",
+    "dart_filing": "related",
+    "manual": "manual",
+}
+PRIO = {
+    "subsidiary": 1,
+    "associate": 2,
+    "investment": 3,
+    "ftc_group": 4,
+    "dart_filing": 5,
+    "manual": 6,
+}
 EQUITY_RAW = {"subsidiary", "associate", "investment"}
 
 
@@ -52,8 +63,16 @@ def oracle_merge(gov: list[dict]) -> list[dict]:
         t = r.get("t") or ("u:" + r["n"] if r.get("kind") else None)
         if not t:
             continue
-        e = by.setdefault(t, {"code": t, "types": [], "dir_by_type": {},
-                              "unlisted": bool(r.get("kind")), "tier": r.get("tier")})
+        e = by.setdefault(
+            t,
+            {
+                "code": t,
+                "types": [],
+                "dir_by_type": {},
+                "unlisted": bool(r.get("kind")),
+                "tier": r.get("tier"),
+            },
+        )
         if r["type"] not in e["types"]:
             e["types"].append(r["type"])
         e["dir_by_type"][r["type"]] = r.get("dir")
@@ -61,14 +80,17 @@ def oracle_merge(gov: list[dict]) -> list[dict]:
     for e in by.values():
         e["types"].sort(key=lambda t: PRIO.get(t, 9))
         primary = e["types"][0]
-        out.append({
-            "code": e["code"],
-            "unlisted": e["unlisted"], "tier": e.get("tier"),
-            # UX-011: 세로 방향은 지분 엣지의 dir — primary는 hasEquity면 항상 지분 타입
-            "incoming": e["dir_by_type"][primary] == "in",
-            "rel_type": EGO_TYPE_MAP.get(primary, "manual"),
-            "has_equity": any(t in EQUITY_RAW for t in e["types"]),
-        })
+        out.append(
+            {
+                "code": e["code"],
+                "unlisted": e["unlisted"],
+                "tier": e.get("tier"),
+                # UX-011: 세로 방향은 지분 엣지의 dir — primary는 hasEquity면 항상 지분 타입
+                "incoming": e["dir_by_type"][primary] == "in",
+                "rel_type": EGO_TYPE_MAP.get(primary, "manual"),
+                "has_equity": any(t in EQUITY_RAW for t in e["types"]),
+            }
+        )
     return out
 
 
@@ -90,8 +112,11 @@ def oracle_vc_split(vc: dict, sector_of) -> dict:
                 by[k] = e
 
     def rank(e):
-        return ({"T1": 1, "T2": 2, "T3": 3}.get(e.get("tier_grade") or "T1", 9),
-                -(e.get("amount") or 0), -(e.get("as_of") or 0))
+        return (
+            {"T1": 1, "T2": 2, "T3": 3}.get(e.get("tier_grade") or "T1", 9),
+            -(e.get("amount") or 0),
+            -(e.get("as_of") or 0),
+        )
 
     def pack(arr):
         arr = sorted(arr, key=rank)
@@ -105,17 +130,30 @@ def oracle_vc_split(vc: dict, sector_of) -> dict:
         shown_kos = order[:VC_MAX_GROUPS]
         shown = [e["t"] for ko in shown_kos for e in byko[ko][:VC_MAX_PER_GROUP]]
         rest = [e["t"] for ko in order[VC_MAX_GROUPS:] for e in byko[ko]]
-        groups = [{"ko": ko, "n": len(byko[ko]),
-                   "shown": min(len(byko[ko]), VC_MAX_PER_GROUP)} for ko in shown_kos]
-        return {"shown": set(shown), "shown_count": len(shown), "rest": len(rest),
-                "all": set(shown), "groups": groups,
-                "rest_groups": max(0, len(order) - VC_MAX_GROUPS)}
+        groups = [
+            {
+                "ko": ko,
+                "n": len(byko[ko]),
+                "shown": min(len(byko[ko]), VC_MAX_PER_GROUP),
+            }
+            for ko in shown_kos
+        ]
+        return {
+            "shown": set(shown),
+            "shown_count": len(shown),
+            "rest": len(rest),
+            "all": set(shown),
+            "groups": groups,
+            "rest_groups": max(0, len(order) - VC_MAX_GROUPS),
+        }
 
     out_a = pack([e for e in by.values() if e["type"] == "supply"])
     out_b = pack([e for e in by.values() if e["type"] != "supply"])
     # UX-019: 아래(고객사) 그룹 표시 순서 = 위(공급처)와 공통 섹터 우선 동일 순서
     a_order = [g["ko"] for g in out_a["groups"]]
-    out_b["groups"].sort(key=lambda g: (a_order.index(g["ko"]) if g["ko"] in a_order else len(a_order)))
+    out_b["groups"].sort(
+        key=lambda g: (a_order.index(g["ko"]) if g["ko"] in a_order else len(a_order))
+    )
     return {"above": out_a, "below": out_b}
 
 
@@ -126,19 +164,25 @@ def oracle_split(gov: list[dict]) -> dict:
     sides = {
         "above": [n["code"] for n in vertical if n["incoming"]],
         "below": [n["code"] for n in vertical if not n["incoming"]],
-        "left":  [n["code"] for n in horizontal if n["rel_type"] == "group"],
+        "left": [n["code"] for n in horizontal if n["rel_type"] == "group"],
         "right": [n["code"] for n in horizontal if n["rel_type"] != "group"],
     }
     out = {}
     for k, arr in sides.items():
         cap = TOP_N if k in ("above", "below") else SIDE_N
-        out[k] = {"shown": set(arr[:cap]) if len(arr) <= cap else None,  # 랭킹 동순위 모호 → 컷 초과 시 집합 대신 개수만 판정
-                  "shown_count": min(len(arr), cap), "rest": max(0, len(arr) - cap),
-                  "all": set(arr)}
+        out[k] = {
+            "shown": (
+                set(arr[:cap]) if len(arr) <= cap else None
+            ),  # 랭킹 동순위 모호 → 컷 초과 시 집합 대신 개수만 판정
+            "shown_count": min(len(arr), cap),
+            "rest": max(0, len(arr) - cap),
+            "all": set(arr),
+        }
     return out
 
 
 # ── 시나리오 자동 선정 ────────────────────────────────────────────────────────
+
 
 def load_ego(ticker: str) -> dict:
     return json.loads((EGO_DIR / f"{ticker}.json").read_text(encoding="utf-8"))
@@ -156,20 +200,28 @@ def pick_scenarios() -> list[dict]:
         if not gov:
             continue
         merged = oracle_merge(gov)
-        stats.append({
-            "t": d["t"], "n": d["n"], "neighbors": len(merged),
-            "has_ftc": any("group" == m["rel_type"] or True for m in []) or any(
-                e.get("type") == "ftc_group" for e in gov),
-            "equity_cnt": sum(1 for m in merged if m["has_equity"]),
-            "meta": by_t.get(d["t"], {}),
-        })
+        stats.append(
+            {
+                "t": d["t"],
+                "n": d["n"],
+                "neighbors": len(merged),
+                "has_ftc": any("group" == m["rel_type"] or True for m in [])
+                or any(e.get("type") == "ftc_group" for e in gov),
+                "equity_cnt": sum(1 for m in merged if m["has_equity"]),
+                "meta": by_t.get(d["t"], {}),
+            }
+        )
     named = [s for s in stats if s["meta"].get("tier") == "named400"]
     s1 = max((s for s in named if s["has_ftc"]), key=lambda s: s["neighbors"])
     s2_pool = [s for s in named if not s["has_ftc"] and s["equity_cnt"] >= 2]
     s2 = max(s2_pool, key=lambda s: s["neighbors"])
-    s3_pool = [s for s in stats
-               if s["meta"].get("mkt") == "KOSDAQ" and s["meta"].get("tier") == "dot"
-               and s["meta"].get("cb", 9) == 0]
+    s3_pool = [
+        s
+        for s in stats
+        if s["meta"].get("mkt") == "KOSDAQ"
+        and s["meta"].get("tier") == "dot"
+        and s["meta"].get("cb", 9) == 0
+    ]
     s3 = sorted(s3_pool, key=lambda s: s["t"])[0]
     return [
         {"label": "S1 대기업 계열", "t": s1["t"], "n": s1["n"], "meta": s1["meta"]},
@@ -179,6 +231,7 @@ def pick_scenarios() -> list[dict]:
 
 
 # ── [D] 데이터 계약 체크 (브라우저 불요, 전 파일) ────────────────────────────
+
 
 def data_checks() -> list[dict]:
     index = json.loads(INDEX_PATH.read_text(encoding="utf-8"))
@@ -194,28 +247,60 @@ def data_checks() -> list[dict]:
             if e.get("type") == "dart_filing":
                 n_filing += 1
                 if not e.get("detail"):
-                    fails.append({"check": "FN-010 dart_filing detail non-empty",
-                                  "file": f.name, "edge": e.get("t")})
+                    fails.append(
+                        {
+                            "check": "FN-010 dart_filing detail non-empty",
+                            "file": f.name,
+                            "edge": e.get("t"),
+                        }
+                    )
             if ":" in (e.get("detail") or ""):
-                fails.append({"check": "detail에 콜론 금지(rl-string 3분할 보호)",
-                              "file": f.name, "edge": e.get("t")})
+                fails.append(
+                    {
+                        "check": "detail에 콜론 금지(rl-string 3분할 보호)",
+                        "file": f.name,
+                        "edge": e.get("t"),
+                    }
+                )
             # ★U5(2026-07-29) 규칙 개정: 이웃은 이제 두 종류다 —
             #   · `t` 있는 이웃 = 상장사 → companies_index에 존재해야 함(기존 계약)
             #   · `t` 없는 이웃 = 비상장·개인 → ego 파일이 이름·kind를 자급하므로
             #     index 조회 대상이 아니다(앵커-로컬, UNLISTED_PLAN §5).
             # 불변식의 의도(dangling 참조 금지)는 유지하고 적용 범위만 좁힌다.
             if e.get("t") and e["t"] not in known:
-                fails.append({"check": "이웃 티커 참조 무결성(companies_index)",
-                              "file": f.name, "edge": e.get("t")})
+                fails.append(
+                    {
+                        "check": "이웃 티커 참조 무결성(companies_index)",
+                        "file": f.name,
+                        "edge": e.get("t"),
+                    }
+                )
             if not e.get("t"):
                 if not e.get("kind"):
-                    fails.append({"check": "U5: 비상장 이웃은 kind 필수",
-                                  "file": f.name, "edge": e.get("n")})
+                    fails.append(
+                        {
+                            "check": "U5: 비상장 이웃은 kind 필수",
+                            "file": f.name,
+                            "edge": e.get("n"),
+                        }
+                    )
                 if not e.get("n"):
-                    fails.append({"check": "U5: 비상장 이웃은 표기(n) 필수",
-                                  "file": f.name, "edge": repr(e)[:60]})
-    return [{"name": "data", "files": n_files, "dart_filing_edges": n_filing,
-             "failures": fails, "ok": not fails}]
+                    fails.append(
+                        {
+                            "check": "U5: 비상장 이웃은 표기(n) 필수",
+                            "file": f.name,
+                            "edge": repr(e)[:60],
+                        }
+                    )
+    return [
+        {
+            "name": "data",
+            "files": n_files,
+            "dart_filing_edges": n_filing,
+            "failures": fails,
+            "ok": not fails,
+        }
+    ]
 
 
 # ── [O]+[R] 브라우저 시나리오 ────────────────────────────────────────────────
@@ -272,12 +357,15 @@ TOGGLE_VC_JS = """async (target) => {
 
 def run_scenario(browser, scenario: dict) -> dict:
     from playwright.sync_api import Error as PwError  # noqa: F401
+
     t, name = scenario["t"], scenario["n"]
     meta = scenario["meta"]
     res = {"label": scenario["label"], "ticker": t, "name": name, "checks": []}
 
     def check(cname, ok, detail=""):
-        res["checks"].append({"check": cname, "ok": bool(ok), "detail": str(detail)[:200]})
+        res["checks"].append(
+            {"check": cname, "ok": bool(ok), "detail": str(detail)[:200]}
+        )
 
     page = browser.new_page(viewport={"width": 1600, "height": 900})
     errors = []
@@ -295,13 +383,21 @@ def run_scenario(browser, scenario: dict) -> dict:
         # [R] 렌더 실측
         check("R: ego 캔버스 마운트", got["egoCanvas"])
         cb, sb = got.get("canvasBox"), got.get("stageBox")
-        check("R: 캔버스=스테이지 크기(FN-009)",
-              cb and sb and abs(cb["w"] - sb["w"]) < 3 and abs(cb["h"] - sb["h"]) < 3,
-              f"canvas={cb} stage={sb}")
-        check("R: 토글 정확히 2개(UX-012)",
-              got["topbarButtons"] == ["지배구조", "밸류체인"], got["topbarButtons"])
-        check("R: __egoDebug 앵커 일치", dbg and dbg.get("anchor") == t,
-              dbg and dbg.get("anchor"))
+        check(
+            "R: 캔버스=스테이지 크기(FN-009)",
+            cb and sb and abs(cb["w"] - sb["w"]) < 3 and abs(cb["h"] - sb["h"]) < 3,
+            f"canvas={cb} stage={sb}",
+        )
+        check(
+            "R: 토글 정확히 2개(UX-012)",
+            got["topbarButtons"] == ["지배구조", "밸류체인"],
+            got["topbarButtons"],
+        )
+        check(
+            "R: __egoDebug 앵커 일치",
+            dbg and dbg.get("anchor") == t,
+            dbg and dbg.get("anchor"),
+        )
 
         # [O] 오라클 대조 — 축 소속·개수·잔여
         gov = (load_ego(t).get("layers") or {}).get("governance") or []
@@ -310,27 +406,45 @@ def run_scenario(browser, scenario: dict) -> dict:
             for side in ("above", "below", "left", "right"):
                 actual = dbg.get(side) or []
                 e = exp[side]
-                ok_cnt = len(actual) == e["shown_count"] and dbg.get(side + "Rest") == e["rest"]
+                ok_cnt = (
+                    len(actual) == e["shown_count"]
+                    and dbg.get(side + "Rest") == e["rest"]
+                )
                 # 컷 미발동(전원 표시)이면 집합까지, 컷 발동이면 소속(all 부분집합)만
-                ok_set = (set(actual) == e["shown"]) if e["shown"] is not None \
+                ok_set = (
+                    (set(actual) == e["shown"])
+                    if e["shown"] is not None
                     else set(actual).issubset(e["all"])
-                check(f"O: {side} 분할 (개수 {e['shown_count']}·잔여 {e['rest']})",
-                      ok_cnt and ok_set,
-                      f"actual={sorted(actual)} rest={dbg.get(side + 'Rest')}")
-            shown_all = set().union(*[set(dbg.get(s) or []) for s in ("above", "below", "left", "right")])
+                )
+                check(
+                    f"O: {side} 분할 (개수 {e['shown_count']}·잔여 {e['rest']})",
+                    ok_cnt and ok_set,
+                    f"actual={sorted(actual)} rest={dbg.get(side + 'Rest')}",
+                )
+            shown_all = set().union(
+                *[set(dbg.get(s) or []) for s in ("above", "below", "left", "right")]
+            )
             rendered = set(dbg.get("renderedCodes") or [])
-            check("R: shown 전원 실제 렌더(히트 타깃)", shown_all <= rendered,
-                  f"missing={sorted(shown_all - rendered)}")
-        check("R: 지배구조 범례(EDGE TYPOLOGY)", got.get("legendTitle") == "EDGE TYPOLOGY",
-              got.get("legendTitle"))
+            check(
+                "R: shown 전원 실제 렌더(히트 타깃)",
+                shown_all <= rendered,
+                f"missing={sorted(shown_all - rendered)}",
+            )
+        check(
+            "R: 지배구조 범례(EDGE TYPOLOGY)",
+            got.get("legendTitle") == "EDGE TYPOLOGY",
+            got.get("legendTitle"),
+        )
 
         # ── U3: 밸류체인 레이어 — 토글·UX-013 오라클·범례 교체(U-D14) ──
         ego = load_ego(t)
         vc = (ego.get("layers") or {}).get("valuechain") or {}
         has_vc = bool((vc.get("up") or []) or (vc.get("down") or []))
-        check("R: 밸류체인 토글 활성 상태 = 데이터 유무 일치",
-              got.get("vcBtnDisabled") == (not has_vc),
-              f"disabled={got.get('vcBtnDisabled')} hasVc={has_vc}")
+        check(
+            "R: 밸류체인 토글 활성 상태 = 데이터 유무 일치",
+            got.get("vcBtnDisabled") == (not has_vc),
+            f"disabled={got.get('vcBtnDisabled')} hasVc={has_vc}",
+        )
         if has_vc:
             tog = page.evaluate(TOGGLE_VC_JS, "밸류체인")
             if not tog.get("ok"):
@@ -338,10 +452,16 @@ def run_scenario(browser, scenario: dict) -> dict:
             else:
                 got2 = page.evaluate(COLLECT_JS)
                 dbg2 = got2.get("dbg") or {}
-                check("VC: __egoDebug.layer 전환", dbg2.get("layer") == "valuechain",
-                      dbg2.get("layer"))
-                check("VC: 범례 교체(FLOW TYPOLOGY, U-D14)",
-                      got2.get("legendTitle") == "FLOW TYPOLOGY", got2.get("legendTitle"))
+                check(
+                    "VC: __egoDebug.layer 전환",
+                    dbg2.get("layer") == "valuechain",
+                    dbg2.get("layer"),
+                )
+                check(
+                    "VC: 범례 교체(FLOW TYPOLOGY, U-D14)",
+                    got2.get("legendTitle") == "FLOW TYPOLOGY",
+                    got2.get("legendTitle"),
+                )
                 index_all = json.loads(INDEX_PATH.read_text(encoding="utf-8"))
                 sec_by_t = {c["t"]: c.get("s") for c in index_all}
                 vexp = oracle_vc_split(vc, lambda tk: sec_by_t.get(tk))
@@ -349,26 +469,39 @@ def run_scenario(browser, scenario: dict) -> dict:
                 for side in ("above", "below"):
                     actual = dbg2.get(side) or []
                     e = vexp[side]
-                    ok_cnt = len(actual) == e["shown_count"] and dbg2.get(side + "Rest") == e["rest"]
+                    ok_cnt = (
+                        len(actual) == e["shown_count"]
+                        and dbg2.get(side + "Rest") == e["rest"]
+                    )
                     ok_set = set(actual) == e["shown"]
-                    check(f"VC-O: {side} 흐름 분할 (개수 {e['shown_count']}·잔여 {e['rest']}, UX-013)",
-                          ok_cnt and ok_set,
-                          f"actual={sorted(actual)} rest={dbg2.get(side + 'Rest')}")
+                    check(
+                        f"VC-O: {side} 흐름 분할 (개수 {e['shown_count']}·잔여 {e['rest']}, UX-013)",
+                        ok_cnt and ok_set,
+                        f"actual={sorted(actual)} rest={dbg2.get(side + 'Rest')}",
+                    )
                     # UX-015 산업군 묶음 — 그룹 순서·산업명·소속 기업 수까지 대조
                     gact = vg.get(side) or []
-                    check(f"VC-G: {side} 산업군 묶음 {[g['ko'] for g in e['groups']]}",
-                          gact == e["groups"] and vg.get(side + "RestGroups") == e["rest_groups"],
-                          f"actual={gact} restGroups={vg.get(side + 'RestGroups')}")
-                check("VC: 가로축 없음(문법 축 분리)",
-                      not (dbg2.get("left") or []) and not (dbg2.get("right") or []),
-                      f"left={dbg2.get('left')} right={dbg2.get('right')}")
+                    check(
+                        f"VC-G: {side} 산업군 묶음 {[g['ko'] for g in e['groups']]}",
+                        gact == e["groups"]
+                        and vg.get(side + "RestGroups") == e["rest_groups"],
+                        f"actual={gact} restGroups={vg.get(side + 'RestGroups')}",
+                    )
+                check(
+                    "VC: 가로축 없음(문법 축 분리)",
+                    not (dbg2.get("left") or []) and not (dbg2.get("right") or []),
+                    f"left={dbg2.get('left')} right={dbg2.get('right')}",
+                )
                 shot_vc = OUT_DIR / f"{scenario['label'].split()[0]}_{t}_vc.png"
                 page.screenshot(path=str(shot_vc))
                 # 지배구조 복귀 — 범례 되돌아오는지까지
                 page.evaluate(TOGGLE_VC_JS, "지배구조")
                 got3 = page.evaluate(COLLECT_JS)
-                check("VC: 지배구조 복귀 시 범례 원복",
-                      got3.get("legendTitle") == "EDGE TYPOLOGY", got3.get("legendTitle"))
+                check(
+                    "VC: 지배구조 복귀 시 범례 원복",
+                    got3.get("legendTitle") == "EDGE TYPOLOGY",
+                    got3.get("legendTitle"),
+                )
 
         check("R: JS 페이지 에러 0건", not errors, errors[:2])
 
@@ -394,19 +527,34 @@ def main() -> int:
             report["scenarios"].append(run_scenario(browser, sc))
         browser.close()
 
-    all_checks = ([c for d in report["data"] for c in [{"check": "D: " + f["check"], "ok": False, "detail": f} for f in d["failures"]]]
-                  or [{"check": "D: 전 ego 파일 데이터 계약", "ok": True, "detail": report["data"][0]}])
+    all_checks = [
+        c
+        for d in report["data"]
+        for c in [
+            {"check": "D: " + f["check"], "ok": False, "detail": f}
+            for f in d["failures"]
+        ]
+    ] or [{"check": "D: 전 ego 파일 데이터 계약", "ok": True, "detail": report["data"][0]}]
     all_checks += [c for s in report["scenarios"] for c in s["checks"]]
     n_fail = sum(1 for c in all_checks if not c["ok"])
-    report["summary"] = {"total": len(all_checks), "fail": n_fail,
-                         "verdict": "PASS" if n_fail == 0 else "FAIL"}
+    report["summary"] = {
+        "total": len(all_checks),
+        "fail": n_fail,
+        "verdict": "PASS" if n_fail == 0 else "FAIL",
+    }
     (OUT_DIR / "report.json").write_text(
-        json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+        json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
 
     for c in all_checks:
-        print(("PASS " if c["ok"] else "FAIL "), c["check"],
-              ("" if c["ok"] else " | " + str(c["detail"])[:160]))
-    print(f"== V-3 {report['summary']['verdict']} ({len(all_checks) - n_fail}/{len(all_checks)}) -> {OUT_DIR / 'report.json'}")
+        print(
+            ("PASS " if c["ok"] else "FAIL "),
+            c["check"],
+            ("" if c["ok"] else " | " + str(c["detail"])[:160]),
+        )
+    print(
+        f"== V-3 {report['summary']['verdict']} ({len(all_checks) - n_fail}/{len(all_checks)}) -> {OUT_DIR / 'report.json'}"
+    )
     return 0 if n_fail == 0 else 1
 
 
