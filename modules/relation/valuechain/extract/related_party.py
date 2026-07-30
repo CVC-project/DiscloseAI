@@ -1266,6 +1266,125 @@ def strip_group_aggregate(name: str) -> str | None:
     return base if base and base != name.strip() else None
 
 
+# ★2026-07-30 (후속 18) 주석 관계 **종료 판정 = 최신 주석 본문 확인**.
+#
+# 배경: 후속16의 연도 컷을 주석에 걸었더니 컷 1,374건 중 746건(54%)이 **최신 주석에
+# 상대가 그대로 있는데 파싱만 놓친 것**이었다(후속17에서 주석을 컷 비대상으로 되돌림).
+# 남은 문제는 그 반대편 — 최신 주석 본문에도 **정말 없는** 420건이 계속 현재 관계로
+# 남는다는 것. 연도 컷은 이 둘을 구분할 수 없다(둘 다 "최신 연도에 파싱 결과 없음").
+#
+# 해법: **부재를 본문으로 확인**한 뒤에만 종료로 기록한다 — 후속14 오류1이 처분을
+# 명시적 근거로 `status='terminated'`로 남긴 선례와 같은 형태. 생산자(이 함수)가
+# 노트 본문을 이미 들고 있으므로 판정 위치도 여기가 맞다(후속15 prune 조문과 같은 사상).
+# 파싱 성공 여부와 무관하게 원문 텍스트는 항상 있으므로, **미파싱 노트에도 작동**한다.
+#
+# ⚠️ 오류 방향을 안전하게 고정한다: 이름을 못 찾으면 종료로 기록하므로 **별칭 누락이
+# 곧 오컷**이다(음차 `엘지디스플레이` vs 사명 `LG디스플레이`, 구사명 등). 그래서
+#   ① 후보 이름은 **링커가 인정하는 집합 그대로**를 쓴다(build_name_to_corp_map 역전 —
+#      registry 사명 + CompanyAlias + 음차 변형)
+#   ② 비상장 상대는 UnlistedNode.name_raw가 **원문 표기 그대로**라 가장 확실하다
+#   ③ 후보 이름을 하나도 못 만들면 **종료로 기록하지 않는다**(판정 보류 = 현행 유지)
+# 짧은 이름이 우연히 걸려 "존재"로 판정되는 쪽은 안전한 오류다(관계를 살려둔다).
+_FLATTEN_RE = re.compile(r"[^0-9A-Za-z가-힣]+")
+
+
+def _flatten_for_search(s: str | None) -> str:
+    """본문·이름 공통 평탄화 — 공백·괄호·구두점 제거 + 대문자화."""
+    return _FLATTEN_RE.sub("", (s or "")).upper()
+
+
+def _names_by_corp(session) -> dict[str, set[str]]:
+    """corp_code → 그 회사로 링킹되는 표기 집합(평탄화) — name_to_corp 역전."""
+    from modules.relation.valuechain.extract.linking import build_name_to_corp_map
+    from modules.relation.storage.models import CompanyRegistry
+
+    out: dict[str, set[str]] = {}
+    for norm_name, corp in build_name_to_corp_map(session).items():
+        flat = _flatten_for_search(norm_name)
+        if flat:
+            out.setdefault(corp, set()).add(flat)
+    # 정규화가 접미어를 떼기 전 원형(사명 그대로)도 후보에 넣는다
+    for name, corp in session.query(
+        CompanyRegistry.name_current, CompanyRegistry.corp_code
+    ).all():
+        flat = _flatten_for_search(name)
+        if flat:
+            out.setdefault(corp, set()).add(flat)
+    return out
+
+
+def terminate_absent_note_relations(session, sections: list[dict]) -> dict:
+    """보고사의 **최신 주석 본문에 없는** 구연도 dart_filing 관계를 terminated로 기록.
+
+    Returns: {'reporters_checked', 'terminated', 'kept_parser_gap', 'undecidable'}
+    """
+    from modules.relation.storage.models import CompanyRegistry, UnlistedNode
+
+    ticker_by_corp = {
+        r.corp_code: r.ticker for r in session.query(CompanyRegistry).all()
+    }
+    corp_by_ticker = {v: k for k, v in ticker_by_corp.items()}
+    names_by_corp = _names_by_corp(session)
+    unlisted_name = {
+        u.uid: u.name_raw for u in session.query(UnlistedNode).all()
+    }
+
+    # 보고사별 최신 주석 연도 → 그 연도 노트 본문만 평탄화해 보관(메모리 절약)
+    latest_year: dict[str, int] = {}
+    for row in sections:
+        t = ticker_by_corp.get(row["corp_code8"])
+        if not t:
+            continue
+        y = row["fiscal_year"] or 0
+        if y > latest_year.get(t, 0):
+            latest_year[t] = y
+    latest_text: dict[str, str] = {}
+    for row in sections:
+        t = ticker_by_corp.get(row["corp_code8"])
+        if not t or (row["fiscal_year"] or 0) != latest_year.get(t):
+            continue
+        latest_text[t] = latest_text.get(t, "") + _flatten_for_search(
+            (row.get("text_md") or "") + " " + (row.get("text_html") or "")
+        )
+
+    counters = {
+        "reporters_checked": 0,
+        "terminated": 0,
+        "kept_parser_gap": 0,
+        "undecidable": 0,
+    }
+    rows = session.query(RelationLocal).filter_by(source_type="dart_filing").all()
+    by_reporter: dict[str, list] = {}
+    for r in rows:
+        by_reporter.setdefault(r.source_corp, []).append(r)
+
+    for reporter, edges in by_reporter.items():
+        newest = latest_year.get(reporter)
+        text = latest_text.get(reporter)
+        if not newest or not text:
+            continue
+        counters["reporters_checked"] += 1
+        newest_targets = {e.target_corp for e in edges if (e.bsns_year or 0) >= newest}
+        for e in edges:
+            if (e.bsns_year or 0) >= newest or e.target_corp in newest_targets:
+                continue  # 최신 연도분이거나 최신 연도에도 파싱된 상대 — 판정 대상 아님
+            tgt = e.target_corp
+            if tgt.startswith("x_"):
+                cands = {_flatten_for_search(unlisted_name.get(tgt))} - {""}
+            else:
+                cands = names_by_corp.get(corp_by_ticker.get(tgt, ""), set())
+            if not cands:
+                counters["undecidable"] += 1
+                continue                      # 후보 이름 없음 → 판정 보류(현행 유지)
+            if any(c in text for c in cands):
+                counters["kept_parser_gap"] += 1   # 본문에 있다 = 파싱 공백, 관계 유지
+                continue
+            if e.status != "terminated":
+                e.status = "terminated"
+            counters["terminated"] += 1
+    return counters
+
+
 def _upsert_relation_local_dart_filing(session, **fields) -> None:
     """UNIQUE(source_corp, target_corp, source_type, bsns_year) upsert — transform/filters.py
     의 동일 패턴 준용(U-D13 멱등 키). source_type은 항상 "dart_filing"."""
@@ -1457,6 +1576,12 @@ def apply_governance(
                 if key not in touched_keys:
                     session.delete(r)
                     counters["pruned_stale"] += 1
+
+        # ★2026-07-30 (후속18) 종료 판정 — **최신 주석 본문에 없는** 구연도 관계만
+        # terminated. upsert가 매 실행 status를 active로 되돌리므로 **upsert 뒤·prune 뒤**
+        # 순서가 중요하다(멱등: 다음 실행에서 같은 판정이 다시 내려진다).
+        session.flush()
+        counters["note_termination"] = terminate_absent_note_relations(session, sections)
 
         # ★U5: 엣지가 사라진 비상장 노드 정리 (참조 무결성 기준)
         session.flush()

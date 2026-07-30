@@ -172,6 +172,19 @@ _ORPHAN_MARKER_RE = re.compile(r"^\d+\s*\)$")                     # '2)' — 각
 _FOOTNOTE_PREFIX_RE = re.compile(r"^(?:주|\*|note)\s*\d*\s*\)")   # '주1) (주)훼미모드'
 _GROUP_TOTAL_RE = re.compile(r"등\s*(?:기타\s*)?\d+\s*개\s*사")     # '㈜A 등 기타 104개사'
 _UNIT_HEADER_RE = re.compile(r"^\(?\s*단위\s*[:：]")                # '(단위: 원)' — 표 머리글
+# ★2026-07-30 (후속18): 각주 **서술 문장**이 회사명 칸으로 들어온다(실측 49건).
+# 법인 표지(㈜·주식회사·LTD)를 품고 있어 카테고리·거래어휘 게이트를 통과했다 —
+# 예: '(주)KG프레시는 당기 중 (주)KG에프앤비에 흡수합병 되었습니다.',
+#     '연결회사는 2025년 1월 2일 (주)화인어프라이언스의 지분을 취득하여…',
+#     '공정거래위원회가 지정한 대규모기업집단계열회사는 … 의결사항에 따라 …'
+# ⚠️ **길이로 판정하지 않는다** — 실존 외국 사명이 40자를 넘는 경우가 흔하다
+# ('HYUNDAI MOTOR GROUP INNOVATION CENTER IN SINGAPORE PTE. LTD.' 등 실측).
+# 오직 **서술 표지**(종결어미·주체 서술구)로만 잡는다.
+_SENTENCE_FORM_RE = re.compile(
+    r"하였습니다|되었습니다|하였음|되었음|합니다|입니다|하였고|되었고|바랍니다"
+    r"|연결회사는|연결실체는|공정거래위원회|의\s*경우|주석\s*\d+\s*참조"
+    r"|흡수합병|사명변경|상호를?\s*변경|지분을\s*취득"
+)
 _AGGREGATE_TOKENS = {"자기주식", "자사주", "기타개인", "우리사주조합", "소액주주",
                      "기타주주", "국민연금", "기타법인",
                      # ★2026-07-30 CPA 표본 검수 실측 — 특정 실체가 아닌 묶음 라벨
@@ -201,6 +214,8 @@ def is_noise(surface: str) -> str | None:
         return "aggregate_token"       # 자기주식·기타개인 등 — 특정 실체가 아님
     if _GROUP_TOTAL_RE.search(s):
         return "group_total"           # '등 기타 104개사' — 개별 법인이 아닌 집계
+    if _SENTENCE_FORM_RE.search(s):
+        return "sentence_form"         # 각주 서술 문장 — 회사명이 아니다
     # ★법인 표지가 있으면 카테고리 라벨로 보지 않는다 — '㈜글로우원과 종속기업'(94.6%),
     # '우리산업(주)와 그 종속기업'(39.5%)처럼 **집계 접미어가 붙은 실존 법인**이
     # 통째로 잡음 처리되던 문제(실측 9건). 접미어 제거는 strip_group_aggregate 소관.
@@ -210,6 +225,33 @@ def is_noise(surface: str) -> str | None:
     if any(w in s for w in _TXN_ITEM_WORDS) and not _CORP_MARKS.search(s):
         return "txn_item"
     return None
+
+
+# ★2026-07-30 (후속18) 표시명 정리 — uid는 이미 `normalize_company_name`으로 각주를
+# 떼고 병합되는데(unlisted_uid) **표시명만 각주를 안고 있었다**(실측 885엣지:
+# `Iksuda Therapeutics Limited(*3)`·`오상-케이넷 창업초기 투자조합(주7)`·`(주)프로젠(보통주)`).
+# 화면에 각주 기호가 보이는 것은 표기 오류이고, 같은 회사가 각주 차이로 다르게 보인다.
+#
+# 선행 고아 접미어도 함께 뗀다: 원문에 구분자가 유실돼 앞 회사의 `Co., Ltd`가 뒷 회사
+# 앞에 붙는다(실측 51엣지 — `LTD.HWASEUNG VIETNAM CHEMICAL CO.`·`Ltd.Zhe Jiang Dayimei…`).
+# **이건 이름을 만들어내는 게 아니라 앞 회사에 속한 조각을 떼는 것**이므로 안전하다
+# (FN-013류 위험 없음). 떼고 남은 것이 카테고리 조각이면 is_noise가 잡는다.
+_LEADING_ORPHAN_SUFFIX_RE = re.compile(
+    r"^(?:LTD|LLC|INC|CORP|GMBH|PTE|CO)\s*[.,]\s*(?=[A-Z가-힣])", re.IGNORECASE
+)
+
+
+def clean_display_name(name_raw: str | None) -> str:
+    """화면에 쓸 표기 정리 — 공백 접기 + 형태 확정 각주 제거 + 선행 고아 접미어 제거.
+
+    ⚠️ 일반 괄호는 보존한다(원칙 ② — `DB(Philippines) Inc.`의 괄호는 신원 정보).
+    """
+    from modules.relation.common.names import _ANNOTATION_RE
+
+    name = re.sub(r"\s+", " ", (name_raw or "")).strip()
+    name = _LEADING_ORPHAN_SUFFIX_RE.sub("", name, count=1).strip()
+    name = _ANNOTATION_RE.sub("", name).strip(" ,·")
+    return re.sub(r"\s+", " ", name).strip()
 
 
 def upsert_unlisted_node(
@@ -226,11 +268,25 @@ def upsert_unlisted_node(
     # ★표시용 공백 정규화(2026-07-29): 원문 충실은 **문자**에 대한 것이고, 개행·연속
     # 공백은 표기가 아니라 원문 표 레이아웃의 잔재다. 그대로 두면 ego 2,933건이
     # 줄바꿈이 낀 이름으로 렌더된다(예: 'Beijing HYUNDAI TRANSYS' + 개행 + 'Transmission').
-    name = re.sub(r"\s+", " ", (name_raw or "")).strip()
+    name = clean_display_name(name_raw)
     if is_noise(name):
         return None
     uid = unlisted_uid(anchor_corp, name)
     row = session.query(UnlistedNode).filter_by(uid=uid).one_or_none()
+    if row is None:
+        # ★2026-07-30 (후속18) **정규화 규칙이 바뀌면 uid가 바뀐다**. 그때 기존 행은
+        # 그대로 남아 있어 `UNIQUE(anchor_corp, name_raw)`를 위반하며 insert가 터진다
+        # (실측: 각주 콤마 잔재 수정 직후 transform·apply 양쪽에서 IntegrityError).
+        # name_raw도 앵커 내 UNIQUE이므로 **이름으로 기존 행을 찾아 재사용**한다 —
+        # 엣지가 이미 그 uid를 참조하므로 uid를 바꾸지 않고 그대로 쓴다.
+        # 이 폴백이 없으면 정규화 규칙을 손볼 때마다 같은 사고가 재발한다.
+        row = (
+            session.query(UnlistedNode)
+            .filter_by(anchor_corp=anchor_corp, name_raw=name)
+            .one_or_none()
+        )
+        if row is not None:
+            uid = row.uid
     kind = classify(name, relate, allow_person=allow_person,
                     surname_fallback=surname_fallback)
     if row:
@@ -252,8 +308,34 @@ def upsert_unlisted_node(
         # 같은 법인의 표기 변형이 여러 번 오면 **가장 깔끔한 것**을 화면에 쓴다
         # (각주·개행이 붙은 긴 변형보다 원형이 읽기 좋다). 원문 보존 원칙과 양립 —
         # 셋 다 원문이고 그중 하나를 고르는 것뿐이다.
-        if len(name) < len(row.name_raw or ""):
-            row.name_raw = name
+        # ⚠️2026-07-30: 기존 값도 **다시 정리한 뒤** 비교한다. 과거엔 새 표기가 더
+        # 짧을 때만 갱신해서, 정리 규칙이 생겨도 **옛 코드로 만들어진 행은 그대로
+        # 남았다**(실측: `Ltd.Zhe Jiang…`가 정리 대상인데 DB에 잔존). 마이그레이션 공백.
+        candidates = [
+            n for n in (clean_display_name(row.name_raw), name) if n and not is_noise(n)
+        ]
+        if candidates:
+            new_name = min(candidates, key=len)
+            if new_name != row.name_raw:
+                # ★2026-07-30 (후속18): 이름 변경이 **같은 앵커의 형제 행과 충돌**할 수
+                # 있다(`X(*1)` 정리 → 이미 있는 `X`와 동일) → UNIQUE(anchor, name_raw)
+                # 위반으로 실행이 죽었다(실측 IntegrityError). 이름만 바꿀 게 아니라
+                # **병합**해야 한다 — 형제로 엣지를 재지정하고 이 행을 지운다.
+                with session.no_autoflush:
+                    sibling = (
+                        session.query(UnlistedNode)
+                        .filter_by(anchor_corp=anchor_corp, name_raw=new_name)
+                        .filter(UnlistedNode.uid != row.uid)
+                        .one_or_none()
+                    )
+                if sibling is not None:
+                    _repoint_edges(session, row.uid, sibling.uid)
+                    session.delete(row)
+                    row = sibling
+                    uid = sibling.uid      # 병합됐으므로 호출자는 정본 uid를 받아야 한다
+                    sibling.status = "active"
+                else:
+                    row.name_raw = new_name
     else:
         session.add(
             UnlistedNode(
@@ -269,6 +351,101 @@ def upsert_unlisted_node(
     return uid
 
 
+def _repoint_edges(session, old_uid: str, new_uid: str | None) -> None:
+    """old_uid 참조 엣지를 new_uid로 재지정(None이면 삭제). **중복 키 안전**.
+
+    재지정 결과가 이미 존재하는 UNIQUE 키와 겹치면 그 엣지는 지운다 — 병합이므로
+    같은 사실의 두 기록이 되기 때문이다.
+    """
+    from modules.relation.storage.models import RelationLocal, ValueChainEdge
+
+    specs = (
+        (RelationLocal, ("source_corp", "target_corp"),
+         ("source_corp", "target_corp", "source_type", "bsns_year")),
+        (ValueChainEdge, ("src_corp", "dst_corp"),
+         ("src_corp", "dst_corp", "edge_type", "as_of", "rcept_no")),
+    )
+    for model, ref_cols, key_cols in specs:
+        for col in ref_cols:
+            for e in session.query(model).filter(getattr(model, col) == old_uid).all():
+                if new_uid is None:
+                    session.delete(e)
+                    continue
+                key = {
+                    k: (new_uid if k == col else getattr(e, k)) for k in key_cols
+                }
+                exists = (
+                    session.query(model)
+                    .filter_by(**key)
+                    .filter(model.id != e.id)
+                    .first()
+                    if hasattr(model, "id")
+                    else session.query(model).filter_by(**key).first()
+                )
+                if exists is not None:
+                    session.delete(e)      # 병합 중복 — 같은 사실의 두 기록
+                else:
+                    setattr(e, col, new_uid)
+
+
+def reconcile_unlisted_names(session) -> int:
+    """표시명 확정 패스 — 정리 규칙을 **전 노드**에 적용하고 충돌은 병합한다.
+
+    ★2026-07-30 (후속18): upsert의 갱신 조건("새 표기가 더 짧을 때")만으로는
+    **옛 코드로 만들어진 행이 영구히 낡은 표기를 유지**한다(실측: `Ltd.Zhe Jiang…`).
+    그래서 전수 패스가 필요하다.
+
+    ⚠️ 두 함정을 여기서 처리한다:
+      ① 정리 결과가 **잡음**이면 애초에 노드가 아니다(`LTD. 등` → `등`) → 참조 엣지와
+         함께 제거(이름만 바꾸면 잡음이 화면에 남고 참조 무결성도 어긋난다).
+      ② 정리 결과가 **같은 앵커의 다른 노드와 동일**해질 수 있다 — 각주 규칙을 넓히면
+         `X(보통주)`와 `X`가 한 이름이 되어 `UNIQUE(anchor_corp, name_raw)`를 위반한다
+         (실제 발생). 이름만 바꾸는 게 아니라 **병합**해야 한다: 정본 uid로 엣지를
+         재지정하고 나머지 행을 삭제. 정본은 `unlisted_uid(anchor, 정리된 이름)`과
+         일치하는 행(있으면), 없으면 uid 최소값 — 결정적이라 실행 순서에 무관.
+    """
+    from modules.relation.storage.models import UnlistedNode, unlisted_uid
+
+    changed = 0
+    with session.no_autoflush:
+        rows = session.query(UnlistedNode).all()
+        cleaned_of: dict[str, str] = {}
+        for row in rows:
+            cleaned = clean_display_name(row.name_raw)
+            if not cleaned or is_noise(cleaned):
+                _repoint_edges(session, row.uid, None)
+                session.delete(row)
+                changed += 1
+                continue
+            cleaned_of[row.uid] = cleaned
+
+        groups: dict[tuple[str, str], list] = {}
+        for row in rows:
+            if row.uid in cleaned_of:
+                groups.setdefault((row.anchor_corp, cleaned_of[row.uid]), []).append(row)
+
+        for (anchor, name), members in groups.items():
+            if len(members) > 1:
+                canonical_uid = unlisted_uid(anchor, name)
+                canon = next(
+                    (m for m in members if m.uid == canonical_uid),
+                    min(members, key=lambda m: m.uid),
+                )
+                for m in members:
+                    if m is canon:
+                        continue
+                    _repoint_edges(session, m.uid, canon.uid)
+                    session.delete(m)
+                    changed += 1
+                members = [canon]
+            row = members[0]
+            if row.name_raw != name:
+                row.name_raw = name
+                changed += 1
+        session.flush()
+    return changed
+
+
 def reconcile_unlisted_kinds(session) -> int:
     """저장된 kind를 **재산출값으로 확정** — 감사 가능성 보장. 갱신 건수 반환.
 
@@ -281,7 +458,7 @@ def reconcile_unlisted_kinds(session) -> int:
     """
     from modules.relation.storage.models import UnlistedNode
 
-    changed = 0
+    changed = reconcile_unlisted_names(session)
     for row in session.query(UnlistedNode).all():
         path = row.first_seen or ""
         expect = classify(

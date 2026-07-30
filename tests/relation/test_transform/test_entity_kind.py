@@ -326,3 +326,66 @@ def test_space_strip_does_not_flip_corporations(surface, relate):
 def test_space_padded_aggregate_labels_are_noise(label):
     """묶음 라벨은 특정 실체가 아니다 — 공백을 넣어 적어도 잡음으로 걸러야 한다."""
     assert is_noise(label) == "aggregate_token"
+
+
+# ── 각주 서술 문장 (2026-07-30 후속18, 실측 49건) ────────────────────────────
+
+@pytest.mark.parametrize("text", [
+    "(주)KG프레시는 당기 중 (주)KG에프앤비(구, KG할리스에프앤비)에 흡수합병 되었습니다.",
+    "연결회사는 2025년 1월 2일 (주)화인어프라이언스의 지분을 취득하여 관계기업으로 편입되었습니다.",
+    "공정거래위원회가 지정한 대규모기업집단계열회사는 한국채택국제회계기준 제1024호 문단10에서 규정하는",
+    "당기 중 OCIM SDN. BHD.에서 OCI TerraSus Sdn. Bhd.로 상호를 변경하였습니다.",
+    "(주)KG아이씨티는 최상위지배기업의 특수관계자가 지배력을 행사하는 기업입니다.",
+    "(주)한국특강의 경우 당기 중 전환사채 처분이 완료되어",
+    "KG에코솔루션(주)로 사명변경하였습니다.",
+    "500주를 모두 취득하게 되어 제2대 주주와의 주주 간 계약은 종료되었습니다(주석 38 참조).",
+])
+def test_footnote_sentences_are_noise(text):
+    """⚠️ 회귀 박제: 각주 서술 문장이 법인 표지(㈜·주식회사)를 품어 기존 게이트를
+    통과했다. 서술 표지로 잡는다."""
+    assert is_noise(text) == "sentence_form"
+
+
+@pytest.mark.parametrize("name", [
+    # ⚠️ 길이로 판정하면 실존 외국 사명이 잘린다(전부 실측 노드)
+    "HYUNDAI MOTOR GROUP INNOVATION CENTER IN SINGAPORE PTE. LTD.",
+    "ASSAN HANIL OTOMOTIV SANAYI VE TICARET ANONIM SIRKETI",
+    "Sichuan Kelun-Doosan Biotechnology Company Limited",
+    "타임폴리오 코스닥벤처 The Unique 대체투자3호 전문투자형 사모투자신탁",
+    "㈜세미콜론명동위탁관리부동산투자회사 (舊㈜디디아이명동엔위탁관리부동산투자회사)",
+    "Korea Electric Power Corporation for Maintenance Company",
+    "百愛樂(GUANGZHOU)體育用品有限公司 (백애락(GUANGZHOU)체육용품유한공사)",
+])
+def test_long_real_company_names_survive_sentence_gate(name):
+    """⚠️ 서술 표지 게이트가 장문 실존 사명을 잡아서는 안 된다."""
+    assert is_noise(name) is None
+
+
+# ── 표시명 정리 (2026-07-30 후속18 — 각주 885엣지 · 회전 조각 51엣지) ─────────
+
+@pytest.mark.parametrize("raw,expected", [
+    ("Iksuda Therapeutics Limited(*3)", "Iksuda Therapeutics Limited"),
+    ("오상-케이넷 창업초기 투자조합(주7)", "오상-케이넷 창업초기 투자조합"),
+    ("(주)프로젠(보통주)", "(주)프로젠"),
+    ("(주)렉스필드컨트리클럽 (주1 참조)", "(주)렉스필드컨트리클럽"),
+    # 원문 구분자 유실로 앞 회사의 'Co., Ltd'가 뒷 회사 앞에 붙은 조각 제거
+    ("LTD.HWASEUNG VIETNAM CHEMICAL CO.", "HWASEUNG VIETNAM CHEMICAL CO."),
+    ("Ltd.Zhe Jiang Dayimei Health Technology Co.",
+     "Zhe Jiang Dayimei Health Technology Co."),
+])
+def test_clean_display_name_strips_annotation_and_orphan_suffix(raw, expected):
+    from modules.relation.transform.entity_kind import clean_display_name
+    assert clean_display_name(raw) == expected
+
+
+@pytest.mark.parametrize("name", [
+    # ⚠️ 원칙 ②: 일반 괄호는 신원 정보 — 떼면 HMM류 오링킹이 된다
+    "DB(Philippines) Inc.",
+    "百愛樂(GUANGZHOU)體育用品有限公司 (백애락(GUANGZHOU)체육용품유한공사)",
+    # ⚠️ 접미어로 시작하는 것처럼 보이는 실존 사명은 건드리지 않는다
+    "CoMo China Co.,Ltd.",
+    "Samsung Electronics Co., Ltd.",
+])
+def test_clean_display_name_preserves_identity_parentheses(name):
+    from modules.relation.transform.entity_kind import clean_display_name
+    assert clean_display_name(name) == name

@@ -614,3 +614,20 @@ def test_governance_cut_exempts_dart_filing_note_edges(in_memory_session):
     assert ("005930", "dart_filing") in shown
     assert ("000660", "otrCprInvstmntSttus") in shown
     assert ("035420", "otrCprInvstmntSttus") not in shown, "지분 구연도는 컷 유지"
+
+
+def test_normalize_strips_leftover_separators_after_annotation_removal():
+    """⚠️ 회귀 박제: 각주가 콤마로 나열되면 제거 후 **구분자만 남아** 정확일치가 깨진다.
+
+    실측 사고 — 원문 `코오롱티슈진\n(주1),(주2),(주5)`가 `코오롱티슈진,,`으로 정규화돼
+    링킹에 실패하고, 코오롱티슈진이 **상장 노드와 비상장 노드로 동시에** 화면에 나왔다
+    (같은 회사·같은 지분율 39.27% / 39.3%).
+    """
+    from modules.relation.common.names import normalize_company_name
+
+    assert normalize_company_name("코오롱티슈진\n(주1),(주2),(주5)") == "코오롱티슈진"
+    assert normalize_company_name("㈜코오롱티슈진(주1)") == "코오롱티슈진"
+    # ⚠️ 내부 콤마는 사명의 일부일 수 있으므로 보존 (양끝만 제거)
+    assert "," in normalize_company_name("가나, 다라 주식회사")
+    # ⚠️ 원칙 ②: 일반 괄호는 신원 정보 — 유지
+    assert "(" in normalize_company_name("DB(Philippines) Inc.")
