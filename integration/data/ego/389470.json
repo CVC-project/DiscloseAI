@@ -1,0 +1,69 @@
+{
+  "t": "389470",
+  "n": "인벤티지랩",
+  "s": "지주",
+  "tier": "named400",
+  "layers": {
+    "governance": [
+      {
+        "t": "348080",
+        "n": "큐라티스",
+        "type": "investment",
+        "detail": "19.44% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "지주",
+        "tier": "dot"
+      },
+      {
+        "n": "김주희",
+        "kind": "person",
+        "type": "investment",
+        "detail": "11.65% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "키카이 바이오 신기술조합 1호",
+        "kind": "coop_fund",
+        "type": "subsidiary",
+        "detail": "99.73% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "348080",
+          "n": "큐라티스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": null,
+          "as_of": 2026,
+          "prov": "단일판매ㆍ공급계약체결 · 주식회사 인벤티지랩"
+        },
+        {
+          "t": "348080",
+          "n": "큐라티스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": null,
+          "as_of": 2026,
+          "prov": "단일판매ㆍ공급계약체결 · 주식회사 인벤티지랩"
+        }
+      ],
+      "down": [
+        {
+          "t": "348080",
+          "n": "큐라티스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 6891000000.0,
+          "as_of": 2025,
+          "prov": "단일판매ㆍ공급계약체결 · (주)큐라티스"
+        }
+      ]
+    }
+  }
+}

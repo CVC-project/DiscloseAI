@@ -1,0 +1,245 @@
+{
+  "t": "006840",
+  "n": "AK홀딩스",
+  "s": "금융",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "018250",
+        "n": "애경산업",
+        "type": "associate",
+        "detail": "47.26% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "화학",
+        "tier": "dot"
+      },
+      {
+        "t": "161000",
+        "n": "애경케미칼",
+        "type": "subsidiary",
+        "detail": "60.77% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "화학",
+        "tier": "dot"
+      },
+      {
+        "t": "089590",
+        "n": "제주항공",
+        "type": "subsidiary",
+        "detail": "50.41% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "운송·물류",
+        "tier": "dot"
+      },
+      {
+        "t": "089590",
+        "n": "제주항공",
+        "type": "dart_filing",
+        "detail": "지배기업 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "운송·물류",
+        "tier": "dot"
+      },
+      {
+        "t": "161000",
+        "n": "애경케미칼",
+        "type": "dart_filing",
+        "detail": "지배기업 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "화학",
+        "tier": "dot"
+      },
+      {
+        "n": "(주)마포애경타운",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "99.11% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "애경자산관리(주)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "18.91% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "애경자산관리(주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "유의적 영향력 · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
+        "n": "에이엠플러스자산개발(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "57.14% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "에이케이플라자(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "71.12% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "이지스엑스일반사모부동산투자신탁14호(적격)",
+        "kind": "coop_fund",
+        "type": "associate",
+        "detail": "29.52% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "장영신",
+        "kind": "person",
+        "type": "investment",
+        "detail": "7.43% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "채동석",
+        "kind": "person",
+        "type": "investment",
+        "detail": "7.53% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "채승석",
+        "kind": "person",
+        "type": "investment",
+        "detail": "8.3% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "채형석",
+        "kind": "person",
+        "type": "investment",
+        "detail": "14.25% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "045660",
+          "n": "에이텍",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 9866100000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입, 특수관계자거래"
+        },
+        {
+          "t": "018250",
+          "n": "애경산업",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 12026637.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "089590",
+          "n": "제주항공",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 620823000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "161000",
+          "n": "애경케미칼",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 197440000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "AID(Advanced Isocyanate Derivative)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3214640000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "045660",
+          "n": "에이텍",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1193086000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "t": "089590",
+          "n": "제주항공",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1402000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "AID(Advanced Isocyanate Derivative)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 5562849000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "VINA PLASTICIZERS CHEMICAL COMPANY LIMITED",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4766910000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "애경자산관리(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1972370000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "에이엠플러스자산개발(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 760891000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        }
+      ]
+    }
+  }
+}

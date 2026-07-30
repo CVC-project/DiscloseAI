@@ -1,0 +1,56 @@
+{
+  "t": "025950",
+  "n": "동신건설",
+  "s": "건설",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "n": "(주)꿈나무",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "93.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "갑을민자(주)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "6.48% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "김근한",
+        "kind": "person",
+        "type": "associate",
+        "detail": "36.15% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "김청한",
+        "kind": "person",
+        "type": "associate",
+        "detail": "29.86% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [],
+      "down": [
+        {
+          "t": "015760",
+          "n": "한국전력공사",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 10900788551.0,
+          "as_of": 2026,
+          "prov": "단일판매ㆍ공급계약체결 · 한국전력공사"
+        }
+      ]
+    }
+  }
+}

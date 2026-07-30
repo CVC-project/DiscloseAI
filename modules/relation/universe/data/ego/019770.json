@@ -1,0 +1,60 @@
+{
+  "t": "019770",
+  "n": "서연탑메탈",
+  "s": "기계·장비",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "007860",
+        "n": "서연",
+        "type": "associate",
+        "detail": "37.5% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "금융",
+        "tier": "dot"
+      },
+      {
+        "t": "200880",
+        "n": "서연이화",
+        "type": "dart_filing",
+        "detail": "본사 소재지 국가 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "자동차",
+        "tier": "dot"
+      },
+      {
+        "n": "유경내",
+        "kind": "person",
+        "type": "investment",
+        "detail": "9.23% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "자본재공제조합",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "11.54% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [],
+      "down": [
+        {
+          "t": "200880",
+          "n": "서연이화",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 89300432000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입"
+        }
+      ]
+    }
+  }
+}

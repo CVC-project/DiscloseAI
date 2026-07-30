@@ -1,0 +1,132 @@
+{
+  "t": "019010",
+  "n": "베뉴지",
+  "s": "유통",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "n": "(주)호텔그랜드유통",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "71.64% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜정도엘엔디",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "25.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜정도엘엔디",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "김만진",
+        "kind": "person",
+        "type": "investment",
+        "detail": "7.66% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "베뉴지씨씨(주)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "48.67% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "정도건설㈜",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "37.74% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "정도건설㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "정도물산",
+        "kind": "person",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "정도진 흥기업",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "31.54% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "정도진 흥기업",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "유의적 영향력 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "n": "정도건설㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 10000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "n": "정도진 흥기업",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 442959000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        },
+        {
+          "n": "정도건설㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 5360000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        },
+        {
+          "n": "정도물산",
+          "kind": "person",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2400000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        }
+      ]
+    }
+  }
+}

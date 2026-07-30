@@ -1,0 +1,123 @@
+{
+  "t": "098070",
+  "n": "한텍",
+  "s": "철강·금속",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "093370",
+        "n": "후성",
+        "type": "subsidiary",
+        "detail": "66.3% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "화학",
+        "tier": "dot"
+      },
+      {
+        "t": "010040",
+        "n": "한국내화",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "소재",
+        "tier": "dot"
+      },
+      {
+        "t": "093370",
+        "n": "후성",
+        "type": "dart_filing",
+        "detail": "지배기업 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "화학",
+        "tier": "dot"
+      },
+      {
+        "t": "010040",
+        "n": "한국내화",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "소재",
+        "tier": "dot"
+      },
+      {
+        "t": "010820",
+        "n": "퍼스텍",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "철강·금속",
+        "tier": "dot"
+      },
+      {
+        "n": "(주)한스",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "주식회사 트래닛",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "후성정공 주식회사",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "후성코퍼레이션 주식회사",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "후성홀딩스 주식회사",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "010040",
+          "n": "한국내화",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1349799000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "010040",
+          "n": "한국내화",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 49150000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": []
+    }
+  }
+}

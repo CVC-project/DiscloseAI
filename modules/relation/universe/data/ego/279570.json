@@ -1,0 +1,87 @@
+{
+  "t": "279570",
+  "n": "케이뱅크",
+  "s": "금융",
+  "tier": "named400",
+  "layers": {
+    "governance": [
+      {
+        "t": "005940",
+        "n": "NH투자증권",
+        "type": "investment",
+        "detail": "5.52% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
+        "t": "030200",
+        "n": "케이티",
+        "type": "ftc_group",
+        "detail": "케이티 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "통신",
+        "tier": "named400"
+      },
+      {
+        "n": "㈜올모",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "6.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜올모일산",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "12.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "비씨카드㈜",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "33.72% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "030200",
+          "n": "케이티",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 33845000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        },
+        {
+          "t": "089600",
+          "n": "KT나스미디어",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 30618000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "030200",
+          "n": "케이티",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 30078000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "t": "297090",
+  "n": "씨에스베어링",
+  "s": "기계·장비",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "112610",
+        "n": "씨에스윈드",
+        "type": "subsidiary",
+        "detail": "53.69% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "철강·금속",
+        "tier": "named400"
+      },
+      {
+        "n": "CS BEARING VIETNAM Co.,Ltd",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "101680",
+          "n": "한국정밀기계",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3326034000.0,
+          "as_of": 2026,
+          "prov": "단일판매ㆍ공급계약체결 · 씨에스베어링(주)"
+        }
+      ],
+      "down": []
+    }
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "t": "490470",
+  "n": "세미파이브",
+  "s": "제약바이오",
+  "tier": "named400",
+  "layers": {
+    "governance": [
+      {
+        "t": "000150",
+        "n": "두산",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "반도체",
+        "tier": "named400"
+      },
+      {
+        "t": "131970",
+        "n": "두산테스나",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2024",
+        "dir": "in",
+        "as_of": 2024,
+        "s": "전문서비스",
+        "tier": "named400"
+      },
+      {
+        "n": "Analog Bits Inc.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "SEMIFIVE Japan Inc.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "SEMIFIVE Technologies India Private Limited",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "99.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "SEMIFIVE US Inc.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "SEMIFIVE Vietnam Company Limited",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "SiFive, Inc.",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "14.77% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "131970",
+          "n": "두산테스나",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1417857000.0,
+          "as_of": 2024,
+          "prov": "특수관계자와의 거래내역 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "000150",
+          "n": "두산",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 216000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입"
+        }
+      ]
+    }
+  }
+}

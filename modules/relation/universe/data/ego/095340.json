@@ -1,0 +1,140 @@
+{
+  "t": "095340",
+  "n": "ISC",
+  "s": "유통",
+  "tier": "named400",
+  "layers": {
+    "governance": [
+      {
+        "t": "011790",
+        "n": "SKC",
+        "type": "associate",
+        "detail": "45.03% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "화학",
+        "tier": "named400"
+      },
+      {
+        "n": "ISC International",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "80.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "ISC VINA MANUFACTURING",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "TechDream Co., Limited",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "034730",
+          "n": "SK",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 50922000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등"
+        },
+        {
+          "t": "011790",
+          "n": "SKC",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1325130000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등"
+        },
+        {
+          "n": "에스케이엔펄스㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 24593000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등"
+        },
+        {
+          "n": "행복나래㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 13656000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등"
+        },
+        {
+          "n": "SK Hynix semiconductor(Chongqing) Ltd.",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 748000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등"
+        }
+      ],
+      "down": [
+        {
+          "t": "011790",
+          "n": "SKC",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 13824000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "t": "000660",
+          "n": "SK하이닉스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 32923195000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "n": "SK Hynix semiconductor(Chongqing) Ltd.",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 774013000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "n": "에스케이엔펄스㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 40304000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "n": "행복나래㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 168000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        }
+      ]
+    }
+  }
+}

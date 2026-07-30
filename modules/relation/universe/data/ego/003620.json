@@ -1,0 +1,131 @@
+{
+  "t": "003620",
+  "n": "KG모빌리티",
+  "s": "자동차",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "151860",
+        "n": "KG에코솔루션",
+        "type": "subsidiary",
+        "detail": "54.35% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "자동차",
+        "tier": "dot"
+      },
+      {
+        "t": "016380",
+        "n": "KG스틸",
+        "type": "dart_filing",
+        "detail": "최상위 지배기업 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "철강·금속",
+        "tier": "dot"
+      },
+      {
+        "n": "KG Mobility Europe PartsCenter B.V.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "KGM Australia",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "KGM Europe Gmbh",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "케이지모빌리티커머셜㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "001390",
+          "n": "KG케미칼",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 147926000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입"
+        },
+        {
+          "t": "046440",
+          "n": "KG파이낸셜",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 221989000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등 · 매출，특수관계자거래"
+        },
+        {
+          "t": "016380",
+          "n": "KG스틸",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 8323313532.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        }
+      ],
+      "down": [
+        {
+          "t": "016380",
+          "n": "KG스틸",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 5126449160.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        },
+        {
+          "n": "KG지엔에스㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 5126449000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        },
+        {
+          "n": "KG캐피탈",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1325185000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        },
+        {
+          "n": "㈜KG제로인",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 84000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        }
+      ]
+    }
+  }
+}

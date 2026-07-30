@@ -1,0 +1,104 @@
+{
+  "t": "264450",
+  "n": "유비쿼스",
+  "s": "반도체",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "078070",
+        "n": "유비쿼스홀딩스",
+        "type": "associate",
+        "detail": "33.49% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "금융",
+        "tier": "dot"
+      },
+      {
+        "t": "078070",
+        "n": "유비쿼스홀딩스",
+        "type": "dart_filing",
+        "detail": "지배기업 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "금융",
+        "tier": "dot"
+      },
+      {
+        "n": "UBIQUOSS JANPAN Inc.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "UBIQUOSS USA, LLC",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "UI벤처투자조합11호",
+        "kind": "coop_fund",
+        "type": "subsidiary",
+        "detail": "95.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜바이랩",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "078070",
+          "n": "유비쿼스홀딩스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 6173035542.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "㈜넥싸이트",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 105379520.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "㈜유비쿼스인베스트먼트",
+          "kind": "coop_fund",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 78379520.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "UBIQUOSS USA, LLC",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 950759867.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
+    }
+  }
+}

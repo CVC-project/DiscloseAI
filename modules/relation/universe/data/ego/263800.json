@@ -1,0 +1,60 @@
+{
+  "t": "263800",
+  "n": "데이타솔루션",
+  "s": "유통",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "049480",
+        "n": "오픈베이스",
+        "type": "subsidiary",
+        "detail": "65.47% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "플랫폼",
+        "tier": "dot"
+      },
+      {
+        "n": "주식회사 트립박스",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "19.01% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "청도풍유 유한공사",
+        "kind": "public_org",
+        "type": "investment",
+        "detail": "8.04% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "052460",
+          "n": "아이크래프트",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 45423480000.0,
+          "as_of": 2026,
+          "prov": "단일판매ㆍ공급계약체결 · 주식회사 데이타솔루션"
+        }
+      ],
+      "down": [
+        {
+          "t": "018260",
+          "n": "삼성에스디에스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 438141388000.0,
+          "as_of": 2026,
+          "prov": "단일판매ㆍ공급계약체결 · 삼성 에스디에스 주식회사"
+        }
+      ]
+    }
+  }
+}

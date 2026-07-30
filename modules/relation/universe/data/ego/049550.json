@@ -1,0 +1,86 @@
+{
+  "t": "049550",
+  "n": "잉크테크",
+  "s": "화학",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "107590",
+        "n": "미원홀딩스",
+        "type": "associate",
+        "detail": "24.48% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "금융",
+        "tier": "dot"
+      },
+      {
+        "n": "Ink Technology(Shanghai) Co, Ltd.",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "49.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "InkTec Europe Ltd",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "정광춘",
+        "kind": "person",
+        "type": "investment",
+        "detail": "9.97% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "002840",
+          "n": "미원상사",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 178672000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "t": "107590",
+          "n": "미원홀딩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 202905890.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매출 등"
+        },
+        {
+          "t": "268280",
+          "n": "미원에스씨",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 6098146.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출기타"
+        }
+      ],
+      "down": [
+        {
+          "t": "268280",
+          "n": "미원에스씨",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 169858400.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        }
+      ]
+    }
+  }
+}

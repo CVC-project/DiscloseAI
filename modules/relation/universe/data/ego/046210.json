@@ -1,0 +1,89 @@
+{
+  "t": "046210",
+  "n": "HLB파나진",
+  "s": "제약바이오",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "187420",
+        "n": "HLB제넥스",
+        "type": "investment",
+        "detail": "8.03% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "제약바이오",
+        "tier": "dot"
+      },
+      {
+        "t": "028300",
+        "n": "HLB",
+        "type": "investment",
+        "detail": "8.45% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "제약바이오",
+        "tier": "named400"
+      },
+      {
+        "t": "278650",
+        "n": "HLB바이오스텝",
+        "type": "investment",
+        "detail": "7.21% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "지주",
+        "tier": "dot"
+      },
+      {
+        "t": "115450",
+        "n": "HLB테라퓨틱스",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "유통",
+        "tier": "dot"
+      },
+      {
+        "n": "(주)바이오스퀘어",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "99.99% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "(주)아론티어",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "9.92% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "028300",
+          "n": "HLB",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 32898000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "067630",
+          "n": "HLB생명과학",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 48233000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ],
+      "down": []
+    }
+  }
+}

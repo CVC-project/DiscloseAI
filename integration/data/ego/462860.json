@@ -1,0 +1,111 @@
+{
+  "t": "462860",
+  "n": "더즌",
+  "s": "통신",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "377300",
+        "n": "카카오페이",
+        "type": "investment",
+        "detail": "8.3% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
+        "t": "035720",
+        "n": "카카오",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "플랫폼",
+        "tier": "named400"
+      },
+      {
+        "n": "DOZN GLOBAL PTE.LTD",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "60.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "PT.DOZN GLOBAL INDONESIA",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "99.9% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "인포플러스 주식회사",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "7.42% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "조철한",
+        "kind": "person",
+        "type": "associate",
+        "detail": "48.66% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "주식회사 스위치원",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "9.1% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "주식회사 오픈에셋",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "14.48% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "035720",
+          "n": "카카오",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1179826000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "t": "377300",
+          "n": "카카오페이",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 59459000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등- 기타"
+        }
+      ],
+      "down": [
+        {
+          "t": "377300",
+          "n": "카카오페이",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3033132000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등- 지급수수료"
+        }
+      ]
+    }
+  }
+}

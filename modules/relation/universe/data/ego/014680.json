@@ -1,0 +1,234 @@
+{
+  "t": "014680",
+  "n": "한솔케미칼",
+  "s": "화학",
+  "tier": "named400",
+  "layers": {
+    "governance": [
+      {
+        "t": "004150",
+        "n": "한솔홀딩스",
+        "type": "ftc_group",
+        "detail": "한솔 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "금융",
+        "tier": "dot"
+      },
+      {
+        "t": "004710",
+        "n": "한솔테크닉스",
+        "type": "ftc_group",
+        "detail": "한솔 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "반도체",
+        "tier": "dot"
+      },
+      {
+        "t": "009180",
+        "n": "한솔로지스틱스",
+        "type": "ftc_group",
+        "detail": "한솔 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "운송·물류",
+        "tier": "dot"
+      },
+      {
+        "t": "025750",
+        "n": "한솔홈데코",
+        "type": "ftc_group",
+        "detail": "한솔 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "소재",
+        "tier": "dot"
+      },
+      {
+        "t": "055490",
+        "n": "테이팩스",
+        "type": "ftc_group",
+        "detail": "한솔 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "소재",
+        "tier": "dot"
+      },
+      {
+        "t": "114810",
+        "n": "한솔아이원스",
+        "type": "ftc_group",
+        "detail": "한솔 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "기계·장비",
+        "tier": "dot"
+      },
+      {
+        "t": "213500",
+        "n": "한솔제지",
+        "type": "ftc_group",
+        "detail": "한솔 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "소재",
+        "tier": "dot"
+      },
+      {
+        "t": "055490",
+        "n": "테이팩스",
+        "type": "associate",
+        "detail": "44.89% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "소재",
+        "tier": "dot"
+      },
+      {
+        "t": "213500",
+        "n": "한솔제지",
+        "type": "dart_filing",
+        "detail": "기타 · 2024",
+        "dir": "in",
+        "as_of": 2024,
+        "s": "소재",
+        "tier": "dot"
+      },
+      {
+        "n": "(주)바이옥스",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "51.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "(주)솔머티리얼즈",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "72.41% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "(주)에이치에스머티리얼즈",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "90.01% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "(주)이노웨이브",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "9.64% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "Hansol ElectronicMaterials (Xi'an) Co., Ltd.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "국민연금공단",
+        "kind": "public_org",
+        "type": "investment",
+        "detail": "13.1% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "삼영순화㈜",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "49.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "004150",
+          "n": "한솔홀딩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 8305000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "㈜코스코페이퍼",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 769889000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "삼영순화㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 503656000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "213500",
+          "n": "한솔제지",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 54833436000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "t": "025750",
+          "n": "한솔홈데코",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 51978000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "t": "025750",
+          "n": "한솔홈데코",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 48700.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입거래"
+        },
+        {
+          "n": "삼영순화㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 150457974000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "MEDI LEGION SDN.BHD.",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 157031000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        }
+      ]
+    }
+  }
+}

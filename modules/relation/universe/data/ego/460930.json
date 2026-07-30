@@ -1,0 +1,172 @@
+{
+  "t": "460930",
+  "n": "현대힘스",
+  "s": "중공업·방산",
+  "tier": "named400",
+  "layers": {
+    "governance": [
+      {
+        "t": "009540",
+        "n": "HD한국조선해양",
+        "type": "associate",
+        "detail": "20.84% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
+        "t": "009540",
+        "n": "HD한국조선해양",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
+        "t": "267250",
+        "n": "HD현대",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2023",
+        "dir": "in",
+        "as_of": 2023,
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
+        "t": "329180",
+        "n": "HD현대중공업",
+        "type": "dart_filing",
+        "detail": "대규모기업집단 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "중공업·방산",
+        "tier": "named400"
+      },
+      {
+        "n": "허큘리스 홀딩스(유)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "40.0% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "009540",
+          "n": "HD한국조선해양",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 7546000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "t": "267250",
+          "n": "HD현대",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 7652000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등, 특수관계자거래(*1)"
+        },
+        {
+          "t": "329180",
+          "n": "HD현대중공업",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 107000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "HD현대삼호㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 44401000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 및 주요 경영진에 대한 보상 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "HD현대오일뱅크㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 36844000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 및 주요 경영진에 대한 보상 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "009540",
+          "n": "HD한국조선해양",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 509000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 및 주요 경영진에 대한 보상 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "329180",
+          "n": "HD현대중공업",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 99859416000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 및 주요 경영진에 대한 보상 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "322000",
+          "n": "HD현대에너지솔루션",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 416000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 및 주요 경영진에 대한 보상 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "HD현대삼호㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 138358362000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 및 주요 경영진에 대한 보상 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "HD현대사이트솔루션㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 625200000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 및 주요 경영진에 대한 보상 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "HD현대미포㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 606051000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 및 주요 경영진에 대한 보상 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "HD현대오일뱅크㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 18500000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 및 주요 경영진에 대한 보상 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
+    }
+  }
+}

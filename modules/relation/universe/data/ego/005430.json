@@ -1,0 +1,126 @@
+{
+  "t": "005430",
+  "n": "한국공항",
+  "s": "운송·물류",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "003490",
+        "n": "대한항공",
+        "type": "subsidiary",
+        "detail": "59.54% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "운송·물류",
+        "tier": "named400"
+      },
+      {
+        "t": "003490",
+        "n": "대한항공",
+        "type": "ftc_group",
+        "detail": "한진 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "운송·물류",
+        "tier": "named400"
+      },
+      {
+        "t": "002320",
+        "n": "한진",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "운송·물류",
+        "tier": "dot"
+      },
+      {
+        "t": "180640",
+        "n": "한진칼",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
+        "n": "KAAS",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "25.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "에어코리아",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "002320",
+          "n": "한진",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 7272000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "020560",
+          "n": "아시아나항공",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 6097000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출, 특수관계자거래"
+        },
+        {
+          "t": "180640",
+          "n": "한진칼",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2434467000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 등"
+        }
+      ],
+      "down": [
+        {
+          "t": "002320",
+          "n": "한진",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1252000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "t": "020560",
+          "n": "아시아나항공",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1660052000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입, 특수관계자거래"
+        },
+        {
+          "t": "180640",
+          "n": "한진칼",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1741923000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입 등"
+        }
+      ]
+    }
+  }
+}

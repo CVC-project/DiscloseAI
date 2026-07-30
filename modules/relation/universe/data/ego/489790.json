@@ -1,0 +1,210 @@
+{
+  "t": "489790",
+  "n": "한화비전",
+  "s": "반도체",
+  "tier": "named400",
+  "layers": {
+    "governance": [
+      {
+        "t": "000880",
+        "n": "한화",
+        "type": "associate",
+        "detail": "33.95% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "화학",
+        "tier": "named400"
+      },
+      {
+        "t": "012450",
+        "n": "한화에어로스페이스",
+        "type": "ftc_group",
+        "detail": "한화 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "중공업·방산",
+        "tier": "named400"
+      },
+      {
+        "t": "012450",
+        "n": "한화에어로스페이스",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "중공업·방산",
+        "tier": "named400"
+      },
+      {
+        "n": "Fabless Pioneer Holdings, Inc.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "84.7% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "Hanwha Vision America, Inc.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "Hanwha Vision Europe, Ltd.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "Hanwha Vision Middle East FZE",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "Hanwha Vision Vietnam Company Limited",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "한화상업설비(상해)유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "한화세미텍㈜(舊한화정밀기계㈜)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "012450",
+          "n": "한화에어로스페이스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 15610027000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 등"
+        },
+        {
+          "t": "452260",
+          "n": "한화갤러리아",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 789145000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "t": "000880",
+          "n": "한화",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 114436000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입 등, 특수관계자거래"
+        },
+        {
+          "t": "000370",
+          "n": "한화손해보험",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 17214000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입 등, 특수관계자거래"
+        },
+        {
+          "n": "Hanwha Japan Co., Ltd.",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 42518000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입 등, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "009830",
+          "n": "한화솔루션",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2578392000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출, 특수관계자거래"
+        },
+        {
+          "t": "042660",
+          "n": "한화오션",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 38981242000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "Hanwha Europe GmbH",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 14283872000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "Hanwha Japan Co., Ltd.",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 12747473000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "Hanwha Machinery Americas, Inc.",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4867799000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "HANWHA Q CELLS GEORGIA,INC.",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2811378000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "한화모멘텀㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 578840000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출, 특수관계자거래"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>U5 — 비상장·개인 노드 시각 문법 목업</title>
+<link rel="stylesheet" href="../../integration/dossier/tokens.css">
+<style>
+  @font-face{font-family:'Pretendard Variable';src:url('../../integration/dossier/assets/fonts/pretendard/PretendardVariable.woff2') format('woff2-variations');font-weight:45 920;font-display:swap}
+  @font-face{font-family:'IBM Plex Mono';src:url('../../integration/dossier/assets/fonts/ibm-plex-mono/IBMPlexMono-Regular.latin.woff2') format('woff2');font-weight:400;font-display:swap}
+  @font-face{font-family:'IBM Plex Mono';src:url('../../integration/dossier/assets/fonts/ibm-plex-mono/IBMPlexMono-SemiBold.latin.woff2') format('woff2');font-weight:600;font-display:swap}
+  :root{
+    --bg:#05060d; --text:#eef4fb; --dim:#8fa1b6; --dim2:#5c6b80;
+    --panel:rgba(12,17,30,.78); --line:rgba(140,170,210,.13);
+    --mint:#74EEC6; --sans:'Pretendard Variable',system-ui,sans-serif; --mono:'IBM Plex Mono',monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);padding:24px}
+  h1{font-family:var(--mono);font-size:15px;letter-spacing:.18em;font-weight:600;margin:0 0 4px}
+  .sub{color:var(--dim);font-size:12px;margin-bottom:20px}
+  .wrap{display:grid;grid-template-columns:320px 1fr;gap:20px;align-items:start}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:14px}
+  .panel-title{font-family:var(--mono);font-size:11px;letter-spacing:.22em;font-weight:600;margin-bottom:2px}
+  .panel-sub{font-size:10px;color:var(--dim2);margin-bottom:12px}
+  .sec-h{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--dim);margin:14px 0 8px;padding-top:10px;border-top:1px solid var(--line)}
+  .sec-h:first-child{border-top:0;padding-top:0;margin-top:0}
+  .row{display:flex;align-items:center;gap:10px;padding:4px 0}
+  .row .lbl{font-size:12px}
+  .row .note{font-size:10px;color:var(--dim2);margin-left:auto;font-family:var(--mono)}
+  canvas{display:block;background:radial-gradient(ellipse at 50% 45%,rgba(92,107,128,.07),transparent 62%),#05060d;border:1px solid var(--line);border-radius:3px;width:100%;height:640px}
+  .cap{font-size:11px;color:var(--dim);margin-top:8px;line-height:1.7}
+  .cap b{color:var(--text);font-weight:600}
+  code{font-family:var(--mono);font-size:10.5px;color:var(--mint)}
+</style>
+</head>
+<body>
+<h1>U5 · UNLISTED NODE GRAMMAR</h1>
+<div class="sub">비상장·개인 노드 시각 문법 목업 — 강원랜드(035250) 실데이터. 승인 후 EgoView에 구현.</div>
+
+<div class="wrap">
+  <div>
+    <div class="panel">
+      <div class="panel-title">NODE TYPOLOGY</div>
+      <div class="panel-sub">노드 유형</div>
+      <div class="sec-h">◍ 상장 — 섹터색 · 시총 크기</div>
+      <div class="row"><svg width="30" height="18"><circle cx="15" cy="9" r="7" fill="#5eead4"/></svg><span class="lbl">상장사</span><span class="note">클릭 → 이동</span></div>
+      <div class="sec-h">◌ 비상장류 — 무채 · 형태로 구분</div>
+      <div class="row"><svg width="30" height="18"><circle cx="15" cy="9" r="5" fill="#5c6b80"/></svg><span class="lbl">비상장법인</span><span class="note">채운 원</span></div>
+      <div class="row"><svg width="30" height="18"><circle cx="15" cy="9" r="5" fill="none" stroke="#5c6b80" stroke-width="1.6"/></svg><span class="lbl">개인</span><span class="note">링</span></div>
+      <div class="row"><svg width="30" height="18"><circle cx="15" cy="9" r="5" fill="none" stroke="#5c6b80" stroke-width="1.6" stroke-dasharray="2.5 2.5"/></svg><span class="lbl">조합·펀드</span><span class="note">점선 링</span></div>
+      <div class="row"><svg width="30" height="18"><circle cx="15" cy="9" r="6.5" fill="none" stroke="#5c6b80" stroke-width="1.3"/><circle cx="15" cy="9" r="3.2" fill="none" stroke="#5c6b80" stroke-width="1.3"/></svg><span class="lbl">공공기관</span><span class="note">이중 링</span></div>
+      <div style="font-size:10.5px;color:var(--dim2);line-height:1.7;margin-top:12px;padding-top:10px;border-top:1px solid var(--line)">
+        비상장 노드는 <b style="color:var(--dim)">클릭해도 이동하지 않습니다</b> — 표기·유형·관계만 보여주는 팝오버.
+        공시에 적힌 문자열 그대로 표시하며, 다른 기업의 같은 이름과 연결하지 않습니다.
+      </div>
+    </div>
+    <div class="panel" style="margin-top:14px">
+      <div class="panel-title">EDGE · 강등</div>
+      <div class="panel-sub">중요도</div>
+      <div class="row"><svg width="44" height="14"><line x1="2" y1="7" x2="42" y2="7" stroke="#74EEC6" stroke-width="2"/></svg><span class="lbl">상장 상대</span><span class="note">alpha 1.0</span></div>
+      <div class="row"><svg width="44" height="14"><line x1="2" y1="7" x2="42" y2="7" stroke="#74EEC6" stroke-width="2" opacity=".38"/></svg><span class="lbl">비상장 상대</span><span class="note">alpha .38</span></div>
+      <div style="font-size:10.5px;color:var(--dim2);line-height:1.7;margin-top:10px">
+        관계유형 색·선 스타일은 <b style="color:var(--dim)">그대로</b> 두고 투명도만 낮춥니다 —
+        파선=계열사, 점선=특수관계자, 빈 테두리=T2로 선 스타일 축이 이미 점유돼 있어서입니다.
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <canvas id="c" width="1600" height="1280"></canvas>
+    <div class="cap">
+      <b>강원랜드</b> — DART 2025 사업보고서 실데이터. 위 = 강원랜드를 소유한 곳(한국광해광업공단 36.27%),
+      아래 = 강원랜드가 소유한 곳. 종전에는 <b>전부 비상장이라 화면이 완전히 비어 있었습니다.</b><br>
+      <code>subsidiary &gt;50% (mint)</code> · <code>associate 20–50% (violet)</code> · <code>investment 5–20% (amber)</code>
+    </div>
+  </div>
+</div>
+
+<script>
+const NODES = [
+  { n:'한국광해광업공단', kind:'public_org',   type:'associate',  detail:'36.27%', dir:'in'  },
+  { n:'㈜하이원엔터테인먼트', kind:'private_corp', type:'subsidiary', detail:'100.0%', dir:'out' },
+  { n:'㈜하이원파트너스',   kind:'private_corp', type:'subsidiary', detail:'100.0%', dir:'out' },
+  { n:'㈜하이원추추파크',   kind:'private_corp', type:'subsidiary', detail:'99.64%', dir:'out' },
+  { n:'㈜키즈라라',        kind:'private_corp', type:'associate',  detail:'30.54%', dir:'out' },
+  { n:'㈜문경레저타운',     kind:'private_corp', type:'associate',  detail:'27.27%', dir:'out' },
+  { n:'블랙밸리C.C.㈜',    kind:'private_corp', type:'investment', detail:'16.55%', dir:'out' },
+];
+// 유형 다양성 시연용 참고 노드(다른 회사 실데이터에서 관측되는 형태)
+const EXTRA = [
+  { n:'정용지', kind:'person', type:'subsidiary', detail:'63.28%', dir:'in', ghost:true },
+  { n:'소프트웨어공제조합', kind:'coop_fund', type:'investment', detail:'8.10%', dir:'out', ghost:true },
+];
+const TYPE_COLOR = { subsidiary:'#74EEC6', associate:'#a78bfa', investment:'#fbbf24' };
+const UNLISTED = '#5c6b80';
+const cv = document.getElementById('c'), ctx = cv.getContext('2d');
+const W = cv.width, H = cv.height, CX = W/2, CY = H/2;
+
+function drawNodeShape(x, y, kind, r) {
+  ctx.strokeStyle = UNLISTED; ctx.fillStyle = UNLISTED; ctx.lineWidth = 2.6;
+  ctx.setLineDash([]);
+  if (kind === 'private_corp') { ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill(); }
+  else if (kind === 'person')  { ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.stroke(); }
+  else if (kind === 'coop_fund'){ ctx.setLineDash([4,4]); ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.stroke(); ctx.setLineDash([]); }
+  else { ctx.lineWidth=2.2; ctx.beginPath(); ctx.arc(x,y,r*1.25,0,7); ctx.stroke();
+         ctx.beginPath(); ctx.arc(x,y,r*0.55,0,7); ctx.stroke(); }
+}
+function arrow(x1,y1,x2,y2,color,alpha){
+  ctx.save(); ctx.globalAlpha=alpha; ctx.strokeStyle=color; ctx.lineWidth=2.4;
+  ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+  const a=Math.atan2(y2-y1,x2-x1), L=16;
+  ctx.fillStyle=color; ctx.beginPath();
+  ctx.moveTo(x2,y2);
+  ctx.lineTo(x2-L*Math.cos(a-.38), y2-L*Math.sin(a-.38));
+  ctx.lineTo(x2-L*Math.cos(a+.38), y2-L*Math.sin(a+.38));
+  ctx.closePath(); ctx.fill(); ctx.restore();
+}
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  const ins = NODES.filter(n=>n.dir==='in').concat(EXTRA.filter(n=>n.dir==='in'));
+  const outs= NODES.filter(n=>n.dir==='out').concat(EXTRA.filter(n=>n.dir==='out'));
+
+  function place(list, upward){
+    const n=list.length, span=Math.min(1180, 190*n), y=upward?CY-330:CY+330;
+    return list.map((d,i)=>({ ...d, x: CX - span/2 + span*(n===1?0.5:i/(n-1)), y }));
+  }
+  const P=[...place(ins,true), ...place(outs,false)];
+
+  P.forEach(d=>{
+    const col=TYPE_COLOR[d.type]||'#94a3b8';
+    const alpha = d.ghost ? .18 : .38;                 // 비상장 = 알파 강등
+    if (d.dir==='in') arrow(d.x, d.y+28, CX, CY-42, col, alpha);
+    else              arrow(CX, CY+42, d.x, d.y-28, col, alpha);
+  });
+
+  P.forEach(d=>{
+    ctx.save(); ctx.globalAlpha = d.ghost ? .45 : 1;
+    drawNodeShape(d.x, d.y, d.kind, 11);
+    ctx.font='600 20px "Pretendard Variable", sans-serif';
+    ctx.textAlign='center'; ctx.fillStyle='#8fa1b6';
+    ctx.fillText(d.n, d.x, d.y + (d.dir==='in' ? -26 : 40));
+    ctx.font='400 17px "IBM Plex Mono", monospace';
+    ctx.fillStyle=TYPE_COLOR[d.type]||'#94a3b8'; ctx.globalAlpha=(d.ghost?.45:1)*.85;
+    ctx.fillText(d.detail, d.x, d.y + (d.dir==='in' ? -48 : 62));
+    if(d.ghost){ ctx.font='400 13px "IBM Plex Mono", monospace'; ctx.fillStyle='#5c6b80';
+      ctx.fillText('(타사 관측 예시)', d.x, d.y + (d.dir==='in' ? -68 : 82)); }
+    ctx.restore();
+  });
+
+  // 앵커 (상장사 = 섹터색 채운 원)
+  const g=ctx.createRadialGradient(CX,CY,0,CX,CY,64);
+  g.addColorStop(0,'rgba(134,239,172,.5)'); g.addColorStop(1,'rgba(134,239,172,0)');
+  ctx.fillStyle=g; ctx.beginPath(); ctx.arc(CX,CY,64,0,7); ctx.fill();
+  ctx.fillStyle='#86efac'; ctx.beginPath(); ctx.arc(CX,CY,17,0,7); ctx.fill();
+  ctx.font='700 24px "Pretendard Variable", sans-serif'; ctx.textAlign='center';
+  ctx.fillStyle='#86efac'; ctx.fillText('강원랜드', CX, CY-34);
+  // 메타는 이름 위로 — 아래는 엣지가 방사되는 구간이라 겹친다
+  ctx.font='400 15px "IBM Plex Mono", monospace'; ctx.fillStyle='#5c6b80';
+  ctx.fillText('035250 · KOSPI · 레저·교육', CX, CY-58);
+}
+draw();
+</script>
+</body>
+</html>

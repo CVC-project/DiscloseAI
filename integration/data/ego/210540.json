@@ -1,0 +1,95 @@
+{
+  "t": "210540",
+  "n": "디와이파워",
+  "s": "기계·장비",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "013570",
+        "n": "디와이",
+        "type": "associate",
+        "detail": "38.44% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "금융",
+        "tier": "dot"
+      },
+      {
+        "n": "DY AMERICA Inc.",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "33.5% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "DY POWER INDIA Pvt.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "Dongyang Mechatronics Jiangyin Co., Ltd.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "n": "DY JAPAN Co., Ltd.",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 12384000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "DY AMERICA Inc.와 그 종속기업",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 4863000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "DY AMERICA Inc.와 그 종속기업",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 92244688000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "DY JAPAN Co., Ltd.",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 64837898000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "디와이이노베이트 주식회사",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3955601000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
+    }
+  }
+}

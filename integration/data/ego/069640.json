@@ -1,0 +1,175 @@
+{
+  "t": "069640",
+  "n": "한세엠케이",
+  "s": "유통",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "016450",
+        "n": "한세예스24홀딩스",
+        "type": "subsidiary",
+        "detail": "69.15% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "섬유·의류",
+        "tier": "dot"
+      },
+      {
+        "t": "105630",
+        "n": "한세실업",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "섬유·의류",
+        "tier": "dot"
+      },
+      {
+        "n": "가애수복식(상해) 유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "뉴본한세예스24 라이징스타 1호",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "14.84% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "만쿤(상해)상무 유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "스마트 무신사- 한국투자 펀드 1호",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "9.9% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "한세드림재팬(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "016450",
+          "n": "한세예스24홀딩스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 21680316000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        },
+        {
+          "t": "105630",
+          "n": "한세실업",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1314345000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        },
+        {
+          "n": "에이치에스소싱(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1314345000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "t": "016450",
+          "n": "한세예스24홀딩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 28855000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "t": "105630",
+          "n": "한세실업",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 61744000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "스타일이십사(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3830952000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "예스이십사(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 20712000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "한세모빌리티(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 5328000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "동아출판(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2173000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "(주)와이앤케이미디어",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 276000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "에이치에스소싱(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 267000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        }
+      ]
+    }
+  }
+}

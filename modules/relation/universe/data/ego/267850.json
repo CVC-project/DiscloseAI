@@ -1,0 +1,62 @@
+{
+  "t": "267850",
+  "n": "아시아나IDT",
+  "s": "플랫폼",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "020560",
+        "n": "아시아나항공",
+        "type": "subsidiary",
+        "detail": "76.22% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "운송·물류",
+        "tier": "named400"
+      },
+      {
+        "t": "180640",
+        "n": "한진칼",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
+        "n": "아시아나티앤아이(주) [비상장]",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "40.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "180640",
+          "n": "한진칼",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 81120000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 등"
+        }
+      ],
+      "down": [
+        {
+          "t": "180640",
+          "n": "한진칼",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 25686000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입 등"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "t": "023450",
+  "n": "동남합성",
+  "s": "화학",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "002840",
+        "n": "미원상사",
+        "type": "investment",
+        "detail": "8.79% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "화학",
+        "tier": "dot"
+      },
+      {
+        "t": "107590",
+        "n": "미원홀딩스",
+        "type": "associate",
+        "detail": "43.97% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "금융",
+        "tier": "dot"
+      },
+      {
+        "n": "한국계면활성제협동조합",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "11.46% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "002840",
+          "n": "미원상사",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 564654000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        }
+      ],
+      "down": [
+        {
+          "t": "002840",
+          "n": "미원상사",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 12068040000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        }
+      ]
+    }
+  }
+}

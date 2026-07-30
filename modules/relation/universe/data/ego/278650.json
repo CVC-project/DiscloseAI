@@ -1,0 +1,137 @@
+{
+  "t": "278650",
+  "n": "HLB바이오스텝",
+  "s": "지주",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "028300",
+        "n": "HLB",
+        "type": "investment",
+        "detail": "14.85% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "제약바이오",
+        "tier": "named400"
+      },
+      {
+        "t": "046210",
+        "n": "HLB파나진",
+        "type": "investment",
+        "detail": "7.21% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "제약바이오",
+        "tier": "dot"
+      },
+      {
+        "t": "115450",
+        "n": "HLB테라퓨틱스",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "유통",
+        "tier": "dot"
+      },
+      {
+        "n": "BNH-POSCO 바이오헬스케어 투자조합",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "13.56% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "HLBI 알밤 제1호 투자조합",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "18.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "HLB바이오코드",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "66.36% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "마이다스동아 바이오내비게이터 투자조합",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "11.36% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "무진메디",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "7.33% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "브이에스팜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "66.2% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "새론바이오",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "60.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "파미노젠",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "33.97% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "028300",
+          "n": "HLB",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 127446000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "067630",
+          "n": "HLB생명과학",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 12259000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "024850",
+          "n": "HLB이노베이션",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 38880000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        }
+      ]
+    }
+  }
+}

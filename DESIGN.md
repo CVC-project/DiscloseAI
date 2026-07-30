@@ -58,6 +58,30 @@ CSS 변수는 iframe 경계를 넘지 못한다 → **각 페이지가 직접 li
 
 **토큰 명명 규칙**: 위 이름만. 별칭(`--teal`·`--pink`·`--violet` 등) 금지 — 2026-07 표준화 완료.
 
+### 2.5 섹터 은하 색 (카테고리 식별색) — 추가·변경 절차
+
+§2의 6개 재무 시맨틱 토큰과 **별개 축**이다. 섹터 색은 "재무적 의미"가 아니라
+SectorMap 은하의 **카테고리 식별색**(반도체=teal 등, 그 자체로 의미 없음). 정본 =
+`integration/v2/src/adapter.js`의 `SECTOR_DEF`(코드 상수, ko명→{id,en,color}). fallback
+`SECTOR_PALETTE`(bundle.jsx)도 **같은 값으로 정합 유지**(둘이 어긋나면 섹터가 조용히 사라짐).
+
+새 섹터를 추가하거나 색을 바꿀 때 규칙:
+
+1. **패밀리(계열) 그룹핑** — 관련 산업끼리 인접 색상(테크=teal~blue, 중공업=violet~purple,
+   금융=amber~gold, 소비=lime~green, 뷰티=pink~rose 등). 무작위 배정 금지.
+2. **재무 시맨틱 토큰과 근접 색상 회피** — 특히 green 대역(`--green #63d68e`≈142°·
+   `--mint #74EEC6`≈158°)은 좁으니 섹터 green은 이 둘과 명도·채도로 구분되게(또는 대역 회피).
+3. **명도 일관** — 어두운 배경(`--bg #05060d`) 위 파스텔(L≈68%) 유지. 기존 색과 톤 맞춤.
+4. **한 번 배정한 색은 고정** — 섹터 정체성이라 "예쁘다고" 바꾸지 않는다(§2 원칙 준용).
+5. **게이트**: `SECTOR_DEF`에 등록 후 `python -m integration.extract_data` 실행 —
+   V-2 핸드오프 assert(`sectors.json` 전 섹터가 `SECTOR_DEF`에 있는지)가 통과해야 한다
+   (미등록 시 exit 1). 색 배정 = **integration(리더) 소유**, 섹터 목록(`sectors.json`) =
+   relation 소유(universe/PLAN.md §0.5 경계).
+
+> 현재 25 섹터(2026-07-22, universe 확장) 전량 `SECTOR_DEF` 등록 완료. 이력: 구 top50
+> 12 섹터 → universe 25 섹터로 확장하며 16종 신규 배정(리더 초안 검토). 구 바이오/2차전지/
+> 디스플레이는 sectors.json 미포함이나 하위호환용으로 `SECTOR_DEF`에 잔존(미사용).
+
 ## 3. 폰트 시스템 (2026-07-13 전면 통일)
 
 **두 벌만 쓴다** — 한글은 Pretendard, 그 외 모두 IBM Plex Mono. 로컬 벤더링만(CDN 금지).
@@ -140,6 +164,7 @@ CSS 변수는 iframe 경계를 넘지 못한다 → **각 페이지가 직접 li
 | [GALAXY_JSON_SCHEMA.md](integration/dossier/GALAXY_JSON_SCHEMA.md) | galaxy JSON 데이터 스키마 (디자인 아님) |
 | [DOSSIER_TABS_PLAN.md](integration/dossier/DOSSIER_TABS_PLAN.md) | 3탭 실행 계획 (디자인 결정 D1~D12) |
 | [integration/v2/DESIGN.md](integration/v2/DESIGN.md) | v2 셸 로직·인터랙션 기록 (렌더 알고리즘·데이터 어댑터) |
+| [integration/v2/UX_DECISIONS.md](integration/v2/UX_DECISIONS.md) | v2 셸 **UX 결정 원장**(UX-### — 리더 피드백·기각·재설계 채록, VARIATIONS 선례) |
 | [design/](design/) | 프로토타입 원형·제작 사양서 — 자구·데이터 판정 기준 |
 
 ## 10. 잔여 격차 (다음 정비 대상)

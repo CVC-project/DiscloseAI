@@ -1,0 +1,207 @@
+{
+  "t": "000430",
+  "n": "대원강업",
+  "s": "자동차",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "005440",
+        "n": "현대지에프홀딩스",
+        "type": "associate",
+        "detail": "32.8% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
+        "t": "069960",
+        "n": "현대백화점",
+        "type": "ftc_group",
+        "detail": "현대백화점 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "유통",
+        "tier": "named400"
+      },
+      {
+        "t": "023000",
+        "n": "삼원강재",
+        "type": "subsidiary",
+        "detail": "55.0% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "자동차",
+        "tier": "dot"
+      },
+      {
+        "t": "005440",
+        "n": "현대지에프홀딩스",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
+        "n": "(주)대원총업",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "11.38% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "(주)대코",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "14.29% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "DAEWON AMERICA, INC.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "82.05% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "DAEWON EUROPE CO., LTD.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "DAEWON INDIA AUTOPARTS PRIVATE LIMITED",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "DAEWON MEXICO, S. DE R.L. DE C.V",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "86.55% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "DAEWON SPRING & SEAT LLC.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "강소미력대원아시아 기차탄황유한공사",
+        "kind": "public_org",
+        "type": "investment",
+        "detail": "19.9% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "대원정밀공업",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "59.38% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "북경미력대원아시아 기차과기유한공사",
+        "kind": "public_org",
+        "type": "investment",
+        "detail": "19.9% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "콘티테크대원에어 스프링시스템즈(유)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "49.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "069960",
+          "n": "현대백화점",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 14179000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        },
+        {
+          "t": "079430",
+          "n": "현대리바트",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 48325000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "453340",
+          "n": "현대그린푸드",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2116157000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매출"
+        },
+        {
+          "n": "콘티테크대원",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 5138533000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "콘티테크대원",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2081456000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "강소미력대원",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 826565000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "북경미력대원",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 480801000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
+    }
+  }
+}

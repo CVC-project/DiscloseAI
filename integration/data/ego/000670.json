@@ -1,0 +1,195 @@
+{
+  "t": "000670",
+  "n": "영풍",
+  "s": "철강·금속",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "010130",
+        "n": "고려아연",
+        "type": "ftc_group",
+        "detail": "영풍 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "철강·금속",
+        "tier": "named400"
+      },
+      {
+        "t": "010130",
+        "n": "고려아연",
+        "type": "dart_filing",
+        "detail": "유의적 영향력 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "철강·금속",
+        "tier": "named400"
+      },
+      {
+        "t": "007810",
+        "n": "코리아써키트",
+        "type": "associate",
+        "detail": "40.21% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "반도체",
+        "tier": "named400"
+      },
+      {
+        "t": "007810",
+        "n": "코리아써키트",
+        "type": "dart_filing",
+        "detail": "지배기업 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "반도체",
+        "tier": "named400"
+      },
+      {
+        "n": "(유)엠와이지",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "(유)와이피씨",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "Sun Metals Holdings Limited",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "10.6% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜영풍JAPAN",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜영풍이앤이",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜테라닉스",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "42.64% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "농업회사법인 에스피팜랜드(유)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "90.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "씨케이(유)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "6.84% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "영풍개발㈜",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "16.45% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "영풍전자㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "장 세 준",
+        "kind": "person",
+        "type": "investment",
+        "detail": "17.9% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "장 세 환",
+        "kind": "person",
+        "type": "investment",
+        "detail": "12.54% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "케이지트레이딩㈜",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "7.85% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "켐코㈜",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "6.13% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "010130",
+          "n": "고려아연",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 328493000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        },
+        {
+          "t": "007810",
+          "n": "코리아써키트",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 414273524.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        }
+      ],
+      "down": [
+        {
+          "t": "010130",
+          "n": "고려아연",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 92923774000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입"
+        }
+      ]
+    }
+  }
+}

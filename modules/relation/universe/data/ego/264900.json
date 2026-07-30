@@ -1,0 +1,62 @@
+{
+  "t": "264900",
+  "n": "크라운제과",
+  "s": "식음료",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "101530",
+        "n": "해태제과식품",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "식음료",
+        "tier": "dot"
+      },
+      {
+        "t": "005740",
+        "n": "크라운해태홀딩스",
+        "type": "associate",
+        "detail": "41.2% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "금융",
+        "tier": "dot"
+      },
+      {
+        "n": "윤영달",
+        "kind": "person",
+        "type": "associate",
+        "detail": "20.26% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "101530",
+          "n": "해태제과식품",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 13647115000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "101530",
+          "n": "해태제과식품",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 81757000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        }
+      ]
+    }
+  }
+}

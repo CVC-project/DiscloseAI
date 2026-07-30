@@ -14,7 +14,7 @@ tools:
 ## 입력 (호출 프롬프트가 반드시 제공)
 - 대상 카드 JSON(1장) + ticker
 - fact-sheet 경로(`modules/report/data/facts/facts_<ticker>.json`) + series(검증된 5개년)
-- 필요 시 주석 원문: `modules/report/data/reports.db` `report_section`(Bash로 sqlite 조회)
+- 필요 시 주석 원문: `shared/data/reports.db` `report_section`(Bash로 sqlite 조회)
 
 ## 검증 절차 (카드당)
 1. **브래킷 수치 전수**: 카드의 모든 `[값]`에 대해 — fact-sheet·series에 존재? 비율·배수면 어떤 두 값의 계산인지 재계산(허용 오차: 조 단위 ±0.1, % ±1p). 근거 못 찾으면 REFUTED.

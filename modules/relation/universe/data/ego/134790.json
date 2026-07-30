@@ -1,0 +1,76 @@
+{
+  "t": "134790",
+  "n": "시디즈",
+  "s": "기타",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "016800",
+        "n": "퍼시스",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "기타",
+        "tier": "dot"
+      },
+      {
+        "n": "(주)바로스",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "15.1% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "(주)일룸",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "40.6% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "SIDIZ AMERICA LLC",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "SIDIZ CHINA INC.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "016800",
+          "n": "퍼시스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 40094847688.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "016800",
+          "n": "퍼시스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 49976459405.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입, 특수관계자거래"
+        }
+      ]
+    }
+  }
+}

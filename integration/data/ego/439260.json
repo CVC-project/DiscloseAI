@@ -1,0 +1,48 @@
+{
+  "t": "439260",
+  "n": "대한조선",
+  "s": "중공업·방산",
+  "tier": "named400",
+  "layers": {
+    "governance": [
+      {
+        "n": "㈜대한위드엔젤스",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜케이에이치아이",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "46.1% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜해남화원산업단지개발",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "n": "(주)포스텍",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 15615080000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": []
+    }
+  }
+}

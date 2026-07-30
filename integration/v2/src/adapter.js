@@ -17,20 +17,48 @@
 (function () {
   "use strict";
 
-  // sector ko → {id, en, color}. Covers the 12 distinct sectors in top50.csv.
+  // sector ko → {id, en, color}. universe 25 섹터 전량 등록 (universe/PLAN.md U-D7·§5.5 V-2).
+  // 색 = 패밀리(계열) 그룹핑 — 관련 산업끼리 인접 색상. 배정 절차는 DESIGN.md §2.5 참조.
+  // ⚠️ 신규 색 추가·변경은 DESIGN.md 절차 준수 + extract_data.py V-2 assert 통과 필수.
+  // (구 12종 중 sectors.json에 없는 바이오/2차전지/디스플레이는 하위호환용으로 유지 — 미사용.)
   const SECTOR_DEF = {
-    "반도체":         { id: "semi",    en: "Semiconductor", color: "#5eead4" },
-    "금융":           { id: "fin",     en: "Financials",    color: "#fbbf24" },
-    "플랫폼":         { id: "it",      en: "Platform",      color: "#60a5fa" },
-    "자동차":         { id: "auto",    en: "Automotive",    color: "#a78bfa" },
-    "바이오":         { id: "bio",     en: "Biotech",       color: "#f472b6" },
-    "에너지":         { id: "energy",  en: "Energy",        color: "#f97316" },
-    "2차전지":        { id: "battery", en: "Battery",       color: "#22d3ee" },
-    "중공업·방산":    { id: "indust",  en: "Industrials",   color: "#c084fc" },
-    "디스플레이":     { id: "display", en: "Display",       color: "#fde047" },
-    "건설":           { id: "cons",    en: "Construction",  color: "#fb923c" },
-    "통신":           { id: "tele",    en: "Telecom",       color: "#818cf8" },
-    "기타":           { id: "etc",     en: "Other",         color: "#94a3b8" },
+    // 테크·전자 (teal→cyan→blue)
+    "반도체":         { id: "semi",       en: "Semiconductor",   color: "#5eead4" },
+    "전기전자부품":   { id: "elec_parts", en: "Electronic Parts", color: "#2dd4bf" },
+    "소재":           { id: "materials",  en: "Materials",       color: "#67e8f9" },
+    "플랫폼":         { id: "it",         en: "Platform",        color: "#60a5fa" },
+    "통신":           { id: "tele",       en: "Telecom",         color: "#818cf8" },
+    // 모빌리티·중공업 (violet→purple)
+    "자동차":         { id: "auto",       en: "Automotive",      color: "#a78bfa" },
+    "기계·장비":      { id: "machinery",  en: "Machinery",       color: "#c4b5fd" },
+    "중공업·방산":    { id: "indust",     en: "Industrials",     color: "#c084fc" },
+    "철강·금속":      { id: "steel",      en: "Steel & Metal",   color: "#a5b4fc" },
+    // 금융 (amber→gold)
+    "금융":           { id: "fin",        en: "Financials",      color: "#fbbf24" },
+    "지주":           { id: "holding",    en: "Holdings",        color: "#fcd34d" },
+    // 에너지·화학 (orange)
+    "에너지":         { id: "energy",     en: "Energy",          color: "#f97316" },
+    "건설":           { id: "cons",       en: "Construction",    color: "#fb923c" },
+    "화학":           { id: "chem",       en: "Chemicals",       color: "#fdba74" },
+    // 소비 (lime→green)
+    "유통":           { id: "retail",     en: "Retail",          color: "#a3e635" },
+    "식음료":         { id: "food",       en: "F&B",             color: "#bef264" },
+    "레저·교육":      { id: "leisure",    en: "Leisure & Edu",   color: "#86efac" },
+    // 헬스·뷰티 (pink→rose)
+    "제약바이오":     { id: "pharma",     en: "Pharma & Bio",    color: "#f472b6" },
+    "화장품":         { id: "cosmetics",  en: "Cosmetics",       color: "#f9a8d4" },
+    "섬유·의류":      { id: "textile",    en: "Textile",         color: "#fda4af" },
+    // 미디어 (magenta)
+    "미디어":         { id: "media",      en: "Media",           color: "#e879f9" },
+    // 서비스·중립
+    "운송·물류":      { id: "logistics",  en: "Logistics",       color: "#7dd3fc" },
+    "부동산":         { id: "realestate", en: "Real Estate",     color: "#d6bfa8" },
+    "전문서비스":     { id: "prof_svc",   en: "Prof. Services",  color: "#cbd5e1" },
+    "기타":           { id: "etc",        en: "Other",           color: "#94a3b8" },
+    // 하위호환(구 top50 taxonomy, sectors.json 미포함 — 미사용)
+    "바이오":         { id: "bio",        en: "Biotech",         color: "#f472b6" },
+    "2차전지":        { id: "battery",    en: "Battery",         color: "#22d3ee" },
+    "디스플레이":     { id: "display",    en: "Display",         color: "#fde047" },
   };
 
   // graph_top50 rl type → standalone REL_STYLES key.
@@ -146,6 +174,9 @@
           cap: Math.max(1, Math.round(totalJo)),
           memberCount: s.memberCount,
           members: s.members,
+          // universe(U2): 전량 기업 수 + LOD-1 배경 dots 좌표. top50 경로면 없음.
+          count: s.count != null ? s.count : s.memberCount,
+          dots: s.dots || [],
         };
       });
   }
@@ -162,6 +193,67 @@
     }
     for (const [id, members] of bySector) {
       out[id] = layoutCompanies(members);
+    }
+    return out;
+  }
+
+  // ── U2 시장별 데이터 (드릴인 LOD) ──────────────────────────────────
+  // 섹터 → KOSPI/KOSDAQ 성운(두 덩이) → 성운 클릭 드릴인 → 시장별 상위 ~10 named + dots.
+  // 위치(레이아웃)는 모드(성운 개요 vs 드릴인)에 따라 SectorMap이 계산 — adapter는 원자료만 공급.
+  const MARKET_NAMED_CAP = 10;   // 드릴인 시 시장별 최대 named 노드 수
+  function _capJo(m) {
+    if (m.market_cap) return Math.min(600, m.market_cap / 1e12);
+    if (typeof m.mc === "number") return Math.min(600, m.mc / 1e12);
+    return Math.max(1, (m.sz || 1) * 5);
+  }
+
+  // {id: {KOSPI:{named:[{code,name,cap,market}...cap desc], dotItems:[{cb,t,n}...], total}, KOSDAQ:{...}}}
+  function buildSectorMarketData(palette, nodes, companiesIndex) {
+    const koToId = new Map(palette.map((p) => [p.ko, p.id]));
+    const namedBySector = new Map();
+    for (const n of nodes) {
+      const id = koToId.get(n.s);
+      if (!id) continue;
+      if (!namedBySector.has(id)) namedBySector.set(id, []);
+      namedBySector.get(id).push(n);
+    }
+    // dot 기업에 신원(t·n) 유지 — UX-009: dot hover 툴팁·클릭 진입에 필요
+    const dotInfo = new Map();  // ko → {KOSPI:[{cb,t,n}], KOSDAQ:[{cb,t,n}]} (tier==='dot' 기업)
+    for (const c of (companiesIndex || [])) {
+      if (c.tier !== "dot") continue;
+      if (!dotInfo.has(c.s)) dotInfo.set(c.s, { KOSPI: [], KOSDAQ: [] });
+      const g = dotInfo.get(c.s);
+      (g[c.mkt] || g.KOSDAQ).push({ cb: c.cb || 0, t: c.t, n: c.n });
+    }
+    const out = {};
+    for (const p of palette) {
+      const named = namedBySector.get(p.id) || [];
+      const di = dotInfo.get(p.ko) || { KOSPI: [], KOSDAQ: [] };
+      const mk = {};
+      for (const M of ["KOSPI", "KOSDAQ"]) {
+        const mnamed = named
+          .filter((n) => n.mkt === M)
+          .sort((a, b) => _capJo(b) - _capJo(a))
+          .map((n) => ({ code: n.t, name: n.n, cap: Math.max(1, Math.round(_capJo(n))), market: M }));
+        // 캡 초과 named도 배경 dot으로(살짝 큰 버킷) — 신원 보존
+        const overflow = mnamed.slice(MARKET_NAMED_CAP).map((x) => ({
+          cb: Math.min(3, Math.max(1, Math.round(x.cap / 6))), t: x.code, n: x.name,
+        }));
+        mk[M] = { named: mnamed, dotItems: [...di[M], ...overflow], total: mnamed.length + di[M].length };
+      }
+      out[p.id] = mk;
+    }
+    return out;
+  }
+
+  // App의 company lookup(activeCompanyCode→company)용 — 시장별 top-N named 평탄화(위치 무관).
+  function flattenNamed(marketData) {
+    const out = {};
+    for (const [id, mk] of Object.entries(marketData)) {
+      out[id] = [
+        ...mk.KOSPI.named.slice(0, MARKET_NAMED_CAP),
+        ...mk.KOSDAQ.named.slice(0, MARKET_NAMED_CAP),
+      ];
     }
     return out;
   }
@@ -224,8 +316,17 @@
     try {
       const result = await D.loadAll();
       const palette = buildPalette(result.sectors);
-      const companies = buildCompaniesByPaletteId(palette, result.nodes);
       const relations = buildRelations(result.nodes);
+
+      // universe 경로(U2): 시장별 드릴인 데이터(성운 개요 → KOSPI/KOSDAQ 드릴인).
+      // top50 fallback이면 기존 단일 클러스터 레이아웃.
+      let companies, sectorMarketData = null;
+      if (result.usingUniverse) {
+        sectorMarketData = buildSectorMarketData(palette, result.nodes, result.companiesIndex);
+        companies = flattenNamed(sectorMarketData);  // App company lookup용
+      } else {
+        companies = buildCompaniesByPaletteId(palette, result.nodes);
+      }
 
       // Index by ticker for fast lookup in dossier panels.
       const nodeByCode = Object.fromEntries(result.nodes.map((n) => [n.t, n]));
@@ -235,6 +336,12 @@
         const t = d.ticker || d.stock_code;
         if (!t) continue;
         (discByTicker[t] = discByTicker[t] || []).push(d);
+      }
+
+      // top50 fallback 전용 dots(export 단일 클러스터). universe는 sectorMarketData로 렌더.
+      let dots = {};
+      if (!sectorMarketData) {
+        for (const p of palette) if (p.dots && p.dots.length) dots[p.id] = p.dots;
       }
 
       window.__realData = {
@@ -248,6 +355,13 @@
         scenarios: result.scenarios,
         meta: result.meta,
         usingMock: result.usingMock,
+        usingUniverse: result.usingUniverse,
+        dots,
+        sectorMarketData,   // universe 드릴인 원자료: {id:{KOSPI:{named,dotItems,total},KOSDAQ:{...}}}
+        // 티커 → {n,s,tier,mkt,cb} 신원 맵 (FN-008 시장 유도·UX-009 dot 기업 진입용)
+        indexByCode: Object.fromEntries((result.companiesIndex || []).map((c) => [c.t, c])),
+        companiesIndex: result.companiesIndex || [],
+        universeMeta: result.universeMeta || null,
       };
       console.log("[adapter] sectors:", palette.length,
                   "companies:", Object.values(companies).reduce((a, c) => a + c.length, 0),

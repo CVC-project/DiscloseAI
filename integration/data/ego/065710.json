@@ -1,0 +1,48 @@
+{
+  "t": "065710",
+  "n": "서호전기",
+  "s": "전기전자부품",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "n": "서호드라이브 주식회사",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "95.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "싱가폴서호",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "70.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "이상호",
+        "kind": "person",
+        "type": "subsidiary",
+        "detail": "54.32% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [],
+      "down": [
+        {
+          "t": "097230",
+          "n": "HJ중공업",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 48000000000.0,
+          "as_of": 2024,
+          "prov": "단일판매ㆍ공급계약체결 · HJ중공업"
+        }
+      ]
+    }
+  }
+}

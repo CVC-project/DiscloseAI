@@ -1,0 +1,66 @@
+{
+  "t": "388210",
+  "n": "씨엠티엑스",
+  "s": "반도체",
+  "tier": "named400",
+  "layers": {
+    "governance": [
+      {
+        "n": "(주)셀릭",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "59.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "Core Materials Advanced Tech CORP",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "70.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "Jiangsu Zijing material Co., Ltd.",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "36.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "박성훈",
+        "kind": "person",
+        "type": "associate",
+        "detail": "30.57% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "183300",
+          "n": "코미코",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 120000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        }
+      ],
+      "down": [
+        {
+          "t": "183300",
+          "n": "코미코",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 13790000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입"
+        }
+      ]
+    }
+  }
+}

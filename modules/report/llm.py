@@ -5,7 +5,8 @@ Phase 4 하네스의 유일한 LLM 진입점. 원격 A100 SGLang(Qwen3-32B-AWQ)�
 - extract(): 구조화 추출 (temp 0, json_schema=xgrammar) — 주석 표 수치 (D7: 숫자는 원문 그대로)
 - thinking off, seed 고정, 재시도, usage 레저(토큰 회계 — 토큰 폭주 가드).
 
-접속: shared/config.py의 REPORT_LLM_* (SSH 터널 `ssh -i ~/.ssh/id_ed25519_gpu -N -L 30000:127.0.0.1:30000 tta@123.37.8.42`).
+접속: shared/config.py의 REPORT_LLM_* (SSH 터널로 원격 30000 포트를 로컬에 포워딩 —
+접속정보는 코드·문서에 기재하지 않음. 로컬 세션 메모리에서만 관리).
 """
 
 from __future__ import annotations
@@ -53,8 +54,8 @@ class LLM:
     def __post_init__(self) -> None:
         if not self.base_url:
             raise RuntimeError(
-                "REPORT_LLM_BASE_URL 미설정 — SSH 터널을 먼저 올리세요 "
-                "(ssh -i ~/.ssh/id_ed25519_gpu -N -L 30000:127.0.0.1:30000 tta@123.37.8.42)."
+                "REPORT_LLM_BASE_URL 미설정 — SSH 터널을 먼저 올리고 .env에 "
+                "REPORT_LLM_BASE_URL(예: http://127.0.0.1:30000/v1)을 설정하세요."
             )
         self._client = OpenAI(base_url=self.base_url, api_key=self.api_key)
 

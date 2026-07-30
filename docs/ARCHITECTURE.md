@@ -99,7 +99,7 @@ yfinance ─────→  modules/price/       ──→  price.db (price_loc
 | 폴더 | 역할 |
 |------|----------|
 | `.claude/` | Skills, Agents, 설정 |
-| `shared/` | 환경변수 로드(config.py, **활성**) + 미래 운영 DB 스키마(db.py·models.py, **현재 미사용**) |
+| `shared/` | 환경변수 로드(config.py, **활성**) + 미래 운영 DB 스키마(db.py·models.py, **현재 미사용**) + **`data/reports.db`**(2026-07-21 승격 — "정본=모듈 로컬" 원칙의 명시적 예외, 아래 참조) |
 | `docs/` | **기초 뼈대 문서만** — 아키텍처(본 문서)·PRD·온보딩·머지 절차. 실행 계획(plan/spec)은 실행되는 폴더에(예: `integration/dossier/DOSSIER_TABS_PLAN.md`) |
 | `design/` | **디자인 정본** — 프로토타입 원형(`prototypes/`: 해방판·kospi50·corporate_universe·dc-runtime.js)·제작 사양서(프롬프트_v6). 디자인 규칙 SSOT는 루트 `DESIGN.md` |
 | (공통) | ⚠️ docs/·design/ 모두 **코드 생성 산출물·데이터·캐시 금지** — 모듈 출력은 `modules/<모듈>/` 아래로 (이슈 #3) |
@@ -111,9 +111,17 @@ yfinance ─────→  modules/price/       ──→  price.db (price_loc
 | `modules/disclosure/` | B | DART 공시 + 분기 재무 + 쉬운 설명 | `disclosure_local`, `financial_statement` |
 | `modules/relation/` | C | 기업 간 관계 (지분·계열) | `company_node`, `relation_raw`, `relation_local` |
 | `modules/price/` | D | 주가 + 공시 후 변동 라벨 | `price_local`, `vkospi_local` |
-| `modules/report/` | 리더 | 사업보고서 원문·정형계정 5개년 (galaxy 파이프라인, Q1) | `report_raw`, `report_section`, `fs_account`, `pipeline_state` (reports.db, 비커밋) |
+| `modules/report/` | 리더 | 사업보고서 원문·정형계정 5개년 (galaxy 파이프라인, Q1) | `report_raw`, `report_section`, `fs_account`, `pipeline_state` (`shared/data/reports.db`, 비커밋 — 아래 예외 참조) |
 
 각 모듈: `db.py`(SQLite 연결), `models.py`(로컬 테이블 = **정본 스키마**), `data/`(DB·JSON, git 커밋됨). **모듈이 생성하는 산출물(HTML·JSON·캐시)도 `docs/`가 아니라 이 폴더 아래**에 둔다 (이슈 #3).
+
+> ⚠️ **"정본=모듈 로컬" 원칙의 공식 예외 (2026-07-21, 리더 결정 — valuechain PLAN D11)**:
+> `reports.db`만 `modules/report/data/`에서 `shared/data/`로 승격했다. 사유: relation 모듈의
+> 밸류체인·지배구조 확장(전 상장사 ~2,600사)이 report의 사업보고서 원문(`report_section`)을
+> 직접 읽어야 하는데, report 자체 수집기를 relation이 중복 구현하면 3중 수집 부채(이슈 #43)가
+> 반복되기 때문. **쓰기 소유는 report 모듈 수집기 단독**, relation 등 타 모듈은 **read-only**.
+> 다른 모듈의 로컬 SQLite(financial.db·disclosure.db·relation.db·price.db)는 이 예외와 무관 —
+> 여전히 각 모듈 폴더 안이 정본이다. 상세: [modules/relation/valuechain/PLAN.md](../modules/relation/valuechain/PLAN.md) §2.1.
 
 ### 서빙 계층 (리더 소유)
 | 폴더 | 역할 |
@@ -152,6 +160,7 @@ D: yfinance 주가 → price_local (price.db);  linker.py가 공시-주가 라�
 | 재무(분기+비율) | `modules/disclosure/data/disclosure.db` | `financial_statement` | corp_code **6자리(ticker)** | Groq 공시분석 맥락용 |
 | 주가 | `modules/price/data/price.db` | `price_local`, `vkospi_local` | corp_code | 라벨은 shared.PriceData에도 |
 | 관계 | `modules/relation/data/relation.db` | `company_node`, `relation_raw`, `relation_local` | **ticker 6자리** | company_node가 8↔6 매핑 보유 |
+| 사업보고서 원문·정형계정 | **`shared/data/reports.db`**(2026-07-21 승격) | `report_raw`, `report_section`, `fs_account`, `pipeline_state` | corp_code **8자리** + ticker **6자리** | 쓰기=report 모듈 단독, 타 모듈 read-only (§2 예외 참조) |
 | (미래 운영) | Supabase | `shared/models.py` 6개 | — | `PriceData`만 활성, 나머지 미사용 |
 
 > ⚠️ **같은 `corp_code` 컬럼이 테이블마다 8자리/6자리로 다르다.** join 시 반드시 자릿수를 확인할 것. relation의 `company_node`가 corp_code(8)↔ticker(6) 매핑의 기준.

@@ -1,0 +1,68 @@
+{
+  "t": "037230",
+  "n": "한국팩키지",
+  "s": "소재",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "034810",
+        "n": "해성산업",
+        "type": "subsidiary",
+        "detail": "51.35% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "금융",
+        "tier": "dot"
+      },
+      {
+        "n": "단우영",
+        "kind": "person",
+        "type": "investment",
+        "detail": "5.03% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "단우준",
+        "kind": "person",
+        "type": "investment",
+        "detail": "5.03% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "단재완",
+        "kind": "person",
+        "type": "investment",
+        "detail": "10.07% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "027970",
+          "n": "한국제지",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2475536000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출 합계"
+        }
+      ],
+      "down": [
+        {
+          "t": "027970",
+          "n": "한국제지",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3253793000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입 합계"
+        }
+      ]
+    }
+  }
+}

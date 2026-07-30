@@ -1,0 +1,88 @@
+{
+  "t": "010660",
+  "n": "화천기계",
+  "s": "기계·장비",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "064850",
+        "n": "에프앤가이드",
+        "type": "investment",
+        "detail": "9.88% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "플랫폼",
+        "tier": "dot"
+      },
+      {
+        "t": "000850",
+        "n": "화천기공",
+        "type": "associate",
+        "detail": "39.95% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "기계·장비",
+        "tier": "dot"
+      },
+      {
+        "t": "000850",
+        "n": "화천기공",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "기계·장비",
+        "tier": "dot"
+      },
+      {
+        "n": "(주)시리우스 인베스트먼트",
+        "kind": "coop_fund",
+        "type": "associate",
+        "detail": "25.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "시리우스 실리콘밸리 1호 신기술투자조합",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "15.24% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "여수 문화방송 주식회사",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "10.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "000850",
+          "n": "화천기공",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 68128792000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "000850",
+          "n": "화천기공",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 4270393000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
+        }
+      ]
+    }
+  }
+}

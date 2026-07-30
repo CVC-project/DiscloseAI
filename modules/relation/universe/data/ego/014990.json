@@ -1,0 +1,60 @@
+{
+  "t": "014990",
+  "n": "인디에프",
+  "s": "섬유·의류",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "011280",
+        "n": "태림포장",
+        "type": "ftc_group",
+        "detail": "글로벌세아 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "소재",
+        "tier": "dot"
+      },
+      {
+        "n": "글로벌세아(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "63.51% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "나산실업(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "011280",
+          "n": "태림포장",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 386425000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출및기타수익"
+        }
+      ],
+      "down": [
+        {
+          "t": "011280",
+          "n": "태림포장",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 266037000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입및기타비용"
+        }
+      ]
+    }
+  }
+}

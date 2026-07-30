@@ -23,7 +23,7 @@ import re
 import sqlite3
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
-_DB = os.path.join(_HERE, "data", "reports.db")
+_DB = os.path.join(os.path.dirname(os.path.dirname(_HERE)), "shared", "data", "reports.db")
 
 # 연결재무제표 최대 5본: raw XML <TITLE> **명칭 매칭** → 키. (V-068)
 # 번호 접두(2-1…)는 회사마다 다르다 — 단일 포괄손익계산서 회사(SK·NAVER·고려아연·현대건설)는

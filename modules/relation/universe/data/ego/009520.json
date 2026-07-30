@@ -1,0 +1,42 @@
+{
+  "t": "009520",
+  "n": "포스코엠텍",
+  "s": "철강·금속",
+  "tier": "named400",
+  "layers": {
+    "governance": [
+      {
+        "t": "005490",
+        "n": "POSCO홀딩스",
+        "type": "ftc_group",
+        "detail": "포스코 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "철강·금속",
+        "tier": "named400"
+      },
+      {
+        "n": "(주)포스코",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "48.85% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "003670",
+          "n": "포스코퓨처엠",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4527895000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ],
+      "down": []
+    }
+  }
+}

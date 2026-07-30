@@ -1,0 +1,60 @@
+{
+  "t": "103590",
+  "n": "일진전기",
+  "s": "전기전자부품",
+  "tier": "named400",
+  "layers": {
+    "governance": [
+      {
+        "t": "015860",
+        "n": "일진홀딩스",
+        "type": "associate",
+        "detail": "49.3% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "금융",
+        "tier": "dot"
+      },
+      {
+        "n": "알피니언메디칼시스템(주)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "16.2% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [],
+      "down": [
+        {
+          "t": "271940",
+          "n": "일진하이솔루스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 50959000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "일진제강(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 67370000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "알피니언메디칼시스템(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 12437000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
+    }
+  }
+}

@@ -37,7 +37,7 @@ until 카드별 3회 초과 → NEEDS_REVIEW.md(리더 큐)에 적고 계속
 - **`python -m modules.report.sectioner --health <ticker>` PASS 필수** — 주석 분할 붕괴·괴물블록·번호 결번(하위번호 누락)을 빌드 전 차단. FAIL이면 sectioner 보강 후 `section_all([ticker])` 재섹션. (이번 세션 3종 조용한 사고의 자동 게이트 — MILKYWAY_GENERATOR §0.)
 
 ## 사전 조건 (아니면 먼저 해결)
-- `modules/report/data/reports.db`에 그 티커의 수집·분할 완료(`report_section`에 note_no 분할 존재). 없으면: `python -m modules.report.collector` → `.sectioner` (옛 XML 포맷이면 sectioner 보강부터).
+- `shared/data/reports.db`에 그 티커의 수집·분할 완료(`report_section`에 note_no 분할 존재). 없으면: `python -m modules.report.collector` → `.sectioner` (옛 XML 포맷이면 sectioner 보강부터).
 - `python -m modules.report.series <ticker>` 완결률 확인 — 표준 템플릿 회사(제조·플랫폼)만 진행. 완결 0~수 개(금융·지주)는 D10 스코프아웃: 중단하고 보고.
 - 렌더 확인용 `python -m http.server 8000` 기동.
 

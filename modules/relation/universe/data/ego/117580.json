@@ -1,0 +1,78 @@
+{
+  "t": "117580",
+  "n": "대성에너지",
+  "s": "에너지",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "016710",
+        "n": "대성홀딩스",
+        "type": "subsidiary",
+        "detail": "71.27% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "기계·장비",
+        "tier": "dot"
+      },
+      {
+        "n": "(주)비아이지",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "13.8% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "대성글로벌위너 청년창업투자조합",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "5.33% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "016710",
+          "n": "대성홀딩스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 5654639192.0,
+          "as_of": 2024,
+          "prov": "특수관계자와의 거래 · 매입 등"
+        },
+        {
+          "n": "대성글로벌네트웍(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3774478212.0,
+          "as_of": 2024,
+          "prov": "특수관계자와의 거래 · 매입 등"
+        }
+      ],
+      "down": [
+        {
+          "t": "016710",
+          "n": "대성홀딩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 25344600.0,
+          "as_of": 2024,
+          "prov": "특수관계자와의 거래 · 매출 등"
+        },
+        {
+          "n": "대성글로벌네트웍(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 27209719.0,
+          "as_of": 2024,
+          "prov": "특수관계자와의 거래 · 매출 등"
+        }
+      ]
+    }
+  }
+}

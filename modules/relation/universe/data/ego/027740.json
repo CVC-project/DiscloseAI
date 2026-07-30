@@ -1,0 +1,104 @@
+{
+  "t": "027740",
+  "n": "마니커",
+  "s": "식음료",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "035810",
+        "n": "이지홀딩스",
+        "type": "associate",
+        "detail": "30.0% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "식음료",
+        "tier": "dot"
+      },
+      {
+        "n": "농업회사법인 (주)삼화육종",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "10.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "농업회사법인 (주)에스앤마니커",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "55.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "얼머스-이앤하이브리드투자조합3호",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "6.1% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "073560",
+          "n": "우리손에프앤지",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 23398653784.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "t": "208140",
+          "n": "정다운",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 257721300.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "353810",
+          "n": "이지바이오",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 177693500.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래내역 · 매출"
+        }
+      ],
+      "down": [
+        {
+          "t": "073560",
+          "n": "우리손에프앤지",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2407358745.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        },
+        {
+          "t": "208140",
+          "n": "정다운",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 292445750.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "t": "353810",
+          "n": "이지바이오",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 770957300.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래내역 · 매입"
+        }
+      ]
+    }
+  }
+}

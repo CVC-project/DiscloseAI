@@ -41,17 +41,11 @@ _TOP50_CSV = Path(__file__).parent.parent / "data" / "top50.csv"
 # ============================================================
 
 
-def map_corp_codes() -> dict:
-    """DART corpCode.xml 전체 다운 → top50.csv의 corp_code 컬럼 갱신.
+def fetch_dart_stock_to_corp_map() -> dict[str, tuple[str, str]]:
+    """DART corpCode.xml 전체 다운 → {ticker(6자리): (corp_code(8자리), corp_name)}.
 
-    동작:
-      1. DART `corpCode.xml` 호출 → ZIP 바이너리
-      2. ZIP 내부 CORPCODE.xml 파싱 → {stock_code: corp_code} 맵
-      3. top50.csv 읽어 ticker별 corp_code 채움
-      4. top50.csv 저장 (corp_code 컬럼 갱신)
-      5. storage/CompanyNode에도 UPSERT
-
-    Returns: {'matched': int, 'unmatched_tickers': [...], 'total': int}
+    ★V0: map_corp_codes()(top50 전용)과 universe/registry.py(전 상장사) 양쪽이
+    공유하는 단일 구현 — corpCode.xml 파싱 이중 구현 금지.
     """
     logger.info("DART corpCode.xml 전체 다운로드 중...")
     zip_bytes = dart_get_binary("corpCode.xml", {})
@@ -71,6 +65,21 @@ def map_corp_codes() -> dict:
             stock_to_corp[stock_code] = (corp_code, corp_name)
 
     logger.info(f"DART 전체 기업 수: {len(stock_to_corp):,} (상장사)")
+    return stock_to_corp
+
+
+def map_corp_codes() -> dict:
+    """DART corpCode.xml 전체 다운 → top50.csv의 corp_code 컬럼 갱신.
+
+    동작:
+      1. fetch_dart_stock_to_corp_map()으로 {stock_code: corp_code} 맵 획득
+      2. top50.csv 읽어 ticker별 corp_code 채움
+      3. top50.csv 저장 (corp_code 컬럼 갱신)
+      4. storage/CompanyNode에도 UPSERT
+
+    Returns: {'matched': int, 'unmatched_tickers': [...], 'total': int}
+    """
+    stock_to_corp = fetch_dart_stock_to_corp_map()
 
     # top50.csv 읽기
     rows: list[dict] = []
@@ -216,26 +225,48 @@ def _parse_ratio(raw: str | None) -> float | None:
 
 
 def _load_top50() -> list[dict]:
+    """레거시 top50.csv 경로 — 과도기 호환용(universe/PLAN.md U-D5). 신규는 _load_registry()."""
     with open(_TOP50_CSV, encoding="utf-8") as f:
         return list(csv.DictReader(f))
+
+
+def _load_registry() -> list[dict]:
+    """CompanyRegistry(전 상장사) → [{'ticker','corp_code','corp_name'}, ...] (★U1).
+
+    top50.csv 자연 필터를 대체 — U0 registry.py가 이미 corp_code까지 채운 상태라
+    별도 map_corp_codes() 없이 바로 순회 가능.
+    """
+    from modules.relation.storage.models import CompanyRegistry
+
+    session = get_local_session()
+    try:
+        rows = session.query(CompanyRegistry).filter(CompanyRegistry.corp_code.isnot(None)).all()
+        return [
+            {"ticker": r.ticker, "corp_code": r.corp_code, "corp_name": r.name_current}
+            for r in rows
+        ]
+    finally:
+        session.close()
 
 
 def collect(corp: str | None = None, bsns_year: int = 2024) -> dict:
     """DART 2개 엔드포인트 호출 → RelationRaw INSERT.
 
-    Idempotent: 동일 (corp, bsns_year, source_type) 기존 레코드 삭제 후 재생성.
+    ★U1: 대상을 top50.csv → CompanyRegistry(전 상장사 ~2,651사)로 확장
+    (universe/PLAN.md U-D1). Idempotent: 동일 (corp, bsns_year, source_type)
+    기존 레코드 삭제 후 재생성.
 
     Args:
-        corp: None이면 top50 전체, 'ticker' 주면 해당 1개만 수집
+        corp: None이면 전 상장사, 'ticker' 주면 해당 1개만 수집
         bsns_year: 사업연도
 
     Returns: {'shareholders_rows': int, 'investments_rows': int, 'errors': [...]}
     """
-    top50 = _load_top50()
+    targets = _load_registry()
     if corp:
-        top50 = [r for r in top50 if r.get("ticker") == corp]
-        if not top50:
-            raise ValueError(f"corp (ticker) '{corp}' not found in top50.csv")
+        targets = [r for r in targets if r.get("ticker") == corp]
+        if not targets:
+            raise ValueError(f"corp (ticker) '{corp}' not found in CompanyRegistry")
 
     session = get_local_session()
     sh_rows = 0
@@ -245,7 +276,7 @@ def collect(corp: str | None = None, bsns_year: int = 2024) -> dict:
     try:
         # Idempotency: 기존 DART ingest 레코드 삭제 후 재생성
         # (삼성전자 단건 수집도 전체 bsns_year 범위의 hyslrSttus·otrCprInvstmntSttus 초기화)
-        corp_names = [r.get("corp_name") for r in top50]
+        corp_names = [r.get("corp_name") for r in targets]
         session.query(RelationRaw).filter(
             RelationRaw.source_type.in_(["hyslrSttus", "otrCprInvstmntSttus"]),
             RelationRaw.bsns_year == bsns_year,
@@ -254,12 +285,12 @@ def collect(corp: str | None = None, bsns_year: int = 2024) -> dict:
                 | RelationRaw.target_name.in_(corp_names)
             ),
         ).delete(synchronize_session=False)
-        for row in top50:
+        for row in targets:
             ticker = row.get("ticker", "").strip()
             corp_code = row.get("corp_code", "").strip()
             corp_name = row.get("corp_name", "").strip()
             if not corp_code:
-                errors.append(f"{ticker}: corp_code 없음 (map-corp-codes 먼저 실행)")
+                errors.append(f"{ticker}: corp_code 없음 (registry.sync() 먼저 실행)")
                 continue
 
             # --- hyslrSttus (들어오는 지분) ---

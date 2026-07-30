@@ -1,0 +1,66 @@
+{
+  "t": "071090",
+  "n": "하이스틸",
+  "s": "철강·금속",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "002220",
+        "n": "한일철강",
+        "type": "investment",
+        "detail": "15.08% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "철강·금속",
+        "tier": "dot"
+      },
+      {
+        "n": "강음한일강철유한공사",
+        "kind": "public_org",
+        "type": "associate",
+        "detail": "40.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "엄신철",
+        "kind": "person",
+        "type": "investment",
+        "detail": "16.11% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "엄정호",
+        "kind": "person",
+        "type": "investment",
+        "detail": "6.31% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "유암코아이비케이에스 신기술투자조합",
+        "kind": "coop_fund",
+        "type": "associate",
+        "detail": "35.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "002220",
+          "n": "한일철강",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 977627740.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ],
+      "down": []
+    }
+  }
+}
