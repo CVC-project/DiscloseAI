@@ -1624,7 +1624,7 @@ window.SectorMap = SectorMap;
 // 상(dir=in·출자 들어옴) / 하(dir=out·피출자·나감) 배치 — valuechain §5 D5 상/하 문법을
 // 지배구조 의미로 재사용(U2 진행 시나리오). 사이드당 Top-N 6 + "외 n사" 묶음 노드(D6).
 // 시각 문법(REL_STYLES 색·이중 평행선·화살표=출자 방향)은 allRelated와 동일 — U-D12 불변.
-function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump }) {
+function EgoView({ anchor, layer, onLayerChange, onReRoot }) {
   const canvasRef = _useRef(null);
   const rafRef = _useRef(0);
   const startRef = _useRef(performance.now());
@@ -2151,16 +2151,12 @@ function EgoView({ anchor, chain, layer, onLayerChange, onReRoot, onChainJump })
         style={{width:'100%', height:'100%', display:'block'}}
         onClick={handleClick} onMouseMove={handleMove}
         onMouseLeave={() => setHoverCode(null)} />
-      {/* UX-012: 상단 중앙 바는 레이어 토글 2개 전용. 재구성 이력을 여기에 나열하니
-          탐색할수록 무한 증식해 토글이 밀렸다(리더 지적) — 이력은 한 단계 뒤로 버튼으로 축약.
-          현재 위치는 좌상단 전역 브레드크럼(GALAXY › 섹터 › 시장 › 기업)이 이미 보여준다. */}
+      {/* UX-012 + ★UX-028: 상단 중앙 바는 **레이어 토글 2개 전용**.
+          재구성 이력을 여기 나열하니 탐색할수록 증식해 토글이 밀렸고(리더 지적),
+          그 대안으로 뒀던 `← 직전기업명` 버튼도 제거했다 — 전역 뒤로가기(ESC·상단
+          뒤로가기 버튼)가 체인을 한 단계씩 되돌리므로 중복이었다(리더 판단).
+          현재 위치는 좌상단 전역 브레드크럼(GALAXY › 섹터 › 시장 › 기업)이 보여준다. */}
       <div className="ego-topbar">
-        {chain.length > 1 && (
-          <button className="ego-back-btn" title={chain[chain.length - 2].name + '(으)로'}
-            onClick={() => onChainJump(chain.length - 2)}>
-            ← {chain[chain.length - 2].name}
-          </button>
-        )}
         <div className="ego-layer-toggle">
           <button className={"ego-layer-btn" + (!isVc ? " is-active" : "")}
             onClick={() => onLayerChange && onLayerChange('governance')}>지배구조</button>
@@ -4208,10 +4204,20 @@ function App() {
       setZoomProgress(1); // 되돌아간 섹터는 이미 봤던 화면이라 줌 애니메이션 재생 없이 바로 표시
       return;
     }
+    // ★2026-07-30 (UX-028) EgoView re-root 체인을 **한 단계씩** 되돌린다.
+    // 그 전에는 A→B→C로 재구성해도 ESC가 곧바로 섹터로 빠져나가 중간 단계가 통째로
+    // 사라졌다. 캔버스 안에 있던 `← 직전기업명` 버튼(UX-012)은 리더 판단으로 제거했고,
+    // 그 역할을 **전역 뒤로가기 하나**(ESC·상단 뒤로가기 버튼)로 합쳤다 — 되돌림 계단이
+    // 한 곳에만 있어 두 affordance가 어긋날 여지가 없다.
+    if (phase === 'company' && egoChain.length > 1) {
+      jumpEgoChain(egoChain.length - 2);
+      return;
+    }
     if (phase === 'company') { backToSector(); return; }
     if (phase === 'sector') { backToGalaxy(); return; }
     if (activeSectorId) { setActiveSectorId(null); return; }
-  }, [discDetailItem, discFullOverlayTicker, corpOverlayTicker, phase, activeSectorId, backToSector, backToGalaxy]);
+  }, [discDetailItem, discFullOverlayTicker, corpOverlayTicker, phase, activeSectorId,
+      backToSector, backToGalaxy, egoChain, jumpEgoChain]);
   const canGoBack = !!(discDetailItem || discFullOverlayTicker || corpOverlayTicker || phase !== 'galaxy' || activeSectorId);
 
   // ESC / Backspace 키 → goBack. Backspace는 채팅 입력창 등 텍스트 편집 중엔 원래 동작(글자 삭제)을 그대로 두고,
@@ -4289,11 +4295,9 @@ function App() {
               ) : phase === 'company' && egoStatus === 'ok' && egoAnchor ? (
                 <EgoView
                   anchor={egoAnchor}
-                  chain={egoChain}
                   layer={egoLayer}
                   onLayerChange={setEgoLayer}
                   onReRoot={reRootEgo}
-                  onChainJump={jumpEgoChain}
                 />
               ) : (
                 <SectorMap
