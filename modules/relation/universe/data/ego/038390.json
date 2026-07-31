@@ -23,7 +23,7 @@
       },
       {
         "n": "조원희",
-        "kind": "person",
+        "kind": "private_corp",
         "type": "associate",
         "detail": "36.35% · 2025",
         "dir": "in",
@@ -31,8 +31,28 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "조원희",
+          "kind": "private_corp",
+          "type": "capital_in",
+          "tier_grade": "T1",
+          "amount": 40500000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 차입거래, 차입"
+        }
+      ],
+      "down": [
+        {
+          "n": "유한회사 판토스홀딩스",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 2129000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 대여거래, 대여"
+        }
+      ]
     }
   }
 }

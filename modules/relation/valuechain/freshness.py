@@ -24,9 +24,19 @@ from modules.relation.storage.models import ValueChainEdge
 FRESH_WINDOW_YEARS = 1  # "2년 컷" = as_of >= 올해 - 1
 
 
+# 자사가 **src** 쪽인 edge_type — related_party.apply의 방향 규칙(흐름 방향)과 1:1이다.
+#   customer 재화 당사→상대 · capital_out 자금 당사→상대(대여·출자)
+# 나머지(supply·capital_in)는 자사가 dst다.
+_SELF_IS_SRC = frozenset(("customer", "capital_out"))
+
+
 def _rp_note_self(edge) -> str:
-    """rp_note 보고 주체(자사) corp_code — related_party.apply 방향 규칙 역산."""
-    return edge.src_corp if edge.edge_type == "customer" else edge.dst_corp
+    """rp_note 보고 주체(자사) corp_code — related_party.apply 방향 규칙 역산.
+
+    ⚠️ 새 edge_type을 추가할 때 여기를 같이 고치지 않으면 자사를 반대로 잡아
+    **신선도 필터가 조용히 틀린다**(2026-07-31 자본거래 도입 때 드러난 결함).
+    """
+    return edge.src_corp if edge.edge_type in _SELF_IS_SRC else edge.dst_corp
 
 
 def keep_edge(edge, latest_rp_year_by_self: dict[str, int], today: date) -> bool:

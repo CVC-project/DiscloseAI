@@ -26,19 +26,19 @@
         "tier": "dot"
       },
       {
-        "n": "(주)소노인터내셔널",
-        "kind": "private_corp",
-        "type": "associate",
-        "detail": "43.58% · 2025",
-        "dir": "in",
-        "as_of": 2025
-      },
-      {
         "n": "㈜샤프테크닉스케이",
         "kind": "private_corp",
         "type": "investment",
         "detail": "8.77% · 2025",
         "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜소노인터내셔널",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "43.58% · 2025",
+        "dir": "in",
         "as_of": 2025
       },
       {
@@ -51,18 +51,27 @@
       }
     ],
     "valuechain": {
-      "up": [
+      "up": [],
+      "down": [
         {
-          "t": "004870",
-          "n": "티웨이홀딩스",
-          "type": "supply",
+          "t": "007720",
+          "n": "소노스퀘어",
+          "type": "capital_out",
           "tier_grade": "T1",
-          "amount": 632266000.0,
-          "as_of": 2023,
-          "prov": "특수관계자 거래 · 매입 등"
+          "amount": 20000000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 현금출자"
+        },
+        {
+          "n": "㈜소노인터내셔널",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 190000002000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 현금출자"
         }
-      ],
-      "down": []
+      ]
     }
   }
 }

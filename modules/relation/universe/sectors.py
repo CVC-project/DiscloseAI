@@ -24,6 +24,16 @@ from modules.relation.storage.models import CompanyRegistry
 logger = logging.getLogger(__name__)
 
 _MAP_CSV = Path(__file__).parent / "data" / "ksic_sector_map.csv"
+# 회사 단위 예외(2026-07-31 신설). KSIC 코드 하나에 성격이 다른 회사가 섞여 있어
+# 코드→섹터 1:1로는 못 가르는 소수를 교정한다. 코드 매핑은 **다수결**로 두고, 소수만
+# 여기서 뒤집는다 — 실측 근거:
+#   · 64992(지주회사) 74사 중 9사가 **금융지주**(KB금융·신한지주·하나금융지주 등).
+#     코드는 holding으로 옮기되 이 9사는 fin에 남긴다 — 은행·보험·증권을 거느린
+#     금융지주는 투자자가 금융으로 읽는다(리더 판정 2026-07-31). 옮기는 대상은
+#     SK스퀘어·SK·LX홀딩스 같은 **비금융 지주회사**다.
+#   · 649(기타 금융업) 20사는 창투·스팩 12 vs 지주 8. 코드는 fin으로 두고 지주 8사만 뒤집는다.
+#   · 64999(그 외 기타 금융업) 3사는 핀테크·스팩과 지주가 혼재 — HS효성만 뒤집는다.
+_OVERRIDE_CSV = Path(__file__).parent / "data" / "sector_overrides.csv"
 
 
 def fetch_induty_codes(limit: int | None = None) -> dict:
@@ -84,6 +94,14 @@ def load_ksic_sector_map() -> dict[str, str]:
         return {row["ksic_code"]: row["sector_id"] for row in csv.DictReader(f)}
 
 
+def load_sector_overrides() -> dict[str, str]:
+    """sector_overrides.csv → {ticker: sector_id}. 파일 없으면 빈 dict."""
+    if not _OVERRIDE_CSV.exists():
+        return {}
+    with open(_OVERRIDE_CSV, encoding="utf-8") as f:
+        return {row["ticker"]: row["sector_id"] for row in csv.DictReader(f)}
+
+
 def ksic_distribution() -> list[tuple[str, int]]:
     """현재 ksic_code 분포(빈도 내림차순) — 매핑 CSV 설계용 리포트."""
     session = get_local_session()
@@ -107,8 +125,10 @@ def apply_sector_mapping() -> dict:
     Returns: {'mapped': int, 'unmapped_codes': {code: count}, 'unmapped_total': int}
     """
     mapping = load_ksic_sector_map()
+    overrides = load_sector_overrides()
     session = get_local_session()
     mapped = 0
+    overridden = 0
     unmapped: dict[str, int] = {}
     try:
         rows = session.query(CompanyRegistry).filter(CompanyRegistry.ksic_code.isnot(None)).all()
@@ -119,16 +139,33 @@ def apply_sector_mapping() -> dict:
                 mapped += 1
             else:
                 unmapped[reg.ksic_code] = unmapped.get(reg.ksic_code, 0) + 1
+        # 회사 단위 예외는 **코드 매핑 뒤에** 적용한다(뒤집는 게 목적이므로 순서가 계약).
+        # ksic_code가 없어 위 루프에서 빠진 회사도 교정되도록 별도 조회한다.
+        for ticker, sector_id in overrides.items():
+            reg = (
+                session.query(CompanyRegistry)
+                .filter(CompanyRegistry.ticker == ticker)
+                .one_or_none()
+            )
+            if reg is None:
+                logger.warning(f"sector_overrides: 미등재 티커 {ticker} — 건너뜀")
+                continue
+            reg.sector_id = sector_id
+            overridden += 1
         session.commit()
     finally:
         session.close()
 
     result = {
         "mapped": mapped,
+        "overridden": overridden,
         "unmapped_codes": unmapped,
         "unmapped_total": sum(unmapped.values()),
     }
-    logger.info(f"섹터 매핑 적용: {mapped}건 매핑, 미매핑 {result['unmapped_total']}건")
+    logger.info(
+        f"섹터 매핑 적용: {mapped}건 매핑, 예외 {overridden}건, "
+        f"미매핑 {result['unmapped_total']}건"
+    )
     return result
 
 

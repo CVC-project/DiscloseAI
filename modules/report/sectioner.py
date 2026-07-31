@@ -54,6 +54,27 @@ _INBODY_NOTE_CAP = 3_000_000
 
 # 사업의 내용 절(통짜 저장) 패턴
 _BIZ_HEAD = (r"II\.\s*사업의\s*내용", "II.사업의내용")
+# ── 사업의내용 절 경계 (2026-07-31 신설 — V-074) ────────────────────────────────
+# 종전에는 경계가 아예 없었다: `html[m.start() : m.start()+800_000]`, 즉 **첫 매치부터
+# 고정 길이**. 표본 300 실측으로 두 방향의 오염이 확인됐다.
+#  · 시작: 첫 매치가 절 머리글인 보고서는 172/294뿐. 나머지 122건(41%)은 **목차 표
+#    셀**(53, `<TD>II. 사업의 내용</TD>` @7천대)이나 **본문 참조 문장**(69, "…'II. 사업의
+#    내용'을 참조하시기 바랍니다") 에서 시작해, I. 회사의 개요부터 담고 있었다.
+#  · 종료: 표본 196 중 189건(96%)이 800k를 꽉 채웠고 절 실길이 중앙은 144,978자 —
+#    나머지 655k는 III. 재무에 관한 사항 이후가 통째로 딸려온 것(두산 2025는 재무 절
+#    414k 포함). 최장 섹션 md 꼬리에 사용권자산·감가상각 명세가 들어있다.
+# → 머리글은 **매치 직후가 닫는 태그인지**로 판정하고(TITLE 우선, 본문 P/SPAN 차선),
+#   종료는 **다음 절의 TITLE 머리글**로 끊는다.
+_BIZ_TITLE_RE = re.compile(r"<TITLE[^>]*>\s*II\.\s*사업의\s*내용\s*</TITLE>", re.I)
+_BIZ_INBODY_RE = re.compile(r"<(P|SPAN)[^>]*>\s*II\.\s*사업의\s*내용\s*</\1>", re.I)
+# ⚠️ 종료 경계로 **본문 `<P>`/`<SPAN>`의 로마숫자는 쓰지 않는다** — 넷 다 참조 문구라
+#    절이 272자(067290 2021)·3,033자(082640 2023)로 잘린다. TITLE 형태만 경계로 인정.
+_NEXT_SEC_RE = re.compile(
+    r"<TITLE[^>]*>\s*(?:III|IV|IX|VIII|VII|VI|V|XII|XI|X)\.\s*[가-힣]", re.I
+)
+# 폭주 방어 안전판(경계 탐지가 실패해 문서 끝까지 가는 경우). 실제 저장 절단은
+# `text_html[:500_000]`이 담당하고 **text_md는 자르지 않는다** — F1/F2와 같은 규약(V-073).
+_BIZ_CAP = 3_000_000
 # 연결재무제표 주석 = DART XML의 <TITLE>N. 제목 (연결)</TITLE> 태그로 구분 (주N 아님).
 #  · 번호는 하위번호 허용: "N", "N-M"(셀트리온), "N.M"(LG엔솔) — 구분자 [.-] 둘 다.
 #  · 제목은 tempered dot로 </TITLE>를 못 넘게 — '(연결)' 없는 사업내용 제목("6. 주요계약…")에서
@@ -347,6 +368,27 @@ def _split_conn_notes(full_xml: str) -> list[tuple[str, str, str]]:
     return alt if len(alt) > len(notes) else notes
 
 
+def find_biz_section(html: str) -> tuple[int, int] | None:
+    """`II. 사업의 내용` 절의 [시작, 끝) 위치. 머리글이 없으면 None.
+
+    시작은 **머리글 형태**를 우선한다(TITLE → 본문 P/SPAN → 옛 동작 폴백).
+    폴백을 남기는 이유: 머리글이 어떤 태그에도 안 싸인 보고서가 실제로 있고(표본 300 중
+    매치없음 4·SPAN머리글 1), 그 경우 옛 동작이라도 유지하는 편이 0건보다 낫다.
+    끝은 다음 절의 TITLE 머리글 — 없으면 문서 끝(둘 다 `_BIZ_CAP` 안전판으로 상한).
+    """
+    m = _BIZ_TITLE_RE.search(html) or _BIZ_INBODY_RE.search(html)
+    if m:
+        start = m.start()
+    else:
+        m0 = re.search(_BIZ_HEAD[0], html)
+        if not m0:
+            return None
+        start = m0.start()
+    nxt = _NEXT_SEC_RE.search(html, start + 10)
+    end = nxt.start() if nxt else len(html)
+    return start, min(end, start + _BIZ_CAP)
+
+
 def section_all(tickers: list[str] | None = None) -> None:
     init_local_db()
     sess = get_local_session()
@@ -361,10 +403,10 @@ def section_all(tickers: list[str] | None = None) -> None:
         # 기존 섹션 삭제 후 재적재 (idempotent)
         sess.query(ReportSection).filter_by(rcept_no=raw.rcept_no).delete()
         n = 0
-        # ① II. 사업의 내용 (통짜)
-        mb = re.search(_BIZ_HEAD[0], html)
-        if mb:
-            seg = html[mb.start() : mb.start() + 800_000]
+        # ① II. 사업의 내용 (절 경계까지 통짜)
+        bounds = find_biz_section(html)
+        if bounds:
+            seg = html[bounds[0] : bounds[1]]
             md = _to_md(seg)
             sess.add(
                 ReportSection(
@@ -404,6 +446,71 @@ def section_all(tickers: list[str] | None = None) -> None:
         sess.commit()
         print(f"[{raw.ticker}] {raw.fiscal_year} rcept={raw.rcept_no}: {n} 섹션")
     sess.close()
+
+
+def resection_biz(tickers: list[str] | None = None, progress_every: int = 200) -> dict:
+    """`II.사업의내용` 섹션**만** 재생성한다(주석 섹션은 손대지 않는다).
+
+    왜 `section_all`을 안 쓰는가 — `section_all`은 rcept_no의 **모든 섹션을 delete 후
+    재적재**한다. 주석 섹션(`III.3.연결주석`·`III.5.별도주석`)은 relation의 특수관계자
+    엣지 20,441건(source_kind='rp_note')과 지배구조의 원천이라, 절 경계 수정과 무관한
+    경로를 같이 흔들면 회귀 원인을 가릴 수 없다. 사업의내용만 갱신하면 **주석 무변이
+    구조적으로 보장**된다(A/B로 세지 않아도 됨).
+
+    Returns: {'updated','inserted','deleted','no_head','raw_missing','len_delta'}
+    """
+    init_local_db()
+    sess = get_local_session()
+    q = sess.query(ReportRaw)
+    if tickers:
+        q = q.filter(ReportRaw.ticker.in_(set(tickers)))
+    rows = q.all()
+    st = {"updated": 0, "inserted": 0, "deleted": 0, "no_head": 0, "raw_missing": 0}
+    len_delta: list[tuple[str, int, int]] = []
+    for i, raw in enumerate(rows, 1):
+        html = _load_raw(raw.raw_path)
+        if not html:
+            st["raw_missing"] += 1
+            continue
+        cur = (
+            sess.query(ReportSection)
+            .filter_by(rcept_no=raw.rcept_no, section_key=_BIZ_HEAD[1])
+            .one_or_none()
+        )
+        bounds = find_biz_section(html)
+        if not bounds:
+            st["no_head"] += 1
+            if cur is not None:  # 머리글이 사라졌으면 낡은 행을 남기지 않는다
+                sess.delete(cur)
+                st["deleted"] += 1
+            continue
+        seg = html[bounds[0] : bounds[1]]
+        md = _to_md(seg)
+        before = cur.char_len if cur is not None else 0
+        if cur is None:
+            sess.add(
+                ReportSection(
+                    rcept_no=raw.rcept_no,
+                    section_key=_BIZ_HEAD[1],
+                    note_no=None,
+                    title=_BIZ_HEAD[1],
+                    text_html=seg[:500_000],
+                    text_md=md,
+                    char_len=len(md),
+                )
+            )
+            st["inserted"] += 1
+        else:
+            cur.text_html, cur.text_md, cur.char_len = seg[:500_000], md, len(md)
+            st["updated"] += 1
+        len_delta.append((raw.rcept_no, before, len(md)))
+        if i % progress_every == 0:
+            sess.commit()
+            print(f"  {i}/{len(rows)} … {st}", flush=True)
+    sess.commit()
+    sess.close()
+    st["len_delta"] = len_delta
+    return st
 
 
 def _mark(sess, rcept_no, ticker, status):
