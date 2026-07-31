@@ -46,14 +46,6 @@
         "tier": "dot"
       },
       {
-        "n": "(주)그란크루세",
-        "kind": "private_corp",
-        "type": "associate",
-        "detail": "35.0% · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
         "n": "(주)수산이앤에스",
         "kind": "private_corp",
         "type": "subsidiary",
@@ -134,6 +126,14 @@
         "as_of": 2023
       },
       {
+        "n": "그란크루세",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "35.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
         "n": "기타(개인)",
         "kind": "private_corp",
         "type": "dart_filing",
@@ -176,7 +176,17 @@
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "그란크루세",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 6333300000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 대여거래"
+        }
+      ]
     }
   }
 }

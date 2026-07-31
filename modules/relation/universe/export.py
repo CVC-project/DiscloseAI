@@ -449,9 +449,19 @@ def export_ego_files(session, output_dir: Path | None = None) -> dict:
         written += 1
         manifest.append(c.ticker)
 
+    # 레지스트리에서 빠진 회사(상장폐지·재편)의 낡은 ego는 지운다. 안 지우면
+    # integration 동기화가 그대로 복사해 **manifest에 없는 파일이 계속 남는다**
+    # (실측 2건: 060240·467930 — 전수 정합 스윕이 ego↔companies_index 불일치로 잡음).
+    stale = 0
+    keep = set(manifest) | {"manifest"}
+    for p in ego_dir.glob("*.json"):
+        if p.stem not in keep:
+            p.unlink()
+            stale += 1
+
     manifest_path = ego_dir / "manifest.json"
     manifest_path.write_text(json.dumps(sorted(manifest)), encoding="utf-8")
-    return {"written": written, "manifest_path": str(manifest_path)}
+    return {"written": written, "stale_removed": stale, "manifest_path": str(manifest_path)}
 
 
 def export_all(session=None) -> dict:

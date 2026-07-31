@@ -79,8 +79,46 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "대유",
+          "kind": "person",
+          "type": "capital_in",
+          "tier_grade": "T1",
+          "amount": 1000000000.0,
+          "as_of": 2022,
+          "prov": "특수관계자 · 차입"
+        },
+        {
+          "n": "㈜대유인베스트먼트",
+          "kind": "coop_fund",
+          "type": "capital_in",
+          "tier_grade": "T1",
+          "amount": 300000000.0,
+          "as_of": 2022,
+          "prov": "특수관계자 · 차입"
+        }
+      ],
+      "down": [
+        {
+          "n": "대유",
+          "kind": "person",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 1999994000.0,
+          "as_of": 2022,
+          "prov": "특수관계자 · 유상증자"
+        },
+        {
+          "n": "조광아이엘아이",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 999997000.0,
+          "as_of": 2022,
+          "prov": "특수관계자 · 유상증자"
+        }
+      ]
     }
   }
 }

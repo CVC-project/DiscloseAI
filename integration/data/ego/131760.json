@@ -14,14 +14,6 @@
         "as_of": 2025
       },
       {
-        "n": "(주)지브이엠",
-        "kind": "private_corp",
-        "type": "associate",
-        "detail": "30.0% · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
         "n": "(주)파인브이티",
         "kind": "private_corp",
         "type": "associate",
@@ -42,6 +34,14 @@
         "kind": "private_corp",
         "type": "associate",
         "detail": "45.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜지브이엠",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "30.0% · 2025",
         "dir": "out",
         "as_of": 2025
       },
@@ -104,7 +104,17 @@
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "(주)파인브이티",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 100000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 현금출자"
+        }
+      ]
     }
   }
 }

@@ -77,6 +77,56 @@ _EXCLUDE_LABEL_SUBSTR = ("채권", "채무", "잔액")
 _SALES_LABEL_PREFIXES = ("매출", "수익거래", "재화의 판매로 인한 수익")
 _PURCHASE_LABEL_PREFIXES = ("매입", "비용거래", "재화의 매입")
 
+# ── 자본거래 (2026-07-31 리더 판정 ④ — edge_type 신설) ─────────────────────────
+# 상거래(customer/supply)와 **같은 화살표로 그리면 안 된다**: 100억 대여와 100억 부품
+# 판매가 구분되지 않는다. 별도 edge_type으로 분리한다.
+#
+# 범위 = **자금 이동 flow만**(리더 판정 2026-07-31). 특수관계자 노트 11,302건 전수에서
+# 라벨 고유 6,281종을 뽑아 세 성격으로 갈랐고, 담는 것은 첫 번째뿐이다:
+#   ① flow  — 자금대여거래 2,248 · 현금출자 2,012 · 자금차입거래 1,227 · 유상증자 889 …
+#   ② 잔액  — 대여금 5,159 · 차입금 1,813 · 임대보증금 1,708 … → **제외**(`당기말`은 거래액이
+#             아니라는 후속22 규칙과 같은 이유. 섞으면 금액 의미가 무너진다)
+#   ③ 우발  — 지급보증 713 · 연대보증 1,197 · 담보제공 … → **제외**(우발부채지 거래액 아님)
+#   ④ 손익  — 이자수익 2,953 · 이자비용 2,701 · 배당금 … → **제외**(원금 이동과 단위가 섞임)
+#
+# ⚠️ **접두어가 아니라 정확 일치**로 판정한다 — `startswith("대여")`면 잔액인 `대여금`이
+#    그대로 걸린다(실측 5,159건). 상거래 어휘가 접두어인 것과 규칙이 다르니 주의.
+# ⚠️ **회수·상환은 담지 않는다** — 원금 반환이라 대여·차입과 같이 담으면 같은 자금이
+#    두 번 계상된다. 담는 것은 자금이 **처음 나가고 들어온** 쪽뿐이다.
+_CAPITAL_OUT_LABELS = frozenset(  # 당사 → 상대로 자금이 나감 (대여·출자)
+    ("자금대여거래", "자금대여", "대여거래", "대여", "현금출자", "출자", "유상증자", "출자금납입")
+)
+_CAPITAL_IN_LABELS = frozenset(  # 상대 → 당사로 자금이 들어옴 (차입)
+    ("자금차입거래", "자금차입", "차입거래", "차입")
+)
+# 잔액·우발이 라벨에 섞여 들어오는 것을 한 번 더 막는 안전판(정확 일치를 이미 쓰지만,
+# 2단 헤더 조합 라벨은 콤마로 이어져 오므로 조각 단위 검사에서 필요하다).
+# `회수`·`상환`이 여기 있는 이유: 2단 헤더 조합(`대여거래,회수` 실측 885건)에서 앞 조각이
+# 자본거래 어휘라 방향이 잡히는데, 회수액을 대여로 계상하면 **같은 자금이 두 번** 들어간다.
+_CAPITAL_EXCLUDE_SUBSTR = (
+    "금", "보증", "담보", "기초", "기말", "잔액", "이자", "배당", "회수", "상환",
+)
+
+
+def _capital_direction(label: str) -> str | None:
+    """자본거래 라벨 → 'capital_out' | 'capital_in' | None.
+
+    2단 헤더 조합 라벨(`대여거래,대여`)은 콤마 조각 중 **하나라도** 자본거래 어휘면
+    그 방향으로 본다. 조각에 잔액·우발·손익 어휘가 섞이면 통째로 버린다.
+    """
+    parts = [p.strip() for p in _norm_ws(label).split(",") if p.strip()]
+    if not parts:
+        return None
+    out = any(p in _CAPITAL_OUT_LABELS for p in parts)
+    inn = any(p in _CAPITAL_IN_LABELS for p in parts)
+    if out == inn:  # 둘 다이거나 둘 다 아님 — 모호하므로 버린다
+        return None
+    for p in parts:
+        if p not in _CAPITAL_OUT_LABELS and p not in _CAPITAL_IN_LABELS:
+            if any(x in p for x in _CAPITAL_EXCLUDE_SUBSTR):
+                return None
+    return "capital_out" if out else "capital_in"
+
 
 def _split_row(line: str) -> list[str]:
     """마크다운 표 한 행 → 셀 리스트 (앞뒤 파이프 제거, strip)."""
@@ -180,11 +230,28 @@ def parse_note(text_md: str | None) -> list[dict]:
             elif label.startswith(_PURCHASE_LABEL_PREFIXES):
                 direction = "supply"
             else:
-                continue
+                # 상거래 어휘가 아니면 자본거래를 시도한다 — 기존 매칭이 **먼저** 걸리므로
+                # 기존 산출은 구조적으로 불변(폴백 관례).
+                direction = _capital_direction(label)
+                if direction is None:
+                    continue
 
             for idx in range(1, min(len(row), len(leaf_columns))):
                 counterparty = leaf_columns[idx].strip()
                 if not counterparty or counterparty.startswith("기타"):
+                    continue
+                # ⚠️ 자금거래 표는 **열이 회사명이 아니라 K-IFRS 구분**인 경우가 있다
+                #    (현금출자 표의 `관계기업 및 공동기업`). 자본거래를 담기 시작하자
+                #    곧바로 허위 상대회사로 새어나왔다(회귀 테스트가 잡음).
+                #    ⚠️⚠️ **자본거래에만** 건다 — 상거래에도 걸었더니 기존 엣지 1,681건이
+                #    사라졌다(상장사 287·비상장 966 포함: 컴투스홀딩스·롯데지주·HS애드…).
+                #    리더 판정은 자본거래 추가지 상거래 산출 변경이 아니다.
+                #    법인격 표기가 있으면 카테고리로 보지 않는다 — `롯데알미늄㈜와 그
+                #    종속기업`은 집계 접미어가 붙은 **실존 법인**이다(entity_kind 선례).
+                if direction.startswith("capital") and (
+                    _is_category_column(counterparty)
+                    and not entity_kind._CORP_MARKS.search(counterparty)
+                ):
                     continue
                 amount = _parse_amount(row[idx], multiplier)
                 if amount is None:
@@ -436,7 +503,9 @@ def parse_note_html_grid(text_html: str | None) -> list[dict]:
             elif label.startswith(_PURCHASE_LABEL_PREFIXES):
                 direction = "supply"
             else:
-                continue
+                direction = _capital_direction(label)
+                if direction is None:
+                    continue
 
             for idx in range(label_cols, len(leaf)):
                 counterparty = leaf[idx].strip()
@@ -568,6 +637,14 @@ def _company_rows_direction(cells: list[str], idxs: list[int]) -> tuple[str, str
         return "customer", sales[0]
     if purch:
         return "supply", purch[0]
+    # 상거래가 아니면 자본거래 — 후보 칸 중 방향이 하나로 모일 때만 채택한다.
+    caps = [
+        (_capital_direction(cells[k]), cells[k].strip())
+        for k in idxs
+        if k < len(cells) and _capital_direction(cells[k])
+    ]
+    if len({d for d, _ in caps}) == 1:
+        return caps[0]
     return None
 
 
@@ -779,6 +856,10 @@ def _company_rows_two_tier(
             dirs.append((label_cols + j, "customer", txn_labels[g].strip()))
         elif _label_match(lab, _PURCHASE_LABEL_PREFIXES):
             dirs.append((label_cols + j, "supply", txn_labels[g].strip()))
+        else:
+            cap = _capital_direction(lab)
+            if cap:
+                dirs.append((label_cols + j, cap, txn_labels[g].strip()))
     if not dirs:
         return False
 
@@ -1533,23 +1614,33 @@ def apply(
             rcept_no = row["rcept_no"]
             as_of = row["fiscal_year"]
 
+            # ⚠️ 폴백 게이트는 **상거래 건수**로 판정한다. 자본거래(2026-07-31 신설)를
+            #    건수에 넣었더니 `parse_note`가 현금출자 1건만 낸 노트에서 폴백이 막혀
+            #    `parse_note_transposed`의 상거래 12건을 통째로 잃었다 — 전수 스윕 S1이
+            #    1,676건 소실로 잡았고 원문(00165680 2023)으로 확인했다. 사슬 신설 때
+            #    "앞 파서가 잡은 노트는 도달하지 않는다"는 계약을 자본거래가 깬 것이다.
+            def _has_trade(items) -> bool:
+                return any(i["direction"] in ("customer", "supply") for i in items or [])
+
+            # 폴백 사슬. 순서·의미는 종전 그대로다:
+            #   ① parse_note              행=거래유형·열=회사 (기본)
+            #   ② parse_note_transposed   전치형(하나금융지주·LIG디펜스류) — HTML 재독
+            #   ③ parse_note_html_grid    markdown COLSPAN 유실로 열이 깨진 계층 헤더 표
+            #                             (2026-07-29 U-확대, 전체 미파싱의 54%)
+            #   ④ parse_note_company_rows 행=회사·열=기간 (2026-07-31, 미파싱의 87%)
             note_items = parse_note(row["text_md"])
-            if not note_items:
-                # 행=거래유형 구조가 아예 없는 노트(전치형, 하나금융지주·
-                # LIG디펜스앤에어로스페이스류)에 한해서만 폴백 — 이미 잡힌
-                # 노트를 이중으로 다시 읽지 않도록 방지(U3와 동일 관례).
-                note_items = parse_note_transposed(row.get("text_html"))
-            if not note_items:
-                # ★2026-07-29 U-확대: markdown COLSPAN 유실로 열 정렬이 깨진
-                # 계층 헤더 표(전체 미파싱의 54%) — 원본 HTML 그리드로 재독.
-                # markdown 경로가 성공한 노트는 그 결과를 유지한다(G-C 검수를
-                # 통과한 기존 동작 보존, 두 경로 불일치 84건은 후속 조사 과제).
-                note_items = parse_note_html_grid(row.get("text_html"))
-            if not note_items:
-                # ★2026-07-31: 행=회사·열=기간 레이아웃(거래라벨 있는 미파싱의 87%).
-                # **사슬 맨 끝** — 앞 3종이 잡은 노트는 여기 도달하지 않으므로 기존
-                # 파싱 산출이 구조적으로 불변이다(전수 스윕 S1로 재확인).
-                note_items = parse_note_company_rows(row["text_md"])
+            for _nxt in (
+                lambda: parse_note_transposed(row.get("text_html")),
+                lambda: parse_note_html_grid(row.get("text_html")),
+                lambda: parse_note_company_rows(row["text_md"]),
+            ):
+                if _has_trade(note_items):
+                    break  # 앞 파서가 상거래를 잡았으면 이중으로 다시 읽지 않는다
+                alt = _nxt()
+                # 상거래를 찾았으면 그 파서 결과로 갈아탄다. 앞 파서가 낸 자본거래는
+                # 같은 표를 다시 읽어 나온 것일 수 있어 합치지 않는다(중복 계상 금지).
+                if _has_trade(alt) or not note_items:
+                    note_items = alt
             if not note_items:
                 # 미지원 표 구조 — 억지 매칭 금지, 스킵 집계만(유형 분류는
                 # 별도 조사 스크립트 소관, 파서 분기 신설은 fixture 필수)
@@ -1587,7 +1678,12 @@ def apply(
                 if corp_code == self_corp:
                     continue  # 자기 자신 표기(연결실체 자기 참조) 무시
 
-                if item["direction"] == "customer":
+                # src→dst = **흐름 방향**이다(상거래는 재화, 자본거래는 자금).
+                #   customer     당사가 판다      → 재화 당사→상대
+                #   supply       당사가 산다      → 재화 상대→당사
+                #   capital_out  당사가 대여·출자 → 자금 당사→상대
+                #   capital_in   당사가 차입      → 자금 상대→당사
+                if item["direction"] in ("customer", "capital_out"):
                     src_corp, dst_corp = self_corp, corp_code
                 else:
                     src_corp, dst_corp = corp_code, self_corp
@@ -1615,6 +1711,11 @@ def apply(
                     amount=item["amount"],
                     as_of=as_of,
                 )
+                # ⚠️ 불변식: **direction == edge_type**. prune이 DB의 edge_type으로 키를
+                #    만들므로(아래 filter_by), 둘이 갈리면 방금 쓴 엣지가 곧바로 stale로
+                #    지워진다. 자본거래를 `capital` 단일 타입으로 뒀다면 여기서 깨졌을 것 —
+                #    `capital_out`/`capital_in` 2종으로 간 이유 중 하나다(다른 하나는
+                #    freshness._rp_note_self의 자사 역산).
                 touched_vce.add(
                     (src_corp, dst_corp, item["direction"], as_of, rcept_no)
                 )

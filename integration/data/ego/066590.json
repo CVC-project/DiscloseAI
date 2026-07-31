@@ -38,7 +38,7 @@
         "as_of": 2025
       },
       {
-        "n": "우수정기주식회사",
+        "n": "우수정기(주)",
         "kind": "private_corp",
         "type": "associate",
         "detail": "43.0% · 2025",
@@ -72,7 +72,26 @@
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "우수정기(주)",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 6000000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 대여거래, 대여"
+        },
+        {
+          "n": "주주, 임원, 종업원",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 3000000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 대여거래, 대여"
+        }
+      ]
     }
   }
 }

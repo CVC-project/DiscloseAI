@@ -16,14 +16,6 @@
         "tier": "dot"
       },
       {
-        "n": "(주)비에이치셀",
-        "kind": "private_corp",
-        "type": "investment",
-        "detail": "10.0% · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
         "n": "(주)셀루메드바이오로직스",
         "kind": "private_corp",
         "type": "subsidiary",
@@ -36,6 +28,14 @@
         "kind": "private_corp",
         "type": "subsidiary",
         "detail": "84.2% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜비에이치셀",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "10.0% · 2025",
         "dir": "out",
         "as_of": 2025
       },
@@ -77,6 +77,33 @@
         {
           "n": "㈜인스코비",
           "kind": "private_corp",
+          "type": "capital_in",
+          "tier_grade": "T1",
+          "amount": 10800000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 자금차입"
+        },
+        {
+          "n": "㈜프리텔레콤",
+          "kind": "private_corp",
+          "type": "capital_in",
+          "tier_grade": "T1",
+          "amount": 400000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 자금차입"
+        },
+        {
+          "n": "(주)해피파트너스",
+          "kind": "private_corp",
+          "type": "capital_in",
+          "tier_grade": "T1",
+          "amount": 250000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 자금차입"
+        },
+        {
+          "n": "㈜인스코비",
+          "kind": "private_corp",
           "type": "supply",
           "tier_grade": "T1",
           "amount": 49444592.0,
@@ -84,7 +111,35 @@
           "prov": "특수관계자거래 · 매입"
         }
       ],
-      "down": []
+      "down": [
+        {
+          "n": "(주)해피파트너스",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 6866567014.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 자금대여"
+        },
+        {
+          "n": "㈜인스코비",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 5000001121.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 유상증자"
+        },
+        {
+          "n": "아피메즈(주)",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 1044848071.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 자금대여"
+        }
+      ]
     }
   }
 }

@@ -63,15 +63,6 @@
     "valuechain": {
       "up": [
         {
-          "t": "003570",
-          "n": "SNT다이내믹스",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 9520544000.0,
-          "as_of": 2025,
-          "prov": "특수관계자 · 매출, 특수관계자거래"
-        },
-        {
           "t": "064960",
           "n": "SNT모티브",
           "type": "customer",
@@ -79,9 +70,28 @@
           "amount": 29102000.0,
           "as_of": 2025,
           "prov": "특수관계자 · 매출 등, 특수관계자거래"
+        },
+        {
+          "t": "003570",
+          "n": "SNT다이내믹스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 9520544000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출, 특수관계자거래"
         }
       ],
-      "down": []
+      "down": [
+        {
+          "n": "SNT Global INC",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 5555000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 현금출자, 출자금 납입"
+        }
+      ]
     }
   }
 }

@@ -147,8 +147,46 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "033310",
+          "n": "엠투엔",
+          "type": "capital_in",
+          "tier_grade": "T1",
+          "amount": 10000000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 차입"
+        }
+      ],
+      "down": [
+        {
+          "n": "㈜리드데이터시스템즈",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 300000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 대여"
+        },
+        {
+          "n": "루스-메이슨 혁신기술펀드",
+          "kind": "coop_fund",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 2000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 현금출자"
+        },
+        {
+          "n": "루스-메이슨 혁신기술펀드 2호",
+          "kind": "coop_fund",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 480000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 현금출자"
+        }
+      ]
     }
   }
 }

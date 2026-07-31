@@ -244,22 +244,6 @@
         "as_of": 2025
       },
       {
-        "n": "㈜플란랩스",
-        "kind": "private_corp",
-        "type": "investment",
-        "detail": "10.76% · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
-        "n": "㈜플란랩스",
-        "kind": "private_corp",
-        "type": "dart_filing",
-        "detail": "관계기업 · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
         "n": "㈜플란부산",
         "kind": "private_corp",
         "type": "dart_filing",
@@ -314,11 +298,37 @@
         "detail": "9.07% · 2025",
         "dir": "in",
         "as_of": 2025
+      },
+      {
+        "n": "플란랩스",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "10.76% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "플란랩스",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "out",
+        "as_of": 2025
       }
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "플란랩스",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 1500100000.0,
+          "as_of": 2023,
+          "prov": "특수관계자 거래 · 현금출자"
+        }
+      ]
     }
   }
 }
