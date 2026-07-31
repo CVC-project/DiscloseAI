@@ -3235,7 +3235,8 @@ function useStockQuote(ticker) {
 
 // ─── Intro screen ──────────────────────────────────────────────────────────
 // ─── Top tabs ──────────────────────────────────────────────────────────────
-function TopTabs({ active, onChange, breadcrumb, onBack, canGoBack }) {
+// UX-030: 상단 BACK 버튼 폐지 — ESC/Backspace 키(goBack)와 기능이 완전히 중복이라 UI에 노출하지 않는다.
+function TopTabs({ active, onChange, breadcrumb }) {
   const kospi = useKospiQuote();
   const kosdaq = useKosdaqQuote();
   const isUp = Number(kospi.changePct) >= 0;
@@ -3254,7 +3255,7 @@ function TopTabs({ active, onChange, breadcrumb, onBack, canGoBack }) {
           <div className="top-breadcrumb">
             {breadcrumb.map((b, i) => (
               <React.Fragment key={i}>
-                <span className={"crumb " + (b.onClick ? 'is-clickable' : '')} onClick={b.onClick}>{b.label}</span>
+                <span className={"crumb " + (b.onClick ? 'is-clickable ' : '') + (b.fixed ? 'is-fixed' : '')} onClick={b.onClick}>{b.label}</span>
                 {i < breadcrumb.length - 1 && <span className="crumb-sep">›</span>}
               </React.Fragment>
             ))}
@@ -3270,12 +3271,6 @@ function TopTabs({ active, onChange, breadcrumb, onBack, canGoBack }) {
             </div>
           ))}
         </div>
-        {canGoBack && (
-          <button className="top-back-btn" onClick={onBack} title="뒤로가기 (ESC)">
-            <span className="top-back-arrow">←</span>
-            <span>BACK</span>
-          </button>
-        )}
       </div>
       <div className="top-tabs-status">
         <div className="index-row">
@@ -4218,7 +4213,7 @@ function App() {
     if (activeSectorId) { setActiveSectorId(null); return; }
   }, [discDetailItem, discFullOverlayTicker, corpOverlayTicker, phase, activeSectorId,
       backToSector, backToGalaxy, egoChain, jumpEgoChain]);
-  const canGoBack = !!(discDetailItem || discFullOverlayTicker || corpOverlayTicker || phase !== 'galaxy' || activeSectorId);
+  // UX-030: canGoBack(상단 BACK 버튼 가시성 플래그)은 버튼 폐지와 함께 제거. goBack은 ESC/Backspace 전용.
 
   // ESC / Backspace 키 → goBack. Backspace는 채팅 입력창 등 텍스트 편집 중엔 원래 동작(글자 삭제)을 그대로 두고,
   // 포커스가 입력 요소가 아닐 때만 뒤로가기로 취급한다 (ESC는 입력 포커스와 무관하게 항상 뒤로가기).
@@ -4258,7 +4253,9 @@ function App() {
   if (phase === 'sector' || phase === 'company') {
     crumb.push({ label: 'GALAXY', onClick: backToGalaxy });
     if (sector) crumb.push({ label: sector.ko, onClick: activeMarket ? backToSectorOverview : null });
-    if (activeMarket) crumb.push({ label: activeMarket, onClick: phase === 'company' ? backToSector : null });
+    // UX-031: 시장 라벨(KOSPI/KOSDAQ)은 구조 표지라 축약 대상 외 — 폭이 모자라면
+    // 긴 섹터·기업명이 …로 줄고 이 크럼은 온전히 남는다.
+    if (activeMarket) crumb.push({ label: activeMarket, fixed: true, onClick: phase === 'company' ? backToSector : null });
   }
   if (phase === 'company' && company) crumb.push({ label: company.name });
 
@@ -4312,7 +4309,7 @@ function App() {
             </div>
           )}
 
-          <TopTabs active={activeTab} onChange={setActiveTab} breadcrumb={crumb} onBack={goBack} canGoBack={canGoBack} />
+          <TopTabs active={activeTab} onChange={setActiveTab} breadcrumb={crumb} />
 
           {/* Top-left panel — varies by phase and active tab */}
           {activeTab === 'finance' ? (
