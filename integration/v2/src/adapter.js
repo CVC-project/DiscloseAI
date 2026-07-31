@@ -177,6 +177,7 @@
           // universe(U2): 전량 기업 수 + LOD-1 배경 dots 좌표. top50 경로면 없음.
           count: s.count != null ? s.count : s.memberCount,
           dots: s.dots || [],
+          markets: s.markets || null,   // UX-032: 시장별 {count, cap조} — 성운 프록시 라벨용
         };
       });
   }
@@ -239,7 +240,15 @@
         const overflow = mnamed.slice(MARKET_NAMED_CAP).map((x) => ({
           cb: Math.min(3, Math.max(1, Math.round(x.cap / 6))), t: x.code, n: x.name,
         }));
-        mk[M] = { named: mnamed, dotItems: [...di[M], ...overflow], total: mnamed.length + di[M].length };
+        // UX-032: capJo = 그 시장의 섹터 시총 실측 합(조원, relation universe.json markets).
+        // 없으면(구 데이터) null — 화면이 조원 표기를 아예 생략한다(추정값을 지어내지 않는다).
+        const mm = (p.markets && p.markets[M]) || null;
+        mk[M] = {
+          named: mnamed, dotItems: [...di[M], ...overflow],
+          total: mnamed.length + di[M].length,
+          capJo: mm ? mm.cap : null,
+          capCount: mm ? mm.count : null,
+        };
       }
       out[p.id] = mk;
     }

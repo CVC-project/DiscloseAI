@@ -141,6 +141,11 @@ CLI: `python -m modules.relation universe {sync|select|export}` (기존 `__main_
 // universe.json
 { "meta": { "as_of": "...", "named_count": 400, "total": 2600 },
   "sectors": [ { "id": "semi", "ko": "반도체", "count": 210, "cap": 980,
+                 // UX-032(2026-07-31): 시장별 분해 신설 — v2 성운 프록시 라벨
+                 // ("반도체 · KOSDAQ · 249사 · 시총 45조원")이 쓴다. cap 단위=조원,
+                 // count/cap 모두 두 시장 합 == 위 count/cap (export에서 동일 루프 집계).
+                 "markets": { "KOSPI": { "count": 45, "cap": 2328.1 },
+                              "KOSDAQ": { "count": 249, "cap": 44.9 } },
                  "dots": [[x, y, capBucket], ...] } ],   // named 제외 잔여사 — 사전 배치 좌표
   "named": [ { "n": "삼성전자", "t": "005930", "s": "반도체", "sz": 1.0, "mc": "...",
                "group": "삼성", "rank": 1, "rl": ["대상명:type:detail", ...] } ] }

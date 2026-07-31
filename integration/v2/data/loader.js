@@ -237,6 +237,9 @@
       memberCount: (byKo.get(s.ko) || []).length,  // 이 화면에 뜨는 named 수
       members: byKo.get(s.ko) || [],
       dots: s.dots || [],                // [[x,y,capBucket], ...] — LOD-1 배경 dots
+      // UX-032: 시장별 실측 집계 {KOSPI:{count,cap조}, KOSDAQ:{...}} — 성운 프록시 라벨용.
+      // 구 universe.json(markets 없음)에서도 화면이 안 깨지게 null 허용.
+      markets: s.markets || null,
     }));
   }
 
