@@ -185,8 +185,82 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "123420",
+          "n": "위메이드플레이",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1168400000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매출등"
+        },
+        {
+          "t": "101730",
+          "n": "위메이드맥스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 16844873000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 영업수익"
+        },
+        {
+          "n": "㈜매드엔진",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 70094409000.0,
+          "as_of": 2023,
+          "prov": "특수관계자 거래 · 영업비용"
+        },
+        {
+          "n": "㈜프렌클리",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1486665000.0,
+          "as_of": 2023,
+          "prov": "특수관계자 거래 · 영업비용"
+        },
+        {
+          "n": "㈜엔티게임즈",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 25826000.0,
+          "as_of": 2023,
+          "prov": "특수관계자 거래 · 영업비용"
+        }
+      ],
+      "down": [
+        {
+          "t": "123420",
+          "n": "위메이드플레이",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 16354000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매입등"
+        },
+        {
+          "n": "㈜매드엔진",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 421931000.0,
+          "as_of": 2023,
+          "prov": "특수관계자 거래 · 영업수익"
+        },
+        {
+          "n": "티니스튜디오㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 58048000.0,
+          "as_of": 2023,
+          "prov": "특수관계자 거래 · 영업수익"
+        }
+      ]
     }
   }
 }

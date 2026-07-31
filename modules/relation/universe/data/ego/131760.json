@@ -103,16 +103,44 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": [
+      "up": [
+        {
+          "n": "㈜지브이엠",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1135400000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입"
+        },
         {
           "n": "(주)파인브이티",
           "kind": "private_corp",
-          "type": "capital_out",
+          "type": "supply",
           "tier_grade": "T1",
-          "amount": 100000.0,
+          "amount": 42040000.0,
           "as_of": 2025,
-          "prov": "특수관계자거래 · 현금출자"
+          "prov": "특수관계자거래 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "n": "HEFEI SUNCO FINETEKCOMPANY CO., LTD",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 52680000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출"
+        },
+        {
+          "n": "(주)파인브이티",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 6994000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출"
         }
       ]
     }

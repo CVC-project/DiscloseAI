@@ -121,8 +121,37 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "키프론바이오",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 5608578000.0,
+          "as_of": 2024,
+          "prov": "특수관계자와의 거래 · 매입거래(*)"
+        }
+      ],
+      "down": [
+        {
+          "n": "키프론바이오",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1065268000.0,
+          "as_of": 2024,
+          "prov": "특수관계자와의 거래 · 매출거래(*)"
+        },
+        {
+          "n": "에이비씨바이오사이언스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 7000000.0,
+          "as_of": 2024,
+          "prov": "특수관계자와의 거래 · 매출거래(*)"
+        }
+      ]
     }
   }
 }

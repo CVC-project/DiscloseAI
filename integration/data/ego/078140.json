@@ -24,6 +24,14 @@
         "as_of": 2025
       },
       {
+        "n": "㈜바름메디",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "25.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
         "n": "대봉엘에프영어조합법인",
         "kind": "coop_fund",
         "type": "associate",
@@ -36,14 +44,6 @@
         "kind": "coop_fund",
         "type": "dart_filing",
         "detail": "관계기업 · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
-        "n": "바름메디(주)",
-        "kind": "private_corp",
-        "type": "associate",
-        "detail": "25.0% · 2025",
         "dir": "out",
         "as_of": 2025
       },
@@ -81,8 +81,28 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "347740",
+          "n": "피엔케이피부임상연구센타",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 98729265.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        }
+      ],
+      "down": [
+        {
+          "t": "347740",
+          "n": "피엔케이피부임상연구센타",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 324368630.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입등"
+        }
+      ]
     }
   }
 }

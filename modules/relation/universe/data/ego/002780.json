@@ -26,6 +26,26 @@
         "tier": "named400"
       },
       {
+        "t": "298040",
+        "n": "효성중공업",
+        "type": "dart_filing",
+        "detail": "지배기업 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "전기전자부품",
+        "tier": "named400"
+      },
+      {
+        "t": "004800",
+        "n": "효성",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "지주",
+        "tier": "named400"
+      },
+      {
         "n": "강진문화원㈜",
         "kind": "private_corp",
         "type": "investment",
@@ -146,6 +166,14 @@
         "as_of": 2025
       },
       {
+        "n": "케이비와이즈스타전문투자형사모부동산신탁제11호",
+        "kind": "coop_fund",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
         "n": "파주병영㈜",
         "kind": "private_corp",
         "type": "investment",
@@ -171,7 +199,26 @@
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "011420",
+          "n": "갤럭시아에스엠",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 18000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출등 · 별도"
+        },
+        {
+          "t": "094280",
+          "n": "효성 ITX",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1901780000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출등"
+        }
+      ],
       "down": []
     }
   }

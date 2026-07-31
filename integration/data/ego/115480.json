@@ -24,14 +24,6 @@
         "as_of": 2025
       },
       {
-        "n": "(주)대광헬스케어",
-        "kind": "private_corp",
-        "type": "investment",
-        "detail": "5.57% · 2025",
-        "dir": "in",
-        "as_of": 2025
-      },
-      {
         "n": "(주)씨유코퍼레이션",
         "kind": "private_corp",
         "type": "associate",
@@ -62,11 +54,57 @@
         "detail": "기타 · 2021",
         "dir": "out",
         "as_of": 2021
+      },
+      {
+        "n": "㈜대광헬스케어",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "5.57% · 2025",
+        "dir": "in",
+        "as_of": 2025
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "㈜대광헬스케어",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 8584852000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입등"
+        }
+      ],
+      "down": [
+        {
+          "t": "070300",
+          "n": "엑스큐어",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 227040000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출등"
+        },
+        {
+          "n": "(주)유니포인트",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 322680000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출등"
+        },
+        {
+          "n": "㈜대광헬스케어",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 259856000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출등"
+        }
+      ]
     }
   }
 }

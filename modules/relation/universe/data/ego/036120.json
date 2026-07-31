@@ -6,19 +6,19 @@
   "layers": {
     "governance": [
       {
-        "n": "(주)제이피어반디",
-        "kind": "private_corp",
-        "type": "investment",
-        "detail": "18.03% · 2025",
-        "dir": "in",
-        "as_of": 2025
-      },
-      {
         "n": "KTB-SB사모투자전문회사",
         "kind": "coop_fund",
         "type": "investment",
         "detail": "13.33% · 2025",
         "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜제이피어반디",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "18.03% · 2025",
+        "dir": "in",
         "as_of": 2025
       },
       {
@@ -55,7 +55,17 @@
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "n": "㈜제이피어반디",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 378406000.0,
+          "as_of": 2023,
+          "prov": "특수관계자 · 매입등"
+        }
+      ],
       "down": []
     }
   }

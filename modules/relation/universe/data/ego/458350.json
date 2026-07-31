@@ -63,15 +63,6 @@
     "valuechain": {
       "up": [
         {
-          "t": "035720",
-          "n": "카카오",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 29270000.0,
-          "as_of": 2024,
-          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
-        },
-        {
           "t": "041510",
           "n": "에스엠",
           "type": "customer",
@@ -79,9 +70,82 @@
           "amount": 8000000.0,
           "as_of": 2025,
           "prov": "특수관계자 · 매출"
+        },
+        {
+          "t": "376300",
+          "n": "디어유",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3528310.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 영업수익 상계액"
+        },
+        {
+          "t": "035720",
+          "n": "카카오",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 8000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 영업수익 등, 특수관계자거래"
+        },
+        {
+          "n": "(주)에스엠엔터테인먼트",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 8000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 영업비용(*2)"
         }
       ],
-      "down": []
+      "down": [
+        {
+          "t": "035720",
+          "n": "카카오",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 650257000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 영업비용 등, 특수관계자거래"
+        },
+        {
+          "t": "041510",
+          "n": "에스엠",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 636392000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 영업비용"
+        },
+        {
+          "n": "(주)에스엠컬처앤콘텐츠",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 484100000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 영업수익(*1)"
+        },
+        {
+          "n": "(주)에스엠유니버스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 58403000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 영업수익(*1)"
+        },
+        {
+          "n": "(주)에스엠엔터테인먼트",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 9140000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 영업수익(*1)"
+        }
+      ]
     }
   }
 }

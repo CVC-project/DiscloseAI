@@ -60,14 +60,6 @@
         "as_of": 2025
       },
       {
-        "n": "(주)컴퍼니블루",
-        "kind": "private_corp",
-        "type": "investment",
-        "detail": "18.52% · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
         "n": "DKI글로벌콘텐츠투자조합",
         "kind": "coop_fund",
         "type": "associate",
@@ -106,6 +98,30 @@
         "detail": "95.0% · 2025",
         "dir": "out",
         "as_of": 2025
+      },
+      {
+        "n": "㈜그립랩스",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2021",
+        "dir": "out",
+        "as_of": 2021
+      },
+      {
+        "n": "㈜컴퍼니블루",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "18.52% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜한세예스이십사 파트너스",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2021",
+        "dir": "out",
+        "as_of": 2021
       },
       {
         "n": "뉴본-한세예스24 라이징스타 1호 투자조합",
@@ -277,8 +293,136 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "동아출판(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3974509000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 매입등(*3)"
+        },
+        {
+          "n": "마이닷 주식회사",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2229900000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 매입등(*3)"
+        },
+        {
+          "n": "빅웨이브엔터테인먼트 주식회사",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 361000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 매입등(*3)"
+        }
+      ],
+      "down": [
+        {
+          "t": "016450",
+          "n": "한세예스24홀딩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4368000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 매출(*1)"
+        },
+        {
+          "t": "105630",
+          "n": "한세실업",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 206680000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 매출(*1)"
+        },
+        {
+          "t": "069640",
+          "n": "한세엠케이",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 70656000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 매출(*1)"
+        },
+        {
+          "n": "한세예스24라이징스타2호,투자조합",
+          "kind": "coop_fund",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 625000000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 현금출자"
+        },
+        {
+          "n": "스타일이십사(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 598226000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 매출(*1)"
+        },
+        {
+          "n": "㈜그립랩스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 392213000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 매출(*1)"
+        },
+        {
+          "n": "동아출판(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 31007000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 매출(*1)"
+        },
+        {
+          "n": "칼라앤터치(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 15524000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 매출(*1)"
+        },
+        {
+          "n": "㈜에이치에스소싱",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2448000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 매출(*1)"
+        },
+        {
+          "n": "㈜뉴피니언",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1392000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 매출(*1)"
+        },
+        {
+          "n": "㈜한세예스이십사 파트너스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 480000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 매출(*1)"
+        }
+      ]
     }
   }
 }

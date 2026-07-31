@@ -56,6 +56,14 @@
         "as_of": 2025
       },
       {
+        "n": "(주)율호",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
         "n": "EVM SYSTEM PH CORP",
         "kind": "private_corp",
         "type": "subsidiary",
@@ -97,7 +105,26 @@
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "072770",
+          "n": "멤레이비티",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 2000000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 자금대여거래"
+        },
+        {
+          "n": "(주)미니멈",
+          "kind": "private_corp",
+          "type": "capital_in",
+          "tier_grade": "T1",
+          "amount": 1500000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 자금차입"
+        }
+      ],
       "down": []
     }
   }

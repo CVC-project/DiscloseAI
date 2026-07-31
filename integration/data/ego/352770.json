@@ -14,6 +14,14 @@
         "as_of": 2025
       },
       {
+        "n": "(주)제로믹스",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
         "n": "(주)파이리코",
         "kind": "private_corp",
         "type": "investment",
@@ -46,14 +54,6 @@
         "as_of": 2025
       },
       {
-        "n": "주식회사 제로믹스",
-        "kind": "private_corp",
-        "type": "subsidiary",
-        "detail": "100.0% · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
         "n": "코엔에프 유한회사",
         "kind": "private_corp",
         "type": "subsidiary",
@@ -63,8 +63,91 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "㈜도미네이트",
+          "kind": "private_corp",
+          "type": "capital_in",
+          "tier_grade": "T1",
+          "amount": 5500000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 자금차입"
+        },
+        {
+          "n": "주요 임직원",
+          "kind": "private_corp",
+          "type": "capital_in",
+          "tier_grade": "T1",
+          "amount": 2500000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 자금차입"
+        },
+        {
+          "n": "㈜에피노드",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 6028300.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입등"
+        },
+        {
+          "n": "(유)코엔에프",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 5145000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입등"
+        }
+      ],
+      "down": [
+        {
+          "n": "(유)코엔에프",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 602851770.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 자금대여"
+        },
+        {
+          "n": "㈜에피노드",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 278362351.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출등"
+        },
+        {
+          "n": "㈜블랜트",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 20000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 자금대여"
+        },
+        {
+          "n": "㈜브랜드리팩터링",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 5760000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출등"
+        },
+        {
+          "n": "㈜블랜트",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2160000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출등"
+        }
+      ]
     }
   }
 }

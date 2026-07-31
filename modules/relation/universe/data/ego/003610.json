@@ -55,8 +55,46 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "제이케미칼(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 4788006000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입"
+        },
+        {
+          "n": "(주)하잠",
+          "kind": "private_corp",
+          "type": "capital_in",
+          "tier_grade": "T1",
+          "amount": 500000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 자금차입"
+        },
+        {
+          "n": "(주)하잠",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 336000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "n": "(주)하잠",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 6000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출"
+        }
+      ]
     }
   }
 }

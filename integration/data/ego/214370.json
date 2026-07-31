@@ -38,7 +38,7 @@
         "as_of": 2025
       },
       {
-        "n": "R&Y Bio㈜현대이엔지대주지앤아이(주)",
+        "n": "R&Y Bio",
         "kind": "private_corp",
         "type": "dart_filing",
         "detail": "기타 · 2025",
@@ -78,6 +78,14 @@
         "as_of": 2025
       },
       {
+        "n": "㈜현대이엔지대주지앤아이(주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
         "n": "정용지",
         "kind": "person",
         "type": "subsidiary",
@@ -87,8 +95,37 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "(주)현대이엔지",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 800000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 거래 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "n": "Zhe Jiang Ke Yi Kai Jian Sheng Wu Ke Ji Co.",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2399002000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 거래 · 매출"
+        },
+        {
+          "n": "대표이사의 친족",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3744000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 거래 · 매출"
+        }
+      ]
     }
   }
 }

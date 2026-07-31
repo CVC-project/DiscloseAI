@@ -111,8 +111,73 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "200230",
+          "n": "텔콘RF제약",
+          "type": "capital_in",
+          "tier_grade": "T1",
+          "amount": 8000000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래내용 · 자금차입거래"
+        },
+        {
+          "t": "123840",
+          "n": "뉴온",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 9196000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출등"
+        },
+        {
+          "t": "200230",
+          "n": "텔콘RF제약",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 8000000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 자금대여거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "200230",
+          "n": "텔콘RF제약",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 7507000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래내용 · 매출"
+        },
+        {
+          "t": "200230",
+          "n": "텔콘RF제약",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 7800000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래내용 · 자금대여거래"
+        },
+        {
+          "t": "123840",
+          "n": "뉴온",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 112467000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입등"
+        },
+        {
+          "n": "대표이사 외",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 699079000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래내용 · 자금대여거래"
+        }
+      ]
     }
   }
 }

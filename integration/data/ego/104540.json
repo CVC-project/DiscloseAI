@@ -6,22 +6,6 @@
   "layers": {
     "governance": [
       {
-        "n": "(주)인스텍",
-        "kind": "private_corp",
-        "type": "investment",
-        "detail": "9.31% · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
-        "n": "(주)인스텍",
-        "kind": "private_corp",
-        "type": "dart_filing",
-        "detail": "관계기업 · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
         "n": "(주)호성약품",
         "kind": "private_corp",
         "type": "dart_filing",
@@ -47,6 +31,22 @@
       },
       {
         "n": "CORENTEC SEA",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜인스텍",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "9.31% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜인스텍",
         "kind": "private_corp",
         "type": "dart_filing",
         "detail": "관계기업 · 2025",
@@ -112,7 +112,26 @@
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "의료법인 영훈의료재단",
+          "kind": "public_org",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 8647180000.0,
+          "as_of": 2022,
+          "prov": "특수관계자와의 주요 거래내용 · 매출거래"
+        },
+        {
+          "n": "㈜인스텍",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 70760000.0,
+          "as_of": 2022,
+          "prov": "특수관계자와의 주요 거래내용 · 현금출자"
+        }
+      ]
     }
   }
 }

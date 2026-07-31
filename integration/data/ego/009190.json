@@ -51,8 +51,37 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "006740",
+          "n": "블루산업개발",
+          "type": "capital_in",
+          "tier_grade": "T1",
+          "amount": 3000000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 차입거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "㈜대양홀딩스컴퍼니",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 1300000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 대여거래"
+        },
+        {
+          "n": "이옥순",
+          "kind": "person",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 1000000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 대여거래"
+        }
+      ]
     }
   }
 }

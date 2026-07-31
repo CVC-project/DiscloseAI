@@ -24,14 +24,6 @@
         "as_of": 2022
       },
       {
-        "n": "㈜떼제베운영",
-        "kind": "private_corp",
-        "type": "dart_filing",
-        "detail": "기타 · 2023",
-        "dir": "out",
-        "as_of": 2023
-      },
-      {
         "n": "㈜레저플러스",
         "kind": "private_corp",
         "type": "dart_filing",
@@ -112,6 +104,14 @@
         "as_of": 2025
       },
       {
+        "n": "떼제베운영",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2023",
+        "dir": "out",
+        "as_of": 2023
+      },
+      {
         "n": "옥산레저㈜",
         "kind": "private_corp",
         "type": "dart_filing",
@@ -121,8 +121,82 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "㈜케이엑스이노베이션",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 314303000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입등"
+        },
+        {
+          "n": "㈜지엘유통개발",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 38534000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입등"
+        },
+        {
+          "n": "㈜신라레저",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 26409000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입등"
+        },
+        {
+          "n": "㈜케이엑스넥스지",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 5206000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입등"
+        },
+        {
+          "n": "㈜레저플러스",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3807000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입등"
+        }
+      ],
+      "down": [
+        {
+          "n": "㈜케이엑스넥스지",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 311151000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출등"
+        },
+        {
+          "n": "㈜케이엑스이노베이션",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 180716000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출등"
+        },
+        {
+          "n": "옥산레저㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 133284000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출등"
+        }
+      ]
     }
   }
 }

@@ -6,7 +6,7 @@
   "layers": {
     "governance": [
       {
-        "n": "(주) 디엠테크솔루션",
+        "n": "(주)디엠테크솔루션",
         "kind": "private_corp",
         "type": "dart_filing",
         "detail": "관계기업 · 2025",
@@ -63,8 +63,64 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "(주)시스웨어",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 174096000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등 · 매입(*2)"
+        },
+        {
+          "n": "(주)디엠테크솔루션",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 164962000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등 · 매입(*2)"
+        },
+        {
+          "n": "K.System Joint Stock Company",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 131977000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등 · 매입(*2)"
+        }
+      ],
+      "down": [
+        {
+          "n": "(주)시스웨어",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1019652000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등 · 매출(*1)"
+        },
+        {
+          "n": "K.System Joint Stock Company",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 363003000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등 · 매출(*1)"
+        },
+        {
+          "n": "(주)디엠테크솔루션",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 98900000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등 · 매출(*1)"
+        }
+      ]
     }
   }
 }

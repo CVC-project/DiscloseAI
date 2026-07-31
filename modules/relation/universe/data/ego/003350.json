@@ -67,8 +67,46 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "123690",
+          "n": "한국화장품",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 99946000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출"
+        }
+      ],
+      "down": [
+        {
+          "t": "123690",
+          "n": "한국화장품",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4077848000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 · 별도"
+        },
+        {
+          "t": "123690",
+          "n": "한국화장품",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 19658780000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입"
+        },
+        {
+          "n": "(주)더샘인터내셔날",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 15630534000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 · 별도"
+        }
+      ]
     }
   }
 }

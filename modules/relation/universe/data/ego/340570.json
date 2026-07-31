@@ -73,16 +73,62 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": [
+      "up": [
+        {
+          "t": "195500",
+          "n": "마니커에프앤지",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 45455.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 · 별도"
+        },
+        {
+          "t": "027740",
+          "n": "마니커",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 350000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출"
+        },
+        {
+          "t": "027710",
+          "n": "팜스토리",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 218381000.0,
+          "as_of": 2023,
+          "prov": "특수관계자거래 · 매출"
+        },
         {
           "n": "㈜코스메디텍",
           "kind": "private_corp",
-          "type": "capital_out",
+          "type": "supply",
           "tier_grade": "T1",
-          "amount": 2000000000.0,
+          "amount": 7753486182.0,
           "as_of": 2025,
-          "prov": "특수관계자 · 자금대여"
+          "prov": "특수관계자 · 매입액등"
+        }
+      ],
+      "down": [
+        {
+          "t": "027710",
+          "n": "팜스토리",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 75431000.0,
+          "as_of": 2023,
+          "prov": "특수관계자거래 · 매입"
+        },
+        {
+          "n": "㈜코스메디텍",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 6360968086.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출액등"
         }
       ]
     }

@@ -6,6 +6,14 @@
   "layers": {
     "governance": [
       {
+        "n": "(주)엔메카시스",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "31.62% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
         "n": "(주)엔메카시스한국투자-엠포드 제2호 신기술사업투자조합",
         "kind": "coop_fund",
         "type": "dart_filing",
@@ -42,14 +50,6 @@
         "kind": "private_corp",
         "type": "investment",
         "detail": "14.13% · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
-        "n": "주식회사 엔메카시스",
-        "kind": "private_corp",
-        "type": "associate",
-        "detail": "31.62% · 2025",
         "dir": "out",
         "as_of": 2025
       },
@@ -103,7 +103,17 @@
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "n": "(주)엔메카시스",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 7039000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        }
+      ],
       "down": [
         {
           "t": "012450",
@@ -131,6 +141,15 @@
           "amount": 4870000000.0,
           "as_of": 2026,
           "prov": "단일판매ㆍ공급계약체결 · (주)아바코"
+        },
+        {
+          "n": "(주)엔메카시스",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 999000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 출자"
         }
       ]
     }

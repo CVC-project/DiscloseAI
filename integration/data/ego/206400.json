@@ -52,7 +52,7 @@
         "as_of": 2025
       },
       {
-        "n": "HUMAN IN MOTION ROBOTICS INC.",
+        "n": "HUMAN IN MOTION ROBOTICS INC",
         "kind": "private_corp",
         "type": "dart_filing",
         "detail": "관계기업 · 2025",
@@ -85,7 +85,17 @@
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "n": "HUMAN IN MOTION ROBOTICS INC",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1217000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입"
+        }
+      ],
       "down": [
         {
           "t": "006360",
@@ -104,6 +114,51 @@
           "amount": 1094000000.0,
           "as_of": 2026,
           "prov": "단일판매ㆍ공급계약체결 · 현대건설(주)"
+        },
+        {
+          "t": "085810",
+          "n": "알티캐스트",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 308000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        },
+        {
+          "n": "HUMAN IN MOTION ROBOTICS INC",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 2022970000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 자금대여"
+        },
+        {
+          "n": "㈜베노바이오",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 1599996000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 출자+자금대여"
+        },
+        {
+          "n": "주주, 임원 등",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 100000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 자금대여"
+        },
+        {
+          "n": "대현기건(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4200000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
         }
       ]
     }

@@ -6,14 +6,6 @@
   "layers": {
     "governance": [
       {
-        "n": "(주)아이엘라이팅",
-        "kind": "private_corp",
-        "type": "dart_filing",
-        "detail": "관계기업 · 2023",
-        "dir": "out",
-        "as_of": 2023
-      },
-      {
         "n": "(주)아이엘로보틱스",
         "kind": "private_corp",
         "type": "dart_filing",
@@ -62,6 +54,14 @@
         "as_of": 2025
       },
       {
+        "n": "아이엘라이팅",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2023",
+        "dir": "out",
+        "as_of": 2023
+      },
+      {
         "n": "아이엘셀리온(주)",
         "kind": "private_corp",
         "type": "subsidiary",
@@ -70,7 +70,7 @@
         "as_of": 2025
       },
       {
-        "n": "호라이즌아이엠(주)",
+        "n": "호라이즌아이엠",
         "kind": "private_corp",
         "type": "dart_filing",
         "detail": "관계기업 · 2025",
@@ -87,8 +87,46 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "(주)아이엘로보틱스",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1297062000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입등"
+        }
+      ],
+      "down": [
+        {
+          "n": "(주)아이엘로보틱스",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 1733596000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 자금대여"
+        },
+        {
+          "n": "(주)아이엘로보틱스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 319364000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출등"
+        },
+        {
+          "n": "㈜어헤즈",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 117000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 자금대여"
+        }
+      ]
     }
   }
 }

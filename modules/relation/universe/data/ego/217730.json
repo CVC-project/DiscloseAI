@@ -6,7 +6,7 @@
   "layers": {
     "governance": [
       {
-        "n": "(주)강스템테라퓨틱스 프리모리스테라퓨틱스)",
+        "n": "(주)강스템테라퓨틱스프리모리스테라퓨틱스)",
         "kind": "private_corp",
         "type": "subsidiary",
         "detail": "84.0% · 2025",
@@ -55,8 +55,55 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "(주)강스템테라퓨틱스프리모리스테라퓨틱스)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 100546000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등 거래 · 영업비용등"
+        },
+        {
+          "n": "(주)프리모리스인터내셔널",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 48419000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등 거래 · 영업비용등"
+        }
+      ],
+      "down": [
+        {
+          "n": "(주)프리모리스인터내셔널",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 590577000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등 거래 · 영업수익등"
+        },
+        {
+          "n": "(주)강스템테라퓨틱스프리모리스테라퓨틱스)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 61723000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등 거래 · 영업수익등"
+        },
+        {
+          "n": "HLB바이오코드(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 9200000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등 거래 · 영업수익등"
+        }
+      ]
     }
   }
 }

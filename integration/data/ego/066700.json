@@ -62,28 +62,12 @@
         "as_of": 2025
       },
       {
-        "n": "(주)테라젠헬스",
-        "kind": "private_corp",
-        "type": "dart_filing",
-        "detail": "관계기업 · 2024",
-        "dir": "out",
-        "as_of": 2024
-      },
-      {
         "n": "(주)테라젠헬스케어",
         "kind": "private_corp",
         "type": "subsidiary",
         "detail": "100.0% · 2025",
         "dir": "out",
         "as_of": 2025
-      },
-      {
-        "n": "(주)테라캔백",
-        "kind": "private_corp",
-        "type": "dart_filing",
-        "detail": "관계기업 · 2024",
-        "dir": "out",
-        "as_of": 2024
       },
       {
         "n": "(주)티이바이오플랫폼",
@@ -95,6 +79,22 @@
       },
       {
         "n": "Cancer Precision Medicine, Inc.",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
+        "n": "㈜테라젠헬스",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
+        "n": "㈜테라캔백",
         "kind": "private_corp",
         "type": "dart_filing",
         "detail": "관계기업 · 2024",
@@ -119,7 +119,35 @@
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "000100",
+          "n": "유한양행",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2834221840.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 매입등"
+        },
+        {
+          "n": "유한메디카㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1200715558.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 매입등"
+        },
+        {
+          "n": "㈜테라젠헬스",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 37419000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 매입등"
+        }
+      ],
       "down": [
         {
           "t": "000100",
@@ -129,6 +157,24 @@
           "amount": 67489000.0,
           "as_of": 2025,
           "prov": "특수관계자 거래 · 매입"
+        },
+        {
+          "n": "㈜테라젠헬스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 116768000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 매출등"
+        },
+        {
+          "n": "Cancer Precision Medicine, Inc.",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 5144478.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 매출등"
         }
       ]
     }

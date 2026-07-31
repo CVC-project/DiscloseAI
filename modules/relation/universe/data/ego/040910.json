@@ -6,7 +6,7 @@
   "layers": {
     "governance": [
       {
-        "n": "(주)비에스지 머티리얼즈",
+        "n": "(주)비에스지머티리얼즈",
         "kind": "private_corp",
         "type": "investment",
         "detail": "15.0% · 2025",
@@ -30,7 +30,7 @@
         "as_of": 2025
       },
       {
-        "n": "--㈜마스터",
+        "n": "㈜마스터",
         "kind": "private_corp",
         "type": "dart_filing",
         "detail": "관계기업 · 2025",
@@ -63,8 +63,37 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "㈜마스터",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 51861000.0,
+          "as_of": 2024,
+          "prov": "특수관계자와의 거래내역 · 매입등"
+        },
+        {
+          "n": "(주)비에스지머티리얼즈",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 300000.0,
+          "as_of": 2024,
+          "prov": "특수관계자와의 거래내역 · 매입등"
+        }
+      ],
+      "down": [
+        {
+          "n": "플라리트",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 500000000.0,
+          "as_of": 2024,
+          "prov": "특수관계자와의 거래내역 · 매출등"
+        }
+      ]
     }
   }
 }

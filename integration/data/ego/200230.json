@@ -95,8 +95,73 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "042040",
+          "n": "케이피엠테크",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 7507000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래내용 · 매출"
+        },
+        {
+          "t": "042040",
+          "n": "케이피엠테크",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 7800000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래내용 · 자금대여거래"
+        },
+        {
+          "t": "123840",
+          "n": "뉴온",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 171551000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출등"
+        },
+        {
+          "t": "123840",
+          "n": "뉴온",
+          "type": "capital_in",
+          "tier_grade": "T1",
+          "amount": 7800000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 자금차입거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "042040",
+          "n": "케이피엠테크",
+          "type": "capital_in",
+          "tier_grade": "T1",
+          "amount": 8000000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래내용 · 자금차입거래"
+        },
+        {
+          "t": "042040",
+          "n": "케이피엠테크",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 8000000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 자금대여거래"
+        },
+        {
+          "n": "임원ㆍ종업원",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 201862000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 자금대여거래"
+        }
+      ]
     }
   }
 }
