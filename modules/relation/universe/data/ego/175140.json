@@ -50,6 +50,14 @@
         "as_of": 2025
       },
       {
+        "n": "㈜마크티",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2023",
+        "dir": "out",
+        "as_of": 2023
+      },
+      {
         "n": "㈜씨티프라퍼티",
         "kind": "private_corp",
         "type": "dart_filing",
@@ -131,8 +139,73 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "047820",
+          "n": "초록뱀미디어",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 490625000.0,
+          "as_of": 2023,
+          "prov": "특수관계자와의 거래 · 매입"
+        },
+        {
+          "t": "131100",
+          "n": "티엔엔터테인먼트",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 455099000.0,
+          "as_of": 2023,
+          "prov": "특수관계자와의 거래 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "t": "047820",
+          "n": "초록뱀미디어",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2821245000.0,
+          "as_of": 2023,
+          "prov": "특수관계자와의 거래 · 매출"
+        },
+        {
+          "t": "131100",
+          "n": "티엔엔터테인먼트",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 61198000.0,
+          "as_of": 2023,
+          "prov": "특수관계자와의 거래 · 매출"
+        },
+        {
+          "n": "㈜마크티",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 16205466000.0,
+          "as_of": 2023,
+          "prov": "특수관계자와의 거래 · 매출"
+        },
+        {
+          "n": "㈜에스메디",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 9879000.0,
+          "as_of": 2023,
+          "prov": "특수관계자와의 거래 · 매출"
+        },
+        {
+          "n": "㈜씨티프라퍼티",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3560000.0,
+          "as_of": 2023,
+          "prov": "특수관계자와의 거래 · 매출"
+        }
+      ]
     }
   }
 }

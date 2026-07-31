@@ -9,9 +9,9 @@
         "t": "010130",
         "n": "고려아연",
         "type": "dart_filing",
-        "detail": "대규모기업집단 (별도) · 2024",
+        "detail": "대규모기업집단 (별도) · 2025",
         "dir": "out",
-        "as_of": 2024,
+        "as_of": 2025,
         "s": "철강·금속",
         "tier": "named400"
       },
@@ -19,9 +19,9 @@
         "t": "000670",
         "n": "영풍",
         "type": "dart_filing",
-        "detail": "대규모기업집단 (별도) · 2024",
+        "detail": "대규모기업집단 (별도) · 2025",
         "dir": "out",
-        "as_of": 2024,
+        "as_of": 2025,
         "s": "철강·금속",
         "tier": "dot"
       },
@@ -34,36 +34,44 @@
         "as_of": 2024
       },
       {
+        "n": "Sun Metals Corporation Pty. Ltd.",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "Zinc Oxide Corporation Vietnam Limited Liability Company",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜알란텀",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "대규모기업집단 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
         "n": "㈜케이지엑스",
         "kind": "private_corp",
         "type": "dart_filing",
-        "detail": "대규모기업집단 (별도) · 2024",
+        "detail": "대규모기업집단 (별도) · 2025",
         "dir": "out",
-        "as_of": 2024
-      },
-      {
-        "n": "소 계",
-        "kind": "private_corp",
-        "type": "dart_filing",
-        "detail": "기타 (별도) · 2024",
-        "dir": "out",
-        "as_of": 2024
+        "as_of": 2025
       },
       {
         "n": "스틸싸이클㈜",
         "kind": "private_corp",
         "type": "dart_filing",
-        "detail": "대규모기업집단 (별도) · 2023",
+        "detail": "대규모기업집단 (별도) · 2025",
         "dir": "out",
-        "as_of": 2023
-      },
-      {
-        "n": "스틸싸이클에스씨㈜",
-        "kind": "private_corp",
-        "type": "dart_filing",
-        "detail": "대규모기업집단 (별도) · 2023",
-        "dir": "out",
-        "as_of": 2023
+        "as_of": 2025
       },
       {
         "n": "유미개발(주)",
@@ -109,25 +117,25 @@
         "n": "케이잼㈜",
         "kind": "private_corp",
         "type": "dart_filing",
-        "detail": "대규모기업집단 (별도) · 2023",
+        "detail": "대규모기업집단 (별도) · 2025",
         "dir": "out",
-        "as_of": 2023
+        "as_of": 2025
       },
       {
         "n": "켐코㈜",
         "kind": "private_corp",
         "type": "dart_filing",
-        "detail": "대규모기업집단 (별도) · 2024",
+        "detail": "대규모기업집단 (별도) · 2025",
         "dir": "out",
-        "as_of": 2024
+        "as_of": 2025
       },
       {
         "n": "한국전구체㈜",
         "kind": "private_corp",
         "type": "dart_filing",
-        "detail": "대규모기업집단 (별도) · 2024",
+        "detail": "대규모기업집단 (별도) · 2025",
         "dir": "out",
-        "as_of": 2024
+        "as_of": 2025
       },
       {
         "n": "회사명",
@@ -139,8 +147,109 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "010130",
+          "n": "고려아연",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 65997000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래 · 별도"
+        },
+        {
+          "t": "000670",
+          "n": "영풍",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 45216000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "t": "010130",
+          "n": "고려아연",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 18747184000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래 · 별도"
+        },
+        {
+          "t": "000670",
+          "n": "영풍",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1734666000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래 · 별도"
+        },
+        {
+          "n": "켐코㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 15128365000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래 · 별도"
+        },
+        {
+          "n": "Sun Metals Corporation Pty. Ltd.",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2829545000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래 · 별도"
+        },
+        {
+          "n": "한국전구체㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 150919000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래 · 별도"
+        },
+        {
+          "n": "㈜케이지엑스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 24274000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래 · 별도"
+        },
+        {
+          "n": "Zinc Oxide Corporation Vietnam Limited Liability Company",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 11840000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래 · 별도"
+        },
+        {
+          "n": "케이잼㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 9813000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래 · 별도"
+        },
+        {
+          "n": "스틸싸이클㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 7410000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래 · 별도"
+        }
+      ]
     }
   }
 }

@@ -22,14 +22,6 @@
         "as_of": 2025
       },
       {
-        "n": "(주)솔트룩스이노베이션",
-        "kind": "private_corp",
-        "type": "subsidiary",
-        "detail": "85.33% · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
         "n": "Goover, Inc",
         "kind": "private_corp",
         "type": "subsidiary",
@@ -94,6 +86,14 @@
         "as_of": 2025
       },
       {
+        "n": "솔트룩스이노베이션㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "85.33% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
         "n": "이경일",
         "kind": "person",
         "type": "investment",
@@ -103,8 +103,46 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "루카스에이아이",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 8793198.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "n": "㈜이니션",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 160000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등 · 자금대여"
+        },
+        {
+          "n": "(주)바이브온코퍼레이션",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3236364.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등 · 매출"
+        },
+        {
+          "n": "아미쿠스렉스㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1500000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등 · 매출"
+        }
+      ]
     }
   }
 }

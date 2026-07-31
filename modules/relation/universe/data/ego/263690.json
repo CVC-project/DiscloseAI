@@ -71,8 +71,46 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "(주)루샘",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3446174000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        },
+        {
+          "n": "(주)메디젬",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 190974000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "n": "(주)메디젬",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 9133201000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출액"
+        },
+        {
+          "n": "(주)루샘",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 12227000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출액"
+        }
+      ]
     }
   }
 }

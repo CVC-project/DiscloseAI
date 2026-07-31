@@ -6,14 +6,6 @@
   "layers": {
     "governance": [
       {
-        "n": "(주)센추리이십일한국",
-        "kind": "private_corp",
-        "type": "dart_filing",
-        "detail": "관계기업 · 2023",
-        "dir": "out",
-        "as_of": 2023
-      },
-      {
         "n": "Titan Equity LLC",
         "kind": "private_corp",
         "type": "dart_filing",
@@ -30,6 +22,14 @@
         "as_of": 2025
       },
       {
+        "n": "㈜센추리이십일한국",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2023",
+        "dir": "out",
+        "as_of": 2023
+      },
+      {
         "n": "김혜임",
         "kind": "person",
         "type": "investment",
@@ -39,7 +39,17 @@
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "n": "엠피원㈜",
+          "kind": "private_corp",
+          "type": "capital_in",
+          "tier_grade": "T1",
+          "amount": 1400000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 자금차입거래"
+        }
+      ],
       "down": []
     }
   }

@@ -65,8 +65,46 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "006260",
+          "n": "LS",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 75579000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 영업비용"
+        },
+        {
+          "t": "010120",
+          "n": "엘에스일렉트릭",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 17808000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 영업비용"
+        }
+      ],
+      "down": [
+        {
+          "t": "010120",
+          "n": "엘에스일렉트릭",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 244884000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 영업수익"
+        },
+        {
+          "n": "포메이션랩스㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 31601000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 영업수익"
+        }
+      ]
     }
   }
 }

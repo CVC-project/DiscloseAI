@@ -75,8 +75,64 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "039560",
+          "n": "다산네트웍스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 520281000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        },
+        {
+          "t": "039560",
+          "n": "다산네트웍스",
+          "type": "capital_in",
+          "tier_grade": "T1",
+          "amount": 3500000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 자금차입거래"
+        },
+        {
+          "n": "㈜다산네트웍솔루션즈",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 697000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "t": "039560",
+          "n": "다산네트웍스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 6740983000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "t": "039560",
+          "n": "다산네트웍스",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 6499999000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 유상증자"
+        },
+        {
+          "n": "ADMC DASAN",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1797663000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        }
+      ]
     }
   }
 }

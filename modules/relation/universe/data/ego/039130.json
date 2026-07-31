@@ -166,7 +166,7 @@
         "as_of": 2025
       },
       {
-        "n": "문카데미 주식회사",
+        "n": "문카데미(주)",
         "kind": "private_corp",
         "type": "investment",
         "detail": "16.91% · 2025",
@@ -191,8 +191,28 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "HANATOUR TD CO., LTD.",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 436078000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 영업비용"
+        }
+      ],
+      "down": [
+        {
+          "n": "HANATOUR TD CO., LTD.",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 292000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 영업수익"
+        }
+      ]
     }
   }
 }

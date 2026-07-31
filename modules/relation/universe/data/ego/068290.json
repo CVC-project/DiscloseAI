@@ -36,22 +36,6 @@
         "tier": "dot"
       },
       {
-        "n": "(주)아트박스",
-        "kind": "private_corp",
-        "type": "associate",
-        "detail": "30.16% · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
-        "n": "(주)아트박스",
-        "kind": "private_corp",
-        "type": "dart_filing",
-        "detail": "관계기업 (별도) · 2024",
-        "dir": "out",
-        "as_of": 2024
-      },
-      {
         "n": "김민석",
         "kind": "person",
         "type": "investment",
@@ -76,25 +60,71 @@
         "as_of": 2025
       },
       {
-        "n": "대표이사 등",
-        "kind": "private_corp",
-        "type": "dart_filing",
-        "detail": "기타 (별도) · 2024",
-        "dir": "out",
-        "as_of": 2024
-      },
-      {
         "n": "베이비샤크넥스트유니콘IP펀드",
         "kind": "coop_fund",
         "type": "investment",
         "detail": "7.79% · 2025",
         "dir": "out",
         "as_of": 2025
+      },
+      {
+        "n": "아트박스",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "30.16% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "아트박스",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 (별도) · 2024",
+        "dir": "out",
+        "as_of": 2024
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "403850",
+          "n": "더핑크퐁컴퍼니",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 531471608.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래 · 별도"
+        },
+        {
+          "n": "아트박스",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 38699836.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "t": "403850",
+          "n": "더핑크퐁컴퍼니",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 928080364.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 · 별도"
+        },
+        {
+          "n": "아트박스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3412232.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 · 별도"
+        }
+      ]
     }
   }
 }

@@ -78,7 +78,7 @@
         "as_of": 2025
       },
       {
-        "n": "호진산업㈜",
+        "n": "호진산업",
         "kind": "private_corp",
         "type": "dart_filing",
         "detail": "기타 · 2025",
@@ -87,8 +87,55 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "㈜해창",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 30589694000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        },
+        {
+          "n": "한성산업㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 17833660000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        },
+        {
+          "n": "호진산업",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 7320648000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "n": "㈜해창",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 357120000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "호진산업",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 213157000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        }
+      ]
     }
   }
 }

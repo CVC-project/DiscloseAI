@@ -73,8 +73,46 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "067920",
+          "n": "이글루",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 595800000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출등"
+        },
+        {
+          "n": "(주)이글루코퍼레이션",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 614429000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입등"
+        }
+      ],
+      "down": [
+        {
+          "t": "067920",
+          "n": "이글루",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 138600000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입등"
+        },
+        {
+          "n": "(주)이글루코퍼레이션",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 152300000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출등"
+        }
+      ]
     }
   }
 }

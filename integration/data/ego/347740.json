@@ -49,8 +49,46 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "078140",
+          "n": "대봉엘에스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 324368630.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입등"
+        },
+        {
+          "n": "유씨엘(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 209579705.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입등"
+        }
+      ],
+      "down": [
+        {
+          "t": "078140",
+          "n": "대봉엘에스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 98729265.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "유씨엘(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 672291289.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        }
+      ]
     }
   }
 }

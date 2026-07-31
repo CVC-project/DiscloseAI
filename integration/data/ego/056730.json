@@ -80,14 +80,6 @@
         "as_of": 2025
       },
       {
-        "n": "㈜더비씨",
-        "kind": "private_corp",
-        "type": "dart_filing",
-        "detail": "기타 (별도) · 2024",
-        "dir": "out",
-        "as_of": 2024
-      },
-      {
         "n": "㈜신안",
         "kind": "private_corp",
         "type": "dart_filing",
@@ -112,20 +104,20 @@
         "as_of": 2025
       },
       {
-        "n": "㈜티에스피",
-        "kind": "private_corp",
-        "type": "dart_filing",
-        "detail": "기타 (별도) · 2024",
-        "dir": "out",
-        "as_of": 2024
-      },
-      {
         "n": "그린씨앤에프대부",
         "kind": "private_corp",
         "type": "dart_filing",
         "detail": "기타 (별도) · 2025",
         "dir": "out",
         "as_of": 2025
+      },
+      {
+        "n": "더비씨",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2024",
+        "dir": "out",
+        "as_of": 2024
       },
       {
         "n": "바로에프앤대부㈜",
@@ -360,6 +352,14 @@
         "as_of": 2025
       },
       {
+        "n": "티에스피",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
         "n": "프레빌",
         "kind": "private_corp",
         "type": "dart_filing",
@@ -369,8 +369,64 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "더비씨",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 4460000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "t": "005010",
+          "n": "휴스틸",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 984640000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 · 별도"
+        },
+        {
+          "n": "바로저축은행",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 41347350000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 자금대여거래 · 별도"
+        },
+        {
+          "n": "바로저축은행",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 61000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 · 별도"
+        },
+        {
+          "n": "티에스피",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 14400000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 · 별도"
+        },
+        {
+          "n": "㈜신안",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 10648000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 · 별도"
+        }
+      ]
     }
   }
 }

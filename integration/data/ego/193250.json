@@ -187,8 +187,37 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "205500",
+          "n": "넥써쓰",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 4025000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입등"
+        },
+        {
+          "n": "㈜원유니버스",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 12985000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입등"
+        }
+      ],
+      "down": [
+        {
+          "t": "205500",
+          "n": "넥써쓰",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 55481000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출등"
+        }
+      ]
     }
   }
 }

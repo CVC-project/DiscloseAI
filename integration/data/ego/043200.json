@@ -14,14 +14,6 @@
         "as_of": 2025
       },
       {
-        "n": "(주)태우",
-        "kind": "private_corp",
-        "type": "dart_filing",
-        "detail": "기타 · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
         "n": "(주)태인태양광발전소",
         "kind": "private_corp",
         "type": "subsidiary",
@@ -95,6 +87,14 @@
       },
       {
         "n": "㈜지본코스메틱",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜태우",
         "kind": "private_corp",
         "type": "dart_filing",
         "detail": "기타 · 2025",
@@ -183,8 +183,91 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "㈜지본",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 4787381000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입"
+        },
+        {
+          "n": "㈜태우",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 122519000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "n": "PARU USA LLC",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3861364000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출"
+        },
+        {
+          "n": "㈜지본",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 640619000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출"
+        },
+        {
+          "n": "Sun Action Trackers LLC",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 339203000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출"
+        },
+        {
+          "n": "㈜지본코스메틱",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 86000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출"
+        },
+        {
+          "n": "(주)파루전자",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 50000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출"
+        },
+        {
+          "n": "줌톤",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 50000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출"
+        },
+        {
+          "n": "(주)파루이엔에스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출"
+        }
+      ]
     }
   }
 }

@@ -30,14 +30,6 @@
         "as_of": 2025
       },
       {
-        "n": "㈜케이원제23호역삼위탁관리부동산투자회사",
-        "kind": "coop_fund",
-        "type": "investment",
-        "detail": "19.54% · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
         "n": "㈜플레이링스",
         "kind": "private_corp",
         "type": "subsidiary",
@@ -58,6 +50,14 @@
         "kind": "coop_fund",
         "type": "investment",
         "detail": "19.89% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "케이원제23호역삼위탁관리부동산투자회사",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "19.54% · 2025",
         "dir": "out",
         "as_of": 2025
       },
@@ -95,8 +95,136 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "112040",
+          "n": "위메이드",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 16354000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매입등"
+        },
+        {
+          "t": "101730",
+          "n": "위메이드맥스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 300000000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 영업수익"
+        },
+        {
+          "n": "㈜위믹스코리아",
+          "kind": "private_corp",
+          "type": "capital_in",
+          "tier_grade": "T1",
+          "amount": 20000000000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 자금차입거래"
+        },
+        {
+          "n": "㈜위믹스코리아",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 387935000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매입등"
+        },
+        {
+          "n": "㈜매드엔진",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 25643000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매입등"
+        },
+        {
+          "n": "㈜위메이드커넥트",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 24077000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매입등"
+        },
+        {
+          "n": "㈜플레이디앤씨",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2282000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매입등"
+        },
+        {
+          "n": "㈜엔티게임즈",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매입등"
+        }
+      ],
+      "down": [
+        {
+          "t": "112040",
+          "n": "위메이드",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1168400000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매출등"
+        },
+        {
+          "n": "㈜전기아이피",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4134764000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매출등"
+        },
+        {
+          "n": "㈜매드엔진",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1525144000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매출등"
+        },
+        {
+          "n": "스마트유니온비대면투자조합",
+          "kind": "coop_fund",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 1500000000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 현금출자"
+        },
+        {
+          "n": "㈜위메이드커넥트",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 43119000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매출등"
+        },
+        {
+          "n": "㈜플레이디앤씨",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4513000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매출등"
+        }
+      ]
     }
   }
 }

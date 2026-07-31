@@ -76,7 +76,7 @@
         "tier": "dot"
       },
       {
-        "n": "BH Flex VINA Co.,Ltd.",
+        "n": "BH Flex VINA Co.Ltd.",
         "kind": "private_corp",
         "type": "dart_filing",
         "detail": "기타 · 2025",
@@ -117,8 +117,46 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "290550",
+          "n": "디케이티",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 357000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입"
+        },
+        {
+          "n": "BH Flex VINA Co.Ltd.",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 271199000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "t": "290550",
+          "n": "디케이티",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 626769000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        },
+        {
+          "n": "DKT VINA Co.,Ltd.",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 19042000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        }
+      ]
     }
   }
 }

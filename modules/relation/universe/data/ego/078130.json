@@ -36,6 +36,16 @@
         "tier": "dot"
       },
       {
+        "t": "104480",
+        "n": "티케이케미칼",
+        "type": "dart_filing",
+        "detail": "대규모기업집단 (별도) · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "화학",
+        "tier": "dot"
+      },
+      {
         "n": "(주)삼라마이다스",
         "kind": "private_corp",
         "type": "subsidiary",
@@ -69,7 +79,26 @@
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "104480",
+          "n": "티케이케미칼",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 18492694000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등과의 거래 내용 · 매출 등 · 별도"
+        },
+        {
+          "t": "010580",
+          "n": "에스엠벡셀",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4622000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 거래 · 매출등"
+        }
+      ],
       "down": []
     }
   }

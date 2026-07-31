@@ -361,8 +361,55 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "100590",
+          "n": "머큐리",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 24360000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출등"
+        },
+        {
+          "t": "031310",
+          "n": "아이즈비전",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 51789000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출등"
+        }
+      ],
+      "down": [
+        {
+          "t": "031310",
+          "n": "아이즈비전",
+          "type": "capital_in",
+          "tier_grade": "T1",
+          "amount": 7000000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 차입"
+        },
+        {
+          "t": "100590",
+          "n": "머큐리",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1767452000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        },
+        {
+          "t": "031310",
+          "n": "아이즈비전",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1998158000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입등"
+        }
+      ]
     }
   }
 }

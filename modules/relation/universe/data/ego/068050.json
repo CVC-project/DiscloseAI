@@ -6,6 +6,14 @@
   "layers": {
     "governance": [
       {
+        "n": "(주)팬에프앤비",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "50.01% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
         "n": "박영석",
         "kind": "person",
         "type": "associate",
@@ -20,18 +28,20 @@
         "detail": "56.08% · 2025",
         "dir": "out",
         "as_of": 2025
-      },
-      {
-        "n": "주식회사 팬에프앤비",
-        "kind": "private_corp",
-        "type": "subsidiary",
-        "detail": "50.01% · 2025",
-        "dir": "out",
-        "as_of": 2025
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "n": "(주)팬스타즈컴퍼니",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 25946000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입"
+        }
+      ],
       "down": [
         {
           "t": "322780",
@@ -41,6 +51,51 @@
           "amount": 5944320000.0,
           "as_of": 2022,
           "prov": "단일판매ㆍ공급계약체결 · 코퍼스코리아"
+        },
+        {
+          "n": "(주)팬스타즈컴퍼니",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 2640000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 자금대여거래"
+        },
+        {
+          "n": "㈜화인랜드",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 600000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 자금대여거래"
+        },
+        {
+          "n": "(주)쌈마이대패",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 362512000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 자금대여거래"
+        },
+        {
+          "n": "(주)팬스타즈컴퍼니",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 7560000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        },
+        {
+          "n": "㈜화인랜드",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3780000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
         }
       ]
     }

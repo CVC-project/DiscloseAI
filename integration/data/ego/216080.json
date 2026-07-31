@@ -78,7 +78,7 @@
         "as_of": 2025
       },
       {
-        "n": "그로펙바이오(주)",
+        "n": "그로펙바이오",
         "kind": "private_corp",
         "type": "associate",
         "detail": "33.3% · 2025",
@@ -86,7 +86,7 @@
         "as_of": 2025
       },
       {
-        "n": "그로펙바이오(주)",
+        "n": "그로펙바이오",
         "kind": "private_corp",
         "type": "dart_filing",
         "detail": "관계기업 · 2025",
@@ -103,8 +103,28 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "㈜제이메타",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3225559000.0,
+          "as_of": 2022,
+          "prov": "특수관계자 · 매입액 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "n": "㈜제이메타",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4200000.0,
+          "as_of": 2022,
+          "prov": "특수관계자 · 매출액 · 별도"
+        }
+      ]
     }
   }
 }

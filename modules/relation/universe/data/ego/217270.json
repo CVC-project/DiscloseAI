@@ -148,14 +148,6 @@
         "as_of": 2025
       },
       {
-        "n": "(주)알피지게이트",
-        "kind": "private_corp",
-        "type": "associate",
-        "detail": "29.1% · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
         "n": "(주)에브리바이크",
         "kind": "private_corp",
         "type": "investment",
@@ -288,6 +280,14 @@
         "kind": "private_corp",
         "type": "investment",
         "detail": "18.4% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜알피지게이트",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "29.1% · 2025",
         "dir": "out",
         "as_of": 2025
       },
@@ -427,12 +427,31 @@
           "n": "카카오",
           "type": "customer",
           "tier_grade": "T1",
-          "amount": 75140000.0,
-          "as_of": 2024,
-          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+          "amount": 40000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 영업수익 등, 특수관계자거래"
         }
       ],
-      "down": []
+      "down": [
+        {
+          "t": "035720",
+          "n": "카카오",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1636536000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 영업수익, 특수관게자거래래"
+        },
+        {
+          "t": "035720",
+          "n": "카카오",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2201295000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 영업비용 등, 특수관계자거래"
+        }
+      ]
     }
   }
 }

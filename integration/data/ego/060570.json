@@ -54,6 +54,22 @@
         "as_of": 2025
       },
       {
+        "n": "(주)비마이프렌즈",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "5.83% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "(주)비마이프렌즈",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "31.35% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
         "n": "LIFE DESIGN COMPANY Inc.",
         "kind": "private_corp",
         "type": "subsidiary",
@@ -76,35 +92,10 @@
         "detail": "7.98% · 2025",
         "dir": "out",
         "as_of": 2025
-      },
-      {
-        "n": "주식회사 비마이프렌즈",
-        "kind": "private_corp",
-        "type": "investment",
-        "detail": "5.83% · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
-        "n": "주식회사 비마이프렌즈",
-        "kind": "private_corp",
-        "type": "associate",
-        "detail": "31.35% · 2025",
-        "dir": "in",
-        "as_of": 2025
       }
     ],
     "valuechain": {
       "up": [
-        {
-          "t": "035720",
-          "n": "카카오",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 15720309000.0,
-          "as_of": 2024,
-          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
-        },
         {
           "t": "041510",
           "n": "에스엠",
@@ -113,6 +104,24 @@
           "amount": 9642000.0,
           "as_of": 2025,
           "prov": "특수관계자 · 매출"
+        },
+        {
+          "t": "402340",
+          "n": "SK스퀘어",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 7000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 영업수익 등"
+        },
+        {
+          "t": "035720",
+          "n": "카카오",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 11667147000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 영업수익 등, 특수관계자거래"
         },
         {
           "n": "㈜카카오엔터테인먼트",
@@ -160,7 +169,7 @@
           "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
         },
         {
-          "n": "주식회사 비마이프렌즈",
+          "n": "(주)비마이프렌즈",
           "kind": "private_corp",
           "type": "supply",
           "tier_grade": "T1",
@@ -169,7 +178,35 @@
           "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
         }
       ],
-      "down": []
+      "down": [
+        {
+          "t": "402340",
+          "n": "SK스퀘어",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 97000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 영업비용 등(*1)"
+        },
+        {
+          "t": "017670",
+          "n": "SK텔레콤",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 57350000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 영업비용, 특수관계자거래"
+        },
+        {
+          "t": "035720",
+          "n": "카카오",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 40000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 영업비용 등, 특수관계자거래"
+        }
+      ]
     }
   }
 }

@@ -41,8 +41,37 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "082740",
+          "n": "한화엔진",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 486774000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 거래 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "t": "082740",
+          "n": "한화엔진",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 5965846000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 거래 · 매출"
+        },
+        {
+          "n": "소시어스한국투자제1호",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 80400000000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 거래 · 유상증자"
+        }
+      ]
     }
   }
 }

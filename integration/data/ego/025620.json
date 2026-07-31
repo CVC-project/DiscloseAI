@@ -16,14 +16,6 @@
         "tier": "dot"
       },
       {
-        "n": "(주)광림",
-        "kind": "private_corp",
-        "type": "investment",
-        "detail": "15.92% · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
         "n": "JAYJUN INTERNATIONAL INC",
         "kind": "private_corp",
         "type": "subsidiary",
@@ -36,6 +28,14 @@
         "kind": "private_corp",
         "type": "subsidiary",
         "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜광림",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "15.92% · 2025",
         "dir": "out",
         "as_of": 2025
       },
@@ -73,16 +73,107 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": [
+      "up": [
         {
-          "n": "㈜카카오헬스케어",
-          "kind": "private_corp",
+          "t": "078860",
+          "n": "아이오케이이엔엠",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 10000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "t": "078860",
+          "n": "아이오케이이엔엠",
           "type": "capital_out",
           "tier_grade": "T1",
-          "amount": 9999997000.0,
+          "amount": 2000000000.0,
           "as_of": 2025,
-          "prov": "특수관계자 · 유상증자"
+          "prov": "특수관계자 · 자금대여거래"
+        },
+        {
+          "t": "002070",
+          "n": "비비안",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1376000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        },
+        {
+          "n": "㈜훼미모드",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 64401000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "t": "002070",
+          "n": "비비안",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 9508000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "t": "307870",
+          "n": "비투엔",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 37960000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "㈜퓨처코어",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 30000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "차실버케어",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 6818000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "㈜스테이지원엔터",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2500000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "㈜화현관광개발",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2400000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "㈜쌍방울",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 232000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
         }
       ]
     }

@@ -53,16 +53,35 @@
     "valuechain": {
       "up": [
         {
-          "n": "(주)유유엘앤피",
-          "kind": "private_corp",
+          "t": "256840",
+          "n": "한국비엔씨",
           "type": "supply",
           "tier_grade": "T1",
-          "amount": 86840000.0,
-          "as_of": 2023,
-          "prov": "특수관계자 거래당기 및 전기 중 특수관계자와의 주요 거래내역 및 · 매입"
+          "amount": 89064000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 · 별도"
         }
       ],
-      "down": []
+      "down": [
+        {
+          "t": "256840",
+          "n": "한국비엔씨",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 6468170000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 · 별도"
+        },
+        {
+          "n": "㈜켐바이오진",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 143440000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 · 별도"
+        }
+      ]
     }
   }
 }

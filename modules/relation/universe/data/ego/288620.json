@@ -41,7 +41,26 @@
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "095910",
+          "n": "에스에너지",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 171563000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입등"
+        },
+        {
+          "n": "에스파워(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 803025000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입등"
+        }
+      ],
       "down": [
         {
           "t": "000720",
@@ -51,6 +70,33 @@
           "amount": 3933364800.0,
           "as_of": 2026,
           "prov": "단일판매ㆍ공급계약체결 · 현대건설 주식회사"
+        },
+        {
+          "t": "095910",
+          "n": "에스에너지",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1008000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출등"
+        },
+        {
+          "t": "095910",
+          "n": "에스에너지",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 3500000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 대여"
+        },
+        {
+          "n": "에스파워(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 42268000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출등"
         }
       ]
     }

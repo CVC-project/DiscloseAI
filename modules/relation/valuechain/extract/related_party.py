@@ -74,8 +74,26 @@ _EXCLUDE_LABEL_SUBSTR = ("채권", "채무", "잔액")
 # 동일 어휘군 — startswith 접두어에 추가(기아의 "특수관계자 기타매출"/"특수관계자
 # 기타매입" 같은 비상거래 컬럼은 "특수관계자"로 시작해 이 접두어와 자연히 불일치,
 # 오분류 위험 없음 확인).
-_SALES_LABEL_PREFIXES = ("매출", "수익거래", "재화의 판매로 인한 수익")
-_PURCHASE_LABEL_PREFIXES = ("매입", "비용거래", "재화의 매입")
+# ★2026-07-31 후속25 (리더 판정): **`영업수익`·`영업비용` 추가**. 지주회사·서비스업은
+# 손익계산서에 `매출`이 아니라 `영업수익`을 쓰므로 기존 어휘로는 거래표가 통째로 안 잡혔다
+# (SK스퀘어 실측: 헤더가 `영업수익 등 | 영업비용 등(*1) | 유형자산 취득 등` — 5종 파서 전부 0).
+#
+# ## 어휘 확장 규약 (새 표기를 발견하면 여기만 고친다)
+# 담는다 = **상거래의 대가**(재화·용역 제공/수취). startswith 접두 매칭이라 `… 등`·
+# `…, 특수관계자거래` 같은 꼬리는 자동 흡수된다.
+#   · SALES   매출 / 수익거래 / 영업수익 / 재화의 판매로 인한 수익
+#   · PURCHASE 매입 / 비용거래 / 영업비용 / 재화의 매입
+# 담지 않는다(넣으면 금액 의미가 바뀐다 — 확장 전 반드시 리더 판정):
+#   · `기타수익` 2,454 · `기타비용` 2,654 — 상거래 대가가 아닌 잡수익·잡비용
+#   · `이자수익` 1,066 · `이자비용` 882 · 배당 — 손익이지 상거래가 아니다(자본거래 §참조)
+#   · `유형자산취득` 631 — 자산 거래
+#   · `수익`·`비용` 단독 1,124/1,016 — 무엇의 수익인지 모호
+#   · 잔액성(`대여금`·`미지급금`·`미수금`·`리스부채`·보증금) — `_EXCLUDE_LABEL_SUBSTR`·
+#     `_BALANCE_PERIOD_HEADERS`가 별도로 막는다
+# ⚠️ `기타수익`이 `수익거래`에 안 걸리는 이유는 **접두 매칭**이기 때문이다. 여기에
+#    `수익`을 넣는 순간 `기타수익`·`이자수익`이 전부 딸려 들어온다 — 넣지 말 것.
+_SALES_LABEL_PREFIXES = ("매출", "수익거래", "영업수익", "재화의 판매로 인한 수익")
+_PURCHASE_LABEL_PREFIXES = ("매입", "비용거래", "영업비용", "재화의 매입")
 
 # ── 자본거래 (2026-07-31 리더 판정 ④ — edge_type 신설) ─────────────────────────
 # 상거래(customer/supply)와 **같은 화살표로 그리면 안 된다**: 100억 대여와 100억 부품
@@ -979,6 +997,13 @@ _FOOTNOTE_LABEL_RE = re.compile(r"^\(주\d*\)$")
 # 원칙 ②("괄호는 신원 정보다")의 분할판 — 괄호 안은 한 덩어리다. 그리고 법인격
 # 접미어만 남는 조각은 앞 조각의 일부이므로 되붙인다.
 _LIST_SEP_RE = re.compile(r"[,、·]")
+# 구분자 없이 이어붙은 회사명의 경계 — 법인격 **접미** 표기 직후에 새 이름이 시작하는 곳.
+# `Ltd.Hana` · `Inc.AniTrace` · `Inc.하나더블유엘에스` · `…태양광(주)(주)이노메이트`
+# (가변 길이 lookbehind는 파이썬에서 불가 — 캡처 후 뒤에 분리자를 덧댄다)
+_GLUE_BOUNDARY_RE = re.compile(
+    r"((?:Inc|Ltd|Ltda|Corp|LLC|GmbH)\.)(?=[A-Z가-힣])"
+    r"|(\))(?=㈜|\(주\))"
+)
 _OPEN_BRACKETS = "([{（［｛"
 _CLOSE_BRACKETS = ")]}）］｝"
 # 되붙임 대상 — 이 토큰만으로 이루어진 조각은 독립 법인명이 될 수 없다.
@@ -1020,6 +1045,14 @@ def split_company_list(name: str | None) -> list[str]:
     """
     if not name:
         return []
+    # ★2026-07-31 후속25: **원문 HTML에 구분자가 아예 없는** 뭉침이 있다(실측 98건) —
+    #   `<TD>Hana Micron Vina Co., Ltd.Hana Micron Vietnam Co., Ltd.HT Micron…</TD>`
+    #   (하나머티리얼즈). `<br>`·`<p>`·`&cr` 중 무엇도 없어 마크업으로는 못 가른다.
+    #   → **법인격 접미 표기 뒤 경계**만 분리자로 승격한다(형태로 확실한 것만 — 원칙 ②).
+    # ⚠️ `S.A.`는 제외한다 — `RECAUDO BOGOTA S.A.S`가 두 동강 난다.
+    # ⚠️ 한계: `Hana Latin AmericaHana Micron America`처럼 법인격 표기가 없는 이음매는
+    #    여전히 못 가른다. 억지로 자르면 멀쩡한 사명이 깨지므로 남겨 둔다.
+    name = _GLUE_BOUNDARY_RE.sub(lambda m: (m.group(1) or m.group(2)) + ",", name)
     depth = 0
     parts: list[str] = []
     buf: list[str] = []
@@ -1171,6 +1204,50 @@ def parse_governance_wide_row(text_md: str | None) -> list[dict]:
 # 위치 추론이 안전하지 않았다(investigate 기록). 원본 text_html(sectioner 변환
 # 이전, ROWSPAN 속성 보존)을 직접 파싱하면 이 모호성이 해소된다 — rowspan을
 # 반영한 완전한 셀 그리드를 복원하면 카테고리/회사명 컬럼 위치가 항상 고정된다.
+# ★2026-07-31 후속25 (리더 지적: "하나머티리얼즈에 여러 기업이 한 데 섞여 있다"):
+# 한 셀에 회사가 **여러 줄로** 적힌 표가 있는데 `get_text(strip=True)`가 줄 경계를
+# 지우고 이어붙여 **허위 노드 1개가 여러 회사를 대표**했다. 실측 98건 —
+#   `(주)동진첨단소재PT.Dongjin Indonesia(주)코렉스명부산업(주)…`(동진쎄미켐)
+#   `(유)사조씨피케이(주)사조대림(주)사조랜더텍…`(사조, 260자)
+#   `HT Micron Semicondutores S.A.Hana Electronics…Inc.AniTrace`(하나머티리얼즈)
+# 줄 경계는 `<br>`·`<p>` 또는 DART 고유 엔티티 `&cr`로 남아 있다.
+# → 조각을 **기존 분리자 `,`로 이어** `split_company_list`가 자연히 쪼개게 한다.
+# ⚠️ 금액 셀 보호: 조각이 **전부 수치성**이면 붙이지 않는다 — `1,234`가 두 조각으로
+#    렌더링된 경우 콤마를 넣으면 그대로지만, 서로 다른 수를 콤마로 이으면 파싱이
+#    깨진다. 수치 셀은 종전대로 이어붙인다(기존 동작 보존).
+_CR_ENTITY_RE = re.compile(r"&cr;?")
+_NUMERIC_PIECE_RE = re.compile(r"^[\d,.\s()\-−―%]*$")
+_HAS_LETTER_RE = re.compile(r"[가-힣A-Za-z]")
+_LEGAL_MARK_RE = re.compile(r"㈜|\(주\)|\(유\)|\(재\)|주식회사|유한회사|Inc\.?|Ltd\.?|Corp\.?")
+
+
+def _cell_text(cell) -> str:
+    """셀 텍스트. 여러 줄이면 조각을 `,`로 잇는다(수치 셀은 종전대로 이어붙임)."""
+    raw = cell.get_text("\n", strip=True)
+    raw = _CR_ENTITY_RE.sub("\n", raw)
+    pieces = [p.strip() for p in raw.split("\n") if p.strip()]
+    if len(pieces) <= 1:
+        return _CR_ENTITY_RE.sub("", cell.get_text(strip=True))
+    if all(_NUMERIC_PIECE_RE.match(p) for p in pieces):
+        return "".join(pieces)  # 수치가 조각난 것 — 붙여야 원래 수가 된다
+    # ⚠️ **각주 조각은 앞 이름에 그대로 붙인다** — `(*1)`이 별도 줄로 렌더링되는 표가
+    #    있어 콤마로 이었더니 `KG케미칼㈜,(*1)`이 되어 링킹이 깨졌다(상장↔상장 7건 소실).
+    #    회사명은 반드시 한글이나 영문을 포함하므로, **글자가 없는 조각**은 기호·각주다.
+    # ⚠️ 줄바꿈이 **회사명 중간**에 오는 표도 있다 — `㈜지` + `란지교시큐리티`를 콤마로
+    #    이었더니 `㈜지,란지교시큐리티`가 되어 링킹이 깨졌다. 앞 조각의 실질 이름
+    #    (법인격 표기 제외)이 2자 미만이면 아직 이름이 안 끝난 것이므로 이어붙인다.
+    merged: list[str] = []
+    for p in pieces:
+        if merged and (
+            not _HAS_LETTER_RE.search(p)
+            or len(_LEGAL_MARK_RE.sub("", merged[-1]).strip()) < 2
+        ):
+            merged[-1] += p
+        else:
+            merged.append(p)
+    return ",".join(merged)
+
+
 def _html_table_grid(table) -> list[list[str]]:
     """<TABLE> → ROWSPAN/COLSPAN을 반영해 셀 위치를 완전히 채운 2차원 그리드.
 
@@ -1198,7 +1275,7 @@ def _html_table_grid(table) -> list[list[str]]:
         for cell in cells:
             while _consume_carry():
                 pass
-            text = cell.get_text(strip=True)
+            text = _cell_text(cell)
             colspan = int(cell.get("colspan", 1) or 1)
             rowspan = int(cell.get("rowspan", 1) or 1)
             for _ in range(colspan):
@@ -1226,6 +1303,207 @@ def _find_header_row(grid: list[list[str]], required_labels: set[str]) -> int | 
         if required_labels <= set(row):
             return i
     return None
+
+
+# ★2026-07-31 후속25 실측: 부재 진단 B4b **711사**가 여기서 열린다. 앞 4종이 전부
+# `당기` 마커 **블록/열**을 앵커로 삼는데, 이 형태는 기간이 **표 밖 문맥**에 있거나
+# (`(2) …거래 등의 내역` / `(당기)` / `(단위: 천원)` 순서로 표 앞에 형제로 놓임)
+# **2단 헤더 상단**에 있다. 계측(회사 단위 대표형, dir 어휘 표 보유 639사):
+#   F-A th있고 기간없음 280 · F-C 역순2단(상단=기간·서브=거래유형) 78 ·
+#   F-B th없음(본표가 td만) 38 · F-D 기간열있음 24  ← 회사행 보유분만 합 420
+#   (집계행만 219사는 상대 특정 불가 — 정당 제외. dir 표 자체 없음 72사)
+# 기간 문맥 실측: `당기` 3,167 · `전기` 1,510 · **문맥 없음 293**(→ 포기, 억지 매칭 금지).
+#
+# ⚠️ **사슬 맨 끝에 신설**한다(후속22와 같은 규율) — 앞 4종이 잡은 노트는 여기 도달하지
+#    않으므로 기존 산출이 구조적으로 불변이다. 앞 파서를 고치면 V-098 직전 세션에서
+#    겪은 "게이트 의미 변경" 사고가 재현된다.
+# ⚠️ 방향 어휘는 기존 것만 재사용한다 — `기타수익`·`임대수익`·`기타비용`은
+#    `_SALES/_PURCHASE_LABEL_PREFIXES`에 매치되지 않아 **자연히 제외**된다(상거래 정의
+#    유지). 이 형태의 표는 그런 열을 흔히 달고 있는데, 어휘를 넓히면 금액 의미가 바뀐다.
+_PERIOD_PAREN_RE = re.compile(r"[(（]\s*(당기|전기|당반기|전반기|당분기|전분기)\s*[)）]")
+# 기간 표기는 문단 **끝**에 온다(`당기 -` · `…입니다.전기 -`). 문단 어디서든 첫 `당기`를
+# 주우면 각주에 걸린다 — 실측: `(*1) 당기 중 (주)포스코에 지급된 배당금은 …입니다.전기 -`
+# 를 **당기**로 읽어 전기 표를 당기로 담았다(포스코 계열, S6가 112건으로 잡음).
+_PERIOD_TAIL_RE = re.compile(r"(당기|전기|당반기|전반기|당분기|전분기)\s*[-–—]?\s*$")
+_CURRENT_PERIOD_PREFIX = "당"
+
+
+def _period_from_context(table) -> str | None:
+    """표 **앞 형제** 텍스트에서 기간 표기를 찾는다(가까운 것 우선). 못 찾으면 None.
+
+    `(당기)`처럼 괄호로 감싼 표기를 먼저 보고, 없으면 짧은 문단의 `당기`/`전기` 단어를
+    본다. 긴 문단은 서술 중의 '전기 대비' 같은 표현이 섞이므로 길이 상한을 둔다.
+    """
+    sib = table
+    for _ in range(6):
+        sib = sib.find_previous_sibling()
+        if sib is None:
+            return None
+        # ⚠️ **다른 데이터 표를 만나면 중단**한다 — 그 위는 그 표의 문맥이지 이 표의
+        #    것이 아니다. 안 끊었더니 앞 표(전기 표 등) 본문의 `당기`를 주워 읽었다
+        #    (실측 1,504건이 table 형제에서 기간을 읽었고 그중 811건이 `당기` 판정).
+        #    단 **제목·기간·단위 소표는 통과**시킨다 — `(단위: 천원)`이 별도 <table>로
+        #    렌더링되는 공시가 많아(영원무역 실측) 여기서 끊으면 문맥을 통째로 놓친다.
+        #    소표 판정은 transposed와 같은 관용구(th 없는 4셀 이하).
+        if getattr(sib, "name", None) == "table":
+            if sib.find_all("th") or len(sib.find_all(["td", "te"])) > 4:
+                return None
+        txt = sib.get_text(" ", strip=True)
+        if not txt:
+            continue
+        m = _PERIOD_PAREN_RE.search(txt)
+        if m:
+            return m.group(1)
+        m2 = _PERIOD_TAIL_RE.search(txt)
+        if m2:
+            return m2.group(1)
+    return None
+
+
+def _company_cols_header(grid: list[list[str]]) -> tuple[int, int | None] | None:
+    """거래유형 헤더 행을 찾는다 → (헤더행 idx, 2단이면 상단(기간) 행 idx).
+
+    앞 3행만 본다 — 그보다 아래에서 방향 어휘가 처음 나오면 본문 잡음일 확률이 높다.
+    """
+    for i in range(min(3, len(grid))):
+        cells = [_norm_ws(c) for c in grid[i]]
+        if not any(_dir_of_label(c) for c in cells):
+            continue
+        upper = None
+        if i > 0:
+            up = [_norm_ws(c) for c in grid[i - 1]]
+            if any(u in _PERIOD_SUBHEADERS for u in up):
+                upper = i - 1
+        return i, upper
+    return None
+
+
+def _dir_of_label(cell: str) -> str | None:
+    """셀 하나 → 방향. 상거래 어휘 우선, 없으면 자본거래(정확 일치)."""
+    c = _norm_ws(cell)
+    if _label_match(c, _SALES_LABEL_PREFIXES):
+        return "customer"
+    if _label_match(c, _PURCHASE_LABEL_PREFIXES):
+        return "supply"
+    return _capital_direction(c)
+
+
+def parse_note_company_cols(text_html: str | None) -> list[dict]:
+    """행=회사·**열=거래유형** 레이아웃 → parse_note()와 동일 스키마 (당기분만).
+
+    기간 축이 표 안에 없고 **표 앞 문맥**에 있거나(F-A/F-B), 2단 헤더의 **상단**에
+    있는(F-C 역순) 형태를 담당한다. 사슬 맨 끝 — 앞 4종이 잡은 노트는 도달하지 않는다.
+    """
+    out: list[dict] = []
+    if not text_html:
+        return out
+    soup = BeautifulSoup(text_html, "html.parser")
+    seen_tables: set[str] = set()
+    # 합산은 **노트 전체 단위**다(표별이 아니라). 한 노트에 거래 분류가 다른 표가 여러 개
+    # 있으면(`매입|지급임차료` 표와 `매출등|매입` 표 등) 같은 상대가 표마다 나오는데,
+    # 소비 측 `apply`도 (상대,방향)으로 합산하므로 여기서 미리 합쳐야 계약이 일치한다.
+    agg: dict[tuple[str, str], list] = {}
+    for table in soup.find_all("table"):
+        grid = _html_table_grid(table)
+        if len(grid) < 2:
+            continue
+        # 같은 표가 문서에 두 번 렌더링되는 공시가 있다(연결·별도 절 중복 등, 실측
+        # 20240315000627의 표4·표102). 합산되면 2배 과대계상이라 시그니처로 한 번만 담는다.
+        sig = "|".join("~".join(r) for r in grid[:3])
+        if sig in seen_tables:
+            continue
+        seen_tables.add(sig)
+        found = _company_cols_header(grid)
+        if found is None:
+            continue
+        hdr_i, upper_i = found
+        header = [_norm_ws(c) for c in grid[hdr_i]]
+
+        # 잔액표는 표 전체 배제 — `당기말`이 하나라도 있으면 거래액 표가 아니다(후속22).
+        scan = header + ([_norm_ws(c) for c in grid[upper_i]] if upper_i is not None else [])
+        if any(h in _BALANCE_PERIOD_HEADERS for h in scan):
+            continue
+
+        # 단위: 표 자신 → 앞 문맥 순. 미등록 외화면 배제(원화 오인 방지).
+        unit_src = table.get_text(" ", strip=True)
+        multiplier = _resolve_unit(unit_src)
+        if multiplier is None and not _UNIT_RE.search(unit_src):
+            sib, ctx = table, ""
+            for _ in range(4):
+                sib = sib.find_previous_sibling()
+                if sib is None:
+                    break
+                ctx = sib.get_text(" ", strip=True) + " " + ctx
+            multiplier = _resolve_unit(ctx) if _UNIT_RE.search(ctx) else 1
+        if multiplier is None:
+            continue
+
+        # 방향 열: 2단이면 상단이 `당기`인 열만, 1단이면 표 앞 문맥으로 기간 판정.
+        if upper_i is not None:
+            upper = [_norm_ws(c) for c in grid[upper_i]]
+            dirs = [
+                (j, d, header[j])
+                for j in range(len(header))
+                if (d := _dir_of_label(header[j]))
+                and j < len(upper)
+                and upper[j].startswith(_CURRENT_PERIOD_PREFIX)
+            ]
+        else:
+            period = _period_from_context(table)
+            if period is None or not period.startswith(_CURRENT_PERIOD_PREFIX):
+                continue  # 전기 표이거나 기간 미상 — 억지 매칭 금지
+            dirs = [
+                (j, d, header[j]) for j in range(len(header)) if (d := _dir_of_label(header[j]))
+            ]
+        if not dirs:
+            continue
+
+        # 회사명 열: 위치가 아니라 **헤더 어휘**로만 찾는다(원칙 ④).
+        # ⚠️ 위치 폴백("방향 열 왼쪽")을 두었더니 회사명이 아닌 열을 상대로 만들었다 —
+        #    ① 부문정보 표(`보고부문|매출액|영업이익`)의 한국·중국이 상대회사가 되고
+        #    ② `종속회사|기타특수관계자|매출|매입` 처럼 **당사 거래가 아닌** 제3자 간
+        #    거래표까지 딸려온다. 어휘로 못 찾으면 **표를 포기**한다(억지 매칭 금지).
+        name_col = _header_col_by_vocab(header, _NAME_HEADER_VOCAB)
+        if name_col is None:
+            name_col = _find_vocab_col(header, _COMPANY_HEADER_STRONG)
+        if name_col is None or name_col in {j for j, _, _ in dirs}:
+            continue
+
+        for row in grid[hdr_i + 1 :]:
+            if len(row) <= name_col:
+                continue
+            name = row[name_col].strip()
+            # ⚠️ 합계 행 필터는 **공백 정규화 후** 검사한다 — 공시는 칸 폭을 맞추려
+            #    `합  계`처럼 글자 사이에 공백을 넣는다(원칙 ④ 공백 패딩과 같은 함정).
+            #    안 하면 `합  계`가 상대회사로 들어간다(실측 2건).
+            flat = _norm_ws(name)
+            if not name or "합계" in flat or "소계" in flat or flat in {_norm_ws(h) for h in header}:
+                continue
+            # 카테고리 행(관계기업 등)은 상대가 아니다. 법인격 표기가 있으면 실존 법인.
+            if _is_category_column(name) and not entity_kind._CORP_MARKS.search(name):
+                continue
+            for j, direction, lab in dirs:
+                if j >= len(row):
+                    continue
+                amount = _parse_amount(row[j], multiplier)
+                if amount is None:
+                    continue
+                # (회사,방향) 다행은 여기서 합산 — `_upsert_edge`가 last-wins라
+                # 흘려보내면 마지막 행만 남아 과소계상된다(후속22 교훈).
+                e = agg.setdefault((name, direction), [0.0, []])
+                e[0] += amount
+                if lab and lab not in e[1]:
+                    e[1].append(lab)
+    for (name, direction), (amount, labs) in agg.items():
+        out.append(
+            {
+                "counterparty": name,
+                "direction": direction,
+                "amount": amount,
+                "label": "+".join(labs),
+            }
+        )
+    return out
 
 
 # ★ 2026-07-30 열 밀림 수리 — 회사명 칸 위치를 **헤더 어휘로** 찾는다.
@@ -1628,11 +1906,14 @@ def apply(
             #   ③ parse_note_html_grid    markdown COLSPAN 유실로 열이 깨진 계층 헤더 표
             #                             (2026-07-29 U-확대, 전체 미파싱의 54%)
             #   ④ parse_note_company_rows 행=회사·열=기간 (2026-07-31, 미파싱의 87%)
+            #   ⑤ parse_note_company_cols 행=회사·열=거래유형, 기간이 표 밖 문맥/2단 상단
+            #                             (2026-07-31 후속25, 부재 진단 B4b 711사)
             note_items = parse_note(row["text_md"])
             for _nxt in (
                 lambda: parse_note_transposed(row.get("text_html")),
                 lambda: parse_note_html_grid(row.get("text_html")),
                 lambda: parse_note_company_rows(row["text_md"]),
+                lambda: parse_note_company_cols(row.get("text_html")),
             ):
                 if _has_trade(note_items):
                     break  # 앞 파서가 상거래를 잡았으면 이중으로 다시 읽지 않는다

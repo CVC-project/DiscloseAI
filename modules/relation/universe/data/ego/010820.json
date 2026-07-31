@@ -39,9 +39,9 @@
         "t": "093370",
         "n": "후성",
         "type": "dart_filing",
-        "detail": "기타 (별도) · 2024",
+        "detail": "기타 (별도) · 2025",
         "dir": "out",
-        "as_of": 2024,
+        "as_of": 2025,
         "s": "화학",
         "tier": "dot"
       },
@@ -49,9 +49,9 @@
         "t": "010040",
         "n": "한국내화",
         "type": "dart_filing",
-        "detail": "기타 (별도) · 2024",
+        "detail": "기타 (별도) · 2025",
         "dir": "out",
-        "as_of": 2024,
+        "as_of": 2025,
         "s": "소재",
         "tier": "dot"
       },
@@ -59,9 +59,9 @@
         "t": "098070",
         "n": "한텍",
         "type": "dart_filing",
-        "detail": "기타 (그룹 합산) (별도) · 2024",
+        "detail": "기타 (그룹 합산) (별도) · 2025",
         "dir": "out",
-        "as_of": 2024,
+        "as_of": 2025,
         "s": "철강·금속",
         "tier": "dot"
       },
@@ -69,9 +69,9 @@
         "n": "(주)트래닛",
         "kind": "private_corp",
         "type": "dart_filing",
-        "detail": "기타 (별도) · 2024",
+        "detail": "기타 (별도) · 2025",
         "dir": "out",
-        "as_of": 2024
+        "as_of": 2025
       },
       {
         "n": "김근수",
@@ -90,18 +90,18 @@
         "as_of": 2025
       },
       {
-        "n": "유콘시스템(주)",
-        "kind": "private_corp",
-        "type": "dart_filing",
-        "detail": "관계기업 (별도) · 2024",
-        "dir": "out",
-        "as_of": 2024
-      },
-      {
         "n": "유콘시스템(주) (국내)",
         "kind": "private_corp",
         "type": "associate",
         "detail": "24.4% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "유콘시스템㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 (별도) · 2025",
         "dir": "out",
         "as_of": 2025
       },
@@ -117,9 +117,9 @@
         "n": "일광이앤씨(주)후성정공(주)",
         "kind": "private_corp",
         "type": "dart_filing",
-        "detail": "기타 (별도) · 2024",
+        "detail": "기타 (별도) · 2025",
         "dir": "out",
-        "as_of": 2024
+        "as_of": 2025
       },
       {
         "n": "한국내화(주) (국내)",
@@ -141,21 +141,31 @@
         "n": "후성코퍼레이션(주)",
         "kind": "private_corp",
         "type": "dart_filing",
-        "detail": "기타 (별도) · 2024",
+        "detail": "기타 (별도) · 2025",
         "dir": "out",
-        "as_of": 2024
+        "as_of": 2025
       },
       {
         "n": "후성홀딩스(주)",
         "kind": "private_corp",
         "type": "dart_filing",
-        "detail": "기타 (별도) · 2024",
+        "detail": "기타 (별도) · 2025",
         "dir": "out",
-        "as_of": 2024
+        "as_of": 2025
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "n": "유콘시스템㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 4041600000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래 · 별도"
+        }
+      ],
       "down": []
     }
   }

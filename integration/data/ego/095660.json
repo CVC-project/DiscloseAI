@@ -56,14 +56,6 @@
         "tier": "dot"
       },
       {
-        "n": "(주)네오위즈파트너스",
-        "kind": "private_corp",
-        "type": "dart_filing",
-        "detail": "기타 · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
         "n": "(주)에이치랩코리아",
         "kind": "private_corp",
         "type": "dart_filing",
@@ -80,7 +72,7 @@
         "as_of": 2025
       },
       {
-        "n": "BNG SOFTWARE LIMITED.",
+        "n": "BNG Software Limited",
         "kind": "private_corp",
         "type": "subsidiary",
         "detail": "100.0% · 2025",
@@ -192,6 +184,14 @@
         "as_of": 2025
       },
       {
+        "n": "㈜네오위즈파트너스",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
         "n": "㈜네온게임즈",
         "kind": "private_corp",
         "type": "investment",
@@ -230,6 +230,14 @@
         "detail": "51.3% · 2025",
         "dir": "out",
         "as_of": 2025
+      },
+      {
+        "n": "㈜플래닛츠",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2024",
+        "dir": "out",
+        "as_of": 2024
       },
       {
         "n": "㈜하이디어",
@@ -313,8 +321,63 @@
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "042420",
+          "n": "네오위즈홀딩스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1226053000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 영업비용 등, 특수관계자거래"
+        },
+        {
+          "n": "Blank Sp.z o.o.",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 636856000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 영업비용 등, 특수관계자거래"
+        },
+        {
+          "n": "(주)에프엠애드",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 32693000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 영업비용 등, 특수관계자거래"
+        }
+      ],
       "down": [
+        {
+          "t": "042420",
+          "n": "네오위즈홀딩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 81059000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 영업수익, 특수관계자거래"
+        },
+        {
+          "n": "지온 NEW-K콘텐츠 투자조합",
+          "kind": "coop_fund",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 546275000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 영업수익, 특수관계자거래"
+        },
+        {
+          "n": "지온재기지원펀드",
+          "kind": "coop_fund",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 152093000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 영업수익, 특수관계자거래"
+        },
         {
           "n": "지온 NEW-K콘텐츠 투자조합",
           "kind": "coop_fund",
@@ -323,6 +386,33 @@
           "amount": 65000000.0,
           "as_of": 2025,
           "prov": "특수관계자와의 거래 · 현금출자, 특수관계자"
+        },
+        {
+          "n": "알로이스-지온 PGK 펀드",
+          "kind": "coop_fund",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 37900000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 영업수익, 특수관계자거래"
+        },
+        {
+          "n": "(주)에이치랩코리아",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 35673000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 영업수익, 특수관계자거래"
+        },
+        {
+          "n": "㈜네오위즈파트너스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 27540000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 영업수익, 특수관계자거래"
         }
       ]
     }

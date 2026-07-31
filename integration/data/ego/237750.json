@@ -51,8 +51,55 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "017040",
+          "n": "광명전기",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1800000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매입등 · 별도"
+        },
+        {
+          "t": "017040",
+          "n": "광명전기",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 20000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출거래 · 별도"
+        },
+        {
+          "n": "(주)이엔에스",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 798008000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매입등 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "t": "017040",
+          "n": "광명전기",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 414034000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매출등 · 별도"
+        },
+        {
+          "n": "(주)이엔에스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 202380000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매출등 · 별도"
+        }
+      ]
     }
   }
 }

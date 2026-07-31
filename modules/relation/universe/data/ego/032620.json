@@ -62,7 +62,7 @@
         "as_of": 2025
       },
       {
-        "n": "KAI-MZ 신기술조합 인슈어테크 1호",
+        "n": "KAI-MZ 신기술조합인슈어테크 1호",
         "kind": "coop_fund",
         "type": "associate",
         "detail": "46.71% · 2025",
@@ -92,22 +92,6 @@
         "detail": "기타 · 2023",
         "dir": "out",
         "as_of": 2023
-      },
-      {
-        "n": "㈜비브로스",
-        "kind": "private_corp",
-        "type": "associate",
-        "detail": "47.89% · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
-        "n": "㈜비브로스",
-        "kind": "private_corp",
-        "type": "dart_filing",
-        "detail": "관계기업 · 2024",
-        "dir": "out",
-        "as_of": 2024
       },
       {
         "n": "㈜아이쿱",
@@ -206,6 +190,22 @@
         "as_of": 2025
       },
       {
+        "n": "비브로스",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "47.89% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "비브로스",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
         "n": "의료법인 녹십자의료재단",
         "kind": "public_org",
         "type": "dart_filing",
@@ -223,16 +223,206 @@
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "005250",
+          "n": "녹십자홀딩스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 255417000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입등"
+        },
+        {
+          "t": "006280",
+          "n": "녹십자",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 44792000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입등"
+        },
+        {
+          "t": "144510",
+          "n": "지씨셀",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 343556000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입등"
+        },
+        {
+          "n": "㈜GC케어",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1997448000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입등"
+        },
+        {
+          "n": "㈜커브컴퍼니",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 346045000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입등"
+        },
+        {
+          "n": "㈜유팜몰",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 342546000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입등"
+        },
+        {
+          "n": "㈜그린벳",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 156893000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입등"
+        },
+        {
+          "n": "비브로스",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 124603000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입등"
+        },
+        {
+          "n": "㈜지씨웰페어",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 59982000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입등"
+        },
+        {
+          "n": "㈜크레너헬스컴",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 45650000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입등"
+        },
+        {
+          "n": "의료법인 녹십자의료재단",
+          "kind": "public_org",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 20235000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입등"
+        }
+      ],
       "down": [
         {
-          "n": "출자",
-          "kind": "private_corp",
-          "type": "capital_out",
+          "t": "005250",
+          "n": "녹십자홀딩스",
+          "type": "customer",
           "tier_grade": "T1",
-          "amount": 4840902000.0,
-          "as_of": 2021,
-          "prov": "특수관계자 거래 · 유상증자"
+          "amount": 1481000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출등"
+        },
+        {
+          "t": "006280",
+          "n": "녹십자",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 235637000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출등"
+        },
+        {
+          "t": "144510",
+          "n": "지씨셀",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2068252000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출등"
+        },
+        {
+          "t": "234690",
+          "n": "녹십자웰빙",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 214793000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출등"
+        },
+        {
+          "n": "㈜GC케어",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 327768000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출등"
+        },
+        {
+          "n": "㈜아이쿱",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 275636000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출등"
+        },
+        {
+          "n": "의료법인 녹십자의료재단",
+          "kind": "public_org",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 104615000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출등"
+        },
+        {
+          "n": "비브로스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 41604000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출등"
+        },
+        {
+          "n": "㈜유팜몰",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 22320000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출등"
+        },
+        {
+          "n": "㈜그린벳",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 7446000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출등"
+        },
+        {
+          "n": "㈜크레너헬스컴",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 6000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출등"
         }
       ]
     }

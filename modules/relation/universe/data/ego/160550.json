@@ -46,7 +46,7 @@
         "as_of": 2025
       },
       {
-        "n": "TGCK한중문화산업 공동발전투자조합",
+        "n": "TGCK한중문화산업공동발전투자조합",
         "kind": "coop_fund",
         "type": "associate",
         "detail": "31.9% · 2025",
@@ -238,18 +238,18 @@
         "as_of": 2025
       },
       {
-        "n": "캐피탈원 해양신산업 투자조합",
-        "kind": "coop_fund",
-        "type": "associate",
-        "detail": "22.76% · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
         "n": "캐피탈원중저예산 전문투자조합2호",
         "kind": "coop_fund",
         "type": "investment",
         "detail": "8.33% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "캐피탈원해양신산업투자조합",
+        "kind": "coop_fund",
+        "type": "associate",
+        "detail": "22.76% · 2025",
         "dir": "out",
         "as_of": 2025
       },
@@ -295,8 +295,73 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "유한회사 태양의후예 문화산업전문회사",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 513613000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입등"
+        },
+        {
+          "n": "(주)영화사금월",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 22530000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입등"
+        },
+        {
+          "n": "㈜뉴아이디",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3189000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입등"
+        },
+        {
+          "n": "캐피탈원해양신산업투자조합",
+          "kind": "coop_fund",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2847000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입등"
+        }
+      ],
+      "down": [
+        {
+          "n": "유한회사 태양의후예 문화산업전문회사",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 909690000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출등"
+        },
+        {
+          "n": "(주)영화사금월",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 168481000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출등"
+        },
+        {
+          "n": "㈜뉴아이디",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 90725000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출등"
+        }
+      ]
     }
   }
 }

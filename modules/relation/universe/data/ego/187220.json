@@ -107,8 +107,46 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "383930",
+          "n": "디티앤씨알오",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 36592000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 등 · 매출등 · 별도"
+        },
+        {
+          "n": "㈜세이프소프트",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1727273000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 등 · 매입등"
+        }
+      ],
+      "down": [
+        {
+          "t": "383930",
+          "n": "디티앤씨알오",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 93833000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 등 · 매입등 · 별도"
+        },
+        {
+          "n": "㈜세이프소프트",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 74208000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 등 · 매출등"
+        }
+      ]
     }
   }
 }

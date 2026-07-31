@@ -6,6 +6,14 @@
   "layers": {
     "governance": [
       {
+        "n": "(주)엘비",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "79.5% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
         "n": "LB INVESTMENT (SHANGHAI) CO., LTD",
         "kind": "private_corp",
         "type": "subsidiary",
@@ -76,18 +84,29 @@
         "detail": "6.6% · 2025",
         "dir": "out",
         "as_of": 2025
-      },
-      {
-        "n": "주식회사 엘비",
-        "kind": "private_corp",
-        "type": "subsidiary",
-        "detail": "79.5% · 2025",
-        "dir": "in",
-        "as_of": 2025
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "n": "(주)엘비",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 149034266.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 영업비용등(*1)"
+        },
+        {
+          "n": "엘비유세스(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 69038780.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 영업비용등(*1)"
+        }
+      ],
       "down": []
     }
   }

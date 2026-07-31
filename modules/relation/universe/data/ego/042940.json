@@ -143,7 +143,26 @@
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "051980",
+          "n": "중앙첨단소재",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 560260000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래내역 · 매입및기타비용"
+        },
+        {
+          "n": "㈜어코스틱스스페이스",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1703000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래내역 · 매입및기타비용"
+        }
+      ],
       "down": [
         {
           "t": "004920",
@@ -157,20 +176,29 @@
         {
           "t": "051980",
           "n": "중앙첨단소재",
-          "type": "capital_out",
+          "type": "customer",
           "tier_grade": "T1",
-          "amount": 3598875000.0,
+          "amount": 7306000.0,
           "as_of": 2025,
-          "prov": "특수관계자와의 거래내역 · 유상증자"
+          "prov": "특수관계자와의 거래내역 · 매출및기타수익"
         },
         {
           "n": "㈜어코스틱스스페이스",
           "kind": "private_corp",
-          "type": "capital_out",
+          "type": "customer",
           "tier_grade": "T1",
-          "amount": 1727250000.0,
+          "amount": 1596052000.0,
           "as_of": 2025,
-          "prov": "특수관계자와의 거래내역 · 유상증자"
+          "prov": "특수관계자와의 거래내역 · 매출및기타수익"
+        },
+        {
+          "n": "㈜성암[구, ㈜성암홀딩스]",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 89395000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래내역 · 매출및기타수익"
         }
       ]
     }

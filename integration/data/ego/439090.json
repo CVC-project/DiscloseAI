@@ -30,14 +30,6 @@
         "as_of": 2024
       },
       {
-        "n": "(주)엘에스화장품",
-        "kind": "private_corp",
-        "type": "dart_filing",
-        "detail": "기타 · 2024",
-        "dir": "out",
-        "as_of": 2024
-      },
-      {
         "n": "L&P Cosmetics China",
         "kind": "private_corp",
         "type": "dart_filing",
@@ -55,6 +47,14 @@
       },
       {
         "n": "㈜ 에델그라운드",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
+        "n": "㈜엘에스화장품",
         "kind": "private_corp",
         "type": "dart_filing",
         "detail": "기타 · 2024",
@@ -103,8 +103,37 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "엘앤피코스메틱㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1295312000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입등(*1)"
+        }
+      ],
+      "down": [
+        {
+          "n": "엘앤피코스메틱㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 9685000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출등"
+        },
+        {
+          "n": "㈜트리셀",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 5227000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출등"
+        }
+      ]
     }
   }
 }

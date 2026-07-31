@@ -44,7 +44,7 @@
         "as_of": 2025
       },
       {
-        "n": "FINE MS VINA CO.,LTD.",
+        "n": "FINE MS VINA CO LTD.",
         "kind": "private_corp",
         "type": "investment",
         "detail": "13.3% · 2025",
@@ -84,8 +84,8 @@
         "as_of": 2025
       },
       {
-        "n": "㈜코데스",
-        "kind": "private_corp",
+        "n": "코데스",
+        "kind": "person",
         "type": "investment",
         "detail": "12.79% · 2025",
         "dir": "in",
@@ -101,8 +101,73 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "441270",
+          "n": "파인엠텍",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 52895000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입및기타비용"
+        },
+        {
+          "t": "106240",
+          "n": "파인테크닉스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2600000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        },
+        {
+          "n": "VINA CNS CO.,LTD",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 90496000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입및기타비용"
+        }
+      ],
+      "down": [
+        {
+          "n": "VINA CNS CO.,LTD",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 7978304000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출및기타수익"
+        },
+        {
+          "n": "코데스",
+          "kind": "person",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 400000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 자금대여거래"
+        },
+        {
+          "n": "코데스",
+          "kind": "person",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출및기타수익"
+        },
+        {
+          "n": "하나나노텍",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2400000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출및기타수익"
+        }
+      ]
     }
   }
 }

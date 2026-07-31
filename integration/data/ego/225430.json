@@ -14,7 +14,7 @@
         "as_of": 2025
       },
       {
-        "n": "모린(주)",
+        "n": "모린㈜",
         "kind": "private_corp",
         "type": "associate",
         "detail": "37.1% · 2025",
@@ -31,8 +31,37 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "모린㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 92368000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "n": "모린㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3345542000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출 · 별도"
+        },
+        {
+          "n": "㈜비비앤코",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 5352000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출 · 별도"
+        }
+      ]
     }
   }
 }

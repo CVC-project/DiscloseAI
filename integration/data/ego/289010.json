@@ -39,11 +39,19 @@
         "t": "461300",
         "n": "아이스크림미디어",
         "type": "dart_filing",
-        "detail": "기타 (별도) · 2024",
+        "detail": "기타 (별도) · 2025",
         "dir": "in",
-        "as_of": 2024,
+        "as_of": 2025,
         "s": "플랫폼",
         "tier": "dot"
+      },
+      {
+        "n": "(주)아이스크림",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2021",
+        "dir": "out",
+        "as_of": 2021
       },
       {
         "n": "㈜아이스크림아트",
@@ -60,10 +68,28 @@
         "detail": "기타 (별도) · 2025",
         "dir": "out",
         "as_of": 2025
+      },
+      {
+        "n": "미디어",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2021",
+        "dir": "out",
+        "as_of": 2021
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "461300",
+          "n": "아이스크림미디어",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1267987159.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 판매로 인한 수익, 특수관계자거래 · 별도"
+        }
+      ],
       "down": [
         {
           "t": "461300",

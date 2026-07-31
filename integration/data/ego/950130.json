@@ -29,9 +29,9 @@
         "t": "004720",
         "n": "팜젠사이언스",
         "type": "dart_filing",
-        "detail": "관계기업 · 2024",
+        "detail": "관계기업 (별도) · 2025",
         "dir": "in",
-        "as_of": 2024,
+        "as_of": 2025,
         "s": "제약바이오",
         "tier": "dot"
       },
@@ -92,6 +92,14 @@
         "as_of": 2025
       },
       {
+        "n": "㈜엘트라글로벌",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
         "n": "메이슨 헬스케어 신기술 투자조합 2호",
         "kind": "coop_fund",
         "type": "subsidiary",
@@ -116,7 +124,7 @@
         "as_of": 2025
       },
       {
-        "n": "캔디엑스홀딩스(유)㈜엘트라글로벌",
+        "n": "캔디엑스홀딩스(유)",
         "kind": "private_corp",
         "type": "dart_filing",
         "detail": "관계기업 · 2025",
@@ -125,7 +133,17 @@
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "004720",
+          "n": "팜젠사이언스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 283820000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래 · 별도"
+        }
+      ],
       "down": [
         {
           "t": "004720",

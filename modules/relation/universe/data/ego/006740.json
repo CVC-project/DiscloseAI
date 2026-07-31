@@ -68,7 +68,7 @@
         "as_of": 2025
       },
       {
-        "n": "비니 1호 투자조합",
+        "n": "비니1호투자조합",
         "kind": "coop_fund",
         "type": "investment",
         "detail": "16.54% · 2025",
@@ -150,7 +150,35 @@
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "t": "009190",
+          "n": "대양금속",
+          "type": "capital_in",
+          "tier_grade": "T1",
+          "amount": 3000000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 차입거래"
+        },
+        {
+          "n": "지앤비조합",
+          "kind": "coop_fund",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 4800000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 대여"
+        },
+        {
+          "n": "블루원㈜",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 539000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 대여"
+        }
+      ]
     }
   }
 }
