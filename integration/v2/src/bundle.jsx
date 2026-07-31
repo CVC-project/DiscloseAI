@@ -1635,7 +1635,12 @@ window.SectorMap = SectorMap;
 // 상(dir=in·출자 들어옴) / 하(dir=out·피출자·나감) 배치 — valuechain §5 D5 상/하 문법을
 // 지배구조 의미로 재사용(U2 진행 시나리오). 사이드당 Top-N 6 + "외 n사" 묶음 노드(D6).
 // 시각 문법(REL_STYLES 색·이중 평행선·화살표=출자 방향)은 allRelated와 동일 — U-D12 불변.
-function EgoView({ anchor, layer, onLayerChange, onReRoot }) {
+// UX-034: dismissRef — EgoView가 열어둔 **일시 레이어(팝업·팝오버)**를 App의 goBack이
+// 사다리 최상단에서 닫을 수 있게 넘겨주는 핸들. 이 상태들은 EgoView 로컬이라 App이
+// 알 방법이 없었고, 그래서 ESC가 팝업을 건너뛰고 단계 이동(re-root 체인 되돌림)을
+// 해버렸다. 되돌림 계단은 한 곳(UX-028/030)이라는 원칙을 지키면서, "무엇이 열려
+// 있는지"만 소유자가 보고하는 구조.
+function EgoView({ anchor, layer, onLayerChange, onReRoot, dismissRef }) {
   const canvasRef = _useRef(null);
   const rafRef = _useRef(0);
   const startRef = _useRef(performance.now());
@@ -1798,6 +1803,19 @@ function EgoView({ anchor, layer, onLayerChange, onReRoot }) {
     setOverflowSide(null);
     setHoverCode(null);
   }, [layer, isVc, anchor.t]);
+
+  // UX-034: 열려 있는 일시 레이어를 **한 번에 하나씩** 닫고 닫았는지 보고한다.
+  // 순서 = 화면에 겹친 순서(비상장 팝오버가 묶음 팝업 위에 뜬다). false를 반환하면
+  // App의 goBack이 다음 단계(오버레이 → 단계 이동)로 진행한다.
+  _useEffect(() => {
+    if (!dismissRef) return undefined;
+    dismissRef.current = () => {
+      if (unlistedInfo) { setUnlistedInfo(null); return true; }
+      if (overflowSide) { setOverflowSide(null); return true; }
+      return false;
+    };
+    return () => { dismissRef.current = null; };
+  }, [dismissRef, unlistedInfo, overflowSide]);
 
   _useEffect(() => {
     window.__egoDebug = {
@@ -4026,6 +4044,9 @@ function App() {
   const [egoAnchor, setEgoAnchor] = useState(null);
   const [egoStatus, setEgoStatus] = useState('idle'); // idle | loading | ok | error
   const [egoChain, setEgoChain] = useState([]); // [{code,name,sectorKo}] re-root 브레드크럼
+  // UX-034: EgoView가 열어둔 일시 레이어(묶음 팝업·비상장 팝오버)를 goBack 사다리 최상단에서
+  // 닫기 위한 핸들. EgoView가 채우고, 언마운트 시 스스로 비운다.
+  const egoDismissRef = useRef(null);
   const egoCacheRef = useRef(new Map());
   // U3: 레이어 토글 상태 — re-root로 기업이 바뀌어도 유지(레이어 비교 탐색 흐름).
   // 데이터 없는 기업에선 EgoView가 지배구조로 안전 폴백(hasVc 가드).
@@ -4238,6 +4259,10 @@ function App() {
   // → (관련 기업 클릭 등으로 섹터를 건너뛴 히스토리가 있으면 그 직전 상태로 복원)
   // → company → sector → (galaxy에서 섹터 선택만 된 상태) 해제
   const goBack = useCallback(() => {
+    // UX-034: 사다리 최상단 = 지금 화면에 떠 있는 EgoView 일시 레이어(묶음 팝업·비상장
+    // 팝오버). 이걸 건너뛰면 ESC가 팝업을 남겨둔 채 단계를 이동해(re-root 체인 되돌림)
+    // 다른 기업으로 점프한 것처럼 보인다 — 리더 보고 사례.
+    if (egoDismissRef.current && egoDismissRef.current()) return;
     if (discDetailItem) { setDiscDetailItem(null); return; }
     if (discFullOverlayTicker) { setDiscFullOverlayTicker(null); return; }
     if (corpOverlayTicker) { setCorpOverlayTicker(null); return; }
@@ -4346,6 +4371,7 @@ function App() {
                   layer={egoLayer}
                   onLayerChange={setEgoLayer}
                   onReRoot={reRootEgo}
+                  dismissRef={egoDismissRef}
                 />
               ) : (
                 <SectorMap
