@@ -6,7 +6,31 @@
   "layers": {
     "governance": [
       {
-        "n": "(주)제이에이치사람들",
+        "n": "(주)하이앤드",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "51.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "(주)하이앤드",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "종속기업 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "(주)햇발",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "유의적 영향력 (별도) · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
+        "n": "㈜제이에이치사람들",
         "kind": "private_corp",
         "type": "associate",
         "detail": "20.54% · 2025",
@@ -14,17 +38,27 @@
         "as_of": 2025
       },
       {
-        "n": "(주)하이앤드",
+        "n": "㈜제이에이치사람들",
         "kind": "private_corp",
-        "type": "subsidiary",
-        "detail": "51.0% · 2025",
+        "type": "dart_filing",
+        "detail": "유의적 영향력 · 2025",
         "dir": "out",
         "as_of": 2025
       }
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "(주)유니원",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2302470000.0,
+          "as_of": 2024,
+          "prov": "특수관계자와의 거래 · 매출 · 별도"
+        }
+      ]
     }
   }
 }

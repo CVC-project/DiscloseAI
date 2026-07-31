@@ -87,8 +87,46 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "선도화학",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 9056822830.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입"
+        },
+        {
+          "n": "화신화학㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 92326500.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "n": "화신화학㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 695615000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        },
+        {
+          "n": "선도화학",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 112322410.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        }
+      ]
     }
   }
 }

@@ -6,6 +6,16 @@
   "layers": {
     "governance": [
       {
+        "t": "017940",
+        "n": "E1",
+        "type": "subsidiary",
+        "detail": "81.79% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "유통",
+        "tier": "dot"
+      },
+      {
         "t": "078020",
         "n": "LS증권",
         "type": "subsidiary",
@@ -16,14 +26,24 @@
         "tier": "dot"
       },
       {
-        "t": "017940",
-        "n": "E1",
-        "type": "subsidiary",
-        "detail": "81.79% · 2025",
+        "t": "010120",
+        "n": "엘에스일렉트릭",
+        "type": "ftc_group",
+        "detail": "엘에스 · 2025",
         "dir": "in",
         "as_of": 2025,
-        "s": "유통",
-        "tier": "dot"
+        "s": "전기전자부품",
+        "tier": "named400"
+      },
+      {
+        "t": "000500",
+        "n": "가온전선",
+        "type": "dart_filing",
+        "detail": "대규모기업집단 · 2024",
+        "dir": "in",
+        "as_of": 2024,
+        "s": "전기전자부품",
+        "tier": "named400"
       },
       {
         "t": "017940",
@@ -59,26 +79,6 @@
         "t": "015360",
         "n": "INVENI",
         "type": "dart_filing",
-        "detail": "기타 · 2025",
-        "dir": "in",
-        "as_of": 2025,
-        "s": "기계·장비",
-        "tier": "dot"
-      },
-      {
-        "t": "000500",
-        "n": "가온전선",
-        "type": "dart_filing",
-        "detail": "대규모기업집단 · 2024",
-        "dir": "in",
-        "as_of": 2024,
-        "s": "전기전자부품",
-        "tier": "named400"
-      },
-      {
-        "t": "015360",
-        "n": "INVENI",
-        "type": "dart_filing",
         "detail": "대규모기업집단 · 2025",
         "dir": "out",
         "as_of": 2025,
@@ -94,6 +94,16 @@
         "as_of": 2025,
         "s": "금융",
         "tier": "named400"
+      },
+      {
+        "t": "015360",
+        "n": "INVENI",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "기계·장비",
+        "tier": "dot"
       },
       {
         "n": "(해외)ELES-Ruspacific Co., Ltd.",
@@ -112,7 +122,7 @@
         "as_of": 2025
       },
       {
-        "n": "APPLICOM INC.",
+        "n": "APPLICOMINC.",
         "kind": "private_corp",
         "type": "dart_filing",
         "detail": "관계기업 · 2025",
@@ -128,12 +138,20 @@
         "as_of": 2025
       },
       {
-        "n": "ELES-Ruspacific Co.",
+        "n": "ELES-Ruspacific Co., Ltd.",
         "kind": "private_corp",
         "type": "dart_filing",
         "detail": "관계기업 · 2025",
         "dir": "out",
         "as_of": 2025
+      },
+      {
+        "n": "G&A사모투자전문회사",
+        "kind": "coop_fund",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2023",
+        "dir": "out",
+        "as_of": 2023
       },
       {
         "n": "HANIL H.K LTD.",
@@ -150,6 +168,14 @@
         "detail": "관계기업 · 2025",
         "dir": "out",
         "as_of": 2025
+      },
+      {
+        "n": "LS VINA Cable & System 등.",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "대규모기업집단 · 2023",
+        "dir": "out",
+        "as_of": 2023
       },
       {
         "n": "LSEV코리아㈜",
@@ -368,6 +394,14 @@
         "as_of": 2025
       },
       {
+        "n": "이베스트투자증권㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2023",
+        "dir": "out",
+        "as_of": 2023
+      },
+      {
         "n": "재단법인 송강",
         "kind": "public_org",
         "type": "dart_filing",
@@ -416,24 +450,6 @@
       ],
       "down": [
         {
-          "t": "017940",
-          "n": "E1",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 4367375000.0,
-          "as_of": 2025,
-          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
-        },
-        {
-          "t": "000500",
-          "n": "가온전선",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 63616000.0,
-          "as_of": 2025,
-          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
-        },
-        {
           "t": "060370",
           "n": "LS마린솔루션",
           "type": "supply",
@@ -441,6 +457,15 @@
           "amount": 7141000.0,
           "as_of": 2025,
           "prov": "특수관계자거래 · 매입, 특수관계자거래"
+        },
+        {
+          "t": "017940",
+          "n": "E1",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4367375000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
         },
         {
           "t": "006260",
@@ -466,6 +491,15 @@
           "type": "customer",
           "tier_grade": "T1",
           "amount": 158364000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "t": "000500",
+          "n": "가온전선",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 63616000.0,
           "as_of": 2025,
           "prov": "특수관계자 거래 · 매출, 특수관계자거래"
         },

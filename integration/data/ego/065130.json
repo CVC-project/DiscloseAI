@@ -8,6 +8,16 @@
       {
         "t": "047310",
         "n": "파워로직스",
+        "type": "investment",
+        "detail": "9.6% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "전기전자부품",
+        "tier": "dot"
+      },
+      {
+        "t": "047310",
+        "n": "파워로직스",
         "type": "associate",
         "detail": "33.75% · 2025",
         "dir": "out",
@@ -16,14 +26,12 @@
         "tier": "dot"
       },
       {
-        "t": "047310",
-        "n": "파워로직스",
-        "type": "investment",
-        "detail": "9.6% · 2025",
-        "dir": "in",
-        "as_of": 2025,
-        "s": "전기전자부품",
-        "tier": "dot"
+        "n": "(주)리오메디텍",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2024",
+        "dir": "out",
+        "as_of": 2024
       },
       {
         "n": "TOP ENGINEERING USA CO.,LTD",
@@ -42,6 +50,14 @@
         "as_of": 2025
       },
       {
+        "n": "㈜레이저앱스",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
         "n": "김원남",
         "kind": "person",
         "type": "investment",
@@ -51,8 +67,28 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "047310",
+          "n": "파워로직스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3233809284.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "047310",
+          "n": "파워로직스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 602370606.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        }
+      ]
     }
   }
 }

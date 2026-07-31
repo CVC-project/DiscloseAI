@@ -6,6 +6,16 @@
   "layers": {
     "governance": [
       {
+        "t": "004990",
+        "n": "롯데지주",
+        "type": "associate",
+        "detail": "48.13% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
         "t": "023530",
         "n": "롯데쇼핑",
         "type": "ftc_group",
@@ -16,13 +26,23 @@
         "tier": "named400"
       },
       {
-        "t": "004990",
-        "n": "롯데지주",
-        "type": "associate",
-        "detail": "48.13% · 2025",
+        "t": "005300",
+        "n": "롯데칠성음료",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
         "dir": "in",
         "as_of": 2025,
-        "s": "금융",
+        "s": "식음료",
+        "tier": "dot"
+      },
+      {
+        "t": "023530",
+        "n": "롯데쇼핑",
+        "type": "dart_filing",
+        "detail": "대규모기업집단 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "유통",
         "tier": "named400"
       },
       {
@@ -46,16 +66,6 @@
         "tier": "named400"
       },
       {
-        "t": "023530",
-        "n": "롯데쇼핑",
-        "type": "dart_filing",
-        "detail": "대규모기업집단 · 2025",
-        "dir": "in",
-        "as_of": 2025,
-        "s": "유통",
-        "tier": "named400"
-      },
-      {
         "n": "(주)대홍기획",
         "kind": "private_corp",
         "type": "dart_filing",
@@ -72,7 +82,7 @@
         "as_of": 2025
       },
       {
-        "n": "L&M Confectionery Pte. Ltd.",
+        "n": "L&M Confectionery Pte.,Ltd.",
         "kind": "private_corp",
         "type": "subsidiary",
         "detail": "100.0% · 2025",
@@ -88,14 +98,6 @@
         "as_of": 2025
       },
       {
-        "n": "LOTTE Confectionery (S.E.A) Pte. Ltd.",
-        "kind": "private_corp",
-        "type": "subsidiary",
-        "detail": "100.0% · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
         "n": "LOTTE F&G Vietnam Company Limited",
         "kind": "private_corp",
         "type": "associate",
@@ -104,18 +106,18 @@
         "as_of": 2025
       },
       {
-        "n": "LOTTE QINGDAO FOODS CO., Ltd.",
-        "kind": "private_corp",
-        "type": "subsidiary",
-        "detail": "90.0% · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
         "n": "LOTTE Rakhat JSC",
         "kind": "private_corp",
         "type": "subsidiary",
         "detail": "95.57% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "Lotte Confectionery (S.E.A) Pte. Ltd.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
         "dir": "out",
         "as_of": 2025
       },
@@ -148,6 +150,14 @@
         "kind": "private_corp",
         "type": "subsidiary",
         "detail": "96.5% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "Lotte Qingdao Foods Co., Ltd.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "90.0% · 2025",
         "dir": "out",
         "as_of": 2025
       },
@@ -355,13 +365,22 @@
     "valuechain": {
       "up": [
         {
+          "t": "023530",
+          "n": "롯데쇼핑",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 9115075000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        },
+        {
           "t": "004990",
           "n": "롯데지주",
           "type": "supply",
           "tier_grade": "T1",
           "amount": 951000000.0,
           "as_of": 2025,
-          "prov": "특수관계자 거래 - 연결 · 재화의 매입, 특수관계자거래"
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
         },
         {
           "t": "005300",
@@ -370,7 +389,7 @@
           "tier_grade": "T1",
           "amount": 404171000000.0,
           "as_of": 2025,
-          "prov": "특수관계자 거래 - 연결 · 재화의 매입, 특수관계자거래"
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
         },
         {
           "t": "023530",
@@ -379,7 +398,7 @@
           "tier_grade": "T1",
           "amount": 5716000000.0,
           "as_of": 2025,
-          "prov": "특수관계자 거래 - 연결 · 재화의 매입, 특수관계자거래"
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
         },
         {
           "t": "286940",
@@ -391,22 +410,13 @@
           "prov": "특수관계자 등과의 거래내역 · 매출"
         },
         {
-          "t": "023530",
-          "n": "롯데쇼핑",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 9115075000.0,
-          "as_of": 2025,
-          "prov": "특수관계자와의 거래 · 매출"
-        },
-        {
           "n": "롯데오토리스(주) 외",
           "kind": "private_corp",
           "type": "supply",
           "tier_grade": "T1",
           "amount": 465839000000.0,
           "as_of": 2025,
-          "prov": "특수관계자 거래 - 연결 · 재화의 매입, 특수관계자거래"
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
         },
         {
           "n": "롯데이노베이트(주) 외",
@@ -415,7 +425,7 @@
           "tier_grade": "T1",
           "amount": 53079000000.0,
           "as_of": 2025,
-          "prov": "특수관계자 거래 - 연결 · 재화의 매입, 특수관계자거래"
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
         },
         {
           "n": "롯데캐피탈(주)",
@@ -424,7 +434,7 @@
           "tier_grade": "T1",
           "amount": 710000000.0,
           "as_of": 2025,
-          "prov": "특수관계자 거래 - 연결 · 재화의 매입, 특수관계자거래"
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
         },
         {
           "n": "롯데네슬레코리아㈜",
@@ -433,7 +443,7 @@
           "tier_grade": "T1",
           "amount": 457000000.0,
           "as_of": 2025,
-          "prov": "특수관계자 거래 - 연결 · 재화의 매입, 특수관계자거래"
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
         },
         {
           "n": "㈜푸드어셈블",
@@ -442,7 +452,7 @@
           "tier_grade": "T1",
           "amount": 421000000.0,
           "as_of": 2025,
-          "prov": "특수관계자 거래 - 연결 · 재화의 매입, 특수관계자거래"
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
         },
         {
           "n": "롯데글로벌로지스(주)",
@@ -451,7 +461,7 @@
           "tier_grade": "T1",
           "amount": 255000000.0,
           "as_of": 2025,
-          "prov": "특수관계자 거래 - 연결 · 재화의 매입, 특수관계자거래"
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
         },
         {
           "n": "(주)대홍기획",
@@ -460,7 +470,7 @@
           "tier_grade": "T1",
           "amount": 16000000.0,
           "as_of": 2025,
-          "prov": "특수관계자 거래 - 연결 · 재화의 매입, 특수관계자거래"
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
         },
         {
           "n": "(주)코리아세븐",
@@ -469,10 +479,19 @@
           "tier_grade": "T1",
           "amount": 1000000.0,
           "as_of": 2025,
-          "prov": "특수관계자 거래 - 연결 · 재화의 매입, 특수관계자거래"
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
         }
       ],
       "down": [
+        {
+          "t": "005300",
+          "n": "롯데칠성음료",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 176465000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 매입 등, 특수관계자거래(주3)"
+        },
         {
           "t": "020150",
           "n": "롯데에너지머티리얼즈",

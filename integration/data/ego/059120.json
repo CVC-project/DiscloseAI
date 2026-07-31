@@ -6,12 +6,28 @@
   "layers": {
     "governance": [
       {
+        "n": "VAS HIGH TECHNOLOGY SOLUTION CORPORATION",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
         "n": "VAS HIGH TECHNOLOGY SOLUTION CORPORATION (해외법인, 비상장)",
         "kind": "private_corp",
         "type": "associate",
         "detail": "20.0% · 2025",
         "dir": "out",
         "as_of": 2025
+      },
+      {
+        "n": "㈜액스토핏",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 (별도) · 2024",
+        "dir": "out",
+        "as_of": 2024
       },
       {
         "n": "김원호",
@@ -28,11 +44,29 @@
         "detail": "19.31% · 2025",
         "dir": "in",
         "as_of": 2025
+      },
+      {
+        "n": "김창호",
+        "kind": "person",
+        "type": "dart_filing",
+        "detail": "최대주주 및 대표이사 (별도) (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
       }
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "㈜액스토핏",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1350000.0,
+          "as_of": 2023,
+          "prov": "특수관계자거래 · 매출 · 별도"
+        }
+      ]
     }
   }
 }

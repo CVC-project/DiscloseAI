@@ -26,6 +26,16 @@
         "tier": "named400"
       },
       {
+        "t": "161390",
+        "n": "한국타이어앤테크놀로지",
+        "type": "dart_filing",
+        "detail": "지배기업 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "소재",
+        "tier": "named400"
+      },
+      {
         "n": "BBHS",
         "kind": "private_corp",
         "type": "associate",
@@ -307,34 +317,80 @@
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "161390",
+          "n": "한국타이어앤테크놀로지",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1929137000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "JCS",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 4577848000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "FHTS",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1672707000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "Hankook & Company Co., Ltd",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 63577000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 매입, 특수관계자거래"
+        }
+      ],
       "down": [
+        {
+          "t": "161390",
+          "n": "한국타이어앤테크놀로지",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 15928000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
         {
           "n": "JCS",
           "kind": "private_corp",
           "type": "customer",
           "tier_grade": "T1",
-          "amount": 86704114000.0,
-          "as_of": 2023,
-          "prov": "특수관계자거래 · 매출 등, 특수관계자거래"
+          "amount": 97785428000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 판매로 인한 수익, 특수관계자거래"
         },
         {
           "n": "FHTS",
           "kind": "private_corp",
           "type": "customer",
           "tier_grade": "T1",
-          "amount": 7085855000.0,
-          "as_of": 2023,
-          "prov": "특수관계자거래 · 매출 등, 특수관계자거래"
+          "amount": 2833215000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 판매로 인한 수익, 특수관계자거래"
         },
         {
           "n": "BBHS",
           "kind": "private_corp",
           "type": "customer",
           "tier_grade": "T1",
-          "amount": 5865579000.0,
-          "as_of": 2023,
-          "prov": "특수관계자거래 · 매출 등, 특수관계자거래"
+          "amount": 2293323000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 판매로 인한 수익, 특수관계자거래"
         }
       ]
     }

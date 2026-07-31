@@ -26,6 +26,16 @@
         "tier": "dot"
       },
       {
+        "t": "089850",
+        "n": "유비벨록스",
+        "type": "dart_filing",
+        "detail": "지배기업 · 2024",
+        "dir": "out",
+        "as_of": 2024,
+        "s": "플랫폼",
+        "tier": "dot"
+      },
+      {
         "n": "(주)루트17",
         "kind": "private_corp",
         "type": "investment",
@@ -66,6 +76,14 @@
         "as_of": 2025
       },
       {
+        "n": "㈜솔드라이브",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
         "n": "㈜아이나비모빌리티",
         "kind": "private_corp",
         "type": "subsidiary",
@@ -82,12 +100,28 @@
         "as_of": 2025
       },
       {
+        "n": "㈜페이잇",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
         "n": "동시테크㈜",
         "kind": "private_corp",
         "type": "associate",
         "detail": "29.68% · 2025",
         "dir": "out",
         "as_of": 2025
+      },
+      {
+        "n": "동시테크㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2024",
+        "dir": "out",
+        "as_of": 2024
       },
       {
         "n": "북경팅커웨어전자과기유한회사",
@@ -154,12 +188,20 @@
         "as_of": 2025
       },
       {
-        "n": "헬스앤바이오(주)",
+        "n": "헬스앤바이오㈜",
         "kind": "private_corp",
         "type": "investment",
         "detail": "19.22% · 2025",
         "dir": "out",
         "as_of": 2025
+      },
+      {
+        "n": "헬스앤바이오㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2024",
+        "dir": "out",
+        "as_of": 2024
       },
       {
         "n": "헵톤 주식회사",
@@ -172,7 +214,26 @@
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "t": "089850",
+          "n": "유비벨록스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1488528.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매출 등"
+        },
+        {
+          "n": "㈜솔드라이브",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 18545460.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매출 등"
+        }
+      ]
     }
   }
 }

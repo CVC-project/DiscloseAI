@@ -14,6 +14,14 @@
         "as_of": 2025
       },
       {
+        "n": "(주)바흐",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
         "n": "(주)오스템이엑스티",
         "kind": "private_corp",
         "type": "subsidiary",
@@ -38,6 +46,14 @@
         "as_of": 2025
       },
       {
+        "n": "(주)휴모닉",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
         "n": "AUSTEM AMERICA Inc.",
         "kind": "private_corp",
         "type": "subsidiary",
@@ -54,10 +70,34 @@
         "as_of": 2025
       },
       {
+        "n": "O'zauto-Austem",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "PA-Digit(Wuhan)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
         "n": "Pos-Austem Suzhou",
         "kind": "private_corp",
         "type": "subsidiary",
         "detail": "80.1% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "Pos-Austem Suzhou Automotive co.,Ltd",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
         "dir": "out",
         "as_of": 2025
       },
@@ -70,10 +110,34 @@
         "as_of": 2025
       },
       {
+        "n": "Pos-Austem Wuhan Automotive co.,Ltd",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
         "n": "Pos-Austem Yantai",
         "kind": "private_corp",
         "type": "subsidiary",
         "detail": "88.94% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "Pos-Austem Yantai Automotive co.,Ltd",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "Powerhouse Austem SxT",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
         "dir": "out",
         "as_of": 2025
       },
@@ -86,6 +150,14 @@
         "as_of": 2025
       },
       {
+        "n": "엠씨제1호그로우쓰사모투자합자회사",
+        "kind": "coop_fund",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2023",
+        "dir": "out",
+        "as_of": 2023
+      },
+      {
         "n": "오스템바이오(주)",
         "kind": "private_corp",
         "type": "subsidiary",
@@ -95,8 +167,55 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "Pos-Austem Yantai Automotive co.,Ltd",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 200719000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "n": "O'zauto-Austem",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4797733000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "Pos-Austem Suzhou Automotive co.,Ltd",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1416626000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "Powerhouse Austem SxT",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 406257000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "Pos-Austem Yantai Automotive co.,Ltd",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 117510000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        }
+      ]
     }
   }
 }

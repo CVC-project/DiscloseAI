@@ -16,6 +16,22 @@
         "tier": "dot"
       },
       {
+        "n": "㈜제이아이머트리얼즈",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "대표이사 및 주요 임원",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
         "n": "함석헌",
         "kind": "person",
         "type": "subsidiary",
@@ -25,8 +41,28 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "038010",
+          "n": "제일테크노스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 518929000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        }
+      ],
+      "down": [
+        {
+          "t": "038010",
+          "n": "제일테크노스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1136773000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입 등"
+        }
+      ]
     }
   }
 }

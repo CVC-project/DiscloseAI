@@ -6,14 +6,6 @@
   "layers": {
     "governance": [
       {
-        "n": "(주)진우엔지니어링",
-        "kind": "private_corp",
-        "type": "subsidiary",
-        "detail": "58.63% · 2025",
-        "dir": "in",
-        "as_of": 2025
-      },
-      {
         "n": "JNTC VINA Co., Ltd.",
         "kind": "private_corp",
         "type": "subsidiary",
@@ -38,17 +30,104 @@
         "as_of": 2025
       },
       {
+        "n": "㈜재우자동화㈜재우엔지니어링",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜진우엔지니어링",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "58.63% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜진우엔지니어링",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "지배기업 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "경동방 JNTC 과기유한공사",
+        "kind": "public_org",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
         "n": "장상욱",
         "kind": "person",
         "type": "investment",
         "detail": "5.81% · 2025",
         "dir": "in",
         "as_of": 2025
+      },
+      {
+        "n": "장상욱",
+        "kind": "person",
+        "type": "dart_filing",
+        "detail": "최상위지배자 · 2025",
+        "dir": "out",
+        "as_of": 2025
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "㈜진우엔지니어링",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 4318906000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "(주)제이앤티지",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3211655000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "(주)재우자동화",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1723607000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "(주)제이앤티지",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1004307000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "㈜진우엔지니어링",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 531899000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
     }
   }
 }

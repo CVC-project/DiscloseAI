@@ -6,6 +6,14 @@
   "layers": {
     "governance": [
       {
+        "n": "ACCESS BUSINESS GROUP INTERNATIONAL LLC",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
         "n": "HEM pharma Japan Inc.",
         "kind": "private_corp",
         "type": "subsidiary",
@@ -19,6 +27,30 @@
         "type": "investment",
         "detail": "11.47% · 2025",
         "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "Pyxis innovations lns.",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "SC이노베이션",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
+        "n": "마루숨",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "out",
         "as_of": 2025
       },
       {
@@ -52,11 +84,38 @@
         "detail": "12.26% · 2025",
         "dir": "in",
         "as_of": 2025
+      },
+      {
+        "n": "한국암웨이㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
       }
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "한국암웨이㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 9030372000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        },
+        {
+          "n": "ACCESS BUSINESS GROUP INTERNATIONAL LLC",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2225621000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        }
+      ]
     }
   }
 }

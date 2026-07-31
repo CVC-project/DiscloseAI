@@ -6,16 +6,6 @@
   "layers": {
     "governance": [
       {
-        "t": "051500",
-        "n": "CJ프레시웨이",
-        "type": "associate",
-        "detail": "47.11% · 2025",
-        "dir": "out",
-        "as_of": 2025,
-        "s": "유통",
-        "tier": "dot"
-      },
-      {
         "t": "079160",
         "n": "CJ CGV",
         "type": "subsidiary",
@@ -23,6 +13,16 @@
         "dir": "out",
         "as_of": 2025,
         "s": "미디어",
+        "tier": "dot"
+      },
+      {
+        "t": "051500",
+        "n": "CJ프레시웨이",
+        "type": "associate",
+        "detail": "47.11% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "유통",
         "tier": "dot"
       },
       {
@@ -44,6 +44,86 @@
         "as_of": 2025,
         "s": "미디어",
         "tier": "named400"
+      },
+      {
+        "t": "000120",
+        "n": "CJ대한통운",
+        "type": "ftc_group",
+        "detail": "씨제이 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "운송·물류",
+        "tier": "named400"
+      },
+      {
+        "t": "011150",
+        "n": "CJ씨푸드",
+        "type": "ftc_group",
+        "detail": "씨제이 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "식음료",
+        "tier": "dot"
+      },
+      {
+        "t": "035760",
+        "n": "CJ ENM",
+        "type": "ftc_group",
+        "detail": "씨제이 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "미디어",
+        "tier": "named400"
+      },
+      {
+        "t": "051500",
+        "n": "CJ프레시웨이",
+        "type": "ftc_group",
+        "detail": "씨제이 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "유통",
+        "tier": "dot"
+      },
+      {
+        "t": "079160",
+        "n": "CJ CGV",
+        "type": "ftc_group",
+        "detail": "씨제이 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "미디어",
+        "tier": "dot"
+      },
+      {
+        "t": "097950",
+        "n": "CJ제일제당",
+        "type": "ftc_group",
+        "detail": "씨제이 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "식음료",
+        "tier": "named400"
+      },
+      {
+        "t": "253450",
+        "n": "스튜디오드래곤",
+        "type": "ftc_group",
+        "detail": "씨제이 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "미디어",
+        "tier": "named400"
+      },
+      {
+        "t": "311690",
+        "n": "CJ 바이오사이언스",
+        "type": "ftc_group",
+        "detail": "씨제이 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "지주",
+        "tier": "dot"
       },
       {
         "n": "CJ Japan Corp",
@@ -105,6 +185,33 @@
     "valuechain": {
       "up": [
         {
+          "t": "035760",
+          "n": "CJ ENM",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1986144000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출"
+        },
+        {
+          "t": "051500",
+          "n": "CJ프레시웨이",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 465953000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출 등"
+        },
+        {
+          "t": "000120",
+          "n": "CJ대한통운",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 610282000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        },
+        {
           "t": "002990",
           "n": "금호건설",
           "type": "supply",
@@ -123,24 +230,6 @@
           "prov": "특수관계자와의 거래 · 매입 등"
         },
         {
-          "t": "079160",
-          "n": "CJ CGV",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 7497276000.0,
-          "as_of": 2025,
-          "prov": "특수관계자 · 매출"
-        },
-        {
-          "t": "000120",
-          "n": "CJ대한통운",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 576518000.0,
-          "as_of": 2024,
-          "prov": "특수관계자와의 거래 · 매출"
-        },
-        {
           "t": "043610",
           "n": "KT지니뮤직",
           "type": "supply",
@@ -150,22 +239,13 @@
           "prov": "특수관계자와의 거래 · 매입 등"
         },
         {
-          "t": "035760",
-          "n": "CJ ENM",
+          "t": "079160",
+          "n": "CJ CGV",
           "type": "customer",
           "tier_grade": "T1",
-          "amount": 1986144000.0,
+          "amount": 7497276000.0,
           "as_of": 2025,
-          "prov": "특수관계자거래 · 매출"
-        },
-        {
-          "t": "051500",
-          "n": "CJ프레시웨이",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 465953000.0,
-          "as_of": 2025,
-          "prov": "특수관계자와의 거래 · 매출 등"
+          "prov": "특수관계자 · 매출"
         },
         {
           "t": "097950",
@@ -314,6 +394,33 @@
       ],
       "down": [
         {
+          "t": "035760",
+          "n": "CJ ENM",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1162522000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입"
+        },
+        {
+          "t": "051500",
+          "n": "CJ프레시웨이",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 12923070000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입 등"
+        },
+        {
+          "t": "000120",
+          "n": "CJ대한통운",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2878955000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입"
+        },
+        {
           "t": "002990",
           "n": "금호건설",
           "type": "customer",
@@ -332,24 +439,6 @@
           "prov": "특수관계자와의 거래 · 매출 등"
         },
         {
-          "t": "079160",
-          "n": "CJ CGV",
-          "type": "supply",
-          "tier_grade": "T1",
-          "amount": 120000.0,
-          "as_of": 2025,
-          "prov": "특수관계자 · 매입"
-        },
-        {
-          "t": "000120",
-          "n": "CJ대한통운",
-          "type": "supply",
-          "tier_grade": "T1",
-          "amount": 2880335000.0,
-          "as_of": 2024,
-          "prov": "특수관계자와의 거래 · 매입"
-        },
-        {
           "t": "043610",
           "n": "KT지니뮤직",
           "type": "customer",
@@ -359,22 +448,13 @@
           "prov": "특수관계자와의 거래 · 매출 등"
         },
         {
-          "t": "035760",
-          "n": "CJ ENM",
+          "t": "079160",
+          "n": "CJ CGV",
           "type": "supply",
           "tier_grade": "T1",
-          "amount": 1162522000.0,
+          "amount": 120000.0,
           "as_of": 2025,
-          "prov": "특수관계자거래 · 매입"
-        },
-        {
-          "t": "051500",
-          "n": "CJ프레시웨이",
-          "type": "supply",
-          "tier_grade": "T1",
-          "amount": 12923070000.0,
-          "as_of": 2025,
-          "prov": "특수관계자와의 거래 · 매입 등"
+          "prov": "특수관계자 · 매입"
         },
         {
           "t": "097950",

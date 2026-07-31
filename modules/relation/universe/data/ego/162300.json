@@ -24,6 +24,14 @@
         "as_of": 2025
       },
       {
+        "n": "Es Steel Company",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
         "n": "SHIN STEELMEXICO",
         "kind": "private_corp",
         "type": "subsidiary",
@@ -72,6 +80,14 @@
         "as_of": 2025
       },
       {
+        "n": "신승곤",
+        "kind": "person",
+        "type": "dart_filing",
+        "detail": "최대주주 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
         "n": "하나34호기업인수목적 주식회사",
         "kind": "private_corp",
         "type": "investment",
@@ -82,7 +98,17 @@
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "Es Steel Company",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 25606736.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 매출"
+        }
+      ]
     }
   }
 }

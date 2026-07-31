@@ -6,6 +6,14 @@
   "layers": {
     "governance": [
       {
+        "n": "(주)네추럴피드한몽에너지개발(주)(주)한국환구연맹(주)비엘멜라니스(주)애니원에프앤씨",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
         "n": "(주)넥스트에스앤엘",
         "kind": "private_corp",
         "type": "subsidiary",
@@ -30,6 +38,14 @@
         "as_of": 2025
       },
       {
+        "n": "(주)애니메탈원스타일로)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
         "n": "(주)애니원에프앤씨",
         "kind": "private_corp",
         "type": "associate",
@@ -42,6 +58,14 @@
         "kind": "private_corp",
         "type": "associate",
         "detail": "45.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "AnyoneFrance",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
         "dir": "out",
         "as_of": 2025
       },
@@ -60,6 +84,14 @@
         "detail": "37.19% · 2025",
         "dir": "out",
         "as_of": 2025
+      },
+      {
+        "n": "㈜비엘",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "유의적 영향력 · 2023",
+        "dir": "out",
+        "as_of": 2023
       },
       {
         "n": "㈜비엘사이언스",
@@ -96,7 +128,35 @@
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "㈜비엘",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 185141567.0,
+          "as_of": 2023,
+          "prov": "특수관계자거래 · 매출 등"
+        },
+        {
+          "n": "한몽에너지개발㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 7360002.0,
+          "as_of": 2023,
+          "prov": "특수관계자거래 · 매출 등"
+        },
+        {
+          "n": "(주)비엘멜라니스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 779400.0,
+          "as_of": 2023,
+          "prov": "특수관계자거래 · 매출 등"
+        }
+      ]
     }
   }
 }

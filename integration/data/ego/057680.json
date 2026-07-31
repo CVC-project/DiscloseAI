@@ -6,6 +6,16 @@
   "layers": {
     "governance": [
       {
+        "t": "031310",
+        "n": "아이즈비전",
+        "type": "investment",
+        "detail": "7.11% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "통신",
+        "tier": "dot"
+      },
+      {
         "t": "036090",
         "n": "위지트",
         "type": "associate",
@@ -18,11 +28,41 @@
       {
         "t": "031310",
         "n": "아이즈비전",
-        "type": "investment",
-        "detail": "7.11% · 2025",
-        "dir": "out",
+        "type": "dart_filing",
+        "detail": "유의적 영향력 · 2025",
+        "dir": "in",
         "as_of": 2025,
         "s": "통신",
+        "tier": "dot"
+      },
+      {
+        "t": "036090",
+        "n": "위지트",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "기계·장비",
+        "tier": "dot"
+      },
+      {
+        "t": "037030",
+        "n": "파워넷",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "전기전자부품",
+        "tier": "dot"
+      },
+      {
+        "t": "100590",
+        "n": "머큐리",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "반도체",
         "tier": "dot"
       },
       {
@@ -99,7 +139,17 @@
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "036090",
+          "n": "위지트",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 5000000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 거래 · 매출"
+        }
+      ],
       "down": [
         {
           "t": "032640",
@@ -109,6 +159,15 @@
           "amount": 4560444000.0,
           "as_of": 2025,
           "prov": "단일판매ㆍ공급계약체결 · LG유플러스"
+        },
+        {
+          "t": "036090",
+          "n": "위지트",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 15422000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 거래 · 매입"
         }
       ]
     }

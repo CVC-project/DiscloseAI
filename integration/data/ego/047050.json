@@ -26,12 +26,12 @@
         "tier": "named400"
       },
       {
-        "t": "005490",
-        "n": "POSCO홀딩스",
+        "t": "009520",
+        "n": "포스코엠텍",
         "type": "dart_filing",
-        "detail": "종속기업 · 2023",
+        "detail": "기타 (별도) · 2021",
         "dir": "in",
-        "as_of": 2023,
+        "as_of": 2021,
         "s": "철강·금속",
         "tier": "named400"
       },
@@ -208,7 +208,7 @@
         "as_of": 2025
       },
       {
-        "n": "POSCO INTERNATIONAL DEUTSCHLAND GmbH",
+        "n": "POSCO INTERNATIONAL Deutschland GmbH",
         "kind": "private_corp",
         "type": "subsidiary",
         "detail": "100.0% · 2025",
@@ -467,9 +467,9 @@
         "n": "POSCO-MALAYSIA SDN.BHD.",
         "kind": "private_corp",
         "type": "dart_filing",
-        "detail": "관계기업 · 2023",
+        "detail": "관계기업 · 2025",
         "dir": "out",
-        "as_of": 2023
+        "as_of": 2025
       },
       {
         "n": "POSCO-MKPC",
@@ -539,33 +539,6 @@
     "valuechain": {
       "up": [
         {
-          "t": "265560",
-          "n": "영화테크",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 87847001580.0,
-          "as_of": 2023,
-          "prov": "단일판매ㆍ공급계약체결 · (주)포스코인터내셔널"
-        },
-        {
-          "t": "265560",
-          "n": "영화테크",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": null,
-          "as_of": 2025,
-          "prov": "단일판매ㆍ공급계약체결 · (주)포스코인터내셔널"
-        },
-        {
-          "t": "058430",
-          "n": "포스코스틸리온",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 231928389000.0,
-          "as_of": 2025,
-          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
-        },
-        {
           "t": "003670",
           "n": "포스코퓨처엠",
           "type": "customer",
@@ -582,24 +555,51 @@
           "amount": 71084452000.0,
           "as_of": 2025,
           "prov": "특수관계자 · 매출, 특수관계자거래"
-        }
-      ],
-      "down": [
+        },
         {
           "t": "058430",
           "n": "포스코스틸리온",
-          "type": "supply",
+          "type": "customer",
           "tier_grade": "T1",
-          "amount": 36485538000.0,
+          "amount": 231928389000.0,
           "as_of": 2025,
-          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
         },
+        {
+          "t": "265560",
+          "n": "영화테크",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": null,
+          "as_of": 2025,
+          "prov": "단일판매ㆍ공급계약체결 · (주)포스코인터내셔널"
+        },
+        {
+          "t": "265560",
+          "n": "영화테크",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 87847001580.0,
+          "as_of": 2023,
+          "prov": "단일판매ㆍ공급계약체결 · (주)포스코인터내셔널"
+        }
+      ],
+      "down": [
         {
           "t": "003670",
           "n": "포스코퓨처엠",
           "type": "supply",
           "tier_grade": "T1",
           "amount": 173973000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "t": "058430",
+          "n": "포스코스틸리온",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 36485538000.0,
           "as_of": 2025,
           "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
         }

@@ -16,7 +16,7 @@
         "tier": "dot"
       },
       {
-        "n": "한국제강(주)",
+        "n": "한국제강㈜",
         "kind": "private_corp",
         "type": "subsidiary",
         "detail": "52.04% · 2025",
@@ -24,7 +24,7 @@
         "as_of": 2025
       },
       {
-        "n": "한국중기계(주)",
+        "n": "한국중기계㈜",
         "kind": "private_corp",
         "type": "investment",
         "detail": "7.69% · 2025",
@@ -34,7 +34,26 @@
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "한국제강㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 17804338240.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출+매출원가 · 별도"
+        },
+        {
+          "n": "한국중기계㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 38500000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 · 별도"
+        }
+      ]
     }
   }
 }

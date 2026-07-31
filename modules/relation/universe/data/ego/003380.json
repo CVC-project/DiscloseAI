@@ -6,14 +6,14 @@
   "layers": {
     "governance": [
       {
-        "t": "028670",
-        "n": "팬오션",
+        "t": "136480",
+        "n": "하림",
         "type": "subsidiary",
-        "detail": "54.72% · 2025",
+        "detail": "57.37% · 2025",
         "dir": "out",
         "as_of": 2025,
-        "s": "운송·물류",
-        "tier": "named400"
+        "s": "식음료",
+        "tier": "dot"
       },
       {
         "t": "136490",
@@ -36,11 +36,31 @@
         "tier": "dot"
       },
       {
+        "t": "028670",
+        "n": "팬오션",
+        "type": "subsidiary",
+        "detail": "54.72% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "운송·물류",
+        "tier": "named400"
+      },
+      {
+        "t": "028670",
+        "n": "팬오션",
+        "type": "ftc_group",
+        "detail": "하림 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "운송·물류",
+        "tier": "named400"
+      },
+      {
         "t": "136480",
         "n": "하림",
-        "type": "subsidiary",
-        "detail": "57.37% · 2025",
-        "dir": "out",
+        "type": "dart_filing",
+        "detail": "지배기업 · 2025",
+        "dir": "in",
         "as_of": 2025,
         "s": "식음료",
         "tier": "dot"
@@ -48,8 +68,8 @@
       {
         "t": "028670",
         "n": "팬오션",
-        "type": "ftc_group",
-        "detail": "하림 · 2025",
+        "type": "dart_filing",
+        "detail": "지배기업 · 2025",
         "dir": "in",
         "as_of": 2025,
         "s": "운송·물류",
@@ -68,26 +88,6 @@
       {
         "t": "136490",
         "n": "선진",
-        "type": "dart_filing",
-        "detail": "지배기업 · 2025",
-        "dir": "in",
-        "as_of": 2025,
-        "s": "식음료",
-        "tier": "dot"
-      },
-      {
-        "t": "028670",
-        "n": "팬오션",
-        "type": "dart_filing",
-        "detail": "지배기업 · 2025",
-        "dir": "in",
-        "as_of": 2025,
-        "s": "운송·물류",
-        "tier": "named400"
-      },
-      {
-        "t": "136480",
-        "n": "하림",
         "type": "dart_filing",
         "detail": "지배기업 · 2025",
         "dir": "in",
@@ -184,28 +184,20 @@
         "as_of": 2025
       },
       {
-        "n": "(주)올품",
-        "kind": "private_corp",
-        "type": "investment",
-        "detail": "5.78% · 2025",
-        "dir": "in",
-        "as_of": 2025
-      },
-      {
-        "n": "(주)올품",
-        "kind": "private_corp",
-        "type": "dart_filing",
-        "detail": "유의적 영향력 · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
         "n": "(주)참트레이딩",
         "kind": "private_corp",
         "type": "subsidiary",
         "detail": "100.0% · 2025",
         "dir": "out",
         "as_of": 2025
+      },
+      {
+        "n": "(주)케이디텍",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2022",
+        "dir": "out",
+        "as_of": 2022
       },
       {
         "n": "(주)하림산업",
@@ -224,20 +216,12 @@
         "as_of": 2025
       },
       {
-        "n": "(주)한국바이오텍",
-        "kind": "private_corp",
-        "type": "investment",
-        "detail": "18.0% · 2025",
-        "dir": "in",
-        "as_of": 2025
-      },
-      {
-        "n": "(주)한국바이오텍",
+        "n": "EGT, LLC",
         "kind": "private_corp",
         "type": "dart_filing",
-        "detail": "유의적 영향력 · 2025",
+        "detail": "관계기업 · 2022",
         "dir": "out",
-        "as_of": 2025
+        "as_of": 2022
       },
       {
         "n": "HARIM USA,LTD.",
@@ -246,6 +230,70 @@
         "detail": "68.63% · 2025",
         "dir": "out",
         "as_of": 2025
+      },
+      {
+        "n": "㈜경우",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2022",
+        "dir": "out",
+        "as_of": 2022
+      },
+      {
+        "n": "㈜에코캐피탈",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2022",
+        "dir": "out",
+        "as_of": 2022
+      },
+      {
+        "n": "㈜올품",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "5.78% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜올품",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "유의적 영향력 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜제이에이치제이",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2022",
+        "dir": "out",
+        "as_of": 2022
+      },
+      {
+        "n": "㈜한국바이오텍",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "18.0% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜한국바이오텍",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "유의적 영향력 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜후레쉬미트",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2022",
+        "dir": "out",
+        "as_of": 2022
       },
       {
         "n": "김홍국",
@@ -264,12 +312,36 @@
         "as_of": 2025
       },
       {
+        "n": "농업회사법인(주)익산",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2022",
+        "dir": "out",
+        "as_of": 2022
+      },
+      {
+        "n": "농업회사법인(주)조하",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2022",
+        "dir": "out",
+        "as_of": 2022
+      },
+      {
         "n": "농업회사법인(주)주원산오리",
         "kind": "private_corp",
         "type": "subsidiary",
         "detail": "95.21% · 2025",
         "dir": "out",
         "as_of": 2025
+      },
+      {
+        "n": "스톤브릿지한앤브라더스 퀀텀제2호 사모투자합자회사",
+        "kind": "coop_fund",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2022",
+        "dir": "out",
+        "as_of": 2022
       },
       {
         "n": "자양5구역피에프브이㈜",
@@ -286,6 +358,30 @@
         "detail": "88.11% · 2025",
         "dir": "out",
         "as_of": 2025
+      },
+      {
+        "n": "지포레㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2022",
+        "dir": "out",
+        "as_of": 2022
+      },
+      {
+        "n": "코리아엘엔지트레이딩㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2022",
+        "dir": "out",
+        "as_of": 2022
+      },
+      {
+        "n": "태영그레인터미널㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2022",
+        "dir": "out",
+        "as_of": 2022
       },
       {
         "n": "플로우수학",
@@ -326,7 +422,7 @@
           "prov": "특수관계자 · 매입 등, 특수관계자거래"
         },
         {
-          "n": "(주)올품",
+          "n": "㈜올품",
           "kind": "private_corp",
           "type": "supply",
           "tier_grade": "T1",
@@ -353,7 +449,7 @@
           "prov": "특수관계자 · 매입 등, 특수관계자거래"
         },
         {
-          "n": "(주)에코캐피탈",
+          "n": "㈜에코캐피탈",
           "kind": "private_corp",
           "type": "supply",
           "tier_grade": "T1",
@@ -400,15 +496,6 @@
       ],
       "down": [
         {
-          "t": "036580",
-          "n": "팜스코",
-          "type": "supply",
-          "tier_grade": "T1",
-          "amount": 59200000.0,
-          "as_of": 2025,
-          "prov": "특수관계자 · 매입, 특수관계자거래"
-        },
-        {
           "t": "028670",
           "n": "팬오션",
           "type": "supply",
@@ -416,6 +503,15 @@
           "amount": 3513000000.0,
           "as_of": 2025,
           "prov": "특수관계자와의 거래 · 재화의 매입 및 기타비용, 특수관계자거래"
+        },
+        {
+          "t": "036580",
+          "n": "팜스코",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 59200000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입, 특수관계자거래"
         },
         {
           "t": "136490",
@@ -436,7 +532,7 @@
           "prov": "특수관계자 · 매출 등, 특수관계자거래"
         },
         {
-          "n": "(주)올품",
+          "n": "㈜올품",
           "kind": "private_corp",
           "type": "customer",
           "tier_grade": "T1",
@@ -445,7 +541,7 @@
           "prov": "특수관계자 · 매출 등, 특수관계자거래"
         },
         {
-          "n": "코리아엘엔지트레이딩(주)",
+          "n": "코리아엘엔지트레이딩㈜",
           "kind": "private_corp",
           "type": "customer",
           "tier_grade": "T1",
@@ -454,7 +550,7 @@
           "prov": "특수관계자 · 매출 등, 특수관계자거래"
         },
         {
-          "n": "(주)후레쉬미트",
+          "n": "㈜후레쉬미트",
           "kind": "private_corp",
           "type": "customer",
           "tier_grade": "T1",
@@ -463,7 +559,7 @@
           "prov": "특수관계자 · 매출 등, 특수관계자거래"
         },
         {
-          "n": "(주)에코캐피탈",
+          "n": "㈜에코캐피탈",
           "kind": "private_corp",
           "type": "customer",
           "tier_grade": "T1",
@@ -508,7 +604,7 @@
           "prov": "특수관계자 · 매출 등, 특수관계자거래"
         },
         {
-          "n": "지포레(주)",
+          "n": "지포레㈜",
           "kind": "private_corp",
           "type": "customer",
           "tier_grade": "T1",
@@ -535,7 +631,7 @@
           "prov": "특수관계자 · 매출 등, 특수관계자거래"
         },
         {
-          "n": "(주)경우",
+          "n": "㈜경우",
           "kind": "private_corp",
           "type": "customer",
           "tier_grade": "T1",
@@ -544,7 +640,7 @@
           "prov": "특수관계자 · 매출 등, 특수관계자거래"
         },
         {
-          "n": "(주)제이에이치제이",
+          "n": "㈜제이에이치제이",
           "kind": "private_corp",
           "type": "customer",
           "tier_grade": "T1",
@@ -553,7 +649,7 @@
           "prov": "특수관계자 · 매출 등, 특수관계자거래"
         },
         {
-          "n": "(주)한국바이오텍",
+          "n": "㈜한국바이오텍",
           "kind": "private_corp",
           "type": "customer",
           "tier_grade": "T1",

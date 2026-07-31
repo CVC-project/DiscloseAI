@@ -1,6 +1,6 @@
 {
   "t": "215380",
-  "n": "우정바이오",
+  "n": "콜마바이오텍",
   "s": "지주",
   "tier": "dot",
   "layers": {
@@ -14,10 +14,18 @@
         "as_of": 2025
       },
       {
-        "n": "더블유제이카바이오 개인투자조합1호",
+        "n": "더블유제이카바이오개인투자조합1호",
         "kind": "coop_fund",
         "type": "associate",
         "detail": "20.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "더블유제이카바이오개인투자조합1호",
+        "kind": "coop_fund",
+        "type": "dart_filing",
+        "detail": "관계기업 (별도) · 2025",
         "dir": "out",
         "as_of": 2025
       },
@@ -28,6 +36,14 @@
         "detail": "7.64% · 2025",
         "dir": "in",
         "as_of": 2025
+      },
+      {
+        "n": "주식회사 나위",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2024",
+        "dir": "out",
+        "as_of": 2024
       },
       {
         "n": "천세정",
@@ -48,7 +64,17 @@
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "주식회사 나위",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3756000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매 출 · 별도"
+        }
+      ]
     }
   }
 }

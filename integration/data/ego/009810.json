@@ -24,7 +24,31 @@
         "as_of": 2025
       },
       {
+        "n": "㈜와이웍스엔터테인먼트",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "52.48% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜헬로라이브",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "32.94% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
         "n": "엠아이",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "20.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "워크하우스컴퍼니 주식회사",
         "kind": "private_corp",
         "type": "associate",
         "detail": "20.0% · 2025",
@@ -64,34 +88,10 @@
         "as_of": 2025
       },
       {
-        "n": "주식회사 와이웍스엔터테인먼트",
-        "kind": "private_corp",
-        "type": "subsidiary",
-        "detail": "52.48% · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
-        "n": "주식회사 워크하우스컴퍼니",
-        "kind": "private_corp",
-        "type": "associate",
-        "detail": "20.0% · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
         "n": "주식회사 큐브릭스튜디오",
         "kind": "private_corp",
         "type": "subsidiary",
         "detail": "70.0% · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
-        "n": "주식회사 헬로라이브",
-        "kind": "private_corp",
-        "type": "associate",
-        "detail": "32.94% · 2025",
         "dir": "out",
         "as_of": 2025
       },
@@ -105,8 +105,46 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "㈜와이웍스엔터테인먼트",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1333116000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        },
+        {
+          "n": "㈜헬로라이브",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 52015000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "n": "㈜헬로라이브",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 6493000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "㈜씨티엘바이오테크",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 5750000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        }
+      ]
     }
   }
 }

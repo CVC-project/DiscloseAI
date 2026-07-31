@@ -26,16 +26,6 @@
         "tier": "dot"
       },
       {
-        "t": "058400",
-        "n": "KNN",
-        "type": "dart_filing",
-        "detail": "관계기업 · 2024",
-        "dir": "out",
-        "as_of": 2024,
-        "s": "미디어",
-        "tier": "dot"
-      },
-      {
         "t": "002350",
         "n": "넥센타이어",
         "type": "dart_filing",
@@ -43,6 +33,16 @@
         "dir": "in",
         "as_of": 2025,
         "s": "소재",
+        "tier": "dot"
+      },
+      {
+        "t": "058400",
+        "n": "KNN",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2024",
+        "dir": "out",
+        "as_of": 2024,
+        "s": "미디어",
         "tier": "dot"
       },
       {
@@ -152,18 +152,18 @@
       {
         "n": "강호찬",
         "kind": "person",
-        "type": "dart_filing",
-        "detail": "최상위지배자 · 2024",
-        "dir": "out",
-        "as_of": 2024
-      },
-      {
-        "n": "강호찬",
-        "kind": "person",
         "type": "associate",
         "detail": "48.49% · 2025",
         "dir": "in",
         "as_of": 2025
+      },
+      {
+        "n": "강호찬",
+        "kind": "person",
+        "type": "dart_filing",
+        "detail": "최상위지배자 · 2024",
+        "dir": "out",
+        "as_of": 2024
       },
       {
         "n": "넥센디앤에스",
@@ -222,6 +222,15 @@
       ],
       "down": [
         {
+          "t": "058400",
+          "n": "KNN",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 31160000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
           "t": "002350",
           "n": "넥센타이어",
           "type": "supply",
@@ -229,15 +238,6 @@
           "amount": 126000000.0,
           "as_of": 2025,
           "prov": "특수관계자와의 거래 · 매입거래 등, 특수관계자거래"
-        },
-        {
-          "t": "058400",
-          "n": "KNN",
-          "type": "supply",
-          "tier_grade": "T1",
-          "amount": 31160000.0,
-          "as_of": 2025,
-          "prov": "특수관계자 - 연결 · 재화의 매입, 특수관계자거래"
         }
       ]
     }

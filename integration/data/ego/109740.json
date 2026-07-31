@@ -16,10 +16,46 @@
         "tier": "dot"
       },
       {
+        "t": "048870",
+        "n": "시너지이노베이션",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2022",
+        "dir": "in",
+        "as_of": 2022,
+        "s": "전기전자부품",
+        "tier": "dot"
+      },
+      {
+        "t": "048870",
+        "n": "시너지이노베이션",
+        "type": "dart_filing",
+        "detail": "유의적 영향력 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "전기전자부품",
+        "tier": "dot"
+      },
+      {
+        "n": "(주)메디카코리아",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
         "n": "(주)오로",
         "kind": "private_corp",
         "type": "associate",
         "detail": "38.46% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "(주)오로",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
         "dir": "out",
         "as_of": 2025
       },
@@ -40,17 +76,76 @@
         "as_of": 2025
       },
       {
+        "n": "노비스바이오(주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "메덱스젠(주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2022",
+        "dir": "out",
+        "as_of": 2022
+      },
+      {
+        "n": "밸류인포맥스(주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2023",
+        "dir": "out",
+        "as_of": 2023
+      },
+      {
         "n": "시너지바이오조합",
         "kind": "coop_fund",
         "type": "investment",
         "detail": "8.4% · 2025",
         "dir": "in",
         "as_of": 2025
+      },
+      {
+        "n": "시너지바이오조합",
+        "kind": "coop_fund",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "시너지파트너스(주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2023",
+        "dir": "out",
+        "as_of": 2023
       }
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "(주)메디카코리아",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3165093000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 공시 · 매출+매출원가"
+        },
+        {
+          "n": "노비스바이오(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 109091000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 공시 · 매출"
+        }
+      ]
     }
   }
 }

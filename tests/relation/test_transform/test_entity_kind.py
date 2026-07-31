@@ -378,6 +378,28 @@ def test_clean_display_name_strips_annotation_and_orphan_suffix(raw, expected):
     assert clean_display_name(raw) == expected
 
 
+@pytest.mark.parametrize("raw,expected", [
+    # ⚠️ 회귀 박제(2026-07-30 전수 스윕): 번호 없는 **맨뒤 별표**만 남는 각주가 있다.
+    # `(*N)` 형태만 떼던 규칙을 빠져나가 화면에 별표가 그대로 노출됐다.
+    ("키움문화벤처제1호투자조합*", "키움문화벤처제1호투자조합"),
+    ("씨아이에스 (前씨아이솔리드 주식회사) *", "씨아이에스 (前씨아이솔리드 주식회사)"),
+    ("㈜한국기업평가**", "㈜한국기업평가"),
+])
+def test_clean_display_name_strips_trailing_bare_asterisk(raw, expected):
+    from modules.relation.transform.entity_kind import clean_display_name
+    assert clean_display_name(raw) == expected
+
+
+@pytest.mark.parametrize("text", [
+    # ⚠️ 회귀 박제(2026-07-30 전수 스윕): 종결어미를 하나씩 열거하면 반드시 빠진다.
+    # `있습니다`가 목록에 없어 이 11건이 노드로 만들어졌다(dart_filing 경로).
+    "BLUE ONE NYC LLC가 100% 지분을 보유하고 있습니다.",
+    "BLUE 31st STREET HOLDCO LLC가 100% 지분을 보유하고 있습니다.",
+])
+def test_holding_sentences_are_noise(text):
+    assert is_noise(text) == "sentence_form"
+
+
 @pytest.mark.parametrize("name", [
     # ⚠️ 원칙 ②: 일반 괄호는 신원 정보 — 떼면 HMM류 오링킹이 된다
     "DB(Philippines) Inc.",
@@ -389,3 +411,54 @@ def test_clean_display_name_strips_annotation_and_orphan_suffix(raw, expected):
 def test_clean_display_name_preserves_identity_parentheses(name):
     from modules.relation.transform.entity_kind import clean_display_name
     assert clean_display_name(name) == name
+
+
+# ── 참조 무결성: 노드 없는 엣지도 정리한다 (2026-07-30 전수 스윕) ─────────────
+
+def test_prune_removes_edges_pointing_at_missing_node(in_memory_session):
+    """⚠️ 회귀 박제: 고아 노드(엣지 없는 노드)만 지우고 **반대 방향**은 안 지우고 있었다.
+
+    표시명 규칙을 손질하면 reconcile이 노드를 병합·삭제하는데, 그 뒤에 생산자가 옛 uid로
+    행을 다시 넣으면 참조가 끊긴 채 남는다(실측 1건: 023590 → x_07ccff2cb98d).
+    화면에는 이미 안 보이므로 남겨두면 순수 오염이다.
+    """
+    from modules.relation.storage.models import RelationLocal, UnlistedNode, ValueChainEdge
+    from modules.relation.transform.entity_kind import prune_orphan_unlisted_nodes
+
+    s = in_memory_session
+    s.add(UnlistedNode(uid="x_alive0000001", anchor_corp="005930",
+                       name_raw="살아있는조합", kind="fund_partnership"))
+    s.add(RelationLocal(source_corp="005930", target_corp="x_alive0000001",
+                        source_type="otrCprInvstmntSttus", relation_type="investment",
+                        bsns_year=2025))
+    s.add(RelationLocal(source_corp="005930", target_corp="x_dead00000001",
+                        source_type="otrCprInvstmntSttus", relation_type="investment",
+                        bsns_year=2025))
+    s.add(ValueChainEdge(src_corp="x_dead00000002", dst_corp="005930", edge_type="supply",
+                         tier="T1", source_kind="rp_note", rcept_no="20250101000001",
+                         provenance="x", amount=1.0, as_of=2025, status="active"))
+    s.commit()
+
+    removed = prune_orphan_unlisted_nodes(s)
+    s.flush()
+
+    rl = s.query(RelationLocal).all()
+    assert removed == 2, "끊어진 참조 2건이 정리돼야 한다"
+    assert [r.target_corp for r in rl] == ["x_alive0000001"], "살아있는 참조는 보존"
+    assert s.query(ValueChainEdge).count() == 0
+    assert s.query(UnlistedNode).count() == 1
+
+
+def test_prune_keeps_listed_ticker_edges(in_memory_session):
+    """상장 티커(6자리)는 UnlistedNode에 없는 게 정상 — 정리 대상이 아니다."""
+    from modules.relation.storage.models import RelationLocal
+    from modules.relation.transform.entity_kind import prune_orphan_unlisted_nodes
+
+    s = in_memory_session
+    s.add(RelationLocal(source_corp="005930", target_corp="000660",
+                        source_type="hyslrSttus", relation_type="subsidiary",
+                        bsns_year=2025))
+    s.commit()
+
+    assert prune_orphan_unlisted_nodes(s) == 0
+    assert s.query(RelationLocal).count() == 1

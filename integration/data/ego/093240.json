@@ -6,16 +6,6 @@
   "layers": {
     "governance": [
       {
-        "t": "011080",
-        "n": "형지I&C",
-        "type": "investment",
-        "detail": "7.01% · 2025",
-        "dir": "in",
-        "as_of": 2025,
-        "s": "섬유·의류",
-        "tier": "dot"
-      },
-      {
         "t": "308100",
         "n": "형지글로벌",
         "type": "investment",
@@ -23,6 +13,16 @@
         "dir": "in",
         "as_of": 2025,
         "s": "유통",
+        "tier": "dot"
+      },
+      {
+        "t": "011080",
+        "n": "형지I&C",
+        "type": "investment",
+        "detail": "7.01% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "섬유·의류",
         "tier": "dot"
       },
       {
@@ -75,7 +75,17 @@
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "308100",
+          "n": "형지글로벌",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 33419000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        }
+      ],
       "down": []
     }
   }

@@ -30,17 +30,26 @@ def fetch_rp_note_sections() -> list[dict]:
     접두 규칙으로 잡는다 — 정밀도는 파서가 표 형태 앵커로 지키므로(억지 매칭
     금지 원칙) 제목망 확대는 재현율만 올린다. 제외 2종은 제목이 '특수관계'로
     시작하지 않는 무관 주석(담보제공자산·지급보증)이라 접두 규칙이 자연 배제.
-    section_key는 전량 'III.3.연결주석' 실측 — 별도재무제표 혼입 없음.
+
+    ★2026-07-30 (report V-070 이후): section_key가 **2종**이 됐다.
+      · `III.3.연결주석`  — 연결재무제표 주석
+      · `III.5.별도주석`  — **연결재무제표를 작성하지 않는 회사**의 개별재무제표 주석
+    report 섹셔너가 주석 머리글 마크업 변종 7종을 읽게 되면서 미섹셔닝 1,559사가
+    열렸고, 그중 연결 미작성사는 개별주석에서만 특수관계자 거래를 얻는다.
+    연결 보유사의 별도주석은 애초에 섹셔닝되지 않으므로(리더 판정) 한 회사에 두 판이
+    섞이지 않는다. 소비 측은 `section_key`를 받아 표기에 `별도`를 명시한다.
     """
     conn = _connect_readonly()
     try:
         cur = conn.execute(
             """
-            SELECT rs.rcept_no, rs.title, rs.text_md, rs.text_html, rr.corp_code8, rr.fiscal_year
+            SELECT rs.rcept_no, rs.title, rs.text_md, rs.text_html, rs.section_key,
+                   rr.corp_code8, rr.fiscal_year
             FROM report_section rs
             JOIN report_raw rr ON rs.rcept_no = rr.rcept_no
             WHERE rs.title LIKE '특수관계%'
                OR rs.title LIKE '연결실체와 특수관계자%'
+               OR rs.title LIKE '연결특수관계자%'
                OR rs.title = '중요한 특수관계자 거래'
             """
         )
@@ -56,6 +65,7 @@ def fetch_sections_by_title(titles: set[str]) -> list[dict]:
     Returns: [{"rcept_no", "title", "text_md", "text_html", "corp_code8", "fiscal_year"}, ...]
     text_html은 sectioner의 markdown 변환 이전 원본 HTML(ROWSPAN 등 보존) — U3
     행=개별회사형처럼 markdown 평탄화로 유실되는 표 구조를 복원해야 할 때 사용.
+    section_key도 함께 돌려준다(별도주석 여부 표기용 — fetch_rp_note_sections 참조).
     """
     if not titles:
         return []
@@ -64,7 +74,8 @@ def fetch_sections_by_title(titles: set[str]) -> list[dict]:
         placeholders = ",".join("?" for _ in titles)
         cur = conn.execute(
             f"""
-            SELECT rs.rcept_no, rs.title, rs.text_md, rs.text_html, rr.corp_code8, rr.fiscal_year
+            SELECT rs.rcept_no, rs.title, rs.text_md, rs.text_html, rs.section_key,
+                   rr.corp_code8, rr.fiscal_year
             FROM report_section rs
             JOIN report_raw rr ON rs.rcept_no = rr.rcept_no
             WHERE rs.title IN ({placeholders})

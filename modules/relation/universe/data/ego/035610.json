@@ -6,6 +6,16 @@
   "layers": {
     "governance": [
       {
+        "t": "139670",
+        "n": "키네마스터",
+        "type": "associate",
+        "detail": "30.54% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "플랫폼",
+        "tier": "dot"
+      },
+      {
         "t": "071200",
         "n": "인피니트헬스케어",
         "type": "associate",
@@ -18,9 +28,9 @@
       {
         "t": "139670",
         "n": "키네마스터",
-        "type": "associate",
-        "detail": "30.54% · 2025",
-        "dir": "out",
+        "type": "dart_filing",
+        "detail": "최대주주 · 2025",
+        "dir": "in",
         "as_of": 2025,
         "s": "플랫폼",
         "tier": "dot"
@@ -99,8 +109,82 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "RaPID co., Ltd",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 688936000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등"
+        },
+        {
+          "n": "㈜솔본미디어",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 45475000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등"
+        }
+      ],
+      "down": [
+        {
+          "t": "139670",
+          "n": "키네마스터",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 337029000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        },
+        {
+          "n": "㈜솔본미디어",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 264088000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        },
+        {
+          "n": "(주)한국원격영상의학원",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 157752000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        },
+        {
+          "n": "RaPID co., Ltd",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 83944000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        },
+        {
+          "n": "MPE.tent GmbH",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 55958000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        },
+        {
+          "n": "㈜포커스신문사",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 30000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        }
+      ]
     }
   }
 }

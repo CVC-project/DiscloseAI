@@ -46,12 +46,44 @@
         "as_of": 2025
       },
       {
+        "n": "㈜바로보다",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
         "n": "브릭메이트(주)",
         "kind": "private_corp",
         "type": "subsidiary",
         "detail": "58.26% · 2025",
         "dir": "out",
         "as_of": 2025
+      },
+      {
+        "n": "신주피이",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
+        "n": "신주홀딩스",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
+        "n": "양정산업",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2024",
+        "dir": "out",
+        "as_of": 2024
       },
       {
         "n": "정규용",
@@ -64,7 +96,17 @@
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "양정산업",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 694000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 및 기타수익"
+        }
+      ]
     }
   }
 }

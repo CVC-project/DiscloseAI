@@ -22,19 +22,19 @@
         "as_of": 2025
       },
       {
-        "n": "(주)호일바이오메드",
-        "kind": "private_corp",
-        "type": "investment",
-        "detail": "10.02% · 2025",
-        "dir": "in",
-        "as_of": 2025
-      },
-      {
         "n": "(주)휴룩스",
         "kind": "private_corp",
         "type": "investment",
         "detail": "8.7% · 2025",
         "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜호일바이오메드",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "10.02% · 2025",
+        "dir": "in",
         "as_of": 2025
       },
       {
@@ -47,8 +47,37 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "㈜진엑스",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3160000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등"
+        }
+      ],
+      "down": [
+        {
+          "n": "㈜진엑스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 627018000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "n": "㈜호일바이오메드",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 394698000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        }
+      ]
     }
   }
 }

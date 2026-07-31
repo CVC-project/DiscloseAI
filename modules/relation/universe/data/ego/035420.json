@@ -6,26 +6,6 @@
   "layers": {
     "governance": [
       {
-        "t": "006800",
-        "n": "미래에셋증권",
-        "type": "investment",
-        "detail": "8.15% · 2025",
-        "dir": "out",
-        "as_of": 2025,
-        "s": "금융",
-        "tier": "named400"
-      },
-      {
-        "t": "031430",
-        "n": "신세계인터내셔날",
-        "type": "investment",
-        "detail": "6.85% · 2025",
-        "dir": "out",
-        "as_of": 2025,
-        "s": "유통",
-        "tier": "dot"
-      },
-      {
         "t": "253450",
         "n": "스튜디오드래곤",
         "type": "investment",
@@ -43,7 +23,27 @@
         "dir": "out",
         "as_of": 2025,
         "s": "플랫폼",
+        "tier": "named400"
+      },
+      {
+        "t": "031430",
+        "n": "신세계인터내셔날",
+        "type": "investment",
+        "detail": "6.85% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "유통",
         "tier": "dot"
+      },
+      {
+        "t": "006800",
+        "n": "미래에셋증권",
+        "type": "investment",
+        "detail": "8.15% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "금융",
+        "tier": "named400"
       },
       {
         "t": "000120",
@@ -73,7 +73,7 @@
         "dir": "in",
         "as_of": 2025,
         "s": "플랫폼",
-        "tier": "dot"
+        "tier": "named400"
       },
       {
         "n": "A Holdings Corporation",
@@ -559,21 +559,21 @@
     "valuechain": {
       "up": [
         {
-          "t": "119850",
-          "n": "지엔씨에너지",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 62710000000.0,
-          "as_of": 2025,
-          "prov": "단일판매ㆍ공급계약체결 · 네이버 주식회사"
-        },
-        {
           "t": "197140",
           "n": "디지캡",
           "type": "customer",
           "tier_grade": "T1",
           "amount": 10392618840.0,
           "as_of": 2026,
+          "prov": "단일판매ㆍ공급계약체결 · 네이버 주식회사"
+        },
+        {
+          "t": "119850",
+          "n": "지엔씨에너지",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 62710000000.0,
+          "as_of": 2025,
           "prov": "단일판매ㆍ공급계약체결 · 네이버 주식회사"
         }
       ],

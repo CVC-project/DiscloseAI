@@ -6,6 +6,16 @@
   "layers": {
     "governance": [
       {
+        "t": "272290",
+        "n": "이녹스첨단소재",
+        "type": "associate",
+        "detail": "27.87% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "반도체",
+        "tier": "named400"
+      },
+      {
         "t": "123750",
         "n": "알톤",
         "type": "associate",
@@ -18,10 +28,10 @@
       {
         "t": "272290",
         "n": "이녹스첨단소재",
-        "type": "associate",
-        "detail": "27.87% · 2025",
-        "dir": "out",
-        "as_of": 2025,
+        "type": "dart_filing",
+        "detail": "유의적 영향력 · 2023",
+        "dir": "in",
+        "as_of": 2023,
         "s": "반도체",
         "tier": "named400"
       },
@@ -67,8 +77,28 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "272290",
+          "n": "이녹스첨단소재",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 92550000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매출 등, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "272290",
+          "n": "이녹스첨단소재",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 4086571000.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 매입 등, 특수관계자거래"
+        }
+      ]
     }
   }
 }

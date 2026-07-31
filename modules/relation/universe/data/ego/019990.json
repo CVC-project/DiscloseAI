@@ -6,6 +6,24 @@
   "layers": {
     "governance": [
       {
+        "t": "010960",
+        "n": "삼호개발",
+        "type": "dart_filing",
+        "detail": "주주 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "건설",
+        "tier": "dot"
+      },
+      {
+        "n": "(주)내강산업",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
         "n": "(주)마이벨로",
         "kind": "private_corp",
         "type": "investment",
@@ -18,6 +36,30 @@
         "kind": "private_corp",
         "type": "investment",
         "detail": "10.6% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "ENERK ARABIA Company",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "Enertork MiddleEast GeneralTrading LCC",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
+        "n": "㈜지오에이치텍",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
         "dir": "out",
         "as_of": 2025
       },
@@ -36,11 +78,55 @@
         "detail": "11.91% · 2025",
         "dir": "in",
         "as_of": 2025
+      },
+      {
+        "n": "부코프리미엄 사모투자 합자회사",
+        "kind": "coop_fund",
+        "type": "dart_filing",
+        "detail": "주주 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "서부전기(주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "주주 · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
+        "n": "이사 및 감사",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "주요경영진 · 2025",
+        "dir": "out",
+        "as_of": 2025
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "서부전기(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 13715000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "n": "서부전기(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 31689000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출"
+        }
+      ]
     }
   }
 }

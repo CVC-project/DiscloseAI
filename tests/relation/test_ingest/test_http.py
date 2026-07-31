@@ -249,3 +249,65 @@ class TestFtcError:
         """RuntimeError를 상속함."""
         err = FtcError("03", "test")
         assert isinstance(err, RuntimeError)
+
+
+# ── 바이너리(원문 ZIP) 디스크 캐시 (2026-07-31) ──────────────────────────────
+
+def test_dart_get_binary_uses_disk_cache(tmp_path, monkeypatch):
+    """⚠️ 회귀 박제: JSON 경로만 캐시가 있어서 relation.db 재구축 때 **공급계약 원문
+    12,634건만** 재fetch해야 했다(약 50분 + DART 일 1만 건 한도 소진).
+    원문 ZIP은 rcept_no로 불변이라 캐시가 안전하다."""
+    from modules.relation.ingest import _http
+
+    monkeypatch.setattr(_http, "_RAW_CACHE_DIR", tmp_path)
+    monkeypatch.setattr(_http, "DART_API_KEY", "dummy")
+    monkeypatch.setattr(_http.time, "sleep", lambda *_: None)
+    calls = []
+
+    class _Resp:
+        content = b"PK\x03\x04payload"
+
+        def raise_for_status(self):
+            return None
+
+    class _Sess:
+        def get(self, url, params=None, timeout=None):
+            calls.append(url)
+            return _Resp()
+
+    monkeypatch.setattr(_http, "_get_session", lambda: _Sess())
+
+    first = _http.dart_get_binary("document.xml", {"rcept_no": "20250101000001"})
+    second = _http.dart_get_binary("document.xml", {"rcept_no": "20250101000001"})
+
+    assert first == second == b"PK\x03\x04payload"
+    assert len(calls) == 1, "두 번째 호출은 디스크 캐시에서 와야 한다"
+
+
+def test_dart_get_binary_cache_key_is_per_rcept(tmp_path, monkeypatch):
+    """서로 다른 rcept_no는 다른 캐시 파일이어야 한다(원문이 섞이면 치명적)."""
+    from modules.relation.ingest import _http
+
+    monkeypatch.setattr(_http, "_RAW_CACHE_DIR", tmp_path)
+    monkeypatch.setattr(_http, "DART_API_KEY", "dummy")
+    monkeypatch.setattr(_http.time, "sleep", lambda *_: None)
+    payloads = {"A": b"aaa", "B": b"bbb"}
+
+    class _Sess:
+        def __init__(self, key):
+            self.key = key
+
+        def get(self, url, params=None, timeout=None):
+            class R:
+                content = payloads[self.key]
+
+                def raise_for_status(self_inner):
+                    return None
+
+            return R()
+
+    monkeypatch.setattr(_http, "_get_session", lambda: _Sess("A"))
+    a = _http.dart_get_binary("document.xml", {"rcept_no": "1"})
+    monkeypatch.setattr(_http, "_get_session", lambda: _Sess("B"))
+    b = _http.dart_get_binary("document.xml", {"rcept_no": "2"})
+    assert a == b"aaa" and b == b"bbb"

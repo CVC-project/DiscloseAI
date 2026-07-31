@@ -36,18 +36,18 @@
         "tier": "dot"
       },
       {
-        "n": "㈜불이",
-        "kind": "private_corp",
-        "type": "investment",
-        "detail": "5.0% · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
         "n": "대한내화물공업현동조합",
         "kind": "coop_fund",
         "type": "investment",
         "detail": "6.74% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "불이",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "5.0% · 2025",
         "dir": "out",
         "as_of": 2025
       },
@@ -61,7 +61,26 @@
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "n": "혜원",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 117523000.0,
+          "as_of": 2021,
+          "prov": "특수관계자 등 · 매   입"
+        },
+        {
+          "n": "불이",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 16400000.0,
+          "as_of": 2021,
+          "prov": "특수관계자 등 · 매   입"
+        }
+      ],
       "down": [
         {
           "t": "005160",
@@ -71,6 +90,42 @@
           "amount": 737000.0,
           "as_of": 2025,
           "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "t": "100130",
+          "n": "동국S&C",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 299694000.0,
+          "as_of": 2021,
+          "prov": "특수관계자 등 · 매   출"
+        },
+        {
+          "t": "005160",
+          "n": "동국산업",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1263255000.0,
+          "as_of": 2021,
+          "prov": "특수관계자 등 · 매   출"
+        },
+        {
+          "n": "디케이동신(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 521961000.0,
+          "as_of": 2021,
+          "prov": "특수관계자 등 · 매   출"
+        },
+        {
+          "n": "불이",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 8208000.0,
+          "as_of": 2021,
+          "prov": "특수관계자 등 · 매   출"
         }
       ]
     }

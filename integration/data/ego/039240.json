@@ -14,10 +14,34 @@
         "as_of": 2025
       },
       {
-        "n": "어센도딥테크 지역혁신투자조합",
+        "n": "POSCO-CDPC",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "송원테크(주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "어센도딥테크지역혁신투자조합",
         "kind": "coop_fund",
         "type": "associate",
         "detail": "33.33% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "어센도딥테크지역혁신투자조합",
+        "kind": "coop_fund",
+        "type": "dart_filing",
+        "detail": "관계기업 (별도) · 2025",
         "dir": "out",
         "as_of": 2025
       },
@@ -47,8 +71,28 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "송원테크(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 203236000.0,
+          "as_of": 2025,
+          "prov": "특수관계자공시 · 매입, 외주가공비 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "n": "송원테크(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1681029000.0,
+          "as_of": 2025,
+          "prov": "특수관계자공시 · 매출액 · 별도"
+        }
+      ]
     }
   }
 }

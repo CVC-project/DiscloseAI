@@ -8,9 +8,9 @@
       {
         "t": "065130",
         "n": "탑엔지니어링",
-        "type": "associate",
-        "detail": "33.75% · 2025",
-        "dir": "in",
+        "type": "investment",
+        "detail": "9.6% · 2025",
+        "dir": "out",
         "as_of": 2025,
         "s": "기계·장비",
         "tier": "dot"
@@ -18,9 +18,9 @@
       {
         "t": "065130",
         "n": "탑엔지니어링",
-        "type": "investment",
-        "detail": "9.6% · 2025",
-        "dir": "out",
+        "type": "associate",
+        "detail": "33.75% · 2025",
+        "dir": "in",
         "as_of": 2025,
         "s": "기계·장비",
         "tier": "dot"
@@ -83,16 +83,35 @@
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "065130",
+          "n": "탑엔지니어링",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 602370606.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        }
+      ],
       "down": [
         {
-          "t": "006400",
-          "n": "삼성SDI",
-          "type": "supply",
-          "tier_grade": "T2",
-          "amount": null,
+          "t": "065130",
+          "n": "탑엔지니어링",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3233809284.0,
           "as_of": 2025,
-          "prov": "II.사업의내용 · 20260310002954:II.사업의내용:1 · PACK 자재 등 | 전지용 | 13,685 | 20% | 파워로직스, 넥스콘 등"
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "탑엔지니어링 비나",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 387537963.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
         }
       ]
     }

@@ -6,16 +6,6 @@
   "layers": {
     "governance": [
       {
-        "t": "017670",
-        "n": "SK텔레콤",
-        "type": "investment",
-        "detail": "18.8% · 2025",
-        "dir": "in",
-        "as_of": 2025,
-        "s": "통신",
-        "tier": "named400"
-      },
-      {
         "t": "047810",
         "n": "한국항공우주",
         "type": "investment",
@@ -23,6 +13,16 @@
         "dir": "in",
         "as_of": 2025,
         "s": "중공업·방산",
+        "tier": "named400"
+      },
+      {
+        "t": "017670",
+        "n": "SK텔레콤",
+        "type": "investment",
+        "detail": "18.8% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "통신",
         "tier": "named400"
       },
       {
@@ -52,7 +52,26 @@
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "t": "017670",
+          "n": "SK텔레콤",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 397777000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 거래 · 별도"
+        },
+        {
+          "t": "047810",
+          "n": "한국항공우주",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 291339000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 거래 · 별도"
+        }
+      ]
     }
   }
 }

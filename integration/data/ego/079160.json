@@ -16,6 +16,16 @@
         "tier": "named400"
       },
       {
+        "t": "001040",
+        "n": "CJ",
+        "type": "ftc_group",
+        "detail": "씨제이 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
         "n": "CGI HOLDINGS LIMITED",
         "kind": "private_corp",
         "type": "subsidiary",
@@ -83,24 +93,6 @@
     "valuechain": {
       "up": [
         {
-          "t": "001040",
-          "n": "CJ",
-          "type": "supply",
-          "tier_grade": "T1",
-          "amount": 120000.0,
-          "as_of": 2025,
-          "prov": "특수관계자 · 매입"
-        },
-        {
-          "t": "000120",
-          "n": "CJ대한통운",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 1863187000.0,
-          "as_of": 2024,
-          "prov": "특수관계자와의 거래 · 매출"
-        },
-        {
           "t": "035760",
           "n": "CJ ENM",
           "type": "customer",
@@ -117,6 +109,24 @@
           "amount": 20488925000.0,
           "as_of": 2025,
           "prov": "특수관계자와의 거래 · 매출 등"
+        },
+        {
+          "t": "253450",
+          "n": "스튜디오드래곤",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 8361000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출원가, 특수관계자거래"
+        },
+        {
+          "t": "001040",
+          "n": "CJ",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 120000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
         },
         {
           "t": "097950",
@@ -162,15 +172,6 @@
           "amount": 1310098000.0,
           "as_of": 2025,
           "prov": "특수관계자와의 거래 · 매출"
-        },
-        {
-          "t": "253450",
-          "n": "스튜디오드래곤",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 8361000.0,
-          "as_of": 2025,
-          "prov": "특수관계자와의 거래 · 매출원가, 특수관계자거래"
         },
         {
           "n": "CJ HK ENTERTAINMENT CO., LTD.",
@@ -247,24 +248,6 @@
       ],
       "down": [
         {
-          "t": "001040",
-          "n": "CJ",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 7497276000.0,
-          "as_of": 2025,
-          "prov": "특수관계자 · 매출"
-        },
-        {
-          "t": "000120",
-          "n": "CJ대한통운",
-          "type": "supply",
-          "tier_grade": "T1",
-          "amount": 5155000.0,
-          "as_of": 2024,
-          "prov": "특수관계자와의 거래 · 매입"
-        },
-        {
           "t": "035760",
           "n": "CJ ENM",
           "type": "supply",
@@ -272,6 +255,15 @@
           "amount": 2772787000.0,
           "as_of": 2025,
           "prov": "특수관계자거래 · 매입"
+        },
+        {
+          "t": "001040",
+          "n": "CJ",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 7497276000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
         },
         {
           "t": "097950",

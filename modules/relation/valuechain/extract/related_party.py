@@ -460,6 +460,420 @@ def parse_note_html_grid(text_html: str | None) -> list[dict]:
     return results
 
 
+# ★2026-07-31 U-확대 실측: 최신연도 2,590노트 중 미파싱 1,844. 그중 **거래 라벨이
+# 있는데 미파싱**인 1,320건을 파서의 실제 단계 함수로 귀속했더니 1,146건(87%)이
+# 한 형태였다 — `당기`가 **마커 블록**(`| 당기 | (단위 : 백만원) |`)이 아니라
+# **열 헤더**에 있는 **행=회사·열=기간** 레이아웃.
+#
+#   (2) 당기와 전기 중 특수관계자와의 거래 내역은 다음과 같습니다.
+#   | (단위: 천원) |
+#   | 특수관계자명 | 거래내용 | 당기 | 전기 |
+#   | (주)조흥 | 매출 등 | 12,000 | - |
+#   (3) 당기말 및 전기말 현재 특수관계자에 대한 채권ㆍ채무내역은 …   ← 잔액표, 배제 대상
+#   | 특수관계자명 | 채권채무내역 | 당기말 | 전기말 |
+#
+# 기존 3종(parse_note·transposed·html_grid)은 전부 "당기 마커 블록"을 앵커로 삼으므로
+# 이 형태에서 조용히 []를 낸다. 이 파서는 **폴백 사슬 맨 끝**에만 붙어서, 앞 3종이
+# 잡은 노트는 여기 도달하지 않는다 — 기존 파싱 746보고사 산출이 구조적으로 불변.
+#
+# ⚠️ 방향 어휘는 기존 것만 재사용한다(_SALES/_PURCHASE_LABEL_PREFIXES). 금융사의
+#   `이자수익`·`수수료수익`류는 매치되지 않아 방출되지 않는데, 이는 버그가 아니라
+#   **리더(CPA) 판정 대기 사안**이다(2026-07-31 판정: 기존 어휘 유지).
+
+# 회사명 칸은 **위치가 아니라 헤더 어휘**로 찾는다(transform/CLAUDE.md 원칙 ④ —
+# 거버넌스 파서 4종이 전부 위치 가정으로 틀렸던 것과 같은 함정).
+_COMPANY_HEADER_STRONG = (
+    "특수관계자명",
+    "특수관계자",
+    "회사명",
+    "회사",
+    "기업명",
+    "법인명",
+    "거래상대방",
+    "상대회사명",
+    "상대방",
+)
+_COMPANY_HEADER_WEAK = ("구분", "관계")  # 강 어휘 열이 없을 때만 회사 열로 승격
+_TXN_LABEL_HEADER_VOCAB = (
+    "거래내용",
+    "거래내역",
+    "계정과목명",
+    "계정과목",
+    "거래구분",
+    "거래유형",
+    "거래종류",
+    "거래의내용",
+    "내역",
+    "내용",
+    "과목",
+    "항목",
+    "계정명",
+)
+_AMOUNT_HEADER_VOCAB = ("금액", "거래금액", "거래액")  # <당기> 구획형 전용
+# ⚠️ `당기말`은 **잔액**이지 거래액이 아니다 — 이 어휘가 헤더에 하나라도 있으면
+#   그 표는 통째로 배제한다(행 라벨 필터만 믿으면 `기타` 라벨 행 등이 샌다).
+_BALANCE_PERIOD_HEADERS = (
+    "당기말",
+    "전기말",
+    "당반기말",
+    "전반기말",
+    "당분기말",
+    "전분기말",
+    "기말",
+    "당기말잔액",
+    "전기말잔액",
+    "보고기간말",
+)
+_WS_ALL_RE = re.compile(r"\s+")
+_TRAILING_PAREN_RE = re.compile(r"[\(（][^)）]*[\)）]\s*$")
+_MARKER_BRACKETS = "<>()[]（）〈〉《》【】［］"
+_MD_RULE_RE = re.compile(r"^[-:\s]+$")
+
+
+def _norm_ws(s: str) -> str:
+    """공백 전부 제거 — 공시는 칸 폭을 맞추려 `당  기`처럼 글자 사이를 벌린다."""
+    return _WS_ALL_RE.sub("", s or "")
+
+
+def _norm_header(s: str) -> str:
+    """헤더 셀 비교용 — 공백 제거 + 꼬리 괄호 제거(`회사명(주1)` → `회사명`)."""
+    return _TRAILING_PAREN_RE.sub("", _norm_ws(s))
+
+
+def _find_vocab_col(norm_cells: list[str], vocab: tuple[str, ...]) -> int | None:
+    for i, c in enumerate(norm_cells):
+        if c in vocab:
+            return i
+    return None
+
+
+def _period_marker_of_row(cells: list[str]) -> str | None:
+    """전폭 기간 구획 행이면 정규화된 기간 토큰(`| <당기> |`), 아니면 None."""
+    vals = {_norm_ws(c).strip(_MARKER_BRACKETS) for c in cells if c.strip()}
+    if len(vals) != 1:
+        return None
+    v = vals.pop()
+    return v if v in ("당기", "전기", "당기말", "전기말") else None
+
+
+def _company_rows_direction(cells: list[str], idxs: list[int]) -> tuple[str, str] | None:
+    """후보 칸들에서 방향·라벨 판정. 매출·매입 동시 매치는 모호하므로 버린다."""
+    sales = [cells[k].strip() for k in idxs if k < len(cells)
+             and _label_match(_norm_ws(cells[k]), _SALES_LABEL_PREFIXES)]
+    purch = [cells[k].strip() for k in idxs if k < len(cells)
+             and _label_match(_norm_ws(cells[k]), _PURCHASE_LABEL_PREFIXES)]
+    if sales and purch:
+        return None
+    if sales:
+        return "customer", sales[0]
+    if purch:
+        return "supply", purch[0]
+    return None
+
+
+def _company_rows_name(row: list[str], company_col: int, carry: str | None) -> str | None:
+    """회사명 + 캐리다운. 잡음(집계·`기타` 접두·수치·dash)은 여기서 거른다.
+
+    ⚠️ 스윕 1회차 실측: 서브헤더가 있는 표는 헤더 폭과 데이터 폭이 어긋나, 열이 밀린
+    **합계 행**이 회사명 칸에 `-`나 `19,948`을 넣는다(아침해 계열 2사). `임직원` 같은
+    묶음 라벨도 들어온다 — `entity_kind.is_noise`가 이 셋을 한 번에 거른다.
+    """
+    name = row[company_col].strip() if company_col < len(row) else ""
+    if not name:
+        name = carry or ""
+    if not name or name.startswith("기타") or _is_category_column(name):
+        return None
+    # ⚠️ 공시는 칸 폭을 맞추려 `합  계`처럼 글자 사이를 벌린다 — 원문 그대로만 검사하면
+    #   `_EMPTY_TOKENS`(합계·소계) 판정을 빠져나간다(모드 T 실측). 공백 제거본도 함께.
+    if entity_kind.is_noise(name) or entity_kind.is_noise(_norm_ws(name)):
+        return None
+    return name
+
+
+def _resolve_unit(text: str) -> int | None:
+    """`(단위: X)` → 배율. **미등록 단위면 None** — 그 표는 배제한다.
+
+    ⚠️ 스윕 1회차 실측: 외화 표기가 상당수다(RMB 75·USD 29·`천원,USD` 14 …).
+    `.get(u, 1)`로 넘기면 배율 1이 되어 **원화 금액인 것처럼 저장**된다 — 금액 의미가
+    틀리느니 안 뽑는 것이 맞다(억지 매칭 금지).
+    """
+    m = _UNIT_RE.search(text or "")
+    if not m:
+        return None
+    return _UNIT_MULTIPLIERS.get(_norm_ws(m.group(1)))  # 미등록 → None
+
+
+def parse_note_company_rows(text_md: str | None) -> list[dict]:
+    """행=회사·열=기간 레이아웃 → parse_note()와 동일 스키마 (당기분만).
+
+    폴백 사슬 **맨 끝** 전용 — 앞 3종이 전부 빈 결과일 때만 호출된다.
+    같은 (회사, 방향)의 계정과목 행이 여럿이면 **여기서 합산해 1건**으로 방출한다:
+    `_upsert_edge`가 UNIQUE(src,dst,type,as_of,rcept_no) **last-wins 덮어쓰기**라
+    다건을 흘리면 마지막 행만 남아 과소계상된다.
+    """
+    if not text_md:
+        return []
+    hits: list[tuple[str, str, float, str]] = []
+    multiplier: int | None = 1
+    lines = text_md.splitlines()
+    i = 0
+    while i < len(lines):
+        s = lines[i].strip()
+        if not s.startswith("|"):
+            # 평문 문장 끝의 단위 표기 — `…다음과 같습니다(단위:천원).`
+            if _UNIT_RE.search(s):
+                multiplier = _resolve_unit(s)  # 미등록 외화면 None → 이후 표 배제
+            i += 1
+            continue
+        block: list[list[str]] = []
+        while i < len(lines) and lines[i].strip().startswith("|"):
+            block.append(_split_row(lines[i]))
+            i += 1
+        multiplier = _consume_company_rows_table(block, multiplier, hits)
+
+    agg: dict[tuple[str, str], dict] = {}
+    for cp, direction, amount, label in hits:
+        e = agg.setdefault(
+            (cp, direction),
+            {"counterparty": cp, "direction": direction, "amount": 0.0, "labels": []},
+        )
+        e["amount"] += amount
+        if label and label not in e["labels"]:
+            e["labels"].append(label)
+    return [
+        {
+            "counterparty": e["counterparty"],
+            "direction": e["direction"],
+            "amount": e["amount"],
+            "label": "+".join(e["labels"]),
+        }
+        for e in agg.values()
+    ]
+
+
+def _consume_company_rows_table(
+    rows: list[list[str]], multiplier: int | None, out: list
+) -> int | None:
+    """표 1개 처리 → 갱신된 multiplier(표 안 단일셀 단위 행이 다음 표에도 이어진다)."""
+    header: list[str] | None = None
+    header_norm: list[str] = []
+    body_start = 0
+    for idx, cells in enumerate(rows):
+        nonempty = [c for c in cells if c.strip()]
+        if len(nonempty) <= 1:
+            if nonempty and _UNIT_RE.search(nonempty[0]):
+                multiplier = _resolve_unit(nonempty[0])
+            continue
+        if all(_MD_RULE_RE.match(c or "") for c in cells):
+            continue  # 마크다운 구분선
+        header, header_norm = cells, [_norm_header(c) for c in cells]
+        body_start = idx + 1
+        break
+    if header is None:
+        return multiplier
+
+    # ① 잔액표 배제 — 라벨 필터보다 앞선 1차 게이트
+    if any(c in _BALANCE_PERIOD_HEADERS for c in header_norm):
+        return multiplier
+    # ①-b 단위 미해석(외화 등) — 배율을 모르면 금액이 틀린다. 배제.
+    if multiplier is None:
+        return multiplier
+
+    # ② 당기 열은 **정확히 1개**여야 한다(2개 이상이면 열 귀속이 모호 → 표 포기)
+    dg_col = header_norm.index("당기") if header_norm.count("당기") == 1 else None
+
+    # ③ 회사 열 — 어휘 강 → 약 → 위치 폴백
+    company_col = _find_vocab_col(header_norm, _COMPANY_HEADER_STRONG)
+    if company_col is None:
+        company_col = _find_vocab_col(header_norm, _COMPANY_HEADER_WEAK)
+    if company_col is None:
+        company_col = 0
+    if dg_col is not None and company_col == dg_col:
+        # `| 당기 | (단위 : 백만원) |` 마커행이 헤더로 잡힌 경우 — 기존 parse_note
+        # 영역이다. 여기서 포기하는 것이 두 파서의 영역 불침범을 보장한다.
+        return multiplier
+
+    body = rows[body_start:]
+
+    # ④-0 모드 T — **2단 헤더(거래유형 × 기간)**. 상위 행은 거래유형, 다음 행은 전부
+    #     기간 토큰이다(스윕 4회차 실측 425건).
+    #       | 특수관계구분 | 회사명 | 매출 | 기타수익 | 기타비용 | 자산취득 |
+    #       | 당기 | 전기 | 당기 | 전기 | 당기 | 전기 | 당기 |
+    #       | 기타 | 제일호…대부 | - | 540 | 61,941 | 19,671 | - | 2,926 | - |
+    #     라벨 열 수는 `데이터폭 − 서브헤더폭`으로 **결정적으로 역산**되고, 서브헤더의
+    #     `당기` 등장 횟수 = 거래유형 수이므로 상위 헤더 뒤쪽과 1:1로 붙는다.
+    if body and dg_col is None:
+        t = _company_rows_two_tier(header, body, multiplier, out)
+        if t:
+            return multiplier
+
+    if dg_col is not None:
+        label_col = _find_vocab_col(header_norm, _TXN_LABEL_HEADER_VOCAB)
+        if label_col in (company_col, dg_col):
+            label_col = None
+        cand = [label_col] if label_col is not None else [
+            k for k in range(dg_col) if k != company_col
+        ]
+        _emit_company_rows(body, header, company_col, cand, dg_col, multiplier, out)
+        return multiplier
+
+    # ④ 모드 S — `<당기>` 전폭 구획으로 기간을 나누는 표
+    dir_cols = [
+        (k, "customer") for k, c in enumerate(header_norm)
+        if _label_match(c, _SALES_LABEL_PREFIXES)
+    ] + [
+        (k, "supply") for k, c in enumerate(header_norm)
+        if _label_match(c, _PURCHASE_LABEL_PREFIXES)
+    ]
+    label_col = _find_vocab_col(header_norm, _TXN_LABEL_HEADER_VOCAB)
+    amount_col = _find_vocab_col(header_norm, _AMOUNT_HEADER_VOCAB)
+    if not dir_cols and (label_col is None or amount_col is None):
+        return multiplier  # 금액 열이 없는 현황표 — 배제 지점
+    _emit_company_rows_marker(
+        body, header, company_col, dir_cols, label_col, amount_col, multiplier, out
+    )
+    return multiplier
+
+
+_PERIOD_TOKENS = ("당기", "전기", "당기말", "전기말", "당분기", "전분기", "당반기", "전반기")
+
+
+def _company_rows_two_tier(
+    header: list[str], body: list[list[str]], multiplier: int, out: list
+) -> bool:
+    """모드 T — 2단 헤더(거래유형 × 기간). 처리했으면 True.
+
+    ⚠️ 열 매핑을 **추측하지 않는다**: 라벨 열 수 = 데이터폭 − 서브헤더폭,
+    거래유형 수 = 서브헤더의 `당기` 등장 횟수. 둘 중 하나라도 앞뒤가 안 맞으면
+    표를 포기한다(금액이 엉뚱한 상대에 붙느니 안 뽑는 편이 낫다).
+    """
+    sub = body[0]
+    sub_norm = [_norm_ws(c) for c in sub]
+    live = [c for c in sub_norm if c]
+    if len(live) < 2 or not all(c in _PERIOD_TOKENS for c in live):
+        return False
+    cur_idx = [j for j, c in enumerate(sub_norm) if c == "당기"]
+    if not cur_idx:
+        return False
+    n_groups = len(cur_idx)
+    if n_groups >= len(header):
+        return False
+    txn_labels = header[len(header) - n_groups:]
+    label_head = header[: len(header) - n_groups]
+
+    data = [r for r in body[1:] if len(r) == label_head.__len__() + len(sub_norm)]
+    if not data:
+        return False
+    label_cols = len(label_head)
+
+    company_col = _find_vocab_col(
+        [_norm_header(c) for c in label_head], _COMPANY_HEADER_STRONG
+    )
+    if company_col is None:
+        company_col = label_cols - 1  # 회사명은 라벨 계층의 가장 안쪽
+
+    dirs: list[tuple[int, str, str]] = []  # (데이터 열, 방향, 라벨)
+    for g, j in enumerate(cur_idx):
+        lab = _norm_ws(txn_labels[g])
+        if _label_match(lab, _SALES_LABEL_PREFIXES):
+            dirs.append((label_cols + j, "customer", txn_labels[g].strip()))
+        elif _label_match(lab, _PURCHASE_LABEL_PREFIXES):
+            dirs.append((label_cols + j, "supply", txn_labels[g].strip()))
+    if not dirs:
+        return False
+
+    carry: str | None = None
+    for row in body[1:]:
+        padded = _pad_left(row, label_cols + len(sub_norm), carry)
+        if padded is None:
+            continue
+        own = padded[company_col].strip() if company_col < len(padded) else ""
+        name = _company_rows_name(padded, company_col, carry)
+        if own and name == own:
+            carry = own
+        if not name:
+            continue
+        for col, direction, lab in dirs:
+            if col >= len(padded):
+                continue
+            amount = _parse_amount(padded[col], multiplier)
+            if amount is not None:
+                out.append((name, direction, amount, lab))
+    return True
+
+
+def _pad_left(row: list[str], header_len: int, carry: str | None) -> list[str] | None:
+    """헤더보다 짧은 행 보정. 캐리다운 변형의 실체는 '빈 칸'이 아니라 **칸 소멸**이다
+    (`| 구분 | 회사명 | 계정과목명 | 당기 | 전기 |` 5열에 `| 이자비용 | 986 | 979 |` 3칸).
+    금액 열은 항상 우측이므로 좌측 패딩이 안전하고, carry가 없으면 패딩하지 않는다."""
+    missing = header_len - len(row)
+    if missing == 0:
+        return row
+    if missing < 0 or missing > 2 or not carry:
+        return None
+    return [""] * missing + row
+
+
+def _emit_company_rows(body, header, company_col, cand, dg_col, multiplier, out) -> None:
+    carry: str | None = None
+    for raw in body:
+        if _period_marker_of_row(raw):
+            continue
+        row = _pad_left(raw, len(header), carry)
+        if row is None:
+            continue
+        own = row[company_col].strip() if company_col < len(row) else ""
+        name = _company_rows_name(row, company_col, carry)
+        if own and name == own:
+            carry = own  # 잡음(`-`·수치·집계 라벨)은 carry를 오염시키지 않는다
+        if not name:
+            continue
+        hit = _company_rows_direction(row, cand)
+        if not hit:
+            continue
+        amount = _parse_amount(row[dg_col], multiplier) if dg_col < len(row) else None
+        if amount is None:
+            continue
+        out.append((name, hit[0], amount, hit[1]))
+
+
+def _emit_company_rows_marker(
+    body, header, company_col, dir_cols, label_col, amount_col, multiplier, out
+) -> None:
+    period: str | None = None
+    carry: str | None = None
+    for raw in body:
+        mk = _period_marker_of_row(raw)
+        if mk:
+            period, carry = mk, None
+            continue
+        if period != "당기":
+            continue
+        row = _pad_left(raw, len(header), carry)
+        if row is None:
+            continue
+        own = row[company_col].strip() if company_col < len(row) else ""
+        name = _company_rows_name(row, company_col, carry)
+        if own and name == own:
+            carry = own  # 잡음(`-`·수치·집계 라벨)은 carry를 오염시키지 않는다
+        if not name:
+            continue
+        if dir_cols:
+            for k, direction in dir_cols:
+                if k >= len(row):
+                    continue
+                amount = _parse_amount(row[k], multiplier)
+                if amount is not None:
+                    out.append((name, direction, amount, header[k].strip()))
+            continue
+        hit = _company_rows_direction(row, [label_col])
+        if not hit:
+            continue
+        amount = _parse_amount(row[amount_col], multiplier) if amount_col < len(row) else None
+        if amount is not None:
+            out.append((name, hit[0], amount, hit[1]))
+
+
 # 2026-07-22 실측(109노트 표본 조사): "구분/특수관계자명" 2-컬럼 카테고리 나열형이
 # 여러 회사에서 동일하게 확인됨(삼성바이오로직스·SK이노베이션·HD현대·HD현대중공업·
 # HD한국조선해양 등) — U-D2 "파서 1벌, 소비자 2곳" 원칙에 따라 같은 노트에서 이
@@ -1105,6 +1519,7 @@ def apply(
         "notes_unparsed": 0,
         "edges_kept": 0,
         "group_aggregate": 0,
+        "separate_fs": 0,
         "unlisted_nodes": 0,
         "pruned_stale": 0,
     }
@@ -1130,6 +1545,11 @@ def apply(
                 # markdown 경로가 성공한 노트는 그 결과를 유지한다(G-C 검수를
                 # 통과한 기존 동작 보존, 두 경로 불일치 84건은 후속 조사 과제).
                 note_items = parse_note_html_grid(row.get("text_html"))
+            if not note_items:
+                # ★2026-07-31: 행=회사·열=기간 레이아웃(거래라벨 있는 미파싱의 87%).
+                # **사슬 맨 끝** — 앞 3종이 잡은 노트는 여기 도달하지 않으므로 기존
+                # 파싱 산출이 구조적으로 불변이다(전수 스윕 S1로 재확인).
+                note_items = parse_note_company_rows(row["text_md"])
             if not note_items:
                 # 미지원 표 구조 — 억지 매칭 금지, 스킵 집계만(유형 분류는
                 # 별도 조사 스크립트 소관, 파서 분기 신설은 fixture 필수)
@@ -1180,6 +1600,9 @@ def apply(
                 if is_aggregate:
                     provenance += f" · {GROUP_AGGREGATE_MARK}"
                     counters["group_aggregate"] += 1
+                if is_separate_fs_section(row):
+                    provenance += f" · {SEPARATE_FS_MARK}"
+                    counters["separate_fs"] += 1
                 _upsert_edge(
                     session,
                     src_corp=src_corp,
@@ -1252,6 +1675,21 @@ _GROUP_AGGREGATE_RE = re.compile(
     r"|등(?:\s+[^,]*?(?:기업집단|계열회사|소속회사|소속)[^,]*)?)\s*$"
 )
 GROUP_AGGREGATE_MARK = "그룹 합산"
+
+# ★ 2026-07-30 리더(CPA) 판정: **연결재무제표를 작성하지 않는 회사**의 개별재무제표
+# 주석에서 나온 관계는 붙이되 표기에 `별도`를 명시한다(후속12 "그룹 합산" 선례 준용).
+# 근거: 연결 미작성사는 종속기업이 없어 내부거래 제거 문제가 성립하지 않지만, 금액의
+# 근거가 연결 기준이 아니라는 사실은 화면에 남아야 한다. 연결 보유사의 별도주석은
+# report 섹셔너가 애초에 담지 않으므로(section_key 'III.5.별도주석'은 연결 미작성사
+# 전용) 한 회사에 연결·별도 두 판이 공존하는 일은 없다.
+# ⚠️ 마커에 콜론 금지 — rl-string "이름:타입:detail" 3분할 계약(FN-010).
+SEPARATE_FS_MARK = "별도"
+SEPARATE_FS_SECTION_KEY = "III.5.별도주석"
+
+
+def is_separate_fs_section(row: dict) -> bool:
+    """이 주석 행이 별도(개별)재무제표 주석에서 왔는가."""
+    return row.get("section_key") == SEPARATE_FS_SECTION_KEY
 
 
 def strip_group_aggregate(name: str) -> str | None:
@@ -1443,6 +1881,7 @@ def apply_governance(
         "notes_unparsed": 0,
         "edges_kept": 0,
         "group_aggregate": 0,
+        "separate_fs": 0,
         "unlisted_nodes": 0,
         "no_ticker": 0,
         "pruned_stale": 0,
@@ -1555,6 +1994,9 @@ def apply_governance(
                         # ⚠️ rl-string은 `이름:타입:detail` 3분할 계약(FN-010) —
                         # 마커에 콜론을 쓰지 않는다.
                         detail += f" ({GROUP_AGGREGATE_MARK})"
+                    if is_separate_fs_section(row):
+                        detail += f" ({SEPARATE_FS_MARK})"
+                        counters["separate_fs"] += 1
                     _upsert_relation_local_dart_filing(
                         session,
                         source_corp=self_ticker,
@@ -1584,9 +2026,12 @@ def apply_governance(
         counters["note_termination"] = terminate_absent_note_relations(session, sections)
 
         # ★U5: 엣지가 사라진 비상장 노드 정리 (참조 무결성 기준)
+        # ⚠️ 순서: reconcile → prune (filters.apply와 동일 — reconcile이 만든 끊어진
+        #    참조를 prune이 마무리한다).
+        session.flush()
+        counters["kind_reconciled"] = entity_kind.reconcile_unlisted_kinds(session)
         session.flush()
         counters["pruned_orphan_nodes"] = entity_kind.prune_orphan_unlisted_nodes(session)
-        counters["kind_reconciled"] = entity_kind.reconcile_unlisted_kinds(session)
 
         session.commit()
     finally:

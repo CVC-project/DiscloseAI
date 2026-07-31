@@ -16,6 +16,16 @@
         "tier": "dot"
       },
       {
+        "t": "106240",
+        "n": "파인테크닉스",
+        "type": "dart_filing",
+        "detail": "지배기업 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "전기전자부품",
+        "tier": "dot"
+      },
+      {
         "n": "㈜베가스",
         "kind": "private_corp",
         "type": "investment",
@@ -49,8 +59,28 @@
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "t": "067390",
+          "n": "아스트",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 10190020.0,
+          "as_of": 2021,
+          "prov": "특수관계자와의 거래 · 매출"
+        }
+      ],
+      "down": [
+        {
+          "t": "067390",
+          "n": "아스트",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 163258552.0,
+          "as_of": 2021,
+          "prov": "특수관계자와의 거래 · 매입"
+        }
+      ]
     }
   }
 }

@@ -180,8 +180,11 @@ _UNIT_HEADER_RE = re.compile(r"^\(?\s*단위\s*[:：]")                # '(단�
 # ⚠️ **길이로 판정하지 않는다** — 실존 외국 사명이 40자를 넘는 경우가 흔하다
 # ('HYUNDAI MOTOR GROUP INNOVATION CENTER IN SINGAPORE PTE. LTD.' 등 실측).
 # 오직 **서술 표지**(종결어미·주체 서술구)로만 잡는다.
+# ★2026-07-30 전수 스윕: `…가 100% 지분을 보유하고 있습니다.`(BLUE ONE NYC LLC 외 11건)가
+#   빠져나갔다 — 종결어미를 하나씩 열거하면 반드시 빠지는 게 생긴다. `습니다`로 묶는다
+#   (회사명에 이 어미가 들어갈 일은 없다).
 _SENTENCE_FORM_RE = re.compile(
-    r"하였습니다|되었습니다|하였음|되었음|합니다|입니다|하였고|되었고|바랍니다"
+    r"습니다|합니다|하였음|되었음|입니다|하였고|되었고|바랍니다"
     r"|연결회사는|연결실체는|공정거래위원회|의\s*경우|주석\s*\d+\s*참조"
     r"|흡수합병|사명변경|상호를?\s*변경|지분을\s*취득"
 )
@@ -251,6 +254,10 @@ def clean_display_name(name_raw: str | None) -> str:
     name = re.sub(r"\s+", " ", (name_raw or "")).strip()
     name = _LEADING_ORPHAN_SUFFIX_RE.sub("", name, count=1).strip()
     name = _ANNOTATION_RE.sub("", name).strip(" ,·")
+    # ★2026-07-30 전수 스윕: 번호 없는 **맨뒤 별표**만 남는 각주가 있다
+    #   (`키움문화벤처제1호투자조합*` · `씨아이에스 (前씨아이솔리드 주식회사) *`).
+    #   _ANNOTATION_RE는 `(*N)` 형태만 떼므로 이 형태가 화면에 그대로 노출됐다.
+    name = re.sub(r"\s*\*+\s*$", "", name).strip(" ,·")
     return re.sub(r"\s+", " ", name).strip()
 
 
@@ -501,6 +508,24 @@ def prune_orphan_unlisted_nodes(session) -> int:
         if row.uid not in referenced:
             session.delete(row)
             removed += 1
+
+    # ★2026-07-30 전수 스윕: **반대 방향의 같은 병** — 노드는 없는데 그 uid를 가리키는
+    # 엣지가 남는다. 표시명 규칙을 손질하면 reconcile이 노드를 병합·삭제하는데, 그
+    # 시점 이후에 생산자가 옛 uid로 행을 다시 넣으면 참조가 끊긴 채 남는다(실측 1건:
+    # 023590 → x_07ccff2cb98d). 화면에는 이미 안 보이므로 남겨두면 순수 오염이다.
+    # transform/CLAUDE.md 원칙 ⑤ ③(충돌 시 병합·재지정)의 마무리 칸.
+    alive = {uid for (uid,) in session.query(UnlistedNode.uid)}
+    for model, cols in (
+        (RelationLocal, ("source_corp", "target_corp")),
+        (ValueChainEdge, ("src_corp", "dst_corp")),
+    ):
+        for e in session.query(model).all():
+            if any(
+                (getattr(e, c) or "").startswith("x_") and getattr(e, c) not in alive
+                for c in cols
+            ):
+                session.delete(e)
+                removed += 1
     return removed
 
 

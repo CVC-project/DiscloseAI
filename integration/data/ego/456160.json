@@ -6,6 +6,16 @@
   "layers": {
     "governance": [
       {
+        "t": "223250",
+        "n": "드림씨아이에스",
+        "type": "dart_filing",
+        "detail": "대손충당금 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "지주",
+        "tier": "dot"
+      },
+      {
         "n": "이희용",
         "kind": "person",
         "type": "investment",
@@ -15,7 +25,17 @@
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "t": "223250",
+          "n": "드림씨아이에스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 90998000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        }
+      ],
       "down": []
     }
   }

@@ -16,6 +16,46 @@
         "tier": "dot"
       },
       {
+        "t": "114450",
+        "n": "그린생명과학",
+        "type": "dart_filing",
+        "detail": "관계기업 (별도) · 2024",
+        "dir": "out",
+        "as_of": 2024,
+        "s": "제약바이오",
+        "tier": "dot"
+      },
+      {
+        "t": "092230",
+        "n": "KPX홀딩스",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2024",
+        "dir": "out",
+        "as_of": 2024,
+        "s": "화학",
+        "tier": "dot"
+      },
+      {
+        "t": "025000",
+        "n": "KPX케미칼",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2024",
+        "dir": "out",
+        "as_of": 2024,
+        "s": "화학",
+        "tier": "dot"
+      },
+      {
+        "t": "100250",
+        "n": "진양홀딩스",
+        "type": "dart_filing",
+        "detail": "기타 (그룹 합산) (별도) · 2024",
+        "dir": "out",
+        "as_of": 2024,
+        "s": "소재",
+        "tier": "dot"
+      },
+      {
         "t": "092230",
         "n": "KPX홀딩스",
         "type": "dart_filing",
@@ -52,6 +92,62 @@
         "as_of": 2025
       },
       {
+        "n": "KPX CHEMICAL(GEORGIA)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
+        "n": "KPX CHEMICAL(INDIA)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
+        "n": "KPX CHEMICAL(NANJING)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
+        "n": "KPX VINA Co., Ltd.",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
+        "n": "KPX개발㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
+        "n": "KPX글로벌㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
+        "n": "거림상사",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
         "n": "아든씨티케이 핀테크투자조합",
         "kind": "coop_fund",
         "type": "investment",
@@ -71,6 +167,24 @@
     "valuechain": {
       "up": [
         {
+          "t": "025000",
+          "n": "KPX케미칼",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2779218965.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출"
+        },
+        {
+          "t": "092230",
+          "n": "KPX홀딩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2800723965.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        },
+        {
           "t": "114450",
           "n": "그린생명과학",
           "type": "customer",
@@ -89,22 +203,49 @@
           "prov": "단일판매ㆍ공급계약체결 · 그린케미칼(주)"
         },
         {
-          "t": "025000",
-          "n": "KPX케미칼",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 2779218965.0,
-          "as_of": 2025,
-          "prov": "특수관계자거래 · 매출"
-        },
-        {
           "t": "092230",
           "n": "KPX홀딩스",
-          "type": "customer",
+          "type": "supply",
           "tier_grade": "T1",
-          "amount": 2800723965.0,
-          "as_of": 2025,
-          "prov": "특수관계자와의 거래 · 매출"
+          "amount": 298788650.0,
+          "as_of": 2021,
+          "prov": "특수관계자와의 거래 · 매입외 · 별도"
+        },
+        {
+          "t": "025000",
+          "n": "KPX케미칼",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 447209000.0,
+          "as_of": 2021,
+          "prov": "특수관계자와의 거래 · 매입 · 별도"
+        },
+        {
+          "n": "거림상사",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 6813778541.0,
+          "as_of": 2021,
+          "prov": "특수관계자와의 거래 · 매 입 등   합 계 · 별도"
+        },
+        {
+          "n": "KPX CHEMICAL(NANJING)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2002078807.0,
+          "as_of": 2021,
+          "prov": "특수관계자와의 거래 · 매입 · 별도"
+        },
+        {
+          "n": "KPX라이프사이언스㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1235489084.0,
+          "as_of": 2021,
+          "prov": "특수관계자와의 거래 · 매입외 · 별도"
         }
       ],
       "down": [
@@ -125,6 +266,15 @@
           "amount": 1269648000.0,
           "as_of": 2025,
           "prov": "특수관계자와의 거래 · 매입"
+        },
+        {
+          "t": "025000",
+          "n": "KPX케미칼",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4986993830.0,
+          "as_of": 2021,
+          "prov": "특수관계자와의 거래 · 매출+매 출 등   합 계 · 별도"
         }
       ]
     }

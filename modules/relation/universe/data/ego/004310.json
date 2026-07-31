@@ -14,10 +14,50 @@
         "as_of": 2025
       },
       {
+        "n": "(주)바이오이노티스",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "(주)아트엠플러스",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "(주)크리스텔라",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "(주)현대내츄럴",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
         "n": "에이앤펩(주)",
         "kind": "private_corp",
         "type": "associate",
         "detail": "43.72% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "에이앤펩(주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 (별도) · 2025",
         "dir": "out",
         "as_of": 2025
       },
@@ -38,17 +78,71 @@
         "as_of": 2025
       },
       {
+        "n": "현대비앤에프(주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
         "n": "현대아이엔에스(주)",
         "kind": "private_corp",
         "type": "investment",
         "detail": "18.6% · 2025",
         "dir": "out",
         "as_of": 2025
+      },
+      {
+        "n": "현대아이엔에스(주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "(주)아트엠플러스",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 16517299000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등 · 별도"
+        },
+        {
+          "n": "(주)바이오이노티스",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2670915000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "n": "(주)아트엠플러스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 27092045000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등 · 별도"
+        },
+        {
+          "n": "(주)바이오이노티스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 186037000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등 · 별도"
+        }
+      ]
     }
   }
 }

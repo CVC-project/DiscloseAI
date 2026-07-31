@@ -30,10 +30,18 @@
         "as_of": 2025
       },
       {
-        "n": "SANWON LTD.",
+        "n": "San Won",
         "kind": "private_corp",
         "type": "associate",
         "detail": "50.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "San Won",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
         "dir": "out",
         "as_of": 2025
       },
@@ -68,11 +76,48 @@
         "detail": "50.0% · 2025",
         "dir": "out",
         "as_of": 2025
+      },
+      {
+        "n": "위해동원식품(유)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "out",
+        "as_of": 2025
       }
     ],
     "valuechain": {
-      "up": [],
-      "down": []
+      "up": [
+        {
+          "n": "위해동원식품(유)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 8385727000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매  입"
+        },
+        {
+          "n": "San Won",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 21569000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매  입"
+        }
+      ],
+      "down": [
+        {
+          "n": "위해동원식품(유)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3865756000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매  출"
+        }
+      ]
     }
   }
 }

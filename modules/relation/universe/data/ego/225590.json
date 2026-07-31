@@ -6,12 +6,20 @@
   "layers": {
     "governance": [
       {
-        "n": "(주)메이븐에프씨",
+        "n": "㈜메이븐에프씨",
         "kind": "private_corp",
         "type": "associate",
         "detail": "29.0% · 2025",
         "dir": "in",
         "as_of": 2025
+      },
+      {
+        "n": "㈜메이븐에프씨",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "지배회사 · 2021",
+        "dir": "out",
+        "as_of": 2021
       },
       {
         "n": "박원희",
@@ -31,7 +39,17 @@
       }
     ],
     "valuechain": {
-      "up": [],
+      "up": [
+        {
+          "n": "㈜메이븐에프씨",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 730366000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입(*)"
+        }
+      ],
       "down": []
     }
   }

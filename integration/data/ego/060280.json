@@ -6,11 +6,11 @@
   "layers": {
     "governance": [
       {
-        "n": "(주)에치와이",
+        "n": "(주)제이레져",
         "kind": "private_corp",
-        "type": "associate",
-        "detail": "30.94% · 2025",
-        "dir": "in",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
         "as_of": 2025
       },
       {
@@ -20,11 +20,71 @@
         "detail": "100.0% · 2025",
         "dir": "out",
         "as_of": 2025
+      },
+      {
+        "n": "㈜비락",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜에치와이",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "30.94% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜에치와이",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "유의적 영향력 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜팔도",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
       }
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "㈜팔도",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 16638238320.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        },
+        {
+          "n": "㈜에치와이",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 8416969000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        },
+        {
+          "n": "㈜비락",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 25210000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        }
+      ]
     }
   }
 }

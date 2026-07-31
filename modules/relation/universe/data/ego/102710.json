@@ -6,21 +6,21 @@
   "layers": {
     "governance": [
       {
-        "t": "445180",
-        "n": "퓨릿",
-        "type": "dart_filing",
-        "detail": "㈜퓨릿 · 2025",
-        "dir": "out",
-        "as_of": 2025,
-        "s": "화학",
-        "tier": "dot"
-      },
-      {
         "t": "017890",
         "n": "한국알콜",
         "type": "dart_filing",
         "detail": "관계기업 · 2025",
         "dir": "in",
+        "as_of": 2025,
+        "s": "화학",
+        "tier": "dot"
+      },
+      {
+        "t": "445180",
+        "n": "퓨릿",
+        "type": "dart_filing",
+        "detail": "㈜퓨릿 · 2025",
+        "dir": "out",
         "as_of": 2025,
         "s": "화학",
         "tier": "dot"
@@ -50,7 +50,7 @@
         "as_of": 2025
       },
       {
-        "n": "ENF(Wuhan) Technology Co.",
+        "n": "ENF(Wuhan) Technology Co., Ltd",
         "kind": "private_corp",
         "type": "dart_filing",
         "detail": "ENF(Wuhan) Technology Co., Ltd. · 2025",
@@ -80,6 +80,30 @@
         "detail": "YOKE(Nantong) Semiconductor Materials Co., Ltd. · 2025",
         "dir": "out",
         "as_of": 2025
+      },
+      {
+        "n": "SE(Jiangsu) Electronic Materials Co.",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "YOKE(Nantong) Electronic Materials Co., Ltd 주3) · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
+        "n": "SKC(Nantong) Semiconductor Mat",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "SKC(Nantong) Semiconductor Mat · 2023",
+        "dir": "out",
+        "as_of": 2023
+      },
+      {
+        "n": "SKC-ENF Electronic Materials Ltd.",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "SKC-ENF Electronic Materials Ltd. · 2023",
+        "dir": "out",
+        "as_of": 2023
       },
       {
         "n": "YOKE(Nantong) Electronic Materials Co.",
@@ -170,7 +194,7 @@
         "as_of": 2025
       },
       {
-        "n": "어업회사법인어진수산 주식회사",
+        "n": "어업회사법인어진수산㈜",
         "kind": "private_corp",
         "type": "dart_filing",
         "detail": "어업회사법인어진수산 주식회사 · 2025",
@@ -200,6 +224,14 @@
         "detail": "61.0% · 2025",
         "dir": "out",
         "as_of": 2025
+      },
+      {
+        "n": "전기",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "당기 · 2022",
+        "dir": "out",
+        "as_of": 2022
       },
       {
         "n": "전기말",
@@ -237,15 +269,6 @@
     "valuechain": {
       "up": [
         {
-          "t": "445180",
-          "n": "퓨릿",
-          "type": "supply",
-          "tier_grade": "T1",
-          "amount": 1737416000.0,
-          "as_of": 2025,
-          "prov": "특수관계자와의 거래 · 재화의 매입, 특수관계자거래"
-        },
-        {
           "t": "017890",
           "n": "한국알콜",
           "type": "customer",
@@ -253,6 +276,15 @@
           "amount": 118251456000.0,
           "as_of": 2025,
           "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "445180",
+          "n": "퓨릿",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1737416000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 매입, 특수관계자거래"
         },
         {
           "n": "㈜팸테크놀로지",
@@ -275,15 +307,6 @@
       ],
       "down": [
         {
-          "t": "445180",
-          "n": "퓨릿",
-          "type": "customer",
-          "tier_grade": "T1",
-          "amount": 408942000.0,
-          "as_of": 2025,
-          "prov": "특수관계자와의 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
-        },
-        {
           "t": "017890",
           "n": "한국알콜",
           "type": "supply",
@@ -291,6 +314,15 @@
           "amount": 836085000.0,
           "as_of": 2025,
           "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "t": "445180",
+          "n": "퓨릿",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 408942000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
         },
         {
           "n": "㈜팸테크놀로지",
@@ -356,7 +388,7 @@
           "prov": "특수관계자와의 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
         },
         {
-          "n": "어업회사법인어진수산 주식회사",
+          "n": "어업회사법인어진수산㈜",
           "kind": "private_corp",
           "type": "customer",
           "tier_grade": "T1",

@@ -24,11 +24,35 @@
         "as_of": 2025
       },
       {
+        "n": "CoImmune, Inc",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "지분법적용투자기업 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "Duopharma Biotech Berhad",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "유의적 영향력 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
         "n": "마르시아 신기술조합 제77호",
         "kind": "coop_fund",
         "type": "associate",
         "detail": "25.56% · 2025",
         "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "마르시아 신기술조합 제77호",
+        "kind": "coop_fund",
+        "type": "dart_filing",
+        "detail": "유의적 영향력 · 2025",
+        "dir": "out",
         "as_of": 2025
       },
       {
@@ -42,7 +66,17 @@
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "Duopharma Biotech Berhad",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 191883249.0,
+          "as_of": 2023,
+          "prov": "특수관계자 거래 · 매출 · 별도"
+        }
+      ]
     }
   }
 }

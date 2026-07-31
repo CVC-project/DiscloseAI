@@ -86,6 +86,16 @@
         "tier": "dot"
       },
       {
+        "t": "139480",
+        "n": "이마트",
+        "type": "dart_filing",
+        "detail": "대규모기업집단 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "유통",
+        "tier": "named400"
+      },
+      {
         "n": "(주)신세계톰보이",
         "kind": "private_corp",
         "type": "subsidiary",
@@ -382,14 +392,6 @@
         "as_of": 2025
       },
       {
-        "n": "㈜인천신세계",
-        "kind": "private_corp",
-        "type": "dart_filing",
-        "detail": "지배기업 · 2025",
-        "dir": "out",
-        "as_of": 2025
-      },
-      {
         "n": "㈜조선호텔앤리조트",
         "kind": "private_corp",
         "type": "dart_filing",
@@ -564,6 +566,14 @@
         "detail": "17.86% · 2025",
         "dir": "out",
         "as_of": 2025
+      },
+      {
+        "n": "신세계건설㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "대규모기업집단 · 2025",
+        "dir": "out",
+        "as_of": 2025
       }
     ],
     "valuechain": {
@@ -594,6 +604,15 @@
           "amount": 18020874000.0,
           "as_of": 2025,
           "prov": "특수관계자 · 매출 등, 특수관계자거래 (주2)"
+        },
+        {
+          "t": "139480",
+          "n": "이마트",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 47755000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 판매로 인한 수익 등, 특수관계자거래"
         },
         {
           "n": "알씨씨",
@@ -632,6 +651,15 @@
           "amount": 25055000.0,
           "as_of": 2025,
           "prov": "특수관계자 · 매입 등, 특수관계자거래 (주3)"
+        },
+        {
+          "t": "139480",
+          "n": "이마트",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1873000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 매입 등, 특수관계자거래"
         },
         {
           "n": "신세계디에프",

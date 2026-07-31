@@ -22,7 +22,10 @@ from pathlib import Path
 from modules.relation.storage.db import get_local_session
 from modules.relation.storage.models import CompanyRegistry, ValueChainEdge
 from modules.relation.storage.queries import current_governance_edges
-from modules.relation.valuechain.extract.related_party import GROUP_AGGREGATE_MARK
+from modules.relation.valuechain.extract.related_party import (
+    GROUP_AGGREGATE_MARK,
+    SEPARATE_FS_MARK,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -89,6 +92,10 @@ def _edge_detail(e) -> str:
         label = "특수관계자"
     if GROUP_AGGREGATE_MARK in (e.detail or ""):
         label = f"{label} ({GROUP_AGGREGATE_MARK})".strip()
+    # ★2026-07-30: 별도(개별)재무제표 주석 출처 마커도 같은 이유로 정규화 뒤에 되붙인다
+    # (리더 판정 — 연결 기준이 아니라는 사실은 화면에 남아야 한다).
+    if f"({SEPARATE_FS_MARK})" in (e.detail or ""):
+        label = f"{label} ({SEPARATE_FS_MARK})".strip()
     return label
 
 

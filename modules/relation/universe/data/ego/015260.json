@@ -30,12 +30,28 @@
         "as_of": 2025
       },
       {
+        "n": "(주)와이에스피",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2021",
+        "dir": "out",
+        "as_of": 2021
+      },
+      {
         "n": "㈜용산",
         "kind": "private_corp",
         "type": "associate",
         "detail": "40.0% · 2025",
         "dir": "out",
         "as_of": 2025
+      },
+      {
+        "n": "㈜용산",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 (별도) · 2021",
+        "dir": "out",
+        "as_of": 2021
       },
       {
         "n": "네오배터리머티리얼즈코리아(주)",
@@ -56,7 +72,17 @@
     ],
     "valuechain": {
       "up": [],
-      "down": []
+      "down": [
+        {
+          "n": "㈜용산",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 17854137000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출(*)"
+        }
+      ]
     }
   }
 }
