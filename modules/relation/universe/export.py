@@ -112,15 +112,33 @@ def _edge_detail_with_year(e) -> str:
         return label
     return f"{label} · {year}" if label else str(year)
 
+
 _SECTOR_ID_TO_KO = {
-    "semi": "반도체", "fin": "금융", "it": "플랫폼", "auto": "자동차",
-    "pharma": "제약바이오", "energy": "에너지", "indust": "중공업·방산",
-    "cons": "건설", "tele": "통신", "etc": "기타", "food": "식음료",
-    "textile": "섬유·의류", "materials": "소재", "media": "미디어",
-    "chem": "화학", "steel": "철강·금속", "elec_parts": "전기전자부품",
-    "machinery": "기계·장비", "retail": "유통", "logistics": "운송·물류",
-    "leisure": "레저·교육", "holding": "지주", "prof_svc": "전문서비스",
-    "realestate": "부동산", "cosmetics": "화장품",
+    "semi": "반도체",
+    "fin": "금융",
+    "it": "플랫폼",
+    "auto": "자동차",
+    "pharma": "제약바이오",
+    "energy": "에너지",
+    "indust": "중공업·방산",
+    "cons": "건설",
+    "tele": "통신",
+    "etc": "기타",
+    "food": "식음료",
+    "textile": "섬유·의류",
+    "materials": "소재",
+    "media": "미디어",
+    "chem": "화학",
+    "steel": "철강·금속",
+    "elec_parts": "전기전자부품",
+    "machinery": "기계·장비",
+    "retail": "유통",
+    "logistics": "운송·물류",
+    "leisure": "레저·교육",
+    "holding": "지주",
+    "prof_svc": "전문서비스",
+    "realestate": "부동산",
+    "cosmetics": "화장품",
 }
 
 
@@ -173,12 +191,27 @@ def export_universe_json(session, output_path: Path | None = None) -> dict:
     for c in sorted(dots, key=lambda x: -(x.market_cap_krw or 0)):
         dots_by_sector[c.sector_id or "etc"].append(c)
 
+    # 섹터 총계 + **시장별(KOSPI/KOSDAQ) 분해**. 시장별 분해는 v2 성운 개요의 프록시
+    # 노드 라벨("화학 · KOSDAQ · 82사 · 시총 14.6조원")이 쓴다 — 그 전까지 화면은
+    # 시총 필드가 없어 노드 반경 계산식을 조원으로 오표기했다(UX-032).
     sector_agg: dict[str, dict] = {}
     for c in companies:
         sid = c.sector_id or "etc"
-        agg = sector_agg.setdefault(sid, {"count": 0, "cap": 0.0})
+        agg = sector_agg.setdefault(
+            sid,
+            {
+                "count": 0,
+                "cap": 0.0,
+                "by_market": {"KOSPI": [0, 0.0], "KOSDAQ": [0, 0.0]},
+            },
+        )
+        jo = (c.market_cap_krw or 0) / 1_000_000_000_000  # 조원
         agg["count"] += 1
-        agg["cap"] += (c.market_cap_krw or 0) / 1_000_000_000_000  # 조원
+        agg["cap"] += jo
+        slot = agg["by_market"].get(c.market)
+        if slot is not None:  # market이 KOSPI/KOSDAQ 둘 중 하나가 아니면 총계에만 반영
+            slot[0] += 1
+            slot[1] += jo
 
     sectors_out = []
     for sid, agg in sorted(sector_agg.items(), key=lambda kv: -kv[1]["cap"]):
@@ -189,6 +222,13 @@ def export_universe_json(session, output_path: Path | None = None) -> dict:
                 "ko": _sector_ko(sid),
                 "count": agg["count"],
                 "cap": round(agg["cap"], 1),
+                "markets": {
+                    M: {
+                        "count": agg["by_market"][M][0],
+                        "cap": round(agg["by_market"][M][1], 1),
+                    }
+                    for M in ("KOSPI", "KOSDAQ")
+                },
                 "dots": [
                     [*(_dot_layout(i)), _cap_bucket(c.market_cap_krw)]
                     for i, c in enumerate(dot_list)
@@ -211,7 +251,10 @@ def export_universe_json(session, output_path: Path | None = None) -> dict:
         detail = _edge_detail_with_year(e)
         ratio_sort = -(e.ratio if e.ratio is not None else -1)
         rl_by_ticker[e.source_corp].append(
-            (ratio_sort, f"{target.name_current}:{e.relation_type}:{detail}".replace("\n", " "))
+            (
+                ratio_sort,
+                f"{target.name_current}:{e.relation_type}:{detail}".replace("\n", " "),
+            )
         )
 
     named_out = []
@@ -234,7 +277,11 @@ def export_universe_json(session, output_path: Path | None = None) -> dict:
 
     max_cap_asof = max((c.cap_asof for c in companies if c.cap_asof), default=None)
     payload = {
-        "meta": {"as_of": max_cap_asof, "named_count": len(named), "total": len(companies)},
+        "meta": {
+            "as_of": max_cap_asof,
+            "named_count": len(named),
+            "total": len(companies),
+        },
         "sectors": sectors_out,
         "named": named_out,
     }
@@ -411,6 +458,7 @@ def export_ego_files(session, output_dir: Path | None = None) -> dict:
     ego_dir.mkdir(parents=True, exist_ok=True)
 
     from modules.relation.storage.models import UnlistedNode
+
     unlisted_nodes = {u.uid: u for u in session.query(UnlistedNode).all()}
 
     # ★2026-07-30 D13 신선도 지배구조 확장 — 보고사별 최신 연도 컷(queries.py docstring)
@@ -423,9 +471,14 @@ def export_ego_files(session, output_dir: Path | None = None) -> dict:
 
     # ★2026-07-29 신선도 필터(리더 결정, valuechain/freshness.py 정본) — 상세는 그 모듈 docstring
     from modules.relation.valuechain.freshness import fresh_edges
+
     vc_edges, _fresh_counters = fresh_edges(session)
-    vc_up_by_corp: dict[str, list] = defaultdict(list)  # 이 회사가 dst(수요자) — 상류=공급처
-    vc_down_by_corp: dict[str, list] = defaultdict(list)  # 이 회사가 src(공급자) — 하류=고객
+    vc_up_by_corp: dict[str, list] = defaultdict(
+        list
+    )  # 이 회사가 dst(수요자) — 상류=공급처
+    vc_down_by_corp: dict[str, list] = defaultdict(
+        list
+    )  # 이 회사가 src(공급자) — 하류=고객
     for e in vc_edges:
         vc_up_by_corp[e.dst_corp].append(e)
         vc_down_by_corp[e.src_corp].append(e)
@@ -445,7 +498,9 @@ def export_ego_files(session, output_dir: Path | None = None) -> dict:
             unlisted_nodes,
         )
         path = ego_dir / f"{c.ticker}.json"
-        path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+        path.write_text(
+            json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8"
+        )
         written += 1
         manifest.append(c.ticker)
 
@@ -461,7 +516,11 @@ def export_ego_files(session, output_dir: Path | None = None) -> dict:
 
     manifest_path = ego_dir / "manifest.json"
     manifest_path.write_text(json.dumps(sorted(manifest)), encoding="utf-8")
-    return {"written": written, "stale_removed": stale, "manifest_path": str(manifest_path)}
+    return {
+        "written": written,
+        "stale_removed": stale,
+        "manifest_path": str(manifest_path),
+    }
 
 
 def export_all(session=None) -> dict:

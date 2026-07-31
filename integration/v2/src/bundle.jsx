@@ -1147,8 +1147,10 @@ function SectorMap({ sectorId, activeMarket, activeCompanyCode, onSelectMarket, 
       const specs = [{ M: 'KOSPI', cx: -0.85, seed: 11 }, { M: 'KOSDAQ', cx: 0.85, seed: 22 }];
       for (const sp of specs) {
         const m = _md[sp.M]; if (!m) continue;
+        // UX-032: cap은 **노드 반경 계산용 프록시**(시총 아님) — 라벨에 조원으로 찍지 말 것.
+        // 표시용 실측 시총은 capJo(relation universe markets 집계)로 따로 싣는다.
         nodes.push({ code: '__mkt_' + sp.M, name: sp.M, en: sp.M, isMarket: true, market: sp.M, count: m.total,
-                     cap: Math.min(90, 26 + m.total * 0.16), x: sp.cx, y: 0, gx: sp.cx, gy: 0 });
+                     capJo: m.capJo, cap: Math.min(90, 26 + m.total * 0.16), x: sp.cx, y: 0, gx: sp.cx, gy: 0 });
         const items = [...m.dotItems, ...m.named.map(c => ({ cb: 1, t: c.code, n: c.name }))];
         dots.push(...scatter(sp.cx, 0, 0.42, sp.seed, items));
       }
@@ -1598,11 +1600,20 @@ function SectorMap({ sectorId, activeMarket, activeCompanyCode, onSelectMarket, 
           const isActive = p.c.code === activeCompanyCode;
           const isHover = hoverCode === p.c.code;
           if (!isActive && !isHover) return null;
+          // UX-032: 성운 프록시(시장) 노드는 기업이 아니다 — 내부 키(__mkt_*)와 반경 프록시를
+          // 조원으로 찍던 것을 "<섹터> · <시장>" + "N사 · 시총 X조원"으로 교체.
+          // capJo가 없으면(구 데이터) 시총 구절을 통째로 생략한다(추정값 금지).
+          const _fmt = (window.DiscloseAI || {}).trillionLabel;
+          const isMkt = !!p.c.isMarket;
+          const mktCap = (isMkt && p.c.capJo != null && _fmt) ? _fmt(p.c.capJo * 1e12) : null;
           return (
             <div key={p.c.code} className={"company-label " + (isActive ? 'is-active' : '')}
               style={{ left: p.x, top: p.y - p.r - 14, color: sec.color }}>
-              <div className="company-label-name">{p.c.name}</div>
-              <div className="company-label-code">{p.c.code} · {p.c.cap}조원</div>
+              <div className="company-label-name">{isMkt ? sec.ko + ' · ' + p.c.market : p.c.name}</div>
+              <div className="company-label-code">
+                {isMkt ? (p.c.count + '사' + (mktCap ? ' · 시총 ' + mktCap : ''))
+                       : (p.c.code + ' · ' + p.c.cap + '조원')}
+              </div>
             </div>
           );
         })}
@@ -1624,7 +1635,12 @@ window.SectorMap = SectorMap;
 // 상(dir=in·출자 들어옴) / 하(dir=out·피출자·나감) 배치 — valuechain §5 D5 상/하 문법을
 // 지배구조 의미로 재사용(U2 진행 시나리오). 사이드당 Top-N 6 + "외 n사" 묶음 노드(D6).
 // 시각 문법(REL_STYLES 색·이중 평행선·화살표=출자 방향)은 allRelated와 동일 — U-D12 불변.
-function EgoView({ anchor, layer, onLayerChange, onReRoot }) {
+// UX-034: dismissRef — EgoView가 열어둔 **일시 레이어(팝업·팝오버)**를 App의 goBack이
+// 사다리 최상단에서 닫을 수 있게 넘겨주는 핸들. 이 상태들은 EgoView 로컬이라 App이
+// 알 방법이 없었고, 그래서 ESC가 팝업을 건너뛰고 단계 이동(re-root 체인 되돌림)을
+// 해버렸다. 되돌림 계단은 한 곳(UX-028/030)이라는 원칙을 지키면서, "무엇이 열려
+// 있는지"만 소유자가 보고하는 구조.
+function EgoView({ anchor, layer, onLayerChange, onReRoot, dismissRef }) {
   const canvasRef = _useRef(null);
   const rafRef = _useRef(0);
   const startRef = _useRef(performance.now());
@@ -1634,6 +1650,14 @@ function EgoView({ anchor, layer, onLayerChange, onReRoot }) {
   const [hoverCode, setHoverCode] = _useState(null);
   const [overflowSide, setOverflowSide] = _useState(null); // 'above' | 'below' | null
   const [unlistedInfo, setUnlistedInfo] = _useState(null); // U5: 비상장 노드 정보 팝오버
+  // UX-033: 밸류체인 세로 스택 행 수를 뷰포트 높이로 제한하려면 레이아웃 메모가 크기를
+  // 알아야 한다 — sizeRef(ref)는 리렌더를 안 일으키므로 state로 따로 둔다.
+  const [vp, setVp] = _useState({ w: window.innerWidth, h: window.innerHeight });
+  _useEffect(() => {
+    const onR = () => setVp({ w: window.innerWidth, h: window.innerHeight });
+    window.addEventListener('resize', onR);
+    return () => window.removeEventListener('resize', onR);
+  }, []);
 
   const TOP_N = 6;    // 세로(지분) 사이드당
   const SIDE_N = 4;   // 가로(비지분) 사이드당 — 실측상 대부분 0~2개
@@ -1663,8 +1687,40 @@ function EgoView({ anchor, layer, onLayerChange, onReRoot }) {
   const VC_RAIL_Y = 0.34, VC_LABEL_Y = 0.46, VC_NODE_Y = 0.60, VC_ROW_GAP = 0.115, VC_HALF = 1.22;
   const VC_SEG_MAX = 0.50;  // 세그먼트 폭 상한 — 그룹 1~2개일 때 화면 전체로 퍼져
                             // 스파인·노드가 중심에서 밀려나는 버그 방지(그룹들을 중앙 정렬)
+
+  // UX-033: 세로 스택이 화면 밖으로 나가지 않게 **행 수를 뷰포트로 제한**한다.
+  // 위쪽(공급처)은 아래쪽(고객사)보다 여유가 좁다 — 상단 탭바(~90px)와 레이어 토글
+  // (.ego-topbar top:84px, 높이 ~37px → 하단 121px)이 캔버스 위를 덮기 때문. 그런데
+  // 행 수(그룹당 4 + 묶음)는 양쪽 동일 상수라, 위쪽만 묶음 노드와 라벨이 토글 뒤로
+  // 잘렸다(리더 스크린샷: 한진칼 운송·물류 공급처). 넘치는 기업은 버리지 않고
+  // 아래쪽과 **같은 문법의 "+N사" 묶음**으로 흡수한다.
+  const VC_TOP_SAFE = 152;   // 토글 하단 121px + 라벨(노드 위) 여유 ~31px
+  const VC_BOT_SAFE = 44;    // 하단 여백 + 라벨(노드 아래)
+  const vcMaxRows = (sign) => {
+    const h = vp.h, w = vp.w;
+    if (!h || !w) return VC_MAX_PER_GROUP + 1;
+    const baseR = Math.min(w, h) * 0.36;
+    const rowPx = VC_ROW_GAP * baseR;
+    const firstY = h / 2 + sign * VC_NODE_Y * baseR;   // 첫 행 y(px)
+    const avail = sign < 0 ? (firstY - VC_TOP_SAFE) : (h - VC_BOT_SAFE - firstY);
+    if (!(rowPx > 0)) return VC_MAX_PER_GROUP + 1;
+    // 첫 행은 항상 그린다(1) + 남는 공간만큼 추가 행. 최소 2행(기업1 + 묶음1)은 보장.
+    return Math.max(2, Math.min(VC_MAX_PER_GROUP + 1, 1 + Math.floor(avail / rowPx)));
+  };
+  // 그룹의 표시 행 수를 maxRows에 맞춰 재단 — 밀려난 기업은 그룹 묶음(+N사)으로 이동.
+  const fitGroupRows = (g, maxRows) => {
+    const rowsNow = g.items.length + (g.hidden > 0 ? 1 : 0);
+    if (rowsNow <= maxRows) return g;
+    const maxItems = Math.max(1, maxRows - 1);   // 마지막 한 줄은 "+N사" 묶음 몫
+    const pushed = g.items.slice(maxItems);
+    return { ...g, items: g.items.slice(0, maxItems),
+             hidden: g.hidden + pushed.length,
+             hiddenItems: [...pushed, ...(g.hiddenItems || [])] };
+  };
+
   const buildVcSide = (side, sign) => {
-    const gs = side.groups || [];
+    const maxRows = vcMaxRows(sign);
+    const gs = (side.groups || []).map(g => fitGroupRows(g, maxRows));
     const withBundleG = gs.length + ((side.restGroupCount || 0) > 0 ? 1 : 0);
     if (!withBundleG) return { nodes: [], groups: [] };
     const segW = Math.min(VC_SEG_MAX, (2 * VC_HALF) / withBundleG);
@@ -1703,8 +1759,8 @@ function EgoView({ anchor, layer, onLayerChange, onReRoot }) {
     }
     return { nodes, groups };
   };
-  const vcAbove = _useMemo(() => (isVc ? buildVcSide(above, -1) : { nodes: [], groups: [] }), [isVc, above]);
-  const vcBelow = _useMemo(() => (isVc ? buildVcSide(below, 1) : { nodes: [], groups: [] }), [isVc, below]);
+  const vcAbove = _useMemo(() => (isVc ? buildVcSide(above, -1) : { nodes: [], groups: [] }), [isVc, above, vp]);
+  const vcBelow = _useMemo(() => (isVc ? buildVcSide(below, 1) : { nodes: [], groups: [] }), [isVc, below, vp]);
 
   // 세로 사이드: 가로로 펼친 행. 가로 사이드: 앵커 높이 좌우로 세로 살짝 퍼진 열.
   const layoutRow = (items, y) => {
@@ -1747,6 +1803,19 @@ function EgoView({ anchor, layer, onLayerChange, onReRoot }) {
     setOverflowSide(null);
     setHoverCode(null);
   }, [layer, isVc, anchor.t]);
+
+  // UX-034: 열려 있는 일시 레이어를 **한 번에 하나씩** 닫고 닫았는지 보고한다.
+  // 순서 = 화면에 겹친 순서(비상장 팝오버가 묶음 팝업 위에 뜬다). false를 반환하면
+  // App의 goBack이 다음 단계(오버레이 → 단계 이동)로 진행한다.
+  _useEffect(() => {
+    if (!dismissRef) return undefined;
+    dismissRef.current = () => {
+      if (unlistedInfo) { setUnlistedInfo(null); return true; }
+      if (overflowSide) { setOverflowSide(null); return true; }
+      return false;
+    };
+    return () => { dismissRef.current = null; };
+  }, [dismissRef, unlistedInfo, overflowSide]);
 
   _useEffect(() => {
     window.__egoDebug = {
@@ -3235,7 +3304,8 @@ function useStockQuote(ticker) {
 
 // ─── Intro screen ──────────────────────────────────────────────────────────
 // ─── Top tabs ──────────────────────────────────────────────────────────────
-function TopTabs({ active, onChange, breadcrumb, onBack, canGoBack }) {
+// UX-030: 상단 BACK 버튼 폐지 — ESC/Backspace 키(goBack)와 기능이 완전히 중복이라 UI에 노출하지 않는다.
+function TopTabs({ active, onChange, breadcrumb }) {
   const kospi = useKospiQuote();
   const kosdaq = useKosdaqQuote();
   const isUp = Number(kospi.changePct) >= 0;
@@ -3254,7 +3324,7 @@ function TopTabs({ active, onChange, breadcrumb, onBack, canGoBack }) {
           <div className="top-breadcrumb">
             {breadcrumb.map((b, i) => (
               <React.Fragment key={i}>
-                <span className={"crumb " + (b.onClick ? 'is-clickable' : '')} onClick={b.onClick}>{b.label}</span>
+                <span className={"crumb " + (b.onClick ? 'is-clickable ' : '') + (b.fixed ? 'is-fixed' : '')} onClick={b.onClick}>{b.label}</span>
                 {i < breadcrumb.length - 1 && <span className="crumb-sep">›</span>}
               </React.Fragment>
             ))}
@@ -3270,12 +3340,6 @@ function TopTabs({ active, onChange, breadcrumb, onBack, canGoBack }) {
             </div>
           ))}
         </div>
-        {canGoBack && (
-          <button className="top-back-btn" onClick={onBack} title="뒤로가기 (ESC)">
-            <span className="top-back-arrow">←</span>
-            <span>BACK</span>
-          </button>
-        )}
       </div>
       <div className="top-tabs-status">
         <div className="index-row">
@@ -3980,6 +4044,9 @@ function App() {
   const [egoAnchor, setEgoAnchor] = useState(null);
   const [egoStatus, setEgoStatus] = useState('idle'); // idle | loading | ok | error
   const [egoChain, setEgoChain] = useState([]); // [{code,name,sectorKo}] re-root 브레드크럼
+  // UX-034: EgoView가 열어둔 일시 레이어(묶음 팝업·비상장 팝오버)를 goBack 사다리 최상단에서
+  // 닫기 위한 핸들. EgoView가 채우고, 언마운트 시 스스로 비운다.
+  const egoDismissRef = useRef(null);
   const egoCacheRef = useRef(new Map());
   // U3: 레이어 토글 상태 — re-root로 기업이 바뀌어도 유지(레이어 비교 탐색 흐름).
   // 데이터 없는 기업에선 EgoView가 지배구조로 안전 폴백(hasVc 가드).
@@ -4192,6 +4259,10 @@ function App() {
   // → (관련 기업 클릭 등으로 섹터를 건너뛴 히스토리가 있으면 그 직전 상태로 복원)
   // → company → sector → (galaxy에서 섹터 선택만 된 상태) 해제
   const goBack = useCallback(() => {
+    // UX-034: 사다리 최상단 = 지금 화면에 떠 있는 EgoView 일시 레이어(묶음 팝업·비상장
+    // 팝오버). 이걸 건너뛰면 ESC가 팝업을 남겨둔 채 단계를 이동해(re-root 체인 되돌림)
+    // 다른 기업으로 점프한 것처럼 보인다 — 리더 보고 사례.
+    if (egoDismissRef.current && egoDismissRef.current()) return;
     if (discDetailItem) { setDiscDetailItem(null); return; }
     if (discFullOverlayTicker) { setDiscFullOverlayTicker(null); return; }
     if (corpOverlayTicker) { setCorpOverlayTicker(null); return; }
@@ -4218,7 +4289,7 @@ function App() {
     if (activeSectorId) { setActiveSectorId(null); return; }
   }, [discDetailItem, discFullOverlayTicker, corpOverlayTicker, phase, activeSectorId,
       backToSector, backToGalaxy, egoChain, jumpEgoChain]);
-  const canGoBack = !!(discDetailItem || discFullOverlayTicker || corpOverlayTicker || phase !== 'galaxy' || activeSectorId);
+  // UX-030: canGoBack(상단 BACK 버튼 가시성 플래그)은 버튼 폐지와 함께 제거. goBack은 ESC/Backspace 전용.
 
   // ESC / Backspace 키 → goBack. Backspace는 채팅 입력창 등 텍스트 편집 중엔 원래 동작(글자 삭제)을 그대로 두고,
   // 포커스가 입력 요소가 아닐 때만 뒤로가기로 취급한다 (ESC는 입력 포커스와 무관하게 항상 뒤로가기).
@@ -4258,7 +4329,9 @@ function App() {
   if (phase === 'sector' || phase === 'company') {
     crumb.push({ label: 'GALAXY', onClick: backToGalaxy });
     if (sector) crumb.push({ label: sector.ko, onClick: activeMarket ? backToSectorOverview : null });
-    if (activeMarket) crumb.push({ label: activeMarket, onClick: phase === 'company' ? backToSector : null });
+    // UX-031: 시장 라벨(KOSPI/KOSDAQ)은 구조 표지라 축약 대상 외 — 폭이 모자라면
+    // 긴 섹터·기업명이 …로 줄고 이 크럼은 온전히 남는다.
+    if (activeMarket) crumb.push({ label: activeMarket, fixed: true, onClick: phase === 'company' ? backToSector : null });
   }
   if (phase === 'company' && company) crumb.push({ label: company.name });
 
@@ -4298,6 +4371,7 @@ function App() {
                   layer={egoLayer}
                   onLayerChange={setEgoLayer}
                   onReRoot={reRootEgo}
+                  dismissRef={egoDismissRef}
                 />
               ) : (
                 <SectorMap
@@ -4312,7 +4386,7 @@ function App() {
             </div>
           )}
 
-          <TopTabs active={activeTab} onChange={setActiveTab} breadcrumb={crumb} onBack={goBack} canGoBack={canGoBack} />
+          <TopTabs active={activeTab} onChange={setActiveTab} breadcrumb={crumb} />
 
           {/* Top-left panel — varies by phase and active tab */}
           {activeTab === 'finance' ? (
