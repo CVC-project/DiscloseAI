@@ -125,3 +125,34 @@ def test_clean_note_title_cuts_body_that_follows_heading():
 def test_split_inbody_ignores_short_block():
     assert sectioner._find_note_section("<TITLE>3. 연결재무제표 주석</TITLE>해당사항 없음", "conn")
     assert sectioner._split_conn_notes("<TITLE>3. 연결재무제표 주석</TITLE>해당사항 없음") == []
+
+
+def test_account_word_note_title_is_not_a_section_boundary():
+    """V-098 (403870 HPSP 2025 실공시): 계정과목형 주석 제목은 절 경계가 아니다.
+
+    주1~10은 <P>/<SPAN> 머리글이다가 **주11부터 <TITLE> 머리글로 전환**되는 문서에서
+    `<TITLE>11. 재고자산</TITLE>`(목차 앵커 AASSOCNOTE 없음)이 `_SECT_BOUND_RE`의
+    계정과목 어휘에 걸려 절 경계로 오판됐다 — 블록이 주10에서 잘려 주11~34
+    (실공시에선 주33 특수관계자 포함)가 통째로 유실됐다. 경계 인정은 AASSOCNOTE가
+    있는 진짜 목차 절뿐이다.
+    """
+    html = _load("f2_title_switch_account_word.xml")
+    notes = sectioner._split_sep_notes(html)
+    nos = [no for no, _, _ in notes]
+    # 종전 버그: 주11에서 절단 → ['1'..'10']. 수정 후 11·12가 살아야 한다.
+    assert "11" in nos and "12" in nos, f"주11 이후 유실: {nos}"
+    assert any(no == "11" and "재고자산" in t for no, t, _ in notes)
+    # 진짜 목차 절(AASSOCNOTE 보유 '6. 배당에 관한 사항')은 여전히 경계다 —
+    # 배당 절 본문이 어떤 노트에도 섞이면 안 된다.
+    assert not any("배당에 관한 회사의 정책" in b for _, _, b in notes)
+
+
+def test_account_word_with_anchor_still_bounds():
+    """AASSOCNOTE를 가진 계정과목형 TITLE은 종전대로 절 경계다(완화 아님을 박제)."""
+    html = _load("f2_title_switch_account_word.xml").replace(
+        '<TITLE ATOC="Y" ENG="11. Inventories" ATOCID="74">',
+        '<TITLE ATOC="Y" AASSOCNOTE="D-0-3-8-2" ENG="11. Inventories" ATOCID="74">',
+    )
+    notes = sectioner._split_sep_notes(html)
+    nos = [no for no, _, _ in notes]
+    assert "11" not in nos, f"앵커 보유 경계가 무시됨: {nos}"

@@ -118,6 +118,16 @@ _SECT_BOUND_RE = re.compile(
     r"|^\s*[\d.\-]+\s*(?:요약재무정보|연결재무제표|재무제표|배당에\s*관한\s*사항"
     r"|증권의\s*발행|기타\s*재무에\s*관한\s*사항|대손충당금|재고자산)\s*(?:\(.*\))?\s*$"
 )
+# ⚠️ 위 경계 어휘 중 `대손충당금`·`재고자산`은 **주석 제목으로도 쓰이는 계정과목**이라
+# 충돌한다(V-098, HPSP 2025 실측): 주1~10이 <P>/<SPAN>이다가 **주11부터 <TITLE>로
+# 마크업이 전환**되는 문서에서 `<TITLE>11. 재고자산</TITLE>`이 목차 절로 오판돼 블록이
+# 잘리고, 주11~33(특수관계자 포함)이 통째로 유실됐다. 목차 절 TITLE은 문서 구조 앵커
+# `AASSOCNOTE="D-..."`를 갖고 본문 주석 TITLE은 갖지 않는다 — 계정과목형 경계는
+# **AASSOCNOTE가 있을 때만** 인정한다(로마숫자·【·재무제표류 절 이름은 종전 그대로).
+_ACCOUNT_BOUND_RE = re.compile(
+    r"^\s*[\d.\-]+\s*(?:대손충당금|재고자산)\s*(?:\(.*\))?\s*$"
+)
+_TITLE_ATTR_ITER_RE = re.compile(r"<TITLE([^>]*)>(.{0,200}?)</TITLE>", re.S)
 # 블록 안 주석 머리글 — 원소 첫머리의 'N. 제목'. 머리글 원소가 본문까지 품는 공시가
 # 많아(`<P>33. 특수관계자 거래(1) 보고기간종료일 현재…</P>`) 닫는 태그를 요구하지 않고
 # 제목은 _clean_note_title이 자른다. 뒤에 숫자·점·닫는 괄호가 오면 하위번호(2.1)·
@@ -174,8 +184,12 @@ def _clean_note_title(raw: str) -> str:
 def _find_note_section(full_xml: str, kind: str) -> str:
     """목차의 주석 절 블록(최장) 반환 — kind in {'conn','sep'}. 없으면 ''."""
     titles = [
-        (m.start(), re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", m.group(1))).strip())
-        for m in _TITLE_ITER_RE.finditer(full_xml)
+        (
+            m.start(),
+            re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", m.group(2))).strip(),
+            m.group(1),  # 태그 속성 원문 — 계정과목형 경계의 목차 앵커 판정용(V-098)
+        )
+        for m in _TITLE_ATTR_ITER_RE.finditer(full_xml)
     ]
 
     def is_head(t: str) -> bool:
@@ -183,17 +197,24 @@ def _find_note_section(full_xml: str, kind: str) -> str:
             return bool(_CONN_SECT_RE.match(t))
         return bool(_SEP_SECT_RE.match(t)) and "연결" not in t
 
+    def is_bound(t: str, attrs: str) -> bool:
+        if _CONN_SECT_RE.match(t) or (_SEP_SECT_RE.match(t) and "연결" not in t):
+            return True
+        if not _SECT_BOUND_RE.match(t):
+            return False
+        # 계정과목형(`N. 재고자산`·`N. 대손충당금`)은 주석 제목과 충돌한다 —
+        # 목차 앵커(AASSOCNOTE)가 있는 진짜 절일 때만 경계로 본다(V-098).
+        if _ACCOUNT_BOUND_RE.match(t) and "AASSOCNOTE" not in attrs.upper():
+            return False
+        return True
+
     best = ""
-    for i, (pos, t) in enumerate(titles):
+    for i, (pos, t, _a) in enumerate(titles):
         if not is_head(t):
             continue
         end = len(full_xml)
-        for pos2, t2 in titles[i + 1 :]:
-            if (
-                _SECT_BOUND_RE.match(t2)
-                or _CONN_SECT_RE.match(t2)
-                or (_SEP_SECT_RE.match(t2) and "연결" not in t2)
-            ):
+        for pos2, t2, a2 in titles[i + 1 :]:
+            if is_bound(t2, a2):
                 end = pos2
                 break
         if end - pos > len(best):
@@ -389,12 +410,18 @@ def find_biz_section(html: str) -> tuple[int, int] | None:
     return start, min(end, start + _BIZ_CAP)
 
 
-def section_all(tickers: list[str] | None = None) -> None:
+def section_all(
+    tickers: list[str] | None = None, rcept_nos: list[str] | None = None
+) -> None:
+    """rcept_nos: 보고서 단위 필터(V-098 절단 의심군처럼 **특정 연도만** 재섹셔닝할 때).
+    ticker 필터는 그 회사 전 연도를 다시 돌므로, 표적이 rcept 목록이면 이쪽이 정확하고 싸다."""
     init_local_db()
     sess = get_local_session()
     q = sess.query(ReportRaw)
     if tickers:
         q = q.filter(ReportRaw.ticker.in_(set(tickers)))
+    if rcept_nos:
+        q = q.filter(ReportRaw.rcept_no.in_(set(rcept_nos)))
     for raw in q.all():
         html = _load_raw(raw.raw_path)
         if not html:
