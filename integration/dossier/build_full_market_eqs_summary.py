@@ -75,7 +75,9 @@ def build_row(path: Path) -> dict[str, Any] | None:
         "eqs_method": eqs.get("method"),
         "eqs_excluded": eqs.get("excluded") or [],
         "eqs_modules": modules,
-        "eqs_module_notes": {k: v.get("note") for k, v in modules.items() if isinstance(v, dict)},
+        "eqs_module_notes": {
+            k: v.get("note") for k, v in modules.items() if isinstance(v, dict)
+        },
     }
     for key in ["M1", "M2", "M3", "M4", "M5", "F1", "F2", "F3", "F4", "F5"]:
         row[f"eqs_{key.lower()}"] = (modules.get(key) or {}).get("score")
@@ -103,7 +105,9 @@ def main() -> int:
         },
         "data": rows,
     }
-    OUT_PATH.write_text(json.dumps(payload, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    OUT_PATH.write_text(
+        json.dumps(payload, ensure_ascii=False, separators=(",", ":")), encoding="utf-8"
+    )
     print(json.dumps(payload["meta"], ensure_ascii=False, indent=2))
     return 0
 

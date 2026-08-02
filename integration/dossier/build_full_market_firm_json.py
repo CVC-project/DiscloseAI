@@ -36,7 +36,10 @@ _ROOT = os.path.abspath(os.path.join(_HERE, "..", ".."))
 sys.path.insert(0, _ROOT)
 
 from modules.financial.eqs.types import FirmPanel, FirmYear  # noqa: E402
-from modules.financial.translator.ratios import compute_ratios, LABELS as RATIO_LABELS  # noqa: E402
+from modules.financial.translator.ratios import (
+    compute_ratios,
+    LABELS as RATIO_LABELS,
+)  # noqa: E402
 from modules.financial.translator.highlights import extract_highlights  # noqa: E402
 from modules.financial.translator.translate import translate_all  # noqa: E402
 from modules.financial.glossary import GLOSSARY  # noqa: E402
@@ -82,7 +85,9 @@ def build() -> dict[str, dict]:
     master = _load_json(_MASTER_PATH)
     ticker_by_corp = {c["corp_code"]: c["ticker"] for c in master["companies"]}
     industry_name_by_corp = {
-        c["corp_code"]: c["industry_name"] for c in master["companies"] if c["industry_name"]
+        c["corp_code"]: c["industry_name"]
+        for c in master["companies"]
+        if c["industry_name"]
     }
 
     panels: dict[str, FirmPanel] = {}
@@ -135,7 +140,9 @@ def build() -> dict[str, dict]:
             continue
 
         is_financial = corp_code in feqs_scores
-        score_row = feqs_scores.get(corp_code) if is_financial else eqs_scores.get(corp_code)
+        score_row = (
+            feqs_scores.get(corp_code) if is_financial else eqs_scores.get(corp_code)
+        )
         if score_row is None:
             continue
 
@@ -181,7 +188,9 @@ def build() -> dict[str, dict]:
         ]
         glossary_keys += [m["name"] for m in score_row.get("modules", [])]
         glossary = {
-            k: GLOSSARY[k].as_dict() for k in dict.fromkeys(glossary_keys) if k in GLOSSARY
+            k: GLOSSARY[k].as_dict()
+            for k in dict.fromkeys(glossary_keys)
+            if k in GLOSSARY
         }
 
         years_list = [y.year for y in panel.years]
@@ -207,9 +216,11 @@ def build() -> dict[str, dict]:
                 "modules": score_row.get("modules", []),
                 "method": score_row.get(
                     "method",
-                    "feqs_v1_financial_peer_percentile_2021_2025"
-                    if is_financial
-                    else "eqs_v3_industry_percentile",
+                    (
+                        "feqs_v1_financial_peer_percentile_2021_2025"
+                        if is_financial
+                        else "eqs_v3_industry_percentile"
+                    ),
                 ),
             },
             "ratios": {

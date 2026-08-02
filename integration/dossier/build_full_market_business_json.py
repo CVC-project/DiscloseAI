@@ -44,7 +44,9 @@ def load_json(path: Path) -> Any:
 
 
 def dump_json(path: Path, payload: Any) -> None:
-    path.write_text(json.dumps(payload, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    path.write_text(
+        json.dumps(payload, ensure_ascii=False, separators=(",", ":")), encoding="utf-8"
+    )
 
 
 def clean_name(name: str | None) -> str:
@@ -157,7 +159,11 @@ def latest_summaries() -> dict[str, dict[str, Any]]:
 
 def master_by_corp() -> dict[str, dict[str, Any]]:
     master = load_json(MASTER_PATH)
-    return {str(row["corp_code"]).zfill(8): row for row in master.get("companies", []) if row.get("corp_code")}
+    return {
+        str(row["corp_code"]).zfill(8): row
+        for row in master.get("companies", [])
+        if row.get("corp_code")
+    }
 
 
 def firm_by_ticker(ticker: str) -> dict[str, Any] | None:
@@ -199,14 +205,26 @@ def build_custom_ideas(summary: dict[str, Any], category: str) -> list[dict[str,
     if revenue or profit:
         bits = []
         if revenue:
-            bits.append(f"{revenue.get('item')}: {revenue.get('value')} ({revenue.get('yoy') or '전년 대비 정보 없음'})")
+            bits.append(
+                f"{revenue.get('item')}: {revenue.get('value')} ({revenue.get('yoy') or '전년 대비 정보 없음'})"
+            )
         if profit:
-            bits.append(f"{profit.get('item')}: {profit.get('value')} ({profit.get('yoy') or '전년 대비 정보 없음'})")
+            bits.append(
+                f"{profit.get('item')}: {profit.get('value')} ({profit.get('yoy') or '전년 대비 정보 없음'})"
+            )
         cards.append(
             {
                 "title": "실적 변화",
                 "value": " · ".join(bits[:2]),
-                "fact": " / ".join(filter(None, [revenue and revenue.get("explain"), profit and profit.get("explain")])),
+                "fact": " / ".join(
+                    filter(
+                        None,
+                        [
+                            revenue and revenue.get("explain"),
+                            profit and profit.get("explain"),
+                        ],
+                    )
+                ),
                 "view": "매출이 커졌는지와 본업 이익이 같이 좋아졌는지를 함께 보면 사업 흐름을 더 쉽게 볼 수 있습니다.",
             }
         )
@@ -225,14 +243,20 @@ def build_custom_ideas(summary: dict[str, Any], category: str) -> list[dict[str,
             {
                 "title": "회사 이해 포인트",
                 "value": f"{category} 사업을 중심으로 요약했습니다.",
-                "fact": compact(summary.get("investor_notes") or "사업보고서 요약 원천을 바탕으로 주요 사업과 제품을 정리했습니다.", 180),
+                "fact": compact(
+                    summary.get("investor_notes")
+                    or "사업보고서 요약 원천을 바탕으로 주요 사업과 제품을 정리했습니다.",
+                    180,
+                ),
                 "view": "사업부문과 제품을 먼저 확인한 뒤, 실적과 재무제표를 이어서 보면 됩니다.",
             }
         )
     return cards[:3]
 
 
-def build_business_json(summary: dict[str, Any], master: dict[str, Any]) -> dict[str, Any]:
+def build_business_json(
+    summary: dict[str, Any], master: dict[str, Any]
+) -> dict[str, Any]:
     ticker = str(master["ticker"]).zfill(6)
     firm = firm_by_ticker(ticker) or {}
     latest_year = None
@@ -256,7 +280,9 @@ def build_business_json(summary: dict[str, Any], master: dict[str, Any]) -> dict
         "overview": compact(summary.get("investor_notes"), 900),
         "segment_finance": compact(summary.get("investor_notes"), 700),
         "segment_breakdown": [s for s in segments if s["name"]],
-        "products": [str(p).strip() for p in (summary.get("products") or []) if str(p).strip()][:12],
+        "products": [
+            str(p).strip() for p in (summary.get("products") or []) if str(p).strip()
+        ][:12],
         "investor_note": compact(summary.get("investor_notes"), 700),
     }
 
@@ -287,7 +313,11 @@ def build_business_json(summary: dict[str, Any], master: dict[str, Any]) -> dict
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--overwrite-curated", action="store_true", help="Overwrite existing 48 curated business JSONs.")
+    parser.add_argument(
+        "--overwrite-curated",
+        action="store_true",
+        help="Overwrite existing 48 curated business JSONs.",
+    )
     args = parser.parse_args()
 
     summaries = latest_summaries()
