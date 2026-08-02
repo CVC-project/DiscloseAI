@@ -4043,8 +4043,7 @@ function App() {
   // 폴백한다(FN-005 사다리 패턴, graph_top50 경로 회귀 무손상 — UX-010).
   const [egoAnchor, setEgoAnchor] = useState(null);
   const [egoStatus, setEgoStatus] = useState('idle'); // idle | loading | ok | error
-  const [egoChain, setEgoChain] = useState([]); // [{code,name,sectorKo}] re-root 브레드크럼
-  // UX-034: EgoView가 열어둔 일시 레이어(묶음 팝업·비상장 팝오버)를 goBack 사다리 최상단에서
+  // UX-034: EgoView가 열어둔 일시 레이어(묶음 팝업·비상장 팝오버)를 goBack 최상단에서
   // 닫기 위한 핸들. EgoView가 채우고, 언마운트 시 스스로 비운다.
   const egoDismissRef = useRef(null);
   const egoCacheRef = useRef(new Map());
@@ -4060,20 +4059,38 @@ function App() {
   const [zoomProgress, setZoomProgress] = useState(0);
   const zoomAnimRef = useRef(0);
 
-  // 뒤로가기 히스토리 — "관련 기업(ghost)" 클릭처럼 sector/company를 한번에 건너뛰는 이동을
-  // ESC/BACK이 한 단계씩 되돌릴 수 있도록, 그런 이동 직전 상태를 스택에 남겨둔다.
-  // (매 렌더마다 최신값으로 갱신되는 ref라서 콜백 안에서 항상 "이동 직전" 스냅샷을 정확히 읽는다.)
-  const navStateRef = useRef({ phase, activeSectorId, activeCompanyCode });
-  navStateRef.current = { phase, activeSectorId, activeCompanyCode };
-  const navHistoryRef = useRef([]);
+  // ─── UX-035: 단일 뒤로가기 스택 ─────────────────────────────────────────
+  // ESC 재정의(리더 지시 — "전반적으로 구조적인 수정"). 그 전까지 되돌림 메커니즘이
+  // 4개(navHistory·egoChain·계층 사다리·ego 팝업)로 갈라져 있었고, 각각 push/clear
+  // 시점이 달라 ESC가 시간 역순이 아니라 고정 우선순위로 동작했다 — 상황마다 다르게
+  // 깨진 원인. 표준 관례(WAI-ARIA dialog: ESC는 최상단 일시 레이어만 · Android
+  // back-stack: 화면 이동은 방문 역순 LIFO, 상태까지 복원)를 따라 하나로 합친다:
+  //   ① 일시 레이어(팝업·오버레이) — 열린 역순으로 하나씩
+  //   ② 화면 전환 — 모든 전환 액션이 직전 스냅샷(phase·섹터·시장·기업·ego레이어)을
+  //      push, ESC가 pop해 통째로 복원. "ESC = 직전 화면"(브라우저 back과 동일 문법).
+  //   ③ 스택 소진(딥링크 등) — 계층 상승 폴백 (company→시장→개요→galaxy)
+  // navStateRef: 매 렌더마다 최신값으로 갱신되는 ref — 액션 콜백 안에서 항상
+  // "이동 직전" 스냅샷을 정확히 읽는다(여러 setState가 배칭돼도 렌더 전이라 안전).
+  const navStateRef = useRef({ phase, activeSectorId, activeMarket, activeCompanyCode, egoLayer });
+  navStateRef.current = { phase, activeSectorId, activeMarket, activeCompanyCode, egoLayer };
+  const backNavRef = useRef([]);     // ② 화면 스냅샷 스택 (LIFO)
+  const layerStackRef = useRef([]);  // ① App 소유 일시 레이어 {id, close} (열린 순서대로)
+  const NAV_STACK_CAP = 60;
+  const pushNav = useCallback(() => {
+    const stack = backNavRef.current;
+    const snap = { ...navStateRef.current };
+    const top = stack[stack.length - 1];
+    // 연속 중복 방지 — 같은 화면을 두 번 쌓지 않는다(같은 기업 재클릭 등)
+    if (top && top.phase === snap.phase && top.activeSectorId === snap.activeSectorId
+        && top.activeMarket === snap.activeMarket && top.activeCompanyCode === snap.activeCompanyCode
+        && top.egoLayer === snap.egoLayer) return;
+    stack.push(snap);
+    if (stack.length > NAV_STACK_CAP) stack.shift();
+  }, []);
 
   // ENTER SECTOR — animate galaxy → sector
   const enterSector = useCallback((sectorId) => {
-    // galaxy에서 처음 섹터로 들어가는 정상 드릴다운은 히스토리에 남기지 않는다(기존 3단계 ESC 동작 유지).
-    // sector/company 단계에서 다른 섹터로 바로 건너뛸 때만(관련 기업 클릭, 섹터 리스트 직접 전환) 이전 상태를 남긴다.
-    if (navStateRef.current.phase !== 'galaxy') {
-      navHistoryRef.current.push({ ...navStateRef.current });
-    }
+    pushNav(); // UX-035: 모든 화면 전환이 직전 스냅샷을 남긴다 (정상 드릴다운 포함 — ESC가 그대로 역주행)
     cancelAnimationFrame(zoomAnimRef.current);
     setActiveSectorId(sectorId);
     setActiveMarket(null);   // 진입 시 성운 개요부터
@@ -4090,35 +4107,40 @@ function App() {
     zoomAnimRef.current = requestAnimationFrame(tick);
   }, []);
 
+  // UX-035: 브레드크럼·패널 ← 버튼의 상향 점프도 "화면 전환"이다 — push하고 이동한다.
+  // 히스토리를 지우지 않는다: ← GALAXY 후 ESC는 방금 보던 깊은 화면으로 되돌아간다
+  // (브라우저에서 홈 클릭 후 Back과 동일한 문법 — 점프의 실행취소).
   const backToGalaxy = useCallback(() => {
-    navHistoryRef.current = []; // 루트로 명시 리셋 — 남은 이동 히스토리는 더 이상 의미 없음
+    pushNav();
     cancelAnimationFrame(zoomAnimRef.current);
     setActiveCompanyCode(null);
     setActiveMarket(null);
     setPhase('galaxy');
     setActiveSectorId(null);
     setZoomProgress(0);
-  }, []);
+  }, [pushNav]);
 
   // 성운 개요로(드릴인·기업 해제)
   const backToSectorOverview = useCallback(() => {
+    pushNav();
     setActiveCompanyCode(null);
     setActiveMarket(null);
     setPhase('sector');
-  }, []);
+  }, [pushNav]);
 
   // 기업 → 시장 드릴인 뷰로 (activeMarket 유지)
   const backToSector = useCallback(() => {
-    navHistoryRef.current = []; // 명시적 "섹터로" 이동 — 이전 이동 히스토리는 폐기
+    pushNav();
     setActiveCompanyCode(null);
     setPhase('sector');
-  }, []);
+  }, [pushNav]);
 
   const enterMarket = useCallback((market) => {
+    pushNav();
     setActiveMarket(market);
     setActiveCompanyCode(null);
     setPhase('sector');
-  }, []);
+  }, [pushNav]);
 
   // FN-008: 기업 코드 → 소속 시장(KOSPI|KOSDAQ). named·dot 전 기업 커버(indexByCode).
   const marketOf = useCallback((code) => {
@@ -4129,17 +4151,18 @@ function App() {
   const selectCompany = useCallback((code) => {
     if (!code) {
       // null → deselect, return to sector view
+      pushNav();
       setActiveCompanyCode(null);
       setPhase('sector');
-      setEgoChain([]);
       return;
     }
+    if (navStateRef.current.activeCompanyCode === code && navStateRef.current.phase === 'company') return; // 같은 기업 재클릭 = 무이동
+    pushNav();
     setActiveCompanyCode(code);
     // FN-008: 시장 미설정(개요에서 dot 클릭 등)이면 그 기업의 시장으로 자동 드릴인
     setActiveMarket(prev => prev || marketOf(code));
     setPhase('company');
-    setEgoChain([]); // 새 진입 — ego fetch effect가 로드 성공 시 [{anchor}]로 시딩
-  }, [marketOf]);
+  }, [marketOf, pushNav]);
 
   const selectGhost = useCallback((code, sectorId) => {
     const targetSectorId = sectorId || (() => {
@@ -4159,7 +4182,7 @@ function App() {
     // ghost 기업의 소속 시장으로 즉시 드릴인 설정.
     setActiveMarket(marketOf(code));
     setPhase('company');
-    setEgoChain([]); // 새 진입(재구성 아님) — 체인 리셋
+    // UX-035: push는 enterSector가 이미 했다(같은 배칭 안 — navStateRef는 아직 이동 전 값)
   }, [enterSector, marketOf]);
 
   // ③ EgoView ego/<ticker>.json 지연 fetch — activeCompanyCode 변경마다(재구성 포함) 재실행.
@@ -4173,7 +4196,6 @@ function App() {
       if (json) {
         setEgoAnchor(json);
         setEgoStatus('ok');
-        setEgoChain(prev => prev.length ? prev : [{ code: json.t, name: json.n, sectorKo: json.s }]);
       } else {
         setEgoAnchor(null);
         setEgoStatus('error'); // → 렌더 분기가 SectorMap(allRelated)으로 폴백
@@ -4190,26 +4212,18 @@ function App() {
 
   // 이웃 노드 클릭 = 앵커 재구성(re-root) — valuechain §5 D5. 섹터·시장이 바뀌면 함께 갱신
   // (selectGhost와 동일한 크로스섹터 점프 패턴 — 어느 진입로든 전 상장사 도달 불변식).
+  // UX-035: 구 egoChain(재구성 전용 별도 체인)은 폐지 — 스냅샷 스택이 대체한다.
+  // 스냅샷은 egoLayer까지 담으므로 ESC 복귀 시 "그 기업의 그 레이어"(예: 밸류체인)가
+  // 그대로 돌아온다. 체인이 하던 UX-028 되돌림은 이 push 한 줄로 동일하게 성립.
   const reRootEgo = useCallback((code, name, sectorKo) => {
+    if (navStateRef.current.activeCompanyCode === code) return; // 자기 자신으로 재구성 = 무이동
+    pushNav();
     const targetSector = SECTOR_PALETTE.find(s => s.ko === sectorKo);
     if (targetSector && targetSector.id !== activeSectorId) setActiveSectorId(targetSector.id);
     setActiveCompanyCode(code);
     setActiveMarket(marketOf(code));
     setPhase('company');
-    setEgoChain(prev => [...prev, { code, name, sectorKo }]);
-  }, [activeSectorId, marketOf]);
-
-  // 브레드크럼 클릭 = 그 지점까지 체인 절단 후 재구성(추가 아님)
-  const jumpEgoChain = useCallback((index) => {
-    const entry = egoChain[index];
-    if (!entry) return;
-    const targetSector = SECTOR_PALETTE.find(s => s.ko === entry.sectorKo);
-    if (targetSector && targetSector.id !== activeSectorId) setActiveSectorId(targetSector.id);
-    setActiveCompanyCode(entry.code);
-    setActiveMarket(marketOf(entry.code));
-    setPhase('company');
-    setEgoChain(prev => prev.slice(0, index + 1));
-  }, [egoChain, activeSectorId, marketOf]);
+  }, [activeSectorId, marketOf, pushNav]);
 
   const [corpOverlayTicker, setCorpOverlayTicker] = useState(null);
   const [discDetailItem, setDiscDetailItem] = useState(null);
@@ -4255,40 +4269,68 @@ function App() {
   // 오버레이 열림 동안 배경 캔버스 draw 정지 (성능 §8)
   useEffect(() => { window.__dossierOpen = !!corpOverlayTicker; }, [corpOverlayTicker]);
 
-  // 단계별 뒤로가기 — 우선순위: 공시 상세/전체 오버레이 → CORPORATION DOSSIER 오버레이
-  // → (관련 기업 클릭 등으로 섹터를 건너뛴 히스토리가 있으면 그 직전 상태로 복원)
-  // → company → sector → (galaxy에서 섹터 선택만 된 상태) 해제
+  // UX-035 ①: App 소유 일시 레이어를 **열린 시점 순서대로** 스택에 등록한다.
+  // 고정 우선순위(discDetail → discFull → corpOverlay 하드코딩)가 아니라 실제 연 순서 —
+  // ESC가 닫는 순서는 항상 그 역순(LIFO). 각 effect의 cleanup이 닫힘과 동시에
+  // 스택에서 제거하므로(✕ 버튼 등 어떤 경로로 닫혀도) 스택에는 열린 레이어만 남는다.
+  useEffect(() => {
+    if (!discDetailItem) return undefined;
+    const entry = { id: 'discDetail', close: () => setDiscDetailItem(null) };
+    layerStackRef.current.push(entry);
+    return () => { const s = layerStackRef.current, i = s.indexOf(entry); if (i >= 0) s.splice(i, 1); };
+  }, [discDetailItem]);
+  useEffect(() => {
+    if (!discFullOverlayTicker) return undefined;
+    const entry = { id: 'discFull', close: () => setDiscFullOverlayTicker(null) };
+    layerStackRef.current.push(entry);
+    return () => { const s = layerStackRef.current, i = s.indexOf(entry); if (i >= 0) s.splice(i, 1); };
+  }, [discFullOverlayTicker]);
+  useEffect(() => {
+    if (!corpOverlayTicker) return undefined;
+    const entry = { id: 'corpOverlay', close: () => setCorpOverlayTicker(null) };
+    layerStackRef.current.push(entry);
+    return () => { const s = layerStackRef.current, i = s.indexOf(entry); if (i >= 0) s.splice(i, 1); };
+  }, [corpOverlayTicker]);
+
+  // UX-035: ESC/Backspace = 단일 뒤로가기 스택 (재정의 — 원장 참조).
+  //   ① 일시 레이어 — 열린 역순으로 하나씩 (ego 팝업은 컨텍스트 종속이라 항상 최신 = 최우선)
+  //   ② 화면 스냅샷 스택 — 직전 화면을 상태째 복원 (Android back-stack 문법)
+  //   ③ 스택 소진 — 계층 상승 폴백: company → 시장 드릴인 → 성운 개요 → galaxy → 선택 해제
+  // 전부 ref 경유라 goBack 자체는 재생성되지 않는다(키 리스너 1회 바인딩).
   const goBack = useCallback(() => {
-    // UX-034: 사다리 최상단 = 지금 화면에 떠 있는 EgoView 일시 레이어(묶음 팝업·비상장
-    // 팝오버). 이걸 건너뛰면 ESC가 팝업을 남겨둔 채 단계를 이동해(re-root 체인 되돌림)
-    // 다른 기업으로 점프한 것처럼 보인다 — 리더 보고 사례.
+    // ① 일시 레이어 — App 오버레이는 전부 화면을 덮으므로, 오버레이가 열려 있다면
+    // 그것이 항상 ego 팝업보다 나중이다(팝업은 캔버스가 노출된 동안만 열림) → 스택 먼저.
+    const layers = layerStackRef.current;
+    if (layers.length) { layers[layers.length - 1].close(); return; }
     if (egoDismissRef.current && egoDismissRef.current()) return;
-    if (discDetailItem) { setDiscDetailItem(null); return; }
-    if (discFullOverlayTicker) { setDiscFullOverlayTicker(null); return; }
-    if (corpOverlayTicker) { setCorpOverlayTicker(null); return; }
-    if (navHistoryRef.current.length > 0) {
-      const prev = navHistoryRef.current.pop();
+    // ② 화면 스냅샷 — 현재와 같은 화면(무이동 push 잔재)은 건너뛰고 처음 다른 화면 복원
+    const cur = navStateRef.current;
+    const nav = backNavRef.current;
+    while (nav.length) {
+      const snap = nav.pop();
+      if (snap.phase !== cur.phase || snap.activeSectorId !== cur.activeSectorId
+          || snap.activeMarket !== cur.activeMarket || snap.activeCompanyCode !== cur.activeCompanyCode
+          || snap.egoLayer !== cur.egoLayer) {
+        cancelAnimationFrame(zoomAnimRef.current);
+        setPhase(snap.phase);
+        setActiveSectorId(snap.activeSectorId);
+        setActiveMarket(snap.activeMarket);
+        setActiveCompanyCode(snap.activeCompanyCode);
+        setEgoLayer(snap.egoLayer);
+        setZoomProgress(snap.phase === 'galaxy' ? 0 : 1); // 이미 봤던 화면 — 줌 애니메이션 없이
+        return;
+      }
+    }
+    // ③ 계층 상승 폴백 (딥링크 진입 등 히스토리가 없을 때만)
+    if (cur.phase === 'company') { setActiveCompanyCode(null); setPhase('sector'); return; }
+    if (cur.phase === 'sector' && cur.activeMarket) { setActiveMarket(null); setActiveCompanyCode(null); return; }
+    if (cur.phase === 'sector') {
       cancelAnimationFrame(zoomAnimRef.current);
-      setPhase(prev.phase);
-      setActiveSectorId(prev.activeSectorId);
-      setActiveCompanyCode(prev.activeCompanyCode);
-      setZoomProgress(1); // 되돌아간 섹터는 이미 봤던 화면이라 줌 애니메이션 재생 없이 바로 표시
+      setActiveCompanyCode(null); setActiveMarket(null); setPhase('galaxy'); setActiveSectorId(null); setZoomProgress(0);
       return;
     }
-    // ★2026-07-30 (UX-028) EgoView re-root 체인을 **한 단계씩** 되돌린다.
-    // 그 전에는 A→B→C로 재구성해도 ESC가 곧바로 섹터로 빠져나가 중간 단계가 통째로
-    // 사라졌다. 캔버스 안에 있던 `← 직전기업명` 버튼(UX-012)은 리더 판단으로 제거했고,
-    // 그 역할을 **전역 뒤로가기 하나**(ESC·상단 뒤로가기 버튼)로 합쳤다 — 되돌림 계단이
-    // 한 곳에만 있어 두 affordance가 어긋날 여지가 없다.
-    if (phase === 'company' && egoChain.length > 1) {
-      jumpEgoChain(egoChain.length - 2);
-      return;
-    }
-    if (phase === 'company') { backToSector(); return; }
-    if (phase === 'sector') { backToGalaxy(); return; }
-    if (activeSectorId) { setActiveSectorId(null); return; }
-  }, [discDetailItem, discFullOverlayTicker, corpOverlayTicker, phase, activeSectorId,
-      backToSector, backToGalaxy, egoChain, jumpEgoChain]);
+    if (cur.activeSectorId) { setActiveSectorId(null); return; }
+  }, []);
   // UX-030: canGoBack(상단 BACK 버튼 가시성 플래그)은 버튼 폐지와 함께 제거. goBack은 ESC/Backspace 전용.
 
   // ESC / Backspace 키 → goBack. Backspace는 채팅 입력창 등 텍스트 편집 중엔 원래 동작(글자 삭제)을 그대로 두고,
@@ -4415,13 +4457,16 @@ function App() {
             mode={phase === 'galaxy' ? 'grid' : 'list'}
             onSelect={(id) => {
               if (phase === 'galaxy') {
-                setActiveSectorId(activeSectorId === id ? null : id);
-              } else {
-                // switch sectors directly
+                setActiveSectorId(activeSectorId === id ? null : id); // 선택 하이라이트 — 화면 전환 아님(push 없음, ESC 폴백이 해제)
+              } else if (id !== activeSectorId) {
+                // switch sectors directly — enterSector가 push (같은 배칭이라 스냅샷은 이동 전 값)
                 setActiveCompanyCode(null);
-                if (id !== activeSectorId) {
-                  enterSector(id);
-                }
+                enterSector(id);
+              } else if (navStateRef.current.activeCompanyCode) {
+                // UX-035: 같은 섹터 재클릭으로 기업만 해제하는 것도 화면 전환 — push해야 ESC로 복귀 가능
+                pushNav();
+                setActiveCompanyCode(null);
+                setPhase('sector');
               }
             }}
           />
