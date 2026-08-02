@@ -14,6 +14,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from business_card_quality import normalize_business_payload
+
 
 ROOT = Path(__file__).resolve().parents[2]
 FULLTEXT_DIR = ROOT / "modules" / "disclosure" / "data" / "fulltext"
@@ -335,7 +337,7 @@ def main() -> int:
         if out.exists() and not args.overwrite_curated:
             preserved += 1
             continue
-        payload = build_business_json(summary, row)
+        payload = normalize_business_payload(build_business_json(summary, row))
         dump_json(out, payload)
         written += 1
 
