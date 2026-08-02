@@ -3073,7 +3073,7 @@ function ScenarioIndexPanel({ scenarios, currentIndex, answeredSet, onJump }) {
   );
 }
 
-function TimeMachineTab({ scenarios, activeTab, onTabChange }) {
+function TimeMachineTab({ scenarios, activeTab, onTabChange, onSelectCompany, onHome }) {
   const allCats = React.useMemo(() => new Set(scenarios.map(s => s.category)), [scenarios]);
   const [activeCategories, setActiveCategories] = React.useState(allCats);
   const [currentIndex, setCurrentIndex] = React.useState(0);
@@ -3110,7 +3110,7 @@ function TimeMachineTab({ scenarios, activeTab, onTabChange }) {
   function handleJump(i) { setCurrentIndex(i); setTmPhase('question'); setTmChoice(null); }
   return (
     <div className="finance-tab">
-      <TopTabs active={activeTab} onChange={onTabChange} />
+      <TopTabs active={activeTab} onChange={onTabChange} onSelectCompany={onSelectCompany} onHome={onHome} />
       <ScenarioCard scenario={current} phase={tmPhase} choice={tmChoice} onChoose={handleChoose} onNext={handleNext} />
       <ScoreBoardPanel score={score} />
       <TmCategoryFilterPanel scenarios={scenarios} activeCategories={activeCategories} onToggle={toggleCategory} />
@@ -3303,9 +3303,143 @@ function useStockQuote(ticker) {
 }
 
 // ─── Intro screen ──────────────────────────────────────────────────────────
+// ─── Global company search ─────────────────────────────────────────────────
+// 전 상장사(company_master.json, ~2,700개) 대상 기업명 검색 + 자동완성.
+// 시가총액 데이터가 리포지토리 어디에도 없어(top50 eqs_summary조차 market_cap 전부 null)
+// 정렬은 일치도순(정확일치 > 접두일치 > 부분일치 > 티커일치)으로 처리한다.
+function highlightMatch(name, query) {
+  if (!query) return name;
+  const idx = name.indexOf(query);
+  if (idx === -1) return name;
+  return (
+    <>
+      {name.slice(0, idx)}
+      <mark>{name.slice(idx, idx + query.length)}</mark>
+      {name.slice(idx + query.length)}
+    </>
+  );
+}
+
+function CompanySearch({ onSelect }) {
+  const [query, setQuery] = useState('');
+  const [open, setOpen] = useState(false);
+  const [highlightIdx, setHighlightIdx] = useState(0);
+  const [index, setIndex] = useState(null); // null = 로딩 전
+  const boxRef = useRef(null);
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    let alive = true;
+    fetch('../dossier/data/company_master.json')
+      .then(r => (r.ok ? r.json() : null))
+      .then(d => {
+        if (!alive || !d || !Array.isArray(d.companies)) return;
+        setIndex(d.companies
+          .filter(c => c.company_name && c.ticker)
+          .map(c => ({ ticker: c.ticker, name: c.company_name, market: c.market || '' })));
+      })
+      .catch(() => {});
+    return () => { alive = false; };
+  }, []);
+
+  useEffect(() => {
+    function onDocDown(e) {
+      if (boxRef.current && !boxRef.current.contains(e.target)) setOpen(false);
+    }
+    document.addEventListener('mousedown', onDocDown);
+    return () => document.removeEventListener('mousedown', onDocDown);
+  }, []);
+
+  useEffect(() => { setHighlightIdx(0); }, [query]);
+
+  const results = useMemo(() => {
+    const q = query.trim();
+    if (!q || !index) return [];
+    const scored = [];
+    for (const c of index) {
+      const nameIdx = c.name.indexOf(q);
+      let score;
+      if (c.name === q) score = 0;
+      else if (nameIdx === 0) score = 1;
+      else if (nameIdx > 0) score = 2;
+      else if (c.ticker.startsWith(q)) score = 3;
+      else continue;
+      scored.push({ ...c, score, nameIdx: nameIdx === -1 ? 0 : nameIdx });
+    }
+    // 시가총액 데이터가 없어 순수 일치도(스코어 → 일치 위치)로만 정렬 — 그 외 임의 기준(이름 길이 등) 미사용.
+    // 동점이면 Array.sort의 안정 정렬 특성상 company_master.json 원본(티커 오름차순) 순서를 그대로 따른다.
+    scored.sort((a, b) => a.score - b.score || a.nameIdx - b.nameIdx);
+    return scored.slice(0, 5);
+  }, [query, index]);
+
+  function pick(c) {
+    if (!c) return;
+    onSelect(c.ticker);
+    setQuery('');
+    setOpen(false);
+    // 포커스를 검색창에 남겨두면 이후 키보드 Enter(ENTER SECTOR/CORPORATION 단축키)가
+    // 이 입력창에 먹혀버려 동작하지 않는다 — 선택 즉시 포커스를 비워준다.
+    if (inputRef.current) inputRef.current.blur();
+  }
+
+  function onKeyDown(e) {
+    // stopPropagation: 이 검색창에서 이미 처리한 키는 상위 document 리스너(다른 화면
+    // 단축키 — Enter=ENTER SECTOR/CORPORATION, Esc/Backspace=goBack)로 새지 않게 막는다.
+    // 안 막으면 검색 결과를 Enter로 고르는 순간, 방금 바뀐 화면 상태를 보고 상위 Enter
+    // 단축키가 곧바로 한 번 더 반응해 오버레이가 의도치 않게 같이 열려버린다.
+    if (e.key === 'Escape') {
+      if (open) { e.stopPropagation(); setOpen(false); }
+      return;
+    }
+    if (!results.length) return;
+    if (e.key === 'ArrowDown') { e.preventDefault(); setHighlightIdx(i => Math.min(results.length - 1, i + 1)); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); setHighlightIdx(i => Math.max(0, i - 1)); }
+    else if (e.key === 'Enter') { e.preventDefault(); e.stopPropagation(); pick(results[highlightIdx] || results[0]); }
+  }
+
+  return (
+    <div className="company-search" ref={boxRef}>
+      <div className="company-search-box">
+        <span className="company-search-icon">⌕</span>
+        <input
+          ref={inputRef}
+          className="company-search-input"
+          type="text"
+          placeholder="기업명 검색"
+          value={query}
+          onChange={(e) => { setQuery(e.target.value); setOpen(true); }}
+          onFocus={() => query && setOpen(true)}
+          onKeyDown={onKeyDown}
+        />
+      </div>
+      {open && query.trim() && (
+        <div className="company-search-drop">
+          {!index ? (
+            <div className="company-search-empty">불러오는 중…</div>
+          ) : results.length ? (
+            results.map((c, i) => (
+              <div
+                key={c.ticker}
+                className={"company-search-item " + (i === highlightIdx ? 'is-active' : '')}
+                onMouseEnter={() => setHighlightIdx(i)}
+                onMouseDown={(e) => { e.preventDefault(); pick(c); }}
+              >
+                <span className="cs-name">{highlightMatch(c.name, query.trim())}</span>
+                <span className="cs-meta">{c.ticker}{c.market ? ' · ' + c.market : ''}</span>
+              </div>
+            ))
+          ) : (
+            <div className="company-search-empty">검색 결과가 없어요</div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ─── Top tabs ──────────────────────────────────────────────────────────────
 // UX-030: 상단 BACK 버튼 폐지 — ESC/Backspace 키(goBack)와 기능이 완전히 중복이라 UI에 노출하지 않는다.
-function TopTabs({ active, onChange, breadcrumb }) {
+function TopTabs({ active, onChange, breadcrumb, onSelectCompany, onHome }) {
   const kospi = useKospiQuote();
   const kosdaq = useKosdaqQuote();
   const isUp = Number(kospi.changePct) >= 0;
@@ -3318,8 +3452,10 @@ function TopTabs({ active, onChange, breadcrumb }) {
   return (
     <div className="top-tabs">
       <div className="top-tabs-brand">
-        <div className="top-brand-mark">◉</div>
-        <div className="top-brand-name">DISCLOSE<span style={{color:'#74EEC6'}}>AI</span></div>
+        <div className="top-brand-clickable" onClick={onHome} title="홈으로">
+          <div className="top-brand-mark">◉</div>
+          <div className="top-brand-name">DISCLOSE<span style={{color:'#74EEC6'}}>AI</span></div>
+        </div>
         {breadcrumb && (
           <div className="top-breadcrumb">
             {breadcrumb.map((b, i) => (
@@ -3340,6 +3476,7 @@ function TopTabs({ active, onChange, breadcrumb }) {
             </div>
           ))}
         </div>
+        {onSelectCompany && <CompanySearch onSelect={onSelectCompany} />}
       </div>
       <div className="top-tabs-status">
         <div className="index-row">
@@ -4229,6 +4366,32 @@ function App() {
   const [discDetailItem, setDiscDetailItem] = useState(null);
   const [discFullOverlayTicker, setDiscFullOverlayTicker] = useState(null);
   const [dossierTab, setDossierTab] = useState('business');
+
+  // 전역 기업 검색(TopTabs 검색창) → 선택 시 이동.
+  // 그래프에 있는 기업(top50)은 selectGhost로 섹터·관계도 미니 뷰까지 재현하고,
+  // 그 밖의 기업(company_master 전체 ~2,700개)은 CORPORATION DOSSIER 오버레이로 바로 진입.
+  const goToCompanyFromSearch = useCallback((code) => {
+    if (!code) return;
+    setActiveTab('finance');
+    const RD = window.__realData || {};
+    const inGraph = RD.nodeByCode && RD.nodeByCode[code];
+    if (inGraph) {
+      selectGhost(code);
+    } else {
+      setCorpOverlayTicker(code);
+      setDossierTab('business');
+    }
+  }, [selectGhost]);
+
+  // 좌상단 DISCLOSEAI 로고 클릭 → 어느 화면에서든 홈(갤럭시 최상위)으로 복귀.
+  const goHome = useCallback(() => {
+    backToGalaxy();
+    setActiveTab('finance');
+    setCorpOverlayTicker(null);
+    setDiscFullOverlayTicker(null);
+    setDiscDetailItem(null);
+  }, [backToGalaxy]);
+
   const [aiOpen, setAiOpen] = useState(false); // AI 사이드바 접기/펼치기 (기본 접힘)
   // 현금 은하수 탭 활성 티커 — dossier/data/galaxy_index.json 매니페스트 로드(build_galaxy_index.py 생성).
   // 하드코딩 대신 매니페스트라 새 골든 추가 시 스크립트 재실행만으로 UI 자동 반영(V-054).
@@ -4259,6 +4422,25 @@ function App() {
     if (!activeCompanyCode) return;
     setDiscFullOverlayTicker(activeCompanyCode);
   }, [activeCompanyCode]);
+
+  // 키보드 Enter로도 ENTER SECTOR / ENTER CORPORATION 버튼과 동일하게 진입.
+  // 검색창·AI 챗 입력창 등에 포커스가 있을 때(타이핑 중 Enter)는 건드리지 않는다.
+  useEffect(() => {
+    function onKeyDown(e) {
+      if (e.key !== 'Enter') return;
+      const tag = (document.activeElement && document.activeElement.tagName) || '';
+      if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+      if (corpOverlayTicker || discFullOverlayTicker) return; // 오버레이 열려있을 땐 무시
+      const onGraphView = activeTab === 'finance' || activeTab === 'disclose';
+      if (onGraphView && phase === 'galaxy' && activeSectorId) {
+        enterSector(activeSectorId);
+      } else if (activeTab === 'finance' && phase === 'company' && activeCompanyCode) {
+        enterCorporation();
+      }
+    }
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [activeTab, phase, activeSectorId, activeCompanyCode, corpOverlayTicker, discFullOverlayTicker, enterSector, enterCorporation]);
 
   // 딥링크: ?corp=<ticker> 로 CORPORATION DOSSIER 오버레이 바로 열기 (로컬 테스트 편의)
   useEffect(() => {
@@ -4428,7 +4610,7 @@ function App() {
             </div>
           )}
 
-          <TopTabs active={activeTab} onChange={setActiveTab} breadcrumb={crumb} />
+          <TopTabs active={activeTab} onChange={setActiveTab} breadcrumb={crumb} onSelectCompany={goToCompanyFromSearch} onHome={goHome} />
 
           {/* Top-left panel — varies by phase and active tab */}
           {activeTab === 'finance' ? (
@@ -4487,6 +4669,8 @@ function App() {
           scenarios={(window.__realData && window.__realData.scenarios) || []}
           activeTab={activeTab}
           onTabChange={setActiveTab}
+          onSelectCompany={goToCompanyFromSearch}
+          onHome={goHome}
         />
       )}
 
