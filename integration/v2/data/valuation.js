@@ -42,10 +42,21 @@
     return num * 1e12;
   }
 
-  // 노드 하나의 시총(원) — 정식 market_cap 우선, 없으면 mc 문자열 파싱.
+  // 노드 하나의 시총(원) — 정식 market_cap 우선, 그다음 mc(숫자|문자열).
+  //
+  // ★2026-08-02 (FN-015) `mc`는 **두 형태**로 들어온다 — 규약을 리졸버마다 다르게
+  // 가정하면 조용히 죽는다. universe 경로에서 loader가 `mc: parseMcWon(n.mc)`로
+  // **숫자(원)**를 넣는데(loader.js), 여기서는 parseMcString이 `typeof s !== "string"`
+  // 이면 즉시 null이라 **400개 전량 null**이 됐다. market_cap도 eqs_summary에서
+  // 47/47 결측이라 1차 분기가 못 받쳐 PER·PBR·섹터 P/E·시총 라벨이 통째로 사라졌다
+  // (실측: 삼성전자 시가총액이 레이아웃용 클램프값 600조원으로 오표기).
+  // adapter.js `_capJo`는 이미 `typeof m.mc === "number"` 분기를 갖고 정상 동작했다
+  // — 같은 입력에 두 리졸버가 다른 답을 내던 것이 근본 원인이라 규약을 통일한다.
   function resolveMarketCap(n) {
-    if (n && n.market_cap) return n.market_cap;
-    return n ? parseMcString(n.mc) : null;
+    if (!n) return null;
+    if (n.market_cap) return n.market_cap;
+    if (typeof n.mc === "number") return Number.isFinite(n.mc) ? n.mc : null;
+    return parseMcString(n.mc);
   }
 
   // 섹터 집계 PER — Σ시총 ÷ Σ당기순이익(흑자 기업만). 지수 제공사들이 쓰는 표준 방식.
