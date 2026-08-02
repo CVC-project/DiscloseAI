@@ -1,0 +1,112 @@
+{
+  "t": "007280",
+  "n": "한국특강",
+  "s": "철강·금속",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "151860",
+        "n": "KG에코솔루션",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2023",
+        "dir": "in",
+        "as_of": 2023,
+        "s": "자동차",
+        "tier": "dot"
+      },
+      {
+        "t": "016380",
+        "n": "KG스틸",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2022",
+        "dir": "in",
+        "as_of": 2022,
+        "s": "철강·금속",
+        "tier": "dot"
+      },
+      {
+        "n": "(주)매직홀딩스",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "38.49% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "(주)매직홀딩스",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "지배회사 (별도) (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "(주)하람로지스",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "9.59% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "(주)하람로지스",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "당기말",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "구 분 (별도) (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "n": "(주)하람로지스",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 38844461000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등, 특수관계자거래 · 별도"
+        },
+        {
+          "n": "(주)매직홀딩스",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1288574000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등, 특수관계자거래 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "n": "(주)매직홀딩스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 15000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등, 특수관계자거래 · 별도"
+        },
+        {
+          "n": "(주)하람로지스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3433000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등, 특수관계자거래 · 별도"
+        }
+      ]
+    }
+  }
+}

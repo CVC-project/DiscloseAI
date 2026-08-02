@@ -95,13 +95,21 @@ def test_db_init_and_models():
         s.close()
 
 
-def test_corps_csv_48():
+def test_corps_csv_full_universe():
+    """★V0(2026-07-21): 48사(galaxy 파이프라인 시드) → 전 상장사(~2,651) 확장.
+
+    기존 48행의 tier/cluster(T0/T1/scope-out)는 보존, 신규 2,600여 행은 빈 값.
+    """
     from modules.report.collector import load_corps
 
     corps = load_corps()
-    assert len(corps) == 48
+    assert len(corps) >= 2600
+    tickers = [c["ticker"] for c in corps]
+    assert len(tickers) == len(set(tickers))  # 중복 없음
     assert all(len(c["ticker"]) == 6 and len(c["corp_code"]) == 8 for c in corps)
     assert any(c["ticker"] == "005930" for c in corps)  # 삼성전자
+    samsung = next(c for c in corps if c["ticker"] == "005930")
+    assert samsung["tier"] == "0"  # T0 골든 레퍼런스 보존 확인
 
 
 # ── DART 의존 (실API) — 키 있을 때만 ──

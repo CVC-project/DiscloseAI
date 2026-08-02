@@ -1,0 +1,112 @@
+{
+  "t": "003350",
+  "n": "한국화장품제조",
+  "s": "화장품",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "123690",
+        "n": "한국화장품",
+        "type": "associate",
+        "detail": "20.0% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "유통",
+        "tier": "dot"
+      },
+      {
+        "t": "123690",
+        "n": "한국화장품",
+        "type": "dart_filing",
+        "detail": "유의적 영향력 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "유통",
+        "tier": "dot"
+      },
+      {
+        "n": "김숙자",
+        "kind": "person",
+        "type": "investment",
+        "detail": "11.21% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "이용준",
+        "kind": "person",
+        "type": "investment",
+        "detail": "10.99% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "임진서",
+        "kind": "person",
+        "type": "investment",
+        "detail": "5.62% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "임충헌",
+        "kind": "person",
+        "type": "investment",
+        "detail": "11.54% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "잼컴패니(주)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "20.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "123690",
+          "n": "한국화장품",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 99946000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출"
+        }
+      ],
+      "down": [
+        {
+          "t": "123690",
+          "n": "한국화장품",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4077848000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 · 별도"
+        },
+        {
+          "t": "123690",
+          "n": "한국화장품",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 19658780000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입"
+        },
+        {
+          "n": "(주)더샘인터내셔날",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 15630534000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 · 별도"
+        }
+      ]
+    }
+  }
+}

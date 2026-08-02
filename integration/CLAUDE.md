@@ -3,6 +3,10 @@
 > 이 파일은 `integration/` 아래 파일 작업 시 자동 로드됨 (Progressive Disclosure).
 > 하위 상세: [v2/CLAUDE.md](v2/CLAUDE.md)(정본 UI) · [dossier/DOSSIER_TABS_PLAN.md](dossier/DOSSIER_TABS_PLAN.md)(3탭 실행 계획)
 > 디자인 규칙: 루트 [DESIGN.md](../DESIGN.md) 준수.
+>
+> **결정 원장 규율 (2026-07-22 신설)** — 반복 실수 방지 2종, 착수 전 필독(S0)·작업 후 기록(S7)·2회 반복 시 코드/조문 승격:
+> - **기능**: [DECISIONS.md](DECISIONS.md) (`FN-###` — 파이프라인·와이어링·배포·환경. 예: cp949 print 크래시, 캐시버스트 규율, V-2 게이트)
+> - **UI/UX**: [v2/UX_DECISIONS.md](v2/UX_DECISIONS.md) (`UX-###` — 리더 피드백·기각·재설계. 예: 병렬 성운 기각→드릴인 확정)
 
 ## 폴더 성격
 

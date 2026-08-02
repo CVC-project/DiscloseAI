@@ -1,0 +1,216 @@
+{
+  "t": "025750",
+  "n": "한솔홈데코",
+  "s": "소재",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "004150",
+        "n": "한솔홀딩스",
+        "type": "associate",
+        "detail": "23.32% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "지주",
+        "tier": "dot"
+      },
+      {
+        "t": "014680",
+        "n": "한솔케미칼",
+        "type": "ftc_group",
+        "detail": "한솔 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "화학",
+        "tier": "named400"
+      },
+      {
+        "t": "004150",
+        "n": "한솔홀딩스",
+        "type": "dart_filing",
+        "detail": "유의적 영향력 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "지주",
+        "tier": "dot"
+      },
+      {
+        "t": "014680",
+        "n": "한솔케미칼",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "화학",
+        "tier": "named400"
+      },
+      {
+        "t": "009180",
+        "n": "한솔로지스틱스",
+        "type": "dart_filing",
+        "detail": "기타 (그룹 합산) · 2022",
+        "dir": "out",
+        "as_of": 2022,
+        "s": "운송·물류",
+        "tier": "dot"
+      },
+      {
+        "t": "055490",
+        "n": "테이팩스",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "소재",
+        "tier": "dot"
+      },
+      {
+        "t": "213500",
+        "n": "한솔제지",
+        "type": "dart_filing",
+        "detail": "기타 · 2024",
+        "dir": "in",
+        "as_of": 2024,
+        "s": "소재",
+        "tier": "dot"
+      },
+      {
+        "n": "Hansol Homedeco Vietnam Co., Ltd.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "Hansol Newzealand Ltd.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "에이치디씨리조트 주식회사",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "주식회사 노타이틀",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "5.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "한솔로지스틱스㈜ 등",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "014680",
+          "n": "한솔케미칼",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 51978000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "t": "213500",
+          "n": "한솔제지",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 5430.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입거래"
+        },
+        {
+          "t": "014680",
+          "n": "한솔케미칼",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 48700.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입거래"
+        },
+        {
+          "t": "055490",
+          "n": "테이팩스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3278.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입거래"
+        },
+        {
+          "t": "213500",
+          "n": "한솔제지",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 8000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "t": "004150",
+          "n": "한솔홀딩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 16810000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "009180",
+          "n": "한솔로지스틱스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 11426773000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등과의 거래 · 매출"
+        },
+        {
+          "t": "055490",
+          "n": "테이팩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3278000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등 거래 · 매출등"
+        },
+        {
+          "n": "한솔로지스유㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 4766671.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "213500",
+          "n": "한솔제지",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1263394.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출거래"
+        }
+      ]
+    }
+  }
+}

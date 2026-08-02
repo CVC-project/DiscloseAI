@@ -1,0 +1,120 @@
+{
+  "t": "025820",
+  "n": "이구산업",
+  "s": "철강·금속",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "060480",
+        "n": "국일신동",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2024",
+        "dir": "out",
+        "as_of": 2024,
+        "s": "철강·금속",
+        "tier": "dot"
+      },
+      {
+        "n": "(주)이구에코텍",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
+        "n": "(주)이구엔지니어링",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
+        "n": "덕흥제선(주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
+        "n": "손인국",
+        "kind": "person",
+        "type": "associate",
+        "detail": "24.66% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "이구무역(주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2024",
+        "dir": "out",
+        "as_of": 2024
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "060480",
+          "n": "국일신동",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 142457000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래 · 별도"
+        },
+        {
+          "t": "060480",
+          "n": "국일신동",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4715830000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 · 별도"
+        },
+        {
+          "n": "이구무역(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 257358000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래 · 별도"
+        },
+        {
+          "n": "덕흥제선(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 238651000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "t": "060480",
+          "n": "국일신동",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3108426000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래 · 별도"
+        },
+        {
+          "n": "(주)이구에코텍",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 270819000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래 · 별도"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "t": "225430",
+  "n": "케이엠제약",
+  "s": "화학",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "n": "강일모",
+        "kind": "person",
+        "type": "associate",
+        "detail": "37.29% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "모린㈜",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "37.1% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "석정골프앤리조트㈜",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "19.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "n": "모린㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 92368000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "n": "모린㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3345542000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출 · 별도"
+        },
+        {
+          "n": "㈜비비앤코",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 5352000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출 · 별도"
+        }
+      ]
+    }
+  }
+}

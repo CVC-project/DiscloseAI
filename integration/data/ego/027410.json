@@ -1,0 +1,245 @@
+{
+  "t": "027410",
+  "n": "BGF",
+  "s": "지주",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "282330",
+        "n": "BGF리테일",
+        "type": "associate",
+        "detail": "30.0% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "유통",
+        "tier": "named400"
+      },
+      {
+        "t": "126600",
+        "n": "BGF에코머티리얼즈",
+        "type": "subsidiary",
+        "detail": "69.95% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "화학",
+        "tier": "dot"
+      },
+      {
+        "t": "282330",
+        "n": "BGF리테일",
+        "type": "ftc_group",
+        "detail": "BGF · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "유통",
+        "tier": "named400"
+      },
+      {
+        "t": "126600",
+        "n": "BGF에코머티리얼즈",
+        "type": "dart_filing",
+        "detail": "지배회사 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "화학",
+        "tier": "dot"
+      },
+      {
+        "t": "282330",
+        "n": "BGF리테일",
+        "type": "dart_filing",
+        "detail": "유의적 영향력 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "유통",
+        "tier": "named400"
+      },
+      {
+        "n": "(주)비지에프에코머티리얼",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "70.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "보광 DTC 스포츠 투자조합",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "7.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "보광 청년창업 콘텐츠 투자조합",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "13.3% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "보광22호 스포츠-IT융복합 투자조합",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "11.8% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "보광25호 스포츠융복합S2투자조합",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "8.3% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "보광밸런스투자조합",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "13.3% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "한국편의점협회",
+        "kind": "public_org",
+        "type": "investment",
+        "detail": "11.1% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "홍석조",
+        "kind": "person",
+        "type": "associate",
+        "detail": "32.4% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "홍정국",
+        "kind": "person",
+        "type": "associate",
+        "detail": "20.77% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "홍정혁",
+        "kind": "person",
+        "type": "investment",
+        "detail": "10.5% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "282330",
+          "n": "BGF리테일",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 531000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입"
+        },
+        {
+          "t": "282330",
+          "n": "BGF리테일",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 766000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등, 특수관계자거래"
+        },
+        {
+          "n": "(주)비지에프로지스",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1366000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입"
+        },
+        {
+          "n": "(주)비지에프네트웍스",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 240000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "t": "126600",
+          "n": "BGF에코머티리얼즈",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 253191000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "t": "282330",
+          "n": "BGF리테일",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 45025000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        },
+        {
+          "t": "282330",
+          "n": "BGF리테일",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 24139000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등, 특수관계자거래"
+        },
+        {
+          "n": "(주)비지에프푸드",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 889000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        },
+        {
+          "n": "(주)비지에프네트웍스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 347000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        },
+        {
+          "n": "(주)비지에프로지스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 300000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        },
+        {
+          "n": "(주)비지에프휴먼넷",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 118000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "t": "258610",
+  "n": "케일럼",
+  "s": "철강·금속",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "217590",
+        "n": "티엠씨",
+        "type": "investment",
+        "detail": "17.33% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "전기전자부품",
+        "tier": "dot"
+      },
+      {
+        "n": "(주)그린테크시스템",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "36.44% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "(주)키위플러스",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "78.12% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "하나아이티엠(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "217590",
+          "n": "티엠씨",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 40460000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입등"
+        },
+        {
+          "n": "신한중공업",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 135762000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입등"
+        },
+        {
+          "n": "(주)태화기업",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 41222000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입등"
+        },
+        {
+          "n": "뉴모텍(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 980000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입등"
+        }
+      ],
+      "down": [
+        {
+          "t": "217590",
+          "n": "티엠씨",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 37440000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출등"
+        },
+        {
+          "t": "006380",
+          "n": "카프로",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 901700000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출등"
+        }
+      ]
+    }
+  }
+}

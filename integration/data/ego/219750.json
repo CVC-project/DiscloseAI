@@ -1,0 +1,87 @@
+{
+  "t": "219750",
+  "n": "한국비티비",
+  "s": "전기전자부품",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "256840",
+        "n": "한국비엔씨",
+        "type": "subsidiary",
+        "detail": "79.99% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "제약바이오",
+        "tier": "dot"
+      },
+      {
+        "t": "256840",
+        "n": "한국비엔씨",
+        "type": "dart_filing",
+        "detail": "지배기업 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "제약바이오",
+        "tier": "dot"
+      },
+      {
+        "n": "BNC KOREA USA, Inc",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜켐바이오진",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "하랑-와이씨신기술투자조합2호㈜",
+        "kind": "coop_fund",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "256840",
+          "n": "한국비엔씨",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 89064000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "t": "256840",
+          "n": "한국비엔씨",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 6468170000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 · 별도"
+        },
+        {
+          "n": "㈜켐바이오진",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 143440000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 · 별도"
+        }
+      ]
+    }
+  }
+}

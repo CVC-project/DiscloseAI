@@ -1,0 +1,133 @@
+{
+  "t": "008730",
+  "n": "율촌화학",
+  "s": "소재",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "072710",
+        "n": "농심홀딩스",
+        "type": "associate",
+        "detail": "31.94% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "지주",
+        "tier": "dot"
+      },
+      {
+        "t": "004370",
+        "n": "농심",
+        "type": "ftc_group",
+        "detail": "농심 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "식음료",
+        "tier": "named400"
+      },
+      {
+        "t": "004370",
+        "n": "농심",
+        "type": "dart_filing",
+        "detail": "기타 · 2022",
+        "dir": "in",
+        "as_of": 2022,
+        "s": "식음료",
+        "tier": "named400"
+      },
+      {
+        "t": "072710",
+        "n": "농심홀딩스",
+        "type": "dart_filing",
+        "detail": "유의적 영향력 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "지주",
+        "tier": "dot"
+      },
+      {
+        "n": "YOULCHON VINA COMPANY LIMITED (베트남)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "농심태경㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "신동윤",
+        "kind": "person",
+        "type": "investment",
+        "detail": "17.75% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "신시열",
+        "kind": "person",
+        "type": "investment",
+        "detail": "6.26% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "004370",
+          "n": "농심",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 293679000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "t": "072710",
+          "n": "농심홀딩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 11682243000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출원가"
+        },
+        {
+          "n": "반도통운(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 5742447000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "004370",
+          "n": "농심",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 37266000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등"
+        },
+        {
+          "n": "반도통운(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 187761593000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등, 특수관계자거래"
+        }
+      ]
+    }
+  }
+}

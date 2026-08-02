@@ -1,0 +1,278 @@
+{
+  "t": "101530",
+  "n": "해태제과식품",
+  "s": "식음료",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "005740",
+        "n": "크라운해태홀딩스",
+        "type": "subsidiary",
+        "detail": "65.8% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "지주",
+        "tier": "dot"
+      },
+      {
+        "t": "005740",
+        "n": "크라운해태홀딩스",
+        "type": "dart_filing",
+        "detail": "지배기업 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "지주",
+        "tier": "dot"
+      },
+      {
+        "t": "264900",
+        "n": "크라운제과",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "식음료",
+        "tier": "dot"
+      },
+      {
+        "t": "264900",
+        "n": "크라운제과",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "식음료",
+        "tier": "dot"
+      },
+      {
+        "n": "(주)두라푸드",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "(주)빨라쪼",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "(주)씨에이치테크",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "(주)영그린",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "(주)코디서비스코리아",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "PALAZZO DEL FREDDOGIOVANNI FASSI S.R.L.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜아트밸리",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "글리코해태(주)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "40.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "글리코해태(주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "해태가루비(주)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "50.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "해태가루비(주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "훼미리식품㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "96.79% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "264900",
+          "n": "크라운제과",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 81757000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "t": "264900",
+          "n": "크라운제과",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 11049799000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래 · 별도"
+        },
+        {
+          "n": "해태가루비(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 58282390000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "글리코해태(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 20111186000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "(주)두라푸드",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 7253098000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "005740",
+          "n": "크라운해태홀딩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 730841000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "264900",
+          "n": "크라운제과",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 13647115000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "글리코해태(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 15659527000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "해태가루비(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1544709000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "㈜아트밸리",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 278230000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "(주)두라푸드",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 235627000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "(주)영그린",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 142648000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "(주)코디서비스코리아",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4869000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "(주)씨에이치테크",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2087000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
+    }
+  }
+}

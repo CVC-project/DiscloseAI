@@ -1,0 +1,270 @@
+{
+  "t": "020000",
+  "n": "한섬",
+  "s": "섬유·의류",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "069960",
+        "n": "현대백화점",
+        "type": "ftc_group",
+        "detail": "현대백화점 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "유통",
+        "tier": "named400"
+      },
+      {
+        "t": "090850",
+        "n": "현대이지웰",
+        "type": "dart_filing",
+        "detail": "기타 · 2024",
+        "dir": "in",
+        "as_of": 2024,
+        "s": "플랫폼",
+        "tier": "dot"
+      },
+      {
+        "t": "005440",
+        "n": "현대지에프홀딩스",
+        "type": "dart_filing",
+        "detail": "종속기업 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "지주",
+        "tier": "named400"
+      },
+      {
+        "t": "005440",
+        "n": "현대지에프홀딩스",
+        "type": "dart_filing",
+        "detail": "최상위 지배기업 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "지주",
+        "tier": "named400"
+      },
+      {
+        "t": "126560",
+        "n": "현대퓨처넷",
+        "type": "dart_filing",
+        "detail": "대규모기업집단 · 2024",
+        "dir": "out",
+        "as_of": 2024,
+        "s": "통신",
+        "tier": "dot"
+      },
+      {
+        "n": "(주)더북컴퍼니",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "11.67% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "(주)왁티",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "9.24% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "(주)피에프아이엔",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "18.36% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜현대렌탈케어",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
+        "n": "㈜현대리바트㈜현대드림투어㈜현대디에프",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "대규모기업집단 · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
+        "n": "㈜현대백화점한무쇼핑㈜㈜현대그린푸드",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "대규모기업집단 · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
+        "n": "㈜현대백화점한무쇼핑㈜㈜현대그린푸드㈜현대퓨처넷㈜현대리바트㈜현대드림투어㈜현대디에프㈜현대에버다임㈜현대바이오랜드㈜현대이지웰㈜비노에이치㈜현대엘앤씨㈜나이스웨더㈜현대렌탈케어",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "대규모기업집단 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜현대에버다임㈜현대바이오랜드㈜현대이지웰㈜비노에이치㈜현대엘앤씨㈜나이스웨더",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "대규모기업집단 · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
+        "n": "㈜현대홈쇼핑",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "40.5% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜현대홈쇼핑",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "지배기업 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "한섬상해(상무) 유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "한섬파리",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "041440",
+          "n": "현대에버다임",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2766000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "090850",
+          "n": "현대이지웰",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 207260000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "069960",
+          "n": "현대백화점",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 44946000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        },
+        {
+          "t": "079430",
+          "n": "현대리바트",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 7500000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "126560",
+          "n": "현대퓨처넷",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 10970585000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "453340",
+          "n": "현대그린푸드",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3291374000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매출"
+        }
+      ],
+      "down": [
+        {
+          "t": "069960",
+          "n": "현대백화점",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 162548000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "069960",
+          "n": "현대백화점",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 217177000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등"
+        },
+        {
+          "t": "126560",
+          "n": "현대퓨처넷",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 34691000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "t": "052260",
+          "n": "현대바이오랜드",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1091000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입등"
+        },
+        {
+          "n": "(주)현대디에프",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 141406000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "(주)나이스웨더",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 377000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "t": "419050",
+  "n": "삼기에너지솔루션즈",
+  "s": "자동차",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "122350",
+        "n": "삼기",
+        "type": "subsidiary",
+        "detail": "51.34% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "자동차",
+        "tier": "dot"
+      },
+      {
+        "n": "SAMKEE AMERICA INC",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "66.1% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "122350",
+          "n": "삼기",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 24452270090.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래내역 · 매  입  등"
+        },
+        {
+          "n": "주식회사 삼기프리시젼",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 841379309.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래내역 · 매  입  등"
+        }
+      ],
+      "down": [
+        {
+          "t": "122350",
+          "n": "삼기",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 42422525668.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래내역 · 매  출  등"
+        }
+      ]
+    }
+  }
+}

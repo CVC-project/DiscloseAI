@@ -1,0 +1,57 @@
+{
+  "t": "003480",
+  "n": "한진중공업홀딩스",
+  "s": "에너지",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "n": "대륜E&S",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "91.08% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "조남호",
+        "kind": "person",
+        "type": "associate",
+        "detail": "46.5% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "한일레저",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "99.99% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [],
+      "down": [
+        {
+          "n": "신한종합건축사사무소",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2040000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "(주)와이에이치파워",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 200000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 현금출자, 출자금 납입"
+        }
+      ]
+    }
+  }
+}

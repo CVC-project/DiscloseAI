@@ -17,9 +17,9 @@ tools:
 - 출력 경로: `modules/report/data/facts/facts_<ticker>.json`
 
 ## 데이터 접근
-주석 원문은 `modules/report/data/reports.db`의 `report_section`(rcept_no, note_no, title, text_md):
+주석 원문은 `shared/data/reports.db`의 `report_section`(rcept_no, note_no, title, text_md):
 ```bash
-python -c "import sqlite3,sys; c=sqlite3.connect('modules/report/data/reports.db'); print(c.execute('select text_md from report_section where rcept_no=? and note_no=?',(sys.argv[1],sys.argv[2])).fetchone()[0])" <rcept> <note>
+python -c "import sqlite3,sys; c=sqlite3.connect('shared/data/reports.db'); print(c.execute('select text_md from report_section where rcept_no=? and note_no=?',(sys.argv[1],sys.argv[2])).fetchone()[0])" <rcept> <note>
 ```
 
 ## 절대 규칙 (MILKYWAY_GENERATOR R6.3)

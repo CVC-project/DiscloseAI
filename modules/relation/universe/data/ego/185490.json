@@ -1,0 +1,60 @@
+{
+  "t": "185490",
+  "n": "아이진",
+  "s": "제약바이오",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "n": "주식회사 한국비엠아이",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "23.16% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "n": "주식회사 한국비엠아이",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3209586000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입등"
+        },
+        {
+          "n": "주식회사 메디치바이오",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 50550000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입등"
+        }
+      ],
+      "down": [
+        {
+          "n": "주식회사 한국비엠아이",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 5878693000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 유상증자"
+        },
+        {
+          "n": "주식회사 한국비엠아이",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 500000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출등(*)"
+        }
+      ]
+    }
+  }
+}

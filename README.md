@@ -36,6 +36,7 @@ python -m http.server 8000               # http://localhost:8000/integration/
 - [PRD](docs/초기PRD.md) — 제품 요구사항·비전
 - [온보딩](docs/ONBOARDING.md) — 팀원 시작 가이드
 - [프로토타입](design/prototypes/corporate_universe_v6_galaxies.html) — UI 프로토타입 원형 (디자인 정본: [DESIGN.md](DESIGN.md))
+- [DART Chatbot 백엔드](https://github.com/malangoppa/dart-chatbot) — AI 코파일럿의 OpenDART RAG 챗봇 백엔드 (질의 분류·정형 조회·벡터 검색·Bedrock 답변 생성)
 
 ## 구조
 

@@ -1,0 +1,132 @@
+{
+  "t": "023900",
+  "n": "풍국주정",
+  "s": "식음료",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "n": "대한주정판매(주)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "9.5% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "마이다스PEF",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "16.9% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "박순애",
+        "kind": "person",
+        "type": "investment",
+        "detail": "13.29% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "서안주정(주)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "11.4% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "선도산업(주)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "50.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "선도화학",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "10.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "에스디지(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "56.4% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "우신에너지",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "5.46% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "이한용",
+        "kind": "person",
+        "type": "associate",
+        "detail": "42.03% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "파라마크케이비제1호PEF",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "5.78% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "n": "선도화학",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 9056822830.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입"
+        },
+        {
+          "n": "화신화학㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 92326500.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "n": "화신화학㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 695615000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        },
+        {
+          "n": "선도화학",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 112322410.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        }
+      ]
+    }
+  }
+}

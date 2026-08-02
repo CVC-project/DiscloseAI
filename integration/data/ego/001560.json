@@ -1,0 +1,77 @@
+{
+  "t": "001560",
+  "n": "제일연마",
+  "s": "소재",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "n": "오유인",
+        "kind": "person",
+        "type": "associate",
+        "detail": "39.35% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "오현수",
+        "kind": "person",
+        "type": "investment",
+        "detail": "7.86% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "004890",
+          "n": "동일산업",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2395140.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입등"
+        },
+        {
+          "n": "삼양연마공업(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 26494400.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입등"
+        },
+        {
+          "n": "(주)세명기업",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 4000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입등"
+        }
+      ],
+      "down": [
+        {
+          "n": "삼양연마공업(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 96242100.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출등"
+        },
+        {
+          "n": "(주)세명기업",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2740000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출등"
+        }
+      ]
+    }
+  }
+}

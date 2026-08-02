@@ -1,0 +1,78 @@
+{
+  "t": "368970",
+  "n": "오에스피",
+  "s": "식음료",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "018620",
+        "n": "우진비앤지",
+        "type": "associate",
+        "detail": "42.61% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "제약바이오",
+        "tier": "dot"
+      },
+      {
+        "t": "018620",
+        "n": "우진비앤지",
+        "type": "dart_filing",
+        "detail": "지배기업 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "제약바이오",
+        "tier": "dot"
+      },
+      {
+        "n": "(주)바우와우코리아",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "55.93% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "(주)퍼플네스트",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "5.74% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "전기말",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "당기말 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "018620",
+          "n": "우진비앤지",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 770888460.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입등"
+        }
+      ],
+      "down": [
+        {
+          "t": "018620",
+          "n": "우진비앤지",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 56691364.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출등"
+        }
+      ]
+    }
+  }
+}

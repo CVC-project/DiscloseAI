@@ -1,0 +1,50 @@
+{
+  "t": "067390",
+  "n": "아스트",
+  "s": "중공업·방산",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "n": "㈜카프에어로",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "알파에어로 유한회사",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "55.0% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "046120",
+          "n": "오르비텍",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 163258552.0,
+          "as_of": 2021,
+          "prov": "특수관계자와의 거래 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "t": "046120",
+          "n": "오르비텍",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 10190020.0,
+          "as_of": 2021,
+          "prov": "특수관계자와의 거래 · 매출"
+        }
+      ]
+    }
+  }
+}

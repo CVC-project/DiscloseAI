@@ -1,0 +1,175 @@
+{
+  "t": "025860",
+  "n": "남해화학",
+  "s": "화학",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "005940",
+        "n": "NH투자증권",
+        "type": "ftc_group",
+        "detail": "농협 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
+        "t": "054050",
+        "n": "NH농우바이오",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "기타",
+        "tier": "dot"
+      },
+      {
+        "n": "NES머티리얼즈",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "70.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "남우진흥",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "19.5% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "농협경제지주",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "56.0% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "닛소남해아그로",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "25.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "토소남해실리카",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "33.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "104460",
+          "n": "디와이피엔에프",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 58400000000.0,
+          "as_of": 2025,
+          "prov": "단일판매ㆍ공급계약체결 · 남해화학주식회사"
+        },
+        {
+          "n": "(주)농협은행",
+          "kind": "private_corp",
+          "type": "capital_in",
+          "tier_grade": "T1",
+          "amount": 402569996108.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 차입거래, 차입"
+        },
+        {
+          "n": "(주)농협에코아그로",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1450753250.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "054050",
+          "n": "NH농우바이오",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 137000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        },
+        {
+          "n": "농협경제지주",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 694595378694.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "닛소남해아그로",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3170378385.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "토소남해실리카",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 2970000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 현금출자"
+        },
+        {
+          "n": "(주)농협사료",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2025241164.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "토소남해실리카",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1937226751.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "(주)농우바이오",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 149200000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "(주)농협우리사료",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 60789000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        }
+      ]
+    }
+  }
+}

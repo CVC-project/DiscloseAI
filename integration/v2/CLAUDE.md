@@ -17,6 +17,16 @@
 - ❌ **빌드 도구 도입 금지** — Vite/esbuild 등은 추후 검토. 현재는 React-CDN + Babel-in-browser 유지
 - ✅ **UI 작업 전 루트 [DESIGN.md](../../DESIGN.md) 준수** — 팔레트·토큰·폰트·엣지 규칙
 
+## UX 원장 규율 (2026-07-22 신설 — 현금 은하수 VARIATIONS 선례 이식)
+
+리더의 UI/UX 피드백·기각·재설계는 **[UX_DECISIONS.md](UX_DECISIONS.md)** 에 `UX-###` 번호로 채록한다:
+
+1. **착수 전 필독(S0)**: v2 UI 작업 시작 전 원장을 읽는다 — **기각된 접근(예: UX-002 한 화면 병렬 성운)을 다시 제안하지 않기 위해**.
+2. **작업 후 기록(S7)**: 리더 피드백으로 방향이 바뀌면 그 자리에서 항목 추가(일자·표면·피드백 요지→결정→적용 커밋·상태).
+3. **2회 반복 = 승격**: 같은 판단이 2회 이상 재확인되면 [DESIGN.md](DESIGN.md)(v2 스펙)·루트 DESIGN.md 조문 또는 코드 게이트로 승격하고 `→ 조문화`/`→ 코드화` 표기. 원장은 이력, 스펙은 현재 상태 — 역할을 섞지 않는다.
+
+> **기능 결정**(캐시버스트·폴백 사다리·NaN 크래시류)은 UI 원장이 아니라 [../DECISIONS.md](../DECISIONS.md)(`FN-###`) — 같은 규율, 층만 다름.
+
 ## CORPORATION DOSSIER 오버레이 — DOSSIER_TABS 탭바 (Phase 2, D1)
 
 ENTER CORPORATION 오버레이는 **`DOSSIER_TABS` 설정 배열이 주도하는 탭바**를 가진다(bundle.jsx). 헤더와 본문 사이에 탭바(언더라인 스타일·mint 토큰), 본문은 활성 탭 iframe(keep-alive `display` 토글), 우측 `OverlayAiChat`(탭별 `context` 갱신)·하단 면책은 유지.

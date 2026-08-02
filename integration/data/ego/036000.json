@@ -1,0 +1,85 @@
+{
+  "t": "036000",
+  "n": "예림당",
+  "s": "플랫폼",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "n": "김순례",
+        "kind": "person",
+        "type": "investment",
+        "detail": "6.29% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "나성훈",
+        "kind": "person",
+        "type": "associate",
+        "detail": "41.1% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "푸른 첨단소재 신기술 투자조합 제2호",
+        "kind": "coop_fund",
+        "type": "subsidiary",
+        "detail": "99.95% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "004870",
+          "n": "티웨이홀딩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 940909000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출 등 · 별도"
+        },
+        {
+          "n": "㈜예림문고 등",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 228860000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 현황 및 거래내용──────────────── · 매입 등 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "t": "004870",
+          "n": "티웨이홀딩스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 21466000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입 등 · 별도"
+        },
+        {
+          "n": "㈜티웨이항공",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 411609000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 현황 및 거래내용──────────────── · 매출 등 · 별도"
+        },
+        {
+          "n": "㈜예림문고 등",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 17731000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 현황 및 거래내용──────────────── · 매출 등 · 별도"
+        }
+      ]
+    }
+  }
+}

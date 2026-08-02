@@ -1,0 +1,78 @@
+{
+  "t": "005070",
+  "n": "코스모신소재",
+  "s": "화학",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "005420",
+        "n": "코스모화학",
+        "type": "associate",
+        "detail": "27.19% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "화학",
+        "tier": "dot"
+      },
+      {
+        "n": "SHANDONG NEW POWDER CO.,LTD",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "20.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "코스모촉매㈜",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "29.25% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "005420",
+          "n": "코스모화학",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 20688192.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 매입, 특수관계자거래 · 별도"
+        },
+        {
+          "n": "코스모촉매㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1758016069.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 매입, 특수관계자거래 · 별도"
+        },
+        {
+          "n": "㈜코스모앤컴퍼니",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1469804951.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 매입, 특수관계자거래 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "n": "㈜코스모앤컴퍼니",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 15500000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 대여거래, 대여 · 별도"
+        }
+      ]
+    }
+  }
+}

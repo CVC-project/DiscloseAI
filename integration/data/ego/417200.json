@@ -1,0 +1,246 @@
+{
+  "t": "417200",
+  "n": "LS머트리얼즈",
+  "s": "반도체",
+  "tier": "named400",
+  "layers": {
+    "governance": [
+      {
+        "t": "010120",
+        "n": "엘에스일렉트릭",
+        "type": "ftc_group",
+        "detail": "엘에스 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "전기전자부품",
+        "tier": "named400"
+      },
+      {
+        "t": "006260",
+        "n": "LS",
+        "type": "dart_filing",
+        "detail": "최상위 지배기업 · 2024",
+        "dir": "out",
+        "as_of": 2024,
+        "s": "지주",
+        "tier": "named400"
+      },
+      {
+        "t": "000500",
+        "n": "가온전선",
+        "type": "dart_filing",
+        "detail": "기타 · 2024",
+        "dir": "out",
+        "as_of": 2024,
+        "s": "전기전자부품",
+        "tier": "named400"
+      },
+      {
+        "t": "000500",
+        "n": "가온전선",
+        "type": "dart_filing",
+        "detail": "지배기업 · 2024",
+        "dir": "in",
+        "as_of": 2024,
+        "s": "전기전자부품",
+        "tier": "named400"
+      },
+      {
+        "n": "LS Materials America LLC",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "LS글로벌인코퍼레이티드㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2023",
+        "dir": "out",
+        "as_of": 2023
+      },
+      {
+        "n": "LS엠트론㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
+        "n": "LS전선㈜",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "43.51% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "LS전선㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "지배기업 · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
+        "n": "㈜지앤피",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
+        "n": "엘에스알스코(주) 보통주",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "엘에스알스코(주) 우선주",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "000500",
+          "n": "가온전선",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 47651000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매출"
+        },
+        {
+          "n": "LS글로벌인코퍼레이티드㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 32108714779.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입"
+        },
+        {
+          "n": "엘에스에코첨단소재㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1641394990.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입"
+        },
+        {
+          "n": "㈜지앤피",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 54000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입"
+        },
+        {
+          "n": "LS전선㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 30256000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "t": "000500",
+          "n": "가온전선",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 299382684.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        },
+        {
+          "n": "LS전선㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3038599335.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        },
+        {
+          "n": "㈜지앤피",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 932116350.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        },
+        {
+          "n": "락성전기투자(중국) 유한공사",
+          "kind": "public_org",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 716428598.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        },
+        {
+          "n": "엘에스에코첨단소재㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 123900000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        },
+        {
+          "n": "락성전기 무석 유한공사",
+          "kind": "public_org",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 123837696.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        },
+        {
+          "n": "한국미래소재(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 72093082.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        },
+        {
+          "n": "LS일렉트릭㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 39500000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        },
+        {
+          "n": "LS빌드윈(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 6500000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        }
+      ]
+    }
+  }
+}

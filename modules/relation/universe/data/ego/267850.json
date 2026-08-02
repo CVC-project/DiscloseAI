@@ -1,0 +1,250 @@
+{
+  "t": "267850",
+  "n": "아시아나IDT",
+  "s": "플랫폼",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "020560",
+        "n": "아시아나항공",
+        "type": "subsidiary",
+        "detail": "76.22% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "운송·물류",
+        "tier": "named400"
+      },
+      {
+        "t": "003490",
+        "n": "대한항공",
+        "type": "ftc_group",
+        "detail": "한진 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "운송·물류",
+        "tier": "named400"
+      },
+      {
+        "t": "180640",
+        "n": "한진칼",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "지주",
+        "tier": "named400"
+      },
+      {
+        "t": "180640",
+        "n": "한진칼",
+        "type": "dart_filing",
+        "detail": "최상위 지배기업 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "지주",
+        "tier": "named400"
+      },
+      {
+        "t": "020560",
+        "n": "아시아나항공",
+        "type": "dart_filing",
+        "detail": "지배기업 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "운송·물류",
+        "tier": "named400"
+      },
+      {
+        "n": "(주)대한한공",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "최상위 지배기업 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "(주)한진칼 계열회사 등",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "아시아나티앤아이(주) [비상장]",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "40.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "아시아나티앤아이㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "한국산업은행",
+        "kind": "public_org",
+        "type": "dart_filing",
+        "detail": "최상위 지배기업 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "180640",
+          "n": "한진칼",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 81120000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 등"
+        },
+        {
+          "t": "020560",
+          "n": "아시아나항공",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 4342457000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등, 특수관계자거래 · 별도"
+        },
+        {
+          "t": "180640",
+          "n": "한진칼",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 57129000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등, 특수관계자거래 · 별도"
+        },
+        {
+          "n": "아시아나티앤아이㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2765514000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등, 특수관계자거래 · 별도"
+        },
+        {
+          "n": "한진정보통신",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 56661000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등, 특수관계자거래 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "t": "180640",
+          "n": "한진칼",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 25686000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입 등"
+        },
+        {
+          "t": "020560",
+          "n": "아시아나항공",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 80255533000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등(*), 특수관계자거래 · 별도"
+        },
+        {
+          "t": "298690",
+          "n": "에어부산",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 14972629000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등(*), 특수관계자거래 · 별도"
+        },
+        {
+          "t": "298690",
+          "n": "에어부산",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 14342647000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등 · 별도"
+        },
+        {
+          "n": "아시아나세이버㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 7322836000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등(*), 특수관계자거래 · 별도"
+        },
+        {
+          "n": "에어서울(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 5412176000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등(*), 특수관계자거래 · 별도"
+        },
+        {
+          "n": "아시아나에어포트㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1412777000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등(*), 특수관계자거래 · 별도"
+        },
+        {
+          "n": "정석인하학원",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 408495000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등(*), 특수관계자거래 · 별도"
+        },
+        {
+          "n": "게이트고메코리아(유)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 143580000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등(*), 특수관계자거래 · 별도"
+        },
+        {
+          "n": "아시아나티앤아이㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 18746000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등(*), 특수관계자거래 · 별도"
+        },
+        {
+          "n": "한진정보통신",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 13900000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등(*), 특수관계자거래 · 별도"
+        }
+      ]
+    }
+  }
+}

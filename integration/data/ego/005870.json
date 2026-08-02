@@ -1,0 +1,67 @@
+{
+  "t": "005870",
+  "n": "휴니드테크놀러지스",
+  "s": "반도체",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "n": "Boeing",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "김유진",
+        "kind": "person",
+        "type": "associate",
+        "detail": "22.73% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "한진교통㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "n": "Boeing",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 291404000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등 · 매입 등, 특수관계자거래 · 별도"
+        },
+        {
+          "n": "한진교통㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 135000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등 · 매입 등, 특수관계자거래 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "n": "Boeing",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 38066057000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등 · 매출 등, 특수관계자거래 · 별도"
+        }
+      ]
+    }
+  }
+}

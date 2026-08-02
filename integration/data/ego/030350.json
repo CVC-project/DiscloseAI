@@ -1,0 +1,87 @@
+{
+  "t": "030350",
+  "n": "드래곤플라이",
+  "s": "플랫폼",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "076610",
+        "n": "해성옵틱스",
+        "type": "investment",
+        "detail": "5.0% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "전기전자부품",
+        "tier": "dot"
+      },
+      {
+        "t": "076610",
+        "n": "해성옵틱스",
+        "type": "dart_filing",
+        "detail": "유의적 영향력 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "전기전자부품",
+        "tier": "dot"
+      },
+      {
+        "n": "(주)에이치피앤케이인베스트먼트",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "10.99% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜리킷",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
+        "n": "디에프체인㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "076610",
+          "n": "해성옵틱스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 11781000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 등"
+        }
+      ],
+      "down": [
+        {
+          "n": "DFCHAIN PHILIPPINES, INC",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 108831000.0,
+          "as_of": 2024,
+          "prov": "특수관계자와의 거래 · 매출"
+        },
+        {
+          "n": "디에프체인㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 23252000.0,
+          "as_of": 2024,
+          "prov": "특수관계자와의 거래 · 매출"
+        }
+      ]
+    }
+  }
+}

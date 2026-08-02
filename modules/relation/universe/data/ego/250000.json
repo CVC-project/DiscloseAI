@@ -1,0 +1,111 @@
+{
+  "t": "250000",
+  "n": "보라티알",
+  "s": "유통",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "n": "(주)씨21",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "김대영",
+        "kind": "person",
+        "type": "associate",
+        "detail": "43.37% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "나현진",
+        "kind": "person",
+        "type": "associate",
+        "detail": "25.5% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "보라리커",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "n": "(주)우윤",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 634614000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입등"
+        },
+        {
+          "n": "(주)엠지씨글로벌앤하우스)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 224032000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입등"
+        },
+        {
+          "n": "(주)한다코퍼레이션",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 48657000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입등"
+        }
+      ],
+      "down": [
+        {
+          "n": "(주)엠지씨글로벌앤하우스)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 7547313000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출등"
+        },
+        {
+          "n": "(주)한다코퍼레이션",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 1000000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 자금대여거래"
+        },
+        {
+          "n": "(주)한다코퍼레이션",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 9956000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출등"
+        },
+        {
+          "n": "(주)우윤",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1024000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출등"
+        }
+      ]
+    }
+  }
+}

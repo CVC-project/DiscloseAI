@@ -1,0 +1,60 @@
+{
+  "t": "125210",
+  "n": "아모그린텍",
+  "s": "반도체",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "052710",
+        "n": "아모텍",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "반도체",
+        "tier": "dot"
+      },
+      {
+        "n": "김병규",
+        "kind": "person",
+        "type": "associate",
+        "detail": "40.32% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "아모라이프사이언스",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "8.2% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "052710",
+          "n": "아모텍",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 22195201000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        }
+      ],
+      "down": [
+        {
+          "t": "052710",
+          "n": "아모텍",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 27151999000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입"
+        }
+      ]
+    }
+  }
+}

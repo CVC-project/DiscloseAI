@@ -1,0 +1,64 @@
+{
+  "t": "007570",
+  "n": "일양약품",
+  "s": "제약바이오",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "n": "양주일양제약유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "52.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "일양바이오팜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "80.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "정도언",
+        "kind": "person",
+        "type": "associate",
+        "detail": "21.84% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "칸테크",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "80.2% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "통화일양 유한공사",
+        "kind": "public_org",
+        "type": "associate",
+        "detail": "45.9% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [],
+      "down": [
+        {
+          "n": "양주일양제약유한공사",
+          "kind": "public_org",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 12458327000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        }
+      ]
+    }
+  }
+}

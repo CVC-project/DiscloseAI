@@ -1,0 +1,75 @@
+{
+  "t": "065370",
+  "n": "위세아이텍",
+  "s": "플랫폼",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "n": "㈜에듀에이아이",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
+        "n": "㈜위씨테크",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2023",
+        "dir": "out",
+        "as_of": 2023
+      },
+      {
+        "n": "김다산",
+        "kind": "person",
+        "type": "associate",
+        "detail": "25.18% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "회사명",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "구분 · 2024",
+        "dir": "out",
+        "as_of": 2024
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "n": "㈜에듀에이아이",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 535772000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "t": "064400",
+          "n": "LG씨엔에스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3925800000.0,
+          "as_of": 2026,
+          "prov": "단일판매ㆍ공급계약체결 · (주)엘지씨엔에스"
+        },
+        {
+          "n": "㈜에듀에이아이",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 58062000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        }
+      ]
+    }
+  }
+}

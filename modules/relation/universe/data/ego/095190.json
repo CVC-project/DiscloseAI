@@ -1,0 +1,84 @@
+{
+  "t": "095190",
+  "n": "신화프리텍",
+  "s": "철강·금속",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "n": "(주)신화ENG",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "22.18% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "(주)신화오토텍",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "(주)신화정공",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "23.29% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "이드원(주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "n": "(주)신화정공",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 127690000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 매입, 특수관계자거래 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "t": "064350",
+          "n": "현대로템",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 9598982960.0,
+          "as_of": 2024,
+          "prov": "단일판매ㆍ공급계약체결 · 현대로템(주)"
+        },
+        {
+          "t": "047810",
+          "n": "한국항공우주",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 12407526000.0,
+          "as_of": 2024,
+          "prov": "단일판매ㆍ공급계약체결 · 한국항공우주산업(주)"
+        },
+        {
+          "t": "012450",
+          "n": "한화에어로스페이스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 26052173403.0,
+          "as_of": 2023,
+          "prov": "단일판매ㆍ공급계약체결 · 한화에어로스페이스(주)"
+        }
+      ]
+    }
+  }
+}

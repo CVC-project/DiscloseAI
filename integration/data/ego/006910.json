@@ -1,0 +1,58 @@
+{
+  "t": "006910",
+  "n": "보성파워텍",
+  "s": "철강·금속",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "n": "보성종합건설(주)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "16.66% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "임재황",
+        "kind": "person",
+        "type": "investment",
+        "detail": "12.15% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "한국에너지솔루션(주)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "17.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "n": "태형산업(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 120940000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "n": "피앤티(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 36000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출 · 별도"
+        }
+      ]
+    }
+  }
+}

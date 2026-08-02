@@ -1,0 +1,116 @@
+{
+  "t": "271980",
+  "n": "제일약품",
+  "s": "제약바이오",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "002620",
+        "n": "제일파마홀딩스",
+        "type": "associate",
+        "detail": "49.24% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "지주",
+        "tier": "dot"
+      },
+      {
+        "t": "476060",
+        "n": "온코닉테라퓨틱스",
+        "type": "associate",
+        "detail": "44.95% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "제약바이오",
+        "tier": "named400"
+      },
+      {
+        "t": "002620",
+        "n": "제일파마홀딩스",
+        "type": "dart_filing",
+        "detail": "지배기업 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "지주",
+        "tier": "dot"
+      },
+      {
+        "n": "에스앤피혁신기술1호조합",
+        "kind": "coop_fund",
+        "type": "associate",
+        "detail": "35.7% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "한응수",
+        "kind": "person",
+        "type": "investment",
+        "detail": "6.32% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "476060",
+          "n": "온코닉테라퓨틱스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 44309098000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 · 별도"
+        },
+        {
+          "n": "제일헬스사이언스㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1752876000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입 등, 특수관계자거래"
+        },
+        {
+          "n": "한국오츠카제약㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 450960000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입 등, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "476060",
+          "n": "온코닉테라퓨틱스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 25679586000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 · 별도"
+        },
+        {
+          "n": "한국오츠카제약㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3963130000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 등, 특수관계자거래"
+        },
+        {
+          "n": "제일헬스사이언스㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 763273000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 등, 특수관계자거래"
+        }
+      ]
+    }
+  }
+}

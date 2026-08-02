@@ -1,0 +1,77 @@
+{
+  "t": "001770",
+  "n": "SHD",
+  "s": "철강·금속",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "n": "(주)신안제관",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "27.12% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "신종호",
+        "kind": "person",
+        "type": "associate",
+        "detail": "45.9% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "n": "(주)신안제관",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 10645000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입등 · 별도"
+        },
+        {
+          "n": "평안제관(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 5778000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입등 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "n": "평안제관(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 13501797000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 · 별도"
+        },
+        {
+          "n": "(주)신안제관",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 7236887000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 · 별도"
+        },
+        {
+          "n": "(주)새암",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 808657000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 · 별도"
+        }
+      ]
+    }
+  }
+}

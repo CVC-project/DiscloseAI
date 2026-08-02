@@ -1,0 +1,107 @@
+{
+  "t": "001000",
+  "n": "신라섬유",
+  "s": "부동산",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "004970",
+        "n": "신라교역",
+        "type": "associate",
+        "detail": "20.6% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "기타",
+        "tier": "dot"
+      },
+      {
+        "t": "002600",
+        "n": "조흥",
+        "type": "investment",
+        "detail": "15.42% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "식음료",
+        "tier": "dot"
+      },
+      {
+        "t": "004970",
+        "n": "신라교역",
+        "type": "dart_filing",
+        "detail": "유의적 영향력 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "기타",
+        "tier": "dot"
+      },
+      {
+        "t": "002600",
+        "n": "조흥",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "식음료",
+        "tier": "dot"
+      },
+      {
+        "t": "004970",
+        "n": "신라교역",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "기타",
+        "tier": "dot"
+      },
+      {
+        "n": "(주)신라홀딩스",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "박재흥",
+        "kind": "person",
+        "type": "investment",
+        "detail": "19.51% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "춘강문화장학재단",
+        "kind": "public_org",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [],
+      "down": [
+        {
+          "t": "002600",
+          "n": "조흥",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 12000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등 · 별도"
+        },
+        {
+          "n": "춘강문화장학재단",
+          "kind": "public_org",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 18000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등 · 별도"
+        }
+      ]
+    }
+  }
+}

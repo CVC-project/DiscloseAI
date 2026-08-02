@@ -1,11 +1,15 @@
 param(
-    [string]$SshHost = "tta@123.37.8.42",
+    [string]$SshHost = $env:DISCLOSEAI_GPU_SSH_HOST,
     [string]$KeyPath = "$env:USERPROFILE\.ssh\discloseai_gpu_backup_ed25519",
     [string]$PidFile = "/data/discloseai/manifests/eqs_v3_batch_03.pid",
     [int]$PollSeconds = 60
 )
 
 $ErrorActionPreference = "Stop"
+
+if (-not $SshHost) {
+    throw "SshHost 미설정 — -SshHost 인자를 넘기거나 환경변수 DISCLOSEAI_GPU_SSH_HOST(예: user@host)를 설정하세요."
+}
 
 while ($true) {
     $remotePid = (ssh -i $KeyPath -o IdentitiesOnly=yes -o BatchMode=yes $SshHost "cat $PidFile" 2>$null).Trim()

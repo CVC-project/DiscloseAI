@@ -1,0 +1,157 @@
+{
+  "t": "330590",
+  "n": "롯데리츠",
+  "s": "부동산",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "023530",
+        "n": "롯데쇼핑",
+        "type": "associate",
+        "detail": "42.04% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "유통",
+        "tier": "named400"
+      },
+      {
+        "t": "023530",
+        "n": "롯데쇼핑",
+        "type": "dart_filing",
+        "detail": "지배기업 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "유통",
+        "tier": "named400"
+      },
+      {
+        "t": "004990",
+        "n": "롯데지주",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "지주",
+        "tier": "named400"
+      },
+      {
+        "n": "(주)코리아세븐",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "(주)호텔롯데",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "롯데글로벌로지스㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "롯데물산㈜",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "6.36% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "롯데물산㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "롯데에이엠씨㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "004990",
+          "n": "롯데지주",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 159233000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 영업비용, 특수관계자거래 · 별도"
+        },
+        {
+          "n": "롯데에이엠씨㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2659285000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 영업비용, 특수관계자거래 · 별도"
+        },
+        {
+          "n": "롯데물산㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1073889000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 영업비용, 특수관계자거래 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "t": "023530",
+          "n": "롯데쇼핑",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 57703429000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 영업수익, 특수관계자거래 · 별도"
+        },
+        {
+          "n": "(주)호텔롯데",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 6292235000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 영업수익, 특수관계자거래 · 별도"
+        },
+        {
+          "n": "롯데글로벌로지스㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2453284000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 영업수익, 특수관계자거래 · 별도"
+        },
+        {
+          "n": "(주)코리아세븐",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 27342000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 영업수익, 특수관계자거래 · 별도"
+        }
+      ]
+    }
+  }
+}

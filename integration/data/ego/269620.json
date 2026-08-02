@@ -1,0 +1,84 @@
+{
+  "t": "269620",
+  "n": "시스웍",
+  "s": "전기전자부품",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "n": "(주)에이티비",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "20.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "SUZHOU SYSWORK CO.,LTD",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜동양기술",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "27.75% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "주식회사 스톤건설",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "13.46% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "n": "㈜동양기술",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1019281000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 거래 · 매입거래등"
+        }
+      ],
+      "down": [
+        {
+          "n": "(주)필로시스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1113470000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 거래 · 매출거래등"
+        },
+        {
+          "n": "㈜비비비",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 736604000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 거래 · 매출거래등"
+        },
+        {
+          "n": "㈜동양기술",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 130750000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 거래 · 매출거래등"
+        }
+      ]
+    }
+  }
+}

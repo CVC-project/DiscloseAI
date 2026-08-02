@@ -1,0 +1,61 @@
+{
+  "t": "115180",
+  "n": "큐리언트",
+  "s": "제약바이오",
+  "tier": "named400",
+  "layers": {
+    "governance": [
+      {
+        "t": "006620",
+        "n": "동구바이오제약",
+        "type": "investment",
+        "detail": "10.82% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "제약바이오",
+        "tier": "dot"
+      },
+      {
+        "n": "QLi5 Therapeutics AG",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "64.12% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "006620",
+          "n": "동구바이오제약",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 8000000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 현금출자"
+        }
+      ],
+      "down": [
+        {
+          "t": "006620",
+          "n": "동구바이오제약",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 16000000000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 등 · 현금출자"
+        },
+        {
+          "n": "유암코키스톤구조혁신기업재무안정사모투자합자회사",
+          "kind": "coop_fund",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 7500000000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 등 · 현금출자"
+        }
+      ]
+    }
+  }
+}

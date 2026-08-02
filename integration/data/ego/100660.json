@@ -1,0 +1,182 @@
+{
+  "t": "100660",
+  "n": "서암기계공업",
+  "s": "기계·장비",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "000850",
+        "n": "화천기공",
+        "type": "associate",
+        "detail": "32.22% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "기계·장비",
+        "tier": "dot"
+      },
+      {
+        "t": "000850",
+        "n": "화천기공",
+        "type": "dart_filing",
+        "detail": "유의적 영향력 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "기계·장비",
+        "tier": "dot"
+      },
+      {
+        "t": "010660",
+        "n": "화천기계",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "기계·장비",
+        "tier": "dot"
+      },
+      {
+        "t": "000850",
+        "n": "화천기공",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "기계·장비",
+        "tier": "dot"
+      },
+      {
+        "n": "Suzuki Seiki",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "90.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "Suzuki Seiki (Foshan)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "90.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "권영열",
+        "kind": "person",
+        "type": "investment",
+        "detail": "13.1% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "권영호",
+        "kind": "person",
+        "type": "investment",
+        "detail": "7.41% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "시리우스 실리콘벨리",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "10.9% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "시리우스 인베스트먼트",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "15.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "시리우스 인베스트먼트",
+        "kind": "coop_fund",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "영풍자동화기기",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "티피에스코리아(주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "000850",
+          "n": "화천기공",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 17293000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "000850",
+          "n": "화천기공",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 10448000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "t": "000850",
+          "n": "화천기공",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2426931000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "t": "000850",
+          "n": "화천기공",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2426931000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "t": "010660",
+          "n": "화천기계",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1816250000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "티피에스코리아(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 20690000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        }
+      ]
+    }
+  }
+}

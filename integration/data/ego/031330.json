@@ -1,0 +1,68 @@
+{
+  "t": "031330",
+  "n": "에스에이엠티",
+  "s": "유통",
+  "tier": "named400",
+  "layers": {
+    "governance": [
+      {
+        "t": "037460",
+        "n": "삼지전자",
+        "type": "associate",
+        "detail": "49.84% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "반도체",
+        "tier": "named400"
+      },
+      {
+        "t": "037460",
+        "n": "삼지전자",
+        "type": "dart_filing",
+        "detail": "지배기업 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "반도체",
+        "tier": "named400"
+      },
+      {
+        "n": "SAMT AMERICA LLC",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "SAMT SG PTE.LTD",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "To-Top Electronics Company Limited",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [],
+      "down": [
+        {
+          "t": "037460",
+          "n": "삼지전자",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 159095000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        }
+      ]
+    }
+  }
+}

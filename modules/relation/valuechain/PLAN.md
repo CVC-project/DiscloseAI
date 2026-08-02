@@ -7,6 +7,11 @@
 > ⑦ 루프 경계 요약표(§4.6) — 재현율 하한·최대 라운드 등 무인 루프 완주 조건 확정
 > 개정: v1.3 (2026-07-21) — ⑧ universe(전 상장사 지배구조 확장) 계획과 상호 참조:
 > V0 CompanyRegistry에 universe 컬럼 동시 반영, §5 엣지 문법의 레이어 분리 명시
+> 개정: v1.4 (2026-07-21) — 착수 전 코드 실측 재검토 반영: ⑨ 진입 위치를 v2 셸 EgoView로
+> 확정(리더 결정 — "FINANCIALS 탭"은 실재하지 않음) ⑩ reports.db 경로 상수 실측(1곳 아님 —
+> 코드 4곳+테스트 1곳+문서 5곳) ⑪ GPU 서버 접속 복구(2026-07-21) 반영 — V2+ 차단 해제
+> ⑫ 학생 베이스 모델 "Qwen3 고정" 해제 — B0에서 최신 릴리스 포함 4기준 재선정(§3.4·§4.2)
+> ⑬ 시각화 엣지 검증 하네스 V 신설([../universe/PLAN.md](../universe/PLAN.md) §5.5 — V-1 계약 체커는 V1 export와 동시 작성)
 > 소유: relation 모듈 (리더). 실행 시 이 문서의 Phase 체크박스를 세션마다 갱신.
 > 관련: [../PLAN.md](../PLAN.md)(지배구조 v1), [../universe/PLAN.md](../universe/PLAN.md)(전 상장사 지배구조 확장 · universe 시각화),
 > [../CLAUDE.md](../CLAUDE.md)(모듈 규칙),
@@ -17,8 +22,11 @@
 ## 0. 목표
 
 ### 제품 목표
-기업 상세 FINANCIALS 탭에 **지배구조 / 밸류체인 토글**을 신설하고, 앵커 기업 중심의
-전방(공급처)·후방(고객사) 흐름을 공시 근거와 함께 시각화한다.
+v2 셸 EgoView(기업 클릭 상세 관계망, [../universe/PLAN.md](../universe/PLAN.md) LOD-2)에
+**지배구조 / 밸류체인 레이어 토글**을 두고, 앵커 기업 중심의 전방(공급처)·후방(고객사)
+흐름을 공시 근거와 함께 시각화한다. ★v1.4: 진입 위치를 셸 단일로 확정 — dossier 탭
+진입은 비목표(구 "FINANCIALS 탭" 전제는 실재하지 않는 탭이었음. dossier 3탭 =
+business/galaxy/eqs, 지배구조 시각화는 셸 bundle.jsx에만 존재).
 갤럭시 → 섹터 클러스터 → 기업 진입 동선은 현행 유지.
 **대상은 처음부터 전 상장사(코스피+코스닥, ~2,600사)** — 밸류체인 엣지는 을(乙) 쪽
 중소형사 공시에서 흘러나오므로(비대칭 공시) 코스닥 소재·부품·장비사가 빠지면
@@ -77,6 +85,8 @@
 | D10 | 진행 방식: 수집은 전량 선행(D3), **추출·QA는 섹터 단위 증분** — 반도체 파일럿(골든) → 검증 → 섹터별 확산 | 골든→확산 패턴, 수정 용이 |
 | D11 | **reports.db를 `shared/data/`로 승격** (리더 결정, v1.1). 쓰기 소유는 report 모듈 수집기 단독, 타 모듈은 read-only. relation의 자체 원문 수집(구 VcSectionCache) 폐기 | 이중 수집 해소. "정본=모듈 로컬" 원칙의 공식 예외 → ARCHITECTURE·루트 CLAUDE.md 명문화 필수 |
 | D12 | **모든 증분 처리는 멱등(idempotent)** — 자연키 unique 제약 + upsert, 재실행이 중복·유실을 만들지 않아야 함 | 기업 추가·변경 시 실수 없는 확장 (§4.5) |
+| D13 ★2026-07-29 | **신선도 정책(리더 결정)** — 화면은 현재 관계만: rp_note=보고사별 최신 주석 연도만 / supply_contract=계약 종료일(valid_until) 미경과만, 종료일 없으면 2년 컷 / biz_prose(T2)=2년 컷. 저장은 전 연도 보존(D7), **필터는 export 단계만**(`freshness.py` 정본). 실측: active 1,559 중 만료 계약 937·구연도 주석 168 등 71%가 비현재였음 | "가장 최근 기준이 논리상 맞다"(리더) — 일회성 수시공시가 수년간 현재처럼 노출되는 왜곡 차단 |
+| D13-G ★2026-07-30 | **⚠️ D13 적용 범위가 밸류체인에서 끝나 있었다 — 지배구조로 확장**: 위 D13 구현(`freshness.py`)은 valuechain export 2곳에만 걸렸고 지배구조(RelationLocal)에는 절대 연도 컷이 **없었다**. `latest_relation_local_edges`가 **쌍별 최신**만 고르므로 그 쌍을 마지막으로 공시한 해가 2020이면 그대로 현재 관계로 렌더(실측 화면 36,321건 중 2023년 이하 **4,320건=11.9%**, 넥스틴→Nextin Solutions 100%가 2020 기준). → `storage/queries.py:current_governance_edges` 신설 = 쌍별 최신 + **보고사별 최신 연도** 컷. **보고사가 원천마다 다르다**: otrCpr=출자사(source) / hyslr=피출자사(target) / dart_filing=보고사(source) / ftc=공정위라 비대상. detail에 ` · YYYY` 표기 동반. 화면 36,321 → **29,364** | 리더 지적("지배구조는 2025 기준인데 왜 2020이 있나"). 전역 하드컷이 아니라 보고사별인 이유 = D13 rp_note와 같은 "미제출사 불이익 없음"(4개사 보호). 화면 결정 = [UX-025](../../../integration/v2/UX_DECISIONS.md) |
 
 ---
 
@@ -90,11 +100,20 @@ shared/data/reports.db          ← modules/report/data/reports.db 이동(승격
   읽기: relation(밸류체인 추출) · 기타 모듈 read-only
 ```
 
-- **승격 마이그레이션 태스크** (V0):
-  1. 파일 이동 + `modules/report/db.py` 경로 상수 변경 (galaxy 파이프라인 회귀 확인 필수)
+- **승격 마이그레이션 태스크** (V0): ★v1.4 실측 — 경로 변경 지점은 "1곳"이 아니라 아래 전부.
+  0. `shared/data/` 디렉터리 **신규 생성** (현재 미존재)
+  1. 파일 이동 + 경로 참조 일괄 변경:
+     - 코드 4곳: `modules/report/db.py:8` · `series.py:89` · `report_source.py:26` ·
+       `check_golden.py` 373·565행 (db.py 외 3파일은 각자 경로를 재정의 — import 미경유)
+     - 테스트 1곳: `tests/report/test_series_golden.py:17`
+     - 에이전트·스킬 문서 5곳: `.claude/agents/note-extractor.md` ·
+       `accuracy-verifier.md` · `completeness-auditor.md` · galaxy-golden `SKILL.md`
+       (`.claude/`·`.agents/` 미러 양쪽 — 미러는 sync_codex 재실행으로)
+     - 변경 후 **galaxy 파이프라인 회귀 확인 필수** + `grep -r "report/data/reports.db"` 잔존 0건
   2. 루트 CLAUDE.md "데이터 정본은 모듈별 로컬 SQLite"에 예외 명문화:
      *"shared/data/ = 리더 승인 공유 코퍼스. 쓰기 소유 모듈 1개 명시, 그 외 read-only"*
-  3. docs/ARCHITECTURE.md DB 토폴로지(§3.5) 갱신
+  3. docs/ARCHITECTURE.md DB 토폴로지(§3.5) 갱신 — reports.db는 현재 §3.5 표에
+     행 자체가 없음 → **행 신설**(위치=shared/data/, 쓰기=report 단독) + §2 폴더 표 갱신
   4. `scripts/sync_codex.py` 재실행 (미러 갱신)
 - **수집 확장**: report 모듈 수집기를 전 상장사 × 5개년으로 확장. 우선 섹션 =
   `II.사업의내용` + 연결주석(특수관계자 포함). 실측 기반 추정: 48사 646MB → 2,600사 ~35GB,
@@ -227,7 +246,7 @@ v1의 "섹션 통째 입력"은 작동하지 않는다 — `II.사업의내용`�
 
 | 항목 | 값 (초기) | 비고 |
 |---|---|---|
-| 베이스 | Qwen3-14B (1순위) / 32B(비교군) | B0에서 제로샷 비교 후 확정 |
+| 베이스 | Qwen3-14B / 32B + **실행 시점 최신 오픈 릴리스**(예: Qwen3.5·Qwen3-Next 계열 등장 시 후보 포함) ★v1.4 | "Qwen3 고정" 해제 — B0에서 4기준 재선정: ⓐ SGLang 서빙+xgrammar 지원 ⓑ LLaMA-Factory QLoRA 지원(신형 아키텍처는 툴체인 지원 지연 리스크) ⓒ val 제로샷 F1 ⓓ A100 80GB 서빙·학습 동시 수용. 메모: galaxy에서 본 GPU 오류는 **열린 산문 생성** 실패 — 본 과제는 스키마 강제 좁은 추출+2패스 검증+τ 운영점이라 실패 양상이 다름. 다만 베이스 업그레이드는 B0 비용이 낮으므로 항상 후보군에 포함 |
 | 방식 | QLoRA 4-bit NF4, LoRA r=32 α=64, all-linear target | LLaMA-Factory config 커밋 |
 | 손실 | **completion-only** (출력 토큰만 loss — 프롬프트 마스킹) | 추출 SFT 표준 |
 | 시퀀스 | 2K (청크 ≤1.5K자 전제) | 청킹 덕에 짧다 — 처리량↑ |
@@ -332,8 +351,10 @@ A5  골드 분리  : val·test 배정분 CPA 검수(test 100%) 후 봉인
 ### 4.2 하네스 B — 학습 루프 (A100, F1 게이트 수렴까지 반복)
 
 ```
-B0  베이스라인 : 제로샷 Qwen 14B·32B + Claude를 val로 평가 → 비교표 1·2행
-                + 학생 크기 확정 (기본 가설: 14B 튜닝 > 32B 제로샷)
+B0  베이스라인 : ★v1.4 선행 스텝 — 최신 오픈 릴리스 웹 조사 → 후보 매트릭스(§3.4 4기준)
+                작성 → 제로샷 평가 대상 확정 (교사는 Claude 유지 — 변경 없음).
+                이후 제로샷 후보군 + Claude를 val로 평가 → 비교표 1·2행
+                + 학생 베이스 확정 (기본 가설: 중형 튜닝 > 대형 제로샷)
 ┌─ 반복 (라운드 r) ─────────────────────────────────────────┐
 │ B1  컴파일   : train → LLaMA-Factory 포맷, dataset_v{r} 태깅            │
 │ B2  학습     : §3.4 레시피. GPU 시분할(§4.0). config·seed 커밋          │
@@ -433,7 +454,7 @@ report 수집기(shared)가 신규 연도 적재 → 하네스 C 증분 실행(�
 
 | 항목 | 정책 |
 |---|---|
-| 진입 | FINANCIALS 탭 내 `지배구조 / 밸류체인` 토글 (갤럭시→섹터→기업 동선 불변) |
+| 진입 ★v1.4 | v2 셸 EgoView(LOD-2) 상단 `지배구조 / 밸류체인` 레이어 토글([../universe/PLAN.md](../universe/PLAN.md) §5) — dossier 탭 진입은 비목표. 갤럭시→섹터→기업 동선 불변 |
 | 레이아웃 | 앵커 중앙 고정, 상류(공급처) 상단 / 하류(고객) 하단 — 물자 흐름 위→아래 |
 | 표시 한도 | 1-hop만. 사이드당 Top-N(기본 6, 5~8 튜닝) — 랭킹: tier → amount → as_of |
 | 잔여 처리 | 묶음 노드 "○○ 외 n사" → 클릭 시 사이드 패널 리스트 (그래프 확장 금지) |
@@ -452,17 +473,93 @@ report 수집기(shared)가 신규 연도 적재 → 하네스 C 증분 실행(�
 ## 6. 실행 로드맵 (수집 전량 선행 · 추출은 섹터 증분 — D3·D10)
 
 ### Phase V0 — 기반 + shared 승격
-- [ ] **reports.db → shared/data/ 승격 마이그레이션** (§2.1 체크리스트 4항 — galaxy 회귀 확인 포함)
-- [ ] report 수집기 전 상장사 확장 → 우선 섹션(사업의내용·연결주석) 전량 수집 개시 (3~5일 배치)
-- [ ] `valuechain/` 패키지 스켈레톤 (`chunker/ extract/ train/ evaluate.py export.py`) + storage 스키마(§2.2 — UNIQUE 제약·멱등 테스트 포함)
-- [ ] CompanyRegistry 전 상장사 적재 + KSIC↔산업연관표 매핑(auto) + M1 동기화 루프 가동
-      — **universe 컬럼(market_cap_krw·cap_asof·sector_id·universe_tier·universe_rank) 동시 반영**
+- [x] **reports.db → shared/data/ 승격 마이그레이션** (§2.1 체크리스트 4항 — galaxy 회귀 확인 포함) — 2026-07-21 완료(PROGRESS.md)
+- [x] report 수집기 전 상장사 확장 → 우선 섹션(사업의내용·연결주석) 전량 수집 개시 (3~5일 배치) — 개시함(진행 중, 2026-07-21 기준 2,259/2,651 tickers)
+- [x] `valuechain/` 패키지 스켈레톤 (`chunker/ extract/ train/ evaluate.py export.py`) + storage 스키마(§2.2 — UNIQUE 제약·멱등 테스트 포함) — 2026-07-21: storage 스키마는 V0에서 선완료, 패키지 스켈레톤(chunker/train/evaluate.py 뼈대 + extract/export.py 실구현)은 이번 세션 완료
+- [x] CompanyRegistry 전 상장사 적재 + KSIC↔산업연관표 매핑(auto) — 2,651사(U0 게이트 PASS)
+      — **universe 컬럼(market_cap_krw·cap_asof·sector_id·universe_tier·universe_rank) 동시 반영** 완료.
+      M1 정기 동기화 루프(월 1회 스케줄러)는 **미가동** — 지금까지는 1회성 sync 실행뿐
       ([../universe/PLAN.md](../universe/PLAN.md) U-D5 — 스키마 합의 후 마이그레이션 1회로 완결)
-- [ ] CompanyAlias 초기 구축 (DART 사명변경 이력 자동 이관)
+- [x] CompanyAlias 초기 구축 — 2026-07-21 완료: 자동(dart_history) 파생은 report_raw
+      corp_name 이력 창(2021~2025)에 실제 사명변경 사례가 0건이라 불발(수집 97.7%
+      시점 기준) — top50 시절 큐레이션된 NAME_ALIASES 21건(현대차·SK·LG·HD현대·삼성
+      그룹 DART 정식명↔KRX 약칭)을 manual 소스로 전량 이관(21/21 매칭). **Phase V0
+      5개 항목 전부 완료.**
 
 ### Phase V1 — T1 엣지 + 뷰 v1 (GPU 무관 · 화면 검증 선행)
-- [ ] 정형 파서 3종: 특수관계자 주석(금액) / 단일판매·공급계약 수시공시 / 타법인출자현황
-- [ ] `ValueChainEdge` T1 적재(멱등 upsert) + `export.py` → valuechain.json
+- [x] **정형 파서 2종으로 확정**(리더 결정, 2026-07-21 — 아래 두 결정 참조):
+      **특수관계자 주석(금액) 완료**(`extract/related_party.py`, 2026-07-21 —
+      매출/매입 거래금액, 당기만, 실제 삼성전자 공시 샘플 기반 pytest 13건 PASS) /
+      **단일판매·공급계약 수시공시 완료**(`extract/supply_contract.py`, 2026-07-21 — DART
+      엔드포인트 조사 결과: 전용 구조화 API 없음, `list.json`(pblntf_detail_ty=I001) +
+      `document.xml` 파싱. 실측 발견: 계약상대방 다수가 영업기밀로 비공개(§7 리스크 기적중).
+      실제 공시 2건 fixture 기반 pytest 5건 PASS)
+  - **리더 결정 A — 타법인출자현황은 3번째 T1 파서로 만들지 않는다.** 지분투자
+    데이터는 U1에서 이미 RelationLocal(거버넌스 레이어)로 완전히 표현됨.
+    ValueChainEdge.edge_type(supply/customer/raw_material/competition)은 거래관계용이라
+    지분율이 자연히 대응하지 않고, 억지로 끼워 넣으면 U-D14가 지키려는 "거버넌스 vs
+    밸류체인 문법 분리"를 파서 레벨에서 다시 깨뜨림. RelationRaw 재사용 아이디어 폐기
+    — 밸류체인 T1은 정형 파서 2종이 최종 스코프.
+  - **리더 결정 B — 익명 엣지 스키마 확장은 T2로 이연, 지금은 안 함.** T1의 가치는
+    정밀·고신뢰(§0 기술 목표)인데 익명 항목은 그 반대라 스키마를 넓혀 T1에 섞으면
+    등급의 의미가 흐려짐. §7 리스크의 "카운트 기여" 취지는 현재도 LinkFailQueue
+    누적 + apply() 카운터(`link_failed`/`no_counterparty`)로 약하게 충족됨(어떤
+    표기가 실패했는지 빈도까지 추적 가능). T2는 confidence·운영점(τ) 스키마를
+    어차피 새로 설계해야 하므로, 익명 표현은 그때 한 번에 설계해 마이그레이션
+    중복을 피한다. `dst_corp NOT NULL` 유지.
+- [x] `ValueChainEdge` T1 적재(멱등 upsert) + `export.py` → valuechain.json — 코드·pytest 완료.
+      **특수관계자 주석 실 코퍼스 실행 완료**(2026-07-22, 2회) — 1차 109노트→69엣지,
+      실측 정확도 재검토 중 **심각한 커버리지 버그 발견·수정**(아래) 후 재실행 →
+      **109노트→155엣지**(customer 79·supply 76). **단일판매·공급계약 2020~2026 전
+      상장사 실 코퍼스 실행 완료** — 1차 배치(전 7개년) 완료 직후 2020·2021년치가
+      `document.xml` 인코딩 버그로 거의 전멸(2020: 1,912건 중 6건, 2021: 2,216건 중
+      0건만 fetch 성공)한 것을 발견·수정(아래) 후 2020~2022년치 재실행 →
+      **최종 1,239엣지**(전부 customer 방향, 연도별 132~213건으로 고르게 분포:
+      2020=132·2021=195·2022=213·2023=170·2024=185·2025=179·2026=165).
+      relation.db 총 ValueChainEdge = 1,394(특수관계자 155 + 공급계약 1,239)
+  - ★2026-07-22 **DART document.xml 인코딩 버그 발견·수정**: 응답 인코딩이 연도·
+    회사마다 다르다 — 2026년 표본(그린광학·아티스트스튜디오)은 UTF-8이었으나
+    2020년 다수·2021년 전량이 실제로는 **cp949**(meta 태그의 "euc-kr" 주장과도
+    다름). UTF-8 하드코딩으로 인해 대량 fetch 실패가 발생 — UTF-8 우선 시도 후
+    cp949 폴백으로 수정, 순수 디코드 로직 분리해 유닛테스트 2건 추가(네트워크
+    모킹 불요). 수정 후 2020~2022 재실행 결과 fetch 성공률 1,911/1,912·2,215/2,216·
+    2,048/2,049(잔여 실패 1건씩은 "File is not a zip file" — 별개의 무시 가능한
+    소수 사례, 원인 미추적).
+  - ★2026-07-22 **실측 버그 발견·수정 (심각)**: `related_party.py`가 "당기/전기 마커
+    직후 빈 줄 하나만 있다"고 가정했으나(2026-07-21 최초 구현·1차 실행 당시 삼성전자
+    표본만으로 확정), 실제로는 다수 회사 표에서 마커와 표 사이에 **제목·기간·단위를
+    파이프 없이 그대로 반복하는 평문 줄**이 끼어 있어(sectioner가 원문 `<P>` 문단과
+    `<TABLE>`을 각각 렌더링해 중복 생김) 그 회사들의 표가 통째로 0줄로 파싱되고
+    있었다 — 109노트 중 겨우 13개만 커버(1차 실행의 69엣지 대부분이 이 13개에서 나옴).
+    추가로 라벨 스킴 자체도 회사군마다 달라 "매출 등"/"매입 등"(삼성 계열) 외에
+    "수익거래"/"비용거래"(현대차 계열 등)도 있음을 확인 — 두 문제를 함께 수정해
+    109개 중 41개(레이블 변형 반영) 커버로 확대. 수정 과정에서 2단 rowspan
+    하위분류 행(예: "수익거래"→"매출거래" 세부내역)이 값 위치를 한 칸씩 밀어
+    엉뚱한 상대회사에 금액을 귀속시킬 뻔한 위험도 발견해, **헤더·데이터 셀 수가
+    정확히 일치하는 행만 채택**하는 가드를 추가(오귀속보다 소수 세부금액 누락이
+    안전). 현대로템 실제 데이터 기반 회귀 테스트 4건 신설.
+  - ★정직하게 기록 — **여전히 미해결인 구조적 한계**: 나머지 ~65/109(하나금융지주
+    계열·LIG넥스원 등)는 표 자체가 **전치(transposed)**돼 있다 — 행=거래유형이 아니라
+    행=상대회사명, 열=거래유형인 정반대 구조. 현재 파서는 이 구조를 지원하지 않는다
+    (억지 매칭 금지 원칙 — 후속 과제로 남김, 별도 파서 분기 또는 표 orientation 자동
+    감지가 필요).
+  - **후속 세션(2026-07-22)에서 해소**: `parse_note_transposed()` 신설(text_html +
+    rowspan 그리드 복원) — 하나·LIG류("매출 등"/"매입 등" 라벨) 커버(rp_note
+    109노트→164엣지). 같은 날 추가 세션에서 열 헤더 라벨 편차 2종 더 확장(기아의
+    bare "매출"/"매입", 한화시스템의 "재화의 판매로 인한 수익..."/"재화의 매입...")
+    → rp_note **164→297엣지**(PROGRESS.md (14) 상세). 현대모비스류(다단 COLSPAN
+    "합계" 컬럼이 리프 컬럼 수와 어긋나는 구조)는 여전히 미해결 — 억지 매칭 금지로
+    보류 중.
+  - **DART list.json 조회기간 상한 실측 발견**(수시공시 실 코퍼스 배치 준비 중):
+    1년 범위로 호출 시 `status="100"`(파라미터 오류) — 문서화 안 된 제약. 3개월
+    (분기) 단위는 정상 동작 확인. `discover_filings()`가 내부적으로 ≤89일 구간
+    자동 분할하도록 수정 + 순수 함수(`_split_date_windows`) 단위 테스트 3건 추가.
+- [x] ★v1.4 하네스 V-1 계약 체커를 valuechain.json에 확장 완료
+      (`test_v1_contract_checker.py`, 2026-07-21) — 스키마 형태(`test_export_json_contract_shape`)
+      + 참조 무결성(엣지 src/dst 전원 CompanyRegistry 실존) + 자연키 중복 0(3회 재실행) +
+      멱등 export(연속 호출 바이트 단위 diff 0, 파서 재실행 후에도 불변) + 근거 노출
+      (provenance·rcept_no 전 엣지 필수) = pytest 4건 전부 PASS. 파서 2종 확정(위 참조)에
+      맞춘 정식 V-1 스위트 완성 — [../universe/PLAN.md](../universe/PLAN.md) §5.5 준용
 - [ ] integration에 §5 명세 전달 → 밸류체인 토글 뷰 v1 (T1만으로 렌더 검증)
 - [ ] 게이트: 반도체 앵커 3사(삼성전자·SK하이닉스·소재주 1) 화면 QA 통과
 
@@ -493,7 +590,8 @@ report 수집기(shared)가 신규 연도 적재 → 하네스 C 증분 실행(�
 
 | 리스크 | 대응 |
 |---|---|
-| shared 승격이 galaxy 파이프라인을 깨뜨림 | V0 마이그레이션에 회귀 확인 명시. 경로 상수 1곳(modules/report/db.py) 집중 관리 |
+| shared 승격이 galaxy 파이프라인을 깨뜨림 | V0 마이그레이션에 회귀 확인 명시. ★v1.4 실측: 경로 참조는 1곳이 아니라 코드 4곳+테스트 1곳+문서 5곳(§2.1 목록) — 일괄 변경 + grep 잔존 0건 게이트 |
+| GPU 접속 정보가 공개 저장소에 노출 (★v1.4 발견) | `modules/report/llm.py`의 docstring·오류 메시지에 서버 IP·계정 평문 하드코딩 — V0 이전 별도 브랜치(`fix/report-llm-secrets`)에서 환경변수로 이전·제거 (shared/config.py:30 "SSH 접속정보 기재 금지" 원칙 위반 해소) |
 | "정본=모듈 로컬" 원칙과의 충돌 | 리더 결정(D11)으로 공식 예외 — ARCHITECTURE·루트 CLAUDE.md 명문화가 V0 선행 조건 |
 | 코스닥 중소형사 공시 품질(서술 부실·비표준 표기) | 하드 네거티브에 코스닥 표기 과표집 + LinkFailQueue 수동 보정 루프(M2)로 흡수 |
 | 공급계약 공시 상대방 "비공개" 다수 | 익명 엣지로만(카운트 기여). T1 한계는 T2가 보완 |

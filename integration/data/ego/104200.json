@@ -1,0 +1,72 @@
+{
+  "t": "104200",
+  "n": "NHN벅스",
+  "s": "플랫폼",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "181710",
+        "n": "NHN",
+        "type": "associate",
+        "detail": "45.26% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "플랫폼",
+        "tier": "dot"
+      },
+      {
+        "t": "181710",
+        "n": "NHN",
+        "type": "dart_filing",
+        "detail": "지배기업 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "플랫폼",
+        "tier": "dot"
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "060250",
+          "n": "NHN KCP",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 268387000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "181710",
+          "n": "NHN",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 9870000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 · 별도"
+        },
+        {
+          "n": "엔에이치엔링크㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 399335000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 · 별도"
+        },
+        {
+          "n": "엔에이치엔페이코㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 44684000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 · 별도"
+        }
+      ]
+    }
+  }
+}

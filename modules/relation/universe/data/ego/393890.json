@@ -1,0 +1,83 @@
+{
+  "t": "393890",
+  "n": "더블유씨피",
+  "s": "전기전자부품",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "n": "W-SCOPE Corporation",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "34.76% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "W-SCOPE Corporation",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "지배기업 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "W-SCOPE Corporation.",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "지배기업 · 2022",
+        "dir": "out",
+        "as_of": 2022
+      },
+      {
+        "n": "W-SCOPE HUNGARY PLANT Kft.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "더블유스코프코리아(주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "n": "더블유스코프코리아(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 26810311740.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "W-SCOPE Corporation",
+          "kind": "private_corp",
+          "type": "capital_in",
+          "tier_grade": "T1",
+          "amount": 4252324000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 차입거래, 차입"
+        }
+      ],
+      "down": [
+        {
+          "n": "더블유스코프코리아(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2292459622.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 판매로 인한 수익, 특수관계자거래(주1)"
+        }
+      ]
+    }
+  }
+}

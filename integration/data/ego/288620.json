@@ -1,0 +1,104 @@
+{
+  "t": "288620",
+  "n": "에스프리즘",
+  "s": "전기전자부품",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "095910",
+        "n": "에스에너지",
+        "type": "associate",
+        "detail": "30.5% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "전기전자부품",
+        "tier": "dot"
+      },
+      {
+        "n": "에스모빌리티(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "60.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "에스파워(주)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "49.18% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "홍성민",
+        "kind": "person",
+        "type": "investment",
+        "detail": "6.9% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "095910",
+          "n": "에스에너지",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 171563000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입등"
+        },
+        {
+          "n": "에스파워(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 803025000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입등"
+        }
+      ],
+      "down": [
+        {
+          "t": "000720",
+          "n": "현대건설",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3933364800.0,
+          "as_of": 2026,
+          "prov": "단일판매ㆍ공급계약체결 · 현대건설 주식회사"
+        },
+        {
+          "t": "095910",
+          "n": "에스에너지",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1008000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출등"
+        },
+        {
+          "t": "095910",
+          "n": "에스에너지",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 3500000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 대여"
+        },
+        {
+          "n": "에스파워(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 42268000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출등"
+        }
+      ]
+    }
+  }
+}

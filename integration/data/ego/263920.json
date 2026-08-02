@@ -1,0 +1,134 @@
+{
+  "t": "263920",
+  "n": "휴엠앤씨",
+  "s": "기타",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "084110",
+        "n": "휴온스글로벌",
+        "type": "subsidiary",
+        "detail": "59.01% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "제약바이오",
+        "tier": "dot"
+      },
+      {
+        "t": "200670",
+        "n": "휴메딕스",
+        "type": "dart_filing",
+        "detail": "동일지배하의 기업 (별도) (별도) · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "제약바이오",
+        "tier": "dot"
+      },
+      {
+        "n": "HuM&C Vina",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "243070",
+          "n": "휴온스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 19994000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "t": "200670",
+          "n": "휴메딕스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 995873.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 · 별도"
+        },
+        {
+          "t": "084110",
+          "n": "휴온스글로벌",
+          "type": "capital_in",
+          "tier_grade": "T1",
+          "amount": 145434000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 자금차입거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "200670",
+          "n": "휴메딕스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 4045825482.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 · 별도"
+        },
+        {
+          "t": "243070",
+          "n": "휴온스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 15846389000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "t": "200670",
+          "n": "휴메딕스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4270279000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "㈜휴온스바이오파마",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 433304000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "㈜휴온스생명과학",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 219824000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "㈜휴온스엔",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 62519000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        },
+        {
+          "n": "㈜휴온스랩",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 149000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        }
+      ]
+    }
+  }
+}

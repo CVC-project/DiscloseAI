@@ -1,0 +1,89 @@
+{
+  "t": "024950",
+  "n": "삼천리자전거",
+  "s": "유통",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "094850",
+        "n": "참좋은여행",
+        "type": "investment",
+        "detail": "7.08% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "레저·교육",
+        "tier": "dot"
+      },
+      {
+        "t": "094850",
+        "n": "참좋은여행",
+        "type": "associate",
+        "detail": "43.78% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "레저·교육",
+        "tier": "dot"
+      },
+      {
+        "t": "094850",
+        "n": "참좋은여행",
+        "type": "dart_filing",
+        "detail": "지배력을 행사하는 기업 (별도) (별도) · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "레저·교육",
+        "tier": "dot"
+      },
+      {
+        "n": "㈜스마트자전거",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "지엘앤코㈜",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "31.64% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "n": "지엘앤코㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 310965000.0,
+          "as_of": 2022,
+          "prov": "특수관계자 거래 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "t": "094850",
+          "n": "참좋은여행",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1221000.0,
+          "as_of": 2022,
+          "prov": "특수관계자 거래 · 매출"
+        },
+        {
+          "n": "㈜올룰로",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3860080000.0,
+          "as_of": 2022,
+          "prov": "특수관계자 거래 · 매출"
+        }
+      ]
+    }
+  }
+}

@@ -28,7 +28,23 @@
     eqs:   "../data/eqs_summary.json",
     disc:  "../data/disclosures.json",
     price: "../data/price_scenarios.json",
+    // universe (2026-07-22, U2 full 이전) — named 400·25섹터·dots. 있으면 top50 대체.
+    universe: "../data/universe.json",
+    companiesIndex: "../data/companies_index.json",
   };
+
+  // "14.6조" / "8,900억" 등 mc 문자열 → 원(KRW) 숫자. 파싱 실패 시 null.
+  function parseMcWon(mc) {
+    if (typeof mc === "number") return mc;
+    if (typeof mc !== "string") return null;
+    const m = mc.replace(/,/g, "").match(/([\d.]+)\s*(조|억)?/);
+    if (!m) return null;
+    const v = parseFloat(m[1]);
+    if (!isFinite(v)) return null;
+    if (m[2] === "조") return v * 1e12;
+    if (m[2] === "억") return v * 1e8;
+    return v;
+  }
 
   async function tryFetch(url) {
     try {
@@ -202,16 +218,40 @@
     }));
   }
 
+  // universe.sectors(id/ko/count/cap조/dots) + named 노드 → 화면 sectors 형태로 변환.
+  // aggregateSectors(top50)와 달리 count·cap은 universe 전량 기준, dots·members 포함.
+  function buildUniverseSectors(universe, nodes) {
+    const byKo = new Map();
+    nodes.forEach((n) => {
+      const s = n.s || "기타";
+      if (!byKo.has(s)) byKo.set(s, []);
+      byKo.get(s).push(n);
+    });
+    return (universe.sectors || []).map((s) => ({
+      id: s.id,
+      ko: s.ko,
+      // adapter.buildPalette는 en/color를 SECTOR_DEF에서 채움 — 여기선 값만 전달.
+      capWon: (s.cap || 0) * 1e12,      // universe cap 단위 = 조
+      capJo: s.cap || 0,
+      count: s.count || 0,               // universe 전량 기업 수(named+dots)
+      memberCount: (byKo.get(s.ko) || []).length,  // 이 화면에 뜨는 named 수
+      members: byKo.get(s.ko) || [],
+      dots: s.dots || [],                // [[x,y,capBucket], ...] — LOD-1 배경 dots
+      // UX-032: 시장별 실측 집계 {KOSPI:{count,cap조}, KOSDAQ:{...}} — 성운 프록시 라벨용.
+      // 구 universe.json(markets 없음)에서도 화면이 안 깨지게 null 허용.
+      markets: s.markets || null,
+    }));
+  }
+
   async function loadAll() {
-    const [graph, eqs, disc, price] = await Promise.all([
+    const [graph, eqs, disc, price, universe, companiesIndex] = await Promise.all([
       tryFetch(URLS.graph),
       tryFetch(URLS.eqs),
       tryFetch(URLS.disc),
       tryFetch(URLS.price),
+      tryFetch(URLS.universe),
+      tryFetch(URLS.companiesIndex),
     ]);
-
-    const usingMock = !graph;
-    const relData = graph || D.MOCK_NODES || [];
 
     // ticker 인덱스 — dashboard L4990-5006
     const eqsByTicker = Object.fromEntries(
@@ -233,16 +273,37 @@
       (scenariosByTicker[s.ticker] = scenariosByTicker[s.ticker] || []).push(s);
     });
 
-    const nodes = relData.map((n) =>
+    // ── universe 우선(U2 full 이전): named 400·25섹터·dots ──────────────
+    // 없으면 graph_top50 경로로 graceful fallback(회귀 무손상).
+    const useUniverse = !!(universe && Array.isArray(universe.named) && universe.named.length);
+    // ★2026-08-02 (FN-016) 폴백 판정은 **존재**가 아니라 **내용**으로 한다.
+    // 구 `graph || D.MOCK_NODES`는 빈 배열이 truthy라 MOCK_NODES에 영원히 도달하지
+    // 못했다. main 시절엔 graph_top50.json에 50건이 있어 무해했지만, universe 전환
+    // 후 그 파일은 `[]`(2 bytes)로 비었다 — universe fetch가 실패하면 relData가
+    // 빈 배열이 되어 **0노드 백지 화면**으로 떨어진다(FN-005 폴백 사다리 무력화).
+    const graphNodes = Array.isArray(graph) && graph.length ? graph : null;
+    const relData = useUniverse ? universe.named : (graphNodes || D.MOCK_NODES || []);
+    const usingMock = !useUniverse && !graphNodes;
+
+    // named 노드에 mc 문자열 → market_cap 숫자 보강(top50 노드는 이미 숫자 mc).
+    const baseNodes = relData.map((n) =>
+      useUniverse ? { ...n, mc: parseMcWon(n.mc) } : n
+    );
+    const nodes = baseNodes.map((n) =>
       enrichNode(n, eqsByTicker, discByTicker, stmtByTicker, scenariosByTicker)
     );
-    const sectors = aggregateSectors(nodes);
+    const sectors = useUniverse
+      ? buildUniverseSectors(universe, nodes)
+      : aggregateSectors(nodes);
 
     return {
       ok: !usingMock,
       usingMock,
+      usingUniverse: useUniverse,
       nodes,
       sectors,
+      companiesIndex: (companiesIndex && Array.isArray(companiesIndex)) ? companiesIndex : [],
+      universeMeta: (universe && universe.meta) || null,
       scenarios: (price && price.data) || [],
       discAll: (disc && disc.disclosures) || [],
       stmtAll: (disc && disc.statements) || [],
@@ -251,6 +312,7 @@
         eqs: !!eqs,
         disc: !!disc,
         price: !!price,
+        universe: useUniverse,
       },
     };
   }

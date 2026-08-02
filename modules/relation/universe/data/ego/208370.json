@@ -1,0 +1,113 @@
+{
+  "t": "208370",
+  "n": "셀바스헬스케어",
+  "s": "전기전자부품",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "108860",
+        "n": "셀바스AI",
+        "type": "associate",
+        "detail": "38.08% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "플랫폼",
+        "tier": "dot"
+      },
+      {
+        "t": "041920",
+        "n": "메디아나",
+        "type": "investment",
+        "detail": "5.83% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "전기전자부품",
+        "tier": "dot"
+      },
+      {
+        "n": "(주)셀바스인비전",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "51.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "(주)피아모리프팅",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "8.11% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "Beijing SELVAS Healthcare CO., LTD",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "HIMS, INC",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "041920",
+          "n": "메디아나",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1832708000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        },
+        {
+          "t": "108860",
+          "n": "셀바스AI",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 210724000.0,
+          "as_of": 2023,
+          "prov": "특수관계자거래 · 영업비용"
+        }
+      ],
+      "down": [
+        {
+          "t": "041920",
+          "n": "메디아나",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 81182000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등"
+        },
+        {
+          "t": "108860",
+          "n": "셀바스AI",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 10942911000.0,
+          "as_of": 2023,
+          "prov": "특수관계자거래 · 유상증자"
+        },
+        {
+          "t": "108860",
+          "n": "셀바스AI",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 5962000.0,
+          "as_of": 2023,
+          "prov": "특수관계자거래 · 영업수익"
+        }
+      ]
+    }
+  }
+}

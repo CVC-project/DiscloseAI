@@ -1,0 +1,52 @@
+{
+  "t": "023960",
+  "n": "에쓰씨엔지니어링",
+  "s": "건설",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "131400",
+        "n": "이브이첨단소재",
+        "type": "investment",
+        "detail": "11.39% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "반도체",
+        "tier": "dot"
+      },
+      {
+        "n": "셀론텍㈜",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "n": "(주)메이드바이닥터",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 13090000.0,
+          "as_of": 2022,
+          "prov": "특수관계자와 관련된 내용 · 매입(주2)"
+        }
+      ],
+      "down": [
+        {
+          "n": "(주)메이드바이닥터",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 18459000.0,
+          "as_of": 2022,
+          "prov": "특수관계자와 관련된 내용 · 매출(주1)"
+        }
+      ]
+    }
+  }
+}

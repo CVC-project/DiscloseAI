@@ -1,0 +1,125 @@
+{
+  "t": "332370",
+  "n": "아이디피",
+  "s": "반도체",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "054800",
+        "n": "아이디스홀딩스",
+        "type": "associate",
+        "detail": "46.2% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "지주",
+        "tier": "dot"
+      },
+      {
+        "t": "052330",
+        "n": "코텍",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "반도체",
+        "tier": "dot"
+      },
+      {
+        "t": "093190",
+        "n": "빅솔론",
+        "type": "dart_filing",
+        "detail": "지배기업 · 2024",
+        "dir": "in",
+        "as_of": 2024,
+        "s": "반도체",
+        "tier": "dot"
+      },
+      {
+        "t": "219420",
+        "n": "링크제니시스",
+        "type": "dart_filing",
+        "detail": "기타 · 2024",
+        "dir": "in",
+        "as_of": 2024,
+        "s": "플랫폼",
+        "tier": "dot"
+      },
+      {
+        "n": "IDP Americas Inc",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "95.28% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "IDP Japan Co., Ltd",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "19.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "김영달",
+        "kind": "person",
+        "type": "investment",
+        "detail": "5.8% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "054800",
+          "n": "아이디스홀딩스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 144000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의거래 · 매입등"
+        },
+        {
+          "t": "093190",
+          "n": "빅솔론",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 206831746.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의거래 · 매입등"
+        },
+        {
+          "n": "에버린트(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2509102068.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의거래 · 매입등"
+        }
+      ],
+      "down": [
+        {
+          "t": "093190",
+          "n": "빅솔론",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 33336432.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의거래 · 매출등"
+        },
+        {
+          "n": "IDP Japan Co., Ltd",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 57524733.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의거래 · 매출등"
+        }
+      ]
+    }
+  }
+}

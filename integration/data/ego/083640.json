@@ -1,0 +1,62 @@
+{
+  "t": "083640",
+  "n": "인콘",
+  "s": "유통",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "032800",
+        "n": "판타지오",
+        "type": "investment",
+        "detail": "5.32% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "레저·교육",
+        "tier": "dot"
+      },
+      {
+        "t": "038530",
+        "n": "케이바이오랩스",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2022",
+        "dir": "in",
+        "as_of": 2022,
+        "s": "유통",
+        "tier": "dot"
+      },
+      {
+        "n": "㈜케이바이오컴퍼니",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "34.21% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "032800",
+          "n": "판타지오",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 2508248800.0,
+          "as_of": 2024,
+          "prov": "특수관계자거래 · 유상증자"
+        }
+      ],
+      "down": [
+        {
+          "t": "205470",
+          "n": "휴마시스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 514093641.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등 특수관계자 거래"
+        }
+      ]
+    }
+  }
+}

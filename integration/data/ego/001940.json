@@ -1,0 +1,86 @@
+{
+  "t": "001940",
+  "n": "KISCO홀딩스",
+  "s": "철강·금속",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "104700",
+        "n": "한국철강",
+        "type": "subsidiary",
+        "detail": "60.34% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "철강·금속",
+        "tier": "dot"
+      },
+      {
+        "n": "대흥산업(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "88.7% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "장세홍",
+        "kind": "person",
+        "type": "associate",
+        "detail": "45.58% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "환영철강공업(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "83.5% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "012160",
+          "n": "영흥",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 58071000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입, 특수관계자거래"
+        },
+        {
+          "n": "(주)대유코아",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 6196023000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입, 특수관계자거래"
+        },
+        {
+          "n": "(주)라보JAPAN",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 116629000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "(주)대유코아",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 6287943000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        }
+      ]
+    }
+  }
+}

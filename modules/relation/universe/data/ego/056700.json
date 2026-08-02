@@ -1,0 +1,95 @@
+{
+  "t": "056700",
+  "n": "신화인터텍",
+  "s": "소재",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "298000",
+        "n": "효성화학",
+        "type": "associate",
+        "detail": "20.0% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "화학",
+        "tier": "dot"
+      },
+      {
+        "t": "298040",
+        "n": "효성중공업",
+        "type": "ftc_group",
+        "detail": "효성 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "전기전자부품",
+        "tier": "named400"
+      },
+      {
+        "n": "DONGGUAN SHINWHA INTERTEK CORP",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "Epitone, Inc.",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "31.04% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "SHINWHA INTERTEK (SUZHOU) CO.,LTD",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "487570",
+          "n": "HS효성",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1846000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등(주1)"
+        },
+        {
+          "t": "298000",
+          "n": "효성화학",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 14537417000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입등"
+        },
+        {
+          "t": "487570",
+          "n": "HS효성",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1850829000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입등"
+        },
+        {
+          "t": "094480",
+          "n": "갤럭시아머니트리",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 50391000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입등"
+        }
+      ],
+      "down": []
+    }
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "t": "326030",
+  "n": "에스케이바이오팜",
+  "s": "제약바이오",
+  "tier": "named400",
+  "layers": {
+    "governance": [
+      {
+        "t": "034730",
+        "n": "SK",
+        "type": "subsidiary",
+        "detail": "64.0% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "지주",
+        "tier": "named400"
+      },
+      {
+        "t": "000660",
+        "n": "SK하이닉스",
+        "type": "ftc_group",
+        "detail": "에스케이 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "반도체",
+        "tier": "named400"
+      },
+      {
+        "n": "Ignis Therapeutics",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "41.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "LifeSci Venture Partners II",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "18.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "LifeSci Venture Partners III",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "19.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "Mentis Care, Inc.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "80.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "SK Life Science Labs, Inc.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "60.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "SK Life Science, Inc.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "SK생물의약과기(상해)유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [],
+      "down": [
+        {
+          "n": "Mentis Care, Inc.",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 10893600000.0,
+          "as_of": 2025,
+          "prov": "특수관계자간의 거래 · 매출 등, 특수관계자거래"
+        },
+        {
+          "n": "Ignis Therapeutics",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4174787000.0,
+          "as_of": 2025,
+          "prov": "특수관계자간의 거래 · 매출 등, 특수관계자거래"
+        },
+        {
+          "n": "Eurofarma Laboratorios S.A.",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 354174000.0,
+          "as_of": 2025,
+          "prov": "특수관계자간의 거래 · 매출 등, 특수관계자거래"
+        }
+      ]
+    }
+  }
+}

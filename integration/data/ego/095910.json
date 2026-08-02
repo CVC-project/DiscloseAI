@@ -1,0 +1,156 @@
+{
+  "t": "095910",
+  "n": "에스에너지",
+  "s": "전기전자부품",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "288620",
+        "n": "에스프리즘",
+        "type": "associate",
+        "detail": "30.5% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "전기전자부품",
+        "tier": "dot"
+      },
+      {
+        "t": "005850",
+        "n": "에스엘",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "자동차",
+        "tier": "named400"
+      },
+      {
+        "n": "(유)썬트랙솔라파크",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2023",
+        "dir": "out",
+        "as_of": 2023
+      },
+      {
+        "n": "Mega Solar Factory LLC",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "10.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "Wodonga Solar Power Pty Ltd",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2023",
+        "dir": "out",
+        "as_of": 2023
+      },
+      {
+        "n": "그린솔라남해하이웨이(주)",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2023",
+        "dir": "out",
+        "as_of": 2023
+      },
+      {
+        "n": "에스개발 주식회사",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "20.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "홍성민",
+        "kind": "person",
+        "type": "investment",
+        "detail": "13.82% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "288620",
+          "n": "에스프리즘",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1008000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출등"
+        },
+        {
+          "t": "288620",
+          "n": "에스프리즘",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 3500000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 대여"
+        },
+        {
+          "n": "그린솔라남해하이웨이(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 191858000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입등"
+        },
+        {
+          "n": "(주)연안솔라",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 52752000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입등"
+        }
+      ],
+      "down": [
+        {
+          "t": "288620",
+          "n": "에스프리즘",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 171563000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입등"
+        },
+        {
+          "n": "(유)썬트랙솔라파크",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 84463000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출등"
+        },
+        {
+          "n": "그린솔라남해하이웨이(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 73964000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출등"
+        },
+        {
+          "n": "(주)연안솔라",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 34625000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출등"
+        }
+      ]
+    }
+  }
+}

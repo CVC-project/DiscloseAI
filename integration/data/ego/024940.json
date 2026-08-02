@@ -1,0 +1,58 @@
+{
+  "t": "024940",
+  "n": "PN풍년",
+  "s": "유통",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "n": "(주)클래드",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2023",
+        "dir": "out",
+        "as_of": 2023
+      },
+      {
+        "n": "유재원",
+        "kind": "person",
+        "type": "associate",
+        "detail": "31.37% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "주식회사 피엔랩",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "n": "(주)클래드",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 10452309000.0,
+          "as_of": 2024,
+          "prov": "특수관계자와의 거래 · 매입 등"
+        }
+      ],
+      "down": [
+        {
+          "n": "(주)클래드",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 30000000.0,
+          "as_of": 2024,
+          "prov": "특수관계자와의 거래 · 매출 등"
+        }
+      ]
+    }
+  }
+}

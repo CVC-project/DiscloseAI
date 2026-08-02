@@ -1,0 +1,58 @@
+{
+  "t": "178920",
+  "n": "PI첨단소재",
+  "s": "소재",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "n": "(주)아케마코리아홀딩",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "54.07% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "ARKEMA SA",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "지배기업 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜코리아피아이홀딩스",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "지배기업 (별도) · 2022",
+        "dir": "out",
+        "as_of": 2022
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "n": "ARKEMA SA",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 2063249000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "n": "ARKEMA SA",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 52261000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 · 별도"
+        }
+      ]
+    }
+  }
+}

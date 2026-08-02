@@ -1,0 +1,105 @@
+{
+  "t": "454910",
+  "n": "두산로보틱스",
+  "s": "기계·장비",
+  "tier": "named400",
+  "layers": {
+    "governance": [
+      {
+        "t": "000150",
+        "n": "두산",
+        "type": "subsidiary",
+        "detail": "68.11% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "반도체",
+        "tier": "named400"
+      },
+      {
+        "t": "034020",
+        "n": "두산에너빌리티",
+        "type": "ftc_group",
+        "detail": "두산 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "기계·장비",
+        "tier": "named400"
+      },
+      {
+        "n": "(주)플레토로보틱스",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "6.85% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "Doosan Robotics Americas, Inc.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "91.44% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "두산신기술투자조합1호",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "19.8% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "010470",
+          "n": "오리콤",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 602000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출"
+        }
+      ],
+      "down": [
+        {
+          "t": "000150",
+          "n": "두산",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 640000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "두산경영연구원(주)",
+          "kind": "public_org",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 63980000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "두산큐벡스(주)",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1260000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "두산모트롤 주식회사",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 700000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        }
+      ]
+    }
+  }
+}

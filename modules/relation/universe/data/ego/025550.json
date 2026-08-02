@@ -1,0 +1,77 @@
+{
+  "t": "025550",
+  "n": "한국선재",
+  "s": "철강·금속",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "452280",
+        "n": "한선엔지니어링",
+        "type": "subsidiary",
+        "detail": "62.52% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "철강·금속",
+        "tier": "dot"
+      },
+      {
+        "n": "기성금속(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "이제훈",
+        "kind": "person",
+        "type": "associate",
+        "detail": "28.83% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "한국선재재팬(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "n": "(주)금제",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 67611474.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "452280",
+          "n": "한선엔지니어링",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 248070000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입등 · 별도"
+        },
+        {
+          "n": "(주)금제",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 5690410.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
+    }
+  }
+}

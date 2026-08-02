@@ -1,0 +1,70 @@
+{
+  "t": "038010",
+  "n": "제일테크노스",
+  "s": "철강·금속",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "417500",
+        "n": "제이아이테크",
+        "type": "associate",
+        "detail": "42.0% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "화학",
+        "tier": "dot"
+      },
+      {
+        "n": "나주영",
+        "kind": "person",
+        "type": "associate",
+        "detail": "34.79% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "417500",
+          "n": "제이아이테크",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1136773000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입 등"
+        },
+        {
+          "n": "㈜신화테크",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1690204000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입 등"
+        }
+      ],
+      "down": [
+        {
+          "t": "417500",
+          "n": "제이아이테크",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 518929000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        },
+        {
+          "n": "㈜신화테크",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 399894000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "t": "043340",
+  "n": "에쎈테크",
+  "s": "기계·장비",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "012800",
+        "n": "대창",
+        "type": "associate",
+        "detail": "50.0% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "철강·금속",
+        "tier": "dot"
+      },
+      {
+        "t": "021050",
+        "n": "서원",
+        "type": "dart_filing",
+        "detail": "최상위 지배기업 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "철강·금속",
+        "tier": "dot"
+      },
+      {
+        "t": "012800",
+        "n": "대창",
+        "type": "dart_filing",
+        "detail": "지배기업 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "철강·금속",
+        "tier": "dot"
+      },
+      {
+        "n": "(주)태우 등 (주)대창의 종속 및 관계기업",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜대창인터내셔널",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "조경호",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "대표이사 (별도) (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "조시영",
+        "kind": "person",
+        "type": "associate",
+        "detail": "22.11% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "조시영",
+        "kind": "person",
+        "type": "dart_filing",
+        "detail": "대표이사 (별도) (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "021050",
+          "n": "서원",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 261088000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입등 · 별도"
+        },
+        {
+          "t": "012800",
+          "n": "대창",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 19754455000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입등 · 별도"
+        },
+        {
+          "n": "(주)아이앤스틸인더스트리",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 9469000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입등 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "t": "021050",
+          "n": "서원",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 99053000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출등 · 별도"
+        },
+        {
+          "t": "012800",
+          "n": "대창",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 907592000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출등 · 별도"
+        }
+      ]
+    }
+  }
+}

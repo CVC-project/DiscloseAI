@@ -1,0 +1,77 @@
+{
+  "t": "105330",
+  "n": "케이엔더블유",
+  "s": "자동차",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "126600",
+        "n": "BGF에코머티리얼즈",
+        "type": "subsidiary",
+        "detail": "56.75% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "화학",
+        "tier": "dot"
+      },
+      {
+        "t": "282330",
+        "n": "BGF리테일",
+        "type": "ftc_group",
+        "detail": "BGF · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "유통",
+        "tier": "named400"
+      },
+      {
+        "n": "(주)비지에프에코스페셜티",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "K.N.W Vietnam Co., Ltd",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "북경특가기차령부건유한공사 (Beijing Tejia Automobile Parts Co.,Ltd)",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "126600",
+          "n": "BGF에코머티리얼즈",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 803513000.0,
+          "as_of": 2025,
+          "prov": "특수관계자간의 거래 · 매입등(*)"
+        },
+        {
+          "t": "282330",
+          "n": "BGF리테일",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 651000.0,
+          "as_of": 2025,
+          "prov": "특수관계자간의 거래 · 매입등(*)"
+        }
+      ],
+      "down": []
+    }
+  }
+}

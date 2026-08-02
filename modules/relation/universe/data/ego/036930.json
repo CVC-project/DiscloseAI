@@ -1,0 +1,50 @@
+{
+  "t": "036930",
+  "n": "주성엔지니어링",
+  "s": "기계·장비",
+  "tier": "named400",
+  "layers": {
+    "governance": [
+      {
+        "n": "파이온텍",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "6.54% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "황철주",
+        "kind": "person",
+        "type": "associate",
+        "detail": "25.5% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "n": "㈜무한",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1892528000.0,
+          "as_of": 2021,
+          "prov": "특수관계자 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "n": "㈜무한",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 15000000.0,
+          "as_of": 2021,
+          "prov": "특수관계자 · 매출"
+        }
+      ]
+    }
+  }
+}

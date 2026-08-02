@@ -1,0 +1,220 @@
+{
+  "t": "067290",
+  "n": "JW신약",
+  "s": "제약바이오",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "096760",
+        "n": "JW홀딩스",
+        "type": "associate",
+        "detail": "30.72% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "지주",
+        "tier": "dot"
+      },
+      {
+        "t": "096760",
+        "n": "JW홀딩스",
+        "type": "dart_filing",
+        "detail": "지배기업 · 2022",
+        "dir": "out",
+        "as_of": 2022,
+        "s": "지주",
+        "tier": "dot"
+      },
+      {
+        "t": "001060",
+        "n": "JW중외제약",
+        "type": "dart_filing",
+        "detail": "기타 · 2022",
+        "dir": "out",
+        "as_of": 2022,
+        "s": "제약바이오",
+        "tier": "dot"
+      },
+      {
+        "t": "234080",
+        "n": "JW생명과학",
+        "type": "dart_filing",
+        "detail": "기타 · 2022",
+        "dir": "out",
+        "as_of": 2022,
+        "s": "제약바이오",
+        "tier": "dot"
+      },
+      {
+        "t": "001060",
+        "n": "JW중외제약",
+        "type": "dart_filing",
+        "detail": "특수관계자 · 2024",
+        "dir": "in",
+        "as_of": 2024,
+        "s": "제약바이오",
+        "tier": "dot"
+      },
+      {
+        "n": "Euvipharm",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2022",
+        "dir": "out",
+        "as_of": 2022
+      },
+      {
+        "n": "JW메디칼㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2022",
+        "dir": "out",
+        "as_of": 2022
+      },
+      {
+        "n": "JW바이오사이언스㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2022",
+        "dir": "out",
+        "as_of": 2022
+      },
+      {
+        "n": "JW생활건강㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2022",
+        "dir": "out",
+        "as_of": 2022
+      },
+      {
+        "n": "JW케미타운㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2022",
+        "dir": "out",
+        "as_of": 2022
+      },
+      {
+        "n": "㈜C&C신약연구소",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2022",
+        "dir": "out",
+        "as_of": 2022
+      },
+      {
+        "n": "㈜생명누리",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2022",
+        "dir": "out",
+        "as_of": 2022
+      },
+      {
+        "n": "㈜중외정보기술",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2022",
+        "dir": "out",
+        "as_of": 2022
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "234080",
+          "n": "JW생명과학",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2844815000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출, 특수관계자거래"
+        },
+        {
+          "t": "001060",
+          "n": "JW중외제약",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 9736433000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입"
+        },
+        {
+          "t": "234080",
+          "n": "JW생명과학",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 994518000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입"
+        },
+        {
+          "n": "JW바이오사이언스㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1398287000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입"
+        }
+      ],
+      "down": [
+        {
+          "t": "234080",
+          "n": "JW생명과학",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 30909000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입, 특수관계자거래"
+        },
+        {
+          "t": "001060",
+          "n": "JW중외제약",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 5240869000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입, 특수관계자거래"
+        },
+        {
+          "t": "096760",
+          "n": "JW홀딩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 42922000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출"
+        },
+        {
+          "t": "001060",
+          "n": "JW중외제약",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 18329955000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출"
+        },
+        {
+          "t": "234080",
+          "n": "JW생명과학",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 30909000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출"
+        },
+        {
+          "n": "JW생활건강㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 40529000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "t": "155660",
+  "n": "DSR",
+  "s": "철강·금속",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "069730",
+        "n": "DSR제강",
+        "type": "investment",
+        "detail": "9.94% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "철강·금속",
+        "tier": "dot"
+      },
+      {
+        "n": "DSR INTERNATIONAL CORP",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "70.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "DSR VINA CO.,Ltd",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "98.5% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "디에스알케이(주)",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "10.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "청도DSR제강유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "92.31% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "홍 석 빈",
+        "kind": "person",
+        "type": "associate",
+        "detail": "23.74% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "069730",
+          "n": "DSR제강",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3776206000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등, 특수관계자거래"
+        },
+        {
+          "t": "069730",
+          "n": "DSR제강",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 28024080000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "DSR CABLE VINA Co., Ltd",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1648111000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "QINGDAO DSR TRADING CORP",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 601972000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "069730",
+          "n": "DSR제강",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 10917633000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "t": "069730",
+          "n": "DSR제강",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 63882165000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "DSR TRADING CORP",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4594240000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "DSR DAIVIET",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4028409000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "QINGDAO DSR TRADING CORP",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2003869000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "DSR CABLE VINA Co., Ltd",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 828299000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "종업원",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 70000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 대여거래, 대여"
+        }
+      ]
+    }
+  }
+}

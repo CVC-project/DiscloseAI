@@ -17,23 +17,34 @@ function TweakButton() { return null; }
 
 // galaxy.jsx — Realistic Andromeda-style spiral galaxy + 3D-tilted solar system
 
+// fallback 팔레트 = adapter.js SECTOR_DEF와 정합(universe 25 섹터, id·ko·color 동일).
+// 실 데이터 로드 실패 시에만 사용. cap은 대략치(mock) — 색·id 정합이 목적(U2 이중 소스 해소).
 const SECTOR_PALETTE = (window.__realData && window.__realData.sectors && window.__realData.sectors.length) ? window.__realData.sectors : [
-  { id: 'semi',    ko: '반도체',     en: 'Semiconductor',   color: '#74EEC6', cap: 980 },
-  { id: 'fin',     ko: '금융',       en: 'Financials',      color: '#fbbf24', cap: 720 },
-  { id: 'auto',    ko: '자동차',     en: 'Automotive',      color: '#a78bfa', cap: 540 },
-  { id: 'bio',     ko: '바이오',     en: 'Biotech',         color: '#f472b6', cap: 410 },
-  { id: 'energy',  ko: '에너지',     en: 'Energy',          color: '#f97316', cap: 380 },
-  { id: 'it',      ko: 'IT/플랫폼',  en: 'Platform',        color: '#60a5fa', cap: 660 },
-  { id: 'chem',    ko: '화학',       en: 'Chemicals',       color: '#facc15', cap: 320 },
-  { id: 'steel',   ko: '철강',       en: 'Steel',           color: '#94a3b8', cap: 240 },
-  { id: 'ship',    ko: '조선',       en: 'Shipbuilding',    color: '#22d3ee', cap: 280 },
-  { id: 'cons',    ko: '건설',       en: 'Construction',    color: '#fb923c', cap: 210 },
-  { id: 'retail',  ko: '유통/소비재', en: 'Retail',         color: '#fb7185', cap: 260 },
-  { id: 'tele',    ko: '통신',       en: 'Telecom',         color: '#818cf8', cap: 290 },
-  { id: 'media',   ko: '미디어',     en: 'Media',           color: '#e879f9', cap: 180 },
-  { id: 'food',    ko: '식음료',     en: 'F&B',             color: '#a3e635', cap: 200 },
-  { id: 'logi',    ko: '운송/물류',  en: 'Logistics',       color: '#34d399', cap: 230 },
-  { id: 'mat',     ko: '소재',       en: 'Materials',       color: '#fcd34d', cap: 220 },
+  { id: 'semi',       ko: '반도체',       en: 'Semiconductor',    color: '#5eead4', cap: 3088 },
+  { id: 'it',         ko: '플랫폼',       en: 'Platform',         color: '#60a5fa', cap: 1600 },
+  { id: 'machinery',  ko: '기계·장비',    en: 'Machinery',        color: '#c4b5fd', cap: 900 },
+  { id: 'fin',        ko: '금융',         en: 'Financials',       color: '#fbbf24', cap: 1400 },
+  { id: 'pharma',     ko: '제약바이오',   en: 'Pharma & Bio',     color: '#f472b6', cap: 800 },
+  { id: 'elec_parts', ko: '전기전자부품', en: 'Electronic Parts', color: '#2dd4bf', cap: 720 },
+  { id: 'retail',     ko: '유통',         en: 'Retail',           color: '#a3e635', cap: 520 },
+  { id: 'chem',       ko: '화학',         en: 'Chemicals',        color: '#fdba74', cap: 640 },
+  { id: 'steel',      ko: '철강·금속',    en: 'Steel & Metal',    color: '#a5b4fc', cap: 480 },
+  { id: 'materials',  ko: '소재',         en: 'Materials',        color: '#67e8f9', cap: 440 },
+  { id: 'auto',       ko: '자동차',       en: 'Automotive',       color: '#a78bfa', cap: 1100 },
+  { id: 'food',       ko: '식음료',       en: 'F&B',              color: '#bef264', cap: 360 },
+  { id: 'holding',    ko: '지주',         en: 'Holdings',         color: '#fcd34d', cap: 700 },
+  { id: 'cons',       ko: '건설',         en: 'Construction',     color: '#fb923c', cap: 340 },
+  { id: 'media',      ko: '미디어',       en: 'Media',            color: '#e879f9', cap: 260 },
+  { id: 'textile',    ko: '섬유·의류',    en: 'Textile',          color: '#fda4af', cap: 180 },
+  { id: 'leisure',    ko: '레저·교육',    en: 'Leisure & Edu',    color: '#86efac', cap: 200 },
+  { id: 'etc',        ko: '기타',         en: 'Other',            color: '#94a3b8', cap: 150 },
+  { id: 'indust',     ko: '중공업·방산',  en: 'Industrials',      color: '#c084fc', cap: 620 },
+  { id: 'logistics',  ko: '운송·물류',    en: 'Logistics',        color: '#7dd3fc', cap: 300 },
+  { id: 'realestate', ko: '부동산',       en: 'Real Estate',      color: '#d6bfa8', cap: 170 },
+  { id: 'cosmetics',  ko: '화장품',       en: 'Cosmetics',        color: '#f9a8d4', cap: 190 },
+  { id: 'prof_svc',   ko: '전문서비스',   en: 'Prof. Services',   color: '#cbd5e1', cap: 130 },
+  { id: 'energy',     ko: '에너지',       en: 'Energy',           color: '#f97316', cap: 420 },
+  { id: 'tele',       ko: '통신',         en: 'Telecom',          color: '#818cf8', cap: 380 },
 ];
 
 // Seeded RNG factory
@@ -837,10 +848,223 @@ window.COMPANIES = COMPANIES;
 window.RELATIONS = RELATIONS;
 window.REL_STYLES = REL_STYLES;
 
+// ─── EgoView 데이터 헬퍼 (universe/PLAN.md §5 LOD-2 — ego/<ticker>.json governance 레이어) ──
+// ego 원시 relation_type → 기존 REL_STYLES 키(시각 문법 U-D12 불변, allRelated와 동일 재사용).
+const EGO_TYPE_MAP = {
+  subsidiary: 'subsidiary', associate: 'associate', investment: 'significant',
+  ftc_group: 'group', dart_filing: 'related', manual: 'manual',
+};
+const EGO_TYPE_PRIORITY = { subsidiary: 1, associate: 2, investment: 3, ftc_group: 4, dart_filing: 5, manual: 6 };
+
+// 같은 이웃(t)에 다중 type 엣지가 있으면(예: investment+ftc_group) 하나로 병합 —
+// allRelated의 hasGroup/hasEquity 이중 평행선 병합과 동일 패턴(bundle.jsx parseRelations 대응).
+// U5(2026-07-29): 비상장·개인 이웃은 `t`(티커)가 없다 — ego 파일이 이름·kind를 자급한다.
+// 키는 `u:<표기>`(앵커 안에서 고유, 이미 export가 중복 정리), code는 살아 있지만
+// **companies_index에 없으므로 클릭 re-root 대상이 아니다**(selectNeighbor에서 차단).
+const UNLISTED_KINDS = new Set(['private_corp', 'person', 'coop_fund', 'public_org']);
+const UNLISTED_COLOR = '#5c6b80';   // --dim2 · 무채(신원 미상장) — 새 색 토큰 추가 없음
+const UNLISTED_KIND_LABEL = { private_corp: '비상장법인', person: '개인',
+                              coop_fund: '조합·펀드', public_org: '공공기관' };
+
+// kind별 노드 형태 — 색이 아니라 형태로 유형을 가른다(색은 무채 고정).
+function drawUnlistedNode(ctx, x, y, kind, r, color) {
+  ctx.save();
+  ctx.fillStyle = color; ctx.strokeStyle = color; ctx.lineWidth = 1.5;
+  ctx.setLineDash([]);
+  if (kind === 'person') {
+    ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.stroke();
+  } else if (kind === 'coop_fund') {
+    ctx.setLineDash([2.5, 2.5]);
+    ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.stroke();
+  } else if (kind === 'public_org') {
+    ctx.lineWidth = 1.2;
+    ctx.beginPath(); ctx.arc(x, y, r * 1.3, 0, Math.PI * 2); ctx.stroke();
+    ctx.beginPath(); ctx.arc(x, y, r * 0.55, 0, Math.PI * 2); ctx.stroke();
+  } else {                       // private_corp (기본)
+    ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+  }
+  ctx.restore();
+}
+
+function mergeEgoNeighbors(rawList) {
+  const byCode = new Map();
+  for (const r of (rawList || [])) {
+    const key = r.t || (r.kind ? 'u:' + r.n : null);
+    if (!key) continue;
+    if (!byCode.has(key)) {
+      byCode.set(key, { code: key, name: r.n, sectorKo: r.s, tier: r.tier,
+                        kind: r.kind || null, types: [], detailByType: {}, dirByType: {} });
+    }
+    const e = byCode.get(key);
+    if (r.tier === 'named400') e.tier = 'named400';
+    if (!e.types.includes(r.type)) e.types.push(r.type);
+    e.detailByType[r.type] = r.detail;
+    e.dirByType[r.type] = r.dir;
+  }
+  return Array.from(byCode.values()).map(e => {
+    e.types.sort((a, b) => (EGO_TYPE_PRIORITY[a] || 9) - (EGO_TYPE_PRIORITY[b] || 9));
+    const primary = e.types[0];
+    // isIncoming은 반드시 primary(최우선) 타입의 dir로 — "처음 만난 엣지"의 dir을 쓰면
+    // 삼성물산처럼 investment(in)+ftc_group(out) 혼재 시 JSON 순서에 따라 위/아래가
+    // 뒤바뀌는 순서 종속이 생긴다(V-3 오라클 설계 중 발견). hasEquity면 primary는
+    // 항상 지분 타입(우선순위 1~3 < 4~6)이라 UX-011 "지분 엣지의 출자 방향" 계약과 일치.
+    return {
+      code: e.code, name: e.name, sectorKo: e.sectorKo, tier: e.tier,
+      kind: e.kind, isUnlisted: !!e.kind,
+      isIncoming: e.dirByType[primary] === 'in',
+      relType: EGO_TYPE_MAP[primary] || 'manual',
+      hasGroup: e.types.includes('ftc_group'),
+      hasEquity: e.types.some(t => t === 'subsidiary' || t === 'associate' || t === 'investment'),
+      detail: e.detailByType[primary], rawType: primary,
+    };
+  });
+}
+
+// 랭킹: tier(named400 우선) → type 중요도 → 지분율(숫자 파싱 가능하면 큰 값 우선) — valuechain §5 D6 "tier→amount" 준용.
+function rankEgoNeighbor(n) {
+  // U5: 상장 우선 · 비상장 후순위 — TOP_N 컷에서 상장 이웃이 먼저 자리를 잡는다.
+  const tierRank = n.isUnlisted ? 2 : (n.tier === 'named400' ? 0 : 1);
+  const typeRank = EGO_TYPE_PRIORITY[n.rawType] || 9;
+  const pct = parseFloat(n.detail);
+  const amtRank = Number.isFinite(pct) ? -pct : 0;
+  return [tierRank, typeRank, amtRank];
+}
+function cmpTuple(a, b) {
+  for (let i = 0; i < a.length; i++) { if (a[i] !== b[i]) return a[i] - b[i]; }
+  return 0;
+}
+
+// UX-011 축 재정의 — 세로축 = 위계 있음(지분), 가로축 = 위계 없음(순수 비지분).
+//
+//   기존엔 dir(in/out)만으로 위/아래를 갈랐는데, 계열사·특수관계자의 dir은 "DB에 어느
+//   방향으로 기록됐나"일 뿐 위계가 아니다. 그걸 위에 두면 "지배한다"로 오독된다
+//   (리더 지적: 삼성SDI 화면의 삼성화재해상보험).
+//
+//   규칙: 지분 엣지가 하나라도 있으면 세로축(위=출자 들어옴 / 아래=피출자).
+//         계열·특수관계는 기존 이중 평행선으로 같은 엣지에 얹는다(현행 유지).
+//         순수 비지분만인 상대만 가로축 — 좌=계열사, 우=특수관계자.
+//   실측 근거: 순수 비지분 이웃은 2,651사 중 2,496사가 0개, 최대 10개 — 가로축 혼잡 없음.
+//   지배기업 특수관계자 12건은 전부 지분 엣지를 동반해 자동으로 세로축에 남는다.
+function splitEgoSides(governance, topN, sideN) {
+  const merged = mergeEgoNeighbors(governance);
+  const bySort = (arr) => arr.sort((a, b) => cmpTuple(rankEgoNeighbor(a), rankEgoNeighbor(b)));
+  const vertical = merged.filter(n => n.hasEquity);
+  const horizontal = merged.filter(n => !n.hasEquity);
+  const above = bySort(vertical.filter(n => n.isIncoming));
+  const below = bySort(vertical.filter(n => !n.isIncoming));
+  // 좌=계열사(파선) / 우=특수관계자(점선). 둘 다 아닌 잔여(manual 등)는 우측에 붙인다.
+  const left = bySort(horizontal.filter(n => n.relType === 'group'));
+  const right = bySort(horizontal.filter(n => n.relType !== 'group'));
+  const cut = (arr, n) => ({ shown: arr.slice(0, n), rest: arr.slice(n) });
+  return {
+    above: cut(above, topN), below: cut(below, topN),
+    left: cut(left, sideN), right: cut(right, sideN),
+  };
+}
+// ─── 밸류체인 레이어 (U3, U-D14·UX-013) ─────────────────────────────────────
+// 문법 축 분리: 색=흐름 단일색(은백 — 관계 6색·시맨틱 6색·섹터 25색 어느 축과도 미충돌,
+// integration 배정), 선 스타일=신뢰등급(T1/T2/T3), 화살촉=오픈 셰브런(물자 흐름 위→아래).
+const VC_FLOW_COLOR = '#e8f1ff';
+const VC_TIER_STYLES = {
+  T1: { alpha: 'dd', width: 2,   dash: [],     label: 'T1 · 정형 공시' },
+  T2: { alpha: '77', width: 1.5, dash: [],     label: 'T2 · 서술 추출' },
+  T3: { alpha: '66', width: 1.2, dash: [3, 4], label: 'T3 · 산업연관표' },
+};
+const _TIER_RANK = { T1: 1, T2: 2, T3: 3 };
+
+function fmtVcAmount(v) {
+  if (v == null || !isFinite(v)) return '';
+  if (v >= 1e12) return (v / 1e12).toFixed(1) + '조';
+  if (v >= 1e8) return Math.round(v / 1e8).toLocaleString() + '억';
+  return Math.round(v / 1e4).toLocaleString() + '만';
+}
+
+// UX-013: 상/하는 up/down 배열 소속이 아니라 type에서 파생 — 배열은 미러 기록이라
+// (실측: up/down 완전 대칭 1,378/1,378·143/143) 신호가 아니다. supply(상대가 공급자)=위,
+// customer(상대가 고객)=아래. 같은 (상대,type) 다연도 엣지는 최신 as_of로 병합.
+function splitVcSides(vc, topN, opts) {
+  const _idxV = (window.__realData && window.__realData.indexByCode) || {};
+  const byKey = new Map();
+  for (const side of ['up', 'down']) {
+    for (const e of (vc && vc[side]) || []) {
+      if (!e.t) continue;
+      const key = e.t + ':' + e.type;
+      const prev = byKey.get(key);
+      if (!prev || (e.as_of || 0) > (prev.as_of || 0)) {
+        byKey.set(key, { code: e.t, name: e.n, type: e.type,
+                         sectorKo: (_idxV[e.t] || {}).s || null,  // 노드색=섹터색 유지(엣지 문법만 교체)
+                         tier: e.tier_grade || 'T1', amount: e.amount, as_of: e.as_of, prov: e.prov });
+      }
+    }
+  }
+  const rank = (n) => [_TIER_RANK[n.tier] || 9, -(n.amount || 0), -(n.as_of || 0)];
+  const bySort = (arr) => arr.sort((a, b) => cmpTuple(rank(a), rank(b)));
+  const above = bySort([...byKey.values()].filter(n => n.type === 'supply'));
+  const below = bySort([...byKey.values()].filter(n => n.type !== 'supply'));
+  if (opts && opts.grouped) {
+    // UX-015 산업군 묶음 모드 — shown = 그룹에 실제로 표시되는 기업 전부
+    const pack = (arr) => {
+      const g = groupVcSide(arr, VC_MAX_GROUPS, VC_MAX_PER_GROUP);
+      const shown = g.groups.flatMap(x => x.items);
+      const hidden = g.groups.reduce((a, x) => a + x.hidden, 0);
+      return { shown, rest: [...g.restItems], groups: g.groups,
+               restGroupCount: g.restGroupCount, hiddenInGroups: hidden };
+    };
+    const A = pack(above), B = pack(below);
+    // UX-019: 양쪽에 공통으로 나오는 섹터는 같은 상대 순서 — 공급처의 플랫폼이 왼쪽
+    // 1번이면 고객사의 플랫폼도 왼쪽 1번(세로 비교가 쉬워짐). 그룹 "선정"은 랭킹
+    // 그대로, "표시 순서"만 공급처 순서를 기준으로 재배열.
+    const aOrder = A.groups.map(g => g.sectorKo);
+    B.groups.sort((x, y) => {
+      const xi = aOrder.indexOf(x.sectorKo), yi = aOrder.indexOf(y.sectorKo);
+      if (xi >= 0 && yi >= 0) return xi - yi;
+      if (xi >= 0) return -1;
+      if (yi >= 0) return 1;
+      return 0;   // 둘 다 공급처에 없으면 원래 랭킹 순 유지(안정 정렬)
+    });
+    return { above: A, below: B };
+  }
+  const cut = (arr) => ({ shown: arr.slice(0, topN), rest: arr.slice(topN) });
+  return { above: cut(above), below: cut(below) };
+}
+
+// UX-015: 밸류체인은 기업 나열이 아니라 **산업군 묶음**으로 읽는다 — "어느 산업에서 사와서
+// 어느 산업에 파는가". 랭킹 순서를 유지한 채 섹터로 접고(그룹 순서 = 최상위 멤버 순위),
+// 그룹 캡 5 · 그룹당 4를 넘으면 각각 묶음으로. 실측: 산업 수 위 최대 7·아래 최대 11·중앙값 1.
+const VC_MAX_GROUPS = 5;
+const VC_MAX_PER_GROUP = 4;
+
+function groupVcSide(items, maxGroups, maxPerGroup) {
+  const order = [];
+  const byKo = new Map();
+  for (const it of items) {           // items는 이미 rank 정렬됨
+    const ko = it.sectorKo || '기타';
+    if (!byKo.has(ko)) { byKo.set(ko, []); order.push(ko); }
+    byKo.get(ko).push(it);
+  }
+  const groups = order.slice(0, maxGroups).map(ko => {
+    const all = byKo.get(ko);
+    const pal = (window.SECTOR_PALETTE || []).find(s => s.ko === ko);
+    return { sectorKo: ko, color: (pal && pal.color) || VC_FLOW_COLOR,
+             items: all.slice(0, maxPerGroup), hidden: Math.max(0, all.length - maxPerGroup),
+             hiddenItems: all.slice(maxPerGroup),   // UX-022: 그룹 내 초과분 — "+N사" 노드·팝업용
+             count: all.length,
+             amount: all.reduce((a, b) => a + (b.amount || 0), 0) };
+  });
+  const restKos = order.slice(maxGroups);
+  const restItems = restKos.flatMap(ko => byKo.get(ko));
+  return { groups, restGroupCount: restKos.length, restItems };
+}
+
+window.mergeEgoNeighbors = mergeEgoNeighbors;
+window.splitEgoSides = splitEgoSides;   // V-3 렌더 하네스가 페이지 내 분할 로직을 직접 조회
+window.splitVcSides = splitVcSides;
+window.groupVcSide = groupVcSide;
+
 // ─── Sector map: companies as glowing nodes inside the chosen sector ────
 const { useRef: _useRef, useEffect: _useEffect, useState: _useState, useMemo: _useMemo } = React;
 
-function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost }) {
+function SectorMap({ sectorId, activeMarket, activeCompanyCode, onSelectMarket, onSelectCompany, onSelectGhost }) {
   const canvasRef = _useRef(null);
   const rafRef = _useRef(0);
   const startRef = _useRef(performance.now());
@@ -851,14 +1075,105 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
   const [hoverCode, setHoverCode] = _useState(null);
   const bgStarsRef = _useRef([]);
   const shootingRef = _useRef([]);
+  const dotsCanvasRef = _useRef(null);   // LOD-1 배경 dots 오프스크린 (섹터 진입 시 1회 빌드)
+  const dotsScreenRef = _useRef([]);     // UX-009: dot 화면 좌표+신원 [{x,y,r,t,n}] — hover/클릭 히트테스트
+  const [hoverDot, setHoverDot] = _useState(null);  // {x,y,n} — DOM 툴팁 (⚠ effect deps에 넣지 말 것, DESIGN §9-1)
 
   const sec = SECTOR_PALETTE.find(s => s.id === sectorId) || SECTOR_PALETTE[0];
-  const companies = COMPANIES[sectorId] || COMPANIES.semi || [];
 
-  // Company layout: only position data, no relation-based movement
-  const layout = _useMemo(() =>
-    companies.map(c => ({ ...c, gx: c.x, gy: c.y })),
-  [companies]);
+  // U2 드릴인 LOD: sectorMarketData가 있으면 모드별 레이아웃 계산
+  //   - 개요(시장 미선택): KOSPI/KOSDAQ 성운 프록시 2노드 + 양쪽 dots
+  //   - 드릴인(시장 선택): 그 시장 상위 ~10 named 중앙 배치 + 나머지 dots
+  // 없으면(top50 fallback) 기존 COMPANIES/dots 단일 클러스터.
+  const _md = (window.__realData && window.__realData.sectorMarketData && window.__realData.sectorMarketData[sectorId]) || null;
+  const MARKET_CAP = 10;
+
+  // FN-008: 활성 기업이 있으면 그 기업의 시장이 곧 렌더 시장 — ghost 진입·딥링크로
+  // activeMarket이 리셋/불일치여도 개요 모드(프록시 노드)로 떨어지지 않게 방어.
+  const _idx = (window.__realData && window.__realData.indexByCode) || {};
+  const effectiveMarket = activeMarket ||
+    (activeCompanyCode && _idx[activeCompanyCode] && _idx[activeCompanyCode].mkt) || null;
+
+  const { layout, dotsData } = _useMemo(() => {
+    const srng = (seed) => { let s = ((seed * 9301 + 49297) % 233280 + 233280) % 233280; return () => { s = (s * 9301 + 49297) % 233280; return s / 233280; }; };
+    // dots 항목: [x, y, capBucket, ticker, name] — UX-009 hover 툴팁·클릭 진입용 신원 보존
+    const scatter = (cx, cy, r, seed, items) => {
+      const rng = srng(seed), o = [];
+      for (let i = 0; i < items.length; i++) {
+        const a = rng() * Math.PI * 2, rr = r * Math.sqrt(rng());
+        const it = items[i] || {};
+        o.push([cx + Math.cos(a) * rr, cy + Math.sin(a) * rr, it.cb || 0, it.t || null, it.n || null]);
+      }
+      return o;
+    };
+    const phyllo = (items, cx, cy, r) => items.map((m, i) => {
+      if (i === 0) return { ...m, x: cx, y: cy, gx: cx, gy: cy };
+      const ang = i * 2.39996, rr = r * (0.34 + ((i - 1) / Math.max(1, items.length - 1)) * 0.62);
+      const gx = cx + Math.cos(ang) * rr, gy = cy + Math.sin(ang) * rr;
+      return { ...m, x: gx, y: gy, gx, gy };
+    });
+    // UX-007: 구(노드) 겹침 해소 — 노드 반경(draw와 동일 공식)을 정규 좌표로 환산해
+    // 겹치는 쌍을 서로 밀어내는 완화(relaxation) 패스. 결정적(난수 없음).
+    const relax = (nodes, baseRpx) => {
+      const rn = nodes.map(n => (Math.min(40, 6 + Math.sqrt(n.cap || 10) * 1.5) * 1.6) / baseRpx);
+      for (let iter = 0; iter < 40; iter++) {
+        let moved = false;
+        for (let i = 0; i < nodes.length; i++) for (let j = i + 1; j < nodes.length; j++) {
+          const a = nodes[i], b = nodes[j];
+          const dx = b.gx - a.gx, dy = b.gy - a.gy;
+          const d = Math.sqrt(dx * dx + dy * dy) || 0.0001;
+          const min = rn[i] + rn[j];
+          if (d < min) {
+            const push = (min - d) / 2, ux = dx / d, uy = dy / d;
+            a.gx -= ux * push; a.gy -= uy * push;
+            b.gx += ux * push; b.gy += uy * push;
+            moved = true;
+          }
+        }
+        if (!moved) break;
+      }
+      for (const n of nodes) { n.x = n.gx; n.y = n.gy; }
+      return nodes;
+    };
+
+    if (!_md) {
+      const comp = COMPANIES[sectorId] || COMPANIES.semi || [];
+      const dd = (window.__realData && window.__realData.dots && window.__realData.dots[sectorId]) || [];
+      return { layout: comp.map(c => ({ ...c, gx: c.x, gy: c.y })), dotsData: dd };
+    }
+    if (!effectiveMarket) {
+      // 개요: 두 성운 프록시 노드(클릭 시 드릴인) + 양쪽 dots 성운
+      const nodes = [], dots = [];
+      const specs = [{ M: 'KOSPI', cx: -0.85, seed: 11 }, { M: 'KOSDAQ', cx: 0.85, seed: 22 }];
+      for (const sp of specs) {
+        const m = _md[sp.M]; if (!m) continue;
+        // UX-032: cap은 **노드 반경 계산용 프록시**(시총 아님) — 라벨에 조원으로 찍지 말 것.
+        // 표시용 실측 시총은 capJo(relation universe markets 집계)로 따로 싣는다.
+        nodes.push({ code: '__mkt_' + sp.M, name: sp.M, en: sp.M, isMarket: true, market: sp.M, count: m.total,
+                     capJo: m.capJo, cap: Math.min(90, 26 + m.total * 0.16), x: sp.cx, y: 0, gx: sp.cx, gy: 0 });
+        const items = [...m.dotItems, ...m.named.map(c => ({ cb: 1, t: c.code, n: c.name }))];
+        dots.push(...scatter(sp.cx, 0, 0.42, sp.seed, items));
+      }
+      return { layout: nodes, dotsData: dots };
+    }
+    // 드릴인: 단일 시장 중앙, 상위 ~10 named + 나머지 dots
+    const m = _md[effectiveMarket] || { named: [], dotItems: [] };
+    const shown = m.named.slice(0, MARKET_CAP).map(c => ({ code: c.code, name: c.name, en: c.name, cap: c.cap, market: c.market }));
+    // FN-008: 활성 기업이 top-N 밖(dot 기업·캡 초과 named)이면 노드로 승격해 중앙에 표시
+    if (activeCompanyCode && !shown.some(c => c.code === activeCompanyCode)) {
+      const over = m.named.find(c => c.code === activeCompanyCode);
+      const di = _idx[activeCompanyCode];
+      if (over) shown.push({ code: over.code, name: over.name, en: over.name, cap: over.cap, market: over.market });
+      else if (di) shown.push({ code: activeCompanyCode, name: di.n, en: di.n, cap: Math.max(2, (di.cb || 0) * 6 + 2), market: di.mkt });
+    }
+    const named = relax(phyllo(shown, 0, 0, 0.72), Math.min(window.innerWidth || 1200, window.innerHeight || 740) * 0.34);
+    const restItems = [...m.dotItems, ...m.named.slice(MARKET_CAP).map(c => ({ cb: 1, t: c.code, n: c.name }))]
+      .filter(it => it.t !== activeCompanyCode);
+    const dots = scatter(0, 0, 0.9, effectiveMarket === 'KOSPI' ? 31 : 32, restItems);
+    return { layout: named, dotsData: dots };
+  }, [_md, sectorId, effectiveMarket, activeCompanyCode]);
+
+  const companies = layout;
 
   // ALL related nodes in a polygon around canvas center.
   // Merges in-sector + cross-sector so lines never overlap and bounds never exceeded.
@@ -895,12 +1210,47 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
   _useEffect(() => {
     const cvs = canvasRef.current;
     const ctx = cvs.getContext('2d');
+    // LOD-1 배경 dots: universe.json sectors[].dots([-1,1] 디스크 좌표)를 섹터색 옅은 점으로
+    // 오프스크린 캔버스에 1회 렌더. 프레임마다 drawImage로 합성만 하고 재도장하지 않음
+    // (universe/PLAN.md §5 "오프스크린 캔버스 1회 렌더 후 합성 — 프레임당 재도장 금지").
+    const buildDotsLayer = (w, h, dpr) => {
+      const dots = dotsData || [];
+      dotsScreenRef.current = [];
+      if (!dots.length) { dotsCanvasRef.current = null; return; }
+      const off = document.createElement('canvas');
+      off.width = w * dpr; off.height = h * dpr;
+      const octx = off.getContext('2d');
+      octx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const cx = w / 2, cy = h / 2;
+      const baseR = Math.min(w, h) * 0.34;   // 섹터 뷰 named 레이어와 동일 스케일
+      // dots는 named 클러스터와 같은 디스크를 채우되(잔여 기업 배경), named보다 훨씬
+      // 작고 균일해 "성긴 별먼지"처럼 읽히게 한다. 소량 지터로 격자감 제거.
+      octx.globalCompositeOperation = 'screen';
+      for (let i = 0; i < dots.length; i++) {
+        const d = dots[i];
+        const dx = d[0], dy = d[1], bucket = d[2] || 0;
+        const px = cx + dx * baseR, py = cy + dy * baseR;
+        const r = 1.1 + bucket * 0.5;         // capBucket(0~) → 점 크기(named보다 작게)
+        const glow = octx.createRadialGradient(px, py, 0, px, py, r * 3);
+        glow.addColorStop(0, sec.color + '55');
+        glow.addColorStop(1, sec.color + '00');
+        octx.fillStyle = glow;
+        octx.beginPath(); octx.arc(px, py, r * 3, 0, Math.PI * 2); octx.fill();
+        octx.fillStyle = sec.color + 'ee';
+        octx.beginPath(); octx.arc(px, py, r, 0, Math.PI * 2); octx.fill();
+        // UX-009: 신원 있는 dot만 히트테스트 대상으로 등록
+        if (d[3]) dotsScreenRef.current.push({ x: px, y: py, r, t: d[3], n: d[4] || d[3] });
+      }
+      dotsCanvasRef.current = off;
+    };
+
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const w = cvs.clientWidth, h = cvs.clientHeight;
       cvs.width = w * dpr; cvs.height = h * dpr;
       sizeRef.current = { w, h, dpr };
       bgStarsRef.current = window.__galaxyHelpers.buildBgStars(53, w, h, 700);
+      buildDotsLayer(w, h, dpr);
     };
     resize();
     window.addEventListener('resize', resize);
@@ -944,12 +1294,60 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
       ctx.fillRect(0, 0, w, h);
       ctx.restore();
 
+      // U2 성운 헤일로 + 라벨 (드릴인 LOD).
+      //  개요: KOSPI(좌)/KOSDAQ(우) 두 성운 헤일로 + "KOSPI · N사" 라벨(클릭 유도).
+      //  드릴인: 해당 시장 단일 중앙 헤일로.
+      if (_md) {
+        const baseRh = Math.min(w, h) * 0.34;
+        const cyN = h / 2;
+        const drawHalo = (cxN, R) => {
+          ctx.save();
+          ctx.globalCompositeOperation = 'screen';
+          const g = ctx.createRadialGradient(cxN, cyN, 0, cxN, cyN, R);
+          g.addColorStop(0, sec.color + '16');
+          g.addColorStop(0.6, sec.color + '0a');
+          g.addColorStop(1, sec.color + '00');
+          ctx.fillStyle = g;
+          ctx.beginPath(); ctx.arc(cxN, cyN, R, 0, Math.PI * 2); ctx.fill();
+          ctx.restore();
+        };
+        if (!effectiveMarket) {
+          const specs = [
+            { key: 'KOSPI',  cxN: w / 2 + (-0.85) * baseRh, total: (_md.KOSPI && _md.KOSPI.total) || 0 },
+            { key: 'KOSDAQ', cxN: w / 2 + (0.85) * baseRh,  total: (_md.KOSDAQ && _md.KOSDAQ.total) || 0 },
+          ];
+          for (const nb of specs) {
+            drawHalo(nb.cxN, baseRh * 0.6);
+            ctx.save();
+            ctx.textAlign = 'center';
+            ctx.font = '600 13px "IBM Plex Mono", ui-monospace, monospace';
+            ctx.fillStyle = sec.color + 'dd';
+            ctx.fillText(nb.key, nb.cxN, cyN - baseRh * 0.72);
+            ctx.fillStyle = 'rgba(143,161,182,0.85)';
+            ctx.font = '400 11px "IBM Plex Mono", ui-monospace, monospace';
+            ctx.fillText(nb.total + '사 · 클릭', nb.cxN, cyN - baseRh * 0.72 + 16);
+            ctx.restore();
+          }
+        } else {
+          drawHalo(w / 2, baseRh * 0.95);
+        }
+      }
+
       // bg stars
       for (const s of bgStarsRef.current) {
         const tw = 0.6 + Math.sin(t * s.tf + s.phase) * 0.4;
         const a = s.alpha * tw;
         ctx.fillStyle = `rgba(${s.r},${s.g},${s.b},${a})`;
         ctx.fillRect(s.x, s.y, s.size, s.size);
+      }
+
+      // LOD-1 배경 dots (named 아닌 잔여 기업) — 프레임당 재도장 없이 합성만.
+      // 미세 호흡(0.5~0.75) 외 정적. 기업 선택 시엔 초점 흐리지 않게 더 옅게.
+      if (dotsCanvasRef.current) {
+        ctx.save();
+        ctx.globalAlpha = activeCompanyCode ? 0.35 : (0.72 + Math.sin(t * 0.6) * 0.08);
+        ctx.drawImage(dotsCanvasRef.current, 0, 0, w, h);
+        ctx.restore();
       }
 
       // Lerp
@@ -1138,36 +1536,61 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
       }
       hoverRef.current = best;
       setHoverCode(best);
-      cvs.style.cursor = best ? 'pointer' : 'default';
+      // UX-009: named/관계 노드 히트가 없으면 배경 dot 히트테스트 → 이름 툴팁
+      let dotHit = null;
+      if (!best) {
+        let dBest = 9;  // 최소 9px 히트 반경 (작은 dot도 잡히게)
+        for (const d of dotsScreenRef.current) {
+          const dist = Math.hypot(d.x - mx, d.y - my);
+          if (dist < Math.max(9, d.r * 3) && dist < dBest + d.r * 3) { dBest = dist; dotHit = d; }
+        }
+      }
+      setHoverDot(dotHit ? { x: dotHit.x, y: dotHit.y, n: dotHit.n } : null);
+      cvs.style.cursor = (best || dotHit) ? 'pointer' : 'default';
     };
     const onClick = (e) => {
       const rect = cvs.getBoundingClientRect();
       const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+      // 개요 모드: 성운 프록시 노드는 히트 반경을 크게(덩이 전체) 잡아 드릴인.
       let best = null, bestD = 28;
       for (const p of nodesRef.current) {
+        const hitR = p.c.isMarket ? 90 : 28;
         const d = Math.hypot(p.x - mx, p.y - my);
-        if (d < bestD) { bestD = d; best = { code: p.c.code, isRelated: false }; }
+        if (d < hitR && d < bestD + (p.c.isMarket ? 70 : 0)) { bestD = d; best = { node: p.c, isRelated: false }; }
       }
       for (const p of relatedNodesRef.current) {
         const d = Math.hypot(p.x - mx, p.y - my);
-        if (d < Math.min(bestD, 22)) { bestD = d; best = { code: p.code, isRelated: true, sectorId: p.sectorId }; }
+        if (d < Math.min(bestD, 22)) { bestD = d; best = { node: { code: p.code }, isRelated: true, sectorId: p.sectorId }; }
       }
       if (best) {
-        if (best.isRelated) onSelectGhost?.(best.code, best.sectorId);
-        else onSelectCompany?.(best.code);
-      } else {
-        onSelectCompany?.(null); // click empty → deselect
+        if (best.node.isMarket) onSelectMarket?.(best.node.market);
+        else if (best.isRelated) onSelectGhost?.(best.node.code, best.sectorId);
+        else onSelectCompany?.(best.node.code);
+        return;
+      }
+      // UX-009: 배경 dot 클릭 → 그 기업으로 진입 (개요·드릴인 양쪽)
+      let dotHit = null, dBest = 9;
+      for (const d of dotsScreenRef.current) {
+        const dist = Math.hypot(d.x - mx, d.y - my);
+        if (dist < Math.max(9, d.r * 3) && dist < dBest + d.r * 3) { dBest = dist; dotHit = d; }
+      }
+      if (dotHit) { onSelectCompany?.(dotHit.t); return; }
+      if (effectiveMarket) {
+        onSelectCompany?.(null); // 드릴인에서 빈 곳 클릭 → 기업 선택 해제
       }
     };
+    const onLeave = () => { setHoverDot(null); hoverRef.current = null; setHoverCode(null); cvs.style.cursor = 'default'; };
     cvs.addEventListener('mousemove', onMove);
     cvs.addEventListener('click', onClick);
+    cvs.addEventListener('mouseleave', onLeave);
     return () => {
       cancelAnimationFrame(rafRef.current);
       window.removeEventListener('resize', resize);
       cvs.removeEventListener('mousemove', onMove);
       cvs.removeEventListener('click', onClick);
+      cvs.removeEventListener('mouseleave', onLeave);
     };
-  }, [layout, allRelated, activeCompanyCode, sectorId]);
+  }, [layout, dotsData, allRelated, activeCompanyCode, effectiveMarket, sectorId]);
 
   return (
     <div className="solar-stage">
@@ -1177,20 +1600,737 @@ function SectorMap({ sectorId, activeCompanyCode, onSelectCompany, onSelectGhost
           const isActive = p.c.code === activeCompanyCode;
           const isHover = hoverCode === p.c.code;
           if (!isActive && !isHover) return null;
+          // UX-032: 성운 프록시(시장) 노드는 기업이 아니다 — 내부 키(__mkt_*)와 반경 프록시를
+          // 조원으로 찍던 것을 "<섹터> · <시장>" + "N사 · 시총 X조원"으로 교체.
+          // capJo가 없으면(구 데이터) 시총 구절을 통째로 생략한다(추정값 금지).
+          const _fmt = (window.DiscloseAI || {}).trillionLabel;
+          const isMkt = !!p.c.isMarket;
+          const mktCap = (isMkt && p.c.capJo != null && _fmt) ? _fmt(p.c.capJo * 1e12) : null;
           return (
             <div key={p.c.code} className={"company-label " + (isActive ? 'is-active' : '')}
               style={{ left: p.x, top: p.y - p.r - 14, color: sec.color }}>
-              <div className="company-label-name">{p.c.name}</div>
-              <div className="company-label-code">{p.c.code} · {p.c.cap}조원</div>
+              <div className="company-label-name">{isMkt ? sec.ko + ' · ' + p.c.market : p.c.name}</div>
+              <div className="company-label-code">
+                {isMkt ? (p.c.count + '사' + (mktCap ? ' · 시총 ' + mktCap : ''))
+                       : (p.c.code + ' · ' + p.c.cap + '조원')}
+              </div>
             </div>
           );
         })}
+        {/* UX-009: 배경 dot hover 이름 툴팁 */}
+        {hoverDot && (
+          <div className="company-label" style={{ left: hoverDot.x, top: hoverDot.y - 16, color: sec.color }}>
+            <div className="company-label-name">{hoverDot.n}</div>
+          </div>
+        )}
       </div>
     </div>
   );
 }
 
 window.SectorMap = SectorMap;
+
+// ─── EgoView (③ 셸, universe/PLAN.md §5 LOD-2) ──────────────────────────────
+// 앵커 기업 중앙 고정 + ego/<ticker>.json governance 1-hop 재구성 뷰.
+// 상(dir=in·출자 들어옴) / 하(dir=out·피출자·나감) 배치 — valuechain §5 D5 상/하 문법을
+// 지배구조 의미로 재사용(U2 진행 시나리오). 사이드당 Top-N 6 + "외 n사" 묶음 노드(D6).
+// 시각 문법(REL_STYLES 색·이중 평행선·화살표=출자 방향)은 allRelated와 동일 — U-D12 불변.
+// UX-034: dismissRef — EgoView가 열어둔 **일시 레이어(팝업·팝오버)**를 App의 goBack이
+// 사다리 최상단에서 닫을 수 있게 넘겨주는 핸들. 이 상태들은 EgoView 로컬이라 App이
+// 알 방법이 없었고, 그래서 ESC가 팝업을 건너뛰고 단계 이동(re-root 체인 되돌림)을
+// 해버렸다. 되돌림 계단은 한 곳(UX-028/030)이라는 원칙을 지키면서, "무엇이 열려
+// 있는지"만 소유자가 보고하는 구조.
+function EgoView({ anchor, layer, onLayerChange, onReRoot, dismissRef }) {
+  const canvasRef = _useRef(null);
+  const rafRef = _useRef(0);
+  const startRef = _useRef(performance.now());
+  const sizeRef = _useRef({ w: 0, h: 0, dpr: 1 });
+  const bgStarsRef = _useRef([]);
+  const hitRef = _useRef([]);
+  const [hoverCode, setHoverCode] = _useState(null);
+  const [overflowSide, setOverflowSide] = _useState(null); // 'above' | 'below' | null
+  const [unlistedInfo, setUnlistedInfo] = _useState(null); // U5: 비상장 노드 정보 팝오버
+  // UX-033: 밸류체인 세로 스택 행 수를 뷰포트 높이로 제한하려면 레이아웃 메모가 크기를
+  // 알아야 한다 — sizeRef(ref)는 리렌더를 안 일으키므로 state로 따로 둔다.
+  const [vp, setVp] = _useState({ w: window.innerWidth, h: window.innerHeight });
+  _useEffect(() => {
+    const onR = () => setVp({ w: window.innerWidth, h: window.innerHeight });
+    window.addEventListener('resize', onR);
+    return () => window.removeEventListener('resize', onR);
+  }, []);
+
+  const TOP_N = 6;    // 세로(지분) 사이드당
+  const SIDE_N = 4;   // 가로(비지분) 사이드당 — 실측상 대부분 0~2개
+  const sec = (window.SECTOR_PALETTE || []).find(s => s.ko === anchor.s) || (window.SECTOR_PALETTE || [])[0] || { color: '#74EEC6' };
+
+  // U3: 밸류체인 레이어 — 데이터가 있는 기업만 활성(현재 T1 509사). hasVc가 false면
+  // layer state가 'valuechain'이어도 지배구조로 렌더(re-root로 무데이터 기업 이동 시 안전).
+  const vcData = (anchor.layers && anchor.layers.valuechain) || null;
+  const hasVc = !!(vcData && (((vcData.up || []).length) || ((vcData.down || []).length)));
+  const isVc = layer === 'valuechain' && hasVc;
+
+  const { above, below, left, right } = _useMemo(() => {
+    if (isVc) {
+      const s = splitVcSides(vcData, TOP_N, { grouped: true });
+      // 밸류체인은 상하(흐름)만 — 가로축 없음(U-D14 문법 축 분리)
+      return { above: s.above, below: s.below,
+               left: { shown: [], rest: [] }, right: { shown: [], rest: [] } };
+    }
+    return splitEgoSides((anchor.layers && anchor.layers.governance) || [], TOP_N, SIDE_N);
+  }, [anchor, isVc]);
+
+  // UX-015 레일 레이아웃 — 그룹(산업군)을 x축에 분배, 그룹 안에서 기업을 다시 분배.
+  //   sign<0: 공급처(위) / sign>0: 고객사(아래).  라벨=최외곽 · 기업=중간 · 레일=앵커쪽.
+  // 레일(앵커쪽) → 산업 라벨 → 기업 세로 스택(바깥). 그룹 내 기업을 수평으로 뿌리면
+  // 세그먼트 폭에 이름이 안 들어가 라벨이 뭉갠다(실측) — 세로 1행 1사로 고정.
+  // UX-019: 스파인·노드·라벨 전부 세그먼트 "중앙" 정렬 + 좌우 폭 확대(HALF 0.88→1.22).
+  const VC_RAIL_Y = 0.34, VC_LABEL_Y = 0.46, VC_NODE_Y = 0.60, VC_ROW_GAP = 0.115, VC_HALF = 1.22;
+  const VC_SEG_MAX = 0.50;  // 세그먼트 폭 상한 — 그룹 1~2개일 때 화면 전체로 퍼져
+                            // 스파인·노드가 중심에서 밀려나는 버그 방지(그룹들을 중앙 정렬)
+
+  // UX-033: 세로 스택이 화면 밖으로 나가지 않게 **행 수를 뷰포트로 제한**한다.
+  // 위쪽(공급처)은 아래쪽(고객사)보다 여유가 좁다 — 상단 탭바(~90px)와 레이어 토글
+  // (.ego-topbar top:84px, 높이 ~37px → 하단 121px)이 캔버스 위를 덮기 때문. 그런데
+  // 행 수(그룹당 4 + 묶음)는 양쪽 동일 상수라, 위쪽만 묶음 노드와 라벨이 토글 뒤로
+  // 잘렸다(리더 스크린샷: 한진칼 운송·물류 공급처). 넘치는 기업은 버리지 않고
+  // 아래쪽과 **같은 문법의 "+N사" 묶음**으로 흡수한다.
+  const VC_TOP_SAFE = 152;   // 토글 하단 121px + 라벨(노드 위) 여유 ~31px
+  const VC_BOT_SAFE = 44;    // 하단 여백 + 라벨(노드 아래)
+  const vcMaxRows = (sign) => {
+    const h = vp.h, w = vp.w;
+    if (!h || !w) return VC_MAX_PER_GROUP + 1;
+    const baseR = Math.min(w, h) * 0.36;
+    const rowPx = VC_ROW_GAP * baseR;
+    const firstY = h / 2 + sign * VC_NODE_Y * baseR;   // 첫 행 y(px)
+    const avail = sign < 0 ? (firstY - VC_TOP_SAFE) : (h - VC_BOT_SAFE - firstY);
+    if (!(rowPx > 0)) return VC_MAX_PER_GROUP + 1;
+    // 첫 행은 항상 그린다(1) + 남는 공간만큼 추가 행. 최소 2행(기업1 + 묶음1)은 보장.
+    return Math.max(2, Math.min(VC_MAX_PER_GROUP + 1, 1 + Math.floor(avail / rowPx)));
+  };
+  // 그룹의 표시 행 수를 maxRows에 맞춰 재단 — 밀려난 기업은 그룹 묶음(+N사)으로 이동.
+  const fitGroupRows = (g, maxRows) => {
+    const rowsNow = g.items.length + (g.hidden > 0 ? 1 : 0);
+    if (rowsNow <= maxRows) return g;
+    const maxItems = Math.max(1, maxRows - 1);   // 마지막 한 줄은 "+N사" 묶음 몫
+    const pushed = g.items.slice(maxItems);
+    return { ...g, items: g.items.slice(0, maxItems),
+             hidden: g.hidden + pushed.length,
+             hiddenItems: [...pushed, ...(g.hiddenItems || [])] };
+  };
+
+  const buildVcSide = (side, sign) => {
+    const maxRows = vcMaxRows(sign);
+    const gs = (side.groups || []).map(g => fitGroupRows(g, maxRows));
+    const withBundleG = gs.length + ((side.restGroupCount || 0) > 0 ? 1 : 0);
+    if (!withBundleG) return { nodes: [], groups: [] };
+    const segW = Math.min(VC_SEG_MAX, (2 * VC_HALF) / withBundleG);
+    const totalW = segW * withBundleG;
+    const nodes = [], groups = [];
+    for (let gi = 0; gi < withBundleG; gi++) {
+      const cxg = -totalW / 2 + segW * (gi + 0.5);
+      const isRestGroup = gi >= gs.length;
+      if (isRestGroup) {
+        groups.push({ cx: cxg, label: '외 ' + side.restGroupCount + '개 산업',
+                      color: '#94a3b8', sign, isRest: true, count: side.rest.length,
+                      segHalf: segW / 2 });
+        nodes.push({ isBundle: true, side: sign < 0 ? 'above' : 'below', rest: side.rest,
+                     code: '__bundle_vc_' + (sign < 0 ? 'above' : 'below'),
+                     gx: cxg, gy: sign * VC_NODE_Y });
+        continue;
+      }
+      const g = gs[gi];
+      const extraRow = g.hidden > 0 ? 1 : 0;
+      groups.push({ cx: cxg, label: g.sectorKo, color: g.color, sign,
+                    count: g.count, hidden: g.hidden, amount: g.amount,
+                    segHalf: segW / 2, rows: g.items.length + extraRow });
+      // 세로 스택 — 노드·스파인 = 세그먼트 중앙, 이름은 노드 오른쪽
+      g.items.forEach((it, i) => {
+        nodes.push({ ...it, gx: cxg, gy: sign * (VC_NODE_Y + i * VC_ROW_GAP),
+                     isVcNode: true, groupIdx: gi, labelRight: true, segW });
+      });
+      // UX-022: 그룹당 4사 초과분 = 스택 맨 아래 같은 섹터색 "+N사" 노드 (클릭 → 팝업)
+      if (g.hidden > 0) {
+        nodes.push({ isBundle: true, isGroupBundle: true, bundleColor: g.color,
+                     rest: g.hiddenItems, restLabel: '+' + g.hidden + '사',
+                     customTitle: g.sectorKo + ' ' + (sign < 0 ? '공급처' : '고객사'),
+                     code: '__gb_' + (sign < 0 ? 'a' : 'b') + '_' + gi,
+                     gx: cxg, gy: sign * (VC_NODE_Y + g.items.length * VC_ROW_GAP), segW });
+      }
+    }
+    return { nodes, groups };
+  };
+  const vcAbove = _useMemo(() => (isVc ? buildVcSide(above, -1) : { nodes: [], groups: [] }), [isVc, above, vp]);
+  const vcBelow = _useMemo(() => (isVc ? buildVcSide(below, 1) : { nodes: [], groups: [] }), [isVc, below, vp]);
+
+  // 세로 사이드: 가로로 펼친 행. 가로 사이드: 앵커 높이 좌우로 세로 살짝 퍼진 열.
+  const layoutRow = (items, y) => {
+    const n = items.length;
+    if (!n) return [];
+    if (n === 1) return [{ ...items[0], gx: 0, gy: y }];
+    const span = 0.82;
+    return items.map((it, i) => ({ ...it, gx: -span + (2 * span) * (i / (n - 1)), gy: y }));
+  };
+  const layoutCol = (items, x) => {
+    const n = items.length;
+    if (!n) return [];
+    if (n === 1) return [{ ...items[0], gx: x, gy: 0, isSide: true }];
+    const span = 0.3;
+    return items.map((it, i) => ({ ...it, gx: x, gy: -span + (2 * span) * (i / (n - 1)), isSide: true }));
+  };
+  const withBundle = (side, key) => {
+    const items = side.shown.slice();
+    if (side.rest.length) items.push({ isBundle: true, side: key, rest: side.rest, code: '__bundle_' + key });
+    return items;
+  };
+  const aboveNodes = _useMemo(() => layoutRow(withBundle(above, 'above'), -0.62), [above]);
+  const belowNodes = _useMemo(() => layoutRow(withBundle(below, 'below'), 0.62), [below]);
+  const leftNodes  = _useMemo(() => layoutCol(withBundle(left, 'left'), -0.86), [left]);
+  const rightNodes = _useMemo(() => layoutCol(withBundle(right, 'right'), 0.86), [right]);
+  const allNodes = _useMemo(
+    () => (isVc ? [...vcAbove.nodes, ...vcBelow.nodes]
+                : [...aboveNodes, ...belowNodes, ...leftNodes, ...rightNodes]),
+    [isVc, vcAbove, vcBelow, aboveNodes, belowNodes, leftNodes, rightNodes]
+  );
+
+  // V-3 렌더 하네스 훅 — 화면이 실제 채택한 분할 상태를 기계 검증용으로 노출(무해·읽기 전용).
+  // ★2026-07-30 (UX-026) 레이어 전환·re-root 시 **일시 팝오버를 닫는다**.
+  // 리더 실사용 버그 — 지배구조에서 비상장 노드 팝오버(조합·펀드 등)를 열고 밸류체인으로
+  // 토글하면 그 팝오버가 **다른 레이어 화면 위에 그대로 남았다**(반대 방향도 동일).
+  // 팝오버 내용은 "그 레이어·그 앵커의 그 노드"에서 온 것이라 컨텍스트가 바뀌면 무효다.
+  // hover 하이라이트도 같은 이유로 초기화한다(포인터가 다른 노드 위에 있게 된다).
+  _useEffect(() => {
+    setUnlistedInfo(null);
+    setOverflowSide(null);
+    setHoverCode(null);
+  }, [layer, isVc, anchor.t]);
+
+  // UX-034: 열려 있는 일시 레이어를 **한 번에 하나씩** 닫고 닫았는지 보고한다.
+  // 순서 = 화면에 겹친 순서(비상장 팝오버가 묶음 팝업 위에 뜬다). false를 반환하면
+  // App의 goBack이 다음 단계(오버레이 → 단계 이동)로 진행한다.
+  _useEffect(() => {
+    if (!dismissRef) return undefined;
+    dismissRef.current = () => {
+      if (unlistedInfo) { setUnlistedInfo(null); return true; }
+      if (overflowSide) { setOverflowSide(null); return true; }
+      return false;
+    };
+    return () => { dismissRef.current = null; };
+  }, [dismissRef, unlistedInfo, overflowSide]);
+
+  _useEffect(() => {
+    window.__egoDebug = {
+      anchor: anchor.t,
+      layer: isVc ? 'valuechain' : 'governance', hasVc,
+      above: above.shown.map(n => n.code), aboveRest: above.rest.length,
+      below: below.shown.map(n => n.code), belowRest: below.rest.length,
+      left:  left.shown.map(n => n.code),  leftRest:  left.rest.length,
+      right: right.shown.map(n => n.code), rightRest: right.rest.length,
+      // UX-015 산업군 묶음 상태 (VC 전용)
+      vcGroups: isVc ? {
+        above: (above.groups || []).map(g => ({ ko: g.sectorKo, n: g.count, shown: g.items.length })),
+        below: (below.groups || []).map(g => ({ ko: g.sectorKo, n: g.count, shown: g.items.length })),
+        aboveRestGroups: above.restGroupCount || 0,
+        belowRestGroups: below.restGroupCount || 0,
+      } : null,
+    };
+  }, [anchor, isVc, hasVc, above, below, left, right]);
+
+  _useEffect(() => {
+    const cvs = canvasRef.current;
+    const ctx = cvs.getContext('2d');
+    const resize = () => {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const w = cvs.clientWidth, h = cvs.clientHeight;
+      cvs.width = w * dpr; cvs.height = h * dpr;
+      sizeRef.current = { w, h, dpr };
+      bgStarsRef.current = window.__galaxyHelpers.buildBgStars(53, w, h, 700);
+    };
+    resize();
+    window.addEventListener('resize', resize);
+
+    const animPos = allNodes.map(n => ({ x: n.gx, y: n.gy }));
+
+    function drawArrowHead(fx, fy, tx, ty, color, size) {
+      const ang = Math.atan2(ty - fy, tx - fx);
+      ctx.beginPath();
+      ctx.moveTo(tx, ty);
+      ctx.lineTo(tx - size * Math.cos(ang - 0.42), ty - size * Math.sin(ang - 0.42));
+      ctx.lineTo(tx - size * Math.cos(ang + 0.42), ty - size * Math.sin(ang + 0.42));
+      ctx.closePath();
+      ctx.fillStyle = color;
+      ctx.fill();
+    }
+
+    // UX-017: 라벨이 세그먼트 폭을 넘어 이웃과 붙지 않게 — 측정 후 문자 단위 축약
+    function clipText(text, maxW) {
+      if (ctx.measureText(text).width <= maxW) return text;
+      let s = String(text);
+      while (s.length > 1 && ctx.measureText(s + '…').width > maxW) s = s.slice(0, -1);
+      return s + '…';
+    }
+    // UX-019: 잘라내기 전에 폰트를 줄여서 전부 보이게 — 안 들어가면 px를 낮추고,
+    // 최소 크기에서도 초과할 때만 축약. 반환값은 실제 적용된 font 문자열.
+    function fitText(text, maxW, px, minPx, weight, family) {
+      for (let p = px; p >= minPx; p -= 0.5) {
+        ctx.font = `${weight} ${p}px ${family}`;
+        if (ctx.measureText(text).width <= maxW) return { text, font: ctx.font };
+      }
+      ctx.font = `${weight} ${minPx}px ${family}`;
+      return { text: clipText(text, maxW), font: ctx.font };
+    }
+
+    // (구 drawChevron은 UX-023에서 폐기 — 화살촉은 지배구조와 동일한 drawArrowHead로 통일)
+
+    const draw = () => {
+      if (window.__dossierOpen) { rafRef.current = requestAnimationFrame(draw); return; }
+      const { w, h, dpr } = sizeRef.current;
+      const t = (performance.now() - startRef.current) / 1000;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      const bg = ctx.createRadialGradient(w / 2, h / 2, 0, w / 2, h / 2, Math.max(w, h) * 0.85);
+      bg.addColorStop(0, '#0a0e1c'); bg.addColorStop(0.5, '#04060e'); bg.addColorStop(1, '#000003');
+      ctx.fillStyle = bg; ctx.fillRect(0, 0, w, h);
+
+      ctx.save();
+      ctx.globalCompositeOperation = 'screen';
+      const tint = ctx.createRadialGradient(w / 2, h / 2, 0, w / 2, h / 2, w * 0.5);
+      tint.addColorStop(0, sec.color + '22'); tint.addColorStop(1, sec.color + '00');
+      ctx.fillStyle = tint; ctx.fillRect(0, 0, w, h);
+      ctx.restore();
+
+      for (const s of bgStarsRef.current) {
+        const tw = 0.6 + Math.sin(t * s.tf + s.phase) * 0.4;
+        ctx.fillStyle = `rgba(${s.r},${s.g},${s.b},${s.alpha * tw})`;
+        ctx.fillRect(s.x, s.y, s.size, s.size);
+      }
+
+      allNodes.forEach((n, i) => {
+        animPos[i].x += (n.gx - animPos[i].x) * 0.09;
+        animPos[i].y += (n.gy - animPos[i].y) * 0.09;
+      });
+
+      const cx = w / 2, cy = h / 2;
+      const baseR = Math.min(w, h) * 0.36;
+      const anchorR = Math.min(44, 10 + Math.sqrt(30) * 1.5);
+      const haloR = anchorR * 1.4;
+      const EQUITY = new Set(['subsidiary', 'associate', 'significant']);
+      const hits = [{ x: cx, y: cy, r: anchorR, isAnchor: true }];
+
+      // UX-015 밸류체인 레일: 앵커 ↔ 레일 트렁크 + 산업군 세그먼트 + 그룹 드롭.
+      // (기업마다 앵커까지 선을 뽑지 않는다 — 산업 단위로 읽히게)
+      if (isVc) {
+        const drawRailSide = (sideObj, sign, trunkLabel) => {
+          if (!sideObj.groups.length) return;
+          const railY = cy + sign * VC_RAIL_Y * baseR;
+          const ts0 = VC_TIER_STYLES.T1;
+          // UX-017: 골격(트렁크+레일) = 앵커 섹터색 — "삼성전자의 공급처·고객사 연결선은
+          // 반도체 색". 산업별 색은 스파인이 맡는다.
+          // UX-023: 라벨은 트렁크 "중심"에 — 라벨 구간만 선을 끊어(갭) 글자가 선에 안 묻히게.
+          //         화살촉은 지배구조와 동일한 채운 삼각형(셰브런 폐기 — 레이어 구분은
+          //         토글·전용 범례·색 문법이 이미 담당).
+          const skel = sec.color;
+          const midY = (cy + sign * haloR + railY) / 2;
+          const yTop = Math.min(cy + sign * haloR, railY), yBot = Math.max(cy + sign * haloR, railY);
+          ctx.strokeStyle = skel + 'cc'; ctx.lineWidth = 2; ctx.setLineDash([]);
+          ctx.beginPath();
+          ctx.moveTo(cx, yTop); ctx.lineTo(cx, midY - 11);
+          ctx.moveTo(cx, midY + 11); ctx.lineTo(cx, yBot);
+          ctx.stroke();
+          if (sign < 0) drawArrowHead(cx, railY, cx, cy - haloR, skel + 'ee', 14);
+          else drawArrowHead(cx, cy + haloR, cx, railY, skel + 'ee', 14);
+          ctx.save();
+          ctx.font = '600 11px "IBM Plex Mono", ui-monospace, monospace';
+          ctx.textAlign = 'center'; ctx.fillStyle = skel + 'ee';
+          ctx.fillText(trunkLabel, cx, midY + 4);
+          ctx.restore();
+          // 레일 본선 — 앵커 섹터색 한 줄. 범위는 스파인·묶음 x + 트렁크 x(cx)의 min~max
+          // (UX-018: 그룹 1개면 스파인 min==max라 레일이 사라져 트렁크와 끊겨 보였음 — KCC건설).
+          const spineXs = sideObj.groups.map(g => cx + g.cx * baseR);  // UX-019: 스파인=세그 중앙
+          const railX0 = Math.min(...spineXs, cx), railX1 = Math.max(...spineXs, cx);
+          ctx.strokeStyle = skel + 'bb'; ctx.lineWidth = 2;
+          ctx.beginPath(); ctx.moveTo(railX0, railY); ctx.lineTo(railX1, railY); ctx.stroke();
+          // 그룹별 드롭 + 세그먼트 캡 + 산업 라벨
+          sideObj.groups.forEach((g) => {
+            const gx = cx + g.cx * baseR;
+            const lastRowY = cy + sign * (VC_NODE_Y + Math.max(0, (g.rows || 1) - 1) * VC_ROW_GAP) * baseR;
+            // 레일 → 그룹 마지막 행까지 수직 스파인(세그 중앙, UX-019) — 섹터색 뚜렷하게
+            ctx.strokeStyle = (g.isRest ? '#94a3b8' : g.color) + (g.isRest ? '88' : 'aa');
+            ctx.lineWidth = g.isRest ? 1 : 1.4;
+            ctx.setLineDash(g.isRest ? [2, 3] : []);
+            ctx.beginPath(); ctx.moveTo(gx, railY); ctx.lineTo(gx, lastRowY); ctx.stroke();
+            ctx.setLineDash([]);
+            // 산업 라벨(레일 바로 바깥) + 집계 — 세그 중앙 정렬, 폰트 자동 축소로 전부 표시(UX-019)
+            const ly = cy + sign * VC_LABEL_Y * baseR;
+            ctx.textAlign = 'center';
+            const maxW = Math.max(30, (g.segHalf || 0.2) * 2 * baseR - 8);
+            const lab = fitText(g.label, maxW, 11, 8.5, '600', '"IBM Plex Mono", ui-monospace, monospace');
+            ctx.fillStyle = (g.isRest ? '#94a3b8' : g.color) + 'ee';
+            ctx.font = lab.font;
+            ctx.fillText(lab.text, gx, ly);
+            const sub = g.isRest ? (g.count + '사')
+              : (g.count + '사' + (g.amount ? '·' + fmtVcAmount(g.amount) : ''));
+            const subFit = fitText(sub, maxW, 9, 8, '400', 'sans-serif');
+            ctx.fillStyle = '#64748b'; ctx.font = subFit.font;
+            ctx.fillText(subFit.text, gx, ly + 11);
+          });
+        };
+        drawRailSide(vcAbove, -1, '공급처');
+        drawRailSide(vcBelow, 1, '고객사');
+      }
+
+      // 관계선 + 화살표 (묶음 노드는 신원 없는 얇은 점선만)
+      allNodes.forEach((n, i) => {
+        if (isVc) return;   // VC는 위 레일이 대신함
+        const nx = cx + animPos[i].x * baseR, ny = cy + animPos[i].y * baseR;
+        if (n.isBundle) {
+          ctx.strokeStyle = 'rgba(148,163,184,0.35)';
+          ctx.lineWidth = 1; ctx.setLineDash([2, 3]);
+          ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(nx, ny); ctx.stroke();
+          ctx.setLineDash([]);
+          return;
+        }
+        // (구 방사형 VC 엣지 경로는 UX-015 레일 전환으로 제거 — 레일은 위 drawRailSide가 전담)
+        const style = REL_STYLES[n.relType] || REL_STYLES.manual;
+        const isEquity = EQUITY.has(n.relType);
+        // U5: 비상장 상대는 **중요도 강등**. 선 스타일 축(파선=계열·점선=특관·
+        // 빈테두리=T2)은 이미 점유돼 있어 건드리지 않고 **투명도**로만 낮춘다.
+        // 0.42는 실화면에서 너무 안 보였다(리더) — 강등은 유지하되 가독 우선으로 상향.
+        const uAlpha = n.isUnlisted ? 0.68 : 1;
+        ctx.save(); ctx.globalAlpha = uAlpha;
+        if (n.hasGroup && n.hasEquity) {
+          const dx = nx - cx, dy = ny - cy, len = Math.sqrt(dx * dx + dy * dy) || 1;
+          const px = -dy / len * 2, py = dx / len * 2;
+          ctx.strokeStyle = style.color + 'cc'; ctx.lineWidth = 2; ctx.setLineDash([]);
+          ctx.beginPath(); ctx.moveTo(cx + px, cy + py); ctx.lineTo(nx + px, ny + py); ctx.stroke();
+          ctx.strokeStyle = REL_STYLES.group.color + 'aa'; ctx.lineWidth = 1.2; ctx.setLineDash(REL_STYLES.group.dash);
+          ctx.beginPath(); ctx.moveTo(cx - px, cy - py); ctx.lineTo(nx - px, ny - py); ctx.stroke();
+          ctx.setLineDash([]);
+          const dxn = dx / len, dyn = dy / len;
+          if (!n.isIncoming) drawArrowHead(cx + px, cy + py, nx + px, ny + py, style.color + 'ee', 14);
+          else { const hx = cx + dxn * haloR, hy = cy + dyn * haloR; drawArrowHead(nx + px, ny + py, hx + px, hy + py, style.color + 'ee', 14); }
+        } else {
+          ctx.strokeStyle = style.color + 'cc'; ctx.lineWidth = isEquity ? 2 : 1.5; ctx.setLineDash(style.dash);
+          ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(nx, ny); ctx.stroke(); ctx.setLineDash([]);
+          if (isEquity) {
+            if (!n.isIncoming) drawArrowHead(cx, cy, nx, ny, style.color + 'ee', 14);
+            else {
+              const dx = nx - cx, dy = ny - cy, len = Math.sqrt(dx * dx + dy * dy) || 1, dxn = dx / len, dyn = dy / len;
+              const hx = cx + dxn * haloR, hy = cy + dyn * haloR;
+              drawArrowHead(nx, ny, hx, hy, style.color + 'ee', 14);
+            }
+          }
+        }
+        ctx.restore();
+      });
+
+      // 앵커 노드
+      const aGrd = ctx.createRadialGradient(cx, cy, 0, cx, cy, anchorR * 1.8);
+      aGrd.addColorStop(0, sec.color + 'aa'); aGrd.addColorStop(1, sec.color + '00');
+      ctx.fillStyle = aGrd; ctx.beginPath(); ctx.arc(cx, cy, anchorR * 1.8, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = sec.color; ctx.beginPath(); ctx.arc(cx, cy, anchorR * 0.5, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(cx, cy, anchorR * 0.5, 0, Math.PI * 2); ctx.stroke();
+      // UX-018: 앵커명 = 백킹 박스 없이 섹터색 글씨 — 이웃 노드 라벨과 같은 문법
+      // (구 백킹은 방사형 VC의 엣지 다발 대응이었음 — 레일 전환으로 불필요)
+      ctx.textAlign = 'center';
+      ctx.font = 'bold 12px sans-serif';
+      ctx.fillStyle = sec.color;
+      ctx.fillText(anchor.n, cx, cy - anchorR * 0.5 - 10);
+
+      // ★2026-07-30 (UX-027) 라벨 겹침 방지 — **중앙 정렬 라벨에는 폭 제약이 아예
+      // 없었다**(VC 세로 스택만 UX-019의 segW 제약을 받고 있었다). 지배구조 하단처럼
+      // 한 행에 노드가 6~7개 오고 이름이 길면(`IPEC INDIA PRIVATE LIMITED` ·
+      // `머카바-에스앤에스 에프앤비 1호`) 이웃 라벨과 글자가 겹쳐 읽을 수 없다(리더 보고).
+      // 같은 행(수평 밴드) 이웃과의 **중심간 거리**로 가용폭을 정한다 — 중앙 정렬이므로
+      // 두 라벨 폭이 각각 거리의 0.95배 이내면 겹치지 않는다(w1/2+w2/2 ≤ 0.95d < d).
+      // 바깥쪽 이웃이 없으면 캔버스 가장자리까지를 한계로 쓴다.
+      const labelMaxW = (() => {
+        const rows = new Map();
+        allNodes.forEach((n, i) => {
+          if (n.labelRight) return;   // VC 세로 스택 — segW 기반 제약(UX-019) 유지
+          const nx = cx + animPos[i].x * baseR, ny = cy + animPos[i].y * baseR;
+          const up = n.isSide || n.gy < 0;
+          const key = (up ? 'u' : 'd') + '|' + Math.round(ny / 16);
+          if (!rows.has(key)) rows.set(key, []);
+          rows.get(key).push({ i, nx });
+        });
+        const out = new Map();
+        const W = sizeRef.current.w || 1200;
+        rows.forEach((list) => {
+          list.sort((a, b) => a.nx - b.nx);
+          list.forEach((it, k) => {
+            const dL = k > 0 ? it.nx - list[k - 1].nx : it.nx * 2;
+            const dR = k < list.length - 1 ? list[k + 1].nx - it.nx : (W - it.nx) * 2;
+            out.set(it.i, Math.max(28, Math.min(dL, dR) * 0.95));
+          });
+        });
+        return out;
+      })();
+
+      // 이웃 + 묶음 노드
+      allNodes.forEach((n, i) => {
+        const nx = cx + animPos[i].x * baseR, ny = cy + animPos[i].y * baseR;
+        if (n.isBundle && n.isGroupBundle) {
+          // UX-022: 그룹 내 초과분 — 스택 맨 아래 같은 섹터색 "+N사" 노드 (클릭 → 팝업)
+          const bc = n.bundleColor || '#94a3b8';
+          ctx.fillStyle = bc + '2e';
+          ctx.beginPath(); ctx.arc(nx, ny, 9, 0, Math.PI * 2); ctx.fill();
+          ctx.strokeStyle = bc + 'aa'; ctx.lineWidth = 1.2;
+          ctx.beginPath(); ctx.arc(nx, ny, 9, 0, Math.PI * 2); ctx.stroke();
+          ctx.textAlign = 'left'; ctx.fillStyle = bc; ctx.font = 'bold 9px sans-serif';
+          ctx.fillText(n.restLabel, nx + 13, ny + 3);
+          hits.push({ x: nx, y: ny, r: 12, isBundle: true,
+                      custom: { title: n.customTitle, items: n.rest } });
+          return;
+        }
+        if (n.isBundle) {
+          ctx.fillStyle = 'rgba(148,163,184,0.18)';
+          ctx.beginPath(); ctx.arc(nx, ny, 16, 0, Math.PI * 2); ctx.fill();
+          ctx.strokeStyle = 'rgba(148,163,184,0.6)'; ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.arc(nx, ny, 16, 0, Math.PI * 2); ctx.stroke();
+          ctx.fillStyle = '#cbd5e1'; ctx.font = '9px sans-serif'; ctx.textAlign = 'center';
+          ctx.fillText('+' + n.rest.length, nx, ny + 3);
+          const firstName = (n.rest[0] && n.rest[0].name) || '';
+          // 잔여가 1개면 "외 0사"가 되어버린다 - 그땐 이름만 (오프바이원 방지).
+          const clip = (s, n2) => (s.length > n2 ? s.slice(0, n2) + '…' : s);
+          const label = n.rest.length === 1
+            ? clip(firstName, 9)
+            : clip(firstName, 6) + ' 외 ' + (n.rest.length - 1) + '사';
+          ctx.fillStyle = '#94a3b8';
+          // UX-027: 묶음 라벨도 같은 행에 있으므로 동일한 가용폭 제약을 받는다
+          const bf = fitText(label, labelMaxW.get(i) || 9999, 8, 6.5, '400', 'sans-serif');
+          ctx.font = bf.font;
+          ctx.fillText(bf.text, nx, ny + (n.side === 'below' ? 30 : -22));
+          hits.push({ x: nx, y: ny, r: 16, isBundle: true, side: n.side });
+          return;
+        }
+        // U5: 비상장류는 섹터가 없다 — 무채 단일색으로 그린다(신원 미상장의 표식).
+        const nodeColor = n.isUnlisted ? UNLISTED_COLOR
+          : ((n.sectorKo && (window.SECTOR_PALETTE || []).find(s => s.ko === n.sectorKo)?.color)
+          || (isVc ? VC_FLOW_COLOR : (REL_STYLES[n.relType] || REL_STYLES.manual).color));
+        const isHover = hoverCode === n.code;
+        // UX-015: 밸류체인은 노드 크기 = 신뢰등급 (T1 정형 공시 크게 / T2 서술 추출 작게)
+        const coreR = isVc ? ((n.tier === 'T1') ? 6.5 : (n.tier === 'T2') ? 4 : 3) : 5;
+        ctx.globalAlpha = 0.8;
+        const r0 = (isHover ? 26 : 20) * (isVc ? (coreR / 5) : 1);
+        const grd = ctx.createRadialGradient(nx, ny, 0, nx, ny, r0);
+        grd.addColorStop(0, nodeColor + '99'); grd.addColorStop(1, nodeColor + '00');
+        ctx.fillStyle = grd; ctx.beginPath(); ctx.arc(nx, ny, r0, 0, Math.PI * 2); ctx.fill();
+        ctx.globalAlpha = 1;
+        if (n.isUnlisted) {
+          // 형태 = 유형(NODE TYPOLOGY): 법인 채운 원 / 개인 링 / 조합·펀드 점선 링 /
+          // 공공기관 이중 링. 상장 최소(5)보다 한 단계 작게 그려 위계를 낮춘다.
+          drawUnlistedNode(ctx, nx, ny, n.kind, 4.2, nodeColor);
+        } else {
+          ctx.fillStyle = nodeColor;
+          ctx.beginPath(); ctx.arc(nx, ny, coreR, 0, Math.PI * 2); ctx.fill();
+        }
+        if (isVc && n.tier === 'T2') {   // 서술 추출은 테두리를 비워 '추정' 뉘앙스
+          ctx.strokeStyle = nodeColor; ctx.lineWidth = 1.2;
+          ctx.beginPath(); ctx.arc(nx, ny, coreR + 2, 0, Math.PI * 2); ctx.stroke();
+        }
+        if (n.labelRight) {
+          // UX-015 세로 스택: 노드 오른쪽에 이름 + 금액 한 줄씩(왼쪽 정렬).
+          // UX-019: 노드=세그 중앙 → 이름 가용폭 = 세그 오른쪽 절반. 폰트 축소 우선, 축약은 최후.
+          const nMaxW = Math.max(30, (n.segW || 0.3) * 0.5 * baseR - 12);
+          ctx.textAlign = 'left';
+          const fitLocal = (text, maxW, px, minPx, weight) => {
+            for (let p = px; p >= minPx; p -= 0.5) {
+              ctx.font = `${weight} ${p}px sans-serif`;
+              if (ctx.measureText(text).width <= maxW) return text;
+            }
+            let s = String(text);
+            while (s.length > 1 && ctx.measureText(s + '…').width > maxW) s = s.slice(0, -1);
+            return s + '…';
+          };
+          ctx.fillStyle = nodeColor;
+          ctx.fillText(fitLocal(n.name, nMaxW, 9, 7.5, 'bold'), nx + 10, ny - 1);
+          if (n.amount) {
+            ctx.fillStyle = '#64748b';
+            const am = fmtVcAmount(n.amount) + (n.as_of ? '·' + n.as_of : '');
+            ctx.fillText(fitLocal(am, nMaxW, 8, 7, '400'), nx + 10, ny + 9);
+          }
+        } else {
+          const labelUp = n.isSide || n.gy < 0;
+          // UX-027: 가용폭 안에서 **폰트를 줄여 전부 보이게**, 최소 크기에서도 넘칠 때만
+          // 축약(UX-019 "잘라내지 말고 줄여서 다 보여라"와 같은 규율).
+          const maxW = labelMaxW.get(i) || 9999;
+          ctx.textAlign = 'center'; ctx.fillStyle = nodeColor;
+          const nameY = labelUp ? ny - 13 : ny + 18;
+          const nf = fitText(n.name, maxW, 9, 7, 'bold', 'sans-serif');
+          ctx.font = nf.font; ctx.fillText(nf.text, nx, nameY);
+          ctx.fillStyle = '#64748b';
+          const s = REL_STYLES[n.relType] || REL_STYLES.manual;
+          const sub = s.label + (n.detail ? ' · ' + n.detail : '');
+          const sf = fitText(sub, maxW, 8, 6.5, '400', 'sans-serif');
+          ctx.font = sf.font; ctx.fillText(sf.text, nx, labelUp ? nameY + 9 : nameY + 11);
+        }
+        hits.push({ x: nx, y: ny, r: isVc ? 14 : 20, code: n.code, name: n.name,
+                    sectorKo: n.sectorKo, isUnlisted: n.isUnlisted, kind: n.kind,
+                    detail: n.detail, relType: n.relType });
+      });
+
+      hitRef.current = hits;
+      if (window.__egoDebug) window.__egoDebug.renderedCodes = hits.filter(h => h.code).map(h => h.code);
+      rafRef.current = requestAnimationFrame(draw);
+    };
+    rafRef.current = requestAnimationFrame(draw);
+    return () => { cancelAnimationFrame(rafRef.current); window.removeEventListener('resize', resize); };
+  }, [allNodes, anchor, sec.color, isVc]);
+
+  const hitTest = (e) => {
+    const rect = canvasRef.current.getBoundingClientRect();
+    const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+    for (const h of hitRef.current) {
+      if (Math.hypot(mx - h.x, my - h.y) <= h.r + 4) return h;
+    }
+    return null;
+  };
+  const handleClick = (e) => {
+    const h = hitTest(e);
+    if (!h || h.isAnchor) return;
+    // UX-022: 그룹 내 "+N사" 번들은 자체 리스트를 들고 있다(custom) — 사이드 묶음과 구분
+    if (h.isBundle) { setOverflowSide(h.custom ? { custom: h.custom } : h.side); return; }
+    // U5: 비상장·개인은 companies_index에 없다 — 이동하지 않고 정보만 보여준다.
+    if (h.isUnlisted) { setUnlistedInfo(h); return; }
+    onReRoot(h.code, h.name, h.sectorKo);
+  };
+  const handleMove = (e) => {
+    const h = hitTest(e);
+    setHoverCode(h && !h.isBundle && !h.isAnchor ? h.code : null);
+    canvasRef.current.style.cursor = (h && !h.isAnchor) ? 'pointer' : 'default';
+  };
+
+  const OVERFLOW_TITLE = isVc
+    ? { above: '공급처', below: '고객사' }
+    : { above: '출자사', below: '피출자사', left: '계열사', right: '특수관계자' };
+  const isCustomOverflow = !!(overflowSide && typeof overflowSide === 'object' && overflowSide.custom);
+  const overflowList = !overflowSide ? null
+    : isCustomOverflow ? overflowSide.custom.items
+    : ({ above, below, left, right }[overflowSide] || {}).rest || null;
+  const overflowTitle = isCustomOverflow
+    ? overflowSide.custom.title
+    : (OVERFLOW_TITLE[overflowSide] || '') + ' 전체';
+
+  return (
+    // FN-009: 캔버스 사이징(position/inset·100%)은 인라인으로 고정한다 — styles.css가
+    // 캐시된 구버전이면 .ego-stage/.ego-canvas 규칙이 없어 캔버스가 기본 300x150으로
+    // 붕괴하고 그림이 좌상단에 박힌다(실제 발생·재현). 레이아웃은 스타일시트 캐시에 의존 금지.
+    <div className="ego-stage" style={{position:'absolute', inset:0}}>
+      <canvas ref={canvasRef} className="ego-canvas"
+        style={{width:'100%', height:'100%', display:'block'}}
+        onClick={handleClick} onMouseMove={handleMove}
+        onMouseLeave={() => setHoverCode(null)} />
+      {/* UX-012 + ★UX-028: 상단 중앙 바는 **레이어 토글 2개 전용**.
+          재구성 이력을 여기 나열하니 탐색할수록 증식해 토글이 밀렸고(리더 지적),
+          그 대안으로 뒀던 `← 직전기업명` 버튼도 제거했다 — 전역 뒤로가기(ESC·상단
+          뒤로가기 버튼)가 체인을 한 단계씩 되돌리므로 중복이었다(리더 판단).
+          현재 위치는 좌상단 전역 브레드크럼(GALAXY › 섹터 › 시장 › 기업)이 보여준다. */}
+      <div className="ego-topbar">
+        <div className="ego-layer-toggle">
+          <button className={"ego-layer-btn" + (!isVc ? " is-active" : "")}
+            onClick={() => onLayerChange && onLayerChange('governance')}>지배구조</button>
+          <button
+            className={"ego-layer-btn" + (isVc ? " is-active" : hasVc ? "" : " is-disabled")}
+            disabled={!hasVc}
+            title={hasVc ? '밸류체인 레이어 — 공시 기반 물자 흐름' : '밸류체인 공시 데이터 없음'}
+            onClick={() => hasVc && onLayerChange && onLayerChange('valuechain')}>밸류체인</button>
+        </div>
+      </div>
+      {unlistedInfo && (
+        <div className="panel ego-overflow-panel">
+          <div className="panel-head">
+            <div className="panel-head-l">
+              <span className="panel-dot" style={{background: UNLISTED_COLOR}} />
+              <span className="panel-title">{UNLISTED_KIND_LABEL[unlistedInfo.kind] || '비상장'}</span>
+            </div>
+            <button className="back-link" onClick={() => setUnlistedInfo(null)}>✕</button>
+          </div>
+          <div className="panel-body">
+            <div style={{fontSize: 13, color: '#e2e8f0', fontWeight: 600, marginBottom: 6,
+                         wordBreak: 'break-all'}}>{unlistedInfo.name}</div>
+            <div style={{fontSize: 11, color: '#94a3b8', lineHeight: 1.8}}>
+              관계 · <span style={{color: (REL_STYLES[unlistedInfo.relType] || REL_STYLES.manual).color}}>
+                {(REL_STYLES[unlistedInfo.relType] || REL_STYLES.manual).label}</span>
+              {unlistedInfo.detail ? <> · {unlistedInfo.detail}</> : null}
+            </div>
+            <div style={{fontSize: 10.5, color: '#5c6b80', lineHeight: 1.7, marginTop: 10,
+                         paddingTop: 8, borderTop: '1px solid rgba(140,170,210,.13)'}}>
+              사업보고서에 기재된 표기 그대로입니다. 비상장이라 별도 기업 정보가 없어
+              이동하지 않습니다.
+            </div>
+          </div>
+        </div>
+      )}
+      {overflowList && (
+        <div className="panel ego-overflow-panel">
+          <div className="panel-head">
+            <div className="panel-head-l">
+              <span className="panel-dot" style={{background: sec.color, boxShadow: `0 0 8px ${sec.color}`}} />
+              <span className="panel-title">{overflowTitle}</span>
+            </div>
+            <div style={{display:'flex', alignItems:'center', gap:8}}>
+              <span className="panel-count">{overflowList.length}사</span>
+              <button className="back-link" onClick={() => setOverflowSide(null)}>✕</button>
+            </div>
+          </div>
+          <div className="panel-body">
+            {(() => {
+              // UX-021: 도트=기업의 섹터색(신원), 라벨=관계유형 색(관계) — 두 축 분리
+              const row = (n, style) => (
+                <div key={n.code + ':' + (n.type || n.relType)} className="ego-overflow-row"
+                  onClick={() => {
+                    if (n.isUnlisted) { setOverflowSide(null); setUnlistedInfo(n); return; }
+                    setOverflowSide(null); onReRoot(n.code, n.name, n.sectorKo);
+                  }}>
+                  <span className="ov-rel-mark" style={{
+                    background: style.dash.length === 0 ? style.markColor : 'transparent',
+                    border: style.dash.length === 0 ? 'none' : `1.5px dashed ${style.markColor}`,
+                  }} />
+                  <span className="ego-overflow-name">{n.name}</span>
+                  <span className="ego-overflow-type" style={{color: style.labelColor}}>{style.label}</span>
+                </div>
+              );
+              // UX-016·020: 팝오버는 두 레이어 모두 산업별 섹션 — "유통 ── / 삼성물산 / …".
+              // 헤더=섹터색, 행 스타일은 레이어 문법 유지(지배구조=관계유형 색·대시 / VC=섹터색+등급 대시).
+              const order = [], byKo = new Map();
+              for (const n of overflowList) {
+                const ko = n.sectorKo || '기타';
+                if (!byKo.has(ko)) { byKo.set(ko, []); order.push(ko); }
+                byKo.get(ko).push(n);
+              }
+              return order.map(ko => {
+                const pal = (window.SECTOR_PALETTE || []).find(s => s.ko === ko);
+                const c = (pal && pal.color) || '#94a3b8';
+                return (
+                  <React.Fragment key={'sec_' + ko}>
+                    <div className="ego-overflow-sec" style={{color: c, borderColor: c + '44'}}>
+                      <span className="ego-overflow-sec-dot" style={{background: c, boxShadow: `0 0 6px ${c}`}} />
+                      {ko} <span style={{color: '#64748b'}}>· {byKo.get(ko).length}사</span>
+                    </div>
+                    {byKo.get(ko).map(n => {
+                      if (isVc) {
+                        return row(n, {
+                          markColor: c, labelColor: c,
+                          dash: (VC_TIER_STYLES[n.tier] || VC_TIER_STYLES.T1).dash,
+                          label: (n.type === 'supply' ? '공급처' : '고객사') + (n.amount ? ' · ' + fmtVcAmount(n.amount) : ''),
+                        });
+                      }
+                      const s = REL_STYLES[n.relType] || REL_STYLES.manual;
+                      return row(n, { markColor: c, labelColor: s.color, dash: [],
+                                      label: s.label + (n.detail ? ' · ' + n.detail : '') });
+                    })}
+                  </React.Fragment>
+                );
+              });
+            })()}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+window.EgoView = EgoView;
+
 // app.jsx — DiscloseAI: Phase 1 Intro → Phase 2 Galaxy → Phase 3 Sector → Phase 4 Company
 // (React hooks already destructured at top of bundle)
 
@@ -2164,7 +3304,8 @@ function useStockQuote(ticker) {
 
 // ─── Intro screen ──────────────────────────────────────────────────────────
 // ─── Top tabs ──────────────────────────────────────────────────────────────
-function TopTabs({ active, onChange, breadcrumb, onBack, canGoBack }) {
+// UX-030: 상단 BACK 버튼 폐지 — ESC/Backspace 키(goBack)와 기능이 완전히 중복이라 UI에 노출하지 않는다.
+function TopTabs({ active, onChange, breadcrumb }) {
   const kospi = useKospiQuote();
   const kosdaq = useKosdaqQuote();
   const isUp = Number(kospi.changePct) >= 0;
@@ -2183,7 +3324,7 @@ function TopTabs({ active, onChange, breadcrumb, onBack, canGoBack }) {
           <div className="top-breadcrumb">
             {breadcrumb.map((b, i) => (
               <React.Fragment key={i}>
-                <span className={"crumb " + (b.onClick ? 'is-clickable' : '')} onClick={b.onClick}>{b.label}</span>
+                <span className={"crumb " + (b.onClick ? 'is-clickable ' : '') + (b.fixed ? 'is-fixed' : '')} onClick={b.onClick}>{b.label}</span>
                 {i < breadcrumb.length - 1 && <span className="crumb-sep">›</span>}
               </React.Fragment>
             ))}
@@ -2199,12 +3340,6 @@ function TopTabs({ active, onChange, breadcrumb, onBack, canGoBack }) {
             </div>
           ))}
         </div>
-        {canGoBack && (
-          <button className="top-back-btn" onClick={onBack} title="뒤로가기 (ESC)">
-            <span className="top-back-arrow">←</span>
-            <span>BACK</span>
-          </button>
-        )}
       </div>
       <div className="top-tabs-status">
         <div className="index-row">
@@ -2273,12 +3408,28 @@ function MascotPanel({ messages = ["섹터를 클릭하면, 기업을 확인할 
 }
 
 // ─── PHASE 3: Sector overview panel (top-left) ─────────────────────────────
-function SectorOverviewPanel({ sector, companyCount, onBack }) {
+// UX-008: 모드별 콘텐츠 — 성운 개요(activeMarket 없음)=DAILY HIGHLIGHTS+SECTOR PULSE,
+// 시장 드릴인(activeMarket)=그 시장 기업 목록(시총순, 클릭 시 기업 선택).
+function SectorOverviewPanel({ sector, companyCount, activeMarket, onBack, onSelectCompany }) {
   if (!sector) return null;
   const D = window.DiscloseAI || {};
   const realData = window.__realData;
   const members = (sector.members || []).map(n => n);
   const highlights = (D.highlightsForSector && realData) ? D.highlightsForSector(realData.discAll, members, 3) : null;
+  // 드릴인 기업 목록: named(시총 정확) 먼저 cap desc → dot 기업 cb desc·이름순
+  const marketList = React.useMemo(() => {
+    if (!activeMarket || !realData || !realData.sectorMarketData) return null;
+    const md = realData.sectorMarketData[sector.id];
+    const m = md && md[activeMarket];
+    if (!m) return null;
+    const namedRows = m.named.map(c => ({ code: c.code, name: c.name, capT: c.cap, isNamed: true }));
+    const namedCodes = new Set(namedRows.map(r => r.code));
+    const dotRows = m.dotItems
+      .filter(d => d.t && !namedCodes.has(d.t))
+      .sort((a, b) => (b.cb - a.cb) || String(a.n).localeCompare(String(b.n), 'ko'))
+      .map(d => ({ code: d.t, name: d.n, capT: null, isNamed: false }));
+    return [...namedRows, ...dotRows];
+  }, [activeMarket, sector.id, realData]);
   const sectorPE = D.computeSectorPE ? D.computeSectorPE(members) : null;
   return (
     <div className="panel panel-tl sector-overview-panel" style={{'--accent': sector.color}}>
@@ -2303,29 +3454,48 @@ function SectorOverviewPanel({ sector, companyCount, onBack }) {
           <div className="ov-stat"><div className="ov-k">기업 수</div><div className="ov-v">{companyCount}</div></div>
           <div className="ov-stat"><div className="ov-k">P / E</div><div className="ov-v">{sectorPE != null ? sectorPE : '-'}</div></div>
         </div>
-        <div className="sector-ov-section">
-          <div className="ov-sec-title">DAILY HIGHLIGHTS · 오늘의 시그널</div>
-          <ul className="ov-sec-list">
-            {highlights && highlights.length ? highlights.map((h, i) => (
-              <li key={i}>
-                <span className="ov-bullet" style={{background: h.high_impact ? '#f87171' : sector.color}} />
-                {h.high_impact && <span style={{color:'#f87171', fontFamily:'var(--font-mono)', fontSize:9, marginRight:4}}>HIGH</span>}
-                <span style={{fontFamily:'var(--font-mono)', fontSize:10, color:'#94a3b8', marginRight:6}}>{h.time}</span>
-                {(h.title || '').slice(0, 30)} — {h.corp_name}
-              </li>
-            )) : (
-              <li style={{color:'#64748b'}}>최근 공시 데이터 없음</li>
-            )}
-          </ul>
-        </div>
-        <div className="sector-ov-section">
-          <div className="ov-sec-title">SECTOR PULSE · 섹터 지수</div>
-          <div className="ov-bars">
-            {[0.3, 0.5, 0.4, 0.7, 0.6, 0.8, 0.9, 0.75, 0.85, 0.95].map((v, i) => (
-              <div key={i} className="ov-bar" style={{height: `${v*100}%`, background: sector.color}} />
-            ))}
+        {!marketList && (<>
+          <div className="sector-ov-section">
+            <div className="ov-sec-title">DAILY HIGHLIGHTS · 오늘의 시그널</div>
+            <ul className="ov-sec-list">
+              {highlights && highlights.length ? highlights.map((h, i) => (
+                <li key={i}>
+                  <span className="ov-bullet" style={{background: h.high_impact ? '#f87171' : sector.color}} />
+                  {h.high_impact && <span style={{color:'#f87171', fontFamily:'var(--font-mono)', fontSize:9, marginRight:4}}>HIGH</span>}
+                  <span style={{fontFamily:'var(--font-mono)', fontSize:10, color:'#94a3b8', marginRight:6}}>{h.time}</span>
+                  {(h.title || '').slice(0, 30)} — {h.corp_name}
+                </li>
+              )) : (
+                <li style={{color:'#64748b'}}>최근 공시 데이터 없음</li>
+              )}
+            </ul>
           </div>
-        </div>
+          <div className="sector-ov-section">
+            <div className="ov-sec-title">SECTOR PULSE · 섹터 지수</div>
+            <div className="ov-bars">
+              {[0.3, 0.5, 0.4, 0.7, 0.6, 0.8, 0.9, 0.75, 0.85, 0.95].map((v, i) => (
+                <div key={i} className="ov-bar" style={{height: `${v*100}%`, background: sector.color}} />
+              ))}
+            </div>
+          </div>
+        </>)}
+        {marketList && (
+          <div className="sector-ov-section">
+            <div className="ov-sec-title">{activeMarket} COMPANIES · 시총순 {marketList.length}사</div>
+            <ul className="ov-sec-list" style={{maxHeight: 300, overflowY: 'auto'}}>
+              {marketList.map((r) => (
+                <li key={r.code} onClick={() => onSelectCompany && onSelectCompany(r.code)}
+                    style={{cursor: 'pointer', display:'flex', alignItems:'baseline', gap:6}}>
+                  <span className="ov-bullet" style={{background: sector.color, opacity: r.isNamed ? 1 : 0.4}} />
+                  <span style={{flex:1, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap'}}>{r.name}</span>
+                  <span style={{fontFamily:'var(--font-mono)', fontSize:10, color:'#94a3b8'}}>
+                    {r.capT != null ? r.capT + 'T' : ''}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -2339,9 +3509,12 @@ const METRIC_TIPS = {
   roe: 'ROE(자기자본이익률) = 당기순이익 ÷ 자기자본 × 100. 회사가 자기 돈으로 얼마나 효율적으로 이익을 냈는지 보여줘요.',
 };
 
-function CompanyOverviewPanel({ company, sector, onBack, onEnter }) {
+function CompanyOverviewPanel({ company, sector, onBack, onEnter, egoAnchor }) {
   if (!company) return null;
-  const rels = (window.RELATIONS[company.code] || []);
+  // ③ ego 데이터 있으면 우선(universe 전량 커버) — 없으면 기존 top50-scoped RELATIONS 폴백.
+  const rels = (egoAnchor && egoAnchor.layers)
+    ? mergeEgoNeighbors(egoAnchor.layers.governance).map(n => ({ code: n.code, type: n.relType }))
+    : (window.RELATIONS[company.code] || []);
   const node = window.__realData && window.__realData.nodeByCode && window.__realData.nodeByCode[company.code];
   const D = window.DiscloseAI || {};
   const valu = node && D.calcValuation ? D.calcValuation(node) : null;
@@ -2631,8 +3804,85 @@ function AssistantPanel({ phase, sector, company, activeTab }) {
   );
 }
 
+
+// U5: 노드 유형 범례 — 두 레이어 공통(비상장 노드는 양쪽 다 나타난다).
+// 색은 무채 고정이고 **형태**가 유형을 가른다(DESIGN.md §2 색=의미 보존 — 새 색 없음).
+function NodeTypologySection() {
+  const mark = (kind) => {
+    const c = UNLISTED_COLOR;
+    if (kind === 'listed') return <circle cx="11" cy="9" r="5.5" fill="#5eead4" />;
+    if (kind === 'person') return <circle cx="11" cy="9" r="4.5" fill="none" stroke={c} strokeWidth="1.5" />;
+    if (kind === 'coop_fund') return <circle cx="11" cy="9" r="4.5" fill="none" stroke={c} strokeWidth="1.5" strokeDasharray="2.5 2.5" />;
+    if (kind === 'public_org') return <g><circle cx="11" cy="9" r="5.8" fill="none" stroke={c} strokeWidth="1.2" />
+      <circle cx="11" cy="9" r="2.6" fill="none" stroke={c} strokeWidth="1.2" /></g>;
+    return <circle cx="11" cy="9" r="4.2" fill={c} />;
+  };
+  const row = (kind, label, note) => (
+    <div className="legend-row" key={kind}>
+      <svg width="22" height="18" className="legend-svg">{mark(kind)}</svg>
+      <div className="legend-text">
+        <div className="legend-label">{label}</div>
+        <div className="legend-sub">{note}</div>
+      </div>
+    </div>
+  );
+  return (
+    <div className="legend-section">
+      <div className="legend-section-h">
+        <span style={{color: UNLISTED_COLOR}}>◌</span> NODE · 노드 유형
+      </div>
+      <div className="legend-grid">
+        {row('listed', '상장사', '섹터색 · 클릭 시 이동')}
+        {row('private_corp', '비상장법인', '무채 · 이동 없음')}
+        {row('person', '개인', '링')}
+        {row('coop_fund', '조합·펀드', '점선 링')}
+        {row('public_org', '공공기관', '이중 링')}
+      </div>
+    </div>
+  );
+}
+
 // ─── Edge legend (bottom-left) — clearer differentiation ─────────────────
-function LegendPanel() {
+function LegendPanel({ mode }) {
+  // U-D14: 레이어 전환 시 범례도 통째로 교체 — 혼합 범례 금지. mode='valuechain'이면
+  // 흐름 문법 전용 범례(색=은백 단일, 선=신뢰등급, 셰브런=물자 흐름 위→아래).
+  if (mode === 'valuechain') {
+    return (
+      <div className="panel panel-bl legend-panel">
+        <div className="panel-head">
+          <div className="panel-head-l">
+            <span className="panel-dot" style={{background: '#e8f1ff', boxShadow: '0 0 8px #e8f1ff'}} />
+            <span className="panel-title">FLOW TYPOLOGY</span>
+            <span className="panel-sub">물자 흐름</span>
+          </div>
+          <div className="panel-count">VALUE CHAIN</div>
+        </div>
+        <div className="panel-body legend-body">
+          <div className="legend-section">
+            <div className="legend-section-h">
+              <span style={{color:'#e8f1ff'}}>━━━</span> LINE · 신뢰등급 (원천별)
+            </div>
+            <div className="legend-grid">
+              <LegendRow color="#e8f1ff" kind="solid" label="T1 정형 공시" sub="특수관계자 거래·공급계약" />
+              <LegendRow color="#e8f1ff77" kind="solid" label="T2 서술 추출" sub="사업보고서 서술 (준비 중)" />
+              <LegendRow color="#e8f1ff88" kind="dot" label="T3 산업연관표" sub="섹터 백본 (준비 중)" />
+            </div>
+          </div>
+          <NodeTypologySection />
+          <div className="legend-section">
+            <div className="legend-section-h">
+              <span style={{color:'#e8f1ff'}}>▼</span> ARROW · 물자 흐름 방향
+            </div>
+            <div style={{fontSize: 10.5, color: '#94a3b8', lineHeight: 1.7, padding: '2px 2px 0'}}>
+              위 = <span style={{color:'#e8f1ff'}}>공급처</span> (매입·조달) → 앵커 →
+              아래 = <span style={{color:'#e8f1ff'}}>고객사</span> (매출·공급계약).<br/>
+              금액은 최신 공시 연도 기준 · 공시 기반 참고 정보 — 투자 조언 아님.
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="panel panel-bl legend-panel">
       <div className="panel-head">
@@ -2664,6 +3914,7 @@ function LegendPanel() {
             <LegendRow color="#64748b" kind="ddash"  label="수동 보정"  sub="manual override" />
           </div>
         </div>
+        <NodeTypologySection />
       </div>
     </div>
   );
@@ -2785,27 +4036,64 @@ function App() {
   const [phase, setPhase] = useState('galaxy');
   const [activeSectorId, setActiveSectorId] = useState(null);
   const [activeCompanyCode, setActiveCompanyCode] = useState(null);
+  const [activeMarket, setActiveMarket] = useState(null);  // U2 드릴인: null=성운 개요, 'KOSPI'|'KOSDAQ'=드릴인
+
+  // ③ EgoView (universe/PLAN.md §5 LOD-2) — ego/<ticker>.json 지연 fetch 상태 + re-root 체인.
+  // 실패(404 등) 시 egoStatus='error' → 렌더 분기가 기존 SectorMap(allRelated 폴리곤)으로
+  // 폴백한다(FN-005 사다리 패턴, graph_top50 경로 회귀 무손상 — UX-010).
+  const [egoAnchor, setEgoAnchor] = useState(null);
+  const [egoStatus, setEgoStatus] = useState('idle'); // idle | loading | ok | error
+  // UX-034: EgoView가 열어둔 일시 레이어(묶음 팝업·비상장 팝오버)를 goBack 최상단에서
+  // 닫기 위한 핸들. EgoView가 채우고, 언마운트 시 스스로 비운다.
+  const egoDismissRef = useRef(null);
+  const egoCacheRef = useRef(new Map());
+  // U3: 레이어 토글 상태 — re-root로 기업이 바뀌어도 유지(레이어 비교 탐색 흐름).
+  // 데이터 없는 기업에선 EgoView가 지배구조로 안전 폴백(hasVc 가드).
+  const [egoLayer, setEgoLayer] = useState('governance');
+  const egoHasVc = !!(egoAnchor && egoAnchor.layers && egoAnchor.layers.valuechain
+    && (((egoAnchor.layers.valuechain.up || []).length) || ((egoAnchor.layers.valuechain.down || []).length)));
+  // 범례(U-D14 전용 범례 교체)는 화면이 실제 그리는 유효 레이어를 따른다
+  const effectiveEgoLayer = (egoLayer === 'valuechain' && egoHasVc) ? 'valuechain' : 'governance';
 
   // sector zoom-in transition
   const [zoomProgress, setZoomProgress] = useState(0);
   const zoomAnimRef = useRef(0);
 
-  // 뒤로가기 히스토리 — "관련 기업(ghost)" 클릭처럼 sector/company를 한번에 건너뛰는 이동을
-  // ESC/BACK이 한 단계씩 되돌릴 수 있도록, 그런 이동 직전 상태를 스택에 남겨둔다.
-  // (매 렌더마다 최신값으로 갱신되는 ref라서 콜백 안에서 항상 "이동 직전" 스냅샷을 정확히 읽는다.)
-  const navStateRef = useRef({ phase, activeSectorId, activeCompanyCode });
-  navStateRef.current = { phase, activeSectorId, activeCompanyCode };
-  const navHistoryRef = useRef([]);
+  // ─── UX-035: 단일 뒤로가기 스택 ─────────────────────────────────────────
+  // ESC 재정의(리더 지시 — "전반적으로 구조적인 수정"). 그 전까지 되돌림 메커니즘이
+  // 4개(navHistory·egoChain·계층 사다리·ego 팝업)로 갈라져 있었고, 각각 push/clear
+  // 시점이 달라 ESC가 시간 역순이 아니라 고정 우선순위로 동작했다 — 상황마다 다르게
+  // 깨진 원인. 표준 관례(WAI-ARIA dialog: ESC는 최상단 일시 레이어만 · Android
+  // back-stack: 화면 이동은 방문 역순 LIFO, 상태까지 복원)를 따라 하나로 합친다:
+  //   ① 일시 레이어(팝업·오버레이) — 열린 역순으로 하나씩
+  //   ② 화면 전환 — 모든 전환 액션이 직전 스냅샷(phase·섹터·시장·기업·ego레이어)을
+  //      push, ESC가 pop해 통째로 복원. "ESC = 직전 화면"(브라우저 back과 동일 문법).
+  //   ③ 스택 소진(딥링크 등) — 계층 상승 폴백 (company→시장→개요→galaxy)
+  // navStateRef: 매 렌더마다 최신값으로 갱신되는 ref — 액션 콜백 안에서 항상
+  // "이동 직전" 스냅샷을 정확히 읽는다(여러 setState가 배칭돼도 렌더 전이라 안전).
+  const navStateRef = useRef({ phase, activeSectorId, activeMarket, activeCompanyCode, egoLayer });
+  navStateRef.current = { phase, activeSectorId, activeMarket, activeCompanyCode, egoLayer };
+  const backNavRef = useRef([]);     // ② 화면 스냅샷 스택 (LIFO)
+  const layerStackRef = useRef([]);  // ① App 소유 일시 레이어 {id, close} (열린 순서대로)
+  const NAV_STACK_CAP = 60;
+  const pushNav = useCallback(() => {
+    const stack = backNavRef.current;
+    const snap = { ...navStateRef.current };
+    const top = stack[stack.length - 1];
+    // 연속 중복 방지 — 같은 화면을 두 번 쌓지 않는다(같은 기업 재클릭 등)
+    if (top && top.phase === snap.phase && top.activeSectorId === snap.activeSectorId
+        && top.activeMarket === snap.activeMarket && top.activeCompanyCode === snap.activeCompanyCode
+        && top.egoLayer === snap.egoLayer) return;
+    stack.push(snap);
+    if (stack.length > NAV_STACK_CAP) stack.shift();
+  }, []);
 
   // ENTER SECTOR — animate galaxy → sector
   const enterSector = useCallback((sectorId) => {
-    // galaxy에서 처음 섹터로 들어가는 정상 드릴다운은 히스토리에 남기지 않는다(기존 3단계 ESC 동작 유지).
-    // sector/company 단계에서 다른 섹터로 바로 건너뛸 때만(관련 기업 클릭, 섹터 리스트 직접 전환) 이전 상태를 남긴다.
-    if (navStateRef.current.phase !== 'galaxy') {
-      navHistoryRef.current.push({ ...navStateRef.current });
-    }
+    pushNav(); // UX-035: 모든 화면 전환이 직전 스냅샷을 남긴다 (정상 드릴다운 포함 — ESC가 그대로 역주행)
     cancelAnimationFrame(zoomAnimRef.current);
     setActiveSectorId(sectorId);
+    setActiveMarket(null);   // 진입 시 성운 개요부터
     setPhase('sector');
     const t0 = performance.now();
     const dur = 1100;
@@ -2819,31 +4107,62 @@ function App() {
     zoomAnimRef.current = requestAnimationFrame(tick);
   }, []);
 
+  // UX-035: 브레드크럼·패널 ← 버튼의 상향 점프도 "화면 전환"이다 — push하고 이동한다.
+  // 히스토리를 지우지 않는다: ← GALAXY 후 ESC는 방금 보던 깊은 화면으로 되돌아간다
+  // (브라우저에서 홈 클릭 후 Back과 동일한 문법 — 점프의 실행취소).
   const backToGalaxy = useCallback(() => {
-    navHistoryRef.current = []; // 루트로 명시 리셋 — 남은 이동 히스토리는 더 이상 의미 없음
+    pushNav();
     cancelAnimationFrame(zoomAnimRef.current);
     setActiveCompanyCode(null);
+    setActiveMarket(null);
     setPhase('galaxy');
     setActiveSectorId(null);
     setZoomProgress(0);
-  }, []);
+  }, [pushNav]);
 
+  // 성운 개요로(드릴인·기업 해제)
+  const backToSectorOverview = useCallback(() => {
+    pushNav();
+    setActiveCompanyCode(null);
+    setActiveMarket(null);
+    setPhase('sector');
+  }, [pushNav]);
+
+  // 기업 → 시장 드릴인 뷰로 (activeMarket 유지)
   const backToSector = useCallback(() => {
-    navHistoryRef.current = []; // 명시적 "섹터로" 이동 — 이전 이동 히스토리는 폐기
+    pushNav();
     setActiveCompanyCode(null);
     setPhase('sector');
+  }, [pushNav]);
+
+  const enterMarket = useCallback((market) => {
+    pushNav();
+    setActiveMarket(market);
+    setActiveCompanyCode(null);
+    setPhase('sector');
+  }, [pushNav]);
+
+  // FN-008: 기업 코드 → 소속 시장(KOSPI|KOSDAQ). named·dot 전 기업 커버(indexByCode).
+  const marketOf = useCallback((code) => {
+    const RD = window.__realData || {};
+    return (RD.indexByCode && RD.indexByCode[code] && RD.indexByCode[code].mkt) || null;
   }, []);
 
   const selectCompany = useCallback((code) => {
     if (!code) {
       // null → deselect, return to sector view
+      pushNav();
       setActiveCompanyCode(null);
       setPhase('sector');
       return;
     }
+    if (navStateRef.current.activeCompanyCode === code && navStateRef.current.phase === 'company') return; // 같은 기업 재클릭 = 무이동
+    pushNav();
     setActiveCompanyCode(code);
+    // FN-008: 시장 미설정(개요에서 dot 클릭 등)이면 그 기업의 시장으로 자동 드릴인
+    setActiveMarket(prev => prev || marketOf(code));
     setPhase('company');
-  }, []);
+  }, [marketOf, pushNav]);
 
   const selectGhost = useCallback((code, sectorId) => {
     const targetSectorId = sectorId || (() => {
@@ -2858,8 +4177,53 @@ function App() {
     // batched into a single render — no intermediate "empty sector" screen.
     enterSector(targetSectorId);
     setActiveCompanyCode(code);
+    // FN-008: enterSector가 activeMarket을 null로 리셋 — 그대로 두면 SectorMap이
+    // 개요 모드(시장 프록시 노드)로 렌더돼 활성 기업이 화면에서 사라짐(SK 진입 붕괴).
+    // ghost 기업의 소속 시장으로 즉시 드릴인 설정.
+    setActiveMarket(marketOf(code));
     setPhase('company');
-  }, [enterSector]);
+    // UX-035: push는 enterSector가 이미 했다(같은 배칭 안 — navStateRef는 아직 이동 전 값)
+  }, [enterSector, marketOf]);
+
+  // ③ EgoView ego/<ticker>.json 지연 fetch — activeCompanyCode 변경마다(재구성 포함) 재실행.
+  // 세션 캐시로 재방문 시 재요청 없이 즉시 반영(성능 게이트 <300ms, universe/PLAN.md §5).
+  useEffect(() => {
+    if (phase !== 'company' || !activeCompanyCode) { setEgoStatus('idle'); return; }
+    let alive = true;
+    const cached = egoCacheRef.current.get(activeCompanyCode);
+    const apply = (json) => {
+      if (!alive) return;
+      if (json) {
+        setEgoAnchor(json);
+        setEgoStatus('ok');
+      } else {
+        setEgoAnchor(null);
+        setEgoStatus('error'); // → 렌더 분기가 SectorMap(allRelated)으로 폴백
+      }
+    };
+    if (cached) { apply(cached); return; }
+    setEgoStatus('loading');
+    fetch(`../data/ego/${activeCompanyCode}.json`)
+      .then(r => (r.ok ? r.json() : null))
+      .then(json => { if (json) egoCacheRef.current.set(activeCompanyCode, json); apply(json); })
+      .catch(() => apply(null));
+    return () => { alive = false; };
+  }, [phase, activeCompanyCode]);
+
+  // 이웃 노드 클릭 = 앵커 재구성(re-root) — valuechain §5 D5. 섹터·시장이 바뀌면 함께 갱신
+  // (selectGhost와 동일한 크로스섹터 점프 패턴 — 어느 진입로든 전 상장사 도달 불변식).
+  // UX-035: 구 egoChain(재구성 전용 별도 체인)은 폐지 — 스냅샷 스택이 대체한다.
+  // 스냅샷은 egoLayer까지 담으므로 ESC 복귀 시 "그 기업의 그 레이어"(예: 밸류체인)가
+  // 그대로 돌아온다. 체인이 하던 UX-028 되돌림은 이 push 한 줄로 동일하게 성립.
+  const reRootEgo = useCallback((code, name, sectorKo) => {
+    if (navStateRef.current.activeCompanyCode === code) return; // 자기 자신으로 재구성 = 무이동
+    pushNav();
+    const targetSector = SECTOR_PALETTE.find(s => s.ko === sectorKo);
+    if (targetSector && targetSector.id !== activeSectorId) setActiveSectorId(targetSector.id);
+    setActiveCompanyCode(code);
+    setActiveMarket(marketOf(code));
+    setPhase('company');
+  }, [activeSectorId, marketOf, pushNav]);
 
   const [corpOverlayTicker, setCorpOverlayTicker] = useState(null);
   const [discDetailItem, setDiscDetailItem] = useState(null);
@@ -2905,27 +4269,69 @@ function App() {
   // 오버레이 열림 동안 배경 캔버스 draw 정지 (성능 §8)
   useEffect(() => { window.__dossierOpen = !!corpOverlayTicker; }, [corpOverlayTicker]);
 
-  // 단계별 뒤로가기 — 우선순위: 공시 상세/전체 오버레이 → CORPORATION DOSSIER 오버레이
-  // → (관련 기업 클릭 등으로 섹터를 건너뛴 히스토리가 있으면 그 직전 상태로 복원)
-  // → company → sector → (galaxy에서 섹터 선택만 된 상태) 해제
+  // UX-035 ①: App 소유 일시 레이어를 **열린 시점 순서대로** 스택에 등록한다.
+  // 고정 우선순위(discDetail → discFull → corpOverlay 하드코딩)가 아니라 실제 연 순서 —
+  // ESC가 닫는 순서는 항상 그 역순(LIFO). 각 effect의 cleanup이 닫힘과 동시에
+  // 스택에서 제거하므로(✕ 버튼 등 어떤 경로로 닫혀도) 스택에는 열린 레이어만 남는다.
+  useEffect(() => {
+    if (!discDetailItem) return undefined;
+    const entry = { id: 'discDetail', close: () => setDiscDetailItem(null) };
+    layerStackRef.current.push(entry);
+    return () => { const s = layerStackRef.current, i = s.indexOf(entry); if (i >= 0) s.splice(i, 1); };
+  }, [discDetailItem]);
+  useEffect(() => {
+    if (!discFullOverlayTicker) return undefined;
+    const entry = { id: 'discFull', close: () => setDiscFullOverlayTicker(null) };
+    layerStackRef.current.push(entry);
+    return () => { const s = layerStackRef.current, i = s.indexOf(entry); if (i >= 0) s.splice(i, 1); };
+  }, [discFullOverlayTicker]);
+  useEffect(() => {
+    if (!corpOverlayTicker) return undefined;
+    const entry = { id: 'corpOverlay', close: () => setCorpOverlayTicker(null) };
+    layerStackRef.current.push(entry);
+    return () => { const s = layerStackRef.current, i = s.indexOf(entry); if (i >= 0) s.splice(i, 1); };
+  }, [corpOverlayTicker]);
+
+  // UX-035: ESC/Backspace = 단일 뒤로가기 스택 (재정의 — 원장 참조).
+  //   ① 일시 레이어 — 열린 역순으로 하나씩 (ego 팝업은 컨텍스트 종속이라 항상 최신 = 최우선)
+  //   ② 화면 스냅샷 스택 — 직전 화면을 상태째 복원 (Android back-stack 문법)
+  //   ③ 스택 소진 — 계층 상승 폴백: company → 시장 드릴인 → 성운 개요 → galaxy → 선택 해제
+  // 전부 ref 경유라 goBack 자체는 재생성되지 않는다(키 리스너 1회 바인딩).
   const goBack = useCallback(() => {
-    if (discDetailItem) { setDiscDetailItem(null); return; }
-    if (discFullOverlayTicker) { setDiscFullOverlayTicker(null); return; }
-    if (corpOverlayTicker) { setCorpOverlayTicker(null); return; }
-    if (navHistoryRef.current.length > 0) {
-      const prev = navHistoryRef.current.pop();
+    // ① 일시 레이어 — App 오버레이는 전부 화면을 덮으므로, 오버레이가 열려 있다면
+    // 그것이 항상 ego 팝업보다 나중이다(팝업은 캔버스가 노출된 동안만 열림) → 스택 먼저.
+    const layers = layerStackRef.current;
+    if (layers.length) { layers[layers.length - 1].close(); return; }
+    if (egoDismissRef.current && egoDismissRef.current()) return;
+    // ② 화면 스냅샷 — 현재와 같은 화면(무이동 push 잔재)은 건너뛰고 처음 다른 화면 복원
+    const cur = navStateRef.current;
+    const nav = backNavRef.current;
+    while (nav.length) {
+      const snap = nav.pop();
+      if (snap.phase !== cur.phase || snap.activeSectorId !== cur.activeSectorId
+          || snap.activeMarket !== cur.activeMarket || snap.activeCompanyCode !== cur.activeCompanyCode
+          || snap.egoLayer !== cur.egoLayer) {
+        cancelAnimationFrame(zoomAnimRef.current);
+        setPhase(snap.phase);
+        setActiveSectorId(snap.activeSectorId);
+        setActiveMarket(snap.activeMarket);
+        setActiveCompanyCode(snap.activeCompanyCode);
+        setEgoLayer(snap.egoLayer);
+        setZoomProgress(snap.phase === 'galaxy' ? 0 : 1); // 이미 봤던 화면 — 줌 애니메이션 없이
+        return;
+      }
+    }
+    // ③ 계층 상승 폴백 (딥링크 진입 등 히스토리가 없을 때만)
+    if (cur.phase === 'company') { setActiveCompanyCode(null); setPhase('sector'); return; }
+    if (cur.phase === 'sector' && cur.activeMarket) { setActiveMarket(null); setActiveCompanyCode(null); return; }
+    if (cur.phase === 'sector') {
       cancelAnimationFrame(zoomAnimRef.current);
-      setPhase(prev.phase);
-      setActiveSectorId(prev.activeSectorId);
-      setActiveCompanyCode(prev.activeCompanyCode);
-      setZoomProgress(1); // 되돌아간 섹터는 이미 봤던 화면이라 줌 애니메이션 재생 없이 바로 표시
+      setActiveCompanyCode(null); setActiveMarket(null); setPhase('galaxy'); setActiveSectorId(null); setZoomProgress(0);
       return;
     }
-    if (phase === 'company') { backToSector(); return; }
-    if (phase === 'sector') { backToGalaxy(); return; }
-    if (activeSectorId) { setActiveSectorId(null); return; }
-  }, [discDetailItem, discFullOverlayTicker, corpOverlayTicker, phase, activeSectorId, backToSector, backToGalaxy]);
-  const canGoBack = !!(discDetailItem || discFullOverlayTicker || corpOverlayTicker || phase !== 'galaxy' || activeSectorId);
+    if (cur.activeSectorId) { setActiveSectorId(null); return; }
+  }, []);
+  // UX-030: canGoBack(상단 BACK 버튼 가시성 플래그)은 버튼 폐지와 함께 제거. goBack은 ESC/Backspace 전용.
 
   // ESC / Backspace 키 → goBack. Backspace는 채팅 입력창 등 텍스트 편집 중엔 원래 동작(글자 삭제)을 그대로 두고,
   // 포커스가 입력 요소가 아닐 때만 뒤로가기로 취급한다 (ESC는 입력 포커스와 무관하게 항상 뒤로가기).
@@ -2948,14 +4354,26 @@ function App() {
   // 산업군 테마 액센트 — 오버레이 크롬(헤더·탭바)과 3탭 iframe에 공통 적용 (섹터색)
   const sectorAccent = (sector && sector.color) || '#74EEC6';
   const companies = activeSectorId ? (window.COMPANIES[activeSectorId] || window.COMPANIES.semi) : [];
-  const company = activeCompanyCode ? companies.find(c => c.code === activeCompanyCode) : null;
+  // UX-009: dot 기업(top-N 밖)은 COMPANIES 평탄 목록에 없음 → indexByCode 신원으로 폴백
+  // (CompanyOverviewPanel은 node 데이터 없으면 기본 정보만 렌더 — null-safe 확인됨)
+  const company = activeCompanyCode
+    ? (companies.find(c => c.code === activeCompanyCode)
+       || (() => {
+            const RD = window.__realData || {};
+            const di = RD.indexByCode && RD.indexByCode[activeCompanyCode];
+            return di ? { code: activeCompanyCode, name: di.n, en: di.n, cap: Math.max(1, (di.cb || 0) * 6 + 1) } : null;
+          })())
+    : null;
 
-  // breadcrumb
+  // breadcrumb — GALAXY › 섹터 › [KOSPI|KOSDAQ] › 기업 (U2 드릴인)
   const crumb = [];
   if (phase === 'galaxy') crumb.push({ label: 'GALAXY' });
   if (phase === 'sector' || phase === 'company') {
     crumb.push({ label: 'GALAXY', onClick: backToGalaxy });
-    if (sector) crumb.push({ label: sector.ko, onClick: phase === 'company' ? backToSector : null });
+    if (sector) crumb.push({ label: sector.ko, onClick: activeMarket ? backToSectorOverview : null });
+    // UX-031: 시장 라벨(KOSPI/KOSDAQ)은 구조 표지라 축약 대상 외 — 폭이 모자라면
+    // 긴 섹터·기업명이 …로 줄고 이 크럼은 온전히 남는다.
+    if (activeMarket) crumb.push({ label: activeMarket, fixed: true, onClick: phase === 'company' ? backToSector : null });
   }
   if (phase === 'company' && company) crumb.push({ label: company.name });
 
@@ -2981,29 +4399,43 @@ function App() {
             />
           )}
 
-          {/* Sector / company phase — sector map */}
+          {/* Sector / company phase — sector map, 또는 ③ EgoView(지배구조 셸, LOD-2) */}
           {(phase === 'sector' || phase === 'company') && sector && (
             <div className="sector-map-stage" style={{
               opacity: Math.max(0, (zoomProgress - 0.3) * 1.6),
               transform: `scale(${0.7 + zoomProgress * 0.3})`,
             }}>
-              <SectorMap
-                sectorId={activeSectorId}
-                activeCompanyCode={activeCompanyCode}
-                onSelectCompany={selectCompany}
-                onSelectGhost={selectGhost}
-              />
+              {phase === 'company' && egoStatus === 'loading' ? (
+                <div className="ego-loading"><div className="ego-loading-spinner" /></div>
+              ) : phase === 'company' && egoStatus === 'ok' && egoAnchor ? (
+                <EgoView
+                  anchor={egoAnchor}
+                  layer={egoLayer}
+                  onLayerChange={setEgoLayer}
+                  onReRoot={reRootEgo}
+                  dismissRef={egoDismissRef}
+                />
+              ) : (
+                <SectorMap
+                  sectorId={activeSectorId}
+                  activeMarket={activeMarket}
+                  activeCompanyCode={activeCompanyCode}
+                  onSelectMarket={enterMarket}
+                  onSelectCompany={selectCompany}
+                  onSelectGhost={selectGhost}
+                />
+              )}
             </div>
           )}
 
-          <TopTabs active={activeTab} onChange={setActiveTab} breadcrumb={crumb} onBack={goBack} canGoBack={canGoBack} />
+          <TopTabs active={activeTab} onChange={setActiveTab} breadcrumb={crumb} />
 
           {/* Top-left panel — varies by phase and active tab */}
           {activeTab === 'finance' ? (
             <>
               {phase === 'galaxy' && <MascotPanel messages={["섹터를 클릭하면, 기업을 확인할 수 있어요!", "오른쪽 아래 섹터 INDEX에서도 선택할 수 있어요.", "AI 코파일럿에게 무엇이든 물어보세요."]} />}
-              {phase === 'sector' && <SectorOverviewPanel sector={sector} companyCount={companies.length} onBack={backToGalaxy} />}
-              {phase === 'company' && <CompanyOverviewPanel company={company} sector={sector} onBack={backToSector} onEnter={enterCorporation} />}
+              {phase === 'sector' && <SectorOverviewPanel sector={sector} companyCount={sector.count || companies.length} activeMarket={activeMarket} onSelectCompany={selectCompany} onBack={activeMarket ? backToSectorOverview : backToGalaxy} />}
+              {phase === 'company' && <CompanyOverviewPanel company={company} sector={sector} onBack={backToSector} onEnter={enterCorporation} egoAnchor={egoStatus === 'ok' ? egoAnchor : null} />}
             </>
           ) : (
             <>
@@ -3016,8 +4448,8 @@ function App() {
           {/* Top-right — AI co-pilot, content varies */}
           <AssistantPanel phase={phase} sector={sector} company={company} activeTab={activeTab} />
 
-          {/* Bottom-left — legend (always) */}
-          <LegendPanel />
+          {/* Bottom-left — legend. company phase + EgoView일 땐 유효 레이어의 전용 범례(U-D14) */}
+          <LegendPanel mode={phase === 'company' && egoStatus === 'ok' ? effectiveEgoLayer : 'governance'} />
 
           {/* Bottom-right — sector index (galaxy) / sector list (sector/company) */}
           <SectorPanel
@@ -3025,13 +4457,16 @@ function App() {
             mode={phase === 'galaxy' ? 'grid' : 'list'}
             onSelect={(id) => {
               if (phase === 'galaxy') {
-                setActiveSectorId(activeSectorId === id ? null : id);
-              } else {
-                // switch sectors directly
+                setActiveSectorId(activeSectorId === id ? null : id); // 선택 하이라이트 — 화면 전환 아님(push 없음, ESC 폴백이 해제)
+              } else if (id !== activeSectorId) {
+                // switch sectors directly — enterSector가 push (같은 배칭이라 스냅샷은 이동 전 값)
                 setActiveCompanyCode(null);
-                if (id !== activeSectorId) {
-                  enterSector(id);
-                }
+                enterSector(id);
+              } else if (navStateRef.current.activeCompanyCode) {
+                // UX-035: 같은 섹터 재클릭으로 기업만 해제하는 것도 화면 전환 — push해야 ESC로 복귀 가능
+                pushNav();
+                setActiveCompanyCode(null);
+                setPhase('sector');
               }
             }}
           />

@@ -1,0 +1,92 @@
+{
+  "t": "298060",
+  "n": "풍전약품",
+  "s": "제약바이오",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "097780",
+        "n": "에코볼트",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "자동차",
+        "tier": "dot"
+      },
+      {
+        "n": "CoImmune, Inc",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "23.88% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "CoImmune, Inc",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "지분법적용투자기업 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "Duopharma Biotech Berhad",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "유의적 영향력 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "마르시아 신기술조합 제77호",
+        "kind": "coop_fund",
+        "type": "associate",
+        "detail": "25.56% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "마르시아 신기술조합 제77호",
+        "kind": "coop_fund",
+        "type": "dart_filing",
+        "detail": "유의적 영향력 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "유타 신기술조합 제83호",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "10.32% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "061250",
+          "n": "화일약품",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1487343000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "n": "Duopharma Biotech Berhad",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 191883249.0,
+          "as_of": 2023,
+          "prov": "특수관계자 거래 · 매출 · 별도"
+        }
+      ]
+    }
+  }
+}

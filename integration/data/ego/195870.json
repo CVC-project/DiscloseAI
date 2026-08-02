@@ -1,0 +1,119 @@
+{
+  "t": "195870",
+  "n": "해성디에스",
+  "s": "반도체",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "034810",
+        "n": "해성산업",
+        "type": "associate",
+        "detail": "34.0% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "지주",
+        "tier": "dot"
+      },
+      {
+        "t": "034810",
+        "n": "해성산업",
+        "type": "dart_filing",
+        "detail": "지배기업 · 2023",
+        "dir": "out",
+        "as_of": 2023,
+        "s": "지주",
+        "tier": "dot"
+      },
+      {
+        "t": "012200",
+        "n": "계양전기",
+        "type": "dart_filing",
+        "detail": "기타 · 2023",
+        "dir": "out",
+        "as_of": 2023,
+        "s": "기계·장비",
+        "tier": "dot"
+      },
+      {
+        "t": "027970",
+        "n": "한국제지",
+        "type": "dart_filing",
+        "detail": "기타 · 2023",
+        "dir": "out",
+        "as_of": 2023,
+        "s": "소재",
+        "tier": "dot"
+      },
+      {
+        "t": "037230",
+        "n": "한국팩키지",
+        "type": "dart_filing",
+        "detail": "기타 · 2023",
+        "dir": "out",
+        "as_of": 2023,
+        "s": "소재",
+        "tier": "dot"
+      },
+      {
+        "t": "037230",
+        "n": "한국팩키지",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "소재",
+        "tier": "dot"
+      },
+      {
+        "n": "HAESUNG DS PHILIPPINES, INC.",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "소주해성디에스 무역유한공사",
+        "kind": "public_org",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "027970",
+          "n": "한국제지",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1445571000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출 합계"
+        },
+        {
+          "t": "037230",
+          "n": "한국팩키지",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 305316000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "t": "027970",
+          "n": "한국제지",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 696403000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입 합계"
+        }
+      ]
+    }
+  }
+}

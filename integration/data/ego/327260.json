@@ -1,0 +1,85 @@
+{
+  "t": "327260",
+  "n": "RF머트리얼즈",
+  "s": "반도체",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "474610",
+        "n": "RF시스템즈",
+        "type": "associate",
+        "detail": "33.18% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "철강·금속",
+        "tier": "dot"
+      },
+      {
+        "t": "218410",
+        "n": "RFHIC",
+        "type": "associate",
+        "detail": "41.85% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "반도체",
+        "tier": "named400"
+      },
+      {
+        "n": "RFHIC Europe CORPORATION",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "RFHIC US CORPORATION",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "알에프에이치아이씨㈜",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "41.85% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "알에프에이치아이씨㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "지배기업 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [],
+      "down": [
+        {
+          "t": "474610",
+          "n": "RF시스템즈",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 33729000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입등 · 별도"
+        },
+        {
+          "n": "알에프에이치아이씨㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 9190836000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출등"
+        }
+      ]
+    }
+  }
+}

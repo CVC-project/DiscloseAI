@@ -1,0 +1,75 @@
+{
+  "t": "009730",
+  "n": "이렘",
+  "s": "철강·금속",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "n": "씨이브이(주)",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "27.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "에스앤티제1호투자조합",
+        "kind": "coop_fund",
+        "type": "investment",
+        "detail": "17.47% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "엑스알비",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "30.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "클리어테크놀로지",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "9.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "n": "㈜이렘스틸",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 372139000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "n": "㈜이렘스틸",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 817080000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등 · 별도"
+        },
+        {
+          "n": "엑스알비",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 6000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등 · 별도"
+        }
+      ]
+    }
+  }
+}

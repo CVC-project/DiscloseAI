@@ -1,0 +1,156 @@
+{
+  "t": "015890",
+  "n": "태경산업",
+  "s": "화학",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "006890",
+        "n": "태경케미컬",
+        "type": "investment",
+        "detail": "16.35% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "화학",
+        "tier": "dot"
+      },
+      {
+        "t": "006890",
+        "n": "태경케미컬",
+        "type": "associate",
+        "detail": "21.41% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "화학",
+        "tier": "dot"
+      },
+      {
+        "t": "014580",
+        "n": "태경비케이",
+        "type": "associate",
+        "detail": "43.6% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "소재",
+        "tier": "dot"
+      },
+      {
+        "t": "014580",
+        "n": "태경비케이",
+        "type": "dart_filing",
+        "detail": "지배기업 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "소재",
+        "tier": "dot"
+      },
+      {
+        "n": "(주)남영전구",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "55.3% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "(주)케이피티",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "9.9% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "(주)태경코엠",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "57.9% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "김해련",
+        "kind": "person",
+        "type": "associate",
+        "detail": "23.28% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "송원김영환 장학재단",
+        "kind": "public_org",
+        "type": "investment",
+        "detail": "9.99% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "태경에스비씨(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "65.1% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "태경에코(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "태경에프앤지(주)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "51.1% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "014580",
+          "n": "태경비케이",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3571392450.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "014580",
+          "n": "태경비케이",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3845511304.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "t": "171120",
+          "n": "라이온켐텍",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1095541000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입등"
+        },
+        {
+          "n": "HCEI버텍스제일호사모투자 합자회사",
+          "kind": "coop_fund",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 22500000001.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 현금출자, 출자금 납입"
+        }
+      ]
+    }
+  }
+}

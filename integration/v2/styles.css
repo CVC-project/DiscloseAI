@@ -69,11 +69,13 @@ html, body, #root { margin: 0px; padding: 0px; width: 100%; height: 100%; backgr
   0%, 100% { opacity: 0.4; }
   50% { opacity: 1; }
 }
-.top-tabs { position: absolute; top: 0px; left: 0px; right: 0px; z-index: 10; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 22px 32px; background: linear-gradient(rgba(2, 3, 10, 0.88), rgba(2, 3, 10, 0)); pointer-events: none; }
+/* UX-031: 브레드크럼이 절대 줄바꿈하지 않도록 좌측 트랙을 minmax(0,1fr)로 —
+   기본 `1fr`은 min-width:auto라 내용이 길면 트랙이 밀려 2줄로 접혔다. */
+.top-tabs { position: absolute; top: 0px; left: 0px; right: 0px; z-index: 10; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; padding: 22px 32px; background: linear-gradient(rgba(2, 3, 10, 0.88), rgba(2, 3, 10, 0)); pointer-events: none; }
 .top-tabs > * { pointer-events: auto; }
-.top-tabs-brand { display: flex; align-items: center; gap: 12px; }
-.top-brand-mark { width: 28px; height: 28px; border: 1px solid var(--cyan); border-radius: 50%; display: grid; place-items: center; font-size: 11px; color: var(--cyan); box-shadow: rgba(116, 238, 198, 0.3) 0px 0px 16px; }
-.top-brand-name { font-family: var(--font-display); font-size: 14px; font-weight: 600; letter-spacing: 0.14em; color: rgb(255, 255, 255); }
+.top-tabs-brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.top-brand-mark { width: 28px; height: 28px; border: 1px solid var(--cyan); border-radius: 50%; display: grid; place-items: center; font-size: 11px; color: var(--cyan); box-shadow: rgba(116, 238, 198, 0.3) 0px 0px 16px; flex: none; }
+.top-brand-name { font-family: var(--font-display); font-size: 14px; font-weight: 600; letter-spacing: 0.14em; color: rgb(255, 255, 255); white-space: nowrap; flex: none; }
 .top-tabs-row { display: flex; gap: 0px; background: rgba(8, 12, 24, 0.4); backdrop-filter: blur(20px); border: 1px solid var(--line); padding: 6px; border-radius: 2px; }
 .top-tab { position: relative; padding: 10px 26px 8px; cursor: pointer; text-align: center; transition: 180ms; }
 .top-tab-en { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.24em; color: var(--text-3); transition: color 180ms; }
@@ -84,17 +86,18 @@ html, body, #root { margin: 0px; padding: 0px; width: 100%; height: 100%; backgr
 .top-tab.is-active .top-tab-ko { color: var(--text-1); opacity: 1; }
 .top-tab.is-active::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: -1px; height: 1px; background: var(--cyan); box-shadow: 0 0 8px var(--cyan); }
 .top-tabs-center { display: flex; align-items: center; gap: 12px; }
-.top-back-btn { display: flex; align-items: center; gap: 6px; padding: 9px 16px; background: #000; border: 1px solid #fff; border-radius: 0; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; color: #fff; cursor: pointer; transition: 160ms; }
-.top-back-btn:hover { background: #fff; color: #000; }
-.top-back-arrow { font-size: 13px; }
-.top-tabs-status { justify-self: end; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; padding: 6px 16px; background: rgba(8, 12, 24, 0.4); backdrop-filter: blur(20px); border: 1px solid var(--line); font-family: var(--font-mono); }
-.index-row { display: flex; align-items: center; gap: 10px; }
-.kospi-label { color: #94a3b8; font-size: 11px; letter-spacing: .08em; min-width: 48px; }
-.kospi-value { color: #74EEC6; font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; }
-.kospi-delta { font-size: 11px; font-weight: 700; font-variant-numeric: tabular-nums; }
+/* UX-030: .top-back-btn / .top-back-arrow 규칙 제거 — 상단 BACK 버튼 폐지(ESC와 중복). */
+/* UX-029: 지수 패널을 5열 그리드로 — 행(.index-row)은 display:contents로 격자에 녹여
+   KOSPI/KOSDAQ 두 줄의 열 폭을 공유시킨다. 라벨=좌측 정렬, 수치·%·갱신표기=우측 정렬.
+   (flex + min-width 방식은 값 자릿수가 달라지면(3,142.80 vs 850.32) 열이 어긋났다.) */
+.top-tabs-status { justify-self: end; display: grid; grid-template-columns: auto auto auto auto auto; align-items: center; column-gap: 10px; row-gap: 4px; padding: 6px 16px; background: rgba(8, 12, 24, 0.4); backdrop-filter: blur(20px); border: 1px solid var(--line); font-family: var(--font-mono); }
+.index-row { display: contents; }
+.kospi-label { color: #94a3b8; font-size: 11px; letter-spacing: .08em; text-align: left; white-space: nowrap; }
+.kospi-value { color: #74EEC6; font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; text-align: right; }
+.kospi-delta { font-size: 11px; font-weight: 700; font-variant-numeric: tabular-nums; text-align: right; }
 .kospi-delta.up { color: #4ade80; }
 .kospi-delta.down { color: #fb7185; }
-.kospi-time { color: #64748b; font-size: 10px; letter-spacing: .02em; white-space: nowrap; }
+.kospi-time { color: #64748b; font-size: 10px; letter-spacing: .02em; white-space: nowrap; text-align: right; }
 .solar-stage { position: absolute; inset: 0px; z-index: 2; }
 .solar-canvas { position: absolute; inset: 0px; width: 100%; height: 100%; display: block; }
 .solar-labels { position: absolute; inset: 0px; pointer-events: none; z-index: 3; }
@@ -296,12 +299,16 @@ html, body, #root { margin: 0px; padding: 0px; width: 100%; height: 100%; backgr
 .company-label-name { font-family: var(--font-body); font-size: 12.5px; font-weight: 500; color: rgb(255, 255, 255); text-shadow: currentcolor 0px 0px 12px; }
 .company-label-code { font-size: 9.5px; letter-spacing: 0.1em; color: var(--text-2); margin-top: 2px; white-space: nowrap; }
 .company-label.is-active .company-label-name { font-size: 14px; }
-.top-breadcrumb { margin-left: 16px; padding-left: 16px; border-left: 1px solid rgba(148, 163, 184, 0.15); display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.14em; color: var(--text-3); }
-.top-breadcrumb .crumb { color: var(--text-3); }
+/* UX-031: 브레드크럼은 항상 한 줄 — 기업명·섹터명이 길면 줄바꿈이 아니라 말줄임(…)으로 자른다.
+   flex-shrink는 GALAXY(첫 크럼)를 제외한 나머지가 분담해, 뿌리 라벨은 온전히 남는다. */
+.top-breadcrumb { margin-left: 16px; padding-left: 16px; border-left: 1px solid rgba(148, 163, 184, 0.15); display: flex; flex-wrap: nowrap; align-items: center; gap: 8px; min-width: 0; overflow: hidden; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.14em; color: var(--text-3); }
+.top-breadcrumb .crumb { color: var(--text-3); flex: 0 1 auto; min-width: 3.5em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.top-breadcrumb .crumb:first-child,
+.top-breadcrumb .crumb.is-fixed { flex: none; min-width: 0; }
 .top-breadcrumb .crumb.is-clickable { color: var(--cyan); cursor: pointer; }
 .top-breadcrumb .crumb.is-clickable:hover { color: rgb(255, 255, 255); }
 .top-breadcrumb .crumb:last-child { color: rgb(255, 255, 255); }
-.crumb-sep { opacity: 0.4; }
+.crumb-sep { opacity: 0.4; flex: none; }
 .finance-tab { position: absolute; inset: 0px; z-index: 1; animation: 1200ms ease-out 0s 1 normal none running fadeIn; }
 @keyframes fadeIn {
   0% { opacity: 0; }
@@ -688,3 +695,60 @@ html, body, #root { margin: 0px; padding: 0px; width: 100%; height: 100%; backgr
 }
 .disc-full-list-row .disc-sum-label { font-size: 11px; }
 .disc-full-list-row .disc-sum-text  { font-size: 11px; color: #64748b; }
+
+/* ===== EGOVIEW (③ 셸, universe/PLAN.md §5 LOD-2) ===== */
+.ego-stage { position: absolute; inset: 0; }
+.ego-canvas { width: 100%; height: 100%; display: block; }
+.ego-topbar {
+  position: absolute; top: 84px; left: 50%; transform: translateX(-50%);
+  z-index: 6; display: flex; align-items: center; gap: 14px;
+  background: rgba(8, 12, 24, 0.55); backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid var(--line); border-radius: 3px; padding: 8px 14px;
+  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.06em;
+  max-width: min(720px, calc(100vw - 700px));
+}
+/* UX-012: 재구성 이력은 한 단계 뒤로 버튼으로만 (구 .ego-chain 무한 증식 제거) */
+.ego-back-btn {
+  background: transparent; border: 1px solid var(--line); color: var(--text-3);
+  font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.08em;
+  padding: 4px 9px; border-radius: 2px; cursor: pointer; flex-shrink: 0;
+  max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.ego-back-btn:hover { color: var(--cyan); border-color: rgba(116, 238, 198, 0.5); }
+.ego-layer-toggle { display: flex; gap: 4px; flex-shrink: 0; }
+.ego-topbar > .ego-back-btn + .ego-layer-toggle { border-left: 1px solid var(--line-soft); padding-left: 12px; }
+.ego-layer-btn {
+  background: transparent; border: 1px solid var(--line); color: var(--text-3);
+  font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.1em;
+  padding: 4px 9px; border-radius: 2px; cursor: pointer;
+}
+.ego-layer-btn.is-active { color: var(--cyan); border-color: rgba(116, 238, 198, 0.5); background: rgba(116, 238, 198, 0.08); }
+.ego-layer-btn.is-disabled { opacity: 0.4; cursor: not-allowed; }
+.ego-overflow-panel {
+  position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+  width: 300px; height: auto; max-height: 260px; z-index: 7;
+}
+.ego-overflow-row {
+  display: flex; align-items: center; gap: 7px; padding: 6px 4px;
+  cursor: pointer; border-bottom: 1px solid var(--line-soft); font-size: 10.5px;
+}
+.ego-overflow-row:hover { background: rgba(116, 238, 198, 0.06); }
+.ego-overflow-row:last-child { border-bottom: none; }
+.ego-overflow-name { color: var(--text-1); flex: 1 1 auto; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* UX-016: VC 팝오버 산업 섹션 헤더 */
+.ego-overflow-sec {
+  display: flex; align-items: center; gap: 6px;
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em;
+  padding: 7px 4px 3px; border-bottom: 1px dashed;
+}
+.ego-overflow-sec-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+/* UX-022: 행 도트는 섹션 헤더 도트 크기로 — 12px는 행 높이를 지배해 과함 */
+.ego-overflow-row .ov-rel-mark { width: 6px; height: 6px; }
+.ego-overflow-type { font-family: var(--font-mono); font-size: 9px; flex-shrink: 0; }
+.ego-loading { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.ego-loading-spinner {
+  width: 28px; height: 28px; border-radius: 50%;
+  border: 2px solid rgba(116, 238, 198, 0.2); border-top-color: var(--cyan);
+  animation: egoSpin 0.8s linear infinite;
+}
+@keyframes egoSpin { to { transform: rotate(360deg); } }

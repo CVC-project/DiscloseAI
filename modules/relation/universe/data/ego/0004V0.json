@@ -1,0 +1,68 @@
+{
+  "t": "0004V0",
+  "n": "엔비알모션",
+  "s": "철강·금속",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "187790",
+        "n": "나노",
+        "type": "associate",
+        "detail": "21.3% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "화학",
+        "tier": "dot"
+      },
+      {
+        "n": "NANO Autovotive S.L.",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "35.4% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "데이먼인더스트리",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "29.6% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "엔비알롤러",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "187790",
+          "n": "나노",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 12192032000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출 등"
+        }
+      ],
+      "down": [
+        {
+          "t": "187790",
+          "n": "나노",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 102200000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입 등"
+        }
+      ]
+    }
+  }
+}

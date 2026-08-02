@@ -1,0 +1,410 @@
+{
+  "t": "009200",
+  "n": "무림페이퍼",
+  "s": "소재",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "001810",
+        "n": "무림SP",
+        "type": "investment",
+        "detail": "19.65% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "소재",
+        "tier": "dot"
+      },
+      {
+        "t": "009580",
+        "n": "무림P&P",
+        "type": "subsidiary",
+        "detail": "66.97% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "소재",
+        "tier": "dot"
+      },
+      {
+        "t": "001810",
+        "n": "무림SP",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "소재",
+        "tier": "dot"
+      },
+      {
+        "t": "009580",
+        "n": "무림P&P",
+        "type": "dart_filing",
+        "detail": "지배기업 · 2023",
+        "dir": "in",
+        "as_of": 2023,
+        "s": "소재",
+        "tier": "dot"
+      },
+      {
+        "n": "무림EUROPE",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "무림USA",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "무림로지텍",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "5.13% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "무림파워텍",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "이도균",
+        "kind": "person",
+        "type": "investment",
+        "detail": "12.31% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "이동욱",
+        "kind": "person",
+        "type": "investment",
+        "detail": "18.93% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "001810",
+          "n": "무림SP",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2271375000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "t": "001810",
+          "n": "무림SP",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3309880000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등"
+        },
+        {
+          "t": "009580",
+          "n": "무림P&P",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 66578395000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "n": "제이앤무림웨이브신기술사업투자조합",
+          "kind": "coop_fund",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 7869000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등"
+        },
+        {
+          "n": "무림-블루웨이브제3호신기술투자조합",
+          "kind": "coop_fund",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 4000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등"
+        },
+        {
+          "n": "코리아골든뷰티신기술투자조합",
+          "kind": "coop_fund",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 4000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등"
+        },
+        {
+          "n": "무림-IBPAI신기술투자조합",
+          "kind": "coop_fund",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등"
+        },
+        {
+          "n": "심리스신기술투자조합",
+          "kind": "coop_fund",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등"
+        },
+        {
+          "n": "에코피티제1호신기술투자조합",
+          "kind": "coop_fund",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등"
+        }
+      ],
+      "down": [
+        {
+          "t": "001810",
+          "n": "무림SP",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1500079000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등"
+        },
+        {
+          "t": "001810",
+          "n": "무림SP",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 26573631000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "t": "009580",
+          "n": "무림P&P",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3361373000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등"
+        },
+        {
+          "n": "제이앤무림제이드신기술사업투자조합",
+          "kind": "coop_fund",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 385684000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "n": "무림-퍼시픽유틸리티신기술투자조합제1호",
+          "kind": "coop_fund",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 67856000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "n": "엔에이치-무림덴탈케어신기술조합제1호",
+          "kind": "coop_fund",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 67200000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "n": "아트만-무림-글로벌원신기술조합",
+          "kind": "coop_fund",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 60600000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "n": "파인밸류-무림에코모빌리티신기술사업투자조합",
+          "kind": "coop_fund",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 58006000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "n": "비와이비-무림Pre-IPO신기술투자조합제1호",
+          "kind": "coop_fund",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 52680000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "n": "무림-블루웨이브제2호신기술투자조합",
+          "kind": "coop_fund",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 49600000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "n": "무림-IBPAI신기술투자조합",
+          "kind": "coop_fund",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 31101000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "n": "무림-오메가신기술투자조합1호",
+          "kind": "coop_fund",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 25020000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "n": "딥다이브-무림2022-2신기술사업투자조합",
+          "kind": "coop_fund",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 24743000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "n": "무림-구름제1호신기술사업투자조합",
+          "kind": "coop_fund",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 21000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "n": "디에스-무림신기술투자조합제1호",
+          "kind": "coop_fund",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 19500000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "n": "딥다이브-무림2021-1신기술사업투자조합",
+          "kind": "coop_fund",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 18693000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "n": "글로벌로보틱스신기술사업투자조합",
+          "kind": "coop_fund",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 16791000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "n": "무림-블루웨이브제3호신기술투자조합",
+          "kind": "coop_fund",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 16752000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "n": "무림-오메가신기술투자조합2호",
+          "kind": "coop_fund",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 15390000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "n": "무림-블루웨이브제1호신기술투자조합",
+          "kind": "coop_fund",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 13480000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "n": "딥다이브-무림2022-1신기술사업투자조합",
+          "kind": "coop_fund",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 11959000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "n": "코리아골든뷰티신기술투자조합",
+          "kind": "coop_fund",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 10322000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "n": "피에스비투자조합2호",
+          "kind": "coop_fund",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 8877000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "n": "심리스신기술투자조합",
+          "kind": "coop_fund",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3968000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        },
+        {
+          "n": "무림-열림모빌리티투자조합제1호",
+          "kind": "coop_fund",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2283000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "t": "021050",
+  "n": "서원",
+  "s": "철강·금속",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "012800",
+        "n": "대창",
+        "type": "associate",
+        "detail": "37.2% · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "철강·금속",
+        "tier": "dot"
+      },
+      {
+        "t": "043340",
+        "n": "에쎈테크",
+        "type": "dart_filing",
+        "detail": "최상위 지배기업 (별도) · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "기계·장비",
+        "tier": "dot"
+      },
+      {
+        "t": "012800",
+        "n": "대창",
+        "type": "dart_filing",
+        "detail": "지배기업 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "철강·금속",
+        "tier": "dot"
+      },
+      {
+        "n": "금융자산",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "임직원 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "분류",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "임직원 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "쉴드스톤 사모투자 합자회사",
+        "kind": "coop_fund",
+        "type": "associate",
+        "detail": "32.68% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "조경호",
+        "kind": "person",
+        "type": "investment",
+        "detail": "7.16% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "조시영",
+        "kind": "person",
+        "type": "associate",
+        "detail": "23.86% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "조정호",
+        "kind": "person",
+        "type": "investment",
+        "detail": "6.57% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "012800",
+          "n": "대창",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 6012987420.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출"
+        },
+        {
+          "t": "043340",
+          "n": "에쎈테크",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 99053000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출등 · 별도"
+        },
+        {
+          "n": "DAECHANG LLOYDS, INC",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1486610652.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "012800",
+          "n": "대창",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 23830948961.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입"
+        },
+        {
+          "t": "043340",
+          "n": "에쎈테크",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 261088000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입등 · 별도"
+        },
+        {
+          "n": "DAECHANG LLOYDS, INC",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 13587746513.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "t": "258830",
+  "n": "세종메디칼",
+  "s": "전기전자부품",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "016790",
+        "n": "현대사료",
+        "type": "dart_filing",
+        "detail": "기타 · 2023",
+        "dir": "in",
+        "as_of": 2023,
+        "s": "식음료",
+        "tier": "dot"
+      },
+      {
+        "t": "016790",
+        "n": "현대사료",
+        "type": "dart_filing",
+        "detail": "미지급금 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "식음료",
+        "tier": "dot"
+      },
+      {
+        "n": "㈜국도상사",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "전환사채 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜두원사이언스제약",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜비에스제이홀딩스",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "21.01% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜비에스제이홀딩스",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "전환사채 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜세종비에이치엘",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜요즈마비엠텍",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "대손충당금 · 2024",
+        "dir": "out",
+        "as_of": 2024
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "084990",
+          "n": "헬릭스미스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 374000.0,
+          "as_of": 2023,
+          "prov": "특수관계자거래35.1 · 매입등"
+        },
+        {
+          "n": "㈜카나리아바이오엠",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 47427000.0,
+          "as_of": 2023,
+          "prov": "특수관계자거래35.1 · 매입등"
+        },
+        {
+          "n": "㈜카나리아바이오",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 41837000.0,
+          "as_of": 2023,
+          "prov": "특수관계자거래35.1 · 매입등"
+        }
+      ],
+      "down": [
+        {
+          "n": "㈜카나리아바이오엠",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 270270000.0,
+          "as_of": 2023,
+          "prov": "특수관계자거래35.1 · 매출등"
+        },
+        {
+          "n": "㈜카나리아바이오",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 93600000.0,
+          "as_of": 2023,
+          "prov": "특수관계자거래35.1 · 매출등"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "t": "050090",
+  "n": "비케이홀딩스",
+  "s": "미디어",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "n": "(주)한국문화진흥",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "25.13% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "비케이씨앤씨",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "40.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "인터웍스 미디어",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "30.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "홍석규",
+        "kind": "person",
+        "type": "investment",
+        "detail": "7.8% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "n": "(주)한국문화진흥",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 378102000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입등 · 별도"
+        },
+        {
+          "n": "인터웍스 미디어",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 243000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입등 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "n": "비케이씨앤씨",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 191346000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출등 · 별도"
+        },
+        {
+          "n": "인터웍스 미디어",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4258000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출등 · 별도"
+        }
+      ]
+    }
+  }
+}

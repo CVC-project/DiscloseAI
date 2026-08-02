@@ -1,0 +1,133 @@
+{
+  "t": "446070",
+  "n": "유니드비티플러스",
+  "s": "소재",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "010060",
+        "n": "OCI홀딩스",
+        "type": "ftc_group",
+        "detail": "오씨아이 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "지주",
+        "tier": "named400"
+      },
+      {
+        "t": "005090",
+        "n": "SGC에너지",
+        "type": "dart_filing",
+        "detail": "대규모기업집단 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "에너지",
+        "tier": "dot"
+      },
+      {
+        "t": "010060",
+        "n": "OCI홀딩스",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "지주",
+        "tier": "named400"
+      },
+      {
+        "t": "456040",
+        "n": "OCI",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "화학",
+        "tier": "dot"
+      },
+      {
+        "n": "㈜유니드글로벌상사",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "25.06% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "이화영",
+        "kind": "person",
+        "type": "investment",
+        "detail": "9.34% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "패스웨이JB 글로벌 신기술투자조합 1호",
+        "kind": "coop_fund",
+        "type": "associate",
+        "detail": "49.7% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "패스웨이고성장투자조합1호",
+        "kind": "coop_fund",
+        "type": "subsidiary",
+        "detail": "84.47% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "010060",
+          "n": "OCI홀딩스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 17573000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출, 특수관계자거래"
+        },
+        {
+          "t": "005090",
+          "n": "SGC에너지",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 125438600.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "014830",
+          "n": "유니드",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 13058000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등"
+        },
+        {
+          "t": "005090",
+          "n": "SGC에너지",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 16681000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "패스웨이JB 글로벌 신기술투자조합 1호",
+          "kind": "coop_fund",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 2500000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 현금출자 · 별도"
+        }
+      ]
+    }
+  }
+}

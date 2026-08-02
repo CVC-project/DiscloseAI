@@ -1,0 +1,61 @@
+{
+  "t": "174900",
+  "n": "앱클론",
+  "s": "제약바이오",
+  "tier": "named400",
+  "layers": {
+    "governance": [
+      {
+        "t": "185750",
+        "n": "종근당",
+        "type": "investment",
+        "detail": "7.1% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "제약바이오",
+        "tier": "dot"
+      },
+      {
+        "n": "이종서",
+        "kind": "person",
+        "type": "investment",
+        "detail": "6.85% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "n": "Atlas Antibodies AB",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 98292000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 · 별도"
+        },
+        {
+          "n": "인센㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 88420000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "n": "인센㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 150000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 · 별도"
+        }
+      ]
+    }
+  }
+}

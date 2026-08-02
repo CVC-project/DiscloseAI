@@ -123,3 +123,44 @@ def test_export_json_schema(in_memory_session, monkeypatch, tmp_path):
     assert "ftc_group" in rl_types
     assert "associate" in rl_types
     assert "investment" in rl_types
+
+
+def test_build_graph_dedupes_multi_year_same_pair(in_memory_session, monkeypatch):
+    """같은 (source_corp, target_corp, source_type)의 여러 연도 행은 최신 연도 1건만
+    엣지로 반영해야 한다 (U1 5개년 백필 이후 발견된 회귀, 2026-07-22)."""
+    monkeypatch.setattr(
+        "modules.relation.graph.build.get_local_session",
+        lambda: in_memory_session,
+    )
+    session = in_memory_session
+    session.add(
+        CompanyNode(
+            corp_code="00126380", corp_name="삼성전자", ticker="005930",
+            market_cap=12627962, sector="반도체", group_name="삼성", is_target=True,
+        )
+    )
+    session.add(
+        CompanyNode(
+            corp_code="00877059", corp_name="삼성바이오로직스", ticker="207940",
+            market_cap=741118, sector="바이오", group_name="삼성", is_target=True,
+        )
+    )
+    for year, ratio in [(2021, 31.0), (2022, 31.1), (2023, 31.2), (2024, 31.22)]:
+        session.add(
+            RelationLocal(
+                source_corp="005930",
+                target_corp="207940",
+                relation_type="associate",
+                ratio=ratio,
+                detail=f"{ratio}%",
+                source_type="otrCprInvstmntSttus",
+                bsns_year=year,
+            )
+        )
+    session.commit()
+
+    G = build.build_graph()
+    edges = list(G.out_edges("005930", data=True))
+    assert len(edges) == 1, f"연도별 중복이 dedupe 안 됨: {edges}"
+    assert edges[0][2]["bsns_year"] == 2024
+    assert edges[0][2]["ratio"] == 31.22

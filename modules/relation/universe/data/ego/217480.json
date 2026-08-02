@@ -1,0 +1,175 @@
+{
+  "t": "217480",
+  "n": "에스디생명공학",
+  "s": "화장품",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "003220",
+        "n": "대원제약",
+        "type": "subsidiary",
+        "detail": "72.9% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "제약바이오",
+        "tier": "dot"
+      },
+      {
+        "t": "003220",
+        "n": "대원제약",
+        "type": "dart_filing",
+        "detail": "지배기업 · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "제약바이오",
+        "tier": "dot"
+      },
+      {
+        "n": "DAEWON PHARMACEUTICAL (Vietnam) Co,Ltd.",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "P COSMETICS CO.,LTD (VIETNAM)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "PT. ORION BEAUTY INTERNATIONAL",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "51.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "SD COSMETICS (SHANGHAI) CO., LTD",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "75.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "SNP COSMETICS (Shanghai) CO., LTD",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "99.2% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "SNP COSMETICS(QINGDAO) CO., LTD",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "대원메디테크㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "대원바이오텍㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "대원헬스케어㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "마스트파트너스 사모투자신탁 1호",
+        "kind": "coop_fund",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "메디케어히어링㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "아로펫㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "에스디생명공학(일본법인)",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "99.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "에스디큐어㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2023",
+        "dir": "out",
+        "as_of": 2023
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "n": "대원헬스케어㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 83146000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매입등"
+        }
+      ],
+      "down": [
+        {
+          "t": "003220",
+          "n": "대원제약",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 81032000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출등"
+        },
+        {
+          "n": "대원바이오텍㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 13323000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 매출등"
+        }
+      ]
+    }
+  }
+}

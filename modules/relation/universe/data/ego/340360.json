@@ -1,0 +1,69 @@
+{
+  "t": "340360",
+  "n": "다보링크",
+  "s": "반도체",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "073640",
+        "n": "테라사이언스",
+        "type": "investment",
+        "detail": "16.66% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "철강·금속",
+        "tier": "dot"
+      },
+      {
+        "n": "(주)에코비아",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "지서현",
+        "kind": "person",
+        "type": "investment",
+        "detail": "7.48% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "073640",
+          "n": "테라사이언스",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 350000000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 거래 · 자금대여"
+        }
+      ],
+      "down": [
+        {
+          "t": "032640",
+          "n": "LG유플러스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 25669992000.0,
+          "as_of": 2026,
+          "prov": "단일판매ㆍ공급계약체결 · 주식회사 LG유플러스"
+        },
+        {
+          "t": "073640",
+          "n": "테라사이언스",
+          "type": "capital_in",
+          "tier_grade": "T1",
+          "amount": 600000000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 거래 · 차입"
+        }
+      ]
+    }
+  }
+}

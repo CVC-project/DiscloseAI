@@ -1,0 +1,165 @@
+{
+  "t": "040300",
+  "n": "YTN",
+  "s": "미디어",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "085620",
+        "n": "미래에셋생명",
+        "type": "investment",
+        "detail": "6.73% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "금융",
+        "tier": "named400"
+      },
+      {
+        "t": "025900",
+        "n": "동화기업",
+        "type": "ftc_group",
+        "detail": "유진 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "소재",
+        "tier": "dot"
+      },
+      {
+        "t": "023410",
+        "n": "유진기업",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "소재",
+        "tier": "dot"
+      },
+      {
+        "t": "023410",
+        "n": "유진기업",
+        "type": "dart_filing",
+        "detail": "유의적 영향력 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "소재",
+        "tier": "dot"
+      },
+      {
+        "n": "Asia Cultrue & Entertainment company",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "49.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜와이티엔디엠비",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "28.52% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜와이티엔디엠비",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜와이티엔라디오",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "37.08% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜와이티엔라디오",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "관계기업 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "유진기업㈜의 종속회사 등",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "유진이엔티㈜",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "39.17% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "유진이엔티㈜",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "유의적 영향력 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "023410",
+          "n": "유진기업",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 20400000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "n": "㈜와이티엔디엠비",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 781997000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 매출 · 별도"
+        },
+        {
+          "n": "㈜와이티엔라디오",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 707369000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 매출 · 별도"
+        },
+        {
+          "n": "유진투자증권㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 390000000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 매출 · 별도"
+        },
+        {
+          "n": "유진이엔티㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 71274000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 매출 · 별도"
+        }
+      ]
+    }
+  }
+}

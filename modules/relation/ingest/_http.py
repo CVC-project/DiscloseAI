@@ -151,10 +151,20 @@ def dart_get(endpoint: str, params: dict, use_cache: bool = True) -> dict:
     raise last_exc
 
 
-def dart_get_binary(endpoint: str, params: dict) -> bytes:
-    """DART document.json 등 바이너리 응답용 (ZIP 다운로드)."""
+def dart_get_binary(endpoint: str, params: dict, use_cache: bool = True) -> bytes:
+    """DART document.json 등 바이너리 응답용 (ZIP 다운로드).
+
+    ★2026-07-31: **디스크 캐시 추가.** JSON 경로(`dart_get`)만 캐시가 있어서, relation.db를
+    재구축할 때 지분·기업정보는 raw_cache 히트로 네트워크 0인데 **공급계약 원문만
+    12,634건을 재fetch**해야 했다(약 50분 + DART 일 1만 건 한도 소진). 원문 ZIP은
+    rcept_no로 불변이라 캐시가 안전하다 — 재구축을 완전 오프라인으로 만든다.
+    """
     if not DART_API_KEY:
         raise DartError("NO_KEY", "DART_API_KEY 환경변수 없음")
+
+    cache = _cache_path(f"dartbin_{endpoint.split('.')[0]}", params).with_suffix(".bin")
+    if use_cache and cache.exists():
+        return cache.read_bytes()
 
     req_params = {"crtfc_key": DART_API_KEY, **params}
     url = f"{DART_BASE_URL}/{endpoint}"
@@ -165,6 +175,8 @@ def dart_get_binary(endpoint: str, params: dict) -> bytes:
             time.sleep(_RATE_LIMIT_SEC)
             r = _get_session().get(url, params=req_params, timeout=60)
             r.raise_for_status()
+            if use_cache:
+                cache.write_bytes(r.content)
             return r.content
         except Exception as e:  # noqa: BLE001
             last_exc = e

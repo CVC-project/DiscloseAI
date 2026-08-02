@@ -1,0 +1,322 @@
+{
+  "t": "005880",
+  "n": "대한해운",
+  "s": "운송·물류",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "008350",
+        "n": "남선알미늄",
+        "type": "ftc_group",
+        "detail": "SM · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "철강·금속",
+        "tier": "dot"
+      },
+      {
+        "t": "010580",
+        "n": "에스엠벡셀",
+        "type": "ftc_group",
+        "detail": "SM · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "자동차",
+        "tier": "dot"
+      },
+      {
+        "t": "078130",
+        "n": "국일제지",
+        "type": "ftc_group",
+        "detail": "SM · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "소재",
+        "tier": "named400"
+      },
+      {
+        "t": "104480",
+        "n": "티케이케미칼",
+        "type": "ftc_group",
+        "detail": "SM · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "화학",
+        "tier": "dot"
+      },
+      {
+        "t": "008350",
+        "n": "남선알미늄",
+        "type": "dart_filing",
+        "detail": "대규모기업집단 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "철강·금속",
+        "tier": "dot"
+      },
+      {
+        "t": "010580",
+        "n": "에스엠벡셀",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "자동차",
+        "tier": "dot"
+      },
+      {
+        "t": "104480",
+        "n": "티케이케미칼",
+        "type": "dart_filing",
+        "detail": "대규모기업집단 (별도) · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "화학",
+        "tier": "dot"
+      },
+      {
+        "n": "㈜대양해군",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "8.13% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜삼라",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "최상위 지배기업 · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜우방",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "21.38% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "양구관사관리㈜",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "7.28% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "에스엠상선㈜",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "23.58% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "통영예선",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "14.5% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "화천병영사랑㈜",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "20.9% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "104480",
+          "n": "티케이케미칼",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 356625000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등과의 거래 내용 · 매출 등 · 별도"
+        },
+        {
+          "t": "010580",
+          "n": "에스엠벡셀",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 318000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 거래 · 매출등"
+        },
+        {
+          "n": "㈜우방",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 14581935000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "동아건설산업 ㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 186192000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "에스엠상선㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 85451000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "코리아엘엔지트레이딩",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 56572000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "에스엠하이플러스㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 14242000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "삼환기업(주)",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3950000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "호텔탑스텐 주식회사",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 3549000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "n": "탑스텐빌라드애월제주",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1833000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "008350",
+          "n": "남선알미늄",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 98922000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출, 특수관계자거래"
+        },
+        {
+          "t": "008350",
+          "n": "남선알미늄",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 168785000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등과의 거래 · 매입 등"
+        },
+        {
+          "t": "104480",
+          "n": "티케이케미칼",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 768895000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 등과의 거래 내용 · 매입 등 · 별도"
+        },
+        {
+          "t": "010580",
+          "n": "에스엠벡셀",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 392086000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 거래 · 매입거래등"
+        },
+        {
+          "n": "코리아엘엔지트레이딩",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 69732302000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "에스엠상선㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 11442925000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "KLBV1 S.A",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3178078000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "에스엠하이플러스㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 131460000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "에스엠신용정보㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 59904000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출, 특수관계자거래"
+        },
+        {
+          "n": "㈜에스엠바로코사부산",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 48000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출, 특수관계자거래"
+        }
+      ]
+    }
+  }
+}

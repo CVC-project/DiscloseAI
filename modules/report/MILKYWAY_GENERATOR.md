@@ -9,7 +9,7 @@
 
 | | |
 |---|---|
-| **입력** | `modules/report/data/reports.db`(수집·분할된 5개년 사업보고서) + `series.py` 24키 시계열 |
+| **입력** | `shared/data/reports.db`(수집·분할된 5개년 사업보고서, 2026-07-21 shared 승격) + `series.py` 24키 시계열 |
 | **출력** | `integration/dossier/data/galaxy_<ticker>.json` — 렌더러 `galaxy.html`이 그대로 읽는 정본 |
 | **실행자** | `/galaxy-golden` 스킬(오케스트레이터) + 서브에이전트 4종 + `check_golden.py`(기계 게이트) + `test_galaxy_interaction.py`(동작 게이트) |
 | **수렴 조건** | 5게이트 전부 PASS(§2). 하나라도 FAIL이면 publish 금지 |

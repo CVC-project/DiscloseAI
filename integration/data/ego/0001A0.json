@@ -1,0 +1,100 @@
+{
+  "t": "0001A0",
+  "n": "덕양에너젠",
+  "s": "에너지",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "009830",
+        "n": "한화솔루션",
+        "type": "dart_filing",
+        "detail": "국내 · 2023",
+        "dir": "in",
+        "as_of": 2023,
+        "s": "화학",
+        "tier": "named400"
+      },
+      {
+        "n": "김기철",
+        "kind": "person",
+        "type": "associate",
+        "detail": "33.35% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "김민석",
+        "kind": "person",
+        "type": "associate",
+        "detail": "22.2% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "김홍석",
+        "kind": "person",
+        "type": "associate",
+        "detail": "22.97% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "디디로직스",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "50.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "민컴퍼니",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "100.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "이정민",
+        "kind": "person",
+        "type": "investment",
+        "detail": "15.74% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "케이앤디에너젠",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "50.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "000880",
+          "n": "한화",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 6467000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출"
+        }
+      ],
+      "down": [
+        {
+          "t": "000880",
+          "n": "한화",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1675000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입"
+        }
+      ]
+    }
+  }
+}

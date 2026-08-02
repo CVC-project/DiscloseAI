@@ -1,0 +1,117 @@
+{
+  "t": "023000",
+  "n": "삼원강재",
+  "s": "자동차",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "000430",
+        "n": "대원강업",
+        "type": "subsidiary",
+        "detail": "55.0% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "자동차",
+        "tier": "dot"
+      },
+      {
+        "t": "005710",
+        "n": "대원산업",
+        "type": "investment",
+        "detail": "6.25% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "자동차",
+        "tier": "dot"
+      },
+      {
+        "t": "069960",
+        "n": "현대백화점",
+        "type": "ftc_group",
+        "detail": "현대백화점 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "유통",
+        "tier": "named400"
+      },
+      {
+        "t": "005440",
+        "n": "현대지에프홀딩스",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "지주",
+        "tier": "named400"
+      },
+      {
+        "n": "DAEWON AMERICA INC",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "17.95% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "DAEWONMEXICO, S. DE R.L. DE C.V",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "13.45% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "079430",
+          "n": "현대리바트",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 41270438000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "t": "453340",
+          "n": "현대그린푸드",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 637885000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매출"
+        }
+      ],
+      "down": [
+        {
+          "t": "005440",
+          "n": "현대지에프홀딩스",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 32139339000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "t": "079430",
+          "n": "현대리바트",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 37844986000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        },
+        {
+          "t": "000430",
+          "n": "대원강업",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 255510339678.0,
+          "as_of": 2025,
+          "prov": "특수관계자 거래 · 재화의 판매로 인한 수익, 특수관계자거래 · 별도"
+        }
+      ]
+    }
+  }
+}

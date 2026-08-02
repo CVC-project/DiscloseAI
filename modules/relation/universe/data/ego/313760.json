@@ -1,0 +1,67 @@
+{
+  "t": "313760",
+  "n": "캐리",
+  "s": "전기전자부품",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "n": "(주)캐리에너지랩",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "90.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "㈜윌링스",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "40.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "드래곤인베스트조합",
+        "kind": "coop_fund",
+        "type": "associate",
+        "detail": "20.64% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "n": "㈜윌링스",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 28884000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입등"
+        }
+      ],
+      "down": [
+        {
+          "n": "㈜윌링스",
+          "kind": "private_corp",
+          "type": "capital_out",
+          "tier_grade": "T1",
+          "amount": 4119655000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 자금대여거래"
+        },
+        {
+          "n": "㈜윌링스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 97770000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출등"
+        }
+      ]
+    }
+  }
+}

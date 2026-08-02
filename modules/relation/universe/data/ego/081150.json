@@ -1,0 +1,108 @@
+{
+  "t": "081150",
+  "n": "티플랙스",
+  "s": "철강·금속",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "n": "(주)경형데이비드",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "7.9% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "(주)키스코",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
+        "n": "㈜한국아이티에스",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
+        "n": "기영스텐레스",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2024",
+        "dir": "out",
+        "as_of": 2024
+      },
+      {
+        "n": "김영국",
+        "kind": "person",
+        "type": "investment",
+        "detail": "10.46% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "김태섭",
+        "kind": "person",
+        "type": "investment",
+        "detail": "10.44% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "김태수",
+        "kind": "person",
+        "type": "investment",
+        "detail": "6.87% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "n": "㈜한국아이티에스",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 123300000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래 · 별도"
+        },
+        {
+          "n": "기영스텐레스",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 18157000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "n": "기영스텐레스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2914778000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래 · 별도"
+        },
+        {
+          "n": "(주)키스코",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 83088000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래 · 별도"
+        }
+      ]
+    }
+  }
+}

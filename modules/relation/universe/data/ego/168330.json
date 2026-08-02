@@ -1,0 +1,72 @@
+{
+  "t": "168330",
+  "n": "내츄럴엔도텍",
+  "s": "제약바이오",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "008490",
+        "n": "서흥",
+        "type": "associate",
+        "detail": "28.81% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "화학",
+        "tier": "dot"
+      },
+      {
+        "t": "000100",
+        "n": "유한양행",
+        "type": "investment",
+        "detail": "5.0% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "제약바이오",
+        "tier": "named400"
+      },
+      {
+        "t": "000100",
+        "n": "유한양행",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "제약바이오",
+        "tier": "named400"
+      },
+      {
+        "n": "(주)엔도더마",
+        "kind": "private_corp",
+        "type": "associate",
+        "detail": "47.18% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "008490",
+          "n": "서흥",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 374892000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        }
+      ],
+      "down": [
+        {
+          "t": "008490",
+          "n": "서흥",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 181080000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 매입, 특수관계자거래"
+        }
+      ]
+    }
+  }
+}

@@ -105,7 +105,13 @@ def test_collect_for_samsung_inserts_relation_raw(
     in_memory_session, dart_hyslr_005930, dart_invst_005930, monkeypatch, tmp_path
 ):
     """collect(corp='005930') 실행 시 RelationRaw가 생성되는지 (개인·재단 포함, 필터는 transform)."""
-    from modules.relation.storage.models import RelationRaw
+    from modules.relation.storage.models import CompanyRegistry, RelationRaw
+
+    # ★U1: collect()가 top50.csv가 아니라 CompanyRegistry에서 대상을 읽음 — 시드 필요
+    in_memory_session.add(
+        CompanyRegistry(corp_code="00126380", ticker="005930", name_current="삼성전자", market="KOSPI")
+    )
+    in_memory_session.commit()
 
     # storage.db.get_local_session을 in_memory_session으로 치환
     monkeypatch.setattr(

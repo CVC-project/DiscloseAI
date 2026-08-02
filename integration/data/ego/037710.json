@@ -1,0 +1,200 @@
+{
+  "t": "037710",
+  "n": "광주신세계",
+  "s": "유통",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "004170",
+        "n": "신세계",
+        "type": "subsidiary",
+        "detail": "62.84% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "유통",
+        "tier": "named400"
+      },
+      {
+        "t": "004170",
+        "n": "신세계",
+        "type": "ftc_group",
+        "detail": "신세계 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "유통",
+        "tier": "named400"
+      },
+      {
+        "t": "031430",
+        "n": "신세계인터내셔날",
+        "type": "dart_filing",
+        "detail": "지배기업 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "유통",
+        "tier": "dot"
+      },
+      {
+        "t": "035510",
+        "n": "신세계I&C",
+        "type": "dart_filing",
+        "detail": "대규모기업집단 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "플랫폼",
+        "tier": "dot"
+      },
+      {
+        "t": "139480",
+        "n": "이마트",
+        "type": "dart_filing",
+        "detail": "대규모기업집단 · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "유통",
+        "tier": "named400"
+      },
+      {
+        "n": "신세계의정부역사(주)",
+        "kind": "public_org",
+        "type": "associate",
+        "detail": "25.0% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "031440",
+          "n": "신세계푸드",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 1034723000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매출 등"
+        },
+        {
+          "t": "035510",
+          "n": "신세계I&C",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 4348451000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등, 특수관계자거래 (주2)"
+        },
+        {
+          "t": "139480",
+          "n": "이마트",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 15938000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 판매로 인한 수익 등, 특수관계자거래"
+        },
+        {
+          "n": "신세계야구단",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 48541329000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등, 특수관계자거래 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "t": "031440",
+          "n": "신세계푸드",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 16775000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 매입 등"
+        },
+        {
+          "t": "035510",
+          "n": "신세계I&C",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 17880000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입 등, 특수관계자거래 (주3)"
+        },
+        {
+          "t": "139480",
+          "n": "이마트",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 4779000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자와의 거래 · 재화의 매입 등, 특수관계자거래"
+        },
+        {
+          "t": "004170",
+          "n": "신세계",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 3316219000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익 등, 특수관계자거래 · 별도"
+        },
+        {
+          "t": "031430",
+          "n": "신세계인터내셔날",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 644149000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익 등, 특수관계자거래 · 별도"
+        },
+        {
+          "n": "신세계야구단",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 15150663000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출 등, 특수관계자거래 · 별도"
+        },
+        {
+          "n": "신세계톰보이",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 262754000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익 등, 특수관계자거래 · 별도"
+        },
+        {
+          "n": "이마트24",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 155446000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래 · 별도"
+        },
+        {
+          "n": "플래티넘페이먼츠",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 42467000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래 · 별도"
+        },
+        {
+          "n": "에스씨케이컴퍼니",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 16775000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익 등, 특수관계자거래 · 별도"
+        }
+      ]
+    }
+  }
+}

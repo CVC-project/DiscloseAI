@@ -1,0 +1,50 @@
+{
+  "t": "012280",
+  "n": "영화금속",
+  "s": "자동차",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "n": "삼신정밀㈜",
+        "kind": "private_corp",
+        "type": "investment",
+        "detail": "13.38% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "최동윤",
+        "kind": "person",
+        "type": "investment",
+        "detail": "9.33% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "n": "삼신정밀㈜",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 66650751000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매입 등 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "n": "삼신정밀㈜",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 28304396000.0,
+          "as_of": 2025,
+          "prov": "특수관계자거래 · 매출 등 · 별도"
+        }
+      ]
+    }
+  }
+}

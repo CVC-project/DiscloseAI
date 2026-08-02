@@ -1,0 +1,114 @@
+{
+  "t": "200350",
+  "n": "아티스트스튜디오",
+  "s": "미디어",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "321820",
+        "n": "아티스트컴퍼니",
+        "type": "investment",
+        "detail": "18.13% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "레저·교육",
+        "tier": "dot"
+      },
+      {
+        "t": "078340",
+        "n": "컴투스",
+        "type": "dart_filing",
+        "detail": "관계기업 · 2024",
+        "dir": "in",
+        "as_of": 2024,
+        "s": "플랫폼",
+        "tier": "named400"
+      },
+      {
+        "n": "(주)래몽래인씨앤씨",
+        "kind": "private_corp",
+        "type": "subsidiary",
+        "detail": "61.29% · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "박인규",
+        "kind": "person",
+        "type": "investment",
+        "detail": "5.04% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      },
+      {
+        "n": "이정재",
+        "kind": "person",
+        "type": "investment",
+        "detail": "5.04% · 2025",
+        "dir": "in",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "078340",
+          "n": "컴투스",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 73278000.0,
+          "as_of": 2024,
+          "prov": "특수관계자 · 재화의 판매로 인한 수익, 특수관계자거래"
+        },
+        {
+          "n": "(주)지담미디어",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 5445455000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입등"
+        },
+        {
+          "n": "(주)베나픽처스",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 16344000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매입등"
+        }
+      ],
+      "down": [
+        {
+          "n": "(주)스튜디오지담",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 6150000000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출등"
+        },
+        {
+          "n": "(주)베나픽처스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 12859000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출등"
+        },
+        {
+          "n": "(주)지담미디어",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 2142000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 · 매출등"
+        }
+      ]
+    }
+  }
+}

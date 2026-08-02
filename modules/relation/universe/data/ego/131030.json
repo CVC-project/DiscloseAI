@@ -1,0 +1,155 @@
+{
+  "t": "131030",
+  "n": "옵투스제약",
+  "s": "제약바이오",
+  "tier": "dot",
+  "layers": {
+    "governance": [
+      {
+        "t": "000250",
+        "n": "삼천당제약",
+        "type": "associate",
+        "detail": "44.5% · 2025",
+        "dir": "in",
+        "as_of": 2025,
+        "s": "제약바이오",
+        "tier": "named400"
+      },
+      {
+        "t": "000250",
+        "n": "삼천당제약",
+        "type": "dart_filing",
+        "detail": "지배기업 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025,
+        "s": "제약바이오",
+        "tier": "named400"
+      },
+      {
+        "n": "(주)소화",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "최상위 지배기업 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "(주)인산엠티에스",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "SCD BIOTECH, LLC",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "SCD JAPAN",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "SCD US, INC.",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "소화인쇄",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      },
+      {
+        "n": "수인약품",
+        "kind": "private_corp",
+        "type": "dart_filing",
+        "detail": "기타 (별도) · 2025",
+        "dir": "out",
+        "as_of": 2025
+      }
+    ],
+    "valuechain": {
+      "up": [
+        {
+          "t": "000250",
+          "n": "삼천당제약",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 900740000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매입및비용 · 별도"
+        },
+        {
+          "n": "소화인쇄",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 1791352000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매입및비용 · 별도"
+        },
+        {
+          "n": "(주)인산엠티에스",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 7260000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매입및비용 · 별도"
+        },
+        {
+          "n": "수인약품",
+          "kind": "private_corp",
+          "type": "supply",
+          "tier_grade": "T1",
+          "amount": 49000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매입및비용 · 별도"
+        }
+      ],
+      "down": [
+        {
+          "t": "000250",
+          "n": "삼천당제약",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 15921254000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매출및수익 · 별도"
+        },
+        {
+          "n": "(주)인산엠티에스",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 426281000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매출및수익 · 별도"
+        },
+        {
+          "n": "수인약품",
+          "kind": "private_corp",
+          "type": "customer",
+          "tier_grade": "T1",
+          "amount": 191372000.0,
+          "as_of": 2025,
+          "prov": "특수관계자 공시 · 매출및수익 · 별도"
+        }
+      ]
+    }
+  }
+}
