@@ -276,8 +276,14 @@
     // ── universe 우선(U2 full 이전): named 400·25섹터·dots ──────────────
     // 없으면 graph_top50 경로로 graceful fallback(회귀 무손상).
     const useUniverse = !!(universe && Array.isArray(universe.named) && universe.named.length);
-    const relData = useUniverse ? universe.named : (graph || D.MOCK_NODES || []);
-    const usingMock = !useUniverse && !graph;
+    // ★2026-08-02 (FN-016) 폴백 판정은 **존재**가 아니라 **내용**으로 한다.
+    // 구 `graph || D.MOCK_NODES`는 빈 배열이 truthy라 MOCK_NODES에 영원히 도달하지
+    // 못했다. main 시절엔 graph_top50.json에 50건이 있어 무해했지만, universe 전환
+    // 후 그 파일은 `[]`(2 bytes)로 비었다 — universe fetch가 실패하면 relData가
+    // 빈 배열이 되어 **0노드 백지 화면**으로 떨어진다(FN-005 폴백 사다리 무력화).
+    const graphNodes = Array.isArray(graph) && graph.length ? graph : null;
+    const relData = useUniverse ? universe.named : (graphNodes || D.MOCK_NODES || []);
+    const usingMock = !useUniverse && !graphNodes;
 
     // named 노드에 mc 문자열 → market_cap 숫자 보강(top50 노드는 이미 숫자 mc).
     const baseNodes = relData.map((n) =>
