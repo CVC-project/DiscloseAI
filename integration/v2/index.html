@@ -7,8 +7,8 @@
   <link rel="icon" href="data:," />
   <!-- FN-004/FN-009: CSS도 캐시버스트 대상 — 버전 없이 두면 브라우저가 구버전 스타일시트를
        계속 써서 "고쳤는데 안 고쳐짐"이 된다(EgoView 캔버스 붕괴로 실제 발생). 수정 시 함께 올릴 것. -->
-  <link rel="stylesheet" href="../dossier/tokens.css?v=m1f" /><!-- 층1 공유 프리미티브(간격·radius·타입 스케일) — DESIGN.md 단일 토큰 체계 -->
-  <link rel="stylesheet" href="./styles.css?v=m1f" />
+  <link rel="stylesheet" href="../dossier/tokens.css?v=m1g" /><!-- 층1 공유 프리미티브(간격·radius·타입 스케일) — DESIGN.md 단일 토큰 체계 -->
+  <link rel="stylesheet" href="./styles.css?v=m1g" />
   <style>
     /* Cross-env layout normalization — prevents zoom/scale differences on GitHub Pages */
     html {
@@ -81,10 +81,10 @@
   </script>
 
   <!-- Data layer: mock + valuation + narration + loader (J3 산출물). -->
-  <script src="./data/mock.js?v=m1f"></script>
-  <script src="./data/valuation.js?v=m1f"></script>
-  <script src="./data/narration.js?v=m1f"></script>
-  <script src="./data/loader.js?v=m1f"></script>
+  <script src="./data/mock.js?v=m1g"></script>
+  <script src="./data/valuation.js?v=m1g"></script>
+  <script src="./data/narration.js?v=m1g"></script>
+  <script src="./data/loader.js?v=m1g"></script>
 
   <!-- 로컬 AI 키 설정 — config.local.js 는 .gitignore에 포함 (커밋 안 됨)
        config.local.js.example 을 복사하여 Gemini API 키를 입력하세요. -->
@@ -92,6 +92,6 @@
 
   <!-- Adapter: fetches via DiscloseAI.loadAll, builds standalone-shaped globals
        (window.__realData), then dynamically injects src/bundle.jsx. -->
-  <script src="./src/adapter.js?v=m1f"></script>
+  <script src="./src/adapter.js?v=m1g"></script>
 </body>
 </html>
