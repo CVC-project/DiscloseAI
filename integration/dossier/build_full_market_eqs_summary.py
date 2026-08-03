@@ -102,7 +102,9 @@ def _merge_cap(
         pass
 
 
-def load_business_market_caps() -> tuple[dict[str, float], dict[str, float], dict[str, str], dict[str, str]]:
+def load_business_market_caps() -> (
+    tuple[dict[str, float], dict[str, float], dict[str, str], dict[str, str]]
+):
     caps: dict[str, float] = {}
     prices: dict[str, float] = {}
     sources: dict[str, str] = {}
@@ -127,7 +129,9 @@ def load_business_market_caps() -> tuple[dict[str, float], dict[str, float], dic
     return caps, prices, sources, asofs
 
 
-def load_universe_market_caps() -> tuple[dict[str, float], dict[str, float], dict[str, str], dict[str, str]]:
+def load_universe_market_caps() -> (
+    tuple[dict[str, float], dict[str, float], dict[str, str], dict[str, str]]
+):
     caps: dict[str, float] = {}
     prices: dict[str, float] = {}
     sources: dict[str, str] = {}
@@ -215,7 +219,13 @@ def fetch_naver_market_caps() -> dict[str, Any]:
     }
 
 
-def load_naver_market_caps() -> tuple[dict[str, float], dict[str, float], dict[str, str], dict[str, str], dict[str, Any] | None]:
+def load_naver_market_caps() -> tuple[
+    dict[str, float],
+    dict[str, float],
+    dict[str, str],
+    dict[str, str],
+    dict[str, Any] | None,
+]:
     if not MARKET_CAP_PATH.exists():
         MARKET_CAP_PATH.parent.mkdir(parents=True, exist_ok=True)
         snapshot = fetch_naver_market_caps()
@@ -303,7 +313,13 @@ def fetch_yahoo_market_caps(tickers: list[str]) -> dict[str, Any]:
 
 def load_yahoo_market_caps(
     target_tickers: list[str] | None = None,
-) -> tuple[dict[str, float], dict[str, float], dict[str, str], dict[str, str], dict[str, Any] | None]:
+) -> tuple[
+    dict[str, float],
+    dict[str, float],
+    dict[str, str],
+    dict[str, str],
+    dict[str, Any] | None,
+]:
     if not YAHOO_MARKET_CAP_PATH.exists() and target_tickers:
         YAHOO_MARKET_CAP_PATH.parent.mkdir(parents=True, exist_ok=True)
         snapshot = fetch_yahoo_market_caps(target_tickers)
@@ -339,8 +355,16 @@ def load_yahoo_market_caps(
     return caps, prices, sources, asofs, meta
 
 
-def load_market_cap_context() -> tuple[dict[str, float], dict[str, float], dict[str, str], dict[str, str], dict[str, Any]]:
-    firm_tickers = {path.stem.replace("firm_", "") for path in FIRM_DIR.glob("firm_*.json")}
+def load_market_cap_context() -> tuple[
+    dict[str, float],
+    dict[str, float],
+    dict[str, str],
+    dict[str, str],
+    dict[str, Any],
+]:
+    firm_tickers = {
+        path.stem.replace("firm_", "") for path in FIRM_DIR.glob("firm_*.json")
+    }
     caps: dict[str, float] = {}
     prices: dict[str, float] = {}
     sources: dict[str, str] = {}
@@ -360,7 +384,9 @@ def load_market_cap_context() -> tuple[dict[str, float], dict[str, float], dict[
                 asof=loaded_asofs.get(ticker),
             )
 
-    naver_caps, naver_prices, naver_sources, naver_asofs, naver_meta = load_naver_market_caps()
+    naver_caps, naver_prices, naver_sources, naver_asofs, naver_meta = (
+        load_naver_market_caps()
+    )
     for ticker, cap in naver_caps.items():
         _merge_cap(
             caps,
@@ -375,9 +401,11 @@ def load_market_cap_context() -> tuple[dict[str, float], dict[str, float], dict[
             overwrite=True,
         )
 
-    missing_after_naver = sorted(ticker for ticker in firm_tickers if ticker not in caps)
-    yahoo_caps, yahoo_prices, yahoo_sources, yahoo_asofs, yahoo_meta = load_yahoo_market_caps(
-        missing_after_naver
+    missing_after_naver = sorted(
+        ticker for ticker in firm_tickers if ticker not in caps
+    )
+    yahoo_caps, yahoo_prices, yahoo_sources, yahoo_asofs, yahoo_meta = (
+        load_yahoo_market_caps(missing_after_naver)
     )
     for ticker, cap in yahoo_caps.items():
         _merge_cap(
@@ -483,7 +511,9 @@ def main() -> int:
             "financial_feqs_count": financial,
             "non_financial_eqs_count": len(rows) - financial,
             "market_cap_count": sum(row.get("market_cap") is not None for row in rows),
-            "market_cap_missing_count": sum(row.get("market_cap") is None for row in rows),
+            "market_cap_missing_count": sum(
+                row.get("market_cap") is None for row in rows
+            ),
             "market_cap_sources": row_source_counts,
             **market_meta,
         },
