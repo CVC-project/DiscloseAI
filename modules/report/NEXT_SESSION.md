@@ -14,13 +14,16 @@
 
 1. **Phase 2 (데이터 준비, 미완이면 먼저)** — `corps.csv`에 8클러스터·`tier=1c` 등재 확인, `fs_enrich`로 7본(한전 제외) fnlttSinglAcntAll 5개년 적재(DART 키), `series` 완결률, `sectioner --health` 8본(한전 주16 괴물블록 기보고 — 재섹션·별도FS 확인).
 2. **Phase 3 (빌드)** — WAVE2_BATCH_PROMPT 순서대로 1본=1세션. `git log --oneline -5`와 `corps.csv` tier로 진행 위치 파악(tier=1 완주·1c 대기).
-3. 본마다: 5게이트 + `--strict` §1~13 = 0 · VARIATIONS 채록(V-099 시퀀스) · 1커밋 push · **DL contact-sheet 리더 승인**.
+3. 본마다: 5게이트 + `--strict` §1~13 = 0 · VARIATIONS 채록(V-099 시퀀스) · 1커밋 push · **승인 대기 없이 다음 본으로**(V-101).
+
+> **리더 검수 방식(2026-08-03 결정, V-101)**: DL 사전 시각승인 폐지 — 완주본은 리더가 직접
+> `python -m http.server 8000` → `http://localhost:8000/integration/dossier/galaxy.html?ticker=<티커>` 로 사후 확인.
+> (1차 T1 5본 승인 대기도 같은 방식으로 해소 — 별도 승인 절차 없음.)
 
 ## 잔여 리더 트랙 (이 브랜치 밖)
 
-1. **1차 T1 5본 DL 시각승인 대기** — SKT 017670·HMM 011200·KT&G 033780·고려아연 010130·현대건설 000720 contact-sheet.
-2. **T2 클러스터 확장** — 기존 12 + 신규 8클러스터의 나머지 기업(각 T1 견본 캐스케이드, §8.5). 별도 브랜치.
-3. dead-click 2~3행 렌더러 버그(V-059, 전 골든 동형·콘텐츠 무관).
+1. **T2 클러스터 확장** — 기존 12 + 신규 8클러스터의 나머지 기업(각 T1 견본 캐스케이드, §8.5). 별도 브랜치.
+2. dead-click 2~3행 렌더러 버그(V-059, 전 골든 동형·콘텐츠 무관).
 
 ## 주의
 

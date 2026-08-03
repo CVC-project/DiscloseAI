@@ -112,7 +112,9 @@ python -m pytest tests/report/ -q                      # 하네스 회귀(체커
 3. **VARIATIONS S7 채록** — **V-099부터 이어지는 단일 시퀀스**(신규 변형 없어도 '신규 변형 없음' 명시) + 채록 로그 1줄
 4. `corps.csv`: `tier` `1c`→`1`
 5. **1커밋 + push**(PR 없음 — 리더 지시). 패턴: `feat(golden): <회사> T1 완주 — <클러스터> 첫 대표 (V-1xx)`
-6. **DL 게이트**: contact-sheet 스크린샷을 리더에게 제시(T1 승격 필수 관문, §8.5)
+6. **리더 검수 = localhost 사후 확인**(2026-08-03 결정 — DL 사전승인 폐지): 승인 대기 없이 다음 본으로 진행한다.
+   완주 보고에 확인 URL만 남긴다: `python -m http.server 8000` →
+   `http://localhost:8000/integration/dossier/galaxy.html?ticker=<티커>` (v2 셸에서도 자동 노출 — galaxy_index 갱신분)
 
 ## 주의
 
