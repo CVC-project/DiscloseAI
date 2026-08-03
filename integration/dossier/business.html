@@ -514,7 +514,9 @@
     }
     .segment-card strong { display:block; font-size:14px; margin-bottom:4px; }
     .segment-share { color:var(--cyan); font-size:24px; font-weight:950; letter-spacing:0; }
+    .segment-share-unknown { color:var(--soft); font-size:12px; font-weight:600; letter-spacing:0; }
     .segment-desc { margin:8px 0 10px; color:var(--soft); font-size:12px; line-height:1.5; }
+    .segment-card-noshare .segment-desc { margin-top:4px; }
     .segment-bar {
       height:9px;
       border-radius:999px;
@@ -1715,8 +1717,9 @@
         const segments = snippets.segment_breakdown || [];
         const segmentText = segments.length
           ? segments.slice(0, 5).map((segment) => {
-              const share = Number(segment.revenue_share || 0);
-              const pctText = Number.isFinite(share) ? ' ' + (share > 1 ? share : share * 100).toFixed(1).replace(/\\.0$/, '') + '%' : '';
+              // revenue_share가 null이면 비중을 모른다는 뜻 — "0%"라고 지어내지 않고 그냥 생략한다.
+              const share = segment.revenue_share;
+              const pctText = share != null ? ' ' + (share > 1 ? share : share * 100).toFixed(1).replace(/\\.0$/, '') + '%' : '';
               return segment.name + pctText + ': ' + segment.desc;
             }).join(' / ')
           : '';
@@ -1743,16 +1746,35 @@
     function segmentBreakdownHtml(row) {
       const segments = row.snippets && Array.isArray(row.snippets.segment_breakdown) ? row.snippets.segment_breakdown : [];
       if (!segments.length) return '';
-      const maxShare = Math.max(...segments.map((segment) => Number(segment.revenue_share || 0)), 0.01);
+      // revenue_share가 null인 건 "0%"가 아니라 "사업보고서에 비중 수치가 없다"는 뜻이다.
+      // 회사 전체에 비중 수치가 하나도 없으면(삼성전자·SK하이닉스류가 아닌 대부분의 회사),
+      // 없는 숫자를 0.0%로 지어내지 않고 사업부문 설명 카드로만 보여준다.
+      const withShare = segments.filter((segment) => segment.revenue_share != null);
+      if (!withShare.length) {
+        const cards = segments.slice(0, 6).map((segment) => {
+          return '<article class="segment-card segment-card-noshare">' +
+            '<strong>' + rich(segment.name || '사업부문') + '</strong>' +
+            '<p class="segment-desc">' + rich(segment.desc || '사업보고서에 표시된 주요 사업부문입니다.') + '</p>' +
+          '</article>';
+        }).join('');
+        return '<div class="segment-breakdown">' +
+          '<div class="segment-breakdown-head"><div><h3>사업부문 설명</h3><p>이 회사의 사업보고서에는 부문별 매출비중 수치가 따로 나와 있지 않아, 어떤 사업을 하는지 설명 중심으로 보여드립니다.</p></div></div>' +
+          '<div class="segment-grid">' + cards + '</div>' +
+        '</div>';
+      }
+      const maxShare = Math.max(...withShare.map((segment) => Number(segment.revenue_share)), 0.01);
       const cards = segments.slice(0, 6).map((segment) => {
-        const share = Number(segment.revenue_share || 0);
+        const hasShare = segment.revenue_share != null;
+        const share = hasShare ? Number(segment.revenue_share) : 0;
         const pct = share > 1 ? share : share * 100;
         const width = Math.max(6, Math.min(100, (share / maxShare) * 100));
         return '<article class="segment-card">' +
           '<strong>' + rich(segment.name || '사업부문') + '</strong>' +
-          '<div class="segment-share">' + pct.toFixed(1).replace(/\\.0$/, '') + '%</div>' +
+          (hasShare
+            ? '<div class="segment-share">' + pct.toFixed(1).replace(/\\.0$/, '') + '%</div>'
+            : '<div class="segment-share-unknown">비중 정보 없음</div>') +
           '<p class="segment-desc">' + rich(segment.desc || '사업보고서에 표시된 주요 사업부문입니다.') + '</p>' +
-          '<div class="segment-bar"><span style="--w:' + width.toFixed(1) + '%"></span></div>' +
+          (hasShare ? '<div class="segment-bar"><span style="--w:' + width.toFixed(1) + '%"></span></div>' : '') +
         '</article>';
       }).join('');
       return '<div class="segment-breakdown">' +
@@ -2223,15 +2245,19 @@
       const years = history.years || [];
       const latestRevenue = num(row.latest_year && row.latest_year.revenue) || 0;
       if (segments.length) {
-        const maxShare = Math.max(...segments.map((segment) => Number(segment.revenue_share || 0)), 0.01);
+        const withShare = segments.filter((segment) => segment.revenue_share != null);
+        const maxShare = withShare.length ? Math.max(...withShare.map((segment) => Number(segment.revenue_share)), 0.01) : 0.01;
         const cards = segments.slice(0, 4).map((segment) => {
-          const share = Number(segment.revenue_share || 0);
+          const hasShare = segment.revenue_share != null;
+          const share = hasShare ? Number(segment.revenue_share) : 0;
           const pct = share > 1 ? share : share * 100;
-          const amount = latestRevenue ? moneyEok(latestRevenue * (share > 1 ? share / 100 : share)) : '';
+          const amount = hasShare && latestRevenue ? moneyEok(latestRevenue * (share > 1 ? share / 100 : share)) : '';
           const width = Math.max(6, Math.min(100, (share / maxShare) * 100));
-          return '<article class="finance-mini"><strong>' + rich(segment.name || '사업부문') + '</strong><span>매출비중 ' + pct.toFixed(1).replace(/\\.0$/, '') + '%' + (amount ? ' · 약 ' + amount : '') + '</span><span>' + rich(segment.desc || '사업보고서에 표시된 주요 사업부문입니다.') + '</span><div class="segment-bar"><span style="--w:' + width.toFixed(1) + '%"></span></div></article>';
+          const shareLabel = hasShare ? '매출비중 ' + pct.toFixed(1).replace(/\\.0$/, '') + '%' + (amount ? ' · 약 ' + amount : '') : '매출비중 정보 없음';
+          return '<article class="finance-mini"><strong>' + rich(segment.name || '사업부문') + '</strong><span>' + shareLabel + '</span><span>' + rich(segment.desc || '사업보고서에 표시된 주요 사업부문입니다.') + '</span>' + (hasShare ? '<div class="segment-bar"><span style="--w:' + width.toFixed(1) + '%"></span></div>' : '') + '</article>';
         }).join('');
-        return '<div class="business-finance-panel"><h3>사업부문별 요약 재무현황: 매출비중으로 먼저 읽기</h3><div class="business-finance-grid">' + cards + '</div><p class="segment-tip">부문별 영업이익·총자산까지 구조화된 회사는 이후 같은 자리에서 3개년 그래프로 확장할 수 있습니다.</p></div>';
+        const heading = withShare.length ? '사업부문별 요약 재무현황: 매출비중으로 먼저 읽기' : '사업부문별 요약: 사업보고서에 매출비중 수치 없음';
+        return '<div class="business-finance-panel"><h3>' + heading + '</h3><div class="business-finance-grid">' + cards + '</div><p class="segment-tip">부문별 영업이익·총자산까지 구조화된 회사는 이후 같은 자리에서 3개년 그래프로 확장할 수 있습니다.</p></div>';
       }
       const metrics = [
         ['매출액', history.revenue || []],
