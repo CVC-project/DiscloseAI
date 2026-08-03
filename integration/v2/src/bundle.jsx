@@ -3314,15 +3314,16 @@ function useStockQuote(ticker) {
 // (`"1210.2조"` 문자열) adapter.js가 이를 nodeByCode로 올려두며 resolveMarketCap이
 // 그 문자열까지 파싱한다. 그래서 "삼성"처럼 접두 동점이 무더기로 잡히는 질의에서
 // 대형주가 위로 올라온다. 400사 밖은 시총이 없으므로 동점 그룹의 뒤로 보낸다.
-function highlightMatch(name, query) {
-  if (!query) return name;
-  const idx = name.indexOf(query);
-  if (idx === -1) return name;
+//
+// idx·len은 매칭 단계(results useMemo)에서 대소문자 무시로 이미 찾아둔 위치를 그대로 받는다 —
+// 여기서 다시 원문 대소문자로 name.indexOf(query)를 하면 "lg" 같은 소문자 입력이 안 걸린다.
+function highlightMatch(name, idx, len) {
+  if (idx == null || idx < 0 || !len) return name;
   return (
     <>
       {name.slice(0, idx)}
-      <mark>{name.slice(idx, idx + query.length)}</mark>
-      {name.slice(idx + query.length)}
+      <mark>{name.slice(idx, idx + len)}</mark>
+      {name.slice(idx + len)}
     </>
   );
 }
@@ -3352,6 +3353,7 @@ function CompanySearch({ onSelect, align }) {
           .map(c => ({
             ticker: c.ticker,
             name: c.company_name,
+            nameLower: c.company_name.toLowerCase(),
             market: c.market || '',
             partial: c.has_dossier === false,
           })));
@@ -3376,11 +3378,13 @@ function CompanySearch({ onSelect, align }) {
     const RD = window.__realData || {};
     const D = window.DiscloseAI || {};
     const byCode = RD.nodeByCode || {};
+    // 영문 대소문자 무시 매칭 — "lg"를 쳐도 "LG전자"가 걸리게. 한글은 대소문자가 없어 영향 없음.
+    const qLower = q.toLowerCase();
     const scored = [];
     for (const c of index) {
-      const nameIdx = c.name.indexOf(q);
+      const nameIdx = c.nameLower.indexOf(qLower);
       let score;
-      if (c.name === q) score = 0;
+      if (c.nameLower === qLower) score = 0;
       else if (nameIdx === 0) score = 1;
       else if (nameIdx > 0) score = 2;
       else if (c.ticker.startsWith(q)) score = 3;
@@ -3388,10 +3392,12 @@ function CompanySearch({ onSelect, align }) {
       // universe.named(400사)에만 mc가 있다 — 그 밖은 null이라 동점 그룹의 뒤로 간다.
       const node = byCode[c.ticker];
       const rawCap = (node && D.resolveMarketCap) ? D.resolveMarketCap(node) : null;
+      // matchLen: 이름에 실제로 일치한 구간이 있을 때만(score 3=티커일치는 이름 하이라이트 대상 아님).
       scored.push({
         ...c,
         score,
         nameIdx: nameIdx === -1 ? 0 : nameIdx,
+        matchLen: nameIdx === -1 ? 0 : qLower.length,
         cap: Number.isFinite(rawCap) && rawCap > 0 ? rawCap : null,
       });
     }
@@ -3459,7 +3465,7 @@ function CompanySearch({ onSelect, align }) {
                 onMouseDown={(e) => { e.preventDefault(); pick(c); }}
               >
                 <span className="cs-main">
-                  <span className="cs-name">{highlightMatch(c.name, query.trim())}</span>
+                  <span className="cs-name">{highlightMatch(c.name, c.nameIdx, c.matchLen)}</span>
                   {c.partial && <span className="cs-partial" title="EQS 재무분석 탭은 아직 준비 중이에요">준비중</span>}
                 </span>
                 <span className="cs-meta">
@@ -4459,13 +4465,23 @@ function App() {
   const [discFullOverlayTicker, setDiscFullOverlayTicker] = useState(null);
   const [dossierTab, setDossierTab] = useState('business');
 
-  // 전역 기업 검색(TopTabs 검색창) → 선택 시 이동.
-  // 그래프에 있는 기업(top50)은 selectGhost로 섹터·관계도 미니 뷰까지 재현하고,
-  // 그 밖의 기업(company_master 전체 ~2,700개)은 CORPORATION DOSSIER 오버레이로 바로 진입.
+  // 전역 기업 검색(TopTabs·오버레이 헤더 검색창) → 선택 시 이동.
+  // 섹터 identity를 찾을 수 있으면(사실상 전 종목) selectGhost로 섹터·관계도 미니 뷰까지
+  // 재현하고, 못 찾을 때만(신규상장 미동기화 등) CORPORATION DOSSIER 오버레이로 직행한다.
   const goToCompanyFromSearch = useCallback((code) => {
     if (!code) return;
     const RD = window.__realData || {};
-    const inGraph = !!(RD.nodeByCode && RD.nodeByCode[code]);
+    // selectGhost는 내부적으로 nodeByCode(그래프 상위 ~400개사)로만 섹터를 찾는다 —
+    // 그 밖의 전 종목(~2,650개, "dot" 기업 포함)은 indexByCode에 섹터(.s)가 이미 있으므로
+    // 여기서 직접 찾아 sectorId를 넘겨주면 selectGhost가 그 조회를 건너뛰고 그대로 쓴다.
+    // 관계도(지배구조·밸류체인)는 티커별 ego/<ticker>.json을 따로 fetch하는 구조라
+    // nodeByCode에 없는 회사도 정상적으로 그려진다 — CompanyOverviewPanel/EgoView가
+    // indexByCode 폴백(UX-009)으로 이미 지원함. 진짜로 identity를 못 찾을 때만
+    // (신규상장 미동기화 등) CORPORATION DOSSIER 오버레이로 바로 보낸다.
+    const nodeSectorKo = RD.nodeByCode && RD.nodeByCode[code] && RD.nodeByCode[code].s;
+    const idxSectorKo = RD.indexByCode && RD.indexByCode[code] && RD.indexByCode[code].s;
+    const sectorKo = nodeSectorKo || idxSectorKo;
+    const targetSector = sectorKo ? SECTOR_PALETTE.find(p => p.ko === sectorKo) : null;
 
     // UX-036: 검색창이 오버레이 헤더에도 생겼으므로, **어디서 검색했는지**에 따라 착지가
     // 달라져야 한다. 예전엔 배경 상태만 바꿔서, 오버레이가 열린 채 헤더는 옛 기업을
@@ -4475,23 +4491,23 @@ function App() {
     //    대상만 교체한다("다른 기업도 같은 화면으로 보고 싶다"는 의도). 배경도 함께
     //    맞춰 두어 나중에 ✕ CLOSE로 나갔을 때 그 기업의 관계도로 이어지게 한다.
     // ② 공시 '상세'는 특정 공시 1건에 매인 화면이라 교체할 대상이 없다 → 닫고 ③으로.
-    // ③ 배경 화면에서 검색 → 그래프에 있으면 관계도로, 없으면 DOSSIER 오버레이로.
+    // ③ 배경 화면에서 검색 → 섹터를 찾으면 관계도로, 못 찾으면 DOSSIER 오버레이로.
     if (corpOverlayTicker) {
       setCorpOverlayTicker(code);
       setDossierTab('business');
-      if (inGraph) selectGhost(code);
+      if (targetSector) selectGhost(code, targetSector.id);
       return;
     }
     if (discFullOverlayTicker) {
       setDiscFullOverlayTicker(code);
-      if (inGraph) selectGhost(code);
+      if (targetSector) selectGhost(code, targetSector.id);
       return;
     }
     if (discDetailItem) setDiscDetailItem(null);
 
     setActiveTab('finance');
-    if (inGraph) {
-      selectGhost(code);
+    if (targetSector) {
+      selectGhost(code, targetSector.id);
     } else {
       setCorpOverlayTicker(code);
       setDossierTab('business');
