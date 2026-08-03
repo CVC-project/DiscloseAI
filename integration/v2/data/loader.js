@@ -138,6 +138,26 @@
     return out;
   }
 
+  function buildLookupNodes(nodes, eqsRows, companiesIndex, eqsByTicker, discByTicker, stmtByTicker, scenariosByTicker) {
+    const byCode = new Map(nodes.map((n) => [n.t, n]));
+    const indexByCode = new Map((companiesIndex || []).map((c) => [c.t, c]));
+    (eqsRows || []).forEach((fin) => {
+      const t = fin && fin.ticker;
+      if (!t || byCode.has(t)) return;
+      const idx = indexByCode.get(t) || {};
+      const base = {
+        t,
+        n: idx.n || fin.corp_name || t,
+        s: idx.s || fin.industry_name || "미분류",
+        mkt: idx.mkt || null,
+        tier: idx.tier || "lookup",
+        mc: fin.market_cap || null,
+      };
+      byCode.set(t, enrichNode(base, eqsByTicker, discByTicker, stmtByTicker, scenariosByTicker));
+    });
+    return Array.from(byCode.values());
+  }
+
   // 12 섹터 자동 추출 + 시총·기업수 집계
   function aggregateSectors(nodes) {
     const map = new Map();
@@ -249,9 +269,8 @@
     ]);
 
     // ticker 인덱스 — dashboard L4990-5006
-    const eqsByTicker = Object.fromEntries(
-      ((eqs && eqs.data) || []).map((d) => [d.ticker, d])
-    );
+    const eqsRows = (eqs && eqs.data) || [];
+    const eqsByTicker = Object.fromEntries(eqsRows.map((d) => [d.ticker, d]));
     const discByTicker = {};
     ((disc && disc.disclosures) || []).forEach((d) => {
       if (!d.ticker) return;
@@ -281,6 +300,15 @@
     const nodes = baseNodes.map((n) =>
       enrichNode(n, eqsByTicker, discByTicker, stmtByTicker)
     );
+    const lookupNodes = buildLookupNodes(
+      nodes,
+      eqsRows,
+      (companiesIndex && Array.isArray(companiesIndex)) ? companiesIndex : [],
+      eqsByTicker,
+      discByTicker,
+      stmtByTicker,
+      scenariosByTicker
+    );
     const sectors = useUniverse
       ? buildUniverseSectors(universe, nodes)
       : aggregateSectors(nodes);
@@ -290,6 +318,7 @@
       usingMock,
       usingUniverse: useUniverse,
       nodes,
+      lookupNodes,
       sectors,
       companiesIndex: (companiesIndex && Array.isArray(companiesIndex)) ? companiesIndex : [],
       universeMeta: (universe && universe.meta) || null,

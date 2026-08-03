@@ -337,8 +337,10 @@
         companies = buildCompaniesByPaletteId(palette, result.nodes);
       }
 
-      // Index by ticker for fast lookup in dossier panels.
-      const nodeByCode = Object.fromEntries(result.nodes.map((n) => [n.t, n]));
+      // Index by ticker for fast lookup in dossier panels/search.
+      // Layout still uses universe.named, but lookup is widened with eqs_summary.
+      const lookupNodes = result.lookupNodes || result.nodes;
+      const nodeByCode = Object.fromEntries(lookupNodes.map((n) => [n.t, n]));
       const discAll = result.discAll || [];
       const discByTicker = {};
       for (const d of discAll) {
@@ -358,7 +360,7 @@
         companies,
         relations,
         nodeByCode,
-        nameByCode: buildNameByCode(result.nodes),
+        nameByCode: buildNameByCode(lookupNodes),
         discByTicker,
         discAll,
         meta: result.meta,
