@@ -1743,14 +1743,47 @@
       }
       return '<ol class="money-flow">' + items.map((item) => '<li><strong>' + esc(item[0]) + '</strong><br>' + rich(item[1]) + '</li>').join('') + '</ol>';
     }
+    function auditSummaryHtml(row) {
+      // 감사의견·핵심감사사항(KAM) — 회계감사인이 이 회사 재무제표에서 가장 유심히
+      // 들여다본 부분. 사업부문 설명은 이미 위쪽 사업 카드에서 보여줬으니, 매출비중
+      // 수치가 없는 회사에서는 같은 설명을 반복하는 대신 이 새로운 정보로 대체한다.
+      const audit = row.audit;
+      if (!audit || !audit.opinion) return '';
+      const opinion = String(audit.opinion);
+      const isClean = opinion === '적정의견';
+      const isSerious = opinion === '의견거절' || opinion === '부적정의견' || opinion === '한정의견';
+      const opinionColor = isSerious ? '#f87171' : (isClean ? '#4ade80' : 'var(--soft)');
+      const kamItems = Array.isArray(audit.kam) ? audit.kam : [];
+      const emphasisItems = Array.isArray(audit.emphasis) ? audit.emphasis : [];
+      const kamHtml = kamItems.length
+        ? kamItems.slice(0, 3).map((k) => (
+            '<article class="segment-card segment-card-noshare">' +
+              '<strong>' + rich(k.title || '핵심감사사항') + '</strong>' +
+              '<p class="segment-desc">' + rich(k.plain || k.summary || '') + '</p>' +
+            '</article>'
+          )).join('')
+        : '<article class="segment-card segment-card-noshare"><p class="segment-desc">이번 감사에서 별도로 강조된 핵심감사사항은 없었습니다.</p></article>';
+      const emphasisHtml = emphasisItems.length
+        ? '<p class="segment-tip" style="color:#f87171">⚠ 강조사항: ' + emphasisItems.map((e) => rich(e.plain || e.summary || e.title || '')).join(' · ') + '</p>'
+        : '';
+      return '<div class="segment-breakdown">' +
+        '<div class="segment-breakdown-head"><div><h3>감사의견과 핵심감사사항</h3><p>회계감사인이 이 회사 재무제표를 감사하며 가장 신경 써서 들여다본 부분입니다.</p></div><div class="mini-label" style="color:' + opinionColor + '">' + esc(opinion) + '</div></div>' +
+        '<div class="segment-grid">' + kamHtml + '</div>' +
+        emphasisHtml +
+      '</div>';
+    }
     function segmentBreakdownHtml(row) {
       const segments = row.snippets && Array.isArray(row.snippets.segment_breakdown) ? row.snippets.segment_breakdown : [];
-      if (!segments.length) return '';
       // revenue_share가 null인 건 "0%"가 아니라 "사업보고서에 비중 수치가 없다"는 뜻이다.
       // 회사 전체에 비중 수치가 하나도 없으면(삼성전자·SK하이닉스류가 아닌 대부분의 회사),
-      // 없는 숫자를 0.0%로 지어내지 않고 사업부문 설명 카드로만 보여준다.
+      // 없는 숫자를 0.0%로 지어내지 않는다.
       const withShare = segments.filter((segment) => segment.revenue_share != null);
-      if (!withShare.length) {
+      if (!segments.length || !withShare.length) {
+        const audit = auditSummaryHtml(row);
+        if (audit) return audit;
+        if (!segments.length) return '';
+        // 감사 데이터도 없으면 최후의 수단으로 사업부문 설명만이라도 보여준다
+        // (위 카드와 겹치지만, 아무것도 안 보여주는 것보다는 낫다).
         const cards = segments.slice(0, 6).map((segment) => {
           return '<article class="segment-card segment-card-noshare">' +
             '<strong>' + rich(segment.name || '사업부문') + '</strong>' +
