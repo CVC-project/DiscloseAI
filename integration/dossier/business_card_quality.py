@@ -18,35 +18,147 @@ IMG = "../data/business_images/"
 
 IMAGE_RULES: list[tuple[tuple[str, ...], str, str]] = [
     (("HBM", "고대역폭"), "business_image_df7b448e6d568266.jpg", "Wikimedia Commons"),
-    (("CIS", "이미지센서", "카메라모듈"), "business_image_025006447be31665.jpg", "Wikimedia Commons"),
-    (("MLCC", "적층세라믹", "콘덴서"), "business_image_76a8c8f5ba93d5d3.avif", "Unsplash"),
-    (("NAND", "SSD", "스토리지"), "business_image_b24ab2723180c79f.jpg", "Wikimedia Commons"),
+    (
+        ("CIS", "이미지센서", "카메라모듈"),
+        "business_image_025006447be31665.jpg",
+        "Wikimedia Commons",
+    ),
+    (
+        ("MLCC", "적층세라믹", "콘덴서"),
+        "business_image_76a8c8f5ba93d5d3.avif",
+        "Unsplash",
+    ),
+    (
+        ("NAND", "SSD", "스토리지"),
+        "business_image_b24ab2723180c79f.jpg",
+        "Wikimedia Commons",
+    ),
     (("DRAM", "메모리"), "business_image_10774ca82ea41202.jpg", "Wikimedia Commons"),
-    (("반도체", "웨이퍼", "Foundry", "파운드리", "Probe", "검사장치"), "business_image_63ecaf002e77f353.jpg", "Wikimedia Commons"),
-    (("OLED", "디스플레이", "패널"), "business_image_d41fecd0a3904c17.jpg", "Wikimedia Commons"),
-    (("스마트폰", "Galaxy", "TV", "모니터", "생활가전", "네트워크시스템"), "business_image_141eab6519656e30.jpg", "Wikimedia Commons"),
-    (("디지털 콕핏", "카오디오", "포터블 스피커", "Harman"), "business_image_8b1b40ffeb79bd60.jpg", "Wikimedia Commons"),
-    (("자동차", "완성차", "전기차", "하이브리드", "모빌리티"), "business_image_3918919e2e6dfce9.avif", "Unsplash"),
-    (("전장부품", "자동차부품", "차량 전장"), "business_image_e310d326cafd0fb3.jpg", "Wikimedia Commons"),
-    (("배터리", "2차전지", "양극재", "음극재", "전해액"), "business_image_d2545c8e29d092d8.avif", "Unsplash"),
-    (("조선", "선박", "LNG", "해양", "플랜트"), "business_image_5184e050831a4460.avif", "Unsplash"),
-    (("FM", "PM", "시설관리", "자산관리", "부동산 시설", "건물관리"), "business_image_d205f8d7b04d385e.avif", "Unsplash"),
-    (("보안", "시큐리티", "경비", "출동", "통합보안", "보안SI"), "business_image_281a9ea62f3d74e6.avif", "Unsplash"),
-    (("물류", "배송", "택배", "창고", "운송"), "business_image_3078a83d5189713b.avif", "Unsplash"),
-    (("할인점", "트레이더스", "이마트", "소매", "유통", "마트", "슈퍼", "편의점"), "business_image_33f95df49fba7bd7.jpg", "Wikimedia Commons"),
-    (("스타벅스", "커피", "음료", "식음료", "외식", "푸드"), "business_image_c346f28a524bc889.avif", "Unsplash"),
-    (("온라인", "SSG", "이커머스", "커머스", "플랫폼"), "business_image_c346f28a524bc889.avif", "Unsplash"),
-    (("호텔", "리조트", "객실", "레저", "여행"), "business_image_d205f8d7b04d385e.avif", "Unsplash"),
-    (("항공", "엔진", "우주", "방산", "미사일", "레이더"), "business_image_1805fba8159acac6.avif", "Unsplash"),
-    (("은행", "대출", "예금", "금융"), "business_image_6d251c6de8f8e995.jpg", "Wikimedia Commons"),
-    (("증권", "브로커리지", "투자", "운용"), "business_image_c1540b930934e19f.avif", "Unsplash"),
-    (("보험", "손해보험", "생명보험", "보장"), "business_image_837140a1a79dbc33.jpg", "Wikimedia Commons"),
-    (("바이오", "의약품", "제약", "CDMO", "임상", "백신"), "business_image_88477d76a420ca8a.avif", "Unsplash"),
-    (("화학", "소재", "정유", "철강", "금속", "원재료"), "business_image_c5e03278f3aee100.jpg", "Wikimedia Commons"),
-    (("전력", "발전", "송전", "전선", "OPGW", "케이블"), "business_image_93b560bdbc084531.jpg", "Wikimedia Commons"),
-    (("통신", "광케이블", "광섬유", "네트워크", "무선"), "business_image_ca24250faeb63812.avif", "Unsplash"),
-    (("게임", "콘텐츠", "미디어", "광고"), "business_image_7a64e307a92ba431.avif", "Unsplash"),
-    (("식품", "담배", "화장품", "생활"), "business_image_c346f28a524bc889.avif", "Unsplash"),
+    (
+        ("반도체", "웨이퍼", "Foundry", "파운드리", "Probe", "검사장치"),
+        "business_image_63ecaf002e77f353.jpg",
+        "Wikimedia Commons",
+    ),
+    (
+        ("OLED", "디스플레이", "패널"),
+        "business_image_d41fecd0a3904c17.jpg",
+        "Wikimedia Commons",
+    ),
+    (
+        ("스마트폰", "Galaxy", "TV", "모니터", "생활가전", "네트워크시스템"),
+        "business_image_141eab6519656e30.jpg",
+        "Wikimedia Commons",
+    ),
+    (
+        ("디지털 콕핏", "카오디오", "포터블 스피커", "Harman"),
+        "business_image_8b1b40ffeb79bd60.jpg",
+        "Wikimedia Commons",
+    ),
+    (
+        ("자동차", "완성차", "전기차", "하이브리드", "모빌리티"),
+        "business_image_3918919e2e6dfce9.avif",
+        "Unsplash",
+    ),
+    (
+        ("전장부품", "자동차부품", "차량 전장"),
+        "business_image_e310d326cafd0fb3.jpg",
+        "Wikimedia Commons",
+    ),
+    (
+        ("배터리", "2차전지", "양극재", "음극재", "전해액"),
+        "business_image_d2545c8e29d092d8.avif",
+        "Unsplash",
+    ),
+    (
+        ("조선", "선박", "LNG", "해양", "플랜트"),
+        "business_image_5184e050831a4460.avif",
+        "Unsplash",
+    ),
+    (
+        ("FM", "PM", "시설관리", "자산관리", "부동산 시설", "건물관리"),
+        "business_image_d205f8d7b04d385e.avif",
+        "Unsplash",
+    ),
+    (
+        ("보안", "시큐리티", "경비", "출동", "통합보안", "보안SI"),
+        "business_image_281a9ea62f3d74e6.avif",
+        "Unsplash",
+    ),
+    (
+        ("물류", "배송", "택배", "창고", "운송"),
+        "business_image_3078a83d5189713b.avif",
+        "Unsplash",
+    ),
+    (
+        ("할인점", "트레이더스", "이마트", "소매", "유통", "마트", "슈퍼", "편의점"),
+        "business_image_33f95df49fba7bd7.jpg",
+        "Wikimedia Commons",
+    ),
+    (
+        ("스타벅스", "커피", "음료", "식음료", "외식", "푸드"),
+        "business_image_c346f28a524bc889.avif",
+        "Unsplash",
+    ),
+    (
+        ("온라인", "SSG", "이커머스", "커머스", "플랫폼"),
+        "business_image_c346f28a524bc889.avif",
+        "Unsplash",
+    ),
+    (
+        ("호텔", "리조트", "객실", "레저", "여행"),
+        "business_image_d205f8d7b04d385e.avif",
+        "Unsplash",
+    ),
+    (
+        ("항공", "엔진", "우주", "방산", "미사일", "레이더"),
+        "business_image_1805fba8159acac6.avif",
+        "Unsplash",
+    ),
+    (
+        ("은행", "대출", "예금", "금융"),
+        "business_image_6d251c6de8f8e995.jpg",
+        "Wikimedia Commons",
+    ),
+    (
+        ("증권", "브로커리지", "투자", "운용"),
+        "business_image_c1540b930934e19f.avif",
+        "Unsplash",
+    ),
+    (
+        ("보험", "손해보험", "생명보험", "보장"),
+        "business_image_837140a1a79dbc33.jpg",
+        "Wikimedia Commons",
+    ),
+    (
+        ("바이오", "의약품", "제약", "CDMO", "임상", "백신"),
+        "business_image_88477d76a420ca8a.avif",
+        "Unsplash",
+    ),
+    (
+        ("화학", "소재", "정유", "철강", "금속", "원재료"),
+        "business_image_c5e03278f3aee100.jpg",
+        "Wikimedia Commons",
+    ),
+    (
+        ("전력", "발전", "송전", "전선", "OPGW", "케이블"),
+        "business_image_93b560bdbc084531.jpg",
+        "Wikimedia Commons",
+    ),
+    (
+        ("통신", "광케이블", "광섬유", "네트워크", "무선"),
+        "business_image_ca24250faeb63812.avif",
+        "Unsplash",
+    ),
+    (
+        ("게임", "콘텐츠", "미디어", "광고"),
+        "business_image_7a64e307a92ba431.avif",
+        "Unsplash",
+    ),
+    (
+        ("식품", "담배", "화장품", "생활"),
+        "business_image_c346f28a524bc889.avif",
+        "Unsplash",
+    ),
 ]
 
 
@@ -71,6 +183,12 @@ KIND_IMAGE: dict[str, tuple[str, str]] = {
 
 BAD_TITLE_PARTS = (
     "기타부문",
+    "기타 사업",
+    "기타",
+    "주요 사업",
+    "사업",
+    "서비스",
+    "제품",
     "내부거래",
     "금융보증계약",
     "계약자산",
@@ -78,16 +196,26 @@ BAD_TITLE_PARTS = (
     "리스부채",
     "사용권자산",
     "영업부문",
+    "보고부문",
+    "연결조정",
+    "조정",
 )
 
 CUSTOMER_LIST_PARTS = (
     "삼성전자, SK하이닉스",
+    "삼성전자",
+    "SK하이닉스",
     "삼성디스플레이",
     "윈팩",
+    "LG전자",
+    "현대차",
+    "기아",
     "Apple",
     "NVIDIA",
     "TSMC",
     "Micron",
+    "Intel",
+    "Qualcomm",
 )
 
 
@@ -185,7 +313,9 @@ def choose_image(card: dict[str, Any], payload: dict[str, Any]) -> tuple[str, st
     return _image_path(filename), source
 
 
-def attach_images(cards: list[dict[str, Any]], payload: dict[str, Any]) -> list[dict[str, Any]]:
+def attach_images(
+    cards: list[dict[str, Any]], payload: dict[str, Any]
+) -> list[dict[str, Any]]:
     result: list[dict[str, Any]] = []
     for card in cards:
         clean = dict(card)
@@ -204,16 +334,42 @@ def fallback_cards(payload: dict[str, Any]) -> list[dict[str, str]]:
         return COMPANY_OVERRIDES["012750"]
     if "금융" in sector or "은행" in sector:
         return [
-            {"title": "금융 서비스", "caption": "예금, 대출, 수수료 등 금융 서비스를 제공합니다.", "kind": "bank", "visual": "BANK"},
-            {"title": "투자·운용", "caption": "자산 운용과 투자 수익이 실적에 영향을 줍니다.", "kind": "securities", "visual": "AUM"},
+            {
+                "title": "금융 서비스",
+                "caption": "예금, 대출, 수수료 등 금융 서비스를 제공합니다.",
+                "kind": "bank",
+                "visual": "BANK",
+            },
+            {
+                "title": "투자·운용",
+                "caption": "자산 운용과 투자 수익이 실적에 영향을 줍니다.",
+                "kind": "securities",
+                "visual": "AUM",
+            },
         ]
     if "반도체" in sector:
         return [
-            {"title": "반도체", "caption": "메모리, 시스템반도체, 장비·소재 관련 사업을 봅니다.", "kind": "chip", "visual": "CHIP"},
-            {"title": "부품·소재", "caption": "공정에 투입되는 부품과 소재가 실적에 영향을 줍니다.", "kind": "chip", "visual": "PARTS"},
+            {
+                "title": "반도체",
+                "caption": "메모리, 시스템반도체, 장비·소재 관련 사업을 봅니다.",
+                "kind": "chip",
+                "visual": "CHIP",
+            },
+            {
+                "title": "부품·소재",
+                "caption": "공정에 투입되는 부품과 소재가 실적에 영향을 줍니다.",
+                "kind": "chip",
+                "visual": "PARTS",
+            },
         ]
+    fallback_title = sector if sector else "핵심 서비스"
     return [
-        {"title": "주요 사업", "caption": f"{sector or '사업'}을 중심으로 매출을 만듭니다.", "kind": "service", "visual": "BUSINESS"}
+        {
+            "title": fallback_title,
+            "caption": f"{fallback_title}을 중심으로 매출을 만듭니다.",
+            "kind": "service",
+            "visual": "BUSINESS",
+        }
     ]
 
 
