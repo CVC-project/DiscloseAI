@@ -2628,7 +2628,7 @@ function QuarterlyTable({ disc }) {
   );
 }
 
-function DisclosureDetailOverlay({ disc, onClose }) {
+function DisclosureDetailOverlay({ disc, onClose, onHome, onSelectCompany }) {
   if (!disc) return null;
   const RD = window.__realData || {};
   const D = window.DiscloseAI || {};
@@ -2643,16 +2643,16 @@ function DisclosureDetailOverlay({ disc, onClose }) {
   return (
     <div style={{position: 'fixed', inset: 0, zIndex: 1000, background: 'rgba(2,4,12,0.88)', backdropFilter: 'blur(18px)', display: 'flex', flexDirection: 'column'}}
       onClick={e => { if (e.target === e.currentTarget) onClose(); }}>
-      {/* Header */}
-      <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 20px', borderBottom: '1px solid rgba(251,191,36,0.2)', background: 'rgba(8,14,26,0.9)', flexShrink: 0}}>
-        <div style={{display: 'flex', alignItems: 'center', gap: 10}}>
-          <span style={{width: 8, height: 8, borderRadius: '50%', background: '#fbbf24', boxShadow: '0 0 8px #fbbf24', display: 'inline-block'}} />
-          <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 11, letterSpacing: '.12em', color: '#fbbf24'}}>{corpName} 공시</span>
-          <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 10, color: '#64748b'}}>· {ticker}</span>
-          {node && node.s && <span style={{fontSize: 10, color: '#475569'}}>· {node.s}</span>}
-        </div>
-        <button onClick={onClose} style={{background: 'transparent', border: '1px solid rgba(251,191,36,0.25)', color: '#94a3b8', fontFamily: 'var(--font-mono,monospace)', fontSize: 11, padding: '4px 14px', cursor: 'pointer', letterSpacing: '.08em', borderRadius: 2}}>✕ CLOSE</button>
-      </div>
+      {/* Header — UX-036 공통 크롬(로고=홈·전역 검색) */}
+      <OverlayHeader
+        accent="#fbbf24"
+        label={`${corpName} 공시`}
+        ticker={ticker}
+        meta={(node && node.s) || null}
+        onClose={onClose}
+        onHome={onHome}
+        onSelectCompany={onSelectCompany}
+      />
       {/* Body — 2-column: content left, AI chat right */}
       <div style={{flex: '1 1 0%', display: 'flex', overflow: 'hidden'}}>
         <div style={{flex: '1 1 0%', overflowY: 'auto', padding: '20px 28px', display: 'flex', flexDirection: 'column', gap: 12}}>
@@ -2684,7 +2684,7 @@ function DisclosureDetailOverlay({ disc, onClose }) {
   );
 }
 
-function DisclosureFullOverlay({ ticker, onClose }) {
+function DisclosureFullOverlay({ ticker, onClose, onHome, onSelectCompany }) {
   const [view, setView] = React.useState('list');
   const [selectedDisc, setSelectedDisc] = React.useState(null);
   const RD = window.__realData || {};
@@ -2709,15 +2709,16 @@ function DisclosureFullOverlay({ ticker, onClose }) {
     : null;
   return (
     <div style={{position: 'fixed', inset: 0, zIndex: 999, background: 'rgba(2,4,12,0.88)', backdropFilter: 'blur(18px)', display: 'flex', flexDirection: 'column'}}>
-      <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 20px', borderBottom: '1px solid rgba(116, 238, 198,0.2)', background: 'rgba(8,14,26,0.9)', flexShrink: 0}}>
-        <div style={{display: 'flex', alignItems: 'center', gap: 12}}>
-          <span style={{width: 8, height: 8, borderRadius: '50%', background: '#74EEC6', boxShadow: '0 0 8px #74EEC6', display: 'inline-block'}} />
-          <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 11, letterSpacing: '.12em', color: '#74EEC6'}}>DISCLOSURE DOSSIER</span>
-          <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 10, color: '#64748b', letterSpacing: '.06em'}}>· {ticker}</span>
-          {view === 'detail' && <button onClick={() => setView('list')} className="disc-back-link">← 목록</button>}
-        </div>
-        <button onClick={onClose} style={{background: 'transparent', border: '1px solid rgba(116, 238, 198,0.25)', color: '#94a3b8', fontFamily: 'var(--font-mono,monospace)', fontSize: 11, padding: '4px 14px', cursor: 'pointer', letterSpacing: '.08em', borderRadius: 2}}>✕ CLOSE</button>
-      </div>
+      {/* Header — UX-036 공통 크롬(로고=홈·전역 검색) */}
+      <OverlayHeader
+        accent="#74EEC6"
+        label="DISCLOSURE DOSSIER"
+        ticker={ticker}
+        extra={view === 'detail' ? <button onClick={() => setView('list')} className="disc-back-link">← 목록</button> : null}
+        onClose={onClose}
+        onHome={onHome}
+        onSelectCompany={onSelectCompany}
+      />
       <div style={{flex: '1 1 0%', display: 'flex', overflow: 'hidden'}}>
       {/* Left: disclosure content */}
       <div style={{flex: '1 1 0%', overflowY: 'auto', padding: '20px 28px', display: 'flex', flexDirection: 'column', gap: 10}}>
@@ -3305,8 +3306,15 @@ function useStockQuote(ticker) {
 // ─── Intro screen ──────────────────────────────────────────────────────────
 // ─── Global company search ─────────────────────────────────────────────────
 // 전 상장사(company_master.json, ~2,700개) 대상 기업명 검색 + 자동완성.
-// 시가총액 데이터가 리포지토리 어디에도 없어(top50 eqs_summary조차 market_cap 전부 null)
-// 정렬은 일치도순(정확일치 > 접두일치 > 부분일치 > 티커일치)으로 처리한다.
+//
+// 정렬(FN-017): 1차 일치도(정확 > 접두 > 부분 > 티커), 2차 **시가총액 내림차순**.
+// 최초 구현(PR #90)은 "시총이 리포지토리 어디에도 없다"고 보고 일치도만 썼는데,
+// eqs_summary(2,680건 전부 null)와 graph_top50(universe 전환 후 빈 배열)만 확인한
+// 것이 원인이었다. 실제로는 **universe.json의 named 400사에 mc가 전량 존재**하고
+// (`"1210.2조"` 문자열) adapter.js가 이를 nodeByCode로 올려두며 resolveMarketCap이
+// 그 문자열까지 파싱한다. 그래서 "삼성"처럼 접두 동점이 무더기로 잡히는 질의에서
+// 대형주가 위로 올라온다. 400사 밖은 시총이 없으므로 동점 그룹의 뒤로 보낸다.
+//
 // idx·len은 매칭 단계(results useMemo)에서 대소문자 무시로 이미 찾아둔 위치를 그대로 받는다 —
 // 여기서 다시 원문 대소문자로 name.indexOf(query)를 하면 "lg" 같은 소문자 입력이 안 걸린다.
 function highlightMatch(name, idx, len) {
@@ -3320,7 +3328,9 @@ function highlightMatch(name, idx, len) {
   );
 }
 
-function CompanySearch({ onSelect }) {
+// align='right' — 오버레이 헤더처럼 검색창이 화면 오른쪽 끝에 붙는 자리에서 쓴다.
+// 기본(left)이면 드롭다운이 오른쪽으로 뻗어 뷰포트를 넘어간다.
+function CompanySearch({ onSelect, align }) {
   const [query, setQuery] = useState('');
   const [open, setOpen] = useState(false);
   const [highlightIdx, setHighlightIdx] = useState(0);
@@ -3334,9 +3344,19 @@ function CompanySearch({ onSelect }) {
       .then(r => (r.ok ? r.json() : null))
       .then(d => {
         if (!alive || !d || !Array.isArray(d.companies)) return;
+        // has_dossier=false(23사, 대부분 KONEX)도 **결과에서 빼지 않는다** — 실측상
+        // business_*.json은 23사 전부 존재해 사업·기업 탭은 정상 동작하고, 빠지는 건
+        // firm_*.json(17사)의 EQS 탭뿐이다. 검색에서 감추면 "있는 기업이 안 나온다"는
+        // 더 큰 오해를 만드므로, 대신 목록에 '준비중'을 달아 클릭 전에 알린다.
         setIndex(d.companies
           .filter(c => c.company_name && c.ticker)
-          .map(c => ({ ticker: c.ticker, name: c.company_name, nameLower: c.company_name.toLowerCase(), market: c.market || '' })));
+          .map(c => ({
+            ticker: c.ticker,
+            name: c.company_name,
+            nameLower: c.company_name.toLowerCase(),
+            market: c.market || '',
+            partial: c.has_dossier === false,
+          })));
       })
       .catch(() => {});
     return () => { alive = false; };
@@ -3355,6 +3375,9 @@ function CompanySearch({ onSelect }) {
   const results = useMemo(() => {
     const q = query.trim();
     if (!q || !index) return [];
+    const RD = window.__realData || {};
+    const D = window.DiscloseAI || {};
+    const byCode = RD.nodeByCode || {};
     // 영문 대소문자 무시 매칭 — "lg"를 쳐도 "LG전자"가 걸리게. 한글은 대소문자가 없어 영향 없음.
     const qLower = q.toLowerCase();
     const scored = [];
@@ -3366,12 +3389,26 @@ function CompanySearch({ onSelect }) {
       else if (nameIdx > 0) score = 2;
       else if (c.ticker.startsWith(q)) score = 3;
       else continue;
+      // universe.named(400사)에만 mc가 있다 — 그 밖은 null이라 동점 그룹의 뒤로 간다.
+      const node = byCode[c.ticker];
+      const rawCap = (node && D.resolveMarketCap) ? D.resolveMarketCap(node) : null;
       // matchLen: 이름에 실제로 일치한 구간이 있을 때만(score 3=티커일치는 이름 하이라이트 대상 아님).
-      scored.push({ ...c, score, nameIdx: nameIdx === -1 ? 0 : nameIdx, matchLen: nameIdx === -1 ? 0 : qLower.length });
+      scored.push({
+        ...c,
+        score,
+        nameIdx: nameIdx === -1 ? 0 : nameIdx,
+        matchLen: nameIdx === -1 ? 0 : qLower.length,
+        cap: Number.isFinite(rawCap) && rawCap > 0 ? rawCap : null,
+      });
     }
-    // 시가총액 데이터가 없어 순수 일치도(스코어 → 일치 위치)로만 정렬 — 그 외 임의 기준(이름 길이 등) 미사용.
-    // 동점이면 Array.sort의 안정 정렬 특성상 company_master.json 원본(티커 오름차순) 순서를 그대로 따른다.
-    scored.sort((a, b) => a.score - b.score || a.nameIdx - b.nameIdx);
+    // 1차 일치도 → 2차 시총 내림차순 → 3차 일치 위치.
+    // 일치도를 시총보다 앞에 두는 이유: 사용자가 정확히 친 이름을 대형주가 밀어내면 안 된다.
+    // 시총이 없는 기업(-1)은 있는 기업보다 항상 뒤 — 동점이면 안정 정렬로 티커 오름차순 유지.
+    scored.sort((a, b) =>
+      a.score - b.score
+      || (b.cap == null ? -1 : b.cap) - (a.cap == null ? -1 : a.cap)
+      || a.nameIdx - b.nameIdx
+    );
     return scored.slice(0, 5);
   }, [query, index]);
 
@@ -3401,7 +3438,7 @@ function CompanySearch({ onSelect }) {
   }
 
   return (
-    <div className="company-search" ref={boxRef}>
+    <div className={"company-search" + (align === 'right' ? ' is-right' : '')} ref={boxRef}>
       <div className="company-search-box">
         <span className="company-search-icon">⌕</span>
         <input
@@ -3427,8 +3464,16 @@ function CompanySearch({ onSelect }) {
                 onMouseEnter={() => setHighlightIdx(i)}
                 onMouseDown={(e) => { e.preventDefault(); pick(c); }}
               >
-                <span className="cs-name">{highlightMatch(c.name, c.nameIdx, c.matchLen)}</span>
-                <span className="cs-meta">{c.ticker}{c.market ? ' · ' + c.market : ''}</span>
+                <span className="cs-main">
+                  <span className="cs-name">{highlightMatch(c.name, c.nameIdx, c.matchLen)}</span>
+                  {c.partial && <span className="cs-partial" title="EQS 재무분석 탭은 아직 준비 중이에요">준비중</span>}
+                </span>
+                <span className="cs-meta">
+                  {c.cap != null && window.DiscloseAI && window.DiscloseAI.trillionLabel && (
+                    <span className="cs-cap">{window.DiscloseAI.trillionLabel(c.cap)}</span>
+                  )}
+                  {c.ticker}{c.market ? ' · ' + c.market : ''}
+                </span>
               </div>
             ))
           ) : (
@@ -3436,6 +3481,56 @@ function CompanySearch({ onSelect }) {
           )}
         </div>
       )}
+    </div>
+  );
+}
+
+// ─── Overlay header (전역 크롬) ─────────────────────────────────────────────
+// UX-036: 풀스크린 오버레이 3종(CORPORATION DOSSIER · DISCLOSURE DOSSIER · 공시 상세)이
+// 각자 헤더 마크업을 복붙해 갖고 있었고, 그 헤더엔 로고도 검색도 없었다. 그래서 PR #90이
+// 붙인 "로고=홈 / 전역 기업검색"은 TopTabs가 뜨는 화면에서만 동작했고, 정작 사용자가 가장
+// 오래 머무는 기업 상세에서는 ✕ CLOSE로 빠져나와야만 다른 기업을 찾을 수 있었다.
+// → 헤더를 이 컴포넌트 하나로 합치고, 로고·검색을 전 표면 공통 크롬으로 승격한다.
+//
+// 세 오버레이의 차이는 accent 색·라벨·부가정보뿐이라 그것만 props로 받는다. 테두리
+// 불투명도는 원래 `+'33'` / `rgba(...,0.2)` / `rgba(...,0.25)`로 미세하게 달랐는데,
+// 눈으로 구분되지 않는 차이라 accent 기반 hex 알파(33/40)로 통일했다.
+//
+// zIndex: 검색 드롭다운(.company-search-drop)이 아래 본문(iframe 포함) 위에 그려지려면
+// 헤더가 형제 중 위에 있어야 한다 — 같은 스태킹 문맥이므로 헤더에 z-index를 준다.
+function OverlayHeader({ accent, label, ticker, meta, extra, onClose, onHome, onSelectCompany }) {
+  const mono = { fontFamily: 'var(--font-mono,monospace)' };
+  return (
+    <div style={{
+      position: 'relative', zIndex: 30,
+      display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16,
+      padding: '10px 20px', borderBottom: '1px solid ' + accent + '33',
+      background: 'rgba(8,14,26,0.9)', flexShrink: 0,
+    }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12, minWidth: 0 }}>
+        {onHome && (
+          <>
+            <div className="top-brand-clickable" onClick={onHome} title="홈으로">
+              <div className="top-brand-mark">◉</div>
+              <div className="top-brand-name">DISCLOSE<span style={{ color: '#74EEC6' }}>AI</span></div>
+            </div>
+            <span style={{ width: 1, height: 16, background: 'rgba(140,170,210,0.22)', flex: 'none' }} />
+          </>
+        )}
+        <span style={{ width: 8, height: 8, borderRadius: '50%', background: accent, boxShadow: '0 0 8px ' + accent, display: 'inline-block', flex: 'none' }} />
+        <span style={{ ...mono, fontSize: 11, letterSpacing: '0.12em', color: accent, whiteSpace: 'nowrap' }}>{label}</span>
+        {ticker && <span style={{ ...mono, fontSize: 10, color: '#64748b', letterSpacing: '0.06em' }}>· {ticker}</span>}
+        {meta && <span style={{ fontSize: 10, color: '#475569' }}>· {meta}</span>}
+        {extra}
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12, flex: 'none' }}>
+        {onSelectCompany && <CompanySearch onSelect={onSelectCompany} align="right" />}
+        <button onClick={onClose} style={{
+          background: 'transparent', border: '1px solid ' + accent + '40',
+          color: '#94a3b8', ...mono, fontSize: 11,
+          padding: '4px 14px', cursor: 'pointer', letterSpacing: '0.08em', borderRadius: 2,
+        }}>✕ CLOSE</button>
+      </div>
     </div>
   );
 }
@@ -4370,12 +4465,11 @@ function App() {
   const [discFullOverlayTicker, setDiscFullOverlayTicker] = useState(null);
   const [dossierTab, setDossierTab] = useState('business');
 
-  // 전역 기업 검색(TopTabs 검색창) → 선택 시 이동.
-  // 그래프에 있는 기업(top50)은 selectGhost로 섹터·관계도 미니 뷰까지 재현하고,
-  // 그 밖의 기업(company_master 전체 ~2,700개)은 CORPORATION DOSSIER 오버레이로 바로 진입.
+  // 전역 기업 검색(TopTabs·오버레이 헤더 검색창) → 선택 시 이동.
+  // 섹터 identity를 찾을 수 있으면(사실상 전 종목) selectGhost로 섹터·관계도 미니 뷰까지
+  // 재현하고, 못 찾을 때만(신규상장 미동기화 등) CORPORATION DOSSIER 오버레이로 직행한다.
   const goToCompanyFromSearch = useCallback((code) => {
     if (!code) return;
-    setActiveTab('finance');
     const RD = window.__realData || {};
     // selectGhost는 내부적으로 nodeByCode(그래프 상위 ~400개사)로만 섹터를 찾는다 —
     // 그 밖의 전 종목(~2,650개, "dot" 기업 포함)은 indexByCode에 섹터(.s)가 이미 있으므로
@@ -4388,13 +4482,37 @@ function App() {
     const idxSectorKo = RD.indexByCode && RD.indexByCode[code] && RD.indexByCode[code].s;
     const sectorKo = nodeSectorKo || idxSectorKo;
     const targetSector = sectorKo ? SECTOR_PALETTE.find(p => p.ko === sectorKo) : null;
+
+    // UX-036: 검색창이 오버레이 헤더에도 생겼으므로, **어디서 검색했는지**에 따라 착지가
+    // 달라져야 한다. 예전엔 배경 상태만 바꿔서, 오버레이가 열린 채 헤더는 옛 기업을
+    // 가리키고 배경만 새 기업으로 바뀌는 어긋남이 생겼다.
+    //
+    // ① CORPORATION/DISCLOSURE DOSSIER 안에서 검색 → 그 DOSSIER 맥락을 유지한 채
+    //    대상만 교체한다("다른 기업도 같은 화면으로 보고 싶다"는 의도). 배경도 함께
+    //    맞춰 두어 나중에 ✕ CLOSE로 나갔을 때 그 기업의 관계도로 이어지게 한다.
+    // ② 공시 '상세'는 특정 공시 1건에 매인 화면이라 교체할 대상이 없다 → 닫고 ③으로.
+    // ③ 배경 화면에서 검색 → 섹터를 찾으면 관계도로, 못 찾으면 DOSSIER 오버레이로.
+    if (corpOverlayTicker) {
+      setCorpOverlayTicker(code);
+      setDossierTab('business');
+      if (targetSector) selectGhost(code, targetSector.id);
+      return;
+    }
+    if (discFullOverlayTicker) {
+      setDiscFullOverlayTicker(code);
+      if (targetSector) selectGhost(code, targetSector.id);
+      return;
+    }
+    if (discDetailItem) setDiscDetailItem(null);
+
+    setActiveTab('finance');
     if (targetSector) {
       selectGhost(code, targetSector.id);
     } else {
       setCorpOverlayTicker(code);
       setDossierTab('business');
     }
-  }, [selectGhost]);
+  }, [selectGhost, corpOverlayTicker, discFullOverlayTicker, discDetailItem]);
 
   // 좌상단 DISCLOSEAI 로고 클릭 → 어느 화면에서든 홈(갤럭시 최상위)으로 복귀.
   const goHome = useCallback(() => {
@@ -4694,24 +4812,15 @@ function App() {
           background:'rgba(2,4,12,0.88)', backdropFilter:'blur(18px)',
           display:'flex', flexDirection:'column',
         }}>
-          {/* Header bar — 산업군 색 테마(sectorAccent) */}
-          <div style={{
-            display:'flex', alignItems:'center', justifyContent:'space-between',
-            padding:'10px 20px', borderBottom:'1px solid ' + sectorAccent + '33',
-            background:'rgba(8,14,26,0.9)', flexShrink:0,
-          }}>
-            <div style={{display:'flex', alignItems:'center', gap:12}}>
-              <span style={{width:8,height:8,borderRadius:'50%',background:sectorAccent,boxShadow:'0 0 8px '+sectorAccent, display:'inline-block'}} />
-              <span style={{fontFamily:'var(--font-mono,monospace)',fontSize:11,letterSpacing:'0.12em',color:sectorAccent}}>CORPORATION DOSSIER</span>
-              <span style={{fontFamily:'var(--font-mono,monospace)',fontSize:10,color:'#64748b',letterSpacing:'0.06em'}}>· {corpOverlayTicker}</span>
-            </div>
-            <button onClick={() => setCorpOverlayTicker(null)} style={{
-              background:'transparent', border:'1px solid ' + sectorAccent + '40',
-              color:'#94a3b8', fontFamily:'var(--font-mono,monospace)', fontSize:11,
-              padding:'4px 14px', cursor:'pointer', letterSpacing:'0.08em',
-              borderRadius:2,
-            }}>✕ CLOSE</button>
-          </div>
+          {/* Header bar — 산업군 색 테마(sectorAccent) + UX-036 공통 크롬(로고=홈·전역 검색) */}
+          <OverlayHeader
+            accent={sectorAccent}
+            label="CORPORATION DOSSIER"
+            ticker={corpOverlayTicker}
+            onClose={() => setCorpOverlayTicker(null)}
+            onHome={goHome}
+            onSelectCompany={goToCompanyFromSearch}
+          />
           {/* Tab bar — DOSSIER_TABS (D1), 활성 탭 = 산업군 색 */}
           <div style={{display:'flex', padding:'0 20px', flexShrink:0, background:'rgba(5,6,13,0.95)', borderBottom:'1px solid rgba(140,170,210,0.13)'}}>
             {DOSSIER_TABS.map((tab) => {
@@ -4781,11 +4890,21 @@ function App() {
       )}
 
       {discDetailItem && (
-        <DisclosureDetailOverlay disc={discDetailItem} onClose={() => setDiscDetailItem(null)} />
+        <DisclosureDetailOverlay
+          disc={discDetailItem}
+          onClose={() => setDiscDetailItem(null)}
+          onHome={goHome}
+          onSelectCompany={goToCompanyFromSearch}
+        />
       )}
 
       {discFullOverlayTicker && (
-        <DisclosureFullOverlay ticker={discFullOverlayTicker} onClose={() => setDiscFullOverlayTicker(null)} />
+        <DisclosureFullOverlay
+          ticker={discFullOverlayTicker}
+          onClose={() => setDiscFullOverlayTicker(null)}
+          onHome={goHome}
+          onSelectCompany={goToCompanyFromSearch}
+        />
       )}
 
       <TweaksPanel>

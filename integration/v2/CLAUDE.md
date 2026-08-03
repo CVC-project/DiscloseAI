@@ -38,7 +38,7 @@ const DOSSIER_TABS = [   // 순서 = 화면 탭 순서. 기본 랜딩 = dossierT
   { id:'eqs',      label:'EQS 재무분석', src:'firm.html',    context:'finance',  activeWhen:'always'  }, // ③
 ];
 ```
-→ **탭 추가/재정렬 = 배열만 수정** (bundle.jsx 재수술 불요). `activeWhen:'hasData'`는 **매니페스트 `../dossier/data/galaxy_index.json`** 을 fetch한 `galaxyTickers`(state)로 판정, 없으면 "· 준비중" 비활성. **새 골든 추가 = `python integration/dossier/build_galaxy_index.py` 재실행**(galaxy_*.json 스캔 → 매니페스트 갱신)만으로 UI 자동 반영 — 코드 수정 불요. 현재 6본(005930·000660·035420·068270·005380·051910). 기본 탭은 `dossierTab` useState 초기값·`enterCorporation`·딥링크 리셋 3곳(모두 `'business'`).
+→ **탭 추가/재정렬 = 배열만 수정** (bundle.jsx 재수술 불요). `activeWhen:'hasData'`는 **매니페스트 `../dossier/data/galaxy_index.json`** 을 fetch한 `galaxyTickers`(state)로 판정, 없으면 "· 준비중" 비활성. **새 골든 추가 = `python integration/dossier/build_galaxy_index.py` 재실행**(galaxy_*.json 스캔 → 매니페스트 갱신)만으로 UI 자동 반영 — 코드 수정 불요. 현재 **12본**(000660·000720·005380·005930·010130·011200·012450·017670·033780·035420·051910·068270 — 매니페스트 실측 2026-08-03). 기본 탭은 `dossierTab` useState 초기값·`enterCorporation`·딥링크 리셋 3곳(모두 `'business'`).
 
 - **탭① 사업·기업**: `../dossier/business.html?ticker=<t>` (kospi50_business_tabs 이식·데이터 구동, `business_<t>.json` fetch). **injectV2Theme 미적용** — 자체 `:root`(galaxy 토큰 스왑) + `tokens.css` 정적 link. rail·자체 3탭 제거, industryKey 우선순위 수정.
 - **탭② 현금 은하수**: `../dossier/galaxy.html?ticker=<t>` (해방판 이식·데이터 구동, `galaxy_<t>.json` fetch). **injectV2Theme 미적용** — 자체 `:root`(Mint 표준) + `tokens.css`.
