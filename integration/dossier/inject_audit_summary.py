@@ -47,9 +47,7 @@ def load_audit_by_corp(db_path: str) -> dict[str, dict]:
     con = sqlite3.connect(db_path)
     con.row_factory = sqlite3.Row
     cur = con.cursor()
-    cur.execute(
-        "SELECT corp_code, audit_opinion, kam, emphasis FROM company_summary"
-    )
+    cur.execute("SELECT corp_code, audit_opinion, kam, emphasis FROM company_summary")
     out: dict[str, dict] = {}
     for row in cur.fetchall():
         corp_code = str(row["corp_code"] or "").zfill(8)
