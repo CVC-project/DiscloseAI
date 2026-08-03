@@ -3307,15 +3307,15 @@ function useStockQuote(ticker) {
 // 전 상장사(company_master.json, ~2,700개) 대상 기업명 검색 + 자동완성.
 // 시가총액 데이터가 리포지토리 어디에도 없어(top50 eqs_summary조차 market_cap 전부 null)
 // 정렬은 일치도순(정확일치 > 접두일치 > 부분일치 > 티커일치)으로 처리한다.
-function highlightMatch(name, query) {
-  if (!query) return name;
-  const idx = name.indexOf(query);
-  if (idx === -1) return name;
+// idx·len은 매칭 단계(results useMemo)에서 대소문자 무시로 이미 찾아둔 위치를 그대로 받는다 —
+// 여기서 다시 원문 대소문자로 name.indexOf(query)를 하면 "lg" 같은 소문자 입력이 안 걸린다.
+function highlightMatch(name, idx, len) {
+  if (idx == null || idx < 0 || !len) return name;
   return (
     <>
       {name.slice(0, idx)}
-      <mark>{name.slice(idx, idx + query.length)}</mark>
-      {name.slice(idx + query.length)}
+      <mark>{name.slice(idx, idx + len)}</mark>
+      {name.slice(idx + len)}
     </>
   );
 }
@@ -3336,7 +3336,7 @@ function CompanySearch({ onSelect }) {
         if (!alive || !d || !Array.isArray(d.companies)) return;
         setIndex(d.companies
           .filter(c => c.company_name && c.ticker)
-          .map(c => ({ ticker: c.ticker, name: c.company_name, market: c.market || '' })));
+          .map(c => ({ ticker: c.ticker, name: c.company_name, nameLower: c.company_name.toLowerCase(), market: c.market || '' })));
       })
       .catch(() => {});
     return () => { alive = false; };
@@ -3355,16 +3355,19 @@ function CompanySearch({ onSelect }) {
   const results = useMemo(() => {
     const q = query.trim();
     if (!q || !index) return [];
+    // 영문 대소문자 무시 매칭 — "lg"를 쳐도 "LG전자"가 걸리게. 한글은 대소문자가 없어 영향 없음.
+    const qLower = q.toLowerCase();
     const scored = [];
     for (const c of index) {
-      const nameIdx = c.name.indexOf(q);
+      const nameIdx = c.nameLower.indexOf(qLower);
       let score;
-      if (c.name === q) score = 0;
+      if (c.nameLower === qLower) score = 0;
       else if (nameIdx === 0) score = 1;
       else if (nameIdx > 0) score = 2;
       else if (c.ticker.startsWith(q)) score = 3;
       else continue;
-      scored.push({ ...c, score, nameIdx: nameIdx === -1 ? 0 : nameIdx });
+      // matchLen: 이름에 실제로 일치한 구간이 있을 때만(score 3=티커일치는 이름 하이라이트 대상 아님).
+      scored.push({ ...c, score, nameIdx: nameIdx === -1 ? 0 : nameIdx, matchLen: nameIdx === -1 ? 0 : qLower.length });
     }
     // 시가총액 데이터가 없어 순수 일치도(스코어 → 일치 위치)로만 정렬 — 그 외 임의 기준(이름 길이 등) 미사용.
     // 동점이면 Array.sort의 안정 정렬 특성상 company_master.json 원본(티커 오름차순) 순서를 그대로 따른다.
@@ -3424,7 +3427,7 @@ function CompanySearch({ onSelect }) {
                 onMouseEnter={() => setHighlightIdx(i)}
                 onMouseDown={(e) => { e.preventDefault(); pick(c); }}
               >
-                <span className="cs-name">{highlightMatch(c.name, query.trim())}</span>
+                <span className="cs-name">{highlightMatch(c.name, c.nameIdx, c.matchLen)}</span>
                 <span className="cs-meta">{c.ticker}{c.market ? ' · ' + c.market : ''}</span>
               </div>
             ))
@@ -4374,9 +4377,19 @@ function App() {
     if (!code) return;
     setActiveTab('finance');
     const RD = window.__realData || {};
-    const inGraph = RD.nodeByCode && RD.nodeByCode[code];
-    if (inGraph) {
-      selectGhost(code);
+    // selectGhost는 내부적으로 nodeByCode(그래프 상위 ~400개사)로만 섹터를 찾는다 —
+    // 그 밖의 전 종목(~2,650개, "dot" 기업 포함)은 indexByCode에 섹터(.s)가 이미 있으므로
+    // 여기서 직접 찾아 sectorId를 넘겨주면 selectGhost가 그 조회를 건너뛰고 그대로 쓴다.
+    // 관계도(지배구조·밸류체인)는 티커별 ego/<ticker>.json을 따로 fetch하는 구조라
+    // nodeByCode에 없는 회사도 정상적으로 그려진다 — CompanyOverviewPanel/EgoView가
+    // indexByCode 폴백(UX-009)으로 이미 지원함. 진짜로 identity를 못 찾을 때만
+    // (신규상장 미동기화 등) CORPORATION DOSSIER 오버레이로 바로 보낸다.
+    const nodeSectorKo = RD.nodeByCode && RD.nodeByCode[code] && RD.nodeByCode[code].s;
+    const idxSectorKo = RD.indexByCode && RD.indexByCode[code] && RD.indexByCode[code].s;
+    const sectorKo = nodeSectorKo || idxSectorKo;
+    const targetSector = sectorKo ? SECTOR_PALETTE.find(p => p.ko === sectorKo) : null;
+    if (targetSector) {
+      selectGhost(code, targetSector.id);
     } else {
       setCorpOverlayTicker(code);
       setDossierTab('business');
