@@ -71,13 +71,18 @@ html, body, #root { margin: 0px; padding: 0px; width: 100%; height: 100%; backgr
 }
 /* UX-031: 브레드크럼이 절대 줄바꿈하지 않도록 좌측 트랙을 minmax(0,1fr)로 —
    기본 `1fr`은 min-width:auto라 내용이 길면 트랙이 밀려 2줄로 접혔다. */
-.top-tabs { position: absolute; top: 0px; left: 0px; right: 0px; z-index: 10; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; padding: 22px 32px; background: linear-gradient(rgba(2, 3, 10, 0.88), rgba(2, 3, 10, 0)); pointer-events: none; }
+.top-tabs { --chrome-h: 52px; position: absolute; top: 0px; left: 0px; right: 0px; z-index: 10; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; padding: 22px 20px; background: linear-gradient(rgba(2, 3, 10, 0.88), rgba(2, 3, 10, 0)); pointer-events: none; }
 .top-tabs > * { pointer-events: auto; }
-.top-tabs-brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
-.top-brand-mark { width: 28px; height: 28px; border: 1px solid var(--cyan); border-radius: 50%; display: grid; place-items: center; font-size: 11px; color: var(--cyan); box-shadow: rgba(116, 238, 198, 0.3) 0px 0px 16px; flex: none; }
-.top-brand-name { font-family: var(--font-display); font-size: 14px; font-weight: 600; letter-spacing: 0.14em; color: rgb(255, 255, 255); white-space: nowrap; flex: none; }
-.top-tabs-row { display: flex; gap: 0px; background: rgba(8, 12, 24, 0.4); backdrop-filter: blur(20px); border: 1px solid var(--line); padding: 6px; border-radius: 2px; }
-.top-tab { position: relative; padding: 10px 26px 8px; cursor: pointer; text-align: center; transition: 180ms; }
+.top-tabs-brand { display: flex; align-items: center; gap: 12px; min-width: 0; padding-left: 12px; }
+.top-brand-clickable { display: flex; align-items: center; gap: 12px; min-width: 0; cursor: pointer; }
+.top-brand-clickable:hover .top-brand-mark { box-shadow: rgba(116, 238, 198, 0.55) 0px 0px 20px; }
+.top-brand-clickable:hover .top-brand-name { opacity: 0.85; }
+.top-brand-mark { width: 28px; height: 28px; border: 1px solid var(--cyan); border-radius: 50%; display: grid; place-items: center; font-size: 11px; color: var(--cyan); box-shadow: rgba(116, 238, 198, 0.3) 0px 0px 16px; flex: none; transition: box-shadow 180ms; }
+.top-brand-name { font-family: var(--font-display); font-size: 14px; font-weight: 600; letter-spacing: 0.14em; color: rgb(255, 255, 255); white-space: nowrap; flex: none; transition: opacity 180ms; }
+/* UX-040: 탭 박스·검색창·지수 패널은 --chrome-h 한 값을 공유한다(상단 크롬 3요소 높이 통일).
+   탭 높이는 내부 패딩 합이 아니라 박스 높이가 결정하고, 라벨은 세로 중앙 정렬로 따라간다. */
+.top-tabs-row { height: var(--chrome-h); box-sizing: border-box; display: flex; align-items: stretch; gap: 0px; background: rgba(8, 12, 24, 0.4); backdrop-filter: blur(20px); border: 1px solid var(--line); padding: 4px; border-radius: 2px; }
+.top-tab { position: relative; display: flex; flex-direction: column; justify-content: center; padding: 0 26px; cursor: pointer; text-align: center; transition: 180ms; }
 .top-tab-en { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.24em; color: var(--text-3); transition: color 180ms; }
 .top-tab-ko { font-size: 10px; color: var(--text-3); margin-top: 2px; letter-spacing: 0.04em; opacity: 0.7; }
 .top-tab:hover .top-tab-en { color: var(--text-1); }
@@ -85,7 +90,14 @@ html, body, #root { margin: 0px; padding: 0px; width: 100%; height: 100%; backgr
 .top-tab.is-active .top-tab-en { color: var(--cyan); }
 .top-tab.is-active .top-tab-ko { color: var(--text-1); opacity: 1; }
 .top-tab.is-active::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: -1px; height: 1px; background: var(--cyan); box-shadow: 0 0 8px var(--cyan); }
-.top-tabs-center { display: flex; align-items: center; gap: 12px; }
+.top-tabs-center { display: flex; align-items: center; }
+/* UX-038: 검색창은 탭 그룹이 아니라 지수 패널 왼쪽에 붙어 우측 정렬군을 이룬다.
+   align-items:stretch — 검색 박스 높이를 2행짜리 지수 패널에 맞춘다. */
+.top-tabs-right { justify-self: stretch; display: flex; align-items: stretch; }
+/* UX-039: 검색창은 탭 그룹과 지수 패널 **사이 여백의 중앙**. 슬롯이 남는 폭을 전부 먹고
+   그 안에서 중앙 정렬 — 드롭다운 앵커(.company-search)는 검색 박스 크기 그대로 유지한다. */
+.top-search-slot { flex: 1; display: flex; align-items: stretch; justify-content: center; padding: 0 12px; }
+.top-tabs-status { flex: none; height: var(--chrome-h); box-sizing: border-box; align-content: center; }
 /* UX-030: .top-back-btn / .top-back-arrow 규칙 제거 — 상단 BACK 버튼 폐지(ESC와 중복). */
 /* UX-029: 지수 패널을 5열 그리드로 — 행(.index-row)은 display:contents로 격자에 녹여
    KOSPI/KOSDAQ 두 줄의 열 폭을 공유시킨다. 라벨=좌측 정렬, 수치·%·갱신표기=우측 정렬.
@@ -98,6 +110,31 @@ html, body, #root { margin: 0px; padding: 0px; width: 100%; height: 100%; backgr
 .kospi-delta.up { color: #4ade80; }
 .kospi-delta.down { color: #fb7185; }
 .kospi-time { color: #64748b; font-size: 10px; letter-spacing: .02em; white-space: nowrap; text-align: right; }
+
+/* Global company search — TopTabs(탭 그룹 오른쪽) + UX-036 오버레이 헤더 공통 */
+.company-search { position: relative; display: flex; align-items: stretch; }
+.company-search-box { flex: 1; display: flex; align-items: center; gap: 6px; background: rgba(8, 12, 24, 0.4); backdrop-filter: blur(20px); border: 1px solid var(--line); border-radius: 2px; padding: 8px 12px; transition: border-color 180ms; }
+.company-search-box:focus-within { border-color: var(--cyan); }
+.company-search-icon { color: var(--text-3); font-size: 12px; }
+.company-search-input { background: none; border: none; outline: none; color: var(--text-1); font-family: var(--font-mono); font-size: 12px; letter-spacing: .04em; width: 116px; transition: width 180ms; }
+.company-search-input::placeholder { color: var(--text-3); }
+.company-search-box:focus-within .company-search-input { width: 164px; }
+.company-search-drop { position: absolute; top: calc(100% + 6px); left: 0; min-width: 240px; background: rgba(6, 10, 20, 0.97); backdrop-filter: blur(20px); border: 1px solid var(--line); border-radius: 2px; overflow: hidden; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5); z-index: 20; }
+.company-search-item { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 9px 12px; cursor: pointer; }
+.company-search-item.is-active, .company-search-item:hover { background: rgba(116, 238, 198, 0.1); }
+.cs-main { display: flex; align-items: baseline; min-width: 0; }
+.cs-name { font-size: 12px; color: var(--text-1); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.cs-name mark { background: none; color: var(--cyan); font-weight: 700; }
+.company-search-item.is-active .cs-name { color: var(--cyan); }
+.cs-meta { display: flex; align-items: baseline; gap: 8px; font-family: var(--font-mono); font-size: 10px; color: var(--text-3); white-space: nowrap; flex-shrink: 0; }
+.company-search-empty { padding: 12px; font-size: 11px; color: var(--text-3); text-align: center; font-family: var(--font-mono); }
+/* UX-036: 오버레이 헤더는 검색창이 화면 오른쪽 끝이라 드롭다운을 오른쪽 정렬 — 기본(left:0)이면 뷰포트를 넘는다 */
+.company-search.is-right .company-search-drop { left: auto; right: 0; }
+/* FN-017: 시총(universe named 400사만 보유) — 정렬 근거를 목록에서 눈으로 확인할 수 있게 표기 */
+.cs-cap { color: var(--cyan); opacity: .75; }
+/* has_dossier=false(23사) — 사업·기업 탭은 열리지만 EQS 탭은 아직 없다는 사전 고지 */
+.cs-partial { flex: none; margin-left: 6px; padding: 1px 5px; border: 1px solid rgba(148, 163, 184, .35); border-radius: 2px; font-family: var(--font-mono); font-size: 9px; letter-spacing: .06em; color: var(--text-3); }
+
 .solar-stage { position: absolute; inset: 0px; z-index: 2; }
 .solar-canvas { position: absolute; inset: 0px; width: 100%; height: 100%; display: block; }
 .solar-labels { position: absolute; inset: 0px; pointer-events: none; z-index: 3; }
@@ -301,7 +338,7 @@ html, body, #root { margin: 0px; padding: 0px; width: 100%; height: 100%; backgr
 .company-label.is-active .company-label-name { font-size: 14px; }
 /* UX-031: 브레드크럼은 항상 한 줄 — 기업명·섹터명이 길면 줄바꿈이 아니라 말줄임(…)으로 자른다.
    flex-shrink는 GALAXY(첫 크럼)를 제외한 나머지가 분담해, 뿌리 라벨은 온전히 남는다. */
-.top-breadcrumb { margin-left: 16px; padding-left: 16px; border-left: 1px solid rgba(148, 163, 184, 0.15); display: flex; flex-wrap: nowrap; align-items: center; gap: 8px; min-width: 0; overflow: hidden; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.14em; color: var(--text-3); }
+.top-breadcrumb { flex: 1 1 auto; justify-content: center; margin-left: 20px; padding-right: 28px; display: flex; flex-wrap: nowrap; align-items: center; gap: 8px; min-width: 0; overflow: hidden; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.14em; color: var(--text-3); }
 .top-breadcrumb .crumb { color: var(--text-3); flex: 0 1 auto; min-width: 3.5em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .top-breadcrumb .crumb:first-child,
 .top-breadcrumb .crumb.is-fixed { flex: none; min-width: 0; }
@@ -469,201 +506,6 @@ html, body, #root { margin: 0px; padding: 0px; width: 100%; height: 100%; backgr
   letter-spacing: .06em;
 }
 .disc-back-link:hover { color: #fff; }
-
-/* ===== TIME MACHINE TAB ===== */
-
-.tm-corp-head {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-.tm-date-chip {
-  display: inline-block;
-  font-family: var(--font-mono, monospace);
-  font-size: 9px;
-  color: #fbbf24;
-  border: 1px solid rgba(251,191,36,0.35);
-  border-radius: 2px;
-  padding: 1px 6px;
-}
-.tm-cat-badge {
-  display: inline-block;
-  font-family: var(--font-mono, monospace);
-  font-size: 9px;
-  color: #a78bfa;
-  border: 1px solid rgba(167,139,250,0.35);
-  border-radius: 2px;
-  padding: 1px 6px;
-}
-.tm-title {
-  font-size: 14px;
-  font-weight: 700;
-  color: #f1f5f9;
-  line-height: 1.4;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.tm-context {
-  font-size: 11px;
-  color: #64748b;
-  line-height: 1.55;
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.tm-answers {
-  display: flex;
-  gap: 8px;
-  margin-top: 4px;
-}
-.tm-btn {
-  flex: 1;
-  padding: 10px 4px;
-  border-radius: 2px;
-  font-family: var(--font-mono, monospace);
-  font-size: 11px;
-  letter-spacing: .06em;
-  cursor: pointer;
-  background: transparent;
-  transition: background 150ms, border-color 150ms;
-}
-.tm-btn-bad  { border: 1px solid rgba(248,113,113,0.45); color: #f87171; }
-.tm-btn-bad:hover  { background: rgba(248,113,113,0.1); }
-.tm-btn-neutral { border: 1px solid rgba(100,116,139,0.45); color: #94a3b8; }
-.tm-btn-neutral:hover { background: rgba(100,116,139,0.1); }
-.tm-btn-good { border: 1px solid rgba(74,222,128,0.45); color: #4ade80; }
-.tm-btn-good:hover { background: rgba(74,222,128,0.1); }
-
-.tm-verdict {
-  display: inline-block;
-  font-family: var(--font-mono, monospace);
-  font-size: 11px;
-  letter-spacing: .1em;
-  border: 1px solid;
-  border-radius: 2px;
-  padding: 3px 10px;
-}
-.tm-result-num {
-  font-family: var(--font-mono, monospace);
-  font-size: 40px;
-  font-weight: 700;
-  line-height: 1;
-}
-.tm-result-sub {
-  font-family: var(--font-mono, monospace);
-  font-size: 10px;
-  color: #64748b;
-  letter-spacing: .06em;
-}
-.tm-explanation {
-  font-size: 11px;
-  color: #94a3b8;
-  line-height: 1.6;
-  max-height: 90px;
-  overflow-y: auto;
-}
-.tm-reveal-actions {
-  display: flex;
-  gap: 8px;
-}
-.tm-dart-btn {
-  padding: 8px 12px;
-  border: 1px solid rgba(251,191,36,0.35);
-  background: transparent;
-  color: #fbbf24;
-  font-family: var(--font-mono, monospace);
-  font-size: 10px;
-  cursor: pointer;
-  border-radius: 2px;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  transition: background 150ms;
-}
-.tm-dart-btn:hover { background: rgba(251,191,36,0.1); }
-.tm-next-btn {
-  flex: 1;
-  padding: 8px;
-  background: rgba(116, 238, 198,0.12);
-  border: 1px solid rgba(116, 238, 198,0.35);
-  color: #74EEC6;
-  font-family: var(--font-mono, monospace);
-  font-size: 11px;
-  letter-spacing: .1em;
-  cursor: pointer;
-  border-radius: 2px;
-  transition: background 150ms;
-}
-.tm-next-btn:hover { background: rgba(116, 238, 198,0.22); }
-
-.score-acc-bar-wrap {
-  width: 100%;
-  height: 4px;
-  background: rgba(116, 238, 198,0.1);
-  border-radius: 2px;
-  overflow: hidden;
-}
-.score-acc-bar {
-  height: 100%;
-  background: #74EEC6;
-  border-radius: 2px;
-  transition: width 600ms ease-out;
-}
-.score-hist-row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 3px 0;
-  border-bottom: 1px solid rgba(116, 238, 198,0.06);
-}
-
-.tm-cat-chip {
-  display: inline-block;
-  font-family: var(--font-mono, monospace);
-  font-size: 9px;
-  letter-spacing: .05em;
-  color: #64748b;
-  border: 1px solid rgba(100,116,139,0.3);
-  border-radius: 2px;
-  padding: 3px 8px;
-  cursor: pointer;
-  background: transparent;
-  transition: color 120ms, border-color 120ms, background 120ms;
-}
-.tm-cat-chip:hover { color: #a78bfa; border-color: rgba(167,139,250,0.4); }
-.tm-cat-chip.is-active { color: #a78bfa; border-color: rgba(167,139,250,0.5); background: rgba(167,139,250,0.1); }
-
-.sc-idx-row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 10px;
-  cursor: pointer;
-  border-bottom: 1px solid rgba(116, 238, 198,0.06);
-  transition: background 120ms;
-}
-.sc-idx-row:hover { background: rgba(116, 238, 198,0.04); }
-.sc-idx-row.is-active {
-  background: rgba(116, 238, 198,0.06);
-  border-left: 3px solid #74EEC6;
-  padding-left: 7px;
-}
-.sc-idx-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  border: 1px solid #475569;
-  flex-shrink: 0;
-}
-.sc-idx-dot.done {
-  background: #74EEC6;
-  border-color: #74EEC6;
-  box-shadow: 0 0 5px #74EEC6;
-}
 
 /* ===== DISCLOSURE SUMMARY SECTIONS ===== */
 
