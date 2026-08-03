@@ -1,75 +1,28 @@
-# 다음 세션 프롬프트 — T1 산업 골든 배치 **완주** (브랜치 `feat/report-phase5`)
+# 다음 세션 프롬프트 — Wave 2 신규 산업 T1 골든 8본 (브랜치 `feat/golden-wave2-industries`)
 
-> 이 파일은 다음 세션에 붙여넣을 핸드오프다. **T1 12본 배치는 완주**됐다 — 아래는 마감 상태·다음 단계.
+> 이 파일은 다음 세션에 붙여넣을 핸드오프다. 갱신: 2026-08-03.
 
-## 완주 상태 (2026-07-18)
-- **골든 완주 12본**(`check_golden --all` 12본 갭 0·각 `--strict` 0): 삼성 005930(**T0 정본**) + **T1 11사** SK 000660·현대차 005380·LG 051910·셀트리온 068270·NAVER 035420(V-070~075)·한화에어로 012450(V-076)·**SKT 017670(V-077)·HMM 011200(V-078)·KT&G 033780(V-079)·고려아연 010130(V-080)·현대건설 000720(V-081)** — 전부 V-062~069 삼성 패리티.
-- **이번 배치(V-077~081, 커밋 66e7134·30c5f7e·dc5f632·d1c9b5c·362ba06, 전부 origin push)**:
-  - **처음부터 빌드 3본**: SKT(통신 lump-opex·침해사고 valley·기타불입자본 -12.13조 인적분할)·HMM(해운 운임 사이클·선박/용선·톤세·자기주식 소각·**V-058 재섹션**으로 주19-1 선박 복원)·KT&G(담배 캐시카우·홍삼 재고·주주환원 초과·초인플레이션·**cf-wc 정상분리 첫 케이스**).
-  - **구표준→T0 패리티 uplift 2본**: 고려아연(제련·유상증자·파생헤지)·현대건설(건설 진행기준·계약자산/부채 양면·PF보증). **uplift 레시피 확립**: 기존 산문 유지 + 승격 dive `.row/.hl`·note_dive·excluded 인용 → `--strict` 커버리지 갭 0.
-- 각 5게이트 PASS(check_golden --strict 0·--all 12본 0·accuracy REFUTED 0·completeness T0 패리티·pytest 9/9). corps.csv tier·galaxy_index(12본)·report_*.json(SKT/HMM/KT&G 신규) 갱신.
+## 현재 상태
 
-## 리더 검수 반영 (2026-07-19~20, 완주 후)
-- **V-082 BS 실계정-행-앵커 게이트(§10)** — 충당부채·순확정급여·이연법인세·재고·무형·관계기업 등 fs_account 재무상태표 실계정이 잔차 흡수·부록 잔류하던 것 근절. `check_golden --strict §10`이 강제(삼성 T0 캘리브레이션). T1 전본 행 신설+승격. V-070 오선례 폐기.
-- **V-083 Zone E 데이터 구동화** — `buildPanelE` 신설로 자본변동표 정적 7행 템플릿(라벨-값 불일치) 해소. `panels.E` 데이터 구동.
-- **V-084 주석 착지 결정론(R6.10·§11)** — `_pinForNote` fuzzy 산문 스캔 폐기(주20 공정가치→위험관리 오핀 근절). 착지는 저작 경로(n{N}·note_dive·원장 명시타깃)로만, 없으면 무핀(삼성 계약). note_dive 11건 저작. `check_golden --strict §11`(note_dive 자기인용)·pytest 2종 신설. **새 골든/수정 시 R6.10 준수 — dive:cited는 note_dive 동반 또는 무핀, fuzzy 매칭 금지.**
+- **골든 20본 목표 중 12본 완주**: 삼성 005930(T0) + T1 11사 — 전원 5게이트 + `--strict` §8~12(무핀 0) PASS, dev 병합(PR #51).
+- **Wave 2 착수(2026-08-03, 리더 결정)**: 48사 밖 **새 산업 8클러스터**에 첫 T1을 세운다 — 철강 현대제철 004020 · 정유 S-Oil 010950 · 식품 CJ제일제당 097950 · 유통 이마트 139480 · 항공 대한항공 003490 · 게임 크래프톤 259960 · 엔터 하이브 352820 · 유틸리티 한국전력 015760. **T2 확장은 이 브랜치 범위 밖**(별도 트랙). **PR 없이 본당 1커밋 push만**(리더 지시).
+- **하네스 정비 완료(V-099·V-100, 08-03)**: ① `check_golden --strict` **§13 CF 운전자본 분리** 게이트(본표 집계 라인 보유 시 cf-wc 강제 — 2회+ 패턴 코드 승격) ② `sectioning_health` **deep**(원문 재분할 대조로 stale 꼬리 절단 검출 — V-058 사각 폐쇄) ③ VARIATIONS **V-070~079 번호 이중 사용 박제**, 신규 채록은 V-099부터 단일 시퀀스 ④ 신규 pytest 9건(`test_cf_wc_split.py`·`test_sectioner_stale_tail.py`). 기존 12본 `--strict --all` 0 무회귀.
 
----
+## ▶ 다음 작업
 
-# ▶ 다음 세션 작업 프롬프트 — T1 무핀 0 완주 (삼성 T0 패리티, V-085)
+**[WAVE2_BATCH_PROMPT.md](WAVE2_BATCH_PROMPT.md)를 읽고 그대로 실행한다.** 진행 순서:
 
-> **아래를 다음 세션에 그대로 붙여넣어 실행한다.** 목표 = T1 11본의 **무핀 주석 116건을 전부 카드/딥다이브로 착지**시켜 `check_golden --strict §12`(무핀 0)를 통과. 삼성 T0(무핀 0)와 동일한 깊이로.
+1. **Phase 2 (데이터 준비, 미완이면 먼저)** — `corps.csv`에 8클러스터·`tier=1c` 등재 확인, `fs_enrich`로 7본(한전 제외) fnlttSinglAcntAll 5개년 적재(DART 키), `series` 완결률, `sectioner --health` 8본(한전 주16 괴물블록 기보고 — 재섹션·별도FS 확인).
+2. **Phase 3 (빌드)** — WAVE2_BATCH_PROMPT 순서대로 1본=1세션. `git log --oneline -5`와 `corps.csv` tier로 진행 위치 파악(tier=1 완주·1c 대기).
+3. 본마다: 5게이트 + `--strict` §1~13 = 0 · VARIATIONS 채록(V-099 시퀀스) · 1커밋 push · **DL contact-sheet 리더 승인**.
 
-## 배경 (왜)
-V-084로 렌더러 fuzzy 폴백을 폐기하자, **주석 클릭 시 착지 카드가 없는 '무핀'**(원문만 뜨고 딥다이브 카드 없음)이 정직하게 드러났다. 삼성 T0는 34주석 전부 카드/note_dive로 착지(무핀 0) — V-062에서 전 주석에 APPENDIX 카드(n6~n33)를 만들었기 때문. T1은 처음 빌드 때 핵심 카드만 만들어 나머지가 무핀. 리더 지시: **삼성 패리티(무핀 0) 강제** — `check_golden §12`가 무착지 주석을 FAIL로 잡는다(이미 코드화, V-085).
+## 잔여 리더 트랙 (이 브랜치 밖)
 
-## 착수 (S0)
-```
-git checkout feat/report-phase5 && git pull
-python -m http.server 8000 &          # 렌더 확인용
-python -m modules.report.check_golden <ticker> --strict   # [무핀] 갭 목록 확인
-```
-먼저 **MILKYWAY_GENERATOR.md**(§6 R6.6a·R6.10·R6.6b 체크리스트 1번 무핀 0)·**VARIATIONS.md V-062·V-080·V-084·V-085**·이 파일을 읽는다. 견본 = **삼성 galaxy_005930.json**(무핀 0 정본 — 같은 주제 주석을 삼성이 어떤 카드로 처리했는지 대조).
-
-## 작업 목록 (무핀 건수 — 오름차순 권장)
-| 티커 | 회사 | 무핀 | 티커 | 회사 | 무핀 |
-|---|---|---|---|---|---|
-| 035420 | NAVER | 2 | 033780 | KT&G | 9 |
-| 000660 | SK하이닉스 | 6 | 051910 | LG화학 | 11 |
-| 005380 | 현대차 | 7 | 068270 | 셀트리온 | 13 |
-| 010130 | 고려아연 | 8 | 017670 | SKT | 16 |
-| 000720 | 현대건설 | 9 | 011200 | HMM | 17 |
-| | | | 012450 | 한화에어로 | 18 |
-
-**NAVER(2건)로 시범 완주** → 패턴 확립 후 오름차순. **1본 = 1커밋**(무리하면 세션 분할).
-
-## 티커별 절차 (무핀 주석마다)
-`check_golden <t> --strict`의 `[무핀] … 주N, 주M …` 목록을 뽑아, 각 주석을 **삼성 견본 대조**로 분류·해소:
-1. **실체 주석 → 전용 카드 승격** (공정가치·범주별금융·위험관리·차입원가·충당·자본금·현금성자산·개별 사업 주석 등): `appendix[]` 또는 `dives{}`에 **`n<주N>` 카드 신설**(삼성 동종 카드가 견본). **prose-writer**로 산문 작성(fact-sheet·fs_account 실값만, A7/A8 문법)·badge·`row`/`hl`(패널 행 있으면)·원장 `dive:cited`→`new-dive:nX`. **accuracy-verifier**로 신규 카드 REFUTED 0 확인.
-2. **코어 dive 흡수 주석 → note_dive 연결** (그 주석 주제를 이미 리치한 흐름 dive가 다룰 때 — 종업원급여→판관비·법인세→k7·부문→매출 등): `meta.note_dive[N]=<dive>` 등재. ⚠️ **§11: 대상 dive 자신의 산문에 `(주N)` 인용 필수** — 없으면 그 dive 산문에 1구절 추가(fact 실값·격식체).
-3. **잔차 '기타' 주석**(기타유동자산·기타부채 등 43건): 삼성이 이런 잔차를 카드로 갖는지 확인 → 있으면 소형 카드 신설(구성 계정·금액), 없으면 관련 BS-zone dive(assets/liab)에 note_dive + 그 dive 산문에 `(주N)` 인용. **generic '자산총계' 뭉뚱그림 금지**(R6.6a) — 구성 내역을 짧게라도 서술.
-⚠️ **fuzzy 재도입 금지(R6.10)** — 착지는 저작 경로(n{N}·note_dive·원장)로만. **수치 창작 금지(D7)** — fact-sheet/fs_account 실값만.
-
-## 완주 게이트 (티커별, 5게이트 + §12)
-- `check_golden <t> --strict` **0** — **§12 무핀 0 포함**(전 주석 착지)·§8~11·§9 커버리지.
-- `check_golden --all` 0(무회귀) · `GALAXY_TICKER=<t> pytest tests/report/test_galaxy_interaction.py` 10/10(착지 결정론 포함).
-- 신규 카드 **accuracy-verifier REFUTED 0** · **completeness-auditor** 삼성 T0 패리티 · playwright 렌더 스팟(무핀이던 주석 클릭→카드 뜨는지, 캐시버스터 `&v=`).
-- **VARIATIONS.md** 채록(V-0##: 티커·해소 건수·카드/​note_dive 분류) + 로그 1줄. **커밋**(galaxy_<t>.json + VARIATIONS) → push.
-
-## 종료 조건
-전 11본 `--strict` 0(§12 무핀 0) · `--all` 0 · pytest 10/10. 삼성 T0와 동일하게 **전 주석 클릭 = 딥다이브 착지**.
-
----
-
-## (후순위 · 리더 트랙 — 무핀 0 완주 후)
-1. **리더 DL 시각승인** — T1 신규 5본(017670·011200·033780·010130·000720) contact-sheet 스크린샷 승인.
-2. **T2 클러스터 확장** — 각 T1 견본으로 클러스터 나머지 자동 확장(MILKYWAY §8.5 캐스케이드).
-3. **build 교훈 코드화 후보**(2회+): ⓐ CF본표 '영업활동 자산부채변동' 별도 라인이면 cf-wc 분리 ⓑ stale 섹션 방어(section_all 선행).
-
-## 렌더러 미결(우선순위 낮음, 리더 트랙)
-- **dead-click 2~3행**(is-nonop/bs-liab/bs-equity 합계행 토글 좌표 충돌) — 골든 공통 렌더러 버그(V-059), 전 골든 동형. 콘텐츠 무관.
-- ~~Zone E 정적 템플릿 라벨 불일치~~ — **해소(V-083 buildPanelE)**.
-- ~~주석 클릭 오핀(fuzzy)~~ — **해소(V-084 R6.10)**.
+1. **1차 T1 5본 DL 시각승인 대기** — SKT 017670·HMM 011200·KT&G 033780·고려아연 010130·현대건설 000720 contact-sheet.
+2. **T2 클러스터 확장** — 기존 12 + 신규 8클러스터의 나머지 기업(각 T1 견본 캐스케이드, §8.5). 별도 브랜치.
+3. dead-click 2~3행 렌더러 버그(V-059, 전 골든 동형·콘텐츠 무관).
 
 ## 주의
-- 인코딩 `PYTHONUTF8=1`. `reports.db`·`facts/`·`raw_cache/`는 gitignore(로컬 전용). main 직접 push·force push 금지.
+
+- 인코딩 `PYTHONUTF8=1`. `reports.db`(shared/data/)·`facts/`·`raw_cache/`는 gitignore(로컬 전용) — `--strict` §7·§10·§13은 이 머신에서만 유효(CI skip).
+- 라이브 검증 클릭 사이 **Esc** 필수(V-049). main 직접 push·force push 금지.

@@ -454,6 +454,12 @@ _STMT_NEED = {
     "eq": "자본변동",
     "cf": "현금흐름",
 }
+# CF 본표의 '운전자본 집계' 라인 판별(§13) — 공백 제거한 계정명에 매칭.
+# 실측 변이: '영업활동으로인한자산부채의변동'·'…자산·부채의변동'·'…자산(부채)의감소(증가)'·'운전자본의변동'.
+# 개별 명세행(매출채권의감소 등)은 '영업활동' 접두가 없어 매칭되지 않는다.
+_CF_WC_RE = re.compile(
+    r"(영업활동.{0,8}자산.{0,4}부채.{0,10}(변동|증감|감소|증가)|운전자본.{0,4}(변동|증감))"
+)
 
 
 def _check_strict(ticker: str, G: dict, dives: dict) -> list[str]:
@@ -678,6 +684,56 @@ def _check_strict(ticker: str, G: dict, dives: dict) -> list[str]:
             f"전용카드 승격(new-dive:n{{N}})·note_dive 연결 필요(V-085): "
             f"{lst}{'…' if len(unpinned) > 10 else ''}"
         )
+
+    # ── 13) (strict) CF 운전자본 분리 정합 (V-099 — 2회+ 반복 패턴의 코드 승격) ──
+    # 원칙: 현금흐름표 **본표에 '영업활동으로 인한 자산·부채의 변동' 집계 라인이 별도로 있으면**
+    # 패널 CF도 cf-wc 행으로 분리한다. cf-noncash(조정)에 뭉뚱그리면 운전자본형 −OCF 서사
+    # (이익은 나는데 재고·매출채권에 현금이 묶임)가 화면에서 사라진다 — V-056(제련)·V-060(건설) 2회.
+    # 근거 없는 회사(본표에 집계 라인 없음)에는 강제하지 않는다 — 없는 근거로 행을 만들지 않는다(R6.9·D7).
+    # 캘리브레이션: 본표 라인 보유 = 삼성 T0(−9.61조)·현대차(−34.33조)·SKT(−0.14조)·한전(−5.38조), 전부 분리 보유.
+    if os.path.exists(db10) and fy:
+        import sqlite3
+
+        con13 = sqlite3.connect(db10)
+        cf_acc = con13.execute(
+            "select account_nm, amount from fs_account "
+            "where ticker=? and fiscal_year=? and sj_div='CF'",
+            (ticker, fy),
+        ).fetchall()
+        con13.close()
+        wc_src = [
+            (nm, a)
+            for nm, a in cf_acc
+            if a is not None and _CF_WC_RE.search((nm or "").replace(" ", ""))
+        ]
+        if wc_src:
+            nm_src, amt_src = max(wc_src, key=lambda x: abs(x[1]))
+            src_jo = amt_src / 1e12
+            rows13 = {
+                r.get("row"): r
+                for z, rs in (G.get("panels") or {}).items()
+                for r in (rs or [])
+            }
+            wc_row = rows13.get("cf-wc")
+            if wc_row is None:
+                nc_name = (rows13.get("cf-noncash") or {}).get("name", "")
+                gaps.append(
+                    f"[CF운전자본] 본표에 '{nm_src}' {src_jo:+.2f}조 별도 라인이 있는데 패널에 cf-wc 행 없음"
+                    + (f" — cf-noncash('{nc_name}')에 뭉뚱그림" if nc_name else "")
+                    + " — 행 분리 필요(V-099)"
+                )
+            else:
+                v = _num(wc_row.get("v"))
+                if v is None:
+                    gaps.append(f"[CF운전자본] cf-wc 행 값 파싱 불가('{wc_row.get('v')}')")
+                elif abs(v - src_jo) > max(0.05, abs(src_jo) * 0.02):
+                    gaps.append(
+                        f"[CF운전자본] cf-wc {v:+.2f}조 ≠ 본표 '{nm_src}' {src_jo:+.2f}조 — 부호·집계 확인(V-099)"
+                    )
+                if "운전자본" in (rows13.get("cf-noncash") or {}).get("name", ""):
+                    gaps.append(
+                        "[CF운전자본] cf-wc 행이 있는데 cf-noncash 라벨도 '운전자본'을 포함 — 이중 표기(V-099)"
+                    )
     return gaps
 
 
