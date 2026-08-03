@@ -2924,202 +2924,6 @@ function OverlayAiChat({ companyName, ticker, context, disc, node }) {
   );
 }
 
-// ─── TIME MACHINE tab components ───────────────────────────────────────────
-
-function ScenarioCard({ scenario, phase, choice, onChoose, onNext }) {
-  if (!scenario) {
-    return (
-      <div className="panel panel-tl">
-        <div className="panel-head">
-          <div className="panel-head-l">
-            <span className="panel-dot" style={{background: '#a78bfa', boxShadow: '0 0 8px #a78bfa'}} />
-            <span className="panel-title">TIME MACHINE</span>
-            <span className="panel-sub">과거 공시 시뮬레이터</span>
-          </div>
-        </div>
-        <div className="panel-body" style={{display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#475569', fontSize: 12}}>시나리오 없음</div>
-      </div>
-    );
-  }
-  const isPositive = scenario.change_pct > 0;
-  const answerDir = scenario.answer === '수혜' ? 'good' : scenario.answer === '악재' ? 'bad' : 'neutral';
-  const choiceCorrect = choice === answerDir;
-  return (
-    <div className="panel panel-tl" style={{'--accent': '#a78bfa'}}>
-      <div className="panel-head">
-        <div className="panel-head-l">
-          <span className="panel-dot" style={{background: '#a78bfa', boxShadow: '0 0 8px #a78bfa'}} />
-          <span className="panel-title">TIME MACHINE</span>
-          <span className="panel-sub">과거 공시 시뮬레이터</span>
-        </div>
-      </div>
-      <div className="panel-body" style={{padding: '10px 12px', display: 'flex', flexDirection: 'column', gap: 8, overflowY: 'auto'}}>
-        <div className="tm-corp-head">
-          <span style={{color: '#f1f5f9', fontWeight: 700, fontSize: 14}}>{scenario.company}</span>
-          <span className="disc-type-badge" style={{marginLeft: 8}}>{scenario.ticker}</span>
-          <span className="tm-date-chip">{scenario.date}</span>
-          <span className="tm-cat-badge">{scenario.category}</span>
-        </div>
-        <div className="tm-title">{scenario.title}</div>
-        <div className="tm-context">{scenario.context}</div>
-        {phase === 'question' ? (
-          <div className="tm-answers">
-            <button className="tm-btn tm-btn-bad" onClick={() => onChoose('bad')}>악재 ↓</button>
-            <button className="tm-btn tm-btn-neutral" onClick={() => onChoose('neutral')}>중립 →</button>
-            <button className="tm-btn tm-btn-good" onClick={() => onChoose('good')}>호재 ↑</button>
-          </div>
-        ) : (
-          <div style={{display: 'flex', flexDirection: 'column', gap: 8}}>
-            <span className="tm-verdict" style={{
-              background: choiceCorrect ? 'rgba(74,222,128,.12)' : 'rgba(248,113,113,.12)',
-              borderColor: choiceCorrect ? '#4ade80' : '#f87171',
-              color: choiceCorrect ? '#4ade80' : '#f87171',
-            }}>{choiceCorrect ? '✓ CORRECT' : '✗ INCORRECT'}</span>
-            <div className="tm-result-num" style={{color: isPositive ? '#4ade80' : '#f87171'}}>
-              {isPositive ? '+' : ''}{scenario.change_pct}%
-            </div>
-            <div className="tm-result-sub">{scenario.window} · KOSPI {scenario.kospi_change_pct >= 0 ? '+' : ''}{scenario.kospi_change_pct}%</div>
-            <div className="tm-explanation">{scenario.explanation}</div>
-            <div className="tm-reveal-actions">
-              {scenario.dart_url && <a href={scenario.dart_url} target="_blank" rel="noopener" className="tm-dart-btn">DART ↗</a>}
-              <button className="tm-next-btn" onClick={onNext}>NEXT →</button>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-function ScoreBoardPanel({ score }) {
-  const pct = score.total > 0 ? Math.round(score.correct / score.total * 100) : 0;
-  return (
-    <div className="panel panel-tr">
-      <div className="panel-head">
-        <div className="panel-head-l">
-          <span className="panel-dot" />
-          <span className="panel-title">SCORE BOARD</span>
-          <span className="panel-sub">세션 점수</span>
-        </div>
-      </div>
-      <div className="panel-body" style={{padding: '12px 14px'}}>
-        <div style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 32, fontWeight: 700, color: '#74EEC6', lineHeight: 1.1, marginBottom: 6}}>
-          {score.correct}<span style={{color: '#475569', fontSize: 18}}>/{score.total}</span>
-        </div>
-        <div style={{fontSize: 10, color: '#64748b', marginBottom: 8}}>정답률 {pct}%</div>
-        <div className="score-acc-bar-wrap"><div className="score-acc-bar" style={{width: pct + '%'}} /></div>
-        <div style={{marginTop: 12, display: 'flex', flexDirection: 'column', gap: 4}}>
-          {[...score.history].reverse().slice(0, 6).map((h, i) => (
-            <div key={i} className="score-hist-row">
-              <span style={{flex: 1, fontSize: 10, color: '#94a3b8', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{h.company}</span>
-              <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 10, color: h.change_pct >= 0 ? '#4ade80' : '#f87171'}}>{h.change_pct >= 0 ? '+' : ''}{h.change_pct}%</span>
-              <span style={{marginLeft: 6, fontSize: 12, color: h.correct ? '#4ade80' : '#f87171'}}>{h.correct ? '✓' : '✗'}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function TmCategoryFilterPanel({ scenarios, activeCategories, onToggle }) {
-  const cats = React.useMemo(() => {
-    const map = {};
-    scenarios.forEach(s => { map[s.category] = (map[s.category] || 0) + 1; });
-    return Object.entries(map).sort((a, b) => b[1] - a[1]);
-  }, [scenarios]);
-  return (
-    <div className="panel panel-bl">
-      <div className="panel-head">
-        <div className="panel-head-l">
-          <span className="panel-dot" style={{background: '#a78bfa', boxShadow: '0 0 8px #a78bfa'}} />
-          <span className="panel-title">SCENARIO TYPE</span>
-          <span className="panel-sub">유형 필터</span>
-        </div>
-        <span className="panel-count">{scenarios.length}건</span>
-      </div>
-      <div className="panel-body" style={{display: 'flex', flexWrap: 'wrap', gap: 6, padding: '8px 10px'}}>
-        {cats.map(([cat, cnt]) => (
-          <button key={cat} className={'tm-cat-chip' + (activeCategories.has(cat) ? ' is-active' : '')} onClick={() => onToggle(cat)}>
-            {cat} <span style={{opacity: .6}}>{cnt}</span>
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function ScenarioIndexPanel({ scenarios, currentIndex, answeredSet, onJump }) {
-  return (
-    <div className="panel panel-br">
-      <div className="panel-head">
-        <div className="panel-head-l">
-          <span className="panel-dot" />
-          <span className="panel-title">SCENARIO LIST</span>
-          <span className="panel-sub">시나리오 목록</span>
-        </div>
-        <span className="panel-count">{scenarios.length}</span>
-      </div>
-      <div className="panel-body">
-        {scenarios.map((s, i) => (
-          <div key={s.id} className={'sc-idx-row' + (i === currentIndex ? ' is-active' : '')} onClick={() => onJump(i)}>
-            <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 9, color: '#475569', minWidth: 16}}>{i + 1}</span>
-            <span style={{flex: 1, fontSize: 11, color: i === currentIndex ? '#74EEC6' : '#94a3b8', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{s.company}</span>
-            <span className="disc-type-badge" style={{fontSize: 8}}>{s.category}</span>
-            <span className={'sc-idx-dot' + (answeredSet.has(s.id) ? ' done' : '')} />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function TimeMachineTab({ scenarios, activeTab, onTabChange, onSelectCompany, onHome }) {
-  const allCats = React.useMemo(() => new Set(scenarios.map(s => s.category)), [scenarios]);
-  const [activeCategories, setActiveCategories] = React.useState(allCats);
-  const [currentIndex, setCurrentIndex] = React.useState(0);
-  const [tmPhase, setTmPhase] = React.useState('question');
-  const [tmChoice, setTmChoice] = React.useState(null);
-  const [answeredSet, setAnsweredSet] = React.useState(new Set());
-  const [score, setScore] = React.useState({ correct: 0, total: 0, history: [] });
-  const filtered = React.useMemo(
-    () => scenarios.filter(s => activeCategories.has(s.category)),
-    [scenarios, activeCategories]
-  );
-  const current = filtered[currentIndex] || null;
-  function toggleCategory(cat) {
-    setActiveCategories(prev => {
-      const next = new Set(prev);
-      if (next.has(cat) && next.size > 1) next.delete(cat); else next.add(cat);
-      return next;
-    });
-    setCurrentIndex(0); setTmPhase('question'); setTmChoice(null);
-  }
-  function handleChoose(dir) {
-    if (!current) return;
-    const answerDir = current.answer === '수혜' ? 'good' : current.answer === '악재' ? 'bad' : 'neutral';
-    const correct = dir === answerDir;
-    setTmChoice(dir); setTmPhase('reveal');
-    setAnsweredSet(prev => new Set([...prev, current.id]));
-    setScore(prev => ({
-      correct: prev.correct + (correct ? 1 : 0),
-      total: prev.total + 1,
-      history: [...prev.history, { company: current.company, category: current.category, correct, change_pct: current.change_pct }],
-    }));
-  }
-  function handleNext() { setTmPhase('question'); setTmChoice(null); setCurrentIndex(i => (i + 1) % Math.max(1, filtered.length)); }
-  function handleJump(i) { setCurrentIndex(i); setTmPhase('question'); setTmChoice(null); }
-  return (
-    <div className="finance-tab">
-      <TopTabs active={activeTab} onChange={onTabChange} onSelectCompany={onSelectCompany} onHome={onHome} />
-      <ScenarioCard scenario={current} phase={tmPhase} choice={tmChoice} onChoose={handleChoose} onNext={handleNext} />
-      <ScoreBoardPanel score={score} />
-      <TmCategoryFilterPanel scenarios={scenarios} activeCategories={activeCategories} onToggle={toggleCategory} />
-      <ScenarioIndexPanel scenarios={filtered} currentIndex={currentIndex} answeredSet={answeredSet} onJump={handleJump} />
-    </div>
-  );
-}
-
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "galaxyStyle": "cinematic",
   "transitionStyle": "zoom",
@@ -3545,7 +3349,6 @@ function TopTabs({ active, onChange, breadcrumb, onSelectCompany, onHome }) {
   const tabs = [
     { id: 'finance',   en: 'FINANCIALS',  ko: '재무정보' },
     { id: 'disclose',  en: 'DISCLOSURES', ko: '공시' },
-    { id: 'timemach',  en: 'TIME MACHINE',ko: '타임머신' },
   ];
   return (
     <div className="top-tabs">
@@ -3574,22 +3377,27 @@ function TopTabs({ active, onChange, breadcrumb, onSelectCompany, onHome }) {
             </div>
           ))}
         </div>
-        {onSelectCompany && <CompanySearch onSelect={onSelectCompany} />}
       </div>
-      <div className="top-tabs-status">
-        <div className="index-row">
-          <span className="hud-dot" />
-          <span className="kospi-label">KOSPI</span>
-          <span className="kospi-value">{formatKospiValue(kospi.value)}</span>
-          <span className={"kospi-delta " + (isUp ? 'up' : 'down')}>{formatKospiPct(kospi.changePct)}</span>
-          <span className="kospi-time">{kospi.loading ? '갱신 중' : formatKospiTime(kospi.updatedAt)}</span>
+      {/* UX-038: 검색창 + 지수 패널 = 우측 정렬군(패널 right:20px와 같은 선). */}
+      <div className="top-tabs-right">
+        <div className="top-search-slot">
+          {onSelectCompany && <CompanySearch onSelect={onSelectCompany} />}
         </div>
-        <div className="index-row">
-          <span className="hud-dot" />
-          <span className="kospi-label">KOSDAQ</span>
-          <span className="kospi-value">{formatKospiValue(kosdaq.value)}</span>
-          <span className={"kospi-delta " + (isKqUp ? 'up' : 'down')}>{formatKospiPct(kosdaq.changePct)}</span>
-          <span className="kospi-time">{kosdaq.loading ? '갱신 중' : formatKospiTime(kosdaq.updatedAt)}</span>
+        <div className="top-tabs-status">
+          <div className="index-row">
+            <span className="hud-dot" />
+            <span className="kospi-label">KOSPI</span>
+            <span className="kospi-value">{formatKospiValue(kospi.value)}</span>
+            <span className={"kospi-delta " + (isUp ? 'up' : 'down')}>{formatKospiPct(kospi.changePct)}</span>
+            <span className="kospi-time">{kospi.loading ? '갱신 중' : formatKospiTime(kospi.updatedAt)}</span>
+          </div>
+          <div className="index-row">
+            <span className="hud-dot" />
+            <span className="kospi-label">KOSDAQ</span>
+            <span className="kospi-value">{formatKospiValue(kosdaq.value)}</span>
+            <span className={"kospi-delta " + (isKqUp ? 'up' : 'down')}>{formatKospiPct(kosdaq.changePct)}</span>
+            <span className="kospi-time">{kosdaq.loading ? '갱신 중' : formatKospiTime(kosdaq.updatedAt)}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -4793,16 +4601,6 @@ function App() {
             />
           )}
         </div>
-      )}
-
-      {introPhase === 'tab' && activeTab === 'timemach' && (
-        <TimeMachineTab
-          scenarios={(window.__realData && window.__realData.scenarios) || []}
-          activeTab={activeTab}
-          onTabChange={setActiveTab}
-          onSelectCompany={goToCompanyFromSearch}
-          onHome={goHome}
-        />
       )}
 
       {/* ENTER CORPORATION overlay — v2 design-consistent fullscreen popup */}

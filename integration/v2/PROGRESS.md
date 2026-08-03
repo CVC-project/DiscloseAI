@@ -152,3 +152,17 @@ SolarCanvas: real-data sectors prop 기반 (memberCount 비례 행성 크기)
 - `injectV2Theme()` 폐기 — firm.html `[data-theme="galaxy"]` 스코프 셀프 테마 + dossier 공용 `tokens.css`
 - 커밋: 46b3e5e(Phase 0 골든·토큰) · 1ff6dab(Phase 1 galaxy 데이터 구동) · 1b534da(Phase 2 탭바) · 890241e(S2 business 이식) · 04a59d5(3탭 디자인 통일) · 472d6cd(로고·AI 사이드바 토글)
 - 상세 계획·설계 결정: [integration/dossier/DOSSIER_TABS_PLAN.md](../dossier/DOSSIER_TABS_PLAN.md) (본 파일은 요약만 기록)
+
+---
+
+## 2026-08-03 — 공시 탭 트랙 착수 · 타임머신 탭 폐지 (Phase 0)
+
+- **브랜치**: `feat/disclosure-tab` (origin/dev `93a6319b` 기준)
+- **타임머신 탭 drop** (UX-037): 상단 탭 3 → **2탭(FINANCIALS·DISCLOSURES)**. `TimeMachineTab` 외 TM 컴포넌트 4종 제거(bundle.jsx 4,938 → 4,731행), TM 전용 CSS 제거(styles.css 782 → 587행)
+- **price_scenarios 배선 은퇴** (FN-018): loader fetch 4 → 3건, `tmAll`/`has_quiz`/`scenarios` 제거. **데이터 파일은 보존**(price 모듈 산출물)
+- 캐시버스트 `?v=m1h → ?v=m1i` (FN-004·FN-009, 5개소)
+- **계획 문서 신설**: [DISCLOSURE_TAB_PLAN.md](DISCLOSURE_TAB_PLAN.md) — 현황 인벤토리(화면·데이터 36사 커버리지)·Phase 뼈대·리더 확인 4건(Q1~Q4)
+- 검증: 로컬 http.server + 실브라우저 렌더 — 상단 탭 2개, JSX/런타임 콘솔 에러 0
+- **상단 크롬 정렬 4건** (UX-038): 브레드크럼=로고~탭 중앙 · 탭=뷰포트 정중앙(검색창을 우측군으로 분리) · 검색창=지수 패널과 동일 높이 · 지수 패널=패널 우측선(20px) 정렬 · 레이어 토글 top 84→100px. 캐시버스트 `m1i → m1j`
+- **상단 크롬 정렬 2차** (UX-039): 검색창=탭~지수 패널 여백 중앙(`.top-search-slot`) · 레이어 토글 top 100→84px(패널 상단선) · 탭 중앙은 실측상 이미 정확(착시 원인=우측 여백). 캐시버스트 `m1j → m1l`
+- **상단 크롬 높이 통일** (UX-040): `--chrome-h: 52px` 토큰 도입 — 탭 박스·검색창·지수 패널 top 22/bottom 74 일치. 캐시버스트 `m1l → m1m`

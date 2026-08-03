@@ -51,7 +51,12 @@ def main() -> int:
             changed += 1
         else:
             unchanged += 1
-    print(json.dumps({"changed": changed, "unchanged": unchanged, "errors": errors}, ensure_ascii=False))
+    print(
+        json.dumps(
+            {"changed": changed, "unchanged": unchanged, "errors": errors},
+            ensure_ascii=False,
+        )
+    )
     return 0
 
 

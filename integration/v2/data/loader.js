@@ -1,6 +1,6 @@
 /* DiscloseAI v2 — loader.js
  *
- * 4개 JSON fetch (graph_top50 + eqs_summary + disclosures + price_scenarios)
+ * 3개 JSON fetch (graph_top50 + eqs_summary + disclosures)
  * + ticker(6자리) 인덱싱 + 노드 enrich + sector aggregate.
  *
  * `Promise.allSettled` + try/catch로 graceful degrade. 어떤 fetch가 실패해도
@@ -21,13 +21,12 @@
     return (note || "").replace(/\s*\(동종업계[^)]*\)/g, "");
   }
 
-  // 4개 JSON URL — v2/index.html(integration/v2/) 기준 상대경로.
-  // 4개 모두 integration/data 공유 (graph_top50은 extract_data.py가 modules/relation에서 동기화한 사본).
+  // 3개 JSON URL — v2/index.html(integration/v2/) 기준 상대경로.
+  // 3개 모두 integration/data 공유 (graph_top50은 extract_data.py가 modules/relation에서 동기화한 사본).
   const URLS = {
     graph: "../data/graph_top50.json",
     eqs:   "../data/eqs_summary.json",
     disc:  "../data/disclosures.json",
-    price: "../data/price_scenarios.json",
     // universe (2026-07-22, U2 full 이전) — named 400·25섹터·dots. 있으면 top50 대체.
     universe: "../data/universe.json",
     companiesIndex: "../data/companies_index.json",
@@ -57,9 +56,9 @@
     }
   }
 
-  // 노드 한 개에 financial / disclosure / price 데이터 주입.
+  // 노드 한 개에 financial / disclosure 데이터 주입.
   // dashboard.html L5011-5085의 로직을 함수로 추출 (외형 유지).
-  function enrichNode(n, eqsByTicker, discByTicker, stmtByTicker, scenariosByTicker) {
+  function enrichNode(n, eqsByTicker, discByTicker, stmtByTicker) {
     const t = n.t;
     const out = { ...n };
     const fin = eqsByTicker[t];
@@ -136,9 +135,6 @@
       dilution_ratio: d.dilution_ratio,
     }));
     out.statements = stmtByTicker[t] || [];
-
-    out.tmAll = scenariosByTicker[t] || [];
-    out.has_quiz = out.tmAll.length > 0;
     return out;
   }
 
@@ -244,11 +240,10 @@
   }
 
   async function loadAll() {
-    const [graph, eqs, disc, price, universe, companiesIndex] = await Promise.all([
+    const [graph, eqs, disc, universe, companiesIndex] = await Promise.all([
       tryFetch(URLS.graph),
       tryFetch(URLS.eqs),
       tryFetch(URLS.disc),
-      tryFetch(URLS.price),
       tryFetch(URLS.universe),
       tryFetch(URLS.companiesIndex),
     ]);
@@ -267,12 +262,6 @@
       if (!s.ticker) return;
       (stmtByTicker[s.ticker] = stmtByTicker[s.ticker] || []).push(s);
     });
-    const scenariosByTicker = {};
-    ((price && price.data) || []).forEach((s) => {
-      if (!s.ticker) return;
-      (scenariosByTicker[s.ticker] = scenariosByTicker[s.ticker] || []).push(s);
-    });
-
     // ── universe 우선(U2 full 이전): named 400·25섹터·dots ──────────────
     // 없으면 graph_top50 경로로 graceful fallback(회귀 무손상).
     const useUniverse = !!(universe && Array.isArray(universe.named) && universe.named.length);
@@ -290,7 +279,7 @@
       useUniverse ? { ...n, mc: parseMcWon(n.mc) } : n
     );
     const nodes = baseNodes.map((n) =>
-      enrichNode(n, eqsByTicker, discByTicker, stmtByTicker, scenariosByTicker)
+      enrichNode(n, eqsByTicker, discByTicker, stmtByTicker)
     );
     const sectors = useUniverse
       ? buildUniverseSectors(universe, nodes)
@@ -304,14 +293,12 @@
       sectors,
       companiesIndex: (companiesIndex && Array.isArray(companiesIndex)) ? companiesIndex : [],
       universeMeta: (universe && universe.meta) || null,
-      scenarios: (price && price.data) || [],
       discAll: (disc && disc.disclosures) || [],
       stmtAll: (disc && disc.statements) || [],
       meta: {
         graph: !!graph,
         eqs: !!eqs,
         disc: !!disc,
-        price: !!price,
         universe: useUniverse,
       },
     };

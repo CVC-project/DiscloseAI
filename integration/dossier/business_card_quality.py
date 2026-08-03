@@ -328,7 +328,10 @@ def dedupe_by_title(
         if len(_text(item.get(desc_key))) > len(_text(existing.get(desc_key))):
             existing[desc_key] = item.get(desc_key)
         # 둘 중 하나라도 실제 매출비중 수치가 있으면 보존한다(segment_breakdown 전용 필드).
-        if existing.get("revenue_share") is None and item.get("revenue_share") is not None:
+        if (
+            existing.get("revenue_share") is None
+            and item.get("revenue_share") is not None
+        ):
             existing["revenue_share"] = item.get("revenue_share")
     return [merged[k] for k in order]
 

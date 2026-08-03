@@ -361,7 +361,6 @@
         nameByCode: buildNameByCode(result.nodes),
         discByTicker,
         discAll,
-        scenarios: result.scenarios,
         meta: result.meta,
         usingMock: result.usingMock,
         usingUniverse: result.usingUniverse,
