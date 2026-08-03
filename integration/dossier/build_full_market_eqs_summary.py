@@ -20,12 +20,15 @@ OUT_PATH = ROOT / "integration" / "data" / "eqs_summary.json"
 BUSINESS_DIR = ROOT / "integration" / "dossier" / "data"
 UNIVERSE_PATH = ROOT / "integration" / "data" / "universe.json"
 MARKET_CAP_PATH = ROOT / "integration" / "data" / "market_caps_naver.json"
+YAHOO_MARKET_CAP_PATH = ROOT / "integration" / "data" / "market_caps_yahoo.json"
 
 NAVER_MARKET_SUM_URL = "https://finance.naver.com/sise/sise_market_sum.naver"
 NAVER_HEADERS = {"User-Agent": "Mozilla/5.0"}
 NAVER_MARKETS = {"KOSPI": 0, "KOSDAQ": 1}
 NAVER_MAX_PAGES = 80
 NAVER_SLEEP_SEC = 0.15
+YAHOO_SUFFIXES = [(".KS", "KOSPI"), (".KQ", "KOSDAQ")]
+YAHOO_SLEEP_SEC = 0.05
 
 
 def load_json(path: Path) -> Any:
@@ -249,7 +252,95 @@ def load_naver_market_caps() -> tuple[dict[str, float], dict[str, float], dict[s
     return caps, prices, sources, asofs, meta
 
 
+def _fast_info_value(fast_info: Any, key: str) -> Any:
+    if isinstance(fast_info, dict):
+        return fast_info.get(key)
+    return getattr(fast_info, key, None)
+
+
+def fetch_yahoo_market_caps(tickers: list[str]) -> dict[str, Any]:
+    """Fetch market caps for tickers missed by the primary Naver snapshot.
+
+    Yahoo Finance is used only as a sparse fallback because Korean coverage is
+    less complete than Naver's market-sum table. Results are persisted as a
+    snapshot to keep normal summary builds deterministic and fast.
+    """
+    import yfinance as yf
+
+    rows: list[dict[str, Any]] = []
+    asof = datetime.now(timezone.utc).date().isoformat()
+    for ticker in sorted(set(tickers)):
+        for suffix, market in YAHOO_SUFFIXES:
+            symbol = f"{ticker}{suffix}"
+            try:
+                fast_info = yf.Ticker(symbol).fast_info
+                market_cap = _fast_info_value(fast_info, "market_cap")
+                last_price = _fast_info_value(fast_info, "last_price")
+            except Exception:
+                continue
+            if not market_cap:
+                continue
+            rows.append(
+                {
+                    "ticker": ticker,
+                    "symbol": symbol,
+                    "market": market,
+                    "last_price": float(last_price) if last_price else None,
+                    "market_cap": float(market_cap),
+                }
+            )
+            break
+        time.sleep(YAHOO_SLEEP_SEC)
+    return {
+        "meta": {
+            "source": "yahoo_finance_fast_info",
+            "as_of": asof,
+            "count": len(rows),
+        },
+        "data": rows,
+    }
+
+
+def load_yahoo_market_caps(
+    target_tickers: list[str] | None = None,
+) -> tuple[dict[str, float], dict[str, float], dict[str, str], dict[str, str], dict[str, Any] | None]:
+    if not YAHOO_MARKET_CAP_PATH.exists() and target_tickers:
+        YAHOO_MARKET_CAP_PATH.parent.mkdir(parents=True, exist_ok=True)
+        snapshot = fetch_yahoo_market_caps(target_tickers)
+        YAHOO_MARKET_CAP_PATH.write_text(
+            json.dumps(snapshot, ensure_ascii=False, separators=(",", ":")),
+            encoding="utf-8",
+        )
+    if not YAHOO_MARKET_CAP_PATH.exists():
+        return {}, {}, {}, {}, None
+
+    snapshot = load_json(YAHOO_MARKET_CAP_PATH)
+    meta = snapshot.get("meta") or {}
+    asof = meta.get("as_of")
+    caps: dict[str, float] = {}
+    prices: dict[str, float] = {}
+    sources: dict[str, str] = {}
+    asofs: dict[str, str] = {}
+    for row in snapshot.get("data") or []:
+        ticker = row.get("ticker")
+        if not ticker:
+            continue
+        _merge_cap(
+            caps,
+            prices,
+            sources,
+            asofs,
+            ticker,
+            row.get("market_cap"),
+            price=row.get("last_price"),
+            source=meta.get("source") or "yahoo_finance_fast_info",
+            asof=asof,
+        )
+    return caps, prices, sources, asofs, meta
+
+
 def load_market_cap_context() -> tuple[dict[str, float], dict[str, float], dict[str, str], dict[str, str], dict[str, Any]]:
+    firm_tickers = {path.stem.replace("firm_", "") for path in FIRM_DIR.glob("firm_*.json")}
     caps: dict[str, float] = {}
     prices: dict[str, float] = {}
     sources: dict[str, str] = {}
@@ -284,8 +375,30 @@ def load_market_cap_context() -> tuple[dict[str, float], dict[str, float], dict[
             overwrite=True,
         )
 
+    missing_after_naver = sorted(ticker for ticker in firm_tickers if ticker not in caps)
+    yahoo_caps, yahoo_prices, yahoo_sources, yahoo_asofs, yahoo_meta = load_yahoo_market_caps(
+        missing_after_naver
+    )
+    for ticker, cap in yahoo_caps.items():
+        _merge_cap(
+            caps,
+            prices,
+            sources,
+            asofs,
+            ticker,
+            cap,
+            price=yahoo_prices.get(ticker),
+            source=yahoo_sources.get(ticker) or "yahoo_finance_fast_info",
+            asof=yahoo_asofs.get(ticker),
+            overwrite=False,
+        )
+
     meta = {
         "market_cap_snapshot": naver_meta,
+        "market_cap_snapshots": {
+            "naver": naver_meta,
+            "yahoo": yahoo_meta,
+        },
     }
     return caps, prices, sources, asofs, meta
 
