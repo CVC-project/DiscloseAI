@@ -138,7 +138,7 @@
     return out;
   }
 
-  function buildLookupNodes(nodes, eqsRows, companiesIndex, eqsByTicker, discByTicker, stmtByTicker, scenariosByTicker) {
+  function buildLookupNodes(nodes, eqsRows, companiesIndex, eqsByTicker, discByTicker, stmtByTicker) {
     const byCode = new Map(nodes.map((n) => [n.t, n]));
     const indexByCode = new Map((companiesIndex || []).map((c) => [c.t, c]));
     (eqsRows || []).forEach((fin) => {
@@ -153,7 +153,7 @@
         tier: idx.tier || "lookup",
         mc: fin.market_cap || null,
       };
-      byCode.set(t, enrichNode(base, eqsByTicker, discByTicker, stmtByTicker, scenariosByTicker));
+      byCode.set(t, enrichNode(base, eqsByTicker, discByTicker, stmtByTicker));
     });
     return Array.from(byCode.values());
   }
@@ -306,8 +306,7 @@
       (companiesIndex && Array.isArray(companiesIndex)) ? companiesIndex : [],
       eqsByTicker,
       discByTicker,
-      stmtByTicker,
-      scenariosByTicker
+      stmtByTicker
     );
     const sectors = useUniverse
       ? buildUniverseSectors(universe, nodes)
