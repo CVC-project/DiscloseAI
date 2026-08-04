@@ -29,46 +29,11 @@ IMAGE_RULES: list[tuple[tuple[str, ...], str, str]] = [
         "Unsplash",
     ),
     (
-        # NAND는 SSD보다 먼저 검사한다 — "NAND"만 있고 "SSD"는 없는 세그먼트(예: 순수
-        # 낸드 플래시 사업부)가 SSD 완제품 사진을 받지 않게. "SSD"·"스토리지"는 SSD
-        # 완제품 사진, "NAND"·"낸드"는 반도체 칩 사진으로 갈라 같은 회사 카드 4장 중
-        # 두 장이 동일 사진이 되는 문제(예: 파두)를 없앤다.
-        ("NAND", "낸드"),
-        "business_image_6d132f7d0cd45102.jpg",
-        "Wikimedia Commons",
-    ),
-    (
-        ("SSD", "스토리지"),
+        ("NAND", "SSD", "스토리지"),
         "business_image_b24ab2723180c79f.jpg",
         "Wikimedia Commons",
     ),
     (("DRAM", "메모리"), "business_image_10774ca82ea41202.jpg", "Wikimedia Commons"),
-    (
-        # VC·PE·여신전문금융업·신기술사업투자조합 — 전부 예전엔 companies의 sector
-        # 텍스트("기타 금융업" 등)까지 내려가 "은행" 이미지 하나로 수렴했다(미래에셋벤처투자
-        # 사례). 세그먼트 제목 자체에서 먼저 걸리도록 은행/증권 규칙보다 앞에 둔다.
-        # 짧은 "VC"를 단독 키워드로 두면 안 된다 — SEGMENT_EXPLAIN의 PE 설명 캡션 안에
-        # "VC보다"라는 문구가 들어있어, PE 카드가 이 규칙에 먼저 걸려 VC 이미지를 받는
-        # 자기 충돌이 있었다(PE와 동일하게 "VC부문" 단위로만 매칭).
-        ("VC부문", "VC 부문", "벤처캐피탈", "벤처투자조합", "벤처투자"),
-        "business_image_ceca6180c78be87d.jpg",
-        "Wikimedia Commons",
-    ),
-    (
-        ("PE부문", "PE 부문", "사모펀드", "프라이빗에쿼티", "바이아웃", "구조조정투자"),
-        "business_image_6967bb0f468d4e39.jpg",
-        "Wikimedia Commons",
-    ),
-    (
-        ("신기술사업투자조합", "신기술조합", "신기술금융", "신기술투자조합"),
-        "business_image_6ac978585d526517.jpg",
-        "Wikimedia Commons",
-    ),
-    (
-        ("여신전문금융업", "할부금융", "시설대여", "리스업", "신기술사업금융업"),
-        "business_image_10d17beeb61d4b0e.jpg",
-        "Wikimedia Commons",
-    ),
     (
         ("반도체", "웨이퍼", "Foundry", "파운드리", "Probe", "검사장치"),
         "business_image_63ecaf002e77f353.jpg",
@@ -234,6 +199,9 @@ BAD_TITLE_PARTS = (
     "보고부문",
     "연결조정",
     "조정",
+    "B2B전자결제",
+    "제품매출",
+    "테스트 매출",
 )
 
 CUSTOMER_LIST_PARTS = (
@@ -253,90 +221,169 @@ CUSTOMER_LIST_PARTS = (
     "Qualcomm",
 )
 
+GENERIC_PRODUCT_PARTS = (
+    "기타",
+    "기타부문",
+    "기타 제품",
+    "사업보고서상",
+    "주요 사업부문",
+    "고객사",
+    "거래처",
+)
 
-# 세그먼트 제목이 이 키워드 중 하나를 포함하면, 그 캡션을 "무엇인지 + 무엇으로
-# 돈을 버는지" 설명으로 항상 덮어쓴다. VC/PE/신기술사업투자조합/여신전문금융업 같은
-# 업종 용어는 사업보고서 원문 desc가 있어도("사업보고서상 주요 사업부문" 등) 초보
-# 투자자에게는 뜻 자체가 안 와닿아서, 원문 유무와 무관하게 항상 설명으로 교체한다.
-SEGMENT_EXPLAIN: list[tuple[tuple[str, ...], str]] = [
+PRODUCT_KIND_RULES: list[tuple[tuple[str, ...], str, str]] = [
     (
-        ("VC부문", "벤처캐피탈", "벤처투자조합", "창업투자"),
-        "VC(벤처캐피탈)는 성장 가능성이 큰 스타트업·벤처기업의 지분을 사들이는 사업입니다. "
-        "투자한 기업이 커져서 상장하거나 다른 곳에 팔릴 때 지분을 되팔아 남기는 차익이 주 수익원입니다.",
+        ("Si-Parts", "SiC-Parts", "Electrode", "Ring", "반도체", "웨이퍼", "식각"),
+        "chip",
+        "CHIP",
     ),
-    (
-        ("PE부문", "PE 부문", "사모펀드", "프라이빗에쿼티", "바이아웃", "구조조정투자"),
-        "PE(사모펀드)는 비상장 기업이나 회사 지분을 인수해 경영을 개선한 뒤 되팔아 차익을 남기는 사업입니다. "
-        "VC보다 더 자리잡은 기업을, 더 큰 금액으로 다루는 경우가 많습니다.",
-    ),
-    (
-        ("신기술사업투자조합", "신기술조합", "신기술투자조합", "신기술금융"),
-        "신기술사업투자조합은 여러 투자자의 자금을 모아 신기술을 가진 기업에 투자하는 조합입니다. "
-        "조합이 투자한 기업의 가치가 오르면 지분을 팔아 조합원들이 수익을 나눠 갖습니다.",
-    ),
-    (
-        ("여신전문금융업", "할부금융", "시설대여업", "리스업", "신기술사업금융업"),
-        "여신전문금융업은 금융당국 인가를 받아 대출·할부금융·리스(시설대여) 등을 제공하는 사업입니다. "
-        "빌려준 돈에 붙는 이자와 수수료가 주 수익원입니다.",
-    ),
+    (("DRAM", "NAND", "HBM", "SSD", "메모리"), "chip", "MEMORY"),
+    (("OLED", "디스플레이", "패널"), "display", "OLED"),
+    (("배터리", "전지", "양극재", "음극재", "전해액"), "battery", "BATTERY"),
+    (("자동차", "완성차", "전기차", "하이브리드", "부품"), "auto", "AUTO"),
+    (("선박", "LNG", "해양", "플랜트", "엔진"), "ship", "SHIP"),
+    (("은행", "대출", "예금"), "bank", "BANK"),
+    (("증권", "투자", "운용", "자산관리"), "securities", "AUM"),
+    (("보험", "보장", "손해보험", "생명보험"), "insurance", "INS"),
+    (("바이오", "제약", "CDMO", "임상", "백신"), "bio", "BIO"),
+    (("통신", "네트워크", "광케이블", "무선"), "telecom", "NET"),
+    (("전력", "발전", "송전", "케이블", "OPGW"), "power", "POWER"),
+    (("게임", "플랫폼", "콘텐츠", "광고"), "platform", "APP"),
+    (("소재", "화학", "정유", "철강", "금속"), "material", "MAT"),
 ]
 
 
-def explain_segment_caption(title: str) -> str | None:
-    text = _text(title)
-    for words, explain in SEGMENT_EXPLAIN:
-        if any(word in text for word in words):
-            return explain
-    return None
-
-
-_DEDUPE_SUFFIXES = ("사업부문", "사업부", "부문", "사업")
-
-
-def _core_title(title: str) -> str:
-    # "SSD"와 "SSD사업"처럼 접미사만 다른 사실상 동일한 제목을 같은 키로 묶기 위한 정규화.
-    t = _text(title)
-    for suf in _DEDUPE_SUFFIXES:
-        if t.endswith(suf) and len(t) > len(suf):
-            return t[: -len(suf)].strip()
-    return t
-
-
-def dedupe_by_title(
-    items: list[dict[str, Any]], *, title_key: str, desc_key: str
-) -> list[dict[str, Any]]:
-    """이름만 다르고 내용이 같은 항목(예: "SSD" / "SSD사업")을 하나로 합친다.
-
-    구분해도 사용자에게 실익이 없는 카드(같은 이미지, 같은 사업)가 두 번 나오는
-    문제(예: 파두)를 근본적으로 줄인다. 짧은 제목·더 긴 설명을 우선한다.
-    """
-    merged: dict[str, dict[str, Any]] = {}
-    order: list[str] = []
-    for item in items:
-        title = _text(item.get(title_key))
-        core = _core_title(title)
-        if not core:
-            continue
-        key = core.lower()
-        if key not in merged:
-            merged[key] = dict(item)
-            order.append(key)
-            continue
-        existing = merged[key]
-        if len(title) < len(_text(existing.get(title_key))):
-            existing[title_key] = item.get(title_key)
-        if len(_text(item.get(desc_key))) > len(_text(existing.get(desc_key))):
-            existing[desc_key] = item.get(desc_key)
-        # 둘 중 하나라도 실제 매출비중 수치가 있으면 보존한다(segment_breakdown 전용 필드).
-        if (
-            existing.get("revenue_share") is None
-            and item.get("revenue_share") is not None
-        ):
-            existing["revenue_share"] = item.get("revenue_share")
-    return [merged[k] for k in order]
-
-
 COMPANY_OVERRIDES: dict[str, list[dict[str, str]]] = {
+    "000440": [
+        {"title": "유류판매", "caption": "주유소와 대리점 채널을 통해 일반유·LPG 등 에너지 제품을 판매합니다.", "kind": "material", "visual": "OIL"},
+        {"title": "부대 용역", "caption": "유류 판매와 함께 발생하는 부대 서비스 수익을 더합니다.", "kind": "service", "visual": "SERVICE"},
+        {"title": "부동산 임대", "caption": "보유 지점 부동산 임대수익이 보조 수익원으로 붙습니다.", "kind": "service", "visual": "RENT"},
+        {"title": "태양광 발전", "caption": "종속회사를 통해 태양광 전기발전 사업도 함께 운영합니다.", "kind": "power", "visual": "SOLAR"},
+    ],
+    "012790": [
+        {"title": "의약품 제조", "caption": "일반·전문·동물용 의약품과 위탁생산 제품을 다품종으로 만듭니다.", "kind": "bio", "visual": "PHARMA"},
+        {"title": "기능성 화장품", "caption": "제약 기술을 바탕으로 팜트리 브랜드 화장품을 판매합니다.", "kind": "consumer", "visual": "COSMETIC"},
+        {"title": "건강기능식품", "caption": "비타민 등 건강기능식품이 의약품 외 제품군을 보완합니다.", "kind": "consumer", "visual": "HEALTH"},
+        {"title": "의약외품", "caption": "마스크 등 생활 방역·위생 관련 제품을 함께 취급합니다.", "kind": "bio", "visual": "MED"},
+    ],
+    "166090": [
+        {
+            "title": "Si-Parts",
+            "caption": "반도체 전공정 중 에칭(식각) 장비 안에서 웨이퍼를 깎는 데 쓰이는 실리콘 소모성 부품입니다.",
+            "kind": "chip",
+            "visual": "Si",
+        },
+        {
+            "title": "SiC-Parts",
+            "caption": "고온·플라즈마 환경을 견디는 실리콘카바이드 부품으로, 식각 공정 장비의 소모품 성격이 큽니다.",
+            "kind": "chip",
+            "visual": "SiC",
+        },
+        {
+            "title": "Electrode·Ring",
+            "caption": "전극과 링처럼 반도체 식각 장비에 반복 투입되는 부품을 고객 주문에 맞춰 공급합니다.",
+            "kind": "chip",
+            "visual": "PARTS",
+        },
+    ],
+    "067310": [
+        {
+            "title": "반도체 패키징·테스트",
+            "caption": "반도체 칩을 제품으로 쓸 수 있게 포장하고 검사하는 후공정 서비스입니다.",
+            "kind": "chip",
+            "visual": "PKG",
+        },
+        {
+            "title": "반도체 재료·Si-Parts",
+            "caption": "식각 장비에 들어가는 실리콘·실리콘카바이드 소모성 부품을 공급합니다.",
+            "kind": "chip",
+            "visual": "Si",
+        },
+        {
+            "title": "반도체 공정소모품",
+            "caption": "고객사의 공정 장비에서 반복 교체되는 부품이라 설비투자와 가동률 영향을 받습니다.",
+            "kind": "chip",
+            "visual": "PARTS",
+        },
+    ],
+    "131290": [
+        {
+            "title": "Probe Card",
+            "caption": "웨이퍼 위 반도체 칩이 정상 작동하는지 검사할 때 쓰는 핵심 테스트 부품입니다.",
+            "kind": "chip",
+            "visual": "PROBE",
+        },
+        {
+            "title": "Interface Board",
+            "caption": "검사장비와 반도체 칩 사이의 신호를 연결해주는 테스트용 기판입니다.",
+            "kind": "chip",
+            "visual": "BOARD",
+        },
+        {
+            "title": "Contact Probe",
+            "caption": "칩과 검사장비를 전기적으로 접촉시켜 불량 여부를 확인하는 미세 접촉 부품입니다.",
+            "kind": "chip",
+            "visual": "PROBE",
+        },
+        {
+            "title": "Interposer",
+            "caption": "고성능 반도체 테스트 과정에서 신호 전달을 보조하는 정밀 부품입니다.",
+            "kind": "chip",
+            "visual": "TEST",
+        },
+    ],
+    "003030": [
+        {"title": "강관 계열사", "caption": "세아제강 등 강관 사업 계열의 실적과 배당 흐름을 함께 보는 지주회사입니다.", "kind": "material", "visual": "PIPE"},
+        {"title": "지주·투자", "caption": "자회사 지분가치와 배당수익이 기업가치의 중심입니다.", "kind": "securities", "visual": "HOLD"},
+    ],
+    "011150": [
+        {"title": "수산가공식품", "caption": "어묵·맛살 등 수산가공 제품 판매가 핵심입니다.", "kind": "consumer", "visual": "FOOD"},
+        {"title": "식품 유통", "caption": "대형 유통채널과 식품 고객사 공급망이 매출에 연결됩니다.", "kind": "consumer", "visual": "RETAIL"},
+    ],
+    "093050": [
+        {"title": "패션 브랜드", "caption": "의류와 잡화 브랜드 판매가 핵심 사업입니다.", "kind": "consumer", "visual": "FASHION"},
+        {"title": "유통 채널", "caption": "오프라인 매장과 온라인몰을 함께 운영합니다.", "kind": "platform", "visual": "ONLINE"},
+    ],
+    "106190": [
+        {"title": "원료의약품", "caption": "의약품 생산에 쓰이는 원료의약품을 제조·판매합니다.", "kind": "bio", "visual": "API"},
+        {"title": "제약 소재", "caption": "고객 제약사의 생산 계획과 수출 수요가 실적에 연결됩니다.", "kind": "bio", "visual": "PHARMA"},
+    ],
+    "153890": [
+        {"title": "전기전자 부품", "caption": "전자제품 제조에 들어가는 부품을 공급합니다.", "kind": "service", "visual": "PARTS"},
+        {"title": "부품 제조", "caption": "고객사 생산량과 제품 교체 수요가 매출에 영향을 줍니다.", "kind": "service", "visual": "MFG"},
+    ],
+    "253450": [
+        {"title": "드라마 제작", "caption": "방송·OTT용 드라마 콘텐츠를 기획하고 제작합니다.", "kind": "platform", "visual": "CONTENT"},
+        {"title": "콘텐츠 유통", "caption": "방영권·판권·해외 판매가 매출에 연결됩니다.", "kind": "platform", "visual": "IP"},
+    ],
+    "365660": [
+        {"title": "모바일 헬스케어", "caption": "병원·환자용 모바일 서비스를 제공하는 헬스케어 플랫폼입니다.", "kind": "platform", "visual": "HEALTH"},
+        {"title": "의료 데이터 서비스", "caption": "병원 시스템과 환자 서비스를 연결하는 디지털 솔루션을 운영합니다.", "kind": "platform", "visual": "DATA"},
+    ],
+    "387690": [
+        {"title": "의료·전자 부품", "caption": "의료기기와 전자제품에 쓰이는 부품·장비를 공급합니다.", "kind": "service", "visual": "MED"},
+        {"title": "정밀 장비", "caption": "고객사 제품 개발과 생산 일정에 맞춰 장비·부품 매출이 발생합니다.", "kind": "service", "visual": "EQUIP"},
+    ],
+    "439960": [
+        {"title": "로봇 제품", "caption": "산업 현장과 서비스 영역에 쓰이는 로봇 제품을 개발합니다.", "kind": "service", "visual": "ROBOT"},
+        {"title": "자동화 솔루션", "caption": "공장·물류 자동화 수요가 사업 확장에 연결됩니다.", "kind": "service", "visual": "AUTO"},
+    ],
+    "466100": [
+        {"title": "로봇 소프트웨어", "caption": "로봇을 움직이고 관리하는 소프트웨어 플랫폼을 제공합니다.", "kind": "platform", "visual": "ROBOT"},
+        {"title": "로봇 관제", "caption": "여러 로봇을 한 화면에서 운영·관리하는 관제 솔루션이 핵심입니다.", "kind": "platform", "visual": "CONTROL"},
+    ],
+    "477850": [
+        {"title": "산업 AI 플랫폼", "caption": "제조·산업 데이터를 분석해 설비와 공정 의사결정을 돕는 AI 솔루션입니다.", "kind": "platform", "visual": "AI"},
+        {"title": "AI 운영 솔루션", "caption": "기업이 AI 모델을 배포하고 관리하는 소프트웨어를 제공합니다.", "kind": "platform", "visual": "MLOPS"},
+    ],
+    "493330": [
+        {"title": "DI-KIT", "caption": "재난·안전 분야에서 쓰이는 탐지·대응 장비 제품입니다.", "kind": "service", "visual": "SAFETY"},
+        {"title": "안전 장비", "caption": "소방·안전 현장의 장비 수요가 매출에 연결됩니다.", "kind": "service", "visual": "FIRE"},
+    ],
+    "950250": [
+        {"title": "검사 장비", "caption": "산업 현장에서 소재와 부품을 검사하는 장비 사업을 봅니다.", "kind": "service", "visual": "TEST"},
+        {"title": "장비 솔루션", "caption": "고객사 품질관리와 생산 공정에 연결되는 솔루션을 제공합니다.", "kind": "service", "visual": "EQUIP"},
+    ],
     "012750": [
         {
             "title": "시큐리티",
@@ -400,19 +447,115 @@ def is_bad_card(card: dict[str, Any]) -> bool:
     combined = f"{title} {caption}"
     if not title:
         return True
-    # BAD_TITLE_PARTS는 순수 substring이 아니라 접두/접미 일치로 본다 — "사업"·"제품"·"서비스"
-    # 처럼 짧고 흔한 항목을 순수 포함으로 걸면 "신기술사업투자조합"(가운데에 "사업"이 있을
-    # 뿐인 정상 세그먼트)처럼 특정 업종 용어가 통째로 카드에서 사라진다.
-    if any(
-        title == part or title.startswith(part) or title.endswith(part)
-        for part in BAD_TITLE_PARTS
-    ):
+    if any(part in title for part in BAD_TITLE_PARTS):
         return True
     if any(part in combined for part in CUSTOMER_LIST_PARTS):
+        return True
+    if "사업보고서상 주요 사업부문" in caption:
+        return True
+    if caption == "사업보고서의 주요 제품·서비스 문단에서 확인되는 사업입니다.":
+        return True
+    if any(part == title for part in GENERIC_PRODUCT_PARTS):
         return True
     if re.fullmatch(r"[\d.,%()/*\- ]+", title):
         return True
     return False
+
+
+def is_good_product_name(name: str) -> bool:
+    clean = _text(name).strip(" .,/·")
+    if len(clean) < 2 or len(clean) > 32:
+        return False
+    if any(part in clean for part in CUSTOMER_LIST_PARTS):
+        return False
+    if any(part == clean or clean.startswith(part + " ") for part in BAD_TITLE_PARTS):
+        return False
+    if any(part in clean for part in ("매출", "제품매출", "테스트 매출", "제조")):
+        return False
+    if any(part == clean for part in GENERIC_PRODUCT_PARTS):
+        return False
+    if re.fullmatch(r"[\d.,%()/*\- ]+", clean):
+        return False
+    return True
+
+
+def infer_kind_visual(text: str, sector: str = "") -> tuple[str, str]:
+    haystack = f"{text} {sector}"
+    for words, kind, visual in PRODUCT_KIND_RULES:
+        if any(word.lower() in haystack.lower() for word in words):
+            return kind, visual
+    return "service", "BUSINESS"
+
+
+def product_caption(name: str, sector: str, overview: str) -> str:
+    if any(word in name for word in ("Si-Parts", "SiC-Parts", "Electrode", "Ring")):
+        return "반도체 식각 공정 장비에 들어가는 교체·소모성 부품입니다."
+    if any(word in name for word in ("DRAM", "NAND", "HBM", "SSD")):
+        return "데이터 저장과 AI 서버 수요에 연결되는 메모리 제품입니다."
+    if "OPGW" in name or "광케이블" in name:
+        return "전력망과 통신망 인프라에 쓰이는 케이블 제품입니다."
+    if "LNG" in name or "선박" in name:
+        return "조선·해양 프로젝트 매출을 만드는 핵심 제품군입니다."
+    if "보험" in sector:
+        return "보험료 수입과 손해율이 실적을 좌우하는 금융 서비스입니다."
+    if "금융" in sector or "은행" in sector:
+        return "이자이익과 수수료 수익을 만드는 금융 서비스입니다."
+    if "반도체" in sector:
+        return "반도체 공정과 고객사 투자 흐름에 연결되는 제품입니다."
+    if "자동차" in sector:
+        return "완성차 생산·판매와 부품 공급망에 연결되는 사업입니다."
+    if "전자부품" in sector or "전자제품" in sector:
+        return "전자제품과 반도체·디스플레이 생산 과정에 들어가는 부품·장비 사업입니다."
+    if "통신" in sector:
+        return "통신망 구축과 데이터 전송 인프라에 연결되는 제품·서비스입니다."
+    if "소매" in sector or "유통" in sector:
+        return "소비자에게 상품을 판매해 매출을 만드는 유통 사업입니다."
+    if overview:
+        return "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다."
+    return f"{name}을 중심으로 매출을 만듭니다."
+
+
+def cards_from_report_terms(payload: dict[str, Any]) -> list[dict[str, str]]:
+    snippets = (
+        payload.get("snippets") if isinstance(payload.get("snippets"), dict) else {}
+    )
+    sector = _text(payload.get("sector") or payload.get("display_category"))
+    overview = (
+        _text(snippets.get("overview")) + " " + _text(snippets.get("segment_finance"))
+    )
+    names: list[str] = []
+    for product in snippets.get("products", []):
+        if isinstance(product, str) and is_good_product_name(product):
+            names.append(product.strip())
+    for seg in snippets.get("segment_breakdown", []):
+        if isinstance(seg, dict):
+            name = _text(seg.get("name"))
+            desc = _text(seg.get("desc"))
+            if is_good_product_name(name):
+                names.append(name)
+            for token in re.split(r"[,/·ㆍ]", desc):
+                token = token.strip()
+                if is_good_product_name(token):
+                    names.append(token)
+
+    result: list[dict[str, str]] = []
+    seen: set[str] = set()
+    for name in names:
+        if name in seen:
+            continue
+        seen.add(name)
+        kind, visual = infer_kind_visual(f"{name} {overview}", sector)
+        result.append(
+            {
+                "title": name,
+                "caption": product_caption(name, sector, overview),
+                "kind": kind,
+                "visual": visual,
+            }
+        )
+        if len(result) >= 4:
+            break
+    return result
 
 
 def choose_image(card: dict[str, Any], payload: dict[str, Any]) -> tuple[str, str]:
@@ -502,10 +645,15 @@ def normalize_business_payload(payload: dict[str, Any]) -> dict[str, Any]:
     if ticker in COMPANY_OVERRIDES:
         cards = [dict(card) for card in COMPANY_OVERRIDES[ticker]]
     else:
-        cards = [
+        report_cards = cards_from_report_terms(data)
+        cards = [dict(card) for card in report_cards]
+        existing_titles = {c.get("title") for c in cards}
+        cards = cards + [
             dict(card)
             for card in data.get("business_cards", [])
-            if isinstance(card, dict) and not is_bad_card(card)
+            if isinstance(card, dict)
+            and not is_bad_card(card)
+            if card.get("title") not in existing_titles
         ]
         if len(cards) < 2:
             cards = cards + [
@@ -513,27 +661,16 @@ def normalize_business_payload(payload: dict[str, Any]) -> dict[str, Any]:
                 for card in fallback_cards(data)
                 if card.get("title") not in {c.get("title") for c in cards}
             ]
-    cards = dedupe_by_title(cards, title_key="title", desc_key="caption")
-    for card in cards:
-        explain = explain_segment_caption(card.get("title"))
-        if explain:
-            card["caption"] = explain
     data["business_cards"] = attach_images(cards[:4], data)
 
     snippets = data.get("snippets")
     if isinstance(snippets, dict):
-        breakdown = [
+        snippets["segment_breakdown"] = [
             seg
             for seg in snippets.get("segment_breakdown", [])
             if isinstance(seg, dict)
             and not any(part in _text(seg.get("name")) for part in BAD_TITLE_PARTS)
         ]
-        breakdown = dedupe_by_title(breakdown, title_key="name", desc_key="desc")
-        for seg in breakdown:
-            explain = explain_segment_caption(seg.get("name"))
-            if explain:
-                seg["desc"] = explain
-        snippets["segment_breakdown"] = breakdown
         if ticker == "139480":
             snippets["overview"] = (
                 "이마트는 할인점과 트레이더스 같은 오프라인 유통, 전문점·푸드, "
