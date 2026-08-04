@@ -570,7 +570,10 @@ def choose_image(card: dict[str, Any], payload: dict[str, Any]) -> tuple[str, st
     for words, filename, source in IMAGE_RULES:
         if any(word.lower() in lower for word in words):
             return _image_path(filename), source
-    sector_text = f"{_text(payload.get('sector'))} {_text(payload.get('display_category'))}".lower()
+    sector_text = (
+        f"{_text(payload.get('sector'))} "
+        f"{_text(payload.get('display_category'))}"
+    ).lower()
     for words, filename, source in IMAGE_RULES:
         if any(word.lower() in sector_text for word in words):
             return _image_path(filename), source
