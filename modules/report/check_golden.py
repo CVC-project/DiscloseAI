@@ -627,7 +627,20 @@ def _check_strict(ticker: str, G: dict, dives: dict) -> list[str]:
                 tot = sum(
                     abs(a) / 1e12 for nm, a in bs_acc if any(k in nm for k in akw)
                 )
-                if tot >= MAT_A and not any(k in bs_panel_names for k in akw):
+                # V-106 B(코드 승격 2026-08-04): MAT_A가 **0원 계정을 자동 면제**하는 구멍만 막는다.
+                # 주11 생물자산은 잔액이 0인데 전용 주석 2,865자 + 원문 BS 캡션이 실재했고,
+                # 그 구멍으로 §12·§9·§10을 모두 통과한 채 남의 카드(주13)로 중복 착지했다.
+                # ⚠️ 소액(0 < x < MAT_A)은 종전대로 임계 적용 — '캡션 실재'만으로 전 계정을
+                #    행으로 올리면 잔차 흡수를 정당하게 쓰는 기존 골든이 무더기로 깨진다(실측 4본).
+                zero_caption = any(
+                    any(k in nm for k in akw) for nm, _ in bs_acc
+                ) and tot == 0
+                if zero_caption and not any(k in bs_panel_names for k in akw):
+                    gaps.append(
+                        f"[BS앵커] '{lab}' 원문 재무상태표에 전용 계정(잔액 0)이 있고 전용 주석도 "
+                        f"있는데 패널 행 없음 — '잔액 0'은 '근거 없음'이 아니다, 행 신설(V-106)"
+                    )
+                elif tot >= MAT_A and not any(k in bs_panel_names for k in akw):
                     gaps.append(
                         f"[BS앵커] '{lab}' 실계정 {tot:.2f}조·전용 주석 있음인데 재무상태표(패널) 행 없음(잔차 흡수) — 행 신설+승격 필요(V-082)"
                     )
@@ -734,7 +747,84 @@ def _check_strict(ticker: str, G: dict, dives: dict) -> list[str]:
                     gaps.append(
                         "[CF운전자본] cf-wc 행이 있는데 cf-noncash 라벨도 '운전자본'을 포함 — 이중 표기(V-099)"
                     )
+
+    # ── 14) (strict) anchor 자기정합 (V-107 C — 리더 지시 코드 승격) ──────────────
+    # 원칙: anchor.shared_keys에 든 series 키를 five.key로 쓰는 dive가 있으면, 그 카드의
+    # five.valley와 anchor.valley_index가 같아야 한다. 같은 파일 안에서 서로 다른 해를 골짜기로
+    # 가리키면 화면에서 앵커 라벨과 카드 캡션이 어긋난다(이마트 tci: anchor 3 vs totalcomp 2).
+    # ⚠️ 'shared_keys의 argmin == valley_index'는 규칙이 아니다 — anchor는 최저점이 아니라
+    #    '그 해의 사건'을 가리키므로(한화·KT&G·NAVER 등 실측), 자기정합만 강제한다.
+    anc = G.get("anchor") or {}
+    vi = anc.get("valley_index")
+    if isinstance(vi, int):
+        for sk in anc.get("shared_keys") or []:
+            for dk, dd in dives.items():
+                fv = dd.get("five") or {}
+                if fv.get("key") == sk and fv.get("valley") is not None and fv["valley"] != vi:
+                    gaps.append(
+                        f"[anchor] shared_keys '{sk}'의 valley_index {vi} ≠ dive '{dk}'.five.valley "
+                        f"{fv['valley']} — 같은 지표가 두 해를 가리킴(V-107)"
+                    )
+
+    # ── 15) (strict) Zone C/E 헤드라인 행 라벨 길이 (V-103·V-106 → 2회+ 코드 승격) ──
+    # 원칙: 흐름 패널(C 현금흐름·E 자본변동)의 **헤드라인 행**(grp 없음) 라벨이 길면 나브·패널에서
+    # 두 줄로 접힌다. 라벨 접힘 지적이 리더 검수에서 2회 나왔고(V-103 APPENDIX 나브 → V-106 Zone E),
+    # 체커·감사 어느 쪽도 라벨 길이를 보지 않아 스크린샷 말고는 검출 경로가 없었다.
+    # 임계 22자 = 전 골든 실측 캘리브레이션(T0 삼성 최대 21자 '영업활동 자산·부채의 변동 (운전자본)').
+    # R6.6a '행 라벨 = 원문 계정명'은 **재무상태표·손익계산서 행 한정**이고 Zone C/E는
+    # V-063 '원문 primary + 짧은 부연' 계약이므로 축약이 허용된다.
+    LABEL_MAX = 22
+    for z in ("C", "E"):
+        for r in (G.get("panels") or {}).get(z, []) or []:
+            if r.get("grp"):
+                continue  # 서브행은 설명 라벨이라 대상 밖
+            nm = r.get("name") or ""
+            if len(nm) > LABEL_MAX:
+                gaps.append(
+                    f"[라벨] Zone {z} 헤드라인 '{r.get('row')}' 라벨 {len(nm)}자(>{LABEL_MAX}) — "
+                    f"두 줄 접힘 위험, 짧은 이름으로 축약(V-106): '{nm}'"
+                )
     return gaps
+
+
+# ── 계정셀 링크 계측 (V-104⑪ → 계측 코드화, 2026-08-04) ────────────────────────────
+# 원문 재무제표 표의 계정셀이 딥다이브로 연결되려면 패널 D 행 `name`이 원문 캡션과
+# 글자까지 같아야 한다(렌더러 `_nameDive`의 norm()이 '(' 이후·공백···:만 흡수).
+# 게이트로 두면 병합 행(`매출채권 및 미수금`)·잔차 행(`그 외 …`)을 정당하게 쓰는 기존
+# 골든 14본이 전부 FAIL하므로, **완주 보고용 계측**으로 승격한다(`--links`).
+_LINK_EXEMPT = ("그 외", "잔차", "(계)", "기타 (", "등 (")
+
+
+def _norm_cap(s: str) -> str:
+    return str(s or "").split("(")[0].replace(" ", "").replace("·", "").replace(":", "")
+
+
+def link_report(ticker: str) -> dict:
+    """패널 D 행 ↔ 원문 재무상태표 캡션 매칭 실측. 완주 보고에 N/N으로 남긴다."""
+    gp = os.path.join(_DATA, f"galaxy_{ticker}.json")
+    rp = os.path.join(_DATA, f"report_{ticker}.json")
+    if not (os.path.exists(gp) and os.path.exists(rp)):
+        return {"ticker": ticker, "error": "galaxy/report json 없음"}
+    G = json.load(open(gp, encoding="utf-8"))
+    R = json.load(open(rp, encoding="utf-8"))
+    caps = []
+    for b in ((R.get("statements") or {}).get("bs") or {}).get("blocks") or []:
+        if b.get("t") == "table":
+            for row in b.get("rows") or []:
+                if len(row) > 1 and row[0] and row[1] and "," in str(row[1]):
+                    caps.append(str(row[0]).strip())
+    capset = {_norm_cap(c) for c in caps}
+    rows = [r.get("name", "") for r in (G.get("panels") or {}).get("D", [])]
+    merged = [r for r in rows if any(x in r for x in _LINK_EXEMPT)]
+    checked = [r for r in rows if r not in merged]
+    hit = [r for r in checked if _norm_cap(r) in capset]
+    unlinked = [c for c in caps if _norm_cap(c) not in {_norm_cap(r) for r in rows}]
+    return {
+        "ticker": ticker, "captions": len(caps), "panel_rows": len(rows),
+        "checked": len(checked), "linked": len(hit), "merged_exempt": len(merged),
+        "miss": [r for r in checked if _norm_cap(r) not in capset],
+        "unlinked_captions": unlinked,
+    }
 
 
 def main() -> int:
@@ -742,7 +832,32 @@ def main() -> int:
     strict = (
         "--strict" in args
     )  # V-068·069 캐스케이드 계약 게이트(원문·amt·승격) 추가 — 수렴 판정용
-    args = [a for a in args if a != "--strict"]
+    links = "--links" in args
+    args = [a for a in args if a not in ("--strict", "--links")]
+    if links:  # 계정셀 링크 계측(V-104⑪) — 게이트가 아니라 완주 보고용 실측
+        import glob
+
+        ts = (
+            sorted(
+                os.path.basename(p)[7:-5]
+                for p in glob.glob(os.path.join(_DATA, "galaxy_*.json"))
+                if os.path.basename(p) != "galaxy_index.json"
+            )
+            if (args and args[0] == "--all")
+            else [args[0] if args else GOLDEN_REF]
+        )
+        for t in ts:
+            r = link_report(t)
+            if r.get("error"):
+                print(f"  {t}: {r['error']}")
+                continue
+            print(
+                f"  {t}: 패널 D {r['panel_rows']}행 · 캡션대조 {r['linked']}/{r['checked']}"
+                f" (병합·잔차 면제 {r['merged_exempt']}) · 미링크 캡션 {len(r['unlinked_captions'])}"
+            )
+            if r["miss"]:
+                print(f"      캡션 불일치 행: {r['miss'][:6]}")
+        return 0
     if args and args[0] == "--all":  # 전 골든 회귀 게이트 (galaxy_*.json 전수 — R8)
         import glob
 

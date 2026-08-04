@@ -25,6 +25,9 @@ SOURCE_MAP: dict[str, dict] = {
     },
     "pretax": {"src": "B", "acc": ["ifrs-full_ProfitLossBeforeTax"]},
     "tax": {"src": "B", "acc": ["ifrs-full_IncomeTaxExpenseContinuingOperations"]},
+    # ⚠️ tax 파생 금지 규칙(V-105 ③ → 코드 승격 2026-08-04): `pretax − ni`로 역산하면
+    #    IFRS5 중단영업 보유사에서 중단영업손익이 섞여 깨진다(CJ FY25 0.48 vs 실제 0.24조).
+    #    tax는 반드시 계속영업 법인세비용 실계정에서만 회수한다 — 파생 폴백을 두지 않는다.
     "ni": {"src": "A|B", "acc": ["ifrs-full_ProfitLoss"]},
     "oci": {"src": "B", "acc": ["ifrs-full_OtherComprehensiveIncome"]},
     # 현금흐름 6
@@ -98,16 +101,20 @@ def _load_fs(ticker: str, db_path: str = _DB) -> tuple[dict, list[int]]:
     """
     con = sqlite3.connect(db_path)
     rows = con.execute(
-        "SELECT sj_div, account_id, fiscal_year, amount FROM fs_account WHERE ticker=?",
+        "SELECT sj_div, account_id, fiscal_year, amount, account_nm FROM fs_account WHERE ticker=?",
         (ticker,),
     ).fetchall()
     con.close()
-    by_acc: dict[tuple[str, str], dict[int, float]] = {}
+    by_acc: dict = {}
     years: set[int] = set()
-    for sj, acc, fy, amt in rows:
+    for sj, acc, fy, amt, nm in rows:
         if amt is None:
             continue
         by_acc.setdefault((sj, acc), {})[fy] = amt
+        # V-061 폴백용 계정명 인덱스 — 같은 이름이 여러 행이면 절댓값이 큰 쪽(총계)을 남긴다.
+        idx = by_acc.setdefault(("__NAME__", sj), {}).setdefault(nm or "", {})
+        if fy not in idx or abs(amt) > abs(idx[fy]):
+            idx[fy] = amt
         years.add(fy)
     fy_list = sorted(years)[-WINDOW:]
     return by_acc, fy_list
@@ -117,6 +124,7 @@ def _series_for(key: str, acc_ids: list[str], by_acc: dict, fy_list: list[int], 
     """sj_div 우선순위 × account_id 후보 중 5개년 전부 채우는 첫 조합을 조(또는 원본÷div) 배열로.
 
     같은 account_id가 여러 표에 있을 때 SJ_PRIORITY로 총계 표를 골라 SCE 오염을 피한다.
+    ⚠️ 한 account_id로 5개년이 안 채워지면 _merge_per_year(V-061 폴백)가 이어받는다.
     """
     sjs = SJ_PRIORITY.get(key, ["IS", "CIS", "CF", "BS"])
     for sj in sjs:
@@ -132,6 +140,66 @@ def _series_for(key: str, acc_ids: list[str], by_acc: dict, fy_list: list[int], 
     return None
 
 
+# ── V-061 per-year 병합 폴백 (5회+ 반복 패턴의 코드 승격, 2026-08-04) ────────────────
+# 증상: 같은 계정이 연도마다 account_id·계정명이 갈려 단일 키로는 5점이 안 채워진다.
+#   실측 변이 — 표준코드 도입 시점 변경('-표준계정코드 미사용-' → 'ifrs-full_…', 이마트 CF 3활동),
+#   계정명 공백·표현 변경('영업활동 현금흐름'↔'영업활동현금흐름'·'배당금의 지급'↔'배당금지급'),
+#   한글 가운뎃점 변이('자산ㆍ부채의변동'), 연도별 부호 반전(capex·div).
+# 처방: account_id 후보 + 계정명 정규식 후보로 **연도별로 따로** 값을 회수해 병합한다.
+#   (V-077 SKT·V-102 현대제철·V-104 S-Oil·V-105 CJ·V-107 이마트에서 수기로 하던 작업)
+ALT_NAME: dict[str, str] = {
+    "ocf": r"^영업활동(으로부터의|으로인한)?\s*(순)?현금(흐름|유입|유출)",
+    "icf": r"^투자활동(으로부터의|으로인한)?\s*(순)?현금(흐름|유입|유출)",
+    "fin": r"^재무활동(으로부터의|으로인한)?\s*(순)?현금(흐름|유입|유출)",
+    "oci": r"^(당기\s*)?(세후\s*)?기타포괄손익$|^총\s*기타포괄손익$|^당기\s*세후\s*기타포괄손익$",
+    "capex": r"유형자산의?\s*취득",
+    "div": r"^배당금(의)?\s*지급$",
+    "sgna": r"^판매비와?\s*(일반)?관리비$",
+    "eps": r"^기본주당(순)?이익",
+    "dep": r"감가상각비",
+}
+# 부호가 연도마다 뒤집히는 키(유출을 양수/음수로 번갈아 적는 회사) — 절댓값으로 정규화.
+ABS_KEYS = {"capex", "div", "buyback"}
+
+
+def _merge_per_year(key: str, acc_ids: list[str], by_acc: dict, fy_list: list[int], *, div: float):
+    """연도별로 account_id 후보 → 계정명 정규식 후보 순으로 값을 회수해 5점을 병합(V-061)."""
+    import re as _re
+
+    sjs = SJ_PRIORITY.get(key, ["IS", "CIS", "CF", "BS"])
+    pat = _re.compile(ALT_NAME[key]) if key in ALT_NAME else None
+    out: list = []
+    for fy in fy_list:
+        got = None
+        for sj in sjs:
+            for acc in acc_ids:
+                v = (by_acc.get((sj, acc)) or {}).get(fy)
+                if v is not None:
+                    got = v
+                    break
+            if got is not None:
+                break
+        if got is None and pat is not None:
+            # 계정명 폴백 — _load_fs가 넣어 둔 이름 인덱스에서 회수(공백 제거본으로도 매칭)
+            cands = []
+            for sj in sjs:
+                for nm, yv in (by_acc.get(("__NAME__", sj)) or {}).items():
+                    if pat.search(nm) or pat.search(nm.replace(" ", "")):
+                        v = yv.get(fy)
+                        if v is not None:
+                            cands.append(v)
+            if cands:
+                got = max(cands, key=abs)
+        if got is None:
+            return None
+        out.append(got)
+    if key in ABS_KEYS:
+        out = [abs(v) for v in out]
+    if div == 1:
+        return [round(v) for v in out]
+    return [round(v / div, 1) for v in out]
+
+
 def build_series(ticker: str, db_path: str = _DB) -> dict:
     """fs_account(B) + 파생(D) → S 24키 × 5점(조 단위, eps만 원). N(rnd·dsOp)은 Phase4 extract 주입.
 
@@ -145,7 +213,10 @@ def build_series(ticker: str, db_path: str = _DB) -> dict:
     for key, spec in SOURCE_MAP.items():
         if spec["src"] == "D" or spec["src"] == "N":
             continue
-        vals = _series_for(key, spec.get("acc", []), by_acc, fy_list, div=(1 if key == "eps" else JO))
+        _div = 1 if key == "eps" else JO
+        vals = _series_for(key, spec.get("acc", []), by_acc, fy_list, div=_div)
+        if vals is None:  # V-061 폴백 — 연도별 account_id·계정명 변이를 병합
+            vals = _merge_per_year(key, spec.get("acc", []), by_acc, fy_list, div=_div)
         if vals is not None:
             series[key] = vals
 

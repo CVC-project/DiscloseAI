@@ -95,10 +95,15 @@ dive 스켈레톤·routing_ledger 전 주석) → 산문(prose-writer, 카드 �
 24. **Zone C/E 헤드라인 행 라벨은 짧은 이름으로**(V-106, 라벨 접힘 2회째) — `배당금`·`비지배지분과의 거래 등`처럼. R6.6a '행 라벨 = 원문 계정명'은 **재무상태표·손익계산서 행 한정**이고 Zone C/E는 V-063 '원문 primary + 짧은 부연' 계약이다. **체커가 안 잡는다** — 조립 직후 Zone C/E 라벨 길이를 눈으로 확인할 것(T0 실측 상한 ~14자).
 25. **원문 재무제표에 캡션이 있고 전용 주석이 있으면 잔액이 0이어도 전용 카드 + 패널 행을 만든다**(V-106). `잔액 0`은 R6.9 방향A의 '근거 없음'이 **아니다**. §12 무핀 0·§9 커버리지는 '어디로든 착지하면 통과'라 **중복 착지를 못 잡고**, §10은 material ≥0.05조에서만 발화해 0원을 자동 면제한다 — **note_dive로 다른 주석 카드에 흘려보내기 전에 원문 캡션 유무를 먼저 확인**할 것.
 
+26. **합계 라인을 특정 사건의 금액으로 쓰지 말 것**(V-107a, **3회째** — V-102 성격별 비용 합계 · V-105④ 중단영업 포함 합계). 손익·비용 주석의 `합계`는 여러 거래를 담은 값이라, 사건의 크기는 **그 사건을 명시한 주석의 개별 금액**으로 말한다. **두 값 다 원문에 있어 숫자 화이트리스트를 통과하고 인과만 틀리므로 기계 게이트가 못 잡는다** — 산문 작성 후 "이 금액이 이 사건의 것인가"를 눈으로 한 번 더 볼 것.
+27. **다열 표는 헤더와 값을 zip해 라벨을 확정**(V-107A). 헤더 열 수 ≠ 값 열 수면 한 칸 밀려 라벨-값이 뒤바뀌고, `source_quote`는 원문 substring이라 그대로 통과한다. `python -m modules.report.facts_lint <t>`로 **ERROR 0**을 확인하고 WARN(순수 수치 파이프 행에서 단일 값 추출)은 눈으로 검토할 것.
+
 ## 완주 게이트 (티커마다 전부 PASS — 하나라도 FAIL이면 publish 금지)
 
 ```bash
-python -m modules.report.check_golden <t> --strict     # §1~§13 갭 0 (무핀 0·BS앵커·착지·CF운전자본 포함)
+python -m modules.report.facts_lint <t>                # S1 산출물 — 스키마·source_quote·열 정렬 ERROR 0
+python -m modules.report.check_golden <t> --strict     # §1~§15 갭 0 (무핀 0·BS앵커·착지·CF운전자본·anchor·라벨 포함)
+python -m modules.report.check_golden <t> --links      # 계정셀 링크 실측(완주 보고에 N/N 기재)
 python -m modules.report.check_golden --all            # 전 골든 무회귀
 GALAXY_TICKER=<t> python -m pytest tests/report/test_galaxy_interaction.py
 python -m pytest tests/report/ -q                      # 하네스 회귀(체커·섹셔너 테스트 포함)
