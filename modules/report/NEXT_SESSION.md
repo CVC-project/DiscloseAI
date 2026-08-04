@@ -27,7 +27,7 @@
   계정명/account_id 변이로 series 매칭만 실패한 것으로 보이며 **V-061 의심 2회째**다(직전 CJ에서도 account_id 기준 회수가 답이었다).
   빌드 세션에서 **per-year 병합으로 골든 series 주입**하고, 확인되면 **series 폴백 코드 승격**(2회 규칙).
 - 구조 가설(S1에서 확정): **사용권자산·리스부채 거대** · 저마진 · 부문(할인점/트레이더스/온라인). 가설은 가설일 뿐 — 실주석으로 확정할 것.
-- S0부터 순서대로: `sectioner --health 139480` → `series 139480` → VARIATIONS 전체 정독(**V-102~105는 직전 3본**) → S1 note-extractor.
+- S0부터 순서대로: `sectioner --health 139480` → `series 139480` → **VARIATIONS.md(정본) 전체 정독** — 08-04 재편으로 코드화 색인·구조 패턴표·활성 채록(V-102~106)·로그만 남아 한 번에 읽힌다(과거 전문은 VARIATIONS_ARCHIVE.md 번호 조회). 이마트는 패턴표의 **단일 CIS·series per-year 병합(V-061)·리스 거대(사용권·리스부채)** 항목을 선제 확인 → S1 note-extractor. **신규 채록은 V-107부터**.
 
 ## ▶ 지난 본 기록 — CJ제일제당 097950 (3/8, 완주)
 
@@ -57,7 +57,7 @@
 
 1. **Phase 2 (데이터 준비, 미완이면 먼저)** — `corps.csv`에 8클러스터·`tier=1c` 등재 확인, `fs_enrich`로 7본(한전 제외) fnlttSinglAcntAll 5개년 적재(DART 키), `series` 완결률, `sectioner --health` 8본(한전 주16 괴물블록 기보고 — 재섹션·별도FS 확인).
 2. **Phase 3 (빌드)** — WAVE2_BATCH_PROMPT 순서대로 1본=1세션. `git log --oneline -5`와 `corps.csv` tier로 진행 위치 파악(tier=1 완주·1c 대기). **현재 완주 3본**(004020·010950·097950), **다음 1c = 139480 이마트**.
-3. 본마다: 5게이트 + `--strict` §1~13 = 0 · VARIATIONS 채록(V-099 시퀀스) · 1커밋 push · **승인 대기 없이 다음 본으로**(V-101).
+3. 본마다: 5게이트 + `--strict` §1~13 = 0 · VARIATIONS 채록(정본 §4, V-107부터) · 1커밋 push · **승인 대기 없이 다음 본으로**(V-101).
 
 > **리더 검수 방식(2026-08-03 결정, V-101)**: DL 사전 시각승인 폐지 — 완주본은 리더가 직접
 > `python -m http.server 8000` → `http://localhost:8000/integration/dossier/galaxy.html?ticker=<티커>` 로 사후 확인.

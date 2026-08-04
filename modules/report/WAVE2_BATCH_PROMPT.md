@@ -50,7 +50,7 @@ python -m modules.report.sectioner --health <ticker>     # deep 포함: stale �
 python -m modules.report.series <ticker>                 # 24키 완결률 — 미완결 키는 five=skip
 ```
 - `--health` FAIL이면 **`section_all(['<ticker>'])` 재섹션 후 재검**(V-058·V-100). 괴물블록이면 별도FS 유입 의심.
-- `VARIATIONS.md` 전체 정독 — 해당 층위(수집/구조/고유/포맷)의 기존 항목을 **이번 회사에 선제 적용**한다.
+- `VARIATIONS.md`(정본 — 코드화 색인·패턴표·활성 채록) 전체 정독 후 **이번 회사에 선제 적용**. 패턴표가 가리키는 과거 전문은 `VARIATIONS_ARCHIVE.md`에서 번호로만 조회.
 - 단일 CIS 회사(sj_div에 IS 없음, V-011) 여부 확인 — 조립·체커에서 sj_div 가정 금지.
 
 ## S1~S8 — 빌드 (`/galaxy-golden <ticker>` 또는 수동)
@@ -111,7 +111,7 @@ python -m pytest tests/report/ -q                      # 하네스 회귀(체커
 
 1. **S8 원문 동반**: `python integration/dossier/build_report_source.py <t>` → `report_<t>.json`
 2. `python integration/dossier/build_galaxy_index.py` (매니페스트 — v2 3탭 자동 노출)
-3. **VARIATIONS S7 채록** — **V-099부터 이어지는 단일 시퀀스**(신규 변형 없어도 '신규 변형 없음' 명시) + 채록 로그 1줄
+3. **VARIATIONS S7 채록** — 정본 §4에 **V-107부터 단일 시퀀스**(신규 변형 없어도 '신규 변형 없음' 명시, **게이트가 왜 못 잡았는지까지**) + 채록 로그 1줄
 4. `corps.csv`: `tier` `1c`→`1`
 5. **1커밋 + push**(PR 없음 — 리더 지시). 패턴: `feat(golden): <회사> T1 완주 — <클러스터> 첫 대표 (V-1xx)`
 6. **리더 검수 = localhost 사후 확인**(2026-08-03 결정 — DL 사전승인 폐지): 승인 대기 없이 다음 본으로 진행한다.
