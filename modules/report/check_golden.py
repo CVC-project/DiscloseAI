@@ -59,8 +59,11 @@ FORMAL_RE = re.compile(
     r"(습니다|합니다|입니다|됩니다|납니다|립니다|칩니다|줍니다|봅니다|랍니다|겁니다|였다[.\s]|한다[.\s])"
 )
 YEAR_RE = re.compile(r"(20(1\d|2[0-4]))년\s*(기준|현재)")
+# ⚠️ '매수'는 정규식이다(V-109) — 원문 계정명 `판매수수료`·`구매수량`처럼 **복합어 안의 '매수'**를
+#    부분일치로 잡아 산문이 계정명을 띄어쓰기로 뭉개는 회피를 부른다(대한항공 k3 실사례).
+#    금칙의 취지는 투자권유의 '매수'이므로 앞 글자가 판/구/도이면 면제한다(염가매수차익은 계속 잡힌다).
 FORBIDDEN = [
-    "매수",
+    r"(?<![판구도])매수",
     "매도 추천",
     "투자 조언",
     "확실히 오",
@@ -247,8 +250,12 @@ def check(ticker: str, strict: bool = False) -> list[str]:
             if "[·]" in (t or "") or "[?]" in (t or ""):
                 gaps.append(f"[{k}] 빈 브래킷")
             for f in FORBIDDEN:
-                if f in (t or "") and f not in allow:
-                    gaps.append(f"[{k}] 금칙어 '{f}'")
+                if f in allow:
+                    continue
+                hit = re.search(f, t or "") if f.startswith("(?") else (f in (t or ""))
+                if hit:
+                    lab = hit.group(0) if hasattr(hit, "group") else f
+                    gaps.append(f"[{k}] 금칙어 '{lab}'")
     blob_all = json.dumps(G, ensure_ascii=False)
     for tok in LEAK_TOKENS.get(ticker, LEAK_TOKENS["_default"]):
         if tok in blob_all:
@@ -793,6 +800,8 @@ def _check_strict(ticker: str, G: dict, dives: dict) -> list[str]:
 # 게이트로 두면 병합 행(`매출채권 및 미수금`)·잔차 행(`그 외 …`)을 정당하게 쓰는 기존
 # 골든 14본이 전부 FAIL하므로, **완주 보고용 계측**으로 승격한다(`--links`).
 _LINK_EXEMPT = ("그 외", "잔차", "(계)", "기타 (", "등 (")
+# 재무상태표 값 셀 판정 — 콤마 없는 `0`·괄호 음수·소수점까지 수치로 인정(V-109).
+_CAPVAL = re.compile(r"\(?-?[\d][\d,]*(\.\d+)?\)?")
 
 
 def _norm_cap(s: str) -> str:
@@ -811,7 +820,10 @@ def link_report(ticker: str) -> dict:
     for b in ((R.get("statements") or {}).get("bs") or {}).get("blocks") or []:
         if b.get("t") == "table":
             for row in b.get("rows") or []:
-                if len(row) > 1 and row[0] and row[1] and "," in str(row[1]):
+                # 값 셀이 수치면 계정 행. ⚠️ `"," in 값`으로 좁히면 **잔액이 0인 계정**(콤마 없음)이
+                # 캡션 집계에서 통째로 빠진다 — V-106②가 '잔액 0 + 전용 캡션'을 1급으로 올린 것과
+                # 어긋나 실제로는 링크되는 행을 미링크로 오계측한다(대한항공 `매각예정부채`, V-109).
+                if len(row) > 1 and row[0] and _CAPVAL.fullmatch(str(row[1]).strip()):
                     caps.append(str(row[0]).strip())
     capset = {_norm_cap(c) for c in caps}
     rows = [r.get("name", "") for r in (G.get("panels") or {}).get("D", [])]

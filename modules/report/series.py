@@ -86,6 +86,7 @@ def is_complete(vals) -> bool:
 
 
 import os
+import re
 import sqlite3
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
@@ -152,12 +153,31 @@ ALT_NAME: dict[str, str] = {
     "icf": r"^투자활동(으로부터의|으로인한)?\s*(순)?현금(흐름|유입|유출)",
     "fin": r"^재무활동(으로부터의|으로인한)?\s*(순)?현금(흐름|유입|유출)",
     "oci": r"^(당기\s*)?(세후\s*)?기타포괄손익$|^총\s*기타포괄손익$|^당기\s*세후\s*기타포괄손익$",
-    "capex": r"유형자산의?\s*취득",
+    # 대한항공 003490 — FY21~23은 유형자산과 투자부동산을 한 줄로(`유형자산 및 투자부동산의 취득`),
+    # FY24~25는 `유형자산의 취득`으로 갈린다. 회사가 스스로 묶어 공시한 설비투자 라인이라 병합이 정당.
+    "capex": r"유형자산(\s*및\s*투자부동산)?의?\s*취득",
     "div": r"^배당금(의)?\s*지급$",
     "sgna": r"^판매비와?\s*(일반)?관리비$",
-    "eps": r"^기본주당(순)?이익",
+    # ⚠️ `계속영업기본주당이익`은 **그 해에 중단영업 EPS가 없거나 0일 때만** 총 EPS와 같다.
+    #    한화에어로 012450 실측: FY22 총 3,964 = 계속 3,223 + 중단 741 — 섞으면 기준 혼용이 된다
+    #    (V-105 ③ `pretax−ni` 파생과 같은 사고 계열). 판정은 _eps_basis_ok()가 연도별로 한다.
+    "eps": r"^(계속영업\s*)?기본주당(순)?이익",
     "dep": r"감가상각비",
 }
+# 계속영업 EPS 채택 가드 — 중단영업 기본주당이익이 그 해에 실재하고 0이 아니면 거부(기준 혼용 차단).
+_EPS_CONT = re.compile(r"^계속영업\s*기본주당")
+_EPS_DISC = re.compile(r"^중단영업\s*기본주당")
+
+
+def _eps_basis_ok(nm: str, fy: int, by_acc: dict, sjs: list[str]) -> bool:
+    """계속영업 EPS 계정명이면, 그 해 중단영업 EPS가 없거나 0일 때만 총 EPS로 인정한다."""
+    if not _EPS_CONT.search(nm):
+        return True
+    for sj in sjs:
+        for other, yv in (by_acc.get(("__NAME__", sj)) or {}).items():
+            if _EPS_DISC.search(other) and yv.get(fy):
+                return False
+    return True
 # 부호가 연도마다 뒤집히는 키(유출을 양수/음수로 번갈아 적는 회사) — 절댓값으로 정규화.
 ABS_KEYS = {"capex", "div", "buyback"}
 
@@ -185,6 +205,8 @@ def _merge_per_year(key: str, acc_ids: list[str], by_acc: dict, fy_list: list[in
             for sj in sjs:
                 for nm, yv in (by_acc.get(("__NAME__", sj)) or {}).items():
                     if pat.search(nm) or pat.search(nm.replace(" ", "")):
+                        if key == "eps" and not _eps_basis_ok(nm, fy, by_acc, sjs):
+                            continue  # 계속영업 EPS인데 그 해 중단영업 EPS가 실재 — 기준 혼용 차단
                         v = yv.get(fy)
                         if v is not None:
                             cands.append(v)

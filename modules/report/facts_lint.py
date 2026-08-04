@@ -36,6 +36,8 @@ _DB = os.path.join(os.path.dirname(os.path.dirname(_HERE)), "shared", "data", "r
 
 FIELDS = {"name", "value", "value_key", "unit", "period", "source_quote", "src", "cols"}
 REQUIRED = {"name", "unit", "period", "source_quote", "src"}
+# 주석이 아닌 본문 섹션 키 — note_no가 NULL이라 주번호 인덱스에 없다. 스키마는 보되 원문 대조는 면제.
+_BODY_KEYS = {"biz"}
 _NUM = re.compile(r"\(?-?[\d][\d,]*\)?")
 _TOT = {"합계", "계", "소계", "총계", "total"}
 
@@ -79,8 +81,13 @@ def lint(ticker: str, db_path: str = _DB) -> tuple[list[str], list[str], dict]:
             n_notes += 1
             body = raw.get(note)
             if raw and body is None:
-                errs.append(f"[{tag}] 주{note} — 원문에 없는 주번호")
-                continue
+                # 주석 밖 본문 섹션(II.사업의내용 등)도 정당한 fact 소스다(V-102⑦ — rnd·기단·수송실적).
+                # note_no가 NULL이라 주번호 인덱스에 없으므로 원문 대조만 면제하고 스키마는 계속 본다.
+                if note in _BODY_KEYS:
+                    body = None
+                else:
+                    errs.append(f"[{tag}] 주{note} — 원문에 없는 주번호")
+                    continue
             for it in blk.get("items") or []:
                 n_items += 1
                 who = f"[{tag}] 주{note} '{str(it.get('name'))[:34]}'"
