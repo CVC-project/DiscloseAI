@@ -602,6 +602,7 @@ COMPANY_OVERRIDES: dict[str, list[dict[str, str]]] = {
     ],
 }
 
+
 def _text(value: Any) -> str:
     return re.sub(r"\s+", " ", str(value or "")).strip()
 
@@ -740,8 +741,7 @@ def choose_image(card: dict[str, Any], payload: dict[str, Any]) -> tuple[str, st
         if any(word.lower() in lower for word in words):
             return _image_path(filename), source
     sector_text = (
-        f"{_text(payload.get('sector'))} "
-        f"{_text(payload.get('display_category'))}"
+        f"{_text(payload.get('sector'))} " f"{_text(payload.get('display_category'))}"
     ).lower()
     for words, filename, source in IMAGE_RULES:
         if any(word.lower() in sector_text for word in words):
@@ -823,8 +823,7 @@ def normalize_business_payload(payload: dict[str, Any]) -> dict[str, Any]:
         cards = cards + [
             dict(card)
             for card in data.get("business_cards", [])
-            if isinstance(card, dict)
-            and not is_bad_card(card)
+            if isinstance(card, dict) and not is_bad_card(card)
             if card.get("title") not in existing_titles
         ]
         if len(cards) < 2:
