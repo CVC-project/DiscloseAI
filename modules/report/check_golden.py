@@ -894,6 +894,34 @@ def _check_strict(ticker: str, G: dict, dives: dict) -> list[str]:
                 f"[series] {sk}[-1]={last} ≠ 패널 {rid} {row['raw_mn'] / 1e6:.{dec + 2}f} "
                 f"(소수 {dec}자리 반올림 기준) — 차트와 카드가 다른 값을 가리킨다(V-112 B)"
             )
+
+    # ── 19) (strict) 경과연수 서술 재계수 (V-112 C → 승격, 3회 규칙) ────────────────
+    # "N년 만에"·"N년 내리"는 숫자가 전부 원문에 있고 **세는 방식만** 틀리므로 브래킷
+    # 화이트리스트(§2)도 항등식(§4)도 못 잡는다. V-102ⓑ(추세 서술)·V-104(e)(기준연도 혼용)에
+    # 이어 V-112(e)에서 "5년 만에 플러스"가 3곳에 퍼졌다(fin FY21이 이미 +2.23조라 4년 만).
+    # 두 계열을 나눠 본다:
+    # `N년 만에`는 두 뜻으로 쓰인다:
+    #   ⓐ **"N년 만에 처음/첫"** = 창 안에서 한 번도 없던 일 → N == 창 길이(5)가 정당하다.
+    #   ⓑ **"N년 만에 (다시) X"** = 마지막으로 X였던 게 N년 전 → 그 연도가 창 안에 있어야
+    #      재도출되므로 **N ≤ 창-1(4)**. 하이브가 정확히 여기서 틀렸다(FY21이 이미 +2.23조).
+    # 그래서 N ≥ 창 길이인데 `처음`·`첫` 표지가 인접하지 않으면 갭. series 불요 · 지표 무관.
+    # ⚠️ `N년 내리|연속|내내`의 series 재계수는 **게이트로 기각**했다(2026-08-06 `--all` 실측):
+    #    9본 9건이 전부 정당한 불일치였다 — ⓐ 런이 말단이 아님("3년 내리 커지다 올해 숨 고름")
+    #    ⓑ 서술 지표가 `five.key`와 다름(원가 비중·판매량 등 비series 지표) ⓒ 부호 반대
+    #    ("유출이 4년 내리 커졌다" = icf series는 감소). V-108 ③ valley 기각과 같은 계열.
+    span = max(
+        [len(a) for a in (G.get("series") or {}).values() if isinstance(a, list)] or [5]
+    )
+    for k, d in dives.items():
+        blob = " ".join(t for t in _texts(d) if isinstance(t, str))
+        for m in re.finditer(r"(\d+)년\s*만에", blob):
+            ctx = blob[max(0, m.start() - 40): m.end() + 30]
+            if int(m.group(1)) >= span and not re.search(r"처음|첫", ctx):
+                gaps.append(
+                    f"[{k}] '{m.group(0)}' — {span}점 창으로 재도출되는 최대 경과는 "
+                    f"{span - 1}년이다('{span}년 만에 처음'이면 표지를 명시). series로 "
+                    f"재계수할 것(V-112 C)"
+                )
     return gaps
 
 
