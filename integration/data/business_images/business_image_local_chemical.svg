@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#07111f"/>
+      <stop offset=".55" stop-color="#111827"/>
+      <stop offset="1" stop-color="#171022"/>
+    </linearGradient>
+    <radialGradient id="glow" cx=".72" cy=".28" r=".55">
+      <stop offset="0" stop-color="#34d399" stop-opacity=".55"/>
+      <stop offset=".35" stop-color="#60a5fa" stop-opacity=".20"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="9"/></filter>
+  </defs>
+  <rect width="640" height="360" fill="url(#bg)"/>
+  <rect width="640" height="360" fill="url(#glow)"/>
+  <g opacity=".16">
+    <circle cx="88" cy="72" r="2" fill="#fff"/><circle cx="540" cy="94" r="1.5" fill="#fff"/>
+    <circle cx="502" cy="286" r="2" fill="#fff"/><circle cx="172" cy="284" r="1.5" fill="#fff"/>
+  </g>
+  <ellipse cx="410" cy="178" rx="166" ry="70" fill="none" stroke="#34d399" stroke-opacity=".22" stroke-width="3"/>
+  <g transform="translate(140 0)" filter="url(#blur)" opacity=".7">
+    <circle cx="210" cy="160" r="54" fill="#34d399"/>
+  </g>
+  <g transform="translate(140 0)"><circle stroke="rgba(255,255,255,.72)" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round" cx="108" cy="160" r="28"/><circle stroke="rgba(255,255,255,.72)" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round" cx="210" cy="112" r="28"/><circle stroke="rgba(255,255,255,.72)" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round" cx="238" cy="220" r="28"/><path stroke="rgba(255,255,255,.72)" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round" d="M134 148l50-24M128 176l84 32"/></g>
+  <rect x="34" y="284" width="210" height="48" rx="24" fill="rgba(0,0,0,.46)" stroke="rgba(255,255,255,.16)"/>
+  <text x="58" y="315" font-family="Arial, sans-serif" font-size="24" font-weight="800" fill="#fff">화학</text>
+</svg>

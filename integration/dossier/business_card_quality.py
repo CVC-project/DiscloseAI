@@ -17,6 +17,27 @@ IMG = "../data/business_images/"
 
 
 IMAGE_RULES: list[tuple[tuple[str, ...], str, str]] = [
+    (
+        ("면제품", "라면", "당면", "국수", "NOODLE"),
+        "business_image_food_noodle.svg",
+        "Local visual",
+    ),
+    (
+        ("양념", "소스", "카레", "케찹", "케첩", "마요네즈", "SAUCE"),
+        "business_image_food_sauce.svg",
+        "Local visual",
+    ),
+    (
+        ("농수산", "참치", "가공식품", "간편식", "만두", "김치", "햇반", "PACKAGED", "CANNED"),
+        "business_image_food_packaged.svg",
+        "Local visual",
+    ),
+    (
+        ("소재식품", "설탕", "밀가루", "식용유", "원당", "유지", "INGREDIENT"),
+        "business_image_food_ingredient.svg",
+        "Local visual",
+    ),
+    (("사료", "축산", "FEED"), "business_image_food_feed.svg", "Local visual"),
     (("HBM", "고대역폭"), "business_image_df7b448e6d568266.jpg", "Wikimedia Commons"),
     (
         ("CIS", "이미지센서", "카메라모듈"),
@@ -249,11 +270,78 @@ PRODUCT_KIND_RULES: list[tuple[tuple[str, ...], str, str]] = [
     (("통신", "네트워크", "광케이블", "무선"), "telecom", "NET"),
     (("전력", "발전", "송전", "케이블", "OPGW"), "power", "POWER"),
     (("게임", "플랫폼", "콘텐츠", "광고"), "platform", "APP"),
+    (
+        ("면제품", "라면", "당면", "국수"),
+        "consumer",
+        "NOODLE",
+    ),
+    (
+        ("양념", "소스", "카레", "케찹", "케첩", "마요네즈"),
+        "consumer",
+        "SAUCE",
+    ),
+    (
+        ("농수산", "참치", "가공식품", "간편식", "만두", "김치", "햇반"),
+        "consumer",
+        "CANNED",
+    ),
+    (
+        ("소재식품", "설탕", "밀가루", "식용유", "원당", "유지"),
+        "consumer",
+        "INGREDIENT",
+    ),
+    (("사료", "축산"), "consumer", "FEED"),
     (("소재", "화학", "정유", "철강", "금속"), "material", "MAT"),
 ]
 
 
 COMPANY_OVERRIDES: dict[str, list[dict[str, str]]] = {
+    "007310": [
+        {
+            "title": "면제품류",
+            "caption": "라면, 당면, 국수처럼 오뚜기의 대표적인 면류 제품을 제조·판매합니다.",
+            "kind": "consumer",
+            "visual": "NOODLE",
+        },
+        {
+            "title": "양념소스류",
+            "caption": "카레, 케첩, 마요네즈, 소스류처럼 가정식 조리에 쓰이는 제품군입니다.",
+            "kind": "consumer",
+            "visual": "SAUCE",
+        },
+        {
+            "title": "농수산가공품류",
+            "caption": "참치캔과 즉석식품 등 저장·간편식 수요에 연결되는 가공식품입니다.",
+            "kind": "consumer",
+            "visual": "CANNED",
+        },
+    ],
+    "097950": [
+        {
+            "title": "식품사업",
+            "caption": "햇반, 만두, 김치, 간편식 등 국내외 소비자 식품 브랜드가 주력입니다.",
+            "kind": "consumer",
+            "visual": "FOOD",
+        },
+        {
+            "title": "소재식품",
+            "caption": "설탕, 밀가루, 식용유 등 식품 제조와 외식 원가에 연결되는 기초 식품 소재를 공급합니다.",
+            "kind": "consumer",
+            "visual": "INGREDIENT",
+        },
+        {
+            "title": "바이오·FNT",
+            "caption": "아미노산, 조미소재, 영양 소재처럼 글로벌 식품·사료 산업에 쓰이는 바이오 소재를 판매합니다.",
+            "kind": "bio",
+            "visual": "BIO",
+        },
+        {
+            "title": "사료·축산",
+            "caption": "사료와 축산 사업은 곡물 가격과 글로벌 축산 수요 영향을 함께 받습니다.",
+            "kind": "consumer",
+            "visual": "FEED",
+        },
+    ],
     "000440": [
         {
             "title": "유류판매",
@@ -649,6 +737,52 @@ def is_good_product_name(name: str) -> bool:
     return True
 
 
+def sector_type(payload: dict[str, Any] | str) -> str:
+    if isinstance(payload, dict):
+        source = " ".join(
+            [
+                _text(payload.get("sector")),
+                _text(payload.get("display_category")),
+                _text(payload.get("name")),
+            ]
+        )
+    else:
+        source = _text(payload)
+    if any(word in source for word in ("금융", "은행", "증권", "보험")):
+        return "finance"
+    if any(word in source for word in ("식품", "음식료", "농수산", "가공식품", "음료")):
+        return "food"
+    if any(word in source for word in ("반도체", "전자부품", "정밀기기")):
+        return "semiconductor"
+    if any(word in source for word in ("소매", "유통", "마트", "백화점")):
+        return "retail"
+    if any(word in source for word in ("경비", "경호", "보안")):
+        return "security"
+    return "general"
+
+
+def card_sector_mismatch(card: dict[str, Any], payload: dict[str, Any]) -> bool:
+    combined = f"{_text(card.get('title'))} {_text(card.get('caption'))}"
+    stype = sector_type(payload)
+    if stype == "food":
+        return any(
+            word in combined
+            for word in (
+                "항공",
+                "항공기",
+                "방산",
+                "데이터센터",
+                "전력",
+                "금융보증",
+                "B2B전자결제",
+                "신기술사업금융",
+            )
+        )
+    if stype == "semiconductor":
+        return any(word in combined for word in ("현금", "B2B전자결제", "금융보증"))
+    return False
+
+
 def infer_kind_visual(text: str, sector: str = "") -> tuple[str, str]:
     haystack = f"{text} {sector}"
     for words, kind, visual in PRODUCT_KIND_RULES:
@@ -658,6 +792,16 @@ def infer_kind_visual(text: str, sector: str = "") -> tuple[str, str]:
 
 
 def product_caption(name: str, sector: str, overview: str) -> str:
+    if any(word in name for word in ("면제품", "라면", "당면", "국수")):
+        return "라면, 당면, 국수처럼 반복 구매가 많은 면류 제품군입니다."
+    if any(word in name for word in ("양념", "소스", "카레", "케찹", "케첩", "마요네즈")):
+        return "가정식 조리와 외식 수요에 함께 쓰이는 소스·조미 제품군입니다."
+    if any(word in name for word in ("농수산", "참치", "가공식품", "간편식", "만두", "김치", "햇반")):
+        return "저장식품과 간편식처럼 소비자 식탁에 바로 닿는 가공식품입니다."
+    if any(word in name for word in ("소재식품", "설탕", "밀가루", "식용유", "원당", "유지")):
+        return "다른 식품을 만드는 데 들어가는 기초 소재라 원재료 가격 영향을 받습니다."
+    if any(word in name for word in ("사료", "축산", "F&C")):
+        return "곡물 가격과 축산 수요에 영향을 받는 사료·축산 사업입니다."
     if any(word in name for word in ("Si-Parts", "SiC-Parts", "Electrode", "Ring")):
         return "반도체 식각 공정 장비에 들어가는 교체·소모성 부품입니다."
     if any(word in name for word in ("DRAM", "NAND", "HBM", "SSD")):
@@ -766,6 +910,27 @@ def attach_images(
 
 def fallback_cards(payload: dict[str, Any]) -> list[dict[str, str]]:
     sector = _text(payload.get("sector") or payload.get("display_category"))
+    if "식품" in sector or "음식료" in sector or "농수산" in sector:
+        return [
+            {
+                "title": "식품사업",
+                "caption": "소비자 식품과 가공식품을 중심으로 매출을 만듭니다.",
+                "kind": "consumer",
+                "visual": "FOOD",
+            },
+            {
+                "title": "소재식품",
+                "caption": "식품 제조에 들어가는 원재료와 소재 제품을 공급합니다.",
+                "kind": "consumer",
+                "visual": "INGREDIENT",
+            },
+            {
+                "title": "가공식품",
+                "caption": "간편식과 저장식품처럼 반복 구매가 많은 제품군입니다.",
+                "kind": "consumer",
+                "visual": "CANNED",
+            },
+        ]
     if "소매" in sector or "유통" in sector:
         return COMPANY_OVERRIDES["139480"]
     if "경비" in sector or "경호" in sector or "보안" in sector:
@@ -824,6 +989,7 @@ def normalize_business_payload(payload: dict[str, Any]) -> dict[str, Any]:
             dict(card)
             for card in data.get("business_cards", [])
             if isinstance(card, dict) and not is_bad_card(card)
+            if not card_sector_mismatch(card, data)
             if card.get("title") not in existing_titles
         ]
         if len(cards) < 2:
