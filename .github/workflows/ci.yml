@@ -18,12 +18,12 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
       - name: Black formatting check
-        # 보수적 확대: 정리 완료된 폴더만. financial/price/relation/tests/scripts는
-        # 별도 포맷 협의 PR 후 추가 (현재 미통과 → 일괄 재포맷은 타 모듈 코드 변경이라 보류)
-        run: python -m black --check modules/disclosure/ integration/ shared/
+        # 보수???��?: ?�리 ?�료???�더�? financial/price/relation/tests/scripts??
+        # 별도 ?�맷 ?�의 PR ??추�? (?�재 미통�????�괄 ?�포맷�? ?� 모듈 코드 변경이??보류)
+        run: python -m black --check --diff modules/disclosure/ integration/ shared/
       - name: Codex mirror sync check
-        # AGENTS.md·.agents/skills 는 CLAUDE.md·.claude/skills 에서 생성됨 (정본=Claude).
-        # 미러가 정본과 어긋나면 실패 → 로컬에서 `python scripts/sync_codex.py` 후 커밋.
+        # AGENTS.md·.agents/skills ??CLAUDE.md·.claude/skills ?�서 ?�성??(?�본=Claude).
+        # 미러가 ?�본�??�긋?�면 ?�패 ??로컬?�서 `python scripts/sync_codex.py` ??커밋.
         run: python scripts/sync_codex.py --check
       - name: Pytest
         run: python -m pytest tests/ -v
