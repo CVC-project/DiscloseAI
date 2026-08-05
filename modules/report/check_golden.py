@@ -79,6 +79,18 @@ VIZ_SCHEMA = {  # viz_data 필수 키 (R6.3-7: 형식 불일치=빈 박스 사�
     "vPuddle": ("ar", (int, float, str)),
     "vBubbles": ("segs", list),
 }
+# 원소 **내부 필드**까지 검사 (V-112 — 상위 키만 보면 빈 박스를 못 잡는다).
+# 실사고: 하이브 k6이 vBubbles에 `{l,v,p}`를 넣었는데 렌더러(`galaxy.html` vBubbles)는
+# `{l,rev,op}`를 읽어 `Math.sqrt(undefined)=NaN` → cx/r/x/y가 전부 NaN이 되며 차트 박스가
+# **통째로 공백**으로 렌더됐다(콘솔 에러 21건). 상위 키 `segs`는 list라 종전 게이트는 통과.
+# 필드 집합은 `galaxy.html`의 각 viz 렌더러가 실제로 읽는 이름에서 뽑았다.
+VIZ_ITEM_FIELDS = {
+    "vHBar": {"l", "v"},
+    "vChips": {"t"},
+    "vWater": {"l", "v"},
+    "vSteps": {"l", "v"},
+    "vBubbles": {"l", "rev", "op"},
+}
 SKIP_ALLOWED_NO_LINKS = True  # appendix는 links 없어도 됨
 
 
@@ -386,6 +398,16 @@ def check(ticker: str, strict: bool = False) -> list[str]:
                     gaps.append(
                         f"[{k}] viz_data 스키마: {w['viz']}에 '{key}' 없음/형식 오류"
                     )
+                elif w["viz"] in VIZ_ITEM_FIELDS:  # V-112: 원소 내부 필드까지
+                    need = VIZ_ITEM_FIELDS[w["viz"]]
+                    for i, it in enumerate(vd.get(key) or []):
+                        miss = need - set(it) if isinstance(it, dict) else need
+                        if miss:
+                            gaps.append(
+                                f"[{k}] viz_data {w['viz']}.{key}[{i}] 필드 누락 "
+                                f"{sorted(miss)} — 렌더러가 읽는 이름과 불일치(빈 박스, V-112)"
+                            )
+                            break
     # ── 7) 주석 라우팅 원장 — "모든 실주석이 처리됐는가" (사용자 요구: 전 주석 완전성) ──
     # reports.db가 있으면: DB 주석 전수가 ledger에 있고, MISSING 0, excluded는 reason 필수,
     # 본문 주N 인용이 실재 주석인지(유령 인용) 검사.
