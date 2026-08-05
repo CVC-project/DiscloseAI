@@ -102,7 +102,7 @@ def main() -> int:
             payload.pop("audit", None)
             missing += 1
         path.write_text(
-            json.dumps(payload, ensure_ascii=False, separators=(",", ":")),
+            json.dumps(payload, ensure_ascii=False, indent=2),
             encoding="utf-8",
         )
 
