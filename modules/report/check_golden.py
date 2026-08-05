@@ -851,6 +851,49 @@ def _check_strict(ticker: str, G: dict, dives: dict) -> list[str]:
             f"[knots] story 공란 {len(ke)}개 — 매듭 카드 본문이 빈다, 해당 dive의 what[0] "
             f"동기화 필요(V-110): {ke[:8]}{'…' if len(ke) > 8 else ''}"
         )
+
+    # ── 17) (strict) Zone A 기초현금 = 현금흐름표 기초 (V-111 A → 승격) ────────────
+    # `pbs-cash`는 '작년 말 통장'이라 `cf-begincash`와 같은 값이어야 한다. 크래프톤에서
+    # 당기말 값을 넣었는데 표시 반올림이 우연히 같아 **16개 절이 전부 통과**했다
+    # (§5는 Zone A에 grp가 없어 미적용, §6은 "0.6"이 패널에 실존해 통과, §13은 cf-begincash만 봄).
+    # 실측(2026-08-06, 전 골든): 비교 가능한 17본 전부 일치 — 무회귀.
+    rows17 = {r.get("row"): r for z, rs in (G.get("panels") or {}).items() for r in (rs or [])}
+    _pa, _pb = rows17.get("pbs-cash"), rows17.get("cf-begincash")
+    if _pa and _pb and _pa.get("raw_mn") is not None and _pb.get("raw_mn") is not None:
+        if _pa["raw_mn"] != _pb["raw_mn"]:
+            gaps.append(
+                f"[Zone A] pbs-cash {_pa['raw_mn']:,} ≠ cf-begincash {_pb['raw_mn']:,} — "
+                f"기초현금은 현금흐름표 기초와 같은 값이어야 한다(V-111 A)"
+            )
+
+    # ── 18) (strict) series 최종값 = 패널 표시값 (V-112 B → 승격) ────────────────
+    # 차트를 그리는 series와 패널 숫자가 **같은 원값에서 나왔는지**만 본다. 하이브에서
+    # 2단 반올림으로 `cash` FY25가 [0.54]인데 패널 `bs-cash`는 "0.53"이었고, §4는 series끼리·
+    # §6은 패널끼리만 봐서 **둘 사이 정합은 아무도 안 봤다**(선과 캡션이 다른 값을 가리킴).
+    # ⚠️ 기존 골든은 1소수 series + 2소수 패널을 정당하게 섞어 쓴다(대한항공 25.2 vs 25.23 등
+    #    실측 16건) → **패널 값을 series의 소수 자릿수로 반올림해** 비교한다. 실측 결과 무회귀.
+    # ⚠️ 파생키(`gross`=revenue−cogs, `tci`=ni+oci)는 **제외**한다 — 이미 반올림된 값끼리
+    #    계산해 실계정과 ±0.1 어긋나는 게 전 골든 11본에 퍼져 있고(2026-08-06 실측), 그 11본은
+    #    k4 산문이 전부 옛 파생값을 인용한다. 근본 수리는 `series.py`가 매출총이익 **실계정**을
+    #    우선 읽게 바꾸는 캐스케이드 작업이라 별도 트랙 — 이 게이트는 **실계정 키만** 주장한다.
+    SERIES_ROW = {
+        "revenue": "is-revenue", "op": "is-opincome",
+        "ni": "is-netincome", "ocf": "cf-op", "icf": "cf-inv", "fin": "cf-fin",
+        "cash": "bs-cash", "assets": "bs-assets", "equity": "bs-equity",
+    }
+    for sk, rid in SERIES_ROW.items():
+        arr, row = (G.get("series") or {}).get(sk), rows17.get(rid)
+        if not (isinstance(arr, list) and arr and row) or row.get("raw_mn") is None:
+            continue
+        last = arr[-1]
+        if not isinstance(last, (int, float)):
+            continue
+        dec = len(str(last).split(".")[1]) if "." in str(last) else 0
+        if abs(round(row["raw_mn"] / 1e6, dec) - last) > 10 ** -(dec + 2):
+            gaps.append(
+                f"[series] {sk}[-1]={last} ≠ 패널 {rid} {row['raw_mn'] / 1e6:.{dec + 2}f} "
+                f"(소수 {dec}자리 반올림 기준) — 차트와 카드가 다른 값을 가리킨다(V-112 B)"
+            )
     return gaps
 
 
