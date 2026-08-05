@@ -255,16 +255,56 @@ PRODUCT_KIND_RULES: list[tuple[tuple[str, ...], str, str]] = [
 
 COMPANY_OVERRIDES: dict[str, list[dict[str, str]]] = {
     "000440": [
-        {"title": "유류판매", "caption": "주유소와 대리점 채널을 통해 일반유·LPG 등 에너지 제품을 판매합니다.", "kind": "material", "visual": "OIL"},
-        {"title": "부대 용역", "caption": "유류 판매와 함께 발생하는 부대 서비스 수익을 더합니다.", "kind": "service", "visual": "SERVICE"},
-        {"title": "부동산 임대", "caption": "보유 지점 부동산 임대수익이 보조 수익원으로 붙습니다.", "kind": "service", "visual": "RENT"},
-        {"title": "태양광 발전", "caption": "종속회사를 통해 태양광 전기발전 사업도 함께 운영합니다.", "kind": "power", "visual": "SOLAR"},
+        {
+            "title": "유류판매",
+            "caption": "주유소와 대리점 채널을 통해 일반유·LPG 등 에너지 제품을 판매합니다.",
+            "kind": "material",
+            "visual": "OIL",
+        },
+        {
+            "title": "부대 용역",
+            "caption": "유류 판매와 함께 발생하는 부대 서비스 수익을 더합니다.",
+            "kind": "service",
+            "visual": "SERVICE",
+        },
+        {
+            "title": "부동산 임대",
+            "caption": "보유 지점 부동산 임대수익이 보조 수익원으로 붙습니다.",
+            "kind": "service",
+            "visual": "RENT",
+        },
+        {
+            "title": "태양광 발전",
+            "caption": "종속회사를 통해 태양광 전기발전 사업도 함께 운영합니다.",
+            "kind": "power",
+            "visual": "SOLAR",
+        },
     ],
     "012790": [
-        {"title": "의약품 제조", "caption": "일반·전문·동물용 의약품과 위탁생산 제품을 다품종으로 만듭니다.", "kind": "bio", "visual": "PHARMA"},
-        {"title": "기능성 화장품", "caption": "제약 기술을 바탕으로 팜트리 브랜드 화장품을 판매합니다.", "kind": "consumer", "visual": "COSMETIC"},
-        {"title": "건강기능식품", "caption": "비타민 등 건강기능식품이 의약품 외 제품군을 보완합니다.", "kind": "consumer", "visual": "HEALTH"},
-        {"title": "의약외품", "caption": "마스크 등 생활 방역·위생 관련 제품을 함께 취급합니다.", "kind": "bio", "visual": "MED"},
+        {
+            "title": "의약품 제조",
+            "caption": "일반·전문·동물용 의약품과 위탁생산 제품을 다품종으로 만듭니다.",
+            "kind": "bio",
+            "visual": "PHARMA",
+        },
+        {
+            "title": "기능성 화장품",
+            "caption": "제약 기술을 바탕으로 팜트리 브랜드 화장품을 판매합니다.",
+            "kind": "consumer",
+            "visual": "COSMETIC",
+        },
+        {
+            "title": "건강기능식품",
+            "caption": "비타민 등 건강기능식품이 의약품 외 제품군을 보완합니다.",
+            "kind": "consumer",
+            "visual": "HEALTH",
+        },
+        {
+            "title": "의약외품",
+            "caption": "마스크 등 생활 방역·위생 관련 제품을 함께 취급합니다.",
+            "kind": "bio",
+            "visual": "MED",
+        },
     ],
     "166090": [
         {
@@ -333,56 +373,186 @@ COMPANY_OVERRIDES: dict[str, list[dict[str, str]]] = {
         },
     ],
     "003030": [
-        {"title": "강관 계열사", "caption": "세아제강 등 강관 사업 계열의 실적과 배당 흐름을 함께 보는 지주회사입니다.", "kind": "material", "visual": "PIPE"},
-        {"title": "지주·투자", "caption": "자회사 지분가치와 배당수익이 기업가치의 중심입니다.", "kind": "securities", "visual": "HOLD"},
+        {
+            "title": "강관 계열사",
+            "caption": "세아제강 등 강관 사업 계열의 실적과 배당 흐름을 함께 보는 지주회사입니다.",
+            "kind": "material",
+            "visual": "PIPE",
+        },
+        {
+            "title": "지주·투자",
+            "caption": "자회사 지분가치와 배당수익이 기업가치의 중심입니다.",
+            "kind": "securities",
+            "visual": "HOLD",
+        },
     ],
     "011150": [
-        {"title": "수산가공식품", "caption": "어묵·맛살 등 수산가공 제품 판매가 핵심입니다.", "kind": "consumer", "visual": "FOOD"},
-        {"title": "식품 유통", "caption": "대형 유통채널과 식품 고객사 공급망이 매출에 연결됩니다.", "kind": "consumer", "visual": "RETAIL"},
+        {
+            "title": "수산가공식품",
+            "caption": "어묵·맛살 등 수산가공 제품 판매가 핵심입니다.",
+            "kind": "consumer",
+            "visual": "FOOD",
+        },
+        {
+            "title": "식품 유통",
+            "caption": "대형 유통채널과 식품 고객사 공급망이 매출에 연결됩니다.",
+            "kind": "consumer",
+            "visual": "RETAIL",
+        },
     ],
     "093050": [
-        {"title": "패션 브랜드", "caption": "의류와 잡화 브랜드 판매가 핵심 사업입니다.", "kind": "consumer", "visual": "FASHION"},
-        {"title": "유통 채널", "caption": "오프라인 매장과 온라인몰을 함께 운영합니다.", "kind": "platform", "visual": "ONLINE"},
+        {
+            "title": "패션 브랜드",
+            "caption": "의류와 잡화 브랜드 판매가 핵심 사업입니다.",
+            "kind": "consumer",
+            "visual": "FASHION",
+        },
+        {
+            "title": "유통 채널",
+            "caption": "오프라인 매장과 온라인몰을 함께 운영합니다.",
+            "kind": "platform",
+            "visual": "ONLINE",
+        },
     ],
     "106190": [
-        {"title": "원료의약품", "caption": "의약품 생산에 쓰이는 원료의약품을 제조·판매합니다.", "kind": "bio", "visual": "API"},
-        {"title": "제약 소재", "caption": "고객 제약사의 생산 계획과 수출 수요가 실적에 연결됩니다.", "kind": "bio", "visual": "PHARMA"},
+        {
+            "title": "원료의약품",
+            "caption": "의약품 생산에 쓰이는 원료의약품을 제조·판매합니다.",
+            "kind": "bio",
+            "visual": "API",
+        },
+        {
+            "title": "제약 소재",
+            "caption": "고객 제약사의 생산 계획과 수출 수요가 실적에 연결됩니다.",
+            "kind": "bio",
+            "visual": "PHARMA",
+        },
     ],
     "153890": [
-        {"title": "전기전자 부품", "caption": "전자제품 제조에 들어가는 부품을 공급합니다.", "kind": "service", "visual": "PARTS"},
-        {"title": "부품 제조", "caption": "고객사 생산량과 제품 교체 수요가 매출에 영향을 줍니다.", "kind": "service", "visual": "MFG"},
+        {
+            "title": "전기전자 부품",
+            "caption": "전자제품 제조에 들어가는 부품을 공급합니다.",
+            "kind": "service",
+            "visual": "PARTS",
+        },
+        {
+            "title": "부품 제조",
+            "caption": "고객사 생산량과 제품 교체 수요가 매출에 영향을 줍니다.",
+            "kind": "service",
+            "visual": "MFG",
+        },
     ],
     "253450": [
-        {"title": "드라마 제작", "caption": "방송·OTT용 드라마 콘텐츠를 기획하고 제작합니다.", "kind": "platform", "visual": "CONTENT"},
-        {"title": "콘텐츠 유통", "caption": "방영권·판권·해외 판매가 매출에 연결됩니다.", "kind": "platform", "visual": "IP"},
+        {
+            "title": "드라마 제작",
+            "caption": "방송·OTT용 드라마 콘텐츠를 기획하고 제작합니다.",
+            "kind": "platform",
+            "visual": "CONTENT",
+        },
+        {
+            "title": "콘텐츠 유통",
+            "caption": "방영권·판권·해외 판매가 매출에 연결됩니다.",
+            "kind": "platform",
+            "visual": "IP",
+        },
     ],
     "365660": [
-        {"title": "모바일 헬스케어", "caption": "병원·환자용 모바일 서비스를 제공하는 헬스케어 플랫폼입니다.", "kind": "platform", "visual": "HEALTH"},
-        {"title": "의료 데이터 서비스", "caption": "병원 시스템과 환자 서비스를 연결하는 디지털 솔루션을 운영합니다.", "kind": "platform", "visual": "DATA"},
+        {
+            "title": "모바일 헬스케어",
+            "caption": "병원·환자용 모바일 서비스를 제공하는 헬스케어 플랫폼입니다.",
+            "kind": "platform",
+            "visual": "HEALTH",
+        },
+        {
+            "title": "의료 데이터 서비스",
+            "caption": "병원 시스템과 환자 서비스를 연결하는 디지털 솔루션을 운영합니다.",
+            "kind": "platform",
+            "visual": "DATA",
+        },
     ],
     "387690": [
-        {"title": "의료·전자 부품", "caption": "의료기기와 전자제품에 쓰이는 부품·장비를 공급합니다.", "kind": "service", "visual": "MED"},
-        {"title": "정밀 장비", "caption": "고객사 제품 개발과 생산 일정에 맞춰 장비·부품 매출이 발생합니다.", "kind": "service", "visual": "EQUIP"},
+        {
+            "title": "의료·전자 부품",
+            "caption": "의료기기와 전자제품에 쓰이는 부품·장비를 공급합니다.",
+            "kind": "service",
+            "visual": "MED",
+        },
+        {
+            "title": "정밀 장비",
+            "caption": "고객사 제품 개발과 생산 일정에 맞춰 장비·부품 매출이 발생합니다.",
+            "kind": "service",
+            "visual": "EQUIP",
+        },
     ],
     "439960": [
-        {"title": "로봇 제품", "caption": "산업 현장과 서비스 영역에 쓰이는 로봇 제품을 개발합니다.", "kind": "service", "visual": "ROBOT"},
-        {"title": "자동화 솔루션", "caption": "공장·물류 자동화 수요가 사업 확장에 연결됩니다.", "kind": "service", "visual": "AUTO"},
+        {
+            "title": "로봇 제품",
+            "caption": "산업 현장과 서비스 영역에 쓰이는 로봇 제품을 개발합니다.",
+            "kind": "service",
+            "visual": "ROBOT",
+        },
+        {
+            "title": "자동화 솔루션",
+            "caption": "공장·물류 자동화 수요가 사업 확장에 연결됩니다.",
+            "kind": "service",
+            "visual": "AUTO",
+        },
     ],
     "466100": [
-        {"title": "로봇 소프트웨어", "caption": "로봇을 움직이고 관리하는 소프트웨어 플랫폼을 제공합니다.", "kind": "platform", "visual": "ROBOT"},
-        {"title": "로봇 관제", "caption": "여러 로봇을 한 화면에서 운영·관리하는 관제 솔루션이 핵심입니다.", "kind": "platform", "visual": "CONTROL"},
+        {
+            "title": "로봇 소프트웨어",
+            "caption": "로봇을 움직이고 관리하는 소프트웨어 플랫폼을 제공합니다.",
+            "kind": "platform",
+            "visual": "ROBOT",
+        },
+        {
+            "title": "로봇 관제",
+            "caption": "여러 로봇을 한 화면에서 운영·관리하는 관제 솔루션이 핵심입니다.",
+            "kind": "platform",
+            "visual": "CONTROL",
+        },
     ],
     "477850": [
-        {"title": "산업 AI 플랫폼", "caption": "제조·산업 데이터를 분석해 설비와 공정 의사결정을 돕는 AI 솔루션입니다.", "kind": "platform", "visual": "AI"},
-        {"title": "AI 운영 솔루션", "caption": "기업이 AI 모델을 배포하고 관리하는 소프트웨어를 제공합니다.", "kind": "platform", "visual": "MLOPS"},
+        {
+            "title": "산업 AI 플랫폼",
+            "caption": "제조·산업 데이터를 분석해 설비와 공정 의사결정을 돕는 AI 솔루션입니다.",
+            "kind": "platform",
+            "visual": "AI",
+        },
+        {
+            "title": "AI 운영 솔루션",
+            "caption": "기업이 AI 모델을 배포하고 관리하는 소프트웨어를 제공합니다.",
+            "kind": "platform",
+            "visual": "MLOPS",
+        },
     ],
     "493330": [
-        {"title": "DI-KIT", "caption": "재난·안전 분야에서 쓰이는 탐지·대응 장비 제품입니다.", "kind": "service", "visual": "SAFETY"},
-        {"title": "안전 장비", "caption": "소방·안전 현장의 장비 수요가 매출에 연결됩니다.", "kind": "service", "visual": "FIRE"},
+        {
+            "title": "DI-KIT",
+            "caption": "재난·안전 분야에서 쓰이는 탐지·대응 장비 제품입니다.",
+            "kind": "service",
+            "visual": "SAFETY",
+        },
+        {
+            "title": "안전 장비",
+            "caption": "소방·안전 현장의 장비 수요가 매출에 연결됩니다.",
+            "kind": "service",
+            "visual": "FIRE",
+        },
     ],
     "950250": [
-        {"title": "검사 장비", "caption": "산업 현장에서 소재와 부품을 검사하는 장비 사업을 봅니다.", "kind": "service", "visual": "TEST"},
-        {"title": "장비 솔루션", "caption": "고객사 품질관리와 생산 공정에 연결되는 솔루션을 제공합니다.", "kind": "service", "visual": "EQUIP"},
+        {
+            "title": "검사 장비",
+            "caption": "산업 현장에서 소재와 부품을 검사하는 장비 사업을 봅니다.",
+            "kind": "service",
+            "visual": "TEST",
+        },
+        {
+            "title": "장비 솔루션",
+            "caption": "고객사 품질관리와 생산 공정에 연결되는 솔루션을 제공합니다.",
+            "kind": "service",
+            "visual": "EQUIP",
+        },
     ],
     "012750": [
         {
@@ -570,7 +740,9 @@ def choose_image(card: dict[str, Any], payload: dict[str, Any]) -> tuple[str, st
     for words, filename, source in IMAGE_RULES:
         if any(word.lower() in lower for word in words):
             return _image_path(filename), source
-    sector_text = f"{_text(payload.get('sector'))} {_text(payload.get('display_category'))}".lower()
+    sector_text = (
+        f"{_text(payload.get('sector'))} " f"{_text(payload.get('display_category'))}"
+    ).lower()
     for words, filename, source in IMAGE_RULES:
         if any(word.lower() in sector_text for word in words):
             return _image_path(filename), source
@@ -651,8 +823,7 @@ def normalize_business_payload(payload: dict[str, Any]) -> dict[str, Any]:
         cards = cards + [
             dict(card)
             for card in data.get("business_cards", [])
-            if isinstance(card, dict)
-            and not is_bad_card(card)
+            if isinstance(card, dict) and not is_bad_card(card)
             if card.get("title") not in existing_titles
         ]
         if len(cards) < 2:
