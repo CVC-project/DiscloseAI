@@ -233,7 +233,19 @@ def check(ticker: str, strict: bool = False) -> list[str]:
     # 골든 레퍼런스는 문체 기준 그 자체(리더 수작업 정본) — 문체 스캔 면제, 구조·항등식·잔재는 검사.
     allow = FORBIDDEN_ALLOW.get(ticker, [])
     style_scan = ticker != GOLDEN_REF
-    for k, d in list(dives.items()) + [("apx:" + a.get("n", "?"), a) for a in apx]:
+    # ⚠️ `strings`(개요·에필로그·인트로)는 종전에 **어느 규칙도 보지 않았다**(V-109 후속).
+    #    화면 상단·하단에 그대로 실리는 산문인데 금칙어·격식체·빈 브래킷 스캔 밖이었다.
+    _STR = G.get("strings") or {}
+    _strcards = {
+        "strings:overview": {"what": [_STR.get("overview") or ""]},
+        "strings:epilogue": {"what": [_STR.get("epilogue") or ""]},
+        "strings:intro": {"what": list(_STR.get("intro_lines") or [])},
+    }
+    for k, d in (
+        list(dives.items())
+        + [("apx:" + a.get("n", "?"), a) for a in apx]
+        + list(_strcards.items())
+    ):
         for t in _texts(
             {
                 "w": d.get("what"),
@@ -791,6 +803,32 @@ def _check_strict(ticker: str, G: dict, dives: dict) -> list[str]:
                     f"[라벨] Zone {z} 헤드라인 '{r.get('row')}' 라벨 {len(nm)}자(>{LABEL_MAX}) — "
                     f"두 줄 접힘 위험, 짧은 이름으로 축약(V-106): '{nm}'"
                 )
+
+    # ── 16) (strict) strings 필수 필드 — 화면에 실리는데 게이트가 없었다 (V-109 후속) ──
+    # 실사고: HMM·한화에어로·SKT·KT&G 4본이 `overview`·`epilogue`·`intro_lines` 전부 공란인 채
+    # `--all --strict` 17본 0을 통과하며 서빙됐다. 라이브에서 개요 문단과 에필로그 본문이
+    # 통째로 비어 있는데도 어느 게이트도 보지 않았다(check_golden에 'strings' 참조 자체가 없었음).
+    # 렌더러가 실제로 읽는 필드만 강제한다 — `header`·`hero`는 템플릿이 corp.*로 대체해 쓰므로 제외.
+    st = G.get("strings") or {}
+    il = st.get("intro_lines") or []
+    if len([x for x in il if (x or "").strip()]) < 2:
+        gaps.append(
+            f"[strings] intro_lines 채워진 줄 {len([x for x in il if (x or '').strip()])}개(<2) — "
+            "인트로 문단이 화면에서 빈다(V-109 후속)"
+        )
+    for f in ("overview", "epilogue"):
+        if not (st.get(f) or "").strip():
+            gaps.append(f"[strings] {f} 공란 — 화면 본문이 통째로 빈다(V-109 후속)")
+
+    # 매듭 카드 본문(`knots[].story`)도 같은 사각이었다 — 렌더러 `storyCard()`가 그대로 그리는데
+    # 7본이 전량 공란인 채 서빙됐다(현대건설·현대차·고려아연·한화에어로·NAVER·LG화학·셀트리온).
+    # 계약은 '해당 dive의 what[0] 동기화'(SKILL S3-2)라 조립이 결정론으로 채울 수 있다.
+    ke = [k.get("id") for k in (G.get("knots") or []) if not (k.get("story") or "").strip()]
+    if ke:
+        gaps.append(
+            f"[knots] story 공란 {len(ke)}개 — 매듭 카드 본문이 빈다, 해당 dive의 what[0] "
+            f"동기화 필요(V-110): {ke[:8]}{'…' if len(ke) > 8 else ''}"
+        )
     return gaps
 
 
