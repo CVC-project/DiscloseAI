@@ -36,7 +36,7 @@
 | 097950 | 18/24 | sgna·buyback·dep·rnd·dsOp·eps | health OK |
 | 139480 | **15/24** | **ocf·icf·fin·oci·tci**·buyback·dep·rnd·dsOp | ⚠️ CF 3활동 결측인데 **fs_account엔 CF 55행 실존**('재무활동현금흐름' 등) — **계정명/account_id 변이로 series 매칭 실패 = V-061 의심 2회째**. 빌드 세션에서 per-year 병합으로 골든 series 주입, 확인되면 **series 폴백 코드 승격**(2회 규칙) |
 | 003490 | 18/24 | capex·buyback·dep·rnd·dsOp·eps | health OK |
-| 259960 | **14/24** | **revenue·cogs·gross·sgna**·div·buyback·dep·rnd·dsOp·eps | ⚠️ **단일 CIS**(IS 0행, V-011 동형) + revenue 계정 변이('영업수익'류) — SKT(14/24)와 동급, 플랫폼형 lump-opex 유력(V-010 대조) |
+| 259960 | **15/24** (08-05 재실측) | **revenue·cogs·gross·sgna**·div·buyback·dep·rnd·dsOp | ⚠️ **단일 CIS**(IS 0행, V-011 동형) · eps는 V-109 가드 도입으로 회수됨 · **revenue는 계정명이 `영업수익`이라 실존**(`[1.886, 1.854, 1.911, 2.710, 3.327]조`) — `ALT_NAME` 추가는 **전 티커 before/after diff 후** 판단 · cogs·gross·sgna 부재 = 플랫폼형 lump-opex(주23 `영업비용`, V-010·V-077 대조) · 주석 33개(하위번호 13-1·13-2·20-1·20-2) · **주12가 111,200자 괴물블록** · FY2025 rcept `20260515002689`(**5월 제출**) |
 | 352820 | 19/24 | div·buyback·dep·rnd·dsOp | health OK |
 | 015760 | 20/24 | buyback·dep·rnd·dsOp | 괴물블록 주16(616k자)=**검증 완료, 실제 거대 주석**(종속·관계기업 목록 — 주1~47 연속·결번 0·이후 주석 전부 정상, 별도FS 유입 아님). health의 '의심' 플래그는 무시 가능 |
 
@@ -58,7 +58,7 @@ python -m modules.report.series <ticker>                 # 24키 완결률 — �
 MILKYWAY §8.6 D1~D5 레시피를 그대로. 요약: fact 추출(note-extractor) → 결정론 골격 조립(panels·knots·CF분해·
 dive 스켈레톤·routing_ledger 전 주석) → 산문(prose-writer, 카드 단위 병렬) → 게이트 수렴 → 원문 동반 생성(S8) → 채록(S7).
 
-## ⚠️ 반복 방지 체크리스트 — 1차 T1 11본에서 실제로 터진 것들
+## ⚠️ 반복 방지 체크리스트 29항 — 실제로 터진 것들
 
 **착수 시 1회, 산문 작성 후 1회 훑는다.** 각 항목 뒤 괄호는 발생 티커·횟수.
 
@@ -98,15 +98,19 @@ dive 스켈레톤·routing_ledger 전 주석) → 산문(prose-writer, 카드 �
 26. **합계 라인을 특정 사건의 금액으로 쓰지 말 것**(V-107a, **3회째** — V-102 성격별 비용 합계 · V-105④ 중단영업 포함 합계). 손익·비용 주석의 `합계`는 여러 거래를 담은 값이라, 사건의 크기는 **그 사건을 명시한 주석의 개별 금액**으로 말한다. **두 값 다 원문에 있어 숫자 화이트리스트를 통과하고 인과만 틀리므로 기계 게이트가 못 잡는다** — 산문 작성 후 "이 금액이 이 사건의 것인가"를 눈으로 한 번 더 볼 것.
 27. **다열 표는 헤더와 값을 zip해 라벨을 확정**(V-107A). 헤더 열 수 ≠ 값 열 수면 한 칸 밀려 라벨-값이 뒤바뀌고, `source_quote`는 원문 substring이라 그대로 통과한다. `python -m modules.report.facts_lint <t>`로 **ERROR 0**을 확인하고 WARN(순수 수치 파이프 행에서 단일 값 추출)은 눈으로 검토할 것.
 
+28. **패널 C 세부는 `fs_account`가 아니라 원문 현금흐름표에서 읽을 것**(V-109⑥, 대한항공 실사고). fs_account는 취득·상환을 **양수로 저장**해 부호가 뭉개져 있어, 투자활동 그룹 합이 [-4.64조]로 나와 총계 [-2.34조]와 안 맞았다(부분집합 탐색으로 부호를 역산하면 '처분이 유출·취득이 유입'이라는 무의미한 해가 나온다 = 재구성 불가의 증거). **재무활동은 우연히 맞아 한 존만 검산하면 통과한다.** 소스는 `integration/dossier/data/report_<t>.json`의 `statements.cf` — 조립 전에 `python integration/dossier/build_report_source.py <t>`로 만들어 두라. ⚠️ 조립기가 fs_account로 만들면 **잔차 행이 차이를 조용히 흡수해 §5 서브행합까지 통과**한다.
+
+29. **저작 필드를 비워 두지 말 것 — 이제 `--strict` §16이 잡는다**(V-110). `strings.intro_lines`(2줄 이상)·`strings.overview`·`strings.epilogue`·**`knots[].story` 전건**이 필수다. `knots.story`는 **해당 dive의 `what[0]` 동기화**가 계약이라 조립이 결정론으로 채운다(knot.id로 못 찾으면 `knot.row == dive.row` 폴백). 실사고: 4본이 개요·에필로그·인트로 전량 공란인 채, `knots.story`는 7본 113개가 공란인 채 **`--all --strict` 17본 0을 통과하며 서빙**됐다 — `check_golden`에 `strings` 참조 자체가 없었기 때문이다. **`--strict` 0은 "게이트가 보는 범위에서 0"일 뿐이니 커버리지 자체를 주기적으로 의심하라.**
+
 ## 완주 게이트 (티커마다 전부 PASS — 하나라도 FAIL이면 publish 금지)
 
 ```bash
 python -m modules.report.facts_lint <t>                # S1 산출물 — 스키마·source_quote·열 정렬 ERROR 0
-python -m modules.report.check_golden <t> --strict     # §1~§15 갭 0 (무핀 0·BS앵커·착지·CF운전자본·anchor·라벨 포함)
+python -m modules.report.check_golden <t> --strict     # §1~§16 갭 0 (무핀 0·BS앵커·착지·CF운전자본·anchor·라벨·strings/knots 포함)
 python -m modules.report.check_golden <t> --links      # 계정셀 링크 실측(완주 보고에 N/N 기재)
-python -m modules.report.check_golden --all            # 전 골든 무회귀
+python -m modules.report.check_golden --all --strict   # 전 골든 무회귀(현재 17본 0)
 GALAXY_TICKER=<t> python -m pytest tests/report/test_galaxy_interaction.py
-python -m pytest tests/report/ -q                      # 하네스 회귀(체커·섹셔너 테스트 포함)
+python -m pytest tests/report/ -q                      # 하네스 회귀(현재 130 passed, 1 skipped)
 ```
 + **accuracy-verifier** REFUTED 0(신규·수정 브래킷 전수) + **completeness-auditor** 삼성 T0 패리티
 + **playwright 라이브 스윕**(원문 TOC 전 주석 클릭→기대 카드 착지, 승격 행 클릭, 콘솔 에러 0.
