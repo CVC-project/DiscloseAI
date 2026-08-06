@@ -153,32 +153,69 @@
   "snippets": {
     "overview": "에어부산(주)의 주요 제품·서비스는 항공기입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 이처럼 온·오프라인 유통망을 유기적으로 결합한 다각적 판매 전략과 지속적인 시장 개척을 통해 영업 경쟁력을 극대화하고 있습니다. 당사는 2025년 총 8,738백만명km(ASK)의 공급능력과 7,194백만명km(RPK)의 생산실적을 산출했습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "에어부산(주)의 주요 제품·서비스는 항공기입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 이처럼 온·오프라인 유통망을 유기적으로 결합한 다각적 판매 전략과 지속적인 시장 개척을 통해 영업 경쟁력을 극대화하고 있습니다. 당사는 2025년 총 8,738백만명km(ASK)의 공급능력과 7,194백만명km(RPK)의 생산실적을 산출했습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "여객",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.6%",
+        "revenue_share": 0.156,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "국제선",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 76.0%",
+        "revenue_share": 0.76,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "화 물",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.001,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "항공기"
     ],
-    "investor_note": "에어부산(주)의 주요 제품·서비스는 항공기입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 이처럼 온·오프라인 유통망을 유기적으로 결합한 다각적 판매 전략과 지속적인 시장 개척을 통해 영업 경쟁력을 극대화하고 있습니다. 당사는 2025년 총 8,738백만명km(ASK)의 공급능력과 7,194백만명km(RPK)의 생산실적을 산출했습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "에어부산(주)의 주요 제품·서비스는 항공기입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 이처럼 온·오프라인 유통망을 유기적으로 결합한 다각적 판매 전략과 지속적인 시장 개척을 통해 영업 경쟁력을 극대화하고 있습니다. 당사는 2025년 총 8,738백만명km(ASK)의 공급능력과 7,194백만명km(RPK)의 생산실적을 산출했습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "여객",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.6%",
+        "revenue_share": 0.156,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "국제선",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 76.0%",
+        "revenue_share": 0.76,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "화 물",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.001,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "항공기",
-      "caption": "항공기을 중심으로 매출을 만드는 사업입니다.",
+      "title": "여객",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.6%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_3078a83d5189713b.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "여객부문",
-      "caption": "여객부문을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "항공 여객 운송업",
-      "caption": "항공 여객 운송업을 중심으로 매출을 만드는 사업입니다.",
+      "title": "국제선",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 76.0%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_3078a83d5189713b.avif",

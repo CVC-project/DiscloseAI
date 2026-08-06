@@ -156,13 +156,24 @@
     "segment_breakdown": [
       {
         "name": "레저부문",
-        "desc": "레저부문 관련 제품·서비스",
-        "revenue_share": null
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 90.2%",
+        "revenue_share": 0.902,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "가격변동추이레저부문",
-        "desc": "레저부문 관련 제품·서비스",
-        "revenue_share": null
+        "name": "스틸",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.8%",
+        "revenue_share": 0.058,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "카본",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.2%",
+        "revenue_share": 0.012,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -170,36 +181,58 @@
       "레저부문",
       "알루미늄"
     ],
-    "investor_note": "(주)알톤의 주요 제품·서비스는 배터리, 레저부문, 제품매출, 알루미늄입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품 등의 현황 당사는 레져용 자전거와 전기자전거의 생산 및 판매를 주요사업으로 하고 있습니다. 당사는 자전거 및 자전거 부품 제조 및 판매 등을 주된 사업으로 영위하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)알톤의 주요 제품·서비스는 배터리, 레저부문, 제품매출, 알루미늄입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품 등의 현황 당사는 레져용 자전거와 전기자전거의 생산 및 판매를 주요사업으로 하고 있습니다. 당사는 자전거 및 자전거 부품 제조 및 판매 등을 주된 사업으로 영위하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "레저부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 90.2%",
+        "revenue_share": 0.902,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "스틸",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.8%",
+        "revenue_share": 0.058,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "카본",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.2%",
+        "revenue_share": 0.012,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "계속 사업 매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "레저부문",
-      "caption": "레저부문을 중심으로 매출을 만드는 사업입니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 90.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "스틸",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.8%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_3078a83d5189713b.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "배터리",
-      "caption": "배터리을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
-      "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "알루미늄",
-      "caption": "알루미늄을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "계속 사업 매출",
-      "caption": "계속 사업 매출을 중심으로 매출을 만드는 사업입니다.",
+      "title": "카본",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.2%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_3078a83d5189713b.avif",

@@ -155,29 +155,32 @@
     "segment_finance": "대주전자재료는 스마트폰·자동차 전장 부품에 쓰이는 전도성 페이스트를 주력으로, 전기차 배터리용 실리콘계 이차전지 음극재와 태양전지 전극재료, 자동차 조명용 형광체까지 사업을 넓혀온 전자재료 전문기업입니다. 매출은 전도성 페이스트(42.5%)와 이차전지용 음극재료(18.7%), 형광체재료(17.2%)가 큰 비중을 차지하며, 중국·베트남 등 해외 법인을 통해서도 생산·판매하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,546억 원으로 전년 대비 16.1% 늘었지만, 영업이익은 29.5%, 당기순이익은 42.6% 각각 줄어 매출 성장에 비해 수익성은 오히려 나빠졌습니다. 부채비율은 155.9%로 자본보다 빚이 많은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "전도성 페이스트",
-        "desc": "스마트폰·자동차 전장용 MLCC 등 칩 부품 전극재료",
-        "revenue_share": 0.4251
+        "name": "전자재료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 42.5%",
+        "revenue_share": 0.4251,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "이차전지용 음극재료",
-        "desc": "전기차 배터리용 실리콘계 음극활물질",
-        "revenue_share": 0.1867
-      },
-      {
-        "name": "형광체재료",
-        "desc": "LED·자동차 전장 광원용 PIG CELL",
-        "revenue_share": 0.1723
+        "name": "태양전지전극재료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.6%",
+        "revenue_share": 0.0864,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "고분자재료",
-        "desc": "전자부품을 외부환경으로부터 보호하는 코팅재료",
-        "revenue_share": 0.1227
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.3%",
+        "revenue_share": 0.1227,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "태양전지 전극재료",
-        "desc": "태양전지 전/후면 전극용 은 페이스트",
-        "revenue_share": 0.0864
+        "name": "형광체재료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.2%",
+        "revenue_share": 0.1723,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -190,39 +193,69 @@
       "금속분말 재료",
       "자동차 헤드램프용 형광체"
     ],
-    "investor_note": "대주전자재료는 스마트폰·자동차 전장 부품에 쓰이는 전도성 페이스트를 주력으로, 전기차 배터리용 실리콘계 이차전지 음극재와 태양전지 전극재료, 자동차 조명용 형광체까지 사업을 넓혀온 전자재료 전문기업입니다. 매출은 전도성 페이스트(42.5%)와 이차전지용 음극재료(18.7%), 형광체재료(17.2%)가 큰 비중을 차지하며, 중국·베트남 등 해외 법인을 통해서도 생산·판매하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,546억 원으로 전년 대비 16.1% 늘었지만, 영업이익은 29.5%, 당기순이익은 42.6% 각각 줄어 매출 성장에 비해 수익성은 오히려 나빠졌습니다. 부채비율은 155.9%로 자본보다 빚이 많은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다."
+    "investor_note": "대주전자재료는 스마트폰·자동차 전장 부품에 쓰이는 전도성 페이스트를 주력으로, 전기차 배터리용 실리콘계 이차전지 음극재와 태양전지 전극재료, 자동차 조명용 형광체까지 사업을 넓혀온 전자재료 전문기업입니다. 매출은 전도성 페이스트(42.5%)와 이차전지용 음극재료(18.7%), 형광체재료(17.2%)가 큰 비중을 차지하며, 중국·베트남 등 해외 법인을 통해서도 생산·판매하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,546억 원으로 전년 대비 16.1% 늘었지만, 영업이익은 29.5%, 당기순이익은 42.6% 각각 줄어 매출 성장에 비해 수익성은 오히려 나빠졌습니다. 부채비율은 155.9%로 자본보다 빚이 많은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "전자재료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 42.5%",
+        "revenue_share": 0.4251,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "태양전지전극재료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.6%",
+        "revenue_share": 0.0864,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "고분자재료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.3%",
+        "revenue_share": 0.1227,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "형광체재료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.2%",
+        "revenue_share": 0.1723,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "전도성 페이스트",
-      "caption": "전도성 페이스트을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "title": "전자재료",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 42.5%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "이차전지용 음극재료",
-      "caption": "이차전지용 음극재료을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
+      "title": "태양전지전극재료",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.6%",
+      "kind": "battery",
+      "visual": "BATTERY",
       "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "형광체재료",
-      "caption": "형광체재료을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "title": "고분자재료",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.3%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "고분자재료",
-      "caption": "고분자재료을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "title": "형광체재료",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.2%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     }
   ],

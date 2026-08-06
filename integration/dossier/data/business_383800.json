@@ -155,9 +155,25 @@
     "segment_finance": "(주)엘엑스홀딩스의 핵심은 광물사업, 팜사업, KDB산업은행등, Trading/신성장 부문, 물류부문 등입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 연결대상 종속회사가 영위하는 사업은 경영컨설팅업 및 기타 금융투자업입니다.당사의 당기말 별도재무제표 기준 영업수익은 총 1,041억원이며, 영업수익의 항목별비중은 배당금수익 69.7%, 상표권 사용수익 29.7%, 기타수익 0.6%입니다. 이러한 지속적인 투자와 생산공정 개선을 통해 회사의 수익성과 경쟁력은 한층 더 견고해질 것으로 예상합니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다.",
     "segment_breakdown": [
       {
-        "name": "KDB산업은행등",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
+        "name": "지주회사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 63.2%",
+        "revenue_share": 0.632,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상표권수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.0%",
+        "revenue_share": 0.27,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "교육 및경영자문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.6%",
+        "revenue_share": 0.086,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,38 +190,60 @@
       "모노머",
       "MMA"
     ],
-    "investor_note": "(주)엘엑스홀딩스의 핵심은 광물사업, 팜사업, KDB산업은행등, Trading/신성장 부문, 물류부문 등입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 연결대상 종속회사가 영위하는 사업은 경영컨설팅업 및 기타 금융투자업입니다.당사의 당기말 별도재무제표 기준 영업수익은 총 1,041억원이며, 영업수익의 항목별비중은 배당금수익 69.7%, 상표권 사용수익 29.7%, 기타수익 0.6%입니다. 이러한 지속적인 투자와 생산공정 개선을 통해 회사의 수익성과 경쟁력은 한층 더 견고해질 것으로 예상합니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다."
+    "investor_note": "(주)엘엑스홀딩스의 핵심은 광물사업, 팜사업, KDB산업은행등, Trading/신성장 부문, 물류부문 등입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 연결대상 종속회사가 영위하는 사업은 경영컨설팅업 및 기타 금융투자업입니다.당사의 당기말 별도재무제표 기준 영업수익은 총 1,041억원이며, 영업수익의 항목별비중은 배당금수익 69.7%, 상표권 사용수익 29.7%, 기타수익 0.6%입니다. 이러한 지속적인 투자와 생산공정 개선을 통해 회사의 수익성과 경쟁력은 한층 더 견고해질 것으로 예상합니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다.",
+    "product_service_segments": [
+      {
+        "name": "지주회사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 63.2%",
+        "revenue_share": 0.632,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상표권수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.0%",
+        "revenue_share": 0.27,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.005,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "교육 및경영자문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.6%",
+        "revenue_share": 0.086,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "KDB산업은행등",
-      "caption": "예금과 대출에서 이자이익을 만드는 금융 서비스입니다.",
-      "kind": "bank",
-      "visual": "BANK",
+      "title": "지주회사",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 63.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
       "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
-      "kind": "display",
-      "visual": "OLED",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "화학제품",
-      "caption": "화학제품을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "material",
-      "visual": "MAT",
+      "title": "상표권수익",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
       "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "철강",
-      "caption": "철강을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "material",
-      "visual": "MAT",
+      "title": "교육 및경영자문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
       "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
       "image_source": "Wikimedia Commons"
     }

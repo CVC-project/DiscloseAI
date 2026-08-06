@@ -155,24 +155,25 @@
     "segment_finance": "윙입푸드홀딩스의 핵심은 전자설비, 광발은행, 건설은행, 화윤은행 등입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 당사 연구개발부는 판매부의 시장조사 자료를 바탕으로 고객의 니즈를 파악하여 연구개발계획을 수립하며, 수립된 계획에 따라 신규 제품 또는 기술 등을 연구개발 합니다. 담보설정 현황 연결회사의 각 보고기간말 현재 차입금과 관련하여 담보로 제공된 자산의 내역은 다음과같습니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다.",
     "segment_breakdown": [
       {
-        "name": "광발은행",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
+        "name": "전통식품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.1%",
+        "revenue_share": 0.5913,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "건설은행",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
+        "name": "간편식품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.6%",
+        "revenue_share": 0.0859,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "화윤은행",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
-      },
-      {
-        "name": "화흥은행",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
+        "name": "냉동식품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.7%",
+        "revenue_share": 0.0572,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -189,38 +190,61 @@
       "중국",
       "간편식품"
     ],
-    "investor_note": "윙입푸드홀딩스의 핵심은 전자설비, 광발은행, 건설은행, 화윤은행 등입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 당사 연구개발부는 판매부의 시장조사 자료를 바탕으로 고객의 니즈를 파악하여 연구개발계획을 수립하며, 수립된 계획에 따라 신규 제품 또는 기술 등을 연구개발 합니다. 담보설정 현황 연결회사의 각 보고기간말 현재 차입금과 관련하여 담보로 제공된 자산의 내역은 다음과같습니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다."
+    "investor_note": "윙입푸드홀딩스의 핵심은 전자설비, 광발은행, 건설은행, 화윤은행 등입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 당사 연구개발부는 판매부의 시장조사 자료를 바탕으로 고객의 니즈를 파악하여 연구개발계획을 수립하며, 수립된 계획에 따라 신규 제품 또는 기술 등을 연구개발 합니다. 담보설정 현황 연결회사의 각 보고기간말 현재 차입금과 관련하여 담보로 제공된 자산의 내역은 다음과같습니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다.",
+    "product_service_segments": [
+      {
+        "name": "전통식품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.1%",
+        "revenue_share": 0.5913,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "간편식품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.6%",
+        "revenue_share": 0.0859,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "냉동식품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.7%",
+        "revenue_share": 0.0572,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "광발은행",
-      "caption": "예금과 대출에서 이자이익을 만드는 금융 서비스입니다.",
-      "kind": "bank",
-      "visual": "BANK",
+      "title": "등록국가",
+      "caption": "이자이익과 수수료 수익을 만드는 금융 서비스입니다.",
+      "kind": "service",
+      "visual": "BUSINESS",
       "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "건설은행",
-      "caption": "예금과 대출에서 이자이익을 만드는 금융 서비스입니다.",
-      "kind": "bank",
-      "visual": "BANK",
+      "title": "권리자",
+      "caption": "이자이익과 수수료 수익을 만드는 금융 서비스입니다.",
+      "kind": "service",
+      "visual": "BUSINESS",
       "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "화윤은행",
-      "caption": "예금과 대출에서 이자이익을 만드는 금융 서비스입니다.",
-      "kind": "bank",
-      "visual": "BANK",
+      "title": "등록일",
+      "caption": "이자이익과 수수료 수익을 만드는 금융 서비스입니다.",
+      "kind": "service",
+      "visual": "BUSINESS",
       "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "화흥은행",
-      "caption": "예금과 대출에서 이자이익을 만드는 금융 서비스입니다.",
-      "kind": "bank",
-      "visual": "BANK",
+      "title": "특허 만료일",
+      "caption": "이자이익과 수수료 수익을 만드는 금융 서비스입니다.",
+      "kind": "service",
+      "visual": "BUSINESS",
       "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
       "image_source": "Wikimedia Commons"
     }

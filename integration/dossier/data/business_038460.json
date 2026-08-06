@@ -153,7 +153,36 @@
   "snippets": {
     "overview": "바이오스마트는 신용카드 등 스마트카드 제조를 주력으로, 의약품, 주류결제 대행, 중전기(변압기용 동선 등), 도서출판까지 다양한 사업을 함께 운영하는 다각화 기업입니다. 매출 비중은 중전기/동제품 사업이 약 62%로 가장 크고, 스마트카드 사업이 약 21%, 의약품 사업이 약 12%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,827억 원으로 전년과 비슷한 수준(-0.3%)을 유지했지만 영업이익은 225억 원으로 11.5% 늘었고, 특히 당기순이익은 89억 원으로 전년 대비 7배 넘게 증가했습니다. 부채비율은 65.1%로 재무구조는 안정적인 수준입니다.",
     "segment_finance": "바이오스마트는 신용카드 등 스마트카드 제조를 주력으로, 의약품, 주류결제 대행, 중전기(변압기용 동선 등), 도서출판까지 다양한 사업을 함께 운영하는 다각화 기업입니다. 매출 비중은 중전기/동제품 사업이 약 62%로 가장 크고, 스마트카드 사업이 약 21%, 의약품 사업이 약 12%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,827억 원으로 전년과 비슷한 수준(-0.3%)을 유지했지만 영업이익은 225억 원으로 11.5% 늘었고, 특히 당기순이익은 89억 원으로 전년 대비 7배 넘게 증가했습니다. 부채비율은 65.1%로 재무구조는 안정적인 수준입니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "스마트 카드",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.1%",
+        "revenue_share": 0.201,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.9%",
+        "revenue_share": 0.0087,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.6%",
+        "revenue_share": 0.1057,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "주류결제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.9%",
+        "revenue_share": 0.0192,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "신용카드/IC카드/METAL카드",
       "전문의약품·일반의약품",
@@ -161,40 +190,62 @@
       "변압기용 평각동선 등 중전기 소재",
       "단행본 도서·매거진"
     ],
-    "investor_note": "바이오스마트는 신용카드 등 스마트카드 제조를 주력으로, 의약품, 주류결제 대행, 중전기(변압기용 동선 등), 도서출판까지 다양한 사업을 함께 운영하는 다각화 기업입니다. 매출 비중은 중전기/동제품 사업이 약 62%로 가장 크고, 스마트카드 사업이 약 21%, 의약품 사업이 약 12%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,827억 원으로 전년과 비슷한 수준(-0.3%)을 유지했지만 영업이익은 225억 원으로 11.5% 늘었고, 특히 당기순이익은 89억 원으로 전년 대비 7배 넘게 증가했습니다. 부채비율은 65.1%로 재무구조는 안정적인 수준입니다."
+    "investor_note": "바이오스마트는 신용카드 등 스마트카드 제조를 주력으로, 의약품, 주류결제 대행, 중전기(변압기용 동선 등), 도서출판까지 다양한 사업을 함께 운영하는 다각화 기업입니다. 매출 비중은 중전기/동제품 사업이 약 62%로 가장 크고, 스마트카드 사업이 약 21%, 의약품 사업이 약 12%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,827억 원으로 전년과 비슷한 수준(-0.3%)을 유지했지만 영업이익은 225억 원으로 11.5% 늘었고, 특히 당기순이익은 89억 원으로 전년 대비 7배 넘게 증가했습니다. 부채비율은 65.1%로 재무구조는 안정적인 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "스마트 카드",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.1%",
+        "revenue_share": 0.201,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.9%",
+        "revenue_share": 0.0087,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.6%",
+        "revenue_share": 0.1057,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "주류결제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.9%",
+        "revenue_share": 0.0192,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "신용카드/IC카드/METAL카드",
-      "caption": "신용카드/IC카드/METAL카드을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
+      "title": "대형마트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.1%",
+      "kind": "consumer",
+      "visual": "MART",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "전문의약품·일반의약품",
-      "caption": "전문의약품·일반의약품을 중심으로 매출을 만드는 사업입니다.",
+      "title": "의약품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.6%",
       "kind": "bio",
-      "visual": "BIO",
+      "visual": "PHARMA",
       "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "주류구매전용카드 결제대행",
-      "caption": "주류구매전용카드 결제대행을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "변압기용 평각동선 등 중전기 소재",
-      "caption": "변압기용 평각동선 등 중전기 소재을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
-      "image_source": "Wikimedia Commons"
+      "title": "주류결제",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.9%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_local_alcohol.svg",
+      "image_source": "Local visual"
     }
   ],
   "custom_report_ideas": [

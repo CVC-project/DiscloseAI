@@ -155,24 +155,25 @@
     "segment_finance": "주식회사 현대홈쇼핑의 핵심은 산업은행, 바이오헬스케어연구소, 단체상해보험, 다중이용업소화재배상책임보험 등입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 종속회사는 홈쇼핑업, 건축자재업, 기타 전기통신업, 화장품 및 의약품 원료 제조업, 의류제조 및 판매업을 영위하고 있습니다. 수주상황에 관한 사항 당사는 일반 고객들을 대상으로 실시간 결제에 의한 판매활동을 진행하고 있어 매출과 관련된 수주는 없습니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다.",
     "segment_breakdown": [
       {
-        "name": "산업은행",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
+        "name": "홈쇼핑업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.6%",
+        "revenue_share": 0.1462,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "단체상해보험",
-        "desc": "보험계약과 자산운용 중심 서비스",
-        "revenue_share": null
+        "name": "인터넷판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.5%",
+        "revenue_share": 0.095,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "다중이용업소화재배상책임보험",
-        "desc": "보험계약과 자산운용 중심 서비스",
-        "revenue_share": null
-      },
-      {
-        "name": "승강기사고배상책임보험",
-        "desc": "보험계약과 자산운용 중심 서비스",
-        "revenue_share": null
+        "name": "건축자재업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.7%",
+        "revenue_share": 0.2567,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -188,40 +189,62 @@
       "창호",
       "인조대리석"
     ],
-    "investor_note": "주식회사 현대홈쇼핑의 핵심은 산업은행, 바이오헬스케어연구소, 단체상해보험, 다중이용업소화재배상책임보험 등입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 종속회사는 홈쇼핑업, 건축자재업, 기타 전기통신업, 화장품 및 의약품 원료 제조업, 의류제조 및 판매업을 영위하고 있습니다. 수주상황에 관한 사항 당사는 일반 고객들을 대상으로 실시간 결제에 의한 판매활동을 진행하고 있어 매출과 관련된 수주는 없습니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다."
+    "investor_note": "주식회사 현대홈쇼핑의 핵심은 산업은행, 바이오헬스케어연구소, 단체상해보험, 다중이용업소화재배상책임보험 등입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 종속회사는 홈쇼핑업, 건축자재업, 기타 전기통신업, 화장품 및 의약품 원료 제조업, 의류제조 및 판매업을 영위하고 있습니다. 수주상황에 관한 사항 당사는 일반 고객들을 대상으로 실시간 결제에 의한 판매활동을 진행하고 있어 매출과 관련된 수주는 없습니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다.",
+    "product_service_segments": [
+      {
+        "name": "홈쇼핑업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.6%",
+        "revenue_share": 0.1462,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "인터넷판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.5%",
+        "revenue_share": 0.095,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "건축자재업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.7%",
+        "revenue_share": 0.2567,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타 전기 통신업 및 기타 화학제품 제조업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.9%",
+        "revenue_share": 0.0691,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "산업은행",
-      "caption": "예금과 대출에서 이자이익을 만드는 금융 서비스입니다.",
-      "kind": "bank",
-      "visual": "BANK",
-      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
-      "image_source": "Wikimedia Commons"
+      "title": "홈쇼핑업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "단체상해보험",
-      "caption": "보험료와 손해율이 실적을 좌우하는 금융 서비스입니다.",
-      "kind": "insurance",
-      "visual": "INS",
-      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
-      "image_source": "Wikimedia Commons"
+      "title": "인터넷판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "다중이용업소화재배상책임보험",
-      "caption": "보험료와 손해율이 실적을 좌우하는 금융 서비스입니다.",
-      "kind": "insurance",
-      "visual": "INS",
-      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "승강기사고배상책임보험",
-      "caption": "보험료와 손해율이 실적을 좌우하는 금융 서비스입니다.",
-      "kind": "insurance",
-      "visual": "INS",
-      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
-      "image_source": "Wikimedia Commons"
+      "title": "건축·주택",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.7%",
+      "kind": "service",
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

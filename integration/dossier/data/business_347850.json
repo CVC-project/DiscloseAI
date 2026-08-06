@@ -107,9 +107,18 @@
     "segment_finance": "주식회사디앤디파마텍의 주요 제품·서비스는 방산, 의약품, 바이오시밀러, (*2), 제품개발팀, 3명입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 매입처에 관한 사항당사는 보고서 제출일 현재 생산 및 판매 중인 제품이 없어 원재료 및 부재료의 매입이 존재하지 않습니다. 생산 및 당사는 연구개발업을 영위하는 회사이기 때문에 대규모 생산설비를 갖추고 있지 않으며, 전임상 연구 및 임상용 신약후보물질의 생산을 GMP 등의 국제기준을 충족하는 제조전문 위탁업체(CMO)를 통해 위탁 생산하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "바이오",
-        "desc": "바이오시밀러 관련 제품·서비스",
-        "revenue_share": null
+        "name": "라이선스매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.0%",
+        "revenue_share": 0.12,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역매출(*2)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 88.0%",
+        "revenue_share": 0.88,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -125,28 +134,44 @@
       "파트너링 후보사 발굴",
       "Blue EarthDiagnostics"
     ],
-    "investor_note": "주식회사디앤디파마텍의 주요 제품·서비스는 방산, 의약품, 바이오시밀러, (*2), 제품개발팀, 3명입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 매입처에 관한 사항당사는 보고서 제출일 현재 생산 및 판매 중인 제품이 없어 원재료 및 부재료의 매입이 존재하지 않습니다. 생산 및 당사는 연구개발업을 영위하는 회사이기 때문에 대규모 생산설비를 갖추고 있지 않으며, 전임상 연구 및 임상용 신약후보물질의 생산을 GMP 등의 국제기준을 충족하는 제조전문 위탁업체(CMO)를 통해 위탁 생산하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사디앤디파마텍의 주요 제품·서비스는 방산, 의약품, 바이오시밀러, (*2), 제품개발팀, 3명입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 매입처에 관한 사항당사는 보고서 제출일 현재 생산 및 판매 중인 제품이 없어 원재료 및 부재료의 매입이 존재하지 않습니다. 생산 및 당사는 연구개발업을 영위하는 회사이기 때문에 대규모 생산설비를 갖추고 있지 않으며, 전임상 연구 및 임상용 신약후보물질의 생산을 GMP 등의 국제기준을 충족하는 제조전문 위탁업체(CMO)를 통해 위탁 생산하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "라이선스매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.0%",
+        "revenue_share": 0.12,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역매출(*2)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 88.0%",
+        "revenue_share": 0.88,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "바이오",
-      "caption": "바이오을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "방산",
-      "caption": "방산을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "title": "방산·항공",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
+      "kind": "ship",
+      "visual": "DEFENSE",
+      "image": "../data/business_images/business_image_1805fba8159acac6.avif",
       "image_source": "Unsplash"
     },
     {
       "title": "의약품",
-      "caption": "의약품을 중심으로 매출을 만드는 사업입니다.",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
+      "kind": "bio",
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "바이오시밀러",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
       "kind": "bio",
       "visual": "BIO",
       "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
@@ -154,7 +179,7 @@
     },
     {
       "title": "제품개발팀",
-      "caption": "제품개발팀을 중심으로 매출을 만드는 사업입니다.",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",

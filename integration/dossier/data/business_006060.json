@@ -156,13 +156,31 @@
     "segment_breakdown": [
       {
         "name": "ODM부문",
-        "desc": "아디다스 신발·모자를 위탁생산(ODM)",
-        "revenue_share": 0.879
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 91.7%",
+        "revenue_share": 0.917,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "화학부문",
-        "desc": "신발용 접착제·코팅제, BOPP·PET 필름 제조",
-        "revenue_share": 0.107
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.7%",
+        "revenue_share": 0.067,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "유통 및 금융부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
+        "revenue_share": 0.016,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "단순 매출 합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -171,12 +189,42 @@
       "BOPP·PET 필름",
       "화학·산업용품 유통"
     ],
-    "investor_note": "화승인더스트리는 베트남·인도네시아 등 해외 공장에서 아디다스 신발을 위탁생산(ODM)하는 사업이 매출의 88%를 차지하는 회사로, 신발용 접착제·필름을 만드는 화학사업과 화학·산업용품 유통사업도 함께 운영합니다. 아디다스와 협의된 가격으로 납품해 일정 수익률을 보장받는 구조가 특징입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 7,810억 원으로 전년 대비 4.6% 줄었고 영업이익은 35.2%, 당기순이익은 79.3% 큰 폭으로 감소해 수익성이 약화됐습니다. 부채비율은 185.0%로 자본보다 빚이 많은 편이라 재무 부담을 살펴볼 필요가 있습니다."
+    "investor_note": "화승인더스트리는 베트남·인도네시아 등 해외 공장에서 아디다스 신발을 위탁생산(ODM)하는 사업이 매출의 88%를 차지하는 회사로, 신발용 접착제·필름을 만드는 화학사업과 화학·산업용품 유통사업도 함께 운영합니다. 아디다스와 협의된 가격으로 납품해 일정 수익률을 보장받는 구조가 특징입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 7,810억 원으로 전년 대비 4.6% 줄었고 영업이익은 35.2%, 당기순이익은 79.3% 큰 폭으로 감소해 수익성이 약화됐습니다. 부채비율은 185.0%로 자본보다 빚이 많은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "ODM부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 91.7%",
+        "revenue_share": 0.917,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "화학부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.7%",
+        "revenue_share": 0.067,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "유통 및 금융부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
+        "revenue_share": 0.016,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "단순 매출 합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "ODM부문",
-      "caption": "ODM부문을 중심으로 매출을 만드는 사업입니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 91.7%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
@@ -184,27 +232,19 @@
     },
     {
       "title": "화학부문",
-      "caption": "화학부문을 중심으로 매출을 만드는 사업입니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.7%",
       "kind": "material",
       "visual": "MAT",
       "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "아디다스 ODM 신발",
-      "caption": "아디다스 ODM 신발을 중심으로 매출을 만드는 사업입니다.",
+      "title": "유통 및 금융부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "신발용 접착제·코팅제",
-      "caption": "신발용 접착제·코팅제을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

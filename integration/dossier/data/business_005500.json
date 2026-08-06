@@ -155,24 +155,25 @@
     "segment_finance": "삼진제약은 소염진통제 게보린, 항혈전제 플래리스, 뇌기능개선제 뉴티린 등으로 잘 알려진 종합제약사로, 정제(54%)와 주사제·캡슐제 중심의 전문·일반의약품에 더해 건강기능식품·의료기기로도 사업을 넓히고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,091억 원으로 전년과 비슷한 수준(+0.3%)이었지만, 전년의 법인세 환급 등 일회성 이익이 사라지며 영업이익은 267억 원(-15.3%), 당기순이익은 241억 원(-38.4%)으로 크게 줄었습니다. 부채비율은 62.0%로 관리 가능한 수준입니다.",
     "segment_breakdown": [
       {
-        "name": "정제",
-        "desc": "플래리스·게보린 등 항혈전·소염진통제",
-        "revenue_share": 0.543
+        "name": "제약",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 54.3%",
+        "revenue_share": 0.543,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "주사제",
-        "desc": "타우로린·페르본 등 항생·해독제",
-        "revenue_share": 0.1506
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.1%",
+        "revenue_share": 0.1506,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "캡슐제",
-        "desc": "뉴티린·트레스탄 등 뇌기능개선·식욕촉진제",
-        "revenue_share": 0.1235
-      },
-      {
-        "name": "상품(건강기능식품 등)",
-        "desc": "하루엔진 등",
-        "revenue_share": 0.1184
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.3%",
+        "revenue_share": 0.1235,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -183,38 +184,68 @@
       "하루엔진(건강기능식품)",
       "원료의약품"
     ],
-    "investor_note": "삼진제약은 소염진통제 게보린, 항혈전제 플래리스, 뇌기능개선제 뉴티린 등으로 잘 알려진 종합제약사로, 정제(54%)와 주사제·캡슐제 중심의 전문·일반의약품에 더해 건강기능식품·의료기기로도 사업을 넓히고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,091억 원으로 전년과 비슷한 수준(+0.3%)이었지만, 전년의 법인세 환급 등 일회성 이익이 사라지며 영업이익은 267억 원(-15.3%), 당기순이익은 241억 원(-38.4%)으로 크게 줄었습니다. 부채비율은 62.0%로 관리 가능한 수준입니다."
+    "investor_note": "삼진제약은 소염진통제 게보린, 항혈전제 플래리스, 뇌기능개선제 뉴티린 등으로 잘 알려진 종합제약사로, 정제(54%)와 주사제·캡슐제 중심의 전문·일반의약품에 더해 건강기능식품·의료기기로도 사업을 넓히고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,091억 원으로 전년과 비슷한 수준(+0.3%)이었지만, 전년의 법인세 환급 등 일회성 이익이 사라지며 영업이익은 267억 원(-15.3%), 당기순이익은 241억 원(-38.4%)으로 크게 줄었습니다. 부채비율은 62.0%로 관리 가능한 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "제약",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 54.3%",
+        "revenue_share": 0.543,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "주사제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.1%",
+        "revenue_share": 0.1506,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "캡슐제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.3%",
+        "revenue_share": 0.1235,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타제형",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.4%",
+        "revenue_share": 0.0142,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "정제",
-      "caption": "정제을 중심으로 매출을 만드는 사업입니다.",
+      "title": "의약품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 54.3%",
       "kind": "bio",
-      "visual": "BIO",
+      "visual": "PHARMA",
       "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
       "image_source": "Unsplash"
     },
     {
       "title": "주사제",
-      "caption": "주사제을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "bio",
-      "visual": "BIO",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.1%",
+      "kind": "service",
+      "visual": "BUSINESS",
       "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
       "image_source": "Unsplash"
     },
     {
       "title": "캡슐제",
-      "caption": "캡슐제을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "bio",
-      "visual": "BIO",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.3%",
+      "kind": "service",
+      "visual": "BUSINESS",
       "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "상품(건강기능식품 등)",
-      "caption": "상품(건강기능식품 등)을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "bio",
-      "visual": "BIO",
+      "title": "기타제형",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.4%",
+      "kind": "service",
+      "visual": "BUSINESS",
       "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
       "image_source": "Unsplash"
     }

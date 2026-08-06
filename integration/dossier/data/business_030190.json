@@ -153,43 +153,81 @@
   "snippets": {
     "overview": "NICE평가정보는 개인 신용조회 서비스 'NICE지키미'로 잘 알려진 신용정보 전문기업으로, 개인신용정보(CB) 사업이 매출의 61%를 차지하고 기업정보 사업 'BizLINE'이 16%, 채권추심 등 자산관리 사업이 12%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,021억 원으로 전년 대비 12.5% 늘었고 영업이익은 20.3%, 당기순이익은 2.7% 각각 증가해 안정적인 성장세를 이어갔습니다. 감사인은 솔루션 구축·개발 용역의 진행률 기준 수익인식을 핵심감사사항으로 짚었습니다. 부채비율은 37.7%로 낮은 편이라 재무구조가 안정적입니다.",
     "segment_finance": "NICE평가정보는 개인 신용조회 서비스 'NICE지키미'로 잘 알려진 신용정보 전문기업으로, 개인신용정보(CB) 사업이 매출의 61%를 차지하고 기업정보 사업 'BizLINE'이 16%, 채권추심 등 자산관리 사업이 12%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,021억 원으로 전년 대비 12.5% 늘었고 영업이익은 20.3%, 당기순이익은 2.7% 각각 증가해 안정적인 성장세를 이어갔습니다. 감사인은 솔루션 구축·개발 용역의 진행률 기준 수익인식을 핵심감사사항으로 짚었습니다. 부채비율은 37.7%로 낮은 편이라 재무구조가 안정적입니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "단 순 합 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "NICE지키미(개인신용조회)",
       "NICE BizLINE(기업정보)",
       "TCB 기업신용평가보고서",
       "채권추심 서비스"
     ],
-    "investor_note": "NICE평가정보는 개인 신용조회 서비스 'NICE지키미'로 잘 알려진 신용정보 전문기업으로, 개인신용정보(CB) 사업이 매출의 61%를 차지하고 기업정보 사업 'BizLINE'이 16%, 채권추심 등 자산관리 사업이 12%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,021억 원으로 전년 대비 12.5% 늘었고 영업이익은 20.3%, 당기순이익은 2.7% 각각 증가해 안정적인 성장세를 이어갔습니다. 감사인은 솔루션 구축·개발 용역의 진행률 기준 수익인식을 핵심감사사항으로 짚었습니다. 부채비율은 37.7%로 낮은 편이라 재무구조가 안정적입니다."
+    "investor_note": "NICE평가정보는 개인 신용조회 서비스 'NICE지키미'로 잘 알려진 신용정보 전문기업으로, 개인신용정보(CB) 사업이 매출의 61%를 차지하고 기업정보 사업 'BizLINE'이 16%, 채권추심 등 자산관리 사업이 12%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,021억 원으로 전년 대비 12.5% 늘었고 영업이익은 20.3%, 당기순이익은 2.7% 각각 증가해 안정적인 성장세를 이어갔습니다. 감사인은 솔루션 구축·개발 용역의 진행률 기준 수익인식을 핵심감사사항으로 짚었습니다. 부채비율은 37.7%로 낮은 편이라 재무구조가 안정적입니다.",
+    "product_service_segments": [
+      {
+        "name": "개인신용정보 사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 61.5%",
+        "revenue_share": 0.6149,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기업정보사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.3%",
+        "revenue_share": 0.1631,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자산관리사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.3%",
+        "revenue_share": 0.123,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "단 순 합 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "NICE지키미(개인신용조회)",
-      "caption": "NICE지키미(개인신용조회)을 중심으로 매출을 만드는 사업입니다.",
+      "title": "개인신용정보 사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 61.5%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "NICE BizLINE(기업정보)",
-      "caption": "NICE BizLINE(기업정보)을 중심으로 매출을 만드는 사업입니다.",
+      "title": "기업정보사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.3%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "TCB 기업신용평가보고서",
-      "caption": "TCB 기업신용평가보고서을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
+      "title": "자산관리사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.3%",
+      "kind": "securities",
+      "visual": "AUM",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "채권추심 서비스",
-      "caption": "채권추심 서비스을 중심으로 매출을 만드는 사업입니다.",
+      "title": "단 순 합 계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",

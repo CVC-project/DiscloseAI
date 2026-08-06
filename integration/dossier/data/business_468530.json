@@ -91,9 +91,32 @@
     "segment_finance": "주식회사 프로티나의 주요 제품·서비스는 의약품, 구리, 분류, 활용(제공)범위, PPI PathFinder®, 서비스 매출입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 판매조직 당사는 차별화된 단백질 상호작용 분석 기술을 기반으로 고객사에 바이오마커 솔루션 서비스, 신약후보물질 최적화 서비스, 및 신약후보물질 공동개발업무를 제공하고 있으며, 이를 위해 기업부설연구소의 연구개발 인력과 사업개발본부가 긴밀히 협업하고 있습니다. 보스턴은 미국 바이오 산업의 중심지로서, 글로벌 제약사 및 바이오텍과의 기술 미팅, 고객 피드백 수집, 시장 트렌드 파악에 적합한 지역입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "항체은행",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
+        "name": "PPI PathFinder®",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.4%",
+        "revenue_share": 0.0842,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "PPI PathFinder®- 선천면역복합체",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
+        "revenue_share": 0.0179,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "내수",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.8%",
+        "revenue_share": 0.0678,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "SPID Platform Systems",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.0008,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -108,36 +131,58 @@
       "SPID PlatformSystems",
       "Non-GLP(통상"
     ],
-    "investor_note": "주식회사 프로티나의 주요 제품·서비스는 의약품, 구리, 분류, 활용(제공)범위, PPI PathFinder®, 서비스 매출입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 판매조직 당사는 차별화된 단백질 상호작용 분석 기술을 기반으로 고객사에 바이오마커 솔루션 서비스, 신약후보물질 최적화 서비스, 및 신약후보물질 공동개발업무를 제공하고 있으며, 이를 위해 기업부설연구소의 연구개발 인력과 사업개발본부가 긴밀히 협업하고 있습니다. 보스턴은 미국 바이오 산업의 중심지로서, 글로벌 제약사 및 바이오텍과의 기술 미팅, 고객 피드백 수집, 시장 트렌드 파악에 적합한 지역입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사 프로티나의 주요 제품·서비스는 의약품, 구리, 분류, 활용(제공)범위, PPI PathFinder®, 서비스 매출입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 판매조직 당사는 차별화된 단백질 상호작용 분석 기술을 기반으로 고객사에 바이오마커 솔루션 서비스, 신약후보물질 최적화 서비스, 및 신약후보물질 공동개발업무를 제공하고 있으며, 이를 위해 기업부설연구소의 연구개발 인력과 사업개발본부가 긴밀히 협업하고 있습니다. 보스턴은 미국 바이오 산업의 중심지로서, 글로벌 제약사 및 바이오텍과의 기술 미팅, 고객 피드백 수집, 시장 트렌드 파악에 적합한 지역입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "PPI PathFinder®",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.4%",
+        "revenue_share": 0.0842,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "PPI PathFinder®- 선천면역복합체",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
+        "revenue_share": 0.0179,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "내수",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.8%",
+        "revenue_share": 0.0678,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "SPID Platform Systems",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.0008,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "항체은행",
-      "caption": "예금과 대출에서 이자이익을 만드는 금융 서비스입니다.",
-      "kind": "bank",
-      "visual": "BANK",
-      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "의약품",
-      "caption": "의약품을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "구리",
-      "caption": "구리을 중심으로 매출을 만드는 사업입니다.",
+      "title": "PPI PathFinder®",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.4%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "분류",
-      "caption": "분류을 중심으로 매출을 만드는 사업입니다.",
+      "title": "PPI PathFinder®- 선천면역복합체",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "내수",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.8%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",

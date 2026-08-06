@@ -155,24 +155,32 @@
     "segment_finance": "대현은 1977년 페페 브랜드로 시작해 씨씨콜렉트, 주크, 모조, 듀엘 등 다양한 브랜드를 운영하는 여성복 전문 패션기업으로, 전국 백화점·상설점 등 366개 오프라인 매장과 온라인몰을 통해 판매하고 있습니다. 매출은 모조(27%), 주크(27%), 듀엘(23%), 씨씨콜렉트(22%) 등 네 브랜드에 고르게 분산돼 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,405억 원으로 전년보다 7.2% 줄었고 영업이익은 50.8%, 당기순이익은 30.7% 각각 감소했습니다. 다만 부채비율은 13.5%로 매우 낮아 재무구조는 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "모조",
-        "desc": "여성복 브랜드",
-        "revenue_share": 0.2678
+        "name": "여성의류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.0%",
+        "revenue_share": 0.2201,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "주크",
-        "desc": "여성복 브랜드",
-        "revenue_share": 0.2658
+        "name": "주 크",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.6%",
+        "revenue_share": 0.2658,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "듀엘",
-        "desc": "여성복 브랜드",
-        "revenue_share": 0.2265
+        "name": "모 조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.8%",
+        "revenue_share": 0.2678,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "씨씨콜렉트",
-        "desc": "여성복 브랜드",
-        "revenue_share": 0.2201
+        "name": "듀 엘",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.7%",
+        "revenue_share": 0.2265,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -186,36 +194,66 @@
       "대현인사이드(온라인몰)",
       "바운더리(편집샵)"
     ],
-    "investor_note": "대현은 1977년 페페 브랜드로 시작해 씨씨콜렉트, 주크, 모조, 듀엘 등 다양한 브랜드를 운영하는 여성복 전문 패션기업으로, 전국 백화점·상설점 등 366개 오프라인 매장과 온라인몰을 통해 판매하고 있습니다. 매출은 모조(27%), 주크(27%), 듀엘(23%), 씨씨콜렉트(22%) 등 네 브랜드에 고르게 분산돼 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,405억 원으로 전년보다 7.2% 줄었고 영업이익은 50.8%, 당기순이익은 30.7% 각각 감소했습니다. 다만 부채비율은 13.5%로 매우 낮아 재무구조는 안정적인 편입니다."
+    "investor_note": "대현은 1977년 페페 브랜드로 시작해 씨씨콜렉트, 주크, 모조, 듀엘 등 다양한 브랜드를 운영하는 여성복 전문 패션기업으로, 전국 백화점·상설점 등 366개 오프라인 매장과 온라인몰을 통해 판매하고 있습니다. 매출은 모조(27%), 주크(27%), 듀엘(23%), 씨씨콜렉트(22%) 등 네 브랜드에 고르게 분산돼 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,405억 원으로 전년보다 7.2% 줄었고 영업이익은 50.8%, 당기순이익은 30.7% 각각 감소했습니다. 다만 부채비율은 13.5%로 매우 낮아 재무구조는 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "여성의류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.0%",
+        "revenue_share": 0.2201,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "주 크",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.6%",
+        "revenue_share": 0.2658,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "모 조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.8%",
+        "revenue_share": 0.2678,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "듀 엘",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.7%",
+        "revenue_share": 0.2265,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "모조",
-      "caption": "모조을 중심으로 매출을 만드는 사업입니다.",
+      "title": "여성의류",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.0%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "주크",
-      "caption": "주크을 중심으로 매출을 만드는 사업입니다.",
+      "title": "주 크",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.6%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "듀엘",
-      "caption": "듀엘을 중심으로 매출을 만드는 사업입니다.",
+      "title": "모 조",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.8%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "씨씨콜렉트",
-      "caption": "씨씨콜렉트을 중심으로 매출을 만드는 사업입니다.",
+      "title": "듀 엘",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.7%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",

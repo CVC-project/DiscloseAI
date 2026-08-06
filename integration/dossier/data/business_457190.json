@@ -123,9 +123,11 @@
     "segment_finance": "주식회사 이수스페셜티케미컬의 주요 제품·서비스는 배터리, 화학제품, 정밀화학 제품, TDM, IPA, Solvent 등입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 향후에도 지속적인 제품개발 및 품질향상을 통한 고객만족 확대 등을 바탕으로 향후에도 사업경쟁력을 강화하고 글로벌 시장을 선도해 나갈 계획입니다. 주식회사 이수스페셜티케미컬(이하 \"당사\")은 정밀화학 및 전고체전지소재 사업부문의 사업경쟁력 강화 및 전문화된 사업영역 역량 집중을 통한 경영효율성 증대 등을 목적으로 2023년 5월 1일을 분할기일로 하여 분할회사인 주식회사 이수화학으로부터 인적분할의 방법으로 설립되었습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "수익증권 매수청구권",
-        "desc": "위탁매매, IB, 운용 등 증권 서비스",
-        "revenue_share": null
+        "name": "정밀화학 상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.3%",
+        "revenue_share": 0.393,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -138,38 +140,30 @@
       "분자량조절제",
       "내부연구"
     ],
-    "investor_note": "주식회사 이수스페셜티케미컬의 주요 제품·서비스는 배터리, 화학제품, 정밀화학 제품, TDM, IPA, Solvent 등입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 향후에도 지속적인 제품개발 및 품질향상을 통한 고객만족 확대 등을 바탕으로 향후에도 사업경쟁력을 강화하고 글로벌 시장을 선도해 나갈 계획입니다. 주식회사 이수스페셜티케미컬(이하 \"당사\")은 정밀화학 및 전고체전지소재 사업부문의 사업경쟁력 강화 및 전문화된 사업영역 역량 집중을 통한 경영효율성 증대 등을 목적으로 2023년 5월 1일을 분할기일로 하여 분할회사인 주식회사 이수화학으로부터 인적분할의 방법으로 설립되었습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사 이수스페셜티케미컬의 주요 제품·서비스는 배터리, 화학제품, 정밀화학 제품, TDM, IPA, Solvent 등입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 향후에도 지속적인 제품개발 및 품질향상을 통한 고객만족 확대 등을 바탕으로 향후에도 사업경쟁력을 강화하고 글로벌 시장을 선도해 나갈 계획입니다. 주식회사 이수스페셜티케미컬(이하 \"당사\")은 정밀화학 및 전고체전지소재 사업부문의 사업경쟁력 강화 및 전문화된 사업영역 역량 집중을 통한 경영효율성 증대 등을 목적으로 2023년 5월 1일을 분할기일로 하여 분할회사인 주식회사 이수화학으로부터 인적분할의 방법으로 설립되었습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "정밀화학 제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 57.9%",
+        "revenue_share": 0.579,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "정밀화학 상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.3%",
+        "revenue_share": 0.393,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "수익증권 매수청구권",
-      "caption": "투자 중개와 자산관리 수수료가 실적에 연결됩니다.",
-      "kind": "securities",
-      "visual": "AUM",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "배터리",
-      "caption": "배터리을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
-      "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "화학제품",
-      "caption": "화학제품을 중심으로 매출을 만드는 사업입니다.",
+      "title": "화학소재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 57.9%",
       "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "정밀화학 제품",
-      "caption": "정밀화학 제품을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "material",
-      "visual": "MAT",
+      "visual": "CHEMICAL",
       "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
       "image_source": "Wikimedia Commons"
     }

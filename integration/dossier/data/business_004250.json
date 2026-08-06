@@ -153,43 +153,80 @@
   "snippets": {
     "overview": "엔피씨는 파렛트·컨테이너 등 산업용 플라스틱 사출제품을 제조·판매하고 일부는 임대(렌탈)하는 물류기자재 전문기업입니다. 판매사업이 매출의 약 70%, 렌탈사업이 약 28%를 차지합니다. 과거 공시 기반 참고 정보로, 매출액은 4,503억 원으로 전년 대비 1.7% 줄었지만 영업이익은 235억 원으로 124.6% 늘어 수익성은 개선됐습니다. 다만 당기순이익은 129억 원으로 82.9% 줄어 영업 성과만큼 최종 이익은 늘지 않았고, 부채비율은 39.1%로 재무구조는 비교적 안정적입니다.",
     "segment_finance": "엔피씨는 파렛트·컨테이너 등 산업용 플라스틱 사출제품을 제조·판매하고 일부는 임대(렌탈)하는 물류기자재 전문기업입니다. 판매사업이 매출의 약 70%, 렌탈사업이 약 28%를 차지합니다. 과거 공시 기반 참고 정보로, 매출액은 4,503억 원으로 전년 대비 1.7% 줄었지만 영업이익은 235억 원으로 124.6% 늘어 수익성은 개선됐습니다. 다만 당기순이익은 129억 원으로 82.9% 줄어 영업 성과만큼 최종 이익은 늘지 않았고, 부채비율은 39.1%로 재무구조는 비교적 안정적입니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.4%",
+        "revenue_share": 0.194,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매출액합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "파렛트",
       "컨테이너",
       "물류기자재",
       "플라스틱 사출제품"
     ],
-    "investor_note": "엔피씨는 파렛트·컨테이너 등 산업용 플라스틱 사출제품을 제조·판매하고 일부는 임대(렌탈)하는 물류기자재 전문기업입니다. 판매사업이 매출의 약 70%, 렌탈사업이 약 28%를 차지합니다. 과거 공시 기반 참고 정보로, 매출액은 4,503억 원으로 전년 대비 1.7% 줄었지만 영업이익은 235억 원으로 124.6% 늘어 수익성은 개선됐습니다. 다만 당기순이익은 129억 원으로 82.9% 줄어 영업 성과만큼 최종 이익은 늘지 않았고, 부채비율은 39.1%로 재무구조는 비교적 안정적입니다."
+    "investor_note": "엔피씨는 파렛트·컨테이너 등 산업용 플라스틱 사출제품을 제조·판매하고 일부는 임대(렌탈)하는 물류기자재 전문기업입니다. 판매사업이 매출의 약 70%, 렌탈사업이 약 28%를 차지합니다. 과거 공시 기반 참고 정보로, 매출액은 4,503억 원으로 전년 대비 1.7% 줄었지만 영업이익은 235억 원으로 124.6% 늘어 수익성은 개선됐습니다. 다만 당기순이익은 129억 원으로 82.9% 줄어 영업 성과만큼 최종 이익은 늘지 않았고, 부채비율은 39.1%로 재무구조는 비교적 안정적입니다.",
+    "product_service_segments": [
+      {
+        "name": "판매사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.9%",
+        "revenue_share": 0.509,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.4%",
+        "revenue_share": 0.194,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "렌탈사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.6%",
+        "revenue_share": 0.276,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매출액합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "파렛트",
-      "caption": "파렛트을 중심으로 매출을 만드는 사업입니다.",
+      "title": "판매사업부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.9%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "컨테이너",
-      "caption": "컨테이너을 중심으로 매출을 만드는 사업입니다.",
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.4%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "물류기자재",
-      "caption": "물류기자재을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "플라스틱 사출제품",
-      "caption": "플라스틱 사출제품을 중심으로 매출을 만드는 사업입니다.",
+      "title": "렌탈사업부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.6%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",

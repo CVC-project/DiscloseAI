@@ -155,9 +155,32 @@
     "segment_finance": "동아에스티(주)의 주요 제품·서비스는 의약품, 바이오시밀러, 그로트로핀, 성장호르몬, 의약품 등, 제품 등입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 스티렌, 자이데나, 모티리톤, 슈가논 등 자사개발 신약 및 그로트로핀, 가스터 등 다양한 전문의약품(ETC)을 제조, 판매하고 있으며, 천안, 대구, 송도캠퍼스에서 각종 제품을 생산하고 있습니다. CODA는 제품생산을 담당하고, Combiphar는 현지 제품 판매를 담당하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "바이오",
-        "desc": "바이오시밀러 관련 제품·서비스",
-        "revenue_share": null
+        "name": "의약품 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.3%",
+        "revenue_share": 0.163,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "모티리톤",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.8%",
+        "revenue_share": 0.048,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "슈가논",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.03,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "가스터",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.5%",
+        "revenue_share": 0.025,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -173,38 +196,68 @@
       "유럽",
       "사우디"
     ],
-    "investor_note": "동아에스티(주)의 주요 제품·서비스는 의약품, 바이오시밀러, 그로트로핀, 성장호르몬, 의약품 등, 제품 등입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 스티렌, 자이데나, 모티리톤, 슈가논 등 자사개발 신약 및 그로트로핀, 가스터 등 다양한 전문의약품(ETC)을 제조, 판매하고 있으며, 천안, 대구, 송도캠퍼스에서 각종 제품을 생산하고 있습니다. CODA는 제품생산을 담당하고, Combiphar는 현지 제품 판매를 담당하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "동아에스티(주)의 주요 제품·서비스는 의약품, 바이오시밀러, 그로트로핀, 성장호르몬, 의약품 등, 제품 등입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 스티렌, 자이데나, 모티리톤, 슈가논 등 자사개발 신약 및 그로트로핀, 가스터 등 다양한 전문의약품(ETC)을 제조, 판매하고 있으며, 천안, 대구, 송도캠퍼스에서 각종 제품을 생산하고 있습니다. CODA는 제품생산을 담당하고, Combiphar는 현지 제품 판매를 담당하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "의약품 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.3%",
+        "revenue_share": 0.163,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "모티리톤",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.8%",
+        "revenue_share": 0.048,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "슈가논",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.03,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "가스터",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.5%",
+        "revenue_share": 0.025,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "바이오",
-      "caption": "바이오을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
-      "image_source": "Unsplash"
-    },
-    {
       "title": "의약품",
-      "caption": "의약품을 중심으로 매출을 만드는 사업입니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.3%",
       "kind": "bio",
-      "visual": "BIO",
+      "visual": "PHARMA",
       "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "그로트로핀",
-      "caption": "그로트로핀을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "bio",
-      "visual": "BIO",
+      "title": "모티리톤",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
       "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "성장호르몬",
-      "caption": "성장호르몬을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "bio",
-      "visual": "BIO",
+      "title": "슈가논",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "가스터",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
       "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
       "image_source": "Unsplash"
     }

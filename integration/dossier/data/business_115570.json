@@ -153,7 +153,15 @@
   "snippets": {
     "overview": "(주)스타플렉스의 주요 제품·서비스는 제품등, FRONTLIT 등, DOP, YARN, 연구결과, 기대효과입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 1995년 FLEX제품을 생산한 이래 끊임없는 연구개발로 국내는 몰론, 전 세계 100여 개국에 고객을 확보하고 있는 수출기업이며, 특히 2001년부터는 세계 최초로 LAMINATING 공법을 이용하여 5M 광폭 FLEX 생산에 성공하여 기술력을 인정받아 세계 각국으로부터 호평을 받고 있습니다. 제품 등 관련 각종 산업표준 당사 제품인 FLEX는 고객의 요구에 맞게 제품제작을 하므로 특별한 산업표준이 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "(주)스타플렉스의 주요 제품·서비스는 제품등, FRONTLIT 등, DOP, YARN, 연구결과, 기대효과입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 1995년 FLEX제품을 생산한 이래 끊임없는 연구개발로 국내는 몰론, 전 세계 100여 개국에 고객을 확보하고 있는 수출기업이며, 특히 2001년부터는 세계 최초로 LAMINATING 공법을 이용하여 5M 광폭 FLEX 생산에 성공하여 기술력을 인정받아 세계 각국으로부터 호평을 받고 있습니다. 제품 등 관련 각종 산업표준 당사 제품인 FLEX는 고객의 요구에 맞게 제품제작을 하므로 특별한 산업표준이 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
+        "revenue_share": 0.016,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "제품등",
       "FRONTLIT 등",
@@ -164,36 +172,36 @@
       "LAMINATING기술 개발",
       "개발결과"
     ],
-    "investor_note": "(주)스타플렉스의 주요 제품·서비스는 제품등, FRONTLIT 등, DOP, YARN, 연구결과, 기대효과입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 1995년 FLEX제품을 생산한 이래 끊임없는 연구개발로 국내는 몰론, 전 세계 100여 개국에 고객을 확보하고 있는 수출기업이며, 특히 2001년부터는 세계 최초로 LAMINATING 공법을 이용하여 5M 광폭 FLEX 생산에 성공하여 기술력을 인정받아 세계 각국으로부터 호평을 받고 있습니다. 제품 등 관련 각종 산업표준 당사 제품인 FLEX는 고객의 요구에 맞게 제품제작을 하므로 특별한 산업표준이 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)스타플렉스의 주요 제품·서비스는 제품등, FRONTLIT 등, DOP, YARN, 연구결과, 기대효과입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 1995년 FLEX제품을 생산한 이래 끊임없는 연구개발로 국내는 몰론, 전 세계 100여 개국에 고객을 확보하고 있는 수출기업이며, 특히 2001년부터는 세계 최초로 LAMINATING 공법을 이용하여 5M 광폭 FLEX 생산에 성공하여 기술력을 인정받아 세계 각국으로부터 호평을 받고 있습니다. 제품 등 관련 각종 산업표준 당사 제품인 FLEX는 고객의 요구에 맞게 제품제작을 하므로 특별한 산업표준이 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "제품등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 97.9%",
+        "revenue_share": 0.979,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
+        "revenue_share": 0.016,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "제품등",
-      "caption": "제품등을 중심으로 매출을 만드는 사업입니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 97.9%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "FRONTLIT 등",
-      "caption": "FRONTLIT 등을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "DOP",
-      "caption": "DOP을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "YARN",
-      "caption": "YARN을 중심으로 매출을 만드는 사업입니다.",
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",

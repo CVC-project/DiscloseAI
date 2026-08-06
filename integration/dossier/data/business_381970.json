@@ -153,7 +153,22 @@
   "snippets": {
     "overview": "케이카의 주요 제품·서비스는 보험, 캐피탈, 임차자산 전대매출, 계약해지 수수료매출, 이천 홈서비스메가센터, 내용입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 원재료 등에 관한 사항 당사는 제조 및 생산 과정이 없는 사업 모델을 영위하여, 원재료에 관한 사항은 별도로 기재하지 않습니다. 당사는 일반 고객을 대상으로 중고차를 매입하고 판매하는 소매 사업(B2C)과 매매업자에게 차량을 공급하는 중고차 경매 사업(B2B)을 영위하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "케이카의 주요 제품·서비스는 보험, 캐피탈, 임차자산 전대매출, 계약해지 수수료매출, 이천 홈서비스메가센터, 내용입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 원재료 등에 관한 사항 당사는 제조 및 생산 과정이 없는 사업 모델을 영위하여, 원재료에 관한 사항은 별도로 기재하지 않습니다. 당사는 일반 고객을 대상으로 중고차를 매입하고 판매하는 소매 사업(B2C)과 매매업자에게 차량을 공급하는 중고차 경매 사업(B2B)을 영위하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.5%",
+        "revenue_share": 0.035,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "소매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.9%",
+        "revenue_share": 0.409,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "보험",
       "캐피탈",
@@ -161,40 +176,62 @@
       "이천 홈서비스메가센터",
       "내용"
     ],
-    "investor_note": "케이카의 주요 제품·서비스는 보험, 캐피탈, 임차자산 전대매출, 계약해지 수수료매출, 이천 홈서비스메가센터, 내용입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 원재료 등에 관한 사항 당사는 제조 및 생산 과정이 없는 사업 모델을 영위하여, 원재료에 관한 사항은 별도로 기재하지 않습니다. 당사는 일반 고객을 대상으로 중고차를 매입하고 판매하는 소매 사업(B2C)과 매매업자에게 차량을 공급하는 중고차 경매 사업(B2B)을 영위하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "케이카의 주요 제품·서비스는 보험, 캐피탈, 임차자산 전대매출, 계약해지 수수료매출, 이천 홈서비스메가센터, 내용입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 원재료 등에 관한 사항 당사는 제조 및 생산 과정이 없는 사업 모델을 영위하여, 원재료에 관한 사항은 별도로 기재하지 않습니다. 당사는 일반 고객을 대상으로 중고차를 매입하고 판매하는 소매 사업(B2C)과 매매업자에게 차량을 공급하는 중고차 경매 사업(B2B)을 영위하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "중고차사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 93.4%",
+        "revenue_share": 0.934,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.5%",
+        "revenue_share": 0.035,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "렌터카사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.9%",
+        "revenue_share": 0.009,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "소매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.9%",
+        "revenue_share": 0.409,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "보험",
-      "caption": "보험료와 손해율이 실적을 좌우하는 금융 서비스입니다.",
+      "title": "중고차사업부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 93.4%",
       "kind": "auto",
       "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "캐피탈",
-      "caption": "캐피탈을 중심으로 매출을 만드는 사업입니다.",
+      "title": "용역",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.5%",
       "kind": "auto",
       "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "임차자산 전대매출",
-      "caption": "임차자산 전대매출을 중심으로 매출을 만드는 사업입니다.",
+      "title": "소매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.9%",
       "kind": "auto",
       "visual": "AUTO",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "이천 홈서비스메가센터",
-      "caption": "이천 홈서비스메가센터을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "auto",
-      "visual": "AUTO",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

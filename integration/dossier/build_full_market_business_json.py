@@ -16,11 +16,11 @@ from typing import Any
 
 from business_card_quality import normalize_business_payload
 
-
 ROOT = Path(__file__).resolve().parents[2]
 FULLTEXT_DIR = ROOT / "modules" / "disclosure" / "data" / "fulltext"
 OUT_DIR = ROOT / "integration" / "dossier" / "data"
 MASTER_PATH = OUT_DIR / "company_master.json"
+PRODUCT_SEGMENTS_PATH = OUT_DIR / "product_service_segments.json"
 
 
 KIND_KEYWORDS = [
@@ -168,6 +168,17 @@ def master_by_corp() -> dict[str, dict[str, Any]]:
     }
 
 
+def product_segments_by_corp() -> dict[str, list[dict[str, Any]]]:
+    if not PRODUCT_SEGMENTS_PATH.exists():
+        return {}
+    payload = load_json(PRODUCT_SEGMENTS_PATH)
+    return {
+        str(corp_code).zfill(8): value
+        for corp_code, value in payload.items()
+        if isinstance(value, list)
+    }
+
+
 def firm_by_ticker(ticker: str) -> dict[str, Any] | None:
     path = OUT_DIR / f"firm_{ticker}.json"
     if not path.exists():
@@ -266,8 +277,11 @@ def build_business_json(
     if years:
         latest_year = years[-1]
     category = master.get("industry_name") or master.get("industry_code") or "사업"
+    reported_segments = (
+        summary.get("product_service_segments") or summary.get("segments") or []
+    )
     segments = []
-    for segment in summary.get("segments") or []:
+    for segment in reported_segments:
         if not isinstance(segment, dict):
             continue
         segments.append(
@@ -282,6 +296,7 @@ def build_business_json(
         "overview": compact(summary.get("investor_notes"), 900),
         "segment_finance": compact(summary.get("investor_notes"), 700),
         "segment_breakdown": [s for s in segments if s["name"]],
+        "product_service_segments": [s for s in segments if s["name"]],
         "products": [
             str(p).strip() for p in (summary.get("products") or []) if str(p).strip()
         ][:12],
@@ -324,10 +339,16 @@ def main() -> int:
 
     summaries = latest_summaries()
     master = master_by_corp()
+    product_segments = product_segments_by_corp()
     written = 0
     preserved = 0
     skipped = 0
     for corp_code, summary in sorted(summaries.items()):
+        if product_segments.get(corp_code):
+            summary = {
+                **summary,
+                "product_service_segments": product_segments[corp_code],
+            }
         row = master.get(corp_code)
         if not row or not row.get("ticker"):
             skipped += 1

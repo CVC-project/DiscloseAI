@@ -155,9 +155,32 @@
     "segment_finance": "고려신용정보는 부실채권의 회수·관리를 대행하는 채권추심업을 주력으로 하며, 담보물건 현장조사 등 신용조사업, 여신서류 발급을 대행하는 민원대행업, 종속회사 행복드림금융대부를 통한 부동산 담보대출(대부업)도 함께 영위하고 있습니다. 매출의 90%가 채권추심 수수료에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,780억 원으로 전년 대비 3.9% 늘었고 영업이익은 9.3% 증가하는 등 경기 둔화 속에서도 수익성 개선을 이어갔습니다. 당기순이익도 132억 원으로 소폭 늘었습니다. 부채비율은 81.5%로 무난한 수준이며, ROE는 22.9%로 자기자본 대비 수익성이 높은 편입니다.",
     "segment_breakdown": [
       {
+        "name": "고려신용정보(주)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.1%",
+        "revenue_share": 0.061,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
         "name": "채권추심업",
-        "desc": "부실채권 회수·관리 대행 수수료",
-        "revenue_share": 0.9
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 90.0%",
+        "revenue_share": 0.9,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "민원대행업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
+        "revenue_share": 0.018,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "행복드림금융대부(주)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.1%",
+        "revenue_share": 0.021,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -167,40 +190,70 @@
       "Delivery 서비스(서류 전달)",
       "부동산 담보대출(대부업)"
     ],
-    "investor_note": "고려신용정보는 부실채권의 회수·관리를 대행하는 채권추심업을 주력으로 하며, 담보물건 현장조사 등 신용조사업, 여신서류 발급을 대행하는 민원대행업, 종속회사 행복드림금융대부를 통한 부동산 담보대출(대부업)도 함께 영위하고 있습니다. 매출의 90%가 채권추심 수수료에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,780억 원으로 전년 대비 3.9% 늘었고 영업이익은 9.3% 증가하는 등 경기 둔화 속에서도 수익성 개선을 이어갔습니다. 당기순이익도 132억 원으로 소폭 늘었습니다. 부채비율은 81.5%로 무난한 수준이며, ROE는 22.9%로 자기자본 대비 수익성이 높은 편입니다."
+    "investor_note": "고려신용정보는 부실채권의 회수·관리를 대행하는 채권추심업을 주력으로 하며, 담보물건 현장조사 등 신용조사업, 여신서류 발급을 대행하는 민원대행업, 종속회사 행복드림금융대부를 통한 부동산 담보대출(대부업)도 함께 영위하고 있습니다. 매출의 90%가 채권추심 수수료에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,780억 원으로 전년 대비 3.9% 늘었고 영업이익은 9.3% 증가하는 등 경기 둔화 속에서도 수익성 개선을 이어갔습니다. 당기순이익도 132억 원으로 소폭 늘었습니다. 부채비율은 81.5%로 무난한 수준이며, ROE는 22.9%로 자기자본 대비 수익성이 높은 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "고려신용정보(주)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.1%",
+        "revenue_share": 0.061,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "채권추심업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 90.0%",
+        "revenue_share": 0.9,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "민원대행업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
+        "revenue_share": 0.018,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "행복드림금융대부(주)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.1%",
+        "revenue_share": 0.021,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
+      "title": "고려신용정보(주)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.1%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
       "title": "채권추심업",
-      "caption": "채권추심업을 중심으로 매출을 만드는 사업입니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 90.0%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "채권추심 서비스",
-      "caption": "채권추심 서비스을 중심으로 매출을 만드는 사업입니다.",
+      "title": "민원대행업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "신용조사(현장조사)",
-      "caption": "신용조사(현장조사)을 중심으로 매출을 만드는 사업입니다.",
+      "title": "행복드림금융대부(주)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.1%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "민원대행업(등기부등본 등 발급)",
-      "caption": "민원대행업(등기부등본 등 발급)을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

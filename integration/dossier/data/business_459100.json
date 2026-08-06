@@ -107,9 +107,25 @@
     "segment_finance": "(주)위츠의 주요 제품·서비스는 카메라모듈, 가전용 LCD, 가전제품, 전자사업, 기타매출, 모바일용 무선충전수신모듈입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 고객사向 공급을 안정적으로 유지하는 한편, 제품 라인업 확대와 고객 다각화를 통해 매출 기반을 확대하고 있습니다. 또한, 전장 및 전기차 충전 인프라 관련 제품은 선행기술 확보와 양산/품질 역량을 바탕으로 시장 대응력을 강화하고 있으며, 생산거점 기반의 원가ㆍ생산 경쟁력을 통해 점유율 확대를 추진하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "전환증권",
-        "desc": "위탁매매, IB, 운용 등 증권 서비스",
-        "revenue_share": null
+        "name": "모바일용무선충전기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.4%",
+        "revenue_share": 0.114,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "게이밍 디스플레이 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.6%",
+        "revenue_share": 0.036,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "가전 디스플레이 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.2%",
+        "revenue_share": 0.062,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -124,40 +140,62 @@
       "전장사업",
       "샘플"
     ],
-    "investor_note": "(주)위츠의 주요 제품·서비스는 카메라모듈, 가전용 LCD, 가전제품, 전자사업, 기타매출, 모바일용 무선충전수신모듈입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 고객사向 공급을 안정적으로 유지하는 한편, 제품 라인업 확대와 고객 다각화를 통해 매출 기반을 확대하고 있습니다. 또한, 전장 및 전기차 충전 인프라 관련 제품은 선행기술 확보와 양산/품질 역량을 바탕으로 시장 대응력을 강화하고 있으며, 생산거점 기반의 원가ㆍ생산 경쟁력을 통해 점유율 확대를 추진하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)위츠의 주요 제품·서비스는 카메라모듈, 가전용 LCD, 가전제품, 전자사업, 기타매출, 모바일용 무선충전수신모듈입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 고객사向 공급을 안정적으로 유지하는 한편, 제품 라인업 확대와 고객 다각화를 통해 매출 기반을 확대하고 있습니다. 또한, 전장 및 전기차 충전 인프라 관련 제품은 선행기술 확보와 양산/품질 역량을 바탕으로 시장 대응력을 강화하고 있으며, 생산거점 기반의 원가ㆍ생산 경쟁력을 통해 점유율 확대를 추진하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "전자사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 52.2%",
+        "revenue_share": 0.522,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "모바일용무선충전기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.4%",
+        "revenue_share": 0.114,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "게이밍 디스플레이 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.6%",
+        "revenue_share": 0.036,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "가전 디스플레이 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.2%",
+        "revenue_share": 0.062,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "전환증권",
-      "caption": "투자 중개와 자산관리 수수료가 실적에 연결됩니다.",
-      "kind": "securities",
-      "visual": "AUM",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "title": "전자사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 52.2%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "카메라모듈",
-      "caption": "스마트폰과 전장 카메라에 들어가는 이미지 처리 부품입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_025006447be31665.jpg",
+      "title": "모바일용무선충전기",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.4%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "디스플레이",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.6%",
+      "kind": "display",
+      "visual": "OLED",
+      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
       "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "가전용 LCD",
-      "caption": "가전용 LCD을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "가전제품",
-      "caption": "가전제품을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

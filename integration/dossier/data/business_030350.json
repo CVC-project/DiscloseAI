@@ -153,7 +153,15 @@
   "snippets": {
     "overview": "드래곤플라이는 '스페셜포스' 등 온라인·모바일 게임과 VR·AR 콘텐츠를 만드는 게임사업과, 자회사 리노펙을 통한 자동차 흡음재·기능성 필름 제조사업을 함께 운영하는 회사입니다. 최근에는 자동차 흡음재 매출이 게임 매출을 웃돌 만큼 사업 비중이 바뀌었습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 158억 원으로 전년 대비 38.0% 줄었고, 영업이익과 당기순이익 모두 적자를 이어가 재무 상태가 취약한 편입니다. 특히 전기(2024회계연도) 감사에서는 계속기업 존속능력에 대한 의문으로 감사인이 의견을 표명하지 못했던 이력이 있어(이번 보고서에는 적정의견이 표명됐지만), 재무 상태를 각별히 주의 깊게 살펴볼 필요가 있습니다.",
     "segment_finance": "드래곤플라이는 '스페셜포스' 등 온라인·모바일 게임과 VR·AR 콘텐츠를 만드는 게임사업과, 자회사 리노펙을 통한 자동차 흡음재·기능성 필름 제조사업을 함께 운영하는 회사입니다. 최근에는 자동차 흡음재 매출이 게임 매출을 웃돌 만큼 사업 비중이 바뀌었습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 158억 원으로 전년 대비 38.0% 줄었고, 영업이익과 당기순이익 모두 적자를 이어가 재무 상태가 취약한 편입니다. 특히 전기(2024회계연도) 감사에서는 계속기업 존속능력에 대한 의문으로 감사인이 의견을 표명하지 못했던 이력이 있어(이번 보고서에는 적정의견이 표명됐지만), 재무 상태를 각별히 주의 깊게 살펴볼 필요가 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "자동차 흡음재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 47.7%",
+        "revenue_share": 0.477,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "온라인게임(스페셜포스)",
       "모바일게임(콜오브카오스 어셈블)",
@@ -161,39 +169,69 @@
       "투명전도막(ITO) 필름",
       "자동차 흡음재·씰링 패드"
     ],
-    "investor_note": "드래곤플라이는 '스페셜포스' 등 온라인·모바일 게임과 VR·AR 콘텐츠를 만드는 게임사업과, 자회사 리노펙을 통한 자동차 흡음재·기능성 필름 제조사업을 함께 운영하는 회사입니다. 최근에는 자동차 흡음재 매출이 게임 매출을 웃돌 만큼 사업 비중이 바뀌었습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 158억 원으로 전년 대비 38.0% 줄었고, 영업이익과 당기순이익 모두 적자를 이어가 재무 상태가 취약한 편입니다. 특히 전기(2024회계연도) 감사에서는 계속기업 존속능력에 대한 의문으로 감사인이 의견을 표명하지 못했던 이력이 있어(이번 보고서에는 적정의견이 표명됐지만), 재무 상태를 각별히 주의 깊게 살펴볼 필요가 있습니다."
+    "investor_note": "드래곤플라이는 '스페셜포스' 등 온라인·모바일 게임과 VR·AR 콘텐츠를 만드는 게임사업과, 자회사 리노펙을 통한 자동차 흡음재·기능성 필름 제조사업을 함께 운영하는 회사입니다. 최근에는 자동차 흡음재 매출이 게임 매출을 웃돌 만큼 사업 비중이 바뀌었습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 158억 원으로 전년 대비 38.0% 줄었고, 영업이익과 당기순이익 모두 적자를 이어가 재무 상태가 취약한 편입니다. 특히 전기(2024회계연도) 감사에서는 계속기업 존속능력에 대한 의문으로 감사인이 의견을 표명하지 못했던 이력이 있어(이번 보고서에는 적정의견이 표명됐지만), 재무 상태를 각별히 주의 깊게 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "게임사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.5%",
+        "revenue_share": 0.3254,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기능성 필름 사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.6%",
+        "revenue_share": 0.126,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동차 흡음재 사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 54.9%",
+        "revenue_share": 0.5486,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동차 흡음재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 47.7%",
+        "revenue_share": 0.477,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "온라인게임(스페셜포스)",
-      "caption": "온라인게임(스페셜포스)을 중심으로 매출을 만드는 사업입니다.",
+      "title": "게임",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.5%",
       "kind": "platform",
-      "visual": "APP",
+      "visual": "GAME",
       "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "모바일게임(콜오브카오스 어셈블)",
-      "caption": "모바일게임(콜오브카오스 어셈블)을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "platform",
-      "visual": "APP",
-      "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "VR·AR 콘텐츠",
-      "caption": "VR·AR 콘텐츠을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "platform",
-      "visual": "APP",
-      "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "투명전도막(ITO) 필름",
-      "caption": "투명전도막(ITO) 필름을 중심으로 매출을 만드는 사업입니다.",
+      "title": "기능성 필름 사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.6%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "자동차 흡음재 사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 54.9%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "자동차 흡음재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 47.7%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     }
   ],

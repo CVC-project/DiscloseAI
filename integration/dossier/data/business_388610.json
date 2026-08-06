@@ -105,7 +105,29 @@
   "snippets": {
     "overview": "주식회사 지에프씨생명과학의 주요 제품·서비스는 의약품, 소재사업부, 스킨마이크로바이옴, 비중, 매입처, 비고입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사 제품의 거래가격은 고객과 시장 및 경제 여건을 고려하여 협의하고 있으며, 거래조건이 쉽게 변경되지 않는 특징이 있습니다. 제품은 제품군으로 구분하였지만 제품군 안에서도 최종고객의 요구에 맞게 개발, 생산되는 매우 다양한 품목과 거래가격을 가진 기술집약적 제품입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "주식회사 지에프씨생명과학의 주요 제품·서비스는 의약품, 소재사업부, 스킨마이크로바이옴, 비중, 매입처, 비고입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사 제품의 거래가격은 고객과 시장 및 경제 여건을 고려하여 협의하고 있으며, 거래조건이 쉽게 변경되지 않는 특징이 있습니다. 제품은 제품군으로 구분하였지만 제품군 안에서도 최종고객의 요구에 맞게 개발, 생산되는 매우 다양한 품목과 거래가격을 가진 기술집약적 제품입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "식물세포",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.9%",
+        "revenue_share": 0.1491,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "펩타이드",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.1%",
+        "revenue_share": 0.0108,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "바이오포뮬레이팅(하이브리드엑소좀)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.0%",
+        "revenue_share": 0.1903,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "의약품",
       "소재사업부",
@@ -120,40 +142,70 @@
       "항산화",
       "보습"
     ],
-    "investor_note": "주식회사 지에프씨생명과학의 주요 제품·서비스는 의약품, 소재사업부, 스킨마이크로바이옴, 비중, 매입처, 비고입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사 제품의 거래가격은 고객과 시장 및 경제 여건을 고려하여 협의하고 있으며, 거래조건이 쉽게 변경되지 않는 특징이 있습니다. 제품은 제품군으로 구분하였지만 제품군 안에서도 최종고객의 요구에 맞게 개발, 생산되는 매우 다양한 품목과 거래가격을 가진 기술집약적 제품입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사 지에프씨생명과학의 주요 제품·서비스는 의약품, 소재사업부, 스킨마이크로바이옴, 비중, 매입처, 비고입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사 제품의 거래가격은 고객과 시장 및 경제 여건을 고려하여 협의하고 있으며, 거래조건이 쉽게 변경되지 않는 특징이 있습니다. 제품은 제품군으로 구분하였지만 제품군 안에서도 최종고객의 요구에 맞게 개발, 생산되는 매우 다양한 품목과 거래가격을 가진 기술집약적 제품입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "소재사업부",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.4%",
+        "revenue_share": 0.1141,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "식물세포",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.9%",
+        "revenue_share": 0.1491,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "펩타이드",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.1%",
+        "revenue_share": 0.0108,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "바이오포뮬레이팅(하이브리드엑소좀)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.0%",
+        "revenue_share": 0.1903,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "의약품",
-      "caption": "의약품을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
-      "image_source": "Unsplash"
-    },
-    {
       "title": "소재사업부",
-      "caption": "소재사업부을 중심으로 매출을 만드는 사업입니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.4%",
       "kind": "material",
       "visual": "MAT",
       "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "스킨마이크로바이옴",
-      "caption": "스킨마이크로바이옴을 중심으로 매출을 만드는 사업입니다.",
+      "title": "식물세포",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.9%",
       "kind": "material",
       "visual": "MAT",
       "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "비중",
-      "caption": "비중을 중심으로 매출을 만드는 사업입니다.",
+      "title": "펩타이드",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.1%",
       "kind": "material",
       "visual": "MAT",
       "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
       "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "전기차·하이브리드",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.0%",
+      "kind": "auto",
+      "visual": "EV",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

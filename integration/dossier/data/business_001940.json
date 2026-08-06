@@ -155,9 +155,18 @@
     "segment_finance": "KISCO홀딩스는 한국철강, 환영철강공업 등을 자회사로 둔 지주회사로, 매출의 거의 전부(약 99.8%)가 철스크랩을 녹여 건축용 철근과 빌렛을 만드는 철강제조 자회사에서 나옵니다. 그 외 임대업(대흥산업), 섬유판매(서륭), 금융투자 등도 소규모로 영위합니다. 과거 공시 기반 참고 정보로, 최근 건설경기 둔화로 철근 수요가 줄면서 연결 매출액은 8,252억 원으로 전년 대비 18.5% 감소했고, 영업손실 707억 원과 당기순손실 231억 원을 기록해 적자로 전환됐습니다. 다만 부채비율은 10.9%로 빚 부담은 크지 않은 편입니다.",
     "segment_breakdown": [
       {
-        "name": "철강제조부문(한국철강·환영철강공업)",
-        "desc": "전기로에서 철스크랩을 녹여 철근·빌렛 생산·판매",
-        "revenue_share": 0.9984
+        "name": "철강",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 94.0%",
+        "revenue_share": 0.9396,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.5%",
+        "revenue_share": 0.0447,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -167,36 +176,36 @@
       "임대사업(대흥산업)",
       "섬유 판매(서륭)"
     ],
-    "investor_note": "KISCO홀딩스는 한국철강, 환영철강공업 등을 자회사로 둔 지주회사로, 매출의 거의 전부(약 99.8%)가 철스크랩을 녹여 건축용 철근과 빌렛을 만드는 철강제조 자회사에서 나옵니다. 그 외 임대업(대흥산업), 섬유판매(서륭), 금융투자 등도 소규모로 영위합니다. 과거 공시 기반 참고 정보로, 최근 건설경기 둔화로 철근 수요가 줄면서 연결 매출액은 8,252억 원으로 전년 대비 18.5% 감소했고, 영업손실 707억 원과 당기순손실 231억 원을 기록해 적자로 전환됐습니다. 다만 부채비율은 10.9%로 빚 부담은 크지 않은 편입니다."
+    "investor_note": "KISCO홀딩스는 한국철강, 환영철강공업 등을 자회사로 둔 지주회사로, 매출의 거의 전부(약 99.8%)가 철스크랩을 녹여 건축용 철근과 빌렛을 만드는 철강제조 자회사에서 나옵니다. 그 외 임대업(대흥산업), 섬유판매(서륭), 금융투자 등도 소규모로 영위합니다. 과거 공시 기반 참고 정보로, 최근 건설경기 둔화로 철근 수요가 줄면서 연결 매출액은 8,252억 원으로 전년 대비 18.5% 감소했고, 영업손실 707억 원과 당기순손실 231억 원을 기록해 적자로 전환됐습니다. 다만 부채비율은 10.9%로 빚 부담은 크지 않은 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "철강",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 94.0%",
+        "revenue_share": 0.9396,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.5%",
+        "revenue_share": 0.0447,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "철강제조부문(한국철강·환영철강공업)",
-      "caption": "철강제조부문(한국철강·환영철강공업)을 중심으로 매출을 만드는 사업입니다.",
+      "title": "철강",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 94.0%",
       "kind": "material",
-      "visual": "MAT",
+      "visual": "STEEL",
       "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "철근(건축구조용)",
-      "caption": "철근(건축구조용)을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "BILLET(반제품)",
-      "caption": "BILLET(반제품)을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "산소 등 부산물",
-      "caption": "산소 등 부산물을 중심으로 매출을 만드는 사업입니다.",
+      "title": "상 품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.5%",
       "kind": "material",
       "visual": "MAT",
       "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",

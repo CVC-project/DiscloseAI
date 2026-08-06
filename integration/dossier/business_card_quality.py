@@ -12,11 +12,56 @@ from copy import deepcopy
 import re
 from typing import Any
 
-
 IMG = "../data/business_images/"
 
 
 IMAGE_RULES: list[tuple[tuple[str, ...], str, str]] = [
+    (
+        ("면제품", "라면", "당면", "국수", "NOODLE"),
+        "business_image_food_noodle.svg",
+        "Local visual",
+    ),
+    (
+        ("양념", "소스", "카레", "케찹", "케첩", "마요네즈", "SAUCE"),
+        "business_image_food_sauce.svg",
+        "Local visual",
+    ),
+    (
+        (
+            "농수산",
+            "참치",
+            "가공식품",
+            "간편식",
+            "만두",
+            "김치",
+            "햇반",
+            "PACKAGED",
+            "CANNED",
+        ),
+        "business_image_food_packaged.svg",
+        "Local visual",
+    ),
+    (
+        ("스낵", "제과", "과자", "비스킷", "쿠키", "SNACK"),
+        "business_image_food_snack.svg",
+        "Local visual",
+    ),
+    (
+        ("음료", "생수", "먹는샘물", "주스", "BEVERAGE"),
+        "business_image_food_beverage.svg",
+        "Local visual",
+    ),
+    (
+        ("주류", "소주", "맥주", "막걸리", "와인", "주정", "ALCOHOL"),
+        "business_image_local_alcohol.svg",
+        "Local visual",
+    ),
+    (
+        ("소재식품", "설탕", "밀가루", "식용유", "원당", "유지", "INGREDIENT"),
+        "business_image_food_ingredient.svg",
+        "Local visual",
+    ),
+    (("사료", "축산", "FEED"), "business_image_food_feed.svg", "Local visual"),
     (("HBM", "고대역폭"), "business_image_df7b448e6d568266.jpg", "Wikimedia Commons"),
     (
         ("CIS", "이미지센서", "카메라모듈"),
@@ -202,6 +247,15 @@ BAD_TITLE_PARTS = (
     "B2B전자결제",
     "제품매출",
     "테스트 매출",
+    "용역기간",
+    "판매금액",
+    "연구부문",
+    "개발부문",
+    "연구개발",
+    "기술개발",
+    "임상시험",
+    "전자상거래 활성화",
+    "출처:",
 )
 
 CUSTOMER_LIST_PARTS = (
@@ -249,11 +303,149 @@ PRODUCT_KIND_RULES: list[tuple[tuple[str, ...], str, str]] = [
     (("통신", "네트워크", "광케이블", "무선"), "telecom", "NET"),
     (("전력", "발전", "송전", "케이블", "OPGW"), "power", "POWER"),
     (("게임", "플랫폼", "콘텐츠", "광고"), "platform", "APP"),
+    (
+        ("면제품", "라면", "당면", "국수"),
+        "consumer",
+        "NOODLE",
+    ),
+    (
+        ("양념", "소스", "카레", "케찹", "케첩", "마요네즈"),
+        "consumer",
+        "SAUCE",
+    ),
+    (
+        ("농수산", "참치", "가공식품", "간편식", "만두", "김치", "햇반"),
+        "consumer",
+        "CANNED",
+    ),
+    (("스낵", "제과", "과자", "비스킷", "쿠키"), "consumer", "SNACK"),
+    (("음료", "생수", "먹는샘물", "주스"), "consumer", "BEVERAGE"),
+    (("주류", "소주", "맥주", "막걸리", "와인", "주정"), "consumer", "ALCOHOL"),
+    (
+        ("소재식품", "설탕", "밀가루", "식용유", "원당", "유지"),
+        "consumer",
+        "INGREDIENT",
+    ),
+    (("사료", "축산"), "consumer", "FEED"),
     (("소재", "화학", "정유", "철강", "금속"), "material", "MAT"),
 ]
 
 
 COMPANY_OVERRIDES: dict[str, list[dict[str, str]]] = {
+    "317770": [
+        {
+            "title": "바이오인식 솔루션",
+            "caption": "지문 등록·인증에 쓰이는 스캐너와 인증 디바이스를 공급합니다.",
+            "kind": "service",
+            "visual": "SECURITY",
+        },
+        {
+            "title": "전자문서 솔루션",
+            "caption": "문서 스캔과 전자문서 처리에 필요한 장비·솔루션을 제공합니다.",
+            "kind": "service",
+            "visual": "DOCUMENT",
+        },
+    ],
+    "446540": [
+        {
+            "title": "2차전지 충방전용 핀",
+            "caption": "배터리 셀의 충전·방전 검사 장비에 들어가는 접촉 부품입니다.",
+            "kind": "battery",
+            "visual": "BATTERY",
+        },
+        {
+            "title": "반도체 테스트용 핀",
+            "caption": "반도체 전기검사 과정에서 칩과 검사 장비를 연결하는 접촉 부품입니다.",
+            "kind": "chip",
+            "visual": "PROBE",
+        },
+    ],
+    "004370": [
+        {
+            "title": "라면",
+            "caption": "신라면·짜파게티 등 봉지면과 용기면을 제조·판매하는 주력 사업입니다.",
+            "kind": "consumer",
+            "visual": "NOODLE",
+        },
+        {
+            "title": "스낵",
+            "caption": "새우깡·꿀꽈배기 등 과자류를 제조·판매합니다.",
+            "kind": "consumer",
+            "visual": "SNACK",
+        },
+        {
+            "title": "음료",
+            "caption": "백산수 등 생수·음료 제품을 제조·판매합니다.",
+            "kind": "consumer",
+            "visual": "BEVERAGE",
+        },
+    ],
+    "280360": [
+        {
+            "title": "제과·스낵",
+            "caption": "빼빼로·가나·꼬깔콘 등 과자와 초콜릿 제품을 제조·판매합니다.",
+            "kind": "consumer",
+            "visual": "SNACK",
+        },
+        {
+            "title": "빙과",
+            "caption": "월드콘·설레임 등 아이스크림과 빙과 제품을 제조·판매합니다.",
+            "kind": "consumer",
+            "visual": "FOOD",
+        },
+        {
+            "title": "유가공·베이커리",
+            "caption": "유제품과 빵 등 제과 외 식품 제품군을 함께 운영합니다.",
+            "kind": "consumer",
+            "visual": "FOOD",
+        },
+    ],
+    "007310": [
+        {
+            "title": "면제품류",
+            "caption": "라면, 당면, 국수처럼 오뚜기의 대표적인 면류 제품을 제조·판매합니다.",
+            "kind": "consumer",
+            "visual": "NOODLE",
+        },
+        {
+            "title": "양념소스류",
+            "caption": "카레, 케첩, 마요네즈, 소스류처럼 가정식 조리에 쓰이는 제품군입니다.",
+            "kind": "consumer",
+            "visual": "SAUCE",
+        },
+        {
+            "title": "농수산가공품류",
+            "caption": "참치캔과 즉석식품 등 저장·간편식 수요에 연결되는 가공식품입니다.",
+            "kind": "consumer",
+            "visual": "CANNED",
+        },
+    ],
+    "097950": [
+        {
+            "title": "식품사업",
+            "caption": "햇반, 만두, 김치, 간편식 등 국내외 소비자 식품 브랜드가 주력입니다.",
+            "kind": "consumer",
+            "visual": "FOOD",
+        },
+        {
+            "title": "소재식품",
+            "caption": "설탕, 밀가루, 식용유 등 식품 제조와 외식 원가에 연결되는 기초 식품 소재를 공급합니다.",
+            "kind": "consumer",
+            "visual": "INGREDIENT",
+        },
+        {
+            "title": "바이오·FNT",
+            "caption": "아미노산, 조미소재, 영양 소재처럼 글로벌 식품·사료 산업에 쓰이는 바이오 소재를 판매합니다.",
+            "kind": "bio",
+            "visual": "BIO",
+        },
+        {
+            "title": "사료·축산",
+            "caption": "사료와 축산 사업은 곡물 가격과 글로벌 축산 수요 영향을 함께 받습니다.",
+            "kind": "consumer",
+            "visual": "FEED",
+        },
+    ],
     "000440": [
         {
             "title": "유류판매",
@@ -329,19 +521,13 @@ COMPANY_OVERRIDES: dict[str, list[dict[str, str]]] = {
     "067310": [
         {
             "title": "반도체 패키징·테스트",
-            "caption": "반도체 칩을 제품으로 쓸 수 있게 포장하고 검사하는 후공정 서비스입니다.",
+            "caption": "반도체 칩을 조립하고 전기적으로 검사하는 후공정 서비스를 제공합니다.",
             "kind": "chip",
             "visual": "PKG",
         },
         {
-            "title": "반도체 재료·Si-Parts",
-            "caption": "식각 장비에 들어가는 실리콘·실리콘카바이드 소모성 부품을 공급합니다.",
-            "kind": "chip",
-            "visual": "Si",
-        },
-        {
-            "title": "반도체 공정소모품",
-            "caption": "고객사의 공정 장비에서 반복 교체되는 부품이라 설비투자와 가동률 영향을 받습니다.",
+            "title": "반도체 소재·소모품",
+            "caption": "식각 장비에 쓰이는 Si-Parts·SiC-Parts 같은 교체형 공정 부품을 공급합니다.",
             "kind": "chip",
             "visual": "PARTS",
         },
@@ -640,13 +826,342 @@ def is_good_product_name(name: str) -> bool:
         return False
     if any(part == clean or clean.startswith(part + " ") for part in BAD_TITLE_PARTS):
         return False
-    if any(part in clean for part in ("매출", "제품매출", "테스트 매출", "제조")):
+    if any(part in clean for part in ("매출", "제품매출", "테스트 매출")):
+        return False
+    if clean == "제조":
         return False
     if any(part == clean for part in GENERIC_PRODUCT_PARTS):
+        return False
+    if re.fullmatch(r"제?\s*\d+\s*기", clean):
+        return False
+    if clean in {"비고", "품목", "구분", "분류", "내용", "번호", "합계", "총계"}:
         return False
     if re.fullmatch(r"[\d.,%()/*\- ]+", clean):
         return False
     return True
+
+
+FOOD_CATEGORY_RULES: list[tuple[tuple[str, ...], str, str, str]] = [
+    (("국내식품제조유통",), "국내 식품", "consumer", "FOOD"),
+    (("해외식품제조유통",), "해외 식품", "consumer", "FOOD"),
+    (("건강케어",), "건강기능식품", "consumer", "HEALTH"),
+    (("식품서비스유통",), "급식·외식", "consumer", "FOOD"),
+    (("면스낵",), "라면·스낵", "consumer", "NOODLE"),
+    (
+        ("라면", "탕면", "사발면", "볶음면", "짜파게티", "너구리", "면제품"),
+        "라면",
+        "consumer",
+        "NOODLE",
+    ),
+    (
+        (
+            "스낵",
+            "제과",
+            "과자",
+            "비스킷",
+            "쿠키",
+            "크래커",
+            "초코파이",
+            "새우깡",
+            "꿀꽈배기",
+        ),
+        "스낵·제과",
+        "consumer",
+        "SNACK",
+    ),
+    (
+        ("음료", "생수", "먹는샘물", "주스", "사이다", "콜라", "백산수"),
+        "음료",
+        "consumer",
+        "BEVERAGE",
+    ),
+    (
+        (
+            "소주",
+            "맥주",
+            "막걸리",
+            "약주",
+            "탁주",
+            "청주",
+            "와인",
+            "주정",
+            "에탄올",
+            "복분자",
+            "위스키",
+        ),
+        "주류",
+        "consumer",
+        "ALCOHOL",
+    ),
+    (
+        (
+            "건강기능식품",
+            "건강식품",
+            "오메가",
+            "유산균",
+            "프로바이오틱스",
+            "콜라겐",
+            "콘드로이친",
+        ),
+        "건강기능식품",
+        "consumer",
+        "HEALTH",
+    ),
+    (("사료", "프리믹스", "사료첨가제"), "사료", "consumer", "FEED"),
+    (
+        ("축산", "양돈", "양계", "가금", "육가공", "돼지고기", "닭고기"),
+        "축산·육가공",
+        "consumer",
+        "FEED",
+    ),
+    (("펫푸드", "반려동물", "PET부문"), "펫푸드", "consumer", "FEED"),
+    (
+        ("소스", "카레", "케찹", "케첩", "마요네즈", "조미", "장류", "간장"),
+        "양념·소스",
+        "consumer",
+        "SAUCE",
+    ),
+    (
+        ("간편식", "즉석식품", "냉동식품", "냉동", "가공식품", "도시락"),
+        "가공식품·간편식",
+        "consumer",
+        "CANNED",
+    ),
+    (
+        ("설탕", "밀가루", "식용유", "전분당", "소재식품", "식품소재"),
+        "소재식품",
+        "consumer",
+        "INGREDIENT",
+    ),
+    (("빵", "제빵", "베이커리", "냉동생지"), "베이커리", "consumer", "FOOD"),
+    (("빙과", "아이스크림"), "빙과", "consumer", "FOOD"),
+    (("유제품", "유가공", "우유", "발효유", "치즈"), "유제품", "consumer", "FOOD"),
+    (
+        ("식품첨가물", "특수효소", "조미액", "카라기난"),
+        "식품소재·첨가물",
+        "consumer",
+        "INGREDIENT",
+    ),
+    (("급식", "컨세션", "외식", "푸드서비스"), "급식·외식", "consumer", "FOOD"),
+    (("식자재", "식품 유통", "식품유통"), "식품유통", "consumer", "FOOD"),
+    (
+        ("두부", "콩나물", "신선식품", "계란", "액상계란"),
+        "신선·가공식품",
+        "consumer",
+        "FOOD",
+    ),
+    (("식용색소",), "식품소재·첨가물", "consumer", "INGREDIENT"),
+]
+
+
+# These rules intentionally describe a *business group*, not a customer name,
+# a single SKU, or an accounting-table row.  They are applied after the food
+# rules and before the raw DART label is used as a final fallback.
+BUSINESS_CATEGORY_RULES: list[tuple[tuple[str, ...], str, str, str]] = [
+    (
+        ("반도체 패키징", "패키징 및 테스트", "패키지 테스트", "후공정"),
+        "반도체 패키징·테스트",
+        "chip",
+        "CHIP",
+    ),
+    (
+        (
+            "Si-Parts",
+            "SiC-Parts",
+            "Silicon Parts",
+            "실리콘부품",
+            "웨이퍼",
+            "식각부품",
+            "반도체 소재",
+            "반도체 재료",
+            "공정소모품",
+        ),
+        "반도체 소재·소모품",
+        "chip",
+        "PARTS",
+    ),
+    (
+        ("반도체 장비", "식각장비", "증착장비", "세정장비", "검사장비", "테스트 장비"),
+        "반도체 장비",
+        "chip",
+        "EQUIP",
+    ),
+    (("HBM", "DRAM", "NAND", "SSD", "메모리"), "메모리 반도체", "chip", "MEMORY"),
+    (
+        ("Foundry", "파운드리", "시스템반도체", "모바일AP", "이미지센서"),
+        "시스템반도체",
+        "chip",
+        "CHIP",
+    ),
+    (("OLED", "디스플레이 패널", "디스플레이"), "디스플레이", "display", "OLED"),
+    (("카메라모듈", "카메라 모듈"), "카메라모듈", "chip", "CAM"),
+    (("MLCC", "적층세라믹", "콘덴서"), "전자부품", "chip", "MLCC"),
+    (("PCB", "인쇄회로기판", "기판"), "전자부품·기판", "chip", "PCB"),
+    (("전장", "자동차 전자", "차량용 전자"), "전장부품", "auto", "AUTO"),
+    (("완성차", "승용차", "SUV", "상용차"), "완성차", "auto", "AUTO"),
+    (("전기차", "하이브리드", "EV"), "전기차·하이브리드", "auto", "EV"),
+    (("파워트레인", "엔진", "변속기"), "구동계 부품", "auto", "PARTS"),
+    (("배터리 셀", "이차전지 셀", "2차전지 셀"), "배터리 셀", "battery", "CELL"),
+    (
+        ("양극재", "음극재", "전해액", "분리막", "배터리 소재"),
+        "배터리 소재",
+        "battery",
+        "MATERIAL",
+    ),
+    (("배터리 장비", "충방전", "전극공정"), "배터리 장비", "battery", "EQUIP"),
+    (("의약품", "신약", "원료의약품", "제약"), "의약품", "bio", "PHARMA"),
+    (
+        ("CDMO", "위탁개발", "위탁생산", "바이오의약품 생산"),
+        "바이오의약품 위탁개발·생산",
+        "bio",
+        "CDMO",
+    ),
+    (("바이오시밀러",), "바이오시밀러", "bio", "BIO"),
+    (("진단", "분자진단", "체외진단"), "진단·분석", "bio", "DIAGNOSTIC"),
+    (("의료기기", "의료용 기기", "치과", "임플란트"), "의료기기", "bio", "MEDICAL"),
+    (("클라우드", "데이터센터"), "클라우드·데이터센터", "service", "CLOUD"),
+    (("보안", "시큐리티", "정보보호", "인증"), "보안 솔루션", "service", "SECURITY"),
+    (("시스템통합", "SI", "시스템 구축"), "시스템 구축·통합", "service", "SI"),
+    (("소프트웨어", "솔루션", "SaaS"), "소프트웨어·솔루션", "service", "SOFTWARE"),
+    (("플랫폼", "커머스", "모빌리티"), "플랫폼 서비스", "platform", "PLATFORM"),
+    (("게임", "게임소프트웨어"), "게임", "platform", "GAME"),
+    (("은행", "예금", "대출", "여신"), "은행", "bank", "BANK"),
+    (("증권", "브로커리지", "위탁매매", "IB"), "증권", "securities", "SECURITIES"),
+    (("보험", "보험료", "손해보험", "생명보험"), "보험", "insurance", "INSURANCE"),
+    (("자산운용", "펀드", "운용자산"), "자산운용", "securities", "AUM"),
+    (("할인점", "마트", "대형마트"), "대형마트", "consumer", "MART"),
+    (("백화점", "면세점"), "백화점·면세점", "consumer", "RETAIL"),
+    (("온라인몰", "전자상거래", "이커머스"), "온라인 유통", "platform", "ONLINE"),
+    (("건축", "건설", "주택"), "건축·주택", "service", "CONSTRUCTION"),
+    (("토목", "플랜트"), "토목·플랜트", "service", "CONSTRUCTION"),
+    (("태양광", "풍력", "신재생"), "신재생에너지", "power", "RENEWABLE"),
+    (("발전", "송전", "변압기", "전력"), "전력기기·발전", "power", "POWER"),
+    (("선박", "LNG선", "탱커", "컨테이너선"), "상선", "ship", "SHIP"),
+    (("해양플랜트", "해양", "오프쇼어"), "해양·플랜트", "ship", "OFFSHORE"),
+    (("특수선", "방산", "항공", "미사일"), "방산·항공", "ship", "DEFENSE"),
+    (("정유", "석유화학", "기초화학", "정밀화학"), "화학소재", "material", "CHEMICAL"),
+    (("철강", "강관", "철근", "선재"), "철강", "material", "STEEL"),
+]
+
+
+def is_food_business_sector(sector: str) -> bool:
+    return any(
+        word in sector
+        for word in ("식품", "음식료", "음료", "사료", "농수산", "주정", "주류")
+    )
+
+
+def is_immaterial_revenue_share(value: Any) -> bool:
+    """Return true below 1%, accepting ratio or percentage storage."""
+    try:
+        share = float(value)
+    except (TypeError, ValueError):
+        return False
+    return share < (0.01 if 0 <= share <= 1 else 1.0)
+
+
+def is_redundant_category(title: str, existing: set[str]) -> bool:
+    """Avoid a narrow product card after its reported combined segment."""
+    tokens = {token.strip() for token in title.split("·") if token.strip()}
+    for current in existing:
+        current_tokens = {
+            token.strip() for token in current.split("·") if token.strip()
+        }
+        if (
+            tokens
+            and current_tokens
+            and (tokens <= current_tokens or current_tokens <= tokens)
+        ):
+            return True
+    return False
+
+
+def canonical_business_category(
+    name: str, sector: str, context: str = "", *, is_segment: bool = False
+) -> tuple[str, str, str] | None:
+    """Collapse product and brand names into investor-readable business groups."""
+    clean = _text(name).strip(" .,/·")
+    if not is_good_product_name(clean):
+        return None
+    food_sector = is_food_business_sector(sector)
+    if food_sector:
+        haystack = f"{clean} {context}"
+        for keywords, title, kind, visual in FOOD_CATEGORY_RULES:
+            if any(keyword.lower() in haystack.lower() for keyword in keywords):
+                return title, kind, visual
+        if is_segment and any(
+            word in clean
+            for word in ("골프장", "기계설비", "물류", "포장", "임대", "태양광")
+        ):
+            segment_title = re.sub(r"\s*(?:사업)?부문$", "", clean).strip()
+            kind, visual = infer_kind_visual(f"{segment_title} {context}", sector)
+            return segment_title, kind, visual
+        # An unmatched food product is usually a brand, table heading, or legal entity.
+        return None
+    haystack = f"{clean} {context}"
+    for keywords, title, kind, visual in BUSINESS_CATEGORY_RULES:
+        if any(keyword.lower() in haystack.lower() for keyword in keywords):
+            return title, kind, visual
+    kind, visual = infer_kind_visual(f"{clean} {context}", sector)
+    return clean, kind, visual
+
+
+def sector_type(payload: dict[str, Any] | str) -> str:
+    if isinstance(payload, dict):
+        source = " ".join(
+            [
+                _text(payload.get("sector")),
+                _text(payload.get("display_category")),
+                _text(payload.get("name")),
+            ]
+        )
+    else:
+        source = _text(payload)
+    if any(word in source for word in ("금융", "은행", "증권", "보험")):
+        return "finance"
+    if any(word in source for word in ("식품", "음식료", "농수산", "가공식품", "음료")):
+        return "food"
+    if any(word in source for word in ("반도체", "전자부품", "정밀기기")):
+        return "semiconductor"
+    if any(word in source for word in ("소매", "유통", "마트", "백화점")):
+        return "retail"
+    if any(word in source for word in ("경비", "경호", "보안")):
+        return "security"
+    return "general"
+
+
+def card_sector_mismatch(card: dict[str, Any], payload: dict[str, Any]) -> bool:
+    combined = f"{_text(card.get('title'))} {_text(card.get('caption'))}"
+    stype = sector_type(payload)
+    if stype == "food":
+        return any(
+            word in combined
+            for word in (
+                "항공",
+                "항공기",
+                "방산",
+                "데이터센터",
+                "전력",
+                "금융보증",
+                "B2B전자결제",
+                "신기술사업금융",
+                "증권",
+                "위탁매매",
+                "IB",
+            )
+        )
+    if stype == "semiconductor":
+        return any(word in combined for word in ("현금", "B2B전자결제", "금융보증"))
+    if stype == "finance":
+        return any(
+            word in combined
+            for word in ("항공", "항공기", "방산", "데이터센터", "식품", "반도체")
+        )
+    if stype == "retail":
+        return any(
+            word in combined for word in ("방산", "항공기", "금융보증", "반도체 패키징")
+        )
+    return False
 
 
 def infer_kind_visual(text: str, sector: str = "") -> tuple[str, str]:
@@ -658,6 +1173,24 @@ def infer_kind_visual(text: str, sector: str = "") -> tuple[str, str]:
 
 
 def product_caption(name: str, sector: str, overview: str) -> str:
+    if any(word in name for word in ("면제품", "라면", "당면", "국수")):
+        return "라면, 당면, 국수처럼 반복 구매가 많은 면류 제품군입니다."
+    if any(
+        word in name for word in ("양념", "소스", "카레", "케찹", "케첩", "마요네즈")
+    ):
+        return "가정식 조리와 외식 수요에 함께 쓰이는 소스·조미 제품군입니다."
+    if any(
+        word in name
+        for word in ("농수산", "참치", "가공식품", "간편식", "만두", "김치", "햇반")
+    ):
+        return "저장식품과 간편식처럼 소비자 식탁에 바로 닿는 가공식품입니다."
+    if any(
+        word in name
+        for word in ("소재식품", "설탕", "밀가루", "식용유", "원당", "유지")
+    ):
+        return "다른 식품을 만드는 데 들어가는 기초 소재라 원재료 가격 영향을 받습니다."
+    if any(word in name for word in ("사료", "축산", "F&C")):
+        return "곡물 가격과 축산 수요에 영향을 받는 사료·축산 사업입니다."
     if any(word in name for word in ("Si-Parts", "SiC-Parts", "Electrode", "Ring")):
         return "반도체 식각 공정 장비에 들어가는 교체·소모성 부품입니다."
     if any(word in name for word in ("DRAM", "NAND", "HBM", "SSD")):
@@ -693,37 +1226,65 @@ def cards_from_report_terms(payload: dict[str, Any]) -> list[dict[str, str]]:
     overview = (
         _text(snippets.get("overview")) + " " + _text(snippets.get("segment_finance"))
     )
-    names: list[str] = []
-    for product in snippets.get("products", []):
-        if isinstance(product, str) and is_good_product_name(product):
-            names.append(product.strip())
-    for seg in snippets.get("segment_breakdown", []):
+    segment_candidates: list[tuple[str, str, bool]] = []
+    product_candidates: list[tuple[str, str, bool]] = []
+    # The II.2 revenue table is authoritative. Never mix free-text section
+    # headings with it: that was the source of false cards like 연구부문.
+    product_service_segments = snippets.get("product_service_segments", [])
+    source_segments = (
+        product_service_segments
+        if isinstance(product_service_segments, list) and product_service_segments
+        else snippets.get("segment_breakdown", [])
+    )
+    for seg in source_segments:
         if isinstance(seg, dict):
             name = _text(seg.get("name"))
             desc = _text(seg.get("desc"))
+            if is_immaterial_revenue_share(seg.get("revenue_share")):
+                continue
             if is_good_product_name(name):
-                names.append(name)
-            for token in re.split(r"[,/·ㆍ]", desc):
-                token = token.strip()
-                if is_good_product_name(token):
-                    names.append(token)
+                segment_candidates.append((name, desc, True))
+    for product in snippets.get("products", []):
+        if isinstance(product, str) and is_good_product_name(product):
+            product_candidates.append((product.strip(), "", False))
 
     result: list[dict[str, str]] = []
     seen: set[str] = set()
-    for name in names:
-        if name in seen:
-            continue
-        seen.add(name)
-        kind, visual = infer_kind_visual(f"{name} {overview}", sector)
-        result.append(
-            {
-                "title": name,
-                "caption": product_caption(name, sector, overview),
+    for candidates in (segment_candidates, product_candidates):
+        for name, local_context, is_segment in candidates:
+            category = canonical_business_category(
+                name, sector, local_context, is_segment=is_segment
+            )
+            if category is None:
+                continue
+            title, kind, visual = category
+            if title in seen or is_redundant_category(title, seen):
+                continue
+            candidate_card = {
+                "title": title,
+                "caption": local_context,
                 "kind": kind,
                 "visual": visual,
             }
-        )
-        if len(result) >= 4:
+            if card_sector_mismatch(candidate_card, payload):
+                continue
+            seen.add(title)
+            caption = (
+                local_context
+                if local_context and len(local_context) <= 90
+                else product_caption(title, sector, overview)
+            )
+            result.append(
+                {
+                    "title": title,
+                    "caption": caption,
+                    "kind": kind,
+                    "visual": visual,
+                }
+            )
+            if len(result) >= 4:
+                break
+        if result:
             break
     return result
 
@@ -766,6 +1327,27 @@ def attach_images(
 
 def fallback_cards(payload: dict[str, Any]) -> list[dict[str, str]]:
     sector = _text(payload.get("sector") or payload.get("display_category"))
+    if "식품" in sector or "음식료" in sector or "농수산" in sector:
+        return [
+            {
+                "title": "식품사업",
+                "caption": "소비자 식품과 가공식품을 중심으로 매출을 만듭니다.",
+                "kind": "consumer",
+                "visual": "FOOD",
+            },
+            {
+                "title": "소재식품",
+                "caption": "식품 제조에 들어가는 원재료와 소재 제품을 공급합니다.",
+                "kind": "consumer",
+                "visual": "INGREDIENT",
+            },
+            {
+                "title": "가공식품",
+                "caption": "간편식과 저장식품처럼 반복 구매가 많은 제품군입니다.",
+                "kind": "consumer",
+                "visual": "CANNED",
+            },
+        ]
     if "소매" in sector or "유통" in sector:
         return COMPANY_OVERRIDES["139480"]
     if "경비" in sector or "경호" in sector or "보안" in sector:
@@ -820,13 +1402,35 @@ def normalize_business_payload(payload: dict[str, Any]) -> dict[str, Any]:
         report_cards = cards_from_report_terms(data)
         cards = [dict(card) for card in report_cards]
         existing_titles = {c.get("title") for c in cards}
-        cards = cards + [
-            dict(card)
-            for card in data.get("business_cards", [])
-            if isinstance(card, dict) and not is_bad_card(card)
-            if card.get("title") not in existing_titles
-        ]
-        if len(cards) < 2:
+        sector = _text(data.get("sector") or data.get("display_category"))
+        # Do not mix an authoritative report-derived business group with stale
+        # cards from a previous heuristic.  The latter was the main source of
+        # customer names, accounting labels, and unrelated categories.
+        if not report_cards:
+            for existing in data.get("business_cards", []):
+                if not isinstance(existing, dict) or is_bad_card(existing):
+                    continue
+                category = canonical_business_category(
+                    _text(existing.get("title")), sector, _text(existing.get("caption"))
+                )
+                if category is None:
+                    continue
+                title, kind, visual = category
+                if title in existing_titles or is_redundant_category(
+                    title, existing_titles
+                ):
+                    continue
+                candidate = {
+                    "title": title,
+                    "caption": product_caption(title, sector, ""),
+                    "kind": kind,
+                    "visual": visual,
+                }
+                if card_sector_mismatch(candidate, data):
+                    continue
+                cards.append(candidate)
+                existing_titles.add(title)
+        if not cards:
             cards = cards + [
                 dict(card)
                 for card in fallback_cards(data)

@@ -153,7 +153,22 @@
   "snippets": {
     "overview": "(주)에프엔씨엔터테인먼트의 주요 제품·서비스는 엔터테인먼트 사업, 공연, MD, 음반, 매니지먼트, 공연 기획입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사의 매니지먼트는 배우뿐만 아니라 가수, 예능인, 스포츠맨에 이르기까지 다양한 분야의 연예인에 대한 매니지먼트 비즈니스를 영위하고 있습니다. 외주 제작의 경우 드라마, 영화 등의 콘텐츠를 전문 제작 회사에서 미디어콘텐츠를 제작하여 공급하는 것으로 최근의 추세는 지상파, 종합편성채널, OTT 플랫폼 등 채널이 확대되며 콘텐츠에 대한 수요가 급증하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "(주)에프엔씨엔터테인먼트의 주요 제품·서비스는 엔터테인먼트 사업, 공연, MD, 음반, 매니지먼트, 공연 기획입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사의 매니지먼트는 배우뿐만 아니라 가수, 예능인, 스포츠맨에 이르기까지 다양한 분야의 연예인에 대한 매니지먼트 비즈니스를 영위하고 있습니다. 외주 제작의 경우 드라마, 영화 등의 콘텐츠를 전문 제작 회사에서 미디어콘텐츠를 제작하여 공급하는 것으로 최근의 추세는 지상파, 종합편성채널, OTT 플랫폼 등 채널이 확대되며 콘텐츠에 대한 수요가 급증하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "매니지먼트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.3%",
+        "revenue_share": 0.1933,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "로열티",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.8%",
+        "revenue_share": 0.1285,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "엔터테인먼트 사업",
       "공연",
@@ -167,39 +182,69 @@
       "유통",
       "드라마"
     ],
-    "investor_note": "(주)에프엔씨엔터테인먼트의 주요 제품·서비스는 엔터테인먼트 사업, 공연, MD, 음반, 매니지먼트, 공연 기획입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사의 매니지먼트는 배우뿐만 아니라 가수, 예능인, 스포츠맨에 이르기까지 다양한 분야의 연예인에 대한 매니지먼트 비즈니스를 영위하고 있습니다. 외주 제작의 경우 드라마, 영화 등의 콘텐츠를 전문 제작 회사에서 미디어콘텐츠를 제작하여 공급하는 것으로 최근의 추세는 지상파, 종합편성채널, OTT 플랫폼 등 채널이 확대되며 콘텐츠에 대한 수요가 급증하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)에프엔씨엔터테인먼트의 주요 제품·서비스는 엔터테인먼트 사업, 공연, MD, 음반, 매니지먼트, 공연 기획입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사의 매니지먼트는 배우뿐만 아니라 가수, 예능인, 스포츠맨에 이르기까지 다양한 분야의 연예인에 대한 매니지먼트 비즈니스를 영위하고 있습니다. 외주 제작의 경우 드라마, 영화 등의 콘텐츠를 전문 제작 회사에서 미디어콘텐츠를 제작하여 공급하는 것으로 최근의 추세는 지상파, 종합편성채널, OTT 플랫폼 등 채널이 확대되며 콘텐츠에 대한 수요가 급증하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "엔터테인먼트 사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 67.8%",
+        "revenue_share": 0.6782,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매니지먼트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.3%",
+        "revenue_share": 0.1933,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "로열티",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.8%",
+        "revenue_share": 0.1285,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "미디어콘텐츠 제작 사업 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "엔터테인먼트 사업",
-      "caption": "엔터테인먼트 사업을 중심으로 매출을 만드는 사업입니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 67.8%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "공연",
-      "caption": "공연을 중심으로 매출을 만드는 사업입니다.",
+      "title": "매니지먼트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.3%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "MD",
-      "caption": "MD을 중심으로 매출을 만드는 사업입니다.",
+      "title": "로열티",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.8%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "음반",
-      "caption": "음반을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "title": "미디어콘텐츠 제작 사업 등",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+      "kind": "platform",
+      "visual": "APP",
+      "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
       "image_source": "Unsplash"
     }
   ],

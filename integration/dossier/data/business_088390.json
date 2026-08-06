@@ -155,14 +155,32 @@
     "segment_finance": "(주)이녹스의 핵심은 세전부문이익, 부문 소계, 레저부문, 소재부문 등입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 당사는 코스닥상장법인으로서 자본시장과 금융투자업에 관한 법률 제161조에 의하여 주요경영사항을 신고하여야 하며, 동시에 지주회사로서 코스닥시장 공시규정 제6조의2와 제7조에 따라 주요종속회사와 자회사의 주요경영사항에 대하여도 신고하여야 합니다. 국내에서는 유일하게 Si 파우더와 SiO(Si산화물) 를 대량 생산 및 판매 등을 주된 사업으로 영위하고 있습니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다.",
     "segment_breakdown": [
       {
-        "name": "레저부문",
-        "desc": "레저부문 관련 제품·서비스",
-        "revenue_share": null
+        "name": "지주부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.5%",
+        "revenue_share": 0.0847,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "소재부문",
-        "desc": "소재부문 관련 제품·서비스",
-        "revenue_share": null
+        "name": "지분법",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.5%",
+        "revenue_share": 0.2552,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "부동산임대",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.0053,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "배당수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.2%",
+        "revenue_share": 0.0419,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,36 +192,58 @@
       "알루미늄",
       "소재재료"
     ],
-    "investor_note": "(주)이녹스의 핵심은 세전부문이익, 부문 소계, 레저부문, 소재부문 등입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 당사는 코스닥상장법인으로서 자본시장과 금융투자업에 관한 법률 제161조에 의하여 주요경영사항을 신고하여야 하며, 동시에 지주회사로서 코스닥시장 공시규정 제6조의2와 제7조에 따라 주요종속회사와 자회사의 주요경영사항에 대하여도 신고하여야 합니다. 국내에서는 유일하게 Si 파우더와 SiO(Si산화물) 를 대량 생산 및 판매 등을 주된 사업으로 영위하고 있습니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다."
+    "investor_note": "(주)이녹스의 핵심은 세전부문이익, 부문 소계, 레저부문, 소재부문 등입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 당사는 코스닥상장법인으로서 자본시장과 금융투자업에 관한 법률 제161조에 의하여 주요경영사항을 신고하여야 하며, 동시에 지주회사로서 코스닥시장 공시규정 제6조의2와 제7조에 따라 주요종속회사와 자회사의 주요경영사항에 대하여도 신고하여야 합니다. 국내에서는 유일하게 Si 파우더와 SiO(Si산화물) 를 대량 생산 및 판매 등을 주된 사업으로 영위하고 있습니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다.",
+    "product_service_segments": [
+      {
+        "name": "지주부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.5%",
+        "revenue_share": 0.0847,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "지분법",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.5%",
+        "revenue_share": 0.2552,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "부동산임대",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.0053,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "배당수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.2%",
+        "revenue_share": 0.0419,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "레저부문",
-      "caption": "레저부문을 중심으로 매출을 만드는 사업입니다.",
+      "title": "지주부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.5%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_3078a83d5189713b.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "소재부문",
-      "caption": "소재부문을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "material",
-      "visual": "MAT",
+      "title": "지분법",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
       "image": "../data/business_images/business_image_3078a83d5189713b.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "배터리",
-      "caption": "배터리을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
-      "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "상품제품용역",
-      "caption": "상품제품용역을 중심으로 매출을 만드는 사업입니다.",
+      "title": "배당수익",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.2%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_3078a83d5189713b.avif",

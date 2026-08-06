@@ -155,14 +155,18 @@
     "segment_finance": "아이디피(주)의 주요 제품·서비스는 배터리, 카드프린터, SMART 시리즈, 소모품, 인쇄용 리본, 옵션 등입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 정밀제어기술 기반의 구조설계 및 셋팅, 구동 프로그램 등은 당사에서 직접 연구개발하고 있으며, 조립 및 포장/출하 공정은 외주로 진행하고 있습니다.리본 원재료는 국내외 염료 전문기업이 생산하고 있으며, 반제품 형태로 공급받아 당사 프린터에 구동 가능한 기구물과 RF Tag를 조립하여 판매하고 있습니다. 대리점이라 함은 당사의 제품만 독점 판매 하거나 경쟁사의 제품도 동시에 취급하고 있는 유통채널을 의미합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "은행, 증권, 보험사",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
+        "name": "소모품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.3%",
+        "revenue_share": 0.493,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "의료보험",
-        "desc": "보험계약과 자산운용 중심 서비스",
-        "revenue_share": null
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.2%",
+        "revenue_share": 0.0223,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -178,36 +182,43 @@
       "공기구비품",
       "- 제품테스트"
     ],
-    "investor_note": "아이디피(주)의 주요 제품·서비스는 배터리, 카드프린터, SMART 시리즈, 소모품, 인쇄용 리본, 옵션 등입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 정밀제어기술 기반의 구조설계 및 셋팅, 구동 프로그램 등은 당사에서 직접 연구개발하고 있으며, 조립 및 포장/출하 공정은 외주로 진행하고 있습니다.리본 원재료는 국내외 염료 전문기업이 생산하고 있으며, 반제품 형태로 공급받아 당사 프린터에 구동 가능한 기구물과 RF Tag를 조립하여 판매하고 있습니다. 대리점이라 함은 당사의 제품만 독점 판매 하거나 경쟁사의 제품도 동시에 취급하고 있는 유통채널을 의미합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "아이디피(주)의 주요 제품·서비스는 배터리, 카드프린터, SMART 시리즈, 소모품, 인쇄용 리본, 옵션 등입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 정밀제어기술 기반의 구조설계 및 셋팅, 구동 프로그램 등은 당사에서 직접 연구개발하고 있으며, 조립 및 포장/출하 공정은 외주로 진행하고 있습니다.리본 원재료는 국내외 염료 전문기업이 생산하고 있으며, 반제품 형태로 공급받아 당사 프린터에 구동 가능한 기구물과 RF Tag를 조립하여 판매하고 있습니다. 대리점이라 함은 당사의 제품만 독점 판매 하거나 경쟁사의 제품도 동시에 취급하고 있는 유통채널을 의미합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.0%",
+        "revenue_share": 0.4004,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "소모품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.3%",
+        "revenue_share": 0.493,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.2%",
+        "revenue_share": 0.0223,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "은행, 증권, 보험사",
-      "caption": "예금과 대출에서 이자이익을 만드는 금융 서비스입니다.",
-      "kind": "bank",
-      "visual": "BANK",
-      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "의료보험",
-      "caption": "보험료와 손해율이 실적을 좌우하는 금융 서비스입니다.",
-      "kind": "insurance",
-      "visual": "INS",
-      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "배터리",
-      "caption": "배터리을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
-      "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
+      "title": "소모품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.3%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "카드프린터",
-      "caption": "카드프린터을 중심으로 매출을 만드는 사업입니다.",
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.2%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",

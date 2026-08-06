@@ -155,19 +155,11 @@
     "segment_finance": "삼보산업은 자동차부품 원료로 쓰이는 알루미늄 합금괴를 만드는 알루미늄합금 사업과, 종속회사를 통한 자동차 다이캐스팅 부품(변속기·전기차부품 등) 제조, 그리고 방송채널(PlayboyTV) 운영까지 서로 다른 세 사업을 함께 영위하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,856억 원으로 전년 대비 16.2% 줄었고 당기순이익은 -32억 원으로 적자를 지속했으나 적자 폭은 전년보다 줄었습니다. 특히 눈여겨봐야 할 점은, 감사인이 유동부채가 유동자산보다 691억 원 많고 부분자본잠식(자본이 잠식되어 줄어든 상태) 상태라는 점을 근거로 재무제표에 대해 '한정의견'을 냈다는 것으로, 이는 회사의 자금조달 계획이 계획대로 되지 않으면 계속기업으로서 존속이 어려울 수 있다는 뜻이라 투자 판단 시 각별한 주의가 필요합니다. 부채비율도 1,047.4%로 매우 높은 수준입니다.",
     "segment_breakdown": [
       {
-        "name": "알루미늄합금",
-        "desc": "자동차부품 등에 쓰이는 알루미늄 합금괴 제조·판매",
-        "revenue_share": 0.4724
-      },
-      {
-        "name": "자동차부품(다이캐스팅)",
-        "desc": "변속기·전기차·엔진용 다이캐스팅 부품(종속회사 삼보오토)",
-        "revenue_share": 0.5036
-      },
-      {
-        "name": "방송프로그램",
-        "desc": "PlayboyTV 등 방송채널 운영(종속회사)",
-        "revenue_share": 0.024
+        "name": "알루미늄합금괴",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 98.9%",
+        "revenue_share": 0.9886,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -180,32 +172,47 @@
       "다이캐스팅 부품",
       "PlayboyTV(방송채널)"
     ],
-    "investor_note": "삼보산업은 자동차부품 원료로 쓰이는 알루미늄 합금괴를 만드는 알루미늄합금 사업과, 종속회사를 통한 자동차 다이캐스팅 부품(변속기·전기차부품 등) 제조, 그리고 방송채널(PlayboyTV) 운영까지 서로 다른 세 사업을 함께 영위하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,856억 원으로 전년 대비 16.2% 줄었고 당기순이익은 -32억 원으로 적자를 지속했으나 적자 폭은 전년보다 줄었습니다. 특히 눈여겨봐야 할 점은, 감사인이 유동부채가 유동자산보다 691억 원 많고 부분자본잠식(자본이 잠식되어 줄어든 상태) 상태라는 점을 근거로 재무제표에 대해 '한정의견'을 냈다는 것으로, 이는 회사의 자금조달 계획이 계획대로 되지 않으면 계속기업으로서 존속이 어려울 수 있다는 뜻이라 투자 판단 시 각별한 주의가 필요합니다. 부채비율도 1,047.4%로 매우 높은 수준입니다."
+    "investor_note": "삼보산업은 자동차부품 원료로 쓰이는 알루미늄 합금괴를 만드는 알루미늄합금 사업과, 종속회사를 통한 자동차 다이캐스팅 부품(변속기·전기차부품 등) 제조, 그리고 방송채널(PlayboyTV) 운영까지 서로 다른 세 사업을 함께 영위하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,856억 원으로 전년 대비 16.2% 줄었고 당기순이익은 -32억 원으로 적자를 지속했으나 적자 폭은 전년보다 줄었습니다. 특히 눈여겨봐야 할 점은, 감사인이 유동부채가 유동자산보다 691억 원 많고 부분자본잠식(자본이 잠식되어 줄어든 상태) 상태라는 점을 근거로 재무제표에 대해 '한정의견'을 냈다는 것으로, 이는 회사의 자금조달 계획이 계획대로 되지 않으면 계속기업으로서 존속이 어려울 수 있다는 뜻이라 투자 판단 시 각별한 주의가 필요합니다. 부채비율도 1,047.4%로 매우 높은 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "알루미늄합금괴",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 98.9%",
+        "revenue_share": 0.9886,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동차부품사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.5%",
+        "revenue_share": 0.555,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.5%",
+        "revenue_share": 0.255,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "알루미늄합금",
-      "caption": "자동차부품 등에 쓰이는 알루미늄 합금괴 제조·판매",
-      "kind": "auto",
-      "visual": "알루미늄합금",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "자동차부품(다이캐스팅)",
-      "caption": "변속기·전기차·엔진용 다이캐스팅 부품(종속회사 삼보오토)",
-      "kind": "auto",
-      "visual": "자동차부품",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "방송프로그램",
-      "caption": "PlayboyTV 등 방송채널 운영(종속회사)",
-      "kind": "service",
-      "visual": "방송프로그램",
-      "image": "../data/business_images/business_image_141eab6519656e30.jpg",
+      "title": "알루미늄합금괴",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 98.9%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
       "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "자동차부품사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.5%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

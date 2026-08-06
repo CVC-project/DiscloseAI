@@ -107,9 +107,25 @@
     "segment_finance": "아하의 주요 제품·서비스는 배터리, 철강, 매입액, 패널, 제품 제조, AD BOARD입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 동사는 전기차 충전기 생산시 7~30kw의 출력에 대하여 동일한 설비를 사용하되, 펌웨어만 바꾸는 방식으로 고객이 요구하는 바에 따라 충전 전류량의 조절이 가능합니다. 초중고의 K-12 교육 시장은 새학기가 시작되기 전인 방학 시점에 설치가 되므로 제조업체 입장에서 보면 제품납기 Lead-Time을 고려할 때 여름철과 겨울철에 수요가 특히 증가하는 특성을 보입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "산업은행",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
+        "name": "에듀테크",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 95.0%",
+        "revenue_share": 0.95,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "헬스케어",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.02,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전기차충전기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.03,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -124,40 +140,55 @@
       "OPS",
       "모듈"
     ],
-    "investor_note": "아하의 주요 제품·서비스는 배터리, 철강, 매입액, 패널, 제품 제조, AD BOARD입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 동사는 전기차 충전기 생산시 7~30kw의 출력에 대하여 동일한 설비를 사용하되, 펌웨어만 바꾸는 방식으로 고객이 요구하는 바에 따라 충전 전류량의 조절이 가능합니다. 초중고의 K-12 교육 시장은 새학기가 시작되기 전인 방학 시점에 설치가 되므로 제조업체 입장에서 보면 제품납기 Lead-Time을 고려할 때 여름철과 겨울철에 수요가 특히 증가하는 특성을 보입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "아하의 주요 제품·서비스는 배터리, 철강, 매입액, 패널, 제품 제조, AD BOARD입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 동사는 전기차 충전기 생산시 7~30kw의 출력에 대하여 동일한 설비를 사용하되, 펌웨어만 바꾸는 방식으로 고객이 요구하는 바에 따라 충전 전류량의 조절이 가능합니다. 초중고의 K-12 교육 시장은 새학기가 시작되기 전인 방학 시점에 설치가 되므로 제조업체 입장에서 보면 제품납기 Lead-Time을 고려할 때 여름철과 겨울철에 수요가 특히 증가하는 특성을 보입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "에듀테크",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 95.0%",
+        "revenue_share": 0.95,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "헬스케어",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.02,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전기차충전기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.03,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "산업은행",
-      "caption": "예금과 대출에서 이자이익을 만드는 금융 서비스입니다.",
-      "kind": "bank",
-      "visual": "BANK",
-      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "철강",
-      "caption": "철강을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "매입액",
-      "caption": "매입액을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "title": "에듀테크",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 95.0%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "패널",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
-      "kind": "display",
-      "visual": "OLED",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
-      "image_source": "Wikimedia Commons"
+      "title": "헬스케어",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "전기차·하이브리드",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+      "kind": "auto",
+      "visual": "EV",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -155,9 +155,11 @@
     "segment_finance": "(주)아모센스의 주요 제품·서비스는 비 고, 전 사, 소재, 모듈, 제품매출, 재료입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 주요제품의 가격변동 추이 당사는 다품종을 생산, 판매하는 회사로 당사의 제품은 고객사의 제품 사양에 따라 제품의 규격 등이 상이합니다. 또한, 기존 확보된 고객 채널을 기반으로 기존 제품을 확대하고, 신규 제품에 대해 영업, 마케팅 활동을 전개함으로써 신규 고객 확대를 하여 매출 증대 및 판매 경로를 확대해 나가고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "소재부문",
-        "desc": "소재 관련 제품·서비스",
-        "revenue_share": null
+        "name": "전 사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 97.7%",
+        "revenue_share": 0.9769,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -168,39 +170,39 @@
       "재료",
       "용역"
     ],
-    "investor_note": "(주)아모센스의 주요 제품·서비스는 비 고, 전 사, 소재, 모듈, 제품매출, 재료입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 주요제품의 가격변동 추이 당사는 다품종을 생산, 판매하는 회사로 당사의 제품은 고객사의 제품 사양에 따라 제품의 규격 등이 상이합니다. 또한, 기존 확보된 고객 채널을 기반으로 기존 제품을 확대하고, 신규 제품에 대해 영업, 마케팅 활동을 전개함으로써 신규 고객 확대를 하여 매출 증대 및 판매 경로를 확대해 나가고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)아모센스의 주요 제품·서비스는 비 고, 전 사, 소재, 모듈, 제품매출, 재료입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 주요제품의 가격변동 추이 당사는 다품종을 생산, 판매하는 회사로 당사의 제품은 고객사의 제품 사양에 따라 제품의 규격 등이 상이합니다. 또한, 기존 확보된 고객 채널을 기반으로 기존 제품을 확대하고, 신규 제품에 대해 영업, 마케팅 활동을 전개함으로써 신규 고객 확대를 하여 매출 증대 및 판매 경로를 확대해 나가고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "전 사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 97.7%",
+        "revenue_share": 0.9769,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "재료, 용역, 기타",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.3%",
+        "revenue_share": 0.0231,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "소재부문",
-      "caption": "소재부문을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "비 고",
-      "caption": "비 고을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
-    },
-    {
       "title": "전 사",
-      "caption": "전 사을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 97.7%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "모듈",
-      "caption": "모듈을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "title": "재료, 용역, 기타",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.3%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     }
   ],

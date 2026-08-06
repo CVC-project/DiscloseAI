@@ -153,7 +153,36 @@
   "snippets": {
     "overview": "신대양제지는 골심지·크라프트라이너지·테스트라이너지 등 골판지 원지(그룹 매출 비중 약 38%)와 골판지 원단·상자(약 62%)를 함께 생산하는 국내 대표 제지·포장재 기업으로, 계열사를 통해 원지 생산부터 상자 가공까지 수직계열화를 갖췄습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 6,395억 원으로 전년 대비 2.9% 줄었고 영업이익은 24.1%, 당기순이익은 33.0% 감소해 수익성이 눈에 띄게 둔화됐습니다. 부채비율은 28.0%로 재무구조는 안정적인 편이며, 총자산은 5.4% 늘었습니다.",
     "segment_finance": "신대양제지는 골심지·크라프트라이너지·테스트라이너지 등 골판지 원지(그룹 매출 비중 약 38%)와 골판지 원단·상자(약 62%)를 함께 생산하는 국내 대표 제지·포장재 기업으로, 계열사를 통해 원지 생산부터 상자 가공까지 수직계열화를 갖췄습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 6,395억 원으로 전년 대비 2.9% 줄었고 영업이익은 24.1%, 당기순이익은 33.0% 감소해 수익성이 눈에 띄게 둔화됐습니다. 부채비율은 28.0%로 재무구조는 안정적인 편이며, 총자산은 5.4% 늘었습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "골판지원지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 95.8%",
+        "revenue_share": 0.9575,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.0104,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "골판지 원지 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "골판지상자",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 91.1%",
+        "revenue_share": 0.9108,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "크라프트라이너지",
       "테스트라이너지",
@@ -161,36 +190,66 @@
       "골판지 원단",
       "골판지 상자"
     ],
-    "investor_note": "신대양제지는 골심지·크라프트라이너지·테스트라이너지 등 골판지 원지(그룹 매출 비중 약 38%)와 골판지 원단·상자(약 62%)를 함께 생산하는 국내 대표 제지·포장재 기업으로, 계열사를 통해 원지 생산부터 상자 가공까지 수직계열화를 갖췄습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 6,395억 원으로 전년 대비 2.9% 줄었고 영업이익은 24.1%, 당기순이익은 33.0% 감소해 수익성이 눈에 띄게 둔화됐습니다. 부채비율은 28.0%로 재무구조는 안정적인 편이며, 총자산은 5.4% 늘었습니다."
+    "investor_note": "신대양제지는 골심지·크라프트라이너지·테스트라이너지 등 골판지 원지(그룹 매출 비중 약 38%)와 골판지 원단·상자(약 62%)를 함께 생산하는 국내 대표 제지·포장재 기업으로, 계열사를 통해 원지 생산부터 상자 가공까지 수직계열화를 갖췄습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 6,395억 원으로 전년 대비 2.9% 줄었고 영업이익은 24.1%, 당기순이익은 33.0% 감소해 수익성이 눈에 띄게 둔화됐습니다. 부채비율은 28.0%로 재무구조는 안정적인 편이며, 총자산은 5.4% 늘었습니다.",
+    "product_service_segments": [
+      {
+        "name": "골판지원지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 95.8%",
+        "revenue_share": 0.9575,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.0104,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "골판지 원지 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "골판지상자",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 91.1%",
+        "revenue_share": 0.9108,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "크라프트라이너지",
-      "caption": "크라프트라이너지을 중심으로 매출을 만드는 사업입니다.",
+      "title": "골판지원지",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 95.8%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "테스트라이너지",
-      "caption": "반도체 칩을 제품으로 쓸 수 있게 포장하고 검사하는 후공정 서비스입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "골심지",
-      "caption": "골심지을 중심으로 매출을 만드는 사업입니다.",
+      "title": "상 품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "골판지 원단",
-      "caption": "골판지 원단을 중심으로 매출을 만드는 사업입니다.",
+      "title": "골판지 원지 계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "골판지상자",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 91.1%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",

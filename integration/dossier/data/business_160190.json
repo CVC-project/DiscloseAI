@@ -107,9 +107,25 @@
     "segment_finance": "하이젠알앤엠(주)의 주요 제품·서비스는 배터리, 방산, 전선, 산업용 모터, 물류로봇, 헬스케어입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 고객 맞춤형 제품이 요구되는 특수 시장으로서 적극적으로 영업을 추진중인 영역은 방산시장이 있습니다. 또한, 저전압 모터 및 드라이브의 고도화된 기술로 시장 진입을 위한 경쟁력을 확보하고 있으며, 수요처 확대 및 대량 생산에 따른 원가경쟁력으로 시장을 주도해 가고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "신한투자증권",
-        "desc": "위탁매매, IB, 운용 등 증권 서비스",
-        "revenue_share": null
+        "name": "산업용모터",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 80.0%",
+        "revenue_share": 0.8,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "서보모터/드라이브",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.0%",
+        "revenue_share": 0.15,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "EV모터/인버터",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.7%",
+        "revenue_share": 0.037,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -126,40 +142,55 @@
       "비고",
       "번호"
     ],
-    "investor_note": "하이젠알앤엠(주)의 주요 제품·서비스는 배터리, 방산, 전선, 산업용 모터, 물류로봇, 헬스케어입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 고객 맞춤형 제품이 요구되는 특수 시장으로서 적극적으로 영업을 추진중인 영역은 방산시장이 있습니다. 또한, 저전압 모터 및 드라이브의 고도화된 기술로 시장 진입을 위한 경쟁력을 확보하고 있으며, 수요처 확대 및 대량 생산에 따른 원가경쟁력으로 시장을 주도해 가고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "하이젠알앤엠(주)의 주요 제품·서비스는 배터리, 방산, 전선, 산업용 모터, 물류로봇, 헬스케어입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 고객 맞춤형 제품이 요구되는 특수 시장으로서 적극적으로 영업을 추진중인 영역은 방산시장이 있습니다. 또한, 저전압 모터 및 드라이브의 고도화된 기술로 시장 진입을 위한 경쟁력을 확보하고 있으며, 수요처 확대 및 대량 생산에 따른 원가경쟁력으로 시장을 주도해 가고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "산업용모터",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 80.0%",
+        "revenue_share": 0.8,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "서보모터/드라이브",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.0%",
+        "revenue_share": 0.15,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "EV모터/인버터",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.7%",
+        "revenue_share": 0.037,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "신한투자증권",
-      "caption": "투자 중개와 자산관리 수수료가 실적에 연결됩니다.",
-      "kind": "securities",
-      "visual": "AUM",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "배터리",
-      "caption": "배터리을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
-      "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "방산",
-      "caption": "방산을 중심으로 매출을 만드는 사업입니다.",
+      "title": "산업용모터",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 80.0%",
       "kind": "power",
       "visual": "POWER",
       "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "전선",
-      "caption": "전선을 중심으로 매출을 만드는 사업입니다.",
+      "title": "서보모터/드라이브",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.0%",
       "kind": "power",
       "visual": "POWER",
       "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
       "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "전기차·하이브리드",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.7%",
+      "kind": "auto",
+      "visual": "EV",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

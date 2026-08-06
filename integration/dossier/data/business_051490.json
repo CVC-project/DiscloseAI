@@ -156,18 +156,24 @@
     "segment_breakdown": [
       {
         "name": "금형부문",
-        "desc": "자동차·가전용 Press·MOLD사출 금형 제작",
-        "revenue_share": 0.492
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.2%",
+        "revenue_share": 0.492,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "전기차 Battery Pack/ESS 사출부품",
-        "desc": "전기차 배터리팩·ESS용 사출부품 양산",
-        "revenue_share": 0.356
+        "name": "전기자동차Battery Pack/ESS사출부품양산",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.6%",
+        "revenue_share": 0.356,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "자동차/가전부품양산",
-        "desc": "자동차 Seat Rail 등 부품 양산",
-        "revenue_share": 0.152
+        "name": "자동차/가전부품양산부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.2%",
+        "revenue_share": 0.152,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -177,30 +183,53 @@
       "Seat Rail·Seat Track Assembly",
       "Bearing Cage·Hub&Shaft"
     ],
-    "investor_note": "나라엠앤디는 자동차용 금형과 부품 양산을 주력으로 하는 회사로, 자동차 금형(49%)과 전기차 배터리팩·ESS용 사출부품(36%), 자동차·가전 부품 양산(15%) 세 축으로 사업을 운영하며 한국·중국·인도네시아·폴란드·멕시코 등지에 종속회사를 두고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,846억 원으로 전년보다 9.4% 줄었고 영업손실로 전환했지만, 당기순이익은 46억 원으로 전년보다 134.6% 늘었습니다. 감사인은 해외 배터리팩 관련 일부 종속기업이 순손실 누적과 자본잠식(자본이 마이너스가 된) 상태에 있어 관련 자산의 손상 여부를 핵심감사사항으로 짚었습니다. 부채비율은 148.8%로 다소 높은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다."
+    "investor_note": "나라엠앤디는 자동차용 금형과 부품 양산을 주력으로 하는 회사로, 자동차 금형(49%)과 전기차 배터리팩·ESS용 사출부품(36%), 자동차·가전 부품 양산(15%) 세 축으로 사업을 운영하며 한국·중국·인도네시아·폴란드·멕시코 등지에 종속회사를 두고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,846억 원으로 전년보다 9.4% 줄었고 영업손실로 전환했지만, 당기순이익은 46억 원으로 전년보다 134.6% 늘었습니다. 감사인은 해외 배터리팩 관련 일부 종속기업이 순손실 누적과 자본잠식(자본이 마이너스가 된) 상태에 있어 관련 자산의 손상 여부를 핵심감사사항으로 짚었습니다. 부채비율은 148.8%로 다소 높은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "금형부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.2%",
+        "revenue_share": 0.492,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전기자동차Battery Pack/ESS사출부품양산",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.6%",
+        "revenue_share": 0.356,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동차/가전부품양산부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.2%",
+        "revenue_share": 0.152,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "금형부문",
-      "caption": "자동차·가전용 Press·MOLD사출 금형 제작",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "전기자동차Battery Pack/ESS사출부품양산",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.6%",
       "kind": "auto",
-      "visual": "금형부문",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "전기차 Battery Pack/ESS 사출부품",
-      "caption": "전기차 배터리팩·ESS용 사출부품 양산",
-      "kind": "battery",
-      "visual": "전기차",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "자동차/가전부품양산",
-      "caption": "자동차 Seat Rail 등 부품 양산",
+      "title": "자동차/가전부품양산부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.2%",
       "kind": "auto",
-      "visual": "AI",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     }

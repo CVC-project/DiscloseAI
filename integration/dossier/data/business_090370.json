@@ -155,9 +155,25 @@
     "segment_finance": "(주)메타랩스의 주요 제품·서비스는 의약품, 은행, 증권, 저축은행, 서비스업, 용역입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 병원경영컨설팅을 중심으로 제휴병원에 필요한 소프트웨어를 개발하여 고객관리서비스(CRM, CTI)를 제공하는 등 다양한 비급여 병원 분야의 B2B & B2C 사업 확장을 통해 경쟁력을 높여 수익구조 다각화에 나서고 있습니다. 컨설팅수입의 경우 제휴병원의 매출액 수준에 따라 결정되며, 모발이식 집중 진료 병원 확장을 통해 탈모 케어 시장 전반에서 병원과 시너지를 낼 수 있는 다양한 비즈니스를 전개해나갈 예정입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "헬스케어 의약품부문",
-        "desc": "의약품 관련 제품·서비스",
-        "revenue_share": null
+        "name": "봉제의류 제조업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.0%",
+        "revenue_share": 0.55,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.0%",
+        "revenue_share": 0.09,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "메디컬",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.03,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,36 +190,66 @@
       "임대",
       "IT서비스 등"
     ],
-    "investor_note": "(주)메타랩스의 주요 제품·서비스는 의약품, 은행, 증권, 저축은행, 서비스업, 용역입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 병원경영컨설팅을 중심으로 제휴병원에 필요한 소프트웨어를 개발하여 고객관리서비스(CRM, CTI)를 제공하는 등 다양한 비급여 병원 분야의 B2B & B2C 사업 확장을 통해 경쟁력을 높여 수익구조 다각화에 나서고 있습니다. 컨설팅수입의 경우 제휴병원의 매출액 수준에 따라 결정되며, 모발이식 집중 진료 병원 확장을 통해 탈모 케어 시장 전반에서 병원과 시너지를 낼 수 있는 다양한 비즈니스를 전개해나갈 예정입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)메타랩스의 주요 제품·서비스는 의약품, 은행, 증권, 저축은행, 서비스업, 용역입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 병원경영컨설팅을 중심으로 제휴병원에 필요한 소프트웨어를 개발하여 고객관리서비스(CRM, CTI)를 제공하는 등 다양한 비급여 병원 분야의 B2B & B2C 사업 확장을 통해 경쟁력을 높여 수익구조 다각화에 나서고 있습니다. 컨설팅수입의 경우 제휴병원의 매출액 수준에 따라 결정되며, 모발이식 집중 진료 병원 확장을 통해 탈모 케어 시장 전반에서 병원과 시너지를 낼 수 있는 다양한 비즈니스를 전개해나갈 예정입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "봉제의류 제조업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.0%",
+        "revenue_share": 0.55,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "서비스업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.0%",
+        "revenue_share": 0.24,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.0%",
+        "revenue_share": 0.09,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "메디컬",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.03,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "헬스케어 의약품부문",
-      "caption": "헬스케어 의약품부문을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "은행",
-      "caption": "예금과 대출에서 이자이익을 만드는 금융 서비스입니다.",
-      "kind": "bank",
-      "visual": "BANK",
-      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "증권",
-      "caption": "투자 중개와 자산관리 수수료가 실적에 연결됩니다.",
-      "kind": "securities",
-      "visual": "AUM",
+      "title": "봉제의류 제조업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
       "title": "서비스업",
-      "caption": "서비스업을 중심으로 매출을 만드는 사업입니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "의약품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.0%",
+      "kind": "bio",
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "메디컬",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",

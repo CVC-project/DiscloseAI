@@ -153,7 +153,29 @@
   "snippets": {
     "overview": "(주)베노티앤알의 주요 제품·서비스는 구리, 비 고, 제품매출, 번호, 내용, 권리자입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 또한 친환경 이중바닥재의 경우 다수와 시공 계약을 체결하는 등 친환경 바닥대 시장의 선점 및 매출 증대 또한 이루어지고 있습니다. 웨어러블 로봇 시장에서 당사의 제품인 'XoMotion'은 가장 진보된 외골격 웨어러블 로봇으로써, 샐프밸런싱, 사용자의 독립성 등에서 탁월한 기능을 보여줍니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "(주)베노티앤알의 주요 제품·서비스는 구리, 비 고, 제품매출, 번호, 내용, 권리자입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 또한 친환경 이중바닥재의 경우 다수와 시공 계약을 체결하는 등 친환경 바닥대 시장의 선점 및 매출 증대 또한 이루어지고 있습니다. 웨어러블 로봇 시장에서 당사의 제품인 'XoMotion'은 가장 진보된 외골격 웨어러블 로봇으로써, 샐프밸런싱, 사용자의 독립성 등에서 탁월한 기능을 보여줍니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "외부차양",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.4%",
+        "revenue_share": 0.2338,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "이중바닥재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.1%",
+        "revenue_share": 0.0612,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "도 배",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.2%",
+        "revenue_share": 0.5122,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "구리",
       "비 고",
@@ -163,36 +185,58 @@
       "등록일",
       "적용제품"
     ],
-    "investor_note": "(주)베노티앤알의 주요 제품·서비스는 구리, 비 고, 제품매출, 번호, 내용, 권리자입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 또한 친환경 이중바닥재의 경우 다수와 시공 계약을 체결하는 등 친환경 바닥대 시장의 선점 및 매출 증대 또한 이루어지고 있습니다. 웨어러블 로봇 시장에서 당사의 제품인 'XoMotion'은 가장 진보된 외골격 웨어러블 로봇으로써, 샐프밸런싱, 사용자의 독립성 등에서 탁월한 기능을 보여줍니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)베노티앤알의 주요 제품·서비스는 구리, 비 고, 제품매출, 번호, 내용, 권리자입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 또한 친환경 이중바닥재의 경우 다수와 시공 계약을 체결하는 등 친환경 바닥대 시장의 선점 및 매출 증대 또한 이루어지고 있습니다. 웨어러블 로봇 시장에서 당사의 제품인 'XoMotion'은 가장 진보된 외골격 웨어러블 로봇으로써, 샐프밸런싱, 사용자의 독립성 등에서 탁월한 기능을 보여줍니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "외부차양",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.4%",
+        "revenue_share": 0.2338,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "이중바닥재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.1%",
+        "revenue_share": 0.0612,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "도 배",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.2%",
+        "revenue_share": 0.5122,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.3%",
+        "revenue_share": 0.1928,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "구리",
-      "caption": "구리을 중심으로 매출을 만드는 사업입니다.",
+      "title": "외부차양",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.4%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "비 고",
-      "caption": "비 고을 중심으로 매출을 만드는 사업입니다.",
+      "title": "이중바닥재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.1%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "번호",
-      "caption": "번호을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "내용",
-      "caption": "내용을 중심으로 매출을 만드는 사업입니다.",
+      "title": "도 배",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.2%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",

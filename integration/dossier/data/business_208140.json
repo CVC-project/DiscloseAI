@@ -153,7 +153,36 @@
   "snippets": {
     "overview": "(주)정다운의 주요 제품·서비스는 방산, 계열, 생산(판매)개시일, 신선, 통오리, 완포입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. ② 고부가가치 창출을 위한 기능성 오리고기 및 친환경오리 제품의 지속적인 매출증대를 위하여 적극적인 홍보활동 및 시장개척을 하겠습니다. 당사는 육용오리를 도축하여 신선육, 육가공품, HMR 및 우모 등의 판매를 주요사업으로 하고 있는 수직계열화(부화에서 제품공급까지, Farm to Plate System)된 회사입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "(주)정다운의 주요 제품·서비스는 방산, 계열, 생산(판매)개시일, 신선, 통오리, 완포입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. ② 고부가가치 창출을 위한 기능성 오리고기 및 친환경오리 제품의 지속적인 매출증대를 위하여 적극적인 홍보활동 및 시장개척을 하겠습니다. 당사는 육용오리를 도축하여 신선육, 육가공품, HMR 및 우모 등의 판매를 주요사업으로 하고 있는 수직계열화(부화에서 제품공급까지, Farm to Plate System)된 회사입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "신선",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.9%",
+        "revenue_share": 0.2387,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "완포",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.5%",
+        "revenue_share": 0.0455,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "슬라이스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.6%",
+        "revenue_share": 0.0957,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "양념육",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+        "revenue_share": 0.0154,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "방산",
       "계열",
@@ -168,40 +197,70 @@
       "양념육",
       "훈제"
     ],
-    "investor_note": "(주)정다운의 주요 제품·서비스는 방산, 계열, 생산(판매)개시일, 신선, 통오리, 완포입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. ② 고부가가치 창출을 위한 기능성 오리고기 및 친환경오리 제품의 지속적인 매출증대를 위하여 적극적인 홍보활동 및 시장개척을 하겠습니다. 당사는 육용오리를 도축하여 신선육, 육가공품, HMR 및 우모 등의 판매를 주요사업으로 하고 있는 수직계열화(부화에서 제품공급까지, Farm to Plate System)된 회사입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)정다운의 주요 제품·서비스는 방산, 계열, 생산(판매)개시일, 신선, 통오리, 완포입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. ② 고부가가치 창출을 위한 기능성 오리고기 및 친환경오리 제품의 지속적인 매출증대를 위하여 적극적인 홍보활동 및 시장개척을 하겠습니다. 당사는 육용오리를 도축하여 신선육, 육가공품, HMR 및 우모 등의 판매를 주요사업으로 하고 있는 수직계열화(부화에서 제품공급까지, Farm to Plate System)된 회사입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "신선",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.9%",
+        "revenue_share": 0.2387,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "완포",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.5%",
+        "revenue_share": 0.0455,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "슬라이스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.6%",
+        "revenue_share": 0.0957,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "양념육",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+        "revenue_share": 0.0154,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "방산",
-      "caption": "방산을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "계열",
-      "caption": "계열을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "생산(판매)개시일",
-      "caption": "생산(판매)개시일을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
-    },
-    {
       "title": "신선",
-      "caption": "신선을 중심으로 매출을 만드는 사업입니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.9%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
+    },
+    {
+      "title": "완포",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "슬라이스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "양념육",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+      "kind": "consumer",
+      "visual": "SAUCE",
+      "image": "../data/business_images/business_image_food_sauce.svg",
+      "image_source": "Local visual"
     }
   ],
   "custom_report_ideas": [

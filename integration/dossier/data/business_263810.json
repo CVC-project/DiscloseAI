@@ -151,9 +151,31 @@
     "rcept_no": "20260317000565"
   },
   "snippets": {
-    "overview": "상신전자(주)의 주요 사업은 바이오에너지입니다. 계약을 따낸 뒤 제작·공사·납품을 거쳐 매출을 만듭니다. 유상사급 품목인 우레탄과 레진(사출)은 계약에 의해 고객사로부터 공급받고 있으며매입가격 산정은 원재료 단가 기준을 공지 후 제품 판매단가에 반영하는 형태를 취하고 있습니다. 전기동은 환율 변동에 따라 영향을 받으며, 등락에 따른 판매단가 변동은 고객사와 협의하여 진행되고 있습니다. 수주형 사업은 계약 규모뿐 아니라 납기, 원가, 프로젝트 구성이 이익을 좌우합니다.",
-    "segment_finance": "상신전자(주)의 주요 사업은 바이오에너지입니다. 계약을 따낸 뒤 제작·공사·납품을 거쳐 매출을 만듭니다. 유상사급 품목인 우레탄과 레진(사출)은 계약에 의해 고객사로부터 공급받고 있으며매입가격 산정은 원재료 단가 기준을 공지 후 제품 판매단가에 반영하는 형태를 취하고 있습니다. 전기동은 환율 변동에 따라 영향을 받으며, 등락에 따른 판매단가 변동은 고객사와 협의하여 진행되고 있습니다. 수주형 사업은 계약 규모뿐 아니라 납기, 원가, 프로젝트 구성이 이익을 좌우합니다.",
-    "segment_breakdown": [],
+    "overview": "상신전자(주)의 주요 사업은 바이오에너지입니다. 유상사급 품목인 우레탄과 레진(사출)은 계약에 의해 고객사로부터 공급받고 있으며매입가격 산정은 원재료 단가 기준을 공지 후 제품 판매단가에 반영하는 형태를 취하고 있습니다. 전기동은 환율 변동에 따라 영향을 받으며, 등락에 따른 판매단가 변동은 고객사와 협의하여 진행되고 있습니다.",
+    "segment_finance": "상신전자(주)의 주요 사업은 바이오에너지입니다. 유상사급 품목인 우레탄과 레진(사출)은 계약에 의해 고객사로부터 공급받고 있으며매입가격 산정은 원재료 단가 기준을 공지 후 제품 판매단가에 반영하는 형태를 취하고 있습니다. 전기동은 환율 변동에 따라 영향을 받으며, 등락에 따른 판매단가 변동은 고객사와 협의하여 진행되고 있습니다.",
+    "segment_breakdown": [
+      {
+        "name": "노이즈필터",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.8%",
+        "revenue_share": 0.558,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "코일",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.3%",
+        "revenue_share": 0.243,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "리액터",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.9%",
+        "revenue_share": 0.129,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "판매구분",
       "제품판매",
@@ -168,39 +190,54 @@
       "고장",
       "PMP"
     ],
-    "investor_note": "상신전자(주)의 주요 사업은 바이오에너지입니다. 계약을 따낸 뒤 제작·공사·납품을 거쳐 매출을 만듭니다. 유상사급 품목인 우레탄과 레진(사출)은 계약에 의해 고객사로부터 공급받고 있으며매입가격 산정은 원재료 단가 기준을 공지 후 제품 판매단가에 반영하는 형태를 취하고 있습니다. 전기동은 환율 변동에 따라 영향을 받으며, 등락에 따른 판매단가 변동은 고객사와 협의하여 진행되고 있습니다. 수주형 사업은 계약 규모뿐 아니라 납기, 원가, 프로젝트 구성이 이익을 좌우합니다."
+    "investor_note": "상신전자(주)의 주요 사업은 바이오에너지입니다. 유상사급 품목인 우레탄과 레진(사출)은 계약에 의해 고객사로부터 공급받고 있으며매입가격 산정은 원재료 단가 기준을 공지 후 제품 판매단가에 반영하는 형태를 취하고 있습니다. 전기동은 환율 변동에 따라 영향을 받으며, 등락에 따른 판매단가 변동은 고객사와 협의하여 진행되고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "노이즈필터",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.8%",
+        "revenue_share": 0.558,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "코일",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.3%",
+        "revenue_share": 0.243,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "리액터",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.9%",
+        "revenue_share": 0.129,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "판매구분",
-      "caption": "판매구분을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "title": "노이즈필터",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.8%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "제품판매",
-      "caption": "제품판매을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "title": "코일",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.3%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "제품설계의뢰→기존제품검토",
-      "caption": "제품설계의뢰→기존제품검토을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "번호",
-      "caption": "번호을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "title": "리액터",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.9%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     }
   ],

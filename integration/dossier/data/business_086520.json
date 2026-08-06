@@ -153,7 +153,22 @@
   "snippets": {
     "overview": "에코프로의 핵심은 전지재료사업부문, 환경사업부문, 투자사업, 무역사업 등입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 증가에 대응하기 위해 국내외 생산 거점을 위한 투자를 계획 중에 있으며 이를 통해 시장 선도적 지위를 더욱 견고히 할 예정입니다. 당사는 중국 내 다수의 질산 제조 기업에게 N2O 제거 기술 및 처리설비를 제공하고 감축을 통해 인정 받은 탄소배출권을 판매 하고자 합니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다.",
     "segment_finance": "에코프로의 핵심은 전지재료사업부문, 환경사업부문, 투자사업, 무역사업 등입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 증가에 대응하기 위해 국내외 생산 거점을 위한 투자를 계획 중에 있으며 이를 통해 시장 선도적 지위를 더욱 견고히 할 예정입니다. 당사는 중국 내 다수의 질산 제조 기업에게 N2O 제거 기술 및 처리설비를 제공하고 감축을 통해 인정 받은 탄소배출권을 판매 하고자 합니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "지주회사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.008,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Shared SVC 수익, 브랜드 사용수익(CI) 및 임대수익 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.8%",
+        "revenue_share": 0.208,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "HBM",
       "배터리",
@@ -167,40 +182,54 @@
       "제품상품기타매출",
       "양극활물질"
     ],
-    "investor_note": "에코프로의 핵심은 전지재료사업부문, 환경사업부문, 투자사업, 무역사업 등입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 증가에 대응하기 위해 국내외 생산 거점을 위한 투자를 계획 중에 있으며 이를 통해 시장 선도적 지위를 더욱 견고히 할 예정입니다. 당사는 중국 내 다수의 질산 제조 기업에게 N2O 제거 기술 및 처리설비를 제공하고 감축을 통해 인정 받은 탄소배출권을 판매 하고자 합니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다."
+    "investor_note": "에코프로의 핵심은 전지재료사업부문, 환경사업부문, 투자사업, 무역사업 등입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 증가에 대응하기 위해 국내외 생산 거점을 위한 투자를 계획 중에 있으며 이를 통해 시장 선도적 지위를 더욱 견고히 할 예정입니다. 당사는 중국 내 다수의 질산 제조 기업에게 N2O 제거 기술 및 처리설비를 제공하고 감축을 통해 인정 받은 탄소배출권을 판매 하고자 합니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다.",
+    "product_service_segments": [
+      {
+        "name": "지주회사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.008,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Shared SVC 수익, 브랜드 사용수익(CI) 및 임대수익 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.8%",
+        "revenue_share": 0.208,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "무역사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 78.4%",
+        "revenue_share": 0.784,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전지재료사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 74.2%",
+        "revenue_share": 0.742,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "HBM",
-      "caption": "데이터 저장과 AI 서버 수요에 연결되는 메모리 제품입니다.",
-      "kind": "chip",
-      "visual": "HBM",
-      "image": "../data/business_images/business_image_df7b448e6d568266.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "배터리",
-      "caption": "배터리을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
-      "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "기타사업",
-      "caption": "기타사업을 중심으로 매출을 만드는 사업입니다.",
+      "title": "무역사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 78.4%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "운송",
-      "caption": "운송을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
-      "image_source": "Unsplash"
+      "title": "전지재료사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 74.2%",
+      "kind": "battery",
+      "visual": "BATTERY",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

@@ -155,9 +155,25 @@
     "segment_finance": "주식회사 퓨쳐켐의 주요 제품·서비스는 의약품, 침샘, 의료기기 도소매, 무역 등 의료, 정밀, 방사성의약품입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품 등의 가격은 주원재료 가격 및 입찰 등 시장에서의 수급상황과 연동되어 판매가격이 변동되고 있습니다. 따라서 특정 원재료의 매입비중이 적고 다양한 원재료의 구성으로 이루어졌으나, 2015년 본격적으로 방사성의약품 완제품을 만들기 시작하면서 합성시약 관련 원재료 비중이 점차 줄어들고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "한미정밀화학",
-        "desc": "정밀 관련 제품·서비스",
-        "revenue_share": null
+        "name": "방사성의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.2%",
+        "revenue_share": 0.302,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 42.5%",
+        "revenue_share": 0.425,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "sCUBE",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+        "revenue_share": 0.015,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,40 +190,70 @@
       "미국1상",
       "유럽3상"
     ],
-    "investor_note": "주식회사 퓨쳐켐의 주요 제품·서비스는 의약품, 침샘, 의료기기 도소매, 무역 등 의료, 정밀, 방사성의약품입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품 등의 가격은 주원재료 가격 및 입찰 등 시장에서의 수급상황과 연동되어 판매가격이 변동되고 있습니다. 따라서 특정 원재료의 매입비중이 적고 다양한 원재료의 구성으로 이루어졌으나, 2015년 본격적으로 방사성의약품 완제품을 만들기 시작하면서 합성시약 관련 원재료 비중이 점차 줄어들고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사 퓨쳐켐의 주요 제품·서비스는 의약품, 침샘, 의료기기 도소매, 무역 등 의료, 정밀, 방사성의약품입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품 등의 가격은 주원재료 가격 및 입찰 등 시장에서의 수급상황과 연동되어 판매가격이 변동되고 있습니다. 따라서 특정 원재료의 매입비중이 적고 다양한 원재료의 구성으로 이루어졌으나, 2015년 본격적으로 방사성의약품 완제품을 만들기 시작하면서 합성시약 관련 원재료 비중이 점차 줄어들고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "방사성의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.2%",
+        "revenue_share": 0.302,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전구체,시약 및 기타",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.6%",
+        "revenue_share": 0.126,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 42.5%",
+        "revenue_share": 0.425,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "sCUBE",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+        "revenue_share": 0.015,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "한미정밀화학",
-      "caption": "한미정밀화학을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
-      "image_source": "Unsplash"
-    },
-    {
       "title": "의약품",
-      "caption": "의약품을 중심으로 매출을 만드는 사업입니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.2%",
       "kind": "bio",
-      "visual": "BIO",
+      "visual": "PHARMA",
       "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "침샘",
-      "caption": "침샘을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "bio",
-      "visual": "BIO",
+      "title": "전구체,시약 및 기타",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
       "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "의료기기 도소매",
-      "caption": "의료기기 도소매을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
-      "image_source": "Wikimedia Commons"
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 42.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "sCUBE",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

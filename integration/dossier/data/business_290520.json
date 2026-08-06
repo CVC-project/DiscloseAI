@@ -153,7 +153,22 @@
   "snippets": {
     "overview": "주식회사 신도기연의 주요 제품·서비스는 OLED, 제품매출, 합착기, 인라인(자동화), 단동(수동) 합착기, 기타제품입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 원재료의 가격변동추이 당사 제품의 원재료 등은 고객사가 요구하는 제품에 따라 원재료의 세부 사양과 가격이 매우 상이합니다. 고객사는 국내 S사, L사, 해외 CSOT 등 국내외 디스플레이패널 제조회사입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "주식회사 신도기연의 주요 제품·서비스는 OLED, 제품매출, 합착기, 인라인(자동화), 단동(수동) 합착기, 기타제품입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 원재료의 가격변동추이 당사 제품의 원재료 등은 고객사가 요구하는 제품에 따라 원재료의 세부 사양과 가격이 매우 상이합니다. 고객사는 국내 S사, L사, 해외 CSOT 등 국내외 디스플레이패널 제조회사입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "탈포기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.1%",
+        "revenue_share": 0.0714,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역 및 부품판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.8%",
+        "revenue_share": 0.0484,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "OLED",
       "합착기",
@@ -166,28 +181,42 @@
       "기술 연구소",
       "폴더블 디스플레이"
     ],
-    "investor_note": "주식회사 신도기연의 주요 제품·서비스는 OLED, 제품매출, 합착기, 인라인(자동화), 단동(수동) 합착기, 기타제품입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 원재료의 가격변동추이 당사 제품의 원재료 등은 고객사가 요구하는 제품에 따라 원재료의 세부 사양과 가격이 매우 상이합니다. 고객사는 국내 S사, L사, 해외 CSOT 등 국내외 디스플레이패널 제조회사입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사 신도기연의 주요 제품·서비스는 OLED, 제품매출, 합착기, 인라인(자동화), 단동(수동) 합착기, 기타제품입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 원재료의 가격변동추이 당사 제품의 원재료 등은 고객사가 요구하는 제품에 따라 원재료의 세부 사양과 가격이 매우 상이합니다. 고객사는 국내 S사, L사, 해외 CSOT 등 국내외 디스플레이패널 제조회사입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "제품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.5%",
+        "revenue_share": 0.1346,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "탈포기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.1%",
+        "revenue_share": 0.0714,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 81.5%",
+        "revenue_share": 0.815,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역 및 부품판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.8%",
+        "revenue_share": 0.0484,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
-      "kind": "display",
-      "visual": "OLED",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "합착기",
-      "caption": "합착기을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "인라인(자동화)",
-      "caption": "인라인(자동화)을 중심으로 매출을 만드는 사업입니다.",
+      "title": "탈포기",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.1%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
@@ -195,10 +224,18 @@
     },
     {
       "title": "기타제품",
-      "caption": "기타제품을 중심으로 매출을 만드는 사업입니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 81.5%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "용역 및 부품판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.8%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     }
   ],

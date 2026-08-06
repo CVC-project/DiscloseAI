@@ -153,7 +153,29 @@
   "snippets": {
     "overview": "(주)킵스바이오파마의 주요 제품·서비스는 OLED, 카메라모듈, 배터리, 방산, 의약품, 전선입니다. 현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. <제약·바이오 사업부문> OLED 사업을 주로 영위하던 회사는 종속회사 및 관계회사를 통해 의약품 제조, 개발, 판매 및 의료기기 판매 사업을 영위해왔습니다. 회사에서 생산되는 OLED 마스크 인장기는 대부분 디스플레이 패널업체로부터 직접 수주를 받아 공급하고 있으며, 해외 일부 거래처는 현지 Agent로부터 수주를 받고 제품을 판매하는 형태도 있습니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다.",
     "segment_finance": "(주)킵스바이오파마의 주요 제품·서비스는 OLED, 카메라모듈, 배터리, 방산, 의약품, 전선입니다. 현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. <제약·바이오 사업부문> OLED 사업을 주로 영위하던 회사는 종속회사 및 관계회사를 통해 의약품 제조, 개발, 판매 및 의료기기 판매 사업을 영위해왔습니다. 회사에서 생산되는 OLED 마스크 인장기는 대부분 디스플레이 패널업체로부터 직접 수주를 받아 공급하고 있으며, 해외 일부 거래처는 현지 Agent로부터 수주를 받고 제품을 판매하는 형태도 있습니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "제약·바이오(*4)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.0%",
+        "revenue_share": 0.29,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "리사이클링",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.0%",
+        "revenue_share": 0.68,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "OLED",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.03,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "OLED",
       "카메라모듈",
@@ -168,40 +190,62 @@
       "단계",
       "임상 국가"
     ],
-    "investor_note": "(주)킵스바이오파마의 주요 제품·서비스는 OLED, 카메라모듈, 배터리, 방산, 의약품, 전선입니다. 현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. <제약·바이오 사업부문> OLED 사업을 주로 영위하던 회사는 종속회사 및 관계회사를 통해 의약품 제조, 개발, 판매 및 의료기기 판매 사업을 영위해왔습니다. 회사에서 생산되는 OLED 마스크 인장기는 대부분 디스플레이 패널업체로부터 직접 수주를 받아 공급하고 있으며, 해외 일부 거래처는 현지 Agent로부터 수주를 받고 제품을 판매하는 형태도 있습니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다."
+    "investor_note": "(주)킵스바이오파마의 주요 제품·서비스는 OLED, 카메라모듈, 배터리, 방산, 의약품, 전선입니다. 현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. <제약·바이오 사업부문> OLED 사업을 주로 영위하던 회사는 종속회사 및 관계회사를 통해 의약품 제조, 개발, 판매 및 의료기기 판매 사업을 영위해왔습니다. 회사에서 생산되는 OLED 마스크 인장기는 대부분 디스플레이 패널업체로부터 직접 수주를 받아 공급하고 있으며, 해외 일부 거래처는 현지 Agent로부터 수주를 받고 제품을 판매하는 형태도 있습니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다.",
+    "product_service_segments": [
+      {
+        "name": "제약·바이오(*4)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.0%",
+        "revenue_share": 0.29,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "리사이클링",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.0%",
+        "revenue_share": 0.68,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "OLED",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.03,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.2%",
+        "revenue_share": 0.1924,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
+      "title": "의약품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.0%",
+      "kind": "bio",
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "리사이클링",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "디스플레이",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
       "kind": "display",
       "visual": "OLED",
       "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
       "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "카메라모듈",
-      "caption": "스마트폰과 전장 카메라에 들어가는 이미지 처리 부품입니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_025006447be31665.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "배터리",
-      "caption": "배터리을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
-      "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "방산",
-      "caption": "방산을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
-      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

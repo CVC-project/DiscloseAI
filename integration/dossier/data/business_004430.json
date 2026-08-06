@@ -153,7 +153,22 @@
   "snippets": {
     "overview": "송원산업은 폴리머 안정제, 연료·윤활유 첨가제, 코팅제 등을 만드는 산업용 화학제품(매출 비중 72%)과 주석화합물·PVC안정제·폴리우레탄 등 기능성 화학제품(28%)을 생산하는 화학 소재 기업으로, 전 세계 화학·PVC 가공업체에 원료를 공급합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 391억 원으로 전년 대비 2.9% 줄었고 영업이익 65.2%, 당기순이익 94.8% 감소로 수익성이 크게 나빠졌습니다. 부채비율은 50.9%로 재무 부담은 크지 않지만, 4분기 공급과잉과 가격경쟁 심화로 어려움이 커진 점은 유의할 필요가 있습니다.",
     "segment_finance": "송원산업은 폴리머 안정제, 연료·윤활유 첨가제, 코팅제 등을 만드는 산업용 화학제품(매출 비중 72%)과 주석화합물·PVC안정제·폴리우레탄 등 기능성 화학제품(28%)을 생산하는 화학 소재 기업으로, 전 세계 화학·PVC 가공업체에 원료를 공급합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 391억 원으로 전년 대비 2.9% 줄었고 영업이익 65.2%, 당기순이익 94.8% 감소로 수익성이 크게 나빠졌습니다. 부채비율은 50.9%로 재무 부담은 크지 않지만, 4분기 공급과잉과 가격경쟁 심화로 어려움이 커진 점은 유의할 필요가 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "한 국",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.6%",
+        "revenue_share": 0.1657,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "그 밖의 아시아 국가",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.7%",
+        "revenue_share": 0.3066,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "폴리머 안정제",
       "연료 첨가제",
@@ -166,36 +181,66 @@
       "가소제",
       "특수화학제품"
     ],
-    "investor_note": "송원산업은 폴리머 안정제, 연료·윤활유 첨가제, 코팅제 등을 만드는 산업용 화학제품(매출 비중 72%)과 주석화합물·PVC안정제·폴리우레탄 등 기능성 화학제품(28%)을 생산하는 화학 소재 기업으로, 전 세계 화학·PVC 가공업체에 원료를 공급합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 391억 원으로 전년 대비 2.9% 줄었고 영업이익 65.2%, 당기순이익 94.8% 감소로 수익성이 크게 나빠졌습니다. 부채비율은 50.9%로 재무 부담은 크지 않지만, 4분기 공급과잉과 가격경쟁 심화로 어려움이 커진 점은 유의할 필요가 있습니다."
+    "investor_note": "송원산업은 폴리머 안정제, 연료·윤활유 첨가제, 코팅제 등을 만드는 산업용 화학제품(매출 비중 72%)과 주석화합물·PVC안정제·폴리우레탄 등 기능성 화학제품(28%)을 생산하는 화학 소재 기업으로, 전 세계 화학·PVC 가공업체에 원료를 공급합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 391억 원으로 전년 대비 2.9% 줄었고 영업이익 65.2%, 당기순이익 94.8% 감소로 수익성이 크게 나빠졌습니다. 부채비율은 50.9%로 재무 부담은 크지 않지만, 4분기 공급과잉과 가격경쟁 심화로 어려움이 커진 점은 유의할 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "Industrial Chemicals산업용 화학제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 72.5%",
+        "revenue_share": 0.7246,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Performance Chemicals기능성 화학제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.5%",
+        "revenue_share": 0.2754,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "한 국",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.6%",
+        "revenue_share": 0.1657,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "그 밖의 아시아 국가",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.7%",
+        "revenue_share": 0.3066,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "폴리머 안정제",
-      "caption": "폴리머 안정제을 중심으로 매출을 만드는 사업입니다.",
+      "title": "Industrial Chemicals산업용 화학제품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 72.5%",
       "kind": "material",
       "visual": "MAT",
       "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "연료 첨가제",
-      "caption": "연료 첨가제을 중심으로 매출을 만드는 사업입니다.",
+      "title": "Performance Chemicals기능성 화학제품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.5%",
       "kind": "material",
       "visual": "MAT",
       "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "윤활유 첨가제",
-      "caption": "윤활유 첨가제을 중심으로 매출을 만드는 사업입니다.",
+      "title": "한 국",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.6%",
       "kind": "material",
       "visual": "MAT",
       "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "코팅제",
-      "caption": "코팅제을 중심으로 매출을 만드는 사업입니다.",
+      "title": "그 밖의 아시아 국가",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.7%",
       "kind": "material",
       "visual": "MAT",
       "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",

@@ -105,7 +105,29 @@
   "snippets": {
     "overview": "(주)엘케이켐의 주요 제품·서비스는 DRAM, NAND, OLED, 화학제품, 내용, 금속추출제입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사가 주력으로 생산하는 제품은 반도체 박막 증착 소재 중 원자층증착공정(ALD)에 사용되는 고유전율막 형성 High-k 소재, 저유전율막 형성 Low-k 소재와 기타 정밀화학 소재로 합성 기반의 광발전소재인 페로브스카이트와 전하수송층 소재 및 고객의 특별한 요청에 의해 제조되는 특수정제 솔벤트, 금속추출제, 무기금속소재와 메탈 프리커서 등이 있습니다. 당사는 한국표준산업분류상 “그 외 기타 분류 안된 화학제품 제조업 (C20499)”에 속하는 회사로 반도체 산업에서 박막 증착 공정에 사용되는 화학소재 ‘프리커서 및 리간드’를 전문적으로 개발하고, 제조 및 판매하는 회사입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "(주)엘케이켐의 주요 제품·서비스는 DRAM, NAND, OLED, 화학제품, 내용, 금속추출제입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사가 주력으로 생산하는 제품은 반도체 박막 증착 소재 중 원자층증착공정(ALD)에 사용되는 고유전율막 형성 High-k 소재, 저유전율막 형성 Low-k 소재와 기타 정밀화학 소재로 합성 기반의 광발전소재인 페로브스카이트와 전하수송층 소재 및 고객의 특별한 요청에 의해 제조되는 특수정제 솔벤트, 금속추출제, 무기금속소재와 메탈 프리커서 등이 있습니다. 당사는 한국표준산업분류상 “그 외 기타 분류 안된 화학제품 제조업 (C20499)”에 속하는 회사로 반도체 산업에서 박막 증착 공정에 사용되는 화학소재 ‘프리커서 및 리간드’를 전문적으로 개발하고, 제조 및 판매하는 회사입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "반도체 박막증착 소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.9%",
+        "revenue_share": 0.319,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Low-k",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 60.4%",
+        "revenue_share": 0.604,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.2%",
+        "revenue_share": 0.032,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "DRAM",
       "NAND",
@@ -119,36 +141,66 @@
       "A 사",
       "Mo precursor 개발"
     ],
-    "investor_note": "(주)엘케이켐의 주요 제품·서비스는 DRAM, NAND, OLED, 화학제품, 내용, 금속추출제입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사가 주력으로 생산하는 제품은 반도체 박막 증착 소재 중 원자층증착공정(ALD)에 사용되는 고유전율막 형성 High-k 소재, 저유전율막 형성 Low-k 소재와 기타 정밀화학 소재로 합성 기반의 광발전소재인 페로브스카이트와 전하수송층 소재 및 고객의 특별한 요청에 의해 제조되는 특수정제 솔벤트, 금속추출제, 무기금속소재와 메탈 프리커서 등이 있습니다. 당사는 한국표준산업분류상 “그 외 기타 분류 안된 화학제품 제조업 (C20499)”에 속하는 회사로 반도체 산업에서 박막 증착 공정에 사용되는 화학소재 ‘프리커서 및 리간드’를 전문적으로 개발하고, 제조 및 판매하는 회사입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)엘케이켐의 주요 제품·서비스는 DRAM, NAND, OLED, 화학제품, 내용, 금속추출제입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사가 주력으로 생산하는 제품은 반도체 박막 증착 소재 중 원자층증착공정(ALD)에 사용되는 고유전율막 형성 High-k 소재, 저유전율막 형성 Low-k 소재와 기타 정밀화학 소재로 합성 기반의 광발전소재인 페로브스카이트와 전하수송층 소재 및 고객의 특별한 요청에 의해 제조되는 특수정제 솔벤트, 금속추출제, 무기금속소재와 메탈 프리커서 등이 있습니다. 당사는 한국표준산업분류상 “그 외 기타 분류 안된 화학제품 제조업 (C20499)”에 속하는 회사로 반도체 산업에서 박막 증착 공정에 사용되는 화학소재 ‘프리커서 및 리간드’를 전문적으로 개발하고, 제조 및 판매하는 회사입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "반도체 박막증착 소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.9%",
+        "revenue_share": 0.319,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Low-k",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 60.4%",
+        "revenue_share": 0.604,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.5%",
+        "revenue_share": 0.045,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.2%",
+        "revenue_share": 0.032,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "DRAM",
-      "caption": "데이터 저장과 AI 서버 수요에 연결되는 메모리 제품입니다.",
+      "title": "반도체 박막증착 소재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.9%",
       "kind": "chip",
       "visual": "CHIP",
-      "image": "../data/business_images/business_image_10774ca82ea41202.jpg",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "NAND",
-      "caption": "데이터 저장과 AI 서버 수요에 연결되는 메모리 제품입니다.",
-      "kind": "chip",
-      "visual": "CHIP",
-      "image": "../data/business_images/business_image_10774ca82ea41202.jpg",
+      "title": "Low-k",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 60.4%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
-      "kind": "display",
-      "visual": "OLED",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
+      "title": "기타소재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.5%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "화학제품",
-      "caption": "화학제품을 중심으로 매출을 만드는 사업입니다.",
+      "title": "상 품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.2%",
       "kind": "material",
       "visual": "MAT",
       "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",

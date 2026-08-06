@@ -155,14 +155,25 @@
     "segment_finance": "(주)씨엠지제약의 주요 제품·서비스는 의약품, 건강기능식품, 의약품 제조, 정제, 동맥경화용제 등, 제품 계입니다. 현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. 당사는 제품 포트폴리오를 현재의 의약품과 더불어 항암제, 안티에이징, 안과, 건강기능식품, 맘앤베이비 등 성장성이 높은 신사업 부문으로 확대하고 있으며 향후 신약과 개량신약을 지속적으로 개발하여 출시하고, 혁신신약의 임상 진입 및 라이센스아웃 등으로 매출 증대와 시장점유율 확대를 통한 주주가치 제고에 중점을 두고 있습니다.또한, 관계회사를 통해 동물의약품 사업을 영위하고 있습니다. 사업의 내용 당사는 차바이오그룹 핵심 계열사로 의약품과 건강기능식품의 연구, 개발과 생산 및 판매를 주사업으로 하는 제약회사입니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다.",
     "segment_breakdown": [
       {
-        "name": "은행엽건조엑스",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
+        "name": "의약품 제조 및 판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 79.9%",
+        "revenue_share": 0.799,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "은행엽엑스",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
+        "name": "캡슐",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.5%",
+        "revenue_share": 0.115,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "ODF",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.3%",
+        "revenue_share": 0.013,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -178,38 +189,60 @@
       "의동시험자료정리 등",
       "허가"
     ],
-    "investor_note": "(주)씨엠지제약의 주요 제품·서비스는 의약품, 건강기능식품, 의약품 제조, 정제, 동맥경화용제 등, 제품 계입니다. 현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. 당사는 제품 포트폴리오를 현재의 의약품과 더불어 항암제, 안티에이징, 안과, 건강기능식품, 맘앤베이비 등 성장성이 높은 신사업 부문으로 확대하고 있으며 향후 신약과 개량신약을 지속적으로 개발하여 출시하고, 혁신신약의 임상 진입 및 라이센스아웃 등으로 매출 증대와 시장점유율 확대를 통한 주주가치 제고에 중점을 두고 있습니다.또한, 관계회사를 통해 동물의약품 사업을 영위하고 있습니다. 사업의 내용 당사는 차바이오그룹 핵심 계열사로 의약품과 건강기능식품의 연구, 개발과 생산 및 판매를 주사업으로 하는 제약회사입니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다."
+    "investor_note": "(주)씨엠지제약의 주요 제품·서비스는 의약품, 건강기능식품, 의약품 제조, 정제, 동맥경화용제 등, 제품 계입니다. 현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. 당사는 제품 포트폴리오를 현재의 의약품과 더불어 항암제, 안티에이징, 안과, 건강기능식품, 맘앤베이비 등 성장성이 높은 신사업 부문으로 확대하고 있으며 향후 신약과 개량신약을 지속적으로 개발하여 출시하고, 혁신신약의 임상 진입 및 라이센스아웃 등으로 매출 증대와 시장점유율 확대를 통한 주주가치 제고에 중점을 두고 있습니다.또한, 관계회사를 통해 동물의약품 사업을 영위하고 있습니다. 사업의 내용 당사는 차바이오그룹 핵심 계열사로 의약품과 건강기능식품의 연구, 개발과 생산 및 판매를 주사업으로 하는 제약회사입니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다.",
+    "product_service_segments": [
+      {
+        "name": "의약품 제조 및 판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 79.9%",
+        "revenue_share": 0.799,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "캡슐",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.5%",
+        "revenue_share": 0.115,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "ODF",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.3%",
+        "revenue_share": 0.013,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 92.7%",
+        "revenue_share": 0.927,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "은행엽건조엑스",
-      "caption": "예금과 대출에서 이자이익을 만드는 금융 서비스입니다.",
-      "kind": "bank",
-      "visual": "BANK",
-      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "은행엽엑스",
-      "caption": "예금과 대출에서 이자이익을 만드는 금융 서비스입니다.",
-      "kind": "bank",
-      "visual": "BANK",
-      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
       "title": "의약품",
-      "caption": "의약품을 중심으로 매출을 만드는 사업입니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 79.9%",
       "kind": "bio",
-      "visual": "BIO",
+      "visual": "PHARMA",
       "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "건강기능식품",
-      "caption": "건강기능식품을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "bio",
-      "visual": "BIO",
+      "title": "캡슐",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "ODF",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.3%",
+      "kind": "service",
+      "visual": "BUSINESS",
       "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
       "image_source": "Unsplash"
     }

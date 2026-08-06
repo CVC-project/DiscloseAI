@@ -135,9 +135,24 @@
     "rcept_no": "20260319000900"
   },
   "snippets": {
-    "overview": "대명에너지(주)의 주요 사업은 풍력발전단지 건설도급공사 수행, 태양광발전단지 건설도급공사 수행, 김천풍력발전사업EPC공사, 금융보증계약(*2) 등입니다. 계약을 따낸 뒤 제작·공사·납품을 거쳐 매출을 만듭니다. - '수주일자'는 '계약상 계약일'이며, '납기일자'는 '계약상 계약 완료일자'입니다. - 장기계약건은 거래회사 또는 당사의 내부 사정에 따라 수주내용의 변경, 연기, 취소가 가능합니다. 수주형 사업은 계약 규모뿐 아니라 납기, 원가, 프로젝트 구성이 이익을 좌우합니다.",
-    "segment_finance": "대명에너지(주)의 주요 사업은 풍력발전단지 건설도급공사 수행, 태양광발전단지 건설도급공사 수행, 김천풍력발전사업EPC공사, 금융보증계약(*2) 등입니다. 계약을 따낸 뒤 제작·공사·납품을 거쳐 매출을 만듭니다. - '수주일자'는 '계약상 계약일'이며, '납기일자'는 '계약상 계약 완료일자'입니다. - 장기계약건은 거래회사 또는 당사의 내부 사정에 따라 수주내용의 변경, 연기, 취소가 가능합니다. 수주형 사업은 계약 규모뿐 아니라 납기, 원가, 프로젝트 구성이 이익을 좌우합니다.",
-    "segment_breakdown": [],
+    "overview": "계약을 따낸 뒤 제작·공사·납품을 거쳐 매출을 만듭니다. - '수주일자'는 '계약상 계약일'이며, '납기일자'는 '계약상 계약 완료일자'입니다. - 장기계약건은 거래회사 또는 당사의 내부 사정에 따라 수주내용의 변경, 연기, 취소가 가능합니다. 수주형 사업은 계약 규모뿐 아니라 납기, 원가, 프로젝트 구성이 이익을 좌우합니다.",
+    "segment_finance": "계약을 따낸 뒤 제작·공사·납품을 거쳐 매출을 만듭니다. - '수주일자'는 '계약상 계약일'이며, '납기일자'는 '계약상 계약 완료일자'입니다. - 장기계약건은 거래회사 또는 당사의 내부 사정에 따라 수주내용의 변경, 연기, 취소가 가능합니다. 수주형 사업은 계약 규모뿐 아니라 납기, 원가, 프로젝트 구성이 이익을 좌우합니다.",
+    "segment_breakdown": [
+      {
+        "name": "발전",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.1%",
+        "revenue_share": 0.2011,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "EPC",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 75.7%",
+        "revenue_share": 0.7568,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "배터리",
       "내 용",
@@ -152,40 +167,55 @@
       "엘에스일렉트릭",
       "납기"
     ],
-    "investor_note": "대명에너지(주)의 주요 사업은 풍력발전단지 건설도급공사 수행, 태양광발전단지 건설도급공사 수행, 김천풍력발전사업EPC공사, 금융보증계약(*2) 등입니다. 계약을 따낸 뒤 제작·공사·납품을 거쳐 매출을 만듭니다. - '수주일자'는 '계약상 계약일'이며, '납기일자'는 '계약상 계약 완료일자'입니다. - 장기계약건은 거래회사 또는 당사의 내부 사정에 따라 수주내용의 변경, 연기, 취소가 가능합니다. 수주형 사업은 계약 규모뿐 아니라 납기, 원가, 프로젝트 구성이 이익을 좌우합니다."
+    "investor_note": "계약을 따낸 뒤 제작·공사·납품을 거쳐 매출을 만듭니다. - '수주일자'는 '계약상 계약일'이며, '납기일자'는 '계약상 계약 완료일자'입니다. - 장기계약건은 거래회사 또는 당사의 내부 사정에 따라 수주내용의 변경, 연기, 취소가 가능합니다. 수주형 사업은 계약 규모뿐 아니라 납기, 원가, 프로젝트 구성이 이익을 좌우합니다.",
+    "product_service_segments": [
+      {
+        "name": "발전",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.1%",
+        "revenue_share": 0.2011,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "O&M 서비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.2%",
+        "revenue_share": 0.0316,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "EPC",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 75.7%",
+        "revenue_share": 0.7568,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "배터리",
-      "caption": "배터리을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
-      "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "내 용",
-      "caption": "내 용을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "O&M서비스",
-      "caption": "O&M서비스을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "발전소 운영관리(발전소 유지보수",
-      "caption": "발전소 운영관리(발전소 유지보수을 중심으로 매출을 만드는 사업입니다.",
+      "title": "전력기기·발전",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.1%",
       "kind": "power",
       "visual": "POWER",
       "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
       "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "O&M 서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "EPC",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 75.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

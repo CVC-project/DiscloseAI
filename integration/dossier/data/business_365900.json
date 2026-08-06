@@ -153,7 +153,29 @@
   "snippets": {
     "overview": "(주)브이씨의 주요 제품·서비스는 OLED, 용역, 기타매출 등, 골프거리측정기, 론치모니터, 골프시뮬레이터 등입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 현재 당사는 규모의 경제를 위해 외주 가공을 통해 제품을 생산하고 있으며, 제품의 주요부품 원료는 당사가 직접 공급하고 있습니다. 당사는 2005년 무선 통신용 반도체 전문 기업으로 출발하여 경쟁력 있는 무선인식(RFID) 제품을 개발하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "(주)브이씨의 주요 제품·서비스는 OLED, 용역, 기타매출 등, 골프거리측정기, 론치모니터, 골프시뮬레이터 등입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 현재 당사는 규모의 경제를 위해 외주 가공을 통해 제품을 생산하고 있으며, 제품의 주요부품 원료는 당사가 직접 공급하고 있습니다. 당사는 2005년 무선 통신용 반도체 전문 기업으로 출발하여 경쟁력 있는 무선인식(RFID) 제품을 개발하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "당사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 61.4%",
+        "revenue_share": 0.614,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "해외판매자회사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.1%",
+        "revenue_share": 0.301,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "국내자회사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.1%",
+        "revenue_share": 0.051,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "OLED",
       "용역",
@@ -167,36 +189,58 @@
       "골프시뮬레이터",
       "반제품"
     ],
-    "investor_note": "(주)브이씨의 주요 제품·서비스는 OLED, 용역, 기타매출 등, 골프거리측정기, 론치모니터, 골프시뮬레이터 등입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 현재 당사는 규모의 경제를 위해 외주 가공을 통해 제품을 생산하고 있으며, 제품의 주요부품 원료는 당사가 직접 공급하고 있습니다. 당사는 2005년 무선 통신용 반도체 전문 기업으로 출발하여 경쟁력 있는 무선인식(RFID) 제품을 개발하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)브이씨의 주요 제품·서비스는 OLED, 용역, 기타매출 등, 골프거리측정기, 론치모니터, 골프시뮬레이터 등입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 현재 당사는 규모의 경제를 위해 외주 가공을 통해 제품을 생산하고 있으며, 제품의 주요부품 원료는 당사가 직접 공급하고 있습니다. 당사는 2005년 무선 통신용 반도체 전문 기업으로 출발하여 경쟁력 있는 무선인식(RFID) 제품을 개발하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "당사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 61.4%",
+        "revenue_share": 0.614,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역 , 기타매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.4%",
+        "revenue_share": 0.034,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "해외판매자회사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.1%",
+        "revenue_share": 0.301,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "국내자회사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.1%",
+        "revenue_share": 0.051,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
-      "kind": "display",
-      "visual": "OLED",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "용역",
-      "caption": "용역을 중심으로 매출을 만드는 사업입니다.",
+      "title": "당사",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 61.4%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "기타매출 등",
-      "caption": "기타매출 등을 중심으로 매출을 만드는 사업입니다.",
+      "title": "해외판매자회사",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.1%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "골프거리측정기",
-      "caption": "골프거리측정기을 중심으로 매출을 만드는 사업입니다.",
+      "title": "국내자회사",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.1%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",

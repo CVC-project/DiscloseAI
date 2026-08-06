@@ -139,9 +139,25 @@
     "segment_finance": "주식회사에스제이켐의 주요 제품·서비스는 화학제품, 아연, 제품 매출, 수처리 응집제(황산알루미늄, 알민산소다 등), 제품별입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 향후 매출액의 변동의 변동에 영향을 줄 것이라고 인정되는 사항당사의 폴리프로필렌 사업은 국제유가 가격의 변동에 따라 원재료 가격과 고객사 판매가격의 기준이 변동 될 수 있습니다. ② 황산알루미늄의 제조공정 본 공정은 탱크로리를 통해 입고된 황산 원료를 저장탱크에 저장하였다가 제품 생산 시에 제조공정으로 이송합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "키움증권",
-        "desc": "위탁매매, IB, 운용 등 증권 서비스",
-        "revenue_share": null
+        "name": "비료용",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.0%",
+        "revenue_share": 0.49,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "공업용",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.0%",
+        "revenue_share": 0.51,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "새로운 (필요량)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 98.0%",
+        "revenue_share": 0.98,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -157,36 +173,51 @@
       "개발전담반",
       "염산"
     ],
-    "investor_note": "주식회사에스제이켐의 주요 제품·서비스는 화학제품, 아연, 제품 매출, 수처리 응집제(황산알루미늄, 알민산소다 등), 제품별입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 향후 매출액의 변동의 변동에 영향을 줄 것이라고 인정되는 사항당사의 폴리프로필렌 사업은 국제유가 가격의 변동에 따라 원재료 가격과 고객사 판매가격의 기준이 변동 될 수 있습니다. ② 황산알루미늄의 제조공정 본 공정은 탱크로리를 통해 입고된 황산 원료를 저장탱크에 저장하였다가 제품 생산 시에 제조공정으로 이송합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사에스제이켐의 주요 제품·서비스는 화학제품, 아연, 제품 매출, 수처리 응집제(황산알루미늄, 알민산소다 등), 제품별입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 향후 매출액의 변동의 변동에 영향을 줄 것이라고 인정되는 사항당사의 폴리프로필렌 사업은 국제유가 가격의 변동에 따라 원재료 가격과 고객사 판매가격의 기준이 변동 될 수 있습니다. ② 황산알루미늄의 제조공정 본 공정은 탱크로리를 통해 입고된 황산 원료를 저장탱크에 저장하였다가 제품 생산 시에 제조공정으로 이송합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "비료용",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.0%",
+        "revenue_share": 0.49,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "공업용",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.0%",
+        "revenue_share": 0.51,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "새로운 (필요량)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 98.0%",
+        "revenue_share": 0.98,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "키움증권",
-      "caption": "투자 중개와 자산관리 수수료가 실적에 연결됩니다.",
-      "kind": "securities",
-      "visual": "AUM",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "화학제품",
-      "caption": "화학제품을 중심으로 매출을 만드는 사업입니다.",
+      "title": "비료용",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.0%",
       "kind": "material",
       "visual": "MAT",
       "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "아연",
-      "caption": "아연을 중심으로 매출을 만드는 사업입니다.",
+      "title": "공업용",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.0%",
       "kind": "material",
       "visual": "MAT",
       "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "수처리 응집제(황산알루미늄",
-      "caption": "수처리 응집제(황산알루미늄을 중심으로 매출을 만드는 사업입니다.",
+      "title": "새로운 (필요량)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 98.0%",
       "kind": "material",
       "visual": "MAT",
       "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",

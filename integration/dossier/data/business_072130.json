@@ -153,7 +153,29 @@
   "snippets": {
     "overview": "유엔젤주식회사의 주요 제품·서비스는 서비스사업, 판매 구분, 코어네트워크(5G, IoT 포함), 용역, 기타매출입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 또한 별도의 생산설비를 갖고 있지 않으나, 아래와 같은 유형자산을 보유하고 있습니다. 배달, 학원, 골프 등 고객관리가 필요한 다양한 서비스 분야에 커스터마이징 되어 공급 중입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "유엔젤주식회사의 주요 제품·서비스는 서비스사업, 판매 구분, 코어네트워크(5G, IoT 포함), 용역, 기타매출입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 또한 별도의 생산설비를 갖고 있지 않으나, 아래와 같은 유형자산을 보유하고 있습니다. 배달, 학원, 골프 등 고객관리가 필요한 다양한 서비스 분야에 커스터마이징 되어 공급 중입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "코어네트워크(5G, IoT 포함)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.9%",
+        "revenue_share": 0.2395,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "스마트러닝",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.4%",
+        "revenue_share": 0.2443,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "글로벌데이터",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.2%",
+        "revenue_share": 0.4023,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "서비스사업",
       "판매 구분",
@@ -168,36 +190,66 @@
       "5G 운용관리서비스 고도화",
       "이동통신 핵심망 솔루션"
     ],
-    "investor_note": "유엔젤주식회사의 주요 제품·서비스는 서비스사업, 판매 구분, 코어네트워크(5G, IoT 포함), 용역, 기타매출입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 또한 별도의 생산설비를 갖고 있지 않으나, 아래와 같은 유형자산을 보유하고 있습니다. 배달, 학원, 골프 등 고객관리가 필요한 다양한 서비스 분야에 커스터마이징 되어 공급 중입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "유엔젤주식회사의 주요 제품·서비스는 서비스사업, 판매 구분, 코어네트워크(5G, IoT 포함), 용역, 기타매출입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 또한 별도의 생산설비를 갖고 있지 않으나, 아래와 같은 유형자산을 보유하고 있습니다. 배달, 학원, 골프 등 고객관리가 필요한 다양한 서비스 분야에 커스터마이징 되어 공급 중입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "코어네트워크(5G, IoT 포함)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.9%",
+        "revenue_share": 0.2395,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "스마트러닝",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.4%",
+        "revenue_share": 0.2443,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "서비스사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.4%",
+        "revenue_share": 0.1139,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "글로벌데이터",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.2%",
+        "revenue_share": 0.4023,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "서비스사업",
-      "caption": "서비스사업을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "판매 구분",
-      "caption": "판매 구분을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "코어네트워크(5G",
-      "caption": "코어네트워크(5G을 중심으로 매출을 만드는 사업입니다.",
+      "title": "코어네트워크(5G, IoT 포함)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.9%",
       "kind": "telecom",
       "visual": "NET",
-      "image": "../data/business_images/business_image_141eab6519656e30.jpg",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "대형마트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.4%",
+      "kind": "consumer",
+      "visual": "MART",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "IoT 포함)",
-      "caption": "IoT 포함)을 중심으로 매출을 만드는 사업입니다.",
+      "title": "서비스사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.4%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "글로벌데이터",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.2%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",

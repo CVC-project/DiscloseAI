@@ -155,14 +155,32 @@
     "segment_finance": "주식회사 팬스타엔터프라이즈의 주요 제품·서비스는 배터리, LNG, 항공기, 철강, 자동차, 유공압 정비기기입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 따라서 당사의 전략은 시장특성에 맞는 제품, 즉 현지화로 그 지역에서의 경쟁시장을 공략하는 것으로써, 꾸준히 자체브랜드와 공동 브랜드를 개발하여 해외시장을 공략할 경우 매출신장이 기대됩니다. 국내 정비기기사업은 당사의 세밀하고 치밀한 기술력과 안정적인 사후관리(A/S)를 통해 수입에 의존하던 관례적인 판매망에서 벗어나 정비기기의 국산화라는 수입대체효과를 창출하였으며, 특히 당사는 고객지원센타를 운영함으로써 소비자들의 운영상 부족한 기술을 보완 제공하여 명실공히 자동차 종합정비기기업체로 자리잡게 되었습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "전자제어자동차정비기기(얼라인먼트 등)",
-        "desc": "자동차 관련 제품·서비스",
-        "revenue_share": null
+        "name": "자동차",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 56.0%",
+        "revenue_share": 0.56,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "전자제어 자동차정비기기",
-        "desc": "자동차 관련 제품·서비스",
-        "revenue_share": null
+        "name": "전자제어",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.1%",
+        "revenue_share": 0.111,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.6%",
+        "revenue_share": 0.2464,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "선박관련",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.6%",
+        "revenue_share": 0.4062,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -179,36 +197,66 @@
       "크루즈 여객",
       "특송 화물 운송"
     ],
-    "investor_note": "주식회사 팬스타엔터프라이즈의 주요 제품·서비스는 배터리, LNG, 항공기, 철강, 자동차, 유공압 정비기기입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 따라서 당사의 전략은 시장특성에 맞는 제품, 즉 현지화로 그 지역에서의 경쟁시장을 공략하는 것으로써, 꾸준히 자체브랜드와 공동 브랜드를 개발하여 해외시장을 공략할 경우 매출신장이 기대됩니다. 국내 정비기기사업은 당사의 세밀하고 치밀한 기술력과 안정적인 사후관리(A/S)를 통해 수입에 의존하던 관례적인 판매망에서 벗어나 정비기기의 국산화라는 수입대체효과를 창출하였으며, 특히 당사는 고객지원센타를 운영함으로써 소비자들의 운영상 부족한 기술을 보완 제공하여 명실공히 자동차 종합정비기기업체로 자리잡게 되었습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사 팬스타엔터프라이즈의 주요 제품·서비스는 배터리, LNG, 항공기, 철강, 자동차, 유공압 정비기기입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 따라서 당사의 전략은 시장특성에 맞는 제품, 즉 현지화로 그 지역에서의 경쟁시장을 공략하는 것으로써, 꾸준히 자체브랜드와 공동 브랜드를 개발하여 해외시장을 공략할 경우 매출신장이 기대됩니다. 국내 정비기기사업은 당사의 세밀하고 치밀한 기술력과 안정적인 사후관리(A/S)를 통해 수입에 의존하던 관례적인 판매망에서 벗어나 정비기기의 국산화라는 수입대체효과를 창출하였으며, 특히 당사는 고객지원센타를 운영함으로써 소비자들의 운영상 부족한 기술을 보완 제공하여 명실공히 자동차 종합정비기기업체로 자리잡게 되었습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "자동차",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 56.0%",
+        "revenue_share": 0.56,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전자제어",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.1%",
+        "revenue_share": 0.111,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.6%",
+        "revenue_share": 0.2464,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "선박관련",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.6%",
+        "revenue_share": 0.4062,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "전자제어자동차정비기기(얼라인먼트 등)",
-      "caption": "전자제어자동차정비기기(얼라인먼트 등)을 중심으로 매출을 만드는 사업입니다.",
+      "title": "자동차",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 56.0%",
       "kind": "auto",
       "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "전자제어 자동차정비기기",
-      "caption": "전자제어 자동차정비기기을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "auto",
-      "visual": "AUTO",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "title": "전자제어",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.1%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "배터리",
-      "caption": "배터리을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
-      "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "LNG",
-      "caption": "LNG을 중심으로 매출을 만드는 사업입니다.",
+      "title": "상선",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.6%",
       "kind": "ship",
       "visual": "SHIP",
       "image": "../data/business_images/business_image_5184e050831a4460.avif",

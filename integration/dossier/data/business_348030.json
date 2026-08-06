@@ -151,13 +151,29 @@
     "rcept_no": "20260319001009"
   },
   "snippets": {
-    "overview": "(주)모비릭스의 주요 제품·서비스는 광고 매출, 광고 서비스 등, 게임 부문, 인앱 결제 매출, 라이센스매출입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 사업으로 영위하고 있으며 일반 제조업과 같은 제품을 판매하고 있지 않습니다. 원재료의 매입 및 생산라인 및 생산설비를 구비하고 있지 않습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_finance": "(주)모비릭스의 주요 제품·서비스는 광고 매출, 광고 서비스 등, 게임 부문, 인앱 결제 매출, 라이센스매출입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 사업으로 영위하고 있으며 일반 제조업과 같은 제품을 판매하고 있지 않습니다. 원재료의 매입 및 생산라인 및 생산설비를 구비하고 있지 않습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "overview": "(주)모비릭스의 주요 제품·서비스는 광고 매출, 광고 서비스 등, 게임 부문, 인앱 결제 매출, 라이센스매출입니다. 사업으로 영위하고 있으며 일반 제조업과 같은 제품을 판매하고 있지 않습니다. 원재료의 매입 및 생산라인 및 생산설비를 구비하고 있지 않습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "segment_finance": "(주)모비릭스의 주요 제품·서비스는 광고 매출, 광고 서비스 등, 게임 부문, 인앱 결제 매출, 라이센스매출입니다. 사업으로 영위하고 있으며 일반 제조업과 같은 제품을 판매하고 있지 않습니다. 원재료의 매입 및 생산라인 및 생산설비를 구비하고 있지 않습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "게임 부문",
-        "desc": "게임 부문 관련 제품·서비스",
-        "revenue_share": null
+        "name": "광고 매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.3%",
+        "revenue_share": 0.393,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "라이센스 매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.008,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "금융 투자부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.5%",
+        "revenue_share": 0.055,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -167,40 +183,54 @@
       "인앱 결제 매출",
       "라이센스매출"
     ],
-    "investor_note": "(주)모비릭스의 주요 제품·서비스는 광고 매출, 광고 서비스 등, 게임 부문, 인앱 결제 매출, 라이센스매출입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 사업으로 영위하고 있으며 일반 제조업과 같은 제품을 판매하고 있지 않습니다. 원재료의 매입 및 생산라인 및 생산설비를 구비하고 있지 않습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)모비릭스의 주요 제품·서비스는 광고 매출, 광고 서비스 등, 게임 부문, 인앱 결제 매출, 라이센스매출입니다. 사업으로 영위하고 있으며 일반 제조업과 같은 제품을 판매하고 있지 않습니다. 원재료의 매입 및 생산라인 및 생산설비를 구비하고 있지 않습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "게임 사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 54.4%",
+        "revenue_share": 0.544,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "광고 매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.3%",
+        "revenue_share": 0.393,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "라이센스 매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.008,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "금융 투자부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.5%",
+        "revenue_share": 0.055,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "게임 부문",
-      "caption": "게임 부문을 중심으로 매출을 만드는 사업입니다.",
+      "title": "게임",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 54.4%",
       "kind": "platform",
-      "visual": "APP",
+      "visual": "GAME",
       "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "광고 매출",
-      "caption": "광고 매출을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "광고 서비스 등",
-      "caption": "광고 서비스 등을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "인앱 결제 매출",
-      "caption": "인앱 결제 매출을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
+      "title": "금융 투자부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.5%",
+      "kind": "securities",
+      "visual": "AUM",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

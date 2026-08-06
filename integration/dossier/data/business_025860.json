@@ -153,7 +153,29 @@
   "snippets": {
     "overview": "남해화학은 국내 비료 시장점유율 42.5%를 차지하는 복합비료·요소비료 제조사이자, 암모니아·황산 등 화학제품과 경유·등유·휘발유 등 유류를 함께 판매하는 농협 계열 기업입니다. 비료·화학 부문이 매출의 65%, 유류 부문이 35%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 6,044억 원으로 전년보다 5.6% 늘었고 영업이익은 431억 원으로 18.9%, 당기순이익은 269억 원으로 25.1% 증가했습니다. 부채비율은 49.2%로 낮은 편이라 재무구조는 안정적인 모습입니다.",
     "segment_finance": "남해화학은 국내 비료 시장점유율 42.5%를 차지하는 복합비료·요소비료 제조사이자, 암모니아·황산 등 화학제품과 경유·등유·휘발유 등 유류를 함께 판매하는 농협 계열 기업입니다. 비료·화학 부문이 매출의 65%, 유류 부문이 35%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 6,044억 원으로 전년보다 5.6% 늘었고 영업이익은 431억 원으로 18.9%, 당기순이익은 269억 원으로 25.1% 증가했습니다. 부채비율은 49.2%로 낮은 편이라 재무구조는 안정적인 모습입니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "복합비료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.4%",
+        "revenue_share": 0.384,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "비료 소계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 42.3%",
+        "revenue_share": 0.423,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.8%",
+        "revenue_share": 0.188,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "복합비료(거북선표)",
       "요소비료(거북선표)",
@@ -164,36 +186,66 @@
       "휘발유",
       "반도체용 황산(NES머티리얼즈)"
     ],
-    "investor_note": "남해화학은 국내 비료 시장점유율 42.5%를 차지하는 복합비료·요소비료 제조사이자, 암모니아·황산 등 화학제품과 경유·등유·휘발유 등 유류를 함께 판매하는 농협 계열 기업입니다. 비료·화학 부문이 매출의 65%, 유류 부문이 35%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 6,044억 원으로 전년보다 5.6% 늘었고 영업이익은 431억 원으로 18.9%, 당기순이익은 269억 원으로 25.1% 증가했습니다. 부채비율은 49.2%로 낮은 편이라 재무구조는 안정적인 모습입니다."
+    "investor_note": "남해화학은 국내 비료 시장점유율 42.5%를 차지하는 복합비료·요소비료 제조사이자, 암모니아·황산 등 화학제품과 경유·등유·휘발유 등 유류를 함께 판매하는 농협 계열 기업입니다. 비료·화학 부문이 매출의 65%, 유류 부문이 35%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 6,044억 원으로 전년보다 5.6% 늘었고 영업이익은 431억 원으로 18.9%, 당기순이익은 269억 원으로 25.1% 증가했습니다. 부채비율은 49.2%로 낮은 편이라 재무구조는 안정적인 모습입니다.",
+    "product_service_segments": [
+      {
+        "name": "비료화학사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.9%",
+        "revenue_share": 0.039,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "복합비료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.4%",
+        "revenue_share": 0.384,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "비료 소계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 42.3%",
+        "revenue_share": 0.423,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.8%",
+        "revenue_share": 0.188,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "복합비료(거북선표)",
-      "caption": "복합비료(거북선표)을 중심으로 매출을 만드는 사업입니다.",
+      "title": "비료화학사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.9%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "복합비료",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.4%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "요소비료(거북선표)",
-      "caption": "요소비료(거북선표)을 중심으로 매출을 만드는 사업입니다.",
+      "title": "비료 소계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 42.3%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "암모니아",
-      "caption": "암모니아을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "황산",
-      "caption": "황산을 중심으로 매출을 만드는 사업입니다.",
+      "title": "제 품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.8%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",

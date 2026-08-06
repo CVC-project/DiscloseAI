@@ -155,19 +155,32 @@
     "segment_finance": "레이크머티리얼즈의 주요 제품·서비스는 NAND, OLED, 화학제품, 메탈로센촉매 소재, 반도체 소재, 제품 소계입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 사업 초기에는 기존 TMA 제조업체들이 당사의 LED 전구체 사업 진출을 막기 위해 TMA 판매를 거절하여 TMA를 수급할 수 없던 애로사항 때문에 당사는 전세계 3개 회사만이 생산하던 TMA 제조기술을 자체 개발하게 되었습니다. 어려운 과정을 거쳐 TMA양산에 성공하면서 TMA를 원료로 TMG를 안정적으로 생산하고 관련 전구체인 TEG, TMI, TMA, Cp2Mg 모두를 제품화함으로써 LED 산업에 성공적으로 진입하게 되었습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "수익증권",
-        "desc": "위탁매매, IB, 운용 등 증권 서비스",
-        "revenue_share": null
+        "name": "반도체 소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.0%",
+        "revenue_share": 0.5496,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "채무증권",
-        "desc": "위탁매매, IB, 운용 등 증권 서비스",
-        "revenue_share": null
+        "name": "Solar 소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.1%",
+        "revenue_share": 0.3105,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "채무증권(*)",
-        "desc": "위탁매매, IB, 운용 등 증권 서비스",
-        "revenue_share": null
+        "name": "LED 소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.4%",
+        "revenue_share": 0.0544,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "석유화학촉매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+        "revenue_share": 0.0797,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -183,39 +196,69 @@
       "건조",
       "가격 경쟁력 확보"
     ],
-    "investor_note": "레이크머티리얼즈의 주요 제품·서비스는 NAND, OLED, 화학제품, 메탈로센촉매 소재, 반도체 소재, 제품 소계입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 사업 초기에는 기존 TMA 제조업체들이 당사의 LED 전구체 사업 진출을 막기 위해 TMA 판매를 거절하여 TMA를 수급할 수 없던 애로사항 때문에 당사는 전세계 3개 회사만이 생산하던 TMA 제조기술을 자체 개발하게 되었습니다. 어려운 과정을 거쳐 TMA양산에 성공하면서 TMA를 원료로 TMG를 안정적으로 생산하고 관련 전구체인 TEG, TMI, TMA, Cp2Mg 모두를 제품화함으로써 LED 산업에 성공적으로 진입하게 되었습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "레이크머티리얼즈의 주요 제품·서비스는 NAND, OLED, 화학제품, 메탈로센촉매 소재, 반도체 소재, 제품 소계입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 사업 초기에는 기존 TMA 제조업체들이 당사의 LED 전구체 사업 진출을 막기 위해 TMA 판매를 거절하여 TMA를 수급할 수 없던 애로사항 때문에 당사는 전세계 3개 회사만이 생산하던 TMA 제조기술을 자체 개발하게 되었습니다. 어려운 과정을 거쳐 TMA양산에 성공하면서 TMA를 원료로 TMG를 안정적으로 생산하고 관련 전구체인 TEG, TMI, TMA, Cp2Mg 모두를 제품화함으로써 LED 산업에 성공적으로 진입하게 되었습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "반도체 소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.0%",
+        "revenue_share": 0.5496,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Solar 소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.1%",
+        "revenue_share": 0.3105,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "LED 소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.4%",
+        "revenue_share": 0.0544,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "석유화학촉매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+        "revenue_share": 0.0797,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "수익증권",
-      "caption": "투자 중개와 자산관리 수수료가 실적에 연결됩니다.",
-      "kind": "securities",
-      "visual": "AUM",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "채무증권",
-      "caption": "투자 중개와 자산관리 수수료가 실적에 연결됩니다.",
-      "kind": "securities",
-      "visual": "AUM",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "NAND",
-      "caption": "데이터 저장과 AI 서버 수요에 연결되는 메모리 제품입니다.",
+      "title": "반도체 소재·소모품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.0%",
       "kind": "chip",
-      "visual": "CHIP",
-      "image": "../data/business_images/business_image_10774ca82ea41202.jpg",
+      "visual": "PARTS",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
-      "kind": "display",
-      "visual": "OLED",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
+      "title": "Solar 소재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.1%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "LED 소재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.4%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "화학소재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+      "kind": "material",
+      "visual": "CHEMICAL",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
       "image_source": "Wikimedia Commons"
     }
   ],

@@ -89,7 +89,29 @@
   "snippets": {
     "overview": "주식회사 비츠로넥스텍의 주요 제품·서비스는 방산, 제품설명, 제품매출, 추력 1톤, 7톤, 가스발생기입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 프로젝트 기준의 수주산업에서는 고객사가 원하는 사양의 Component 또는 제품을 공지하며 입찰을 통해 계약이 체결됩니다. 매출처 당기 및 전기 중 회사 매출액의 10% 이상을 차지하는 외부고객과 관련된 정보는다음과 같습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "주식회사 비츠로넥스텍의 주요 제품·서비스는 방산, 제품설명, 제품매출, 추력 1톤, 7톤, 가스발생기입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 프로젝트 기준의 수주산업에서는 고객사가 원하는 사양의 Component 또는 제품을 공지하며 입찰을 통해 계약이 체결됩니다. 매출처 당기 및 전기 중 회사 매출액의 10% 이상을 차지하는 외부고객과 관련된 정보는다음과 같습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "핵융합에너지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.7%",
+        "revenue_share": 0.347,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "가속기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.4%",
+        "revenue_share": 0.144,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "플라즈마",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.2%",
+        "revenue_share": 0.142,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "방산",
       "제품설명",
@@ -102,39 +124,61 @@
       "구축물",
       "소형발사체 엔진 S"
     ],
-    "investor_note": "주식회사 비츠로넥스텍의 주요 제품·서비스는 방산, 제품설명, 제품매출, 추력 1톤, 7톤, 가스발생기입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 프로젝트 기준의 수주산업에서는 고객사가 원하는 사양의 Component 또는 제품을 공지하며 입찰을 통해 계약이 체결됩니다. 매출처 당기 및 전기 중 회사 매출액의 10% 이상을 차지하는 외부고객과 관련된 정보는다음과 같습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사 비츠로넥스텍의 주요 제품·서비스는 방산, 제품설명, 제품매출, 추력 1톤, 7톤, 가스발생기입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 프로젝트 기준의 수주산업에서는 고객사가 원하는 사양의 Component 또는 제품을 공지하며 입찰을 통해 계약이 체결됩니다. 매출처 당기 및 전기 중 회사 매출액의 10% 이상을 차지하는 외부고객과 관련된 정보는다음과 같습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "제품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 36.8%",
+        "revenue_share": 0.368,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "핵융합에너지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.7%",
+        "revenue_share": 0.347,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "가속기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.4%",
+        "revenue_share": 0.144,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "플라즈마",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.2%",
+        "revenue_share": 0.142,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "방산",
-      "caption": "방산을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "title": "핵융합에너지",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.7%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_1805fba8159acac6.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "제품설명",
-      "caption": "제품설명을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "title": "가속기",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.4%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_1805fba8159acac6.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "추력 1톤",
-      "caption": "추력 1톤을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "7톤",
-      "caption": "7톤을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "title": "플라즈마",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.2%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_1805fba8159acac6.avif",
       "image_source": "Unsplash"
     }
   ],

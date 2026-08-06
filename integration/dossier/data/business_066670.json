@@ -155,9 +155,18 @@
     "segment_finance": "(주)디티씨의 주요 금융 서비스는 전자부품, 사업부분, LED 부문, 디스플레이 부문 등입니다. 예금·대출, 투자, 보험, 카드 등에서 수익을 만듭니다. 당사는 ODM사업의 원가경쟁력을 높이기 위해서 해외현지법인 생산이 아닌 해외외주생산 방법으로 제조를 진행하고 있습니다. 고객과의 지속적인 거래관계로 고객의 생산계획에 따라 수시로 생산납품하는 형태로 이에 따라 수준잔고는 의미가 없음. 금융회사는 단순 매출보다 이자수익, 수수료, 충당금, 자본 여력이 함께 움직입니다.",
     "segment_breakdown": [
       {
-        "name": "전자부품",
-        "desc": "전자부품.조명 관련 제품·서비스",
-        "revenue_share": null
+        "name": "LCD",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임대",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,40 +183,70 @@
       "LED사업부",
       "전자부품.조명"
     ],
-    "investor_note": "(주)디티씨의 주요 금융 서비스는 전자부품, 사업부분, LED 부문, 디스플레이 부문 등입니다. 예금·대출, 투자, 보험, 카드 등에서 수익을 만듭니다. 당사는 ODM사업의 원가경쟁력을 높이기 위해서 해외현지법인 생산이 아닌 해외외주생산 방법으로 제조를 진행하고 있습니다. 고객과의 지속적인 거래관계로 고객의 생산계획에 따라 수시로 생산납품하는 형태로 이에 따라 수준잔고는 의미가 없음. 금융회사는 단순 매출보다 이자수익, 수수료, 충당금, 자본 여력이 함께 움직입니다."
+    "investor_note": "(주)디티씨의 주요 금융 서비스는 전자부품, 사업부분, LED 부문, 디스플레이 부문 등입니다. 예금·대출, 투자, 보험, 카드 등에서 수익을 만듭니다. 당사는 ODM사업의 원가경쟁력을 높이기 위해서 해외현지법인 생산이 아닌 해외외주생산 방법으로 제조를 진행하고 있습니다. 고객과의 지속적인 거래관계로 고객의 생산계획에 따라 수시로 생산납품하는 형태로 이에 따라 수준잔고는 의미가 없음. 금융회사는 단순 매출보다 이자수익, 수수료, 충당금, 자본 여력이 함께 움직입니다.",
+    "product_service_segments": [
+      {
+        "name": "LCD",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임대",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "LED사업부",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.6%",
+        "revenue_share": 0.596,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전장사업부",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.6%",
+        "revenue_share": 0.226,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "전자부품",
-      "caption": "전자부품을 중심으로 매출을 만드는 사업입니다.",
+      "title": "LCD",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
-      "kind": "display",
-      "visual": "OLED",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
+      "title": "임대",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "LED사업부",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "전장부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.6%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_e310d326cafd0fb3.jpg",
       "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "방산",
-      "caption": "방산을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "증권",
-      "caption": "투자 중개와 자산관리 수수료가 실적에 연결됩니다.",
-      "kind": "securities",
-      "visual": "AUM",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

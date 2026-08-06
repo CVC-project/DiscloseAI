@@ -153,7 +153,22 @@
   "snippets": {
     "overview": "성창기업지주는 합판·마루판을 만드는 성창기업, 친환경 파티클보드를 만드는 성창보드, 폐목재를 재활용하는 지씨테크 등을 거느린 지주회사로, PB사업(44%)과 합판사업(41%)이 매출의 대부분을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,272억 원으로 전년 대비 11.1% 줄었고, 영업손실은 소폭 개선됐지만 당기순손실은 206억 원으로 크게 늘어 자회사 실적 부진의 영향이 컸던 것으로 보입니다. 부채비율은 27.1%로 낮은 편이라 재무 안정성 자체는 양호합니다.",
     "segment_finance": "성창기업지주는 합판·마루판을 만드는 성창기업, 친환경 파티클보드를 만드는 성창보드, 폐목재를 재활용하는 지씨테크 등을 거느린 지주회사로, PB사업(44%)과 합판사업(41%)이 매출의 대부분을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,272억 원으로 전년 대비 11.1% 줄었고, 영업손실은 소폭 개선됐지만 당기순손실은 206억 원으로 크게 늘어 자회사 실적 부진의 영향이 컸던 것으로 보입니다. 부채비율은 27.1%로 낮은 편이라 재무 안정성 자체는 양호합니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "TEGO 합판",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.1%",
+        "revenue_share": 0.0612,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "포 르 마 린",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
+        "revenue_share": 0.05,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "합판",
       "TEGO합판",
@@ -162,36 +177,66 @@
       "포르마린(접착제)",
       "수입합판·PB 유통"
     ],
-    "investor_note": "성창기업지주는 합판·마루판을 만드는 성창기업, 친환경 파티클보드를 만드는 성창보드, 폐목재를 재활용하는 지씨테크 등을 거느린 지주회사로, PB사업(44%)과 합판사업(41%)이 매출의 대부분을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,272억 원으로 전년 대비 11.1% 줄었고, 영업손실은 소폭 개선됐지만 당기순손실은 206억 원으로 크게 늘어 자회사 실적 부진의 영향이 컸던 것으로 보입니다. 부채비율은 27.1%로 낮은 편이라 재무 안정성 자체는 양호합니다."
+    "investor_note": "성창기업지주는 합판·마루판을 만드는 성창기업, 친환경 파티클보드를 만드는 성창보드, 폐목재를 재활용하는 지씨테크 등을 거느린 지주회사로, PB사업(44%)과 합판사업(41%)이 매출의 대부분을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,272억 원으로 전년 대비 11.1% 줄었고, 영업손실은 소폭 개선됐지만 당기순손실은 206억 원으로 크게 늘어 자회사 실적 부진의 영향이 컸던 것으로 보입니다. 부채비율은 27.1%로 낮은 편이라 재무 안정성 자체는 양호합니다.",
+    "product_service_segments": [
+      {
+        "name": "성창기업(합판사업)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.7%",
+        "revenue_share": 0.2972,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "TEGO 합판",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.1%",
+        "revenue_share": 0.0612,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "포 르 마 린",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
+        "revenue_share": 0.05,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "성창보드(PB 사업)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.1%",
+        "revenue_share": 0.4411,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "합판",
-      "caption": "합판을 중심으로 매출을 만드는 사업입니다.",
+      "title": "성창기업(합판사업)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.7%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "파티클보드(PB)",
-      "caption": "파티클보드(PB)을 중심으로 매출을 만드는 사업입니다.",
+      "title": "TEGO 합판",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.1%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "우드칩",
-      "caption": "우드칩을 중심으로 매출을 만드는 사업입니다.",
+      "title": "포 르 마 린",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "포르마린(접착제)",
-      "caption": "포르마린(접착제)을 중심으로 매출을 만드는 사업입니다.",
+      "title": "성창보드(PB 사업)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.1%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",

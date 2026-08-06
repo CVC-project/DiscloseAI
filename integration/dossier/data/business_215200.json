@@ -153,7 +153,15 @@
   "snippets": {
     "overview": "메가스터디교육(주)의 주요 제품·서비스는 제9기, 대상, 총예산, 직접 일자리, 직업훈련, 고용 서비스입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품 등의 현황 당사의 사업부문은 유초중사업부문, 고등사업부문, 대학사업부문, 취업사업부문 및 기타사업부문 등으로 구분되며, 사업부문별 매출은 용역 제공과 재화의 판매로 구분됩니다. 각 사업부별 용역의 제공과 재화의 판매를 통한 각 유형별 매출 현황은 다음과 같습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "메가스터디교육(주)의 주요 제품·서비스는 제9기, 대상, 총예산, 직접 일자리, 직업훈련, 고용 서비스입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품 등의 현황 당사의 사업부문은 유초중사업부문, 고등사업부문, 대학사업부문, 취업사업부문 및 기타사업부문 등으로 구분되며, 사업부문별 매출은 용역 제공과 재화의 판매로 구분됩니다. 각 사업부별 용역의 제공과 재화의 판매를 통한 각 유형별 매출 현황은 다음과 같습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "재화",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.008,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "제9기",
       "대상",
@@ -164,36 +172,58 @@
       "고용 장려금",
       "실업소득"
     ],
-    "investor_note": "메가스터디교육(주)의 주요 제품·서비스는 제9기, 대상, 총예산, 직접 일자리, 직업훈련, 고용 서비스입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품 등의 현황 당사의 사업부문은 유초중사업부문, 고등사업부문, 대학사업부문, 취업사업부문 및 기타사업부문 등으로 구분되며, 사업부문별 매출은 용역 제공과 재화의 판매로 구분됩니다. 각 사업부별 용역의 제공과 재화의 판매를 통한 각 유형별 매출 현황은 다음과 같습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "메가스터디교육(주)의 주요 제품·서비스는 제9기, 대상, 총예산, 직접 일자리, 직업훈련, 고용 서비스입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품 등의 현황 당사의 사업부문은 유초중사업부문, 고등사업부문, 대학사업부문, 취업사업부문 및 기타사업부문 등으로 구분되며, 사업부문별 매출은 용역 제공과 재화의 판매로 구분됩니다. 각 사업부별 용역의 제공과 재화의 판매를 통한 각 유형별 매출 현황은 다음과 같습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "유초중사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.0%",
+        "revenue_share": 0.1903,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "재화",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.008,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "고등사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.9%",
+        "revenue_share": 0.3592,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "대학사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.6%",
+        "revenue_share": 0.0862,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "제9기",
-      "caption": "제9기을 중심으로 매출을 만드는 사업입니다.",
+      "title": "유초중사업부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.0%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "대상",
-      "caption": "대상을 중심으로 매출을 만드는 사업입니다.",
+      "title": "고등사업부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.9%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "총예산",
-      "caption": "총예산을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "직접 일자리",
-      "caption": "직접 일자리을 중심으로 매출을 만드는 사업입니다.",
+      "title": "대학사업부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.6%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",

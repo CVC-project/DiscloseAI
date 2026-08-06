@@ -153,7 +153,22 @@
   "snippets": {
     "overview": "(주) 힘스의 주요 제품·서비스는 OLED, [제품 그룹 구분], 비젼 모듈, 제품매출, OLED장비, OLED Mask입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 고객사로 부터 제품을 수주하면 \"설계->발주->입고 및 조립->출고\"의 절차에따라 공정이 진행됩니다. 당사 매출은 고객사의 설비투자 여부에 따라 변동이 심한 특성을 가지고 있어 인력운영 및 사업계획 수립에 어려움이 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "(주) 힘스의 주요 제품·서비스는 OLED, [제품 그룹 구분], 비젼 모듈, 제품매출, OLED장비, OLED Mask입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 고객사로 부터 제품을 수주하면 \"설계->발주->입고 및 조립->출고\"의 절차에따라 공정이 진행됩니다. 당사 매출은 고객사의 설비투자 여부에 따라 변동이 심한 특성을 가지고 있어 인력운영 및 사업계획 수립에 어려움이 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "Non-oled 장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.8%",
+        "revenue_share": 0.088,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "비전모듈 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.4%",
+        "revenue_share": 0.064,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "OLED",
       "[제품 그룹 구분]",
@@ -167,36 +182,58 @@
       "내용",
       "권리자"
     ],
-    "investor_note": "(주) 힘스의 주요 제품·서비스는 OLED, [제품 그룹 구분], 비젼 모듈, 제품매출, OLED장비, OLED Mask입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 고객사로 부터 제품을 수주하면 \"설계->발주->입고 및 조립->출고\"의 절차에따라 공정이 진행됩니다. 당사 매출은 고객사의 설비투자 여부에 따라 변동이 심한 특성을 가지고 있어 인력운영 및 사업계획 수립에 어려움이 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주) 힘스의 주요 제품·서비스는 OLED, [제품 그룹 구분], 비젼 모듈, 제품매출, OLED장비, OLED Mask입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 고객사로 부터 제품을 수주하면 \"설계->발주->입고 및 조립->출고\"의 절차에따라 공정이 진행됩니다. 당사 매출은 고객사의 설비투자 여부에 따라 변동이 심한 특성을 가지고 있어 인력운영 및 사업계획 수립에 어려움이 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "제품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 70.2%",
+        "revenue_share": 0.7018,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Non-oled 장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.8%",
+        "revenue_share": 0.088,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "비전모듈 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.4%",
+        "revenue_share": 0.064,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품 및 기타",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.6%",
+        "revenue_share": 0.1462,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
+      "title": "디스플레이",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.8%",
       "kind": "display",
       "visual": "OLED",
       "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "[제품 그룹 구분]",
-      "caption": "[제품 그룹 구분]을 중심으로 매출을 만드는 사업입니다.",
+      "title": "비전모듈 등",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.4%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "비젼 모듈",
-      "caption": "비젼 모듈을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "인도",
-      "caption": "인도을 중심으로 매출을 만드는 사업입니다.",
+      "title": "상품 및 기타",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.6%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",

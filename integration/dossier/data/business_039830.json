@@ -155,14 +155,18 @@
     "segment_finance": "오로라(오로라월드)는 캐릭터 디자인을 개발해 완구로 상품화하고 전 세계 80여개국에 공급하는 글로벌 캐릭터완구 기업으로, 매출의 약 70%를 해외에서 벌어들이고 있습니다. 캐릭터완구 판매가 매출의 95%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,280억 원으로 전년 대비 19.0% 늘었고 영업이익도 444억 원으로 43.6% 크게 증가했으며 당기순이익 역시 210억 원으로 405.3% 늘었습니다. 다만 부채비율은 227.5%로 매우 높은 편이라 재무 부담을 신중히 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "캐릭터완구(재화판매)",
-        "desc": "자체·라이선스 브랜드 캐릭터 완구 제조·유통",
-        "revenue_share": 0.946
+        "name": "재화의 판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 94.6%",
+        "revenue_share": 0.946,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "임대수입",
-        "desc": "부동산 임대",
-        "revenue_share": 0.021
+        "name": "용역의 제공",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.1%",
+        "revenue_share": 0.021,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -170,39 +174,39 @@
       "상표권 라이선싱",
       "애니메이션 콘텐츠"
     ],
-    "investor_note": "오로라(오로라월드)는 캐릭터 디자인을 개발해 완구로 상품화하고 전 세계 80여개국에 공급하는 글로벌 캐릭터완구 기업으로, 매출의 약 70%를 해외에서 벌어들이고 있습니다. 캐릭터완구 판매가 매출의 95%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,280억 원으로 전년 대비 19.0% 늘었고 영업이익도 444억 원으로 43.6% 크게 증가했으며 당기순이익 역시 210억 원으로 405.3% 늘었습니다. 다만 부채비율은 227.5%로 매우 높은 편이라 재무 부담을 신중히 살펴볼 필요가 있습니다."
+    "investor_note": "오로라(오로라월드)는 캐릭터 디자인을 개발해 완구로 상품화하고 전 세계 80여개국에 공급하는 글로벌 캐릭터완구 기업으로, 매출의 약 70%를 해외에서 벌어들이고 있습니다. 캐릭터완구 판매가 매출의 95%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,280억 원으로 전년 대비 19.0% 늘었고 영업이익도 444억 원으로 43.6% 크게 증가했으며 당기순이익 역시 210억 원으로 405.3% 늘었습니다. 다만 부채비율은 227.5%로 매우 높은 편이라 재무 부담을 신중히 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "재화의 판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 94.6%",
+        "revenue_share": 0.946,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역의 제공",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.1%",
+        "revenue_share": 0.021,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "캐릭터완구(재화판매)",
-      "caption": "캐릭터완구(재화판매)을 중심으로 매출을 만드는 사업입니다.",
+      "title": "재화의 판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 94.6%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "임대수입",
-      "caption": "임대수입을 중심으로 매출을 만드는 사업입니다.",
+      "title": "용역의 제공",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.1%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "상표권 라이선싱",
-      "caption": "상표권 라이선싱을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "애니메이션 콘텐츠",
-      "caption": "애니메이션 콘텐츠을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "platform",
-      "visual": "APP",
-      "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
       "image_source": "Unsplash"
     }
   ],

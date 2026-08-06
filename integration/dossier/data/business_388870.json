@@ -13,103 +13,103 @@
     "year": 2025,
     "revenue": null,
     "cogs": null,
-    "operating_income": -11507092762.0,
-    "net_income": -10756653748.0,
-    "operating_cashflow": -8347267822.0,
-    "investing_cashflow": 8786562012.0,
-    "financing_cashflow": 18744958826.0,
-    "total_assets": 29868258308.0,
-    "total_liabilities": 15942556867.0,
-    "total_equity": 13925701441.0,
-    "current_assets": 26398174911.0,
-    "current_liabilities": 1392433188.0,
-    "long_term_debt": 14550123679.0
+    "operating_income": -11507092762,
+    "net_income": -10756653748,
+    "operating_cashflow": -8347267822,
+    "investing_cashflow": 8786562012,
+    "financing_cashflow": 18744958826,
+    "total_assets": 29868258308,
+    "total_liabilities": 15942556867,
+    "total_equity": 13925701441,
+    "current_assets": 26398174911,
+    "current_liabilities": 1392433188,
+    "long_term_debt": 14550123679
   },
   "history": [
     {
       "year": 2023,
-      "revenue": 0.0,
-      "cogs": 0.0,
-      "operating_income": -10116681013.0,
-      "net_income": -8858360895.0,
-      "operating_cashflow": -7413108881.0,
-      "investing_cashflow": 474340592.0,
-      "financing_cashflow": 18805498509.0,
-      "total_assets": 29690249518.0,
-      "total_liabilities": 1341046482.0,
-      "total_equity": 28349203036.0,
-      "current_assets": 26170432005.0,
-      "current_liabilities": 1213343939.0,
-      "long_term_debt": 127702543.0
+      "revenue": 0,
+      "cogs": 0,
+      "operating_income": -10116681013,
+      "net_income": -8858360895,
+      "operating_cashflow": -7413108881,
+      "investing_cashflow": 474340592,
+      "financing_cashflow": 18805498509,
+      "total_assets": 29690249518,
+      "total_liabilities": 1341046482,
+      "total_equity": 28349203036,
+      "current_assets": 26170432005,
+      "current_liabilities": 1213343939,
+      "long_term_debt": 127702543
     },
     {
       "year": 2024,
       "revenue": null,
       "cogs": null,
-      "operating_income": -12601090336.0,
-      "net_income": -10560177402.0,
-      "operating_cashflow": -9327343224.0,
-      "investing_cashflow": -407689391.0,
-      "financing_cashflow": -31478490.0,
-      "total_assets": 19628332286.0,
-      "total_liabilities": 1014822179.0,
-      "total_equity": 18613510107.0,
-      "current_assets": 16254052326.0,
-      "current_liabilities": 973213870.0,
-      "long_term_debt": 41608309.0
+      "operating_income": -12601090336,
+      "net_income": -10560177402,
+      "operating_cashflow": -9327343224,
+      "investing_cashflow": -407689391,
+      "financing_cashflow": -31478490,
+      "total_assets": 19628332286,
+      "total_liabilities": 1014822179,
+      "total_equity": 18613510107,
+      "current_assets": 16254052326,
+      "current_liabilities": 973213870,
+      "long_term_debt": 41608309
     },
     {
       "year": 2025,
       "revenue": null,
       "cogs": null,
-      "operating_income": -11507092762.0,
-      "net_income": -10756653748.0,
-      "operating_cashflow": -8347267822.0,
-      "investing_cashflow": 8786562012.0,
-      "financing_cashflow": 18744958826.0,
-      "total_assets": 29868258308.0,
-      "total_liabilities": 15942556867.0,
-      "total_equity": 13925701441.0,
-      "current_assets": 26398174911.0,
-      "current_liabilities": 1392433188.0,
-      "long_term_debt": 14550123679.0
+      "operating_income": -11507092762,
+      "net_income": -10756653748,
+      "operating_cashflow": -8347267822,
+      "investing_cashflow": 8786562012,
+      "financing_cashflow": 18744958826,
+      "total_assets": 29868258308,
+      "total_liabilities": 15942556867,
+      "total_equity": 13925701441,
+      "current_assets": 26398174911,
+      "current_liabilities": 1392433188,
+      "long_term_debt": 14550123679
     }
   ],
   "modules": [
     {
       "name": "M1",
       "score": null,
-      "raw": -34224864111.0,
+      "raw": -34224864111,
       "note": "3년 누적 영업이익=-342억 ≤ 0 — 현금이익률 산출 불가",
-      "weight": 1.0
+      "weight": 1
     },
     {
       "name": "M2",
       "score": null,
       "raw": null,
       "note": "매출 결측",
-      "weight": 1.0
+      "weight": 1
     },
     {
       "name": "M3",
       "score": 22.4,
       "raw": 1.1448297189584995,
       "note": "부채비율=114% (동종업계 KSIC-701 70개사, P10/P50/P90=7/48/336%)",
-      "weight": 1.0
+      "weight": 1
     },
     {
       "name": "M4",
       "score": null,
       "raw": null,
       "note": "영업이익률 결측",
-      "weight": 1.0
+      "weight": 1
     },
     {
       "name": "M5",
       "score": 14.9,
       "raw": -0.2991289640570619,
       "note": "자본 CAGR -29.9%/yr",
-      "weight": 1.0
+      "weight": 1
     }
   ],
   "percentile": {},
@@ -143,19 +143,11 @@
   },
   "business_cards": [
     {
-      "title": "건강보험",
+      "title": "보험",
       "caption": "보험계약과 자산운용 중심 서비스",
       "kind": "insurance",
-      "visual": "건강보험",
+      "visual": "INSURANCE",
       "image": "../data/business_images/business_image_c1540b930934e19f.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "자연과학 및 공학 연구개발업",
-      "caption": "자연과학 및 공학 연구개발업을 중심으로 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     }
   ],

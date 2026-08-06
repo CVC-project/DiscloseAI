@@ -153,7 +153,15 @@
   "snippets": {
     "overview": "네오위즈홀딩스는 게임 개발사 네오위즈(P의 거짓·브라운더스트2·피망 뉴맞고 등)를 자회사로 둔 지주회사로, 신기술·신사업 투자를 담당하는 네오위즈파트너스와 모바일 광고플랫폼 기업 티앤케이팩토리도 함께 거느리고 있습니다. 매출은 대부분 자회사 네오위즈의 게임사업(약 86%)에서 나오며, 광고·투자 등 기타사업이 13%가량을 차지합니다. 과거 공시 기반 참고 정보로, 2025년 연결 매출액은 4,368억 원으로 전년 대비 18.7% 늘었고 영업이익은 552억 원으로 170.6% 급증했으며 당기순이익도 617억 원 흑자로 전환했습니다. 부채비율은 23.6%로 낮아 재무구조는 안정적인 편입니다.",
     "segment_finance": "네오위즈홀딩스는 게임 개발사 네오위즈(P의 거짓·브라운더스트2·피망 뉴맞고 등)를 자회사로 둔 지주회사로, 신기술·신사업 투자를 담당하는 네오위즈파트너스와 모바일 광고플랫폼 기업 티앤케이팩토리도 함께 거느리고 있습니다. 매출은 대부분 자회사 네오위즈의 게임사업(약 86%)에서 나오며, 광고·투자 등 기타사업이 13%가량을 차지합니다. 과거 공시 기반 참고 정보로, 2025년 연결 매출액은 4,368억 원으로 전년 대비 18.7% 늘었고 영업이익은 552억 원으로 170.6% 급증했으며 당기순이익도 617억 원 흑자로 전환했습니다. 부채비율은 23.6%로 낮아 재무구조는 안정적인 편입니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "배당",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 62.4%",
+        "revenue_share": 0.624,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "P의 거짓(액션RPG)",
       "브라운더스트2(어드벤처 RPG)",
@@ -163,36 +171,66 @@
       "피망 포털",
       "모바일 광고플랫폼(티앤케이팩토리)"
     ],
-    "investor_note": "네오위즈홀딩스는 게임 개발사 네오위즈(P의 거짓·브라운더스트2·피망 뉴맞고 등)를 자회사로 둔 지주회사로, 신기술·신사업 투자를 담당하는 네오위즈파트너스와 모바일 광고플랫폼 기업 티앤케이팩토리도 함께 거느리고 있습니다. 매출은 대부분 자회사 네오위즈의 게임사업(약 86%)에서 나오며, 광고·투자 등 기타사업이 13%가량을 차지합니다. 과거 공시 기반 참고 정보로, 2025년 연결 매출액은 4,368억 원으로 전년 대비 18.7% 늘었고 영업이익은 552억 원으로 170.6% 급증했으며 당기순이익도 617억 원 흑자로 전환했습니다. 부채비율은 23.6%로 낮아 재무구조는 안정적인 편입니다."
+    "investor_note": "네오위즈홀딩스는 게임 개발사 네오위즈(P의 거짓·브라운더스트2·피망 뉴맞고 등)를 자회사로 둔 지주회사로, 신기술·신사업 투자를 담당하는 네오위즈파트너스와 모바일 광고플랫폼 기업 티앤케이팩토리도 함께 거느리고 있습니다. 매출은 대부분 자회사 네오위즈의 게임사업(약 86%)에서 나오며, 광고·투자 등 기타사업이 13%가량을 차지합니다. 과거 공시 기반 참고 정보로, 2025년 연결 매출액은 4,368억 원으로 전년 대비 18.7% 늘었고 영업이익은 552억 원으로 170.6% 급증했으며 당기순이익도 617억 원 흑자로 전환했습니다. 부채비율은 23.6%로 낮아 재무구조는 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "지주사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.6%",
+        "revenue_share": 0.346,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "배당",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 62.4%",
+        "revenue_share": 0.624,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "게임사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 86.7%",
+        "revenue_share": 0.867,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임대사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.1%",
+        "revenue_share": 0.011,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "P의 거짓(액션RPG)",
-      "caption": "P의 거짓(액션RPG)을 중심으로 매출을 만드는 사업입니다.",
+      "title": "지주사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.6%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "브라운더스트2(어드벤처 RPG)",
-      "caption": "브라운더스트2(어드벤처 RPG)을 중심으로 매출을 만드는 사업입니다.",
+      "title": "배당",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 62.4%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "피망 뉴맞고",
-      "caption": "피망 뉴맞고을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "title": "게임",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 86.7%",
+      "kind": "platform",
+      "visual": "GAME",
+      "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "고양이와 스프",
-      "caption": "고양이와 스프을 중심으로 매출을 만드는 사업입니다.",
+      "title": "임대사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.1%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",

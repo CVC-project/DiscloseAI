@@ -153,7 +153,22 @@
   "snippets": {
     "overview": "(주)엔바이오니아의 주요 제품·서비스는 배터리, 전사, 양전하 필터 (정수), 후처리필터), 양전하 필터 (기타), 수입업체 등입니다. 현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. 경쟁사 대비 제품 성능이 비교 우위에 있으면서도 저차압 특성으로 인해(필터 수명이 길어져 교체주기가 길어지는 효과) 제조사에게 원가 및 비용절감을 제공할 수 있다는 장점이 있습니다. 제품인『양전하 필터(정수)』는 고객사에서 판매하는 정수기의 모델별로 다양한 성능 Spec.이 있습니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다.",
     "segment_finance": "(주)엔바이오니아의 주요 제품·서비스는 배터리, 전사, 양전하 필터 (정수), 후처리필터), 양전하 필터 (기타), 수입업체 등입니다. 현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. 경쟁사 대비 제품 성능이 비교 우위에 있으면서도 저차압 특성으로 인해(필터 수명이 길어져 교체주기가 길어지는 효과) 제조사에게 원가 및 비용절감을 제공할 수 있다는 장점이 있습니다. 제품인『양전하 필터(정수)』는 고객사에서 판매하는 정수기의 모델별로 다양한 성능 Spec.이 있습니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "전사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 66.0%",
+        "revenue_share": 0.66,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "세프라텍",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+        "revenue_share": 0.08,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "배터리",
       "전사",
@@ -168,36 +183,51 @@
       "샘플패드",
       "흡습성"
     ],
-    "investor_note": "(주)엔바이오니아의 주요 제품·서비스는 배터리, 전사, 양전하 필터 (정수), 후처리필터), 양전하 필터 (기타), 수입업체 등입니다. 현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. 경쟁사 대비 제품 성능이 비교 우위에 있으면서도 저차압 특성으로 인해(필터 수명이 길어져 교체주기가 길어지는 효과) 제조사에게 원가 및 비용절감을 제공할 수 있다는 장점이 있습니다. 제품인『양전하 필터(정수)』는 고객사에서 판매하는 정수기의 모델별로 다양한 성능 Spec.이 있습니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다."
+    "investor_note": "(주)엔바이오니아의 주요 제품·서비스는 배터리, 전사, 양전하 필터 (정수), 후처리필터), 양전하 필터 (기타), 수입업체 등입니다. 현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. 경쟁사 대비 제품 성능이 비교 우위에 있으면서도 저차압 특성으로 인해(필터 수명이 길어져 교체주기가 길어지는 효과) 제조사에게 원가 및 비용절감을 제공할 수 있다는 장점이 있습니다. 제품인『양전하 필터(정수)』는 고객사에서 판매하는 정수기의 모델별로 다양한 성능 Spec.이 있습니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다.",
+    "product_service_segments": [
+      {
+        "name": "전사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 66.0%",
+        "revenue_share": 0.66,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품/상품 /기타",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.0%",
+        "revenue_share": 0.06,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "세프라텍",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+        "revenue_share": 0.08,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "배터리",
-      "caption": "배터리을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
-      "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
-      "image_source": "Unsplash"
-    },
-    {
       "title": "전사",
-      "caption": "전사을 중심으로 매출을 만드는 사업입니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 66.0%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "양전하 필터 (정수)",
-      "caption": "양전하 필터 (정수)을 중심으로 매출을 만드는 사업입니다.",
+      "title": "제품/상품 /기타",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.0%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "후처리필터)",
-      "caption": "후처리필터)을 중심으로 매출을 만드는 사업입니다.",
+      "title": "세프라텍",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",

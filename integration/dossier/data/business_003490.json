@@ -153,7 +153,36 @@
   "snippets": {
     "overview": "대한항공은 여객·화물 운송을 핵심으로, 항공기체 정비(MRO)와 무인기 개발까지 아우르는 항공우주사업, 아시아나항공 등 계열사를 통해 사업을 넓힌 국내 최대 항공사입니다. 매출의 약 60%는 여객사업에서, 27%는 화물사업에서 나옵니다. 과거 공시 기반 참고 정보로, 아시아나항공 편입 효과 등으로 최근 매출액은 25조 2,255억 원으로 전년보다 41.2% 늘었지만, 영업이익은 1조 1,135억 원으로 47.2%, 당기순이익은 6,472억 원으로 53.2% 각각 줄었습니다. 부채비율은 339.9%로 높은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다.",
     "segment_finance": "대한항공은 여객·화물 운송을 핵심으로, 항공기체 정비(MRO)와 무인기 개발까지 아우르는 항공우주사업, 아시아나항공 등 계열사를 통해 사업을 넓힌 국내 최대 항공사입니다. 매출의 약 60%는 여객사업에서, 27%는 화물사업에서 나옵니다. 과거 공시 기반 참고 정보로, 아시아나항공 편입 효과 등으로 최근 매출액은 25조 2,255억 원으로 전년보다 41.2% 늘었지만, 영업이익은 1조 1,135억 원으로 47.2%, 당기순이익은 6,472억 원으로 53.2% 각각 줄었습니다. 부채비율은 339.9%로 높은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "대한항공",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.9%",
+        "revenue_share": 0.029,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "여객노선(국제)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 56.8%",
+        "revenue_share": 0.568,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "화물노선",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.7%",
+        "revenue_share": 0.267,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "항공우주",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.7%",
+        "revenue_share": 0.047,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "여객운송",
       "화물운송",
@@ -166,36 +195,58 @@
       "아시아나항공",
       "호텔운영(한진인터내셔널)"
     ],
-    "investor_note": "대한항공은 여객·화물 운송을 핵심으로, 항공기체 정비(MRO)와 무인기 개발까지 아우르는 항공우주사업, 아시아나항공 등 계열사를 통해 사업을 넓힌 국내 최대 항공사입니다. 매출의 약 60%는 여객사업에서, 27%는 화물사업에서 나옵니다. 과거 공시 기반 참고 정보로, 아시아나항공 편입 효과 등으로 최근 매출액은 25조 2,255억 원으로 전년보다 41.2% 늘었지만, 영업이익은 1조 1,135억 원으로 47.2%, 당기순이익은 6,472억 원으로 53.2% 각각 줄었습니다. 부채비율은 339.9%로 높은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다."
+    "investor_note": "대한항공은 여객·화물 운송을 핵심으로, 항공기체 정비(MRO)와 무인기 개발까지 아우르는 항공우주사업, 아시아나항공 등 계열사를 통해 사업을 넓힌 국내 최대 항공사입니다. 매출의 약 60%는 여객사업에서, 27%는 화물사업에서 나옵니다. 과거 공시 기반 참고 정보로, 아시아나항공 편입 효과 등으로 최근 매출액은 25조 2,255억 원으로 전년보다 41.2% 늘었지만, 영업이익은 1조 1,135억 원으로 47.2%, 당기순이익은 6,472억 원으로 53.2% 각각 줄었습니다. 부채비율은 339.9%로 높은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "대한항공",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.9%",
+        "revenue_share": 0.029,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "여객노선(국제)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 56.8%",
+        "revenue_share": 0.568,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "화물노선",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.7%",
+        "revenue_share": 0.267,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "항공우주",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.7%",
+        "revenue_share": 0.047,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "여객운송",
-      "caption": "여객운송을 중심으로 매출을 만드는 사업입니다.",
+      "title": "방산·항공",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.9%",
+      "kind": "ship",
+      "visual": "DEFENSE",
+      "image": "../data/business_images/business_image_1805fba8159acac6.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "여객노선(국제)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 56.8%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_3078a83d5189713b.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "화물운송",
-      "caption": "화물운송을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "마일리지 서비스",
-      "caption": "마일리지 서비스을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "군용기 정비(MRO)",
-      "caption": "군용기 정비(MRO)을 중심으로 매출을 만드는 사업입니다.",
+      "title": "화물노선",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.7%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_3078a83d5189713b.avif",

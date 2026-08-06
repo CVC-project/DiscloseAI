@@ -137,7 +137,29 @@
   "snippets": {
     "overview": "티이엠씨(주)의 주요 제품·서비스는 NAND, 배터리, NG Sorter&Tray Washing설비, 생산능력, 비중, Excimer입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품의 가격변동 추이 당사가 납품하는 제품은 제품군별, 고객사별로 사양이 상이하기 때문에 제품믹스에 따라 가격변동이 있습니다. 고객사의 다양한 부서의 담당자들과 지속적인 대화 및 소통을 통한 개발 및 공급 전략을 수립으로 선제적 기술을 확보하고 고객이 필요로 하는 제품을 원하는 시점에 공급해 상생할 수 있는 모델을 지속적으로 만들어가고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "티이엠씨(주)의 주요 제품·서비스는 NAND, 배터리, NG Sorter&Tray Washing설비, 생산능력, 비중, Excimer입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품의 가격변동 추이 당사가 납품하는 제품은 제품군별, 고객사별로 사양이 상이하기 때문에 제품믹스에 따라 가격변동이 있습니다. 고객사의 다양한 부서의 담당자들과 지속적인 대화 및 소통을 통한 개발 및 공급 전략을 수립으로 선제적 기술을 확보하고 고객이 필요로 하는 제품을 원하는 시점에 공급해 상생할 수 있는 모델을 지속적으로 만들어가고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "반도체용 특수가스 부문 (케미칼)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 57.0%",
+        "revenue_share": 0.57,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "반도체 장비부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 41.5%",
+        "revenue_share": 0.415,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "2차전지 장비부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+        "revenue_share": 0.015,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "NAND",
       "배터리",
@@ -152,40 +174,55 @@
       "연구기간",
       "COS"
     ],
-    "investor_note": "티이엠씨(주)의 주요 제품·서비스는 NAND, 배터리, NG Sorter&Tray Washing설비, 생산능력, 비중, Excimer입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품의 가격변동 추이 당사가 납품하는 제품은 제품군별, 고객사별로 사양이 상이하기 때문에 제품믹스에 따라 가격변동이 있습니다. 고객사의 다양한 부서의 담당자들과 지속적인 대화 및 소통을 통한 개발 및 공급 전략을 수립으로 선제적 기술을 확보하고 고객이 필요로 하는 제품을 원하는 시점에 공급해 상생할 수 있는 모델을 지속적으로 만들어가고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "티이엠씨(주)의 주요 제품·서비스는 NAND, 배터리, NG Sorter&Tray Washing설비, 생산능력, 비중, Excimer입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품의 가격변동 추이 당사가 납품하는 제품은 제품군별, 고객사별로 사양이 상이하기 때문에 제품믹스에 따라 가격변동이 있습니다. 고객사의 다양한 부서의 담당자들과 지속적인 대화 및 소통을 통한 개발 및 공급 전략을 수립으로 선제적 기술을 확보하고 고객이 필요로 하는 제품을 원하는 시점에 공급해 상생할 수 있는 모델을 지속적으로 만들어가고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "반도체용 특수가스 부문 (케미칼)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 57.0%",
+        "revenue_share": 0.57,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "반도체 장비부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 41.5%",
+        "revenue_share": 0.415,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "2차전지 장비부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+        "revenue_share": 0.015,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "NAND",
-      "caption": "데이터 저장과 AI 서버 수요에 연결되는 메모리 제품입니다.",
+      "title": "반도체용 특수가스 부문 (케미칼)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 57.0%",
       "kind": "chip",
       "visual": "CHIP",
-      "image": "../data/business_images/business_image_10774ca82ea41202.jpg",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "배터리",
-      "caption": "배터리을 중심으로 매출을 만드는 사업입니다.",
+      "title": "반도체 장비",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 41.5%",
+      "kind": "chip",
+      "visual": "EQUIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "2차전지 장비부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
       "kind": "battery",
       "visual": "BATTERY",
       "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
       "image_source": "Unsplash"
-    },
-    {
-      "title": "NG Sorter&Tray Washing설비",
-      "caption": "NG Sorter&Tray Washing설비을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "생산능력",
-      "caption": "생산능력을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
-      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

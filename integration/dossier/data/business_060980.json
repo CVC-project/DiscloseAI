@@ -155,9 +155,11 @@
     "segment_finance": "HL홀딩스는 2014년 인적분할로 출범한 지주회사로, HL·Halla·Mando 브랜드 상표권 수익과 자회사 배당수익을 기반으로 자동차 정비용 애프터마켓 순정부품 유통·물류 사업을 함께 운영하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 3,350억 원으로 전년보다 2.6% 줄었고 영업이익도 886억 원으로 1.9% 감소했지만, 당기순이익은 214억 원으로 8.4% 늘었습니다. 부채비율은 116.7%로 다소 높은 편입니다. 감사인은 회사가 보유한 현금창출단위들의 자산가치 평가(손상검사)를 핵심감사사항으로 선정했으며, 내부회계관리제도에 대해서도 별도로 적정의견을 표명했습니다.",
     "segment_breakdown": [
       {
-        "name": "자동차부품 유통(상품)",
-        "desc": "애프터마켓 순정부품 유통",
-        "revenue_share": 0.67
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 67.0%",
+        "revenue_share": 0.67,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -165,24 +167,32 @@
       "3PL 물류·통관 서비스",
       "HL·Halla·Mando 상표권 라이선스"
     ],
-    "investor_note": "HL홀딩스는 2014년 인적분할로 출범한 지주회사로, HL·Halla·Mando 브랜드 상표권 수익과 자회사 배당수익을 기반으로 자동차 정비용 애프터마켓 순정부품 유통·물류 사업을 함께 운영하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 3,350억 원으로 전년보다 2.6% 줄었고 영업이익도 886억 원으로 1.9% 감소했지만, 당기순이익은 214억 원으로 8.4% 늘었습니다. 부채비율은 116.7%로 다소 높은 편입니다. 감사인은 회사가 보유한 현금창출단위들의 자산가치 평가(손상검사)를 핵심감사사항으로 선정했으며, 내부회계관리제도에 대해서도 별도로 적정의견을 표명했습니다."
+    "investor_note": "HL홀딩스는 2014년 인적분할로 출범한 지주회사로, HL·Halla·Mando 브랜드 상표권 수익과 자회사 배당수익을 기반으로 자동차 정비용 애프터마켓 순정부품 유통·물류 사업을 함께 운영하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 3,350억 원으로 전년보다 2.6% 줄었고 영업이익도 886억 원으로 1.9% 감소했지만, 당기순이익은 214억 원으로 8.4% 늘었습니다. 부채비율은 116.7%로 다소 높은 편입니다. 감사인은 회사가 보유한 현금창출단위들의 자산가치 평가(손상검사)를 핵심감사사항으로 선정했으며, 내부회계관리제도에 대해서도 별도로 적정의견을 표명했습니다.",
+    "product_service_segments": [
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 67.0%",
+        "revenue_share": 0.67,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.0%",
+        "revenue_share": 0.04,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "자동차부품 유통(상품)",
-      "caption": "애프터마켓 순정부품 유통",
-      "kind": "auto",
-      "visual": "자동차부품",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "자동차부품 제조(제품)",
-      "caption": "자동차 부품 제조·판매",
-      "kind": "auto",
-      "visual": "자동차부품",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 67.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

@@ -153,25 +153,77 @@
   "snippets": {
     "overview": "주식회사 피엔에이치테크의 주요 제품·서비스는 OLED, 제품매출 소계, OLED 제품, 제품매출입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 수주에 관한 사항 당사의 제품 판매 방식은 고객사와 거래기본계약을 체결하고 PO를 받아 개별 PO별로 신속하게 출하하는 형태로 진행되고 있습니다. 당사는 지속적인 원가절감 활동과 생산성 향상 노력을 통하여 고객사의 단가인하 요구에 대응하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "주식회사 피엔에이치테크의 주요 제품·서비스는 OLED, 제품매출 소계, OLED 제품, 제품매출입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 수주에 관한 사항 당사의 제품 판매 방식은 고객사와 거래기본계약을 체결하고 PO를 받아 개별 PO별로 신속하게 출하하는 형태로 진행되고 있습니다. 당사는 지속적인 원가절감 활동과 생산성 향상 노력을 통하여 고객사의 단가인하 요구에 대응하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "OLED 원료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+        "revenue_share": 0.0152,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "OLED 소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 96.2%",
+        "revenue_share": 0.9622,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.0196,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "OLED",
       "OLED 제품"
     ],
-    "investor_note": "주식회사 피엔에이치테크의 주요 제품·서비스는 OLED, 제품매출 소계, OLED 제품, 제품매출입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 수주에 관한 사항 당사의 제품 판매 방식은 고객사와 거래기본계약을 체결하고 PO를 받아 개별 PO별로 신속하게 출하하는 형태로 진행되고 있습니다. 당사는 지속적인 원가절감 활동과 생산성 향상 노력을 통하여 고객사의 단가인하 요구에 대응하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사 피엔에이치테크의 주요 제품·서비스는 OLED, 제품매출 소계, OLED 제품, 제품매출입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 수주에 관한 사항 당사의 제품 판매 방식은 고객사와 거래기본계약을 체결하고 PO를 받아 개별 PO별로 신속하게 출하하는 형태로 진행되고 있습니다. 당사는 지속적인 원가절감 활동과 생산성 향상 노력을 통하여 고객사의 단가인하 요구에 대응하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "OLED 원료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+        "revenue_share": 0.0152,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "OLED 소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 96.2%",
+        "revenue_share": 0.9622,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품매출 소계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 97.7%",
+        "revenue_share": 0.9774,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.0196,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
+      "title": "디스플레이",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
       "kind": "display",
       "visual": "OLED",
       "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "기초 화학물질 제조업",
-      "caption": "기초 화학물질 제조업을 중심으로 매출을 만드는 사업입니다.",
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
       "kind": "material",
       "visual": "MAT",
       "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",

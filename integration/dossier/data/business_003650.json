@@ -155,19 +155,32 @@
     "segment_finance": "미창석유공업은 1962년 설립된 산업용 윤활유 전문기업으로, 자동차·산업기계용 윤활유와 타이어 등에 쓰이는 고무배합유, 변압기용 전기절연유 등을 생산합니다. 일본 ENEOS와 기술제휴를 맺고 있으며 윤활유가 매출의 73%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,054억 원으로 전년 대비 6.1% 줄었고 영업이익도 24.3% 감소했지만, 당기순이익은 688억 원으로 30.9% 늘었습니다. 부채비율은 11.4%로 매우 낮아 재무구조는 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "윤활유",
-        "desc": "공작기계·선박·자동차용 윤활유",
-        "revenue_share": 0.728
-      },
-      {
-        "name": "고무배합유",
-        "desc": "타이어·신발 등 고무제품 원료유",
-        "revenue_share": 0.191
+        "name": "제조.유류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.1%",
+        "revenue_share": 0.191,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "전기절연유",
-        "desc": "변압기 절연유",
-        "revenue_share": 0.041
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.1%",
+        "revenue_share": 0.041,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "윤 활 유",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 72.8%",
+        "revenue_share": 0.728,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.4%",
+        "revenue_share": 0.014,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -176,20 +189,42 @@
       "전기절연유",
       "유동파라핀"
     ],
-    "investor_note": "미창석유공업은 1962년 설립된 산업용 윤활유 전문기업으로, 자동차·산업기계용 윤활유와 타이어 등에 쓰이는 고무배합유, 변압기용 전기절연유 등을 생산합니다. 일본 ENEOS와 기술제휴를 맺고 있으며 윤활유가 매출의 73%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,054억 원으로 전년 대비 6.1% 줄었고 영업이익도 24.3% 감소했지만, 당기순이익은 688억 원으로 30.9% 늘었습니다. 부채비율은 11.4%로 매우 낮아 재무구조는 안정적인 편입니다."
+    "investor_note": "미창석유공업은 1962년 설립된 산업용 윤활유 전문기업으로, 자동차·산업기계용 윤활유와 타이어 등에 쓰이는 고무배합유, 변압기용 전기절연유 등을 생산합니다. 일본 ENEOS와 기술제휴를 맺고 있으며 윤활유가 매출의 73%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,054억 원으로 전년 대비 6.1% 줄었고 영업이익도 24.3% 감소했지만, 당기순이익은 688억 원으로 30.9% 늘었습니다. 부채비율은 11.4%로 매우 낮아 재무구조는 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "제조.유류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.1%",
+        "revenue_share": 0.191,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전기절연유",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.1%",
+        "revenue_share": 0.041,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "윤 활 유",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 72.8%",
+        "revenue_share": 0.728,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.4%",
+        "revenue_share": 0.014,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "윤활유",
-      "caption": "윤활유을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "고무배합유",
-      "caption": "고무배합유을 중심으로 매출을 만드는 사업입니다.",
+      "title": "제조.유류",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.1%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
@@ -197,15 +232,23 @@
     },
     {
       "title": "전기절연유",
-      "caption": "전기절연유을 중심으로 매출을 만드는 사업입니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.1%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "유동파라핀",
-      "caption": "유동파라핀을 중심으로 매출을 만드는 사업입니다.",
+      "title": "윤 활 유",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 72.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "상 품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.4%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",

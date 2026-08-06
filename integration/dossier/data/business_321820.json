@@ -155,9 +155,25 @@
     "segment_finance": "(주)아티스트컴퍼니의 주요 제품·서비스는 SSD, IP 브랜드 라이선싱, 셀러브리티, 상품개발, 애드테크(Ad-Tech)플랫폼, DSP 온라인입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 생산 및 설비에 관한 사항 연예 매니지먼트 사업은 일반적인 제조업과 달리 원재료 및 생산설비를 기반으로 하는 사업이 아니며, 아티스트와 관련 인적자원을 중심으로 사업이 이루어지는 특성을 가지고 있습니다. 또한 방송사 및 OTT 플랫폼과의 계약 조건, 2차 판권 판매 방식 등에 따라가격 변동 폭이 크게 달라지므로 표준 가격 또는 가격 변동 추이를 산정하기는 어렵습니다.당사의 애드테크(Ad-Tech) 플랫폼 사업부문의 가격은 일반적인 제조업과 달리 광고성과 및 시장 경쟁 상황에 따라 변동됩니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "서울보증보험",
-        "desc": "보험계약과 자산운용 중심 서비스",
-        "revenue_share": null
+        "name": "연예 매니지먼트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 74.6%",
+        "revenue_share": 0.7461,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "콘텐츠 제작/배급",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.4%",
+        "revenue_share": 0.0436,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "애드테크 플랫폼",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.0%",
+        "revenue_share": 0.2,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,39 +190,54 @@
       "애드테크 플랫폼",
       "DSP"
     ],
-    "investor_note": "(주)아티스트컴퍼니의 주요 제품·서비스는 SSD, IP 브랜드 라이선싱, 셀러브리티, 상품개발, 애드테크(Ad-Tech)플랫폼, DSP 온라인입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 생산 및 설비에 관한 사항 연예 매니지먼트 사업은 일반적인 제조업과 달리 원재료 및 생산설비를 기반으로 하는 사업이 아니며, 아티스트와 관련 인적자원을 중심으로 사업이 이루어지는 특성을 가지고 있습니다. 또한 방송사 및 OTT 플랫폼과의 계약 조건, 2차 판권 판매 방식 등에 따라가격 변동 폭이 크게 달라지므로 표준 가격 또는 가격 변동 추이를 산정하기는 어렵습니다.당사의 애드테크(Ad-Tech) 플랫폼 사업부문의 가격은 일반적인 제조업과 달리 광고성과 및 시장 경쟁 상황에 따라 변동됩니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)아티스트컴퍼니의 주요 제품·서비스는 SSD, IP 브랜드 라이선싱, 셀러브리티, 상품개발, 애드테크(Ad-Tech)플랫폼, DSP 온라인입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 생산 및 설비에 관한 사항 연예 매니지먼트 사업은 일반적인 제조업과 달리 원재료 및 생산설비를 기반으로 하는 사업이 아니며, 아티스트와 관련 인적자원을 중심으로 사업이 이루어지는 특성을 가지고 있습니다. 또한 방송사 및 OTT 플랫폼과의 계약 조건, 2차 판권 판매 방식 등에 따라가격 변동 폭이 크게 달라지므로 표준 가격 또는 가격 변동 추이를 산정하기는 어렵습니다.당사의 애드테크(Ad-Tech) 플랫폼 사업부문의 가격은 일반적인 제조업과 달리 광고성과 및 시장 경쟁 상황에 따라 변동됩니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "연예 매니지먼트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 74.6%",
+        "revenue_share": 0.7461,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "콘텐츠 제작/배급",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.4%",
+        "revenue_share": 0.0436,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "애드테크 플랫폼",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.0%",
+        "revenue_share": 0.2,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "서울보증보험",
-      "caption": "보험료와 손해율이 실적을 좌우하는 금융 서비스입니다.",
-      "kind": "insurance",
-      "visual": "INS",
-      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "SSD",
-      "caption": "데이터 저장과 AI 서버 수요에 연결되는 메모리 제품입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_10774ca82ea41202.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "IP 브랜드 라이선싱",
-      "caption": "IP 브랜드 라이선싱을 중심으로 매출을 만드는 사업입니다.",
+      "title": "연예 매니지먼트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 74.6%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "셀러브리티",
-      "caption": "셀러브리티을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "title": "콘텐츠 제작/배급",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.4%",
+      "kind": "platform",
+      "visual": "APP",
+      "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "플랫폼 서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.0%",
+      "kind": "platform",
+      "visual": "PLATFORM",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
       "image_source": "Unsplash"
     }
   ],

@@ -105,7 +105,29 @@
   "snippets": {
     "overview": "주식회사 하스의 주요 제품·서비스는 Amber Block, Amber Mill, 의료기기, 중앙연구소, 치과소재연구센터, 연구개발팀입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품 등의 현황 주요제품 등의 가격변동추이 당사의 제품은 판매방식과 국가 및 병원규모에 따라 가격을 달리 설정하고 있습니다.특히 국가에 따른 치과소재에 대한 물가나 구매력 등에 따라 가격을 책정하고 있고, 동일 제품이라 하더라도 다양한 사이즈로 제작되고 있어 해당 제품의 가격 변동 추이를 정확하게 기재하기 어렵습니다. 당사는 2008년 설립된 치과용 수복소재인 리튬 디실리케이트 결정화 유리(lithium disilicate glass-ceramics)와 지르코니아(zirconia) 소재 제조를 주력사업으로 영위하고있는 기업입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "주식회사 하스의 주요 제품·서비스는 Amber Block, Amber Mill, 의료기기, 중앙연구소, 치과소재연구센터, 연구개발팀입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품 등의 현황 주요제품 등의 가격변동추이 당사의 제품은 판매방식과 국가 및 병원규모에 따라 가격을 달리 설정하고 있습니다.특히 국가에 따른 치과소재에 대한 물가나 구매력 등에 따라 가격을 책정하고 있고, 동일 제품이라 하더라도 다양한 사이즈로 제작되고 있어 해당 제품의 가격 변동 추이를 정확하게 기재하기 어렵습니다. 당사는 2008년 설립된 치과용 수복소재인 리튬 디실리케이트 결정화 유리(lithium disilicate glass-ceramics)와 지르코니아(zirconia) 소재 제조를 주력사업으로 영위하고있는 기업입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "Amber Ingot",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.3%",
+        "revenue_share": 0.133,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Rosetta Block",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.6%",
+        "revenue_share": 0.156,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Rosetta Ingot",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.4%",
+        "revenue_share": 0.174,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "Amber Block",
       "Amber Mill",
@@ -113,43 +135,64 @@
       "중앙연구소",
       "치과소재연구센터",
       "연구개발팀",
-      "개발 (치과소재)",
       "기술표준파트",
       "관리",
       "첨단소재연구센터",
       "임상센터",
       "연구기획팀"
     ],
-    "investor_note": "주식회사 하스의 주요 제품·서비스는 Amber Block, Amber Mill, 의료기기, 중앙연구소, 치과소재연구센터, 연구개발팀입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품 등의 현황 주요제품 등의 가격변동추이 당사의 제품은 판매방식과 국가 및 병원규모에 따라 가격을 달리 설정하고 있습니다.특히 국가에 따른 치과소재에 대한 물가나 구매력 등에 따라 가격을 책정하고 있고, 동일 제품이라 하더라도 다양한 사이즈로 제작되고 있어 해당 제품의 가격 변동 추이를 정확하게 기재하기 어렵습니다. 당사는 2008년 설립된 치과용 수복소재인 리튬 디실리케이트 결정화 유리(lithium disilicate glass-ceramics)와 지르코니아(zirconia) 소재 제조를 주력사업으로 영위하고있는 기업입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사 하스의 주요 제품·서비스는 Amber Block, Amber Mill, 의료기기, 중앙연구소, 치과소재연구센터, 연구개발팀입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품 등의 현황 주요제품 등의 가격변동추이 당사의 제품은 판매방식과 국가 및 병원규모에 따라 가격을 달리 설정하고 있습니다.특히 국가에 따른 치과소재에 대한 물가나 구매력 등에 따라 가격을 책정하고 있고, 동일 제품이라 하더라도 다양한 사이즈로 제작되고 있어 해당 제품의 가격 변동 추이를 정확하게 기재하기 어렵습니다. 당사는 2008년 설립된 치과용 수복소재인 리튬 디실리케이트 결정화 유리(lithium disilicate glass-ceramics)와 지르코니아(zirconia) 소재 제조를 주력사업으로 영위하고있는 기업입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.8%",
+        "revenue_share": 0.208,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Amber Ingot",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.3%",
+        "revenue_share": 0.133,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Rosetta Block",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.6%",
+        "revenue_share": 0.156,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Rosetta Ingot",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.4%",
+        "revenue_share": 0.174,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "Amber Block",
-      "caption": "Amber Block을 중심으로 매출을 만드는 사업입니다.",
+      "title": "Amber Ingot",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.3%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "Amber Mill",
-      "caption": "Amber Mill을 중심으로 매출을 만드는 사업입니다.",
+      "title": "Rosetta Block",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.6%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "의료기기",
-      "caption": "의료기기을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "중앙연구소",
-      "caption": "중앙연구소을 중심으로 매출을 만드는 사업입니다.",
+      "title": "Rosetta Ingot",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.4%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",

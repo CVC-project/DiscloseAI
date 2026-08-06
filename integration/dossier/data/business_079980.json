@@ -151,13 +151,29 @@
     "rcept_no": "20260316000718"
   },
   "snippets": {
-    "overview": "(주)휴비스의 주요 사업은 폴리에스터 부문 계, 삼남석유화학, 서비스부문, 신규사업입니다. 계약을 따낸 뒤 제작·공사·납품을 거쳐 매출을 만듭니다. 주요계약 보고서 작성 기준일 현재 당사의 재무상태에 중요한 영향을 미치는 비경상적인 중요계약은 없습니다. 영업개황 및 사업부문의 구분 당사가 영위하는 사업의 영업부문은 폴리에스터 섬유제조, 서비스 부문으로 구성됩니다. 수주형 사업은 계약 규모뿐 아니라 납기, 원가, 프로젝트 구성이 이익을 좌우합니다.",
-    "segment_finance": "(주)휴비스의 주요 사업은 폴리에스터 부문 계, 삼남석유화학, 서비스부문, 신규사업입니다. 계약을 따낸 뒤 제작·공사·납품을 거쳐 매출을 만듭니다. 주요계약 보고서 작성 기준일 현재 당사의 재무상태에 중요한 영향을 미치는 비경상적인 중요계약은 없습니다. 영업개황 및 사업부문의 구분 당사가 영위하는 사업의 영업부문은 폴리에스터 섬유제조, 서비스 부문으로 구성됩니다. 수주형 사업은 계약 규모뿐 아니라 납기, 원가, 프로젝트 구성이 이익을 좌우합니다.",
+    "overview": "(주)휴비스의 주요 사업은 폴리에스터 부문 계, 삼남석유화학, 서비스부문, 신규사업입니다. 주요계약 보고서 작성 기준일 현재 당사의 재무상태에 중요한 영향을 미치는 비경상적인 중요계약은 없습니다. 영업개황 및 사업부문의 구분 당사가 영위하는 사업의 영업부문은 폴리에스터 섬유제조, 서비스 부문으로 구성됩니다.",
+    "segment_finance": "(주)휴비스의 주요 사업은 폴리에스터 부문 계, 삼남석유화학, 서비스부문, 신규사업입니다. 주요계약 보고서 작성 기준일 현재 당사의 재무상태에 중요한 영향을 미치는 비경상적인 중요계약은 없습니다. 영업개황 및 사업부문의 구분 당사가 영위하는 사업의 영업부문은 폴리에스터 섬유제조, 서비스 부문으로 구성됩니다.",
     "segment_breakdown": [
       {
-        "name": "폴리에스터 부문 계",
-        "desc": "폴리에스터 관련 제품·서비스",
-        "revenue_share": null
+        "name": "폴리에스터",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 77.0%",
+        "revenue_share": 0.77,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "지배기업 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 78.0%",
+        "revenue_share": 0.78,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "사천휴비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.0%",
+        "revenue_share": 0.22,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,36 +190,66 @@
       "부직포 제품 개발",
       "기술개발 완료"
     ],
-    "investor_note": "(주)휴비스의 주요 사업은 폴리에스터 부문 계, 삼남석유화학, 서비스부문, 신규사업입니다. 계약을 따낸 뒤 제작·공사·납품을 거쳐 매출을 만듭니다. 주요계약 보고서 작성 기준일 현재 당사의 재무상태에 중요한 영향을 미치는 비경상적인 중요계약은 없습니다. 영업개황 및 사업부문의 구분 당사가 영위하는 사업의 영업부문은 폴리에스터 섬유제조, 서비스 부문으로 구성됩니다. 수주형 사업은 계약 규모뿐 아니라 납기, 원가, 프로젝트 구성이 이익을 좌우합니다."
+    "investor_note": "(주)휴비스의 주요 사업은 폴리에스터 부문 계, 삼남석유화학, 서비스부문, 신규사업입니다. 주요계약 보고서 작성 기준일 현재 당사의 재무상태에 중요한 영향을 미치는 비경상적인 중요계약은 없습니다. 영업개황 및 사업부문의 구분 당사가 영위하는 사업의 영업부문은 폴리에스터 섬유제조, 서비스 부문으로 구성됩니다.",
+    "product_service_segments": [
+      {
+        "name": "폴리에스터",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 77.0%",
+        "revenue_share": 0.77,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타*",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.01,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "지배기업 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 78.0%",
+        "revenue_share": 0.78,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "사천휴비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.0%",
+        "revenue_share": 0.22,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "폴리에스터 부문 계",
-      "caption": "폴리에스터 부문 계을 중심으로 매출을 만드는 사업입니다.",
+      "title": "폴리에스터",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 77.0%",
       "kind": "material",
       "visual": "MAT",
       "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "배터리",
-      "caption": "배터리을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
-      "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "휴비스",
-      "caption": "휴비스을 중심으로 매출을 만드는 사업입니다.",
+      "title": "기타*",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
       "kind": "material",
       "visual": "MAT",
       "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "제품(폴리에스터 섬유)",
-      "caption": "제품(폴리에스터 섬유)을 중심으로 매출을 만드는 사업입니다.",
+      "title": "지배기업 계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 78.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "사천휴비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.0%",
       "kind": "material",
       "visual": "MAT",
       "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",

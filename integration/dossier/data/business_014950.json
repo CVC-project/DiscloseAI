@@ -11,36 +11,36 @@
   "dart_url": "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260320000589",
   "latest_year": {
     "year": 2025,
-    "revenue": 60020414513.0,
-    "cogs": 17660824727.0,
-    "operating_income": 3272885603.0,
-    "net_income": -754888317.0,
-    "operating_cashflow": 2076543432.0,
-    "investing_cashflow": -1152715063.0,
-    "financing_cashflow": -255977291.0,
-    "total_assets": 85223222713.0,
-    "total_liabilities": 16238307359.0,
-    "total_equity": 68984915354.0,
-    "current_assets": 56973513031.0,
-    "current_liabilities": 11746795507.0,
-    "long_term_debt": 4491511852.0
+    "revenue": 60020414513,
+    "cogs": 17660824727,
+    "operating_income": 3272885603,
+    "net_income": -754888317,
+    "operating_cashflow": 2076543432,
+    "investing_cashflow": -1152715063,
+    "financing_cashflow": -255977291,
+    "total_assets": 85223222713,
+    "total_liabilities": 16238307359,
+    "total_equity": 68984915354,
+    "current_assets": 56973513031,
+    "current_liabilities": 11746795507,
+    "long_term_debt": 4491511852
   },
   "history": [
     {
       "year": 2025,
-      "revenue": 60020414513.0,
-      "cogs": 17660824727.0,
-      "operating_income": 3272885603.0,
-      "net_income": -754888317.0,
-      "operating_cashflow": 2076543432.0,
-      "investing_cashflow": -1152715063.0,
-      "financing_cashflow": -255977291.0,
-      "total_assets": 85223222713.0,
-      "total_liabilities": 16238307359.0,
-      "total_equity": 68984915354.0,
-      "current_assets": 56973513031.0,
-      "current_liabilities": 11746795507.0,
-      "long_term_debt": 4491511852.0
+      "revenue": 60020414513,
+      "cogs": 17660824727,
+      "operating_income": 3272885603,
+      "net_income": -754888317,
+      "operating_cashflow": 2076543432,
+      "investing_cashflow": -1152715063,
+      "financing_cashflow": -255977291,
+      "total_assets": 85223222713,
+      "total_liabilities": 16238307359,
+      "total_equity": 68984915354,
+      "current_assets": 56973513031,
+      "current_liabilities": 11746795507,
+      "long_term_debt": 4491511852
     }
   ],
   "modules": [
@@ -49,35 +49,35 @@
       "score": null,
       "raw": null,
       "note": "1년 이력 — 단년도 OCF/영업이익은 변동성이 커 M1 제외",
-      "weight": 1.0
+      "weight": 1
     },
     {
       "name": "M2",
       "score": null,
       "raw": null,
       "note": "패널 부족(t,t-1 필요)",
-      "weight": 1.0
+      "weight": 1
     },
     {
       "name": "M3",
       "score": 91.8,
       "raw": 0.23538924815189244,
       "note": "부채비율=24% (동종업계 KSIC-212 104개사, P10/P50/P90=16/64/146%)",
-      "weight": 1.0
+      "weight": 1
     },
     {
       "name": "M4",
       "score": null,
       "raw": 0.05452954014989543,
       "note": "유효 영업이익률 1년 — 안정성 판단에는 최소 2년 필요",
-      "weight": 1.0
+      "weight": 1
     },
     {
       "name": "M5",
       "score": null,
       "raw": null,
       "note": "패널 1년 — 전년 자본 필요(최소 2년)",
-      "weight": 1.0
+      "weight": 1
     }
   ],
   "percentile": {},
@@ -91,19 +91,32 @@
     "segment_finance": "삼익제약은 고혈압·고지혈증 치료제(세자르정 등)와 당뇨병 치료제(그리핀정 등)를 중심으로 하는 전문의약품 제조사로, 순환기용제가 매출의 약 47%를 차지하며 타 제약사 의약품을 위탁생산하는 CMO 사업도 함께 운영합니다. 의약품 유통은 자회사 팜베이를 통해 일원화하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 600억 원, 영업이익은 32억 원을 기록했으나 당기순이익은 7억 원의 손실을 냈습니다. 부채비율은 23.5%로 낮아 재무 안정성은 양호한 편입니다.",
     "segment_breakdown": [
       {
-        "name": "순환기용제",
-        "desc": "고혈압·고지혈증 치료제(세자르정 등)",
-        "revenue_share": 0.468
+        "name": "순환기 용제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.3%",
+        "revenue_share": 0.073,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "당뇨병용제",
-        "desc": "혈당조절 치료제(그리핀정 등)",
-        "revenue_share": 0.107
+        "name": "세자르플러스정",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.5%",
+        "revenue_share": 0.045,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "CMO",
-        "desc": "타 제약사 의약품 위·수탁생산",
-        "revenue_share": 0.114
+        "name": "에라빅스정",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.5%",
+        "revenue_share": 0.055,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "카덴자정5/80mg",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.4%",
+        "revenue_share": 0.024,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -116,30 +129,68 @@
       "종합감기약",
       "위탁생산(CMO)"
     ],
-    "investor_note": "삼익제약은 고혈압·고지혈증 치료제(세자르정 등)와 당뇨병 치료제(그리핀정 등)를 중심으로 하는 전문의약품 제조사로, 순환기용제가 매출의 약 47%를 차지하며 타 제약사 의약품을 위탁생산하는 CMO 사업도 함께 운영합니다. 의약품 유통은 자회사 팜베이를 통해 일원화하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 600억 원, 영업이익은 32억 원을 기록했으나 당기순이익은 7억 원의 손실을 냈습니다. 부채비율은 23.5%로 낮아 재무 안정성은 양호한 편입니다."
+    "investor_note": "삼익제약은 고혈압·고지혈증 치료제(세자르정 등)와 당뇨병 치료제(그리핀정 등)를 중심으로 하는 전문의약품 제조사로, 순환기용제가 매출의 약 47%를 차지하며 타 제약사 의약품을 위탁생산하는 CMO 사업도 함께 운영합니다. 의약품 유통은 자회사 팜베이를 통해 일원화하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 600억 원, 영업이익은 32억 원을 기록했으나 당기순이익은 7억 원의 손실을 냈습니다. 부채비율은 23.5%로 낮아 재무 안정성은 양호한 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "순환기 용제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.3%",
+        "revenue_share": 0.073,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "세자르플러스정",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.5%",
+        "revenue_share": 0.045,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "에라빅스정",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.5%",
+        "revenue_share": 0.055,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "카덴자정5/80mg",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.4%",
+        "revenue_share": 0.024,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "순환기용제",
-      "caption": "고혈압·고지혈증 치료제(세자르정 등)",
+      "title": "순환기 용제",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.3%",
       "kind": "service",
-      "visual": "순환기용제",
+      "visual": "BUSINESS",
       "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "당뇨병용제",
-      "caption": "혈당조절 치료제(그리핀정 등)",
+      "title": "세자르플러스정",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.5%",
       "kind": "service",
-      "visual": "당뇨병용제",
+      "visual": "BUSINESS",
       "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "CMO",
-      "caption": "타 제약사 의약품 위·수탁생산",
-      "kind": "bio",
-      "visual": "CMO",
+      "title": "에라빅스정",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "카덴자정5/80mg",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.4%",
+      "kind": "service",
+      "visual": "BUSINESS",
       "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
       "image_source": "Unsplash"
     }

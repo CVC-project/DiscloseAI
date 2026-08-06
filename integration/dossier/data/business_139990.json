@@ -151,23 +151,36 @@
     "rcept_no": "20260318001296"
   },
   "snippets": {
-    "overview": "아주스틸(주)의 주요 사업은 사업내용, 건설자재 등, 철강부문, 거래은행 등입니다. 계약을 따낸 뒤 제작·공사·납품을 거쳐 매출을 만듭니다. 당사의 매출은 내수판매 위주로 이루어지고 있으며, 대부분 고객사와의 직접거래를 통해 발생하고 있습니다. 이를 기반으로 주요고객사인 삼성전자와 LG전자에 당사의 고품질 컬러강판을 주로 납품하고 있습니다.- 가전산업의 특성상 제품의 수명주기(PLC, Product Life Cycle)가 짧아 1년~5년 주기로 신규모델을 개발하고 있습니다. 수주형 사업은 계약 규모뿐 아니라 납기, 원가, 프로젝트 구성이 이익을 좌우합니다.",
-    "segment_finance": "아주스틸(주)의 주요 사업은 사업내용, 건설자재 등, 철강부문, 거래은행 등입니다. 계약을 따낸 뒤 제작·공사·납품을 거쳐 매출을 만듭니다. 당사의 매출은 내수판매 위주로 이루어지고 있으며, 대부분 고객사와의 직접거래를 통해 발생하고 있습니다. 이를 기반으로 주요고객사인 삼성전자와 LG전자에 당사의 고품질 컬러강판을 주로 납품하고 있습니다.- 가전산업의 특성상 제품의 수명주기(PLC, Product Life Cycle)가 짧아 1년~5년 주기로 신규모델을 개발하고 있습니다. 수주형 사업은 계약 규모뿐 아니라 납기, 원가, 프로젝트 구성이 이익을 좌우합니다.",
+    "overview": "아주스틸(주)의 주요 사업은 사업내용, 건설자재 등, 철강부문, 거래은행 등입니다. 당사의 매출은 내수판매 위주로 이루어지고 있으며, 대부분 고객사와의 직접거래를 통해 발생하고 있습니다.",
+    "segment_finance": "아주스틸(주)의 주요 사업은 사업내용, 건설자재 등, 철강부문, 거래은행 등입니다. 당사의 매출은 내수판매 위주로 이루어지고 있으며, 대부분 고객사와의 직접거래를 통해 발생하고 있습니다.",
     "segment_breakdown": [
       {
         "name": "철강부문",
-        "desc": "철강 관련 제품·서비스",
-        "revenue_share": null
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.9%",
+        "revenue_share": 0.1495,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "거래은행",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
+        "name": "생활가전",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.6%",
+        "revenue_share": 0.1057,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "농협은행",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
+        "name": "건재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.5%",
+        "revenue_share": 0.2645,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동차 부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+        "revenue_share": 0.0153,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -184,40 +197,70 @@
       "SUSLIKE",
       "DP"
     ],
-    "investor_note": "아주스틸(주)의 주요 사업은 사업내용, 건설자재 등, 철강부문, 거래은행 등입니다. 계약을 따낸 뒤 제작·공사·납품을 거쳐 매출을 만듭니다. 당사의 매출은 내수판매 위주로 이루어지고 있으며, 대부분 고객사와의 직접거래를 통해 발생하고 있습니다. 이를 기반으로 주요고객사인 삼성전자와 LG전자에 당사의 고품질 컬러강판을 주로 납품하고 있습니다.- 가전산업의 특성상 제품의 수명주기(PLC, Product Life Cycle)가 짧아 1년~5년 주기로 신규모델을 개발하고 있습니다. 수주형 사업은 계약 규모뿐 아니라 납기, 원가, 프로젝트 구성이 이익을 좌우합니다."
+    "investor_note": "아주스틸(주)의 주요 사업은 사업내용, 건설자재 등, 철강부문, 거래은행 등입니다. 당사의 매출은 내수판매 위주로 이루어지고 있으며, 대부분 고객사와의 직접거래를 통해 발생하고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "철강부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.9%",
+        "revenue_share": 0.1495,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "생활가전",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.6%",
+        "revenue_share": 0.1057,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "건재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.5%",
+        "revenue_share": 0.2645,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동차 부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+        "revenue_share": 0.0153,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "철강부문",
-      "caption": "철강부문을 중심으로 매출을 만드는 사업입니다.",
+      "title": "철강",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.9%",
+      "kind": "material",
+      "visual": "STEEL",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "생활가전",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.6%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_141eab6519656e30.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "건재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.5%",
       "kind": "material",
       "visual": "MAT",
       "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "거래은행",
-      "caption": "예금과 대출에서 이자이익을 만드는 금융 서비스입니다.",
-      "kind": "bank",
-      "visual": "BANK",
-      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "농협은행",
-      "caption": "예금과 대출에서 이자이익을 만드는 금융 서비스입니다.",
-      "kind": "bank",
-      "visual": "BANK",
-      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
-      "kind": "display",
-      "visual": "OLED",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
-      "image_source": "Wikimedia Commons"
+      "title": "자동차 부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

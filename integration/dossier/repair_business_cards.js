@@ -6,6 +6,11 @@ const DATA_DIR = path.join(ROOT, "dossier", "data");
 const IMG = "../data/business_images/";
 
 const IMAGE_RULES = [
+  [["면제품", "라면", "당면", "국수", "NOODLE"], "business_image_food_noodle.svg", "Local visual"],
+  [["양념", "소스", "카레", "케찹", "케첩", "마요네즈", "SAUCE"], "business_image_food_sauce.svg", "Local visual"],
+  [["농수산", "참치", "가공식품", "간편식", "만두", "김치", "햇반", "PACKAGED", "CANNED"], "business_image_food_packaged.svg", "Local visual"],
+  [["소재식품", "설탕", "밀가루", "식용유", "원당", "유지", "INGREDIENT"], "business_image_food_ingredient.svg", "Local visual"],
+  [["사료", "축산", "FEED"], "business_image_food_feed.svg", "Local visual"],
   [["HBM", "고대역폭"], "business_image_df7b448e6d568266.jpg", "Wikimedia Commons"],
   [["DRAM", "메모리"], "business_image_10774ca82ea41202.jpg", "Wikimedia Commons"],
   [["NAND", "SSD", "스토리지"], "business_image_b24ab2723180c79f.jpg", "Wikimedia Commons"],
@@ -40,14 +45,29 @@ const BAD_PARTS = [
   "내부거래", "금융보증계약", "계약자산", "매출채권", "리스부채", "사용권자산",
   "영업부문", "보고부문", "연결조정", "조정", "B2B전자결제",
   "제품매출", "테스트 매출",
+  "직접판매", "간접판매", "부가서비스제공가능여부", "무인증", "특징",
+  "- 상용", "일용직 인사", "노무법인", "관련 부속품", "제품용역", "개발",
+  "코스닥증권", "신규 서비스 확장성", "예산", "카드",
 ];
 
 const CUSTOMER_PARTS = [
   "삼성전자, SK하이닉스", "삼성전자", "SK하이닉스", "삼성디스플레이", "윈팩",
   "LG전자", "현대차", "기아", "Apple", "NVIDIA", "TSMC", "Micron", "Intel", "Qualcomm",
+  "Procera Networks", "MicroSoft", "Microsoft", "현대정보기술",
 ];
 
 const EXACT_OVERRIDES = {
+  "007310": [
+    ["면제품류", "라면, 당면, 국수처럼 오뚜기의 대표적인 면류 제품을 제조·판매합니다.", "consumer", "NOODLE"],
+    ["양념소스류", "카레, 케첩, 마요네즈, 소스류처럼 가정식 조리에 쓰이는 제품군입니다.", "consumer", "SAUCE"],
+    ["농수산가공품류", "참치캔과 즉석식품 등 저장·간편식 수요에 연결되는 가공식품입니다.", "consumer", "CANNED"],
+  ],
+  "097950": [
+    ["식품사업", "햇반, 만두, 김치, 간편식 등 국내외 소비자 식품 브랜드가 주력입니다.", "consumer", "FOOD"],
+    ["소재식품", "설탕, 밀가루, 식용유 등 식품 제조와 외식 원가에 연결되는 기초 식품 소재를 공급합니다.", "consumer", "INGREDIENT"],
+    ["바이오·FNT", "아미노산, 조미소재, 영양 소재처럼 글로벌 식품·사료 산업에 쓰이는 바이오 소재를 판매합니다.", "bio", "BIO"],
+    ["사료·축산", "사료와 축산 사업은 곡물 가격과 글로벌 축산 수요 영향을 함께 받습니다.", "consumer", "FEED"],
+  ],
   "066590": [
     ["자동차 파워트레인 부품", "변속기·엔진 등에 들어가는 알루미늄 다이캐스팅 부품을 생산합니다.", "auto", "PARTS"],
     ["자동차부품 상품 유통", "완성차와 부품 고객사의 생산·정비 수요에 맞춰 자동차부품 상품을 공급합니다.", "auto", "AUTO"],
@@ -73,6 +93,21 @@ const EXACT_OVERRIDES = {
     ["반도체 패키징·테스트", "반도체 칩을 제품으로 쓸 수 있게 포장하고 검사하는 후공정 서비스입니다.", "chip", "PKG"],
     ["반도체 재료·Si-Parts", "식각 장비에 들어가는 실리콘·실리콘카바이드 소모성 부품을 공급합니다.", "chip", "Si"],
     ["반도체 공정소모품", "고객사의 공정 장비에서 반복 교체되는 부품이라 설비투자와 가동률 영향을 받습니다.", "chip", "PARTS"],
+  ],
+  "039570": [
+    ["건설솔루션", "건축·기전·조경 인테리어 등 공간 시공과 시설 구축 프로젝트를 수행합니다.", "construction", "BUILD"],
+    ["FM·PM 시설관리", "건물 설비와 자산을 운영·관리해 반복적인 관리 서비스 매출을 만듭니다.", "service", "FM"],
+    ["라이프솔루션", "공간 운영과 생활 편의 서비스를 결합해 고객 건물의 운영 효율을 높입니다.", "service", "SERVICE"],
+  ],
+  "042500": [
+    ["네트워크 구축·통합", "기업 고객의 네트워크 장비를 설계·구축하고 시스템을 통합하는 IT 서비스입니다.", "telecom", "NET"],
+    ["클라우드 서비스", "클라우드 인프라와 관련 리셀·운영 서비스를 제공해 반복 수익을 만듭니다.", "platform", "CLOUD"],
+    ["데이터센터 인프라", "서버와 네트워크 장비가 안정적으로 돌아가도록 인프라 구축·운영을 지원합니다.", "infra", "DATA"],
+  ],
+  "046310": [
+    ["무전기·통신장비", "무전기와 통신장비를 생산해 산업·특수 통신 수요에 대응합니다.", "telecom", "RADIO"],
+    ["블랙박스·차량기기", "차량용 영상기기와 전장 제품을 공급하는 전자장비 사업입니다.", "auto", "DVR"],
+    ["레이더디텍터", "차량용 전자기기 라인업 중 운전자 보조 성격의 제품군입니다.", "auto", "RADAR"],
   ],
   "166090": [
     ["Si-Parts", "반도체 전공정 중 에칭 장비 안에서 웨이퍼를 깎는 데 쓰이는 실리콘 소모성 부품입니다.", "chip", "Si"],
@@ -168,6 +203,9 @@ function isBadName(name, sector = "") {
 
 function sectorFallbackTitles(payload) {
   const sector = `${payload.sector || ""} ${payload.display_category || ""}`;
+  if (/컴퓨터 프로그래밍|시스템 통합|정보서비스|SI|소프트웨어/.test(sector)) return ["시스템 구축·통합", "IT 인프라 운영", "소프트웨어·솔루션"];
+  if (/통신|광케이블|네트워크/.test(sector)) return ["네트워크 장비·공사", "통신 인프라", "유지보수 서비스"];
+  if (/식품|음식료|농수산|가공식품|음료/.test(sector)) return ["식품사업", "소재식품", "가공식품"];
   if (/소매|유통|마트|백화점|할인점/.test(sector)) return ["할인점", "전문점·온라인", "식품·생활용품"];
   if (/건설|토목|건축/.test(sector)) return ["건축", "토목", "주택·개발"];
   if (/섬유|의복|패션|방적/.test(sector)) return ["의류·섬유제품", "브랜드·상품", "임대·유통"];
@@ -183,7 +221,14 @@ function sectorFallbackTitles(payload) {
 function sectorType(payload) {
   const s = `${payload.sector || ""} ${payload.display_category || ""} ${payload.name || ""}`;
   if (/금융|은행|증권|보험/.test(s)) return "finance";
+  if (/식품|음식료|농수산|가공식품|음료/.test(s)) return "food";
   if (/반도체|전자부품|정밀기기/.test(s)) return "semiconductor";
+  if (/SI|소프트웨어|IT서비스|정보서비스|시스템|데이터센터/.test(s)) return "it_service";
+  if (/통신|광케이블|네트워크/.test(s)) return "telecom";
+  if (/건설|토목|건축|플랜트/.test(s)) return "construction";
+  if (/섬유|의류|패션/.test(s)) return "textile";
+  if (/시멘트|레미콘|건자재|유리|목재/.test(s)) return "building_material";
+  if (/화학|석유|정유|소재|탄소/.test(s)) return "chemical";
   if (/소매|유통|마트|백화점/.test(s)) return "retail";
   if (/경비|경호|보안/.test(s)) return "security";
   if (/자동차/.test(s)) return "auto";
@@ -192,21 +237,50 @@ function sectorType(payload) {
   return "general";
 }
 
+function incompatibleWordsForType(type) {
+  const common = ["금융보증계약", "계약자산", "매출채권", "리스부채", "사용권자산", "단기매매증권", "현금,B2B전자결제"];
+  if (type === "semiconductor") return [...common, "항공기", "방산", "화학약품", "신기술사업금융", "데이터센터", "전력사업"];
+  if (type === "food") return [...common, "항공기", "방산", "데이터센터", "반도체", "전력사업", "신기술사업금융"];
+  if (type === "finance") return ["항공기", "방산", "화학약품", "반도체 공정소모품", "패키징", "식품사업", "데이터센터"];
+  if (type === "retail") return [...common, "항공기", "방산", "반도체", "전력사업"];
+  if (type === "it_service") return [...common, "항공기", "방산", "식품사업", "화학약품", "은행", "보험", "증권"];
+  if (type === "telecom") return [...common, "MLCC", "구리", "금융보증", "데이터센터"];
+  if (type === "security") return [...common, "항공기", "방산", "식품사업", "화학약품"];
+  if (type === "chemical") return [...common, "항공기", "데이터센터", "금융보증"];
+  return common;
+}
+
 function productScore(name, payload) {
   const n = text(name);
   const type = sectorType(payload);
   let score = 10;
+  if (incompatibleWordsForType(type).some((word) => n.includes(word))) score -= 160;
   if (type === "semiconductor") {
     if (/패키징|테스트|PKG|반도체칩부품화|OSAT/i.test(n)) score += 95;
     if (/Si-Parts|SiC-Parts|실리콘부품|공정소모품|Electrode|Ring|식각/i.test(n)) score += 90;
     if (/Probe|Probe Card|Contact Probe|Interposer|검사장치|BGA|PCB/i.test(n)) score += 80;
     if (/DRAM|NAND|HBM|CIS|이미지센서|Foundry|파운드리/i.test(n)) score += 70;
     if (/SSD|배터리|구리|화학약품/i.test(n)) score -= 45;
+  } else if (type === "food") {
+    if (/식품|소재식품|가공식품|면|라면|당면|국수|소스|양념|카레|케찹|케첩|마요네즈|참치|농수산|간편식|HMR|만두|김치|햇반|바이오|FNT|아미노산|조미소재|사료|축산/.test(n)) score += 90;
+    if (/항공|항공기|방산|데이터센터|전력|반도체|금융보증|B2B전자결제|의약품|신기술사업금융/.test(n)) score -= 140;
   } else if (type === "retail") {
     if (/할인점|트레이더스|마트|백화점|온라인|이커머스|식품|생활|전문점/.test(n)) score += 80;
     if (/IT서비스|데이터센터|금융보증/.test(n)) score -= 60;
   } else if (type === "security") {
     if (/보안|시큐리티|경비|FM|PM|시설관리|자산관리|보안SI/.test(n)) score += 80;
+  } else if (type === "it_service") {
+    if (/SI|IT서비스|시스템|유지보수|인프라|데이터센터|클라우드|소프트웨어|솔루션|플랫폼|보안SI|VAN/.test(n)) score += 85;
+  } else if (type === "telecom") {
+    if (/통신|광케이블|광섬유|네트워크|OPGW|전력선|케이블/.test(n)) score += 85;
+  } else if (type === "construction") {
+    if (/건설|건축|토목|플랜트|주택|분양|공사|개발/.test(n)) score += 85;
+  } else if (type === "textile") {
+    if (/의류|패션|섬유|원단|브랜드|봉제|직물/.test(n)) score += 85;
+  } else if (type === "building_material") {
+    if (/시멘트|레미콘|건자재|유리|목재|합판|골재/.test(n)) score += 85;
+  } else if (type === "chemical") {
+    if (/화학|석유|정유|소재|수지|필름|도료|탄소|첨단소재|윤활유/.test(n)) score += 85;
   } else if (type === "finance") {
     if (/은행|대출|예금|카드|증권|브로커리지|보험|자산관리|운용|리스/.test(n)) score += 70;
   } else {
@@ -238,6 +312,23 @@ function kindVisual(name, payload) {
 
 function captionFor(name, payload) {
   const n = text(name);
+  if (/시스템 유지보수/.test(n)) return "고객사의 업무 시스템과 장비가 안정적으로 돌아가도록 운영·점검하는 IT 서비스입니다.";
+  if (/시스템 구축·통합/.test(n)) return "기업 업무에 필요한 서버, 네트워크, 소프트웨어를 묶어 하나의 시스템으로 구축합니다.";
+  if (/IT 인프라 운영/.test(n)) return "서버, 네트워크, 보안 장비 같은 기업 IT 기반을 운영·관리하는 서비스입니다.";
+  if (/데이터센터 인프라/.test(n)) return "서버와 네트워크 장비가 안정적으로 돌아가도록 데이터센터 기반을 구축·운영합니다.";
+  if (/클라우드 서비스/.test(n)) return "기업이 서버와 소프트웨어를 직접 보유하지 않고 빌려 쓰도록 돕는 IT 서비스입니다.";
+  if (/소프트웨어·솔루션/.test(n)) return "고객 업무를 자동화하거나 관리 효율을 높이는 소프트웨어 제품군입니다.";
+  if (/플랫폼 서비스/.test(n)) return "여러 이용자와 서비스를 한곳에서 연결해 반복 이용을 만드는 디지털 서비스입니다.";
+  if (/콘텐츠 서비스/.test(n)) return "차량·모바일·온라인 환경에서 소비되는 콘텐츠와 부가 서비스를 제공합니다.";
+  if (/HR·급여관리 솔루션/.test(n)) return "임직원 급여, 인사, 근태 같은 기업 관리 업무를 소프트웨어로 처리하는 서비스입니다.";
+  if (/무선랜/.test(n)) return "기업과 공공기관의 무선 네트워크 접속 환경을 구축하는 장비·서비스입니다.";
+  if (/컨설팅/.test(n)) return "고객사의 업무 흐름과 IT 환경을 진단하고 시스템 개선 방향을 설계하는 서비스입니다.";
+  if (/B2B 정비사업/.test(n)) return "차량과 서비스 사업자가 연결되는 기업 대상 정비·관리 플랫폼 사업입니다.";
+  if (/면제품|라면|당면|국수/.test(n)) return "라면, 당면, 국수처럼 반복 구매가 많은 면류 제품군입니다.";
+  if (/양념|소스|카레|케찹|케첩|마요네즈/.test(n)) return "가정식 조리와 외식 수요에 함께 쓰이는 소스·조미 제품군입니다.";
+  if (/농수산|참치|가공식품|간편식|HMR|만두|김치|햇반/.test(n)) return "저장식품과 간편식처럼 소비자 식탁에 바로 닿는 가공식품입니다.";
+  if (/소재식품|설탕|밀가루|식용유|원당|유지류/.test(n)) return "다른 식품을 만드는 데 들어가는 기초 소재라 원재료 가격 영향을 받습니다.";
+  if (/사료|축산|F&C/.test(n)) return "곡물 가격과 축산 수요에 영향을 받는 사료·축산 사업입니다.";
   if (/패키징|테스트|PKG|반도체칩부품화|OSAT/i.test(n)) return "반도체 칩을 제품으로 쓸 수 있게 포장하고 검사하는 후공정 서비스입니다.";
   if (/Si-Parts|SiC-Parts|실리콘부품|공정소모품|Electrode|Ring|식각/i.test(n)) return "반도체 공정 장비에 들어가는 교체·소모성 부품입니다.";
   if (/Probe|Probe Card|Contact Probe|Interposer|검사장치/i.test(n)) return "반도체와 전자제품이 정상 작동하는지 검사하는 장비·부품입니다.";
@@ -267,16 +358,40 @@ function makeCard(title, payload) {
   return { ...card, image, image_source };
 }
 
+function normalizeCandidateName(name, payload) {
+  const n = text(name);
+  const type = sectorType(payload);
+  if (type === "it_service") {
+    if (/유지보수/.test(n)) return "시스템 유지보수";
+    if (/급여|인사|노무/.test(n)) return "HR·급여관리 솔루션";
+    if (/차세대|SI|시스템.?통합|구축/.test(n)) return "시스템 구축·통합";
+    if (/인프라|서버|네트워크/.test(n)) return "IT 인프라 운영";
+    if (/데이터센터/.test(n)) return "데이터센터 인프라";
+    if (/클라우드|Cloud/i.test(n)) return "클라우드 서비스";
+    if (/VAN/.test(n)) return "VAN 대행관리";
+    if (/소프트웨어|솔루션|자사제품/.test(n)) return "소프트웨어·솔루션";
+    if (/플랫폼/.test(n)) return "플랫폼 서비스";
+    if (/콘텐츠/.test(n)) return "콘텐츠 서비스";
+    if (/직접판매|간접판매/.test(n)) return "";
+  }
+  if (type === "telecom") {
+    if (/광케이블|광섬유|OPGW/.test(n)) return "광케이블·통신선";
+    if (/네트워크|통신/.test(n)) return "통신 네트워크";
+    if (/유지보수/.test(n)) return "유지보수 서비스";
+  }
+  return n;
+}
+
 function candidateNames(payload) {
   const snippets = payload.snippets || {};
   const candidates = [];
+  for (const product of snippets.products || []) candidates.push(normalizeCandidateName(product, payload));
   for (const seg of snippets.segment_breakdown || []) {
     if (seg && seg.name && text(seg.desc) !== "사업보고서상 주요 사업부문") {
-      candidates.push(text(seg.name));
+      candidates.push(normalizeCandidateName(seg.name, payload));
     }
   }
-  for (const product of snippets.products || []) candidates.push(text(product));
-  for (const card of payload.business_cards || []) candidates.push(text(card.title));
+  for (const card of payload.business_cards || []) candidates.push(normalizeCandidateName(card.title, payload));
   return [...new Set(candidates.filter(Boolean))];
 }
 
@@ -318,6 +433,31 @@ function repairCards(payload) {
   return cards;
 }
 
+function cleanOverviewText(value, payload) {
+  const raw = text(value);
+  if (!raw) return raw;
+  const type = sectorType(payload);
+  const banned = [...incompatibleWordsForType(type), ...CUSTOMER_PARTS];
+  if (!["construction", "ship"].includes(type)) {
+    banned.push("계약을 따낸 뒤", "제작·공사·납품", "수주형 사업", "건설 사업", "공사·납품", "프로젝트 구성이 이익");
+  }
+  if (!["semiconductor", "it_service", "telecom", "security"].includes(type)) {
+    banned.push("데이터센터", "네트워크 구축", "Cloud서비스 리셀러");
+  }
+  if (["it_service", "telecom", "security"].includes(type)) {
+    banned.push("제품을 만들고 판매하는 제조 기반 회사", "직접판매", "간접판매");
+  }
+  if (type !== "food") {
+    banned.push("면제품류", "농수산가공품류", "양념소스류", "종합식품기업");
+  }
+  const sentences = raw
+    .split(/(?<=[.!?。]|다\.|니다\.)\s+/)
+    .map((sentence) => sentence.trim())
+    .filter(Boolean)
+    .filter((sentence) => !banned.some((word) => sentence.includes(word)));
+  return sentences.join(" ");
+}
+
 function cleanSnippets(payload) {
   const snippets = payload.snippets || {};
   snippets.segment_breakdown = (snippets.segment_breakdown || []).filter((seg) => {
@@ -325,6 +465,9 @@ function cleanSnippets(payload) {
     return text(seg.desc) !== "사업보고서상 주요 사업부문";
   });
   snippets.products = [...new Set((snippets.products || []).map(text).filter((name) => productScore(name, payload) > -20 && !isBadName(name, payload.sector || "")))];
+  snippets.overview = cleanOverviewText(snippets.overview, payload);
+  snippets.segment_finance = cleanOverviewText(snippets.segment_finance, payload);
+  snippets.investor_note = cleanOverviewText(snippets.investor_note, payload);
   payload.snippets = snippets;
 }
 
@@ -335,8 +478,13 @@ function needsRepair(payload) {
   if (cards.length < 2) return true;
   if (cards.some((card) => isBadName(card.title, payload.sector || ""))) return true;
   if (cards.some((card) => text(card.caption).length < 8)) return true;
+  if (cards.some((card) => /다른 식품|을 중심으로 매출을 만드는 사업입니다/.test(card.caption || ""))) return true;
   const type = sectorType(payload);
+  const banned = incompatibleWordsForType(type);
+  if (cards.some((card) => banned.some((word) => `${card.title} ${card.caption}`.includes(word)))) return true;
   if (type === "semiconductor" && cards.some((card) => /배터리|구리|화학약품|현금|B2B/.test(`${card.title} ${card.caption}`))) return true;
+  if (type === "food" && cards.some((card) => /항공|항공기|방산|데이터센터|전력|금융보증|B2B전자결제|신기술사업금융/.test(`${card.title} ${card.caption}`))) return true;
+  if (type === "food" && new Set(cards.map((card) => card.image)).size === 1 && cards.length >= 3) return true;
   if (cards.some((card) => /사업보고서상 주요 사업부문|주요 사업부문입니다/.test(card.caption || ""))) return true;
   return false;
 }
@@ -347,12 +495,12 @@ for (const file of fs.readdirSync(DATA_DIR).filter((name) => /^business_\d{6}\.j
   const full = path.join(DATA_DIR, file);
   const payload = readJson(full);
   scanned += 1;
-  const before = JSON.stringify(payload.business_cards || []);
+  const before = JSON.stringify(payload);
   cleanSnippets(payload);
   if (needsRepair(payload)) {
     payload.business_cards = repairCards(payload);
   }
-  if (JSON.stringify(payload.business_cards || []) !== before) {
+  if (JSON.stringify(payload) !== before) {
     writeJson(full, payload);
     repaired += 1;
   }

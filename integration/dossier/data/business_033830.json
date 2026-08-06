@@ -153,7 +153,15 @@
   "snippets": {
     "overview": "티비씨(TBC)는 대구·경북 지역의 지상파 방송사로 SBS와 네트워크 협정을 맺고 TV·라디오·DMB 방송을 송출하며, 방송광고·협찬 수입 외에 공연 투자, 행사대행, 위탁 교육사업으로 매출원을 넓히고 있습니다. 매출의 약 55%가 방송사업에서, 45%가 공연·행사·교육 등 기타사업에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 426억 원으로 전년 대비 6.0% 늘었고 영업이익도 소폭 증가했지만, 당기순이익은 거의 제자리걸음이었습니다. 뉴미디어 확산으로 방송광고 매출은 계속 줄고 있지만 공연·행사 수익 확대가 이를 상쇄하는 모습입니다. 부채비율은 4.5%로 재무구조가 매우 안정적입니다.",
     "segment_finance": "티비씨(TBC)는 대구·경북 지역의 지상파 방송사로 SBS와 네트워크 협정을 맺고 TV·라디오·DMB 방송을 송출하며, 방송광고·협찬 수입 외에 공연 투자, 행사대행, 위탁 교육사업으로 매출원을 넓히고 있습니다. 매출의 약 55%가 방송사업에서, 45%가 공연·행사·교육 등 기타사업에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 426억 원으로 전년 대비 6.0% 늘었고 영업이익도 소폭 증가했지만, 당기순이익은 거의 제자리걸음이었습니다. 뉴미디어 확산으로 방송광고 매출은 계속 줄고 있지만 공연·행사 수익 확대가 이를 상쇄하는 모습입니다. 부채비율은 4.5%로 재무구조가 매우 안정적입니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "방송협찬",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.0%",
+        "revenue_share": 0.16,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "지상파 TV 방송광고",
       "라디오(FM)·DMB 방송",
@@ -161,20 +169,42 @@
       "공연·문화행사 투자·대행",
       "위탁 교육사업"
     ],
-    "investor_note": "티비씨(TBC)는 대구·경북 지역의 지상파 방송사로 SBS와 네트워크 협정을 맺고 TV·라디오·DMB 방송을 송출하며, 방송광고·협찬 수입 외에 공연 투자, 행사대행, 위탁 교육사업으로 매출원을 넓히고 있습니다. 매출의 약 55%가 방송사업에서, 45%가 공연·행사·교육 등 기타사업에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 426억 원으로 전년 대비 6.0% 늘었고 영업이익도 소폭 증가했지만, 당기순이익은 거의 제자리걸음이었습니다. 뉴미디어 확산으로 방송광고 매출은 계속 줄고 있지만 공연·행사 수익 확대가 이를 상쇄하는 모습입니다. 부채비율은 4.5%로 재무구조가 매우 안정적입니다."
+    "investor_note": "티비씨(TBC)는 대구·경북 지역의 지상파 방송사로 SBS와 네트워크 협정을 맺고 TV·라디오·DMB 방송을 송출하며, 방송광고·협찬 수입 외에 공연 투자, 행사대행, 위탁 교육사업으로 매출원을 넓히고 있습니다. 매출의 약 55%가 방송사업에서, 45%가 공연·행사·교육 등 기타사업에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 426억 원으로 전년 대비 6.0% 늘었고 영업이익도 소폭 증가했지만, 당기순이익은 거의 제자리걸음이었습니다. 뉴미디어 확산으로 방송광고 매출은 계속 줄고 있지만 공연·행사 수익 확대가 이를 상쇄하는 모습입니다. 부채비율은 4.5%로 재무구조가 매우 안정적입니다.",
+    "product_service_segments": [
+      {
+        "name": "방송사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.2%",
+        "revenue_share": 0.172,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "방송협찬",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.0%",
+        "revenue_share": 0.16,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타방송수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.9%",
+        "revenue_share": 0.219,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.9%",
+        "revenue_share": 0.449,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "지상파 TV 방송광고",
-      "caption": "지상파 TV 방송광고을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_141eab6519656e30.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "라디오(FM)·DMB 방송",
-      "caption": "건물과 부동산 시설을 운영·관리하는 인프라 서비스입니다.",
+      "title": "방송사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.2%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
@@ -182,18 +212,26 @@
     },
     {
       "title": "방송협찬",
-      "caption": "방송협찬을 중심으로 매출을 만드는 사업입니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.0%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "공연·문화행사 투자·대행",
-      "caption": "공연·문화행사 투자·대행을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "securities",
-      "visual": "AUM",
-      "image": "../data/business_images/business_image_c1540b930934e19f.avif",
+      "title": "기타방송수익",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "기타사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     }
   ],

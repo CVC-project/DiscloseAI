@@ -153,7 +153,29 @@
   "snippets": {
     "overview": "엠투아이의 주요 제품·서비스는 배터리, 스마트HMI, 명령, 스마트SCADA, 분석, W) 판매입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 고객사의 제품 설계, 생산 계획, 품질 데이터 등이 설비와 직접 연동되며, 제조 밸류체인 간 데이터 흐름을 실시간으로 통합합니다. 자사 개발 제품인 HMI, SCADA, 산업용 DEVICE, 스마트팩토리 솔루션은 다양한 산업군에 적용되어 고도화된 제조 환경과 생산성 혁신을 이끌고 있습니다.특히 고객 맞춤형 솔루션 설계 역량을 기반으로, 제조 공정의 디지털 전환과 운영 효율화를 동시에 실현할 수 있는 통합 플랫폼을 제공합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "엠투아이의 주요 제품·서비스는 배터리, 스마트HMI, 명령, 스마트SCADA, 분석, W) 판매입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 고객사의 제품 설계, 생산 계획, 품질 데이터 등이 설비와 직접 연동되며, 제조 밸류체인 간 데이터 흐름을 실시간으로 통합합니다. 자사 개발 제품인 HMI, SCADA, 산업용 DEVICE, 스마트팩토리 솔루션은 다양한 산업군에 적용되어 고도화된 제조 환경과 생산성 혁신을 이끌고 있습니다.특히 고객 맞춤형 솔루션 설계 역량을 기반으로, 제조 공정의 디지털 전환과 운영 효율화를 동시에 실현할 수 있는 통합 플랫폼을 제공합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "스마트SCADA",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.01,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "스마트DEVICE",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+        "revenue_share": 0.015,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "물류 로봇 및자동화 시스템",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 48.5%",
+        "revenue_share": 0.485,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "스마트HMI",
       "명령",
@@ -167,39 +189,61 @@
       "물류 로봇",
       "자동화 시스템"
     ],
-    "investor_note": "엠투아이의 주요 제품·서비스는 배터리, 스마트HMI, 명령, 스마트SCADA, 분석, W) 판매입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 고객사의 제품 설계, 생산 계획, 품질 데이터 등이 설비와 직접 연동되며, 제조 밸류체인 간 데이터 흐름을 실시간으로 통합합니다. 자사 개발 제품인 HMI, SCADA, 산업용 DEVICE, 스마트팩토리 솔루션은 다양한 산업군에 적용되어 고도화된 제조 환경과 생산성 혁신을 이끌고 있습니다.특히 고객 맞춤형 솔루션 설계 역량을 기반으로, 제조 공정의 디지털 전환과 운영 효율화를 동시에 실현할 수 있는 통합 플랫폼을 제공합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "엠투아이의 주요 제품·서비스는 배터리, 스마트HMI, 명령, 스마트SCADA, 분석, W) 판매입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 고객사의 제품 설계, 생산 계획, 품질 데이터 등이 설비와 직접 연동되며, 제조 밸류체인 간 데이터 흐름을 실시간으로 통합합니다. 자사 개발 제품인 HMI, SCADA, 산업용 DEVICE, 스마트팩토리 솔루션은 다양한 산업군에 적용되어 고도화된 제조 환경과 생산성 혁신을 이끌고 있습니다.특히 고객 맞춤형 솔루션 설계 역량을 기반으로, 제조 공정의 디지털 전환과 운영 효율화를 동시에 실현할 수 있는 통합 플랫폼을 제공합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 45.7%",
+        "revenue_share": 0.457,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "스마트SCADA",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.01,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "스마트DEVICE",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+        "revenue_share": 0.015,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "물류 로봇 및자동화 시스템",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 48.5%",
+        "revenue_share": 0.485,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "스마트HMI",
-      "caption": "스마트HMI을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
+      "title": "대형마트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+      "kind": "consumer",
+      "visual": "MART",
       "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "명령",
-      "caption": "명령을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "title": "전기차·하이브리드",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+      "kind": "auto",
+      "visual": "EV",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "스마트SCADA",
-      "caption": "스마트SCADA을 중심으로 매출을 만드는 사업입니다.",
+      "title": "물류 로봇 및자동화 시스템",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 48.5%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "분석",
-      "caption": "분석을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
       "image_source": "Unsplash"
     }
   ],

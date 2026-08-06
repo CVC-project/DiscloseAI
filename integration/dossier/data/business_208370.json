@@ -155,9 +155,25 @@
     "segment_finance": "(주)셀바스헬스케어의 주요 제품·서비스는 방산, 의료진단기기, 체성분분석기, 비중, 직접판매, 점자정보단말기입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 한소네6는 국내시장에서 독보적으로 시장을 점유하고 있으며, 세계 최대 시장인 미국 시각장애인 학교에 진입하는 등 다양한 고객을 확보하고 있습니다. 보고서 작성 기준일 현재 당사의 생산설비 현황은 다음과 같습니다.(기준일 : 2025년 12월 31일) (단위: 천원) 진행중인 투자 또는 향후 투자계획 아큐닉(ACCUNIQ), 힘스(HIMS) 전 사업부문의 제품 고도화를 위한 연구 개발에 대한 투자가 지속적으로 진행되고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "국민건강보험공단",
-        "desc": "보험계약과 자산운용 중심 서비스",
-        "revenue_share": null
+        "name": "의료진단기기(ACCUNIQ)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.1%",
+        "revenue_share": 0.3112,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전자동혈압계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.6%",
+        "revenue_share": 0.126,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "보조공학기기(HIMS)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.0%",
+        "revenue_share": 0.3099,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -165,7 +181,6 @@
       "의료진단기기",
       "체성분분석기",
       "비중",
-      "직접판매",
       "점자정보단말기",
       "임상학술 활동",
       "비만학회",
@@ -174,36 +189,66 @@
       "마케팅",
       "판촉 활동"
     ],
-    "investor_note": "(주)셀바스헬스케어의 주요 제품·서비스는 방산, 의료진단기기, 체성분분석기, 비중, 직접판매, 점자정보단말기입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 한소네6는 국내시장에서 독보적으로 시장을 점유하고 있으며, 세계 최대 시장인 미국 시각장애인 학교에 진입하는 등 다양한 고객을 확보하고 있습니다. 보고서 작성 기준일 현재 당사의 생산설비 현황은 다음과 같습니다.(기준일 : 2025년 12월 31일) (단위: 천원) 진행중인 투자 또는 향후 투자계획 아큐닉(ACCUNIQ), 힘스(HIMS) 전 사업부문의 제품 고도화를 위한 연구 개발에 대한 투자가 지속적으로 진행되고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)셀바스헬스케어의 주요 제품·서비스는 방산, 의료진단기기, 체성분분석기, 비중, 직접판매, 점자정보단말기입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 한소네6는 국내시장에서 독보적으로 시장을 점유하고 있으며, 세계 최대 시장인 미국 시각장애인 학교에 진입하는 등 다양한 고객을 확보하고 있습니다. 보고서 작성 기준일 현재 당사의 생산설비 현황은 다음과 같습니다.(기준일 : 2025년 12월 31일) (단위: 천원) 진행중인 투자 또는 향후 투자계획 아큐닉(ACCUNIQ), 힘스(HIMS) 전 사업부문의 제품 고도화를 위한 연구 개발에 대한 투자가 지속적으로 진행되고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "의료진단기기(ACCUNIQ)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.1%",
+        "revenue_share": 0.3112,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전자동혈압계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.6%",
+        "revenue_share": 0.126,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타(용역, 상품 등)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.7%",
+        "revenue_share": 0.117,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "보조공학기기(HIMS)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.0%",
+        "revenue_share": 0.3099,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "국민건강보험공단",
-      "caption": "보험료와 손해율이 실적을 좌우하는 금융 서비스입니다.",
-      "kind": "insurance",
-      "visual": "INS",
-      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
-      "image_source": "Wikimedia Commons"
+      "title": "진단·분석",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.1%",
+      "kind": "bio",
+      "visual": "DIAGNOSTIC",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "방산",
-      "caption": "방산을 중심으로 매출을 만드는 사업입니다.",
+      "title": "전자동혈압계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.6%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "의료진단기기",
-      "caption": "의료진단기기을 중심으로 매출을 만드는 사업입니다.",
+      "title": "기타(용역, 상품 등)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.7%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "체성분분석기",
-      "caption": "체성분분석기을 중심으로 매출을 만드는 사업입니다.",
+      "title": "보조공학기기(HIMS)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.0%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",

@@ -4,43 +4,43 @@
   "stock_code": "317450",
   "corp_code": "00179489",
   "grade": "A",
-  "total": 100.0,
+  "total": 100,
   "market_cap": null,
   "last_price": null,
   "ttm_per": null,
   "dart_url": "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260325001031",
   "latest_year": {
     "year": 2025,
-    "revenue": 287254358952.0,
-    "cogs": 113268995079.0,
-    "operating_income": 92498324556.0,
-    "net_income": 81435216634.0,
-    "operating_cashflow": 81561053982.0,
-    "investing_cashflow": -263529333224.0,
-    "financing_cashflow": 181112944888.0,
-    "total_assets": 841674647202.0,
-    "total_liabilities": 47296540812.0,
-    "total_equity": 794378106390.0,
-    "current_assets": 643308726757.0,
-    "current_liabilities": 46184037069.0,
-    "long_term_debt": 1112503743.0
+    "revenue": 287254358952,
+    "cogs": 113268995079,
+    "operating_income": 92498324556,
+    "net_income": 81435216634,
+    "operating_cashflow": 81561053982,
+    "investing_cashflow": -263529333224,
+    "financing_cashflow": 181112944888,
+    "total_assets": 841674647202,
+    "total_liabilities": 47296540812,
+    "total_equity": 794378106390,
+    "current_assets": 643308726757,
+    "current_liabilities": 46184037069,
+    "long_term_debt": 1112503743
   },
   "history": [
     {
       "year": 2025,
-      "revenue": 287254358952.0,
-      "cogs": 113268995079.0,
-      "operating_income": 92498324556.0,
-      "net_income": 81435216634.0,
-      "operating_cashflow": 81561053982.0,
-      "investing_cashflow": -263529333224.0,
-      "financing_cashflow": 181112944888.0,
-      "total_assets": 841674647202.0,
-      "total_liabilities": 47296540812.0,
-      "total_equity": 794378106390.0,
-      "current_assets": 643308726757.0,
-      "current_liabilities": 46184037069.0,
-      "long_term_debt": 1112503743.0
+      "revenue": 287254358952,
+      "cogs": 113268995079,
+      "operating_income": 92498324556,
+      "net_income": 81435216634,
+      "operating_cashflow": 81561053982,
+      "investing_cashflow": -263529333224,
+      "financing_cashflow": 181112944888,
+      "total_assets": 841674647202,
+      "total_liabilities": 47296540812,
+      "total_equity": 794378106390,
+      "current_assets": 643308726757,
+      "current_liabilities": 46184037069,
+      "long_term_debt": 1112503743
     }
   ],
   "modules": [
@@ -49,35 +49,35 @@
       "score": null,
       "raw": null,
       "note": "1년 이력 — 단년도 OCF/영업이익은 변동성이 커 M1 제외",
-      "weight": 1.0
+      "weight": 1
     },
     {
       "name": "M2",
       "score": null,
       "raw": null,
       "note": "패널 부족(t,t-1 필요)",
-      "weight": 1.0
+      "weight": 1
     },
     {
       "name": "M3",
-      "score": 100.0,
+      "score": 100,
       "raw": 0.05953907897454032,
       "note": "부채비율=6% (동종업계 KSIC-212 104개사, P10/P50/P90=16/64/146%)",
-      "weight": 1.0
+      "weight": 1
     },
     {
       "name": "M4",
       "score": null,
       "raw": 0.3220084279781335,
       "note": "유효 영업이익률 1년 — 안정성 판단에는 최소 2년 필요",
-      "weight": 1.0
+      "weight": 1
     },
     {
       "name": "M5",
       "score": null,
       "raw": null,
       "note": "패널 1년 — 전년 자본 필요(최소 2년)",
-      "weight": 1.0
+      "weight": 1
     }
   ],
   "percentile": {},
@@ -91,24 +91,25 @@
     "segment_finance": "명인제약은 뇌졸중·파킨슨·조현병·우울증 치료제 등 중추신경계(CNS)에 작용하는 정신신경용제를 주력으로 하는 제약회사로, IQVIA 2025년 4분기 기준 국내 정신신경용제 시장 점유율 1위를 차지하고 있습니다. 매출의 약 79%가 정신신경용제에서 나오며, 잇몸약 '이가탄F', 변비약 '메이킨Q' 등 인지도 높은 일반의약품도 함께 판매하고 있습니다. 원료합성부터 완제의약품 생산까지 자체 기술력을 갖추고 있어 글로벌 제약사와도 파트너십을 맺고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,872억 원, 영업이익은 924억 원, 당기순이익은 814억 원을 기록했습니다(2024년 상장 이후 공시로 전년 비교 데이터는 확인되지 않습니다). 부채비율은 6.0%로 매우 낮아 재무구조는 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "정신신경용제(전문의약품)",
-        "desc": "뇌졸중·파킨슨·조현병·우울증 치료제 등 중추신경계 의약품",
-        "revenue_share": 0.79
-      },
-      {
         "name": "순환계용제",
-        "desc": "순환계 질환 치료용 전문의약품",
-        "revenue_share": 0.061
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.0%",
+        "revenue_share": 0.0602,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "치과구강용제(일반의약품)",
-        "desc": "이가탄F 등 잇몸약",
-        "revenue_share": 0.084
+        "name": "일반의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.4%",
+        "revenue_share": 0.0843,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "소화계용제(일반의약품)",
-        "desc": "메이킨Q 등 변비약",
-        "revenue_share": 0.055
+        "name": "소화계용제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.5%",
+        "revenue_share": 0.055,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -122,38 +123,60 @@
       "치과구강용제",
       "소화계용제"
     ],
-    "investor_note": "명인제약은 뇌졸중·파킨슨·조현병·우울증 치료제 등 중추신경계(CNS)에 작용하는 정신신경용제를 주력으로 하는 제약회사로, IQVIA 2025년 4분기 기준 국내 정신신경용제 시장 점유율 1위를 차지하고 있습니다. 매출의 약 79%가 정신신경용제에서 나오며, 잇몸약 '이가탄F', 변비약 '메이킨Q' 등 인지도 높은 일반의약품도 함께 판매하고 있습니다. 원료합성부터 완제의약품 생산까지 자체 기술력을 갖추고 있어 글로벌 제약사와도 파트너십을 맺고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,872억 원, 영업이익은 924억 원, 당기순이익은 814억 원을 기록했습니다(2024년 상장 이후 공시로 전년 비교 데이터는 확인되지 않습니다). 부채비율은 6.0%로 매우 낮아 재무구조는 안정적인 편입니다."
+    "investor_note": "명인제약은 뇌졸중·파킨슨·조현병·우울증 치료제 등 중추신경계(CNS)에 작용하는 정신신경용제를 주력으로 하는 제약회사로, IQVIA 2025년 4분기 기준 국내 정신신경용제 시장 점유율 1위를 차지하고 있습니다. 매출의 약 79%가 정신신경용제에서 나오며, 잇몸약 '이가탄F', 변비약 '메이킨Q' 등 인지도 높은 일반의약품도 함께 판매하고 있습니다. 원료합성부터 완제의약품 생산까지 자체 기술력을 갖추고 있어 글로벌 제약사와도 파트너십을 맺고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,872억 원, 영업이익은 924억 원, 당기순이익은 814억 원을 기록했습니다(2024년 상장 이후 공시로 전년 비교 데이터는 확인되지 않습니다). 부채비율은 6.0%로 매우 낮아 재무구조는 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 67.4%",
+        "revenue_share": 0.6739,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "순환계용제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.0%",
+        "revenue_share": 0.0602,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "일반의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.4%",
+        "revenue_share": 0.0843,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "소화계용제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.5%",
+        "revenue_share": 0.055,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "정신신경용제(전문의약품)",
-      "caption": "뇌졸중·파킨슨·조현병·우울증 치료제 등 중추신경계 의약품",
-      "kind": "bio",
-      "visual": "정신신경용제",
-      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
-      "image_source": "Unsplash"
-    },
-    {
       "title": "순환계용제",
-      "caption": "순환계 질환 치료용 전문의약품",
-      "kind": "bio",
-      "visual": "순환계용제",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
       "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "치과구강용제(일반의약품)",
-      "caption": "이가탄F 등 잇몸약",
+      "title": "의약품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.4%",
       "kind": "bio",
-      "visual": "치과구강용제",
+      "visual": "PHARMA",
       "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "소화계용제(일반의약품)",
-      "caption": "메이킨Q 등 변비약",
-      "kind": "bio",
-      "visual": "소화계용제",
+      "title": "소화계용제",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
       "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
       "image_source": "Unsplash"
     }

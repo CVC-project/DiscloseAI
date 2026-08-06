@@ -155,24 +155,32 @@
     "segment_finance": "삼화콘덴서공업은 국내에서 관계사 삼화전기의 전해콘덴서를 제외한 거의 모든 콘덴서(FILM콘덴서, MLCC, 단층세라믹콘덴서 등)를 생산하는 종합 콘덴서 메이커로, 매출의 약 66%를 해외 수출로 올리는 수출 중심 기업입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,944억 원으로 전년과 비슷한 수준(-0.3%)이었지만 영업이익은 128억 원(-27.9%), 순이익은 126억 원(-42.8%) 줄었습니다. 부채비율은 21.7%로 낮아 재무구조는 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "MLCC",
-        "desc": "적층형 세라믹 콘덴서",
-        "revenue_share": 0.461
+        "name": "콘덴서 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.1%",
+        "revenue_share": 0.461,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "FC(FILM콘덴서)",
-        "desc": "전력용 콘덴서",
-        "revenue_share": 0.151
+        "name": "F C",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.1%",
+        "revenue_share": 0.151,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "DC-LINK",
-        "desc": "전장용 콘덴서",
-        "revenue_share": 0.195
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.5%",
+        "revenue_share": 0.195,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "DCC",
-        "desc": "단층세라믹콘덴서",
-        "revenue_share": 0.083
+        "name": "D C C",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.3%",
+        "revenue_share": 0.083,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -181,39 +189,69 @@
       "단층세라믹콘덴서(DCC)",
       "DC-LINK 콘덴서"
     ],
-    "investor_note": "삼화콘덴서공업은 국내에서 관계사 삼화전기의 전해콘덴서를 제외한 거의 모든 콘덴서(FILM콘덴서, MLCC, 단층세라믹콘덴서 등)를 생산하는 종합 콘덴서 메이커로, 매출의 약 66%를 해외 수출로 올리는 수출 중심 기업입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,944억 원으로 전년과 비슷한 수준(-0.3%)이었지만 영업이익은 128억 원(-27.9%), 순이익은 126억 원(-42.8%) 줄었습니다. 부채비율은 21.7%로 낮아 재무구조는 안정적인 편입니다."
+    "investor_note": "삼화콘덴서공업은 국내에서 관계사 삼화전기의 전해콘덴서를 제외한 거의 모든 콘덴서(FILM콘덴서, MLCC, 단층세라믹콘덴서 등)를 생산하는 종합 콘덴서 메이커로, 매출의 약 66%를 해외 수출로 올리는 수출 중심 기업입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,944억 원으로 전년과 비슷한 수준(-0.3%)이었지만 영업이익은 128억 원(-27.9%), 순이익은 126억 원(-42.8%) 줄었습니다. 부채비율은 21.7%로 낮아 재무구조는 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "콘덴서 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.1%",
+        "revenue_share": 0.461,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "F C",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.1%",
+        "revenue_share": 0.151,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "DC-LINK",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.5%",
+        "revenue_share": 0.195,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "D C C",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.3%",
+        "revenue_share": 0.083,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "MLCC",
-      "caption": "MLCC을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "title": "전자부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.1%",
+      "kind": "chip",
+      "visual": "MLCC",
+      "image": "../data/business_images/business_image_76a8c8f5ba93d5d3.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "FC(FILM콘덴서)",
-      "caption": "FC(FILM콘덴서)을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "title": "F C",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.1%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
       "title": "DC-LINK",
-      "caption": "DC-LINK을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.5%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "DCC",
-      "caption": "DCC을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "title": "D C C",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.3%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     }
   ],

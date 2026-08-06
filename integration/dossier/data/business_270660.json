@@ -153,7 +153,29 @@
   "snippets": {
     "overview": "에브리봇 주식회사의 주요 제품·서비스는 배터리, 출시일, 비고, 제품(5건), 제품 매출, 엣지2입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 생산 및 설비에 관한 사항 당사는 별도의 생산시설을 갖추지 않고 있으며, 당사가 연구개발한 제품을 외주가공의 형태로 생산하여 수요처에 납품하고 있습니다. 뿐만 아니라 수년간 누적된 고객의 소모품 구매창구 역할로 엑세서리 매출이 꾸준히 증가하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "에브리봇 주식회사의 주요 제품·서비스는 배터리, 출시일, 비고, 제품(5건), 제품 매출, 엣지2입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 생산 및 설비에 관한 사항 당사는 별도의 생산시설을 갖추지 않고 있으며, 당사가 연구개발한 제품을 외주가공의 형태로 생산하여 수요처에 납품하고 있습니다. 뿐만 아니라 수년간 누적된 고객의 소모품 구매창구 역할로 엑세서리 매출이 꾸준히 증가하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "쓰리스핀PLUS",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.6%",
+        "revenue_share": 0.0459,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "쓰리스핀EVO",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.8%",
+        "revenue_share": 0.1478,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "쓰리스핀",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
+        "revenue_share": 0.0182,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "배터리",
       "출시일",
@@ -166,36 +188,58 @@
       "와이앤커뮤니케이션스",
       "우리홈쇼핑"
     ],
-    "investor_note": "에브리봇 주식회사의 주요 제품·서비스는 배터리, 출시일, 비고, 제품(5건), 제품 매출, 엣지2입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 생산 및 설비에 관한 사항 당사는 별도의 생산시설을 갖추지 않고 있으며, 당사가 연구개발한 제품을 외주가공의 형태로 생산하여 수요처에 납품하고 있습니다. 뿐만 아니라 수년간 누적된 고객의 소모품 구매창구 역할로 엑세서리 매출이 꾸준히 증가하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "에브리봇 주식회사의 주요 제품·서비스는 배터리, 출시일, 비고, 제품(5건), 제품 매출, 엣지2입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 생산 및 설비에 관한 사항 당사는 별도의 생산시설을 갖추지 않고 있으며, 당사가 연구개발한 제품을 외주가공의 형태로 생산하여 수요처에 납품하고 있습니다. 뿐만 아니라 수년간 누적된 고객의 소모품 구매창구 역할로 엑세서리 매출이 꾸준히 증가하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.0007,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "쓰리스핀PLUS",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.6%",
+        "revenue_share": 0.0459,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "쓰리스핀EVO",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.8%",
+        "revenue_share": 0.1478,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "쓰리스핀",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
+        "revenue_share": 0.0182,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "배터리",
-      "caption": "배터리을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
-      "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "출시일",
-      "caption": "출시일을 중심으로 매출을 만드는 사업입니다.",
+      "title": "쓰리스핀PLUS",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.6%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "비고",
-      "caption": "비고을 중심으로 매출을 만드는 사업입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "title": "전기차·하이브리드",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.8%",
+      "kind": "auto",
+      "visual": "EV",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "제품(5건)",
-      "caption": "제품(5건)을 중심으로 매출을 만드는 사업입니다.",
+      "title": "쓰리스핀",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",

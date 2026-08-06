@@ -153,7 +153,29 @@
   "snippets": {
     "overview": "씨앤지하이테크(주)의 주요 제품·서비스는 DRAM, NAND, HBM, SSD, 이미지센서, OLED입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품인 반도체 등 장비의 가격은 주문자생산방식의 특성 때문에 동일 품목이라 하더라도 고객사가 요청한 사양에 따라 단가가 상이하여 정해진 가격으로 판매되지 않습니다. 화학약품 혼합 공급 장치의 품질은 칩/패널 제조 양산 설비의 품질과 수율에 직결되기 때문에 시장이 폐쇄적이며, 신규 혼합 화학약품일지라도 고객사와 신뢰와 협업 관계가 없는 상태에서 시장 진입은 어려운 상황입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "씨앤지하이테크(주)의 주요 제품·서비스는 DRAM, NAND, HBM, SSD, 이미지센서, OLED입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품인 반도체 등 장비의 가격은 주문자생산방식의 특성 때문에 동일 품목이라 하더라도 고객사가 요청한 사양에 따라 단가가 상이하여 정해진 가격으로 판매되지 않습니다. 화학약품 혼합 공급 장치의 품질은 칩/패널 제조 양산 설비의 품질과 수율에 직결되기 때문에 시장이 폐쇄적이며, 신규 혼합 화학약품일지라도 고객사와 신뢰와 협업 관계가 없는 상태에서 시장 진입은 어려운 상황입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "화학약품재생장치",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.4%",
+        "revenue_share": 0.004,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.1%",
+        "revenue_share": 0.081,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.6%",
+        "revenue_share": 0.236,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "DRAM",
       "NAND",
@@ -168,40 +190,54 @@
       "설명",
       "제품설명"
     ],
-    "investor_note": "씨앤지하이테크(주)의 주요 제품·서비스는 DRAM, NAND, HBM, SSD, 이미지센서, OLED입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품인 반도체 등 장비의 가격은 주문자생산방식의 특성 때문에 동일 품목이라 하더라도 고객사가 요청한 사양에 따라 단가가 상이하여 정해진 가격으로 판매되지 않습니다. 화학약품 혼합 공급 장치의 품질은 칩/패널 제조 양산 설비의 품질과 수율에 직결되기 때문에 시장이 폐쇄적이며, 신규 혼합 화학약품일지라도 고객사와 신뢰와 협업 관계가 없는 상태에서 시장 진입은 어려운 상황입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "씨앤지하이테크(주)의 주요 제품·서비스는 DRAM, NAND, HBM, SSD, 이미지센서, OLED입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품인 반도체 등 장비의 가격은 주문자생산방식의 특성 때문에 동일 품목이라 하더라도 고객사가 요청한 사양에 따라 단가가 상이하여 정해진 가격으로 판매되지 않습니다. 화학약품 혼합 공급 장치의 품질은 칩/패널 제조 양산 설비의 품질과 수율에 직결되기 때문에 시장이 폐쇄적이며, 신규 혼합 화학약품일지라도 고객사와 신뢰와 협업 관계가 없는 상태에서 시장 진입은 어려운 상황입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.8%",
+        "revenue_share": 0.448,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "화학약품재생장치",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.4%",
+        "revenue_share": 0.004,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.1%",
+        "revenue_share": 0.081,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.6%",
+        "revenue_share": 0.236,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "DRAM",
-      "caption": "데이터 저장과 AI 서버 수요에 연결되는 메모리 제품입니다.",
-      "kind": "chip",
-      "visual": "CHIP",
-      "image": "../data/business_images/business_image_10774ca82ea41202.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "NAND",
-      "caption": "데이터 저장과 AI 서버 수요에 연결되는 메모리 제품입니다.",
-      "kind": "chip",
-      "visual": "CHIP",
-      "image": "../data/business_images/business_image_10774ca82ea41202.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "HBM",
-      "caption": "데이터 저장과 AI 서버 수요에 연결되는 메모리 제품입니다.",
-      "kind": "chip",
-      "visual": "HBM",
-      "image": "../data/business_images/business_image_df7b448e6d568266.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "SSD",
-      "caption": "데이터 저장과 AI 서버 수요에 연결되는 메모리 제품입니다.",
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.1%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_10774ca82ea41202.jpg",
-      "image_source": "Wikimedia Commons"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "용역",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

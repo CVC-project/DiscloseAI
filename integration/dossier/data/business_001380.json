@@ -155,9 +155,11 @@
     "segment_finance": "SG글로벌은 자동차시트커버와 완성 시트를 만드는 부품업체로, 베트남 법인(C.V.T)을 통한 생산도 병행하고 있으며 디스플레이 부품 사업과 부동산 임대사업도 함께 운영합니다. 매출의 약 63%가 시트커버, 26%가 완성 시트 사업에서 나오고, 디스플레이 사업은 매출 비중이 작으면서 수년째 적자를 내고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 934억 원으로 전년보다 6.0% 줄었고 영업이익과 당기순이익도 각각 19.3%, 55.6% 감소했습니다. 부채비율은 30.6%로 안정적인 수준입니다.",
     "segment_breakdown": [
       {
-        "name": "부동산 임대 등",
-        "desc": "기타 임대수입",
-        "revenue_share": 0.056
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.4%",
+        "revenue_share": 0.114,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -165,40 +167,70 @@
       "자동차시트(Car Seat)",
       "디스플레이 부품"
     ],
-    "investor_note": "SG글로벌은 자동차시트커버와 완성 시트를 만드는 부품업체로, 베트남 법인(C.V.T)을 통한 생산도 병행하고 있으며 디스플레이 부품 사업과 부동산 임대사업도 함께 운영합니다. 매출의 약 63%가 시트커버, 26%가 완성 시트 사업에서 나오고, 디스플레이 사업은 매출 비중이 작으면서 수년째 적자를 내고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 934억 원으로 전년보다 6.0% 줄었고 영업이익과 당기순이익도 각각 19.3%, 55.6% 감소했습니다. 부채비율은 30.6%로 안정적인 수준입니다."
+    "investor_note": "SG글로벌은 자동차시트커버와 완성 시트를 만드는 부품업체로, 베트남 법인(C.V.T)을 통한 생산도 병행하고 있으며 디스플레이 부품 사업과 부동산 임대사업도 함께 운영합니다. 매출의 약 63%가 시트커버, 26%가 완성 시트 사업에서 나오고, 디스플레이 사업은 매출 비중이 작으면서 수년째 적자를 내고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 934억 원으로 전년보다 6.0% 줄었고 영업이익과 당기순이익도 각각 19.3%, 55.6% 감소했습니다. 부채비율은 30.6%로 안정적인 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "시트부품사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.4%",
+        "revenue_share": 0.514,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.4%",
+        "revenue_share": 0.114,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "시트부품사업 소계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 62.8%",
+        "revenue_share": 0.628,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "시트사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.8%",
+        "revenue_share": 0.258,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "부동산 임대 등",
-      "caption": "부동산 임대 등을 중심으로 매출을 만드는 사업입니다.",
+      "title": "시트부품사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.4%",
       "kind": "auto",
       "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "자동차시트커버(Seat Trim Cover)",
-      "caption": "자동차시트커버(Seat Trim Cover)을 중심으로 매출을 만드는 사업입니다.",
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.4%",
       "kind": "auto",
       "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "자동차시트(Car Seat)",
-      "caption": "자동차시트(Car Seat)을 중심으로 매출을 만드는 사업입니다.",
+      "title": "시트부품사업 소계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 62.8%",
       "kind": "auto",
       "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "디스플레이 부품",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
-      "kind": "display",
-      "visual": "OLED",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
-      "image_source": "Wikimedia Commons"
+      "title": "시트사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.8%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

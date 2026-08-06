@@ -107,24 +107,25 @@
     "segment_finance": "(주)아이지넷의 주요 금융 서비스는 보닥 (보험닥터), 보험대리점(GA), 플랫폼보험수수료, 독립보험 등입니다. 예금·대출, 투자, 보험, 카드 등에서 수익을 만듭니다. 당사는 GA로서 소비자의 금융편의를 위해 보험회사와 독립적이고 대등한 위치에서 판매업무를 수행하고 있으며, 당사와 위촉계약이 체결되어 불특정 다수의 고객을 상대로 영업을 하는 보험설계사에게 다양한 손해/생명 보험상품의 비교 분석 정보 제공 및 교육 등을 실시하고 있습니다. 이를 기반으로, 모바일 애플리케이션으로 구현된 AI 보험 서비스 플랫폼 '보닥'과 기업용 보험 솔루션을 개발해 보험사 등 시장에 제공하고 있습니다. 금융회사는 단순 매출보다 이자수익, 수수료, 충당금, 자본 여력이 함께 움직입니다.",
     "segment_breakdown": [
       {
-        "name": "보닥 (보험닥터)",
-        "desc": "보험, 보닥 (보험닥터) 관련 제품·서비스",
-        "revenue_share": null
+        "name": "플랫폼입점수수료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.7%",
+        "revenue_share": 0.017,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "보험대리점(GA)",
-        "desc": "보험, 보험대리점(GA) 관련 제품·서비스",
-        "revenue_share": null
+        "name": "솔루션(B2B)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.6%",
+        "revenue_share": 0.006,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "독립보험",
-        "desc": "보험 관련 제품·서비스",
-        "revenue_share": null
-      },
-      {
-        "name": "생명보험",
-        "desc": "보험 관련 제품·서비스",
-        "revenue_share": null
+        "name": "플랫폼보험수수료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 97.7%",
+        "revenue_share": 0.977,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -141,40 +142,39 @@
       "데이터베이스",
       "보험대리점(GA)"
     ],
-    "investor_note": "(주)아이지넷의 주요 금융 서비스는 보닥 (보험닥터), 보험대리점(GA), 플랫폼보험수수료, 독립보험 등입니다. 예금·대출, 투자, 보험, 카드 등에서 수익을 만듭니다. 당사는 GA로서 소비자의 금융편의를 위해 보험회사와 독립적이고 대등한 위치에서 판매업무를 수행하고 있으며, 당사와 위촉계약이 체결되어 불특정 다수의 고객을 상대로 영업을 하는 보험설계사에게 다양한 손해/생명 보험상품의 비교 분석 정보 제공 및 교육 등을 실시하고 있습니다. 이를 기반으로, 모바일 애플리케이션으로 구현된 AI 보험 서비스 플랫폼 '보닥'과 기업용 보험 솔루션을 개발해 보험사 등 시장에 제공하고 있습니다. 금융회사는 단순 매출보다 이자수익, 수수료, 충당금, 자본 여력이 함께 움직입니다."
+    "investor_note": "(주)아이지넷의 주요 금융 서비스는 보닥 (보험닥터), 보험대리점(GA), 플랫폼보험수수료, 독립보험 등입니다. 예금·대출, 투자, 보험, 카드 등에서 수익을 만듭니다. 당사는 GA로서 소비자의 금융편의를 위해 보험회사와 독립적이고 대등한 위치에서 판매업무를 수행하고 있으며, 당사와 위촉계약이 체결되어 불특정 다수의 고객을 상대로 영업을 하는 보험설계사에게 다양한 손해/생명 보험상품의 비교 분석 정보 제공 및 교육 등을 실시하고 있습니다. 이를 기반으로, 모바일 애플리케이션으로 구현된 AI 보험 서비스 플랫폼 '보닥'과 기업용 보험 솔루션을 개발해 보험사 등 시장에 제공하고 있습니다. 금융회사는 단순 매출보다 이자수익, 수수료, 충당금, 자본 여력이 함께 움직입니다.",
+    "product_service_segments": [
+      {
+        "name": "플랫폼입점수수료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.7%",
+        "revenue_share": 0.017,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "솔루션(B2B)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.6%",
+        "revenue_share": 0.006,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "플랫폼보험수수료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 97.7%",
+        "revenue_share": 0.977,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "보닥 (보험닥터)",
-      "caption": "보험료와 손해율이 실적을 좌우하는 금융 서비스입니다.",
-      "kind": "insurance",
-      "visual": "INS",
-      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "보험대리점(GA)",
-      "caption": "보험료와 손해율이 실적을 좌우하는 금융 서비스입니다.",
-      "kind": "insurance",
-      "visual": "INS",
-      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "독립보험",
-      "caption": "보험료와 손해율이 실적을 좌우하는 금융 서비스입니다.",
-      "kind": "insurance",
-      "visual": "INS",
-      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "생명보험",
-      "caption": "보험료와 손해율이 실적을 좌우하는 금융 서비스입니다.",
-      "kind": "insurance",
-      "visual": "INS",
-      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
-      "image_source": "Wikimedia Commons"
+      "title": "플랫폼 서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.7%",
+      "kind": "platform",
+      "visual": "PLATFORM",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

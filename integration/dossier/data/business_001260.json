@@ -155,19 +155,32 @@
     "segment_finance": "남광토건은 도로·철도·항만 등 토목공사를 주력으로, 건축·주택(Haustory 브랜드)공사와 필리핀·앙골라 등 해외공사까지 수행해 온 종합건설회사로, 토목공사가 매출의 70%가량을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,574억 원으로 전년 대비 29.1% 줄었지만, 영업이익은 56.6% 늘어난 114억 원을 기록했고 당기순이익은 14.6% 줄어든 52억 원이었습니다. 총자산은 1.7% 줄어든 4,100억 원이며, 부채비율은 228.1%로 자본보다 두 배 넘는 빚을 지고 있어 재무 부담을 눈여겨볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "토목",
-        "desc": "도로·철도·항만 등 토목공사",
-        "revenue_share": 0.6981
+        "name": "국내도급공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.6%",
+        "revenue_share": 0.1158,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "건축",
-        "desc": "건축공사(관급+민간)",
-        "revenue_share": 0.2882
+        "name": "민간",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.2%",
+        "revenue_share": 0.1724,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "해외",
-        "desc": "해외 도급공사",
-        "revenue_share": 0.0137
+        "name": "토목공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 69.8%",
+        "revenue_share": 0.6981,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "해외도급공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+        "revenue_share": 0.0263,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -176,36 +189,66 @@
       "주택(Haustory)",
       "해외공사"
     ],
-    "investor_note": "남광토건은 도로·철도·항만 등 토목공사를 주력으로, 건축·주택(Haustory 브랜드)공사와 필리핀·앙골라 등 해외공사까지 수행해 온 종합건설회사로, 토목공사가 매출의 70%가량을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,574억 원으로 전년 대비 29.1% 줄었지만, 영업이익은 56.6% 늘어난 114억 원을 기록했고 당기순이익은 14.6% 줄어든 52억 원이었습니다. 총자산은 1.7% 줄어든 4,100억 원이며, 부채비율은 228.1%로 자본보다 두 배 넘는 빚을 지고 있어 재무 부담을 눈여겨볼 필요가 있습니다."
+    "investor_note": "남광토건은 도로·철도·항만 등 토목공사를 주력으로, 건축·주택(Haustory 브랜드)공사와 필리핀·앙골라 등 해외공사까지 수행해 온 종합건설회사로, 토목공사가 매출의 70%가량을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,574억 원으로 전년 대비 29.1% 줄었지만, 영업이익은 56.6% 늘어난 114억 원을 기록했고 당기순이익은 14.6% 줄어든 52억 원이었습니다. 총자산은 1.7% 줄어든 4,100억 원이며, 부채비율은 228.1%로 자본보다 두 배 넘는 빚을 지고 있어 재무 부담을 눈여겨볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "국내도급공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.6%",
+        "revenue_share": 0.1158,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "민간",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.2%",
+        "revenue_share": 0.1724,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "토목공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 69.8%",
+        "revenue_share": 0.6981,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "해외도급공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+        "revenue_share": 0.0263,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "토목",
-      "caption": "토목을 중심으로 매출을 만드는 사업입니다.",
+      "title": "국내도급공사",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.6%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "건축",
-      "caption": "건축을 중심으로 매출을 만드는 사업입니다.",
+      "title": "민간",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.2%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "해외",
-      "caption": "해외을 중심으로 매출을 만드는 사업입니다.",
+      "title": "토목·플랜트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 69.8%",
       "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_5184e050831a4460.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "주택(Haustory)",
-      "caption": "주택(Haustory)을 중심으로 매출을 만드는 사업입니다.",
+      "title": "해외도급공사",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
       "kind": "service",
       "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
