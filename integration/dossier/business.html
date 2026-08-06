@@ -1790,13 +1790,14 @@
       // revenue_share가 null인 건 "0%"가 아니라 "사업보고서에 비중 수치가 없다"는 뜻이다.
       // 회사 전체에 비중 수치가 하나도 없으면(삼성전자·SK하이닉스류가 아닌 대부분의 회사),
       // 없는 숫자를 0.0%로 지어내지 않는다.
+      // 감사의견·핵심감사사항은 매출비중 유무와 무관한 별개 정보이므로, 매출비중 데이터가
+      // 채워진 회사에서도 항상 별도 패널로 이어붙인다(과거엔 매출비중 없을 때의 대체 표시로만
+      // 썼는데, 이후 매출비중이 채워진 회사에서 감사 패널이 통째로 사라지는 버그가 있었다).
       const withShare = segments.filter((segment) => segment.revenue_share != null);
+      const audit = auditSummaryHtml(row);
       if (!segments.length || !withShare.length) {
-        const audit = auditSummaryHtml(row);
-        if (audit) return audit;
-        if (!segments.length) return '';
-        // 감사 데이터도 없으면 최후의 수단으로 사업부문 설명만이라도 보여준다
-        // (위 카드와 겹치지만, 아무것도 안 보여주는 것보다는 낫다).
+        if (!segments.length) return audit;
+        // 사업부문 설명만이라도 보여준다(위 카드와 겹치지만, 아무것도 안 보여주는 것보다는 낫다).
         const cards = segments.slice(0, 6).map((segment) => {
           return '<article class="segment-card segment-card-noshare">' +
             '<strong>' + rich(segment.name || '사업부문') + '</strong>' +
@@ -1806,7 +1807,7 @@
         return '<div class="segment-breakdown">' +
           '<div class="segment-breakdown-head"><div><h3>사업부문 설명</h3><p>이 회사의 사업보고서에는 부문별 매출비중 수치가 따로 나와 있지 않아, 어떤 사업을 하는지 설명 중심으로 보여드립니다.</p></div></div>' +
           '<div class="segment-grid">' + cards + '</div>' +
-        '</div>';
+        '</div>' + audit;
       }
       const maxShare = Math.max(...withShare.map((segment) => Number(segment.revenue_share)), 0.01);
       const cards = segments.slice(0, 6).map((segment) => {
@@ -1827,7 +1828,7 @@
         '<div class="segment-breakdown-head"><div><h3>부문별 매출비중과 사업 설명</h3><p>사업보고서 요약 데이터 기준으로 어느 부문이 회사 매출을 크게 움직이는지 먼저 보여줍니다.</p></div><div class="mini-label">보고서 표시 기준</div></div>' +
         '<div class="segment-grid">' + cards + '</div>' +
         '<p class="segment-tip">부문 간 내부거래 제거 방식에 따라 단순 합계가 100%와 다를 수 있어, 막대는 전체 파이 비중보다 사업 규모를 비교하는 신호판으로 읽으면 됩니다.</p>' +
-      '</div>';
+      '</div>' + audit;
     }
     function sortedSegments(row) {
       const segments = row.snippets && Array.isArray(row.snippets.segment_breakdown) ? row.snippets.segment_breakdown : [];
