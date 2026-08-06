@@ -10,10 +10,22 @@ from __future__ import annotations
 import re
 from typing import Any
 
-
 _NON_BUSINESS_LABELS = {
-    "합계", "소계", "기타", "연구", "연구부문", "개발", "개발부문", "연구개발",
-    "판매금액", "매출액", "용역기간", "계약기간", "비고", "구분", "품목",
+    "합계",
+    "소계",
+    "기타",
+    "연구",
+    "연구부문",
+    "개발",
+    "개발부문",
+    "연구개발",
+    "판매금액",
+    "매출액",
+    "용역기간",
+    "계약기간",
+    "비고",
+    "구분",
+    "품목",
 }
 
 
@@ -34,11 +46,17 @@ def _number(value: Any) -> float | None:
 def _is_business_label(value: str) -> bool:
     label = _text(value)
     compact_label = re.sub(r"\s+", "", label)
-    if len(label) < 2 or label in _NON_BUSINESS_LABELS or compact_label in _NON_BUSINESS_LABELS:
+    if (
+        len(label) < 2
+        or label in _NON_BUSINESS_LABELS
+        or compact_label in _NON_BUSINESS_LABELS
+    ):
         return False
     if re.fullmatch(r"제?\s*\d+\s*기", label):
         return False
-    return not any(token in label for token in ("연구부문", "개발부문", "용역기간", "판매금액"))
+    return not any(
+        token in label for token in ("연구부문", "개발부문", "용역기간", "판매금액")
+    )
 
 
 def _find_chapter_ii(parsed: dict[str, Any]) -> dict[str, Any] | None:
@@ -70,7 +88,12 @@ def _share_from_row(row: list[Any]) -> float | None:
     for index in range(1, len(row)):
         value = _number(row[index])
         previous = _number(row[index - 1])
-        if value is not None and previous is not None and previous > 100 and 0 <= value <= 100:
+        if (
+            value is not None
+            and previous is not None
+            and previous > 100
+            and 0 <= value <= 100
+        ):
             return round(value / 100, 4)
     return None
 

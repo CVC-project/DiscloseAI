@@ -15,7 +15,10 @@ import pathlib
 import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
-from business_card_quality import COMPANY_OVERRIDES, normalize_business_payload  # noqa: E402
+from business_card_quality import (
+    COMPANY_OVERRIDES,
+    normalize_business_payload,
+)  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 OUT_DIR = ROOT / "integration" / "dossier" / "data"
@@ -59,7 +62,11 @@ def main() -> int:
         has_authoritative_segments = bool(product_segments.get(corp_code))
         # Keep manually curated cards only when there is no new structured
         # II.2 table to supersede them. The table is the source of truth.
-        if ticker in curated and ticker not in COMPANY_OVERRIDES and not has_authoritative_segments:
+        if (
+            ticker in curated
+            and ticker not in COMPANY_OVERRIDES
+            and not has_authoritative_segments
+        ):
             continue
         if has_authoritative_segments:
             snippets = payload.setdefault("snippets", {})

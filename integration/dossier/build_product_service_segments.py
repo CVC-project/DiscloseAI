@@ -13,7 +13,6 @@ import sys
 from pathlib import Path
 from typing import Any
 
-
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
@@ -34,7 +33,11 @@ def main() -> int:
     parser.add_argument(
         "--output",
         type=Path,
-        default=ROOT / "integration" / "dossier" / "data" / "product_service_segments.json",
+        default=ROOT
+        / "integration"
+        / "dossier"
+        / "data"
+        / "product_service_segments.json",
     )
     args = parser.parse_args()
 
@@ -55,7 +58,11 @@ def main() -> int:
     args.output.write_text(
         json.dumps(records, ensure_ascii=False, separators=(",", ":")), encoding="utf-8"
     )
-    print(json.dumps({"scanned": scanned, "with_product_table": len(records)}, ensure_ascii=False))
+    print(
+        json.dumps(
+            {"scanned": scanned, "with_product_table": len(records)}, ensure_ascii=False
+        )
+    )
     return 0
 
 

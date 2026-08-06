@@ -16,7 +16,6 @@ from typing import Any
 
 from business_card_quality import normalize_business_payload
 
-
 ROOT = Path(__file__).resolve().parents[2]
 FULLTEXT_DIR = ROOT / "modules" / "disclosure" / "data" / "fulltext"
 OUT_DIR = ROOT / "integration" / "dossier" / "data"
@@ -278,7 +277,9 @@ def build_business_json(
     if years:
         latest_year = years[-1]
     category = master.get("industry_name") or master.get("industry_code") or "사업"
-    reported_segments = summary.get("product_service_segments") or summary.get("segments") or []
+    reported_segments = (
+        summary.get("product_service_segments") or summary.get("segments") or []
+    )
     segments = []
     for segment in reported_segments:
         if not isinstance(segment, dict):
@@ -344,7 +345,10 @@ def main() -> int:
     skipped = 0
     for corp_code, summary in sorted(summaries.items()):
         if product_segments.get(corp_code):
-            summary = {**summary, "product_service_segments": product_segments[corp_code]}
+            summary = {
+                **summary,
+                "product_service_segments": product_segments[corp_code],
+            }
         row = master.get(corp_code)
         if not row or not row.get("ticker"):
             skipped += 1

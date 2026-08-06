@@ -12,7 +12,6 @@ from copy import deepcopy
 import re
 from typing import Any
 
-
 IMG = "../data/business_images/"
 
 
@@ -28,7 +27,17 @@ IMAGE_RULES: list[tuple[tuple[str, ...], str, str]] = [
         "Local visual",
     ),
     (
-        ("농수산", "참치", "가공식품", "간편식", "만두", "김치", "햇반", "PACKAGED", "CANNED"),
+        (
+            "농수산",
+            "참치",
+            "가공식품",
+            "간편식",
+            "만두",
+            "김치",
+            "햇반",
+            "PACKAGED",
+            "CANNED",
+        ),
         "business_image_food_packaged.svg",
         "Local visual",
     ),
@@ -838,9 +847,24 @@ FOOD_CATEGORY_RULES: list[tuple[tuple[str, ...], str, str, str]] = [
     (("건강케어",), "건강기능식품", "consumer", "HEALTH"),
     (("식품서비스유통",), "급식·외식", "consumer", "FOOD"),
     (("면스낵",), "라면·스낵", "consumer", "NOODLE"),
-    (("라면", "탕면", "사발면", "볶음면", "짜파게티", "너구리", "면제품"), "라면", "consumer", "NOODLE"),
     (
-        ("스낵", "제과", "과자", "비스킷", "쿠키", "크래커", "초코파이", "새우깡", "꿀꽈배기"),
+        ("라면", "탕면", "사발면", "볶음면", "짜파게티", "너구리", "면제품"),
+        "라면",
+        "consumer",
+        "NOODLE",
+    ),
+    (
+        (
+            "스낵",
+            "제과",
+            "과자",
+            "비스킷",
+            "쿠키",
+            "크래커",
+            "초코파이",
+            "새우깡",
+            "꿀꽈배기",
+        ),
         "스낵·제과",
         "consumer",
         "SNACK",
@@ -852,25 +876,80 @@ FOOD_CATEGORY_RULES: list[tuple[tuple[str, ...], str, str, str]] = [
         "BEVERAGE",
     ),
     (
-        ("소주", "맥주", "막걸리", "약주", "탁주", "청주", "와인", "주정", "에탄올", "복분자", "위스키"),
+        (
+            "소주",
+            "맥주",
+            "막걸리",
+            "약주",
+            "탁주",
+            "청주",
+            "와인",
+            "주정",
+            "에탄올",
+            "복분자",
+            "위스키",
+        ),
         "주류",
         "consumer",
         "ALCOHOL",
     ),
-    (("건강기능식품", "건강식품", "오메가", "유산균", "프로바이오틱스", "콜라겐", "콘드로이친"), "건강기능식품", "consumer", "HEALTH"),
+    (
+        (
+            "건강기능식품",
+            "건강식품",
+            "오메가",
+            "유산균",
+            "프로바이오틱스",
+            "콜라겐",
+            "콘드로이친",
+        ),
+        "건강기능식품",
+        "consumer",
+        "HEALTH",
+    ),
     (("사료", "프리믹스", "사료첨가제"), "사료", "consumer", "FEED"),
-    (("축산", "양돈", "양계", "가금", "육가공", "돼지고기", "닭고기"), "축산·육가공", "consumer", "FEED"),
+    (
+        ("축산", "양돈", "양계", "가금", "육가공", "돼지고기", "닭고기"),
+        "축산·육가공",
+        "consumer",
+        "FEED",
+    ),
     (("펫푸드", "반려동물", "PET부문"), "펫푸드", "consumer", "FEED"),
-    (("소스", "카레", "케찹", "케첩", "마요네즈", "조미", "장류", "간장"), "양념·소스", "consumer", "SAUCE"),
-    (("간편식", "즉석식품", "냉동식품", "냉동", "가공식품", "도시락"), "가공식품·간편식", "consumer", "CANNED"),
-    (("설탕", "밀가루", "식용유", "전분당", "소재식품", "식품소재"), "소재식품", "consumer", "INGREDIENT"),
+    (
+        ("소스", "카레", "케찹", "케첩", "마요네즈", "조미", "장류", "간장"),
+        "양념·소스",
+        "consumer",
+        "SAUCE",
+    ),
+    (
+        ("간편식", "즉석식품", "냉동식품", "냉동", "가공식품", "도시락"),
+        "가공식품·간편식",
+        "consumer",
+        "CANNED",
+    ),
+    (
+        ("설탕", "밀가루", "식용유", "전분당", "소재식품", "식품소재"),
+        "소재식품",
+        "consumer",
+        "INGREDIENT",
+    ),
     (("빵", "제빵", "베이커리", "냉동생지"), "베이커리", "consumer", "FOOD"),
     (("빙과", "아이스크림"), "빙과", "consumer", "FOOD"),
     (("유제품", "유가공", "우유", "발효유", "치즈"), "유제품", "consumer", "FOOD"),
-    (("식품첨가물", "특수효소", "조미액", "카라기난"), "식품소재·첨가물", "consumer", "INGREDIENT"),
+    (
+        ("식품첨가물", "특수효소", "조미액", "카라기난"),
+        "식품소재·첨가물",
+        "consumer",
+        "INGREDIENT",
+    ),
     (("급식", "컨세션", "외식", "푸드서비스"), "급식·외식", "consumer", "FOOD"),
     (("식자재", "식품 유통", "식품유통"), "식품유통", "consumer", "FOOD"),
-    (("두부", "콩나물", "신선식품", "계란", "액상계란"), "신선·가공식품", "consumer", "FOOD"),
+    (
+        ("두부", "콩나물", "신선식품", "계란", "액상계란"),
+        "신선·가공식품",
+        "consumer",
+        "FOOD",
+    ),
     (("식용색소",), "식품소재·첨가물", "consumer", "INGREDIENT"),
 ]
 
@@ -879,11 +958,41 @@ FOOD_CATEGORY_RULES: list[tuple[tuple[str, ...], str, str, str]] = [
 # a single SKU, or an accounting-table row.  They are applied after the food
 # rules and before the raw DART label is used as a final fallback.
 BUSINESS_CATEGORY_RULES: list[tuple[tuple[str, ...], str, str, str]] = [
-    (("반도체 패키징", "패키징 및 테스트", "패키지 테스트", "후공정"), "반도체 패키징·테스트", "chip", "CHIP"),
-    (("Si-Parts", "SiC-Parts", "Silicon Parts", "실리콘부품", "웨이퍼", "식각부품", "반도체 소재", "반도체 재료", "공정소모품"), "반도체 소재·소모품", "chip", "PARTS"),
-    (("반도체 장비", "식각장비", "증착장비", "세정장비", "검사장비", "테스트 장비"), "반도체 장비", "chip", "EQUIP"),
+    (
+        ("반도체 패키징", "패키징 및 테스트", "패키지 테스트", "후공정"),
+        "반도체 패키징·테스트",
+        "chip",
+        "CHIP",
+    ),
+    (
+        (
+            "Si-Parts",
+            "SiC-Parts",
+            "Silicon Parts",
+            "실리콘부품",
+            "웨이퍼",
+            "식각부품",
+            "반도체 소재",
+            "반도체 재료",
+            "공정소모품",
+        ),
+        "반도체 소재·소모품",
+        "chip",
+        "PARTS",
+    ),
+    (
+        ("반도체 장비", "식각장비", "증착장비", "세정장비", "검사장비", "테스트 장비"),
+        "반도체 장비",
+        "chip",
+        "EQUIP",
+    ),
     (("HBM", "DRAM", "NAND", "SSD", "메모리"), "메모리 반도체", "chip", "MEMORY"),
-    (("Foundry", "파운드리", "시스템반도체", "모바일AP", "이미지센서"), "시스템반도체", "chip", "CHIP"),
+    (
+        ("Foundry", "파운드리", "시스템반도체", "모바일AP", "이미지센서"),
+        "시스템반도체",
+        "chip",
+        "CHIP",
+    ),
     (("OLED", "디스플레이 패널", "디스플레이"), "디스플레이", "display", "OLED"),
     (("카메라모듈", "카메라 모듈"), "카메라모듈", "chip", "CAM"),
     (("MLCC", "적층세라믹", "콘덴서"), "전자부품", "chip", "MLCC"),
@@ -893,10 +1002,20 @@ BUSINESS_CATEGORY_RULES: list[tuple[tuple[str, ...], str, str, str]] = [
     (("전기차", "하이브리드", "EV"), "전기차·하이브리드", "auto", "EV"),
     (("파워트레인", "엔진", "변속기"), "구동계 부품", "auto", "PARTS"),
     (("배터리 셀", "이차전지 셀", "2차전지 셀"), "배터리 셀", "battery", "CELL"),
-    (("양극재", "음극재", "전해액", "분리막", "배터리 소재"), "배터리 소재", "battery", "MATERIAL"),
+    (
+        ("양극재", "음극재", "전해액", "분리막", "배터리 소재"),
+        "배터리 소재",
+        "battery",
+        "MATERIAL",
+    ),
     (("배터리 장비", "충방전", "전극공정"), "배터리 장비", "battery", "EQUIP"),
     (("의약품", "신약", "원료의약품", "제약"), "의약품", "bio", "PHARMA"),
-    (("CDMO", "위탁개발", "위탁생산", "바이오의약품 생산"), "바이오의약품 위탁개발·생산", "bio", "CDMO"),
+    (
+        ("CDMO", "위탁개발", "위탁생산", "바이오의약품 생산"),
+        "바이오의약품 위탁개발·생산",
+        "bio",
+        "CDMO",
+    ),
     (("바이오시밀러",), "바이오시밀러", "bio", "BIO"),
     (("진단", "분자진단", "체외진단"), "진단·분석", "bio", "DIAGNOSTIC"),
     (("의료기기", "의료용 기기", "치과", "임플란트"), "의료기기", "bio", "MEDICAL"),
@@ -948,8 +1067,10 @@ def is_redundant_category(title: str, existing: set[str]) -> bool:
         current_tokens = {
             token.strip() for token in current.split("·") if token.strip()
         }
-        if tokens and current_tokens and (
-            tokens <= current_tokens or current_tokens <= tokens
+        if (
+            tokens
+            and current_tokens
+            and (tokens <= current_tokens or current_tokens <= tokens)
         ):
             return True
     return False
@@ -1038,8 +1159,7 @@ def card_sector_mismatch(card: dict[str, Any], payload: dict[str, Any]) -> bool:
         )
     if stype == "retail":
         return any(
-            word in combined
-            for word in ("방산", "항공기", "금융보증", "반도체 패키징")
+            word in combined for word in ("방산", "항공기", "금융보증", "반도체 패키징")
         )
     return False
 
@@ -1055,11 +1175,19 @@ def infer_kind_visual(text: str, sector: str = "") -> tuple[str, str]:
 def product_caption(name: str, sector: str, overview: str) -> str:
     if any(word in name for word in ("면제품", "라면", "당면", "국수")):
         return "라면, 당면, 국수처럼 반복 구매가 많은 면류 제품군입니다."
-    if any(word in name for word in ("양념", "소스", "카레", "케찹", "케첩", "마요네즈")):
+    if any(
+        word in name for word in ("양념", "소스", "카레", "케찹", "케첩", "마요네즈")
+    ):
         return "가정식 조리와 외식 수요에 함께 쓰이는 소스·조미 제품군입니다."
-    if any(word in name for word in ("농수산", "참치", "가공식품", "간편식", "만두", "김치", "햇반")):
+    if any(
+        word in name
+        for word in ("농수산", "참치", "가공식품", "간편식", "만두", "김치", "햇반")
+    ):
         return "저장식품과 간편식처럼 소비자 식탁에 바로 닿는 가공식품입니다."
-    if any(word in name for word in ("소재식품", "설탕", "밀가루", "식용유", "원당", "유지")):
+    if any(
+        word in name
+        for word in ("소재식품", "설탕", "밀가루", "식용유", "원당", "유지")
+    ):
         return "다른 식품을 만드는 데 들어가는 기초 소재라 원재료 가격 영향을 받습니다."
     if any(word in name for word in ("사료", "축산", "F&C")):
         return "곡물 가격과 축산 수요에 영향을 받는 사료·축산 사업입니다."
