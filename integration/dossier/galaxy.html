@@ -72,7 +72,7 @@ a{color:var(--cyan);} a:hover{color:var(--mint);}
   <div data-screen-label="인트로" style="position:relative;z-index:2;display:grid;grid-template-columns:1.1fr 1.6fr;gap:28px;padding:26px 28px 24px;border-bottom:1px solid var(--line);">
     <div>
       <div style="font-size:24px;font-weight:800;line-height:1.45;letter-spacing:-.01em;">작년 통장의 <span style="font-family:var(--mono);color:var(--cyan);">{{ corp.cash_begin }}</span>는, 어떻게 올해 <span style="font-family:var(--mono);color:var(--cyan);">{{ corp.cash_end }}</span>가 됐을까요?</div>
-      <div style="margin-top:12px;font-size:15px;line-height:1.7;">이 이야기의 핵심은 <b>'손익 성적표의 이익'과 '통장의 현금'이 왜 다른가</b>예요.</div>
+      <div style="margin-top:12px;font-size:15px;line-height:1.7;">{{ strings.intro_lead }}</div>
       <div style="margin-top:8px;font-size:13px;line-height:1.65;color:var(--dim);">{{ strings.intro_lines.1 }}</div>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
@@ -1504,7 +1504,15 @@ class Component extends DCLogic {
     return {
       pv, pt,
       corp: this._G ? this._G.corp : { name: '', fiscal_year: '', period: '', basis: '', cash_begin: '', cash_end: '' },
-      strings: this._G ? this._G.strings : { intro_lines: ['', ''] },
+      // V-110: `intro_lines[0]`은 티커마다 저작해 두고도 템플릿이 고정 문구를 쓰는 바람에
+      //  한 번도 렌더되지 않았다. 여기서 배선하되, 비어 있으면 종전 문구로 폴백한다.
+      strings: this._G
+        ? Object.assign({}, this._G.strings, {
+            intro_lead:
+              (((this._G.strings || {}).intro_lines || [])[0] || '').trim() ||
+              "이 이야기의 핵심은 '손익 성적표의 이익'과 '통장의 현금'이 왜 다른가예요.",
+          })
+        : { intro_lines: ['', ''], intro_lead: '' },
       galaxySvg: safe(this.buildGalaxy, null),
       midOverlay: safe(this.buildMidOverlay, null),
       inspectorCard: safe(this.buildCard, null),
