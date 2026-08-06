@@ -89,7 +89,29 @@
   "snippets": {
     "overview": "(주)이노테크의 주요 사업은 디스플레이 SW융합제품 사업화, 개발사업, 구축사업입니다. 제품 등의 가격 변동 추이 당사는 발주처의 요구사양에 맞추어 제작되며 수주산업으로 발주처의 요구사양에 맞추어 제작되어 고객이 요구한 사양, 기능, 품질등 여러요인에 영향을 받고 있어 제품의 가격은 각 프로젝트의 요구사양 및 입찰 상황에 따라 변동됩니다. 이후 견적서 제출, 계약서 체결, 장비 제작, 납품, 설치, 대금 수령되어 판매가 완료됩니다.",
     "segment_finance": "(주)이노테크의 주요 사업은 디스플레이 SW융합제품 사업화, 개발사업, 구축사업입니다. 제품 등의 가격 변동 추이 당사는 발주처의 요구사양에 맞추어 제작되며 수주산업으로 발주처의 요구사양에 맞추어 제작되어 고객이 요구한 사양, 기능, 품질등 여러요인에 영향을 받고 있어 제품의 가격은 각 프로젝트의 요구사양 및 입찰 상황에 따라 변동됩니다. 이후 견적서 제출, 계약서 체결, 장비 제작, 납품, 설치, 대금 수령되어 판매가 완료됩니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "디스플레이",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.3%",
+        "revenue_share": 0.3231,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "반도체",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.3%",
+        "revenue_share": 0.0429,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "수처리약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 61.7%",
+        "revenue_share": 0.617,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "NAND",
       "SSD",
@@ -104,24 +126,62 @@
       "Flexible 복합신뢰성환경 시험장비",
       "차세대디스플레이인 폴더블"
     ],
-    "investor_note": "(주)이노테크의 주요 사업은 디스플레이 SW융합제품 사업화, 개발사업, 구축사업입니다. 제품 등의 가격 변동 추이 당사는 발주처의 요구사양에 맞추어 제작되며 수주산업으로 발주처의 요구사양에 맞추어 제작되어 고객이 요구한 사양, 기능, 품질등 여러요인에 영향을 받고 있어 제품의 가격은 각 프로젝트의 요구사양 및 입찰 상황에 따라 변동됩니다. 이후 견적서 제출, 계약서 체결, 장비 제작, 납품, 설치, 대금 수령되어 판매가 완료됩니다."
+    "investor_note": "(주)이노테크의 주요 사업은 디스플레이 SW융합제품 사업화, 개발사업, 구축사업입니다. 제품 등의 가격 변동 추이 당사는 발주처의 요구사양에 맞추어 제작되며 수주산업으로 발주처의 요구사양에 맞추어 제작되어 고객이 요구한 사양, 기능, 품질등 여러요인에 영향을 받고 있어 제품의 가격은 각 프로젝트의 요구사양 및 입찰 상황에 따라 변동됩니다. 이후 견적서 제출, 계약서 체결, 장비 제작, 납품, 설치, 대금 수령되어 판매가 완료됩니다.",
+    "product_service_segments": [
+      {
+        "name": "디스플레이",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.3%",
+        "revenue_share": 0.3231,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "반도체",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.3%",
+        "revenue_share": 0.0429,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타(2차전지, 전기전자,자동차 등)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.0%",
+        "revenue_share": 0.0004,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "수처리약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 61.7%",
+        "revenue_share": 0.617,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "디스플레이 SW융합제품 사업화",
-      "caption": "디스플레이 관련 제품·서비스",
+      "title": "디스플레이",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.3%",
       "kind": "display",
-      "visual": "디스플레이",
+      "visual": "OLED",
       "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "특수 목적용 기계 제조업",
-      "caption": "특수 목적용 기계 제조업을 중심으로 매출을 만듭니다.",
+      "title": "반도체",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.3%",
+      "kind": "chip",
+      "visual": "CHIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "수처리약품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 61.7%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

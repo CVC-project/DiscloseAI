@@ -153,7 +153,22 @@
   "snippets": {
     "overview": "(주)씨티알모빌리티의 주요 사업은 부품사업입니다. 특히 국산화 대상 제품은 많은 투자비용, 연구개발 경험, 인력이 필요하고 기술력, 원가 경쟁력이 없으면 고객사로부터 수주의 기회를 실기하는 경우가 많습니다. 고객에 대해서는 업계 상위 생산에 따른 규모의 경제를 확보하여 경쟁력 있는 가격을 제공하고, 신규 기술 동향에 맞게 고객에게 기술 지원을 통해 시장 선점에 주력하고 있습니다.",
     "segment_finance": "(주)씨티알모빌리티의 주요 사업은 부품사업입니다. 특히 국산화 대상 제품은 많은 투자비용, 연구개발 경험, 인력이 필요하고 기술력, 원가 경쟁력이 없으면 고객사로부터 수주의 기회를 실기하는 경우가 많습니다. 고객에 대해서는 업계 상위 생산에 따른 규모의 경제를 확보하여 경쟁력 있는 가격을 제공하고, 신규 기술 동향에 맞게 고객에게 기술 지원을 통해 시장 선점에 주력하고 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "구동부분",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 64.0%",
+        "revenue_share": 0.6397,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "현가부분",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.8%",
+        "revenue_share": 0.3581,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "기존 사업",
       "- 라인 효율화",
@@ -168,22 +183,38 @@
       "자동변속기 부품(전륜 6속",
       "후륜 8속"
     ],
-    "investor_note": "(주)씨티알모빌리티의 주요 사업은 부품사업입니다. 특히 국산화 대상 제품은 많은 투자비용, 연구개발 경험, 인력이 필요하고 기술력, 원가 경쟁력이 없으면 고객사로부터 수주의 기회를 실기하는 경우가 많습니다. 고객에 대해서는 업계 상위 생산에 따른 규모의 경제를 확보하여 경쟁력 있는 가격을 제공하고, 신규 기술 동향에 맞게 고객에게 기술 지원을 통해 시장 선점에 주력하고 있습니다."
+    "investor_note": "(주)씨티알모빌리티의 주요 사업은 부품사업입니다. 특히 국산화 대상 제품은 많은 투자비용, 연구개발 경험, 인력이 필요하고 기술력, 원가 경쟁력이 없으면 고객사로부터 수주의 기회를 실기하는 경우가 많습니다. 고객에 대해서는 업계 상위 생산에 따른 규모의 경제를 확보하여 경쟁력 있는 가격을 제공하고, 신규 기술 동향에 맞게 고객에게 기술 지원을 통해 시장 선점에 주력하고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "구동부분",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 64.0%",
+        "revenue_share": 0.6397,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "현가부분",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.8%",
+        "revenue_share": 0.3581,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "라인 효율화",
-      "caption": "- 라인 효율화 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "-",
+      "title": "구동부분",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 64.0%",
+      "kind": "auto",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "자동차 신품 부품 제조업",
-      "caption": "자동차 신품 부품 제조업을 중심으로 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
+      "title": "현가부분",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.8%",
+      "kind": "auto",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     }

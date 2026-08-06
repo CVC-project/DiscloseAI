@@ -139,24 +139,32 @@
     "segment_finance": "한주라이트메탈은 울산 본사·화산·원산 공장과 슬로바키아 종속기업을 통해 알루미늄 소재 자동차부품을 만드는 회사입니다. 자동차 경량화에 쓰이는 너클·서브프레임 등 초경량화 부품이 매출의 47.9%로 가장 크고, 엔진 부품이 35.0%를 차지하며, 전기차 배터리케이스 등 EV 부품과 선박 부품은 각각 4%대입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,594억 원으로 전년 대비 3.5% 늘었고 영업이익은 전년 적자에서 13억 원 흑자로 전환됐지만, 당기순이익은 여전히 27억 원 적자입니다. 부채비율은 358.7%로 자본보다 부채가 훨씬 많아 재무 부담을 눈여겨볼 필요가 있습니다.",
     "segment_breakdown": [
       {
+        "name": "자동차부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.2%",
+        "revenue_share": 0.042,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
         "name": "초경량화 부품",
-        "desc": "너클·캐리어, 서브프레임 크로스멤버, 하이브리드 디스크 등 알루미늄 경량화 자동차부품",
-        "revenue_share": 0.479
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 47.9%",
+        "revenue_share": 0.479,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "엔진 부품",
-        "desc": "8단 변속기 오일펌프 커버 등 엔진 부품",
-        "revenue_share": 0.35
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.0%",
+        "revenue_share": 0.35,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "선박 부품",
-        "desc": "스위블 브라켓 등 선박용 알루미늄 부품",
-        "revenue_share": 0.049
-      },
-      {
-        "name": "EV 부품",
-        "desc": "전기차 배터리케이스·모터하우징",
-        "revenue_share": 0.042
+        "name": "WHEEL",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.001,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -169,40 +177,62 @@
       "알로이 휠",
       "스위블 브라켓(선박부품)"
     ],
-    "investor_note": "한주라이트메탈은 울산 본사·화산·원산 공장과 슬로바키아 종속기업을 통해 알루미늄 소재 자동차부품을 만드는 회사입니다. 자동차 경량화에 쓰이는 너클·서브프레임 등 초경량화 부품이 매출의 47.9%로 가장 크고, 엔진 부품이 35.0%를 차지하며, 전기차 배터리케이스 등 EV 부품과 선박 부품은 각각 4%대입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,594억 원으로 전년 대비 3.5% 늘었고 영업이익은 전년 적자에서 13억 원 흑자로 전환됐지만, 당기순이익은 여전히 27억 원 적자입니다. 부채비율은 358.7%로 자본보다 부채가 훨씬 많아 재무 부담을 눈여겨볼 필요가 있습니다."
+    "investor_note": "한주라이트메탈은 울산 본사·화산·원산 공장과 슬로바키아 종속기업을 통해 알루미늄 소재 자동차부품을 만드는 회사입니다. 자동차 경량화에 쓰이는 너클·서브프레임 등 초경량화 부품이 매출의 47.9%로 가장 크고, 엔진 부품이 35.0%를 차지하며, 전기차 배터리케이스 등 EV 부품과 선박 부품은 각각 4%대입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,594억 원으로 전년 대비 3.5% 늘었고 영업이익은 전년 적자에서 13억 원 흑자로 전환됐지만, 당기순이익은 여전히 27억 원 적자입니다. 부채비율은 358.7%로 자본보다 부채가 훨씬 많아 재무 부담을 눈여겨볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "자동차부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.2%",
+        "revenue_share": 0.042,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "초경량화 부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 47.9%",
+        "revenue_share": 0.479,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "엔진 부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.0%",
+        "revenue_share": 0.35,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "WHEEL",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.001,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
+      "title": "자동차부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.2%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
+    },
+    {
       "title": "초경량화 부품",
-      "caption": "너클·캐리어, 서브프레임 크로스멤버, 하이브리드 디스크 등 알루미늄 경량화 자동차부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 47.9%",
       "kind": "auto",
-      "visual": "초경량화",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "엔진 부품",
-      "caption": "8단 변속기 오일펌프 커버 등 엔진 부품",
+      "title": "구동계 부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.0%",
       "kind": "auto",
-      "visual": "엔진",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "선박 부품",
-      "caption": "스위블 브라켓 등 선박용 알루미늄 부품",
-      "kind": "auto",
-      "visual": "선박",
-      "image": "../data/business_images/business_image_local_ship.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "EV 부품",
-      "caption": "전기차 배터리케이스·모터하우징",
-      "kind": "battery",
-      "visual": "EV",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
+      "visual": "PARTS",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

@@ -140,8 +140,17 @@
     "segment_breakdown": [
       {
         "name": "PET부문",
-        "desc": "PET부문 관련 제품·서비스",
-        "revenue_share": null
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 63.2%",
+        "revenue_share": 0.632,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
+        "revenue_share": 0.018,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -155,38 +164,44 @@
       "인도어",
       "네츄럴시그니처 포독"
     ],
-    "investor_note": "주식회사 오에스피의 주요 금융 서비스는 PET부문, 인디고바이오뉴트리션포캣, 농림축산식품 미생물유전체전략연구사업단, KB금융 등입니다. 예금·대출, 투자, 보험, 카드 등에서 수익을 만듭니다. 이와 같은 실적으로 기존 고객의 만족도를 지속적으로 높이면서 신뢰의 관계를 이어가고, 추가로 펫푸드 시장에 새로 진입하려고 하는 업체들 뿐만 아니라, 기존 제조업체에서 품질 등에 실망하여 믿을 수 있는 제조업체로 옮기려고 하는 업체까지 수용하여, 지속적으로 생산량을 늘려 나가도록 하겠습니다. 당사는 주문자생산방식으로 공급·판매하고 있어, 수주내역이 존재하지 않아 해당사항이 없습니다. 금융회사는 단순 매출보다 이자수익, 수수료, 충당금, 자본 여력이 함께 움직입니다."
+    "investor_note": "주식회사 오에스피의 주요 금융 서비스는 PET부문, 인디고바이오뉴트리션포캣, 농림축산식품 미생물유전체전략연구사업단, KB금융 등입니다. 예금·대출, 투자, 보험, 카드 등에서 수익을 만듭니다. 이와 같은 실적으로 기존 고객의 만족도를 지속적으로 높이면서 신뢰의 관계를 이어가고, 추가로 펫푸드 시장에 새로 진입하려고 하는 업체들 뿐만 아니라, 기존 제조업체에서 품질 등에 실망하여 믿을 수 있는 제조업체로 옮기려고 하는 업체까지 수용하여, 지속적으로 생산량을 늘려 나가도록 하겠습니다. 당사는 주문자생산방식으로 공급·판매하고 있어, 수주내역이 존재하지 않아 해당사항이 없습니다. 금융회사는 단순 매출보다 이자수익, 수수료, 충당금, 자본 여력이 함께 움직입니다.",
+    "product_service_segments": [
+      {
+        "name": "PET부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 63.2%",
+        "revenue_share": 0.632,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "PB제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.3%",
+        "revenue_share": 0.343,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
+        "revenue_share": 0.018,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.0%",
+        "revenue_share": 0.09,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "은행",
-      "caption": "예금과 대출에서 이자이익을 만드는 금융 서비스입니다.",
-      "kind": "bank",
-      "visual": "BANK",
-      "image": "../data/business_images/business_image_food_feed.svg",
-      "image_source": "Local visual"
-    },
-    {
-      "title": "캐피탈",
-      "caption": "캐피탈 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "펫푸드",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 63.2%",
       "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_food_feed.svg",
-      "image_source": "Local visual"
-    },
-    {
-      "title": "PET부문",
-      "caption": "PET부문 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_food_feed.svg",
-      "image_source": "Local visual"
-    },
-    {
-      "title": "ODM제품",
-      "caption": "ODM제품 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "consumer",
-      "visual": "SHOP",
+      "visual": "FEED",
       "image": "../data/business_images/business_image_food_feed.svg",
       "image_source": "Local visual"
     }

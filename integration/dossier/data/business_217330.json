@@ -155,9 +155,11 @@
     "segment_finance": "(주)싸이토젠의 주요 서비스는 의약품, 고객 구분, 제공 서비스, 솔루션, 경쟁력, 의사입니다. 이용자 활동을 광고·결제·콘텐츠·거래 수익으로 연결합니다. 다만, 분석 등에 필요한 각종 원재료 등의 재고는 사전에 준비하여 고객 주문에 따른 수주 대응을 하고 있습니다. 이렇게 쌓인 임상적 데이터 및 레퍼런스들을 기반으로 현지에서의 파트너십을 강화할 예정이며 글로벌 시장에서의 매출도 확대해 나갈 계획입니다. 플랫폼 기업은 이용자 기반이 광고, 결제, 구독, 콘텐츠 수익으로 이어지는 구조가 핵심입니다.",
     "segment_breakdown": [
       {
-        "name": "바이오",
-        "desc": "바이오마커 발굴 관련 제품·서비스",
-        "revenue_share": null
+        "name": "독성 및 분자진단",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.2%",
+        "revenue_share": 0.0721,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,40 +176,55 @@
       "검증",
       "동반진단개발사업"
     ],
-    "investor_note": "(주)싸이토젠의 주요 서비스는 의약품, 고객 구분, 제공 서비스, 솔루션, 경쟁력, 의사입니다. 이용자 활동을 광고·결제·콘텐츠·거래 수익으로 연결합니다. 다만, 분석 등에 필요한 각종 원재료 등의 재고는 사전에 준비하여 고객 주문에 따른 수주 대응을 하고 있습니다. 이렇게 쌓인 임상적 데이터 및 레퍼런스들을 기반으로 현지에서의 파트너십을 강화할 예정이며 글로벌 시장에서의 매출도 확대해 나갈 계획입니다. 플랫폼 기업은 이용자 기반이 광고, 결제, 구독, 콘텐츠 수익으로 이어지는 구조가 핵심입니다."
+    "investor_note": "(주)싸이토젠의 주요 서비스는 의약품, 고객 구분, 제공 서비스, 솔루션, 경쟁력, 의사입니다. 이용자 활동을 광고·결제·콘텐츠·거래 수익으로 연결합니다. 다만, 분석 등에 필요한 각종 원재료 등의 재고는 사전에 준비하여 고객 주문에 따른 수주 대응을 하고 있습니다. 이렇게 쌓인 임상적 데이터 및 레퍼런스들을 기반으로 현지에서의 파트너십을 강화할 예정이며 글로벌 시장에서의 매출도 확대해 나갈 계획입니다. 플랫폼 기업은 이용자 기반이 광고, 결제, 구독, 콘텐츠 수익으로 이어지는 구조가 핵심입니다.",
+    "product_service_segments": [
+      {
+        "name": "Liquid Biopsy 응용사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.7%",
+        "revenue_share": 0.5071,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "독성 및 분자진단",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.2%",
+        "revenue_share": 0.0721,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "게놈기술개발 및 분석서비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 42.1%",
+        "revenue_share": 0.4208,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "의약품",
-      "caption": "의약품 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "Liquid Biopsy 응용사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "진단·분석",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.2%",
       "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "DIAGNOSTIC",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "제공 서비스",
-      "caption": "제공 서비스 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "게놈기술개발 및 분석서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 42.1%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "솔루션",
-      "caption": "솔루션 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "경쟁력",
-      "caption": "경쟁력 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

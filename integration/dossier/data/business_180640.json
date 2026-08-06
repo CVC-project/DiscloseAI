@@ -153,7 +153,22 @@
   "snippets": {
     "overview": "(주)한진칼의 핵심은 호텔사업, 임대사업, 1. 항공운송사업, 3. 호텔사업 등입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 주요자회사 ㈜한진㈜한진은 고객 가치 제고를 위한 컨설팅/솔루션 제공 및 고객중심의 차별화된 서비스 제공을 통해 판매를 확대할 계획입니다.라. 주요자회사 ㈜한진 ㈜한진은 물류, 택배, 글로벌, 에너지 사업을 영위하고 있습니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다.",
     "segment_finance": "(주)한진칼의 핵심은 호텔사업, 임대사업, 1. 항공운송사업, 3. 호텔사업 등입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 주요자회사 ㈜한진㈜한진은 고객 가치 제고를 위한 컨설팅/솔루션 제공 및 고객중심의 차별화된 서비스 제공을 통해 판매를 확대할 계획입니다.라. 주요자회사 ㈜한진 ㈜한진은 물류, 택배, 글로벌, 에너지 사업을 영위하고 있습니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "배당",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 65.1%",
+        "revenue_share": 0.651,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "대한항공",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.9%",
+        "revenue_share": 0.029,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "배터리",
       "원유",
@@ -166,24 +181,62 @@
       "글로벌",
       "대리 서비스"
     ],
-    "investor_note": "(주)한진칼의 핵심은 호텔사업, 임대사업, 1. 항공운송사업, 3. 호텔사업 등입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 주요자회사 ㈜한진㈜한진은 고객 가치 제고를 위한 컨설팅/솔루션 제공 및 고객중심의 차별화된 서비스 제공을 통해 판매를 확대할 계획입니다.라. 주요자회사 ㈜한진 ㈜한진은 물류, 택배, 글로벌, 에너지 사업을 영위하고 있습니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다."
+    "investor_note": "(주)한진칼의 핵심은 호텔사업, 임대사업, 1. 항공운송사업, 3. 호텔사업 등입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 주요자회사 ㈜한진㈜한진은 고객 가치 제고를 위한 컨설팅/솔루션 제공 및 고객중심의 차별화된 서비스 제공을 통해 판매를 확대할 계획입니다.라. 주요자회사 ㈜한진 ㈜한진은 물류, 택배, 글로벌, 에너지 사업을 영위하고 있습니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다.",
+    "product_service_segments": [
+      {
+        "name": "지주사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.6%",
+        "revenue_share": 0.306,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "배당",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 65.1%",
+        "revenue_share": 0.651,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임대사업(주1)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.6%",
+        "revenue_share": 0.046,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "대한항공",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.9%",
+        "revenue_share": 0.029,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "금융 서비스",
-      "caption": "예금, 대출, 수수료 등 금융 서비스를 제공합니다.",
-      "kind": "bank",
-      "visual": "BANK",
-      "image": "../data/business_images/business_image_local_bank.svg",
-      "image_source": "Local curated visual"
+      "title": "지주사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "투자·운용",
-      "caption": "자산 운용과 투자 수익이 실적에 영향을 줍니다.",
-      "kind": "securities",
-      "visual": "AUM",
-      "image": "../data/business_images/business_image_local_securities.svg",
-      "image_source": "Local curated visual"
+      "title": "배당",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 65.1%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "임대사업(주1)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

@@ -155,14 +155,11 @@
     "segment_finance": "한국공항은 대한항공 계열의 공항 지상조업 전문회사로, 항공화물 상하역·항공기 급유·견인 등 지상조업이 매출의 약 80%를 차지합니다. 자회사 에어코리아를 통해 항공여객 체크인·운항관리 서비스도 제공하며, 제주 생수·축산물 판매와 제주민속촌 운영 등 비조업 사업으로도 영역을 넓히고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,631억 원으로 전년 대비 5.9% 늘었고 영업이익도 4.5% 증가했지만, 당기순이익은 소폭(0.1%) 줄었습니다. 부채비율은 30.7%로 재무구조는 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "항공운수보조(지상조업)",
-        "desc": "항공화물 상하역·항공기 급유·견인유도 등 항공기 지상조업",
-        "revenue_share": 0.8
-      },
-      {
-        "name": "항공여객운송조업(에어코리아)",
-        "desc": "공항 내 항공여객 체크인, 출입국 지원, 운항관리 위탁",
-        "revenue_share": 0.122
+        "name": "항공여객운송조업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -175,24 +172,25 @@
       "제주민속촌 운영",
       "지게차 렌탈"
     ],
-    "investor_note": "한국공항은 대한항공 계열의 공항 지상조업 전문회사로, 항공화물 상하역·항공기 급유·견인 등 지상조업이 매출의 약 80%를 차지합니다. 자회사 에어코리아를 통해 항공여객 체크인·운항관리 서비스도 제공하며, 제주 생수·축산물 판매와 제주민속촌 운영 등 비조업 사업으로도 영역을 넓히고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,631억 원으로 전년 대비 5.9% 늘었고 영업이익도 4.5% 증가했지만, 당기순이익은 소폭(0.1%) 줄었습니다. 부채비율은 30.7%로 재무구조는 안정적인 편입니다."
+    "investor_note": "한국공항은 대한항공 계열의 공항 지상조업 전문회사로, 항공화물 상하역·항공기 급유·견인 등 지상조업이 매출의 약 80%를 차지합니다. 자회사 에어코리아를 통해 항공여객 체크인·운항관리 서비스도 제공하며, 제주 생수·축산물 판매와 제주민속촌 운영 등 비조업 사업으로도 영역을 넓히고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,631억 원으로 전년 대비 5.9% 늘었고 영업이익도 4.5% 증가했지만, 당기순이익은 소폭(0.1%) 줄었습니다. 부채비율은 30.7%로 재무구조는 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "항공여객운송조업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "항공운수보조(지상조업)",
-      "caption": "항공화물 상하역·항공기 급유·견인유도 등 항공기 지상조업",
-      "kind": "service",
-      "visual": "항공운수보조",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "항공여객운송조업(에어코리아)",
-      "caption": "공항 내 항공여객 체크인, 출입국 지원, 운항관리 위탁",
-      "kind": "service",
-      "visual": "항공여객운송조업",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
+      "title": "방산·항공",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+      "kind": "ship",
+      "visual": "DEFENSE",
+      "image": "../data/business_images/business_image_1805fba8159acac6.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

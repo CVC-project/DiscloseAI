@@ -156,13 +156,17 @@
     "segment_breakdown": [
       {
         "name": "반도체부문",
-        "desc": "반도체부문 관련 제품·서비스",
-        "revenue_share": null
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 90.3%",
+        "revenue_share": 0.903,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "디스플레이부문",
-        "desc": "디스플레이부문 관련 제품·서비스",
-        "revenue_share": null
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.7%",
+        "revenue_share": 0.097,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -178,40 +182,40 @@
       "Wet Station",
       "Coater"
     ],
-    "investor_note": "(주)케이씨텍의 주요 제품·서비스는 OLED, 반도체부문, 반도체 장비, 소재의 제조, 연마(CMP) 장비, 연마 소재(Slurry)입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 생산실적 당사가 당기 중 생산하여 고객사로 공급한 제품의 매출액은 357,164백만원입니다. 국내 고객사의 투자가 확정되면 당사의 영업조직은 제품 사양을 고객사와 사전에 협의하며, 협의를 통해 확정된 사양으로 제품을 제작, 공급하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)케이씨텍의 주요 제품·서비스는 OLED, 반도체부문, 반도체 장비, 소재의 제조, 연마(CMP) 장비, 연마 소재(Slurry)입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 생산실적 당사가 당기 중 생산하여 고객사로 공급한 제품의 매출액은 357,164백만원입니다. 국내 고객사의 투자가 확정되면 당사의 영업조직은 제품 사양을 고객사와 사전에 협의하며, 협의를 통해 확정된 사양으로 제품을 제작, 공급하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "반도체부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 90.3%",
+        "revenue_share": 0.903,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "디스플레이부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.7%",
+        "revenue_share": 0.097,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
+      "title": "반도체부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 90.3%",
+      "kind": "chip",
+      "visual": "CHIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "디스플레이",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.7%",
       "kind": "display",
       "visual": "OLED",
       "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
       "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "반도체부문",
-      "caption": "반도체부문 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "chip",
-      "visual": "CHIP",
-      "image": "../data/business_images/business_image_local_semiconductor_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "반도체 장비",
-      "caption": "반도체 장비 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "chip",
-      "visual": "CHIP",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "소재의 제조",
-      "caption": "소재의 제조 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
     }
   ],
   "custom_report_ideas": [

@@ -107,9 +107,25 @@
     "segment_finance": "장르의 판매 시장을 확대하고 판매 경로를 확장함으로써 추가 매출을 확보하고자 합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "신한투자증권",
-        "desc": "증권 관련 제품·서비스",
-        "revenue_share": null
+        "name": "게임개발",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 56.1%",
+        "revenue_share": 0.5613,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "스텔라 블레이드",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.9%",
+        "revenue_share": 0.3993,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "데스티니 차일드(주1)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.4%",
+        "revenue_share": 0.0236,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -124,40 +140,55 @@
       "프로세스 구축",
       "정보통신망이용촉진"
     ],
-    "investor_note": "장르의 판매 시장을 확대하고 판매 경로를 확장함으로써 추가 매출을 확보하고자 합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "장르의 판매 시장을 확대하고 판매 경로를 확장함으로써 추가 매출을 확보하고자 합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "게임개발",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 56.1%",
+        "revenue_share": 0.5613,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "스텔라 블레이드",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.9%",
+        "revenue_share": 0.3993,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "데스티니 차일드(주1)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.4%",
+        "revenue_share": 0.0236,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "시스템 구축·통합",
-      "caption": "기업 업무에 필요한 서버, 네트워크, 소프트웨어를 묶어 하나의 시스템으로 구축합니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "title": "게임",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 56.1%",
+      "kind": "platform",
+      "visual": "GAME",
+      "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "신탁",
-      "caption": "신탁 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "스텔라 블레이드",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.9%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "연구결과의 상품화",
-      "caption": "연구결과의 상품화 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "데스티니 차일드(주1)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.4%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "OnPermise",
-      "caption": "OnPermise 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -155,14 +155,25 @@
     "segment_finance": "제품을 만들고 판매하는 제조 기반 회사입니다. 당사의 회로기판 소재는 기술력, 고객 요구 제품 개발 역량, 생산 및 품질 관리, 비용 구조, 생산 능력(글로벌 최대) 등에서의 경쟁력 차이와 이를 활용한 판매 가격의 차별화를 바탕으로 글로벌 최고 수준의 제품을 공급하며 회로기판 소재 산업을 선도하고 있습니다. 주요제품 등의 가격변동 추이 당사의 제품은 고객사의 제품믹스 (소재별/제품별/인치별 등)에 따라 편차가 큽니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "IT소재부문",
-        "desc": "IT소재, IT소재부문 관련 제품·서비스",
-        "revenue_share": null
+        "name": "IT소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.3%",
+        "revenue_share": 0.0831,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "IT소재부문(㎡)",
-        "desc": "IT소재, IT소재부문 관련 제품·서비스",
-        "revenue_share": null
+        "name": "디스플레이 OLED 소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 66.3%",
+        "revenue_share": 0.663,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "회로기판 소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.4%",
+        "revenue_share": 0.2539,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -175,32 +186,62 @@
       "제품상품용역기타",
       "반도체패키지 소재"
     ],
-    "investor_note": "제품을 만들고 판매하는 제조 기반 회사입니다. 당사의 회로기판 소재는 기술력, 고객 요구 제품 개발 역량, 생산 및 품질 관리, 비용 구조, 생산 능력(글로벌 최대) 등에서의 경쟁력 차이와 이를 활용한 판매 가격의 차별화를 바탕으로 글로벌 최고 수준의 제품을 공급하며 회로기판 소재 산업을 선도하고 있습니다. 주요제품 등의 가격변동 추이 당사의 제품은 고객사의 제품믹스 (소재별/제품별/인치별 등)에 따라 편차가 큽니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "제품을 만들고 판매하는 제조 기반 회사입니다. 당사의 회로기판 소재는 기술력, 고객 요구 제품 개발 역량, 생산 및 품질 관리, 비용 구조, 생산 능력(글로벌 최대) 등에서의 경쟁력 차이와 이를 활용한 판매 가격의 차별화를 바탕으로 글로벌 최고 수준의 제품을 공급하며 회로기판 소재 산업을 선도하고 있습니다. 주요제품 등의 가격변동 추이 당사의 제품은 고객사의 제품믹스 (소재별/제품별/인치별 등)에 따라 편차가 큽니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "IT소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.3%",
+        "revenue_share": 0.0831,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "디스플레이 OLED 소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 66.3%",
+        "revenue_share": 0.663,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "회로기판 소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.4%",
+        "revenue_share": 0.2539,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "계속 사업 매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
+      "title": "IT소재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.3%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "디스플레이",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 66.3%",
       "kind": "display",
       "visual": "OLED",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "IT소재",
-      "caption": "IT소재 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "반도체 패키지 소재",
-      "caption": "반도체 패키지 소재 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "전자부품·기판",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.4%",
       "kind": "chip",
-      "visual": "CHIP",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "visual": "PCB",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

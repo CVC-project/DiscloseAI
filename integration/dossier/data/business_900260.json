@@ -153,7 +153,36 @@
   "snippets": {
     "overview": "로스웰인터내셔널유한회사의 주요 제품·서비스는 배터리, 공조제어기, 온풍, 송풍, 자동모드, 강력냉방입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 따라서 위의 제품별 가동률 = (당해 생산량)/(1라인당 연간생산가능수량) 으로 계산하였습니다. 당사와 연결종속회사의 주된 영업활동은 자동차용 전장제품의 연구개발과 제조 및 유통이며, 크게 CAN 제어시스템을 기반으로 한 CAN bus 부문, 자동 에어컨디셔닝 등의 차량용 공조설비 부문、ZTE통신 가정용 정보단말 사업부문으로 구성되어 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "로스웰인터내셔널유한회사의 주요 제품·서비스는 배터리, 공조제어기, 온풍, 송풍, 자동모드, 강력냉방입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 따라서 위의 제품별 가동률 = (당해 생산량)/(1라인당 연간생산가능수량) 으로 계산하였습니다. 당사와 연결종속회사의 주된 영업활동은 자동차용 전장제품의 연구개발과 제조 및 유통이며, 크게 CAN 제어시스템을 기반으로 한 CAN bus 부문, 자동 에어컨디셔닝 등의 차량용 공조설비 부문、ZTE통신 가정용 정보단말 사업부문으로 구성되어 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "CANbus시스템",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.4%",
+        "revenue_share": 0.0143,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "CAN통합음향오락시스템",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.002,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "CAN통합정위및운행기록기-일체",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.1%",
+        "revenue_share": 0.0112,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "공조제어기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.9%",
+        "revenue_share": 0.0094,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "배터리",
       "공조제어기",
@@ -168,40 +197,54 @@
       "가격책정 진행",
       "S 전담자"
     ],
-    "investor_note": "로스웰인터내셔널유한회사의 주요 제품·서비스는 배터리, 공조제어기, 온풍, 송풍, 자동모드, 강력냉방입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 따라서 위의 제품별 가동률 = (당해 생산량)/(1라인당 연간생산가능수량) 으로 계산하였습니다. 당사와 연결종속회사의 주된 영업활동은 자동차용 전장제품의 연구개발과 제조 및 유통이며, 크게 CAN 제어시스템을 기반으로 한 CAN bus 부문, 자동 에어컨디셔닝 등의 차량용 공조설비 부문、ZTE통신 가정용 정보단말 사업부문으로 구성되어 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "로스웰인터내셔널유한회사의 주요 제품·서비스는 배터리, 공조제어기, 온풍, 송풍, 자동모드, 강력냉방입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 따라서 위의 제품별 가동률 = (당해 생산량)/(1라인당 연간생산가능수량) 으로 계산하였습니다. 당사와 연결종속회사의 주된 영업활동은 자동차용 전장제품의 연구개발과 제조 및 유통이며, 크게 CAN 제어시스템을 기반으로 한 CAN bus 부문, 자동 에어컨디셔닝 등의 차량용 공조설비 부문、ZTE통신 가정용 정보단말 사업부문으로 구성되어 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "CANbus시스템",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.4%",
+        "revenue_share": 0.0143,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "CAN통합음향오락시스템",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.002,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "CAN통합정위및운행기록기-일체",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.1%",
+        "revenue_share": 0.0112,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "공조제어기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.9%",
+        "revenue_share": 0.0094,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "배터리",
-      "caption": "배터리 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
-      "image": "../data/business_images/business_image_local_battery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "공조제어기",
-      "caption": "공조제어기 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "CANbus시스템",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.4%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "온풍",
-      "caption": "온풍 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "CAN통합정위및운행기록기-일체",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.1%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "송풍",
-      "caption": "송풍 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

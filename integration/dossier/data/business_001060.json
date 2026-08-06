@@ -155,19 +155,18 @@
     "segment_finance": "JW중외제약은 리바로, 헴리브라, 트루패스 등 오리지널 신약과 위너프로 대표되는 수액제를 주력으로 하는 제약회사로, 화콜·하이맘 같은 생활 속 일반의약품도 함께 판매합니다. 글로벌 R&D 네트워크와 당진·시화 생산시설을 바탕으로 순환기·내분비계 치료제 시장을 선도하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 7,752억 원으로 전년 대비 7.8% 늘었고 영업이익도 14.5% 증가했지만, 당기순이익은 5.4% 줄었습니다. 부채비율은 63.9%로 무난한 수준이며, 자기자본이익률(ROE)은 17.6%로 수익성은 양호한 편입니다.",
     "segment_breakdown": [
       {
-        "name": "전문의약품(처방약)",
-        "desc": "리바로 등 순환기·내분비계 치료제 중심 처방약",
-        "revenue_share": 0.32
+        "name": "의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.7%",
+        "revenue_share": 0.247,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "수액제",
-        "desc": "영양수액·일반수액·특수수액 등 병원용 수액 제품",
-        "revenue_share": 0.33
-      },
-      {
-        "name": "바이오의약품 도입판매",
-        "desc": "헴리브라·악템라 등 희귀질환·자가면역질환 치료제",
-        "revenue_share": 0.15
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.5%",
+        "revenue_share": 0.095,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -184,32 +183,62 @@
       "페린젝트",
       "헤모류"
     ],
-    "investor_note": "JW중외제약은 리바로, 헴리브라, 트루패스 등 오리지널 신약과 위너프로 대표되는 수액제를 주력으로 하는 제약회사로, 화콜·하이맘 같은 생활 속 일반의약품도 함께 판매합니다. 글로벌 R&D 네트워크와 당진·시화 생산시설을 바탕으로 순환기·내분비계 치료제 시장을 선도하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 7,752억 원으로 전년 대비 7.8% 늘었고 영업이익도 14.5% 증가했지만, 당기순이익은 5.4% 줄었습니다. 부채비율은 63.9%로 무난한 수준이며, 자기자본이익률(ROE)은 17.6%로 수익성은 양호한 편입니다."
+    "investor_note": "JW중외제약은 리바로, 헴리브라, 트루패스 등 오리지널 신약과 위너프로 대표되는 수액제를 주력으로 하는 제약회사로, 화콜·하이맘 같은 생활 속 일반의약품도 함께 판매합니다. 글로벌 R&D 네트워크와 당진·시화 생산시설을 바탕으로 순환기·내분비계 치료제 시장을 선도하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 7,752억 원으로 전년 대비 7.8% 늘었고 영업이익도 14.5% 증가했지만, 당기순이익은 5.4% 줄었습니다. 부채비율은 63.9%로 무난한 수준이며, 자기자본이익률(ROE)은 17.6%로 수익성은 양호한 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.7%",
+        "revenue_share": 0.247,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상/제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.3%",
+        "revenue_share": 0.183,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.5%",
+        "revenue_share": 0.095,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.4%",
+        "revenue_share": 0.024,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "전문의약품(처방약)",
-      "caption": "리바로 등 순환기·내분비계 치료제 중심 처방약",
+      "title": "의약품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.7%",
       "kind": "bio",
-      "visual": "전문의약품",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "수액제",
-      "caption": "영양수액·일반수액·특수수액 등 병원용 수액 제품",
+      "title": "상/제품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.3%",
       "kind": "service",
-      "visual": "수액제",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "바이오의약품 도입판매",
-      "caption": "헴리브라·악템라 등 희귀질환·자가면역질환 치료제",
-      "kind": "bio",
-      "visual": "바이오의약품",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -153,7 +153,36 @@
   "snippets": {
     "overview": "제품을 만들고 판매하는 제조 기반 회사입니다. 광범위한 고객과 전 산업을 망라하는 수요층을 대상으로 범용적이고 표준제품을 생산, 판매하는 전략이 필요하며 이는 당사가 창업 이래 지속적으로 구사한 기본 판매 전략으로 이를 통하여 당사 매출의 근간을 이루고 있습니다. 당사는 범용적이고 표준적인 모션컨트롤 제품을 개발/제조하여 고객사에 직접 판매하거나 자동화 부품을 판매하는 대리점 및 장비 소프트웨어 개발 사업을 영위하는 특약대리점을 통하여 고객사인 각종 자동화 제조/검사장비들에게 공급되고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "제품을 만들고 판매하는 제조 기반 회사입니다. 광범위한 고객과 전 산업을 망라하는 수요층을 대상으로 범용적이고 표준제품을 생산, 판매하는 전략이 필요하며 이는 당사가 창업 이래 지속적으로 구사한 기본 판매 전략으로 이를 통하여 당사 매출의 근간을 이루고 있습니다. 당사는 범용적이고 표준적인 모션컨트롤 제품을 개발/제조하여 고객사에 직접 판매하거나 자동화 부품을 판매하는 대리점 및 장비 소프트웨어 개발 사업을 영위하는 특약대리점을 통하여 고객사인 각종 자동화 제조/검사장비들에게 공급되고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "제 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 87.7%",
+        "revenue_share": 0.877,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "로봇",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.5%",
+        "revenue_share": 0.105,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
+        "revenue_share": 0.018,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "반도체",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.3%",
+        "revenue_share": 0.533,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "HBM",
       "OLED",
@@ -165,24 +194,70 @@
       "<개요> 물류",
       "UX 인터페이스 기술"
     ],
-    "investor_note": "제품을 만들고 판매하는 제조 기반 회사입니다. 광범위한 고객과 전 산업을 망라하는 수요층을 대상으로 범용적이고 표준제품을 생산, 판매하는 전략이 필요하며 이는 당사가 창업 이래 지속적으로 구사한 기본 판매 전략으로 이를 통하여 당사 매출의 근간을 이루고 있습니다. 당사는 범용적이고 표준적인 모션컨트롤 제품을 개발/제조하여 고객사에 직접 판매하거나 자동화 부품을 판매하는 대리점 및 장비 소프트웨어 개발 사업을 영위하는 특약대리점을 통하여 고객사인 각종 자동화 제조/검사장비들에게 공급되고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "제품을 만들고 판매하는 제조 기반 회사입니다. 광범위한 고객과 전 산업을 망라하는 수요층을 대상으로 범용적이고 표준제품을 생산, 판매하는 전략이 필요하며 이는 당사가 창업 이래 지속적으로 구사한 기본 판매 전략으로 이를 통하여 당사 매출의 근간을 이루고 있습니다. 당사는 범용적이고 표준적인 모션컨트롤 제품을 개발/제조하여 고객사에 직접 판매하거나 자동화 부품을 판매하는 대리점 및 장비 소프트웨어 개발 사업을 영위하는 특약대리점을 통하여 고객사인 각종 자동화 제조/검사장비들에게 공급되고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "제 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 87.7%",
+        "revenue_share": 0.877,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "로봇",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.5%",
+        "revenue_share": 0.105,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
+        "revenue_share": 0.018,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "반도체",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.3%",
+        "revenue_share": 0.533,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
+      "title": "제 품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 87.7%",
       "kind": "chip",
       "visual": "CHIP",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "모션제어칩",
-      "caption": "모션제어칩 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "로봇",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.5%",
       "kind": "chip",
       "visual": "CHIP",
-      "image": "../data/business_images/business_image_local_semiconductor_part.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "용역",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
+      "kind": "chip",
+      "visual": "CHIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "반도체",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.3%",
+      "kind": "chip",
+      "visual": "CHIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

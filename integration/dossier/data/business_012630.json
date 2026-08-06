@@ -155,24 +155,32 @@
     "segment_finance": "HDC(에이치디씨)는 HDC현대산업개발(건설), HDC현대EP(소재), 통영에코파워(발전), HDC아이파크몰(유통), HDC영창(악기) 등을 자회사로 둔 지주회사로, 매출의 60% 이상이 아파트·오피스텔 시공 등 건설부문에서 나옵니다. 2024년 가동을 시작한 통영 LNG 복합화력발전소가 새로운 수익원으로 자리잡으며 발전부문 매출이 크게 늘었습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 6조 5,847억 원으로 전년 대비 6.2% 늘었고 영업이익은 6,488억 원으로 88.2% 증가했으며 당기순이익도 4,164억 원으로 60.0% 늘었습니다. 다만 부채비율이 133.7%로 자본보다 빚이 많은 편이고, 자회사 건설현장의 과거 사고와 관련한 행정처분 절차가 진행 중이라는 점도 참고할 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "건설·개발",
-        "desc": "주택, 토목, 건축, 부동산 개발",
-        "revenue_share": 0.627
+        "name": "지 주",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.01,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "소재",
-        "desc": "자동차·건자재용 플라스틱",
-        "revenue_share": 0.138
+        "name": "건 설",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 62.7%",
+        "revenue_share": 0.627,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "발전",
-        "desc": "LNG 복합화력 전력 생산",
-        "revenue_share": 0.11
+        "name": "소 재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.8%",
+        "revenue_share": 0.138,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "운영·유통",
-        "desc": "건물관리, 호텔, 상업시설 임대",
-        "revenue_share": 0.112
+        "name": "발 전",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.0%",
+        "revenue_share": 0.11,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -188,40 +196,70 @@
       "전자피아노",
       "관현악기"
     ],
-    "investor_note": "HDC(에이치디씨)는 HDC현대산업개발(건설), HDC현대EP(소재), 통영에코파워(발전), HDC아이파크몰(유통), HDC영창(악기) 등을 자회사로 둔 지주회사로, 매출의 60% 이상이 아파트·오피스텔 시공 등 건설부문에서 나옵니다. 2024년 가동을 시작한 통영 LNG 복합화력발전소가 새로운 수익원으로 자리잡으며 발전부문 매출이 크게 늘었습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 6조 5,847억 원으로 전년 대비 6.2% 늘었고 영업이익은 6,488억 원으로 88.2% 증가했으며 당기순이익도 4,164억 원으로 60.0% 늘었습니다. 다만 부채비율이 133.7%로 자본보다 빚이 많은 편이고, 자회사 건설현장의 과거 사고와 관련한 행정처분 절차가 진행 중이라는 점도 참고할 필요가 있습니다."
+    "investor_note": "HDC(에이치디씨)는 HDC현대산업개발(건설), HDC현대EP(소재), 통영에코파워(발전), HDC아이파크몰(유통), HDC영창(악기) 등을 자회사로 둔 지주회사로, 매출의 60% 이상이 아파트·오피스텔 시공 등 건설부문에서 나옵니다. 2024년 가동을 시작한 통영 LNG 복합화력발전소가 새로운 수익원으로 자리잡으며 발전부문 매출이 크게 늘었습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 6조 5,847억 원으로 전년 대비 6.2% 늘었고 영업이익은 6,488억 원으로 88.2% 증가했으며 당기순이익도 4,164억 원으로 60.0% 늘었습니다. 다만 부채비율이 133.7%로 자본보다 빚이 많은 편이고, 자회사 건설현장의 과거 사고와 관련한 행정처분 절차가 진행 중이라는 점도 참고할 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "지 주",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.01,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "건 설",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 62.7%",
+        "revenue_share": 0.627,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "소 재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.8%",
+        "revenue_share": 0.138,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "발 전",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.0%",
+        "revenue_share": 0.11,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "건설·개발",
-      "caption": "주택, 토목, 건축, 부동산 개발",
+      "title": "지 주",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
       "kind": "service",
-      "visual": "건설",
-      "image": "../data/business_images/business_image_local_housing.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "소재",
-      "caption": "자동차·건자재용 플라스틱",
-      "kind": "auto",
-      "visual": "소재",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "발전",
-      "caption": "LNG 복합화력 전력 생산",
-      "kind": "ship",
-      "visual": "LNG",
-      "image": "../data/business_images/business_image_local_ship.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "운영·유통",
-      "caption": "건물관리, 호텔, 상업시설 임대",
+      "title": "건 설",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 62.7%",
       "kind": "service",
-      "visual": "운영",
-      "image": "../data/business_images/business_image_local_fm.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "소 재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "발 전",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

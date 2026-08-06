@@ -155,19 +155,32 @@
     "segment_finance": "한국종합기술은 상하수도·수자원·환경·도로·교통 등 건설엔지니어링 전 분야에서 설계와 감리, 시공(CM)까지 수행하는 종합엔지니어링 회사로, 매출은 설계(약 46%)·시공(약 29%)·감리(약 23%) 순으로 나뉩니다. 최근에는 연료전지 등 신재생에너지 발전사업으로도 영역을 넓히고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,129억 원으로 전년 대비 3.5% 늘었고 영업이익은 60억 원으로 전년보다 크게 개선(569.4% 증가)됐으며 당기순이익도 85억 원으로 37.1% 늘었습니다. 다만 부채비율은 147.9%로 자본보다 빚이 많은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "설계",
-        "desc": "상하수도·수자원·환경·국토계획 등 엔지니어링 설계용역",
-        "revenue_share": 0.4556
+        "name": "엔지니어링부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.8%",
+        "revenue_share": 0.0782,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "시공",
-        "desc": "관급·민간 토목공사 시공(CM 포함)",
-        "revenue_share": 0.2899
+        "name": "상하수도",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.6%",
+        "revenue_share": 0.0861,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "감리",
-        "desc": "건설사업관리(CM)·건설사업 감리용역",
-        "revenue_share": 0.2339
+        "name": "플랜트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.6%",
+        "revenue_share": 0.0463,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "국토계획",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.1%",
+        "revenue_share": 0.081,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -182,32 +195,70 @@
       "매립가스 자원화 설비",
       "하수처리장 에너지자립화 설비"
     ],
-    "investor_note": "한국종합기술은 상하수도·수자원·환경·도로·교통 등 건설엔지니어링 전 분야에서 설계와 감리, 시공(CM)까지 수행하는 종합엔지니어링 회사로, 매출은 설계(약 46%)·시공(약 29%)·감리(약 23%) 순으로 나뉩니다. 최근에는 연료전지 등 신재생에너지 발전사업으로도 영역을 넓히고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,129억 원으로 전년 대비 3.5% 늘었고 영업이익은 60억 원으로 전년보다 크게 개선(569.4% 증가)됐으며 당기순이익도 85억 원으로 37.1% 늘었습니다. 다만 부채비율은 147.9%로 자본보다 빚이 많은 편이라 재무 부담을 살펴볼 필요가 있습니다."
+    "investor_note": "한국종합기술은 상하수도·수자원·환경·도로·교통 등 건설엔지니어링 전 분야에서 설계와 감리, 시공(CM)까지 수행하는 종합엔지니어링 회사로, 매출은 설계(약 46%)·시공(약 29%)·감리(약 23%) 순으로 나뉩니다. 최근에는 연료전지 등 신재생에너지 발전사업으로도 영역을 넓히고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,129억 원으로 전년 대비 3.5% 늘었고 영업이익은 60억 원으로 전년보다 크게 개선(569.4% 증가)됐으며 당기순이익도 85억 원으로 37.1% 늘었습니다. 다만 부채비율은 147.9%로 자본보다 빚이 많은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "엔지니어링부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.8%",
+        "revenue_share": 0.0782,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상하수도",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.6%",
+        "revenue_share": 0.0861,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "플랜트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.6%",
+        "revenue_share": 0.0463,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "국토계획",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.1%",
+        "revenue_share": 0.081,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "설계",
-      "caption": "상하수도·수자원·환경·국토계획 등 엔지니어링 설계용역",
+      "title": "엔지니어링부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.8%",
       "kind": "service",
-      "visual": "설계",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "시공",
-      "caption": "관급·민간 토목공사 시공(CM 포함)",
+      "title": "상하수도",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.6%",
       "kind": "service",
-      "visual": "시공",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "감리",
-      "caption": "건설사업관리(CM)·건설사업 감리용역",
+      "title": "토목·플랜트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.6%",
       "kind": "service",
-      "visual": "감리",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_5184e050831a4460.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "국토계획",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.1%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

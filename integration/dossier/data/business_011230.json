@@ -155,9 +155,18 @@
     "segment_finance": "삼화전자공업은 친환경차 전장부품(LDC·OBC), 생활가전 EMI 필터, 전파암실용 흡수체 등에 쓰이는 페라이트 코어를 만드는 회사로, 자체 제품 제조가 매출의 약 83%를 차지합니다. 전파암실용 흡수체 코어는 글로벌 점유율 70% 이상이라고 밝히고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 296억 원으로 전년 대비 11.3% 줄었고 영업이익 -77억 원, 순이익 -87억 원의 적자를 기록했습니다. 부채비율은 206.9%로 높고, 감사보고서에는 유동부채가 유동자산보다 많아 계속기업으로서의 존속능력에 불확실성이 있다는 강조사항이 포함돼 있어 각별한 주의가 필요합니다.",
     "segment_breakdown": [
       {
-        "name": "상품(자재·부속품)",
-        "desc": "원료 등 상품 유통",
-        "revenue_share": 0.17
+        "name": "제조업전자, 전기부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 83.0%",
+        "revenue_share": 0.8302,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.0%",
+        "revenue_share": 0.1698,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -168,24 +177,40 @@
       "MPC(Metal Powder Core)",
       "무선충전 Tx/Rx"
     ],
-    "investor_note": "삼화전자공업은 친환경차 전장부품(LDC·OBC), 생활가전 EMI 필터, 전파암실용 흡수체 등에 쓰이는 페라이트 코어를 만드는 회사로, 자체 제품 제조가 매출의 약 83%를 차지합니다. 전파암실용 흡수체 코어는 글로벌 점유율 70% 이상이라고 밝히고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 296억 원으로 전년 대비 11.3% 줄었고 영업이익 -77억 원, 순이익 -87억 원의 적자를 기록했습니다. 부채비율은 206.9%로 높고, 감사보고서에는 유동부채가 유동자산보다 많아 계속기업으로서의 존속능력에 불확실성이 있다는 강조사항이 포함돼 있어 각별한 주의가 필요합니다."
+    "investor_note": "삼화전자공업은 친환경차 전장부품(LDC·OBC), 생활가전 EMI 필터, 전파암실용 흡수체 등에 쓰이는 페라이트 코어를 만드는 회사로, 자체 제품 제조가 매출의 약 83%를 차지합니다. 전파암실용 흡수체 코어는 글로벌 점유율 70% 이상이라고 밝히고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 296억 원으로 전년 대비 11.3% 줄었고 영업이익 -77억 원, 순이익 -87억 원의 적자를 기록했습니다. 부채비율은 206.9%로 높고, 감사보고서에는 유동부채가 유동자산보다 많아 계속기업으로서의 존속능력에 불확실성이 있다는 강조사항이 포함돼 있어 각별한 주의가 필요합니다.",
+    "product_service_segments": [
+      {
+        "name": "제조업전자, 전기부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 83.0%",
+        "revenue_share": 0.8302,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.0%",
+        "revenue_share": 0.1698,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "상품(자재·부속품)",
-      "caption": "원료 등 상품 유통",
-      "kind": "service",
-      "visual": "상품",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "title": "제조업전자, 전기부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 83.0%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "영상 및 음향기기 제조업",
-      "caption": "영상 및 음향기기 제조업을 중심으로 매출을 만듭니다.",
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

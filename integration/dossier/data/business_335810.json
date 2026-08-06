@@ -153,7 +153,22 @@
   "snippets": {
     "overview": "프리시젼바이오의 주요 제품·서비스는 배터리, 화학제품, 면역진단 제품, 임상화학 제품, 제품매출, 안전성평가연구소입니다. 현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. 신규 사업분야인 임상화학진단 제품을 2021년부터 본격적으로 생산하여 판매하고 있습니다. 당사는 인공위성 카메라 이미징 기술을 활용한 시분해 형광 면역진단 플랫폼을 개발하여, 심근경색, 감염성 질환, 뇌질환 등 시급성이 요구되어 저농도를 정확히 측정할 필요가 있는 진단제품을 강점으로 생산 및 판매하고 있습니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다.",
     "segment_finance": "프리시젼바이오의 주요 제품·서비스는 배터리, 화학제품, 면역진단 제품, 임상화학 제품, 제품매출, 안전성평가연구소입니다. 현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. 신규 사업분야인 임상화학진단 제품을 2021년부터 본격적으로 생산하여 판매하고 있습니다. 당사는 인공위성 카메라 이미징 기술을 활용한 시분해 형광 면역진단 플랫폼을 개발하여, 심근경색, 감염성 질환, 뇌질환 등 시급성이 요구되어 저농도를 정확히 측정할 필요가 있는 진단제품을 강점으로 생산 및 판매하고 있습니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "상품 및 용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.02,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총 합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "배터리",
       "화학제품",
@@ -166,32 +181,62 @@
       "개발완료",
       "연구결과"
     ],
-    "investor_note": "프리시젼바이오의 주요 제품·서비스는 배터리, 화학제품, 면역진단 제품, 임상화학 제품, 제품매출, 안전성평가연구소입니다. 현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. 신규 사업분야인 임상화학진단 제품을 2021년부터 본격적으로 생산하여 판매하고 있습니다. 당사는 인공위성 카메라 이미징 기술을 활용한 시분해 형광 면역진단 플랫폼을 개발하여, 심근경색, 감염성 질환, 뇌질환 등 시급성이 요구되어 저농도를 정확히 측정할 필요가 있는 진단제품을 강점으로 생산 및 판매하고 있습니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다."
+    "investor_note": "프리시젼바이오의 주요 제품·서비스는 배터리, 화학제품, 면역진단 제품, 임상화학 제품, 제품매출, 안전성평가연구소입니다. 현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. 신규 사업분야인 임상화학진단 제품을 2021년부터 본격적으로 생산하여 판매하고 있습니다. 당사는 인공위성 카메라 이미징 기술을 활용한 시분해 형광 면역진단 플랫폼을 개발하여, 심근경색, 감염성 질환, 뇌질환 등 시급성이 요구되어 저농도를 정확히 측정할 필요가 있는 진단제품을 강점으로 생산 및 판매하고 있습니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.0%",
+        "revenue_share": 0.38,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임상화학 제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 60.0%",
+        "revenue_share": 0.6,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품 및 용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.02,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총 합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "화학제품",
-      "caption": "화학제품 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "title": "임상화학 제품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 60.0%",
+      "kind": "bio",
+      "visual": "BIO",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "면역진단 제품",
-      "caption": "면역진단 제품 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "상품 및 용역",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "임상화학 제품",
-      "caption": "임상화학 제품 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "title": "총 합계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

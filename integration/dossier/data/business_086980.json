@@ -155,14 +155,18 @@
     "segment_finance": "쇼박스는 1999년 설립돼 <퇴마록>, <소주전쟁> 등 영화 투자·배급을 주력으로 해온 콘텐츠 기업으로, 2020년 드라마 <이태원 클라쓰> 이후 드라마 기획·제작으로 사업을 넓혀 2025년에는 <마녀>(채널A·넷플릭스)가 흥행하며 드라마 매출 비중이 70%까지 늘었습니다. 반면 영화 매출은 29%로 줄었는데, 국내 극장시장 전체가 위축(2025년 극장 매출 전년 대비 12.4% 감소)된 영향이 큽니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 627억 원으로 전년 대비 32.6% 줄었고, 영업이익과 당기순이익 모두 적자로 전환해 각각 116억 원, 150억 원의 손실을 기록했습니다. 다만 부채비율은 23.7%로 낮아 재무구조 자체의 부담은 크지 않습니다.",
     "segment_breakdown": [
       {
-        "name": "드라마",
-        "desc": "드라마 기획·제작 및 유통",
-        "revenue_share": 0.7045
+        "name": "영화",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.1%",
+        "revenue_share": 0.291,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "영화",
-        "desc": "영화 투자·배급 및 판권 판매",
-        "revenue_share": 0.291
+        "name": "드라마",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 70.5%",
+        "revenue_share": 0.7045,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,24 +178,40 @@
       "공중파 판권 판매",
       "부가판권(OST·DMB 등)"
     ],
-    "investor_note": "쇼박스는 1999년 설립돼 <퇴마록>, <소주전쟁> 등 영화 투자·배급을 주력으로 해온 콘텐츠 기업으로, 2020년 드라마 <이태원 클라쓰> 이후 드라마 기획·제작으로 사업을 넓혀 2025년에는 <마녀>(채널A·넷플릭스)가 흥행하며 드라마 매출 비중이 70%까지 늘었습니다. 반면 영화 매출은 29%로 줄었는데, 국내 극장시장 전체가 위축(2025년 극장 매출 전년 대비 12.4% 감소)된 영향이 큽니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 627억 원으로 전년 대비 32.6% 줄었고, 영업이익과 당기순이익 모두 적자로 전환해 각각 116억 원, 150억 원의 손실을 기록했습니다. 다만 부채비율은 23.7%로 낮아 재무구조 자체의 부담은 크지 않습니다."
+    "investor_note": "쇼박스는 1999년 설립돼 <퇴마록>, <소주전쟁> 등 영화 투자·배급을 주력으로 해온 콘텐츠 기업으로, 2020년 드라마 <이태원 클라쓰> 이후 드라마 기획·제작으로 사업을 넓혀 2025년에는 <마녀>(채널A·넷플릭스)가 흥행하며 드라마 매출 비중이 70%까지 늘었습니다. 반면 영화 매출은 29%로 줄었는데, 국내 극장시장 전체가 위축(2025년 극장 매출 전년 대비 12.4% 감소)된 영향이 큽니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 627억 원으로 전년 대비 32.6% 줄었고, 영업이익과 당기순이익 모두 적자로 전환해 각각 116억 원, 150억 원의 손실을 기록했습니다. 다만 부채비율은 23.7%로 낮아 재무구조 자체의 부담은 크지 않습니다.",
+    "product_service_segments": [
+      {
+        "name": "영화",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.1%",
+        "revenue_share": 0.291,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "드라마",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 70.5%",
+        "revenue_share": 0.7045,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "드라마",
-      "caption": "드라마 기획·제작 및 유통",
+      "title": "영화",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.1%",
       "kind": "service",
-      "visual": "드라마",
-      "image": "../data/business_images/business_image_local_content.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "영화",
-      "caption": "영화 투자·배급 및 판권 판매",
-      "kind": "securities",
-      "visual": "영화",
-      "image": "../data/business_images/business_image_local_default_b.svg",
-      "image_source": "Local curated visual"
+      "title": "드라마",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 70.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -155,24 +155,32 @@
     "segment_finance": "한화는 방산·화약, 조선, 태양광, 화학, 건설, 유통, 레저/서비스에 더해 생명·손해보험까지 아우르는 대형 사업회사로, 매출 비중은 금융업(43%)이 가장 크고 방산·화약(21%)과 조선(19%)이 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 74조 7,854억 원으로 전년 대비 34.4% 늘었고 영업이익도 71.6% 증가했지만, 부채비율이 497.4%로 자본 대비 빚(부채)이 매우 많은 편이라 재무 부담을 살펴볼 필요가 있습니다. 감사의견은 적정으로, 회계상 특별히 지적된 문제는 없었습니다.",
     "segment_breakdown": [
       {
-        "name": "방산·항공",
-        "desc": "화약, 자주포, 레이더, 항공엔진",
-        "revenue_share": 0.209
+        "name": "화약 제조업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.9%",
+        "revenue_share": 0.0093,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "조선",
-        "desc": "LNG운반선과 특수선 건조",
-        "revenue_share": 0.195
+        "name": "방산",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.1%",
+        "revenue_share": 0.1008,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "에너지·화학",
-        "desc": "태양광, 석유화학, 소재",
-        "revenue_share": 0.168
+        "name": "한화시스템㈜ 방산부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.3%",
+        "revenue_share": 0.0326,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "유통·레저·건설",
-        "desc": "무역, 백화점, 리조트, 건설",
-        "revenue_share": 0.159
+        "name": "항공엔진",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.7%",
+        "revenue_share": 0.0266,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -188,39 +196,53 @@
       "단체급식(아워홈)",
       "석유화학제품(PVC·가성소다)"
     ],
-    "investor_note": "한화는 방산·화약, 조선, 태양광, 화학, 건설, 유통, 레저/서비스에 더해 생명·손해보험까지 아우르는 대형 사업회사로, 매출 비중은 금융업(43%)이 가장 크고 방산·화약(21%)과 조선(19%)이 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 74조 7,854억 원으로 전년 대비 34.4% 늘었고 영업이익도 71.6% 증가했지만, 부채비율이 497.4%로 자본 대비 빚(부채)이 매우 많은 편이라 재무 부담을 살펴볼 필요가 있습니다. 감사의견은 적정으로, 회계상 특별히 지적된 문제는 없었습니다."
+    "investor_note": "한화는 방산·화약, 조선, 태양광, 화학, 건설, 유통, 레저/서비스에 더해 생명·손해보험까지 아우르는 대형 사업회사로, 매출 비중은 금융업(43%)이 가장 크고 방산·화약(21%)과 조선(19%)이 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 74조 7,854억 원으로 전년 대비 34.4% 늘었고 영업이익도 71.6% 증가했지만, 부채비율이 497.4%로 자본 대비 빚(부채)이 매우 많은 편이라 재무 부담을 살펴볼 필요가 있습니다. 감사의견은 적정으로, 회계상 특별히 지적된 문제는 없었습니다.",
+    "product_service_segments": [
+      {
+        "name": "화약 제조업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.9%",
+        "revenue_share": 0.0093,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "방산",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.1%",
+        "revenue_share": 0.1008,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "한화시스템㈜ 방산부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.3%",
+        "revenue_share": 0.0326,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "항공엔진",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.7%",
+        "revenue_share": 0.0266,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "석유화학제품(PVC·가성소다)",
-      "caption": "석유화학제품(PVC·가성소다) 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_local_oil.svg",
-      "image_source": "Local curated visual"
+      "title": "방산·항공",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.1%",
+      "kind": "ship",
+      "visual": "DEFENSE",
+      "image": "../data/business_images/business_image_1805fba8159acac6.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "에너지·화학",
-      "caption": "에너지·화학 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "산업용 화약",
-      "caption": "산업용 화약 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "자주포·장갑차 등 방산장비",
-      "caption": "자주포·장갑차 등 방산장비 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_4ae102473975707c.jpg",
+      "title": "구동계 부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.7%",
+      "kind": "auto",
+      "visual": "PARTS",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
       "image_source": "Wikimedia Commons"
     }
   ],

@@ -155,24 +155,32 @@
     "segment_finance": "남화산업은 광주·전남 지역에서 무안컨트리클럽이라는 54홀 골프장을 운영하는 국내 최초 상장 골프장 회사입니다. 매출의 약 77%는 골프장 입장료(그린피)이고 나머지는 카트 대여·식음료·숙박입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 167억 원(-19.0%), 영업이익은 40억 원(-48.9%)으로 줄었는데, 내장객이 해외골프·파크골프로 분산된 영향으로 보입니다. 당기순이익은 66억 원으로 오히려 영업이익보다 많았는데, 관계기업 투자주식의 지분법 이익 덕분입니다. 부채비율은 7.1%로 매우 낮습니다.",
     "segment_breakdown": [
       {
-        "name": "골프장 입장",
-        "desc": "54홀 규모 골프장 그린피 매출",
-        "revenue_share": 0.7715
-      },
-      {
-        "name": "대여",
-        "desc": "골프카트 대여 매출",
-        "revenue_share": 0.1554
+        "name": "골프입장",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 77.1%",
+        "revenue_share": 0.7715,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "식음료",
-        "desc": "클럽하우스 식음료 매출",
-        "revenue_share": 0.065
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.5%",
+        "revenue_share": 0.065,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "대여",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.5%",
+        "revenue_share": 0.1554,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "숙박",
-        "desc": "골프텔 숙박 매출",
-        "revenue_share": 0.0081
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.0081,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -181,40 +189,62 @@
       "식음료",
       "골프텔 숙박"
     ],
-    "investor_note": "남화산업은 광주·전남 지역에서 무안컨트리클럽이라는 54홀 골프장을 운영하는 국내 최초 상장 골프장 회사입니다. 매출의 약 77%는 골프장 입장료(그린피)이고 나머지는 카트 대여·식음료·숙박입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 167억 원(-19.0%), 영업이익은 40억 원(-48.9%)으로 줄었는데, 내장객이 해외골프·파크골프로 분산된 영향으로 보입니다. 당기순이익은 66억 원으로 오히려 영업이익보다 많았는데, 관계기업 투자주식의 지분법 이익 덕분입니다. 부채비율은 7.1%로 매우 낮습니다."
+    "investor_note": "남화산업은 광주·전남 지역에서 무안컨트리클럽이라는 54홀 골프장을 운영하는 국내 최초 상장 골프장 회사입니다. 매출의 약 77%는 골프장 입장료(그린피)이고 나머지는 카트 대여·식음료·숙박입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 167억 원(-19.0%), 영업이익은 40억 원(-48.9%)으로 줄었는데, 내장객이 해외골프·파크골프로 분산된 영향으로 보입니다. 당기순이익은 66억 원으로 오히려 영업이익보다 많았는데, 관계기업 투자주식의 지분법 이익 덕분입니다. 부채비율은 7.1%로 매우 낮습니다.",
+    "product_service_segments": [
+      {
+        "name": "골프입장",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 77.1%",
+        "revenue_share": 0.7715,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "식음료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.5%",
+        "revenue_share": 0.065,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "대여",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.5%",
+        "revenue_share": 0.1554,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "숙박",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.0081,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "골프장 입장",
-      "caption": "54홀 규모 골프장 그린피 매출",
+      "title": "골프입장",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 77.1%",
       "kind": "service",
-      "visual": "골프장",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "대여",
-      "caption": "골프카트 대여 매출",
-      "kind": "service",
-      "visual": "대여",
-      "image": "../data/business_images/business_image_local_default_b.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "식음료",
-      "caption": "클럽하우스 식음료 매출",
-      "kind": "service",
-      "visual": "식음료",
-      "image": "../data/business_images/business_image_food_packaged.svg",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.5%",
+      "kind": "consumer",
+      "visual": "BEVERAGE",
+      "image": "../data/business_images/business_image_food_beverage.svg",
       "image_source": "Local visual"
     },
     {
-      "title": "숙박",
-      "caption": "골프텔 숙박 매출",
+      "title": "대여",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.5%",
       "kind": "service",
-      "visual": "숙박",
-      "image": "../data/business_images/business_image_local_default_d.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

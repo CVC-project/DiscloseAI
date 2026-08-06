@@ -155,30 +155,55 @@
     "segment_finance": "영화금속은 자동차부품용 주물을 제조·판매하는 회사로, 매출의 약 98%가 주물 제품에서 나옵니다. 공장별로 실적 차이가 있어 함안공장이 매출의 약 60%를 차지하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,514억 원으로 전년 대비 16.5% 늘었고 영업이익도 152억 원으로 54.1% 크게 증가했으며 당기순이익 역시 121억 원으로 40.5% 늘었습니다. 다만 부채비율은 189.5%로 높은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "주물(자동차부품)",
-        "desc": "자동차부품용 주물 제조·판매",
-        "revenue_share": 0.98
+        "name": "주물",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 98.0%",
+        "revenue_share": 0.98,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.01,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
       "자동차용 주물부품"
     ],
-    "investor_note": "영화금속은 자동차부품용 주물을 제조·판매하는 회사로, 매출의 약 98%가 주물 제품에서 나옵니다. 공장별로 실적 차이가 있어 함안공장이 매출의 약 60%를 차지하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,514억 원으로 전년 대비 16.5% 늘었고 영업이익도 152억 원으로 54.1% 크게 증가했으며 당기순이익 역시 121억 원으로 40.5% 늘었습니다. 다만 부채비율은 189.5%로 높은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다."
+    "investor_note": "영화금속은 자동차부품용 주물을 제조·판매하는 회사로, 매출의 약 98%가 주물 제품에서 나옵니다. 공장별로 실적 차이가 있어 함안공장이 매출의 약 60%를 차지하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,514억 원으로 전년 대비 16.5% 늘었고 영업이익도 152억 원으로 54.1% 크게 증가했으며 당기순이익 역시 121억 원으로 40.5% 늘었습니다. 다만 부채비율은 189.5%로 높은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "주물",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 98.0%",
+        "revenue_share": 0.98,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.01,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "주물(자동차부품)",
-      "caption": "자동차부품용 주물 제조·판매",
+      "title": "주물",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 98.0%",
       "kind": "auto",
-      "visual": "주물",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "자동차용 주물부품",
-      "caption": "자동차용 주물부품 관련 제품과 서비스를 통해 매출을 만듭니다.",
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
       "kind": "auto",
-      "visual": "자동차용",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     }

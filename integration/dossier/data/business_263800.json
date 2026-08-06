@@ -153,7 +153,36 @@
   "snippets": {
     "overview": "제품을 만들고 판매하는 제조 기반 회사입니다. 특히 기업 고객에게 검증된 최상의 AI 및 데이터 플랫폼을 제공하고자 IBM, 삼성SDS, Dataiku, SIEMENS 등 글로벌 선도 벤더사와 강력한 파트너십을 구축하였으며, 우수한 솔루션의 공급부터 실제 비즈니스 현장 적용까지 전 과정을 지원하는 AI Adoption 파트너로서 시장을 선도하고 있습니다. 당사가 영위하는 사업의 특성상 '생산'의 개념이 적용되지 아니하므로 해당사항이 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "제품을 만들고 판매하는 제조 기반 회사입니다. 특히 기업 고객에게 검증된 최상의 AI 및 데이터 플랫폼을 제공하고자 IBM, 삼성SDS, Dataiku, SIEMENS 등 글로벌 선도 벤더사와 강력한 파트너십을 구축하였으며, 우수한 솔루션의 공급부터 실제 비즈니스 현장 적용까지 전 과정을 지원하는 AI Adoption 파트너로서 시장을 선도하고 있습니다. 당사가 영위하는 사업의 특성상 '생산'의 개념이 적용되지 아니하므로 해당사항이 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.3%",
+        "revenue_share": 0.5332,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "S/W(Software)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.6%",
+        "revenue_share": 0.0658,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.5%",
+        "revenue_share": 0.2049,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "유지보수",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.3%",
+        "revenue_share": 0.1932,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "데이터센터",
       "용역",
@@ -166,32 +195,70 @@
       "Teradata",
       "Teradata 제품"
     ],
-    "investor_note": "제품을 만들고 판매하는 제조 기반 회사입니다. 특히 기업 고객에게 검증된 최상의 AI 및 데이터 플랫폼을 제공하고자 IBM, 삼성SDS, Dataiku, SIEMENS 등 글로벌 선도 벤더사와 강력한 파트너십을 구축하였으며, 우수한 솔루션의 공급부터 실제 비즈니스 현장 적용까지 전 과정을 지원하는 AI Adoption 파트너로서 시장을 선도하고 있습니다. 당사가 영위하는 사업의 특성상 '생산'의 개념이 적용되지 아니하므로 해당사항이 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "제품을 만들고 판매하는 제조 기반 회사입니다. 특히 기업 고객에게 검증된 최상의 AI 및 데이터 플랫폼을 제공하고자 IBM, 삼성SDS, Dataiku, SIEMENS 등 글로벌 선도 벤더사와 강력한 파트너십을 구축하였으며, 우수한 솔루션의 공급부터 실제 비즈니스 현장 적용까지 전 과정을 지원하는 AI Adoption 파트너로서 시장을 선도하고 있습니다. 당사가 영위하는 사업의 특성상 '생산'의 개념이 적용되지 아니하므로 해당사항이 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.3%",
+        "revenue_share": 0.5332,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "S/W(Software)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.6%",
+        "revenue_share": 0.0658,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.5%",
+        "revenue_share": 0.2049,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "유지보수",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.3%",
+        "revenue_share": 0.1932,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "데이터센터",
-      "caption": "데이터센터 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.3%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_datacenter.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "SI(System Integration)",
-      "caption": "SI(System Integration) 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "S/W(Software)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.6%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "W와 H",
-      "caption": "W와 H 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "용역",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.5%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "유지보수",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.3%",
+      "kind": "consumer",
+      "visual": "INGREDIENT",
+      "image": "../data/business_images/business_image_food_ingredient.svg",
+      "image_source": "Local visual"
     }
   ],
   "custom_report_ideas": [

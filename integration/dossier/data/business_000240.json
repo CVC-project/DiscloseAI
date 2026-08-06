@@ -155,9 +155,25 @@
     "segment_finance": "한국앤컴퍼니는 한국타이어그룹의 지주회사로, 매출의 대부분(약 84%)은 자회사가 만드는 HANKOOK 브랜드의 차량용·산업용 축전지(배터리) 판매에서 나오고, 나머지는 상표권 로열티와 한국타이어앤테크놀로지 등 계열사의 지분법이익·배당, 임대·용역 수익으로 구성됩니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 4,575억 원으로 전년 대비 4.8% 늘었지만 영업이익은 4,116억 원(-1.6%), 당기순이익은 3,472억 원(-1.0%)으로 소폭 줄었습니다. 부채비율은 10.0%로 재무구조는 매우 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "경영총괄부문",
-        "desc": "HANKOOK 상표권 로열티, 자회사 지분법이익·배당, 사무실 임대·용역",
-        "revenue_share": 0.161
+        "name": "상표권",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.5%",
+        "revenue_share": 0.035,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "지분법평가",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.6%",
+        "revenue_share": 0.216,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "업무지원용역수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.6%",
+        "revenue_share": 0.006,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -165,32 +181,62 @@
       "산업용 축전지",
       "HANKOOK 브랜드 상표권"
     ],
-    "investor_note": "한국앤컴퍼니는 한국타이어그룹의 지주회사로, 매출의 대부분(약 84%)은 자회사가 만드는 HANKOOK 브랜드의 차량용·산업용 축전지(배터리) 판매에서 나오고, 나머지는 상표권 로열티와 한국타이어앤테크놀로지 등 계열사의 지분법이익·배당, 임대·용역 수익으로 구성됩니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 4,575억 원으로 전년 대비 4.8% 늘었지만 영업이익은 4,116억 원(-1.6%), 당기순이익은 3,472억 원(-1.0%)으로 소폭 줄었습니다. 부채비율은 10.0%로 재무구조는 매우 안정적인 편입니다."
+    "investor_note": "한국앤컴퍼니는 한국타이어그룹의 지주회사로, 매출의 대부분(약 84%)은 자회사가 만드는 HANKOOK 브랜드의 차량용·산업용 축전지(배터리) 판매에서 나오고, 나머지는 상표권 로열티와 한국타이어앤테크놀로지 등 계열사의 지분법이익·배당, 임대·용역 수익으로 구성됩니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 4,575억 원으로 전년 대비 4.8% 늘었지만 영업이익은 4,116억 원(-1.6%), 당기순이익은 3,472억 원(-1.0%)으로 소폭 줄었습니다. 부채비율은 10.0%로 재무구조는 매우 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "제품,상품 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 71.7%",
+        "revenue_share": 0.717,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상표권",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.5%",
+        "revenue_share": 0.035,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "지분법평가",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.6%",
+        "revenue_share": 0.216,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "업무지원용역수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.6%",
+        "revenue_share": 0.006,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "경영총괄부문",
-      "caption": "HANKOOK 상표권 로열티, 자회사 지분법이익·배당, 사무실 임대·용역",
+      "title": "제품,상품 등",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 71.7%",
       "kind": "service",
-      "visual": "경영총괄부문",
-      "image": "../data/business_images/business_image_local_finance_hold.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "금융 서비스",
-      "caption": "예금, 대출, 수수료 등 금융 서비스를 제공합니다.",
-      "kind": "bank",
-      "visual": "BANK",
-      "image": "../data/business_images/business_image_local_bank.svg",
-      "image_source": "Local curated visual"
+      "title": "상표권",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "투자·운용",
-      "caption": "자산 운용과 투자 수익이 실적에 영향을 줍니다.",
-      "kind": "securities",
-      "visual": "AUM",
-      "image": "../data/business_images/business_image_local_securities.svg",
-      "image_source": "Local curated visual"
+      "title": "지분법평가",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

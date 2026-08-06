@@ -153,7 +153,29 @@
   "snippets": {
     "overview": "매출은 장비사업(약 53%)과 부품소재사업(약 47%)이 비슷한 비중을 차지하며, OLED 시장 성장에 따라 장비 수요가 늘고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,603억 원으로 전년 대비 1.3% 소폭 줄었지만, 영업이익 62억 원과 당기순이익 284억 원 모두 전년 적자에서 흑자로 전환했습니다. 부채비율은 34.1%로 안정적이며, 자기자본이익률(ROE)은 10.5%입니다. 다만 부품소재 사업부문은 실적 둔화로 자산 손상 위험이 있다는 점이 감사보고서에서 지적된 만큼 참고할 필요가 있습니다.",
     "segment_finance": "매출은 장비사업(약 53%)과 부품소재사업(약 47%)이 비슷한 비중을 차지하며, OLED 시장 성장에 따라 장비 수요가 늘고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,603억 원으로 전년 대비 1.3% 소폭 줄었지만, 영업이익 62억 원과 당기순이익 284억 원 모두 전년 적자에서 흑자로 전환했습니다. 부채비율은 34.1%로 안정적이며, 자기자본이익률(ROE)은 10.5%입니다. 다만 부품소재 사업부문은 실적 둔화로 자산 손상 위험이 있다는 점이 감사보고서에서 지적된 만큼 참고할 필요가 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "2차전지 통합검사기 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
+        "revenue_share": 0.0496,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.7%",
+        "revenue_share": 0.0271,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.9%",
+        "revenue_share": 0.0693,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "디스플레이 검사장비(AOI)",
       "레이저 리페어 장비",
@@ -162,24 +184,70 @@
       "확산판",
       "PCB 검사장비"
     ],
-    "investor_note": "매출은 장비사업(약 53%)과 부품소재사업(약 47%)이 비슷한 비중을 차지하며, OLED 시장 성장에 따라 장비 수요가 늘고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,603억 원으로 전년 대비 1.3% 소폭 줄었지만, 영업이익 62억 원과 당기순이익 284억 원 모두 전년 적자에서 흑자로 전환했습니다. 부채비율은 34.1%로 안정적이며, 자기자본이익률(ROE)은 10.5%입니다. 다만 부품소재 사업부문은 실적 둔화로 자산 손상 위험이 있다는 점이 감사보고서에서 지적된 만큼 참고할 필요가 있습니다."
+    "investor_note": "매출은 장비사업(약 53%)과 부품소재사업(약 47%)이 비슷한 비중을 차지하며, OLED 시장 성장에 따라 장비 수요가 늘고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,603억 원으로 전년 대비 1.3% 소폭 줄었지만, 영업이익 62억 원과 당기순이익 284억 원 모두 전년 적자에서 흑자로 전환했습니다. 부채비율은 34.1%로 안정적이며, 자기자본이익률(ROE)은 10.5%입니다. 다만 부품소재 사업부문은 실적 둔화로 자산 손상 위험이 있다는 점이 감사보고서에서 지적된 만큼 참고할 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "장비사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.4%",
+        "revenue_share": 0.3842,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "2차전지 통합검사기 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
+        "revenue_share": 0.0496,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.7%",
+        "revenue_share": 0.0271,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.9%",
+        "revenue_share": 0.0693,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "장비사업부문",
-      "caption": "OLED 검사·리페어 장비, 2차전지 검사장비 제조",
-      "kind": "battery",
-      "visual": "OLED",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
-      "image_source": "Wikimedia Commons"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.4%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "부품소재사업부문",
-      "caption": "LCD·LED 백라이트유닛용 도광판·확산판 제조",
+      "title": "2차전지 통합검사기 외",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
+      "kind": "battery",
+      "visual": "BATTERY",
+      "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.7%",
       "kind": "auto",
-      "visual": "부품소재사업부문",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "용역",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

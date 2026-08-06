@@ -155,19 +155,32 @@
     "segment_finance": "(주)팬젠의 주요 사업은 바이오시밀러 G-CSF, 바이오시밀러 EPO, 바이오의약품 개발기술이전서비스, 바이오 시밀러 등입니다. CDMO 사업은 고객과 계약후 약 1년 내외에 관련 용역의 개발 및 생산을 진행하며 대금은 진행 단계별로 청구하여 청구후 30~60일 이내에 현금으로 회수하고 있습니다. 11월~) ·튀르키예 : VEM사에 바이오시밀러 EPO 기술이전계약체결(2021년 6월) 제품(최종원액, FDS) 판매(2024.",
     "segment_breakdown": [
       {
-        "name": "바이오시밀러 G-CSF",
-        "desc": "바이오시밀러 관련 제품·서비스",
-        "revenue_share": null
+        "name": "EPO의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 56.0%",
+        "revenue_share": 0.56,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "바이오시밀러 EPO",
-        "desc": "바이오시밀러 관련 제품·서비스",
-        "revenue_share": null
+        "name": "기술이전(CDO)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.1%",
+        "revenue_share": 0.141,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "바이오",
-        "desc": "바이오시밀러 관련 제품·서비스",
-        "revenue_share": null
+        "name": "위탁생산(CMO)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.2%",
+        "revenue_share": 0.142,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "로열티",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.0%",
+        "revenue_share": 0.06,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -183,32 +196,70 @@
       "기술이전(CDO)",
       "계약상대방"
     ],
-    "investor_note": "(주)팬젠의 주요 사업은 바이오시밀러 G-CSF, 바이오시밀러 EPO, 바이오의약품 개발기술이전서비스, 바이오 시밀러 등입니다. CDMO 사업은 고객과 계약후 약 1년 내외에 관련 용역의 개발 및 생산을 진행하며 대금은 진행 단계별로 청구하여 청구후 30~60일 이내에 현금으로 회수하고 있습니다. 11월~) ·튀르키예 : VEM사에 바이오시밀러 EPO 기술이전계약체결(2021년 6월) 제품(최종원액, FDS) 판매(2024."
+    "investor_note": "(주)팬젠의 주요 사업은 바이오시밀러 G-CSF, 바이오시밀러 EPO, 바이오의약품 개발기술이전서비스, 바이오 시밀러 등입니다. CDMO 사업은 고객과 계약후 약 1년 내외에 관련 용역의 개발 및 생산을 진행하며 대금은 진행 단계별로 청구하여 청구후 30~60일 이내에 현금으로 회수하고 있습니다. 11월~) ·튀르키예 : VEM사에 바이오시밀러 EPO 기술이전계약체결(2021년 6월) 제품(최종원액, FDS) 판매(2024.",
+    "product_service_segments": [
+      {
+        "name": "EPO의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 56.0%",
+        "revenue_share": 0.56,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기술이전(CDO)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.1%",
+        "revenue_share": 0.141,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "위탁생산(CMO)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.2%",
+        "revenue_share": 0.142,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "로열티",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.0%",
+        "revenue_share": 0.06,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "의약품",
-      "caption": "의약품 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 56.0%",
       "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "바이오시밀러",
-      "caption": "바이오시밀러 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "기술이전(CDO)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.1%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "성인",
-      "caption": "성인 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "바이오의약품 위탁개발·생산",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.2%",
       "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "CDMO",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "로열티",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

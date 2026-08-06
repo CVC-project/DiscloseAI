@@ -155,19 +155,11 @@
     "segment_finance": "옵티시스(주)의 주요 제품·서비스는 제품매출, 영상신호용 광링크, 영상신호용광링크, 기술, 제품 가격, 유통망 확보입니다. 따라서 당사는 대상시스템, 경쟁제품 혹은 대안제품 등의 가격을 고려한 시장가를 정하고 유통단계별 가격을 추정하여 당사의 1차적 고객인 협력사에 OEM/disty 가격을 산정하여, 시장가와 함께 제공하고 있습니다. 따라서 직접 또는 해외 대리점을 통해 판매된 제품의 고객 요청 사항에 대한 기술 지원을 통해 해결하는 것이 매우 중요합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "영상신호용 광링크",
-        "desc": "영상신호용 광링크 관련 제품·서비스",
-        "revenue_share": null
-      },
-      {
-        "name": "영상신호용광링크",
-        "desc": "영상신호용광링크 관련 제품·서비스",
-        "revenue_share": null
-      },
-      {
-        "name": "기술",
-        "desc": "기술 관련 제품·서비스",
-        "revenue_share": null
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.4%",
+        "revenue_share": 0.104,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -176,32 +168,56 @@
       "기술",
       "유통망 확보"
     ],
-    "investor_note": "옵티시스(주)의 주요 제품·서비스는 제품매출, 영상신호용 광링크, 영상신호용광링크, 기술, 제품 가격, 유통망 확보입니다. 따라서 당사는 대상시스템, 경쟁제품 혹은 대안제품 등의 가격을 고려한 시장가를 정하고 유통단계별 가격을 추정하여 당사의 1차적 고객인 협력사에 OEM/disty 가격을 산정하여, 시장가와 함께 제공하고 있습니다. 따라서 직접 또는 해외 대리점을 통해 판매된 제품의 고객 요청 사항에 대한 기술 지원을 통해 해결하는 것이 매우 중요합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "옵티시스(주)의 주요 제품·서비스는 제품매출, 영상신호용 광링크, 영상신호용광링크, 기술, 제품 가격, 유통망 확보입니다. 따라서 당사는 대상시스템, 경쟁제품 혹은 대안제품 등의 가격을 고려한 시장가를 정하고 유통단계별 가격을 추정하여 당사의 1차적 고객인 협력사에 OEM/disty 가격을 산정하여, 시장가와 함께 제공하고 있습니다. 따라서 직접 또는 해외 대리점을 통해 판매된 제품의 고객 요청 사항에 대한 기술 지원을 통해 해결하는 것이 매우 중요합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "제품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 78.3%",
+        "revenue_share": 0.783,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.4%",
+        "revenue_share": 0.104,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "영상신호용 광링크",
-      "caption": "영상신호용 광링크 관련 제품·서비스",
-      "kind": "service",
-      "visual": "영상신호용",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "caption": "통신망 구축과 데이터 전송 인프라에 연결되는 제품·서비스입니다.",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "영상신호용광링크",
-      "caption": "영상신호용광링크 관련 제품·서비스",
-      "kind": "service",
-      "visual": "영상신호용광링크",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "caption": "통신망 구축과 데이터 전송 인프라에 연결되는 제품·서비스입니다.",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "기술",
-      "caption": "기술 관련 제품·서비스",
-      "kind": "service",
-      "visual": "기술",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "caption": "통신망 구축과 데이터 전송 인프라에 연결되는 제품·서비스입니다.",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "유통망 확보",
+      "caption": "통신망 구축과 데이터 전송 인프라에 연결되는 제품·서비스입니다.",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

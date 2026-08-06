@@ -155,19 +155,32 @@
     "segment_finance": "바이넥스는 부산 공장에서 정장제·점안제 등 케미컬의약품을 만드는 한편, 송도·오송 공장에서는 국내 최초 바이오의약품 CDMO(위탁개발생산) 사업을 운영하는 제약회사입니다. 매출의 절반가량(46.7%)은 바이오의약품 위탁생산에서 나오고, 점안제·정장제 등 케미컬의약품 제조판매가 나머지 대부분을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,684억 원으로 전년 대비 29.5% 크게 늘었고, 영업손실은 45억 원으로 적자 폭이 85.3% 줄었으며 당기순손실도 32억 원으로 적자 규모가 90.7% 축소돼 실적이 개선되는 흐름을 보였습니다. 다만 아직 영업이익과 순이익 모두 적자 상태이고, 부채비율은 66.1%로 재무 부담을 계속 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "바이오의약품 위탁생산(CDMO)",
-        "desc": "세포주 개발부터 GMP 생산까지 위탁생산 서비스",
-        "revenue_share": 0.4672
+        "name": "바이오",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.7%",
+        "revenue_share": 0.4672,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "케미컬의약품 제조·판매",
-        "desc": "점안제·정장제 등 완제의약품 제조판매",
-        "revenue_share": 0.4051
+        "name": "분석센터매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.4%",
+        "revenue_share": 0.0043,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "바이오 분석 위탁용역",
-        "desc": "단백질 특성분석 등 바이오 분석 서비스",
-        "revenue_share": 0.0043
+        "name": "케미컬의약품제조및판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.6%",
+        "revenue_share": 0.0462,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "소염진통제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+        "revenue_share": 0.0257,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -180,32 +193,62 @@
       "소염진통제",
       "항생·항균제"
     ],
-    "investor_note": "바이넥스는 부산 공장에서 정장제·점안제 등 케미컬의약품을 만드는 한편, 송도·오송 공장에서는 국내 최초 바이오의약품 CDMO(위탁개발생산) 사업을 운영하는 제약회사입니다. 매출의 절반가량(46.7%)은 바이오의약품 위탁생산에서 나오고, 점안제·정장제 등 케미컬의약품 제조판매가 나머지 대부분을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,684억 원으로 전년 대비 29.5% 크게 늘었고, 영업손실은 45억 원으로 적자 폭이 85.3% 줄었으며 당기순손실도 32억 원으로 적자 규모가 90.7% 축소돼 실적이 개선되는 흐름을 보였습니다. 다만 아직 영업이익과 순이익 모두 적자 상태이고, 부채비율은 66.1%로 재무 부담을 계속 살펴볼 필요가 있습니다."
+    "investor_note": "바이넥스는 부산 공장에서 정장제·점안제 등 케미컬의약품을 만드는 한편, 송도·오송 공장에서는 국내 최초 바이오의약품 CDMO(위탁개발생산) 사업을 운영하는 제약회사입니다. 매출의 절반가량(46.7%)은 바이오의약품 위탁생산에서 나오고, 점안제·정장제 등 케미컬의약품 제조판매가 나머지 대부분을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,684억 원으로 전년 대비 29.5% 크게 늘었고, 영업손실은 45억 원으로 적자 폭이 85.3% 줄었으며 당기순손실도 32억 원으로 적자 규모가 90.7% 축소돼 실적이 개선되는 흐름을 보였습니다. 다만 아직 영업이익과 순이익 모두 적자 상태이고, 부채비율은 66.1%로 재무 부담을 계속 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "바이오",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.7%",
+        "revenue_share": 0.4672,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "분석센터매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.4%",
+        "revenue_share": 0.0043,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "케미컬의약품제조및판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.6%",
+        "revenue_share": 0.0462,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "소염진통제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+        "revenue_share": 0.0257,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "바이오의약품 위탁생산(CDMO)",
-      "caption": "세포주 개발부터 GMP 생산까지 위탁생산 서비스",
+      "title": "바이오",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.7%",
       "kind": "bio",
-      "visual": "CDMO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "BIO",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "케미컬의약품 제조·판매",
-      "caption": "점안제·정장제 등 완제의약품 제조판매",
+      "title": "의약품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.6%",
       "kind": "bio",
-      "visual": "케미컬의약품",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "바이오 분석 위탁용역",
-      "caption": "단백질 특성분석 등 바이오 분석 서비스",
-      "kind": "bio",
-      "visual": "바이오",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "소염진통제",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -155,9 +155,25 @@
     "segment_finance": "알파에이아이는 척추·골절 치료용 금속 임플란트와 외과용 수술기구를 만드는 메디칼 사업을 주력으로 하는 회사로, 온열매트 등을 만들던 헬스케어 사업부는 계속된 적자로 2025년 9월 영업을 중단했습니다. 최근에는 장기일반민간임대주택(부동산) 사업으로도 영역을 넓히려 하고 있어, 기존 의료기기 사업과는 다른 방향의 다각화가 진행 중입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 168억 원으로 전년 대비 37.2% 줄었고, 영업손실 57억 원, 당기순손실 63억 원으로 적자가 계속되고 있으며 부채비율은 135.0%로 부채 부담이 큰 편입니다. 특히 이 회사(별도 재무제표 기준)의 감사보고서는 감사 절차상 제약과 계속기업으로서의 존속능력에 대한 중요한 불확실성을 이유로 감사인이 의견을 표명하지 않는 '의견거절'을 받았고, 부채총계가 자본총계를 76억 원가량 초과하는 완전자본잠식 상태라고 재무제표 주석에 명시돼 있어 투자 판단에 각별한 주의가 필요합니다.",
     "segment_breakdown": [
       {
-        "name": "메디칼(상품)",
-        "desc": "임플란트·내시경 등 상품 유통",
-        "revenue_share": 0.2314
+        "name": "메디칼",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 52.5%",
+        "revenue_share": 0.5247,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.1%",
+        "revenue_share": 0.2314,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "헬스케어",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.9%",
+        "revenue_share": 0.0888,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -168,32 +184,55 @@
       "척추인공디스크",
       "온열매트(사업중단)"
     ],
-    "investor_note": "알파에이아이는 척추·골절 치료용 금속 임플란트와 외과용 수술기구를 만드는 메디칼 사업을 주력으로 하는 회사로, 온열매트 등을 만들던 헬스케어 사업부는 계속된 적자로 2025년 9월 영업을 중단했습니다. 최근에는 장기일반민간임대주택(부동산) 사업으로도 영역을 넓히려 하고 있어, 기존 의료기기 사업과는 다른 방향의 다각화가 진행 중입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 168억 원으로 전년 대비 37.2% 줄었고, 영업손실 57억 원, 당기순손실 63억 원으로 적자가 계속되고 있으며 부채비율은 135.0%로 부채 부담이 큰 편입니다. 특히 이 회사(별도 재무제표 기준)의 감사보고서는 감사 절차상 제약과 계속기업으로서의 존속능력에 대한 중요한 불확실성을 이유로 감사인이 의견을 표명하지 않는 '의견거절'을 받았고, 부채총계가 자본총계를 76억 원가량 초과하는 완전자본잠식 상태라고 재무제표 주석에 명시돼 있어 투자 판단에 각별한 주의가 필요합니다."
+    "investor_note": "알파에이아이는 척추·골절 치료용 금속 임플란트와 외과용 수술기구를 만드는 메디칼 사업을 주력으로 하는 회사로, 온열매트 등을 만들던 헬스케어 사업부는 계속된 적자로 2025년 9월 영업을 중단했습니다. 최근에는 장기일반민간임대주택(부동산) 사업으로도 영역을 넓히려 하고 있어, 기존 의료기기 사업과는 다른 방향의 다각화가 진행 중입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 168억 원으로 전년 대비 37.2% 줄었고, 영업손실 57억 원, 당기순손실 63억 원으로 적자가 계속되고 있으며 부채비율은 135.0%로 부채 부담이 큰 편입니다. 특히 이 회사(별도 재무제표 기준)의 감사보고서는 감사 절차상 제약과 계속기업으로서의 존속능력에 대한 중요한 불확실성을 이유로 감사인이 의견을 표명하지 않는 '의견거절'을 받았고, 부채총계가 자본총계를 76억 원가량 초과하는 완전자본잠식 상태라고 재무제표 주석에 명시돼 있어 투자 판단에 각별한 주의가 필요합니다.",
+    "product_service_segments": [
+      {
+        "name": "메디칼",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 52.5%",
+        "revenue_share": 0.5247,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.1%",
+        "revenue_share": 0.2314,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "헬스케어",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.9%",
+        "revenue_share": 0.0888,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "메디칼(제품)",
-      "caption": "임플란트·외과용 수술기구 제조",
+      "title": "메디칼",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 52.5%",
       "kind": "service",
-      "visual": "메디칼",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "메디칼(상품)",
-      "caption": "임플란트·내시경 등 상품 유통",
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.1%",
       "kind": "service",
-      "visual": "메디칼",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "헬스케어(2025년 9월 사업중단)",
-      "caption": "온열매트·건강기능식품 등(영업 중단)",
-      "kind": "consumer",
-      "visual": "헬스케어",
-      "image": "../data/business_images/business_image_local_healthcare.svg",
-      "image_source": "Local curated visual"
+      "title": "헬스케어",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

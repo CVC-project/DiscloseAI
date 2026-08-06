@@ -156,28 +156,31 @@
     "segment_breakdown": [
       {
         "name": "전선부문",
-        "desc": "산업용 케이블·전력선·통신케이블",
-        "revenue_share": 0.238
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.2%",
+        "revenue_share": 0.092,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "일렉트릭부문",
-        "desc": "전력기기·자동화·배전반 등",
-        "revenue_share": 0.156
+        "name": "중간재부문(나동선)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.5%",
+        "revenue_share": 0.025,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "엠트론부문",
-        "desc": "트랙터·사출성형기 등 기계",
-        "revenue_share": 0.035
+        "name": "전력선부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.2%",
+        "revenue_share": 0.102,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "엠앤엠부문",
-        "desc": "전기동 제련·귀금속",
-        "revenue_share": 0.469
-      },
-      {
-        "name": "아이앤디부문",
-        "desc": "부동산개발·해외투자(Superior Essex)",
-        "revenue_share": 0.152
+        "name": "통신부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.4%",
+        "revenue_share": 0.004,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -193,40 +196,62 @@
       "전기동",
       "금·은"
     ],
-    "investor_note": "LS는 전선(케이블)·일렉트릭(전력기기)·엠트론(트랙터)·엠앤엠(전기동 제련)·아이앤디(부동산·해외투자) 5개 사업부문을 거느린 지주회사로, 전기동을 다루는 엠앤엠부문이 매출의 절반 가까이를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 31조 8,700억 원으로 전년 대비 15.7% 늘었지만 영업이익은 1.9% 줄어든 1조 525억 원, 당기순이익은 23.9% 늘어난 4,851억 원이었습니다. 총자산은 21.8% 늘어난 24조 9,947억 원이며, 부채비율은 225.5%로 자본 대비 빚이 두 배 넘어 재무 부담을 눈여겨볼 필요가 있습니다."
+    "investor_note": "LS는 전선(케이블)·일렉트릭(전력기기)·엠트론(트랙터)·엠앤엠(전기동 제련)·아이앤디(부동산·해외투자) 5개 사업부문을 거느린 지주회사로, 전기동을 다루는 엠앤엠부문이 매출의 절반 가까이를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 31조 8,700억 원으로 전년 대비 15.7% 늘었지만 영업이익은 1.9% 줄어든 1조 525억 원, 당기순이익은 23.9% 늘어난 4,851억 원이었습니다. 총자산은 21.8% 늘어난 24조 9,947억 원이며, 부채비율은 225.5%로 자본 대비 빚이 두 배 넘어 재무 부담을 눈여겨볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "전선부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.2%",
+        "revenue_share": 0.092,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "중간재부문(나동선)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.5%",
+        "revenue_share": 0.025,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전력선부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.2%",
+        "revenue_share": 0.102,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "통신부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.4%",
+        "revenue_share": 0.004,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "전선부문",
-      "caption": "산업용 케이블·전력선·통신케이블",
-      "kind": "telecom",
-      "visual": "전선부문",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "일렉트릭부문",
-      "caption": "전력기기·자동화·배전반 등",
-      "kind": "power",
-      "visual": "일렉트릭부문",
-      "image": "../data/business_images/business_image_local_power.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "엠트론부문",
-      "caption": "트랙터·사출성형기 등 기계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.2%",
       "kind": "service",
-      "visual": "엠트론부문",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "엠앤엠부문",
-      "caption": "전기동 제련·귀금속",
-      "kind": "material",
-      "visual": "엠앤엠부문",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "title": "중간재부문(나동선)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "전력기기·발전",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.2%",
+      "kind": "power",
+      "visual": "POWER",
+      "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

@@ -156,13 +156,17 @@
     "segment_breakdown": [
       {
         "name": "자동차부문",
-        "desc": "전기차 승온 히터 등 자동차 전장부품 제조·판매",
-        "revenue_share": 0.999
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 96.4%",
+        "revenue_share": 0.964,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "콘덴서부문",
-        "desc": "범용 콘덴서 판매(2025년 재고소진 후 사업종료)",
-        "revenue_share": 0.001
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.6%",
+        "revenue_share": 0.036,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -170,24 +174,40 @@
       "자동차 전장부품",
       "콘덴서(사업종료)"
     ],
-    "investor_note": "매출의 99.9%가 자동차 전장부품에서 발생하며, 기존 콘덴서 사업은 2025년 재고 소진 후 종료했습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,518억 원으로 전년 대비 5.8% 늘었고 영업이익은 6.0%, 당기순이익은 373.3% 큰 폭으로 증가했습니다. 다만 부채비율은 228.7%로 자본 대비 부채가 많은 편이라 재무 부담을 살펴볼 필요가 있습니다."
+    "investor_note": "매출의 99.9%가 자동차 전장부품에서 발생하며, 기존 콘덴서 사업은 2025년 재고 소진 후 종료했습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,518억 원으로 전년 대비 5.8% 늘었고 영업이익은 6.0%, 당기순이익은 373.3% 큰 폭으로 증가했습니다. 다만 부채비율은 228.7%로 자본 대비 부채가 많은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "자동차부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 96.4%",
+        "revenue_share": 0.964,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.6%",
+        "revenue_share": 0.036,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "자동차부문",
-      "caption": "전기차 승온 히터 등 자동차 전장부품 제조·판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 96.4%",
       "kind": "auto",
-      "visual": "자동차부문",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "콘덴서부문",
-      "caption": "범용 콘덴서 판매(2025년 재고소진 후 사업종료)",
-      "kind": "service",
-      "visual": "콘덴서부문",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.6%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

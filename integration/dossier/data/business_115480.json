@@ -153,7 +153,22 @@
   "snippets": {
     "overview": "(주)씨유메디칼시스템의 주요 제품·서비스는 배터리, 기타제품, 현지대리점, 시 장, 비 고, 다중이용시설입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 수주상황 당사의 의료기기사업은 고객사의 영업 주문에 따라 생산을 진행하고 있으며 주로 단기 P/O를 받아 한달 이내 납품 완료하며 매출이 발생합니다. 특히 독일과 일본에 현지 법인을 설립하여 시장 조사, 마케팅 및 고객 지원을 강화하고 국가별 특성에 맞는 판매 전략을 추진하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "(주)씨유메디칼시스템의 주요 제품·서비스는 배터리, 기타제품, 현지대리점, 시 장, 비 고, 다중이용시설입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 수주상황 당사의 의료기기사업은 고객사의 영업 주문에 따라 생산을 진행하고 있으며 주로 단기 P/O를 받아 한달 이내 납품 완료하며 매출이 발생합니다. 특히 독일과 일본에 현지 법인을 설립하여 시장 조사, 마케팅 및 고객 지원을 강화하고 국가별 특성에 맞는 판매 전략을 추진하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "심장충격기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 81.9%",
+        "revenue_share": 0.819,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "DEFIBRILLATOR",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.6%",
+        "revenue_share": 0.036,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "배터리",
       "기타제품",
@@ -168,24 +183,70 @@
       "기업체 등",
       "직판"
     ],
-    "investor_note": "(주)씨유메디칼시스템의 주요 제품·서비스는 배터리, 기타제품, 현지대리점, 시 장, 비 고, 다중이용시설입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 수주상황 당사의 의료기기사업은 고객사의 영업 주문에 따라 생산을 진행하고 있으며 주로 단기 P/O를 받아 한달 이내 납품 완료하며 매출이 발생합니다. 특히 독일과 일본에 현지 법인을 설립하여 시장 조사, 마케팅 및 고객 지원을 강화하고 국가별 특성에 맞는 판매 전략을 추진하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)씨유메디칼시스템의 주요 제품·서비스는 배터리, 기타제품, 현지대리점, 시 장, 비 고, 다중이용시설입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 수주상황 당사의 의료기기사업은 고객사의 영업 주문에 따라 생산을 진행하고 있으며 주로 단기 P/O를 받아 한달 이내 납품 완료하며 매출이 발생합니다. 특히 독일과 일본에 현지 법인을 설립하여 시장 조사, 마케팅 및 고객 지원을 강화하고 국가별 특성에 맞는 판매 전략을 추진하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "심장충격기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 81.9%",
+        "revenue_share": 0.819,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "DEFIBRILLATOR",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.6%",
+        "revenue_share": 0.036,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.2%",
+        "revenue_share": 0.102,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품 및 기타",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.3%",
+        "revenue_share": 0.043,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "현지대리점",
-      "caption": "현지대리점 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "심장충격기",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 81.9%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "시 장",
-      "caption": "시 장 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "증권",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.6%",
+      "kind": "securities",
+      "visual": "SECURITIES",
+      "image": "../data/business_images/business_image_c1540b930934e19f.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "기타제품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.2%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "상품 및 기타",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.3%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

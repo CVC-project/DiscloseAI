@@ -155,19 +155,25 @@
     "segment_finance": "S-Oil은 하루 66만 9천 배럴의 원유정제능력을 갖춘 정유사로, 휘발유·경유·항공유 등을 만드는 정유부문(매출의 79%)을 중심으로 윤활유(9%)와 석유화학 제품(12%)으로 사업을 다각화하고 있습니다. 최대주주는 사우디아라비아 국영 석유회사 Saudi Aramco의 종속회사(지분 63.4%)로, 장기계약을 통해 원유를 안정적으로 공급받고 있습니다. 현재 석유화학 생산 비중을 12%에서 25%로 늘리는 대규모 증설 프로젝트(샤힌 프로젝트, 총 투자액 9조 2,580억 원)를 2026년 상업가동을 목표로 진행 중입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 34조 2,469억 원으로 전년 대비 6.5% 줄었고 영업이익도 2,356억 원으로 44.2% 감소했는데, 이는 국제유가 하락과 정제마진 변동 등의 영향으로 보입니다. 다만 당기순이익은 1,769억 원으로 흑자 전환했습니다. 총자산은 26조 5,569억 원, 부채비율은 198.8%로 대규모 증설 투자에 따른 차입이 반영되어 다소 높은 편입니다.",
     "segment_breakdown": [
       {
-        "name": "정유부문",
-        "desc": "휘발유·경유·항공유 등 원유정제 제품, 하루 66.9만 배럴 정제능력",
-        "revenue_share": 0.788
+        "name": "정유",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+        "revenue_share": 0.015,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "석유화학부문",
-        "desc": "방향족(파라자일렌·벤젠)·올레핀계(폴리프로필렌 등) 제품",
-        "revenue_share": 0.124
+        "name": "윤활",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.3%",
+        "revenue_share": 0.083,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "윤활부문",
-        "desc": "고급 윤활기유·윤활유, 하루 4.4만 배럴 생산능력",
-        "revenue_share": 0.088
+        "name": "석유화학",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.4%",
+        "revenue_share": 0.124,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -180,32 +186,54 @@
       "방향족 제품(파라자일렌·벤젠)",
       "올레핀계 제품(폴리프로필렌 등)"
     ],
-    "investor_note": "S-Oil은 하루 66만 9천 배럴의 원유정제능력을 갖춘 정유사로, 휘발유·경유·항공유 등을 만드는 정유부문(매출의 79%)을 중심으로 윤활유(9%)와 석유화학 제품(12%)으로 사업을 다각화하고 있습니다. 최대주주는 사우디아라비아 국영 석유회사 Saudi Aramco의 종속회사(지분 63.4%)로, 장기계약을 통해 원유를 안정적으로 공급받고 있습니다. 현재 석유화학 생산 비중을 12%에서 25%로 늘리는 대규모 증설 프로젝트(샤힌 프로젝트, 총 투자액 9조 2,580억 원)를 2026년 상업가동을 목표로 진행 중입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 34조 2,469억 원으로 전년 대비 6.5% 줄었고 영업이익도 2,356억 원으로 44.2% 감소했는데, 이는 국제유가 하락과 정제마진 변동 등의 영향으로 보입니다. 다만 당기순이익은 1,769억 원으로 흑자 전환했습니다. 총자산은 26조 5,569억 원, 부채비율은 198.8%로 대규모 증설 투자에 따른 차입이 반영되어 다소 높은 편입니다."
+    "investor_note": "S-Oil은 하루 66만 9천 배럴의 원유정제능력을 갖춘 정유사로, 휘발유·경유·항공유 등을 만드는 정유부문(매출의 79%)을 중심으로 윤활유(9%)와 석유화학 제품(12%)으로 사업을 다각화하고 있습니다. 최대주주는 사우디아라비아 국영 석유회사 Saudi Aramco의 종속회사(지분 63.4%)로, 장기계약을 통해 원유를 안정적으로 공급받고 있습니다. 현재 석유화학 생산 비중을 12%에서 25%로 늘리는 대규모 증설 프로젝트(샤힌 프로젝트, 총 투자액 9조 2,580억 원)를 2026년 상업가동을 목표로 진행 중입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 34조 2,469억 원으로 전년 대비 6.5% 줄었고 영업이익도 2,356억 원으로 44.2% 감소했는데, 이는 국제유가 하락과 정제마진 변동 등의 영향으로 보입니다. 다만 당기순이익은 1,769억 원으로 흑자 전환했습니다. 총자산은 26조 5,569억 원, 부채비율은 198.8%로 대규모 증설 투자에 따른 차입이 반영되어 다소 높은 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "정유",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+        "revenue_share": 0.015,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품 및 상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.3%",
+        "revenue_share": 0.173,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "윤활",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.3%",
+        "revenue_share": 0.083,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "석유화학",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.4%",
+        "revenue_share": 0.124,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "정유부문",
-      "caption": "휘발유·경유·항공유 등 원유정제 제품, 하루 66.9만 배럴 정제능력",
+      "title": "화학소재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
       "kind": "material",
-      "visual": "정유부문",
-      "image": "../data/business_images/business_image_local_oil.svg",
-      "image_source": "Local curated visual"
+      "visual": "CHEMICAL",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "석유화학부문",
-      "caption": "방향족(파라자일렌·벤젠)·올레핀계(폴리프로필렌 등) 제품",
-      "kind": "material",
-      "visual": "석유화학부문",
-      "image": "../data/business_images/business_image_local_oil.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "윤활부문",
-      "caption": "고급 윤활기유·윤활유, 하루 4.4만 배럴 생산능력",
+      "title": "윤활",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.3%",
       "kind": "service",
-      "visual": "윤활부문",
-      "image": "../data/business_images/business_image_local_oil.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

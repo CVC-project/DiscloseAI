@@ -153,7 +153,36 @@
   "snippets": {
     "overview": "제품을 만들고 판매하는 제조 기반 회사입니다. 제품매출은 연결회사의 주력 사업으로 직접 제품을 개발, 제조하여 회사 상표(자체 브랜드)로 고객에게 판매하는 것으로 Nand MCP, 셀룰라램(CRAM), DRAM 등이 있으며, 이들 제품은 제품별, 스펙별로다양하게 제품군이 구성되어 있습니다. 향후 NAND MCP 시장에서의 경쟁력을 강화하는 동시에, 고용량 제품 수요에 대응하기 위해 LPDDR5x 기반의 단품 및 MCP 제품 개발과 프로모션을 강화할 계획입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "제품을 만들고 판매하는 제조 기반 회사입니다. 제품매출은 연결회사의 주력 사업으로 직접 제품을 개발, 제조하여 회사 상표(자체 브랜드)로 고객에게 판매하는 것으로 Nand MCP, 셀룰라램(CRAM), DRAM 등이 있으며, 이들 제품은 제품별, 스펙별로다양하게 제품군이 구성되어 있습니다. 향후 NAND MCP 시장에서의 경쟁력을 강화하는 동시에, 고용량 제품 수요에 대응하기 위해 LPDDR5x 기반의 단품 및 MCP 제품 개발과 프로모션을 강화할 계획입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "25.01.01 ~25.12.31",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.2%",
+        "revenue_share": 0.3924,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "DRAM",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.8%",
+        "revenue_share": 0.2278,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "TLC NAND",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.1%",
+        "revenue_share": 0.1208,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "LPDDR4",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.8%",
+        "revenue_share": 0.0881,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "DRAM",
       "NAND",
@@ -166,32 +195,62 @@
       "기간",
       "비고"
     ],
-    "investor_note": "제품을 만들고 판매하는 제조 기반 회사입니다. 제품매출은 연결회사의 주력 사업으로 직접 제품을 개발, 제조하여 회사 상표(자체 브랜드)로 고객에게 판매하는 것으로 Nand MCP, 셀룰라램(CRAM), DRAM 등이 있으며, 이들 제품은 제품별, 스펙별로다양하게 제품군이 구성되어 있습니다. 향후 NAND MCP 시장에서의 경쟁력을 강화하는 동시에, 고용량 제품 수요에 대응하기 위해 LPDDR5x 기반의 단품 및 MCP 제품 개발과 프로모션을 강화할 계획입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "제품을 만들고 판매하는 제조 기반 회사입니다. 제품매출은 연결회사의 주력 사업으로 직접 제품을 개발, 제조하여 회사 상표(자체 브랜드)로 고객에게 판매하는 것으로 Nand MCP, 셀룰라램(CRAM), DRAM 등이 있으며, 이들 제품은 제품별, 스펙별로다양하게 제품군이 구성되어 있습니다. 향후 NAND MCP 시장에서의 경쟁력을 강화하는 동시에, 고용량 제품 수요에 대응하기 위해 LPDDR5x 기반의 단품 및 MCP 제품 개발과 프로모션을 강화할 계획입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "25.01.01 ~25.12.31",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.2%",
+        "revenue_share": 0.3924,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "DRAM",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.8%",
+        "revenue_share": 0.2278,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "TLC NAND",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.1%",
+        "revenue_share": 0.1208,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "LPDDR4",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.8%",
+        "revenue_share": 0.0881,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "DRAM",
-      "caption": "데이터 저장과 AI 서버 수요에 연결되는 메모리 제품입니다.",
+      "title": "25.01.01 ~25.12.31",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.2%",
       "kind": "chip",
       "visual": "CHIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "메모리 반도체",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.8%",
+      "kind": "chip",
+      "visual": "MEMORY",
       "image": "../data/business_images/business_image_10774ca82ea41202.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "NAND",
-      "caption": "데이터 저장과 AI 서버 수요에 연결되는 메모리 제품입니다.",
+      "title": "LPDDR4",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.8%",
       "kind": "chip",
       "visual": "CHIP",
-      "image": "../data/business_images/business_image_10774ca82ea41202.jpg",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
       "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "제조",
-      "caption": "제조 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "chip",
-      "visual": "CHIP",
-      "image": "../data/business_images/business_image_local_semiconductor_part.svg",
-      "image_source": "Local curated visual"
     }
   ],
   "custom_report_ideas": [

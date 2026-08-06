@@ -155,14 +155,11 @@
     "segment_finance": "한국쉘석유는 글로벌 브랜드 Shell의 국내 판매법인으로, 자동차·산업설비·선박용 윤활유와 그리스를 제조·판매하는 윤활유 전문기업입니다. 자체 생산 윤활유가 매출의 80%, 수입해 판매하는 상품이 15%, 그리스가 5%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,449억 원으로 전년 대비 5.4% 늘었고 영업이익은 14.9%, 당기순이익은 31.6% 각각 증가해 수익성이 개선됐습니다. 부채비율은 42.7%로 낮은 편이라 재무구조가 안정적입니다.",
     "segment_breakdown": [
       {
-        "name": "윤활유(수입상품)",
-        "desc": "Shell 브랜드 윤활유 수입 판매",
-        "revenue_share": 0.15
-      },
-      {
-        "name": "그리스",
-        "desc": "산업·자동차용 그리스 생산·판매",
-        "revenue_share": 0.047
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.0%",
+        "revenue_share": 0.15,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -170,31 +167,31 @@
       "그리스",
       "친환경 변압기유(Midel)"
     ],
-    "investor_note": "한국쉘석유는 글로벌 브랜드 Shell의 국내 판매법인으로, 자동차·산업설비·선박용 윤활유와 그리스를 제조·판매하는 윤활유 전문기업입니다. 자체 생산 윤활유가 매출의 80%, 수입해 판매하는 상품이 15%, 그리스가 5%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,449억 원으로 전년 대비 5.4% 늘었고 영업이익은 14.9%, 당기순이익은 31.6% 각각 증가해 수익성이 개선됐습니다. 부채비율은 42.7%로 낮은 편이라 재무구조가 안정적입니다."
+    "investor_note": "한국쉘석유는 글로벌 브랜드 Shell의 국내 판매법인으로, 자동차·산업설비·선박용 윤활유와 그리스를 제조·판매하는 윤활유 전문기업입니다. 자체 생산 윤활유가 매출의 80%, 수입해 판매하는 상품이 15%, 그리스가 5%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,449억 원으로 전년 대비 5.4% 늘었고 영업이익은 14.9%, 당기순이익은 31.6% 각각 증가해 수익성이 개선됐습니다. 부채비율은 42.7%로 낮은 편이라 재무구조가 안정적입니다.",
+    "product_service_segments": [
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.0%",
+        "revenue_share": 0.15,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 80.0%",
+        "revenue_share": 0.8,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "윤활유(제품)",
-      "caption": "자동차·산업·선박용 윤활유 자체 생산·판매",
-      "kind": "auto",
-      "visual": "윤활유",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "윤활유(수입상품)",
-      "caption": "Shell 브랜드 윤활유 수입 판매",
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.0%",
       "kind": "service",
-      "visual": "윤활유",
-      "image": "../data/business_images/business_image_local_oil.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "그리스",
-      "caption": "산업·자동차용 그리스 생산·판매",
-      "kind": "auto",
-      "visual": "그리스",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     }
   ],

@@ -155,14 +155,32 @@
     "segment_finance": "셀루메드는 인공무릎관절(TKR), 탈회골이식재(DBM), 골형성단백질(rhBMP2) 등을 만드는 의료기기·바이오 기업이지만, 최근에는 자회사의 환경설비·일반설비 시공사업이 매출의 약 89%를 차지할 만큼 비중이 커졌고 정작 의료기기·바이오로직스 매출은 전체의 9% 수준입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,401억 원으로 전년 대비 8.6% 늘었으나 영업손실 51억 원, 당기순손실 21억 원을 기록해 적자가 이어지고 있고, 유동부채가 유동자산을 넘어서는 등 계속기업(회사가 사업을 계속 이어갈 수 있는지)으로서의 존속능력에 유의적 의문이 제기된 상태입니다. 특히 이번 감사에서는 의견거절을 받아 재무제표의 신뢰성 자체에 주의가 필요하며, 투자 판단 시 각별히 유의해야 합니다.",
     "segment_breakdown": [
       {
-        "name": "건설기계설비(환경·일반설비)",
-        "desc": "자회사의 환경설비 공사·일반설비 시공",
-        "revenue_share": 0.89
+        "name": "의료기기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.0%",
+        "revenue_share": 0.09,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "의료기기·바이오로직스",
-        "desc": "인공관절·이식재·골형성단백질 등 의료기기·바이오 제품",
-        "revenue_share": 0.09
+        "name": "화장품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.01,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "도소매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.01,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "건설기계설비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 89.0%",
+        "revenue_share": 0.89,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -176,24 +194,70 @@
       "환경설비 공사",
       "일반설비(닥트·배관) 시공"
     ],
-    "investor_note": "셀루메드는 인공무릎관절(TKR), 탈회골이식재(DBM), 골형성단백질(rhBMP2) 등을 만드는 의료기기·바이오 기업이지만, 최근에는 자회사의 환경설비·일반설비 시공사업이 매출의 약 89%를 차지할 만큼 비중이 커졌고 정작 의료기기·바이오로직스 매출은 전체의 9% 수준입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,401억 원으로 전년 대비 8.6% 늘었으나 영업손실 51억 원, 당기순손실 21억 원을 기록해 적자가 이어지고 있고, 유동부채가 유동자산을 넘어서는 등 계속기업(회사가 사업을 계속 이어갈 수 있는지)으로서의 존속능력에 유의적 의문이 제기된 상태입니다. 특히 이번 감사에서는 의견거절을 받아 재무제표의 신뢰성 자체에 주의가 필요하며, 투자 판단 시 각별히 유의해야 합니다."
+    "investor_note": "셀루메드는 인공무릎관절(TKR), 탈회골이식재(DBM), 골형성단백질(rhBMP2) 등을 만드는 의료기기·바이오 기업이지만, 최근에는 자회사의 환경설비·일반설비 시공사업이 매출의 약 89%를 차지할 만큼 비중이 커졌고 정작 의료기기·바이오로직스 매출은 전체의 9% 수준입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,401억 원으로 전년 대비 8.6% 늘었으나 영업손실 51억 원, 당기순손실 21억 원을 기록해 적자가 이어지고 있고, 유동부채가 유동자산을 넘어서는 등 계속기업(회사가 사업을 계속 이어갈 수 있는지)으로서의 존속능력에 유의적 의문이 제기된 상태입니다. 특히 이번 감사에서는 의견거절을 받아 재무제표의 신뢰성 자체에 주의가 필요하며, 투자 판단 시 각별히 유의해야 합니다.",
+    "product_service_segments": [
+      {
+        "name": "의료기기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.0%",
+        "revenue_share": 0.09,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "화장품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.01,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "도소매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.01,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "건설기계설비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 89.0%",
+        "revenue_share": 0.89,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "건설기계설비(환경·일반설비)",
-      "caption": "자회사의 환경설비 공사·일반설비 시공",
-      "kind": "service",
-      "visual": "건설기계설비",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "title": "의료기기",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.0%",
+      "kind": "bio",
+      "visual": "MEDICAL",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "의료기기·바이오로직스",
-      "caption": "인공관절·이식재·골형성단백질 등 의료기기·바이오 제품",
-      "kind": "bio",
-      "visual": "의료기기",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "화장품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "도소매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "건축·주택",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 89.0%",
+      "kind": "service",
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

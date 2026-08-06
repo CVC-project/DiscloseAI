@@ -153,7 +153,15 @@
   "snippets": {
     "overview": "이수화학은 합성세제 원료인 LAB·NP 등을 만드는 석유화학사업을 주력으로 하면서, 자회사 이수건설을 통한 아파트 브랜드 '브라운스톤' 등 건설사업, 자회사 이수앱지스를 통한 바이오시밀러(클로티냅·애브서틴·파바갈) 의약사업까지 함께 하는 지주 성격의 회사입니다. 매출은 석유화학이 약 84%로 대부분을 차지하고, 건설이 약 13%, 의약이 약 3%입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 6,594억 원으로 전년 대비 13.4% 줄었지만 영업이익은 68억 원으로 전년 적자에서 흑자로 전환했습니다. 다만 당기순손실은 405억 원으로 적자가 이어졌고, 부채비율은 305.0%로 자본보다 빚이 훨씬 많은 편이라 재무 부담을 특히 주의 깊게 살펴볼 필요가 있습니다.",
     "segment_finance": "이수화학은 합성세제 원료인 LAB·NP 등을 만드는 석유화학사업을 주력으로 하면서, 자회사 이수건설을 통한 아파트 브랜드 '브라운스톤' 등 건설사업, 자회사 이수앱지스를 통한 바이오시밀러(클로티냅·애브서틴·파바갈) 의약사업까지 함께 하는 지주 성격의 회사입니다. 매출은 석유화학이 약 84%로 대부분을 차지하고, 건설이 약 13%, 의약이 약 3%입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 6,594억 원으로 전년 대비 13.4% 줄었지만 영업이익은 68억 원으로 전년 적자에서 흑자로 전환했습니다. 다만 당기순손실은 405억 원으로 적자가 이어졌고, 부채비율은 305.0%로 자본보다 빚이 훨씬 많은 편이라 재무 부담을 특히 주의 깊게 살펴볼 필요가 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.9%",
+        "revenue_share": 0.009,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "LAB(연성알킬벤젠, 합성세제 원료)",
       "NP(노말파라핀)",
@@ -165,32 +173,54 @@
       "애브서틴(바이오시밀러)",
       "파바갈(바이오시밀러)"
     ],
-    "investor_note": "이수화학은 합성세제 원료인 LAB·NP 등을 만드는 석유화학사업을 주력으로 하면서, 자회사 이수건설을 통한 아파트 브랜드 '브라운스톤' 등 건설사업, 자회사 이수앱지스를 통한 바이오시밀러(클로티냅·애브서틴·파바갈) 의약사업까지 함께 하는 지주 성격의 회사입니다. 매출은 석유화학이 약 84%로 대부분을 차지하고, 건설이 약 13%, 의약이 약 3%입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 6,594억 원으로 전년 대비 13.4% 줄었지만 영업이익은 68억 원으로 전년 적자에서 흑자로 전환했습니다. 다만 당기순손실은 405억 원으로 적자가 이어졌고, 부채비율은 305.0%로 자본보다 빚이 훨씬 많은 편이라 재무 부담을 특히 주의 깊게 살펴볼 필요가 있습니다."
+    "investor_note": "이수화학은 합성세제 원료인 LAB·NP 등을 만드는 석유화학사업을 주력으로 하면서, 자회사 이수건설을 통한 아파트 브랜드 '브라운스톤' 등 건설사업, 자회사 이수앱지스를 통한 바이오시밀러(클로티냅·애브서틴·파바갈) 의약사업까지 함께 하는 지주 성격의 회사입니다. 매출은 석유화학이 약 84%로 대부분을 차지하고, 건설이 약 13%, 의약이 약 3%입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 6,594억 원으로 전년 대비 13.4% 줄었지만 영업이익은 68억 원으로 전년 적자에서 흑자로 전환했습니다. 다만 당기순손실은 405억 원으로 적자가 이어졌고, 부채비율은 305.0%로 자본보다 빚이 훨씬 많은 편이라 재무 부담을 특히 주의 깊게 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "석유화학사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 97.7%",
+        "revenue_share": 0.977,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.9%",
+        "revenue_share": 0.009,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "스마트팜사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.002,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "주택사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.6%",
+        "revenue_share": 0.056,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "석유화학사업부문",
-      "caption": "합성세제 원료(LAB·NP 등) 제조·판매",
+      "title": "화학소재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 97.7%",
       "kind": "material",
-      "visual": "석유화학사업부문",
-      "image": "../data/business_images/business_image_local_oil.svg",
-      "image_source": "Local curated visual"
+      "visual": "CHEMICAL",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "건설사업부문",
-      "caption": "아파트·공공건축물·플랜트 시공(이수건설, 브라운스톤)",
-      "kind": "ship",
-      "visual": "건설사업부문",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "의약사업부문",
-      "caption": "바이오시밀러 의약품 제조·판매(이수앱지스)",
-      "kind": "bio",
-      "visual": "의약사업부문",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "건축·주택",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.6%",
+      "kind": "service",
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

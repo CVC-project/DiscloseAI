@@ -121,7 +121,22 @@
   "snippets": {
     "overview": "(주)STX그린로지스의 주요 제품·서비스는 LNG, 원유, 선박관리업, 선박부품, 해운대리업 일체, 벌크선입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 매출처 당기와 전기 중 당사의 매출액의 10% 이상을 차지하는 외부고객과 관련된 정보는 다음과 같습니다. 매출현황 사업부문별 요약 재무현황 주식회사 STX그린로지스가 도입한 K-IFRS 기준에 따라 당사와 연결대상 종속회사에 포함된 회사들이 영위하는 사업은 아래와 같습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "(주)STX그린로지스의 주요 제품·서비스는 LNG, 원유, 선박관리업, 선박부품, 해운대리업 일체, 벌크선입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 매출처 당기와 전기 중 당사의 매출액의 10% 이상을 차지하는 외부고객과 관련된 정보는 다음과 같습니다. 매출현황 사업부문별 요약 재무현황 주식회사 STX그린로지스가 도입한 K-IFRS 기준에 따라 당사와 연결대상 종속회사에 포함된 회사들이 영위하는 사업은 아래와 같습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "해운",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 61.4%",
+        "revenue_share": 0.6138,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "선박관리업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.7%",
+        "revenue_share": 0.3573,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "LNG",
       "원유",
@@ -136,32 +151,40 @@
       "전력",
       "기후"
     ],
-    "investor_note": "(주)STX그린로지스의 주요 제품·서비스는 LNG, 원유, 선박관리업, 선박부품, 해운대리업 일체, 벌크선입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 매출처 당기와 전기 중 당사의 매출액의 10% 이상을 차지하는 외부고객과 관련된 정보는 다음과 같습니다. 매출현황 사업부문별 요약 재무현황 주식회사 STX그린로지스가 도입한 K-IFRS 기준에 따라 당사와 연결대상 종속회사에 포함된 회사들이 영위하는 사업은 아래와 같습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)STX그린로지스의 주요 제품·서비스는 LNG, 원유, 선박관리업, 선박부품, 해운대리업 일체, 벌크선입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 매출처 당기와 전기 중 당사의 매출액의 10% 이상을 차지하는 외부고객과 관련된 정보는 다음과 같습니다. 매출현황 사업부문별 요약 재무현황 주식회사 STX그린로지스가 도입한 K-IFRS 기준에 따라 당사와 연결대상 종속회사에 포함된 회사들이 영위하는 사업은 아래와 같습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "해운",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 61.4%",
+        "revenue_share": 0.6138,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "선박관리업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.7%",
+        "revenue_share": 0.3573,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "원유",
-      "caption": "원유 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "해운",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 61.4%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "선박관리업",
-      "caption": "선박관리업 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "상선",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.7%",
       "kind": "ship",
       "visual": "SHIP",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "선박부품",
-      "caption": "선박부품 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "ship",
-      "visual": "SHIP",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

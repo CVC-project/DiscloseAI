@@ -155,24 +155,32 @@
     "segment_finance": "한진은 택배를 중심으로 물류(육상·해상 운송, 항만 하역), 글로벌 포워딩, 에너지(주유소·전기차 충전) 사업을 함께 운영하는 종합물류기업입니다. 매출의 절반 이상(57%)이 택배사업에서 나오고, 나머지는 물류·글로벌·에너지 사업이 나눠 채우고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3조 649억 원으로 전년 대비 1.6% 늘었고 영업이익도 12.1% 증가했으며, 당기순이익은 흑자로 전환돼 실적이 개선됐습니다. 다만 부채비율은 183.4%로 자본보다 훨씬 많은 빚을 지고 있어 재무 부담을 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "택배",
-        "desc": "전국 분류터미널·집배점 기반 생활물류 택배 서비스",
-        "revenue_share": 0.565
+        "name": "물류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.8%",
+        "revenue_share": 0.228,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "물류",
-        "desc": "공로·철도·해운을 이용한 화물 운송 및 항만 하역",
-        "revenue_share": 0.228
+        "name": "택배",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 56.5%",
+        "revenue_share": 0.565,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "글로벌",
-        "desc": "해상·항공 포워딩 등 국제 화물운송 중개·대리",
-        "revenue_share": 0.116
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.6%",
+        "revenue_share": 0.116,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "에너지",
-        "desc": "직영주유소 유류 판매 및 전기차 충전 인프라",
-        "revenue_share": 0.091
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.1%",
+        "revenue_share": 0.091,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -183,39 +191,69 @@
       "글로벌 포워딩",
       "전기차 충전·유류 판매(에너지)"
     ],
-    "investor_note": "한진은 택배를 중심으로 물류(육상·해상 운송, 항만 하역), 글로벌 포워딩, 에너지(주유소·전기차 충전) 사업을 함께 운영하는 종합물류기업입니다. 매출의 절반 이상(57%)이 택배사업에서 나오고, 나머지는 물류·글로벌·에너지 사업이 나눠 채우고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3조 649억 원으로 전년 대비 1.6% 늘었고 영업이익도 12.1% 증가했으며, 당기순이익은 흑자로 전환돼 실적이 개선됐습니다. 다만 부채비율은 183.4%로 자본보다 훨씬 많은 빚을 지고 있어 재무 부담을 살펴볼 필요가 있습니다."
+    "investor_note": "한진은 택배를 중심으로 물류(육상·해상 운송, 항만 하역), 글로벌 포워딩, 에너지(주유소·전기차 충전) 사업을 함께 운영하는 종합물류기업입니다. 매출의 절반 이상(57%)이 택배사업에서 나오고, 나머지는 물류·글로벌·에너지 사업이 나눠 채우고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3조 649억 원으로 전년 대비 1.6% 늘었고 영업이익도 12.1% 증가했으며, 당기순이익은 흑자로 전환돼 실적이 개선됐습니다. 다만 부채비율은 183.4%로 자본보다 훨씬 많은 빚을 지고 있어 재무 부담을 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "물류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.8%",
+        "revenue_share": 0.228,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "택배",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 56.5%",
+        "revenue_share": 0.565,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "글로벌",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.6%",
+        "revenue_share": 0.116,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "에너지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.1%",
+        "revenue_share": 0.091,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "택배",
-      "caption": "전국 분류터미널·집배점 기반 생활물류 택배 서비스",
-      "kind": "consumer",
-      "visual": "택배",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
+      "title": "물류",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "물류",
-      "caption": "공로·철도·해운을 이용한 화물 운송 및 항만 하역",
+      "title": "택배",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 56.5%",
       "kind": "service",
-      "visual": "물류",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "글로벌",
-      "caption": "해상·항공 포워딩 등 국제 화물운송 중개·대리",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.6%",
       "kind": "service",
-      "visual": "글로벌",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "에너지",
-      "caption": "직영주유소 유류 판매 및 전기차 충전 인프라",
-      "kind": "auto",
-      "visual": "에너지",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.1%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
       "image_source": "Unsplash"
     }
   ],

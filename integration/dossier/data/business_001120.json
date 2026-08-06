@@ -156,18 +156,31 @@
     "segment_breakdown": [
       {
         "name": "자원",
-        "desc": "광물자원 투자·운영, 팜농장 운영",
-        "revenue_share": 0.073
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.3%",
+        "revenue_share": 0.073,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "Trading/신성장",
-        "desc": "자원·소재·IT부품 트레이딩 및 신사업 투자",
-        "revenue_share": 0.456
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 45.6%",
+        "revenue_share": 0.456,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "물류",
-        "desc": "포워딩(국제운송 주선)·CL(계약물류) 사업",
-        "revenue_share": 0.471
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 47.1%",
+        "revenue_share": 0.471,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "석탄(USD/ton) (주1)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 97.0%",
+        "revenue_share": 0.97,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -179,32 +192,70 @@
       "판유리(LX글라스, HanGlas)",
       "IT서비스·SAP 솔루션"
     ],
-    "investor_note": "LX인터내셔널은 석탄·니켈 등 광물자원과 팜오일 생산·트레이딩, 메탄올·철강재 등 소재 트레이딩, 국제물류(포워딩·CL) 사업을 함께 운영하는 종합상사로, 자회사 LX판토스(물류)와 LX글라스(판유리, HanGlas 브랜드)를 두고 있습니다. 과거 공시 기반 참고 정보로, 연결 매출액은 16조 7,063억 원으로 전년 대비 0.4% 늘었지만 영업이익은 2,921억 원으로 40.3% 줄었고 당기순이익도 41.3% 감소했습니다. 부채비율은 163.8%로 자본보다 빚이 많은 편이라 재무 부담을 살펴볼 필요가 있습니다."
+    "investor_note": "LX인터내셔널은 석탄·니켈 등 광물자원과 팜오일 생산·트레이딩, 메탄올·철강재 등 소재 트레이딩, 국제물류(포워딩·CL) 사업을 함께 운영하는 종합상사로, 자회사 LX판토스(물류)와 LX글라스(판유리, HanGlas 브랜드)를 두고 있습니다. 과거 공시 기반 참고 정보로, 연결 매출액은 16조 7,063억 원으로 전년 대비 0.4% 늘었지만 영업이익은 2,921억 원으로 40.3% 줄었고 당기순이익도 41.3% 감소했습니다. 부채비율은 163.8%로 자본보다 빚이 많은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "자원",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.3%",
+        "revenue_share": 0.073,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Trading/신성장",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 45.6%",
+        "revenue_share": 0.456,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "물류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 47.1%",
+        "revenue_share": 0.471,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "석탄(USD/ton) (주1)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 97.0%",
+        "revenue_share": 0.97,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "자원",
-      "caption": "광물자원 투자·운영, 팜농장 운영",
-      "kind": "securities",
-      "visual": "자원",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.3%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "Trading/신성장",
-      "caption": "자원·소재·IT부품 트레이딩 및 신사업 투자",
-      "kind": "securities",
-      "visual": "Trading",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 45.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "물류",
-      "caption": "포워딩(국제운송 주선)·CL(계약물류) 사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 47.1%",
       "kind": "service",
-      "visual": "물류",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "석탄(USD/ton) (주1)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 97.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -139,9 +139,32 @@
     "segment_finance": "와이씨켐(주)의 주요 사업은 반도체전자재료, 일반화학, 유해화학물질 영업허가 (4공장), 기타전자재료 등입니다. 사업의 내용 와이씨켐 주식회사(이하 '당사')는 2001년 설립과 함께 반도체 공정 재료 사업에 뛰어들어 적극적으로 R&D 투자, 핵심 기술 인재 육성, 제조 기반의 투자 확대를 수행해 왔습니다. 당사는 원재료 수급문제로 생산과 납품에 차질이 발생한 적은 없습니다.",
     "segment_breakdown": [
       {
-        "name": "지분증권",
-        "desc": "위탁매매, IB, 운용 등 증권 서비스",
-        "revenue_share": null
+        "name": "반도체전자재료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 94.3%",
+        "revenue_share": 0.943,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "일반화학",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.4%",
+        "revenue_share": 0.054,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.3%",
+        "revenue_share": 0.003,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매 출 합 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -158,32 +181,62 @@
       "발명명칭",
       "권리자"
     ],
-    "investor_note": "와이씨켐(주)의 주요 사업은 반도체전자재료, 일반화학, 유해화학물질 영업허가 (4공장), 기타전자재료 등입니다. 사업의 내용 와이씨켐 주식회사(이하 '당사')는 2001년 설립과 함께 반도체 공정 재료 사업에 뛰어들어 적극적으로 R&D 투자, 핵심 기술 인재 육성, 제조 기반의 투자 확대를 수행해 왔습니다. 당사는 원재료 수급문제로 생산과 납품에 차질이 발생한 적은 없습니다."
+    "investor_note": "와이씨켐(주)의 주요 사업은 반도체전자재료, 일반화학, 유해화학물질 영업허가 (4공장), 기타전자재료 등입니다. 사업의 내용 와이씨켐 주식회사(이하 '당사')는 2001년 설립과 함께 반도체 공정 재료 사업에 뛰어들어 적극적으로 R&D 투자, 핵심 기술 인재 육성, 제조 기반의 투자 확대를 수행해 왔습니다. 당사는 원재료 수급문제로 생산과 납품에 차질이 발생한 적은 없습니다.",
+    "product_service_segments": [
+      {
+        "name": "반도체전자재료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 94.3%",
+        "revenue_share": 0.943,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "일반화학",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.4%",
+        "revenue_share": 0.054,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.3%",
+        "revenue_share": 0.003,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매 출 합 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "구리",
-      "caption": "구리 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "title": "반도체전자재료",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 94.3%",
+      "kind": "chip",
+      "visual": "CHIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "[제품 구성]",
-      "caption": "[제품 구성] 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "일반화학",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.4%",
       "kind": "material",
       "visual": "MAT",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "대표제품",
-      "caption": "대표제품 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "매 출 합 계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
       "kind": "material",
       "visual": "MAT",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

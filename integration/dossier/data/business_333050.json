@@ -137,7 +137,29 @@
   "snippets": {
     "overview": "(주)모코엠시스의 주요 사업은 솔루션사업, 클라우드사업, 연계솔루션사업, 보안솔루션사업 등입니다. 그리고, 공공기업 혹은 일반기업의 규모가 큰 사업일 경우, 해당 사업을 수주한 SI업체를 통해서 매출 계약을 합니다. 기존 고객에게는 연계 시스템에 대한 정밀 진단 서비스를 제공하고, 기 사용 중인 제품의 업그레이드를 유도하여 매출을 극대화할 계획입니다.",
     "segment_finance": "(주)모코엠시스의 주요 사업은 솔루션사업, 클라우드사업, 연계솔루션사업, 보안솔루션사업 등입니다. 그리고, 공공기업 혹은 일반기업의 규모가 큰 사업일 경우, 해당 사업을 수주한 SI업체를 통해서 매출 계약을 합니다. 기존 고객에게는 연계 시스템에 대한 정밀 진단 서비스를 제공하고, 기 사용 중인 제품의 업그레이드를 유도하여 매출을 극대화할 계획입니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "연계솔루션",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 76.6%",
+        "revenue_share": 0.7662,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "보안솔루션",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.6%",
+        "revenue_share": 0.1163,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "클라우드솔루션(APM솔루션 포함)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.7%",
+        "revenue_share": 0.1174,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "자산운용",
       "캐피탈",
@@ -147,40 +169,55 @@
       "제 5(전전) 기",
       "제품설명"
     ],
-    "investor_note": "(주)모코엠시스의 주요 사업은 솔루션사업, 클라우드사업, 연계솔루션사업, 보안솔루션사업 등입니다. 그리고, 공공기업 혹은 일반기업의 규모가 큰 사업일 경우, 해당 사업을 수주한 SI업체를 통해서 매출 계약을 합니다. 기존 고객에게는 연계 시스템에 대한 정밀 진단 서비스를 제공하고, 기 사용 중인 제품의 업그레이드를 유도하여 매출을 극대화할 계획입니다."
+    "investor_note": "(주)모코엠시스의 주요 사업은 솔루션사업, 클라우드사업, 연계솔루션사업, 보안솔루션사업 등입니다. 그리고, 공공기업 혹은 일반기업의 규모가 큰 사업일 경우, 해당 사업을 수주한 SI업체를 통해서 매출 계약을 합니다. 기존 고객에게는 연계 시스템에 대한 정밀 진단 서비스를 제공하고, 기 사용 중인 제품의 업그레이드를 유도하여 매출을 극대화할 계획입니다.",
+    "product_service_segments": [
+      {
+        "name": "연계솔루션",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 76.6%",
+        "revenue_share": 0.7662,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "보안솔루션",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.6%",
+        "revenue_share": 0.1163,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "클라우드솔루션(APM솔루션 포함)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.7%",
+        "revenue_share": 0.1174,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "자산운용",
-      "caption": "투자 중개와 자산관리 수수료가 실적에 연결됩니다.",
-      "kind": "securities",
-      "visual": "AUM",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "title": "소프트웨어·솔루션",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 76.6%",
+      "kind": "service",
+      "visual": "SOFTWARE",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "캐피탈",
-      "caption": "캐피탈 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "보안 솔루션",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.6%",
       "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "visual": "SECURITY",
+      "image": "../data/business_images/business_image_281a9ea62f3d74e6.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "신탁",
-      "caption": "신탁 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "클라우드·데이터센터",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.7%",
       "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "제 7(당) 기",
-      "caption": "제 7(당) 기 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "visual": "CLOUD",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

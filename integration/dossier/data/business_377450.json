@@ -155,29 +155,11 @@
     "segment_finance": "(주)리파인의 주요 제품·서비스는 전월세보증금 대출 서비스, 전월세보증금대출 권리조사료, 담보대출 서비스, 전세보증금 반환보증 서비스, 전세보증금 반환보증 위탁수수료, 3.9입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 원재료 당사는 부동산 권리조사 서비스를 주된 사업으로 영위하고 있어 해당사항이 없습니다. 이와 관련해서 당사가 제공하는 서비스는 위탁 받은 업무에 대한 수행으로 크게 통지 관련 서비스와 판매지원 서비스로 나눌 수 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "A보험사",
-        "desc": "A보험사 관련 제품·서비스",
-        "revenue_share": null
-      },
-      {
-        "name": "B보험사",
-        "desc": "보험계약과 자산운용 중심 서비스",
-        "revenue_share": null
-      },
-      {
-        "name": "C보험사",
-        "desc": "보험계약과 자산운용 중심 서비스",
-        "revenue_share": null
-      },
-      {
-        "name": "D보험사",
-        "desc": "보험계약과 자산운용 중심 서비스",
-        "revenue_share": null
-      },
-      {
-        "name": "E보험사",
-        "desc": "보험계약과 자산운용 중심 서비스",
-        "revenue_share": null
+        "name": "통지관련 수수료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.8%",
+        "revenue_share": 0.048,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -187,40 +169,54 @@
       "전세보증금 반환보증 서비스",
       "A보험사"
     ],
-    "investor_note": "(주)리파인의 주요 제품·서비스는 전월세보증금 대출 서비스, 전월세보증금대출 권리조사료, 담보대출 서비스, 전세보증금 반환보증 서비스, 전세보증금 반환보증 위탁수수료, 3.9입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 원재료 당사는 부동산 권리조사 서비스를 주된 사업으로 영위하고 있어 해당사항이 없습니다. 이와 관련해서 당사가 제공하는 서비스는 위탁 받은 업무에 대한 수행으로 크게 통지 관련 서비스와 판매지원 서비스로 나눌 수 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)리파인의 주요 제품·서비스는 전월세보증금 대출 서비스, 전월세보증금대출 권리조사료, 담보대출 서비스, 전세보증금 반환보증 서비스, 전세보증금 반환보증 위탁수수료, 3.9입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 원재료 당사는 부동산 권리조사 서비스를 주된 사업으로 영위하고 있어 해당사항이 없습니다. 이와 관련해서 당사가 제공하는 서비스는 위탁 받은 업무에 대한 수행으로 크게 통지 관련 서비스와 판매지원 서비스로 나눌 수 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "전월세보증금 대출 서비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 85.7%",
+        "revenue_share": 0.857,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "통지관련 수수료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.8%",
+        "revenue_share": 0.048,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "담보대출 서비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.9%",
+        "revenue_share": 0.039,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타 위탁수수료(주1)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.7%",
+        "revenue_share": 0.007,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "A보험사",
-      "caption": "A보험사 관련 제품·서비스",
-      "kind": "insurance",
-      "visual": "A보험사",
-      "image": "../data/business_images/business_image_local_insurance.svg",
-      "image_source": "Local curated visual"
+      "title": "은행",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 85.7%",
+      "kind": "bank",
+      "visual": "BANK",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "B보험사",
-      "caption": "보험계약과 자산운용 중심 서비스",
-      "kind": "insurance",
-      "visual": "B보험사",
-      "image": "../data/business_images/business_image_local_securities.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "C보험사",
-      "caption": "보험계약과 자산운용 중심 서비스",
-      "kind": "insurance",
-      "visual": "C보험사",
-      "image": "../data/business_images/business_image_local_securities.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "D보험사",
-      "caption": "보험계약과 자산운용 중심 서비스",
-      "kind": "insurance",
-      "visual": "D보험사",
-      "image": "../data/business_images/business_image_local_securities.svg",
-      "image_source": "Local curated visual"
+      "title": "통지관련 수수료",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

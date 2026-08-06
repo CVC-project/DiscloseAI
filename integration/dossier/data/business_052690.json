@@ -156,13 +156,24 @@
     "segment_breakdown": [
       {
         "name": "원자력",
-        "desc": "원자력발전소 종합설계 및 O&M",
-        "revenue_share": 0.669
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 48.0%",
+        "revenue_share": 0.48,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "O&M",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.9%",
+        "revenue_share": 0.189,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "원자로",
-        "desc": "원자로계통설계(NSSS) 및 관련 O&M",
-        "revenue_share": 0.181
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.6%",
+        "revenue_share": 0.156,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -173,24 +184,70 @@
       "해상풍력·태양광·ESS 설계·EPC",
       "원전 정비(O&M)"
     ],
-    "investor_note": "한국전력기술(한전기술)은 원자력발전소의 설계 전반을 맡는 원자력 사업(67%)과 원자로 내부 계통을 설계하는 원자로 사업(18%)을 주력으로, 화력·신재생에너지 발전소 설계 등 에너지신사업(15%)까지 아우르는 국내 유일의 원전 종합설계 전문기업입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 5,187억 원으로 전년 대비 6.3% 줄었고 영업이익도 35.3% 감소했지만, 당기순이익은 45.9% 늘었습니다. 감사인은 정비공사 진행률에 따른 매출인식과 총계약원가 추정을 핵심감사사항으로 짚었습니다. 부채비율은 41.7%로 낮아 재무구조는 안정적입니다."
+    "investor_note": "한국전력기술(한전기술)은 원자력발전소의 설계 전반을 맡는 원자력 사업(67%)과 원자로 내부 계통을 설계하는 원자로 사업(18%)을 주력으로, 화력·신재생에너지 발전소 설계 등 에너지신사업(15%)까지 아우르는 국내 유일의 원전 종합설계 전문기업입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 5,187억 원으로 전년 대비 6.3% 줄었고 영업이익도 35.3% 감소했지만, 당기순이익은 45.9% 늘었습니다. 감사인은 정비공사 진행률에 따른 매출인식과 총계약원가 추정을 핵심감사사항으로 짚었습니다. 부채비율은 41.7%로 낮아 재무구조는 안정적입니다.",
+    "product_service_segments": [
+      {
+        "name": "원자력",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 48.0%",
+        "revenue_share": 0.48,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "O&M",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.9%",
+        "revenue_share": 0.189,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "원자로",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.6%",
+        "revenue_share": 0.156,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "에너지신사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.8%",
+        "revenue_share": 0.078,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "원자력",
-      "caption": "원자력발전소 종합설계 및 O&M",
-      "kind": "power",
-      "visual": "원자력",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 48.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "O&M",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "원자로",
-      "caption": "원자로계통설계(NSSS) 및 관련 O&M",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.6%",
       "kind": "service",
-      "visual": "원자로",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "에너지신사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -91,9 +91,18 @@
     "segment_finance": "티씨머티리얼즈 주식회사의 주요 사업은 구축사업, 산업은행, 영업총괄부문입니다. 전방산업을 구성하는 전력시장 수요가 확대할 것으로 보고 영업 및 판매 전략을 수행하고 있습니다. 국내 최대 수준의 함침 및 생산 설비를 바탕으로 모터고정자 제작 기업으로 입지를 공고히 하고 있으며 대형 모터 고정자에 필요한 각동선을 자체 생산 후 즉시 투입할 수 있어 납기 및 원가측면에서 경쟁 우위를 확보하고 있습니다.",
     "segment_breakdown": [
       {
-        "name": "산업은행",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
+        "name": "전력인프라",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 58.0%",
+        "revenue_share": 0.5804,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전장소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.5%",
+        "revenue_share": 0.2147,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -110,40 +119,55 @@
       "배터리부스바",
       "전장에나멜"
     ],
-    "investor_note": "티씨머티리얼즈 주식회사의 주요 사업은 구축사업, 산업은행, 영업총괄부문입니다. 전방산업을 구성하는 전력시장 수요가 확대할 것으로 보고 영업 및 판매 전략을 수행하고 있습니다. 국내 최대 수준의 함침 및 생산 설비를 바탕으로 모터고정자 제작 기업으로 입지를 공고히 하고 있으며 대형 모터 고정자에 필요한 각동선을 자체 생산 후 즉시 투입할 수 있어 납기 및 원가측면에서 경쟁 우위를 확보하고 있습니다."
+    "investor_note": "티씨머티리얼즈 주식회사의 주요 사업은 구축사업, 산업은행, 영업총괄부문입니다. 전방산업을 구성하는 전력시장 수요가 확대할 것으로 보고 영업 및 판매 전략을 수행하고 있습니다. 국내 최대 수준의 함침 및 생산 설비를 바탕으로 모터고정자 제작 기업으로 입지를 공고히 하고 있으며 대형 모터 고정자에 필요한 각동선을 자체 생산 후 즉시 투입할 수 있어 납기 및 원가측면에서 경쟁 우위를 확보하고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "전력인프라",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 58.0%",
+        "revenue_share": 0.5804,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전장소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.5%",
+        "revenue_share": 0.2147,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "가전및기타",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.9%",
+        "revenue_share": 0.1586,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "배터리",
-      "caption": "배터리 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
-      "image": "../data/business_images/business_image_local_cable.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "방산",
-      "caption": "방산 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "전력기기·발전",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 58.0%",
       "kind": "power",
       "visual": "POWER",
-      "image": "../data/business_images/business_image_4ae102473975707c.jpg",
+      "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "변압기",
-      "caption": "변압기 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "power",
-      "visual": "POWER",
-      "image": "../data/business_images/business_image_local_cable.svg",
-      "image_source": "Local curated visual"
+      "title": "전장부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.5%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_e310d326cafd0fb3.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "구리",
-      "caption": "구리 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "가전및기타",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.9%",
       "kind": "power",
       "visual": "POWER",
-      "image": "../data/business_images/business_image_local_cable.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

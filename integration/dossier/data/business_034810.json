@@ -155,24 +155,25 @@
     "segment_finance": "해성산업은 오피스빌딩 임대·관리를 하는 지주사업을 모태로, 한국제지(인쇄용지·판지), 한국팩키지(식품용 카톤팩·골판지), 계양전기(전동공구 등 산업용품, 자동차 시트·브레이크 모터 등 전장품), 해성디에스(반도체 리드프레임·Package Substrate)까지 5개 사업부문을 거느린 그룹입니다. 매출 비중은 제지부문(약 52%)과 반도체부품제조부문(약 29%)이 가장 크고, 전장품부문(약 13%)이 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2조 2,600억 원으로 전년 대비 1.8% 늘었지만 영업이익은 41.4% 줄었고, 계양전기 산업용품·전장품부문과 한국제지 판지부문 등에서 약 614억 원의 손상차손이 반영되며 당기순이익은 448억 원 적자로 전환됐습니다. 부채비율도 101.0%로 자본총계보다 부채가 더 많아 재무 부담을 꼼꼼히 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "제지부문",
-        "desc": "인쇄용지·백판지·식품포장용 카톤팩·골판지·특수지 제조(한국제지·한국팩키지·국일제지)",
-        "revenue_share": 0.522
+        "name": "임대관리",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.4%",
+        "revenue_share": 0.494,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "반도체부품 제조부문",
-        "desc": "반도체 리드프레임·Package Substrate 제조(해성디에스)",
-        "revenue_share": 0.2906
+        "name": "관리",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.2%",
+        "revenue_share": 0.202,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "전장품부문",
-        "desc": "자동차 Seat·Brake 모터 등 제조(계양전기)",
-        "revenue_share": 0.1288
-      },
-      {
-        "name": "산업용품부문",
-        "desc": "전동공구·엔진 등 산업용구 제조(계양전기)",
-        "revenue_share": 0.0445
+        "name": "주차",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.01,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -188,40 +189,70 @@
       "그래핀 소재",
       "오피스빌딩 임대·관리"
     ],
-    "investor_note": "해성산업은 오피스빌딩 임대·관리를 하는 지주사업을 모태로, 한국제지(인쇄용지·판지), 한국팩키지(식품용 카톤팩·골판지), 계양전기(전동공구 등 산업용품, 자동차 시트·브레이크 모터 등 전장품), 해성디에스(반도체 리드프레임·Package Substrate)까지 5개 사업부문을 거느린 그룹입니다. 매출 비중은 제지부문(약 52%)과 반도체부품제조부문(약 29%)이 가장 크고, 전장품부문(약 13%)이 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2조 2,600억 원으로 전년 대비 1.8% 늘었지만 영업이익은 41.4% 줄었고, 계양전기 산업용품·전장품부문과 한국제지 판지부문 등에서 약 614억 원의 손상차손이 반영되며 당기순이익은 448억 원 적자로 전환됐습니다. 부채비율도 101.0%로 자본총계보다 부채가 더 많아 재무 부담을 꼼꼼히 살펴볼 필요가 있습니다."
+    "investor_note": "해성산업은 오피스빌딩 임대·관리를 하는 지주사업을 모태로, 한국제지(인쇄용지·판지), 한국팩키지(식품용 카톤팩·골판지), 계양전기(전동공구 등 산업용품, 자동차 시트·브레이크 모터 등 전장품), 해성디에스(반도체 리드프레임·Package Substrate)까지 5개 사업부문을 거느린 그룹입니다. 매출 비중은 제지부문(약 52%)과 반도체부품제조부문(약 29%)이 가장 크고, 전장품부문(약 13%)이 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2조 2,600억 원으로 전년 대비 1.8% 늘었지만 영업이익은 41.4% 줄었고, 계양전기 산업용품·전장품부문과 한국제지 판지부문 등에서 약 614억 원의 손상차손이 반영되며 당기순이익은 448억 원 적자로 전환됐습니다. 부채비율도 101.0%로 자본총계보다 부채가 더 많아 재무 부담을 꼼꼼히 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "임대관리",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.4%",
+        "revenue_share": 0.494,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "관리",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.2%",
+        "revenue_share": 0.202,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "주차",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.01,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "지주사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.5%",
+        "revenue_share": 0.125,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "제지부문",
-      "caption": "인쇄용지·백판지·식품포장용 카톤팩·골판지·특수지 제조(한국제지·한국팩키지·국일제지)",
-      "kind": "consumer",
-      "visual": "제지부문",
-      "image": "../data/business_images/business_image_local_packaging.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "반도체부품 제조부문",
-      "caption": "반도체 리드프레임·Package Substrate 제조(해성디에스)",
-      "kind": "chip",
-      "visual": "반도체부품",
-      "image": "../data/business_images/business_image_local_semiconductor_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "전장품부문",
-      "caption": "자동차 Seat·Brake 모터 등 제조(계양전기)",
-      "kind": "auto",
-      "visual": "전장품부문",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "산업용품부문",
-      "caption": "전동공구·엔진 등 산업용구 제조(계양전기)",
+      "title": "임대관리",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.4%",
       "kind": "service",
-      "visual": "산업용품부문",
-      "image": "../data/business_images/business_image_local_default_d.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "관리",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "주차",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "지주사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

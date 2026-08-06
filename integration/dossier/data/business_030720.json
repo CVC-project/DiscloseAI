@@ -156,13 +156,17 @@
     "segment_breakdown": [
       {
         "name": "수산물유통부문",
-        "desc": "(주)유왕 등을 통한 수산물 가공·유통",
-        "revenue_share": 0.3705
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.0%",
+        "revenue_share": 0.3705,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "곡물제조업외",
-        "desc": "빵가루 제조 등",
-        "revenue_share": 0.0859
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.6%",
+        "revenue_share": 0.0859,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -171,32 +175,55 @@
       "횟감용 참치 가공((주)유왕)",
       "빵가루(제빵원료)"
     ],
-    "investor_note": "동원수산은 태평양·인도양에서 참치연승선으로 참다랑어 등을 잡는 원양어업과 뉴질랜드 인근 트롤어업을 주력으로, 자회사 (주)유왕을 통한 횟감용 참치 가공·유통과 빵가루 제조도 함께 합니다. 2025년 매출액은 1,725억 원으로 6.0% 줄었지만 영업이익 88억 원(+65.8%), 당기순이익 77억 원(+48.7%) 모두 늘었습니다. 총자산은 1,348억 원(+23.9%), 부채비율 139.1%, ROE 14.7%입니다. 감사인은 수산물 매출의 기간귀속 적정성을 핵심 점검사항으로 짚었습니다. 과거 공시 기반 참고 정보입니다."
+    "investor_note": "동원수산은 태평양·인도양에서 참치연승선으로 참다랑어 등을 잡는 원양어업과 뉴질랜드 인근 트롤어업을 주력으로, 자회사 (주)유왕을 통한 횟감용 참치 가공·유통과 빵가루 제조도 함께 합니다. 2025년 매출액은 1,725억 원으로 6.0% 줄었지만 영업이익 88억 원(+65.8%), 당기순이익 77억 원(+48.7%) 모두 늘었습니다. 총자산은 1,348억 원(+23.9%), 부채비율 139.1%, ROE 14.7%입니다. 감사인은 수산물 매출의 기간귀속 적정성을 핵심 점검사항으로 짚었습니다. 과거 공시 기반 참고 정보입니다.",
+    "product_service_segments": [
+      {
+        "name": "수산사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 54.4%",
+        "revenue_share": 0.5436,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "수산물유통부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.0%",
+        "revenue_share": 0.3705,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "곡물제조업외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.6%",
+        "revenue_share": 0.0859,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "수산사업부문",
-      "caption": "원양어선(참치연승·트롤)을 통한 어획물 판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 54.4%",
       "kind": "service",
-      "visual": "수산사업부문",
-      "image": "../data/business_images/business_image_food_packaged.svg",
-      "image_source": "Local visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "수산물유통부문",
-      "caption": "(주)유왕 등을 통한 수산물 가공·유통",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.0%",
       "kind": "service",
-      "visual": "수산물유통부문",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "곡물제조업",
-      "caption": "빵가루 제조 등",
+      "title": "곡물제조업외",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.6%",
       "kind": "service",
-      "visual": "곡물제조업외",
-      "image": "../data/business_images/business_image_local_default_c.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

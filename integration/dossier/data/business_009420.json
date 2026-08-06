@@ -155,9 +155,32 @@
     "segment_finance": "한올바이오파마는 탈모치료제 헤어그로, 정장제 바이오탑, 항암제 엘리가드 등을 판매하는 제약사이면서, 자가면역질환 항체신약 바토클리맙·아이메로프루바트와 안구건조증 신약 탄파너셉트 등을 해외 파트너사와 함께 개발하는 바이오신약 연구개발 기업이기도 합니다. 의약품 제조·판매가 매출의 80% 이상을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,551억 원으로 전년 대비 11.7% 늘었지만 신약 연구개발 투자 확대로 영업손실 9억 원을 기록하며 적자 전환했고 당기순손실도 55억 원으로 커졌습니다. 부채비율은 39.3%로 낮아 재무구조는 안정적입니다. 감사의견은 적정이며, 핵심감사사항으로 신약 개발비(601억 원, 총자산의 26.6%)의 손상 여부 평가가 지목됐습니다.",
     "segment_breakdown": [
       {
-        "name": "의약품 제조·판매",
-        "desc": "합성·바이오의약품 개발·생산·판매(단일 사업부문)",
-        "revenue_share": 1
+        "name": "의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.1%",
+        "revenue_share": 0.151,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "알파본연질캡슐",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.2%",
+        "revenue_share": 0.042,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "헤어그로정",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.0%",
+        "revenue_share": 0.04,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.8%",
+        "revenue_share": 0.118,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -171,40 +194,70 @@
       "아이메로프루바트(자가면역질환 항체신약, 개발중)",
       "탄파너셉트(안구건조증 신약, 개발중)"
     ],
-    "investor_note": "한올바이오파마는 탈모치료제 헤어그로, 정장제 바이오탑, 항암제 엘리가드 등을 판매하는 제약사이면서, 자가면역질환 항체신약 바토클리맙·아이메로프루바트와 안구건조증 신약 탄파너셉트 등을 해외 파트너사와 함께 개발하는 바이오신약 연구개발 기업이기도 합니다. 의약품 제조·판매가 매출의 80% 이상을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,551억 원으로 전년 대비 11.7% 늘었지만 신약 연구개발 투자 확대로 영업손실 9억 원을 기록하며 적자 전환했고 당기순손실도 55억 원으로 커졌습니다. 부채비율은 39.3%로 낮아 재무구조는 안정적입니다. 감사의견은 적정이며, 핵심감사사항으로 신약 개발비(601억 원, 총자산의 26.6%)의 손상 여부 평가가 지목됐습니다."
+    "investor_note": "한올바이오파마는 탈모치료제 헤어그로, 정장제 바이오탑, 항암제 엘리가드 등을 판매하는 제약사이면서, 자가면역질환 항체신약 바토클리맙·아이메로프루바트와 안구건조증 신약 탄파너셉트 등을 해외 파트너사와 함께 개발하는 바이오신약 연구개발 기업이기도 합니다. 의약품 제조·판매가 매출의 80% 이상을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,551억 원으로 전년 대비 11.7% 늘었지만 신약 연구개발 투자 확대로 영업손실 9억 원을 기록하며 적자 전환했고 당기순손실도 55억 원으로 커졌습니다. 부채비율은 39.3%로 낮아 재무구조는 안정적입니다. 감사의견은 적정이며, 핵심감사사항으로 신약 개발비(601억 원, 총자산의 26.6%)의 손상 여부 평가가 지목됐습니다.",
+    "product_service_segments": [
+      {
+        "name": "의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.1%",
+        "revenue_share": 0.151,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "알파본연질캡슐",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.2%",
+        "revenue_share": 0.042,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "헤어그로정",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.0%",
+        "revenue_share": 0.04,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.8%",
+        "revenue_share": 0.118,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "의약품 제조·판매",
-      "caption": "합성·바이오의약품 개발·생산·판매(단일 사업부문)",
+      "title": "의약품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.1%",
       "kind": "bio",
-      "visual": "의약품",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "바이오탑캡슐(정장제)",
-      "caption": "바이오탑캡슐(정장제) 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "bio",
-      "visual": "바이오탑캡슐",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "헤어그로정(탈모치료제)",
-      "caption": "헤어그로정(탈모치료제) 관련 제품과 서비스를 통해 매출을 만듭니다.",
+      "title": "알파본연질캡슐",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.2%",
       "kind": "service",
-      "visual": "헤어그로정",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "노르믹스정(항생제)",
-      "caption": "노르믹스정(항생제) 관련 제품과 서비스를 통해 매출을 만듭니다.",
+      "title": "헤어그로정",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.0%",
       "kind": "service",
-      "visual": "노르믹스정",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

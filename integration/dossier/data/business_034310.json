@@ -155,34 +155,32 @@
     "segment_finance": "NICE홀딩스는 43개 종속회사를 거느린 지주회사로, 신용카드 결제망을 중계하는 VAN·PG 지급결제사업이 매출의 44%로 가장 크고, 반도체·알루미늄합금 등 제조업이 21%, 개인·기업 신용정보(CB) 사업이 15%를 차지하는 종합 정보·인프라 그룹입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3조 2,425억 원으로 전년 대비 6.7% 늘었고 영업이익도 13.7% 증가했지만, 당기순이익은 24.1% 줄었습니다. 감사인은 알루미늄·인도네시아 PG사업부문의 자산손상 여부를 핵심감사사항으로 짚었습니다. 부채비율은 162.0%로 빚이 많은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "지급결제",
-        "desc": "카드거래 승인대행(VAN), 온라인 결제중계(PG)",
-        "revenue_share": 0.4397
-      },
-      {
-        "name": "제조",
-        "desc": "2차전지 보호회로 반도체, 알루미늄 합금 자동차·전자부품",
-        "revenue_share": 0.207
-      },
-      {
-        "name": "기업 및 개인신용정보",
-        "desc": "개인신용조회(CB) 및 기업정보 서비스",
-        "revenue_share": 0.145
-      },
-      {
-        "name": "무인화운영",
-        "desc": "ATM 관리, 무인주차, KIOSK, 영상보안",
-        "revenue_share": 0.1212
-      },
-      {
         "name": "자산관리",
-        "desc": "채권추심 및 부실채권 매입투자",
-        "revenue_share": 0.0221
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.2%",
+        "revenue_share": 0.0221,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "신용평가",
-        "desc": "회사채·기업어음 신용평가",
-        "revenue_share": 0.0149
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+        "revenue_share": 0.0149,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "지급결제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.0%",
+        "revenue_share": 0.4397,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "무인화운영",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.1%",
+        "revenue_share": 0.1212,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -195,40 +193,70 @@
       "고강도 알루미늄 합금제품",
       "채권추심"
     ],
-    "investor_note": "NICE홀딩스는 43개 종속회사를 거느린 지주회사로, 신용카드 결제망을 중계하는 VAN·PG 지급결제사업이 매출의 44%로 가장 크고, 반도체·알루미늄합금 등 제조업이 21%, 개인·기업 신용정보(CB) 사업이 15%를 차지하는 종합 정보·인프라 그룹입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3조 2,425억 원으로 전년 대비 6.7% 늘었고 영업이익도 13.7% 증가했지만, 당기순이익은 24.1% 줄었습니다. 감사인은 알루미늄·인도네시아 PG사업부문의 자산손상 여부를 핵심감사사항으로 짚었습니다. 부채비율은 162.0%로 빚이 많은 편이라 재무 부담을 살펴볼 필요가 있습니다."
+    "investor_note": "NICE홀딩스는 43개 종속회사를 거느린 지주회사로, 신용카드 결제망을 중계하는 VAN·PG 지급결제사업이 매출의 44%로 가장 크고, 반도체·알루미늄합금 등 제조업이 21%, 개인·기업 신용정보(CB) 사업이 15%를 차지하는 종합 정보·인프라 그룹입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3조 2,425억 원으로 전년 대비 6.7% 늘었고 영업이익도 13.7% 증가했지만, 당기순이익은 24.1% 줄었습니다. 감사인은 알루미늄·인도네시아 PG사업부문의 자산손상 여부를 핵심감사사항으로 짚었습니다. 부채비율은 162.0%로 빚이 많은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "자산관리",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.2%",
+        "revenue_share": 0.0221,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "신용평가",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+        "revenue_share": 0.0149,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "지급결제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.0%",
+        "revenue_share": 0.4397,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "무인화운영",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.1%",
+        "revenue_share": 0.1212,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
+      "title": "자산관리",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.2%",
+      "kind": "securities",
+      "visual": "AUM",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "신용평가",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
       "title": "지급결제",
-      "caption": "카드거래 승인대행(VAN), 온라인 결제중계(PG)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.0%",
       "kind": "service",
-      "visual": "지급결제",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "제조",
-      "caption": "2차전지 보호회로 반도체, 알루미늄 합금 자동차·전자부품",
-      "kind": "chip",
-      "visual": "제조",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "기업 및 개인신용정보",
-      "caption": "개인신용조회(CB) 및 기업정보 서비스",
-      "kind": "service",
-      "visual": "기업",
-      "image": "../data/business_images/business_image_local_default_c.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "무인화운영",
-      "caption": "ATM 관리, 무인주차, KIOSK, 영상보안",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.1%",
       "kind": "service",
-      "visual": "무인화운영",
-      "image": "../data/business_images/business_image_local_security.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

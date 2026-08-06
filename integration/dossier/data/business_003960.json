@@ -155,24 +155,32 @@
     "segment_finance": "과거 공시 기반 참고 정보로, 최근 매출액은 3조 4,998억 원으로 전년 대비 32.4% 크게 늘었지만 영업이익은 28.8% 줄었고, 당기순이익은 적자로 전환해 735억 원 손실을 냈습니다. 부채비율은 174.7%로 자본보다 부채가 훨씬 많아 재무 부담이 큰 편입니다.",
     "segment_breakdown": [
       {
-        "name": "식품제조",
-        "desc": "어묵, 맛살, 식용유 제품",
-        "revenue_share": 0.368
-      },
-      {
-        "name": "OEM식품·유통",
-        "desc": "위탁생산 식품과 식자재 유통",
-        "revenue_share": 0.389
-      },
-      {
-        "name": "축산·급식",
-        "desc": "가금·양돈과 단체급식",
-        "revenue_share": 0.17
-      },
-      {
         "name": "원양어업",
-        "desc": "참치, 명태, 대구 등",
-        "revenue_share": 0.037
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.7%",
+        "revenue_share": 0.0369,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "식품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.1%",
+        "revenue_share": 0.0505,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "햄, 소시지류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.0%",
+        "revenue_share": 0.0695,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "식용유지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.2%",
+        "revenue_share": 0.0816,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -187,39 +195,69 @@
       "식자재유통",
       "생돈(돼지고기)"
     ],
-    "investor_note": "과거 공시 기반 참고 정보로, 최근 매출액은 3조 4,998억 원으로 전년 대비 32.4% 크게 늘었지만 영업이익은 28.8% 줄었고, 당기순이익은 적자로 전환해 735억 원 손실을 냈습니다. 부채비율은 174.7%로 자본보다 부채가 훨씬 많아 재무 부담이 큰 편입니다."
+    "investor_note": "과거 공시 기반 참고 정보로, 최근 매출액은 3조 4,998억 원으로 전년 대비 32.4% 크게 늘었지만 영업이익은 28.8% 줄었고, 당기순이익은 적자로 전환해 735억 원 손실을 냈습니다. 부채비율은 174.7%로 자본보다 부채가 훨씬 많아 재무 부담이 큰 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "원양어업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.7%",
+        "revenue_share": 0.0369,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "식품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.1%",
+        "revenue_share": 0.0505,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "햄, 소시지류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.0%",
+        "revenue_share": 0.0695,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "식용유지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.2%",
+        "revenue_share": 0.0816,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "식품제조",
-      "caption": "어묵, 맛살, 식용유 제품",
-      "kind": "consumer",
-      "visual": "식품제조",
-      "image": "../data/business_images/business_image_food_ingredient.svg",
-      "image_source": "Local visual"
-    },
-    {
-      "title": "OEM식품·유통",
-      "caption": "위탁생산 식품과 식자재 유통",
-      "kind": "consumer",
-      "visual": "OEM식품",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "축산·급식",
-      "caption": "가금·양돈과 단체급식",
-      "kind": "service",
-      "visual": "축산",
-      "image": "../data/business_images/business_image_food_feed.svg",
-      "image_source": "Local visual"
-    },
-    {
       "title": "원양어업",
-      "caption": "참치, 명태, 대구 등",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.7%",
       "kind": "service",
-      "visual": "원양어업",
-      "image": "../data/business_images/business_image_food_packaged.svg",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "식품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.1%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "햄, 소시지류",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "식용유지",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.2%",
+      "kind": "consumer",
+      "visual": "INGREDIENT",
+      "image": "../data/business_images/business_image_food_ingredient.svg",
       "image_source": "Local visual"
     }
   ],

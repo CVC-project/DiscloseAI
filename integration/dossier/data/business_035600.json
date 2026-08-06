@@ -156,23 +156,24 @@
     "segment_breakdown": [
       {
         "name": "전자상거래 및 유통",
-        "desc": "전자결제대행(PG) 서비스 및 유통망 상품매출",
-        "revenue_share": 0.6706
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 67.1%",
+        "revenue_share": 0.6706,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "요식업",
-        "desc": "체인화음식점업(프랜차이즈)",
-        "revenue_share": 0.2513
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.1%",
+        "revenue_share": 0.2513,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "미디어 및 방송",
-        "desc": "미디어광고, 온라인 증권방송 등",
-        "revenue_share": 0.0499
-      },
-      {
-        "name": "부동산임대업",
-        "desc": "부동산임대",
-        "revenue_share": 0.0094
+        "name": "금융업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.0079,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -184,40 +185,62 @@
       "외식 프랜차이즈",
       "부동산임대"
     ],
-    "investor_note": "KG이니시스는 국내 1위 전자결제대행(PG) 서비스 '이니페이'를 핵심 사업으로, 전자상거래·유통 외에도 교육, 외식 프랜차이즈, 신용카드·할부금융, 부동산임대, 미디어·방송 등 다양한 자회사 사업을 함께 운영하는 그룹입니다. 매출은 전자상거래 및 유통(PG서비스 포함)이 67.1%로 가장 크고, 요식업(프랜차이즈)이 25.1%, 미디어·방송이 5.0%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 3,588억원으로 전년과 비슷한(+0.3%) 수준을 유지했지만 영업이익은 985억원으로 61.6% 늘고 당기순이익도 577억원으로 29.2% 증가해 수익성이 개선됐습니다. 다만 부채비율이 161.8%로 자본보다 부채가 훨씬 많은 편이라 재무 부담을 주의 깊게 살펴볼 필요가 있습니다."
+    "investor_note": "KG이니시스는 국내 1위 전자결제대행(PG) 서비스 '이니페이'를 핵심 사업으로, 전자상거래·유통 외에도 교육, 외식 프랜차이즈, 신용카드·할부금융, 부동산임대, 미디어·방송 등 다양한 자회사 사업을 함께 운영하는 그룹입니다. 매출은 전자상거래 및 유통(PG서비스 포함)이 67.1%로 가장 크고, 요식업(프랜차이즈)이 25.1%, 미디어·방송이 5.0%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 3,588억원으로 전년과 비슷한(+0.3%) 수준을 유지했지만 영업이익은 985억원으로 61.6% 늘고 당기순이익도 577억원으로 29.2% 증가해 수익성이 개선됐습니다. 다만 부채비율이 161.8%로 자본보다 부채가 훨씬 많은 편이라 재무 부담을 주의 깊게 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "전자상거래 및 유통",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 67.1%",
+        "revenue_share": 0.6706,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "교육사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.1%",
+        "revenue_share": 0.0211,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "요식업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.1%",
+        "revenue_share": 0.2513,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "금융업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.0079,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "시스템 구축·통합",
-      "caption": "기업 업무에 필요한 서버, 네트워크, 소프트웨어를 묶어 하나의 시스템으로 구축합니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "전자결제대행(PG) 서비스(이니페이)",
-      "caption": "전자결제대행(PG) 서비스(이니페이) 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "모바일 결제(이니페이 모바일)",
-      "caption": "모바일 결제(이니페이 모바일) 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
       "title": "온라인 유통",
-      "caption": "온라인 유통 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 67.1%",
+      "kind": "platform",
+      "visual": "ONLINE",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "교육사업부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.1%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "요식업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.1%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -156,18 +156,31 @@
     "segment_breakdown": [
       {
         "name": "건자재",
-        "desc": "석고보드·단열재 등 건축 내외장재",
-        "revenue_share": 0.1491
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.9%",
+        "revenue_share": 0.099,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.1%",
+        "revenue_share": 0.021,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "도료",
-        "desc": "건축·자동차·선박용 도료",
-        "revenue_share": 0.2946
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.8%",
+        "revenue_share": 0.158,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "실리콘",
-        "desc": "실리콘·실란트 등 정밀화학 소재",
-        "revenue_share": 0.473
+        "name": "KCC(HK)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.5%",
+        "revenue_share": 0.025,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -183,32 +196,70 @@
       "유리장섬유",
       "세라믹 기판(DCB)"
     ],
-    "investor_note": "케이씨씨는 건자재(석고보드·단열재), 도료(건축·자동차·선박용), 실리콘·실란트, 유리장섬유 등을 생산하는 종합정밀화학 기업으로, 매출의 절반가량을 실리콘 부문이 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6조 4,838억 원으로 전년 대비 2.6% 줄었고 영업이익도 9.2% 감소했지만, 당기순이익은 4배 넘게(424.6%) 늘어난 1조 5,384억 원을 기록했습니다. 총자산은 28.2% 늘어난 16조 8,035억 원이며, 부채비율은 114.8%로 자본보다 다소 많은 빚을 지고 있어 재무 부담을 함께 살펴볼 필요가 있습니다."
+    "investor_note": "케이씨씨는 건자재(석고보드·단열재), 도료(건축·자동차·선박용), 실리콘·실란트, 유리장섬유 등을 생산하는 종합정밀화학 기업으로, 매출의 절반가량을 실리콘 부문이 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6조 4,838억 원으로 전년 대비 2.6% 줄었고 영업이익도 9.2% 감소했지만, 당기순이익은 4배 넘게(424.6%) 늘어난 1조 5,384억 원을 기록했습니다. 총자산은 28.2% 늘어난 16조 8,035억 원이며, 부채비율은 114.8%로 자본보다 다소 많은 빚을 지고 있어 재무 부담을 함께 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "건자재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.9%",
+        "revenue_share": 0.099,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.1%",
+        "revenue_share": 0.021,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "도료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.8%",
+        "revenue_share": 0.158,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "KCC(HK)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.5%",
+        "revenue_share": 0.025,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "건자재",
-      "caption": "석고보드·단열재 등 건축 내외장재",
-      "kind": "service",
-      "visual": "건자재",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.9%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.1%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "도료",
-      "caption": "건축·자동차·선박용 도료",
-      "kind": "auto",
-      "visual": "도료",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.8%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "실리콘",
-      "caption": "실리콘·실란트 등 정밀화학 소재",
+      "title": "KCC(HK)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.5%",
       "kind": "material",
-      "visual": "실리콘",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

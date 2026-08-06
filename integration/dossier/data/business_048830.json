@@ -155,14 +155,25 @@
     "segment_finance": "엔피케이는 ABS·PP·PC·PE 등 범용 플라스틱에 첨가제를 배합해 자동차·전자부품용 소재로 만드는 컴파운드(매출의 93%)와 마스터배치(7%)를 생산하는 합성수지 전문기업으로, 중국 자회사를 통해서도 같은 사업을 하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 838억 원으로 전년보다 29.8% 늘었고, 영업이익과 당기순이익 모두 각각 10억 원, 11억 원으로 전년 적자에서 흑자로 전환됐습니다. 부채비율은 50.5%로 재무구조는 비교적 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "컴파운드",
-        "desc": "자동차·전자부품용 합성수지 컴파운드 제조",
-        "revenue_share": 0.927
+        "name": "마스터배치",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.3%",
+        "revenue_share": 0.073,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "마스터배치",
-        "desc": "압출·사출용 기능성 마스터배치 제조",
-        "revenue_share": 0.073
+        "name": "총 매출액",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "순 매출액",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,24 +185,54 @@
       "난연제 마스터배치",
       "Color 마스터배치"
     ],
-    "investor_note": "엔피케이는 ABS·PP·PC·PE 등 범용 플라스틱에 첨가제를 배합해 자동차·전자부품용 소재로 만드는 컴파운드(매출의 93%)와 마스터배치(7%)를 생산하는 합성수지 전문기업으로, 중국 자회사를 통해서도 같은 사업을 하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 838억 원으로 전년보다 29.8% 늘었고, 영업이익과 당기순이익 모두 각각 10억 원, 11억 원으로 전년 적자에서 흑자로 전환됐습니다. 부채비율은 50.5%로 재무구조는 비교적 안정적인 편입니다."
+    "investor_note": "엔피케이는 ABS·PP·PC·PE 등 범용 플라스틱에 첨가제를 배합해 자동차·전자부품용 소재로 만드는 컴파운드(매출의 93%)와 마스터배치(7%)를 생산하는 합성수지 전문기업으로, 중국 자회사를 통해서도 같은 사업을 하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 838억 원으로 전년보다 29.8% 늘었고, 영업이익과 당기순이익 모두 각각 10억 원, 11억 원으로 전년 적자에서 흑자로 전환됐습니다. 부채비율은 50.5%로 재무구조는 비교적 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "합성수지사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 92.7%",
+        "revenue_share": 0.927,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "마스터배치",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.3%",
+        "revenue_share": 0.073,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총 매출액",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "순 매출액",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "컴파운드",
-      "caption": "자동차·전자부품용 합성수지 컴파운드 제조",
-      "kind": "auto",
-      "visual": "컴파운드",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "title": "합성수지사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 92.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "마스터배치",
-      "caption": "압출·사출용 기능성 마스터배치 제조",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.3%",
       "kind": "service",
-      "visual": "마스터배치",
-      "image": "../data/business_images/business_image_local_rubber.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

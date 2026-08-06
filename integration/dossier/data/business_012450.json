@@ -111,28 +111,24 @@
     "segment_breakdown": [
       {
         "name": "항공",
-        "desc": "항공기 엔진, 엔진부품, 항공기계 등 생산",
-        "revenue_share": 0.0944
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.4%",
+        "revenue_share": 0.0944,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "방산",
-        "desc": "자주포, 장갑차, 유도무기, 탄약 등 군수장비 생산",
-        "revenue_share": 0.3888
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.9%",
+        "revenue_share": 0.3888,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "해양",
-        "desc": "선박 건조, 해양플랜트, 특수선 건조 및 서비스",
-        "revenue_share": 0.5452
-      },
-      {
-        "name": "IT서비스",
-        "desc": "전산시스템 설계·구축, IT융합 엔지니어링 서비스",
-        "revenue_share": 0.0248
-      },
-      {
-        "name": "항공우주",
-        "desc": "발사체, 위성시스템, 위성영상 서비스 제공",
-        "revenue_share": 0.0125
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 54.5%",
+        "revenue_share": 0.5452,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "investor_note": "한화에어로스페이스는 항공기 엔진과 부품, 자주포·장갑차 같은 방위사업, 선박 건조 등 다양한 분야에서 사업하는 방위산업 대형 기업입니다. 지난해 매출이 26조 7,000억 원으로 전년 대비 137.8% 크게 증가했는데, 이는 방산과 해양 사업이 잘 나갔고 신규 사업이 추가되었기 때문입니다. 영업이익(회사가 본업으로 버는 이익)도 3조 900억 원으로 78.3% 증가하며 수익성이 개선되었으나, 금융비용 증가로 인해 최종 순이익은 2조 2,000억 원으로 13.3% 감소했습니다. 현재 부채비율(빌린 돈을 자기 자본으로 나눈 비율)이 221.3%로 높은 편이며, 선박과 방위사업 수주가 많아 미래 현금 수입이 기대되는 상황입니다. 과거 공시 기반 참고 정보입니다.",
@@ -151,30 +147,60 @@
       "발사체"
     ],
     "raw_moves": [],
-    "utilization": []
+    "utilization": [],
+    "product_service_segments": [
+      {
+        "name": "항공",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.4%",
+        "revenue_share": 0.0944,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "방산",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.9%",
+        "revenue_share": 0.3888,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "해양",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 54.5%",
+        "revenue_share": 0.5452,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "IT서비스 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.5%",
+        "revenue_share": 0.0248,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "항공엔진",
-      "caption": "항공기 엔진과 부품 사업은 장기 수주와 정비 수요를 봅니다.",
-      "kind": "aero",
-      "visual": "ENGINE",
+      "title": "방산·항공",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.4%",
+      "kind": "ship",
+      "visual": "DEFENSE",
       "image": "../data/business_images/business_image_1805fba8159acac6.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "방산",
-      "caption": "자주포, 장갑차, 탄약 등 방산 수출 계약이 핵심입니다.",
-      "kind": "aero",
-      "visual": "DEF",
-      "image": "../data/business_images/business_image_1805fba8159acac6.avif",
+      "title": "해양·플랜트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 54.5%",
+      "kind": "ship",
+      "visual": "OFFSHORE",
+      "image": "../data/business_images/business_image_5184e050831a4460.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "우주",
-      "caption": "발사체와 위성 관련 투자는 중장기 성장 단서입니다.",
-      "kind": "signal",
-      "visual": "SPACE",
+      "title": "IT서비스 등",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
       "image": "../data/business_images/business_image_1805fba8159acac6.avif",
       "image_source": "Unsplash"
     }

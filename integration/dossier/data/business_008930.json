@@ -155,14 +155,25 @@
     "segment_finance": "한미사이언스는 한미약품·제이브이엠 등을 거느린 사업형 지주회사로, 자회사 지분이익과 특허·상표권 수수료를 받는 지주부문 외에 의료기기·건강식품 등 헬스케어사업, 그리고 온라인팜을 통한 의약품 도매유통(매출의 약 83%)까지 함께 영위하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 3,569억 원으로 전년 대비 5.7% 늘었고 영업이익은 40.3%, 당기순이익은 107.6% 크게 증가했습니다. 부채비율은 55.2%로 비교적 안정적인 편입니다. 감사의견은 적정이며, 핵심감사사항으로는 관계기업인 제이브이엠 투자주식의 손상 여부 평가가 지목됐습니다.",
     "segment_breakdown": [
       {
-        "name": "의약품 도매부문",
-        "desc": "약국·병원 대상 의약품·건기식 B2B 유통(온라인팜, HMP몰)",
-        "revenue_share": 0.833
+        "name": "수수료수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.03,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "지주부문",
-        "desc": "자회사 지분이익, 특허권·상표권 사용료 등 지주회사 수익",
-        "revenue_share": 0.056
+        "name": "약국자동화시스템",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 48.1%",
+        "revenue_share": 0.4809,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.0%",
+        "revenue_share": 0.0997,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -173,32 +184,62 @@
       "의약품 B2B 유통(HMP몰)",
       "신약 라이선스 아웃(한미약품 R&D 파이프라인)"
     ],
-    "investor_note": "한미사이언스는 한미약품·제이브이엠 등을 거느린 사업형 지주회사로, 자회사 지분이익과 특허·상표권 수수료를 받는 지주부문 외에 의료기기·건강식품 등 헬스케어사업, 그리고 온라인팜을 통한 의약품 도매유통(매출의 약 83%)까지 함께 영위하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 3,569억 원으로 전년 대비 5.7% 늘었고 영업이익은 40.3%, 당기순이익은 107.6% 크게 증가했습니다. 부채비율은 55.2%로 비교적 안정적인 편입니다. 감사의견은 적정이며, 핵심감사사항으로는 관계기업인 제이브이엠 투자주식의 손상 여부 평가가 지목됐습니다."
+    "investor_note": "한미사이언스는 한미약품·제이브이엠 등을 거느린 사업형 지주회사로, 자회사 지분이익과 특허·상표권 수수료를 받는 지주부문 외에 의료기기·건강식품 등 헬스케어사업, 그리고 온라인팜을 통한 의약품 도매유통(매출의 약 83%)까지 함께 영위하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 3,569억 원으로 전년 대비 5.7% 늘었고 영업이익은 40.3%, 당기순이익은 107.6% 크게 증가했습니다. 부채비율은 55.2%로 비교적 안정적인 편입니다. 감사의견은 적정이며, 핵심감사사항으로는 관계기업인 제이브이엠 투자주식의 손상 여부 평가가 지목됐습니다.",
+    "product_service_segments": [
+      {
+        "name": "수수료수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.03,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "약국자동화시스템",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 48.1%",
+        "revenue_share": 0.4809,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 41.9%",
+        "revenue_share": 0.4194,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.0%",
+        "revenue_share": 0.0997,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "의약품 도매부문",
-      "caption": "약국·병원 대상 의약품·건기식 B2B 유통(온라인팜, HMP몰)",
-      "kind": "bio",
-      "visual": "의약품",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "헬스케어사업부문",
-      "caption": "의료기기·식품·뷰티케어·제약 IT솔루션",
-      "kind": "bio",
-      "visual": "헬스케어사업부문",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "지주부문",
-      "caption": "자회사 지분이익, 특허권·상표권 사용료 등 지주회사 수익",
+      "title": "수수료수익",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
       "kind": "service",
-      "visual": "지주부문",
-      "image": "../data/business_images/business_image_local_finance_hold.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "약국자동화시스템",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 48.1%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

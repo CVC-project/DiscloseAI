@@ -139,14 +139,18 @@
     "segment_finance": "제품 및 서비스의 매출액 원재료당사는 자체 개발한 솔루션을 공급하며, 솔루션 공급시 고객의 요구에 따라 커스터마이징, 추가 개발 등의 개발 서비스를 제공합니다. 당사의 인력 상황에 따라 프로젝트 참여가 어려운 경우, 제품 관련 자료를 제공하고 고객사 설명회를 진행하는 등 프로젝트팀과 진행 과정에서 협력합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "은행",
-        "desc": "은행, 저축은행 관련 제품·서비스",
-        "revenue_share": null
+        "name": "기술비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.5%",
+        "revenue_share": 0.0851,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "KB증권",
-        "desc": "증권 관련 제품·서비스",
-        "revenue_share": null
+        "name": "운영비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.9%",
+        "revenue_share": 0.0792,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -158,40 +162,54 @@
       "제품기술비",
       "- 솔루션"
     ],
-    "investor_note": "제품 및 서비스의 매출액 원재료당사는 자체 개발한 솔루션을 공급하며, 솔루션 공급시 고객의 요구에 따라 커스터마이징, 추가 개발 등의 개발 서비스를 제공합니다. 당사의 인력 상황에 따라 프로젝트 참여가 어려운 경우, 제품 관련 자료를 제공하고 고객사 설명회를 진행하는 등 프로젝트팀과 진행 과정에서 협력합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "제품 및 서비스의 매출액 원재료당사는 자체 개발한 솔루션을 공급하며, 솔루션 공급시 고객의 요구에 따라 커스터마이징, 추가 개발 등의 개발 서비스를 제공합니다. 당사의 인력 상황에 따라 프로젝트 참여가 어려운 경우, 제품 관련 자료를 제공하고 고객사 설명회를 진행하는 등 프로젝트팀과 진행 과정에서 협력합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.7%",
+        "revenue_share": 0.267,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "서비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 56.9%",
+        "revenue_share": 0.5686,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기술비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.5%",
+        "revenue_share": 0.0851,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "운영비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.9%",
+        "revenue_share": 0.0792,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "시스템 구축·통합",
-      "caption": "기업 업무에 필요한 서버, 네트워크, 소프트웨어를 묶어 하나의 시스템으로 구축합니다.",
+      "title": "기술비",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.5%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "소프트웨어·솔루션",
-      "caption": "고객 업무를 자동화하거나 관리 효율을 높이는 소프트웨어 제품군입니다.",
+      "title": "운영비",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.9%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "캐피탈",
-      "caption": "캐피탈 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "제품라이선스비",
-      "caption": "제품라이선스비 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

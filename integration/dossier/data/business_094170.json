@@ -153,7 +153,15 @@
   "snippets": {
     "overview": "(주)동운아나텍의 주요 제품·서비스는 Foundry, OLED, 비 고, 품명, 비고, 제품매출입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 시스템 반도체 IC의 설계와 완성된 제품의 판매만을 전문으로 하는 팹리스(Fabless) 업체로, 반도체 칩을 자체 설계 후 파운드리(Foundry) 회사에 위탁 생산해 최종 완성된 시스템 반도체를 고객사에 판매하고 있습니다. 판매 고객사는 스마트폰의 경우 주로 한국, 중국 스마트폰 Set 업체이며, 자동차의 경우 국내 전장업체를 통해 자동차 완성업체에 공급됩니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "(주)동운아나텍의 주요 제품·서비스는 Foundry, OLED, 비 고, 품명, 비고, 제품매출입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 시스템 반도체 IC의 설계와 완성된 제품의 판매만을 전문으로 하는 팹리스(Fabless) 업체로, 반도체 칩을 자체 설계 후 파운드리(Foundry) 회사에 위탁 생산해 최종 완성된 시스템 반도체를 고객사에 판매하고 있습니다. 판매 고객사는 스마트폰의 경우 주로 한국, 중국 스마트폰 Set 업체이며, 자동차의 경우 국내 전장업체를 통해 자동차 완성업체에 공급됩니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "LED조명 Driver IC",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "Foundry",
       "OLED",
@@ -167,23 +175,24 @@
       "- DSP 적용",
       "DAC 구현"
     ],
-    "investor_note": "(주)동운아나텍의 주요 제품·서비스는 Foundry, OLED, 비 고, 품명, 비고, 제품매출입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 시스템 반도체 IC의 설계와 완성된 제품의 판매만을 전문으로 하는 팹리스(Fabless) 업체로, 반도체 칩을 자체 설계 후 파운드리(Foundry) 회사에 위탁 생산해 최종 완성된 시스템 반도체를 고객사에 판매하고 있습니다. 판매 고객사는 스마트폰의 경우 주로 한국, 중국 스마트폰 Set 업체이며, 자동차의 경우 국내 전장업체를 통해 자동차 완성업체에 공급됩니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)동운아나텍의 주요 제품·서비스는 Foundry, OLED, 비 고, 품명, 비고, 제품매출입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 시스템 반도체 IC의 설계와 완성된 제품의 판매만을 전문으로 하는 팹리스(Fabless) 업체로, 반도체 칩을 자체 설계 후 파운드리(Foundry) 회사에 위탁 생산해 최종 완성된 시스템 반도체를 고객사에 판매하고 있습니다. 판매 고객사는 스마트폰의 경우 주로 한국, 중국 스마트폰 Set 업체이며, 자동차의 경우 국내 전장업체를 통해 자동차 완성업체에 공급됩니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "LED조명 Driver IC",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "Foundry",
-      "caption": "Foundry 관련 제품과 서비스를 통해 매출을 만듭니다.",
+      "title": "LED조명 Driver IC",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
       "kind": "chip",
-      "visual": "Foundry",
-      "image": "../data/business_images/business_image_local_semiconductor_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "OLED",
-      "caption": "OLED 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "display",
-      "visual": "OLED",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
+      "visual": "CHIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
       "image_source": "Wikimedia Commons"
     }
   ],

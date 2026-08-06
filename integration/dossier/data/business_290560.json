@@ -123,9 +123,18 @@
     "segment_finance": "파라택시스이더리움의 주요 서비스는 보유 기술, 설명, 페트라 클라우드서비스, 클라우드 DB보안, 용역, 임대료 등입니다. 이용자 활동을 광고·결제·콘텐츠·거래 수익으로 연결합니다. 사업으로 영위하고 있는 B2B(Business to Business) 보안 소프트웨어 시장은 일반 개인 사용자용 보안 소프트웨어와 달리 산업의 구분과 판매 대상이 명확하게 구분되어 있어 첫 수주의 장벽은 높을 수 있습니다. 매출 실적 (주1) PETRA 매출은 PETAR SIGN과의 합산 매출액입니다.(주2) PETRA CLOUD는 별도의 제품이 아닌 유통 구조상 매출 분류를 위한 구분으로 클라우드 플랫폼에서 판매하고 있는 페트라와 페트라 사이퍼의 매출액입니다. 플랫폼 기업은 이용자 기반이 광고, 결제, 구독, 콘텐츠 수익으로 이어지는 구조가 핵심입니다.",
     "segment_breakdown": [
       {
-        "name": "유럽중앙은행",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
+        "name": "페트라(Petra)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.6%",
+        "revenue_share": 0.2256,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "페트라 사이퍼(Petra Cipher)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.2%",
+        "revenue_share": 0.3124,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -142,40 +151,70 @@
       "스마트플랫폼팀",
       "PETRA TRUST BRIDGE"
     ],
-    "investor_note": "파라택시스이더리움의 주요 서비스는 보유 기술, 설명, 페트라 클라우드서비스, 클라우드 DB보안, 용역, 임대료 등입니다. 이용자 활동을 광고·결제·콘텐츠·거래 수익으로 연결합니다. 사업으로 영위하고 있는 B2B(Business to Business) 보안 소프트웨어 시장은 일반 개인 사용자용 보안 소프트웨어와 달리 산업의 구분과 판매 대상이 명확하게 구분되어 있어 첫 수주의 장벽은 높을 수 있습니다. 매출 실적 (주1) PETRA 매출은 PETAR SIGN과의 합산 매출액입니다.(주2) PETRA CLOUD는 별도의 제품이 아닌 유통 구조상 매출 분류를 위한 구분으로 클라우드 플랫폼에서 판매하고 있는 페트라와 페트라 사이퍼의 매출액입니다. 플랫폼 기업은 이용자 기반이 광고, 결제, 구독, 콘텐츠 수익으로 이어지는 구조가 핵심입니다."
+    "investor_note": "파라택시스이더리움의 주요 서비스는 보유 기술, 설명, 페트라 클라우드서비스, 클라우드 DB보안, 용역, 임대료 등입니다. 이용자 활동을 광고·결제·콘텐츠·거래 수익으로 연결합니다. 사업으로 영위하고 있는 B2B(Business to Business) 보안 소프트웨어 시장은 일반 개인 사용자용 보안 소프트웨어와 달리 산업의 구분과 판매 대상이 명확하게 구분되어 있어 첫 수주의 장벽은 높을 수 있습니다. 매출 실적 (주1) PETRA 매출은 PETAR SIGN과의 합산 매출액입니다.(주2) PETRA CLOUD는 별도의 제품이 아닌 유통 구조상 매출 분류를 위한 구분으로 클라우드 플랫폼에서 판매하고 있는 페트라와 페트라 사이퍼의 매출액입니다. 플랫폼 기업은 이용자 기반이 광고, 결제, 구독, 콘텐츠 수익으로 이어지는 구조가 핵심입니다.",
+    "product_service_segments": [
+      {
+        "name": "페트라(Petra)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.6%",
+        "revenue_share": 0.2256,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "페트라 사이퍼(Petra Cipher)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.2%",
+        "revenue_share": 0.3124,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "페트라 클라우드서비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.2%",
+        "revenue_share": 0.1923,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역 / 서비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.8%",
+        "revenue_share": 0.2582,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "클라우드 서비스",
-      "caption": "기업이 서버와 소프트웨어를 직접 보유하지 않고 빌려 쓰도록 돕는 IT 서비스입니다.",
+      "title": "페트라(Petra)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.6%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_cloud.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "시스템 구축·통합",
-      "caption": "기업 업무에 필요한 서버, 네트워크, 소프트웨어를 묶어 하나의 시스템으로 구축합니다.",
+      "title": "페트라 사이퍼(Petra Cipher)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.2%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "플랫폼 서비스",
-      "caption": "여러 이용자와 서비스를 한곳에서 연결해 반복 이용을 만드는 디지털 서비스입니다.",
-      "kind": "platform",
-      "visual": "APP",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "title": "클라우드·데이터센터",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.2%",
+      "kind": "service",
+      "visual": "CLOUD",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "보유 기술",
-      "caption": "보유 기술 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "용역 / 서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.8%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

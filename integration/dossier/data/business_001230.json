@@ -156,18 +156,31 @@
     "segment_breakdown": [
       {
         "name": "철강부문",
-        "desc": "동국제강 등 봉형강·후판·냉연강판 생산판매",
-        "revenue_share": 0.663
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 43.7%",
+        "revenue_share": 0.4367,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "무역부문",
-        "desc": "철강 원부재료 중계무역(DKI·DKC)",
-        "revenue_share": 0.143
+        "name": "후판",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.4%",
+        "revenue_share": 0.1737,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "운송부문",
-        "desc": "인터지스의 항만하역·육상/해상운송",
-        "revenue_share": 0.128
+        "name": "DKSM",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.8%",
+        "revenue_share": 0.0384,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "부산물",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.0%",
+        "revenue_share": 0.0003,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -181,32 +194,62 @@
       "시스템통합(SI)",
       "상표권 사용료"
     ],
-    "investor_note": "동국홀딩스는 2023년 동국제강에서 분할된 지주회사로, 상표권 사용료·경영자문·배당금 수익을 받으며 그룹 경영을 조율하고 있습니다. 그룹 전체로 보면 매출의 66%는 철강(동국제강의 봉형강·후판 등), 14%는 철강 중계무역, 13%는 인터지스의 운송사업에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 9,852억 원으로 전년과 비슷한 수준(-0.7%)이었고 영업이익은 394억 원으로 32.0% 줄었지만, 당기순이익은 207억 원으로 5.4% 늘었습니다. 부채비율은 37.7%로 낮은 편이라 재무구조는 안정적입니다."
+    "investor_note": "동국홀딩스는 2023년 동국제강에서 분할된 지주회사로, 상표권 사용료·경영자문·배당금 수익을 받으며 그룹 경영을 조율하고 있습니다. 그룹 전체로 보면 매출의 66%는 철강(동국제강의 봉형강·후판 등), 14%는 철강 중계무역, 13%는 인터지스의 운송사업에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 9,852억 원으로 전년과 비슷한 수준(-0.7%)이었고 영업이익은 394억 원으로 32.0% 줄었지만, 당기순이익은 207억 원으로 5.4% 늘었습니다. 부채비율은 37.7%로 낮은 편이라 재무구조는 안정적입니다.",
+    "product_service_segments": [
+      {
+        "name": "철강부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 43.7%",
+        "revenue_share": 0.4367,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "후판",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.4%",
+        "revenue_share": 0.1737,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "DKSM",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.8%",
+        "revenue_share": 0.0384,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "부산물",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.0%",
+        "revenue_share": 0.0003,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "철강부문",
-      "caption": "동국제강 등 봉형강·후판·냉연강판 생산판매",
+      "title": "철강",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 43.7%",
       "kind": "material",
-      "visual": "철강부문",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "visual": "STEEL",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "무역부문",
-      "caption": "철강 원부재료 중계무역(DKI·DKC)",
-      "kind": "material",
-      "visual": "무역부문",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "운송부문",
-      "caption": "인터지스의 항만하역·육상/해상운송",
+      "title": "후판",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.4%",
       "kind": "service",
-      "visual": "운송부문",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "DKSM",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

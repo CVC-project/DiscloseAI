@@ -153,7 +153,36 @@
   "snippets": {
     "overview": "과거 공시 기반 참고 정보로, 최근 연결 매출액은 5조 8,861억 원으로 전년보다 2.4% 줄었지만 영업이익은 605억 원으로 흑자 전환했습니다. 다만 당기순이익은 -2,966억 원으로 적자 전환했고, 부채비율은 207.3%로 자본보다 빚이 두 배 넘게 많아 재무 부담이 큰 편입니다. 감사보고서에는 건설 PF(프로젝트파이낸싱) 보증 약정 관련 강조사항도 포함돼 있어 유의가 필요합니다.",
     "segment_finance": "과거 공시 기반 참고 정보로, 최근 연결 매출액은 5조 8,861억 원으로 전년보다 2.4% 줄었지만 영업이익은 605억 원으로 흑자 전환했습니다. 다만 당기순이익은 -2,966억 원으로 적자 전환했고, 부채비율은 207.3%로 자본보다 빚이 두 배 넘게 많아 재무 부담이 큰 편입니다. 감사보고서에는 건설 PF(프로젝트파이낸싱) 보증 약정 관련 강조사항도 포함돼 있어 유의가 필요합니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "건설",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 85.7%",
+        "revenue_share": 0.8573,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.3%",
+        "revenue_share": 0.1127,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "레저",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.8%",
+        "revenue_share": 0.0283,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "AM",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.0017,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "코오롱하늘채(주택브랜드)",
       "BMW·MINI·아우디·볼보 자동차 딜러",
@@ -163,32 +192,62 @@
       "석유수지·에폭시수지(화학소재)",
       "골프장 운영(그린나래)"
     ],
-    "investor_note": "과거 공시 기반 참고 정보로, 최근 연결 매출액은 5조 8,861억 원으로 전년보다 2.4% 줄었지만 영업이익은 605억 원으로 흑자 전환했습니다. 다만 당기순이익은 -2,966억 원으로 적자 전환했고, 부채비율은 207.3%로 자본보다 빚이 두 배 넘게 많아 재무 부담이 큰 편입니다. 감사보고서에는 건설 PF(프로젝트파이낸싱) 보증 약정 관련 강조사항도 포함돼 있어 유의가 필요합니다."
+    "investor_note": "과거 공시 기반 참고 정보로, 최근 연결 매출액은 5조 8,861억 원으로 전년보다 2.4% 줄었지만 영업이익은 605억 원으로 흑자 전환했습니다. 다만 당기순이익은 -2,966억 원으로 적자 전환했고, 부채비율은 207.3%로 자본보다 빚이 두 배 넘게 많아 재무 부담이 큰 편입니다. 감사보고서에는 건설 PF(프로젝트파이낸싱) 보증 약정 관련 강조사항도 포함돼 있어 유의가 필요합니다.",
+    "product_service_segments": [
+      {
+        "name": "건설",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 85.7%",
+        "revenue_share": 0.8573,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.3%",
+        "revenue_share": 0.1127,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "레저",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.8%",
+        "revenue_share": 0.0283,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "AM",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.0017,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "유통사업부문",
-      "caption": "BMW·아우디 등 자동차 판매, 철강·화학 종합상사",
-      "kind": "auto",
-      "visual": "유통사업부문",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "건설사업부문",
-      "caption": "코오롱글로벌의 주택·토목·환경·신재생에너지",
-      "kind": "power",
-      "visual": "건설사업부문",
-      "image": "../data/business_images/business_image_local_housing.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "IT사업부문",
-      "caption": "IT 솔루션 유통 및 IT 인프라·SW 서비스",
+      "title": "건축·주택",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 85.7%",
       "kind": "service",
-      "visual": "IT사업부문",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "상사",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.3%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "레저",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

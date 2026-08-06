@@ -139,9 +139,25 @@
     "segment_finance": "(주)에스에이엠지엔터테인먼트의 주요 사업은 공간사업 운영 등, 오프라인 공간사업, 공간사업, 엔에이치투자증권 등입니다. 매출처 등 현황 본 보고서 보고기간 중 매출처 상위 5개 회사로의 매출은 전체 매출의 약 28%를 구성합니다. 어린이 채널인 '키즈스테이션'에 방영된 이후 2025년 시즌3까지 방영, 팝업 개최와 MD 판매 등 글로벌 비즈니스 영역을 확장 중에 있습니다.",
     "segment_breakdown": [
       {
-        "name": "엔에이치투자증권",
-        "desc": "위탁매매, IB, 운용 등 증권 서비스",
-        "revenue_share": null
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.0019,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "라이선스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.8%",
+        "revenue_share": 0.1879,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.6%",
+        "revenue_share": 0.046,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -158,40 +174,54 @@
       "메탈카드봇",
       "위시캣"
     ],
-    "investor_note": "(주)에스에이엠지엔터테인먼트의 주요 사업은 공간사업 운영 등, 오프라인 공간사업, 공간사업, 엔에이치투자증권 등입니다. 매출처 등 현황 본 보고서 보고기간 중 매출처 상위 5개 회사로의 매출은 전체 매출의 약 28%를 구성합니다. 어린이 채널인 '키즈스테이션'에 방영된 이후 2025년 시즌3까지 방영, 팝업 개최와 MD 판매 등 글로벌 비즈니스 영역을 확장 중에 있습니다."
+    "investor_note": "(주)에스에이엠지엔터테인먼트의 주요 사업은 공간사업 운영 등, 오프라인 공간사업, 공간사업, 엔에이치투자증권 등입니다. 매출처 등 현황 본 보고서 보고기간 중 매출처 상위 5개 회사로의 매출은 전체 매출의 약 28%를 구성합니다. 어린이 채널인 '키즈스테이션'에 방영된 이후 2025년 시즌3까지 방영, 팝업 개최와 MD 판매 등 글로벌 비즈니스 영역을 확장 중에 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.0019,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 76.0%",
+        "revenue_share": 0.7602,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "라이선스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.8%",
+        "revenue_share": 0.1879,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.6%",
+        "revenue_share": 0.046,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "로봇",
-      "caption": "로봇 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "라이선스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.8%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_robot.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "레인저 가면세트",
-      "caption": "레인저 가면세트 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "용역",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.6%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "피규어",
-      "caption": "피규어 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "플레이세트",
-      "caption": "플레이세트 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -156,18 +156,24 @@
     "segment_breakdown": [
       {
         "name": "플랜트용 기자재",
-        "desc": "LNG·석유화학·발전·조선용 관이음쇠류 제조",
-        "revenue_share": 0.8944
-      },
-      {
-        "name": "2차전지용 기자재",
-        "desc": "2차전지 생산설비 부품(에이치와이티씨)",
-        "revenue_share": 0.1013
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 89.4%",
+        "revenue_share": 0.8944,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "부동산 임대 외",
-        "desc": "서울 한남동 건물 임대·전시기획(파운드리서울)",
-        "revenue_share": 0.0043
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.4%",
+        "revenue_share": 0.0043,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "2차전지용 기자재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.1%",
+        "revenue_share": 0.1013,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -177,32 +183,47 @@
       "2차전지 생산설비 부품",
       "점포임대·전시기획(파운드리서울)"
     ],
-    "investor_note": "태광은 LNG·석유화학·발전·조선·해양구조물 등에 쓰이는 관이음쇠류(Elbow·Tee·Reducer 등 배관자재)를 만드는 플랜트 기자재 전문기업으로, 매출의 약 89%가 이 사업에서 나옵니다. 자회사 에이치와이티씨를 통해 삼성SDI·LG에너지솔루션 등에 2차전지 생산설비 부품도 공급하고(약 10%), 파운드리서울을 통해 서울 한남동 건물 임대사업도 하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,969억 원으로 전년보다 11.3% 늘었고 당기순이익도 655억 원으로 42.0% 크게 증가했지만, 영업이익은 387억 원으로 2.9% 소폭 줄었습니다. 부채비율은 10.6%로 매우 낮아 재무구조가 안정적인 편입니다."
+    "investor_note": "태광은 LNG·석유화학·발전·조선·해양구조물 등에 쓰이는 관이음쇠류(Elbow·Tee·Reducer 등 배관자재)를 만드는 플랜트 기자재 전문기업으로, 매출의 약 89%가 이 사업에서 나옵니다. 자회사 에이치와이티씨를 통해 삼성SDI·LG에너지솔루션 등에 2차전지 생산설비 부품도 공급하고(약 10%), 파운드리서울을 통해 서울 한남동 건물 임대사업도 하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,969억 원으로 전년보다 11.3% 늘었고 당기순이익도 655억 원으로 42.0% 크게 증가했지만, 영업이익은 387억 원으로 2.9% 소폭 줄었습니다. 부채비율은 10.6%로 매우 낮아 재무구조가 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "플랜트용 기자재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 89.4%",
+        "revenue_share": 0.8944,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "부동산 임대 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.4%",
+        "revenue_share": 0.0043,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "2차전지용 기자재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.1%",
+        "revenue_share": 0.1013,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "플랜트용 기자재",
-      "caption": "LNG·석유화학·발전·조선용 관이음쇠류 제조",
-      "kind": "ship",
-      "visual": "LNG",
-      "image": "../data/business_images/business_image_local_oil.svg",
-      "image_source": "Local curated visual"
+      "title": "토목·플랜트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 89.4%",
+      "kind": "service",
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_5184e050831a4460.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "2차전지용 기자재",
-      "caption": "2차전지 생산설비 부품(에이치와이티씨)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.1%",
       "kind": "battery",
-      "visual": "2차전지용",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "부동산 임대",
-      "caption": "서울 한남동 건물 임대·전시기획(파운드리서울)",
-      "kind": "service",
-      "visual": "부동산",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "visual": "BATTERY",
+      "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -155,29 +155,32 @@
     "segment_finance": "KG케미칼은 화학·비료 소재 사업에서 출발해 지금은 자동차(KG모빌리티), 철강(KG스틸), 전자결제(KG이니시스), 커피전문점(할리스), 할부금융(KG캐피탈)까지 아우르는 대형 그룹의 지주회사입니다. 매출 비중은 자동차 제조·판매가 약 47%, 철강·항만이 약 35%로 두 사업이 전체의 대부분을 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 9조 1,016억 원으로 전년 대비 2.7% 늘었고 당기순이익도 2,439억 원으로 6.8% 증가했지만, 영업이익은 3,056억 원으로 4.1% 줄었습니다. 부채비율은 111.9%로 자본보다 빚이 많은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "자동차",
-        "desc": "KG모빌리티 완성차 제조·판매",
-        "revenue_share": 0.468
+        "name": "화학",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.4%",
+        "revenue_share": 0.0238,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "철강·항만",
-        "desc": "철강제품 생산과 항만 운영",
-        "revenue_share": 0.348
+        "name": "바이오에너지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.1%",
+        "revenue_share": 0.0115,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "전자결제",
-        "desc": "온라인·모바일 결제 서비스",
-        "revenue_share": 0.099
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.7%",
+        "revenue_share": 0.0074,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "화학·바이오에너지",
-        "desc": "비료·혼화제와 바이오중유",
-        "revenue_share": 0.035
-      },
-      {
-        "name": "외식·미디어·교육",
-        "desc": "프랜차이즈, 미디어, 교육 콘텐츠",
-        "revenue_share": 0.047
+        "name": "미디어 및 방송",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.0%",
+        "revenue_share": 0.1001,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -193,40 +196,62 @@
       "골프장·연수원 운영",
       "교육콘텐츠(KG에듀원)"
     ],
-    "investor_note": "KG케미칼은 화학·비료 소재 사업에서 출발해 지금은 자동차(KG모빌리티), 철강(KG스틸), 전자결제(KG이니시스), 커피전문점(할리스), 할부금융(KG캐피탈)까지 아우르는 대형 그룹의 지주회사입니다. 매출 비중은 자동차 제조·판매가 약 47%, 철강·항만이 약 35%로 두 사업이 전체의 대부분을 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 9조 1,016억 원으로 전년 대비 2.7% 늘었고 당기순이익도 2,439억 원으로 6.8% 증가했지만, 영업이익은 3,056억 원으로 4.1% 줄었습니다. 부채비율은 111.9%로 자본보다 빚이 많은 편이라 재무 부담을 살펴볼 필요가 있습니다."
+    "investor_note": "KG케미칼은 화학·비료 소재 사업에서 출발해 지금은 자동차(KG모빌리티), 철강(KG스틸), 전자결제(KG이니시스), 커피전문점(할리스), 할부금융(KG캐피탈)까지 아우르는 대형 그룹의 지주회사입니다. 매출 비중은 자동차 제조·판매가 약 47%, 철강·항만이 약 35%로 두 사업이 전체의 대부분을 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 9조 1,016억 원으로 전년 대비 2.7% 늘었고 당기순이익도 2,439억 원으로 6.8% 증가했지만, 영업이익은 3,056억 원으로 4.1% 줄었습니다. 부채비율은 111.9%로 자본보다 빚이 많은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "화학",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.4%",
+        "revenue_share": 0.0238,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "바이오에너지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.1%",
+        "revenue_share": 0.0115,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전자결제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.7%",
+        "revenue_share": 0.0074,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "미디어 및 방송",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.0%",
+        "revenue_share": 0.1001,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "자동차",
-      "caption": "KG모빌리티 완성차 제조·판매",
-      "kind": "auto",
-      "visual": "자동차",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "title": "화학",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.4%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "바이오에너지",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.1%",
+      "kind": "bio",
+      "visual": "BIO",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "철강·항만",
-      "caption": "철강제품 생산과 항만 운영",
+      "title": "미디어 및 방송",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.0%",
       "kind": "material",
-      "visual": "철강",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "전자결제",
-      "caption": "온라인·모바일 결제 서비스",
-      "kind": "service",
-      "visual": "전자결제",
-      "image": "../data/business_images/business_image_local_card.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "화학·바이오에너지",
-      "caption": "비료·혼화제와 바이오중유",
-      "kind": "bio",
-      "visual": "화학",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

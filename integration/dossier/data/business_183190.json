@@ -155,9 +155,18 @@
     "segment_finance": "아세아시멘트(주)의 주요 사업은 NH투자증권, 테마파크사업, 시멘트사업부문, 기타사업부문 등입니다. 경영상의 주요계약 작성기준일 현재 회사의 재무상태에 중요한 영향을 미치는 비경상적인 중요계약은 다음과같습니다. 동사는 기존제품보다는 차별화·고급화 전략을 통하여 고부가가치제품 생산을 통하여수익극대화를 위해 노력하고 있습니다.",
     "segment_breakdown": [
       {
-        "name": "NH투자증권",
-        "desc": "위탁매매, IB, 운용 등 증권 서비스",
-        "revenue_share": null
+        "name": "시멘트부문(아세아시멘트(주), 한라시멘트(주), 아세아산업개발(주)외 2사)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 80.6%",
+        "revenue_share": 0.8059,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "레미콘",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.0%",
+        "revenue_share": 0.0995,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -168,40 +177,54 @@
       "등 록",
       "물류비용"
     ],
-    "investor_note": "아세아시멘트(주)의 주요 사업은 NH투자증권, 테마파크사업, 시멘트사업부문, 기타사업부문 등입니다. 경영상의 주요계약 작성기준일 현재 회사의 재무상태에 중요한 영향을 미치는 비경상적인 중요계약은 다음과같습니다. 동사는 기존제품보다는 차별화·고급화 전략을 통하여 고부가가치제품 생산을 통하여수익극대화를 위해 노력하고 있습니다."
+    "investor_note": "아세아시멘트(주)의 주요 사업은 NH투자증권, 테마파크사업, 시멘트사업부문, 기타사업부문 등입니다. 경영상의 주요계약 작성기준일 현재 회사의 재무상태에 중요한 영향을 미치는 비경상적인 중요계약은 다음과같습니다. 동사는 기존제품보다는 차별화·고급화 전략을 통하여 고부가가치제품 생산을 통하여수익극대화를 위해 노력하고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "시멘트부문(아세아시멘트(주), 한라시멘트(주), 아세아산업개발(주)외 2사)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 80.6%",
+        "revenue_share": 0.8059,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "레미콘",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.0%",
+        "revenue_share": 0.0995,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "2차제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.9%",
+        "revenue_share": 0.0387,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타부문(우신벤처투자(주),아농(주), 경주월드(주))",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.7%",
+        "revenue_share": 0.0071,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "아세아시멘트 현대제철",
-      "caption": "아세아시멘트 현대제철 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "레미콘",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_cement.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "2차제품",
-      "caption": "2차제품 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.9%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_cement.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "부동산임대",
-      "caption": "부동산임대 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_cement.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "서비스업",
-      "caption": "서비스업 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_cement.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

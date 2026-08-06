@@ -155,24 +155,32 @@
     "segment_finance": "원익은 압력센서 등 전자부품을 위탁생산하는 전자부품사업, 반도체 공정용 석영유리제품과 조명기기를 취급하는 통상사업, 더마 코스메틱 화장품 브랜드 Cell Fusion C와 수술용 의료기기를 다루는 헬스케어사업, 그리고 F&B·임대업 등 기타사업까지 네 개 부문을 함께 운영하는 회사입니다. 매출의 절반 이상(57.5%)은 코스메틱 부문에서 나오고, 전자부품(16.6%)과 통상(14.8%)이 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,507억 원으로 전년 대비 8.6% 늘었지만 영업이익은 89억 원으로 4.2% 줄었고, 당기순이익도 116억 원으로 45.5% 크게 감소했습니다. 부채비율은 33.4%로 재무구조는 안정적인 편입니다.",
     "segment_breakdown": [
       {
+        "name": "통상",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.8%",
+        "revenue_share": 0.1478,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "헬스케어",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.1%",
+        "revenue_share": 0.0812,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
         "name": "코스메틱",
-        "desc": "메디컬 코스메틱 화장품(CellFusionC 등)",
-        "revenue_share": 0.5746
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 57.5%",
+        "revenue_share": 0.5746,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "전자부품",
-        "desc": "HIC(하이브리드 집적회로), RF Filter, GPS 등 OEM 생산",
-        "revenue_share": 0.1659
-      },
-      {
-        "name": "통상",
-        "desc": "석영유리제품·조명기기·계측장비 등 상품 유통",
-        "revenue_share": 0.1478
-      },
-      {
-        "name": "헬스케어(의료기기)",
-        "desc": "외과·비뇨기과 수술장비 등 소모품·장비 유통",
-        "revenue_share": 0.0812
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.6%",
+        "revenue_share": 0.1659,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -184,40 +192,70 @@
       "Cell Fusion C(더마 코스메틱)",
       "외과·비뇨기과 의료기기"
     ],
-    "investor_note": "원익은 압력센서 등 전자부품을 위탁생산하는 전자부품사업, 반도체 공정용 석영유리제품과 조명기기를 취급하는 통상사업, 더마 코스메틱 화장품 브랜드 Cell Fusion C와 수술용 의료기기를 다루는 헬스케어사업, 그리고 F&B·임대업 등 기타사업까지 네 개 부문을 함께 운영하는 회사입니다. 매출의 절반 이상(57.5%)은 코스메틱 부문에서 나오고, 전자부품(16.6%)과 통상(14.8%)이 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,507억 원으로 전년 대비 8.6% 늘었지만 영업이익은 89억 원으로 4.2% 줄었고, 당기순이익도 116억 원으로 45.5% 크게 감소했습니다. 부채비율은 33.4%로 재무구조는 안정적인 편입니다."
+    "investor_note": "원익은 압력센서 등 전자부품을 위탁생산하는 전자부품사업, 반도체 공정용 석영유리제품과 조명기기를 취급하는 통상사업, 더마 코스메틱 화장품 브랜드 Cell Fusion C와 수술용 의료기기를 다루는 헬스케어사업, 그리고 F&B·임대업 등 기타사업까지 네 개 부문을 함께 운영하는 회사입니다. 매출의 절반 이상(57.5%)은 코스메틱 부문에서 나오고, 전자부품(16.6%)과 통상(14.8%)이 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,507억 원으로 전년 대비 8.6% 늘었지만 영업이익은 89억 원으로 4.2% 줄었고, 당기순이익도 116억 원으로 45.5% 크게 감소했습니다. 부채비율은 33.4%로 재무구조는 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "통상",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.8%",
+        "revenue_share": 0.1478,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "헬스케어",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.1%",
+        "revenue_share": 0.0812,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "코스메틱",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 57.5%",
+        "revenue_share": 0.5746,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전자부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.6%",
+        "revenue_share": 0.1659,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
+      "title": "통상",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "헬스케어",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.1%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
       "title": "코스메틱",
-      "caption": "메디컬 코스메틱 화장품(CellFusionC 등)",
-      "kind": "consumer",
-      "visual": "코스메틱",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 57.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "전자부품",
-      "caption": "HIC(하이브리드 집적회로), RF Filter, GPS 등 OEM 생산",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.6%",
       "kind": "auto",
-      "visual": "전자부품",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "통상",
-      "caption": "석영유리제품·조명기기·계측장비 등 상품 유통",
-      "kind": "service",
-      "visual": "통상",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "헬스케어(의료기기)",
-      "caption": "외과·비뇨기과 수술장비 등 소모품·장비 유통",
-      "kind": "service",
-      "visual": "헬스케어",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

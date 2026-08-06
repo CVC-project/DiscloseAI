@@ -155,19 +155,25 @@
     "segment_finance": "원익홀딩스는 반도체·디스플레이용 가스 공급장치와 고순도 특수가스를 자체 사업으로 운영하는 동시에, 원익아이피에스(반도체 장비), 원익피앤이(2차전지 장비), 원익큐엔씨(쿼츠·세라믹 부품) 등 15개 종속회사를 거느린 사업형 지주회사입니다. 매출은 가스부문이 51.8%로 가장 크고 반도체 장비부문이 38.0%를 차지하며, 팹리스·로보틱스 신사업과 부동산·벤처투자도 함께 벌이고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,229억 원으로 전년 대비 3.5% 줄었고 영업손실 4억 원으로 적자 전환했지만, 당기순이익은 504억 원으로 흑자 전환했습니다. 부채비율은 51.4%로 재무구조는 무난한 편입니다.",
     "segment_breakdown": [
       {
-        "name": "가스",
-        "desc": "반도체·산업용 특수가스 제조·정제·판매",
-        "revenue_share": 0.518
+        "name": "반도체 장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.0%",
+        "revenue_share": 0.38,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "반도체 장비",
-        "desc": "가스 공급·정제 장치 및 배관공사",
-        "revenue_share": 0.38
+        "name": "가스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.8%",
+        "revenue_share": 0.518,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "투자",
-        "desc": "부동산 자산개발·벤처투자",
-        "revenue_share": 0.05
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
+        "revenue_share": 0.05,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -179,32 +185,70 @@
       "쿼츠·세라믹 부품(원익큐엔씨)",
       "팹리스·로보틱스(신사업)"
     ],
-    "investor_note": "원익홀딩스는 반도체·디스플레이용 가스 공급장치와 고순도 특수가스를 자체 사업으로 운영하는 동시에, 원익아이피에스(반도체 장비), 원익피앤이(2차전지 장비), 원익큐엔씨(쿼츠·세라믹 부품) 등 15개 종속회사를 거느린 사업형 지주회사입니다. 매출은 가스부문이 51.8%로 가장 크고 반도체 장비부문이 38.0%를 차지하며, 팹리스·로보틱스 신사업과 부동산·벤처투자도 함께 벌이고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,229억 원으로 전년 대비 3.5% 줄었고 영업손실 4억 원으로 적자 전환했지만, 당기순이익은 504억 원으로 흑자 전환했습니다. 부채비율은 51.4%로 재무구조는 무난한 편입니다."
+    "investor_note": "원익홀딩스는 반도체·디스플레이용 가스 공급장치와 고순도 특수가스를 자체 사업으로 운영하는 동시에, 원익아이피에스(반도체 장비), 원익피앤이(2차전지 장비), 원익큐엔씨(쿼츠·세라믹 부품) 등 15개 종속회사를 거느린 사업형 지주회사입니다. 매출은 가스부문이 51.8%로 가장 크고 반도체 장비부문이 38.0%를 차지하며, 팹리스·로보틱스 신사업과 부동산·벤처투자도 함께 벌이고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,229억 원으로 전년 대비 3.5% 줄었고 영업손실 4억 원으로 적자 전환했지만, 당기순이익은 504억 원으로 흑자 전환했습니다. 부채비율은 51.4%로 재무구조는 무난한 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "반도체 장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.0%",
+        "revenue_share": 0.38,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "가스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.8%",
+        "revenue_share": 0.518,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "신사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
+        "revenue_share": 0.063,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "투자",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
+        "revenue_share": 0.05,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "가스",
-      "caption": "반도체·산업용 특수가스 제조·정제·판매",
+      "title": "반도체 장비",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.0%",
       "kind": "chip",
-      "visual": "가스",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "visual": "EQUIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "반도체 장비",
-      "caption": "가스 공급·정제 장치 및 배관공사",
-      "kind": "chip",
-      "visual": "반도체",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "title": "가스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.8%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "신사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "투자",
-      "caption": "부동산 자산개발·벤처투자",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
       "kind": "securities",
-      "visual": "투자",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "visual": "AUM",
+      "image": "../data/business_images/business_image_c1540b930934e19f.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

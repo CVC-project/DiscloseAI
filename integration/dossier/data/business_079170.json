@@ -156,18 +156,24 @@
     "segment_breakdown": [
       {
         "name": "아연말/인산아연",
-        "desc": "선박·철구조물 부식방지용 도료 원료",
-        "revenue_share": 0.6526
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 65.3%",
+        "revenue_share": 0.6526,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "LIBr",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.2%",
+        "revenue_share": 0.0618,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "제올라이트",
-        "desc": "산소제조장치용 흡착제",
-        "revenue_share": 0.2656
-      },
-      {
-        "name": "LiBr(리튬브로마이드)",
-        "desc": "흡수식 냉동기·냉온수기용 흡수제",
-        "revenue_share": 0.0618
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.6%",
+        "revenue_share": 0.2656,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -176,32 +182,55 @@
       "리튬브로마이드(LiBr)",
       "제올라이트"
     ],
-    "investor_note": "한창산업은 선박·컨테이너·철구조물의 부식방지용 도료 원료인 아연말·인산아연을 주력으로, 냉난방 흡수식 냉동기용 흡수제 리튬브로마이드(LiBr)와 산소제조장치에 쓰이는 제올라이트를 함께 생산하는 화학소재 업체입니다. 아연말·인산아연이 매출의 65%를 차지하고, 제올라이트도 26.6%로 비중이 늘고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 985억 원으로 전년보다 4.1% 늘었지만 영업이익은 78억 원으로 10.1% 줄고 당기순이익도 65억 원으로 3.4% 감소해 수익성은 다소 둔화됐습니다. 부채비율은 19.1%로 낮아 재무구조는 안정적인 편입니다."
+    "investor_note": "한창산업은 선박·컨테이너·철구조물의 부식방지용 도료 원료인 아연말·인산아연을 주력으로, 냉난방 흡수식 냉동기용 흡수제 리튬브로마이드(LiBr)와 산소제조장치에 쓰이는 제올라이트를 함께 생산하는 화학소재 업체입니다. 아연말·인산아연이 매출의 65%를 차지하고, 제올라이트도 26.6%로 비중이 늘고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 985억 원으로 전년보다 4.1% 늘었지만 영업이익은 78억 원으로 10.1% 줄고 당기순이익도 65억 원으로 3.4% 감소해 수익성은 다소 둔화됐습니다. 부채비율은 19.1%로 낮아 재무구조는 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "아연말/인산아연",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 65.3%",
+        "revenue_share": 0.6526,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "LIBr",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.2%",
+        "revenue_share": 0.0618,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제올라이트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.6%",
+        "revenue_share": 0.2656,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "아연말/인산아연",
-      "caption": "선박·철구조물 부식방지용 도료 원료",
-      "kind": "ship",
-      "visual": "아연말",
-      "image": "../data/business_images/business_image_local_ship.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 65.3%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "증권",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.2%",
+      "kind": "securities",
+      "visual": "SECURITIES",
+      "image": "../data/business_images/business_image_c1540b930934e19f.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "제올라이트",
-      "caption": "산소제조장치용 흡착제",
-      "kind": "service",
-      "visual": "제올라이트",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "LiBr(리튬브로마이드)",
-      "caption": "흡수식 냉동기·냉온수기용 흡수제",
-      "kind": "service",
-      "visual": "LiBr",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.6%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

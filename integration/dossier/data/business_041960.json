@@ -155,19 +155,32 @@
     "segment_finance": "코미팜은 돼지구제역백신, 돼지써코바이러스백신 등 동물용 백신을 주력으로 생산·판매하는 동물의약품 전문기업으로, 매출의 99% 이상이 이 사업에서 나옵니다. 이와 별도로 항암제·암성통증치료제 신약 PAX-1(코미녹스)과 아프리카돼지열병(ASF) 백신을 개발 중이며, 아직 매출은 발생하지 않고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 524억 원으로 전년 대비 10.7% 줄었고 영업이익도 68.3% 감소했습니다. 특히 전환사채 관련 파생상품 평가·처분손실이 반영되면서 당기순손실 80억 원으로 적자 전환했는데, 실제 매출이 나는 동물의약품 사업부문 자체의 영업이익은 60억 원 흑자였습니다. 부채비율은 85.8%로 준수한 수준입니다.",
     "segment_breakdown": [
       {
-        "name": "동물의약품(제조업)",
-        "desc": "돼지·소 대상 백신 등 동물용의약품 제조판매",
-        "revenue_share": 0.9916
+        "name": "제조업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.2%",
+        "revenue_share": 0.1824,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "도소매",
-        "desc": "사료첨가제 등 상품판매",
-        "revenue_share": 0.0002
+        "name": "돼지 써코바이러스 2형예방백신(백신)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+        "revenue_share": 0.015,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "인체의약품(신약개발)",
-        "desc": "항암제·암성통증치료제 PAX-1 등 임상개발 중(당기 매출 미발생)",
-        "revenue_share": 0
+        "name": "돼지 써코바이러스 2형예방백신",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.4%",
+        "revenue_share": 0.0141,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "소로타바이러스,코로나바이러스 예방백신",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.3%",
+        "revenue_share": 0.0127,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -180,32 +193,70 @@
       "항암제·암성통증치료제 PAX-1(코미녹스, 개발중)",
       "임상병리검사 대행서비스"
     ],
-    "investor_note": "코미팜은 돼지구제역백신, 돼지써코바이러스백신 등 동물용 백신을 주력으로 생산·판매하는 동물의약품 전문기업으로, 매출의 99% 이상이 이 사업에서 나옵니다. 이와 별도로 항암제·암성통증치료제 신약 PAX-1(코미녹스)과 아프리카돼지열병(ASF) 백신을 개발 중이며, 아직 매출은 발생하지 않고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 524억 원으로 전년 대비 10.7% 줄었고 영업이익도 68.3% 감소했습니다. 특히 전환사채 관련 파생상품 평가·처분손실이 반영되면서 당기순손실 80억 원으로 적자 전환했는데, 실제 매출이 나는 동물의약품 사업부문 자체의 영업이익은 60억 원 흑자였습니다. 부채비율은 85.8%로 준수한 수준입니다."
+    "investor_note": "코미팜은 돼지구제역백신, 돼지써코바이러스백신 등 동물용 백신을 주력으로 생산·판매하는 동물의약품 전문기업으로, 매출의 99% 이상이 이 사업에서 나옵니다. 이와 별도로 항암제·암성통증치료제 신약 PAX-1(코미녹스)과 아프리카돼지열병(ASF) 백신을 개발 중이며, 아직 매출은 발생하지 않고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 524억 원으로 전년 대비 10.7% 줄었고 영업이익도 68.3% 감소했습니다. 특히 전환사채 관련 파생상품 평가·처분손실이 반영되면서 당기순손실 80억 원으로 적자 전환했는데, 실제 매출이 나는 동물의약품 사업부문 자체의 영업이익은 60억 원 흑자였습니다. 부채비율은 85.8%로 준수한 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "제조업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.2%",
+        "revenue_share": 0.1824,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "돼지 써코바이러스 2형예방백신(백신)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+        "revenue_share": 0.015,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "돼지 써코바이러스 2형예방백신",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.4%",
+        "revenue_share": 0.0141,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "소로타바이러스,코로나바이러스 예방백신",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.3%",
+        "revenue_share": 0.0127,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "동물의약품(제조업)",
-      "caption": "돼지·소 대상 백신 등 동물용의약품 제조판매",
-      "kind": "bio",
-      "visual": "동물의약품",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "도소매",
-      "caption": "사료첨가제 등 상품판매",
+      "title": "제조업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.2%",
       "kind": "service",
-      "visual": "도소매",
-      "image": "../data/business_images/business_image_food_feed.svg",
-      "image_source": "Local visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "인체의약품(신약개발)",
-      "caption": "항암제·암성통증치료제 PAX-1 등 임상개발 중(당기 매출 미발생)",
+      "title": "돼지 써코바이러스 2형예방백신(백신)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
       "kind": "bio",
-      "visual": "인체의약품",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "BIO",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "돼지 써코바이러스 2형예방백신",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.4%",
+      "kind": "bio",
+      "visual": "BIO",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "소로타바이러스,코로나바이러스 예방백신",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.3%",
+      "kind": "bio",
+      "visual": "BIO",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

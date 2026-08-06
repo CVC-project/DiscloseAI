@@ -155,34 +155,32 @@
     "segment_finance": "대화제약은 감염질환치료제 세파메칠정, 소화기관치료제 후로스판정 같은 전문의약품과 파스제제 등을 만드는 제약회사로, 의약품 도매업과 미용 의료기기(아말리안 필러), 히알루론산 원료 사업까지 함께 운영하고 있습니다. 특히 세계 최초 경구용 항암제로 개발한 리포락셀액이 2024년 중국 시판허가를 받았고, 유방암 적응증 확대를 위한 임상과 품목허가 절차도 진행 중입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,430억 원으로 전년 대비 4.2% 줄었고 영업이익도 31억 원으로 52.9% 크게 감소했지만, 당기순이익은 23억 원으로 오히려 180.8% 늘었습니다. 부채비율은 166.4%로 자본보다 부채가 더 많은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "의약품제조·판매부문",
-        "desc": "전문·일반의약품, 파스제제, OEM 등 제조판매",
-        "revenue_share": 0.524
+        "name": "의약품제조, 판매부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 52.4%",
+        "revenue_share": 0.524,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "OEM(파스·패치류)",
-        "desc": "타사 위탁생산 파스·패치 제품",
-        "revenue_share": 0.153
+        "name": "OEM(주1)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.3%",
+        "revenue_share": 0.153,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "의약품도매부문",
-        "desc": "타사 의약품 유통·도매",
-        "revenue_share": 0.156
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.6%",
+        "revenue_share": 0.156,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "의약품원료 제조·판매부문",
-        "desc": "원료의약품(HA 등) 제조판매",
-        "revenue_share": 0.115
-      },
-      {
-        "name": "화장품·의료기기 제조판매부문",
-        "desc": "더말필러·아말리안 등 미용의료기기",
-        "revenue_share": 0.05
-      },
-      {
-        "name": "의료정보시스템부문",
-        "desc": "메디프레임 서비스·콘텐츠 제작",
-        "revenue_share": 0.002
+        "name": "의료정보시스템",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.002,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -194,40 +192,54 @@
       "리포락셀액(경구용 항암제)",
       "히알루론산(HA)·화장품 원료"
     ],
-    "investor_note": "대화제약은 감염질환치료제 세파메칠정, 소화기관치료제 후로스판정 같은 전문의약품과 파스제제 등을 만드는 제약회사로, 의약품 도매업과 미용 의료기기(아말리안 필러), 히알루론산 원료 사업까지 함께 운영하고 있습니다. 특히 세계 최초 경구용 항암제로 개발한 리포락셀액이 2024년 중국 시판허가를 받았고, 유방암 적응증 확대를 위한 임상과 품목허가 절차도 진행 중입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,430억 원으로 전년 대비 4.2% 줄었고 영업이익도 31억 원으로 52.9% 크게 감소했지만, 당기순이익은 23억 원으로 오히려 180.8% 늘었습니다. 부채비율은 166.4%로 자본보다 부채가 더 많은 편이라 재무 부담을 살펴볼 필요가 있습니다."
+    "investor_note": "대화제약은 감염질환치료제 세파메칠정, 소화기관치료제 후로스판정 같은 전문의약품과 파스제제 등을 만드는 제약회사로, 의약품 도매업과 미용 의료기기(아말리안 필러), 히알루론산 원료 사업까지 함께 운영하고 있습니다. 특히 세계 최초 경구용 항암제로 개발한 리포락셀액이 2024년 중국 시판허가를 받았고, 유방암 적응증 확대를 위한 임상과 품목허가 절차도 진행 중입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,430억 원으로 전년 대비 4.2% 줄었고 영업이익도 31억 원으로 52.9% 크게 감소했지만, 당기순이익은 23억 원으로 오히려 180.8% 늘었습니다. 부채비율은 166.4%로 자본보다 부채가 더 많은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "의약품제조, 판매부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 52.4%",
+        "revenue_share": 0.524,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "OEM(주1)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.3%",
+        "revenue_share": 0.153,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "의약품도매부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.6%",
+        "revenue_share": 0.156,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "의료정보시스템",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.002,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "의약품제조·판매부문",
-      "caption": "전문·일반의약품, 파스제제, OEM 등 제조판매",
+      "title": "의약품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 52.4%",
       "kind": "bio",
-      "visual": "의약품제조",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "OEM(파스·패치류)",
-      "caption": "타사 위탁생산 파스·패치 제품",
+      "title": "OEM(주1)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.3%",
       "kind": "service",
-      "visual": "OEM",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "의약품도매부문",
-      "caption": "타사 의약품 유통·도매",
-      "kind": "bio",
-      "visual": "의약품도매부문",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "의약품원료 제조·판매부문",
-      "caption": "원료의약품(HA 등) 제조판매",
-      "kind": "bio",
-      "visual": "의약품원료",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

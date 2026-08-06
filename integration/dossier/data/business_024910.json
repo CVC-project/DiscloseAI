@@ -155,14 +155,32 @@
     "segment_finance": "과거 공시 기반 참고 정보로, 최근 연결 매출액은 7,053억 원으로 전년보다 10.5% 늘었지만, 원가 부담 등으로 영업이익은 73억 원으로 23.8% 줄었고 당기순이익은 215억 원 적자로 전환됐습니다. 부채비율은 313.2%로 자본보다 빚이 훨씬 많은 수준이라 재무 안정성 측면에서 주의 깊게 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "자동차부품",
-        "desc": "현대·기아차 등에 공급하는 변속기·액추에이터·페달·레버 OEM 생산",
-        "revenue_share": 0.98
+        "name": "AUTO T/M부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 62.5%",
+        "revenue_share": 0.6245,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "산업용캐스터",
-        "desc": "자동화라인용 산업용 캐스터(바퀴) 생산·판매",
-        "revenue_share": 0.02
+        "name": "ACTUATOR",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.4%",
+        "revenue_share": 0.1244,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "CABLE",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.4%",
+        "revenue_share": 0.014,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "PEDAL",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.6%",
+        "revenue_share": 0.0655,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,22 +192,68 @@
       "Reservoir Tank(오일저장탱크)",
       "산업용캐스터"
     ],
-    "investor_note": "과거 공시 기반 참고 정보로, 최근 연결 매출액은 7,053억 원으로 전년보다 10.5% 늘었지만, 원가 부담 등으로 영업이익은 73억 원으로 23.8% 줄었고 당기순이익은 215억 원 적자로 전환됐습니다. 부채비율은 313.2%로 자본보다 빚이 훨씬 많은 수준이라 재무 안정성 측면에서 주의 깊게 살펴볼 필요가 있습니다."
+    "investor_note": "과거 공시 기반 참고 정보로, 최근 연결 매출액은 7,053억 원으로 전년보다 10.5% 늘었지만, 원가 부담 등으로 영업이익은 73억 원으로 23.8% 줄었고 당기순이익은 215억 원 적자로 전환됐습니다. 부채비율은 313.2%로 자본보다 빚이 훨씬 많은 수준이라 재무 안정성 측면에서 주의 깊게 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "AUTO T/M부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 62.5%",
+        "revenue_share": 0.6245,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "ACTUATOR",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.4%",
+        "revenue_share": 0.1244,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "CABLE",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.4%",
+        "revenue_share": 0.014,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "PEDAL",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.6%",
+        "revenue_share": 0.0655,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "산업용캐스터",
-      "caption": "자동화라인용 산업용 캐스터(바퀴) 생산·판매",
-      "kind": "service",
-      "visual": "산업용캐스터",
+      "title": "AUTO T/M부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 62.5%",
+      "kind": "auto",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "자동차 신품 부품 제조업",
-      "caption": "자동차 신품 부품 제조업을 중심으로 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
+      "title": "ACTUATOR",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.4%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "CABLE",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.4%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "PEDAL",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.6%",
+      "kind": "auto",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     }

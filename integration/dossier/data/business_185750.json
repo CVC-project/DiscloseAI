@@ -155,9 +155,32 @@
     "segment_finance": "주식회사 종근당의 주요 제품·서비스는 의약품, 바이오시밀러, 아연, 매출 현황, 비 고, 완제의약품입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 완제의약품을 제조, 판매하는 제약기업으로서 발효 및 합성기술에 의한 제품생산에 많은 경험과 노하우를 축적해 왔습니다. 의약품 산업은 인간의 생명과 보건에 관련된 제품을 생산하는 정밀화학산업으로 국민 건강증진 및 건강권 확보와 직결된 산업으로 이에 따른 의약품 허가/제조/유통 등에 대한 정부의 규제가 타 산업에 비해 엄격한 편입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "산업은행",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
+        "name": "완제의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.7%",
+        "revenue_share": 0.0867,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "아토젯",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.5%",
+        "revenue_share": 0.0649,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "글리아티린",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.8%",
+        "revenue_share": 0.0476,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "펙수클루",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.5%",
+        "revenue_share": 0.0454,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,40 +197,70 @@
       "상업화 진행",
       "자누메트)"
     ],
-    "investor_note": "주식회사 종근당의 주요 제품·서비스는 의약품, 바이오시밀러, 아연, 매출 현황, 비 고, 완제의약품입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 완제의약품을 제조, 판매하는 제약기업으로서 발효 및 합성기술에 의한 제품생산에 많은 경험과 노하우를 축적해 왔습니다. 의약품 산업은 인간의 생명과 보건에 관련된 제품을 생산하는 정밀화학산업으로 국민 건강증진 및 건강권 확보와 직결된 산업으로 이에 따른 의약품 허가/제조/유통 등에 대한 정부의 규제가 타 산업에 비해 엄격한 편입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사 종근당의 주요 제품·서비스는 의약품, 바이오시밀러, 아연, 매출 현황, 비 고, 완제의약품입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 완제의약품을 제조, 판매하는 제약기업으로서 발효 및 합성기술에 의한 제품생산에 많은 경험과 노하우를 축적해 왔습니다. 의약품 산업은 인간의 생명과 보건에 관련된 제품을 생산하는 정밀화학산업으로 국민 건강증진 및 건강권 확보와 직결된 산업으로 이에 따른 의약품 허가/제조/유통 등에 대한 정부의 규제가 타 산업에 비해 엄격한 편입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "완제의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.7%",
+        "revenue_share": 0.0867,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "아토젯",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.5%",
+        "revenue_share": 0.0649,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "글리아티린",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.8%",
+        "revenue_share": 0.0476,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "펙수클루",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.5%",
+        "revenue_share": 0.0454,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "의약품",
-      "caption": "의약품 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.7%",
       "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "바이오시밀러",
-      "caption": "바이오시밀러 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "아토젯",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "아연",
-      "caption": "아연 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "글리아티린",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "매출 현황",
-      "caption": "매출 현황 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "펙수클루",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

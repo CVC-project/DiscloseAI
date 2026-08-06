@@ -123,19 +123,18 @@
     "segment_finance": "알멕은 알루미늄을 압출·가공해 부품을 만드는 전문업체로, 폭스바겐·아우디·포르쉐·제너럴모터스 등 해외 완성차업체에 공급하는 전기차 배터리 모듈케이스·배터리팩 프레임을 주력 제품으로 삼고 있습니다. 매출의 60% 이상이 이 EV용 압출부품에서 나오고, 나머지는 압출 원료인 빌렛과 자동차 일반부품에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,878억 원으로 전년 대비 19.7% 늘었고 영업이익도 전년 적자에서 62억 원 흑자로 돌아섰지만, 당기순이익은 61억 원 적자를 기록해 본업 실적 개선과 달리 최종 손익은 오히려 나빠졌습니다. 부채비율은 112.7%로 다소 높은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "EV Components(압출)",
-        "desc": "전기차 배터리 모듈케이스·팩프레임 등 알루미늄 압출 부품",
-        "revenue_share": 0.607
-      },
-      {
-        "name": "빌렛(주조)",
-        "desc": "압출제품 제조용 원통형 알루미늄 소재",
-        "revenue_share": 0.243
-      },
-      {
         "name": "자동차 일반 부품",
-        "desc": "범퍼·방진·차체 구조부품 등",
-        "revenue_share": 0.076
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.6%",
+        "revenue_share": 0.076,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "산업재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.005,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -147,32 +146,62 @@
       "산업용 압출 레일",
       "빌렛(알루미늄 주조 소재)"
     ],
-    "investor_note": "알멕은 알루미늄을 압출·가공해 부품을 만드는 전문업체로, 폭스바겐·아우디·포르쉐·제너럴모터스 등 해외 완성차업체에 공급하는 전기차 배터리 모듈케이스·배터리팩 프레임을 주력 제품으로 삼고 있습니다. 매출의 60% 이상이 이 EV용 압출부품에서 나오고, 나머지는 압출 원료인 빌렛과 자동차 일반부품에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,878억 원으로 전년 대비 19.7% 늘었고 영업이익도 전년 적자에서 62억 원 흑자로 돌아섰지만, 당기순이익은 61억 원 적자를 기록해 본업 실적 개선과 달리 최종 손익은 오히려 나빠졌습니다. 부채비율은 112.7%로 다소 높은 편이라 재무 부담을 살펴볼 필요가 있습니다."
+    "investor_note": "알멕은 알루미늄을 압출·가공해 부품을 만드는 전문업체로, 폭스바겐·아우디·포르쉐·제너럴모터스 등 해외 완성차업체에 공급하는 전기차 배터리 모듈케이스·배터리팩 프레임을 주력 제품으로 삼고 있습니다. 매출의 60% 이상이 이 EV용 압출부품에서 나오고, 나머지는 압출 원료인 빌렛과 자동차 일반부품에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,878억 원으로 전년 대비 19.7% 늘었고 영업이익도 전년 적자에서 62억 원 흑자로 돌아섰지만, 당기순이익은 61억 원 적자를 기록해 본업 실적 개선과 달리 최종 손익은 오히려 나빠졌습니다. 부채비율은 112.7%로 다소 높은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "압출제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 60.7%",
+        "revenue_share": 0.607,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동차 일반 부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.6%",
+        "revenue_share": 0.076,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "산업재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.005,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "주조제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.3%",
+        "revenue_share": 0.243,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "EV Components(압출)",
-      "caption": "전기차 배터리 모듈케이스·팩프레임 등 알루미늄 압출 부품",
-      "kind": "battery",
-      "visual": "EV",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "빌렛(주조)",
-      "caption": "압출제품 제조용 원통형 알루미늄 소재",
+      "title": "압출제품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 60.7%",
       "kind": "material",
-      "visual": "빌렛",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "자동차 일반 부품",
-      "caption": "범퍼·방진·차체 구조부품 등",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.6%",
       "kind": "auto",
-      "visual": "자동차",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
+    },
+    {
+      "title": "주조제품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.3%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

@@ -155,9 +155,11 @@
     "segment_finance": "다우기술은 IT서비스(뿌리오·사방넷·다우오피스 등)와 건물관리 사업을 하면서, 온라인 증권사 키움증권을 비롯해 저축은행·자산운용·캐피탈 등 금융 계열사를 다수 거느린 지주회사 성격의 기업입니다. 연결 매출의 대부분(약 98.6%)이 키움증권 등 금융부문에서 나오고, IT서비스 사업부는 매출의 약 2.9%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 17조 4,950억 원으로 전년 대비 50.5% 늘었고 영업이익도 32.7%, 당기순이익도 35.6% 증가해 실적이 크게 개선됐습니다. 다만 부채비율은 1,006.9%로 매우 높은데, 이는 증권사 특성상 고객예수금·차입금이 부채로 잡히기 때문으로 일반 제조업과 단순 비교하기는 어렵습니다.",
     "segment_breakdown": [
       {
-        "name": "건물관리",
-        "desc": "빌딩관리·부동산 컨설팅 서비스",
-        "revenue_share": 0.0018
+        "name": "건물관리본부",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.0018,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,40 +176,62 @@
       "키움프라이빗에쿼티",
       "키움이앤에스(빌딩관리)"
     ],
-    "investor_note": "다우기술은 IT서비스(뿌리오·사방넷·다우오피스 등)와 건물관리 사업을 하면서, 온라인 증권사 키움증권을 비롯해 저축은행·자산운용·캐피탈 등 금융 계열사를 다수 거느린 지주회사 성격의 기업입니다. 연결 매출의 대부분(약 98.6%)이 키움증권 등 금융부문에서 나오고, IT서비스 사업부는 매출의 약 2.9%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 17조 4,950억 원으로 전년 대비 50.5% 늘었고 영업이익도 32.7%, 당기순이익도 35.6% 증가해 실적이 크게 개선됐습니다. 다만 부채비율은 1,006.9%로 매우 높은데, 이는 증권사 특성상 고객예수금·차입금이 부채로 잡히기 때문으로 일반 제조업과 단순 비교하기는 어렵습니다."
+    "investor_note": "다우기술은 IT서비스(뿌리오·사방넷·다우오피스 등)와 건물관리 사업을 하면서, 온라인 증권사 키움증권을 비롯해 저축은행·자산운용·캐피탈 등 금융 계열사를 다수 거느린 지주회사 성격의 기업입니다. 연결 매출의 대부분(약 98.6%)이 키움증권 등 금융부문에서 나오고, IT서비스 사업부는 매출의 약 2.9%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 17조 4,950억 원으로 전년 대비 50.5% 늘었고 영업이익도 32.7%, 당기순이익도 35.6% 증가해 실적이 크게 개선됐습니다. 다만 부채비율은 1,006.9%로 매우 높은데, 이는 증권사 특성상 고객예수금·차입금이 부채로 잡히기 때문으로 일반 제조업과 단순 비교하기는 어렵습니다.",
+    "product_service_segments": [
+      {
+        "name": "비금융사업부",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.9%",
+        "revenue_share": 0.0285,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "건물관리본부",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.0018,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "비금융사업부 합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.0303,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "금융사업부",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 70.4%",
+        "revenue_share": 0.7037,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "뿌리오(문자·메일 대량발송)",
-      "caption": "뿌리오(문자·메일 대량발송) 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "비금융사업부",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.9%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "애드콘(모바일쿠폰)",
-      "caption": "애드콘(모바일쿠폰) 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "비금융사업부 합계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "사방넷(쇼핑몰 통합관리)",
-      "caption": "사방넷(쇼핑몰 통합관리) 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "금융사업부",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 70.4%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "다우오피스(그룹웨어)",
-      "caption": "다우오피스(그룹웨어) 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

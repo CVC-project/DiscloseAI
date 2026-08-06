@@ -155,24 +155,32 @@
     "segment_finance": "인지컨트롤스는 자동차 엔진 온도를 조절하는 서모스탯·워터템프컨트롤러 등 온도관리부품(TMS)과 센서(EMS), 냉각수 제어밸브, 경량화 플라스틱 부품을 만드는 자동차 부품 전문기업으로, 최근에는 전기차용 배터리모듈과 통합 열관리모듈로 사업을 넓히고 있습니다. 밸브류가 매출의 32%, 플라스틱 부품이 24%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 7,179억 원으로 전년보다 10.6% 늘었고 영업이익은 50.2%, 당기순이익은 94.3% 증가해 수익성이 크게 좋아졌습니다. 부채비율은 169.3%로 부채가 자본보다 많은 편입니다.",
     "segment_breakdown": [
       {
+        "name": "자동차부품부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.1%",
+        "revenue_share": 0.1312,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "SENSOR류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.7%",
+        "revenue_share": 0.0973,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "SWITCH류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.7%",
+        "revenue_share": 0.0167,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
         "name": "VALVE류",
-        "desc": "냉각수 제어밸브 등 열관리 밸브 부품",
-        "revenue_share": 0.3204
-      },
-      {
-        "name": "PLASTIC류(EP)",
-        "desc": "엔진 헤드커버 등 경량화 엔지니어링 플라스틱 부품",
-        "revenue_share": 0.2433
-      },
-      {
-        "name": "WTC류(TMS)",
-        "desc": "서모스탯 등 엔진·전기차 온도관리시스템 부품",
-        "revenue_share": 0.1312
-      },
-      {
-        "name": "SENSOR·SWITCH·SOLENOID류(EMS)",
-        "desc": "엔진 온도·진동·압력 감지 센서 및 스위치",
-        "revenue_share": 0.1444
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.0%",
+        "revenue_share": 0.3204,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -186,38 +194,68 @@
       "배터리모듈",
       "통합열관리모듈"
     ],
-    "investor_note": "인지컨트롤스는 자동차 엔진 온도를 조절하는 서모스탯·워터템프컨트롤러 등 온도관리부품(TMS)과 센서(EMS), 냉각수 제어밸브, 경량화 플라스틱 부품을 만드는 자동차 부품 전문기업으로, 최근에는 전기차용 배터리모듈과 통합 열관리모듈로 사업을 넓히고 있습니다. 밸브류가 매출의 32%, 플라스틱 부품이 24%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 7,179억 원으로 전년보다 10.6% 늘었고 영업이익은 50.2%, 당기순이익은 94.3% 증가해 수익성이 크게 좋아졌습니다. 부채비율은 169.3%로 부채가 자본보다 많은 편입니다."
+    "investor_note": "인지컨트롤스는 자동차 엔진 온도를 조절하는 서모스탯·워터템프컨트롤러 등 온도관리부품(TMS)과 센서(EMS), 냉각수 제어밸브, 경량화 플라스틱 부품을 만드는 자동차 부품 전문기업으로, 최근에는 전기차용 배터리모듈과 통합 열관리모듈로 사업을 넓히고 있습니다. 밸브류가 매출의 32%, 플라스틱 부품이 24%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 7,179억 원으로 전년보다 10.6% 늘었고 영업이익은 50.2%, 당기순이익은 94.3% 증가해 수익성이 크게 좋아졌습니다. 부채비율은 169.3%로 부채가 자본보다 많은 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "자동차부품부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.1%",
+        "revenue_share": 0.1312,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "SENSOR류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.7%",
+        "revenue_share": 0.0973,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "SWITCH류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.7%",
+        "revenue_share": 0.0167,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "VALVE류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.0%",
+        "revenue_share": 0.3204,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
+      "title": "자동차부품부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.1%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "SENSOR류",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.7%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "SWITCH류",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.7%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
+    },
+    {
       "title": "VALVE류",
-      "caption": "냉각수 제어밸브 등 열관리 밸브 부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.0%",
       "kind": "auto",
-      "visual": "VALVE류",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "PLASTIC류(EP)",
-      "caption": "엔진 헤드커버 등 경량화 엔지니어링 플라스틱 부품",
-      "kind": "auto",
-      "visual": "PLASTIC류",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "WTC류(TMS)",
-      "caption": "서모스탯 등 엔진·전기차 온도관리시스템 부품",
-      "kind": "auto",
-      "visual": "WTC류",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "SENSOR·SWITCH·SOLENOID류(EMS)",
-      "caption": "엔진 온도·진동·압력 감지 센서 및 스위치",
-      "kind": "service",
-      "visual": "SENSOR",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     }

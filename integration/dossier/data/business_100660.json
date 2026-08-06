@@ -155,19 +155,32 @@
     "segment_finance": "서암기계공업은 기어, 척&실린더, 커빅커플링 등 공작기계용 핵심부품을 50년 넘게 만들어온 회사로, 최근엔 선박엔진·공기압축기·풍력발전기·철도차량용 기어로도 사업을 넓히고 있습니다. 매출은 기어(40.2%)와 척&실린더(38.8%)가 대부분입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 465억 원으로 전년 대비 9.7% 늘었고 영업이익은 적자에서 흑자로 전환, 당기순이익은 204.4% 급증한 12억 원을 기록했습니다. 부채비율은 21.8%로 낮아 재무구조는 안정적이나, 당기 중 종속회사를 처음 취득해 연결재무제표를 최초 작성했다는 감사인의 강조사항이 있어 전년 비교 수치가 개별기준이라는 점은 참고하세요.",
     "segment_breakdown": [
       {
-        "name": "기어",
-        "desc": "공작기계·산업기계·조선·풍력용 동력전달 핵심부품",
-        "revenue_share": 0.402
+        "name": "제 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.8%",
+        "revenue_share": 0.388,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "척&실린더",
-        "desc": "CNC선반 등에 공작물을 고정하는 장치",
-        "revenue_share": 0.388
+        "name": "기 어",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.2%",
+        "revenue_share": 0.402,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "커빅커플링",
-        "desc": "정밀 각도 분할장치용 초정밀 부품",
-        "revenue_share": 0.091
+        "name": "커빅 커플링",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.1%",
+        "revenue_share": 0.091,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.5%",
+        "revenue_share": 0.025,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -182,32 +195,70 @@
       "감속기용 기어",
       "산업로봇용 기어"
     ],
-    "investor_note": "서암기계공업은 기어, 척&실린더, 커빅커플링 등 공작기계용 핵심부품을 50년 넘게 만들어온 회사로, 최근엔 선박엔진·공기압축기·풍력발전기·철도차량용 기어로도 사업을 넓히고 있습니다. 매출은 기어(40.2%)와 척&실린더(38.8%)가 대부분입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 465억 원으로 전년 대비 9.7% 늘었고 영업이익은 적자에서 흑자로 전환, 당기순이익은 204.4% 급증한 12억 원을 기록했습니다. 부채비율은 21.8%로 낮아 재무구조는 안정적이나, 당기 중 종속회사를 처음 취득해 연결재무제표를 최초 작성했다는 감사인의 강조사항이 있어 전년 비교 수치가 개별기준이라는 점은 참고하세요."
+    "investor_note": "서암기계공업은 기어, 척&실린더, 커빅커플링 등 공작기계용 핵심부품을 50년 넘게 만들어온 회사로, 최근엔 선박엔진·공기압축기·풍력발전기·철도차량용 기어로도 사업을 넓히고 있습니다. 매출은 기어(40.2%)와 척&실린더(38.8%)가 대부분입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 465억 원으로 전년 대비 9.7% 늘었고 영업이익은 적자에서 흑자로 전환, 당기순이익은 204.4% 급증한 12억 원을 기록했습니다. 부채비율은 21.8%로 낮아 재무구조는 안정적이나, 당기 중 종속회사를 처음 취득해 연결재무제표를 최초 작성했다는 감사인의 강조사항이 있어 전년 비교 수치가 개별기준이라는 점은 참고하세요.",
+    "product_service_segments": [
+      {
+        "name": "제 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.8%",
+        "revenue_share": 0.388,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기 어",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.2%",
+        "revenue_share": 0.402,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "커빅 커플링",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.1%",
+        "revenue_share": 0.091,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.5%",
+        "revenue_share": 0.025,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "기어",
-      "caption": "공작기계·산업기계·조선·풍력용 동력전달 핵심부품",
-      "kind": "auto",
-      "visual": "기어",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "척&실린더",
-      "caption": "CNC선반 등에 공작물을 고정하는 장치",
+      "title": "제 품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.8%",
       "kind": "service",
-      "visual": "척&실린더",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "커빅커플링",
-      "caption": "정밀 각도 분할장치용 초정밀 부품",
-      "kind": "auto",
-      "visual": "커빅커플링",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "title": "기 어",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "커빅 커플링",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.1%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "상 품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

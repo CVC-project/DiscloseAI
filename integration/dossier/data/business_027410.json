@@ -155,24 +155,32 @@
     "segment_finance": "비지에프는 CU 편의점을 운영하는 (주)비지에프리테일의 지주회사로, 브랜드 사용료·경영지원 용역료·배당금 수익을 주요 수입원으로 삼고 있습니다(편의점 사업은 별도 상장회사라 이 회사의 연결매출에는 포함되지 않습니다). 자회사인 비지에프에코머티리얼즈는 자동차·전자 부품에 쓰이는 고기능성 폴리머 소재를, 케이엔더블유는 자동차 내장재와 전자부품 소재를, 비지에프에코스페셜티는 반도체 공정용 특수가스를 생산해 소재·화학 사업의 비중(약 73%)이 가장 큽니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,694억 원으로 전년 대비 8.2% 늘고 영업이익도 10.8% 증가했지만, 당기순이익은 40.5% 줄어 이익의 질을 자세히 볼 필요가 있습니다. 부채비율은 18.5%로 재무 부담이 매우 낮은 안정적인 재무구조를 유지하고 있습니다.",
     "segment_breakdown": [
       {
-        "name": "소재/화학(비지에프에코머티리얼즈)",
-        "desc": "자동차·전자용 고기능성 폴리머 소재 제조",
-        "revenue_share": 0.7297
+        "name": "엔지니어링플라스틱소재ㆍ화학",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.4%",
+        "revenue_share": 0.324,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "반도체소재(비지에프에코스페셜티)",
-        "desc": "반도체 공정용 특수가스(F2·SF6) 제조",
-        "revenue_share": 0.1077
+        "name": "PA6",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.5%",
+        "revenue_share": 0.225,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "투자(지주회사 본체)",
-        "desc": "브랜드 사용료·경영지원 용역료·배당금·임대수익",
-        "revenue_share": 0.1017
+        "name": "PP",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.2%",
+        "revenue_share": 0.282,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "전자/자동차부품소재(케이엔더블유)",
-        "desc": "전자부품 공정 소재 및 자동차 내장재 제조",
-        "revenue_share": 0.0609
+        "name": "전자부품소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.2%",
+        "revenue_share": 0.1323,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -187,40 +195,70 @@
       "반도체 공정용 SF6가스",
       "2차전지 전해액 첨가제"
     ],
-    "investor_note": "비지에프는 CU 편의점을 운영하는 (주)비지에프리테일의 지주회사로, 브랜드 사용료·경영지원 용역료·배당금 수익을 주요 수입원으로 삼고 있습니다(편의점 사업은 별도 상장회사라 이 회사의 연결매출에는 포함되지 않습니다). 자회사인 비지에프에코머티리얼즈는 자동차·전자 부품에 쓰이는 고기능성 폴리머 소재를, 케이엔더블유는 자동차 내장재와 전자부품 소재를, 비지에프에코스페셜티는 반도체 공정용 특수가스를 생산해 소재·화학 사업의 비중(약 73%)이 가장 큽니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,694억 원으로 전년 대비 8.2% 늘고 영업이익도 10.8% 증가했지만, 당기순이익은 40.5% 줄어 이익의 질을 자세히 볼 필요가 있습니다. 부채비율은 18.5%로 재무 부담이 매우 낮은 안정적인 재무구조를 유지하고 있습니다."
+    "investor_note": "비지에프는 CU 편의점을 운영하는 (주)비지에프리테일의 지주회사로, 브랜드 사용료·경영지원 용역료·배당금 수익을 주요 수입원으로 삼고 있습니다(편의점 사업은 별도 상장회사라 이 회사의 연결매출에는 포함되지 않습니다). 자회사인 비지에프에코머티리얼즈는 자동차·전자 부품에 쓰이는 고기능성 폴리머 소재를, 케이엔더블유는 자동차 내장재와 전자부품 소재를, 비지에프에코스페셜티는 반도체 공정용 특수가스를 생산해 소재·화학 사업의 비중(약 73%)이 가장 큽니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,694억 원으로 전년 대비 8.2% 늘고 영업이익도 10.8% 증가했지만, 당기순이익은 40.5% 줄어 이익의 질을 자세히 볼 필요가 있습니다. 부채비율은 18.5%로 재무 부담이 매우 낮은 안정적인 재무구조를 유지하고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "엔지니어링플라스틱소재ㆍ화학",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.4%",
+        "revenue_share": 0.324,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "PA6",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.5%",
+        "revenue_share": 0.225,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "PP",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.2%",
+        "revenue_share": 0.282,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전자부품소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.2%",
+        "revenue_share": 0.1323,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "소재/화학(비지에프에코머티리얼즈)",
-      "caption": "자동차·전자용 고기능성 폴리머 소재 제조",
+      "title": "엔지니어링플라스틱소재ㆍ화학",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.4%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "PA6",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "PP",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "전자부품소재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.2%",
       "kind": "auto",
-      "visual": "소재",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "반도체소재(비지에프에코스페셜티)",
-      "caption": "반도체 공정용 특수가스(F2·SF6) 제조",
-      "kind": "chip",
-      "visual": "반도체소재",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "투자(지주회사 본체)",
-      "caption": "브랜드 사용료·경영지원 용역료·배당금·임대수익",
-      "kind": "securities",
-      "visual": "투자",
-      "image": "../data/business_images/business_image_local_finance_hold.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "전자/자동차부품소재(케이엔더블유)",
-      "caption": "전자부품 공정 소재 및 자동차 내장재 제조",
-      "kind": "auto",
-      "visual": "전자",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

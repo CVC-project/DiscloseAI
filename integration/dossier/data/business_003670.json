@@ -108,23 +108,7 @@
     "raw_material": "주1) 계약금액은 적용 환율 및 원재료 가격 변동 등에 따라 변동될 수 있습니다.",
     "capacity": "4. 사업 추진현황(조직 및 인력구성 현황, 연구개발활동 내역, 제품 및 서비스 개발 진척도 및 상용화 여부, 매출 발생여부 등)- 광양 전구체 공장 완공하여 현재 생산중이며 합작투자 등을 통한 생산능력 확장 추진 중임. 니켈 및 코발트 사업은 아이디어 도출 단계로 End User 고객사와 합작 투자 또는 연계판매를 장기적 관업에서 협의 중임",
     "segment_finance": "",
-    "segment_breakdown": [
-      {
-        "name": "내화물사업",
-        "desc": "내화물 제조 및 산업용노재 정비 서비스",
-        "revenue_share": 0.172
-      },
-      {
-        "name": "라임화성사업",
-        "desc": "생석회 제조, 화성품 가공·판매, 화성공장 위탁운영",
-        "revenue_share": 0.292
-      },
-      {
-        "name": "에너지소재사업",
-        "desc": "이차전지용 양극재·음극재 제조 및 판매",
-        "revenue_share": 0.536
-      }
-    ],
+    "segment_breakdown": [],
     "investor_note": "포스코퓨처엠은 포스코그룹의 계열사로 이차전지(스마트폰·전기차 배터리) 핵심 소재를 만드는 회사입니다. 양극재와 음극재 같은 배터리 내부 부품이 전체 매출의 54%를 차지하며, 나머지는 철강 산업용 내화물과 생석회 등 전통 사업에서 나옵니다. 지난해 매출은 294조 원으로 전년 대비 21% 감소했는데, 이는 전 세계 배터리 산업이 공급 과잉으로 조정 중이기 때문입니다. 다만 긍정적인 신호도 있습니다. 영업이익(회사가 본업으로 버는 돈)이 적자에서 흑자로 전환되었고, 순이익(세금 등을 뺀 최종 이익)도 365억 원의 흑자를 기록했습니다. 현금은 설비 투자와 빚 갚는 데 많이 썼지만, 배터리 산업 성장에 대비해 자산을 15% 늘렸습니다. 과거 공시 기반 참고 정보입니다.",
     "products": [
       "양극재",
@@ -141,30 +125,53 @@
       "구형흑연"
     ],
     "raw_moves": [],
-    "utilization": []
+    "utilization": [],
+    "product_service_segments": [
+      {
+        "name": "기초소재사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.2%",
+        "revenue_share": 0.172,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "라임화성사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.2%",
+        "revenue_share": 0.292,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "에너지소재사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.6%",
+        "revenue_share": 0.536,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "양극재",
-      "caption": "전기차 배터리 성능과 판가를 좌우하는 핵심 소재입니다.",
+      "title": "기초소재사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.2%",
       "kind": "battery",
-      "visual": "Cathode",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
+      "visual": "BATTERY",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "음극재",
-      "caption": "배터리 충전 속도와 수명에 영향을 주는 소재입니다.",
-      "kind": "chem",
-      "visual": "Anode",
+      "title": "라임화성사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.2%",
+      "kind": "battery",
+      "visual": "BATTERY",
       "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "내화물·라임케미칼",
-      "caption": "철강 공정에 쓰이는 기초소재 사업도 함께 봅니다.",
-      "kind": "chem",
-      "visual": "Lime",
+      "title": "에너지소재사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.6%",
+      "kind": "battery",
+      "visual": "BATTERY",
       "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
       "image_source": "Wikimedia Commons"
     }

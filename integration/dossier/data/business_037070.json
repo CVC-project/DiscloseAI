@@ -155,19 +155,25 @@
     "segment_finance": "파세코는 1986년 설립된 가전제품 제조업체로, 석유스토브·창문형에어컨 등 계절가전과 가스쿡탑·후드 등 주방가전을 자체 브랜드로, 정수기·의류청정기는 코웨이 등에 OEM/ODM 방식으로 공급하고 있습니다. 매출의 약 절반이 OEM/ODM 사업에서 나오고, 나머지는 난방기기(25%)·주방기기(9%)·기타 생활가전(19%)이 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,679억 원으로 전년 대비 6.4% 늘었고, 영업이익과 순이익 모두 흑자로 전환했습니다. 부채비율은 29.4%로 낮은 편이라 재무 안정성은 양호한 편입니다.",
     "segment_breakdown": [
       {
-        "name": "OEM/ODM(정수기·의류청정기)",
-        "desc": "코웨이 등 위탁생산(OEM/ODM) 정수기·의류청정기",
-        "revenue_share": 0.475
+        "name": "OEM/ODM",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 47.5%",
+        "revenue_share": 0.475,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "난방기기",
-        "desc": "석유스토브·히터 등 계절가전(PASECO·KERONA)",
-        "revenue_share": 0.253
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.3%",
+        "revenue_share": 0.253,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "주방기기",
-        "desc": "가스쿡탑·후드 등 주방가전",
-        "revenue_share": 0.087
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.7%",
+        "revenue_share": 0.087,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -183,32 +189,55 @@
       "정수기(OEM/ODM)",
       "의류청정기(OEM/ODM)"
     ],
-    "investor_note": "파세코는 1986년 설립된 가전제품 제조업체로, 석유스토브·창문형에어컨 등 계절가전과 가스쿡탑·후드 등 주방가전을 자체 브랜드로, 정수기·의류청정기는 코웨이 등에 OEM/ODM 방식으로 공급하고 있습니다. 매출의 약 절반이 OEM/ODM 사업에서 나오고, 나머지는 난방기기(25%)·주방기기(9%)·기타 생활가전(19%)이 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,679억 원으로 전년 대비 6.4% 늘었고, 영업이익과 순이익 모두 흑자로 전환했습니다. 부채비율은 29.4%로 낮은 편이라 재무 안정성은 양호한 편입니다."
+    "investor_note": "파세코는 1986년 설립된 가전제품 제조업체로, 석유스토브·창문형에어컨 등 계절가전과 가스쿡탑·후드 등 주방가전을 자체 브랜드로, 정수기·의류청정기는 코웨이 등에 OEM/ODM 방식으로 공급하고 있습니다. 매출의 약 절반이 OEM/ODM 사업에서 나오고, 나머지는 난방기기(25%)·주방기기(9%)·기타 생활가전(19%)이 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,679억 원으로 전년 대비 6.4% 늘었고, 영업이익과 순이익 모두 흑자로 전환했습니다. 부채비율은 29.4%로 낮은 편이라 재무 안정성은 양호한 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "OEM/ODM",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 47.5%",
+        "revenue_share": 0.475,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "난방기기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.3%",
+        "revenue_share": 0.253,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "주방기기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.7%",
+        "revenue_share": 0.087,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "OEM/ODM(정수기·의류청정기)",
-      "caption": "코웨이 등 위탁생산(OEM/ODM) 정수기·의류청정기",
+      "title": "OEM/ODM",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 47.5%",
       "kind": "service",
-      "visual": "OEM",
-      "image": "../data/business_images/business_image_local_fashion.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "난방기기",
-      "caption": "석유스토브·히터 등 계절가전(PASECO·KERONA)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.3%",
       "kind": "service",
-      "visual": "난방기기",
-      "image": "../data/business_images/business_image_local_oil.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "주방기기",
-      "caption": "가스쿡탑·후드 등 주방가전",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.7%",
       "kind": "service",
-      "visual": "주방기기",
-      "image": "../data/business_images/business_image_local_default_c.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

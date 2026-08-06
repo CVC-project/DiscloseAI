@@ -155,19 +155,25 @@
     "segment_finance": "바텍은 치과용 디지털 엑스레이(파노라마)와 3D CT를 개발·제조하는 덴탈 이미징 전문기업으로, 전 세계 90개국 법인·대리점을 통해 판매하며 글로벌 CT 시장 1위를 지키고 있습니다. 매출은 3D 진단장비(CT)가 62.2%로 가장 크고, 구강 진단장비·센서가 18.7%, 2D 파노라마 장비가 12.9%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,264억원으로 전년 대비 10.7% 늘었고 영업이익도 547억원으로 소폭(1.5%) 증가했습니다. 다만 당기순이익은 390억원으로 29.3% 줄었습니다. 부채비율은 38.5%로 비교적 안정적인 수준입니다.",
     "segment_breakdown": [
       {
-        "name": "3D 진단장비(CT)",
-        "desc": "치과용 3D Digital CT 촬영 제품",
-        "revenue_share": 0.622
+        "name": "3D 진단장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 62.2%",
+        "revenue_share": 0.622,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "구강 내 진단장비·센서",
-        "desc": "구강 내 촬영장비 및 X-ray 센서",
-        "revenue_share": 0.187
+        "name": "구강 내 진단 장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.5%",
+        "revenue_share": 0.105,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "2D 진단장비",
-        "desc": "치과용 2D 파노라마 촬영 제품",
-        "revenue_share": 0.129
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.2%",
+        "revenue_share": 0.082,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -178,32 +184,54 @@
       "Panoramic-Cephalometric 장비",
       "Clever One(영상 뷰어 소프트웨어)"
     ],
-    "investor_note": "바텍은 치과용 디지털 엑스레이(파노라마)와 3D CT를 개발·제조하는 덴탈 이미징 전문기업으로, 전 세계 90개국 법인·대리점을 통해 판매하며 글로벌 CT 시장 1위를 지키고 있습니다. 매출은 3D 진단장비(CT)가 62.2%로 가장 크고, 구강 진단장비·센서가 18.7%, 2D 파노라마 장비가 12.9%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,264억원으로 전년 대비 10.7% 늘었고 영업이익도 547억원으로 소폭(1.5%) 증가했습니다. 다만 당기순이익은 390억원으로 29.3% 줄었습니다. 부채비율은 38.5%로 비교적 안정적인 수준입니다."
+    "investor_note": "바텍은 치과용 디지털 엑스레이(파노라마)와 3D CT를 개발·제조하는 덴탈 이미징 전문기업으로, 전 세계 90개국 법인·대리점을 통해 판매하며 글로벌 CT 시장 1위를 지키고 있습니다. 매출은 3D 진단장비(CT)가 62.2%로 가장 크고, 구강 진단장비·센서가 18.7%, 2D 파노라마 장비가 12.9%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,264억원으로 전년 대비 10.7% 늘었고 영업이익도 547억원으로 소폭(1.5%) 증가했습니다. 다만 당기순이익은 390억원으로 29.3% 줄었습니다. 부채비율은 38.5%로 비교적 안정적인 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.9%",
+        "revenue_share": 0.129,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "3D 진단장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 62.2%",
+        "revenue_share": 0.622,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "구강 내 진단 장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.5%",
+        "revenue_share": 0.105,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.2%",
+        "revenue_share": 0.082,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "3D 진단장비(CT)",
-      "caption": "치과용 3D Digital CT 촬영 제품",
-      "kind": "service",
-      "visual": "3D",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "title": "진단·분석",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 62.2%",
+      "kind": "bio",
+      "visual": "DIAGNOSTIC",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "구강 내 진단장비·센서",
-      "caption": "구강 내 촬영장비 및 X-ray 센서",
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.2%",
       "kind": "service",
-      "visual": "구강",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "2D 진단장비",
-      "caption": "치과용 2D 파노라마 촬영 제품",
-      "kind": "service",
-      "visual": "2D",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

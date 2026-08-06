@@ -155,14 +155,18 @@
     "segment_finance": "현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다.",
     "segment_breakdown": [
       {
-        "name": "사료첨가제부문",
-        "desc": "사료첨가제부문 관련 제품·서비스",
-        "revenue_share": null
+        "name": "배합사료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.6%",
+        "revenue_share": 0.2162,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "배합사료부문",
-        "desc": "배합사료부문 관련 제품·서비스",
-        "revenue_share": null
+        "name": "사료첨가제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 78.4%",
+        "revenue_share": 0.7838,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -177,38 +181,30 @@
       "생산 기술",
       "실리카"
     ],
-    "investor_note": "현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다."
+    "investor_note": "현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다.",
+    "product_service_segments": [
+      {
+        "name": "배합사료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.6%",
+        "revenue_share": 0.2162,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "사료첨가제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 78.4%",
+        "revenue_share": 0.7838,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "배합사료부문",
-      "caption": "곡물 가격과 축산 수요에 영향을 받는 사료·축산 사업입니다.",
+      "title": "사료",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.6%",
       "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_food_feed.svg",
-      "image_source": "Local visual"
-    },
-    {
-      "title": "사료첨가제부문",
-      "caption": "곡물 가격과 축산 수요에 영향을 받는 사료·축산 사업입니다.",
-      "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_food_feed.svg",
-      "image_source": "Local visual"
-    },
-    {
-      "title": "구리",
-      "caption": "구리 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_food_feed.svg",
-      "image_source": "Local visual"
-    },
-    {
-      "title": "아연",
-      "caption": "아연 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "consumer",
-      "visual": "SHOP",
+      "visual": "FEED",
       "image": "../data/business_images/business_image_food_feed.svg",
       "image_source": "Local visual"
     }

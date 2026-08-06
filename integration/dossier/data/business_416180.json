@@ -123,14 +123,18 @@
     "segment_finance": "신성에스티 주식회사의 주요 사업은 IT/자동차부문, 출자증권입니다. 각 팀은 당사 보유기술을 기반으로 기존 및 신규 고객사의 국내외 신규 생산품에 대한 프로젝트 관리, RFQ(견적요청) 대응 및 수주 업무를 담당하고 있습니다. 수주상황 당사는 고객사로부터 최초 수주 시 프로젝트의 단종(EOP, End of Production) 시점까지의 예상 총 생산계획을 접수하여 수주를 관리합니다.",
     "segment_breakdown": [
       {
-        "name": "IT/자동차부문",
-        "desc": "IT, 자동차 관련 제품·서비스",
-        "revenue_share": null
+        "name": "2차전지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 71.0%",
+        "revenue_share": 0.7099,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "출자증권",
-        "desc": "위탁매매, IB, 운용 등 증권 서비스",
-        "revenue_share": null
+        "name": "IT/자동차",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.0%",
+        "revenue_share": 0.2901,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -142,22 +146,38 @@
       "자동차",
       "제품생산"
     ],
-    "investor_note": "신성에스티 주식회사의 주요 사업은 IT/자동차부문, 출자증권입니다. 각 팀은 당사 보유기술을 기반으로 기존 및 신규 고객사의 국내외 신규 생산품에 대한 프로젝트 관리, RFQ(견적요청) 대응 및 수주 업무를 담당하고 있습니다. 수주상황 당사는 고객사로부터 최초 수주 시 프로젝트의 단종(EOP, End of Production) 시점까지의 예상 총 생산계획을 접수하여 수주를 관리합니다."
+    "investor_note": "신성에스티 주식회사의 주요 사업은 IT/자동차부문, 출자증권입니다. 각 팀은 당사 보유기술을 기반으로 기존 및 신규 고객사의 국내외 신규 생산품에 대한 프로젝트 관리, RFQ(견적요청) 대응 및 수주 업무를 담당하고 있습니다. 수주상황 당사는 고객사로부터 최초 수주 시 프로젝트의 단종(EOP, End of Production) 시점까지의 예상 총 생산계획을 접수하여 수주를 관리합니다.",
+    "product_service_segments": [
+      {
+        "name": "2차전지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 71.0%",
+        "revenue_share": 0.7099,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "IT/자동차",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.0%",
+        "revenue_share": 0.2901,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "IT/자동차부문",
-      "caption": "IT, 자동차 관련 제품·서비스",
-      "kind": "auto",
-      "visual": "IT",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "title": "2차전지",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 71.0%",
+      "kind": "battery",
+      "visual": "BATTERY",
+      "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "출자증권",
-      "caption": "위탁매매, IB, 운용 등 증권 서비스",
-      "kind": "securities",
-      "visual": "출자증권",
+      "title": "IT/자동차",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.0%",
+      "kind": "auto",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     }

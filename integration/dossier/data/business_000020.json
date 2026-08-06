@@ -155,19 +155,32 @@
     "segment_finance": "동화약품은 까스활명수·후시딘·판콜 등 대중에게 익숙한 일반의약품과 전문의약품을 만드는 제약회사로, 자회사 메디쎄이를 통해 정형외과용 임플란트도 생산하고 최근에는 베트남에서 의약품 유통체인(TS Care) 사업을 새로 키우고 있습니다. 과거 공시 기반 참고 정보로, 연결 매출액은 4,963억 원으로 전년 대비 6.8% 늘었지만 영업이익은 2억 원으로 전년보다 98.1% 급감했습니다. 반면 당기순이익은 38억 원으로 79.0% 증가했습니다. 부채비율은 60.0%로 무난한 수준입니다.",
     "segment_breakdown": [
       {
-        "name": "제약업",
-        "desc": "일반·전문의약품 제조판매(까스활명수·후시딘 등)",
-        "revenue_share": 0.782
+        "name": "의약품 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.6%",
+        "revenue_share": 0.1664,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "의료기기 제조업",
-        "desc": "정형외과용 임플란트(메디쎄이)",
-        "revenue_share": 0.057
+        "name": "후시딘류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.3%",
+        "revenue_share": 0.0526,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "의약품 유통체인",
-        "desc": "베트남 현지 의약품 유통(TS Care)",
-        "revenue_share": 0.16
+        "name": "판콜류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.7%",
+        "revenue_share": 0.1166,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "잇치류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.4%",
+        "revenue_share": 0.0839,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -179,32 +192,70 @@
       "정형외과용 임플란트(ILIAD, ZENIUS)",
       "의약품 유통체인(베트남 TS Care)"
     ],
-    "investor_note": "동화약품은 까스활명수·후시딘·판콜 등 대중에게 익숙한 일반의약품과 전문의약품을 만드는 제약회사로, 자회사 메디쎄이를 통해 정형외과용 임플란트도 생산하고 최근에는 베트남에서 의약품 유통체인(TS Care) 사업을 새로 키우고 있습니다. 과거 공시 기반 참고 정보로, 연결 매출액은 4,963억 원으로 전년 대비 6.8% 늘었지만 영업이익은 2억 원으로 전년보다 98.1% 급감했습니다. 반면 당기순이익은 38억 원으로 79.0% 증가했습니다. 부채비율은 60.0%로 무난한 수준입니다."
+    "investor_note": "동화약품은 까스활명수·후시딘·판콜 등 대중에게 익숙한 일반의약품과 전문의약품을 만드는 제약회사로, 자회사 메디쎄이를 통해 정형외과용 임플란트도 생산하고 최근에는 베트남에서 의약품 유통체인(TS Care) 사업을 새로 키우고 있습니다. 과거 공시 기반 참고 정보로, 연결 매출액은 4,963억 원으로 전년 대비 6.8% 늘었지만 영업이익은 2억 원으로 전년보다 98.1% 급감했습니다. 반면 당기순이익은 38억 원으로 79.0% 증가했습니다. 부채비율은 60.0%로 무난한 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "의약품 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.6%",
+        "revenue_share": 0.1664,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "후시딘류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.3%",
+        "revenue_share": 0.0526,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "판콜류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.7%",
+        "revenue_share": 0.1166,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "잇치류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.4%",
+        "revenue_share": 0.0839,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "제약업",
-      "caption": "일반·전문의약품 제조판매(까스활명수·후시딘 등)",
+      "title": "의약품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.6%",
       "kind": "bio",
-      "visual": "제약업",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "의료기기 제조업",
-      "caption": "정형외과용 임플란트(메디쎄이)",
+      "title": "후시딘류",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.3%",
       "kind": "service",
-      "visual": "의료기기",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "의약품 유통체인",
-      "caption": "베트남 현지 의약품 유통(TS Care)",
-      "kind": "bio",
-      "visual": "의약품",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "판콜류",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "잇치류",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.4%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

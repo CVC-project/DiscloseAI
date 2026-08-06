@@ -155,19 +155,32 @@
     "segment_finance": "남화토건은 건축·토목 공사를 주력으로 하는 종합건설회사로, 종속회사 남화개발과 함께 관공서·아파트 등 건축공사와 도로·항만 등 토목공사를 도급받아 수행합니다. 매출의 4분의 3 이상이 건축공사에서 나오고 토목과 조경·전기공사가 나머지를 채웁니다. 과거 공시 기반 참고 정보로, 최근 매출액은 726억 원으로 전년 대비 28.3% 늘었고 영업이익은 37억 원으로 흑자 전환했으며, 당기순이익도 110억 원으로 45.5% 증가했습니다. 부채비율은 12.8%로 낮은 편이라 재무구조는 안정적입니다.",
     "segment_breakdown": [
       {
-        "name": "건축",
-        "desc": "관공서·아파트·공장 등 건축 공사 도급",
-        "revenue_share": 0.768
+        "name": "수주",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 76.8%",
+        "revenue_share": 0.7679,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "토목",
-        "desc": "항만·도로·교량 등 일반·농업토목 공사",
-        "revenue_share": 0.168
+        "name": "토 목",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.8%",
+        "revenue_share": 0.1681,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "조경·전기",
-        "desc": "조경시설과 통신·송전 등 전기공사",
-        "revenue_share": 0.064
+        "name": "조경,전기 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.4%",
+        "revenue_share": 0.064,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매 출 총 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -176,32 +189,70 @@
       "조경·전기공사",
       "주택분양"
     ],
-    "investor_note": "남화토건은 건축·토목 공사를 주력으로 하는 종합건설회사로, 종속회사 남화개발과 함께 관공서·아파트 등 건축공사와 도로·항만 등 토목공사를 도급받아 수행합니다. 매출의 4분의 3 이상이 건축공사에서 나오고 토목과 조경·전기공사가 나머지를 채웁니다. 과거 공시 기반 참고 정보로, 최근 매출액은 726억 원으로 전년 대비 28.3% 늘었고 영업이익은 37억 원으로 흑자 전환했으며, 당기순이익도 110억 원으로 45.5% 증가했습니다. 부채비율은 12.8%로 낮은 편이라 재무구조는 안정적입니다."
+    "investor_note": "남화토건은 건축·토목 공사를 주력으로 하는 종합건설회사로, 종속회사 남화개발과 함께 관공서·아파트 등 건축공사와 도로·항만 등 토목공사를 도급받아 수행합니다. 매출의 4분의 3 이상이 건축공사에서 나오고 토목과 조경·전기공사가 나머지를 채웁니다. 과거 공시 기반 참고 정보로, 최근 매출액은 726억 원으로 전년 대비 28.3% 늘었고 영업이익은 37억 원으로 흑자 전환했으며, 당기순이익도 110억 원으로 45.5% 증가했습니다. 부채비율은 12.8%로 낮은 편이라 재무구조는 안정적입니다.",
+    "product_service_segments": [
+      {
+        "name": "수주",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 76.8%",
+        "revenue_share": 0.7679,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "토 목",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.8%",
+        "revenue_share": 0.1681,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "조경,전기 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.4%",
+        "revenue_share": 0.064,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매 출 총 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "건축",
-      "caption": "관공서·아파트·공장 등 건축 공사 도급",
+      "title": "수주",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 76.8%",
       "kind": "service",
-      "visual": "건축",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "토목",
-      "caption": "항만·도로·교량 등 일반·농업토목 공사",
+      "title": "토 목",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.8%",
       "kind": "service",
-      "visual": "토목",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "조경·전기",
-      "caption": "조경시설과 통신·송전 등 전기공사",
-      "kind": "telecom",
-      "visual": "조경",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "title": "조경,전기 등",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.4%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "매 출 총 계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

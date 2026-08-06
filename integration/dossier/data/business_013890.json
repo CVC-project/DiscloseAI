@@ -155,14 +155,18 @@
     "segment_finance": "지누스는 세계 최초로 매트리스를 상자에 압축 포장하는 'Bed-in-a-Box' 방식을 상용화한 회사로, 아마존·월마트 등 대형 유통망을 통해 매트리스와 가구를 판매합니다. 매출의 약 76%가 매트리스에서, 24%가 프레임·가구 등에서 나오며 미국을 중심으로 전 세계에 진출해 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 9,131억 원으로 전년과 비슷한 수준(-0.8%)이었고 영업이익은 254억 원으로 흑자 전환했지만, 당기순이익은 185억 원 적자를 기록했습니다. 부채비율은 65.3%이며, 자기자본이익률(ROE)은 -2.8%로 수익성 개선이 더 필요한 상황입니다.",
     "segment_breakdown": [
       {
-        "name": "Mattress",
-        "desc": "폼·스프링 매트리스 등 침구 제품",
-        "revenue_share": 0.755
+        "name": "Non-Mattress",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.7%",
+        "revenue_share": 0.237,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "Non-Mattress",
-        "desc": "매트리스 프레임·가구·베개 등",
-        "revenue_share": 0.237
+        "name": "매출총계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -176,40 +180,46 @@
       "Furniture",
       "Pillow"
     ],
-    "investor_note": "지누스는 세계 최초로 매트리스를 상자에 압축 포장하는 'Bed-in-a-Box' 방식을 상용화한 회사로, 아마존·월마트 등 대형 유통망을 통해 매트리스와 가구를 판매합니다. 매출의 약 76%가 매트리스에서, 24%가 프레임·가구 등에서 나오며 미국을 중심으로 전 세계에 진출해 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 9,131억 원으로 전년과 비슷한 수준(-0.8%)이었고 영업이익은 254억 원으로 흑자 전환했지만, 당기순이익은 185억 원 적자를 기록했습니다. 부채비율은 65.3%이며, 자기자본이익률(ROE)은 -2.8%로 수익성 개선이 더 필요한 상황입니다."
+    "investor_note": "지누스는 세계 최초로 매트리스를 상자에 압축 포장하는 'Bed-in-a-Box' 방식을 상용화한 회사로, 아마존·월마트 등 대형 유통망을 통해 매트리스와 가구를 판매합니다. 매출의 약 76%가 매트리스에서, 24%가 프레임·가구 등에서 나오며 미국을 중심으로 전 세계에 진출해 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 9,131억 원으로 전년과 비슷한 수준(-0.8%)이었고 영업이익은 254억 원으로 흑자 전환했지만, 당기순이익은 185억 원 적자를 기록했습니다. 부채비율은 65.3%이며, 자기자본이익률(ROE)은 -2.8%로 수익성 개선이 더 필요한 상황입니다.",
+    "product_service_segments": [
+      {
+        "name": "제품 (주1)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 75.5%",
+        "revenue_share": 0.755,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Non-Mattress",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.7%",
+        "revenue_share": 0.237,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품 및 기타매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.008,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매출총계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "Mattress",
-      "caption": "폼·스프링 매트리스 등 침구 제품",
-      "kind": "service",
-      "visual": "Mattress",
-      "image": "../data/business_images/business_image_local_fashion.svg",
-      "image_source": "Local curated visual"
-    },
-    {
       "title": "Non-Mattress",
-      "caption": "매트리스 프레임·가구·베개 등",
-      "kind": "service",
-      "visual": "Non-Mattre",
-      "image": "../data/business_images/business_image_local_default_b.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "FoamMattress",
-      "caption": "FoamMattress 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.7%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "SpringMattress",
-      "caption": "SpringMattress 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -153,7 +153,22 @@
   "snippets": {
     "overview": "제이씨현시스템은 그래픽카드·메인보드·모니터 등 PC부품과 드론, VR기기를 유통하고 IT기기 리스·렌탈 사업도 하는 IT유통 기업입니다. 매출의 92%는 본사의 컴퓨터기기·드론·VR 판매에서, 나머지 8%는 종속회사 엘림넷의 네트워크 보안과 온라인 화상회의 솔루션(나우앤나우) 서비스에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,138억 원으로 전년 대비 18.9% 늘었고 영업이익은 77억 원으로 111.4%, 당기순이익은 93억 원으로 348.1% 큰 폭으로 증가했습니다. 총자산은 1,626억 원으로 소폭 늘었고, 부채비율은 34.5%로 재무구조가 비교적 안정적인 편입니다.",
     "segment_finance": "제이씨현시스템은 그래픽카드·메인보드·모니터 등 PC부품과 드론, VR기기를 유통하고 IT기기 리스·렌탈 사업도 하는 IT유통 기업입니다. 매출의 92%는 본사의 컴퓨터기기·드론·VR 판매에서, 나머지 8%는 종속회사 엘림넷의 네트워크 보안과 온라인 화상회의 솔루션(나우앤나우) 서비스에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,138억 원으로 전년 대비 18.9% 늘었고 영업이익은 77억 원으로 111.4%, 당기순이익은 93억 원으로 348.1% 큰 폭으로 증가했습니다. 총자산은 1,626억 원으로 소폭 늘었고, 부채비율은 34.5%로 재무구조가 비교적 안정적인 편입니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "모니터",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.0%",
+        "revenue_share": 0.0604,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "통합배선솔루션",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
+        "revenue_share": 0.0161,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "그래픽카드",
       "메인보드",
@@ -166,24 +181,70 @@
       "온라인 화상회의(나우앤나우)",
       "ISP·IDC·정보보안 서비스"
     ],
-    "investor_note": "제이씨현시스템은 그래픽카드·메인보드·모니터 등 PC부품과 드론, VR기기를 유통하고 IT기기 리스·렌탈 사업도 하는 IT유통 기업입니다. 매출의 92%는 본사의 컴퓨터기기·드론·VR 판매에서, 나머지 8%는 종속회사 엘림넷의 네트워크 보안과 온라인 화상회의 솔루션(나우앤나우) 서비스에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,138억 원으로 전년 대비 18.9% 늘었고 영업이익은 77억 원으로 111.4%, 당기순이익은 93억 원으로 348.1% 큰 폭으로 증가했습니다. 총자산은 1,626억 원으로 소폭 늘었고, 부채비율은 34.5%로 재무구조가 비교적 안정적인 편입니다."
+    "investor_note": "제이씨현시스템은 그래픽카드·메인보드·모니터 등 PC부품과 드론, VR기기를 유통하고 IT기기 리스·렌탈 사업도 하는 IT유통 기업입니다. 매출의 92%는 본사의 컴퓨터기기·드론·VR 판매에서, 나머지 8%는 종속회사 엘림넷의 네트워크 보안과 온라인 화상회의 솔루션(나우앤나우) 서비스에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,138억 원으로 전년 대비 18.9% 늘었고 영업이익은 77억 원으로 111.4%, 당기순이익은 93억 원으로 348.1% 큰 폭으로 증가했습니다. 총자산은 1,626억 원으로 소폭 늘었고, 부채비율은 34.5%로 재무구조가 비교적 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "IT제품판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 54.7%",
+        "revenue_share": 0.5467,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "모니터",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.0%",
+        "revenue_share": 0.0604,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "통합배선솔루션",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
+        "revenue_share": 0.0161,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "인터넷서비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.1%",
+        "revenue_share": 0.0413,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "IT제품 판매(컴퓨터·드론·VR)",
-      "caption": "PC부품·드론·VR기기 유통 및 IT기기 리스·렌탈",
-      "kind": "auto",
-      "visual": "IT제품",
-      "image": "../data/business_images/business_image_local_cement.svg",
-      "image_source": "Local curated visual"
+      "title": "IT제품판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 54.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "인터넷 보안 서비스(㈜엘림넷)",
-      "caption": "네트워크·정보보안, 온라인 화상회의 솔루션 제공",
-      "kind": "telecom",
-      "visual": "인터넷",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "title": "모니터",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_141eab6519656e30.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "소프트웨어·솔루션",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
+      "kind": "service",
+      "visual": "SOFTWARE",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "인터넷서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.1%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -137,7 +137,36 @@
   "snippets": {
     "overview": "이에 따라, 본 보고서에 수주 계약 현황을 기재해야 하나, 고객사의 영업 기밀 보호 및 시장 경쟁력 유지를 위해 해당 내용의 공개를 생략합니다. 당사의 판매 조직은 고객사 발굴, 기술 문의 대응, 수주 협상 및 계약 체결까지의 영업 전 과정을 담당하고 있습니다.",
     "segment_finance": "이에 따라, 본 보고서에 수주 계약 현황을 기재해야 하나, 고객사의 영업 기밀 보호 및 시장 경쟁력 유지를 위해 해당 내용의 공개를 생략합니다. 당사의 판매 조직은 고객사 발굴, 기술 문의 대응, 수주 협상 및 계약 체결까지의 영업 전 과정을 담당하고 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "라이선스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 67.6%",
+        "revenue_share": 0.6761,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "유지/보수",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.1%",
+        "revenue_share": 0.2614,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "로열티",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.6%",
+        "revenue_share": 0.0064,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매 출 총 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "DRAM",
       "HBM",
@@ -152,32 +181,62 @@
       "모바일",
       "PC 시장 의존"
     ],
-    "investor_note": "이에 따라, 본 보고서에 수주 계약 현황을 기재해야 하나, 고객사의 영업 기밀 보호 및 시장 경쟁력 유지를 위해 해당 내용의 공개를 생략합니다. 당사의 판매 조직은 고객사 발굴, 기술 문의 대응, 수주 협상 및 계약 체결까지의 영업 전 과정을 담당하고 있습니다."
+    "investor_note": "이에 따라, 본 보고서에 수주 계약 현황을 기재해야 하나, 고객사의 영업 기밀 보호 및 시장 경쟁력 유지를 위해 해당 내용의 공개를 생략합니다. 당사의 판매 조직은 고객사 발굴, 기술 문의 대응, 수주 협상 및 계약 체결까지의 영업 전 과정을 담당하고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "라이선스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 67.6%",
+        "revenue_share": 0.6761,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "유지/보수",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.1%",
+        "revenue_share": 0.2614,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "로열티",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.6%",
+        "revenue_share": 0.0064,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매 출 총 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "데이터센터 인프라",
-      "caption": "서버와 네트워크 장비가 안정적으로 돌아가도록 데이터센터 기반을 구축·운영합니다.",
+      "title": "라이선스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 67.6%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_datacenter.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "IT 인프라 운영",
-      "caption": "서버, 네트워크, 보안 장비 같은 기업 IT 기반을 운영·관리하는 서비스입니다.",
+      "title": "유지/보수",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.1%",
+      "kind": "consumer",
+      "visual": "INGREDIENT",
+      "image": "../data/business_images/business_image_food_ingredient.svg",
+      "image_source": "Local visual"
+    },
+    {
+      "title": "매 출 총 계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "DRAM",
-      "caption": "데이터 저장과 AI 서버 수요에 연결되는 메모리 제품입니다.",
-      "kind": "chip",
-      "visual": "CHIP",
-      "image": "../data/business_images/business_image_10774ca82ea41202.jpg",
-      "image_source": "Wikimedia Commons"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

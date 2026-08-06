@@ -137,7 +137,22 @@
   "snippets": {
     "overview": "엔젯(주)의 주요 제품·서비스는 OLED, 제품 매출, 규격, 사양, ELB모듈, 매출처입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사의 연구개발 수행 결과는 고객사의 리페어 공정에 적용될 수 있도록 상용화를 목적으로 특화되어 개발되고 있으며 향후에는 더욱 제품 경쟁력이 강화될 수 있을 것으로 기대하고 있습니다. 당사의 제품은 대부분 경쟁제품이 없는 초기시장의 제품으로 기존 기술로 접근이 어려운 기능을 제공하며 고해상도, 고점도, 초박막코팅등의 기능을 제공하기 때문에 기존 기술과의 경쟁적 위치에 있지 않습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "엔젯(주)의 주요 제품·서비스는 OLED, 제품 매출, 규격, 사양, ELB모듈, 매출처입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사의 연구개발 수행 결과는 고객사의 리페어 공정에 적용될 수 있도록 상용화를 목적으로 특화되어 개발되고 있으며 향후에는 더욱 제품 경쟁력이 강화될 수 있을 것으로 기대하고 있습니다. 당사의 제품은 대부분 경쟁제품이 없는 초기시장의 제품으로 기존 기술로 접근이 어려운 기능을 제공하며 고해상도, 고점도, 초박막코팅등의 기능을 제공하기 때문에 기존 기술과의 경쟁적 위치에 있지 않습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "EHD 코팅 솔루션",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.8%",
+        "revenue_share": 0.1778,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매 출 총 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "OLED",
       "규격",
@@ -151,40 +166,54 @@
       "연구기간",
       "정부출연금"
     ],
-    "investor_note": "엔젯(주)의 주요 제품·서비스는 OLED, 제품 매출, 규격, 사양, ELB모듈, 매출처입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사의 연구개발 수행 결과는 고객사의 리페어 공정에 적용될 수 있도록 상용화를 목적으로 특화되어 개발되고 있으며 향후에는 더욱 제품 경쟁력이 강화될 수 있을 것으로 기대하고 있습니다. 당사의 제품은 대부분 경쟁제품이 없는 초기시장의 제품으로 기존 기술로 접근이 어려운 기능을 제공하며 고해상도, 고점도, 초박막코팅등의 기능을 제공하기 때문에 기존 기술과의 경쟁적 위치에 있지 않습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "엔젯(주)의 주요 제품·서비스는 OLED, 제품 매출, 규격, 사양, ELB모듈, 매출처입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사의 연구개발 수행 결과는 고객사의 리페어 공정에 적용될 수 있도록 상용화를 목적으로 특화되어 개발되고 있으며 향후에는 더욱 제품 경쟁력이 강화될 수 있을 것으로 기대하고 있습니다. 당사의 제품은 대부분 경쟁제품이 없는 초기시장의 제품으로 기존 기술로 접근이 어려운 기능을 제공하며 고해상도, 고점도, 초박막코팅등의 기능을 제공하기 때문에 기존 기술과의 경쟁적 위치에 있지 않습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "제품 매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 61.5%",
+        "revenue_share": 0.6147,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "EHD 코팅 솔루션",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.8%",
+        "revenue_share": 0.1778,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.7%",
+        "revenue_share": 0.2074,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매 출 총 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
-      "kind": "display",
-      "visual": "OLED",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
-      "image_source": "Wikimedia Commons"
+      "title": "소프트웨어·솔루션",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.8%",
+      "kind": "service",
+      "visual": "SOFTWARE",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "규격",
-      "caption": "규격 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "매 출 총 계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "사양",
-      "caption": "사양 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "ELB모듈",
-      "caption": "ELB모듈 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

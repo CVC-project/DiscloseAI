@@ -153,7 +153,15 @@
   "snippets": {
     "overview": "삼천리자전거는 전기자전거·MTB 등 자전거 제조·판매(매출의 약 48%)와 패키지 여행상품 판매(약 53%)를 함께 운영하는 회사입니다. PHANTOM, CELLO 등 자체 브랜드로 국내 대리점·대형마트 유통망을 폭넓게 갖추고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,755억 원으로 전년 대비 8.9% 늘었고 영업이익은 124억 원, 순이익은 115억 원으로 모두 큰 폭으로 증가했습니다. 다만 감사보고서에는 강조사항으로 회장이 배임 혐의로 기소되어 주식 거래가 정지되고 상장적격성 심사를 받고 있다는 내용이 담겨 있어 유의가 필요합니다.",
     "segment_finance": "삼천리자전거는 전기자전거·MTB 등 자전거 제조·판매(매출의 약 48%)와 패키지 여행상품 판매(약 53%)를 함께 운영하는 회사입니다. PHANTOM, CELLO 등 자체 브랜드로 국내 대리점·대형마트 유통망을 폭넓게 갖추고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,755억 원으로 전년 대비 8.9% 늘었고 영업이익은 124억 원, 순이익은 115억 원으로 모두 큰 폭으로 증가했습니다. 다만 감사보고서에는 강조사항으로 회장이 배임 혐의로 기소되어 주식 거래가 정지되고 상장적격성 심사를 받고 있다는 내용이 담겨 있어 유의가 필요합니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "자전거",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 47.5%",
+        "revenue_share": 0.475,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "전기자전거",
       "MTB자전거",
@@ -166,24 +174,40 @@
       "CELLO",
       "LESPO"
     ],
-    "investor_note": "삼천리자전거는 전기자전거·MTB 등 자전거 제조·판매(매출의 약 48%)와 패키지 여행상품 판매(약 53%)를 함께 운영하는 회사입니다. PHANTOM, CELLO 등 자체 브랜드로 국내 대리점·대형마트 유통망을 폭넓게 갖추고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,755억 원으로 전년 대비 8.9% 늘었고 영업이익은 124억 원, 순이익은 115억 원으로 모두 큰 폭으로 증가했습니다. 다만 감사보고서에는 강조사항으로 회장이 배임 혐의로 기소되어 주식 거래가 정지되고 상장적격성 심사를 받고 있다는 내용이 담겨 있어 유의가 필요합니다."
+    "investor_note": "삼천리자전거는 전기자전거·MTB 등 자전거 제조·판매(매출의 약 48%)와 패키지 여행상품 판매(약 53%)를 함께 운영하는 회사입니다. PHANTOM, CELLO 등 자체 브랜드로 국내 대리점·대형마트 유통망을 폭넓게 갖추고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,755억 원으로 전년 대비 8.9% 늘었고 영업이익은 124억 원, 순이익은 115억 원으로 모두 큰 폭으로 증가했습니다. 다만 감사보고서에는 강조사항으로 회장이 배임 혐의로 기소되어 주식 거래가 정지되고 상장적격성 심사를 받고 있다는 내용이 담겨 있어 유의가 필요합니다.",
+    "product_service_segments": [
+      {
+        "name": "자전거",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 47.5%",
+        "revenue_share": 0.475,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "여행서비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 52.5%",
+        "revenue_share": 0.525,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "자전거사업부문",
-      "caption": "전기자전거·MTB 등 자전거 제조·판매",
+      "title": "자전거",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 47.5%",
       "kind": "service",
-      "visual": "자전거사업부문",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "여행사업부문",
-      "caption": "패키지·여행 상품 판매",
+      "title": "여행서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 52.5%",
       "kind": "service",
-      "visual": "여행사업부문",
-      "image": "../data/business_images/business_image_local_packaging.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

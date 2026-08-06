@@ -155,19 +155,32 @@
     "segment_finance": "이 외에 관이음쇠인 Flange, 발전소·선박용 철구조물을 만드는 산업기계 사업도 소규모로 운영하고 있고, 미국·멕시코·중국 해외법인을 통해 현지 완성차 업체에도 공급하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 6,993억 원으로 전년 대비 8.4% 늘었지만 영업이익은 253억 원으로 42.0%, 당기순이익은 202억 원으로 57.3% 줄어 매출 성장에도 수익성은 크게 둔화됐습니다. 부채비율은 132.9%로 재무 부담을 유의해서 볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "자동차부품",
-        "desc": "현대차·기아向 H/Shaft·Axle 등 동력전달·제동 부품",
-        "revenue_share": 0.992
+        "name": "차부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.5%",
+        "revenue_share": 0.195,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "프랜지",
-        "desc": "플랜트·조선용 관이음쇠(Flange)",
-        "revenue_share": 0.001
+        "name": "상용(AXLE BEAM등)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.008,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "산업기계",
-        "desc": "발전소·선박용 철구조물 및 엔진부품",
-        "revenue_share": 0.007
+        "name": "승용(F/AXLE ASS'Y)외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.5%",
+        "revenue_share": 0.335,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "북경서한, SEOHAN AUTO USA, SEOHAN AUTO MEXICO, 오토메탈글로벌㈜, SEOHAN AUTO GEORGIA, 디코어㈜",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.0%",
+        "revenue_share": 0.35,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -176,22 +189,52 @@
       "Flange(관이음쇠)",
       "엔진제관(선박용 철구조물)"
     ],
-    "investor_note": "이 외에 관이음쇠인 Flange, 발전소·선박용 철구조물을 만드는 산업기계 사업도 소규모로 운영하고 있고, 미국·멕시코·중국 해외법인을 통해 현지 완성차 업체에도 공급하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 6,993억 원으로 전년 대비 8.4% 늘었지만 영업이익은 253억 원으로 42.0%, 당기순이익은 202억 원으로 57.3% 줄어 매출 성장에도 수익성은 크게 둔화됐습니다. 부채비율은 132.9%로 재무 부담을 유의해서 볼 필요가 있습니다."
+    "investor_note": "이 외에 관이음쇠인 Flange, 발전소·선박용 철구조물을 만드는 산업기계 사업도 소규모로 운영하고 있고, 미국·멕시코·중국 해외법인을 통해 현지 완성차 업체에도 공급하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 6,993억 원으로 전년 대비 8.4% 늘었지만 영업이익은 253억 원으로 42.0%, 당기순이익은 202억 원으로 57.3% 줄어 매출 성장에도 수익성은 크게 둔화됐습니다. 부채비율은 132.9%로 재무 부담을 유의해서 볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "차부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.5%",
+        "revenue_share": 0.195,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상용(AXLE BEAM등)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.008,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "승용(F/AXLE ASS'Y)외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.5%",
+        "revenue_share": 0.335,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "북경서한, SEOHAN AUTO USA, SEOHAN AUTO MEXICO, 오토메탈글로벌㈜, SEOHAN AUTO GEORGIA, 디코어㈜",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.0%",
+        "revenue_share": 0.35,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "프랜지",
-      "caption": "플랜트·조선용 관이음쇠(Flange)",
-      "kind": "ship",
-      "visual": "프랜지",
+      "title": "차부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.5%",
+      "kind": "auto",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "산업기계",
-      "caption": "발전소·선박용 철구조물 및 엔진부품",
+      "title": "승용(F/AXLE ASS'Y)외",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.5%",
       "kind": "auto",
-      "visual": "산업기계",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     }

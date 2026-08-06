@@ -121,7 +121,29 @@
   "snippets": {
     "overview": "㈜그린리소스의 주요 사업은 화학물질, 목적사업입니다. 서로 경쟁 관계에 있거나, 고객 친화점인 대리점을 통해 진입할 경우 시장진입에 성공 확률이 크기 때문입니다. 초전도선재 장비제작의 경우에도, 주문생산 방식으로 각 장비별 개별계약을 하며, 장비가격은 고객사에게 제안하여 진행합니다.",
     "segment_finance": "㈜그린리소스의 주요 사업은 화학물질, 목적사업입니다. 서로 경쟁 관계에 있거나, 고객 친화점인 대리점을 통해 진입할 경우 시장진입에 성공 확률이 크기 때문입니다. 초전도선재 장비제작의 경우에도, 주문생산 방식으로 각 장비별 개별계약을 하며, 장비가격은 고객사에게 제안하여 진행합니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "초고밀도 특수코팅",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
+        "revenue_share": 0.0503,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "초전도선재 장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.4%",
+        "revenue_share": 0.0136,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "정밀세정 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.2%",
+        "revenue_share": 0.0317,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "DRAM",
       "NAND",
@@ -135,40 +157,62 @@
       "1년",
       "시제품제작"
     ],
-    "investor_note": "㈜그린리소스의 주요 사업은 화학물질, 목적사업입니다. 서로 경쟁 관계에 있거나, 고객 친화점인 대리점을 통해 진입할 경우 시장진입에 성공 확률이 크기 때문입니다. 초전도선재 장비제작의 경우에도, 주문생산 방식으로 각 장비별 개별계약을 하며, 장비가격은 고객사에게 제안하여 진행합니다."
+    "investor_note": "㈜그린리소스의 주요 사업은 화학물질, 목적사업입니다. 서로 경쟁 관계에 있거나, 고객 친화점인 대리점을 통해 진입할 경우 시장진입에 성공 확률이 크기 때문입니다. 초전도선재 장비제작의 경우에도, 주문생산 방식으로 각 장비별 개별계약을 하며, 장비가격은 고객사에게 제안하여 진행합니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.9%",
+        "revenue_share": 0.0591,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "초고밀도 특수코팅",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
+        "revenue_share": 0.0503,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "초전도선재 장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.4%",
+        "revenue_share": 0.0136,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "정밀세정 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.2%",
+        "revenue_share": 0.0317,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "DRAM",
-      "caption": "데이터 저장과 AI 서버 수요에 연결되는 메모리 제품입니다.",
+      "title": "초고밀도 특수코팅",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
       "kind": "chip",
       "visual": "CHIP",
-      "image": "../data/business_images/business_image_10774ca82ea41202.jpg",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "NAND",
-      "caption": "데이터 저장과 AI 서버 수요에 연결되는 메모리 제품입니다.",
-      "kind": "chip",
-      "visual": "CHIP",
-      "image": "../data/business_images/business_image_10774ca82ea41202.jpg",
+      "title": "철강",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.4%",
+      "kind": "material",
+      "visual": "STEEL",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
+      "title": "정밀세정 외",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.2%",
       "kind": "chip",
       "visual": "CHIP",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
       "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "용사코팅",
-      "caption": "용사코팅 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "chip",
-      "visual": "CHIP",
-      "image": "../data/business_images/business_image_local_semiconductor_part.svg",
-      "image_source": "Local curated visual"
     }
   ],
   "custom_report_ideas": [

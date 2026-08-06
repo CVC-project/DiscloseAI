@@ -121,39 +121,62 @@
   "snippets": {
     "overview": "지에이이노더스(주)의 주요 사업은 토목사업, 국토개발사업, 토공사업, 개발사업 등입니다. 주로 관급공사 위주로 수주, 원 도급공사가 대부분이며, 2025년엔 매출액 523억원, 영업이익 10억원, 당기순이익은 12억원을 기록하였습니다. 특히 현재 추진 중인 전남권 및 동남권 해상풍력 프로젝트를 대상으로 EPC사 및 시공사와의 협력 네트워크를 확대하며 수주 기회를 적극 모색하고 있습니다.",
     "segment_finance": "지에이이노더스(주)의 주요 사업은 토목사업, 국토개발사업, 토공사업, 개발사업 등입니다. 주로 관급공사 위주로 수주, 원 도급공사가 대부분이며, 2025년엔 매출액 523억원, 영업이익 10억원, 당기순이익은 12억원을 기록하였습니다. 특히 현재 추진 중인 전남권 및 동남권 해상풍력 프로젝트를 대상으로 EPC사 및 시공사와의 협력 네트워크를 확대하며 수주 기회를 적극 모색하고 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "토목공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 87.8%",
+        "revenue_share": 0.878,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "장비임대",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.2%",
+        "revenue_share": 0.122,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "배터리",
       "LNG",
       "원유",
       "철강"
     ],
-    "investor_note": "지에이이노더스(주)의 주요 사업은 토목사업, 국토개발사업, 토공사업, 개발사업 등입니다. 주로 관급공사 위주로 수주, 원 도급공사가 대부분이며, 2025년엔 매출액 523억원, 영업이익 10억원, 당기순이익은 12억원을 기록하였습니다. 특히 현재 추진 중인 전남권 및 동남권 해상풍력 프로젝트를 대상으로 EPC사 및 시공사와의 협력 네트워크를 확대하며 수주 기회를 적극 모색하고 있습니다."
+    "investor_note": "지에이이노더스(주)의 주요 사업은 토목사업, 국토개발사업, 토공사업, 개발사업 등입니다. 주로 관급공사 위주로 수주, 원 도급공사가 대부분이며, 2025년엔 매출액 523억원, 영업이익 10억원, 당기순이익은 12억원을 기록하였습니다. 특히 현재 추진 중인 전남권 및 동남권 해상풍력 프로젝트를 대상으로 EPC사 및 시공사와의 협력 네트워크를 확대하며 수주 기회를 적극 모색하고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "토목공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 87.8%",
+        "revenue_share": 0.878,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "장비임대",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.2%",
+        "revenue_share": 0.122,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "배터리",
-      "caption": "배터리 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "title": "토목·플랜트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 87.8%",
+      "kind": "service",
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_5184e050831a4460.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "원유",
-      "caption": "원유 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "장비임대",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.2%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "철강",
-      "caption": "철강 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

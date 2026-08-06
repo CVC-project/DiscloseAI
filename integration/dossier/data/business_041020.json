@@ -153,33 +153,7 @@
   "snippets": {
     "overview": "폴라리스오피스는 문서 소프트웨어 회사에서 출발했지만, 현재는 자동차 공조부품, 합성사·화학, 패션 유통, AI융합, 원료의약품까지 함께 보유한 다각화 기업입니다. 핵심 소프트웨어인 폴라리스 오피스는 클라우드 협업과 AI 기능을 붙여 B2C·B2B 수익을 키우려 하고, 계열회사 편입으로 매출 외형은 커졌습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,242억 원으로 전년보다 17.4% 늘었고 영업이익은 91억 원으로 증가했습니다. 다만 사업 포트폴리오가 넓어졌기 때문에 소프트웨어 본업 성장과 인수한 계열사의 수익성을 나눠 봐야 합니다.",
     "segment_finance": "폴라리스오피스는 문서 소프트웨어 회사에서 출발했지만, 현재는 자동차 공조부품, 합성사·화학, 패션 유통, AI융합, 원료의약품까지 함께 보유한 다각화 기업입니다. 핵심 소프트웨어인 폴라리스 오피스는 클라우드 협업과 AI 기능을 붙여 B2C·B2B 수익을 키우려 하고, 계열회사 편입으로 매출 외형은 커졌습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,242억 원으로 전년보다 17.4% 늘었고 영업이익은 91억 원으로 증가했습니다. 다만 사업 포트폴리오가 넓어졌기 때문에 소프트웨어 본업 성장과 인수한 계열사의 수익성을 나눠 봐야 합니다.",
-    "segment_breakdown": [
-      {
-        "name": "소프트웨어 플랫폼",
-        "desc": "문서 작성·협업·AI 오피스와 기업용 오피스 SDK",
-        "revenue_share": 0.112
-      },
-      {
-        "name": "자동차 공조부품",
-        "desc": "Header Condenser, Radiator Cap, Evaporator, Pipe 등 자동차 열관리 부품",
-        "revenue_share": 0.36
-      },
-      {
-        "name": "합성사·화학",
-        "desc": "가발용 원사, 안경렌즈용 모노머, 가발용 본드 등 소재 사업",
-        "revenue_share": 0.313
-      },
-      {
-        "name": "F&C·AI융합",
-        "desc": "키플링·이스트팩 브랜드 유통과 IT/SI·AI 융합 사업",
-        "revenue_share": 0.15
-      },
-      {
-        "name": "API·CDMO",
-        "desc": "원료의약품과 의약품 위탁개발·생산 사업",
-        "revenue_share": 0.065
-      }
-    ],
+    "segment_breakdown": [],
     "products": [
       "Polaris Office 클라우드",
       "Polaris Office PC",
@@ -193,40 +167,70 @@
       "캐주얼 브랜드 키플링·이스트팩",
       "원료의약품 API·CDMO"
     ],
-    "investor_note": "폴라리스오피스는 문서 소프트웨어 회사에서 출발했지만, 현재는 자동차 공조부품, 합성사·화학, 패션 유통, AI융합, 원료의약품까지 함께 보유한 다각화 기업입니다. 핵심 소프트웨어인 폴라리스 오피스는 클라우드 협업과 AI 기능을 붙여 B2C·B2B 수익을 키우려 하고, 계열회사 편입으로 매출 외형은 커졌습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,242억 원으로 전년보다 17.4% 늘었고 영업이익은 91억 원으로 증가했습니다. 다만 사업 포트폴리오가 넓어졌기 때문에 소프트웨어 본업 성장과 인수한 계열사의 수익성을 나눠 봐야 합니다."
+    "investor_note": "폴라리스오피스는 문서 소프트웨어 회사에서 출발했지만, 현재는 자동차 공조부품, 합성사·화학, 패션 유통, AI융합, 원료의약품까지 함께 보유한 다각화 기업입니다. 핵심 소프트웨어인 폴라리스 오피스는 클라우드 협업과 AI 기능을 붙여 B2C·B2B 수익을 키우려 하고, 계열회사 편입으로 매출 외형은 커졌습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,242억 원으로 전년보다 17.4% 늘었고 영업이익은 91억 원으로 증가했습니다. 다만 사업 포트폴리오가 넓어졌기 때문에 소프트웨어 본업 성장과 인수한 계열사의 수익성을 나눠 봐야 합니다.",
+    "product_service_segments": [
+      {
+        "name": "소프트웨어 플랫폼 사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.2%",
+        "revenue_share": 0.112,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동차 공조부품 사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.9%",
+        "revenue_share": 0.269,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "합성사 및 화학 사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.4%",
+        "revenue_share": 0.314,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "F&C 및AI융합사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.4%",
+        "revenue_share": 0.134,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "소프트웨어 플랫폼",
-      "caption": "문서 작성·협업·AI 오피스와 기업용 오피스 SDK",
-      "kind": "platform",
-      "visual": "AI",
-      "image": "../data/business_images/business_image_local_ai.svg",
-      "image_source": "Local curated visual"
+      "title": "소프트웨어·솔루션",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.2%",
+      "kind": "service",
+      "visual": "SOFTWARE",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "자동차 공조부품",
-      "caption": "Header Condenser, Radiator Cap, Evaporator, Pipe 등 자동차 열관리 부품",
+      "title": "자동차 공조부품 사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.9%",
       "kind": "auto",
-      "visual": "EV",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "합성사·화학",
-      "caption": "가발용 원사, 안경렌즈용 모노머, 가발용 본드 등 소재 사업",
+      "title": "합성사 및 화학 사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.4%",
       "kind": "material",
-      "visual": "합성사",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "F&C·AI융합",
-      "caption": "키플링·이스트팩 브랜드 유통과 IT/SI·AI 융합 사업",
+      "title": "F&C 및AI융합사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.4%",
       "kind": "service",
-      "visual": "AI",
-      "image": "../data/business_images/business_image_local_ai.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

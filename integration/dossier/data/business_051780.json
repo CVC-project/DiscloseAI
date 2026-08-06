@@ -156,18 +156,31 @@
     "segment_breakdown": [
       {
         "name": "커피",
-        "desc": "이탈리아 일리카페 커피·커피머신 유통",
-        "revenue_share": 0.9202
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 92.0%",
+        "revenue_share": 0.9202,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "엔터테인먼트",
-        "desc": "드라마 제작, 보조출연자 공급 에이전시",
-        "revenue_share": 0.0253
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.5%",
+        "revenue_share": 0.0253,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "자원개발",
-        "desc": "미국 텍사스·루이지애나 유가스전 개발",
-        "revenue_share": 0.0545
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.5%",
+        "revenue_share": 0.0545,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "커피유통",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.6%",
+        "revenue_share": 0.9961,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -177,32 +190,70 @@
       "보조출연자 공급 에이전시",
       "해외 유가스전 Oil·Gas 생산"
     ],
-    "investor_note": "큐로홀딩스는 이탈리아 일리카페 커피·커피머신을 유통하는 커피 사업을 중심으로, 드라마 제작과 보조출연자 공급을 담당하는 엔터테인먼트 사업, 미국 텍사스·루이지애나 유가스전에서 원유·가스를 생산하는 자원개발 사업까지 함께 운영하는 지주회사입니다. 매출의 대부분(92%)은 커피 사업에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 566억 원으로 전년보다 7.3% 줄었고 영업손실 폭은 줄었지만 당기순손실 91억 원을 기록했습니다. 특히 감사인은 순손실 누적과 유동부채가 유동자산을 7,665백만원 초과하는 상황을 근거로 계속기업(회사가 앞으로도 정상적으로 운영될 수 있는지)으로서의 존속능력에 유의적 불확실성이 있다고 지적했으며, 부채비율도 340.6%로 매우 높아 재무 상태를 신중히 살펴볼 필요가 있습니다."
+    "investor_note": "큐로홀딩스는 이탈리아 일리카페 커피·커피머신을 유통하는 커피 사업을 중심으로, 드라마 제작과 보조출연자 공급을 담당하는 엔터테인먼트 사업, 미국 텍사스·루이지애나 유가스전에서 원유·가스를 생산하는 자원개발 사업까지 함께 운영하는 지주회사입니다. 매출의 대부분(92%)은 커피 사업에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 566억 원으로 전년보다 7.3% 줄었고 영업손실 폭은 줄었지만 당기순손실 91억 원을 기록했습니다. 특히 감사인은 순손실 누적과 유동부채가 유동자산을 7,665백만원 초과하는 상황을 근거로 계속기업(회사가 앞으로도 정상적으로 운영될 수 있는지)으로서의 존속능력에 유의적 불확실성이 있다고 지적했으며, 부채비율도 340.6%로 매우 높아 재무 상태를 신중히 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "커피",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 92.0%",
+        "revenue_share": 0.9202,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "엔터테인먼트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.5%",
+        "revenue_share": 0.0253,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자원개발",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.5%",
+        "revenue_share": 0.0545,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "커피유통",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.6%",
+        "revenue_share": 0.9961,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "커피",
-      "caption": "이탈리아 일리카페 커피·커피머신 유통",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 92.0%",
       "kind": "service",
-      "visual": "커피",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "엔터테인먼트",
-      "caption": "드라마 제작, 보조출연자 공급 에이전시",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.5%",
       "kind": "service",
-      "visual": "엔터테인먼트",
-      "image": "../data/business_images/business_image_local_content.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "자원개발",
-      "caption": "미국 텍사스·루이지애나 유가스전 개발",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.5%",
       "kind": "service",
-      "visual": "자원개발",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "커피유통",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

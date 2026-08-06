@@ -155,9 +155,11 @@
     "segment_finance": "DKME(디케이엠이)는 석유화학 플랜트에 쓰이는 열교환기·압력용기·TOWER를 100% 수주 방식으로 만드는 화공기기 제조사입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,334억 원으로 전년과 비슷했고 영업이익은 100억 원을 유지했지만, 당기순이익은 28억 원 적자로 전환됐습니다. 특히 2024년 말 전 경영진의 배임·횡령 혐의 공시로 상장적격성 실질심사 대상이 되어 주식 매매거래가 정지되었고, 이후 상장폐지 결정에 이의신청을 내 2026년 3월까지 개선기간을 받은 상태입니다. 부채비율은 49.9%로 낮은 편이지만, 거래정지와 상장폐지 심사라는 중대한 리스크가 진행 중이니 각별히 주의가 필요합니다.",
     "segment_breakdown": [
       {
-        "name": "화공기기부문",
-        "desc": "석유화학 플랜트용 열교환기·압력용기·TOWER 제조(100% 수주생산)",
-        "revenue_share": 1
+        "name": "화공기기 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -165,40 +167,25 @@
       "압력용기",
       "TOWER(증류탑)"
     ],
-    "investor_note": "DKME(디케이엠이)는 석유화학 플랜트에 쓰이는 열교환기·압력용기·TOWER를 100% 수주 방식으로 만드는 화공기기 제조사입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,334억 원으로 전년과 비슷했고 영업이익은 100억 원을 유지했지만, 당기순이익은 28억 원 적자로 전환됐습니다. 특히 2024년 말 전 경영진의 배임·횡령 혐의 공시로 상장적격성 실질심사 대상이 되어 주식 매매거래가 정지되었고, 이후 상장폐지 결정에 이의신청을 내 2026년 3월까지 개선기간을 받은 상태입니다. 부채비율은 49.9%로 낮은 편이지만, 거래정지와 상장폐지 심사라는 중대한 리스크가 진행 중이니 각별히 주의가 필요합니다."
+    "investor_note": "DKME(디케이엠이)는 석유화학 플랜트에 쓰이는 열교환기·압력용기·TOWER를 100% 수주 방식으로 만드는 화공기기 제조사입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,334억 원으로 전년과 비슷했고 영업이익은 100억 원을 유지했지만, 당기순이익은 28억 원 적자로 전환됐습니다. 특히 2024년 말 전 경영진의 배임·횡령 혐의 공시로 상장적격성 실질심사 대상이 되어 주식 매매거래가 정지되었고, 이후 상장폐지 결정에 이의신청을 내 2026년 3월까지 개선기간을 받은 상태입니다. 부채비율은 49.9%로 낮은 편이지만, 거래정지와 상장폐지 심사라는 중대한 리스크가 진행 중이니 각별히 주의가 필요합니다.",
+    "product_service_segments": [
+      {
+        "name": "화공기기 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "화공기기부문",
-      "caption": "석유화학 플랜트용 열교환기·압력용기·TOWER 제조(100% 수주생산)",
-      "kind": "ship",
-      "visual": "화공기기부문",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "열교환기",
-      "caption": "열교환기 관련 제품과 서비스를 통해 매출을 만듭니다.",
+      "title": "화공기기 부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
       "kind": "service",
-      "visual": "열교환기",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "압력용기",
-      "caption": "압력용기 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "압력용기",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "TOWER(증류탑)",
-      "caption": "TOWER(증류탑) 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "TOWER",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

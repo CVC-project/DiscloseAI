@@ -156,18 +156,24 @@
     "segment_breakdown": [
       {
         "name": "부분육",
-        "desc": "가정용 조리용 부위별 절단육",
-        "revenue_share": 0.425
-      },
-      {
-        "name": "통닭",
-        "desc": "가정용 조리 원료육",
-        "revenue_share": 0.345
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 42.5%",
+        "revenue_share": 0.425,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "염장육",
-        "desc": "패스트푸드·프랜차이즈용 대량소비 제품",
-        "revenue_share": 0.16
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.0%",
+        "revenue_share": 0.16,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "생계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.005,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -177,32 +183,54 @@
       "육가공품(햄·훈제)",
       "생계·초생추·종란"
     ],
-    "investor_note": "마니커는 종계·부화·사육·도계·육가공·유통까지 일괄하는 수직계열화 육계기업으로, 통닭·부분육·염장육 등 마니커 브랜드 닭고기 제품을 생산합니다. 부분육(절단육)이 매출의 42.5%, 통닭이 34.5%, 프랜차이즈용 염장육이 16.0%를 차지하며, 판매처는 대리점(32.5%)과 프랜차이즈(36.8%)가 큰 비중을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,688억 원으로 전년보다 10.8% 늘었고 영업이익도 20억 원으로 흑자 전환했습니다. 당기순이익은 3억 원 적자로 적자폭이 크게 줄었지만, 부채비율은 274.1%로 자본보다 빚이 훨씬 많은 편이라 재무 부담을 유의해서 볼 필요가 있습니다."
+    "investor_note": "마니커는 종계·부화·사육·도계·육가공·유통까지 일괄하는 수직계열화 육계기업으로, 통닭·부분육·염장육 등 마니커 브랜드 닭고기 제품을 생산합니다. 부분육(절단육)이 매출의 42.5%, 통닭이 34.5%, 프랜차이즈용 염장육이 16.0%를 차지하며, 판매처는 대리점(32.5%)과 프랜차이즈(36.8%)가 큰 비중을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,688억 원으로 전년보다 10.8% 늘었고 영업이익도 20억 원으로 흑자 전환했습니다. 당기순이익은 3억 원 적자로 적자폭이 크게 줄었지만, 부채비율은 274.1%로 자본보다 빚이 훨씬 많은 편이라 재무 부담을 유의해서 볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "제품매출외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.5%",
+        "revenue_share": 0.345,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "부분육",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 42.5%",
+        "revenue_share": 0.425,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "염장육",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.0%",
+        "revenue_share": 0.16,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "생계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.005,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "부분육",
-      "caption": "가정용 조리용 부위별 절단육",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 42.5%",
       "kind": "service",
-      "visual": "부분육",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "통닭",
-      "caption": "가정용 조리 원료육",
-      "kind": "service",
-      "visual": "통닭",
-      "image": "../data/business_images/business_image_local_default_b.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "염장육",
-      "caption": "패스트푸드·프랜차이즈용 대량소비 제품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.0%",
       "kind": "service",
-      "visual": "염장육",
-      "image": "../data/business_images/business_image_food_packaged.svg",
-      "image_source": "Local visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

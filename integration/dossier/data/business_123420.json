@@ -153,31 +153,55 @@
   "snippets": {
     "overview": "위메이드플레이의 주요 제품·서비스는 비고, 자체, Match-3 Simulator 연구, 크로스 프로모션 시스템입니다. 서비스를 제공하는 기업으로 생산설비를 통한 생산이 아닌 주로 인적자원을 활용한 사업이 주가 되기 때문에 생산활동과 관련한 원재료의 현황이나 원재료의 제품별 비중 등을 산정하기가 어렵습니다. 업데이트를 통해 사용자의 흥미를 유지시키고, 고객분석을 통해 다양한 이벤트를 실시하는 것입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "위메이드플레이의 주요 제품·서비스는 비고, 자체, Match-3 Simulator 연구, 크로스 프로모션 시스템입니다. 서비스를 제공하는 기업으로 생산설비를 통한 생산이 아닌 주로 인적자원을 활용한 사업이 주가 되기 때문에 생산활동과 관련한 원재료의 현황이나 원재료의 제품별 비중 등을 산정하기가 어렵습니다. 업데이트를 통해 사용자의 흥미를 유지시키고, 고객분석을 통해 다양한 이벤트를 실시하는 것입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "모바일게임",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 81.6%",
+        "revenue_share": 0.816,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "비고",
       "자체",
       "Match-3 Simulator 연구",
       "크로스 프로모션 시스템"
     ],
-    "investor_note": "위메이드플레이의 주요 제품·서비스는 비고, 자체, Match-3 Simulator 연구, 크로스 프로모션 시스템입니다. 서비스를 제공하는 기업으로 생산설비를 통한 생산이 아닌 주로 인적자원을 활용한 사업이 주가 되기 때문에 생산활동과 관련한 원재료의 현황이나 원재료의 제품별 비중 등을 산정하기가 어렵습니다. 업데이트를 통해 사용자의 흥미를 유지시키고, 고객분석을 통해 다양한 이벤트를 실시하는 것입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "위메이드플레이의 주요 제품·서비스는 비고, 자체, Match-3 Simulator 연구, 크로스 프로모션 시스템입니다. 서비스를 제공하는 기업으로 생산설비를 통한 생산이 아닌 주로 인적자원을 활용한 사업이 주가 되기 때문에 생산활동과 관련한 원재료의 현황이나 원재료의 제품별 비중 등을 산정하기가 어렵습니다. 업데이트를 통해 사용자의 흥미를 유지시키고, 고객분석을 통해 다양한 이벤트를 실시하는 것입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "모바일게임",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 81.6%",
+        "revenue_share": 0.816,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "광고 등 기타",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.4%",
+        "revenue_share": 0.184,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "자체",
-      "caption": "자체 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "자체",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "title": "게임",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 81.6%",
+      "kind": "platform",
+      "visual": "GAME",
+      "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "Match-3 Simulator 연구",
-      "caption": "Match-3 Simulator 연구 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "Match-3",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "title": "광고 등 기타",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.4%",
+      "kind": "platform",
+      "visual": "APP",
+      "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

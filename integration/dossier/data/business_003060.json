@@ -155,19 +155,32 @@
     "segment_finance": "에이프로젠바이오로직스는 순환계·중추신경계 치료제 등 제네릭의약품을 만드는 제약사업과, 충북 오송 공장에서 항체의약품을 위탁생산(CDMO)하는 바이오사업을 함께 운영하며, 최근에는 반도체 장비부품 회사(엔투텍)까지 인수해 사업을 넓혔습니다. 오송공장은 세계 5위권 항체 생산능력을 갖춰 향후 본격 가동되면 실적에 기여할 것으로 회사는 기대하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 732억 원으로 8.7% 늘었지만 영업손실 603억 원, 당기순손실 1,682억 원으로 적자가 지속됐고, 부채비율은 111.5%로 자본보다 빚이 더 많은 상태입니다.",
     "segment_breakdown": [
       {
-        "name": "제약(합성의약품)",
-        "desc": "순환계·중추신경계 등 제네릭의약품 제조·판매",
-        "revenue_share": 0.781
+        "name": "의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.7%",
+        "revenue_share": 0.1373,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "바이오",
-        "desc": "오송공장에서 항체의약품 위탁생산(CDMO)",
-        "revenue_share": 0.076
+        "name": "중추신경계용약",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.5%",
+        "revenue_share": 0.075,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "반도체 장비부품",
-        "desc": "반도체 공정용 부품(챔버·게이트밸브) 제조",
-        "revenue_share": 0.132
+        "name": "소화기관용약",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.6%",
+        "revenue_share": 0.1463,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "대사성의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.5%",
+        "revenue_share": 0.0554,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -177,32 +190,62 @@
       "바이오의약품 위탁생산(CDMO)",
       "반도체 장비부품(챔버·게이트밸브)"
     ],
-    "investor_note": "에이프로젠바이오로직스는 순환계·중추신경계 치료제 등 제네릭의약품을 만드는 제약사업과, 충북 오송 공장에서 항체의약품을 위탁생산(CDMO)하는 바이오사업을 함께 운영하며, 최근에는 반도체 장비부품 회사(엔투텍)까지 인수해 사업을 넓혔습니다. 오송공장은 세계 5위권 항체 생산능력을 갖춰 향후 본격 가동되면 실적에 기여할 것으로 회사는 기대하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 732억 원으로 8.7% 늘었지만 영업손실 603억 원, 당기순손실 1,682억 원으로 적자가 지속됐고, 부채비율은 111.5%로 자본보다 빚이 더 많은 상태입니다."
+    "investor_note": "에이프로젠바이오로직스는 순환계·중추신경계 치료제 등 제네릭의약품을 만드는 제약사업과, 충북 오송 공장에서 항체의약품을 위탁생산(CDMO)하는 바이오사업을 함께 운영하며, 최근에는 반도체 장비부품 회사(엔투텍)까지 인수해 사업을 넓혔습니다. 오송공장은 세계 5위권 항체 생산능력을 갖춰 향후 본격 가동되면 실적에 기여할 것으로 회사는 기대하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 732억 원으로 8.7% 늘었지만 영업손실 603억 원, 당기순손실 1,682억 원으로 적자가 지속됐고, 부채비율은 111.5%로 자본보다 빚이 더 많은 상태입니다.",
+    "product_service_segments": [
+      {
+        "name": "의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.7%",
+        "revenue_share": 0.1373,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "중추신경계용약",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.5%",
+        "revenue_share": 0.075,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "소화기관용약",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.6%",
+        "revenue_share": 0.1463,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "대사성의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.5%",
+        "revenue_share": 0.0554,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "제약(합성의약품)",
-      "caption": "순환계·중추신경계 등 제네릭의약품 제조·판매",
+      "title": "의약품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.7%",
       "kind": "bio",
-      "visual": "제약",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "바이오",
-      "caption": "오송공장에서 항체의약품 위탁생산(CDMO)",
-      "kind": "bio",
-      "visual": "CDMO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "중추신경계용약",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "반도체 장비부품",
-      "caption": "반도체 공정용 부품(챔버·게이트밸브) 제조",
-      "kind": "chip",
-      "visual": "반도체",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "title": "소화기관용약",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

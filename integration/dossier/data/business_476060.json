@@ -107,9 +107,18 @@
     "segment_finance": "온코닉테라퓨틱스 주식회사의 주요 제품·서비스는 의약품, 자큐보정(Zastaprazan) (P-CAB), 미란성 위식도역류질환, 위궤양, 자큐보정(Zastaprazan) 제품판매, 성분명입니다. 현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. 매입처에 관한 사항 당사는 보고기간 말 현재 신약연구개발회사로서 생산 및 판매 중인 제품이 없어 원재료 가격변동 추이가 없습니다. 그 중 시장이 큰 중국의 경우, 중국내 PPI 1위이면서 6천억 정도의 PPI매출을 확보하고 있는 리브존파마슈티컬그룹을 중국내 판매자로 확보함으로써, 해외 시장의 고객 확보도 일정 부분 완료되었습니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다.",
     "segment_breakdown": [
       {
-        "name": "건강보험",
-        "desc": "보험계약과 자산운용 중심 서비스",
-        "revenue_share": null
+        "name": "매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.03,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "내 수",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.01,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -126,40 +135,32 @@
       "라이선스 인",
       "아웃"
     ],
-    "investor_note": "온코닉테라퓨틱스 주식회사의 주요 제품·서비스는 의약품, 자큐보정(Zastaprazan) (P-CAB), 미란성 위식도역류질환, 위궤양, 자큐보정(Zastaprazan) 제품판매, 성분명입니다. 현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. 매입처에 관한 사항 당사는 보고기간 말 현재 신약연구개발회사로서 생산 및 판매 중인 제품이 없어 원재료 가격변동 추이가 없습니다. 그 중 시장이 큰 중국의 경우, 중국내 PPI 1위이면서 6천억 정도의 PPI매출을 확보하고 있는 리브존파마슈티컬그룹을 중국내 판매자로 확보함으로써, 해외 시장의 고객 확보도 일정 부분 완료되었습니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다."
+    "investor_note": "온코닉테라퓨틱스 주식회사의 주요 제품·서비스는 의약품, 자큐보정(Zastaprazan) (P-CAB), 미란성 위식도역류질환, 위궤양, 자큐보정(Zastaprazan) 제품판매, 성분명입니다. 현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. 매입처에 관한 사항 당사는 보고기간 말 현재 신약연구개발회사로서 생산 및 판매 중인 제품이 없어 원재료 가격변동 추이가 없습니다. 그 중 시장이 큰 중국의 경우, 중국내 PPI 1위이면서 6천억 정도의 PPI매출을 확보하고 있는 리브존파마슈티컬그룹을 중국내 판매자로 확보함으로써, 해외 시장의 고객 확보도 일정 부분 완료되었습니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다.",
+    "product_service_segments": [
+      {
+        "name": "매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.03,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "내 수",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.01,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "의약품",
-      "caption": "의약품 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "자큐보정(Zastaprazan) (P-CAB)",
-      "caption": "자큐보정(Zastaprazan) (P-CAB) 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "내 수",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "미란성 위식도역류질환",
-      "caption": "미란성 위식도역류질환 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "위궤양",
-      "caption": "위궤양 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

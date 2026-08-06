@@ -155,19 +155,25 @@
     "segment_finance": "대우건설은 아파트(푸르지오)·오피스텔 등 주택시설을 짓는 건축부문을 핵심으로, 도로·철도·항만 등 토목부문, 석유화학·LNG·원자력발전 플랜트부문, 국내외 부동산 투자개발 등 기타부문까지 아우르는 종합건설사입니다. 건축이 매출의 약 68%로 가장 크고, 토목이 17%, 플랜트가 10%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 8조 546억 원으로 전년 대비 23.3% 줄었고, 해외 토목 현장의 손실 등 영향으로 영업이익과 당기순이익 모두 전년 흑자에서 적자로 전환되며 실적이 크게 나빠졌습니다. 부채비율은 284.5%로 자본 대비 부채 부담이 커 재무 상황을 주의 깊게 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "건축",
-        "desc": "아파트·오피스텔 등 주거·비주거 건축시공",
-        "revenue_share": 0.684
+        "name": "토 목",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.4%",
+        "revenue_share": 0.174,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "토목",
-        "desc": "도로·교량·항만·철도·수자원 등 토목공사",
-        "revenue_share": 0.174
+        "name": "건 축",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.4%",
+        "revenue_share": 0.684,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "플랜트",
-        "desc": "Oil&Gas·LNG·석유화학·원자력발전·신재생에너지 플랜트",
-        "revenue_share": 0.104
+        "name": "플 랜 트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.4%",
+        "revenue_share": 0.104,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -179,32 +185,55 @@
       "원자력발전 플랜트",
       "해상풍력 등 신재생에너지"
     ],
-    "investor_note": "대우건설은 아파트(푸르지오)·오피스텔 등 주택시설을 짓는 건축부문을 핵심으로, 도로·철도·항만 등 토목부문, 석유화학·LNG·원자력발전 플랜트부문, 국내외 부동산 투자개발 등 기타부문까지 아우르는 종합건설사입니다. 건축이 매출의 약 68%로 가장 크고, 토목이 17%, 플랜트가 10%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 8조 546억 원으로 전년 대비 23.3% 줄었고, 해외 토목 현장의 손실 등 영향으로 영업이익과 당기순이익 모두 전년 흑자에서 적자로 전환되며 실적이 크게 나빠졌습니다. 부채비율은 284.5%로 자본 대비 부채 부담이 커 재무 상황을 주의 깊게 살펴볼 필요가 있습니다."
+    "investor_note": "대우건설은 아파트(푸르지오)·오피스텔 등 주택시설을 짓는 건축부문을 핵심으로, 도로·철도·항만 등 토목부문, 석유화학·LNG·원자력발전 플랜트부문, 국내외 부동산 투자개발 등 기타부문까지 아우르는 종합건설사입니다. 건축이 매출의 약 68%로 가장 크고, 토목이 17%, 플랜트가 10%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 8조 546억 원으로 전년 대비 23.3% 줄었고, 해외 토목 현장의 손실 등 영향으로 영업이익과 당기순이익 모두 전년 흑자에서 적자로 전환되며 실적이 크게 나빠졌습니다. 부채비율은 284.5%로 자본 대비 부채 부담이 커 재무 상황을 주의 깊게 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "토 목",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.4%",
+        "revenue_share": 0.174,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "건 축",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.4%",
+        "revenue_share": 0.684,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "플 랜 트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.4%",
+        "revenue_share": 0.104,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "건축",
-      "caption": "아파트·오피스텔 등 주거·비주거 건축시공",
+      "title": "토 목",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.4%",
       "kind": "service",
-      "visual": "건축",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "토목",
-      "caption": "도로·교량·항만·철도·수자원 등 토목공사",
+      "title": "건 축",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.4%",
       "kind": "service",
-      "visual": "토목",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "플랜트",
-      "caption": "Oil&Gas·LNG·석유화학·원자력발전·신재생에너지 플랜트",
-      "kind": "ship",
-      "visual": "LNG",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "title": "플 랜 트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.4%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -155,19 +155,18 @@
     "segment_finance": "삼일기업공사는 1958년 설립된 건설사로, 미국 육군 극동공병단 발주공사부터 시작해 관급·민간 건축공사와 토목공사를 주력으로 하는 종합건설업체입니다. 매출의 90%가 건축공사, 9.5%가 토목공사에서 나오며 청담동 신축공사, 병원·공장 증축공사 등을 수행하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 851억 원으로 전년보다 24.4% 줄었지만 영업이익과 순이익은 각각 30.8%, 17.0% 늘었습니다. 부채비율은 33.5%로 건설업 평균 대비 낮은 편이라 재무 안정성은 양호합니다.",
     "segment_breakdown": [
       {
-        "name": "건축공사",
-        "desc": "관급·민간 건축 도급공사",
-        "revenue_share": 0.8999
+        "name": "국내도급공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "토목공사",
-        "desc": "관급 토목 도급공사",
-        "revenue_share": 0.0952
-      },
-      {
-        "name": "임대수입",
-        "desc": "보유 부동산 임대",
-        "revenue_share": 0.0048
+        "name": "민간",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -176,32 +175,40 @@
       "토목공사",
       "초정밀 플랜트공사"
     ],
-    "investor_note": "삼일기업공사는 1958년 설립된 건설사로, 미국 육군 극동공병단 발주공사부터 시작해 관급·민간 건축공사와 토목공사를 주력으로 하는 종합건설업체입니다. 매출의 90%가 건축공사, 9.5%가 토목공사에서 나오며 청담동 신축공사, 병원·공장 증축공사 등을 수행하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 851억 원으로 전년보다 24.4% 줄었지만 영업이익과 순이익은 각각 30.8%, 17.0% 늘었습니다. 부채비율은 33.5%로 건설업 평균 대비 낮은 편이라 재무 안정성은 양호합니다."
+    "investor_note": "삼일기업공사는 1958년 설립된 건설사로, 미국 육군 극동공병단 발주공사부터 시작해 관급·민간 건축공사와 토목공사를 주력으로 하는 종합건설업체입니다. 매출의 90%가 건축공사, 9.5%가 토목공사에서 나오며 청담동 신축공사, 병원·공장 증축공사 등을 수행하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 851억 원으로 전년보다 24.4% 줄었지만 영업이익과 순이익은 각각 30.8%, 17.0% 늘었습니다. 부채비율은 33.5%로 건설업 평균 대비 낮은 편이라 재무 안정성은 양호합니다.",
+    "product_service_segments": [
+      {
+        "name": "국내도급공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "민간",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "건축공사",
-      "caption": "관급·민간 건축 도급공사",
+      "title": "국내도급공사",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
       "kind": "service",
-      "visual": "건축공사",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "토목공사",
-      "caption": "관급 토목 도급공사",
+      "title": "민간",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
       "kind": "service",
-      "visual": "토목공사",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "임대수입",
-      "caption": "보유 부동산 임대",
-      "kind": "service",
-      "visual": "임대수입",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

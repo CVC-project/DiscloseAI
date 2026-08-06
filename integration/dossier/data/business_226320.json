@@ -153,7 +153,29 @@
   "snippets": {
     "overview": "주식회사 잇츠한불의 주요 제품·서비스는 건강기능식품, 브랜드, 비고, 화장품제조, 판매업, 가맹점입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 화장품 제조 및 판매업을 영위하고 있으며, 모회사인 한불화장품과의 합병으로 생산부터 R&D, 마케팅, 유통까지 아우르는 종합 화장품 기업으로 출범하였습니다. 연결대상 종속회사는 총4개사이며, 주요종속회사는 주식회사 네오팜 1개사 입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "주식회사 잇츠한불의 주요 제품·서비스는 건강기능식품, 브랜드, 비고, 화장품제조, 판매업, 가맹점입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 화장품 제조 및 판매업을 영위하고 있으며, 모회사인 한불화장품과의 합병으로 생산부터 R&D, 마케팅, 유통까지 아우르는 종합 화장품 기업으로 출범하였습니다. 연결대상 종속회사는 총4개사이며, 주요종속회사는 주식회사 네오팜 1개사 입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "화장품 제조 및 판매업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.4%",
+        "revenue_share": 0.994,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "벌크 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.6%",
+        "revenue_share": 0.006,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "건강기능식품",
       "브랜드",
@@ -168,24 +190,47 @@
       "온라인",
       "홈쇼핑"
     ],
-    "investor_note": "주식회사 잇츠한불의 주요 제품·서비스는 건강기능식품, 브랜드, 비고, 화장품제조, 판매업, 가맹점입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 화장품 제조 및 판매업을 영위하고 있으며, 모회사인 한불화장품과의 합병으로 생산부터 R&D, 마케팅, 유통까지 아우르는 종합 화장품 기업으로 출범하였습니다. 연결대상 종속회사는 총4개사이며, 주요종속회사는 주식회사 네오팜 1개사 입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사 잇츠한불의 주요 제품·서비스는 건강기능식품, 브랜드, 비고, 화장품제조, 판매업, 가맹점입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 화장품 제조 및 판매업을 영위하고 있으며, 모회사인 한불화장품과의 합병으로 생산부터 R&D, 마케팅, 유통까지 아우르는 종합 화장품 기업으로 출범하였습니다. 연결대상 종속회사는 총4개사이며, 주요종속회사는 주식회사 네오팜 1개사 입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "화장품 제조 및 판매업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.4%",
+        "revenue_share": 0.994,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "벌크 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.6%",
+        "revenue_share": 0.006,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "건강기능식품",
-      "caption": "건강기능식품 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "consumer",
-      "visual": "건강기능식품",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "title": "화장품 제조 및 판매업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.4%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     },
     {
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "title": "화장품제조",
-      "caption": "화장품제조 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image_source": "Local curated visual"
+      "title": "총 계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

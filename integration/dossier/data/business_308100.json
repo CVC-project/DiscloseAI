@@ -153,38 +153,83 @@
   "snippets": {
     "overview": "(주)형지글로벌의 주요 제품·서비스는 패션 의류, 브랜드 의류, 유통입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 또한 당사는 공시서류 작성기준일 현재 생산과 영업에 중요한 시설, 설비 등에 대한 투자가 진행 중이거나 계획을 수립하고 있지 않습니다. 경영상의 주요계약 등 공시서류 작성기준일 현재 회사의 재무상태에 중요한 영향을 미치는 비경상적인 중요계약은 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "(주)형지글로벌의 주요 제품·서비스는 패션 의류, 브랜드 의류, 유통입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 또한 당사는 공시서류 작성기준일 현재 생산과 영업에 중요한 시설, 설비 등에 대한 투자가 진행 중이거나 계획을 수립하고 있지 않습니다. 경영상의 주요계약 등 공시서류 작성기준일 현재 회사의 재무상태에 중요한 영향을 미치는 비경상적인 중요계약은 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "제/상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 78.2%",
+        "revenue_share": 0.782,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "골프잡화",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.0%",
+        "revenue_share": 0.1703,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총 합 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "패션 의류",
       "브랜드 의류",
       "유통"
     ],
-    "investor_note": "(주)형지글로벌의 주요 제품·서비스는 패션 의류, 브랜드 의류, 유통입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 또한 당사는 공시서류 작성기준일 현재 생산과 영업에 중요한 시설, 설비 등에 대한 투자가 진행 중이거나 계획을 수립하고 있지 않습니다. 경영상의 주요계약 등 공시서류 작성기준일 현재 회사의 재무상태에 중요한 영향을 미치는 비경상적인 중요계약은 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)형지글로벌의 주요 제품·서비스는 패션 의류, 브랜드 의류, 유통입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 또한 당사는 공시서류 작성기준일 현재 생산과 영업에 중요한 시설, 설비 등에 대한 투자가 진행 중이거나 계획을 수립하고 있지 않습니다. 경영상의 주요계약 등 공시서류 작성기준일 현재 회사의 재무상태에 중요한 영향을 미치는 비경상적인 중요계약은 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "제/상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 78.2%",
+        "revenue_share": 0.782,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "골프잡화",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.0%",
+        "revenue_share": 0.1703,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총 합 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "패션 의류",
-      "caption": "패션 의류 관련 제품과 서비스를 통해 매출을 만듭니다.",
+      "title": "제/상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 78.2%",
       "kind": "service",
-      "visual": "패션",
-      "image": "../data/business_images/business_image_local_textile.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "브랜드 의류",
-      "caption": "브랜드 의류 관련 제품과 서비스를 통해 매출을 만듭니다.",
+      "title": "골프잡화",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.0%",
       "kind": "service",
-      "visual": "브랜드",
-      "image": "../data/business_images/business_image_local_textile.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "유통",
-      "caption": "유통 관련 제품과 서비스를 통해 매출을 만듭니다.",
+      "title": "총 합 계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
       "kind": "service",
-      "visual": "유통",
-      "image": "../data/business_images/business_image_local_textile.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

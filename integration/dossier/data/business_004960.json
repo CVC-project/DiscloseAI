@@ -155,19 +155,32 @@
     "segment_finance": "한신공영은 '한신더휴' 브랜드로 아파트·주상복합을 짓는 종합건설사로, 민간 아파트·도시정비사업 건축(44%)과 자체 시행 개발사업(27%), 도로·철도 등 관급 토목공사(27%)를 진행합니다. 2025년말 기준 수주잔고는 약 7조 4천억 원으로 일감을 넉넉히 확보한 상태입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 1,491억 원으로 전년 대비 22.9% 줄었지만 영업이익은 645억 원으로 73.2%, 당기순이익은 578억 원으로 291.9% 늘어 수익성은 크게 좋아졌습니다. 부채비율은 163.0%로 건설업 특성상 다소 높은 편입니다. 감사의견은 적정이며, 핵심감사사항으로 공사 진행률에 따른 매출 인식(투입법)의 추정 적정성이 점검됐습니다.",
     "segment_breakdown": [
       {
-        "name": "건축부문",
-        "desc": "민간·관급 아파트·주상복합 건축공사",
-        "revenue_share": 0.437
+        "name": "국내도급공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.6%",
+        "revenue_share": 0.0059,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "자체공사",
-        "desc": "회사가 시행사를 겸하는 자체 개발·분양 사업",
-        "revenue_share": 0.27
+        "name": "민간",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.0081,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "토목부문",
-        "desc": "도로·철도·상하수도 등 국내외 토목공사",
-        "revenue_share": 0.268
+        "name": "토목공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.0097,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "해외도급공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.0077,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -178,32 +191,70 @@
       "관급 건축공사",
       "해외 SOC 도급공사(미얀마 등)"
     ],
-    "investor_note": "한신공영은 '한신더휴' 브랜드로 아파트·주상복합을 짓는 종합건설사로, 민간 아파트·도시정비사업 건축(44%)과 자체 시행 개발사업(27%), 도로·철도 등 관급 토목공사(27%)를 진행합니다. 2025년말 기준 수주잔고는 약 7조 4천억 원으로 일감을 넉넉히 확보한 상태입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 1,491억 원으로 전년 대비 22.9% 줄었지만 영업이익은 645억 원으로 73.2%, 당기순이익은 578억 원으로 291.9% 늘어 수익성은 크게 좋아졌습니다. 부채비율은 163.0%로 건설업 특성상 다소 높은 편입니다. 감사의견은 적정이며, 핵심감사사항으로 공사 진행률에 따른 매출 인식(투입법)의 추정 적정성이 점검됐습니다."
+    "investor_note": "한신공영은 '한신더휴' 브랜드로 아파트·주상복합을 짓는 종합건설사로, 민간 아파트·도시정비사업 건축(44%)과 자체 시행 개발사업(27%), 도로·철도 등 관급 토목공사(27%)를 진행합니다. 2025년말 기준 수주잔고는 약 7조 4천억 원으로 일감을 넉넉히 확보한 상태입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 1,491억 원으로 전년 대비 22.9% 줄었지만 영업이익은 645억 원으로 73.2%, 당기순이익은 578억 원으로 291.9% 늘어 수익성은 크게 좋아졌습니다. 부채비율은 163.0%로 건설업 특성상 다소 높은 편입니다. 감사의견은 적정이며, 핵심감사사항으로 공사 진행률에 따른 매출 인식(투입법)의 추정 적정성이 점검됐습니다.",
+    "product_service_segments": [
+      {
+        "name": "국내도급공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.6%",
+        "revenue_share": 0.0059,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "민간",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.0081,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "토목공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.0097,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "해외도급공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.0077,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "건축부문",
-      "caption": "민간·관급 아파트·주상복합 건축공사",
+      "title": "한신더휴(아파트 브랜드)",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
       "kind": "service",
-      "visual": "건축부문",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "자체공사",
-      "caption": "회사가 시행사를 겸하는 자체 개발·분양 사업",
+      "title": "한신더휴 리저브(고급 주상복합)",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
       "kind": "service",
-      "visual": "자체공사",
-      "image": "../data/business_images/business_image_local_housing.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "토목부문",
-      "caption": "도로·철도·상하수도 등 국내외 토목공사",
+      "title": "건축·주택",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
       "kind": "service",
-      "visual": "토목부문",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "토목·플랜트",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
+      "kind": "service",
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_5184e050831a4460.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

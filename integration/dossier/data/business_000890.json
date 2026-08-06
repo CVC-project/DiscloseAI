@@ -155,19 +155,32 @@
     "segment_finance": "보해양조는 잎새주·보해소주 등의 소주와 매취순·보해복분자주 등의 과실주를 주력으로 하는 광주·전남 기반 주류회사로, 매실 음료 등 식음료 사업도 함께 운영합니다. 과실주 부문이 매출의 약 52%로 가장 크고, 소주가 27%, 식품이 18%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 898억 원으로 전년 대비 2.6% 늘었고 영업이익은 65.7% 큰 폭으로 증가했지만, 당기순이익은 47.8% 줄어 최종적으로 남는 돈은 오히려 감소했습니다. 부채비율은 62.4%로 다소 높은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "주류-과실주",
-        "desc": "매취순·보해복분자주 등 과실주",
-        "revenue_share": 0.516
+        "name": "주류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.2%",
+        "revenue_share": 0.272,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "주류-소주",
-        "desc": "잎새주·보해소주 등 소주",
-        "revenue_share": 0.272
+        "name": "과실주",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.6%",
+        "revenue_share": 0.516,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "식품(식음료)",
-        "desc": "매실 음료 등 건강음료, OEM/ODM 포함",
-        "revenue_share": 0.178
+        "name": "식품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.8%",
+        "revenue_share": 0.178,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -179,40 +192,54 @@
       "고마그라제(스페인 스피릿)",
       "매실 음료"
     ],
-    "investor_note": "보해양조는 잎새주·보해소주 등의 소주와 매취순·보해복분자주 등의 과실주를 주력으로 하는 광주·전남 기반 주류회사로, 매실 음료 등 식음료 사업도 함께 운영합니다. 과실주 부문이 매출의 약 52%로 가장 크고, 소주가 27%, 식품이 18%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 898억 원으로 전년 대비 2.6% 늘었고 영업이익은 65.7% 큰 폭으로 증가했지만, 당기순이익은 47.8% 줄어 최종적으로 남는 돈은 오히려 감소했습니다. 부채비율은 62.4%로 다소 높은 편이라 재무 부담을 살펴볼 필요가 있습니다."
+    "investor_note": "보해양조는 잎새주·보해소주 등의 소주와 매취순·보해복분자주 등의 과실주를 주력으로 하는 광주·전남 기반 주류회사로, 매실 음료 등 식음료 사업도 함께 운영합니다. 과실주 부문이 매출의 약 52%로 가장 크고, 소주가 27%, 식품이 18%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 898억 원으로 전년 대비 2.6% 늘었고 영업이익은 65.7% 큰 폭으로 증가했지만, 당기순이익은 47.8% 줄어 최종적으로 남는 돈은 오히려 감소했습니다. 부채비율은 62.4%로 다소 높은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "주류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.2%",
+        "revenue_share": 0.272,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "과실주",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.6%",
+        "revenue_share": 0.516,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "식품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.8%",
+        "revenue_share": 0.178,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "식품(식음료)",
-      "caption": "식품(식음료) 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "주류",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
       "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_food_packaged.svg",
+      "visual": "ALCOHOL",
+      "image": "../data/business_images/business_image_local_alcohol.svg",
       "image_source": "Local visual"
     },
     {
-      "title": "잎새주(소주)",
-      "caption": "잎새주(소주) 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_alcohol.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "보해소주",
-      "caption": "보해소주 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_alcohol.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "보해복분자주",
-      "caption": "보해복분자주 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_alcohol.svg",
-      "image_source": "Local curated visual"
+      "title": "음료",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
+      "kind": "consumer",
+      "visual": "BEVERAGE",
+      "image": "../data/business_images/business_image_food_beverage.svg",
+      "image_source": "Local visual"
     }
   ],
   "custom_report_ideas": [

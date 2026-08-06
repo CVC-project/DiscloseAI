@@ -153,7 +153,15 @@
   "snippets": {
     "overview": "주식회사 티비에이치글로벌의 주요 제품·서비스는 패션사업, 상품 매출, 남성복, 여성복(MIND BRIDGE, JUCY JUDY, BASIC HOUSE입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 보고서 작성일 현재 마인드브릿지, 쥬시쥬디 등의 브랜드 제품을 외주 생산 후 직접 판매하고 있으며, 각 제품별 매출액 및 비중은 다음과 같습니다. 최초에 배정되는 초도물량은 자동배분시스템에 의해 공급되고 있으며, 판매 후 후속공급은 매장과 당사의 물류창고간의 PAS시스템에 의해 판매된 제품이 즉시 출고되는 Quick Response System을 통해 원활한 시장대응을 하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "주식회사 티비에이치글로벌의 주요 제품·서비스는 패션사업, 상품 매출, 남성복, 여성복(MIND BRIDGE, JUCY JUDY, BASIC HOUSE입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 보고서 작성일 현재 마인드브릿지, 쥬시쥬디 등의 브랜드 제품을 외주 생산 후 직접 판매하고 있으며, 각 제품별 매출액 및 비중은 다음과 같습니다. 최초에 배정되는 초도물량은 자동배분시스템에 의해 공급되고 있으며, 판매 후 후속공급은 매장과 당사의 물류창고간의 PAS시스템에 의해 판매된 제품이 즉시 출고되는 Quick Response System을 통해 원활한 시장대응을 하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "㈜TBH GLOBAL,㈜TBH KOREA,TBH GLOBAL (M) SDN.BHD",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.7%",
+        "revenue_share": 0.997,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "패션사업",
       "상품 매출",
@@ -168,40 +176,63 @@
       "상표권",
       "9개월"
     ],
-    "investor_note": "주식회사 티비에이치글로벌의 주요 제품·서비스는 패션사업, 상품 매출, 남성복, 여성복(MIND BRIDGE, JUCY JUDY, BASIC HOUSE입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 보고서 작성일 현재 마인드브릿지, 쥬시쥬디 등의 브랜드 제품을 외주 생산 후 직접 판매하고 있으며, 각 제품별 매출액 및 비중은 다음과 같습니다. 최초에 배정되는 초도물량은 자동배분시스템에 의해 공급되고 있으며, 판매 후 후속공급은 매장과 당사의 물류창고간의 PAS시스템에 의해 판매된 제품이 즉시 출고되는 Quick Response System을 통해 원활한 시장대응을 하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사 티비에이치글로벌의 주요 제품·서비스는 패션사업, 상품 매출, 남성복, 여성복(MIND BRIDGE, JUCY JUDY, BASIC HOUSE입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 보고서 작성일 현재 마인드브릿지, 쥬시쥬디 등의 브랜드 제품을 외주 생산 후 직접 판매하고 있으며, 각 제품별 매출액 및 비중은 다음과 같습니다. 최초에 배정되는 초도물량은 자동배분시스템에 의해 공급되고 있으며, 판매 후 후속공급은 매장과 당사의 물류창고간의 PAS시스템에 의해 판매된 제품이 즉시 출고되는 Quick Response System을 통해 원활한 시장대응을 하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "㈜TBH GLOBAL,㈜TBH KOREA,TBH GLOBAL (M) SDN.BHD",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.7%",
+        "revenue_share": 0.997,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.3%",
+        "revenue_share": 0.003,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "연결조정 전 합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "패션사업",
-      "caption": "패션사업 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_fashion.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "상품",
-      "caption": "상품 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "남성복",
-      "caption": "남성복 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "여성복(MIND BRIDGE",
-      "caption": "여성복(MIND BRIDGE 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "JUCY JUDY",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -155,9 +155,18 @@
     "segment_finance": "에이치에스효성첨단소재(주)의 주요 제품·서비스는 의약품, 전선, 산업자재, 제품상품기타, 타이어코드, 스틸코드입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사 및 해외종속회사의 사업은 제품 및 제조공정의 특징, 시장 및 판매방법의 특징 등에 따라 산업자재, 섬유 및 기타 부문으로 구분할 수 있습니다. 지배회사 및 주요종속회사의 원재료 및 은 다음과 같습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "산업자재부문",
-        "desc": "산업자재 관련 제품·서비스",
-        "revenue_share": null
+        "name": "산업자재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 98.9%",
+        "revenue_share": 0.989,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "섬유",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.4%",
+        "revenue_share": 0.104,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,32 +183,40 @@
       "굿이어",
       "유럽"
     ],
-    "investor_note": "에이치에스효성첨단소재(주)의 주요 제품·서비스는 의약품, 전선, 산업자재, 제품상품기타, 타이어코드, 스틸코드입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사 및 해외종속회사의 사업은 제품 및 제조공정의 특징, 시장 및 판매방법의 특징 등에 따라 산업자재, 섬유 및 기타 부문으로 구분할 수 있습니다. 지배회사 및 주요종속회사의 원재료 및 은 다음과 같습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "에이치에스효성첨단소재(주)의 주요 제품·서비스는 의약품, 전선, 산업자재, 제품상품기타, 타이어코드, 스틸코드입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사 및 해외종속회사의 사업은 제품 및 제조공정의 특징, 시장 및 판매방법의 특징 등에 따라 산업자재, 섬유 및 기타 부문으로 구분할 수 있습니다. 지배회사 및 주요종속회사의 원재료 및 은 다음과 같습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "산업자재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 98.9%",
+        "revenue_share": 0.989,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "섬유",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.4%",
+        "revenue_share": 0.104,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "탄소섬유",
-      "caption": "탄소섬유 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_local_textile.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "전선",
-      "caption": "전선 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_local_textile.svg",
-      "image_source": "Local curated visual"
-    },
-    {
       "title": "산업자재",
-      "caption": "산업자재 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 98.9%",
       "kind": "material",
       "visual": "MAT",
-      "image": "../data/business_images/business_image_local_textile.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "섬유",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.4%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

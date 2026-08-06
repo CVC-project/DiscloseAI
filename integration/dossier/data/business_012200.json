@@ -155,14 +155,18 @@
     "segment_finance": "과거 공시 기반 참고 정보로, 최근 연결 매출액은 3,897억 원으로 5.6% 늘었지만 영업손실 271억 원, 당기순손실 368억 원을 기록해 적자가 지속됐습니다(다만 순손실 폭은 전년보다는 줄었습니다). 부채비율은 959.5%로 자본 대비 빚이 매우 많아 재무 위험이 큰 편이라 각별한 주의가 필요합니다.",
     "segment_breakdown": [
       {
-        "name": "산업용품",
-        "desc": "전동공구·소형엔진·산업용구 제조",
-        "revenue_share": 0.257
+        "name": "산업용품(안산, 소주)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.7%",
+        "revenue_share": 0.257,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "전장품",
-        "desc": "자동차 시트·파킹브레이크용 모터 제조",
-        "revenue_share": 0.743
+        "name": "전장품(천안)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 74.3%",
+        "revenue_share": 0.743,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -173,24 +177,40 @@
       "전자식 파킹브레이크(EPB) 액추에이터",
       "Tilt&Tele 액추에이터"
     ],
-    "investor_note": "과거 공시 기반 참고 정보로, 최근 연결 매출액은 3,897억 원으로 5.6% 늘었지만 영업손실 271억 원, 당기순손실 368억 원을 기록해 적자가 지속됐습니다(다만 순손실 폭은 전년보다는 줄었습니다). 부채비율은 959.5%로 자본 대비 빚이 매우 많아 재무 위험이 큰 편이라 각별한 주의가 필요합니다."
+    "investor_note": "과거 공시 기반 참고 정보로, 최근 연결 매출액은 3,897억 원으로 5.6% 늘었지만 영업손실 271억 원, 당기순손실 368억 원을 기록해 적자가 지속됐습니다(다만 순손실 폭은 전년보다는 줄었습니다). 부채비율은 959.5%로 자본 대비 빚이 매우 많아 재무 위험이 큰 편이라 각별한 주의가 필요합니다.",
+    "product_service_segments": [
+      {
+        "name": "산업용품(안산, 소주)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.7%",
+        "revenue_share": 0.257,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전장품(천안)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 74.3%",
+        "revenue_share": 0.743,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "산업용품",
-      "caption": "전동공구·소형엔진·산업용구 제조",
-      "kind": "service",
-      "visual": "산업용품",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "title": "산업용품(안산, 소주)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.7%",
+      "kind": "consumer",
+      "visual": "ALCOHOL",
+      "image": "../data/business_images/business_image_local_alcohol.svg",
+      "image_source": "Local visual"
     },
     {
-      "title": "전장품",
-      "caption": "자동차 시트·파킹브레이크용 모터 제조",
+      "title": "전장부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 74.3%",
       "kind": "auto",
-      "visual": "전장품",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_e310d326cafd0fb3.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

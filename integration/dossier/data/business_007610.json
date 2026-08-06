@@ -155,14 +155,32 @@
     "segment_finance": "선도전기는 수배전반·가스절연개폐기(GIS)·보호계전기 등 전력변환기기를 만드는 중전기기 전문업체로, 한국전력공사 등에 납품하며 자회사를 통해 금융투자와 블루베리 재배 등 농업사업도 함께 하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 381억 원으로 전년 대비 59.2% 늘었고 영업이익은 12억 원으로 흑자 전환했지만 당기순이익은 52억 원으로 전년보다 46.0% 줄었습니다. 부채비율은 101.5%로 자본과 비슷한 규모의 빚을 지고 있으며, 과거 감사의견 거절 이력과 상장적격성 실질심사가 진행 중이라는 강조사항이 감사보고서에 함께 담겨 있어 투자 시 유의가 필요합니다.",
     "segment_breakdown": [
       {
-        "name": "전기변환기기류(중전기기)",
-        "desc": "수배전반·진공차단기·가스절연개폐기(GIS)·보호계전기 등 전력기기 생산판매",
-        "revenue_share": 0.998
+        "name": "전기변환 기기류부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.2%",
+        "revenue_share": 0.552,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "농업경영",
-        "desc": "블루베리 등 유실수 재배·판매",
-        "revenue_share": 0.002
+        "name": "RELAY PANEL",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.5%",
+        "revenue_share": 0.155,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "GIS",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.0%",
+        "revenue_share": 0.26,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "공사수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.4%",
+        "revenue_share": 0.004,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -172,40 +190,62 @@
       "보호계전기(RELAY PANEL)",
       "블루베리(농업)"
     ],
-    "investor_note": "선도전기는 수배전반·가스절연개폐기(GIS)·보호계전기 등 전력변환기기를 만드는 중전기기 전문업체로, 한국전력공사 등에 납품하며 자회사를 통해 금융투자와 블루베리 재배 등 농업사업도 함께 하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 381억 원으로 전년 대비 59.2% 늘었고 영업이익은 12억 원으로 흑자 전환했지만 당기순이익은 52억 원으로 전년보다 46.0% 줄었습니다. 부채비율은 101.5%로 자본과 비슷한 규모의 빚을 지고 있으며, 과거 감사의견 거절 이력과 상장적격성 실질심사가 진행 중이라는 강조사항이 감사보고서에 함께 담겨 있어 투자 시 유의가 필요합니다."
+    "investor_note": "선도전기는 수배전반·가스절연개폐기(GIS)·보호계전기 등 전력변환기기를 만드는 중전기기 전문업체로, 한국전력공사 등에 납품하며 자회사를 통해 금융투자와 블루베리 재배 등 농업사업도 함께 하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 381억 원으로 전년 대비 59.2% 늘었고 영업이익은 12억 원으로 흑자 전환했지만 당기순이익은 52억 원으로 전년보다 46.0% 줄었습니다. 부채비율은 101.5%로 자본과 비슷한 규모의 빚을 지고 있으며, 과거 감사의견 거절 이력과 상장적격성 실질심사가 진행 중이라는 강조사항이 감사보고서에 함께 담겨 있어 투자 시 유의가 필요합니다.",
+    "product_service_segments": [
+      {
+        "name": "전기변환 기기류부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.2%",
+        "revenue_share": 0.552,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "RELAY PANEL",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.5%",
+        "revenue_share": 0.155,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "GIS",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.0%",
+        "revenue_share": 0.26,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "공사수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.4%",
+        "revenue_share": 0.004,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "수배전반",
-      "caption": "수배전반 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "전기변환 기기류부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.2%",
       "kind": "power",
       "visual": "POWER",
-      "image": "../data/business_images/business_image_local_power.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "진공차단기",
-      "caption": "진공차단기 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "RELAY PANEL",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.5%",
       "kind": "power",
       "visual": "POWER",
-      "image": "../data/business_images/business_image_local_power.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "가스절연개폐기(GIS)",
-      "caption": "가스절연개폐기(GIS) 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "GIS",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.0%",
       "kind": "power",
       "visual": "POWER",
-      "image": "../data/business_images/business_image_local_power.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "보호계전기(RELAY PANEL)",
-      "caption": "보호계전기(RELAY PANEL) 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "power",
-      "visual": "POWER",
-      "image": "../data/business_images/business_image_local_power.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

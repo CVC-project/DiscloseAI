@@ -156,13 +156,31 @@
     "segment_breakdown": [
       {
         "name": "방직부문",
-        "desc": "면사·혼방사 등 사류와 염색가공 포류·상품 판매",
-        "revenue_share": 0.9983
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.4%",
+        "revenue_share": 0.2535,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "포 류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.6%",
+        "revenue_share": 0.5358,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.9%",
+        "revenue_share": 0.209,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "임대부문",
-        "desc": "공장·부동산 임대수입",
-        "revenue_share": 0.0017
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.0017,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -172,24 +190,62 @@
       "포류(RAINBOW 퀼트 등)",
       "염색가공 원단"
     ],
-    "investor_note": "대한방직은 면사·혼방사 등 사류를 수입·판매하는 사류사업본부와, 대구공장에서 직물을 염색·가공해 RAINBOW 브랜드 퀼트 등으로 공급하는 직물사업본부로 이뤄진 섬유 회사입니다. 매출의 거의 전부가 방직 부문에서 나오며, 수출 비중이 64%로 내수보다 높습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,582억 원으로 전년 대비 18.2% 늘었지만 영업이익은 6억 원으로 71.2% 급감했고, 당기순이익은 6억 원 적자로 전환했습니다. 부채비율은 51.2%로 낮은 편이지만, 매출 성장에도 수익성이 크게 나빠진 점은 살펴볼 필요가 있습니다."
+    "investor_note": "대한방직은 면사·혼방사 등 사류를 수입·판매하는 사류사업본부와, 대구공장에서 직물을 염색·가공해 RAINBOW 브랜드 퀼트 등으로 공급하는 직물사업본부로 이뤄진 섬유 회사입니다. 매출의 거의 전부가 방직 부문에서 나오며, 수출 비중이 64%로 내수보다 높습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,582억 원으로 전년 대비 18.2% 늘었지만 영업이익은 6억 원으로 71.2% 급감했고, 당기순이익은 6억 원 적자로 전환했습니다. 부채비율은 51.2%로 낮은 편이지만, 매출 성장에도 수익성이 크게 나빠진 점은 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "방직부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.4%",
+        "revenue_share": 0.2535,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "포 류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.6%",
+        "revenue_share": 0.5358,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.9%",
+        "revenue_share": 0.209,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임대부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.0017,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "방직부문",
-      "caption": "면사·혼방사 등 사류와 염색가공 포류·상품 판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.4%",
       "kind": "service",
-      "visual": "방직부문",
-      "image": "../data/business_images/business_image_local_textile.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "임대부문",
-      "caption": "공장·부동산 임대수입",
+      "title": "포 류",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.6%",
       "kind": "service",
-      "visual": "임대부문",
-      "image": "../data/business_images/business_image_local_textile.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "상 품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

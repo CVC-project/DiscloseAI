@@ -156,18 +156,31 @@
     "segment_breakdown": [
       {
         "name": "건재",
-        "desc": "단열재·내장재·외장재 등 건축자재",
-        "revenue_share": 0.6621
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.0%",
+        "revenue_share": 0.3797,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.0%",
+        "revenue_share": 0.2804,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "주방기기 및 환기",
-        "desc": "하츠의 렌지후드·빌트인기기·주택환기시스템",
-        "revenue_share": 0.2897
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.2%",
+        "revenue_share": 0.1417,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "화스너 및 공구",
-        "desc": "영우화스너의 결합용 화스너·공구",
-        "revenue_share": 0.0463
+        "name": "공사수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.0301,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -178,32 +191,70 @@
       "화스너",
       "에어타카"
     ],
-    "investor_note": "벽산은 단열재·외장재 등 건축자재를 만드는 '건재' 사업을 주력으로, 자회사 하츠의 주방 렌지후드·환기시스템 사업을 함께 운영하는 건축자재 기업입니다. 올해 화스너 제조사 영우화스너를 인수하며 화스너·공구 사업을 새로 편입했습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,106억 원으로 전년 대비 5.0% 줄었고 영업이익도 9.5% 감소했지만, 당기순이익은 273억 원으로 33.1% 늘었습니다. 부채비율은 76.3%로 무난한 수준입니다."
+    "investor_note": "벽산은 단열재·외장재 등 건축자재를 만드는 '건재' 사업을 주력으로, 자회사 하츠의 주방 렌지후드·환기시스템 사업을 함께 운영하는 건축자재 기업입니다. 올해 화스너 제조사 영우화스너를 인수하며 화스너·공구 사업을 새로 편입했습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,106억 원으로 전년 대비 5.0% 줄었고 영업이익도 9.5% 감소했지만, 당기순이익은 273억 원으로 33.1% 늘었습니다. 부채비율은 76.3%로 무난한 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "건재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.0%",
+        "revenue_share": 0.3797,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.0%",
+        "revenue_share": 0.2804,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "주방기기 및 환기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.2%",
+        "revenue_share": 0.1417,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "공사수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.0301,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "건재",
-      "caption": "단열재·내장재·외장재 등 건축자재",
-      "kind": "service",
-      "visual": "건재",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "상 품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "주방기기 및 환기",
-      "caption": "하츠의 렌지후드·빌트인기기·주택환기시스템",
-      "kind": "service",
-      "visual": "주방기기",
-      "image": "../data/business_images/business_image_local_housing.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.2%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "화스너 및 공구",
-      "caption": "영우화스너의 결합용 화스너·공구",
-      "kind": "service",
-      "visual": "화스너",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "title": "공사수익",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

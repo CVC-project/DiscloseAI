@@ -155,9 +155,32 @@
     "segment_finance": "빌리언스는 콘돔 등 의료용 고무제품을 만드는 제조사업(매출의 40%)과 소속 아티스트 활동·음반·드라마 제작을 담당하는 엔터테인먼트 사업(60%)을 함께 운영하는 회사로, 코스닥 상장사 경남제약 지분(17.9%)도 보유하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 253억 원으로 전년 대비 39.3% 크게 줄었고 당기순이익은 흑자에서 73억 원 손실로 적자 전환했습니다. 감사인은 제조사업부 자산손상과 관계기업투자주식의 회수가능액 평가를 핵심감사사항으로 짚었습니다.",
     "segment_breakdown": [
       {
-        "name": "엔터테인먼트부문",
-        "desc": "소속 아티스트 활동·음반·드라마 등 콘텐츠 기획제작",
-        "revenue_share": 0.599
+        "name": "의료기기 제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.0%",
+        "revenue_share": 0.23,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.0%",
+        "revenue_share": 0.17,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "엔터테인먼트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
+        "revenue_share": 0.05,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "㈜빌리언스 엔터부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.0%",
+        "revenue_share": 0.44,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -167,24 +190,70 @@
       "드라마·콘텐츠 제작",
       "아티스트 매니지먼트"
     ],
-    "investor_note": "빌리언스는 콘돔 등 의료용 고무제품을 만드는 제조사업(매출의 40%)과 소속 아티스트 활동·음반·드라마 제작을 담당하는 엔터테인먼트 사업(60%)을 함께 운영하는 회사로, 코스닥 상장사 경남제약 지분(17.9%)도 보유하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 253억 원으로 전년 대비 39.3% 크게 줄었고 당기순이익은 흑자에서 73억 원 손실로 적자 전환했습니다. 감사인은 제조사업부 자산손상과 관계기업투자주식의 회수가능액 평가를 핵심감사사항으로 짚었습니다."
+    "investor_note": "빌리언스는 콘돔 등 의료용 고무제품을 만드는 제조사업(매출의 40%)과 소속 아티스트 활동·음반·드라마 제작을 담당하는 엔터테인먼트 사업(60%)을 함께 운영하는 회사로, 코스닥 상장사 경남제약 지분(17.9%)도 보유하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 253억 원으로 전년 대비 39.3% 크게 줄었고 당기순이익은 흑자에서 73억 원 손실로 적자 전환했습니다. 감사인은 제조사업부 자산손상과 관계기업투자주식의 회수가능액 평가를 핵심감사사항으로 짚었습니다.",
+    "product_service_segments": [
+      {
+        "name": "의료기기 제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.0%",
+        "revenue_share": 0.23,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.0%",
+        "revenue_share": 0.17,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "엔터테인먼트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
+        "revenue_share": 0.05,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "㈜빌리언스 엔터부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.0%",
+        "revenue_share": 0.44,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "제조부문(의료용 고무제품)",
-      "caption": "콘돔·의료용 장갑 등 위생·의료용 고무제품 제조판매",
-      "kind": "service",
-      "visual": "제조부문",
-      "image": "../data/business_images/business_image_local_rubber.svg",
-      "image_source": "Local curated visual"
+      "title": "의료기기",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.0%",
+      "kind": "bio",
+      "visual": "MEDICAL",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "엔터테인먼트부문",
-      "caption": "소속 아티스트 활동·음반·드라마 등 콘텐츠 기획제작",
-      "kind": "platform",
-      "visual": "엔터테인먼트부문",
-      "image": "../data/business_images/business_image_local_content.svg",
-      "image_source": "Local curated visual"
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "엔터테인먼트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "㈜빌리언스 엔터부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

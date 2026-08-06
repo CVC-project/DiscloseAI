@@ -153,7 +153,15 @@
   "snippets": {
     "overview": "창해에탄올은 소주 등의 원료로 쓰이는 발효주정·정제주정을 만드는 주정사업을 핵심으로, 계열사를 통해 폐열을 활용한 스팀공급(우리에너지), 에탄올 플랜트 시공(창해이엔지), 베트남 타피오카 칩 수출입(창해베트남) 사업도 함께 운영하는 회사입니다. 주정 부문이 매출의 약 84%를 차지하며, 국내 주정 생산량의 약 20% 이상을 담당하는 업계 상위 사업자입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,223억 원으로 전년 대비 11.0% 줄었고 영업이익도 8.6% 감소했지만, 당기순이익은 5.2% 늘어 최종적으로 남는 돈은 오히려 증가했습니다. 부채비율은 33.6%로 재무구조는 비교적 안정적인 편입니다.",
     "segment_finance": "창해에탄올은 소주 등의 원료로 쓰이는 발효주정·정제주정을 만드는 주정사업을 핵심으로, 계열사를 통해 폐열을 활용한 스팀공급(우리에너지), 에탄올 플랜트 시공(창해이엔지), 베트남 타피오카 칩 수출입(창해베트남) 사업도 함께 운영하는 회사입니다. 주정 부문이 매출의 약 84%를 차지하며, 국내 주정 생산량의 약 20% 이상을 담당하는 업계 상위 사업자입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,223억 원으로 전년 대비 11.0% 줄었고 영업이익도 8.6% 감소했지만, 당기순이익은 5.2% 늘어 최종적으로 남는 돈은 오히려 증가했습니다. 부채비율은 33.6%로 재무구조는 비교적 안정적인 편입니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "정제주정",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 42.0%",
+        "revenue_share": 0.4204,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "발효주정",
       "정제주정",
@@ -162,40 +170,46 @@
       "타피오카칩(에탄올 원료)",
       "신재생에너지 발전설비 공사"
     ],
-    "investor_note": "창해에탄올은 소주 등의 원료로 쓰이는 발효주정·정제주정을 만드는 주정사업을 핵심으로, 계열사를 통해 폐열을 활용한 스팀공급(우리에너지), 에탄올 플랜트 시공(창해이엔지), 베트남 타피오카 칩 수출입(창해베트남) 사업도 함께 운영하는 회사입니다. 주정 부문이 매출의 약 84%를 차지하며, 국내 주정 생산량의 약 20% 이상을 담당하는 업계 상위 사업자입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,223억 원으로 전년 대비 11.0% 줄었고 영업이익도 8.6% 감소했지만, 당기순이익은 5.2% 늘어 최종적으로 남는 돈은 오히려 증가했습니다. 부채비율은 33.6%로 재무구조는 비교적 안정적인 편입니다."
+    "investor_note": "창해에탄올은 소주 등의 원료로 쓰이는 발효주정·정제주정을 만드는 주정사업을 핵심으로, 계열사를 통해 폐열을 활용한 스팀공급(우리에너지), 에탄올 플랜트 시공(창해이엔지), 베트남 타피오카 칩 수출입(창해베트남) 사업도 함께 운영하는 회사입니다. 주정 부문이 매출의 약 84%를 차지하며, 국내 주정 생산량의 약 20% 이상을 담당하는 업계 상위 사업자입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,223억 원으로 전년 대비 11.0% 줄었고 영업이익도 8.6% 감소했지만, 당기순이익은 5.2% 늘어 최종적으로 남는 돈은 오히려 증가했습니다. 부채비율은 33.6%로 재무구조는 비교적 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "주정사업부",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 41.2%",
+        "revenue_share": 0.4123,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "정제주정",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 42.0%",
+        "revenue_share": 0.4204,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "에너지사업부",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.8%",
+        "revenue_share": 0.048,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "엔지니어링사업부",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.9%",
+        "revenue_share": 0.1892,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "주정사업부",
-      "caption": "소주 등 원료용 발효·정제주정 제조판매(창해에탄올)",
-      "kind": "service",
-      "visual": "주정사업부",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "엔지니어링사업부",
-      "caption": "에탄올플랜트 설계·시공·유지보수(창해이엔지)",
-      "kind": "ship",
-      "visual": "엔지니어링사업부",
+      "title": "주류",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 41.2%",
+      "kind": "consumer",
+      "visual": "ALCOHOL",
       "image": "../data/business_images/business_image_local_alcohol.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "무역사업부",
-      "caption": "베트남 타피오카 칩 수집·수출입(창해베트남)",
-      "kind": "service",
-      "visual": "무역사업부",
-      "image": "../data/business_images/business_image_local_alcohol.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "에너지사업부",
-      "caption": "소각폐열 활용 산업단지 스팀공급(우리에너지)",
-      "kind": "power",
-      "visual": "에너지사업부",
-      "image": "../data/business_images/business_image_local_alcohol.svg",
-      "image_source": "Local curated visual"
+      "image_source": "Local visual"
     }
   ],
   "custom_report_ideas": [

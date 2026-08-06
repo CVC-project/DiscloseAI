@@ -155,14 +155,25 @@
     "segment_finance": "한국큐빅은 자동차 내장재 곡면 표면처리(Curl-Fit) 기술을 가진 지배회사와, 라디에이터 그릴·엠블럼· 몰딩 등 외장재를 사출·도금으로 만드는 삼신화학공업을 자회사로 둔 자동차 부품 회사로, 매출의 대부분(약 88%)은 외장재에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,272억 원으로 전년 대비 9.9% 줄었고 영업이익은 79억 원(-30.6%), 당기순이익은 46억 원(-52.4%)으로 함께 감소했습니다. 부채비율은 65.6%로 관리가 필요한 수준입니다.",
     "segment_breakdown": [
       {
-        "name": "자동차외장재",
-        "desc": "라디에이터 그릴·엠블럼·몰딩 등 사출·도금 제조",
-        "revenue_share": 0.88
+        "name": "자동차내장재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.0%",
+        "revenue_share": 0.12,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "자동차내장재",
-        "desc": "Curl-Fit 공법으로 자동차 내장재 곡면 표면처리",
-        "revenue_share": 0.12
+        "name": "자동차외장재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 88.0%",
+        "revenue_share": 0.88,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총 매출액",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -171,22 +182,45 @@
       "엠블럼",
       "몰딩"
     ],
-    "investor_note": "한국큐빅은 자동차 내장재 곡면 표면처리(Curl-Fit) 기술을 가진 지배회사와, 라디에이터 그릴·엠블럼· 몰딩 등 외장재를 사출·도금으로 만드는 삼신화학공업을 자회사로 둔 자동차 부품 회사로, 매출의 대부분(약 88%)은 외장재에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,272억 원으로 전년 대비 9.9% 줄었고 영업이익은 79억 원(-30.6%), 당기순이익은 46억 원(-52.4%)으로 함께 감소했습니다. 부채비율은 65.6%로 관리가 필요한 수준입니다."
+    "investor_note": "한국큐빅은 자동차 내장재 곡면 표면처리(Curl-Fit) 기술을 가진 지배회사와, 라디에이터 그릴·엠블럼· 몰딩 등 외장재를 사출·도금으로 만드는 삼신화학공업을 자회사로 둔 자동차 부품 회사로, 매출의 대부분(약 88%)은 외장재에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,272억 원으로 전년 대비 9.9% 줄었고 영업이익은 79억 원(-30.6%), 당기순이익은 46억 원(-52.4%)으로 함께 감소했습니다. 부채비율은 65.6%로 관리가 필요한 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "자동차내장재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.0%",
+        "revenue_share": 0.12,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동차외장재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 88.0%",
+        "revenue_share": 0.88,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총 매출액",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "자동차외장재",
-      "caption": "라디에이터 그릴·엠블럼·몰딩 등 사출·도금 제조",
+      "title": "자동차내장재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.0%",
       "kind": "auto",
-      "visual": "자동차외장재",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "자동차내장재",
-      "caption": "Curl-Fit 공법으로 자동차 내장재 곡면 표면처리",
+      "title": "자동차외장재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 88.0%",
       "kind": "auto",
-      "visual": "자동차내장재",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     }

@@ -156,8 +156,10 @@
     "segment_breakdown": [
       {
         "name": "종합고무부품부문",
-        "desc": "자동차용 고무부품, 토목건축자재·면진제진시스템",
-        "revenue_share": 0.331
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.1%",
+        "revenue_share": 0.331,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -169,22 +171,45 @@
       "자동화 솔루션",
       "의료기기"
     ],
-    "investor_note": "DRB동일은 2022년 순수지주회사로 전환한 회사로, 전동벨트·컨베어벨트·러버트랙을 만드는 산업용고무제품부문(매출의 약 55%)과 자동차 실링부품·면진제진시스템을 만드는 종합고무부품부문(약 33%), 자동화·의료기기 사업(약 12%)으로 구성돼 있습니다. 2025년 매출액은 8,027억 원(+6.7%), 영업이익 248억 원(+13.8%)으로 늘었지만 당기순이익은 89억 원으로 31.9% 줄었습니다. 총자산은 9,749억 원(-0.8%), 부채비율 84.3%, ROE 1.7%입니다. 감사인은 계열사 간 거래 공시가 제대로 됐는지를 핵심 점검사항으로 짚었습니다. 과거 공시 기반 참고 정보입니다."
+    "investor_note": "DRB동일은 2022년 순수지주회사로 전환한 회사로, 전동벨트·컨베어벨트·러버트랙을 만드는 산업용고무제품부문(매출의 약 55%)과 자동차 실링부품·면진제진시스템을 만드는 종합고무부품부문(약 33%), 자동화·의료기기 사업(약 12%)으로 구성돼 있습니다. 2025년 매출액은 8,027억 원(+6.7%), 영업이익 248억 원(+13.8%)으로 늘었지만 당기순이익은 89억 원으로 31.9% 줄었습니다. 총자산은 9,749억 원(-0.8%), 부채비율 84.3%, ROE 1.7%입니다. 감사인은 계열사 간 거래 공시가 제대로 됐는지를 핵심 점검사항으로 짚었습니다. 과거 공시 기반 참고 정보입니다.",
+    "product_service_segments": [
+      {
+        "name": "산업용고무제품부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 54.7%",
+        "revenue_share": 0.547,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "종합고무부품부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.1%",
+        "revenue_share": 0.331,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.2%",
+        "revenue_share": 0.122,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "산업용고무제품부문",
-      "caption": "전동벨트·컨베어벨트·러버트랙 제조",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 54.7%",
       "kind": "service",
-      "visual": "산업용고무제품부문",
-      "image": "../data/business_images/business_image_local_rubber.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "종합고무부품부문",
-      "caption": "자동차용 고무부품, 토목건축자재·면진제진시스템",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.1%",
       "kind": "auto",
-      "visual": "종합고무부품부문",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     }

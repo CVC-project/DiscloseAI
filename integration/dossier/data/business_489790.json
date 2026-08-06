@@ -107,14 +107,32 @@
     "segment_finance": "한화비전(주)의 핵심은 시큐리티부문, 산업용장비부문, 세전부문이익(손실), 개발센터 반도체후공정 부문 등입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 및 국내외종속법인은 비메모리 반도체칩의 설계용역을 주업으로 하며, 2025년 연결 조정 후 외부매출액은 없으며, 영상처리 SoC 및 NPU 설계에 관한 연구 개발을 수행하였습니다. 당사는 지주회사로서 종속법인의 경영활동을 지원하고 신사업을 발굴하는 역할을 수행하였습니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다.",
     "segment_breakdown": [
       {
-        "name": "시큐리티부문",
-        "desc": "시큐리티 관련 제품·서비스",
-        "revenue_share": null
+        "name": "시큐리티",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.6%",
+        "revenue_share": 0.5561,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "산업용장비부문",
-        "desc": "산업용장비 관련 제품·서비스",
-        "revenue_share": null
+        "name": "저장장치",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.9%",
+        "revenue_share": 0.0791,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "주변기기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.1%",
+        "revenue_share": 0.0809,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "산업용장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.5%",
+        "revenue_share": 0.1553,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -131,32 +149,70 @@
       "저장장치",
       "액세서리 등"
     ],
-    "investor_note": "한화비전(주)의 핵심은 시큐리티부문, 산업용장비부문, 세전부문이익(손실), 개발센터 반도체후공정 부문 등입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 및 국내외종속법인은 비메모리 반도체칩의 설계용역을 주업으로 하며, 2025년 연결 조정 후 외부매출액은 없으며, 영상처리 SoC 및 NPU 설계에 관한 연구 개발을 수행하였습니다. 당사는 지주회사로서 종속법인의 경영활동을 지원하고 신사업을 발굴하는 역할을 수행하였습니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다."
+    "investor_note": "한화비전(주)의 핵심은 시큐리티부문, 산업용장비부문, 세전부문이익(손실), 개발센터 반도체후공정 부문 등입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 및 국내외종속법인은 비메모리 반도체칩의 설계용역을 주업으로 하며, 2025년 연결 조정 후 외부매출액은 없으며, 영상처리 SoC 및 NPU 설계에 관한 연구 개발을 수행하였습니다. 당사는 지주회사로서 종속법인의 경영활동을 지원하고 신사업을 발굴하는 역할을 수행하였습니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다.",
+    "product_service_segments": [
+      {
+        "name": "시큐리티",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.6%",
+        "revenue_share": 0.5561,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "저장장치",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.9%",
+        "revenue_share": 0.0791,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "주변기기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.1%",
+        "revenue_share": 0.0809,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "산업용장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.5%",
+        "revenue_share": 0.1553,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "※ 품목별 수출",
-      "caption": "※ 품목별 수출 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "telecom",
-      "visual": "NET",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "title": "보안 솔루션",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.6%",
+      "kind": "service",
+      "visual": "SECURITY",
+      "image": "../data/business_images/business_image_281a9ea62f3d74e6.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "매입처와특수한관계여부",
-      "caption": "매입처와특수한관계여부 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "저장장치",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.9%",
       "kind": "telecom",
       "visual": "NET",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "공급시장의독과점 정도",
-      "caption": "공급시장의독과점 정도 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "주변기기",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.1%",
       "kind": "telecom",
       "visual": "NET",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "산업용장비",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.5%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

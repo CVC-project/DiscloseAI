@@ -153,47 +153,84 @@
   "snippets": {
     "overview": "변화를 정확히 예측할 수가 없기 때문에 수주물량, 수주잔고 등 별도 수주상황을 관리하지 않고 있습니다.",
     "segment_finance": "변화를 정확히 예측할 수가 없기 때문에 수주물량, 수주잔고 등 별도 수주상황을 관리하지 않고 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "휴대폰부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.0%",
+        "revenue_share": 0.17,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동차부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 81.0%",
+        "revenue_share": 0.81,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "산업용 재봉기 및 자수기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.02,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "아연",
       "마그네슘 다이캐스팅 제품",
       "시간",
       "상품매출 등"
     ],
-    "investor_note": "변화를 정확히 예측할 수가 없기 때문에 수주물량, 수주잔고 등 별도 수주상황을 관리하지 않고 있습니다."
+    "investor_note": "변화를 정확히 예측할 수가 없기 때문에 수주물량, 수주잔고 등 별도 수주상황을 관리하지 않고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "휴대폰부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.0%",
+        "revenue_share": 0.17,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동차부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 81.0%",
+        "revenue_share": 0.81,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "산업용 재봉기 및 자수기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.02,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "아연",
-      "caption": "아연 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "telecom",
-      "visual": "NET",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "title": "휴대폰부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.0%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "마그네슘 다이캐스팅 제품",
-      "caption": "마그네슘 다이캐스팅 제품 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "telecom",
-      "visual": "NET",
-      "image": "../data/business_images/business_image_local_auto_part.svg",
-      "image_source": "Local curated visual"
+      "title": "자동차부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 81.0%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "시간",
-      "caption": "시간 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "산업용 재봉기 및 자수기",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
       "kind": "telecom",
       "visual": "NET",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "상품매출 등",
-      "caption": "상품매출 등 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "telecom",
-      "visual": "NET",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

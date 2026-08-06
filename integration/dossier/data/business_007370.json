@@ -155,24 +155,32 @@
     "segment_finance": "진양제약은 크리빅스정(고지혈증 치료제) 등 순환계용약을 주력으로, 중추신경계·소화기관용약과 다양한 제네릭 의약품을 생산·판매하는 제약회사입니다. 매출의 약 3분의 1이 순환계용약에서 나오며, 코스닥 상장 제약사 중에서도 매출 규모 상위권에 속합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,206억 원으로 전년보다 6.5% 늘었지만 영업이익은 78.4% 줄었고, 보유 부동산 평가이익 등의 영향으로 당기순이익은 222억 원을 기록했습니다. 부채비율은 67.5%, 자기자본이익률(ROE)은 15.9%였습니다.",
     "segment_breakdown": [
       {
-        "name": "순환계용약",
-        "desc": "크리빅스정 등 고지혈증·순환기 치료제",
-        "revenue_share": 0.326
+        "name": "의약품제조판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.6%",
+        "revenue_share": 0.3258,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "중추신경계용약",
-        "desc": "아세콜 등 중추신경계 치료제",
-        "revenue_share": 0.123
+        "name": "아세콜 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.3%",
+        "revenue_share": 0.1228,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "소화기관용약",
-        "desc": "에스졸정 등 소화기 치료제",
-        "revenue_share": 0.119
+        "name": "에스졸정 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.9%",
+        "revenue_share": 0.1188,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "대사성의약품 등",
-        "desc": "미아릴정 등 대사성 의약품",
-        "revenue_share": 0.101
+        "name": "미아릴정 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.1%",
+        "revenue_share": 0.1008,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -183,40 +191,70 @@
       "진프라그정",
       "아토란정"
     ],
-    "investor_note": "진양제약은 크리빅스정(고지혈증 치료제) 등 순환계용약을 주력으로, 중추신경계·소화기관용약과 다양한 제네릭 의약품을 생산·판매하는 제약회사입니다. 매출의 약 3분의 1이 순환계용약에서 나오며, 코스닥 상장 제약사 중에서도 매출 규모 상위권에 속합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,206억 원으로 전년보다 6.5% 늘었지만 영업이익은 78.4% 줄었고, 보유 부동산 평가이익 등의 영향으로 당기순이익은 222억 원을 기록했습니다. 부채비율은 67.5%, 자기자본이익률(ROE)은 15.9%였습니다."
+    "investor_note": "진양제약은 크리빅스정(고지혈증 치료제) 등 순환계용약을 주력으로, 중추신경계·소화기관용약과 다양한 제네릭 의약품을 생산·판매하는 제약회사입니다. 매출의 약 3분의 1이 순환계용약에서 나오며, 코스닥 상장 제약사 중에서도 매출 규모 상위권에 속합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,206억 원으로 전년보다 6.5% 늘었지만 영업이익은 78.4% 줄었고, 보유 부동산 평가이익 등의 영향으로 당기순이익은 222억 원을 기록했습니다. 부채비율은 67.5%, 자기자본이익률(ROE)은 15.9%였습니다.",
+    "product_service_segments": [
+      {
+        "name": "의약품제조판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.6%",
+        "revenue_share": 0.3258,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "아세콜 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.3%",
+        "revenue_share": 0.1228,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "에스졸정 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.9%",
+        "revenue_share": 0.1188,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "미아릴정 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.1%",
+        "revenue_share": 0.1008,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "순환계용약",
-      "caption": "크리빅스정 등 고지혈증·순환기 치료제",
-      "kind": "service",
-      "visual": "순환계용약",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "중추신경계용약",
-      "caption": "아세콜 등 중추신경계 치료제",
-      "kind": "service",
-      "visual": "중추신경계용약",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "소화기관용약",
-      "caption": "에스졸정 등 소화기 치료제",
-      "kind": "service",
-      "visual": "소화기관용약",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "대사성의약품 등",
-      "caption": "미아릴정 등 대사성 의약품",
+      "title": "의약품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.6%",
       "kind": "bio",
-      "visual": "대사성의약품",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "아세콜 외",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.3%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "에스졸정 외",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "미아릴정 외",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.1%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

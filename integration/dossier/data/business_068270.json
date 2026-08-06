@@ -101,13 +101,24 @@
     "segment_breakdown": [
       {
         "name": "바이오의약품",
-        "desc": "항체 바이오시밀러 및 신약 개발·판매",
-        "revenue_share": 0.9327
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 93.2%",
+        "revenue_share": 0.932,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.0007,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "케미컬의약품",
-        "desc": "합성의약품 및 제네릭 의약품 판매",
-        "revenue_share": 0.0673
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.5%",
+        "revenue_share": 0.0654,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "investor_note": "셀트리온은 항체 바이오시밀러(원래 의약품과 같은 효과를 내도록 만든 복제 생물의약품)와 신약을 개발·판매하는 바이오제약 회사로, 램시마, 트룩시마, 허쥬마 등 12개의 주요 제품을 보유하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액이 4조 1,625억 원으로 전년 대비 16.9% 증가했으며, 영업이익은 1조 1,685억 원으로 137.5% 급증해 수익성이 크게 개선되었습니다. 순이익(회사가 벌어들인 최종 이익)도 1조 296억 원으로 143.6% 증가했고, 주당순이익은 4,668원으로 2배 이상 늘어나 주주가치가 향상되었습니다. 재무 건전성 측면에서 부채비율(빌린 돈이 자산에서 차지하는 비중)이 28.7%로 낮아 안정적인 재무 구조를 유지하고 있으며, 총자산은 22조 3,349억 원으로 꾸준히 증가하는 중입니다.",
@@ -126,39 +137,38 @@
       "렉키로나 (CT-P59)"
     ],
     "raw_moves": [],
-    "utilization": []
+    "utilization": [],
+    "product_service_segments": [
+      {
+        "name": "바이오의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 93.2%",
+        "revenue_share": 0.932,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.0007,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "케미컬의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.5%",
+        "revenue_share": 0.0654,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "바이오시밀러",
-      "caption": "자가면역질환·항암제 바이오시밀러 판매가 핵심입니다.",
+      "title": "의약품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 93.2%",
       "kind": "bio",
-      "visual": "Bio",
+      "visual": "PHARMA",
       "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "신제품 출시",
-      "caption": "허가와 출시 일정이 매출 성장의 관문입니다.",
-      "kind": "lab",
-      "visual": "Launch",
-      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "해외 판매",
-      "caption": "미국·유럽 판매망과 약가 경쟁력이 매출을 좌우합니다.",
-      "kind": "platform",
-      "visual": "Global",
-      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "연구개발",
-      "caption": "후속 파이프라인과 임상 투자가 장기 경쟁력을 만듭니다.",
-      "kind": "bio",
-      "visual": "R&D",
-      "image": "../data/business_images/business_image_c1540b930934e19f.avif",
       "image_source": "Unsplash"
     }
   ],

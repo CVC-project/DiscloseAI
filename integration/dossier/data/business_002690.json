@@ -156,18 +156,24 @@
     "segment_breakdown": [
       {
         "name": "선재",
-        "desc": "PC강연선·경강선 등 선재 제품",
-        "revenue_share": 0.1587
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.9%",
+        "revenue_share": 0.1587,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "마봉",
-        "desc": "일반·스텐리스 마봉강",
-        "revenue_share": 0.5189
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.9%",
+        "revenue_share": 0.5189,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "세경봉",
-        "desc": "자동차 단조용 알루미늄 연속주조봉",
-        "revenue_share": 0.3224
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.2%",
+        "revenue_share": 0.3224,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -178,32 +184,55 @@
       "스텐리스마봉강",
       "알루미늄 세경연속주조봉(단조용 소재)"
     ],
-    "investor_note": "동일제강은 건설·자동차용 PC강연선과 마봉강을 만드는 선재업체로, 최근에는 자동차 경량화 수요에 대응해 알루미늄 세경봉(단조용 소재) 사업을 키우고 있습니다. 중국산 저가 철강 유입과 시황 부진으로 매출은 줄었지만 원가 관리로 적자 폭은 줄어드는 모습입니다. 과거 공시 기반 참고 정보로, 매출액은 1,473억 원으로 전년 대비 2.5% 감소했고 영업손실은 35억 원으로 전년보다 적자 폭이 39.5% 개선됐으며, 당기순이익은 13억 원으로 흑자 전환했습니다. 부채비율은 11.9%로 낮은 편이라 재무 안정성은 양호한 편입니다."
+    "investor_note": "동일제강은 건설·자동차용 PC강연선과 마봉강을 만드는 선재업체로, 최근에는 자동차 경량화 수요에 대응해 알루미늄 세경봉(단조용 소재) 사업을 키우고 있습니다. 중국산 저가 철강 유입과 시황 부진으로 매출은 줄었지만 원가 관리로 적자 폭은 줄어드는 모습입니다. 과거 공시 기반 참고 정보로, 매출액은 1,473억 원으로 전년 대비 2.5% 감소했고 영업손실은 35억 원으로 전년보다 적자 폭이 39.5% 개선됐으며, 당기순이익은 13억 원으로 흑자 전환했습니다. 부채비율은 11.9%로 낮은 편이라 재무 안정성은 양호한 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "선재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.9%",
+        "revenue_share": 0.1587,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "마봉",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.9%",
+        "revenue_share": 0.5189,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "세경봉",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.2%",
+        "revenue_share": 0.3224,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "선재",
-      "caption": "PC강연선·경강선 등 선재 제품",
-      "kind": "service",
-      "visual": "선재",
-      "image": "../data/business_images/business_image_local_cement.svg",
-      "image_source": "Local curated visual"
+      "title": "철강",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.9%",
+      "kind": "material",
+      "visual": "STEEL",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "마봉",
-      "caption": "일반·스텐리스 마봉강",
-      "kind": "service",
-      "visual": "마봉",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.9%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "세경봉",
-      "caption": "자동차 단조용 알루미늄 연속주조봉",
-      "kind": "auto",
-      "visual": "세경봉",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.2%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

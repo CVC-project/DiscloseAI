@@ -137,7 +137,29 @@
   "snippets": {
     "overview": "(주)엑스게이트의 주요 제품·서비스는 관제서비스, 유무선통합보안솔루션, 복구, 통합보안관제서비스, 공공기관, IDS입니다. 연구개발활동 당사는 고객의 요구를 먼저 파악하고 발상의 전환을 통해 창조적이고 혁신적인 제품,미래를 선도하는 기술을 지속적으로 창출하여 시장을 선도해 나가고 있습니다. 제품 출하 시 제공 가능한 UTM 기능들(VPN, IPS, 방화벽 등)을 전부 설치하며, 고객사가 원하는 기능을 세팅 및 정책 업데이트 등을 통하여 사용할 수 있게 합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "(주)엑스게이트의 주요 제품·서비스는 관제서비스, 유무선통합보안솔루션, 복구, 통합보안관제서비스, 공공기관, IDS입니다. 연구개발활동 당사는 고객의 요구를 먼저 파악하고 발상의 전환을 통해 창조적이고 혁신적인 제품,미래를 선도하는 기술을 지속적으로 창출하여 시장을 선도해 나가고 있습니다. 제품 출하 시 제공 가능한 UTM 기능들(VPN, IPS, 방화벽 등)을 전부 설치하며, 고객사가 원하는 기능을 세팅 및 정책 업데이트 등을 통하여 사용할 수 있게 합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "HW/SW",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.5%",
+        "revenue_share": 0.685,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "유지보수/RMA",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.0%",
+        "revenue_share": 0.11,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매 출 총 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "관제서비스",
       "유무선통합보안솔루션",
@@ -152,24 +174,62 @@
       "번호",
       "내용"
     ],
-    "investor_note": "(주)엑스게이트의 주요 제품·서비스는 관제서비스, 유무선통합보안솔루션, 복구, 통합보안관제서비스, 공공기관, IDS입니다. 연구개발활동 당사는 고객의 요구를 먼저 파악하고 발상의 전환을 통해 창조적이고 혁신적인 제품,미래를 선도하는 기술을 지속적으로 창출하여 시장을 선도해 나가고 있습니다. 제품 출하 시 제공 가능한 UTM 기능들(VPN, IPS, 방화벽 등)을 전부 설치하며, 고객사가 원하는 기능을 세팅 및 정책 업데이트 등을 통하여 사용할 수 있게 합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)엑스게이트의 주요 제품·서비스는 관제서비스, 유무선통합보안솔루션, 복구, 통합보안관제서비스, 공공기관, IDS입니다. 연구개발활동 당사는 고객의 요구를 먼저 파악하고 발상의 전환을 통해 창조적이고 혁신적인 제품,미래를 선도하는 기술을 지속적으로 창출하여 시장을 선도해 나가고 있습니다. 제품 출하 시 제공 가능한 UTM 기능들(VPN, IPS, 방화벽 등)을 전부 설치하며, 고객사가 원하는 기능을 세팅 및 정책 업데이트 등을 통하여 사용할 수 있게 합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "HW/SW",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.5%",
+        "revenue_share": 0.685,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "서비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.5%",
+        "revenue_share": 0.205,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "유지보수/RMA",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.0%",
+        "revenue_share": 0.11,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매 출 총 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "유무선통합보안솔루션",
-      "caption": "유무선통합보안솔루션 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "telecom",
-      "visual": "유무선통합보안솔루션",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "title": "HW/SW",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "복구",
-      "caption": "복구 관련 제품과 서비스를 통해 매출을 만듭니다.",
+      "title": "유지보수/RMA",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.0%",
+      "kind": "consumer",
+      "visual": "INGREDIENT",
+      "image": "../data/business_images/business_image_food_ingredient.svg",
+      "image_source": "Local visual"
+    },
+    {
+      "title": "매 출 총 계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
       "kind": "service",
-      "visual": "복구",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

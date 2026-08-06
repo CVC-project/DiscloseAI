@@ -155,24 +155,32 @@
     "segment_finance": "코아스는 1992년 설립된 사무용 가구 전문업체로, 책상·의자·캐비닛·파티션 등 전통 제품군에 더해 최근에는 IoT 전동 데스크와 AI 기반 자세교정 의자 같은 스마트오피스 제품으로 영역을 넓히고 있습니다. 퍼시스·리바트와 함께 국내 사무용 가구 3대 업체로 꼽히며, 2025년 APEC 정상회의에 친환경 가구를 협찬하기도 했습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 622억 원으로 전년 대비 20.2% 줄었고, 영업손실은 56억 원으로 적자 규모는 다소 줄었으나 여전히 적자이며, 당기순손실은 314억 원으로 크게 확대됐습니다. 부채비율은 134.5%이고, 감사보고서에는 계속기업으로서의 존속능력에 대한 중요한 불확실성이 존재한다는 설명이 포함돼 있어 재무 상황을 주의 깊게 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "사무용 의자",
-        "desc": "사무용 의자 제조·판매",
-        "revenue_share": 0.281
+        "name": "사무용 가구",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.8%",
+        "revenue_share": 0.1275,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "책상·수납",
-        "desc": "책상, 캐비닛, 서랍",
-        "revenue_share": 0.296
+        "name": "서랍",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.8%",
+        "revenue_share": 0.048,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "시스템 가구",
-        "desc": "판넬과 사무공간 시공",
-        "revenue_share": 0.137
+        "name": "의자",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.1%",
+        "revenue_share": 0.2806,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "교육·병원 가구",
-        "desc": "특수 공간용 가구 등",
-        "revenue_share": 0.286
+        "name": "캐비닛",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.0%",
+        "revenue_share": 0.1205,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -185,40 +193,70 @@
       "AI 자세교정 의자",
       "스마트 LED 조명"
     ],
-    "investor_note": "코아스는 1992년 설립된 사무용 가구 전문업체로, 책상·의자·캐비닛·파티션 등 전통 제품군에 더해 최근에는 IoT 전동 데스크와 AI 기반 자세교정 의자 같은 스마트오피스 제품으로 영역을 넓히고 있습니다. 퍼시스·리바트와 함께 국내 사무용 가구 3대 업체로 꼽히며, 2025년 APEC 정상회의에 친환경 가구를 협찬하기도 했습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 622억 원으로 전년 대비 20.2% 줄었고, 영업손실은 56억 원으로 적자 규모는 다소 줄었으나 여전히 적자이며, 당기순손실은 314억 원으로 크게 확대됐습니다. 부채비율은 134.5%이고, 감사보고서에는 계속기업으로서의 존속능력에 대한 중요한 불확실성이 존재한다는 설명이 포함돼 있어 재무 상황을 주의 깊게 살펴볼 필요가 있습니다."
+    "investor_note": "코아스는 1992년 설립된 사무용 가구 전문업체로, 책상·의자·캐비닛·파티션 등 전통 제품군에 더해 최근에는 IoT 전동 데스크와 AI 기반 자세교정 의자 같은 스마트오피스 제품으로 영역을 넓히고 있습니다. 퍼시스·리바트와 함께 국내 사무용 가구 3대 업체로 꼽히며, 2025년 APEC 정상회의에 친환경 가구를 협찬하기도 했습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 622억 원으로 전년 대비 20.2% 줄었고, 영업손실은 56억 원으로 적자 규모는 다소 줄었으나 여전히 적자이며, 당기순손실은 314억 원으로 크게 확대됐습니다. 부채비율은 134.5%이고, 감사보고서에는 계속기업으로서의 존속능력에 대한 중요한 불확실성이 존재한다는 설명이 포함돼 있어 재무 상황을 주의 깊게 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "사무용 가구",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.8%",
+        "revenue_share": 0.1275,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "서랍",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.8%",
+        "revenue_share": 0.048,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "의자",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.1%",
+        "revenue_share": 0.2806,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "캐비닛",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.0%",
+        "revenue_share": 0.1205,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "사무용 의자",
-      "caption": "사무용 의자 제조·판매",
+      "title": "사무용 가구",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.8%",
       "kind": "service",
-      "visual": "사무용",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "책상·수납",
-      "caption": "책상, 캐비닛, 서랍",
+      "title": "서랍",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.8%",
       "kind": "service",
-      "visual": "책상",
-      "image": "../data/business_images/business_image_local_default_b.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "시스템 가구",
-      "caption": "판넬과 사무공간 시공",
+      "title": "의자",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.1%",
       "kind": "service",
-      "visual": "시스템",
-      "image": "../data/business_images/business_image_local_default_c.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "교육·병원 가구",
-      "caption": "특수 공간용 가구 등",
+      "title": "캐비닛",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.0%",
       "kind": "service",
-      "visual": "교육",
-      "image": "../data/business_images/business_image_local_education.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

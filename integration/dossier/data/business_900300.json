@@ -153,7 +153,36 @@
   "snippets": {
     "overview": "오가니틱코스메틱의 핵심은 신발사업입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 자회사를 통해 신발 제품과 화장품의 판매를 핵심 사업으로 영위하고 있고 매출의 대부분을 차지하고 있는 주력 사업인 신발사업 부문은 중국과 인도네시아 시장을 중심으로 사업을 진행하고 있습니다. 100% 중국 내수 시장에서 판매되고 있으며, 시리즈별 각 제품단가를 평균으로 산출한 제품 판매 가격입니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다.",
     "segment_finance": "오가니틱코스메틱의 핵심은 신발사업입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 자회사를 통해 신발 제품과 화장품의 판매를 핵심 사업으로 영위하고 있고 매출의 대부분을 차지하고 있는 주력 사업인 신발사업 부문은 중국과 인도네시아 시장을 중심으로 사업을 진행하고 있습니다. 100% 중국 내수 시장에서 판매되고 있으며, 시리즈별 각 제품단가를 평균으로 산출한 제품 판매 가격입니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "클렌징화장품시리즈",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.9%",
+        "revenue_share": 0.0388,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "여름용화장품시리즈",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.7%",
+        "revenue_share": 0.1172,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기능성화장품시리즈",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.5%",
+        "revenue_share": 0.0252,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "영아용화장품시리즈",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.7%",
+        "revenue_share": 0.1567,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "생산개시일",
       "유아용화장품(프리미엄)시리즈",
@@ -166,24 +195,70 @@
       "시 장",
       "비고"
     ],
-    "investor_note": "오가니틱코스메틱의 핵심은 신발사업입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 자회사를 통해 신발 제품과 화장품의 판매를 핵심 사업으로 영위하고 있고 매출의 대부분을 차지하고 있는 주력 사업인 신발사업 부문은 중국과 인도네시아 시장을 중심으로 사업을 진행하고 있습니다. 100% 중국 내수 시장에서 판매되고 있으며, 시리즈별 각 제품단가를 평균으로 산출한 제품 판매 가격입니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다."
+    "investor_note": "오가니틱코스메틱의 핵심은 신발사업입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 자회사를 통해 신발 제품과 화장품의 판매를 핵심 사업으로 영위하고 있고 매출의 대부분을 차지하고 있는 주력 사업인 신발사업 부문은 중국과 인도네시아 시장을 중심으로 사업을 진행하고 있습니다. 100% 중국 내수 시장에서 판매되고 있으며, 시리즈별 각 제품단가를 평균으로 산출한 제품 판매 가격입니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다.",
+    "product_service_segments": [
+      {
+        "name": "클렌징화장품시리즈",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.9%",
+        "revenue_share": 0.0388,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "여름용화장품시리즈",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.7%",
+        "revenue_share": 0.1172,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기능성화장품시리즈",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.5%",
+        "revenue_share": 0.0252,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "영아용화장품시리즈",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.7%",
+        "revenue_share": 0.1567,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "생산개시일",
-      "caption": "생산개시일 관련 제품과 서비스를 통해 매출을 만듭니다.",
+      "title": "클렌징화장품시리즈",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.9%",
       "kind": "service",
-      "visual": "생산개시일",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "유아용화장품(프리미엄)시리즈",
-      "caption": "유아용화장품(프리미엄)시리즈 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "consumer",
-      "visual": "유아용화장품",
-      "image": "../data/business_images/business_image_local_cosmetics.svg",
-      "image_source": "Local curated visual"
+      "title": "여름용화장품시리즈",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "기능성화장품시리즈",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "영아용화장품시리즈",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

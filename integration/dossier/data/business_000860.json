@@ -156,13 +156,31 @@
     "segment_breakdown": [
       {
         "name": "도료",
-        "desc": "건축·선박·자동차·강관용 도료(페인트) 생산·판매",
-        "revenue_share": 0.556
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.2%",
+        "revenue_share": 0.3418,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "합성수지",
-        "desc": "공업용·건축자재용 합성수지 제조·판매",
-        "revenue_share": 0.42
+        "name": "상 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
+        "revenue_share": 0.0634,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "종속회사 [강남제비스코 (곤산)]",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+        "revenue_share": 0.0265,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "종속회사 [강남제비스코 파우더코팅스 (장가항)]",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.0%",
+        "revenue_share": 0.0597,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -175,24 +193,70 @@
       "복합성형재료",
       "사무용품"
     ],
-    "investor_note": "강남제비스코는 건축·선박·자동차·강관 등에 쓰이는 도료(페인트)를 주력으로 하고, 접착제와 합성수지, 복합재료, 사무용품까지 사업을 넓힌 화학 소재 기업입니다. 도료 부문이 매출의 약 56%, 합성수지 부문이 약 42%를 차지하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 5,985억 원으로 전년보다 6.9% 줄었고, 영업이익은 82억 원으로 59.6% 감소했으며, 당기순이익은 9억 원으로 94.9%나 줄어 수익성이 크게 나빠졌습니다. 다만 부채비율은 37.4%로 재무구조는 비교적 안정적인 편입니다."
+    "investor_note": "강남제비스코는 건축·선박·자동차·강관 등에 쓰이는 도료(페인트)를 주력으로 하고, 접착제와 합성수지, 복합재료, 사무용품까지 사업을 넓힌 화학 소재 기업입니다. 도료 부문이 매출의 약 56%, 합성수지 부문이 약 42%를 차지하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 5,985억 원으로 전년보다 6.9% 줄었고, 영업이익은 82억 원으로 59.6% 감소했으며, 당기순이익은 9억 원으로 94.9%나 줄어 수익성이 크게 나빠졌습니다. 다만 부채비율은 37.4%로 재무구조는 비교적 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "도료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.2%",
+        "revenue_share": 0.3418,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
+        "revenue_share": 0.0634,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "종속회사 [강남제비스코 (곤산)]",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+        "revenue_share": 0.0265,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "종속회사 [강남제비스코 파우더코팅스 (장가항)]",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.0%",
+        "revenue_share": 0.0597,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "도료",
-      "caption": "건축·선박·자동차·강관용 도료(페인트) 생산·판매",
-      "kind": "auto",
-      "visual": "도료",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.2%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "합성수지",
-      "caption": "공업용·건축자재용 합성수지 제조·판매",
-      "kind": "service",
-      "visual": "합성수지",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "title": "상 품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "종속회사 [강남제비스코 (곤산)]",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "종속회사 [강남제비스코 파우더코팅스 (장가항)]",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

@@ -155,29 +155,32 @@
     "segment_finance": "삼천당제약은 하메론·티어린프리 등 점안제(안과용제)를 주력으로, 순환기·소화기·호흡기 질환 치료제와 항생제까지 다루는 전문의약품 제조사입니다. 매출의 61%가 안과용제에서 나오며, 자회사 옵투스제약과 함께 국내 점안제 생산 1위 지위를 바탕으로 미국·유럽·일본 등에 황반변성치료제(아일리아) 바이오시밀러 공급 계약을 다수 체결해 해외 진출을 확대하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,318억 원으로 전년 대비 9.9% 늘었고 영업이익은 84억 원으로 220.5% 증가했으며 당기순이익은 120억 원으로 적자에서 흑자로 전환됐습니다. 부채비율은 54.4%로 관리 가능한 수준입니다.",
     "segment_breakdown": [
       {
-        "name": "안과용제",
-        "desc": "하메론·티어린프리 등 점안제(건성질환·각막염 치료)",
-        "revenue_share": 0.6106
+        "name": "의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.2%",
+        "revenue_share": 0.1119,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "순환기질환치료제",
-        "desc": "아토로우·지텐션 등 동맥경화·협심증 치료제",
-        "revenue_share": 0.0747
+        "name": "건성질환,각막염 치료제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.1%",
+        "revenue_share": 0.0314,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "소화기계용제",
-        "desc": "산화마그네슘·모푸렌 등",
-        "revenue_share": 0.0437
+        "name": "순 환 기질 환치 료 제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.0096,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "호흡기질환치료제",
-        "desc": "소담·타리에스 등 기관지염·알레르기비염 치료제",
-        "revenue_share": 0.0417
-      },
-      {
-        "name": "항생제",
-        "desc": "크라목스·파클 등",
-        "revenue_share": 0.0393
+        "name": "심근성허혈증 치료제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.4%",
+        "revenue_share": 0.0038,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -189,40 +192,54 @@
       "크라목스(항생제)",
       "황반변성치료제 바이오시밀러(아일리아 시밀러)"
     ],
-    "investor_note": "삼천당제약은 하메론·티어린프리 등 점안제(안과용제)를 주력으로, 순환기·소화기·호흡기 질환 치료제와 항생제까지 다루는 전문의약품 제조사입니다. 매출의 61%가 안과용제에서 나오며, 자회사 옵투스제약과 함께 국내 점안제 생산 1위 지위를 바탕으로 미국·유럽·일본 등에 황반변성치료제(아일리아) 바이오시밀러 공급 계약을 다수 체결해 해외 진출을 확대하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,318억 원으로 전년 대비 9.9% 늘었고 영업이익은 84억 원으로 220.5% 증가했으며 당기순이익은 120억 원으로 적자에서 흑자로 전환됐습니다. 부채비율은 54.4%로 관리 가능한 수준입니다."
+    "investor_note": "삼천당제약은 하메론·티어린프리 등 점안제(안과용제)를 주력으로, 순환기·소화기·호흡기 질환 치료제와 항생제까지 다루는 전문의약품 제조사입니다. 매출의 61%가 안과용제에서 나오며, 자회사 옵투스제약과 함께 국내 점안제 생산 1위 지위를 바탕으로 미국·유럽·일본 등에 황반변성치료제(아일리아) 바이오시밀러 공급 계약을 다수 체결해 해외 진출을 확대하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,318억 원으로 전년 대비 9.9% 늘었고 영업이익은 84억 원으로 220.5% 증가했으며 당기순이익은 120억 원으로 적자에서 흑자로 전환됐습니다. 부채비율은 54.4%로 관리 가능한 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.2%",
+        "revenue_share": 0.1119,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "건성질환,각막염 치료제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.1%",
+        "revenue_share": 0.0314,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "순 환 기질 환치 료 제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.0096,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "심근성허혈증 치료제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.4%",
+        "revenue_share": 0.0038,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "안과용제",
-      "caption": "하메론·티어린프리 등 점안제(건성질환·각막염 치료)",
-      "kind": "service",
-      "visual": "안과용제",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "의약품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.2%",
+      "kind": "bio",
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "순환기질환치료제",
-      "caption": "아토로우·지텐션 등 동맥경화·협심증 치료제",
+      "title": "건성질환,각막염 치료제",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.1%",
       "kind": "service",
-      "visual": "순환기질환치료제",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "소화기계용제",
-      "caption": "산화마그네슘·모푸렌 등",
-      "kind": "service",
-      "visual": "소화기계용제",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "호흡기질환치료제",
-      "caption": "소담·타리에스 등 기관지염·알레르기비염 치료제",
-      "kind": "service",
-      "visual": "호흡기질환치료제",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

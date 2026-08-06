@@ -137,7 +137,15 @@
   "snippets": {
     "overview": "주식회사 핀텔의 주요 사업은 경기도 스타기업 육성사업, 적용사업, 육성사업입니다. 수주상황 당기말 기준 수주총액은 10,279백만원이며, 이 중 5,772백만원을 납품완료하여, 수주잔고는 4,507백만원입니다. 제품의 가격변동 당사의 제품에 대한 가격은 일반적인 제조업의 경우와는 다르게 프로젝트의 규모, 제공되는 서비스의 수준, 고객사의 요청 등에 따라 협의 또는 입찰에 의해 결정됩니다.",
     "segment_finance": "주식회사 핀텔의 주요 사업은 경기도 스타기업 육성사업, 적용사업, 육성사업입니다. 수주상황 당기말 기준 수주총액은 10,279백만원이며, 이 중 5,772백만원을 납품완료하여, 수주잔고는 4,507백만원입니다. 제품의 가격변동 당사의 제품에 대한 가격은 일반적인 제조업의 경우와는 다르게 프로젝트의 규모, 제공되는 서비스의 수준, 고객사의 요청 등에 따라 협의 또는 입찰에 의해 결정됩니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "교통 솔루션",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 75.0%",
+        "revenue_share": 0.75,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "자사제품",
       "보안 솔루션",
@@ -147,40 +155,40 @@
       "장치",
       "시스템"
     ],
-    "investor_note": "주식회사 핀텔의 주요 사업은 경기도 스타기업 육성사업, 적용사업, 육성사업입니다. 수주상황 당기말 기준 수주총액은 10,279백만원이며, 이 중 5,772백만원을 납품완료하여, 수주잔고는 4,507백만원입니다. 제품의 가격변동 당사의 제품에 대한 가격은 일반적인 제조업의 경우와는 다르게 프로젝트의 규모, 제공되는 서비스의 수준, 고객사의 요청 등에 따라 협의 또는 입찰에 의해 결정됩니다."
+    "investor_note": "주식회사 핀텔의 주요 사업은 경기도 스타기업 육성사업, 적용사업, 육성사업입니다. 수주상황 당기말 기준 수주총액은 10,279백만원이며, 이 중 5,772백만원을 납품완료하여, 수주잔고는 4,507백만원입니다. 제품의 가격변동 당사의 제품에 대한 가격은 일반적인 제조업의 경우와는 다르게 프로젝트의 규모, 제공되는 서비스의 수준, 고객사의 요청 등에 따라 협의 또는 입찰에 의해 결정됩니다.",
+    "product_service_segments": [
+      {
+        "name": "자사제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.0%",
+        "revenue_share": 0.24,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "교통 솔루션",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 75.0%",
+        "revenue_share": 0.75,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
+      "title": "자사제품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
       "title": "소프트웨어·솔루션",
-      "caption": "고객 업무를 자동화하거나 관리 효율을 높이는 소프트웨어 제품군입니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 75.0%",
       "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "시스템",
-      "caption": "시스템 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "중소벤처기업부",
-      "caption": "중소벤처기업부 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "완료",
-      "caption": "완료 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "visual": "SOFTWARE",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

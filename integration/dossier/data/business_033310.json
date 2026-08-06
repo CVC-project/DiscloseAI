@@ -155,19 +155,11 @@
     "segment_finance": "엠투엔은 석유화학제품 포장용기인 스틸드럼을 만드는 스틸드럼사업, 자동차·가전용 냉동공조부품(HVAC)을 생산하는 전장사업(옛 신한전기), 그리고 미국 자회사를 통해 신약을 개발하는 바이오사업을 함께 운영하고 있습니다. 전장사업이 매출의 약 59%, 스틸드럼사업이 약 41%를 차지하며, 바이오사업은 아직 매출 없이 개발비용만 발생하는 단계입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 865억 원으로 전년보다 5.1% 줄었고 영업이익도 27억 원으로 26.1% 감소했으며, 당기순이익은 -5억 원으로 전년 흑자에서 적자로 전환됐습니다. 다만 부채비율은 33.1%로 재무구조는 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "스틸드럼",
-        "desc": "석유화학제품 포장용 철강제 드럼 제조·판매",
-        "revenue_share": 0.4113
-      },
-      {
-        "name": "전장(HVAC부품)",
-        "desc": "자동차·가전용 냉동공조(HVAC) 부품 제조·판매",
-        "revenue_share": 0.5886
-      },
-      {
-        "name": "바이오(신약개발)",
-        "desc": "미국 자회사를 통한 신약후보물질 개발·임상(매출 미발생, 비용 단계)",
-        "revenue_share": null
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.2%",
+        "revenue_share": 0.0119,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -180,32 +172,55 @@
       "Thermostat",
       "신약후보물질(개발단계)"
     ],
-    "investor_note": "엠투엔은 석유화학제품 포장용기인 스틸드럼을 만드는 스틸드럼사업, 자동차·가전용 냉동공조부품(HVAC)을 생산하는 전장사업(옛 신한전기), 그리고 미국 자회사를 통해 신약을 개발하는 바이오사업을 함께 운영하고 있습니다. 전장사업이 매출의 약 59%, 스틸드럼사업이 약 41%를 차지하며, 바이오사업은 아직 매출 없이 개발비용만 발생하는 단계입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 865억 원으로 전년보다 5.1% 줄었고 영업이익도 27억 원으로 26.1% 감소했으며, 당기순이익은 -5억 원으로 전년 흑자에서 적자로 전환됐습니다. 다만 부채비율은 33.1%로 재무구조는 안정적인 편입니다."
+    "investor_note": "엠투엔은 석유화학제품 포장용기인 스틸드럼을 만드는 스틸드럼사업, 자동차·가전용 냉동공조부품(HVAC)을 생산하는 전장사업(옛 신한전기), 그리고 미국 자회사를 통해 신약을 개발하는 바이오사업을 함께 운영하고 있습니다. 전장사업이 매출의 약 59%, 스틸드럼사업이 약 41%를 차지하며, 바이오사업은 아직 매출 없이 개발비용만 발생하는 단계입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 865억 원으로 전년보다 5.1% 줄었고 영업이익도 27억 원으로 26.1% 감소했으며, 당기순이익은 -5억 원으로 전년 흑자에서 적자로 전환됐습니다. 다만 부채비율은 33.1%로 재무구조는 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "스틸드럼 사업부",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.9%",
+        "revenue_share": 0.3994,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.2%",
+        "revenue_share": 0.0119,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전장 사업부",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 58.9%",
+        "revenue_share": 0.5885,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "스틸드럼",
-      "caption": "석유화학제품 포장용 철강제 드럼 제조·판매",
-      "kind": "material",
-      "visual": "스틸드럼",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "전장(HVAC부품)",
-      "caption": "자동차·가전용 냉동공조(HVAC) 부품 제조·판매",
+      "title": "스틸드럼 사업부",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.9%",
       "kind": "auto",
-      "visual": "전장",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "바이오(신약개발)",
-      "caption": "미국 자회사를 통한 신약후보물질 개발·임상(매출 미발생, 비용 단계)",
-      "kind": "bio",
-      "visual": "바이오",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.2%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "전장부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 58.9%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_e310d326cafd0fb3.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

@@ -156,13 +156,17 @@
     "segment_breakdown": [
       {
         "name": "인조대리석",
-        "desc": "주방상판·건축 내외장재용 아크릴계 인조대리석 트라이스톤",
-        "revenue_share": 0.6464
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 64.6%",
+        "revenue_share": 0.6464,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "합성왁스",
-        "desc": "플라스틱·페인트·화장품 등에 첨가되는 기능향상제 왁스",
-        "revenue_share": 0.2919
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.2%",
+        "revenue_share": 0.2919,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -173,24 +177,40 @@
       "테라조무늬 인조대리석",
       "외장재용 인조대리석"
     ],
-    "investor_note": "라이온켐텍은 주방상판·건축 내외장재로 쓰이는 인조대리석 '트라이스톤'과, 플라스틱·페인트·화장품 등에 첨가되는 기능성 첨가제인 합성왁스('L-C WAX')를 만드는 소재기업입니다. 매출은 인조대리석이 약 65%, 합성왁스가 약 29%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,302억 원으로 전년 대비 8.1% 줄었지만 영업이익은 113억 원으로 21.3% 늘어 수익성은 오히려 개선됐습니다. 다만 당기순이익은 84억 원으로 3.7% 소폭 줄었습니다. 부채비율은 20.3%로 낮은 편이라 재무구조는 안정적인 편입니다."
+    "investor_note": "라이온켐텍은 주방상판·건축 내외장재로 쓰이는 인조대리석 '트라이스톤'과, 플라스틱·페인트·화장품 등에 첨가되는 기능성 첨가제인 합성왁스('L-C WAX')를 만드는 소재기업입니다. 매출은 인조대리석이 약 65%, 합성왁스가 약 29%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,302억 원으로 전년 대비 8.1% 줄었지만 영업이익은 113억 원으로 21.3% 늘어 수익성은 오히려 개선됐습니다. 다만 당기순이익은 84억 원으로 3.7% 소폭 줄었습니다. 부채비율은 20.3%로 낮은 편이라 재무구조는 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "인조대리석",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 64.6%",
+        "revenue_share": 0.6464,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "합성왁스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.2%",
+        "revenue_share": 0.2919,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "인조대리석",
-      "caption": "주방상판·건축 내외장재용 아크릴계 인조대리석 트라이스톤",
-      "kind": "service",
-      "visual": "인조대리석",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 64.6%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "합성왁스",
-      "caption": "플라스틱·페인트·화장품 등에 첨가되는 기능향상제 왁스",
-      "kind": "consumer",
-      "visual": "합성왁스",
-      "image": "../data/business_images/business_image_local_cosmetics.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.2%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

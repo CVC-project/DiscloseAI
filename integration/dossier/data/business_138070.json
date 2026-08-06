@@ -153,7 +153,36 @@
   "snippets": {
     "overview": "(주)신진에스엠의 주요 제품·서비스는 방산, 철강, 본사, 표준플레이트, 제품 매출 합계, 제품개발팀입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사 표준 플레이트 제품의 경쟁력은 대량생산과 효율적인 유통 시스템으로 인한 빠른 납기와 저가격 정책과 제품 품질에 대한 고객의 신용도 입니다. 이미 당사의 제품은 적극적인 홍보 없이도 많은 제조업체에서 그 품질력을 인정받아 오랜기간 신뢰를 받고 있으며,점점 수요시장이 확대되고 있어 제품 매출이 꾸준히 상승하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "(주)신진에스엠의 주요 제품·서비스는 방산, 철강, 본사, 표준플레이트, 제품 매출 합계, 제품개발팀입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사 표준 플레이트 제품의 경쟁력은 대량생산과 효율적인 유통 시스템으로 인한 빠른 납기와 저가격 정책과 제품 품질에 대한 고객의 신용도 입니다. 이미 당사의 제품은 적극적인 홍보 없이도 많은 제조업체에서 그 품질력을 인정받아 오랜기간 신뢰를 받고 있으며,점점 수요시장이 확대되고 있어 제품 매출이 꾸준히 상승하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "본사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 60.7%",
+        "revenue_share": 0.6069,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "정밀 가공설비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
+        "revenue_share": 0.0176,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "본사 매출 합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 64.4%",
+        "revenue_share": 0.6438,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "종속회사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.9%",
+        "revenue_share": 0.3492,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "방산",
       "철강",
@@ -167,32 +196,62 @@
       "환봉 절단기",
       "유공압"
     ],
-    "investor_note": "(주)신진에스엠의 주요 제품·서비스는 방산, 철강, 본사, 표준플레이트, 제품 매출 합계, 제품개발팀입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사 표준 플레이트 제품의 경쟁력은 대량생산과 효율적인 유통 시스템으로 인한 빠른 납기와 저가격 정책과 제품 품질에 대한 고객의 신용도 입니다. 이미 당사의 제품은 적극적인 홍보 없이도 많은 제조업체에서 그 품질력을 인정받아 오랜기간 신뢰를 받고 있으며,점점 수요시장이 확대되고 있어 제품 매출이 꾸준히 상승하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)신진에스엠의 주요 제품·서비스는 방산, 철강, 본사, 표준플레이트, 제품 매출 합계, 제품개발팀입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사 표준 플레이트 제품의 경쟁력은 대량생산과 효율적인 유통 시스템으로 인한 빠른 납기와 저가격 정책과 제품 품질에 대한 고객의 신용도 입니다. 이미 당사의 제품은 적극적인 홍보 없이도 많은 제조업체에서 그 품질력을 인정받아 오랜기간 신뢰를 받고 있으며,점점 수요시장이 확대되고 있어 제품 매출이 꾸준히 상승하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "본사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 60.7%",
+        "revenue_share": 0.6069,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "정밀 가공설비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
+        "revenue_share": 0.0176,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "본사 매출 합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 64.4%",
+        "revenue_share": 0.6438,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "종속회사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.9%",
+        "revenue_share": 0.3492,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "방산",
-      "caption": "방산 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "방산",
-      "image": "../data/business_images/business_image_4ae102473975707c.jpg",
+      "title": "본사",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 60.7%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "철강",
-      "caption": "철강 관련 제품과 서비스를 통해 매출을 만듭니다.",
+      "title": "정밀 가공설비",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
       "kind": "material",
-      "visual": "철강",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "본사",
-      "caption": "본사 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "본사",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "title": "종속회사",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.9%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

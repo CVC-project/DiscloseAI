@@ -108,34 +108,101 @@
     "raw_material": null,
     "capacity": null,
     "segment_finance": "",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "PGM",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 47.2%",
+        "revenue_share": 0.472,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "ISR",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.1%",
+        "revenue_share": 0.121,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "AEW",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.1%",
+        "revenue_share": 0.131,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "C4I",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.7%",
+        "revenue_share": 0.247,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "investor_note": "",
     "products": [],
     "raw_moves": [],
-    "utilization": []
+    "utilization": [],
+    "product_service_segments": [
+      {
+        "name": "PGM",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 47.2%",
+        "revenue_share": 0.472,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "ISR",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.1%",
+        "revenue_share": 0.121,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "AEW",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.1%",
+        "revenue_share": 0.131,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "C4I",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.7%",
+        "revenue_share": 0.247,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "유도무기",
-      "caption": "미사일·정밀타격 체계 수주와 납품을 봅니다.",
-      "kind": "aero",
-      "visual": "MISSILE",
+      "title": "PGM",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 47.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
       "image": "../data/business_images/business_image_1805fba8159acac6.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "레이다·센서",
-      "caption": "감시정찰 센서와 전자전 장비가 핵심입니다.",
-      "kind": "signal",
-      "visual": "RADAR",
+      "title": "ISR",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.1%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_1805fba8159acac6.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "AEW",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.1%",
+      "kind": "service",
+      "visual": "BUSINESS",
       "image": "../data/business_images/business_image_1805fba8159acac6.avif",
       "image_source": "Unsplash"
     },
     {
       "title": "C4I",
-      "caption": "지휘통제·통신 체계는 방산전자 사업의 축입니다.",
-      "kind": "platform",
-      "visual": "C4I",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
       "image": "../data/business_images/business_image_1805fba8159acac6.avif",
       "image_source": "Unsplash"
     }

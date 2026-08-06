@@ -155,14 +155,32 @@
     "segment_finance": "WISCOM은 PVC·PE 등 합성수지에 첨가물을 배합해 전선·자동차·건축자재용 컴파운드를 만드는 소재기업으로, LG화학 등의 위탁을 받아 착색가공(임가공) 사업도 함께 하고 중국 법인을 통해서도 생산·판매하고 있습니다. 합성수지 제품이 매출의 약 67%, 임가공이 약 27%, 중국법인이 약 12%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,032억 원으로 전년보다 4.8% 늘었고 영업손실은 6억 원으로 적자폭이 크게 줄었으며, 당기순이익은 13억 원으로 전년 적자에서 흑자로 전환됐습니다. 부채비율은 15.1%로 재무구조가 매우 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "임가공",
-        "desc": "LG화학 등으로부터 위탁받은 ABS·EP 등 착색가공 서비스",
-        "revenue_share": 0.269
+        "name": "제 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 66.9%",
+        "revenue_share": 0.6688,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "중국법인",
-        "desc": "중국 현지 법인을 통한 PVC 컴파운드 생산·판매",
-        "revenue_share": 0.123
+        "name": "임 가 공",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.9%",
+        "revenue_share": 0.2687,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.0015,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "중 국",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.3%",
+        "revenue_share": 0.1233,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -172,32 +190,62 @@
       "착색가공(임가공)",
       "안료 등 상품"
     ],
-    "investor_note": "WISCOM은 PVC·PE 등 합성수지에 첨가물을 배합해 전선·자동차·건축자재용 컴파운드를 만드는 소재기업으로, LG화학 등의 위탁을 받아 착색가공(임가공) 사업도 함께 하고 중국 법인을 통해서도 생산·판매하고 있습니다. 합성수지 제품이 매출의 약 67%, 임가공이 약 27%, 중국법인이 약 12%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,032억 원으로 전년보다 4.8% 늘었고 영업손실은 6억 원으로 적자폭이 크게 줄었으며, 당기순이익은 13억 원으로 전년 적자에서 흑자로 전환됐습니다. 부채비율은 15.1%로 재무구조가 매우 안정적인 편입니다."
+    "investor_note": "WISCOM은 PVC·PE 등 합성수지에 첨가물을 배합해 전선·자동차·건축자재용 컴파운드를 만드는 소재기업으로, LG화학 등의 위탁을 받아 착색가공(임가공) 사업도 함께 하고 중국 법인을 통해서도 생산·판매하고 있습니다. 합성수지 제품이 매출의 약 67%, 임가공이 약 27%, 중국법인이 약 12%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,032억 원으로 전년보다 4.8% 늘었고 영업손실은 6억 원으로 적자폭이 크게 줄었으며, 당기순이익은 13억 원으로 전년 적자에서 흑자로 전환됐습니다. 부채비율은 15.1%로 재무구조가 매우 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "제 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 66.9%",
+        "revenue_share": 0.6688,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임 가 공",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.9%",
+        "revenue_share": 0.2687,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.0015,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "중 국",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.3%",
+        "revenue_share": 0.1233,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "합성수지 컴파운드(제품)",
-      "caption": "전선·자동차·건축자재용 PVC·PE 등 합성수지 컴파운드 제조·판매",
-      "kind": "auto",
-      "visual": "합성수지",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "title": "제 품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 66.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "임가공",
-      "caption": "LG화학 등으로부터 위탁받은 ABS·EP 등 착색가공 서비스",
-      "kind": "material",
-      "visual": "임가공",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "title": "임 가 공",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "중국법인",
-      "caption": "중국 현지 법인을 통한 PVC 컴파운드 생산·판매",
+      "title": "중 국",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.3%",
       "kind": "service",
-      "visual": "중국법인",
-      "image": "../data/business_images/business_image_local_default_c.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

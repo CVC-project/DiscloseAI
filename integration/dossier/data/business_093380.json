@@ -155,9 +155,32 @@
     "segment_finance": "매출은 사실상 너트류 단일 사업에서 나오며, 그중 용접너트(25%)·휠너트(16.6%)·플랜지너트(16.4%) 비중이 큽니다. 과거 공시 기반 참고 정보로, 최근(8월 결산) 매출액은 902억 원으로 전년 대비 3.0% 줄었고 영업이익도 36.6% 감소했지만, 당기순이익은 7억 원으로 전년 적자에서 흑자로 전환됐습니다. 부채비율은 30.4%로 재무구조는 비교적 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "자동차용 체결부품(너트) 제조",
-        "desc": "현대차·기아 등 완성차·협력업체 공급용 너트류 제조·판매",
-        "revenue_share": 1
+        "name": "WELD NUT(용접너트)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.0%",
+        "revenue_share": 0.25,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "LOCK NUT(풀림방지강제너트)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.4%",
+        "revenue_share": 0.114,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "FLANGE NUT",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.4%",
+        "revenue_share": 0.164,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "WHEEL NUT",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.6%",
+        "revenue_share": 0.166,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -169,32 +192,70 @@
       "CONICAL NUT",
       "HEX NUT"
     ],
-    "investor_note": "매출은 사실상 너트류 단일 사업에서 나오며, 그중 용접너트(25%)·휠너트(16.6%)·플랜지너트(16.4%) 비중이 큽니다. 과거 공시 기반 참고 정보로, 최근(8월 결산) 매출액은 902억 원으로 전년 대비 3.0% 줄었고 영업이익도 36.6% 감소했지만, 당기순이익은 7억 원으로 전년 적자에서 흑자로 전환됐습니다. 부채비율은 30.4%로 재무구조는 비교적 안정적인 편입니다."
+    "investor_note": "매출은 사실상 너트류 단일 사업에서 나오며, 그중 용접너트(25%)·휠너트(16.6%)·플랜지너트(16.4%) 비중이 큽니다. 과거 공시 기반 참고 정보로, 최근(8월 결산) 매출액은 902억 원으로 전년 대비 3.0% 줄었고 영업이익도 36.6% 감소했지만, 당기순이익은 7억 원으로 전년 적자에서 흑자로 전환됐습니다. 부채비율은 30.4%로 재무구조는 비교적 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "WELD NUT(용접너트)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.0%",
+        "revenue_share": 0.25,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "LOCK NUT(풀림방지강제너트)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.4%",
+        "revenue_share": 0.114,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "FLANGE NUT",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.4%",
+        "revenue_share": 0.164,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "WHEEL NUT",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.6%",
+        "revenue_share": 0.166,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "WELD NUT(용접너트)",
-      "caption": "WELD NUT(용접너트) 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "WELD",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "LOCK NUT(풀림방지너트)",
-      "caption": "LOCK NUT(풀림방지너트) 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "LOCK",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "title": "LOCK NUT(풀림방지강제너트)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.4%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "FLANGE NUT",
-      "caption": "FLANGE NUT 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "FLANGE",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.4%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "WHEEL NUT",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.6%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

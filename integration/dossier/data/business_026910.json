@@ -155,14 +155,25 @@
     "segment_finance": "광진실업은 자동화설비·자동차·조선산업에 쓰이는 특수형상 봉강(탄소강·스테인레스)을 만드는 철강 제조사이며, 종속회사 광진모터스를 통해 부산·울산·경남 지역에서 할리데이비슨과 트라이엄프 대형 오토바이를 공식 판매하는 사업도 함께 하고 있습니다. 봉강 부문이 매출의 83%, 모터스 부문이 17%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 568억 원으로 전년보다 2.8% 줄었고, 영업손실 42억 원을 냈으며 당기순이익도 전년 흑자에서 48억 원 적자로 전환됐습니다. 부채비율은 363.1%로 자본보다 부채가 훨씬 많아 재무 안정성을 주의 깊게 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "봉강부문",
-        "desc": "자동화설비·자동차·조선용 특수형상 탄소강·스테인레스 봉강 제조",
-        "revenue_share": 0.828
+        "name": "봉강",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 74.9%",
+        "revenue_share": 0.749,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "모터스부문",
-        "desc": "할리데이비슨·트라이엄프 대형 오토바이 공식딜러(부울경 지역)",
-        "revenue_share": 0.172
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.7%",
+        "revenue_share": 0.067,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "모터스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.7%",
+        "revenue_share": 0.167,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,24 +185,55 @@
       "오토바이 부품·액세서리",
       "오토바이 정비서비스"
     ],
-    "investor_note": "광진실업은 자동화설비·자동차·조선산업에 쓰이는 특수형상 봉강(탄소강·스테인레스)을 만드는 철강 제조사이며, 종속회사 광진모터스를 통해 부산·울산·경남 지역에서 할리데이비슨과 트라이엄프 대형 오토바이를 공식 판매하는 사업도 함께 하고 있습니다. 봉강 부문이 매출의 83%, 모터스 부문이 17%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 568억 원으로 전년보다 2.8% 줄었고, 영업손실 42억 원을 냈으며 당기순이익도 전년 흑자에서 48억 원 적자로 전환됐습니다. 부채비율은 363.1%로 자본보다 부채가 훨씬 많아 재무 안정성을 주의 깊게 살펴볼 필요가 있습니다."
+    "investor_note": "광진실업은 자동화설비·자동차·조선산업에 쓰이는 특수형상 봉강(탄소강·스테인레스)을 만드는 철강 제조사이며, 종속회사 광진모터스를 통해 부산·울산·경남 지역에서 할리데이비슨과 트라이엄프 대형 오토바이를 공식 판매하는 사업도 함께 하고 있습니다. 봉강 부문이 매출의 83%, 모터스 부문이 17%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 568억 원으로 전년보다 2.8% 줄었고, 영업손실 42억 원을 냈으며 당기순이익도 전년 흑자에서 48억 원 적자로 전환됐습니다. 부채비율은 363.1%로 자본보다 부채가 훨씬 많아 재무 안정성을 주의 깊게 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "봉강",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 74.9%",
+        "revenue_share": 0.749,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.7%",
+        "revenue_share": 0.067,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "모터스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.7%",
+        "revenue_share": 0.167,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "봉강부문",
-      "caption": "자동화설비·자동차·조선용 특수형상 탄소강·스테인레스 봉강 제조",
-      "kind": "auto",
-      "visual": "봉강부문",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
+      "title": "봉강",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 74.9%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "모터스부문",
-      "caption": "할리데이비슨·트라이엄프 대형 오토바이 공식딜러(부울경 지역)",
-      "kind": "service",
-      "visual": "모터스부문",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.7%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "모터스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.7%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

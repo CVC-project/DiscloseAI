@@ -156,8 +156,24 @@
     "segment_breakdown": [
       {
         "name": "태양광부문",
-        "desc": "태양광부문 관련 제품·서비스",
-        "revenue_share": null
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.9%",
+        "revenue_share": 0.0687,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전력, 리스매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.3%",
+        "revenue_share": 0.1032,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "연료전지부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.4%",
+        "revenue_share": 0.1541,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -173,40 +189,54 @@
       "태양광모듈",
       "EPC 등"
     ],
-    "investor_note": "(주)에스에너지의 주요 사업은 단일 보고 부문, 태양광부문, EPC 건설, O&M부문 등입니다. 제품 및 서비스 현황 (주1) 상품매출의 경우, 주문자 상표부착(OEM) 방식, 제조자 개발/생산(ODM) 방식 등에 의해 매출이 이루어지며 상세 내용은 다음과 같습니다. 국내 최초 태양광 모듈 제조의 경쟁력을 바탕으로 국내외 다수의 태양광 프로젝트 개발 사업을 지속적으로 확대해 나가고 있으며, 발전소 유지보수 등의 기존 사업도 더욱 강화할 계획입니다."
+    "investor_note": "(주)에스에너지의 주요 사업은 단일 보고 부문, 태양광부문, EPC 건설, O&M부문 등입니다. 제품 및 서비스 현황 (주1) 상품매출의 경우, 주문자 상표부착(OEM) 방식, 제조자 개발/생산(ODM) 방식 등에 의해 매출이 이루어지며 상세 내용은 다음과 같습니다. 국내 최초 태양광 모듈 제조의 경쟁력을 바탕으로 국내외 다수의 태양광 프로젝트 개발 사업을 지속적으로 확대해 나가고 있으며, 발전소 유지보수 등의 기존 사업도 더욱 강화할 계획입니다.",
+    "product_service_segments": [
+      {
+        "name": "태양광부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.9%",
+        "revenue_share": 0.0687,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품, 상품매출(주1)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.4%",
+        "revenue_share": 0.5536,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전력, 리스매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.3%",
+        "revenue_share": 0.1032,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "연료전지부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.4%",
+        "revenue_share": 0.1541,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "태양광모듈 등",
-      "caption": "태양광모듈 등 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "신재생에너지",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.9%",
       "kind": "power",
-      "visual": "POWER",
-      "image": "../data/business_images/business_image_local_power.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "태양광발전시스템",
-      "caption": "태양광발전시스템 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "power",
-      "visual": "POWER",
-      "image": "../data/business_images/business_image_local_power.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "태양전지",
-      "caption": "태양전지 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "power",
-      "visual": "POWER",
-      "image": "../data/business_images/business_image_local_power.svg",
-      "image_source": "Local curated visual"
+      "visual": "RENEWABLE",
+      "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "연료전지부문",
-      "caption": "연료전지부문 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "power",
-      "visual": "POWER",
-      "image": "../data/business_images/business_image_local_power.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.4%",
+      "kind": "battery",
+      "visual": "BATTERY",
+      "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

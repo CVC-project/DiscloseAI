@@ -155,19 +155,18 @@
     "segment_finance": "태광산업은 PTA·AN·프로필렌 등 석유화학 원료와 나일론·아크릴·스판덱스·아라미드 등 화학섬유를 만드는 석유화학·섬유 전문기업으로, 자회사를 통해 인터넷전화·방송·광고 등 방송통신 사업도 함께 하고 있습니다. 석유화학이 매출의 약 78%로 압도적인 비중을 차지하고, 섬유가 13%, 방송통신이 6%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 8,274억 원으로 전년보다 13.9% 줄었고, 석유화학 업황 부진으로 영업손실 360억 원을 기록해 적자폭이 커졌습니다. 다만 당기순이익은 831억 원 흑자를 유지했는데, 이는 영업 외 손익의 영향으로 보입니다. 부채비율은 13.5%로 매우 낮아 재무구조는 안정적인 편입니다. 감사보고서에는 석유화학부문 자산의 손상차손 251억 원을 인식한 내용도 포함돼 있습니다.",
     "segment_breakdown": [
       {
-        "name": "석유화학부문",
-        "desc": "PTA·AN·프로필렌 등 원료 제조판매",
-        "revenue_share": 0.78
+        "name": "제조 및 임대",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 84.1%",
+        "revenue_share": 0.8413,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "섬유부문",
-        "desc": "나일론·아크릴·스판덱스·아라미드 등 화학섬유·직물 제조판매",
-        "revenue_share": 0.1335
-      },
-      {
-        "name": "방송통신부문",
-        "desc": "인터넷전화·방송채널·광고 서비스",
-        "revenue_share": 0.0641
+        "name": "㈜세광패션",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -181,32 +180,62 @@
       "인터넷전화 서비스",
       "방송채널·광고 서비스"
     ],
-    "investor_note": "태광산업은 PTA·AN·프로필렌 등 석유화학 원료와 나일론·아크릴·스판덱스·아라미드 등 화학섬유를 만드는 석유화학·섬유 전문기업으로, 자회사를 통해 인터넷전화·방송·광고 등 방송통신 사업도 함께 하고 있습니다. 석유화학이 매출의 약 78%로 압도적인 비중을 차지하고, 섬유가 13%, 방송통신이 6%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 8,274억 원으로 전년보다 13.9% 줄었고, 석유화학 업황 부진으로 영업손실 360억 원을 기록해 적자폭이 커졌습니다. 다만 당기순이익은 831억 원 흑자를 유지했는데, 이는 영업 외 손익의 영향으로 보입니다. 부채비율은 13.5%로 매우 낮아 재무구조는 안정적인 편입니다. 감사보고서에는 석유화학부문 자산의 손상차손 251억 원을 인식한 내용도 포함돼 있습니다."
+    "investor_note": "태광산업은 PTA·AN·프로필렌 등 석유화학 원료와 나일론·아크릴·스판덱스·아라미드 등 화학섬유를 만드는 석유화학·섬유 전문기업으로, 자회사를 통해 인터넷전화·방송·광고 등 방송통신 사업도 함께 하고 있습니다. 석유화학이 매출의 약 78%로 압도적인 비중을 차지하고, 섬유가 13%, 방송통신이 6%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 8,274억 원으로 전년보다 13.9% 줄었고, 석유화학 업황 부진으로 영업손실 360억 원을 기록해 적자폭이 커졌습니다. 다만 당기순이익은 831억 원 흑자를 유지했는데, 이는 영업 외 손익의 영향으로 보입니다. 부채비율은 13.5%로 매우 낮아 재무구조는 안정적인 편입니다. 감사보고서에는 석유화학부문 자산의 손상차손 251억 원을 인식한 내용도 포함돼 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "제조 및 임대",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 84.1%",
+        "revenue_share": 0.8413,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품,상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.3%",
+        "revenue_share": 0.1129,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.1%",
+        "revenue_share": 0.031,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "㈜세광패션",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "석유화학부문",
-      "caption": "PTA·AN·프로필렌 등 원료 제조판매",
+      "title": "제조 및 임대",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 84.1%",
       "kind": "material",
-      "visual": "석유화학부문",
-      "image": "../data/business_images/business_image_local_textile.svg",
-      "image_source": "Local curated visual"
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "섬유부문",
-      "caption": "나일론·아크릴·스판덱스·아라미드 등 화학섬유·직물 제조판매",
+      "title": "제품,상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.3%",
       "kind": "material",
-      "visual": "섬유부문",
-      "image": "../data/business_images/business_image_local_textile.svg",
-      "image_source": "Local curated visual"
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "방송통신부문",
-      "caption": "인터넷전화·방송채널·광고 서비스",
-      "kind": "telecom",
-      "visual": "방송통신부문",
-      "image": "../data/business_images/business_image_local_textile.svg",
-      "image_source": "Local curated visual"
+      "title": "㈜세광패션",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

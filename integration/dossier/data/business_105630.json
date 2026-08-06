@@ -156,8 +156,17 @@
     "segment_breakdown": [
       {
         "name": "OEM/ODM부문",
-        "desc": "OEM, ODM부문 관련 제품·서비스",
-        "revenue_share": null
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 87.7%",
+        "revenue_share": 0.877,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "단순 매출 합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,32 +183,47 @@
       "HANSAE TN CO.",
       "HANSAE TG CO."
     ],
-    "investor_note": "한세실업의 주요 사업은 OEM/ODM부문입니다. 각 부서별로 개별 상담을 통하여 주문을 받아 국내외 협력 업체에서 원단을 생산하거나 해외로부터 원단을 구입한 후 이를 해외 현지법인으로 송출하고, 해외 현지법인에서 의류를 완성하여 고객들에게 판매하고 있습니다. 칼라앤터치주식회사와 함께 경쟁력 있는 원단비지니스 수행에 있어 미주지역의 축이 될 것으로 예상하며, 본 인수를 통해 액티브웨어 등 고단가로 포트폴리오확장을 계획하고 있으며 지리적 이점으로 인한 물류비절감 및 수주확대를기대하고 있습니다."
+    "investor_note": "한세실업의 주요 사업은 OEM/ODM부문입니다. 각 부서별로 개별 상담을 통하여 주문을 받아 국내외 협력 업체에서 원단을 생산하거나 해외로부터 원단을 구입한 후 이를 해외 현지법인으로 송출하고, 해외 현지법인에서 의류를 완성하여 고객들에게 판매하고 있습니다. 칼라앤터치주식회사와 함께 경쟁력 있는 원단비지니스 수행에 있어 미주지역의 축이 될 것으로 예상하며, 본 인수를 통해 액티브웨어 등 고단가로 포트폴리오확장을 계획하고 있으며 지리적 이점으로 인한 물류비절감 및 수주확대를기대하고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "OEM/ODM부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 87.7%",
+        "revenue_share": 0.877,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "원단사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.3%",
+        "revenue_share": 0.123,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "단순 매출 합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "OEM/ODM부문",
-      "caption": "OEM, ODM부문 관련 제품·서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 87.7%",
       "kind": "service",
-      "visual": "OEM",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "ODM부문",
-      "caption": "ODM부문 관련 제품과 서비스를 통해 매출을 만듭니다.",
+      "title": "원단사업부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.3%",
       "kind": "service",
-      "visual": "ODM부문",
-      "image": "../data/business_images/business_image_local_default_c.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "의류",
-      "caption": "의류 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "의류",
-      "image": "../data/business_images/business_image_local_fashion.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

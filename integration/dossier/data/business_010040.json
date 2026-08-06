@@ -156,13 +156,17 @@
     "segment_breakdown": [
       {
         "name": "내화물",
-        "desc": "1300도 이상 고온에 견디는 내화물(정형·부정형) 제조·판매",
-        "revenue_share": 0.5196
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 52.0%",
+        "revenue_share": 0.5196,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "건설",
-        "desc": "공업로·산업로 등 시공 및 조업정비(자회사 일광이앤씨)",
-        "revenue_share": 0.4804
+        "name": "건 설",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 48.0%",
+        "revenue_share": 0.4804,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -171,24 +175,40 @@
       "공업로·산업로 시공",
       "조업정비(로 유지보수)"
     ],
-    "investor_note": "한국내화는 제철·제강 등 고온 공정에 쓰이는 내화물(정형·부정형)을 만드는 종합 내화물 업체로, 건설 자회사 일광이앤씨를 통해 공업로·산업로 시공과 유지보수(조업정비)도 함께 하고 있으며, 매출은 내화물과 건설이 약 52%대 48%로 비슷하게 나뉩니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 4,063억 원으로 전년 대비 2.3% 줄었고 영업이익도 27억 원으로 67.7% 감소했으며, 당기순이익은 217억 원 손실로 전년 흑자에서 적자로 전환됐습니다. 부채비율은 58.1%입니다."
+    "investor_note": "한국내화는 제철·제강 등 고온 공정에 쓰이는 내화물(정형·부정형)을 만드는 종합 내화물 업체로, 건설 자회사 일광이앤씨를 통해 공업로·산업로 시공과 유지보수(조업정비)도 함께 하고 있으며, 매출은 내화물과 건설이 약 52%대 48%로 비슷하게 나뉩니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 4,063억 원으로 전년 대비 2.3% 줄었고 영업이익도 27억 원으로 67.7% 감소했으며, 당기순이익은 217억 원 손실로 전년 흑자에서 적자로 전환됐습니다. 부채비율은 58.1%입니다.",
+    "product_service_segments": [
+      {
+        "name": "내화물",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 52.0%",
+        "revenue_share": 0.5196,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "건 설",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 48.0%",
+        "revenue_share": 0.4804,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "내화물",
-      "caption": "1300도 이상 고온에 견디는 내화물(정형·부정형) 제조·판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 52.0%",
       "kind": "service",
-      "visual": "내화물",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "건설",
-      "caption": "공업로·산업로 등 시공 및 조업정비(자회사 일광이앤씨)",
+      "title": "건 설",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 48.0%",
       "kind": "service",
-      "visual": "건설",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

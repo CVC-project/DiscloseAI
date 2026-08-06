@@ -155,19 +155,18 @@
     "segment_finance": "대성홀딩스는 도시가스 공급을 주력으로 하는 지주회사로, 자회사 대성에너지를 통해 대구·경북 지역에 도시가스를 공급하며 IT, 콜센터·텔레마케팅, 건물관리, 벤처캐피탈 계열사도 함께 운영합니다. 도시가스 판매량 증가로 실적은 꾸준한 흐름입니다. 과거 공시 기반 참고 정보로, 매출액은 87억 원(-2.3%)이었지만 영업이익은 280억 원으로 20.5% 늘었고, 당기순이익은 223억 원으로 전년 대비 49.6% 감소했습니다. 부채비율은 103.1%로 자본과 비슷한 수준의 빚을 지고 있습니다.",
     "segment_breakdown": [
       {
-        "name": "도시가스",
-        "desc": "대성에너지 등을 통한 도시가스 공급",
-        "revenue_share": 0.9425
+        "name": "경영관리본부",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 62.8%",
+        "revenue_share": 0.6285,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "콜센터·텔레마케팅",
-        "desc": "대성글로벌네트웍의 통신·CRM 사업",
-        "revenue_share": 0.025
-      },
-      {
-        "name": "경영관리·IT",
-        "desc": "계열사 경영지원 및 IT 시스템 구축·운영",
-        "revenue_share": 0.0122
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 98.4%",
+        "revenue_share": 0.9838,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -178,32 +177,54 @@
       "벤처캐피탈(대성창업투자)",
       "매립가스 자원화(대성환경에너지)"
     ],
-    "investor_note": "대성홀딩스는 도시가스 공급을 주력으로 하는 지주회사로, 자회사 대성에너지를 통해 대구·경북 지역에 도시가스를 공급하며 IT, 콜센터·텔레마케팅, 건물관리, 벤처캐피탈 계열사도 함께 운영합니다. 도시가스 판매량 증가로 실적은 꾸준한 흐름입니다. 과거 공시 기반 참고 정보로, 매출액은 87억 원(-2.3%)이었지만 영업이익은 280억 원으로 20.5% 늘었고, 당기순이익은 223억 원으로 전년 대비 49.6% 감소했습니다. 부채비율은 103.1%로 자본과 비슷한 수준의 빚을 지고 있습니다."
+    "investor_note": "대성홀딩스는 도시가스 공급을 주력으로 하는 지주회사로, 자회사 대성에너지를 통해 대구·경북 지역에 도시가스를 공급하며 IT, 콜센터·텔레마케팅, 건물관리, 벤처캐피탈 계열사도 함께 운영합니다. 도시가스 판매량 증가로 실적은 꾸준한 흐름입니다. 과거 공시 기반 참고 정보로, 매출액은 87억 원(-2.3%)이었지만 영업이익은 280억 원으로 20.5% 늘었고, 당기순이익은 223억 원으로 전년 대비 49.6% 감소했습니다. 부채비율은 103.1%로 자본과 비슷한 수준의 빚을 지고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "경영관리본부",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 62.8%",
+        "revenue_share": 0.6285,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "IT사업부",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.1%",
+        "revenue_share": 0.3715,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 98.4%",
+        "revenue_share": 0.9838,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
+        "revenue_share": 0.0162,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "도시가스",
-      "caption": "대성에너지 등을 통한 도시가스 공급",
-      "kind": "power",
-      "visual": "도시가스",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "콜센터·텔레마케팅",
-      "caption": "대성글로벌네트웍의 통신·CRM 사업",
-      "kind": "telecom",
-      "visual": "콜센터",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "경영관리·IT",
-      "caption": "계열사 경영지원 및 IT 시스템 구축·운영",
+      "title": "경영관리본부",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 62.8%",
       "kind": "service",
-      "visual": "경영관리",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "IT사업부",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.1%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

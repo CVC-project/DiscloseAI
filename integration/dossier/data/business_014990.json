@@ -155,19 +155,32 @@
     "segment_finance": "인디에프는 조이너스·꼼빠니아·바인드·트루젠·모스바니 등 여러 패션 브랜드를 운영하는 의류 제조·판매기업으로, 조이너스와 바인드 두 브랜드가 매출의 절반 이상을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,045억 원으로 전년 대비 8.8% 줄었지만, 영업이익은 전년 적자에서 11억 원 흑자로 전환했고 당기순손실 규모도 92.1% 줄어드는 등 수익성이 개선됐습니다. 총자산은 4.5% 줄어든 1,158억 원이며, 부채비율은 205.5%로 자본보다 두 배 많은 빚을 지고 있어 재무 부담을 지켜볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "여성복",
-        "desc": "조이너스, 꼼빠니아 등",
-        "revenue_share": 0.535
+        "name": "의류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.4%",
+        "revenue_share": 0.3045,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "캐주얼",
-        "desc": "바인드 등 캐주얼 브랜드",
-        "revenue_share": 0.282
+        "name": "꼼빠니아",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.0%",
+        "revenue_share": 0.2302,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "남성복",
-        "desc": "트루젠, 모스바니 등",
-        "revenue_share": 0.137
+        "name": "트루젠",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.4%",
+        "revenue_share": 0.0738,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "바인드",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.1%",
+        "revenue_share": 0.2815,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -178,32 +191,70 @@
       "모스바니",
       "아위"
     ],
-    "investor_note": "인디에프는 조이너스·꼼빠니아·바인드·트루젠·모스바니 등 여러 패션 브랜드를 운영하는 의류 제조·판매기업으로, 조이너스와 바인드 두 브랜드가 매출의 절반 이상을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,045억 원으로 전년 대비 8.8% 줄었지만, 영업이익은 전년 적자에서 11억 원 흑자로 전환했고 당기순손실 규모도 92.1% 줄어드는 등 수익성이 개선됐습니다. 총자산은 4.5% 줄어든 1,158억 원이며, 부채비율은 205.5%로 자본보다 두 배 많은 빚을 지고 있어 재무 부담을 지켜볼 필요가 있습니다."
+    "investor_note": "인디에프는 조이너스·꼼빠니아·바인드·트루젠·모스바니 등 여러 패션 브랜드를 운영하는 의류 제조·판매기업으로, 조이너스와 바인드 두 브랜드가 매출의 절반 이상을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,045억 원으로 전년 대비 8.8% 줄었지만, 영업이익은 전년 적자에서 11억 원 흑자로 전환했고 당기순손실 규모도 92.1% 줄어드는 등 수익성이 개선됐습니다. 총자산은 4.5% 줄어든 1,158억 원이며, 부채비율은 205.5%로 자본보다 두 배 많은 빚을 지고 있어 재무 부담을 지켜볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "의류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.4%",
+        "revenue_share": 0.3045,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "꼼빠니아",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.0%",
+        "revenue_share": 0.2302,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "트루젠",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.4%",
+        "revenue_share": 0.0738,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "바인드",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.1%",
+        "revenue_share": 0.2815,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "여성복",
-      "caption": "조이너스, 꼼빠니아 등",
+      "title": "의류",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.4%",
       "kind": "service",
-      "visual": "여성복",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "캐주얼",
-      "caption": "바인드 등 캐주얼 브랜드",
+      "title": "꼼빠니아",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.0%",
       "kind": "service",
-      "visual": "캐주얼",
-      "image": "../data/business_images/business_image_local_default_b.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "남성복",
-      "caption": "트루젠, 모스바니 등",
+      "title": "트루젠",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.4%",
       "kind": "service",
-      "visual": "남성복",
-      "image": "../data/business_images/business_image_local_default_c.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "바인드",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.1%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

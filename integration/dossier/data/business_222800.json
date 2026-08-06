@@ -155,9 +155,18 @@
     "segment_finance": "(주)심텍의 핵심은 PCB부문입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 이 후 존속법인인 심텍홀딩스는 지주회사사업을 담당하고, 신설법인인 ㈜심텍은 PCB제조 및 판매사업을 담당하여 현재까지 사업을 영위해 오고 있습니다. (舊)심텍은 1987년 8월 24일 설립되어 PCB(인쇄회로기판)제조 및 판매사업을 영위해 오다가 지주회사 체재로 전환 하기 위해 사명을 심텍홀딩스로 변경하고, 2015년 7월 1일 인적분할을 하였습니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다.",
     "segment_breakdown": [
       {
-        "name": "PCB부문",
-        "desc": "반도체와 전자제품용 인쇄회로기판",
-        "revenue_share": null
+        "name": "인쇄회로기판",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.6%",
+        "revenue_share": 0.246,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Package Substrate",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 75.4%",
+        "revenue_share": 0.754,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -166,24 +175,40 @@
       "모듈 PCB",
       "반도체용 기판"
     ],
-    "investor_note": "(주)심텍의 핵심은 PCB부문입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 이 후 존속법인인 심텍홀딩스는 지주회사사업을 담당하고, 신설법인인 ㈜심텍은 PCB제조 및 판매사업을 담당하여 현재까지 사업을 영위해 오고 있습니다. (舊)심텍은 1987년 8월 24일 설립되어 PCB(인쇄회로기판)제조 및 판매사업을 영위해 오다가 지주회사 체재로 전환 하기 위해 사명을 심텍홀딩스로 변경하고, 2015년 7월 1일 인적분할을 하였습니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다."
+    "investor_note": "(주)심텍의 핵심은 PCB부문입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 이 후 존속법인인 심텍홀딩스는 지주회사사업을 담당하고, 신설법인인 ㈜심텍은 PCB제조 및 판매사업을 담당하여 현재까지 사업을 영위해 오고 있습니다. (舊)심텍은 1987년 8월 24일 설립되어 PCB(인쇄회로기판)제조 및 판매사업을 영위해 오다가 지주회사 체재로 전환 하기 위해 사명을 심텍홀딩스로 변경하고, 2015년 7월 1일 인적분할을 하였습니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다.",
+    "product_service_segments": [
+      {
+        "name": "인쇄회로기판",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.6%",
+        "revenue_share": 0.246,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Package Substrate",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 75.4%",
+        "revenue_share": 0.754,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "패키지 기판",
-      "caption": "패키지 기판 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "패키지",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "title": "전자부품·기판",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.6%",
+      "kind": "chip",
+      "visual": "PCB",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "모듈 PCB",
-      "caption": "모듈 PCB 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "모듈",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "title": "Package Substrate",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 75.4%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

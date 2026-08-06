@@ -111,13 +111,17 @@
     "segment_breakdown": [
       {
         "name": "중공업",
-        "desc": "변압기, 차단기, 전동기 등 전력기기 및 산업설비 제조·판매",
-        "revenue_share": 0.6952
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 69.5%",
+        "revenue_share": 0.6952,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "건설",
-        "desc": "주택, 상업시설, 토목·환경, SOC 사업 등 건설공사",
-        "revenue_share": 0.2993
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.9%",
+        "revenue_share": 0.2993,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "investor_note": "최근 실적이 매우 좋아서 지난해 매출이 5조 9,685억 원으로 전년 대비 22% 늘었고, 영업이익(매출에서 비용을 뺀 순수 수익)은 무려 106% 증가한 7,470억 원을 기록했습니다. 순이익(세금을 낸 후 남은 최종 수익)도 5,199억 원으로 133% 이상 증가해 수익성이 크게 개선되었습니다. 다만 부채비율(자본 대비 빌린 돈의 비율)이 190%로 높은 편이지만 전년 대비 개선 추세를 보이고 있으며, 주당순이익도 55,832원으로 2배 이상 늘어 주주가치가 향상되었습니다. 과거 공시 기반 참고 정보입니다.",
@@ -136,30 +140,38 @@
       "상업시설"
     ],
     "raw_moves": [],
-    "utilization": []
+    "utilization": [],
+    "product_service_segments": [
+      {
+        "name": "중공업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 69.5%",
+        "revenue_share": 0.6952,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "건설",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.9%",
+        "revenue_share": 0.2993,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "변압기",
-      "caption": "초고압 변압기 수요와 전력망 투자를 먼저 봅니다.",
-      "kind": "energy",
-      "visual": "Grid",
-      "image": "../data/business_images/business_image_c1540b930934e19f.avif",
+      "title": "중공업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 69.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_1805fba8159acac6.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "차단기",
-      "caption": "전력 설비 증설과 교체 수요가 매출을 만듭니다.",
-      "kind": "factory",
-      "visual": "Switch",
-      "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "건설",
-      "caption": "건설 부문은 원가율과 공정률 리스크를 따로 봅니다.",
-      "kind": "factory",
-      "visual": "Build",
+      "title": "건축·주택",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.9%",
+      "kind": "service",
+      "visual": "CONSTRUCTION",
       "image": "../data/business_images/business_image_1805fba8159acac6.avif",
       "image_source": "Unsplash"
     }

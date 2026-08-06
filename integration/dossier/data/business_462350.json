@@ -121,7 +121,22 @@
   "snippets": {
     "overview": "주식회사 이노스페이스의 주요 사업은 건설중인 자산, 중기부 수출바우처 사업, 민관공동 창업자 발굴육성사업, 방산사업 등입니다. 기납품액은 당기 중 수익인식 금액으로 기재하였으며, 수주잔고는 당기말 계약잔액으로 기재하였습니다. * 방산사업은 보안관계상 일부 납품 및 수주 상황에 대해 상세히 기재하지 않았습니다.",
     "segment_finance": "주식회사 이노스페이스의 주요 사업은 건설중인 자산, 중기부 수출바우처 사업, 민관공동 창업자 발굴육성사업, 방산사업 등입니다. 기납품액은 당기 중 수익인식 금액으로 기재하였으며, 수주잔고는 당기말 계약잔액으로 기재하였습니다. * 방산사업은 보안관계상 일부 납품 및 수주 상황에 대해 상세히 기재하지 않았습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "설비구축,시험평가 및 기술연구 용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.6%",
+        "revenue_share": 0.0962,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매 출 총 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "배터리",
       "방산",
@@ -135,40 +150,70 @@
       "발사서비스",
       "제품(관측로켓"
     ],
-    "investor_note": "주식회사 이노스페이스의 주요 사업은 건설중인 자산, 중기부 수출바우처 사업, 민관공동 창업자 발굴육성사업, 방산사업 등입니다. 기납품액은 당기 중 수익인식 금액으로 기재하였으며, 수주잔고는 당기말 계약잔액으로 기재하였습니다. * 방산사업은 보안관계상 일부 납품 및 수주 상황에 대해 상세히 기재하지 않았습니다."
+    "investor_note": "주식회사 이노스페이스의 주요 사업은 건설중인 자산, 중기부 수출바우처 사업, 민관공동 창업자 발굴육성사업, 방산사업 등입니다. 기납품액은 당기 중 수익인식 금액으로 기재하였으며, 수주잔고는 당기말 계약잔액으로 기재하였습니다. * 방산사업은 보안관계상 일부 납품 및 수주 상황에 대해 상세히 기재하지 않았습니다.",
+    "product_service_segments": [
+      {
+        "name": "발사서비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.1%",
+        "revenue_share": 0.0906,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품(관측로켓, 엔진부품 등)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 81.3%",
+        "revenue_share": 0.8131,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "설비구축,시험평가 및 기술연구 용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.6%",
+        "revenue_share": 0.0962,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매 출 총 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "배터리",
-      "caption": "배터리 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
-      "image": "../data/business_images/business_image_a36fe45e187e177c.jpg",
-      "image_source": "Wikimedia"
+      "title": "발사서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.1%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_1805fba8159acac6.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "방산",
-      "caption": "방산 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_4ae102473975707c.jpg",
-      "image_source": "Wikimedia Commons"
+      "title": "구동계 부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 81.3%",
+      "kind": "auto",
+      "visual": "PARTS",
+      "image": "../data/business_images/business_image_1805fba8159acac6.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "이노스페이스",
-      "caption": "이노스페이스 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_a36fe45e187e177c.jpg",
-      "image_source": "Wikimedia"
+      "title": "설비구축,시험평가 및 기술연구 용역",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.6%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_1805fba8159acac6.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "위성발사 서비스",
-      "caption": "위성발사 서비스 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_a36fe45e187e177c.jpg",
-      "image_source": "Wikimedia"
+      "title": "매 출 총 계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_1805fba8159acac6.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

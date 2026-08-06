@@ -123,24 +123,32 @@
     "segment_finance": "OCI(주)의 주요 제품·서비스는 배터리, 화학제품, 전선, 철강, 베이직케미컬, 반도체용 폴리실리콘입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 연결회사는 스페셜티 제품 등 고부가가치 제품의 생산 비중을 증가시키고, 수출시장을 확대 및 다각화하여 카본케미컬 부문의 수익성을 극대화하고자 노력하고 있습니다. 가성소다는 범용 무기화학 제품으로 비누 제조, 섬유 염색 등 산업 전반에 다양한 용도로 사용되며, 이차전지의 핵심 소재인 양극재 생산 공정에 불순물 제거 및 세정 용도로도 사용됩니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "농협은행",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
+        "name": "베이직케미컬",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.0%",
+        "revenue_share": 0.37,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "산업은행",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
+        "name": "카본케미컬",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 62.0%",
+        "revenue_share": 0.62,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "신한은행",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.0%",
+        "revenue_share": 0.07,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "베이직케미컬부문",
-        "desc": "베이직케미컬 관련 제품·서비스",
-        "revenue_share": null
+        "name": "매출액 합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -157,32 +165,62 @@
       "벤젠",
       "제3기"
     ],
-    "investor_note": "OCI(주)의 주요 제품·서비스는 배터리, 화학제품, 전선, 철강, 베이직케미컬, 반도체용 폴리실리콘입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 연결회사는 스페셜티 제품 등 고부가가치 제품의 생산 비중을 증가시키고, 수출시장을 확대 및 다각화하여 카본케미컬 부문의 수익성을 극대화하고자 노력하고 있습니다. 가성소다는 범용 무기화학 제품으로 비누 제조, 섬유 염색 등 산업 전반에 다양한 용도로 사용되며, 이차전지의 핵심 소재인 양극재 생산 공정에 불순물 제거 및 세정 용도로도 사용됩니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "OCI(주)의 주요 제품·서비스는 배터리, 화학제품, 전선, 철강, 베이직케미컬, 반도체용 폴리실리콘입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 연결회사는 스페셜티 제품 등 고부가가치 제품의 생산 비중을 증가시키고, 수출시장을 확대 및 다각화하여 카본케미컬 부문의 수익성을 극대화하고자 노력하고 있습니다. 가성소다는 범용 무기화학 제품으로 비누 제조, 섬유 염색 등 산업 전반에 다양한 용도로 사용되며, 이차전지의 핵심 소재인 양극재 생산 공정에 불순물 제거 및 세정 용도로도 사용됩니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "베이직케미컬",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.0%",
+        "revenue_share": 0.37,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "카본케미컬",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 62.0%",
+        "revenue_share": 0.62,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.0%",
+        "revenue_share": 0.07,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매출액 합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "농협은행",
-      "caption": "예대, 수수료, 투자 등 금융 서비스",
-      "kind": "bank",
-      "visual": "농협은행",
-      "image": "../data/business_images/business_image_local_bank.svg",
-      "image_source": "Local curated visual"
+      "title": "베이직케미컬",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "산업은행",
-      "caption": "예대, 수수료, 투자 등 금융 서비스",
-      "kind": "bank",
-      "visual": "산업은행",
-      "image": "../data/business_images/business_image_local_bank.svg",
-      "image_source": "Local curated visual"
+      "title": "카본케미컬",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 62.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "신한은행",
-      "caption": "예대, 수수료, 투자 등 금융 서비스",
-      "kind": "bank",
-      "visual": "신한은행",
-      "image": "../data/business_images/business_image_local_bank.svg",
-      "image_source": "Local curated visual"
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

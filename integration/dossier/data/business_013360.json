@@ -155,24 +155,25 @@
     "segment_finance": "일성건설은 아파트·오피스 등 건축공사(국내 67%)와 도로·철도·교량 등 토목공사(국내 10%)를 함께하는 종합건설업체로, 몽골·라오스·파라과이 등 해외 공사(22%)로도 영역을 넓히고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,526억 원으로 전년 대비 9.5% 줄었지만 영업이익(103억 원)과 당기순이익(37억 원)은 나란히 적자에서 흑자로 전환됐습니다. 다만 부채비율이 415.7%로 자본보다 빚이 4배 넘게 많고, 공사는 끝났지만 아직 받지 못한 미청구공사금액이 총자산의 16%를 차지해 회수 여부를 지켜볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "국내 건축공사",
-        "desc": "아파트·오피스 등 국내 주거·비주거 건물 시공",
-        "revenue_share": 0.67
+        "name": "국내",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 67.0%",
+        "revenue_share": 0.67,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "국내 토목공사",
-        "desc": "도로·터널·교량 등 국내 사회기반시설 시공",
-        "revenue_share": 0.104
+        "name": "토목공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.4%",
+        "revenue_share": 0.104,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "해외 건축공사",
-        "desc": "몽골·라오스 등 해외 주거·병원 시공",
-        "revenue_share": 0.128
-      },
-      {
-        "name": "해외 토목공사",
-        "desc": "해외 도로·교량 등 토목공사",
-        "revenue_share": 0.093
+        "name": "해외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.8%",
+        "revenue_share": 0.128,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -183,40 +184,55 @@
       "조경공사",
       "해외 건축·토목(몽골·라오스·파라과이 등)"
     ],
-    "investor_note": "일성건설은 아파트·오피스 등 건축공사(국내 67%)와 도로·철도·교량 등 토목공사(국내 10%)를 함께하는 종합건설업체로, 몽골·라오스·파라과이 등 해외 공사(22%)로도 영역을 넓히고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,526억 원으로 전년 대비 9.5% 줄었지만 영업이익(103억 원)과 당기순이익(37억 원)은 나란히 적자에서 흑자로 전환됐습니다. 다만 부채비율이 415.7%로 자본보다 빚이 4배 넘게 많고, 공사는 끝났지만 아직 받지 못한 미청구공사금액이 총자산의 16%를 차지해 회수 여부를 지켜볼 필요가 있습니다."
+    "investor_note": "일성건설은 아파트·오피스 등 건축공사(국내 67%)와 도로·철도·교량 등 토목공사(국내 10%)를 함께하는 종합건설업체로, 몽골·라오스·파라과이 등 해외 공사(22%)로도 영역을 넓히고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,526억 원으로 전년 대비 9.5% 줄었지만 영업이익(103억 원)과 당기순이익(37억 원)은 나란히 적자에서 흑자로 전환됐습니다. 다만 부채비율이 415.7%로 자본보다 빚이 4배 넘게 많고, 공사는 끝났지만 아직 받지 못한 미청구공사금액이 총자산의 16%를 차지해 회수 여부를 지켜볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "국내",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 67.0%",
+        "revenue_share": 0.67,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "토목공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.4%",
+        "revenue_share": 0.104,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "해외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.8%",
+        "revenue_share": 0.128,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "국내 건축공사",
-      "caption": "아파트·오피스 등 국내 주거·비주거 건물 시공",
+      "title": "국내",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 67.0%",
       "kind": "service",
-      "visual": "국내",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "국내 토목공사",
-      "caption": "도로·터널·교량 등 국내 사회기반시설 시공",
+      "title": "토목·플랜트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.4%",
       "kind": "service",
-      "visual": "국내",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_5184e050831a4460.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "해외 건축공사",
-      "caption": "몽골·라오스 등 해외 주거·병원 시공",
+      "title": "해외",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.8%",
       "kind": "service",
-      "visual": "해외",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "해외 토목공사",
-      "caption": "해외 도로·교량 등 토목공사",
-      "kind": "service",
-      "visual": "해외",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

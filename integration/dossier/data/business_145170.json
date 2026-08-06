@@ -107,9 +107,18 @@
     "segment_finance": "노브랜드는 40여 개 글로벌 패션 브랜드에 니트와 우븐 의류를 디자인·기획·생산해 수출하는 디자인 플랫폼 하우스입니다. 단순 위탁생산을 넘어 소재 개발과 상품 디자인을 먼저 제안하고, Gap, J.C. Penney, Target 등 대량생산 브랜드와 프리미엄·온라인 브랜드까지 고객군을 넓혔습니다. 2024년에는 아웃도어 의류 업체 유니코글로벌을 인수했습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,021억 원으로 전년보다 10.2% 늘었고 당기순이익은 50억 원으로 흑자 전환했습니다. 다만 영업이익은 133억 원으로 전년보다 줄어 관세, 환율, 브랜드별 오더 변화가 중요합니다.",
     "segment_breakdown": [
       {
-        "name": "의류 ODM·OEM",
-        "desc": "글로벌 브랜드에 니트·우븐 의류를 디자인, 기획, 생산해 수출",
-        "revenue_share": 1
+        "name": "Knit",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 67.0%",
+        "revenue_share": 0.67,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Woven",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.0%",
+        "revenue_share": 0.33,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -122,40 +131,40 @@
       "OEM 생산",
       "아웃도어 의류"
     ],
-    "investor_note": "노브랜드는 40여 개 글로벌 패션 브랜드에 니트와 우븐 의류를 디자인·기획·생산해 수출하는 디자인 플랫폼 하우스입니다. 단순 위탁생산을 넘어 소재 개발과 상품 디자인을 먼저 제안하고, Gap, J.C. Penney, Target 등 대량생산 브랜드와 프리미엄·온라인 브랜드까지 고객군을 넓혔습니다. 2024년에는 아웃도어 의류 업체 유니코글로벌을 인수했습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,021억 원으로 전년보다 10.2% 늘었고 당기순이익은 50억 원으로 흑자 전환했습니다. 다만 영업이익은 133억 원으로 전년보다 줄어 관세, 환율, 브랜드별 오더 변화가 중요합니다."
+    "investor_note": "노브랜드는 40여 개 글로벌 패션 브랜드에 니트와 우븐 의류를 디자인·기획·생산해 수출하는 디자인 플랫폼 하우스입니다. 단순 위탁생산을 넘어 소재 개발과 상품 디자인을 먼저 제안하고, Gap, J.C. Penney, Target 등 대량생산 브랜드와 프리미엄·온라인 브랜드까지 고객군을 넓혔습니다. 2024년에는 아웃도어 의류 업체 유니코글로벌을 인수했습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,021억 원으로 전년보다 10.2% 늘었고 당기순이익은 50억 원으로 흑자 전환했습니다. 다만 영업이익은 133억 원으로 전년보다 줄어 관세, 환율, 브랜드별 오더 변화가 중요합니다.",
+    "product_service_segments": [
+      {
+        "name": "Knit",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 67.0%",
+        "revenue_share": 0.67,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Woven",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.0%",
+        "revenue_share": 0.33,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "의류 ODM·OEM",
-      "caption": "글로벌 브랜드에 니트·우븐 의류를 디자인, 기획, 생산해 수출",
+      "title": "Knit",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 67.0%",
       "kind": "service",
-      "visual": "의류",
-      "image": "../data/business_images/business_image_local_textile.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "니트 의류",
-      "caption": "니트 의류 관련 제품과 서비스를 통해 매출을 만듭니다.",
+      "title": "Woven",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.0%",
       "kind": "service",
-      "visual": "니트",
-      "image": "../data/business_images/business_image_local_textile.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "우븐 의류",
-      "caption": "우븐 의류 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "우븐",
-      "image": "../data/business_images/business_image_local_fashion.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "스웨터",
-      "caption": "스웨터 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "스웨터",
-      "image": "../data/business_images/business_image_local_default_d.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

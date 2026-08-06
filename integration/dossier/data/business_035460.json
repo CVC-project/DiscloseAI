@@ -155,19 +155,32 @@
     "segment_finance": "기산텔레콤은 이동통신 광중계기(DAS)와 Wi-Fi 장비를 만드는 통신장비 회사이면서, 방산물자를 만드는 현대제이콤과 항공항행안전장비(DVOR 등)를 만드는 모피언스를 종속회사로 둔 지주 성격의 기업입니다. 매출은 항공산업 부문이 50%로 가장 크고 방위산업(27%)과 통신산업(24%)이 뒤를 잇는데, 최근 항공 부문의 해외 수출이 크게 늘면서 항공 비중이 커졌습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 994억 원으로 전년 대비 6.9% 늘었고 영업이익은 63.3% 크게 증가했지만, 당기순이익은 28.4% 감소했습니다. 부채비율은 95.9%로 자본과 비슷한 수준의 빚을 지고 있어 재무 부담을 참고할 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "항공산업",
-        "desc": "항공항행안전 무선장비(DVOR 등) 개발·제조·수출",
-        "revenue_share": 0.496
+        "name": "통신산업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.5%",
+        "revenue_share": 0.2354,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "방위산업",
-        "desc": "유무선 통신장비·정보보호장비 등 방산물자",
-        "revenue_share": 0.269
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.9%",
+        "revenue_share": 0.2688,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "통신산업",
-        "desc": "이동통신 중계기, Wi-Fi AP, VoIP 장비",
-        "revenue_share": 0.235
+        "name": "항공산업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.6%",
+        "revenue_share": 0.4958,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "단순합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -180,32 +193,70 @@
       "DVOR(항공항행안전 거리측정장비)",
       "ILS(계기착륙시설)"
     ],
-    "investor_note": "기산텔레콤은 이동통신 광중계기(DAS)와 Wi-Fi 장비를 만드는 통신장비 회사이면서, 방산물자를 만드는 현대제이콤과 항공항행안전장비(DVOR 등)를 만드는 모피언스를 종속회사로 둔 지주 성격의 기업입니다. 매출은 항공산업 부문이 50%로 가장 크고 방위산업(27%)과 통신산업(24%)이 뒤를 잇는데, 최근 항공 부문의 해외 수출이 크게 늘면서 항공 비중이 커졌습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 994억 원으로 전년 대비 6.9% 늘었고 영업이익은 63.3% 크게 증가했지만, 당기순이익은 28.4% 감소했습니다. 부채비율은 95.9%로 자본과 비슷한 수준의 빚을 지고 있어 재무 부담을 참고할 필요가 있습니다."
+    "investor_note": "기산텔레콤은 이동통신 광중계기(DAS)와 Wi-Fi 장비를 만드는 통신장비 회사이면서, 방산물자를 만드는 현대제이콤과 항공항행안전장비(DVOR 등)를 만드는 모피언스를 종속회사로 둔 지주 성격의 기업입니다. 매출은 항공산업 부문이 50%로 가장 크고 방위산업(27%)과 통신산업(24%)이 뒤를 잇는데, 최근 항공 부문의 해외 수출이 크게 늘면서 항공 비중이 커졌습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 994억 원으로 전년 대비 6.9% 늘었고 영업이익은 63.3% 크게 증가했지만, 당기순이익은 28.4% 감소했습니다. 부채비율은 95.9%로 자본과 비슷한 수준의 빚을 지고 있어 재무 부담을 참고할 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "통신산업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.5%",
+        "revenue_share": 0.2354,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "방위산업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.9%",
+        "revenue_share": 0.2688,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "항공산업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.6%",
+        "revenue_share": 0.4958,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "단순합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "항공산업",
-      "caption": "항공항행안전 무선장비(DVOR 등) 개발·제조·수출",
+      "title": "통신산업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.5%",
       "kind": "telecom",
-      "visual": "항공산업",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "방위산업",
-      "caption": "유무선 통신장비·정보보호장비 등 방산물자",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.9%",
       "kind": "telecom",
-      "visual": "방위산업",
-      "image": "../data/business_images/business_image_4ae102473975707c.jpg",
-      "image_source": "Wikimedia Commons"
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "통신산업",
-      "caption": "이동통신 중계기, Wi-Fi AP, VoIP 장비",
+      "title": "방산·항공",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.6%",
+      "kind": "ship",
+      "visual": "DEFENSE",
+      "image": "../data/business_images/business_image_1805fba8159acac6.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "단순합계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
       "kind": "telecom",
-      "visual": "통신산업",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

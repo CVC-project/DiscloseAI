@@ -153,7 +153,22 @@
   "snippets": {
     "overview": "주식회사 피엔티 엠에스의 주요 사업은 사업내용입니다. 원재료 가격변동 추이 물가상승 및 환율 변동 등의 요인으로 인하여 일부 원자재 가격이 점진적으로 인상되는 추세에 있으며, 수주되는 제품의 사양 및 수주금액 변동에 따른 설계 변경, 대량구매로 인한 특가구입 등 구매업무의 효율화를 통해 적절한 대응을 함으로써 급격한 원가 변동의 부담을 최소화 하고 있습니다. 분리막 제조 설비는 2차 전지의 4대 구성요소 중 하나인 분리막을 생산하는 설비로 고효율 리튬이온 배터리에 사용되는 고성능 PE 습식 분리막을 생산하는데 사용됩니다.",
     "segment_finance": "주식회사 피엔티 엠에스의 주요 사업은 사업내용입니다. 원재료 가격변동 추이 물가상승 및 환율 변동 등의 요인으로 인하여 일부 원자재 가격이 점진적으로 인상되는 추세에 있으며, 수주되는 제품의 사양 및 수주금액 변동에 따른 설계 변경, 대량구매로 인한 특가구입 등 구매업무의 효율화를 통해 적절한 대응을 함으로써 급격한 원가 변동의 부담을 최소화 하고 있습니다. 분리막 제조 설비는 2차 전지의 4대 구성요소 중 하나인 분리막을 생산하는 설비로 고효율 리튬이온 배터리에 사용되는 고성능 PE 습식 분리막을 생산하는데 사용됩니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "2차전지 분리막 생산설비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 85.0%",
+        "revenue_share": 0.85,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "편광필름연신설비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 75.0%",
+        "revenue_share": 0.75,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "OLED",
       "배터리",
@@ -167,32 +182,40 @@
       "특허권",
       "특허청"
     ],
-    "investor_note": "주식회사 피엔티 엠에스의 주요 사업은 사업내용입니다. 원재료 가격변동 추이 물가상승 및 환율 변동 등의 요인으로 인하여 일부 원자재 가격이 점진적으로 인상되는 추세에 있으며, 수주되는 제품의 사양 및 수주금액 변동에 따른 설계 변경, 대량구매로 인한 특가구입 등 구매업무의 효율화를 통해 적절한 대응을 함으로써 급격한 원가 변동의 부담을 최소화 하고 있습니다. 분리막 제조 설비는 2차 전지의 4대 구성요소 중 하나인 분리막을 생산하는 설비로 고효율 리튬이온 배터리에 사용되는 고성능 PE 습식 분리막을 생산하는데 사용됩니다."
+    "investor_note": "주식회사 피엔티 엠에스의 주요 사업은 사업내용입니다. 원재료 가격변동 추이 물가상승 및 환율 변동 등의 요인으로 인하여 일부 원자재 가격이 점진적으로 인상되는 추세에 있으며, 수주되는 제품의 사양 및 수주금액 변동에 따른 설계 변경, 대량구매로 인한 특가구입 등 구매업무의 효율화를 통해 적절한 대응을 함으로써 급격한 원가 변동의 부담을 최소화 하고 있습니다. 분리막 제조 설비는 2차 전지의 4대 구성요소 중 하나인 분리막을 생산하는 설비로 고효율 리튬이온 배터리에 사용되는 고성능 PE 습식 분리막을 생산하는데 사용됩니다.",
+    "product_service_segments": [
+      {
+        "name": "2차전지 분리막 생산설비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 85.0%",
+        "revenue_share": 0.85,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "편광필름연신설비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 75.0%",
+        "revenue_share": 0.75,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "OLED",
-      "caption": "OLED 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "display",
-      "visual": "OLED",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "배터리",
-      "caption": "배터리 관련 제품과 서비스를 통해 매출을 만듭니다.",
+      "title": "배터리 소재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 85.0%",
       "kind": "battery",
-      "visual": "배터리",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "visual": "MATERIAL",
+      "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "철강",
-      "caption": "철강 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "material",
-      "visual": "철강",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "title": "편광필름연신설비",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 75.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -155,14 +155,18 @@
     "segment_finance": "중국·독일·멕시코 등 해외 생산기지도 갖추고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 8,080억 원으로 전년보다 20.9% 늘었고, 영업이익은 185억 원으로 흑자 전환했으며 당기순이익도 315억 원으로 23.0% 증가했습니다. 다만 부채비율은 221.6%로 높은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "자동차부품 제조",
-        "desc": "크래쉬패드·콘솔·글러브박스 등 자동차 내외장재 OEM 생산",
-        "revenue_share": 0.997
+        "name": "제조부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.7%",
+        "revenue_share": 0.997,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "토목시설물 건설",
-        "desc": "수주 건축물 건설",
-        "revenue_share": 0.003
+        "name": "건설부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.3%",
+        "revenue_share": 0.003,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -173,22 +177,30 @@
       "자동차 내외장재",
       "토목시설물 건설"
     ],
-    "investor_note": "중국·독일·멕시코 등 해외 생산기지도 갖추고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 8,080억 원으로 전년보다 20.9% 늘었고, 영업이익은 185억 원으로 흑자 전환했으며 당기순이익도 315억 원으로 23.0% 증가했습니다. 다만 부채비율은 221.6%로 높은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다."
+    "investor_note": "중국·독일·멕시코 등 해외 생산기지도 갖추고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 8,080억 원으로 전년보다 20.9% 늘었고, 영업이익은 185억 원으로 흑자 전환했으며 당기순이익도 315억 원으로 23.0% 증가했습니다. 다만 부채비율은 221.6%로 높은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "제조부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.7%",
+        "revenue_share": 0.997,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "건설부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.3%",
+        "revenue_share": 0.003,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "자동차부품 제조",
-      "caption": "크래쉬패드·콘솔·글러브박스 등 자동차 내외장재 OEM 생산",
+      "title": "제조부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.7%",
       "kind": "auto",
-      "visual": "자동차부품",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "토목시설물 건설",
-      "caption": "수주 건축물 건설",
-      "kind": "service",
-      "visual": "토목시설물",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     }

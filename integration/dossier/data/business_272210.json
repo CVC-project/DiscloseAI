@@ -110,14 +110,18 @@
     "segment_finance": "",
     "segment_breakdown": [
       {
-        "name": "방산부문",
-        "desc": "감시정찰, 지휘통제통신, 항공전자, 해양시스템, 위성, MRO 등 방위산업",
-        "revenue_share": 0.666
+        "name": "방산",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 66.6%",
+        "revenue_share": 0.666,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "ICT부문",
-        "desc": "IT 아웃소싱, SI, 디지털플랫폼 등 정보통신 서비스",
-        "revenue_share": 0.178
+        "name": "ICT",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.8%",
+        "revenue_share": 0.178,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "investor_note": "과거 공시 기반 참고 정보로, 최근 매출액이 전년 대비 30.7% 증가해 3조 6,641억 원을 기록하며 강한 성장세를 보였으나, 원자재 가격 상승과 비용 증가로 영업이익은 오히려 45.3% 감소했습니다(영업이익 = 매출에서 제품 생산비와 운영비를 뺀 순수 사업 이익). 순이익도 53% 감소해 2,091억 원에 그쳤는데, 이는 투자 손실 등의 영향입니다. 한편 총자산이 77.6% 증가하면서 부채비율(= 빌린 돈을 자기 자본으로 나눈 비율)이 106.5%로 높아져 재무 건전성 개선이 과제이며, 주당 배당금은 500원으로 인상해 주주환원 정책을 지속하고 있습니다.",
@@ -136,30 +140,38 @@
       "블록체인 솔루션"
     ],
     "raw_moves": [],
-    "utilization": []
+    "utilization": [],
+    "product_service_segments": [
+      {
+        "name": "방산",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 66.6%",
+        "revenue_share": 0.666,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "ICT",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.8%",
+        "revenue_share": 0.178,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "방산전자",
-      "caption": "레이다, 전자광학, 지휘통제 체계를 봅니다.",
-      "kind": "aero",
-      "visual": "RADAR",
-      "image": "../data/business_images/business_image_1805fba8159acac6.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "위성·우주",
-      "caption": "위성통신과 우주 사업은 중장기 성장 단서입니다.",
-      "kind": "signal",
-      "visual": "SPACE",
+      "title": "방산·항공",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 66.6%",
+      "kind": "ship",
+      "visual": "DEFENSE",
       "image": "../data/business_images/business_image_1805fba8159acac6.avif",
       "image_source": "Unsplash"
     },
     {
       "title": "ICT",
-      "caption": "시스템 통합과 IT 서비스 매출을 함께 봅니다.",
-      "kind": "platform",
-      "visual": "ICT",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
       "image": "../data/business_images/business_image_1805fba8159acac6.avif",
       "image_source": "Unsplash"
     }

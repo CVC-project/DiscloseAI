@@ -155,9 +155,32 @@
     "segment_finance": "상기 표에서 단가가 변동하는 원인으로는 제품의 생산원가, 원재료 조달 상황 및 환율 변동에 따른 차이보다는 고객 사업의 예산 범위, 경쟁 공급업체의 수주 경쟁에 따른 상이한 할인율, 연도별 프로젝트 수의 차이에 기인합니다.",
     "segment_breakdown": [
       {
-        "name": "키움증권",
-        "desc": "위탁매매, IB, 운용 등 증권 서비스",
-        "revenue_share": null
+        "name": "용역매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.0%",
+        "revenue_share": 0.44,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "SW 및 라이선스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.8%",
+        "revenue_share": 0.098,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "무선랜",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.7%",
+        "revenue_share": 0.047,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "UCS/IPT",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.002,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -172,40 +195,54 @@
       "Saisei Networks",
       "Authorized Distributor"
     ],
-    "investor_note": "상기 표에서 단가가 변동하는 원인으로는 제품의 생산원가, 원재료 조달 상황 및 환율 변동에 따른 차이보다는 고객 사업의 예산 범위, 경쟁 공급업체의 수주 경쟁에 따른 상이한 할인율, 연도별 프로젝트 수의 차이에 기인합니다."
+    "investor_note": "상기 표에서 단가가 변동하는 원인으로는 제품의 생산원가, 원재료 조달 상황 및 환율 변동에 따른 차이보다는 고객 사업의 예산 범위, 경쟁 공급업체의 수주 경쟁에 따른 상이한 할인율, 연도별 프로젝트 수의 차이에 기인합니다.",
+    "product_service_segments": [
+      {
+        "name": "용역매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.0%",
+        "revenue_share": 0.44,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "SW 및 라이선스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.8%",
+        "revenue_share": 0.098,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "무선랜",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.7%",
+        "revenue_share": 0.047,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "UCS/IPT",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.002,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "데이터센터 인프라",
-      "caption": "서버와 네트워크 장비가 안정적으로 돌아가도록 데이터센터 기반을 구축·운영합니다.",
+      "title": "SW 및 라이선스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.8%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_datacenter.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "IT 인프라 운영",
-      "caption": "서버, 네트워크, 보안 장비 같은 기업 IT 기반을 운영·관리하는 서비스입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "시스템 구축·통합",
-      "caption": "기업 업무에 필요한 서버, 네트워크, 소프트웨어를 묶어 하나의 시스템으로 구축합니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "무선랜",
-      "caption": "기업과 공공기관의 무선 네트워크 접속 환경을 구축하는 장비·서비스입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.7%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

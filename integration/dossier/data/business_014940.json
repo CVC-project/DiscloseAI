@@ -155,14 +155,25 @@
     "segment_finance": "오리엔탈정공은 선박에 들어가는 각종 크레인(Marine Crane)과 구명장비, 선원 거주구(Deck House) 등 대형 철구조물을 만드는 조선기자재 기업으로, 구조물 부문이 매출의 약 55%, 기계품 부문이 45%를 차지합니다. HD현대 등 국내 대형 조선소가 주요 매출처입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,072억 원으로 전년 대비 변동이 거의 없었고 영업이익은 242억 원으로 2.4% 소폭 줄었으며 당기순이익도 191억 원으로 26.5% 감소했습니다. 부채비율은 89.8%로 무난한 수준입니다.",
     "segment_breakdown": [
       {
-        "name": "구조물",
-        "desc": "선박용 Deck House·Engine Room Casing 등 대형 철구조물(오리엔탈마린텍)",
-        "revenue_share": 0.553
+        "name": "기계품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.6%",
+        "revenue_share": 0.446,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "기계품",
-        "desc": "선박용 크레인·데크기계 등 하역·구명장비",
-        "revenue_share": 0.446
+        "name": "Life Saving Appliances",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.001,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "구조물",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.3%",
+        "revenue_share": 0.553,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -173,24 +184,47 @@
       "Deck House",
       "Engine Room Casing"
     ],
-    "investor_note": "오리엔탈정공은 선박에 들어가는 각종 크레인(Marine Crane)과 구명장비, 선원 거주구(Deck House) 등 대형 철구조물을 만드는 조선기자재 기업으로, 구조물 부문이 매출의 약 55%, 기계품 부문이 45%를 차지합니다. HD현대 등 국내 대형 조선소가 주요 매출처입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,072억 원으로 전년 대비 변동이 거의 없었고 영업이익은 242억 원으로 2.4% 소폭 줄었으며 당기순이익도 191억 원으로 26.5% 감소했습니다. 부채비율은 89.8%로 무난한 수준입니다."
+    "investor_note": "오리엔탈정공은 선박에 들어가는 각종 크레인(Marine Crane)과 구명장비, 선원 거주구(Deck House) 등 대형 철구조물을 만드는 조선기자재 기업으로, 구조물 부문이 매출의 약 55%, 기계품 부문이 45%를 차지합니다. HD현대 등 국내 대형 조선소가 주요 매출처입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,072억 원으로 전년 대비 변동이 거의 없었고 영업이익은 242억 원으로 2.4% 소폭 줄었으며 당기순이익도 191억 원으로 26.5% 감소했습니다. 부채비율은 89.8%로 무난한 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "기계품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.6%",
+        "revenue_share": 0.446,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Life Saving Appliances",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.001,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "구조물",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.3%",
+        "revenue_share": 0.553,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "구조물",
-      "caption": "선박용 Deck House·Engine Room Casing 등 대형 철구조물(오리엔탈마린텍)",
-      "kind": "ship",
-      "visual": "구조물",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "title": "기계품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "기계품",
-      "caption": "선박용 크레인·데크기계 등 하역·구명장비",
-      "kind": "ship",
-      "visual": "기계품",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "title": "구조물",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.3%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -155,14 +155,18 @@
     "segment_finance": "테고사이언스 주식회사의 주요 제품·서비스는 의약품, CDMO, 세포치료제, 3도 화상, ㉣제품의 특성, ㉥향후계획입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 목적사업으로 하며, 세포치료제의 개발 컨설팅 및 위탁생산과 품질관리 서비스를 제공하고 있습니다. 당사는 세계 최고수준의 세포배양기술과, 자체 보유한 GMP 시설에서의 엄격한 제조및 품질관리, 독보적인 글로벌 기준의 세포은행의 구축과 같은 차별적인 기술경쟁력을 가지고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "첨단바이오의약품(세포치료제)",
-        "desc": "의약품, 세포치료제 관련 제품·서비스",
-        "revenue_share": null
+        "name": "3차원배양피부모델",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.4%",
+        "revenue_share": 0.014,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "세포은행",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.9%",
+        "revenue_share": 0.049,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -179,32 +183,47 @@
       "후속임상(국내)",
       "보톡스"
     ],
-    "investor_note": "테고사이언스 주식회사의 주요 제품·서비스는 의약품, CDMO, 세포치료제, 3도 화상, ㉣제품의 특성, ㉥향후계획입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 목적사업으로 하며, 세포치료제의 개발 컨설팅 및 위탁생산과 품질관리 서비스를 제공하고 있습니다. 당사는 세계 최고수준의 세포배양기술과, 자체 보유한 GMP 시설에서의 엄격한 제조및 품질관리, 독보적인 글로벌 기준의 세포은행의 구축과 같은 차별적인 기술경쟁력을 가지고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "테고사이언스 주식회사의 주요 제품·서비스는 의약품, CDMO, 세포치료제, 3도 화상, ㉣제품의 특성, ㉥향후계획입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 목적사업으로 하며, 세포치료제의 개발 컨설팅 및 위탁생산과 품질관리 서비스를 제공하고 있습니다. 당사는 세계 최고수준의 세포배양기술과, 자체 보유한 GMP 시설에서의 엄격한 제조및 품질관리, 독보적인 글로벌 기준의 세포은행의 구축과 같은 차별적인 기술경쟁력을 가지고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 85.7%",
+        "revenue_share": 0.857,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "3차원배양피부모델",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.4%",
+        "revenue_share": 0.014,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.9%",
+        "revenue_share": 0.049,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "의약품",
-      "caption": "의약품 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "세포치료제",
-      "caption": "세포치료제 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "3차원배양피부모델",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.4%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "3도 화상",
-      "caption": "3도 화상 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "용역",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.9%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

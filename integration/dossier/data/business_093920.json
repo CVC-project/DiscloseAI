@@ -155,9 +155,18 @@
     "segment_finance": "(주)서원인텍의 주요 제품·서비스는 OLED, 배터리, 방산, Manufacturing, 키패드, 부자재입니다. 또한, 최근에는 신규 중소업체의 난립으로 인해 경쟁업체가 증가하고 있으며, 당사의 경우 고객사의 생산 중심지인 베트남 현지 공장에 액세서리 생산라인(생산설비 등)을 확대하여 대량 생산을 가능하게 설비 투자를 진행하고 있습니다. 정밀기계는 소재ㆍ부품ㆍ장비 전문기업으로서, 독일첨단 기술을 기반으로 혁신적인 초정밀 가공설비를 개발 및 생산하고 있으며, 끊임없는 개발로, 초정밀 고속가공기, CNC방전가공기, 5축 레이저 가공기, 레이저워터젯 가공기, 고객 주문형 가공기, 자동화 시스템을 제공합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "대신증권",
-        "desc": "위탁매매, IB, 운용 등 증권 서비스",
-        "revenue_share": null
+        "name": "Manufacturing",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.7%",
+        "revenue_share": 0.997,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Sourcing",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.001,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -172,40 +181,39 @@
       "방법",
       "실용신안"
     ],
-    "investor_note": "(주)서원인텍의 주요 제품·서비스는 OLED, 배터리, 방산, Manufacturing, 키패드, 부자재입니다. 또한, 최근에는 신규 중소업체의 난립으로 인해 경쟁업체가 증가하고 있으며, 당사의 경우 고객사의 생산 중심지인 베트남 현지 공장에 액세서리 생산라인(생산설비 등)을 확대하여 대량 생산을 가능하게 설비 투자를 진행하고 있습니다. 정밀기계는 소재ㆍ부품ㆍ장비 전문기업으로서, 독일첨단 기술을 기반으로 혁신적인 초정밀 가공설비를 개발 및 생산하고 있으며, 끊임없는 개발로, 초정밀 고속가공기, CNC방전가공기, 5축 레이저 가공기, 레이저워터젯 가공기, 고객 주문형 가공기, 자동화 시스템을 제공합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)서원인텍의 주요 제품·서비스는 OLED, 배터리, 방산, Manufacturing, 키패드, 부자재입니다. 또한, 최근에는 신규 중소업체의 난립으로 인해 경쟁업체가 증가하고 있으며, 당사의 경우 고객사의 생산 중심지인 베트남 현지 공장에 액세서리 생산라인(생산설비 등)을 확대하여 대량 생산을 가능하게 설비 투자를 진행하고 있습니다. 정밀기계는 소재ㆍ부품ㆍ장비 전문기업으로서, 독일첨단 기술을 기반으로 혁신적인 초정밀 가공설비를 개발 및 생산하고 있으며, 끊임없는 개발로, 초정밀 고속가공기, CNC방전가공기, 5축 레이저 가공기, 레이저워터젯 가공기, 고객 주문형 가공기, 자동화 시스템을 제공합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "Manufacturing",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.7%",
+        "revenue_share": 0.997,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Sourcing",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.001,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.002,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
-      "kind": "display",
-      "visual": "OLED",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "배터리",
-      "caption": "배터리 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "방산",
-      "caption": "방산 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "telecom",
-      "visual": "NET",
-      "image": "../data/business_images/business_image_4ae102473975707c.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
       "title": "Manufacturing",
-      "caption": "반도체 공정 장비에 들어가는 교체·소모성 부품입니다.",
-      "kind": "telecom",
-      "visual": "NET",
-      "image": "../data/business_images/business_image_local_electrode_ring.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.7%",
+      "kind": "chip",
+      "visual": "CHIP",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -139,9 +139,25 @@
     "segment_finance": "(주)큐엠씨의 주요 제품·서비스는 디스플레이 제조장비, 반도체 제조장비, 전장 제조장비, 자동화 장비입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 회사의 장비 제조사업은 제조공정상 동일의 원자재 및 용역, 관련 기계장치를 이용하여 하나의 제조공장에서 제품이 생산되는 사업의 특성상 사업부문의 구분이 사실상 어려워 단일 사업부문으로 기재하되 생산되는 제품을 산업 및 고객, 제조공정의 특징 등을 고려하여 총 4개 부문으로 나누어 그 현황을 기재하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "제조장비",
-        "desc": "디스플레이·반도체·전장 제조장비",
-        "revenue_share": null
+        "name": "반도체 장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.0%",
+        "revenue_share": 0.53,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "카메라 모듈 장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.02,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "LED 및 디스플레이 장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.0%",
+        "revenue_share": 0.09,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -150,40 +166,55 @@
       "전장 제조장비",
       "자동화 장비"
     ],
-    "investor_note": "(주)큐엠씨의 주요 제품·서비스는 디스플레이 제조장비, 반도체 제조장비, 전장 제조장비, 자동화 장비입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 회사의 장비 제조사업은 제조공정상 동일의 원자재 및 용역, 관련 기계장치를 이용하여 하나의 제조공장에서 제품이 생산되는 사업의 특성상 사업부문의 구분이 사실상 어려워 단일 사업부문으로 기재하되 생산되는 제품을 산업 및 고객, 제조공정의 특징 등을 고려하여 총 4개 부문으로 나누어 그 현황을 기재하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)큐엠씨의 주요 제품·서비스는 디스플레이 제조장비, 반도체 제조장비, 전장 제조장비, 자동화 장비입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 회사의 장비 제조사업은 제조공정상 동일의 원자재 및 용역, 관련 기계장치를 이용하여 하나의 제조공장에서 제품이 생산되는 사업의 특성상 사업부문의 구분이 사실상 어려워 단일 사업부문으로 기재하되 생산되는 제품을 산업 및 고객, 제조공정의 특징 등을 고려하여 총 4개 부문으로 나누어 그 현황을 기재하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "반도체 장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.0%",
+        "revenue_share": 0.53,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "카메라 모듈 장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.02,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "LED 및 디스플레이 장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.0%",
+        "revenue_share": 0.09,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "제조장비",
-      "caption": "디스플레이·반도체·전장 제조장비",
+      "title": "반도체 장비",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.0%",
       "kind": "chip",
-      "visual": "제조장비",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
+      "visual": "EQUIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "디스플레이 제조장비",
-      "caption": "디스플레이 제조장비 관련 제품과 서비스를 통해 매출을 만듭니다.",
+      "title": "카메라모듈",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+      "kind": "chip",
+      "visual": "CAM",
+      "image": "../data/business_images/business_image_025006447be31665.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "디스플레이",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.0%",
       "kind": "display",
-      "visual": "디스플레이",
+      "visual": "OLED",
       "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
       "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "반도체 제조장비",
-      "caption": "반도체 제조장비 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "chip",
-      "visual": "반도체",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "전장 제조장비",
-      "caption": "전장 제조장비 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "전장",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
     }
   ],
   "custom_report_ideas": [

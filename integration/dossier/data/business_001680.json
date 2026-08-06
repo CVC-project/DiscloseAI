@@ -155,14 +155,32 @@
     "segment_finance": "대상은 '청정원'·'종가'·'미원' 브랜드로 유명한 종합식품기업으로, 조미료·장류·김치 등을 만드는 식품사업과 전분당·MSG·아미노산을 생산하는 소재(바이오)사업을 함께 운영합니다. 식품사업이 매출의 87%를 차지하며, 인도네시아·베트남·미국 등 해외 법인을 통해서도 판매하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4조 4,013억 원으로 전년 대비 3.4% 늘었지만 영업이익은 4.3% 줄었고, 당기순이익은 3,030억 원의 적자로 전환됐습니다. 부채비율은 217.2%로 자본보다 빚이 두 배 넘게 많아 재무 부담을 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "식품",
-        "desc": "청정원·종가·미원 등 조미료·장류·김치·가공식품",
-        "revenue_share": 0.867
+        "name": "대상(주)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+        "revenue_share": 0.08,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "소재",
-        "desc": "전분당·MSG·아미노산(라이신 등) 바이오 소재",
-        "revenue_share": 0.332
+        "name": "장류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+        "revenue_share": 0.08,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "서구식품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.0%",
+        "revenue_share": 0.17,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "육가공",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.0%",
+        "revenue_share": 0.07,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -175,24 +193,54 @@
       "MSG",
       "라이신"
     ],
-    "investor_note": "대상은 '청정원'·'종가'·'미원' 브랜드로 유명한 종합식품기업으로, 조미료·장류·김치 등을 만드는 식품사업과 전분당·MSG·아미노산을 생산하는 소재(바이오)사업을 함께 운영합니다. 식품사업이 매출의 87%를 차지하며, 인도네시아·베트남·미국 등 해외 법인을 통해서도 판매하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4조 4,013억 원으로 전년 대비 3.4% 늘었지만 영업이익은 4.3% 줄었고, 당기순이익은 3,030억 원의 적자로 전환됐습니다. 부채비율은 217.2%로 자본보다 빚이 두 배 넘게 많아 재무 부담을 살펴볼 필요가 있습니다."
+    "investor_note": "대상은 '청정원'·'종가'·'미원' 브랜드로 유명한 종합식품기업으로, 조미료·장류·김치 등을 만드는 식품사업과 전분당·MSG·아미노산을 생산하는 소재(바이오)사업을 함께 운영합니다. 식품사업이 매출의 87%를 차지하며, 인도네시아·베트남·미국 등 해외 법인을 통해서도 판매하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4조 4,013억 원으로 전년 대비 3.4% 늘었지만 영업이익은 4.3% 줄었고, 당기순이익은 3,030억 원의 적자로 전환됐습니다. 부채비율은 217.2%로 자본보다 빚이 두 배 넘게 많아 재무 부담을 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "대상(주)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+        "revenue_share": 0.08,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "장류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+        "revenue_share": 0.08,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "서구식품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.0%",
+        "revenue_share": 0.17,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "육가공",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.0%",
+        "revenue_share": 0.07,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "식품",
-      "caption": "청정원·종가·미원 등 조미료·장류·김치·가공식품",
+      "title": "양념·소스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
       "kind": "consumer",
-      "visual": "식품",
-      "image": "../data/business_images/business_image_food_packaged.svg",
+      "visual": "SAUCE",
+      "image": "../data/business_images/business_image_food_sauce.svg",
       "image_source": "Local visual"
     },
     {
-      "title": "소재",
-      "caption": "전분당·MSG·아미노산(라이신 등) 바이오 소재",
-      "kind": "bio",
-      "visual": "소재",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "축산·육가공",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.0%",
+      "kind": "consumer",
+      "visual": "FEED",
+      "image": "../data/business_images/business_image_food_feed.svg",
+      "image_source": "Local visual"
     }
   ],
   "custom_report_ideas": [

@@ -111,8 +111,10 @@
     "segment_breakdown": [
       {
         "name": "에너지솔루션",
-        "desc": "EV, ESS, IT기기 등 다양한 분야의 2차전지 제조·판매",
-        "revenue_share": 1
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "investor_note": "LG에너지솔루션은 전기차·에너지저장장치·IT기기 등 다양한 분야에 쓰이는 2차전지(충전해서 반복 사용하는 배터리)를 만드는 회사입니다. 지난해 매출은 23조 6,717억 원으로 전년 대비 감소했지만, 영업이익(매출에서 기본 사업 비용을 뺀 순이익)은 1조 3,461억 원으로 크게 증가해 수익성이 개선되고 있습니다. 원가 효율화와 구조 개선이 주효했으며, 영업현금흐름도 2조 1,718억 원으로 안정적인 현금 창출 능력을 보여줍니다. 다만 총자산 67조 원 규모로 사업을 확장 중인 가운데 부채비율이 129.1%로 높아(부채가 자본을 초과한 상태), 차입금 관리에 주의가 필요합니다. 과거 공시 기반 참고 정보입니다.",
@@ -129,30 +131,23 @@
       "바이폴라전지"
     ],
     "raw_moves": [],
-    "utilization": []
+    "utilization": [],
+    "product_service_segments": [
+      {
+        "name": "에너지솔루션",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "배터리 셀",
-      "caption": "전기차·ESS 수요와 고객사 생산계획을 봅니다.",
-      "kind": "battery",
-      "visual": "CELL",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "소재",
-      "caption": "양극재·음극재·전해액 등 소재 가격이 원가를 흔듭니다.",
-      "kind": "chem",
-      "visual": "MATERIAL",
-      "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "배터리 소재",
-      "caption": "소재 내재화와 고객사 공급망이 경쟁력을 만듭니다.",
-      "kind": "chem",
-      "visual": "MATERIAL",
+      "title": "소프트웨어·솔루션",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+      "kind": "service",
+      "visual": "SOFTWARE",
       "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
       "image_source": "Unsplash"
     }

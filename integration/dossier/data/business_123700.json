@@ -153,7 +153,15 @@
   "snippets": {
     "overview": "(주)에스제이엠의 주요 사업은 총부문수익, 자동차사업부문 (자동차용 BELLOWS사업부), 플랜트사업부문 (산업용 BELLOWS사업부), 자동차사업부문 (자동차용BELLOWS사업부) 등입니다. 제품 등의 현황 연결회사는 자동차부품인 Flexible Coupling과 산업용제품인 Expansion Joint의 생산 및 판매를 주요사업으로 하고 있습니다. 각 제품별 매출액 및 총 매출액에서 차지하는 비율은 다음과 같습니다.",
     "segment_finance": "(주)에스제이엠의 주요 사업은 총부문수익, 자동차사업부문 (자동차용 BELLOWS사업부), 플랜트사업부문 (산업용 BELLOWS사업부), 자동차사업부문 (자동차용BELLOWS사업부) 등입니다. 제품 등의 현황 연결회사는 자동차부품인 Flexible Coupling과 산업용제품인 Expansion Joint의 생산 및 판매를 주요사업으로 하고 있습니다. 각 제품별 매출액 및 총 매출액에서 차지하는 비율은 다음과 같습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.005,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "배터리",
       "LNG",
@@ -167,31 +175,53 @@
       "건축배관용 신축이음쇠",
       "자동차사업부문 (자동차용BELLOWS사업부)"
     ],
-    "investor_note": "(주)에스제이엠의 주요 사업은 총부문수익, 자동차사업부문 (자동차용 BELLOWS사업부), 플랜트사업부문 (산업용 BELLOWS사업부), 자동차사업부문 (자동차용BELLOWS사업부) 등입니다. 제품 등의 현황 연결회사는 자동차부품인 Flexible Coupling과 산업용제품인 Expansion Joint의 생산 및 판매를 주요사업으로 하고 있습니다. 각 제품별 매출액 및 총 매출액에서 차지하는 비율은 다음과 같습니다."
+    "investor_note": "(주)에스제이엠의 주요 사업은 총부문수익, 자동차사업부문 (자동차용 BELLOWS사업부), 플랜트사업부문 (산업용 BELLOWS사업부), 자동차사업부문 (자동차용BELLOWS사업부) 등입니다. 제품 등의 현황 연결회사는 자동차부품인 Flexible Coupling과 산업용제품인 Expansion Joint의 생산 및 판매를 주요사업으로 하고 있습니다. 각 제품별 매출액 및 총 매출액에서 차지하는 비율은 다음과 같습니다.",
+    "product_service_segments": [
+      {
+        "name": "자동차사업부문 (자동차용 BELLOWS사업부)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 86.0%",
+        "revenue_share": 0.86,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "플랜트사업부문 (산업용 BELLOWS사업부)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.4%",
+        "revenue_share": 0.114,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.1%",
+        "revenue_share": 0.021,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.005,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "배터리",
-      "caption": "배터리 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
-    },
-    {
       "title": "자동차사업부문 (자동차용 BELLOWS사업부)",
-      "caption": "자동차사업부문 (자동차용 BELLOWS사업부) 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 86.0%",
       "kind": "auto",
       "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "Flexible Coupling",
-      "caption": "Flexible Coupling 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "auto",
-      "visual": "AUTO",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "title": "토목·플랜트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.4%",
+      "kind": "service",
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_5184e050831a4460.avif",
       "image_source": "Unsplash"
     }
   ],

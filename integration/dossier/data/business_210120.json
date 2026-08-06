@@ -156,23 +156,31 @@
     "segment_breakdown": [
       {
         "name": "방송프로그램",
-        "desc": "방송프로그램 관련 제품·서비스",
-        "revenue_share": null
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.5%",
+        "revenue_share": 0.1252,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "드라마제작",
-        "desc": "드라마제작 관련 제품·서비스",
-        "revenue_share": null
+        "name": "음반",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.1%",
+        "revenue_share": 0.0105,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "광고산업",
-        "desc": "광고산업 관련 제품·서비스",
-        "revenue_share": null
+        "name": "광고협찬",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+        "revenue_share": 0.0802,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "광고대행업",
-        "desc": "광고대행업 관련 제품·서비스",
-        "revenue_share": null
+        "name": "사용료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 78.9%",
+        "revenue_share": 0.7887,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -189,40 +197,70 @@
       "가상현실업",
       "온라인정보 제공업"
     ],
-    "investor_note": "(주)캔버스엔의 주요 제품·서비스는 방송프로그램, 드라마제작, 광고산업, 광고대행업, 광고제작업, 광고전문서비스업입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 주요계약 당사는 일반 제조기업과 달리 상품이나 제품이 아닌 영상콘텐츠인 작품을 제작하는 기업이므로 별도의 기술을 보유하고 있지는 않습니다. 이때 다수의 수요자들에게 판매를 제안하고 협상하는 판매 과정상 주요한 요소를 차지하는 것이 비단 드라마 작품 본연의 작품성과 흥행기대감 등도 있겠지만 드라마를 기획 제작한 제작사의 경험치와 신뢰도 또한 주요한 요소로 작용합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)캔버스엔의 주요 제품·서비스는 방송프로그램, 드라마제작, 광고산업, 광고대행업, 광고제작업, 광고전문서비스업입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 주요계약 당사는 일반 제조기업과 달리 상품이나 제품이 아닌 영상콘텐츠인 작품을 제작하는 기업이므로 별도의 기술을 보유하고 있지는 않습니다. 이때 다수의 수요자들에게 판매를 제안하고 협상하는 판매 과정상 주요한 요소를 차지하는 것이 비단 드라마 작품 본연의 작품성과 흥행기대감 등도 있겠지만 드라마를 기획 제작한 제작사의 경험치와 신뢰도 또한 주요한 요소로 작용합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "방송프로그램",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.5%",
+        "revenue_share": 0.1252,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "음반",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.1%",
+        "revenue_share": 0.0105,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "광고협찬",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+        "revenue_share": 0.0802,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "사용료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 78.9%",
+        "revenue_share": 0.7887,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "방송프로그램",
-      "caption": "방송프로그램 관련 제품·서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.5%",
       "kind": "service",
-      "visual": "방송프로그램",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "드라마제작",
-      "caption": "드라마제작 관련 제품·서비스",
+      "title": "음반",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.1%",
       "kind": "service",
-      "visual": "드라마제작",
-      "image": "../data/business_images/business_image_local_content.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "광고산업",
-      "caption": "광고산업 관련 제품·서비스",
+      "title": "광고협찬",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
       "kind": "platform",
-      "visual": "광고산업",
-      "image": "../data/business_images/business_image_local_content.svg",
-      "image_source": "Local curated visual"
+      "visual": "APP",
+      "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "광고대행업",
-      "caption": "광고대행업 관련 제품·서비스",
-      "kind": "platform",
-      "visual": "광고대행업",
-      "image": "../data/business_images/business_image_local_content.svg",
-      "image_source": "Local curated visual"
+      "title": "사용료",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 78.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

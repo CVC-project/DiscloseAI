@@ -155,19 +155,18 @@
     "segment_finance": "이지홀딩스는 배합사료·사료첨가제(FB), 돼지 도축·육가공(LB), 닭고기·오리 도계·도압(PB) 사업을 계열사를 통해 운영하는 축산·사료 전문 지주회사입니다. 매출의 절반가량이 사료 사업에서, 나머지는 육가공(23%)·가금(17%)·수의서비스 및 금융 등 기타(8%)에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3조 3,889억 원으로 전년 대비 3.2% 늘었고 영업이익은 22.7%, 당기순이익은 97.3% 증가하며 수익성이 개선됐습니다. 다만 부채비율은 134.5%로 자본보다 부채가 많은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "사료(FB)",
-        "desc": "국내외 배합사료·사료첨가제 생산·판매",
-        "revenue_share": 0.5226
+        "name": "첨가제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.3%",
+        "revenue_share": 0.0228,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "육가공(LB)",
-        "desc": "돼지 도축·지육·비육돈 등 육가공 사업",
-        "revenue_share": 0.2291
-      },
-      {
-        "name": "가금(PB)",
-        "desc": "닭고기 도계·오리 도압 등 가금 사업",
-        "revenue_share": 0.1694
+        "name": "해외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.6%",
+        "revenue_share": 0.5156,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -179,38 +178,52 @@
       "수의서비스",
       "곡물 유통"
     ],
-    "investor_note": "이지홀딩스는 배합사료·사료첨가제(FB), 돼지 도축·육가공(LB), 닭고기·오리 도계·도압(PB) 사업을 계열사를 통해 운영하는 축산·사료 전문 지주회사입니다. 매출의 절반가량이 사료 사업에서, 나머지는 육가공(23%)·가금(17%)·수의서비스 및 금융 등 기타(8%)에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3조 3,889억 원으로 전년 대비 3.2% 늘었고 영업이익은 22.7%, 당기순이익은 97.3% 증가하며 수익성이 개선됐습니다. 다만 부채비율은 134.5%로 자본보다 부채가 많은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다."
+    "investor_note": "이지홀딩스는 배합사료·사료첨가제(FB), 돼지 도축·육가공(LB), 닭고기·오리 도계·도압(PB) 사업을 계열사를 통해 운영하는 축산·사료 전문 지주회사입니다. 매출의 절반가량이 사료 사업에서, 나머지는 육가공(23%)·가금(17%)·수의서비스 및 금융 등 기타(8%)에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3조 3,889억 원으로 전년 대비 3.2% 늘었고 영업이익은 22.7%, 당기순이익은 97.3% 증가하며 수익성이 개선됐습니다. 다만 부채비율은 134.5%로 자본보다 부채가 많은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "사료사업부(FB)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.2%",
+        "revenue_share": 0.3321,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "첨가제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.3%",
+        "revenue_share": 0.0228,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "해외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.6%",
+        "revenue_share": 0.5156,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "육가공사업부(LB)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.1%",
+        "revenue_share": 0.1212,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "배합사료(양돈·양계·축우용)",
-      "caption": "곡물 가격과 축산 수요에 영향을 받는 사료·축산 사업입니다.",
+      "title": "사료",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.2%",
       "kind": "consumer",
-      "visual": "SHOP",
+      "visual": "FEED",
       "image": "../data/business_images/business_image_food_feed.svg",
       "image_source": "Local visual"
     },
     {
-      "title": "사료첨가제",
-      "caption": "곡물 가격과 축산 수요에 영향을 받는 사료·축산 사업입니다.",
+      "title": "축산·육가공",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.1%",
       "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_food_feed.svg",
-      "image_source": "Local visual"
-    },
-    {
-      "title": "사료(FB)",
-      "caption": "곡물 가격과 축산 수요에 영향을 받는 사료·축산 사업입니다.",
-      "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_food_feed.svg",
-      "image_source": "Local visual"
-    },
-    {
-      "title": "지육·비육돈(육가공)",
-      "caption": "지육·비육돈(육가공) 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "consumer",
-      "visual": "SHOP",
+      "visual": "FEED",
       "image": "../data/business_images/business_image_food_feed.svg",
       "image_source": "Local visual"
     }

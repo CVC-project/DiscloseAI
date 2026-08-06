@@ -156,13 +156,24 @@
     "segment_breakdown": [
       {
         "name": "시멘트부문",
-        "desc": "시멘트·레미콘·몰탈 제조(아세아시멘트·한라시멘트 등)",
-        "revenue_share": 0.5468
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 43.7%",
+        "revenue_share": 0.4374,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "제지부문",
-        "desc": "골판지원지·상자 등 산업용지 제조(아세아제지 등)",
-        "revenue_share": 0.602
+        "name": "레미콘",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.4%",
+        "revenue_share": 0.054,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "단순합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 54.7%",
+        "revenue_share": 0.5468,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -172,24 +183,70 @@
       "골판지원지",
       "골판지상자"
     ],
-    "investor_note": "아세아는 시멘트·레미콘을 만드는 아세아시멘트·한라시멘트와 골판지원지·상자를 만드는 아세아제지 등 계열사를 거느린 지주회사로, 시멘트 부문이 매출의 절반 이상, 제지 부문이 나머지 상당 부분을 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결기준 매출액은 1조 8,844억 원으로 전년 대비 6.1% 줄었고 영업이익은 1,110억 원으로 35.6%, 당기순이익은 512억 원으로 52.7% 감소해 건설경기 둔화의 영향을 받은 것으로 보입니다. 부채비율은 63.0%, ROE(자기자본이익률)는 2.5%로 재무 구조는 안정적이나 수익성은 낮아진 모습입니다."
+    "investor_note": "아세아는 시멘트·레미콘을 만드는 아세아시멘트·한라시멘트와 골판지원지·상자를 만드는 아세아제지 등 계열사를 거느린 지주회사로, 시멘트 부문이 매출의 절반 이상, 제지 부문이 나머지 상당 부분을 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결기준 매출액은 1조 8,844억 원으로 전년 대비 6.1% 줄었고 영업이익은 1,110억 원으로 35.6%, 당기순이익은 512억 원으로 52.7% 감소해 건설경기 둔화의 영향을 받은 것으로 보입니다. 부채비율은 63.0%, ROE(자기자본이익률)는 2.5%로 재무 구조는 안정적이나 수익성은 낮아진 모습입니다.",
+    "product_service_segments": [
+      {
+        "name": "시멘트부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 43.7%",
+        "revenue_share": 0.4374,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "레미콘",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.4%",
+        "revenue_share": 0.054,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "2차제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.1%",
+        "revenue_share": 0.021,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "단순합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 54.7%",
+        "revenue_share": 0.5468,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "시멘트부문",
-      "caption": "시멘트·레미콘·몰탈 제조(아세아시멘트·한라시멘트 등)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 43.7%",
       "kind": "service",
-      "visual": "시멘트부문",
-      "image": "../data/business_images/business_image_local_cement.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "제지부문",
-      "caption": "골판지원지·상자 등 산업용지 제조(아세아제지 등)",
+      "title": "레미콘",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.4%",
       "kind": "service",
-      "visual": "제지부문",
-      "image": "../data/business_images/business_image_local_packaging.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "2차제품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.1%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "단순합계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 54.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

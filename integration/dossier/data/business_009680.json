@@ -155,19 +155,25 @@
     "segment_finance": "매출의 절반 이상이 연료시스템부품에서, 나머지가 전장·파워트레인부품에서 나오며 미래차 부품 개발도 진행 중입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,796억 원으로 전년보다 3.8% 줄었고 영업이익과 당기순이익도 각각 22.1%, 16.6% 감소했습니다. 부채비율은 9.9%로 매우 낮아 재무구조는 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "연료시스템부품",
-        "desc": "LPI/LPDI SYSTEM 등 연료 공급 시스템 부품",
-        "revenue_share": 0.529
-      },
-      {
-        "name": "전장부품",
-        "desc": "OPU·FPC 등 전자제어 부품",
-        "revenue_share": 0.281
+        "name": "자동차부 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 52.9%",
+        "revenue_share": 0.529,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "파워트레인부품",
-        "desc": "P/CLUTCH·CVVL 등 동력전달계 부품",
-        "revenue_share": 0.18
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.0%",
+        "revenue_share": 0.18,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전장부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.1%",
+        "revenue_share": 0.281,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -179,32 +185,55 @@
       "OPU(오일펌프 제어기)",
       "FPC"
     ],
-    "investor_note": "매출의 절반 이상이 연료시스템부품에서, 나머지가 전장·파워트레인부품에서 나오며 미래차 부품 개발도 진행 중입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,796억 원으로 전년보다 3.8% 줄었고 영업이익과 당기순이익도 각각 22.1%, 16.6% 감소했습니다. 부채비율은 9.9%로 매우 낮아 재무구조는 안정적인 편입니다."
+    "investor_note": "매출의 절반 이상이 연료시스템부품에서, 나머지가 전장·파워트레인부품에서 나오며 미래차 부품 개발도 진행 중입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,796억 원으로 전년보다 3.8% 줄었고 영업이익과 당기순이익도 각각 22.1%, 16.6% 감소했습니다. 부채비율은 9.9%로 매우 낮아 재무구조는 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "자동차부 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 52.9%",
+        "revenue_share": 0.529,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "파워트레인부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.0%",
+        "revenue_share": 0.18,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전장부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.1%",
+        "revenue_share": 0.281,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "연료시스템부품",
-      "caption": "LPI/LPDI SYSTEM 등 연료 공급 시스템 부품",
+      "title": "자동차부 품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 52.9%",
       "kind": "auto",
-      "visual": "연료시스템부품",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "구동계 부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.0%",
+      "kind": "auto",
+      "visual": "PARTS",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
       "title": "전장부품",
-      "caption": "OPU·FPC 등 전자제어 부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.1%",
       "kind": "auto",
-      "visual": "전장부품",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "파워트레인부품",
-      "caption": "P/CLUTCH·CVVL 등 동력전달계 부품",
-      "kind": "auto",
-      "visual": "파워트레인부품",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_e310d326cafd0fb3.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

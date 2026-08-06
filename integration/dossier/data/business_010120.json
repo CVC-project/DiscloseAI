@@ -110,24 +110,32 @@
     "segment_finance": "",
     "segment_breakdown": [
       {
-        "name": "전력부문",
-        "desc": "전력기기, 전력시스템, 신재생에너지, 철도시스템 등",
-        "revenue_share": 1.012
+        "name": "전력",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 89.4%",
+        "revenue_share": 0.894,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "자동화부문",
-        "desc": "PLC, 인버터, 자동화시스템, 산업용 통신기기",
-        "revenue_share": 0.117
+        "name": "자동화",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.7%",
+        "revenue_share": 0.117,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "금속부문",
-        "desc": "동관, 스테인레스관 제조 및 판매",
-        "revenue_share": 0.13
+        "name": "금속",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.0%",
+        "revenue_share": 0.13,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "IT부문",
-        "desc": "ERP, 데이터센터, SI, 스마트팩토리 등",
-        "revenue_share": 0.028
+        "name": "IT",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.8%",
+        "revenue_share": 0.028,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "investor_note": "엘에스일렉트릭은 전력기기, 자동화시스템, 금속관 등을 만드는 종합 전기·전자 제조업체로, 지난해 약 5조 원의 매출을 올리며 전년 대비 9% 이상 성장했습니다. 전력부문이 매출의 대부분을 차지하며 저압·고압 기기부터 신재생에너지, 철도시스템까지 다양한 제품을 공급하고, 자동화와 금속 부문도 함께 운영하고 있습니다. 영업이익(사업을 통해 번 순수 이익)과 순이익(모든 비용을 뺀 최종 이익) 모두 두 자릿수 성장률을 기록해 매출 증가를 수익으로 잘 전환했으며, 영업현금흐름(실제 사업에서 나온 현금)도 순이익을 웃돌아 현금창출력이 탄탄합니다. 부채비율(빌린 돈이 자기 자본의 몇 배인지)은 131% 수준으로 업계 기준에서 적정한 수준을 유지하고 있습니다. 과거 공시 기반 참고 정보입니다.",
@@ -146,31 +154,69 @@
       "철도시스템"
     ],
     "raw_moves": [],
-    "utilization": []
+    "utilization": [],
+    "product_service_segments": [
+      {
+        "name": "전력",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 89.4%",
+        "revenue_share": 0.894,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동화",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.7%",
+        "revenue_share": 0.117,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "금속",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.0%",
+        "revenue_share": 0.13,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "IT",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.8%",
+        "revenue_share": 0.028,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "전력자동화",
-      "caption": "공장·빌딩·전력망 자동화 장비가 핵심입니다.",
-      "kind": "energy",
-      "visual": "Grid",
+      "title": "전력기기·발전",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 89.4%",
+      "kind": "power",
+      "visual": "POWER",
       "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "배전기기",
-      "caption": "차단기와 배전반 수요는 설비투자와 함께 움직입니다.",
-      "kind": "factory",
-      "visual": "Switch",
-      "image": "../data/business_images/business_image_c1540b930934e19f.avif",
+      "title": "자동화",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_1805fba8159acac6.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "전력 인프라",
-      "caption": "데이터센터와 재생에너지 투자가 장기 수요를 만듭니다.",
-      "kind": "signal",
-      "visual": "Infra",
-      "image": "../data/business_images/business_image_c1540b930934e19f.avif",
+      "title": "금속",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "IT",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_1805fba8159acac6.avif",
       "image_source": "Unsplash"
     }
   ],

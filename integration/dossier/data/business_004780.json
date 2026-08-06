@@ -155,14 +155,25 @@
     "segment_finance": "대륙제관은 1966년 설립된 금속포장용기 전문기업으로, 국내 시장의 약 60%를 점유한 윤활유관·페인트관 등 일반관 사업(매출 비중 약 32%)과, 자체 브랜드로 만드는 휴대용 부탄가스·헤어스프레이관 등 에어졸관 사업(약 64%)을 운영합니다. 자체 개발한 폭발방지 기술(C.R.V.)로 용기 안전성을 높인 점이 특징입니다. 과거 공시 기반 참고 정보로, 매출액은 2,665억 원(-2.9%), 영업이익은 103억 원(-34.9%), 당기순이익은 91억 원(-20.3%)으로 줄었지만, 부채비율은 32.4%로 안정적입니다.",
     "segment_breakdown": [
       {
-        "name": "일반관",
-        "desc": "윤활유관·페인트관·식용유관 등 금속용기 제조",
-        "revenue_share": 0.3232
+        "name": "에어졸관",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 63.5%",
+        "revenue_share": 0.6355,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "에어졸관",
-        "desc": "휴대용 부탄가스·헤어스프레이관 등 제조",
-        "revenue_share": 0.6355
+        "name": "가 스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.4%",
+        "revenue_share": 0.2538,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "부재료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.3%",
+        "revenue_share": 0.0229,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -172,24 +183,70 @@
       "휴대용 부탄가스",
       "에어졸관(헤어스프레이관)"
     ],
-    "investor_note": "대륙제관은 1966년 설립된 금속포장용기 전문기업으로, 국내 시장의 약 60%를 점유한 윤활유관·페인트관 등 일반관 사업(매출 비중 약 32%)과, 자체 브랜드로 만드는 휴대용 부탄가스·헤어스프레이관 등 에어졸관 사업(약 64%)을 운영합니다. 자체 개발한 폭발방지 기술(C.R.V.)로 용기 안전성을 높인 점이 특징입니다. 과거 공시 기반 참고 정보로, 매출액은 2,665억 원(-2.9%), 영업이익은 103억 원(-34.9%), 당기순이익은 91억 원(-20.3%)으로 줄었지만, 부채비율은 32.4%로 안정적입니다."
+    "investor_note": "대륙제관은 1966년 설립된 금속포장용기 전문기업으로, 국내 시장의 약 60%를 점유한 윤활유관·페인트관 등 일반관 사업(매출 비중 약 32%)과, 자체 브랜드로 만드는 휴대용 부탄가스·헤어스프레이관 등 에어졸관 사업(약 64%)을 운영합니다. 자체 개발한 폭발방지 기술(C.R.V.)로 용기 안전성을 높인 점이 특징입니다. 과거 공시 기반 참고 정보로, 매출액은 2,665억 원(-2.9%), 영업이익은 103억 원(-34.9%), 당기순이익은 91억 원(-20.3%)으로 줄었지만, 부채비율은 32.4%로 안정적입니다.",
+    "product_service_segments": [
+      {
+        "name": "단일사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.3%",
+        "revenue_share": 0.3232,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "에어졸관",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 63.5%",
+        "revenue_share": 0.6355,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "가 스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.4%",
+        "revenue_share": 0.2538,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "부재료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.3%",
+        "revenue_share": 0.0229,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "일반관",
-      "caption": "윤활유관·페인트관·식용유관 등 금속용기 제조",
+      "title": "단일사업부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.3%",
       "kind": "material",
-      "visual": "일반관",
-      "image": "../data/business_images/business_image_food_ingredient.svg",
-      "image_source": "Local visual"
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "에어졸관",
-      "caption": "휴대용 부탄가스·헤어스프레이관 등 제조",
-      "kind": "service",
-      "visual": "에어졸관",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 63.5%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "가 스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.4%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "부재료",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.3%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

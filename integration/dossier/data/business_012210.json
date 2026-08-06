@@ -123,24 +123,32 @@
     "segment_finance": "자동차부품이 매출의 45%로 가장 크고, 중장비와 선박엔진 부품이 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 737억 원으로 전년 대비 3.5% 줄었지만 영업이익은 30.5% 늘었고, 다만 당기순이익은 51.2% 감소했습니다. 부채비율은 103.6%로 자본보다 부채가 다소 많은 편입니다.",
     "segment_breakdown": [
       {
-        "name": "자동차부품",
-        "desc": "상용차용 프론트액슬·스티어링너클·크랭크샤프트 등",
-        "revenue_share": 0.4467
+        "name": "제 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.7%",
+        "revenue_share": 0.4467,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "중장비부품",
-        "desc": "굴삭기·불도저용 스핀들·보스·엔드비트 등",
-        "revenue_share": 0.226
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.6%",
+        "revenue_share": 0.226,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "선박엔진부품",
-        "desc": "선박엔진용 커넥팅로드 등",
-        "revenue_share": 0.166
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.6%",
+        "revenue_share": 0.166,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "방산부품",
-        "desc": "로워암, 탄두 등 방위산업용 단조품",
-        "revenue_share": 0.0425
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.2%",
+        "revenue_share": 0.0425,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -155,40 +163,70 @@
       "탄두",
       "블레이드"
     ],
-    "investor_note": "자동차부품이 매출의 45%로 가장 크고, 중장비와 선박엔진 부품이 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 737억 원으로 전년 대비 3.5% 줄었지만 영업이익은 30.5% 늘었고, 다만 당기순이익은 51.2% 감소했습니다. 부채비율은 103.6%로 자본보다 부채가 다소 많은 편입니다."
+    "investor_note": "자동차부품이 매출의 45%로 가장 크고, 중장비와 선박엔진 부품이 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 737억 원으로 전년 대비 3.5% 줄었지만 영업이익은 30.5% 늘었고, 다만 당기순이익은 51.2% 감소했습니다. 부채비율은 103.6%로 자본보다 부채가 다소 많은 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "제 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.7%",
+        "revenue_share": 0.4467,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "중장비부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.6%",
+        "revenue_share": 0.226,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "선박엔진부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.6%",
+        "revenue_share": 0.166,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "방산부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.2%",
+        "revenue_share": 0.0425,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "자동차부품",
-      "caption": "상용차용 프론트액슬·스티어링너클·크랭크샤프트 등",
-      "kind": "auto",
-      "visual": "자동차부품",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
+      "title": "제 품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.7%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "중장비부품",
-      "caption": "굴삭기·불도저용 스핀들·보스·엔드비트 등",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.6%",
       "kind": "auto",
-      "visual": "중장비부품",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "선박엔진부품",
-      "caption": "선박엔진용 커넥팅로드 등",
-      "kind": "auto",
-      "visual": "선박엔진부품",
-      "image": "../data/business_images/business_image_local_ship.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "방산부품",
-      "caption": "로워암, 탄두 등 방위산업용 단조품",
-      "kind": "auto",
-      "visual": "방산부품",
-      "image": "../data/business_images/business_image_4ae102473975707c.jpg",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
       "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "구동계 부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.6%",
+      "kind": "auto",
+      "visual": "PARTS",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "방산·항공",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.2%",
+      "kind": "ship",
+      "visual": "DEFENSE",
+      "image": "../data/business_images/business_image_1805fba8159acac6.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

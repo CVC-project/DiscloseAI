@@ -155,14 +155,18 @@
     "segment_finance": "자동차부품부문이 매출의 약 59%, 자동화설비부문이 약 38%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 3,886억 원으로 전년보다 31.0% 줄었고 영업이익도 208억 원으로 42.2% 감소했으며, 당기순이익 역시 150억 원으로 55.7% 줄어 자동화설비 부문 수주 감소의 영향을 크게 받은 것으로 보입니다. 부채비율은 137.1%로 자본보다 많은 빚을 지고 있어 재무 부담을 함께 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "자동화설비",
-        "desc": "자동차 차체 자동용접라인·전기차 배터리 생산설비 제조",
-        "revenue_share": 0.3766
+        "name": "자동화설비부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.7%",
+        "revenue_share": 0.3766,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "자동차부품",
-        "desc": "자동차 Door·안전벨트·내장품 등 부품 생산",
-        "revenue_share": 0.5907
+        "name": "자동차부품부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.1%",
+        "revenue_share": 0.5907,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -172,22 +176,45 @@
       "자동차 안전벨트(Seat Belt)",
       "자동차 내장품(플라스틱 사출)"
     ],
-    "investor_note": "자동차부품부문이 매출의 약 59%, 자동화설비부문이 약 38%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 3,886억 원으로 전년보다 31.0% 줄었고 영업이익도 208억 원으로 42.2% 감소했으며, 당기순이익 역시 150억 원으로 55.7% 줄어 자동화설비 부문 수주 감소의 영향을 크게 받은 것으로 보입니다. 부채비율은 137.1%로 자본보다 많은 빚을 지고 있어 재무 부담을 함께 살펴볼 필요가 있습니다."
+    "investor_note": "자동차부품부문이 매출의 약 59%, 자동화설비부문이 약 38%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 3,886억 원으로 전년보다 31.0% 줄었고 영업이익도 208억 원으로 42.2% 감소했으며, 당기순이익 역시 150억 원으로 55.7% 줄어 자동화설비 부문 수주 감소의 영향을 크게 받은 것으로 보입니다. 부채비율은 137.1%로 자본보다 많은 빚을 지고 있어 재무 부담을 함께 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "자동화설비부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.7%",
+        "revenue_share": 0.3766,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동차부품부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.1%",
+        "revenue_share": 0.5907,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.3%",
+        "revenue_share": 0.0327,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "자동화설비",
-      "caption": "자동차 차체 자동용접라인·전기차 배터리 생산설비 제조",
-      "kind": "battery",
-      "visual": "자동화설비",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "title": "자동화설비부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "자동차부품",
-      "caption": "자동차 Door·안전벨트·내장품 등 부품 생산",
+      "title": "자동차부품부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.1%",
       "kind": "auto",
-      "visual": "자동차부품",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     }

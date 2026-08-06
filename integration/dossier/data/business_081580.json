@@ -155,14 +155,25 @@
     "segment_finance": "성우전자(주)의 주요 제품·서비스는 배터리, 이동통신단말기 부문, [성우전자 사업부문, 이동통신 단말기 부문(휴대폰부품), SHIELD CAN, DECO입니다. 또한, 고객의 정보를 근거로 하여 당사에서 3일전 생산, 검사, 포장 완료하여 최상의 품질의 제품을 납품할 수있는 체제를 이루고 있습니다. 다기능 제품개발, 친환경 소재 적용 , 프리미엄브랜드 글로벌 시장 확대 등의 전략을 통해 경쟁력을 높여 나갈 것입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "사출품 부문",
-        "desc": "사출품 부문 관련 제품·서비스",
-        "revenue_share": null
+        "name": "이동통신단말기 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.3%",
+        "revenue_share": 0.503,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "이동통신 단말기 부문(휴대폰부품)",
-        "desc": "이동통신 단말기 부문(휴대폰부품) 관련 제품·서비스",
-        "revenue_share": null
+        "name": "광학기기 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.8%",
+        "revenue_share": 0.228,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "사출품 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.2%",
+        "revenue_share": 0.252,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -177,40 +188,62 @@
       "사출품 부문",
       "배터리 케이스 등"
     ],
-    "investor_note": "성우전자(주)의 주요 제품·서비스는 배터리, 이동통신단말기 부문, [성우전자 사업부문, 이동통신 단말기 부문(휴대폰부품), SHIELD CAN, DECO입니다. 또한, 고객의 정보를 근거로 하여 당사에서 3일전 생산, 검사, 포장 완료하여 최상의 품질의 제품을 납품할 수있는 체제를 이루고 있습니다. 다기능 제품개발, 친환경 소재 적용 , 프리미엄브랜드 글로벌 시장 확대 등의 전략을 통해 경쟁력을 높여 나갈 것입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "성우전자(주)의 주요 제품·서비스는 배터리, 이동통신단말기 부문, [성우전자 사업부문, 이동통신 단말기 부문(휴대폰부품), SHIELD CAN, DECO입니다. 또한, 고객의 정보를 근거로 하여 당사에서 3일전 생산, 검사, 포장 완료하여 최상의 품질의 제품을 납품할 수있는 체제를 이루고 있습니다. 다기능 제품개발, 친환경 소재 적용 , 프리미엄브랜드 글로벌 시장 확대 등의 전략을 통해 경쟁력을 높여 나갈 것입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "이동통신단말기 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.3%",
+        "revenue_share": 0.503,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "광학기기 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.8%",
+        "revenue_share": 0.228,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "사출품 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.2%",
+        "revenue_share": 0.252,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
+        "revenue_share": 0.016,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "통신 네트워크",
-      "caption": "통신 네트워크 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "이동통신단말기 부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.3%",
       "kind": "telecom",
       "visual": "NET",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "배터리",
-      "caption": "배터리 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "[성우전자 사업부문",
-      "caption": "[성우전자 사업부문 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "광학기기 부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.8%",
       "kind": "telecom",
       "visual": "NET",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "SHIELD CAN",
-      "caption": "SHIELD CAN 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "사출품 부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.2%",
       "kind": "telecom",
       "visual": "NET",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

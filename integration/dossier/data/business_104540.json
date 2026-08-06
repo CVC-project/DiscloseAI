@@ -155,19 +155,32 @@
     "segment_finance": "주식회사 코렌텍의 주요 제품·서비스는 비철금속, 기업, 반제품, HIP, 수 입, 인공고관절입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 다섯째, 기존 경쟁사와 달리 가장 차별적이며, 영업적 지속적 경쟁우위는 제품의 대한 고객 요청에 신속한 대응을 통하여 고객의 신뢰성 확보 및 신규 고객 창출에 효과적으로 활용할 수 있으며, 무엇보다도 시장에서 각 제품의 Opinion leader 로 형성된개발 group의 활용을 통한 영업 저변 확대 및 매출 증대에 기대효과가 있습니다. 넷째, 매출 증대의 일환으로 신제품 개발을 통한 고객과의 지속적인 관계를 형성함으로써 꾸준한 매출증대를 이룰 수 있도록 합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "비철금속",
-        "desc": "비철금속 관련 제품·서비스",
-        "revenue_share": null
+        "name": "인공고관절(HIP)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.2%",
+        "revenue_share": 0.402,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "기업",
-        "desc": "기업 관련 제품·서비스",
-        "revenue_share": null
+        "name": "인공슬관절(KNEE)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.1%",
+        "revenue_share": 0.461,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "HIP",
-        "desc": "HIP 관련 제품·서비스",
-        "revenue_share": null
+        "name": "척추고정체(SPINE)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.6%",
+        "revenue_share": 0.046,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "인공견관절(SHOULDER)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.6%",
+        "revenue_share": 0.066,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -179,24 +192,70 @@
       "인공고관절",
       "딜러"
     ],
-    "investor_note": "주식회사 코렌텍의 주요 제품·서비스는 비철금속, 기업, 반제품, HIP, 수 입, 인공고관절입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 다섯째, 기존 경쟁사와 달리 가장 차별적이며, 영업적 지속적 경쟁우위는 제품의 대한 고객 요청에 신속한 대응을 통하여 고객의 신뢰성 확보 및 신규 고객 창출에 효과적으로 활용할 수 있으며, 무엇보다도 시장에서 각 제품의 Opinion leader 로 형성된개발 group의 활용을 통한 영업 저변 확대 및 매출 증대에 기대효과가 있습니다. 넷째, 매출 증대의 일환으로 신제품 개발을 통한 고객과의 지속적인 관계를 형성함으로써 꾸준한 매출증대를 이룰 수 있도록 합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사 코렌텍의 주요 제품·서비스는 비철금속, 기업, 반제품, HIP, 수 입, 인공고관절입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 다섯째, 기존 경쟁사와 달리 가장 차별적이며, 영업적 지속적 경쟁우위는 제품의 대한 고객 요청에 신속한 대응을 통하여 고객의 신뢰성 확보 및 신규 고객 창출에 효과적으로 활용할 수 있으며, 무엇보다도 시장에서 각 제품의 Opinion leader 로 형성된개발 group의 활용을 통한 영업 저변 확대 및 매출 증대에 기대효과가 있습니다. 넷째, 매출 증대의 일환으로 신제품 개발을 통한 고객과의 지속적인 관계를 형성함으로써 꾸준한 매출증대를 이룰 수 있도록 합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "인공고관절(HIP)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.2%",
+        "revenue_share": 0.402,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "인공슬관절(KNEE)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.1%",
+        "revenue_share": 0.461,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "척추고정체(SPINE)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.6%",
+        "revenue_share": 0.046,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "인공견관절(SHOULDER)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.6%",
+        "revenue_share": 0.066,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "비철금속",
-      "caption": "비철금속 관련 제품·서비스",
-      "kind": "material",
-      "visual": "비철금속",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "title": "인공고관절(HIP)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "기업",
-      "caption": "기업 관련 제품·서비스",
+      "title": "인공슬관절(KNEE)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.1%",
       "kind": "service",
-      "visual": "기업",
-      "image": "../data/business_images/business_image_local_default_b.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "척추고정체(SPINE)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "인공견관절(SHOULDER)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

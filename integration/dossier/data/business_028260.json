@@ -110,34 +110,32 @@
     "segment_finance": "[사업부문별 요약 재무현황] 2025년 매출액은 40조 7,422억원이며, 영업이익은 3조 2,927억원입니다.각 부문별 주요 손익, 재무정보 및 비중은 아래의 표와 같습니다.",
     "segment_breakdown": [
       {
-        "name": "건설부문",
-        "desc": "건축, 토목, 플랜트, 주택 등 건설사업",
-        "revenue_share": 0.347
+        "name": "건 설",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.7%",
+        "revenue_share": 0.3473,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "상사부문",
-        "desc": "화학, 철강, 에너지, 소재 등 국제무역",
-        "revenue_share": 0.359
+        "name": "상 사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.9%",
+        "revenue_share": 0.3592,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "패션부문",
-        "desc": "의류 수입 및 판매사업",
-        "revenue_share": 0.05
+        "name": "패 션",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
+        "revenue_share": 0.0495,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "리조트부문",
-        "desc": "에버랜드, 캐리비안베이, 골프장 운영",
-        "revenue_share": 0.018
-      },
-      {
-        "name": "급식/식자재유통",
-        "desc": "전문급식 및 식자재유통사업",
-        "revenue_share": 0.08
-      },
-      {
-        "name": "바이오사업",
-        "desc": "바이오의약품 위탁생산 및 바이오시밀러",
-        "revenue_share": 0.146
+        "name": "리조트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
+        "revenue_share": 0.0178,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "investor_note": "삼성물산은 건설·상사·바이오 등 다양한 사업을 영위하는 종합 기업으로, 지난해 매출액 40조 7,422억 원(전년 대비 3.2% 감소)을 기록했습니다. 매출은 감소했지만 영업이익은 3조 2,927억 원으로 10.4% 증가해 비용 관리를 통한 수익성 개선을 보여주고 있으며, 당기순이익(기업이 벌어들인 최종 이익)은 3조 9,067억 원으로 41% 증가했습니다. 사업 구성을 보면 상사부문(화학·철강·에너지 등 국제무역)과 건설부문이 각각 36%, 35%로 주요 수익원이고, 바이오사업이 15%를 차지하고 있습니다. 재무 건전성 측면에서 부채비율 50.5%(부채이 자본으로 나눈 비율로, 낮을수록 안정적)로 건전한 수준을 유지 중이며, 총자산은 86조 5,327억 원에 달합니다. 주당순이익은 14,905원으로 전년 대비 9.4% 증가해 주주가치 개선 추세를 보이고 있습니다. 과거 공시 기반 참고 정보입니다.",
@@ -156,30 +154,68 @@
       "항체의약품"
     ],
     "raw_moves": [],
-    "utilization": []
+    "utilization": [],
+    "product_service_segments": [
+      {
+        "name": "건 설",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.7%",
+        "revenue_share": 0.3473,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상 사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.9%",
+        "revenue_share": 0.3592,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "패 션",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
+        "revenue_share": 0.0495,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "리조트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
+        "revenue_share": 0.0178,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "건설",
-      "caption": "건축·토목·플랜트 수주와 원가율을 봅니다.",
-      "kind": "factory",
-      "visual": "BUILD",
-      "image": "../data/business_images/business_image_5184e050831a4460.avif",
+      "title": "건 설",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "상사",
-      "caption": "원자재·트레이딩·프로젝트 사업의 마진을 확인합니다.",
-      "kind": "platform",
-      "visual": "TRADING",
-      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "title": "상 사",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "패션·리조트",
-      "caption": "소비 경기와 브랜드 경쟁력이 실적을 보탭니다.",
-      "kind": "platform",
-      "visual": "LIFE",
+      "title": "패 션",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "리조트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
       "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     }

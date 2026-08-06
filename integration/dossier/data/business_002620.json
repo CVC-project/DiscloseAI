@@ -155,14 +155,25 @@
     "segment_finance": "제일파마홀딩스는 제일약품과 제일헬스사이언스 등을 자회사로 둔 지주회사로, 고지혈증약 '리피토', 항암제 '론서프', 신경병증성통증약 '리리카' 등 전문의약품과 파스 브랜드 '케펜텍' 등 일반의약품을 생산·판매합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,576억 원으로 전년 대비 15.7% 줄었지만 영업이익(386억 원)과 당기순이익(346억 원)은 나란히 적자에서 흑자로 전환했습니다. 부채비율은 86.9% 수준이며, 감사인은 반품·환불에 대비해 쌓아둔 부채와 회수권 추정치를 핵심적으로 점검했습니다.",
     "segment_breakdown": [
       {
-        "name": "제약(제일약품)",
-        "desc": "리피토·자큐보 등 전문의약품 제조·판매",
-        "revenue_share": null
+        "name": "임대료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.0%",
+        "revenue_share": 0.35,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "제약(제일헬스사이언스)",
-        "desc": "케펜텍 등 일반의약품(파스류) 제조·판매",
-        "revenue_share": null
+        "name": "지분법",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.3%",
+        "revenue_share": 0.283,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제일약품(주)(연결기준)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.7%",
+        "revenue_share": 0.267,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -175,40 +186,70 @@
       "케펜텍(파스)",
       "투엑스비(비타민)"
     ],
-    "investor_note": "제일파마홀딩스는 제일약품과 제일헬스사이언스 등을 자회사로 둔 지주회사로, 고지혈증약 '리피토', 항암제 '론서프', 신경병증성통증약 '리리카' 등 전문의약품과 파스 브랜드 '케펜텍' 등 일반의약품을 생산·판매합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,576억 원으로 전년 대비 15.7% 줄었지만 영업이익(386억 원)과 당기순이익(346억 원)은 나란히 적자에서 흑자로 전환했습니다. 부채비율은 86.9% 수준이며, 감사인은 반품·환불에 대비해 쌓아둔 부채와 회수권 추정치를 핵심적으로 점검했습니다."
+    "investor_note": "제일파마홀딩스는 제일약품과 제일헬스사이언스 등을 자회사로 둔 지주회사로, 고지혈증약 '리피토', 항암제 '론서프', 신경병증성통증약 '리리카' 등 전문의약품과 파스 브랜드 '케펜텍' 등 일반의약품을 생산·판매합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,576억 원으로 전년 대비 15.7% 줄었지만 영업이익(386억 원)과 당기순이익(346억 원)은 나란히 적자에서 흑자로 전환했습니다. 부채비율은 86.9% 수준이며, 감사인은 반품·환불에 대비해 쌓아둔 부채와 회수권 추정치를 핵심적으로 점검했습니다.",
+    "product_service_segments": [
+      {
+        "name": "지주사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 36.7%",
+        "revenue_share": 0.367,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임대료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.0%",
+        "revenue_share": 0.35,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "지분법",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.3%",
+        "revenue_share": 0.283,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제일약품(주)(연결기준)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.7%",
+        "revenue_share": 0.267,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "리피토(고지혈증치료제)",
-      "caption": "리피토(고지혈증치료제) 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "지주사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 36.7%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "자큐보",
-      "caption": "자큐보 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "임대료",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "카듀엣",
-      "caption": "카듀엣 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "지분법",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.3%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "로제듀오",
-      "caption": "로제듀오 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "제일약품(주)(연결기준)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.7%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

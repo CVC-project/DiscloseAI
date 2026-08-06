@@ -155,19 +155,18 @@
     "segment_finance": "뉴인텍은 전기를 쓰는 산업에 필수인 커패시터(콘덴서)를 만드는 회사로, 자동차·태양광·인버터에 쓰이는 신재생에너지용 DC Link 커패시터가 매출의 56%를 차지하고, 커패시터의 핵심 원재료인 금속증착필름을 직접 만들어 전 세계 필름커패시터 제조업체에도 판매하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 827억 원으로 전년 대비 4.1% 늘었지만 영업손실 72억 원, 당기순손실 126억 원으로 적자가 이어졌고 순손실 폭은 전년 대비 92.6% 커졌습니다. 부채비율은 383.1%로 자본 대비 부채가 매우 많아 재무 부담이 큰 편입니다.",
     "segment_breakdown": [
       {
-        "name": "신재생에너지용 DC Link 커패시터",
-        "desc": "자동차·태양광·인버터용 커패시터",
-        "revenue_share": 0.5573
-      },
-      {
-        "name": "금속증착필름",
-        "desc": "커패시터의 핵심 원재료, 외부 필름커패시터 업체에도 판매",
-        "revenue_share": 0.2851
-      },
-      {
         "name": "AC용 커패시터",
-        "desc": "모터 구동·역률개선·전기기기용",
-        "revenue_share": 0.1101
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.0%",
+        "revenue_share": 0.1101,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "신재생에너지용DC Link 커패시터",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.7%",
+        "revenue_share": 0.5573,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -175,30 +174,45 @@
       "AC용 커패시터",
       "금속증착필름"
     ],
-    "investor_note": "뉴인텍은 전기를 쓰는 산업에 필수인 커패시터(콘덴서)를 만드는 회사로, 자동차·태양광·인버터에 쓰이는 신재생에너지용 DC Link 커패시터가 매출의 56%를 차지하고, 커패시터의 핵심 원재료인 금속증착필름을 직접 만들어 전 세계 필름커패시터 제조업체에도 판매하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 827억 원으로 전년 대비 4.1% 늘었지만 영업손실 72억 원, 당기순손실 126억 원으로 적자가 이어졌고 순손실 폭은 전년 대비 92.6% 커졌습니다. 부채비율은 383.1%로 자본 대비 부채가 매우 많아 재무 부담이 큰 편입니다."
+    "investor_note": "뉴인텍은 전기를 쓰는 산업에 필수인 커패시터(콘덴서)를 만드는 회사로, 자동차·태양광·인버터에 쓰이는 신재생에너지용 DC Link 커패시터가 매출의 56%를 차지하고, 커패시터의 핵심 원재료인 금속증착필름을 직접 만들어 전 세계 필름커패시터 제조업체에도 판매하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 827억 원으로 전년 대비 4.1% 늘었지만 영업손실 72억 원, 당기순손실 126억 원으로 적자가 이어졌고 순손실 폭은 전년 대비 92.6% 커졌습니다. 부채비율은 383.1%로 자본 대비 부채가 매우 많아 재무 부담이 큰 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.5%",
+        "revenue_share": 0.2851,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "AC용 커패시터",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.0%",
+        "revenue_share": 0.1101,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "신재생에너지용DC Link 커패시터",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.7%",
+        "revenue_share": 0.5573,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "신재생에너지용 DC Link 커패시터",
-      "caption": "자동차·태양광·인버터용 커패시터",
-      "kind": "auto",
-      "visual": "신재생에너지용",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "금속증착필름",
-      "caption": "커패시터의 핵심 원재료, 외부 필름커패시터 업체에도 판매",
-      "kind": "material",
-      "visual": "금속증착필름",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
-    },
-    {
       "title": "AC용 커패시터",
-      "caption": "모터 구동·역률개선·전기기기용",
-      "kind": "service",
-      "visual": "AC용",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.0%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "신재생에너지",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.7%",
+      "kind": "power",
+      "visual": "RENEWABLE",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     }

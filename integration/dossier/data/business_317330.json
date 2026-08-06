@@ -153,7 +153,36 @@
   "snippets": {
     "overview": "주식회사 덕산테코피아의 주요 사업은 Fine Chemical 부문, 반도체 부문, 정밀화학부문, 반도체부문 등입니다. 매출처 현황 수주상황 당사의 사업은 수주로 진행하지 않고 고객사에서 수시로 PO 발주하고 있습니다. 주요계약 - 당사는 작성 기준일 현재 회사의 재무상태에 영향을 미치는 비경상적인 중요계약이 존재하지 않습니다.",
     "segment_finance": "주식회사 덕산테코피아의 주요 사업은 Fine Chemical 부문, 반도체 부문, 정밀화학부문, 반도체부문 등입니다. 매출처 현황 수주상황 당사의 사업은 수주로 진행하지 않고 고객사에서 수시로 PO 발주하고 있습니다. 주요계약 - 당사는 작성 기준일 현재 회사의 재무상태에 영향을 미치는 비경상적인 중요계약이 존재하지 않습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "OLED 유기재료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.2%",
+        "revenue_share": 0.3823,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "반도체 소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.4%",
+        "revenue_share": 0.5342,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "2차전지 소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.7%",
+        "revenue_share": 0.0566,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "의약품 중간체",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.8%",
+        "revenue_share": 0.0483,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "OLED",
       "화학제품",
@@ -163,32 +192,70 @@
       "디스플레이용유기소재 제품개발",
       "상품화 완료"
     ],
-    "investor_note": "주식회사 덕산테코피아의 주요 사업은 Fine Chemical 부문, 반도체 부문, 정밀화학부문, 반도체부문 등입니다. 매출처 현황 수주상황 당사의 사업은 수주로 진행하지 않고 고객사에서 수시로 PO 발주하고 있습니다. 주요계약 - 당사는 작성 기준일 현재 회사의 재무상태에 영향을 미치는 비경상적인 중요계약이 존재하지 않습니다."
+    "investor_note": "주식회사 덕산테코피아의 주요 사업은 Fine Chemical 부문, 반도체 부문, 정밀화학부문, 반도체부문 등입니다. 매출처 현황 수주상황 당사의 사업은 수주로 진행하지 않고 고객사에서 수시로 PO 발주하고 있습니다. 주요계약 - 당사는 작성 기준일 현재 회사의 재무상태에 영향을 미치는 비경상적인 중요계약이 존재하지 않습니다.",
+    "product_service_segments": [
+      {
+        "name": "OLED 유기재료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.2%",
+        "revenue_share": 0.3823,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "반도체 소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.4%",
+        "revenue_share": 0.5342,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "2차전지 소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.7%",
+        "revenue_share": 0.0566,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "의약품 중간체",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.8%",
+        "revenue_share": 0.0483,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "화학제품",
-      "caption": "화학제품 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "OLED 소재",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
+      "title": "디스플레이",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.2%",
       "kind": "display",
       "visual": "OLED",
       "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "디스플레이용유기소재 제품개발",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
-      "kind": "display",
-      "visual": "OLED",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
+      "title": "반도체 소재·소모품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.4%",
+      "kind": "chip",
+      "visual": "PARTS",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
       "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "2차전지 소재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.7%",
+      "kind": "battery",
+      "visual": "BATTERY",
+      "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "의약품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.8%",
+      "kind": "bio",
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

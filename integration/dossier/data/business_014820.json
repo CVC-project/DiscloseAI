@@ -155,9 +155,18 @@
     "segment_finance": "동원시스템즈는 참치캔·식품·생활용품 등에 쓰이는 연포장재·유리병·PET용기·제관(CAN)과 알미늄 압연제품을 만드는 포장재 전문기업으로, 베트남·사모아·싱가포르 등 해외 종속회사를 통해 글로벌 생산·물류망도 갖추고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 3,728억 원으로 전년 대비 2.9% 늘었지만 영업이익은 661억 원으로 28.0%, 당기순이익은 537억 원으로 25.9% 줄어 수익성은 다소 둔화됐습니다. 부채비율은 77.4%로 무난한 수준입니다.",
     "segment_breakdown": [
       {
-        "name": "포장재(연포장재·유리병·PET·제관·알미늄압연)",
-        "desc": "참치캔·식품·생활용품 등에 쓰이는 각종 포장재와 알미늄 압연제품 제조판매",
-        "revenue_share": 1
+        "name": "포장",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 87.6%",
+        "revenue_share": 0.8757,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.4%",
+        "revenue_share": 0.1339,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -167,40 +176,55 @@
       "제관(CAN, 참치캔 등)",
       "알미늄(AL-FOIL) 압연제품"
     ],
-    "investor_note": "동원시스템즈는 참치캔·식품·생활용품 등에 쓰이는 연포장재·유리병·PET용기·제관(CAN)과 알미늄 압연제품을 만드는 포장재 전문기업으로, 베트남·사모아·싱가포르 등 해외 종속회사를 통해 글로벌 생산·물류망도 갖추고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 3,728억 원으로 전년 대비 2.9% 늘었지만 영업이익은 661억 원으로 28.0%, 당기순이익은 537억 원으로 25.9% 줄어 수익성은 다소 둔화됐습니다. 부채비율은 77.4%로 무난한 수준입니다."
+    "investor_note": "동원시스템즈는 참치캔·식품·생활용품 등에 쓰이는 연포장재·유리병·PET용기·제관(CAN)과 알미늄 압연제품을 만드는 포장재 전문기업으로, 베트남·사모아·싱가포르 등 해외 종속회사를 통해 글로벌 생산·물류망도 갖추고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 3,728억 원으로 전년 대비 2.9% 늘었지만 영업이익은 661억 원으로 28.0%, 당기순이익은 537억 원으로 25.9% 줄어 수익성은 다소 둔화됐습니다. 부채비율은 77.4%로 무난한 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "포장",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 87.6%",
+        "revenue_share": 0.8757,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.4%",
+        "revenue_share": 0.1339,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타(용역수익 외)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.5%",
+        "revenue_share": 0.0347,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "포장재(연포장재·유리병·PET·제관·알미늄압연)",
-      "caption": "참치캔·식품·생활용품 등에 쓰이는 각종 포장재와 알미늄 압연제품 제조판매",
-      "kind": "consumer",
-      "visual": "포장재",
-      "image": "../data/business_images/business_image_food_packaged.svg",
-      "image_source": "Local visual"
+      "title": "포장",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 87.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "연포장재",
-      "caption": "연포장재 관련 제품과 서비스를 통해 매출을 만듭니다.",
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.4%",
       "kind": "service",
-      "visual": "연포장재",
-      "image": "../data/business_images/business_image_local_packaging.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "유리병",
-      "caption": "유리병 관련 제품과 서비스를 통해 매출을 만듭니다.",
+      "title": "기타(용역수익 외)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.5%",
       "kind": "service",
-      "visual": "유리병",
-      "image": "../data/business_images/business_image_local_default_c.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "PET 용기",
-      "caption": "PET 용기 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "PET",
-      "image": "../data/business_images/business_image_local_default_d.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

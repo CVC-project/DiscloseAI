@@ -153,7 +153,36 @@
   "snippets": {
     "overview": "코오롱글로벌은 '코오롱하늘채'·'린든그로브' 주택 브랜드로 대표되는 건설사업을 중심으로, 철강·화학·군수용품 등을 취급하는 상사사업, 호텔·골프장·스포츠센터를 운영하는 레저사업, 부동산 시설관리(AM)사업을 함께 하는 종합기업입니다. 건설사업이 매출의 약 86%를 차지하고, 상사사업이 11%로 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2조 6,844억 원으로 전년보다 7.8% 줄었지만 영업이익은 36억 원으로 흑자 전환했습니다. 다만 당기순이익은 -2,003억 원으로 적자를 이어갔고, 부채비율은 332.3%로 자본보다 빚이 3배 넘게 많아 재무 부담이 매우 큰 편이니 유의가 필요합니다. 감사보고서에도 대규모 PF(프로젝트파이낸싱) 보증 약정 관련 강조사항이 포함돼 있습니다.",
     "segment_finance": "코오롱글로벌은 '코오롱하늘채'·'린든그로브' 주택 브랜드로 대표되는 건설사업을 중심으로, 철강·화학·군수용품 등을 취급하는 상사사업, 호텔·골프장·스포츠센터를 운영하는 레저사업, 부동산 시설관리(AM)사업을 함께 하는 종합기업입니다. 건설사업이 매출의 약 86%를 차지하고, 상사사업이 11%로 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2조 6,844억 원으로 전년보다 7.8% 줄었지만 영업이익은 36억 원으로 흑자 전환했습니다. 다만 당기순이익은 -2,003억 원으로 적자를 이어갔고, 부채비율은 332.3%로 자본보다 빚이 3배 넘게 많아 재무 부담이 매우 큰 편이니 유의가 필요합니다. 감사보고서에도 대규모 PF(프로젝트파이낸싱) 보증 약정 관련 강조사항이 포함돼 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "건설",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 85.7%",
+        "revenue_share": 0.8573,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.3%",
+        "revenue_share": 0.1127,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "레저",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.8%",
+        "revenue_share": 0.0283,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "AM",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.0017,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "코오롱하늘채(주택브랜드)",
       "린든그로브(주택브랜드)",
@@ -164,40 +193,62 @@
       "코오롱스포렉스(스포츠센터)",
       "부동산 자산관리(AM)"
     ],
-    "investor_note": "코오롱글로벌은 '코오롱하늘채'·'린든그로브' 주택 브랜드로 대표되는 건설사업을 중심으로, 철강·화학·군수용품 등을 취급하는 상사사업, 호텔·골프장·스포츠센터를 운영하는 레저사업, 부동산 시설관리(AM)사업을 함께 하는 종합기업입니다. 건설사업이 매출의 약 86%를 차지하고, 상사사업이 11%로 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2조 6,844억 원으로 전년보다 7.8% 줄었지만 영업이익은 36억 원으로 흑자 전환했습니다. 다만 당기순이익은 -2,003억 원으로 적자를 이어갔고, 부채비율은 332.3%로 자본보다 빚이 3배 넘게 많아 재무 부담이 매우 큰 편이니 유의가 필요합니다. 감사보고서에도 대규모 PF(프로젝트파이낸싱) 보증 약정 관련 강조사항이 포함돼 있습니다."
+    "investor_note": "코오롱글로벌은 '코오롱하늘채'·'린든그로브' 주택 브랜드로 대표되는 건설사업을 중심으로, 철강·화학·군수용품 등을 취급하는 상사사업, 호텔·골프장·스포츠센터를 운영하는 레저사업, 부동산 시설관리(AM)사업을 함께 하는 종합기업입니다. 건설사업이 매출의 약 86%를 차지하고, 상사사업이 11%로 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2조 6,844억 원으로 전년보다 7.8% 줄었지만 영업이익은 36억 원으로 흑자 전환했습니다. 다만 당기순이익은 -2,003억 원으로 적자를 이어갔고, 부채비율은 332.3%로 자본보다 빚이 3배 넘게 많아 재무 부담이 매우 큰 편이니 유의가 필요합니다. 감사보고서에도 대규모 PF(프로젝트파이낸싱) 보증 약정 관련 강조사항이 포함돼 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "건설",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 85.7%",
+        "revenue_share": 0.8573,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.3%",
+        "revenue_share": 0.1127,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "레저",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.8%",
+        "revenue_share": 0.0283,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "AM",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.0017,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "건설사업부문",
-      "caption": "주택·토목·환경·신재생에너지 시공",
-      "kind": "power",
-      "visual": "건설사업부문",
-      "image": "../data/business_images/business_image_local_housing.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "상사사업부문",
-      "caption": "철강·화학·군수·산업차량 등 종합상사",
-      "kind": "material",
-      "visual": "상사사업부문",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "레저사업부문",
-      "caption": "호텔·골프·리조트·스포츠센터 운영",
+      "title": "건축·주택",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 85.7%",
       "kind": "service",
-      "visual": "레저사업부문",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "AM사업부문",
-      "caption": "부동산 위탁운영·건물 유지관리",
+      "title": "상사",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.3%",
       "kind": "service",
-      "visual": "AM사업부문",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "레저",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

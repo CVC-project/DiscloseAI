@@ -155,29 +155,25 @@
     "segment_finance": "롯데지주는 롯데쇼핑(백화점·마트·하이마트 등)을 연결 자회사로 두고, 롯데케미칼(석유화학·배터리소재)·롯데웰푸드(제과·빙과)·롯데칠성음료(음료·주류) 등 주요 계열사는 지분법으로 보유하는 지주회사입니다. 자체 수익은 경영지원·상표권사용료·배당금 등으로 구성됩니다. 과거 공시 기반 참고 정보로, 연결 매출액은 15조 5,396억 원으로 전년 대비 1.4% 감소했고 영업이익도 2,394억 원으로 29.7% 줄었습니다. 당기순손실은 5,950억 원으로 적자를 지속했으나 전년보다는 손실 폭이 37.1% 줄었습니다. 부채비율은 144.9%로 다소 높은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "유통(롯데쇼핑 연결)",
-        "desc": "백화점·할인점·하이마트·슈퍼·홈쇼핑·영화·이커머스",
-        "revenue_share": 0.884
+        "name": "백화점",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.3%",
+        "revenue_share": 0.243,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "지주부문 자체수익",
-        "desc": "경영지원·상표권사용·임대·배당수익 등",
-        "revenue_share": 0.022
+        "name": "할인점",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.8%",
+        "revenue_share": 0.398,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "화학·소재(지분법 관계사)",
-        "desc": "롯데케미칼의 기초화학·첨단소재·정밀화학·전지소재",
-        "revenue_share": null
-      },
-      {
-        "name": "식품(지분법 관계사)",
-        "desc": "롯데웰푸드의 건과·빙과·유가공 등",
-        "revenue_share": null
-      },
-      {
-        "name": "음료·주류(지분법 관계사)",
-        "desc": "롯데칠성음료의 음료·주류",
-        "revenue_share": null
+        "name": "슈퍼",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.9%",
+        "revenue_share": 0.089,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -186,40 +182,70 @@
       "제과·빙과(롯데웰푸드, 지분법)",
       "음료·주류(롯데칠성음료, 지분법)"
     ],
-    "investor_note": "롯데지주는 롯데쇼핑(백화점·마트·하이마트 등)을 연결 자회사로 두고, 롯데케미칼(석유화학·배터리소재)·롯데웰푸드(제과·빙과)·롯데칠성음료(음료·주류) 등 주요 계열사는 지분법으로 보유하는 지주회사입니다. 자체 수익은 경영지원·상표권사용료·배당금 등으로 구성됩니다. 과거 공시 기반 참고 정보로, 연결 매출액은 15조 5,396억 원으로 전년 대비 1.4% 감소했고 영업이익도 2,394억 원으로 29.7% 줄었습니다. 당기순손실은 5,950억 원으로 적자를 지속했으나 전년보다는 손실 폭이 37.1% 줄었습니다. 부채비율은 144.9%로 다소 높은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다."
+    "investor_note": "롯데지주는 롯데쇼핑(백화점·마트·하이마트 등)을 연결 자회사로 두고, 롯데케미칼(석유화학·배터리소재)·롯데웰푸드(제과·빙과)·롯데칠성음료(음료·주류) 등 주요 계열사는 지분법으로 보유하는 지주회사입니다. 자체 수익은 경영지원·상표권사용료·배당금 등으로 구성됩니다. 과거 공시 기반 참고 정보로, 연결 매출액은 15조 5,396억 원으로 전년 대비 1.4% 감소했고 영업이익도 2,394억 원으로 29.7% 줄었습니다. 당기순손실은 5,950억 원으로 적자를 지속했으나 전년보다는 손실 폭이 37.1% 줄었습니다. 부채비율은 144.9%로 다소 높은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "백화점",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.3%",
+        "revenue_share": 0.243,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "할인점",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.8%",
+        "revenue_share": 0.398,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전자제품 전문점",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.7%",
+        "revenue_share": 0.167,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "슈퍼",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.9%",
+        "revenue_share": 0.089,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "유통(롯데쇼핑 연결)",
-      "caption": "백화점·할인점·하이마트·슈퍼·홈쇼핑·영화·이커머스",
-      "kind": "platform",
-      "visual": "유통",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "지주부문 자체수익",
-      "caption": "경영지원·상표권사용·임대·배당수익 등",
-      "kind": "service",
-      "visual": "지주부문",
-      "image": "../data/business_images/business_image_local_finance_hold.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "화학·소재(지분법 관계사)",
-      "caption": "롯데케미칼의 기초화학·첨단소재·정밀화학·전지소재",
-      "kind": "material",
-      "visual": "화학",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "식품(지분법 관계사)",
-      "caption": "롯데웰푸드의 건과·빙과·유가공 등",
+      "title": "백화점·면세점",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.3%",
       "kind": "consumer",
-      "visual": "식품",
-      "image": "../data/business_images/business_image_food_packaged.svg",
-      "image_source": "Local visual"
+      "visual": "RETAIL",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "대형마트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.8%",
+      "kind": "consumer",
+      "visual": "MART",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "전자제품 전문점",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "슈퍼",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

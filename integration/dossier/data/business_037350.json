@@ -155,29 +155,32 @@
     "segment_finance": "성도이엔지는 반도체 등 첨단산업의 클린룸 설비공사를 주력으로 하면서, 산업가스·케미칼 플랜트 시공, 정유·석유화학·발전소 플랜트 시공, 물류센터 등 종합건설시공까지 담당하는 산업설비 전문 건설회사로, 중국·베트남·폴란드·헝가리·미국 등에 해외 법인도 두고 있습니다. 매출은 종합건설시공(51%)과 하이테크산업설비(38%)가 대부분을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 7,434억 원으로 전년 대비 25.6% 줄었지만, 영업이익은 576억 원으로 오히려 111.4% 늘었고 당기순이익도 281억 원으로 83.9% 증가했습니다. 부채비율은 119.6%로 부채가 자본보다 다소 많은 편입니다. 다만 감사보고서에는 중국 종속회사의 소송 관련 부채가 과거 재무제표에서 누락돼 있었다는 전기 재무제표 재작성 사실이 강조사항으로 기재돼 있어 참고할 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "종합건설시공",
-        "desc": "물류·산업플랜트 등 종합건설 시공",
-        "revenue_share": 0.51
-      },
-      {
         "name": "하이테크산업설비",
-        "desc": "IT·BT·ET 첨단산업 클린룸 설비공사",
-        "revenue_share": 0.38
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.0%",
+        "revenue_share": 0.38,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "가스&케미칼",
-        "desc": "산업가스·특수가스·케미칼 플랜트 시공",
-        "revenue_share": 0.08
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+        "revenue_share": 0.08,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "플랜트",
-        "desc": "정유·석유화학·발전소·환경산업 플랜트 시공",
-        "revenue_share": 0.02
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.02,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "부동산 개발",
-        "desc": "부동산 시행 및 컨설팅",
-        "revenue_share": 0.01
+        "name": "종합건설시공",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.0%",
+        "revenue_share": 0.51,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -187,40 +190,70 @@
       "물류·산업플랜트 종합건설",
       "부동산 개발·시행"
     ],
-    "investor_note": "성도이엔지는 반도체 등 첨단산업의 클린룸 설비공사를 주력으로 하면서, 산업가스·케미칼 플랜트 시공, 정유·석유화학·발전소 플랜트 시공, 물류센터 등 종합건설시공까지 담당하는 산업설비 전문 건설회사로, 중국·베트남·폴란드·헝가리·미국 등에 해외 법인도 두고 있습니다. 매출은 종합건설시공(51%)과 하이테크산업설비(38%)가 대부분을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 7,434억 원으로 전년 대비 25.6% 줄었지만, 영업이익은 576억 원으로 오히려 111.4% 늘었고 당기순이익도 281억 원으로 83.9% 증가했습니다. 부채비율은 119.6%로 부채가 자본보다 다소 많은 편입니다. 다만 감사보고서에는 중국 종속회사의 소송 관련 부채가 과거 재무제표에서 누락돼 있었다는 전기 재무제표 재작성 사실이 강조사항으로 기재돼 있어 참고할 필요가 있습니다."
+    "investor_note": "성도이엔지는 반도체 등 첨단산업의 클린룸 설비공사를 주력으로 하면서, 산업가스·케미칼 플랜트 시공, 정유·석유화학·발전소 플랜트 시공, 물류센터 등 종합건설시공까지 담당하는 산업설비 전문 건설회사로, 중국·베트남·폴란드·헝가리·미국 등에 해외 법인도 두고 있습니다. 매출은 종합건설시공(51%)과 하이테크산업설비(38%)가 대부분을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 7,434억 원으로 전년 대비 25.6% 줄었지만, 영업이익은 576억 원으로 오히려 111.4% 늘었고 당기순이익도 281억 원으로 83.9% 증가했습니다. 부채비율은 119.6%로 부채가 자본보다 다소 많은 편입니다. 다만 감사보고서에는 중국 종속회사의 소송 관련 부채가 과거 재무제표에서 누락돼 있었다는 전기 재무제표 재작성 사실이 강조사항으로 기재돼 있어 참고할 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "하이테크산업설비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.0%",
+        "revenue_share": 0.38,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "가스&케미칼",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+        "revenue_share": 0.08,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "플랜트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.02,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "종합건설시공",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.0%",
+        "revenue_share": 0.51,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "종합건설시공",
-      "caption": "물류·산업플랜트 등 종합건설 시공",
-      "kind": "ship",
-      "visual": "종합건설시공",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
-    },
-    {
       "title": "하이테크산업설비",
-      "caption": "IT·BT·ET 첨단산업 클린룸 설비공사",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.0%",
       "kind": "service",
-      "visual": "하이테크산업설비",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "가스&케미칼",
-      "caption": "산업가스·특수가스·케미칼 플랜트 시공",
-      "kind": "ship",
-      "visual": "가스&케미칼",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "플랜트",
-      "caption": "정유·석유화학·발전소·환경산업 플랜트 시공",
-      "kind": "ship",
-      "visual": "플랜트",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "title": "토목·플랜트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+      "kind": "service",
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_5184e050831a4460.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "건축·주택",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.0%",
+      "kind": "service",
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

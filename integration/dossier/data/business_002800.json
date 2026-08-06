@@ -155,19 +155,32 @@
     "segment_finance": "신신제약은 근육통·관절통에 쓰는 첩부제(파스류, 매출 비중 55%)를 주력으로, 물파스·에어파스 등 외용액제(19%), 경구제(8%), 해충기피제·티눈제거제·밴드류 등을 만드는 OTC(일반의약품) 전문 제약회사로, 전국 1만2천여 약국에 직접 영업망을 갖추고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,137억 원으로 전년 대비 6.9% 늘었고 영업이익은 56.6%, 당기순이익은 92.9% 큰 폭으로 증가했습니다. 부채비율은 84.5%로 다소 있는 편이지만 수익성 개선 추세는 긍정적입니다.",
     "segment_breakdown": [
       {
-        "name": "첩부제(파스류)",
-        "desc": "근육통·관절통·신경통용 붙이는 파스",
-        "revenue_share": 0.5536
+        "name": "첩부제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.4%",
+        "revenue_share": 0.5536,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "외용액제",
-        "desc": "물파스 등 바르는 외용제",
-        "revenue_share": 0.1891
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.9%",
+        "revenue_share": 0.1891,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "경구제",
-        "desc": "먹는 일반의약품",
-        "revenue_share": 0.0795
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+        "revenue_share": 0.0795,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "에어로졸",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.9%",
+        "revenue_share": 0.0489,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -180,32 +193,70 @@
       "밴드류",
       "반창고"
     ],
-    "investor_note": "신신제약은 근육통·관절통에 쓰는 첩부제(파스류, 매출 비중 55%)를 주력으로, 물파스·에어파스 등 외용액제(19%), 경구제(8%), 해충기피제·티눈제거제·밴드류 등을 만드는 OTC(일반의약품) 전문 제약회사로, 전국 1만2천여 약국에 직접 영업망을 갖추고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,137억 원으로 전년 대비 6.9% 늘었고 영업이익은 56.6%, 당기순이익은 92.9% 큰 폭으로 증가했습니다. 부채비율은 84.5%로 다소 있는 편이지만 수익성 개선 추세는 긍정적입니다."
+    "investor_note": "신신제약은 근육통·관절통에 쓰는 첩부제(파스류, 매출 비중 55%)를 주력으로, 물파스·에어파스 등 외용액제(19%), 경구제(8%), 해충기피제·티눈제거제·밴드류 등을 만드는 OTC(일반의약품) 전문 제약회사로, 전국 1만2천여 약국에 직접 영업망을 갖추고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,137억 원으로 전년 대비 6.9% 늘었고 영업이익은 56.6%, 당기순이익은 92.9% 큰 폭으로 증가했습니다. 부채비율은 84.5%로 다소 있는 편이지만 수익성 개선 추세는 긍정적입니다.",
+    "product_service_segments": [
+      {
+        "name": "첩부제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.4%",
+        "revenue_share": 0.5536,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "외용액제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.9%",
+        "revenue_share": 0.1891,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "경구제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+        "revenue_share": 0.0795,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "에어로졸",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.9%",
+        "revenue_share": 0.0489,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "첩부제(파스류)",
-      "caption": "근육통·관절통·신경통용 붙이는 파스",
+      "title": "첩부제",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.4%",
       "kind": "service",
-      "visual": "첩부제",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "외용액제",
-      "caption": "물파스 등 바르는 외용제",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.9%",
       "kind": "service",
-      "visual": "외용액제",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "경구제",
-      "caption": "먹는 일반의약품",
-      "kind": "bio",
-      "visual": "경구제",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "에어로졸",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

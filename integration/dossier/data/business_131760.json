@@ -153,7 +153,22 @@
   "snippets": {
     "overview": "주식회사 파인텍의 주요 제품·서비스는 원유, 부품사업부, Touch System 제품, Touch System, 장비사업부, 디스플레이 제조 장비입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 아울러 적시에 중국법인의 설비를 베트남으로 이전하여 신규투자 없이 고객사의 생산지 이전에 빠르게 대응하였습니다. 국내업체영업을 전담하는 국내영업팀과 해외업체영업을 전담하는 해외영업팀을 분리 운영하고 있으며 수주 및 생산은 '고객과의 접촉 - 견적서 제출 - DR(Design Review) - 제작 - 납품 - Set Up - 검수' 과정을 거치게 됩니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "주식회사 파인텍의 주요 제품·서비스는 원유, 부품사업부, Touch System 제품, Touch System, 장비사업부, 디스플레이 제조 장비입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 아울러 적시에 중국법인의 설비를 베트남으로 이전하여 신규투자 없이 고객사의 생산지 이전에 빠르게 대응하였습니다. 국내업체영업을 전담하는 국내영업팀과 해외업체영업을 전담하는 해외영업팀을 분리 운영하고 있으며 수주 및 생산은 '고객과의 접촉 - 견적서 제출 - DR(Design Review) - 제작 - 납품 - Set Up - 검수' 과정을 거치게 됩니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "Digitizer",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.5%",
+        "revenue_share": 0.045,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "2차전지 제조 장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.7%",
+        "revenue_share": 0.077,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "원유",
       "부품사업부",
@@ -162,32 +177,70 @@
       "장비사업부",
       "디스플레이 제조 장비"
     ],
-    "investor_note": "주식회사 파인텍의 주요 제품·서비스는 원유, 부품사업부, Touch System 제품, Touch System, 장비사업부, 디스플레이 제조 장비입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 아울러 적시에 중국법인의 설비를 베트남으로 이전하여 신규투자 없이 고객사의 생산지 이전에 빠르게 대응하였습니다. 국내업체영업을 전담하는 국내영업팀과 해외업체영업을 전담하는 해외영업팀을 분리 운영하고 있으며 수주 및 생산은 '고객과의 접촉 - 견적서 제출 - DR(Design Review) - 제작 - 납품 - Set Up - 검수' 과정을 거치게 됩니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사 파인텍의 주요 제품·서비스는 원유, 부품사업부, Touch System 제품, Touch System, 장비사업부, 디스플레이 제조 장비입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 아울러 적시에 중국법인의 설비를 베트남으로 이전하여 신규투자 없이 고객사의 생산지 이전에 빠르게 대응하였습니다. 국내업체영업을 전담하는 국내영업팀과 해외업체영업을 전담하는 해외영업팀을 분리 운영하고 있으며 수주 및 생산은 '고객과의 접촉 - 견적서 제출 - DR(Design Review) - 제작 - 납품 - Set Up - 검수' 과정을 거치게 됩니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "부품사업부",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.7%",
+        "revenue_share": 0.267,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Digitizer",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.5%",
+        "revenue_share": 0.045,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "장비사업부",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.6%",
+        "revenue_share": 0.596,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "2차전지 제조 장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.7%",
+        "revenue_share": 0.077,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "부품사업부",
-      "caption": "부품사업부 관련 제품·서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.7%",
       "kind": "auto",
-      "visual": "부품사업부",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "Digitizer",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "장비사업부",
-      "caption": "장비사업부 관련 제품·서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.6%",
       "kind": "service",
-      "visual": "장비사업부",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "부품사업부및장비사업부",
-      "caption": "부품사업부, 장비사업부 관련 제품·서비스",
-      "kind": "auto",
-      "visual": "부품사업부및장비사업",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "title": "2차전지 제조 장비",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.7%",
+      "kind": "battery",
+      "visual": "BATTERY",
+      "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

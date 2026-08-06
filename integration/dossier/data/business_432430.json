@@ -121,7 +121,36 @@
   "snippets": {
     "overview": "(주)와이랩의 주요 사업은 계속영업사업 합계, 사업권 귀속, 제작부문, 계속영업사업 등입니다. 이에 보고서에 수주계약 현황을 상세하게 기재하여야 하나 상기 사유에 근거하여 기공시된 수주내역에 대해서만 기재합니다. 그 외 당사는 2024년 5월 신규 설립한 베트남 법인(YLAB VINA Company Limited)을 통해 웹툰 아트 제작 효율화 및 원가 절감을 진행하고 있으며, 타사 외주 작품도 수주하며 사업을 지속적으로 확대해 나가고 있습니다.",
     "segment_finance": "(주)와이랩의 주요 사업은 계속영업사업 합계, 사업권 귀속, 제작부문, 계속영업사업 등입니다. 이에 보고서에 수주계약 현황을 상세하게 기재하여야 하나 상기 사유에 근거하여 기공시된 수주내역에 대해서만 기재합니다. 그 외 당사는 2024년 5월 신규 설립한 베트남 법인(YLAB VINA Company Limited)을 통해 웹툰 아트 제작 효율화 및 원가 절감을 진행하고 있으며, 타사 외주 작품도 수주하며 사업을 지속적으로 확대해 나가고 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "웹툰 제작",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.3%",
+        "revenue_share": 0.2427,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "영상 제작",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 67.6%",
+        "revenue_share": 0.6758,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "웹툰 현지화",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.3%",
+        "revenue_share": 0.0528,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "IP OSMU",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.9%",
+        "revenue_share": 0.0287,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "계속영업사업 합계",
       "사업권 귀속",
@@ -129,40 +158,70 @@
       "계속영업사업",
       "공동사업"
     ],
-    "investor_note": "(주)와이랩의 주요 사업은 계속영업사업 합계, 사업권 귀속, 제작부문, 계속영업사업 등입니다. 이에 보고서에 수주계약 현황을 상세하게 기재하여야 하나 상기 사유에 근거하여 기공시된 수주내역에 대해서만 기재합니다. 그 외 당사는 2024년 5월 신규 설립한 베트남 법인(YLAB VINA Company Limited)을 통해 웹툰 아트 제작 효율화 및 원가 절감을 진행하고 있으며, 타사 외주 작품도 수주하며 사업을 지속적으로 확대해 나가고 있습니다."
+    "investor_note": "(주)와이랩의 주요 사업은 계속영업사업 합계, 사업권 귀속, 제작부문, 계속영업사업 등입니다. 이에 보고서에 수주계약 현황을 상세하게 기재하여야 하나 상기 사유에 근거하여 기공시된 수주내역에 대해서만 기재합니다. 그 외 당사는 2024년 5월 신규 설립한 베트남 법인(YLAB VINA Company Limited)을 통해 웹툰 아트 제작 효율화 및 원가 절감을 진행하고 있으며, 타사 외주 작품도 수주하며 사업을 지속적으로 확대해 나가고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "웹툰 제작",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.3%",
+        "revenue_share": 0.2427,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "영상 제작",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 67.6%",
+        "revenue_share": 0.6758,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "웹툰 현지화",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.3%",
+        "revenue_share": 0.0528,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "IP OSMU",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.9%",
+        "revenue_share": 0.0287,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "계속영업",
-      "caption": "계속영업 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "웹툰 제작",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.3%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "사업권 귀속",
-      "caption": "사업권 귀속 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "영상 제작",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 67.6%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "제작부문",
-      "caption": "제작부문 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "웹툰 현지화",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.3%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "공동사업",
-      "caption": "공동사업 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "IP OSMU",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.9%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

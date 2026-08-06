@@ -155,9 +155,18 @@
     "segment_finance": "블루콤은 원래 블루투스 이어폰·헤드셋 제조사였으나 물량 급감과 수익성 악화로 2025년 12월 무선이어폰 사업을 종료하고, 현재는 보유 부동산을 임대하는 부동산 투자·임대업을 주력 사업으로 전환했습니다. 최근 매출의 82%가 부동산 임대에서 나옵니다. 과거 공시 기반 참고 정보로, 계속사업 기준 최근 매출액은 58억 원으로 사업 축소 영향으로 전년 대비 68.3% 줄었지만, 영업이익은 흑자로 전환했고 당기순이익도 163억 원으로 크게 늘었습니다. 부채비율은 18.1%로 매우 낮아 재무 안정성은 우수한 편입니다.",
     "segment_breakdown": [
       {
-        "name": "부동산투자(임대)",
-        "desc": "투자부동산 임대수익 — 전체 자산의 절반 이상을 차지하는 주력 사업",
-        "revenue_share": 0.817
+        "name": "부동산투자",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 81.7%",
+        "revenue_share": 0.817,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "블루투스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.4%",
+        "revenue_share": 0.054,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -166,24 +175,47 @@
       "DECIBEL(자사 브랜드)",
       "EXFIT(자사 브랜드)"
     ],
-    "investor_note": "블루콤은 원래 블루투스 이어폰·헤드셋 제조사였으나 물량 급감과 수익성 악화로 2025년 12월 무선이어폰 사업을 종료하고, 현재는 보유 부동산을 임대하는 부동산 투자·임대업을 주력 사업으로 전환했습니다. 최근 매출의 82%가 부동산 임대에서 나옵니다. 과거 공시 기반 참고 정보로, 계속사업 기준 최근 매출액은 58억 원으로 사업 축소 영향으로 전년 대비 68.3% 줄었지만, 영업이익은 흑자로 전환했고 당기순이익도 163억 원으로 크게 늘었습니다. 부채비율은 18.1%로 매우 낮아 재무 안정성은 우수한 편입니다."
+    "investor_note": "블루콤은 원래 블루투스 이어폰·헤드셋 제조사였으나 물량 급감과 수익성 악화로 2025년 12월 무선이어폰 사업을 종료하고, 현재는 보유 부동산을 임대하는 부동산 투자·임대업을 주력 사업으로 전환했습니다. 최근 매출의 82%가 부동산 임대에서 나옵니다. 과거 공시 기반 참고 정보로, 계속사업 기준 최근 매출액은 58억 원으로 사업 축소 영향으로 전년 대비 68.3% 줄었지만, 영업이익은 흑자로 전환했고 당기순이익도 163억 원으로 크게 늘었습니다. 부채비율은 18.1%로 매우 낮아 재무 안정성은 우수한 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "부동산투자",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 81.7%",
+        "revenue_share": 0.817,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "블루투스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.4%",
+        "revenue_share": 0.054,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타 및 A/S",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.9%",
+        "revenue_share": 0.129,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "부동산투자(임대)",
-      "caption": "투자부동산 임대수익 — 전체 자산의 절반 이상을 차지하는 주력 사업",
+      "title": "부동산투자",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 81.7%",
       "kind": "securities",
-      "visual": "부동산투자",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
+      "visual": "AUM",
+      "image": "../data/business_images/business_image_c1540b930934e19f.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "블루투스(중단사업)",
-      "caption": "블루투스 이어폰·헤드셋 제조·판매, 2025년 12월 사업 종료",
+      "title": "블루투스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.4%",
       "kind": "service",
-      "visual": "블루투스",
-      "image": "../data/business_images/business_image_local_default_b.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

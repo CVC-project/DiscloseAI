@@ -156,18 +156,24 @@
     "segment_breakdown": [
       {
         "name": "정보통신",
-        "desc": "ATM 등 금융자동화기기 판매·유지보수",
-        "revenue_share": 0.603
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 60.3%",
+        "revenue_share": 0.603,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "펌프제조",
-        "desc": "국내외 건설사·발전사향 펌프 생산·판매",
-        "revenue_share": 0.0946
+        "name": "펌프 제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.5%",
+        "revenue_share": 0.0946,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "수입차딜러",
-        "desc": "페라리·마세라티 수입·판매",
-        "revenue_share": 0.0928
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.3%",
+        "revenue_share": 0.0928,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -177,32 +183,70 @@
       "마세라티(수입차딜러)",
       "카매트(인테리어)"
     ],
-    "investor_note": "㈜효성은 지분관리와 투자를 주요 사업으로 하는 지주회사로, ATM 등 금융자동화기기를 만드는 정보통신 부문, 산업용 펌프 제조, 페라리·마세라티를 수입 판매하는 수입차딜러 사업을 함께 운영합니다. 매출 비중은 정보통신이 60%로 가장 크고 지주사업이 21%, 펌프제조와 수입차딜러가 각각 9% 안팎입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2조 4,317억 원으로 전년 대비 7.0% 늘었고 영업이익은 3,930억 원으로 77.7% 크게 증가했지만, 당기순이익은 4,221억 원으로 12.8% 줄어 최종적으로 남는 돈은 오히려 감소했습니다. 총자산은 5조 3,871억 원으로 24.1% 늘었고 부채비율은 88.5%, ROE는 15.7%를 기록했습니다."
+    "investor_note": "㈜효성은 지분관리와 투자를 주요 사업으로 하는 지주회사로, ATM 등 금융자동화기기를 만드는 정보통신 부문, 산업용 펌프 제조, 페라리·마세라티를 수입 판매하는 수입차딜러 사업을 함께 운영합니다. 매출 비중은 정보통신이 60%로 가장 크고 지주사업이 21%, 펌프제조와 수입차딜러가 각각 9% 안팎입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2조 4,317억 원으로 전년 대비 7.0% 늘었고 영업이익은 3,930억 원으로 77.7% 크게 증가했지만, 당기순이익은 4,221억 원으로 12.8% 줄어 최종적으로 남는 돈은 오히려 감소했습니다. 총자산은 5조 3,871억 원으로 24.1% 늘었고 부채비율은 88.5%, ROE는 15.7%를 기록했습니다.",
+    "product_service_segments": [
+      {
+        "name": "지주사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.8%",
+        "revenue_share": 0.2076,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "정보통신",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 60.3%",
+        "revenue_share": 0.603,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "펌프 제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.5%",
+        "revenue_share": 0.0946,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "수입차딜러",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.3%",
+        "revenue_share": 0.0928,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "정보통신",
-      "caption": "ATM 등 금융자동화기기 판매·유지보수",
-      "kind": "bank",
-      "visual": "정보통신",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "title": "지주사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "펌프제조",
-      "caption": "국내외 건설사·발전사향 펌프 생산·판매",
-      "kind": "power",
-      "visual": "펌프제조",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "title": "정보통신",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 60.3%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "펌프 제조",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "수입차딜러",
-      "caption": "페라리·마세라티 수입·판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.3%",
       "kind": "service",
-      "visual": "수입차딜러",
-      "image": "../data/business_images/business_image_local_default_c.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

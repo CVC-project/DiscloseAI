@@ -107,9 +107,25 @@
     "segment_finance": "(주)씨어스테크놀로지의 주요 제품·서비스는 특징, 체온계, 겨드랑이 온도, 장시간 연속체온 측정, 인체부착형, 1회용 전용 점착패드입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 원재료의 경우 구매시점에 따른 단가 변동이 있어, 고객사의 출고수량에 따라 매입수량이 유동적일 수 있습니다. 일회용 심전도 전극은 환자의 몸에 부착한 상태로 방사선(X선, MRI) 촬영 검사가 가능한 제품과 UV 경화형 전도성 하이드로겔 조성 개발로 자동화 대량 생산이 가능하여 가격 경쟁력을 확보하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "의료보험",
-        "desc": "보험계약과 자산운용 중심 서비스",
-        "revenue_share": null
+        "name": "입원환자 모니터링 솔루션",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 89.0%",
+        "revenue_share": 0.8903,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.0015,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매출 총계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -125,24 +141,54 @@
       "관리",
       "심박"
     ],
-    "investor_note": "(주)씨어스테크놀로지의 주요 제품·서비스는 특징, 체온계, 겨드랑이 온도, 장시간 연속체온 측정, 인체부착형, 1회용 전용 점착패드입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 원재료의 경우 구매시점에 따른 단가 변동이 있어, 고객사의 출고수량에 따라 매입수량이 유동적일 수 있습니다. 일회용 심전도 전극은 환자의 몸에 부착한 상태로 방사선(X선, MRI) 촬영 검사가 가능한 제품과 UV 경화형 전도성 하이드로겔 조성 개발로 자동화 대량 생산이 가능하여 가격 경쟁력을 확보하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)씨어스테크놀로지의 주요 제품·서비스는 특징, 체온계, 겨드랑이 온도, 장시간 연속체온 측정, 인체부착형, 1회용 전용 점착패드입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 원재료의 경우 구매시점에 따른 단가 변동이 있어, 고객사의 출고수량에 따라 매입수량이 유동적일 수 있습니다. 일회용 심전도 전극은 환자의 몸에 부착한 상태로 방사선(X선, MRI) 촬영 검사가 가능한 제품과 UV 경화형 전도성 하이드로겔 조성 개발로 자동화 대량 생산이 가능하여 가격 경쟁력을 확보하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "자사제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.4%",
+        "revenue_share": 0.1036,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "입원환자 모니터링 솔루션",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 89.0%",
+        "revenue_share": 0.8903,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.0015,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매출 총계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "의료보험",
-      "caption": "보험계약과 자산운용 중심 서비스",
-      "kind": "insurance",
-      "visual": "의료보험",
-      "image": "../data/business_images/business_image_local_securities.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "의료용 기기 제조업",
-      "caption": "의료용 기기 제조업을 중심으로 매출을 만듭니다.",
+      "title": "자사제품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.4%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "소프트웨어·솔루션",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 89.0%",
+      "kind": "service",
+      "visual": "SOFTWARE",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

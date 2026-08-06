@@ -153,7 +153,22 @@
   "snippets": {
     "overview": "주식회사 인콘의 주요 제품·서비스는 은행, 증권, 카드, 비중, ICT, 제품 & 상품입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 또한 해외 전시회의 경우 실질적인 신규고객을 확보할 수 있는 축소된 시장의 역할도 합니다. 당사는 ICT 산업 중 Hardware, Software, IT서비스 부문에서 사업을 영위하고 있으며, 기존 영위하던 영상보안사업을 통해 축적된 기술력을 기반으로 제조 중심의 기업에서 영상보안분야의 각종 솔루션을 제공하는 IoT기반의 ICT 전문 기업으로 사업영역을 넓혀가고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "주식회사 인콘의 주요 제품·서비스는 은행, 증권, 카드, 비중, ICT, 제품 & 상품입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 또한 해외 전시회의 경우 실질적인 신규고객을 확보할 수 있는 축소된 시장의 역할도 합니다. 당사는 ICT 산업 중 Hardware, Software, IT서비스 부문에서 사업을 영위하고 있으며, 기존 영위하던 영상보안사업을 통해 축적된 기술력을 기반으로 제조 중심의 기업에서 영상보안분야의 각종 솔루션을 제공하는 IoT기반의 ICT 전문 기업으로 사업영역을 넓혀가고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "ICT",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 87.6%",
+        "revenue_share": 0.876,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.4%",
+        "revenue_share": 0.124,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "은행",
       "증권",
@@ -166,32 +181,40 @@
       "Camera",
       "SW 등)"
     ],
-    "investor_note": "주식회사 인콘의 주요 제품·서비스는 은행, 증권, 카드, 비중, ICT, 제품 & 상품입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 또한 해외 전시회의 경우 실질적인 신규고객을 확보할 수 있는 축소된 시장의 역할도 합니다. 당사는 ICT 산업 중 Hardware, Software, IT서비스 부문에서 사업을 영위하고 있으며, 기존 영위하던 영상보안사업을 통해 축적된 기술력을 기반으로 제조 중심의 기업에서 영상보안분야의 각종 솔루션을 제공하는 IoT기반의 ICT 전문 기업으로 사업영역을 넓혀가고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사 인콘의 주요 제품·서비스는 은행, 증권, 카드, 비중, ICT, 제품 & 상품입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 또한 해외 전시회의 경우 실질적인 신규고객을 확보할 수 있는 축소된 시장의 역할도 합니다. 당사는 ICT 산업 중 Hardware, Software, IT서비스 부문에서 사업을 영위하고 있으며, 기존 영위하던 영상보안사업을 통해 축적된 기술력을 기반으로 제조 중심의 기업에서 영상보안분야의 각종 솔루션을 제공하는 IoT기반의 ICT 전문 기업으로 사업영역을 넓혀가고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "ICT",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 87.6%",
+        "revenue_share": 0.876,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.4%",
+        "revenue_share": 0.124,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "은행",
-      "caption": "예금과 대출에서 이자이익을 만드는 금융 서비스입니다.",
-      "kind": "bank",
-      "visual": "BANK",
-      "image": "../data/business_images/business_image_local_bank.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "증권",
-      "caption": "투자 중개와 자산관리 수수료가 실적에 연결됩니다.",
-      "kind": "securities",
-      "visual": "AUM",
-      "image": "../data/business_images/business_image_local_fm.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "비중",
-      "caption": "비중 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "ICT",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 87.6%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "용역",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.4%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -155,14 +155,32 @@
     "segment_finance": "호텔신라는 서울·제주 시내면세점과 인천공항, 싱가포르 창이공항, 홍콩 첵랍콕공항 등에서 면세점을 운영하는 TR부문과, 서울·제주신라호텔·신라스테이·신라모노그램을 운영하는 호텔&레저부문으로 나뉘며 매출의 84%가 면세사업에서 나옵니다. 최근 중국인 관광객 구매력 감소와 환율 상승, 공항 임대료 부담 등으로 면세업계 전반이 어려운 가운데 회사도 구조조정을 추진 중입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4조 683억 원으로 전년 대비 3.1% 늘었고 영업이익은 135억 원으로 흑자 전환했지만 당기순손실은 1,728억 원으로 오히려 커졌습니다. 부채비율은 220.1%로 부채 부담이 큰 편입니다. 감사의견은 적정이며, 핵심감사사항으로 면세사업 매출 장려활동에 따른 수익인식 정확성과 일부 사업장의 자산 손상평가(172억 원 손상차손)가 지목됐습니다.",
     "segment_breakdown": [
       {
-        "name": "TR부문(Travel Retail)",
-        "desc": "국내외 면세점(향수·화장품·명품 등) 운영",
-        "revenue_share": 0.837
+        "name": "TR",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 83.7%",
+        "revenue_share": 0.837,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "호텔&레저부문",
-        "desc": "호텔 숙박·식음·연회, 피트니스, 여행 예약대행",
-        "revenue_share": 0.179
+        "name": "영업손익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.3%",
+        "revenue_share": 0.153,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자 산",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.3%",
+        "revenue_share": 0.493,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "호텔&레저 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.9%",
+        "revenue_share": 0.179,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -175,24 +193,70 @@
       "반트(VANTT, 피트니스 클럽)",
       "BTM(기업 출장관리 서비스)"
     ],
-    "investor_note": "호텔신라는 서울·제주 시내면세점과 인천공항, 싱가포르 창이공항, 홍콩 첵랍콕공항 등에서 면세점을 운영하는 TR부문과, 서울·제주신라호텔·신라스테이·신라모노그램을 운영하는 호텔&레저부문으로 나뉘며 매출의 84%가 면세사업에서 나옵니다. 최근 중국인 관광객 구매력 감소와 환율 상승, 공항 임대료 부담 등으로 면세업계 전반이 어려운 가운데 회사도 구조조정을 추진 중입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4조 683억 원으로 전년 대비 3.1% 늘었고 영업이익은 135억 원으로 흑자 전환했지만 당기순손실은 1,728억 원으로 오히려 커졌습니다. 부채비율은 220.1%로 부채 부담이 큰 편입니다. 감사의견은 적정이며, 핵심감사사항으로 면세사업 매출 장려활동에 따른 수익인식 정확성과 일부 사업장의 자산 손상평가(172억 원 손상차손)가 지목됐습니다."
+    "investor_note": "호텔신라는 서울·제주 시내면세점과 인천공항, 싱가포르 창이공항, 홍콩 첵랍콕공항 등에서 면세점을 운영하는 TR부문과, 서울·제주신라호텔·신라스테이·신라모노그램을 운영하는 호텔&레저부문으로 나뉘며 매출의 84%가 면세사업에서 나옵니다. 최근 중국인 관광객 구매력 감소와 환율 상승, 공항 임대료 부담 등으로 면세업계 전반이 어려운 가운데 회사도 구조조정을 추진 중입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4조 683억 원으로 전년 대비 3.1% 늘었고 영업이익은 135억 원으로 흑자 전환했지만 당기순손실은 1,728억 원으로 오히려 커졌습니다. 부채비율은 220.1%로 부채 부담이 큰 편입니다. 감사의견은 적정이며, 핵심감사사항으로 면세사업 매출 장려활동에 따른 수익인식 정확성과 일부 사업장의 자산 손상평가(172억 원 손상차손)가 지목됐습니다.",
+    "product_service_segments": [
+      {
+        "name": "TR",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 83.7%",
+        "revenue_share": 0.837,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "영업손익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.3%",
+        "revenue_share": 0.153,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자 산",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.3%",
+        "revenue_share": 0.493,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "호텔&레저 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.9%",
+        "revenue_share": 0.179,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "TR부문(Travel Retail)",
-      "caption": "국내외 면세점(향수·화장품·명품 등) 운영",
-      "kind": "consumer",
-      "visual": "AI",
-      "image": "../data/business_images/business_image_local_cosmetics.svg",
-      "image_source": "Local curated visual"
+      "title": "TR",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 83.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "호텔&레저부문",
-      "caption": "호텔 숙박·식음·연회, 피트니스, 여행 예약대행",
+      "title": "영업손익",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.3%",
       "kind": "service",
-      "visual": "호텔&레저부문",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "자 산",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.3%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "호텔&레저 등",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

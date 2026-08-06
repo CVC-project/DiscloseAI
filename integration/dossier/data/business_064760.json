@@ -155,19 +155,25 @@
     "segment_finance": "티씨케이는 반도체 식각(에칭) 공정에 쓰이는 SiC(실리콘카바이드) 링·웨이퍼 부품과, 반도체·태양광용 잉곳 성장로에 쓰이는 고순도 흑연 부품을 만드는 반도체 소재 전문기업입니다. 매출의 약 85%는 SiC 부품에서, 나머지는 흑연 부품·Susceptor 등에서 나오며 대부분 해외로 수출됩니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,013억 원(+9.3%), 영업이익은 838억 원(+3.9%)으로 늘었지만 당기순이익은 699억 원으로 2.9% 줄었습니다. 부채비율은 9.3%로 매우 낮아 재무구조가 안정적입니다.",
     "segment_breakdown": [
       {
-        "name": "Solid SiC부문",
-        "desc": "반도체 식각(에칭) 공정용 SiC Ring·Wafer 등 부품",
-        "revenue_share": 0.846
-      },
-      {
         "name": "Graphite부문",
-        "desc": "반도체·태양광 잉곳 성장로용 고순도 흑연 부품",
-        "revenue_share": 0.112
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.0%",
+        "revenue_share": 0.11,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "Susceptor부문",
-        "desc": "반도체 ALD 장비용 Susceptor 등",
-        "revenue_share": 0.041
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.1%",
+        "revenue_share": 0.041,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Solid SiC부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 84.6%",
+        "revenue_share": 0.846,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -177,32 +183,62 @@
       "Susceptor",
       "LED용 Wafer Carrier"
     ],
-    "investor_note": "티씨케이는 반도체 식각(에칭) 공정에 쓰이는 SiC(실리콘카바이드) 링·웨이퍼 부품과, 반도체·태양광용 잉곳 성장로에 쓰이는 고순도 흑연 부품을 만드는 반도체 소재 전문기업입니다. 매출의 약 85%는 SiC 부품에서, 나머지는 흑연 부품·Susceptor 등에서 나오며 대부분 해외로 수출됩니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,013억 원(+9.3%), 영업이익은 838억 원(+3.9%)으로 늘었지만 당기순이익은 699억 원으로 2.9% 줄었습니다. 부채비율은 9.3%로 매우 낮아 재무구조가 안정적입니다."
+    "investor_note": "티씨케이는 반도체 식각(에칭) 공정에 쓰이는 SiC(실리콘카바이드) 링·웨이퍼 부품과, 반도체·태양광용 잉곳 성장로에 쓰이는 고순도 흑연 부품을 만드는 반도체 소재 전문기업입니다. 매출의 약 85%는 SiC 부품에서, 나머지는 흑연 부품·Susceptor 등에서 나오며 대부분 해외로 수출됩니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,013억 원(+9.3%), 영업이익은 838억 원(+3.9%)으로 늘었지만 당기순이익은 699억 원으로 2.9% 줄었습니다. 부채비율은 9.3%로 매우 낮아 재무구조가 안정적입니다.",
+    "product_service_segments": [
+      {
+        "name": "Graphite부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.0%",
+        "revenue_share": 0.11,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "태양광용 고순도 흑연제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.002,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Susceptor부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.1%",
+        "revenue_share": 0.041,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Solid SiC부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 84.6%",
+        "revenue_share": 0.846,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "Solid SiC부문",
-      "caption": "반도체 식각(에칭) 공정용 SiC Ring·Wafer 등 부품",
-      "kind": "chip",
-      "visual": "Solid",
-      "image": "../data/business_images/business_image_local_sic_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
       "title": "Graphite부문",
-      "caption": "반도체·태양광 잉곳 성장로용 고순도 흑연 부품",
-      "kind": "chip",
-      "visual": "Graphite부문",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "Susceptor부문",
-      "caption": "반도체 ALD 장비용 Susceptor 등",
-      "kind": "chip",
-      "visual": "Susceptor부",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.1%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "시스템 구축·통합",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 84.6%",
+      "kind": "service",
+      "visual": "SI",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

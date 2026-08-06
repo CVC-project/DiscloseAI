@@ -139,9 +139,11 @@
     "segment_finance": "과거 공시 기반 참고 정보로, 최근 매출액은 6,355억 원으로 전년보다 30.3% 늘었고 영업이익은 190억 원으로 86.4%, 당기순이익은 141억 원으로 133.6% 증가하며 뚜렷한 성장세를 보였습니다. 부채비율은 70.3%입니다. 감사인은 매출이 회사의 핵심 성과지표인 만큼 매출의 발생사실을 핵심감사사항으로 점검했고, 내부회계관리제도에도 적정의견을 표명했습니다.",
     "segment_breakdown": [
       {
-        "name": "전자부품 유통업",
-        "desc": "메모리·시스템반도체·디스플레이 유통",
-        "revenue_share": 0.999
+        "name": "전자부품 등 유통업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.9%",
+        "revenue_share": 0.999,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -153,40 +155,32 @@
       "디스플레이",
       "메모리 A/S 서비스"
     ],
-    "investor_note": "과거 공시 기반 참고 정보로, 최근 매출액은 6,355억 원으로 전년보다 30.3% 늘었고 영업이익은 190억 원으로 86.4%, 당기순이익은 141억 원으로 133.6% 증가하며 뚜렷한 성장세를 보였습니다. 부채비율은 70.3%입니다. 감사인은 매출이 회사의 핵심 성과지표인 만큼 매출의 발생사실을 핵심감사사항으로 점검했고, 내부회계관리제도에도 적정의견을 표명했습니다."
+    "investor_note": "과거 공시 기반 참고 정보로, 최근 매출액은 6,355억 원으로 전년보다 30.3% 늘었고 영업이익은 190억 원으로 86.4%, 당기순이익은 141억 원으로 133.6% 증가하며 뚜렷한 성장세를 보였습니다. 부채비율은 70.3%입니다. 감사인은 매출이 회사의 핵심 성과지표인 만큼 매출의 발생사실을 핵심감사사항으로 점검했고, 내부회계관리제도에도 적정의견을 표명했습니다.",
+    "product_service_segments": [
+      {
+        "name": "전자부품 등 유통업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.9%",
+        "revenue_share": 0.999,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.001,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "DRAM",
-      "caption": "데이터 저장과 AI 서버 수요에 연결되는 메모리 제품입니다.",
-      "kind": "chip",
-      "visual": "CHIP",
-      "image": "../data/business_images/business_image_10774ca82ea41202.jpg",
+      "title": "전자부품 등 유통업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.9%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
       "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "NAND Flash",
-      "caption": "데이터 저장과 AI 서버 수요에 연결되는 메모리 제품입니다.",
-      "kind": "chip",
-      "visual": "CHIP",
-      "image": "../data/business_images/business_image_10774ca82ea41202.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "Touch Controller IC",
-      "caption": "Touch Controller IC 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "Camera Image Sensor",
-      "caption": "Camera Image Sensor 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
     }
   ],
   "custom_report_ideas": [

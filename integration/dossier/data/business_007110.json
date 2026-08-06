@@ -155,14 +155,18 @@
     "segment_finance": "일신석재는 화강석·대리석 등 건축용 석재를 만들어 유통하고(69%), 이를 직접 시공하는 석공사업(30%)도 함께 하는 석재 전문기업입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 545억 원으로 전년 대비 30.8% 크게 줄었고 영업이익도 6억 원으로 82.1% 감소했으며, 당기순이익은 6억 원 손실로 적자 전환했습니다. 부채비율은 56.6%로 아직 관리 가능한 수준이지만, 매출과 이익이 함께 줄고 있어 업황 회복 여부를 지켜볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "석재제조/유통",
-        "desc": "화강석·대리석 등 건축내외장재 제조·유통",
-        "revenue_share": 0.6857
+        "name": "석재제조/유통업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.6%",
+        "revenue_share": 0.6857,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "임대매출",
-        "desc": "하치장·전시장 임대",
-        "revenue_share": 0.0137
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.4%",
+        "revenue_share": 0.0137,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -171,24 +175,47 @@
       "석공사(건축물 석재마감시공)",
       "하치장·전시장 임대"
     ],
-    "investor_note": "일신석재는 화강석·대리석 등 건축용 석재를 만들어 유통하고(69%), 이를 직접 시공하는 석공사업(30%)도 함께 하는 석재 전문기업입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 545억 원으로 전년 대비 30.8% 크게 줄었고 영업이익도 6억 원으로 82.1% 감소했으며, 당기순이익은 6억 원 손실로 적자 전환했습니다. 부채비율은 56.6%로 아직 관리 가능한 수준이지만, 매출과 이익이 함께 줄고 있어 업황 회복 여부를 지켜볼 필요가 있습니다."
+    "investor_note": "일신석재는 화강석·대리석 등 건축용 석재를 만들어 유통하고(69%), 이를 직접 시공하는 석공사업(30%)도 함께 하는 석재 전문기업입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 545억 원으로 전년 대비 30.8% 크게 줄었고 영업이익도 6억 원으로 82.1% 감소했으며, 당기순이익은 6억 원 손실로 적자 전환했습니다. 부채비율은 56.6%로 아직 관리 가능한 수준이지만, 매출과 이익이 함께 줄고 있어 업황 회복 여부를 지켜볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "석공사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.1%",
+        "revenue_share": 0.3007,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "석재제조/유통업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.6%",
+        "revenue_share": 0.6857,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임대매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.4%",
+        "revenue_share": 0.0137,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "석재제조/유통",
-      "caption": "화강석·대리석 등 건축내외장재 제조·유통",
+      "title": "석공사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.1%",
       "kind": "service",
-      "visual": "석재제조",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "임대",
-      "caption": "하치장·전시장 임대",
+      "title": "석재제조/유통업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.6%",
       "kind": "service",
-      "visual": "임대매출",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

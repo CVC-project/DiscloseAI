@@ -107,14 +107,25 @@
     "segment_finance": "(주)에이텀의 주요 제품·서비스는 OLED, MLCC, 배터리, 선박엔진, 변압기, 전선입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 에이텀 베트남 법인은 위에서 설명한 각종 제품을 만드는 생산기지 역할을 하고 있으며, 청한전자 주식회사는 MLCC 등 전자부품 유통업을 30년 동안 영위해온 기업이고, 주식회사 디에스티는 선박 및 산업기계 부품 제조 및 판매사는 기업입니다. 제품의 가격변동 추이 당사의 제품 및 상품의 가격은 최초에 협의된 가격에서 크게 변화하지 않으며, 시장과 고객의 수요에 따라 진화하고 있거나, 가격의 변화추이가 나타날 수준의 매출 기간을 가지고 있지 않습니다.TA부문은 최초 15W부터 매출이 시작되었는데, 시기에 따라 권선형, PPP 방식, PPC방식으로 변화하며, 사실상 신규제품으로의 전이가 발생하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "MLCC부문",
-        "desc": "MLCC 관련 제품·서비스",
-        "revenue_share": null
+        "name": "선박/기계부품 (주1)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.0%",
+        "revenue_share": 0.4,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "선박엔진부품 부문",
-        "desc": "선박엔진 관련 제품·서비스",
-        "revenue_share": null
+        "name": "MLCC",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.0%",
+        "revenue_share": 0.3,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "IC 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.0%",
+        "revenue_share": 0.14,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -130,40 +141,55 @@
       "TA트랜스",
       "트랜스"
     ],
-    "investor_note": "(주)에이텀의 주요 제품·서비스는 OLED, MLCC, 배터리, 선박엔진, 변압기, 전선입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 에이텀 베트남 법인은 위에서 설명한 각종 제품을 만드는 생산기지 역할을 하고 있으며, 청한전자 주식회사는 MLCC 등 전자부품 유통업을 30년 동안 영위해온 기업이고, 주식회사 디에스티는 선박 및 산업기계 부품 제조 및 판매사는 기업입니다. 제품의 가격변동 추이 당사의 제품 및 상품의 가격은 최초에 협의된 가격에서 크게 변화하지 않으며, 시장과 고객의 수요에 따라 진화하고 있거나, 가격의 변화추이가 나타날 수준의 매출 기간을 가지고 있지 않습니다.TA부문은 최초 15W부터 매출이 시작되었는데, 시기에 따라 권선형, PPP 방식, PPC방식으로 변화하며, 사실상 신규제품으로의 전이가 발생하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)에이텀의 주요 제품·서비스는 OLED, MLCC, 배터리, 선박엔진, 변압기, 전선입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 에이텀 베트남 법인은 위에서 설명한 각종 제품을 만드는 생산기지 역할을 하고 있으며, 청한전자 주식회사는 MLCC 등 전자부품 유통업을 30년 동안 영위해온 기업이고, 주식회사 디에스티는 선박 및 산업기계 부품 제조 및 판매사는 기업입니다. 제품의 가격변동 추이 당사의 제품 및 상품의 가격은 최초에 협의된 가격에서 크게 변화하지 않으며, 시장과 고객의 수요에 따라 진화하고 있거나, 가격의 변화추이가 나타날 수준의 매출 기간을 가지고 있지 않습니다.TA부문은 최초 15W부터 매출이 시작되었는데, 시기에 따라 권선형, PPP 방식, PPC방식으로 변화하며, 사실상 신규제품으로의 전이가 발생하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "선박/기계부품 (주1)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.0%",
+        "revenue_share": 0.4,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "MLCC",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.0%",
+        "revenue_share": 0.3,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "IC 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.0%",
+        "revenue_share": 0.14,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
-      "kind": "display",
-      "visual": "OLED",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "MLCC",
-      "caption": "MLCC 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "선박엔진",
-      "caption": "선박엔진 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "상선",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.0%",
       "kind": "ship",
       "visual": "SHIP",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_5184e050831a4460.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "변압기",
-      "caption": "변압기 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "title": "전자부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.0%",
+      "kind": "chip",
+      "visual": "MLCC",
+      "image": "../data/business_images/business_image_76a8c8f5ba93d5d3.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "IC 등",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.0%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

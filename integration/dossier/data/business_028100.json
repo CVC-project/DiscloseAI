@@ -156,8 +156,24 @@
     "segment_breakdown": [
       {
         "name": "토목부문",
-        "desc": "보링그라우팅·수중공사·상하수도·토공사 등 지반조성 토목공사",
-        "revenue_share": 0.9998
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 0.9998,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "일반건설부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.9%",
+        "revenue_share": 0.389,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "지하연속벽(D-Wall) 및 기초공사부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.8%",
+        "revenue_share": 0.208,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -171,24 +187,62 @@
       "지반조사·시험·계측 토탈서비스",
       "엔지니어링 용역"
     ],
-    "investor_note": "동아지질은 지반조사부터 시험·계측·설계·시공까지 한번에 제공하는 토탈서비스 능력을 갖춘 토목 전문 건설회사로, 보링 그라우팅 공사와 수중공사, 상하수도설비 공사 등을 주력으로 합니다. 매출의 99.98%가 토목부문에서 나오며, 싱가포르 LTA·현대건설 등을 주요 매출처로 국내외에서 공사를 수행하고 있고 최근에는 해외 매출 비중이 국내를 넘어섰습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,677억 원으로 전년 대비 18.9% 늘었고 영업이익은 88.0%, 당기순이익은 64.4% 각각 크게 증가하며 실적이 뚜렷하게 개선됐습니다. 부채비율은 99.1%로 자본과 비슷한 수준의 빚을 지고 있어 큰 무리는 아니지만 재무 부담을 계속 지켜볼 필요가 있습니다."
+    "investor_note": "동아지질은 지반조사부터 시험·계측·설계·시공까지 한번에 제공하는 토탈서비스 능력을 갖춘 토목 전문 건설회사로, 보링 그라우팅 공사와 수중공사, 상하수도설비 공사 등을 주력으로 합니다. 매출의 99.98%가 토목부문에서 나오며, 싱가포르 LTA·현대건설 등을 주요 매출처로 국내외에서 공사를 수행하고 있고 최근에는 해외 매출 비중이 국내를 넘어섰습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,677억 원으로 전년 대비 18.9% 늘었고 영업이익은 88.0%, 당기순이익은 64.4% 각각 크게 증가하며 실적이 뚜렷하게 개선됐습니다. 부채비율은 99.1%로 자본과 비슷한 수준의 빚을 지고 있어 큰 무리는 아니지만 재무 부담을 계속 지켜볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "토목부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 0.9998,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.0013,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "일반건설부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.9%",
+        "revenue_share": 0.389,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "지하연속벽(D-Wall) 및 기초공사부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.8%",
+        "revenue_share": 0.208,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "토목부문",
-      "caption": "보링그라우팅·수중공사·상하수도·토공사 등 지반조성 토목공사",
+      "title": "토목·플랜트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
       "kind": "service",
-      "visual": "토목부문",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_5184e050831a4460.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "기반조성 및 시설물 축조관련 전문공사업",
-      "caption": "기반조성 및 시설물 축조관련 전문공사업을 중심으로 매출을 만듭니다.",
+      "title": "건축·주택",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.9%",
+      "kind": "service",
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "지하연속벽(D-Wall) 및 기초공사부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.8%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

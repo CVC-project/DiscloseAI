@@ -155,14 +155,32 @@
     "segment_finance": "에이치엘비제약은 전문의약품 제조·판매와 위수탁생산(CMO), 건강기능식품(콴첼) 사업을 주력으로 하며, 장기지속형 주사제(DDS) 기반 신약·개량신약도 연구하고 있는 제약사입니다. 로수듀오·씨트클러 등 160종 이상의 전문의약품을 판매위탁 방식으로 공급하며, 2025년 5월에는 신화어드밴스를 인수해 의약품 유통사업도 새로 시작했습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,055억 원으로 전년 대비 50.0% 급증했는데 이는 신화어드밴스 편입 효과가 큽니다. 영업이익은 10억 원으로 27.8% 줄었지만 당기순이익은 45억 원으로 126.3% 늘었습니다. 부채비율은 36.4%로 안정적인 편이며, ROE는 3.8%로 아직 낮은 수준입니다.",
     "segment_breakdown": [
       {
-        "name": "의약품 유통(신화어드밴스)",
-        "desc": "2025년 편입한 종속회사를 통한 의약품 유통 상품매출",
-        "revenue_share": 0.248
+        "name": "의약품제조판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.02,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "상품매출(위수탁 CMO 등)",
-        "desc": "위탁영업·CMO 관련 상품매출",
-        "revenue_share": 0.149
+        "name": "신경정신",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.4%",
+        "revenue_share": 0.0939,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "소화기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.9%",
+        "revenue_share": 0.0794,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "피부및비뇨기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.7%",
+        "revenue_share": 0.0373,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -178,32 +196,70 @@
       "까스명수액",
       "콴첼(관절 건강기능식품)"
     ],
-    "investor_note": "에이치엘비제약은 전문의약품 제조·판매와 위수탁생산(CMO), 건강기능식품(콴첼) 사업을 주력으로 하며, 장기지속형 주사제(DDS) 기반 신약·개량신약도 연구하고 있는 제약사입니다. 로수듀오·씨트클러 등 160종 이상의 전문의약품을 판매위탁 방식으로 공급하며, 2025년 5월에는 신화어드밴스를 인수해 의약품 유통사업도 새로 시작했습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,055억 원으로 전년 대비 50.0% 급증했는데 이는 신화어드밴스 편입 효과가 큽니다. 영업이익은 10억 원으로 27.8% 줄었지만 당기순이익은 45억 원으로 126.3% 늘었습니다. 부채비율은 36.4%로 안정적인 편이며, ROE는 3.8%로 아직 낮은 수준입니다."
+    "investor_note": "에이치엘비제약은 전문의약품 제조·판매와 위수탁생산(CMO), 건강기능식품(콴첼) 사업을 주력으로 하며, 장기지속형 주사제(DDS) 기반 신약·개량신약도 연구하고 있는 제약사입니다. 로수듀오·씨트클러 등 160종 이상의 전문의약품을 판매위탁 방식으로 공급하며, 2025년 5월에는 신화어드밴스를 인수해 의약품 유통사업도 새로 시작했습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,055억 원으로 전년 대비 50.0% 급증했는데 이는 신화어드밴스 편입 효과가 큽니다. 영업이익은 10억 원으로 27.8% 줄었지만 당기순이익은 45억 원으로 126.3% 늘었습니다. 부채비율은 36.4%로 안정적인 편이며, ROE는 3.8%로 아직 낮은 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "의약품제조판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.02,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "신경정신",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.4%",
+        "revenue_share": 0.0939,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "소화기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.9%",
+        "revenue_share": 0.0794,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "피부및비뇨기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.7%",
+        "revenue_share": 0.0373,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "의약품제조판매(제품)",
-      "caption": "전문의약품(순환기·항생·신경정신 등) 자체 제조·위탁영업",
+      "title": "의약품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
       "kind": "bio",
-      "visual": "의약품제조판매",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "의약품 유통(신화어드밴스)",
-      "caption": "2025년 편입한 종속회사를 통한 의약품 유통 상품매출",
-      "kind": "bio",
-      "visual": "의약품",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "상품매출(위수탁 CMO 등)",
-      "caption": "위탁영업·CMO 관련 상품매출",
+      "title": "신경정신",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.4%",
       "kind": "service",
-      "visual": "상품매출",
-      "image": "../data/business_images/business_image_local_default_c.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "소화기",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "피부및비뇨기",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

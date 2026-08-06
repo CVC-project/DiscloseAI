@@ -155,19 +155,25 @@
     "segment_finance": "주식회사 라파스의 주요 제품·서비스는 원유, 의약품, 건강기능식품, 비고, 제품 품목, 자사제품입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 회사의 현황 회사는 경피약물전달(TDDS) 기술인 용해성 마이크로니들을 이용한 패치의 연구개발, 제조, 판매 사업을 영위하고 있습니다. 훨씬 적은 용량으로도 동등 이상의 효능을 발휘하며, 동시에 환부를 보호하는 기능까지 갖추고 있습니다.이러한 일반의약품 개발을 통해 회사는 시장에 빠르게 진출하여 매출을 창출하고 사업 경쟁력을 강화할 것으로 기대하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "서울보증보험",
-        "desc": "서울보증보험 관련 제품·서비스",
-        "revenue_share": null
+        "name": "전사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 47.9%",
+        "revenue_share": 0.4789,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "농협은행",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
+        "name": "자사브랜드",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 41.5%",
+        "revenue_share": 0.4155,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "신한은행",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
+        "name": "총 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -182,32 +188,55 @@
       "대상지역",
       "계약체결일"
     ],
-    "investor_note": "주식회사 라파스의 주요 제품·서비스는 원유, 의약품, 건강기능식품, 비고, 제품 품목, 자사제품입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 회사의 현황 회사는 경피약물전달(TDDS) 기술인 용해성 마이크로니들을 이용한 패치의 연구개발, 제조, 판매 사업을 영위하고 있습니다. 훨씬 적은 용량으로도 동등 이상의 효능을 발휘하며, 동시에 환부를 보호하는 기능까지 갖추고 있습니다.이러한 일반의약품 개발을 통해 회사는 시장에 빠르게 진출하여 매출을 창출하고 사업 경쟁력을 강화할 것으로 기대하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사 라파스의 주요 제품·서비스는 원유, 의약품, 건강기능식품, 비고, 제품 품목, 자사제품입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 회사의 현황 회사는 경피약물전달(TDDS) 기술인 용해성 마이크로니들을 이용한 패치의 연구개발, 제조, 판매 사업을 영위하고 있습니다. 훨씬 적은 용량으로도 동등 이상의 효능을 발휘하며, 동시에 환부를 보호하는 기능까지 갖추고 있습니다.이러한 일반의약품 개발을 통해 회사는 시장에 빠르게 진출하여 매출을 창출하고 사업 경쟁력을 강화할 것으로 기대하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "전사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 47.9%",
+        "revenue_share": 0.4789,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자사브랜드",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 41.5%",
+        "revenue_share": 0.4155,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "서울보증보험",
-      "caption": "서울보증보험 관련 제품·서비스",
-      "kind": "insurance",
-      "visual": "서울보증보험",
-      "image": "../data/business_images/business_image_local_insurance.svg",
-      "image_source": "Local curated visual"
+      "title": "전사",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 47.9%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "농협은행",
-      "caption": "예대, 수수료, 투자 등 금융 서비스",
-      "kind": "bank",
-      "visual": "농협은행",
-      "image": "../data/business_images/business_image_local_bank.svg",
-      "image_source": "Local curated visual"
+      "title": "자사브랜드",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 41.5%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "신한은행",
-      "caption": "예대, 수수료, 투자 등 금융 서비스",
-      "kind": "bank",
-      "visual": "신한은행",
-      "image": "../data/business_images/business_image_local_bank.svg",
-      "image_source": "Local curated visual"
+      "title": "총 계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

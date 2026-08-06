@@ -155,14 +155,32 @@
     "segment_finance": "아난티는 남해·코드·코브·앳 강남·클럽 제주·빌라쥬 드 아난티 등 6개 골프장·호텔·리조트를 운영하는 국내 대표 휴양 플랫폼 기업으로, 회원권 분양을 통한 플랫폼 개발과 숙박·골프 등 운영 매출로 사업을 나눠 진행하고 있습니다. 매출의 84%는 리조트·호텔 운영에서, 16%는 신규 회원권 분양에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,580억 원으로 전년 대비 9.5% 줄었지만 영업이익은 신규 플랫폼(빌라쥬 드 아난티 등) 가동 확대에 힘입어 큰 폭으로 늘었습니다. 다만 당기순이익은 380억 원 적자를 이어갔고, 부채비율은 121.7%로 자본보다 빚이 많은 편이라 재무 부담을 살펴볼 필요가 있습니다. 감사의견은 적정이며, 핵심감사사항으로 매출 인식 시점의 적정성 여부가 점검됐습니다.",
     "segment_breakdown": [
       {
-        "name": "플랫폼 운영",
-        "desc": "골프·호텔·리조트 6곳 운영(객실·식음료·골프 등)",
-        "revenue_share": 0.84
+        "name": "플랫폼 개발(분양)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.2%",
+        "revenue_share": 0.142,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "플랫폼 개발(분양)",
-        "desc": "신규 리조트 개발 및 회원권 분양",
-        "revenue_share": 0.16
+        "name": "플랫폼 운영",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 69.8%",
+        "revenue_share": 0.698,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.9%",
+        "revenue_share": 0.029,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "골프",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.7%",
+        "revenue_share": 0.077,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,24 +192,62 @@
       "빌라쥬 드 아난티(호텔·리조트)",
       "이터널저니 온라인몰"
     ],
-    "investor_note": "아난티는 남해·코드·코브·앳 강남·클럽 제주·빌라쥬 드 아난티 등 6개 골프장·호텔·리조트를 운영하는 국내 대표 휴양 플랫폼 기업으로, 회원권 분양을 통한 플랫폼 개발과 숙박·골프 등 운영 매출로 사업을 나눠 진행하고 있습니다. 매출의 84%는 리조트·호텔 운영에서, 16%는 신규 회원권 분양에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,580억 원으로 전년 대비 9.5% 줄었지만 영업이익은 신규 플랫폼(빌라쥬 드 아난티 등) 가동 확대에 힘입어 큰 폭으로 늘었습니다. 다만 당기순이익은 380억 원 적자를 이어갔고, 부채비율은 121.7%로 자본보다 빚이 많은 편이라 재무 부담을 살펴볼 필요가 있습니다. 감사의견은 적정이며, 핵심감사사항으로 매출 인식 시점의 적정성 여부가 점검됐습니다."
+    "investor_note": "아난티는 남해·코드·코브·앳 강남·클럽 제주·빌라쥬 드 아난티 등 6개 골프장·호텔·리조트를 운영하는 국내 대표 휴양 플랫폼 기업으로, 회원권 분양을 통한 플랫폼 개발과 숙박·골프 등 운영 매출로 사업을 나눠 진행하고 있습니다. 매출의 84%는 리조트·호텔 운영에서, 16%는 신규 회원권 분양에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,580억 원으로 전년 대비 9.5% 줄었지만 영업이익은 신규 플랫폼(빌라쥬 드 아난티 등) 가동 확대에 힘입어 큰 폭으로 늘었습니다. 다만 당기순이익은 380억 원 적자를 이어갔고, 부채비율은 121.7%로 자본보다 빚이 많은 편이라 재무 부담을 살펴볼 필요가 있습니다. 감사의견은 적정이며, 핵심감사사항으로 매출 인식 시점의 적정성 여부가 점검됐습니다.",
+    "product_service_segments": [
+      {
+        "name": "플랫폼 개발(분양)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.2%",
+        "revenue_share": 0.142,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "플랫폼 운영",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 69.8%",
+        "revenue_share": 0.698,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.9%",
+        "revenue_share": 0.029,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "골프",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.7%",
+        "revenue_share": 0.077,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "플랫폼 운영",
-      "caption": "골프·호텔·리조트 6곳 운영(객실·식음료·골프 등)",
+      "title": "플랫폼 서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.2%",
       "kind": "platform",
-      "visual": "플랫폼",
-      "image": "../data/business_images/business_image_food_packaged.svg",
-      "image_source": "Local visual"
+      "visual": "PLATFORM",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "플랫폼 개발(분양)",
-      "caption": "신규 리조트 개발 및 회원권 분양",
-      "kind": "platform",
-      "visual": "플랫폼",
-      "image": "../data/business_images/business_image_local_housing.svg",
-      "image_source": "Local curated visual"
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "골프",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

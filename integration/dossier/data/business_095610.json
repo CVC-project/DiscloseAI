@@ -155,9 +155,11 @@
     "segment_finance": "(주)테스의 주요 사업은 삼성사업본부, SKH사업본부, OED사업본부, 장비사업 등입니다. * 세부내역(수주일자, 납기, 수량 등)을 기재시 회사의 영업활동에 지장을 초래할 수 있고 고객의 투자정보등이 노출될 수 있어 해당 사항을 기재하지 않았습니다. 제품 등의 가격변동 추이 당사 주력 제품인 반도체 장비는 고객별, 공정별, 장비옵션(chamber 수에 따라 가격편차가 큼)별 장비사양 및 성능이 달라지는 주문별 맞춤 생산 방식입니다.",
     "segment_breakdown": [
       {
-        "name": "한국산업은행",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
+        "name": "전사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 85.5%",
+        "revenue_share": 0.855,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -173,40 +175,32 @@
       "- 반도체 장비(PECVD",
       "GPE)- 디스플레이"
     ],
-    "investor_note": "(주)테스의 주요 사업은 삼성사업본부, SKH사업본부, OED사업본부, 장비사업 등입니다. * 세부내역(수주일자, 납기, 수량 등)을 기재시 회사의 영업활동에 지장을 초래할 수 있고 고객의 투자정보등이 노출될 수 있어 해당 사항을 기재하지 않았습니다. 제품 등의 가격변동 추이 당사 주력 제품인 반도체 장비는 고객별, 공정별, 장비옵션(chamber 수에 따라 가격편차가 큼)별 장비사양 및 성능이 달라지는 주문별 맞춤 생산 방식입니다."
+    "investor_note": "(주)테스의 주요 사업은 삼성사업본부, SKH사업본부, OED사업본부, 장비사업 등입니다. * 세부내역(수주일자, 납기, 수량 등)을 기재시 회사의 영업활동에 지장을 초래할 수 있고 고객의 투자정보등이 노출될 수 있어 해당 사항을 기재하지 않았습니다. 제품 등의 가격변동 추이 당사 주력 제품인 반도체 장비는 고객별, 공정별, 장비옵션(chamber 수에 따라 가격편차가 큼)별 장비사양 및 성능이 달라지는 주문별 맞춤 생산 방식입니다.",
+    "product_service_segments": [
+      {
+        "name": "전사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 85.5%",
+        "revenue_share": 0.855,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품 외(기타)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.5%",
+        "revenue_share": 0.145,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "한국산업은행",
-      "caption": "예금과 대출에서 이자이익을 만드는 금융 서비스입니다.",
-      "kind": "bank",
-      "visual": "BANK",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "DRAM",
-      "caption": "데이터 저장과 AI 서버 수요에 연결되는 메모리 제품입니다.",
-      "kind": "chip",
-      "visual": "CHIP",
-      "image": "../data/business_images/business_image_10774ca82ea41202.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "NAND",
-      "caption": "데이터 저장과 AI 서버 수요에 연결되는 메모리 제품입니다.",
-      "kind": "chip",
-      "visual": "CHIP",
-      "image": "../data/business_images/business_image_10774ca82ea41202.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
-      "kind": "display",
-      "visual": "OLED",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
-      "image_source": "Wikimedia Commons"
+      "title": "전사",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 85.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -156,13 +156,31 @@
     "segment_breakdown": [
       {
         "name": "모자생활BU",
-        "desc": "스킨케어(닥터아토·더퓨어)·수유용품·생활건강(B&B 세제 등)",
-        "revenue_share": 0.775
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.7%",
+        "revenue_share": 0.137,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "패션BU",
-        "desc": "유아동의류(타티네 쇼콜라, 뮤아 등)",
-        "revenue_share": 0.214
+        "name": "수유용품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.005,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "생활건강",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 61.5%",
+        "revenue_share": 0.615,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "완구&발육",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.7%",
+        "revenue_share": 0.017,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -175,24 +193,62 @@
       "수유용품",
       "유아용 물티슈"
     ],
-    "investor_note": "메디앙스는 닥터아토, 더퓨어, B&B 등 스킨케어·수유용품 브랜드와 타티네 쇼콜라·뮤아 등 유아동 패션 브랜드를 함께 운영하는 유아 토털문화기업입니다. 매출의 약 78%는 스킨케어·수유용품 등 모자생활 사업에서, 21%는 유아동의류 패션 사업에서 나옵니다. 과거 공시 기반 참고 정보로, 2025년 연결 매출액은 487억 원으로 전년과 비슷한 수준(-0.4%)을 유지했고, 영업손실과 당기순손실 모두 전년보다 적자폭이 줄었습니다(영업이익 -11억 원, 순이익 -60억 원). 부채비율은 60.3%로 관리 가능한 수준이지만 여전히 적자 상태라는 점은 유의할 필요가 있습니다."
+    "investor_note": "메디앙스는 닥터아토, 더퓨어, B&B 등 스킨케어·수유용품 브랜드와 타티네 쇼콜라·뮤아 등 유아동 패션 브랜드를 함께 운영하는 유아 토털문화기업입니다. 매출의 약 78%는 스킨케어·수유용품 등 모자생활 사업에서, 21%는 유아동의류 패션 사업에서 나옵니다. 과거 공시 기반 참고 정보로, 2025년 연결 매출액은 487억 원으로 전년과 비슷한 수준(-0.4%)을 유지했고, 영업손실과 당기순손실 모두 전년보다 적자폭이 줄었습니다(영업이익 -11억 원, 순이익 -60억 원). 부채비율은 60.3%로 관리 가능한 수준이지만 여전히 적자 상태라는 점은 유의할 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "모자생활BU",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.7%",
+        "revenue_share": 0.137,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "수유용품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.005,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "생활건강",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 61.5%",
+        "revenue_share": 0.615,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "완구&발육",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.7%",
+        "revenue_share": 0.017,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "모자생활BU",
-      "caption": "스킨케어(닥터아토·더퓨어)·수유용품·생활건강(B&B 세제 등)",
-      "kind": "consumer",
-      "visual": "모자생활BU",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "패션BU",
-      "caption": "유아동의류(타티네 쇼콜라, 뮤아 등)",
+      "title": "생활건강",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 61.5%",
       "kind": "service",
-      "visual": "패션BU",
-      "image": "../data/business_images/business_image_local_fashion.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "완구&발육",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -156,13 +156,31 @@
     "segment_breakdown": [
       {
         "name": "내화물부문",
-        "desc": "내화물부문 관련 제품·서비스",
-        "revenue_share": null
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 84.9%",
+        "revenue_share": 0.849,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "스틸부문",
-        "desc": "스틸부문 관련 제품·서비스",
-        "revenue_share": null
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.6%",
+        "revenue_share": 0.186,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "IT부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.1%",
+        "revenue_share": 0.111,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -179,40 +197,70 @@
       "파이프(단관",
       "각관)"
     ],
-    "investor_note": "제품을 만들고 판매하는 제조 기반 회사입니다. 제품 등의 가격변동 추이 IT부문은 규격화되고 표준화된 서비스가 아니라 고객의 상황과 요구사항에 따라 서비스를 제공하는 맞춤형 서비스를 제공하고 있고, 매출은 투입되는 원가에 일정 마진을 가산하여 제안 후 고객과 협의를 통해 가격을 확정하기 때문에 가격변동추이 등을 산정하기 어렵습니다. 최적의 정보기술 역량을 바탕으로 고객사의 비즈니스 환경에 최적화된 맞춤형 IT 서비스를 제공하며 디지털 경쟁력 확보를 지원합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "제품을 만들고 판매하는 제조 기반 회사입니다. 제품 등의 가격변동 추이 IT부문은 규격화되고 표준화된 서비스가 아니라 고객의 상황과 요구사항에 따라 서비스를 제공하는 맞춤형 서비스를 제공하고 있고, 매출은 투입되는 원가에 일정 마진을 가산하여 제안 후 고객과 협의를 통해 가격을 확정하기 때문에 가격변동추이 등을 산정하기 어렵습니다. 최적의 정보기술 역량을 바탕으로 고객사의 비즈니스 환경에 최적화된 맞춤형 IT 서비스를 제공하며 디지털 경쟁력 확보를 지원합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "내화물부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 84.9%",
+        "revenue_share": 0.849,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "스틸부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.6%",
+        "revenue_share": 0.186,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "IT부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.1%",
+        "revenue_share": 0.111,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "데이터센터",
-      "caption": "데이터센터 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "내화물부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 84.9%",
       "kind": "material",
       "visual": "MAT",
-      "image": "../data/business_images/business_image_local_datacenter.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "철강",
-      "caption": "철강 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "스틸부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.6%",
       "kind": "material",
       "visual": "MAT",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "아연",
-      "caption": "아연 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "IT부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.1%",
       "kind": "material",
       "visual": "MAT",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "비철금속",
-      "caption": "비철금속 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "총 계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
       "kind": "material",
       "visual": "MAT",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

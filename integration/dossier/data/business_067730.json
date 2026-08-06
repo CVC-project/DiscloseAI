@@ -155,19 +155,32 @@
     "segment_finance": "로지시스는 금융권 전산장비 유지보수와 VAN(부가가치통신망) 대행관리를 주력으로 하는 IT 서비스 기업입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 485억 원으로 전년 대비 13.3% 늘었고 영업이익과 순이익도 각각 20.6%, 36.9% 증가해 외형과 수익성이 함께 개선됐습니다. 부채비율은 42.1%로 재무구조도 비교적 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "전산장비 유지보수",
-        "desc": "은행 등 금융기관 전산시스템의 장애처리·점검·설치지원",
-        "revenue_share": 0.524
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 52.4%",
+        "revenue_share": 0.524,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "VAN 대행관리",
-        "desc": "편의점 등 현금지급기(CD/ATM)의 현금 장입·회수·장애처리 대행",
-        "revenue_share": 0.471
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 47.1%",
+        "revenue_share": 0.471,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "상품(전산장비 판매)",
-        "desc": "전산장비 및 주변기기 공급",
-        "revenue_share": 0.005
+        "name": "용역 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.5%",
+        "revenue_share": 0.995,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.005,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -176,40 +189,62 @@
       "현금물류 대행용역",
       "전산장비·주변기기 판매"
     ],
-    "investor_note": "로지시스는 금융권 전산장비 유지보수와 VAN(부가가치통신망) 대행관리를 주력으로 하는 IT 서비스 기업입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 485억 원으로 전년 대비 13.3% 늘었고 영업이익과 순이익도 각각 20.6%, 36.9% 증가해 외형과 수익성이 함께 개선됐습니다. 부채비율은 42.1%로 재무구조도 비교적 안정적인 편입니다."
+    "investor_note": "로지시스는 금융권 전산장비 유지보수와 VAN(부가가치통신망) 대행관리를 주력으로 하는 IT 서비스 기업입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 485억 원으로 전년 대비 13.3% 늘었고 영업이익과 순이익도 각각 20.6%, 36.9% 증가해 외형과 수익성이 함께 개선됐습니다. 부채비율은 42.1%로 재무구조도 비교적 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 52.4%",
+        "revenue_share": 0.524,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "VAN 대행관리",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 47.1%",
+        "revenue_share": 0.471,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.5%",
+        "revenue_share": 0.995,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.005,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "시스템 유지보수",
-      "caption": "고객사의 업무 시스템과 장비가 안정적으로 돌아가도록 운영·점검하는 IT 서비스입니다.",
+      "title": "용역",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 52.4%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "VAN 대행관리",
-      "caption": "VAN 대행관리 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 47.1%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "현금물류 대행용역",
-      "caption": "현금물류 대행용역 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "용역 계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.5%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "전산장비·주변기기 판매",
-      "caption": "전산장비·주변기기 판매 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

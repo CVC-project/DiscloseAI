@@ -155,9 +155,25 @@
     "segment_finance": "(주)중앙백신연구소의 주요 제품·서비스는 의약품, CDMO, 증가율, 양돈백신, PED-X, PED-X Live입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 논산에는 조류백신 Bulk 생산, 백신실험을 위한 시설, 완제품을 보관할 수 있는 창고를 갖추고 있으며, 2025년 중 일부 완제품 포장 설비를 도입하였고 현재 제조업 변경 승인 진행중입니다. 원재료 등의 가격변동추이 당 사의 주요판매품인 양돈백신과 양계백신의 공정개선을 통한 원자재 사용량 감소를 통하여 원자재 금액을 감소시켰으나, 지속적인 생산자 물가상승 및 환율변동 등의 영향으로 일부 원부자재의 단가 인상 및 공급 불안정 위험이 잠재되어있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "단일부문(동물약품)",
-        "desc": "동물약품 관련 제품·서비스",
-        "revenue_share": null
+        "name": "가금백신",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.9%",
+        "revenue_share": 0.059,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "애견백신",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.9%",
+        "revenue_share": 0.239,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "고양이백신",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.8%",
+        "revenue_share": 0.038,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -173,24 +189,62 @@
       "품목 규격",
       "동물약품"
     ],
-    "investor_note": "(주)중앙백신연구소의 주요 제품·서비스는 의약품, CDMO, 증가율, 양돈백신, PED-X, PED-X Live입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 논산에는 조류백신 Bulk 생산, 백신실험을 위한 시설, 완제품을 보관할 수 있는 창고를 갖추고 있으며, 2025년 중 일부 완제품 포장 설비를 도입하였고 현재 제조업 변경 승인 진행중입니다. 원재료 등의 가격변동추이 당 사의 주요판매품인 양돈백신과 양계백신의 공정개선을 통한 원자재 사용량 감소를 통하여 원자재 금액을 감소시켰으나, 지속적인 생산자 물가상승 및 환율변동 등의 영향으로 일부 원부자재의 단가 인상 및 공급 불안정 위험이 잠재되어있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)중앙백신연구소의 주요 제품·서비스는 의약품, CDMO, 증가율, 양돈백신, PED-X, PED-X Live입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 논산에는 조류백신 Bulk 생산, 백신실험을 위한 시설, 완제품을 보관할 수 있는 창고를 갖추고 있으며, 2025년 중 일부 완제품 포장 설비를 도입하였고 현재 제조업 변경 승인 진행중입니다. 원재료 등의 가격변동추이 당 사의 주요판매품인 양돈백신과 양계백신의 공정개선을 통한 원자재 사용량 감소를 통하여 원자재 금액을 감소시켰으나, 지속적인 생산자 물가상승 및 환율변동 등의 영향으로 일부 원부자재의 단가 인상 및 공급 불안정 위험이 잠재되어있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.5%",
+        "revenue_share": 0.035,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "가금백신",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.9%",
+        "revenue_share": 0.059,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "애견백신",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.9%",
+        "revenue_share": 0.239,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "고양이백신",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.8%",
+        "revenue_share": 0.038,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "동물약품(단일사업)",
-      "caption": "동물약품 관련 제품·서비스",
-      "kind": "service",
-      "visual": "동물약품",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "가금백신",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.9%",
+      "kind": "bio",
+      "visual": "BIO",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "단일부문(동물약품)",
-      "caption": "동물약품 관련 제품·서비스",
-      "kind": "service",
-      "visual": "단일부문",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "애견백신",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.9%",
+      "kind": "bio",
+      "visual": "BIO",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "고양이백신",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.8%",
+      "kind": "bio",
+      "visual": "BIO",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

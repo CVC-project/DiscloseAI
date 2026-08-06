@@ -155,14 +155,18 @@
     "segment_finance": "주식회사 에코앤드림의 주요 사업은 이차전지소재부문, 저감사업, 엔진교체사업, 정책사업 등입니다. DOC, DPF, SCR, TWC 등의 제품군이 있으며 적용분야를 확대하여 선박용 SCR, GHP(가스히트펌프) 냉난방기용 등 국내 제조사를 고객으로 확보하고 신규 물량 확대를 위해 노력하고 있습니다.촉매시스템 사업은 국가의 예산을 통해 이루어지는 환경부 운행차 배출가스 저감장치 사업입니다. 또한 지속적인 연구개발 및 생산설비 투자로 빠르게 변화하는 이차전지 기술 시장에 적극적으로 대응하고자 노력하고 있습니다.",
     "segment_breakdown": [
       {
-        "name": "이차전지소재부문",
-        "desc": "이차전지소재부문, 이차전지소재 관련 제품·서비스",
-        "revenue_share": null
+        "name": "이차전지소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 66.0%",
+        "revenue_share": 0.66,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "촉매소재부문",
-        "desc": "촉매소재 관련 제품·서비스",
-        "revenue_share": null
+        "name": "촉매소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.0%",
+        "revenue_share": 0.22,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -179,24 +183,40 @@
       "제품설명",
       "촉매 시스템-A제품(대)"
     ],
-    "investor_note": "주식회사 에코앤드림의 주요 사업은 이차전지소재부문, 저감사업, 엔진교체사업, 정책사업 등입니다. DOC, DPF, SCR, TWC 등의 제품군이 있으며 적용분야를 확대하여 선박용 SCR, GHP(가스히트펌프) 냉난방기용 등 국내 제조사를 고객으로 확보하고 신규 물량 확대를 위해 노력하고 있습니다.촉매시스템 사업은 국가의 예산을 통해 이루어지는 환경부 운행차 배출가스 저감장치 사업입니다. 또한 지속적인 연구개발 및 생산설비 투자로 빠르게 변화하는 이차전지 기술 시장에 적극적으로 대응하고자 노력하고 있습니다."
+    "investor_note": "주식회사 에코앤드림의 주요 사업은 이차전지소재부문, 저감사업, 엔진교체사업, 정책사업 등입니다. DOC, DPF, SCR, TWC 등의 제품군이 있으며 적용분야를 확대하여 선박용 SCR, GHP(가스히트펌프) 냉난방기용 등 국내 제조사를 고객으로 확보하고 신규 물량 확대를 위해 노력하고 있습니다.촉매시스템 사업은 국가의 예산을 통해 이루어지는 환경부 운행차 배출가스 저감장치 사업입니다. 또한 지속적인 연구개발 및 생산설비 투자로 빠르게 변화하는 이차전지 기술 시장에 적극적으로 대응하고자 노력하고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "이차전지소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 66.0%",
+        "revenue_share": 0.66,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "촉매소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.0%",
+        "revenue_share": 0.22,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "이차전지소재부문",
-      "caption": "이차전지소재부문, 이차전지소재 관련 제품·서비스",
-      "kind": "material",
-      "visual": "이차전지소재부문",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "title": "이차전지소재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 66.0%",
+      "kind": "battery",
+      "visual": "BATTERY",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "일차전지 및 이차전지 제조업",
-      "caption": "일차전지 및 이차전지 제조업을 중심으로 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "title": "촉매소재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.0%",
+      "kind": "battery",
+      "visual": "BATTERY",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

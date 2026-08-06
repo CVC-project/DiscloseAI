@@ -156,8 +156,31 @@
     "segment_breakdown": [
       {
         "name": "전자부품소재",
-        "desc": "전자부품소재 관련 제품·서비스",
-        "revenue_share": null
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.7%",
+        "revenue_share": 0.0474,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.0013,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동차부품소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.9%",
+        "revenue_share": 0.2692,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "반도체소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.6%",
+        "revenue_share": 0.5365,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -173,40 +196,62 @@
       "제품표시라벨",
       "자동차부품소재"
     ],
-    "investor_note": "케이엔더블유의 주요 사업은 부문간 수익, 전자부품소재, 반도체소재부문입니다. 수주상황 - 당사 및 종속회사의 사업은 수주로 진행하지 않고 고객사에서 수시로 PO 발주하고 있습니다. 매출처 - 연결기준, 매출액의 10% 이상을 차지하는 외부 고객과 관련된 매출비중은 다음과 같습니다."
+    "investor_note": "케이엔더블유의 주요 사업은 부문간 수익, 전자부품소재, 반도체소재부문입니다. 수주상황 - 당사 및 종속회사의 사업은 수주로 진행하지 않고 고객사에서 수시로 PO 발주하고 있습니다. 매출처 - 연결기준, 매출액의 10% 이상을 차지하는 외부 고객과 관련된 매출비중은 다음과 같습니다.",
+    "product_service_segments": [
+      {
+        "name": "전자부품소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.7%",
+        "revenue_share": 0.0474,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.0013,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동차부품소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.9%",
+        "revenue_share": 0.2692,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "반도체소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.6%",
+        "revenue_share": 0.5365,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
-      "kind": "display",
-      "visual": "OLED",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
+      "title": "전자부품소재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.7%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "MLCC",
-      "caption": "MLCC 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "자동차부품소재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.9%",
       "kind": "auto",
       "visual": "AUTO",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "배터리",
-      "caption": "배터리 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "전자부품소재",
-      "caption": "전자부품소재 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "auto",
-      "visual": "AUTO",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "title": "반도체소재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.6%",
+      "kind": "chip",
+      "visual": "CHIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

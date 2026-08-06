@@ -155,14 +155,32 @@
     "segment_finance": "계약을 따낸 뒤 제작·공사·납품을 거쳐 매출을 만듭니다. 종속회사에 포함된 회사들이 영위하는 PC구조물생산업(에이치디씨현대피씨이㈜)과 호텔서비스업(호텔에이치디씨㈜), 주거용건물 개발 및 공급업(㈜에이치디씨아이파크제1호위탁관리부동산투자회사, ㈜에이치디씨아이파크제2호위탁관리부동산투자회사) 등이 있으며, 각 부문별 특징은 아래와 같습니다. 발주처는 공공기관 또는 민간기업 등이며 당사는 수주 이후 건축물을 시공하여 발주처에 공급합니다. 수주형 사업은 계약 규모뿐 아니라 납기, 원가, 프로젝트 구성이 이익을 좌우합니다.",
     "segment_breakdown": [
       {
-        "name": "단기투자증권",
-        "desc": "위탁매매, IB, 운용 등 증권 서비스",
-        "revenue_share": null
+        "name": "건설",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 60.6%",
+        "revenue_share": 0.606,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "장기투자증권",
-        "desc": "위탁매매, IB, 운용 등 증권 서비스",
-        "revenue_share": null
+        "name": "토목",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.7%",
+        "revenue_share": 0.067,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "해외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.005,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "일반건축",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.8%",
+        "revenue_share": 0.038,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,32 +192,54 @@
       "공급업 등",
       "매입액"
     ],
-    "investor_note": "계약을 따낸 뒤 제작·공사·납품을 거쳐 매출을 만듭니다. 종속회사에 포함된 회사들이 영위하는 PC구조물생산업(에이치디씨현대피씨이㈜)과 호텔서비스업(호텔에이치디씨㈜), 주거용건물 개발 및 공급업(㈜에이치디씨아이파크제1호위탁관리부동산투자회사, ㈜에이치디씨아이파크제2호위탁관리부동산투자회사) 등이 있으며, 각 부문별 특징은 아래와 같습니다. 발주처는 공공기관 또는 민간기업 등이며 당사는 수주 이후 건축물을 시공하여 발주처에 공급합니다. 수주형 사업은 계약 규모뿐 아니라 납기, 원가, 프로젝트 구성이 이익을 좌우합니다."
+    "investor_note": "계약을 따낸 뒤 제작·공사·납품을 거쳐 매출을 만듭니다. 종속회사에 포함된 회사들이 영위하는 PC구조물생산업(에이치디씨현대피씨이㈜)과 호텔서비스업(호텔에이치디씨㈜), 주거용건물 개발 및 공급업(㈜에이치디씨아이파크제1호위탁관리부동산투자회사, ㈜에이치디씨아이파크제2호위탁관리부동산투자회사) 등이 있으며, 각 부문별 특징은 아래와 같습니다. 발주처는 공공기관 또는 민간기업 등이며 당사는 수주 이후 건축물을 시공하여 발주처에 공급합니다. 수주형 사업은 계약 규모뿐 아니라 납기, 원가, 프로젝트 구성이 이익을 좌우합니다.",
+    "product_service_segments": [
+      {
+        "name": "건설",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 60.6%",
+        "revenue_share": 0.606,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "토목",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.7%",
+        "revenue_share": 0.067,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "해외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.005,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "일반건축",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.8%",
+        "revenue_share": 0.038,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "PC구조물 생산업",
-      "caption": "PC구조물 생산업 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "건축·주택",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 60.6%",
       "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "호텔서비스업",
-      "caption": "호텔서비스업 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "토목·플랜트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.7%",
       "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "공급업 등",
-      "caption": "공급업 등 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_5184e050831a4460.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

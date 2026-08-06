@@ -123,19 +123,25 @@
     "segment_finance": "워트 주식회사의 주요 사업은 HBM, OLED, 방산, 제품개발입니다. 당사의 장비는 통상적으로 고객의 주문 후 늦어도 2~3개월 이내에 납품이 되고 있어 중장기적인 수주잔고는 당사의 사업 특성상 해당사항이 없습니다.",
     "segment_breakdown": [
       {
-        "name": "HBM",
-        "desc": "HBM 관련 제품·서비스",
-        "revenue_share": null
+        "name": "FFU",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.3%",
+        "revenue_share": 0.1327,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "OLED",
-        "desc": "OLED 관련 제품·서비스",
-        "revenue_share": null
+        "name": "TCU",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+        "revenue_share": 0.0265,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "방산",
-        "desc": "방산 관련 제품·서비스",
-        "revenue_share": null
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.7%",
+        "revenue_share": 0.0371,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -149,24 +155,62 @@
       "초정밀 온습도 제어장비",
       "기대효과"
     ],
-    "investor_note": "워트 주식회사의 주요 사업은 HBM, OLED, 방산, 제품개발입니다. 당사의 장비는 통상적으로 고객의 주문 후 늦어도 2~3개월 이내에 납품이 되고 있어 중장기적인 수주잔고는 당사의 사업 특성상 해당사항이 없습니다."
+    "investor_note": "워트 주식회사의 주요 사업은 HBM, OLED, 방산, 제품개발입니다. 당사의 장비는 통상적으로 고객의 주문 후 늦어도 2~3개월 이내에 납품이 되고 있어 중장기적인 수주잔고는 당사의 사업 특성상 해당사항이 없습니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 73.0%",
+        "revenue_share": 0.7302,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "FFU",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.3%",
+        "revenue_share": 0.1327,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "TCU",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+        "revenue_share": 0.0265,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.7%",
+        "revenue_share": 0.0371,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "OLED",
-      "caption": "OLED 관련 제품·서비스",
-      "kind": "display",
-      "visual": "OLED",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
-      "image_source": "Wikimedia Commons"
+      "title": "FFU",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.3%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "방산",
-      "caption": "방산 관련 제품·서비스",
+      "title": "TCU",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
       "kind": "service",
-      "visual": "방산",
-      "image": "../data/business_images/business_image_4ae102473975707c.jpg",
-      "image_source": "Wikimedia Commons"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

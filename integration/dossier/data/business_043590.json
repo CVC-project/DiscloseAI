@@ -153,7 +153,36 @@
   "snippets": {
     "overview": "매출은 자동차사업부가 62%로 가장 크고 반도체사업부(36%)가 뒤를 이으며, 전자사업부는 축소되는 추세입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 213억 원으로 전년 대비 28.4% 줄었지만 영업손실은 -21억 원으로 적자폭이 줄었고 당기순손실도 -32억 원으로 개선됐습니다. 부채비율은 61.9%로 무난한 수준입니다. 참고로 회사는 과거 2020~2021년 법정관리(회생절차)를 거친 이력이 있어 재무 안정성을 특히 꼼꼼히 살펴볼 필요가 있습니다.",
     "segment_finance": "매출은 자동차사업부가 62%로 가장 크고 반도체사업부(36%)가 뒤를 이으며, 전자사업부는 축소되는 추세입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 213억 원으로 전년 대비 28.4% 줄었지만 영업손실은 -21억 원으로 적자폭이 줄었고 당기순손실도 -32억 원으로 개선됐습니다. 부채비율은 61.9%로 무난한 수준입니다. 참고로 회사는 과거 2020~2021년 법정관리(회생절차)를 거친 이력이 있어 재무 안정성을 특히 꼼꼼히 살펴볼 필요가 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.9%",
+        "revenue_share": 0.359,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "주문생산",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.3%",
+        "revenue_share": 0.023,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "단 순 합 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총 합 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "Display Driver IC(DDI) 설계",
       "Touch Screen Controller IC 설계",
@@ -162,24 +191,62 @@
       "무선충전 부품",
       "전기차 구동모터·인버터용 사출부품"
     ],
-    "investor_note": "매출은 자동차사업부가 62%로 가장 크고 반도체사업부(36%)가 뒤를 이으며, 전자사업부는 축소되는 추세입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 213억 원으로 전년 대비 28.4% 줄었지만 영업손실은 -21억 원으로 적자폭이 줄었고 당기순손실도 -32억 원으로 개선됐습니다. 부채비율은 61.9%로 무난한 수준입니다. 참고로 회사는 과거 2020~2021년 법정관리(회생절차)를 거친 이력이 있어 재무 안정성을 특히 꼼꼼히 살펴볼 필요가 있습니다."
+    "investor_note": "매출은 자동차사업부가 62%로 가장 크고 반도체사업부(36%)가 뒤를 이으며, 전자사업부는 축소되는 추세입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 213억 원으로 전년 대비 28.4% 줄었지만 영업손실은 -21억 원으로 적자폭이 줄었고 당기순손실도 -32억 원으로 개선됐습니다. 부채비율은 61.9%로 무난한 수준입니다. 참고로 회사는 과거 2020~2021년 법정관리(회생절차)를 거친 이력이 있어 재무 안정성을 특히 꼼꼼히 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.9%",
+        "revenue_share": 0.359,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "주문생산",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.3%",
+        "revenue_share": 0.023,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "단 순 합 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총 합 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "반도체사업부",
-      "caption": "Driver IC·Touch IC 설계 및 패키징(팹리스)",
+      "title": "주문생산",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.3%",
       "kind": "chip",
-      "visual": "반도체사업부",
-      "image": "../data/business_images/business_image_local_semiconductor_pkg.svg",
-      "image_source": "Local curated visual"
+      "visual": "CHIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "전자사업부",
-      "caption": "Transformer&Coil, 무선충전 부품",
-      "kind": "auto",
-      "visual": "전자사업부",
-      "image": "../data/business_images/business_image_local_semiconductor_part.svg",
-      "image_source": "Local curated visual"
+      "title": "단 순 합 계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+      "kind": "chip",
+      "visual": "CHIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "총 합 계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+      "kind": "chip",
+      "visual": "CHIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

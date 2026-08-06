@@ -153,7 +153,29 @@
   "snippets": {
     "overview": "삼일씨엔에스는 건축물 기초에 쓰이는 콘크리트파일·PC(프리캐스트 콘크리트) 등 콘크리트사업(43%)과 해상풍력 발전기 부품인 트랜지션피스·강교를 만드는 풍력·스틸사업(49%), 건설용 골재사업(8%)을 함께 운영하는 건자재 기업입니다. 특히 해상풍력 트랜지션피스는 국제 인증과 고도의 용접 기술이 필요한 사업으로, 전 세계 재생에너지 확대에 따라 시장이 커지고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,231억 원으로 전년 대비 0.8% 늘었고, 영업이익과 당기순이익 모두 적자에서 흑자로 전환했습니다. 부채비율은 64.4%로 비교적 안정적인 수준입니다.",
     "segment_finance": "삼일씨엔에스는 건축물 기초에 쓰이는 콘크리트파일·PC(프리캐스트 콘크리트) 등 콘크리트사업(43%)과 해상풍력 발전기 부품인 트랜지션피스·강교를 만드는 풍력·스틸사업(49%), 건설용 골재사업(8%)을 함께 운영하는 건자재 기업입니다. 특히 해상풍력 트랜지션피스는 국제 인증과 고도의 용접 기술이 필요한 사업으로, 전 세계 재생에너지 확대에 따라 시장이 커지고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,231억 원으로 전년 대비 0.8% 늘었고, 영업이익과 당기순이익 모두 적자에서 흑자로 전환했습니다. 부채비율은 64.4%로 비교적 안정적인 수준입니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "콘크리트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 43.0%",
+        "revenue_share": 0.43,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "풍력.스 틸",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.0%",
+        "revenue_share": 0.49,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "골재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+        "revenue_share": 0.08,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "콘크리트파일(PHC PILE)",
       "PC(프리캐스트 콘크리트)",
@@ -161,40 +183,55 @@
       "강교",
       "골재"
     ],
-    "investor_note": "삼일씨엔에스는 건축물 기초에 쓰이는 콘크리트파일·PC(프리캐스트 콘크리트) 등 콘크리트사업(43%)과 해상풍력 발전기 부품인 트랜지션피스·강교를 만드는 풍력·스틸사업(49%), 건설용 골재사업(8%)을 함께 운영하는 건자재 기업입니다. 특히 해상풍력 트랜지션피스는 국제 인증과 고도의 용접 기술이 필요한 사업으로, 전 세계 재생에너지 확대에 따라 시장이 커지고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,231억 원으로 전년 대비 0.8% 늘었고, 영업이익과 당기순이익 모두 적자에서 흑자로 전환했습니다. 부채비율은 64.4%로 비교적 안정적인 수준입니다."
+    "investor_note": "삼일씨엔에스는 건축물 기초에 쓰이는 콘크리트파일·PC(프리캐스트 콘크리트) 등 콘크리트사업(43%)과 해상풍력 발전기 부품인 트랜지션피스·강교를 만드는 풍력·스틸사업(49%), 건설용 골재사업(8%)을 함께 운영하는 건자재 기업입니다. 특히 해상풍력 트랜지션피스는 국제 인증과 고도의 용접 기술이 필요한 사업으로, 전 세계 재생에너지 확대에 따라 시장이 커지고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,231억 원으로 전년 대비 0.8% 늘었고, 영업이익과 당기순이익 모두 적자에서 흑자로 전환했습니다. 부채비율은 64.4%로 비교적 안정적인 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "콘크리트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 43.0%",
+        "revenue_share": 0.43,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "풍력.스 틸",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.0%",
+        "revenue_share": 0.49,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "골재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+        "revenue_share": 0.08,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
+      "title": "콘크리트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 43.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "신재생에너지",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.0%",
+      "kind": "power",
+      "visual": "RENEWABLE",
+      "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
       "title": "골재",
-      "caption": "골재 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_cement.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "콘크리트파일(PHC PILE)",
-      "caption": "콘크리트파일(PHC PILE) 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_cement.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "PC(프리캐스트 콘크리트)",
-      "caption": "PC(프리캐스트 콘크리트) 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_cement.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "해상풍력 트랜지션피스",
-      "caption": "해상풍력 트랜지션피스 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_cement.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

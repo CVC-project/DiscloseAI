@@ -155,9 +155,18 @@
     "segment_finance": "대한제강은 철스크랩을 원료로 빌릿을 만들고 이를 압연해 철근을 생산하는 전기로 제강회사로, 2020년 동종업체 와이케이스틸 지분을 인수해 국내 철근 생산 3위권 지위를 다지고 있습니다. 매출의 99% 이상이 제강·압연(철근) 사업에서 나오며, 물류 자회사 대한네트웍스도 함께 운영합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 2,470억 원으로 전년 대비 1.8% 늘었지만 영업이익은 28억 원 적자로 전환했고, 당기순이익도 138억 원으로 65.4% 줄었습니다. 부채비율은 34.4%로 관리 가능한 수준이나 수익성 저하는 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "제강/압연",
-        "desc": "철스크랩으로 빌릿을 만들고 철근으로 압연·판매",
-        "revenue_share": 0.9933
+        "name": "대한제강(주)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.3%",
+        "revenue_share": 0.9933,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "와이케이스틸(주)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.6%",
+        "revenue_share": 0.9959,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -166,24 +175,40 @@
       "Bar-in-Coil",
       "빌릿"
     ],
-    "investor_note": "대한제강은 철스크랩을 원료로 빌릿을 만들고 이를 압연해 철근을 생산하는 전기로 제강회사로, 2020년 동종업체 와이케이스틸 지분을 인수해 국내 철근 생산 3위권 지위를 다지고 있습니다. 매출의 99% 이상이 제강·압연(철근) 사업에서 나오며, 물류 자회사 대한네트웍스도 함께 운영합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 2,470억 원으로 전년 대비 1.8% 늘었지만 영업이익은 28억 원 적자로 전환했고, 당기순이익도 138억 원으로 65.4% 줄었습니다. 부채비율은 34.4%로 관리 가능한 수준이나 수익성 저하는 살펴볼 필요가 있습니다."
+    "investor_note": "대한제강은 철스크랩을 원료로 빌릿을 만들고 이를 압연해 철근을 생산하는 전기로 제강회사로, 2020년 동종업체 와이케이스틸 지분을 인수해 국내 철근 생산 3위권 지위를 다지고 있습니다. 매출의 99% 이상이 제강·압연(철근) 사업에서 나오며, 물류 자회사 대한네트웍스도 함께 운영합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 2,470억 원으로 전년 대비 1.8% 늘었지만 영업이익은 28억 원 적자로 전환했고, 당기순이익도 138억 원으로 65.4% 줄었습니다. 부채비율은 34.4%로 관리 가능한 수준이나 수익성 저하는 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "대한제강(주)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.3%",
+        "revenue_share": 0.9933,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "와이케이스틸(주)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.6%",
+        "revenue_share": 0.9959,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "제강/압연",
-      "caption": "철스크랩으로 빌릿을 만들고 철근으로 압연·판매",
-      "kind": "service",
-      "visual": "제강",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "title": "대한제강(주)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.3%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "1차 철강 제조업",
-      "caption": "1차 철강 제조업을 중심으로 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "title": "와이케이스틸(주)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.6%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

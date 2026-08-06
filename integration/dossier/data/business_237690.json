@@ -153,7 +153,29 @@
   "snippets": {
     "overview": "에스티팜(주)의 주요 제품·서비스는 화학제품, 의약품, CDMO, 신약API, 직판(본사->고객사), 납기입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 지속적인 연구 개발을 통해 30종 이상의 in-house 5' Cap 유도체를 개발하였으며, 고객 맞춤형 5' Cap 생산 서비스를 제공하고자 노력하고 있습니다. 회사는 이처럼 높은 부가가치가 기대되는 새로운 분야에 진출하기 위해 sgRNA 전용 GMP 생산라인을 설치하여 유전자치료제 CDMO로서의 시장 점유율과 기술 경쟁력을 확대해 나가고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "에스티팜(주)의 주요 제품·서비스는 화학제품, 의약품, CDMO, 신약API, 직판(본사->고객사), 납기입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 지속적인 연구 개발을 통해 30종 이상의 in-house 5' Cap 유도체를 개발하였으며, 고객 맞춤형 5' Cap 생산 서비스를 제공하고자 노력하고 있습니다. 회사는 이처럼 높은 부가가치가 기대되는 새로운 분야에 진출하기 위해 sgRNA 전용 GMP 생산라인을 설치하여 유전자치료제 CDMO로서의 시장 점유율과 기술 경쟁력을 확대해 나가고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "제네릭API",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.5%",
+        "revenue_share": 0.1455,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.4%",
+        "revenue_share": 0.0045,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.7%",
+        "revenue_share": 0.187,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "화학제품",
       "의약품",
@@ -167,32 +189,54 @@
       "계약체결일",
       "계약종료일"
     ],
-    "investor_note": "에스티팜(주)의 주요 제품·서비스는 화학제품, 의약품, CDMO, 신약API, 직판(본사->고객사), 납기입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 지속적인 연구 개발을 통해 30종 이상의 in-house 5' Cap 유도체를 개발하였으며, 고객 맞춤형 5' Cap 생산 서비스를 제공하고자 노력하고 있습니다. 회사는 이처럼 높은 부가가치가 기대되는 새로운 분야에 진출하기 위해 sgRNA 전용 GMP 생산라인을 설치하여 유전자치료제 CDMO로서의 시장 점유율과 기술 경쟁력을 확대해 나가고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "에스티팜(주)의 주요 제품·서비스는 화학제품, 의약품, CDMO, 신약API, 직판(본사->고객사), 납기입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 지속적인 연구 개발을 통해 30종 이상의 in-house 5' Cap 유도체를 개발하였으며, 고객 맞춤형 5' Cap 생산 서비스를 제공하고자 노력하고 있습니다. 회사는 이처럼 높은 부가가치가 기대되는 새로운 분야에 진출하기 위해 sgRNA 전용 GMP 생산라인을 설치하여 유전자치료제 CDMO로서의 시장 점유율과 기술 경쟁력을 확대해 나가고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 66.2%",
+        "revenue_share": 0.6625,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제네릭API",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.5%",
+        "revenue_share": 0.1455,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.4%",
+        "revenue_share": 0.0045,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.7%",
+        "revenue_share": 0.187,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "화학제품",
-      "caption": "화학제품 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "제네릭API",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "의약품",
-      "caption": "의약품 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "신약API",
-      "caption": "신약API 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "용역",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

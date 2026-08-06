@@ -155,14 +155,18 @@
     "segment_finance": "2025년 매출액은 6,262억 원(+10.2%), 영업이익 419억 원(+17.7%), 당기순이익 211억 원(+15.8%)으로 모두 성장했습니다. 총자산은 5,158억 원(+7.7%)이며 부채비율은 288.0%로 자본보다 빚이 많고 ROE는 17.7%입니다. 감사보고서가 첨부되지 않아 감사의견은 확인할 수 없었습니다. 과거 공시 기반 참고 정보입니다.",
     "segment_breakdown": [
       {
-        "name": "자동차부품",
-        "desc": "현대·기아차 등에 공급하는 DOOR FRAME·시트프레임 등 프레스 부품",
-        "revenue_share": 0.948
+        "name": "강관",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.5%",
+        "revenue_share": 0.045,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "강관",
-        "desc": "건설·부품용 산업용 강관(대구공장)",
-        "revenue_share": 0.052
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.1%",
+        "revenue_share": 0.011,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -175,22 +179,45 @@
       "BATTERY FRAME(전기차용)",
       "산업용 강관"
     ],
-    "investor_note": "2025년 매출액은 6,262억 원(+10.2%), 영업이익 419억 원(+17.7%), 당기순이익 211억 원(+15.8%)으로 모두 성장했습니다. 총자산은 5,158억 원(+7.7%)이며 부채비율은 288.0%로 자본보다 빚이 많고 ROE는 17.7%입니다. 감사보고서가 첨부되지 않아 감사의견은 확인할 수 없었습니다. 과거 공시 기반 참고 정보입니다."
+    "investor_note": "2025년 매출액은 6,262억 원(+10.2%), 영업이익 419억 원(+17.7%), 당기순이익 211억 원(+15.8%)으로 모두 성장했습니다. 총자산은 5,158억 원(+7.7%)이며 부채비율은 288.0%로 자본보다 빚이 많고 ROE는 17.7%입니다. 감사보고서가 첨부되지 않아 감사의견은 확인할 수 없었습니다. 과거 공시 기반 참고 정보입니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 92.8%",
+        "revenue_share": 0.928,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "강관",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.5%",
+        "revenue_share": 0.045,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.1%",
+        "revenue_share": 0.011,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "강관",
-      "caption": "건설·부품용 산업용 강관(대구공장)",
-      "kind": "auto",
-      "visual": "강관",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
+      "title": "철강",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.5%",
+      "kind": "material",
+      "visual": "STEEL",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "자동차 신품 부품 제조업",
-      "caption": "자동차 신품 부품 제조업을 중심으로 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.1%",
+      "kind": "auto",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     }

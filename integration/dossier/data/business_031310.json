@@ -155,9 +155,18 @@
     "segment_finance": "아이즈비전은 SKT·KT·LGU+ 망을 임차해 서비스하는 알뜰폰(MVNO) 아이즈모바일을 운영하는 통신사업자로, 자회사 머큐리를 통한 유무선공유기·광케이블 등 통신장비 제조가 매출의 약 64%를 차지하고, 집진기·환경계측기(리트코)와 가정간편식(HMR) 사업도 함께 하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액(연결)은 1,943억 원으로 전년 대비 6.3% 늘었고 영업이익은 229.6% 급증했으며, 당기순이익도 88억 원으로 흑자 전환했습니다. 부채비율은 38.4%로 무난한 수준입니다.",
     "segment_breakdown": [
       {
-        "name": "정보통신기기 제조",
-        "desc": "유무선공유기·광케이블 등 통신장비 제조(자회사 머큐리)",
-        "revenue_share": 0.637
+        "name": "MNO",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.7%",
+        "revenue_share": 0.147,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "중고폰 및 자급제 유통",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.3%",
+        "revenue_share": 0.293,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -168,24 +177,70 @@
       "전기집진기·대기환경 계측기",
       "가정간편식(HMR, 떡볶이 등)"
     ],
-    "investor_note": "아이즈비전은 SKT·KT·LGU+ 망을 임차해 서비스하는 알뜰폰(MVNO) 아이즈모바일을 운영하는 통신사업자로, 자회사 머큐리를 통한 유무선공유기·광케이블 등 통신장비 제조가 매출의 약 64%를 차지하고, 집진기·환경계측기(리트코)와 가정간편식(HMR) 사업도 함께 하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액(연결)은 1,943억 원으로 전년 대비 6.3% 늘었고 영업이익은 229.6% 급증했으며, 당기순이익도 88억 원으로 흑자 전환했습니다. 부채비율은 38.4%로 무난한 수준입니다."
+    "investor_note": "아이즈비전은 SKT·KT·LGU+ 망을 임차해 서비스하는 알뜰폰(MVNO) 아이즈모바일을 운영하는 통신사업자로, 자회사 머큐리를 통한 유무선공유기·광케이블 등 통신장비 제조가 매출의 약 64%를 차지하고, 집진기·환경계측기(리트코)와 가정간편식(HMR) 사업도 함께 하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액(연결)은 1,943억 원으로 전년 대비 6.3% 늘었고 영업이익은 229.6% 급증했으며, 당기순이익도 88억 원으로 흑자 전환했습니다. 부채비율은 38.4%로 무난한 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "통신사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 56.0%",
+        "revenue_share": 0.56,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "MNO",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.7%",
+        "revenue_share": 0.147,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "중고폰 및 자급제 유통",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.3%",
+        "revenue_share": 0.293,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "홈사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.8%",
+        "revenue_share": 0.6878,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "모바일사업(MVNO)",
-      "caption": "알뜰폰·중고폰 유통 등 통신서비스",
+      "title": "통신사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 56.0%",
       "kind": "telecom",
-      "visual": "모바일사업",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "정보통신기기 제조",
-      "caption": "유무선공유기·광케이블 등 통신장비 제조(자회사 머큐리)",
+      "title": "MNO",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.7%",
       "kind": "telecom",
-      "visual": "정보통신기기",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "중고폰 및 자급제 유통",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.3%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "홈사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.8%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

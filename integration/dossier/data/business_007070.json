@@ -156,18 +156,31 @@
     "segment_breakdown": [
       {
         "name": "편의점",
-        "desc": "GS25 편의점 운영",
-        "revenue_share": 0.748
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 66.4%",
+        "revenue_share": 0.664,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.4%",
+        "revenue_share": 0.084,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "수퍼마켓",
-        "desc": "GS THE FRESH 수퍼마켓 운영",
-        "revenue_share": 0.145
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.2%",
+        "revenue_share": 0.132,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "홈쇼핑",
-        "desc": "GS SHOP TV·온라인 홈쇼핑",
-        "revenue_share": 0.088
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.02,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -176,31 +189,69 @@
       "GS SHOP",
       "우리동네GS 앱"
     ],
-    "investor_note": "GS리테일은 편의점 GS25, 수퍼마켓 GS THE FRESH, 홈쇼핑 GS SHOP을 운영하는 국내 대표 유통기업으로, 매출의 약 75%가 편의점에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 11조 9,574억 원으로 전년 대비 2.8% 늘었고 영업이익은 2,921억 원으로 22.2% 증가했으며 당기순이익도 502억 원으로 크게 늘었습니다. 부채비율은 128.4%로 유통업 특성상 다소 높은 편이니 참고하시기 바랍니다."
+    "investor_note": "GS리테일은 편의점 GS25, 수퍼마켓 GS THE FRESH, 홈쇼핑 GS SHOP을 운영하는 국내 대표 유통기업으로, 매출의 약 75%가 편의점에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 11조 9,574억 원으로 전년 대비 2.8% 늘었고 영업이익은 2,921억 원으로 22.2% 증가했으며 당기순이익도 502억 원으로 크게 늘었습니다. 부채비율은 128.4%로 유통업 특성상 다소 높은 편이니 참고하시기 바랍니다.",
+    "product_service_segments": [
+      {
+        "name": "편의점",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 66.4%",
+        "revenue_share": 0.664,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.4%",
+        "revenue_share": 0.084,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "수퍼마켓",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.2%",
+        "revenue_share": 0.132,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "홈쇼핑",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.02,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "편의점",
-      "caption": "GS25 편의점 운영",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 66.4%",
       "kind": "service",
-      "visual": "편의점",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "상품외",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.4%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "수퍼마켓",
-      "caption": "GS THE FRESH 수퍼마켓 운영",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.2%",
       "kind": "service",
-      "visual": "수퍼마켓",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "홈쇼핑",
-      "caption": "GS SHOP TV·온라인 홈쇼핑",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
       "kind": "service",
-      "visual": "홈쇼핑",
-      "image": "../data/business_images/business_image_141eab6519656e30.jpg",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
       "image_source": "Wikimedia Commons"
     }
   ],

@@ -155,24 +155,32 @@
     "segment_finance": "한독은 1954년 설립된 제약회사로, 당뇨병치료제 아마릴·테넬리아, 고혈압치료제 트리테이스, 진통소염제 케토톱 등 전문·일반의약품을 제조·판매하고 있으며 진단기기·시약 사업과 의약품 수탁생산 서비스도 함께 운영하고 있습니다. 2025년에는 건강기능식품 등 헬스케어제품 사업부문을 물적분할해 한독헬스케어를 신설했습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 5,351억 원으로 전년 대비 5.5% 늘었고 영업이익은 32억 원으로 크게 개선됐지만, 당기순이익은 -22억 원으로 적자가 이어져(적자폭은 전년 대비 줄어듦) 수익성 회복이 더딘 모습입니다. 부채비율은 184.1%로 부채 부담이 큰 편이라 재무구조를 유의해서 볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "의약품",
-        "desc": "전문·일반의약품 제조 및 판매(아마릴·테넬리아·트리테이스 등)",
-        "revenue_share": null
+        "name": "의약품제조 및 판매업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.9%",
+        "revenue_share": 0.089,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "의료기기",
-        "desc": "진단기기·시약 판매(아텔리카·바로잰 등)",
-        "revenue_share": 0.1467
+        "name": "** 케토톱 群",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.5%",
+        "revenue_share": 0.0851,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "수탁생산",
-        "desc": "의약품 수탁생산 및 품질관리 서비스",
-        "revenue_share": null
+        "name": "*** 아마릴 群",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.4%",
+        "revenue_share": 0.0745,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "부동산 임대업",
-        "desc": "본사 사옥 일부 임대",
-        "revenue_share": null
+        "name": "**** 훼스탈 群",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.7%",
+        "revenue_share": 0.0271,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -184,40 +192,70 @@
       "미쎄라",
       "란투스"
     ],
-    "investor_note": "한독은 1954년 설립된 제약회사로, 당뇨병치료제 아마릴·테넬리아, 고혈압치료제 트리테이스, 진통소염제 케토톱 등 전문·일반의약품을 제조·판매하고 있으며 진단기기·시약 사업과 의약품 수탁생산 서비스도 함께 운영하고 있습니다. 2025년에는 건강기능식품 등 헬스케어제품 사업부문을 물적분할해 한독헬스케어를 신설했습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 5,351억 원으로 전년 대비 5.5% 늘었고 영업이익은 32억 원으로 크게 개선됐지만, 당기순이익은 -22억 원으로 적자가 이어져(적자폭은 전년 대비 줄어듦) 수익성 회복이 더딘 모습입니다. 부채비율은 184.1%로 부채 부담이 큰 편이라 재무구조를 유의해서 볼 필요가 있습니다."
+    "investor_note": "한독은 1954년 설립된 제약회사로, 당뇨병치료제 아마릴·테넬리아, 고혈압치료제 트리테이스, 진통소염제 케토톱 등 전문·일반의약품을 제조·판매하고 있으며 진단기기·시약 사업과 의약품 수탁생산 서비스도 함께 운영하고 있습니다. 2025년에는 건강기능식품 등 헬스케어제품 사업부문을 물적분할해 한독헬스케어를 신설했습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 5,351억 원으로 전년 대비 5.5% 늘었고 영업이익은 32억 원으로 크게 개선됐지만, 당기순이익은 -22억 원으로 적자가 이어져(적자폭은 전년 대비 줄어듦) 수익성 회복이 더딘 모습입니다. 부채비율은 184.1%로 부채 부담이 큰 편이라 재무구조를 유의해서 볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "의약품제조 및 판매업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.9%",
+        "revenue_share": 0.089,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "** 케토톱 群",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.5%",
+        "revenue_share": 0.0851,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "*** 아마릴 群",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.4%",
+        "revenue_share": 0.0745,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "**** 훼스탈 群",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.7%",
+        "revenue_share": 0.0271,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "의약품",
-      "caption": "전문·일반의약품 제조 및 판매(아마릴·테넬리아·트리테이스 등)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.9%",
       "kind": "bio",
-      "visual": "의약품",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "의료기기",
-      "caption": "진단기기·시약 판매(아텔리카·바로잰 등)",
+      "title": "** 케토톱 群",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.5%",
       "kind": "service",
-      "visual": "의료기기",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "수탁생산",
-      "caption": "의약품 수탁생산 및 품질관리 서비스",
-      "kind": "bio",
-      "visual": "수탁생산",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "부동산 임대업",
-      "caption": "본사 사옥 일부 임대",
+      "title": "*** 아마릴 群",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.4%",
       "kind": "service",
-      "visual": "부동산",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "**** 훼스탈 群",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

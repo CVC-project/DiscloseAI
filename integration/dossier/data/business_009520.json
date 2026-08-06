@@ -156,18 +156,31 @@
     "segment_breakdown": [
       {
         "name": "철강부원료",
-        "desc": "제강 탈산용 알루미늄 펠레트·인고트 등",
-        "revenue_share": 0.389
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.001,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "위탁운영",
-        "desc": "포스코 페로망간공장 위탁운영",
-        "revenue_share": 0.095
+        "name": "펠레트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.1%",
+        "revenue_share": 0.261,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "엔지니어링",
-        "desc": "철강포장 설비 판매·엔지니어링",
-        "revenue_share": 0.016
+        "name": "미니펠레트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.0%",
+        "revenue_share": 0.11,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용재, 고철",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.7%",
+        "revenue_share": 0.007,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -178,40 +191,54 @@
       "포장설비 엔지니어링",
       "페로망간공장 위탁운영"
     ],
-    "investor_note": "포스코엠텍은 포스코 계열사로, 제강 과정에 필요한 알루미늄 탈산제(펠레트·인고트)를 만드는 철강부원료 사업과 포스코 철강코일을 포장하는 철강제품포장 사업을 두 축으로 하며, 페로망간공장 위탁운영도 함께 합니다. 매출은 철강제품포장이 50%, 철강부원료가 39%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,574억 원으로 전년보다 3.1% 늘었지만 영업이익은 10억 원으로 27.3% 줄었고, 당기순이익은 14억 원으로 148.7% 늘었습니다. 부채비율은 35.8%로 낮아 재무 안정성은 양호한 편이나 영업이익률 자체가 낮아 수익성은 지켜볼 필요가 있습니다."
+    "investor_note": "포스코엠텍은 포스코 계열사로, 제강 과정에 필요한 알루미늄 탈산제(펠레트·인고트)를 만드는 철강부원료 사업과 포스코 철강코일을 포장하는 철강제품포장 사업을 두 축으로 하며, 페로망간공장 위탁운영도 함께 합니다. 매출은 철강제품포장이 50%, 철강부원료가 39%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,574억 원으로 전년보다 3.1% 늘었지만 영업이익은 10억 원으로 27.3% 줄었고, 당기순이익은 14억 원으로 148.7% 늘었습니다. 부채비율은 35.8%로 낮아 재무 안정성은 양호한 편이나 영업이익률 자체가 낮아 수익성은 지켜볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "철강부원료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.001,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "펠레트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.1%",
+        "revenue_share": 0.261,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "미니펠레트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.0%",
+        "revenue_share": 0.11,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용재, 고철",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.7%",
+        "revenue_share": 0.007,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "철강제품포장",
-      "caption": "포스코 열연·냉연 코일 포장 용역",
+      "title": "펠레트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.1%",
       "kind": "material",
-      "visual": "철강제품포장",
-      "image": "../data/business_images/business_image_local_packaging.svg",
-      "image_source": "Local curated visual"
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "철강부원료",
-      "caption": "제강 탈산용 알루미늄 펠레트·인고트 등",
+      "title": "미니펠레트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.0%",
       "kind": "material",
-      "visual": "철강부원료",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "위탁운영",
-      "caption": "포스코 페로망간공장 위탁운영",
-      "kind": "service",
-      "visual": "위탁운영",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "엔지니어링",
-      "caption": "철강포장 설비 판매·엔지니어링",
-      "kind": "material",
-      "visual": "엔지니어링",
-      "image": "../data/business_images/business_image_local_packaging.svg",
-      "image_source": "Local curated visual"
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

@@ -155,29 +155,32 @@
     "segment_finance": "녹십자는 혈액제제(알부민·면역글로불린 등, 매출의 약 40%)와 백신제제(독감·수두백신, 약 15%)를 필두로 헌터증후군 치료제 '헌터라제' 등 전문의약품을 생산·판매하는 제약회사로, 미국에 출시한 면역글로불린 'ALYGLO'로 해외 시장도 넓히고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 9,912억 원으로 전년 대비 18.5% 늘었고 영업이익은 691억 원으로 크게 늘었지만, 순이익은 -296억 원으로 적자가 이어졌습니다(적자 폭은 줄었습니다). 부채비율은 113.1% 수준입니다.",
     "segment_breakdown": [
       {
-        "name": "혈액제제류",
-        "desc": "알부민·면역글로불린 등 혈액 유래 의약품",
-        "revenue_share": 0.397
+        "name": "제/상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.3%",
+        "revenue_share": 0.383,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "백신제제류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.6%",
+        "revenue_share": 0.206,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "일반제제류",
-        "desc": "헌터증후군·B형간염 치료제 등",
-        "revenue_share": 0.241
-      },
-      {
-        "name": "백신제제",
-        "desc": "독감·수두백신 등",
-        "revenue_share": 0.151
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.9%",
+        "revenue_share": 0.329,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "OTC류",
-        "desc": "일반의약품 등",
-        "revenue_share": 0.055
-      },
-      {
-        "name": "검체 진단·분석",
-        "desc": "혈액 진단 및 유전자 분석 서비스",
-        "revenue_share": 0.091
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.5%",
+        "revenue_share": 0.075,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -189,40 +192,70 @@
       "헌터라제",
       "그린진에프"
     ],
-    "investor_note": "녹십자는 혈액제제(알부민·면역글로불린 등, 매출의 약 40%)와 백신제제(독감·수두백신, 약 15%)를 필두로 헌터증후군 치료제 '헌터라제' 등 전문의약품을 생산·판매하는 제약회사로, 미국에 출시한 면역글로불린 'ALYGLO'로 해외 시장도 넓히고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 9,912억 원으로 전년 대비 18.5% 늘었고 영업이익은 691억 원으로 크게 늘었지만, 순이익은 -296억 원으로 적자가 이어졌습니다(적자 폭은 줄었습니다). 부채비율은 113.1% 수준입니다."
+    "investor_note": "녹십자는 혈액제제(알부민·면역글로불린 등, 매출의 약 40%)와 백신제제(독감·수두백신, 약 15%)를 필두로 헌터증후군 치료제 '헌터라제' 등 전문의약품을 생산·판매하는 제약회사로, 미국에 출시한 면역글로불린 'ALYGLO'로 해외 시장도 넓히고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 9,912억 원으로 전년 대비 18.5% 늘었고 영업이익은 691억 원으로 크게 늘었지만, 순이익은 -296억 원으로 적자가 이어졌습니다(적자 폭은 줄었습니다). 부채비율은 113.1% 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "제/상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.3%",
+        "revenue_share": 0.383,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "백신제제류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.6%",
+        "revenue_share": 0.206,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "일반제제류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.9%",
+        "revenue_share": 0.329,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "OTC류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.5%",
+        "revenue_share": 0.075,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "알부민",
-      "caption": "알부민 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "제/상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.3%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "아이비글로불린(IVIG)",
-      "caption": "아이비글로불린(IVIG) 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "백신제제류",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.6%",
       "kind": "bio",
       "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "ALYGLO",
-      "caption": "ALYGLO 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "일반제제류",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "독감백신",
-      "caption": "독감백신 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "OTC류",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

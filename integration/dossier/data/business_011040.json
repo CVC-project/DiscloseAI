@@ -155,9 +155,32 @@
     "segment_finance": "경동제약은 1976년 설립된 제약회사로, 매출의 약 95%가 의약품 사업에서 나오며 순환기계용제 '듀오로반', 혈압강하제 '발디핀' 등을 주력으로 병의원과 약국에 판매하고 있습니다. 사옥 임대와 스포츠용품·건강기능식품 판매도 소규모로 함께 하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,962억 원으로 전년보다 1.2% 늘었고, 영업이익은 76억 원으로 192.2% 급증했으며 당기순이익도 84억 원으로 55.1% 증가해 수익성이 크게 개선됐습니다. 부채비율은 40.6%로 재무구조는 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "임대",
-        "desc": "경동제약빌딩 등 사옥 임대",
-        "revenue_share": 0.021
+        "name": "제약부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.1%",
+        "revenue_share": 0.221,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "발디핀정 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.2%",
+        "revenue_share": 0.1521,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "레바미드정 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.5%",
+        "revenue_share": 0.0854,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.0%",
+        "revenue_share": 0.2801,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -167,24 +190,70 @@
       "알포틴연질캡슐(정신신경용제)",
       "위아바임(건강기능식품)"
     ],
-    "investor_note": "경동제약은 1976년 설립된 제약회사로, 매출의 약 95%가 의약품 사업에서 나오며 순환기계용제 '듀오로반', 혈압강하제 '발디핀' 등을 주력으로 병의원과 약국에 판매하고 있습니다. 사옥 임대와 스포츠용품·건강기능식품 판매도 소규모로 함께 하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,962억 원으로 전년보다 1.2% 늘었고, 영업이익은 76억 원으로 192.2% 급증했으며 당기순이익도 84억 원으로 55.1% 증가해 수익성이 크게 개선됐습니다. 부채비율은 40.6%로 재무구조는 안정적인 편입니다."
+    "investor_note": "경동제약은 1976년 설립된 제약회사로, 매출의 약 95%가 의약품 사업에서 나오며 순환기계용제 '듀오로반', 혈압강하제 '발디핀' 등을 주력으로 병의원과 약국에 판매하고 있습니다. 사옥 임대와 스포츠용품·건강기능식품 판매도 소규모로 함께 하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,962억 원으로 전년보다 1.2% 늘었고, 영업이익은 76억 원으로 192.2% 급증했으며 당기순이익도 84억 원으로 55.1% 증가해 수익성이 크게 개선됐습니다. 부채비율은 40.6%로 재무구조는 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "제약부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.1%",
+        "revenue_share": 0.221,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "발디핀정 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.2%",
+        "revenue_share": 0.1521,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "레바미드정 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.5%",
+        "revenue_share": 0.0854,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.0%",
+        "revenue_share": 0.2801,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "제약(제품+상품)",
-      "caption": "순환기계·혈압강하제 등 의약품 제조 및 유통",
+      "title": "의약품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.1%",
       "kind": "bio",
-      "visual": "제약",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "임대",
-      "caption": "경동제약빌딩 등 사옥 임대",
-      "kind": "bio",
-      "visual": "임대",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "발디핀정 외",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "레바미드정 외",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "상 품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

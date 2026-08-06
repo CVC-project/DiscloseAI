@@ -156,13 +156,24 @@
     "segment_breakdown": [
       {
         "name": "멀티플렉스 운영",
-        "desc": "국내외 극장 입장료·매점·광고 등 운영 매출",
-        "revenue_share": 0.644
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.5%",
+        "revenue_share": 0.395,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "기술특별관·콘텐츠 플랫폼",
-        "desc": "4DX·SCREEN X 장비 판매 및 콘텐츠 제작·배급",
-        "revenue_share": 0.064
+        "name": "컨세션 판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.8%",
+        "revenue_share": 0.128,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "광고 판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.1%",
+        "revenue_share": 0.061,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -175,24 +186,62 @@
       "IT 시스템 구축(SI)",
       "IT 시스템 운영(SM)"
     ],
-    "investor_note": "CJ CGV는 한국·중국·베트남·인도네시아·튀르키예 5개국에서 극장(멀티플렉스)을 운영하며, 4DX·SCREEN X 같은 기술특별관 장비를 자체 개발해 해외 극장에도 판매합니다. 2024년에는 IT서비스 자회사 CJ올리브네트웍스를 연결로 편입해 사업을 다각화했습니다. 매출은 극장 운영(입장료·매점·광고, 약 64%)이 가장 크고, IT서비스가 38%, 4DX·SCREEN X 등 기술특별관 사업이 6%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2조 2,753억 원으로 전년 대비 16.2% 늘고 영업이익도 962억 원으로 26.7% 증가했지만, 당기순손실은 1,433억 원으로 적자가 이어지고 있습니다. 특히 부채비율이 533.9%에 달해 자본 대비 빚 부담이 매우 크다는 점은 유의해서 볼 필요가 있습니다."
+    "investor_note": "CJ CGV는 한국·중국·베트남·인도네시아·튀르키예 5개국에서 극장(멀티플렉스)을 운영하며, 4DX·SCREEN X 같은 기술특별관 장비를 자체 개발해 해외 극장에도 판매합니다. 2024년에는 IT서비스 자회사 CJ올리브네트웍스를 연결로 편입해 사업을 다각화했습니다. 매출은 극장 운영(입장료·매점·광고, 약 64%)이 가장 크고, IT서비스가 38%, 4DX·SCREEN X 등 기술특별관 사업이 6%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2조 2,753억 원으로 전년 대비 16.2% 늘고 영업이익도 962억 원으로 26.7% 증가했지만, 당기순손실은 1,433억 원으로 적자가 이어지고 있습니다. 특히 부채비율이 533.9%에 달해 자본 대비 빚 부담이 매우 크다는 점은 유의해서 볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "멀티플렉스 운영",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.5%",
+        "revenue_share": 0.395,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "컨세션 판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.8%",
+        "revenue_share": 0.128,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "광고 판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.1%",
+        "revenue_share": 0.061,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타 판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.0%",
+        "revenue_share": 0.06,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "멀티플렉스 운영",
-      "caption": "국내외 극장 입장료·매점·광고 등 운영 매출",
-      "kind": "platform",
-      "visual": "멀티플렉스",
-      "image": "../data/business_images/business_image_local_content.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "기술특별관·콘텐츠 플랫폼",
-      "caption": "4DX·SCREEN X 장비 판매 및 콘텐츠 제작·배급",
+      "title": "컨세션 판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "광고 판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.1%",
       "kind": "platform",
-      "visual": "기술특별관",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "visual": "APP",
+      "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

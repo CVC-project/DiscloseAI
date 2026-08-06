@@ -156,23 +156,31 @@
     "segment_breakdown": [
       {
         "name": "토목/플랜트/환경",
-        "desc": "토목·플랜트·환경 공사",
-        "revenue_share": 0.379
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.9%",
+        "revenue_share": 0.379,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "건축",
-        "desc": "건축공사",
-        "revenue_share": 0.166
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.6%",
+        "revenue_share": 0.166,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "주택/개발",
-        "desc": "주택 및 개발사업",
-        "revenue_share": 0.404
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.4%",
+        "revenue_share": 0.404,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "해외",
-        "desc": "해외 도급공사",
-        "revenue_share": 0.036
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.6%",
+        "revenue_share": 0.036,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -182,40 +190,62 @@
       "주택·개발사업",
       "해외공사"
     ],
-    "investor_note": "금호건설은 토목·플랜트·환경, 건축, 주택/개발, 해외공사를 아우르는 종합건설회사로, 주택/개발 사업이 매출의 40%가량을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2조 184억 원으로 전년 대비 5.4% 늘었고, 영업이익과 당기순이익 모두 전년 적자에서 벗어나 각각 470억 원, 623억 원 흑자로 전환했습니다. 총자산은 3.1% 줄어든 1조 5,044억 원이며, 부채비율은 520.2%로 자본 대비 빚이 5배가 넘어 재무 부담이 상당히 큰 편이므로 향후 실적 추이를 주의 깊게 살펴볼 필요가 있습니다."
+    "investor_note": "금호건설은 토목·플랜트·환경, 건축, 주택/개발, 해외공사를 아우르는 종합건설회사로, 주택/개발 사업이 매출의 40%가량을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2조 184억 원으로 전년 대비 5.4% 늘었고, 영업이익과 당기순이익 모두 전년 적자에서 벗어나 각각 470억 원, 623억 원 흑자로 전환했습니다. 총자산은 3.1% 줄어든 1조 5,044억 원이며, 부채비율은 520.2%로 자본 대비 빚이 5배가 넘어 재무 부담이 상당히 큰 편이므로 향후 실적 추이를 주의 깊게 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "토목/플랜트/환경",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.9%",
+        "revenue_share": 0.379,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "건축",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.6%",
+        "revenue_share": 0.166,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "주택/개발",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.4%",
+        "revenue_share": 0.404,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "해외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.6%",
+        "revenue_share": 0.036,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "토목공사",
-      "caption": "토목공사 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "토목·플랜트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.9%",
       "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_5184e050831a4460.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "건축공사",
-      "caption": "건축공사 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "건축·주택",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.6%",
       "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "플랜트공사",
-      "caption": "플랜트공사 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "해외",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.6%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "주택·개발사업",
-      "caption": "주택·개발사업 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_housing.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

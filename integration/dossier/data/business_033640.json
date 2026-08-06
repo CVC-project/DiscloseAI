@@ -155,19 +155,32 @@
     "segment_finance": "네패스는 스마트폰·서버 등에 들어가는 시스템반도체를 소형화·고성능화하는 후공정(패키징) 기술인 WLP·FOWLP를 주력으로 하고, 반도체·디스플레이 공정용 케미칼(현상액·식각액 등)과 2차전지용 리드탭까지 함께 만드는 회사입니다. 매출의 약 3분의 2가 반도체 후공정에서 나오고, 나머지는 전자재료와 2차전지 부품에서 나눠 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 5,214억 원으로 전년 대비 12.3% 늘었고, 영업이익은 237억 원으로 크게 늘었으며 당기순이익도 전년 적자에서 201억 원 흑자로 돌아서 실적이 뚜렷하게 개선됐습니다. 다만 부채비율은 183.7%로 높은 편이라 재무 부담은 여전히 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "반도체부문",
-        "desc": "시스템반도체 후공정(WLP·FOWLP 범핑, 테스트) 파운드리",
-        "revenue_share": 0.676
+        "name": "반 도 체",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 54.3%",
+        "revenue_share": 0.5433,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "전자재료부문",
-        "desc": "반도체·디스플레이 공정용 현상액·식각액·포토레지스트·세정제",
-        "revenue_share": 0.176
+        "name": "제 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.9%",
+        "revenue_share": 0.2188,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "2차전지부문",
-        "desc": "ESS·EV/HEV 배터리용 리드탭 등 2차전지 부품",
-        "revenue_share": 0.147
+        "name": "전자 재료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.2%",
+        "revenue_share": 0.0819,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "2차 전지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.6%",
+        "revenue_share": 0.1459,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -180,40 +193,70 @@
       "세정제(Cleaner)",
       "2차전지용 리드탭"
     ],
-    "investor_note": "네패스는 스마트폰·서버 등에 들어가는 시스템반도체를 소형화·고성능화하는 후공정(패키징) 기술인 WLP·FOWLP를 주력으로 하고, 반도체·디스플레이 공정용 케미칼(현상액·식각액 등)과 2차전지용 리드탭까지 함께 만드는 회사입니다. 매출의 약 3분의 2가 반도체 후공정에서 나오고, 나머지는 전자재료와 2차전지 부품에서 나눠 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 5,214억 원으로 전년 대비 12.3% 늘었고, 영업이익은 237억 원으로 크게 늘었으며 당기순이익도 전년 적자에서 201억 원 흑자로 돌아서 실적이 뚜렷하게 개선됐습니다. 다만 부채비율은 183.7%로 높은 편이라 재무 부담은 여전히 살펴볼 필요가 있습니다."
+    "investor_note": "네패스는 스마트폰·서버 등에 들어가는 시스템반도체를 소형화·고성능화하는 후공정(패키징) 기술인 WLP·FOWLP를 주력으로 하고, 반도체·디스플레이 공정용 케미칼(현상액·식각액 등)과 2차전지용 리드탭까지 함께 만드는 회사입니다. 매출의 약 3분의 2가 반도체 후공정에서 나오고, 나머지는 전자재료와 2차전지 부품에서 나눠 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 5,214억 원으로 전년 대비 12.3% 늘었고, 영업이익은 237억 원으로 크게 늘었으며 당기순이익도 전년 적자에서 201억 원 흑자로 돌아서 실적이 뚜렷하게 개선됐습니다. 다만 부채비율은 183.7%로 높은 편이라 재무 부담은 여전히 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "반 도 체",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 54.3%",
+        "revenue_share": 0.5433,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.9%",
+        "revenue_share": 0.2188,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전자 재료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.2%",
+        "revenue_share": 0.0819,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "2차 전지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.6%",
+        "revenue_share": 0.1459,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "FOWLP/FOPLP 패키징",
-      "caption": "반도체 칩을 제품으로 쓸 수 있게 포장하고 검사하는 후공정 서비스입니다.",
+      "title": "반 도 체",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 54.3%",
       "kind": "chip",
       "visual": "CHIP",
-      "image": "../data/business_images/business_image_local_semiconductor_pkg.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "반도체 테스트(Test)",
-      "caption": "반도체 칩을 제품으로 쓸 수 있게 포장하고 검사하는 후공정 서비스입니다.",
+      "title": "제 품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.9%",
       "kind": "chip",
       "visual": "CHIP",
-      "image": "../data/business_images/business_image_local_probe.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "Etchant(식각액)",
-      "caption": "반도체 공정 장비에 들어가는 교체·소모성 부품입니다.",
+      "title": "전자 재료",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.2%",
       "kind": "chip",
       "visual": "CHIP",
-      "image": "../data/business_images/business_image_local_electrode_ring.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "WLP(웨이퍼레벨패키지) 범핑",
-      "caption": "WLP(웨이퍼레벨패키지) 범핑 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "2차 전지",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.6%",
       "kind": "chip",
       "visual": "CHIP",
-      "image": "../data/business_images/business_image_local_packaging.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

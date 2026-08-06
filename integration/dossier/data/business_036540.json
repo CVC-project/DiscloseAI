@@ -155,36 +155,70 @@
     "segment_finance": "과거 공시 기반 참고 정보로, 최근 연결 매출액은 3,673억 원으로 전년보다 8.3% 줄었고, 영업손실 196억 원과 당기순손실 191억 원을 기록하며 적자로 전환했습니다. 부채비율은 16.2%로 낮은 편이라 재무구조 자체의 부담은 크지 않습니다. 감사인은 고객사 요청에 따라 제품을 가공해주고 받는 임가공매출이 진행률에 따라 인식되는 만큼, 그 발생사실과 정확성을 핵심감사사항으로 선정했습니다.",
     "segment_breakdown": [
       {
-        "name": "메모리",
-        "desc": "메모리 반도체 조립·테스트(후공정)",
-        "revenue_share": 0.812
+        "name": "반도체 제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 81.2%",
+        "revenue_share": 0.812,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "비메모리",
-        "desc": "산업용·PC·영상·전력용 반도체 후공정",
-        "revenue_share": 0.181
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.1%",
+        "revenue_share": 0.181,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.4%",
+        "revenue_share": 0.004,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
       "메모리 반도체 패키징·테스트",
       "비메모리 반도체 패키징·테스트"
     ],
-    "investor_note": "과거 공시 기반 참고 정보로, 최근 연결 매출액은 3,673억 원으로 전년보다 8.3% 줄었고, 영업손실 196억 원과 당기순손실 191억 원을 기록하며 적자로 전환했습니다. 부채비율은 16.2%로 낮은 편이라 재무구조 자체의 부담은 크지 않습니다. 감사인은 고객사 요청에 따라 제품을 가공해주고 받는 임가공매출이 진행률에 따라 인식되는 만큼, 그 발생사실과 정확성을 핵심감사사항으로 선정했습니다."
+    "investor_note": "과거 공시 기반 참고 정보로, 최근 연결 매출액은 3,673억 원으로 전년보다 8.3% 줄었고, 영업손실 196억 원과 당기순손실 191억 원을 기록하며 적자로 전환했습니다. 부채비율은 16.2%로 낮은 편이라 재무구조 자체의 부담은 크지 않습니다. 감사인은 고객사 요청에 따라 제품을 가공해주고 받는 임가공매출이 진행률에 따라 인식되는 만큼, 그 발생사실과 정확성을 핵심감사사항으로 선정했습니다.",
+    "product_service_segments": [
+      {
+        "name": "반도체 제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 81.2%",
+        "revenue_share": 0.812,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "비메모리",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.1%",
+        "revenue_share": 0.181,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.4%",
+        "revenue_share": 0.004,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "메모리",
-      "caption": "메모리 반도체 조립·테스트(후공정)",
+      "title": "반도체 제조",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 81.2%",
       "kind": "chip",
-      "visual": "메모리",
-      "image": "../data/business_images/business_image_local_probe.svg",
-      "image_source": "Local curated visual"
+      "visual": "CHIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "비메모리",
-      "caption": "산업용·PC·영상·전력용 반도체 후공정",
+      "title": "메모리 반도체",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.1%",
       "kind": "chip",
-      "visual": "비메모리",
+      "visual": "MEMORY",
       "image": "../data/business_images/business_image_10774ca82ea41202.jpg",
       "image_source": "Wikimedia Commons"
     }

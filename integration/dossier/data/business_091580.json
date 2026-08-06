@@ -153,7 +153,29 @@
   "snippets": {
     "overview": "상신이디피(주)의 주요 사업은 신규사업입니다. 수주상황 2차전지 생산, 판매 부문삼성SDI에서 1주일 단위로 발주를 하고 있으나 공식적인 발주가 아니고 협력업체생산계획에 반영하도록 하기 위한 삼성SDI의 생산계획입니다. 참고로 당사의 제품은 생산부터 제품출고까지 3~4일이면 충분하므로 주간 발주만으로도 고객이 필요로 하는 제품의 납기를 달성할 수 있어 영업활동에서 수주가 중요한 사항은 아닙니다.",
     "segment_finance": "상신이디피(주)의 주요 사업은 신규사업입니다. 수주상황 2차전지 생산, 판매 부문삼성SDI에서 1주일 단위로 발주를 하고 있으나 공식적인 발주가 아니고 협력업체생산계획에 반영하도록 하기 위한 삼성SDI의 생산계획입니다. 참고로 당사의 제품은 생산부터 제품출고까지 3~4일이면 충분하므로 주간 발주만으로도 고객이 필요로 하는 제품의 납기를 달성할 수 있어 영업활동에서 수주가 중요한 사항은 아닙니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "ENERGY (2차전지류)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.1%",
+        "revenue_share": 0.3211,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "CAN(중대형)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 56.4%",
+        "revenue_share": 0.5639,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.2%",
+        "revenue_share": 0.0415,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "배터리",
       "데이터센터",
@@ -168,32 +190,55 @@
       "흑점",
       "Burr.긁힘"
     ],
-    "investor_note": "상신이디피(주)의 주요 사업은 신규사업입니다. 수주상황 2차전지 생산, 판매 부문삼성SDI에서 1주일 단위로 발주를 하고 있으나 공식적인 발주가 아니고 협력업체생산계획에 반영하도록 하기 위한 삼성SDI의 생산계획입니다. 참고로 당사의 제품은 생산부터 제품출고까지 3~4일이면 충분하므로 주간 발주만으로도 고객이 필요로 하는 제품의 납기를 달성할 수 있어 영업활동에서 수주가 중요한 사항은 아닙니다."
+    "investor_note": "상신이디피(주)의 주요 사업은 신규사업입니다. 수주상황 2차전지 생산, 판매 부문삼성SDI에서 1주일 단위로 발주를 하고 있으나 공식적인 발주가 아니고 협력업체생산계획에 반영하도록 하기 위한 삼성SDI의 생산계획입니다. 참고로 당사의 제품은 생산부터 제품출고까지 3~4일이면 충분하므로 주간 발주만으로도 고객이 필요로 하는 제품의 납기를 달성할 수 있어 영업활동에서 수주가 중요한 사항은 아닙니다.",
+    "product_service_segments": [
+      {
+        "name": "ENERGY (2차전지류)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.1%",
+        "revenue_share": 0.3211,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "CAN(중대형)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 56.4%",
+        "revenue_share": 0.5639,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.2%",
+        "revenue_share": 0.0415,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "배터리",
-      "caption": "배터리 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "battery",
-      "visual": "배터리",
-      "image": "../data/business_images/business_image_local_battery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "데이터센터",
-      "caption": "데이터센터 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "데이터센터",
-      "image": "../data/business_images/business_image_local_datacenter.svg",
-      "image_source": "Local curated visual"
-    },
-    {
       "title": "ENERGY (2차전지류)",
-      "caption": "ENERGY (2차전지류) 관련 제품과 서비스를 통해 매출을 만듭니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.1%",
       "kind": "battery",
-      "visual": "ENERGY",
-      "image": "../data/business_images/business_image_local_battery.svg",
-      "image_source": "Local curated visual"
+      "visual": "BATTERY",
+      "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "CAN(중대형)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 56.4%",
+      "kind": "battery",
+      "visual": "BATTERY",
+      "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.2%",
+      "kind": "battery",
+      "visual": "BATTERY",
+      "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

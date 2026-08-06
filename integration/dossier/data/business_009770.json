@@ -156,8 +156,10 @@
     "segment_breakdown": [
       {
         "name": "상품",
-        "desc": "키친타올·물티슈 등 유통",
-        "revenue_share": 0.127
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.7%",
+        "revenue_share": 0.127,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -167,24 +169,54 @@
       "키친타올",
       "물티슈"
     ],
-    "investor_note": "삼정펄프는 화장지 원지부터 두루마리·티슈 등 완제품까지 생산하는 국내 위생용지 제조사로, 매출의 86%가 원지·완제품, 나머지는 키친타올·물티슈 유통에서 나옵니다. 2025년 하반기에는 수입산 원지의 가격경쟁력 악화로 수익성이 낮은 평택공장 가동을 중단하고 천안·함안공장 중심으로 생산체계를 재편했습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,485억 원으로 전년 대비 9.3% 줄었고 영업손실 14억 원으로 적자 전환했지만, 보유 금융자산 관련 이익 등의 영향으로 당기순이익은 313억 원을 기록했습니다. 부채비율은 12.3%로 매우 낮아 재무 안정성은 양호합니다."
+    "investor_note": "삼정펄프는 화장지 원지부터 두루마리·티슈 등 완제품까지 생산하는 국내 위생용지 제조사로, 매출의 86%가 원지·완제품, 나머지는 키친타올·물티슈 유통에서 나옵니다. 2025년 하반기에는 수입산 원지의 가격경쟁력 악화로 수익성이 낮은 평택공장 가동을 중단하고 천안·함안공장 중심으로 생산체계를 재편했습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,485억 원으로 전년 대비 9.3% 줄었고 영업손실 14억 원으로 적자 전환했지만, 보유 금융자산 관련 이익 등의 영향으로 당기순이익은 313억 원을 기록했습니다. 부채비율은 12.3%로 매우 낮아 재무 안정성은 양호합니다.",
+    "product_service_segments": [
+      {
+        "name": "완제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.2%",
+        "revenue_share": 0.282,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 86.4%",
+        "revenue_share": 0.864,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.7%",
+        "revenue_share": 0.127,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.9%",
+        "revenue_share": 0.009,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "상품",
-      "caption": "키친타올·물티슈 등 유통",
-      "kind": "service",
-      "visual": "상품",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "펄프, 종이 및 판지 제조업",
-      "caption": "펄프, 종이 및 판지 제조업을 중심으로 매출을 만듭니다.",
+      "title": "완제품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.2%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

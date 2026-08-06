@@ -155,14 +155,25 @@
     "segment_finance": "2025년 11월에는 의약바이오 사업부문을 인적분할해 삼양바이오팜을 새로 설립했습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3조 3,482억 원으로 전년 대비 5.8% 줄었고 영업이익도 14.7% 감소했습니다. 특히 당기순이익은 -2,981억 원으로 적자 전환했는데, 이는 사업분할과 공정거래위원회 조사에 따른 과징금 충당부채 반영 등 일회성 요인이 영향을 준 것으로 보입니다. 부채비율은 98.8%로 자본과 비슷한 수준의 부채를 지고 있습니다.",
     "segment_breakdown": [
       {
-        "name": "화학부문",
-        "desc": "엔지니어링플라스틱·PET용기·이온교환수지·계면활성제 등(삼양사·삼양패키징 등)",
-        "revenue_share": 0.537
+        "name": "식품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 45.3%",
+        "revenue_share": 0.453,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "식품부문",
-        "desc": "설탕·밀가루·식용유·전분 등 식품 소재(삼양사, 삼양에프앤비)",
-        "revenue_share": 0.453
+        "name": "화학",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.7%",
+        "revenue_share": 0.537,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -176,40 +187,47 @@
       "계면활성제",
       "BPA"
     ],
-    "investor_note": "2025년 11월에는 의약바이오 사업부문을 인적분할해 삼양바이오팜을 새로 설립했습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3조 3,482억 원으로 전년 대비 5.8% 줄었고 영업이익도 14.7% 감소했습니다. 특히 당기순이익은 -2,981억 원으로 적자 전환했는데, 이는 사업분할과 공정거래위원회 조사에 따른 과징금 충당부채 반영 등 일회성 요인이 영향을 준 것으로 보입니다. 부채비율은 98.8%로 자본과 비슷한 수준의 부채를 지고 있습니다."
+    "investor_note": "2025년 11월에는 의약바이오 사업부문을 인적분할해 삼양바이오팜을 새로 설립했습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3조 3,482억 원으로 전년 대비 5.8% 줄었고 영업이익도 14.7% 감소했습니다. 특히 당기순이익은 -2,981억 원으로 적자 전환했는데, 이는 사업분할과 공정거래위원회 조사에 따른 과징금 충당부채 반영 등 일회성 요인이 영향을 준 것으로 보입니다. 부채비율은 98.8%로 자본과 비슷한 수준의 부채를 지고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "식품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 45.3%",
+        "revenue_share": 0.453,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "화학",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.7%",
+        "revenue_share": 0.537,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "설탕(큐원)",
-      "caption": "다른 식품을 만드는 데 들어가는 기초 소재라 원재료 가격 영향을 받습니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_food_ingredient.svg",
-      "image_source": "Local visual"
+      "title": "화학",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.7%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "밀가루",
-      "caption": "다른 식품을 만드는 데 들어가는 기초 소재라 원재료 가격 영향을 받습니다.",
+      "title": "총합계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_food_ingredient.svg",
-      "image_source": "Local visual"
-    },
-    {
-      "title": "식용유",
-      "caption": "다른 식품을 만드는 데 들어가는 기초 소재라 원재료 가격 영향을 받습니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_food_ingredient.svg",
-      "image_source": "Local visual"
-    },
-    {
-      "title": "전분·전분당",
-      "caption": "전분·전분당 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_food_ingredient.svg",
-      "image_source": "Local visual"
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

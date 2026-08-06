@@ -155,14 +155,25 @@
     "segment_finance": "한솔홀딩스는 자체 사업 없이 상표사용료·경영자문료·배당금을 받는 순수지주회사로, 종합물류서비스(한솔로지스틱스)가 매출의 62%로 가장 크고, 지류 유통·IT서비스(한솔피엔에스), 골판지 제조(한솔페이퍼텍)가 뒤를 잇습니다. 인쇄용지 등을 만드는 한솔제지, 전자부품을 만드는 한솔테크닉스는 지분법으로 반영되는 관계기업이라 이 매출에는 포함되지 않습니다. 과거 공시 기반 참고 정보로, 최근 매출액(연결)은 1조 983억 원으로 전년 대비 38.7% 크게 늘었고 영업이익과 당기순이익도 각각 202.3%, 461.8% 급증했는데, 이는 한솔로지스틱스가 새로 연결 대상에 편입된 영향이 커 단순 비교에 주의가 필요합니다. 부채비율은 37.8%로 낮은 편입니다.",
     "segment_breakdown": [
       {
-        "name": "지류 제조 판매업(한솔페이퍼텍)",
-        "desc": "골판지 원지 제조·판매",
-        "revenue_share": 0.104
+        "name": "골판지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "지주부문(한솔홀딩스)",
-        "desc": "상표사용수익·경영자문수익·배당금수익을 받는 순수지주회사",
-        "revenue_share": null
+        "name": "I T",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.9%",
+        "revenue_share": 0.1985,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "지류유통",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 80.2%",
+        "revenue_share": 0.8015,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -172,40 +183,70 @@
       "컨테이너·트럭·항공 물류(한솔로지스틱스)",
       "상표사용료·경영자문(지주회사)"
     ],
-    "investor_note": "한솔홀딩스는 자체 사업 없이 상표사용료·경영자문료·배당금을 받는 순수지주회사로, 종합물류서비스(한솔로지스틱스)가 매출의 62%로 가장 크고, 지류 유통·IT서비스(한솔피엔에스), 골판지 제조(한솔페이퍼텍)가 뒤를 잇습니다. 인쇄용지 등을 만드는 한솔제지, 전자부품을 만드는 한솔테크닉스는 지분법으로 반영되는 관계기업이라 이 매출에는 포함되지 않습니다. 과거 공시 기반 참고 정보로, 최근 매출액(연결)은 1조 983억 원으로 전년 대비 38.7% 크게 늘었고 영업이익과 당기순이익도 각각 202.3%, 461.8% 급증했는데, 이는 한솔로지스틱스가 새로 연결 대상에 편입된 영향이 커 단순 비교에 주의가 필요합니다. 부채비율은 37.8%로 낮은 편입니다."
+    "investor_note": "한솔홀딩스는 자체 사업 없이 상표사용료·경영자문료·배당금을 받는 순수지주회사로, 종합물류서비스(한솔로지스틱스)가 매출의 62%로 가장 크고, 지류 유통·IT서비스(한솔피엔에스), 골판지 제조(한솔페이퍼텍)가 뒤를 잇습니다. 인쇄용지 등을 만드는 한솔제지, 전자부품을 만드는 한솔테크닉스는 지분법으로 반영되는 관계기업이라 이 매출에는 포함되지 않습니다. 과거 공시 기반 참고 정보로, 최근 매출액(연결)은 1조 983억 원으로 전년 대비 38.7% 크게 늘었고 영업이익과 당기순이익도 각각 202.3%, 461.8% 급증했는데, 이는 한솔로지스틱스가 새로 연결 대상에 편입된 영향이 커 단순 비교에 주의가 필요합니다. 부채비율은 37.8%로 낮은 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "골판지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "I T",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.9%",
+        "revenue_share": 0.1985,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "지류유통",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 80.2%",
+        "revenue_share": 0.8015,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "종합물류서비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "종합물류서비스(한솔로지스틱스)",
-      "caption": "컨테이너·트럭 운송, 해상·항공 포워딩 등 종합물류",
+      "title": "골판지",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
       "kind": "service",
-      "visual": "종합물류서비스",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "지류 도소매업·IT서비스(한솔피엔에스)",
-      "caption": "인쇄용지·산업용지 유통 및 IT시스템 구축",
+      "title": "I T",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.9%",
       "kind": "service",
-      "visual": "지류",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "지류 제조 판매업(한솔페이퍼텍)",
-      "caption": "골판지 원지 제조·판매",
+      "title": "지류유통",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 80.2%",
       "kind": "service",
-      "visual": "지류",
-      "image": "../data/business_images/business_image_local_packaging.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "지주부문(한솔홀딩스)",
-      "caption": "상표사용수익·경영자문수익·배당금수익을 받는 순수지주회사",
+      "title": "종합물류서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
       "kind": "service",
-      "visual": "지주부문",
-      "image": "../data/business_images/business_image_local_finance_hold.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -155,19 +155,32 @@
     "segment_finance": "SUN&L(선앤엘)은 합판·MDF 등 목재 2차가공·유통을 하는 목재부문, 목창호·인테리어 공사·가구를 다루는 인테리어부문, 화장품 용기·펌프디스펜서 등을 만드는 생활용품부문을 함께 운영하는 회사로, 매출의 절반 이상(약 54%)이 인테리어부문에서 나옵니다. 건설경기 침체와 저가 수입 합판 유입으로 2023년 합판 국내 생산을, 2024년 초에는 MDF·제재 생산을 중단하고 유통 중심으로 사업을 전환했습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,724억 원으로 전년 대비 19.7% 줄었고 영업손실 178억 원으로 적자 전환했지만, 당기순손실은 36억 원으로 전년보다 손실 폭이 줄었습니다. 부채비율은 112.2%로 다소 높은 편입니다.",
     "segment_breakdown": [
       {
-        "name": "목재부문",
-        "desc": "합판·MDF·제재목·PB(파티클보드) 등 목재 2차가공·유통",
-        "revenue_share": 0.19
+        "name": "목재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.5%",
+        "revenue_share": 0.075,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "인테리어부문",
-        "desc": "목창호·인테리어 공사·건가구 등 실내건축·시공",
-        "revenue_share": 0.539
+        "name": "MDF",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.0%",
+        "revenue_share": 0.07,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "생활용품부문",
-        "desc": "플라스틱 펌프디스펜서·트리거스프레이어·화장품 용기 생산유통",
-        "revenue_share": 0.262
+        "name": "제재목",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.8%",
+        "revenue_share": 0.038,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "PB",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.2%",
+        "revenue_share": 0.052,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -182,32 +195,70 @@
       "Trigger Sprayer",
       "화장품 용기"
     ],
-    "investor_note": "SUN&L(선앤엘)은 합판·MDF 등 목재 2차가공·유통을 하는 목재부문, 목창호·인테리어 공사·가구를 다루는 인테리어부문, 화장품 용기·펌프디스펜서 등을 만드는 생활용품부문을 함께 운영하는 회사로, 매출의 절반 이상(약 54%)이 인테리어부문에서 나옵니다. 건설경기 침체와 저가 수입 합판 유입으로 2023년 합판 국내 생산을, 2024년 초에는 MDF·제재 생산을 중단하고 유통 중심으로 사업을 전환했습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,724억 원으로 전년 대비 19.7% 줄었고 영업손실 178억 원으로 적자 전환했지만, 당기순손실은 36억 원으로 전년보다 손실 폭이 줄었습니다. 부채비율은 112.2%로 다소 높은 편입니다."
+    "investor_note": "SUN&L(선앤엘)은 합판·MDF 등 목재 2차가공·유통을 하는 목재부문, 목창호·인테리어 공사·가구를 다루는 인테리어부문, 화장품 용기·펌프디스펜서 등을 만드는 생활용품부문을 함께 운영하는 회사로, 매출의 절반 이상(약 54%)이 인테리어부문에서 나옵니다. 건설경기 침체와 저가 수입 합판 유입으로 2023년 합판 국내 생산을, 2024년 초에는 MDF·제재 생산을 중단하고 유통 중심으로 사업을 전환했습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,724억 원으로 전년 대비 19.7% 줄었고 영업손실 178억 원으로 적자 전환했지만, 당기순손실은 36억 원으로 전년보다 손실 폭이 줄었습니다. 부채비율은 112.2%로 다소 높은 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "목재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.5%",
+        "revenue_share": 0.075,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "MDF",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.0%",
+        "revenue_share": 0.07,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제재목",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.8%",
+        "revenue_share": 0.038,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "PB",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.2%",
+        "revenue_share": 0.052,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "목재부문",
-      "caption": "합판·MDF·제재목·PB(파티클보드) 등 목재 2차가공·유통",
+      "title": "목재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.5%",
       "kind": "service",
-      "visual": "목재부문",
-      "image": "../data/business_images/business_image_local_wood.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "인테리어부문",
-      "caption": "목창호·인테리어 공사·건가구 등 실내건축·시공",
+      "title": "MDF",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.0%",
       "kind": "service",
-      "visual": "인테리어부문",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "생활용품부문",
-      "caption": "플라스틱 펌프디스펜서·트리거스프레이어·화장품 용기 생산유통",
-      "kind": "consumer",
-      "visual": "생활용품부문",
-      "image": "../data/business_images/business_image_local_cosmetics.svg",
-      "image_source": "Local curated visual"
+      "title": "제재목",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "PB",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

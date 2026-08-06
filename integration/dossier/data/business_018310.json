@@ -155,14 +155,11 @@
     "segment_finance": "삼목에스폼은 아파트 등 건설 현장의 골조공사에 쓰이는 알루미늄 거푸집(콘크리트를 굳히는 틀)을 만들어 제조·판매·임대하는 건설자재 전문업체로, 알루미늄폼이 매출의 80%를 차지하고 인도·말레이시아·베트남 등 해외 현지 법인도 운영하고 있습니다. 과거 공시 기반 참고 정보로, 국내 건설경기 침체가 이어지며 최근 매출액은 3,169억 원으로 전년 대비 21.1% 줄었고, 영업이익은 91.4%, 당기순이익은 86.1% 크게 감소해 수익성이 눈에 띄게 나빠졌습니다. 다만 부채비율은 17.3%로 매우 낮아 재무구조 자체는 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "알루미늄폼",
-        "desc": "건물 내벽·슬라브용 알루미늄 거푸집 제조·판매·임대",
-        "revenue_share": 0.804
-      },
-      {
-        "name": "판넬폼(갱폼·시스템폼·특수폼)",
-        "desc": "건물 외벽·항만·교량 공사용 거푸집 제조·판매·임대",
-        "revenue_share": 0.196
+        "name": "판넬폼",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.6%",
+        "revenue_share": 0.196,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -172,24 +169,40 @@
       "특수폼",
       "판넬폼"
     ],
-    "investor_note": "삼목에스폼은 아파트 등 건설 현장의 골조공사에 쓰이는 알루미늄 거푸집(콘크리트를 굳히는 틀)을 만들어 제조·판매·임대하는 건설자재 전문업체로, 알루미늄폼이 매출의 80%를 차지하고 인도·말레이시아·베트남 등 해외 현지 법인도 운영하고 있습니다. 과거 공시 기반 참고 정보로, 국내 건설경기 침체가 이어지며 최근 매출액은 3,169억 원으로 전년 대비 21.1% 줄었고, 영업이익은 91.4%, 당기순이익은 86.1% 크게 감소해 수익성이 눈에 띄게 나빠졌습니다. 다만 부채비율은 17.3%로 매우 낮아 재무구조 자체는 안정적인 편입니다."
+    "investor_note": "삼목에스폼은 아파트 등 건설 현장의 골조공사에 쓰이는 알루미늄 거푸집(콘크리트를 굳히는 틀)을 만들어 제조·판매·임대하는 건설자재 전문업체로, 알루미늄폼이 매출의 80%를 차지하고 인도·말레이시아·베트남 등 해외 현지 법인도 운영하고 있습니다. 과거 공시 기반 참고 정보로, 국내 건설경기 침체가 이어지며 최근 매출액은 3,169억 원으로 전년 대비 21.1% 줄었고, 영업이익은 91.4%, 당기순이익은 86.1% 크게 감소해 수익성이 눈에 띄게 나빠졌습니다. 다만 부채비율은 17.3%로 매우 낮아 재무구조 자체는 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "폼사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 80.4%",
+        "revenue_share": 0.804,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "판넬폼",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.6%",
+        "revenue_share": 0.196,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "알루미늄폼",
-      "caption": "건물 내벽·슬라브용 알루미늄 거푸집 제조·판매·임대",
-      "kind": "service",
-      "visual": "알루미늄폼",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "title": "폼사업부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 80.4%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "판넬폼(갱폼·시스템폼·특수폼)",
-      "caption": "건물 외벽·항만·교량 공사용 거푸집 제조·판매·임대",
-      "kind": "service",
-      "visual": "판넬폼",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "title": "판넬폼",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.6%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

@@ -153,7 +153,36 @@
   "snippets": {
     "overview": "주식회사 세운메디칼의 주요 사업은 사업 내용, 수출부문, 국내부문입니다. 수주 상황 당사에서 영위하는 사업의 특성상 외부 수주에 의해 매출이 발생하지 않기 때문에 발주 및 수주에 관한 해당 사항이 없습니다. 또한 납품 이후 당사의 제품에서 발생한 기술적인 오류에 대해 즉각대응하여 고객의 불편을 최소화하고 이후 생산 차질 시간을 최소화할 수 있도록 노력하고 있습니다.",
     "segment_finance": "주식회사 세운메디칼의 주요 사업은 사업 내용, 수출부문, 국내부문입니다. 수주 상황 당사에서 영위하는 사업의 특성상 외부 수주에 의해 매출이 발생하지 않기 때문에 발주 및 수주에 관한 해당 사항이 없습니다. 또한 납품 이후 당사의 제품에서 발생한 기술적인 오류에 대해 즉각대응하여 고객의 불편을 최소화하고 이후 생산 차질 시간을 최소화할 수 있도록 노력하고 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "의료용저압지속흡인기류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.7%",
+        "revenue_share": 0.137,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "흡인용튜브카데타류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.0%",
+        "revenue_share": 0.11,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "수액세트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.5%",
+        "revenue_share": 0.165,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "비뇨기과용 튜브카테타류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.2%",
+        "revenue_share": 0.132,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "의약품",
       "의료기기제조",
@@ -164,40 +193,70 @@
       "연구결과",
       "기대효과"
     ],
-    "investor_note": "주식회사 세운메디칼의 주요 사업은 사업 내용, 수출부문, 국내부문입니다. 수주 상황 당사에서 영위하는 사업의 특성상 외부 수주에 의해 매출이 발생하지 않기 때문에 발주 및 수주에 관한 해당 사항이 없습니다. 또한 납품 이후 당사의 제품에서 발생한 기술적인 오류에 대해 즉각대응하여 고객의 불편을 최소화하고 이후 생산 차질 시간을 최소화할 수 있도록 노력하고 있습니다."
+    "investor_note": "주식회사 세운메디칼의 주요 사업은 사업 내용, 수출부문, 국내부문입니다. 수주 상황 당사에서 영위하는 사업의 특성상 외부 수주에 의해 매출이 발생하지 않기 때문에 발주 및 수주에 관한 해당 사항이 없습니다. 또한 납품 이후 당사의 제품에서 발생한 기술적인 오류에 대해 즉각대응하여 고객의 불편을 최소화하고 이후 생산 차질 시간을 최소화할 수 있도록 노력하고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "의료용저압지속흡인기류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.7%",
+        "revenue_share": 0.137,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "흡인용튜브카데타류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.0%",
+        "revenue_share": 0.11,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "수액세트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.5%",
+        "revenue_share": 0.165,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "비뇨기과용 튜브카테타류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.2%",
+        "revenue_share": 0.132,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "의약품",
-      "caption": "의약품 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "의료기기제조",
-      "caption": "의료기기제조 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "의료용저압지속흡인기류",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.7%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "의료기구 시술용",
-      "caption": "의료기구 시술용 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "흡인용튜브카데타류",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "제품상품기타",
-      "caption": "제품상품기타 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "수액세트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.5%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "비뇨기과용 튜브카테타류",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

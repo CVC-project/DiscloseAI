@@ -153,7 +153,29 @@
   "snippets": {
     "overview": "아이에스동서는 콘크리트 자재를 생산하는 콘크리트사업, 아파트·상가를 짓는 건설사업, 폐기물 처리와 폐배터리 재활용을 담당하는 환경사업까지 함께 운영하는 회사입니다. 매출 비중은 환경사업이 39%, 건설사업이 36%, 콘크리트사업이 22% 정도로 어느 한 축에 치우치지 않고 고르게 분산돼 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 2,343억 원으로 전년보다 18.5% 줄었고 영업이익도 681억 원으로 59.9% 감소했습니다. 다만 당기순이익은 -718억 원으로 여전히 적자지만 전년보다는 적자 폭이 55.2% 줄었습니다. 부채비율은 143.3%로 자본보다 빚이 더 많은 편이라 재무 부담(빌린 돈을 갚아야 하는 압박)을 살펴볼 필요가 있습니다.",
     "segment_finance": "아이에스동서는 콘크리트 자재를 생산하는 콘크리트사업, 아파트·상가를 짓는 건설사업, 폐기물 처리와 폐배터리 재활용을 담당하는 환경사업까지 함께 운영하는 회사입니다. 매출 비중은 환경사업이 39%, 건설사업이 36%, 콘크리트사업이 22% 정도로 어느 한 축에 치우치지 않고 고르게 분산돼 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 2,343억 원으로 전년보다 18.5% 줄었고 영업이익도 681억 원으로 59.9% 감소했습니다. 다만 당기순이익은 -718억 원으로 여전히 적자지만 전년보다는 적자 폭이 55.2% 줄었습니다. 부채비율은 143.3%로 자본보다 빚이 더 많은 편이라 재무 부담(빌린 돈을 갚아야 하는 압박)을 살펴볼 필요가 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "콘크리트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.5%",
+        "revenue_share": 0.2151,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "건 설",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.8%",
+        "revenue_share": 0.3578,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "환 경",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.8%",
+        "revenue_share": 0.2882,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "PC(콘크리트 건축자재)",
       "에일린의뜰(아파트/상가)",
@@ -162,32 +184,70 @@
       "환경설비건설",
       "폐배터리 재활용(배터리 소재)"
     ],
-    "investor_note": "아이에스동서는 콘크리트 자재를 생산하는 콘크리트사업, 아파트·상가를 짓는 건설사업, 폐기물 처리와 폐배터리 재활용을 담당하는 환경사업까지 함께 운영하는 회사입니다. 매출 비중은 환경사업이 39%, 건설사업이 36%, 콘크리트사업이 22% 정도로 어느 한 축에 치우치지 않고 고르게 분산돼 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 2,343억 원으로 전년보다 18.5% 줄었고 영업이익도 681억 원으로 59.9% 감소했습니다. 다만 당기순이익은 -718억 원으로 여전히 적자지만 전년보다는 적자 폭이 55.2% 줄었습니다. 부채비율은 143.3%로 자본보다 빚이 더 많은 편이라 재무 부담(빌린 돈을 갚아야 하는 압박)을 살펴볼 필요가 있습니다."
+    "investor_note": "아이에스동서는 콘크리트 자재를 생산하는 콘크리트사업, 아파트·상가를 짓는 건설사업, 폐기물 처리와 폐배터리 재활용을 담당하는 환경사업까지 함께 운영하는 회사입니다. 매출 비중은 환경사업이 39%, 건설사업이 36%, 콘크리트사업이 22% 정도로 어느 한 축에 치우치지 않고 고르게 분산돼 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 2,343억 원으로 전년보다 18.5% 줄었고 영업이익도 681억 원으로 59.9% 감소했습니다. 다만 당기순이익은 -718억 원으로 여전히 적자지만 전년보다는 적자 폭이 55.2% 줄었습니다. 부채비율은 143.3%로 자본보다 빚이 더 많은 편이라 재무 부담(빌린 돈을 갚아야 하는 압박)을 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "콘크리트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.5%",
+        "revenue_share": 0.2151,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "건 설",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.8%",
+        "revenue_share": 0.3578,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "환 경",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.8%",
+        "revenue_share": 0.2882,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "폐배터리 재활용사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.3%",
+        "revenue_share": 0.1034,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "환경사업부문",
-      "caption": "폐기물 처리·환경설비건설·폐배터리 재활용",
+      "title": "콘크리트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "건 설",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "환 경",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "폐배터리 재활용사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.3%",
       "kind": "battery",
-      "visual": "환경사업부문",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "건설사업부문",
-      "caption": "아파트·상가 등 건축·토목 시공",
-      "kind": "service",
-      "visual": "건설사업부문",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "콘크리트사업부문",
-      "caption": "PC 등 건축자재 생산·판매",
-      "kind": "service",
-      "visual": "콘크리트사업부문",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "BATTERY",
+      "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

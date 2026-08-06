@@ -156,13 +156,17 @@
     "segment_breakdown": [
       {
         "name": "디지털헬스케어",
-        "desc": "비대면 진료 등 원격의료 플랫폼 및 헬스케어 솔루션",
-        "revenue_share": 0.0877
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.8%",
+        "revenue_share": 0.0877,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "IT교육",
-        "desc": "IT 전문가 양성 등 기업·개인 대상 교육 서비스",
-        "revenue_share": 0.0547
+        "name": "IT 교육",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.5%",
+        "revenue_share": 0.0547,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -179,32 +183,70 @@
       "비트교육센터",
       "비트캠퍼스"
     ],
-    "investor_note": "비트컴퓨터는 병원·의원용 전자의무기록(EMR)·처방전달시스템 등 의료정보시스템을 오랫동안 공급해 온 의료정보 전문기업으로, 최근에는 비대면 진료 플랫폼 '바로닥터' 등 디지털헬스케어와 IT교육사업으로도 영역을 넓히고 있습니다. 매출의 약 79%가 의료정보사업에서 나오고, 디지털헬스케어(9%)와 IT교육(5%), 임대사업(7%)이 나머지를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 359억 원으로 전년 대비 2.9% 줄었고 영업이익도 12.1% 감소했지만, 부채비율은 12.1%로 낮은 편이라 재무 안정성은 양호한 편입니다."
+    "investor_note": "비트컴퓨터는 병원·의원용 전자의무기록(EMR)·처방전달시스템 등 의료정보시스템을 오랫동안 공급해 온 의료정보 전문기업으로, 최근에는 비대면 진료 플랫폼 '바로닥터' 등 디지털헬스케어와 IT교육사업으로도 영역을 넓히고 있습니다. 매출의 약 79%가 의료정보사업에서 나오고, 디지털헬스케어(9%)와 IT교육(5%), 임대사업(7%)이 나머지를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 359억 원으로 전년 대비 2.9% 줄었고 영업이익도 12.1% 감소했지만, 부채비율은 12.1%로 낮은 편이라 재무 안정성은 양호한 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "의료정보사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 79.1%",
+        "revenue_share": 0.7912,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "디지털헬스케어",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.8%",
+        "revenue_share": 0.0877,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "IT 교육",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.5%",
+        "revenue_share": 0.0547,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임대사업 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.6%",
+        "revenue_share": 0.0664,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "디지털헬스케어",
-      "caption": "비대면 진료 등 원격의료 플랫폼 및 헬스케어 솔루션",
-      "kind": "platform",
-      "visual": "디지털헬스케어",
-      "image": "../data/business_images/business_image_local_healthcare.svg",
-      "image_source": "Local curated visual"
+      "title": "의료정보사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 79.1%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "IT교육",
-      "caption": "IT 전문가 양성 등 기업·개인 대상 교육 서비스",
+      "title": "디지털헬스케어",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.8%",
       "kind": "service",
-      "visual": "IT교육",
-      "image": "../data/business_images/business_image_local_education.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "IT 교육",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "임대사업 등",
-      "caption": "부동산 임대수입 등 기타 사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.6%",
       "kind": "service",
-      "visual": "임대사업",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

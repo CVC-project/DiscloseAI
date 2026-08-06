@@ -155,14 +155,32 @@
     "segment_finance": "BYC는 1946년 창립한 국내 대표 내의(속옷) 전문기업으로, 자체 브랜드 'BYC'를 중심으로 신생아부터 중장년층까지 아우르는 내의 제품을 생산·판매합니다. 전국 1,150여개 도소매점과 49개 직영점, 자사몰을 통해 유통하며, 보유 부동산 임대사업도 매출의 28%를 차지할 만큼 비중이 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,631억 원으로 전년 대비 1.2% 줄었지만 영업이익은 11.5%, 당기순이익은 6.4% 늘었습니다. 부채비율은 37.9%로 낮아 재무구조는 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "섬유(제조+상품)",
-        "desc": "내의·양품류 제조 및 판매",
-        "revenue_share": 0.7232
+        "name": "섬 유",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.2%",
+        "revenue_share": 0.3223,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "임대",
-        "desc": "보유 부동산 임대사업",
-        "revenue_share": 0.2766
+        "name": "상 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.0%",
+        "revenue_share": 0.3996,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "섬유부문 합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 72.3%",
+        "revenue_share": 0.7232,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임 대",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.7%",
+        "revenue_share": 0.2766,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -171,24 +189,70 @@
       "보디히트",
       "보디드라이"
     ],
-    "investor_note": "BYC는 1946년 창립한 국내 대표 내의(속옷) 전문기업으로, 자체 브랜드 'BYC'를 중심으로 신생아부터 중장년층까지 아우르는 내의 제품을 생산·판매합니다. 전국 1,150여개 도소매점과 49개 직영점, 자사몰을 통해 유통하며, 보유 부동산 임대사업도 매출의 28%를 차지할 만큼 비중이 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,631억 원으로 전년 대비 1.2% 줄었지만 영업이익은 11.5%, 당기순이익은 6.4% 늘었습니다. 부채비율은 37.9%로 낮아 재무구조는 안정적인 편입니다."
+    "investor_note": "BYC는 1946년 창립한 국내 대표 내의(속옷) 전문기업으로, 자체 브랜드 'BYC'를 중심으로 신생아부터 중장년층까지 아우르는 내의 제품을 생산·판매합니다. 전국 1,150여개 도소매점과 49개 직영점, 자사몰을 통해 유통하며, 보유 부동산 임대사업도 매출의 28%를 차지할 만큼 비중이 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,631억 원으로 전년 대비 1.2% 줄었지만 영업이익은 11.5%, 당기순이익은 6.4% 늘었습니다. 부채비율은 37.9%로 낮아 재무구조는 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "섬 유",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.2%",
+        "revenue_share": 0.3223,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.0%",
+        "revenue_share": 0.3996,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "섬유부문 합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 72.3%",
+        "revenue_share": 0.7232,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임 대",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.7%",
+        "revenue_share": 0.2766,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "섬유(제조+상품)",
-      "caption": "내의·양품류 제조 및 판매",
+      "title": "섬 유",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.2%",
       "kind": "service",
-      "visual": "섬유",
-      "image": "../data/business_images/business_image_local_textile.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "임대",
-      "caption": "보유 부동산 임대사업",
+      "title": "상 품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.0%",
       "kind": "service",
-      "visual": "임대",
-      "image": "../data/business_images/business_image_local_default_b.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "섬유부문 합계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 72.3%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "임 대",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

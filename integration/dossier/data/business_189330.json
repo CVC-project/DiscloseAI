@@ -153,7 +153,29 @@
   "snippets": {
     "overview": "(주)씨이랩의 주요 사업은 최적화하는사업, IT사업입니다. 금액은 프로젝트 진행률에 따라 매출(기납품액)과 보고기간말 현재의 수주잔고로 구분됩니다. 수량은 프로젝트 계약 건수를 기준으로 산정되며 보고기간말 현재 진행 중인 프로젝트의 경우 기납품 수량과 수주잔고 수량에 각각 동일하게 반영될 수 있습니다.",
     "segment_finance": "(주)씨이랩의 주요 사업은 최적화하는사업, IT사업입니다. 금액은 프로젝트 진행률에 따라 매출(기납품액)과 보고기간말 현재의 수주잔고로 구분됩니다. 수량은 프로젝트 계약 건수를 기준으로 산정되며 보고기간말 현재 진행 중인 프로젝트의 경우 기납품 수량과 수주잔고 수량에 각각 동일하게 반영될 수 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "AI Infra",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 61.5%",
+        "revenue_share": 0.6154,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Vision AI",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.9%",
+        "revenue_share": 0.1794,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Digital Twin",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.5%",
+        "revenue_share": 0.2052,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "적용제품",
       "제품설명",
@@ -167,24 +189,55 @@
       "AI 모델",
       "디지털트윈 구축"
     ],
-    "investor_note": "(주)씨이랩의 주요 사업은 최적화하는사업, IT사업입니다. 금액은 프로젝트 진행률에 따라 매출(기납품액)과 보고기간말 현재의 수주잔고로 구분됩니다. 수량은 프로젝트 계약 건수를 기준으로 산정되며 보고기간말 현재 진행 중인 프로젝트의 경우 기납품 수량과 수주잔고 수량에 각각 동일하게 반영될 수 있습니다."
+    "investor_note": "(주)씨이랩의 주요 사업은 최적화하는사업, IT사업입니다. 금액은 프로젝트 진행률에 따라 매출(기납품액)과 보고기간말 현재의 수주잔고로 구분됩니다. 수량은 프로젝트 계약 건수를 기준으로 산정되며 보고기간말 현재 진행 중인 프로젝트의 경우 기납품 수량과 수주잔고 수량에 각각 동일하게 반영될 수 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "AI Infra",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 61.5%",
+        "revenue_share": 0.6154,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Vision AI",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.9%",
+        "revenue_share": 0.1794,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Digital Twin",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.5%",
+        "revenue_share": 0.2052,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "시스템 구축·통합",
-      "caption": "기업 업무에 필요한 서버, 네트워크, 소프트웨어를 묶어 하나의 시스템으로 구축합니다.",
+      "title": "AI Infra",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 61.5%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "클라우드 서비스",
-      "caption": "기업이 서버와 소프트웨어를 직접 보유하지 않고 빌려 쓰도록 돕는 IT 서비스입니다.",
+      "title": "시스템 구축·통합",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.9%",
+      "kind": "service",
+      "visual": "SI",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "Digital Twin",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.5%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_cloud.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

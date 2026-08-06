@@ -155,9 +155,25 @@
     "segment_finance": "에이치엘비테라퓨틱스 주식회사의 주요 제품·서비스는 원유, 의약품, 변압기, 전선, 제품매출, 제품 용도입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 원재료 가격은 전기동(LME) 및 원유 가격과 연동되는 글로벌 원자재 시장의 영향을 받으나, 현재까지 수급상 문제는 발생하지 않았습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "채무증권",
-        "desc": "위탁매매, IB, 운용 등 증권 서비스",
-        "revenue_share": null
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.7%",
+        "revenue_share": 0.0071,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "백신의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 48.8%",
+        "revenue_share": 0.4876,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "수수료매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.8%",
+        "revenue_share": 0.3579,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -172,32 +188,46 @@
       "내 용",
       "권리자"
     ],
-    "investor_note": "에이치엘비테라퓨틱스 주식회사의 주요 제품·서비스는 원유, 의약품, 변압기, 전선, 제품매출, 제품 용도입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 원재료 가격은 전기동(LME) 및 원유 가격과 연동되는 글로벌 원자재 시장의 영향을 받으나, 현재까지 수급상 문제는 발생하지 않았습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "에이치엘비테라퓨틱스 주식회사의 주요 제품·서비스는 원유, 의약품, 변압기, 전선, 제품매출, 제품 용도입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 원재료 가격은 전기동(LME) 및 원유 가격과 연동되는 글로벌 원자재 시장의 영향을 받으나, 현재까지 수급상 문제는 발생하지 않았습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "제품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.7%",
+        "revenue_share": 0.1474,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.7%",
+        "revenue_share": 0.0071,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "백신의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 48.8%",
+        "revenue_share": 0.4876,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "수수료매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.8%",
+        "revenue_share": 0.3579,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "원유",
-      "caption": "원유 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "변압기",
-      "caption": "변압기 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "전선",
-      "caption": "전선 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "title": "의약품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 48.8%",
+      "kind": "bio",
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

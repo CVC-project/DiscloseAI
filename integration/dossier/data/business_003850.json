@@ -155,14 +155,32 @@
     "segment_finance": "보령은 국산 신약 카나브를 중심으로 고혈압·당뇨·신장질환 치료제를 판매하는 전문의약품(매출의 80% 이상) 사업과, 겔포스·용각산 같은 일반의약품 사업을 함께 운영하는 제약회사입니다. 최근에는 프랑스 사노피의 항암제 탁소텔 사업을 인수하는 등 브랜드 인수를 통한 사업 확장에도 적극적입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 174억 원으로 전년과 비슷한 수준을 유지했지만, 영업이익과 당기순이익은 각각 7.7%씩 줄었습니다. 이는 약가 인하 관련 소송에 따른 충당부채 반영 영향으로, 소송 결과에 따라 향후 실적이 달라질 수 있습니다. 부채비율은 64.1%로 다소 늘어난 편입니다.",
     "segment_breakdown": [
       {
-        "name": "전문의약품(ETC)",
-        "desc": "고혈압·당뇨·신장·항암·정신질환 등 처방의약품",
-        "revenue_share": 0.8
+        "name": "제/상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.9%",
+        "revenue_share": 0.159,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "일반의약품(OTC)",
-        "desc": "겔포스·용각산 등 소비자용 상비약",
-        "revenue_share": 0.073
+        "name": "바이오아스트릭스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.1%",
+        "revenue_share": 0.011,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "당뇨",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.002,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "당뇨 제네릭",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.2%",
+        "revenue_share": 0.012,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -177,24 +195,62 @@
       "탁솔·탁소텔(항암제)",
       "헤모시스(혈액투석액)"
     ],
-    "investor_note": "보령은 국산 신약 카나브를 중심으로 고혈압·당뇨·신장질환 치료제를 판매하는 전문의약품(매출의 80% 이상) 사업과, 겔포스·용각산 같은 일반의약품 사업을 함께 운영하는 제약회사입니다. 최근에는 프랑스 사노피의 항암제 탁소텔 사업을 인수하는 등 브랜드 인수를 통한 사업 확장에도 적극적입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 174억 원으로 전년과 비슷한 수준을 유지했지만, 영업이익과 당기순이익은 각각 7.7%씩 줄었습니다. 이는 약가 인하 관련 소송에 따른 충당부채 반영 영향으로, 소송 결과에 따라 향후 실적이 달라질 수 있습니다. 부채비율은 64.1%로 다소 늘어난 편입니다."
+    "investor_note": "보령은 국산 신약 카나브를 중심으로 고혈압·당뇨·신장질환 치료제를 판매하는 전문의약품(매출의 80% 이상) 사업과, 겔포스·용각산 같은 일반의약품 사업을 함께 운영하는 제약회사입니다. 최근에는 프랑스 사노피의 항암제 탁소텔 사업을 인수하는 등 브랜드 인수를 통한 사업 확장에도 적극적입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 174억 원으로 전년과 비슷한 수준을 유지했지만, 영업이익과 당기순이익은 각각 7.7%씩 줄었습니다. 이는 약가 인하 관련 소송에 따른 충당부채 반영 영향으로, 소송 결과에 따라 향후 실적이 달라질 수 있습니다. 부채비율은 64.1%로 다소 늘어난 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "제/상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.9%",
+        "revenue_share": 0.159,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "바이오아스트릭스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.1%",
+        "revenue_share": 0.011,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "당뇨",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.002,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "당뇨 제네릭",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.2%",
+        "revenue_share": 0.012,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "전문의약품(ETC)",
-      "caption": "고혈압·당뇨·신장·항암·정신질환 등 처방의약품",
-      "kind": "bio",
-      "visual": "전문의약품",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "제/상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "일반의약품(OTC)",
-      "caption": "겔포스·용각산 등 소비자용 상비약",
+      "title": "바이오아스트릭스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.1%",
       "kind": "bio",
-      "visual": "일반의약품",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "BIO",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "당뇨 제네릭",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

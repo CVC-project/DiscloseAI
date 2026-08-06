@@ -155,19 +155,18 @@
     "segment_finance": "과거 공시 기반 참고 정보로, 최근 연결 매출액은 4조 2,910억 원으로 전년보다 27.7% 늘었고 영업이익·순이익도 각각 40.5%, 25.8% 증가했습니다. 다만 자산이 51.9% 크게 늘어난 만큼 부채비율도 145.2%로 높아져, 외형 성장과 함께 재무 구조 변화를 함께 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "전자부품 유통부문",
-        "desc": "삼성전자 등 IT부품(Memory·MLCC 등) 유통",
-        "revenue_share": 0.8752
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 87.8%",
+        "revenue_share": 0.8785,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "건설부문",
-        "desc": "반도체설비 설치공사 등 전문건설",
-        "revenue_share": 0.1098
-      },
-      {
-        "name": "통신기기부문",
-        "desc": "무선 중계기·Open RAN 장비·운영정보표시장치",
-        "revenue_share": 0.0146
+        "name": "공사및 용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.0%",
+        "revenue_share": 0.1099,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -177,24 +176,54 @@
       "운영정보표시장치(OIDD)",
       "반도체설비 설치·유지보수"
     ],
-    "investor_note": "과거 공시 기반 참고 정보로, 최근 연결 매출액은 4조 2,910억 원으로 전년보다 27.7% 늘었고 영업이익·순이익도 각각 40.5%, 25.8% 증가했습니다. 다만 자산이 51.9% 크게 늘어난 만큼 부채비율도 145.2%로 높아져, 외형 성장과 함께 재무 구조 변화를 함께 살펴볼 필요가 있습니다."
+    "investor_note": "과거 공시 기반 참고 정보로, 최근 연결 매출액은 4조 2,910억 원으로 전년보다 27.7% 늘었고 영업이익·순이익도 각각 40.5%, 25.8% 증가했습니다. 다만 자산이 51.9% 크게 늘어난 만큼 부채비율도 145.2%로 높아져, 외형 성장과 함께 재무 구조 변화를 함께 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.1%",
+        "revenue_share": 0.0112,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 87.8%",
+        "revenue_share": 0.8785,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "공사및 용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.0%",
+        "revenue_share": 0.1099,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임대 및 기타",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.0%",
+        "revenue_share": 0.0004,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "건설부문",
-      "caption": "반도체설비 설치공사 등 전문건설",
-      "kind": "chip",
-      "visual": "건설부문",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 87.8%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "통신기기부문",
-      "caption": "무선 중계기·Open RAN 장비·운영정보표시장치",
+      "title": "공사및 용역",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.0%",
       "kind": "telecom",
-      "visual": "통신기기부문",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

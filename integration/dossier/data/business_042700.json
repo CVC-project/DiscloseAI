@@ -111,8 +111,17 @@
     "segment_breakdown": [
       {
         "name": "반도체장비",
-        "desc": "HBM 본더, 검사장비, 패키징 장비 등 반도체 제조용 장비",
-        "revenue_share": 1
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 84.6%",
+        "revenue_share": 0.8462,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Conversion Kit 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.4%",
+        "revenue_share": 0.1538,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "investor_note": "한미반도체는 반도체 제조 장비 전문 기업으로, HBM 본더(반도체 칩을 연결하는 장비), 검사장비, 패키징 장비 등을 만들고 있습니다. 지난해 매출액은 576조 원으로 전년 대비 3.2% 증가했으며, 반도체 산업의 회복세에 따라 수요가 지속적으로 늘어나고 있습니다. 특히 당기순이익(회사가 벌어들인 최종 수익)이 214조 원으로 전년 대비 40% 이상 급증했고, 영업이익률(매출 중 실제 수익이 차지하는 비율)이 43.6%에 달해 매우 높은 수익성을 유지하고 있습니다. 재무 건전성도 우수한데, 부채비율(빌린 돈 대 자기 자본의 비율)이 17.8%로 매우 낮고, 현금이 276조 원으로 전년 대비 165% 증가해 충분한 유동성을 확보하고 있습니다. 과거 공시 기반 참고 정보입니다.",
@@ -131,23 +140,39 @@
       "3D VISION INSPECTION"
     ],
     "raw_moves": [],
-    "utilization": []
+    "utilization": [],
+    "product_service_segments": [
+      {
+        "name": "반도체장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 84.6%",
+        "revenue_share": 0.8462,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Conversion Kit 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.4%",
+        "revenue_share": 0.1538,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "반도체 장비",
-      "caption": "후공정 장비와 검사·패키징 장비 수요를 봅니다.",
-      "kind": "factory",
-      "visual": "EQUIP",
+      "title": "반도체장비",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 84.6%",
+      "kind": "chip",
+      "visual": "CHIP",
       "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "HBM 투자",
-      "caption": "AI 메모리 투자 확대가 장비 수주로 이어질 수 있습니다.",
-      "kind": "chip",
-      "visual": "HBM",
-      "image": "../data/business_images/business_image_df7b448e6d568266.jpg",
+      "title": "시스템 구축·통합",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.4%",
+      "kind": "service",
+      "visual": "SI",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
       "image_source": "Wikimedia Commons"
     }
   ],

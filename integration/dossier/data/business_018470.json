@@ -155,14 +155,25 @@
     "segment_finance": "조일알미늄은 알루미늄 압연 단일 사업만 영위하는 회사로, 2차전지 양극박재·건축 내외장재·자동차 소재·포장용 Foil재 등 다양한 산업에 알루미늄판을 공급합니다. 연속주조·슬래브주조·열간압연 라인을 함께 보유해 일반재부터 고부가가치 제품까지 대응하며, 국내 압연 3사 중 약 12% 시장점유율을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,866억 원(전년비 -2.3%), 영업이익은 137억 원(-31.4%), 당기순이익은 79억 원(-27.4%)으로 수익성이 악화됐습니다. 부채비율은 96.2%로 다소 높습니다. 감사인은 압연부문(현금창출단위) 유형자산의 손상 여부를 핵심감사사항으로 짚었는데, 과거에도 손상차손을 인식한 이력이 있어 지속적인 점검이 필요한 항목입니다.",
     "segment_breakdown": [
       {
-        "name": "알루미늄 압연",
-        "desc": "각종 알루미늄판(Foil·Fin·양극박재 등) 제조",
-        "revenue_share": 0.999
+        "name": "알미늄 압연",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.9%",
+        "revenue_share": 0.999,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "알루미늄판 임가공",
-        "desc": "기물용 소재 등 임가공",
-        "revenue_share": 0.001
+        "name": "알미늄판 임가공",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.001,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "부문계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -177,24 +188,47 @@
       "화장품 Cap",
       "알루미늄판 임가공"
     ],
-    "investor_note": "조일알미늄은 알루미늄 압연 단일 사업만 영위하는 회사로, 2차전지 양극박재·건축 내외장재·자동차 소재·포장용 Foil재 등 다양한 산업에 알루미늄판을 공급합니다. 연속주조·슬래브주조·열간압연 라인을 함께 보유해 일반재부터 고부가가치 제품까지 대응하며, 국내 압연 3사 중 약 12% 시장점유율을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,866억 원(전년비 -2.3%), 영업이익은 137억 원(-31.4%), 당기순이익은 79억 원(-27.4%)으로 수익성이 악화됐습니다. 부채비율은 96.2%로 다소 높습니다. 감사인은 압연부문(현금창출단위) 유형자산의 손상 여부를 핵심감사사항으로 짚었는데, 과거에도 손상차손을 인식한 이력이 있어 지속적인 점검이 필요한 항목입니다."
+    "investor_note": "조일알미늄은 알루미늄 압연 단일 사업만 영위하는 회사로, 2차전지 양극박재·건축 내외장재·자동차 소재·포장용 Foil재 등 다양한 산업에 알루미늄판을 공급합니다. 연속주조·슬래브주조·열간압연 라인을 함께 보유해 일반재부터 고부가가치 제품까지 대응하며, 국내 압연 3사 중 약 12% 시장점유율을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,866억 원(전년비 -2.3%), 영업이익은 137억 원(-31.4%), 당기순이익은 79억 원(-27.4%)으로 수익성이 악화됐습니다. 부채비율은 96.2%로 다소 높습니다. 감사인은 압연부문(현금창출단위) 유형자산의 손상 여부를 핵심감사사항으로 짚었는데, 과거에도 손상차손을 인식한 이력이 있어 지속적인 점검이 필요한 항목입니다.",
+    "product_service_segments": [
+      {
+        "name": "알미늄 압연",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.9%",
+        "revenue_share": 0.999,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "알미늄판 임가공",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.001,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "부문계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "알루미늄 압연",
-      "caption": "각종 알루미늄판(Foil·Fin·양극박재 등) 제조",
-      "kind": "service",
-      "visual": "알루미늄",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "title": "알미늄 압연",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.9%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "알루미늄판 임가공",
-      "caption": "기물용 소재 등 임가공",
+      "title": "부문계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
       "kind": "material",
-      "visual": "알루미늄판",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

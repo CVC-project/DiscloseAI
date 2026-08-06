@@ -156,13 +156,24 @@
     "segment_breakdown": [
       {
         "name": "RF부문",
-        "desc": "무선통신 기지국용 시스템·안테나·필터 등 장비 제조",
-        "revenue_share": 0.804
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.2%",
+        "revenue_share": 0.022,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "ANTENNA 류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.5%",
+        "revenue_share": 0.195,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "LED부문",
-        "desc": "스포츠조명·실외조명 등 LED조명 제조",
-        "revenue_share": 0.196
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.6%",
+        "revenue_share": 0.196,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -172,24 +183,70 @@
       "스포츠조명",
       "실외조명(LED)"
     ],
-    "investor_note": "케이엠더블유는 5G 등 무선통신 기지국에 들어가는 안테나·필터·시스템 장비를 만드는 RF사업과, 스포츠조명·실외조명을 만드는 LED사업을 함께 하는 회사입니다. 매출의 약 80%가 RF부문에서, 나머지는 LED조명에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 975억 원으로 전년 대비 11.6% 늘었지만, 영업이익은 237억 원 적자, 당기순이익은 270억 원 적자를 이어갔습니다. 다만 적자 규모 자체는 전년보다 각각 47.7%, 30.0% 줄어들며 개선되는 흐름을 보였습니다. 부채비율은 88.0%, ROE는 -19.7%로 여전히 수익성 회복이 필요한 상황입니다."
+    "investor_note": "케이엠더블유는 5G 등 무선통신 기지국에 들어가는 안테나·필터·시스템 장비를 만드는 RF사업과, 스포츠조명·실외조명을 만드는 LED사업을 함께 하는 회사입니다. 매출의 약 80%가 RF부문에서, 나머지는 LED조명에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 975억 원으로 전년 대비 11.6% 늘었지만, 영업이익은 237억 원 적자, 당기순이익은 270억 원 적자를 이어갔습니다. 다만 적자 규모 자체는 전년보다 각각 47.7%, 30.0% 줄어들며 개선되는 흐름을 보였습니다. 부채비율은 88.0%, ROE는 -19.7%로 여전히 수익성 회복이 필요한 상황입니다.",
+    "product_service_segments": [
+      {
+        "name": "RF부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.2%",
+        "revenue_share": 0.022,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "ANTENNA 류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.5%",
+        "revenue_share": 0.195,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "FILTER 류 및 기타",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 58.7%",
+        "revenue_share": 0.587,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "LED부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.6%",
+        "revenue_share": 0.196,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "RF부문",
-      "caption": "무선통신 기지국용 시스템·안테나·필터 등 장비 제조",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.2%",
       "kind": "telecom",
-      "visual": "RF부문",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "ANTENNA 류",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.5%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "FILTER 류 및 기타",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 58.7%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "LED부문",
-      "caption": "스포츠조명·실외조명 등 LED조명 제조",
-      "kind": "service",
-      "visual": "LED부문",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.6%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -155,29 +155,32 @@
     "segment_finance": "조광페인트는 1967년 설립된 도료(페인트) 전문기업으로, 공업용(데스몬)·분체(파우락)·UV경화(유비락)·건축용(자연N)·자동차보수용(글라슈리트) 도료를 주력으로 하며, 자회사 씨케이이엠솔루션을 통해 이차전지·전자기기용 방열소재(TIM) 사업으로도 영역을 넓히고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,026억 원으로 전년 대비 18.3% 줄었고 영업이익 194억 원 적자, 당기순이익 103억 원 적자로 전년 흑자에서 적자 전환했습니다. 총자산은 4,327억 원(+10.4%)으로 늘었지만 부채비율은 104.1%, 자기자본이익률(ROE)은 -5.1%로 수익성 저하가 뚜렷합니다. 감사인은 보유 사업(현금창출단위)의 자산가치 손상 여부를 핵심감사사항으로 짚었습니다.",
     "segment_breakdown": [
       {
-        "name": "공업·분체 도료",
-        "desc": "산업용 도료와 분체도료",
-        "revenue_share": 0.428
+        "name": "공업용",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.1%",
+        "revenue_share": 0.2512,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "UV·전자소재 도료",
-        "desc": "자외선 경화형 도료",
-        "revenue_share": 0.18
+        "name": "분체",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.7%",
+        "revenue_share": 0.1772,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "건축·중방식 도료",
-        "desc": "건축용과 중방식용 도료",
-        "revenue_share": 0.157
+        "name": "목공용",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.4%",
+        "revenue_share": 0.034,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "자동차보수용 도료",
-        "desc": "차량 보수 도장용 도료",
-        "revenue_share": 0.12
-      },
-      {
-        "name": "목공·접착제",
-        "desc": "목재용 도료와 산업용 접착제",
-        "revenue_share": 0.072
+        "name": "UV",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.0%",
+        "revenue_share": 0.1796,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -190,40 +193,70 @@
       "ANYTITE(점접착제)",
       "TIM Solution(전기전자 방열소재)"
     ],
-    "investor_note": "조광페인트는 1967년 설립된 도료(페인트) 전문기업으로, 공업용(데스몬)·분체(파우락)·UV경화(유비락)·건축용(자연N)·자동차보수용(글라슈리트) 도료를 주력으로 하며, 자회사 씨케이이엠솔루션을 통해 이차전지·전자기기용 방열소재(TIM) 사업으로도 영역을 넓히고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,026억 원으로 전년 대비 18.3% 줄었고 영업이익 194억 원 적자, 당기순이익 103억 원 적자로 전년 흑자에서 적자 전환했습니다. 총자산은 4,327억 원(+10.4%)으로 늘었지만 부채비율은 104.1%, 자기자본이익률(ROE)은 -5.1%로 수익성 저하가 뚜렷합니다. 감사인은 보유 사업(현금창출단위)의 자산가치 손상 여부를 핵심감사사항으로 짚었습니다."
+    "investor_note": "조광페인트는 1967년 설립된 도료(페인트) 전문기업으로, 공업용(데스몬)·분체(파우락)·UV경화(유비락)·건축용(자연N)·자동차보수용(글라슈리트) 도료를 주력으로 하며, 자회사 씨케이이엠솔루션을 통해 이차전지·전자기기용 방열소재(TIM) 사업으로도 영역을 넓히고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,026억 원으로 전년 대비 18.3% 줄었고 영업이익 194억 원 적자, 당기순이익 103억 원 적자로 전년 흑자에서 적자 전환했습니다. 총자산은 4,327억 원(+10.4%)으로 늘었지만 부채비율은 104.1%, 자기자본이익률(ROE)은 -5.1%로 수익성 저하가 뚜렷합니다. 감사인은 보유 사업(현금창출단위)의 자산가치 손상 여부를 핵심감사사항으로 짚었습니다.",
+    "product_service_segments": [
+      {
+        "name": "공업용",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.1%",
+        "revenue_share": 0.2512,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "분체",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.7%",
+        "revenue_share": 0.1772,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "목공용",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.4%",
+        "revenue_share": 0.034,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "UV",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.0%",
+        "revenue_share": 0.1796,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "공업·분체 도료",
-      "caption": "산업용 도료와 분체도료",
-      "kind": "service",
-      "visual": "공업",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "UV·전자소재 도료",
-      "caption": "자외선 경화형 도료",
+      "title": "공업용",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.1%",
       "kind": "material",
-      "visual": "UV",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "건축·중방식 도료",
-      "caption": "건축용과 중방식용 도료",
-      "kind": "service",
-      "visual": "건축",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "title": "분체",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.7%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "자동차보수용 도료",
-      "caption": "차량 보수 도장용 도료",
-      "kind": "auto",
-      "visual": "자동차보수용",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
+      "title": "목공용",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.4%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "UV",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

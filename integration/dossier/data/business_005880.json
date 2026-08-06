@@ -156,23 +156,31 @@
     "segment_breakdown": [
       {
         "name": "벌크선",
-        "desc": "철광석 등 원자재 해상운송",
-        "revenue_share": 0.492
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.0%",
+        "revenue_share": 0.5,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "LNG선",
-        "desc": "천연가스 해상운송",
-        "revenue_share": 0.252
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.0%",
+        "revenue_share": 0.25,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "탱커선",
-        "desc": "원유·석유제품 해상운송",
-        "revenue_share": 0.042
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.0%",
+        "revenue_share": 0.04,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "무역·광업·건설업",
-        "desc": "철강 등 수출입, 철광석 생산, 관급공사",
-        "revenue_share": 0.052
+        "name": "무역업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.01,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -186,32 +194,62 @@
       "광업(철광석 생산판매)",
       "선박관리"
     ],
-    "investor_note": "대한해운은 벌크선·LNG선·탱커선을 통해 철광석, 천연가스, 원유 등 원자재를 실어 나르는 해운사로, 포스코·한국가스공사·한국전력공사 등과 장기운송계약을 맺어 안정적으로 사업을 운영하고 있습니다. 매출의 절반가량은 벌크선(철광석 등 운송), 4분의 1은 LNG선 사업에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 2,769억 원으로 전년보다 26.9% 줄었고 영업이익도 37.0% 감소했지만, 당기순이익은 1,732억 원으로 오히려 5.1% 늘었습니다. 부채비율은 70.2%로 무난한 수준이며, 자기자본이익률(ROE)은 7.4%를 기록했습니다."
+    "investor_note": "대한해운은 벌크선·LNG선·탱커선을 통해 철광석, 천연가스, 원유 등 원자재를 실어 나르는 해운사로, 포스코·한국가스공사·한국전력공사 등과 장기운송계약을 맺어 안정적으로 사업을 운영하고 있습니다. 매출의 절반가량은 벌크선(철광석 등 운송), 4분의 1은 LNG선 사업에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 2,769억 원으로 전년보다 26.9% 줄었고 영업이익도 37.0% 감소했지만, 당기순이익은 1,732억 원으로 오히려 5.1% 늘었습니다. 부채비율은 70.2%로 무난한 수준이며, 자기자본이익률(ROE)은 7.4%를 기록했습니다.",
+    "product_service_segments": [
+      {
+        "name": "벌크선",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.0%",
+        "revenue_share": 0.5,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "LNG선",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.0%",
+        "revenue_share": 0.25,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "탱커선",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.0%",
+        "revenue_share": 0.04,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "무역업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.01,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "벌크선",
-      "caption": "철광석 등 원자재 해상운송",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.0%",
       "kind": "service",
-      "visual": "벌크선",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "LNG선",
-      "caption": "천연가스 해상운송",
+      "title": "상선",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.0%",
       "kind": "ship",
-      "visual": "LNG",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
+      "visual": "SHIP",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "탱커선",
-      "caption": "원유·석유제품 해상운송",
+      "title": "무역업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
       "kind": "service",
-      "visual": "탱커선",
-      "image": "../data/business_images/business_image_local_oil.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

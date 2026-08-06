@@ -155,9 +155,32 @@
     "segment_finance": "주식회사 휴비츠의 주요 제품·서비스는 HBM, SSD, 담배, 제품매출, 산업용OCT, 필름입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 디지털 리프렉터는 경쟁사가 한정되어 있고 품질이나 제품의 성능이 판매에 있어 상대적으로 중요한 제품으로 고가의 제품이며 시장이 성장기 초기에 있으므로 가격경쟁이 심하지 않기 때문에 저가 제품의 공급에 의한 수요의 탄력성이 다른 제품에 비해 크다고 할 수 있으며 일본 업체들이 강세를 보이고 있습니다.- 셋째는 안경점의 다른 기기들과는 달리 광학이 전혀 적용되지 않은 제품입니다. 설비의 신설 및 매입 계획 등 - 당사는 제품 생산의 특성상 대규모 시설투자가 필요로 하지는 않습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "의료보험",
-        "desc": "보험계약과 자산운용 중심 서비스",
-        "revenue_share": null
+        "name": "자동검안기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.0%",
+        "revenue_share": 0.17,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동렌즈미터",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.03,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "렌즈가공기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.0%",
+        "revenue_share": 0.24,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "리플렉터",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.0%",
+        "revenue_share": 0.09,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -173,24 +196,70 @@
       "- AL(=Axial Length)",
       "Tangential map"
     ],
-    "investor_note": "주식회사 휴비츠의 주요 제품·서비스는 HBM, SSD, 담배, 제품매출, 산업용OCT, 필름입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 디지털 리프렉터는 경쟁사가 한정되어 있고 품질이나 제품의 성능이 판매에 있어 상대적으로 중요한 제품으로 고가의 제품이며 시장이 성장기 초기에 있으므로 가격경쟁이 심하지 않기 때문에 저가 제품의 공급에 의한 수요의 탄력성이 다른 제품에 비해 크다고 할 수 있으며 일본 업체들이 강세를 보이고 있습니다.- 셋째는 안경점의 다른 기기들과는 달리 광학이 전혀 적용되지 않은 제품입니다. 설비의 신설 및 매입 계획 등 - 당사는 제품 생산의 특성상 대규모 시설투자가 필요로 하지는 않습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사 휴비츠의 주요 제품·서비스는 HBM, SSD, 담배, 제품매출, 산업용OCT, 필름입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 디지털 리프렉터는 경쟁사가 한정되어 있고 품질이나 제품의 성능이 판매에 있어 상대적으로 중요한 제품으로 고가의 제품이며 시장이 성장기 초기에 있으므로 가격경쟁이 심하지 않기 때문에 저가 제품의 공급에 의한 수요의 탄력성이 다른 제품에 비해 크다고 할 수 있으며 일본 업체들이 강세를 보이고 있습니다.- 셋째는 안경점의 다른 기기들과는 달리 광학이 전혀 적용되지 않은 제품입니다. 설비의 신설 및 매입 계획 등 - 당사는 제품 생산의 특성상 대규모 시설투자가 필요로 하지는 않습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "자동검안기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.0%",
+        "revenue_share": 0.17,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동렌즈미터",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.03,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "렌즈가공기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.0%",
+        "revenue_share": 0.24,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "리플렉터",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.0%",
+        "revenue_share": 0.09,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "의료보험",
-      "caption": "보험계약과 자산운용 중심 서비스",
-      "kind": "insurance",
-      "visual": "의료보험",
-      "image": "../data/business_images/business_image_local_securities.svg",
-      "image_source": "Local curated visual"
+      "title": "자동검안기",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "담배",
-      "caption": "담배 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "consumer",
-      "visual": "담배",
-      "image": "../data/business_images/business_image_local_default_d.svg",
-      "image_source": "Local curated visual"
+      "title": "자동렌즈미터",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "렌즈가공기",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "리플렉터",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

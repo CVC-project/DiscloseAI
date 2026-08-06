@@ -156,13 +156,17 @@
     "segment_breakdown": [
       {
         "name": "1. 초ㆍ중등 부문",
-        "desc": "중등 부문 관련 제품·서비스",
-        "revenue_share": null
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.5%",
+        "revenue_share": 0.1551,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "초ㆍ중등 부문",
-        "desc": "중등 부문 관련 제품·서비스",
-        "revenue_share": null
+        "name": "2. 고등 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 84.0%",
+        "revenue_share": 0.8401,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -171,40 +175,47 @@
       "모의고사",
       "디자인팀"
     ],
-    "investor_note": "(주)디지털대성의 주요 제품·서비스는 중등 부문, 교습용 교재, 모의고사, 디자인팀, 제품 출판기획입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 생산설비 당사의 생산 및 설비에 관한 사항으로는 고등 사업부문에서 오프라인 학원을 운영하여 교육서비스를 제공하고, 본사의 스튜디오 등에서 제작된 동영상 강의를 온라인 사이트를 통하여 교육서비스를 제공하고 있습니다. 원재료를 표시하기는 어렵지만, 우수한 강사진 영입 및 양질의 콘텐츠를 기획, 제작하여 교육컨텐츠를 공급한다는 측면에서 시장에서 우위에 위치하고 수험생들의 니즈에 맞는 강의를 할 수 있는 개별 강사 영입 및 강의와 교재에 대한 콘텐츠 개발, 안정적인 서버환경과 오프라인 학원 인프라 등이 주요한 품질 결정 요소입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)디지털대성의 주요 제품·서비스는 중등 부문, 교습용 교재, 모의고사, 디자인팀, 제품 출판기획입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 생산설비 당사의 생산 및 설비에 관한 사항으로는 고등 사업부문에서 오프라인 학원을 운영하여 교육서비스를 제공하고, 본사의 스튜디오 등에서 제작된 동영상 강의를 온라인 사이트를 통하여 교육서비스를 제공하고 있습니다. 원재료를 표시하기는 어렵지만, 우수한 강사진 영입 및 양질의 콘텐츠를 기획, 제작하여 교육컨텐츠를 공급한다는 측면에서 시장에서 우위에 위치하고 수험생들의 니즈에 맞는 강의를 할 수 있는 개별 강사 영입 및 강의와 교재에 대한 콘텐츠 개발, 안정적인 서버환경과 오프라인 학원 인프라 등이 주요한 품질 결정 요소입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "1. 초ㆍ중등 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.5%",
+        "revenue_share": 0.1551,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "2. 고등 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 84.0%",
+        "revenue_share": 0.8401,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "3. 기타 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.0048,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "중등 부문",
-      "caption": "중등 부문 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "1. 초ㆍ중등 부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.5%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_education.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "교습용 교재",
-      "caption": "교습용 교재 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "2. 고등 부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 84.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_education.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "모의고사",
-      "caption": "모의고사 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_education.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "디자인팀",
-      "caption": "디자인팀 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_education.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

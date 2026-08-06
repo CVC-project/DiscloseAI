@@ -155,14 +155,32 @@
     "segment_finance": "팬오션은 철광석·석탄·곡물 등을 실어 나르는 벌크선 운송을 주력으로 컨테이너·탱커·LNG선 운송과 곡물 유통사업까지 함께하는 국내 최대 해운사입니다. 아시아 항로가 매출의 64%를 차지하며 포스코·한국전력 발전자회사 등이 주요 고객입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 5조 4,328억 원으로 전년 대비 5.3% 늘었고 영업이익은 4,919억 원(+4.4%), 당기순이익은 3,014억 원(+12.4%)으로 모두 증가했습니다. 부채비율은 89.6%로 무난한 수준입니다.",
     "segment_breakdown": [
       {
-        "name": "해운업(벌크)",
-        "desc": "철광석·석탄·곡물 등 벌크화물 운송",
-        "revenue_share": 0.57
+        "name": "1. 해운업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 76.0%",
+        "revenue_share": 0.76,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "해운업(비벌크)",
-        "desc": "컨테이너·탱커·LNG선 운송",
-        "revenue_share": 0.19
+        "name": "벌크",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 57.0%",
+        "revenue_share": 0.57,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "컨테이너",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+        "revenue_share": 0.08,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "탱커선",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
+        "revenue_share": 0.05,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -172,24 +190,70 @@
       "LNG선",
       "곡물 유통"
     ],
-    "investor_note": "팬오션은 철광석·석탄·곡물 등을 실어 나르는 벌크선 운송을 주력으로 컨테이너·탱커·LNG선 운송과 곡물 유통사업까지 함께하는 국내 최대 해운사입니다. 아시아 항로가 매출의 64%를 차지하며 포스코·한국전력 발전자회사 등이 주요 고객입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 5조 4,328억 원으로 전년 대비 5.3% 늘었고 영업이익은 4,919억 원(+4.4%), 당기순이익은 3,014억 원(+12.4%)으로 모두 증가했습니다. 부채비율은 89.6%로 무난한 수준입니다."
+    "investor_note": "팬오션은 철광석·석탄·곡물 등을 실어 나르는 벌크선 운송을 주력으로 컨테이너·탱커·LNG선 운송과 곡물 유통사업까지 함께하는 국내 최대 해운사입니다. 아시아 항로가 매출의 64%를 차지하며 포스코·한국전력 발전자회사 등이 주요 고객입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 5조 4,328억 원으로 전년 대비 5.3% 늘었고 영업이익은 4,919억 원(+4.4%), 당기순이익은 3,014억 원(+12.4%)으로 모두 증가했습니다. 부채비율은 89.6%로 무난한 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "1. 해운업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 76.0%",
+        "revenue_share": 0.76,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "벌크",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 57.0%",
+        "revenue_share": 0.57,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "컨테이너",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+        "revenue_share": 0.08,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "탱커선",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
+        "revenue_share": 0.05,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "해운업(벌크)",
-      "caption": "철광석·석탄·곡물 등 벌크화물 운송",
+      "title": "1. 해운업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 76.0%",
       "kind": "service",
-      "visual": "해운업",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "해운업(비벌크)",
-      "caption": "컨테이너·탱커·LNG선 운송",
+      "title": "벌크",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 57.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "컨테이너",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "상선",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
       "kind": "ship",
-      "visual": "LNG",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
+      "visual": "SHIP",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

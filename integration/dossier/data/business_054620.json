@@ -155,24 +155,25 @@
     "segment_finance": "APS는 지주부문과 신소재 사업을 갖고, 종속회사를 통해 장비 제어 소프트웨어, 스마트팩토리·로봇물류, 피부미용 의료기기, 반도체 정밀부품, 반도체 설비를 운영합니다. 한 회사 안에 반도체 장비·부품과 자동화 소프트웨어, 의료기기 사업이 함께 있는 구조입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 848억 원으로 전년보다 9.7% 줄었고 영업손실 68억 원, 당기순손실 86억 원입니다. 부채비율은 72.6%입니다. 종속회사별 수익성과 영업권 손상 여부가 중요한 확인 포인트입니다.",
     "segment_breakdown": [
       {
-        "name": "소프트웨어",
-        "desc": "장비 컨트롤 SW, 스마트팩토리, 로봇물류, IT 인프라",
-        "revenue_share": null
+        "name": "지주 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.7%",
+        "revenue_share": 0.1268,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "피부미용 의료기기",
-        "desc": "비손메디칼을 통한 피부미용 의료기기와 화장품 유통",
-        "revenue_share": null
+        "name": "소프트웨어 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.5%",
+        "revenue_share": 0.3547,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "반도체 부품",
-        "desc": "정밀세정, ESC, 코팅 제조와 정밀부품 사업",
-        "revenue_share": null
-      },
-      {
-        "name": "반도체 설비",
-        "desc": "웨이퍼 절단 장비, 칠러, 그라인더 등 반도체 장비",
-        "revenue_share": null
+        "name": "피부미용의료기기 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.6%",
+        "revenue_share": 0.1263,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -186,40 +187,62 @@
       "반도체 웨이퍼 절단 장비",
       "칠러·그라인더 장비"
     ],
-    "investor_note": "APS는 지주부문과 신소재 사업을 갖고, 종속회사를 통해 장비 제어 소프트웨어, 스마트팩토리·로봇물류, 피부미용 의료기기, 반도체 정밀부품, 반도체 설비를 운영합니다. 한 회사 안에 반도체 장비·부품과 자동화 소프트웨어, 의료기기 사업이 함께 있는 구조입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 848억 원으로 전년보다 9.7% 줄었고 영업손실 68억 원, 당기순손실 86억 원입니다. 부채비율은 72.6%입니다. 종속회사별 수익성과 영업권 손상 여부가 중요한 확인 포인트입니다."
+    "investor_note": "APS는 지주부문과 신소재 사업을 갖고, 종속회사를 통해 장비 제어 소프트웨어, 스마트팩토리·로봇물류, 피부미용 의료기기, 반도체 정밀부품, 반도체 설비를 운영합니다. 한 회사 안에 반도체 장비·부품과 자동화 소프트웨어, 의료기기 사업이 함께 있는 구조입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 848억 원으로 전년보다 9.7% 줄었고 영업손실 68억 원, 당기순손실 86억 원입니다. 부채비율은 72.6%입니다. 종속회사별 수익성과 영업권 손상 여부가 중요한 확인 포인트입니다.",
+    "product_service_segments": [
+      {
+        "name": "지주 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.7%",
+        "revenue_share": 0.1268,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "신소재사업부",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.0053,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "소프트웨어 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.5%",
+        "revenue_share": 0.3547,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "피부미용의료기기 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.6%",
+        "revenue_share": 0.1263,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "소프트웨어",
-      "caption": "장비 컨트롤 SW, 스마트팩토리, 로봇물류, IT 인프라",
+      "title": "지주 부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.7%",
       "kind": "service",
-      "visual": "소프트웨어",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "피부미용 의료기기",
-      "caption": "비손메디칼을 통한 피부미용 의료기기와 화장품 유통",
-      "kind": "consumer",
-      "visual": "피부미용",
-      "image": "../data/business_images/business_image_local_cosmetics.svg",
-      "image_source": "Local curated visual"
+      "title": "소프트웨어·솔루션",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.5%",
+      "kind": "service",
+      "visual": "SOFTWARE",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "반도체 부품",
-      "caption": "정밀세정, ESC, 코팅 제조와 정밀부품 사업",
-      "kind": "chip",
-      "visual": "반도체",
-      "image": "../data/business_images/business_image_local_semiconductor_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "반도체 설비",
-      "caption": "웨이퍼 절단 장비, 칠러, 그라인더 등 반도체 장비",
-      "kind": "chip",
-      "visual": "반도체",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "title": "의료기기",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.6%",
+      "kind": "bio",
+      "visual": "MEDICAL",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

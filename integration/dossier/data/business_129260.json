@@ -155,24 +155,32 @@
     "segment_finance": "인터지스는 동국제강 계열 물류회사로, 전국 주요 항만에서의 하역사업과 철강제품 육상운송, 철강 원재료 해상운송, 포워딩까지 물류 전 과정을 아우르고 있습니다. 매출은 해운(약 30%), 운송(약 29%), 하역(약 20%), 포워딩(약 11%) 순으로 고르게 나뉘어 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 7,089억 원으로 전년보다 1.1% 늘었지만 영업이익은 17.2%, 당기순이익은 28.6% 각각 줄었습니다. 부채비율은 68.5%이며, 자기자본이익률(ROE)은 3.6%였습니다.",
     "segment_breakdown": [
       {
+        "name": "하역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.8%",
+        "revenue_share": 0.198,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
         "name": "운송",
-        "desc": "철강제품·컨테이너 육상운송",
-        "revenue_share": 0.294
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.6%",
+        "revenue_share": 0.306,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "해운",
-        "desc": "철강 원재료 등 해상운송(정기선·부정기선)",
-        "revenue_share": 0.298
-      },
-      {
-        "name": "하역",
-        "desc": "부산·인천·포항·당진 등 항만 하역",
-        "revenue_share": 0.199
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.8%",
+        "revenue_share": 0.278,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "포워딩",
-        "desc": "베트남·멕시코·미국·태국 등 해외 포워딩",
-        "revenue_share": 0.106
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.9%",
+        "revenue_share": 0.139,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -182,40 +190,70 @@
       "포워딩 서비스",
       "물류센터 운영"
     ],
-    "investor_note": "인터지스는 동국제강 계열 물류회사로, 전국 주요 항만에서의 하역사업과 철강제품 육상운송, 철강 원재료 해상운송, 포워딩까지 물류 전 과정을 아우르고 있습니다. 매출은 해운(약 30%), 운송(약 29%), 하역(약 20%), 포워딩(약 11%) 순으로 고르게 나뉘어 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 7,089억 원으로 전년보다 1.1% 늘었지만 영업이익은 17.2%, 당기순이익은 28.6% 각각 줄었습니다. 부채비율은 68.5%이며, 자기자본이익률(ROE)은 3.6%였습니다."
+    "investor_note": "인터지스는 동국제강 계열 물류회사로, 전국 주요 항만에서의 하역사업과 철강제품 육상운송, 철강 원재료 해상운송, 포워딩까지 물류 전 과정을 아우르고 있습니다. 매출은 해운(약 30%), 운송(약 29%), 하역(약 20%), 포워딩(약 11%) 순으로 고르게 나뉘어 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 7,089억 원으로 전년보다 1.1% 늘었지만 영업이익은 17.2%, 당기순이익은 28.6% 각각 줄었습니다. 부채비율은 68.5%이며, 자기자본이익률(ROE)은 3.6%였습니다.",
+    "product_service_segments": [
+      {
+        "name": "하역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.8%",
+        "revenue_share": 0.198,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "운송",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.6%",
+        "revenue_share": 0.306,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "해운",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.8%",
+        "revenue_share": 0.278,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "포워딩",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.9%",
+        "revenue_share": 0.139,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
+      "title": "하역",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
+    },
+    {
       "title": "운송",
-      "caption": "철강제품·컨테이너 육상운송",
-      "kind": "material",
-      "visual": "운송",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "해운",
-      "caption": "철강 원재료 등 해상운송(정기선·부정기선)",
-      "kind": "material",
-      "visual": "해운",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "하역",
-      "caption": "부산·인천·포항·당진 등 항만 하역",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.8%",
       "kind": "service",
-      "visual": "하역",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "포워딩",
-      "caption": "베트남·멕시코·미국·태국 등 해외 포워딩",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.9%",
       "kind": "service",
-      "visual": "포워딩",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -153,7 +153,36 @@
   "snippets": {
     "overview": "주식회사 제우스의 주요 사업은 디스플레이 부문, 반도체 부문, 플러그밸브 부문, 사업부분 등입니다. 제품 등의 가격변동추이 당사의 매출은 대부분 고객이 요구하는 사양에 부합하는 제품을 생산하는 개별수주 형태로 진행되기 때문에 계약별로 동일한 제품이 생산, 판매되는 것이 아닙니다. 원재료에 관한 사항 당사의 제품은 선 생산 후 판매되는 제품이 아닌 개별 수주에 의한 판매로써 수주 시점에 생산에 필요한 품목, 규격, 수량 등이 결정되므로 품목에 의한 구분이 어렵습니다.",
     "segment_finance": "주식회사 제우스의 주요 사업은 디스플레이 부문, 반도체 부문, 플러그밸브 부문, 사업부분 등입니다. 제품 등의 가격변동추이 당사의 매출은 대부분 고객이 요구하는 사양에 부합하는 제품을 생산하는 개별수주 형태로 진행되기 때문에 계약별로 동일한 제품이 생산, 판매되는 것이 아닙니다. 원재료에 관한 사항 당사의 제품은 선 생산 후 판매되는 제품이 아닌 개별 수주에 의한 판매로써 수주 시점에 생산에 필요한 품목, 규격, 수량 등이 결정되므로 품목에 의한 구분이 어렵습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "디스플레이 제조 장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.4%",
+        "revenue_share": 0.0943,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "반도체 제조 장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 60.7%",
+        "revenue_share": 0.6069,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "플러그밸브",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.2%",
+        "revenue_share": 0.042,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "산업용 로봇 및 진공",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.7%",
+        "revenue_share": 0.2568,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "HBM",
       "제품개발",
@@ -167,32 +196,70 @@
       "중국",
       "Purge Hot AirHP"
     ],
-    "investor_note": "주식회사 제우스의 주요 사업은 디스플레이 부문, 반도체 부문, 플러그밸브 부문, 사업부분 등입니다. 제품 등의 가격변동추이 당사의 매출은 대부분 고객이 요구하는 사양에 부합하는 제품을 생산하는 개별수주 형태로 진행되기 때문에 계약별로 동일한 제품이 생산, 판매되는 것이 아닙니다. 원재료에 관한 사항 당사의 제품은 선 생산 후 판매되는 제품이 아닌 개별 수주에 의한 판매로써 수주 시점에 생산에 필요한 품목, 규격, 수량 등이 결정되므로 품목에 의한 구분이 어렵습니다."
+    "investor_note": "주식회사 제우스의 주요 사업은 디스플레이 부문, 반도체 부문, 플러그밸브 부문, 사업부분 등입니다. 제품 등의 가격변동추이 당사의 매출은 대부분 고객이 요구하는 사양에 부합하는 제품을 생산하는 개별수주 형태로 진행되기 때문에 계약별로 동일한 제품이 생산, 판매되는 것이 아닙니다. 원재료에 관한 사항 당사의 제품은 선 생산 후 판매되는 제품이 아닌 개별 수주에 의한 판매로써 수주 시점에 생산에 필요한 품목, 규격, 수량 등이 결정되므로 품목에 의한 구분이 어렵습니다.",
+    "product_service_segments": [
+      {
+        "name": "디스플레이 제조 장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.4%",
+        "revenue_share": 0.0943,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "반도체 제조 장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 60.7%",
+        "revenue_share": 0.6069,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "플러그밸브",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.2%",
+        "revenue_share": 0.042,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "산업용 로봇 및 진공",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.7%",
+        "revenue_share": 0.2568,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "제품개발",
-      "caption": "제품개발 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "title": "디스플레이",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.4%",
+      "kind": "display",
+      "visual": "OLED",
+      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "시제품 테스트",
-      "caption": "반도체 칩을 제품으로 쓸 수 있게 포장하고 검사하는 후공정 서비스입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_probe.svg",
-      "image_source": "Local curated visual"
+      "title": "반도체 제조 장비",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 60.7%",
+      "kind": "chip",
+      "visual": "CHIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "J.E.T.",
-      "caption": "J.E.T. 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "플러그밸브",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.2%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "산업용 로봇 및 진공",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

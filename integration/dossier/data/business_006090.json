@@ -156,13 +156,17 @@
     "segment_breakdown": [
       {
         "name": "식품제조",
-        "desc": "맛살·햄·소시지·어묵·만두 등 가공식품 제조·판매",
-        "revenue_share": 0.7597
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 76.0%",
+        "revenue_share": 0.7597,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "수산",
-        "desc": "참치연승·선망, 명태 트롤 등 원양어업 어획물 판매",
-        "revenue_share": 0.2318
+        "name": "수 산",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.2%",
+        "revenue_share": 0.2318,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -176,24 +180,40 @@
       "명태",
       "오징어"
     ],
-    "investor_note": "사조오양은 맛살·햄·소시지·어묵·만두 등을 만드는 식품제조부문과, 참치·명태·오징어 등을 원양에서 어획해 판매하는 수산부문을 함께 운영하는 사조그룹 계열 식품·수산기업입니다. 식품제조부문이 매출의 약 76%, 수산부문이 약 23%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 4,173억 원으로 전년보다 4.2% 늘었지만 영업이익은 135억 원으로 35.3% 줄고 당기순이익도 105억 원으로 16.3% 감소해 외형 성장에 비해 수익성은 약화됐습니다. 부채비율은 76.5%로 다소 높은 편이라 재무 부담도 함께 살펴볼 필요가 있습니다."
+    "investor_note": "사조오양은 맛살·햄·소시지·어묵·만두 등을 만드는 식품제조부문과, 참치·명태·오징어 등을 원양에서 어획해 판매하는 수산부문을 함께 운영하는 사조그룹 계열 식품·수산기업입니다. 식품제조부문이 매출의 약 76%, 수산부문이 약 23%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 4,173억 원으로 전년보다 4.2% 늘었지만 영업이익은 135억 원으로 35.3% 줄고 당기순이익도 105억 원으로 16.3% 감소해 외형 성장에 비해 수익성은 약화됐습니다. 부채비율은 76.5%로 다소 높은 편이라 재무 부담도 함께 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "식품제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 76.0%",
+        "revenue_share": 0.7597,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "수 산",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.2%",
+        "revenue_share": 0.2318,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "식품제조",
-      "caption": "맛살·햄·소시지·어묵·만두 등 가공식품 제조·판매",
-      "kind": "consumer",
-      "visual": "식품제조",
-      "image": "../data/business_images/business_image_food_packaged.svg",
-      "image_source": "Local visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 76.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "수산",
-      "caption": "참치연승·선망, 명태 트롤 등 원양어업 어획물 판매",
+      "title": "수 산",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.2%",
       "kind": "service",
-      "visual": "수산",
-      "image": "../data/business_images/business_image_food_packaged.svg",
-      "image_source": "Local visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

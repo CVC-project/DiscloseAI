@@ -155,9 +155,25 @@
     "segment_finance": "동구바이오제약은 피부과·비뇨기과 처방 1위권 품목(더모타손MLE, 유로파서방정 등)을 보유한 전문의약품 제조사로, 의약품 위탁생산(CMO) 사업과 신기술사업금융 자회사(로프티록인베스트먼트)를 통한 투자사업도 함께 운영하고 있습니다. 매출의 대부분(95%가량)이 의약품·의약외품 제조판매에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,426억 원으로 전년보다 2.6% 줄고 영업이익도 27.1% 감소했지만, 당기순이익은 501억 원으로 전년 대비 크게 늘어 자기자본이익률(ROE)이 39.0%에 달했습니다. 부채비율은 121.1%로 다소 높은 편입니다.",
     "segment_breakdown": [
       {
-        "name": "의약품 및 의약외품",
-        "desc": "전문의약품(피부과·비뇨기과 등) 및 CMO 제조판매",
-        "revenue_share": 0.95
+        "name": "외피용약",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+        "revenue_share": 0.0801,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "항생물질제제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.1%",
+        "revenue_share": 0.071,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "알레르기용약",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.6%",
+        "revenue_share": 0.0958,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,40 +190,62 @@
       "셀블룸(코스메슈티컬)",
       "의약품 위탁생산(CMO)"
     ],
-    "investor_note": "동구바이오제약은 피부과·비뇨기과 처방 1위권 품목(더모타손MLE, 유로파서방정 등)을 보유한 전문의약품 제조사로, 의약품 위탁생산(CMO) 사업과 신기술사업금융 자회사(로프티록인베스트먼트)를 통한 투자사업도 함께 운영하고 있습니다. 매출의 대부분(95%가량)이 의약품·의약외품 제조판매에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,426억 원으로 전년보다 2.6% 줄고 영업이익도 27.1% 감소했지만, 당기순이익은 501억 원으로 전년 대비 크게 늘어 자기자본이익률(ROE)이 39.0%에 달했습니다. 부채비율은 121.1%로 다소 높은 편입니다."
+    "investor_note": "동구바이오제약은 피부과·비뇨기과 처방 1위권 품목(더모타손MLE, 유로파서방정 등)을 보유한 전문의약품 제조사로, 의약품 위탁생산(CMO) 사업과 신기술사업금융 자회사(로프티록인베스트먼트)를 통한 투자사업도 함께 운영하고 있습니다. 매출의 대부분(95%가량)이 의약품·의약외품 제조판매에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,426억 원으로 전년보다 2.6% 줄고 영업이익도 27.1% 감소했지만, 당기순이익은 501억 원으로 전년 대비 크게 늘어 자기자본이익률(ROE)이 39.0%에 달했습니다. 부채비율은 121.1%로 다소 높은 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.8%",
+        "revenue_share": 0.2281,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "외피용약",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+        "revenue_share": 0.0801,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "항생물질제제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.1%",
+        "revenue_share": 0.071,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "알레르기용약",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.6%",
+        "revenue_share": 0.0958,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "더모타손MLE(피부과)",
-      "caption": "더모타손MLE(피부과) 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "외피용약",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "알레스틴정(항히스타민제)",
-      "caption": "알레스틴정(항히스타민제) 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "항생물질제제",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.1%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "유로파서방정(전립선치료제)",
-      "caption": "유로파서방정(전립선치료제) 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "유로리드(전립선비대증치료제)",
-      "caption": "유로리드(전립선비대증치료제) 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "알레르기용약",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -155,19 +155,32 @@
     "segment_finance": "자체 가공품이 매출의 약 57%를 차지하고, 나머지는 코일 등 원재료·상품 유통 판매입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,799억 원으로 전년과 비슷한 수준(-1.0%)을 유지했고, 영업이익은 2억 원으로 전년보다 크게 늘었지만 절대 규모는 여전히 작은 편이며, 당기순이익은 21억 원으로 7.9% 줄었습니다. 부채비율은 15.7%로 재무구조는 매우 안정적입니다.",
     "segment_breakdown": [
       {
-        "name": "1차금속제조업(가공품)",
-        "desc": "스켈프·강판·강관·형강 등 코일 가공품",
-        "revenue_share": 0.573
+        "name": "1차금속제조업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.8%",
+        "revenue_share": 0.2181,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "원재료(코일) 판매",
-        "desc": "열연·냉연 코일 원재료 유통",
-        "revenue_share": 0.352
+        "name": "-.강 판",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.2%",
+        "revenue_share": 0.2418,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "상품",
-        "desc": "강판·강관·형강 등 유통판매",
-        "revenue_share": 0.071
+        "name": "-.강 관",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.2%",
+        "revenue_share": 0.1018,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "-.형 강",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.2%",
+        "revenue_share": 0.0116,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -178,32 +191,70 @@
       "열연코일",
       "냉연코일"
     ],
-    "investor_note": "자체 가공품이 매출의 약 57%를 차지하고, 나머지는 코일 등 원재료·상품 유통 판매입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,799억 원으로 전년과 비슷한 수준(-1.0%)을 유지했고, 영업이익은 2억 원으로 전년보다 크게 늘었지만 절대 규모는 여전히 작은 편이며, 당기순이익은 21억 원으로 7.9% 줄었습니다. 부채비율은 15.7%로 재무구조는 매우 안정적입니다."
+    "investor_note": "자체 가공품이 매출의 약 57%를 차지하고, 나머지는 코일 등 원재료·상품 유통 판매입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,799억 원으로 전년과 비슷한 수준(-1.0%)을 유지했고, 영업이익은 2억 원으로 전년보다 크게 늘었지만 절대 규모는 여전히 작은 편이며, 당기순이익은 21억 원으로 7.9% 줄었습니다. 부채비율은 15.7%로 재무구조는 매우 안정적입니다.",
+    "product_service_segments": [
+      {
+        "name": "1차금속제조업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.8%",
+        "revenue_share": 0.2181,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "-.강 판",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.2%",
+        "revenue_share": 0.2418,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "-.강 관",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.2%",
+        "revenue_share": 0.1018,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "-.형 강",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.2%",
+        "revenue_share": 0.0116,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "1차금속제조업(가공품)",
-      "caption": "스켈프·강판·강관·형강 등 코일 가공품",
+      "title": "1차금속제조업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.8%",
       "kind": "material",
-      "visual": "1차금속제조업",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "원재료(코일) 판매",
-      "caption": "열연·냉연 코일 원재료 유통",
-      "kind": "service",
-      "visual": "원재료",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "title": "-.강 판",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.2%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "상품",
-      "caption": "강판·강관·형강 등 유통판매",
-      "kind": "service",
-      "visual": "상품",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "title": "-.강 관",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.2%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "-.형 강",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.2%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

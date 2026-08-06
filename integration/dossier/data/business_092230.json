@@ -155,9 +155,25 @@
     "segment_finance": "KPX홀딩스(주)의 핵심은 전자재료제조, 투자사업부문, 자본시장과금융, 민간투자사업 등입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 자동차부품부문을 영위하는 종속회사는 진양오토모티브㈜, ㈜일승산업, 진양에너지유틸리티㈜이며, 연결 조정 전 당기 매출은 1,647억 원을 기록하였습니다. 지배회사인 KPX홀딩스㈜는 KPX케미칼㈜(구, 한국포리올㈜)와 KPX화인케미칼㈜(구, 한국화인케미칼㈜)의 투자사업부문을 각각 분할함과 동시에 합병하여 설립된 지주회사입니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다.",
     "segment_breakdown": [
       {
-        "name": "PPG부문",
-        "desc": "PPG부문 관련 제품·서비스",
-        "revenue_share": null
+        "name": "브랜드수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.01,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "수수료수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.1%",
+        "revenue_share": 0.121,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "도매업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.6%",
+        "revenue_share": 0.136,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,24 +190,70 @@
       "가공 직판",
       "대리점판매 PUFOAM 침구류"
     ],
-    "investor_note": "KPX홀딩스(주)의 핵심은 전자재료제조, 투자사업부문, 자본시장과금융, 민간투자사업 등입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 자동차부품부문을 영위하는 종속회사는 진양오토모티브㈜, ㈜일승산업, 진양에너지유틸리티㈜이며, 연결 조정 전 당기 매출은 1,647억 원을 기록하였습니다. 지배회사인 KPX홀딩스㈜는 KPX케미칼㈜(구, 한국포리올㈜)와 KPX화인케미칼㈜(구, 한국화인케미칼㈜)의 투자사업부문을 각각 분할함과 동시에 합병하여 설립된 지주회사입니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다."
+    "investor_note": "KPX홀딩스(주)의 핵심은 전자재료제조, 투자사업부문, 자본시장과금융, 민간투자사업 등입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 자동차부품부문을 영위하는 종속회사는 진양오토모티브㈜, ㈜일승산업, 진양에너지유틸리티㈜이며, 연결 조정 전 당기 매출은 1,647억 원을 기록하였습니다. 지배회사인 KPX홀딩스㈜는 KPX케미칼㈜(구, 한국포리올㈜)와 KPX화인케미칼㈜(구, 한국화인케미칼㈜)의 투자사업부문을 각각 분할함과 동시에 합병하여 설립된 지주회사입니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다.",
+    "product_service_segments": [
+      {
+        "name": "지주사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.6%",
+        "revenue_share": 0.186,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "브랜드수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.01,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "수수료수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.1%",
+        "revenue_share": 0.121,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "도매업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.6%",
+        "revenue_share": 0.136,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "화학제품",
-      "caption": "화학제품 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "지주사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.6%",
       "kind": "material",
       "visual": "MAT",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "증권",
-      "caption": "투자 중개와 자산관리 수수료가 실적에 연결됩니다.",
-      "kind": "securities",
-      "visual": "AUM",
-      "image": "../data/business_images/business_image_local_fm.svg",
-      "image_source": "Local curated visual"
+      "title": "브랜드수익",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "수수료수익",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.1%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "도매업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.6%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

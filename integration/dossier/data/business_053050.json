@@ -153,31 +153,69 @@
   "snippets": {
     "overview": "(주)지에스이의 주요 제품·서비스는 LNG, 원유, 도시가스공급사업, 배관공급업)입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품, 서비스 등의 매출현황 - 상기 기타매출은 한국채택국제회계기준서 제1115호 '고객과의 계약에서 생기는 수익'에 따라 기존 유형자산(공급설비)의 차감 항목으로 계상하고 있는 시설분담금 등을 선수수익으로 계정 재분류하고 기간에 걸쳐 수익을 인식하므로 대응되는 비용의 발생이 없는 수익입니다.나. 또한 전사원 영업 활동을 통하여 타연료를 사용 중인 수요가의 도시가스 전환을 위한 집중관리로 판매량의 극대화를 도모하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "(주)지에스이의 주요 제품·서비스는 LNG, 원유, 도시가스공급사업, 배관공급업)입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품, 서비스 등의 매출현황 - 상기 기타매출은 한국채택국제회계기준서 제1115호 '고객과의 계약에서 생기는 수익'에 따라 기존 유형자산(공급설비)의 차감 항목으로 계상하고 있는 시설분담금 등을 선수수익으로 계정 재분류하고 기간에 걸쳐 수익을 인식하므로 대응되는 비용의 발생이 없는 수익입니다.나. 또한 전사원 영업 활동을 통하여 타연료를 사용 중인 수요가의 도시가스 전환을 위한 집중관리로 판매량의 극대화를 도모하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "LNG",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 96.6%",
+        "revenue_share": 0.9664,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "CNG",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.2%",
+        "revenue_share": 0.0223,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "LNG",
       "원유",
       "도시가스공급사업",
       "배관공급업)"
     ],
-    "investor_note": "(주)지에스이의 주요 제품·서비스는 LNG, 원유, 도시가스공급사업, 배관공급업)입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품, 서비스 등의 매출현황 - 상기 기타매출은 한국채택국제회계기준서 제1115호 '고객과의 계약에서 생기는 수익'에 따라 기존 유형자산(공급설비)의 차감 항목으로 계상하고 있는 시설분담금 등을 선수수익으로 계정 재분류하고 기간에 걸쳐 수익을 인식하므로 대응되는 비용의 발생이 없는 수익입니다.나. 또한 전사원 영업 활동을 통하여 타연료를 사용 중인 수요가의 도시가스 전환을 위한 집중관리로 판매량의 극대화를 도모하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)지에스이의 주요 제품·서비스는 LNG, 원유, 도시가스공급사업, 배관공급업)입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품, 서비스 등의 매출현황 - 상기 기타매출은 한국채택국제회계기준서 제1115호 '고객과의 계약에서 생기는 수익'에 따라 기존 유형자산(공급설비)의 차감 항목으로 계상하고 있는 시설분담금 등을 선수수익으로 계정 재분류하고 기간에 걸쳐 수익을 인식하므로 대응되는 비용의 발생이 없는 수익입니다.나. 또한 전사원 영업 활동을 통하여 타연료를 사용 중인 수요가의 도시가스 전환을 위한 집중관리로 판매량의 극대화를 도모하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "LNG",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 96.6%",
+        "revenue_share": 0.9664,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "CNG",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.2%",
+        "revenue_share": 0.0223,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.1%",
+        "revenue_share": 0.0112,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "원유",
-      "caption": "원유 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "title": "LNG",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 96.6%",
+      "kind": "ship",
+      "visual": "SHIP",
+      "image": "../data/business_images/business_image_5184e050831a4460.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "도시가스공급사업",
-      "caption": "도시가스공급사업 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "CNG",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.2%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

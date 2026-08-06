@@ -155,19 +155,11 @@
     "segment_finance": "농심은 라면(신라면·안성탕면 등)과 스낵(새우깡 등), 음료(백산수 등)를 생산하는 국내 대표 식품기업으로, 매출의 약 85%가 라면 사업에서 발생하며 14개 해외 법인을 통해 100여 개국에 수출합니다. 국내 시장 저성장 속에서도 신제품과 해외 확대로 성장을 이어가고 있습니다. 과거 공시 기반 참고 정보로, 매출액은 3조 5,143억 원(+2.2%), 영업이익은 1,839억 원(+12.8%), 당기순이익은 1,700억 원(+7.9%)으로 모두 늘었고, 부채비율은 35.0%로 재무구조가 안정적입니다.",
     "segment_breakdown": [
       {
-        "name": "라면",
-        "desc": "신라면 등 라면류 제조·판매",
-        "revenue_share": 0.851
-      },
-      {
-        "name": "스낵",
-        "desc": "새우깡 등 과자류 제조·판매",
-        "revenue_share": 0.139
-      },
-      {
-        "name": "음료",
-        "desc": "백산수 등 생수·음료 제조·판매",
-        "revenue_share": 0.034
+        "name": "식 품 제 조및판 매 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 85.1%",
+        "revenue_share": 0.851,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -180,39 +172,61 @@
       "육개장사발면",
       "김치사발면"
     ],
-    "investor_note": "농심은 라면(신라면·안성탕면 등)과 스낵(새우깡 등), 음료(백산수 등)를 생산하는 국내 대표 식품기업으로, 매출의 약 85%가 라면 사업에서 발생하며 14개 해외 법인을 통해 100여 개국에 수출합니다. 국내 시장 저성장 속에서도 신제품과 해외 확대로 성장을 이어가고 있습니다. 과거 공시 기반 참고 정보로, 매출액은 3조 5,143억 원(+2.2%), 영업이익은 1,839억 원(+12.8%), 당기순이익은 1,700억 원(+7.9%)으로 모두 늘었고, 부채비율은 35.0%로 재무구조가 안정적입니다."
+    "investor_note": "농심은 라면(신라면·안성탕면 등)과 스낵(새우깡 등), 음료(백산수 등)를 생산하는 국내 대표 식품기업으로, 매출의 약 85%가 라면 사업에서 발생하며 14개 해외 법인을 통해 100여 개국에 수출합니다. 국내 시장 저성장 속에서도 신제품과 해외 확대로 성장을 이어가고 있습니다. 과거 공시 기반 참고 정보로, 매출액은 3조 5,143억 원(+2.2%), 영업이익은 1,839억 원(+12.8%), 당기순이익은 1,700억 원(+7.9%)으로 모두 늘었고, 부채비율은 35.0%로 재무구조가 안정적입니다.",
+    "product_service_segments": [
+      {
+        "name": "식 품 제 조및판 매 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 85.1%",
+        "revenue_share": 0.851,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.9%",
+        "revenue_share": 0.139,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품 및 상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.4%",
+        "revenue_share": 0.034,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품, 상품 및 기타",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.8%",
+        "revenue_share": 0.138,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "신라면",
-      "caption": "라면, 당면, 국수처럼 반복 구매가 많은 면류 제품군입니다.",
+      "title": "라면",
+      "caption": "신라면·짜파게티 등 봉지면과 용기면을 제조·판매하는 주력 사업입니다.",
       "kind": "consumer",
-      "visual": "SHOP",
+      "visual": "NOODLE",
       "image": "../data/business_images/business_image_food_noodle.svg",
       "image_source": "Local visual"
     },
     {
-      "title": "안성탕면",
-      "caption": "안성탕면 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "스낵",
+      "caption": "새우깡·꿀꽈배기 등 과자류를 제조·판매합니다.",
       "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_local_default_b.svg",
-      "image_source": "Local curated visual"
+      "visual": "SNACK",
+      "image": "../data/business_images/business_image_food_snack.svg",
+      "image_source": "Local visual"
     },
     {
-      "title": "육개장사발면",
-      "caption": "육개장사발면 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "음료",
+      "caption": "백산수 등 생수·음료 제품을 제조·판매합니다.",
       "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_local_default_c.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "김치사발면",
-      "caption": "저장식품과 간편식처럼 소비자 식탁에 바로 닿는 가공식품입니다.",
-      "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_food_packaged.svg",
+      "visual": "BEVERAGE",
+      "image": "../data/business_images/business_image_food_beverage.svg",
       "image_source": "Local visual"
     }
   ],

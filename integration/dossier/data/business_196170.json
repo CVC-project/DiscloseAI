@@ -155,14 +155,25 @@
     "segment_finance": "(주)알테오젠의 주요 사업은 알테오젠바이오로직스, ALT-L2(허셉틴 바이오시밀러), ALT-L9(아일리아 바이오시밀러)입니다. 또한, 제품화 성공 이후 고객회사의 해당 매출이 발생하면 매출액의 일정 부분에 해당하는 경상기술료(로열티) 또는 단계별 기간 및 누적 판매 마일스톤을 수취합니다. 또한, 별도 구분되는 기술용역계약에 의한 계약금(Upfront), 마일스톤(Milestone)등을 수취하고 있으며, 상업용 제품생산 공급계약에 의한 상업용 제품 매출대금을 수취하고 있습니다.",
     "segment_breakdown": [
       {
-        "name": "ALT-L2(허셉틴 바이오시밀러)",
-        "desc": "바이오시밀러 관련 제품·서비스",
-        "revenue_share": null
+        "name": "기술용역수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 78.5%",
+        "revenue_share": 0.785,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "ALT-L9(아일리아 바이오시밀러)",
-        "desc": "바이오시밀러 관련 제품·서비스",
-        "revenue_share": null
+        "name": "ALT-L9(*주1)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.001,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품 매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.5%",
+        "revenue_share": 0.065,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -178,24 +189,54 @@
       "진행단계",
       "MSD(스위스)"
     ],
-    "investor_note": "(주)알테오젠의 주요 사업은 알테오젠바이오로직스, ALT-L2(허셉틴 바이오시밀러), ALT-L9(아일리아 바이오시밀러)입니다. 또한, 제품화 성공 이후 고객회사의 해당 매출이 발생하면 매출액의 일정 부분에 해당하는 경상기술료(로열티) 또는 단계별 기간 및 누적 판매 마일스톤을 수취합니다. 또한, 별도 구분되는 기술용역계약에 의한 계약금(Upfront), 마일스톤(Milestone)등을 수취하고 있으며, 상업용 제품생산 공급계약에 의한 상업용 제품 매출대금을 수취하고 있습니다."
+    "investor_note": "(주)알테오젠의 주요 사업은 알테오젠바이오로직스, ALT-L2(허셉틴 바이오시밀러), ALT-L9(아일리아 바이오시밀러)입니다. 또한, 제품화 성공 이후 고객회사의 해당 매출이 발생하면 매출액의 일정 부분에 해당하는 경상기술료(로열티) 또는 단계별 기간 및 누적 판매 마일스톤을 수취합니다. 또한, 별도 구분되는 기술용역계약에 의한 계약금(Upfront), 마일스톤(Milestone)등을 수취하고 있으며, 상업용 제품생산 공급계약에 의한 상업용 제품 매출대금을 수취하고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "기술용역수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 78.5%",
+        "revenue_share": 0.785,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "ALT-L9(*주1)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.001,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타기술용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.9%",
+        "revenue_share": 0.019,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품 매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.5%",
+        "revenue_share": 0.065,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "의약품",
-      "caption": "의약품 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "기술용역수익",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 78.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "바이오시밀러",
-      "caption": "바이오시밀러 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_default_b.svg",
-      "image_source": "Local curated visual"
+      "title": "기타기술용역",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

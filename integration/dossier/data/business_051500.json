@@ -155,9 +155,32 @@
     "segment_finance": "CJ프레시웨이는 국내 1위 식자재유통 기업으로, 식당·급식업체·호텔 등에 농수축산물과 가공식품을 공급하는 사업이 매출의 약 75%를 차지하고, 병원·기업 단체급식과 골프장·휴게소 식음료 운영(푸드서비스)이 나머지를 차지합니다. 자회사 프레시플러스를 통해 조미식품·농산물 가공도 병행합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 3조 4,810억 원으로 전년 대비 7.9% 늘었고 영업이익도 8.1% 증가했으며 당기순이익은 501억 원으로 82.8% 크게 늘었습니다. 다만 부채비율이 249.1%로 높은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "식자재유통",
-        "desc": "식품대리점·급식업체·외식업체 대상 식자재 공급",
-        "revenue_share": 0.7505
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 47.6%",
+        "revenue_share": 0.476,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "농산물",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.9%",
+        "revenue_share": 0.109,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "수산물",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
+        "revenue_share": 0.063,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "축산물",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.3%",
+        "revenue_share": 0.103,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -169,24 +192,70 @@
       "골프장·휴게소 컨세션",
       "조미식품(프레시플러스)"
     ],
-    "investor_note": "CJ프레시웨이는 국내 1위 식자재유통 기업으로, 식당·급식업체·호텔 등에 농수축산물과 가공식품을 공급하는 사업이 매출의 약 75%를 차지하고, 병원·기업 단체급식과 골프장·휴게소 식음료 운영(푸드서비스)이 나머지를 차지합니다. 자회사 프레시플러스를 통해 조미식품·농산물 가공도 병행합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 3조 4,810억 원으로 전년 대비 7.9% 늘었고 영업이익도 8.1% 증가했으며 당기순이익은 501억 원으로 82.8% 크게 늘었습니다. 다만 부채비율이 249.1%로 높은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다."
+    "investor_note": "CJ프레시웨이는 국내 1위 식자재유통 기업으로, 식당·급식업체·호텔 등에 농수축산물과 가공식품을 공급하는 사업이 매출의 약 75%를 차지하고, 병원·기업 단체급식과 골프장·휴게소 식음료 운영(푸드서비스)이 나머지를 차지합니다. 자회사 프레시플러스를 통해 조미식품·농산물 가공도 병행합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 3조 4,810억 원으로 전년 대비 7.9% 늘었고 영업이익도 8.1% 증가했으며 당기순이익은 501억 원으로 82.8% 크게 늘었습니다. 다만 부채비율이 249.1%로 높은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 47.6%",
+        "revenue_share": 0.476,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "농산물",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.9%",
+        "revenue_share": 0.109,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "수산물",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
+        "revenue_share": 0.063,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "축산물",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.3%",
+        "revenue_share": 0.103,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "식자재유통",
-      "caption": "식품대리점·급식업체·외식업체 대상 식자재 공급",
-      "kind": "consumer",
-      "visual": "식자재유통",
-      "image": "../data/business_images/business_image_food_packaged.svg",
-      "image_source": "Local visual"
-    },
-    {
-      "title": "음·식료품 및 담배 도매업",
-      "caption": "음·식료품 및 담배 도매업을 중심으로 매출을 만듭니다.",
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 47.6%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "농산물",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "수산물",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "축산물",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.3%",
+      "kind": "consumer",
+      "visual": "FEED",
+      "image": "../data/business_images/business_image_food_feed.svg",
+      "image_source": "Local visual"
     }
   ],
   "custom_report_ideas": [

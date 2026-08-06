@@ -155,19 +155,11 @@
     "segment_finance": "제룡산업주식회사의 주요 제품·서비스는 변압기, 전선, 철강, 금속제품, 배전, 통신입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제룡산업주식회사는 \"시장 친화적인 기술선도 강소기업\"의 경영이념 아래 송전자재, 배전자재, 지중선자재, 통신기자재, 철도자재를 제조 판매하는 기업으로서 원자재의 성격, 제품 및 제조공정의 특징 등을 고려하여 당사의 사업부문을 금속제품과 합성수지제품으로 구분하였습니다. 제품 매출의 대부분은 주문에 의한 다품종 소량생산 방식으로 생산 및 판매가 이루어지고 있어 품목별 매출액을 표시하지 않고 사업부문별로 통합해서 매출액 및 매출비율을 표시하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "변압기",
-        "desc": "변압기 관련 제품·서비스",
-        "revenue_share": null
-      },
-      {
-        "name": "전선",
-        "desc": "전선 관련 제품·서비스",
-        "revenue_share": null
-      },
-      {
-        "name": "철강",
-        "desc": "철강 관련 제품·서비스",
-        "revenue_share": null
+        "name": "총 매 출 액",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -183,32 +175,55 @@
       "지중배전 수지제품",
       "철도전차선 자재"
     ],
-    "investor_note": "제룡산업주식회사의 주요 제품·서비스는 변압기, 전선, 철강, 금속제품, 배전, 통신입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제룡산업주식회사는 \"시장 친화적인 기술선도 강소기업\"의 경영이념 아래 송전자재, 배전자재, 지중선자재, 통신기자재, 철도자재를 제조 판매하는 기업으로서 원자재의 성격, 제품 및 제조공정의 특징 등을 고려하여 당사의 사업부문을 금속제품과 합성수지제품으로 구분하였습니다. 제품 매출의 대부분은 주문에 의한 다품종 소량생산 방식으로 생산 및 판매가 이루어지고 있어 품목별 매출액을 표시하지 않고 사업부문별로 통합해서 매출액 및 매출비율을 표시하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "제룡산업주식회사의 주요 제품·서비스는 변압기, 전선, 철강, 금속제품, 배전, 통신입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제룡산업주식회사는 \"시장 친화적인 기술선도 강소기업\"의 경영이념 아래 송전자재, 배전자재, 지중선자재, 통신기자재, 철도자재를 제조 판매하는 기업으로서 원자재의 성격, 제품 및 제조공정의 특징 등을 고려하여 당사의 사업부문을 금속제품과 합성수지제품으로 구분하였습니다. 제품 매출의 대부분은 주문에 의한 다품종 소량생산 방식으로 생산 및 판매가 이루어지고 있어 품목별 매출액을 표시하지 않고 사업부문별로 통합해서 매출액 및 매출비율을 표시하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "금속제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 83.3%",
+        "revenue_share": 0.833,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "합성수지제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.7%",
+        "revenue_share": 0.167,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총 매 출 액",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "변압기",
-      "caption": "변압기 관련 제품·서비스",
-      "kind": "service",
-      "visual": "변압기",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "전선",
-      "caption": "전선 관련 제품·서비스",
-      "kind": "service",
-      "visual": "전선",
-      "image": "../data/business_images/business_image_local_cable.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "철강",
-      "caption": "철강 관련 제품·서비스",
+      "title": "금속제품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 83.3%",
       "kind": "material",
-      "visual": "철강",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "합성수지제품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.7%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "총 매 출 액",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

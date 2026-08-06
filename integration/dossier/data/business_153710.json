@@ -153,7 +153,29 @@
   "snippets": {
     "overview": "(주)옵티팜의 주요 제품·서비스는 의약품, 은행, 증권, 보험, 박테리오파지, 옵티케어입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 양돈, 양계, 도매영업 별 각 1명씩 영업담당자가 배치되어 있으며 축종별, 고객별 전문성을 확보하여 영업 경쟁력을 확보하고 있습니다. 또한, 당사와 업무협약을 체결한 전국 8개 대리점과 공동구매, OEM제품 생산, 완제품 수입 등을 통하여 매출 확대 및 지속적인 수익구조 개선을 계획하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "(주)옵티팜의 주요 제품·서비스는 의약품, 은행, 증권, 보험, 박테리오파지, 옵티케어입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 양돈, 양계, 도매영업 별 각 1명씩 영업담당자가 배치되어 있으며 축종별, 고객별 전문성을 확보하여 영업 경쟁력을 확보하고 있습니다. 또한, 당사와 업무협약을 체결한 전국 8개 대리점과 공동구매, OEM제품 생산, 완제품 수입 등을 통하여 매출 확대 및 지속적인 수익구조 개선을 계획하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "미니피그",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.8%",
+        "revenue_share": 0.038,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.8%",
+        "revenue_share": 0.468,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "수수료수입",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.3%",
+        "revenue_share": 0.053,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "의약품",
       "은행",
@@ -168,32 +190,62 @@
       "통상실시권(이종장기제품 개발기술)",
       "대한민국"
     ],
-    "investor_note": "(주)옵티팜의 주요 제품·서비스는 의약품, 은행, 증권, 보험, 박테리오파지, 옵티케어입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 양돈, 양계, 도매영업 별 각 1명씩 영업담당자가 배치되어 있으며 축종별, 고객별 전문성을 확보하여 영업 경쟁력을 확보하고 있습니다. 또한, 당사와 업무협약을 체결한 전국 8개 대리점과 공동구매, OEM제품 생산, 완제품 수입 등을 통하여 매출 확대 및 지속적인 수익구조 개선을 계획하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)옵티팜의 주요 제품·서비스는 의약품, 은행, 증권, 보험, 박테리오파지, 옵티케어입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 양돈, 양계, 도매영업 별 각 1명씩 영업담당자가 배치되어 있으며 축종별, 고객별 전문성을 확보하여 영업 경쟁력을 확보하고 있습니다. 또한, 당사와 업무협약을 체결한 전국 8개 대리점과 공동구매, OEM제품 생산, 완제품 수입 등을 통하여 매출 확대 및 지속적인 수익구조 개선을 계획하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.1%",
+        "revenue_share": 0.111,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "미니피그",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.8%",
+        "revenue_share": 0.038,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.8%",
+        "revenue_share": 0.468,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "수수료수입",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.3%",
+        "revenue_share": 0.053,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "의약품",
-      "caption": "의약품 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "미니피그",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "은행",
-      "caption": "예금과 대출에서 이자이익을 만드는 금융 서비스입니다.",
-      "kind": "bank",
-      "visual": "BANK",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "증권",
-      "caption": "투자 중개와 자산관리 수수료가 실적에 연결됩니다.",
-      "kind": "securities",
-      "visual": "AUM",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "수수료수입",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.3%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

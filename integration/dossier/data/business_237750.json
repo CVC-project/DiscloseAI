@@ -155,14 +155,32 @@
     "segment_finance": "피앤씨테크 주식회사의 주요 제품·서비스는 변압기, 전선, 철강, 특징, 시리즈, 제품 설명입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품 설명 당사는 고객의 수요를 조기에 파악하여 우수한 기술력을 바탕으로 고객이 필요로하는 가치를 신속하게 제공하고 스마트 그리드 시대를 선도하며, 전력 IT 분야의 선구자로서의 역할을 다하는 기술 선도 기업으로 성장하는 것이 목표입니다. 단지 해외시장에서 국내업체간 경쟁이 심화되고 있는 추세이나 지속적인 투자로 제품의 기술적인 경쟁력을 확보해 나가고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "배전자동화 단말장치 (FRTU/FTU)",
-        "desc": "배전자동화 관련 제품·서비스",
-        "revenue_share": null
+        "name": "배전자동화단말장치",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 58.9%",
+        "revenue_share": 0.589,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "배전자동화 단말장치",
-        "desc": "배전자동화 관련 제품·서비스",
-        "revenue_share": null
+        "name": "디지털보호계전기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.3%",
+        "revenue_share": 0.193,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "고장점표정장치",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.7%",
+        "revenue_share": 0.007,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "METER",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.005,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -176,40 +194,54 @@
       "배전자동화",
       "중국"
     ],
-    "investor_note": "피앤씨테크 주식회사의 주요 제품·서비스는 변압기, 전선, 철강, 특징, 시리즈, 제품 설명입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품 설명 당사는 고객의 수요를 조기에 파악하여 우수한 기술력을 바탕으로 고객이 필요로하는 가치를 신속하게 제공하고 스마트 그리드 시대를 선도하며, 전력 IT 분야의 선구자로서의 역할을 다하는 기술 선도 기업으로 성장하는 것이 목표입니다. 단지 해외시장에서 국내업체간 경쟁이 심화되고 있는 추세이나 지속적인 투자로 제품의 기술적인 경쟁력을 확보해 나가고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "피앤씨테크 주식회사의 주요 제품·서비스는 변압기, 전선, 철강, 특징, 시리즈, 제품 설명입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품 설명 당사는 고객의 수요를 조기에 파악하여 우수한 기술력을 바탕으로 고객이 필요로하는 가치를 신속하게 제공하고 스마트 그리드 시대를 선도하며, 전력 IT 분야의 선구자로서의 역할을 다하는 기술 선도 기업으로 성장하는 것이 목표입니다. 단지 해외시장에서 국내업체간 경쟁이 심화되고 있는 추세이나 지속적인 투자로 제품의 기술적인 경쟁력을 확보해 나가고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "배전자동화단말장치",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 58.9%",
+        "revenue_share": 0.589,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "디지털보호계전기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.3%",
+        "revenue_share": 0.193,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "고장점표정장치",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.7%",
+        "revenue_share": 0.007,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "METER",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.005,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "변압기",
-      "caption": "변압기 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "배전자동화단말장치",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 58.9%",
       "kind": "power",
       "visual": "POWER",
-      "image": "../data/business_images/business_image_local_power.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "전선",
-      "caption": "전선 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "디지털보호계전기",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.3%",
       "kind": "power",
       "visual": "POWER",
-      "image": "../data/business_images/business_image_local_power.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "철강",
-      "caption": "철강 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "power",
-      "visual": "POWER",
-      "image": "../data/business_images/business_image_local_power.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "시리즈",
-      "caption": "시리즈 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "power",
-      "visual": "POWER",
-      "image": "../data/business_images/business_image_local_power.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

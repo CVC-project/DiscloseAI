@@ -155,24 +155,32 @@
     "segment_finance": "SGC에너지는 전북 군산 열병합발전소에서 전기·증기·REC를 생산하는 발전/에너지 부문을 모태로, SGC이앤씨를 통한 플랜트·건설·부동산개발 부문, SGC솔루션의 유리병·글라스락 등 유리 부문, 물류센터 운영까지 아우르는 SGC그룹 계열사입니다. 건설및부동산이 매출의 약 53%로 가장 크고, 발전·에너지가 33%, 유리가 13%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2조 4,606억 원으로 전년 대비 4.5% 늘었지만, 영업이익은 958억 원으로 49.5% 줄었고 당기순이익은 전년 흑자에서 948억 원 적자로 전환됐습니다. 부채비율은 339.2%로 부채 부담이 큰 편이며, 물류창고 붕괴사고에 따른 영업정지 행정처분 소송과 부동산 개발 관련 지급보증도 향후 지켜볼 사항입니다.",
     "segment_breakdown": [
       {
-        "name": "건설및부동산",
-        "desc": "플랜트 EPC, 토목·건축·주택사업(SGC이앤씨 등)",
-        "revenue_share": 0.531
+        "name": "전기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 48.5%",
+        "revenue_share": 0.485,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "발전/에너지",
-        "desc": "열병합발전 전기·증기·REC 판매",
-        "revenue_share": 0.33
+        "name": "증기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.1%",
+        "revenue_share": 0.191,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "유리",
-        "desc": "유리병(B2B)·글라스락 생활유리제품(B2C)",
-        "revenue_share": 0.132
+        "name": "REC",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.5%",
+        "revenue_share": 0.285,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "물류센터",
-        "desc": "보관 및 창고업",
-        "revenue_share": 0.007
+        "name": "전기(연평균 SMP)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 93.4%",
+        "revenue_share": 0.934,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -185,40 +193,70 @@
       "건설·부동산개발",
       "물류센터 운영"
     ],
-    "investor_note": "SGC에너지는 전북 군산 열병합발전소에서 전기·증기·REC를 생산하는 발전/에너지 부문을 모태로, SGC이앤씨를 통한 플랜트·건설·부동산개발 부문, SGC솔루션의 유리병·글라스락 등 유리 부문, 물류센터 운영까지 아우르는 SGC그룹 계열사입니다. 건설및부동산이 매출의 약 53%로 가장 크고, 발전·에너지가 33%, 유리가 13%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2조 4,606억 원으로 전년 대비 4.5% 늘었지만, 영업이익은 958억 원으로 49.5% 줄었고 당기순이익은 전년 흑자에서 948억 원 적자로 전환됐습니다. 부채비율은 339.2%로 부채 부담이 큰 편이며, 물류창고 붕괴사고에 따른 영업정지 행정처분 소송과 부동산 개발 관련 지급보증도 향후 지켜볼 사항입니다."
+    "investor_note": "SGC에너지는 전북 군산 열병합발전소에서 전기·증기·REC를 생산하는 발전/에너지 부문을 모태로, SGC이앤씨를 통한 플랜트·건설·부동산개발 부문, SGC솔루션의 유리병·글라스락 등 유리 부문, 물류센터 운영까지 아우르는 SGC그룹 계열사입니다. 건설및부동산이 매출의 약 53%로 가장 크고, 발전·에너지가 33%, 유리가 13%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2조 4,606억 원으로 전년 대비 4.5% 늘었지만, 영업이익은 958억 원으로 49.5% 줄었고 당기순이익은 전년 흑자에서 948억 원 적자로 전환됐습니다. 부채비율은 339.2%로 부채 부담이 큰 편이며, 물류창고 붕괴사고에 따른 영업정지 행정처분 소송과 부동산 개발 관련 지급보증도 향후 지켜볼 사항입니다.",
+    "product_service_segments": [
+      {
+        "name": "전기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 48.5%",
+        "revenue_share": 0.485,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "증기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.1%",
+        "revenue_share": 0.191,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "REC",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.5%",
+        "revenue_share": 0.285,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전기(연평균 SMP)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 93.4%",
+        "revenue_share": 0.934,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "건설및부동산",
-      "caption": "플랜트 EPC, 토목·건축·주택사업(SGC이앤씨 등)",
-      "kind": "ship",
-      "visual": "건설및부동산",
-      "image": "../data/business_images/business_image_local_housing.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "발전/에너지",
-      "caption": "열병합발전 전기·증기·REC 판매",
-      "kind": "power",
-      "visual": "발전",
-      "image": "../data/business_images/business_image_local_power.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "유리",
-      "caption": "유리병(B2B)·글라스락 생활유리제품(B2C)",
-      "kind": "consumer",
-      "visual": "유리",
-      "image": "../data/business_images/business_image_local_default_c.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "물류센터",
-      "caption": "보관 및 창고업",
+      "title": "전기",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 48.5%",
       "kind": "service",
-      "visual": "물류센터",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "증기",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.1%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "REC",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "전기(연평균 SMP)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 93.4%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

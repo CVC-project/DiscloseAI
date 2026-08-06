@@ -153,7 +153,36 @@
   "snippets": {
     "overview": "에이치엘비펩 주식회사의 주요 사업은 의약용 펩타이드 바이오소재, 펩타이드 바이오소재, 화학합성, 신약개발부문 등입니다. 펩타이드 원료 의약소재의 공정개발팀은 펩타이드 API와 CDMO 합성공정, 정제공정을 개발하고 제조 및 스케일-업, 생산 관리 등 제조 기술과 연관된 기술개발을 진행하고 있습니다. 연구용부터 임상1상 ~ 3상을 위한 임상의약품을 거쳐 상업화된 의약품을 생산할 수 있는 능력과 경험으로 고객들의 만족도를 높이고 있습니다.",
     "segment_finance": "에이치엘비펩 주식회사의 주요 사업은 의약용 펩타이드 바이오소재, 펩타이드 바이오소재, 화학합성, 신약개발부문 등입니다. 펩타이드 원료 의약소재의 공정개발팀은 펩타이드 API와 CDMO 합성공정, 정제공정을 개발하고 제조 및 스케일-업, 생산 관리 등 제조 기술과 연관된 기술개발을 진행하고 있습니다. 연구용부터 임상1상 ~ 3상을 위한 임상의약품을 거쳐 상업화된 의약품을 생산할 수 있는 능력과 경험으로 고객들의 만족도를 높이고 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "의약용 펩타이드 소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.9%",
+        "revenue_share": 0.0492,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "데스모프레신",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.0%",
+        "revenue_share": 0.1997,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임상용 펩타이드",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.6%",
+        "revenue_share": 0.0556,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "위탁 용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.2%",
+        "revenue_share": 0.0722,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "의약품",
       "CDMO",
@@ -168,32 +197,70 @@
       "물리화학적 특성",
       "DMF"
     ],
-    "investor_note": "에이치엘비펩 주식회사의 주요 사업은 의약용 펩타이드 바이오소재, 펩타이드 바이오소재, 화학합성, 신약개발부문 등입니다. 펩타이드 원료 의약소재의 공정개발팀은 펩타이드 API와 CDMO 합성공정, 정제공정을 개발하고 제조 및 스케일-업, 생산 관리 등 제조 기술과 연관된 기술개발을 진행하고 있습니다. 연구용부터 임상1상 ~ 3상을 위한 임상의약품을 거쳐 상업화된 의약품을 생산할 수 있는 능력과 경험으로 고객들의 만족도를 높이고 있습니다."
+    "investor_note": "에이치엘비펩 주식회사의 주요 사업은 의약용 펩타이드 바이오소재, 펩타이드 바이오소재, 화학합성, 신약개발부문 등입니다. 펩타이드 원료 의약소재의 공정개발팀은 펩타이드 API와 CDMO 합성공정, 정제공정을 개발하고 제조 및 스케일-업, 생산 관리 등 제조 기술과 연관된 기술개발을 진행하고 있습니다. 연구용부터 임상1상 ~ 3상을 위한 임상의약품을 거쳐 상업화된 의약품을 생산할 수 있는 능력과 경험으로 고객들의 만족도를 높이고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "의약용 펩타이드 소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.9%",
+        "revenue_share": 0.0492,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "데스모프레신",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.0%",
+        "revenue_share": 0.1997,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임상용 펩타이드",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.6%",
+        "revenue_share": 0.0556,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "위탁 용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.2%",
+        "revenue_share": 0.0722,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "의약품",
-      "caption": "의약품 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "의약용 펩타이드 소재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.9%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "데스모프레신",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "임상용 펩타이드",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.6%",
       "kind": "bio",
       "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "불순물 (Impurity)",
-      "caption": "불순물 (Impurity) 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "위탁 용역",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.2%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "품목허가 (품목신고)",
-      "caption": "품목허가 (품목신고) 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

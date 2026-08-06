@@ -137,7 +137,22 @@
   "snippets": {
     "overview": "솔트웨어(주)의 주요 제품·서비스는 IPET, 컨설팅, 시장진출, 특허, 그 방법, 에이씨엔에스솔트웨어입니다. 제품을 기반으로 각종 서비스를 제공하고 있으며, 각 제품별 특성 및 시장의 특성에 맞춰서 매출액 증대를 위한 영업 전략을 운영하고 있습니다. 고객들의 성공사례를 중심으로 지면광고를 통해 고객이 인정하고 찾을 수 있는 제품임을 부각하고 있고, 솔트웨어가 고객의 사업 성공의 동반자 역할을 하고 있음을 알리는 마케팅 활동을 수행하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "솔트웨어(주)의 주요 제품·서비스는 IPET, 컨설팅, 시장진출, 특허, 그 방법, 에이씨엔에스솔트웨어입니다. 제품을 기반으로 각종 서비스를 제공하고 있으며, 각 제품별 특성 및 시장의 특성에 맞춰서 매출액 증대를 위한 영업 전략을 운영하고 있습니다. 고객들의 성공사례를 중심으로 지면광고를 통해 고객이 인정하고 찾을 수 있는 제품임을 부각하고 있고, 솔트웨어가 고객의 사업 성공의 동반자 역할을 하고 있음을 알리는 마케팅 활동을 수행하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 93.8%",
+        "revenue_share": 0.9377,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "시스템통합",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.4%",
+        "revenue_share": 0.0338,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "IPET",
       "컨설팅",
@@ -152,24 +167,40 @@
       "챗봇",
       "추천서비스"
     ],
-    "investor_note": "솔트웨어(주)의 주요 제품·서비스는 IPET, 컨설팅, 시장진출, 특허, 그 방법, 에이씨엔에스솔트웨어입니다. 제품을 기반으로 각종 서비스를 제공하고 있으며, 각 제품별 특성 및 시장의 특성에 맞춰서 매출액 증대를 위한 영업 전략을 운영하고 있습니다. 고객들의 성공사례를 중심으로 지면광고를 통해 고객이 인정하고 찾을 수 있는 제품임을 부각하고 있고, 솔트웨어가 고객의 사업 성공의 동반자 역할을 하고 있음을 알리는 마케팅 활동을 수행하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "솔트웨어(주)의 주요 제품·서비스는 IPET, 컨설팅, 시장진출, 특허, 그 방법, 에이씨엔에스솔트웨어입니다. 제품을 기반으로 각종 서비스를 제공하고 있으며, 각 제품별 특성 및 시장의 특성에 맞춰서 매출액 증대를 위한 영업 전략을 운영하고 있습니다. 고객들의 성공사례를 중심으로 지면광고를 통해 고객이 인정하고 찾을 수 있는 제품임을 부각하고 있고, 솔트웨어가 고객의 사업 성공의 동반자 역할을 하고 있음을 알리는 마케팅 활동을 수행하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 93.8%",
+        "revenue_share": 0.9377,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "시스템통합",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.4%",
+        "revenue_share": 0.0338,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "컨설팅",
-      "caption": "고객사의 업무 흐름과 IT 환경을 진단하고 시스템 개선 방향을 설계하는 서비스입니다.",
+      "title": "용역",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 93.8%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "시장진출",
-      "caption": "시장진출 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "시스템 구축·통합",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.4%",
       "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "visual": "SI",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -155,9 +155,25 @@
     "segment_finance": "제품을 만들고 판매하는 제조 기반 회사입니다. 국내를 넘어 세계 시장을 목표로 고객에게 차별화된가치 제공과 경쟁력 우위의 신제품 개발을 통한 스페셜티화를 수행하고, 선도적 R&D 활동을 통해 미래성장동력인 신사업을 준비하고자 연구영역을 확장하고 있습니다. 또한 삼양패키징은 국내 최초 Aseptic 기술을 도입하여 기존 Hot Filling 충전방식과 달리 무균화된 액을 무균화된 용기에 무균화된 충전룸에서 충전하여 저산성이나 중성음료를 안전하게 실온에서 충전하는 차별화된 충전방식으로 제품을 생산하고 있으며, 이렇게 차별화된 제조기술로 인해 국내 독점적인 OEM, ODM 제품을 출시하여 경쟁력을 확보하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "식품부문",
-        "desc": "식품부문 관련 제품·서비스",
-        "revenue_share": null
+        "name": "식품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 57.9%",
+        "revenue_share": 0.579,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "화학",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 41.7%",
+        "revenue_share": 0.4168,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "단순합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -172,31 +188,53 @@
       "프리믹스",
       "전분"
     ],
-    "investor_note": "제품을 만들고 판매하는 제조 기반 회사입니다. 국내를 넘어 세계 시장을 목표로 고객에게 차별화된가치 제공과 경쟁력 우위의 신제품 개발을 통한 스페셜티화를 수행하고, 선도적 R&D 활동을 통해 미래성장동력인 신사업을 준비하고자 연구영역을 확장하고 있습니다. 또한 삼양패키징은 국내 최초 Aseptic 기술을 도입하여 기존 Hot Filling 충전방식과 달리 무균화된 액을 무균화된 용기에 무균화된 충전룸에서 충전하여 저산성이나 중성음료를 안전하게 실온에서 충전하는 차별화된 충전방식으로 제품을 생산하고 있으며, 이렇게 차별화된 제조기술로 인해 국내 독점적인 OEM, ODM 제품을 출시하여 경쟁력을 확보하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "제품을 만들고 판매하는 제조 기반 회사입니다. 국내를 넘어 세계 시장을 목표로 고객에게 차별화된가치 제공과 경쟁력 우위의 신제품 개발을 통한 스페셜티화를 수행하고, 선도적 R&D 활동을 통해 미래성장동력인 신사업을 준비하고자 연구영역을 확장하고 있습니다. 또한 삼양패키징은 국내 최초 Aseptic 기술을 도입하여 기존 Hot Filling 충전방식과 달리 무균화된 액을 무균화된 용기에 무균화된 충전룸에서 충전하여 저산성이나 중성음료를 안전하게 실온에서 충전하는 차별화된 충전방식으로 제품을 생산하고 있으며, 이렇게 차별화된 제조기술로 인해 국내 독점적인 OEM, ODM 제품을 출시하여 경쟁력을 확보하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "식품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 57.9%",
+        "revenue_share": 0.579,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "화학",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 41.7%",
+        "revenue_share": 0.4168,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타(용역매출 등)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.4%",
+        "revenue_share": 0.0043,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "단순합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "식품부문",
-      "caption": "식품부문 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "삼양사",
-      "caption": "삼양사 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_local_default_c.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "설탕",
+      "title": "소재식품",
       "caption": "다른 식품을 만드는 데 들어가는 기초 소재라 원재료 가격 영향을 받습니다.",
       "kind": "consumer",
-      "visual": "SHOP",
+      "visual": "INGREDIENT",
       "image": "../data/business_images/business_image_food_ingredient.svg",
+      "image_source": "Local visual"
+    },
+    {
+      "title": "사료",
+      "caption": "곡물 가격과 축산 수요에 영향을 받는 사료·축산 사업입니다.",
+      "kind": "consumer",
+      "visual": "FEED",
+      "image": "../data/business_images/business_image_food_feed.svg",
       "image_source": "Local visual"
     }
   ],

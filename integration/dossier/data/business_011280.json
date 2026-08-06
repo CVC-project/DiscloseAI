@@ -155,19 +155,25 @@
     "segment_finance": "태림포장은 골판지 원지를 가공해 골판지 원단과 상자를 만드는 포장재 전문기업으로, 시화·구미·포천 등 전국 7개 공장을 운영하고 있습니다. 골판지·골판지상자 사업이 매출의 약 94%를 차지하고, 자회사 동원페이퍼가 만드는 골판지 원지(이면지·골심지 등)가 약 6%, 동림로지스틱의 화물운송이 나머지를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 7,538억 원으로 전년보다 5.4% 늘었고 영업손실은 49억 원으로 적자폭이 줄었습니다(전년 -166억 원). 당기순손실도 91억 원으로 적자폭이 축소됐지만, 여전히 순손실 상태이고 부채비율은 112.1%로 자본보다 빚이 더 많아 재무 부담을 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "골판지 및 골판지상자",
-        "desc": "골판지 원단·상자 제조판매(시화·구미·포천 등 7개 공장)",
-        "revenue_share": 0.9444
-      },
-      {
         "name": "골판지원지",
-        "desc": "이면지·골심지 등 원지 제조(동원페이퍼)",
-        "revenue_share": 0.0556
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.6%",
+        "revenue_share": 0.0758,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "화물운송업",
-        "desc": "화물운송 서비스(동림로지스틱)",
-        "revenue_share": 0.0001
+        "name": "지관원지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.7%",
+        "revenue_share": 0.0367,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "골판지 및골판지 상자",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.6%",
+        "revenue_share": 0.3464,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -177,32 +183,62 @@
       "지관원지",
       "화물운송 서비스"
     ],
-    "investor_note": "태림포장은 골판지 원지를 가공해 골판지 원단과 상자를 만드는 포장재 전문기업으로, 시화·구미·포천 등 전국 7개 공장을 운영하고 있습니다. 골판지·골판지상자 사업이 매출의 약 94%를 차지하고, 자회사 동원페이퍼가 만드는 골판지 원지(이면지·골심지 등)가 약 6%, 동림로지스틱의 화물운송이 나머지를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 7,538억 원으로 전년보다 5.4% 늘었고 영업손실은 49억 원으로 적자폭이 줄었습니다(전년 -166억 원). 당기순손실도 91억 원으로 적자폭이 축소됐지만, 여전히 순손실 상태이고 부채비율은 112.1%로 자본보다 빚이 더 많아 재무 부담을 살펴볼 필요가 있습니다."
+    "investor_note": "태림포장은 골판지 원지를 가공해 골판지 원단과 상자를 만드는 포장재 전문기업으로, 시화·구미·포천 등 전국 7개 공장을 운영하고 있습니다. 골판지·골판지상자 사업이 매출의 약 94%를 차지하고, 자회사 동원페이퍼가 만드는 골판지 원지(이면지·골심지 등)가 약 6%, 동림로지스틱의 화물운송이 나머지를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 7,538억 원으로 전년보다 5.4% 늘었고 영업손실은 49억 원으로 적자폭이 줄었습니다(전년 -166억 원). 당기순손실도 91억 원으로 적자폭이 축소됐지만, 여전히 순손실 상태이고 부채비율은 112.1%로 자본보다 빚이 더 많아 재무 부담을 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "골판지원지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.6%",
+        "revenue_share": 0.0758,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "지관원지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.7%",
+        "revenue_share": 0.0367,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.0049,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "골판지 및골판지 상자",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.6%",
+        "revenue_share": 0.3464,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "골판지 및 골판지상자",
-      "caption": "골판지 원단·상자 제조판매(시화·구미·포천 등 7개 공장)",
-      "kind": "service",
-      "visual": "골판지",
-      "image": "../data/business_images/business_image_local_textile.svg",
-      "image_source": "Local curated visual"
-    },
-    {
       "title": "골판지원지",
-      "caption": "이면지·골심지 등 원지 제조(동원페이퍼)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.6%",
       "kind": "service",
-      "visual": "골판지원지",
-      "image": "../data/business_images/business_image_local_packaging.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "화물운송업",
-      "caption": "화물운송 서비스(동림로지스틱)",
+      "title": "지관원지",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.7%",
       "kind": "service",
-      "visual": "화물운송업",
-      "image": "../data/business_images/business_image_local_packaging.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "골판지 및골판지 상자",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

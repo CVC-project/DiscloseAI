@@ -155,9 +155,11 @@
     "segment_finance": "이스트소프트는 AI 더빙·검색 플랫폼(페르소에이아이, 앨런)과 유틸리티SW '알툴즈', 보안백신 '알약' 등 AI·SW 사업을 중심으로, 포털(줌닷컴), AI 안경 가상피팅 커머스(라운즈), 자산운용, 카발 IP 기반 게임까지 다섯 개 사업부문을 운영하는 회사입니다. 매출의 절반 이상(51.8%)이 AI·SW 사업에서 나오고, 게임 사업이 23.8%로 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,067억 원으로 전년 대비 4.2% 늘었지만, AI 신사업 투자 확대 등의 영향으로 영업손실과 당기순손실은 오히려 전년보다 각각 40.9%, 41.3% 커졌습니다. 부채비율은 196.3%로 자본보다 부채가 약 2배 많은 수준이고, ROE(자기자본이익률)도 -26.6%로 수익성 개선이 아직 이뤄지지 않고 있어 향후 실적 흐름을 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "자산운용업",
-        "desc": "사모펀드·투자자문·투자일임",
-        "revenue_share": 0.131
+        "name": "자산운용업,투자자문업,투자일임업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.1%",
+        "revenue_share": 0.131,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -171,24 +173,70 @@
       "MMORPG 카발(CABAL) 온라인·모바일·RED",
       "자산운용(엑스포넨셜자산운용)"
     ],
-    "investor_note": "이스트소프트는 AI 더빙·검색 플랫폼(페르소에이아이, 앨런)과 유틸리티SW '알툴즈', 보안백신 '알약' 등 AI·SW 사업을 중심으로, 포털(줌닷컴), AI 안경 가상피팅 커머스(라운즈), 자산운용, 카발 IP 기반 게임까지 다섯 개 사업부문을 운영하는 회사입니다. 매출의 절반 이상(51.8%)이 AI·SW 사업에서 나오고, 게임 사업이 23.8%로 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,067억 원으로 전년 대비 4.2% 늘었지만, AI 신사업 투자 확대 등의 영향으로 영업손실과 당기순손실은 오히려 전년보다 각각 40.9%, 41.3% 커졌습니다. 부채비율은 196.3%로 자본보다 부채가 약 2배 많은 수준이고, ROE(자기자본이익률)도 -26.6%로 수익성 개선이 아직 이뤄지지 않고 있어 향후 실적 흐름을 살펴볼 필요가 있습니다."
+    "investor_note": "이스트소프트는 AI 더빙·검색 플랫폼(페르소에이아이, 앨런)과 유틸리티SW '알툴즈', 보안백신 '알약' 등 AI·SW 사업을 중심으로, 포털(줌닷컴), AI 안경 가상피팅 커머스(라운즈), 자산운용, 카발 IP 기반 게임까지 다섯 개 사업부문을 운영하는 회사입니다. 매출의 절반 이상(51.8%)이 AI·SW 사업에서 나오고, 게임 사업이 23.8%로 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,067억 원으로 전년 대비 4.2% 늘었지만, AI 신사업 투자 확대 등의 영향으로 영업손실과 당기순손실은 오히려 전년보다 각각 40.9%, 41.3% 커졌습니다. 부채비율은 196.3%로 자본보다 부채가 약 2배 많은 수준이고, ROE(자기자본이익률)도 -26.6%로 수익성 개선이 아직 이뤄지지 않고 있어 향후 실적 흐름을 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "AI,SW 사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.8%",
+        "revenue_share": 0.518,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "포털 사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.6%",
+        "revenue_share": 0.036,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "커머스 사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.6%",
+        "revenue_share": 0.076,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자산운용업,투자자문업,투자일임업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.1%",
+        "revenue_share": 0.131,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "자산운용업",
-      "caption": "사모펀드·투자자문·투자일임",
-      "kind": "securities",
-      "visual": "자산운용업",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "소프트웨어 개발 및 공급업",
-      "caption": "소프트웨어 개발 및 공급업을 중심으로 매출을 만듭니다.",
+      "title": "AI,SW 사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.8%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "포털 사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "플랫폼 서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.6%",
+      "kind": "platform",
+      "visual": "PLATFORM",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "자산운용",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.1%",
+      "kind": "securities",
+      "visual": "AUM",
+      "image": "../data/business_images/business_image_c1540b930934e19f.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

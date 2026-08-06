@@ -155,14 +155,25 @@
     "segment_finance": "(주)세종메디칼의 주요 제품·서비스는 기타품목, 기타제품, 기타 임가공, 진성레이져 등, 제품 매출, Trocar입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 복강경 수술용 기구를 포함한 의료기기를 생산·판매하는 전문업체로서, 1996년 세종기업으로 출발하여 30여년간 수입 의료기기 제품이 독차지했던 한국의 복강경시장을 당사에서 생산하는 국산제품으로 대체하면서 국산 복강경수술용 기구의 새로운 역사를 쓰고 있습니다. 이와 같은 시장 환경에 대응하기 위한 당사의 핵심 경쟁력은 전 공정 내재화에 기반한 원스톱 생산체계에 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "보험등재",
-        "desc": "보험계약과 자산운용 중심 서비스",
-        "revenue_share": null
+        "name": "Trocar",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.4%",
+        "revenue_share": 0.3841,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "건강보험",
-        "desc": "보험계약과 자산운용 중심 서비스",
-        "revenue_share": null
+        "name": "LabBag",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.2%",
+        "revenue_share": 0.232,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "LapSingle",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.7%",
+        "revenue_share": 0.1473,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -176,24 +187,55 @@
       "조직의 절개",
       "응고"
     ],
-    "investor_note": "(주)세종메디칼의 주요 제품·서비스는 기타품목, 기타제품, 기타 임가공, 진성레이져 등, 제품 매출, Trocar입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 복강경 수술용 기구를 포함한 의료기기를 생산·판매하는 전문업체로서, 1996년 세종기업으로 출발하여 30여년간 수입 의료기기 제품이 독차지했던 한국의 복강경시장을 당사에서 생산하는 국산제품으로 대체하면서 국산 복강경수술용 기구의 새로운 역사를 쓰고 있습니다. 이와 같은 시장 환경에 대응하기 위한 당사의 핵심 경쟁력은 전 공정 내재화에 기반한 원스톱 생산체계에 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)세종메디칼의 주요 제품·서비스는 기타품목, 기타제품, 기타 임가공, 진성레이져 등, 제품 매출, Trocar입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 복강경 수술용 기구를 포함한 의료기기를 생산·판매하는 전문업체로서, 1996년 세종기업으로 출발하여 30여년간 수입 의료기기 제품이 독차지했던 한국의 복강경시장을 당사에서 생산하는 국산제품으로 대체하면서 국산 복강경수술용 기구의 새로운 역사를 쓰고 있습니다. 이와 같은 시장 환경에 대응하기 위한 당사의 핵심 경쟁력은 전 공정 내재화에 기반한 원스톱 생산체계에 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "Trocar",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.4%",
+        "revenue_share": 0.3841,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "LabBag",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.2%",
+        "revenue_share": 0.232,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "LapSingle",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.7%",
+        "revenue_share": 0.1473,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "보험등재",
-      "caption": "보험계약과 자산운용 중심 서비스",
-      "kind": "insurance",
-      "visual": "보험등재",
-      "image": "../data/business_images/business_image_local_securities.svg",
-      "image_source": "Local curated visual"
+      "title": "Trocar",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.4%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "건강보험",
-      "caption": "보험계약과 자산운용 중심 서비스",
-      "kind": "insurance",
-      "visual": "건강보험",
-      "image": "../data/business_images/business_image_local_securities.svg",
-      "image_source": "Local curated visual"
+      "title": "LabBag",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "시스템 구축·통합",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.7%",
+      "kind": "service",
+      "visual": "SI",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

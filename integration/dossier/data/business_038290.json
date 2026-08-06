@@ -155,19 +155,25 @@
     "segment_finance": "마크로젠은 사람부터 동물, 식물, 바이러스까지 다양한 생물의 유전자 염기서열을 분석해주는 유전체 분석 전문기업으로, 이 서비스가 매출의 88.9%를 차지합니다. 이 외에 DNA 조각을 합성하는 올리고(Oligo) 서비스, 유전자 발현을 분석하는 마이크로어레이(Microarray), 질병모델 동물을 만드는 유전자변형 마우스 사업도 함께 운영하며, 최근에는 국가 통합 바이오 빅데이터 구축 사업과 AI 주치의 개발 등 국책과제에도 참여하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,952억 원으로 전년 대비 43.8% 크게 늘었고, 영업이익은 1억 원으로 흑자 전환했습니다. 다만 당기순손실은 2억 원으로 적자가 이어졌는데, 전년보다는 손실 폭이 97.4% 줄어든 수준입니다. 부채비율은 104.1%로 자본과 비슷한 수준의 부채를 지고 있어 재무 상태를 계속 지켜볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "Oligo 합성",
-        "desc": "PCR·시퀀싱용 DNA 조각(프라이머) 합성",
-        "revenue_share": 0.049
+        "name": "용역매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 88.9%",
+        "revenue_share": 0.8895,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "Microarray 분석",
-        "desc": "슬라이드 기반 유전자 발현·변이 분석",
-        "revenue_share": 0.0366
+        "name": "Microarray",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.7%",
+        "revenue_share": 0.0366,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "유전자변형 마우스",
-        "desc": "질병모델 동물 제작",
-        "revenue_share": 0.0083
+        "name": "Oligo",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.9%",
+        "revenue_share": 0.049,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -178,40 +184,54 @@
       "유전자변형 마우스 제작",
       "메타게놈 시퀀싱"
     ],
-    "investor_note": "마크로젠은 사람부터 동물, 식물, 바이러스까지 다양한 생물의 유전자 염기서열을 분석해주는 유전체 분석 전문기업으로, 이 서비스가 매출의 88.9%를 차지합니다. 이 외에 DNA 조각을 합성하는 올리고(Oligo) 서비스, 유전자 발현을 분석하는 마이크로어레이(Microarray), 질병모델 동물을 만드는 유전자변형 마우스 사업도 함께 운영하며, 최근에는 국가 통합 바이오 빅데이터 구축 사업과 AI 주치의 개발 등 국책과제에도 참여하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,952억 원으로 전년 대비 43.8% 크게 늘었고, 영업이익은 1억 원으로 흑자 전환했습니다. 다만 당기순손실은 2억 원으로 적자가 이어졌는데, 전년보다는 손실 폭이 97.4% 줄어든 수준입니다. 부채비율은 104.1%로 자본과 비슷한 수준의 부채를 지고 있어 재무 상태를 계속 지켜볼 필요가 있습니다."
+    "investor_note": "마크로젠은 사람부터 동물, 식물, 바이러스까지 다양한 생물의 유전자 염기서열을 분석해주는 유전체 분석 전문기업으로, 이 서비스가 매출의 88.9%를 차지합니다. 이 외에 DNA 조각을 합성하는 올리고(Oligo) 서비스, 유전자 발현을 분석하는 마이크로어레이(Microarray), 질병모델 동물을 만드는 유전자변형 마우스 사업도 함께 운영하며, 최근에는 국가 통합 바이오 빅데이터 구축 사업과 AI 주치의 개발 등 국책과제에도 참여하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,952억 원으로 전년 대비 43.8% 크게 늘었고, 영업이익은 1억 원으로 흑자 전환했습니다. 다만 당기순손실은 2억 원으로 적자가 이어졌는데, 전년보다는 손실 폭이 97.4% 줄어든 수준입니다. 부채비율은 104.1%로 자본과 비슷한 수준의 부채를 지고 있어 재무 상태를 계속 지켜볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "용역매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 88.9%",
+        "revenue_share": 0.8895,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Microarray",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.7%",
+        "revenue_share": 0.0366,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.0083,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Oligo",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.9%",
+        "revenue_share": 0.049,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "유전체 분석 서비스(DNA Sequencing)",
-      "caption": "사람·동물·식물 등 유전자 염기서열 분석 서비스",
+      "title": "Microarray",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.7%",
       "kind": "service",
-      "visual": "유전체",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "Oligo 합성",
-      "caption": "PCR·시퀀싱용 DNA 조각(프라이머) 합성",
+      "title": "Oligo",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.9%",
       "kind": "service",
-      "visual": "Oligo",
-      "image": "../data/business_images/business_image_local_cement.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "Microarray 분석",
-      "caption": "슬라이드 기반 유전자 발현·변이 분석",
-      "kind": "service",
-      "visual": "Microarray",
-      "image": "../data/business_images/business_image_local_default_c.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "유전자변형 마우스",
-      "caption": "질병모델 동물 제작",
-      "kind": "service",
-      "visual": "유전자변형",
-      "image": "../data/business_images/business_image_local_default_d.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

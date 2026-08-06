@@ -155,19 +155,25 @@
     "segment_finance": "우진비앤지는 항생제·백신·소독제 등 동물용의약품을 만드는 회사이며, 자회사 오에스피와 바우와우코리아를 통해 반려견·반려묘용 프리미엄 사료와 간식(인디고, 제니스 등) 사업도 함께 운영하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 547억 원으로 전년보다 1.6% 줄었지만 영업이익은 3억 원으로 8.1% 늘었습니다. 다만 당기순이익은 -35억 원으로 여전히 적자 상태이며, 적자 폭이 전년보다는 줄었습니다(+6.4%). 부채비율은 70.5%로 재무구조는 비교적 안정적인 편입니다.",
     "segment_breakdown": [
       {
+        "name": "인체용의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.0075,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
         "name": "동물용의약품",
-        "desc": "항생제·백신·소독제 등 동물용의약품 제조·판매(본사)",
-        "revenue_share": 0.55
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.4%",
+        "revenue_share": 0.0035,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "반려동물 사료(오에스피)",
-        "desc": "반려견·반려묘 프리미엄 건식사료 ODM 제조",
-        "revenue_share": null
-      },
-      {
-        "name": "반려동물 간식(바우와우코리아)",
-        "desc": "반습식·화식사료 및 육포 등 펫 간식 제조",
-        "revenue_share": null
+        "name": "동물용의약품 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.3%",
+        "revenue_share": 0.5335,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -182,32 +188,46 @@
       "제니스(Zenith) 반려동물 간식",
       "바우와우 육포·저키"
     ],
-    "investor_note": "우진비앤지는 항생제·백신·소독제 등 동물용의약품을 만드는 회사이며, 자회사 오에스피와 바우와우코리아를 통해 반려견·반려묘용 프리미엄 사료와 간식(인디고, 제니스 등) 사업도 함께 운영하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 547억 원으로 전년보다 1.6% 줄었지만 영업이익은 3억 원으로 8.1% 늘었습니다. 다만 당기순이익은 -35억 원으로 여전히 적자 상태이며, 적자 폭이 전년보다는 줄었습니다(+6.4%). 부채비율은 70.5%로 재무구조는 비교적 안정적인 편입니다."
+    "investor_note": "우진비앤지는 항생제·백신·소독제 등 동물용의약품을 만드는 회사이며, 자회사 오에스피와 바우와우코리아를 통해 반려견·반려묘용 프리미엄 사료와 간식(인디고, 제니스 등) 사업도 함께 운영하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 547억 원으로 전년보다 1.6% 줄었지만 영업이익은 3억 원으로 8.1% 늘었습니다. 다만 당기순이익은 -35억 원으로 여전히 적자 상태이며, 적자 폭이 전년보다는 줄었습니다(+6.4%). 부채비율은 70.5%로 재무구조는 비교적 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "인체용의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.0075,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "동물용의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.4%",
+        "revenue_share": 0.0035,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "동물용의약품 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.3%",
+        "revenue_share": 0.5335,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품 합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 86.3%",
+        "revenue_share": 0.8632,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "동물용의약품",
-      "caption": "항생제·백신·소독제 등 동물용의약품 제조·판매(본사)",
+      "title": "의약품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.3%",
       "kind": "bio",
-      "visual": "동물용의약품",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "반려동물 사료(오에스피)",
-      "caption": "반려견·반려묘 프리미엄 건식사료 ODM 제조",
-      "kind": "service",
-      "visual": "반려동물",
-      "image": "../data/business_images/business_image_food_feed.svg",
-      "image_source": "Local visual"
-    },
-    {
-      "title": "반려동물 간식(바우와우코리아)",
-      "caption": "반습식·화식사료 및 육포 등 펫 간식 제조",
-      "kind": "service",
-      "visual": "반려동물",
-      "image": "../data/business_images/business_image_food_feed.svg",
-      "image_source": "Local visual"
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

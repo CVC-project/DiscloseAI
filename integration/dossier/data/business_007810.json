@@ -156,18 +156,31 @@
     "segment_breakdown": [
       {
         "name": "PCB 제조",
-        "desc": "통신기기용 HDI, 반도체용 Package Substrate 등",
-        "revenue_share": 0.6213
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 62.1%",
+        "revenue_share": 0.6213,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "FPCB 제조",
-        "desc": "휴대폰·카메라모듈용 연성 인쇄회로기판(자회사 인터플렉스)",
-        "revenue_share": 0.3076
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.8%",
+        "revenue_share": 0.3076,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "반도체 패키징",
-        "desc": "반도체 패키지 조립·검사(자회사 시그네틱스)",
-        "revenue_share": 0.0683
+        "name": "반도체 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.8%",
+        "revenue_share": 0.0683,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임대 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.3%",
+        "revenue_share": 0.0028,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -177,32 +190,54 @@
       "특수PCB(테라닉스)",
       "반도체 패키징(시그네틱스)"
     ],
-    "investor_note": "코리아써키트는 반도체·이동통신·가전용 PCB(인쇄회로기판)를 만드는 회사로, 자회사 인터플렉스를 통해 연성회로기판(FPCB)을, 시그네틱스를 통해 반도체 패키징 사업을 함께 영위하고 있습니다. 매출은 PCB가 약 62%, FPCB가 약 31%, 반도체 패키징이 약 7%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 5,097억 원으로 전년보다 7.3% 늘었고, 영업이익과 당기순이익 모두 흑자로 전환해 각각 538억 원, 537억 원을 기록했습니다. 부채비율은 76.1%이며, 자기자본이익률(ROE)은 7.3%였습니다."
+    "investor_note": "코리아써키트는 반도체·이동통신·가전용 PCB(인쇄회로기판)를 만드는 회사로, 자회사 인터플렉스를 통해 연성회로기판(FPCB)을, 시그네틱스를 통해 반도체 패키징 사업을 함께 영위하고 있습니다. 매출은 PCB가 약 62%, FPCB가 약 31%, 반도체 패키징이 약 7%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 5,097억 원으로 전년보다 7.3% 늘었고, 영업이익과 당기순이익 모두 흑자로 전환해 각각 538억 원, 537억 원을 기록했습니다. 부채비율은 76.1%이며, 자기자본이익률(ROE)은 7.3%였습니다.",
+    "product_service_segments": [
+      {
+        "name": "PCB 제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 62.1%",
+        "revenue_share": 0.6213,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "FPCB 제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.8%",
+        "revenue_share": 0.3076,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "반도체 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.8%",
+        "revenue_share": 0.0683,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임대 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.3%",
+        "revenue_share": 0.0028,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "PCB 제조",
-      "caption": "통신기기용 HDI, 반도체용 Package Substrate 등",
+      "title": "전자부품·기판",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 62.1%",
       "kind": "chip",
       "visual": "PCB",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "FPCB 제조",
-      "caption": "휴대폰·카메라모듈용 연성 인쇄회로기판(자회사 인터플렉스)",
-      "kind": "service",
-      "visual": "FPCB",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "반도체 패키징",
-      "caption": "반도체 패키지 조립·검사(자회사 시그네틱스)",
+      "title": "반도체 부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.8%",
       "kind": "chip",
-      "visual": "반도체",
-      "image": "../data/business_images/business_image_local_semiconductor_pkg.svg",
-      "image_source": "Local curated visual"
+      "visual": "CHIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

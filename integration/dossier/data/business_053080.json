@@ -156,23 +156,31 @@
     "segment_breakdown": [
       {
         "name": "산업용클린룸",
-        "desc": "반도체·디스플레이 공장용 초정밀 클린룸 시공",
-        "revenue_share": 0.426
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 42.6%",
+        "revenue_share": 0.426,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "드라이룸",
-        "desc": "이차전지 생산라인용 저습도 청정실 시공",
-        "revenue_share": 0.342
-      },
-      {
-        "name": "교량건설업",
-        "desc": "교량거더 제작·공급·시공(종속회사 삼현비앤이)",
-        "revenue_share": 0.138
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.2%",
+        "revenue_share": 0.342,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "바이오클린룸",
-        "desc": "제약·바이오 공장용 클린룸 시공",
-        "revenue_share": 0.092
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.2%",
+        "revenue_share": 0.092,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "교량 건설업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.8%",
+        "revenue_share": 0.138,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -188,40 +196,70 @@
       "HiTAB 교량거더",
       "AICON 교량거더"
     ],
-    "investor_note": "케이엔솔은 반도체·디스플레이 공장에 들어가는 초정밀 클린룸(먼지를 극도로 줄인 청정공간)과 이차전지 생산에 필요한 저습도 드라이룸, 제약·바이오 공장용 바이오클린룸을 시공하는 회사로, 종속회사 삼현비앤이를 통해 교량거더(다리를 받치는 구조물) 사업도 함께 영위합니다. 매출은 산업용클린룸(43%)과 드라이룸(34%)이 가장 크고, 교량건설(14%)과 바이오클린룸(9%)이 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 4,635억 원으로 전년 대비 20.0% 줄었고, 영업이익과 당기순이익 모두 적자로 전환해 각각 620억 원, 544억 원의 손실을 기록했습니다. 부채비율도 212.9%로 크게 높아져, 재무 부담이 커진 점을 함께 살펴볼 필요가 있습니다."
+    "investor_note": "케이엔솔은 반도체·디스플레이 공장에 들어가는 초정밀 클린룸(먼지를 극도로 줄인 청정공간)과 이차전지 생산에 필요한 저습도 드라이룸, 제약·바이오 공장용 바이오클린룸을 시공하는 회사로, 종속회사 삼현비앤이를 통해 교량거더(다리를 받치는 구조물) 사업도 함께 영위합니다. 매출은 산업용클린룸(43%)과 드라이룸(34%)이 가장 크고, 교량건설(14%)과 바이오클린룸(9%)이 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 4,635억 원으로 전년 대비 20.0% 줄었고, 영업이익과 당기순이익 모두 적자로 전환해 각각 620억 원, 544억 원의 손실을 기록했습니다. 부채비율도 212.9%로 크게 높아져, 재무 부담이 커진 점을 함께 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "산업용클린룸",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 42.6%",
+        "revenue_share": 0.426,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "드라이룸",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.2%",
+        "revenue_share": 0.342,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "바이오클린룸",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.2%",
+        "revenue_share": 0.092,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "교량 건설업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.8%",
+        "revenue_share": 0.138,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "산업용클린룸",
-      "caption": "반도체·디스플레이 공장용 초정밀 클린룸 시공",
-      "kind": "chip",
-      "visual": "산업용클린룸",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
-      "image_source": "Wikimedia Commons"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 42.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "드라이룸",
-      "caption": "이차전지 생산라인용 저습도 청정실 시공",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.2%",
       "kind": "service",
-      "visual": "드라이룸",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "교량건설업",
-      "caption": "교량거더 제작·공급·시공(종속회사 삼현비앤이)",
-      "kind": "service",
-      "visual": "교량건설업",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "바이오클린룸",
-      "caption": "제약·바이오 공장용 클린룸 시공",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.2%",
       "kind": "bio",
-      "visual": "바이오클린룸",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "visual": "BIO",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "건축·주택",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.8%",
+      "kind": "service",
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

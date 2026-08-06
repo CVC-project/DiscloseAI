@@ -155,19 +155,32 @@
     "segment_finance": "아가방컴퍼니는 '아가방'과 '디즈니베이비' 등의 브랜드로 유아의류와 용품을 만들어 파는 회사로, 매출의 약 95%가 국내 시장에서 나오고 나머지는 해외 법인을 통해 판매됩니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,890억 원으로 전년 대비 3.5% 늘었고 당기순이익은 106억 원으로 4.4% 증가했지만, 영업이익은 139억 원으로 8.0% 감소했습니다. 부채비율은 32.0%로 재무 구조는 안정적인 편이며, ROE(자기자본이익률)는 6.1% 수준입니다.",
     "segment_breakdown": [
       {
-        "name": "국내(유아의류·용품)",
-        "desc": "국내 유아의류·용품 제조판매",
-        "revenue_share": 0.955
-      },
-      {
-        "name": "해외(유아의류·용품)",
-        "desc": "해외 법인 통한 유아의류·용품 판매",
-        "revenue_share": 0.026
+        "name": "국내",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 95.5%",
+        "revenue_share": 0.955,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "임대 등",
-        "desc": "부동산 임대 등 기타",
-        "revenue_share": 0.019
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.9%",
+        "revenue_share": 0.019,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "해외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+        "revenue_share": 0.026,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -176,32 +189,62 @@
       "에뜨와",
       "퓨토"
     ],
-    "investor_note": "아가방컴퍼니는 '아가방'과 '디즈니베이비' 등의 브랜드로 유아의류와 용품을 만들어 파는 회사로, 매출의 약 95%가 국내 시장에서 나오고 나머지는 해외 법인을 통해 판매됩니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,890억 원으로 전년 대비 3.5% 늘었고 당기순이익은 106억 원으로 4.4% 증가했지만, 영업이익은 139억 원으로 8.0% 감소했습니다. 부채비율은 32.0%로 재무 구조는 안정적인 편이며, ROE(자기자본이익률)는 6.1% 수준입니다."
+    "investor_note": "아가방컴퍼니는 '아가방'과 '디즈니베이비' 등의 브랜드로 유아의류와 용품을 만들어 파는 회사로, 매출의 약 95%가 국내 시장에서 나오고 나머지는 해외 법인을 통해 판매됩니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,890억 원으로 전년 대비 3.5% 늘었고 당기순이익은 106억 원으로 4.4% 증가했지만, 영업이익은 139억 원으로 8.0% 감소했습니다. 부채비율은 32.0%로 재무 구조는 안정적인 편이며, ROE(자기자본이익률)는 6.1% 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "국내",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 95.5%",
+        "revenue_share": 0.955,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임대 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.9%",
+        "revenue_share": 0.019,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "해외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+        "revenue_share": 0.026,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "국내(유아의류·용품)",
-      "caption": "국내 유아의류·용품 제조판매",
+      "title": "국내",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 95.5%",
       "kind": "service",
-      "visual": "국내",
-      "image": "../data/business_images/business_image_local_fashion.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "해외(유아의류·용품)",
-      "caption": "해외 법인 통한 유아의류·용품 판매",
-      "kind": "service",
-      "visual": "해외",
-      "image": "../data/business_images/business_image_local_fashion.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "임대 등",
-      "caption": "부동산 임대 등 기타",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.9%",
       "kind": "service",
-      "visual": "임대",
-      "image": "../data/business_images/business_image_local_default_c.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "해외",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

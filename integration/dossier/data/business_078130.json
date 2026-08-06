@@ -156,23 +156,31 @@
     "segment_breakdown": [
       {
         "name": "특수지(용인)",
-        "desc": "담배필터용 박엽지·강판간지 등 특수 기능지 생산",
-        "revenue_share": 0.673
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.3%",
+        "revenue_share": 0.593,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "유통",
-        "desc": "크라프트지 등 제지 상품의 유통·판매",
-        "revenue_share": 0.318
+        "name": "수출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+        "revenue_share": 0.08,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "가공",
-        "desc": "자체가공 및 외주 임가공 서비스",
-        "revenue_share": 0.009
+        "name": "유 통",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.8%",
+        "revenue_share": 0.158,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "그래핀·신소재(국일그래핀)",
-        "desc": "대면적 그래핀 박막 등 신소재 연구개발(매출 미발생)",
-        "revenue_share": null
+        "name": "가 공",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.9%",
+        "revenue_share": 0.009,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -182,40 +190,62 @@
       "특수지",
       "그래핀 박막소재"
     ],
-    "investor_note": "국일제지는 담배필터용 박엽지와 강판간지 등 특수지를 만드는 제지회사로, 매출의 3분의 2 이상이 용인공장의 특수지 사업에서 나오고 나머지는 크라프트지 유통과 임가공에서 발생합니다. 최근에는 자회사 국일그래핀을 통해 그래핀 박막 신소재 개발에도 나서고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 677억 원으로 전년 대비 20.3% 늘었고 영업손실과 순손실 규모도 각각 61.6%, 85.7% 줄어드는 등 적자 폭이 개선됐습니다. 다만 감사인은 중단된 산업용지 사업 등 자산에서 손상차손이 발생한 점을 핵심감사사항으로 짚었고, 부채비율은 11.7%로 낮은 편입니다."
+    "investor_note": "국일제지는 담배필터용 박엽지와 강판간지 등 특수지를 만드는 제지회사로, 매출의 3분의 2 이상이 용인공장의 특수지 사업에서 나오고 나머지는 크라프트지 유통과 임가공에서 발생합니다. 최근에는 자회사 국일그래핀을 통해 그래핀 박막 신소재 개발에도 나서고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 677억 원으로 전년 대비 20.3% 늘었고 영업손실과 순손실 규모도 각각 61.6%, 85.7% 줄어드는 등 적자 폭이 개선됐습니다. 다만 감사인은 중단된 산업용지 사업 등 자산에서 손상차손이 발생한 점을 핵심감사사항으로 짚었고, 부채비율은 11.7%로 낮은 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "특수지(용인)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.3%",
+        "revenue_share": 0.593,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "수출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+        "revenue_share": 0.08,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "유 통",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.8%",
+        "revenue_share": 0.158,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "가 공",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.9%",
+        "revenue_share": 0.009,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "특수지(용인)",
-      "caption": "담배필터용 박엽지·강판간지 등 특수 기능지 생산",
-      "kind": "consumer",
-      "visual": "특수지",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "유통",
-      "caption": "크라프트지 등 제지 상품의 유통·판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.3%",
       "kind": "service",
-      "visual": "유통",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "가공",
-      "caption": "자체가공 및 외주 임가공 서비스",
+      "title": "수출",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
       "kind": "service",
-      "visual": "가공",
-      "image": "../data/business_images/business_image_local_default_c.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "그래핀·신소재(국일그래핀)",
-      "caption": "대면적 그래핀 박막 등 신소재 연구개발(매출 미발생)",
-      "kind": "material",
-      "visual": "그래핀",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "title": "유 통",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

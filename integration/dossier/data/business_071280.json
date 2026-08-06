@@ -156,13 +156,17 @@
     "segment_breakdown": [
       {
         "name": "제조",
-        "desc": "제조 관련 제품·서비스",
-        "revenue_share": null
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 48.4%",
+        "revenue_share": 0.4838,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "디스플레이",
-        "desc": "디스플레이 관련 제품·서비스",
-        "revenue_share": null
+        "name": "반도체",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.7%",
+        "revenue_share": 0.4471,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -170,23 +174,31 @@
       "디스플레이",
       "제품계"
     ],
-    "investor_note": "로체시스템즈의 주요 사업은 제조, 디스플레이, 제품계입니다. 원재료 등의 가격변동추이당사의 원재료 등의 매입은 수주받은 장비의 설계 방식에 따라, 시장에서 유통되는 제품이 아닌 주문생산을 하여 납품을 받고 있습니다. 매출처 등 당사의 주요매출은 FPD장비, 반도체 장비, GCM장비, 모듈장비로 구분되며, 주문제작 판매, 부품판매, 개조개선 및 유지보수 매출로 구분이 됩니다."
+    "investor_note": "로체시스템즈의 주요 사업은 제조, 디스플레이, 제품계입니다. 원재료 등의 가격변동추이당사의 원재료 등의 매입은 수주받은 장비의 설계 방식에 따라, 시장에서 유통되는 제품이 아닌 주문생산을 하여 납품을 받고 있습니다. 매출처 등 당사의 주요매출은 FPD장비, 반도체 장비, GCM장비, 모듈장비로 구분되며, 주문제작 판매, 부품판매, 개조개선 및 유지보수 매출로 구분이 됩니다.",
+    "product_service_segments": [
+      {
+        "name": "제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 48.4%",
+        "revenue_share": 0.4838,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "반도체",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.7%",
+        "revenue_share": 0.4471,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "제조",
-      "caption": "제조 관련 제품·서비스",
-      "kind": "service",
-      "visual": "제조",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "디스플레이",
-      "caption": "디스플레이 관련 제품·서비스",
-      "kind": "display",
-      "visual": "디스플레이",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
+      "title": "반도체",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.7%",
+      "kind": "chip",
+      "visual": "CHIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
       "image_source": "Wikimedia Commons"
     }
   ],

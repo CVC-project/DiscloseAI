@@ -155,19 +155,32 @@
     "segment_finance": "대한전선은 1941년부터 이어온 전선 전문 기업으로, 발전소에서 가정까지 전기를 나르는 초고압케이블과 전력선, 해저케이블·HVDC케이블, 통신케이블 등을 국내 당진공장과 베트남·남아공·사우디 해외 공장에서 생산합니다. 매출의 절반은 도체·권선용 소재(나선 및 권선)에서, 나머지는 전력·절연선과 공사·상품 매출에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 3조 6,360억 원으로 전년 대비 10.5% 늘었고 영업이익도 1,286억 원으로 11.7%, 당기순이익도 898억 원으로 21.1% 증가했습니다. 부채비율은 114.0%로 자본과 비슷한 수준의 빚을 지고 있습니다.",
     "segment_breakdown": [
       {
-        "name": "나선 및 권선",
-        "desc": "통신선·전력선용 도체 및 전기기기 권선용 소재",
-        "revenue_share": 0.507
+        "name": "전선부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.4%",
+        "revenue_share": 0.194,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "전력 및 절연선",
-        "desc": "송배전선 등 초고압케이블·전력선",
-        "revenue_share": 0.274
+        "name": "나선 및권선",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.7%",
+        "revenue_share": 0.507,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "통신케이블",
-        "desc": "데이터·음성·영상 전송용 통신망 케이블",
-        "revenue_share": 0.009
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.9%",
+        "revenue_share": 0.009,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.9%",
+        "revenue_share": 0.099,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -179,32 +192,62 @@
       "Copper Rod",
       "나선 및 권선"
     ],
-    "investor_note": "대한전선은 1941년부터 이어온 전선 전문 기업으로, 발전소에서 가정까지 전기를 나르는 초고압케이블과 전력선, 해저케이블·HVDC케이블, 통신케이블 등을 국내 당진공장과 베트남·남아공·사우디 해외 공장에서 생산합니다. 매출의 절반은 도체·권선용 소재(나선 및 권선)에서, 나머지는 전력·절연선과 공사·상품 매출에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 3조 6,360억 원으로 전년 대비 10.5% 늘었고 영업이익도 1,286억 원으로 11.7%, 당기순이익도 898억 원으로 21.1% 증가했습니다. 부채비율은 114.0%로 자본과 비슷한 수준의 빚을 지고 있습니다."
+    "investor_note": "대한전선은 1941년부터 이어온 전선 전문 기업으로, 발전소에서 가정까지 전기를 나르는 초고압케이블과 전력선, 해저케이블·HVDC케이블, 통신케이블 등을 국내 당진공장과 베트남·남아공·사우디 해외 공장에서 생산합니다. 매출의 절반은 도체·권선용 소재(나선 및 권선)에서, 나머지는 전력·절연선과 공사·상품 매출에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 3조 6,360억 원으로 전년 대비 10.5% 늘었고 영업이익도 1,286억 원으로 11.7%, 당기순이익도 898억 원으로 21.1% 증가했습니다. 부채비율은 114.0%로 자본과 비슷한 수준의 빚을 지고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "전선부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.4%",
+        "revenue_share": 0.194,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "나선 및권선",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.7%",
+        "revenue_share": 0.507,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "통신케이블",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.9%",
+        "revenue_share": 0.009,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.9%",
+        "revenue_share": 0.099,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "나선 및 권선",
-      "caption": "통신선·전력선용 도체 및 전기기기 권선용 소재",
-      "kind": "telecom",
-      "visual": "나선",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "전력 및 절연선",
-      "caption": "송배전선 등 초고압케이블·전력선",
+      "title": "전선부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.4%",
       "kind": "power",
-      "visual": "전력",
-      "image": "../data/business_images/business_image_local_power.svg",
-      "image_source": "Local curated visual"
+      "visual": "POWER",
+      "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "통신케이블",
-      "caption": "데이터·음성·영상 전송용 통신망 케이블",
-      "kind": "telecom",
-      "visual": "통신케이블",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "title": "나선 및권선",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.7%",
+      "kind": "power",
+      "visual": "POWER",
+      "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.9%",
+      "kind": "power",
+      "visual": "POWER",
+      "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

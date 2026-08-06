@@ -155,14 +155,25 @@
     "segment_finance": "DH오토넥스(옛 대유플러스)는 유무선 통신장비를 개발·판매하는 정보통신부문, 전기차 충전기를 만드는 에너지사업부문, LPG차량용 연료탱크와 수소프레임을 생산하는 자동차부품부문을 함께 운영하는 회사로, 최근에는 자동차부품부문이 매출의 90%를 차지할 만큼 비중이 커졌습니다. 2024년 4월에는 경영정상화를 위해 제3자배정 유상증자와 전환사채 발행으로 총 422억 원 규모의 M&A 투자계약을 체결하기도 했습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 401억 원으로 전년 대비 24.1% 늘었고 영업이익은 적자에서 흑자로 전환됐습니다. 다만 총자산은 512억 원으로 22.5% 줄었고, 부채비율은 59.6% 수준입니다. 이 회사의 사업보고서에는 감사보고서 첨부파일이 확인되지 않아 감사의견과 핵심감사사항은 이번에 파악하지 못했습니다.",
     "segment_breakdown": [
       {
-        "name": "정보통신부문",
-        "desc": "네트워크 솔루션 및 유무선 통신장비 개발·판매",
-        "revenue_share": 0.0908
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.3%",
+        "revenue_share": 0.4631,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "자동차부품부문",
-        "desc": "LPG차량용 연료탱크, 수소프레임, 차량용 HAPTIC MOTOR 제조",
-        "revenue_share": 0.8951
+        "name": "EPC/SPC",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 82.6%",
+        "revenue_share": 0.8258,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "LPG BOMBE",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 84.2%",
+        "revenue_share": 0.8423,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,30 +185,60 @@
       "차량용 HAPTIC MOTOR",
       "수소프레임"
     ],
-    "investor_note": "DH오토넥스(옛 대유플러스)는 유무선 통신장비를 개발·판매하는 정보통신부문, 전기차 충전기를 만드는 에너지사업부문, LPG차량용 연료탱크와 수소프레임을 생산하는 자동차부품부문을 함께 운영하는 회사로, 최근에는 자동차부품부문이 매출의 90%를 차지할 만큼 비중이 커졌습니다. 2024년 4월에는 경영정상화를 위해 제3자배정 유상증자와 전환사채 발행으로 총 422억 원 규모의 M&A 투자계약을 체결하기도 했습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 401억 원으로 전년 대비 24.1% 늘었고 영업이익은 적자에서 흑자로 전환됐습니다. 다만 총자산은 512억 원으로 22.5% 줄었고, 부채비율은 59.6% 수준입니다. 이 회사의 사업보고서에는 감사보고서 첨부파일이 확인되지 않아 감사의견과 핵심감사사항은 이번에 파악하지 못했습니다."
+    "investor_note": "DH오토넥스(옛 대유플러스)는 유무선 통신장비를 개발·판매하는 정보통신부문, 전기차 충전기를 만드는 에너지사업부문, LPG차량용 연료탱크와 수소프레임을 생산하는 자동차부품부문을 함께 운영하는 회사로, 최근에는 자동차부품부문이 매출의 90%를 차지할 만큼 비중이 커졌습니다. 2024년 4월에는 경영정상화를 위해 제3자배정 유상증자와 전환사채 발행으로 총 422억 원 규모의 M&A 투자계약을 체결하기도 했습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 401억 원으로 전년 대비 24.1% 늘었고 영업이익은 적자에서 흑자로 전환됐습니다. 다만 총자산은 512억 원으로 22.5% 줄었고, 부채비율은 59.6% 수준입니다. 이 회사의 사업보고서에는 감사보고서 첨부파일이 확인되지 않아 감사의견과 핵심감사사항은 이번에 파악하지 못했습니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.7%",
+        "revenue_share": 0.3073,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.3%",
+        "revenue_share": 0.4631,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "EPC/SPC",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 82.6%",
+        "revenue_share": 0.8258,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "LPG BOMBE",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 84.2%",
+        "revenue_share": 0.8423,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "정보통신부문",
-      "caption": "네트워크 솔루션 및 유무선 통신장비 개발·판매",
-      "kind": "telecom",
-      "visual": "정보통신부문",
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.3%",
+      "kind": "auto",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "에너지사업부문",
-      "caption": "전기차 충전기, 신소재·신에너지 개발·판매",
+      "title": "EPC/SPC",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 82.6%",
       "kind": "auto",
-      "visual": "에너지사업부문",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "자동차부품부문",
-      "caption": "LPG차량용 연료탱크, 수소프레임, 차량용 HAPTIC MOTOR 제조",
+      "title": "LPG BOMBE",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 84.2%",
       "kind": "auto",
-      "visual": "자동차부품부문",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     }

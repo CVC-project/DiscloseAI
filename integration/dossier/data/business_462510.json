@@ -105,7 +105,15 @@
   "snippets": {
     "overview": "주식회사 라메디텍의 주요 제품·서비스는 사용용도, 레이저, 기타 피부미용, 의료기기, 레이저 채혈기, 핸디레이 등입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 매출처 수주상황 당사가 고객에게 제공하는 제품은 고객사 별로 요구되는 사양 차이에 따른 구체적인 가격 등의 편차가 있습니다. 제품의 가격변동 추이 당사가 고객에게 제공하는 제품은 고객사별로 요구되는 사양 차이에 따른 가격 편차가 있어 제품당 가격을 단순 산정하기 어렵습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "주식회사 라메디텍의 주요 제품·서비스는 사용용도, 레이저, 기타 피부미용, 의료기기, 레이저 채혈기, 핸디레이 등입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 매출처 수주상황 당사가 고객에게 제공하는 제품은 고객사 별로 요구되는 사양 차이에 따른 구체적인 가격 등의 편차가 있습니다. 제품의 가격변동 추이 당사가 고객에게 제공하는 제품은 고객사별로 요구되는 사양 차이에 따른 가격 편차가 있어 제품당 가격을 단순 산정하기 어렵습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "레이저 채혈기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.0197,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "사용용도",
       "레이저",
@@ -118,24 +126,40 @@
       "경로별 비중",
       "총판"
     ],
-    "investor_note": "주식회사 라메디텍의 주요 제품·서비스는 사용용도, 레이저, 기타 피부미용, 의료기기, 레이저 채혈기, 핸디레이 등입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 매출처 수주상황 당사가 고객에게 제공하는 제품은 고객사 별로 요구되는 사양 차이에 따른 구체적인 가격 등의 편차가 있습니다. 제품의 가격변동 추이 당사가 고객에게 제공하는 제품은 고객사별로 요구되는 사양 차이에 따른 가격 편차가 있어 제품당 가격을 단순 산정하기 어렵습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사 라메디텍의 주요 제품·서비스는 사용용도, 레이저, 기타 피부미용, 의료기기, 레이저 채혈기, 핸디레이 등입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 매출처 수주상황 당사가 고객에게 제공하는 제품은 고객사 별로 요구되는 사양 차이에 따른 구체적인 가격 등의 편차가 있습니다. 제품의 가격변동 추이 당사가 고객에게 제공하는 제품은 고객사별로 요구되는 사양 차이에 따른 가격 편차가 있어 제품당 가격을 단순 산정하기 어렵습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "레이저 및 기타 피부미용/의료기기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 91.2%",
+        "revenue_share": 0.9121,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "레이저 채혈기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.0197,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "사용용도",
-      "caption": "사용용도 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "사용용도",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
+      "title": "의료기기",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 91.2%",
+      "kind": "bio",
+      "visual": "MEDICAL",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "레이저",
-      "caption": "레이저 관련 제품과 서비스를 통해 매출을 만듭니다.",
+      "title": "레이저 채혈기",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
       "kind": "service",
-      "visual": "레이저",
-      "image": "../data/business_images/business_image_local_default_b.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

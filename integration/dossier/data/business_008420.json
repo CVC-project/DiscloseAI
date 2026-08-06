@@ -155,19 +155,32 @@
     "segment_finance": "문배철강은 1973년부터 포스코의 열연제품(박판·후판)을 취급해온 국내 최대 철강 유통·가공업체로, 광양·시화 공장에서 코일 가공을 하며 최근에는 보유 부동산을 활용한 임대사업도 함께 하고 있습니다. 국내 열연대리점 8개사 중 시장점유율 약 8.9%를 차지하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,378억 원으로 전년 대비 1.7% 줄었고 영업손실 9억 원을 냈지만 적자폭은 전년보다 줄었습니다. 당기순이익은 58억 원으로 11.4% 감소했습니다. 부채비율은 22.3%로 낮아 재무구조는 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "철강 제조·유통",
-        "desc": "포스코 열연제품(박판·후판 등) 가공 및 유통",
-        "revenue_share": 0.965
+        "name": "제 품 매 출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 70.1%",
+        "revenue_share": 0.701,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "부동산 임대",
-        "desc": "서울 본사·용인 사업장 등 보유부동산 임대사업",
-        "revenue_share": 0.019
+        "name": "상 품 매 출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.4%",
+        "revenue_share": 0.264,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "임가공",
-        "desc": "철강 임가공 서비스",
-        "revenue_share": 0.015
+        "name": "임가공매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+        "revenue_share": 0.015,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임 대 매 출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.9%",
+        "revenue_share": 0.019,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -178,32 +191,62 @@
       "강판",
       "형강"
     ],
-    "investor_note": "문배철강은 1973년부터 포스코의 열연제품(박판·후판)을 취급해온 국내 최대 철강 유통·가공업체로, 광양·시화 공장에서 코일 가공을 하며 최근에는 보유 부동산을 활용한 임대사업도 함께 하고 있습니다. 국내 열연대리점 8개사 중 시장점유율 약 8.9%를 차지하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,378억 원으로 전년 대비 1.7% 줄었고 영업손실 9억 원을 냈지만 적자폭은 전년보다 줄었습니다. 당기순이익은 58억 원으로 11.4% 감소했습니다. 부채비율은 22.3%로 낮아 재무구조는 안정적인 편입니다."
+    "investor_note": "문배철강은 1973년부터 포스코의 열연제품(박판·후판)을 취급해온 국내 최대 철강 유통·가공업체로, 광양·시화 공장에서 코일 가공을 하며 최근에는 보유 부동산을 활용한 임대사업도 함께 하고 있습니다. 국내 열연대리점 8개사 중 시장점유율 약 8.9%를 차지하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,378억 원으로 전년 대비 1.7% 줄었고 영업손실 9억 원을 냈지만 적자폭은 전년보다 줄었습니다. 당기순이익은 58억 원으로 11.4% 감소했습니다. 부채비율은 22.3%로 낮아 재무구조는 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "제 품 매 출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 70.1%",
+        "revenue_share": 0.701,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상 품 매 출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.4%",
+        "revenue_share": 0.264,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임가공매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+        "revenue_share": 0.015,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임 대 매 출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.9%",
+        "revenue_share": 0.019,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "철강 제조·유통",
-      "caption": "포스코 열연제품(박판·후판 등) 가공 및 유통",
+      "title": "제 품 매 출",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 70.1%",
       "kind": "material",
-      "visual": "철강",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "부동산 임대",
-      "caption": "서울 본사·용인 사업장 등 보유부동산 임대사업",
-      "kind": "service",
-      "visual": "부동산",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "title": "상 품 매 출",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.4%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "임가공",
-      "caption": "철강 임가공 서비스",
+      "title": "임 대 매 출",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.9%",
       "kind": "material",
-      "visual": "임가공",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

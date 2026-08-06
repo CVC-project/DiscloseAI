@@ -155,19 +155,25 @@
     "segment_finance": "한화솔루션은 PVC·가성소다 등을 만드는 기초소재(석유화학) 사업과, 태양광 셀·모듈부터 발전소 건설까지 아우르는 큐셀 신재생에너지 사업을 두 축으로 하는 종합 에너지·소재 기업입니다. 매출의 절반 이상(54%)이 태양광 사업에서, 32%가 기초소재에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 13조 3,330억 원으로 전년 대비 7.6% 늘었지만 영업손실 3,647억 원, 당기순손실 6,152억 원을 기록해 적자폭은 줄었지만 수익성 회복이 과제로 남아 있습니다. 부채비율은 196.3%로 부채가 많은 편입니다. 감사의견은 적정이며, 핵심감사사항으로 해외 태양광 자회사(Q Energy Mediterranee)의 영업권 손상 평가가 지목됐습니다.",
     "segment_breakdown": [
       {
-        "name": "신재생에너지(큐셀)",
-        "desc": "태양광 셀·모듈 생산 및 발전소 EPC·에너지솔루션",
-        "revenue_share": 0.543
-      },
-      {
         "name": "기초소재",
-        "desc": "PE·PVC·가성소다·TDI 등 석유화학 제품",
-        "revenue_share": 0.321
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.1%",
+        "revenue_share": 0.3213,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "가공소재",
-        "desc": "자동차부품·산업용·태양광 소재 등 경량복합소재",
-        "revenue_share": 0.084
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.4%",
+        "revenue_share": 0.0844,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "신재생에너지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 54.3%",
+        "revenue_share": 0.5434,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -180,32 +186,55 @@
       "태양광 소재",
       "전자소재(FCCL 등)"
     ],
-    "investor_note": "한화솔루션은 PVC·가성소다 등을 만드는 기초소재(석유화학) 사업과, 태양광 셀·모듈부터 발전소 건설까지 아우르는 큐셀 신재생에너지 사업을 두 축으로 하는 종합 에너지·소재 기업입니다. 매출의 절반 이상(54%)이 태양광 사업에서, 32%가 기초소재에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 13조 3,330억 원으로 전년 대비 7.6% 늘었지만 영업손실 3,647억 원, 당기순손실 6,152억 원을 기록해 적자폭은 줄었지만 수익성 회복이 과제로 남아 있습니다. 부채비율은 196.3%로 부채가 많은 편입니다. 감사의견은 적정이며, 핵심감사사항으로 해외 태양광 자회사(Q Energy Mediterranee)의 영업권 손상 평가가 지목됐습니다."
+    "investor_note": "한화솔루션은 PVC·가성소다 등을 만드는 기초소재(석유화학) 사업과, 태양광 셀·모듈부터 발전소 건설까지 아우르는 큐셀 신재생에너지 사업을 두 축으로 하는 종합 에너지·소재 기업입니다. 매출의 절반 이상(54%)이 태양광 사업에서, 32%가 기초소재에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 13조 3,330억 원으로 전년 대비 7.6% 늘었지만 영업손실 3,647억 원, 당기순손실 6,152억 원을 기록해 적자폭은 줄었지만 수익성 회복이 과제로 남아 있습니다. 부채비율은 196.3%로 부채가 많은 편입니다. 감사의견은 적정이며, 핵심감사사항으로 해외 태양광 자회사(Q Energy Mediterranee)의 영업권 손상 평가가 지목됐습니다.",
+    "product_service_segments": [
+      {
+        "name": "기초소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.1%",
+        "revenue_share": 0.3213,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "가공소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.4%",
+        "revenue_share": 0.0844,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "신재생에너지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 54.3%",
+        "revenue_share": 0.5434,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "신재생에너지(큐셀)",
-      "caption": "태양광 셀·모듈 생산 및 발전소 EPC·에너지솔루션",
-      "kind": "power",
-      "visual": "신재생에너지",
-      "image": "../data/business_images/business_image_local_cement.svg",
-      "image_source": "Local curated visual"
-    },
-    {
       "title": "기초소재",
-      "caption": "PE·PVC·가성소다·TDI 등 석유화학 제품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.1%",
       "kind": "material",
-      "visual": "기초소재",
-      "image": "../data/business_images/business_image_local_oil.svg",
-      "image_source": "Local curated visual"
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "가공소재",
-      "caption": "자동차부품·산업용·태양광 소재 등 경량복합소재",
-      "kind": "auto",
-      "visual": "가공소재",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.4%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "신재생에너지",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 54.3%",
+      "kind": "power",
+      "visual": "RENEWABLE",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

@@ -156,18 +156,31 @@
     "segment_breakdown": [
       {
         "name": "미디어커머스",
-        "desc": "차량용품·마사지기·향수 등 D2C 온라인 판매",
-        "revenue_share": 0.684
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.4%",
+        "revenue_share": 0.154,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "식품·음료",
-        "desc": "잼·시럽(프레시코), 콤부차(코아바이오) 제조·판매",
-        "revenue_share": 0.275
+        "name": "차량용품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.8%",
+        "revenue_share": 0.168,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "향수",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.4%",
+        "revenue_share": 0.064,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "화장품",
-        "desc": "엘리샤코이 등 화장품 제조·판매",
-        "revenue_share": 0.039
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.3%",
+        "revenue_share": 0.043,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -178,40 +191,70 @@
       "콤부차(아임얼라이브)",
       "화장품(엘리샤코이)"
     ],
-    "investor_note": "HLB글로벌은 미디어 콘텐츠로 제품을 홍보해 자사몰에서 직접 판매하는 미디어커머스(마사지기·차량용품·향수 등)가 매출의 68%를 차지하는 회사로, 종속회사를 통해 잼·시럽(프레시코), 콤부차(아임얼라이브), 화장품(엘리샤코이) 사업도 함께 운영합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,002억 원으로 전년 대비 2.1% 늘었지만 영업이익은 흑자에서 적자로 돌아서며 98억 원의 손실을 냈고, 당기순손실도 89억 원으로 이어졌습니다. 다만 부채비율은 55.4%로 자본 대비 빚 부담은 크지 않은 편입니다."
+    "investor_note": "HLB글로벌은 미디어 콘텐츠로 제품을 홍보해 자사몰에서 직접 판매하는 미디어커머스(마사지기·차량용품·향수 등)가 매출의 68%를 차지하는 회사로, 종속회사를 통해 잼·시럽(프레시코), 콤부차(아임얼라이브), 화장품(엘리샤코이) 사업도 함께 운영합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,002억 원으로 전년 대비 2.1% 늘었지만 영업이익은 흑자에서 적자로 돌아서며 98억 원의 손실을 냈고, 당기순손실도 89억 원으로 이어졌습니다. 다만 부채비율은 55.4%로 자본 대비 빚 부담은 크지 않은 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "미디어커머스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.4%",
+        "revenue_share": 0.154,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "차량용품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.8%",
+        "revenue_share": 0.168,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "향수",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.4%",
+        "revenue_share": 0.064,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "화장품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.3%",
+        "revenue_share": 0.043,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "미디어커머스",
-      "caption": "차량용품·마사지기·향수 등 D2C 온라인 판매",
+      "title": "플랫폼 서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.4%",
       "kind": "platform",
-      "visual": "미디어커머스",
-      "image": "../data/business_images/business_image_local_content.svg",
-      "image_source": "Local curated visual"
+      "visual": "PLATFORM",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "식품·음료",
-      "caption": "잼·시럽(프레시코), 콤부차(코아바이오) 제조·판매",
-      "kind": "bio",
-      "visual": "식품",
-      "image": "../data/business_images/business_image_local_alcohol.svg",
-      "image_source": "Local curated visual"
+      "title": "차량용품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "향수",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.4%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "화장품",
-      "caption": "엘리샤코이 등 화장품 제조·판매",
-      "kind": "consumer",
-      "visual": "화장품",
-      "image": "../data/business_images/business_image_local_cosmetics.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "패션잡화(기타)",
-      "caption": "안경 등 패션잡화 도소매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.3%",
       "kind": "service",
-      "visual": "패션잡화",
-      "image": "../data/business_images/business_image_local_fashion.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

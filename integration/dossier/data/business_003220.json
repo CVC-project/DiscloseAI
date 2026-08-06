@@ -156,18 +156,31 @@
     "segment_breakdown": [
       {
         "name": "제약",
-        "desc": "전문의약품·일반의약품 제조 및 판매, 병의원 공급",
-        "revenue_share": 0.897
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.2%",
+        "revenue_share": 0.122,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "화장품",
-        "desc": "SNP 브랜드 마스크팩 등 화장품 제조·판매",
-        "revenue_share": 0.05
+        "name": "펠루비/CR/에스정",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.5%",
+        "revenue_share": 0.085,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "건강기능식품",
-        "desc": "장대원 프로바이오틱스 등 건강기능식품",
-        "revenue_share": 0.06
+        "name": "콜대원/키즈",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.8%",
+        "revenue_share": 0.048,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "신바로",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.03,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -182,32 +195,70 @@
       "장대원(프로바이오틱스)",
       "오감식탁"
     ],
-    "investor_note": "대원제약은 전문의약품과 일반의약품을 아우르는 제약회사로, 짜먹는 감기약 콜대원과 진해거담제 코대원포르테, 진통소염제 펠루비 등이 주력 제품입니다. 매출의 약 90%는 제약 부문에서 나오고, 나머지는 SNP 마스크팩 등 화장품(5%)과 장대원 프로바이오틱스 등 건강기능식품(6%)이 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,054억 원으로 전년 대비 1.2% 늘었지만 영업이익은 34억 원으로 87.7% 급감했고 당기순이익은 40억 원 적자로 전환했습니다. 부채비율은 123.5%로 자본보다 빚이 더 많은 상태라 재무 부담을 살펴볼 필요가 있습니다."
+    "investor_note": "대원제약은 전문의약품과 일반의약품을 아우르는 제약회사로, 짜먹는 감기약 콜대원과 진해거담제 코대원포르테, 진통소염제 펠루비 등이 주력 제품입니다. 매출의 약 90%는 제약 부문에서 나오고, 나머지는 SNP 마스크팩 등 화장품(5%)과 장대원 프로바이오틱스 등 건강기능식품(6%)이 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,054억 원으로 전년 대비 1.2% 늘었지만 영업이익은 34억 원으로 87.7% 급감했고 당기순이익은 40억 원 적자로 전환했습니다. 부채비율은 123.5%로 자본보다 빚이 더 많은 상태라 재무 부담을 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "제약",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.2%",
+        "revenue_share": 0.122,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "펠루비/CR/에스정",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.5%",
+        "revenue_share": 0.085,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "콜대원/키즈",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.8%",
+        "revenue_share": 0.048,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "신바로",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.03,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "제약",
-      "caption": "전문의약품·일반의약품 제조 및 판매, 병의원 공급",
+      "title": "의약품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.2%",
       "kind": "bio",
-      "visual": "제약",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "화장품",
-      "caption": "SNP 브랜드 마스크팩 등 화장품 제조·판매",
-      "kind": "consumer",
-      "visual": "화장품",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "펠루비/CR/에스정",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "건강기능식품",
-      "caption": "장대원 프로바이오틱스 등 건강기능식품",
-      "kind": "bio",
-      "visual": "건강기능식품",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "콜대원/키즈",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "신바로",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

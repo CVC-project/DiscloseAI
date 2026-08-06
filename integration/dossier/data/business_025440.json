@@ -153,7 +153,15 @@
   "snippets": {
     "overview": "DH오토웨어는 현대모비스·르노·알파인 등에 디스플레이, D-Audio, AMP 등 차량용 인포테인먼트 부품을 공급하는 전장사업(매출의 93%)과 자동차 차체 자동화설비·지그를 만드는 자동화사업(7%)을 함께 하는 기업입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 4,943억 원으로 전년보다 32.9% 크게 늘었지만, 영업손실 49억 원을 냈고 당기순이익도 234억 원 적자를 기록했습니다. 특히 부채비율이 561.9%로 자본보다 부채가 5배 이상 많은 수준이라 재무 안정성에 각별한 주의가 필요합니다.",
     "segment_finance": "DH오토웨어는 현대모비스·르노·알파인 등에 디스플레이, D-Audio, AMP 등 차량용 인포테인먼트 부품을 공급하는 전장사업(매출의 93%)과 자동차 차체 자동화설비·지그를 만드는 자동화사업(7%)을 함께 하는 기업입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 4,943억 원으로 전년보다 32.9% 크게 늘었지만, 영업손실 49억 원을 냈고 당기순이익도 234억 원 적자를 기록했습니다. 특히 부채비율이 561.9%로 자본보다 부채가 5배 이상 많은 수준이라 재무 안정성에 각별한 주의가 필요합니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "AMP, VESS 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.3%",
+        "revenue_share": 0.033,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "디스플레이(D-Audio)",
       "AMP(Class-D 앰프)",
@@ -162,23 +170,54 @@
       "Audio Front Panel",
       "자동차 차체 자동화설비·조립용 지그"
     ],
-    "investor_note": "DH오토웨어는 현대모비스·르노·알파인 등에 디스플레이, D-Audio, AMP 등 차량용 인포테인먼트 부품을 공급하는 전장사업(매출의 93%)과 자동차 차체 자동화설비·지그를 만드는 자동화사업(7%)을 함께 하는 기업입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 4,943억 원으로 전년보다 32.9% 크게 늘었지만, 영업손실 49억 원을 냈고 당기순이익도 234억 원 적자를 기록했습니다. 특히 부채비율이 561.9%로 자본보다 부채가 5배 이상 많은 수준이라 재무 안정성에 각별한 주의가 필요합니다."
+    "investor_note": "DH오토웨어는 현대모비스·르노·알파인 등에 디스플레이, D-Audio, AMP 등 차량용 인포테인먼트 부품을 공급하는 전장사업(매출의 93%)과 자동차 차체 자동화설비·지그를 만드는 자동화사업(7%)을 함께 하는 기업입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 4,943억 원으로 전년보다 32.9% 크게 늘었지만, 영업손실 49억 원을 냈고 당기순이익도 234억 원 적자를 기록했습니다. 특히 부채비율이 561.9%로 자본보다 부채가 5배 이상 많은 수준이라 재무 안정성에 각별한 주의가 필요합니다.",
+    "product_service_segments": [
+      {
+        "name": "전장사업부",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 96.0%",
+        "revenue_share": 0.96,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "AMP, VESS 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.3%",
+        "revenue_share": 0.033,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동화사업부",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "전장사업부",
-      "caption": "차량용 디스플레이·D-Audio·AMP 등 카인포테인먼트 부품 제조",
+      "title": "전장부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 96.0%",
       "kind": "auto",
-      "visual": "전장사업부",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_e310d326cafd0fb3.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
+      "title": "AMP, VESS 등",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.3%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
       "title": "자동화사업부",
-      "caption": "자동차 차체 자동화설비 및 조립용 지그 제작",
-      "kind": "auto",
-      "visual": "자동화사업부",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     }
   ],

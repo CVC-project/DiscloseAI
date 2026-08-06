@@ -153,7 +153,29 @@
   "snippets": {
     "overview": "현대ADM의 주요 제품·서비스는 의약품, 건강기능식품, 매출처, 기납품액, 계약금액, 계약품목입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 원재료 당사는 인적자원을 활용한 임상시험 대행 용역을 제공하는 사업으로 생산설비를 통한 생산이 아닌 인적자원을 활용한 사업이 주가 되기 때문에 생산활동과 관련한 원재료의 현황이나 원재료의 제품별 비중을 산정하기는 어렵습니다. 당사는 인적자원을 활용한 임상시험대행 용역을 제공하고 있으므로, 생산설비에는 해당사항이 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "현대ADM의 주요 제품·서비스는 의약품, 건강기능식품, 매출처, 기납품액, 계약금액, 계약품목입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 원재료 당사는 인적자원을 활용한 임상시험 대행 용역을 제공하는 사업으로 생산설비를 통한 생산이 아닌 인적자원을 활용한 사업이 주가 되기 때문에 생산활동과 관련한 원재료의 현황이나 원재료의 제품별 비중을 산정하기는 어렵습니다. 당사는 인적자원을 활용한 임상시험대행 용역을 제공하고 있으므로, 생산설비에는 해당사항이 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 41.9%",
+        "revenue_share": 0.419,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "LPS",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.5%",
+        "revenue_share": 0.535,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임대매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.6%",
+        "revenue_share": 0.046,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "의약품",
       "건강기능식품",
@@ -162,32 +184,47 @@
       "계약금액",
       "계약품목"
     ],
-    "investor_note": "현대ADM의 주요 제품·서비스는 의약품, 건강기능식품, 매출처, 기납품액, 계약금액, 계약품목입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 원재료 당사는 인적자원을 활용한 임상시험 대행 용역을 제공하는 사업으로 생산설비를 통한 생산이 아닌 인적자원을 활용한 사업이 주가 되기 때문에 생산활동과 관련한 원재료의 현황이나 원재료의 제품별 비중을 산정하기는 어렵습니다. 당사는 인적자원을 활용한 임상시험대행 용역을 제공하고 있으므로, 생산설비에는 해당사항이 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "현대ADM의 주요 제품·서비스는 의약품, 건강기능식품, 매출처, 기납품액, 계약금액, 계약품목입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 원재료 당사는 인적자원을 활용한 임상시험 대행 용역을 제공하는 사업으로 생산설비를 통한 생산이 아닌 인적자원을 활용한 사업이 주가 되기 때문에 생산활동과 관련한 원재료의 현황이나 원재료의 제품별 비중을 산정하기는 어렵습니다. 당사는 인적자원을 활용한 임상시험대행 용역을 제공하고 있으므로, 생산설비에는 해당사항이 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 41.9%",
+        "revenue_share": 0.419,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "LPS",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.5%",
+        "revenue_share": 0.535,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임대매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.6%",
+        "revenue_share": 0.046,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "의약품",
-      "caption": "의약품 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "건강기능식품",
-      "caption": "건강기능식품 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_local_default_b.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "매출처",
-      "caption": "매출처 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "용역",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 41.9%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "LPS",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

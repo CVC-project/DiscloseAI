@@ -155,24 +155,32 @@
     "segment_finance": "현대에이치티는 1988년 현대전자 시절부터 이어온 홈오토메이션 기술을 바탕으로 아파트·주택용 스마트홈 월패드, 디지털도어락, 무인경비시스템(자동문), 주방TV 등을 만드는 AI 스마트홈 전문기업입니다. 매출의 약 64%가 월패드 등 스마트홈 제품에서 나오고, 도어락(8%)과 무인경비시스템(7%)이 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,533억 원으로 전년 대비 9.2% 줄었고, 영업이익도 70억 원으로 36.6% 감소했습니다. 당기순이익 역시 106억 원으로 23.8% 줄어 전반적으로 수익성이 둔화된 모습입니다. 부채비율은 32.9%로 재무구조는 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "스마트홈(월패드 등)",
-        "desc": "아파트·단독주택용 홈네트워크 월패드가 주력",
-        "revenue_share": 0.6411
+        "name": "스마트홈",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 64.1%",
+        "revenue_share": 0.6411,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "디지털도어락",
-        "desc": "공동주택용 디지털 도어락",
-        "revenue_share": 0.0801
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+        "revenue_share": 0.0801,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "무인경비시스템",
-        "desc": "아파트 자동문 등 무인경비 설비",
-        "revenue_share": 0.0679
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.8%",
+        "revenue_share": 0.0679,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "주방TV",
-        "desc": "주방용 스마트 TV 기기",
-        "revenue_share": 0.0257
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+        "revenue_share": 0.0257,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -184,38 +192,68 @@
       "지능형 홈네트워크 리노베이션",
       "AI 스피커·음성인식 솔루션"
     ],
-    "investor_note": "현대에이치티는 1988년 현대전자 시절부터 이어온 홈오토메이션 기술을 바탕으로 아파트·주택용 스마트홈 월패드, 디지털도어락, 무인경비시스템(자동문), 주방TV 등을 만드는 AI 스마트홈 전문기업입니다. 매출의 약 64%가 월패드 등 스마트홈 제품에서 나오고, 도어락(8%)과 무인경비시스템(7%)이 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,533억 원으로 전년 대비 9.2% 줄었고, 영업이익도 70억 원으로 36.6% 감소했습니다. 당기순이익 역시 106억 원으로 23.8% 줄어 전반적으로 수익성이 둔화된 모습입니다. 부채비율은 32.9%로 재무구조는 안정적인 편입니다."
+    "investor_note": "현대에이치티는 1988년 현대전자 시절부터 이어온 홈오토메이션 기술을 바탕으로 아파트·주택용 스마트홈 월패드, 디지털도어락, 무인경비시스템(자동문), 주방TV 등을 만드는 AI 스마트홈 전문기업입니다. 매출의 약 64%가 월패드 등 스마트홈 제품에서 나오고, 도어락(8%)과 무인경비시스템(7%)이 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,533억 원으로 전년 대비 9.2% 줄었고, 영업이익도 70억 원으로 36.6% 감소했습니다. 당기순이익 역시 106억 원으로 23.8% 줄어 전반적으로 수익성이 둔화된 모습입니다. 부채비율은 32.9%로 재무구조는 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "스마트홈",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 64.1%",
+        "revenue_share": 0.6411,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "디지털도어락",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+        "revenue_share": 0.0801,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "무인경비시스템",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.8%",
+        "revenue_share": 0.0679,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "주방TV",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+        "revenue_share": 0.0257,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "스마트홈(월패드 등)",
-      "caption": "아파트·단독주택용 홈네트워크 월패드가 주력",
-      "kind": "telecom",
-      "visual": "스마트홈",
-      "image": "../data/business_images/business_image_local_housing.svg",
-      "image_source": "Local curated visual"
+      "title": "대형마트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 64.1%",
+      "kind": "consumer",
+      "visual": "MART",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "디지털도어락",
-      "caption": "공동주택용 디지털 도어락",
-      "kind": "service",
-      "visual": "디지털도어락",
-      "image": "../data/business_images/business_image_local_housing.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "무인경비시스템",
-      "caption": "아파트 자동문 등 무인경비 설비",
-      "kind": "service",
-      "visual": "무인경비시스템",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.8%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_281a9ea62f3d74e6.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "주방TV",
-      "caption": "주방용 스마트 TV 기기",
-      "kind": "service",
-      "visual": "주방TV",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+      "kind": "telecom",
+      "visual": "NET",
       "image": "../data/business_images/business_image_141eab6519656e30.jpg",
       "image_source": "Wikimedia Commons"
     }

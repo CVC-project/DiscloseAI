@@ -155,14 +155,32 @@
     "segment_finance": "세종텔레콤은 통신망·IDC·전화 부가서비스를 운영하면서 전기·통신·소방 공사도 수행하는 인프라 기업입니다. 2024년 유선통신사업을 세종네트웍스로 물적분할했고, 2025년에는 AI·DX와 토큰증권 사업을 세종디엑스로 분리해 통신 인프라와 디지털 신사업을 나눠 키우는 구조가 됐습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,841억 원으로 전년보다 23.5% 줄었고 영업손실은 107억 원이었지만 당기순이익은 80억 원으로 흑자 전환했습니다. 부채비율은 105.8%로 자본과 비슷한 수준의 빚을 지고 있습니다.",
     "segment_breakdown": [
       {
-        "name": "통신부문",
-        "desc": "회선임대, IDC, 전화·인터넷 부가서비스와 디지털 방송 솔루션",
-        "revenue_share": 0.701
+        "name": "전기공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.9%",
+        "revenue_share": 0.299,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "전기공사부문",
-        "desc": "철도·공항·아파트 등 전기·통신·소방 공사 수주 사업",
-        "revenue_share": 0.299
+        "name": "통신",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.7%",
+        "revenue_share": 0.1272,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "인터넷",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.6%",
+        "revenue_share": 0.1062,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "시내부가통신",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.1%",
+        "revenue_share": 0.1914,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -177,24 +195,70 @@
       "기업용 AI·DX 솔루션",
       "디지털 방송 솔루션"
     ],
-    "investor_note": "세종텔레콤은 통신망·IDC·전화 부가서비스를 운영하면서 전기·통신·소방 공사도 수행하는 인프라 기업입니다. 2024년 유선통신사업을 세종네트웍스로 물적분할했고, 2025년에는 AI·DX와 토큰증권 사업을 세종디엑스로 분리해 통신 인프라와 디지털 신사업을 나눠 키우는 구조가 됐습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,841억 원으로 전년보다 23.5% 줄었고 영업손실은 107억 원이었지만 당기순이익은 80억 원으로 흑자 전환했습니다. 부채비율은 105.8%로 자본과 비슷한 수준의 빚을 지고 있습니다."
+    "investor_note": "세종텔레콤은 통신망·IDC·전화 부가서비스를 운영하면서 전기·통신·소방 공사도 수행하는 인프라 기업입니다. 2024년 유선통신사업을 세종네트웍스로 물적분할했고, 2025년에는 AI·DX와 토큰증권 사업을 세종디엑스로 분리해 통신 인프라와 디지털 신사업을 나눠 키우는 구조가 됐습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,841억 원으로 전년보다 23.5% 줄었고 영업손실은 107억 원이었지만 당기순이익은 80억 원으로 흑자 전환했습니다. 부채비율은 105.8%로 자본과 비슷한 수준의 빚을 지고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "전기공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.9%",
+        "revenue_share": 0.299,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "통신",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.7%",
+        "revenue_share": 0.1272,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "인터넷",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.6%",
+        "revenue_share": 0.1062,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "시내부가통신",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.1%",
+        "revenue_share": 0.1914,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "통신부문",
-      "caption": "회선임대, IDC, 전화·인터넷 부가서비스와 디지털 방송 솔루션",
+      "title": "전기공사",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.9%",
       "kind": "telecom",
-      "visual": "통신부문",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "전기공사부문",
-      "caption": "철도·공항·아파트 등 전기·통신·소방 공사 수주 사업",
+      "title": "통신",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.7%",
       "kind": "telecom",
-      "visual": "전기공사부문",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "인터넷",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.6%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "시내부가통신",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.1%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

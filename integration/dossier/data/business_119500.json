@@ -155,29 +155,18 @@
     "segment_finance": "포메탈은 1969년 설립된 단조정밀기계부품 전문기업으로, 자유단조품·형단조품·복합단조품 등 다양한 단조 기술로 산업기계·자동차·로봇/풍력·방위산업·농기계용 부품 800여 종을 150여 매출처에 공급하고 있습니다. 매출은 자동차부문이 30.1%, 산업기계부문이 29.4%로 큰 비중을 차지하고, 최근에는 방위산업 부문 매출 비중이 23.4%까지 늘었습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 511억 원으로 전년보다 21.5% 줄었지만 영업이익은 19억 원으로 29.8% 늘고 당기순이익도 21억 원으로 37.7% 증가해 수익성은 오히려 개선됐습니다. 부채비율은 21.0%로 낮아 재무구조도 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "자동차부문",
-        "desc": "스핀들·너클·캠샤프트 등 자동차용 단조부품",
-        "revenue_share": 0.301
+        "name": "산업기계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.4%",
+        "revenue_share": 0.294,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "산업기계부문",
-        "desc": "베어링·밸브류·철도부품 등 단조부품",
-        "revenue_share": 0.294
-      },
-      {
-        "name": "방위산업부문",
-        "desc": "각종 ARM류·휠 등 방위산업용 단조부품",
-        "revenue_share": 0.234
-      },
-      {
-        "name": "로봇/풍력부문",
-        "desc": "샤프트·감속기어 등 로봇·풍력용 단조부품(수출 중심)",
-        "revenue_share": 0.144
-      },
-      {
-        "name": "농기계부문",
-        "desc": "크랑크샤프트·캠샤프트 등 농기계용 단조부품",
-        "revenue_share": 0.027
+        "name": "자동차",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.1%",
+        "revenue_share": 0.301,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -191,40 +180,54 @@
       "감속기어·로봇부품(로봇/풍력용)",
       "각종 ARM류(방위산업용)"
     ],
-    "investor_note": "포메탈은 1969년 설립된 단조정밀기계부품 전문기업으로, 자유단조품·형단조품·복합단조품 등 다양한 단조 기술로 산업기계·자동차·로봇/풍력·방위산업·농기계용 부품 800여 종을 150여 매출처에 공급하고 있습니다. 매출은 자동차부문이 30.1%, 산업기계부문이 29.4%로 큰 비중을 차지하고, 최근에는 방위산업 부문 매출 비중이 23.4%까지 늘었습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 511억 원으로 전년보다 21.5% 줄었지만 영업이익은 19억 원으로 29.8% 늘고 당기순이익도 21억 원으로 37.7% 증가해 수익성은 오히려 개선됐습니다. 부채비율은 21.0%로 낮아 재무구조도 안정적인 편입니다."
+    "investor_note": "포메탈은 1969년 설립된 단조정밀기계부품 전문기업으로, 자유단조품·형단조품·복합단조품 등 다양한 단조 기술로 산업기계·자동차·로봇/풍력·방위산업·농기계용 부품 800여 종을 150여 매출처에 공급하고 있습니다. 매출은 자동차부문이 30.1%, 산업기계부문이 29.4%로 큰 비중을 차지하고, 최근에는 방위산업 부문 매출 비중이 23.4%까지 늘었습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 511억 원으로 전년보다 21.5% 줄었지만 영업이익은 19억 원으로 29.8% 늘고 당기순이익도 21억 원으로 37.7% 증가해 수익성은 오히려 개선됐습니다. 부채비율은 21.0%로 낮아 재무구조도 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "제품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 95.6%",
+        "revenue_share": 0.956,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품 및 기타매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.4%",
+        "revenue_share": 0.044,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "산업기계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.4%",
+        "revenue_share": 0.294,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동차",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.1%",
+        "revenue_share": 0.301,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "자동차부문",
-      "caption": "스핀들·너클·캠샤프트 등 자동차용 단조부품",
+      "title": "산업기계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.4%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "자동차",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.1%",
       "kind": "auto",
-      "visual": "자동차부문",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
-    },
-    {
-      "title": "산업기계부문",
-      "caption": "베어링·밸브류·철도부품 등 단조부품",
-      "kind": "auto",
-      "visual": "산업기계부문",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "방위산업부문",
-      "caption": "각종 ARM류·휠 등 방위산업용 단조부품",
-      "kind": "auto",
-      "visual": "방위산업부문",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "로봇/풍력부문",
-      "caption": "샤프트·감속기어 등 로봇·풍력용 단조부품(수출 중심)",
-      "kind": "auto",
-      "visual": "로봇",
-      "image": "../data/business_images/business_image_local_robot.svg",
-      "image_source": "Local curated visual"
     }
   ],
   "custom_report_ideas": [

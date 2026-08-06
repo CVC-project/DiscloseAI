@@ -155,19 +155,32 @@
     "segment_finance": "한국 본사 외에 중국·인도·체코·슬로바키아·미국·베트남 등에 생산법인을 두고 GM·포드·BMW 등으로도 판매처를 넓히고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 2,006억 원으로 전년 대비 4.1% 늘었지만 영업이익은 484억 원으로 5.9%, 당기순이익은 462억 원으로 25.3% 줄어 매출 증가에도 수익성은 다소 둔화됐습니다. 부채비율은 34.7%로 재무구조는 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "LATCH(도어래치)",
-        "desc": "자동차 도어 개폐장치용 잠금장치",
-        "revenue_share": 0.267
+        "name": "자동차부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 63.4%",
+        "revenue_share": 0.634,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "HINGE(도어힌지)",
-        "desc": "자동차 도어 개폐장치용 경첩",
-        "revenue_share": 0.162
+        "name": "중국",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.1%",
+        "revenue_share": 0.081,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "DOOR MODULE",
-        "desc": "도어 관련 부품을 통합한 모듈 제품",
-        "revenue_share": 0.238
+        "name": "LATCH ASS'Y류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.7%",
+        "revenue_share": 0.267,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "HINGE ASS'Y류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.2%",
+        "revenue_share": 0.162,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -177,30 +190,68 @@
       "STRIKER(도어스트라이커)",
       "Active Hood Lift System"
     ],
-    "investor_note": "한국 본사 외에 중국·인도·체코·슬로바키아·미국·베트남 등에 생산법인을 두고 GM·포드·BMW 등으로도 판매처를 넓히고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 2,006억 원으로 전년 대비 4.1% 늘었지만 영업이익은 484억 원으로 5.9%, 당기순이익은 462억 원으로 25.3% 줄어 매출 증가에도 수익성은 다소 둔화됐습니다. 부채비율은 34.7%로 재무구조는 안정적인 편입니다."
+    "investor_note": "한국 본사 외에 중국·인도·체코·슬로바키아·미국·베트남 등에 생산법인을 두고 GM·포드·BMW 등으로도 판매처를 넓히고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 2,006억 원으로 전년 대비 4.1% 늘었지만 영업이익은 484억 원으로 5.9%, 당기순이익은 462억 원으로 25.3% 줄어 매출 증가에도 수익성은 다소 둔화됐습니다. 부채비율은 34.7%로 재무구조는 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "자동차부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 63.4%",
+        "revenue_share": 0.634,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "중국",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.1%",
+        "revenue_share": 0.081,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "LATCH ASS'Y류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.7%",
+        "revenue_share": 0.267,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "HINGE ASS'Y류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.2%",
+        "revenue_share": 0.162,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "LATCH(도어래치)",
-      "caption": "자동차 도어 개폐장치용 잠금장치",
+      "title": "자동차부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 63.4%",
       "kind": "auto",
-      "visual": "LATCH",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "HINGE(도어힌지)",
-      "caption": "자동차 도어 개폐장치용 경첩",
+      "title": "중국",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.1%",
       "kind": "auto",
-      "visual": "HINGE",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "DOOR MODULE",
-      "caption": "도어 관련 부품을 통합한 모듈 제품",
+      "title": "LATCH ASS'Y류",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.7%",
       "kind": "auto",
-      "visual": "DOOR",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "HINGE ASS'Y류",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.2%",
+      "kind": "auto",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     }

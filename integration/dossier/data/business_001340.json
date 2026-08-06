@@ -155,19 +155,18 @@
     "segment_finance": "피케이씨(옛 백광산업)는 염화나트륨을 전기분해해 가성소다·염산 등을 만드는 무기화학 기업으로, 화공사업이 매출의 97%를 차지합니다. 반도체·디스플레이용 고순도 특수가스, 식품첨가제(솔비톨·말티톨)도 함께 생산하며 스포츠사업(골프연습장 등)도 겸업하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,721억 원으로 전년 대비 11.0% 늘었고 영업이익도 24.6%, 당기순이익도 180.5% 증가했습니다. 다만 부채비율은 171.6%로 자본보다 빚이 많은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "CA(Chlor-Alkali)",
-        "desc": "가성소다·염산 등 산업 기초 무기화학제품",
-        "revenue_share": 0.7
-      },
-      {
         "name": "소재(특수가스)",
-        "desc": "반도체·디스플레이용 고순도 특수가스",
-        "revenue_share": 0.138
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.8%",
+        "revenue_share": 0.138,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "식품첨가제",
-        "desc": "솔비톨·말티톨 등 식품첨가물",
-        "revenue_share": 0.128
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.8%",
+        "revenue_share": 0.128,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -180,32 +179,55 @@
       "솔비톨",
       "말티톨"
     ],
-    "investor_note": "피케이씨(옛 백광산업)는 염화나트륨을 전기분해해 가성소다·염산 등을 만드는 무기화학 기업으로, 화공사업이 매출의 97%를 차지합니다. 반도체·디스플레이용 고순도 특수가스, 식품첨가제(솔비톨·말티톨)도 함께 생산하며 스포츠사업(골프연습장 등)도 겸업하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,721억 원으로 전년 대비 11.0% 늘었고 영업이익도 24.6%, 당기순이익도 180.5% 증가했습니다. 다만 부채비율은 171.6%로 자본보다 빚이 많은 편이라 재무 부담을 살펴볼 필요가 있습니다."
+    "investor_note": "피케이씨(옛 백광산업)는 염화나트륨을 전기분해해 가성소다·염산 등을 만드는 무기화학 기업으로, 화공사업이 매출의 97%를 차지합니다. 반도체·디스플레이용 고순도 특수가스, 식품첨가제(솔비톨·말티톨)도 함께 생산하며 스포츠사업(골프연습장 등)도 겸업하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,721억 원으로 전년 대비 11.0% 늘었고 영업이익도 24.6%, 당기순이익도 180.5% 증가했습니다. 다만 부채비율은 171.6%로 자본보다 빚이 많은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "화공사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 70.0%",
+        "revenue_share": 0.7,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "소재(특수가스)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.8%",
+        "revenue_share": 0.138,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "식품첨가제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.8%",
+        "revenue_share": 0.128,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "CA(Chlor-Alkali)",
-      "caption": "가성소다·염산 등 산업 기초 무기화학제품",
+      "title": "화공사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 70.0%",
       "kind": "material",
-      "visual": "CA",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "소재(특수가스)",
-      "caption": "반도체·디스플레이용 고순도 특수가스",
-      "kind": "chip",
-      "visual": "소재",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.8%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
       "title": "식품첨가제",
-      "caption": "솔비톨·말티톨 등 식품첨가물",
-      "kind": "consumer",
-      "visual": "식품첨가제",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.8%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

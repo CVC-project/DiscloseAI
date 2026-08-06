@@ -91,24 +91,25 @@
     "segment_finance": "주식회사 에스팀의 주요 제품·서비스는 콘텐츠 마케팅, 이미지, 인플루언서, SNS(소셜미디어), 유튜브, 뷰티입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 전속 아티스트들은 당사의 육성 시스템을 통해 성장한 사례로, 이들은 당사의 아티스트 육성 능력과 콘텐츠 제작 경쟁력을 상징하는 성과인 동시에, 시장에서 독립적인 수요를 형성하는 아티스트로 자리매김하였습니다. 당사는 시장 내 지배적인 위치와 차별화된 경쟁력을 기반으로, 안정적인 매출 창출이 가능한 사업 파이프라인을 구축해 왔으며, 향후에는 패션, 뷰티 산업을 넘어 다양한 분야로의 매출 다변화를 적극 추진할 예정입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "콘텐츠 마케팅",
-        "desc": "콘텐츠 마케팅 관련 제품·서비스",
-        "revenue_share": null
+        "name": "콘텐츠",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 73.0%",
+        "revenue_share": 0.7295,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "이미지",
-        "desc": "이미지 관련 제품·서비스",
-        "revenue_share": null
+        "name": "일반",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.8%",
+        "revenue_share": 0.1282,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "인플루언서",
-        "desc": "인플루언서 관련 제품·서비스",
-        "revenue_share": null
-      },
-      {
-        "name": "SNS(소셜미디어)",
-        "desc": "SNS(소셜미디어) 관련 제품·서비스",
-        "revenue_share": null
+        "name": "매니지먼트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.0%",
+        "revenue_share": 0.1396,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -125,40 +126,55 @@
       "패션위크",
       "뉴욕"
     ],
-    "investor_note": "주식회사 에스팀의 주요 제품·서비스는 콘텐츠 마케팅, 이미지, 인플루언서, SNS(소셜미디어), 유튜브, 뷰티입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 전속 아티스트들은 당사의 육성 시스템을 통해 성장한 사례로, 이들은 당사의 아티스트 육성 능력과 콘텐츠 제작 경쟁력을 상징하는 성과인 동시에, 시장에서 독립적인 수요를 형성하는 아티스트로 자리매김하였습니다. 당사는 시장 내 지배적인 위치와 차별화된 경쟁력을 기반으로, 안정적인 매출 창출이 가능한 사업 파이프라인을 구축해 왔으며, 향후에는 패션, 뷰티 산업을 넘어 다양한 분야로의 매출 다변화를 적극 추진할 예정입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사 에스팀의 주요 제품·서비스는 콘텐츠 마케팅, 이미지, 인플루언서, SNS(소셜미디어), 유튜브, 뷰티입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 전속 아티스트들은 당사의 육성 시스템을 통해 성장한 사례로, 이들은 당사의 아티스트 육성 능력과 콘텐츠 제작 경쟁력을 상징하는 성과인 동시에, 시장에서 독립적인 수요를 형성하는 아티스트로 자리매김하였습니다. 당사는 시장 내 지배적인 위치와 차별화된 경쟁력을 기반으로, 안정적인 매출 창출이 가능한 사업 파이프라인을 구축해 왔으며, 향후에는 패션, 뷰티 산업을 넘어 다양한 분야로의 매출 다변화를 적극 추진할 예정입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "콘텐츠",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 73.0%",
+        "revenue_share": 0.7295,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "일반",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.8%",
+        "revenue_share": 0.1282,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매니지먼트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.0%",
+        "revenue_share": 0.1396,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "콘텐츠 마케팅",
-      "caption": "콘텐츠 마케팅 관련 제품·서비스",
+      "title": "콘텐츠",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 73.0%",
       "kind": "platform",
-      "visual": "콘텐츠",
-      "image": "../data/business_images/business_image_local_content.svg",
-      "image_source": "Local curated visual"
+      "visual": "APP",
+      "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "이미지",
-      "caption": "이미지 관련 제품·서비스",
+      "title": "일반",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.8%",
       "kind": "service",
-      "visual": "이미지",
-      "image": "../data/business_images/business_image_local_default_b.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "인플루언서",
-      "caption": "인플루언서 관련 제품·서비스",
+      "title": "매니지먼트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.0%",
       "kind": "service",
-      "visual": "인플루언서",
-      "image": "../data/business_images/business_image_local_default_c.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "SNS(소셜미디어)",
-      "caption": "SNS(소셜미디어) 관련 제품·서비스",
-      "kind": "service",
-      "visual": "SNS",
-      "image": "../data/business_images/business_image_local_content.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

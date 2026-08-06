@@ -156,33 +156,31 @@
     "segment_breakdown": [
       {
         "name": "도시가스",
-        "desc": "경기·인천 지역 도시가스 소매공급",
-        "revenue_share": 0.6863
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.6%",
+        "revenue_share": 0.6863,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "발전",
-        "desc": "시화 MTV 834MW급 LNG복합화력발전",
-        "revenue_share": 0.1253
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.5%",
+        "revenue_share": 0.1253,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "자동차판매",
-        "desc": "BMW·BYD 신차·중고차 판매 및 A/S(삼천리모터스·이브이)",
-        "revenue_share": 0.0941
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.4%",
+        "revenue_share": 0.0941,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "플랜트",
-        "desc": "가스·열배관 공사 및 에너지 엔지니어링",
-        "revenue_share": 0.0782
-      },
-      {
-        "name": "집단에너지",
-        "desc": "열·전기 생산공급(휴세스)",
-        "revenue_share": 0.0122
-      },
-      {
-        "name": "해외호텔",
-        "desc": "미국 비즈니스호텔 운영",
-        "revenue_share": 0.0078
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.8%",
+        "revenue_share": 0.0782,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -193,40 +191,70 @@
       "가스·열배관 공사",
       "미국 비즈니스호텔(Courtyard·Element)"
     ],
-    "investor_note": "삼천리는 경기·인천 지역에 도시가스를 공급하는 사업을 주력(매출의 69%)으로, 시화 MTV의 LNG복합화력발전, BMW·BYD 신차·중고차 판매(삼천리모터스), 가스·열배관 공사(플랜트), 집단에너지, 미국 비즈니스호텔까지 다각화된 사업을 영위합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 5조 2,754억 원으로 전년 대비 3.0% 늘었고 영업이익은 1,596억 원으로 39.7%, 당기순이익은 1,313억 원으로 7.9% 증가했습니다. 부채비율은 136.9%로 에너지·인프라 업종 특성상 다소 높은 편이라 재무 구조를 함께 살펴볼 필요가 있습니다."
+    "investor_note": "삼천리는 경기·인천 지역에 도시가스를 공급하는 사업을 주력(매출의 69%)으로, 시화 MTV의 LNG복합화력발전, BMW·BYD 신차·중고차 판매(삼천리모터스), 가스·열배관 공사(플랜트), 집단에너지, 미국 비즈니스호텔까지 다각화된 사업을 영위합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 5조 2,754억 원으로 전년 대비 3.0% 늘었고 영업이익은 1,596억 원으로 39.7%, 당기순이익은 1,313억 원으로 7.9% 증가했습니다. 부채비율은 136.9%로 에너지·인프라 업종 특성상 다소 높은 편이라 재무 구조를 함께 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "도시가스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.6%",
+        "revenue_share": 0.6863,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "발전",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.5%",
+        "revenue_share": 0.1253,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동차판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.4%",
+        "revenue_share": 0.0941,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "플랜트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.8%",
+        "revenue_share": 0.0782,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "도시가스",
-      "caption": "경기·인천 지역 도시가스 소매공급",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.6%",
       "kind": "service",
-      "visual": "도시가스",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "발전",
-      "caption": "시화 MTV 834MW급 LNG복합화력발전",
-      "kind": "ship",
-      "visual": "LNG",
-      "image": "../data/business_images/business_image_141eab6519656e30.jpg",
+      "title": "전력기기·발전",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.5%",
+      "kind": "power",
+      "visual": "POWER",
+      "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
       "title": "자동차판매",
-      "caption": "BMW·BYD 신차·중고차 판매 및 A/S(삼천리모터스·이브이)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.4%",
       "kind": "auto",
-      "visual": "자동차판매",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "플랜트",
-      "caption": "가스·열배관 공사 및 에너지 엔지니어링",
-      "kind": "ship",
-      "visual": "플랜트",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "title": "토목·플랜트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.8%",
+      "kind": "service",
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_5184e050831a4460.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

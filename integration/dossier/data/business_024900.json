@@ -155,19 +155,32 @@
     "segment_finance": "2025년 매출액은 1조 7,380억 원으로 7.7% 줄었고, 영업이익 32억 원(-61.1%), 당기순이익 12억 원(-92.6%)으로 이익이 크게 감소했습니다. 총자산은 5,908억 원(+5.8%)이지만 부채비율은 414.4%로 자본보다 빚이 훨씬 많고 ROE는 1.1%입니다. 감사인은 수출 매출의 실재성을 핵심 점검사항으로 짚었습니다. 과거 공시 기반 참고 정보입니다.",
     "segment_breakdown": [
       {
-        "name": "Cockpit Module 외",
-        "desc": "운전석 모듈·크래시패드 등 자동차 내장재",
-        "revenue_share": 0.8114
+        "name": "제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 81.1%",
+        "revenue_share": 0.8114,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "Door Trim",
-        "desc": "자동차 도어 내장재",
-        "revenue_share": 0.1335
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.4%",
+        "revenue_share": 0.1335,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "MEB 외",
-        "desc": "배터리모듈용 부품(BMA) 등",
-        "revenue_share": 0.0177
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
+        "revenue_share": 0.0177,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동차부 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 71.2%",
+        "revenue_share": 0.7115,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -177,22 +190,60 @@
       "Anti-Vibration Pad",
       "BMA 배터리모듈용 부품"
     ],
-    "investor_note": "2025년 매출액은 1조 7,380억 원으로 7.7% 줄었고, 영업이익 32억 원(-61.1%), 당기순이익 12억 원(-92.6%)으로 이익이 크게 감소했습니다. 총자산은 5,908억 원(+5.8%)이지만 부채비율은 414.4%로 자본보다 빚이 훨씬 많고 ROE는 1.1%입니다. 감사인은 수출 매출의 실재성을 핵심 점검사항으로 짚었습니다. 과거 공시 기반 참고 정보입니다."
+    "investor_note": "2025년 매출액은 1조 7,380억 원으로 7.7% 줄었고, 영업이익 32억 원(-61.1%), 당기순이익 12억 원(-92.6%)으로 이익이 크게 감소했습니다. 총자산은 5,908억 원(+5.8%)이지만 부채비율은 414.4%로 자본보다 빚이 훨씬 많고 ROE는 1.1%입니다. 감사인은 수출 매출의 실재성을 핵심 점검사항으로 짚었습니다. 과거 공시 기반 참고 정보입니다.",
+    "product_service_segments": [
+      {
+        "name": "제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 81.1%",
+        "revenue_share": 0.8114,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Door Trim",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.4%",
+        "revenue_share": 0.1335,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "MEB 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
+        "revenue_share": 0.0177,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동차부 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 71.2%",
+        "revenue_share": 0.7115,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "Cockpit Module",
-      "caption": "운전석 모듈·크래시패드 등 자동차 내장재",
+      "title": "Door Trim",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.4%",
       "kind": "auto",
-      "visual": "Cockpit",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "Door Trim",
-      "caption": "자동차 도어 내장재",
+      "title": "MEB 외",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
       "kind": "auto",
-      "visual": "Door",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "자동차부 품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 71.2%",
+      "kind": "auto",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     }

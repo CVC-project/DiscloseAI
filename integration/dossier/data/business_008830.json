@@ -156,18 +156,24 @@
     "segment_breakdown": [
       {
         "name": "농기계용",
-        "desc": "농기계에 쓰이는 동력전달장치 부품",
-        "revenue_share": 0.517
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.7%",
+        "revenue_share": 0.517,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "자동차용",
-        "desc": "자동차용 동력전달장치 부품",
-        "revenue_share": 0.429
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 42.9%",
+        "revenue_share": 0.429,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "산업용",
-        "desc": "산업기계용 동력전달장치 부품",
-        "revenue_share": 0.049
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.9%",
+        "revenue_share": 0.049,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -175,32 +181,55 @@
       "트랜스미션",
       "기어"
     ],
-    "investor_note": "대동기어는 자동차·농기계·산업기계에 쓰이는 동력전달장치 부품과 트랜스미션을 생산하는 기업으로, 농기계용 부품이 매출의 약 52%, 자동차용이 약 43%를 차지합니다. 최대주주 ㈜대동에 대한 매출 의존도가 높아(총매출의 53.3%) 특수관계자 거래 비중이 큰 편입니다. 과거 공시 기반 참고 정보로, 매출액은 2,209억 원(-14.1%), 영업이익은 1억 원(-96.4%)으로 급감했으며, 당기순이익도 -47억 원으로 적자 전환했습니다. 부채비율은 240.6%로 빚이 매우 많아 재무 안정성을 신중히 살펴볼 필요가 있습니다."
+    "investor_note": "대동기어는 자동차·농기계·산업기계에 쓰이는 동력전달장치 부품과 트랜스미션을 생산하는 기업으로, 농기계용 부품이 매출의 약 52%, 자동차용이 약 43%를 차지합니다. 최대주주 ㈜대동에 대한 매출 의존도가 높아(총매출의 53.3%) 특수관계자 거래 비중이 큰 편입니다. 과거 공시 기반 참고 정보로, 매출액은 2,209억 원(-14.1%), 영업이익은 1억 원(-96.4%)으로 급감했으며, 당기순이익도 -47억 원으로 적자 전환했습니다. 부채비율은 240.6%로 빚이 매우 많아 재무 안정성을 신중히 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "농기계용",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.7%",
+        "revenue_share": 0.517,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동차용",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 42.9%",
+        "revenue_share": 0.429,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "산업용",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.9%",
+        "revenue_share": 0.049,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "농기계용",
-      "caption": "농기계에 쓰이는 동력전달장치 부품",
-      "kind": "auto",
-      "visual": "농기계용",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "자동차용",
-      "caption": "자동차용 동력전달장치 부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 42.9%",
       "kind": "auto",
-      "visual": "자동차용",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
       "title": "산업용",
-      "caption": "산업기계용 동력전달장치 부품",
-      "kind": "auto",
-      "visual": "산업용",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -153,7 +153,29 @@
   "snippets": {
     "overview": "케이지에코솔루션 주식회사의 핵심은 바이오에너지 부문, 자동차 제조 부문, 바이오중유, 바이오중유 (평균판매단가) 등입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 연결회사는 냉연강판을 비롯하여 각종 표면처리강판을 주요제품으로 생산/판매하고있으며, 각 제품별 특성, 종류, 용도는 아래와 같습니다. 또한 고객에게 KGM 모델에 대한 시승 기회를 제공하고 브랜드 헤리티지를 직접 체험할 수 있는 KGM 익스피리언스 센터(Experience Center)를 일산, 강남에 이어 부산에 추가로 오픈하여, 지역 거점 중심의 고객 접점을 확대하고 브랜드 경험 강화를 지속하고 있습니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다.",
     "segment_finance": "케이지에코솔루션 주식회사의 핵심은 바이오에너지 부문, 자동차 제조 부문, 바이오중유, 바이오중유 (평균판매단가) 등입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 연결회사는 냉연강판을 비롯하여 각종 표면처리강판을 주요제품으로 생산/판매하고있으며, 각 제품별 특성, 종류, 용도는 아래와 같습니다. 또한 고객에게 KGM 모델에 대한 시승 기회를 제공하고 브랜드 헤리티지를 직접 체험할 수 있는 KGM 익스피리언스 센터(Experience Center)를 일산, 강남에 이어 부산에 추가로 오픈하여, 지역 거점 중심의 고객 접점을 확대하고 브랜드 경험 강화를 지속하고 있습니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "철강부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 73.8%",
+        "revenue_share": 0.738,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "PEB",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.6%",
+        "revenue_share": 0.006,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "해외법인판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.0%",
+        "revenue_share": 0.16,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "배터리",
       "항공기",
@@ -168,36 +190,50 @@
       "TV브라운관 밴드",
       "일반건축재(지붕"
     ],
-    "investor_note": "케이지에코솔루션 주식회사의 핵심은 바이오에너지 부문, 자동차 제조 부문, 바이오중유, 바이오중유 (평균판매단가) 등입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 연결회사는 냉연강판을 비롯하여 각종 표면처리강판을 주요제품으로 생산/판매하고있으며, 각 제품별 특성, 종류, 용도는 아래와 같습니다. 또한 고객에게 KGM 모델에 대한 시승 기회를 제공하고 브랜드 헤리티지를 직접 체험할 수 있는 KGM 익스피리언스 센터(Experience Center)를 일산, 강남에 이어 부산에 추가로 오픈하여, 지역 거점 중심의 고객 접점을 확대하고 브랜드 경험 강화를 지속하고 있습니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다."
+    "investor_note": "케이지에코솔루션 주식회사의 핵심은 바이오에너지 부문, 자동차 제조 부문, 바이오중유, 바이오중유 (평균판매단가) 등입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 연결회사는 냉연강판을 비롯하여 각종 표면처리강판을 주요제품으로 생산/판매하고있으며, 각 제품별 특성, 종류, 용도는 아래와 같습니다. 또한 고객에게 KGM 모델에 대한 시승 기회를 제공하고 브랜드 헤리티지를 직접 체험할 수 있는 KGM 익스피리언스 센터(Experience Center)를 일산, 강남에 이어 부산에 추가로 오픈하여, 지역 거점 중심의 고객 접점을 확대하고 브랜드 경험 강화를 지속하고 있습니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다.",
+    "product_service_segments": [
+      {
+        "name": "철강부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 73.8%",
+        "revenue_share": 0.738,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "PEB",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.6%",
+        "revenue_share": 0.006,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "해외법인판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.0%",
+        "revenue_share": 0.16,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
+        "revenue_share": 0.063,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "배터리",
-      "caption": "배터리 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "항공기",
-      "caption": "항공기 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "auto",
-      "visual": "AUTO",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "방산",
-      "caption": "방산 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "auto",
-      "visual": "AUTO",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
-    },
-    {
       "title": "철강",
-      "caption": "철강 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 73.8%",
+      "kind": "material",
+      "visual": "STEEL",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "해외법인판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.0%",
       "kind": "auto",
       "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",

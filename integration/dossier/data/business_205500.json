@@ -156,23 +156,17 @@
     "segment_breakdown": [
       {
         "name": "게임 매출",
-        "desc": "게임 매출 관련 제품·서비스",
-        "revenue_share": null
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.4%",
+        "revenue_share": 0.174,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "로한2",
-        "desc": "로한2 관련 제품·서비스",
-        "revenue_share": null
-      },
-      {
-        "name": "앤빌 Steam",
-        "desc": "앤빌 Steam 관련 제품·서비스",
-        "revenue_share": null
-      },
-      {
-        "name": "SHOUT!",
-        "desc": "SHOUT! 관련 제품·서비스",
-        "revenue_share": null
+        "name": "용역 매출 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 82.6%",
+        "revenue_share": 0.826,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -189,40 +183,56 @@
       "유럽",
       "중동 북아프리카"
     ],
-    "investor_note": "주식회사 넥써쓰의 주요 제품·서비스는 게임 매출, 로한2, 앤빌 Steam, SHOUT!, 용역 매출 등, 배포입니다. 서비스를 제공하는 기업으로, 생산설비를 통한 제조 활동이 아닌 인적자원을 기반으로 사업을 영위하고 있습니다. 이에 따라 일반적인 제조업과 같이 생산활동과 관련된 원재료 현황이나 제품별 원재료 비중을 산정하기는 어렵습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사 넥써쓰의 주요 제품·서비스는 게임 매출, 로한2, 앤빌 Steam, SHOUT!, 용역 매출 등, 배포입니다. 서비스를 제공하는 기업으로, 생산설비를 통한 제조 활동이 아닌 인적자원을 기반으로 사업을 영위하고 있습니다. 이에 따라 일반적인 제조업과 같이 생산활동과 관련된 원재료 현황이나 제품별 원재료 비중을 산정하기는 어렵습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "게임 매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.4%",
+        "revenue_share": 0.174,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역 매출 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 82.6%",
+        "revenue_share": 0.826,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "게임",
-      "caption": "게임 매출 관련 제품·서비스",
-      "kind": "platform",
-      "visual": "게임",
-      "image": "../data/business_images/business_image_local_content.svg",
-      "image_source": "Local curated visual"
-    },
-    {
       "title": "로한2",
-      "caption": "로한2 관련 제품·서비스",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
       "kind": "service",
-      "visual": "로한2",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "앤빌 Steam",
-      "caption": "앤빌 Steam 관련 제품·서비스",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
       "kind": "service",
-      "visual": "앤빌",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "SHOUT!",
-      "caption": "SHOUT! 관련 제품·서비스",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
       "kind": "service",
-      "visual": "SHOUT!",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "배포",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -156,23 +156,17 @@
     "segment_breakdown": [
       {
         "name": "ODM부문",
-        "desc": "ODM부문, ODM 관련 제품·서비스",
-        "revenue_share": null
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 98.4%",
+        "revenue_share": 0.984,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "화학용품/산업용품 등",
-        "desc": "화학용품, 산업용품 등 관련 제품·서비스",
-        "revenue_share": null
-      },
-      {
-        "name": "ODM부문(천족)(*)",
-        "desc": "ODM부문, ODM 관련 제품·서비스",
-        "revenue_share": null
-      },
-      {
-        "name": "화학용품/산업용품 外",
-        "desc": "화학용품 관련 제품·서비스",
-        "revenue_share": null
+        "name": "단순 매출 합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -188,32 +182,47 @@
       "Ltd.",
       "ADIDAS ODM 신발제품"
     ],
-    "investor_note": "화승엔터프라이즈의 주요 제품·서비스는 원유, ODM부문, ADIDASNIKE, 언더아머, 유통, 기타부문입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 높은 수익의 창출을 위해 혁신을 통한 생산효율성 증가, 자동화설비 도입 등 을 통한 인당생산성 및 로스율 감소를 통해 아디다스와 협의된 Profit 이상의 이익을 창출하고 있습니다.ODM부문의 ODM신발 가격은 아디다스와의 ODM 계약에 따라 상호간 협의된 가격으로 판매하고 있습니다.다. 원재료 등의 가격변동추이 *주요원재료에 대한 가격변동추이이며, 단순평균가격입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "화승엔터프라이즈의 주요 제품·서비스는 원유, ODM부문, ADIDASNIKE, 언더아머, 유통, 기타부문입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 높은 수익의 창출을 위해 혁신을 통한 생산효율성 증가, 자동화설비 도입 등 을 통한 인당생산성 및 로스율 감소를 통해 아디다스와 협의된 Profit 이상의 이익을 창출하고 있습니다.ODM부문의 ODM신발 가격은 아디다스와의 ODM 계약에 따라 상호간 협의된 가격으로 판매하고 있습니다.다. 원재료 등의 가격변동추이 *주요원재료에 대한 가격변동추이이며, 단순평균가격입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "ODM부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 98.4%",
+        "revenue_share": 0.984,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "유통및기타부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
+        "revenue_share": 0.016,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "단순 매출 합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "ODM부문",
-      "caption": "ODM부문, ODM 관련 제품·서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 98.4%",
       "kind": "service",
-      "visual": "ODM부문",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "화학용품/산업용품 등",
-      "caption": "화학용품, 산업용품 등 관련 제품·서비스",
-      "kind": "material",
-      "visual": "화학용품",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "ODM부문(천족)(*)",
-      "caption": "ODM부문, ODM 관련 제품·서비스",
+      "title": "유통및기타부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
       "kind": "service",
-      "visual": "ODM부문",
-      "image": "../data/business_images/business_image_local_default_c.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

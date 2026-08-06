@@ -155,19 +155,32 @@
     "segment_finance": "동방은 전국 주요 항만과 물류거점 네트워크를 갖추고 항만하역, 화물자동차운송, 선박운송을 축으로 초중량물 운송·3자물류(3PL)·컨테이너터미널까지 운영하는 종합물류기업입니다. 매출은 화물자동차운송(37%), 선박운송(27%), 항만하역(26%)에 고르게 걸쳐 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 9,155억 원으로 전년보다 5.0% 늘었지만 영업이익은 319억 원으로 18.1%, 당기순이익은 174억 원으로 16.3% 각각 줄었습니다. 부채비율은 272.6%로 높은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
+        "name": "항만하역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.9%",
+        "revenue_share": 0.259,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
         "name": "화물자동차운송",
-        "desc": "일반·중량화물 도로운송",
-        "revenue_share": 0.374
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.4%",
+        "revenue_share": 0.374,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "선박운송",
-        "desc": "일반·중량화물 해상운송",
-        "revenue_share": 0.272
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.2%",
+        "revenue_share": 0.272,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "항만하역",
-        "desc": "수출입·일반화물 하역 및 창고보관",
-        "revenue_share": 0.259
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.008,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -179,32 +192,62 @@
       "컨테이너터미널",
       "물류센터 운영"
     ],
-    "investor_note": "동방은 전국 주요 항만과 물류거점 네트워크를 갖추고 항만하역, 화물자동차운송, 선박운송을 축으로 초중량물 운송·3자물류(3PL)·컨테이너터미널까지 운영하는 종합물류기업입니다. 매출은 화물자동차운송(37%), 선박운송(27%), 항만하역(26%)에 고르게 걸쳐 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 9,155억 원으로 전년보다 5.0% 늘었지만 영업이익은 319억 원으로 18.1%, 당기순이익은 174억 원으로 16.3% 각각 줄었습니다. 부채비율은 272.6%로 높은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다."
+    "investor_note": "동방은 전국 주요 항만과 물류거점 네트워크를 갖추고 항만하역, 화물자동차운송, 선박운송을 축으로 초중량물 운송·3자물류(3PL)·컨테이너터미널까지 운영하는 종합물류기업입니다. 매출은 화물자동차운송(37%), 선박운송(27%), 항만하역(26%)에 고르게 걸쳐 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 9,155억 원으로 전년보다 5.0% 늘었지만 영업이익은 319억 원으로 18.1%, 당기순이익은 174억 원으로 16.3% 각각 줄었습니다. 부채비율은 272.6%로 높은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "항만하역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.9%",
+        "revenue_share": 0.259,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "화물자동차운송",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.4%",
+        "revenue_share": 0.374,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "선박운송",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.2%",
+        "revenue_share": 0.272,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.008,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
+      "title": "항만하역",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
+    },
+    {
       "title": "화물자동차운송",
-      "caption": "일반·중량화물 도로운송",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.4%",
       "kind": "auto",
-      "visual": "화물자동차운송",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "선박운송",
-      "caption": "일반·중량화물 해상운송",
+      "title": "상선",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.2%",
       "kind": "ship",
-      "visual": "선박운송",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "항만하역",
-      "caption": "수출입·일반화물 하역 및 창고보관",
-      "kind": "service",
-      "visual": "항만하역",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
+      "visual": "SHIP",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

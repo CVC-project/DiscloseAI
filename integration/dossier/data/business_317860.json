@@ -153,7 +153,29 @@
   "snippets": {
     "overview": "주식회사 노드메이슨의 주요 제품·서비스는 루틴, 클렌징 제품, 바디 제품, 발의 피부연화 제품, 캔들 모로칸 가드너, 발의 피부연화제품입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 화장품 시장내에서도 기초화장품이라고 불리우는 스킨케어 시장에서 사업을 영위하고 있으며, 당사의 전 제품은 학술적으로도 인정받은 사하라 선인장 씨앗 오일을 원료로 생산되고 있기 때문에 인종, 피부타입과 관계 없이 전세계 소비자에게 사용 가능한 제품입니다. 당사는 자체 생산설비 없이 외주가공 형태로 제품을 생산하고 있으므로 해당사항이 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "주식회사 노드메이슨의 주요 제품·서비스는 루틴, 클렌징 제품, 바디 제품, 발의 피부연화 제품, 캔들 모로칸 가드너, 발의 피부연화제품입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 화장품 시장내에서도 기초화장품이라고 불리우는 스킨케어 시장에서 사업을 영위하고 있으며, 당사의 전 제품은 학술적으로도 인정받은 사하라 선인장 씨앗 오일을 원료로 생산되고 있기 때문에 인종, 피부타입과 관계 없이 전세계 소비자에게 사용 가능한 제품입니다. 당사는 자체 생산설비 없이 외주가공 형태로 제품을 생산하고 있으므로 해당사항이 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "기초",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.3%",
+        "revenue_share": 0.283,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "에센스, 오일",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.7%",
+        "revenue_share": 0.2072,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "색조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.0%",
+        "revenue_share": 0.0603,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "루틴",
       "클렌징 제품",
@@ -168,40 +190,70 @@
       "바디 로션",
       "오일 등"
     ],
-    "investor_note": "주식회사 노드메이슨의 주요 제품·서비스는 루틴, 클렌징 제품, 바디 제품, 발의 피부연화 제품, 캔들 모로칸 가드너, 발의 피부연화제품입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 화장품 시장내에서도 기초화장품이라고 불리우는 스킨케어 시장에서 사업을 영위하고 있으며, 당사의 전 제품은 학술적으로도 인정받은 사하라 선인장 씨앗 오일을 원료로 생산되고 있기 때문에 인종, 피부타입과 관계 없이 전세계 소비자에게 사용 가능한 제품입니다. 당사는 자체 생산설비 없이 외주가공 형태로 제품을 생산하고 있으므로 해당사항이 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사 노드메이슨의 주요 제품·서비스는 루틴, 클렌징 제품, 바디 제품, 발의 피부연화 제품, 캔들 모로칸 가드너, 발의 피부연화제품입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 화장품 시장내에서도 기초화장품이라고 불리우는 스킨케어 시장에서 사업을 영위하고 있으며, 당사의 전 제품은 학술적으로도 인정받은 사하라 선인장 씨앗 오일을 원료로 생산되고 있기 때문에 인종, 피부타입과 관계 없이 전세계 소비자에게 사용 가능한 제품입니다. 당사는 자체 생산설비 없이 외주가공 형태로 제품을 생산하고 있으므로 해당사항이 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "기초",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.3%",
+        "revenue_share": 0.283,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "에센스, 오일",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.7%",
+        "revenue_share": 0.2072,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "바디제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.9%",
+        "revenue_share": 0.1389,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "색조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.0%",
+        "revenue_share": 0.0603,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "루틴",
-      "caption": "루틴 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "기초",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.3%",
       "kind": "material",
       "visual": "MAT",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "클렌징 제품",
-      "caption": "클렌징 제품 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "에센스, 오일",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.7%",
       "kind": "material",
       "visual": "MAT",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "바디 제품",
-      "caption": "바디 제품 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "바디제품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.9%",
       "kind": "material",
       "visual": "MAT",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "발의 피부연화 제품",
-      "caption": "발의 피부연화 제품 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "색조",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.0%",
       "kind": "material",
       "visual": "MAT",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

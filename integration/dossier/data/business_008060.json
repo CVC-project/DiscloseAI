@@ -153,7 +153,36 @@
   "snippets": {
     "overview": "대덕은 자회사 대덕전자(PCB, 인쇄회로기판)와 와이솔(RF 부품)을 거느린 지주회사로, 배당수익·경영자문료·상표권 수익을 주 수입원으로 하며 연결 기준 PCB사업이 매출의 약 72%, RF사업이 약 21%를 차지합니다. 과거 공시 기반 참고 정보로, 연결 매출액은 1조 3,849억 원(+9.3%), 영업이익은 113억 원(+34.4%)으로 늘었지만, 당기순이익은 62억 원으로 85.5% 급감했습니다. 이는 자회사 와이솔 RF사업부문에서 202억 원 규모 손상차손이 발생한 영향으로, 부채비율은 26.8%로 재무구조는 안정적입니다.",
     "segment_finance": "대덕은 자회사 대덕전자(PCB, 인쇄회로기판)와 와이솔(RF 부품)을 거느린 지주회사로, 배당수익·경영자문료·상표권 수익을 주 수입원으로 하며 연결 기준 PCB사업이 매출의 약 72%, RF사업이 약 21%를 차지합니다. 과거 공시 기반 참고 정보로, 연결 매출액은 1조 3,849억 원(+9.3%), 영업이익은 113억 원(+34.4%)으로 늘었지만, 당기순이익은 62억 원으로 85.5% 급감했습니다. 이는 자회사 와이솔 RF사업부문에서 202억 원 규모 손상차손이 발생한 영향으로, 부채비율은 26.8%로 재무구조는 안정적입니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "용역의 제공",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.0%",
+        "revenue_share": 0.19,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "브랜드로열티",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.0%",
+        "revenue_share": 0.18,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "관계기업 및 종속기업의 배당",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 63.0%",
+        "revenue_share": 0.63,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전자부품제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.0%",
+        "revenue_share": 0.99,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "반도체 패키지 기판(substrate)",
       "MLB 기판",
@@ -161,24 +190,70 @@
       "Duplexer",
       "RF Module"
     ],
-    "investor_note": "대덕은 자회사 대덕전자(PCB, 인쇄회로기판)와 와이솔(RF 부품)을 거느린 지주회사로, 배당수익·경영자문료·상표권 수익을 주 수입원으로 하며 연결 기준 PCB사업이 매출의 약 72%, RF사업이 약 21%를 차지합니다. 과거 공시 기반 참고 정보로, 연결 매출액은 1조 3,849억 원(+9.3%), 영업이익은 113억 원(+34.4%)으로 늘었지만, 당기순이익은 62억 원으로 85.5% 급감했습니다. 이는 자회사 와이솔 RF사업부문에서 202억 원 규모 손상차손이 발생한 영향으로, 부채비율은 26.8%로 재무구조는 안정적입니다."
+    "investor_note": "대덕은 자회사 대덕전자(PCB, 인쇄회로기판)와 와이솔(RF 부품)을 거느린 지주회사로, 배당수익·경영자문료·상표권 수익을 주 수입원으로 하며 연결 기준 PCB사업이 매출의 약 72%, RF사업이 약 21%를 차지합니다. 과거 공시 기반 참고 정보로, 연결 매출액은 1조 3,849억 원(+9.3%), 영업이익은 113억 원(+34.4%)으로 늘었지만, 당기순이익은 62억 원으로 85.5% 급감했습니다. 이는 자회사 와이솔 RF사업부문에서 202억 원 규모 손상차손이 발생한 영향으로, 부채비율은 26.8%로 재무구조는 안정적입니다.",
+    "product_service_segments": [
+      {
+        "name": "용역의 제공",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.0%",
+        "revenue_share": 0.19,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "브랜드로열티",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.0%",
+        "revenue_share": 0.18,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "관계기업 및 종속기업의 배당",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 63.0%",
+        "revenue_share": 0.63,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전자부품제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.0%",
+        "revenue_share": 0.99,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "PCB사업(대덕전자)",
-      "caption": "반도체 패키지 기판·MLB 기판 제조·판매",
-      "kind": "chip",
-      "visual": "PCB사업",
-      "image": "../data/business_images/business_image_local_packaging.svg",
-      "image_source": "Local curated visual"
+      "title": "용역의 제공",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "RF사업(와이솔)",
-      "caption": "SAW Filter 등 RF 부품 제조·판매",
+      "title": "브랜드로열티",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "관계기업 및 종속기업의 배당",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 63.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "전자부품제조",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.0%",
       "kind": "auto",
-      "visual": "RF사업",
-      "image": "../data/business_images/business_image_local_default_b.svg",
-      "image_source": "Local curated visual"
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

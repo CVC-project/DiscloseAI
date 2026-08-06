@@ -155,19 +155,25 @@
     "segment_finance": "손오공은 전통적인 완구 회사에서 IP 기반 콘텐츠·리테일과 자동차 유통을 함께 하는 회사로 바뀌고 있습니다. 완구·게임 부문은 라부부, 캐릭터 굿즈, 닌텐도 콘솔·소프트웨어 유통이 중심이고, 자동차 부문은 폭스바겐 공식 딜러 클라쎄오토와 중고차·렌터카 사업이 포함됩니다. 2025년에는 자동차판매 부문이 연결 매출의 약 64%, 완구·게임이 약 35%를 차지했습니다. 마텔 완구 유통계약과 리그오브레전드 PC방 총판계약은 종료됐고, 케이비캐피탈 차량 공급·소매판매 위탁계약과 서서울모터리움 경영위탁계약이 새 사업 기반으로 제시됐습니다. 2025년 매출은 970억 원으로 크게 늘었지만 영업손실은 계속되고 있어, 매출 확대가 실제 수익성 회복으로 이어지는지가 핵심입니다.",
     "segment_breakdown": [
       {
-        "name": "완구·게임",
-        "desc": "라부부, 캐릭터 상품, 닌텐도 게임기와 소프트웨어 유통",
-        "revenue_share": 0.35
+        "name": "완구 및게임",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.0%",
+        "revenue_share": 0.35,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "자동차 판매",
-        "desc": "폭스바겐 공식 딜러와 중고차 유통·렌터카 사업",
-        "revenue_share": 0.64
+        "name": "중고차판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.01,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "부동산·투자",
-        "desc": "부동산 개발·운영, 경영컨설팅과 기타금융투자",
-        "revenue_share": null
+        "name": "자동차판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 64.0%",
+        "revenue_share": 0.64,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -179,32 +185,55 @@
       "자동차 판매·정비",
       "부동산 개발·운영"
     ],
-    "investor_note": "손오공은 전통적인 완구 회사에서 IP 기반 콘텐츠·리테일과 자동차 유통을 함께 하는 회사로 바뀌고 있습니다. 완구·게임 부문은 라부부, 캐릭터 굿즈, 닌텐도 콘솔·소프트웨어 유통이 중심이고, 자동차 부문은 폭스바겐 공식 딜러 클라쎄오토와 중고차·렌터카 사업이 포함됩니다. 2025년에는 자동차판매 부문이 연결 매출의 약 64%, 완구·게임이 약 35%를 차지했습니다. 마텔 완구 유통계약과 리그오브레전드 PC방 총판계약은 종료됐고, 케이비캐피탈 차량 공급·소매판매 위탁계약과 서서울모터리움 경영위탁계약이 새 사업 기반으로 제시됐습니다. 2025년 매출은 970억 원으로 크게 늘었지만 영업손실은 계속되고 있어, 매출 확대가 실제 수익성 회복으로 이어지는지가 핵심입니다."
+    "investor_note": "손오공은 전통적인 완구 회사에서 IP 기반 콘텐츠·리테일과 자동차 유통을 함께 하는 회사로 바뀌고 있습니다. 완구·게임 부문은 라부부, 캐릭터 굿즈, 닌텐도 콘솔·소프트웨어 유통이 중심이고, 자동차 부문은 폭스바겐 공식 딜러 클라쎄오토와 중고차·렌터카 사업이 포함됩니다. 2025년에는 자동차판매 부문이 연결 매출의 약 64%, 완구·게임이 약 35%를 차지했습니다. 마텔 완구 유통계약과 리그오브레전드 PC방 총판계약은 종료됐고, 케이비캐피탈 차량 공급·소매판매 위탁계약과 서서울모터리움 경영위탁계약이 새 사업 기반으로 제시됐습니다. 2025년 매출은 970억 원으로 크게 늘었지만 영업손실은 계속되고 있어, 매출 확대가 실제 수익성 회복으로 이어지는지가 핵심입니다.",
+    "product_service_segments": [
+      {
+        "name": "완구 및게임",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.0%",
+        "revenue_share": 0.35,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "중고차판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.01,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동차판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 64.0%",
+        "revenue_share": 0.64,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "완구·게임",
-      "caption": "라부부, 캐릭터 상품, 닌텐도 게임기와 소프트웨어 유통",
+      "title": "게임",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.0%",
       "kind": "platform",
-      "visual": "완구",
-      "image": "../data/business_images/business_image_local_content.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "자동차 판매",
-      "caption": "폭스바겐 공식 딜러와 중고차 유통·렌터카 사업",
-      "kind": "auto",
-      "visual": "자동차",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "visual": "GAME",
+      "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "부동산·투자",
-      "caption": "부동산 개발·운영, 경영컨설팅과 기타금융투자",
-      "kind": "bank",
-      "visual": "부동산",
-      "image": "../data/business_images/business_image_local_default_c.svg",
-      "image_source": "Local curated visual"
+      "title": "중고차판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "자동차판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 64.0%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

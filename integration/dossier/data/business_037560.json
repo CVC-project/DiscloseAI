@@ -153,13 +153,7 @@
   "snippets": {
     "overview": "LG헬로비전은 전국 23개 권역에서 케이블TV(헬로TV)와 초고속인터넷, 인터넷전화, 알뜰폰(MVNO)을 제공하는 종합유선방송사업자로, 지역채널 광고와 가전 렌탈·할부판매 사업도 함께 벌이고 있습니다. 매출은 방송·인터넷·광고·부가서비스·상품판매로 고르게 나뉘어 있으며, 최근에는 가전 등 상품매출 비중이 가장 커졌습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 2,656억 원으로 전년 대비 5.8% 늘었고 영업이익도 39.0% 증가했으며, 순이익은 전년 적자에서 흑자로 돌아섰습니다. 다만 부채비율이 179.6%로 높은 편이고 ROE도 0.4%에 그쳐, 수익성 개선은 아직 초기 단계로 보입니다.",
     "segment_finance": "LG헬로비전은 전국 23개 권역에서 케이블TV(헬로TV)와 초고속인터넷, 인터넷전화, 알뜰폰(MVNO)을 제공하는 종합유선방송사업자로, 지역채널 광고와 가전 렌탈·할부판매 사업도 함께 벌이고 있습니다. 매출은 방송·인터넷·광고·부가서비스·상품판매로 고르게 나뉘어 있으며, 최근에는 가전 등 상품매출 비중이 가장 커졌습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 2,656억 원으로 전년 대비 5.8% 늘었고 영업이익도 39.0% 증가했으며, 순이익은 전년 적자에서 흑자로 돌아섰습니다. 다만 부채비율이 179.6%로 높은 편이고 ROE도 0.4%에 그쳐, 수익성 개선은 아직 초기 단계로 보입니다.",
-    "segment_breakdown": [
-      {
-        "name": "상품매출",
-        "desc": "가전·단말기 렌탈 및 할부판매 등 상품 매출",
-        "revenue_share": 0.26
-      }
-    ],
+    "segment_breakdown": [],
     "products": [
       "헬로TV(케이블TV)",
       "헬로인터넷(초고속인터넷)",
@@ -170,12 +164,42 @@
       "가전 렌탈·할부판매",
       "홈/기업솔루션"
     ],
-    "investor_note": "LG헬로비전은 전국 23개 권역에서 케이블TV(헬로TV)와 초고속인터넷, 인터넷전화, 알뜰폰(MVNO)을 제공하는 종합유선방송사업자로, 지역채널 광고와 가전 렌탈·할부판매 사업도 함께 벌이고 있습니다. 매출은 방송·인터넷·광고·부가서비스·상품판매로 고르게 나뉘어 있으며, 최근에는 가전 등 상품매출 비중이 가장 커졌습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 2,656억 원으로 전년 대비 5.8% 늘었고 영업이익도 39.0% 증가했으며, 순이익은 전년 적자에서 흑자로 돌아섰습니다. 다만 부채비율이 179.6%로 높은 편이고 ROE도 0.4%에 그쳐, 수익성 개선은 아직 초기 단계로 보입니다."
+    "investor_note": "LG헬로비전은 전국 23개 권역에서 케이블TV(헬로TV)와 초고속인터넷, 인터넷전화, 알뜰폰(MVNO)을 제공하는 종합유선방송사업자로, 지역채널 광고와 가전 렌탈·할부판매 사업도 함께 벌이고 있습니다. 매출은 방송·인터넷·광고·부가서비스·상품판매로 고르게 나뉘어 있으며, 최근에는 가전 등 상품매출 비중이 가장 커졌습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 2,656억 원으로 전년 대비 5.8% 늘었고 영업이익도 39.0% 증가했으며, 순이익은 전년 적자에서 흑자로 돌아섰습니다. 다만 부채비율이 179.6%로 높은 편이고 ROE도 0.4%에 그쳐, 수익성 개선은 아직 초기 단계로 보입니다.",
+    "product_service_segments": [
+      {
+        "name": "방송사업매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.2%",
+        "revenue_share": 0.222,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "인터넷사업매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.0%",
+        "revenue_share": 0.1,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "광고서비스사업매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.8%",
+        "revenue_share": 0.198,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "부가서비스사업매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.0%",
+        "revenue_share": 0.22,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "헬로TV(케이블TV)",
-      "caption": "헬로TV(케이블TV) 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
       "kind": "power",
       "visual": "POWER",
       "image": "../data/business_images/business_image_141eab6519656e30.jpg",
@@ -183,27 +207,27 @@
     },
     {
       "title": "헬로인터넷(초고속인터넷)",
-      "caption": "헬로인터넷(초고속인터넷) 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "헬로집전화(인터넷전화)",
-      "caption": "헬로집전화(인터넷전화) 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "헬로모바일(MVNO)",
-      "caption": "헬로모바일(MVNO) 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

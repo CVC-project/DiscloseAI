@@ -105,7 +105,29 @@
   "snippets": {
     "overview": "주식회사 에스켐의 주요 사업은 목적사업, 규제내용사업입니다. 고객사로부터 정기 및 비정기적으로 발주서를 수신하여 생산 및 납품을 진행하는 구조이므로, 별도의 수주잔고가 존재하지 않습니다.따라서 본 항목에서는 수주 현황을 기재하지 않았습니다. 매출처 현황 수주에 관한 사항 당사의 사업 특성상 장기 수주 계약 방식이 아닌 고객사의 발주서(PO, Purchase Order) 기반 거래로 운영되고 있습니다.",
     "segment_finance": "주식회사 에스켐의 주요 사업은 목적사업, 규제내용사업입니다. 고객사로부터 정기 및 비정기적으로 발주서를 수신하여 생산 및 납품을 진행하는 구조이므로, 별도의 수주잔고가 존재하지 않습니다.따라서 본 항목에서는 수주 현황을 기재하지 않았습니다. 매출처 현황 수주에 관한 사항 당사의 사업 특성상 장기 수주 계약 방식이 아닌 고객사의 발주서(PO, Purchase Order) 기반 거래로 운영되고 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "발광 보조층",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 41.9%",
+        "revenue_share": 0.4194,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "공통층",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.6%",
+        "revenue_share": 0.3162,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "헬스케어",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.4%",
+        "revenue_share": 0.1444,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "OLED",
       "의약품",
@@ -118,32 +140,62 @@
       "유해성",
       "위해성에 관한 심사"
     ],
-    "investor_note": "주식회사 에스켐의 주요 사업은 목적사업, 규제내용사업입니다. 고객사로부터 정기 및 비정기적으로 발주서를 수신하여 생산 및 납품을 진행하는 구조이므로, 별도의 수주잔고가 존재하지 않습니다.따라서 본 항목에서는 수주 현황을 기재하지 않았습니다. 매출처 현황 수주에 관한 사항 당사의 사업 특성상 장기 수주 계약 방식이 아닌 고객사의 발주서(PO, Purchase Order) 기반 거래로 운영되고 있습니다."
+    "investor_note": "주식회사 에스켐의 주요 사업은 목적사업, 규제내용사업입니다. 고객사로부터 정기 및 비정기적으로 발주서를 수신하여 생산 및 납품을 진행하는 구조이므로, 별도의 수주잔고가 존재하지 않습니다.따라서 본 항목에서는 수주 현황을 기재하지 않았습니다. 매출처 현황 수주에 관한 사항 당사의 사업 특성상 장기 수주 계약 방식이 아닌 고객사의 발주서(PO, Purchase Order) 기반 거래로 운영되고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.8%",
+        "revenue_share": 0.108,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "발광 보조층",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 41.9%",
+        "revenue_share": 0.4194,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "공통층",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.6%",
+        "revenue_share": 0.3162,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "헬스케어",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.4%",
+        "revenue_share": 0.1444,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "법률의 목적화학물질의 등록",
-      "caption": "법률의 목적화학물질의 등록 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "발광 보조층",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 41.9%",
       "kind": "material",
       "visual": "MAT",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
-      "kind": "display",
-      "visual": "OLED",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "발광층",
-      "caption": "발광층 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "공통층",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.6%",
       "kind": "material",
       "visual": "MAT",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "헬스케어",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.4%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

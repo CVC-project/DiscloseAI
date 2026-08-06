@@ -155,14 +155,18 @@
     "segment_finance": "라닉스의 주요 제품·서비스는 배터리, Autonomous Vehicle (T-WAVE, V2X RSU, OBU, RVP), 비중입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 이 제품은 AMI(지능형 검침 인프라) 시장을 비롯해 제조, 서비스, 국방 등 다양한 분야에서 고객 맞춤형 대응이 가능하며 실질적인 적용 사례도 늘고 있습니다. mPERS는 당사가 개발한 미국 유럽향 제품으로 노인층을 위한 Pendant 형태의 응급구조 단말기이며, 이를 운용하기 위한 모니터링 시스템도 함께 개발하여 고객사에게 토탈 솔루션을 제공하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "국민건강보험",
-        "desc": "보험계약과 자산운용 중심 서비스",
-        "revenue_share": null
+        "name": "Automotive MCU (Network, DSRC, Security)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.6%",
+        "revenue_share": 0.9962,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "장기요양보험",
-        "desc": "보험계약과 자산운용 중심 서비스",
-        "revenue_share": null
+        "name": "Smart Life (Smart Watch, Smart Scale,AI돌봄센서, 마약검출기)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.3%",
+        "revenue_share": 0.1334,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -177,24 +181,56 @@
       "PKG",
       "직거래 고객"
     ],
-    "investor_note": "라닉스의 주요 제품·서비스는 배터리, Autonomous Vehicle (T-WAVE, V2X RSU, OBU, RVP), 비중입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 이 제품은 AMI(지능형 검침 인프라) 시장을 비롯해 제조, 서비스, 국방 등 다양한 분야에서 고객 맞춤형 대응이 가능하며 실질적인 적용 사례도 늘고 있습니다. mPERS는 당사가 개발한 미국 유럽향 제품으로 노인층을 위한 Pendant 형태의 응급구조 단말기이며, 이를 운용하기 위한 모니터링 시스템도 함께 개발하여 고객사에게 토탈 솔루션을 제공하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "라닉스의 주요 제품·서비스는 배터리, Autonomous Vehicle (T-WAVE, V2X RSU, OBU, RVP), 비중입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 이 제품은 AMI(지능형 검침 인프라) 시장을 비롯해 제조, 서비스, 국방 등 다양한 분야에서 고객 맞춤형 대응이 가능하며 실질적인 적용 사례도 늘고 있습니다. mPERS는 당사가 개발한 미국 유럽향 제품으로 노인층을 위한 Pendant 형태의 응급구조 단말기이며, 이를 운용하기 위한 모니터링 시스템도 함께 개발하여 고객사에게 토탈 솔루션을 제공하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "Automotive MCU (Network, DSRC, Security)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.6%",
+        "revenue_share": 0.9962,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Smart Life (Smart Watch, Smart Scale,AI돌봄센서, 마약검출기)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.3%",
+        "revenue_share": 0.1334,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "국민건강보험",
-      "caption": "보험계약과 자산운용 중심 서비스",
-      "kind": "insurance",
-      "visual": "국민건강보험",
-      "image": "../data/business_images/business_image_local_securities.svg",
-      "image_source": "Local curated visual"
+      "title": "Autonomous Vehicle (T-WAVE",
+      "caption": "반도체 공정과 고객사 투자 흐름에 연결되는 제품입니다.",
+      "kind": "chip",
+      "visual": "CHIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "장기요양보험",
-      "caption": "보험계약과 자산운용 중심 서비스",
-      "kind": "insurance",
-      "visual": "장기요양보험",
-      "image": "../data/business_images/business_image_local_securities.svg",
-      "image_source": "Local curated visual"
+      "title": "V2X RSU",
+      "caption": "반도체 공정과 고객사 투자 흐름에 연결되는 제품입니다.",
+      "kind": "chip",
+      "visual": "CHIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "OBU",
+      "caption": "반도체 공정과 고객사 투자 흐름에 연결되는 제품입니다.",
+      "kind": "chip",
+      "visual": "CHIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "RVP)",
+      "caption": "반도체 공정과 고객사 투자 흐름에 연결되는 제품입니다.",
+      "kind": "chip",
+      "visual": "CHIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

@@ -155,9 +155,18 @@
     "segment_finance": "(주)씨에스는 1999년 국내 최초로 CDMA 초소형 RF 중계기를 개발한 이래, SK텔레콤에 이동통신 중계기(기지국 신호를 증폭해 통화 음영지역을 없애는 장비)를 공급해온 전문업체로, 일본에서는 NTT도코모에도 5G 중계기를 판매하고 있습니다. 매출은 완제품 중계기(43%), 개발·설치 용역(7%), 상품 등 기타(51%)로 구성됩니다. 과거 공시 기반 참고 정보로, 국내외 통신사업자의 투자 축소 영향으로 최근 연결 매출액은 236억 원으로 전년 대비 36.4% 줄었고, 영업손익은 적자로 전환해 11억 원의 영업손실을, 당기순이익도 9억 원의 손실을 냈습니다. 다만 부채비율은 9.2%로 매우 낮아 재무구조 자체는 안정적인 편입니다.",
     "segment_breakdown": [
       {
+        "name": "통신장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 42.7%",
+        "revenue_share": 0.427,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
         "name": "용역",
-        "desc": "중계기 개발 및 설치 용역",
-        "revenue_share": 0.067
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.7%",
+        "revenue_share": 0.067,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -169,24 +178,40 @@
       "해외향 ICS 중계기",
       "중계기 개발·설치 용역"
     ],
-    "investor_note": "(주)씨에스는 1999년 국내 최초로 CDMA 초소형 RF 중계기를 개발한 이래, SK텔레콤에 이동통신 중계기(기지국 신호를 증폭해 통화 음영지역을 없애는 장비)를 공급해온 전문업체로, 일본에서는 NTT도코모에도 5G 중계기를 판매하고 있습니다. 매출은 완제품 중계기(43%), 개발·설치 용역(7%), 상품 등 기타(51%)로 구성됩니다. 과거 공시 기반 참고 정보로, 국내외 통신사업자의 투자 축소 영향으로 최근 연결 매출액은 236억 원으로 전년 대비 36.4% 줄었고, 영업손익은 적자로 전환해 11억 원의 영업손실을, 당기순이익도 9억 원의 손실을 냈습니다. 다만 부채비율은 9.2%로 매우 낮아 재무구조 자체는 안정적인 편입니다."
+    "investor_note": "(주)씨에스는 1999년 국내 최초로 CDMA 초소형 RF 중계기를 개발한 이래, SK텔레콤에 이동통신 중계기(기지국 신호를 증폭해 통화 음영지역을 없애는 장비)를 공급해온 전문업체로, 일본에서는 NTT도코모에도 5G 중계기를 판매하고 있습니다. 매출은 완제품 중계기(43%), 개발·설치 용역(7%), 상품 등 기타(51%)로 구성됩니다. 과거 공시 기반 참고 정보로, 국내외 통신사업자의 투자 축소 영향으로 최근 연결 매출액은 236억 원으로 전년 대비 36.4% 줄었고, 영업손익은 적자로 전환해 11억 원의 영업손실을, 당기순이익도 9억 원의 손실을 냈습니다. 다만 부채비율은 9.2%로 매우 낮아 재무구조 자체는 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "통신장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 42.7%",
+        "revenue_share": 0.427,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.7%",
+        "revenue_share": 0.067,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "통신 및 방송 장비 제조업",
-      "caption": "통신 및 방송 장비 제조업을 중심으로 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "title": "통신장비",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 42.7%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     },
     {
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "title": "5G RF 중계기",
-      "caption": "5G RF 중계기 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image_source": "Local curated visual"
+      "title": "용역",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.7%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

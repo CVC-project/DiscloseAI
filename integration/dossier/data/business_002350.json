@@ -155,19 +155,18 @@
     "segment_finance": "넥센타이어는 승용차용(PCR)·경트럭용(LTR)·SUV용 타이어를 생산·판매하는 국내 대표 타이어 제조사로, 국내 창녕과 중국 청도·체코 자테츠에 생산기지를 두고 있으며 매출의 95%가 타이어 판매에서 나옵니다. 나머지는 렌탈(NEXT-LEVEL)·금형 등 비타이어 사업입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 3조 1,896억 원으로 전년 대비 12.0% 늘었고 당기순이익도 19.3% 증가했지만, 영업이익은 1.1% 소폭 줄었습니다. 부채비율은 129.2%로 다소 높은 편입니다.",
     "segment_breakdown": [
       {
-        "name": "타이어부문",
-        "desc": "PCR·LTR·SUV용 타이어 제조판매",
-        "revenue_share": 0.9509
+        "name": "타이어",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 95.1%",
+        "revenue_share": 0.9509,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "렌탈·용역",
-        "desc": "타이어 임대·렌탈(NEXT-LEVEL) 및 용역",
-        "revenue_share": 0.0467
-      },
-      {
-        "name": "비타이어(금형 등)",
-        "desc": "타이어 금형 제작판매 등 기타 사업",
-        "revenue_share": 0.0024
+        "name": "비타이어",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.0022,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -180,32 +179,32 @@
       "i.Q series",
       "NEXT-LEVEL(타이어 렌탈)"
     ],
-    "investor_note": "넥센타이어는 승용차용(PCR)·경트럭용(LTR)·SUV용 타이어를 생산·판매하는 국내 대표 타이어 제조사로, 국내 창녕과 중국 청도·체코 자테츠에 생산기지를 두고 있으며 매출의 95%가 타이어 판매에서 나옵니다. 나머지는 렌탈(NEXT-LEVEL)·금형 등 비타이어 사업입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 3조 1,896억 원으로 전년 대비 12.0% 늘었고 당기순이익도 19.3% 증가했지만, 영업이익은 1.1% 소폭 줄었습니다. 부채비율은 129.2%로 다소 높은 편입니다."
+    "investor_note": "넥센타이어는 승용차용(PCR)·경트럭용(LTR)·SUV용 타이어를 생산·판매하는 국내 대표 타이어 제조사로, 국내 창녕과 중국 청도·체코 자테츠에 생산기지를 두고 있으며 매출의 95%가 타이어 판매에서 나옵니다. 나머지는 렌탈(NEXT-LEVEL)·금형 등 비타이어 사업입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 3조 1,896억 원으로 전년 대비 12.0% 늘었고 당기순이익도 19.3% 증가했지만, 영업이익은 1.1% 소폭 줄었습니다. 부채비율은 129.2%로 다소 높은 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "타이어",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 95.1%",
+        "revenue_share": 0.9509,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "비타이어",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.0022,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "타이어부문",
-      "caption": "PCR·LTR·SUV용 타이어 제조판매",
+      "title": "타이어",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 95.1%",
       "kind": "service",
-      "visual": "타이어부문",
-      "image": "../data/business_images/business_image_local_cement.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "렌탈·용역",
-      "caption": "타이어 임대·렌탈(NEXT-LEVEL) 및 용역",
-      "kind": "service",
-      "visual": "EV",
-      "image": "../data/business_images/business_image_local_tire.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "비타이어(금형 등)",
-      "caption": "타이어 금형 제작판매 등 기타 사업",
-      "kind": "service",
-      "visual": "비타이어",
-      "image": "../data/business_images/business_image_local_tire.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

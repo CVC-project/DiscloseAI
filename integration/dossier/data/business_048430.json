@@ -155,14 +155,25 @@
     "segment_finance": "중국·베트남 현지법인을 통해 부품 소싱과 임가공도 함께 하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,972억 원으로 전년보다 2.0% 줄었고 영업이익은 82.7% 급감해 수익성이 크게 나빠졌습니다. 다만 당기순이익은 110억 원으로 감소폭이 상대적으로 작았고(-17.4%), 부채비율은 20.3%로 낮은 편이라 재무구조 자체는 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "자동차부품(점화부품)",
-        "desc": "현대·기아차에 공급하는 점화코일·점화플러그 등 점화장치 부품",
-        "revenue_share": 0.756
+        "name": "자동차부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.1%",
+        "revenue_share": 0.591,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "와이어링하네스",
-        "desc": "자동차 전기·전자 신호를 전달하는 배선 뭉치",
-        "revenue_share": 0.091
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.1%",
+        "revenue_share": 0.091,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.5%",
+        "revenue_share": 0.165,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -177,24 +188,55 @@
       "전기차 충전 커넥터 비상해제케이블",
       "인렛 온도센서"
     ],
-    "investor_note": "중국·베트남 현지법인을 통해 부품 소싱과 임가공도 함께 하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,972억 원으로 전년보다 2.0% 줄었고 영업이익은 82.7% 급감해 수익성이 크게 나빠졌습니다. 다만 당기순이익은 110억 원으로 감소폭이 상대적으로 작았고(-17.4%), 부채비율은 20.3%로 낮은 편이라 재무구조 자체는 안정적인 편입니다."
+    "investor_note": "중국·베트남 현지법인을 통해 부품 소싱과 임가공도 함께 하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,972억 원으로 전년보다 2.0% 줄었고 영업이익은 82.7% 급감해 수익성이 크게 나빠졌습니다. 다만 당기순이익은 110억 원으로 감소폭이 상대적으로 작았고(-17.4%), 부채비율은 20.3%로 낮은 편이라 재무구조 자체는 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "자동차부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.1%",
+        "revenue_share": 0.591,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "와이어링하네스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.1%",
+        "revenue_share": 0.091,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.5%",
+        "revenue_share": 0.165,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "와이어링하네스",
-      "caption": "자동차 전기·전자 신호를 전달하는 배선 뭉치",
+      "title": "자동차부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.1%",
       "kind": "auto",
-      "visual": "와이어링하네스",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "전동기, 발전기 및 전기 변환 · 공급 · 제어 장치 제조업",
-      "caption": "전동기, 발전기 및 전기 변환 · 공급 · 제어 장치 제조업을 중심으로 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "title": "와이어링하네스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.1%",
+      "kind": "power",
+      "visual": "POWER",
+      "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.5%",
+      "kind": "power",
+      "visual": "POWER",
+      "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

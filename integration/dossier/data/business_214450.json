@@ -155,19 +155,25 @@
     "segment_finance": "(주)파마리서치의 주요 제품·서비스는 의약품, 건강기능식품, 약국, 도매, 현금, 연구부문입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 우수한 기술경쟁력을 기반으로 한 의약품, 의료기기, 화장품 제조업체로서 R&D를 통한 제품개발 및 시장 확대에 힘쓰고 있습니다. 고객은 고령층이었으나, 최근에는 노화 예방 및 관리를 추구하는 젊은 연령층의 시장 진입이 두드러지고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "연구부문",
-        "desc": "연구부문 관련 제품·서비스",
-        "revenue_share": null
+        "name": "의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.4%",
+        "revenue_share": 0.154,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "개발부문",
-        "desc": "개발부문 관련 제품·서비스",
-        "revenue_share": null
+        "name": "의료기기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 58.6%",
+        "revenue_share": 0.586,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "연구부문부문",
-        "desc": "연구부문 관련 제품·서비스",
-        "revenue_share": null
+        "name": "화장품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.6%",
+        "revenue_share": 0.246,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -184,40 +190,55 @@
       "제품개발 의의",
       "경쟁제품"
     ],
-    "investor_note": "(주)파마리서치의 주요 제품·서비스는 의약품, 건강기능식품, 약국, 도매, 현금, 연구부문입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 우수한 기술경쟁력을 기반으로 한 의약품, 의료기기, 화장품 제조업체로서 R&D를 통한 제품개발 및 시장 확대에 힘쓰고 있습니다. 고객은 고령층이었으나, 최근에는 노화 예방 및 관리를 추구하는 젊은 연령층의 시장 진입이 두드러지고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)파마리서치의 주요 제품·서비스는 의약품, 건강기능식품, 약국, 도매, 현금, 연구부문입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 우수한 기술경쟁력을 기반으로 한 의약품, 의료기기, 화장품 제조업체로서 R&D를 통한 제품개발 및 시장 확대에 힘쓰고 있습니다. 고객은 고령층이었으나, 최근에는 노화 예방 및 관리를 추구하는 젊은 연령층의 시장 진입이 두드러지고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.4%",
+        "revenue_share": 0.154,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "의료기기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 58.6%",
+        "revenue_share": 0.586,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "화장품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.6%",
+        "revenue_share": 0.246,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "의약품",
-      "caption": "의약품 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.4%",
       "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "건강기능식품",
-      "caption": "건강기능식품 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "의료기기",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 58.6%",
+      "kind": "bio",
+      "visual": "MEDICAL",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "약국",
-      "caption": "약국 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "화장품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.6%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "도매",
-      "caption": "도매 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

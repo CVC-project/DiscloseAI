@@ -153,31 +153,98 @@
   "snippets": {
     "overview": "SNT에너지 주식회사의 주요 사업은 동력사업입니다. 건설사, NOOTER ERIKSEN, 지멘스 HTT 등 해외 고객사와 협력 관계를 유지하며 영업활동을 하고 있습니다.또한, 복수기(SURFACE CONDENSER), 질소산화물 저감장치(SCR) 등은 한국전력, 한국전력 자회사, 지역난방공사, 해외 발전 관계사 및 국내 건설사 등으로 수주 활동을 하고 있습니다. 설계방식에 의한 수주생산으로 제품의 규격이 상이하며 일률적인 제품가격의 산정이 어렵습니다.",
     "segment_finance": "SNT에너지 주식회사의 주요 사업은 동력사업입니다. 건설사, NOOTER ERIKSEN, 지멘스 HTT 등 해외 고객사와 협력 관계를 유지하며 영업활동을 하고 있습니다.또한, 복수기(SURFACE CONDENSER), 질소산화물 저감장치(SCR) 등은 한국전력, 한국전력 자회사, 지역난방공사, 해외 발전 관계사 및 국내 건설사 등으로 수주 활동을 하고 있습니다. 설계방식에 의한 수주생산으로 제품의 규격이 상이하며 일률적인 제품가격의 산정이 어렵습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "AIR COOLER",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 88.9%",
+        "revenue_share": 0.889,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "HRSG",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.1%",
+        "revenue_share": 0.091,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "SCR 설비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.02,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총 매출액",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "LNG",
       "철강",
       "SIEMENS (독일)",
       "INNOSPIN (스위스)"
     ],
-    "investor_note": "SNT에너지 주식회사의 주요 사업은 동력사업입니다. 건설사, NOOTER ERIKSEN, 지멘스 HTT 등 해외 고객사와 협력 관계를 유지하며 영업활동을 하고 있습니다.또한, 복수기(SURFACE CONDENSER), 질소산화물 저감장치(SCR) 등은 한국전력, 한국전력 자회사, 지역난방공사, 해외 발전 관계사 및 국내 건설사 등으로 수주 활동을 하고 있습니다. 설계방식에 의한 수주생산으로 제품의 규격이 상이하며 일률적인 제품가격의 산정이 어렵습니다."
+    "investor_note": "SNT에너지 주식회사의 주요 사업은 동력사업입니다. 건설사, NOOTER ERIKSEN, 지멘스 HTT 등 해외 고객사와 협력 관계를 유지하며 영업활동을 하고 있습니다.또한, 복수기(SURFACE CONDENSER), 질소산화물 저감장치(SCR) 등은 한국전력, 한국전력 자회사, 지역난방공사, 해외 발전 관계사 및 국내 건설사 등으로 수주 활동을 하고 있습니다. 설계방식에 의한 수주생산으로 제품의 규격이 상이하며 일률적인 제품가격의 산정이 어렵습니다.",
+    "product_service_segments": [
+      {
+        "name": "AIR COOLER",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 88.9%",
+        "revenue_share": 0.889,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "HRSG",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.1%",
+        "revenue_share": 0.091,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "SCR 설비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.02,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총 매출액",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "철강",
-      "caption": "철강 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "material",
-      "visual": "철강",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "title": "AIR COOLER",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 88.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "SIEMENS (독일)",
-      "caption": "SIEMENS (독일) 관련 제품과 서비스를 통해 매출을 만듭니다.",
+      "title": "HRSG",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.1%",
       "kind": "service",
-      "visual": "SIEMENS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "SCR 설비",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

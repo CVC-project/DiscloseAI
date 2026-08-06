@@ -156,18 +156,24 @@
     "segment_breakdown": [
       {
         "name": "공사부문",
-        "desc": "반도체·디스플레이 설비 설계·시공(케이씨이앤씨)",
-        "revenue_share": 0.462
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.2%",
+        "revenue_share": 0.462,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "장비부문",
-        "desc": "가스·화학약품 공급장치 등 산업용 기계장치 제조",
-        "revenue_share": 0.272
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.2%",
+        "revenue_share": 0.272,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "소재 및 부품",
-        "desc": "산업용 가스·소재부품 수출입 및 제조판매",
-        "revenue_share": 0.25
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.0%",
+        "revenue_share": 0.25,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -178,40 +184,55 @@
       "산업용·특수가스 공급",
       "에칭용 실리콘파트"
     ],
-    "investor_note": "매출은 설비 시공을 담당하는 공사부문이 46.2%로 가장 크고, 장비부문 27.2%, 소재·부품 25.0%가 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 7,973억 원으로 전년 대비 8.0% 늘었고 영업이익은 464억 원으로 66.1% 크게 증가했지만, 당기순이익은 504억 원으로 오히려 2.0% 줄었습니다. 부채비율은 19.0%로 재무구조는 안정적인 편입니다."
+    "investor_note": "매출은 설비 시공을 담당하는 공사부문이 46.2%로 가장 크고, 장비부문 27.2%, 소재·부품 25.0%가 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 7,973억 원으로 전년 대비 8.0% 늘었고 영업이익은 464억 원으로 66.1% 크게 증가했지만, 당기순이익은 504억 원으로 오히려 2.0% 줄었습니다. 부채비율은 19.0%로 재무구조는 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "공사부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.2%",
+        "revenue_share": 0.462,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "장비부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.2%",
+        "revenue_share": 0.272,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "소재 및 부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.0%",
+        "revenue_share": 0.25,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "Gas 공급장치",
-      "caption": "Gas 공급장치 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "공사부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.2%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "Chemical(CCSS) 공급장치",
-      "caption": "Chemical(CCSS) 공급장치 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "장비부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.2%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "반도체 배관시공",
-      "caption": "반도체 배관시공 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "chip",
-      "visual": "CHIP",
-      "image": "../data/business_images/business_image_local_semiconductor_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "Gas Scrubber/Purifier/IR Oven",
-      "caption": "Gas Scrubber/Purifier/IR Oven 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "title": "소재 및 부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.0%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

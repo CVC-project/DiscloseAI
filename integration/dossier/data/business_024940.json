@@ -155,14 +155,32 @@
     "segment_finance": "PN풍년은 '풍년' 브랜드 압력솥과 전기밥솥 등 주방용품을 만들어온 종합주방회사로, 자체 제품(36%)뿐 아니라 상품 유통(59%)의 비중도 크며, 자회사 피엔랩을 통해 온라인·가전 판매도 확대하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 560억 원으로 전년 대비 2.0% 늘었고 영업이익과 당기순이익은 각각 70.2%, 81.3% 크게 증가했습니다. 부채비율은 17.6%로 낮아 재무 구조가 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "주방용품 유통(상품)",
-        "desc": "압력솥 등 상품 판매",
-        "revenue_share": 0.593
+        "name": "피엔풍년",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.9%",
+        "revenue_share": 0.359,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "전기가전(피엔랩)",
-        "desc": "모노 브랜드 온라인 전기가전 판매",
-        "revenue_share": 0.014
+        "name": "상 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.3%",
+        "revenue_share": 0.593,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "부 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.03,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임대료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.002,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -171,32 +189,62 @@
       "기물류(주방용품)",
       "전기가전(모노 브랜드)"
     ],
-    "investor_note": "PN풍년은 '풍년' 브랜드 압력솥과 전기밥솥 등 주방용품을 만들어온 종합주방회사로, 자체 제품(36%)뿐 아니라 상품 유통(59%)의 비중도 크며, 자회사 피엔랩을 통해 온라인·가전 판매도 확대하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 560억 원으로 전년 대비 2.0% 늘었고 영업이익과 당기순이익은 각각 70.2%, 81.3% 크게 증가했습니다. 부채비율은 17.6%로 낮아 재무 구조가 안정적인 편입니다."
+    "investor_note": "PN풍년은 '풍년' 브랜드 압력솥과 전기밥솥 등 주방용품을 만들어온 종합주방회사로, 자체 제품(36%)뿐 아니라 상품 유통(59%)의 비중도 크며, 자회사 피엔랩을 통해 온라인·가전 판매도 확대하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 560억 원으로 전년 대비 2.0% 늘었고 영업이익과 당기순이익은 각각 70.2%, 81.3% 크게 증가했습니다. 부채비율은 17.6%로 낮아 재무 구조가 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "피엔풍년",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.9%",
+        "revenue_share": 0.359,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.3%",
+        "revenue_share": 0.593,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "부 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.03,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임대료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.002,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "주방용품 제조(제품)",
-      "caption": "압력솥 등 자체 생산 주방용품(풍년 브랜드)",
+      "title": "피엔풍년",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.9%",
       "kind": "service",
-      "visual": "주방용품",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "주방용품 유통(상품)",
-      "caption": "압력솥 등 상품 판매",
+      "title": "상 품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.3%",
       "kind": "service",
-      "visual": "주방용품",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "전기가전(피엔랩)",
-      "caption": "모노 브랜드 온라인 전기가전 판매",
+      "title": "부 품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
       "kind": "service",
-      "visual": "전기가전",
-      "image": "../data/business_images/business_image_local_default_c.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

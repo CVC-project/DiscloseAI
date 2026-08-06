@@ -105,7 +105,36 @@
   "snippets": {
     "overview": "주식회사 파인메딕스의 주요 사업은 사업분야, 신규사업, 유통사업, 산학연협력사업 등입니다. 당사는 의료 현장의 실질적인 요구를 반영하여 내시경용 시술 기구를 자체 개발, 생산 및 판매하고 있으며, 이를 통해 국내외 의료 시장에서의 경쟁력을 확고히 하고 있습니다. 다만, 크게 두가지 병원 형태의 수주 및 납품을 진행하고 있습니다.",
     "segment_finance": "주식회사 파인메딕스의 주요 사업은 사업분야, 신규사업, 유통사업, 산학연협력사업 등입니다. 당사는 의료 현장의 실질적인 요구를 반영하여 내시경용 시술 기구를 자체 개발, 생산 및 판매하고 있으며, 이를 통해 국내외 의료 시장에서의 경쟁력을 확고히 하고 있습니다. 다만, 크게 두가지 병원 형태의 수주 및 납품을 진행하고 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "내시경시술기구",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.1%",
+        "revenue_share": 0.1808,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Clear Grasp Snare",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.9%",
+        "revenue_share": 0.2692,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Clear Cut Knife",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.1%",
+        "revenue_share": 0.1905,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Clear Hemograsper",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.9%",
+        "revenue_share": 0.0191,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "의약품",
       "내시경 시술 기구",
@@ -120,40 +149,70 @@
       "제품화 단계",
       "판매 단계"
     ],
-    "investor_note": "주식회사 파인메딕스의 주요 사업은 사업분야, 신규사업, 유통사업, 산학연협력사업 등입니다. 당사는 의료 현장의 실질적인 요구를 반영하여 내시경용 시술 기구를 자체 개발, 생산 및 판매하고 있으며, 이를 통해 국내외 의료 시장에서의 경쟁력을 확고히 하고 있습니다. 다만, 크게 두가지 병원 형태의 수주 및 납품을 진행하고 있습니다."
+    "investor_note": "주식회사 파인메딕스의 주요 사업은 사업분야, 신규사업, 유통사업, 산학연협력사업 등입니다. 당사는 의료 현장의 실질적인 요구를 반영하여 내시경용 시술 기구를 자체 개발, 생산 및 판매하고 있으며, 이를 통해 국내외 의료 시장에서의 경쟁력을 확고히 하고 있습니다. 다만, 크게 두가지 병원 형태의 수주 및 납품을 진행하고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "내시경시술기구",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.1%",
+        "revenue_share": 0.1808,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Clear Grasp Snare",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.9%",
+        "revenue_share": 0.2692,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Clear Cut Knife",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.1%",
+        "revenue_share": 0.1905,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Clear Hemograsper",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.9%",
+        "revenue_share": 0.0191,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "의약품",
-      "caption": "의약품 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "내시경 시술 기구",
-      "caption": "내시경 시술 기구 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "내시경시술기구",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.1%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "치료내시경",
-      "caption": "치료내시경 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "Clear Grasp Snare",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.9%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "EMR 시술용 제품",
-      "caption": "EMR 시술용 제품 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "Clear Cut Knife",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.1%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "Clear Hemograsper",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

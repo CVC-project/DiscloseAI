@@ -155,19 +155,11 @@
     "segment_finance": "에스아이리소스는 팜유 등을 가공해 만든 바이오중유를 국내 발전사에 공급하는 자원판매 기업으로, 러시아 사할린산 이탄(피트모스)의 국내 유통도 함께 하고 있습니다. 매출의 98%가 바이오중유 제조판매에서 나오며 이탄 채굴판매가 나머지를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 208억 원으로 전년 대비 97.9% 늘었고 영업손실과 순손실 규모도 각각 줄어드는 등 개선세를 보였습니다. 다만 감사인은 경쟁 심화에 따른 영업손실 지속으로 바이오중유사업 자산의 손상 가능성을 핵심감사사항으로 짚었고, 부채비율은 64.2% 수준입니다.",
     "segment_breakdown": [
       {
-        "name": "바이오연료 제조판매",
-        "desc": "팜유 등을 가공한 바이오중유를 발전사에 공급",
-        "revenue_share": 0.98
-      },
-      {
-        "name": "이탄 채굴판매",
-        "desc": "러시아 사할린산 이탄(피트모스)을 수입·유통",
-        "revenue_share": 0.02
-      },
-      {
-        "name": "유연탄 채굴판매",
-        "desc": "러시아산 유연탄 중계무역(당기 매출 없음)",
-        "revenue_share": 0
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.02,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -175,32 +167,48 @@
       "이탄(피트모스)",
       "유연탄"
     ],
-    "investor_note": "에스아이리소스는 팜유 등을 가공해 만든 바이오중유를 국내 발전사에 공급하는 자원판매 기업으로, 러시아 사할린산 이탄(피트모스)의 국내 유통도 함께 하고 있습니다. 매출의 98%가 바이오중유 제조판매에서 나오며 이탄 채굴판매가 나머지를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 208억 원으로 전년 대비 97.9% 늘었고 영업손실과 순손실 규모도 각각 줄어드는 등 개선세를 보였습니다. 다만 감사인은 경쟁 심화에 따른 영업손실 지속으로 바이오중유사업 자산의 손상 가능성을 핵심감사사항으로 짚었고, 부채비율은 64.2% 수준입니다."
+    "investor_note": "에스아이리소스는 팜유 등을 가공해 만든 바이오중유를 국내 발전사에 공급하는 자원판매 기업으로, 러시아 사할린산 이탄(피트모스)의 국내 유통도 함께 하고 있습니다. 매출의 98%가 바이오중유 제조판매에서 나오며 이탄 채굴판매가 나머지를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 208억 원으로 전년 대비 97.9% 늘었고 영업손실과 순손실 규모도 각각 줄어드는 등 개선세를 보였습니다. 다만 감사인은 경쟁 심화에 따른 영업손실 지속으로 바이오중유사업 자산의 손상 가능성을 핵심감사사항으로 짚었고, 부채비율은 64.2% 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.02,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 98.0%",
+        "revenue_share": 0.98,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "바이오연료 제조판매",
-      "caption": "팜유 등을 가공한 바이오중유를 발전사에 공급",
+      "title": "바이오중유",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
       "kind": "bio",
-      "visual": "바이오연료",
-      "image": "../data/business_images/business_image_local_power.svg",
-      "image_source": "Local curated visual"
+      "visual": "BIO",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "이탄 채굴판매",
-      "caption": "러시아 사할린산 이탄(피트모스)을 수입·유통",
-      "kind": "service",
-      "visual": "이탄",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "title": "이탄(피트모스)",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "유연탄 채굴판매",
-      "caption": "러시아산 유연탄 중계무역(당기 매출 없음)",
-      "kind": "service",
-      "visual": "유연탄",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "title": "유연탄",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

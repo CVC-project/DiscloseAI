@@ -121,7 +121,29 @@
   "snippets": {
     "overview": "(주)포스뱅크의 주요 제품·서비스는 SSD, 제품매출, POS, WAVEAPEXA CORE, 하청제품(ODM, O 포트입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 또한 당사는 글로벌 결제 솔루션 선도 기업들과의 협력을 바탕으로 고객 맞춤형 ODM 제품을 개발·공급하고 있으며, 세계적인 패스트푸드 및 편의점 프랜차이즈를 대상으로 한 다양한 프로젝트를 수주함으로써 글로벌 시장 내 사업 기회를 지속적으로 확대해 나가고 있습니다. 글로벌 스탠다드에 부합하는 품질과 고객 중심의 혁신을 바탕으로 전 세계 시장에 최적화된 결제 인프라를 제공하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "(주)포스뱅크의 주요 제품·서비스는 SSD, 제품매출, POS, WAVEAPEXA CORE, 하청제품(ODM, O 포트입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 또한 당사는 글로벌 결제 솔루션 선도 기업들과의 협력을 바탕으로 고객 맞춤형 ODM 제품을 개발·공급하고 있으며, 세계적인 패스트푸드 및 편의점 프랜차이즈를 대상으로 한 다양한 프로젝트를 수주함으로써 글로벌 시장 내 사업 기회를 지속적으로 확대해 나가고 있습니다. 글로벌 스탠다드에 부합하는 품질과 고객 중심의 혁신을 바탕으로 전 세계 시장에 최적화된 결제 인프라를 제공하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "KIOSK",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.3%",
+        "revenue_share": 0.0835,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.2%",
+        "revenue_share": 0.0618,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.9%",
+        "revenue_share": 0.0086,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "SSD",
       "POS",
@@ -134,24 +156,46 @@
       "고속 프린터",
       "매입처"
     ],
-    "investor_note": "(주)포스뱅크의 주요 제품·서비스는 SSD, 제품매출, POS, WAVEAPEXA CORE, 하청제품(ODM, O 포트입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 또한 당사는 글로벌 결제 솔루션 선도 기업들과의 협력을 바탕으로 고객 맞춤형 ODM 제품을 개발·공급하고 있으며, 세계적인 패스트푸드 및 편의점 프랜차이즈를 대상으로 한 다양한 프로젝트를 수주함으로써 글로벌 시장 내 사업 기회를 지속적으로 확대해 나가고 있습니다. 글로벌 스탠다드에 부합하는 품질과 고객 중심의 혁신을 바탕으로 전 세계 시장에 최적화된 결제 인프라를 제공하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)포스뱅크의 주요 제품·서비스는 SSD, 제품매출, POS, WAVEAPEXA CORE, 하청제품(ODM, O 포트입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 또한 당사는 글로벌 결제 솔루션 선도 기업들과의 협력을 바탕으로 고객 맞춤형 ODM 제품을 개발·공급하고 있으며, 세계적인 패스트푸드 및 편의점 프랜차이즈를 대상으로 한 다양한 프로젝트를 수주함으로써 글로벌 시장 내 사업 기회를 지속적으로 확대해 나가고 있습니다. 글로벌 스탠다드에 부합하는 품질과 고객 중심의 혁신을 바탕으로 전 세계 시장에 최적화된 결제 인프라를 제공하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "제품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 70.8%",
+        "revenue_share": 0.7082,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "KIOSK",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.3%",
+        "revenue_share": 0.0835,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.2%",
+        "revenue_share": 0.0618,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.9%",
+        "revenue_share": 0.0086,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "WAVEAPEXA CORE",
-      "caption": "WAVEAPEXA CORE 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "KIOSK",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.3%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "하청제품(ODM",
-      "caption": "하청제품(ODM 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

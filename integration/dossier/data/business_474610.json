@@ -105,7 +105,29 @@
   "snippets": {
     "overview": "그 외 원자재에 대해서는 수주 시점에 맞춰 조달 및 생산 그리고, 납기일정을 감안하여 각 품목별로 발주를 진행합니다.",
     "segment_finance": "그 외 원자재에 대해서는 수주 시점에 맞춰 조달 및 생산 그리고, 납기일정을 감안하여 각 품목별로 발주를 진행합니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "안테나시스템",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.7%",
+        "revenue_share": 0.3967,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "환경제어시스템",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.0%",
+        "revenue_share": 0.1201,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "민수",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.6%",
+        "revenue_share": 0.1155,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "배터리",
       "레이다시스템",
@@ -114,40 +136,62 @@
       "IT 디바이스",
       "조립"
     ],
-    "investor_note": "그 외 원자재에 대해서는 수주 시점에 맞춰 조달 및 생산 그리고, 납기일정을 감안하여 각 품목별로 발주를 진행합니다."
+    "investor_note": "그 외 원자재에 대해서는 수주 시점에 맞춰 조달 및 생산 그리고, 납기일정을 감안하여 각 품목별로 발주를 진행합니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.9%",
+        "revenue_share": 0.3391,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "안테나시스템",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.7%",
+        "revenue_share": 0.3967,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "환경제어시스템",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.0%",
+        "revenue_share": 0.1201,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "민수",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.6%",
+        "revenue_share": 0.1155,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "레이다시스템",
-      "caption": "레이다시스템 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "안테나시스템",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.7%",
       "kind": "material",
       "visual": "MAT",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "배터리",
-      "caption": "배터리 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "소재",
-      "caption": "소재 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "환경제어시스템",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.0%",
       "kind": "material",
       "visual": "MAT",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "화학",
-      "caption": "화학 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "민수",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.6%",
       "kind": "material",
       "visual": "MAT",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

@@ -155,9 +155,25 @@
     "segment_finance": "인바이오 주식회사의 주요 제품·서비스는 유액제, 살균제, 제품상품 임가공매출, 인바이오 -> 농약판매업자, 제품매출, 자산처리입니다. 현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. 작물의 시기에 맞추어 생산과 판매가 이루어지며, 농업 환경의 변동에 주요한 영향을 받습니다. 또한 시군별중점거래처를 육성하여 지역에서 당사 제품의 영향력을 높여가고 있으며, 매년 신규품목수를 확대하고, 고수익 제품의 판매비중을 높여가고 있습니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다.",
     "segment_breakdown": [
       {
-        "name": "인바이오 -> 농약판매업자",
-        "desc": "인바이오 -> 농약판매업자 관련 제품·서비스",
-        "revenue_share": null
+        "name": "수화제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.3%",
+        "revenue_share": 0.1033,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "입제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.4%",
+        "revenue_share": 0.0942,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "입상수화제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.4%",
+        "revenue_share": 0.1137,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -170,40 +186,62 @@
       "관련제품",
       "산림청"
     ],
-    "investor_note": "인바이오 주식회사의 주요 제품·서비스는 유액제, 살균제, 제품상품 임가공매출, 인바이오 -> 농약판매업자, 제품매출, 자산처리입니다. 현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. 작물의 시기에 맞추어 생산과 판매가 이루어지며, 농업 환경의 변동에 주요한 영향을 받습니다. 또한 시군별중점거래처를 육성하여 지역에서 당사 제품의 영향력을 높여가고 있으며, 매년 신규품목수를 확대하고, 고수익 제품의 판매비중을 높여가고 있습니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다."
+    "investor_note": "인바이오 주식회사의 주요 제품·서비스는 유액제, 살균제, 제품상품 임가공매출, 인바이오 -> 농약판매업자, 제품매출, 자산처리입니다. 현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. 작물의 시기에 맞추어 생산과 판매가 이루어지며, 농업 환경의 변동에 주요한 영향을 받습니다. 또한 시군별중점거래처를 육성하여 지역에서 당사 제품의 영향력을 높여가고 있으며, 매년 신규품목수를 확대하고, 고수익 제품의 판매비중을 높여가고 있습니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.9%",
+        "revenue_share": 0.5386,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "수화제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.3%",
+        "revenue_share": 0.1033,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "입제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.4%",
+        "revenue_share": 0.0942,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "입상수화제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.4%",
+        "revenue_share": 0.1137,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "유액제",
-      "caption": "유액제 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "수화제",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.3%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_agro.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "살균제",
-      "caption": "살균제 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "입제",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.4%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_agro.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "제품상품 임가공",
-      "caption": "제품상품 임가공 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "입상수화제",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.4%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_agro.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "인바이오 -> 농약판매업자",
-      "caption": "인바이오 -> 농약판매업자 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_agro.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

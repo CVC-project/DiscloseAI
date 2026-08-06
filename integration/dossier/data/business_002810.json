@@ -155,19 +155,25 @@
     "segment_finance": "삼영무역은 화공약품(용제·모노머 등) 유통, 안경렌즈 수출, 자회사를 통한 자동차부품(Curl-Fit 내장재·라디에이터그릴 등) 제조까지 세 축으로 운영하는 종합상사형 기업입니다. 매출은 자동차부품(51%)과 화공약품(40%)이 대부분이고, 렌즈부문은 관계기업 지분법이익으로도 이익에 보탬이 됩니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 4,468억 원으로 전년보다 6.9% 줄고 영업이익도 30.5% 감소했지만, 당기순이익은 613억 원으로 소폭(-2.0%) 감소에 그쳤습니다. 부채비율은 15.6%로 매우 낮아 재무 안정성은 양호한 편입니다.",
     "segment_breakdown": [
       {
-        "name": "자동차부품 제조",
-        "desc": "Curl-Fit 내장재, 라디에이터그릴 등 외장재",
-        "revenue_share": 0.508
-      },
-      {
         "name": "화공약품 판매",
-        "desc": "용제·모노머 등 화공약품 유통",
-        "revenue_share": 0.403
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.3%",
+        "revenue_share": 0.403,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "안경렌즈 판매",
-        "desc": "시력보정용 플라스틱 안경렌즈 수출",
-        "revenue_share": 0.067
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.7%",
+        "revenue_share": 0.067,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동차부품 제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.8%",
+        "revenue_share": 0.508,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -179,32 +185,55 @@
       "가니쉬·몰딩",
       "휠캡"
     ],
-    "investor_note": "삼영무역은 화공약품(용제·모노머 등) 유통, 안경렌즈 수출, 자회사를 통한 자동차부품(Curl-Fit 내장재·라디에이터그릴 등) 제조까지 세 축으로 운영하는 종합상사형 기업입니다. 매출은 자동차부품(51%)과 화공약품(40%)이 대부분이고, 렌즈부문은 관계기업 지분법이익으로도 이익에 보탬이 됩니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 4,468억 원으로 전년보다 6.9% 줄고 영업이익도 30.5% 감소했지만, 당기순이익은 613억 원으로 소폭(-2.0%) 감소에 그쳤습니다. 부채비율은 15.6%로 매우 낮아 재무 안정성은 양호한 편입니다."
+    "investor_note": "삼영무역은 화공약품(용제·모노머 등) 유통, 안경렌즈 수출, 자회사를 통한 자동차부품(Curl-Fit 내장재·라디에이터그릴 등) 제조까지 세 축으로 운영하는 종합상사형 기업입니다. 매출은 자동차부품(51%)과 화공약품(40%)이 대부분이고, 렌즈부문은 관계기업 지분법이익으로도 이익에 보탬이 됩니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 4,468억 원으로 전년보다 6.9% 줄고 영업이익도 30.5% 감소했지만, 당기순이익은 613억 원으로 소폭(-2.0%) 감소에 그쳤습니다. 부채비율은 15.6%로 매우 낮아 재무 안정성은 양호한 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "화공약품 판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.3%",
+        "revenue_share": 0.403,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "안경렌즈 판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.7%",
+        "revenue_share": 0.067,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동차부품 제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.8%",
+        "revenue_share": 0.508,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "자동차부품 제조",
-      "caption": "Curl-Fit 내장재, 라디에이터그릴 등 외장재",
-      "kind": "auto",
-      "visual": "자동차부품",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "title": "화공약품 판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.3%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "화공약품 판매",
-      "caption": "용제·모노머 등 화공약품 유통",
+      "title": "안경렌즈 판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.7%",
       "kind": "service",
-      "visual": "화공약품",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "안경렌즈 판매",
-      "caption": "시력보정용 플라스틱 안경렌즈 수출",
-      "kind": "service",
-      "visual": "안경렌즈",
-      "image": "../data/business_images/business_image_local_default_c.svg",
-      "image_source": "Local curated visual"
+      "title": "자동차부품 제조",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.8%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

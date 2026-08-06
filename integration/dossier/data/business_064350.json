@@ -110,19 +110,32 @@
     "segment_finance": "",
     "segment_breakdown": [
       {
-        "name": "디펜스솔루션",
-        "desc": "지상무기체계, 미래무인체계, 항공우주 발사체 등",
-        "revenue_share": 0.55
+        "name": "디펜스솔루션 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.0%",
+        "revenue_share": 0.55,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "레일솔루션",
-        "desc": "철도차량 제조, 철도시스템, 운영 및 유지보수",
-        "revenue_share": 0.36
+        "name": "레일솔루션 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 36.0%",
+        "revenue_share": 0.36,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "에코플랜트",
-        "desc": "수소인프라, 산업용 로봇, 제철설비, 스마트물류",
-        "revenue_share": 0.09
+        "name": "에코플랜트 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.0%",
+        "revenue_share": 0.09,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총 합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "investor_note": "현대로템은 K2전차, KTX 열차, 수소전기트램 등을 만드는 방위산업·철도·친환경 에너지 기업으로, 매출액이 5조 8,390억 원으로 전년 대비 33% 크게 증가했습니다(영업이익률 17.2%로 개선). 사업은 방위사업(55%), 철도차량(36%), 수소·로봇·제철설비(9%)로 나뉘는데, 대형 수주 프로젝트들이 본격 이행되면서 순이익도 770억 원으로 90% 증가했습니다. 다만 부채비율이 206%로 높은데, 이는 철도·방위사업 특성상 고객 선수금이 많아서이며 현금도 908억 원으로 충분합니다(자기자본이익률 25.3%는 투자한 자본 대비 수익성이 높다는 뜻). 배당금도 600원으로 전년의 3배 증가했고 향후 계속 늘릴 계획입니다. 과거 공시 기반 참고 정보입니다.",
@@ -141,31 +154,61 @@
       "수소충전소"
     ],
     "raw_moves": [],
-    "utilization": []
+    "utilization": [],
+    "product_service_segments": [
+      {
+        "name": "디펜스솔루션 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.0%",
+        "revenue_share": 0.55,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "레일솔루션 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 36.0%",
+        "revenue_share": 0.36,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "에코플랜트 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.0%",
+        "revenue_share": 0.09,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총 합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "철도",
-      "caption": "전동차, 고속철, 유지보수 수주를 봅니다.",
-      "kind": "factory",
-      "visual": "RAIL",
+      "title": "소프트웨어·솔루션",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.0%",
+      "kind": "service",
+      "visual": "SOFTWARE",
       "image": "../data/business_images/business_image_1805fba8159acac6.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "방산",
-      "caption": "전차와 장갑차 등 방산 수출 계약이 중요합니다.",
-      "kind": "aero",
-      "visual": "DEF",
-      "image": "../data/business_images/business_image_1805fba8159acac6.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "플랜트",
-      "caption": "생산설비와 자동화 사업도 실적을 보탭니다.",
-      "kind": "factory",
-      "visual": "PLANT",
+      "title": "토목·플랜트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.0%",
+      "kind": "service",
+      "visual": "CONSTRUCTION",
       "image": "../data/business_images/business_image_5184e050831a4460.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "총 합계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_1805fba8159acac6.avif",
       "image_source": "Unsplash"
     }
   ],

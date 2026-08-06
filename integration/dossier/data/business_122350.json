@@ -153,7 +153,36 @@
   "snippets": {
     "overview": "신규 Item의 경우에도 입찰경쟁을 통해 수주 및 납품하는 형태이고 이 역시 기본거래조건만 체결하고 있습니다. 또한 세계를 무대로 경쟁하고 발전하기 위해서 축적된 기술 및 품질과 신뢰를 바탕으로 고객 만족을 실현하고, 끊임없는 기술개발과 원가절감을 통해 경쟁력있는 가격과 품질로 제품의 생산과 공급을 이룰 것입니다.",
     "segment_finance": "신규 Item의 경우에도 입찰경쟁을 통해 수주 및 납품하는 형태이고 이 역시 기본거래조건만 체결하고 있습니다. 또한 세계를 무대로 경쟁하고 발전하기 위해서 축적된 기술 및 품질과 신뢰를 바탕으로 고객 만족을 실현하고, 끊임없는 기술개발과 원가절감을 통해 경쟁력있는 가격과 품질로 제품의 생산과 공급을 이룰 것입니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "엔진부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.7%",
+        "revenue_share": 0.357,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "변속기부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.7%",
+        "revenue_share": 0.317,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전기차부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.2%",
+        "revenue_share": 0.032,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "HEV",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.2%",
+        "revenue_share": 0.222,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "배터리",
       "합금",
@@ -165,38 +194,52 @@
       "생산설비 등",
       "엔진부품"
     ],
-    "investor_note": "신규 Item의 경우에도 입찰경쟁을 통해 수주 및 납품하는 형태이고 이 역시 기본거래조건만 체결하고 있습니다. 또한 세계를 무대로 경쟁하고 발전하기 위해서 축적된 기술 및 품질과 신뢰를 바탕으로 고객 만족을 실현하고, 끊임없는 기술개발과 원가절감을 통해 경쟁력있는 가격과 품질로 제품의 생산과 공급을 이룰 것입니다."
+    "investor_note": "신규 Item의 경우에도 입찰경쟁을 통해 수주 및 납품하는 형태이고 이 역시 기본거래조건만 체결하고 있습니다. 또한 세계를 무대로 경쟁하고 발전하기 위해서 축적된 기술 및 품질과 신뢰를 바탕으로 고객 만족을 실현하고, 끊임없는 기술개발과 원가절감을 통해 경쟁력있는 가격과 품질로 제품의 생산과 공급을 이룰 것입니다.",
+    "product_service_segments": [
+      {
+        "name": "엔진부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.7%",
+        "revenue_share": 0.357,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "변속기부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.7%",
+        "revenue_share": 0.317,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전기차부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.2%",
+        "revenue_share": 0.032,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "HEV",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.2%",
+        "revenue_share": 0.222,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "배터리",
-      "caption": "배터리 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
+      "title": "구동계 부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.7%",
+      "kind": "auto",
+      "visual": "PARTS",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "합금",
-      "caption": "합금 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "전기차·하이브리드",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.2%",
       "kind": "auto",
-      "visual": "AUTO",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "해당없음",
-      "caption": "해당없음 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "auto",
-      "visual": "AUTO",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "INGOT 등",
-      "caption": "INGOT 등 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "auto",
-      "visual": "AUTO",
+      "visual": "EV",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     }

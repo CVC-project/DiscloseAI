@@ -155,19 +155,25 @@
     "segment_finance": "신흥은 치과용 유니트체어(진료대)·합금·주사침 등을 자체 제조하는 한편, 치과 소모품·기자재를 유통하는 국내 대표 치과 의료기기·용품 기업으로, 자회사 신흥MST를 통해 임플란트도 생산합니다. 매출의 대부분(약 72%)이 유통 상품 판매에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,026억 원으로 전년 대비 0.8% 늘었고 영업이익도 13.0% 증가했지만, 당기순이익은 43.8% 줄었습니다. 부채비율은 29.0%로 낮은 편입니다.",
     "segment_breakdown": [
       {
-        "name": "상품(유통)",
-        "desc": "치과 의료기기·재료 소모품 유통판매",
-        "revenue_share": 0.718
+        "name": "치과진료대",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.1%",
+        "revenue_share": 0.061,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "임플란트 제조(신흥MST)",
-        "desc": "인공치아 Fixture·Abutment 등 임플란트 제품 제조판매",
-        "revenue_share": null
+        "name": "합금유치관",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.1%",
+        "revenue_share": 0.101,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "개원자금 대여(서울대부)",
-        "desc": "치과의료인 대상 개업·시설자금 대여",
-        "revenue_share": null
+        "name": "주사침",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.2%",
+        "revenue_share": 0.022,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -179,32 +185,62 @@
       "임플란트(Fixture·Abutment)",
       "덴탈비타민"
     ],
-    "investor_note": "신흥은 치과용 유니트체어(진료대)·합금·주사침 등을 자체 제조하는 한편, 치과 소모품·기자재를 유통하는 국내 대표 치과 의료기기·용품 기업으로, 자회사 신흥MST를 통해 임플란트도 생산합니다. 매출의 대부분(약 72%)이 유통 상품 판매에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,026억 원으로 전년 대비 0.8% 늘었고 영업이익도 13.0% 증가했지만, 당기순이익은 43.8% 줄었습니다. 부채비율은 29.0%로 낮은 편입니다."
+    "investor_note": "신흥은 치과용 유니트체어(진료대)·합금·주사침 등을 자체 제조하는 한편, 치과 소모품·기자재를 유통하는 국내 대표 치과 의료기기·용품 기업으로, 자회사 신흥MST를 통해 임플란트도 생산합니다. 매출의 대부분(약 72%)이 유통 상품 판매에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,026억 원으로 전년 대비 0.8% 늘었고 영업이익도 13.0% 증가했지만, 당기순이익은 43.8% 줄었습니다. 부채비율은 29.0%로 낮은 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.4%",
+        "revenue_share": 0.034,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "치과진료대",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.1%",
+        "revenue_share": 0.061,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "합금유치관",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.1%",
+        "revenue_share": 0.101,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "주사침",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.2%",
+        "revenue_share": 0.022,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "상품(유통)",
-      "caption": "치과 의료기기·재료 소모품 유통판매",
-      "kind": "service",
-      "visual": "상품",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "title": "의료기기",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.1%",
+      "kind": "bio",
+      "visual": "MEDICAL",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "임플란트 제조(신흥MST)",
-      "caption": "인공치아 Fixture·Abutment 등 임플란트 제품 제조판매",
+      "title": "합금유치관",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.1%",
       "kind": "service",
-      "visual": "임플란트",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "개원자금 대여(서울대부)",
-      "caption": "치과의료인 대상 개업·시설자금 대여",
+      "title": "주사침",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.2%",
       "kind": "service",
-      "visual": "개원자금",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -155,29 +155,25 @@
     "segment_finance": "롯데쇼핑은 백화점·할인점(롯데마트)·전자제품전문점(하이마트)·슈퍼·홈쇼핑·영화관(롯데시네마)·이커머스(롯데ON)까지 유통 전반을 아우르는 종합유통기업으로, 국내는 물론 베트남·인도네시아에도 점포를 운영하고 있습니다. 과거 공시 기반 참고 정보로, 연결 매출액은 13조 7,383억 원으로 전년 대비 1.8% 감소했지만 영업이익은 5,470억 원으로 15.6% 늘었고, 당기순이익은 735억 원으로 흑자 전환했습니다. 부채비율은 124.8%로 다소 높은 편이라 재무구조를 함께 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "마트·슈퍼",
-        "desc": "할인점과 슈퍼마켓",
-        "revenue_share": 0.487
-      },
-      {
         "name": "백화점",
-        "desc": "국내외 롯데백화점",
-        "revenue_share": 0.243
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.3%",
+        "revenue_share": 0.243,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "가전전문점",
-        "desc": "롯데하이마트 가전 도소매",
-        "revenue_share": 0.167
+        "name": "할인점",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.8%",
+        "revenue_share": 0.398,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "홈쇼핑·이커머스",
-        "desc": "TV·모바일 커머스와 롯데ON",
-        "revenue_share": 0.074
-      },
-      {
-        "name": "영화상영",
-        "desc": "롯데시네마 영화관 운영",
-        "revenue_share": 0.032
+        "name": "슈퍼",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.9%",
+        "revenue_share": 0.089,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -189,39 +185,69 @@
       "영화상영업(롯데시네마)",
       "이커머스(롯데ON)"
     ],
-    "investor_note": "롯데쇼핑은 백화점·할인점(롯데마트)·전자제품전문점(하이마트)·슈퍼·홈쇼핑·영화관(롯데시네마)·이커머스(롯데ON)까지 유통 전반을 아우르는 종합유통기업으로, 국내는 물론 베트남·인도네시아에도 점포를 운영하고 있습니다. 과거 공시 기반 참고 정보로, 연결 매출액은 13조 7,383억 원으로 전년 대비 1.8% 감소했지만 영업이익은 5,470억 원으로 15.6% 늘었고, 당기순이익은 735억 원으로 흑자 전환했습니다. 부채비율은 124.8%로 다소 높은 편이라 재무구조를 함께 살펴볼 필요가 있습니다."
+    "investor_note": "롯데쇼핑은 백화점·할인점(롯데마트)·전자제품전문점(하이마트)·슈퍼·홈쇼핑·영화관(롯데시네마)·이커머스(롯데ON)까지 유통 전반을 아우르는 종합유통기업으로, 국내는 물론 베트남·인도네시아에도 점포를 운영하고 있습니다. 과거 공시 기반 참고 정보로, 연결 매출액은 13조 7,383억 원으로 전년 대비 1.8% 감소했지만 영업이익은 5,470억 원으로 15.6% 늘었고, 당기순이익은 735억 원으로 흑자 전환했습니다. 부채비율은 124.8%로 다소 높은 편이라 재무구조를 함께 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "백화점",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.3%",
+        "revenue_share": 0.243,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "할인점",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.8%",
+        "revenue_share": 0.398,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전자제품 전문점",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.7%",
+        "revenue_share": 0.167,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "슈퍼",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.9%",
+        "revenue_share": 0.089,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "마트·슈퍼",
-      "caption": "할인점과 슈퍼마켓",
-      "kind": "service",
-      "visual": "마트",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "title": "백화점·면세점",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.3%",
+      "kind": "consumer",
+      "visual": "RETAIL",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "백화점",
-      "caption": "국내외 롯데백화점",
-      "kind": "service",
-      "visual": "백화점",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "title": "대형마트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.8%",
+      "kind": "consumer",
+      "visual": "MART",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "가전전문점",
-      "caption": "롯데하이마트 가전 도소매",
+      "title": "전자제품 전문점",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.7%",
       "kind": "service",
-      "visual": "가전전문점",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "홈쇼핑·이커머스",
-      "caption": "TV·모바일 커머스와 롯데ON",
-      "kind": "platform",
-      "visual": "홈쇼핑",
-      "image": "../data/business_images/business_image_141eab6519656e30.jpg",
+      "title": "슈퍼",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
       "image_source": "Wikimedia Commons"
     }
   ],

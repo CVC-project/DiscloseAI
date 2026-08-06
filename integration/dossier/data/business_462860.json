@@ -89,7 +89,22 @@
   "snippets": {
     "overview": "주식회사 더즌의 주요 제품·서비스는 디지털 뱅킹 솔루션, 펌뱅킹가상계좌부가서비스, 메시징 서비스, 플랫폼 제휴 서비스, 부가서비스, FX 솔루션입니다. 메시징 서비스는 대량 메시지 발송을 희망하는 기업 또는 개인 고객의 메시지 발송 수요를 처리하는 서비스입니다. 원재료 등의 가격변동 추이 당사는 펌뱅킹, 가상계좌, 외화정산 등 금융 관련 사업을 영위하고 있어, 일반 제조업과 달리 원재료, 부재료, 저장품 등은 매입이 존재하지 않아 해당사항이 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "주식회사 더즌의 주요 제품·서비스는 디지털 뱅킹 솔루션, 펌뱅킹가상계좌부가서비스, 메시징 서비스, 플랫폼 제휴 서비스, 부가서비스, FX 솔루션입니다. 메시징 서비스는 대량 메시지 발송을 희망하는 기업 또는 개인 고객의 메시지 발송 수요를 처리하는 서비스입니다. 원재료 등의 가격변동 추이 당사는 펌뱅킹, 가상계좌, 외화정산 등 금융 관련 사업을 영위하고 있어, 일반 제조업과 달리 원재료, 부재료, 저장품 등은 매입이 존재하지 않아 해당사항이 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "FX 솔루션",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.1%",
+        "revenue_share": 0.1808,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "데이터 솔루션",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.0296,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "디지털 뱅킹 솔루션",
       "펌뱅킹가상계좌부가서비스",
@@ -104,40 +119,54 @@
       "판매전략",
       "펌뱅킹"
     ],
-    "investor_note": "주식회사 더즌의 주요 제품·서비스는 디지털 뱅킹 솔루션, 펌뱅킹가상계좌부가서비스, 메시징 서비스, 플랫폼 제휴 서비스, 부가서비스, FX 솔루션입니다. 메시징 서비스는 대량 메시지 발송을 희망하는 기업 또는 개인 고객의 메시지 발송 수요를 처리하는 서비스입니다. 원재료 등의 가격변동 추이 당사는 펌뱅킹, 가상계좌, 외화정산 등 금융 관련 사업을 영위하고 있어, 일반 제조업과 달리 원재료, 부재료, 저장품 등은 매입이 존재하지 않아 해당사항이 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사 더즌의 주요 제품·서비스는 디지털 뱅킹 솔루션, 펌뱅킹가상계좌부가서비스, 메시징 서비스, 플랫폼 제휴 서비스, 부가서비스, FX 솔루션입니다. 메시징 서비스는 대량 메시지 발송을 희망하는 기업 또는 개인 고객의 메시지 발송 수요를 처리하는 서비스입니다. 원재료 등의 가격변동 추이 당사는 펌뱅킹, 가상계좌, 외화정산 등 금융 관련 사업을 영위하고 있어, 일반 제조업과 달리 원재료, 부재료, 저장품 등은 매입이 존재하지 않아 해당사항이 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "서비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 45.9%",
+        "revenue_share": 0.4585,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "FX 솔루션",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.1%",
+        "revenue_share": 0.1808,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "데이터 솔루션",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.0296,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "메시징 서비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.8%",
+        "revenue_share": 0.2279,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "디지털 뱅킹 솔루션",
-      "caption": "디지털 뱅킹 솔루션 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "telecom",
-      "visual": "NET",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "펌뱅킹가상계좌부가서비스",
-      "caption": "펌뱅킹가상계좌부가서비스 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "telecom",
-      "visual": "NET",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "title": "소프트웨어·솔루션",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.1%",
+      "kind": "service",
+      "visual": "SOFTWARE",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "메시징 서비스",
-      "caption": "메시징 서비스 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.8%",
       "kind": "telecom",
       "visual": "NET",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "플랫폼 제휴 서비스",
-      "caption": "플랫폼 제휴 서비스 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "telecom",
-      "visual": "NET",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

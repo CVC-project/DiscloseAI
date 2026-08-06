@@ -155,19 +155,25 @@
     "segment_finance": "HLB는 체외진단기기·의약외품을 만드는 헬스케어 사업과, 자회사 Elevar Therapeutics를 통해 경구용 표적항암제 리보세라닙 등 신약을 개발하는 바이오 사업, 구명정·특수선을 만드는 조선기자재 사업, 뷰티 디바이스를 파는 미디어커머스 사업을 함께 운영합니다. 매출은 조선기자재(복합소재) 부문이 절반 이상입니다. 과거 공시 기반 참고 정보로, 최근 매출액(연결)은 841억 원으로 전년 대비 23.6% 늘었지만, 신약 개발 비용 부담으로 당기순손실이 2,354억 원까지 확대됐습니다. 부채비율은 88.1%로 다소 높은 편입니다.",
     "segment_breakdown": [
       {
-        "name": "헬스케어·바이오",
-        "desc": "체외진단기기·의약외품 제조 및 리보세라닙 등 항암신약 개발",
-        "revenue_share": 0.241
+        "name": "GRP/GRE PIPE",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.4%",
+        "revenue_share": 0.1241,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "복합소재(선박)",
-        "desc": "특수선·구명정·DAVIT·GRP파이프 설계·건조",
-        "revenue_share": 0.597
+        "name": "구명정 및 특수선",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.2%",
+        "revenue_share": 0.3917,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "미디어커머스",
-        "desc": "뷰티 디바이스 등 소비재 온라인 판매",
-        "revenue_share": 0.162
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.4%",
+        "revenue_share": 0.0044,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -180,32 +186,54 @@
       "GRP/GRE 파이프",
       "뷰티 디바이스(미디어커머스)"
     ],
-    "investor_note": "HLB는 체외진단기기·의약외품을 만드는 헬스케어 사업과, 자회사 Elevar Therapeutics를 통해 경구용 표적항암제 리보세라닙 등 신약을 개발하는 바이오 사업, 구명정·특수선을 만드는 조선기자재 사업, 뷰티 디바이스를 파는 미디어커머스 사업을 함께 운영합니다. 매출은 조선기자재(복합소재) 부문이 절반 이상입니다. 과거 공시 기반 참고 정보로, 최근 매출액(연결)은 841억 원으로 전년 대비 23.6% 늘었지만, 신약 개발 비용 부담으로 당기순손실이 2,354억 원까지 확대됐습니다. 부채비율은 88.1%로 다소 높은 편입니다."
+    "investor_note": "HLB는 체외진단기기·의약외품을 만드는 헬스케어 사업과, 자회사 Elevar Therapeutics를 통해 경구용 표적항암제 리보세라닙 등 신약을 개발하는 바이오 사업, 구명정·특수선을 만드는 조선기자재 사업, 뷰티 디바이스를 파는 미디어커머스 사업을 함께 운영합니다. 매출은 조선기자재(복합소재) 부문이 절반 이상입니다. 과거 공시 기반 참고 정보로, 최근 매출액(연결)은 841억 원으로 전년 대비 23.6% 늘었지만, 신약 개발 비용 부담으로 당기순손실이 2,354억 원까지 확대됐습니다. 부채비율은 88.1%로 다소 높은 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "제품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.8%",
+        "revenue_share": 0.1984,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "GRP/GRE PIPE",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.4%",
+        "revenue_share": 0.1241,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "구명정 및 특수선",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.2%",
+        "revenue_share": 0.3917,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.4%",
+        "revenue_share": 0.0044,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "헬스케어·바이오",
-      "caption": "체외진단기기·의약외품 제조 및 리보세라닙 등 항암신약 개발",
-      "kind": "bio",
-      "visual": "헬스케어",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "GRP/GRE PIPE",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.4%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "복합소재(선박)",
-      "caption": "특수선·구명정·DAVIT·GRP파이프 설계·건조",
+      "title": "방산·항공",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.2%",
       "kind": "ship",
-      "visual": "복합소재",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "미디어커머스",
-      "caption": "뷰티 디바이스 등 소비재 온라인 판매",
-      "kind": "platform",
-      "visual": "미디어커머스",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "DEFENSE",
+      "image": "../data/business_images/business_image_1805fba8159acac6.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -155,9 +155,18 @@
     "segment_finance": "고려산업은 1957년 설립된 배합사료 전문기업으로, 매출의 약 97%가 양돈·축우·양계용 사료 제조·판매에서 나오며 옥수수·대두박 등 원재료 대부분을 미국·남미에서 수입하고 있습니다. 사료 판로 확보를 위해 식육유통, 임대업 등도 함께 하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,973억 원으로 전년보다 3.4% 줄었고 영업이익도 137억 원으로 3.7% 감소했지만, 당기순이익은 96억 원으로 148.4% 크게 늘었습니다. 부채비율은 120.2%로 자본보다 빚이 많은 편입니다.",
     "segment_breakdown": [
       {
-        "name": "사료",
-        "desc": "양돈·축우·양계용 배합사료 제조·판매",
-        "revenue_share": 0.966
+        "name": "사료부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 93.9%",
+        "revenue_share": 0.939,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.7%",
+        "revenue_share": 0.027,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -167,24 +176,55 @@
       "식육유통",
       "보조사료"
     ],
-    "investor_note": "고려산업은 1957년 설립된 배합사료 전문기업으로, 매출의 약 97%가 양돈·축우·양계용 사료 제조·판매에서 나오며 옥수수·대두박 등 원재료 대부분을 미국·남미에서 수입하고 있습니다. 사료 판로 확보를 위해 식육유통, 임대업 등도 함께 하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,973억 원으로 전년보다 3.4% 줄었고 영업이익도 137억 원으로 3.7% 감소했지만, 당기순이익은 96억 원으로 148.4% 크게 늘었습니다. 부채비율은 120.2%로 자본보다 빚이 많은 편입니다."
+    "investor_note": "고려산업은 1957년 설립된 배합사료 전문기업으로, 매출의 약 97%가 양돈·축우·양계용 사료 제조·판매에서 나오며 옥수수·대두박 등 원재료 대부분을 미국·남미에서 수입하고 있습니다. 사료 판로 확보를 위해 식육유통, 임대업 등도 함께 하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,973억 원으로 전년보다 3.4% 줄었고 영업이익도 137억 원으로 3.7% 감소했지만, 당기순이익은 96억 원으로 148.4% 크게 늘었습니다. 부채비율은 120.2%로 자본보다 빚이 많은 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "사료부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 93.9%",
+        "revenue_share": 0.939,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.7%",
+        "revenue_share": 0.027,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
+        "revenue_share": 0.05,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "사료",
-      "caption": "양돈·축우·양계용 배합사료 제조·판매",
-      "kind": "service",
-      "visual": "사료",
-      "image": "../data/business_images/business_image_food_ingredient.svg",
+      "title": "사료부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 93.9%",
+      "kind": "consumer",
+      "visual": "FEED",
+      "image": "../data/business_images/business_image_food_feed.svg",
       "image_source": "Local visual"
     },
     {
-      "title": "곡물가공품, 전분 및 전분제품 제조업",
-      "caption": "곡물가공품, 전분 및 전분제품 제조업을 중심으로 매출을 만듭니다.",
+      "title": "상 품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.7%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_food_ingredient.svg",
-      "image_source": "Local visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "기타사업부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -155,14 +155,18 @@
     "segment_finance": "모나리자는 두루마리 화장지·미용티슈 등 위생용지를 만드는 제지 전문기업으로, 자체 생산 제품(69%)과 유통 상품(16%), 화장지 원지 반제품(14%) 판매로 매출을 구성하고 있으며 성인용 기저귀 등 고령화 관련 위생용품 시장 확대에도 대응하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,240억 원으로 전년 대비 1.8% 소폭 줄었고 영업이익도 67.7% 크게 감소했지만, 당기순이익은 20.8% 늘었습니다. 부채비율은 15.0%로 매우 낮아 재무구조는 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "화장지(자체생산)",
-        "desc": "두루마리 화장지·미용티슈 등 위생용지 자체 제조판매",
-        "revenue_share": 0.689
+        "name": "제지부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.9%",
+        "revenue_share": 0.689,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "화장지(유통)",
-        "desc": "타사 브랜드 화장지 등 상품 유통판매",
-        "revenue_share": 0.163
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.3%",
+        "revenue_share": 0.163,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -172,32 +176,46 @@
       "생리대",
       "성인용 기저귀"
     ],
-    "investor_note": "모나리자는 두루마리 화장지·미용티슈 등 위생용지를 만드는 제지 전문기업으로, 자체 생산 제품(69%)과 유통 상품(16%), 화장지 원지 반제품(14%) 판매로 매출을 구성하고 있으며 성인용 기저귀 등 고령화 관련 위생용품 시장 확대에도 대응하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,240억 원으로 전년 대비 1.8% 소폭 줄었고 영업이익도 67.7% 크게 감소했지만, 당기순이익은 20.8% 늘었습니다. 부채비율은 15.0%로 매우 낮아 재무구조는 안정적인 편입니다."
+    "investor_note": "모나리자는 두루마리 화장지·미용티슈 등 위생용지를 만드는 제지 전문기업으로, 자체 생산 제품(69%)과 유통 상품(16%), 화장지 원지 반제품(14%) 판매로 매출을 구성하고 있으며 성인용 기저귀 등 고령화 관련 위생용품 시장 확대에도 대응하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,240억 원으로 전년 대비 1.8% 소폭 줄었고 영업이익도 67.7% 크게 감소했지만, 당기순이익은 20.8% 늘었습니다. 부채비율은 15.0%로 매우 낮아 재무구조는 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "제지부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.9%",
+        "revenue_share": 0.689,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.3%",
+        "revenue_share": 0.163,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "반제품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.0%",
+        "revenue_share": 0.14,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.008,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "화장지(자체생산)",
-      "caption": "두루마리 화장지·미용티슈 등 위생용지 자체 제조판매",
+      "title": "제지부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.9%",
       "kind": "service",
-      "visual": "화장지",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "화장지(유통)",
-      "caption": "타사 브랜드 화장지 등 상품 유통판매",
-      "kind": "service",
-      "visual": "화장지",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "원지(반제품)",
-      "caption": "화장지 제조용 원지 반제품 판매",
-      "kind": "service",
-      "visual": "원지",
-      "image": "../data/business_images/business_image_local_packaging.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

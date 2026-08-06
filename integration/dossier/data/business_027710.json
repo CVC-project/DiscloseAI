@@ -153,7 +153,15 @@
   "snippets": {
     "overview": "팜스토리는 배합사료 제조부터 양돈 사육, 돼지·소 도축·가공, 닭고기 가공까지 축산업 전 과정을 계열화한 종합 축산기업으로, 사료사업부가 매출의 약 절반을 차지하고 육가공사업부(도축·부분육)가 뒤를 잇고 있습니다. 마니커에프앤지를 통해 닭고기 가공품 사업도 함께 운영합니다. 과거 공시 기반 참고 정보로, 최근 매출액(연결)은 1조 4,558억 원으로 전년과 비슷한 수준을 유지했고, 당기순이익은 306억 원으로 전년 대비 크게 늘었지만 영업이익은 14.2% 줄었습니다. 부채비율은 186.6%로 다소 높은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
     "segment_finance": "팜스토리는 배합사료 제조부터 양돈 사육, 돼지·소 도축·가공, 닭고기 가공까지 축산업 전 과정을 계열화한 종합 축산기업으로, 사료사업부가 매출의 약 절반을 차지하고 육가공사업부(도축·부분육)가 뒤를 잇고 있습니다. 마니커에프앤지를 통해 닭고기 가공품 사업도 함께 운영합니다. 과거 공시 기반 참고 정보로, 최근 매출액(연결)은 1조 4,558억 원으로 전년과 비슷한 수준을 유지했고, 당기순이익은 306억 원으로 전년 대비 크게 늘었지만 영업이익은 14.2% 줄었습니다. 부채비율은 186.6%로 다소 높은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "양돈매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.3%",
+        "revenue_share": 0.1135,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "배합사료",
       "지육·정육(돼지고기)",
@@ -162,38 +170,52 @@
       "닭고기(계육) 가공품",
       "곡물"
     ],
-    "investor_note": "팜스토리는 배합사료 제조부터 양돈 사육, 돼지·소 도축·가공, 닭고기 가공까지 축산업 전 과정을 계열화한 종합 축산기업으로, 사료사업부가 매출의 약 절반을 차지하고 육가공사업부(도축·부분육)가 뒤를 잇고 있습니다. 마니커에프앤지를 통해 닭고기 가공품 사업도 함께 운영합니다. 과거 공시 기반 참고 정보로, 최근 매출액(연결)은 1조 4,558억 원으로 전년과 비슷한 수준을 유지했고, 당기순이익은 306억 원으로 전년 대비 크게 늘었지만 영업이익은 14.2% 줄었습니다. 부채비율은 186.6%로 다소 높은 편이라 재무 부담을 살펴볼 필요가 있습니다."
+    "investor_note": "팜스토리는 배합사료 제조부터 양돈 사육, 돼지·소 도축·가공, 닭고기 가공까지 축산업 전 과정을 계열화한 종합 축산기업으로, 사료사업부가 매출의 약 절반을 차지하고 육가공사업부(도축·부분육)가 뒤를 잇고 있습니다. 마니커에프앤지를 통해 닭고기 가공품 사업도 함께 운영합니다. 과거 공시 기반 참고 정보로, 최근 매출액(연결)은 1조 4,558억 원으로 전년과 비슷한 수준을 유지했고, 당기순이익은 306억 원으로 전년 대비 크게 늘었지만 영업이익은 14.2% 줄었습니다. 부채비율은 186.6%로 다소 높은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "사료사업부(FB)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.6%",
+        "revenue_share": 0.4964,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "육가공사업부(LB)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.6%",
+        "revenue_share": 0.2459,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "양돈매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.3%",
+        "revenue_share": 0.1135,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "가금사업부(PB)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
+        "revenue_share": 0.0632,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "배합사료",
-      "caption": "곡물 가격과 축산 수요에 영향을 받는 사료·축산 사업입니다.",
+      "title": "사료",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.6%",
       "kind": "consumer",
-      "visual": "SHOP",
+      "visual": "FEED",
       "image": "../data/business_images/business_image_food_feed.svg",
       "image_source": "Local visual"
     },
     {
-      "title": "사료사업부(FB)",
-      "caption": "곡물 가격과 축산 수요에 영향을 받는 사료·축산 사업입니다.",
+      "title": "축산·육가공",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.6%",
       "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_food_feed.svg",
-      "image_source": "Local visual"
-    },
-    {
-      "title": "지육·정육(돼지고기)",
-      "caption": "지육·정육(돼지고기) 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_food_feed.svg",
-      "image_source": "Local visual"
-    },
-    {
-      "title": "한우·생우",
-      "caption": "한우·생우 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "consumer",
-      "visual": "SHOP",
+      "visual": "FEED",
       "image": "../data/business_images/business_image_food_feed.svg",
       "image_source": "Local visual"
     }

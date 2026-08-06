@@ -23,14 +23,25 @@
     "segment_finance": "마이크로엔엑스의 주요 제품·서비스는 배터리, 의약품, 금액, 자사 제품, 매출1위, 치과용 모터SYS.(엔진 포함)입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 해당 제품군이 목표하는 고객은 치과 의료기기 제조사들이며, B2B 비즈니스 모델에 초점을 맞추고 잠재고객층의 요구와 시장 트렌드에 집중한 사업을 강화하고 있습니다. 고객 맞춤 개발과 더불어 시장을 선도하는 제품 아이디어의 기획과 상품화 역시 준비 중에 있으며, 그 예로 임플란트 제품군 라인업의 다양화 및 고도화가 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "한국은행",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
+        "name": "매출2위",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.0%",
+        "revenue_share": 0.2399,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "대신증권",
-        "desc": "위탁매매, IB, 운용 등 증권 서비스",
-        "revenue_share": null
+        "name": "상 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.0203,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매 출 총 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -46,24 +57,62 @@
       "B2B",
       "수리"
     ],
-    "investor_note": "마이크로엔엑스의 주요 제품·서비스는 배터리, 의약품, 금액, 자사 제품, 매출1위, 치과용 모터SYS.(엔진 포함)입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 해당 제품군이 목표하는 고객은 치과 의료기기 제조사들이며, B2B 비즈니스 모델에 초점을 맞추고 잠재고객층의 요구와 시장 트렌드에 집중한 사업을 강화하고 있습니다. 고객 맞춤 개발과 더불어 시장을 선도하는 제품 아이디어의 기획과 상품화 역시 준비 중에 있으며, 그 예로 임플란트 제품군 라인업의 다양화 및 고도화가 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "마이크로엔엑스의 주요 제품·서비스는 배터리, 의약품, 금액, 자사 제품, 매출1위, 치과용 모터SYS.(엔진 포함)입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 해당 제품군이 목표하는 고객은 치과 의료기기 제조사들이며, B2B 비즈니스 모델에 초점을 맞추고 잠재고객층의 요구와 시장 트렌드에 집중한 사업을 강화하고 있습니다. 고객 맞춤 개발과 더불어 시장을 선도하는 제품 아이디어의 기획과 상품화 역시 준비 중에 있으며, 그 예로 임플란트 제품군 라인업의 다양화 및 고도화가 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "자사 제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 60.3%",
+        "revenue_share": 0.603,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매출2위",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.0%",
+        "revenue_share": 0.2399,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.0203,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매 출 총 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "의약품",
-      "caption": "의약품 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "image": "../data/business_images/business_image_local_medical_device.svg",
-      "title": "치과용 모터SYS.(엔진 포함)",
-      "caption": "치과용 모터SYS.(엔진 포함) 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "자사 제품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 60.3%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "상 품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "매 출 총 계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

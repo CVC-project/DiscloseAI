@@ -155,9 +155,18 @@
     "segment_finance": "비에이치아이의 주요 사업은 발전부문, 한국산업은행, 운전자금 등, 전문건설공제조합 등입니다. 당사가 영위하는 사업은 수주산업으로 모든 제품이 주문제작 방식에 의해 생산, 판매되고 있으며 특정산업에 한정된 고객을 대상으로 하고 있습니다. 경영상의 주요계약 등 * 기타 중요하지 않다고 판단되는 소액의 단순 지분 참여 등의 계약은 기재하지 않았습니다.",
     "segment_breakdown": [
       {
-        "name": "한국산업은행",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
+        "name": "HRSG(Heat Recovery Steam Generator)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 78.3%",
+        "revenue_share": 0.783,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "B.O.P (Balance of Plant)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.4%",
+        "revenue_share": 0.034,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -173,32 +182,39 @@
       "일진제강",
       "전품목"
     ],
-    "investor_note": "비에이치아이의 주요 사업은 발전부문, 한국산업은행, 운전자금 등, 전문건설공제조합 등입니다. 당사가 영위하는 사업은 수주산업으로 모든 제품이 주문제작 방식에 의해 생산, 판매되고 있으며 특정산업에 한정된 고객을 대상으로 하고 있습니다. 경영상의 주요계약 등 * 기타 중요하지 않다고 판단되는 소액의 단순 지분 참여 등의 계약은 기재하지 않았습니다."
+    "investor_note": "비에이치아이의 주요 사업은 발전부문, 한국산업은행, 운전자금 등, 전문건설공제조합 등입니다. 당사가 영위하는 사업은 수주산업으로 모든 제품이 주문제작 방식에 의해 생산, 판매되고 있으며 특정산업에 한정된 고객을 대상으로 하고 있습니다. 경영상의 주요계약 등 * 기타 중요하지 않다고 판단되는 소액의 단순 지분 참여 등의 계약은 기재하지 않았습니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.6%",
+        "revenue_share": 0.126,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "HRSG(Heat Recovery Steam Generator)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 78.3%",
+        "revenue_share": 0.783,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "B.O.P (Balance of Plant)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.4%",
+        "revenue_share": 0.034,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "배터리",
-      "caption": "배터리 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "해양플랜트",
-      "caption": "해양플랜트 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "ship",
-      "visual": "SHIP",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "사용처",
-      "caption": "사용처 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "B.O.P (Balance of Plant)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.4%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

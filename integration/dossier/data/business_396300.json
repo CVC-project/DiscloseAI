@@ -153,7 +153,29 @@
   "snippets": {
     "overview": "제품을 만들고 판매하는 제조 기반 회사입니다. 뿌리산업 관련 부품의 금형 기술을 활용하여 정밀하고 다양한 형상의 디자인을 구현하고 점진적으로 얇아지는 OLED TV와 고객의 니즈(벽과의 일체감)를 반영한 제품을 생산합니다. 고객사들은 모두 전기차, 수소차, ESS, 차세대 전장 시스템 등 미래 모빌리티와 에너지 전환 분야의 글로벌 선도 기업들로, 이들과의 협력은 당사의 기술 경쟁력과 시장 신뢰도를 입증하는 핵심 자산입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "제품을 만들고 판매하는 제조 기반 회사입니다. 뿌리산업 관련 부품의 금형 기술을 활용하여 정밀하고 다양한 형상의 디자인을 구현하고 점진적으로 얇아지는 OLED TV와 고객의 니즈(벽과의 일체감)를 반영한 제품을 생산합니다. 고객사들은 모두 전기차, 수소차, ESS, 차세대 전장 시스템 등 미래 모빌리티와 에너지 전환 분야의 글로벌 선도 기업들로, 이들과의 협력은 당사의 기술 경쟁력과 시장 신뢰도를 입증하는 핵심 자산입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "IT매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.7%",
+        "revenue_share": 0.447,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "부품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.6%",
+        "revenue_share": 0.516,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.01,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "OLED",
       "배터리",
@@ -167,12 +189,42 @@
       "연구소",
       "팀명"
     ],
-    "investor_note": "제품을 만들고 판매하는 제조 기반 회사입니다. 뿌리산업 관련 부품의 금형 기술을 활용하여 정밀하고 다양한 형상의 디자인을 구현하고 점진적으로 얇아지는 OLED TV와 고객의 니즈(벽과의 일체감)를 반영한 제품을 생산합니다. 고객사들은 모두 전기차, 수소차, ESS, 차세대 전장 시스템 등 미래 모빌리티와 에너지 전환 분야의 글로벌 선도 기업들로, 이들과의 협력은 당사의 기술 경쟁력과 시장 신뢰도를 입증하는 핵심 자산입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "제품을 만들고 판매하는 제조 기반 회사입니다. 뿌리산업 관련 부품의 금형 기술을 활용하여 정밀하고 다양한 형상의 디자인을 구현하고 점진적으로 얇아지는 OLED TV와 고객의 니즈(벽과의 일체감)를 반영한 제품을 생산합니다. 고객사들은 모두 전기차, 수소차, ESS, 차세대 전장 시스템 등 미래 모빌리티와 에너지 전환 분야의 글로벌 선도 기업들로, 이들과의 협력은 당사의 기술 경쟁력과 시장 신뢰도를 입증하는 핵심 자산입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "IT매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.7%",
+        "revenue_share": 0.447,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "부품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.6%",
+        "revenue_share": 0.516,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.01,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.7%",
+        "revenue_share": 0.027,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
+      "title": "디스플레이",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
       "kind": "display",
       "visual": "OLED",
       "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
@@ -180,27 +232,27 @@
     },
     {
       "title": "배터리",
-      "caption": "배터리 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
       "kind": "battery",
       "visual": "BATTERY",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "데이터센터",
-      "caption": "데이터센터 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_local_datacenter.svg",
-      "image_source": "Local curated visual"
+      "title": "클라우드·데이터센터",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
+      "kind": "service",
+      "visual": "CLOUD",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "부품",
-      "caption": "부품 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

@@ -155,19 +155,32 @@
     "segment_finance": "과거 공시 기반 참고 정보로, 최근 매출액은 9조 287억 원으로 전년 대비 9.4% 줄었고 영업이익도 18.5% 감소했지만, 당기순이익은 6,483억 원으로 1.5% 늘었습니다. 부채비율은 125.8%로 건설·플랜트업 특성상 선수금 등이 부채로 잡혀 다소 높게 나타나는 수준입니다.",
     "segment_breakdown": [
       {
-        "name": "화공",
-        "desc": "정유·석유화학·가스 등 플랜트 설계·조달·시공",
-        "revenue_share": 0.571
+        "name": "제59기(2025년 말)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 57.1%",
+        "revenue_share": 0.571,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "첨단산업",
-        "desc": "반도체·디스플레이 등 산업설비, 바이오플랜트",
-        "revenue_share": 0.28
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.0%",
+        "revenue_share": 0.28,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "New Energy",
-        "desc": "LNG, 청정에너지(수소·CCUS), 수처리 설비",
-        "revenue_share": 0.149
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.9%",
+        "revenue_share": 0.149,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제58기(2024년 말)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 45.8%",
+        "revenue_share": 0.458,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -179,32 +192,70 @@
       "수소·CCUS(탄소포집) 솔루션",
       "수처리(ECO Water)설비"
     ],
-    "investor_note": "과거 공시 기반 참고 정보로, 최근 매출액은 9조 287억 원으로 전년 대비 9.4% 줄었고 영업이익도 18.5% 감소했지만, 당기순이익은 6,483억 원으로 1.5% 늘었습니다. 부채비율은 125.8%로 건설·플랜트업 특성상 선수금 등이 부채로 잡혀 다소 높게 나타나는 수준입니다."
+    "investor_note": "과거 공시 기반 참고 정보로, 최근 매출액은 9조 287억 원으로 전년 대비 9.4% 줄었고 영업이익도 18.5% 감소했지만, 당기순이익은 6,483억 원으로 1.5% 늘었습니다. 부채비율은 125.8%로 건설·플랜트업 특성상 선수금 등이 부채로 잡혀 다소 높게 나타나는 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "제59기(2025년 말)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 57.1%",
+        "revenue_share": 0.571,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "첨단산업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.0%",
+        "revenue_share": 0.28,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "New Energy",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.9%",
+        "revenue_share": 0.149,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제58기(2024년 말)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 45.8%",
+        "revenue_share": 0.458,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "화공",
-      "caption": "정유·석유화학·가스 등 플랜트 설계·조달·시공",
-      "kind": "ship",
-      "visual": "화공",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "title": "제59기(2025년 말)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 57.1%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "첨단산업",
-      "caption": "반도체·디스플레이 등 산업설비, 바이오플랜트",
-      "kind": "chip",
-      "visual": "첨단산업",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
-      "image_source": "Wikimedia Commons"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "New Energy",
-      "caption": "LNG, 청정에너지(수소·CCUS), 수처리 설비",
-      "kind": "ship",
-      "visual": "LNG",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "제58기(2024년 말)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 45.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

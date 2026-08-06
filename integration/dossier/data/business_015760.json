@@ -110,24 +110,11 @@
     "segment_finance": "현재 국내 전력 산업의 체계는 전력생산, 수송, 판매 체계로 이뤄지고 있으며, 당사는발전자회사와 민간발전회사, 구역전기사업자가 생산한 전력을 전력거래소에서 구입하여 일반 고객에게 판매하고 있습니다. (주요 사업 및 매출) 당사의 주요 사업은 네 개의 사업부문으로 구성되어 있습니다. ① 전기판매부문[한국전력공사(주)]에서는 구역전기사업자 판매지역을 제외하고 국내 전역에 소비되는 전력량의 대부분을 판매하고 있습니다. ② 원자력발전사업부문[한국수력원자력(주)]과 ③ 화력발전사업부문[한국남동발전(주), 한국중부발전(주), 한국서부발전(주), 한국남부발전(주), 한국동서발전(주)]에서 생산된 전기는 전력거래소를 통해 한국전력공사에 판매되고 있습니다.",
     "segment_breakdown": [
       {
-        "name": "전기판매부문",
-        "desc": "국내 전역에 소비되는 전력 판매",
-        "revenue_share": 0.658
-      },
-      {
-        "name": "원자력발전부문",
-        "desc": "원자력발전소를 통한 전력 생산",
-        "revenue_share": 0.106
-      },
-      {
-        "name": "화력발전부문",
-        "desc": "석탄, LNG 등을 이용한 화력발전",
-        "revenue_share": 0.196
-      },
-      {
-        "name": "기타사업부문",
-        "desc": "발전소 설계, 설비정비, 원전연료, ICT 등",
-        "revenue_share": 0.038
+        "name": "한국중부발전(주)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.9%",
+        "revenue_share": 0.039,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "investor_note": "한국전력공사는 국내 전역에 전기를 공급하는 에너지 공기업으로, 전력 판매가 매출의 65.8%를 차지하며 원자력·화력발전 등 다양한 방식으로 전력을 생산·공급합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 97조 4,293억 원으로 전년 대비 4.3% 증가했고, 영업이익은 13조 4,906억 원으로 61.3% 크게 증가하며 수익성이 개선되었습니다(영업이익은 매출에서 사업 운영비를 뺀 순수 수익). 당기순이익(세금 등 모든 비용을 뺀 최종 이익)도 8조 6,667억 원으로 139.3% 증가해 수익성 개선이 뚜렷한 상황입니다. 다만 부채비율이 416.5%로 높은 수준(자본 대비 빌린 돈이 많다는 의미)이지만, 영업현금흐름이 약 13조 7,888억 원으로 충분해 사업 운영의 안정성은 양호하며, 자기자본이익률 17.3%로 투자된 자본에 대한 수익성도 양호한 상태입니다.",
@@ -144,24 +131,54 @@
       "해외전력사업"
     ],
     "raw_moves": [],
-    "utilization": []
+    "utilization": [],
+    "product_service_segments": [
+      {
+        "name": "전기판매 사업부분",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 65.8%",
+        "revenue_share": 0.658,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "원자력발전 사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.6%",
+        "revenue_share": 0.106,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "화력발전 사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.5%",
+        "revenue_share": 0.045,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "한국중부발전(주)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.9%",
+        "revenue_share": 0.039,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "전력 판매",
-      "caption": "전기를 구매·송배전해 최종 소비자에게 판매합니다.",
-      "kind": "energy",
+      "title": "전자부품·기판",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 65.8%",
+      "kind": "chip",
+      "visual": "PCB",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "전력기기·발전",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.6%",
+      "kind": "power",
       "visual": "POWER",
       "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
       "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "송배전망",
-      "caption": "전력 인프라 투자가 유형자산과 감가상각비로 이어집니다.",
-      "kind": "signal",
-      "visual": "GRID",
-      "image": "../data/business_images/business_image_c1540b930934e19f.avif",
-      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

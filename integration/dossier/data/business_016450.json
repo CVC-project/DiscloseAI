@@ -155,29 +155,18 @@
     "segment_finance": "한세예스24홀딩스는 의류 수출기업 한세실업, 온라인서점 예스24, 캐주얼·유아동 의류 한세엠케이, 교과서 출판사 동아출판, 자동차부품업체 한세모빌리티를 자회사로 둔 지주회사입니다. 여러 산업에 걸쳐 다각화되어 있어 특정 자회사의 부침이 전체 실적에 섞여 나타납니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 3조 4,098억 원으로 전년 대비 20.5% 늘었지만 영업이익은 654억 원으로 57.0% 줄었고 당기순이익은 231억 원 적자로 전환했습니다. 부채비율은 222.5%로 부채 부담이 큰 편입니다. 감사의견은 적정이며, 핵심감사사항으로 자동차부품 자회사의 영업권 손상과 의류판매 자회사의 재고자산 평가가 지목됐습니다.",
     "segment_breakdown": [
       {
-        "name": "의류제조(한세실업)",
-        "desc": "글로벌 바이어 대상 의류 OEM·ODM 수출",
-        "revenue_share": null
+        "name": "OEM/ODM부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 87.7%",
+        "revenue_share": 0.877,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "의류판매(한세엠케이)",
-        "desc": "캐주얼·유아동·골프웨어 브랜드 판매",
-        "revenue_share": null
-      },
-      {
-        "name": "전자상거래(예스이십사)",
-        "desc": "온라인 도서·음반·공연예매·eBook 판매",
-        "revenue_share": null
-      },
-      {
-        "name": "출판인쇄(동아출판)",
-        "desc": "초중고 교과서·참고서 출판",
-        "revenue_share": null
-      },
-      {
-        "name": "자동차부품(한세모빌리티)",
-        "desc": "구동·조향·제동·전장 자동차 부품 제조",
-        "revenue_share": null
+        "name": "단순 매출 합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -192,40 +181,54 @@
       "하기스 베이비웨어",
       "한세모빌리티 자동차부품(구동·조향·제동·전장)"
     ],
-    "investor_note": "한세예스24홀딩스는 의류 수출기업 한세실업, 온라인서점 예스24, 캐주얼·유아동 의류 한세엠케이, 교과서 출판사 동아출판, 자동차부품업체 한세모빌리티를 자회사로 둔 지주회사입니다. 여러 산업에 걸쳐 다각화되어 있어 특정 자회사의 부침이 전체 실적에 섞여 나타납니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 3조 4,098억 원으로 전년 대비 20.5% 늘었지만 영업이익은 654억 원으로 57.0% 줄었고 당기순이익은 231억 원 적자로 전환했습니다. 부채비율은 222.5%로 부채 부담이 큰 편입니다. 감사의견은 적정이며, 핵심감사사항으로 자동차부품 자회사의 영업권 손상과 의류판매 자회사의 재고자산 평가가 지목됐습니다."
+    "investor_note": "한세예스24홀딩스는 의류 수출기업 한세실업, 온라인서점 예스24, 캐주얼·유아동 의류 한세엠케이, 교과서 출판사 동아출판, 자동차부품업체 한세모빌리티를 자회사로 둔 지주회사입니다. 여러 산업에 걸쳐 다각화되어 있어 특정 자회사의 부침이 전체 실적에 섞여 나타납니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 3조 4,098억 원으로 전년 대비 20.5% 늘었지만 영업이익은 654억 원으로 57.0% 줄었고 당기순이익은 231억 원 적자로 전환했습니다. 부채비율은 222.5%로 부채 부담이 큰 편입니다. 감사의견은 적정이며, 핵심감사사항으로 자동차부품 자회사의 영업권 손상과 의류판매 자회사의 재고자산 평가가 지목됐습니다.",
+    "product_service_segments": [
+      {
+        "name": "OEM/ODM부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 87.7%",
+        "revenue_share": 0.877,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "원단사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.3%",
+        "revenue_share": 0.123,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "단순 매출 합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "도서/음반/DVD/기타",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.0023,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "의류제조(한세실업)",
-      "caption": "글로벌 바이어 대상 의류 OEM·ODM 수출",
+      "title": "OEM/ODM부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 87.7%",
       "kind": "service",
-      "visual": "의류제조",
-      "image": "../data/business_images/business_image_local_fashion.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "의류판매(한세엠케이)",
-      "caption": "캐주얼·유아동·골프웨어 브랜드 판매",
+      "title": "원단사업부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.3%",
       "kind": "service",
-      "visual": "의류판매",
-      "image": "../data/business_images/business_image_local_fashion.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "전자상거래(예스이십사)",
-      "caption": "온라인 도서·음반·공연예매·eBook 판매",
-      "kind": "service",
-      "visual": "전자상거래",
-      "image": "../data/business_images/business_image_local_default_c.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "출판인쇄(동아출판)",
-      "caption": "초중고 교과서·참고서 출판",
-      "kind": "service",
-      "visual": "출판인쇄",
-      "image": "../data/business_images/business_image_local_default_d.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

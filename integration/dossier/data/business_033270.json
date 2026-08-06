@@ -155,9 +155,25 @@
     "segment_finance": "한국유나이티드제약은 여러 성분을 하나로 합치거나 방출 방식을 개선한 '개량신약'을 주력으로 하는 전문의약품 제조기업으로, 순환기계 치료제 '실로스탄CR정'과 '아트맥콤비젤', 소화기계 치료제 '가스티인CR정' 등 200여 개 제품을 생산해 40여 개국에 수출하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,887억 원으로 전년과 비슷한 수준을 유지했고 영업이익은 11.9% 줄었지만 당기순이익은 18.0% 늘어 최종적으로 남는 돈은 오히려 증가했습니다. 부채비율은 14.3%로 매우 낮은 편이라 재무구조가 안정적입니다.",
     "segment_breakdown": [
       {
-        "name": "전문의약품(개량신약)",
-        "desc": "블록버스터 개량신약 등 약 200여 개 제품 제조·판매",
-        "revenue_share": 1
+        "name": "아트맥콤비젤",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.6%",
+        "revenue_share": 0.096,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "가스티인",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.1%",
+        "revenue_share": 0.061,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "오메틸큐티렛",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.5%",
+        "revenue_share": 0.055,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -167,40 +183,62 @@
       "오메틸큐티렛",
       "라베미니정"
     ],
-    "investor_note": "한국유나이티드제약은 여러 성분을 하나로 합치거나 방출 방식을 개선한 '개량신약'을 주력으로 하는 전문의약품 제조기업으로, 순환기계 치료제 '실로스탄CR정'과 '아트맥콤비젤', 소화기계 치료제 '가스티인CR정' 등 200여 개 제품을 생산해 40여 개국에 수출하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,887억 원으로 전년과 비슷한 수준을 유지했고 영업이익은 11.9% 줄었지만 당기순이익은 18.0% 늘어 최종적으로 남는 돈은 오히려 증가했습니다. 부채비율은 14.3%로 매우 낮은 편이라 재무구조가 안정적입니다."
+    "investor_note": "한국유나이티드제약은 여러 성분을 하나로 합치거나 방출 방식을 개선한 '개량신약'을 주력으로 하는 전문의약품 제조기업으로, 순환기계 치료제 '실로스탄CR정'과 '아트맥콤비젤', 소화기계 치료제 '가스티인CR정' 등 200여 개 제품을 생산해 40여 개국에 수출하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,887억 원으로 전년과 비슷한 수준을 유지했고 영업이익은 11.9% 줄었지만 당기순이익은 18.0% 늘어 최종적으로 남는 돈은 오히려 증가했습니다. 부채비율은 14.3%로 매우 낮은 편이라 재무구조가 안정적입니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.5%",
+        "revenue_share": 0.145,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "아트맥콤비젤",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.6%",
+        "revenue_share": 0.096,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "가스티인",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.1%",
+        "revenue_share": 0.061,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "오메틸큐티렛",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.5%",
+        "revenue_share": 0.055,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "전문의약품(개량신약)",
-      "caption": "블록버스터 개량신약 등 약 200여 개 제품 제조·판매",
-      "kind": "bio",
-      "visual": "전문의약품",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "실로스탄CR정",
-      "caption": "실로스탄CR정 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "실로스탄CR정",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
       "title": "아트맥콤비젤",
-      "caption": "아트맥콤비젤 관련 제품과 서비스를 통해 매출을 만듭니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.6%",
       "kind": "service",
-      "visual": "아트맥콤비젤",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "가스티인CR정",
-      "caption": "가스티인CR정 관련 제품과 서비스를 통해 매출을 만듭니다.",
+      "title": "가스티인",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.1%",
       "kind": "service",
-      "visual": "가스티인CR정",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "오메틸큐티렛",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

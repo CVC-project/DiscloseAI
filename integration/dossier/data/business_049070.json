@@ -155,14 +155,18 @@
     "segment_finance": "매출의 70% 이상이 IT디바이스에서 나오고, 나머지는 자동차부품과 가전제품 조립에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 5,907억 원으로 전년 대비 3.9% 줄었고, 영업이익은 113억 원 적자로 돌아섰으며 당기순이익도 65.1% 감소해 수익성이 눈에 띄게 나빠졌습니다. 다만 부채비율은 15.4%로 낮아 재무구조 자체는 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "IT디바이스",
-        "desc": "휴대폰 ASS'Y·안테나·차폐 부품 등 삼성전자向 조립 부품",
-        "revenue_share": 0.7042
+        "name": "IT 디바이스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 70.4%",
+        "revenue_share": 0.7042,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "자동차부품",
-        "desc": "자동차용 램프·커넥터 등 내외장재 부품",
-        "revenue_share": 0.153
+        "name": "자동차 부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.3%",
+        "revenue_share": 0.153,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,24 +178,62 @@
       "자동차 커넥터 부품",
       "휴대폰 사출 금형"
     ],
-    "investor_note": "매출의 70% 이상이 IT디바이스에서 나오고, 나머지는 자동차부품과 가전제품 조립에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 5,907억 원으로 전년 대비 3.9% 줄었고, 영업이익은 113억 원 적자로 돌아섰으며 당기순이익도 65.1% 감소해 수익성이 눈에 띄게 나빠졌습니다. 다만 부채비율은 15.4%로 낮아 재무구조 자체는 안정적인 편입니다."
+    "investor_note": "매출의 70% 이상이 IT디바이스에서 나오고, 나머지는 자동차부품과 가전제품 조립에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 5,907억 원으로 전년 대비 3.9% 줄었고, 영업이익은 113억 원 적자로 돌아섰으며 당기순이익도 65.1% 감소해 수익성이 눈에 띄게 나빠졌습니다. 다만 부채비율은 15.4%로 낮아 재무구조 자체는 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "IT 디바이스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 70.4%",
+        "revenue_share": 0.7042,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "가전제품ASS'Y",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.7%",
+        "revenue_share": 0.117,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동차 부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.3%",
+        "revenue_share": 0.153,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "금형 및 기타",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.0083,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "자동차부품",
-      "caption": "자동차용 램프·커넥터 등 내외장재 부품",
-      "kind": "auto",
-      "visual": "자동차부품",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "title": "IT 디바이스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 70.4%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
       "image_source": "Unsplash"
     },
     {
       "title": "가전제품ASS'Y",
-      "caption": "냉장고·세탁기 등 생활가전 내외장재",
-      "kind": "consumer",
-      "visual": "가전제품ASS'Y",
-      "image": "../data/business_images/business_image_141eab6519656e30.jpg",
-      "image_source": "Wikimedia Commons"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.7%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "자동차 부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.3%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

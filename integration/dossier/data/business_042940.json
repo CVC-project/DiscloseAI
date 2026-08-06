@@ -155,14 +155,25 @@
     "segment_finance": "상지건설은 고급 빌라·오피스텔·주택 등을 직접 개발해 분양하는 부동산개발업과, 이를 시공하는 건설업(토목건축·전기·통신·소방공사)을 함께 하는 회사로, 부동산 PM·분양대행 등 관련 용역도 제공합니다. 최근 매출은 분양공사보다 도급공사(시공) 비중이 커져 매출의 96%를 차지하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 186억 원으로 전년 대비 8.9% 줄었고, 영업손실 68억 원·순손실 134억 원을 기록해 여전히 적자 상태이지만 손실 규모는 전년보다 줄었습니다. 부채비율은 116.4%로 자본보다 부채가 많아 재무 부담을 주의 깊게 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "도급공사(건설업)",
-        "desc": "빌라·오피스텔·주택 등 토목건축 시공",
-        "revenue_share": 0.9599
+        "name": "분양공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 65.1%",
+        "revenue_share": 0.6506,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "전기·통신·소방 공사",
-        "desc": "건축물 전기·통신·소방 설비공사",
-        "revenue_share": 0.0389
+        "name": "도급공사(건설업)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 96.0%",
+        "revenue_share": 0.9599,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전기, 통신, 소방 공사 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.9%",
+        "revenue_share": 0.0389,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -177,24 +188,55 @@
       "부동산 PM·유지관리",
       "분양대행 서비스"
     ],
-    "investor_note": "상지건설은 고급 빌라·오피스텔·주택 등을 직접 개발해 분양하는 부동산개발업과, 이를 시공하는 건설업(토목건축·전기·통신·소방공사)을 함께 하는 회사로, 부동산 PM·분양대행 등 관련 용역도 제공합니다. 최근 매출은 분양공사보다 도급공사(시공) 비중이 커져 매출의 96%를 차지하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 186억 원으로 전년 대비 8.9% 줄었고, 영업손실 68억 원·순손실 134억 원을 기록해 여전히 적자 상태이지만 손실 규모는 전년보다 줄었습니다. 부채비율은 116.4%로 자본보다 부채가 많아 재무 부담을 주의 깊게 살펴볼 필요가 있습니다."
+    "investor_note": "상지건설은 고급 빌라·오피스텔·주택 등을 직접 개발해 분양하는 부동산개발업과, 이를 시공하는 건설업(토목건축·전기·통신·소방공사)을 함께 하는 회사로, 부동산 PM·분양대행 등 관련 용역도 제공합니다. 최근 매출은 분양공사보다 도급공사(시공) 비중이 커져 매출의 96%를 차지하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 186억 원으로 전년 대비 8.9% 줄었고, 영업손실 68억 원·순손실 134억 원을 기록해 여전히 적자 상태이지만 손실 규모는 전년보다 줄었습니다. 부채비율은 116.4%로 자본보다 부채가 많아 재무 부담을 주의 깊게 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "분양공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 65.1%",
+        "revenue_share": 0.6506,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "도급공사(건설업)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 96.0%",
+        "revenue_share": 0.9599,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전기, 통신, 소방 공사 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.9%",
+        "revenue_share": 0.0389,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "도급공사(건설업)",
-      "caption": "빌라·오피스텔·주택 등 토목건축 시공",
+      "title": "분양공사",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 65.1%",
       "kind": "service",
-      "visual": "도급공사",
-      "image": "../data/business_images/business_image_local_housing.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "전기·통신·소방 공사",
-      "caption": "건축물 전기·통신·소방 설비공사",
+      "title": "건축·주택",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 96.0%",
+      "kind": "service",
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "전기, 통신, 소방 공사 등",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.9%",
       "kind": "telecom",
-      "visual": "전기",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

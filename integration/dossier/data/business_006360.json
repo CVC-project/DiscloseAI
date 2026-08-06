@@ -153,23 +153,7 @@
   "snippets": {
     "overview": "GS건설은 '자이' 아파트로 잘 알려진 건설사로, 건축·주택사업 외에 정유·석유화학 플랜트(EPC), 도로·철도 인프라, 폴란드 모듈러주택(Danwood), 해외 수처리시설 운영(GS이니마) 등으로 사업을 다각화했습니다. 과거 공시 기반 참고 정보로, 연결 매출액은 12조 4,503억 원으로 전년 대비 3.2% 감소했지만 영업이익은 4,378억 원으로 53.1% 늘었고, 당기순이익은 934억 원으로 64.6% 줄었습니다. 부채비율은 234.2%로 빚 부담이 큰 편입니다. 감사보고서에는 인천 검단 아파트 건설현장 사고 관련 불확실성이 강조사항으로 함께 명시돼 있습니다.",
     "segment_finance": "GS건설은 '자이' 아파트로 잘 알려진 건설사로, 건축·주택사업 외에 정유·석유화학 플랜트(EPC), 도로·철도 인프라, 폴란드 모듈러주택(Danwood), 해외 수처리시설 운영(GS이니마) 등으로 사업을 다각화했습니다. 과거 공시 기반 참고 정보로, 연결 매출액은 12조 4,503억 원으로 전년 대비 3.2% 감소했지만 영업이익은 4,378억 원으로 53.1% 늘었고, 당기순이익은 934억 원으로 64.6% 줄었습니다. 부채비율은 234.2%로 빚 부담이 큰 편입니다. 감사보고서에는 인천 검단 아파트 건설현장 사고 관련 불확실성이 강조사항으로 함께 명시돼 있습니다.",
-    "segment_breakdown": [
-      {
-        "name": "건축·주택",
-        "desc": "자이, 재건축, 오피스 건축",
-        "revenue_share": 0.626
-      },
-      {
-        "name": "플랜트·인프라",
-        "desc": "EPC와 도로·철도 등 토목",
-        "revenue_share": 0.223
-      },
-      {
-        "name": "수처리",
-        "desc": "해수담수화와 상하수도 운영",
-        "revenue_share": 0.07
-      }
-    ],
+    "segment_breakdown": [],
     "products": [
       "자이(APT 브랜드)",
       "오피스빌딩·데이터센터·클린룸 시공",
@@ -180,32 +164,70 @@
       "수처리시설 운영(GS이니마)",
       "스마트홈·리모델링(자이에스앤디)"
     ],
-    "investor_note": "GS건설은 '자이' 아파트로 잘 알려진 건설사로, 건축·주택사업 외에 정유·석유화학 플랜트(EPC), 도로·철도 인프라, 폴란드 모듈러주택(Danwood), 해외 수처리시설 운영(GS이니마) 등으로 사업을 다각화했습니다. 과거 공시 기반 참고 정보로, 연결 매출액은 12조 4,503억 원으로 전년 대비 3.2% 감소했지만 영업이익은 4,378억 원으로 53.1% 늘었고, 당기순이익은 934억 원으로 64.6% 줄었습니다. 부채비율은 234.2%로 빚 부담이 큰 편입니다. 감사보고서에는 인천 검단 아파트 건설현장 사고 관련 불확실성이 강조사항으로 함께 명시돼 있습니다."
+    "investor_note": "GS건설은 '자이' 아파트로 잘 알려진 건설사로, 건축·주택사업 외에 정유·석유화학 플랜트(EPC), 도로·철도 인프라, 폴란드 모듈러주택(Danwood), 해외 수처리시설 운영(GS이니마) 등으로 사업을 다각화했습니다. 과거 공시 기반 참고 정보로, 연결 매출액은 12조 4,503억 원으로 전년 대비 3.2% 감소했지만 영업이익은 4,378억 원으로 53.1% 늘었고, 당기순이익은 934억 원으로 64.6% 줄었습니다. 부채비율은 234.2%로 빚 부담이 큰 편입니다. 감사보고서에는 인천 검단 아파트 건설현장 사고 관련 불확실성이 강조사항으로 함께 명시돼 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "건축ㆍ주택사업본부",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 62.5%",
+        "revenue_share": 0.6255,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "플랜트사업본부",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.6%",
+        "revenue_share": 0.106,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "인프라사업본부",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.7%",
+        "revenue_share": 0.1174,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "개발ㆍ신사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.5%",
+        "revenue_share": 0.0349,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "건축·주택",
-      "caption": "자이, 재건축, 오피스 건축",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 62.5%",
       "kind": "service",
-      "visual": "건축",
-      "image": "../data/business_images/business_image_local_housing.svg",
-      "image_source": "Local curated visual"
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "플랜트·인프라",
-      "caption": "EPC와 도로·철도 등 토목",
-      "kind": "ship",
-      "visual": "플랜트",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "title": "토목·플랜트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.6%",
+      "kind": "service",
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_5184e050831a4460.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "수처리",
-      "caption": "해수담수화와 상하수도 운영",
+      "title": "인프라사업본부",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.7%",
       "kind": "service",
-      "visual": "수처리",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "개발ㆍ신사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

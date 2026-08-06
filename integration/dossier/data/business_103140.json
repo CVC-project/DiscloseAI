@@ -156,18 +156,31 @@
     "segment_breakdown": [
       {
         "name": "신동부문",
-        "desc": "신동부문 관련 제품·서비스",
-        "revenue_share": null
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 54.5%",
+        "revenue_share": 0.545,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "봉ㆍ선",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.7%",
+        "revenue_share": 0.057,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "소전",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.4%",
+        "revenue_share": 0.044,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "방산부문",
-        "desc": "방산, 방산부문 관련 제품·서비스",
-        "revenue_share": null
-      },
-      {
-        "name": "신동부문 총계",
-        "desc": "신동부문 관련 제품·서비스",
-        "revenue_share": null
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.8%",
+        "revenue_share": 0.308,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -183,32 +196,70 @@
       "스포츠탄",
       "국가방위산업"
     ],
-    "investor_note": "(주)풍산의 주요 사업은 신동부문, 방산부문, 신동부문 총계, 신동사업부문 등입니다. 또한, Scrap 투입 비율 확대를 통해 원료의 재활용을 통한 자원의 순환경제와 원가경쟁력을 높이기 위해 노력하고 있습니다.당기 전체 매출은 3조 8,491억원으로 신동 및 방산 부문의 매출 비중은 각각 69%, 31%를 차지하였습니다. 생산제품별 총판매중량대비 총매출액의 단순평균가격으로 산출하였습니다."
+    "investor_note": "(주)풍산의 주요 사업은 신동부문, 방산부문, 신동부문 총계, 신동사업부문 등입니다. 또한, Scrap 투입 비율 확대를 통해 원료의 재활용을 통한 자원의 순환경제와 원가경쟁력을 높이기 위해 노력하고 있습니다.당기 전체 매출은 3조 8,491억원으로 신동 및 방산 부문의 매출 비중은 각각 69%, 31%를 차지하였습니다. 생산제품별 총판매중량대비 총매출액의 단순평균가격으로 산출하였습니다.",
+    "product_service_segments": [
+      {
+        "name": "신동부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 54.5%",
+        "revenue_share": 0.545,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "봉ㆍ선",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.7%",
+        "revenue_share": 0.057,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "소전",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.4%",
+        "revenue_share": 0.044,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "방산부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.8%",
+        "revenue_share": 0.308,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "신동부문",
-      "caption": "신동부문 관련 제품·서비스",
-      "kind": "service",
-      "visual": "신동부문",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "방산부문",
-      "caption": "방산, 방산부문 관련 제품·서비스",
-      "kind": "service",
-      "visual": "방산부문",
-      "image": "../data/business_images/business_image_4ae102473975707c.jpg",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 54.5%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "신동부문 총계",
-      "caption": "신동부문 관련 제품·서비스",
-      "kind": "service",
-      "visual": "신동부문",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "title": "봉ㆍ선",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.7%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "소전",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.4%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "방산·항공",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.8%",
+      "kind": "ship",
+      "visual": "DEFENSE",
+      "image": "../data/business_images/business_image_1805fba8159acac6.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

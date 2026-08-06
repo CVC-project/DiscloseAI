@@ -137,7 +137,22 @@
   "snippets": {
     "overview": "(주)넥스트칩의 주요 제품·서비스는 Foundry, 이미지센서, 제품 매출, ISP, 제품매출 소계, 파운드리(Foundry)입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 2단계로 공급가 책정 기준은 첫번째가 경쟁사의 가격 정책에 대한 대응이며 고객사별 물량, 제품 판매시 직간접적인 시너지 분석과 연구 개발비 투자 회수 가능성을 기준으로 공급가를 책정 합니다. 첫번째는 수요와 공급에 따른 경쟁으로 시장 판매 가격의 변동이 있을 수 있으며, 두번째는 원자재와 외부 임가공에 대한 가격 변동으로 원가 인상 또는 인하로 인한 공급가의 변동 입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "(주)넥스트칩의 주요 제품·서비스는 Foundry, 이미지센서, 제품 매출, ISP, 제품매출 소계, 파운드리(Foundry)입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 2단계로 공급가 책정 기준은 첫번째가 경쟁사의 가격 정책에 대한 대응이며 고객사별 물량, 제품 판매시 직간접적인 시너지 분석과 연구 개발비 투자 회수 가능성을 기준으로 공급가를 책정 합니다. 첫번째는 수요와 공급에 따른 경쟁으로 시장 판매 가격의 변동이 있을 수 있으며, 두번째는 원자재와 외부 임가공에 대한 가격 변동으로 원가 인상 또는 인하로 인한 공급가의 변동 입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "AHD",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.5%",
+        "revenue_share": 0.2055,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.5%",
+        "revenue_share": 0.0451,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "Foundry",
       "이미지센서",
@@ -149,23 +164,45 @@
       "신뢰성 시험",
       "한국"
     ],
-    "investor_note": "(주)넥스트칩의 주요 제품·서비스는 Foundry, 이미지센서, 제품 매출, ISP, 제품매출 소계, 파운드리(Foundry)입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 2단계로 공급가 책정 기준은 첫번째가 경쟁사의 가격 정책에 대한 대응이며 고객사별 물량, 제품 판매시 직간접적인 시너지 분석과 연구 개발비 투자 회수 가능성을 기준으로 공급가를 책정 합니다. 첫번째는 수요와 공급에 따른 경쟁으로 시장 판매 가격의 변동이 있을 수 있으며, 두번째는 원자재와 외부 임가공에 대한 가격 변동으로 원가 인상 또는 인하로 인한 공급가의 변동 입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)넥스트칩의 주요 제품·서비스는 Foundry, 이미지센서, 제품 매출, ISP, 제품매출 소계, 파운드리(Foundry)입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 2단계로 공급가 책정 기준은 첫번째가 경쟁사의 가격 정책에 대한 대응이며 고객사별 물량, 제품 판매시 직간접적인 시너지 분석과 연구 개발비 투자 회수 가능성을 기준으로 공급가를 책정 합니다. 첫번째는 수요와 공급에 따른 경쟁으로 시장 판매 가격의 변동이 있을 수 있으며, 두번째는 원자재와 외부 임가공에 대한 가격 변동으로 원가 인상 또는 인하로 인한 공급가의 변동 입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "제품 매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 74.9%",
+        "revenue_share": 0.7486,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "AHD",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.5%",
+        "revenue_share": 0.2055,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품매출 소계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 95.4%",
+        "revenue_share": 0.9542,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.5%",
+        "revenue_share": 0.0451,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "Foundry",
-      "caption": "Foundry 관련 제품과 서비스를 통해 매출을 만듭니다.",
+      "title": "AHD",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.5%",
       "kind": "chip",
-      "visual": "Foundry",
-      "image": "../data/business_images/business_image_local_semiconductor_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "이미지센서",
-      "caption": "이미지센서 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "이미지센서",
-      "image": "../data/business_images/business_image_025006447be31665.jpg",
+      "visual": "CHIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
       "image_source": "Wikimedia Commons"
     }
   ],

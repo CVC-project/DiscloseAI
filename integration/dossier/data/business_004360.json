@@ -155,19 +155,25 @@
     "segment_finance": "세방은 전국 항만에서 벌크화물 하역과 컨테이너 운송, 중량물 운송, 물류센터 보관까지 아우르는 종합물류기업으로, 운송부문(61%)과 하역부문(23%)이 매출의 대부분을 차지하며 2025년 9월 완주복합물류센터를 새로 준공했습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 2,417억 원으로 전년 대비 9.6% 줄었지만 영업이익은 11.5% 늘었고, 당기순이익은 656억 원으로 전년 대비 23.2% 감소했습니다. 부채비율은 23.8%로 낮은 편이라 재무 구조는 안정적입니다.",
     "segment_breakdown": [
       {
-        "name": "운송부문",
-        "desc": "컨테이너·벌크·중량화물 육상·철도·해상 운송",
-        "revenue_share": 0.612
+        "name": "화물운송",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 61.2%",
+        "revenue_share": 0.612,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "하역부문",
-        "desc": "항만 벌크·컨테이너 하역",
-        "revenue_share": 0.229
+        "name": "항만하역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.9%",
+        "revenue_share": 0.229,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "보관부문",
-        "desc": "CY/CFS 등 물류센터 보관",
-        "revenue_share": 0.127
+        "name": "CY/CFS외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.7%",
+        "revenue_share": 0.127,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -177,32 +183,70 @@
       "물류센터 보관(CY/CFS)",
       "완주복합물류센터"
     ],
-    "investor_note": "세방은 전국 항만에서 벌크화물 하역과 컨테이너 운송, 중량물 운송, 물류센터 보관까지 아우르는 종합물류기업으로, 운송부문(61%)과 하역부문(23%)이 매출의 대부분을 차지하며 2025년 9월 완주복합물류센터를 새로 준공했습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 2,417억 원으로 전년 대비 9.6% 줄었지만 영업이익은 11.5% 늘었고, 당기순이익은 656억 원으로 전년 대비 23.2% 감소했습니다. 부채비율은 23.8%로 낮은 편이라 재무 구조는 안정적입니다."
+    "investor_note": "세방은 전국 항만에서 벌크화물 하역과 컨테이너 운송, 중량물 운송, 물류센터 보관까지 아우르는 종합물류기업으로, 운송부문(61%)과 하역부문(23%)이 매출의 대부분을 차지하며 2025년 9월 완주복합물류센터를 새로 준공했습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 2,417억 원으로 전년 대비 9.6% 줄었지만 영업이익은 11.5% 늘었고, 당기순이익은 656억 원으로 전년 대비 23.2% 감소했습니다. 부채비율은 23.8%로 낮은 편이라 재무 구조는 안정적입니다.",
+    "product_service_segments": [
+      {
+        "name": "화물운송",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 61.2%",
+        "revenue_share": 0.612,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "항만하역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.9%",
+        "revenue_share": 0.229,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "CY/CFS외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.7%",
+        "revenue_share": 0.127,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임대 외 기타",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.2%",
+        "revenue_share": 0.032,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "운송부문",
-      "caption": "컨테이너·벌크·중량화물 육상·철도·해상 운송",
+      "title": "화물운송",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 61.2%",
       "kind": "service",
-      "visual": "운송부문",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "하역부문",
-      "caption": "항만 벌크·컨테이너 하역",
+      "title": "항만하역",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.9%",
       "kind": "service",
-      "visual": "하역부문",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "보관부문",
-      "caption": "CY/CFS 등 물류센터 보관",
+      "title": "CY/CFS외",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.7%",
       "kind": "service",
-      "visual": "보관부문",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "임대 외 기타",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -153,29 +153,67 @@
   "snippets": {
     "overview": "에스제이엠홀딩스는 유가증권 상장사 (주)에스제이엠 등 20개 종속회사를 거느린 지주회사로, 자동차 배기계에 들어가 소음·진동을 흡수하는 신축이음쇠(Flexible Coupling)를 만드는 자동차사업부가 매출의 85%를 차지합니다. 산업·건축용 배관에 쓰이는 신축이음쇠(Expansion Joint)를 만드는 플랜트사업부가 14%, 통신용 반도체 칩(MMIC)을 설계·판매하는 기타부문이 1%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,057억 원으로 전년과 비슷한 수준(-0.2%)이었지만 영업이익은 23.1%, 당기순이익은 31.5% 줄어 수익성이 둔화됐습니다. 부채비율은 19.8%로 매우 낮아 재무구조는 안정적인 편입니다.",
     "segment_finance": "에스제이엠홀딩스는 유가증권 상장사 (주)에스제이엠 등 20개 종속회사를 거느린 지주회사로, 자동차 배기계에 들어가 소음·진동을 흡수하는 신축이음쇠(Flexible Coupling)를 만드는 자동차사업부가 매출의 85%를 차지합니다. 산업·건축용 배관에 쓰이는 신축이음쇠(Expansion Joint)를 만드는 플랜트사업부가 14%, 통신용 반도체 칩(MMIC)을 설계·판매하는 기타부문이 1%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,057억 원으로 전년과 비슷한 수준(-0.2%)이었지만 영업이익은 23.1%, 당기순이익은 31.5% 줄어 수익성이 둔화됐습니다. 부채비율은 19.8%로 매우 낮아 재무구조는 안정적인 편입니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.005,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "Flexible Coupling(자동차용 신축이음쇠)",
       "Expansion Joint(산업·건축용 신축이음쇠)",
       "MMIC(통신용 반도체 칩)"
     ],
-    "investor_note": "에스제이엠홀딩스는 유가증권 상장사 (주)에스제이엠 등 20개 종속회사를 거느린 지주회사로, 자동차 배기계에 들어가 소음·진동을 흡수하는 신축이음쇠(Flexible Coupling)를 만드는 자동차사업부가 매출의 85%를 차지합니다. 산업·건축용 배관에 쓰이는 신축이음쇠(Expansion Joint)를 만드는 플랜트사업부가 14%, 통신용 반도체 칩(MMIC)을 설계·판매하는 기타부문이 1%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,057억 원으로 전년과 비슷한 수준(-0.2%)이었지만 영업이익은 23.1%, 당기순이익은 31.5% 줄어 수익성이 둔화됐습니다. 부채비율은 19.8%로 매우 낮아 재무구조는 안정적인 편입니다."
+    "investor_note": "에스제이엠홀딩스는 유가증권 상장사 (주)에스제이엠 등 20개 종속회사를 거느린 지주회사로, 자동차 배기계에 들어가 소음·진동을 흡수하는 신축이음쇠(Flexible Coupling)를 만드는 자동차사업부가 매출의 85%를 차지합니다. 산업·건축용 배관에 쓰이는 신축이음쇠(Expansion Joint)를 만드는 플랜트사업부가 14%, 통신용 반도체 칩(MMIC)을 설계·판매하는 기타부문이 1%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,057억 원으로 전년과 비슷한 수준(-0.2%)이었지만 영업이익은 23.1%, 당기순이익은 31.5% 줄어 수익성이 둔화됐습니다. 부채비율은 19.8%로 매우 낮아 재무구조는 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "자동차사업부(자동차용 BELLOWS)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 84.9%",
+        "revenue_share": 0.849,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "플랜트사업부(산업용 BELLOWS)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.1%",
+        "revenue_share": 0.111,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.02,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.005,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "자동차사업부",
-      "caption": "자동차 배기계용 신축이음쇠(Flexible Coupling) 제조",
+      "title": "자동차사업부(자동차용 BELLOWS)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 84.9%",
       "kind": "auto",
-      "visual": "자동차사업부",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "플랜트사업부",
-      "caption": "산업·건축용 배관 신축이음쇠(Expansion Joint) 제조",
-      "kind": "ship",
-      "visual": "플랜트사업부",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "title": "토목·플랜트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.1%",
+      "kind": "service",
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_5184e050831a4460.avif",
       "image_source": "Unsplash"
     }
   ],

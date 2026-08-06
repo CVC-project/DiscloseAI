@@ -155,24 +155,32 @@
     "segment_finance": "대원은 '칸타빌(Cantavil)' 브랜드로 아파트·주상복합을 짓는 건설사업(주택분양·도급공사 등 약 85%)과 학생복·단체복용 모직 원단·원사를 만드는 섬유사업(13%)을 함께 운영하며, 국내뿐 아니라 베트남에서도 건설 프로젝트를 진행하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,121억 원으로 전년 대비 59.5% 크게 줄었고, 영업이익과 당기순이익 모두 적자로 전환해 각각 137억 원, 84억 원의 손실을 기록했습니다. 건설업 특성상 미분양·미착공 현장의 자산 회수가능성이 감사에서 핵심적으로 다뤄졌으며, 부채비율은 82.4%로 자본과 비슷한 수준의 빚을 지고 있습니다.",
     "segment_breakdown": [
       {
-        "name": "도급공사(건축)",
-        "desc": "아파트·주상복합·상업용 건물 등 건축 도급공사",
-        "revenue_share": 0.589
+        "name": "건설",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.6%",
+        "revenue_share": 0.1161,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "섬유",
-        "desc": "학생복·단체복용 모직 원단·원사 제조",
-        "revenue_share": 0.128
+        "name": "도급공사(건축)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 58.9%",
+        "revenue_share": 0.5888,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "도급공사(토목)",
-        "desc": "산업단지조성·도로 등 사회간접자본시설 공사",
-        "revenue_share": 0.145
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.5%",
+        "revenue_share": 0.1446,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "분양(주택)",
-        "desc": "칸타빌 브랜드 아파트 분양 사업",
-        "revenue_share": 0.116
+        "name": "섬유",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.8%",
+        "revenue_share": 0.1281,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -181,40 +189,62 @@
       "토목공사(산업단지·도로)",
       "모직물 원단·원사"
     ],
-    "investor_note": "대원은 '칸타빌(Cantavil)' 브랜드로 아파트·주상복합을 짓는 건설사업(주택분양·도급공사 등 약 85%)과 학생복·단체복용 모직 원단·원사를 만드는 섬유사업(13%)을 함께 운영하며, 국내뿐 아니라 베트남에서도 건설 프로젝트를 진행하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,121억 원으로 전년 대비 59.5% 크게 줄었고, 영업이익과 당기순이익 모두 적자로 전환해 각각 137억 원, 84억 원의 손실을 기록했습니다. 건설업 특성상 미분양·미착공 현장의 자산 회수가능성이 감사에서 핵심적으로 다뤄졌으며, 부채비율은 82.4%로 자본과 비슷한 수준의 빚을 지고 있습니다."
+    "investor_note": "대원은 '칸타빌(Cantavil)' 브랜드로 아파트·주상복합을 짓는 건설사업(주택분양·도급공사 등 약 85%)과 학생복·단체복용 모직 원단·원사를 만드는 섬유사업(13%)을 함께 운영하며, 국내뿐 아니라 베트남에서도 건설 프로젝트를 진행하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,121억 원으로 전년 대비 59.5% 크게 줄었고, 영업이익과 당기순이익 모두 적자로 전환해 각각 137억 원, 84억 원의 손실을 기록했습니다. 건설업 특성상 미분양·미착공 현장의 자산 회수가능성이 감사에서 핵심적으로 다뤄졌으며, 부채비율은 82.4%로 자본과 비슷한 수준의 빚을 지고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "건설",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.6%",
+        "revenue_share": 0.1161,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "도급공사(건축)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 58.9%",
+        "revenue_share": 0.5888,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "도급공사(토목)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.5%",
+        "revenue_share": 0.1446,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "섬유",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.8%",
+        "revenue_share": 0.1281,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "도급공사(건축)",
-      "caption": "아파트·주상복합·상업용 건물 등 건축 도급공사",
+      "title": "건축·주택",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.6%",
       "kind": "service",
-      "visual": "도급공사",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "토목·플랜트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.5%",
+      "kind": "service",
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_5184e050831a4460.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "섬유",
-      "caption": "학생복·단체복용 모직 원단·원사 제조",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.8%",
       "kind": "service",
-      "visual": "섬유",
-      "image": "../data/business_images/business_image_local_textile.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "도급공사(토목)",
-      "caption": "산업단지조성·도로 등 사회간접자본시설 공사",
-      "kind": "service",
-      "visual": "도급공사",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "분양(주택)",
-      "caption": "칸타빌 브랜드 아파트 분양 사업",
-      "kind": "service",
-      "visual": "분양",
-      "image": "../data/business_images/business_image_local_housing.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

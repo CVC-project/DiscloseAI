@@ -155,24 +155,11 @@
     "segment_finance": "매출은 전선 사업 중 절연전선(56%)과 전력전선(35%)이 대부분을 차지하며, 알루미늄휠 사업이 새로운 성장축으로 더해졌습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,245억 원으로 전년 대비 13.0% 늘었지만 영업이익은 34.8% 줄었습니다. 다만 당기순이익은 129억 원으로 90.1% 늘어 순이익은 오히려 개선됐습니다. 부채비율은 127.9%로 자본보다 빚이 많은 편이라 재무 부담을 참고할 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "전선(절연전선)",
-        "desc": "전원 배선용 절연전선",
-        "revenue_share": 0.56
-      },
-      {
-        "name": "전선(전력전선)",
-        "desc": "전력 송배전용 케이블",
-        "revenue_share": 0.35
-      },
-      {
-        "name": "자동차 알루미늄휠",
-        "desc": "현대차·기아 등에 납품하는 OEM 알루미늄 휠(자회사 대원알텍)",
-        "revenue_share": 0.16
-      },
-      {
-        "name": "전선(나선·통신전선 등)",
-        "desc": "나선·통신전선·기타",
-        "revenue_share": 0.09
+        "name": "알루미늄휠",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.8%",
+        "revenue_share": 0.998,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -182,32 +169,32 @@
       "통신전선",
       "자동차 알루미늄휠(OEM)"
     ],
-    "investor_note": "매출은 전선 사업 중 절연전선(56%)과 전력전선(35%)이 대부분을 차지하며, 알루미늄휠 사업이 새로운 성장축으로 더해졌습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,245억 원으로 전년 대비 13.0% 늘었지만 영업이익은 34.8% 줄었습니다. 다만 당기순이익은 129억 원으로 90.1% 늘어 순이익은 오히려 개선됐습니다. 부채비율은 127.9%로 자본보다 빚이 많은 편이라 재무 부담을 참고할 필요가 있습니다."
+    "investor_note": "매출은 전선 사업 중 절연전선(56%)과 전력전선(35%)이 대부분을 차지하며, 알루미늄휠 사업이 새로운 성장축으로 더해졌습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,245억 원으로 전년 대비 13.0% 늘었지만 영업이익은 34.8% 줄었습니다. 다만 당기순이익은 129억 원으로 90.1% 늘어 순이익은 오히려 개선됐습니다. 부채비율은 127.9%로 자본보다 빚이 많은 편이라 재무 부담을 참고할 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "알루미늄휠",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.8%",
+        "revenue_share": 0.998,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역및기타",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.002,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "전선(절연전선)",
-      "caption": "전원 배선용 절연전선",
-      "kind": "service",
-      "visual": "전선",
-      "image": "../data/business_images/business_image_local_cable.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "전선(전력전선)",
-      "caption": "전력 송배전용 케이블",
+      "title": "알루미늄휠",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.8%",
       "kind": "power",
-      "visual": "전선",
-      "image": "../data/business_images/business_image_local_power.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "전선(나선·통신전선 등)",
-      "caption": "나선·통신전선·기타",
-      "kind": "telecom",
-      "visual": "전선",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "visual": "POWER",
+      "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

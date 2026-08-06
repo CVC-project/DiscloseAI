@@ -105,7 +105,15 @@
   "snippets": {
     "overview": "주식회사 한켐의 주요 사업은 신규소재사업입니다. 이와 같이 발주부터 제품 제작 및 납품까지의 단순하고 짧은 프로세스로 인하여 수주잔고가 곧 향후 3개월의 매출액을 의미하지 않으며, 수주물량에 따른 중장기 실적 예측도 어려운 구조를 갖고 있습니다. 당사는 고객사의 특정 요구에 맞추어 화합물 소재를 연구, 개발, 생산하며, 최적화된 제조 공정과 순도 높은 최종 제품을 제공하여 고객의 제품 개발 시간과 비용을 절감할 수 있도록 지원하는 CRO 및 CDMO 사업을 영위하고 있습니다.",
     "segment_finance": "주식회사 한켐의 주요 사업은 신규소재사업입니다. 이와 같이 발주부터 제품 제작 및 납품까지의 단순하고 짧은 프로세스로 인하여 수주잔고가 곧 향후 3개월의 매출액을 의미하지 않으며, 수주물량에 따른 중장기 실적 예측도 어려운 구조를 갖고 있습니다. 당사는 고객사의 특정 요구에 맞추어 화합물 소재를 연구, 개발, 생산하며, 최적화된 제조 공정과 순도 높은 최종 제품을 제공하여 고객의 제품 개발 시간과 비용을 절감할 수 있도록 지원하는 CRO 및 CDMO 사업을 영위하고 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.0054,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "OLED",
       "MLCC",
@@ -118,24 +126,39 @@
       "고성능 핸드폰",
       "TV"
     ],
-    "investor_note": "주식회사 한켐의 주요 사업은 신규소재사업입니다. 이와 같이 발주부터 제품 제작 및 납품까지의 단순하고 짧은 프로세스로 인하여 수주잔고가 곧 향후 3개월의 매출액을 의미하지 않으며, 수주물량에 따른 중장기 실적 예측도 어려운 구조를 갖고 있습니다. 당사는 고객사의 특정 요구에 맞추어 화합물 소재를 연구, 개발, 생산하며, 최적화된 제조 공정과 순도 높은 최종 제품을 제공하여 고객의 제품 개발 시간과 비용을 절감할 수 있도록 지원하는 CRO 및 CDMO 사업을 영위하고 있습니다."
+    "investor_note": "주식회사 한켐의 주요 사업은 신규소재사업입니다. 이와 같이 발주부터 제품 제작 및 납품까지의 단순하고 짧은 프로세스로 인하여 수주잔고가 곧 향후 3개월의 매출액을 의미하지 않으며, 수주물량에 따른 중장기 실적 예측도 어려운 구조를 갖고 있습니다. 당사는 고객사의 특정 요구에 맞추어 화합물 소재를 연구, 개발, 생산하며, 최적화된 제조 공정과 순도 높은 최종 제품을 제공하여 고객의 제품 개발 시간과 비용을 절감할 수 있도록 지원하는 CRO 및 CDMO 사업을 영위하고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 84.0%",
+        "revenue_share": 0.8399,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.5%",
+        "revenue_share": 0.1547,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.0054,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "OLED",
-      "caption": "OLED 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "display",
-      "visual": "OLED",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
+      "title": "기타소재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.5%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
       "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "MLCC",
-      "caption": "MLCC 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "MLCC",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
     }
   ],
   "custom_report_ideas": [

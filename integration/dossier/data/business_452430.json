@@ -121,7 +121,29 @@
   "snippets": {
     "overview": "㈜사피엔반도체의 주요 사업은 전자파 장애, 바이오/의료, 전문사업입니다. 하지만 향후에는 고객사 증가에 따른 대리점 판매 비중이 점차 커질 것으로 판단하고 있습니다. 당사는 고객의 기술지원 및 응대속도를 높이기 위해 직접판매 형식의 판매를 위주로 현재 사업을 운영하고 있습니다.",
     "segment_finance": "㈜사피엔반도체의 주요 사업은 전자파 장애, 바이오/의료, 전문사업입니다. 하지만 향후에는 고객사 증가에 따른 대리점 판매 비중이 점차 커질 것으로 판단하고 있습니다. 당사는 고객의 기술지원 및 응대속도를 높이기 위해 직접판매 형식의 판매를 위주로 현재 사업을 운영하고 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "CMOS Backplane",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.6%",
+        "revenue_share": 0.5058,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.2%",
+        "revenue_share": 0.0219,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매출총계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "Foundry",
       "OLED",
@@ -134,39 +156,53 @@
       "안정성 강화",
       "적응형 LED 전조등"
     ],
-    "investor_note": "㈜사피엔반도체의 주요 사업은 전자파 장애, 바이오/의료, 전문사업입니다. 하지만 향후에는 고객사 증가에 따른 대리점 판매 비중이 점차 커질 것으로 판단하고 있습니다. 당사는 고객의 기술지원 및 응대속도를 높이기 위해 직접판매 형식의 판매를 위주로 현재 사업을 운영하고 있습니다."
+    "investor_note": "㈜사피엔반도체의 주요 사업은 전자파 장애, 바이오/의료, 전문사업입니다. 하지만 향후에는 고객사 증가에 따른 대리점 판매 비중이 점차 커질 것으로 판단하고 있습니다. 당사는 고객의 기술지원 및 응대속도를 높이기 위해 직접판매 형식의 판매를 위주로 현재 사업을 운영하고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.6%",
+        "revenue_share": 0.3762,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "CMOS Backplane",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.6%",
+        "revenue_share": 0.5058,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.2%",
+        "revenue_share": 0.0219,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매출총계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "Foundry",
-      "caption": "Foundry 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "CMOS Backplane",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.6%",
       "kind": "chip",
       "visual": "CHIP",
-      "image": "../data/business_images/business_image_local_semiconductor_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
-      "kind": "chip",
-      "visual": "CHIP",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "Chip set",
-      "caption": "Chip set 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "용역",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.2%",
       "kind": "chip",
       "visual": "CHIP",
-      "image": "../data/business_images/business_image_local_semiconductor_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "대형디스플레이 구동반도체",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
-      "kind": "chip",
-      "visual": "CHIP",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
       "image_source": "Wikimedia Commons"
     }
   ],

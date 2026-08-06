@@ -111,18 +111,24 @@
     "segment_breakdown": [
       {
         "name": "컴포넌트",
-        "desc": "MLCC, Inductor, Chip Resistor 등 수동소자 생산",
-        "revenue_share": 0.4595
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.0%",
+        "revenue_share": 0.4595,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "패키지솔루션",
-        "desc": "반도체패키지기판 생산 및 공급",
-        "revenue_share": 0.2034
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.3%",
+        "revenue_share": 0.2034,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "광학솔루션",
-        "desc": "카메라모듈 생산 및 판매",
-        "revenue_share": 0.3371
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.7%",
+        "revenue_share": 0.3371,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "investor_note": "삼성전기는 스마트폰과 반도체에 들어가는 작은 전자부품들을 만드는 회사입니다. MLCC(적층세라믹콘덴서)나 인덕터 같은 수동소자 40%, 반도체를 보호하고 연결하는 패키지기판 20%, 카메라모듈 34% 등 세 가지 사업으로 나뉘어 있으며, 과거 공시 기반으로 최근 매출액이 11조 3천억 원으로 전년 대비 약 10% 증가했습니다. 특히 영업이익(회사가 본업으로 번 이익)이 9천억 원으로 24% 증가해 수익성이 크게 개선되었고, 총자산도 14조 6천억 원으로 늘어나 사업 확장이 진행 중입니다. 부채비율이 49%로 50% 미만의 건전한 수준을 유지하고 있으며, 현금 보유액도 2조 7천억 원으로 재무 안정성이 양호한 상태입니다. 다만 순이익 증가율은 4%로 영업이익 증가율보다 낮은데, 이는 일시적 손실 요인의 영향으로 보입니다.",
@@ -141,39 +147,46 @@
       "AI 가속기용 기판"
     ],
     "raw_moves": [],
-    "utilization": []
+    "utilization": [],
+    "product_service_segments": [
+      {
+        "name": "컴포넌트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.0%",
+        "revenue_share": 0.4595,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "패키지솔루션",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.3%",
+        "revenue_share": 0.2034,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "광학솔루션",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.7%",
+        "revenue_share": 0.3371,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "MLCC",
-      "caption": "스마트폰·전장용 적층세라믹콘덴서 수요를 봅니다.",
-      "kind": "sensor",
-      "visual": "MLCC",
-      "image": "../data/business_images/business_image_76a8c8f5ba93d5d3.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "카메라모듈",
-      "caption": "모바일과 자동차용 카메라모듈이 주요 제품군입니다.",
-      "kind": "sensor",
-      "visual": "CAM",
-      "image": "../data/business_images/business_image_025006447be31665.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "패키지기판",
-      "caption": "고성능 반도체용 기판 수요와 고객사 투자가 중요합니다.",
+      "title": "컴포넌트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.0%",
       "kind": "chip",
-      "visual": "PKG",
+      "visual": "CHIP",
       "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "전장부품",
-      "caption": "차량 전장화가 전자부품 수요를 넓힙니다.",
-      "kind": "auto",
-      "visual": "AUTO",
-      "image": "../data/business_images/business_image_e310d326cafd0fb3.jpg",
+      "title": "소프트웨어·솔루션",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.3%",
+      "kind": "service",
+      "visual": "SOFTWARE",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
       "image_source": "Wikimedia Commons"
     }
   ],

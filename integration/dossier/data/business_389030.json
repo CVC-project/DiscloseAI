@@ -153,7 +153,29 @@
   "snippets": {
     "overview": "지니너스(주)의 주요 서비스는 원유, (3)검사, 진단제품, CancerSCAN, LiquidSCAN, OncoLapse입니다. 이용자 활동을 광고·결제·콘텐츠·거래 수익으로 연결합니다. 지니너스 주식회사(이하 ‘당사’)는 2018년 4월 20일 삼성서울병원 삼성유전체연구소에서 스핀오프된 유전체 분석 기술 등의 연구개발, 유전체 분석 솔루션 등의 개발과 제조 등을 주요사업으로 하고 있는 바이오 벤처 회사입니다. 플랫폼 기업은 이용자 기반이 광고, 결제, 구독, 콘텐츠 수익으로 이어지는 구조가 핵심입니다.",
     "segment_finance": "지니너스(주)의 주요 서비스는 원유, (3)검사, 진단제품, CancerSCAN, LiquidSCAN, OncoLapse입니다. 이용자 활동을 광고·결제·콘텐츠·거래 수익으로 연결합니다. 지니너스 주식회사(이하 ‘당사’)는 2018년 4월 20일 삼성서울병원 삼성유전체연구소에서 스핀오프된 유전체 분석 기술 등의 연구개발, 유전체 분석 솔루션 등의 개발과 제조 등을 주요사업으로 하고 있는 바이오 벤처 회사입니다. 플랫폼 기업은 이용자 기반이 광고, 결제, 구독, 콘텐츠 수익으로 이어지는 구조가 핵심입니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "용역매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 61.0%",
+        "revenue_share": 0.61,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "암유전체 분석 솔루션",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.0%",
+        "revenue_share": 0.15,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.01,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "원유",
       "(3)검사",
@@ -168,40 +190,46 @@
       "단일세포 분석 서비스",
       "암유전체 분석 솔루션"
     ],
-    "investor_note": "지니너스(주)의 주요 서비스는 원유, (3)검사, 진단제품, CancerSCAN, LiquidSCAN, OncoLapse입니다. 이용자 활동을 광고·결제·콘텐츠·거래 수익으로 연결합니다. 지니너스 주식회사(이하 ‘당사’)는 2018년 4월 20일 삼성서울병원 삼성유전체연구소에서 스핀오프된 유전체 분석 기술 등의 연구개발, 유전체 분석 솔루션 등의 개발과 제조 등을 주요사업으로 하고 있는 바이오 벤처 회사입니다. 플랫폼 기업은 이용자 기반이 광고, 결제, 구독, 콘텐츠 수익으로 이어지는 구조가 핵심입니다."
+    "investor_note": "지니너스(주)의 주요 서비스는 원유, (3)검사, 진단제품, CancerSCAN, LiquidSCAN, OncoLapse입니다. 이용자 활동을 광고·결제·콘텐츠·거래 수익으로 연결합니다. 지니너스 주식회사(이하 ‘당사’)는 2018년 4월 20일 삼성서울병원 삼성유전체연구소에서 스핀오프된 유전체 분석 기술 등의 연구개발, 유전체 분석 솔루션 등의 개발과 제조 등을 주요사업으로 하고 있는 바이오 벤처 회사입니다. 플랫폼 기업은 이용자 기반이 광고, 결제, 구독, 콘텐츠 수익으로 이어지는 구조가 핵심입니다.",
+    "product_service_segments": [
+      {
+        "name": "용역매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 61.0%",
+        "revenue_share": 0.61,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "암유전체 분석 솔루션",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.0%",
+        "revenue_share": 0.15,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
+        "revenue_share": 0.05,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.01,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "원유",
-      "caption": "원유 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "소프트웨어·솔루션",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.0%",
       "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "(3)검사",
-      "caption": "(3)검사 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "chip",
-      "visual": "CHIP",
-      "image": "../data/business_images/business_image_local_default_b.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "진단제품",
-      "caption": "진단제품 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "CancerSCAN",
-      "caption": "CancerSCAN 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "visual": "SOFTWARE",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

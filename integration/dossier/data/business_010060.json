@@ -156,18 +156,24 @@
     "segment_breakdown": [
       {
         "name": "신재생에너지",
-        "desc": "태양광용 폴리실리콘 등 태양광 소재",
-        "revenue_share": 0.12
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.0%",
+        "revenue_share": 0.12,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "에너지솔루션",
-        "desc": "태양광·열병합 발전 등 에너지 사업",
-        "revenue_share": 0.13
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.0%",
+        "revenue_share": 0.13,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "화학소재",
-        "desc": "반도체용 폴리실리콘·과산화수소·카본블랙 등 정밀·석유화학",
-        "revenue_share": 0.59
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.0%",
+        "revenue_share": 0.59,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -184,32 +190,70 @@
       "태양광·열병합 발전",
       "도시개발(시티오씨엘)"
     ],
-    "investor_note": "OCI홀딩스는 2023년 지주회사로 전환한 뒤, 반도체·태양광용 폴리실리콘·과산화수소·카본블랙 등을 만드는 화학소재(매출 59%), 태양광·열병합 발전의 에너지솔루션(13%), 인천 '시티오씨엘' 도시개발(13%), 태양광 소재 신재생에너지(12%) 부문 자회사를 거느리고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3조 3,800억 원(전년비 -5.5%)이며 영업이익 576억 원 적자, 당기순이익 1,462억 원 적자로 전년 흑자에서 적자 전환했습니다. 총자산은 7조 8,708억 원(-2.8%), 부채비율은 66.3%로 안정적인 편입니다. 감사인은 이연법인세자산의 실현 가능성과 일부 자회사 영업권의 손상 여부를 핵심감사사항으로 짚었습니다."
+    "investor_note": "OCI홀딩스는 2023년 지주회사로 전환한 뒤, 반도체·태양광용 폴리실리콘·과산화수소·카본블랙 등을 만드는 화학소재(매출 59%), 태양광·열병합 발전의 에너지솔루션(13%), 인천 '시티오씨엘' 도시개발(13%), 태양광 소재 신재생에너지(12%) 부문 자회사를 거느리고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3조 3,800억 원(전년비 -5.5%)이며 영업이익 576억 원 적자, 당기순이익 1,462억 원 적자로 전년 흑자에서 적자 전환했습니다. 총자산은 7조 8,708억 원(-2.8%), 부채비율은 66.3%로 안정적인 편입니다. 감사인은 이연법인세자산의 실현 가능성과 일부 자회사 영업권의 손상 여부를 핵심감사사항으로 짚었습니다.",
+    "product_service_segments": [
+      {
+        "name": "신재생에너지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.0%",
+        "revenue_share": 0.12,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "에너지솔루션",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.0%",
+        "revenue_share": 0.13,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "화학소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.0%",
+        "revenue_share": 0.59,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "도시개발사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.0%",
+        "revenue_share": 0.13,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "신재생에너지",
-      "caption": "태양광용 폴리실리콘 등 태양광 소재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.0%",
       "kind": "power",
-      "visual": "신재생에너지",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "visual": "RENEWABLE",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "에너지솔루션",
-      "caption": "태양광·열병합 발전 등 에너지 사업",
-      "kind": "power",
-      "visual": "에너지솔루션",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "title": "소프트웨어·솔루션",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.0%",
+      "kind": "service",
+      "visual": "SOFTWARE",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "화학소재",
-      "caption": "반도체용 폴리실리콘·과산화수소·카본블랙 등 정밀·석유화학",
-      "kind": "chip",
-      "visual": "화학소재",
-      "image": "../data/business_images/business_image_local_oil.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "도시개발사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

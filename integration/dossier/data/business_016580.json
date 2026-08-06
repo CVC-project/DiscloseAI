@@ -155,29 +155,32 @@
     "segment_finance": "환인제약은 정신·신경계 질환 치료제를 주력으로 하는 제약회사로, 쿠에타핀·에프람 등 정신신경용제가 전체 매출의 82.8%를 차지하며 국내 정신치료 약물시장 점유율 1위를 지키고 있습니다. 이 외에 해열소염진통제, 순환기질환치료제, 소화성궤양치료제 등도 함께 판매합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,552억 원으로 전년과 비슷한 수준(-1.7%)이었지만 영업이익은 39.4% 줄어든 130억 원, 당기순이익은 41.9% 감소한 135억 원을 기록해 수익성이 다소 둔화됐습니다. 다만 총자산은 12.8% 늘었고 부채비율은 13.7%로 매우 낮아 재무구조는 안정적입니다.",
     "segment_breakdown": [
       {
-        "name": "정신신경용제",
-        "desc": "조현병·우울증 등 정신·신경질환 치료제",
-        "revenue_share": 0.8278
+        "name": "의약품부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 82.8%",
+        "revenue_share": 0.8278,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "해열소염진통제",
-        "desc": "해열 및 진통 목적 의약품",
-        "revenue_share": 0.0855
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.6%",
+        "revenue_share": 0.0855,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "순환기질환치료제",
-        "desc": "고지혈증 등 순환장애 치료제",
-        "revenue_share": 0.0433
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.3%",
+        "revenue_share": 0.0433,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "소화성궤양치료제",
-        "desc": "위궤양 치료·간장보호 의약품",
-        "revenue_share": 0.0174
-      },
-      {
-        "name": "골다공증치료제",
-        "desc": "골다공증 예방·치료 의약품",
-        "revenue_share": 0.0075
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.7%",
+        "revenue_share": 0.0174,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -190,40 +193,70 @@
       "환인라베프라졸정",
       "프로이반"
     ],
-    "investor_note": "환인제약은 정신·신경계 질환 치료제를 주력으로 하는 제약회사로, 쿠에타핀·에프람 등 정신신경용제가 전체 매출의 82.8%를 차지하며 국내 정신치료 약물시장 점유율 1위를 지키고 있습니다. 이 외에 해열소염진통제, 순환기질환치료제, 소화성궤양치료제 등도 함께 판매합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,552억 원으로 전년과 비슷한 수준(-1.7%)이었지만 영업이익은 39.4% 줄어든 130억 원, 당기순이익은 41.9% 감소한 135억 원을 기록해 수익성이 다소 둔화됐습니다. 다만 총자산은 12.8% 늘었고 부채비율은 13.7%로 매우 낮아 재무구조는 안정적입니다."
+    "investor_note": "환인제약은 정신·신경계 질환 치료제를 주력으로 하는 제약회사로, 쿠에타핀·에프람 등 정신신경용제가 전체 매출의 82.8%를 차지하며 국내 정신치료 약물시장 점유율 1위를 지키고 있습니다. 이 외에 해열소염진통제, 순환기질환치료제, 소화성궤양치료제 등도 함께 판매합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,552억 원으로 전년과 비슷한 수준(-1.7%)이었지만 영업이익은 39.4% 줄어든 130억 원, 당기순이익은 41.9% 감소한 135억 원을 기록해 수익성이 다소 둔화됐습니다. 다만 총자산은 12.8% 늘었고 부채비율은 13.7%로 매우 낮아 재무구조는 안정적입니다.",
+    "product_service_segments": [
+      {
+        "name": "의약품부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 82.8%",
+        "revenue_share": 0.8278,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "해열소염진통제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.6%",
+        "revenue_share": 0.0855,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "순환기질환치료제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.3%",
+        "revenue_share": 0.0433,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "소화성궤양치료제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.7%",
+        "revenue_share": 0.0174,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "정신신경용제",
-      "caption": "조현병·우울증 등 정신·신경질환 치료제",
-      "kind": "service",
-      "visual": "정신신경용제",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "의약품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 82.8%",
+      "kind": "bio",
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "해열소염진통제",
-      "caption": "해열 및 진통 목적 의약품",
-      "kind": "bio",
-      "visual": "해열소염진통제",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "순환기질환치료제",
-      "caption": "고지혈증 등 순환장애 치료제",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.3%",
       "kind": "service",
-      "visual": "순환기질환치료제",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "소화성궤양치료제",
-      "caption": "위궤양 치료·간장보호 의약품",
-      "kind": "bio",
-      "visual": "소화성궤양치료제",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

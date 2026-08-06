@@ -155,19 +155,18 @@
     "segment_finance": "(주)엔지켐생명과학의 주요 제품·서비스는 의약품, 건강기능식품, 상품 등, 진해거담제, 항응고제 등, 바이오유지입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사의 원료의약품 부문에서는 뛰어난 원료합성기술과 MRI 조영제 합성기술을 바탕으로 다양한 원료의약품을 연구개발하여 제조, 판매하고 있습니다. Batch수는 Batch Term에 따라 결정되며, Batch Term은 첫번째 Batch(일반 제조업의 경우 생산 LOT의 개념) 이후 두번째 Batch가 투입되는데 필요한 일수를 의미합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "건강기능식품부문",
-        "desc": "건강기능식품 관련 제품·서비스",
-        "revenue_share": null
+        "name": "원료의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.8%",
+        "revenue_share": 0.338,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "바이오유지부문",
-        "desc": "바이오유지 관련 제품·서비스",
-        "revenue_share": null
-      },
-      {
-        "name": "바이오유지 제조/판매",
-        "desc": "바이오유지 관련 제품·서비스",
-        "revenue_share": null
+        "name": "바이오유지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 66.2%",
+        "revenue_share": 0.662,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -183,32 +182,40 @@
       "생산량(size)가 상이하며",
       "생산능력산출품목"
     ],
-    "investor_note": "(주)엔지켐생명과학의 주요 제품·서비스는 의약품, 건강기능식품, 상품 등, 진해거담제, 항응고제 등, 바이오유지입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사의 원료의약품 부문에서는 뛰어난 원료합성기술과 MRI 조영제 합성기술을 바탕으로 다양한 원료의약품을 연구개발하여 제조, 판매하고 있습니다. Batch수는 Batch Term에 따라 결정되며, Batch Term은 첫번째 Batch(일반 제조업의 경우 생산 LOT의 개념) 이후 두번째 Batch가 투입되는데 필요한 일수를 의미합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)엔지켐생명과학의 주요 제품·서비스는 의약품, 건강기능식품, 상품 등, 진해거담제, 항응고제 등, 바이오유지입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사의 원료의약품 부문에서는 뛰어난 원료합성기술과 MRI 조영제 합성기술을 바탕으로 다양한 원료의약품을 연구개발하여 제조, 판매하고 있습니다. Batch수는 Batch Term에 따라 결정되며, Batch Term은 첫번째 Batch(일반 제조업의 경우 생산 LOT의 개념) 이후 두번째 Batch가 투입되는데 필요한 일수를 의미합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "원료의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.8%",
+        "revenue_share": 0.338,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "바이오유지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 66.2%",
+        "revenue_share": 0.662,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "건강기능식품부문",
-      "caption": "건강기능식품 관련 제품·서비스",
-      "kind": "consumer",
-      "visual": "건강기능식품",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "의약품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.8%",
+      "kind": "bio",
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "바이오유지 부문",
-      "caption": "바이오유지 관련 제품·서비스",
+      "title": "바이오유지",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 66.2%",
       "kind": "bio",
-      "visual": "바이오유지",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "바이오유지 제조/판매",
-      "caption": "바이오유지 관련 제품·서비스",
-      "kind": "bio",
-      "visual": "바이오유지",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "BIO",
+      "image": "../data/business_images/business_image_food_ingredient.svg",
+      "image_source": "Local visual"
     }
   ],
   "custom_report_ideas": [

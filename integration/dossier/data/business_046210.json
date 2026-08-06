@@ -156,18 +156,17 @@
     "segment_breakdown": [
       {
         "name": "분자진단",
-        "desc": "PNA 기반 암 체세포돌연변이 진단시약·분석서비스",
-        "revenue_share": 0.7681
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 76.8%",
+        "revenue_share": 0.7681,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "핵산추출",
-        "desc": "핵산 추출장비 및 추출시약",
-        "revenue_share": 0.0423
-      },
-      {
-        "name": "면역진단",
-        "desc": "퀀텀팩 기술 기반 면역진단 제품",
-        "revenue_share": 0.0045
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.2%",
+        "revenue_share": 0.0423,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -180,32 +179,55 @@
       "PANAMAX(핵산추출장비)",
       "QuantumPACK(면역진단)"
     ],
-    "investor_note": "HLB파나진은 인공유전자 PNA 소재를 기반으로 폐암·대장암 등 유전자 돌연변이를 검출하는 분자진단 시약(PNAClamp 등)과 면역진단 제품을 개발하는 바이오기업으로, 분자진단 사업이 매출의 77%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 150억 원으로 전년 대비 14.0% 늘었지만 영업손실과 순손실이 이어졌습니다. 감사인은 자회사 바이오스퀘어의 영업권에서 52억 원의 손상차손을 인식한 점을 핵심감사사항으로 짚어, 자회사 사업 부진에 유의할 필요가 있습니다."
+    "investor_note": "HLB파나진은 인공유전자 PNA 소재를 기반으로 폐암·대장암 등 유전자 돌연변이를 검출하는 분자진단 시약(PNAClamp 등)과 면역진단 제품을 개발하는 바이오기업으로, 분자진단 사업이 매출의 77%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 150억 원으로 전년 대비 14.0% 늘었지만 영업손실과 순손실이 이어졌습니다. 감사인은 자회사 바이오스퀘어의 영업권에서 52억 원의 손상차손을 인식한 점을 핵심감사사항으로 짚어, 자회사 사업 부진에 유의할 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "소재사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.5%",
+        "revenue_share": 0.185,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "분자진단",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 76.8%",
+        "revenue_share": 0.7681,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "핵산추출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.2%",
+        "revenue_share": 0.0423,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "분자진단",
-      "caption": "PNA 기반 암 체세포돌연변이 진단시약·분석서비스",
-      "kind": "service",
-      "visual": "분자진단",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "소재사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.5%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "진단·분석",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 76.8%",
+      "kind": "bio",
+      "visual": "DIAGNOSTIC",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "핵산추출",
-      "caption": "핵산 추출장비 및 추출시약",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.2%",
       "kind": "service",
-      "visual": "핵산추출",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "면역진단",
-      "caption": "퀀텀팩 기술 기반 면역진단 제품",
-      "kind": "service",
-      "visual": "면역진단",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

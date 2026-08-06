@@ -153,7 +153,22 @@
   "snippets": {
     "overview": "(주)넥슨게임즈의 주요 사업은 게임부문, 임대사업, 게임사업부문, 임대사업부문입니다. 매출인 임대수익은 거래상대방으로 부터 받는 일정기간의 계약조건에 따른 임대료이므로 경기변동 및 물가상승에 따라 변동될 수 있습니다. 게임매출은 부분 유료화를 통한 아이템 판매가 이뤄지므로 정액제 게임과 달리 고정가격 산정이 어려우며, 그 단가가 고정되어 있지 않고 거래목적물 등에 따라 유동적이므로 가격 변동 추이 파악이 어렵습니다.",
     "segment_finance": "(주)넥슨게임즈의 주요 사업은 게임부문, 임대사업, 게임사업부문, 임대사업부문입니다. 매출인 임대수익은 거래상대방으로 부터 받는 일정기간의 계약조건에 따른 임대료이므로 경기변동 및 물가상승에 따라 변동될 수 있습니다. 게임매출은 부분 유료화를 통한 아이템 판매가 이뤄지므로 정액제 게임과 달리 고정가격 산정이 어려우며, 그 단가가 고정되어 있지 않고 거래목적물 등에 따라 유동적이므로 가격 변동 추이 파악이 어렵습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "게임부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.7%",
+        "revenue_share": 0.4669,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "게임매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.6%",
+        "revenue_share": 0.5162,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "FPS",
       "분기",
@@ -163,32 +178,54 @@
       "모바일",
       "온라인(PC"
     ],
-    "investor_note": "(주)넥슨게임즈의 주요 사업은 게임부문, 임대사업, 게임사업부문, 임대사업부문입니다. 매출인 임대수익은 거래상대방으로 부터 받는 일정기간의 계약조건에 따른 임대료이므로 경기변동 및 물가상승에 따라 변동될 수 있습니다. 게임매출은 부분 유료화를 통한 아이템 판매가 이뤄지므로 정액제 게임과 달리 고정가격 산정이 어려우며, 그 단가가 고정되어 있지 않고 거래목적물 등에 따라 유동적이므로 가격 변동 추이 파악이 어렵습니다."
+    "investor_note": "(주)넥슨게임즈의 주요 사업은 게임부문, 임대사업, 게임사업부문, 임대사업부문입니다. 매출인 임대수익은 거래상대방으로 부터 받는 일정기간의 계약조건에 따른 임대료이므로 경기변동 및 물가상승에 따라 변동될 수 있습니다. 게임매출은 부분 유료화를 통한 아이템 판매가 이뤄지므로 정액제 게임과 달리 고정가격 산정이 어려우며, 그 단가가 고정되어 있지 않고 거래목적물 등에 따라 유동적이므로 가격 변동 추이 파악이 어렵습니다.",
+    "product_service_segments": [
+      {
+        "name": "게임부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.7%",
+        "revenue_share": 0.4669,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "게임매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.6%",
+        "revenue_share": 0.5162,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.7%",
+        "revenue_share": 0.0169,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임대사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "분기",
-      "caption": "분기 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "title": "게임",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.7%",
+      "kind": "platform",
+      "visual": "GAME",
+      "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "MMORPG",
-      "caption": "MMORPG 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "임대사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "Loot Shooter",
-      "caption": "Loot Shooter 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

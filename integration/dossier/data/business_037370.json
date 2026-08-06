@@ -155,14 +155,18 @@
     "segment_finance": "EG는 자동차 모터·스피커용 자석 원료로 쓰이는 산화철을 만드는 소재기업으로, 최근 중국의 희토류 수출통제로 희토류를 대체하는 페라이트 자석용 산화철 수요가 늘고 있는 산업 환경에 있습니다. 산화철 제조가 매출의 대부분(약 92%)을 차지하고, 나머지는 폐자원 재활용 등 에너지환경사업과 태양광 발전, 부동산 임대 등으로 구성돼 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 627억 원으로 전년 대비 3.8% 줄었고, 영업손실은 21억 원으로 적자 폭이 60.4% 줄었지만 여전히 적자이며, 당기순손실도 76억 원으로 전년보다 손실이 13.7% 늘었습니다. 특히 부채비율이 554.4%로 자본 대비 빚이 매우 많은 수준이라 재무 건전성을 각별히 살펴볼 필요가 있고, 자기자본이익률(ROE)도 -30.7%로 자본을 까먹고 있는 상황입니다.",
     "segment_breakdown": [
       {
-        "name": "산화철(제조부문)",
-        "desc": "자동차모터·스피커·모니터용 자석 원료 산화철 제조",
-        "revenue_share": 0.92
+        "name": "제조부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.0%",
+        "revenue_share": 0.2,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "부동산 외",
-        "desc": "임대 등 기타 수익",
-        "revenue_share": 0.03
+        "name": "Hard:스피커용 자석Soft:디플렉션 요크(DY,고급DY)-모니터용, 고급FBT-안료산화철 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 72.0%",
+        "revenue_share": 0.72,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -171,24 +175,62 @@
       "환경플랜트 설비(에너지환경사업)",
       "태양광 발전(전기공급)"
     ],
-    "investor_note": "EG는 자동차 모터·스피커용 자석 원료로 쓰이는 산화철을 만드는 소재기업으로, 최근 중국의 희토류 수출통제로 희토류를 대체하는 페라이트 자석용 산화철 수요가 늘고 있는 산업 환경에 있습니다. 산화철 제조가 매출의 대부분(약 92%)을 차지하고, 나머지는 폐자원 재활용 등 에너지환경사업과 태양광 발전, 부동산 임대 등으로 구성돼 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 627억 원으로 전년 대비 3.8% 줄었고, 영업손실은 21억 원으로 적자 폭이 60.4% 줄었지만 여전히 적자이며, 당기순손실도 76억 원으로 전년보다 손실이 13.7% 늘었습니다. 특히 부채비율이 554.4%로 자본 대비 빚이 매우 많은 수준이라 재무 건전성을 각별히 살펴볼 필요가 있고, 자기자본이익률(ROE)도 -30.7%로 자본을 까먹고 있는 상황입니다."
+    "investor_note": "EG는 자동차 모터·스피커용 자석 원료로 쓰이는 산화철을 만드는 소재기업으로, 최근 중국의 희토류 수출통제로 희토류를 대체하는 페라이트 자석용 산화철 수요가 늘고 있는 산업 환경에 있습니다. 산화철 제조가 매출의 대부분(약 92%)을 차지하고, 나머지는 폐자원 재활용 등 에너지환경사업과 태양광 발전, 부동산 임대 등으로 구성돼 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 627억 원으로 전년 대비 3.8% 줄었고, 영업손실은 21억 원으로 적자 폭이 60.4% 줄었지만 여전히 적자이며, 당기순손실도 76억 원으로 전년보다 손실이 13.7% 늘었습니다. 특히 부채비율이 554.4%로 자본 대비 빚이 매우 많은 수준이라 재무 건전성을 각별히 살펴볼 필요가 있고, 자기자본이익률(ROE)도 -30.7%로 자본을 까먹고 있는 상황입니다.",
+    "product_service_segments": [
+      {
+        "name": "제조부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.0%",
+        "revenue_share": 0.2,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Hard:스피커용 자석Soft:디플렉션 요크(DY,고급DY)-모니터용, 고급FBT-안료산화철 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 72.0%",
+        "revenue_share": 0.72,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "에너지환경사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.03,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "태양광발전사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.02,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "산화철(제조부문)",
-      "caption": "자동차모터·스피커·모니터용 자석 원료 산화철 제조",
+      "title": "제조부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.0%",
       "kind": "auto",
-      "visual": "산화철",
-      "image": "../data/business_images/business_image_141eab6519656e30.jpg",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "부동산",
-      "caption": "임대 등 기타 수익",
-      "kind": "service",
-      "visual": "부동산",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "title": "에너지환경사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "신재생에너지",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+      "kind": "power",
+      "visual": "RENEWABLE",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

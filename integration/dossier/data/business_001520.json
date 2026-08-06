@@ -156,23 +156,31 @@
     "segment_breakdown": [
       {
         "name": "건재",
-        "desc": "레미콘 제조·판매, 마감자재 유통",
-        "revenue_share": 0.5837
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 58.4%",
+        "revenue_share": 0.5837,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "건설",
-        "desc": "주택·건축·토목·플랜트 시공",
-        "revenue_share": 0.1724
-      },
-      {
-        "name": "섬유",
-        "desc": "아크릴 원사·스판본드 생산",
-        "revenue_share": 0.1367
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.2%",
+        "revenue_share": 0.1724,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "플랜트",
-        "desc": "발전소·제철 등 산업용 송풍기 제작",
-        "revenue_share": 0.0625
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.2%",
+        "revenue_share": 0.0625,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "섬유",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.7%",
+        "revenue_share": 0.1367,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -182,40 +190,70 @@
       "스판본드",
       "단열재/타일/위생도기/석고보드"
     ],
-    "investor_note": "동양은 1955년 창립 이래 레미콘을 생산하는 건재 부문, 주택·토목·플랜트를 시공하는 건설 부문, 산업용 송풍기를 만드는 플랜트 부문, 아크릴 원사·스판본드를 생산하는 섬유 부문까지 아우르는 종합 건설소재 기업입니다. 매출 비중은 건재가 58%로 가장 크고 건설이 17%, 섬유가 14%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,306억 원으로 건설경기 악화와 레미콘 출하량 감소 영향으로 전년 대비 16.0% 줄었고 영업이익도 -207억 원으로 적자 전환했습니다. 다만 당기순이익은 202억 원으로 흑자 전환했습니다. 총자산은 1조 4,548억 원, 부채비율은 92.2%로 자본과 비슷한 수준의 빚을 지고 있습니다."
+    "investor_note": "동양은 1955년 창립 이래 레미콘을 생산하는 건재 부문, 주택·토목·플랜트를 시공하는 건설 부문, 산업용 송풍기를 만드는 플랜트 부문, 아크릴 원사·스판본드를 생산하는 섬유 부문까지 아우르는 종합 건설소재 기업입니다. 매출 비중은 건재가 58%로 가장 크고 건설이 17%, 섬유가 14%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,306억 원으로 건설경기 악화와 레미콘 출하량 감소 영향으로 전년 대비 16.0% 줄었고 영업이익도 -207억 원으로 적자 전환했습니다. 다만 당기순이익은 202억 원으로 흑자 전환했습니다. 총자산은 1조 4,548억 원, 부채비율은 92.2%로 자본과 비슷한 수준의 빚을 지고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "건재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 58.4%",
+        "revenue_share": 0.5837,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "건설",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.2%",
+        "revenue_share": 0.1724,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "플랜트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.2%",
+        "revenue_share": 0.0625,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "섬유",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.7%",
+        "revenue_share": 0.1367,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "건재",
-      "caption": "레미콘 제조·판매, 마감자재 유통",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 58.4%",
       "kind": "service",
-      "visual": "건재",
-      "image": "../data/business_images/business_image_local_cement.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "건설",
-      "caption": "주택·건축·토목·플랜트 시공",
-      "kind": "ship",
-      "visual": "건설",
-      "image": "../data/business_images/business_image_local_housing.svg",
-      "image_source": "Local curated visual"
+      "title": "건축·주택",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.2%",
+      "kind": "service",
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "토목·플랜트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.2%",
+      "kind": "service",
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_5184e050831a4460.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "섬유",
-      "caption": "아크릴 원사·스판본드 생산",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.7%",
       "kind": "service",
-      "visual": "섬유",
-      "image": "../data/business_images/business_image_local_textile.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "플랜트",
-      "caption": "발전소·제철 등 산업용 송풍기 제작",
-      "kind": "ship",
-      "visual": "플랜트",
-      "image": "../data/business_images/business_image_local_cement.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

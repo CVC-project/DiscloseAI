@@ -153,7 +153,22 @@
   "snippets": {
     "overview": "삼진엘앤디는 한국 본사와 해외 6개 종속기업을 통해 2차전지 부품과 사무자동화(OA) 제품을 만드는 부품·전자기기 기업입니다. 매출의 약 60%는 복사기 주변기기(FINISHER) 등 OA 제품사업부문에서, 약 38%는 2차전지·ESS(에너지저장장치)에 쓰이는 케이스·개스킷을 만드는 부품사업부문에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,363억 원으로 전년 대비 21.3% 줄었고, 영업이익(-19억 원)과 순이익(-105억 원) 모두 적자를 이어갔지만 적자 폭은 전년보다 줄었습니다. 부채비율은 217.3%로 자본 대비 빚 부담이 큰 편이라 재무 안정성을 유심히 살펴볼 필요가 있습니다.",
     "segment_finance": "삼진엘앤디는 한국 본사와 해외 6개 종속기업을 통해 2차전지 부품과 사무자동화(OA) 제품을 만드는 부품·전자기기 기업입니다. 매출의 약 60%는 복사기 주변기기(FINISHER) 등 OA 제품사업부문에서, 약 38%는 2차전지·ESS(에너지저장장치)에 쓰이는 케이스·개스킷을 만드는 부품사업부문에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,363억 원으로 전년 대비 21.3% 줄었고, 영업이익(-19억 원)과 순이익(-105억 원) 모두 적자를 이어갔지만 적자 폭은 전년보다 줄었습니다. 부채비율은 217.3%로 자본 대비 빚 부담이 큰 편이라 재무 안정성을 유심히 살펴볼 필요가 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "부 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.5%",
+        "revenue_share": 0.385,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.9%",
+        "revenue_share": 0.599,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "ESS 케이스",
       "2차전지용 개스킷(Gasket)",
@@ -161,24 +176,40 @@
       "복사기 주변기기(FINISHER)",
       "금형"
     ],
-    "investor_note": "삼진엘앤디는 한국 본사와 해외 6개 종속기업을 통해 2차전지 부품과 사무자동화(OA) 제품을 만드는 부품·전자기기 기업입니다. 매출의 약 60%는 복사기 주변기기(FINISHER) 등 OA 제품사업부문에서, 약 38%는 2차전지·ESS(에너지저장장치)에 쓰이는 케이스·개스킷을 만드는 부품사업부문에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,363억 원으로 전년 대비 21.3% 줄었고, 영업이익(-19억 원)과 순이익(-105억 원) 모두 적자를 이어갔지만 적자 폭은 전년보다 줄었습니다. 부채비율은 217.3%로 자본 대비 빚 부담이 큰 편이라 재무 안정성을 유심히 살펴볼 필요가 있습니다."
+    "investor_note": "삼진엘앤디는 한국 본사와 해외 6개 종속기업을 통해 2차전지 부품과 사무자동화(OA) 제품을 만드는 부품·전자기기 기업입니다. 매출의 약 60%는 복사기 주변기기(FINISHER) 등 OA 제품사업부문에서, 약 38%는 2차전지·ESS(에너지저장장치)에 쓰이는 케이스·개스킷을 만드는 부품사업부문에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,363억 원으로 전년 대비 21.3% 줄었고, 영업이익(-19억 원)과 순이익(-105억 원) 모두 적자를 이어갔지만 적자 폭은 전년보다 줄었습니다. 부채비율은 217.3%로 자본 대비 빚 부담이 큰 편이라 재무 안정성을 유심히 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "부 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.5%",
+        "revenue_share": 0.385,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.9%",
+        "revenue_share": 0.599,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "부품사업부문",
-      "caption": "2차전지·ESS·UPS용 케이스·개스킷 등 사출부품 생산",
-      "kind": "battery",
-      "visual": "부품사업부문",
-      "image": "../data/business_images/business_image_local_battery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "그외 기타 제품 제조업",
-      "caption": "그외 기타 제품 제조업을 중심으로 매출을 만듭니다.",
+      "title": "부 품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.5%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "제 품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

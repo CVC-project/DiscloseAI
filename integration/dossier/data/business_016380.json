@@ -155,19 +155,25 @@
     "segment_finance": "KG스틸(구 동부제철)은 냉연강판, 아연도금강판, 컬러강판(X-TONE), 석도강판 등을 생산하는 철강 전문회사로, 자동차·가전제품·건축자재 등 다양한 산업에 소재를 공급하고 있습니다. 매출의 74%가 국내 철강부문에서, 16%가 해외법인 판매에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3조 1,934억 원으로 전년보다 3.3% 줄었고 영업이익도 1,507억 원으로 26.8% 감소했지만, 당기순이익은 1,355억 원으로 2.3% 늘었습니다. 부채비율은 50.9%로 무난한 수준입니다.",
     "segment_breakdown": [
       {
-        "name": "철강부문(냉연·아연도·컬러강판 등)",
-        "desc": "냉연강판·아연도금강판·컬러강판·석도강판 제조판매",
-        "revenue_share": 0.738
-      },
-      {
-        "name": "해외법인판매",
-        "desc": "해외 종속법인을 통한 철강제품 판매",
-        "revenue_share": 0.16
+        "name": "철강부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 73.8%",
+        "revenue_share": 0.738,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "PEB",
-        "desc": "철골 건축시스템",
-        "revenue_share": 0.006
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.6%",
+        "revenue_share": 0.006,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "해외법인판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.0%",
+        "revenue_share": 0.16,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -178,24 +184,54 @@
       "PEB(철골건축시스템)",
       "항만하역"
     ],
-    "investor_note": "KG스틸(구 동부제철)은 냉연강판, 아연도금강판, 컬러강판(X-TONE), 석도강판 등을 생산하는 철강 전문회사로, 자동차·가전제품·건축자재 등 다양한 산업에 소재를 공급하고 있습니다. 매출의 74%가 국내 철강부문에서, 16%가 해외법인 판매에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3조 1,934억 원으로 전년보다 3.3% 줄었고 영업이익도 1,507억 원으로 26.8% 감소했지만, 당기순이익은 1,355억 원으로 2.3% 늘었습니다. 부채비율은 50.9%로 무난한 수준입니다."
+    "investor_note": "KG스틸(구 동부제철)은 냉연강판, 아연도금강판, 컬러강판(X-TONE), 석도강판 등을 생산하는 철강 전문회사로, 자동차·가전제품·건축자재 등 다양한 산업에 소재를 공급하고 있습니다. 매출의 74%가 국내 철강부문에서, 16%가 해외법인 판매에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3조 1,934억 원으로 전년보다 3.3% 줄었고 영업이익도 1,507억 원으로 26.8% 감소했지만, 당기순이익은 1,355억 원으로 2.3% 늘었습니다. 부채비율은 50.9%로 무난한 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "철강부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 73.8%",
+        "revenue_share": 0.738,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "PEB",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.6%",
+        "revenue_share": 0.006,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "해외법인판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.0%",
+        "revenue_share": 0.16,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
+        "revenue_share": 0.063,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "철강부문(냉연·아연도·컬러강판 등)",
-      "caption": "냉연강판·아연도금강판·컬러강판·석도강판 제조판매",
+      "title": "철강",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 73.8%",
       "kind": "material",
-      "visual": "철강부문",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "visual": "STEEL",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "해외법인판매",
-      "caption": "해외 종속법인을 통한 철강제품 판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.0%",
       "kind": "material",
-      "visual": "해외법인판매",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

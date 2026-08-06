@@ -155,9 +155,11 @@
     "segment_finance": "(주)루멘스의 주요 사업은 LED 사업부문, LGP 사업부문, 자동차전장사업부문, 전자부품 등입니다. 고객과의 지속적인 거래관계로 고객의 생산계획에 따라 수시로 생산납품하는 형태로 이에 따라 수준잔고는 의미가 없음. 증가와 함께 당사의 생산공정의 변화(Roll Stamping 공정도입)를 통해 매출증가 및 원가구조 개선을 진행중에 있습니다.",
     "segment_breakdown": [
       {
-        "name": "전자부품",
-        "desc": "전자부품.조명, 전자부품 관련 제품·서비스",
-        "revenue_share": null
+        "name": "금융업 (*1)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.001,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -173,40 +175,62 @@
       "사업부분",
       "디스플레이 부문"
     ],
-    "investor_note": "(주)루멘스의 주요 사업은 LED 사업부문, LGP 사업부문, 자동차전장사업부문, 전자부품 등입니다. 고객과의 지속적인 거래관계로 고객의 생산계획에 따라 수시로 생산납품하는 형태로 이에 따라 수준잔고는 의미가 없음. 증가와 함께 당사의 생산공정의 변화(Roll Stamping 공정도입)를 통해 매출증가 및 원가구조 개선을 진행중에 있습니다."
+    "investor_note": "(주)루멘스의 주요 사업은 LED 사업부문, LGP 사업부문, 자동차전장사업부문, 전자부품 등입니다. 고객과의 지속적인 거래관계로 고객의 생산계획에 따라 수시로 생산납품하는 형태로 이에 따라 수준잔고는 의미가 없음. 증가와 함께 당사의 생산공정의 변화(Roll Stamping 공정도입)를 통해 매출증가 및 원가구조 개선을 진행중에 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "LED사업부",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.6%",
+        "revenue_share": 0.596,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전장사업부",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.6%",
+        "revenue_share": 0.226,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "LGP사업부",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.5%",
+        "revenue_share": 0.175,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "금융업 (*1)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.001,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "LED 사업부문",
-      "caption": "사업부 관련 제품·서비스",
-      "kind": "service",
-      "visual": "LED",
-      "image": "../data/business_images/business_image_local_semiconductor_part.svg",
-      "image_source": "Local curated visual"
+      "title": "LED사업부",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.6%",
+      "kind": "chip",
+      "visual": "CHIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "LGP 사업부문",
-      "caption": "사업부 관련 제품·서비스",
-      "kind": "service",
-      "visual": "LGP",
-      "image": "../data/business_images/business_image_local_semiconductor_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "자동차전장사업부문",
-      "caption": "사업부, 전장사업부 관련 제품·서비스",
+      "title": "전장부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.6%",
       "kind": "auto",
-      "visual": "자동차전장사업부문",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_e310d326cafd0fb3.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "전자부품",
-      "caption": "전자부품.조명, 전자부품 관련 제품·서비스",
-      "kind": "auto",
-      "visual": "전자부품",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "title": "LGP사업부",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.5%",
+      "kind": "chip",
+      "visual": "CHIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

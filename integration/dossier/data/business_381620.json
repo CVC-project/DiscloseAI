@@ -105,7 +105,29 @@
   "snippets": {
     "overview": "제닉스로보틱스 주식회사의 주요 제품·서비스는 OLED, 배터리, 스마트팩토리, 제품의 기획, 빅데이터, VR입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 모든 제품에 있어서 선 발주 후 생산 방식으로 거래하고 있으며, 수주에 성공한 설비들은 당사의 자체 설계 및 국내 조립 현장에서의 직접 제작 및 시운전을 통해 검수 완료 후 고객사에 납품(수출)하고 있습니다. 이 중 제조공장에서의 물류는 원자재의 입고부터 생산공정간 자재의 이동 및 보관, 최종 제품 출고까지의 전 과정을 의미하며, 각 과정별로 목적에 부합하는 설비와 IT 시스템이 활용됩니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "제닉스로보틱스 주식회사의 주요 제품·서비스는 OLED, 배터리, 스마트팩토리, 제품의 기획, 빅데이터, VR입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 모든 제품에 있어서 선 발주 후 생산 방식으로 거래하고 있으며, 수주에 성공한 설비들은 당사의 자체 설계 및 국내 조립 현장에서의 직접 제작 및 시운전을 통해 검수 완료 후 고객사에 납품(수출)하고 있습니다. 이 중 제조공장에서의 물류는 원자재의 입고부터 생산공정간 자재의 이동 및 보관, 최종 제품 출고까지의 전 과정을 의미하며, 각 과정별로 목적에 부합하는 설비와 IT 시스템이 활용됩니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "Stocker",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 69.4%",
+        "revenue_share": 0.694,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "AGV/AMR",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.1%",
+        "revenue_share": 0.121,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Job change",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.9%",
+        "revenue_share": 0.089,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "OLED",
       "배터리",
@@ -120,40 +142,70 @@
       "Job Change",
       "Stocker"
     ],
-    "investor_note": "제닉스로보틱스 주식회사의 주요 제품·서비스는 OLED, 배터리, 스마트팩토리, 제품의 기획, 빅데이터, VR입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 모든 제품에 있어서 선 발주 후 생산 방식으로 거래하고 있으며, 수주에 성공한 설비들은 당사의 자체 설계 및 국내 조립 현장에서의 직접 제작 및 시운전을 통해 검수 완료 후 고객사에 납품(수출)하고 있습니다. 이 중 제조공장에서의 물류는 원자재의 입고부터 생산공정간 자재의 이동 및 보관, 최종 제품 출고까지의 전 과정을 의미하며, 각 과정별로 목적에 부합하는 설비와 IT 시스템이 활용됩니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "제닉스로보틱스 주식회사의 주요 제품·서비스는 OLED, 배터리, 스마트팩토리, 제품의 기획, 빅데이터, VR입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 모든 제품에 있어서 선 발주 후 생산 방식으로 거래하고 있으며, 수주에 성공한 설비들은 당사의 자체 설계 및 국내 조립 현장에서의 직접 제작 및 시운전을 통해 검수 완료 후 고객사에 납품(수출)하고 있습니다. 이 중 제조공장에서의 물류는 원자재의 입고부터 생산공정간 자재의 이동 및 보관, 최종 제품 출고까지의 전 과정을 의미하며, 각 과정별로 목적에 부합하는 설비와 IT 시스템이 활용됩니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "Stocker",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 69.4%",
+        "revenue_share": 0.694,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "AGV/AMR",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.1%",
+        "revenue_share": 0.121,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.6%",
+        "revenue_share": 0.066,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Job change",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.9%",
+        "revenue_share": 0.089,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
-      "kind": "display",
-      "visual": "OLED",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "배터리",
-      "caption": "배터리 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "스마트팩토리",
-      "caption": "스마트팩토리 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "Stocker",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 69.4%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "제품의 기획",
-      "caption": "제품의 기획 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "AGV/AMR",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.1%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "기타장비",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "Job change",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

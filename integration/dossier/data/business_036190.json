@@ -155,24 +155,32 @@
     "segment_finance": "금화피에스시는 화력·원자력 발전소의 경상정비·계획예방정비를 주력사업으로 하는 플랜트 전문기업으로, 발전소·에너지 플랜트 건설, 자동차 전장부품 제조, 수처리·폐수처리 설비까지 사업을 다각화하고 있습니다. 매출의 약 73%가 발전정비부문에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,234억 원으로 전년 대비 24.5% 늘었고 영업이익도 438억 원으로 21.0% 증가했지만, 당기순이익은 305억 원으로 23.6% 감소했습니다. 부채비율은 27.4%로 낮은 편이라 재무구조는 안정적입니다.",
     "segment_breakdown": [
       {
-        "name": "발전정비",
-        "desc": "화력·원자력 발전소 경상정비·계획예방정비",
-        "revenue_share": 0.7308
+        "name": "국내",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 73.2%",
+        "revenue_share": 0.7322,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "수처리 및 폐수",
-        "desc": "순수제조·폐수처리·해수담수화 설비 및 운영정비",
-        "revenue_share": 0.1886
+        "name": "발전소건설",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.1%",
+        "revenue_share": 0.0212,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "플랜트건설",
-        "desc": "발전소·에너지설비·전기공사·엔지니어링제조",
-        "revenue_share": 0.0735
+        "name": "전기공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.0015,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "자동차부품제조",
-        "desc": "자동차 전장부품(ECU, Actuator 등) 제조",
-        "revenue_share": 0.0071
+        "name": "엔지니어링제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.1%",
+        "revenue_share": 0.0214,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -189,39 +197,61 @@
       "해수담수설비",
       "MDI(전기탈이온교환장치)"
     ],
-    "investor_note": "금화피에스시는 화력·원자력 발전소의 경상정비·계획예방정비를 주력사업으로 하는 플랜트 전문기업으로, 발전소·에너지 플랜트 건설, 자동차 전장부품 제조, 수처리·폐수처리 설비까지 사업을 다각화하고 있습니다. 매출의 약 73%가 발전정비부문에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,234억 원으로 전년 대비 24.5% 늘었고 영업이익도 438억 원으로 21.0% 증가했지만, 당기순이익은 305억 원으로 23.6% 감소했습니다. 부채비율은 27.4%로 낮은 편이라 재무구조는 안정적입니다."
+    "investor_note": "금화피에스시는 화력·원자력 발전소의 경상정비·계획예방정비를 주력사업으로 하는 플랜트 전문기업으로, 발전소·에너지 플랜트 건설, 자동차 전장부품 제조, 수처리·폐수처리 설비까지 사업을 다각화하고 있습니다. 매출의 약 73%가 발전정비부문에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,234억 원으로 전년 대비 24.5% 늘었고 영업이익도 438억 원으로 21.0% 증가했지만, 당기순이익은 305억 원으로 23.6% 감소했습니다. 부채비율은 27.4%로 낮은 편이라 재무구조는 안정적입니다.",
+    "product_service_segments": [
+      {
+        "name": "국내",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 73.2%",
+        "revenue_share": 0.7322,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "발전소건설",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.1%",
+        "revenue_share": 0.0212,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전기공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.0015,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "엔지니어링제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.1%",
+        "revenue_share": 0.0214,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "발전정비",
-      "caption": "화력·원자력 발전소 경상정비·계획예방정비",
-      "kind": "power",
-      "visual": "발전정비",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "title": "국내",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 73.2%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "수처리 및 폐수",
-      "caption": "순수제조·폐수처리·해수담수화 설비 및 운영정비",
+      "title": "건축·주택",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.1%",
       "kind": "service",
-      "visual": "수처리",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "플랜트건설",
-      "caption": "발전소·에너지설비·전기공사·엔지니어링제조",
-      "kind": "ship",
-      "visual": "플랜트건설",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "자동차부품제조",
-      "caption": "자동차 전장부품(ECU, Actuator 등) 제조",
-      "kind": "auto",
-      "visual": "자동차부품제조",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "title": "엔지니어링제조",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.1%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
       "image_source": "Unsplash"
     }
   ],

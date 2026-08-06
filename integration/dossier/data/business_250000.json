@@ -153,7 +153,36 @@
   "snippets": {
     "overview": "(주)보라티알의 주요 제품·서비스는 원유, 구리, 상세제품, 담당업무, 업무, 갈바니-블럭치즈입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. <식품 트렌드 변화> 수요의 경우 장기적으로는 국내 유제품 소비량의 변동 추이 및 식품 트렌드의 변화에 영향을 받으며, 단기적으로는 경쟁 제품의 가격 대비 당사 상품의 가격이 수요에 영향을 미친다고 볼 수 있습니다. 따라서 국내에서 매입하는 원재료의 개념은 제품의 소량을 제외한 대다수가 수입 상품 입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "(주)보라티알의 주요 제품·서비스는 원유, 구리, 상세제품, 담당업무, 업무, 갈바니-블럭치즈입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. <식품 트렌드 변화> 수요의 경우 장기적으로는 국내 유제품 소비량의 변동 추이 및 식품 트렌드의 변화에 영향을 받으며, 단기적으로는 경쟁 제품의 가격 대비 당사 상품의 가격이 수요에 영향을 미친다고 볼 수 있습니다. 따라서 국내에서 매입하는 원재료의 개념은 제품의 소량을 제외한 대다수가 수입 상품 입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.8%",
+        "revenue_share": 0.228,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "면류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.2%",
+        "revenue_share": 0.212,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "유가공류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.0%",
+        "revenue_share": 0.14,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "농산가공식품류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.2%",
+        "revenue_share": 0.122,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "원유",
       "구리",
@@ -168,40 +197,70 @@
       "투토솔-썬드리아 토마토펠라-페레론치노",
       "쥬카토-페이스트제품"
     ],
-    "investor_note": "(주)보라티알의 주요 제품·서비스는 원유, 구리, 상세제품, 담당업무, 업무, 갈바니-블럭치즈입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. <식품 트렌드 변화> 수요의 경우 장기적으로는 국내 유제품 소비량의 변동 추이 및 식품 트렌드의 변화에 영향을 받으며, 단기적으로는 경쟁 제품의 가격 대비 당사 상품의 가격이 수요에 영향을 미친다고 볼 수 있습니다. 따라서 국내에서 매입하는 원재료의 개념은 제품의 소량을 제외한 대다수가 수입 상품 입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)보라티알의 주요 제품·서비스는 원유, 구리, 상세제품, 담당업무, 업무, 갈바니-블럭치즈입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. <식품 트렌드 변화> 수요의 경우 장기적으로는 국내 유제품 소비량의 변동 추이 및 식품 트렌드의 변화에 영향을 받으며, 단기적으로는 경쟁 제품의 가격 대비 당사 상품의 가격이 수요에 영향을 미친다고 볼 수 있습니다. 따라서 국내에서 매입하는 원재료의 개념은 제품의 소량을 제외한 대다수가 수입 상품 입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.8%",
+        "revenue_share": 0.228,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "면류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.2%",
+        "revenue_share": 0.212,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "유가공류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.0%",
+        "revenue_share": 0.14,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "농산가공식품류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.2%",
+        "revenue_share": 0.122,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "원유",
-      "caption": "원유 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "구리",
-      "caption": "구리 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "title": "면류",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "상세제품",
-      "caption": "상세제품 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_local_default_c.svg",
-      "image_source": "Local curated visual"
+      "title": "유가공류",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "담당업무",
-      "caption": "담당업무 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "농산가공식품류",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.2%",
       "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_local_default_d.svg",
-      "image_source": "Local curated visual"
+      "visual": "CANNED",
+      "image": "../data/business_images/business_image_food_packaged.svg",
+      "image_source": "Local visual"
     }
   ],
   "custom_report_ideas": [

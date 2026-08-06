@@ -155,24 +155,18 @@
     "segment_finance": "동우팜투테이블은 병아리 부화부터 사육, 도계(닭 가공), 유통까지 전 과정을 한 회사가 관리하는 '수평계열화' 방식의 닭고기 생산기업으로, 위탁 사육농가와 계약해 안전한 원재료를 조달하고 '바른닭고기' 브랜드로 신선육을 판매합니다. 매출의 대부분이 도계육(닭고기 신선육)에서 나오며, 국내 도계 시장에서 계열사를 포함해 약 15%의 점유율을 차지하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,254억 원으로 전년 대비 7.4% 늘었고, 영업이익과 당기순이익 모두 전년 적자에서 흑자로 돌아서 실적이 뚜렷하게 개선됐습니다. 부채비율도 17.8%로 낮아 재무 안정성도 양호한 편입니다.",
     "segment_breakdown": [
       {
-        "name": "도계육(신선육)",
-        "desc": "닭을 도계·가공한 신선육 제품 '바른닭고기'",
-        "revenue_share": 0.84
-      },
-      {
-        "name": "생계·병아리 등",
-        "desc": "산 채로 유통하는 생계·병아리 판매",
-        "revenue_share": 0.12
-      },
-      {
         "name": "단미사료",
-        "desc": "동물사료용 배합사료 첨가제",
-        "revenue_share": 0.02
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.02,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "도계육외 상품",
-        "desc": "토종닭·오리 등 매입 유통 상품",
-        "revenue_share": 0.02
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.02,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -182,40 +176,47 @@
       "토종닭·오리 제품",
       "생계·병아리"
     ],
-    "investor_note": "동우팜투테이블은 병아리 부화부터 사육, 도계(닭 가공), 유통까지 전 과정을 한 회사가 관리하는 '수평계열화' 방식의 닭고기 생산기업으로, 위탁 사육농가와 계약해 안전한 원재료를 조달하고 '바른닭고기' 브랜드로 신선육을 판매합니다. 매출의 대부분이 도계육(닭고기 신선육)에서 나오며, 국내 도계 시장에서 계열사를 포함해 약 15%의 점유율을 차지하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,254억 원으로 전년 대비 7.4% 늘었고, 영업이익과 당기순이익 모두 전년 적자에서 흑자로 돌아서 실적이 뚜렷하게 개선됐습니다. 부채비율도 17.8%로 낮아 재무 안정성도 양호한 편입니다."
+    "investor_note": "동우팜투테이블은 병아리 부화부터 사육, 도계(닭 가공), 유통까지 전 과정을 한 회사가 관리하는 '수평계열화' 방식의 닭고기 생산기업으로, 위탁 사육농가와 계약해 안전한 원재료를 조달하고 '바른닭고기' 브랜드로 신선육을 판매합니다. 매출의 대부분이 도계육(닭고기 신선육)에서 나오며, 국내 도계 시장에서 계열사를 포함해 약 15%의 점유율을 차지하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,254억 원으로 전년 대비 7.4% 늘었고, 영업이익과 당기순이익 모두 전년 적자에서 흑자로 돌아서 실적이 뚜렷하게 개선됐습니다. 부채비율도 17.8%로 낮아 재무 안정성도 양호한 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 84.0%",
+        "revenue_share": 0.84,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "단미사료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.02,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.02,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "도계육(신선육)",
-      "caption": "닭을 도계·가공한 신선육 제품 '바른닭고기'",
-      "kind": "service",
-      "visual": "도계육",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "생계·병아리 등",
-      "caption": "산 채로 유통하는 생계·병아리 판매",
-      "kind": "service",
-      "visual": "생계",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
-    },
-    {
       "title": "단미사료",
-      "caption": "동물사료용 배합사료 첨가제",
-      "kind": "service",
-      "visual": "단미사료",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+      "kind": "consumer",
+      "visual": "FEED",
       "image": "../data/business_images/business_image_food_feed.svg",
       "image_source": "Local visual"
     },
     {
-      "title": "도계육외 상품",
-      "caption": "토종닭·오리 등 매입 유통 상품",
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
       "kind": "service",
-      "visual": "도계육외",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

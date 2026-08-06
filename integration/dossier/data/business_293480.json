@@ -155,24 +155,25 @@
     "segment_finance": "하나제약은 마약성진통제와 마취제를 주력으로 하는 전문의약품 제조사로, 순환기(32%)·기타 제제(30%)·마취마약(24%) 의약품 등 380여 종의 건강보험 등재의약품을 종합병원·병의원에 공급합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,395억 원으로 전년 대비 6.3% 늘고 영업이익도 2.6% 증가했지만, 당기순이익은 87억 원으로 58.7% 줄어 실제로 남는 돈은 오히려 감소했습니다. 총자산은 4,181억 원으로 늘었고 부채비율은 33.4%로 재무구조는 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "순환기 의약품",
-        "desc": "심혈관 질환 치료제(로스토린정 등)",
-        "revenue_share": 0.3188
-      },
-      {
-        "name": "마취·마약 의약품",
-        "desc": "수술용 마취제·마약성진통제(하나구연산펜타닐주 등)",
-        "revenue_share": 0.2394
+        "name": "마취 마약 의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.9%",
+        "revenue_share": 0.2394,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "소화기 의약품",
-        "desc": "인체 소화 관련 의약품(파라메트정 등)",
-        "revenue_share": 0.0838
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.4%",
+        "revenue_share": 0.0838,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "진통제 의약품",
-        "desc": "통증 제거·완화 목적 의약품(네큐팜주사액 등)",
-        "revenue_share": 0.0591
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.9%",
+        "revenue_share": 0.0591,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -186,32 +187,46 @@
       "타이리콜8시간이알서방정",
       "하니반주"
     ],
-    "investor_note": "하나제약은 마약성진통제와 마취제를 주력으로 하는 전문의약품 제조사로, 순환기(32%)·기타 제제(30%)·마취마약(24%) 의약품 등 380여 종의 건강보험 등재의약품을 종합병원·병의원에 공급합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,395억 원으로 전년 대비 6.3% 늘고 영업이익도 2.6% 증가했지만, 당기순이익은 87억 원으로 58.7% 줄어 실제로 남는 돈은 오히려 감소했습니다. 총자산은 4,181억 원으로 늘었고 부채비율은 33.4%로 재무구조는 안정적인 편입니다."
+    "investor_note": "하나제약은 마약성진통제와 마취제를 주력으로 하는 전문의약품 제조사로, 순환기(32%)·기타 제제(30%)·마취마약(24%) 의약품 등 380여 종의 건강보험 등재의약품을 종합병원·병의원에 공급합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,395억 원으로 전년 대비 6.3% 늘고 영업이익도 2.6% 증가했지만, 당기순이익은 87억 원으로 58.7% 줄어 실제로 남는 돈은 오히려 감소했습니다. 총자산은 4,181억 원으로 늘었고 부채비율은 33.4%로 재무구조는 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.9%",
+        "revenue_share": 0.3188,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "마취 마약 의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.9%",
+        "revenue_share": 0.2394,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "소화기 의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.4%",
+        "revenue_share": 0.0838,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "진통제 의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.9%",
+        "revenue_share": 0.0591,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "순환기 의약품",
-      "caption": "심혈관 질환 치료제(로스토린정 등)",
+      "title": "의약품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.9%",
       "kind": "bio",
-      "visual": "순환기",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "마취·마약 의약품",
-      "caption": "수술용 마취제·마약성진통제(하나구연산펜타닐주 등)",
-      "kind": "bio",
-      "visual": "마취",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "소화기 의약품",
-      "caption": "인체 소화 관련 의약품(파라메트정 등)",
-      "kind": "bio",
-      "visual": "소화기",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -155,19 +155,32 @@
     "segment_finance": "동양에스텍은 포스코의 가공센터로서 열연코일·박판·후판을 가공해 건설용 소부재와 BH-BEAM, 규격소재를 만들어 판매하는 철강 가공업체입니다. 철강제품판매가 매출의 72%로 가장 크고, 자회사를 통한 건설폐기물 처리(14%)와 강구조물 건설(9%), 금속절삭기계 판매(5%)로 사업을 다각화하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,978억 원으로 전년 대비 3.5% 늘었지만 영업이익은 42.5%, 당기순이익은 35.3% 각각 줄어 매출 증가에도 수익성은 뚜렷하게 나빠졌습니다. 부채비율은 65.0%로 안정적인 수준이지만, 자기자본이익률(ROE)이 1.6%에 그쳐 이익 규모가 크지 않은 점은 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "폐기물 중간처리 및 수집운반",
-        "desc": "건설폐기물 처리·중간처리·수집운반",
-        "revenue_share": 0.1392
+        "name": "지배 회사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.1%",
+        "revenue_share": 0.3006,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "강구조건설",
-        "desc": "강구조물·금속공작물 설치 공사",
-        "revenue_share": 0.0914
+        "name": "임 가 공",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.0075,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "규격소재 및 기계판매",
-        "desc": "금속 절삭기계·고속절단기·규격소재",
-        "revenue_share": 0.0481
+        "name": "도 매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.5%",
+        "revenue_share": 0.3751,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "종속 회사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.7%",
+        "revenue_share": 0.1274,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -181,40 +194,62 @@
       "건설폐기물 처리",
       "금속절삭기계"
     ],
-    "investor_note": "동양에스텍은 포스코의 가공센터로서 열연코일·박판·후판을 가공해 건설용 소부재와 BH-BEAM, 규격소재를 만들어 판매하는 철강 가공업체입니다. 철강제품판매가 매출의 72%로 가장 크고, 자회사를 통한 건설폐기물 처리(14%)와 강구조물 건설(9%), 금속절삭기계 판매(5%)로 사업을 다각화하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,978억 원으로 전년 대비 3.5% 늘었지만 영업이익은 42.5%, 당기순이익은 35.3% 각각 줄어 매출 증가에도 수익성은 뚜렷하게 나빠졌습니다. 부채비율은 65.0%로 안정적인 수준이지만, 자기자본이익률(ROE)이 1.6%에 그쳐 이익 규모가 크지 않은 점은 살펴볼 필요가 있습니다."
+    "investor_note": "동양에스텍은 포스코의 가공센터로서 열연코일·박판·후판을 가공해 건설용 소부재와 BH-BEAM, 규격소재를 만들어 판매하는 철강 가공업체입니다. 철강제품판매가 매출의 72%로 가장 크고, 자회사를 통한 건설폐기물 처리(14%)와 강구조물 건설(9%), 금속절삭기계 판매(5%)로 사업을 다각화하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,978억 원으로 전년 대비 3.5% 늘었지만 영업이익은 42.5%, 당기순이익은 35.3% 각각 줄어 매출 증가에도 수익성은 뚜렷하게 나빠졌습니다. 부채비율은 65.0%로 안정적인 수준이지만, 자기자본이익률(ROE)이 1.6%에 그쳐 이익 규모가 크지 않은 점은 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "지배 회사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.1%",
+        "revenue_share": 0.3006,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임 가 공",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.0075,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "도 매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.5%",
+        "revenue_share": 0.3751,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "종속 회사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.7%",
+        "revenue_share": 0.1274,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "철강제품판매",
-      "caption": "포스코 열연코일·박판·후판을 가공한 열연·후판 제품",
+      "title": "지배 회사",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.1%",
       "kind": "material",
-      "visual": "철강제품판매",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "폐기물 중간처리 및 수집운반",
-      "caption": "건설폐기물 처리·중간처리·수집운반",
-      "kind": "service",
-      "visual": "폐기물",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "title": "도 매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.5%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "강구조건설",
-      "caption": "강구조물·금속공작물 설치 공사",
+      "title": "종속 회사",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.7%",
       "kind": "material",
-      "visual": "강구조건설",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "규격소재 및 기계판매",
-      "caption": "금속 절삭기계·고속절단기·규격소재",
-      "kind": "material",
-      "visual": "규격소재",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

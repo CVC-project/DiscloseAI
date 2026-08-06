@@ -168,32 +168,54 @@
       "시티델리",
       "하이면"
     ],
-    "investor_note": "SPC삼립은 삼립호빵·보름달 등으로 잘 알려진 제빵기업으로, 빵·샌드위치를 만드는 Bakery부문, 밀가루·계란·육가공품을 다루는 Food부문 외에 식자재 유통(SPC GFS 자회사)까지 함께 운영하고 있으며, 유통사업부문이 전체 매출의 51%를 차지하는 그룹 내 통합 물류·조달 역할도 겸하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3조 3,704억 원으로 전년 대비 1.7% 줄었고, 영업이익은 가평휴게소 자산 손상 등의 영향으로 59.2% 크게 감소했으며 당기순이익도 83.8% 줄어 수익성이 눈에 띄게 나빠졌습니다. 부채비율은 158.5%로 자본 대비 빚이 많은 편이라 재무 부담을 살펴볼 필요가 있습니다."
+    "investor_note": "SPC삼립은 삼립호빵·보름달 등으로 잘 알려진 제빵기업으로, 빵·샌드위치를 만드는 Bakery부문, 밀가루·계란·육가공품을 다루는 Food부문 외에 식자재 유통(SPC GFS 자회사)까지 함께 운영하고 있으며, 유통사업부문이 전체 매출의 51%를 차지하는 그룹 내 통합 물류·조달 역할도 겸하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3조 3,704억 원으로 전년 대비 1.7% 줄었고, 영업이익은 가평휴게소 자산 손상 등의 영향으로 59.2% 크게 감소했으며 당기순이익도 83.8% 줄어 수익성이 눈에 띄게 나빠졌습니다. 부채비율은 158.5%로 자본 대비 빚이 많은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "BAKERY사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.2%",
+        "revenue_share": 0.262,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "FOOD사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.5%",
+        "revenue_share": 0.215,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "유통사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.3%",
+        "revenue_share": 0.513,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.7%",
+        "revenue_share": 0.087,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "Bakery사업부문",
-      "caption": "빵·샌드위치·케이크 등 제과 제조·판매",
-      "kind": "service",
-      "visual": "Bakery사업부문",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
+      "title": "베이커리",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
+      "kind": "consumer",
+      "visual": "FOOD",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "Food사업부문",
-      "caption": "밀가루·계란·육가공품·떡 등 식품 제조",
+      "title": "소재식품",
+      "caption": "다른 식품을 만드는 데 들어가는 기초 소재라 원재료 가격 영향을 받습니다.",
       "kind": "consumer",
-      "visual": "Food사업부문",
+      "visual": "INGREDIENT",
       "image": "../data/business_images/business_image_food_ingredient.svg",
       "image_source": "Local visual"
-    },
-    {
-      "title": "유통사업부문",
-      "caption": "식재료 및 관련 식자재 유통(SPC GFS)",
-      "kind": "service",
-      "visual": "유통사업부문",
-      "image": "../data/business_images/business_image_local_cement.svg",
-      "image_source": "Local curated visual"
     }
   ],
   "custom_report_ideas": [

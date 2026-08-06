@@ -137,7 +137,29 @@
   "snippets": {
     "overview": "(주)핑거스토리의 주요 제품·서비스는 플랫폼 기획팀, 작품관리, 채널 관리, 결제 취소, 화장품사업부문, 제품매출입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 하기 주요서비스 등의 가격변동 추이는 고객이 플랫폼 내에서 재화를 획득할 때의 결제상품을 기준으로 작성하였으며, 하기 6개 상품은 고객이 결제하고 있는 상품내역의 약 80%의 비중을 차지하고 있습니다. 제품 등의 생산 및 판매 등과 관련한 별도의 연구개발현황이 존재하지 않습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "(주)핑거스토리의 주요 제품·서비스는 플랫폼 기획팀, 작품관리, 채널 관리, 결제 취소, 화장품사업부문, 제품매출입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 하기 주요서비스 등의 가격변동 추이는 고객이 플랫폼 내에서 재화를 획득할 때의 결제상품을 기준으로 작성하였으며, 하기 6개 상품은 고객이 결제하고 있는 상품내역의 약 80%의 비중을 차지하고 있습니다. 제품 등의 생산 및 판매 등과 관련한 별도의 연구개발현황이 존재하지 않습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "온라인 콘텐츠매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 98.0%",
+        "revenue_share": 0.9797,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "영화",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+        "revenue_share": 0.0154,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매 출 총 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "플랫폼 기획팀",
       "작품관리",
@@ -150,40 +172,54 @@
       "물류",
       "제품출고"
     ],
-    "investor_note": "(주)핑거스토리의 주요 제품·서비스는 플랫폼 기획팀, 작품관리, 채널 관리, 결제 취소, 화장품사업부문, 제품매출입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 하기 주요서비스 등의 가격변동 추이는 고객이 플랫폼 내에서 재화를 획득할 때의 결제상품을 기준으로 작성하였으며, 하기 6개 상품은 고객이 결제하고 있는 상품내역의 약 80%의 비중을 차지하고 있습니다. 제품 등의 생산 및 판매 등과 관련한 별도의 연구개발현황이 존재하지 않습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)핑거스토리의 주요 제품·서비스는 플랫폼 기획팀, 작품관리, 채널 관리, 결제 취소, 화장품사업부문, 제품매출입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 하기 주요서비스 등의 가격변동 추이는 고객이 플랫폼 내에서 재화를 획득할 때의 결제상품을 기준으로 작성하였으며, 하기 6개 상품은 고객이 결제하고 있는 상품내역의 약 80%의 비중을 차지하고 있습니다. 제품 등의 생산 및 판매 등과 관련한 별도의 연구개발현황이 존재하지 않습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "온라인 콘텐츠매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 98.0%",
+        "revenue_share": 0.9797,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "영화",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+        "revenue_share": 0.0154,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.005,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매 출 총 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "플랫폼 기획팀",
-      "caption": "플랫폼 기획팀 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "platform",
-      "visual": "APP",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "작품관리",
-      "caption": "작품관리 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "영화",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "채널 관리",
-      "caption": "채널 관리 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "매 출 총 계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "결제 취소",
-      "caption": "결제 취소 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

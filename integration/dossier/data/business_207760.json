@@ -155,9 +155,25 @@
     "segment_finance": "미스터블루의 주요 제품·서비스는 만화(B2C), 만화(B2B), 포털, 출판, 웹소설, 타플랫폼 콘텐츠 서비스입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 콘텐츠를 제작또는 유통하는 무형제품의 제작과 유통에서 발생하므로 생산활동과 관련한 원재료의현황이나 원재료의 제품별 비중, 가격변동추이 등을 표기하기가 어렵습니다. 고객층 등을 구분하고, 그에 맞는 마케팅/이벤트 방식을 채택하여 실시하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "출자증권",
-        "desc": "위탁매매, IB, 운용 등 증권 서비스",
-        "revenue_share": null
+        "name": "웹소설",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.6%",
+        "revenue_share": 0.2156,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "출판",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
+        "revenue_share": 0.0176,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "소설 출판",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
+        "revenue_share": 0.0159,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,40 +190,70 @@
       "온라인 만화",
       "웹툰 콘텐츠 서비스"
     ],
-    "investor_note": "미스터블루의 주요 제품·서비스는 만화(B2C), 만화(B2B), 포털, 출판, 웹소설, 타플랫폼 콘텐츠 서비스입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 콘텐츠를 제작또는 유통하는 무형제품의 제작과 유통에서 발생하므로 생산활동과 관련한 원재료의현황이나 원재료의 제품별 비중, 가격변동추이 등을 표기하기가 어렵습니다. 고객층 등을 구분하고, 그에 맞는 마케팅/이벤트 방식을 채택하여 실시하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "미스터블루의 주요 제품·서비스는 만화(B2C), 만화(B2B), 포털, 출판, 웹소설, 타플랫폼 콘텐츠 서비스입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 콘텐츠를 제작또는 유통하는 무형제품의 제작과 유통에서 발생하므로 생산활동과 관련한 원재료의현황이나 원재료의 제품별 비중, 가격변동추이 등을 표기하기가 어렵습니다. 고객층 등을 구분하고, 그에 맞는 마케팅/이벤트 방식을 채택하여 실시하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "온라인콘텐츠서비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 48.0%",
+        "revenue_share": 0.4796,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "웹소설",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.6%",
+        "revenue_share": 0.2156,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "출판",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
+        "revenue_share": 0.0176,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "소설 출판",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
+        "revenue_share": 0.0159,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "만화(B2C)",
-      "caption": "만화(B2C) 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "title": "온라인콘텐츠서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 48.0%",
+      "kind": "platform",
+      "visual": "APP",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "만화(B2B)",
-      "caption": "만화(B2B) 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "웹소설",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.6%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "포털",
-      "caption": "포털 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "출판",
-      "caption": "출판 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "소설 출판",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

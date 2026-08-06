@@ -155,14 +155,25 @@
     "segment_finance": "진흥기업은 1959년 설립된 종합건설회사로, 아파트·주택 재개발·재건축 등 건축공사와 도로 등 토목공사를 함께 수행하고 있습니다. 매출의 약 81%가 건축공사에서, 19%가 토목공사에서 나오며 공공·민간 발주처를 두루 상대합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 5,763억 원으로 전년보다 20.6% 줄었고, 영업이익과 당기순이익 모두 적자로 전환해 각각 230억 원, 283억 원의 손실을 기록했습니다. 부채비율은 133.7%로 다소 높은 편이라 재무 상황을 주의 깊게 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "건축공사(민간·관급)",
-        "desc": "주택·재개발·업무상업시설 등 건축 도급공사",
-        "revenue_share": 0.808
+        "name": "국내도급공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.2%",
+        "revenue_share": 0.192,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "민간",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 61.6%",
+        "revenue_share": 0.616,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "토목공사",
-        "desc": "관급 토목·SOC 공사",
-        "revenue_share": 0.192
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.2%",
+        "revenue_share": 0.192,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -172,24 +183,55 @@
       "토목공사",
       "SOC사업"
     ],
-    "investor_note": "진흥기업은 1959년 설립된 종합건설회사로, 아파트·주택 재개발·재건축 등 건축공사와 도로 등 토목공사를 함께 수행하고 있습니다. 매출의 약 81%가 건축공사에서, 19%가 토목공사에서 나오며 공공·민간 발주처를 두루 상대합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 5,763억 원으로 전년보다 20.6% 줄었고, 영업이익과 당기순이익 모두 적자로 전환해 각각 230억 원, 283억 원의 손실을 기록했습니다. 부채비율은 133.7%로 다소 높은 편이라 재무 상황을 주의 깊게 살펴볼 필요가 있습니다."
+    "investor_note": "진흥기업은 1959년 설립된 종합건설회사로, 아파트·주택 재개발·재건축 등 건축공사와 도로 등 토목공사를 함께 수행하고 있습니다. 매출의 약 81%가 건축공사에서, 19%가 토목공사에서 나오며 공공·민간 발주처를 두루 상대합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 5,763억 원으로 전년보다 20.6% 줄었고, 영업이익과 당기순이익 모두 적자로 전환해 각각 230억 원, 283억 원의 손실을 기록했습니다. 부채비율은 133.7%로 다소 높은 편이라 재무 상황을 주의 깊게 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "국내도급공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.2%",
+        "revenue_share": 0.192,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "민간",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 61.6%",
+        "revenue_share": 0.616,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "토목공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.2%",
+        "revenue_share": 0.192,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "건축공사(민간·관급)",
-      "caption": "주택·재개발·업무상업시설 등 건축 도급공사",
+      "title": "국내도급공사",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.2%",
       "kind": "service",
-      "visual": "건축공사",
-      "image": "../data/business_images/business_image_local_housing.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "토목공사",
-      "caption": "관급 토목·SOC 공사",
+      "title": "민간",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 61.6%",
       "kind": "service",
-      "visual": "토목공사",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "토목·플랜트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.2%",
+      "kind": "service",
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_5184e050831a4460.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

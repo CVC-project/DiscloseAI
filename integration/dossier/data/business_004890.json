@@ -155,9 +155,32 @@
     "segment_finance": "동일산업은 자동차·기계부품용 봉강·마봉강을 생산하는 봉강사업부(매출의 52%), 제철 공정에 쓰이는 합금철사업부(22%), 건설기계 부품을 만드는 주조사업부(11%), 자동차 등속조인트 부품을 만드는 자회사 디오토모티브(15%)로 구성된 철강·부품 그룹입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 3,479억 원으로 전년 대비 16.3% 줄었고 영업손실에 이어 당기순이익도 129억 원 손실로 적자 전환했습니다. 감사인은 현금창출단위 손상평가를 핵심감사사항으로 짚었습니다.",
     "segment_breakdown": [
       {
-        "name": "자동차부품제조",
-        "desc": "자동차 등속조인트 부품 생산(디오토모티브)",
-        "revenue_share": 0.152
+        "name": "봉강",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.3%",
+        "revenue_share": 0.513,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "합금철",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.8%",
+        "revenue_share": 0.218,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "주조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.7%",
+        "revenue_share": 0.107,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동차 부품 제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.0%",
+        "revenue_share": 0.15,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -168,38 +191,68 @@
       "주강 및 특수강 부품",
       "자동차 등속조인트 부품"
     ],
-    "investor_note": "동일산업은 자동차·기계부품용 봉강·마봉강을 생산하는 봉강사업부(매출의 52%), 제철 공정에 쓰이는 합금철사업부(22%), 건설기계 부품을 만드는 주조사업부(11%), 자동차 등속조인트 부품을 만드는 자회사 디오토모티브(15%)로 구성된 철강·부품 그룹입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 3,479억 원으로 전년 대비 16.3% 줄었고 영업손실에 이어 당기순이익도 129억 원 손실로 적자 전환했습니다. 감사인은 현금창출단위 손상평가를 핵심감사사항으로 짚었습니다."
+    "investor_note": "동일산업은 자동차·기계부품용 봉강·마봉강을 생산하는 봉강사업부(매출의 52%), 제철 공정에 쓰이는 합금철사업부(22%), 건설기계 부품을 만드는 주조사업부(11%), 자동차 등속조인트 부품을 만드는 자회사 디오토모티브(15%)로 구성된 철강·부품 그룹입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 3,479억 원으로 전년 대비 16.3% 줄었고 영업손실에 이어 당기순이익도 129억 원 손실로 적자 전환했습니다. 감사인은 현금창출단위 손상평가를 핵심감사사항으로 짚었습니다.",
+    "product_service_segments": [
+      {
+        "name": "봉강",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.3%",
+        "revenue_share": 0.513,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "합금철",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.8%",
+        "revenue_share": 0.218,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "주조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.7%",
+        "revenue_share": 0.107,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동차 부품 제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.0%",
+        "revenue_share": 0.15,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "봉강사업부",
-      "caption": "자동차·기계부품용 봉강·마봉강 생산",
-      "kind": "auto",
-      "visual": "봉강사업부",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
+      "title": "봉강",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.3%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "합금철사업부",
-      "caption": "제강 공정용 합금철(훼로망간 등) 생산",
-      "kind": "service",
-      "visual": "합금철사업부",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "title": "합금철",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.8%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "주조사업부",
-      "caption": "건설기계용 베어링·스프로킷 등 주강·특수강 부품 생산",
-      "kind": "auto",
-      "visual": "주조사업부",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "title": "주조",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.7%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "자동차부품제조",
-      "caption": "자동차 등속조인트 부품 생산(디오토모티브)",
+      "title": "자동차 부품 제조",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.0%",
       "kind": "auto",
-      "visual": "자동차부품제조",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     }

@@ -155,19 +155,32 @@
     "segment_finance": "제일일렉트릭은 스마트 배선기구, 차단기, 분전반 등 IoT 기반 스마트홈 전기설비를 만드는 회사로, 미국 이튼(EATON)에 공급하는 회로차단기 핵심부품(PCB ASSY) 수출이 매출의 41%를 차지합니다. 종속회사를 통해 자동차용 와이어하네스 사업도 함께 하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,960억 원으로 전년 대비 5.2% 늘었고 영업이익은 117억 원으로 32.1% 증가했지만, 당기순이익은 66억 원으로 35.7% 줄었습니다. 부채비율은 42.9%로 안정적인 수준입니다.",
     "segment_breakdown": [
       {
-        "name": "PCB ASSY 등(수출)",
-        "desc": "미국 EATON 등에 공급하는 회로차단기 핵심부품 수출",
-        "revenue_share": 0.4061
+        "name": "배선기구",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.0054,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "상품",
-        "desc": "매입 상품 판매",
-        "revenue_share": 0.1912
+        "name": "스마트배선기구",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.1%",
+        "revenue_share": 0.0914,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "분전반·배선기구·차단기",
-        "desc": "스마트분전반, 배선기구, 배선·누전차단기 등 국내 판매",
-        "revenue_share": 0.1884
+        "name": "차단기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.0049,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "누전차단기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.0198,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -178,32 +191,54 @@
       "AFCI/GFCI PCB ASSEMBLY",
       "자동차용 와이어하네스(종속회사)"
     ],
-    "investor_note": "제일일렉트릭은 스마트 배선기구, 차단기, 분전반 등 IoT 기반 스마트홈 전기설비를 만드는 회사로, 미국 이튼(EATON)에 공급하는 회로차단기 핵심부품(PCB ASSY) 수출이 매출의 41%를 차지합니다. 종속회사를 통해 자동차용 와이어하네스 사업도 함께 하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,960억 원으로 전년 대비 5.2% 늘었고 영업이익은 117억 원으로 32.1% 증가했지만, 당기순이익은 66억 원으로 35.7% 줄었습니다. 부채비율은 42.9%로 안정적인 수준입니다."
+    "investor_note": "제일일렉트릭은 스마트 배선기구, 차단기, 분전반 등 IoT 기반 스마트홈 전기설비를 만드는 회사로, 미국 이튼(EATON)에 공급하는 회로차단기 핵심부품(PCB ASSY) 수출이 매출의 41%를 차지합니다. 종속회사를 통해 자동차용 와이어하네스 사업도 함께 하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,960억 원으로 전년 대비 5.2% 늘었고 영업이익은 117억 원으로 32.1% 증가했지만, 당기순이익은 66억 원으로 35.7% 줄었습니다. 부채비율은 42.9%로 안정적인 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "배선기구",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.0054,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "스마트배선기구",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.1%",
+        "revenue_share": 0.0914,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "차단기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.0049,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "누전차단기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.0198,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "PCB ASSY 등(수출)",
-      "caption": "미국 EATON 등에 공급하는 회로차단기 핵심부품 수출",
-      "kind": "auto",
-      "visual": "PCB",
-      "image": "../data/business_images/business_image_local_cement.svg",
-      "image_source": "Local curated visual"
+      "title": "대형마트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.1%",
+      "kind": "consumer",
+      "visual": "MART",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "상품",
-      "caption": "매입 상품 판매",
-      "kind": "service",
-      "visual": "상품",
-      "image": "../data/business_images/business_image_local_power.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "분전반·배선기구·차단기",
-      "caption": "스마트분전반, 배선기구, 배선·누전차단기 등 국내 판매",
-      "kind": "service",
-      "visual": "분전반",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "title": "누전차단기",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+      "kind": "power",
+      "visual": "POWER",
+      "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

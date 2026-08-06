@@ -155,19 +155,11 @@
     "segment_finance": "리어액슬 한 품목이 매출의 82%를 차지할 만큼 특정 제품 의존도가 높은 편입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 938억 원으로 전년 대비 4.0% 늘었고 영업이익은 61.0%, 당기순이익은 3.7% 증가해 전반적으로 수익성이 개선됐습니다. 부채비율은 89.6%로 자본 대비 부채 부담은 크지 않은 수준입니다.",
     "segment_breakdown": [
       {
-        "name": "AXLE(액슬)",
-        "desc": "차체와 타이어를 연결해 승차감·제동력을 지지하는 후륜 현가부품",
-        "revenue_share": 0.8213
-      },
-      {
-        "name": "CROSS MBR(크로스멤버)",
-        "desc": "엔진 지지 및 충격 흡수용 차체 전단부 부품",
-        "revenue_share": 0.0006
-      },
-      {
-        "name": "ARM",
-        "desc": "크로스멤버 측면 장착 현가부품",
-        "revenue_share": 0.0068
+        "name": "자동차부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 82.1%",
+        "revenue_share": 0.8213,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -178,22 +170,23 @@
       "트레일링암",
       "전기차 배터리모듈 크로스멤버"
     ],
-    "investor_note": "리어액슬 한 품목이 매출의 82%를 차지할 만큼 특정 제품 의존도가 높은 편입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 938억 원으로 전년 대비 4.0% 늘었고 영업이익은 61.0%, 당기순이익은 3.7% 증가해 전반적으로 수익성이 개선됐습니다. 부채비율은 89.6%로 자본 대비 부채 부담은 크지 않은 수준입니다."
+    "investor_note": "리어액슬 한 품목이 매출의 82%를 차지할 만큼 특정 제품 의존도가 높은 편입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 938억 원으로 전년 대비 4.0% 늘었고 영업이익은 61.0%, 당기순이익은 3.7% 증가해 전반적으로 수익성이 개선됐습니다. 부채비율은 89.6%로 자본 대비 부채 부담은 크지 않은 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "자동차부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 82.1%",
+        "revenue_share": 0.8213,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "AXLE(액슬)",
-      "caption": "차체와 타이어를 연결해 승차감·제동력을 지지하는 후륜 현가부품",
+      "title": "자동차부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 82.1%",
       "kind": "auto",
-      "visual": "AXLE",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "CROSS MBR(크로스멤버)",
-      "caption": "엔진 지지 및 충격 흡수용 차체 전단부 부품",
-      "kind": "auto",
-      "visual": "CROSS",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     }

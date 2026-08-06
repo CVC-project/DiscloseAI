@@ -156,18 +156,17 @@
     "segment_breakdown": [
       {
         "name": "컨테이너 하역",
-        "desc": "인천 송도신항 컨테이너 전용 터미널 운영·하역",
-        "revenue_share": 0.4897
-      },
-      {
-        "name": "싸이로 하역",
-        "desc": "인천·군산항 양곡 전용 터미널에서 수입 양곡 하역·보관",
-        "revenue_share": 0.3533
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.0%",
+        "revenue_share": 0.4897,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "일반 하역",
-        "desc": "평택항·인천북항 등에서 자동차·철재·원목 등 일반화물 하역",
-        "revenue_share": 0.1331
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.3%",
+        "revenue_share": 0.1331,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -176,31 +175,69 @@
       "일반 하역(자동차·철재·원목 등)",
       "부동산 임대"
     ],
-    "investor_note": "선광은 인천·군산·평택 등을 거점으로 수출입 화물의 하역·보관·운송 서비스를 제공하는 종합물류기업으로, 컨테이너 하역(49%)과 양곡을 취급하는 싸이로 하역(35%)이 매출의 대부분을 차지하며 부동산 임대사업도 함께 운영합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,904억 원으로 전년 대비 2.0% 늘었고 영업이익은 413억 원으로 13.8%, 당기순이익은 394억 원으로 39.5% 증가하는 등 수익성이 꾸준히 개선됐습니다. 부채비율은 59.2%로 재무구조도 안정적인 편입니다."
+    "investor_note": "선광은 인천·군산·평택 등을 거점으로 수출입 화물의 하역·보관·운송 서비스를 제공하는 종합물류기업으로, 컨테이너 하역(49%)과 양곡을 취급하는 싸이로 하역(35%)이 매출의 대부분을 차지하며 부동산 임대사업도 함께 운영합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,904억 원으로 전년 대비 2.0% 늘었고 영업이익은 413억 원으로 13.8%, 당기순이익은 394억 원으로 39.5% 증가하는 등 수익성이 꾸준히 개선됐습니다. 부채비율은 59.2%로 재무구조도 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "하역사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.3%",
+        "revenue_share": 0.3533,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "컨테이너 하역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.0%",
+        "revenue_share": 0.4897,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "일반 하역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.3%",
+        "revenue_share": 0.1331,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임대사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.4%",
+        "revenue_share": 0.0238,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "컨테이너 하역",
-      "caption": "인천 송도신항 컨테이너 전용 터미널 운영·하역",
+      "title": "하역사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.3%",
       "kind": "service",
-      "visual": "컨테이너",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "싸이로 하역",
-      "caption": "인천·군산항 양곡 전용 터미널에서 수입 양곡 하역·보관",
+      "title": "컨테이너 하역",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.0%",
       "kind": "service",
-      "visual": "싸이로",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "일반 하역",
-      "caption": "평택항·인천북항 등에서 자동차·철재·원목 등 일반화물 하역",
-      "kind": "auto",
-      "visual": "일반",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.3%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "임대사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.4%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
       "image_source": "Unsplash"
     }
   ],

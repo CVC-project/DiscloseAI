@@ -155,14 +155,11 @@
     "segment_finance": "코맥스는 비디오폰과 홈네트워크에서 출발해 스마트홈 IoT, 디지털 도어락, CCTV, 산업용 네트워크까지 다루는 주거·보안 솔루션 기업입니다. 보고서상 스마트홈 솔루션이 매출의 대부분을 차지하고, 국내외 건설사와 유통사를 주요 고객으로 삼습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 851억 원으로 전년 대비 27.3% 감소했고 영업손실은 141억 원, 당기순손실은 151억 원이었습니다. 부채비율은 753.2%로 매우 높아 실적 회복과 재무 부담을 함께 살펴봐야 합니다.",
     "segment_breakdown": [
       {
-        "name": "스마트홈·홈네트워크",
-        "desc": "아파트·주택용 홈오토메이션과 IoT 시스템 생산·판매",
-        "revenue_share": 0.817
-      },
-      {
-        "name": "시큐리티·산업용 네트워크",
-        "desc": "CCTV, 디지털 도어락, 병원·선박 등 특수시설 네트워크",
-        "revenue_share": null
+        "name": "제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 81.7%",
+        "revenue_share": 0.817,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -175,24 +172,32 @@
       "산업용 네트워크 시스템",
       "설치·A/S 서비스"
     ],
-    "investor_note": "코맥스는 비디오폰과 홈네트워크에서 출발해 스마트홈 IoT, 디지털 도어락, CCTV, 산업용 네트워크까지 다루는 주거·보안 솔루션 기업입니다. 보고서상 스마트홈 솔루션이 매출의 대부분을 차지하고, 국내외 건설사와 유통사를 주요 고객으로 삼습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 851억 원으로 전년 대비 27.3% 감소했고 영업손실은 141억 원, 당기순손실은 151억 원이었습니다. 부채비율은 753.2%로 매우 높아 실적 회복과 재무 부담을 함께 살펴봐야 합니다."
+    "investor_note": "코맥스는 비디오폰과 홈네트워크에서 출발해 스마트홈 IoT, 디지털 도어락, CCTV, 산업용 네트워크까지 다루는 주거·보안 솔루션 기업입니다. 보고서상 스마트홈 솔루션이 매출의 대부분을 차지하고, 국내외 건설사와 유통사를 주요 고객으로 삼습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 851억 원으로 전년 대비 27.3% 감소했고 영업손실은 141억 원, 당기순손실은 151억 원이었습니다. 부채비율은 753.2%로 매우 높아 실적 회복과 재무 부담을 함께 살펴봐야 합니다.",
+    "product_service_segments": [
+      {
+        "name": "제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 81.7%",
+        "revenue_share": 0.817,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "ACC 외 기타",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.3%",
+        "revenue_share": 0.183,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "스마트홈·홈네트워크",
-      "caption": "아파트·주택용 홈오토메이션과 IoT 시스템 생산·판매",
+      "title": "ACC 외 기타",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.3%",
       "kind": "telecom",
-      "visual": "스마트홈",
-      "image": "../data/business_images/business_image_local_housing.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "시큐리티·산업용 네트워크",
-      "caption": "CCTV, 디지털 도어락, 병원·선박 등 특수시설 네트워크",
-      "kind": "ship",
-      "visual": "시큐리티",
-      "image": "../data/business_images/business_image_141eab6519656e30.jpg",
-      "image_source": "Wikimedia Commons"
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

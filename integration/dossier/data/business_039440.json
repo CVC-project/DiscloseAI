@@ -155,14 +155,18 @@
     "segment_finance": "과거 공시 기반 참고 정보로, 최근 연결 매출액은 3,280억 원으로 전년보다 1.8% 줄었고 영업이익은 197억 원으로 27.7%, 당기순이익은 154억 원으로 43.2% 감소했습니다. 부채비율은 27.6%로 낮은 편이라 재무구조는 안정적입니다. 감사인은 공사 진행률에 따라 수익을 인식하는 투입법 회계처리를 핵심감사사항으로 선정했습니다.",
     "segment_breakdown": [
       {
-        "name": "제조(C.C.S.S. 등)",
-        "desc": "반도체·디스플레이 전공정 약액공급 장비",
-        "revenue_share": 0.913
+        "name": "제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 91.3%",
+        "revenue_share": 0.913,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "WET SYSTEM",
-        "desc": "세정·식각·현상·리플로우 장비",
-        "revenue_share": 0.036
+        "name": "WETSYSTEM(세정/식각/현상,리플로우)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.6%",
+        "revenue_share": 0.036,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -172,24 +176,32 @@
       "디스플레이 포토트렉시스템",
       "잉크젯 프린터"
     ],
-    "investor_note": "과거 공시 기반 참고 정보로, 최근 연결 매출액은 3,280억 원으로 전년보다 1.8% 줄었고 영업이익은 197억 원으로 27.7%, 당기순이익은 154억 원으로 43.2% 감소했습니다. 부채비율은 27.6%로 낮은 편이라 재무구조는 안정적입니다. 감사인은 공사 진행률에 따라 수익을 인식하는 투입법 회계처리를 핵심감사사항으로 선정했습니다."
+    "investor_note": "과거 공시 기반 참고 정보로, 최근 연결 매출액은 3,280억 원으로 전년보다 1.8% 줄었고 영업이익은 197억 원으로 27.7%, 당기순이익은 154억 원으로 43.2% 감소했습니다. 부채비율은 27.6%로 낮은 편이라 재무구조는 안정적입니다. 감사인은 공사 진행률에 따라 수익을 인식하는 투입법 회계처리를 핵심감사사항으로 선정했습니다.",
+    "product_service_segments": [
+      {
+        "name": "제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 91.3%",
+        "revenue_share": 0.913,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "WETSYSTEM(세정/식각/현상,리플로우)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.6%",
+        "revenue_share": 0.036,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "제조(C.C.S.S. 등)",
-      "caption": "반도체·디스플레이 전공정 약액공급 장비",
+      "title": "WETSYSTEM(세정/식각/현상,리플로우)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.6%",
       "kind": "chip",
-      "visual": "제조",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
+      "visual": "CHIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
       "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "WET SYSTEM",
-      "caption": "세정·식각·현상·리플로우 장비",
-      "kind": "service",
-      "visual": "WET",
-      "image": "../data/business_images/business_image_local_electrode_ring.svg",
-      "image_source": "Local curated visual"
     }
   ],
   "custom_report_ideas": [

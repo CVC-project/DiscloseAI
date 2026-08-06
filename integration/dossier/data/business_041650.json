@@ -155,14 +155,32 @@
     "segment_finance": "상신브레이크는 자동차용 브레이크 패드 등 제동부품을 만드는 제동부문(매출 대부분)과 제동제품 제조 전용설비를 만드는 설비부문으로 구성된 자동차 부품업체로, 매출의 73%를 수출로 올리고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 5,422억 원으로 전년 대비 6.3% 줄었고 영업이익과 순이익 모두 적자로 전환해 각각 -13억 원, -120억 원을 기록했습니다. 부채비율은 154.5%로 높은 편이며, 감사보고서에서는 멕시코 해외법인의 자산 손상 여부가 핵심감사사항으로 다뤄졌습니다.",
     "segment_breakdown": [
       {
-        "name": "제동부문",
-        "desc": "자동차용 브레이크 패드 등 제동제품 제조",
-        "revenue_share": 0.99
+        "name": "제동 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 73.5%",
+        "revenue_share": 0.735,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "설비부문",
-        "desc": "제동제품 제조 전용설비 제작·판매",
-        "revenue_share": 0.009
+        "name": "LINING",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.2%",
+        "revenue_share": 0.042,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "SHOE ASSEMBLY",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.9%",
+        "revenue_share": 0.059,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "BRAKE ASSEMBLY",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.0%",
+        "revenue_share": 0.07,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -173,22 +191,68 @@
       "AXLE ASSEMBLY",
       "제동제품 제조 전용설비"
     ],
-    "investor_note": "상신브레이크는 자동차용 브레이크 패드 등 제동부품을 만드는 제동부문(매출 대부분)과 제동제품 제조 전용설비를 만드는 설비부문으로 구성된 자동차 부품업체로, 매출의 73%를 수출로 올리고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 5,422억 원으로 전년 대비 6.3% 줄었고 영업이익과 순이익 모두 적자로 전환해 각각 -13억 원, -120억 원을 기록했습니다. 부채비율은 154.5%로 높은 편이며, 감사보고서에서는 멕시코 해외법인의 자산 손상 여부가 핵심감사사항으로 다뤄졌습니다."
+    "investor_note": "상신브레이크는 자동차용 브레이크 패드 등 제동부품을 만드는 제동부문(매출 대부분)과 제동제품 제조 전용설비를 만드는 설비부문으로 구성된 자동차 부품업체로, 매출의 73%를 수출로 올리고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 5,422억 원으로 전년 대비 6.3% 줄었고 영업이익과 순이익 모두 적자로 전환해 각각 -13억 원, -120억 원을 기록했습니다. 부채비율은 154.5%로 높은 편이며, 감사보고서에서는 멕시코 해외법인의 자산 손상 여부가 핵심감사사항으로 다뤄졌습니다.",
+    "product_service_segments": [
+      {
+        "name": "제동 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 73.5%",
+        "revenue_share": 0.735,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "LINING",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.2%",
+        "revenue_share": 0.042,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "SHOE ASSEMBLY",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.9%",
+        "revenue_share": 0.059,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "BRAKE ASSEMBLY",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.0%",
+        "revenue_share": 0.07,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "제동부문",
-      "caption": "자동차용 브레이크 패드 등 제동제품 제조",
+      "title": "제동 부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 73.5%",
       "kind": "auto",
-      "visual": "제동부문",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "설비부문",
-      "caption": "제동제품 제조 전용설비 제작·판매",
-      "kind": "service",
-      "visual": "설비부문",
+      "title": "LINING",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.2%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "SHOE ASSEMBLY",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.9%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "BRAKE ASSEMBLY",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.0%",
+      "kind": "auto",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     }

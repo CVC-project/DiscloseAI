@@ -124,18 +124,31 @@
     "segment_breakdown": [
       {
         "name": "클라우드&AI",
-        "desc": "클라우드 전환·MSP·AI 적용 서비스",
-        "revenue_share": 0.59
-      },
-      {
-        "name": "Digital Business Service(SI/SM)",
-        "desc": "시스템통합·운영 서비스",
-        "revenue_share": 0.22
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.0%",
+        "revenue_share": 0.59,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "스마트엔지니어링",
-        "desc": "스마트팩토리·물류·시티 등 로봇/자동화",
-        "revenue_share": 0.19
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.0%",
+        "revenue_share": 0.19,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Digital BusinessService (SI/SM)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.0%",
+        "revenue_share": 0.22,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -147,32 +160,70 @@
       "SI(시스템통합)",
       "SM(시스템운영)"
     ],
-    "investor_note": "LG씨엔에스는 클라우드·AI 전환(AX), 스마트팩토리·물류·시티 등 스마트 엔지니어링, 시스템 통합·운영(SI/SM)을 아우르는 IT서비스 기업으로, 클라우드&AI 사업이 매출의 59%를 차지하며 빠르게 성장하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결기준 매출액은 6조 1,295억 원으로 전년 대비 2.5% 늘었고 영업이익은 5,518억 원으로 7.6%, 순이익은 4,391억 원으로 20.3% 증가했습니다. 부채비율 79.7%, ROE 17.3%로 재무·수익성 모두 양호한 편입니다."
+    "investor_note": "LG씨엔에스는 클라우드·AI 전환(AX), 스마트팩토리·물류·시티 등 스마트 엔지니어링, 시스템 통합·운영(SI/SM)을 아우르는 IT서비스 기업으로, 클라우드&AI 사업이 매출의 59%를 차지하며 빠르게 성장하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결기준 매출액은 6조 1,295억 원으로 전년 대비 2.5% 늘었고 영업이익은 5,518억 원으로 7.6%, 순이익은 4,391억 원으로 20.3% 증가했습니다. 부채비율 79.7%, ROE 17.3%로 재무·수익성 모두 양호한 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "클라우드&AI",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.0%",
+        "revenue_share": 0.59,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "스마트엔지니어링",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.0%",
+        "revenue_share": 0.19,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Digital BusinessService (SI/SM)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.0%",
+        "revenue_share": 0.22,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "클라우드&AI",
-      "caption": "클라우드 전환·MSP·AI 적용 서비스",
+      "title": "클라우드·데이터센터",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.0%",
       "kind": "service",
-      "visual": "AI",
-      "image": "../data/business_images/business_image_local_cloud.svg",
-      "image_source": "Local curated visual"
+      "visual": "CLOUD",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "Digital Business Service(SI/SM)",
-      "caption": "시스템통합·운영 서비스",
-      "kind": "service",
-      "visual": "Digital",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "title": "대형마트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.0%",
+      "kind": "consumer",
+      "visual": "MART",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "스마트엔지니어링",
-      "caption": "스마트팩토리·물류·시티 등 로봇/자동화",
+      "title": "시스템 구축·통합",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.0%",
       "kind": "service",
-      "visual": "스마트엔지니어링",
-      "image": "../data/business_images/business_image_local_robot.svg",
-      "image_source": "Local curated visual"
+      "visual": "SI",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "총합계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -155,9 +155,11 @@
     "segment_finance": "풍원정밀(주)의 주요 제품·서비스는 OLED, 금속마스크, 직접매출, 제품임가공, 금속 마스크, OLED 증착용입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 경영상의 주요계약 회사가 영위하는 산업은 주문 생산방식이고 고객이 한정되어 있어 수주일, 납기, 제품의 가격이 회사와 고객사의 중요한 영업상 기밀사항이므로 별도로 기재하지 않았습니다.2. 끊임없는 기술연구개발을 통해 지속적으로 고객의 수요에 부합하는 기술력을 제공하고, 공동 기술 개발 협력 체계를 유지해 나갈 계획입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "환경책임보험 가입증서",
-        "desc": "보험계약과 자산운용 중심 서비스",
-        "revenue_share": null
+        "name": "임가공",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.3%",
+        "revenue_share": 0.073,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -172,40 +174,32 @@
       "내용",
       "적용제품"
     ],
-    "investor_note": "풍원정밀(주)의 주요 제품·서비스는 OLED, 금속마스크, 직접매출, 제품임가공, 금속 마스크, OLED 증착용입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 경영상의 주요계약 회사가 영위하는 산업은 주문 생산방식이고 고객이 한정되어 있어 수주일, 납기, 제품의 가격이 회사와 고객사의 중요한 영업상 기밀사항이므로 별도로 기재하지 않았습니다.2. 끊임없는 기술연구개발을 통해 지속적으로 고객의 수요에 부합하는 기술력을 제공하고, 공동 기술 개발 협력 체계를 유지해 나갈 계획입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "풍원정밀(주)의 주요 제품·서비스는 OLED, 금속마스크, 직접매출, 제품임가공, 금속 마스크, OLED 증착용입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 경영상의 주요계약 회사가 영위하는 산업은 주문 생산방식이고 고객이 한정되어 있어 수주일, 납기, 제품의 가격이 회사와 고객사의 중요한 영업상 기밀사항이므로 별도로 기재하지 않았습니다.2. 끊임없는 기술연구개발을 통해 지속적으로 고객의 수요에 부합하는 기술력을 제공하고, 공동 기술 개발 협력 체계를 유지해 나갈 계획입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 92.7%",
+        "revenue_share": 0.927,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임가공",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.3%",
+        "revenue_share": 0.073,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
-      "kind": "display",
-      "visual": "OLED",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "금속마스크",
-      "caption": "금속마스크 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "직접",
-      "caption": "직접 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "제품임가공",
-      "caption": "제품임가공 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "title": "임가공",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.3%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

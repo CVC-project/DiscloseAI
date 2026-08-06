@@ -153,7 +153,15 @@
   "snippets": {
     "overview": "주식회사 유바이오로직스의 주요 제품·서비스는 의약품, 제품매출, 경구용콜레라백신, 제조 서비스(CRMO), 제품(종속법인), Filler입니다. 현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. 안정적인 매출 및 이익을 바탕으로 선진시장을 타겟으로 하는 프리미엄 백신을 개발 중이며 이를 통해 글로벌 백신회사로 도약하고자 합니다. 개발 중인 장티푸스 접합백신(EuTYPH-C), 수막구균 접합백신(EuNmCV)도 1차적으로는 UNICEF를 통한 공공시장 진출을 목표하고 있으나, 기술이전 및 원액공급을 통한 사설시장 진출도 진행중에 있습니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다.",
     "segment_finance": "주식회사 유바이오로직스의 주요 제품·서비스는 의약품, 제품매출, 경구용콜레라백신, 제조 서비스(CRMO), 제품(종속법인), Filler입니다. 현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. 안정적인 매출 및 이익을 바탕으로 선진시장을 타겟으로 하는 프리미엄 백신을 개발 중이며 이를 통해 글로벌 백신회사로 도약하고자 합니다. 개발 중인 장티푸스 접합백신(EuTYPH-C), 수막구균 접합백신(EuNmCV)도 1차적으로는 UNICEF를 통한 공공시장 진출을 목표하고 있으나, 기술이전 및 원액공급을 통한 사설시장 진출도 진행중에 있습니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "Filler",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.0011,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "의약품",
       "경구용콜레라백신",
@@ -167,40 +175,63 @@
       "빌게이츠재단",
       "WHO 산하기관"
     ],
-    "investor_note": "주식회사 유바이오로직스의 주요 제품·서비스는 의약품, 제품매출, 경구용콜레라백신, 제조 서비스(CRMO), 제품(종속법인), Filler입니다. 현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. 안정적인 매출 및 이익을 바탕으로 선진시장을 타겟으로 하는 프리미엄 백신을 개발 중이며 이를 통해 글로벌 백신회사로 도약하고자 합니다. 개발 중인 장티푸스 접합백신(EuTYPH-C), 수막구균 접합백신(EuNmCV)도 1차적으로는 UNICEF를 통한 공공시장 진출을 목표하고 있으나, 기술이전 및 원액공급을 통한 사설시장 진출도 진행중에 있습니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다."
+    "investor_note": "주식회사 유바이오로직스의 주요 제품·서비스는 의약품, 제품매출, 경구용콜레라백신, 제조 서비스(CRMO), 제품(종속법인), Filler입니다. 현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. 안정적인 매출 및 이익을 바탕으로 선진시장을 타겟으로 하는 프리미엄 백신을 개발 중이며 이를 통해 글로벌 백신회사로 도약하고자 합니다. 개발 중인 장티푸스 접합백신(EuTYPH-C), 수막구균 접합백신(EuNmCV)도 1차적으로는 UNICEF를 통한 공공시장 진출을 목표하고 있으나, 기술이전 및 원액공급을 통한 사설시장 진출도 진행중에 있습니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다.",
+    "product_service_segments": [
+      {
+        "name": "제품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 97.3%",
+        "revenue_share": 0.973,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Filler",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.0011,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "서비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.7%",
+        "revenue_share": 0.027,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "의약품",
-      "caption": "의약품 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
       "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "경구용콜레라백신",
-      "caption": "경구용콜레라백신 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
       "kind": "bio",
       "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "제조 서비스(CRMO)",
-      "caption": "제조 서비스(CRMO) 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "제품(종속법인)",
-      "caption": "제품(종속법인) 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

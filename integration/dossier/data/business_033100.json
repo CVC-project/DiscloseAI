@@ -155,9 +155,18 @@
     "segment_finance": "제룡전기는 배전선로에서 전압을 조정하는 변압기를 만드는 전력기기 전문기업으로, 매출의 100%가 변압기(중전기) 부문에서 나오며 수출 비중이 약 89%에 달합니다. 친환경 몰드변압기·가스절연개폐장치(GIS) 등 고효율 제품 개발에 주력합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,240억 원으로 전년 대비 14.7% 줄었고 영업이익은 관세 영향으로 31.5% 감소한 670억 원, 당기순이익은 587억 원으로 26.5% 줄었습니다. 부채비율은 11.5%로 낮고 ROE는 26.9%로 수익성은 여전히 견조합니다.",
     "segment_breakdown": [
       {
-        "name": "중전기(변압기)",
-        "desc": "배전선로용 변압기 등 전력기기 제조·판매",
-        "revenue_share": 1
+        "name": "중 전 기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총 매 출 액",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -167,40 +176,40 @@
       "가스절연개폐장치(GIS)",
       "아몰퍼스 변압기"
     ],
-    "investor_note": "제룡전기는 배전선로에서 전압을 조정하는 변압기를 만드는 전력기기 전문기업으로, 매출의 100%가 변압기(중전기) 부문에서 나오며 수출 비중이 약 89%에 달합니다. 친환경 몰드변압기·가스절연개폐장치(GIS) 등 고효율 제품 개발에 주력합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,240억 원으로 전년 대비 14.7% 줄었고 영업이익은 관세 영향으로 31.5% 감소한 670억 원, 당기순이익은 587억 원으로 26.5% 줄었습니다. 부채비율은 11.5%로 낮고 ROE는 26.9%로 수익성은 여전히 견조합니다."
+    "investor_note": "제룡전기는 배전선로에서 전압을 조정하는 변압기를 만드는 전력기기 전문기업으로, 매출의 100%가 변압기(중전기) 부문에서 나오며 수출 비중이 약 89%에 달합니다. 친환경 몰드변압기·가스절연개폐장치(GIS) 등 고효율 제품 개발에 주력합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,240억 원으로 전년 대비 14.7% 줄었고 영업이익은 관세 영향으로 31.5% 감소한 670억 원, 당기순이익은 587억 원으로 26.5% 줄었습니다. 부채비율은 11.5%로 낮고 ROE는 26.9%로 수익성은 여전히 견조합니다.",
+    "product_service_segments": [
+      {
+        "name": "중 전 기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총 매 출 액",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "중전기(변압기)",
-      "caption": "배전선로용 변압기 등 전력기기 제조·판매",
+      "title": "중 전 기",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
       "kind": "power",
-      "visual": "중전기",
-      "image": "../data/business_images/business_image_local_power.svg",
-      "image_source": "Local curated visual"
+      "visual": "POWER",
+      "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "배전용 변압기",
-      "caption": "배전용 변압기 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "배전용",
-      "image": "../data/business_images/business_image_local_power.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "몰드변압기",
-      "caption": "몰드변압기 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "몰드변압기",
-      "image": "../data/business_images/business_image_local_power.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "친환경 변압기",
-      "caption": "친환경 변압기 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "친환경",
-      "image": "../data/business_images/business_image_local_power.svg",
-      "image_source": "Local curated visual"
+      "title": "총 매 출 액",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+      "kind": "power",
+      "visual": "POWER",
+      "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

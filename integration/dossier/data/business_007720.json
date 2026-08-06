@@ -155,14 +155,18 @@
     "segment_finance": "소노스퀘어는 호텔·리조트 등에 필요한 기업소모성자재(MRO)를 구매대행하는 사업을 핵심으로 하고, 자체 브랜드 GOOD&GOODS를 통한 리조트 내 유통사업, 매트리스 등 리빙제품 렌탈사업(소노시즌)도 함께 운영하는 회사로, 매출의 89%가 도소매(MRO·유통) 사업에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액(연결)은 1,628억 원으로 전년 대비 22.0% 늘었고 영업이익은 112.9% 크게 증가했지만, 당기순손실은 27억 원으로 적자가 이어졌습니다(전년보다는 손실 폭이 73.9% 줄었습니다). 부채비율은 68.7%로 낮은 편이라 재무구조는 비교적 안정적입니다.",
     "segment_breakdown": [
       {
-        "name": "도소매업(MRO·유통)",
-        "desc": "호텔·리조트용 기업소모성자재 구매대행 및 리조트 내 유통",
-        "revenue_share": 0.8876
+        "name": "도소매업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 88.8%",
+        "revenue_share": 0.8876,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "렌탈업(소노시즌)",
-        "desc": "매트리스 등 리빙제품 렌탈",
-        "revenue_share": 0.1124
+        "name": "소노시즌",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.2%",
+        "revenue_share": 0.1124,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -171,24 +175,40 @@
       "매트리스 렌탈",
       "리빙제품 렌탈"
     ],
-    "investor_note": "소노스퀘어는 호텔·리조트 등에 필요한 기업소모성자재(MRO)를 구매대행하는 사업을 핵심으로 하고, 자체 브랜드 GOOD&GOODS를 통한 리조트 내 유통사업, 매트리스 등 리빙제품 렌탈사업(소노시즌)도 함께 운영하는 회사로, 매출의 89%가 도소매(MRO·유통) 사업에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액(연결)은 1,628억 원으로 전년 대비 22.0% 늘었고 영업이익은 112.9% 크게 증가했지만, 당기순손실은 27억 원으로 적자가 이어졌습니다(전년보다는 손실 폭이 73.9% 줄었습니다). 부채비율은 68.7%로 낮은 편이라 재무구조는 비교적 안정적입니다."
+    "investor_note": "소노스퀘어는 호텔·리조트 등에 필요한 기업소모성자재(MRO)를 구매대행하는 사업을 핵심으로 하고, 자체 브랜드 GOOD&GOODS를 통한 리조트 내 유통사업, 매트리스 등 리빙제품 렌탈사업(소노시즌)도 함께 운영하는 회사로, 매출의 89%가 도소매(MRO·유통) 사업에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액(연결)은 1,628억 원으로 전년 대비 22.0% 늘었고 영업이익은 112.9% 크게 증가했지만, 당기순손실은 27억 원으로 적자가 이어졌습니다(전년보다는 손실 폭이 73.9% 줄었습니다). 부채비율은 68.7%로 낮은 편이라 재무구조는 비교적 안정적입니다.",
+    "product_service_segments": [
+      {
+        "name": "도소매업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 88.8%",
+        "revenue_share": 0.8876,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "소노시즌",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.2%",
+        "revenue_share": 0.1124,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "도소매업(MRO·유통)",
-      "caption": "호텔·리조트용 기업소모성자재 구매대행 및 리조트 내 유통",
+      "title": "도소매업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 88.8%",
       "kind": "service",
-      "visual": "도소매업",
-      "image": "../data/business_images/business_image_local_mro.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "렌탈업(소노시즌)",
-      "caption": "매트리스 등 리빙제품 렌탈",
+      "title": "소노시즌",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.2%",
       "kind": "service",
-      "visual": "렌탈업",
-      "image": "../data/business_images/business_image_local_default_b.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

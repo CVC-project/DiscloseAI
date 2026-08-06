@@ -139,24 +139,25 @@
     "segment_finance": "제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 광학부품 설계, 제조 고객사에 디스플레이 패널 관련 기술지원을 제공하고, 최종 시스템 설계를 하는 완제품제조 고객사들에게 컨트롤러 SoC 관련 기술지원을 제공합니다. 제품등의 가격 변동 추이 당사가 고객에게 제공하는 반도체 제품은 고객사별로 요구되는 파운드리 제조 공정이 상이하고, 동일 제조 공정내에서도 다양한 요구 사양 차이에 따른 가격 편차가 크기 때문에 제품당 가격을 단순 산정하기 어렵습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "Foundry",
-        "desc": "Foundry 관련 제품·서비스",
-        "revenue_share": null
+        "name": "모바일 TV",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.4%",
+        "revenue_share": 0.204,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "OLED",
-        "desc": "OLED, OLEDoS 관련 제품·서비스",
-        "revenue_share": null
+        "name": "용역매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.9%",
+        "revenue_share": 0.079,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "배터리",
-        "desc": "배터리 관련 제품·서비스",
-        "revenue_share": null
-      },
-      {
-        "name": "데이터센터",
-        "desc": "데이터센터 관련 제품·서비스",
-        "revenue_share": null
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+        "revenue_share": 0.015,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -171,40 +172,46 @@
       "자체 기획",
       "차량용 HUD"
     ],
-    "investor_note": "제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 광학부품 설계, 제조 고객사에 디스플레이 패널 관련 기술지원을 제공하고, 최종 시스템 설계를 하는 완제품제조 고객사들에게 컨트롤러 SoC 관련 기술지원을 제공합니다. 제품등의 가격 변동 추이 당사가 고객에게 제공하는 반도체 제품은 고객사별로 요구되는 파운드리 제조 공정이 상이하고, 동일 제조 공정내에서도 다양한 요구 사양 차이에 따른 가격 편차가 크기 때문에 제품당 가격을 단순 산정하기 어렵습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 광학부품 설계, 제조 고객사에 디스플레이 패널 관련 기술지원을 제공하고, 최종 시스템 설계를 하는 완제품제조 고객사들에게 컨트롤러 SoC 관련 기술지원을 제공합니다. 제품등의 가격 변동 추이 당사가 고객에게 제공하는 반도체 제품은 고객사별로 요구되는 파운드리 제조 공정이 상이하고, 동일 제조 공정내에서도 다양한 요구 사양 차이에 따른 가격 편차가 크기 때문에 제품당 가격을 단순 산정하기 어렵습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "제품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 70.7%",
+        "revenue_share": 0.707,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "모바일 TV",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.4%",
+        "revenue_share": 0.204,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.9%",
+        "revenue_share": 0.079,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+        "revenue_share": 0.015,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "Foundry",
-      "caption": "Foundry 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
-      "kind": "display",
-      "visual": "OLED",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "제품의 개요",
-      "caption": "제품의 개요 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "컨트롤러 SoC",
-      "caption": "컨트롤러 SoC 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "title": "모바일 TV",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.4%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_141eab6519656e30.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

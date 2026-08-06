@@ -155,19 +155,18 @@
     "segment_finance": "(주)진매트릭스의 주요 제품·서비스는 의약품, 은행, 보험, 제품설명, 제품매출, 매입액입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 수요자(의료기관)와 공동연구를 수행하고, 공신력있는 외부기관의 검증 또는 인증(신의료기술 인증 등)을 획득함으로써 제품에 대한 신뢰성을 확보하고, 경쟁력 있는 기관과의 판매제휴를 통해 안정적인 매출을 시현하는 전략을 취하고 있습니다. 제품 등의 가격변동 추이 제품 및 상품 관련 품목수 및 판매가격이 다양하고 기술료 수익, 용역매출, 기타매출등의 제품가격의 기재는 적절하지 않아 가격변동 추이를 기재하지 않았습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "분자진단/생화학 제조",
-        "desc": "분자진단, 생화학 제조 관련 제품·서비스",
-        "revenue_share": null
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.1%",
+        "revenue_share": 0.101,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "생화학",
-        "desc": "생화학 제조 관련 제품·서비스",
-        "revenue_share": null
-      },
-      {
-        "name": "건강보험",
-        "desc": "보험 관련 제품·서비스",
-        "revenue_share": null
+        "name": "용역매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.4%",
+        "revenue_share": 0.014,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -183,24 +182,70 @@
       "생화학 제조",
       "매출처"
     ],
-    "investor_note": "(주)진매트릭스의 주요 제품·서비스는 의약품, 은행, 보험, 제품설명, 제품매출, 매입액입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 수요자(의료기관)와 공동연구를 수행하고, 공신력있는 외부기관의 검증 또는 인증(신의료기술 인증 등)을 획득함으로써 제품에 대한 신뢰성을 확보하고, 경쟁력 있는 기관과의 판매제휴를 통해 안정적인 매출을 시현하는 전략을 취하고 있습니다. 제품 등의 가격변동 추이 제품 및 상품 관련 품목수 및 판매가격이 다양하고 기술료 수익, 용역매출, 기타매출등의 제품가격의 기재는 적절하지 않아 가격변동 추이를 기재하지 않았습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)진매트릭스의 주요 제품·서비스는 의약품, 은행, 보험, 제품설명, 제품매출, 매입액입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 수요자(의료기관)와 공동연구를 수행하고, 공신력있는 외부기관의 검증 또는 인증(신의료기술 인증 등)을 획득함으로써 제품에 대한 신뢰성을 확보하고, 경쟁력 있는 기관과의 판매제휴를 통해 안정적인 매출을 시현하는 전략을 취하고 있습니다. 제품 등의 가격변동 추이 제품 및 상품 관련 품목수 및 판매가격이 다양하고 기술료 수익, 용역매출, 기타매출등의 제품가격의 기재는 적절하지 않아 가격변동 추이를 기재하지 않았습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "제품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 88.0%",
+        "revenue_share": 0.88,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.1%",
+        "revenue_share": 0.101,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.4%",
+        "revenue_share": 0.014,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.005,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "의약품",
-      "caption": "의약품 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
       "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "은행",
-      "caption": "예금과 대출에서 이자이익을 만드는 금융 서비스입니다.",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
       "kind": "bank",
       "visual": "BANK",
-      "image": "../data/business_images/business_image_local_bank.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "보험",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
+      "kind": "insurance",
+      "visual": "INSURANCE",
+      "image": "../data/business_images/business_image_837140a1a79dbc33.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "제품설명",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

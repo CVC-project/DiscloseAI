@@ -137,7 +137,22 @@
   "snippets": {
     "overview": "(주)코이즈의 주요 제품·서비스는 OLED, 제품 매출, 광학필름, PET필름, 제품매출, 광학코팅입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 경쟁업체들은 완제품 형태의 코팅 조액을 구입하여 광학필름 표면을 코팅하는 경우가 대부분이나, 당사의 경우 자체적으로 원료를 구입하여 직접 필름 원단의 성질별로 코팅액을 조액함으로써 생산 원가 및 품질에서 우위를 차지하고 있습니다. 이러한 독자적인 교반배합기술과 UV 경화장치 개발 기술을 토대로 타 경쟁업체에 비해 우수한 광특성 및 가격경쟁력 확보로 안정적인 시장점유율을 지속하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "(주)코이즈의 주요 제품·서비스는 OLED, 제품 매출, 광학필름, PET필름, 제품매출, 광학코팅입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 경쟁업체들은 완제품 형태의 코팅 조액을 구입하여 광학필름 표면을 코팅하는 경우가 대부분이나, 당사의 경우 자체적으로 원료를 구입하여 직접 필름 원단의 성질별로 코팅액을 조액함으로써 생산 원가 및 품질에서 우위를 차지하고 있습니다. 이러한 독자적인 교반배합기술과 UV 경화장치 개발 기술을 토대로 타 경쟁업체에 비해 우수한 광특성 및 가격경쟁력 확보로 안정적인 시장점유율을 지속하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "조명",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
+        "revenue_share": 0.05,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품 매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.9%",
+        "revenue_share": 0.019,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "OLED",
       "광학필름",
@@ -146,40 +161,46 @@
       "광학필름코팅",
       "신제품개발"
     ],
-    "investor_note": "(주)코이즈의 주요 제품·서비스는 OLED, 제품 매출, 광학필름, PET필름, 제품매출, 광학코팅입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 경쟁업체들은 완제품 형태의 코팅 조액을 구입하여 광학필름 표면을 코팅하는 경우가 대부분이나, 당사의 경우 자체적으로 원료를 구입하여 직접 필름 원단의 성질별로 코팅액을 조액함으로써 생산 원가 및 품질에서 우위를 차지하고 있습니다. 이러한 독자적인 교반배합기술과 UV 경화장치 개발 기술을 토대로 타 경쟁업체에 비해 우수한 광특성 및 가격경쟁력 확보로 안정적인 시장점유율을 지속하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)코이즈의 주요 제품·서비스는 OLED, 제품 매출, 광학필름, PET필름, 제품매출, 광학코팅입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 경쟁업체들은 완제품 형태의 코팅 조액을 구입하여 광학필름 표면을 코팅하는 경우가 대부분이나, 당사의 경우 자체적으로 원료를 구입하여 직접 필름 원단의 성질별로 코팅액을 조액함으로써 생산 원가 및 품질에서 우위를 차지하고 있습니다. 이러한 독자적인 교반배합기술과 UV 경화장치 개발 기술을 토대로 타 경쟁업체에 비해 우수한 광특성 및 가격경쟁력 확보로 안정적인 시장점유율을 지속하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "제품 매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 92.2%",
+        "revenue_share": 0.922,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "조명",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
+        "revenue_share": 0.05,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품 매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.9%",
+        "revenue_share": 0.019,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타 매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.1%",
+        "revenue_share": 0.021,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
-      "kind": "display",
-      "visual": "OLED",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "광학필름",
-      "caption": "광학필름 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "조명",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "PET필름",
-      "caption": "PET필름 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "광학코팅",
-      "caption": "광학코팅 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

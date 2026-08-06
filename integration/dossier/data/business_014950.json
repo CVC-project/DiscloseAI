@@ -91,19 +91,32 @@
     "segment_finance": "삼익제약은 고혈압·고지혈증 치료제(세자르정 등)와 당뇨병 치료제(그리핀정 등)를 중심으로 하는 전문의약품 제조사로, 순환기용제가 매출의 약 47%를 차지하며 타 제약사 의약품을 위탁생산하는 CMO 사업도 함께 운영합니다. 의약품 유통은 자회사 팜베이를 통해 일원화하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 600억 원, 영업이익은 32억 원을 기록했으나 당기순이익은 7억 원의 손실을 냈습니다. 부채비율은 23.5%로 낮아 재무 안정성은 양호한 편입니다.",
     "segment_breakdown": [
       {
-        "name": "순환기용제",
-        "desc": "고혈압·고지혈증 치료제(세자르정 등)",
-        "revenue_share": 0.468
+        "name": "순환기 용제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.3%",
+        "revenue_share": 0.073,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "당뇨병용제",
-        "desc": "혈당조절 치료제(그리핀정 등)",
-        "revenue_share": 0.107
+        "name": "세자르플러스정",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.5%",
+        "revenue_share": 0.045,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "CMO",
-        "desc": "타 제약사 의약품 위·수탁생산",
-        "revenue_share": 0.114
+        "name": "에라빅스정",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.5%",
+        "revenue_share": 0.055,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "카덴자정5/80mg",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.4%",
+        "revenue_share": 0.024,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -116,24 +129,70 @@
       "종합감기약",
       "위탁생산(CMO)"
     ],
-    "investor_note": "삼익제약은 고혈압·고지혈증 치료제(세자르정 등)와 당뇨병 치료제(그리핀정 등)를 중심으로 하는 전문의약품 제조사로, 순환기용제가 매출의 약 47%를 차지하며 타 제약사 의약품을 위탁생산하는 CMO 사업도 함께 운영합니다. 의약품 유통은 자회사 팜베이를 통해 일원화하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 600억 원, 영업이익은 32억 원을 기록했으나 당기순이익은 7억 원의 손실을 냈습니다. 부채비율은 23.5%로 낮아 재무 안정성은 양호한 편입니다."
+    "investor_note": "삼익제약은 고혈압·고지혈증 치료제(세자르정 등)와 당뇨병 치료제(그리핀정 등)를 중심으로 하는 전문의약품 제조사로, 순환기용제가 매출의 약 47%를 차지하며 타 제약사 의약품을 위탁생산하는 CMO 사업도 함께 운영합니다. 의약품 유통은 자회사 팜베이를 통해 일원화하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 600억 원, 영업이익은 32억 원을 기록했으나 당기순이익은 7억 원의 손실을 냈습니다. 부채비율은 23.5%로 낮아 재무 안정성은 양호한 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "순환기 용제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.3%",
+        "revenue_share": 0.073,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "세자르플러스정",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.5%",
+        "revenue_share": 0.045,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "에라빅스정",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.5%",
+        "revenue_share": 0.055,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "카덴자정5/80mg",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.4%",
+        "revenue_share": 0.024,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "순환기용제",
-      "caption": "고혈압·고지혈증 치료제(세자르정 등)",
+      "title": "순환기 용제",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.3%",
       "kind": "service",
-      "visual": "순환기용제",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "당뇨병용제",
-      "caption": "혈당조절 치료제(그리핀정 등)",
+      "title": "세자르플러스정",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.5%",
       "kind": "service",
-      "visual": "당뇨병용제",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "에라빅스정",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "카덴자정5/80mg",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.4%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

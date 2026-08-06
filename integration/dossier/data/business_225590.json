@@ -156,8 +156,24 @@
     "segment_breakdown": [
       {
         "name": "패션부문",
-        "desc": "패션부문 관련 제품·서비스",
-        "revenue_share": null
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.1%",
+        "revenue_share": 0.991,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임대부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.9%",
+        "revenue_share": 0.009,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매 출 총 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -165,40 +181,47 @@
       "의류",
       "더레노마 등"
     ],
-    "investor_note": "패션플랫폼(주)의 주요 제품·서비스는 패션부문, 의류, 더레노마 등입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 산업 특성상 다양한 제품 생산이 필요하므로 인건비, 생산설비에 따른 고정비 등 비용 절감 차원에서 각 의류의 종류에 따른 숙련된 직원을 채용하기 보다는 의류별 전문성을 갖춘 외주가공업체를 통해 전량 제조하고 있습니다. 각 주요제품 등의 매출액 및 매출액에서 차지하는 비율은 다음과 같습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "패션플랫폼(주)의 주요 제품·서비스는 패션부문, 의류, 더레노마 등입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사는 산업 특성상 다양한 제품 생산이 필요하므로 인건비, 생산설비에 따른 고정비 등 비용 절감 차원에서 각 의류의 종류에 따른 숙련된 직원을 채용하기 보다는 의류별 전문성을 갖춘 외주가공업체를 통해 전량 제조하고 있습니다. 각 주요제품 등의 매출액 및 매출액에서 차지하는 비율은 다음과 같습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "패션부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.1%",
+        "revenue_share": 0.991,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임대부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.9%",
+        "revenue_share": 0.009,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매 출 총 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "패션부문",
-      "caption": "패션부문 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.1%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_fashion.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "의류",
-      "caption": "의류 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "매 출 총 계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_fashion.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "더레노마 등",
-      "caption": "더레노마 등 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "임대부문",
-      "caption": "임대부문 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

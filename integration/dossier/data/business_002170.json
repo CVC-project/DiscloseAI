@@ -156,13 +156,17 @@
     "segment_breakdown": [
       {
         "name": "가죽부문",
-        "desc": "원피 수입가공한 피혁원단 생산·판매(수출·내수)",
-        "revenue_share": 0.987
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 98.7%",
+        "revenue_share": 0.987,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "임대부문",
-        "desc": "서울·경기·부산 등 부동산 임대",
-        "revenue_share": 0.013
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.3%",
+        "revenue_share": 0.013,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -172,24 +176,40 @@
       "신발용 가죽",
       "가방용 가죽"
     ],
-    "investor_note": "삼양통상(SYTS)은 원피를 수입·가공해 자동차 시트용, 신발용, 가방용 가죽원단을 만들어 파는 피혁 전문기업으로, 매출의 대부분(약 99%)이 가죽부문에서 나오고 나머지는 부동산 임대 수입입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,746억 원으로 전년보다 8.7% 줄고 영업이익도 7.8% 감소했지만, 당기순이익은 239억 원으로 117.6% 늘어 영업 외 요인이 실적을 끌어올린 것으로 보입니다. 부채비율은 4.6%로 매우 낮아 재무 안정성은 높은 편입니다."
+    "investor_note": "삼양통상(SYTS)은 원피를 수입·가공해 자동차 시트용, 신발용, 가방용 가죽원단을 만들어 파는 피혁 전문기업으로, 매출의 대부분(약 99%)이 가죽부문에서 나오고 나머지는 부동산 임대 수입입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,746억 원으로 전년보다 8.7% 줄고 영업이익도 7.8% 감소했지만, 당기순이익은 239억 원으로 117.6% 늘어 영업 외 요인이 실적을 끌어올린 것으로 보입니다. 부채비율은 4.6%로 매우 낮아 재무 안정성은 높은 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "가죽부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 98.7%",
+        "revenue_share": 0.987,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임대부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.3%",
+        "revenue_share": 0.013,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "가죽부문",
-      "caption": "원피 수입가공한 피혁원단 생산·판매(수출·내수)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 98.7%",
       "kind": "service",
-      "visual": "가죽부문",
-      "image": "../data/business_images/business_image_local_textile.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "임대부문",
-      "caption": "서울·경기·부산 등 부동산 임대",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.3%",
       "kind": "service",
-      "visual": "임대부문",
-      "image": "../data/business_images/business_image_local_default_b.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

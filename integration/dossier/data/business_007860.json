@@ -156,13 +156,24 @@
     "segment_breakdown": [
       {
         "name": "자동차 부품 제조",
-        "desc": "현대차·기아 협력사로 자동차 내외장 부품을 생산",
-        "revenue_share": 0.937
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 93.7%",
+        "revenue_share": 0.937,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "금형 및 중장비설비 제조",
-        "desc": "자동차용 프레스·사출금형과 굴삭기 CABIN 제조",
-        "revenue_share": 0.032
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.2%",
+        "revenue_share": 0.032,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "단순합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -179,32 +190,70 @@
       "사출금형",
       "건설중장비 CABIN"
     ],
-    "investor_note": "서연은 자동차 내외장 부품을 만드는 자회사(서연이화 등)를 거느린 지주회사로, 매출의 대부분(94%)이 도어트림·시트·범퍼 등 자동차 부품 제조에서 나옵니다. 그 외에 자동차용 금형과 건설중장비 부품(3%), 자회사에 전산·경영자문 서비스를 제공하는 지주사업(3%)도 함께 영위합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4조 9,160억 원으로 전년 대비 9.3% 늘었지만 영업이익은 17.5% 줄었고 당기순이익도 58.4% 감소해 외형 성장에 비해 수익성은 약화됐습니다. 부채비율은 128.2%로 자본보다 다소 많은 빚을 지고 있습니다."
+    "investor_note": "서연은 자동차 내외장 부품을 만드는 자회사(서연이화 등)를 거느린 지주회사로, 매출의 대부분(94%)이 도어트림·시트·범퍼 등 자동차 부품 제조에서 나옵니다. 그 외에 자동차용 금형과 건설중장비 부품(3%), 자회사에 전산·경영자문 서비스를 제공하는 지주사업(3%)도 함께 영위합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4조 9,160억 원으로 전년 대비 9.3% 늘었지만 영업이익은 17.5% 줄었고 당기순이익도 58.4% 감소해 외형 성장에 비해 수익성은 약화됐습니다. 부채비율은 128.2%로 자본보다 다소 많은 빚을 지고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "자동차 부품 제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 93.7%",
+        "revenue_share": 0.937,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "금형 및 중장비설비 제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.2%",
+        "revenue_share": 0.032,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "지주회사 및 기타",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.1%",
+        "revenue_share": 0.031,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "단순합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "금형 및 중장비설비 제조",
-      "caption": "자동차용 프레스·사출금형과 굴삭기 CABIN 제조",
+      "title": "자동차 부품 제조",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 93.7%",
       "kind": "auto",
-      "visual": "금형",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "금융 서비스",
-      "caption": "예금, 대출, 수수료 등 금융 서비스를 제공합니다.",
-      "kind": "bank",
-      "visual": "BANK",
-      "image": "../data/business_images/business_image_local_bank.svg",
-      "image_source": "Local curated visual"
+      "title": "금형 및 중장비설비 제조",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "투자·운용",
-      "caption": "자산 운용과 투자 수익이 실적에 영향을 줍니다.",
-      "kind": "securities",
-      "visual": "AUM",
-      "image": "../data/business_images/business_image_local_securities.svg",
-      "image_source": "Local curated visual"
+      "title": "지주회사 및 기타",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.1%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "단순합계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

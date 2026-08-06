@@ -156,13 +156,31 @@
     "segment_breakdown": [
       {
         "name": "Misto 부문",
-        "desc": "FILA 등 자체 브랜드 및 K-패션 브랜드 라이선스·유통",
-        "revenue_share": 0.186
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.9%",
+        "revenue_share": 0.149,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "그 외 브랜드(주1)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.6%",
+        "revenue_share": 0.036,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Misto 부문 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.6%",
+        "revenue_share": 0.186,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "Acushnet 부문",
-        "desc": "Titleist·FootJoy 등 골프 브랜드 제조·판매",
-        "revenue_share": 0.814
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 61.2%",
+        "revenue_share": 0.612,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -173,24 +191,70 @@
       "KJUS(골프웨어)",
       "Alife·Pairs(K-패션 브랜드)"
     ],
-    "investor_note": "미스토홀딩스는 옛 휠라홀딩스로, FILA 브랜드 중심의 Misto 부문과 Titleist·FootJoy 등 골프용품을 만드는 Acushnet 부문을 함께 거느린 지주회사입니다. 매출의 81%가 골프용품 사업인 Acushnet 부문에서 나오며, 미국 골프 인구 증가에 힘입어 실적을 이끌고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액(연결)은 4조 4,686억 원으로 전년 대비 4.7% 늘었고 영업이익은 31.6%, 순이익은 67.8% 큰 폭으로 증가했습니다. 부채비율은 112.7%로 자본보다 다소 많은 빚을 지고 있습니다."
+    "investor_note": "미스토홀딩스는 옛 휠라홀딩스로, FILA 브랜드 중심의 Misto 부문과 Titleist·FootJoy 등 골프용품을 만드는 Acushnet 부문을 함께 거느린 지주회사입니다. 매출의 81%가 골프용품 사업인 Acushnet 부문에서 나오며, 미국 골프 인구 증가에 힘입어 실적을 이끌고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액(연결)은 4조 4,686억 원으로 전년 대비 4.7% 늘었고 영업이익은 31.6%, 순이익은 67.8% 큰 폭으로 증가했습니다. 부채비율은 112.7%로 자본보다 다소 많은 빚을 지고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "Misto 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.9%",
+        "revenue_share": 0.149,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "그 외 브랜드(주1)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.6%",
+        "revenue_share": 0.036,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Misto 부문 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.6%",
+        "revenue_share": 0.186,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Acushnet 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 61.2%",
+        "revenue_share": 0.612,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "Misto 부문",
-      "caption": "FILA 등 자체 브랜드 및 K-패션 브랜드 라이선스·유통",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.9%",
       "kind": "service",
-      "visual": "Misto",
-      "image": "../data/business_images/business_image_local_fashion.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "그 외 브랜드(주1)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "Misto 부문 계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "Acushnet 부문",
-      "caption": "Titleist·FootJoy 등 골프 브랜드 제조·판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 61.2%",
       "kind": "service",
-      "visual": "Acushnet",
-      "image": "../data/business_images/business_image_local_default_b.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

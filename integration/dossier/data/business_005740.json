@@ -155,24 +155,32 @@
     "segment_finance": "크라운해태홀딩스는 크라운제과·해태제과식품·훼미리식품을 자회사로 둔 제과 전문 지주회사로, 하임·죠리퐁·마이쮸(크라운제과), 홈런볼·오예스·맛동산(해태제과식품), 버터링(훼미리식품) 등 친숙한 과자 브랜드를 보유하고 있습니다. 지주회사인 크라운해태홀딩스 자체는 용역·브랜드 로열티·배당금 수익만 있고, 매출의 대부분은 해태제과식품(약 52%)과 크라운제과(약 39%)에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 698억 원으로 전년보다 2.2% 늘었지만 영업이익은 572억 원으로 15.3% 줄었고 당기순이익도 336억 원으로 22.9% 감소했습니다. 부채비율은 96.8%로 자본과 비슷한 수준의 빚을 지고 있어 재무 부담을 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "지주부문(크라운해태홀딩스)",
-        "desc": "자회사 용역·브랜드 로열티·배당금 수익",
-        "revenue_share": 0.019
+        "name": "지 주",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.2%",
+        "revenue_share": 0.0117,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "제과부문-크라운제과",
-        "desc": "비스킷·스낵·캔디 제조판매(하임·죠리퐁 등)",
-        "revenue_share": 0.3874
+        "name": "브랜드 매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.0017,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "제과부문-해태제과식품",
-        "desc": "제과·냉동식품 제조판매(홈런볼·오예스 등)",
-        "revenue_share": 0.5205
+        "name": "배당금수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.6%",
+        "revenue_share": 0.0056,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "제과부문-훼미리식품",
-        "desc": "제과·아이스크림 제조(OEM 위주, 버터링 등)",
-        "revenue_share": 0.0668
+        "name": "제 과",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.0%",
+        "revenue_share": 0.3703,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -189,40 +197,54 @@
       "고향만두(해태제과식품)",
       "버터링(훼미리식품)"
     ],
-    "investor_note": "크라운해태홀딩스는 크라운제과·해태제과식품·훼미리식품을 자회사로 둔 제과 전문 지주회사로, 하임·죠리퐁·마이쮸(크라운제과), 홈런볼·오예스·맛동산(해태제과식품), 버터링(훼미리식품) 등 친숙한 과자 브랜드를 보유하고 있습니다. 지주회사인 크라운해태홀딩스 자체는 용역·브랜드 로열티·배당금 수익만 있고, 매출의 대부분은 해태제과식품(약 52%)과 크라운제과(약 39%)에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 698억 원으로 전년보다 2.2% 늘었지만 영업이익은 572억 원으로 15.3% 줄었고 당기순이익도 336억 원으로 22.9% 감소했습니다. 부채비율은 96.8%로 자본과 비슷한 수준의 빚을 지고 있어 재무 부담을 살펴볼 필요가 있습니다."
+    "investor_note": "크라운해태홀딩스는 크라운제과·해태제과식품·훼미리식품을 자회사로 둔 제과 전문 지주회사로, 하임·죠리퐁·마이쮸(크라운제과), 홈런볼·오예스·맛동산(해태제과식품), 버터링(훼미리식품) 등 친숙한 과자 브랜드를 보유하고 있습니다. 지주회사인 크라운해태홀딩스 자체는 용역·브랜드 로열티·배당금 수익만 있고, 매출의 대부분은 해태제과식품(약 52%)과 크라운제과(약 39%)에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 698억 원으로 전년보다 2.2% 늘었지만 영업이익은 572억 원으로 15.3% 줄었고 당기순이익도 336억 원으로 22.9% 감소했습니다. 부채비율은 96.8%로 자본과 비슷한 수준의 빚을 지고 있어 재무 부담을 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "지 주",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.2%",
+        "revenue_share": 0.0117,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "브랜드 매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.0017,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "배당금수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.6%",
+        "revenue_share": 0.0056,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제 과",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.0%",
+        "revenue_share": 0.3703,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "지주부문(크라운해태홀딩스)",
-      "caption": "자회사 용역·브랜드 로열티·배당금 수익",
+      "title": "지 주",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.2%",
       "kind": "service",
-      "visual": "지주부문",
-      "image": "../data/business_images/business_image_local_finance_hold.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "제과부문-크라운제과",
-      "caption": "비스킷·스낵·캔디 제조판매(하임·죠리퐁 등)",
+      "title": "제 과",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.0%",
       "kind": "service",
-      "visual": "제과부문-크라운제과",
-      "image": "../data/business_images/business_image_local_default_b.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "제과부문-해태제과식품",
-      "caption": "제과·냉동식품 제조판매(홈런볼·오예스 등)",
-      "kind": "consumer",
-      "visual": "제과부문-해태제과식",
-      "image": "../data/business_images/business_image_local_default_c.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "제과부문-훼미리식품",
-      "caption": "제과·아이스크림 제조(OEM 위주, 버터링 등)",
-      "kind": "consumer",
-      "visual": "제과부문-훼미리식품",
-      "image": "../data/business_images/business_image_local_default_d.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

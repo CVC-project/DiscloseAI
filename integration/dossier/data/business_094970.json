@@ -153,7 +153,29 @@
   "snippets": {
     "overview": "제이엠티(주)의 주요 사업은 전자부품, 생활건강사업, 생활건강사업부, 임대사업 등입니다. 회사가 영위하는 EMS(Electronic Manufacturing Services) 사업은 생산설비를 기반으로 전자제품의 제조 및 납품에 관한 서비스를 일괄적으로 제공하는 제조 전문 서비스 산업입니다. 당사는 디바이스 기술 발전에 따른 산업 변화에 대응하기 위해 생산공정 자동화 기술을 지속적으로 개발하고 있으며, 선제적인 설비투자를 통해 생산성 향상 및 수율 관리를 강화함으로써 원가 경쟁력과 품질 경쟁력을 확보하고 있습니다.",
     "segment_finance": "제이엠티(주)의 주요 사업은 전자부품, 생활건강사업, 생활건강사업부, 임대사업 등입니다. 회사가 영위하는 EMS(Electronic Manufacturing Services) 사업은 생산설비를 기반으로 전자제품의 제조 및 납품에 관한 서비스를 일괄적으로 제공하는 제조 전문 서비스 산업입니다. 당사는 디바이스 기술 발전에 따른 산업 변화에 대응하기 위해 생산공정 자동화 기술을 지속적으로 개발하고 있으며, 선제적인 설비투자를 통해 생산성 향상 및 수율 관리를 강화함으로써 원가 경쟁력과 품질 경쟁력을 확보하고 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "전자부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.3%",
+        "revenue_share": 0.323,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "FPBA",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.8%",
+        "revenue_share": 0.258,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기록매체복제/미디어",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.0%",
+        "revenue_share": 0.14,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "OLED",
       "MLCC",
@@ -168,24 +190,70 @@
       "미국",
       "자동차내장부품"
     ],
-    "investor_note": "제이엠티(주)의 주요 사업은 전자부품, 생활건강사업, 생활건강사업부, 임대사업 등입니다. 회사가 영위하는 EMS(Electronic Manufacturing Services) 사업은 생산설비를 기반으로 전자제품의 제조 및 납품에 관한 서비스를 일괄적으로 제공하는 제조 전문 서비스 산업입니다. 당사는 디바이스 기술 발전에 따른 산업 변화에 대응하기 위해 생산공정 자동화 기술을 지속적으로 개발하고 있으며, 선제적인 설비투자를 통해 생산성 향상 및 수율 관리를 강화함으로써 원가 경쟁력과 품질 경쟁력을 확보하고 있습니다."
+    "investor_note": "제이엠티(주)의 주요 사업은 전자부품, 생활건강사업, 생활건강사업부, 임대사업 등입니다. 회사가 영위하는 EMS(Electronic Manufacturing Services) 사업은 생산설비를 기반으로 전자제품의 제조 및 납품에 관한 서비스를 일괄적으로 제공하는 제조 전문 서비스 산업입니다. 당사는 디바이스 기술 발전에 따른 산업 변화에 대응하기 위해 생산공정 자동화 기술을 지속적으로 개발하고 있으며, 선제적인 설비투자를 통해 생산성 향상 및 수율 관리를 강화함으로써 원가 경쟁력과 품질 경쟁력을 확보하고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "전자부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.3%",
+        "revenue_share": 0.323,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "FPBA",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.8%",
+        "revenue_share": 0.258,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기록매체복제/미디어",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.0%",
+        "revenue_share": 0.14,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "생활건강사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.1%",
+        "revenue_share": 0.171,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
-      "kind": "display",
-      "visual": "OLED",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "title": "전자부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.3%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "MLCC",
-      "caption": "MLCC 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "title": "FPBA",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.8%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "기록매체복제/미디어",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.0%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "생활건강사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.1%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

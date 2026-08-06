@@ -110,29 +110,18 @@
     "segment_finance": "",
     "segment_breakdown": [
       {
-        "name": "석유사업",
-        "desc": "원유 정제 및 석유제품 생산·판매",
-        "revenue_share": 0.59
+        "name": "무연",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.3%",
+        "revenue_share": 0.123,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "E&S CIC 사업부문",
-        "desc": "LNG, 전력, 도시가스 등 에너지 사업",
-        "revenue_share": 0.15
-      },
-      {
-        "name": "화학사업",
-        "desc": "기초유화 및 화학소재 제품 생산",
-        "revenue_share": 0.11
-      },
-      {
-        "name": "배터리사업",
-        "desc": "전기차 및 ESS용 배터리 생산",
-        "revenue_share": 0.09
-      },
-      {
-        "name": "윤활유사업",
-        "desc": "자동차 및 산업용 윤활유 생산",
-        "revenue_share": 0.05
+        "name": "경유",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.0%",
+        "revenue_share": 0.23,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "investor_note": "SK이노베이션은 휘발유, 경유 등 석유제품 생산·판매가 매출의 59%를 차지하는 에너지·화학 대형 기업으로, LNG·도시가스 같은 에너지사업(15%), 화학소재(11%), 전기차 배터리(9%) 등 다양한 사업을 영위하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 80조 원대로 전년 대비 8.1% 증가했고 영업이익도 26.1% 늘어나 사업 실적이 개선되는 모습을 보였습니다. 다만 당기순손실이 5조 원대로 적자를 기록한 것은 금융비용 증가와 투자손실(주로 해외 투자 관련) 때문이며, 부채비율이 190%로 높은 수준(자산 대비 부채가 거의 2배)이지만 전년 대비 소폭 개선되었습니다. 영업 현금흐름은 1조 원대로 추정되어 사업 자체의 현금 창출력은 유지되고 있는 상황입니다.",
@@ -151,38 +140,68 @@
       "도시가스"
     ],
     "raw_moves": [],
-    "utilization": []
+    "utilization": [],
+    "product_service_segments": [
+      {
+        "name": "배터리사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.2%",
+        "revenue_share": 0.152,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "석유사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.6%",
+        "revenue_share": 0.296,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "무연",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.3%",
+        "revenue_share": 0.123,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "경유",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.0%",
+        "revenue_share": 0.23,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "정유",
-      "caption": "정제마진, 유가, 환율이 실적을 크게 흔듭니다.",
-      "kind": "energy",
-      "visual": "OIL",
-      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "석유화학",
-      "caption": "화학 제품 스프레드와 수요 사이클을 봅니다.",
-      "kind": "chem",
-      "visual": "CHEM",
-      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "배터리",
-      "caption": "배터리 자회사와 투자 부담, 성장성을 함께 봅니다.",
+      "title": "배터리사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.2%",
       "kind": "battery",
-      "visual": "EV",
+      "visual": "BATTERY",
       "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "윤활유",
-      "caption": "윤활유 사업은 마진 안정성과 브랜드 경쟁력이 중요합니다.",
-      "kind": "energy",
-      "visual": "LUBE",
+      "title": "석유사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.6%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "무연",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.3%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "경유",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.0%",
+      "kind": "material",
+      "visual": "MAT",
       "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
       "image_source": "Wikimedia Commons"
     }

@@ -156,13 +156,17 @@
     "segment_breakdown": [
       {
         "name": "운수장비",
-        "desc": "방위산업 제품(변속기·화포)과 차량용 차축·변속기 등 부품",
-        "revenue_share": 0.996
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.6%",
+        "revenue_share": 0.996,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "기계",
-        "desc": "기어가공기 등 금속가공용 공작기계",
-        "revenue_share": 0.004
+        "name": "기 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.4%",
+        "revenue_share": 0.004,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -173,22 +177,30 @@
       "브레이크 캘리퍼 바디",
       "공작기계(기어가공기·수직선반)"
     ],
-    "investor_note": "SNT다이내믹스는 방산용 변속기·화력장비와 차량용 차축·변속기 등을 만드는 운수장비사업이 매출의 99.6%를 차지하는 회사로, 방위사업청·한화에어로스페이스·현대로템 등이 주요 고객이며 공작기계 사업도 소규모로 운영하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 7,120억 원으로 전년 대비 15.9% 늘었지만 영업이익과 당기순이익은 각각 22.7%, 35.9% 줄었습니다. 부채비율은 41.7%로 무난한 수준입니다."
+    "investor_note": "SNT다이내믹스는 방산용 변속기·화력장비와 차량용 차축·변속기 등을 만드는 운수장비사업이 매출의 99.6%를 차지하는 회사로, 방위사업청·한화에어로스페이스·현대로템 등이 주요 고객이며 공작기계 사업도 소규모로 운영하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 7,120억 원으로 전년 대비 15.9% 늘었지만 영업이익과 당기순이익은 각각 22.7%, 35.9% 줄었습니다. 부채비율은 41.7%로 무난한 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "운수장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.6%",
+        "revenue_share": 0.996,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.4%",
+        "revenue_share": 0.004,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "운수장비",
-      "caption": "방위산업 제품(변속기·화포)과 차량용 차축·변속기 등 부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.6%",
       "kind": "auto",
-      "visual": "운수장비",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "기계",
-      "caption": "기어가공기 등 금속가공용 공작기계",
-      "kind": "material",
-      "visual": "기계",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     }

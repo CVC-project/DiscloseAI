@@ -153,7 +153,36 @@
   "snippets": {
     "overview": "삼화왕관은 진로·오비 등에 납품하는 병마개(Cap) 전문 제조업체로 CAP사업부(매출의 약 78%)가 주력이며, 자회사 신우를 통해 화장품 용기도 생산합니다(약 22%). 과거 공시 기반 참고 정보로, 최근 매출액은 1,628억 원으로 전년 대비 2.5% 줄었고 영업이익은 67억 원(-36.4%), 순이익은 42억 원(-46.5%) 감소했습니다. 부채비율은 80.9%로 다소 높은 편이며, 감사보고서에서는 화장품 용기 사업부의 자산 손상 여부가 핵심감사사항으로 다뤄졌습니다.",
     "segment_finance": "삼화왕관은 진로·오비 등에 납품하는 병마개(Cap) 전문 제조업체로 CAP사업부(매출의 약 78%)가 주력이며, 자회사 신우를 통해 화장품 용기도 생산합니다(약 22%). 과거 공시 기반 참고 정보로, 최근 매출액은 1,628억 원으로 전년 대비 2.5% 줄었고 영업이익은 67억 원(-36.4%), 순이익은 42억 원(-46.5%) 감소했습니다. 부채비율은 80.9%로 다소 높은 편이며, 감사보고서에서는 화장품 용기 사업부의 자산 손상 여부가 핵심감사사항으로 다뤄졌습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "CAP",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 72.5%",
+        "revenue_share": 0.725,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "금속인쇄",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.6%",
+        "revenue_share": 0.046,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.3%",
+        "revenue_share": 0.003,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "플라스틱 용기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.4%",
+        "revenue_share": 0.224,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "Plastic Cap",
       "Crown Cap",
@@ -162,24 +191,62 @@
       "화장품 용기",
       "금속인쇄판"
     ],
-    "investor_note": "삼화왕관은 진로·오비 등에 납품하는 병마개(Cap) 전문 제조업체로 CAP사업부(매출의 약 78%)가 주력이며, 자회사 신우를 통해 화장품 용기도 생산합니다(약 22%). 과거 공시 기반 참고 정보로, 최근 매출액은 1,628억 원으로 전년 대비 2.5% 줄었고 영업이익은 67억 원(-36.4%), 순이익은 42억 원(-46.5%) 감소했습니다. 부채비율은 80.9%로 다소 높은 편이며, 감사보고서에서는 화장품 용기 사업부의 자산 손상 여부가 핵심감사사항으로 다뤄졌습니다."
+    "investor_note": "삼화왕관은 진로·오비 등에 납품하는 병마개(Cap) 전문 제조업체로 CAP사업부(매출의 약 78%)가 주력이며, 자회사 신우를 통해 화장품 용기도 생산합니다(약 22%). 과거 공시 기반 참고 정보로, 최근 매출액은 1,628억 원으로 전년 대비 2.5% 줄었고 영업이익은 67억 원(-36.4%), 순이익은 42억 원(-46.5%) 감소했습니다. 부채비율은 80.9%로 다소 높은 편이며, 감사보고서에서는 화장품 용기 사업부의 자산 손상 여부가 핵심감사사항으로 다뤄졌습니다.",
+    "product_service_segments": [
+      {
+        "name": "CAP",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 72.5%",
+        "revenue_share": 0.725,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "금속인쇄",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.6%",
+        "revenue_share": 0.046,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.3%",
+        "revenue_share": 0.003,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "플라스틱 용기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.4%",
+        "revenue_share": 0.224,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "CAP 사업부",
-      "caption": "음료·주류용 병마개(Cap) 제조",
-      "kind": "service",
-      "visual": "CAP",
-      "image": "../data/business_images/business_image_local_alcohol.svg",
-      "image_source": "Local curated visual"
+      "title": "CAP",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 72.5%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "플라스틱용기 사업부",
-      "caption": "화장품 용기 제조(자회사 신우)",
-      "kind": "consumer",
-      "visual": "플라스틱용기",
-      "image": "../data/business_images/business_image_local_cosmetics.svg",
-      "image_source": "Local curated visual"
+      "title": "금속인쇄",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.6%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "플라스틱 용기",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.4%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

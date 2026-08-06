@@ -153,7 +153,15 @@
   "snippets": {
     "overview": "주식회사 아스타의 주요 제품·서비스는 OLED, 시료 전처리 시스템, MALDI-TOF 시료 전처리소모품, MicroPrep kit, uFocus plateITO glass, 기타 매출입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품 등의 가격변동추이 제품별 단가는 원자재 수급조건, 시장현황 및 수요에 따라 변동됩니다. 원재료는 Data Generation Unit (IDSys LT) 및 시료전처리시스템 제품의 제조에 소요되는 원재료의 연간 매입액을 산정 및 기재하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "주식회사 아스타의 주요 제품·서비스는 OLED, 시료 전처리 시스템, MALDI-TOF 시료 전처리소모품, MicroPrep kit, uFocus plateITO glass, 기타 매출입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품 등의 가격변동추이 제품별 단가는 원자재 수급조건, 시장현황 및 수요에 따라 변동됩니다. 원재료는 Data Generation Unit (IDSys LT) 및 시료전처리시스템 제품의 제조에 소요되는 원재료의 연간 매입액을 산정 및 기재하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "Data Generation Unit 및 진단시스템",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 80.9%",
+        "revenue_share": 0.8092,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "OLED",
       "시료 전처리 시스템",
@@ -166,40 +174,40 @@
       "계약체결일",
       "계약종료일"
     ],
-    "investor_note": "주식회사 아스타의 주요 제품·서비스는 OLED, 시료 전처리 시스템, MALDI-TOF 시료 전처리소모품, MicroPrep kit, uFocus plateITO glass, 기타 매출입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품 등의 가격변동추이 제품별 단가는 원자재 수급조건, 시장현황 및 수요에 따라 변동됩니다. 원재료는 Data Generation Unit (IDSys LT) 및 시료전처리시스템 제품의 제조에 소요되는 원재료의 연간 매입액을 산정 및 기재하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사 아스타의 주요 제품·서비스는 OLED, 시료 전처리 시스템, MALDI-TOF 시료 전처리소모품, MicroPrep kit, uFocus plateITO glass, 기타 매출입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품 등의 가격변동추이 제품별 단가는 원자재 수급조건, 시장현황 및 수요에 따라 변동됩니다. 원재료는 Data Generation Unit (IDSys LT) 및 시료전처리시스템 제품의 제조에 소요되는 원재료의 연간 매입액을 산정 및 기재하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "제품및 상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.9%",
+        "revenue_share": 0.1592,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Data Generation Unit 및 진단시스템",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 80.9%",
+        "revenue_share": 0.8092,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
-      "kind": "display",
-      "visual": "OLED",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "시료 전처리 시스템",
-      "caption": "시료 전처리 시스템 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "제품및 상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.9%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "MALDI-TOF 시료 전처리소모품",
-      "caption": "MALDI-TOF 시료 전처리소모품 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "MicroPrep kit",
-      "caption": "MicroPrep kit 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "진단·분석",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 80.9%",
+      "kind": "bio",
+      "visual": "DIAGNOSTIC",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

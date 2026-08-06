@@ -155,9 +155,11 @@
     "segment_finance": "네이처셀은 자가지방유래 줄기세포를 이용한 퇴행성관절염 치료제 '조인트스템' 등을 연구개발하는 바이오 기업으로, 줄기세포 배양배지와 배양액 원료 화장품 '닥터쥬크르', 건강음료 사업도 함께 운영합니다. 매출은 화장품이 31%, 줄기세포 배양배지가 25%, 음료가 나머지를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 207억 원으로 전년 대비 35.9% 줄었고 영업이익과 당기순이익 모두 각각 -36억 원, -28억 원으로 적자로 전환했습니다. 총자산은 747억 원으로 소폭 늘었고 부채비율은 18.6%로 낮은 편이지만, 신약 개발 특성상 임상 진행 상황에 따라 실적 변동성이 클 수 있어 참고할 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "줄기세포배양액 화장품",
-        "desc": "닥터쥬크르 MSC 앰플 등",
-        "revenue_share": 0.31
+        "name": "OEM 임가공 음료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.5%",
+        "revenue_share": 0.195,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -168,32 +170,55 @@
       "귀리식혜",
       "발효홍삼K"
     ],
-    "investor_note": "네이처셀은 자가지방유래 줄기세포를 이용한 퇴행성관절염 치료제 '조인트스템' 등을 연구개발하는 바이오 기업으로, 줄기세포 배양배지와 배양액 원료 화장품 '닥터쥬크르', 건강음료 사업도 함께 운영합니다. 매출은 화장품이 31%, 줄기세포 배양배지가 25%, 음료가 나머지를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 207억 원으로 전년 대비 35.9% 줄었고 영업이익과 당기순이익 모두 각각 -36억 원, -28억 원으로 적자로 전환했습니다. 총자산은 747억 원으로 소폭 늘었고 부채비율은 18.6%로 낮은 편이지만, 신약 개발 특성상 임상 진행 상황에 따라 실적 변동성이 클 수 있어 참고할 필요가 있습니다."
+    "investor_note": "네이처셀은 자가지방유래 줄기세포를 이용한 퇴행성관절염 치료제 '조인트스템' 등을 연구개발하는 바이오 기업으로, 줄기세포 배양배지와 배양액 원료 화장품 '닥터쥬크르', 건강음료 사업도 함께 운영합니다. 매출은 화장품이 31%, 줄기세포 배양배지가 25%, 음료가 나머지를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 207억 원으로 전년 대비 35.9% 줄었고 영업이익과 당기순이익 모두 각각 -36억 원, -28억 원으로 적자로 전환했습니다. 총자산은 747억 원으로 소폭 늘었고 부채비율은 18.6%로 낮은 편이지만, 신약 개발 특성상 임상 진행 상황에 따라 실적 변동성이 클 수 있어 참고할 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "줄기세포사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.0%",
+        "revenue_share": 0.25,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "식품사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.1%",
+        "revenue_share": 0.211,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "OEM 임가공 음료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.5%",
+        "revenue_share": 0.195,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "줄기세포배양액 화장품",
-      "caption": "닥터쥬크르 MSC 앰플 등",
-      "kind": "consumer",
-      "visual": "줄기세포배양액",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
       "title": "줄기세포사업부문",
-      "caption": "줄기세포 배양배지 판매(치료제는 개발중)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.0%",
       "kind": "service",
-      "visual": "줄기세포사업부문",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "음료 사업부문",
-      "caption": "자사 비건음료 및 OEM 음료",
+      "title": "식품사업부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.1%",
       "kind": "service",
-      "visual": "음료",
-      "image": "../data/business_images/business_image_local_alcohol.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "OEM 임가공 음료",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.5%",
+      "kind": "consumer",
+      "visual": "BEVERAGE",
+      "image": "../data/business_images/business_image_food_beverage.svg",
+      "image_source": "Local visual"
     }
   ],
   "custom_report_ideas": [

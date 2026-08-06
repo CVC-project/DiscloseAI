@@ -155,24 +155,32 @@
     "segment_finance": "동국산업은 자동차·전자부품에 쓰이는 냉연강판·칼라인쇄강판을 생산하는 철강사업(매출의 84%)과 풍력발전기용 WIND-TOWER·해상풍력 하부구조물을 만드는 신재생에너지·건설사업(16%)을 함께 운영합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 7,277억 원으로 전년 대비 7.9% 줄었고 영업이익도 41.4% 감소했지만, 당기순이익은 전년보다 손실 폭이 줄어들었습니다. 감사인은 관계기업투자자산과 사업부문 현금창출단위의 손상평가를 핵심감사사항으로 짚었습니다.",
     "segment_breakdown": [
       {
-        "name": "냉연강판부문",
-        "desc": "자동차·전자부품용 냉연·산세강판 생산",
-        "revenue_share": 0.517
+        "name": "철강부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.7%",
+        "revenue_share": 0.517,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "칼라인쇄강판부문",
-        "desc": "건축 내외장재·가전용 표면처리강판 생산",
-        "revenue_share": 0.3185
+        "name": "칼라인쇄강판",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.9%",
+        "revenue_share": 0.3185,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "신재생에너지부문",
-        "desc": "풍력발전기용 WIND-TOWER, 해상풍력 하부구조물 판매",
-        "revenue_share": 0.1066
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.7%",
+        "revenue_share": 0.1066,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "건설부문",
-        "desc": "풍력발전단지 건설공사",
-        "revenue_share": 0.0579
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.8%",
+        "revenue_share": 0.0579,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -182,40 +190,70 @@
       "WIND-TOWER(풍력타워)",
       "해상풍력 하부구조물"
     ],
-    "investor_note": "동국산업은 자동차·전자부품에 쓰이는 냉연강판·칼라인쇄강판을 생산하는 철강사업(매출의 84%)과 풍력발전기용 WIND-TOWER·해상풍력 하부구조물을 만드는 신재생에너지·건설사업(16%)을 함께 운영합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 7,277억 원으로 전년 대비 7.9% 줄었고 영업이익도 41.4% 감소했지만, 당기순이익은 전년보다 손실 폭이 줄어들었습니다. 감사인은 관계기업투자자산과 사업부문 현금창출단위의 손상평가를 핵심감사사항으로 짚었습니다."
+    "investor_note": "동국산업은 자동차·전자부품에 쓰이는 냉연강판·칼라인쇄강판을 생산하는 철강사업(매출의 84%)과 풍력발전기용 WIND-TOWER·해상풍력 하부구조물을 만드는 신재생에너지·건설사업(16%)을 함께 운영합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 7,277억 원으로 전년 대비 7.9% 줄었고 영업이익도 41.4% 감소했지만, 당기순이익은 전년보다 손실 폭이 줄어들었습니다. 감사인은 관계기업투자자산과 사업부문 현금창출단위의 손상평가를 핵심감사사항으로 짚었습니다.",
+    "product_service_segments": [
+      {
+        "name": "철강부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.7%",
+        "revenue_share": 0.517,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "칼라인쇄강판",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.9%",
+        "revenue_share": 0.3185,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "신재생에너지부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.7%",
+        "revenue_share": 0.1066,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "건설부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.8%",
+        "revenue_share": 0.0579,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "냉연강판부문",
-      "caption": "자동차·전자부품용 냉연·산세강판 생산",
-      "kind": "auto",
-      "visual": "냉연강판부문",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "title": "철강",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.7%",
+      "kind": "material",
+      "visual": "STEEL",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "칼라인쇄강판부문",
-      "caption": "건축 내외장재·가전용 표면처리강판 생산",
+      "title": "칼라인쇄강판",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.9%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "신재생에너지",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.7%",
+      "kind": "power",
+      "visual": "RENEWABLE",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "건축·주택",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.8%",
       "kind": "service",
-      "visual": "칼라인쇄강판부문",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "신재생에너지부문",
-      "caption": "풍력발전기용 WIND-TOWER, 해상풍력 하부구조물 판매",
-      "kind": "power",
-      "visual": "신재생에너지부문",
-      "image": "../data/business_images/business_image_local_power.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "건설부문",
-      "caption": "풍력발전단지 건설공사",
-      "kind": "power",
-      "visual": "건설부문",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

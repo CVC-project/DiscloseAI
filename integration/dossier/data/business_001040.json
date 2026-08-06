@@ -155,19 +155,32 @@
     "segment_finance": "CJ는 CJ제일제당(식품·바이오), CJ대한통운(물류), CJ올리브영(유통), CJ ENM·CJ CGV(엔터테인먼트) 등을 거느린 지주회사로, 물류&신유통이 매출의 41.3%로 가장 크고 식품(33.1%), 생명공학(13.8%), 엔터테인먼트&미디어(11.2%)가 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 45조 188억 원(전년비 +3.1%)으로 늘었지만 영업이익 2조 5,277억 원(-0.8%), 당기순이익 1,426억 원(-5.7%)으로 소폭 줄었습니다. 부채비율은 176.0%이며, 감사인은 자회사들의 영업권(인수 시 남는 무형의 웃돈) 손상 가능성을 핵심감사사항으로 짚었습니다.",
     "segment_breakdown": [
       {
-        "name": "생명공학",
-        "desc": "아미노산·핵산 등 발효·정제 기반 바이오 소재",
-        "revenue_share": 0.138
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 47.6%",
+        "revenue_share": 0.476,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "물류 & 신유통",
-        "desc": "택배·물류(CJ대한통운)·올리브영 등 유통",
-        "revenue_share": 0.413
+        "name": "농산물",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.9%",
+        "revenue_share": 0.109,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "엔터테인먼트 & 미디어",
-        "desc": "방송·영화·음악·티빙 등 콘텐츠",
-        "revenue_share": 0.112
+        "name": "수산물",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
+        "revenue_share": 0.063,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "축산물",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.3%",
+        "revenue_share": 0.103,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -184,32 +197,70 @@
       "CJ프레시웨이 식자재유통",
       "뚜레쥬르·빕스"
     ],
-    "investor_note": "CJ는 CJ제일제당(식품·바이오), CJ대한통운(물류), CJ올리브영(유통), CJ ENM·CJ CGV(엔터테인먼트) 등을 거느린 지주회사로, 물류&신유통이 매출의 41.3%로 가장 크고 식품(33.1%), 생명공학(13.8%), 엔터테인먼트&미디어(11.2%)가 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 45조 188억 원(전년비 +3.1%)으로 늘었지만 영업이익 2조 5,277억 원(-0.8%), 당기순이익 1,426억 원(-5.7%)으로 소폭 줄었습니다. 부채비율은 176.0%이며, 감사인은 자회사들의 영업권(인수 시 남는 무형의 웃돈) 손상 가능성을 핵심감사사항으로 짚었습니다."
+    "investor_note": "CJ는 CJ제일제당(식품·바이오), CJ대한통운(물류), CJ올리브영(유통), CJ ENM·CJ CGV(엔터테인먼트) 등을 거느린 지주회사로, 물류&신유통이 매출의 41.3%로 가장 크고 식품(33.1%), 생명공학(13.8%), 엔터테인먼트&미디어(11.2%)가 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 45조 188억 원(전년비 +3.1%)으로 늘었지만 영업이익 2조 5,277억 원(-0.8%), 당기순이익 1,426억 원(-5.7%)으로 소폭 줄었습니다. 부채비율은 176.0%이며, 감사인은 자회사들의 영업권(인수 시 남는 무형의 웃돈) 손상 가능성을 핵심감사사항으로 짚었습니다.",
+    "product_service_segments": [
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 47.6%",
+        "revenue_share": 0.476,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "농산물",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.9%",
+        "revenue_share": 0.109,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "수산물",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
+        "revenue_share": 0.063,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "축산물",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.3%",
+        "revenue_share": 0.103,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "생명공학",
-      "caption": "아미노산·핵산 등 발효·정제 기반 바이오 소재",
-      "kind": "insurance",
-      "visual": "생명공학",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "물류 & 신유통",
-      "caption": "택배·물류(CJ대한통운)·올리브영 등 유통",
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 47.6%",
       "kind": "service",
-      "visual": "물류",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "엔터테인먼트 & 미디어",
-      "caption": "방송·영화·음악·티빙 등 콘텐츠",
-      "kind": "platform",
-      "visual": "엔터테인먼트",
-      "image": "../data/business_images/business_image_local_content.svg",
-      "image_source": "Local curated visual"
+      "title": "농산물",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "수산물",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "축산물",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.3%",
+      "kind": "consumer",
+      "visual": "FEED",
+      "image": "../data/business_images/business_image_food_feed.svg",
+      "image_source": "Local visual"
     }
   ],
   "custom_report_ideas": [

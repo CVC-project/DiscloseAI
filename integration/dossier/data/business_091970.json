@@ -155,9 +155,11 @@
     "segment_finance": "나노캠텍(주)의 주요 제품·서비스는 OLED, 원유, 도전성 소재 사업부, 기능성ECO소재 사업, 기능성 소재 사업부, 상품 소계입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 급변하는 시장에서 제품의 신속·정확한 제공은 필수적으로, 당사는 24시간 제품배달서비스제도 도입으로 고객의 만족을 최우선으로 하고 있습니다. 해외법인은 한국에서 제공한 도전성 원료를 사용해서 현지에서 가공 후 제품을 생산하여 현지 업체에 판매하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "한국기술은행",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
+        "name": "주방기기부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.4%",
+        "revenue_share": 0.4444,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -172,24 +174,47 @@
       "고순도",
       "스마트폰"
     ],
-    "investor_note": "나노캠텍(주)의 주요 제품·서비스는 OLED, 원유, 도전성 소재 사업부, 기능성ECO소재 사업, 기능성 소재 사업부, 상품 소계입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 급변하는 시장에서 제품의 신속·정확한 제공은 필수적으로, 당사는 24시간 제품배달서비스제도 도입으로 고객의 만족을 최우선으로 하고 있습니다. 해외법인은 한국에서 제공한 도전성 원료를 사용해서 현지에서 가공 후 제품을 생산하여 현지 업체에 판매하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "나노캠텍(주)의 주요 제품·서비스는 OLED, 원유, 도전성 소재 사업부, 기능성ECO소재 사업, 기능성 소재 사업부, 상품 소계입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 급변하는 시장에서 제품의 신속·정확한 제공은 필수적으로, 당사는 24시간 제품배달서비스제도 도입으로 고객의 만족을 최우선으로 하고 있습니다. 해외법인은 한국에서 제공한 도전성 원료를 사용해서 현지에서 가공 후 제품을 생산하여 현지 업체에 판매하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "도전성 소재 사업부",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.8%",
+        "revenue_share": 0.5384,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기능성ECO소재 사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.0%",
+        "revenue_share": 0.0004,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "주방기기부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.4%",
+        "revenue_share": 0.4444,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "한국기술은행",
-      "caption": "예대, 수수료, 투자 등 금융 서비스",
-      "kind": "bank",
-      "visual": "한국기술은행",
-      "image": "../data/business_images/business_image_local_bank.svg",
-      "image_source": "Local curated visual"
+      "title": "도전성 소재 사업부",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.8%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "플라스틱제품 제조업",
-      "caption": "플라스틱제품 제조업을 중심으로 매출을 만듭니다.",
+      "title": "주방기기부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.4%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

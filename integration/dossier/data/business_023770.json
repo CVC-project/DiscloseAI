@@ -155,14 +155,18 @@
     "segment_finance": "플레이위드는 로한온라인·씰온라인 등 PC 온라인 게임과 씰M·로한2 등 모바일 게임을 서비스하는 게임 개발·퍼블리싱 전문기업으로, 매출의 약 87%가 모바일 게임에서 나옵니다. 최근에는 신작 '드래곤 플라이트2'를 출시하며 라인업을 넓히고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 346억 원으로 전년 대비 7.3% 늘었고 영업손실은 46억 원, 당기순손실은 20억 원으로 적자 규모는 전년보다 줄었습니다. 자기자본이익률(ROE)은 -10.8%로 아직 이익을 내지 못하는 상태이며, 부채비율은 68.1%로 재무 부담이 크지는 않은 편입니다.",
     "segment_breakdown": [
       {
-        "name": "모바일게임",
-        "desc": "씰M·로한2 등 모바일 게임 서비스",
-        "revenue_share": 0.866
+        "name": "게임",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 86.6%",
+        "revenue_share": 0.866,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "온라인게임",
-        "desc": "로한온라인·씰온라인 등 PC 온라인 게임",
-        "revenue_share": 0.117
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.7%",
+        "revenue_share": 0.117,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,24 +178,32 @@
       "드래곤 플라이트2",
       "엘로아"
     ],
-    "investor_note": "플레이위드는 로한온라인·씰온라인 등 PC 온라인 게임과 씰M·로한2 등 모바일 게임을 서비스하는 게임 개발·퍼블리싱 전문기업으로, 매출의 약 87%가 모바일 게임에서 나옵니다. 최근에는 신작 '드래곤 플라이트2'를 출시하며 라인업을 넓히고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 346억 원으로 전년 대비 7.3% 늘었고 영업손실은 46억 원, 당기순손실은 20억 원으로 적자 규모는 전년보다 줄었습니다. 자기자본이익률(ROE)은 -10.8%로 아직 이익을 내지 못하는 상태이며, 부채비율은 68.1%로 재무 부담이 크지는 않은 편입니다."
+    "investor_note": "플레이위드는 로한온라인·씰온라인 등 PC 온라인 게임과 씰M·로한2 등 모바일 게임을 서비스하는 게임 개발·퍼블리싱 전문기업으로, 매출의 약 87%가 모바일 게임에서 나옵니다. 최근에는 신작 '드래곤 플라이트2'를 출시하며 라인업을 넓히고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 346억 원으로 전년 대비 7.3% 늘었고 영업손실은 46억 원, 당기순손실은 20억 원으로 적자 규모는 전년보다 줄었습니다. 자기자본이익률(ROE)은 -10.8%로 아직 이익을 내지 못하는 상태이며, 부채비율은 68.1%로 재무 부담이 크지는 않은 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "게임",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 86.6%",
+        "revenue_share": 0.866,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "온라인게임",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.7%",
+        "revenue_share": 0.117,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "모바일게임",
-      "caption": "씰M·로한2 등 모바일 게임 서비스",
+      "title": "게임",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 86.6%",
       "kind": "platform",
-      "visual": "모바일게임",
-      "image": "../data/business_images/business_image_local_content.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "온라인게임",
-      "caption": "로한온라인·씰온라인 등 PC 온라인 게임",
-      "kind": "platform",
-      "visual": "온라인게임",
-      "image": "../data/business_images/business_image_local_cement.svg",
-      "image_source": "Local curated visual"
+      "visual": "GAME",
+      "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

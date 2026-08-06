@@ -155,24 +155,18 @@
     "segment_finance": "코스모화학은 이차전지 양극소재 원료인 황산코발트와 백색안료 이산화티타늄을 국내에서 유일하게 함께 만드는 회사로, 자회사 코스모신소재를 통한 이차전지 양극활물질·기능성필름 사업이 매출의 가장 큰 비중(약 68%)을 차지하고, 이산화티타늄(약 20%), 황산코발트 등 전지소재(약 10%), 촉매(약 1%)가 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 6,641억 원으로 전년 대비 11.4% 줄었고 영업손실 159억 원을 기록해 적자로 전환됐습니다. 당기순손실은 309억 원으로 적자폭 자체는 전년보다 줄었습니다. 부채비율은 100.0%로 자본과 비슷한 수준의 빚을 지고 있어 재무 부담을 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "신소재(코스모신소재)",
-        "desc": "이차전지 양극활물질·기능성필름·토너 제조",
-        "revenue_share": 0.6844
+        "name": "양극활물질",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 71.8%",
+        "revenue_share": 0.7181,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "이산화티타늄",
-        "desc": "백색안료 이산화티타늄(범용·특수용) 제조",
-        "revenue_share": 0.1996
-      },
-      {
-        "name": "전지소재(황산코발트)",
-        "desc": "이차전지 양극소재 원료인 황산코발트·황산니켈 제조",
-        "revenue_share": 0.1012
-      },
-      {
-        "name": "촉매(코스모촉매)",
-        "desc": "제올라이트·알루민산소다 등 촉매·환경처리제 제조",
-        "revenue_share": 0.0148
+        "name": "토너",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.9%",
+        "revenue_share": 0.0294,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -183,40 +177,55 @@
       "토너",
       "제올라이트"
     ],
-    "investor_note": "코스모화학은 이차전지 양극소재 원료인 황산코발트와 백색안료 이산화티타늄을 국내에서 유일하게 함께 만드는 회사로, 자회사 코스모신소재를 통한 이차전지 양극활물질·기능성필름 사업이 매출의 가장 큰 비중(약 68%)을 차지하고, 이산화티타늄(약 20%), 황산코발트 등 전지소재(약 10%), 촉매(약 1%)가 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 6,641억 원으로 전년 대비 11.4% 줄었고 영업손실 159억 원을 기록해 적자로 전환됐습니다. 당기순손실은 309억 원으로 적자폭 자체는 전년보다 줄었습니다. 부채비율은 100.0%로 자본과 비슷한 수준의 빚을 지고 있어 재무 부담을 살펴볼 필요가 있습니다."
+    "investor_note": "코스모화학은 이차전지 양극소재 원료인 황산코발트와 백색안료 이산화티타늄을 국내에서 유일하게 함께 만드는 회사로, 자회사 코스모신소재를 통한 이차전지 양극활물질·기능성필름 사업이 매출의 가장 큰 비중(약 68%)을 차지하고, 이산화티타늄(약 20%), 황산코발트 등 전지소재(약 10%), 촉매(약 1%)가 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 6,641억 원으로 전년 대비 11.4% 줄었고 영업손실 159억 원을 기록해 적자로 전환됐습니다. 당기순손실은 309억 원으로 적자폭 자체는 전년보다 줄었습니다. 부채비율은 100.0%로 자본과 비슷한 수준의 빚을 지고 있어 재무 부담을 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "제품/상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.2%",
+        "revenue_share": 0.2525,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "양극활물질",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 71.8%",
+        "revenue_share": 0.7181,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "토너",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.9%",
+        "revenue_share": 0.0294,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "신소재(코스모신소재)",
-      "caption": "이차전지 양극활물질·기능성필름·토너 제조",
+      "title": "제품/상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.2%",
       "kind": "material",
-      "visual": "신소재",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "이산화티타늄",
-      "caption": "백색안료 이산화티타늄(범용·특수용) 제조",
-      "kind": "service",
-      "visual": "이산화티타늄",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "전지소재(황산코발트)",
-      "caption": "이차전지 양극소재 원료인 황산코발트·황산니켈 제조",
+      "title": "양극활물질",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 71.8%",
       "kind": "material",
-      "visual": "전지소재",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "촉매(코스모촉매)",
-      "caption": "제올라이트·알루민산소다 등 촉매·환경처리제 제조",
-      "kind": "service",
-      "visual": "촉매",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "title": "토너",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.9%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

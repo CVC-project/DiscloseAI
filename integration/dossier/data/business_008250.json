@@ -155,19 +155,25 @@
     "segment_finance": "이건산업은 거푸집용 합판과 원목마루·강마루 등을 만드는 목재종합건자재 전문회사로, 칠레·솔로몬군도에 해외 생산·조림기지를 두고 있으며 자회사 이건에너지를 통해 목재 부산물(우드칩)로 열병합발전도 하고 있습니다. 매출은 합판·마루 등 목재부문이 약 86%로 대부분을 차지하고, 열병합발전을 하는 에너지부문이 약 11%, 해외조림 원목 판매가 약 3%를 차지합니다. 국내 합판 시장은 저가 대체재와 수입품 증가로 위축되는 추세지만, 오랜 업력을 바탕으로 시장 지위를 유지하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,973억 원으로 전년 대비 9.1% 줄었고, 영업손실 38억 원으로 적자 전환했으며 당기순손실도 141억 원으로 확대됐습니다. 부채비율은 111.9%로 자본보다 빚이 많은 편이라 재무 부담을 주의 깊게 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "목재부문",
-        "desc": "합판·마루 제조 및 칠레법인 합판·베니어 판매",
-        "revenue_share": 0.859
+        "name": "목재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 85.9%",
+        "revenue_share": 0.8589,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "에너지부문",
-        "desc": "열병합발전을 통한 증기·전기 판매",
-        "revenue_share": 0.112
+        "name": "조림",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.9%",
+        "revenue_share": 0.0294,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "조림부문",
-        "desc": "솔로몬군도 해외조림을 통한 원목 생산·판매",
-        "revenue_share": 0.029
+        "name": "에너지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.2%",
+        "revenue_share": 0.1117,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -179,32 +185,62 @@
       "조림 원목",
       "열병합발전 증기·전기"
     ],
-    "investor_note": "이건산업은 거푸집용 합판과 원목마루·강마루 등을 만드는 목재종합건자재 전문회사로, 칠레·솔로몬군도에 해외 생산·조림기지를 두고 있으며 자회사 이건에너지를 통해 목재 부산물(우드칩)로 열병합발전도 하고 있습니다. 매출은 합판·마루 등 목재부문이 약 86%로 대부분을 차지하고, 열병합발전을 하는 에너지부문이 약 11%, 해외조림 원목 판매가 약 3%를 차지합니다. 국내 합판 시장은 저가 대체재와 수입품 증가로 위축되는 추세지만, 오랜 업력을 바탕으로 시장 지위를 유지하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,973억 원으로 전년 대비 9.1% 줄었고, 영업손실 38억 원으로 적자 전환했으며 당기순손실도 141억 원으로 확대됐습니다. 부채비율은 111.9%로 자본보다 빚이 많은 편이라 재무 부담을 주의 깊게 살펴볼 필요가 있습니다."
+    "investor_note": "이건산업은 거푸집용 합판과 원목마루·강마루 등을 만드는 목재종합건자재 전문회사로, 칠레·솔로몬군도에 해외 생산·조림기지를 두고 있으며 자회사 이건에너지를 통해 목재 부산물(우드칩)로 열병합발전도 하고 있습니다. 매출은 합판·마루 등 목재부문이 약 86%로 대부분을 차지하고, 열병합발전을 하는 에너지부문이 약 11%, 해외조림 원목 판매가 약 3%를 차지합니다. 국내 합판 시장은 저가 대체재와 수입품 증가로 위축되는 추세지만, 오랜 업력을 바탕으로 시장 지위를 유지하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,973억 원으로 전년 대비 9.1% 줄었고, 영업손실 38억 원으로 적자 전환했으며 당기순손실도 141억 원으로 확대됐습니다. 부채비율은 111.9%로 자본보다 빚이 많은 편이라 재무 부담을 주의 깊게 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "목재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 85.9%",
+        "revenue_share": 0.8589,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "조림",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.9%",
+        "revenue_share": 0.0294,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "에너지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.2%",
+        "revenue_share": 0.1117,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "보고부문 합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "목재부문",
-      "caption": "합판·마루 제조 및 칠레법인 합판·베니어 판매",
+      "title": "목재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 85.9%",
       "kind": "service",
-      "visual": "목재부문",
-      "image": "../data/business_images/business_image_local_wood.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "에너지부문",
-      "caption": "열병합발전을 통한 증기·전기 판매",
-      "kind": "power",
-      "visual": "에너지부문",
-      "image": "../data/business_images/business_image_local_power.svg",
-      "image_source": "Local curated visual"
+      "title": "조림",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "조림부문",
-      "caption": "솔로몬군도 해외조림을 통한 원목 생산·판매",
+      "title": "에너지",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.2%",
       "kind": "service",
-      "visual": "조림부문",
-      "image": "../data/business_images/business_image_local_default_c.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -155,24 +155,32 @@
     "segment_finance": "서울평가정보는 개인 신용조회 서비스 SIREN24와 기업신용등급 서비스 BIZRATING 등을 제공하는 신용정보회사로, 채권추심업과 신용조사업도 함께 영위하며 자회사 서울신용평가를 통해 CP·ABS 신용평가 사업도 하고 있습니다. 매출은 신용조회 서비스가 86%로 압도적인 비중을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 412억 원으로 전년 대비 8.3% 늘었고 영업이익은 31.0%, 당기순이익은 152.6% 큰 폭으로 증가했습니다. 부채비율은 17.9%로 재무구조가 매우 안정적이며 ROE도 20.6%로 수익성이 양호한 편입니다.",
     "segment_breakdown": [
       {
-        "name": "신용조회",
-        "desc": "개인·기업 신용조회, 본인확인 서비스",
-        "revenue_share": 0.864
-      },
-      {
-        "name": "채권추심",
-        "desc": "채권 회수 대행 및 자산관리(AMC)",
-        "revenue_share": 0.059
+        "name": "서울평가정보(주)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.9%",
+        "revenue_share": 0.059,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "신용조사",
-        "desc": "개인·법인 신용도 및 재산 조사",
-        "revenue_share": 0.039
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.9%",
+        "revenue_share": 0.039,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "신용평가",
-        "desc": "CP·ABS·전자단기사채 신용평가(자회사 서울신용평가)",
-        "revenue_share": 0.038
+        "name": "신용조회",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 86.4%",
+        "revenue_share": 0.864,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "서울신용평가(주)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.8%",
+        "revenue_share": 0.038,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -185,40 +193,70 @@
       "신용조사",
       "신용평가(CP·ABS 등, 서울신용평가)"
     ],
-    "investor_note": "서울평가정보는 개인 신용조회 서비스 SIREN24와 기업신용등급 서비스 BIZRATING 등을 제공하는 신용정보회사로, 채권추심업과 신용조사업도 함께 영위하며 자회사 서울신용평가를 통해 CP·ABS 신용평가 사업도 하고 있습니다. 매출은 신용조회 서비스가 86%로 압도적인 비중을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 412억 원으로 전년 대비 8.3% 늘었고 영업이익은 31.0%, 당기순이익은 152.6% 큰 폭으로 증가했습니다. 부채비율은 17.9%로 재무구조가 매우 안정적이며 ROE도 20.6%로 수익성이 양호한 편입니다."
+    "investor_note": "서울평가정보는 개인 신용조회 서비스 SIREN24와 기업신용등급 서비스 BIZRATING 등을 제공하는 신용정보회사로, 채권추심업과 신용조사업도 함께 영위하며 자회사 서울신용평가를 통해 CP·ABS 신용평가 사업도 하고 있습니다. 매출은 신용조회 서비스가 86%로 압도적인 비중을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 412억 원으로 전년 대비 8.3% 늘었고 영업이익은 31.0%, 당기순이익은 152.6% 큰 폭으로 증가했습니다. 부채비율은 17.9%로 재무구조가 매우 안정적이며 ROE도 20.6%로 수익성이 양호한 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "서울평가정보(주)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.9%",
+        "revenue_share": 0.059,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "신용조사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.9%",
+        "revenue_share": 0.039,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "신용조회",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 86.4%",
+        "revenue_share": 0.864,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "서울신용평가(주)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.8%",
+        "revenue_share": 0.038,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "신용조회",
-      "caption": "개인·기업 신용조회, 본인확인 서비스",
+      "title": "서울평가정보(주)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.9%",
       "kind": "service",
-      "visual": "신용조회",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "채권추심",
-      "caption": "채권 회수 대행 및 자산관리(AMC)",
-      "kind": "service",
-      "visual": "채권추심",
-      "image": "../data/business_images/business_image_local_fm.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "신용조사",
-      "caption": "개인·법인 신용도 및 재산 조사",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.9%",
       "kind": "service",
-      "visual": "신용조사",
-      "image": "../data/business_images/business_image_local_default_c.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "신용평가",
-      "caption": "CP·ABS·전자단기사채 신용평가(자회사 서울신용평가)",
+      "title": "신용조회",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 86.4%",
       "kind": "service",
-      "visual": "신용평가",
-      "image": "../data/business_images/business_image_local_finance_hold.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "서울신용평가(주)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

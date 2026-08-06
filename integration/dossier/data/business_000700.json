@@ -156,13 +156,17 @@
     "segment_breakdown": [
       {
         "name": "종합물류",
-        "desc": "국제 화물 포워딩과 창고·보관·수송을 포함한 계약물류",
-        "revenue_share": 0.687
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.7%",
+        "revenue_share": 0.687,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "IT",
-        "desc": "항만·해운·물류 기업 대상 업무용 소프트웨어 개발·공급",
-        "revenue_share": 0.3
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.0%",
+        "revenue_share": 0.2997,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -171,24 +175,40 @@
       "계약물류(창고·보관·수송)",
       "임대업"
     ],
-    "investor_note": "유수홀딩스는 국제 화물 포워딩과 계약물류 서비스를 제공하는 종합물류부문과, 항만·해운·물류 기업에 소프트웨어를 공급하는 IT부문(자회사 싸이버로지텍)을 함께 운영하는 회사입니다. 매출의 69%는 종합물류, 30%는 IT부문에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,184억 원으로 전년 대비 4.0% 줄었지만 영업이익은 15.9% 늘었고, 당기순이익은 47.1% 감소해 영업外 요인의 영향을 받은 것으로 보입니다. 부채비율은 16.4%로 빚 부담이 크지 않은 편입니다."
+    "investor_note": "유수홀딩스는 국제 화물 포워딩과 계약물류 서비스를 제공하는 종합물류부문과, 항만·해운·물류 기업에 소프트웨어를 공급하는 IT부문(자회사 싸이버로지텍)을 함께 운영하는 회사입니다. 매출의 69%는 종합물류, 30%는 IT부문에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,184억 원으로 전년 대비 4.0% 줄었지만 영업이익은 15.9% 늘었고, 당기순이익은 47.1% 감소해 영업外 요인의 영향을 받은 것으로 보입니다. 부채비율은 16.4%로 빚 부담이 크지 않은 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "종합물류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.7%",
+        "revenue_share": 0.687,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "IT",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.0%",
+        "revenue_share": 0.2997,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "종합물류",
-      "caption": "국제 화물 포워딩과 창고·보관·수송을 포함한 계약물류",
-      "kind": "service",
-      "visual": "종합물류",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "title": "항만·물류 IT솔루션(싸이버로지텍)",
-      "caption": "항만·물류 IT솔루션(싸이버로지텍) 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.7%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "IT",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -155,24 +155,25 @@
     "segment_finance": "엔케이는 선박용 소화장치(CO2·폼·분말시스템)를 주력으로, 고압가스용기, 밸러스트수처리장치(NK O3), 잠수함·수상함용 방산 특수기기까지 생산하는 조선기자재·방산 전문기업입니다. 소화장치 사업이 매출의 약 64%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,301억 원으로 전년 대비 17.3% 늘었지만 영업손실과 순손실이 이어졌습니다. 감사인은 수출 비중이 큰 만큼 수출매출의 수익인식 시점을 핵심감사사항으로 짚었습니다.",
     "segment_breakdown": [
       {
-        "name": "소화장치",
-        "desc": "선박·육상용 고정식 소화장치 제조판매",
-        "revenue_share": 0.635
+        "name": "소화장치(고정식)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.2%",
+        "revenue_share": 0.342,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "고압가스용기",
-        "desc": "고압가스 실린더·용기 제조판매 및 충전·재검사",
-        "revenue_share": 0.117
-      },
-      {
-        "name": "특수기기",
-        "desc": "잠수함·수상함 방산 제품 판매·정비",
-        "revenue_share": 0.088
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.7%",
+        "revenue_share": 0.117,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "밸러스트수처리장치",
-        "desc": "선박 밸러스트수 처리장치(NK O3) 제조판매",
-        "revenue_share": 0.015
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+        "revenue_share": 0.015,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -184,40 +185,62 @@
       "NK O3 BWT SYSTEM(밸러스트수처리)",
       "방산 특수기기(유압공급장치)"
     ],
-    "investor_note": "엔케이는 선박용 소화장치(CO2·폼·분말시스템)를 주력으로, 고압가스용기, 밸러스트수처리장치(NK O3), 잠수함·수상함용 방산 특수기기까지 생산하는 조선기자재·방산 전문기업입니다. 소화장치 사업이 매출의 약 64%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,301억 원으로 전년 대비 17.3% 늘었지만 영업손실과 순손실이 이어졌습니다. 감사인은 수출 비중이 큰 만큼 수출매출의 수익인식 시점을 핵심감사사항으로 짚었습니다."
+    "investor_note": "엔케이는 선박용 소화장치(CO2·폼·분말시스템)를 주력으로, 고압가스용기, 밸러스트수처리장치(NK O3), 잠수함·수상함용 방산 특수기기까지 생산하는 조선기자재·방산 전문기업입니다. 소화장치 사업이 매출의 약 64%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,301억 원으로 전년 대비 17.3% 늘었지만 영업손실과 순손실이 이어졌습니다. 감사인은 수출 비중이 큰 만큼 수출매출의 수익인식 시점을 핵심감사사항으로 짚었습니다.",
+    "product_service_segments": [
+      {
+        "name": "소화장치(고정식)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.2%",
+        "revenue_share": 0.342,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.3%",
+        "revenue_share": 0.103,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "고압가스용기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.7%",
+        "revenue_share": 0.117,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "밸러스트수처리장치",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+        "revenue_share": 0.015,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "소화장치",
-      "caption": "선박·육상용 고정식 소화장치 제조판매",
-      "kind": "ship",
-      "visual": "소화장치",
-      "image": "../data/business_images/business_image_local_ship.svg",
-      "image_source": "Local curated visual"
+      "title": "소화장치(고정식)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.2%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "고압가스용기",
-      "caption": "고압가스 실린더·용기 제조판매 및 충전·재검사",
-      "kind": "service",
-      "visual": "고압가스용기",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "특수기기",
-      "caption": "잠수함·수상함 방산 제품 판매·정비",
-      "kind": "service",
-      "visual": "특수기기",
-      "image": "../data/business_images/business_image_4ae102473975707c.jpg",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.7%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
       "title": "밸러스트수처리장치",
-      "caption": "선박 밸러스트수 처리장치(NK O3) 제조판매",
-      "kind": "ship",
-      "visual": "밸러스트수처리장치",
-      "image": "../data/business_images/business_image_local_ship.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

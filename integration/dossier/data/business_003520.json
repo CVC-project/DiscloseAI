@@ -155,14 +155,32 @@
     "segment_finance": "영진약품은 KT&G그룹 계열의 제약회사로, 항생제·정맥영양제·순환기계·호흡기계 등 다양한 의약품을 생산하며 국내영업이 매출의 약 91%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,542억 원으로 전년 대비 0.9% 늘었지만 영업이익은 34억 원으로 60.8% 크게 줄었고 당기순이익은 -2억 원으로 적자 전환했습니다. 부채비율은 186.9%로 높은 편이라 재무 부담을 눈여겨볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "국내영업",
-        "desc": "만성질환·호흡기계 등 국내 의약품 판매",
-        "revenue_share": 0.911
+        "name": "내수",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.0%",
+        "revenue_share": 0.2,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "해외영업",
-        "desc": "항생주사제·원료의약품 등 수출",
-        "revenue_share": 0.089
+        "name": "정맥,경장영양",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.0%",
+        "revenue_share": 0.16,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "순환기계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.0%",
+        "revenue_share": 0.14,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "정신신경계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.0%",
+        "revenue_share": 0.09,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,24 +192,70 @@
       "라베뉴",
       "디아미크롱"
     ],
-    "investor_note": "영진약품은 KT&G그룹 계열의 제약회사로, 항생제·정맥영양제·순환기계·호흡기계 등 다양한 의약품을 생산하며 국내영업이 매출의 약 91%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,542억 원으로 전년 대비 0.9% 늘었지만 영업이익은 34억 원으로 60.8% 크게 줄었고 당기순이익은 -2억 원으로 적자 전환했습니다. 부채비율은 186.9%로 높은 편이라 재무 부담을 눈여겨볼 필요가 있습니다."
+    "investor_note": "영진약품은 KT&G그룹 계열의 제약회사로, 항생제·정맥영양제·순환기계·호흡기계 등 다양한 의약품을 생산하며 국내영업이 매출의 약 91%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,542억 원으로 전년 대비 0.9% 늘었지만 영업이익은 34억 원으로 60.8% 크게 줄었고 당기순이익은 -2억 원으로 적자 전환했습니다. 부채비율은 186.9%로 높은 편이라 재무 부담을 눈여겨볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "내수",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.0%",
+        "revenue_share": 0.2,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "정맥,경장영양",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.0%",
+        "revenue_share": 0.16,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "순환기계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.0%",
+        "revenue_share": 0.14,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "정신신경계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.0%",
+        "revenue_share": 0.09,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "국내영업",
-      "caption": "만성질환·호흡기계 등 국내 의약품 판매",
-      "kind": "bio",
-      "visual": "국내영업",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "title": "내수",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "해외영업",
-      "caption": "항생주사제·원료의약품 등 수출",
-      "kind": "bio",
-      "visual": "해외영업",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "정맥,경장영양",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "순환기계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "정신신경계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

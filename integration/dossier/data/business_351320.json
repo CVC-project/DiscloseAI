@@ -155,19 +155,11 @@
     "segment_finance": "(주)넥사다이내믹스의 주요 제품·서비스는 OLED, 스마트 솔루션, 제품-기타, 물류자동화 장비 등, 제품-장비, 디스플레이 제조장비 등입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 가격변동 원인 당사 제품은 고객의 요구에 따라 맞춤 제작되고 있어, 원재료 또한, 장비별로 사양이 매우 상이합니다. 제조장비 등의 매출액은 수출 11,699백만원, 내수 337백만원으로 구성되어있으며, 화장품 유통의 매출액은 수출 214백만원, 내수 694백만원으로 구성되어 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "OLED",
-        "desc": "OLED 관련 제품·서비스",
-        "revenue_share": null
-      },
-      {
-        "name": "스마트 솔루션",
-        "desc": "스마트 솔루션 관련 제품·서비스",
-        "revenue_share": null
-      },
-      {
-        "name": "물류자동화 장비 등",
-        "desc": "물류자동화 장비 등 관련 제품·서비스",
-        "revenue_share": null
+        "name": "K-뷰티",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.0%",
+        "revenue_share": 0.0698,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -184,32 +176,40 @@
       "스마트솔루션",
       "제조 장비등"
     ],
-    "investor_note": "(주)넥사다이내믹스의 주요 제품·서비스는 OLED, 스마트 솔루션, 제품-기타, 물류자동화 장비 등, 제품-장비, 디스플레이 제조장비 등입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 가격변동 원인 당사 제품은 고객의 요구에 따라 맞춤 제작되고 있어, 원재료 또한, 장비별로 사양이 매우 상이합니다. 제조장비 등의 매출액은 수출 11,699백만원, 내수 337백만원으로 구성되어있으며, 화장품 유통의 매출액은 수출 214백만원, 내수 694백만원으로 구성되어 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)넥사다이내믹스의 주요 제품·서비스는 OLED, 스마트 솔루션, 제품-기타, 물류자동화 장비 등, 제품-장비, 디스플레이 제조장비 등입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 가격변동 원인 당사 제품은 고객의 요구에 따라 맞춤 제작되고 있어, 원재료 또한, 장비별로 사양이 매우 상이합니다. 제조장비 등의 매출액은 수출 11,699백만원, 내수 337백만원으로 구성되어있으며, 화장품 유통의 매출액은 수출 214백만원, 내수 694백만원으로 구성되어 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "제품-장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 92.2%",
+        "revenue_share": 0.9216,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "K-뷰티",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.0%",
+        "revenue_share": 0.0698,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "OLED",
-      "caption": "OLED 관련 제품·서비스",
-      "kind": "display",
-      "visual": "OLED",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
-      "image_source": "Wikimedia Commons"
+      "title": "제품-장비",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 92.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "스마트 솔루션",
-      "caption": "스마트 솔루션 관련 제품·서비스",
+      "title": "K-뷰티",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.0%",
       "kind": "service",
-      "visual": "스마트",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "물류자동화 장비 등",
-      "caption": "물류자동화 장비 등 관련 제품·서비스",
-      "kind": "service",
-      "visual": "물류자동화",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -155,9 +155,11 @@
     "segment_finance": "태경케미컬은 액체탄산·드라이아이스를 만드는 탄산가스 사업(매출 비중 약 95%)과 수산화마그네슘 등을 만드는 환경사업(약 5%)을 운영하며, 조선사·빙과업체 등과 장기공급계약을 맺어 안정적으로 판매하고 있습니다. 2025년에는 라이온켐텍 지분을 인수해 관계기업으로 편입했습니다. 과거 공시 기반 참고 정보로, 매출액은 613억 원(-13.7%), 영업이익은 20억 원(-84.9%), 당기순이익은 87억 원(-30.7%)으로 모두 줄었지만, 부채비율은 30.1%로 낮아 재무구조는 안정적입니다.",
     "segment_breakdown": [
       {
-        "name": "탄산가스",
-        "desc": "액체탄산·드라이아이스 등 가스 제조·판매",
-        "revenue_share": 0.948
+        "name": "일반가스外",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.6%",
+        "revenue_share": 0.216,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -169,24 +171,70 @@
       "수산화마그네슘",
       "액상소석회"
     ],
-    "investor_note": "태경케미컬은 액체탄산·드라이아이스를 만드는 탄산가스 사업(매출 비중 약 95%)과 수산화마그네슘 등을 만드는 환경사업(약 5%)을 운영하며, 조선사·빙과업체 등과 장기공급계약을 맺어 안정적으로 판매하고 있습니다. 2025년에는 라이온켐텍 지분을 인수해 관계기업으로 편입했습니다. 과거 공시 기반 참고 정보로, 매출액은 613억 원(-13.7%), 영업이익은 20억 원(-84.9%), 당기순이익은 87억 원(-30.7%)으로 모두 줄었지만, 부채비율은 30.1%로 낮아 재무구조는 안정적입니다."
+    "investor_note": "태경케미컬은 액체탄산·드라이아이스를 만드는 탄산가스 사업(매출 비중 약 95%)과 수산화마그네슘 등을 만드는 환경사업(약 5%)을 운영하며, 조선사·빙과업체 등과 장기공급계약을 맺어 안정적으로 판매하고 있습니다. 2025년에는 라이온켐텍 지분을 인수해 관계기업으로 편입했습니다. 과거 공시 기반 참고 정보로, 매출액은 613억 원(-13.7%), 영업이익은 20억 원(-84.9%), 당기순이익은 87억 원(-30.7%)으로 모두 줄었지만, 부채비율은 30.1%로 낮아 재무구조는 안정적입니다.",
+    "product_service_segments": [
+      {
+        "name": "탄산가스사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.5%",
+        "revenue_share": 0.685,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "일반가스外",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.6%",
+        "revenue_share": 0.216,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.4%",
+        "revenue_share": 0.024,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "(상품)기타",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.4%",
+        "revenue_share": 0.084,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "탄산가스",
-      "caption": "액체탄산·드라이아이스 등 가스 제조·판매",
-      "kind": "service",
-      "visual": "탄산가스",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "title": "탄산가스사업부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.5%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "기초 화학물질 제조업",
-      "caption": "기초 화학물질 제조업을 중심으로 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "title": "일반가스外",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.6%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "기타제품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.4%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "(상품)기타",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.4%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

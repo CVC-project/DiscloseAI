@@ -155,9 +155,32 @@
     "segment_finance": "경남스틸은 포스코의 가공센터로서 냉연·열연 코일을 공급받아 자동차·가전·건설용 강판(CR, PO, GI, HGI 등 다양한 도금강판)으로 전단·절단 가공해 판매하는 단일 철강가공 사업을 영위합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,571억 원으로 전년 대비 9.7% 줄었고 영업이익과 당기순이익도 각각 36.9%, 37.9% 감소해 중국발 공급과잉과 건설경기 부진의 영향을 받은 것으로 보입니다. 감사인은 재고자산(총자산의 30%)에 대한 평가충당금 측정의 합리성을 핵심감사사항으로 짚었습니다. 부채비율은 39.7%로 관리 가능한 수준입니다.",
     "segment_breakdown": [
       {
-        "name": "제1차 철강산업(단일부문)",
-        "desc": "포스코 가공센터로 냉연·열연코일 전단·절단·가공 판매",
-        "revenue_share": 1
+        "name": "제1차철강산업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.3%",
+        "revenue_share": 0.183,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전기아연도금강판(EGI)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.7%",
+        "revenue_share": 0.037,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "산세코일(PO)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.9%",
+        "revenue_share": 0.309,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용융아연도금강판(GI)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.8%",
+        "revenue_share": 0.108,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -169,40 +192,62 @@
       "열연코일(HR)",
       "고내식합금도금강판(ZM/POSMAC)"
     ],
-    "investor_note": "경남스틸은 포스코의 가공센터로서 냉연·열연 코일을 공급받아 자동차·가전·건설용 강판(CR, PO, GI, HGI 등 다양한 도금강판)으로 전단·절단 가공해 판매하는 단일 철강가공 사업을 영위합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,571억 원으로 전년 대비 9.7% 줄었고 영업이익과 당기순이익도 각각 36.9%, 37.9% 감소해 중국발 공급과잉과 건설경기 부진의 영향을 받은 것으로 보입니다. 감사인은 재고자산(총자산의 30%)에 대한 평가충당금 측정의 합리성을 핵심감사사항으로 짚었습니다. 부채비율은 39.7%로 관리 가능한 수준입니다."
+    "investor_note": "경남스틸은 포스코의 가공센터로서 냉연·열연 코일을 공급받아 자동차·가전·건설용 강판(CR, PO, GI, HGI 등 다양한 도금강판)으로 전단·절단 가공해 판매하는 단일 철강가공 사업을 영위합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,571억 원으로 전년 대비 9.7% 줄었고 영업이익과 당기순이익도 각각 36.9%, 37.9% 감소해 중국발 공급과잉과 건설경기 부진의 영향을 받은 것으로 보입니다. 감사인은 재고자산(총자산의 30%)에 대한 평가충당금 측정의 합리성을 핵심감사사항으로 짚었습니다. 부채비율은 39.7%로 관리 가능한 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "제1차철강산업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.3%",
+        "revenue_share": 0.183,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전기아연도금강판(EGI)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.7%",
+        "revenue_share": 0.037,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "산세코일(PO)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.9%",
+        "revenue_share": 0.309,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용융아연도금강판(GI)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.8%",
+        "revenue_share": 0.108,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "제1차 철강산업(단일부문)",
-      "caption": "포스코 가공센터로 냉연·열연코일 전단·절단·가공 판매",
+      "title": "철강",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.3%",
       "kind": "material",
-      "visual": "제1차",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "냉연강판(CR)",
-      "caption": "냉연강판(CR) 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "냉연강판",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "visual": "STEEL",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "산세코일(PO)",
-      "caption": "산세코일(PO) 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "산세코일",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.9%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "용융아연도금강판(GI)",
-      "caption": "용융아연도금강판(GI) 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "용융아연도금강판",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.8%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

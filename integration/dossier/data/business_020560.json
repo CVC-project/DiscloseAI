@@ -155,19 +155,32 @@
     "segment_finance": "아시아나항공은 국내 6개 도시와 해외 22개국 53개 도시를 운항하는 국내 대형 항공사로, 국제선 여객이 매출의 약 69%를 차지합니다. 2025년 화물기·국제화물 일부를 계열사로 이관해 여객 중심으로 재편했습니다. 과거 공시 기반 참고 정보로, 최근 연결기준 매출액은 7조 2,668억 원으로 전년 대비 12.6% 줄었고 영업손익은 3,451억 원 손실로 적자 전환했습니다. 순손실은 2,925억 원으로 적자 폭은 다소 줄었으나, 부채비율이 1,370.2%로 매우 높아 재무 상황을 유의해 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "여객노선(국제)",
-        "desc": "국제선 항공 여객 운송",
-        "revenue_share": 0.692
+        "name": "아시아나항공",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.6%",
+        "revenue_share": 0.046,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "여객노선(국내)",
-        "desc": "국내선 항공 여객 운송",
-        "revenue_share": 0.046
+        "name": "여객노선(국제)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 69.2%",
+        "revenue_share": 0.692,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "화물노선",
-        "desc": "화물기 및 여객기 Belly 활용 화물운송",
-        "revenue_share": 0.154
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.4%",
+        "revenue_share": 0.154,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "에어부산",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.6%",
+        "revenue_share": 0.156,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -177,32 +190,70 @@
       "항공정비(MRO 지원)",
       "IT서비스(아시아나IDT)"
     ],
-    "investor_note": "아시아나항공은 국내 6개 도시와 해외 22개국 53개 도시를 운항하는 국내 대형 항공사로, 국제선 여객이 매출의 약 69%를 차지합니다. 2025년 화물기·국제화물 일부를 계열사로 이관해 여객 중심으로 재편했습니다. 과거 공시 기반 참고 정보로, 최근 연결기준 매출액은 7조 2,668억 원으로 전년 대비 12.6% 줄었고 영업손익은 3,451억 원 손실로 적자 전환했습니다. 순손실은 2,925억 원으로 적자 폭은 다소 줄었으나, 부채비율이 1,370.2%로 매우 높아 재무 상황을 유의해 살펴볼 필요가 있습니다."
+    "investor_note": "아시아나항공은 국내 6개 도시와 해외 22개국 53개 도시를 운항하는 국내 대형 항공사로, 국제선 여객이 매출의 약 69%를 차지합니다. 2025년 화물기·국제화물 일부를 계열사로 이관해 여객 중심으로 재편했습니다. 과거 공시 기반 참고 정보로, 최근 연결기준 매출액은 7조 2,668억 원으로 전년 대비 12.6% 줄었고 영업손익은 3,451억 원 손실로 적자 전환했습니다. 순손실은 2,925억 원으로 적자 폭은 다소 줄었으나, 부채비율이 1,370.2%로 매우 높아 재무 상황을 유의해 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "아시아나항공",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.6%",
+        "revenue_share": 0.046,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "여객노선(국제)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 69.2%",
+        "revenue_share": 0.692,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "화물노선",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.4%",
+        "revenue_share": 0.154,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "에어부산",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.6%",
+        "revenue_share": 0.156,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "여객노선(국제)",
-      "caption": "국제선 항공 여객 운송",
-      "kind": "service",
-      "visual": "여객노선",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
+      "title": "방산·항공",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.6%",
+      "kind": "ship",
+      "visual": "DEFENSE",
+      "image": "../data/business_images/business_image_1805fba8159acac6.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "여객노선(국내)",
-      "caption": "국내선 항공 여객 운송",
+      "title": "여객노선(국제)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 69.2%",
       "kind": "service",
-      "visual": "여객노선",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "화물노선",
-      "caption": "화물기 및 여객기 Belly 활용 화물운송",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.4%",
       "kind": "service",
-      "visual": "화물노선",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "에어부산",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

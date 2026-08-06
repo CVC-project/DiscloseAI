@@ -153,7 +153,36 @@
   "snippets": {
     "overview": "(주)아셈스의 주요 사업은 필름사업부, 코팅사 사업부, 합포사업부, 부산과학기술혁신 포상 사업 등입니다. 이러한 영업 조직을 최대한 활용하여 현재의 고객을 유지하고, 새로운 시장을 개척하면서, 고객이 원하는 제품을 만들어 소개, 신규 프로젝트 적용을 통하여 판매 하도록 노력하고 있습니다. 제품 가격 변동 현황 당사의 수주된 단가는 경쟁사와의 경쟁에서 중요한 정보로 공개하기 어렵습니다.",
     "segment_finance": "(주)아셈스의 주요 사업은 필름사업부, 코팅사 사업부, 합포사업부, 부산과학기술혁신 포상 사업 등입니다. 이러한 영업 조직을 최대한 활용하여 현재의 고객을 유지하고, 새로운 시장을 개척하면서, 고객이 원하는 제품을 만들어 소개, 신규 프로젝트 적용을 통하여 판매 하도록 노력하고 있습니다. 제품 가격 변동 현황 당사의 수주된 단가는 경쟁사와의 경쟁에서 중요한 정보로 공개하기 어렵습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "무이형지형 필름",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.9%",
+        "revenue_share": 0.2694,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "이형지형 필름",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.8%",
+        "revenue_share": 0.4079,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동차썬루프용 원단",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.5%",
+        "revenue_share": 0.2352,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "래미네이션",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.0%",
+        "revenue_share": 0.0597,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "방산",
       "적용제품명",
@@ -168,40 +197,70 @@
       "운동화8.jpg 운동화9",
       "적용제품명 적용차량명 차량사양"
     ],
-    "investor_note": "(주)아셈스의 주요 사업은 필름사업부, 코팅사 사업부, 합포사업부, 부산과학기술혁신 포상 사업 등입니다. 이러한 영업 조직을 최대한 활용하여 현재의 고객을 유지하고, 새로운 시장을 개척하면서, 고객이 원하는 제품을 만들어 소개, 신규 프로젝트 적용을 통하여 판매 하도록 노력하고 있습니다. 제품 가격 변동 현황 당사의 수주된 단가는 경쟁사와의 경쟁에서 중요한 정보로 공개하기 어렵습니다."
+    "investor_note": "(주)아셈스의 주요 사업은 필름사업부, 코팅사 사업부, 합포사업부, 부산과학기술혁신 포상 사업 등입니다. 이러한 영업 조직을 최대한 활용하여 현재의 고객을 유지하고, 새로운 시장을 개척하면서, 고객이 원하는 제품을 만들어 소개, 신규 프로젝트 적용을 통하여 판매 하도록 노력하고 있습니다. 제품 가격 변동 현황 당사의 수주된 단가는 경쟁사와의 경쟁에서 중요한 정보로 공개하기 어렵습니다.",
+    "product_service_segments": [
+      {
+        "name": "무이형지형 필름",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.9%",
+        "revenue_share": 0.2694,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "이형지형 필름",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.8%",
+        "revenue_share": 0.4079,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동차썬루프용 원단",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.5%",
+        "revenue_share": 0.2352,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "래미네이션",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.0%",
+        "revenue_share": 0.0597,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "방산",
-      "caption": "방산 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "무이형지형 필름",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.9%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_4ae102473975707c.jpg",
-      "image_source": "Wikimedia Commons"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "적용제품명",
-      "caption": "적용제품명 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "이형지형 필름",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.8%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "운동화1.jpg 운동화1",
-      "caption": "운동화1.jpg 운동화1 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "title": "자동차썬루프용 원단",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.5%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "운동화1_1.jpg 운동화2",
-      "caption": "운동화1_1.jpg 운동화2 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "래미네이션",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -155,9 +155,25 @@
     "segment_finance": "(주)디앤씨미디어의 주요 제품·서비스는 (*), 전자책, 정부출연금, 관련제품, 인터넷, 모바일 만화콘텐츠 서비스입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품의 가격변동 추이 당사는 웹소설 및 웹툰 콘텐츠를 인터넷과 모바일을 통해 온라인으로 제공하거나 종이책으로 출간하는 사업을 영위하고 있습니다. 원재료 등의 가격변동추이 생산 및 설비에 관한 사항 당사는 웹소설 및 웹툰 콘텐츠 공급업체로서 전자책 및 종이책을 통해 콘텐츠를 공급하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "전자책",
-        "desc": "전자책 관련 제품·서비스",
-        "revenue_share": null
+        "name": "웹소설",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.0%",
+        "revenue_share": 0.23,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "종이책",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.0%",
+        "revenue_share": 0.04,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "웹툰",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 47.0%",
+        "revenue_share": 0.47,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -167,32 +183,70 @@
       "인터넷",
       "모바일 만화콘텐츠 서비스"
     ],
-    "investor_note": "(주)디앤씨미디어의 주요 제품·서비스는 (*), 전자책, 정부출연금, 관련제품, 인터넷, 모바일 만화콘텐츠 서비스입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품의 가격변동 추이 당사는 웹소설 및 웹툰 콘텐츠를 인터넷과 모바일을 통해 온라인으로 제공하거나 종이책으로 출간하는 사업을 영위하고 있습니다. 원재료 등의 가격변동추이 생산 및 설비에 관한 사항 당사는 웹소설 및 웹툰 콘텐츠 공급업체로서 전자책 및 종이책을 통해 콘텐츠를 공급하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)디앤씨미디어의 주요 제품·서비스는 (*), 전자책, 정부출연금, 관련제품, 인터넷, 모바일 만화콘텐츠 서비스입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품의 가격변동 추이 당사는 웹소설 및 웹툰 콘텐츠를 인터넷과 모바일을 통해 온라인으로 제공하거나 종이책으로 출간하는 사업을 영위하고 있습니다. 원재료 등의 가격변동추이 생산 및 설비에 관한 사항 당사는 웹소설 및 웹툰 콘텐츠 공급업체로서 전자책 및 종이책을 통해 콘텐츠를 공급하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "웹소설",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.0%",
+        "revenue_share": 0.23,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "종이책",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.0%",
+        "revenue_share": 0.04,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "웹툰",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 47.0%",
+        "revenue_share": 0.47,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품및기타",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.0%",
+        "revenue_share": 0.23,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "전자책",
-      "caption": "전자책 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "웹소설",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "정부출연금",
-      "caption": "정부출연금 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "종이책",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "인터넷",
-      "caption": "인터넷 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "웹툰",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 47.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "상품및기타",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

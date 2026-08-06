@@ -155,24 +155,32 @@
     "segment_finance": "삼아제약은 진해거담제·기관지확장제 등 호흡기계 의약품을 주력으로 하는 제약회사로, 이 부문이 매출의 68%를 차지하며 피부질환·해열진통·소화기 치료제도 함께 생산합니다. 다만 최근 호흡기 환자 감소의 영향으로 매출과 이익이 함께 줄었습니다. 과거 공시 기반 참고 정보로, 영업이익은 109억 원으로 전년 대비 55.1% 감소했고 당기순이익도 129억 원으로 41.4% 줄어 수익성이 크게 나빠졌습니다. 총자산은 2,470억 원으로 소폭(-0.7%) 감소했지만, 부채비율은 8.3%로 매우 낮아 재무구조 자체는 안정적인 편입니다. 이 회사의 사업보고서에는 감사보고서 첨부파일이 확인되지 않아 감사의견과 핵심감사사항은 이번에 파악하지 못했습니다.",
     "segment_breakdown": [
       {
-        "name": "호흡기계",
-        "desc": "진해거담·기관지확장·비염 치료제",
-        "revenue_share": 0.677
+        "name": "의약품제조및판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 67.7%",
+        "revenue_share": 0.677,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "해열진통소염",
-        "desc": "발열·두통·근육통·염증 치료제",
-        "revenue_share": 0.132
+        "name": "항생제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.4%",
+        "revenue_share": 0.024,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "피부기계",
-        "desc": "아토피피부염·습진·건선 치료제",
-        "revenue_share": 0.103
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.3%",
+        "revenue_share": 0.103,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "소화기계",
-        "desc": "소화불량·속쓰림 치료제",
-        "revenue_share": 0.059
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.9%",
+        "revenue_share": 0.059,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -185,40 +193,70 @@
       "세토펜(해열진통제)",
       "노마골드츄정"
     ],
-    "investor_note": "삼아제약은 진해거담제·기관지확장제 등 호흡기계 의약품을 주력으로 하는 제약회사로, 이 부문이 매출의 68%를 차지하며 피부질환·해열진통·소화기 치료제도 함께 생산합니다. 다만 최근 호흡기 환자 감소의 영향으로 매출과 이익이 함께 줄었습니다. 과거 공시 기반 참고 정보로, 영업이익은 109억 원으로 전년 대비 55.1% 감소했고 당기순이익도 129억 원으로 41.4% 줄어 수익성이 크게 나빠졌습니다. 총자산은 2,470억 원으로 소폭(-0.7%) 감소했지만, 부채비율은 8.3%로 매우 낮아 재무구조 자체는 안정적인 편입니다. 이 회사의 사업보고서에는 감사보고서 첨부파일이 확인되지 않아 감사의견과 핵심감사사항은 이번에 파악하지 못했습니다."
+    "investor_note": "삼아제약은 진해거담제·기관지확장제 등 호흡기계 의약품을 주력으로 하는 제약회사로, 이 부문이 매출의 68%를 차지하며 피부질환·해열진통·소화기 치료제도 함께 생산합니다. 다만 최근 호흡기 환자 감소의 영향으로 매출과 이익이 함께 줄었습니다. 과거 공시 기반 참고 정보로, 영업이익은 109억 원으로 전년 대비 55.1% 감소했고 당기순이익도 129억 원으로 41.4% 줄어 수익성이 크게 나빠졌습니다. 총자산은 2,470억 원으로 소폭(-0.7%) 감소했지만, 부채비율은 8.3%로 매우 낮아 재무구조 자체는 안정적인 편입니다. 이 회사의 사업보고서에는 감사보고서 첨부파일이 확인되지 않아 감사의견과 핵심감사사항은 이번에 파악하지 못했습니다.",
+    "product_service_segments": [
+      {
+        "name": "의약품제조및판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 67.7%",
+        "revenue_share": 0.677,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "항생제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.4%",
+        "revenue_share": 0.024,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "피부기계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.3%",
+        "revenue_share": 0.103,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "소화기계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.9%",
+        "revenue_share": 0.059,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "호흡기계",
-      "caption": "진해거담·기관지확장·비염 치료제",
-      "kind": "service",
-      "visual": "호흡기계",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "title": "의약품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 67.7%",
+      "kind": "bio",
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "해열진통소염",
-      "caption": "발열·두통·근육통·염증 치료제",
+      "title": "항생제",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.4%",
       "kind": "service",
-      "visual": "해열진통소염",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "피부기계",
-      "caption": "아토피피부염·습진·건선 치료제",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.3%",
       "kind": "service",
-      "visual": "피부기계",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "소화기계",
-      "caption": "소화불량·속쓰림 치료제",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.9%",
       "kind": "service",
-      "visual": "소화기계",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

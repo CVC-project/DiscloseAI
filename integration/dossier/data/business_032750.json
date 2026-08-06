@@ -155,19 +155,32 @@
     "segment_finance": "스피커(5%), 스마트홈 허브·통신모듈(11%) 등으로 사업을 넓혀가고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,483억 원으로 전년 대비 6.8% 줄었고 영업이익은 19.7%, 당기순이익은 57.0% 감소해 수익성이 크게 둔화됐습니다. 부채비율은 16.1%로 낮아 재무구조는 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "리모컨(REMOCON)",
-        "desc": "삼성전자 등 TV용 적외선·스마트 리모컨 제조",
-        "revenue_share": 0.719
+        "name": "전자부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 71.9%",
+        "revenue_share": 0.719,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "스피커",
-        "desc": "TV·음향기기용 스피커 제조",
-        "revenue_share": 0.048
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.8%",
+        "revenue_share": 0.048,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "통신모듈(IoT)",
-        "desc": "스마트홈 허브·통신모듈 제조",
-        "revenue_share": 0.114
+        "name": "통신모듈",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.4%",
+        "revenue_share": 0.114,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.4%",
+        "revenue_share": 0.054,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -177,24 +190,70 @@
       "SmartThings V4 Hub",
       "스마트싱스 파인드 트랙커"
     ],
-    "investor_note": "스피커(5%), 스마트홈 허브·통신모듈(11%) 등으로 사업을 넓혀가고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,483억 원으로 전년 대비 6.8% 줄었고 영업이익은 19.7%, 당기순이익은 57.0% 감소해 수익성이 크게 둔화됐습니다. 부채비율은 16.1%로 낮아 재무구조는 안정적인 편입니다."
+    "investor_note": "스피커(5%), 스마트홈 허브·통신모듈(11%) 등으로 사업을 넓혀가고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,483억 원으로 전년 대비 6.8% 줄었고 영업이익은 19.7%, 당기순이익은 57.0% 감소해 수익성이 크게 둔화됐습니다. 부채비율은 16.1%로 낮아 재무구조는 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "전자부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 71.9%",
+        "revenue_share": 0.719,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "스피커",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.8%",
+        "revenue_share": 0.048,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "통신모듈",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.4%",
+        "revenue_share": 0.114,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.4%",
+        "revenue_share": 0.054,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "스피커",
-      "caption": "TV·음향기기용 스피커 제조",
-      "kind": "service",
-      "visual": "스피커",
-      "image": "../data/business_images/business_image_141eab6519656e30.jpg",
-      "image_source": "Wikimedia Commons"
+      "title": "전자부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 71.9%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "통신모듈(IoT)",
-      "caption": "스마트홈 허브·통신모듈 제조",
+      "title": "스피커",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.8%",
       "kind": "telecom",
-      "visual": "통신모듈",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "통신모듈",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.4%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.4%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

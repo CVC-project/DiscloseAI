@@ -156,8 +156,10 @@
     "segment_breakdown": [
       {
         "name": "펀드운영부문",
-        "desc": "기업투자 및 자문",
-        "revenue_share": 0.002
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.002,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -171,40 +173,62 @@
       "전기계장 설계·시공",
       "FTTH 광통신 자재"
     ],
-    "investor_note": "비츠로시스는 발전소·변전소의 전력 흐름을 감시·제어하는 전력감시제어시스템을 핵심으로, 철도 승강장 안전문(PSD) 제어, 원자력발전 보조기기·제어반(SMR 포함), 정수장·하수처리장 수처리감시제어, 전기계장 설계·시공까지 인프라 제어 전반을 아우르는 사업을 하고 있습니다. 국가·지자체 발주 프로젝트 특성상 매출을 사업부문 단위로 구분하며, 최근에는 전기계장 설계·시공을 담당하는 공사사업부문이 41.1%로 가장 크고 전력제어 중심의 인프라사업부문이 38.6%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 448억 원으로 전년보다 74.7% 크게 늘었고 영업이익도 약 5,800만 원으로 흑자 전환했으며 당기순이익은 15억 원으로 역시 흑자 전환했습니다. 다만 부채비율은 180.7%로 자본보다 부채가 훨씬 많은 편이라 재무 부담을 유의해서 볼 필요가 있습니다."
+    "investor_note": "비츠로시스는 발전소·변전소의 전력 흐름을 감시·제어하는 전력감시제어시스템을 핵심으로, 철도 승강장 안전문(PSD) 제어, 원자력발전 보조기기·제어반(SMR 포함), 정수장·하수처리장 수처리감시제어, 전기계장 설계·시공까지 인프라 제어 전반을 아우르는 사업을 하고 있습니다. 국가·지자체 발주 프로젝트 특성상 매출을 사업부문 단위로 구분하며, 최근에는 전기계장 설계·시공을 담당하는 공사사업부문이 41.1%로 가장 크고 전력제어 중심의 인프라사업부문이 38.6%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 448억 원으로 전년보다 74.7% 크게 늘었고 영업이익도 약 5,800만 원으로 흑자 전환했으며 당기순이익은 15억 원으로 역시 흑자 전환했습니다. 다만 부채비율은 180.7%로 자본보다 부채가 훨씬 많은 편이라 재무 부담을 유의해서 볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "인프라사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.6%",
+        "revenue_share": 0.386,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "환경사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.0%",
+        "revenue_share": 0.2,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "공사사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 41.1%",
+        "revenue_share": 0.411,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "펀드운영부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.002,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "공사사업부문",
-      "caption": "전기계장 설계 및 시공",
-      "kind": "service",
-      "visual": "공사사업부문",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
-    },
-    {
       "title": "인프라사업부문",
-      "caption": "전력제어시스템·승강장안전문(PSD) 등",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.6%",
       "kind": "power",
-      "visual": "인프라사업부문",
-      "image": "../data/business_images/business_image_local_safety.svg",
-      "image_source": "Local curated visual"
+      "visual": "POWER",
+      "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "환경사업부문",
-      "caption": "수처리시스템 및 수질유지보수",
-      "kind": "service",
-      "visual": "환경사업부문",
-      "image": "../data/business_images/business_image_local_power.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.0%",
+      "kind": "power",
+      "visual": "POWER",
+      "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "펀드운영부문",
-      "caption": "기업투자 및 자문",
-      "kind": "securities",
-      "visual": "펀드운영부문",
-      "image": "../data/business_images/business_image_local_power.svg",
-      "image_source": "Local curated visual"
+      "title": "공사사업부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 41.1%",
+      "kind": "power",
+      "visual": "POWER",
+      "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

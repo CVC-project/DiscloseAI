@@ -155,14 +155,32 @@
     "segment_finance": "위닉스는 공기청정기, 제습기, 정수기 등 생활가전 완제품과 냉장고·에어컨용 열교환기 부품을 만드는 회사입니다. 연결 기준 내수 매출은 47.3%, 수출 매출은 52.7%로 해외 판매 비중이 더 큽니다. 종속회사를 통해 항공운송 사업도 시작했습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,695억 원으로 전년보다 5.2% 늘었지만 영업손실은 606억 원으로 크게 악화됐습니다. 제품 판매 성장보다 재고, 원가, 신규 항공사업 부담을 함께 봐야 합니다.",
     "segment_breakdown": [
       {
-        "name": "부품·열교환기",
-        "desc": "냉장고와 에어컨에 들어가는 EVAPORATOR 등 핵심부품",
-        "revenue_share": 0.03
+        "name": "여객(주1)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.5%",
+        "revenue_share": 0.2652,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "항공운송",
-        "desc": "양양 소재 종속회사를 통한 국내선·국제선 항공운송 사업",
-        "revenue_share": null
+        "name": "국제선",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 62.8%",
+        "revenue_share": 0.6278,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기 타(주2)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.2%",
+        "revenue_share": 0.0617,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "화물(주3)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.5%",
+        "revenue_share": 0.0453,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -175,24 +193,70 @@
       "열교환기",
       "항공운송 서비스"
     ],
-    "investor_note": "위닉스는 공기청정기, 제습기, 정수기 등 생활가전 완제품과 냉장고·에어컨용 열교환기 부품을 만드는 회사입니다. 연결 기준 내수 매출은 47.3%, 수출 매출은 52.7%로 해외 판매 비중이 더 큽니다. 종속회사를 통해 항공운송 사업도 시작했습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,695억 원으로 전년보다 5.2% 늘었지만 영업손실은 606억 원으로 크게 악화됐습니다. 제품 판매 성장보다 재고, 원가, 신규 항공사업 부담을 함께 봐야 합니다."
+    "investor_note": "위닉스는 공기청정기, 제습기, 정수기 등 생활가전 완제품과 냉장고·에어컨용 열교환기 부품을 만드는 회사입니다. 연결 기준 내수 매출은 47.3%, 수출 매출은 52.7%로 해외 판매 비중이 더 큽니다. 종속회사를 통해 항공운송 사업도 시작했습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,695억 원으로 전년보다 5.2% 늘었지만 영업손실은 606억 원으로 크게 악화됐습니다. 제품 판매 성장보다 재고, 원가, 신규 항공사업 부담을 함께 봐야 합니다.",
+    "product_service_segments": [
+      {
+        "name": "여객(주1)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.5%",
+        "revenue_share": 0.2652,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "국제선",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 62.8%",
+        "revenue_share": 0.6278,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기 타(주2)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.2%",
+        "revenue_share": 0.0617,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "화물(주3)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.5%",
+        "revenue_share": 0.0453,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "부품·열교환기",
-      "caption": "냉장고와 에어컨에 들어가는 EVAPORATOR 등 핵심부품",
-      "kind": "auto",
-      "visual": "EV",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
+      "title": "여객(주1)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "항공운송",
-      "caption": "양양 소재 종속회사를 통한 국내선·국제선 항공운송 사업",
-      "kind": "material",
-      "visual": "항공운송",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
+      "title": "국제선",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 62.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "기 타(주2)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "화물(주3)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

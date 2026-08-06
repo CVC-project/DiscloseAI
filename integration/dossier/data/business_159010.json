@@ -153,7 +153,29 @@
   "snippets": {
     "overview": "(주)아스플로의 주요 제품·서비스는 튜브, 파이프, 제품 계, 반제품계, 제품합계, 반도체 부품입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 특히 지역별 사업환경 특성에 맞게 주요고객과 전략적 파트너쉽을 맺어 Co-marketing 및 글로벌 네트워크를 강화하거나, 생산시설 및 판매법인 현지화를 통한 Localization을 현실화 추진하며, 지역 거점별 Distributor나 Sales Agent를 두어 지역별 시장 특성에 맞는 사업확대 전략을 추진하고 있습니다. 이런 이유로 원재료 가격 산출은 각 제품군 별로 매출 비중이 높은 대표적인 원재료를 기준으로 산출하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "(주)아스플로의 주요 제품·서비스는 튜브, 파이프, 제품 계, 반제품계, 제품합계, 반도체 부품입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 특히 지역별 사업환경 특성에 맞게 주요고객과 전략적 파트너쉽을 맺어 Co-marketing 및 글로벌 네트워크를 강화하거나, 생산시설 및 판매법인 현지화를 통한 Localization을 현실화 추진하며, 지역 거점별 Distributor나 Sales Agent를 두어 지역별 시장 특성에 맞는 사업확대 전략을 추진하고 있습니다. 이런 이유로 원재료 가격 산출은 각 제품군 별로 매출 비중이 높은 대표적인 원재료를 기준으로 산출하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "피팅",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.3%",
+        "revenue_share": 0.1329,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "밸브/레귤레이터",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.3%",
+        "revenue_share": 0.1832,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "디퓨저/필터",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.7%",
+        "revenue_share": 0.0674,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "튜브",
       "파이프",
@@ -161,40 +183,62 @@
       "제품합계",
       "반도체 부품"
     ],
-    "investor_note": "(주)아스플로의 주요 제품·서비스는 튜브, 파이프, 제품 계, 반제품계, 제품합계, 반도체 부품입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 특히 지역별 사업환경 특성에 맞게 주요고객과 전략적 파트너쉽을 맺어 Co-marketing 및 글로벌 네트워크를 강화하거나, 생산시설 및 판매법인 현지화를 통한 Localization을 현실화 추진하며, 지역 거점별 Distributor나 Sales Agent를 두어 지역별 시장 특성에 맞는 사업확대 전략을 추진하고 있습니다. 이런 이유로 원재료 가격 산출은 각 제품군 별로 매출 비중이 높은 대표적인 원재료를 기준으로 산출하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)아스플로의 주요 제품·서비스는 튜브, 파이프, 제품 계, 반제품계, 제품합계, 반도체 부품입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 특히 지역별 사업환경 특성에 맞게 주요고객과 전략적 파트너쉽을 맺어 Co-marketing 및 글로벌 네트워크를 강화하거나, 생산시설 및 판매법인 현지화를 통한 Localization을 현실화 추진하며, 지역 거점별 Distributor나 Sales Agent를 두어 지역별 시장 특성에 맞는 사업확대 전략을 추진하고 있습니다. 이런 이유로 원재료 가격 산출은 각 제품군 별로 매출 비중이 높은 대표적인 원재료를 기준으로 산출하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.4%",
+        "revenue_share": 0.5044,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "피팅",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.3%",
+        "revenue_share": 0.1329,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "밸브/레귤레이터",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.3%",
+        "revenue_share": 0.1832,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "디퓨저/필터",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.7%",
+        "revenue_share": 0.0674,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "튜브",
-      "caption": "튜브 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "피팅",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.3%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "파이프",
-      "caption": "파이프 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "밸브/레귤레이터",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.3%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "반제품계",
-      "caption": "반제품계 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "디퓨저/필터",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.7%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "제품",
-      "caption": "제품 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

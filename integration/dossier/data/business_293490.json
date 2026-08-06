@@ -153,7 +153,22 @@
   "snippets": {
     "overview": "(주)카카오게임즈의 주요 제품·서비스는 블록체인개발, 플랫폼, DEX, Market, 전송, 거래입니다. 경쟁사 간 크로스 프로모션을 하는 사례도 종종 발생하는데, 당사의 경우 경쟁사인 슈퍼셀의 '클래시 로얄'과 카카오프렌즈 IP를 활용하여 당사가 제공하는 스낵게임의 크로스 프로모션을 진행한 바 있습니다. 이 단계에 참여하는 이용자들에게는 실제 오픈 시점에 다양한 아이템 패키지를 제공하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "(주)카카오게임즈의 주요 제품·서비스는 블록체인개발, 플랫폼, DEX, Market, 전송, 거래입니다. 경쟁사 간 크로스 프로모션을 하는 사례도 종종 발생하는데, 당사의 경우 경쟁사인 슈퍼셀의 '클래시 로얄'과 카카오프렌즈 IP를 활용하여 당사가 제공하는 스낵게임의 크로스 프로모션을 진행한 바 있습니다. 이 단계에 참여하는 이용자들에게는 실제 오픈 시점에 다양한 아이템 패키지를 제공하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "PC게임",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.5%",
+        "revenue_share": 0.245,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "모바일게임",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 75.5%",
+        "revenue_share": 0.755,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "블록체인개발",
       "플랫폼",
@@ -168,32 +183,32 @@
       "게임플랫폼",
       "Global Service Platform개발"
     ],
-    "investor_note": "(주)카카오게임즈의 주요 제품·서비스는 블록체인개발, 플랫폼, DEX, Market, 전송, 거래입니다. 경쟁사 간 크로스 프로모션을 하는 사례도 종종 발생하는데, 당사의 경우 경쟁사인 슈퍼셀의 '클래시 로얄'과 카카오프렌즈 IP를 활용하여 당사가 제공하는 스낵게임의 크로스 프로모션을 진행한 바 있습니다. 이 단계에 참여하는 이용자들에게는 실제 오픈 시점에 다양한 아이템 패키지를 제공하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)카카오게임즈의 주요 제품·서비스는 블록체인개발, 플랫폼, DEX, Market, 전송, 거래입니다. 경쟁사 간 크로스 프로모션을 하는 사례도 종종 발생하는데, 당사의 경우 경쟁사인 슈퍼셀의 '클래시 로얄'과 카카오프렌즈 IP를 활용하여 당사가 제공하는 스낵게임의 크로스 프로모션을 진행한 바 있습니다. 이 단계에 참여하는 이용자들에게는 실제 오픈 시점에 다양한 아이템 패키지를 제공하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "PC게임",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.5%",
+        "revenue_share": 0.245,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "모바일게임",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 75.5%",
+        "revenue_share": 0.755,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "플랫폼 서비스",
-      "caption": "여러 이용자와 서비스를 한곳에서 연결해 반복 이용을 만드는 디지털 서비스입니다.",
+      "title": "게임",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.5%",
       "kind": "platform",
-      "visual": "APP",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "블록체인개발",
-      "caption": "블록체인개발 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "Market",
-      "caption": "Market 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "visual": "GAME",
+      "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

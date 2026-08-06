@@ -153,37 +153,104 @@
   "snippets": {
     "overview": "하이브의 주요 제품·서비스는 스토리사업, IP사업입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 글로벌 트렌드를 이끄는 '콘텐츠'와 당사의 주 고객인 '팬'을 최우선 가치로 두고, 높은 기준과 끊임없는 개선으로 고객을 만족시키도록 노력하고 있습니다. 제품 가격변동추이 당사의 음반 매출은 아티스트 및 음반의 볼륨(정규, 미니, 싱글 등)에 따라 출고 가격이 상이하며, 공연 매출의 경우 공연 지역, 공연 규모 등에 따라 단가가 다르게 결정됩니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "하이브의 주요 제품·서비스는 스토리사업, IP사업입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 글로벌 트렌드를 이끄는 '콘텐츠'와 당사의 주 고객인 '팬'을 최우선 가치로 두고, 높은 기준과 끊임없는 개선으로 고객을 만족시키도록 노력하고 있습니다. 제품 가격변동추이 당사의 음반 매출은 아티스트 및 음반의 볼륨(정규, 미니, 싱글 등)에 따라 출고 가격이 상이하며, 공연 매출의 경우 공연 지역, 공연 규모 등에 따라 단가가 다르게 결정됩니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "음반/음원",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.2%",
+        "revenue_share": 0.2917,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "공연",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.8%",
+        "revenue_share": 0.2883,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "광고, 출연료 (주2)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.5%",
+        "revenue_share": 0.0555,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "MD 및 라이선싱",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.5%",
+        "revenue_share": 0.2153,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "스토리사업",
       "IP사업"
     ],
-    "investor_note": "하이브의 주요 제품·서비스는 스토리사업, IP사업입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 글로벌 트렌드를 이끄는 '콘텐츠'와 당사의 주 고객인 '팬'을 최우선 가치로 두고, 높은 기준과 끊임없는 개선으로 고객을 만족시키도록 노력하고 있습니다. 제품 가격변동추이 당사의 음반 매출은 아티스트 및 음반의 볼륨(정규, 미니, 싱글 등)에 따라 출고 가격이 상이하며, 공연 매출의 경우 공연 지역, 공연 규모 등에 따라 단가가 다르게 결정됩니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "하이브의 주요 제품·서비스는 스토리사업, IP사업입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 글로벌 트렌드를 이끄는 '콘텐츠'와 당사의 주 고객인 '팬'을 최우선 가치로 두고, 높은 기준과 끊임없는 개선으로 고객을 만족시키도록 노력하고 있습니다. 제품 가격변동추이 당사의 음반 매출은 아티스트 및 음반의 볼륨(정규, 미니, 싱글 등)에 따라 출고 가격이 상이하며, 공연 매출의 경우 공연 지역, 공연 규모 등에 따라 단가가 다르게 결정됩니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "음반/음원",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.2%",
+        "revenue_share": 0.2917,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "공연",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.8%",
+        "revenue_share": 0.2883,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "광고, 출연료 (주2)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.5%",
+        "revenue_share": 0.0555,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "MD 및 라이선싱",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.5%",
+        "revenue_share": 0.2153,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "스토리사업",
-      "caption": "스토리사업 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "음반/음원",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.2%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "IP사업",
-      "caption": "IP사업 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "공연",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.8%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "오디오물 출판 및 원판 녹음업",
-      "caption": "오디오물 출판 및 원판 녹음업 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "광고, 출연료 (주2)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.5%",
+      "kind": "platform",
+      "visual": "APP",
+      "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "MD 및 라이선싱",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.5%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

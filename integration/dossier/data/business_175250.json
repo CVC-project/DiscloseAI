@@ -153,7 +153,36 @@
   "snippets": {
     "overview": "아이큐어 주식회사의 주요 사업은 화학합성, 소비재산업고도화기술개발사업, 연구개발사업, 제제기술사업 등입니다. 제품 등의 가격변동추이 당사의 의약품 및 화장품은 고객사의 수주에 따라 주문제작하기 때문에 제품별 단순판매단가 비교가 어려우며, 수주된 단가는 경쟁사와의 경쟁에서 중요한 정보로 공개하기 어렵습니다. 이러한 시스템으로 인해 수주잔고는 매출처의 상황에 따라 수시로 확정되므로 특정일의 정확한 수주잔고를 표시할 수 없습니다.",
     "segment_finance": "아이큐어 주식회사의 주요 사업은 화학합성, 소비재산업고도화기술개발사업, 연구개발사업, 제제기술사업 등입니다. 제품 등의 가격변동추이 당사의 의약품 및 화장품은 고객사의 수주에 따라 주문제작하기 때문에 제품별 단순판매단가 비교가 어려우며, 수주된 단가는 경쟁사와의 경쟁에서 중요한 정보로 공개하기 어렵습니다. 이러한 시스템으로 인해 수주잔고는 매출처의 상황에 따라 수시로 확정되므로 특정일의 정확한 수주잔고를 표시할 수 없습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "제약",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.8%",
+        "revenue_share": 0.1677,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "카타플라스마",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.4%",
+        "revenue_share": 0.0041,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "패치",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+        "revenue_share": 0.0265,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "경구제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.7%",
+        "revenue_share": 0.0269,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "의약품",
       "화장품",
@@ -167,32 +196,62 @@
       "도네페질 패치의라이센스",
       "화장품연구소"
     ],
-    "investor_note": "아이큐어 주식회사의 주요 사업은 화학합성, 소비재산업고도화기술개발사업, 연구개발사업, 제제기술사업 등입니다. 제품 등의 가격변동추이 당사의 의약품 및 화장품은 고객사의 수주에 따라 주문제작하기 때문에 제품별 단순판매단가 비교가 어려우며, 수주된 단가는 경쟁사와의 경쟁에서 중요한 정보로 공개하기 어렵습니다. 이러한 시스템으로 인해 수주잔고는 매출처의 상황에 따라 수시로 확정되므로 특정일의 정확한 수주잔고를 표시할 수 없습니다."
+    "investor_note": "아이큐어 주식회사의 주요 사업은 화학합성, 소비재산업고도화기술개발사업, 연구개발사업, 제제기술사업 등입니다. 제품 등의 가격변동추이 당사의 의약품 및 화장품은 고객사의 수주에 따라 주문제작하기 때문에 제품별 단순판매단가 비교가 어려우며, 수주된 단가는 경쟁사와의 경쟁에서 중요한 정보로 공개하기 어렵습니다. 이러한 시스템으로 인해 수주잔고는 매출처의 상황에 따라 수시로 확정되므로 특정일의 정확한 수주잔고를 표시할 수 없습니다.",
+    "product_service_segments": [
+      {
+        "name": "제약",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.8%",
+        "revenue_share": 0.1677,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "카타플라스마",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.4%",
+        "revenue_share": 0.0041,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "패치",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+        "revenue_share": 0.0265,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "경구제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.7%",
+        "revenue_share": 0.0269,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "화장품",
-      "caption": "화장품 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_local_cosmetics.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "제약",
-      "caption": "제약 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "의약품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.8%",
       "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "플라스타",
-      "caption": "플라스타 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "패치",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
       "kind": "material",
       "visual": "MAT",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "경구제",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.7%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

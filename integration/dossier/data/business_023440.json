@@ -155,38 +155,43 @@
     "segment_finance": "제이스코홀딩스는 연강선재(못·철망·건축자재용 저탄소강)와 코일형 철근(BIC)을 만드는 철강기업으로, 연강선재 분야에서는 국내 유일 생산체제를 유지하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 410억 원으로 전년 대비 44.7% 늘었지만 영업손실 84억 원, 당기순손실 320억 원으로 적자가 지속됐습니다. 특히 감사인이 재무제표에 '의견거절'(감사 의견을 낼 수 없다는 뜻)을 표명했는데, 유동부채가 유동자산보다 371억 원 많아 계속기업 존속에 유의적 의문이 제기된 점이 근거입니다.",
     "segment_breakdown": [
       {
-        "name": "연강선재",
-        "desc": "옷걸이·못·철망 등에 쓰이는 저탄소강 선재, 국내 유일 생산",
-        "revenue_share": 0.9968
-      },
-      {
-        "name": "BIC(코일철근)",
-        "desc": "코일형으로 가공한 철근, 가공·운반 효율 우수",
-        "revenue_share": 0.0032
+        "name": "압연",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.7%",
+        "revenue_share": 0.9968,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
       "연강선재",
       "BIC(코일철근)"
     ],
-    "investor_note": "제이스코홀딩스는 연강선재(못·철망·건축자재용 저탄소강)와 코일형 철근(BIC)을 만드는 철강기업으로, 연강선재 분야에서는 국내 유일 생산체제를 유지하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 410억 원으로 전년 대비 44.7% 늘었지만 영업손실 84억 원, 당기순손실 320억 원으로 적자가 지속됐습니다. 특히 감사인이 재무제표에 '의견거절'(감사 의견을 낼 수 없다는 뜻)을 표명했는데, 유동부채가 유동자산보다 371억 원 많아 계속기업 존속에 유의적 의문이 제기된 점이 근거입니다."
+    "investor_note": "제이스코홀딩스는 연강선재(못·철망·건축자재용 저탄소강)와 코일형 철근(BIC)을 만드는 철강기업으로, 연강선재 분야에서는 국내 유일 생산체제를 유지하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 410억 원으로 전년 대비 44.7% 늘었지만 영업손실 84억 원, 당기순손실 320억 원으로 적자가 지속됐습니다. 특히 감사인이 재무제표에 '의견거절'(감사 의견을 낼 수 없다는 뜻)을 표명했는데, 유동부채가 유동자산보다 371억 원 많아 계속기업 존속에 유의적 의문이 제기된 점이 근거입니다.",
+    "product_service_segments": [
+      {
+        "name": "압연",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.7%",
+        "revenue_share": 0.9968,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.3%",
+        "revenue_share": 0.0032,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "연강선재",
-      "caption": "옷걸이·못·철망 등에 쓰이는 저탄소강 선재, 국내 유일 생산",
-      "kind": "service",
-      "visual": "연강선재",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "BIC(코일철근)",
-      "caption": "코일형으로 가공한 철근, 가공·운반 효율 우수",
-      "kind": "service",
-      "visual": "BIC",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "title": "압연",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.7%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

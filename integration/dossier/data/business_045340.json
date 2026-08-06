@@ -155,19 +155,32 @@
     "segment_finance": "토탈소프트뱅크는 항만·물류 산업의 디지털 전환을 지원하는 IT 솔루션 기업으로, 컨테이너 터미널 운영시스템(CATOS)이 매출의 약 74%를 차지하고 선박 적재계획 시스템(CASP) 등 해운 솔루션이 뒤를 잇습니다. 전 세계 110여개 컨테이너터미널에 시스템을 공급하며 수출 비중이 매출의 90%에 가까운 글로벌 기업입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 274억 원으로 전년 대비 32.8% 늘었고 영업이익(93억 원)과 당기순이익(85억 원)도 각각 81.0%, 39.8% 증가했습니다. 부채비율은 50.4%로 재무 부담도 크지 않은 편입니다.",
     "segment_breakdown": [
       {
-        "name": "Marine Terminal(터미널운영)",
-        "desc": "CATOS·MOST 등 항만 터미널 운영시스템",
-        "revenue_share": 0.75
+        "name": "Marine Terminal",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 73.7%",
+        "revenue_share": 0.737,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "Shipping(선사용 솔루션)",
-        "desc": "CASP·TSB Supercargo·클라우드 CASP 등 선박 적재계획 시스템",
-        "revenue_share": 0.209
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.3%",
+        "revenue_share": 0.013,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "Port Community(PLUS)",
-        "desc": "웹 기반 항만 커뮤니티 시스템",
-        "revenue_share": 0.004
+        "name": "Port Community",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.4%",
+        "revenue_share": 0.004,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Shipping",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.0%",
+        "revenue_share": 0.13,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -179,32 +192,62 @@
       "클라우드 CASP",
       "교육용 시뮬레이터·E-Learning"
     ],
-    "investor_note": "토탈소프트뱅크는 항만·물류 산업의 디지털 전환을 지원하는 IT 솔루션 기업으로, 컨테이너 터미널 운영시스템(CATOS)이 매출의 약 74%를 차지하고 선박 적재계획 시스템(CASP) 등 해운 솔루션이 뒤를 잇습니다. 전 세계 110여개 컨테이너터미널에 시스템을 공급하며 수출 비중이 매출의 90%에 가까운 글로벌 기업입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 274억 원으로 전년 대비 32.8% 늘었고 영업이익(93억 원)과 당기순이익(85억 원)도 각각 81.0%, 39.8% 증가했습니다. 부채비율은 50.4%로 재무 부담도 크지 않은 편입니다."
+    "investor_note": "토탈소프트뱅크는 항만·물류 산업의 디지털 전환을 지원하는 IT 솔루션 기업으로, 컨테이너 터미널 운영시스템(CATOS)이 매출의 약 74%를 차지하고 선박 적재계획 시스템(CASP) 등 해운 솔루션이 뒤를 잇습니다. 전 세계 110여개 컨테이너터미널에 시스템을 공급하며 수출 비중이 매출의 90%에 가까운 글로벌 기업입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 274억 원으로 전년 대비 32.8% 늘었고 영업이익(93억 원)과 당기순이익(85억 원)도 각각 81.0%, 39.8% 증가했습니다. 부채비율은 50.4%로 재무 부담도 크지 않은 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "Marine Terminal",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 73.7%",
+        "revenue_share": 0.737,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.3%",
+        "revenue_share": 0.013,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Port Community",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.4%",
+        "revenue_share": 0.004,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Shipping",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.0%",
+        "revenue_share": 0.13,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "Marine Terminal(터미널운영)",
-      "caption": "CATOS·MOST 등 항만 터미널 운영시스템",
+      "title": "Marine Terminal",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 73.7%",
       "kind": "service",
-      "visual": "Marine",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "Shipping(선사용 솔루션)",
-      "caption": "CASP·TSB Supercargo·클라우드 CASP 등 선박 적재계획 시스템",
-      "kind": "ship",
-      "visual": "SHIP",
-      "image": "../data/business_images/business_image_local_cloud.svg",
-      "image_source": "Local curated visual"
+      "title": "용역",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.3%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "Port Community(PLUS)",
-      "caption": "웹 기반 항만 커뮤니티 시스템",
+      "title": "Shipping",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.0%",
       "kind": "service",
-      "visual": "Port",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

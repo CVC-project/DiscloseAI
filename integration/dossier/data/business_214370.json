@@ -153,7 +153,36 @@
   "snippets": {
     "overview": "주식회사 케어젠의 주요 제품·서비스는 방산, 의약품, 건강기능식품, 브랜드, 완제품(건강기능식품), 생산능력입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 또한 바디/비만 관리용 전문테라피 제품으로 과도한 셀룰라이트로 인해 불규칙하게 형성된 피부를 회복시켜주는 펩타이드를 함유한 메조테라피 및 주사형 수출용 의료기기 제품도 생산 판매하고 있습니다. 당사는 이러한 펩타이드 및 성장인자 원료의 연구개발 및 생산 역량을 기반으로 글로벌 원료 시장에서도 사업을 확대하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "주식회사 케어젠의 주요 제품·서비스는 방산, 의약품, 건강기능식품, 브랜드, 완제품(건강기능식품), 생산능력입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 또한 바디/비만 관리용 전문테라피 제품으로 과도한 셀룰라이트로 인해 불규칙하게 형성된 피부를 회복시켜주는 펩타이드를 함유한 메조테라피 및 주사형 수출용 의료기기 제품도 생산 판매하고 있습니다. 당사는 이러한 펩타이드 및 성장인자 원료의 연구개발 및 생산 역량을 기반으로 글로벌 원료 시장에서도 사업을 확대하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "전문테라피(필러, 메조)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 72.5%",
+        "revenue_share": 0.7254,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "안면",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 45.6%",
+        "revenue_share": 0.4561,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "헤어",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.1%",
+        "revenue_share": 0.2208,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "바디",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.7%",
+        "revenue_share": 0.037,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "방산",
       "의약품",
@@ -168,24 +197,70 @@
       "경쟁제품: 루센티스",
       "아일리아"
     ],
-    "investor_note": "주식회사 케어젠의 주요 제품·서비스는 방산, 의약품, 건강기능식품, 브랜드, 완제품(건강기능식품), 생산능력입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 또한 바디/비만 관리용 전문테라피 제품으로 과도한 셀룰라이트로 인해 불규칙하게 형성된 피부를 회복시켜주는 펩타이드를 함유한 메조테라피 및 주사형 수출용 의료기기 제품도 생산 판매하고 있습니다. 당사는 이러한 펩타이드 및 성장인자 원료의 연구개발 및 생산 역량을 기반으로 글로벌 원료 시장에서도 사업을 확대하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사 케어젠의 주요 제품·서비스는 방산, 의약품, 건강기능식품, 브랜드, 완제품(건강기능식품), 생산능력입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 또한 바디/비만 관리용 전문테라피 제품으로 과도한 셀룰라이트로 인해 불규칙하게 형성된 피부를 회복시켜주는 펩타이드를 함유한 메조테라피 및 주사형 수출용 의료기기 제품도 생산 판매하고 있습니다. 당사는 이러한 펩타이드 및 성장인자 원료의 연구개발 및 생산 역량을 기반으로 글로벌 원료 시장에서도 사업을 확대하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "전문테라피(필러, 메조)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 72.5%",
+        "revenue_share": 0.7254,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "안면",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 45.6%",
+        "revenue_share": 0.4561,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "헤어",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.1%",
+        "revenue_share": 0.2208,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "바디",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.7%",
+        "revenue_share": 0.037,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "의약품",
-      "caption": "의약품 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "bio",
-      "visual": "의약품",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "전문테라피(필러, 메조)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 72.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "건강기능식품",
-      "caption": "건강기능식품 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "consumer",
-      "visual": "건강기능식품",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "안면",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 45.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "헤어",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.1%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "바디",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

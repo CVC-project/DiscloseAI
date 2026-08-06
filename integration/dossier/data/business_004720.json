@@ -153,7 +153,15 @@
   "snippets": {
     "overview": "팜젠사이언스는 소화기·고혈압·고지혈증 치료제 등을 만드는 제약사업(매출 비중 85%)을 주력으로, 건강기능식품·뷰티 헬스케어사업과 서울 방배동 사옥 임대 등 기타사업도 함께 운영합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,730억 원으로 전년보다 1.0% 늘었지만 영업이익은 43.8% 줄었고, 관계기업(지분법 투자회사) 주식의 손상 반영으로 당기순이익이 흑자에서 약 1,166억 원 적자로 전환됐습니다. 부채비율은 33.6%로 재무 부담 자체는 크지 않은 편이지만, 투자자산 손상으로 실적 변동성이 커진 점은 살펴볼 필요가 있습니다.",
     "segment_finance": "팜젠사이언스는 소화기·고혈압·고지혈증 치료제 등을 만드는 제약사업(매출 비중 85%)을 주력으로, 건강기능식품·뷰티 헬스케어사업과 서울 방배동 사옥 임대 등 기타사업도 함께 운영합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,730억 원으로 전년보다 1.0% 늘었지만 영업이익은 43.8% 줄었고, 관계기업(지분법 투자회사) 주식의 손상 반영으로 당기순이익이 흑자에서 약 1,166억 원 적자로 전환됐습니다. 부채비율은 33.6%로 재무 부담 자체는 크지 않은 편이지만, 투자자산 손상으로 실적 변동성이 커진 점은 살펴볼 필요가 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "바르디핀",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.8%",
+        "revenue_share": 0.048,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "에소맥스정",
       "아르시딘에프정",
@@ -168,40 +176,70 @@
       "텔로디핀정",
       "크바젯정"
     ],
-    "investor_note": "팜젠사이언스는 소화기·고혈압·고지혈증 치료제 등을 만드는 제약사업(매출 비중 85%)을 주력으로, 건강기능식품·뷰티 헬스케어사업과 서울 방배동 사옥 임대 등 기타사업도 함께 운영합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,730억 원으로 전년보다 1.0% 늘었지만 영업이익은 43.8% 줄었고, 관계기업(지분법 투자회사) 주식의 손상 반영으로 당기순이익이 흑자에서 약 1,166억 원 적자로 전환됐습니다. 부채비율은 33.6%로 재무 부담 자체는 크지 않은 편이지만, 투자자산 손상으로 실적 변동성이 커진 점은 살펴볼 필요가 있습니다."
+    "investor_note": "팜젠사이언스는 소화기·고혈압·고지혈증 치료제 등을 만드는 제약사업(매출 비중 85%)을 주력으로, 건강기능식품·뷰티 헬스케어사업과 서울 방배동 사옥 임대 등 기타사업도 함께 운영합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,730억 원으로 전년보다 1.0% 늘었지만 영업이익은 43.8% 줄었고, 관계기업(지분법 투자회사) 주식의 손상 반영으로 당기순이익이 흑자에서 약 1,166억 원 적자로 전환됐습니다. 부채비율은 33.6%로 재무 부담 자체는 크지 않은 편이지만, 투자자산 손상으로 실적 변동성이 커진 점은 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "제약사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
+        "revenue_share": 0.063,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "바르디핀",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.8%",
+        "revenue_share": 0.048,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "헬스케어사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.7%",
+        "revenue_share": 0.037,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.5%",
+        "revenue_share": 0.115,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "에소맥스정",
-      "caption": "에소맥스정 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "의약품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
       "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "아르시딘에프정",
-      "caption": "아르시딘에프정 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "바르디핀",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "바르디핀정",
-      "caption": "바르디핀정 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "헬스케어사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "리바틴정",
-      "caption": "리바틴정 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "기타사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -155,24 +155,32 @@
     "segment_finance": "하림지주는 곡물(해운)-사료-축산-도축가공-식품제조-유통에 이르는 식품 가치사슬을 통합 관리하는 지주회사로, 팬오션(해운, 37%), 하림·한강식품 등 식품(27%), 선진·팜스코 등 사료·축산(26%), 엔에스쇼핑(유통, 5%) 등 계열사를 두고 있습니다. 닭고기 가공과 브랜드 돈육, 사료 제조 판매, 건화물 해상운송 물량에서 국내 1위를 지키고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 13조 2,148억 원으로 전년 대비 7.7% 늘었고 영업이익은 8,874억 원으로 15.9%, 당기순이익은 5,137억 원으로 193.9% 크게 증가했습니다. 부채비율은 170.9%로 다소 높은 편입니다.",
     "segment_breakdown": [
       {
-        "name": "운송(팬오션)",
-        "desc": "벌크·컨테이너 등 해상운송 및 곡물사업",
-        "revenue_share": 0.3679
+        "name": "육계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.7%",
+        "revenue_share": 0.5967,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "사료 및 축산",
-        "desc": "배합사료 제조 및 양돈·가금 축산(선진·팜스코 등)",
-        "revenue_share": 0.259
+        "name": "육가공",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.4%",
+        "revenue_share": 0.1337,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "유통",
-        "desc": "TV홈쇼핑·전자상거래(엔에스쇼핑)",
-        "revenue_share": 0.0451
+        "name": "사료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.8%",
+        "revenue_share": 0.0376,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "지주업 및 투자",
-        "desc": "자회사 관리 및 투자",
-        "revenue_share": 0.0069
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.5%",
+        "revenue_share": 0.0454,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -183,32 +191,62 @@
       "홈쇼핑(NS샵)",
       "부동산개발(하림산업 양재동)"
     ],
-    "investor_note": "하림지주는 곡물(해운)-사료-축산-도축가공-식품제조-유통에 이르는 식품 가치사슬을 통합 관리하는 지주회사로, 팬오션(해운, 37%), 하림·한강식품 등 식품(27%), 선진·팜스코 등 사료·축산(26%), 엔에스쇼핑(유통, 5%) 등 계열사를 두고 있습니다. 닭고기 가공과 브랜드 돈육, 사료 제조 판매, 건화물 해상운송 물량에서 국내 1위를 지키고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 13조 2,148억 원으로 전년 대비 7.7% 늘었고 영업이익은 8,874억 원으로 15.9%, 당기순이익은 5,137억 원으로 193.9% 크게 증가했습니다. 부채비율은 170.9%로 다소 높은 편입니다."
+    "investor_note": "하림지주는 곡물(해운)-사료-축산-도축가공-식품제조-유통에 이르는 식품 가치사슬을 통합 관리하는 지주회사로, 팬오션(해운, 37%), 하림·한강식품 등 식품(27%), 선진·팜스코 등 사료·축산(26%), 엔에스쇼핑(유통, 5%) 등 계열사를 두고 있습니다. 닭고기 가공과 브랜드 돈육, 사료 제조 판매, 건화물 해상운송 물량에서 국내 1위를 지키고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 13조 2,148억 원으로 전년 대비 7.7% 늘었고 영업이익은 8,874억 원으로 15.9%, 당기순이익은 5,137억 원으로 193.9% 크게 증가했습니다. 부채비율은 170.9%로 다소 높은 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "육계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.7%",
+        "revenue_share": 0.5967,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "육가공",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.4%",
+        "revenue_share": 0.1337,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "사료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.8%",
+        "revenue_share": 0.0376,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.5%",
+        "revenue_share": 0.0454,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "운송(팬오션)",
-      "caption": "벌크·컨테이너 등 해상운송 및 곡물사업",
+      "title": "육계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.7%",
       "kind": "service",
-      "visual": "운송",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "사료 및 축산",
-      "caption": "배합사료 제조 및 양돈·가금 축산(선진·팜스코 등)",
+      "title": "육가공",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.4%",
       "kind": "service",
-      "visual": "사료",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "사료",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.8%",
+      "kind": "consumer",
+      "visual": "FEED",
       "image": "../data/business_images/business_image_food_feed.svg",
       "image_source": "Local visual"
-    },
-    {
-      "title": "유통",
-      "caption": "TV홈쇼핑·전자상거래(엔에스쇼핑)",
-      "kind": "service",
-      "visual": "유통",
-      "image": "../data/business_images/business_image_141eab6519656e30.jpg",
-      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

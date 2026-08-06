@@ -156,28 +156,24 @@
     "segment_breakdown": [
       {
         "name": "백화점업",
-        "desc": "신세계백화점 등 백화점 판매",
-        "revenue_share": 0.384
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.4%",
+        "revenue_share": 0.384,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "도소매업",
-        "desc": "패션·라이프스타일·화장품(신세계인터내셔날)·가구(신세계까사)·홈쇼핑(신세계라이브쇼핑)",
-        "revenue_share": 0.281
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.6%",
+        "revenue_share": 0.196,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "면세업",
-        "desc": "신세계디에프 면세점 사업",
-        "revenue_share": 0.333
-      },
-      {
-        "name": "부동산 및 자동차여객터미널업",
-        "desc": "센트럴시티 등 부동산 임대·터미널 운영",
-        "revenue_share": 0.037
-      },
-      {
-        "name": "호텔업",
-        "desc": "JW메리어트 호텔서울·호텔오노마 대전 등 관광호텔·리조트",
-        "revenue_share": 0.022
+        "name": "가구소매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.6%",
+        "revenue_share": 0.036,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -190,39 +186,69 @@
       "호텔오노마 대전",
       "신세계디에프(면세점)"
     ],
-    "investor_note": "신세계는 백화점업(매출 비중 38%)을 주력으로, 신세계인터내셔날 등을 통한 패션·화장품 도소매업(28%), 신세계디에프 면세점(33%), 센트럴시티 등 부동산·터미널업(4%), JW메리어트 호텔서울 등 호텔업(2%)까지 아우르는 국내 대표 유통 대기업입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 6조 9,294억 원으로 전년 대비 5.5% 늘었고 영업이익도 소폭 증가했지만, 면세점·홈쇼핑 자회사 관련 자산 손상 등의 영향으로 당기순이익은 646억 원으로 65.4% 크게 줄었습니다. 부채비율은 140.9%로 다소 높은 편입니다."
+    "investor_note": "신세계는 백화점업(매출 비중 38%)을 주력으로, 신세계인터내셔날 등을 통한 패션·화장품 도소매업(28%), 신세계디에프 면세점(33%), 센트럴시티 등 부동산·터미널업(4%), JW메리어트 호텔서울 등 호텔업(2%)까지 아우르는 국내 대표 유통 대기업입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 6조 9,294억 원으로 전년 대비 5.5% 늘었고 영업이익도 소폭 증가했지만, 면세점·홈쇼핑 자회사 관련 자산 손상 등의 영향으로 당기순이익은 646억 원으로 65.4% 크게 줄었습니다. 부채비율은 140.9%로 다소 높은 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "백화점업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.4%",
+        "revenue_share": 0.384,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "도소매업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.6%",
+        "revenue_share": 0.196,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "가구소매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.6%",
+        "revenue_share": 0.036,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타통신판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.9%",
+        "revenue_share": 0.049,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "백화점업",
-      "caption": "신세계백화점 등 백화점 판매",
-      "kind": "service",
-      "visual": "백화점업",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "title": "백화점·면세점",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.4%",
+      "kind": "consumer",
+      "visual": "RETAIL",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "도소매업",
-      "caption": "패션·라이프스타일·화장품(신세계인터내셔날)·가구(신세계까사)·홈쇼핑(신세계라이브쇼핑)",
-      "kind": "consumer",
-      "visual": "도소매업",
-      "image": "../data/business_images/business_image_local_fashion.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "면세업",
-      "caption": "신세계디에프 면세점 사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.6%",
       "kind": "service",
-      "visual": "면세업",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "부동산 및 자동차여객터미널업",
-      "caption": "센트럴시티 등 부동산 임대·터미널 운영",
-      "kind": "auto",
-      "visual": "부동산",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "title": "가구소매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "기타통신판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.9%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
       "image_source": "Unsplash"
     }
   ],

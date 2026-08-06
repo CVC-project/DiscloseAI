@@ -153,7 +153,29 @@
   "snippets": {
     "overview": "비트맥스 주식회사의 주요 사업은 전자제조, 개인위치정보사업허가서, SI사업, 서비스사업 등입니다. 합병후 SI 사업부를 신설하여, 전자제조 대기업을 대상으로 고객 맞춤 수주형 디지털 지식 서비스를 제공하고 있습니다. 특히 MES(제조), PLM(개발)과 MIS(경영)정보 시스템 구축 및 운영을 통해 고객사의 제조 경영 디지털 혁신과 운영 효율성 및 생산성 증대에 기여하고 있습니다.",
     "segment_finance": "비트맥스 주식회사의 주요 사업은 전자제조, 개인위치정보사업허가서, SI사업, 서비스사업 등입니다. 합병후 SI 사업부를 신설하여, 전자제조 대기업을 대상으로 고객 맞춤 수주형 디지털 지식 서비스를 제공하고 있습니다. 특히 MES(제조), PLM(개발)과 MIS(경영)정보 시스템 구축 및 운영을 통해 고객사의 제조 경영 디지털 혁신과 운영 효율성 및 생산성 증대에 기여하고 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "AR 개발 플랫폼",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.6%",
+        "revenue_share": 0.006,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "산업용 AR 솔루션",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.4%",
+        "revenue_share": 0.004,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "디지털트윈 플랫폼",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.4%",
+        "revenue_share": 0.004,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "SSD",
       "디지털 트랜스포메이션",
@@ -168,32 +190,46 @@
       "디지털트윈 플랫폼",
       "IT 서비스(SI)"
     ],
-    "investor_note": "비트맥스 주식회사의 주요 사업은 전자제조, 개인위치정보사업허가서, SI사업, 서비스사업 등입니다. 합병후 SI 사업부를 신설하여, 전자제조 대기업을 대상으로 고객 맞춤 수주형 디지털 지식 서비스를 제공하고 있습니다. 특히 MES(제조), PLM(개발)과 MIS(경영)정보 시스템 구축 및 운영을 통해 고객사의 제조 경영 디지털 혁신과 운영 효율성 및 생산성 증대에 기여하고 있습니다."
+    "investor_note": "비트맥스 주식회사의 주요 사업은 전자제조, 개인위치정보사업허가서, SI사업, 서비스사업 등입니다. 합병후 SI 사업부를 신설하여, 전자제조 대기업을 대상으로 고객 맞춤 수주형 디지털 지식 서비스를 제공하고 있습니다. 특히 MES(제조), PLM(개발)과 MIS(경영)정보 시스템 구축 및 운영을 통해 고객사의 제조 경영 디지털 혁신과 운영 효율성 및 생산성 증대에 기여하고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "AR 개발 플랫폼",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.6%",
+        "revenue_share": 0.006,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "산업용 AR 솔루션",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.4%",
+        "revenue_share": 0.004,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "디지털트윈 플랫폼",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.4%",
+        "revenue_share": 0.004,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "IT 서비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 92.4%",
+        "revenue_share": 0.924,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "클라우드 서비스",
-      "caption": "기업이 서버와 소프트웨어를 직접 보유하지 않고 빌려 쓰도록 돕는 IT 서비스입니다.",
+      "title": "IT 서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 92.4%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_cloud.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "플랫폼 서비스",
-      "caption": "여러 이용자와 서비스를 한곳에서 연결해 반복 이용을 만드는 디지털 서비스입니다.",
-      "kind": "platform",
-      "visual": "APP",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "시스템 구축·통합",
-      "caption": "기업 업무에 필요한 서버, 네트워크, 소프트웨어를 묶어 하나의 시스템으로 구축합니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

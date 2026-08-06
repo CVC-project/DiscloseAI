@@ -155,14 +155,32 @@
     "segment_finance": "휴젤(주)의 주요 제품·서비스는 의약품, 톡신, 필러, 웰라쥬, 국내사업, 국내사업부입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사의 연결대상 종속법인인 ㈜아크로스는 지속 시간의 연장과 함께 사용 목적에 적합한 점탄성을 확보한 HA필러(Hyaluronic Acid filler) 계열 제품의 생산ㆍ판매 사업을 영위하고 있습니다. 주성분 보툴리눔 독소 A형 단백질은 당사와 같이 보툴리눔 톡신 제품을 제조하는 회사의 경우 자체적으로 생산하고 있으며 외부로부터 조달하고 있지 않습니다.그러나 보툴리눔 독소 생산균주를 보유하고 있지 않은 회사는 독소 단백질을 외부로부터 구입해야 하는데 판매처가 없기에 전 세계적으로 수급에 어려움이 존재합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "톡신, 바이오제제",
-        "desc": "톡신 관련 제품·서비스",
-        "revenue_share": null
+        "name": "Toxin",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 54.2%",
+        "revenue_share": 0.5422,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "톡신, 바이오복합제제",
-        "desc": "톡신 관련 제품·서비스",
-        "revenue_share": null
+        "name": "Filler",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.6%",
+        "revenue_share": 0.3063,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Cosmetics",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.2%",
+        "revenue_share": 0.1325,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Medical Device",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.3%",
+        "revenue_share": 0.0127,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -179,24 +197,70 @@
       "실행",
       "동남아시아"
     ],
-    "investor_note": "휴젤(주)의 주요 제품·서비스는 의약품, 톡신, 필러, 웰라쥬, 국내사업, 국내사업부입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사의 연결대상 종속법인인 ㈜아크로스는 지속 시간의 연장과 함께 사용 목적에 적합한 점탄성을 확보한 HA필러(Hyaluronic Acid filler) 계열 제품의 생산ㆍ판매 사업을 영위하고 있습니다. 주성분 보툴리눔 독소 A형 단백질은 당사와 같이 보툴리눔 톡신 제품을 제조하는 회사의 경우 자체적으로 생산하고 있으며 외부로부터 조달하고 있지 않습니다.그러나 보툴리눔 독소 생산균주를 보유하고 있지 않은 회사는 독소 단백질을 외부로부터 구입해야 하는데 판매처가 없기에 전 세계적으로 수급에 어려움이 존재합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "휴젤(주)의 주요 제품·서비스는 의약품, 톡신, 필러, 웰라쥬, 국내사업, 국내사업부입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사의 연결대상 종속법인인 ㈜아크로스는 지속 시간의 연장과 함께 사용 목적에 적합한 점탄성을 확보한 HA필러(Hyaluronic Acid filler) 계열 제품의 생산ㆍ판매 사업을 영위하고 있습니다. 주성분 보툴리눔 독소 A형 단백질은 당사와 같이 보툴리눔 톡신 제품을 제조하는 회사의 경우 자체적으로 생산하고 있으며 외부로부터 조달하고 있지 않습니다.그러나 보툴리눔 독소 생산균주를 보유하고 있지 않은 회사는 독소 단백질을 외부로부터 구입해야 하는데 판매처가 없기에 전 세계적으로 수급에 어려움이 존재합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "Toxin",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 54.2%",
+        "revenue_share": 0.5422,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Filler",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.6%",
+        "revenue_share": 0.3063,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Cosmetics",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.2%",
+        "revenue_share": 0.1325,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Medical Device",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.3%",
+        "revenue_share": 0.0127,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "국내사업부",
-      "caption": "국내사업, 국내사업부 관련 제품·서비스",
+      "title": "Toxin",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 54.2%",
       "kind": "service",
-      "visual": "국내사업부",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "톡신, 바이오제제",
-      "caption": "톡신 관련 제품·서비스",
-      "kind": "bio",
-      "visual": "톡신",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "Filler",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "Cosmetics",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "전기차·하이브리드",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.3%",
+      "kind": "auto",
+      "visual": "EV",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

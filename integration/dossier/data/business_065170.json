@@ -153,7 +153,15 @@
   "snippets": {
     "overview": "주식회사 비엘팜텍의 주요 제품·서비스는 건강기능식품, 생활건강사업, 다이어트, 비타민, 체지방감소, 에너지대사증진입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 수주상황 생활건강사업 중 방송영업 및 E-커머스의 경우 개별 소비자에게 직접 제품을 판매하는 형태로 사업을 영위하고 있으므로, 수주 관련 사항은 발생하지 않습니다. 사업으로 영위하고 있으므로 일반 제조업과 달리 원재료의 매입이 존재하지 않는 바, 매입에 대한 사항은 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "주식회사 비엘팜텍의 주요 제품·서비스는 건강기능식품, 생활건강사업, 다이어트, 비타민, 체지방감소, 에너지대사증진입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 수주상황 생활건강사업 중 방송영업 및 E-커머스의 경우 개별 소비자에게 직접 제품을 판매하는 형태로 사업을 영위하고 있으므로, 수주 관련 사항은 발생하지 않습니다. 사업으로 영위하고 있으므로 일반 제조업과 달리 원재료의 매입이 존재하지 않는 바, 매입에 대한 사항은 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "단순합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "건강기능식품",
       "생활건강사업",
@@ -168,40 +176,55 @@
       "체감다이어트 등",
       "기타사업부문"
     ],
-    "investor_note": "주식회사 비엘팜텍의 주요 제품·서비스는 건강기능식품, 생활건강사업, 다이어트, 비타민, 체지방감소, 에너지대사증진입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 수주상황 생활건강사업 중 방송영업 및 E-커머스의 경우 개별 소비자에게 직접 제품을 판매하는 형태로 사업을 영위하고 있으므로, 수주 관련 사항은 발생하지 않습니다. 사업으로 영위하고 있으므로 일반 제조업과 달리 원재료의 매입이 존재하지 않는 바, 매입에 대한 사항은 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사 비엘팜텍의 주요 제품·서비스는 건강기능식품, 생활건강사업, 다이어트, 비타민, 체지방감소, 에너지대사증진입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 수주상황 생활건강사업 중 방송영업 및 E-커머스의 경우 개별 소비자에게 직접 제품을 판매하는 형태로 사업을 영위하고 있으므로, 수주 관련 사항은 발생하지 않습니다. 사업으로 영위하고 있으므로 일반 제조업과 달리 원재료의 매입이 존재하지 않는 바, 매입에 대한 사항은 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "생활건강사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 65.7%",
+        "revenue_share": 0.657,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.3%",
+        "revenue_share": 0.343,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "단순합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "건강기능식품",
-      "caption": "건강기능식품 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
-    },
-    {
       "title": "생활건강사업",
-      "caption": "생활건강사업 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_local_default_b.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 65.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "다이어트",
-      "caption": "다이어트 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_local_default_c.svg",
-      "image_source": "Local curated visual"
+      "title": "기타사업부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.3%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "비타민",
-      "caption": "비타민 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_local_default_d.svg",
-      "image_source": "Local curated visual"
+      "title": "단순합계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

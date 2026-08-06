@@ -155,14 +155,32 @@
     "segment_finance": "엔브이에이치코리아는 자동차 내장재(헤드라이너·도어트림 등)와 흡차음 부품을 만드는 자동차부품 사업(72%)과 반도체·바이오 클린룸 설비, 교량거더 시공을 하는 환경에너지 사업(28%)을 함께 하는 회사입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 6,238억 원으로 전년 대비 2.3% 늘었지만 영업이익과 당기순이익은 각각 218억 원, 449억 원 손실을 내며 적자로 전환했습니다. 부채비율도 371.1%로 자본 대비 빚 부담이 매우 큰 편이라 재무 상태를 주의 깊게 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "자동차부품",
-        "desc": "자동차 내장재·엔진룸 흡차음재 등 부품 제조",
-        "revenue_share": 0.715
+        "name": "자동차 부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 43.3%",
+        "revenue_share": 0.433,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "환경에너지(클린룸·교량거더)",
-        "desc": "반도체·바이오 클린룸 설비 및 교량거더 시공",
-        "revenue_share": 0.285
+        "name": "인도",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.9%",
+        "revenue_share": 0.119,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "미국",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.0%",
+        "revenue_share": 0.04,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "폴란드",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+        "revenue_share": 0.08,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,22 +192,68 @@
       "클린룸 설비(반도체·바이오)",
       "교량거더(Girder)"
     ],
-    "investor_note": "엔브이에이치코리아는 자동차 내장재(헤드라이너·도어트림 등)와 흡차음 부품을 만드는 자동차부품 사업(72%)과 반도체·바이오 클린룸 설비, 교량거더 시공을 하는 환경에너지 사업(28%)을 함께 하는 회사입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 6,238억 원으로 전년 대비 2.3% 늘었지만 영업이익과 당기순이익은 각각 218억 원, 449억 원 손실을 내며 적자로 전환했습니다. 부채비율도 371.1%로 자본 대비 빚 부담이 매우 큰 편이라 재무 상태를 주의 깊게 살펴볼 필요가 있습니다."
+    "investor_note": "엔브이에이치코리아는 자동차 내장재(헤드라이너·도어트림 등)와 흡차음 부품을 만드는 자동차부품 사업(72%)과 반도체·바이오 클린룸 설비, 교량거더 시공을 하는 환경에너지 사업(28%)을 함께 하는 회사입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 6,238억 원으로 전년 대비 2.3% 늘었지만 영업이익과 당기순이익은 각각 218억 원, 449억 원 손실을 내며 적자로 전환했습니다. 부채비율도 371.1%로 자본 대비 빚 부담이 매우 큰 편이라 재무 상태를 주의 깊게 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "자동차 부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 43.3%",
+        "revenue_share": 0.433,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "인도",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.9%",
+        "revenue_share": 0.119,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "미국",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.0%",
+        "revenue_share": 0.04,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "폴란드",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+        "revenue_share": 0.08,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "자동차부품",
-      "caption": "자동차 내장재·엔진룸 흡차음재 등 부품 제조",
+      "title": "자동차 부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 43.3%",
       "kind": "auto",
-      "visual": "자동차부품",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "환경에너지(클린룸·교량거더)",
-      "caption": "반도체·바이오 클린룸 설비 및 교량거더 시공",
-      "kind": "chip",
-      "visual": "환경에너지",
+      "title": "인도",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.9%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "미국",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.0%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "폴란드",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+      "kind": "auto",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     }

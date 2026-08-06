@@ -155,14 +155,18 @@
     "segment_finance": "신세계아이앤씨는 신세계그룹의 IT 서비스 전문기업으로, 유통업에 특화된 시스템 구축·운영(SI/SM)을 기반으로 클라우드, 셀프계산대 등 스마트리테일, AI, 전기차충전 서비스까지 사업을 넓히고 있습니다. 매출은 IT서비스 부문(약 61%)이 가장 크고, IT 장비·솔루션을 유통하는 IT유통 부문(약 29%)이 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,872억 원으로 전년 대비 9.8% 늘었고 영업이익도 32.9% 증가했지만, 당기순이익은 16.3% 줄어 영업 실적과 최종 손익의 방향이 엇갈렸습니다. 부채비율은 33.0%로 재무 부담이 크지 않은 안정적인 수준입니다.",
     "segment_breakdown": [
       {
-        "name": "IT유통",
-        "desc": "서버·스토리지·보안·모바일 등 IT장비 및 솔루션 총판 유통",
-        "revenue_share": 0.2869
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.3%",
+        "revenue_share": 0.5534,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "플그림(종속회사)",
-        "desc": "시스템 통합 구축·운영 용역",
-        "revenue_share": 0.0307
+        "name": "IT 유통",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.9%",
+        "revenue_share": 0.2791,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -178,24 +182,62 @@
       "IT 장비·솔루션 유통",
       "eCvan·eCtax 전자문서서비스"
     ],
-    "investor_note": "신세계아이앤씨는 신세계그룹의 IT 서비스 전문기업으로, 유통업에 특화된 시스템 구축·운영(SI/SM)을 기반으로 클라우드, 셀프계산대 등 스마트리테일, AI, 전기차충전 서비스까지 사업을 넓히고 있습니다. 매출은 IT서비스 부문(약 61%)이 가장 크고, IT 장비·솔루션을 유통하는 IT유통 부문(약 29%)이 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,872억 원으로 전년 대비 9.8% 늘었고 영업이익도 32.9% 증가했지만, 당기순이익은 16.3% 줄어 영업 실적과 최종 손익의 방향이 엇갈렸습니다. 부채비율은 33.0%로 재무 부담이 크지 않은 안정적인 수준입니다."
+    "investor_note": "신세계아이앤씨는 신세계그룹의 IT 서비스 전문기업으로, 유통업에 특화된 시스템 구축·운영(SI/SM)을 기반으로 클라우드, 셀프계산대 등 스마트리테일, AI, 전기차충전 서비스까지 사업을 넓히고 있습니다. 매출은 IT서비스 부문(약 61%)이 가장 크고, IT 장비·솔루션을 유통하는 IT유통 부문(약 29%)이 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,872억 원으로 전년 대비 9.8% 늘었고 영업이익도 32.9% 증가했지만, 당기순이익은 16.3% 줄어 영업 실적과 최종 손익의 방향이 엇갈렸습니다. 부채비율은 33.0%로 재무 부담이 크지 않은 안정적인 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "IT 서비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.7%",
+        "revenue_share": 0.0567,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.3%",
+        "revenue_share": 0.5534,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "IT 유통",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.9%",
+        "revenue_share": 0.2791,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "IT정보서비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.0%",
+        "revenue_share": 0.0003,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "IT유통",
-      "caption": "서버·스토리지·보안·모바일 등 IT장비 및 솔루션 총판 유통",
+      "title": "IT 서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.7%",
       "kind": "service",
-      "visual": "IT유통",
-      "image": "../data/business_images/business_image_b24ab2723180c79f.jpg",
-      "image_source": "Wikimedia Commons"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "플그림(종속회사)",
-      "caption": "시스템 통합 구축·운영 용역",
+      "title": "용역",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.3%",
       "kind": "service",
-      "visual": "플그림",
-      "image": "../data/business_images/business_image_local_default_b.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "IT 유통",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

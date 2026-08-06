@@ -155,14 +155,18 @@
     "segment_finance": "시노펙스는 반도체 공정용 필터, 스마트폰용 연성인쇄회로기판(FPCB), 혈액투석 의료기기를 함께 만드는 융합기술 기업입니다. 매출의 약 90%가 FPCB·반도체 실장(SE부문)에서 나오고, 나머지는 반도체·수처리용 필터(AMFS부문)에서 나옵니다. 반도체 CMP필터는 국내 시장점유율 1위이며, 최근에는 전량 수입에 의존하던 혈액여과기를 국산화해 서울대병원 등에 공급을 시작했습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,615억 원으로 전년보다 9.7% 늘었지만 영업이익은 67억 원으로 68.2%, 당기순이익은 71억 원으로 74.4% 큰 폭으로 줄어 수익성은 크게 나빠졌습니다. 부채비율은 51.1%로 다소 부담스러운 수준입니다.",
     "segment_breakdown": [
       {
-        "name": "SE(SmartLife Electronics) 부문",
-        "desc": "스마트폰 FPCB·반도체 실장 등 핸드폰 부품",
-        "revenue_share": 0.8945
+        "name": "SE 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 89.5%",
+        "revenue_share": 0.8945,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "AMFS(필터·수처리) 부문",
-        "desc": "반도체·산업용 필터 및 액체여과·수처리 시스템",
-        "revenue_share": 0.1055
+        "name": "AMFS 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.5%",
+        "revenue_share": 0.1055,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -176,24 +180,40 @@
       "이동형 인공신장기",
       "수처리용 분리막"
     ],
-    "investor_note": "시노펙스는 반도체 공정용 필터, 스마트폰용 연성인쇄회로기판(FPCB), 혈액투석 의료기기를 함께 만드는 융합기술 기업입니다. 매출의 약 90%가 FPCB·반도체 실장(SE부문)에서 나오고, 나머지는 반도체·수처리용 필터(AMFS부문)에서 나옵니다. 반도체 CMP필터는 국내 시장점유율 1위이며, 최근에는 전량 수입에 의존하던 혈액여과기를 국산화해 서울대병원 등에 공급을 시작했습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,615억 원으로 전년보다 9.7% 늘었지만 영업이익은 67억 원으로 68.2%, 당기순이익은 71억 원으로 74.4% 큰 폭으로 줄어 수익성은 크게 나빠졌습니다. 부채비율은 51.1%로 다소 부담스러운 수준입니다."
+    "investor_note": "시노펙스는 반도체 공정용 필터, 스마트폰용 연성인쇄회로기판(FPCB), 혈액투석 의료기기를 함께 만드는 융합기술 기업입니다. 매출의 약 90%가 FPCB·반도체 실장(SE부문)에서 나오고, 나머지는 반도체·수처리용 필터(AMFS부문)에서 나옵니다. 반도체 CMP필터는 국내 시장점유율 1위이며, 최근에는 전량 수입에 의존하던 혈액여과기를 국산화해 서울대병원 등에 공급을 시작했습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,615억 원으로 전년보다 9.7% 늘었지만 영업이익은 67억 원으로 68.2%, 당기순이익은 71억 원으로 74.4% 큰 폭으로 줄어 수익성은 크게 나빠졌습니다. 부채비율은 51.1%로 다소 부담스러운 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "SE 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 89.5%",
+        "revenue_share": 0.8945,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "AMFS 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.5%",
+        "revenue_share": 0.1055,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "SE(SmartLife Electronics) 부문",
-      "caption": "스마트폰 FPCB·반도체 실장 등 핸드폰 부품",
-      "kind": "chip",
-      "visual": "SE",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "title": "SE 부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 89.5%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "AMFS(필터·수처리) 부문",
-      "caption": "반도체·산업용 필터 및 액체여과·수처리 시스템",
-      "kind": "chip",
-      "visual": "AMFS",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "title": "AMFS 부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.5%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

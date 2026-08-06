@@ -153,7 +153,22 @@
   "snippets": {
     "overview": "주식회사 피플바이오의 주요 제품·서비스는 의약품, 제품매출, 내용, AlzOn 검사, 기타 제품, 사업개발입니다. 현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. 제품 등의 가격변동추이 당사의 진단제품은 시장에서 형성되는 공정가격이 없으며, 시장상황 및 사업파트너와의 공급 계약에 따라 판매가격이 결정되고 있습니다. ISO 13485는 의료기기의 설계, 개발, 생산, 설치 및 부가 서비스를 제공하는 조직 시스템에 대한 요구사항을 정의하고 있습니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다.",
     "segment_finance": "주식회사 피플바이오의 주요 제품·서비스는 의약품, 제품매출, 내용, AlzOn 검사, 기타 제품, 사업개발입니다. 현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. 제품 등의 가격변동추이 당사의 진단제품은 시장에서 형성되는 공정가격이 없으며, 시장상황 및 사업파트너와의 공급 계약에 따라 판매가격이 결정되고 있습니다. ISO 13485는 의료기기의 설계, 개발, 생산, 설치 및 부가 서비스를 제공하는 조직 시스템에 대한 요구사항을 정의하고 있습니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "수출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.0046,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.4%",
+        "revenue_share": 0.0945,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "의약품",
       "내용",
@@ -165,32 +180,70 @@
       "캠페인",
       "기술 서비스팀"
     ],
-    "investor_note": "주식회사 피플바이오의 주요 제품·서비스는 의약품, 제품매출, 내용, AlzOn 검사, 기타 제품, 사업개발입니다. 현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. 제품 등의 가격변동추이 당사의 진단제품은 시장에서 형성되는 공정가격이 없으며, 시장상황 및 사업파트너와의 공급 계약에 따라 판매가격이 결정되고 있습니다. ISO 13485는 의료기기의 설계, 개발, 생산, 설치 및 부가 서비스를 제공하는 조직 시스템에 대한 요구사항을 정의하고 있습니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다."
+    "investor_note": "주식회사 피플바이오의 주요 제품·서비스는 의약품, 제품매출, 내용, AlzOn 검사, 기타 제품, 사업개발입니다. 현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. 제품 등의 가격변동추이 당사의 진단제품은 시장에서 형성되는 공정가격이 없으며, 시장상황 및 사업파트너와의 공급 계약에 따라 판매가격이 결정되고 있습니다. ISO 13485는 의료기기의 설계, 개발, 생산, 설치 및 부가 서비스를 제공하는 조직 시스템에 대한 요구사항을 정의하고 있습니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다.",
+    "product_service_segments": [
+      {
+        "name": "제품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 90.1%",
+        "revenue_share": 0.9009,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "수출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.0046,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.4%",
+        "revenue_share": 0.0945,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.3%",
+        "revenue_share": 0.0028,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "의약품",
-      "caption": "의약품 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
       "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "AlzOn 검사",
-      "caption": "AlzOn 검사 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "chip",
-      "visual": "CHIP",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "사업개발",
-      "caption": "사업개발 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "- 기술협력",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

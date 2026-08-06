@@ -155,9 +155,32 @@
     "segment_finance": "(주)하이퍼코퍼레이션의 주요 사업은 바이오분석팀, 화학합성, 신약사업부문, 건강보험 등입니다. 판매 채널을 통한 직접판매와 G-마켓, 옥션,11번가,인터파크 등과 쿠팡 등의 소셜커머스 시장, On-line 쇼핑몰 및 홈쇼핑등의 경로를 통해 판매를 하고 있습니다. 가정과 회사에서 사용하는 PC 필수 제품인 마우스, 키보드, 헤드셋, 웹캠 등 다양한 제품을 판매하며, 이러한 핵심 부품의 안정적 공급을 통해 고객 가치 확대에 주력하고 있습니다.",
     "segment_breakdown": [
       {
-        "name": "건강보험",
-        "desc": "보험계약과 자산운용 중심 서비스",
-        "revenue_share": null
+        "name": "커머스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 84.8%",
+        "revenue_share": 0.8481,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "신약",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
+        "revenue_share": 0.0161,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "테크",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.4%",
+        "revenue_share": 0.0543,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "소프트웨어",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.8%",
+        "revenue_share": 0.0976,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,32 +197,70 @@
       "서비스수입",
       "IT용역서비스"
     ],
-    "investor_note": "(주)하이퍼코퍼레이션의 주요 사업은 바이오분석팀, 화학합성, 신약사업부문, 건강보험 등입니다. 판매 채널을 통한 직접판매와 G-마켓, 옥션,11번가,인터파크 등과 쿠팡 등의 소셜커머스 시장, On-line 쇼핑몰 및 홈쇼핑등의 경로를 통해 판매를 하고 있습니다. 가정과 회사에서 사용하는 PC 필수 제품인 마우스, 키보드, 헤드셋, 웹캠 등 다양한 제품을 판매하며, 이러한 핵심 부품의 안정적 공급을 통해 고객 가치 확대에 주력하고 있습니다."
+    "investor_note": "(주)하이퍼코퍼레이션의 주요 사업은 바이오분석팀, 화학합성, 신약사업부문, 건강보험 등입니다. 판매 채널을 통한 직접판매와 G-마켓, 옥션,11번가,인터파크 등과 쿠팡 등의 소셜커머스 시장, On-line 쇼핑몰 및 홈쇼핑등의 경로를 통해 판매를 하고 있습니다. 가정과 회사에서 사용하는 PC 필수 제품인 마우스, 키보드, 헤드셋, 웹캠 등 다양한 제품을 판매하며, 이러한 핵심 부품의 안정적 공급을 통해 고객 가치 확대에 주력하고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "커머스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 84.8%",
+        "revenue_share": 0.8481,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "신약",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
+        "revenue_share": 0.0161,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "테크",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.4%",
+        "revenue_share": 0.0543,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "소프트웨어",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.8%",
+        "revenue_share": 0.0976,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "신약",
-      "caption": "신약 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "title": "플랫폼 서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 84.8%",
+      "kind": "platform",
+      "visual": "PLATFORM",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "국소용 비마약성 진통제",
-      "caption": "국소용 비마약성 진통제 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "title": "의약품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
+      "kind": "bio",
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "알츠하이머병",
-      "caption": "알츠하이머병 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "테크",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.4%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "소프트웨어·솔루션",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.8%",
+      "kind": "service",
+      "visual": "SOFTWARE",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

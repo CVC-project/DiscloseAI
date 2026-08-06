@@ -153,7 +153,29 @@
   "snippets": {
     "overview": "과거 공시 기반 참고 정보로, 최근 연결 매출액은 9,453억 원으로 전년 대비 3.9% 늘었고 영업이익도 1.9% 증가했으며, 당기순이익은 224.9% 크게 늘었습니다. 다만 부채비율이 161.3%로 다소 높은 편이니 재무구조는 참고할 필요가 있습니다.",
     "segment_finance": "과거 공시 기반 참고 정보로, 최근 연결 매출액은 9,453억 원으로 전년 대비 3.9% 늘었고 영업이익도 1.9% 증가했으며, 당기순이익은 224.9% 크게 늘었습니다. 다만 부채비율이 161.3%로 다소 높은 편이니 재무구조는 참고할 필요가 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "HA",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.3%",
+        "revenue_share": 0.4629,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "BA",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.8%",
+        "revenue_share": 0.178,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "ETC",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.9%",
+        "revenue_share": 0.0095,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "세탁기 부품",
       "냉장고 부품",
@@ -165,40 +187,62 @@
       "부스바",
       "물류·유통 서비스"
     ],
-    "investor_note": "과거 공시 기반 참고 정보로, 최근 연결 매출액은 9,453억 원으로 전년 대비 3.9% 늘었고 영업이익도 1.9% 증가했으며, 당기순이익은 224.9% 크게 늘었습니다. 다만 부채비율이 161.3%로 다소 높은 편이니 재무구조는 참고할 필요가 있습니다."
+    "investor_note": "과거 공시 기반 참고 정보로, 최근 연결 매출액은 9,453억 원으로 전년 대비 3.9% 늘었고 영업이익도 1.9% 증가했으며, 당기순이익은 224.9% 크게 늘었습니다. 다만 부채비율이 161.3%로 다소 높은 편이니 재무구조는 참고할 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "HA",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.3%",
+        "revenue_share": 0.4629,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "BA",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.8%",
+        "revenue_share": 0.178,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "물류서비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.0%",
+        "revenue_share": 0.3496,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "ETC",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.9%",
+        "revenue_share": 0.0095,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "세탁기 부품",
-      "caption": "세탁기 부품 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "HA",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.3%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "냉장고 부품",
-      "caption": "냉장고 부품 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "BA",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.8%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "청소기 부품",
-      "caption": "청소기 부품 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "물류서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "로봇청소기(Lemmy)",
-      "caption": "로봇청소기(Lemmy) 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_robot.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

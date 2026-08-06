@@ -153,7 +153,29 @@
   "snippets": {
     "overview": "SP삼화(옛 삼화페인트공업)는 건축용·공업용 도료를 만드는 종합 도료 제조사로 매출의 약 98%가 도료·화학제품 부문에서 나오며, IT서비스·운송주선·투자자문 등 계열사업도 함께 영위합니다. 국내 매출이 81%, 해외 매출이 19%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,170억 원으로 전년 대비 1.8% 줄었고 영업이익과 순이익 모두 77~95억 원 수준으로 각각 49.7% 감소했습니다. 부채비율은 82.3%로 다소 높은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다.",
     "segment_finance": "SP삼화(옛 삼화페인트공업)는 건축용·공업용 도료를 만드는 종합 도료 제조사로 매출의 약 98%가 도료·화학제품 부문에서 나오며, IT서비스·운송주선·투자자문 등 계열사업도 함께 영위합니다. 국내 매출이 81%, 해외 매출이 19%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,170억 원으로 전년 대비 1.8% 줄었고 영업이익과 순이익 모두 77~95억 원 수준으로 각각 49.7% 감소했습니다. 부채비율은 82.3%로 다소 높은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.5%",
+        "revenue_share": 0.2654,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임가공매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.0047,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.001,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "건축용 도료",
       "공업용 도료",
@@ -161,24 +183,46 @@
       "운송주선",
       "투자자문"
     ],
-    "investor_note": "SP삼화(옛 삼화페인트공업)는 건축용·공업용 도료를 만드는 종합 도료 제조사로 매출의 약 98%가 도료·화학제품 부문에서 나오며, IT서비스·운송주선·투자자문 등 계열사업도 함께 영위합니다. 국내 매출이 81%, 해외 매출이 19%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,170억 원으로 전년 대비 1.8% 줄었고 영업이익과 순이익 모두 77~95억 원 수준으로 각각 49.7% 감소했습니다. 부채비율은 82.3%로 다소 높은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다."
+    "investor_note": "SP삼화(옛 삼화페인트공업)는 건축용·공업용 도료를 만드는 종합 도료 제조사로 매출의 약 98%가 도료·화학제품 부문에서 나오며, IT서비스·운송주선·투자자문 등 계열사업도 함께 영위합니다. 국내 매출이 81%, 해외 매출이 19%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,170억 원으로 전년 대비 1.8% 줄었고 영업이익과 순이익 모두 77~95억 원 수준으로 각각 49.7% 감소했습니다. 부채비율은 82.3%로 다소 높은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "도료 및화학제품제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 70.7%",
+        "revenue_share": 0.7065,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.5%",
+        "revenue_share": 0.2654,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임가공매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.0047,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.001,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "도료 및 화학제품 제조",
-      "caption": "건축용·공업용 도료 생산·판매",
+      "title": "도료 및화학제품제조",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 70.7%",
       "kind": "material",
-      "visual": "도료",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "IT 서비스 등",
-      "caption": "정보시스템 구축·관리·컨설팅, 운송주선, 투자자문",
-      "kind": "securities",
-      "visual": "IT",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

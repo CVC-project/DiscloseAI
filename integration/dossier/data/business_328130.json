@@ -137,7 +137,22 @@
   "snippets": {
     "overview": "주식회사 루닛의 주요 제품·서비스는 Lunit INSIGHT, 완료, 마케팅 활동, 조달청, [제품 개요]입니다. 당사는 암 분야 임상시험의 높은 시장성에 주목하여, Lunit SCOPE 제품군을 연구용으로 판매하고 있습니다. 종속회사는 사업 구조상 소프트웨어 개발 및 서비스 공급을 주업으로 하고 있으므로, 일반적인 제조업 형태의 생산설비를 구비하고 있지 않습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "주식회사 루닛의 주요 제품·서비스는 Lunit INSIGHT, 완료, 마케팅 활동, 조달청, [제품 개요]입니다. 당사는 암 분야 임상시험의 높은 시장성에 주목하여, Lunit SCOPE 제품군을 연구용으로 판매하고 있습니다. 종속회사는 사업 구조상 소프트웨어 개발 및 서비스 공급을 주업으로 하고 있으므로, 일반적인 제조업 형태의 생산설비를 구비하고 있지 않습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "CancerScreening",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 81.2%",
+        "revenue_share": 0.8116,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Oncology",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.2%",
+        "revenue_share": 0.1215,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "Lunit INSIGHT",
       "완료",
@@ -145,40 +160,40 @@
       "조달청",
       "[제품 개요]"
     ],
-    "investor_note": "주식회사 루닛의 주요 제품·서비스는 Lunit INSIGHT, 완료, 마케팅 활동, 조달청, [제품 개요]입니다. 당사는 암 분야 임상시험의 높은 시장성에 주목하여, Lunit SCOPE 제품군을 연구용으로 판매하고 있습니다. 종속회사는 사업 구조상 소프트웨어 개발 및 서비스 공급을 주업으로 하고 있으므로, 일반적인 제조업 형태의 생산설비를 구비하고 있지 않습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사 루닛의 주요 제품·서비스는 Lunit INSIGHT, 완료, 마케팅 활동, 조달청, [제품 개요]입니다. 당사는 암 분야 임상시험의 높은 시장성에 주목하여, Lunit SCOPE 제품군을 연구용으로 판매하고 있습니다. 종속회사는 사업 구조상 소프트웨어 개발 및 서비스 공급을 주업으로 하고 있으므로, 일반적인 제조업 형태의 생산설비를 구비하고 있지 않습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "CancerScreening",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 81.2%",
+        "revenue_share": 0.8116,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Oncology",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.2%",
+        "revenue_share": 0.1215,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "시스템 구축·통합",
-      "caption": "기업 업무에 필요한 서버, 네트워크, 소프트웨어를 묶어 하나의 시스템으로 구축합니다.",
+      "title": "CancerScreening",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 81.2%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "완료",
-      "caption": "완료 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "Oncology",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.2%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "마케팅 활동",
-      "caption": "마케팅 활동 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "조달청",
-      "caption": "조달청 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

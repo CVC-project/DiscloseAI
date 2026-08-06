@@ -153,7 +153,29 @@
   "snippets": {
     "overview": "최근에는 거래처들이 플랫폼사, 게임회사, 엔터사 등으로 다변화됨에 따라 당사가 직접 영업하여 수주하는 프로젝트들이 늘어나고 있습니다. 특히, H**ACHI 방송카메라 등 장비의 독점 수입 총판으로 국내 판매 및 유지보수(A/S)하고 있습니다.- 판매조건당사 및 주요종속회사는 국내를 포함한 글로벌 거래처 및 기업/공공사업자들과 거래하고 있습니다.",
     "segment_finance": "최근에는 거래처들이 플랫폼사, 게임회사, 엔터사 등으로 다변화됨에 따라 당사가 직접 영업하여 수주하는 프로젝트들이 늘어나고 있습니다. 특히, H**ACHI 방송카메라 등 장비의 독점 수입 총판으로 국내 판매 및 유지보수(A/S)하고 있습니다.- 판매조건당사 및 주요종속회사는 국내를 포함한 글로벌 거래처 및 기업/공공사업자들과 거래하고 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "콘텐츠 제작(주1)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 79.6%",
+        "revenue_share": 0.796,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "영상 기획 제작(주2)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.9%",
+        "revenue_share": 0.109,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "장비판매(주3)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
+        "revenue_share": 0.016,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "방송장비 상품",
       "- 상품",
@@ -167,40 +189,55 @@
       "N*CUniversal",
       "M*G 스피어"
     ],
-    "investor_note": "최근에는 거래처들이 플랫폼사, 게임회사, 엔터사 등으로 다변화됨에 따라 당사가 직접 영업하여 수주하는 프로젝트들이 늘어나고 있습니다. 특히, H**ACHI 방송카메라 등 장비의 독점 수입 총판으로 국내 판매 및 유지보수(A/S)하고 있습니다.- 판매조건당사 및 주요종속회사는 국내를 포함한 글로벌 거래처 및 기업/공공사업자들과 거래하고 있습니다."
+    "investor_note": "최근에는 거래처들이 플랫폼사, 게임회사, 엔터사 등으로 다변화됨에 따라 당사가 직접 영업하여 수주하는 프로젝트들이 늘어나고 있습니다. 특히, H**ACHI 방송카메라 등 장비의 독점 수입 총판으로 국내 판매 및 유지보수(A/S)하고 있습니다.- 판매조건당사 및 주요종속회사는 국내를 포함한 글로벌 거래처 및 기업/공공사업자들과 거래하고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "콘텐츠 제작(주1)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 79.6%",
+        "revenue_share": 0.796,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "영상 기획 제작(주2)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.9%",
+        "revenue_share": 0.109,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "장비판매(주3)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
+        "revenue_share": 0.016,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "방송장비 상품",
-      "caption": "방송장비 상품 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "title": "콘텐츠 제작(주1)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 79.6%",
+      "kind": "platform",
+      "visual": "APP",
+      "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "상품",
-      "caption": "- 상품 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "영상 기획 제작(주2)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.9%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "판매전략",
-      "caption": "판매전략 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "장비판매(주3)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "광고",
-      "caption": "광고 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_content.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

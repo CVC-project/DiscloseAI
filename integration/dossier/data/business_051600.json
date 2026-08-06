@@ -155,29 +155,32 @@
     "segment_finance": "한전KPS는 한국전력공사가 설립한 발전설비 정비 전문기업으로, 원자력·양수발전 정비가 매출의 39%, 화력발전 정비가 34%를 차지하고 송변전설비 정비, 해외 발전설비 운전·정비 등으로 사업을 넓혀가고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 5,765억 원으로 전년 대비 1.2% 늘었지만 영업이익은 33.1%, 당기순이익은 27.9% 각각 줄어 수익성이 둔화됐습니다. 감사인은 정비공사의 진행률에 따라 매출을 나눠 인식하는 방식(원가기준 투입법)을 핵심감사사항으로 짚었습니다. 부채비율은 26.6%로 낮은 편이라 재무구조는 안정적입니다.",
     "segment_breakdown": [
       {
-        "name": "원자력/양수",
-        "desc": "국내 원자력·양수발전소 정비",
-        "revenue_share": 0.394
-      },
-      {
         "name": "화력",
-        "desc": "국내 화력발전소 정비",
-        "revenue_share": 0.337
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.2%",
+        "revenue_share": 0.3419,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "해외",
-        "desc": "해외 발전설비 운전·정비",
-        "revenue_share": 0.108
-      },
-      {
-        "name": "대외",
-        "desc": "한전 계열 외 국내 발전설비 정비, 신재생에너지 사업",
-        "revenue_share": 0.081
+        "name": "원자력/양수",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.0%",
+        "revenue_share": 0.4,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "송변전",
-        "desc": "송전선로·HVDC 변환설비 유지정비",
-        "revenue_share": 0.07
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.1%",
+        "revenue_share": 0.0713,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "대외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.2%",
+        "revenue_share": 0.082,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -189,24 +192,70 @@
       "HVDC 변환설비 정비",
       "해외 발전설비 운전·정비"
     ],
-    "investor_note": "한전KPS는 한국전력공사가 설립한 발전설비 정비 전문기업으로, 원자력·양수발전 정비가 매출의 39%, 화력발전 정비가 34%를 차지하고 송변전설비 정비, 해외 발전설비 운전·정비 등으로 사업을 넓혀가고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 5,765억 원으로 전년 대비 1.2% 늘었지만 영업이익은 33.1%, 당기순이익은 27.9% 각각 줄어 수익성이 둔화됐습니다. 감사인은 정비공사의 진행률에 따라 매출을 나눠 인식하는 방식(원가기준 투입법)을 핵심감사사항으로 짚었습니다. 부채비율은 26.6%로 낮은 편이라 재무구조는 안정적입니다."
+    "investor_note": "한전KPS는 한국전력공사가 설립한 발전설비 정비 전문기업으로, 원자력·양수발전 정비가 매출의 39%, 화력발전 정비가 34%를 차지하고 송변전설비 정비, 해외 발전설비 운전·정비 등으로 사업을 넓혀가고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 5,765억 원으로 전년 대비 1.2% 늘었지만 영업이익은 33.1%, 당기순이익은 27.9% 각각 줄어 수익성이 둔화됐습니다. 감사인은 정비공사의 진행률에 따라 매출을 나눠 인식하는 방식(원가기준 투입법)을 핵심감사사항으로 짚었습니다. 부채비율은 26.6%로 낮은 편이라 재무구조는 안정적입니다.",
+    "product_service_segments": [
+      {
+        "name": "화력",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.2%",
+        "revenue_share": 0.3419,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "원자력/양수",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.0%",
+        "revenue_share": 0.4,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "송변전",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.1%",
+        "revenue_share": 0.0713,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "대외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.2%",
+        "revenue_share": 0.082,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "원자력/양수",
-      "caption": "국내 원자력·양수발전소 정비",
-      "kind": "power",
-      "visual": "원자력",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "title": "화력",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.2%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "화력",
-      "caption": "국내 화력발전소 정비",
-      "kind": "power",
-      "visual": "화력",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "title": "원자력/양수",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.0%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "송변전",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.1%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "대외",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.2%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

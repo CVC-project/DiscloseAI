@@ -153,7 +153,15 @@
   "snippets": {
     "overview": "에스지이(주)의 주요 사업은 사업명, VCM 감축사업, SG의 레미콘사업부문 포괄양도, 건설신기술 등입니다. 민수는 일반 매출과 동일하게 수요자와 계약자가 동일하며, 납품도 계약자에게 이루어지고 있습니다. 판매 및 관리 아스콘은 수출 등 장거리 납품이 사실상 불가능한 제품적 특성으로 인해 내수시장 판매에 의존하는 제품입니다.",
     "segment_finance": "에스지이(주)의 주요 사업은 사업명, VCM 감축사업, SG의 레미콘사업부문 포괄양도, 건설신기술 등입니다. 민수는 일반 매출과 동일하게 수요자와 계약자가 동일하며, 납품도 계약자에게 이루어지고 있습니다. 판매 및 관리 아스콘은 수출 등 장거리 납품이 사실상 불가능한 제품적 특성으로 인해 내수시장 판매에 의존하는 제품입니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "개질아스콘",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.5%",
+        "revenue_share": 0.055,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "원유",
       "아스콘",
@@ -167,40 +175,46 @@
       "개질AP의 개발",
       "칼라아스콘"
     ],
-    "investor_note": "에스지이(주)의 주요 사업은 사업명, VCM 감축사업, SG의 레미콘사업부문 포괄양도, 건설신기술 등입니다. 민수는 일반 매출과 동일하게 수요자와 계약자가 동일하며, 납품도 계약자에게 이루어지고 있습니다. 판매 및 관리 아스콘은 수출 등 장거리 납품이 사실상 불가능한 제품적 특성으로 인해 내수시장 판매에 의존하는 제품입니다."
+    "investor_note": "에스지이(주)의 주요 사업은 사업명, VCM 감축사업, SG의 레미콘사업부문 포괄양도, 건설신기술 등입니다. 민수는 일반 매출과 동일하게 수요자와 계약자가 동일하며, 납품도 계약자에게 이루어지고 있습니다. 판매 및 관리 아스콘은 수출 등 장거리 납품이 사실상 불가능한 제품적 특성으로 인해 내수시장 판매에 의존하는 제품입니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 66.4%",
+        "revenue_share": 0.664,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "개질아스콘",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.5%",
+        "revenue_share": 0.055,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 71.9%",
+        "revenue_share": 0.719,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품 및 공사매출(기타매출 포함)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.1%",
+        "revenue_share": 0.281,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "원유",
-      "caption": "원유 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "개질아스콘",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.5%",
       "kind": "material",
       "visual": "MAT",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "아스콘",
-      "caption": "아스콘 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "년도",
-      "caption": "년도 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "생산량",
-      "caption": "생산량 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

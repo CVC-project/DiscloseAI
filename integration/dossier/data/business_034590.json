@@ -155,9 +155,18 @@
     "segment_finance": "인천도시가스는 인천광역시 일부와 경기도 김포시 일부 지역에서 독점적으로 도시가스를 공급하는 공익적 성격의 회사로, 한국가스공사로부터 천연가스를 도매로 구매해 84만여 세대에 재판매합니다. 매출 구성은 취사·난방용 주택용이 36%로 가장 크고, 연료전지 발전용이 31%, 산업용이 18%를 차지합니다. 요금은 정부·지자체 승인을 받는 공공요금 체계라 실적이 비교적 안정적인 편입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 9,629억 원으로 전년 대비 2.1% 늘었지만, 영업이익은 191억 원으로 1.4%, 당기순이익도 191억 원으로 0.5% 각각 소폭 줄었습니다. 부채비율은 88.4%로 재무구조는 양호한 편입니다.",
     "segment_breakdown": [
       {
-        "name": "도시가스 공급",
-        "desc": "인천·김포 일부 지역 독점 공급권역 내 천연가스 공급",
-        "revenue_share": 1
+        "name": "도시가스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매출 합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -168,40 +177,32 @@
       "도시가스(연료전지 발전용)",
       "도시가스(열병합 발전용)"
     ],
-    "investor_note": "인천도시가스는 인천광역시 일부와 경기도 김포시 일부 지역에서 독점적으로 도시가스를 공급하는 공익적 성격의 회사로, 한국가스공사로부터 천연가스를 도매로 구매해 84만여 세대에 재판매합니다. 매출 구성은 취사·난방용 주택용이 36%로 가장 크고, 연료전지 발전용이 31%, 산업용이 18%를 차지합니다. 요금은 정부·지자체 승인을 받는 공공요금 체계라 실적이 비교적 안정적인 편입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 9,629억 원으로 전년 대비 2.1% 늘었지만, 영업이익은 191억 원으로 1.4%, 당기순이익도 191억 원으로 0.5% 각각 소폭 줄었습니다. 부채비율은 88.4%로 재무구조는 양호한 편입니다."
+    "investor_note": "인천도시가스는 인천광역시 일부와 경기도 김포시 일부 지역에서 독점적으로 도시가스를 공급하는 공익적 성격의 회사로, 한국가스공사로부터 천연가스를 도매로 구매해 84만여 세대에 재판매합니다. 매출 구성은 취사·난방용 주택용이 36%로 가장 크고, 연료전지 발전용이 31%, 산업용이 18%를 차지합니다. 요금은 정부·지자체 승인을 받는 공공요금 체계라 실적이 비교적 안정적인 편입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 9,629억 원으로 전년 대비 2.1% 늘었지만, 영업이익은 191억 원으로 1.4%, 당기순이익도 191억 원으로 0.5% 각각 소폭 줄었습니다. 부채비율은 88.4%로 재무구조는 양호한 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "도시가스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매출 합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "도시가스 공급",
-      "caption": "인천·김포 일부 지역 독점 공급권역 내 천연가스 공급",
+      "title": "도시가스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
       "kind": "service",
-      "visual": "도시가스",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "도시가스(주택용 취사·난방)",
-      "caption": "도시가스(주택용 취사·난방) 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "도시가스",
-      "image": "../data/business_images/business_image_local_housing.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "도시가스(영업·업무용 냉난방)",
-      "caption": "도시가스(영업·업무용 냉난방) 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "도시가스",
-      "image": "../data/business_images/business_image_local_default_c.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "도시가스(산업용)",
-      "caption": "도시가스(산업용) 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "도시가스",
-      "image": "../data/business_images/business_image_local_default_d.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

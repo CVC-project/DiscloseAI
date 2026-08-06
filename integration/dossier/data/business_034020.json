@@ -111,23 +111,24 @@
     "segment_breakdown": [
       {
         "name": "두산에너빌리티",
-        "desc": "원자력·복합화력 발전설비 제작 및 EPC, 해상풍력 기자재 공급",
-        "revenue_share": 0.4566
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 45.7%",
+        "revenue_share": 0.4566,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "두산밥캣",
-        "desc": "소형 건설기계, 산업차량(지게차), 유압기기 제조 및 판매",
-        "revenue_share": 0.5154
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.5%",
+        "revenue_share": 0.5154,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "두산퓨얼셀",
-        "desc": "발전용 연료전지 기자재 공급 및 장기유지보수 서비스",
-        "revenue_share": 0.0245
-      },
-      {
-        "name": "기타(두산큐벡스)",
-        "desc": "골프장 운영 및 위탁운영 사업",
-        "revenue_share": 0.0035
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.5%",
+        "revenue_share": 0.0245,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "investor_note": "두산에너빌리티는 발전설비와 산업기계를 만드는 대형 중공업 회사입니다. 원자로·가스터빈 같은 발전 설비와 해상풍력 기자재를 공급하는 '두산에너빌리티' 부문(매출의 46%)과 지게차·소형 건설기계를 파는 '두산밥캣' 부문(매출의 52%)이 주력입니다. 지난해 매출은 17조 원으로 전년보다 5% 늘었지만, 원재료비 상승과 비용 증가로 영업이익(회사가 본업으로 버는 돈)은 오히려 25% 줄어들었습니다. 순이익(최종 남은 돈)도 847억 원으로 24% 감소했는데, 이는 원가 부담이 매출 증가를 따라가지 못했기 때문입니다. 부채비율이 129%로 높아(부채가 자본보다 많다는 뜻), 재무 구조 개선이 과제입니다. 과거 공시 기반 참고 정보입니다.",
@@ -146,31 +147,54 @@
       "담수설비"
     ],
     "raw_moves": [],
-    "utilization": []
+    "utilization": [],
+    "product_service_segments": [
+      {
+        "name": "두산에너빌리티",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 45.7%",
+        "revenue_share": 0.4566,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "두산밥캣",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.5%",
+        "revenue_share": 0.5154,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "두산퓨얼셀",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.5%",
+        "revenue_share": 0.0245,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "원전",
-      "caption": "원전 주기기와 서비스 수주가 핵심 성장 축입니다.",
-      "kind": "energy",
-      "visual": "NUCLEAR",
+      "title": "두산에너빌리티",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 45.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
       "image": "../data/business_images/business_image_1805fba8159acac6.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "가스터빈",
-      "caption": "발전용 터빈과 친환경 발전 설비 수요를 봅니다.",
-      "kind": "factory",
-      "visual": "TURBINE",
-      "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
-      "image_source": "Wikimedia Commons"
+      "title": "두산밥캣",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_1805fba8159acac6.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "플랜트",
-      "caption": "대형 발전·산업 플랜트 프로젝트의 원가 관리가 중요합니다.",
-      "kind": "factory",
-      "visual": "PLANT",
-      "image": "../data/business_images/business_image_5184e050831a4460.avif",
+      "title": "두산퓨얼셀",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_1805fba8159acac6.avif",
       "image_source": "Unsplash"
     }
   ],

@@ -155,19 +155,11 @@
     "segment_finance": "한국지역난방공사는 전국 19개 사업장에서 약 191만 세대 공동주택과 3천여 건물에 온수·난방(열)을 공급하고, 열병합발전과 태양광 등 신재생에너지로 만든 전기도 판매하는 집단에너지 공기업입니다. 매출은 전기(약 53%)와 열(약 44%)이 대부분을 차지하고, 냉수(지역냉방)가 나머지를 채웁니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 3조 9,981억 원으로 전년 대비 12.0% 늘었고 영업이익과 당기순이익 모두 61.5%씩 크게 증가했습니다. 다만 부채비율은 257.6%로 자본보다 빚이 훨씬 많은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "열(지역난방)",
-        "desc": "공동주택·건물에 온수·난방열 공급",
-        "revenue_share": 0.4419
-      },
-      {
-        "name": "전기",
-        "desc": "열병합발전·신재생에너지·구역전기 판매",
-        "revenue_share": 0.5348
-      },
-      {
-        "name": "냉수(지역냉방)",
-        "desc": "건물에 냉방용 냉수 공급",
-        "revenue_share": 0.0068
+        "name": "매출비중",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 52.9%",
+        "revenue_share": 0.5294,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -178,32 +170,49 @@
       "구역전기사업",
       "집단에너지 공급 인프라"
     ],
-    "investor_note": "한국지역난방공사는 전국 19개 사업장에서 약 191만 세대 공동주택과 3천여 건물에 온수·난방(열)을 공급하고, 열병합발전과 태양광 등 신재생에너지로 만든 전기도 판매하는 집단에너지 공기업입니다. 매출은 전기(약 53%)와 열(약 44%)이 대부분을 차지하고, 냉수(지역냉방)가 나머지를 채웁니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 3조 9,981억 원으로 전년 대비 12.0% 늘었고 영업이익과 당기순이익 모두 61.5%씩 크게 증가했습니다. 다만 부채비율은 257.6%로 자본보다 빚이 훨씬 많은 편이라 재무 부담을 살펴볼 필요가 있습니다."
+    "investor_note": "한국지역난방공사는 전국 19개 사업장에서 약 191만 세대 공동주택과 3천여 건물에 온수·난방(열)을 공급하고, 열병합발전과 태양광 등 신재생에너지로 만든 전기도 판매하는 집단에너지 공기업입니다. 매출은 전기(약 53%)와 열(약 44%)이 대부분을 차지하고, 냉수(지역냉방)가 나머지를 채웁니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 3조 9,981억 원으로 전년 대비 12.0% 늘었고 영업이익과 당기순이익 모두 61.5%씩 크게 증가했습니다. 다만 부채비율은 257.6%로 자본보다 빚이 훨씬 많은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "매출비중",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 52.9%",
+        "revenue_share": 0.5294,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "열(지역난방)",
-      "caption": "공동주택·건물에 온수·난방열 공급",
+      "title": "지역난방(온수·난방열)",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
       "kind": "service",
-      "visual": "열",
-      "image": "../data/business_images/business_image_local_housing.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "전기",
-      "caption": "열병합발전·신재생에너지·구역전기 판매",
+      "title": "지역냉방(냉수)",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "전력기기·발전",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
       "kind": "power",
-      "visual": "전기",
-      "image": "../data/business_images/business_image_local_power.svg",
-      "image_source": "Local curated visual"
+      "visual": "POWER",
+      "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "냉수(지역냉방)",
-      "caption": "건물에 냉방용 냉수 공급",
-      "kind": "service",
-      "visual": "냉수",
-      "image": "../data/business_images/business_image_local_default_c.svg",
-      "image_source": "Local curated visual"
+      "title": "신재생에너지",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
+      "kind": "power",
+      "visual": "RENEWABLE",
+      "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

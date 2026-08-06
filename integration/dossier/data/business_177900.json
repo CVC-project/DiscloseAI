@@ -105,7 +105,22 @@
   "snippets": {
     "overview": "쓰리에이로직스(주)의 주요 제품·서비스는 HBM, Foundry, 의약품, SoC(System on Chip), GPU, NPU입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 주요제품 가격변동 추이 당사는 시스템 반도체 사업을 영위하고 있으며, 당사가 판매하는 제품은 고객사별로 요구되는 사양에 따라 제품의 제원과 가격이 상이합니다. 매출처 등 현황 당사의 제품은 고객의 발주에 따라 납품이 이루어지며, 당사의 제품은 최종 수요자가 장기간에 걸친 구매를 하는 품목이 아니기 때문에 수주계약 내역은 존재하지 않습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "쓰리에이로직스(주)의 주요 제품·서비스는 HBM, Foundry, 의약품, SoC(System on Chip), GPU, NPU입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 주요제품 가격변동 추이 당사는 시스템 반도체 사업을 영위하고 있으며, 당사가 판매하는 제품은 고객사별로 요구되는 사양에 따라 제품의 제원과 가격이 상이합니다. 매출처 등 현황 당사의 제품은 고객의 발주에 따라 납품이 이루어지며, 당사의 제품은 최종 수요자가 장기간에 걸친 구매를 하는 품목이 아니기 때문에 수주계약 내역은 존재하지 않습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "NFC Reader IC",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.3%",
+        "revenue_share": 0.2426,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총 매 출 액",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "HBM",
       "Foundry",
@@ -120,24 +135,55 @@
       "[제품의 생산공정도]",
       "파운드리(Foundry)"
     ],
-    "investor_note": "쓰리에이로직스(주)의 주요 제품·서비스는 HBM, Foundry, 의약품, SoC(System on Chip), GPU, NPU입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 주요제품 가격변동 추이 당사는 시스템 반도체 사업을 영위하고 있으며, 당사가 판매하는 제품은 고객사별로 요구되는 사양에 따라 제품의 제원과 가격이 상이합니다. 매출처 등 현황 당사의 제품은 고객의 발주에 따라 납품이 이루어지며, 당사의 제품은 최종 수요자가 장기간에 걸친 구매를 하는 품목이 아니기 때문에 수주계약 내역은 존재하지 않습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "쓰리에이로직스(주)의 주요 제품·서비스는 HBM, Foundry, 의약품, SoC(System on Chip), GPU, NPU입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 주요제품 가격변동 추이 당사는 시스템 반도체 사업을 영위하고 있으며, 당사가 판매하는 제품은 고객사별로 요구되는 사양에 따라 제품의 제원과 가격이 상이합니다. 매출처 등 현황 당사의 제품은 고객의 발주에 따라 납품이 이루어지며, 당사의 제품은 최종 수요자가 장기간에 걸친 구매를 하는 품목이 아니기 때문에 수주계약 내역은 존재하지 않습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "NFC 사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 57.4%",
+        "revenue_share": 0.5736,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "NFC Reader IC",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.3%",
+        "revenue_share": 0.2426,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총 매 출 액",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "Foundry",
-      "caption": "Foundry 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "NFC 사업부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 57.4%",
       "kind": "chip",
       "visual": "CHIP",
-      "image": "../data/business_images/business_image_local_semiconductor_part.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "SoC(System on Chip)",
-      "caption": "SoC(System on Chip) 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "NFC Reader IC",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.3%",
       "kind": "chip",
       "visual": "CHIP",
-      "image": "../data/business_images/business_image_local_semiconductor_part.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "총 매 출 액",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+      "kind": "chip",
+      "visual": "CHIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

@@ -153,7 +153,15 @@
   "snippets": {
     "overview": "(주)탑코미디어의 주요 제품·서비스는 콘텐츠사업, 전자출판(만화잡지 포함), 유통부문, 플랫폼부문, 콘텐츠사업부문입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 생산 및 설비 당사 콘텐츠사업부문은 웹툰 콘텐츠의 기획ㆍ제작, 유통 및 플랫폼 서비스를 영위하는 무형의 콘텐츠 사업으로, 일반 제조업과 같은 유형의 생산설비를 보유하고 있지 않습니다. 원재료의 현황 당사 콘텐츠사업부문은 웹툰 콘텐츠의 자체 제작, 외부 콘텐츠 유통 및 플랫폼 서비스를 영위하고 있으며, 무형의 콘텐츠를 제공하는 사업 특성상 원재료 매입이 수반되지 않아, 원재료 매입액을 산정할 수 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "(주)탑코미디어의 주요 제품·서비스는 콘텐츠사업, 전자출판(만화잡지 포함), 유통부문, 플랫폼부문, 콘텐츠사업부문입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 생산 및 설비 당사 콘텐츠사업부문은 웹툰 콘텐츠의 기획ㆍ제작, 유통 및 플랫폼 서비스를 영위하는 무형의 콘텐츠 사업으로, 일반 제조업과 같은 유형의 생산설비를 보유하고 있지 않습니다. 원재료의 현황 당사 콘텐츠사업부문은 웹툰 콘텐츠의 자체 제작, 외부 콘텐츠 유통 및 플랫폼 서비스를 영위하고 있으며, 무형의 콘텐츠를 제공하는 사업 특성상 원재료 매입이 수반되지 않아, 원재료 매입액을 산정할 수 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "유통",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.9%",
+        "revenue_share": 0.2686,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "콘텐츠사업",
       "전자출판(만화잡지 포함)",
@@ -161,40 +169,40 @@
       "플랫폼부문",
       "콘텐츠사업부문"
     ],
-    "investor_note": "(주)탑코미디어의 주요 제품·서비스는 콘텐츠사업, 전자출판(만화잡지 포함), 유통부문, 플랫폼부문, 콘텐츠사업부문입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 생산 및 설비 당사 콘텐츠사업부문은 웹툰 콘텐츠의 기획ㆍ제작, 유통 및 플랫폼 서비스를 영위하는 무형의 콘텐츠 사업으로, 일반 제조업과 같은 유형의 생산설비를 보유하고 있지 않습니다. 원재료의 현황 당사 콘텐츠사업부문은 웹툰 콘텐츠의 자체 제작, 외부 콘텐츠 유통 및 플랫폼 서비스를 영위하고 있으며, 무형의 콘텐츠를 제공하는 사업 특성상 원재료 매입이 수반되지 않아, 원재료 매입액을 산정할 수 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)탑코미디어의 주요 제품·서비스는 콘텐츠사업, 전자출판(만화잡지 포함), 유통부문, 플랫폼부문, 콘텐츠사업부문입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 생산 및 설비 당사 콘텐츠사업부문은 웹툰 콘텐츠의 기획ㆍ제작, 유통 및 플랫폼 서비스를 영위하는 무형의 콘텐츠 사업으로, 일반 제조업과 같은 유형의 생산설비를 보유하고 있지 않습니다. 원재료의 현황 당사 콘텐츠사업부문은 웹툰 콘텐츠의 자체 제작, 외부 콘텐츠 유통 및 플랫폼 서비스를 영위하고 있으며, 무형의 콘텐츠를 제공하는 사업 특성상 원재료 매입이 수반되지 않아, 원재료 매입액을 산정할 수 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "콘텐츠사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 69.9%",
+        "revenue_share": 0.6993,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "유통",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.9%",
+        "revenue_share": 0.2686,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "콘텐츠사업",
-      "caption": "콘텐츠사업 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 69.9%",
       "kind": "platform",
       "visual": "APP",
-      "image": "../data/business_images/business_image_local_content.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "전자출판(만화잡지 포함)",
-      "caption": "전자출판(만화잡지 포함) 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "유통",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.9%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "유통부문",
-      "caption": "유통부문 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "플랫폼부문",
-      "caption": "플랫폼부문 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "platform",
-      "visual": "APP",
-      "image": "../data/business_images/business_image_local_default_d.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

@@ -155,24 +155,32 @@
     "segment_finance": "금강공업은 배관용·구조용 강관과 알루미늄폼·갱폼 등 건설용 거푸집을 주력으로 하고, 계열사를 통해 배합사료(고려산업)와 선박용 엔진밸브·형단조 부품(케이에스피 등)까지 사업을 넓힌 종합 제조기업입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 8,021억 원으로 전년 대비 0.1% 늘었지만 영업이익은 68.2% 급감한 104억 원에 그쳤고, 당기순이익은 373억 원 적자로 전환했습니다. 총자산은 2.2% 늘어난 1조 1,879억 원이며, 부채비율은 138.5%로 자본보다 많은 빚을 지고 있어 수익성 회복 여부를 지켜볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "건설자재",
-        "desc": "강관, 거푸집, 가설재, 모듈러",
-        "revenue_share": 0.406
+        "name": "제조/임대",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.4%",
+        "revenue_share": 0.114,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "사료",
-        "desc": "가축용 배합사료 제조·판매",
-        "revenue_share": 0.352
+        "name": "알루미늄폼 (임대)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.1%",
+        "revenue_share": 0.131,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "단조부품",
-        "desc": "자동차·중장비용 단조 부품",
-        "revenue_share": 0.115
+        "name": "판넬폼 (알루미늄폼)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.8%",
+        "revenue_share": 0.088,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "선박엔진 부품",
-        "desc": "선박용 엔진밸브 제조",
-        "revenue_share": 0.08
+        "name": "가설재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.03,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -187,40 +195,70 @@
       "형단조 부품",
       "모듈러 건축"
     ],
-    "investor_note": "금강공업은 배관용·구조용 강관과 알루미늄폼·갱폼 등 건설용 거푸집을 주력으로 하고, 계열사를 통해 배합사료(고려산업)와 선박용 엔진밸브·형단조 부품(케이에스피 등)까지 사업을 넓힌 종합 제조기업입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 8,021억 원으로 전년 대비 0.1% 늘었지만 영업이익은 68.2% 급감한 104억 원에 그쳤고, 당기순이익은 373억 원 적자로 전환했습니다. 총자산은 2.2% 늘어난 1조 1,879억 원이며, 부채비율은 138.5%로 자본보다 많은 빚을 지고 있어 수익성 회복 여부를 지켜볼 필요가 있습니다."
+    "investor_note": "금강공업은 배관용·구조용 강관과 알루미늄폼·갱폼 등 건설용 거푸집을 주력으로 하고, 계열사를 통해 배합사료(고려산업)와 선박용 엔진밸브·형단조 부품(케이에스피 등)까지 사업을 넓힌 종합 제조기업입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 8,021억 원으로 전년 대비 0.1% 늘었지만 영업이익은 68.2% 급감한 104억 원에 그쳤고, 당기순이익은 373억 원 적자로 전환했습니다. 총자산은 2.2% 늘어난 1조 1,879억 원이며, 부채비율은 138.5%로 자본보다 많은 빚을 지고 있어 수익성 회복 여부를 지켜볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "제조/임대",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.4%",
+        "revenue_share": 0.114,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "알루미늄폼 (임대)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.1%",
+        "revenue_share": 0.131,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "판넬폼 (알루미늄폼)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.8%",
+        "revenue_share": 0.088,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "가설재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.03,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "건설자재",
-      "caption": "강관, 거푸집, 가설재, 모듈러",
-      "kind": "service",
-      "visual": "건설자재",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "title": "제조/임대",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.4%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "사료",
-      "caption": "가축용 배합사료 제조·판매",
-      "kind": "service",
-      "visual": "사료",
-      "image": "../data/business_images/business_image_food_feed.svg",
-      "image_source": "Local visual"
+      "title": "알루미늄폼 (임대)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.1%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "단조부품",
-      "caption": "자동차·중장비용 단조 부품",
-      "kind": "auto",
-      "visual": "단조부품",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
+      "title": "판넬폼 (알루미늄폼)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.8%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "선박엔진 부품",
-      "caption": "선박용 엔진밸브 제조",
-      "kind": "auto",
-      "visual": "선박엔진",
-      "image": "../data/business_images/business_image_local_ship.svg",
-      "image_source": "Local curated visual"
+      "title": "가설재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

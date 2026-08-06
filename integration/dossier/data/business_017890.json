@@ -155,14 +155,32 @@
     "segment_finance": "한국알콜산업은 소주 원료인 정제주정과 무수주정을 생산하는 국내 주정 제조사이자, 페인트·잉크 용제로 쓰이는 초산에틸·초산부틸 등 화학제품을 함께 만드는 기업으로, 제조부문이 매출의 98%(주정 45%, 화학제품 40%, 컬러페이스트 10%)를 차지하고 나머지는 미국 상업용 부동산 임대사업에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,238억 원으로 전년 대비 0.7% 늘었고 영업이익은 16.0%, 당기순이익은 24.5% 각각 증가해 수익성이 개선됐습니다. 부채비율은 18.3%로 매우 낮은 편이라 재무구조가 안정적입니다.",
     "segment_breakdown": [
       {
-        "name": "제조(주정·화학)",
-        "desc": "정제주정·무수주정, 초산에틸·초산부틸 등 화학제품, Color Paste 생산",
-        "revenue_share": 0.976
+        "name": "제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 45.1%",
+        "revenue_share": 0.451,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "임대(미국 부동산)",
-        "desc": "미국 로스앤젤레스 등 상업용 부동산 임대업",
-        "revenue_share": 0.024
+        "name": "화학",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.5%",
+        "revenue_share": 0.395,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Color Paste",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.0%",
+        "revenue_share": 0.1,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,24 +192,62 @@
       "고순도 유기용제",
       "미국 상업용 부동산 임대"
     ],
-    "investor_note": "한국알콜산업은 소주 원료인 정제주정과 무수주정을 생산하는 국내 주정 제조사이자, 페인트·잉크 용제로 쓰이는 초산에틸·초산부틸 등 화학제품을 함께 만드는 기업으로, 제조부문이 매출의 98%(주정 45%, 화학제품 40%, 컬러페이스트 10%)를 차지하고 나머지는 미국 상업용 부동산 임대사업에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,238억 원으로 전년 대비 0.7% 늘었고 영업이익은 16.0%, 당기순이익은 24.5% 각각 증가해 수익성이 개선됐습니다. 부채비율은 18.3%로 매우 낮은 편이라 재무구조가 안정적입니다."
+    "investor_note": "한국알콜산업은 소주 원료인 정제주정과 무수주정을 생산하는 국내 주정 제조사이자, 페인트·잉크 용제로 쓰이는 초산에틸·초산부틸 등 화학제품을 함께 만드는 기업으로, 제조부문이 매출의 98%(주정 45%, 화학제품 40%, 컬러페이스트 10%)를 차지하고 나머지는 미국 상업용 부동산 임대사업에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,238억 원으로 전년 대비 0.7% 늘었고 영업이익은 16.0%, 당기순이익은 24.5% 각각 증가해 수익성이 개선됐습니다. 부채비율은 18.3%로 매우 낮은 편이라 재무구조가 안정적입니다.",
+    "product_service_segments": [
+      {
+        "name": "제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 45.1%",
+        "revenue_share": 0.451,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "화학",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.5%",
+        "revenue_share": 0.395,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Color Paste",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.0%",
+        "revenue_share": 0.1,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "제조(주정·화학)",
-      "caption": "정제주정·무수주정, 초산에틸·초산부틸 등 화학제품, Color Paste 생산",
+      "title": "화학",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.5%",
       "kind": "material",
-      "visual": "제조",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "임대(미국 부동산)",
-      "caption": "미국 로스앤젤레스 등 상업용 부동산 임대업",
-      "kind": "service",
-      "visual": "임대",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "title": "Color Paste",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "총 계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

@@ -155,24 +155,32 @@
     "segment_finance": "DN오토모티브는 자동차용 방진부품과 축전지(배터리), 디엔솔루션즈의 공작기계, 자동차용 튜브까지 네 개 사업부문을 가진 종합 부품·기계 회사입니다. 매출 비중은 공작기계가 53%로 가장 크고 자동차용 부품이 33%, 축전지가 9%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3조 6,757억 원으로 전년 대비 7.0% 늘었고 영업이익은 5,279억 원으로 1.0%, 당기순이익은 3,249억 원으로 2.1% 증가하며 꾸준한 성장을 이어갔습니다. 총자산은 5조 2,756억 원, 부채비율은 115.4%이며 ROE는 14.1%로 자기자본 대비 수익성이 양호한 편입니다.",
     "segment_breakdown": [
       {
-        "name": "공작기계",
-        "desc": "금속 절삭가공 공작기계(디엔솔루션즈)",
-        "revenue_share": 0.531
-      },
-      {
         "name": "자동차용 부품",
-        "desc": "자동차용 방진부품",
-        "revenue_share": 0.33
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.0%",
+        "revenue_share": 0.33,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "자동차용 축전지",
-        "desc": "완성차·A/S용 배터리",
-        "revenue_share": 0.093
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.3%",
+        "revenue_share": 0.093,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "공작기계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.1%",
+        "revenue_share": 0.531,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "자동차용 튜브",
-        "desc": "산업·특수용 타이어 튜브",
-        "revenue_share": 0.046
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.6%",
+        "revenue_share": 0.046,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -181,38 +189,68 @@
       "공작기계(PUMA 등, 디엔솔루션즈)",
       "자동차용 튜브(DONGAH)"
     ],
-    "investor_note": "DN오토모티브는 자동차용 방진부품과 축전지(배터리), 디엔솔루션즈의 공작기계, 자동차용 튜브까지 네 개 사업부문을 가진 종합 부품·기계 회사입니다. 매출 비중은 공작기계가 53%로 가장 크고 자동차용 부품이 33%, 축전지가 9%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3조 6,757억 원으로 전년 대비 7.0% 늘었고 영업이익은 5,279억 원으로 1.0%, 당기순이익은 3,249억 원으로 2.1% 증가하며 꾸준한 성장을 이어갔습니다. 총자산은 5조 2,756억 원, 부채비율은 115.4%이며 ROE는 14.1%로 자기자본 대비 수익성이 양호한 편입니다."
+    "investor_note": "DN오토모티브는 자동차용 방진부품과 축전지(배터리), 디엔솔루션즈의 공작기계, 자동차용 튜브까지 네 개 사업부문을 가진 종합 부품·기계 회사입니다. 매출 비중은 공작기계가 53%로 가장 크고 자동차용 부품이 33%, 축전지가 9%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3조 6,757억 원으로 전년 대비 7.0% 늘었고 영업이익은 5,279억 원으로 1.0%, 당기순이익은 3,249억 원으로 2.1% 증가하며 꾸준한 성장을 이어갔습니다. 총자산은 5조 2,756억 원, 부채비율은 115.4%이며 ROE는 14.1%로 자기자본 대비 수익성이 양호한 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "자동차용 부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.0%",
+        "revenue_share": 0.33,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동차용 축전지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.3%",
+        "revenue_share": 0.093,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "공작기계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.1%",
+        "revenue_share": 0.531,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동차용 튜브",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.6%",
+        "revenue_share": 0.046,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "공작기계",
-      "caption": "금속 절삭가공 공작기계(디엔솔루션즈)",
-      "kind": "material",
-      "visual": "공작기계",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
       "title": "자동차용 부품",
-      "caption": "자동차용 방진부품",
-      "kind": "auto",
-      "visual": "자동차용",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.0%",
+      "kind": "battery",
+      "visual": "BATTERY",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
       "title": "자동차용 축전지",
-      "caption": "완성차·A/S용 배터리",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.3%",
       "kind": "battery",
-      "visual": "자동차용",
+      "visual": "BATTERY",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
+      "title": "공작기계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.1%",
+      "kind": "battery",
+      "visual": "BATTERY",
+      "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
+      "image_source": "Unsplash"
+    },
+    {
       "title": "자동차용 튜브",
-      "caption": "산업·특수용 타이어 튜브",
-      "kind": "auto",
-      "visual": "자동차용",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.6%",
+      "kind": "battery",
+      "visual": "BATTERY",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     }

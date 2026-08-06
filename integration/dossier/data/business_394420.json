@@ -89,7 +89,22 @@
   "snippets": {
     "overview": "주식회사 리센스메디컬의 주요 제품·서비스는 reverse engineering, 설계 방식, 의료기기, 부작용, 안전성 데이터, 핵심기술입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 영업기획팀은 해외 수출을 포함한 영업지원 기능을 중심으로, 영업조직이 현장에서 판매와 고객 대응에 집중할 수 있도록 필요한 운영·관리 업무 전반을 수행합니다. 당사의 판매조직은 총 4개의 팀(마케팅팀, 영업1팀, 영업2팀, 영업기획팀, 북미사업개발팀)으로 나뉘어져 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "주식회사 리센스메디컬의 주요 제품·서비스는 reverse engineering, 설계 방식, 의료기기, 부작용, 안전성 데이터, 핵심기술입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 영업기획팀은 해외 수출을 포함한 영업지원 기능을 중심으로, 영업조직이 현장에서 판매와 고객 대응에 집중할 수 있도록 필요한 운영·관리 업무 전반을 수행합니다. 당사의 판매조직은 총 4개의 팀(마케팅팀, 영업1팀, 영업2팀, 영업기획팀, 북미사업개발팀)으로 나뉘어져 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "VetEase",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.8%",
+        "revenue_share": 0.0377,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.0%",
+        "revenue_share": 0.0002,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "reverse engineering",
       "설계 방식",
@@ -103,40 +118,46 @@
       "소모품",
       "디바이스"
     ],
-    "investor_note": "주식회사 리센스메디컬의 주요 제품·서비스는 reverse engineering, 설계 방식, 의료기기, 부작용, 안전성 데이터, 핵심기술입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 영업기획팀은 해외 수출을 포함한 영업지원 기능을 중심으로, 영업조직이 현장에서 판매와 고객 대응에 집중할 수 있도록 필요한 운영·관리 업무 전반을 수행합니다. 당사의 판매조직은 총 4개의 팀(마케팅팀, 영업1팀, 영업2팀, 영업기획팀, 북미사업개발팀)으로 나뉘어져 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사 리센스메디컬의 주요 제품·서비스는 reverse engineering, 설계 방식, 의료기기, 부작용, 안전성 데이터, 핵심기술입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 영업기획팀은 해외 수출을 포함한 영업지원 기능을 중심으로, 영업조직이 현장에서 판매와 고객 대응에 집중할 수 있도록 필요한 운영·관리 업무 전반을 수행합니다. 당사의 판매조직은 총 4개의 팀(마케팅팀, 영업1팀, 영업2팀, 영업기획팀, 북미사업개발팀)으로 나뉘어져 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "VetEase",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.8%",
+        "revenue_share": 0.0377,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타(주3)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.0096,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.0%",
+        "revenue_share": 0.0002,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "reverse engineering",
-      "caption": "반도체 공정 장비에 들어가는 교체·소모성 부품입니다.",
+      "title": "VetEase",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.8%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_electrode_ring.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "설계 방식",
-      "caption": "설계 방식 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "의료기기",
-      "caption": "의료기기 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_medical_device.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "부작용",
-      "caption": "부작용 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

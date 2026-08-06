@@ -155,19 +155,25 @@
     "segment_finance": "대한제당은 설탕을 만드는 식품부문을 중심으로, 수입육·수산물을 유통하는 축산유통부문(푸드림)과 무지개사료 브랜드의 배합사료 사업을 함께 하는 회사입니다. 매출은 식품 51%, 축산유통 28%, 사료 17% 순으로 나뉘며, 설탕과 사료 가격 모두 국제 원당·곡물 시세와 환율에 크게 영향을 받습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 3,562억 원으로 전년 대비 1.3% 줄었고 영업이익은 565억 원으로 52.9% 늘었지만, 당기순이익은 603억 원 적자로 전환했습니다. 부채비율은 159.4%로 자본보다 빚이 많은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "식품부문",
-        "desc": "설탕 등 식품 제조·판매",
-        "revenue_share": 0.512
+        "name": "식 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.2%",
+        "revenue_share": 0.512,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "축산유통부문",
-        "desc": "수입육·수산물 등 유통(푸드림)",
-        "revenue_share": 0.276
+        "name": "축산유통",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.6%",
+        "revenue_share": 0.276,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "사료부문",
-        "desc": "배합사료(무지개사료) 제조·판매",
-        "revenue_share": 0.174
+        "name": "사 료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.4%",
+        "revenue_share": 0.174,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -175,32 +181,55 @@
       "푸드림(수입육·수산물)",
       "무지개사료(배합사료)"
     ],
-    "investor_note": "대한제당은 설탕을 만드는 식품부문을 중심으로, 수입육·수산물을 유통하는 축산유통부문(푸드림)과 무지개사료 브랜드의 배합사료 사업을 함께 하는 회사입니다. 매출은 식품 51%, 축산유통 28%, 사료 17% 순으로 나뉘며, 설탕과 사료 가격 모두 국제 원당·곡물 시세와 환율에 크게 영향을 받습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 3,562억 원으로 전년 대비 1.3% 줄었고 영업이익은 565억 원으로 52.9% 늘었지만, 당기순이익은 603억 원 적자로 전환했습니다. 부채비율은 159.4%로 자본보다 빚이 많은 편이라 재무 부담을 살펴볼 필요가 있습니다."
+    "investor_note": "대한제당은 설탕을 만드는 식품부문을 중심으로, 수입육·수산물을 유통하는 축산유통부문(푸드림)과 무지개사료 브랜드의 배합사료 사업을 함께 하는 회사입니다. 매출은 식품 51%, 축산유통 28%, 사료 17% 순으로 나뉘며, 설탕과 사료 가격 모두 국제 원당·곡물 시세와 환율에 크게 영향을 받습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 3,562억 원으로 전년 대비 1.3% 줄었고 영업이익은 565억 원으로 52.9% 늘었지만, 당기순이익은 603억 원 적자로 전환했습니다. 부채비율은 159.4%로 자본보다 빚이 많은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "식 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.2%",
+        "revenue_share": 0.512,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "축산유통",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.6%",
+        "revenue_share": 0.276,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "사 료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.4%",
+        "revenue_share": 0.174,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "식품부문",
-      "caption": "설탕 등 식품 제조·판매",
+      "title": "식 품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "축산유통",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.6%",
       "kind": "consumer",
-      "visual": "식품부문",
-      "image": "../data/business_images/business_image_food_ingredient.svg",
+      "visual": "FEED",
+      "image": "../data/business_images/business_image_food_feed.svg",
       "image_source": "Local visual"
     },
     {
-      "title": "축산유통부문",
-      "caption": "수입육·수산물 등 유통(푸드림)",
+      "title": "사 료",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.4%",
       "kind": "service",
-      "visual": "축산유통부문",
-      "image": "../data/business_images/business_image_food_packaged.svg",
-      "image_source": "Local visual"
-    },
-    {
-      "title": "사료부문",
-      "caption": "배합사료(무지개사료) 제조·판매",
-      "kind": "service",
-      "visual": "사료부문",
-      "image": "../data/business_images/business_image_food_ingredient.svg",
-      "image_source": "Local visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

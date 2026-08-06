@@ -156,13 +156,17 @@
     "segment_breakdown": [
       {
         "name": "연료관",
-        "desc": "취사용 휴대용 부탄가스(썬연료·알프스 등) 제조",
-        "revenue_share": 0.8439
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 84.4%",
+        "revenue_share": 0.8439,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "에어졸관",
-        "desc": "살충제·화장품 등 에어졸 용기 OEM 생산",
-        "revenue_share": 0.1561
+        "name": "에어졸 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.6%",
+        "revenue_share": 0.1561,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -175,24 +179,40 @@
       "생활용품 에어졸캔",
       "화장품용 에어졸캔"
     ],
-    "investor_note": "(주)태양은 국내 시장점유율 1위(약 37%)인 휴대용 부탄가스 전문기업으로, 대표 브랜드 썬연료 등 연료관 사업이 매출의 84%를 차지하고, 화장품·살충제용 에어졸관을 OEM 방식으로 생산하는 사업(16%)도 함께 합니다. 세계 부탄가스 수출 물량의 약 60%를 당사가 차지할 정도로 해외 비중도 높습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,403억 원으로 전년 대비 7.8% 줄었지만 영업이익 23억 원(+10.4%), 당기순이익 118억 원(+43.5%)으로 늘었습니다. 부채비율은 14.4%로 낮아 재무구조는 안정적입니다."
+    "investor_note": "(주)태양은 국내 시장점유율 1위(약 37%)인 휴대용 부탄가스 전문기업으로, 대표 브랜드 썬연료 등 연료관 사업이 매출의 84%를 차지하고, 화장품·살충제용 에어졸관을 OEM 방식으로 생산하는 사업(16%)도 함께 합니다. 세계 부탄가스 수출 물량의 약 60%를 당사가 차지할 정도로 해외 비중도 높습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,403억 원으로 전년 대비 7.8% 줄었지만 영업이익 23억 원(+10.4%), 당기순이익 118억 원(+43.5%)으로 늘었습니다. 부채비율은 14.4%로 낮아 재무구조는 안정적입니다.",
+    "product_service_segments": [
+      {
+        "name": "연료관",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 84.4%",
+        "revenue_share": 0.8439,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "에어졸 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.6%",
+        "revenue_share": 0.1561,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "연료관",
-      "caption": "취사용 휴대용 부탄가스(썬연료·알프스 등) 제조",
-      "kind": "service",
-      "visual": "연료관",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 84.4%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "에어졸관",
-      "caption": "살충제·화장품 등 에어졸 용기 OEM 생산",
-      "kind": "consumer",
-      "visual": "에어졸관",
-      "image": "../data/business_images/business_image_local_agro.svg",
-      "image_source": "Local curated visual"
+      "title": "에어졸 외",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.6%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

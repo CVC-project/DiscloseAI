@@ -156,23 +156,31 @@
     "segment_breakdown": [
       {
         "name": "건축/공업용 도료",
-        "desc": "노루페인트·노루케미칼 등의 건축·공업용 도료",
-        "revenue_share": 0.619
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 61.9%",
+        "revenue_share": 0.619,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "자동차용 도료",
-        "desc": "노루오토코팅의 자동차 도료",
-        "revenue_share": 0.371
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.1%",
+        "revenue_share": 0.371,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "PCM용 도료",
-        "desc": "노루코일코팅의 강판용 도료",
-        "revenue_share": 0.193
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.3%",
+        "revenue_share": 0.193,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "농생명",
-        "desc": "더기반의 참외·고추 등 종자사업",
-        "revenue_share": 0.022
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.2%",
+        "revenue_share": 0.022,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -182,40 +190,70 @@
       "PP-RP540-N(PCM 강판용 도료)",
       "알찬꿀·넘버세븐고추(종자)"
     ],
-    "investor_note": "노루홀딩스는 노루페인트·노루오토코팅·노루코일코팅·노루케미칼 등을 거느린 도료(페인트) 전문 지주회사로, 지주회사 자체는 배당수익과 수수료 수익으로 운영되고 실제 매출은 계열사에서 나옵니다. 건축·공업용 도료가 매출의 가장 큰 비중을 차지하고, 자동차용·PCM 강판용 도료, 농업회사 더기반의 종자사업도 함께 하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 2,392억 원으로 전년과 비슷한 수준(-0.7%)이었지만 영업이익은 645억 원으로 11.1%, 당기순이익은 585억 원으로 28.7% 각각 줄었습니다. 부채비율은 57.6%로 낮은 편이라 재무구조는 안정적입니다."
+    "investor_note": "노루홀딩스는 노루페인트·노루오토코팅·노루코일코팅·노루케미칼 등을 거느린 도료(페인트) 전문 지주회사로, 지주회사 자체는 배당수익과 수수료 수익으로 운영되고 실제 매출은 계열사에서 나옵니다. 건축·공업용 도료가 매출의 가장 큰 비중을 차지하고, 자동차용·PCM 강판용 도료, 농업회사 더기반의 종자사업도 함께 하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 2,392억 원으로 전년과 비슷한 수준(-0.7%)이었지만 영업이익은 645억 원으로 11.1%, 당기순이익은 585억 원으로 28.7% 각각 줄었습니다. 부채비율은 57.6%로 낮은 편이라 재무구조는 안정적입니다.",
+    "product_service_segments": [
+      {
+        "name": "건축/공업용 도료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 61.9%",
+        "revenue_share": 0.619,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동차용 도료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.1%",
+        "revenue_share": 0.371,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "PCM용 도료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.3%",
+        "revenue_share": 0.193,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "농생명",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.2%",
+        "revenue_share": 0.022,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "건축/공업용 도료",
-      "caption": "노루페인트·노루케미칼 등의 건축·공업용 도료",
+      "title": "건축·주택",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 61.9%",
       "kind": "service",
-      "visual": "건축",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "자동차용 도료",
-      "caption": "노루오토코팅의 자동차 도료",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.1%",
       "kind": "auto",
-      "visual": "자동차용",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
       "title": "PCM용 도료",
-      "caption": "노루코일코팅의 강판용 도료",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.3%",
       "kind": "service",
-      "visual": "PCM용",
-      "image": "../data/business_images/business_image_local_cement.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "농생명",
-      "caption": "더기반의 참외·고추 등 종자사업",
-      "kind": "insurance",
-      "visual": "농생명",
-      "image": "../data/business_images/business_image_local_default_d.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

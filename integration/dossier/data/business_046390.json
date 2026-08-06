@@ -155,9 +155,25 @@
     "segment_finance": "삼화네트웍스는 30년 이상 업력을 가진 국내 최초의 드라마 독립제작사로, 130편 이상의 드라마를 만들어왔으며 종속회사 스튜디오아이콘을 통한 드라마 제작과 더블유에스엔터테인먼트를 통한 연예인 매니지먼트를 함께 운영하고 있습니다. 매출의 99% 이상이 드라마 제작에서 나오는 만큼 개별 작품의 흥행과 편성 여부에 실적이 크게 좌우되는 구조입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 372억 원으로 전년보다 20.2% 줄었고 영업손실과 당기순손실 모두 적자로 전환했습니다. 부채비율은 15.6%로 낮은 편이라 재무구조 자체는 안정적입니다. 감사인은 드라마 매출의 수익인식이 적절한 시점에 이뤄졌는지를 핵심감사사항으로 선정했습니다.",
     "segment_breakdown": [
       {
-        "name": "드라마제작",
-        "desc": "SBS 등 방송사·OTT向 드라마 기획·제작",
-        "revenue_share": 0.9941
+        "name": "드라마제작 매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.4%",
+        "revenue_share": 0.9941,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "연기자 매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.0%",
+        "revenue_share": 0.0004,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "음반 매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.0016,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -166,24 +182,70 @@
       "음원(OST)",
       "부동산 임대"
     ],
-    "investor_note": "삼화네트웍스는 30년 이상 업력을 가진 국내 최초의 드라마 독립제작사로, 130편 이상의 드라마를 만들어왔으며 종속회사 스튜디오아이콘을 통한 드라마 제작과 더블유에스엔터테인먼트를 통한 연예인 매니지먼트를 함께 운영하고 있습니다. 매출의 99% 이상이 드라마 제작에서 나오는 만큼 개별 작품의 흥행과 편성 여부에 실적이 크게 좌우되는 구조입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 372억 원으로 전년보다 20.2% 줄었고 영업손실과 당기순손실 모두 적자로 전환했습니다. 부채비율은 15.6%로 낮은 편이라 재무구조 자체는 안정적입니다. 감사인은 드라마 매출의 수익인식이 적절한 시점에 이뤄졌는지를 핵심감사사항으로 선정했습니다."
+    "investor_note": "삼화네트웍스는 30년 이상 업력을 가진 국내 최초의 드라마 독립제작사로, 130편 이상의 드라마를 만들어왔으며 종속회사 스튜디오아이콘을 통한 드라마 제작과 더블유에스엔터테인먼트를 통한 연예인 매니지먼트를 함께 운영하고 있습니다. 매출의 99% 이상이 드라마 제작에서 나오는 만큼 개별 작품의 흥행과 편성 여부에 실적이 크게 좌우되는 구조입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 372억 원으로 전년보다 20.2% 줄었고 영업손실과 당기순손실 모두 적자로 전환했습니다. 부채비율은 15.6%로 낮은 편이라 재무구조 자체는 안정적입니다. 감사인은 드라마 매출의 수익인식이 적절한 시점에 이뤄졌는지를 핵심감사사항으로 선정했습니다.",
+    "product_service_segments": [
+      {
+        "name": "드라마제작 매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.4%",
+        "revenue_share": 0.9941,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "연기자 매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.0%",
+        "revenue_share": 0.0004,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "음반 매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.0016,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타 매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.4%",
+        "revenue_share": 0.0039,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "드라마제작",
-      "caption": "SBS 등 방송사·OTT向 드라마 기획·제작",
-      "kind": "service",
-      "visual": "드라마제작",
-      "image": "../data/business_images/business_image_local_content.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "영화, 비디오물, 방송프로그램 제작 및 배급업",
-      "caption": "영화, 비디오물, 방송프로그램 제작 및 배급업을 중심으로 매출을 만듭니다.",
+      "title": "드라마 제작(우주메리미, 키스는 괜히 해서!)",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_1805fba8159acac6.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "연예인 매니지먼트",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "음원(OST)",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "부동산 임대",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

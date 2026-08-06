@@ -155,29 +155,32 @@
     "segment_finance": "혜인은 캐터필라(CAT)를 비롯한 글로벌 브랜드 건설기계·엔진·발전기세트를 국내에 독점 공급하는 국내 최대급 건설기계 딜러사로, 매출의 상당 부분이 CAT 엔진(35%)과 부품 판매(28%), CAT 건설기계 (25%)에서 나옵니다. 장비렌탈·중고장비매매·신재생에너지 사업도 함께 운영하며 정비 서비스로 고객을 지속 관리하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,417억 원으로 전년 대비 2.9% 줄었지만 영업이익은 175억 원으로 24.0% 늘었고 당기순이익도 142억 원으로 95.7% 크게 증가했습니다. 부채비율은 96.4%로 자본과 비슷한 수준의 빚을 지고 있어 재무 부담을 함께 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "CAT 장비·엔진",
-        "desc": "건설기계, 엔진, 발전기세트",
-        "revenue_share": 0.594
+        "name": "장비/엔진",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.6%",
+        "revenue_share": 0.246,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "부품",
-        "desc": "건설기계·엔진 부품과 타이어",
-        "revenue_share": 0.276
+        "name": "CAT 엔진",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.8%",
+        "revenue_share": 0.348,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "정비",
-        "desc": "장비 정비 서비스",
-        "revenue_share": 0.075
+        "name": "산업장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.002,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "물류·산업장비",
-        "desc": "물류장비와 파쇄·선별 장비",
-        "revenue_share": 0.04
-      },
-      {
-        "name": "임대·중개",
-        "desc": "건설기계 렌탈과 중개 매출",
-        "revenue_share": 0.014
+        "name": "물류장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.8%",
+        "revenue_share": 0.038,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -190,40 +193,54 @@
       "정비 서비스",
       "장비 렌탈"
     ],
-    "investor_note": "혜인은 캐터필라(CAT)를 비롯한 글로벌 브랜드 건설기계·엔진·발전기세트를 국내에 독점 공급하는 국내 최대급 건설기계 딜러사로, 매출의 상당 부분이 CAT 엔진(35%)과 부품 판매(28%), CAT 건설기계 (25%)에서 나옵니다. 장비렌탈·중고장비매매·신재생에너지 사업도 함께 운영하며 정비 서비스로 고객을 지속 관리하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,417억 원으로 전년 대비 2.9% 줄었지만 영업이익은 175억 원으로 24.0% 늘었고 당기순이익도 142억 원으로 95.7% 크게 증가했습니다. 부채비율은 96.4%로 자본과 비슷한 수준의 빚을 지고 있어 재무 부담을 함께 살펴볼 필요가 있습니다."
+    "investor_note": "혜인은 캐터필라(CAT)를 비롯한 글로벌 브랜드 건설기계·엔진·발전기세트를 국내에 독점 공급하는 국내 최대급 건설기계 딜러사로, 매출의 상당 부분이 CAT 엔진(35%)과 부품 판매(28%), CAT 건설기계 (25%)에서 나옵니다. 장비렌탈·중고장비매매·신재생에너지 사업도 함께 운영하며 정비 서비스로 고객을 지속 관리하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,417억 원으로 전년 대비 2.9% 줄었지만 영업이익은 175억 원으로 24.0% 늘었고 당기순이익도 142억 원으로 95.7% 크게 증가했습니다. 부채비율은 96.4%로 자본과 비슷한 수준의 빚을 지고 있어 재무 부담을 함께 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "장비/엔진",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.6%",
+        "revenue_share": 0.246,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "CAT 엔진",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.8%",
+        "revenue_share": 0.348,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "산업장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.002,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "물류장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.8%",
+        "revenue_share": 0.038,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "CAT 장비·엔진",
-      "caption": "건설기계, 엔진, 발전기세트",
-      "kind": "power",
-      "visual": "CAT",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "부품",
-      "caption": "건설기계·엔진 부품과 타이어",
+      "title": "구동계 부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.6%",
       "kind": "auto",
-      "visual": "부품",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "PARTS",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "정비",
-      "caption": "장비 정비 서비스",
+      "title": "물류장비",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.8%",
       "kind": "service",
-      "visual": "정비",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "물류·산업장비",
-      "caption": "물류장비와 파쇄·선별 장비",
-      "kind": "service",
-      "visual": "물류",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -155,14 +155,32 @@
     "segment_finance": "이엘씨는 반도체 세정설비에 들어가는 유량계·LFC 등 정밀 계측부품을 만드는 제어계측기기 사업(매출의 47%)과, 반도체 패키징 공정에서 열 방출을 위해 소재를 정밀 연삭하는 Strip Grinder 장비를 만드는 반도체장비 사업(53%)을 하고 있습니다. 2024년 3월에는 기존 BLU(백라이트유닛) 사업을 중단하기로 결정해 사업구조를 반도체 관련 두 축으로 재편했습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 378억 원으로 전년 대비 29.6% 늘었고, 당기순이익은 82억 원으로 흑자 전환했습니다. 다만 영업손실 9억 원은 이어지고 있어, 순이익 흑자는 영업 외 요인(사업 정리 관련 손익 등)의 영향이 있었을 것으로 보입니다. 총자산은 1,824억 원, 부채비율은 5.5%로 매우 낮아 재무구조는 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "반도체장비 부문",
-        "desc": "반도체 패키징 연삭(Grinding) 장비 Strip Grinder 및 소모품",
-        "revenue_share": 0.532
+        "name": "제어계측기기 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.0%",
+        "revenue_share": 0.39,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "제어계측기기 부문",
-        "desc": "반도체 세정설비에 탑재되는 유량계·LFC 등 정밀 계측부품",
-        "revenue_share": 0.468
+        "name": "내수",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.5%",
+        "revenue_share": 0.285,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제어계측기기 부문 소계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "반도체장비 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.1%",
+        "revenue_share": 0.261,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -171,24 +189,70 @@
       "스피너 모터",
       "반도체 패키징용 Strip Grinder"
     ],
-    "investor_note": "이엘씨는 반도체 세정설비에 들어가는 유량계·LFC 등 정밀 계측부품을 만드는 제어계측기기 사업(매출의 47%)과, 반도체 패키징 공정에서 열 방출을 위해 소재를 정밀 연삭하는 Strip Grinder 장비를 만드는 반도체장비 사업(53%)을 하고 있습니다. 2024년 3월에는 기존 BLU(백라이트유닛) 사업을 중단하기로 결정해 사업구조를 반도체 관련 두 축으로 재편했습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 378억 원으로 전년 대비 29.6% 늘었고, 당기순이익은 82억 원으로 흑자 전환했습니다. 다만 영업손실 9억 원은 이어지고 있어, 순이익 흑자는 영업 외 요인(사업 정리 관련 손익 등)의 영향이 있었을 것으로 보입니다. 총자산은 1,824억 원, 부채비율은 5.5%로 매우 낮아 재무구조는 안정적인 편입니다."
+    "investor_note": "이엘씨는 반도체 세정설비에 들어가는 유량계·LFC 등 정밀 계측부품을 만드는 제어계측기기 사업(매출의 47%)과, 반도체 패키징 공정에서 열 방출을 위해 소재를 정밀 연삭하는 Strip Grinder 장비를 만드는 반도체장비 사업(53%)을 하고 있습니다. 2024년 3월에는 기존 BLU(백라이트유닛) 사업을 중단하기로 결정해 사업구조를 반도체 관련 두 축으로 재편했습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 378억 원으로 전년 대비 29.6% 늘었고, 당기순이익은 82억 원으로 흑자 전환했습니다. 다만 영업손실 9억 원은 이어지고 있어, 순이익 흑자는 영업 외 요인(사업 정리 관련 손익 등)의 영향이 있었을 것으로 보입니다. 총자산은 1,824억 원, 부채비율은 5.5%로 매우 낮아 재무구조는 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "제어계측기기 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.0%",
+        "revenue_share": 0.39,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "내수",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.5%",
+        "revenue_share": 0.285,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제어계측기기 부문 소계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "반도체장비 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.1%",
+        "revenue_share": 0.261,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "반도체장비 부문",
-      "caption": "반도체 패키징 연삭(Grinding) 장비 Strip Grinder 및 소모품",
-      "kind": "chip",
-      "visual": "반도체장비",
-      "image": "../data/business_images/business_image_local_semiconductor_pkg.svg",
-      "image_source": "Local curated visual"
+      "title": "제어계측기기 부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "제어계측기기 부문",
-      "caption": "반도체 세정설비에 탑재되는 유량계·LFC 등 정밀 계측부품",
+      "title": "내수",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "제어계측기기 부문 소계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "반도체장비 부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.1%",
       "kind": "chip",
-      "visual": "제어계측기기",
-      "image": "../data/business_images/business_image_local_semiconductor_part.svg",
-      "image_source": "Local curated visual"
+      "visual": "CHIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

@@ -139,14 +139,32 @@
     "segment_finance": "애니메디솔루션 주식회사의 주요 제품·서비스는 시제품 등, 제9기, 제8기, TMS 의료용가이드, 뼈 모델, 글룩입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사 창업 초기에는 연구개발과정에서의 시제품 판매 등 추후 성장을 위한 기술적 완성도 및 사업의 기반을 다지기 위한 성격의 소규모 매출을 확보했었습니다. 제품들의 전반적인 판매 증가가 이루어졌고, 2024년은 전년대비 20% 성장한 약 13.6억, 2025년은 35% 성장한 약18.3억의 매출을 달성하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "공적보험",
-        "desc": "보험계약과 자산운용 중심 서비스",
-        "revenue_share": null
+        "name": "코스메틱AI",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 52.5%",
+        "revenue_share": 0.5255,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "의료실비보험",
-        "desc": "보험계약과 자산운용 중심 서비스",
-        "revenue_share": null
+        "name": "메디컬AI",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.2%",
+        "revenue_share": 0.0223,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "수술가이드",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.6%",
+        "revenue_share": 0.3855,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.7%",
+        "revenue_share": 0.0173,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -163,24 +181,70 @@
       "제론",
       "레이저 각인기"
     ],
-    "investor_note": "애니메디솔루션 주식회사의 주요 제품·서비스는 시제품 등, 제9기, 제8기, TMS 의료용가이드, 뼈 모델, 글룩입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사 창업 초기에는 연구개발과정에서의 시제품 판매 등 추후 성장을 위한 기술적 완성도 및 사업의 기반을 다지기 위한 성격의 소규모 매출을 확보했었습니다. 제품들의 전반적인 판매 증가가 이루어졌고, 2024년은 전년대비 20% 성장한 약 13.6억, 2025년은 35% 성장한 약18.3억의 매출을 달성하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "애니메디솔루션 주식회사의 주요 제품·서비스는 시제품 등, 제9기, 제8기, TMS 의료용가이드, 뼈 모델, 글룩입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 당사 창업 초기에는 연구개발과정에서의 시제품 판매 등 추후 성장을 위한 기술적 완성도 및 사업의 기반을 다지기 위한 성격의 소규모 매출을 확보했었습니다. 제품들의 전반적인 판매 증가가 이루어졌고, 2024년은 전년대비 20% 성장한 약 13.6억, 2025년은 35% 성장한 약18.3억의 매출을 달성하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "코스메틱AI",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 52.5%",
+        "revenue_share": 0.5255,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "메디컬AI",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.2%",
+        "revenue_share": 0.0223,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "수술가이드",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.6%",
+        "revenue_share": 0.3855,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.7%",
+        "revenue_share": 0.0173,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "공적보험",
-      "caption": "보험계약과 자산운용 중심 서비스",
-      "kind": "insurance",
-      "visual": "공적보험",
-      "image": "../data/business_images/business_image_local_securities.svg",
-      "image_source": "Local curated visual"
+      "title": "코스메틱AI",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 52.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "의료실비보험",
-      "caption": "보험계약과 자산운용 중심 서비스",
-      "kind": "insurance",
-      "visual": "의료실비보험",
-      "image": "../data/business_images/business_image_local_securities.svg",
-      "image_source": "Local curated visual"
+      "title": "메디컬AI",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "수술가이드",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

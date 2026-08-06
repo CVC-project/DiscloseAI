@@ -155,14 +155,18 @@
     "segment_finance": "피제이메탈의 주요 제품·서비스는 배터리, 알루미늄 제품제조, 기타매출, 탈산제, 재생연 제품제조, 순 연입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 사업의 내용종속회사 ㈜피제이이앤에스는 2023년 6월 19일 신설된 법인으로 재생연을 생산하고 있으며, 해외 및 국내 차량용 폐 납 축전지를 구매하여, 고순도 재생연 잉곳 제품을 생산·판매하고 있습니다. 사업의 내용 당사는 해외 및 국내에서 알루미늄 스크랩을 구매하여, 알루미늄 제품을 생산 및 판매합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "배터리",
-        "desc": "배터리 관련 제품·서비스",
-        "revenue_share": null
+        "name": "빌 렛",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.7%",
+        "revenue_share": 0.3173,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "탈산제",
-        "desc": "탈산제 관련 제품·서비스",
-        "revenue_share": null
+        "name": "순연드로스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.0%",
+        "revenue_share": 0.0599,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -179,32 +183,70 @@
       "순연 잉곳 생산",
       "순연"
     ],
-    "investor_note": "피제이메탈의 주요 제품·서비스는 배터리, 알루미늄 제품제조, 기타매출, 탈산제, 재생연 제품제조, 순 연입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 사업의 내용종속회사 ㈜피제이이앤에스는 2023년 6월 19일 신설된 법인으로 재생연을 생산하고 있으며, 해외 및 국내 차량용 폐 납 축전지를 구매하여, 고순도 재생연 잉곳 제품을 생산·판매하고 있습니다. 사업의 내용 당사는 해외 및 국내에서 알루미늄 스크랩을 구매하여, 알루미늄 제품을 생산 및 판매합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "피제이메탈의 주요 제품·서비스는 배터리, 알루미늄 제품제조, 기타매출, 탈산제, 재생연 제품제조, 순 연입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 사업의 내용종속회사 ㈜피제이이앤에스는 2023년 6월 19일 신설된 법인으로 재생연을 생산하고 있으며, 해외 및 국내 차량용 폐 납 축전지를 구매하여, 고순도 재생연 잉곳 제품을 생산·판매하고 있습니다. 사업의 내용 당사는 해외 및 국내에서 알루미늄 스크랩을 구매하여, 알루미늄 제품을 생산 및 판매합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "알루미늄 제품제조 및 판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.3%",
+        "revenue_share": 0.6827,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "빌 렛",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.7%",
+        "revenue_share": 0.3173,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "재생연 제품제조 및 판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 94.0%",
+        "revenue_share": 0.9401,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "순연드로스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.0%",
+        "revenue_share": 0.0599,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "배터리",
-      "caption": "배터리 관련 제품·서비스",
-      "kind": "battery",
-      "visual": "배터리",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "title": "알루미늄 제품제조 및 판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.3%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "알루미늄 제품제조",
-      "caption": "알루미늄 제품제조 관련 제품·서비스",
-      "kind": "service",
-      "visual": "알루미늄",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "title": "빌 렛",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.7%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "탈산제",
-      "caption": "탈산제 관련 제품·서비스",
-      "kind": "service",
-      "visual": "탈산제",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "title": "재생연 제품제조 및 판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 94.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "순연드로스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

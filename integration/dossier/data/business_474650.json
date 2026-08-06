@@ -105,7 +105,22 @@
   "snippets": {
     "overview": "제품인 3D 프린터 장비 제조는 개별 수주로 주문 제작방식으로 생산되고 있습니다. 3D 프린팅 서비스란, 고객사가 원하는 3D 프린팅 출력물을 당사의 3D 프린터를 통해 생산 및 제공하는 서비스입니다.",
     "segment_finance": "제품인 3D 프린터 장비 제조는 개별 수주로 주문 제작방식으로 생산되고 있습니다. 3D 프린팅 서비스란, 고객사가 원하는 3D 프린팅 출력물을 당사의 3D 프린터를 통해 생산 및 제공하는 서비스입니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "메탈",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
+        "revenue_share": 0.0633,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "모니터링",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.4%",
+        "revenue_share": 0.2843,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "보급형 3D 프린터",
       "교사",
@@ -118,40 +133,62 @@
       "제품사진 mbj.jpg MBJ",
       "3D 프린터"
     ],
-    "investor_note": "제품인 3D 프린터 장비 제조는 개별 수주로 주문 제작방식으로 생산되고 있습니다. 3D 프린팅 서비스란, 고객사가 원하는 3D 프린팅 출력물을 당사의 3D 프린터를 통해 생산 및 제공하는 서비스입니다."
+    "investor_note": "제품인 3D 프린터 장비 제조는 개별 수주로 주문 제작방식으로 생산되고 있습니다. 3D 프린팅 서비스란, 고객사가 원하는 3D 프린팅 출력물을 당사의 3D 프린터를 통해 생산 및 제공하는 서비스입니다.",
+    "product_service_segments": [
+      {
+        "name": "제품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.4%",
+        "revenue_share": 0.2443,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "메탈",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
+        "revenue_share": 0.0633,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "모니터링",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.4%",
+        "revenue_share": 0.2843,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "3D 프린팅 서비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.6%",
+        "revenue_share": 0.1057,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "보급형 3D 프린터",
-      "caption": "보급형 3D 프린터 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "메탈",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "교사",
-      "caption": "교사 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "모니터링",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.4%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_141eab6519656e30.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "수지(레진",
-      "caption": "수지(레진 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "3D 프린팅 서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.6%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "Resin)",
-      "caption": "Resin) 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -155,29 +155,32 @@
     "segment_finance": "대한유화는 나프타를 분해해 에틸렌·프로필렌 같은 기초유분을 만들고, 이를 원료로 폴리에틸렌(HDPE)·폴리프로필렌(PP) 등 플라스틱 소재까지 생산하는 국내 대표 석유화학 회사입니다. 2025년에는 유틸리티(전기·증기)와 소금을 만드는 한주를 새로 자회사로 편입해 매출원을 넓혔으며, 매출은 기초유분(45%)과 폴리머(39%)가 대부분을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3조 3,478억 원으로 전년 대비 19.6% 늘었고 영업이익과 당기순이익 모두 전년 적자에서 흑자로 전환했습니다(각각 526억 원, 558억 원). 다만 석유화학 업황 부진으로 핵심 사업부인 온산·울산공장은 최근 4개년간 영업손실을 기록했고, 이번 감사에서 온산공장 설비에 대해 320억 원의 손상차손이 인식됐습니다. 부채비율은 29.7%로 재무구조는 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "석유화학(기초유분·모노머)",
-        "desc": "에틸렌·프로필렌 등 NCC 기초원료",
-        "revenue_share": 0.448
+        "name": "석유화학",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.8%",
+        "revenue_share": 0.4481,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "석유화학(폴리머)",
-        "desc": "PP·HDPE 등 플라스틱 소재",
-        "revenue_share": 0.39
-      },
-      {
-        "name": "유틸리티",
-        "desc": "전기·증기·공업용수(자회사 한주)",
-        "revenue_share": 0.154
+        "name": "폴리머",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.0%",
+        "revenue_share": 0.3898,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "산업용가스",
-        "desc": "질소·산소·아르곤 등(자회사 코리아에어텍)",
-        "revenue_share": 0.018
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
+        "revenue_share": 0.0181,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "소금",
-        "desc": "정제소금(자회사 한주)",
-        "revenue_share": 0.012
+        "name": "유틸리티",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.4%",
+        "revenue_share": 0.1538,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -191,40 +194,70 @@
       "전기·증기·공업용수(유틸리티)",
       "정제소금"
     ],
-    "investor_note": "대한유화는 나프타를 분해해 에틸렌·프로필렌 같은 기초유분을 만들고, 이를 원료로 폴리에틸렌(HDPE)·폴리프로필렌(PP) 등 플라스틱 소재까지 생산하는 국내 대표 석유화학 회사입니다. 2025년에는 유틸리티(전기·증기)와 소금을 만드는 한주를 새로 자회사로 편입해 매출원을 넓혔으며, 매출은 기초유분(45%)과 폴리머(39%)가 대부분을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3조 3,478억 원으로 전년 대비 19.6% 늘었고 영업이익과 당기순이익 모두 전년 적자에서 흑자로 전환했습니다(각각 526억 원, 558억 원). 다만 석유화학 업황 부진으로 핵심 사업부인 온산·울산공장은 최근 4개년간 영업손실을 기록했고, 이번 감사에서 온산공장 설비에 대해 320억 원의 손상차손이 인식됐습니다. 부채비율은 29.7%로 재무구조는 안정적인 편입니다."
+    "investor_note": "대한유화는 나프타를 분해해 에틸렌·프로필렌 같은 기초유분을 만들고, 이를 원료로 폴리에틸렌(HDPE)·폴리프로필렌(PP) 등 플라스틱 소재까지 생산하는 국내 대표 석유화학 회사입니다. 2025년에는 유틸리티(전기·증기)와 소금을 만드는 한주를 새로 자회사로 편입해 매출원을 넓혔으며, 매출은 기초유분(45%)과 폴리머(39%)가 대부분을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3조 3,478억 원으로 전년 대비 19.6% 늘었고 영업이익과 당기순이익 모두 전년 적자에서 흑자로 전환했습니다(각각 526억 원, 558억 원). 다만 석유화학 업황 부진으로 핵심 사업부인 온산·울산공장은 최근 4개년간 영업손실을 기록했고, 이번 감사에서 온산공장 설비에 대해 320억 원의 손상차손이 인식됐습니다. 부채비율은 29.7%로 재무구조는 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "석유화학",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.8%",
+        "revenue_share": 0.4481,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "폴리머",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.0%",
+        "revenue_share": 0.3898,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "산업용가스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
+        "revenue_share": 0.0181,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "유틸리티",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.4%",
+        "revenue_share": 0.1538,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "석유화학(기초유분·모노머)",
-      "caption": "에틸렌·프로필렌 등 NCC 기초원료",
+      "title": "화학소재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.8%",
       "kind": "material",
-      "visual": "석유화학",
-      "image": "../data/business_images/business_image_local_oil.svg",
-      "image_source": "Local curated visual"
+      "visual": "CHEMICAL",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "석유화학(폴리머)",
-      "caption": "PP·HDPE 등 플라스틱 소재",
+      "title": "폴리머",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.0%",
       "kind": "material",
-      "visual": "석유화학",
-      "image": "../data/business_images/business_image_local_oil.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "유틸리티",
-      "caption": "전기·증기·공업용수(자회사 한주)",
-      "kind": "service",
-      "visual": "유틸리티",
-      "image": "../data/business_images/business_image_local_finance_hold.svg",
-      "image_source": "Local curated visual"
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "산업용가스",
-      "caption": "질소·산소·아르곤 등(자회사 코리아에어텍)",
-      "kind": "service",
-      "visual": "산업용가스",
-      "image": "../data/business_images/business_image_local_finance_hold.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "유틸리티",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.4%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

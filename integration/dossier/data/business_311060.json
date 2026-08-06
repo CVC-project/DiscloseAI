@@ -155,24 +155,25 @@
     "segment_finance": "(주)엘에이티의 주요 사업은 HBM, OLED, 배터리, 양산용장비입니다. 또한 당사는 원가기준 투입법을 적용하여 진행기준수익을 인식하는 수주계약은 없습니다. 수주상황 당사는 일부 제품군에서 거래처의 생산계획에 따라 납품하고 있으나, 공급물량이 확정되어 있지 않고 대내외적 경제환경 변화와 그에 따른 수요를 정확히 예측할 수 없습니다.",
     "segment_breakdown": [
       {
-        "name": "HBM",
-        "desc": "HBM 관련 제품·서비스",
-        "revenue_share": null
-      },
-      {
-        "name": "OLED",
-        "desc": "OLED 관련 제품·서비스",
-        "revenue_share": null
-      },
-      {
-        "name": "배터리",
-        "desc": "배터리 관련 제품·서비스",
-        "revenue_share": null
-      },
-      {
         "name": "양산용장비",
-        "desc": "양산용장비 관련 제품·서비스",
-        "revenue_share": null
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 87.2%",
+        "revenue_share": 0.872,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "R&D용장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.1%",
+        "revenue_share": 0.081,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "C/S",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.7%",
+        "revenue_share": 0.047,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -188,32 +189,55 @@
       "CVD",
       "Sputter 등"
     ],
-    "investor_note": "(주)엘에이티의 주요 사업은 HBM, OLED, 배터리, 양산용장비입니다. 또한 당사는 원가기준 투입법을 적용하여 진행기준수익을 인식하는 수주계약은 없습니다. 수주상황 당사는 일부 제품군에서 거래처의 생산계획에 따라 납품하고 있으나, 공급물량이 확정되어 있지 않고 대내외적 경제환경 변화와 그에 따른 수요를 정확히 예측할 수 없습니다."
+    "investor_note": "(주)엘에이티의 주요 사업은 HBM, OLED, 배터리, 양산용장비입니다. 또한 당사는 원가기준 투입법을 적용하여 진행기준수익을 인식하는 수주계약은 없습니다. 수주상황 당사는 일부 제품군에서 거래처의 생산계획에 따라 납품하고 있으나, 공급물량이 확정되어 있지 않고 대내외적 경제환경 변화와 그에 따른 수요를 정확히 예측할 수 없습니다.",
+    "product_service_segments": [
+      {
+        "name": "양산용장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 87.2%",
+        "revenue_share": 0.872,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "R&D용장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.1%",
+        "revenue_share": 0.081,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "C/S",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.7%",
+        "revenue_share": 0.047,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "OLED",
-      "caption": "OLED 관련 제품·서비스",
-      "kind": "display",
-      "visual": "OLED",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "배터리",
-      "caption": "배터리 관련 제품·서비스",
-      "kind": "battery",
-      "visual": "배터리",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
       "title": "양산용장비",
-      "caption": "양산용장비 관련 제품·서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 87.2%",
       "kind": "service",
-      "visual": "양산용장비",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "R&D용장비",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.1%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "C/S",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

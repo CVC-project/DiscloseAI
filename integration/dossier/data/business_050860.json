@@ -155,14 +155,32 @@
     "segment_finance": "아세아텍은 관리기·스피드스프레이어·트랙터·콤바인 등 농업용 기계를 만드는 국내 대표 농기계 전문기업으로, 자체 생산 제품이 매출의 약 91%를 차지합니다. 정부의 농기계 구입 융자 정책에 영향을 크게 받는 사업 특성을 갖고 있습니다. 과거 공시 기반 참고 정보로, 최근(2025년 6월 결산) 매출액은 1,132억 원으로 전년 대비 8.5% 줄었고 영업이익과 당기순이익도 각각 37.6%, 39.9% 감소해 내수 부진의 영향을 받았습니다. 부채비율은 51.5%, ROE(자기자본이익률)는 2.1%로 수익성이 다소 낮아진 모습입니다.",
     "segment_breakdown": [
       {
-        "name": "부품",
-        "desc": "엔진 등 부품 판매",
-        "revenue_share": 0.063
+        "name": "농업용기계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 90.9%",
+        "revenue_share": 0.909,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "상품",
-        "desc": "동력운반차 등 상품 매출",
-        "revenue_share": 0.028
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.8%",
+        "revenue_share": 0.028,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
+        "revenue_share": 0.063,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "관리기작업기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 98.0%",
+        "revenue_share": 0.98,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -173,24 +191,70 @@
       "승용이앙기",
       "동력운반차"
     ],
-    "investor_note": "아세아텍은 관리기·스피드스프레이어·트랙터·콤바인 등 농업용 기계를 만드는 국내 대표 농기계 전문기업으로, 자체 생산 제품이 매출의 약 91%를 차지합니다. 정부의 농기계 구입 융자 정책에 영향을 크게 받는 사업 특성을 갖고 있습니다. 과거 공시 기반 참고 정보로, 최근(2025년 6월 결산) 매출액은 1,132억 원으로 전년 대비 8.5% 줄었고 영업이익과 당기순이익도 각각 37.6%, 39.9% 감소해 내수 부진의 영향을 받았습니다. 부채비율은 51.5%, ROE(자기자본이익률)는 2.1%로 수익성이 다소 낮아진 모습입니다."
+    "investor_note": "아세아텍은 관리기·스피드스프레이어·트랙터·콤바인 등 농업용 기계를 만드는 국내 대표 농기계 전문기업으로, 자체 생산 제품이 매출의 약 91%를 차지합니다. 정부의 농기계 구입 융자 정책에 영향을 크게 받는 사업 특성을 갖고 있습니다. 과거 공시 기반 참고 정보로, 최근(2025년 6월 결산) 매출액은 1,132억 원으로 전년 대비 8.5% 줄었고 영업이익과 당기순이익도 각각 37.6%, 39.9% 감소해 내수 부진의 영향을 받았습니다. 부채비율은 51.5%, ROE(자기자본이익률)는 2.1%로 수익성이 다소 낮아진 모습입니다.",
+    "product_service_segments": [
+      {
+        "name": "농업용기계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 90.9%",
+        "revenue_share": 0.909,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.8%",
+        "revenue_share": 0.028,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
+        "revenue_share": 0.063,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "관리기작업기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 98.0%",
+        "revenue_share": 0.98,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "부품",
-      "caption": "엔진 등 부품 판매",
-      "kind": "auto",
-      "visual": "부품",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "title": "농업용기계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 90.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "상품",
-      "caption": "동력운반차 등 상품 매출",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.8%",
       "kind": "service",
-      "visual": "상품",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "관리기작업기",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 98.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

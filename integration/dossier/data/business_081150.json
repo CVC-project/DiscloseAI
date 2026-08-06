@@ -153,38 +153,60 @@
   "snippets": {
     "overview": "주식회사 티플랙스의 주요 사업은 사업소(사업부문)입니다. 상품매출의 경우는 유통상을 통하여 도매판매가 이루어지고 있습니다. 따라서 당사는 중개상, 도매상, 판매전문자회사 등의 제도를 채택하고 있지 않습니다.",
     "segment_finance": "주식회사 티플랙스의 주요 사업은 사업소(사업부문)입니다. 상품매출의 경우는 유통상을 통하여 도매판매가 이루어지고 있습니다. 따라서 당사는 중개상, 도매상, 판매전문자회사 등의 제도를 채택하고 있지 않습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.9%",
+        "revenue_share": 0.179,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.001,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "희소금속",
       "봉강",
       "후판"
     ],
-    "investor_note": "주식회사 티플랙스의 주요 사업은 사업소(사업부문)입니다. 상품매출의 경우는 유통상을 통하여 도매판매가 이루어지고 있습니다. 따라서 당사는 중개상, 도매상, 판매전문자회사 등의 제도를 채택하고 있지 않습니다."
+    "investor_note": "주식회사 티플랙스의 주요 사업은 사업소(사업부문)입니다. 상품매출의 경우는 유통상을 통하여 도매판매가 이루어지고 있습니다. 따라서 당사는 중개상, 도매상, 판매전문자회사 등의 제도를 채택하고 있지 않습니다.",
+    "product_service_segments": [
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.9%",
+        "revenue_share": 0.179,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 82.0%",
+        "revenue_share": 0.82,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.001,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "희소금속",
-      "caption": "희소금속 관련 제품과 서비스를 통해 매출을 만듭니다.",
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.9%",
       "kind": "material",
-      "visual": "희소금속",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "봉강",
-      "caption": "봉강 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "봉강",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "후판",
-      "caption": "후판 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "후판",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

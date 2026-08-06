@@ -107,9 +107,25 @@
     "segment_finance": "(주)프로젠의 주요 제품·서비스는 의약품, 바이오시밀러, 기업, 비만, 라이선스 계약 정보, Super EGF입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 원재료 매입에 관한 사항 당사는 신약 연구개발 기업으로 생산 및 판매하는 제품이 없어 원재료 등의 매입은 발생하지 않습니다. 원재료 제품별 비중 당사는 신약 연구개발 기업으로 생산 및 판매하는 제품이 없으며, 원재료의 제품별 비중은산출할 수 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "바이오",
-        "desc": "바이오시밀러 관련 제품·서비스",
-        "revenue_share": null
+        "name": "Super EGF",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.8%",
+        "revenue_share": 0.0283,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "lgE Trap",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 62.2%",
+        "revenue_share": 0.6216,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "대사성질환 치료물질",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.6%",
+        "revenue_share": 0.2262,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -126,40 +142,70 @@
       "제품화",
       "제품의 특성"
     ],
-    "investor_note": "(주)프로젠의 주요 제품·서비스는 의약품, 바이오시밀러, 기업, 비만, 라이선스 계약 정보, Super EGF입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 원재료 매입에 관한 사항 당사는 신약 연구개발 기업으로 생산 및 판매하는 제품이 없어 원재료 등의 매입은 발생하지 않습니다. 원재료 제품별 비중 당사는 신약 연구개발 기업으로 생산 및 판매하는 제품이 없으며, 원재료의 제품별 비중은산출할 수 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)프로젠의 주요 제품·서비스는 의약품, 바이오시밀러, 기업, 비만, 라이선스 계약 정보, Super EGF입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 원재료 매입에 관한 사항 당사는 신약 연구개발 기업으로 생산 및 판매하는 제품이 없어 원재료 등의 매입은 발생하지 않습니다. 원재료 제품별 비중 당사는 신약 연구개발 기업으로 생산 및 판매하는 제품이 없으며, 원재료의 제품별 비중은산출할 수 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "신약연구개발",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 73.2%",
+        "revenue_share": 0.7324,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Super EGF",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.8%",
+        "revenue_share": 0.0283,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "lgE Trap",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 62.2%",
+        "revenue_share": 0.6216,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "대사성질환 치료물질",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.6%",
+        "revenue_share": 0.2262,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "의약품",
-      "caption": "의약품 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 73.2%",
       "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "바이오시밀러",
-      "caption": "바이오시밀러 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_default_b.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "기업",
-      "caption": "기업 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "Super EGF",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.8%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "비만",
-      "caption": "비만 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "lgE Trap",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 62.2%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "대사성질환 치료물질",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

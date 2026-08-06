@@ -111,13 +111,17 @@
     "segment_breakdown": [
       {
         "name": "컨테이너",
-        "desc": "컨테이너 수송 서비스 제공",
-        "revenue_share": 0.849
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 84.9%",
+        "revenue_share": 0.849,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "벌크",
-        "desc": "유조선, 건화물선 등 벌크화물 수송",
-        "revenue_share": 0.133
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.3%",
+        "revenue_share": 0.133,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "investor_note": "에이치엠엠은 세계 최대 규모의 컨테이너선 운영사로, 컨테이너 운송(매출의 84.9%)을 주력으로 벌크화물 운송과 터미널 운영 등 다양한 해운·물류 서비스를 제공합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 10조 8,914억 원으로 전년 대비 6.9% 감소했으나, 영업이익 1조 4,612억 원과 순이익 1조 8,787억 원을 기록하며 여전히 흑자를 유지하고 있습니다. 다만 영업이익은 전년 대비 58.4% 하락했는데, 이는 해운 시황 변동성과 원가 상승의 영향입니다. 재무 건전성 측면에서 총자산 33조 5,631억 원에 부채비율 26.3%(부채가 자본의 26.3% 수준)로 안정적인 구조를 유지하고 있으며, 자기자본수익률 7.1%로 적정 수준의 수익성을 보이고 있습니다. 회사는 주당배당금 700원으로 배당성향 35.2%를 실현하며 주주환원 정책을 지속하고 있습니다.",
@@ -134,30 +138,53 @@
       "제품운반선"
     ],
     "raw_moves": [],
-    "utilization": []
+    "utilization": [],
+    "product_service_segments": [
+      {
+        "name": "컨테이너",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 84.9%",
+        "revenue_share": 0.849,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "벌크",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.3%",
+        "revenue_share": 0.133,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타(*)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
+        "revenue_share": 0.018,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "컨테이너선",
-      "caption": "컨테이너 운임과 물동량이 매출을 좌우합니다.",
-      "kind": "ship",
-      "visual": "BOX",
+      "title": "컨테이너",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 84.9%",
+      "kind": "telecom",
+      "visual": "NET",
       "image": "../data/business_images/business_image_3078a83d5189713b.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "벌크선",
-      "caption": "원자재 운송 수요와 벌크 운임 시황에 영향을 받습니다.",
-      "kind": "ship",
-      "visual": "BULK",
+      "title": "벌크",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.3%",
+      "kind": "telecom",
+      "visual": "NET",
       "image": "../data/business_images/business_image_3078a83d5189713b.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "터미널·물류",
-      "caption": "항만·물류 네트워크가 서비스 경쟁력을 만듭니다.",
-      "kind": "platform",
-      "visual": "PORT",
+      "title": "기타(*)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
+      "kind": "telecom",
+      "visual": "NET",
       "image": "../data/business_images/business_image_3078a83d5189713b.avif",
       "image_source": "Unsplash"
     }

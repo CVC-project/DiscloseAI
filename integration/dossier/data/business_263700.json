@@ -155,9 +155,32 @@
     "segment_finance": "주식회사 케어랩스의 주요 제품·서비스는 플랫폼, 특허권(국내), 서버, 프로그램입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 연결실체가 영위하는 플랫폼, 마케팅, 솔루션 사업부문은 생산설비를 통한 생산이 아닌 인적자원을 활용한 사업이 주가 되기 때문에 생산활동과 관련한 원재료의 현황이나 원재료의 제품별 비중을 산정하기는 어렵습니다. 생산 및 설비에 관한 사항 연결실체는 소프트웨어 제작 및 공급 등이 주된 사업이며, 고정된 생산설비에서 반복적인 생산활동을 통하여 물리적인 제품을 만들어내는 생산설비가 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "건강보험",
-        "desc": "보험계약과 자산운용 중심 서비스",
-        "revenue_share": null
+        "name": "플랫폼",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.4%",
+        "revenue_share": 0.4638,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "마케팅",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.2%",
+        "revenue_share": 0.3221,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "솔루션",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.4%",
+        "revenue_share": 0.214,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총 합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -166,40 +189,70 @@
       "서버",
       "프로그램"
     ],
-    "investor_note": "주식회사 케어랩스의 주요 제품·서비스는 플랫폼, 특허권(국내), 서버, 프로그램입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 연결실체가 영위하는 플랫폼, 마케팅, 솔루션 사업부문은 생산설비를 통한 생산이 아닌 인적자원을 활용한 사업이 주가 되기 때문에 생산활동과 관련한 원재료의 현황이나 원재료의 제품별 비중을 산정하기는 어렵습니다. 생산 및 설비에 관한 사항 연결실체는 소프트웨어 제작 및 공급 등이 주된 사업이며, 고정된 생산설비에서 반복적인 생산활동을 통하여 물리적인 제품을 만들어내는 생산설비가 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사 케어랩스의 주요 제품·서비스는 플랫폼, 특허권(국내), 서버, 프로그램입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 연결실체가 영위하는 플랫폼, 마케팅, 솔루션 사업부문은 생산설비를 통한 생산이 아닌 인적자원을 활용한 사업이 주가 되기 때문에 생산활동과 관련한 원재료의 현황이나 원재료의 제품별 비중을 산정하기는 어렵습니다. 생산 및 설비에 관한 사항 연결실체는 소프트웨어 제작 및 공급 등이 주된 사업이며, 고정된 생산설비에서 반복적인 생산활동을 통하여 물리적인 제품을 만들어내는 생산설비가 없습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "플랫폼",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.4%",
+        "revenue_share": 0.4638,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "마케팅",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.2%",
+        "revenue_share": 0.3221,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "솔루션",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.4%",
+        "revenue_share": 0.214,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총 합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "플랫폼",
-      "caption": "플랫폼 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "플랫폼 서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.4%",
+      "kind": "platform",
+      "visual": "PLATFORM",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "마케팅",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.2%",
       "kind": "platform",
       "visual": "APP",
-      "image": "../data/business_images/business_image_local_content.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "특허권(국내)",
-      "caption": "특허권(국내) 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "소프트웨어·솔루션",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.4%",
       "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_content.svg",
-      "image_source": "Local curated visual"
+      "visual": "SOFTWARE",
+      "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "서버",
-      "caption": "서버 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_content.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "프로그램",
-      "caption": "프로그램 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_content.svg",
-      "image_source": "Local curated visual"
+      "title": "총 합계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+      "kind": "platform",
+      "visual": "APP",
+      "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

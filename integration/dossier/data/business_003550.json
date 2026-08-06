@@ -155,24 +155,25 @@
     "segment_finance": "자체 수익은 배당금(44%)과 상표권 사용료(39%), 임대수익(17%)으로 구성됩니다. 과거 공시 기반 참고 정보로, 연결 매출액은 7조 2,525억 원으로 전년 대비 1.1% 늘었지만 영업이익은 5.7% 줄었고, 당기순이익은 26.5% 증가했습니다. 부채비율은 12.0%로 매우 낮아 재무구조는 안정적입니다.",
     "segment_breakdown": [
       {
-        "name": "지주부문 자체수익",
-        "desc": "배당금·상표권사용료·임대수익",
-        "revenue_share": 0.11
+        "name": "지주회사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
+        "revenue_share": 0.05,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "부동산자산관리·레저",
-        "desc": "디앤오(AM·레저·CM), 미래엠(호텔) 등",
-        "revenue_share": 0.04
+        "name": "상표권사용수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.0%",
+        "revenue_share": 0.04,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "교육·경영자문",
-        "desc": "LG경영개발원의 컨설팅·교육·AI연구용역",
-        "revenue_share": 0.03
-      },
-      {
-        "name": "스포츠구단·부동산임대",
-        "desc": "LG스포츠, LG Holdings Japan",
-        "revenue_share": 0.01
+        "name": "임대수익 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.02,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -183,40 +184,70 @@
       "석유화학·배터리소재·바이오(LG화학, 지분법)",
       "통신서비스(LG유플러스, 지분법)"
     ],
-    "investor_note": "자체 수익은 배당금(44%)과 상표권 사용료(39%), 임대수익(17%)으로 구성됩니다. 과거 공시 기반 참고 정보로, 연결 매출액은 7조 2,525억 원으로 전년 대비 1.1% 늘었지만 영업이익은 5.7% 줄었고, 당기순이익은 26.5% 증가했습니다. 부채비율은 12.0%로 매우 낮아 재무구조는 안정적입니다."
+    "investor_note": "자체 수익은 배당금(44%)과 상표권 사용료(39%), 임대수익(17%)으로 구성됩니다. 과거 공시 기반 참고 정보로, 연결 매출액은 7조 2,525억 원으로 전년 대비 1.1% 늘었지만 영업이익은 5.7% 줄었고, 당기순이익은 26.5% 증가했습니다. 부채비율은 12.0%로 매우 낮아 재무구조는 안정적입니다.",
+    "product_service_segments": [
+      {
+        "name": "지주회사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
+        "revenue_share": 0.05,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상표권사용수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.0%",
+        "revenue_share": 0.04,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임대수익 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.02,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "IT서비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 63.0%",
+        "revenue_share": 0.63,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "IT서비스(LG씨엔에스 등)",
-      "caption": "클라우드·AI, SI/SM 등 IT서비스 (연결 자회사)",
+      "title": "지주회사",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
       "kind": "service",
-      "visual": "AI",
-      "image": "../data/business_images/business_image_local_cloud.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "지주부문 자체수익",
-      "caption": "배당금·상표권사용료·임대수익",
+      "title": "상표권사용수익",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.0%",
       "kind": "service",
-      "visual": "지주부문",
-      "image": "../data/business_images/business_image_local_finance_hold.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "부동산자산관리·레저",
-      "caption": "디앤오(AM·레저·CM), 미래엠(호텔) 등",
+      "title": "임대수익 등",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
       "kind": "service",
-      "visual": "부동산자산관리",
-      "image": "../data/business_images/business_image_local_fm.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "교육·경영자문",
-      "caption": "LG경영개발원의 컨설팅·교육·AI연구용역",
+      "title": "IT서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 63.0%",
       "kind": "service",
-      "visual": "AI",
-      "image": "../data/business_images/business_image_local_education.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

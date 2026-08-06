@@ -155,24 +155,11 @@
     "segment_finance": "동일금속은 건설기계 장비 부품 전문생산업체로, 크롤러 크레인용 트랙슈·텀블러·아이들러와 굴삭기용 어드져스트 컴포넌트, 초대형 굴삭기의 특수주강 트랙슈 등을 만듭니다. 크롤러크레인용 부품은 미국·일본으로 전량 수출되고, 굴삭기용 부품은 국내 3사와 해외 4개사에 공급됩니다. 과거 공시 기반 참고 정보로, 최근 매출액은 917억 원으로 전년 대비 6.7% 늘었고 영업이익은 14억 원으로 131.8% 크게 증가했지만, 당기순이익은 50억 원으로 30.3% 줄었습니다. 부채비율은 15.8%로 낮아 재무구조는 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "크롤러크레인용 트랙슈",
-        "desc": "미국·일본 크롤러크레인 업체에 공급하는 트랙슈 부품",
-        "revenue_share": 0.305
-      },
-      {
-        "name": "굴삭기용 부품",
-        "desc": "국내외 굴삭기 업체에 공급하는 컴포넌트·트랙스프링",
-        "revenue_share": 0.245
-      },
-      {
-        "name": "초대형 굴삭기용 트랙슈",
-        "desc": "일본 히타치건기 등에 공급하는 광산용 초대형 굴삭기 부품",
-        "revenue_share": 0.086
-      },
-      {
-        "name": "BOOM류",
-        "desc": "굴삭기 BOOM·ARM 등 구조물 부품",
-        "revenue_share": 0.003
+        "name": "MCG-미국",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 70.0%",
+        "revenue_share": 0.7,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -182,40 +169,25 @@
       "트랙스프링 어셈블리",
       "굴삭기 BOOM류"
     ],
-    "investor_note": "동일금속은 건설기계 장비 부품 전문생산업체로, 크롤러 크레인용 트랙슈·텀블러·아이들러와 굴삭기용 어드져스트 컴포넌트, 초대형 굴삭기의 특수주강 트랙슈 등을 만듭니다. 크롤러크레인용 부품은 미국·일본으로 전량 수출되고, 굴삭기용 부품은 국내 3사와 해외 4개사에 공급됩니다. 과거 공시 기반 참고 정보로, 최근 매출액은 917억 원으로 전년 대비 6.7% 늘었고 영업이익은 14억 원으로 131.8% 크게 증가했지만, 당기순이익은 50억 원으로 30.3% 줄었습니다. 부채비율은 15.8%로 낮아 재무구조는 안정적인 편입니다."
+    "investor_note": "동일금속은 건설기계 장비 부품 전문생산업체로, 크롤러 크레인용 트랙슈·텀블러·아이들러와 굴삭기용 어드져스트 컴포넌트, 초대형 굴삭기의 특수주강 트랙슈 등을 만듭니다. 크롤러크레인용 부품은 미국·일본으로 전량 수출되고, 굴삭기용 부품은 국내 3사와 해외 4개사에 공급됩니다. 과거 공시 기반 참고 정보로, 최근 매출액은 917억 원으로 전년 대비 6.7% 늘었고 영업이익은 14억 원으로 131.8% 크게 증가했지만, 당기순이익은 50억 원으로 30.3% 줄었습니다. 부채비율은 15.8%로 낮아 재무구조는 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "MCG-미국",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 70.0%",
+        "revenue_share": 0.7,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "크롤러크레인용 트랙슈",
-      "caption": "미국·일본 크롤러크레인 업체에 공급하는 트랙슈 부품",
-      "kind": "auto",
-      "visual": "크롤러크레인용",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "굴삭기용 부품",
-      "caption": "국내외 굴삭기 업체에 공급하는 컴포넌트·트랙스프링",
-      "kind": "auto",
-      "visual": "굴삭기용",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "초대형 굴삭기용 트랙슈",
-      "caption": "일본 히타치건기 등에 공급하는 광산용 초대형 굴삭기 부품",
-      "kind": "auto",
-      "visual": "초대형",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "BOOM류",
-      "caption": "굴삭기 BOOM·ARM 등 구조물 부품",
-      "kind": "auto",
-      "visual": "BOOM류",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "title": "MCG-미국",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 70.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

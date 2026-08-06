@@ -155,9 +155,18 @@
     "segment_finance": "제품을 만들고 판매하는 제조 기반 회사입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "산업은행",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
+        "name": "덕산네오룩스(주)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 58.8%",
+        "revenue_share": 0.588,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "현대중공업터보기계(*1)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 41.2%",
+        "revenue_share": 0.412,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -173,24 +182,40 @@
       "제작",
       "시운전"
     ],
-    "investor_note": "제품을 만들고 판매하는 제조 기반 회사입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "제품을 만들고 판매하는 제조 기반 회사입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "덕산네오룩스(주)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 58.8%",
+        "revenue_share": 0.588,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "현대중공업터보기계(*1)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 41.2%",
+        "revenue_share": 0.412,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "산업은행",
-      "caption": "예대, 수수료, 투자 등 금융 서비스",
-      "kind": "bank",
-      "visual": "산업은행",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "title": "덕산네오룩스(주)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 58.8%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "전자부품 제조업",
-      "caption": "전자부품 제조업을 중심으로 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "title": "현대중공업터보기계(*1)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 41.2%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

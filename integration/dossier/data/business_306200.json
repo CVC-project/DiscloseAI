@@ -155,9 +155,18 @@
     "segment_finance": "(주)세아제강의 주요 사업은 해상풍력사업, 출자증권입니다. 수주상황수주 및 납품이 빈번하고 주문과 생산 제품 인도납기기간이 길지 않아 수주량과 매출량의 차이가 크지 않습니다. 또한 특수관생산기술팀은 특수관 신규 제조 공정 기술 정보 수집과 제품 품질 향상 등 특수관 제품의 경쟁력 강화를 위해 노력하고 있습니다.",
     "segment_breakdown": [
       {
-        "name": "출자증권",
-        "desc": "위탁매매, IB, 운용 등 증권 서비스",
-        "revenue_share": null
+        "name": "강관",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 92.0%",
+        "revenue_share": 0.92,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+        "revenue_share": 0.08,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,24 +183,40 @@
       "상용화",
       "디자인"
     ],
-    "investor_note": "(주)세아제강의 주요 사업은 해상풍력사업, 출자증권입니다. 수주상황수주 및 납품이 빈번하고 주문과 생산 제품 인도납기기간이 길지 않아 수주량과 매출량의 차이가 크지 않습니다. 또한 특수관생산기술팀은 특수관 신규 제조 공정 기술 정보 수집과 제품 품질 향상 등 특수관 제품의 경쟁력 강화를 위해 노력하고 있습니다."
+    "investor_note": "(주)세아제강의 주요 사업은 해상풍력사업, 출자증권입니다. 수주상황수주 및 납품이 빈번하고 주문과 생산 제품 인도납기기간이 길지 않아 수주량과 매출량의 차이가 크지 않습니다. 또한 특수관생산기술팀은 특수관 신규 제조 공정 기술 정보 수집과 제품 품질 향상 등 특수관 제품의 경쟁력 강화를 위해 노력하고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "강관",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 92.0%",
+        "revenue_share": 0.92,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+        "revenue_share": 0.08,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "출자증권",
-      "caption": "위탁매매, IB, 운용 등 증권 서비스",
-      "kind": "securities",
-      "visual": "출자증권",
-      "image": "../data/business_images/business_image_local_securities.svg",
-      "image_source": "Local curated visual"
+      "title": "철강",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 92.0%",
+      "kind": "material",
+      "visual": "STEEL",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "1차 철강 제조업",
-      "caption": "1차 철강 제조업을 중심으로 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "title": "상품 등",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

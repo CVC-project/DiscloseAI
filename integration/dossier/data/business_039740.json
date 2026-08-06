@@ -155,14 +155,18 @@
     "segment_finance": "한국정보공학은 한국HPE·HPI·한국Lenovo·H3C·Pure Storage 등의 국내 총판으로 서버와 컴퓨터 주변기기를 유통하는 IT하드웨어 유통기업이며, IT 교육서비스와 이커머스 솔루션 사업도 함께 운영하고 있습니다. 매출의 91.7%가 IT유통(상품매출)에서 나오고, 교육서비스가 4.9%, 이커머스솔루션이 2.7%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,462억원으로 전년 대비 24.6% 줄었고 영업이익(4억원)과 당기순이익(17억원)도 각각 32.0%, 47.1% 감소해 실적이 뚜렷하게 위축됐습니다. 총자산은 1,113억원으로 24.3% 늘었지만 부채비율이 110.7%로 자본보다 부채가 많은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "IT유통(상품매출)",
-        "desc": "한국HPE·HPI·한국Lenovo·H3C·Pure Storage 등 총판 유통",
-        "revenue_share": 0.9167
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 91.7%",
+        "revenue_share": 0.9167,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "이커머스솔루션 및 이커머스",
-        "desc": "이커머스 솔루션 개발·운영대행",
-        "revenue_share": 0.0268
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.7%",
+        "revenue_share": 0.0268,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -172,24 +176,47 @@
       "이커머스 솔루션",
       "창업투자"
     ],
-    "investor_note": "한국정보공학은 한국HPE·HPI·한국Lenovo·H3C·Pure Storage 등의 국내 총판으로 서버와 컴퓨터 주변기기를 유통하는 IT하드웨어 유통기업이며, IT 교육서비스와 이커머스 솔루션 사업도 함께 운영하고 있습니다. 매출의 91.7%가 IT유통(상품매출)에서 나오고, 교육서비스가 4.9%, 이커머스솔루션이 2.7%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,462억원으로 전년 대비 24.6% 줄었고 영업이익(4억원)과 당기순이익(17억원)도 각각 32.0%, 47.1% 감소해 실적이 뚜렷하게 위축됐습니다. 총자산은 1,113억원으로 24.3% 늘었지만 부채비율이 110.7%로 자본보다 부채가 많은 편이라 재무 부담을 살펴볼 필요가 있습니다."
+    "investor_note": "한국정보공학은 한국HPE·HPI·한국Lenovo·H3C·Pure Storage 등의 국내 총판으로 서버와 컴퓨터 주변기기를 유통하는 IT하드웨어 유통기업이며, IT 교육서비스와 이커머스 솔루션 사업도 함께 운영하고 있습니다. 매출의 91.7%가 IT유통(상품매출)에서 나오고, 교육서비스가 4.9%, 이커머스솔루션이 2.7%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,462억원으로 전년 대비 24.6% 줄었고 영업이익(4억원)과 당기순이익(17억원)도 각각 32.0%, 47.1% 감소해 실적이 뚜렷하게 위축됐습니다. 총자산은 1,113억원으로 24.3% 늘었지만 부채비율이 110.7%로 자본보다 부채가 많은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 91.7%",
+        "revenue_share": 0.9167,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "교육서비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.9%",
+        "revenue_share": 0.049,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "이커머스솔루션 및 이커머스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.7%",
+        "revenue_share": 0.0268,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "IT유통(상품매출)",
-      "caption": "한국HPE·HPI·한국Lenovo·H3C·Pure Storage 등 총판 유통",
+      "title": "교육서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.9%",
       "kind": "service",
-      "visual": "IT유통",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "이커머스솔루션 및 이커머스",
-      "caption": "이커머스 솔루션 개발·운영대행",
-      "kind": "platform",
-      "visual": "이커머스솔루션",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "title": "소프트웨어·솔루션",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.7%",
+      "kind": "service",
+      "visual": "SOFTWARE",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

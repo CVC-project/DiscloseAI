@@ -153,7 +153,15 @@
   "snippets": {
     "overview": "주식회사 위지윅스튜디오의 주요 사업은 콘텐츠 사업, 기타 사업, 뉴미디어사업, 대관사업 등입니다. 또한, CG/VFX 및 전시, 행사대행 사업의 경우 기본적으로 고객사의 수주를 바탕으로 진행하며, 해당 뉴미디어 사업자 및 고객사와의 강한 네트워크를 기반으로 장기적 협력관계를 통해 판매를 진행하고 있습니다. 당기, 당사의 전체 매출 중 내수가 차지하는 비중은 93.8%이며, 수출이 차지하는 비중은 6.2%입니다.",
     "segment_finance": "주식회사 위지윅스튜디오의 주요 사업은 콘텐츠 사업, 기타 사업, 뉴미디어사업, 대관사업 등입니다. 또한, CG/VFX 및 전시, 행사대행 사업의 경우 기본적으로 고객사의 수주를 바탕으로 진행하며, 해당 뉴미디어 사업자 및 고객사와의 강한 네트워크를 기반으로 장기적 협력관계를 통해 판매를 진행하고 있습니다. 당기, 당사의 전체 매출 중 내수가 차지하는 비중은 93.8%이며, 수출이 차지하는 비중은 6.2%입니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "중단영업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
+        "revenue_share": 0.063,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "VFX",
       "뉴미디어 사업",
@@ -166,24 +174,55 @@
       "영화",
       "제작 서비스"
     ],
-    "investor_note": "주식회사 위지윅스튜디오의 주요 사업은 콘텐츠 사업, 기타 사업, 뉴미디어사업, 대관사업 등입니다. 또한, CG/VFX 및 전시, 행사대행 사업의 경우 기본적으로 고객사의 수주를 바탕으로 진행하며, 해당 뉴미디어 사업자 및 고객사와의 강한 네트워크를 기반으로 장기적 협력관계를 통해 판매를 진행하고 있습니다. 당기, 당사의 전체 매출 중 내수가 차지하는 비중은 93.8%이며, 수출이 차지하는 비중은 6.2%입니다."
+    "investor_note": "주식회사 위지윅스튜디오의 주요 사업은 콘텐츠 사업, 기타 사업, 뉴미디어사업, 대관사업 등입니다. 또한, CG/VFX 및 전시, 행사대행 사업의 경우 기본적으로 고객사의 수주를 바탕으로 진행하며, 해당 뉴미디어 사업자 및 고객사와의 강한 네트워크를 기반으로 장기적 협력관계를 통해 판매를 진행하고 있습니다. 당기, 당사의 전체 매출 중 내수가 차지하는 비중은 93.8%이며, 수출이 차지하는 비중은 6.2%입니다.",
+    "product_service_segments": [
+      {
+        "name": "VFX 및 뉴미디어 사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.9%",
+        "revenue_share": 0.069,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "콘텐츠 사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 93.1%",
+        "revenue_share": 0.931,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "중단영업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
+        "revenue_share": 0.063,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "뉴미디어 사업",
-      "caption": "뉴미디어 사업 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "VFX 및 뉴미디어 사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.9%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_content.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
+      "image_source": "Unsplash"
     },
     {
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "title": "영화 콘텐츠 기획",
-      "caption": "영화 콘텐츠 기획 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "콘텐츠 사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 93.1%",
+      "kind": "platform",
+      "visual": "APP",
+      "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "중단영업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

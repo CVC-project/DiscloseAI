@@ -153,7 +153,15 @@
   "snippets": {
     "overview": "(주)에프에스엔의 주요 사업은 Global 사업 등입니다. 매출은 각 광고주와의 계약을 통해서 발생하므로 제품의 가격변동추이를 추정하기 어렵습니다. 생산 및 당사는 모바일 광고, 마케팅 등의 사업을 영위하는 업체로서 별도의 생산 시설은 갖고 있지 않습니다.",
     "segment_finance": "(주)에프에스엔의 주요 사업은 Global 사업 등입니다. 매출은 각 광고주와의 계약을 통해서 발생하므로 제품의 가격변동추이를 추정하기 어렵습니다. 생산 및 당사는 모바일 광고, 마케팅 등의 사업을 영위하는 업체로서 별도의 생산 시설은 갖고 있지 않습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "브랜드 및 플랫폼",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 78.1%",
+        "revenue_share": 0.7811,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "의약품",
       "마케팅",
@@ -161,32 +169,25 @@
       "매체대행",
       "제9기"
     ],
-    "investor_note": "(주)에프에스엔의 주요 사업은 Global 사업 등입니다. 매출은 각 광고주와의 계약을 통해서 발생하므로 제품의 가격변동추이를 추정하기 어렵습니다. 생산 및 당사는 모바일 광고, 마케팅 등의 사업을 영위하는 업체로서 별도의 생산 시설은 갖고 있지 않습니다."
+    "investor_note": "(주)에프에스엔의 주요 사업은 Global 사업 등입니다. 매출은 각 광고주와의 계약을 통해서 발생하므로 제품의 가격변동추이를 추정하기 어렵습니다. 생산 및 당사는 모바일 광고, 마케팅 등의 사업을 영위하는 업체로서 별도의 생산 시설은 갖고 있지 않습니다.",
+    "product_service_segments": [
+      {
+        "name": "브랜드 및 플랫폼",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 78.1%",
+        "revenue_share": 0.7811,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "마케팅",
-      "caption": "마케팅 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "광고대행",
-      "caption": "광고대행 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_content.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "매체대행",
-      "caption": "매체대행 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "title": "플랫폼 서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 78.1%",
+      "kind": "platform",
+      "visual": "PLATFORM",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

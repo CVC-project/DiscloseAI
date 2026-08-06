@@ -153,7 +153,36 @@
   "snippets": {
     "overview": "현대제철은 국내 최대 전기로 제강사이자 당진 일관제철소를 운영하는 국내 2위 고로 제강사로, 자동차·조선용 열연·냉연·후판 등을 만드는 판재사업과 건설용 철근·형강을 만드는 봉형강사업을 두 축으로 합니다. 매출은 판재사업이 약 70%로 대부분을 차지하고, 건설경기에 민감한 봉형강사업이 약 23%를 차지합니다. 최근에는 탄소중립 대응을 위한 설비투자와 함께 미국 전기로 제철소 신설도 추진하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 22조 7,332억 원으로 전년 대비 2.1% 줄었지만, 영업이익은 2,192억 원으로 37.5% 늘었습니다. 다만 당기순이익은 13억 원으로 전년 대비 84.2% 크게 줄어 매출·영업이익 개선에 비해 최종 이익은 미미한 수준에 그쳤습니다. 부채비율은 73.6%로 재무구조는 양호한 편입니다.",
     "segment_finance": "현대제철은 국내 최대 전기로 제강사이자 당진 일관제철소를 운영하는 국내 2위 고로 제강사로, 자동차·조선용 열연·냉연·후판 등을 만드는 판재사업과 건설용 철근·형강을 만드는 봉형강사업을 두 축으로 합니다. 매출은 판재사업이 약 70%로 대부분을 차지하고, 건설경기에 민감한 봉형강사업이 약 23%를 차지합니다. 최근에는 탄소중립 대응을 위한 설비투자와 함께 미국 전기로 제철소 신설도 추진하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 22조 7,332억 원으로 전년 대비 2.1% 줄었지만, 영업이익은 2,192억 원으로 37.5% 늘었습니다. 다만 당기순이익은 13억 원으로 전년 대비 84.2% 크게 줄어 매출·영업이익 개선에 비해 최종 이익은 미미한 수준에 그쳤습니다. 부채비율은 73.6%로 재무구조는 양호한 편입니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "철 강제조업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.7%",
+        "revenue_share": 0.227,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "판 재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 70.1%",
+        "revenue_share": 0.701,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "중 기 外",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.1%",
+        "revenue_share": 0.011,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "단순합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "열연강판",
       "냉연강판",
@@ -164,40 +193,70 @@
       "특수강",
       "자동차 모빌리티 부품"
     ],
-    "investor_note": "현대제철은 국내 최대 전기로 제강사이자 당진 일관제철소를 운영하는 국내 2위 고로 제강사로, 자동차·조선용 열연·냉연·후판 등을 만드는 판재사업과 건설용 철근·형강을 만드는 봉형강사업을 두 축으로 합니다. 매출은 판재사업이 약 70%로 대부분을 차지하고, 건설경기에 민감한 봉형강사업이 약 23%를 차지합니다. 최근에는 탄소중립 대응을 위한 설비투자와 함께 미국 전기로 제철소 신설도 추진하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 22조 7,332억 원으로 전년 대비 2.1% 줄었지만, 영업이익은 2,192억 원으로 37.5% 늘었습니다. 다만 당기순이익은 13억 원으로 전년 대비 84.2% 크게 줄어 매출·영업이익 개선에 비해 최종 이익은 미미한 수준에 그쳤습니다. 부채비율은 73.6%로 재무구조는 양호한 편입니다."
+    "investor_note": "현대제철은 국내 최대 전기로 제강사이자 당진 일관제철소를 운영하는 국내 2위 고로 제강사로, 자동차·조선용 열연·냉연·후판 등을 만드는 판재사업과 건설용 철근·형강을 만드는 봉형강사업을 두 축으로 합니다. 매출은 판재사업이 약 70%로 대부분을 차지하고, 건설경기에 민감한 봉형강사업이 약 23%를 차지합니다. 최근에는 탄소중립 대응을 위한 설비투자와 함께 미국 전기로 제철소 신설도 추진하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 22조 7,332억 원으로 전년 대비 2.1% 줄었지만, 영업이익은 2,192억 원으로 37.5% 늘었습니다. 다만 당기순이익은 13억 원으로 전년 대비 84.2% 크게 줄어 매출·영업이익 개선에 비해 최종 이익은 미미한 수준에 그쳤습니다. 부채비율은 73.6%로 재무구조는 양호한 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "철 강제조업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.7%",
+        "revenue_share": 0.227,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "판 재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 70.1%",
+        "revenue_share": 0.701,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "중 기 外",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.1%",
+        "revenue_share": 0.011,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "단순합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "열연강판",
-      "caption": "열연강판 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "철 강제조업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.7%",
       "kind": "material",
       "visual": "MAT",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "냉연강판",
-      "caption": "냉연강판 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "판 재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 70.1%",
       "kind": "material",
       "visual": "MAT",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "후판",
-      "caption": "후판 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "중 기 外",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.1%",
       "kind": "material",
       "visual": "MAT",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "철근",
-      "caption": "철근 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "단순합계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
       "kind": "material",
       "visual": "MAT",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

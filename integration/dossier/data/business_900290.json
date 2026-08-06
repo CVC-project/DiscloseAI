@@ -153,7 +153,36 @@
   "snippets": {
     "overview": "그레이트리치과기유한공사의 핵심은 화학입자, 화학용제, 물리화학적 코팅, 목적사업입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 매출원가 당사의 매출은 직접판매로 이루어지고 있으며, 업무는 다음과 같은 절차로 이루어집니다. 수주상황 현재 당사 재무제표에 중요한 영향을 미치는 장기공급계약 수주거래는 없습니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다.",
     "segment_finance": "그레이트리치과기유한공사의 핵심은 화학입자, 화학용제, 물리화학적 코팅, 목적사업입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 매출원가 당사의 매출은 직접판매로 이루어지고 있으며, 업무는 다음과 같은 절차로 이루어집니다. 수주상황 현재 당사 재무제표에 중요한 영향을 미치는 장기공급계약 수주거래는 없습니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "포장필름",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.7%",
+        "revenue_share": 0.0869,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "광학보호필름",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.8%",
+        "revenue_share": 0.4481,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "광학접착필름",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.8%",
+        "revenue_share": 0.2184,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동차필름",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.8%",
+        "revenue_share": 0.238,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "OLED",
       "MLCC",
@@ -168,40 +197,70 @@
       "육안식3D디스플레이 광학막의 연구개발",
       "CPP광학보호막의 최적화"
     ],
-    "investor_note": "그레이트리치과기유한공사의 핵심은 화학입자, 화학용제, 물리화학적 코팅, 목적사업입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 매출원가 당사의 매출은 직접판매로 이루어지고 있으며, 업무는 다음과 같은 절차로 이루어집니다. 수주상황 현재 당사 재무제표에 중요한 영향을 미치는 장기공급계약 수주거래는 없습니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다."
+    "investor_note": "그레이트리치과기유한공사의 핵심은 화학입자, 화학용제, 물리화학적 코팅, 목적사업입니다. 자회사 실적과 지분가치가 사업의 중심입니다. 매출원가 당사의 매출은 직접판매로 이루어지고 있으며, 업무는 다음과 같은 절차로 이루어집니다. 수주상황 현재 당사 재무제표에 중요한 영향을 미치는 장기공급계약 수주거래는 없습니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다.",
+    "product_service_segments": [
+      {
+        "name": "포장필름",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.7%",
+        "revenue_share": 0.0869,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "광학보호필름",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.8%",
+        "revenue_share": 0.4481,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "광학접착필름",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.8%",
+        "revenue_share": 0.2184,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동차필름",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.8%",
+        "revenue_share": 0.238,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
-      "kind": "display",
-      "visual": "OLED",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
+      "title": "포장필름",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "MLCC",
-      "caption": "MLCC 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "광학보호필름",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.8%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "정리",
-      "caption": "정리 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "광학접착필름",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.8%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "시장 동향",
-      "caption": "시장 동향 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "title": "자동차필름",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.8%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

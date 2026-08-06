@@ -155,14 +155,18 @@
     "segment_finance": "서한은 아파트 분양사업(자체 시행)과 건축·토목 도급공사를 주력으로 하는 종합 건설업체로, 매출의 절반 이상(56%)이 분양공사에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,451억 원으로 전년 대비 13.9% 줄었지만 영업이익은 625억 원으로 136.4%, 당기순이익은 289억 원으로 49.9% 늘어 수익성은 개선됐습니다. 부채비율은 129.1%로 건설업 특성상 다소 높은 편이며, 감사보고서에는 전기 재무제표 일부 계정을 다시 작성(전기오류수정)했다는 강조사항도 함께 담겨 있어 참고할 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "건축공사",
-        "desc": "건축 건설용역 도급공사",
-        "revenue_share": 0.3085
+        "name": "건설부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.9%",
+        "revenue_share": 0.3085,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "토목공사",
-        "desc": "토목 건설용역 도급공사",
-        "revenue_share": 0.1172
+        "name": "분양공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 56.0%",
+        "revenue_share": 0.5601,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -170,32 +174,40 @@
       "건축공사",
       "토목공사"
     ],
-    "investor_note": "서한은 아파트 분양사업(자체 시행)과 건축·토목 도급공사를 주력으로 하는 종합 건설업체로, 매출의 절반 이상(56%)이 분양공사에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,451억 원으로 전년 대비 13.9% 줄었지만 영업이익은 625억 원으로 136.4%, 당기순이익은 289억 원으로 49.9% 늘어 수익성은 개선됐습니다. 부채비율은 129.1%로 건설업 특성상 다소 높은 편이며, 감사보고서에는 전기 재무제표 일부 계정을 다시 작성(전기오류수정)했다는 강조사항도 함께 담겨 있어 참고할 필요가 있습니다."
+    "investor_note": "서한은 아파트 분양사업(자체 시행)과 건축·토목 도급공사를 주력으로 하는 종합 건설업체로, 매출의 절반 이상(56%)이 분양공사에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,451억 원으로 전년 대비 13.9% 줄었지만 영업이익은 625억 원으로 136.4%, 당기순이익은 289억 원으로 49.9% 늘어 수익성은 개선됐습니다. 부채비율은 129.1%로 건설업 특성상 다소 높은 편이며, 감사보고서에는 전기 재무제표 일부 계정을 다시 작성(전기오류수정)했다는 강조사항도 함께 담겨 있어 참고할 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "건설부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.9%",
+        "revenue_share": 0.3085,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "분양공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 56.0%",
+        "revenue_share": 0.5601,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "분양공사(아파트 분양사업)",
-      "caption": "자체 시행하는 아파트 등 주택 분양사업",
+      "title": "건축·주택",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.9%",
       "kind": "service",
-      "visual": "분양공사",
-      "image": "../data/business_images/business_image_local_housing.svg",
-      "image_source": "Local curated visual"
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "건축공사",
-      "caption": "건축 건설용역 도급공사",
+      "title": "분양공사",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 56.0%",
       "kind": "service",
-      "visual": "건축공사",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "토목공사",
-      "caption": "토목 건설용역 도급공사",
-      "kind": "service",
-      "visual": "토목공사",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

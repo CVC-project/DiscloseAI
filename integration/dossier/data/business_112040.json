@@ -155,14 +155,32 @@
     "segment_finance": "㈜위메이드의 주요 제품·서비스는 '모바일', 'PC 온라인', 'PC온라인', 경영자문 서비스 계약, 모바일 게임, 블록체인 기술입니다. 사업으로 영위하고 있으므로 일반 제조업과는 달리 원재료의 매입이 존재하지 않는 않는 바, 매입에 관한 사항은 별도로 기재하지 않습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "키움증권",
-        "desc": "위탁매매, IB, 운용 등 증권 서비스",
-        "revenue_share": null
+        "name": "라이선스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.4%",
+        "revenue_share": 0.1744,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "수익증권",
-        "desc": "위탁매매, IB, 운용 등 증권 서비스",
-        "revenue_share": null
+        "name": "모바일",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.1%",
+        "revenue_share": 0.5007,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "캐주얼게임",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.9%",
+        "revenue_share": 0.2394,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "PC 온라인",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.7%",
+        "revenue_share": 0.0669,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -179,40 +197,70 @@
       "푸쉬 시스템 개발",
       "CS Tool 개발"
     ],
-    "investor_note": "㈜위메이드의 주요 제품·서비스는 '모바일', 'PC 온라인', 'PC온라인', 경영자문 서비스 계약, 모바일 게임, 블록체인 기술입니다. 사업으로 영위하고 있으므로 일반 제조업과는 달리 원재료의 매입이 존재하지 않는 않는 바, 매입에 관한 사항은 별도로 기재하지 않습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "㈜위메이드의 주요 제품·서비스는 '모바일', 'PC 온라인', 'PC온라인', 경영자문 서비스 계약, 모바일 게임, 블록체인 기술입니다. 사업으로 영위하고 있으므로 일반 제조업과는 달리 원재료의 매입이 존재하지 않는 않는 바, 매입에 관한 사항은 별도로 기재하지 않습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "라이선스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.4%",
+        "revenue_share": 0.1744,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "모바일",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.1%",
+        "revenue_share": 0.5007,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "캐주얼게임",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.9%",
+        "revenue_share": 0.2394,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "PC 온라인",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.7%",
+        "revenue_share": 0.0669,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "클라우드 서비스",
-      "caption": "기업이 서버와 소프트웨어를 직접 보유하지 않고 빌려 쓰도록 돕는 IT 서비스입니다.",
+      "title": "라이선스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.4%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_cloud.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "DB시스템 설계",
-      "caption": "DB시스템 설계 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "모바일",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.1%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "푸쉬 시스템 개발",
-      "caption": "푸쉬 시스템 개발 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "title": "게임",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.9%",
+      "kind": "platform",
+      "visual": "GAME",
+      "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "'모바일'",
-      "caption": "'모바일' 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "PC 온라인",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.7%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

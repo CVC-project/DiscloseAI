@@ -110,29 +110,32 @@
     "segment_finance": "[HD현대(주)] 당사의 연결기준 사업부문별 매출 및 수주내역은「II. 사업의 내용, 2. 주요 제품 및 서비스」및 하단에 기재된 주요 자회사 및 종속회사의 내용을 참조 바랍니다.",
     "segment_breakdown": [
       {
-        "name": "조선해양",
-        "desc": "선박, 해양플랜트, 선박용엔진 제조",
-        "revenue_share": 0.42
+        "name": "조 선 해 양",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 42.0%",
+        "revenue_share": 0.42,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "정유",
-        "desc": "휘발유, 경유, 중유 등 석유제품 생산",
-        "revenue_share": 0.38
+        "name": "정 유",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.0%",
+        "revenue_share": 0.38,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "전기전자",
-        "desc": "변압기, 차단기, 전동기 등 전력기기 제조",
-        "revenue_share": 0.05
+        "name": "전 기 전 자",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
+        "revenue_share": 0.05,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "건설기계",
-        "desc": "굴착기, 휠로더 등 건설기계 제조",
-        "revenue_share": 0.12
-      },
-      {
-        "name": "선박서비스",
-        "desc": "선박 유지보수, 벙커링, 친환경솔루션",
-        "revenue_share": 0.03
+        "name": "건 설 기 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.0%",
+        "revenue_share": 0.12,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "investor_note": "에이치디현대주식회사는 조선해양, 정유, 건설기계 등 다양한 산업에서 사업을 영위하는 종합 중공업 기업입니다. 조선해양 부문에서는 LNG선, 컨테이너선, 원유운반선 같은 대형 선박과 선박용 엔진을 제조하고, 정유 부문에서는 휘발유와 경유 등 석유제품을 생산하며, 건설기계 부문에서는 굴착기와 휠로더를 만드는 등 여러 분야에서 핵심 제품을 공급하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 71조 원대로 전년 대비 5.2% 증가했으며, 특히 영업이익이 2배 이상 증가하고 순이익도 90% 이상 늘어나 사업 수익성이 크게 개선된 것으로 나타났습니다. 총자산은 78조 원대로 안정적인 규모를 유지하고 있고, 부채비율(기업이 빌린 돈이 자기 자본의 몇 배인지를 나타내는 지표)이 1.59배 수준으로 적정한 재무 구조를 갖추고 있으며, 영업활동 현금흐름도 4조 원대로 사업에서 실제로 벌어들이는 현금이 양호한 상태입니다.",
@@ -151,31 +154,69 @@
       "배전반"
     ],
     "raw_moves": [],
-    "utilization": []
+    "utilization": [],
+    "product_service_segments": [
+      {
+        "name": "조 선 해 양",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 42.0%",
+        "revenue_share": 0.42,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "정 유",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.0%",
+        "revenue_share": 0.38,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전 기 전 자",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
+        "revenue_share": 0.05,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "건 설 기 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.0%",
+        "revenue_share": 0.12,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "조선",
-      "caption": "조선 자회사의 수주잔고와 선가 흐름을 봅니다.",
-      "kind": "ship",
-      "visual": "SHIP",
+      "title": "조 선 해 양",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 42.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
       "image": "../data/business_images/business_image_5184e050831a4460.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "정유",
-      "caption": "정제마진과 유가가 에너지 자회사 실적을 흔듭니다.",
-      "kind": "energy",
-      "visual": "OIL",
-      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
-      "image_source": "Wikimedia Commons"
+      "title": "정 유",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_5184e050831a4460.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "건설기계",
-      "caption": "인프라 투자와 장비 수요가 경기 흐름에 민감합니다.",
-      "kind": "factory",
-      "visual": "MACH",
-      "image": "../data/business_images/business_image_c1540b930934e19f.avif",
+      "title": "전 기 전 자",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_5184e050831a4460.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "건 설 기 계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_5184e050831a4460.avif",
       "image_source": "Unsplash"
     }
   ],

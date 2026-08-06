@@ -153,7 +153,22 @@
   "snippets": {
     "overview": "우리엔터프라이즈는 50여 년 역사의 LED·일반조명 회사로 출발했지만, 현재 매출의 대부분(92%)은 자회사를 통한 LED 부품(PKG·Light Bar)과 TV 완제품(SET) 조립 사업에서 나옵니다. 조명 자체는 매출의 2%에 불과하고, 건강기능식품(하루틴, 클라리온 등 자체 브랜드) 사업이 6% 정도를 차지하며 신사업으로 키우고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 652억 원으로 전년 대비 15.4% 줄었고 영업이익도 93.0% 급감했으며, 당기순이익은 전년 흑자에서 102억 원 적자로 전환됐습니다. 부채비율은 159.3%로 자본보다 부채가 많은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다.",
     "segment_finance": "우리엔터프라이즈는 50여 년 역사의 LED·일반조명 회사로 출발했지만, 현재 매출의 대부분(92%)은 자회사를 통한 LED 부품(PKG·Light Bar)과 TV 완제품(SET) 조립 사업에서 나옵니다. 조명 자체는 매출의 2%에 불과하고, 건강기능식품(하루틴, 클라리온 등 자체 브랜드) 사업이 6% 정도를 차지하며 신사업으로 키우고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 652억 원으로 전년 대비 15.4% 줄었고 영업이익도 93.0% 급감했으며, 당기순이익은 전년 흑자에서 102억 원 적자로 전환됐습니다. 부채비율은 159.3%로 자본보다 부채가 많은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "LED BLU",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.8%",
+        "revenue_share": 0.068,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "바이오 (건강기능식품)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.0%",
+        "revenue_share": 0.0596,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "LED 조명(산업·홈·상업용)",
       "LED PKG(부품)",
@@ -164,32 +179,62 @@
       "FPCB(연성회로기판)",
       "도광판(LGP)"
     ],
-    "investor_note": "우리엔터프라이즈는 50여 년 역사의 LED·일반조명 회사로 출발했지만, 현재 매출의 대부분(92%)은 자회사를 통한 LED 부품(PKG·Light Bar)과 TV 완제품(SET) 조립 사업에서 나옵니다. 조명 자체는 매출의 2%에 불과하고, 건강기능식품(하루틴, 클라리온 등 자체 브랜드) 사업이 6% 정도를 차지하며 신사업으로 키우고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 652억 원으로 전년 대비 15.4% 줄었고 영업이익도 93.0% 급감했으며, 당기순이익은 전년 흑자에서 102억 원 적자로 전환됐습니다. 부채비율은 159.3%로 자본보다 부채가 많은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다."
+    "investor_note": "우리엔터프라이즈는 50여 년 역사의 LED·일반조명 회사로 출발했지만, 현재 매출의 대부분(92%)은 자회사를 통한 LED 부품(PKG·Light Bar)과 TV 완제품(SET) 조립 사업에서 나옵니다. 조명 자체는 매출의 2%에 불과하고, 건강기능식품(하루틴, 클라리온 등 자체 브랜드) 사업이 6% 정도를 차지하며 신사업으로 키우고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 652억 원으로 전년 대비 15.4% 줄었고 영업이익도 93.0% 급감했으며, 당기순이익은 전년 흑자에서 102억 원 적자로 전환됐습니다. 부채비율은 159.3%로 자본보다 부채가 많은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "조명사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.02,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "LED BLU",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.8%",
+        "revenue_share": 0.068,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 85.2%",
+        "revenue_share": 0.8524,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "바이오 (건강기능식품)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.0%",
+        "revenue_share": 0.0596,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "조명사업부문",
-      "caption": "LED 산업·홈·상업·스포츠 조명 및 일반조명 제조·판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
       "kind": "service",
-      "visual": "조명사업부문",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "LED BLU·SET TV 사업부문",
-      "caption": "LED PKG·Light Bar 부품 및 TV 완제품(SET) 조립·판매",
-      "kind": "auto",
-      "visual": "LED",
-      "image": "../data/business_images/business_image_local_semiconductor_pkg.svg",
-      "image_source": "Local curated visual"
+      "title": "LED BLU",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "건강기능식품 사업부문",
-      "caption": "하루틴·클라리온 등 자체 브랜드 건강기능식품 제조·판매",
-      "kind": "consumer",
-      "visual": "건강기능식품",
-      "image": "../data/business_images/business_image_local_default_c.svg",
-      "image_source": "Local curated visual"
+      "title": "바이오 (건강기능식품)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.0%",
+      "kind": "bio",
+      "visual": "BIO",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

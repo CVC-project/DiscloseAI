@@ -155,14 +155,18 @@
     "segment_finance": "엘컴텍은 원래 카메라 모듈용 렌즈 등 휴대폰부품을 만들던 회사에서, 최근에는 K-POP 콘서트용 응원봉 등을 위탁생산(EMS)하는 사업이 매출의 절반 이상을 차지하는 방향으로 무게중심이 옮겨갔고, LED조명 사업도 함께 영위하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 462억 원으로 전년 대비 19.3% 줄었고 영업이익과 순이익도 각각 37.6%, 56.7% 감소했습니다. 다만 부채비율은 17.1%로 매우 낮아 재무 안정성 자체는 양호한 편입니다.",
     "segment_breakdown": [
       {
-        "name": "EMS 부품",
-        "desc": "응원봉 등 소형 전자제품 위탁생산(EMS)",
-        "revenue_share": 0.5849
+        "name": "휴대폰 부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.1%",
+        "revenue_share": 0.0608,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "휴대폰 부품",
-        "desc": "카메라 모듈용 렌즈 ASS'Y",
-        "revenue_share": 0.0608
+        "name": "EMS 부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 58.5%",
+        "revenue_share": 0.5849,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -170,24 +174,47 @@
       "응원봉(EMS 위탁생산)",
       "LED조명(BLU 기반)"
     ],
-    "investor_note": "엘컴텍은 원래 카메라 모듈용 렌즈 등 휴대폰부품을 만들던 회사에서, 최근에는 K-POP 콘서트용 응원봉 등을 위탁생산(EMS)하는 사업이 매출의 절반 이상을 차지하는 방향으로 무게중심이 옮겨갔고, LED조명 사업도 함께 영위하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 462억 원으로 전년 대비 19.3% 줄었고 영업이익과 순이익도 각각 37.6%, 56.7% 감소했습니다. 다만 부채비율은 17.1%로 매우 낮아 재무 안정성 자체는 양호한 편입니다."
+    "investor_note": "엘컴텍은 원래 카메라 모듈용 렌즈 등 휴대폰부품을 만들던 회사에서, 최근에는 K-POP 콘서트용 응원봉 등을 위탁생산(EMS)하는 사업이 매출의 절반 이상을 차지하는 방향으로 무게중심이 옮겨갔고, LED조명 사업도 함께 영위하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 462억 원으로 전년 대비 19.3% 줄었고 영업이익과 순이익도 각각 37.6%, 56.7% 감소했습니다. 다만 부채비율은 17.1%로 매우 낮아 재무 안정성 자체는 양호한 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "휴대폰 부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.1%",
+        "revenue_share": 0.0608,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "EMS 부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 58.5%",
+        "revenue_share": 0.5849,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타 부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.4%",
+        "revenue_share": 0.3543,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "EMS 부품",
-      "caption": "응원봉 등 소형 전자제품 위탁생산(EMS)",
+      "title": "휴대폰 부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.1%",
       "kind": "auto",
-      "visual": "EMS",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "휴대폰 부품",
-      "caption": "카메라 모듈용 렌즈 ASS'Y",
+      "title": "EMS 부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 58.5%",
       "kind": "auto",
-      "visual": "휴대폰",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

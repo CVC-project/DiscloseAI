@@ -155,19 +155,25 @@
     "segment_finance": "케이엘넷은 1994년 물류비 절감을 위해 물류 관련 기관·기업들이 공동 출자해 설립한 물류IT 전문기업으로, 해운·항만 관련 전자문서중계서비스(EDI)를 중심으로 정보시스템 구축(SI), 시스템관리(SM), IT아웃소싱까지 사업을 넓혀왔습니다. 매출의 60% 이상이 EDI에서 나오고 SM(시스템관리)이 약 27%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 475억 원으로 전년 대비 5.2% 줄었지만 영업이익은 104억 원으로 5.1%, 당기순이익은 100억 원으로 12.5% 늘어 수익성은 오히려 개선됐습니다. 부채비율은 13.6%로 낮은 편이라 재무 부담은 크지 않습니다.",
     "segment_breakdown": [
       {
-        "name": "부가통신(EDI)",
-        "desc": "해운·항만 물류 전자문서중계서비스",
-        "revenue_share": 0.6267
+        "name": "영업이익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 94.0%",
+        "revenue_share": 0.94,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "SI(시스템통합)",
-        "desc": "물류·공공기관 정보시스템 구축",
-        "revenue_share": 0.0899
+        "name": "자 산",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.0%",
+        "revenue_share": 0.22,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "SM(시스템관리)",
-        "desc": "정보시스템 위탁운영·유지보수",
-        "revenue_share": 0.2722
+        "name": "감가상각비 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 92.0%",
+        "revenue_share": 0.92,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -180,32 +186,55 @@
       "LogisBill(전자세금계산서서비스)",
       "화물운송정보망 서비스"
     ],
-    "investor_note": "케이엘넷은 1994년 물류비 절감을 위해 물류 관련 기관·기업들이 공동 출자해 설립한 물류IT 전문기업으로, 해운·항만 관련 전자문서중계서비스(EDI)를 중심으로 정보시스템 구축(SI), 시스템관리(SM), IT아웃소싱까지 사업을 넓혀왔습니다. 매출의 60% 이상이 EDI에서 나오고 SM(시스템관리)이 약 27%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 475억 원으로 전년 대비 5.2% 줄었지만 영업이익은 104억 원으로 5.1%, 당기순이익은 100억 원으로 12.5% 늘어 수익성은 오히려 개선됐습니다. 부채비율은 13.6%로 낮은 편이라 재무 부담은 크지 않습니다."
+    "investor_note": "케이엘넷은 1994년 물류비 절감을 위해 물류 관련 기관·기업들이 공동 출자해 설립한 물류IT 전문기업으로, 해운·항만 관련 전자문서중계서비스(EDI)를 중심으로 정보시스템 구축(SI), 시스템관리(SM), IT아웃소싱까지 사업을 넓혀왔습니다. 매출의 60% 이상이 EDI에서 나오고 SM(시스템관리)이 약 27%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 475억 원으로 전년 대비 5.2% 줄었지만 영업이익은 104억 원으로 5.1%, 당기순이익은 100억 원으로 12.5% 늘어 수익성은 오히려 개선됐습니다. 부채비율은 13.6%로 낮은 편이라 재무 부담은 크지 않습니다.",
+    "product_service_segments": [
+      {
+        "name": "영업이익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 94.0%",
+        "revenue_share": 0.94,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자 산",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.0%",
+        "revenue_share": 0.22,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "감가상각비 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 92.0%",
+        "revenue_share": 0.92,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "부가통신(EDI)",
-      "caption": "해운·항만 물류 전자문서중계서비스",
+      "title": "영업이익",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 94.0%",
       "kind": "telecom",
-      "visual": "부가통신",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "SI(시스템통합)",
-      "caption": "물류·공공기관 정보시스템 구축",
-      "kind": "service",
-      "visual": "SI",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "title": "자 산",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.0%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "SM(시스템관리)",
-      "caption": "정보시스템 위탁운영·유지보수",
-      "kind": "service",
-      "visual": "SM",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "title": "감가상각비 등",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 92.0%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

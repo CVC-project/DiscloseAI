@@ -155,9 +155,18 @@
     "segment_finance": "유니퀘스트(주)의 주요 제품·서비스는 DRAM, NAND, HBM, SSD, Foundry, 이미지센서입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 수주상황 비메모리 반도체 시장의 특성상 신제품 출시로 인한 경쟁력 상실, 경쟁상품의 가격인하 등과 같은 시장의 변동 사항이 많이 발생합니다. 이로 인하여 장기간의 공급을 게약하는 수주발생은 미비하며 고객사의 요청이 생길 경우 해당품목에 대한 단가를 확정하고 즉시 매출을 발생 시킵니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "미래에셋증권",
-        "desc": "증권 관련 제품·서비스",
-        "revenue_share": null
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 98.3%",
+        "revenue_share": 0.9829,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "대행매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
+        "revenue_share": 0.0157,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -169,32 +178,55 @@
       "이미지센서",
       "증권"
     ],
-    "investor_note": "유니퀘스트(주)의 주요 제품·서비스는 DRAM, NAND, HBM, SSD, Foundry, 이미지센서입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 수주상황 비메모리 반도체 시장의 특성상 신제품 출시로 인한 경쟁력 상실, 경쟁상품의 가격인하 등과 같은 시장의 변동 사항이 많이 발생합니다. 이로 인하여 장기간의 공급을 게약하는 수주발생은 미비하며 고객사의 요청이 생길 경우 해당품목에 대한 단가를 확정하고 즉시 매출을 발생 시킵니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "유니퀘스트(주)의 주요 제품·서비스는 DRAM, NAND, HBM, SSD, Foundry, 이미지센서입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 수주상황 비메모리 반도체 시장의 특성상 신제품 출시로 인한 경쟁력 상실, 경쟁상품의 가격인하 등과 같은 시장의 변동 사항이 많이 발생합니다. 이로 인하여 장기간의 공급을 게약하는 수주발생은 미비하며 고객사의 요청이 생길 경우 해당품목에 대한 단가를 확정하고 즉시 매출을 발생 시킵니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 98.3%",
+        "revenue_share": 0.9829,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "대행매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
+        "revenue_share": 0.0157,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.0013,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "미래에셋증권",
-      "caption": "투자 중개와 자산관리 수수료가 실적에 연결됩니다.",
+      "title": "메모리 반도체",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
+      "kind": "chip",
+      "visual": "MEMORY",
+      "image": "../data/business_images/business_image_10774ca82ea41202.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "시스템반도체",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
+      "kind": "chip",
+      "visual": "CHIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "증권",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
       "kind": "securities",
-      "visual": "AUM",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "DRAM",
-      "caption": "데이터 저장과 AI 서버 수요에 연결되는 메모리 제품입니다.",
-      "kind": "chip",
-      "visual": "CHIP",
-      "image": "../data/business_images/business_image_10774ca82ea41202.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "NAND",
-      "caption": "데이터 저장과 AI 서버 수요에 연결되는 메모리 제품입니다.",
-      "kind": "chip",
-      "visual": "CHIP",
-      "image": "../data/business_images/business_image_10774ca82ea41202.jpg",
-      "image_source": "Wikimedia Commons"
+      "visual": "SECURITIES",
+      "image": "../data/business_images/business_image_c1540b930934e19f.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -155,14 +155,18 @@
     "segment_finance": "광전자는 Discrete 반도체, 광센서, LED 등을 생산하는 전자부품 제조업체로, 한국·중국·일본에 걸친 생산·판매 네트워크를 갖추고 있습니다. 모바일 기기, 자동차, 디지털 가전 등에 들어가는 핵심 부품을 공급하며 최근에는 로봇·AI 분야 대응을 위한 차세대 반도체 개발에도 힘쓰고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,326억 원으로 전년보다 1.9% 늘었지만 영업이익은 18.2%, 당기순이익은 60.2% 각각 줄었습니다. 부채비율은 7.1%로 매우 낮아 재무구조는 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "PKG(반도체 패키지)",
-        "desc": "Discrete 반도체 등 전자기기 부품 패키징",
-        "revenue_share": 0.7868
+        "name": "전자부품제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 78.7%",
+        "revenue_share": 0.7868,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "FAB(웨이퍼 공정)",
-        "desc": "반도체 웨이퍼 가공",
-        "revenue_share": 0.211
+        "name": "FAB",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.1%",
+        "revenue_share": 0.211,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -171,24 +175,40 @@
       "LED",
       "반도체 웨이퍼(FAB)"
     ],
-    "investor_note": "광전자는 Discrete 반도체, 광센서, LED 등을 생산하는 전자부품 제조업체로, 한국·중국·일본에 걸친 생산·판매 네트워크를 갖추고 있습니다. 모바일 기기, 자동차, 디지털 가전 등에 들어가는 핵심 부품을 공급하며 최근에는 로봇·AI 분야 대응을 위한 차세대 반도체 개발에도 힘쓰고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,326억 원으로 전년보다 1.9% 늘었지만 영업이익은 18.2%, 당기순이익은 60.2% 각각 줄었습니다. 부채비율은 7.1%로 매우 낮아 재무구조는 안정적인 편입니다."
+    "investor_note": "광전자는 Discrete 반도체, 광센서, LED 등을 생산하는 전자부품 제조업체로, 한국·중국·일본에 걸친 생산·판매 네트워크를 갖추고 있습니다. 모바일 기기, 자동차, 디지털 가전 등에 들어가는 핵심 부품을 공급하며 최근에는 로봇·AI 분야 대응을 위한 차세대 반도체 개발에도 힘쓰고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,326억 원으로 전년보다 1.9% 늘었지만 영업이익은 18.2%, 당기순이익은 60.2% 각각 줄었습니다. 부채비율은 7.1%로 매우 낮아 재무구조는 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "전자부품제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 78.7%",
+        "revenue_share": 0.7868,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "FAB",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.1%",
+        "revenue_share": 0.211,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "PKG(반도체 패키지)",
-      "caption": "Discrete 반도체 등 전자기기 부품 패키징",
+      "title": "전자부품제조",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 78.7%",
       "kind": "chip",
-      "visual": "PKG",
-      "image": "../data/business_images/business_image_local_semiconductor_pkg.svg",
-      "image_source": "Local curated visual"
+      "visual": "CHIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "FAB(웨이퍼 공정)",
-      "caption": "반도체 웨이퍼 가공",
+      "title": "FAB",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.1%",
       "kind": "chip",
-      "visual": "FAB",
-      "image": "../data/business_images/business_image_local_semiconductor_part.svg",
-      "image_source": "Local curated visual"
+      "visual": "CHIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

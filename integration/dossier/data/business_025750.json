@@ -155,29 +155,32 @@
     "segment_finance": "한솔홈데코는 MDF(중밀도섬유판)와 마루, 시트 등 목재 인테리어 자재를 만드는 목재사업이 매출의 98%를 차지하며, 생산 과정에서 나오는 폐목재로 전력·스팀을 만드는 열병합발전사업과 조림사업도 함께 운영합니다. 보드(MDF)가 매출의 48%, 마루가 35%를 차지하고, 대리점과 건설사·가구사에 주로 판매합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,798억 원으로 전년보다 14.5% 줄었고 영업이익도 23억 원으로 79.6% 급감했습니다. 조림자산(생물자산) 평가손실 210억 원이 반영되며 당기순이익은 223억 원 적자를 기록했고, 부채비율은 128.8%로 자본보다 빚이 많은 상태입니다.",
     "segment_breakdown": [
       {
-        "name": "보드(MDF)",
-        "desc": "가구·건축 내장재용 목질판상재",
-        "revenue_share": 0.4829
+        "name": "목재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 48.3%",
+        "revenue_share": 0.4829,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "마루",
-        "desc": "가정·상업용 바닥재(강마루·강화마루 등)",
-        "revenue_share": 0.3521
-      },
-      {
-        "name": "시트",
-        "desc": "가구·도어·몰딩용 표면마감재",
-        "revenue_share": 0.0825
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.2%",
+        "revenue_share": 0.3521,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "목분 등",
-        "desc": "MDF·마루 제작 부산물로 만든 친환경 충진제",
-        "revenue_share": 0.02
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.02,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "열병합발전",
-        "desc": "폐목재를 활용한 전력·스팀 생산",
-        "revenue_share": 0.0177
+        "name": "시트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.2%",
+        "revenue_share": 0.0825,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -187,40 +190,70 @@
       "목분",
       "열병합발전 전력·스팀"
     ],
-    "investor_note": "한솔홈데코는 MDF(중밀도섬유판)와 마루, 시트 등 목재 인테리어 자재를 만드는 목재사업이 매출의 98%를 차지하며, 생산 과정에서 나오는 폐목재로 전력·스팀을 만드는 열병합발전사업과 조림사업도 함께 운영합니다. 보드(MDF)가 매출의 48%, 마루가 35%를 차지하고, 대리점과 건설사·가구사에 주로 판매합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,798억 원으로 전년보다 14.5% 줄었고 영업이익도 23억 원으로 79.6% 급감했습니다. 조림자산(생물자산) 평가손실 210억 원이 반영되며 당기순이익은 223억 원 적자를 기록했고, 부채비율은 128.8%로 자본보다 빚이 많은 상태입니다."
+    "investor_note": "한솔홈데코는 MDF(중밀도섬유판)와 마루, 시트 등 목재 인테리어 자재를 만드는 목재사업이 매출의 98%를 차지하며, 생산 과정에서 나오는 폐목재로 전력·스팀을 만드는 열병합발전사업과 조림사업도 함께 운영합니다. 보드(MDF)가 매출의 48%, 마루가 35%를 차지하고, 대리점과 건설사·가구사에 주로 판매합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,798억 원으로 전년보다 14.5% 줄었고 영업이익도 23억 원으로 79.6% 급감했습니다. 조림자산(생물자산) 평가손실 210억 원이 반영되며 당기순이익은 223억 원 적자를 기록했고, 부채비율은 128.8%로 자본보다 빚이 많은 상태입니다.",
+    "product_service_segments": [
+      {
+        "name": "목재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 48.3%",
+        "revenue_share": 0.4829,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "마루",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.2%",
+        "revenue_share": 0.3521,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "목분 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.02,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "시트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.2%",
+        "revenue_share": 0.0825,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "보드(MDF)",
-      "caption": "가구·건축 내장재용 목질판상재",
+      "title": "목재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 48.3%",
       "kind": "service",
-      "visual": "보드",
-      "image": "../data/business_images/business_image_local_wood.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "마루",
-      "caption": "가정·상업용 바닥재(강마루·강화마루 등)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.2%",
       "kind": "service",
-      "visual": "마루",
-      "image": "../data/business_images/business_image_local_wood.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "시트",
-      "caption": "가구·도어·몰딩용 표면마감재",
-      "kind": "service",
-      "visual": "시트",
-      "image": "../data/business_images/business_image_local_wood.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "목분 등",
-      "caption": "MDF·마루 제작 부산물로 만든 친환경 충진제",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
       "kind": "service",
-      "visual": "목분",
-      "image": "../data/business_images/business_image_local_wood.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "시트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

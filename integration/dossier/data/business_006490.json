@@ -155,19 +155,32 @@
     "segment_finance": "프리티(법인명 주식회사 인스코비)는 LGU+·KT·SKT망을 활용한 알뜰폰(MVNO) 브랜드 '프리티'를 주력 사업으로 하며, 한국전력의 원격검침 인프라(AMI) 구축사업과 화장품·시계·주류 유통사업도 함께 운영합니다. 알뜰폰 사업이 매출의 88%를 차지합니다. 감사보고서에는 당기순손실이 커 유동부채가 유동자산을 초과하는 등 계속기업 존속에 대한 중요한 불확실성이 있다는 강조사항이 담겼습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,055억 원으로 전년 대비 5.0% 늘고 영업이익은 흑자로 전환됐지만, 당기순이익은 416억 원의 적자를 기록했습니다. 재무 상태에 대한 주의 깊은 확인이 필요합니다.",
     "segment_breakdown": [
       {
-        "name": "MVNO(알뜰폰)",
-        "desc": "프리텔레콤 등을 통한 알뜰폰 통신서비스 '프리티'",
-        "revenue_share": 0.883
+        "name": "MVNO",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 88.3%",
+        "revenue_share": 0.883,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "스마트그리드",
-        "desc": "한국전력 AMI(원격검침) 사업 등",
-        "revenue_share": 0.068
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.8%",
+        "revenue_share": 0.068,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "유통",
-        "desc": "화장품·시계·주류 도소매",
-        "revenue_share": 0.05
+        "name": "화장품 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.8%",
+        "revenue_share": 0.048,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "시계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.002,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -177,32 +190,62 @@
       "시계",
       "주류 수입유통"
     ],
-    "investor_note": "프리티(법인명 주식회사 인스코비)는 LGU+·KT·SKT망을 활용한 알뜰폰(MVNO) 브랜드 '프리티'를 주력 사업으로 하며, 한국전력의 원격검침 인프라(AMI) 구축사업과 화장품·시계·주류 유통사업도 함께 운영합니다. 알뜰폰 사업이 매출의 88%를 차지합니다. 감사보고서에는 당기순손실이 커 유동부채가 유동자산을 초과하는 등 계속기업 존속에 대한 중요한 불확실성이 있다는 강조사항이 담겼습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,055억 원으로 전년 대비 5.0% 늘고 영업이익은 흑자로 전환됐지만, 당기순이익은 416억 원의 적자를 기록했습니다. 재무 상태에 대한 주의 깊은 확인이 필요합니다."
+    "investor_note": "프리티(법인명 주식회사 인스코비)는 LGU+·KT·SKT망을 활용한 알뜰폰(MVNO) 브랜드 '프리티'를 주력 사업으로 하며, 한국전력의 원격검침 인프라(AMI) 구축사업과 화장품·시계·주류 유통사업도 함께 운영합니다. 알뜰폰 사업이 매출의 88%를 차지합니다. 감사보고서에는 당기순손실이 커 유동부채가 유동자산을 초과하는 등 계속기업 존속에 대한 중요한 불확실성이 있다는 강조사항이 담겼습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,055억 원으로 전년 대비 5.0% 늘고 영업이익은 흑자로 전환됐지만, 당기순이익은 416억 원의 적자를 기록했습니다. 재무 상태에 대한 주의 깊은 확인이 필요합니다.",
+    "product_service_segments": [
+      {
+        "name": "MVNO",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 88.3%",
+        "revenue_share": 0.883,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "스마트그리드",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.8%",
+        "revenue_share": 0.068,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "화장품 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.8%",
+        "revenue_share": 0.048,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "시계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.002,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "MVNO(알뜰폰)",
-      "caption": "프리텔레콤 등을 통한 알뜰폰 통신서비스 '프리티'",
+      "title": "MVNO",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 88.3%",
       "kind": "telecom",
-      "visual": "MVNO",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "스마트그리드",
-      "caption": "한국전력 AMI(원격검침) 사업 등",
-      "kind": "power",
-      "visual": "스마트그리드",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "유통",
-      "caption": "화장품·시계·주류 도소매",
+      "title": "대형마트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.8%",
       "kind": "consumer",
-      "visual": "유통",
-      "image": "../data/business_images/business_image_local_alcohol.svg",
-      "image_source": "Local curated visual"
+      "visual": "MART",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "화장품 등",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.8%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

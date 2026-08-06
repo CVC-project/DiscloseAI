@@ -155,19 +155,25 @@
     "segment_finance": "아이에이는 자동차 전장용 반도체·모듈을 만드는 회사로, 종속회사인 트리노테크놀로지를 통해 전기차·가전에 쓰이는 전력반도체(IGBT·MOSFET)를, 아이에이클라우드를 통해 클라우드 인프라 사업을 함께 하고 있습니다. 매출의 절반 이상(57%)이 시트 열선 제어, 배터리관리(IBS) 등 자동차 전장용 반도체에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 411억 원으로 전년 대비 18.8% 줄었고 영업이익은 -73억 원으로 적자를 이어갔으며 당기순이익도 -445억 원으로 손실 폭이 커졌습니다. 부채비율은 79.7%이며, 감사보고서에는 유동부채가 유동자산을 넘어서 계속기업으로서의 존속능력에 불확실성이 있다는 강조사항이 담겨 있어 주의 깊게 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "반도체(자동차 전장용)",
-        "desc": "시트 열선·통풍 제어, 배터리관리 등 차량용 반도체",
-        "revenue_share": 0.57
+        "name": "반도체",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 57.0%",
+        "revenue_share": 0.57,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "모듈(자동차 전장용)",
-        "desc": "IBS·HPM 등 전력모듈",
-        "revenue_share": 0.341
+        "name": "모듈",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.1%",
+        "revenue_share": 0.341,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "용역",
-        "desc": "자동차 전장용 기술 용역",
-        "revenue_share": 0.066
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.6%",
+        "revenue_share": 0.066,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -178,40 +184,55 @@
       "클라우디아(Cloudia, 프라이빗 클라우드)",
       "제니아(Xenia, PaaS)"
     ],
-    "investor_note": "아이에이는 자동차 전장용 반도체·모듈을 만드는 회사로, 종속회사인 트리노테크놀로지를 통해 전기차·가전에 쓰이는 전력반도체(IGBT·MOSFET)를, 아이에이클라우드를 통해 클라우드 인프라 사업을 함께 하고 있습니다. 매출의 절반 이상(57%)이 시트 열선 제어, 배터리관리(IBS) 등 자동차 전장용 반도체에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 411억 원으로 전년 대비 18.8% 줄었고 영업이익은 -73억 원으로 적자를 이어갔으며 당기순이익도 -445억 원으로 손실 폭이 커졌습니다. 부채비율은 79.7%이며, 감사보고서에는 유동부채가 유동자산을 넘어서 계속기업으로서의 존속능력에 불확실성이 있다는 강조사항이 담겨 있어 주의 깊게 살펴볼 필요가 있습니다."
+    "investor_note": "아이에이는 자동차 전장용 반도체·모듈을 만드는 회사로, 종속회사인 트리노테크놀로지를 통해 전기차·가전에 쓰이는 전력반도체(IGBT·MOSFET)를, 아이에이클라우드를 통해 클라우드 인프라 사업을 함께 하고 있습니다. 매출의 절반 이상(57%)이 시트 열선 제어, 배터리관리(IBS) 등 자동차 전장용 반도체에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 411억 원으로 전년 대비 18.8% 줄었고 영업이익은 -73억 원으로 적자를 이어갔으며 당기순이익도 -445억 원으로 손실 폭이 커졌습니다. 부채비율은 79.7%이며, 감사보고서에는 유동부채가 유동자산을 넘어서 계속기업으로서의 존속능력에 불확실성이 있다는 강조사항이 담겨 있어 주의 깊게 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "반도체",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 57.0%",
+        "revenue_share": 0.57,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "모듈",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.1%",
+        "revenue_share": 0.341,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.6%",
+        "revenue_share": 0.066,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "LSA(시트 열선·통풍 제어 반도체)",
-      "caption": "LSA(시트 열선·통풍 제어 반도체) 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "반도체",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 57.0%",
       "kind": "chip",
       "visual": "CHIP",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "HPM(고전력 모터 제어기)",
-      "caption": "건물과 부동산 시설을 운영·관리하는 인프라 서비스입니다.",
-      "kind": "power",
-      "visual": "POWER",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "title": "모듈",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.1%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "IGBT(절연게이트 양극성 트랜지스터)",
-      "caption": "IGBT(절연게이트 양극성 트랜지스터) 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "MOSFET(SJ/MV MOSFET)",
-      "caption": "MOSFET(SJ/MV MOSFET) 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "title": "용역",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.6%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

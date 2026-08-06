@@ -156,13 +156,17 @@
     "segment_breakdown": [
       {
         "name": "산업설비공사",
-        "desc": "정밀화학·바이오·제약·식품 플랜트 건설(E.P.C)",
-        "revenue_share": 0.8238
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 82.4%",
+        "revenue_share": 0.8238,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "의료기기",
-        "desc": "셀론텍의 바이오콜라겐 치료재료(카티졸 등)",
-        "revenue_share": 0.1168
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.7%",
+        "revenue_share": 0.1168,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -172,24 +176,55 @@
       "카티졸",
       "리젠씰"
     ],
-    "investor_note": "에쓰씨엔지니어링은 정밀화학·바이오·제약·식품 공장을 짓는 산업설비 플랜트 건설회사로, 매출의 82%가 이 공사부문에서 나옵니다. 자회사 셀론텍을 통해 무릎연골 보충재 '카티졸' 등 바이오콜라겐 의료기기 사업도 함께 하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,723억 원으로 전년 대비 4.2% 줄었고, 영업이익과 당기순이익 모두 적자로 전환됐습니다. 부채비율은 188.8%로 자본보다 빚이 많은 편이라 재무 부담을 살펴볼 필요가 있습니다."
+    "investor_note": "에쓰씨엔지니어링은 정밀화학·바이오·제약·식품 공장을 짓는 산업설비 플랜트 건설회사로, 매출의 82%가 이 공사부문에서 나옵니다. 자회사 셀론텍을 통해 무릎연골 보충재 '카티졸' 등 바이오콜라겐 의료기기 사업도 함께 하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,723억 원으로 전년 대비 4.2% 줄었고, 영업이익과 당기순이익 모두 적자로 전환됐습니다. 부채비율은 188.8%로 자본보다 빚이 많은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "산업설비공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 82.4%",
+        "revenue_share": 0.8238,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "건강식품사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.7%",
+        "revenue_share": 0.0571,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "의료기기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.7%",
+        "revenue_share": 0.1168,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "산업설비공사",
-      "caption": "정밀화학·바이오·제약·식품 플랜트 건설(E.P.C)",
-      "kind": "ship",
-      "visual": "산업설비공사",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 82.4%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "건강식품사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "의료기기",
-      "caption": "셀론텍의 바이오콜라겐 치료재료(카티졸 등)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.7%",
       "kind": "bio",
-      "visual": "의료기기",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "MEDICAL",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

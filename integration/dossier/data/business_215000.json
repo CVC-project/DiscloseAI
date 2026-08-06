@@ -155,9 +155,11 @@
     "segment_finance": "자회사 실적과 지분가치가 사업의 중심입니다. 또한 빠른 시장대응을 위하여 소모품상품에 대한 생산관리 체제를 혁신하며, 고객 다양성 만족을 위해 유지보수 단계에서 품목별 가격대/특성에 따른 복수의 상품을 판매하고, 다양한 고객의 요구를 수용할 수 있도록 정품 소모품의 다변화를 추진할 예정입니다. 사업부문별로 보면 스크린 골프방, 실내골프연습장 등 골프 시뮬레이터를 활용한 다양한 분야의 사업을 영위하고 있는 스크린골프 사업부문과 A/S, 매장운영 지원 등 고객지원서비스를 제공하는 비즈몰, 유지보수자재 분야의 사업을 영위하고 있는 스크린골프 유지보수사업부문이 있습니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다.",
     "segment_breakdown": [
       {
-        "name": "신종자본증권",
-        "desc": "위탁매매, IB, 운용 등 증권 서비스",
-        "revenue_share": null
+        "name": "광고, 제휴",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.3%",
+        "revenue_share": 0.033,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -173,40 +175,70 @@
       "비고",
       "■ 신형 스크린골프시뮬레이터(GOLFZON-R"
     ],
-    "investor_note": "자회사 실적과 지분가치가 사업의 중심입니다. 또한 빠른 시장대응을 위하여 소모품상품에 대한 생산관리 체제를 혁신하며, 고객 다양성 만족을 위해 유지보수 단계에서 품목별 가격대/특성에 따른 복수의 상품을 판매하고, 다양한 고객의 요구를 수용할 수 있도록 정품 소모품의 다변화를 추진할 예정입니다. 사업부문별로 보면 스크린 골프방, 실내골프연습장 등 골프 시뮬레이터를 활용한 다양한 분야의 사업을 영위하고 있는 스크린골프 사업부문과 A/S, 매장운영 지원 등 고객지원서비스를 제공하는 비즈몰, 유지보수자재 분야의 사업을 영위하고 있는 스크린골프 유지보수사업부문이 있습니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다."
+    "investor_note": "자회사 실적과 지분가치가 사업의 중심입니다. 또한 빠른 시장대응을 위하여 소모품상품에 대한 생산관리 체제를 혁신하며, 고객 다양성 만족을 위해 유지보수 단계에서 품목별 가격대/특성에 따른 복수의 상품을 판매하고, 다양한 고객의 요구를 수용할 수 있도록 정품 소모품의 다변화를 추진할 예정입니다. 사업부문별로 보면 스크린 골프방, 실내골프연습장 등 골프 시뮬레이터를 활용한 다양한 분야의 사업을 영위하고 있는 스크린골프 사업부문과 A/S, 매장운영 지원 등 고객지원서비스를 제공하는 비즈몰, 유지보수자재 분야의 사업을 영위하고 있는 스크린골프 유지보수사업부문이 있습니다. 지주사는 개별 제품보다 핵심 자회사 구성과 투자 포트폴리오 변화가 중요합니다.",
+    "product_service_segments": [
+      {
+        "name": "스크린골프사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 77.2%",
+        "revenue_share": 0.772,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "광고, 제휴",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.3%",
+        "revenue_share": 0.033,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "직영사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.5%",
+        "revenue_share": 0.075,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타(미디어, 거리측정기 등)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.0%",
+        "revenue_share": 0.12,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "스크린골프사업부문",
-      "caption": "스크린골프사업부문 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 77.2%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "온라인 서비스",
-      "caption": "온라인 서비스 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "title": "광고, 제휴",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.3%",
+      "kind": "platform",
+      "visual": "APP",
+      "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "Vision plus",
-      "caption": "Vision plus 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "직영사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.5%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "Twovision",
-      "caption": "Twovision 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "기타(미디어, 거리측정기 등)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

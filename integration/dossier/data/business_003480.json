@@ -155,14 +155,11 @@
     "segment_finance": "한진중공업홀딩스는 직접 사업은 하지 않는 순수지주회사로, 자회사인 대륜이엔에스(서울 성북·강북 등 도시가스 공급)와 대륜발전(양주·별내 집단에너지 발전), 한일레저(솔모로CC 골프장)를 통해 수익을 냅니다. 매출의 64%는 도시가스, 32%는 발전전기 사업에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 2,017억 원으로 전년 대비 3.2% 늘었고 영업이익은 59.7%, 당기순이익은 2.8% 증가해 자회사 실적이 고르게 개선됐습니다. 다만 부채비율은 278.7%로 자본보다 훨씬 많은 빚을 지고 있어 재무 부담을 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "도시가스공급업",
-        "desc": "서울 성북·강북 등지에 LNG 도시가스를 공급(대륜E&S)",
-        "revenue_share": 0.641
-      },
-      {
-        "name": "발전전기업",
-        "desc": "양주·별내 집단에너지 열병합발전소 운영(대륜발전)",
-        "revenue_share": 0.32
+        "name": "상표권사용수입",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.0%",
+        "revenue_share": 0.0003,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -171,32 +168,46 @@
       "골프장 운영(한일레저 솔모로CC)",
       "브랜드 라이선싱"
     ],
-    "investor_note": "한진중공업홀딩스는 직접 사업은 하지 않는 순수지주회사로, 자회사인 대륜이엔에스(서울 성북·강북 등 도시가스 공급)와 대륜발전(양주·별내 집단에너지 발전), 한일레저(솔모로CC 골프장)를 통해 수익을 냅니다. 매출의 64%는 도시가스, 32%는 발전전기 사업에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 2,017억 원으로 전년 대비 3.2% 늘었고 영업이익은 59.7%, 당기순이익은 2.8% 증가해 자회사 실적이 고르게 개선됐습니다. 다만 부채비율은 278.7%로 자본보다 훨씬 많은 빚을 지고 있어 재무 부담을 살펴볼 필요가 있습니다."
+    "investor_note": "한진중공업홀딩스는 직접 사업은 하지 않는 순수지주회사로, 자회사인 대륜이엔에스(서울 성북·강북 등 도시가스 공급)와 대륜발전(양주·별내 집단에너지 발전), 한일레저(솔모로CC 골프장)를 통해 수익을 냅니다. 매출의 64%는 도시가스, 32%는 발전전기 사업에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 2,017억 원으로 전년 대비 3.2% 늘었고 영업이익은 59.7%, 당기순이익은 2.8% 증가해 자회사 실적이 고르게 개선됐습니다. 다만 부채비율은 278.7%로 자본보다 훨씬 많은 빚을 지고 있어 재무 부담을 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "투자 및 기타",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.7%",
+        "revenue_share": 0.0065,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상표권사용수입",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.0%",
+        "revenue_share": 0.0003,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임대사업수입",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.0017,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "골프장사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
+        "revenue_share": 0.0184,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "도시가스공급업",
-      "caption": "서울 성북·강북 등지에 LNG 도시가스를 공급(대륜E&S)",
-      "kind": "ship",
-      "visual": "LNG",
-      "image": "../data/business_images/business_image_local_ship.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "발전전기업",
-      "caption": "양주·별내 집단에너지 열병합발전소 운영(대륜발전)",
-      "kind": "power",
-      "visual": "발전전기업",
-      "image": "../data/business_images/business_image_local_power.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "지주회사(투자 및 기타)",
-      "caption": "배당금·상표권사용료·임대수익을 수취하는 순수지주회사",
-      "kind": "securities",
-      "visual": "지주회사",
-      "image": "../data/business_images/business_image_local_finance_hold.svg",
-      "image_source": "Local curated visual"
+      "title": "골프장사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

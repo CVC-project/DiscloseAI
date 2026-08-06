@@ -121,7 +121,36 @@
   "snippets": {
     "overview": "제품을 만들고 판매하는 제조 기반 회사입니다. 첫째로는 한국이 세계 최고 경쟁력을 보유하고 있는 휴대폰, 메모리, 디스플레이 제품을 개발하는 고객 혹은 최종 고객이 수요의 증가로 인해 파운드리 사업을 확장하려는 경우입니다. 이러한 당사의 역량을 기준으로 당사의 판매 조직은 국내 및 해외 팹리스(Fabless) 기업의 시스템 반도체 개발 프로젝트를 수주하기 위한 각각의 영업팀 조직과 납기 및 고객 지원, 실적 관리, 수주 및 외주 생산 관리를 수행하는 관리 조직으로 구성되어 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "제품을 만들고 판매하는 제조 기반 회사입니다. 첫째로는 한국이 세계 최고 경쟁력을 보유하고 있는 휴대폰, 메모리, 디스플레이 제품을 개발하는 고객 혹은 최종 고객이 수요의 증가로 인해 파운드리 사업을 확장하려는 경우입니다. 이러한 당사의 역량을 기준으로 당사의 판매 조직은 국내 및 해외 팹리스(Fabless) 기업의 시스템 반도체 개발 프로젝트를 수주하기 위한 각각의 영업팀 조직과 납기 및 고객 지원, 실적 관리, 수주 및 외주 생산 관리를 수행하는 관리 조직으로 구성되어 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "AI",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.7%",
+        "revenue_share": 0.267,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Automotive",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.3%",
+        "revenue_share": 0.113,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Display",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.3%",
+        "revenue_share": 0.103,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Memory",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.1%",
+        "revenue_share": 0.321,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "NAND",
       "Foundry",
@@ -133,24 +162,70 @@
       "영업본부",
       "영업팀"
     ],
-    "investor_note": "제품을 만들고 판매하는 제조 기반 회사입니다. 첫째로는 한국이 세계 최고 경쟁력을 보유하고 있는 휴대폰, 메모리, 디스플레이 제품을 개발하는 고객 혹은 최종 고객이 수요의 증가로 인해 파운드리 사업을 확장하려는 경우입니다. 이러한 당사의 역량을 기준으로 당사의 판매 조직은 국내 및 해외 팹리스(Fabless) 기업의 시스템 반도체 개발 프로젝트를 수주하기 위한 각각의 영업팀 조직과 납기 및 고객 지원, 실적 관리, 수주 및 외주 생산 관리를 수행하는 관리 조직으로 구성되어 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "제품을 만들고 판매하는 제조 기반 회사입니다. 첫째로는 한국이 세계 최고 경쟁력을 보유하고 있는 휴대폰, 메모리, 디스플레이 제품을 개발하는 고객 혹은 최종 고객이 수요의 증가로 인해 파운드리 사업을 확장하려는 경우입니다. 이러한 당사의 역량을 기준으로 당사의 판매 조직은 국내 및 해외 팹리스(Fabless) 기업의 시스템 반도체 개발 프로젝트를 수주하기 위한 각각의 영업팀 조직과 납기 및 고객 지원, 실적 관리, 수주 및 외주 생산 관리를 수행하는 관리 조직으로 구성되어 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "AI",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.7%",
+        "revenue_share": 0.267,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Automotive",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.3%",
+        "revenue_share": 0.113,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Display",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.3%",
+        "revenue_share": 0.103,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Memory",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.1%",
+        "revenue_share": 0.321,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "반도체",
-      "caption": "메모리, 시스템반도체, 장비·소재 관련 사업을 봅니다.",
+      "title": "AI",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.7%",
       "kind": "chip",
       "visual": "CHIP",
-      "image": "../data/business_images/business_image_10774ca82ea41202.jpg",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "부품·소재",
-      "caption": "공정에 투입되는 부품과 소재가 실적에 영향을 줍니다.",
+      "title": "Automotive",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.3%",
       "kind": "chip",
-      "visual": "PARTS",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "visual": "CHIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "Display",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.3%",
+      "kind": "chip",
+      "visual": "CHIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "Memory",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.1%",
+      "kind": "chip",
+      "visual": "CHIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

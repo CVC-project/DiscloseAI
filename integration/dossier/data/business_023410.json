@@ -155,19 +155,18 @@
     "segment_finance": "유진기업은 구조물에 쓰이는 레미콘을 제조·판매하고, 시멘트·모래·자갈 등 건자재를 유통하는 회사입니다. 레미콘 사업이 매출의 67.6%로 가장 크고, 건자재유통이 26.8%, 골재가 2.6%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 3,326억 원으로 전년 대비 4.4% 줄었고 영업이익도 41.1% 감소했습니다. 당기순손실은 244억 원으로 적자가 이어졌지만 전년보다는 손실 폭이 75.7% 줄었습니다. 부채비율은 125.6%로 자본보다 많은 빚을 지고 있어 재무구조를 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "레미콘",
-        "desc": "구조물용 레미콘 제조·판매",
-        "revenue_share": 0.6757
-      },
-      {
-        "name": "건자재유통",
-        "desc": "시멘트·건자재 유통판매",
-        "revenue_share": 0.2682
+        "name": "건자재 상품 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.8%",
+        "revenue_share": 0.2682,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "골재",
-        "desc": "모래·자갈 등 골재 생산판매",
-        "revenue_share": 0.0255
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.5%",
+        "revenue_share": 0.0255,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -176,32 +175,55 @@
       "골재(모래·자갈)",
       "건자재 유통상품"
     ],
-    "investor_note": "유진기업은 구조물에 쓰이는 레미콘을 제조·판매하고, 시멘트·모래·자갈 등 건자재를 유통하는 회사입니다. 레미콘 사업이 매출의 67.6%로 가장 크고, 건자재유통이 26.8%, 골재가 2.6%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 3,326억 원으로 전년 대비 4.4% 줄었고 영업이익도 41.1% 감소했습니다. 당기순손실은 244억 원으로 적자가 이어졌지만 전년보다는 손실 폭이 75.7% 줄었습니다. 부채비율은 125.6%로 자본보다 많은 빚을 지고 있어 재무구조를 살펴볼 필요가 있습니다."
+    "investor_note": "유진기업은 구조물에 쓰이는 레미콘을 제조·판매하고, 시멘트·모래·자갈 등 건자재를 유통하는 회사입니다. 레미콘 사업이 매출의 67.6%로 가장 크고, 건자재유통이 26.8%, 골재가 2.6%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 3,326억 원으로 전년 대비 4.4% 줄었고 영업이익도 41.1% 감소했습니다. 당기순손실은 244억 원으로 적자가 이어졌지만 전년보다는 손실 폭이 75.7% 줄었습니다. 부채비율은 125.6%로 자본보다 많은 빚을 지고 있어 재무구조를 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "레미콘 제품 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 67.6%",
+        "revenue_share": 0.6757,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "건자재 상품 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.8%",
+        "revenue_share": 0.2682,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "골재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.5%",
+        "revenue_share": 0.0255,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "레미콘",
-      "caption": "구조물용 레미콘 제조·판매",
+      "title": "레미콘 제품 등",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 67.6%",
       "kind": "service",
-      "visual": "레미콘",
-      "image": "../data/business_images/business_image_local_cement.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "건자재유통",
-      "caption": "시멘트·건자재 유통판매",
+      "title": "건자재 상품 등",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.8%",
       "kind": "service",
-      "visual": "건자재유통",
-      "image": "../data/business_images/business_image_local_cement.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "골재",
-      "caption": "모래·자갈 등 골재 생산판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.5%",
       "kind": "service",
-      "visual": "골재",
-      "image": "../data/business_images/business_image_local_cement.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -155,24 +155,25 @@
     "segment_finance": "이렇게 결정된 수주 목표가를 기준으로 고객사와 수의계약 또는 입찰을 통하여 발주를 받게 됩니다. 최종 확정된 사양에 따라 검사기의 재료비/인건비/경비를 종합한 원가를 바탕으로 수주 목표가를 결정하게 됩니다.",
     "segment_breakdown": [
       {
-        "name": "OLED",
-        "desc": "OLED 관련 제품·서비스",
-        "revenue_share": null
+        "name": "Display 검사장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.5%",
+        "revenue_share": 0.065,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "MLCC",
-        "desc": "MLCC 관련 제품·서비스",
-        "revenue_share": null
+        "name": "Chip 검사장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.4%",
+        "revenue_share": 0.294,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "방산",
-        "desc": "방산 관련 제품·서비스",
-        "revenue_share": null
-      },
-      {
-        "name": "구리",
-        "desc": "구리 관련 제품·서비스",
-        "revenue_share": null
+        "name": "특성 검사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.1%",
+        "revenue_share": 0.121,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -187,40 +188,54 @@
       "제조",
       "검사 장비"
     ],
-    "investor_note": "이렇게 결정된 수주 목표가를 기준으로 고객사와 수의계약 또는 입찰을 통하여 발주를 받게 됩니다. 최종 확정된 사양에 따라 검사기의 재료비/인건비/경비를 종합한 원가를 바탕으로 수주 목표가를 결정하게 됩니다."
+    "investor_note": "이렇게 결정된 수주 목표가를 기준으로 고객사와 수의계약 또는 입찰을 통하여 발주를 받게 됩니다. 최종 확정된 사양에 따라 검사기의 재료비/인건비/경비를 종합한 원가를 바탕으로 수주 목표가를 결정하게 됩니다.",
+    "product_service_segments": [
+      {
+        "name": "Display 검사장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.5%",
+        "revenue_share": 0.065,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Chip 검사장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.4%",
+        "revenue_share": 0.294,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타 외관검사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.3%",
+        "revenue_share": 0.053,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "특성 검사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.1%",
+        "revenue_share": 0.121,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
-      "kind": "display",
-      "visual": "OLED",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
+      "title": "반도체 장비",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.5%",
+      "kind": "chip",
+      "visual": "EQUIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "MLCC",
-      "caption": "MLCC 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "특성 검사",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.1%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "광학계",
-      "caption": "광학계 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "카메라",
-      "caption": "카메라 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

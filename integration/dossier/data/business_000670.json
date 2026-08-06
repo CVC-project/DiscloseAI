@@ -155,24 +155,32 @@
     "segment_finance": "영풍은 아연괴·황산을 생산하는 비철금속 제련회사로, 코리아써키트·인터플렉스 등 계열사를 통해 PCB(인쇄회로기판)와 반도체 패키징(시그네틱스) 사업도 함께 하며 전자부품 부문이 매출의 약 65%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2조 9,089억 원으로 전년 대비 4.4% 늘었지만 영업이익은 -2,596억 원으로 적자를 이어갔고 당기순이익은 308억 원으로 흑자 전환했습니다. 부채비율은 49.4%로 무난한 수준이나, 감사인은 아연 제련사업의 손상 가능성과 석포제련소의 토양·지하수 오염 정화 관련 소송·행정처분에 따른 불확실성을 강조해 환경 관련 리스크를 신중히 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "제련",
-        "desc": "아연괴·황산 등 비철금속 제련",
-        "revenue_share": 0.41
+        "name": "제련 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.7%",
+        "revenue_share": 0.3172,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "전자부품",
-        "desc": "HDI·Package Substrate 등 PCB 제조",
-        "revenue_share": 0.6488
+        "name": "황산 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.8%",
+        "revenue_share": 0.0779,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "반도체",
-        "desc": "반도체 패키징(시그네틱스)",
-        "revenue_share": 0.0354
+        "name": "부동산 임대",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+        "revenue_share": 0.0149,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "상품중개",
-        "desc": "비철금속·전자설비 상품중개",
-        "revenue_share": 0.0423
+        "name": "부문 소계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 41.0%",
+        "revenue_share": 0.41,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -181,40 +189,70 @@
       "PCB(코리아써키트·인터플렉스·영풍전자·테라닉스)",
       "반도체 패키징(시그네틱스)"
     ],
-    "investor_note": "영풍은 아연괴·황산을 생산하는 비철금속 제련회사로, 코리아써키트·인터플렉스 등 계열사를 통해 PCB(인쇄회로기판)와 반도체 패키징(시그네틱스) 사업도 함께 하며 전자부품 부문이 매출의 약 65%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2조 9,089억 원으로 전년 대비 4.4% 늘었지만 영업이익은 -2,596억 원으로 적자를 이어갔고 당기순이익은 308억 원으로 흑자 전환했습니다. 부채비율은 49.4%로 무난한 수준이나, 감사인은 아연 제련사업의 손상 가능성과 석포제련소의 토양·지하수 오염 정화 관련 소송·행정처분에 따른 불확실성을 강조해 환경 관련 리스크를 신중히 살펴볼 필요가 있습니다."
+    "investor_note": "영풍은 아연괴·황산을 생산하는 비철금속 제련회사로, 코리아써키트·인터플렉스 등 계열사를 통해 PCB(인쇄회로기판)와 반도체 패키징(시그네틱스) 사업도 함께 하며 전자부품 부문이 매출의 약 65%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2조 9,089억 원으로 전년 대비 4.4% 늘었지만 영업이익은 -2,596억 원으로 적자를 이어갔고 당기순이익은 308억 원으로 흑자 전환했습니다. 부채비율은 49.4%로 무난한 수준이나, 감사인은 아연 제련사업의 손상 가능성과 석포제련소의 토양·지하수 오염 정화 관련 소송·행정처분에 따른 불확실성을 강조해 환경 관련 리스크를 신중히 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "제련 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.7%",
+        "revenue_share": 0.3172,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "황산 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.8%",
+        "revenue_share": 0.0779,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "부동산 임대",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+        "revenue_share": 0.0149,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "부문 소계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 41.0%",
+        "revenue_share": 0.41,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "제련",
-      "caption": "아연괴·황산 등 비철금속 제련",
+      "title": "제련 부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.7%",
       "kind": "material",
-      "visual": "제련",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "전자부품",
-      "caption": "HDI·Package Substrate 등 PCB 제조",
-      "kind": "auto",
-      "visual": "전자부품",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "반도체",
-      "caption": "반도체 패키징(시그네틱스)",
-      "kind": "chip",
-      "visual": "반도체",
-      "image": "../data/business_images/business_image_local_semiconductor_pkg.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "상품중개",
-      "caption": "비철금속·전자설비 상품중개",
+      "title": "황산 외",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.8%",
       "kind": "material",
-      "visual": "상품중개",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "부동산 임대",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "부문 소계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 41.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

@@ -155,14 +155,25 @@
     "segment_finance": "인터엠은 1983년 설립된 산업용 전문 음향·영상기기 제조사로, 호텔·관공서·학교 등에서 안내방송에 쓰이는 전관방송(P.A) 시스템과 공연장·방송국용 프로 음향(S.R) 시스템, HD 영상방송 장비를 만듭니다. JVC·한화비전 등과의 OEM·ODM 협력도 하고 있으며, 최근에는 유럽 화재방송 규격(EN54-16) 인증을 받아 해외시장 진출도 추진하고 있습니다. 매출은 자체 제조 제품이 약 62%, 유통 상품이 약 20%, 용역이 약 9%, 임대수익이 약 9%를 차지합니다. 참고로 이 회사의 결산월은 9월이라 이번 보고서는 2025년 9월 말 기준입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 600억 원으로 전년 대비 0.5% 소폭 줄었고, 영업이익 39억 원(-9.5%)과 당기순이익 20억 원(-11.3%)도 함께 감소했습니다. 부채비율은 111.3%로 자본보다 빚이 다소 많은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
+        "name": "제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.3%",
+        "revenue_share": 0.533,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
         "name": "상품",
-        "desc": "OEM 앰프·스피커 등 유통 판매",
-        "revenue_share": 0.195
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.5%",
+        "revenue_share": 0.195,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "용역",
-        "desc": "설계·시공 등 용역매출",
-        "revenue_share": 0.094
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.4%",
+        "revenue_share": 0.094,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,24 +185,47 @@
       "스피커",
       "OEM/ODM 음향기기(JVC·한화비전 등)"
     ],
-    "investor_note": "인터엠은 1983년 설립된 산업용 전문 음향·영상기기 제조사로, 호텔·관공서·학교 등에서 안내방송에 쓰이는 전관방송(P.A) 시스템과 공연장·방송국용 프로 음향(S.R) 시스템, HD 영상방송 장비를 만듭니다. JVC·한화비전 등과의 OEM·ODM 협력도 하고 있으며, 최근에는 유럽 화재방송 규격(EN54-16) 인증을 받아 해외시장 진출도 추진하고 있습니다. 매출은 자체 제조 제품이 약 62%, 유통 상품이 약 20%, 용역이 약 9%, 임대수익이 약 9%를 차지합니다. 참고로 이 회사의 결산월은 9월이라 이번 보고서는 2025년 9월 말 기준입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 600억 원으로 전년 대비 0.5% 소폭 줄었고, 영업이익 39억 원(-9.5%)과 당기순이익 20억 원(-11.3%)도 함께 감소했습니다. 부채비율은 111.3%로 자본보다 빚이 다소 많은 편이라 재무 부담을 살펴볼 필요가 있습니다."
+    "investor_note": "인터엠은 1983년 설립된 산업용 전문 음향·영상기기 제조사로, 호텔·관공서·학교 등에서 안내방송에 쓰이는 전관방송(P.A) 시스템과 공연장·방송국용 프로 음향(S.R) 시스템, HD 영상방송 장비를 만듭니다. JVC·한화비전 등과의 OEM·ODM 협력도 하고 있으며, 최근에는 유럽 화재방송 규격(EN54-16) 인증을 받아 해외시장 진출도 추진하고 있습니다. 매출은 자체 제조 제품이 약 62%, 유통 상품이 약 20%, 용역이 약 9%, 임대수익이 약 9%를 차지합니다. 참고로 이 회사의 결산월은 9월이라 이번 보고서는 2025년 9월 말 기준입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 600억 원으로 전년 대비 0.5% 소폭 줄었고, 영업이익 39억 원(-9.5%)과 당기순이익 20억 원(-11.3%)도 함께 감소했습니다. 부채비율은 111.3%로 자본보다 빚이 다소 많은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.3%",
+        "revenue_share": 0.533,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.5%",
+        "revenue_share": 0.195,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.4%",
+        "revenue_share": 0.094,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "제조(제품·반제품)",
-      "caption": "전관방송·프로음향 시스템 자체 제조",
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.5%",
       "kind": "service",
-      "visual": "제조",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "상품",
-      "caption": "OEM 앰프·스피커 등 유통 판매",
+      "title": "용역",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.4%",
       "kind": "service",
-      "visual": "상품",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

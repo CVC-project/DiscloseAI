@@ -155,19 +155,11 @@
     "segment_finance": "코리아나화장품은 라비다·세니떼·자인 등 자체 브랜드를 보유한 화장품 제조·판매 회사로, 국내에서 세레니끄 피부관리샵을 가맹 운영하고 중국 천진 법인을 통해서도 화장품을 생산·판매하고 있습니다. 매출의 대부분(약 99%)이 화장품 사업에서 나오며, 기초 제품이 그중에서도 가장 큰 비중을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 736억 원으로 전년보다 10.6% 줄었고 영업이익과 당기순이익 모두 적자로 전환해 각각 43억 원, 77억 원의 손실을 기록했습니다. 부채비율은 18.2%로 낮아 재무구조 자체는 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "화장품(기초)",
-        "desc": "라비다·세니떼 등 기초 화장품",
-        "revenue_share": 0.7078
-      },
-      {
-        "name": "화장품(헤어·바디 등)",
-        "desc": "헤어·바디 제품 등",
-        "revenue_share": 0.2431
-      },
-      {
-        "name": "화장품(색조)",
-        "desc": "라비다·텐세컨즈 등 색조 화장품",
-        "revenue_share": 0.0388
+        "name": "색조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.9%",
+        "revenue_share": 0.0388,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -182,32 +174,40 @@
       "텐세컨즈",
       "세레니끄(피부관리샵)"
     ],
-    "investor_note": "코리아나화장품은 라비다·세니떼·자인 등 자체 브랜드를 보유한 화장품 제조·판매 회사로, 국내에서 세레니끄 피부관리샵을 가맹 운영하고 중국 천진 법인을 통해서도 화장품을 생산·판매하고 있습니다. 매출의 대부분(약 99%)이 화장품 사업에서 나오며, 기초 제품이 그중에서도 가장 큰 비중을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 736억 원으로 전년보다 10.6% 줄었고 영업이익과 당기순이익 모두 적자로 전환해 각각 43억 원, 77억 원의 손실을 기록했습니다. 부채비율은 18.2%로 낮아 재무구조 자체는 안정적인 편입니다."
+    "investor_note": "코리아나화장품은 라비다·세니떼·자인 등 자체 브랜드를 보유한 화장품 제조·판매 회사로, 국내에서 세레니끄 피부관리샵을 가맹 운영하고 중국 천진 법인을 통해서도 화장품을 생산·판매하고 있습니다. 매출의 대부분(약 99%)이 화장품 사업에서 나오며, 기초 제품이 그중에서도 가장 큰 비중을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 736억 원으로 전년보다 10.6% 줄었고 영업이익과 당기순이익 모두 적자로 전환해 각각 43억 원, 77억 원의 손실을 기록했습니다. 부채비율은 18.2%로 낮아 재무구조 자체는 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "화장품사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 70.8%",
+        "revenue_share": 0.7078,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "색조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.9%",
+        "revenue_share": 0.0388,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "화장품(기초)",
-      "caption": "라비다·세니떼 등 기초 화장품",
-      "kind": "consumer",
-      "visual": "화장품",
-      "image": "../data/business_images/business_image_local_cosmetics.svg",
-      "image_source": "Local curated visual"
+      "title": "화장품사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 70.8%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "화장품(헤어·바디 등)",
-      "caption": "헤어·바디 제품 등",
-      "kind": "consumer",
-      "visual": "화장품",
-      "image": "../data/business_images/business_image_local_cosmetics.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "화장품(색조)",
-      "caption": "라비다·텐세컨즈 등 색조 화장품",
-      "kind": "consumer",
-      "visual": "화장품",
-      "image": "../data/business_images/business_image_local_cosmetics.svg",
-      "image_source": "Local curated visual"
+      "title": "색조",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.9%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

@@ -155,14 +155,25 @@
     "segment_finance": "황금에스티는 스테인레스 코일을 절단·가공해 판매하는 철강부문과 도로·철도·항만 등 인프라를 시공하는 건설부문을 함께 운영하는 회사입니다. 매출은 스테인레스 등 철강 제품(54%)이 가장 크고 건설 공사수익(30%)과 매입 상품 판매(14%)가 뒤를 이으며, 최근에는 고품질 건축소재 'TITAMAX'와 ALC(경량기포콘크리트) 제품으로 사업을 넓히고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,165억 원으로 전년 대비 1.4% 소폭 줄었고 영업이익도 7.1% 감소했지만, 당기순이익은 6.9% 늘어 최종적으로 남는 돈은 오히려 증가했습니다. 부채비율은 26.5%로 재무 부담이 크지 않은 안정적인 수준입니다.",
     "segment_breakdown": [
       {
-        "name": "건설(공사수익)",
-        "desc": "도로·철도·항만·터널 등 인프라 시공",
-        "revenue_share": 0.2993
+        "name": "스테인레스 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.8%",
+        "revenue_share": 0.5383,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "상품",
-        "desc": "매입 스테인레스 완제품 유통",
-        "revenue_share": 0.1444
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.4%",
+        "revenue_share": 0.1444,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "공사수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.9%",
+        "revenue_share": 0.2993,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -173,24 +184,70 @@
       "터널·단지 건설",
       "스테인레스 상품 유통"
     ],
-    "investor_note": "황금에스티는 스테인레스 코일을 절단·가공해 판매하는 철강부문과 도로·철도·항만 등 인프라를 시공하는 건설부문을 함께 운영하는 회사입니다. 매출은 스테인레스 등 철강 제품(54%)이 가장 크고 건설 공사수익(30%)과 매입 상품 판매(14%)가 뒤를 이으며, 최근에는 고품질 건축소재 'TITAMAX'와 ALC(경량기포콘크리트) 제품으로 사업을 넓히고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,165억 원으로 전년 대비 1.4% 소폭 줄었고 영업이익도 7.1% 감소했지만, 당기순이익은 6.9% 늘어 최종적으로 남는 돈은 오히려 증가했습니다. 부채비율은 26.5%로 재무 부담이 크지 않은 안정적인 수준입니다."
+    "investor_note": "황금에스티는 스테인레스 코일을 절단·가공해 판매하는 철강부문과 도로·철도·항만 등 인프라를 시공하는 건설부문을 함께 운영하는 회사입니다. 매출은 스테인레스 등 철강 제품(54%)이 가장 크고 건설 공사수익(30%)과 매입 상품 판매(14%)가 뒤를 이으며, 최근에는 고품질 건축소재 'TITAMAX'와 ALC(경량기포콘크리트) 제품으로 사업을 넓히고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,165억 원으로 전년 대비 1.4% 소폭 줄었고 영업이익도 7.1% 감소했지만, 당기순이익은 6.9% 늘어 최종적으로 남는 돈은 오히려 증가했습니다. 부채비율은 26.5%로 재무 부담이 크지 않은 안정적인 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "스테인레스 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.8%",
+        "revenue_share": 0.5383,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.4%",
+        "revenue_share": 0.1444,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "공사수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.9%",
+        "revenue_share": 0.2993,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
+        "revenue_share": 0.018,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "건설(공사수익)",
-      "caption": "도로·철도·항만·터널 등 인프라 시공",
-      "kind": "service",
-      "visual": "건설",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "title": "스테인레스 외",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.8%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "상품",
-      "caption": "매입 스테인레스 완제품 유통",
-      "kind": "service",
-      "visual": "상품",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.4%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "공사수익",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.9%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "기타수익",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

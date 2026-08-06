@@ -155,14 +155,32 @@
     "segment_finance": "세방전지는 '로케트 배터리'로 잘 알려진 납축전지 전문기업으로, 차량용·산업용·이륜용 납축전지를 만드는 납축전지부문이 매출의 85%를 차지하며, 리튬전지 모듈을 조립하는 EV전지부문도 15%를 담당하며 성장하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2조 1,420억 원으로 전년 대비 4.0% 늘었지만, 미국 관세와 환율 영향 등으로 영업이익과 당기순이익은 각각 14.4%, 17.9% 감소했습니다. 부채비율은 34.9%로 안정적인 수준입니다.",
     "segment_breakdown": [
       {
-        "name": "납축전지부문",
-        "desc": "차량·산업·이륜용 납축전지(로케트 배터리), 재생연·격리판 제조",
-        "revenue_share": 0.847
+        "name": "납축전지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 69.0%",
+        "revenue_share": 0.69,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "EV전지부문",
-        "desc": "차량용 배터리모듈·전력보조배터리팩, 가정용 ESS 모듈",
-        "revenue_share": 0.153
+        "name": "산업용",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.2%",
+        "revenue_share": 0.082,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "재생연",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.5%",
+        "revenue_share": 0.055,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "격리판",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.9%",
+        "revenue_share": 0.009,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,24 +192,62 @@
       "EV 배터리모듈",
       "전력보조배터리팩"
     ],
-    "investor_note": "세방전지는 '로케트 배터리'로 잘 알려진 납축전지 전문기업으로, 차량용·산업용·이륜용 납축전지를 만드는 납축전지부문이 매출의 85%를 차지하며, 리튬전지 모듈을 조립하는 EV전지부문도 15%를 담당하며 성장하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2조 1,420억 원으로 전년 대비 4.0% 늘었지만, 미국 관세와 환율 영향 등으로 영업이익과 당기순이익은 각각 14.4%, 17.9% 감소했습니다. 부채비율은 34.9%로 안정적인 수준입니다."
+    "investor_note": "세방전지는 '로케트 배터리'로 잘 알려진 납축전지 전문기업으로, 차량용·산업용·이륜용 납축전지를 만드는 납축전지부문이 매출의 85%를 차지하며, 리튬전지 모듈을 조립하는 EV전지부문도 15%를 담당하며 성장하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2조 1,420억 원으로 전년 대비 4.0% 늘었지만, 미국 관세와 환율 영향 등으로 영업이익과 당기순이익은 각각 14.4%, 17.9% 감소했습니다. 부채비율은 34.9%로 안정적인 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "납축전지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 69.0%",
+        "revenue_share": 0.69,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "산업용",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.2%",
+        "revenue_share": 0.082,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "재생연",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.5%",
+        "revenue_share": 0.055,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "격리판",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.9%",
+        "revenue_share": 0.009,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "납축전지부문",
-      "caption": "차량·산업·이륜용 납축전지(로케트 배터리), 재생연·격리판 제조",
+      "title": "납축전지",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 69.0%",
       "kind": "battery",
-      "visual": "납축전지부문",
-      "image": "../data/business_images/business_image_local_battery.svg",
-      "image_source": "Local curated visual"
+      "visual": "BATTERY",
+      "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "EV전지부문",
-      "caption": "차량용 배터리모듈·전력보조배터리팩, 가정용 ESS 모듈",
+      "title": "산업용",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.2%",
       "kind": "battery",
-      "visual": "EV",
-      "image": "../data/business_images/business_image_local_power.svg",
-      "image_source": "Local curated visual"
+      "visual": "BATTERY",
+      "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "재생연",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.5%",
+      "kind": "battery",
+      "visual": "BATTERY",
+      "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

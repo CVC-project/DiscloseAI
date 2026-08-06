@@ -155,34 +155,32 @@
     "segment_finance": "원익큐브는 화학원료(케미칼)와 엔지니어링 플라스틱(폴리머)을 국내외에서 조달해 유통하는 사업을 주력으로, 목조주택용 건자재 유통, 자체 공장의 건축용 실란트(실리콘) 제조, HP 인디고 디지털인쇄기 유통, 자회사 나노이닉스의 LCD용 캐리어필름까지 다각화된 사업 포트폴리오를 갖고 있습니다. 매출은 폴리머(41%)와 케미칼(26%) 두 부문이 대부분을 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,847억 원으로 전년과 비슷한 수준(-0.7%)이었고 영업이익은 33억 원으로 7.2% 줄었지만 당기순이익은 28억 원으로 4.8% 늘었습니다. 부채비율은 36.0%로 낮아 재무 안정성은 양호합니다.",
     "segment_breakdown": [
       {
-        "name": "폴리머 부문",
-        "desc": "PET·PC·PE 등 플라스틱 원료 유통",
-        "revenue_share": 0.4079
+        "name": "케미칼 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.9%",
+        "revenue_share": 0.2589,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "케미칼 부문",
-        "desc": "화학원료 유통(도료·접착제용)",
-        "revenue_share": 0.2589
+        "name": "폴리머 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.8%",
+        "revenue_share": 0.4079,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "건자재 부문",
-        "desc": "목조주택용 자재 유통",
-        "revenue_share": 0.172
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.2%",
+        "revenue_share": 0.172,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "실리콘 부문",
-        "desc": "실란트 등 실리콘 제조·유통",
-        "revenue_share": 0.0726
-      },
-      {
-        "name": "DS부문",
-        "desc": "HP 디지털인쇄기·소모품 유통",
-        "revenue_share": 0.0705
-      },
-      {
-        "name": "전자소재 부문",
-        "desc": "자회사 나노이닉스의 LCD용 캐리어필름 등",
-        "revenue_share": 0.0181
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.3%",
+        "revenue_share": 0.0726,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -193,40 +191,70 @@
       "HP 인디고 디지털인쇄기",
       "LCD용 캐리어필름"
     ],
-    "investor_note": "원익큐브는 화학원료(케미칼)와 엔지니어링 플라스틱(폴리머)을 국내외에서 조달해 유통하는 사업을 주력으로, 목조주택용 건자재 유통, 자체 공장의 건축용 실란트(실리콘) 제조, HP 인디고 디지털인쇄기 유통, 자회사 나노이닉스의 LCD용 캐리어필름까지 다각화된 사업 포트폴리오를 갖고 있습니다. 매출은 폴리머(41%)와 케미칼(26%) 두 부문이 대부분을 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,847억 원으로 전년과 비슷한 수준(-0.7%)이었고 영업이익은 33억 원으로 7.2% 줄었지만 당기순이익은 28억 원으로 4.8% 늘었습니다. 부채비율은 36.0%로 낮아 재무 안정성은 양호합니다."
+    "investor_note": "원익큐브는 화학원료(케미칼)와 엔지니어링 플라스틱(폴리머)을 국내외에서 조달해 유통하는 사업을 주력으로, 목조주택용 건자재 유통, 자체 공장의 건축용 실란트(실리콘) 제조, HP 인디고 디지털인쇄기 유통, 자회사 나노이닉스의 LCD용 캐리어필름까지 다각화된 사업 포트폴리오를 갖고 있습니다. 매출은 폴리머(41%)와 케미칼(26%) 두 부문이 대부분을 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,847억 원으로 전년과 비슷한 수준(-0.7%)이었고 영업이익은 33억 원으로 7.2% 줄었지만 당기순이익은 28억 원으로 4.8% 늘었습니다. 부채비율은 36.0%로 낮아 재무 안정성은 양호합니다.",
+    "product_service_segments": [
+      {
+        "name": "케미칼 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.9%",
+        "revenue_share": 0.2589,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "폴리머 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.8%",
+        "revenue_share": 0.4079,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "건자재 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.2%",
+        "revenue_share": 0.172,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "실리콘 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.3%",
+        "revenue_share": 0.0726,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "폴리머 부문",
-      "caption": "PET·PC·PE 등 플라스틱 원료 유통",
+      "title": "케미칼 부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.9%",
       "kind": "service",
-      "visual": "폴리머",
-      "image": "../data/business_images/business_image_local_cement.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "케미칼 부문",
-      "caption": "화학원료 유통(도료·접착제용)",
-      "kind": "material",
-      "visual": "케미칼",
-      "image": "../data/business_images/business_image_local_education.svg",
-      "image_source": "Local curated visual"
+      "title": "폴리머 부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "건자재 부문",
-      "caption": "목조주택용 자재 유통",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.2%",
       "kind": "service",
-      "visual": "건자재",
-      "image": "../data/business_images/business_image_local_housing.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "실리콘 부문",
-      "caption": "실란트 등 실리콘 제조·유통",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.3%",
       "kind": "service",
-      "visual": "실리콘",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

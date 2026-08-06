@@ -153,7 +153,29 @@
   "snippets": {
     "overview": "케이티스카이라이프는 국내 유일 위성방송사업자로 TV·인터넷·알뜰폰(skylife 모바일)을 결합 판매하며, 케이블TV 자회사 KT HCN과 ENA·ENA드라마 등 방송채널을 운영하는 KT ENA를 계열사로 두고 있습니다. 위성방송이 매출의 약 68%, 유선방송이 21%, 방송채널사업이 11%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 9,842억 원으로 전년 대비 3.8% 줄었지만 영업이익은 229억 원으로 흑자 전환했고 당기순이익도 14억 원으로 흑자 전환했습니다. 다만 자기자본이익률(ROE)은 0.3%에 그쳐 이익 규모는 아직 크지 않으며, 부채비율은 73.3%로 무난한 수준입니다.",
     "segment_finance": "케이티스카이라이프는 국내 유일 위성방송사업자로 TV·인터넷·알뜰폰(skylife 모바일)을 결합 판매하며, 케이블TV 자회사 KT HCN과 ENA·ENA드라마 등 방송채널을 운영하는 KT ENA를 계열사로 두고 있습니다. 위성방송이 매출의 약 68%, 유선방송이 21%, 방송채널사업이 11%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 9,842억 원으로 전년 대비 3.8% 줄었지만 영업이익은 229억 원으로 흑자 전환했고 당기순이익도 14억 원으로 흑자 전환했습니다. 다만 자기자본이익률(ROE)은 0.3%에 그쳐 이익 규모는 아직 크지 않으며, 부채비율은 73.3%로 무난한 수준입니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "위성방송",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 65.4%",
+        "revenue_share": 0.654,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "플랫폼수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.8%",
+        "revenue_share": 0.278,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "유선방송 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.6%",
+        "revenue_share": 0.516,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "skylife TV",
       "sky UHD",
@@ -166,40 +188,70 @@
       "ENA STORY",
       "OLIFE"
     ],
-    "investor_note": "케이티스카이라이프는 국내 유일 위성방송사업자로 TV·인터넷·알뜰폰(skylife 모바일)을 결합 판매하며, 케이블TV 자회사 KT HCN과 ENA·ENA드라마 등 방송채널을 운영하는 KT ENA를 계열사로 두고 있습니다. 위성방송이 매출의 약 68%, 유선방송이 21%, 방송채널사업이 11%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 9,842억 원으로 전년 대비 3.8% 줄었지만 영업이익은 229억 원으로 흑자 전환했고 당기순이익도 14억 원으로 흑자 전환했습니다. 다만 자기자본이익률(ROE)은 0.3%에 그쳐 이익 규모는 아직 크지 않으며, 부채비율은 73.3%로 무난한 수준입니다."
+    "investor_note": "케이티스카이라이프는 국내 유일 위성방송사업자로 TV·인터넷·알뜰폰(skylife 모바일)을 결합 판매하며, 케이블TV 자회사 KT HCN과 ENA·ENA드라마 등 방송채널을 운영하는 KT ENA를 계열사로 두고 있습니다. 위성방송이 매출의 약 68%, 유선방송이 21%, 방송채널사업이 11%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 9,842억 원으로 전년 대비 3.8% 줄었지만 영업이익은 229억 원으로 흑자 전환했고 당기순이익도 14억 원으로 흑자 전환했습니다. 다만 자기자본이익률(ROE)은 0.3%에 그쳐 이익 규모는 아직 크지 않으며, 부채비율은 73.3%로 무난한 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "위성방송",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 65.4%",
+        "revenue_share": 0.654,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "플랫폼수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.8%",
+        "revenue_share": 0.278,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.8%",
+        "revenue_share": 0.068,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "유선방송 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.6%",
+        "revenue_share": 0.516,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "skylife TV",
-      "caption": "skylife TV 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "위성방송",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 65.4%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_141eab6519656e30.jpg",
-      "image_source": "Wikimedia Commons"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "sky UHD",
-      "caption": "sky UHD 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "플랫폼 서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.8%",
+      "kind": "platform",
+      "visual": "PLATFORM",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "기타수익",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.8%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "skylife 모바일(알뜰폰)",
-      "caption": "skylife 모바일(알뜰폰) 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "유선방송 등",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.6%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "KT HCN 케이블TV",
-      "caption": "KT HCN 케이블TV 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "power",
-      "visual": "POWER",
-      "image": "../data/business_images/business_image_141eab6519656e30.jpg",
-      "image_source": "Wikimedia Commons"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

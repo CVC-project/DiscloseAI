@@ -155,29 +155,32 @@
     "segment_finance": "서희건설은 분양 리스크가 큰 자체사업보다 '서희스타힐스' 브랜드로 지역주택조합 아파트 도급공사를 전국에서 안정적으로 수행해온 중견 건설사로, 포스코 내부 토건정비공사도 지속적으로 맡고 있습니다. 골프장 운영업, 임대관리업, 의약품 도소매업 등으로 사업을 다각화했고, 환경부문 종속회사를 통해 폐기물처리·전력생산 사업도 함께 벌이고 있습니다. 매출의 대부분(86.4%)은 민간 아파트 건축공사에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 1,001억 원으로 전년 대비 25.3% 줄었고, 영업이익도 1,443억 원으로 38.8% 감소, 당기순이익도 1,206억 원으로 24.3% 줄어 전반적으로 실적이 둔화됐습니다. 부채비율은 49.6%로 재무구조는 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "건축(민간)",
-        "desc": "지역주택조합 등 민간 아파트 도급건축",
-        "revenue_share": 0.8636
+        "name": "국내도급공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+        "revenue_share": 0.0154,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "토목(민간)",
-        "desc": "민간 토목공사",
-        "revenue_share": 0.0875
+        "name": "민간",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 86.4%",
+        "revenue_share": 0.8636,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "건축(관급)",
-        "desc": "조달청·LH공사 등 공공건축",
-        "revenue_share": 0.0154
+        "name": "토목",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.0%",
+        "revenue_share": 0.0003,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "플랜트",
-        "desc": "민간 플랜트 공사",
-        "revenue_share": 0.0017
-      },
-      {
-        "name": "토목(관급)",
-        "desc": "공공 토목공사",
-        "revenue_share": 0.0003
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.0017,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -188,40 +191,54 @@
       "골프장 운영",
       "폐기물처리·전력생산(환경부문)"
     ],
-    "investor_note": "서희건설은 분양 리스크가 큰 자체사업보다 '서희스타힐스' 브랜드로 지역주택조합 아파트 도급공사를 전국에서 안정적으로 수행해온 중견 건설사로, 포스코 내부 토건정비공사도 지속적으로 맡고 있습니다. 골프장 운영업, 임대관리업, 의약품 도소매업 등으로 사업을 다각화했고, 환경부문 종속회사를 통해 폐기물처리·전력생산 사업도 함께 벌이고 있습니다. 매출의 대부분(86.4%)은 민간 아파트 건축공사에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 1,001억 원으로 전년 대비 25.3% 줄었고, 영업이익도 1,443억 원으로 38.8% 감소, 당기순이익도 1,206억 원으로 24.3% 줄어 전반적으로 실적이 둔화됐습니다. 부채비율은 49.6%로 재무구조는 안정적인 편입니다."
+    "investor_note": "서희건설은 분양 리스크가 큰 자체사업보다 '서희스타힐스' 브랜드로 지역주택조합 아파트 도급공사를 전국에서 안정적으로 수행해온 중견 건설사로, 포스코 내부 토건정비공사도 지속적으로 맡고 있습니다. 골프장 운영업, 임대관리업, 의약품 도소매업 등으로 사업을 다각화했고, 환경부문 종속회사를 통해 폐기물처리·전력생산 사업도 함께 벌이고 있습니다. 매출의 대부분(86.4%)은 민간 아파트 건축공사에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 1,001억 원으로 전년 대비 25.3% 줄었고, 영업이익도 1,443억 원으로 38.8% 감소, 당기순이익도 1,206억 원으로 24.3% 줄어 전반적으로 실적이 둔화됐습니다. 부채비율은 49.6%로 재무구조는 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "국내도급공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
+        "revenue_share": 0.0154,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "민간",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 86.4%",
+        "revenue_share": 0.8636,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "토목",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.0%",
+        "revenue_share": 0.0003,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "플랜트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.0017,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "서희스타힐스(지역주택조합 아파트)",
-      "caption": "서희스타힐스(지역주택조합 아파트) 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "국내도급공사",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.5%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_housing.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "공공건축물 도급공사",
-      "caption": "공공건축물 도급공사 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "민간",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 86.4%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "도로 토목공사",
-      "caption": "도로 토목공사 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "건축(민간)",
-      "caption": "건축(민간) 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

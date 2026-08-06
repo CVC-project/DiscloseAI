@@ -155,9 +155,32 @@
     "segment_finance": "조아제약은 1988년 설립된 제약사로 조아바이톤-에이, 헤파토스, 훼마틴, 잘크톤 등 200여 가지 의약품·건강기능식품을 생산해 전국 약국망과 해외 23개국에 공급하며, 약국 프랜차이즈 메디팜을 자회사로 두고 있습니다. 매출의 82%는 자체 제조 제품, 나머지는 파스류 등 유통 상품에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 593억 원으로 전년보다 5.4% 줄었고, 영업손실 65억 원·순손실 73억 원으로 적자가 이어지고 있습니다. 부채비율도 197.2%로 자본보다 빚이 훨씬 많아 재무구조를 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "상품(유통)",
-        "desc": "파스류 등 사입 판매 상품",
-        "revenue_share": 0.176
+        "name": "의약품제조업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.9%",
+        "revenue_share": 0.019,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "헤파토스군",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.6%",
+        "revenue_share": 0.036,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "훼마틴군",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
+        "revenue_share": 0.063,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "바소칸군",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.02,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,24 +197,70 @@
       "파스류",
       "메디팜(프랜차이즈)"
     ],
-    "investor_note": "조아제약은 1988년 설립된 제약사로 조아바이톤-에이, 헤파토스, 훼마틴, 잘크톤 등 200여 가지 의약품·건강기능식품을 생산해 전국 약국망과 해외 23개국에 공급하며, 약국 프랜차이즈 메디팜을 자회사로 두고 있습니다. 매출의 82%는 자체 제조 제품, 나머지는 파스류 등 유통 상품에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 593억 원으로 전년보다 5.4% 줄었고, 영업손실 65억 원·순손실 73억 원으로 적자가 이어지고 있습니다. 부채비율도 197.2%로 자본보다 빚이 훨씬 많아 재무구조를 살펴볼 필요가 있습니다."
+    "investor_note": "조아제약은 1988년 설립된 제약사로 조아바이톤-에이, 헤파토스, 훼마틴, 잘크톤 등 200여 가지 의약품·건강기능식품을 생산해 전국 약국망과 해외 23개국에 공급하며, 약국 프랜차이즈 메디팜을 자회사로 두고 있습니다. 매출의 82%는 자체 제조 제품, 나머지는 파스류 등 유통 상품에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 593억 원으로 전년보다 5.4% 줄었고, 영업손실 65억 원·순손실 73억 원으로 적자가 이어지고 있습니다. 부채비율도 197.2%로 자본보다 빚이 훨씬 많아 재무구조를 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "의약품제조업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.9%",
+        "revenue_share": 0.019,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "헤파토스군",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.6%",
+        "revenue_share": 0.036,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "훼마틴군",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
+        "revenue_share": 0.063,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "바소칸군",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.02,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "상품(유통)",
-      "caption": "파스류 등 사입 판매 상품",
-      "kind": "service",
-      "visual": "상품",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "의약품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.9%",
+      "kind": "bio",
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "의약품 제조업",
-      "caption": "의약품 제조업을 중심으로 매출을 만듭니다.",
+      "title": "헤파토스군",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.6%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "훼마틴군",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "바소칸군",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -153,7 +153,15 @@
   "snippets": {
     "overview": "매일유업(주)의 주요 사업은 유제품 부문 등입니다. 제품 등의 가격변동추이 * 산출대상은 매출액 비중이 큰 대표제품(매일우유 엣지 900ml, 앱솔루트 명작, 바리스타룰스 325ml, 엔요플레인 100ml)으로 선정하였으며, 상기 가격은 DC 제외 매출액으로 실제 판매가격과 차이가 있을 수 있습니다. (영업 부문 정보) 회사의 영업 부문은 생산하는 제품의 형태에 따라 유가공 부문, 기타 부문으로 분류하였습니다.",
     "segment_finance": "매일유업(주)의 주요 사업은 유제품 부문 등입니다. 제품 등의 가격변동추이 * 산출대상은 매출액 비중이 큰 대표제품(매일우유 엣지 900ml, 앱솔루트 명작, 바리스타룰스 325ml, 엔요플레인 100ml)으로 선정하였으며, 상기 가격은 DC 제외 매출액으로 실제 판매가격과 차이가 있을 수 있습니다. (영업 부문 정보) 회사의 영업 부문은 생산하는 제품의 형태에 따라 유가공 부문, 기타 부문으로 분류하였습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "총계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "원유",
       "유가공",
@@ -167,40 +175,32 @@
       "총괄",
       "유제품등"
     ],
-    "investor_note": "매일유업(주)의 주요 사업은 유제품 부문 등입니다. 제품 등의 가격변동추이 * 산출대상은 매출액 비중이 큰 대표제품(매일우유 엣지 900ml, 앱솔루트 명작, 바리스타룰스 325ml, 엔요플레인 100ml)으로 선정하였으며, 상기 가격은 DC 제외 매출액으로 실제 판매가격과 차이가 있을 수 있습니다. (영업 부문 정보) 회사의 영업 부문은 생산하는 제품의 형태에 따라 유가공 부문, 기타 부문으로 분류하였습니다."
+    "investor_note": "매일유업(주)의 주요 사업은 유제품 부문 등입니다. 제품 등의 가격변동추이 * 산출대상은 매출액 비중이 큰 대표제품(매일우유 엣지 900ml, 앱솔루트 명작, 바리스타룰스 325ml, 엔요플레인 100ml)으로 선정하였으며, 상기 가격은 DC 제외 매출액으로 실제 판매가격과 차이가 있을 수 있습니다. (영업 부문 정보) 회사의 영업 부문은 생산하는 제품의 형태에 따라 유가공 부문, 기타 부문으로 분류하였습니다.",
+    "product_service_segments": [
+      {
+        "name": "유제품 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.6%",
+        "revenue_share": 0.5955,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "유제품 부문 등",
-      "caption": "유제품 부문 등 관련 제품·서비스",
-      "kind": "service",
-      "visual": "유제품",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "원유",
-      "caption": "원유 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "원유",
-      "image": "../data/business_images/business_image_local_default_b.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "유가공",
-      "caption": "유가공 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "유가공",
-      "image": "../data/business_images/business_image_local_default_c.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "식용",
-      "caption": "식용 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "식용",
-      "image": "../data/business_images/business_image_local_default_d.svg",
-      "image_source": "Local curated visual"
+      "title": "유제품 외",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.6%",
+      "kind": "consumer",
+      "visual": "INGREDIENT",
+      "image": "../data/business_images/business_image_food_ingredient.svg",
+      "image_source": "Local visual"
     }
   ],
   "custom_report_ideas": [

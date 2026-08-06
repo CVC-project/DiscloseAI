@@ -155,19 +155,11 @@
     "segment_finance": "(주)예스티의 주요 사업은 HBM, OLED, 제품매출, 반도체장비입니다. 둘째, 단순 마케팅 수주 노력에 그치는 것이 아니라 연구소의 신기술 개발, 제조기술의 양산체제 구축, 공정 및 장비 운용 노하우 확보 및 유지보수Part의 장비 납품 후 장비의 운용 지원이 어우러진 종합 판매 전략을 수립하고 있습니다. 향후 중국 내 투자 및 OLED, Flexible Display 분야의 신규 투자에 따른 장비시장에 적극 진출할 계획이며 국내 시장에서도 SK Hynix, Amkor 칩 등으로부터 지속적으로 수주가 이루어지고 있는 등 고객의 다변화를 기하고 있습니다.",
     "segment_breakdown": [
       {
-        "name": "HBM",
-        "desc": "HBM 관련 제품·서비스",
-        "revenue_share": null
-      },
-      {
-        "name": "OLED",
-        "desc": "OLED, LED 관련 제품·서비스",
-        "revenue_share": null
-      },
-      {
-        "name": "반도체장비",
-        "desc": "반도체장비 관련 제품·서비스",
-        "revenue_share": null
+        "name": "디스플레이장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.0%",
+        "revenue_share": 0.2,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -180,24 +172,39 @@
       "제조",
       "설치"
     ],
-    "investor_note": "(주)예스티의 주요 사업은 HBM, OLED, 제품매출, 반도체장비입니다. 둘째, 단순 마케팅 수주 노력에 그치는 것이 아니라 연구소의 신기술 개발, 제조기술의 양산체제 구축, 공정 및 장비 운용 노하우 확보 및 유지보수Part의 장비 납품 후 장비의 운용 지원이 어우러진 종합 판매 전략을 수립하고 있습니다. 향후 중국 내 투자 및 OLED, Flexible Display 분야의 신규 투자에 따른 장비시장에 적극 진출할 계획이며 국내 시장에서도 SK Hynix, Amkor 칩 등으로부터 지속적으로 수주가 이루어지고 있는 등 고객의 다변화를 기하고 있습니다."
+    "investor_note": "(주)예스티의 주요 사업은 HBM, OLED, 제품매출, 반도체장비입니다. 둘째, 단순 마케팅 수주 노력에 그치는 것이 아니라 연구소의 신기술 개발, 제조기술의 양산체제 구축, 공정 및 장비 운용 노하우 확보 및 유지보수Part의 장비 납품 후 장비의 운용 지원이 어우러진 종합 판매 전략을 수립하고 있습니다. 향후 중국 내 투자 및 OLED, Flexible Display 분야의 신규 투자에 따른 장비시장에 적극 진출할 계획이며 국내 시장에서도 SK Hynix, Amkor 칩 등으로부터 지속적으로 수주가 이루어지고 있는 등 고객의 다변화를 기하고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "제품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 79.0%",
+        "revenue_share": 0.79,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "디스플레이장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.0%",
+        "revenue_share": 0.2,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.01,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "OLED",
-      "caption": "OLED, LED 관련 제품·서비스",
+      "title": "디스플레이",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.0%",
       "kind": "display",
       "visual": "OLED",
       "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
       "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "반도체장비",
-      "caption": "반도체장비 관련 제품·서비스",
-      "kind": "chip",
-      "visual": "반도체장비",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
     }
   ],
   "custom_report_ideas": [

@@ -155,19 +155,25 @@
     "segment_finance": "SH에너지화학은 건물단열재 등에 쓰이는 EPS레진(스티로폼 원료)을 만드는 합성수지 제조사업(매출 비중 99% 이상)을 주력으로, 화장품 원료용 Nylon-12(ANYBES), 미국 셰일가스 개발, 경영컨설팅도 소규모로 병행하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 986억 원으로 전년 대비 21.8% 줄었고, 영업손실과 순손실 규모도 각각 26.4%, 3.5% 더 커지는 등 적자가 지속되고 있습니다. 부채비율은 46.1%로 낮은 편이지만, 본업인 합성수지 사업의 수익성 회복 여부를 지켜볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "합성수지등제조",
-        "desc": "EPS레진(단열재·완충재 원료)·화장품 원료(ANYBES) 제조",
-        "revenue_share": 0.999
+        "name": "합성수지등 제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.9%",
+        "revenue_share": 0.999,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "자원개발",
-        "desc": "미국 현지법인을 통한 셰일가스 개발",
-        "revenue_share": 0.0002
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.001,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "경영컨설팅",
-        "desc": "투자 및 경영자문",
-        "revenue_share": 0.0001
+        "name": "단순합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -175,32 +181,47 @@
       "Nylon-12 Fine Powder(ANYBES)",
       "셰일가스(Shale Gas)"
     ],
-    "investor_note": "SH에너지화학은 건물단열재 등에 쓰이는 EPS레진(스티로폼 원료)을 만드는 합성수지 제조사업(매출 비중 99% 이상)을 주력으로, 화장품 원료용 Nylon-12(ANYBES), 미국 셰일가스 개발, 경영컨설팅도 소규모로 병행하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 986억 원으로 전년 대비 21.8% 줄었고, 영업손실과 순손실 규모도 각각 26.4%, 3.5% 더 커지는 등 적자가 지속되고 있습니다. 부채비율은 46.1%로 낮은 편이지만, 본업인 합성수지 사업의 수익성 회복 여부를 지켜볼 필요가 있습니다."
+    "investor_note": "SH에너지화학은 건물단열재 등에 쓰이는 EPS레진(스티로폼 원료)을 만드는 합성수지 제조사업(매출 비중 99% 이상)을 주력으로, 화장품 원료용 Nylon-12(ANYBES), 미국 셰일가스 개발, 경영컨설팅도 소규모로 병행하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 986억 원으로 전년 대비 21.8% 줄었고, 영업손실과 순손실 규모도 각각 26.4%, 3.5% 더 커지는 등 적자가 지속되고 있습니다. 부채비율은 46.1%로 낮은 편이지만, 본업인 합성수지 사업의 수익성 회복 여부를 지켜볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "합성수지등 제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.9%",
+        "revenue_share": 0.999,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.001,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "단순합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "합성수지등제조",
-      "caption": "EPS레진(단열재·완충재 원료)·화장품 원료(ANYBES) 제조",
-      "kind": "consumer",
-      "visual": "합성수지등제조",
-      "image": "../data/business_images/business_image_local_cosmetics.svg",
-      "image_source": "Local curated visual"
+      "title": "합성수지등 제조",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 99.9%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "자원개발",
-      "caption": "미국 현지법인을 통한 셰일가스 개발",
-      "kind": "service",
-      "visual": "자원개발",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "경영컨설팅",
-      "caption": "투자 및 경영자문",
-      "kind": "securities",
-      "visual": "경영컨설팅",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "title": "단순합계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

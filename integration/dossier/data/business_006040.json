@@ -156,8 +156,10 @@
     "segment_breakdown": [
       {
         "name": "식품가공유통부문",
-        "desc": "동원참치·StarKist 등 식품 제조·유통",
-        "revenue_share": 0.6767
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 67.7%",
+        "revenue_share": 0.6767,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -170,32 +172,62 @@
       "연포장재·알루미늄박·유리병·CAN·PET 포장재",
       "2차전지 알루미늄 양극박·원통형캔·셀파우치"
     ],
-    "investor_note": "동원산업은 동원그룹의 지주회사로, 참치를 잡는 원양어업과 동원참치·양반김치를 만드는 동원F&B, 미국 1위 참치브랜드 스타키스트(StarKist) 등 식품가공유통사업이 매출의 약 68%를 차지하며, 물류(3PL)와 2차전지 소재를 포함한 포장사업도 함께 운영합니다. 2025년 매출액은 9조 5,836억 원(+7.1%), 영업이익 5,161억 원(+3.0%), 당기순이익은 3,871억 원으로 240.9% 늘었습니다. 총자산은 7조 7,775억 원(+8.7%), 부채비율 110.1%, ROE 11.1%입니다. 감사인은 포장소재부문 영업권의 손상 여부를 핵심 점검사항으로 짚었습니다. 과거 공시 기반 참고 정보입니다."
+    "investor_note": "동원산업은 동원그룹의 지주회사로, 참치를 잡는 원양어업과 동원참치·양반김치를 만드는 동원F&B, 미국 1위 참치브랜드 스타키스트(StarKist) 등 식품가공유통사업이 매출의 약 68%를 차지하며, 물류(3PL)와 2차전지 소재를 포함한 포장사업도 함께 운영합니다. 2025년 매출액은 9조 5,836억 원(+7.1%), 영업이익 5,161억 원(+3.0%), 당기순이익은 3,871억 원으로 240.9% 늘었습니다. 총자산은 7조 7,775억 원(+8.7%), 부채비율 110.1%, ROE 11.1%입니다. 감사인은 포장소재부문 영업권의 손상 여부를 핵심 점검사항으로 짚었습니다. 과거 공시 기반 참고 정보입니다.",
+    "product_service_segments": [
+      {
+        "name": "수산사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.5%",
+        "revenue_share": 0.0354,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "식품가공유통부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 67.7%",
+        "revenue_share": 0.6767,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "물류사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.4%",
+        "revenue_share": 0.124,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "포장사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.5%",
+        "revenue_share": 0.1154,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "식품가공유통부문",
-      "caption": "동원참치·StarKist 등 식품 제조·유통",
-      "kind": "consumer",
-      "visual": "식품가공유통부문",
-      "image": "../data/business_images/business_image_food_packaged.svg",
-      "image_source": "Local visual"
+      "title": "수산사업부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "물류사업부문",
-      "caption": "3PL 등 보관·배송 서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.4%",
       "kind": "service",
-      "visual": "물류사업부문",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "포장사업부문",
-      "caption": "종합포장재 및 2차전지 소재(알루미늄 양극박 등)",
-      "kind": "battery",
-      "visual": "포장사업부문",
-      "image": "../data/business_images/business_image_local_packaging.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

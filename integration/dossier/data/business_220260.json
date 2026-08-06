@@ -153,7 +153,22 @@
   "snippets": {
     "overview": "(주)켐트로스의 주요 사업은 첨단소재사업부문, 융합소재사업부문, 융합소재사업부, 첨단사업부 등입니다. 의약소재는 기존 의약품 이외에 당사의 기술력을 적용 신규의약품을 외부 개발업체와 공동으로 사업화를 진행하고, 고객사와의 오래된 신뢰를 바탕으로 GMP 기준에 의한 품질관리와 생산관리를 통해 고객의 요구사항을 충족시키는 것으로 경쟁사와 차별을 두고 있습니다. 또한, 고객의 요구가 급변화하는 상황에서 능동적으로 대처하여 경쟁사와의 차별을 시도하고 있습니다.",
     "segment_finance": "(주)켐트로스의 주요 사업은 첨단소재사업부문, 융합소재사업부문, 융합소재사업부, 첨단사업부 등입니다. 의약소재는 기존 의약품 이외에 당사의 기술력을 적용 신규의약품을 외부 개발업체와 공동으로 사업화를 진행하고, 고객사와의 오래된 신뢰를 바탕으로 GMP 기준에 의한 품질관리와 생산관리를 통해 고객의 요구사항을 충족시키는 것으로 경쟁사와 차별을 두고 있습니다. 또한, 고객의 요구가 급변화하는 상황에서 능동적으로 대처하여 경쟁사와의 차별을 시도하고 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "디스플레이",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.2%",
+        "revenue_share": 0.062,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "반도체공정",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.2%",
+        "revenue_share": 0.252,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "OLED",
       "카메라모듈",
@@ -168,39 +183,69 @@
       "난연성 확보",
       "수명"
     ],
-    "investor_note": "(주)켐트로스의 주요 사업은 첨단소재사업부문, 융합소재사업부문, 융합소재사업부, 첨단사업부 등입니다. 의약소재는 기존 의약품 이외에 당사의 기술력을 적용 신규의약품을 외부 개발업체와 공동으로 사업화를 진행하고, 고객사와의 오래된 신뢰를 바탕으로 GMP 기준에 의한 품질관리와 생산관리를 통해 고객의 요구사항을 충족시키는 것으로 경쟁사와 차별을 두고 있습니다. 또한, 고객의 요구가 급변화하는 상황에서 능동적으로 대처하여 경쟁사와의 차별을 시도하고 있습니다."
+    "investor_note": "(주)켐트로스의 주요 사업은 첨단소재사업부문, 융합소재사업부문, 융합소재사업부, 첨단사업부 등입니다. 의약소재는 기존 의약품 이외에 당사의 기술력을 적용 신규의약품을 외부 개발업체와 공동으로 사업화를 진행하고, 고객사와의 오래된 신뢰를 바탕으로 GMP 기준에 의한 품질관리와 생산관리를 통해 고객의 요구사항을 충족시키는 것으로 경쟁사와 차별을 두고 있습니다. 또한, 고객의 요구가 급변화하는 상황에서 능동적으로 대처하여 경쟁사와의 차별을 시도하고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "첨단소재사업부",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.1%",
+        "revenue_share": 0.191,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "디스플레이",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.2%",
+        "revenue_share": 0.062,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "반도체공정",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.2%",
+        "revenue_share": 0.252,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기능성첨가제/기타",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.7%",
+        "revenue_share": 0.027,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "화학제품",
-      "caption": "화학제품 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
-    },
-    {
       "title": "첨단소재사업부",
-      "caption": "첨단소재사업부 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.1%",
       "kind": "material",
       "visual": "MAT",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "IT소재",
-      "caption": "IT소재 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
+      "title": "디스플레이",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.2%",
       "kind": "display",
       "visual": "OLED",
       "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "반도체공정",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.2%",
+      "kind": "chip",
+      "visual": "CHIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "기능성첨가제/기타",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.7%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
       "image_source": "Wikimedia Commons"
     }
   ],

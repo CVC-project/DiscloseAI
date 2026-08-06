@@ -153,46 +153,61 @@
   "snippets": {
     "overview": "주식회사 LX세미콘의 주요 제품·서비스는 OLED, 시스템반도체, Driver-IC 등입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 또한, 고객사에서 요구하는 최적의 솔루션 제품을 고객 맞춤형으로 제공함으로써 시장 지위 유지가 가능할 것으로 예상합니다. 매출처 단일 외부고객으로부터의 매출액이 당사 매출액의 10% 이상을 차지하는 고객은 2개사(社)로 25년 당기 매출액은 각각 9,123억원, 4,448억원 입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "주식회사 LX세미콘의 주요 제품·서비스는 OLED, 시스템반도체, Driver-IC 등입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 또한, 고객사에서 요구하는 최적의 솔루션 제품을 고객 맞춤형으로 제공함으로써 시장 지위 유지가 가능할 것으로 예상합니다. 매출처 단일 외부고객으로부터의 매출액이 당사 매출액의 10% 이상을 차지하는 고객은 2개사(社)로 25년 당기 매출액은 각각 9,123억원, 4,448억원 입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "시스템반도체",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 89.4%",
+        "revenue_share": 0.8941,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Driver - IC 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.6%",
+        "revenue_share": 0.1059,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "OLED",
       "시스템반도체",
       "Driver-IC 등"
     ],
-    "investor_note": "주식회사 LX세미콘의 주요 제품·서비스는 OLED, 시스템반도체, Driver-IC 등입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 또한, 고객사에서 요구하는 최적의 솔루션 제품을 고객 맞춤형으로 제공함으로써 시장 지위 유지가 가능할 것으로 예상합니다. 매출처 단일 외부고객으로부터의 매출액이 당사 매출액의 10% 이상을 차지하는 고객은 2개사(社)로 25년 당기 매출액은 각각 9,123억원, 4,448억원 입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사 LX세미콘의 주요 제품·서비스는 OLED, 시스템반도체, Driver-IC 등입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 또한, 고객사에서 요구하는 최적의 솔루션 제품을 고객 맞춤형으로 제공함으로써 시장 지위 유지가 가능할 것으로 예상합니다. 매출처 단일 외부고객으로부터의 매출액이 당사 매출액의 10% 이상을 차지하는 고객은 2개사(社)로 25년 당기 매출액은 각각 9,123억원, 4,448억원 입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "시스템반도체",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 89.4%",
+        "revenue_share": 0.8941,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Driver - IC 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.6%",
+        "revenue_share": 0.1059,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
+      "title": "시스템반도체",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 89.4%",
       "kind": "chip",
       "visual": "CHIP",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "시스템반도체",
-      "caption": "시스템반도체 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "Driver - IC 외",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.6%",
       "kind": "chip",
       "visual": "CHIP",
-      "image": "../data/business_images/business_image_local_semiconductor_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "Driver-IC 등",
-      "caption": "Driver-IC 등 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "chip",
-      "visual": "CHIP",
-      "image": "../data/business_images/business_image_local_semiconductor_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "전략마케팅부문",
-      "caption": "전략마케팅부문 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "chip",
-      "visual": "CHIP",
-      "image": "../data/business_images/business_image_local_semiconductor_part.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

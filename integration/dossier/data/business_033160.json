@@ -155,19 +155,32 @@
     "segment_finance": "엠케이전자는 반도체 패키징에 쓰이는 본딩와이어·솔더볼 등 소재를 만드는 반도체 소재 기업으로, 용인 본사와 중국 쿤산 공장을 거점으로 반도체 업체에 납품하고 있습니다. 최근에는 금속 재활용(친환경 소재)과 이차전지용 실리콘 음극재 등 신사업으로도 영역을 넓히고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 4,038억 원으로 전년 대비 19.9% 늘었고 당기순이익도 흑자로 전환됐지만, 영업이익은 141억 원으로 74.7% 줄어 수익성은 약화됐습니다. 부채비율은 153.0%로 자본보다 빚이 많은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "반도체 세선·증착재료",
-        "desc": "본딩와이어·골드증착재·스퍼터링타겟 등 반도체 패키징 소재",
-        "revenue_share": 0.95
+        "name": "반도체용 세금선및증착재료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 91.8%",
+        "revenue_share": 0.9183,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "솔더볼(패키징 소재)",
-        "desc": "BGA·WLP 등 반도체 패키지용 접합소재",
-        "revenue_share": 0.034
+        "name": "골드 증착재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.6%",
+        "revenue_share": 0.006,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "친환경·이차전지 소재",
-        "desc": "금속 재활용 및 이차전지 실리콘 음극재 신사업",
-        "revenue_share": null
+        "name": "스퍼터링 타겟",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+        "revenue_share": 0.0256,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "솔더볼",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.4%",
+        "revenue_share": 0.0339,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -179,32 +192,62 @@
       "팔라듐 합금 소재",
       "이차전지 소재"
     ],
-    "investor_note": "엠케이전자는 반도체 패키징에 쓰이는 본딩와이어·솔더볼 등 소재를 만드는 반도체 소재 기업으로, 용인 본사와 중국 쿤산 공장을 거점으로 반도체 업체에 납품하고 있습니다. 최근에는 금속 재활용(친환경 소재)과 이차전지용 실리콘 음극재 등 신사업으로도 영역을 넓히고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 4,038억 원으로 전년 대비 19.9% 늘었고 당기순이익도 흑자로 전환됐지만, 영업이익은 141억 원으로 74.7% 줄어 수익성은 약화됐습니다. 부채비율은 153.0%로 자본보다 빚이 많은 편이라 재무 부담을 살펴볼 필요가 있습니다."
+    "investor_note": "엠케이전자는 반도체 패키징에 쓰이는 본딩와이어·솔더볼 등 소재를 만드는 반도체 소재 기업으로, 용인 본사와 중국 쿤산 공장을 거점으로 반도체 업체에 납품하고 있습니다. 최근에는 금속 재활용(친환경 소재)과 이차전지용 실리콘 음극재 등 신사업으로도 영역을 넓히고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 4,038억 원으로 전년 대비 19.9% 늘었고 당기순이익도 흑자로 전환됐지만, 영업이익은 141억 원으로 74.7% 줄어 수익성은 약화됐습니다. 부채비율은 153.0%로 자본보다 빚이 많은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "반도체용 세금선및증착재료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 91.8%",
+        "revenue_share": 0.9183,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "골드 증착재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.6%",
+        "revenue_share": 0.006,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "스퍼터링 타겟",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+        "revenue_share": 0.0256,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "솔더볼",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.4%",
+        "revenue_share": 0.0339,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "반도체 세선·증착재료",
-      "caption": "본딩와이어·골드증착재·스퍼터링타겟 등 반도체 패키징 소재",
+      "title": "반도체용 세금선및증착재료",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 91.8%",
       "kind": "chip",
-      "visual": "반도체",
-      "image": "../data/business_images/business_image_local_semiconductor_pkg.svg",
-      "image_source": "Local curated visual"
+      "visual": "CHIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "솔더볼(패키징 소재)",
-      "caption": "BGA·WLP 등 반도체 패키지용 접합소재",
-      "kind": "chip",
-      "visual": "솔더볼",
-      "image": "../data/business_images/business_image_local_semiconductor_pkg.svg",
-      "image_source": "Local curated visual"
+      "title": "스퍼터링 타겟",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "친환경·이차전지 소재",
-      "caption": "금속 재활용 및 이차전지 실리콘 음극재 신사업",
-      "kind": "battery",
-      "visual": "친환경",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "title": "솔더볼",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.4%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

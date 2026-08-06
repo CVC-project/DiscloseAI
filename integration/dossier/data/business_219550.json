@@ -153,7 +153,36 @@
   "snippets": {
     "overview": "(주)디와이디의 주요 사업은 건설매출, 건설, 건설산업기본법, 건설(*1) 등입니다. 매출처 수주상황 - 당사는 행정청의 인허가가 늦어져 2024년 12월 02일 계약 상대방과 합의를 통해 계약을 해제하였습니다. 구체적인 사항은 2024년 12월 02일에 공시된 \" 단일판매ㆍ공급계약해지 \" 공시를 참고하시기 바랍니다.",
     "segment_finance": "(주)디와이디의 주요 사업은 건설매출, 건설, 건설산업기본법, 건설(*1) 등입니다. 매출처 수주상황 - 당사는 행정청의 인허가가 늦어져 2024년 12월 02일 계약 상대방과 합의를 통해 계약을 해제하였습니다. 구체적인 사항은 2024년 12월 02일에 공시된 \" 단일판매ㆍ공급계약해지 \" 공시를 참고하시기 바랍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "H & B",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.9%",
+        "revenue_share": 0.469,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "온라인",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.6%",
+        "revenue_share": 0.2462,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "해외수출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.2%",
+        "revenue_share": 0.0925,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "건설매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.9%",
+        "revenue_share": 0.0089,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "화장품",
       "화장품법",
@@ -166,40 +195,62 @@
       "등록된 디자인",
       "디자인"
     ],
-    "investor_note": "(주)디와이디의 주요 사업은 건설매출, 건설, 건설산업기본법, 건설(*1) 등입니다. 매출처 수주상황 - 당사는 행정청의 인허가가 늦어져 2024년 12월 02일 계약 상대방과 합의를 통해 계약을 해제하였습니다. 구체적인 사항은 2024년 12월 02일에 공시된 \" 단일판매ㆍ공급계약해지 \" 공시를 참고하시기 바랍니다."
+    "investor_note": "(주)디와이디의 주요 사업은 건설매출, 건설, 건설산업기본법, 건설(*1) 등입니다. 매출처 수주상황 - 당사는 행정청의 인허가가 늦어져 2024년 12월 02일 계약 상대방과 합의를 통해 계약을 해제하였습니다. 구체적인 사항은 2024년 12월 02일에 공시된 \" 단일판매ㆍ공급계약해지 \" 공시를 참고하시기 바랍니다.",
+    "product_service_segments": [
+      {
+        "name": "H & B",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.9%",
+        "revenue_share": 0.469,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "온라인",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.6%",
+        "revenue_share": 0.2462,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "해외수출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.2%",
+        "revenue_share": 0.0925,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "건설매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.9%",
+        "revenue_share": 0.0089,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "화장품",
-      "caption": "화장품 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_local_cosmetics.svg",
-      "image_source": "Local curated visual"
+      "title": "H & B",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "판매업 등록",
-      "caption": "판매업 등록 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_local_default_b.svg",
-      "image_source": "Local curated visual"
+      "title": "온라인",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "소비자 기본법",
-      "caption": "소비자 기본법 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_local_default_c.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "국가 지방자치단체",
-      "caption": "국가 지방자치단체 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_local_default_d.svg",
-      "image_source": "Local curated visual"
+      "title": "해외수출",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

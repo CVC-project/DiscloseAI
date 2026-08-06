@@ -155,19 +155,32 @@
     "segment_finance": "이구산업은 1971년 설립된 비철금속 전문 제조업체로, 동·황동·인청동을 만들어 자동차 부품(커넥터·터미널), 반도체, 전기전자제품, 건축자재 등 다양한 산업에 공급하고 있습니다. 특히 전기차 배터리를 연결하는 버스바(Busbar)와 리드탭(Lead tap)에 쓰이는 동 제품 수요가 늘면서, 전체 매출에서 전기차 관련 부품 소재 비중이 점차 커지고 있습니다. 매출은 동이 약 48%, 황동이 약 41%, 인청동이 약 8%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 5,077억 원으로 전년 대비 7.5% 늘었지만, 영업이익은 244억 원으로 3.0%, 당기순이익은 109억 원으로 13.4% 각각 줄어 매출 성장에 비해 수익성은 다소 둔화됐습니다. 부채비율은 158.8%로 자본보다 빚이 많은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "동(銅)",
-        "desc": "커넥터·전기차 배터리 부품 등에 쓰이는 구리 소재",
-        "revenue_share": 0.478
+        "name": "비철금속",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.7%",
+        "revenue_share": 0.4666,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "황동",
-        "desc": "전자·건축자재용 황동 소재",
-        "revenue_share": 0.409
+        "name": "황 동",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.8%",
+        "revenue_share": 0.3982,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "인청동",
-        "desc": "전기·전자 부품용 인청동 소재",
-        "revenue_share": 0.077
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.6%",
+        "revenue_share": 0.0764,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임가공",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.2%",
+        "revenue_share": 0.0118,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -181,32 +194,70 @@
       "발광다이오드(LED)용 단자 소재",
       "태양광 발전 전력판매"
     ],
-    "investor_note": "이구산업은 1971년 설립된 비철금속 전문 제조업체로, 동·황동·인청동을 만들어 자동차 부품(커넥터·터미널), 반도체, 전기전자제품, 건축자재 등 다양한 산업에 공급하고 있습니다. 특히 전기차 배터리를 연결하는 버스바(Busbar)와 리드탭(Lead tap)에 쓰이는 동 제품 수요가 늘면서, 전체 매출에서 전기차 관련 부품 소재 비중이 점차 커지고 있습니다. 매출은 동이 약 48%, 황동이 약 41%, 인청동이 약 8%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 5,077억 원으로 전년 대비 7.5% 늘었지만, 영업이익은 244억 원으로 3.0%, 당기순이익은 109억 원으로 13.4% 각각 줄어 매출 성장에 비해 수익성은 다소 둔화됐습니다. 부채비율은 158.8%로 자본보다 빚이 많은 편이라 재무 부담을 살펴볼 필요가 있습니다."
+    "investor_note": "이구산업은 1971년 설립된 비철금속 전문 제조업체로, 동·황동·인청동을 만들어 자동차 부품(커넥터·터미널), 반도체, 전기전자제품, 건축자재 등 다양한 산업에 공급하고 있습니다. 특히 전기차 배터리를 연결하는 버스바(Busbar)와 리드탭(Lead tap)에 쓰이는 동 제품 수요가 늘면서, 전체 매출에서 전기차 관련 부품 소재 비중이 점차 커지고 있습니다. 매출은 동이 약 48%, 황동이 약 41%, 인청동이 약 8%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 5,077억 원으로 전년 대비 7.5% 늘었지만, 영업이익은 244억 원으로 3.0%, 당기순이익은 109억 원으로 13.4% 각각 줄어 매출 성장에 비해 수익성은 다소 둔화됐습니다. 부채비율은 158.8%로 자본보다 빚이 많은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "비철금속",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.7%",
+        "revenue_share": 0.4666,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "황 동",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.8%",
+        "revenue_share": 0.3982,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "인청동",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.6%",
+        "revenue_share": 0.0764,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임가공",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.2%",
+        "revenue_share": 0.0118,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "동(銅)",
-      "caption": "커넥터·전기차 배터리 부품 등에 쓰이는 구리 소재",
-      "kind": "battery",
-      "visual": "동",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
+      "title": "비철금속",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.7%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "황동",
-      "caption": "전자·건축자재용 황동 소재",
+      "title": "황 동",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.8%",
       "kind": "material",
-      "visual": "황동",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "인청동",
-      "caption": "전기·전자 부품용 인청동 소재",
-      "kind": "auto",
-      "visual": "인청동",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.6%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "임가공",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.2%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

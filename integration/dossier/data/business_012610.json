@@ -155,14 +155,25 @@
     "segment_finance": "경인양행은 섬유·가죽 염색에 쓰이는 반응성염료(Synozol 브랜드)를 주력으로 생산하는 염료 전문기업으로, 매출의 약 75%가 염료부문에서 나옵니다. 계열사 제이엠씨를 통해 국내 유일하게 식품첨가물인 사카린도 생산하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 3,797억 원으로 전년보다 1.5% 늘었지만, 영업이익은 162억 원으로 32.9%, 당기순이익은 55억 원으로 65.7% 줄어 수익성이 나빠졌습니다. 부채비율은 98.8%로 자본과 비슷한 수준의 빚을 지고 있어 재무 부담을 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "염료",
-        "desc": "반응성염료 등 섬유·가죽용 염료 생산(Synozol)",
-        "revenue_share": 0.745
+        "name": "염료부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 64.7%",
+        "revenue_share": 0.6471,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "화학",
-        "desc": "사카린 등 식품첨가물, 황산가리 생산",
-        "revenue_share": 0.255
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.0%",
+        "revenue_share": 0.0902,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "화학부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.7%",
+        "revenue_share": 0.2468,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -172,24 +183,55 @@
       "사카린",
       "황산가리(SOP)"
     ],
-    "investor_note": "경인양행은 섬유·가죽 염색에 쓰이는 반응성염료(Synozol 브랜드)를 주력으로 생산하는 염료 전문기업으로, 매출의 약 75%가 염료부문에서 나옵니다. 계열사 제이엠씨를 통해 국내 유일하게 식품첨가물인 사카린도 생산하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 3,797억 원으로 전년보다 1.5% 늘었지만, 영업이익은 162억 원으로 32.9%, 당기순이익은 55억 원으로 65.7% 줄어 수익성이 나빠졌습니다. 부채비율은 98.8%로 자본과 비슷한 수준의 빚을 지고 있어 재무 부담을 살펴볼 필요가 있습니다."
+    "investor_note": "경인양행은 섬유·가죽 염색에 쓰이는 반응성염료(Synozol 브랜드)를 주력으로 생산하는 염료 전문기업으로, 매출의 약 75%가 염료부문에서 나옵니다. 계열사 제이엠씨를 통해 국내 유일하게 식품첨가물인 사카린도 생산하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 3,797억 원으로 전년보다 1.5% 늘었지만, 영업이익은 162억 원으로 32.9%, 당기순이익은 55억 원으로 65.7% 줄어 수익성이 나빠졌습니다. 부채비율은 98.8%로 자본과 비슷한 수준의 빚을 지고 있어 재무 부담을 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "염료부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 64.7%",
+        "revenue_share": 0.6471,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.0%",
+        "revenue_share": 0.0902,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "화학부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.7%",
+        "revenue_share": 0.2468,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "염료",
-      "caption": "반응성염료 등 섬유·가죽용 염료 생산(Synozol)",
-      "kind": "service",
-      "visual": "염료",
-      "image": "../data/business_images/business_image_local_textile.svg",
-      "image_source": "Local curated visual"
+      "title": "염료부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 64.7%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "화학",
-      "caption": "사카린 등 식품첨가물, 황산가리 생산",
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.0%",
       "kind": "material",
-      "visual": "화학",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "화학부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.7%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

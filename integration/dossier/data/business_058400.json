@@ -156,13 +156,24 @@
     "segment_breakdown": [
       {
         "name": "TV방송광고",
-        "desc": "TV 프로그램·중간광고 판매",
-        "revenue_share": 0.3065
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.6%",
+        "revenue_share": 0.3065,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "라디오방송광고",
-        "desc": "라디오 프로그램 광고 판매",
-        "revenue_share": 0.0202
+        "name": "Radio방송광고",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.0202,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임대",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.3%",
+        "revenue_share": 0.0433,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -172,24 +183,70 @@
       "임대사업(부동산)",
       "용역사업"
     ],
-    "investor_note": "KNN(주식회사 케이엔엔)은 부산·경남 지역의 유일한 민영방송사로, TV·라디오 방송광고를 중심으로 프로그램 협찬사업, 부동산 임대, 기타 용역사업까지 함께 운영하고 있습니다. 매출의 절반가량은 협찬사업(50.9%)에서 나오고, 방송광고(TV 30.7%·라디오 2.0%)와 용역(12.1%), 임대(4.3%)가 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 685억 원으로 전년과 비슷한 수준(-0.5%)이었고 영업이익은 31억 원으로 29.2% 줄었지만, 당기순이익은 113억 원으로 39.3% 늘었습니다. 부채비율은 7.8%로 재무구조가 매우 안정적인 편입니다."
+    "investor_note": "KNN(주식회사 케이엔엔)은 부산·경남 지역의 유일한 민영방송사로, TV·라디오 방송광고를 중심으로 프로그램 협찬사업, 부동산 임대, 기타 용역사업까지 함께 운영하고 있습니다. 매출의 절반가량은 협찬사업(50.9%)에서 나오고, 방송광고(TV 30.7%·라디오 2.0%)와 용역(12.1%), 임대(4.3%)가 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 685억 원으로 전년과 비슷한 수준(-0.5%)이었고 영업이익은 31억 원으로 29.2% 줄었지만, 당기순이익은 113억 원으로 39.3% 늘었습니다. 부채비율은 7.8%로 재무구조가 매우 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "TV방송광고",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.6%",
+        "revenue_share": 0.3065,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Radio방송광고",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.0202,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "협찬사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.9%",
+        "revenue_share": 0.5093,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임대",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.3%",
+        "revenue_share": 0.0433,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "TV방송광고",
-      "caption": "TV 프로그램·중간광고 판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.6%",
       "kind": "platform",
-      "visual": "TV방송광고",
+      "visual": "APP",
       "image": "../data/business_images/business_image_141eab6519656e30.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "라디오방송광고",
-      "caption": "라디오 프로그램 광고 판매",
+      "title": "Radio방송광고",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
       "kind": "platform",
-      "visual": "라디오방송광고",
-      "image": "../data/business_images/business_image_local_content.svg",
-      "image_source": "Local curated visual"
+      "visual": "APP",
+      "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "협찬사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "임대",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.3%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -156,13 +156,17 @@
     "segment_breakdown": [
       {
         "name": "제조부문",
-        "desc": "식품용 포장재·다류·커피제품 제조·포장",
-        "revenue_share": 0.226
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.6%",
+        "revenue_share": 0.226,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "구매수출부문",
-        "desc": "크리머 수출, 원부자재 구매대행",
-        "revenue_share": 0.196
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.6%",
+        "revenue_share": 0.196,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -175,32 +179,62 @@
       "크리머 수출",
       "구매·수출입 대행"
     ],
-    "investor_note": "동서는 식자재·수입음료 등을 유통하는 식품사업부문, 식품용 포장재·다류(茶類)·커피제품 포장을 담당하는 제조부문, 크리머 수출과 원부자재 구매대행을 하는 구매수출부문, 그리고 보세창고업·임대업 등 기타부문으로 구성된 식품·유통기업입니다. 식품사업이 매출의 약 56%, 제조부문이 약 23%, 구매수출부문이 약 20%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 5,328억 원으로 전년보다 9.0% 늘었고 영업이익도 453억 원으로 1.9% 증가했지만, 당기순이익은 1,464억 원으로 7.9% 줄었습니다. 순이익이 영업이익보다 훨씬 큰 것은 관계기업 지분법 투자수익의 영향으로 보이며, 부채비율은 3.5%로 재무구조가 매우 안정적인 편입니다."
+    "investor_note": "동서는 식자재·수입음료 등을 유통하는 식품사업부문, 식품용 포장재·다류(茶類)·커피제품 포장을 담당하는 제조부문, 크리머 수출과 원부자재 구매대행을 하는 구매수출부문, 그리고 보세창고업·임대업 등 기타부문으로 구성된 식품·유통기업입니다. 식품사업이 매출의 약 56%, 제조부문이 약 23%, 구매수출부문이 약 20%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 5,328억 원으로 전년보다 9.0% 늘었고 영업이익도 453억 원으로 1.9% 증가했지만, 당기순이익은 1,464억 원으로 7.9% 줄었습니다. 순이익이 영업이익보다 훨씬 큰 것은 관계기업 지분법 투자수익의 영향으로 보이며, 부채비율은 3.5%로 재무구조가 매우 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "식품사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 56.2%",
+        "revenue_share": 0.562,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제조부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.6%",
+        "revenue_share": 0.226,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "구매수출부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.6%",
+        "revenue_share": 0.196,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
+        "revenue_share": 0.016,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "식품사업부문",
-      "caption": "식자재·수입음료·식용유지 유통",
-      "kind": "consumer",
-      "visual": "식품사업부문",
-      "image": "../data/business_images/business_image_food_packaged.svg",
-      "image_source": "Local visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 56.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "제조부문",
-      "caption": "식품용 포장재·다류·커피제품 제조·포장",
-      "kind": "consumer",
-      "visual": "제조부문",
-      "image": "../data/business_images/business_image_local_packaging.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "구매수출부문",
-      "caption": "크리머 수출, 원부자재 구매대행",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.6%",
       "kind": "service",
-      "visual": "구매수출부문",
-      "image": "../data/business_images/business_image_local_mro.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

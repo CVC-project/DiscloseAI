@@ -156,18 +156,24 @@
     "segment_breakdown": [
       {
         "name": "양식기부문(PT.DLI)",
-        "desc": "인도네시아 자회사를 통한 스테인리스 양식기 제조",
-        "revenue_share": 0.149
-      },
-      {
-        "name": "주방용품외(리빙스타)",
-        "desc": "주방·생활용품, 헤어용품 판매",
-        "revenue_share": 0.032
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.9%",
+        "revenue_share": 0.149,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "수전금구부문(D.B.M)",
-        "desc": "해외 건축자재 판매",
-        "revenue_share": 0.006
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.6%",
+        "revenue_share": 0.0056,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "주방용품외(리빙스타)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.2%",
+        "revenue_share": 0.0324,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -177,40 +183,62 @@
       "주방용품",
       "헤어용품"
     ],
-    "investor_note": "대림통상은 수전금구와 비데 등 욕실용 건축자재를 만드는 건자재사업(81%)을 주력으로, 인도네시아 자회사를 통한 스테인리스 양식기 제조(15%), 주방용품·생활용품 판매(3%) 등을 함께 운영합니다. 친환경 에너지 절약 수전 카트리지 개발로 대통령상을 수상한 이력도 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,261억 원으로 전년 대비 7.9% 줄었고 영업이익은 적자로 전환해 95억 원 손실을 냈으며 당기순이익도 169억 원 손실로 적자가 이어졌습니다. 부채비율은 305.4%로 자본 대비 부채가 매우 많아 재무 부담이 큰 편입니다."
+    "investor_note": "대림통상은 수전금구와 비데 등 욕실용 건축자재를 만드는 건자재사업(81%)을 주력으로, 인도네시아 자회사를 통한 스테인리스 양식기 제조(15%), 주방용품·생활용품 판매(3%) 등을 함께 운영합니다. 친환경 에너지 절약 수전 카트리지 개발로 대통령상을 수상한 이력도 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,261억 원으로 전년 대비 7.9% 줄었고 영업이익은 적자로 전환해 95억 원 손실을 냈으며 당기순이익도 169억 원 손실로 적자가 이어졌습니다. 부채비율은 305.4%로 자본 대비 부채가 매우 많아 재무 부담이 큰 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "건자재사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 81.3%",
+        "revenue_share": 0.813,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "양식기부문(PT.DLI)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.9%",
+        "revenue_share": 0.149,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "수전금구부문(D.B.M)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.6%",
+        "revenue_share": 0.0056,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "주방용품외(리빙스타)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.2%",
+        "revenue_share": 0.0324,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "건자재사업부문",
-      "caption": "수전금구·위생도기·비데 등 욕실 건축자재 제조·판매",
-      "kind": "service",
-      "visual": "건자재사업부문",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 81.3%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "양식기부문(PT.DLI)",
-      "caption": "인도네시아 자회사를 통한 스테인리스 양식기 제조",
-      "kind": "service",
-      "visual": "양식기부문",
-      "image": "../data/business_images/business_image_local_finance_hold.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.9%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "주방용품외(리빙스타)",
-      "caption": "주방·생활용품, 헤어용품 판매",
-      "kind": "consumer",
-      "visual": "주방용품외",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "수전금구부문(D.B.M)",
-      "caption": "해외 건축자재 판매",
-      "kind": "service",
-      "visual": "수전금구부문",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.2%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

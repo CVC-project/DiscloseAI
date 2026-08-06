@@ -155,24 +155,25 @@
     "segment_finance": "유에스티의 주요 사업은 배터리, LNG, 해양플랜트, 고순도 청정관입니다. 다양한 규격의 제품을 생산하기 위해서 일정규모 이상의 설비투자가 필요하며 또한 판매를 위해서는 고객별 인증이 필요합니다. 생산라인은 자동세정라인, 자동전해연마라인, 크린룸 포장라인으로 구성되며, 부대설비로 순수제조기 등이 필요합니다.",
     "segment_breakdown": [
       {
-        "name": "배터리",
-        "desc": "배터리 관련 제품·서비스",
-        "revenue_share": null
-      },
-      {
-        "name": "LNG",
-        "desc": "LNG 관련 제품·서비스",
-        "revenue_share": null
-      },
-      {
-        "name": "해양플랜트",
-        "desc": "해양플랜트 관련 제품·서비스",
-        "revenue_share": null
+        "name": "스테인리스 강관",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 93.2%",
+        "revenue_share": 0.932,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "고순도 청정관",
-        "desc": "고순도 청정관 관련 제품·서비스",
-        "revenue_share": null
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.03,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임가공",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.9%",
+        "revenue_share": 0.009,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -184,32 +185,47 @@
       "매입액",
       "매출형태"
     ],
-    "investor_note": "유에스티의 주요 사업은 배터리, LNG, 해양플랜트, 고순도 청정관입니다. 다양한 규격의 제품을 생산하기 위해서 일정규모 이상의 설비투자가 필요하며 또한 판매를 위해서는 고객별 인증이 필요합니다. 생산라인은 자동세정라인, 자동전해연마라인, 크린룸 포장라인으로 구성되며, 부대설비로 순수제조기 등이 필요합니다."
+    "investor_note": "유에스티의 주요 사업은 배터리, LNG, 해양플랜트, 고순도 청정관입니다. 다양한 규격의 제품을 생산하기 위해서 일정규모 이상의 설비투자가 필요하며 또한 판매를 위해서는 고객별 인증이 필요합니다. 생산라인은 자동세정라인, 자동전해연마라인, 크린룸 포장라인으로 구성되며, 부대설비로 순수제조기 등이 필요합니다.",
+    "product_service_segments": [
+      {
+        "name": "스테인리스 강관",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 93.2%",
+        "revenue_share": 0.932,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "고순도 청정관",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.03,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임가공",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.9%",
+        "revenue_share": 0.009,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "배터리",
-      "caption": "배터리 관련 제품·서비스",
-      "kind": "battery",
-      "visual": "배터리",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "해양플랜트",
-      "caption": "해양플랜트 관련 제품·서비스",
-      "kind": "ship",
-      "visual": "해양플랜트",
-      "image": "../data/business_images/business_image_local_offshore.svg",
-      "image_source": "Local curated visual"
+      "title": "철강",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 93.2%",
+      "kind": "material",
+      "visual": "STEEL",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "고순도 청정관",
-      "caption": "고순도 청정관 관련 제품·서비스",
-      "kind": "service",
-      "visual": "고순도",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

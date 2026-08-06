@@ -155,19 +155,25 @@
     "segment_finance": "과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 7,419억 원으로 전년 대비 10.3% 늘었고 영업이익은 797억 원으로 37.8% 증가했지만, 당기순이익은 151억 원으로 29.0% 줄었습니다. 부채비율은 239.6%로 건설업 특성상 부채 비중이 높은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "건설(개발/건축)",
-        "desc": "아파트·사옥·복합시설·물류창고 건설",
-        "revenue_share": 0.6865
+        "name": "건설부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.7%",
+        "revenue_share": 0.6865,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "토목",
-        "desc": "도로·택지·철도·항만 등 인프라 공사",
-        "revenue_share": 0.1601
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.0%",
+        "revenue_share": 0.1601,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "자체(주택개발)",
-        "desc": "자체 시행 아파트·오피스텔·상업시설",
-        "revenue_share": 0.0993
+        "name": "자체",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.9%",
+        "revenue_share": 0.0993,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -179,32 +185,62 @@
       "항만 운영",
       "환경기초시설 설계·시공"
     ],
-    "investor_note": "과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 7,419억 원으로 전년 대비 10.3% 늘었고 영업이익은 797억 원으로 37.8% 증가했지만, 당기순이익은 151억 원으로 29.0% 줄었습니다. 부채비율은 239.6%로 건설업 특성상 부채 비중이 높은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다."
+    "investor_note": "과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 7,419억 원으로 전년 대비 10.3% 늘었고 영업이익은 797억 원으로 37.8% 증가했지만, 당기순이익은 151억 원으로 29.0% 줄었습니다. 부채비율은 239.6%로 건설업 특성상 부채 비중이 높은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "건설부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.7%",
+        "revenue_share": 0.6865,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "토목",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.0%",
+        "revenue_share": 0.1601,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자체",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.9%",
+        "revenue_share": 0.0993,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.4%",
+        "revenue_share": 0.0542,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "건설(개발/건축)",
-      "caption": "아파트·사옥·복합시설·물류창고 건설",
+      "title": "건축·주택",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.7%",
       "kind": "service",
-      "visual": "건설",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "토목",
-      "caption": "도로·택지·철도·항만 등 인프라 공사",
+      "title": "토목·플랜트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.0%",
       "kind": "service",
-      "visual": "토목",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_5184e050831a4460.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "자체(주택개발)",
-      "caption": "자체 시행 아파트·오피스텔·상업시설",
+      "title": "자체",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.9%",
       "kind": "service",
-      "visual": "자체",
-      "image": "../data/business_images/business_image_local_housing.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

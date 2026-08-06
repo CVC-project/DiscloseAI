@@ -155,14 +155,32 @@
     "segment_finance": "나인테크의 주요 제품·서비스는 OLED, 배터리, 수수료 수익, 2차 전지, Lamination입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품의 가격변동 추이 당사의 제품은 고객의 요구 사양에 맞춰 생산하는 주문자 생산방식으로 제조하고 있습니다. 제품등의 현황 당사는 미래성장 동력 아이템으로 손꼽히는 리튬이온 2차전지 공정장비분야에서 국내시장 점유율 1위 및 세계시장에서 경쟁력을 확보를 위해, 2차전지 제조업체와 협력하여 조립공정 장비를 개발 및 공급하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "한국무역보험",
-        "desc": "보험계약과 자산운용 중심 서비스",
-        "revenue_share": null
+        "name": "이차전지 제조용 장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.8%",
+        "revenue_share": 0.688,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "하이투자증권",
-        "desc": "위탁매매, IB, 운용 등 증권 서비스",
-        "revenue_share": null
+        "name": "Stacking",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.6%",
+        "revenue_share": 0.036,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "디스플레이 제조용 장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
+        "revenue_share": 0.05,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Wet Station",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.005,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -171,40 +189,62 @@
       "2차 전지",
       "Lamination"
     ],
-    "investor_note": "나인테크의 주요 제품·서비스는 OLED, 배터리, 수수료 수익, 2차 전지, Lamination입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품의 가격변동 추이 당사의 제품은 고객의 요구 사양에 맞춰 생산하는 주문자 생산방식으로 제조하고 있습니다. 제품등의 현황 당사는 미래성장 동력 아이템으로 손꼽히는 리튬이온 2차전지 공정장비분야에서 국내시장 점유율 1위 및 세계시장에서 경쟁력을 확보를 위해, 2차전지 제조업체와 협력하여 조립공정 장비를 개발 및 공급하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "나인테크의 주요 제품·서비스는 OLED, 배터리, 수수료 수익, 2차 전지, Lamination입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품의 가격변동 추이 당사의 제품은 고객의 요구 사양에 맞춰 생산하는 주문자 생산방식으로 제조하고 있습니다. 제품등의 현황 당사는 미래성장 동력 아이템으로 손꼽히는 리튬이온 2차전지 공정장비분야에서 국내시장 점유율 1위 및 세계시장에서 경쟁력을 확보를 위해, 2차전지 제조업체와 협력하여 조립공정 장비를 개발 및 공급하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "이차전지 제조용 장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.8%",
+        "revenue_share": 0.688,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Stacking",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.6%",
+        "revenue_share": 0.036,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "디스플레이 제조용 장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
+        "revenue_share": 0.05,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Wet Station",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.005,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
+      "title": "이차전지 제조용 장비",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.8%",
+      "kind": "battery",
+      "visual": "BATTERY",
+      "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "Stacking",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "디스플레이",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
       "kind": "display",
       "visual": "OLED",
       "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
       "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "배터리",
-      "caption": "배터리 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "2차 전지",
-      "caption": "2차 전지 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "Lamination",
-      "caption": "Lamination 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
     }
   ],
   "custom_report_ideas": [

@@ -156,13 +156,24 @@
     "segment_breakdown": [
       {
         "name": "렌탈 매출",
-        "desc": "정수기·공기청정기·비데 등 렌탈 및 멤버십",
-        "revenue_share": 0.909
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 56.7%",
+        "revenue_share": 0.567,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "연결 종속회사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.3%",
+        "revenue_share": 0.343,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "일시불 매출",
-        "desc": "환경가전 일시불 판매 및 수출",
-        "revenue_share": 0.065
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.3%",
+        "revenue_share": 0.023,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -173,24 +184,46 @@
       "연수기",
       "전기레인지"
     ],
-    "investor_note": "코웨이는 정수기·공기청정기·비데 등 환경가전을 만들어 국내 약 765만 렌탈·멤버십 계정을 보유한 국내 1위 렌탈 가전 기업으로, 매출의 91%가 매달 요금을 받는 렌탈 매출에서 나오는 안정적인 수익구조가 특징입니다. 말레이시아, 미국, 중국 등 해외 종속회사를 통해서도 같은 사업을 하고, 수처리·가구·화장품 등 계열 사업도 함께 운영합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4조 9,635억 원으로 전년 대비 15.2% 늘었고 영업이익은 10.5%, 당기순이익은 9.2% 증가하며 꾸준한 성장세를 이어갔습니다. 부채비율은 93.7%로 자본과 비슷한 수준의 빚을 지고 있어 참고할 필요가 있습니다."
+    "investor_note": "코웨이는 정수기·공기청정기·비데 등 환경가전을 만들어 국내 약 765만 렌탈·멤버십 계정을 보유한 국내 1위 렌탈 가전 기업으로, 매출의 91%가 매달 요금을 받는 렌탈 매출에서 나오는 안정적인 수익구조가 특징입니다. 말레이시아, 미국, 중국 등 해외 종속회사를 통해서도 같은 사업을 하고, 수처리·가구·화장품 등 계열 사업도 함께 운영합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4조 9,635억 원으로 전년 대비 15.2% 늘었고 영업이익은 10.5%, 당기순이익은 9.2% 증가하며 꾸준한 성장세를 이어갔습니다. 부채비율은 93.7%로 자본과 비슷한 수준의 빚을 지고 있어 참고할 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "렌탈 매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 56.7%",
+        "revenue_share": 0.567,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "연결 종속회사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.3%",
+        "revenue_share": 0.343,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "일시불 매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.3%",
+        "revenue_share": 0.023,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타 매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.6%",
+        "revenue_share": 0.006,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "렌탈",
-      "caption": "정수기·공기청정기·비데 등 렌탈 및 멤버십",
+      "title": "연결 종속회사",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.3%",
       "kind": "service",
-      "visual": "렌탈",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "일시불",
-      "caption": "환경가전 일시불 판매 및 수출",
-      "kind": "service",
-      "visual": "일시불",
-      "image": "../data/business_images/business_image_local_default_b.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

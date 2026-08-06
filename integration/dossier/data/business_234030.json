@@ -89,7 +89,29 @@
   "snippets": {
     "overview": "(주)싸이닉솔루션의 주요 제품·서비스는 Foundry, 이미지센서, OLED, 배터리, 신뢰성 시험, 어떤 부품입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 고객사 요구에 따라 설계, 공정 선택, 생산 계획 등 토탈 솔루션을 제공하며, 특히 중국 시장에서의 도전과 노력으로 2018년부터 연평균 20% 이상의 매출 성장을 이어가고 있습니다. 개발매출(디자인서비스)의 세부 항목은 IP라이선스, Back-end설계 서비스, 포토마스크제작, 시제품웨이퍼 제조, 테스트 및 패키지 제작 등으로 구성이 되는데, 고객사에 따라 이 중 일부 또는 전부에 대한 서비스를 제공하며 매출이 발생을 하게 됩니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "(주)싸이닉솔루션의 주요 제품·서비스는 Foundry, 이미지센서, OLED, 배터리, 신뢰성 시험, 어떤 부품입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 고객사 요구에 따라 설계, 공정 선택, 생산 계획 등 토탈 솔루션을 제공하며, 특히 중국 시장에서의 도전과 노력으로 2018년부터 연평균 20% 이상의 매출 성장을 이어가고 있습니다. 개발매출(디자인서비스)의 세부 항목은 IP라이선스, Back-end설계 서비스, 포토마스크제작, 시제품웨이퍼 제조, 테스트 및 패키지 제작 등으로 구성이 되는데, 고객사에 따라 이 중 일부 또는 전부에 대한 서비스를 제공하며 매출이 발생을 하게 됩니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "CIS",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.7%",
+        "revenue_share": 0.2272,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "DDI (HV)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.9%",
+        "revenue_share": 0.0989,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "ASSP",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.0048,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "Foundry",
       "이미지센서",
@@ -102,39 +124,53 @@
       "Test Vector",
       "적용 분야"
     ],
-    "investor_note": "(주)싸이닉솔루션의 주요 제품·서비스는 Foundry, 이미지센서, OLED, 배터리, 신뢰성 시험, 어떤 부품입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 고객사 요구에 따라 설계, 공정 선택, 생산 계획 등 토탈 솔루션을 제공하며, 특히 중국 시장에서의 도전과 노력으로 2018년부터 연평균 20% 이상의 매출 성장을 이어가고 있습니다. 개발매출(디자인서비스)의 세부 항목은 IP라이선스, Back-end설계 서비스, 포토마스크제작, 시제품웨이퍼 제조, 테스트 및 패키지 제작 등으로 구성이 되는데, 고객사에 따라 이 중 일부 또는 전부에 대한 서비스를 제공하며 매출이 발생을 하게 됩니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)싸이닉솔루션의 주요 제품·서비스는 Foundry, 이미지센서, OLED, 배터리, 신뢰성 시험, 어떤 부품입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 고객사 요구에 따라 설계, 공정 선택, 생산 계획 등 토탈 솔루션을 제공하며, 특히 중국 시장에서의 도전과 노력으로 2018년부터 연평균 20% 이상의 매출 성장을 이어가고 있습니다. 개발매출(디자인서비스)의 세부 항목은 IP라이선스, Back-end설계 서비스, 포토마스크제작, 시제품웨이퍼 제조, 테스트 및 패키지 제작 등으로 구성이 되는데, 고객사에 따라 이 중 일부 또는 전부에 대한 서비스를 제공하며 매출이 발생을 하게 됩니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.6%",
+        "revenue_share": 0.5357,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "CIS",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.7%",
+        "revenue_share": 0.2272,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "DDI (HV)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.9%",
+        "revenue_share": 0.0989,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "ASSP",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.0048,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "Foundry",
-      "caption": "Foundry 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "chip",
-      "visual": "CHIP",
-      "image": "../data/business_images/business_image_local_semiconductor_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "이미지센서",
-      "caption": "스마트폰과 전장 카메라에 들어가는 이미지 처리 부품입니다.",
+      "title": "CIS",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.7%",
       "kind": "chip",
       "visual": "CHIP",
       "image": "../data/business_images/business_image_025006447be31665.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "파운드리 사업부",
-      "caption": "파운드리 사업부 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "DDI (HV)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.9%",
       "kind": "chip",
       "visual": "CHIP",
-      "image": "../data/business_images/business_image_local_semiconductor_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
-      "kind": "chip",
-      "visual": "CHIP",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
       "image_source": "Wikimedia Commons"
     }
   ],

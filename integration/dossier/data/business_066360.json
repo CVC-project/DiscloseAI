@@ -155,19 +155,32 @@
     "segment_finance": "체리부로는 원종계·종계 사육부터 부화, 육계 사육, 도계, 가공까지 닭고기 생산의 전 과정을 담당하는 수직계열화 업체로, 매출의 대부분(93.9%)이 신선육·가공육 등 육계부문에서 발생하고 사료·병아리 판매가 나머지를 차지합니다. 2025년 기준 총 도계량은 8,700만 수이며 매출은 전량 국내시장에서 발생하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,054억 원으로 전년 대비 5.9% 늘었고, 영업이익은 284억 원으로 전년 대비 크게 증가했으며, 당기순이익도 286억 원으로 적자에서 흑자로 전환됐습니다. 다만 부채비율은 135.7%로 자본보다 부채가 많은 편이라 재무 부담은 계속 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "육계부문",
-        "desc": "도계·단순가공 및 신선육 2차가공",
-        "revenue_share": 0.939
+        "name": "육 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 93.9%",
+        "revenue_share": 0.939,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "상품",
-        "desc": "육계 외 상품 유통",
-        "revenue_share": 0.0234
+        "name": "사 료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
+        "revenue_share": 0.0157,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "병아리·사료",
-        "desc": "병아리·사료 판매",
-        "revenue_share": 0.0318
+        "name": "병아리",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
+        "revenue_share": 0.0161,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.3%",
+        "revenue_share": 0.0234,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -177,32 +190,70 @@
       "병아리",
       "종란"
     ],
-    "investor_note": "체리부로는 원종계·종계 사육부터 부화, 육계 사육, 도계, 가공까지 닭고기 생산의 전 과정을 담당하는 수직계열화 업체로, 매출의 대부분(93.9%)이 신선육·가공육 등 육계부문에서 발생하고 사료·병아리 판매가 나머지를 차지합니다. 2025년 기준 총 도계량은 8,700만 수이며 매출은 전량 국내시장에서 발생하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,054억 원으로 전년 대비 5.9% 늘었고, 영업이익은 284억 원으로 전년 대비 크게 증가했으며, 당기순이익도 286억 원으로 적자에서 흑자로 전환됐습니다. 다만 부채비율은 135.7%로 자본보다 부채가 많은 편이라 재무 부담은 계속 살펴볼 필요가 있습니다."
+    "investor_note": "체리부로는 원종계·종계 사육부터 부화, 육계 사육, 도계, 가공까지 닭고기 생산의 전 과정을 담당하는 수직계열화 업체로, 매출의 대부분(93.9%)이 신선육·가공육 등 육계부문에서 발생하고 사료·병아리 판매가 나머지를 차지합니다. 2025년 기준 총 도계량은 8,700만 수이며 매출은 전량 국내시장에서 발생하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,054억 원으로 전년 대비 5.9% 늘었고, 영업이익은 284억 원으로 전년 대비 크게 증가했으며, 당기순이익도 286억 원으로 적자에서 흑자로 전환됐습니다. 다만 부채비율은 135.7%로 자본보다 부채가 많은 편이라 재무 부담은 계속 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "육 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 93.9%",
+        "revenue_share": 0.939,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "사 료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
+        "revenue_share": 0.0157,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "병아리",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
+        "revenue_share": 0.0161,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.3%",
+        "revenue_share": 0.0234,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "육계부문",
-      "caption": "도계·단순가공 및 신선육 2차가공",
+      "title": "육 계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 93.9%",
       "kind": "service",
-      "visual": "육계부문",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "상품",
-      "caption": "육계 외 상품 유통",
+      "title": "사 료",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
       "kind": "service",
-      "visual": "상품",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "병아리·사료",
-      "caption": "병아리·사료 판매",
+      "title": "병아리",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
       "kind": "service",
-      "visual": "병아리",
-      "image": "../data/business_images/business_image_food_feed.svg",
-      "image_source": "Local visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "상 품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.3%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

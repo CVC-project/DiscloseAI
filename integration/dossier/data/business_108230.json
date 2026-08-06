@@ -139,9 +139,18 @@
     "segment_finance": "제품을 만들고 판매하는 제조 기반 회사입니다. 배터리 제조사에 공급하여 글로벌 시장에서 선도적인 역할을 수행하고 있습니다.모빌리티(Mobility) : 전기자동차에 들어가는 모터 및 각종 전동화 부품을 생산할 수 있는 자동화 공정 설비를 개발하여 고객사에 납품하고 있습니다. 국내의 경우 2010년대 초반에 나노섬유 제조설비를 확립하여 본격적인 시장이 형성되었고, 대량생산 및 상용화 기술의 발전으로 다양한 분야로 확대 적용되고 있어 나노섬유 제품의 시장 수요가 증가할 것으로 전망됩니다.나노섬유 기술은 필터미디어 분야에서도 적용 범위가 확대되고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "FA부문",
-        "desc": "FA부문 관련 제품·서비스",
-        "revenue_share": null
+        "name": "FA",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 91.4%",
+        "revenue_share": 0.914,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.0011,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -158,40 +167,47 @@
       "FA부문",
       "제품판매부문"
     ],
-    "investor_note": "제품을 만들고 판매하는 제조 기반 회사입니다. 배터리 제조사에 공급하여 글로벌 시장에서 선도적인 역할을 수행하고 있습니다.모빌리티(Mobility) : 전기자동차에 들어가는 모터 및 각종 전동화 부품을 생산할 수 있는 자동화 공정 설비를 개발하여 고객사에 납품하고 있습니다. 국내의 경우 2010년대 초반에 나노섬유 제조설비를 확립하여 본격적인 시장이 형성되었고, 대량생산 및 상용화 기술의 발전으로 다양한 분야로 확대 적용되고 있어 나노섬유 제품의 시장 수요가 증가할 것으로 전망됩니다.나노섬유 기술은 필터미디어 분야에서도 적용 범위가 확대되고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "제품을 만들고 판매하는 제조 기반 회사입니다. 배터리 제조사에 공급하여 글로벌 시장에서 선도적인 역할을 수행하고 있습니다.모빌리티(Mobility) : 전기자동차에 들어가는 모터 및 각종 전동화 부품을 생산할 수 있는 자동화 공정 설비를 개발하여 고객사에 납품하고 있습니다. 국내의 경우 2010년대 초반에 나노섬유 제조설비를 확립하여 본격적인 시장이 형성되었고, 대량생산 및 상용화 기술의 발전으로 다양한 분야로 확대 적용되고 있어 나노섬유 제품의 시장 수요가 증가할 것으로 전망됩니다.나노섬유 기술은 필터미디어 분야에서도 적용 범위가 확대되고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "FA",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 91.4%",
+        "revenue_share": 0.914,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.0011,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.7%",
+        "revenue_share": 0.0574,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
-      "kind": "display",
-      "visual": "OLED",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "배터리",
-      "caption": "배터리 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "방산",
-      "caption": "방산 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "FA",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 91.4%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_4ae102473975707c.jpg",
-      "image_source": "Wikimedia Commons"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "데이터센터",
-      "caption": "데이터센터 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "제품판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.7%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_datacenter.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

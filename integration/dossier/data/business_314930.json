@@ -153,7 +153,22 @@
   "snippets": {
     "overview": "(주)바이오다인의 주요 제품·서비스는 바이알 세트, 제품 매출, SOLUTION 등, 제품 소계, 구성비, 전체입니다. 현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. 당사의 핵심 사업 분야는 액상세포검사(LBC - Liquid Based Cytology) 장비 및 암진단을 목적으로 하는 시약 키트의 개발, 제조, 판매입니다. 즉, 당사는 액상세포검사 시장에서 약 20년간 유지되어오던 기존 방식의 단점을 개선한 독자 기술을 기반으로 하여 진단 정확도와 사용성을 크게 높인 제품을 개발했습니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다.",
     "segment_finance": "(주)바이오다인의 주요 제품·서비스는 바이알 세트, 제품 매출, SOLUTION 등, 제품 소계, 구성비, 전체입니다. 현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. 당사의 핵심 사업 분야는 액상세포검사(LBC - Liquid Based Cytology) 장비 및 암진단을 목적으로 하는 시약 키트의 개발, 제조, 판매입니다. 즉, 당사는 액상세포검사 시장에서 약 20년간 유지되어오던 기존 방식의 단점을 개선한 독자 기술을 기반으로 하여 진단 정확도와 사용성을 크게 높인 제품을 개발했습니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "LBC진단시약 키트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 89.0%",
+        "revenue_share": 0.89,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "LBC 장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.1%",
+        "revenue_share": 0.041,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "바이알 세트",
       "SOLUTION 등",
@@ -165,24 +180,40 @@
       "Roche(로슈)",
       "마일스톤(USD 6"
     ],
-    "investor_note": "(주)바이오다인의 주요 제품·서비스는 바이알 세트, 제품 매출, SOLUTION 등, 제품 소계, 구성비, 전체입니다. 현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. 당사의 핵심 사업 분야는 액상세포검사(LBC - Liquid Based Cytology) 장비 및 암진단을 목적으로 하는 시약 키트의 개발, 제조, 판매입니다. 즉, 당사는 액상세포검사 시장에서 약 20년간 유지되어오던 기존 방식의 단점을 개선한 독자 기술을 기반으로 하여 진단 정확도와 사용성을 크게 높인 제품을 개발했습니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다."
+    "investor_note": "(주)바이오다인의 주요 제품·서비스는 바이알 세트, 제품 매출, SOLUTION 등, 제품 소계, 구성비, 전체입니다. 현재 판매 제품과 연구개발 성과가 함께 실적을 설명합니다. 당사의 핵심 사업 분야는 액상세포검사(LBC - Liquid Based Cytology) 장비 및 암진단을 목적으로 하는 시약 키트의 개발, 제조, 판매입니다. 즉, 당사는 액상세포검사 시장에서 약 20년간 유지되어오던 기존 방식의 단점을 개선한 독자 기술을 기반으로 하여 진단 정확도와 사용성을 크게 높인 제품을 개발했습니다. 바이오·제약사는 현재 팔리는 제품과 앞으로 매출이 될 개발 과제가 실적을 함께 움직입니다.",
+    "product_service_segments": [
+      {
+        "name": "LBC진단시약 키트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 89.0%",
+        "revenue_share": 0.89,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "LBC 장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.1%",
+        "revenue_share": 0.041,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "바이알 세트",
-      "caption": "바이알 세트 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "바이알",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
+      "title": "진단·분석",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 89.0%",
+      "kind": "bio",
+      "visual": "DIAGNOSTIC",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "SOLUTION 등",
-      "caption": "SOLUTION 등 관련 제품과 서비스를 통해 매출을 만듭니다.",
+      "title": "LBC 장비",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.1%",
       "kind": "service",
-      "visual": "SOLUTION",
-      "image": "../data/business_images/business_image_local_default_b.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -155,14 +155,25 @@
     "segment_finance": "화천기계는 금속재료를 절삭·연마해 만드는 공작기계(선반, 밀링, CNC공작기계)를 제조·판매하며, 자동차 엔진용 실린더블럭 등 부품가공업도 함께 하는 기계 전문 기업입니다. 매출은 공작기계 부문과 자동차부품 부문이 거의 절반씩을 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,145억 원으로 전년 대비 7.7% 줄었고, 영업이익은 88.8% 급감한 2억 원에 그쳤으며, 당기순이익도 53.3% 감소한 27억 원을 기록해 수익성이 크게 나빠졌습니다. 다만 총자산은 1,749억 원으로 소폭 늘었고 부채비율은 23.4%로 재무구조는 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "공작기계",
-        "desc": "CNC·범용 선반, 밀링 등 금속가공용 공작기계 제조",
-        "revenue_share": 0.4977
+        "name": "공 작 기 계제조및판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.5%",
+        "revenue_share": 0.345,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "자동차부품",
-        "desc": "자동차 엔진용 실린더블럭 등 엔진부품 가공·납품",
-        "revenue_share": 0.5023
+        "name": "제 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.3%",
+        "revenue_share": 0.153,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동차부 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.2%",
+        "revenue_share": 0.502,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,22 +185,53 @@
       "실린더헤드",
       "크랭크샤프트"
     ],
-    "investor_note": "화천기계는 금속재료를 절삭·연마해 만드는 공작기계(선반, 밀링, CNC공작기계)를 제조·판매하며, 자동차 엔진용 실린더블럭 등 부품가공업도 함께 하는 기계 전문 기업입니다. 매출은 공작기계 부문과 자동차부품 부문이 거의 절반씩을 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,145억 원으로 전년 대비 7.7% 줄었고, 영업이익은 88.8% 급감한 2억 원에 그쳤으며, 당기순이익도 53.3% 감소한 27억 원을 기록해 수익성이 크게 나빠졌습니다. 다만 총자산은 1,749억 원으로 소폭 늘었고 부채비율은 23.4%로 재무구조는 안정적인 편입니다."
+    "investor_note": "화천기계는 금속재료를 절삭·연마해 만드는 공작기계(선반, 밀링, CNC공작기계)를 제조·판매하며, 자동차 엔진용 실린더블럭 등 부품가공업도 함께 하는 기계 전문 기업입니다. 매출은 공작기계 부문과 자동차부품 부문이 거의 절반씩을 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,145억 원으로 전년 대비 7.7% 줄었고, 영업이익은 88.8% 급감한 2억 원에 그쳤으며, 당기순이익도 53.3% 감소한 27억 원을 기록해 수익성이 크게 나빠졌습니다. 다만 총자산은 1,749억 원으로 소폭 늘었고 부채비율은 23.4%로 재무구조는 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "공 작 기 계제조및판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.5%",
+        "revenue_share": 0.345,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.3%",
+        "revenue_share": 0.153,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동차부 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.2%",
+        "revenue_share": 0.502,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "공작기계",
-      "caption": "CNC·범용 선반, 밀링 등 금속가공용 공작기계 제조",
-      "kind": "material",
-      "visual": "공작기계",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "title": "공 작 기 계제조및판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "자동차부품",
-      "caption": "자동차 엔진용 실린더블럭 등 엔진부품 가공·납품",
+      "title": "제 품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.3%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "자동차부 품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.2%",
       "kind": "auto",
-      "visual": "자동차부품",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     }

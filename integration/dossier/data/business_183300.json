@@ -153,7 +153,36 @@
   "snippets": {
     "overview": "(주)코미코의 주요 사업은 화학물질, 유해화학물질 교육, 유해화학물질 실적보고, 화학물질 배출량조사 등입니다. 이후 고객사의 생산 계획에 따라 수시 발주를 받는 형식으로 수주잔고 등 별도의 수주상황을 관리하고 있지 않습니다. 다만, 해외에 위치한 자회사에서 서비스가 불가능한 제품 등 일부만이 KoMiCo 국내법인에서 각 해외 자회사로 판매된 뒤 다시 최종 고객사로 납품되며, 이는 연결기준으로 내부거래가 제거되어 중복 매출은 발생하지 않는 구조입니다.",
     "segment_finance": "(주)코미코의 주요 사업은 화학물질, 유해화학물질 교육, 유해화학물질 실적보고, 화학물질 배출량조사 등입니다. 이후 고객사의 생산 계획에 따라 수시 발주를 받는 형식으로 수주잔고 등 별도의 수주상황을 관리하고 있지 않습니다. 다만, 해외에 위치한 자회사에서 서비스가 불가능한 제품 등 일부만이 KoMiCo 국내법인에서 각 해외 자회사로 판매된 뒤 다시 최종 고객사로 납품되며, 이는 연결기준으로 내부거래가 제거되어 중복 매출은 발생하지 않는 구조입니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.8%",
+        "revenue_share": 0.218,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "코팅",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.1%",
+        "revenue_share": 0.281,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.1%",
+        "revenue_share": 0.501,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매출액 합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "최고 수준의 세정",
       "코팅서비스 제공",
@@ -168,40 +197,54 @@
       "SKhynix",
       "DongWon Parts"
     ],
-    "investor_note": "(주)코미코의 주요 사업은 화학물질, 유해화학물질 교육, 유해화학물질 실적보고, 화학물질 배출량조사 등입니다. 이후 고객사의 생산 계획에 따라 수시 발주를 받는 형식으로 수주잔고 등 별도의 수주상황을 관리하고 있지 않습니다. 다만, 해외에 위치한 자회사에서 서비스가 불가능한 제품 등 일부만이 KoMiCo 국내법인에서 각 해외 자회사로 판매된 뒤 다시 최종 고객사로 납품되며, 이는 연결기준으로 내부거래가 제거되어 중복 매출은 발생하지 않는 구조입니다."
+    "investor_note": "(주)코미코의 주요 사업은 화학물질, 유해화학물질 교육, 유해화학물질 실적보고, 화학물질 배출량조사 등입니다. 이후 고객사의 생산 계획에 따라 수시 발주를 받는 형식으로 수주잔고 등 별도의 수주상황을 관리하고 있지 않습니다. 다만, 해외에 위치한 자회사에서 서비스가 불가능한 제품 등 일부만이 KoMiCo 국내법인에서 각 해외 자회사로 판매된 뒤 다시 최종 고객사로 납품되며, 이는 연결기준으로 내부거래가 제거되어 중복 매출은 발생하지 않는 구조입니다.",
+    "product_service_segments": [
+      {
+        "name": "매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.8%",
+        "revenue_share": 0.218,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "코팅",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.1%",
+        "revenue_share": 0.281,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.1%",
+        "revenue_share": 0.501,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매출액 합계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "최고 수준의 세정",
-      "caption": "최고 수준의 세정 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "코팅",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.1%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "코팅서비스 제공",
-      "caption": "코팅서비스 제공 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "대한민국",
-      "caption": "대한민국 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "미국",
-      "caption": "미국 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "title": "부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.1%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

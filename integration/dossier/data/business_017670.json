@@ -108,23 +108,7 @@
     "raw_material": null,
     "capacity": "기업사업은 수주 경쟁력 강화로 신규 고객이 증가하고, 이에 따른 기업회선 매출 상승과 데이터센터 규모 확대 및 가동률 증가에 따른 매출 성장 등으로 전년 대비 7.8% 증가한 1조 4,727억원을 달성하였습니다.",
     "segment_finance": "",
-    "segment_breakdown": [
-      {
-        "name": "무선통신사업",
-        "desc": "5G 기반 이동통신 서비스 및 음성·데이터 통신 제공",
-        "revenue_share": 0.73
-      },
-      {
-        "name": "유선통신사업",
-        "desc": "초고속인터넷, IPTV, 전화, 데이터센터 등 유선 통신 서비스",
-        "revenue_share": 0.25
-      },
-      {
-        "name": "기타사업",
-        "desc": "상품판매형 데이터방송채널사용사업 및 투자업",
-        "revenue_share": 0.02
-      }
-    ],
+    "segment_breakdown": [],
     "investor_note": "SK텔레콤은 5G 이동통신을 중심으로 무선·유선 통신 서비스를 제공하는 국내 주요 통신사로, 매출의 73%를 5G 기반 이동통신 사업에서 얻고 있습니다. 과거 공시 기반 참고 정보로는 최근 매출이 17조 원대를 유지하고 있으나 경쟁 심화와 시장 포화로 전년 대비 감소 추세를 보이고 있으며, 특히 영업이익(회사가 본업으로 버는 이익)과 순이익(모든 비용을 뺀 최종 이익)이 크게 하락했습니다. 감가상각비 증가와 금융비용 상승이 수익성을 압박하고 있으며, 부채비율이 132%로 높아 차입금이 자본을 초과한 상태입니다(부채비율은 회사가 빌린 돈이 자기 자본의 몇 배인지를 나타냅니다). 자기자본이익률(투자한 돈 대비 벌어들인 이익)도 3.2%로 매우 낮아 수익성 개선이 과제로 보이며, 주당순이익 급감으로 향후 배당 정책 추이를 주시할 필요가 있습니다.",
     "products": [
       "5G 이동통신 서비스",
@@ -140,31 +124,54 @@
       "T플랜"
     ],
     "raw_moves": [],
-    "utilization": []
+    "utilization": [],
+    "product_service_segments": [
+      {
+        "name": "무선통신사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 73.0%",
+        "revenue_share": 0.73,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "유선통신사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.0%",
+        "revenue_share": 0.25,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.02,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "이동통신",
-      "caption": "무선 가입자와 ARPU가 기본 수익원입니다.",
-      "kind": "signal",
-      "visual": "5G",
+      "title": "무선통신사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 73.0%",
+      "kind": "telecom",
+      "visual": "NET",
       "image": "../data/business_images/business_image_ca24250faeb63812.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "AI·데이터센터",
-      "caption": "AI 인프라와 클라우드 수요가 성장 축입니다.",
-      "kind": "platform",
-      "visual": "AI",
-      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "title": "유선통신사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.0%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "구독·플랫폼",
-      "caption": "멤버십, 미디어, 커머스 서비스가 실적을 보탭니다.",
-      "kind": "platform",
-      "visual": "APP",
-      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "title": "기타사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
       "image_source": "Unsplash"
     }
   ],

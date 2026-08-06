@@ -155,24 +155,25 @@
     "segment_finance": "동부건설은 건축·토목·플랜트·분양공사를 주력으로 하는 종합건설사로, 동부엔지니어링(설계·감리) 등 자회사도 두고 있습니다. 매출은 건축공사(43%)와 토목공사(31%)가 대부분을 차지합니다. 2023년 인천 검단 아파트 지하주차장 붕괴사고로 받은 영업정지 처분은 현재 집행정지(효력 정지) 상태로, 최종 결과에 따라 향후 재무제표에 영향을 줄 수 있다고 감사보고서에도 나와 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 7,586억 원으로 전년보다 4.2% 늘었고 영업이익·당기순이익 모두 흑자로 전환해 각각 426억 원, 445억 원을 기록했습니다. 부채비율은 206.4%로 높은 편입니다.",
     "segment_breakdown": [
       {
-        "name": "건축공사",
-        "desc": "관급·민간 건축시공",
-        "revenue_share": 0.429
+        "name": "관급",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 67.0%",
+        "revenue_share": 0.67,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "토목공사",
-        "desc": "관급·민간 토목시공",
-        "revenue_share": 0.314
+        "name": "민간",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.0%",
+        "revenue_share": 0.15,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "플랜트공사",
-        "desc": "플랜트 시공",
-        "revenue_share": 0.112
-      },
-      {
-        "name": "분양공사",
-        "desc": "자체·민간 분양사업",
-        "revenue_share": 0.072
+        "name": "해외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.0%",
+        "revenue_share": 0.1,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -185,40 +186,55 @@
       "부동산 개발",
       "태양광 발전(동부당진솔라)"
     ],
-    "investor_note": "동부건설은 건축·토목·플랜트·분양공사를 주력으로 하는 종합건설사로, 동부엔지니어링(설계·감리) 등 자회사도 두고 있습니다. 매출은 건축공사(43%)와 토목공사(31%)가 대부분을 차지합니다. 2023년 인천 검단 아파트 지하주차장 붕괴사고로 받은 영업정지 처분은 현재 집행정지(효력 정지) 상태로, 최종 결과에 따라 향후 재무제표에 영향을 줄 수 있다고 감사보고서에도 나와 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 7,586억 원으로 전년보다 4.2% 늘었고 영업이익·당기순이익 모두 흑자로 전환해 각각 426억 원, 445억 원을 기록했습니다. 부채비율은 206.4%로 높은 편입니다."
+    "investor_note": "동부건설은 건축·토목·플랜트·분양공사를 주력으로 하는 종합건설사로, 동부엔지니어링(설계·감리) 등 자회사도 두고 있습니다. 매출은 건축공사(43%)와 토목공사(31%)가 대부분을 차지합니다. 2023년 인천 검단 아파트 지하주차장 붕괴사고로 받은 영업정지 처분은 현재 집행정지(효력 정지) 상태로, 최종 결과에 따라 향후 재무제표에 영향을 줄 수 있다고 감사보고서에도 나와 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 7,586억 원으로 전년보다 4.2% 늘었고 영업이익·당기순이익 모두 흑자로 전환해 각각 426억 원, 445억 원을 기록했습니다. 부채비율은 206.4%로 높은 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "관급",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 67.0%",
+        "revenue_share": 0.67,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "민간",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.0%",
+        "revenue_share": 0.15,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "해외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.0%",
+        "revenue_share": 0.1,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "건축공사",
-      "caption": "건축공사 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "관급",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 67.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "토목공사",
-      "caption": "토목공사 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "민간",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "플랜트공사",
-      "caption": "플랜트공사 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "해외",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "분양공사",
-      "caption": "분양공사 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_housing.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

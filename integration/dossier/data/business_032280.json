@@ -155,19 +155,25 @@
     "segment_finance": "삼일은 1965년 설립된 포항 기반 종합물류기업으로, POSCO 철강제품의 육상운송을 주력으로 하면서 포항항 부두 하역과 주유소 유류판매도 함께 하고 있습니다. 매출의 71%가 운송·터미널 사업, 26%가 하역 사업에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 999억 원으로 전년보다 4.9% 줄었고 영업이익·순이익도 각각 13.9%, 22.3% 감소했습니다. 부채비율은 60.6%로 관리 가능한 수준이나, 철강·물류 업황에 실적이 좌우되는 구조라 전방산업 경기를 함께 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "운송·터미널",
-        "desc": "POSCO 철강제품 등 화물운송·물류터미널 임대",
-        "revenue_share": 0.71
+        "name": "운송,터미널",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 71.0%",
+        "revenue_share": 0.71,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "하역",
-        "desc": "포항항 부두 항만하역",
-        "revenue_share": 0.26
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.0%",
+        "revenue_share": 0.26,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "유류",
-        "desc": "포항 주유소 유류판매",
-        "revenue_share": 0.03
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.03,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -178,32 +184,55 @@
       "화물주선업",
       "주유소 유류판매"
     ],
-    "investor_note": "삼일은 1965년 설립된 포항 기반 종합물류기업으로, POSCO 철강제품의 육상운송을 주력으로 하면서 포항항 부두 하역과 주유소 유류판매도 함께 하고 있습니다. 매출의 71%가 운송·터미널 사업, 26%가 하역 사업에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 999억 원으로 전년보다 4.9% 줄었고 영업이익·순이익도 각각 13.9%, 22.3% 감소했습니다. 부채비율은 60.6%로 관리 가능한 수준이나, 철강·물류 업황에 실적이 좌우되는 구조라 전방산업 경기를 함께 살펴볼 필요가 있습니다."
+    "investor_note": "삼일은 1965년 설립된 포항 기반 종합물류기업으로, POSCO 철강제품의 육상운송을 주력으로 하면서 포항항 부두 하역과 주유소 유류판매도 함께 하고 있습니다. 매출의 71%가 운송·터미널 사업, 26%가 하역 사업에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 999억 원으로 전년보다 4.9% 줄었고 영업이익·순이익도 각각 13.9%, 22.3% 감소했습니다. 부채비율은 60.6%로 관리 가능한 수준이나, 철강·물류 업황에 실적이 좌우되는 구조라 전방산업 경기를 함께 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "운송,터미널",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 71.0%",
+        "revenue_share": 0.71,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "하역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.0%",
+        "revenue_share": 0.26,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "유류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.03,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "운송·터미널",
-      "caption": "POSCO 철강제품 등 화물운송·물류터미널 임대",
-      "kind": "material",
-      "visual": "운송",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
+      "title": "운송,터미널",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 71.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "하역",
-      "caption": "포항항 부두 항만하역",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.0%",
       "kind": "service",
-      "visual": "하역",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "유류",
-      "caption": "포항 주유소 유류판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
       "kind": "service",
-      "visual": "유류",
-      "image": "../data/business_images/business_image_local_oil.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

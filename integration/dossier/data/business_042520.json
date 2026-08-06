@@ -155,19 +155,25 @@
     "segment_finance": "한스바이오메드는 피부·뼈 인체조직 이식재(Bella Cell HD, SureFuse 등)와 리프팅 실 MintLift 등 의료기기를 만드는 회사로, 두 분야가 매출의 약 60%를 차지하며 미국·태국·영국 등 해외 법인을 통해서도 판매하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 897억 원으로 전년보다 10.7% 늘었지만 영업이익은 -258억 원으로 적자 전환했고 당기순이익도 -320억 원의 손실을 냈습니다. 부채비율은 273.0%로 매우 높은 수준이며, 감사인은 순손실과 유동부채 초과로 계속기업으로서의 존속능력에 대한 중요한 불확실성이 있다고 지적했습니다.",
     "segment_breakdown": [
       {
-        "name": "피부이식재",
-        "desc": "Bella Cell HD·SureDerm 등 피부 인체조직 이식재",
-        "revenue_share": 0.3114
-      },
-      {
-        "name": "뼈이식재",
-        "desc": "SureFuse·ExFuse 등 뼈 인체조직 이식재",
-        "revenue_share": 0.2975
+        "name": "뼈 이식재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.8%",
+        "revenue_share": 0.2975,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "의료기기",
-        "desc": "MintLift 리프팅 실, 모발이식기 등 의료기기",
-        "revenue_share": 0.3105
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.1%",
+        "revenue_share": 0.3105,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "실리콘소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.6%",
+        "revenue_share": 0.0059,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -182,32 +188,54 @@
       "Scar Clinic",
       "DermalSign"
     ],
-    "investor_note": "한스바이오메드는 피부·뼈 인체조직 이식재(Bella Cell HD, SureFuse 등)와 리프팅 실 MintLift 등 의료기기를 만드는 회사로, 두 분야가 매출의 약 60%를 차지하며 미국·태국·영국 등 해외 법인을 통해서도 판매하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 897억 원으로 전년보다 10.7% 늘었지만 영업이익은 -258억 원으로 적자 전환했고 당기순이익도 -320억 원의 손실을 냈습니다. 부채비율은 273.0%로 매우 높은 수준이며, 감사인은 순손실과 유동부채 초과로 계속기업으로서의 존속능력에 대한 중요한 불확실성이 있다고 지적했습니다."
+    "investor_note": "한스바이오메드는 피부·뼈 인체조직 이식재(Bella Cell HD, SureFuse 등)와 리프팅 실 MintLift 등 의료기기를 만드는 회사로, 두 분야가 매출의 약 60%를 차지하며 미국·태국·영국 등 해외 법인을 통해서도 판매하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 897억 원으로 전년보다 10.7% 늘었지만 영업이익은 -258억 원으로 적자 전환했고 당기순이익도 -320억 원의 손실을 냈습니다. 부채비율은 273.0%로 매우 높은 수준이며, 감사인은 순손실과 유동부채 초과로 계속기업으로서의 존속능력에 대한 중요한 불확실성이 있다고 지적했습니다.",
+    "product_service_segments": [
+      {
+        "name": "제품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.1%",
+        "revenue_share": 0.3114,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "뼈 이식재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.8%",
+        "revenue_share": 0.2975,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "의료기기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.1%",
+        "revenue_share": 0.3105,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "실리콘소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.6%",
+        "revenue_share": 0.0059,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "피부이식재",
-      "caption": "Bella Cell HD·SureDerm 등 피부 인체조직 이식재",
+      "title": "뼈 이식재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.8%",
       "kind": "service",
-      "visual": "피부이식재",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "뼈이식재",
-      "caption": "SureFuse·ExFuse 등 뼈 인체조직 이식재",
-      "kind": "service",
-      "visual": "뼈이식재",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "의료기기",
-      "caption": "MintLift 리프팅 실, 모발이식기 등 의료기기",
-      "kind": "service",
-      "visual": "의료기기",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.1%",
+      "kind": "bio",
+      "visual": "MEDICAL",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

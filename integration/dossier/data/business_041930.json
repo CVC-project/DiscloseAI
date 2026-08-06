@@ -156,13 +156,17 @@
     "segment_breakdown": [
       {
         "name": "자동차부문",
-        "desc": "내연기관·전기차·수소차용 고무 가스켓·호스류",
-        "revenue_share": 0.4939
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.4%",
+        "revenue_share": 0.4939,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "가전부문",
-        "desc": "드럼세탁기용 도어가스켓 등 고무·플라스틱 부품",
-        "revenue_share": 0.5061
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.6%",
+        "revenue_share": 0.5061,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -173,24 +177,40 @@
       "드럼세탁기용 DOOR GASKET",
       "가전용 플라스틱 부품"
     ],
-    "investor_note": "매출은 자동차부문과 가전부문이 절반씩을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액(연결)은 4,034억 원으로 전년 대비 5.3% 늘었고 당기순이익도 89.3% 큰 폭으로 증가했지만, 영업이익은 6.6% 줄었습니다. 부채비율은 63.7%로 무난한 수준입니다."
+    "investor_note": "매출은 자동차부문과 가전부문이 절반씩을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액(연결)은 4,034억 원으로 전년 대비 5.3% 늘었고 당기순이익도 89.3% 큰 폭으로 증가했지만, 영업이익은 6.6% 줄었습니다. 부채비율은 63.7%로 무난한 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "자동차부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.4%",
+        "revenue_share": 0.4939,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "가전부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.6%",
+        "revenue_share": 0.5061,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "자동차부문",
-      "caption": "내연기관·전기차·수소차용 고무 가스켓·호스류",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.4%",
       "kind": "auto",
-      "visual": "자동차부문",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
       "title": "가전부문",
-      "caption": "드럼세탁기용 도어가스켓 등 고무·플라스틱 부품",
-      "kind": "auto",
-      "visual": "가전부문",
-      "image": "../data/business_images/business_image_local_rubber.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

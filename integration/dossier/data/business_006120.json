@@ -155,19 +155,25 @@
     "segment_finance": "SK디스커버리는 별도 사업 없이 자회사를 관리하는 지주회사로, SK케미칼(친환경 소재·의약품), SK가스(LPG 판매), SK플라즈마(혈장분획제제), SK바이오사이언스(백신) 등 다양한 계열사를 거느리고 있습니다. 그룹 매출의 대부분은 LPG를 수입·판매하는 가스사업에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 10조 1,640억 원으로 전년 대비 12.4% 늘었고 영업이익은 3,613억 원으로 109.4%, 당기순이익은 1,446억 원으로 353.1% 증가하는 등 실적이 크게 좋아졌습니다. 다만 부채비율은 137.9%로 다소 높은 편이라 재무 부담도 함께 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "환경친화 소재(Green Chemicals, SK케미칼)",
-        "desc": "Copolyester 수지 등 친환경 소재 생산",
-        "revenue_share": 0.153
+        "name": "투자부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.6%",
+        "revenue_share": 0.006,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "제약(Life Science, SK케미칼)",
-        "desc": "기넥신에프 등 의약품·의료기기 생산판매",
-        "revenue_share": 0.112
+        "name": "Green Chemicals Biz.",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.3%",
+        "revenue_share": 0.153,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "백신·바이오(SK바이오사이언스)",
-        "desc": "독감·대상포진·수두·코로나19 백신 생산 및 CDMO",
-        "revenue_share": null
+        "name": "Life Science Biz.",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.2%",
+        "revenue_share": 0.112,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -179,40 +185,62 @@
       "부동산 개발·임대",
       "신재생에너지(풍력·태양광) 발전"
     ],
-    "investor_note": "SK디스커버리는 별도 사업 없이 자회사를 관리하는 지주회사로, SK케미칼(친환경 소재·의약품), SK가스(LPG 판매), SK플라즈마(혈장분획제제), SK바이오사이언스(백신) 등 다양한 계열사를 거느리고 있습니다. 그룹 매출의 대부분은 LPG를 수입·판매하는 가스사업에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 10조 1,640억 원으로 전년 대비 12.4% 늘었고 영업이익은 3,613억 원으로 109.4%, 당기순이익은 1,446억 원으로 353.1% 증가하는 등 실적이 크게 좋아졌습니다. 다만 부채비율은 137.9%로 다소 높은 편이라 재무 부담도 함께 살펴볼 필요가 있습니다."
+    "investor_note": "SK디스커버리는 별도 사업 없이 자회사를 관리하는 지주회사로, SK케미칼(친환경 소재·의약품), SK가스(LPG 판매), SK플라즈마(혈장분획제제), SK바이오사이언스(백신) 등 다양한 계열사를 거느리고 있습니다. 그룹 매출의 대부분은 LPG를 수입·판매하는 가스사업에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 10조 1,640억 원으로 전년 대비 12.4% 늘었고 영업이익은 3,613억 원으로 109.4%, 당기순이익은 1,446억 원으로 353.1% 증가하는 등 실적이 크게 좋아졌습니다. 다만 부채비율은 137.9%로 다소 높은 편이라 재무 부담도 함께 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "투자부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.6%",
+        "revenue_share": 0.006,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Green Chemicals Biz.",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.3%",
+        "revenue_share": 0.153,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Life Science Biz.",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.2%",
+        "revenue_share": 0.112,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "가스사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 92.0%",
+        "revenue_share": 0.92,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "가스사업(SK가스)",
-      "caption": "LPG 등 화학제품 수입·저장·판매(트레이딩 포함)",
-      "kind": "material",
-      "visual": "가스사업",
-      "image": "../data/business_images/business_image_local_oil.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "환경친화 소재(Green Chemicals, SK케미칼)",
-      "caption": "Copolyester 수지 등 친환경 소재 생산",
-      "kind": "material",
-      "visual": "환경친화",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "제약(Life Science, SK케미칼)",
-      "caption": "기넥신에프 등 의약품·의료기기 생산판매",
-      "kind": "bio",
-      "visual": "제약",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "혈장분획제제사업(SK플라즈마)",
-      "caption": "에스케이알부민주 등 혈장분획제제 제조판매",
+      "title": "Green Chemicals Biz",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.3%",
       "kind": "service",
-      "visual": "혈장분획제제사업",
-      "image": "../data/business_images/business_image_local_default_d.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "Life Science Biz",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "가스사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 92.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

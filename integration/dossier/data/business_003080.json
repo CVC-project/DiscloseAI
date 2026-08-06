@@ -155,9 +155,32 @@
     "segment_finance": "SB성보는 작물보호제(농약) 전문기업으로, 살충제·살균제·제초제 등을 생산해 전국 도소매상을 통해 농가에 공급하고 있으며 매출의 94%가 작물보호제에서 나옵니다. 나머지는 임대수입과 카페 매출 등으로 구성됩니다. 과거 공시 기반 참고 정보로, 최근 매출액은 643억 원으로 전년 대비 7.5% 늘었지만 영업이익은 오히려 적자로 돌아섰습니다. 다만 당기순이익은 341억 원으로 흑자 전환되었고 ROE는 24.5%로 높은 편이며, 부채비율은 49.4%로 자본 대비 절반 수준의 빚을 지고 있습니다.",
     "segment_breakdown": [
       {
-        "name": "작물보호제",
-        "desc": "살충제·살균제·제초제 등 농약 제조·판매",
-        "revenue_share": 0.94
+        "name": "살충제(에스페로외)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.6%",
+        "revenue_share": 0.2257,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "살균살충제(한소네외)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.0301,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "살균제(해비치외)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.2%",
+        "revenue_share": 0.3119,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제초제(바스타외)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.2%",
+        "revenue_share": 0.3723,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -166,24 +189,70 @@
       "제초제",
       "살균살충제(복합제)"
     ],
-    "investor_note": "SB성보는 작물보호제(농약) 전문기업으로, 살충제·살균제·제초제 등을 생산해 전국 도소매상을 통해 농가에 공급하고 있으며 매출의 94%가 작물보호제에서 나옵니다. 나머지는 임대수입과 카페 매출 등으로 구성됩니다. 과거 공시 기반 참고 정보로, 최근 매출액은 643억 원으로 전년 대비 7.5% 늘었지만 영업이익은 오히려 적자로 돌아섰습니다. 다만 당기순이익은 341억 원으로 흑자 전환되었고 ROE는 24.5%로 높은 편이며, 부채비율은 49.4%로 자본 대비 절반 수준의 빚을 지고 있습니다."
+    "investor_note": "SB성보는 작물보호제(농약) 전문기업으로, 살충제·살균제·제초제 등을 생산해 전국 도소매상을 통해 농가에 공급하고 있으며 매출의 94%가 작물보호제에서 나옵니다. 나머지는 임대수입과 카페 매출 등으로 구성됩니다. 과거 공시 기반 참고 정보로, 최근 매출액은 643억 원으로 전년 대비 7.5% 늘었지만 영업이익은 오히려 적자로 돌아섰습니다. 다만 당기순이익은 341억 원으로 흑자 전환되었고 ROE는 24.5%로 높은 편이며, 부채비율은 49.4%로 자본 대비 절반 수준의 빚을 지고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "살충제(에스페로외)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.6%",
+        "revenue_share": 0.2257,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "살균살충제(한소네외)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.0301,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "살균제(해비치외)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.2%",
+        "revenue_share": 0.3119,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제초제(바스타외)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.2%",
+        "revenue_share": 0.3723,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "작물보호제",
-      "caption": "살충제·살균제·제초제 등 농약 제조·판매",
-      "kind": "service",
-      "visual": "작물보호제",
-      "image": "../data/business_images/business_image_local_agro.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "비료, 농약 및 살균, 살충제 제조업",
-      "caption": "비료, 농약 및 살균, 살충제 제조업을 중심으로 매출을 만듭니다.",
+      "title": "살충제(에스페로외)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.6%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_agro.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "살균살충제(한소네외)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "살균제(해비치외)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "제초제(바스타외)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

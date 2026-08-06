@@ -156,13 +156,17 @@
     "segment_breakdown": [
       {
         "name": "제지부문",
-        "desc": "지관용원지·라이너원지 제조",
-        "revenue_share": 0.8459
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 84.6%",
+        "revenue_share": 0.8459,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "골판지부문",
-        "desc": "골판지원단·상자 제조(블루팩키지)",
-        "revenue_share": 0.1272
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.7%",
+        "revenue_share": 0.1272,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -171,24 +175,40 @@
       "골판지원단",
       "골판지상자"
     ],
-    "investor_note": "블루산업개발(옛 영풍제지)은 지관·상자 등에 쓰이는 지관용원지와 골판지상자용 라이너원지를 만드는 제지회사로, 제지부문이 매출의 약 85%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 932억 원으로 전년 대비 5.8% 늘었지만 영업이익은 -158억 원으로 적자가 이어졌고 당기순이익도 -244억 원으로 적자폭이 컸습니다. 부채비율은 100.9%로 자본과 비슷한 수준의 빚을 지고 있어 재무 부담을 살펴볼 필요가 있으며, 감사인도 영업손실 증가 추세를 고려해 매출인식의 적정성을 핵심감사사항으로 짚었습니다."
+    "investor_note": "블루산업개발(옛 영풍제지)은 지관·상자 등에 쓰이는 지관용원지와 골판지상자용 라이너원지를 만드는 제지회사로, 제지부문이 매출의 약 85%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 932억 원으로 전년 대비 5.8% 늘었지만 영업이익은 -158억 원으로 적자가 이어졌고 당기순이익도 -244억 원으로 적자폭이 컸습니다. 부채비율은 100.9%로 자본과 비슷한 수준의 빚을 지고 있어 재무 부담을 살펴볼 필요가 있으며, 감사인도 영업손실 증가 추세를 고려해 매출인식의 적정성을 핵심감사사항으로 짚었습니다.",
+    "product_service_segments": [
+      {
+        "name": "제지부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 84.6%",
+        "revenue_share": 0.8459,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "골판지부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.7%",
+        "revenue_share": 0.1272,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "제지부문",
-      "caption": "지관용원지·라이너원지 제조",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 84.6%",
       "kind": "service",
-      "visual": "제지부문",
-      "image": "../data/business_images/business_image_local_packaging.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "골판지부문",
-      "caption": "골판지원단·상자 제조(블루팩키지)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.7%",
       "kind": "service",
-      "visual": "골판지부문",
-      "image": "../data/business_images/business_image_local_textile.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

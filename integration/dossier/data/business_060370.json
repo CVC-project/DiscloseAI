@@ -155,14 +155,25 @@
     "segment_finance": "LS마린솔루션은 해저케이블과 지중케이블의 시공·유지보수를 전문으로 하는 기업으로, 2024년 지중시공 전문업체 LS빌드윈을 계열화해 해저와 지중을 아우르는 턴키 솔루션을 갖췄습니다. 매출의 70%는 지중시공, 30%는 해저시공에서 나오며, 2025년 말 수주잔고는 8,256억 원에 달합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,442억 원으로 전년 대비 87.4% 크게 늘었지만, 영업이익은 70억 원으로 43.4%, 당기순이익은 83억 원으로 36.7% 줄었습니다. 유상증자 등으로 총자산은 7,390억 원까지 190.7% 급증했고, 부채비율은 17.7%로 재무구조는 매우 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "지중시공부문",
-        "desc": "지중케이블 시공 및 유지보수(LS빌드윈)",
-        "revenue_share": 0.704
+        "name": "해저케이블",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.6%",
+        "revenue_share": 0.296,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "해저시공부문",
-        "desc": "해저케이블 시공 및 유지보수",
-        "revenue_share": 0.296
+        "name": "지중케이블",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 70.4%",
+        "revenue_share": 0.704,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제31기 매출액",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -172,24 +183,47 @@
       "해상풍력 설치항만 서비스",
       "SOV(해상풍력단지 서비스운영선) 사업"
     ],
-    "investor_note": "LS마린솔루션은 해저케이블과 지중케이블의 시공·유지보수를 전문으로 하는 기업으로, 2024년 지중시공 전문업체 LS빌드윈을 계열화해 해저와 지중을 아우르는 턴키 솔루션을 갖췄습니다. 매출의 70%는 지중시공, 30%는 해저시공에서 나오며, 2025년 말 수주잔고는 8,256억 원에 달합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,442억 원으로 전년 대비 87.4% 크게 늘었지만, 영업이익은 70억 원으로 43.4%, 당기순이익은 83억 원으로 36.7% 줄었습니다. 유상증자 등으로 총자산은 7,390억 원까지 190.7% 급증했고, 부채비율은 17.7%로 재무구조는 매우 안정적인 편입니다."
+    "investor_note": "LS마린솔루션은 해저케이블과 지중케이블의 시공·유지보수를 전문으로 하는 기업으로, 2024년 지중시공 전문업체 LS빌드윈을 계열화해 해저와 지중을 아우르는 턴키 솔루션을 갖췄습니다. 매출의 70%는 지중시공, 30%는 해저시공에서 나오며, 2025년 말 수주잔고는 8,256억 원에 달합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,442억 원으로 전년 대비 87.4% 크게 늘었지만, 영업이익은 70억 원으로 43.4%, 당기순이익은 83억 원으로 36.7% 줄었습니다. 유상증자 등으로 총자산은 7,390억 원까지 190.7% 급증했고, 부채비율은 17.7%로 재무구조는 매우 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "해저케이블",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.6%",
+        "revenue_share": 0.296,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "지중케이블",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 70.4%",
+        "revenue_share": 0.704,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제31기 매출액",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "지중시공부문",
-      "caption": "지중케이블 시공 및 유지보수(LS빌드윈)",
-      "kind": "service",
-      "visual": "지중시공부문",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "title": "해저케이블",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.6%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "해저시공부문",
-      "caption": "해저케이블 시공 및 유지보수",
-      "kind": "service",
-      "visual": "해저시공부문",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "title": "지중케이블",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 70.4%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

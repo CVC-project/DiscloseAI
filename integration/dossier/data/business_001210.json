@@ -155,9 +155,18 @@
     "segment_finance": "금호전기는 형광램프와 LED조명을 주력으로 생산하는 전문 조명제조업체로, LED조명이 매출의 약 79%를 차지하며 소프트웨어 개발 자회사(브릭메이트)도 운영하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 443억 원으로 전년 대비 16.6% 줄었지만, 영업손실과 순손실 규모는 각각 76.1%, 71.6% 줄어들며 적자 폭이 크게 개선됐습니다. 총자산은 7.7% 줄어든 307억 원이며, 부채비율은 204.3%로 자본보다 두 배 많은 빚을 지고 있어 재무 부담이 큰 편이므로 실적 개선 지속 여부를 지켜볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "일반조명",
-        "desc": "형광램프·LED조명 제조판매",
-        "revenue_share": 0.9429
+        "name": "LED조명",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 79.2%",
+        "revenue_share": 0.7917,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임대수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.1%",
+        "revenue_share": 0.0112,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -166,24 +175,62 @@
       "유도등",
       "소프트웨어 개발(브릭메이트)"
     ],
-    "investor_note": "금호전기는 형광램프와 LED조명을 주력으로 생산하는 전문 조명제조업체로, LED조명이 매출의 약 79%를 차지하며 소프트웨어 개발 자회사(브릭메이트)도 운영하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 443억 원으로 전년 대비 16.6% 줄었지만, 영업손실과 순손실 규모는 각각 76.1%, 71.6% 줄어들며 적자 폭이 크게 개선됐습니다. 총자산은 7.7% 줄어든 307억 원이며, 부채비율은 204.3%로 자본보다 두 배 많은 빚을 지고 있어 재무 부담이 큰 편이므로 실적 개선 지속 여부를 지켜볼 필요가 있습니다."
+    "investor_note": "금호전기는 형광램프와 LED조명을 주력으로 생산하는 전문 조명제조업체로, LED조명이 매출의 약 79%를 차지하며 소프트웨어 개발 자회사(브릭메이트)도 운영하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 443억 원으로 전년 대비 16.6% 줄었지만, 영업손실과 순손실 규모는 각각 76.1%, 71.6% 줄어들며 적자 폭이 크게 개선됐습니다. 총자산은 7.7% 줄어든 307억 원이며, 부채비율은 204.3%로 자본보다 두 배 많은 빚을 지고 있어 재무 부담이 큰 편이므로 실적 개선 지속 여부를 지켜볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "조명사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.0%",
+        "revenue_share": 0.1505,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "LED조명",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 79.2%",
+        "revenue_share": 0.7917,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임대수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.1%",
+        "revenue_share": 0.0112,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "서비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
+        "revenue_share": 0.0159,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "일반조명",
-      "caption": "형광램프·LED조명 제조판매",
-      "kind": "service",
-      "visual": "일반조명",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "전구 및 조명장치 제조업",
-      "caption": "전구 및 조명장치 제조업을 중심으로 매출을 만듭니다.",
+      "title": "조명사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "LED조명",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 79.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "임대수익",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.1%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

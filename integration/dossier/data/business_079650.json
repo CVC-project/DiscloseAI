@@ -155,9 +155,25 @@
     "segment_finance": "서산은 레미콘·흄관·파일·전주 등을 만드는 콘크리트제품 제조를 주력으로 하며, 전기자동차 충전기 등 에너지솔루션 사업도 준비하고 있지만 아직 매출이 거의 없습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 451억 원으로 전년 대비 26.4% 늘었으나 영업손실이 33억 원으로 전년보다 손실 폭이 커졌고 당기순손실도 28억 원을 기록했습니다. 다만 부채비율은 5.4%로 매우 낮아 재무 안정성(빚 부담) 자체는 양호한 편입니다.",
     "segment_breakdown": [
       {
-        "name": "에너지솔루션",
-        "desc": "전기자동차 충전기 등 신사업, 아직 매출 미미",
-        "revenue_share": 0
+        "name": "흄관",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.0021,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "파일",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.2%",
+        "revenue_share": 0.3417,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전주",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.7%",
+        "revenue_share": 0.1071,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -167,23 +183,61 @@
       "전주(통신주·한전주)",
       "전기자동차 충전기"
     ],
-    "investor_note": "서산은 레미콘·흄관·파일·전주 등을 만드는 콘크리트제품 제조를 주력으로 하며, 전기자동차 충전기 등 에너지솔루션 사업도 준비하고 있지만 아직 매출이 거의 없습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 451억 원으로 전년 대비 26.4% 늘었으나 영업손실이 33억 원으로 전년보다 손실 폭이 커졌고 당기순손실도 28억 원을 기록했습니다. 다만 부채비율은 5.4%로 매우 낮아 재무 안정성(빚 부담) 자체는 양호한 편입니다."
+    "investor_note": "서산은 레미콘·흄관·파일·전주 등을 만드는 콘크리트제품 제조를 주력으로 하며, 전기자동차 충전기 등 에너지솔루션 사업도 준비하고 있지만 아직 매출이 거의 없습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 451억 원으로 전년 대비 26.4% 늘었으나 영업손실이 33억 원으로 전년보다 손실 폭이 커졌고 당기순손실도 28억 원을 기록했습니다. 다만 부채비율은 5.4%로 매우 낮아 재무 안정성(빚 부담) 자체는 양호한 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "콘크리트제품 제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.1%",
+        "revenue_share": 0.5312,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "흄관",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.0021,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "파일",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.2%",
+        "revenue_share": 0.3417,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전주",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.7%",
+        "revenue_share": 0.1071,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "콘크리트제품제조",
-      "caption": "레미콘·흄관·파일·전주 등 콘크리트 제품 생산·판매",
+      "title": "콘크리트제품 제조",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.1%",
       "kind": "service",
-      "visual": "콘크리트제품제조",
-      "image": "../data/business_images/business_image_local_cement.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "에너지솔루션",
-      "caption": "전기자동차 충전기 등 신사업, 아직 매출 미미",
-      "kind": "auto",
-      "visual": "에너지솔루션",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "title": "파일",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "전주",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
       "image_source": "Unsplash"
     }
   ],

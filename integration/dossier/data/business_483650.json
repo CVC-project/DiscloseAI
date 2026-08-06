@@ -105,7 +105,36 @@
   "snippets": {
     "overview": "주식회사 달바글로벌의 주요 사업은 프로바이오틱스, 프리바이오틱스입니다. 수주상황 당사의 제품은 대부분 당사의 매출채널에서 주문한 소비자에게 직접 판매하는 형태로서 수주의 성격을 띠지 않습니다. 시장 트렌드, 고객 니즈, 경쟁사 제품 동향을 분석하여 신제품 스펙을 확정하고 이를 위한 신규 원료와 제형을 제안하며 협력사와 구체적인 제조 방향에 대한 가이드를 제시하는 업무를 담당하고 있습니다.",
     "segment_finance": "주식회사 달바글로벌의 주요 사업은 프로바이오틱스, 프리바이오틱스입니다. 수주상황 당사의 제품은 대부분 당사의 매출채널에서 주문한 소비자에게 직접 판매하는 형태로서 수주의 성격을 띠지 않습니다. 시장 트렌드, 고객 니즈, 경쟁사 제품 동향을 분석하여 신제품 스펙을 확정하고 이를 위한 신규 원료와 제형을 제안하며 협력사와 구체적인 제조 방향에 대한 가이드를 제시하는 업무를 담당하고 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "화장품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.0%",
+        "revenue_share": 0.46,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "선케어",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.3%",
+        "revenue_share": 0.223,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "크림",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.8%",
+        "revenue_share": 0.098,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "마스크팩",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.2%",
+        "revenue_share": 0.052,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "건강기능식품",
       "완제품",
@@ -120,40 +149,70 @@
       "연구",
       "지속 개발중"
     ],
-    "investor_note": "주식회사 달바글로벌의 주요 사업은 프로바이오틱스, 프리바이오틱스입니다. 수주상황 당사의 제품은 대부분 당사의 매출채널에서 주문한 소비자에게 직접 판매하는 형태로서 수주의 성격을 띠지 않습니다. 시장 트렌드, 고객 니즈, 경쟁사 제품 동향을 분석하여 신제품 스펙을 확정하고 이를 위한 신규 원료와 제형을 제안하며 협력사와 구체적인 제조 방향에 대한 가이드를 제시하는 업무를 담당하고 있습니다."
+    "investor_note": "주식회사 달바글로벌의 주요 사업은 프로바이오틱스, 프리바이오틱스입니다. 수주상황 당사의 제품은 대부분 당사의 매출채널에서 주문한 소비자에게 직접 판매하는 형태로서 수주의 성격을 띠지 않습니다. 시장 트렌드, 고객 니즈, 경쟁사 제품 동향을 분석하여 신제품 스펙을 확정하고 이를 위한 신규 원료와 제형을 제안하며 협력사와 구체적인 제조 방향에 대한 가이드를 제시하는 업무를 담당하고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "화장품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.0%",
+        "revenue_share": 0.46,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "선케어",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.3%",
+        "revenue_share": 0.223,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "크림",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.8%",
+        "revenue_share": 0.098,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "마스크팩",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.2%",
+        "revenue_share": 0.052,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "건강기능식품",
-      "caption": "건강기능식품 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "완제품",
-      "caption": "완제품 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "부자재",
-      "caption": "부자재 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
-    },
-    {
       "title": "화장품",
-      "caption": "화장품 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.0%",
       "kind": "material",
       "visual": "MAT",
-      "image": "../data/business_images/business_image_local_cosmetics.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "선케어",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.3%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "크림",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.8%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "마스크팩",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.2%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

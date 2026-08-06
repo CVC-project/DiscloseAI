@@ -155,9 +155,25 @@
     "segment_finance": "명문제약은 로젯정(고지혈증치료제)·씨앤유캡슐(소화기용제) 등 제네릭·개량신약 중심의 의약품을 만드는 제약회사로, 자회사 명문바이오를 통해 의약품 유통사업도 하고 있으며, 계열사 명문투자개발을 통해 골프장 등 서비스 사업도 함께 운영하고 있습니다. 과거 공시 기반 참고 정보로, 연결 매출액은 1,952억 원으로 전년 대비 4.7% 늘었고 영업이익은 68억 원으로 254.4% 급증했으며, 당기순이익은 14억 원으로 흑자 전환했습니다. 부채비율은 160.8%로 다소 높은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "의약품/바이오부문",
-        "desc": "완제·원료의약품 제조판매, 의약품 유통(명문제약·명문바이오)",
-        "revenue_share": 0.956
+        "name": "로젯정",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.0%",
+        "revenue_share": 0.15,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "명문로수바스타틴칼슘정",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.02,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "명문아트로다캡슐",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.1%",
+        "revenue_share": 0.021,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -168,24 +184,62 @@
       "에페신정(근이완제)",
       "골프장 운영(명문투자개발)"
     ],
-    "investor_note": "명문제약은 로젯정(고지혈증치료제)·씨앤유캡슐(소화기용제) 등 제네릭·개량신약 중심의 의약품을 만드는 제약회사로, 자회사 명문바이오를 통해 의약품 유통사업도 하고 있으며, 계열사 명문투자개발을 통해 골프장 등 서비스 사업도 함께 운영하고 있습니다. 과거 공시 기반 참고 정보로, 연결 매출액은 1,952억 원으로 전년 대비 4.7% 늘었고 영업이익은 68억 원으로 254.4% 급증했으며, 당기순이익은 14억 원으로 흑자 전환했습니다. 부채비율은 160.8%로 다소 높은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다."
+    "investor_note": "명문제약은 로젯정(고지혈증치료제)·씨앤유캡슐(소화기용제) 등 제네릭·개량신약 중심의 의약품을 만드는 제약회사로, 자회사 명문바이오를 통해 의약품 유통사업도 하고 있으며, 계열사 명문투자개발을 통해 골프장 등 서비스 사업도 함께 운영하고 있습니다. 과거 공시 기반 참고 정보로, 연결 매출액은 1,952억 원으로 전년 대비 4.7% 늘었고 영업이익은 68억 원으로 254.4% 급증했으며, 당기순이익은 14억 원으로 흑자 전환했습니다. 부채비율은 160.8%로 다소 높은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+        "revenue_share": 0.026,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "로젯정",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.0%",
+        "revenue_share": 0.15,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "명문로수바스타틴칼슘정",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+        "revenue_share": 0.02,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "명문아트로다캡슐",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.1%",
+        "revenue_share": 0.021,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "의약품/바이오부문",
-      "caption": "완제·원료의약품 제조판매, 의약품 유통(명문제약·명문바이오)",
-      "kind": "bio",
-      "visual": "의약품",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "의약품 제조업",
-      "caption": "의약품 제조업을 중심으로 매출을 만듭니다.",
+      "title": "로젯정",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "명문로수바스타틴칼슘정",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "명문아트로다캡슐",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.1%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

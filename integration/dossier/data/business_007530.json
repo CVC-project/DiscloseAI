@@ -155,19 +155,11 @@
     "segment_finance": "와이엠은 자동차·전자제품·건축자재에 쓰이는 볼트와 스크류(파스너)를 만드는 회사로, 매출의 약 98%가 자동차용 파스너에서 나옵니다. 현대모비스·현대자동차 등 국내 완성차 그룹이 주요 매출처로 전체 매출의 절반가량을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,771억 원으로 전년 대비 2.9% 늘었지만 영업이익은 39억 원으로 34.7% 줄었고 당기순이익도 25억 원으로 51.8% 감소했습니다. 부채비율은 182.1%로 높은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "자동차용 파스너",
-        "desc": "자동차 부품용 볼트·스크류",
-        "revenue_share": 0.975
-      },
-      {
-        "name": "전자부품용 파스너",
-        "desc": "전자제품용 스크류",
-        "revenue_share": 0.007
-      },
-      {
-        "name": "건축용 파스너",
-        "desc": "건축 내장용 스크류",
-        "revenue_share": 0.018
+        "name": "파스너 (Fastener)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 97.5%",
+        "revenue_share": 0.975,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -176,32 +168,32 @@
       "전자부품용 스크류",
       "건축용 스크류"
     ],
-    "investor_note": "와이엠은 자동차·전자제품·건축자재에 쓰이는 볼트와 스크류(파스너)를 만드는 회사로, 매출의 약 98%가 자동차용 파스너에서 나옵니다. 현대모비스·현대자동차 등 국내 완성차 그룹이 주요 매출처로 전체 매출의 절반가량을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,771억 원으로 전년 대비 2.9% 늘었지만 영업이익은 39억 원으로 34.7% 줄었고 당기순이익도 25억 원으로 51.8% 감소했습니다. 부채비율은 182.1%로 높은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다."
+    "investor_note": "와이엠은 자동차·전자제품·건축자재에 쓰이는 볼트와 스크류(파스너)를 만드는 회사로, 매출의 약 98%가 자동차용 파스너에서 나옵니다. 현대모비스·현대자동차 등 국내 완성차 그룹이 주요 매출처로 전체 매출의 절반가량을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,771억 원으로 전년 대비 2.9% 늘었지만 영업이익은 39억 원으로 34.7% 줄었고 당기순이익도 25억 원으로 51.8% 감소했습니다. 부채비율은 182.1%로 높은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "파스너 (Fastener)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 97.5%",
+        "revenue_share": 0.975,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.7%",
+        "revenue_share": 0.007,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "자동차용 파스너",
-      "caption": "자동차 부품용 볼트·스크류",
-      "kind": "auto",
-      "visual": "자동차용",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "전자부품용 파스너",
-      "caption": "전자제품용 스크류",
-      "kind": "auto",
-      "visual": "전자부품용",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "건축용 파스너",
-      "caption": "건축 내장용 스크류",
-      "kind": "service",
-      "visual": "건축용",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "title": "파스너 (Fastener)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 97.5%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

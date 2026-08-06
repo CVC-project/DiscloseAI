@@ -121,7 +121,29 @@
   "snippets": {
     "overview": "시큐레터주식회사의 주요 제품·서비스는 SLE, 용역, 구축형, 제품 개요, 자바스크립트, 제품기획팀입니다. 발굴 및 파트너 관리를 통한 영업 커버리지 확대를 통해 시장점유율을 높이고 있으며, 기술 지원 조직과 함께 기술컨설팅 및 판매 후 기술 지원을 통해 고객의 재구매 및 업셀링을 강화하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "시큐레터주식회사의 주요 제품·서비스는 SLE, 용역, 구축형, 제품 개요, 자바스크립트, 제품기획팀입니다. 발굴 및 파트너 관리를 통한 영업 커버리지 확대를 통해 시장점유율을 높이고 있으며, 기술 지원 조직과 함께 기술컨설팅 및 판매 후 기술 지원을 통해 고객의 재구매 및 업셀링을 강화하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.9%",
+        "revenue_share": 0.2987,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "SLF",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.5%",
+        "revenue_share": 0.085,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "SLES",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.6%",
+        "revenue_share": 0.0859,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "SLE",
       "용역",
@@ -135,24 +157,62 @@
       "제품구축",
       "장애대응"
     ],
-    "investor_note": "시큐레터주식회사의 주요 제품·서비스는 SLE, 용역, 구축형, 제품 개요, 자바스크립트, 제품기획팀입니다. 발굴 및 파트너 관리를 통한 영업 커버리지 확대를 통해 시장점유율을 높이고 있으며, 기술 지원 조직과 함께 기술컨설팅 및 판매 후 기술 지원을 통해 고객의 재구매 및 업셀링을 강화하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "시큐레터주식회사의 주요 제품·서비스는 SLE, 용역, 구축형, 제품 개요, 자바스크립트, 제품기획팀입니다. 발굴 및 파트너 관리를 통한 영업 커버리지 확대를 통해 시장점유율을 높이고 있으며, 기술 지원 조직과 함께 기술컨설팅 및 판매 후 기술 지원을 통해 고객의 재구매 및 업셀링을 강화하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.9%",
+        "revenue_share": 0.2987,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.7%",
+        "revenue_share": 0.0868,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "SLF",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.5%",
+        "revenue_share": 0.085,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "SLES",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.6%",
+        "revenue_share": 0.0859,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "시스템 구축·통합",
-      "caption": "기업 업무에 필요한 서버, 네트워크, 소프트웨어를 묶어 하나의 시스템으로 구축합니다.",
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.9%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "자바스크립트",
-      "caption": "자바스크립트 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "SLF",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.5%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "SLES",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

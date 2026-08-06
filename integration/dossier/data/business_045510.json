@@ -155,19 +155,25 @@
     "segment_finance": "정원엔시스는 서버·스토리지·네트워크 장비 등 IT 인프라를 유통·구축하고(57%), PC 유통(26%)과 유지보수 서비스(18%)도 함께 하는 IT 종합서비스 기업입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,009억 원으로 전년 대비 3.3% 늘었고 영업이익은 19억 원으로 24.3%, 당기순이익은 11억 원으로 18.9% 증가했습니다. 부채비율은 101.8%로 자본과 비슷한 수준입니다. 다만 특수관계자와의 자금 거래·담보 제공 규모가 커 감사인이 강조사항으로 짚었으니 참고하시기 바랍니다.",
     "segment_breakdown": [
       {
-        "name": "IT인프라",
-        "desc": "서버·스토리지·네트워크 장비 유통·구축",
-        "revenue_share": 0.5674
+        "name": "IT 인프라",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 56.7%",
+        "revenue_share": 0.5674,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "IT유통",
-        "desc": "PC·노트북 등 유통판매",
-        "revenue_share": 0.2552
+        "name": "IT 유통",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.5%",
+        "revenue_share": 0.2552,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "고객지원(MA)",
-        "desc": "H/W·S/W 유지보수 서비스",
-        "revenue_share": 0.1773
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.7%",
+        "revenue_share": 0.1773,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -176,32 +182,55 @@
       "PC·주변기기",
       "IT 인프라 구축·유지보수"
     ],
-    "investor_note": "정원엔시스는 서버·스토리지·네트워크 장비 등 IT 인프라를 유통·구축하고(57%), PC 유통(26%)과 유지보수 서비스(18%)도 함께 하는 IT 종합서비스 기업입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,009억 원으로 전년 대비 3.3% 늘었고 영업이익은 19억 원으로 24.3%, 당기순이익은 11억 원으로 18.9% 증가했습니다. 부채비율은 101.8%로 자본과 비슷한 수준입니다. 다만 특수관계자와의 자금 거래·담보 제공 규모가 커 감사인이 강조사항으로 짚었으니 참고하시기 바랍니다."
+    "investor_note": "정원엔시스는 서버·스토리지·네트워크 장비 등 IT 인프라를 유통·구축하고(57%), PC 유통(26%)과 유지보수 서비스(18%)도 함께 하는 IT 종합서비스 기업입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,009억 원으로 전년 대비 3.3% 늘었고 영업이익은 19억 원으로 24.3%, 당기순이익은 11억 원으로 18.9% 증가했습니다. 부채비율은 101.8%로 자본과 비슷한 수준입니다. 다만 특수관계자와의 자금 거래·담보 제공 규모가 커 감사인이 강조사항으로 짚었으니 참고하시기 바랍니다.",
+    "product_service_segments": [
+      {
+        "name": "IT 인프라",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 56.7%",
+        "revenue_share": 0.5674,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "IT 유통",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.5%",
+        "revenue_share": 0.2552,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "고객지원(MA)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.7%",
+        "revenue_share": 0.1773,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "IT인프라",
-      "caption": "서버·스토리지·네트워크 장비 유통·구축",
-      "kind": "telecom",
-      "visual": "IT인프라",
-      "image": "../data/business_images/business_image_b24ab2723180c79f.jpg",
+      "title": "IT 인프라",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 56.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "IT 유통",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "IT유통",
-      "caption": "PC·노트북 등 유통판매",
-      "kind": "service",
-      "visual": "IT유통",
-      "image": "../data/business_images/business_image_local_cement.svg",
-      "image_source": "Local curated visual"
-    },
-    {
       "title": "고객지원(MA)",
-      "caption": "H/W·S/W 유지보수 서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.7%",
       "kind": "service",
-      "visual": "고객지원",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

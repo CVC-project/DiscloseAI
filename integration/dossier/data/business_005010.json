@@ -155,9 +155,18 @@
     "segment_finance": "휴스틸은 물·가스 배관에 쓰이는 배관용 강관, 유정 굴착에 쓰이는 OCTG(유정용 강관), 건축 구조물용 강관 등을 만드는 단일 사업부문 철강회사입니다. 당진·대불(탄소강관)과 대구(스테인리스강관) 공장을 운영하며 2025년 공장 가동률은 평균 84.6%였습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,124억 원으로 전년 대비 15.3% 줄었고 영업이익도 79.6% 급감했으며, 당기순이익은 전년 흑자에서 150억 원 적자로 전환됐습니다. 다만 부채비율은 29.8%로 재무구조 자체는 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "강관 제조·판매",
-        "desc": "탄소강관·스테인리스강관 등 강관 제조·판매 단일 사업부문",
-        "revenue_share": 1
+        "name": "강관",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 97.3%",
+        "revenue_share": 0.973,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.6%",
+        "revenue_share": 0.006,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -168,40 +177,32 @@
       "흑관",
       "백관"
     ],
-    "investor_note": "휴스틸은 물·가스 배관에 쓰이는 배관용 강관, 유정 굴착에 쓰이는 OCTG(유정용 강관), 건축 구조물용 강관 등을 만드는 단일 사업부문 철강회사입니다. 당진·대불(탄소강관)과 대구(스테인리스강관) 공장을 운영하며 2025년 공장 가동률은 평균 84.6%였습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,124억 원으로 전년 대비 15.3% 줄었고 영업이익도 79.6% 급감했으며, 당기순이익은 전년 흑자에서 150억 원 적자로 전환됐습니다. 다만 부채비율은 29.8%로 재무구조 자체는 안정적인 편입니다."
+    "investor_note": "휴스틸은 물·가스 배관에 쓰이는 배관용 강관, 유정 굴착에 쓰이는 OCTG(유정용 강관), 건축 구조물용 강관 등을 만드는 단일 사업부문 철강회사입니다. 당진·대불(탄소강관)과 대구(스테인리스강관) 공장을 운영하며 2025년 공장 가동률은 평균 84.6%였습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,124억 원으로 전년 대비 15.3% 줄었고 영업이익도 79.6% 급감했으며, 당기순이익은 전년 흑자에서 150억 원 적자로 전환됐습니다. 다만 부채비율은 29.8%로 재무구조 자체는 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "강관",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 97.3%",
+        "revenue_share": 0.973,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.6%",
+        "revenue_share": 0.006,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "강관 제조·판매",
-      "caption": "탄소강관·스테인리스강관 등 강관 제조·판매 단일 사업부문",
-      "kind": "service",
-      "visual": "강관",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "배관용 강관",
-      "caption": "배관용 강관 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "배관용",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "구조용 강관",
-      "caption": "구조용 강관 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "구조용",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "유정용 강관(OCTG)",
-      "caption": "유정용 강관(OCTG) 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "유정용",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "title": "철강",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 97.3%",
+      "kind": "material",
+      "visual": "STEEL",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

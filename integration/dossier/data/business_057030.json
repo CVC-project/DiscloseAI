@@ -155,19 +155,32 @@
     "segment_finance": "와이비엠넷은 온라인 외국어 교육과 온라인 테스트, 디지털 콘텐츠 판매를 기반으로 성장한 교육 플랫폼 회사입니다. 모회사 YBM의 외국어 콘텐츠와 강사진을 활용해 TOEIC, TOEFL, JPT, HSK 등 시험 대비 강의를 운영하고, 기업·대학 대상 온라인 교육 솔루션도 공급합니다. 사업보고서는 단순 온라인 강의에서 벗어나 AI 튜터, 실시간 질의응답, AI 기반 평가 시스템을 도입해 에듀테크 회사로 확장하고 있다고 설명합니다. 제조업처럼 원재료나 생산설비가 중요한 회사가 아니라 강사진, 콘텐츠 데이터베이스, IT 개발력, 서버 안정성이 서비스 품질을 좌우합니다.",
     "segment_breakdown": [
       {
-        "name": "온라인 교육",
-        "desc": "외국어, 평생교육, IT, 직무역량 교육 콘텐츠와 강의 서비스",
-        "revenue_share": null
+        "name": "온라인교육",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.1%",
+        "revenue_share": 0.2709,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "온라인 테스트",
-        "desc": "시험 접수, 평가, 학습자 진단 등 온라인 평가 서비스",
-        "revenue_share": null
+        "name": "온라인접수",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.5%",
+        "revenue_share": 0.1146,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "교육 솔루션",
-        "desc": "기업과 대학 대상 교육 플랫폼, 콘텐츠, IT 솔루션",
-        "revenue_share": null
+        "name": "오프라인 주니어교육",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.9%",
+        "revenue_share": 0.1286,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "수수료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.9%",
+        "revenue_share": 0.0787,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -179,32 +192,70 @@
       "AI 튜터",
       "교육 IT 솔루션"
     ],
-    "investor_note": "와이비엠넷은 온라인 외국어 교육과 온라인 테스트, 디지털 콘텐츠 판매를 기반으로 성장한 교육 플랫폼 회사입니다. 모회사 YBM의 외국어 콘텐츠와 강사진을 활용해 TOEIC, TOEFL, JPT, HSK 등 시험 대비 강의를 운영하고, 기업·대학 대상 온라인 교육 솔루션도 공급합니다. 사업보고서는 단순 온라인 강의에서 벗어나 AI 튜터, 실시간 질의응답, AI 기반 평가 시스템을 도입해 에듀테크 회사로 확장하고 있다고 설명합니다. 제조업처럼 원재료나 생산설비가 중요한 회사가 아니라 강사진, 콘텐츠 데이터베이스, IT 개발력, 서버 안정성이 서비스 품질을 좌우합니다."
+    "investor_note": "와이비엠넷은 온라인 외국어 교육과 온라인 테스트, 디지털 콘텐츠 판매를 기반으로 성장한 교육 플랫폼 회사입니다. 모회사 YBM의 외국어 콘텐츠와 강사진을 활용해 TOEIC, TOEFL, JPT, HSK 등 시험 대비 강의를 운영하고, 기업·대학 대상 온라인 교육 솔루션도 공급합니다. 사업보고서는 단순 온라인 강의에서 벗어나 AI 튜터, 실시간 질의응답, AI 기반 평가 시스템을 도입해 에듀테크 회사로 확장하고 있다고 설명합니다. 제조업처럼 원재료나 생산설비가 중요한 회사가 아니라 강사진, 콘텐츠 데이터베이스, IT 개발력, 서버 안정성이 서비스 품질을 좌우합니다.",
+    "product_service_segments": [
+      {
+        "name": "온라인교육",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.1%",
+        "revenue_share": 0.2709,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "온라인접수",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.5%",
+        "revenue_share": 0.1146,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "오프라인 주니어교육",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.9%",
+        "revenue_share": 0.1286,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "수수료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.9%",
+        "revenue_share": 0.0787,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "온라인 교육",
-      "caption": "외국어, 평생교육, IT, 직무역량 교육 콘텐츠와 강의 서비스",
-      "kind": "platform",
-      "visual": "온라인",
-      "image": "../data/business_images/business_image_local_education.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "온라인 테스트",
-      "caption": "시험 접수, 평가, 학습자 진단 등 온라인 평가 서비스",
+      "title": "온라인교육",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.1%",
       "kind": "service",
-      "visual": "온라인",
-      "image": "../data/business_images/business_image_local_probe.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "교육 솔루션",
-      "caption": "기업과 대학 대상 교육 플랫폼, 콘텐츠, IT 솔루션",
-      "kind": "platform",
-      "visual": "교육",
-      "image": "../data/business_images/business_image_local_education.svg",
-      "image_source": "Local curated visual"
+      "title": "온라인접수",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "오프라인 주니어교육",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "수수료",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

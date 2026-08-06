@@ -155,14 +155,25 @@
     "segment_finance": "나노엔텍은 손톱만 한 칩 하나로 혈액 검사를 수행하는 '랩온어칩' 기술을 바탕으로, 잔존백혈구 자동계수기(ADAM-rWBC)나 형광면역진단기(FREND System) 같은 체외진단 장비와 세포계수기 등 생명과학 실험장비를 미국 등 해외 시장에 주로 판매하는 의료기기 기업입니다. 매출의 절반 이상이 진단키트 등 소모품에서 꾸준히 나오는 구조입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 381억 원으로 전년 대비 25.2% 늘었고 영업이익도 77.4% 증가했지만, 당기순이익은 15억 원으로 오히려 55.9% 줄었습니다. 부채비율은 7.7%로 매우 낮아 재무 안정성은 우수한 편입니다.",
     "segment_breakdown": [
       {
-        "name": "체외진단",
-        "desc": "혈액제제 분석·형광면역진단 장비 및 진단키트(소모품)",
-        "revenue_share": 0.629
+        "name": "생명과학",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+        "revenue_share": 0.08,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "생명과학",
-        "desc": "세포계수·세포모니터링 등 생명과학 실험장비 및 소모품",
-        "revenue_share": 0.262
+        "name": "소모품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.2%",
+        "revenue_share": 0.182,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "체외진단",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.3%",
+        "revenue_share": 0.033,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,24 +185,70 @@
       "C-Chip(1회용 세포계수키트)",
       "헬스케어 상담 서비스"
     ],
-    "investor_note": "나노엔텍은 손톱만 한 칩 하나로 혈액 검사를 수행하는 '랩온어칩' 기술을 바탕으로, 잔존백혈구 자동계수기(ADAM-rWBC)나 형광면역진단기(FREND System) 같은 체외진단 장비와 세포계수기 등 생명과학 실험장비를 미국 등 해외 시장에 주로 판매하는 의료기기 기업입니다. 매출의 절반 이상이 진단키트 등 소모품에서 꾸준히 나오는 구조입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 381억 원으로 전년 대비 25.2% 늘었고 영업이익도 77.4% 증가했지만, 당기순이익은 15억 원으로 오히려 55.9% 줄었습니다. 부채비율은 7.7%로 매우 낮아 재무 안정성은 우수한 편입니다."
+    "investor_note": "나노엔텍은 손톱만 한 칩 하나로 혈액 검사를 수행하는 '랩온어칩' 기술을 바탕으로, 잔존백혈구 자동계수기(ADAM-rWBC)나 형광면역진단기(FREND System) 같은 체외진단 장비와 세포계수기 등 생명과학 실험장비를 미국 등 해외 시장에 주로 판매하는 의료기기 기업입니다. 매출의 절반 이상이 진단키트 등 소모품에서 꾸준히 나오는 구조입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 381억 원으로 전년 대비 25.2% 늘었고 영업이익도 77.4% 증가했지만, 당기순이익은 15억 원으로 오히려 55.9% 줄었습니다. 부채비율은 7.7%로 매우 낮아 재무 안정성은 우수한 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "생명과학",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+        "revenue_share": 0.08,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "소모품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.2%",
+        "revenue_share": 0.182,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "체외진단",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.3%",
+        "revenue_share": 0.033,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "헬스케어 서비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.9%",
+        "revenue_share": 0.049,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "체외진단",
-      "caption": "혈액제제 분석·형광면역진단 장비 및 진단키트(소모품)",
+      "title": "생명과학",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
       "kind": "service",
-      "visual": "체외진단",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "생명과학",
-      "caption": "세포계수·세포모니터링 등 생명과학 실험장비 및 소모품",
-      "kind": "insurance",
-      "visual": "생명과학",
-      "image": "../data/business_images/business_image_141eab6519656e30.jpg",
-      "image_source": "Wikimedia Commons"
+      "title": "소모품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "진단·분석",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.3%",
+      "kind": "bio",
+      "visual": "DIAGNOSTIC",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "헬스케어 서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

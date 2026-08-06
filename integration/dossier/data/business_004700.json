@@ -155,9 +155,18 @@
     "segment_finance": "조광피혁은 자동차 시트(Car Seat)와 스티어링휠에 쓰이는 가죽원단을 만드는 회사로, 원피 등 원재료 대부분을 해외에서 수입해 국제 원자재가격에 실적이 크게 좌우됩니다. 과거 공시 기반 참고 정보로, 최근 매출액은 978억 원(전년비 +8.5%), 영업이익은 87억 원(+21.6%)으로 늘었지만 당기순이익은 115억 원으로 8.4% 줄었습니다. 부채비율은 14.6%로 매우 낮아 재무구조는 안정적입니다. 다만 총자산의 72%에 달하는 4,751억 원이 상장주식 등 금융자산(기타포괄손익-공정가치측정금융자산)으로, 본업인 가죽 제조보다 보유 주식 가치 변동이 재무제표에 더 큰 영향을 줄 수 있어 감사인도 이를 핵심감사사항으로 짚었습니다.",
     "segment_breakdown": [
       {
-        "name": "피혁제조업",
-        "desc": "자동차 시트·핸들용 가죽원단 제조·판매",
-        "revenue_share": 1
+        "name": "피혁원단",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 96.7%",
+        "revenue_share": 0.9674,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.7%",
+        "revenue_share": 0.0073,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -166,40 +175,39 @@
       "Car Seat 재단품",
       "가죽 부산물"
     ],
-    "investor_note": "조광피혁은 자동차 시트(Car Seat)와 스티어링휠에 쓰이는 가죽원단을 만드는 회사로, 원피 등 원재료 대부분을 해외에서 수입해 국제 원자재가격에 실적이 크게 좌우됩니다. 과거 공시 기반 참고 정보로, 최근 매출액은 978억 원(전년비 +8.5%), 영업이익은 87억 원(+21.6%)으로 늘었지만 당기순이익은 115억 원으로 8.4% 줄었습니다. 부채비율은 14.6%로 매우 낮아 재무구조는 안정적입니다. 다만 총자산의 72%에 달하는 4,751억 원이 상장주식 등 금융자산(기타포괄손익-공정가치측정금융자산)으로, 본업인 가죽 제조보다 보유 주식 가치 변동이 재무제표에 더 큰 영향을 줄 수 있어 감사인도 이를 핵심감사사항으로 짚었습니다."
+    "investor_note": "조광피혁은 자동차 시트(Car Seat)와 스티어링휠에 쓰이는 가죽원단을 만드는 회사로, 원피 등 원재료 대부분을 해외에서 수입해 국제 원자재가격에 실적이 크게 좌우됩니다. 과거 공시 기반 참고 정보로, 최근 매출액은 978억 원(전년비 +8.5%), 영업이익은 87억 원(+21.6%)으로 늘었지만 당기순이익은 115억 원으로 8.4% 줄었습니다. 부채비율은 14.6%로 매우 낮아 재무구조는 안정적입니다. 다만 총자산의 72%에 달하는 4,751억 원이 상장주식 등 금융자산(기타포괄손익-공정가치측정금융자산)으로, 본업인 가죽 제조보다 보유 주식 가치 변동이 재무제표에 더 큰 영향을 줄 수 있어 감사인도 이를 핵심감사사항으로 짚었습니다.",
+    "product_service_segments": [
+      {
+        "name": "피혁원단",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 96.7%",
+        "revenue_share": 0.9674,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.5%",
+        "revenue_share": 0.0253,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.7%",
+        "revenue_share": 0.0073,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "피혁제조업",
-      "caption": "자동차 시트·핸들용 가죽원단 제조·판매",
-      "kind": "auto",
-      "visual": "피혁제조업",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "자동차 시트용 가죽원단",
-      "caption": "자동차 시트용 가죽원단 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "auto",
-      "visual": "자동차",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "스티어링휠(S/Wheel)용 가죽원단",
-      "caption": "스티어링휠(S/Wheel)용 가죽원단 관련 제품과 서비스를 통해 매출을 만듭니다.",
+      "title": "피혁원단",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 96.7%",
       "kind": "service",
-      "visual": "스티어링휠",
-      "image": "../data/business_images/business_image_local_textile.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "Car Seat 재단품",
-      "caption": "Car Seat 재단품 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "Car",
-      "image": "../data/business_images/business_image_local_default_d.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

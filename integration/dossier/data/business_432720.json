@@ -121,7 +121,29 @@
   "snippets": {
     "overview": "주식회사 퀄리타스반도체의 주요 제품·서비스는 IP, 제품설명, 디스플레이칩셋 인터페이스 IP, Tablet PC, IP DesignService, IP 설계(아날로그입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 고객사는 당사가 검증을 완료한 인터페이스 IP를 채택함으로써 자체 개발에 필요한 막대한 인력과 비용을 절감하는 것은 물론, 개발 기간을 단축하여 제품의 시장 경쟁력을 제고할 수 있습니다. 당사는 초고속 인터커넥트를 위한 인터페이스 IP 제품을 개발하고 SoC고객에게 라이센싱하는 사업을 영위하고 하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "주식회사 퀄리타스반도체의 주요 제품·서비스는 IP, 제품설명, 디스플레이칩셋 인터페이스 IP, Tablet PC, IP DesignService, IP 설계(아날로그입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 고객사는 당사가 검증을 완료한 인터페이스 IP를 채택함으로써 자체 개발에 필요한 막대한 인력과 비용을 절감하는 것은 물론, 개발 기간을 단축하여 제품의 시장 경쟁력을 제고할 수 있습니다. 당사는 초고속 인터커넥트를 위한 인터페이스 IP 제품을 개발하고 SoC고객에게 라이센싱하는 사업을 영위하고 하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "MIPI IP",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.7%",
+        "revenue_share": 0.4971,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Display Chipset IP",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.3%",
+        "revenue_share": 0.3128,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "PCIe IP",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.7%",
+        "revenue_share": 0.1773,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "IP",
       "제품설명",
@@ -136,24 +158,55 @@
       "역할",
       "제1개발실"
     ],
-    "investor_note": "주식회사 퀄리타스반도체의 주요 제품·서비스는 IP, 제품설명, 디스플레이칩셋 인터페이스 IP, Tablet PC, IP DesignService, IP 설계(아날로그입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 고객사는 당사가 검증을 완료한 인터페이스 IP를 채택함으로써 자체 개발에 필요한 막대한 인력과 비용을 절감하는 것은 물론, 개발 기간을 단축하여 제품의 시장 경쟁력을 제고할 수 있습니다. 당사는 초고속 인터커넥트를 위한 인터페이스 IP 제품을 개발하고 SoC고객에게 라이센싱하는 사업을 영위하고 하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사 퀄리타스반도체의 주요 제품·서비스는 IP, 제품설명, 디스플레이칩셋 인터페이스 IP, Tablet PC, IP DesignService, IP 설계(아날로그입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 고객사는 당사가 검증을 완료한 인터페이스 IP를 채택함으로써 자체 개발에 필요한 막대한 인력과 비용을 절감하는 것은 물론, 개발 기간을 단축하여 제품의 시장 경쟁력을 제고할 수 있습니다. 당사는 초고속 인터커넥트를 위한 인터페이스 IP 제품을 개발하고 SoC고객에게 라이센싱하는 사업을 영위하고 하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "MIPI IP",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.7%",
+        "revenue_share": 0.4971,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Display Chipset IP",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.3%",
+        "revenue_share": 0.3128,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "PCIe IP",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.7%",
+        "revenue_share": 0.1773,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "반도체",
-      "caption": "메모리, 시스템반도체, 장비·소재 관련 사업을 봅니다.",
+      "title": "MIPI IP",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.7%",
       "kind": "chip",
       "visual": "CHIP",
-      "image": "../data/business_images/business_image_10774ca82ea41202.jpg",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "부품·소재",
-      "caption": "공정에 투입되는 부품과 소재가 실적에 영향을 줍니다.",
+      "title": "Display Chipset IP",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.3%",
       "kind": "chip",
-      "visual": "PARTS",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "visual": "CHIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "PCIe IP",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.7%",
+      "kind": "chip",
+      "visual": "CHIP",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

@@ -155,19 +155,25 @@
     "segment_finance": "KSS해운은 선박 종류에 따라 GAS선(LPG·암모니아 등), PRODUCT선(석유제품·메탄올), CHEMICAL선(케미칼 화물)으로 사업부문을 나눈 해운회사로, 매출의 대부분(약 86%)은 가스 운반선 사업에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 5,613억 원으로 전년 대비 8.4% 늘었고 영업이익도 1,103억 원으로 6.0% 증가했지만, 당기순이익은 365억 원으로 36.3% 줄었습니다. 다만 선박 등 대규모 설비투자가 필요한 해운업 특성상 부채비율은 255.3%로 자본보다 빚이 훨씬 많은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "GAS선",
-        "desc": "LPG·암모니아·프로필렌 등 가스 화물 해상운송",
-        "revenue_share": 0.86
+        "name": "GAS",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 86.0%",
+        "revenue_share": 0.86,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "PRODUCT선",
-        "desc": "석유제품(CPP)·메탄올 등 화물 해상운송",
-        "revenue_share": 0.081
+        "name": "PRODUCT",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.1%",
+        "revenue_share": 0.081,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "CHEMICAL선",
-        "desc": "B.OIL·메탄올·BTX 등 케미칼 화물 해상운송",
-        "revenue_share": 0.06
+        "name": "CHEMICAL",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.0%",
+        "revenue_share": 0.06,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -175,32 +181,55 @@
       "석유제품(CPP)·메탄올 운송",
       "케미칼(B.OIL·BTX 등) 운송"
     ],
-    "investor_note": "KSS해운은 선박 종류에 따라 GAS선(LPG·암모니아 등), PRODUCT선(석유제품·메탄올), CHEMICAL선(케미칼 화물)으로 사업부문을 나눈 해운회사로, 매출의 대부분(약 86%)은 가스 운반선 사업에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 5,613억 원으로 전년 대비 8.4% 늘었고 영업이익도 1,103억 원으로 6.0% 증가했지만, 당기순이익은 365억 원으로 36.3% 줄었습니다. 다만 선박 등 대규모 설비투자가 필요한 해운업 특성상 부채비율은 255.3%로 자본보다 빚이 훨씬 많은 편이라 재무 부담을 살펴볼 필요가 있습니다."
+    "investor_note": "KSS해운은 선박 종류에 따라 GAS선(LPG·암모니아 등), PRODUCT선(석유제품·메탄올), CHEMICAL선(케미칼 화물)으로 사업부문을 나눈 해운회사로, 매출의 대부분(약 86%)은 가스 운반선 사업에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 5,613억 원으로 전년 대비 8.4% 늘었고 영업이익도 1,103억 원으로 6.0% 증가했지만, 당기순이익은 365억 원으로 36.3% 줄었습니다. 다만 선박 등 대규모 설비투자가 필요한 해운업 특성상 부채비율은 255.3%로 자본보다 빚이 훨씬 많은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "GAS",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 86.0%",
+        "revenue_share": 0.86,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "PRODUCT",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.1%",
+        "revenue_share": 0.081,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "CHEMICAL",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.0%",
+        "revenue_share": 0.06,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "GAS선",
-      "caption": "LPG·암모니아·프로필렌 등 가스 화물 해상운송",
+      "title": "GAS",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 86.0%",
       "kind": "service",
-      "visual": "GAS선",
-      "image": "../data/business_images/business_image_local_oil.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "PRODUCT선",
-      "caption": "석유제품(CPP)·메탄올 등 화물 해상운송",
+      "title": "PRODUCT",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.1%",
       "kind": "service",
-      "visual": "PRODUCT선",
-      "image": "../data/business_images/business_image_local_oil.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "CHEMICAL선",
-      "caption": "B.OIL·메탄올·BTX 등 케미칼 화물 해상운송",
+      "title": "CHEMICAL",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.0%",
       "kind": "service",
-      "visual": "CHEMICAL선",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -155,29 +155,25 @@
     "segment_finance": "태웅은 풍력·조선·원자력·산업플랜트 등에 쓰이는 대형 단조품(금형 없이 큰 규격을 주문생산하는 부품)을 만드는 단조 전문기업으로, 원소재인 잉곳(INGOT)·라운드블룸을 자체 생산하는 제강사업부도 함께 운영합니다. 풍력설비용 단조품이 매출의 49.1%로 가장 크고, 조선·선박엔진용이 18.0%, 산업플랜트용이 15.0%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 3,496억 원으로 전년 대비 9.5% 줄었고 영업이익은 78.0%, 당기순이익은 78.1% 크게 감소해 수익성이 크게 나빠졌습니다. 다만 부채비율은 32.9%로 낮은 편이라 재무구조 자체는 안정적입니다.",
     "segment_breakdown": [
       {
-        "name": "풍력설비",
-        "desc": "풍력발전 터빈용 대형 단조품(Main Shaft·Tower Flange 등)",
-        "revenue_share": 0.491
-      },
-      {
-        "name": "조선&선박엔진",
-        "desc": "선박엔진용 단조품(Piston rod·Crown 등)",
-        "revenue_share": 0.18
+        "name": "산업기계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.0%",
+        "revenue_share": 0.11,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "산업플랜트",
-        "desc": "열교환기·압력용기 등 플랜트용 단조품",
-        "revenue_share": 0.15
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.0%",
+        "revenue_share": 0.15,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "산업기계",
-        "desc": "Shaft·Gear·Wheel 등 산업기계용 단조품",
-        "revenue_share": 0.11
-      },
-      {
-        "name": "발전(원자력 등)",
-        "desc": "원자력 발전설비용 단조품",
-        "revenue_share": 0.034
+        "name": "조선&선박엔진",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.0%",
+        "revenue_share": 0.18,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -189,40 +185,62 @@
       "INGOT(제강 원소재)",
       "ROUND BLOOM(제강 원소재)"
     ],
-    "investor_note": "태웅은 풍력·조선·원자력·산업플랜트 등에 쓰이는 대형 단조품(금형 없이 큰 규격을 주문생산하는 부품)을 만드는 단조 전문기업으로, 원소재인 잉곳(INGOT)·라운드블룸을 자체 생산하는 제강사업부도 함께 운영합니다. 풍력설비용 단조품이 매출의 49.1%로 가장 크고, 조선·선박엔진용이 18.0%, 산업플랜트용이 15.0%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 3,496억 원으로 전년 대비 9.5% 줄었고 영업이익은 78.0%, 당기순이익은 78.1% 크게 감소해 수익성이 크게 나빠졌습니다. 다만 부채비율은 32.9%로 낮은 편이라 재무구조 자체는 안정적입니다."
+    "investor_note": "태웅은 풍력·조선·원자력·산업플랜트 등에 쓰이는 대형 단조품(금형 없이 큰 규격을 주문생산하는 부품)을 만드는 단조 전문기업으로, 원소재인 잉곳(INGOT)·라운드블룸을 자체 생산하는 제강사업부도 함께 운영합니다. 풍력설비용 단조품이 매출의 49.1%로 가장 크고, 조선·선박엔진용이 18.0%, 산업플랜트용이 15.0%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 3,496억 원으로 전년 대비 9.5% 줄었고 영업이익은 78.0%, 당기순이익은 78.1% 크게 감소해 수익성이 크게 나빠졌습니다. 다만 부채비율은 32.9%로 낮은 편이라 재무구조 자체는 안정적입니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.1%",
+        "revenue_share": 0.491,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "산업기계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.0%",
+        "revenue_share": 0.11,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "산업플랜트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.0%",
+        "revenue_share": 0.15,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "조선&선박엔진",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.0%",
+        "revenue_share": 0.18,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "풍력설비",
-      "caption": "풍력발전 터빈용 대형 단조품(Main Shaft·Tower Flange 등)",
-      "kind": "power",
-      "visual": "AI",
-      "image": "../data/business_images/business_image_local_ai.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "조선&선박엔진",
-      "caption": "선박엔진용 단조품(Piston rod·Crown 등)",
-      "kind": "ship",
-      "visual": "조선&선박엔진",
-      "image": "../data/business_images/business_image_local_ship.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "산업플랜트",
-      "caption": "열교환기·압력용기 등 플랜트용 단조품",
-      "kind": "ship",
-      "visual": "산업플랜트",
-      "image": "../data/business_images/business_image_local_offshore.svg",
-      "image_source": "Local curated visual"
-    },
-    {
       "title": "산업기계",
-      "caption": "Shaft·Gear·Wheel 등 산업기계용 단조품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "토목·플랜트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.0%",
       "kind": "service",
-      "visual": "산업기계",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_5184e050831a4460.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "구동계 부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.0%",
+      "kind": "auto",
+      "visual": "PARTS",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

@@ -156,28 +156,31 @@
     "segment_breakdown": [
       {
         "name": "B2C 가구",
-        "desc": "장롱·침대·소파 등 생활가구",
-        "revenue_share": 0.204
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.4%",
+        "revenue_share": 0.204,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "사무용가구",
-        "desc": "사무실 책상·파티션 등",
-        "revenue_share": 0.093
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.3%",
+        "revenue_share": 0.093,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "빌트인가구",
-        "desc": "아파트 주방·거실장 등",
-        "revenue_share": 0.242
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.2%",
+        "revenue_share": 0.242,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "자재유통",
-        "desc": "친환경 보드류 유상판매",
-        "revenue_share": 0.074
-      },
-      {
-        "name": "B2B 부문",
-        "desc": "산업자재·사무용 빌딩·공장 공사",
-        "revenue_share": 0.388
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.4%",
+        "revenue_share": 0.074,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -186,40 +189,70 @@
       "빌트인 주방·거실장",
       "산업자재·B2B 공사"
     ],
-    "investor_note": "현대리바트는 현대백화점그룹 계열의 가구·목제품 전문기업으로, 장롱·소파 등 B2C 가구, 사무용가구, 아파트 빌트인가구, 산업자재 및 B2B 공사까지 폭넓은 사업을 운영하고 있으며 B2B 부문이 매출의 39%로 가장 큰 비중을 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 5,462억 원으로 전년보다 17.3% 줄었고 영업이익은 157억 원으로 34.6%, 당기순이익은 74억 원으로 51.2% 감소하는 등 전반적으로 실적이 둔화된 한 해였습니다. 부채비율은 85.0%입니다. 감사인은 경쟁이 치열해진 빌트인가구 부문의 자산가치 평가(손상검사)를 핵심감사사항으로 선정했습니다."
+    "investor_note": "현대리바트는 현대백화점그룹 계열의 가구·목제품 전문기업으로, 장롱·소파 등 B2C 가구, 사무용가구, 아파트 빌트인가구, 산업자재 및 B2B 공사까지 폭넓은 사업을 운영하고 있으며 B2B 부문이 매출의 39%로 가장 큰 비중을 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1조 5,462억 원으로 전년보다 17.3% 줄었고 영업이익은 157억 원으로 34.6%, 당기순이익은 74억 원으로 51.2% 감소하는 등 전반적으로 실적이 둔화된 한 해였습니다. 부채비율은 85.0%입니다. 감사인은 경쟁이 치열해진 빌트인가구 부문의 자산가치 평가(손상검사)를 핵심감사사항으로 선정했습니다.",
+    "product_service_segments": [
+      {
+        "name": "B2C 가구",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.4%",
+        "revenue_share": 0.204,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "사무용가구",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.3%",
+        "revenue_share": 0.093,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "빌트인가구",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.2%",
+        "revenue_share": 0.242,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자재유통",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.4%",
+        "revenue_share": 0.074,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "B2C 가구",
-      "caption": "장롱·침대·소파 등 생활가구",
-      "kind": "consumer",
-      "visual": "B2C",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.4%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "사무용가구",
-      "caption": "사무실 책상·파티션 등",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.3%",
       "kind": "service",
-      "visual": "사무용가구",
-      "image": "../data/business_images/business_image_local_default_b.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "빌트인가구",
-      "caption": "아파트 주방·거실장 등",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.2%",
       "kind": "service",
-      "visual": "빌트인가구",
-      "image": "../data/business_images/business_image_local_default_c.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "자재유통",
-      "caption": "친환경 보드류 유상판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.4%",
       "kind": "service",
-      "visual": "자재유통",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

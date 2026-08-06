@@ -121,7 +121,36 @@
   "snippets": {
     "overview": "(주)케이씨산업의 주요 사업은 현대산업개발, 현대건설, 중흥토건, 한화건설,포스코건설,DL건설, 호반건설,두산건설,케이티씨건설, 에스케이건설 등입니다. 계약을 따낸 뒤 제작·공사·납품을 거쳐 매출을 만듭니다. 사업부문별 요약 재무현황 사업의 특성에 따라 부문별 매출액은 분류하고 있으나, 사업부간 비교가 어려운 부문별 자산, 부채, 매출총이익, 매출원가 및 비용은 분류하지 않고 있습니다. 당사의 최근 3년간 품목별 매출액 및 총매출액에서 차지하는 비중은 다음과 같습니다. 수주형 사업은 계약 규모뿐 아니라 납기, 원가, 프로젝트 구성이 이익을 좌우합니다.",
     "segment_finance": "(주)케이씨산업의 주요 사업은 현대산업개발, 현대건설, 중흥토건, 한화건설,포스코건설,DL건설, 호반건설,두산건설,케이티씨건설, 에스케이건설 등입니다. 계약을 따낸 뒤 제작·공사·납품을 거쳐 매출을 만듭니다. 사업부문별 요약 재무현황 사업의 특성에 따라 부문별 매출액은 분류하고 있으나, 사업부간 비교가 어려운 부문별 자산, 부채, 매출총이익, 매출원가 및 비용은 분류하지 않고 있습니다. 당사의 최근 3년간 품목별 매출액 및 총매출액에서 차지하는 비중은 다음과 같습니다. 수주형 사업은 계약 규모뿐 아니라 납기, 원가, 프로젝트 구성이 이익을 좌우합니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "PC 암거",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 58.2%",
+        "revenue_share": 0.5822,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "PC방음벽",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.8%",
+        "revenue_share": 0.0277,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "특수PC",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.9%",
+        "revenue_share": 0.0694,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "DSM",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.4%",
+        "revenue_share": 0.1639,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "판매제품 유형",
       "콘크리트파일",
@@ -136,40 +165,70 @@
       "공법개요",
       "상호 일체화"
     ],
-    "investor_note": "(주)케이씨산업의 주요 사업은 현대산업개발, 현대건설, 중흥토건, 한화건설,포스코건설,DL건설, 호반건설,두산건설,케이티씨건설, 에스케이건설 등입니다. 계약을 따낸 뒤 제작·공사·납품을 거쳐 매출을 만듭니다. 사업부문별 요약 재무현황 사업의 특성에 따라 부문별 매출액은 분류하고 있으나, 사업부간 비교가 어려운 부문별 자산, 부채, 매출총이익, 매출원가 및 비용은 분류하지 않고 있습니다. 당사의 최근 3년간 품목별 매출액 및 총매출액에서 차지하는 비중은 다음과 같습니다. 수주형 사업은 계약 규모뿐 아니라 납기, 원가, 프로젝트 구성이 이익을 좌우합니다."
+    "investor_note": "(주)케이씨산업의 주요 사업은 현대산업개발, 현대건설, 중흥토건, 한화건설,포스코건설,DL건설, 호반건설,두산건설,케이티씨건설, 에스케이건설 등입니다. 계약을 따낸 뒤 제작·공사·납품을 거쳐 매출을 만듭니다. 사업부문별 요약 재무현황 사업의 특성에 따라 부문별 매출액은 분류하고 있으나, 사업부간 비교가 어려운 부문별 자산, 부채, 매출총이익, 매출원가 및 비용은 분류하지 않고 있습니다. 당사의 최근 3년간 품목별 매출액 및 총매출액에서 차지하는 비중은 다음과 같습니다. 수주형 사업은 계약 규모뿐 아니라 납기, 원가, 프로젝트 구성이 이익을 좌우합니다.",
+    "product_service_segments": [
+      {
+        "name": "PC 암거",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 58.2%",
+        "revenue_share": 0.5822,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "PC방음벽",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.8%",
+        "revenue_share": 0.0277,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "특수PC",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.9%",
+        "revenue_share": 0.0694,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "DSM",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.4%",
+        "revenue_share": 0.1639,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "판매제품 유형",
-      "caption": "판매제품 유형 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "PC 암거",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 58.2%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "콘크리트파일",
-      "caption": "콘크리트파일 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "PC방음벽",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.8%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "아파트",
-      "caption": "아파트 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "특수PC",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.9%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "증기양생",
-      "caption": "증기양생 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "DSM",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.4%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

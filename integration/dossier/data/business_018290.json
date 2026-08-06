@@ -156,13 +156,24 @@
     "segment_breakdown": [
       {
         "name": "화장품",
-        "desc": "VT·ENC 등 기초·클렌징·메이크업 화장품",
-        "revenue_share": 0.9359
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 93.6%",
+        "revenue_share": 0.9359,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "라미네이팅",
-        "desc": "인쇄물·필름 코팅 기계 및 소재(GMP)",
-        "revenue_share": 0.0628
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
+        "revenue_share": 0.0628,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "엔터테인먼트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.5%",
+        "revenue_share": 0.1248,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -173,24 +184,55 @@
       "인덕션 히팅 롤러",
       "건강기능식품(피니톨포리버)"
     ],
-    "investor_note": "브이티는 VT·ENC 브랜드의 색조·기초 화장품을 주력으로, 라미네이팅 기계·필름 사업과 알츠하이머 치료제 연구 바이오 사업도 함께 운영하는 회사입니다. 매출의 대부분(약 94%)이 화장품에서 나오며, K뷰티 인기에 힘입어 북미·러시아 등 해외에서 빠르게 성장하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,371억 원으로 전년 대비 1.3% 늘었지만 영업이익은 25.3%, 당기순이익은 38.3% 각각 줄었습니다. 부채비율은 39.6%로 안정적이며, 자기자본이익률(ROE)은 26.0%로 수익성은 여전히 높은 편입니다."
+    "investor_note": "브이티는 VT·ENC 브랜드의 색조·기초 화장품을 주력으로, 라미네이팅 기계·필름 사업과 알츠하이머 치료제 연구 바이오 사업도 함께 운영하는 회사입니다. 매출의 대부분(약 94%)이 화장품에서 나오며, K뷰티 인기에 힘입어 북미·러시아 등 해외에서 빠르게 성장하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 4,371억 원으로 전년 대비 1.3% 늘었지만 영업이익은 25.3%, 당기순이익은 38.3% 각각 줄었습니다. 부채비율은 39.6%로 안정적이며, 자기자본이익률(ROE)은 26.0%로 수익성은 여전히 높은 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "화장품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 93.6%",
+        "revenue_share": 0.9359,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "라미네이팅",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
+        "revenue_share": 0.0628,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "엔터테인먼트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.5%",
+        "revenue_share": 0.1248,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "화장품",
-      "caption": "VT·ENC 등 기초·클렌징·메이크업 화장품",
-      "kind": "consumer",
-      "visual": "화장품",
-      "image": "../data/business_images/business_image_local_cosmetics.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 93.6%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "라미네이팅",
-      "caption": "인쇄물·필름 코팅 기계 및 소재(GMP)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
       "kind": "material",
-      "visual": "라미네이팅",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "엔터테인먼트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.5%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

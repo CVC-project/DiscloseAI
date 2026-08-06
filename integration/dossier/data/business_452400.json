@@ -121,7 +121,29 @@
   "snippets": {
     "overview": "주식회사 이닉스의 주요 사업은 전자산업영업팀, 제조부문입니다. 따라서 현재 본격적으로 우수한 제조업체로서 배터리 생산관련 대규모 사업을 수주 및 공급 중이며 지속성장이 가능한 전기차 부품 제조기업으로 도약이 시작되었습니다.당사의 개발능력, 대응능력, 우수한 품질은 고객사로부터 좋은 평판을 받아 신규 수주확보라는 선순환으로 이어지고 있습니다. 확보한 수주는 고객사의 생산계획에 따라 수시로 변동되며, 영업활동이 진행중인 수주상황 또한 불확실성이 존재하는바, 내부관리의 목적에는 부합하나, 외부적 공개 목적에는 부적합함으로 판단하였습니다.",
     "segment_finance": "주식회사 이닉스의 주요 사업은 전자산업영업팀, 제조부문입니다. 따라서 현재 본격적으로 우수한 제조업체로서 배터리 생산관련 대규모 사업을 수주 및 공급 중이며 지속성장이 가능한 전기차 부품 제조기업으로 도약이 시작되었습니다.당사의 개발능력, 대응능력, 우수한 품질은 고객사로부터 좋은 평판을 받아 신규 수주확보라는 선순환으로 이어지고 있습니다. 확보한 수주는 고객사의 생산계획에 따라 수시로 변동되며, 영업활동이 진행중인 수주상황 또한 불확실성이 존재하는바, 내부관리의 목적에는 부합하나, 외부적 공개 목적에는 부적합함으로 판단하였습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "내화소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.0%",
+        "revenue_share": 0.1098,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "테이프",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.2%",
+        "revenue_share": 0.1719,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "흡음재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.2%",
+        "revenue_share": 0.032,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "배터리",
       "설명",
@@ -131,28 +153,58 @@
       "배터리셀 패드",
       "내화소재"
     ],
-    "investor_note": "주식회사 이닉스의 주요 사업은 전자산업영업팀, 제조부문입니다. 따라서 현재 본격적으로 우수한 제조업체로서 배터리 생산관련 대규모 사업을 수주 및 공급 중이며 지속성장이 가능한 전기차 부품 제조기업으로 도약이 시작되었습니다.당사의 개발능력, 대응능력, 우수한 품질은 고객사로부터 좋은 평판을 받아 신규 수주확보라는 선순환으로 이어지고 있습니다. 확보한 수주는 고객사의 생산계획에 따라 수시로 변동되며, 영업활동이 진행중인 수주상황 또한 불확실성이 존재하는바, 내부관리의 목적에는 부합하나, 외부적 공개 목적에는 부적합함으로 판단하였습니다."
+    "investor_note": "주식회사 이닉스의 주요 사업은 전자산업영업팀, 제조부문입니다. 따라서 현재 본격적으로 우수한 제조업체로서 배터리 생산관련 대규모 사업을 수주 및 공급 중이며 지속성장이 가능한 전기차 부품 제조기업으로 도약이 시작되었습니다.당사의 개발능력, 대응능력, 우수한 품질은 고객사로부터 좋은 평판을 받아 신규 수주확보라는 선순환으로 이어지고 있습니다. 확보한 수주는 고객사의 생산계획에 따라 수시로 변동되며, 영업활동이 진행중인 수주상황 또한 불확실성이 존재하는바, 내부관리의 목적에는 부합하나, 외부적 공개 목적에는 부적합함으로 판단하였습니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.0%",
+        "revenue_share": 0.1597,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "내화소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.0%",
+        "revenue_share": 0.1098,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "테이프",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.2%",
+        "revenue_share": 0.1719,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "흡음재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.2%",
+        "revenue_share": 0.032,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "배터리",
-      "caption": "배터리 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
+      "title": "내화소재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.0%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "비중",
-      "caption": "비중 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "테이프",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.2%",
       "kind": "auto",
       "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "전동화개발팀",
-      "caption": "전동화개발팀 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "흡음재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.2%",
       "kind": "auto",
       "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",

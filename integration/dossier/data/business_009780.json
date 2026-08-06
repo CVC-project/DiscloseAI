@@ -155,14 +155,25 @@
     "segment_finance": "엠에스씨는 해초를 가공한 카라기난(식품 겔화제)과 천연식용색소, 조미액 등 식품첨가물을 만드는 식품소재 전문기업으로, 자회사 젠푸드·밀양한천·명신비료 등을 통해 레토르트식품·한천 사업도 함께 하고 있습니다. 과거 공시 기반 참고 정보로, 연결 매출액은 1,976억 원으로 전년 대비 4.2% 늘었고 영업이익은 296억 원으로 7.8%, 당기순이익은 230억 원으로 5.7% 증가했습니다. 부채비율은 46.5%로 안정적인 수준입니다.",
     "segment_breakdown": [
       {
-        "name": "조미식품가공 등",
-        "desc": "식품가공풍미제(조미액)",
-        "revenue_share": 0.4438
+        "name": "제조부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 36.0%",
+        "revenue_share": 0.3601,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "조미식품가공외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.4%",
+        "revenue_share": 0.4438,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "천연식용색소",
-        "desc": "식용색소(칼라믹스CB 등)",
-        "revenue_share": 0.1057
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.6%",
+        "revenue_share": 0.1057,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -171,40 +182,54 @@
       "천연식용색소(칼라믹스CB)",
       "PET 음료제품"
     ],
-    "investor_note": "엠에스씨는 해초를 가공한 카라기난(식품 겔화제)과 천연식용색소, 조미액 등 식품첨가물을 만드는 식품소재 전문기업으로, 자회사 젠푸드·밀양한천·명신비료 등을 통해 레토르트식품·한천 사업도 함께 하고 있습니다. 과거 공시 기반 참고 정보로, 연결 매출액은 1,976억 원으로 전년 대비 4.2% 늘었고 영업이익은 296억 원으로 7.8%, 당기순이익은 230억 원으로 5.7% 증가했습니다. 부채비율은 46.5%로 안정적인 수준입니다."
+    "investor_note": "엠에스씨는 해초를 가공한 카라기난(식품 겔화제)과 천연식용색소, 조미액 등 식품첨가물을 만드는 식품소재 전문기업으로, 자회사 젠푸드·밀양한천·명신비료 등을 통해 레토르트식품·한천 사업도 함께 하고 있습니다. 과거 공시 기반 참고 정보로, 연결 매출액은 1,976억 원으로 전년 대비 4.2% 늘었고 영업이익은 296억 원으로 7.8%, 당기순이익은 230억 원으로 5.7% 증가했습니다. 부채비율은 46.5%로 안정적인 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "제조부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 36.0%",
+        "revenue_share": 0.3601,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "조미식품가공외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.4%",
+        "revenue_share": 0.4438,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "천연식용색소",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.6%",
+        "revenue_share": 0.1057,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "PET 제품류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.2%",
+        "revenue_share": 0.0723,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "카라기난(식품첨가물 겔화제)",
-      "caption": "카라기난(식품첨가물 겔화제) 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "양념·소스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.4%",
       "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
+      "visual": "SAUCE",
+      "image": "../data/business_images/business_image_food_sauce.svg",
+      "image_source": "Local visual"
     },
     {
-      "title": "조미액(식품가공풍미제)",
-      "caption": "조미액(식품가공풍미제) 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "식품소재·첨가물",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.6%",
       "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_local_default_b.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "조미식품가공 등",
-      "caption": "조미식품가공 등 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_local_default_c.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "천연식용색소(칼라믹스CB)",
-      "caption": "천연식용색소(칼라믹스CB) 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_local_default_d.svg",
-      "image_source": "Local curated visual"
+      "visual": "INGREDIENT",
+      "image": "../data/business_images/business_image_food_ingredient.svg",
+      "image_source": "Local visual"
     }
   ],
   "custom_report_ideas": [

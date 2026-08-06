@@ -137,7 +137,15 @@
   "snippets": {
     "overview": "원포유는 1998년 설립돼 국방부·법무부 등 공공기관에 비대면 화상통화 서비스를 제공해온 회사로, AI얼굴인증· 음성인식(STT)·거대언어모델(LLM) 등을 결합한 인공지능 비대면 서비스 전문기업으로 발전하고 있습니다. 매출은 수용자·보호외국인 대상의 법무부 서비스가 68.5%로 가장 크고, 군 장병 대상 국방부 서비스 '그린비', 병원·학교 비대면 서비스가 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 90억 원으로 전년 대비 9.8% 줄었고 영업이익도 19.0% 감소했습니다. 당기순이익 역시 24억 원으로 1.8% 소폭 줄어 전반적으로 실적이 다소 위축된 모습입니다.",
     "segment_finance": "원포유는 1998년 설립돼 국방부·법무부 등 공공기관에 비대면 화상통화 서비스를 제공해온 회사로, AI얼굴인증· 음성인식(STT)·거대언어모델(LLM) 등을 결합한 인공지능 비대면 서비스 전문기업으로 발전하고 있습니다. 매출은 수용자·보호외국인 대상의 법무부 서비스가 68.5%로 가장 크고, 군 장병 대상 국방부 서비스 '그린비', 병원·학교 비대면 서비스가 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 90억 원으로 전년 대비 9.8% 줄었고 영업이익도 19.0% 감소했습니다. 당기순이익 역시 24억 원으로 1.8% 소폭 줄어 전반적으로 실적이 다소 위축된 모습입니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "매 출 총 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "법무부 수용자 비대면서비스",
       "보호외국인 대상 비대면서비스",
@@ -148,40 +156,70 @@
       "STT(음성인식)",
       "LLM 기반 AI 서비스"
     ],
-    "investor_note": "원포유는 1998년 설립돼 국방부·법무부 등 공공기관에 비대면 화상통화 서비스를 제공해온 회사로, AI얼굴인증· 음성인식(STT)·거대언어모델(LLM) 등을 결합한 인공지능 비대면 서비스 전문기업으로 발전하고 있습니다. 매출은 수용자·보호외국인 대상의 법무부 서비스가 68.5%로 가장 크고, 군 장병 대상 국방부 서비스 '그린비', 병원·학교 비대면 서비스가 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 90억 원으로 전년 대비 9.8% 줄었고 영업이익도 19.0% 감소했습니다. 당기순이익 역시 24억 원으로 1.8% 소폭 줄어 전반적으로 실적이 다소 위축된 모습입니다."
+    "investor_note": "원포유는 1998년 설립돼 국방부·법무부 등 공공기관에 비대면 화상통화 서비스를 제공해온 회사로, AI얼굴인증· 음성인식(STT)·거대언어모델(LLM) 등을 결합한 인공지능 비대면 서비스 전문기업으로 발전하고 있습니다. 매출은 수용자·보호외국인 대상의 법무부 서비스가 68.5%로 가장 크고, 군 장병 대상 국방부 서비스 '그린비', 병원·학교 비대면 서비스가 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 90억 원으로 전년 대비 9.8% 줄었고 영업이익도 19.0% 감소했습니다. 당기순이익 역시 24억 원으로 1.8% 소폭 줄어 전반적으로 실적이 다소 위축된 모습입니다.",
+    "product_service_segments": [
+      {
+        "name": "법무부 서비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.5%",
+        "revenue_share": 0.685,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "국방부 서비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.4%",
+        "revenue_share": 0.114,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "병원 비대면 서비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.7%",
+        "revenue_share": 0.137,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매 출 총 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "법무부 수용자 비대면서비스",
-      "caption": "법무부 수용자 비대면서비스 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "법무부 서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.5%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "보호외국인 대상 비대면서비스",
-      "caption": "보호외국인 대상 비대면서비스 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "국방부 서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.4%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "국방부 비대면서비스 '그린비'",
-      "caption": "국방부 비대면서비스 '그린비' 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "병원 비대면 서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.7%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "병원 비대면서비스",
-      "caption": "병원 비대면서비스 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "매 출 총 계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_healthcare.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

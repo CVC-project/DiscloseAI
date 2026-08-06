@@ -155,29 +155,25 @@
     "segment_finance": "휴온스글로벌은 의약품(휴온스), 필러·에스테틱(휴메딕스), 의료용 유리용기(휴엠앤씨), 보툴리눔톡신(휴온스바이오파마), 건강기능식품(휴온스엔) 등 9개 자회사를 거느린 토탈 헬스케어 그룹의 순수지주회사입니다. 직접 제품을 팔기보다 자회사 지분을 보유하며 브랜드 사용료, 경영자문수익, 배당수익, 임대수익 등으로 돈을 법니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 8,474억 원으로 전년 대비 4.2% 늘었고, 당기순이익은 818억 원으로 21.9% 증가했습니다. 다만 영업이익은 905억 원으로 6.6% 줄어, 매출 성장에도 본업의 수익성은 다소 약해졌습니다. 부채비율은 43.0%로 안정적인 수준입니다.",
     "segment_breakdown": [
       {
-        "name": "전문의약품·수탁생산(휴온스)",
-        "desc": "국소마취제·점안제 등 전문의약품 제조·판매 및 CMO 수탁생산",
-        "revenue_share": null
+        "name": "I. 전문의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 45.0%",
+        "revenue_share": 0.45,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "에스테틱·필러(휴메딕스)",
-        "desc": "히알루론산 필러·보툴리눔톡신 등 에스테틱 제품, 전문의약품 CMO",
-        "revenue_share": null
+        "name": "II. 뷰티·웰빙",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.0%",
+        "revenue_share": 0.26,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "의료용 유리용기·부자재(휴엠앤씨)",
-        "desc": "앰플·바이알 등 의료용 유리용기, 메이크업 소품 제조",
-        "revenue_share": null
-      },
-      {
-        "name": "보툴리눔톡신·바이오(휴온스바이오파마)",
-        "desc": "보툴리눔톡신(리즈톡스) 제조·판매 및 바이오의약품 연구",
-        "revenue_share": null
-      },
-      {
-        "name": "건강기능식품(휴온스엔)",
-        "desc": "기능성 식품소재 OEM/ODM 및 자체 브랜드 건기식",
-        "revenue_share": null
+        "name": "III. 수탁",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.0%",
+        "revenue_share": 0.13,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -192,40 +188,70 @@
       "약물주입기(더마샤인)",
       "화장품 부자재(스펀지·퍼프)"
     ],
-    "investor_note": "휴온스글로벌은 의약품(휴온스), 필러·에스테틱(휴메딕스), 의료용 유리용기(휴엠앤씨), 보툴리눔톡신(휴온스바이오파마), 건강기능식품(휴온스엔) 등 9개 자회사를 거느린 토탈 헬스케어 그룹의 순수지주회사입니다. 직접 제품을 팔기보다 자회사 지분을 보유하며 브랜드 사용료, 경영자문수익, 배당수익, 임대수익 등으로 돈을 법니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 8,474억 원으로 전년 대비 4.2% 늘었고, 당기순이익은 818억 원으로 21.9% 증가했습니다. 다만 영업이익은 905억 원으로 6.6% 줄어, 매출 성장에도 본업의 수익성은 다소 약해졌습니다. 부채비율은 43.0%로 안정적인 수준입니다."
+    "investor_note": "휴온스글로벌은 의약품(휴온스), 필러·에스테틱(휴메딕스), 의료용 유리용기(휴엠앤씨), 보툴리눔톡신(휴온스바이오파마), 건강기능식품(휴온스엔) 등 9개 자회사를 거느린 토탈 헬스케어 그룹의 순수지주회사입니다. 직접 제품을 팔기보다 자회사 지분을 보유하며 브랜드 사용료, 경영자문수익, 배당수익, 임대수익 등으로 돈을 법니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 8,474억 원으로 전년 대비 4.2% 늘었고, 당기순이익은 818억 원으로 21.9% 증가했습니다. 다만 영업이익은 905억 원으로 6.6% 줄어, 매출 성장에도 본업의 수익성은 다소 약해졌습니다. 부채비율은 43.0%로 안정적인 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "I. 전문의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 45.0%",
+        "revenue_share": 0.45,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "II. 뷰티·웰빙",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.0%",
+        "revenue_share": 0.26,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "III. 수탁",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.0%",
+        "revenue_share": 0.13,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "IV. 기타",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.0%",
+        "revenue_share": 0.17,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "전문의약품·수탁생산(휴온스)",
-      "caption": "국소마취제·점안제 등 전문의약품 제조·판매 및 CMO 수탁생산",
+      "title": "의약품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 45.0%",
       "kind": "bio",
-      "visual": "전문의약품",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "에스테틱·필러(휴메딕스)",
-      "caption": "히알루론산 필러·보툴리눔톡신 등 에스테틱 제품, 전문의약품 CMO",
-      "kind": "bio",
-      "visual": "에스테틱",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "의료용 유리용기·부자재(휴엠앤씨)",
-      "caption": "앰플·바이알 등 의료용 유리용기, 메이크업 소품 제조",
+      "title": "II. 뷰티·웰빙",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.0%",
       "kind": "service",
-      "visual": "의료용",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "보툴리눔톡신·바이오(휴온스바이오파마)",
-      "caption": "보툴리눔톡신(리즈톡스) 제조·판매 및 바이오의약품 연구",
-      "kind": "bio",
-      "visual": "보툴리눔톡신",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "III. 수탁",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "IV. 기타",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

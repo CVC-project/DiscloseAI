@@ -107,9 +107,25 @@
     "segment_finance": "동국생명과학주식회사의 주요 제품·서비스는 방산, 의약품, 【품목별 유통, 판매 장비】, 품목별, 유통입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 원재료 등의 가격변동추이 조영제를 원료의약품부터 완제의약품까지 제조 및 생산, 판매하는 수직계열화를 구축한 회사는 국내에서 당사가 유일합니다. 제네릭을 제조 및 판매하는 국내 회사가 오리지날 의약품을 제조 및 판매하는 세계 유수의글로벌 회사를 뛰어넘어 내수 시장을 선도하는 회사가 되기까지에는 기술력뿐만 아니라 우수한 영업력이 뒷받침되었습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "건강보험",
-        "desc": "보험계약과 자산운용 중심 서비스",
-        "revenue_share": null
+        "name": "조영제 API",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+        "revenue_share": 0.08,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.8%",
+        "revenue_share": 0.058,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "진단장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.4%",
+        "revenue_share": 0.204,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -126,24 +142,62 @@
       "생산능력",
       "납기"
     ],
-    "investor_note": "동국생명과학주식회사의 주요 제품·서비스는 방산, 의약품, 【품목별 유통, 판매 장비】, 품목별, 유통입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 원재료 등의 가격변동추이 조영제를 원료의약품부터 완제의약품까지 제조 및 생산, 판매하는 수직계열화를 구축한 회사는 국내에서 당사가 유일합니다. 제네릭을 제조 및 판매하는 국내 회사가 오리지날 의약품을 제조 및 판매하는 세계 유수의글로벌 회사를 뛰어넘어 내수 시장을 선도하는 회사가 되기까지에는 기술력뿐만 아니라 우수한 영업력이 뒷받침되었습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "동국생명과학주식회사의 주요 제품·서비스는 방산, 의약품, 【품목별 유통, 판매 장비】, 품목별, 유통입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 원재료 등의 가격변동추이 조영제를 원료의약품부터 완제의약품까지 제조 및 생산, 판매하는 수직계열화를 구축한 회사는 국내에서 당사가 유일합니다. 제네릭을 제조 및 판매하는 국내 회사가 오리지날 의약품을 제조 및 판매하는 세계 유수의글로벌 회사를 뛰어넘어 내수 시장을 선도하는 회사가 되기까지에는 기술력뿐만 아니라 우수한 영업력이 뒷받침되었습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.8%",
+        "revenue_share": 0.538,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "조영제 API",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
+        "revenue_share": 0.08,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.8%",
+        "revenue_share": 0.058,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "진단장비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.4%",
+        "revenue_share": 0.204,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "건강보험",
-      "caption": "보험계약과 자산운용 중심 서비스",
-      "kind": "insurance",
-      "visual": "건강보험",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "의약품 제조업",
-      "caption": "의약품 제조업을 중심으로 매출을 만듭니다.",
+      "title": "조영제 API",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "진단·분석",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.4%",
+      "kind": "bio",
+      "visual": "DIAGNOSTIC",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

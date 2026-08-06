@@ -118,7 +118,7 @@
     {
       "name": "M2",
       "score": 43,
-      "raw": 0.00008783720677096873,
+      "raw": 8.783720677096873e-05,
       "note": "매출증가율 -4.1%, 매출채권+계약자산증가율 -4.0%, 차이 D=+0.0%p (동종업계 KSIC-10 73개사 P50=-1.8%p)",
       "weight": 1
     },
@@ -155,14 +155,11 @@
     "segment_finance": "남양유업은 맛있는우유GT 등 우유류와 임페리얼XO 등 분유류를 주력으로, 아이스크림·치즈(백미당)와 음료(17차)까지 생산하는 유가공 전문기업으로, 우유류가 매출의 54%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 9,141억 원으로 전년 대비 4.1% 줄었지만, 영업이익은 전년 적자에서 51억 원 흑자로 전환했고 당기순이익도 27배 넘게(2743.4%) 늘어난 71억 원을 기록했습니다. 총자산은 51.3% 늘어난 1조 954억 원이며, 부채비율은 15.4%로 빚이 매우 적어 재무구조가 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "우유류",
-        "desc": "우유·발효유 등",
-        "revenue_share": 0.54
-      },
-      {
         "name": "분유류",
-        "desc": "조제분유(임페리얼XO 등)",
-        "revenue_share": 0.211
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.1%",
+        "revenue_share": 0.211,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,24 +171,40 @@
       "백미당(아이스크림·커피)",
       "남양E-5"
     ],
-    "investor_note": "남양유업은 맛있는우유GT 등 우유류와 임페리얼XO 등 분유류를 주력으로, 아이스크림·치즈(백미당)와 음료(17차)까지 생산하는 유가공 전문기업으로, 우유류가 매출의 54%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 9,141억 원으로 전년 대비 4.1% 줄었지만, 영업이익은 전년 적자에서 51억 원 흑자로 전환했고 당기순이익도 27배 넘게(2743.4%) 늘어난 71억 원을 기록했습니다. 총자산은 51.3% 늘어난 1조 954억 원이며, 부채비율은 15.4%로 빚이 매우 적어 재무구조가 안정적인 편입니다."
+    "investor_note": "남양유업은 맛있는우유GT 등 우유류와 임페리얼XO 등 분유류를 주력으로, 아이스크림·치즈(백미당)와 음료(17차)까지 생산하는 유가공 전문기업으로, 우유류가 매출의 54%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 9,141억 원으로 전년 대비 4.1% 줄었지만, 영업이익은 전년 적자에서 51억 원 흑자로 전환했고 당기순이익도 27배 넘게(2743.4%) 늘어난 71억 원을 기록했습니다. 총자산은 51.3% 늘어난 1조 954억 원이며, 부채비율은 15.4%로 빚이 매우 적어 재무구조가 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "유제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 54.0%",
+        "revenue_share": 0.54,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "분유류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.1%",
+        "revenue_share": 0.211,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "우유류",
-      "caption": "우유·발효유 등",
-      "kind": "service",
-      "visual": "우유류",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "유제품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 54.0%",
+      "kind": "consumer",
+      "visual": "INGREDIENT",
+      "image": "../data/business_images/business_image_food_ingredient.svg",
+      "image_source": "Local visual"
     },
     {
       "title": "분유류",
-      "caption": "조제분유(임페리얼XO 등)",
-      "kind": "service",
-      "visual": "분유류",
-      "image": "../data/business_images/business_image_local_oil.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.1%",
+      "kind": "consumer",
+      "visual": "INGREDIENT",
+      "image": "../data/business_images/business_image_food_ingredient.svg",
+      "image_source": "Local visual"
     }
   ],
   "custom_report_ideas": [

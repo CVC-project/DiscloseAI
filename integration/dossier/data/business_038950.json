@@ -155,19 +155,11 @@
     "segment_finance": "파인디지털은 '파인뷰' 브랜드의 차량용 블랙박스와 '파인드라이브' 내비게이션을 주력으로, 골프거리측정기와 전자지도(자회사 맵퍼스의 '아틀란'), 공공자전거시스템(자회사 위트콤) 사업도 함께 운영하는 기업입니다. 매출은 블랙박스가 68%로 가장 크고, 내비게이션·지도 관련이 11%, 골프거리측정기가 6%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 628억원으로 전년 대비 11.2% 줄었고 영업손실 45억원, 당기순손실 12억원으로 적자가 이어졌습니다. 부채비율은 8.8%로 매우 낮은 편이라 재무구조는 안정적이지만, 매출 감소와 적자 지속은 참고할 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "차량용 블랙박스",
-        "desc": "파인뷰 브랜드 블랙박스 제조판매",
-        "revenue_share": 0.68
-      },
-      {
-        "name": "내비게이션·지도",
-        "desc": "내비게이션 단말기 및 전자지도(아틀란)",
-        "revenue_share": 0.11
-      },
-      {
-        "name": "골프거리측정기",
-        "desc": "GPS·레이저 골프거리측정기",
-        "revenue_share": 0.06
+        "name": "임 대",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+        "revenue_share": 0.0262,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -178,32 +170,47 @@
       "공공자전거시스템(자회사 위트콤)",
       "컬러링 서비스(자회사 위트콤)"
     ],
-    "investor_note": "파인디지털은 '파인뷰' 브랜드의 차량용 블랙박스와 '파인드라이브' 내비게이션을 주력으로, 골프거리측정기와 전자지도(자회사 맵퍼스의 '아틀란'), 공공자전거시스템(자회사 위트콤) 사업도 함께 운영하는 기업입니다. 매출은 블랙박스가 68%로 가장 크고, 내비게이션·지도 관련이 11%, 골프거리측정기가 6%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 628억원으로 전년 대비 11.2% 줄었고 영업손실 45억원, 당기순손실 12억원으로 적자가 이어졌습니다. 부채비율은 8.8%로 매우 낮은 편이라 재무구조는 안정적이지만, 매출 감소와 적자 지속은 참고할 필요가 있습니다."
+    "investor_note": "파인디지털은 '파인뷰' 브랜드의 차량용 블랙박스와 '파인드라이브' 내비게이션을 주력으로, 골프거리측정기와 전자지도(자회사 맵퍼스의 '아틀란'), 공공자전거시스템(자회사 위트콤) 사업도 함께 운영하는 기업입니다. 매출은 블랙박스가 68%로 가장 크고, 내비게이션·지도 관련이 11%, 골프거리측정기가 6%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 628억원으로 전년 대비 11.2% 줄었고 영업손실 45억원, 당기순손실 12억원으로 적자가 이어졌습니다. 부채비율은 8.8%로 매우 낮은 편이라 재무구조는 안정적이지만, 매출 감소와 적자 지속은 참고할 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.8%",
+        "revenue_share": 0.2081,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품서비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 76.6%",
+        "revenue_share": 0.7657,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임 대",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+        "revenue_share": 0.0262,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "차량용 블랙박스",
-      "caption": "파인뷰 브랜드 블랙박스 제조판매",
-      "kind": "service",
-      "visual": "차량용",
-      "image": "../data/business_images/business_image_local_auto_part.svg",
-      "image_source": "Local curated visual"
+      "title": "상품서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 76.6%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "내비게이션·지도",
-      "caption": "내비게이션 단말기 및 전자지도(아틀란)",
-      "kind": "service",
-      "visual": "내비게이션",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "골프거리측정기",
-      "caption": "GPS·레이저 골프거리측정기",
-      "kind": "service",
-      "visual": "골프거리측정기",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "title": "임 대",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

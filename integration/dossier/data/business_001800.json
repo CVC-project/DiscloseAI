@@ -155,14 +155,25 @@
     "segment_finance": "오리온홀딩스는 2017년 지주회사로 전환한 이후 초코파이·포카칩 등을 만드는 제과 자회사 ㈜오리온, 영화 투자·배급사인 ㈜쇼박스, 제주 용암수·바이오 사업을 담당하는 기타 부문을 거느리고 있습니다. 매출은 제과 부문이 압도적인 비중을 차지하며 중국·베트남·러시아 등 해외에서도 사업을 확장하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3조 3,931억 원으로 전년 대비 6.2% 늘었지만 영업이익은 4,877억 원으로 3.7%, 당기순이익은 3,377억 원으로 29.6% 줄어 매출 성장에도 수익성은 다소 약화됐습니다. 총자산은 6조 1,834억 원으로 늘었고 부채비율은 19.9%로 낮은 편이라 재무구조는 안정적입니다.",
     "segment_breakdown": [
       {
-        "name": "제과(㈜오리온)",
-        "desc": "초코파이·포카칩 등 과자·스낵 제조판매",
-        "revenue_share": 0.96
+        "name": "배당수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.8%",
+        "revenue_share": 0.558,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "영상(㈜쇼박스)",
-        "desc": "영화 투자·배급·제작기획",
-        "revenue_share": 0.018
+        "name": "로열티수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.6%",
+        "revenue_share": 0.346,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "(주)쇼박스와 그 종속회사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.5%",
+        "revenue_share": 0.065,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -173,24 +184,70 @@
       "닥터유 제주용암수",
       "영화 투자·배급(쇼박스)"
     ],
-    "investor_note": "오리온홀딩스는 2017년 지주회사로 전환한 이후 초코파이·포카칩 등을 만드는 제과 자회사 ㈜오리온, 영화 투자·배급사인 ㈜쇼박스, 제주 용암수·바이오 사업을 담당하는 기타 부문을 거느리고 있습니다. 매출은 제과 부문이 압도적인 비중을 차지하며 중국·베트남·러시아 등 해외에서도 사업을 확장하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3조 3,931억 원으로 전년 대비 6.2% 늘었지만 영업이익은 4,877억 원으로 3.7%, 당기순이익은 3,377억 원으로 29.6% 줄어 매출 성장에도 수익성은 다소 약화됐습니다. 총자산은 6조 1,834억 원으로 늘었고 부채비율은 19.9%로 낮은 편이라 재무구조는 안정적입니다."
+    "investor_note": "오리온홀딩스는 2017년 지주회사로 전환한 이후 초코파이·포카칩 등을 만드는 제과 자회사 ㈜오리온, 영화 투자·배급사인 ㈜쇼박스, 제주 용암수·바이오 사업을 담당하는 기타 부문을 거느리고 있습니다. 매출은 제과 부문이 압도적인 비중을 차지하며 중국·베트남·러시아 등 해외에서도 사업을 확장하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3조 3,931억 원으로 전년 대비 6.2% 늘었지만 영업이익은 4,877억 원으로 3.7%, 당기순이익은 3,377억 원으로 29.6% 줄어 매출 성장에도 수익성은 다소 약화됐습니다. 총자산은 6조 1,834억 원으로 늘었고 부채비율은 19.9%로 낮은 편이라 재무구조는 안정적입니다.",
+    "product_service_segments": [
+      {
+        "name": "지주사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.6%",
+        "revenue_share": 0.096,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "배당수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.8%",
+        "revenue_share": 0.558,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "로열티수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.6%",
+        "revenue_share": 0.346,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "(주)쇼박스와 그 종속회사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.5%",
+        "revenue_share": 0.065,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "제과(㈜오리온)",
-      "caption": "초코파이·포카칩 등 과자·스낵 제조판매",
+      "title": "지주사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.6%",
       "kind": "service",
-      "visual": "제과",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "영상(㈜쇼박스)",
-      "caption": "영화 투자·배급·제작기획",
-      "kind": "securities",
-      "visual": "영상",
-      "image": "../data/business_images/business_image_local_default_b.svg",
-      "image_source": "Local curated visual"
+      "title": "배당수익",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "로열티수익",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "(주)쇼박스와 그 종속회사",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

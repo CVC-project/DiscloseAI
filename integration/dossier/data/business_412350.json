@@ -139,9 +139,18 @@
     "segment_finance": "레이저쎌 주식회사의 주요 제품·서비스는 SSD, Foundry, OLED, 배터리, 방산, 철강입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 고객사와의 긴밀한 접점 역할을 수행하며, 고객의 전략, 제품 로드맵 정보 및 경쟁사 동향을 정확히 분석, 고객의 니즈를 발빠르게 충족시키는 판촉활동을 중점적으로 수행하고 있습니다. 고객의경우 북미, 유럽에 개발팀을, 중국 내에 제조시설을 두는 경우가 빈번하여 영업그룹 내 공조가 필수입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "수익증권",
-        "desc": "위탁매매, IB, 운용 등 증권 서비스",
-        "revenue_share": null
+        "name": "국 내",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.0%",
+        "revenue_share": 0.5,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "해 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.0%",
+        "revenue_share": 0.5,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -157,32 +166,40 @@
       "연구기간",
       "연구결과"
     ],
-    "investor_note": "레이저쎌 주식회사의 주요 제품·서비스는 SSD, Foundry, OLED, 배터리, 방산, 철강입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 고객사와의 긴밀한 접점 역할을 수행하며, 고객의 전략, 제품 로드맵 정보 및 경쟁사 동향을 정확히 분석, 고객의 니즈를 발빠르게 충족시키는 판촉활동을 중점적으로 수행하고 있습니다. 고객의경우 북미, 유럽에 개발팀을, 중국 내에 제조시설을 두는 경우가 빈번하여 영업그룹 내 공조가 필수입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "레이저쎌 주식회사의 주요 제품·서비스는 SSD, Foundry, OLED, 배터리, 방산, 철강입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 고객사와의 긴밀한 접점 역할을 수행하며, 고객의 전략, 제품 로드맵 정보 및 경쟁사 동향을 정확히 분석, 고객의 니즈를 발빠르게 충족시키는 판촉활동을 중점적으로 수행하고 있습니다. 고객의경우 북미, 유럽에 개발팀을, 중국 내에 제조시설을 두는 경우가 빈번하여 영업그룹 내 공조가 필수입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "국 내",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.0%",
+        "revenue_share": 0.5,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "해 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.0%",
+        "revenue_share": 0.5,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "Foundry",
-      "caption": "Foundry 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "국 내",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
-      "kind": "display",
-      "visual": "OLED",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "배터리",
-      "caption": "배터리 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "title": "해 외",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -110,24 +110,25 @@
     "segment_finance": "※ 각 부문별 매출액은 부문 간 내부거래를 제거한 금액 기준※ 세부 매출은 [4. 매출 및 수주상황] 항목 참조",
     "segment_breakdown": [
       {
-        "name": "담배사업부문",
-        "desc": "궐련, 차세대담배(HNB) 제조 및 판매",
-        "revenue_share": 0.664
+        "name": "담배",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 66.4%",
+        "revenue_share": 0.664,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "건강기능식품사업부문",
-        "desc": "홍삼, 비홍삼 건강기능식품 제조 및 판매",
-        "revenue_share": 0.173
+        "name": "건강기능식품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.3%",
+        "revenue_share": 0.173,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "부동산사업부문",
-        "desc": "부동산 개발 및 임대 사업",
-        "revenue_share": 0.108
-      },
-      {
-        "name": "기타사업부문",
-        "desc": "의약품, 화장품 연구개발 및 판매",
-        "revenue_share": 0.055
+        "name": "부동산",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.8%",
+        "revenue_share": 0.108,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "investor_note": "(주)케이티앤지는 에쎄, 레종 등 궐련과 릴 솔리드, 릴 하이브리드 같은 차세대담배(담배를 태우지 않고 가열하는 제품)를 주력으로 하는 담배 제조사로, 매출의 66%를 담배사업에서 창출하고 있습니다. 지난해 매출액은 6조 5,797억 원으로 전년 대비 11.3% 증가했으며, 영업이익도 1조 3,437억 원으로 13% 성장해 수익성이 개선되는 모습을 보였습니다(영업이익이란 본업에서 벌어들인 순수 이익을 의미합니다). 담배사업 외에도 정관장, 홍삼정 같은 건강기능식품(17%), 부동산 임대(11%), 의약품·화장품 개발(6%) 등으로 사업을 다각화하고 있습니다. 재무 건전성 측면에서 부채비율이 51.9%로 안정적이며(부채비율이란 자산 중 빌린 돈의 비중을 나타냅니다), 당기순이익의 57.6%를 현금배당으로 주주에게 돌려주는 주주친화적 정책을 펼치고 있습니다. 과거 공시 기반 참고 정보입니다.",
@@ -145,23 +146,54 @@
       "다나한"
     ],
     "raw_moves": [],
-    "utilization": []
+    "utilization": [],
+    "product_service_segments": [
+      {
+        "name": "담배",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 66.4%",
+        "revenue_share": 0.664,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "건강기능식품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.3%",
+        "revenue_share": 0.173,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "부동산",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.8%",
+        "revenue_share": 0.108,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "담배",
-      "caption": "궐련과 차세대 전자담배 판매가 핵심입니다.",
-      "kind": "factory",
-      "visual": "HNB",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 66.4%",
+      "kind": "telecom",
+      "visual": "NET",
       "image": "../data/business_images/business_image_c346f28a524bc889.avif",
       "image_source": "Unsplash"
     },
     {
       "title": "건강기능식품",
-      "caption": "홍삼 등 건강기능식품이 별도 성장 축입니다.",
-      "kind": "bio",
-      "visual": "KGC",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.3%",
+      "kind": "telecom",
+      "visual": "NET",
       "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "부동산",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.8%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
       "image_source": "Unsplash"
     }
   ],

@@ -153,7 +153,22 @@
   "snippets": {
     "overview": "(주)이월드의 주요 제품·서비스는 쥬얼리사업부, 임가공비 등, 제품생산, 애니골드, 테라리제, 악세서리 제조입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 회사는 테마파크 사업부문이 장치산업이라는 특성상 생산설비로 2025년 기말 장부가액 기준 2,897억원의 토지와 건물을 보유하고 있습니다. 생산설비의 현황 등 * 토지 기준시가 : '25년 공시지가, 건물 기준시가 : '25년 지방세 과세시가표준액 당사의 시설 및 설비는 토지와 건물, 구축물 및 기계장치와 시설장치 등이 있으며, 2025년 12월 31일 현재 장부가액은 264,718,855천원으로 전기말 대비 6,865,086천원 감소하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "(주)이월드의 주요 제품·서비스는 쥬얼리사업부, 임가공비 등, 제품생산, 애니골드, 테라리제, 악세서리 제조입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 회사는 테마파크 사업부문이 장치산업이라는 특성상 생산설비로 2025년 기말 장부가액 기준 2,897억원의 토지와 건물을 보유하고 있습니다. 생산설비의 현황 등 * 토지 기준시가 : '25년 공시지가, 건물 기준시가 : '25년 지방세 과세시가표준액 당사의 시설 및 설비는 토지와 건물, 구축물 및 기계장치와 시설장치 등이 있으며, 2025년 12월 31일 현재 장부가액은 264,718,855천원으로 전기말 대비 6,865,086천원 감소하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "식음료수입",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.6%",
+        "revenue_share": 0.056,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품수입",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.3%",
+        "revenue_share": 0.023,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "쥬얼리사업부",
       "임가공비 등",
@@ -165,24 +180,70 @@
       "입장권",
       "상품 판매"
     ],
-    "investor_note": "(주)이월드의 주요 제품·서비스는 쥬얼리사업부, 임가공비 등, 제품생산, 애니골드, 테라리제, 악세서리 제조입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 회사는 테마파크 사업부문이 장치산업이라는 특성상 생산설비로 2025년 기말 장부가액 기준 2,897억원의 토지와 건물을 보유하고 있습니다. 생산설비의 현황 등 * 토지 기준시가 : '25년 공시지가, 건물 기준시가 : '25년 지방세 과세시가표준액 당사의 시설 및 설비는 토지와 건물, 구축물 및 기계장치와 시설장치 등이 있으며, 2025년 12월 31일 현재 장부가액은 264,718,855천원으로 전기말 대비 6,865,086천원 감소하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)이월드의 주요 제품·서비스는 쥬얼리사업부, 임가공비 등, 제품생산, 애니골드, 테라리제, 악세서리 제조입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 회사는 테마파크 사업부문이 장치산업이라는 특성상 생산설비로 2025년 기말 장부가액 기준 2,897억원의 토지와 건물을 보유하고 있습니다. 생산설비의 현황 등 * 토지 기준시가 : '25년 공시지가, 건물 기준시가 : '25년 지방세 과세시가표준액 당사의 시설 및 설비는 토지와 건물, 구축물 및 기계장치와 시설장치 등이 있으며, 2025년 12월 31일 현재 장부가액은 264,718,855천원으로 전기말 대비 6,865,086천원 감소하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "테마파크사업부",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.6%",
+        "revenue_share": 0.246,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "식음료수입",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.6%",
+        "revenue_share": 0.056,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품수입",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.3%",
+        "revenue_share": 0.023,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타수입",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.1%",
+        "revenue_share": 0.031,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "쥬얼리사업부",
-      "caption": "쥬얼리사업부 관련 제품·서비스",
-      "kind": "service",
-      "visual": "쥬얼리사업부",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "title": "테마파크사업부",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.6%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "테마파크사업부",
-      "caption": "테마파크사업부 관련 제품·서비스",
-      "kind": "service",
-      "visual": "테마파크사업부",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "title": "식음료수입",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.6%",
+      "kind": "consumer",
+      "visual": "BEVERAGE",
+      "image": "../data/business_images/business_image_food_beverage.svg",
+      "image_source": "Local visual"
+    },
+    {
+      "title": "상품수입",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.3%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "기타수입",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.1%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

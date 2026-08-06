@@ -155,19 +155,25 @@
     "segment_finance": "KCC건설은 아파트(오퍼스 한강 스위첸)·복합시설 등을 짓는 건축과, 철도·도로 등 토목공사를 함께 하는 종합건설사입니다. 건축이 매출의 77%, 토목이 23%를 차지하며, 도시정비사업과 물류센터 등 다양한 민간·공공 공사를 수행하고 있습니다. 과거 공시 기반 참고 정보로, 최근 영업이익은 883억 원으로 전년보다 36.8% 늘었고 당기순이익은 453억 원으로 184.4% 크게 증가했습니다. 총자산은 1조 5,831억 원으로 7.1% 늘었지만, 부채비율은 186.5%로 자본보다 부채가 많은 편이라 재무구조는 계속 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "건축",
-        "desc": "아파트·오피스텔·복합시설 등 건축공사",
-        "revenue_share": 0.7657
+        "name": "국내도급공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 76.6%",
+        "revenue_share": 0.7657,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "토목",
-        "desc": "도로·철도·지하철 등 토목공사",
-        "revenue_share": 0.2327
+        "name": "토 목",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.3%",
+        "revenue_share": 0.2327,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "분양",
-        "desc": "발코니 확장공사 등 부동산 분양 관련 공사",
-        "revenue_share": 0.0016
+        "name": "분양공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.0016,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -179,32 +185,47 @@
       "관공서 건축(청주시청사)",
       "분양(발코니 확장공사 등)"
     ],
-    "investor_note": "KCC건설은 아파트(오퍼스 한강 스위첸)·복합시설 등을 짓는 건축과, 철도·도로 등 토목공사를 함께 하는 종합건설사입니다. 건축이 매출의 77%, 토목이 23%를 차지하며, 도시정비사업과 물류센터 등 다양한 민간·공공 공사를 수행하고 있습니다. 과거 공시 기반 참고 정보로, 최근 영업이익은 883억 원으로 전년보다 36.8% 늘었고 당기순이익은 453억 원으로 184.4% 크게 증가했습니다. 총자산은 1조 5,831억 원으로 7.1% 늘었지만, 부채비율은 186.5%로 자본보다 부채가 많은 편이라 재무구조는 계속 살펴볼 필요가 있습니다."
+    "investor_note": "KCC건설은 아파트(오퍼스 한강 스위첸)·복합시설 등을 짓는 건축과, 철도·도로 등 토목공사를 함께 하는 종합건설사입니다. 건축이 매출의 77%, 토목이 23%를 차지하며, 도시정비사업과 물류센터 등 다양한 민간·공공 공사를 수행하고 있습니다. 과거 공시 기반 참고 정보로, 최근 영업이익은 883억 원으로 전년보다 36.8% 늘었고 당기순이익은 453억 원으로 184.4% 크게 증가했습니다. 총자산은 1조 5,831억 원으로 7.1% 늘었지만, 부채비율은 186.5%로 자본보다 부채가 많은 편이라 재무구조는 계속 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "국내도급공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 76.6%",
+        "revenue_share": 0.7657,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "토 목",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.3%",
+        "revenue_share": 0.2327,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "분양공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.0016,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "건축",
-      "caption": "아파트·오피스텔·복합시설 등 건축공사",
+      "title": "국내도급공사",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 76.6%",
       "kind": "service",
-      "visual": "건축",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "토목",
-      "caption": "도로·철도·지하철 등 토목공사",
+      "title": "토 목",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.3%",
       "kind": "service",
-      "visual": "토목",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "분양",
-      "caption": "발코니 확장공사 등 부동산 분양 관련 공사",
-      "kind": "service",
-      "visual": "분양",
-      "image": "../data/business_images/business_image_local_housing.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

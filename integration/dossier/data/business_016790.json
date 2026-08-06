@@ -155,14 +155,25 @@
     "segment_finance": "현대사료는 양계·양돈용 배합사료를 만들어 파는 회사로, 매출의 70% 이상이 산란계 등 닭 사육용 사료에서 나오고 양돈사료와 기타 축종용 사료도 함께 판매합니다. 원재료인 옥수수·대두박 대부분을 수입에 의존해 국제 곡물가격과 환율 변동에 실적이 좌우됩니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,130억 원으로 전년 대비 12.0% 줄었지만 영업이익은 49억 원으로 87.9% 늘었습니다. 다만 당기순이익은 43억 원으로 84.6% 줄었고, 부채비율은 25.1%로 재무구조 자체는 안정적인 편이지만 상장적격성 실질심사가 진행 중이라 투자에 각별한 주의가 필요합니다.",
     "segment_breakdown": [
       {
-        "name": "양계사료",
-        "desc": "산란계·육계 등 닭 사육용 배합사료 제조·판매",
-        "revenue_share": 0.7204
+        "name": "사료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 72.0%",
+        "revenue_share": 0.7204,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "양돈사료",
-        "desc": "돼지 사육용 배합사료 제조 및 상품 판매",
-        "revenue_share": 0.1651
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.8%",
+        "revenue_share": 0.1477,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.7%",
+        "revenue_share": 0.0174,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -171,22 +182,44 @@
       "메추리사료",
       "기타사료"
     ],
-    "investor_note": "현대사료는 양계·양돈용 배합사료를 만들어 파는 회사로, 매출의 70% 이상이 산란계 등 닭 사육용 사료에서 나오고 양돈사료와 기타 축종용 사료도 함께 판매합니다. 원재료인 옥수수·대두박 대부분을 수입에 의존해 국제 곡물가격과 환율 변동에 실적이 좌우됩니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,130억 원으로 전년 대비 12.0% 줄었지만 영업이익은 49억 원으로 87.9% 늘었습니다. 다만 당기순이익은 43억 원으로 84.6% 줄었고, 부채비율은 25.1%로 재무구조 자체는 안정적인 편이지만 상장적격성 실질심사가 진행 중이라 투자에 각별한 주의가 필요합니다."
+    "investor_note": "현대사료는 양계·양돈용 배합사료를 만들어 파는 회사로, 매출의 70% 이상이 산란계 등 닭 사육용 사료에서 나오고 양돈사료와 기타 축종용 사료도 함께 판매합니다. 원재료인 옥수수·대두박 대부분을 수입에 의존해 국제 곡물가격과 환율 변동에 실적이 좌우됩니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,130억 원으로 전년 대비 12.0% 줄었지만 영업이익은 49억 원으로 87.9% 늘었습니다. 다만 당기순이익은 43억 원으로 84.6% 줄었고, 부채비율은 25.1%로 재무구조 자체는 안정적인 편이지만 상장적격성 실질심사가 진행 중이라 투자에 각별한 주의가 필요합니다.",
+    "product_service_segments": [
+      {
+        "name": "사료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 72.0%",
+        "revenue_share": 0.7204,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "양돈사료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.8%",
+        "revenue_share": 0.1477,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타사료",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.5%",
+        "revenue_share": 0.1145,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.7%",
+        "revenue_share": 0.0174,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "양계사료",
-      "caption": "산란계·육계 등 닭 사육용 배합사료 제조·판매",
-      "kind": "service",
-      "visual": "양계사료",
-      "image": "../data/business_images/business_image_food_feed.svg",
-      "image_source": "Local visual"
-    },
-    {
-      "title": "양돈사료",
-      "caption": "돼지 사육용 배합사료 제조 및 상품 판매",
-      "kind": "service",
-      "visual": "양돈사료",
+      "title": "사료",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 72.0%",
+      "kind": "consumer",
+      "visual": "FEED",
       "image": "../data/business_images/business_image_food_feed.svg",
       "image_source": "Local visual"
     }

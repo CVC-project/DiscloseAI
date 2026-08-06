@@ -155,24 +155,25 @@
     "segment_finance": "비씨월드제약은 마취통증약·항생제·순환계약 등 전문의약품을 제조·판매하며, 국내 제약사에 원료의약품을 공급하는 CMO·CDMO 사업과 자체 약물전달기술(DDS)을 활용한 해외 라이센싱아웃도 함께 벌이는 제약회사입니다. 매출은 항생제(38%)와 기타처방약(29%)이 큰 비중을 차지하고, 마취통증약(19%)과 순환계약(13%)이 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 757억 원으로 전년 대비 1.3% 늘었고 영업이익은 33.1% 증가했지만, 당기순이익은 적자(-31억 원)를 이어가고 있어 이익의 질을 살펴볼 필요가 있습니다. 부채비율은 143.9%로 자본보다 빚이 더 많은 편이라 재무 부담이 있는 편입니다.",
     "segment_breakdown": [
       {
-        "name": "항생제",
-        "desc": "항생제·결핵치료제 등",
-        "revenue_share": 0.377
-      },
-      {
-        "name": "마취통증약",
-        "desc": "암성통증치료·근이완제·마취진통제",
-        "revenue_share": 0.192
+        "name": "의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.2%",
+        "revenue_share": 0.192,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "순환계약",
-        "desc": "고혈압·고지혈증 치료제",
-        "revenue_share": 0.133
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.3%",
+        "revenue_share": 0.133,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "기술료 등",
-        "desc": "기술이전·연구용역 수익",
-        "revenue_share": 0.004
+        "name": "항생제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.7%",
+        "revenue_share": 0.377,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -186,32 +187,70 @@
       "해외수출 전문의약품",
       "기술 라이센싱아웃"
     ],
-    "investor_note": "비씨월드제약은 마취통증약·항생제·순환계약 등 전문의약품을 제조·판매하며, 국내 제약사에 원료의약품을 공급하는 CMO·CDMO 사업과 자체 약물전달기술(DDS)을 활용한 해외 라이센싱아웃도 함께 벌이는 제약회사입니다. 매출은 항생제(38%)와 기타처방약(29%)이 큰 비중을 차지하고, 마취통증약(19%)과 순환계약(13%)이 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 757억 원으로 전년 대비 1.3% 늘었고 영업이익은 33.1% 증가했지만, 당기순이익은 적자(-31억 원)를 이어가고 있어 이익의 질을 살펴볼 필요가 있습니다. 부채비율은 143.9%로 자본보다 빚이 더 많은 편이라 재무 부담이 있는 편입니다."
+    "investor_note": "비씨월드제약은 마취통증약·항생제·순환계약 등 전문의약품을 제조·판매하며, 국내 제약사에 원료의약품을 공급하는 CMO·CDMO 사업과 자체 약물전달기술(DDS)을 활용한 해외 라이센싱아웃도 함께 벌이는 제약회사입니다. 매출은 항생제(38%)와 기타처방약(29%)이 큰 비중을 차지하고, 마취통증약(19%)과 순환계약(13%)이 뒤를 잇습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 757억 원으로 전년 대비 1.3% 늘었고 영업이익은 33.1% 증가했지만, 당기순이익은 적자(-31억 원)를 이어가고 있어 이익의 질을 살펴볼 필요가 있습니다. 부채비율은 143.9%로 자본보다 빚이 더 많은 편이라 재무 부담이 있는 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.2%",
+        "revenue_share": 0.192,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "순환계약",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.3%",
+        "revenue_share": 0.133,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "항생제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.7%",
+        "revenue_share": 0.377,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타처방약",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.4%",
+        "revenue_share": 0.294,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "항생제",
-      "caption": "항생제·결핵치료제 등",
-      "kind": "service",
-      "visual": "항생제",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "마취통증약",
-      "caption": "암성통증치료·근이완제·마취진통제",
-      "kind": "service",
-      "visual": "마취통증약",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "의약품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.2%",
+      "kind": "bio",
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "순환계약",
-      "caption": "고혈압·고지혈증 치료제",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.3%",
       "kind": "service",
-      "visual": "순환계약",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "항생제",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "기타처방약",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.4%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

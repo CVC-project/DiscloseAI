@@ -155,14 +155,32 @@
     "segment_finance": "제이에스코퍼레이션은 GUESS·Michael Kors 등 글로벌 브랜드에 핸드백을 OEM/ODM 방식으로 공급하는 핸드백 제조부문과, GAP·Old Navy 등에 니트·가먼트를 공급하는 의류 제조부문을 주력으로 하며, 종속기업 서울미라마를 통해 서울 '그랜드하얏트서울' 호텔도 운영하고 있습니다. 매출 비중은 의류(63%), 핸드백(24%), 호텔(13%) 순입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 2,882억 원으로 전년 대비 15.3% 늘었고 영업이익도 15.9% 증가했지만, 당기순이익은 16.1% 줄어 최종적으로 남는 돈은 오히려 감소했습니다. 부채비율은 242.9%로 자본보다 빚이 두 배 이상 많은 편이라 재무 부담을 살펴볼 필요가 있으며, ROE는 16.6%로 자기자본 대비 수익성은 양호합니다.",
     "segment_breakdown": [
       {
-        "name": "의류 제조부문",
-        "desc": "GAP·Old Navy 등 해외 브랜드 OEM 니트·가먼트 생산",
-        "revenue_share": 0.6323
+        "name": "핸드백",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.0%",
+        "revenue_share": 0.2401,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "핸드백 제조부문",
-        "desc": "GUESS·Michael Kors 등 브랜드 핸드백 OEM/ODM 생산",
-        "revenue_share": 0.2409
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.0005,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "핸드백 매출 소계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.1%",
+        "revenue_share": 0.2409,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "의류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 60.7%",
+        "revenue_share": 0.607,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -173,32 +191,54 @@
       "원단",
       "호텔 객실·연회(그랜드하얏트서울)"
     ],
-    "investor_note": "제이에스코퍼레이션은 GUESS·Michael Kors 등 글로벌 브랜드에 핸드백을 OEM/ODM 방식으로 공급하는 핸드백 제조부문과, GAP·Old Navy 등에 니트·가먼트를 공급하는 의류 제조부문을 주력으로 하며, 종속기업 서울미라마를 통해 서울 '그랜드하얏트서울' 호텔도 운영하고 있습니다. 매출 비중은 의류(63%), 핸드백(24%), 호텔(13%) 순입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 2,882억 원으로 전년 대비 15.3% 늘었고 영업이익도 15.9% 증가했지만, 당기순이익은 16.1% 줄어 최종적으로 남는 돈은 오히려 감소했습니다. 부채비율은 242.9%로 자본보다 빚이 두 배 이상 많은 편이라 재무 부담을 살펴볼 필요가 있으며, ROE는 16.6%로 자기자본 대비 수익성은 양호합니다."
+    "investor_note": "제이에스코퍼레이션은 GUESS·Michael Kors 등 글로벌 브랜드에 핸드백을 OEM/ODM 방식으로 공급하는 핸드백 제조부문과, GAP·Old Navy 등에 니트·가먼트를 공급하는 의류 제조부문을 주력으로 하며, 종속기업 서울미라마를 통해 서울 '그랜드하얏트서울' 호텔도 운영하고 있습니다. 매출 비중은 의류(63%), 핸드백(24%), 호텔(13%) 순입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 2,882억 원으로 전년 대비 15.3% 늘었고 영업이익도 15.9% 증가했지만, 당기순이익은 16.1% 줄어 최종적으로 남는 돈은 오히려 감소했습니다. 부채비율은 242.9%로 자본보다 빚이 두 배 이상 많은 편이라 재무 부담을 살펴볼 필요가 있으며, ROE는 16.6%로 자기자본 대비 수익성은 양호합니다.",
+    "product_service_segments": [
+      {
+        "name": "핸드백",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.0%",
+        "revenue_share": 0.2401,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.0005,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "핸드백 매출 소계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.1%",
+        "revenue_share": 0.2409,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "의류",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 60.7%",
+        "revenue_share": 0.607,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "의류 제조부문",
-      "caption": "GAP·Old Navy 등 해외 브랜드 OEM 니트·가먼트 생산",
+      "title": "핸드백",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.0%",
       "kind": "service",
-      "visual": "의류",
-      "image": "../data/business_images/business_image_local_textile.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "핸드백 제조부문",
-      "caption": "GUESS·Michael Kors 등 브랜드 핸드백 OEM/ODM 생산",
+      "title": "의류",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 60.7%",
       "kind": "service",
-      "visual": "핸드백",
-      "image": "../data/business_images/business_image_local_default_b.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "호텔사업부문",
-      "caption": "서울 '그랜드하얏트서울' 호텔 운영(하얏트 위탁경영)",
-      "kind": "service",
-      "visual": "호텔사업부문",
-      "image": "../data/business_images/business_image_local_default_c.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

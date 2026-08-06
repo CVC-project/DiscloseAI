@@ -155,14 +155,32 @@
     "segment_finance": "에이치케이이노엔 주식회사의 주요 제품·서비스는 의약품, 바이오시밀러, 전문의약품, 케이캡, 위식도역류질환 치료제, H&B입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품들의 성장을 통해 2025년 매출액 1조 632억 원, 영업이익 1,109억 원을 기록했습니다. 또한, 2022년부터 가동된 오송 수액신공장을 통해 수액 매출도 매년 안정적으로 증가하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "바이오의약품",
-        "desc": "의약품 관련 제품·서비스",
-        "revenue_share": null
+        "name": "전문의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.4%",
+        "revenue_share": 0.184,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "바이오",
-        "desc": "바이오시밀러 관련 제품·서비스",
-        "revenue_share": null
+        "name": "수액",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.3%",
+        "revenue_share": 0.133,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "에포카인",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.8%",
+        "revenue_share": 0.038,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "로바젯",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.6%",
+        "revenue_share": 0.036,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -175,40 +193,70 @@
       "컨디션",
       "숙취해소 제품"
     ],
-    "investor_note": "에이치케이이노엔 주식회사의 주요 제품·서비스는 의약품, 바이오시밀러, 전문의약품, 케이캡, 위식도역류질환 치료제, H&B입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품들의 성장을 통해 2025년 매출액 1조 632억 원, 영업이익 1,109억 원을 기록했습니다. 또한, 2022년부터 가동된 오송 수액신공장을 통해 수액 매출도 매년 안정적으로 증가하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "에이치케이이노엔 주식회사의 주요 제품·서비스는 의약품, 바이오시밀러, 전문의약품, 케이캡, 위식도역류질환 치료제, H&B입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품들의 성장을 통해 2025년 매출액 1조 632억 원, 영업이익 1,109억 원을 기록했습니다. 또한, 2022년부터 가동된 오송 수액신공장을 통해 수액 매출도 매년 안정적으로 증가하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "전문의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.4%",
+        "revenue_share": 0.184,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "수액",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.3%",
+        "revenue_share": 0.133,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "에포카인",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.8%",
+        "revenue_share": 0.038,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "로바젯",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.6%",
+        "revenue_share": 0.036,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "의약품",
-      "caption": "의약품 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.4%",
       "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "바이오시밀러",
-      "caption": "바이오시밀러 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "수액",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.3%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "케이캡",
-      "caption": "케이캡 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "에포카인",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "위식도역류질환 치료제",
-      "caption": "위식도역류질환 치료제 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "bio",
-      "visual": "BIO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "로바젯",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

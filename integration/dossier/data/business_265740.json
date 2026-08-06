@@ -153,7 +153,29 @@
   "snippets": {
     "overview": "(주)엔에프씨의 주요 제품·서비스는 완제품, 화장품 완제품, 가품목, 나품목, 다품목, 양산중입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 또한, 해외 원료 박람회 및 완제품 전시회에 지속적으로 참가하여 신규 고객 발굴 및 기존 거래선 확대에 주력하고 있으며, 현지 시장 요구에 부합하는 전용 원료 개발 및 기술 세미나 등을 통해 해외 매출 기반을 확대하고 있습니다. 또한 규제 대응을 위한 기술자료 및 시험 데이터를 사전에 확보함으로써 고객사의 제품 개발 과정과 시장 진입을 지원하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "(주)엔에프씨의 주요 제품·서비스는 완제품, 화장품 완제품, 가품목, 나품목, 다품목, 양산중입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 또한, 해외 원료 박람회 및 완제품 전시회에 지속적으로 참가하여 신규 고객 발굴 및 기존 거래선 확대에 주력하고 있으며, 현지 시장 요구에 부합하는 전용 원료 개발 및 기술 세미나 등을 통해 해외 매출 기반을 확대하고 있습니다. 또한 규제 대응을 위한 기술자료 및 시험 데이터를 사전에 확보함으로써 고객사의 제품 개발 과정과 시장 진입을 지원하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.1%",
+        "revenue_share": 0.201,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "벌크",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.008,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.1%",
+        "revenue_share": 0.101,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "완제품",
       "화장품 완제품",
@@ -164,40 +186,62 @@
       "건조중량",
       "총균수"
     ],
-    "investor_note": "(주)엔에프씨의 주요 제품·서비스는 완제품, 화장품 완제품, 가품목, 나품목, 다품목, 양산중입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 또한, 해외 원료 박람회 및 완제품 전시회에 지속적으로 참가하여 신규 고객 발굴 및 기존 거래선 확대에 주력하고 있으며, 현지 시장 요구에 부합하는 전용 원료 개발 및 기술 세미나 등을 통해 해외 매출 기반을 확대하고 있습니다. 또한 규제 대응을 위한 기술자료 및 시험 데이터를 사전에 확보함으로써 고객사의 제품 개발 과정과 시장 진입을 지원하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)엔에프씨의 주요 제품·서비스는 완제품, 화장품 완제품, 가품목, 나품목, 다품목, 양산중입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 또한, 해외 원료 박람회 및 완제품 전시회에 지속적으로 참가하여 신규 고객 발굴 및 기존 거래선 확대에 주력하고 있으며, 현지 시장 요구에 부합하는 전용 원료 개발 및 기술 세미나 등을 통해 해외 매출 기반을 확대하고 있습니다. 또한 규제 대응을 위한 기술자료 및 시험 데이터를 사전에 확보함으로써 고객사의 제품 개발 과정과 시장 진입을 지원하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.1%",
+        "revenue_share": 0.201,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "벌크",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.008,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "완제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.8%",
+        "revenue_share": 0.688,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.1%",
+        "revenue_share": 0.101,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
+      "title": "소재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.1%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
       "title": "완제품",
-      "caption": "완제품 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.8%",
       "kind": "material",
       "visual": "MAT",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "가품목",
-      "caption": "가품목 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.1%",
       "kind": "material",
       "visual": "MAT",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "나품목",
-      "caption": "나품목 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "다품목",
-      "caption": "다품목 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

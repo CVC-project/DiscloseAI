@@ -155,9 +155,32 @@
     "segment_finance": "에이텍은 은행 ATM·CD 등 금융자동화기기를 만드는 회사로, 자회사 알파엔지니어링·태양알앤피를 통해 물류센터용 자동화 설비(스태커크레인, 컨베이어, 랙 등)도 함께 다룹니다. 매출의 대부분(약 96%)은 금융자동화 부문에서 나오며, 포르투갈·러시아·미국 등 해외 금융기관에도 ATM을 공급하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,602억 원으로 전년 대비 246.5% 늘었고 영업이익도 크게 증가했는데, 2024년 11월 컴퓨터사업부를 분할하면서 매출 구성이 바뀐 영향이 있습니다. 다만 당기순이익은 3억 원으로 97.5% 줄었고, 부채비율 74.1%에 자기자본이익률(ROE)은 0.4%에 그쳐 수익성은 아직 낮은 편입니다.",
     "segment_breakdown": [
       {
-        "name": "물류자동화",
-        "desc": "물류센터용 자동화 설비(스태커크레인·컨베이어·랙)",
-        "revenue_share": 0.04
+        "name": "금융자동화",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.0%",
+        "revenue_share": 0.4396,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 43.0%",
+        "revenue_share": 0.4295,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.1%",
+        "revenue_share": 0.0306,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임대",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
+        "revenue_share": 0.016,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -173,40 +196,70 @@
       "컨베이어",
       "물류 자동화 랙(Rack)"
     ],
-    "investor_note": "에이텍은 은행 ATM·CD 등 금융자동화기기를 만드는 회사로, 자회사 알파엔지니어링·태양알앤피를 통해 물류센터용 자동화 설비(스태커크레인, 컨베이어, 랙 등)도 함께 다룹니다. 매출의 대부분(약 96%)은 금융자동화 부문에서 나오며, 포르투갈·러시아·미국 등 해외 금융기관에도 ATM을 공급하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,602억 원으로 전년 대비 246.5% 늘었고 영업이익도 크게 증가했는데, 2024년 11월 컴퓨터사업부를 분할하면서 매출 구성이 바뀐 영향이 있습니다. 다만 당기순이익은 3억 원으로 97.5% 줄었고, 부채비율 74.1%에 자기자본이익률(ROE)은 0.4%에 그쳐 수익성은 아직 낮은 편입니다."
+    "investor_note": "에이텍은 은행 ATM·CD 등 금융자동화기기를 만드는 회사로, 자회사 알파엔지니어링·태양알앤피를 통해 물류센터용 자동화 설비(스태커크레인, 컨베이어, 랙 등)도 함께 다룹니다. 매출의 대부분(약 96%)은 금융자동화 부문에서 나오며, 포르투갈·러시아·미국 등 해외 금융기관에도 ATM을 공급하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,602억 원으로 전년 대비 246.5% 늘었고 영업이익도 크게 증가했는데, 2024년 11월 컴퓨터사업부를 분할하면서 매출 구성이 바뀐 영향이 있습니다. 다만 당기순이익은 3억 원으로 97.5% 줄었고, 부채비율 74.1%에 자기자본이익률(ROE)은 0.4%에 그쳐 수익성은 아직 낮은 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "금융자동화",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.0%",
+        "revenue_share": 0.4396,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 43.0%",
+        "revenue_share": 0.4295,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.1%",
+        "revenue_share": 0.0306,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임대",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
+        "revenue_share": 0.016,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "ATM(현금자동입출금기)",
-      "caption": "ATM(현금자동입출금기) 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "금융자동화",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "CD(현금인출기)",
-      "caption": "CD(현금인출기) 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "용역",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 43.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "무인정산기",
-      "caption": "무인정산기 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.1%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "디지털데스크",
-      "caption": "디지털데스크 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "임대",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -155,19 +155,11 @@
     "segment_finance": "대동금속은 회주철·구상흑연 정밀주조 기술로 농기계·자동차 엔진용 실린더헤드/블록, 건설기계용 메인컨트롤밸브(MCV), 반도체용 진공펌프 부품 등을 만드는 주물 전문기업입니다. 매출은 산업기계·일반산업용 부품이 51.8%, 자동차·농기계용 실린더헤드가 43.7%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,018억 원으로 전년 대비 2.3% 늘었고 영업이익도 1억 원 흑자로 전환됐지만, 당기순이익은 13억 원 적자를 이어갔습니다(적자폭은 76.1% 줄어듦). 부채비율은 127.0%로 자본보다 부채가 더 많은 편이라 재무 부담을 눈여겨볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "산업기계·일반산업 부품",
-        "desc": "MCV·유압부품·반도체 진공펌프 부품 등",
-        "revenue_share": 0.518
-      },
-      {
-        "name": "자동차·농기계용 실린더헤드/블록",
-        "desc": "현대기아차·대동·구보다 등에 납품하는 엔진 주물부품",
-        "revenue_share": 0.437
-      },
-      {
         "name": "상품",
-        "desc": "기타 매입 판매 상품",
-        "revenue_share": 0.045
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.5%",
+        "revenue_share": 0.045,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -177,24 +169,32 @@
       "반도체용 진공펌프 부품",
       "구상흑연·회주철 주물 소재"
     ],
-    "investor_note": "대동금속은 회주철·구상흑연 정밀주조 기술로 농기계·자동차 엔진용 실린더헤드/블록, 건설기계용 메인컨트롤밸브(MCV), 반도체용 진공펌프 부품 등을 만드는 주물 전문기업입니다. 매출은 산업기계·일반산업용 부품이 51.8%, 자동차·농기계용 실린더헤드가 43.7%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,018억 원으로 전년 대비 2.3% 늘었고 영업이익도 1억 원 흑자로 전환됐지만, 당기순이익은 13억 원 적자를 이어갔습니다(적자폭은 76.1% 줄어듦). 부채비율은 127.0%로 자본보다 부채가 더 많은 편이라 재무 부담을 눈여겨볼 필요가 있습니다."
+    "investor_note": "대동금속은 회주철·구상흑연 정밀주조 기술로 농기계·자동차 엔진용 실린더헤드/블록, 건설기계용 메인컨트롤밸브(MCV), 반도체용 진공펌프 부품 등을 만드는 주물 전문기업입니다. 매출은 산업기계·일반산업용 부품이 51.8%, 자동차·농기계용 실린더헤드가 43.7%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,018억 원으로 전년 대비 2.3% 늘었고 영업이익도 1억 원 흑자로 전환됐지만, 당기순이익은 13억 원 적자를 이어갔습니다(적자폭은 76.1% 줄어듦). 부채비율은 127.0%로 자본보다 부채가 더 많은 편이라 재무 부담을 눈여겨볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 43.7%",
+        "revenue_share": 0.437,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.5%",
+        "revenue_share": 0.045,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "산업기계·일반산업 부품",
-      "caption": "MCV·유압부품·반도체 진공펌프 부품 등",
-      "kind": "chip",
-      "visual": "산업기계",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
       "title": "상품",
-      "caption": "기타 매입 판매 상품",
-      "kind": "service",
-      "visual": "상품",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.5%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

@@ -155,19 +155,25 @@
     "segment_finance": "대웅은 '삶의 질 향상을 선도하는 글로벌 헬스케어 그룹'을 표방하는 지주회사로, 보툴리눔톡신 '나보타'와 위식도역류질환 치료제 '펙수클루' 등을 만드는 대웅제약(약 64%), 원료의약품을 생산하는 대웅바이오(약 29%), 자가면역질환 신약을 연구하는 한올바이오파마(약 7%) 등 총 35개 종속회사를 거느리고 있습니다. 나보타는 지난해 처음으로 연 매출 2,000억 원을 돌파하며 수출 비중 84%로 해외에서 강세를 보이고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2조 683억 원으로 전년 대비 6.8% 늘었고 당기순이익은 231.0% 크게 증가했지만, 영업이익은 7.1% 줄었습니다. 부채비율은 82.9%로 비교적 안정적인 수준입니다.",
     "segment_breakdown": [
       {
-        "name": "대웅제약(완제의약품)",
-        "desc": "나보타·우루사·펙수클루 등 전문의약품 제조·판매",
-        "revenue_share": 0.64
+        "name": "우루사(ETC,OTC)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.2%",
+        "revenue_share": 0.072,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "대웅바이오(원료의약품)",
-        "desc": "원료의약품 제조 및 완제의약품 공급",
-        "revenue_share": 0.29
+        "name": "펙수클루",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.1%",
+        "revenue_share": 0.071,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "한올바이오파마(신약연구)",
-        "desc": "자가면역질환 등 바이오신약 연구개발 및 의약품 판매",
-        "revenue_share": 0.07
+        "name": "크레젯",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+        "revenue_share": 0.026,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -182,32 +188,62 @@
       "바이오탑(프로바이오틱스)",
       "엘리가드(전립선암치료제)"
     ],
-    "investor_note": "대웅은 '삶의 질 향상을 선도하는 글로벌 헬스케어 그룹'을 표방하는 지주회사로, 보툴리눔톡신 '나보타'와 위식도역류질환 치료제 '펙수클루' 등을 만드는 대웅제약(약 64%), 원료의약품을 생산하는 대웅바이오(약 29%), 자가면역질환 신약을 연구하는 한올바이오파마(약 7%) 등 총 35개 종속회사를 거느리고 있습니다. 나보타는 지난해 처음으로 연 매출 2,000억 원을 돌파하며 수출 비중 84%로 해외에서 강세를 보이고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2조 683억 원으로 전년 대비 6.8% 늘었고 당기순이익은 231.0% 크게 증가했지만, 영업이익은 7.1% 줄었습니다. 부채비율은 82.9%로 비교적 안정적인 수준입니다."
+    "investor_note": "대웅은 '삶의 질 향상을 선도하는 글로벌 헬스케어 그룹'을 표방하는 지주회사로, 보툴리눔톡신 '나보타'와 위식도역류질환 치료제 '펙수클루' 등을 만드는 대웅제약(약 64%), 원료의약품을 생산하는 대웅바이오(약 29%), 자가면역질환 신약을 연구하는 한올바이오파마(약 7%) 등 총 35개 종속회사를 거느리고 있습니다. 나보타는 지난해 처음으로 연 매출 2,000억 원을 돌파하며 수출 비중 84%로 해외에서 강세를 보이고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2조 683억 원으로 전년 대비 6.8% 늘었고 당기순이익은 231.0% 크게 증가했지만, 영업이익은 7.1% 줄었습니다. 부채비율은 82.9%로 비교적 안정적인 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.5%",
+        "revenue_share": 0.165,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "우루사(ETC,OTC)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.2%",
+        "revenue_share": 0.072,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "펙수클루",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.1%",
+        "revenue_share": 0.071,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "크레젯",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+        "revenue_share": 0.026,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "대웅제약(완제의약품)",
-      "caption": "나보타·우루사·펙수클루 등 전문의약품 제조·판매",
-      "kind": "bio",
-      "visual": "대웅제약",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "우루사(ETC,OTC)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "대웅바이오(원료의약품)",
-      "caption": "원료의약품 제조 및 완제의약품 공급",
-      "kind": "bio",
-      "visual": "대웅바이오",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "펙수클루",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.1%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "한올바이오파마(신약연구)",
-      "caption": "자가면역질환 등 바이오신약 연구개발 및 의약품 판매",
-      "kind": "bio",
-      "visual": "한올바이오파마",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "크레젯",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

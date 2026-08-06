@@ -155,14 +155,25 @@
     "segment_finance": "동신건설은 경북 지역 중심의 종합건설사로, 관급 도로·철도 토목공사부터 경주읍성 성벽복원 같은 문화재 복원공사까지 폭넓게 수행합니다. 2025년 매출액은 333억 원으로 51.6% 줄었고, 영업이익 -22억 원으로 적자 전환했지만 당기순이익은 1억 원으로 근소한 흑자를 유지했습니다. 총자산은 1,099억 원(-2.4%), 부채비율 12.9%, ROE 0.2%입니다. 감사인은 공사 진행률에 따른 수익인식의 정확성을 핵심 점검사항으로 짚었습니다. 과거 공시 기반 참고 정보입니다.",
     "segment_breakdown": [
       {
-        "name": "토목",
-        "desc": "관급 도로·철도·하수관로 등 토목공사",
-        "revenue_share": 0.6933
+        "name": "국내도급공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 94.8%",
+        "revenue_share": 0.9479,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "건축",
-        "desc": "관급·민간 건축공사(체육시설·문화재 복원 등)",
-        "revenue_share": 0.2107
+        "name": "민간",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "토목공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 96.4%",
+        "revenue_share": 0.9643,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -172,24 +183,55 @@
       "문화재 복원공사(경주읍성 성벽복원)",
       "관공서·체육시설 건축공사"
     ],
-    "investor_note": "동신건설은 경북 지역 중심의 종합건설사로, 관급 도로·철도 토목공사부터 경주읍성 성벽복원 같은 문화재 복원공사까지 폭넓게 수행합니다. 2025년 매출액은 333억 원으로 51.6% 줄었고, 영업이익 -22억 원으로 적자 전환했지만 당기순이익은 1억 원으로 근소한 흑자를 유지했습니다. 총자산은 1,099억 원(-2.4%), 부채비율 12.9%, ROE 0.2%입니다. 감사인은 공사 진행률에 따른 수익인식의 정확성을 핵심 점검사항으로 짚었습니다. 과거 공시 기반 참고 정보입니다."
+    "investor_note": "동신건설은 경북 지역 중심의 종합건설사로, 관급 도로·철도 토목공사부터 경주읍성 성벽복원 같은 문화재 복원공사까지 폭넓게 수행합니다. 2025년 매출액은 333억 원으로 51.6% 줄었고, 영업이익 -22억 원으로 적자 전환했지만 당기순이익은 1억 원으로 근소한 흑자를 유지했습니다. 총자산은 1,099억 원(-2.4%), 부채비율 12.9%, ROE 0.2%입니다. 감사인은 공사 진행률에 따른 수익인식의 정확성을 핵심 점검사항으로 짚었습니다. 과거 공시 기반 참고 정보입니다.",
+    "product_service_segments": [
+      {
+        "name": "국내도급공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 94.8%",
+        "revenue_share": 0.9479,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "민간",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "토목공사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 96.4%",
+        "revenue_share": 0.9643,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "토목",
-      "caption": "관급 도로·철도·하수관로 등 토목공사",
+      "title": "국내도급공사",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 94.8%",
       "kind": "service",
-      "visual": "토목",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "건축",
-      "caption": "관급·민간 건축공사(체육시설·문화재 복원 등)",
+      "title": "민간",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
       "kind": "service",
-      "visual": "건축",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "토목·플랜트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 96.4%",
+      "kind": "service",
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_5184e050831a4460.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -155,29 +155,32 @@
     "segment_finance": "대양전기공업은 선박용 조명과 항해통신장비를 주력으로 하면서 철도차량용 배전반, 자동차용 압력센서, 종속회사를 통한 잠수함용 축전지까지 만드는 방산·조선기자재 기업입니다. 48년간 쌓은 기술력으로 국내 선박용 조명 시장에서 높은 점유율을 유지하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,300억 원으로 전년 대비 17.2% 늘었고 영업이익은 270억 원으로 72.5% 크게 증가했으며, 당기순이익도 247억 원으로 26.5% 늘었습니다. 부채비율은 19.6%로 낮아 재무구조가 안정적입니다.",
     "segment_breakdown": [
       {
-        "name": "조선(조명)",
-        "desc": "선박용 LED·방폭조명 등 선박 조명기기 생산",
-        "revenue_share": 0.417
+        "name": "조명",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.8%",
+        "revenue_share": 0.228,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "방폭조명",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.4%",
+        "revenue_share": 0.074,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "전자시스템",
-        "desc": "선박용 항해통신장비·냉동컨테이너 모니터링시스템",
-        "revenue_share": 0.23
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.0%",
+        "revenue_share": 0.23,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "전기시스템",
-        "desc": "선박·철도차량용 배전반 등 전기시스템",
-        "revenue_share": 0.172
-      },
-      {
-        "name": "방위산업(한국특수전지)",
-        "desc": "잠수함용 연축전지 등 방산 축전지 제조",
-        "revenue_share": null
-      },
-      {
-        "name": "자동차(압력센서)",
-        "desc": "ESC·수소차용 압력센서 등 자동차 부품",
-        "revenue_share": null
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.4%",
+        "revenue_share": 0.074,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -190,40 +193,70 @@
       "ESC용 압력센서",
       "수소차 압력센서"
     ],
-    "investor_note": "대양전기공업은 선박용 조명과 항해통신장비를 주력으로 하면서 철도차량용 배전반, 자동차용 압력센서, 종속회사를 통한 잠수함용 축전지까지 만드는 방산·조선기자재 기업입니다. 48년간 쌓은 기술력으로 국내 선박용 조명 시장에서 높은 점유율을 유지하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,300억 원으로 전년 대비 17.2% 늘었고 영업이익은 270억 원으로 72.5% 크게 증가했으며, 당기순이익도 247억 원으로 26.5% 늘었습니다. 부채비율은 19.6%로 낮아 재무구조가 안정적입니다."
+    "investor_note": "대양전기공업은 선박용 조명과 항해통신장비를 주력으로 하면서 철도차량용 배전반, 자동차용 압력센서, 종속회사를 통한 잠수함용 축전지까지 만드는 방산·조선기자재 기업입니다. 48년간 쌓은 기술력으로 국내 선박용 조명 시장에서 높은 점유율을 유지하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,300억 원으로 전년 대비 17.2% 늘었고 영업이익은 270억 원으로 72.5% 크게 증가했으며, 당기순이익도 247억 원으로 26.5% 늘었습니다. 부채비율은 19.6%로 낮아 재무구조가 안정적입니다.",
+    "product_service_segments": [
+      {
+        "name": "조명",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.8%",
+        "revenue_share": 0.228,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "방폭조명",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.4%",
+        "revenue_share": 0.074,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전자시스템",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.0%",
+        "revenue_share": 0.23,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전기시스템",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.4%",
+        "revenue_share": 0.074,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "조선(조명)",
-      "caption": "선박용 LED·방폭조명 등 선박 조명기기 생산",
+      "title": "조명",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.8%",
       "kind": "ship",
-      "visual": "조선",
-      "image": "../data/business_images/business_image_local_ship.svg",
-      "image_source": "Local curated visual"
+      "visual": "SHIP",
+      "image": "../data/business_images/business_image_5184e050831a4460.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "방폭조명",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.4%",
+      "kind": "ship",
+      "visual": "SHIP",
+      "image": "../data/business_images/business_image_5184e050831a4460.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "전자시스템",
-      "caption": "선박용 항해통신장비·냉동컨테이너 모니터링시스템",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.0%",
       "kind": "ship",
-      "visual": "전자시스템",
-      "image": "../data/business_images/business_image_141eab6519656e30.jpg",
-      "image_source": "Wikimedia Commons"
+      "visual": "SHIP",
+      "image": "../data/business_images/business_image_5184e050831a4460.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "전기시스템",
-      "caption": "선박·철도차량용 배전반 등 전기시스템",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.4%",
       "kind": "ship",
-      "visual": "전기시스템",
-      "image": "../data/business_images/business_image_local_ship.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "방위산업(한국특수전지)",
-      "caption": "잠수함용 연축전지 등 방산 축전지 제조",
-      "kind": "service",
-      "visual": "방위산업",
-      "image": "../data/business_images/business_image_4ae102473975707c.jpg",
-      "image_source": "Wikimedia Commons"
+      "visual": "SHIP",
+      "image": "../data/business_images/business_image_5184e050831a4460.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

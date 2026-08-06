@@ -155,24 +155,32 @@
     "segment_finance": "삼양식품은 삼양라면·불닭볶음면을 앞세운 면류를 중심으로 스낵, 소스·조미소재, 냉동식품, 뉴트리션까지 사업을 넓힌 글로벌 식품 제조기업입니다. 매출의 약 92%가 면·스낵 사업에서 나오며, 불닭볶음면의 해외 인기로 미국·중국·일본 등 해외 법인 매출이 빠르게 늘고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2조 3,517억 원으로 전년 대비 36.1% 늘었고 영업이익·순이익도 각각 52.1%, 43.3% 증가해 수익성이 함께 좋아졌지만, 부채비율은 72.7%로 다소 오른 편입니다.",
     "segment_breakdown": [
       {
-        "name": "면스낵",
-        "desc": "봉지면·용기면·스낵류(짱구·사또밥 등)",
-        "revenue_share": 0.917
-      },
-      {
-        "name": "소스·조미소재",
-        "desc": "불닭소스 등 소스·조미소재",
-        "revenue_share": 0.03
-      },
-      {
-        "name": "냉동",
-        "desc": "만두류·떡갈비류 등 냉동식품",
-        "revenue_share": 0.026
+        "name": "식품의 제조 및 판매 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 91.7%",
+        "revenue_share": 0.917,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "뉴트리션",
-        "desc": "백색우유·기능성식품 등",
-        "revenue_share": 0.001
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.001,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "소스조미소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.03,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "냉동",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+        "revenue_share": 0.026,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -189,30 +197,52 @@
       "만두류",
       "떡갈비류"
     ],
-    "investor_note": "삼양식품은 삼양라면·불닭볶음면을 앞세운 면류를 중심으로 스낵, 소스·조미소재, 냉동식품, 뉴트리션까지 사업을 넓힌 글로벌 식품 제조기업입니다. 매출의 약 92%가 면·스낵 사업에서 나오며, 불닭볶음면의 해외 인기로 미국·중국·일본 등 해외 법인 매출이 빠르게 늘고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2조 3,517억 원으로 전년 대비 36.1% 늘었고 영업이익·순이익도 각각 52.1%, 43.3% 증가해 수익성이 함께 좋아졌지만, 부채비율은 72.7%로 다소 오른 편입니다."
+    "investor_note": "삼양식품은 삼양라면·불닭볶음면을 앞세운 면류를 중심으로 스낵, 소스·조미소재, 냉동식품, 뉴트리션까지 사업을 넓힌 글로벌 식품 제조기업입니다. 매출의 약 92%가 면·스낵 사업에서 나오며, 불닭볶음면의 해외 인기로 미국·중국·일본 등 해외 법인 매출이 빠르게 늘고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2조 3,517억 원으로 전년 대비 36.1% 늘었고 영업이익·순이익도 각각 52.1%, 43.3% 증가해 수익성이 함께 좋아졌지만, 부채비율은 72.7%로 다소 오른 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "식품의 제조 및 판매 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 91.7%",
+        "revenue_share": 0.917,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "뉴트리션",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.001,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "소스조미소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.03,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "냉동",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+        "revenue_share": 0.026,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "면스낵",
-      "caption": "봉지면·용기면·스낵류(짱구·사또밥 등)",
-      "kind": "service",
-      "visual": "면스낵",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "소스·조미소재",
-      "caption": "불닭소스 등 소스·조미소재",
-      "kind": "material",
-      "visual": "소스",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "냉동",
-      "caption": "만두류·떡갈비류 등 냉동식품",
+      "title": "양념·소스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
       "kind": "consumer",
-      "visual": "냉동",
+      "visual": "SAUCE",
+      "image": "../data/business_images/business_image_food_sauce.svg",
+      "image_source": "Local visual"
+    },
+    {
+      "title": "가공식품·간편식",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+      "kind": "consumer",
+      "visual": "CANNED",
       "image": "../data/business_images/business_image_food_packaged.svg",
       "image_source": "Local visual"
     }

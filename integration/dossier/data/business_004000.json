@@ -153,7 +153,15 @@
   "snippets": {
     "overview": "롯데정밀화학은 방수·방청 페인트 원료인 ECH, 가성소다, 암모니아, 질소산화물 저감제 유록스 등을 만드는 케미칼사업부와, 건축·의약·식품용 셀룰로스 계열 소재인 메셀로스·애니코트 등을 만드는 그린소재사업부로 구성된 정밀화학 기업입니다. 케미칼사업부가 매출의 약 55%, 그린소재사업부가 약 30%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 7,526억 원으로 전년 대비 4.9% 늘었고 영업이익은 47.6%, 당기순이익은 191.6% 각각 크게 증가했습니다. 부채비율은 12.7%로 매우 낮아 재무구조가 안정적입니다.",
     "segment_finance": "롯데정밀화학은 방수·방청 페인트 원료인 ECH, 가성소다, 암모니아, 질소산화물 저감제 유록스 등을 만드는 케미칼사업부와, 건축·의약·식품용 셀룰로스 계열 소재인 메셀로스·애니코트 등을 만드는 그린소재사업부로 구성된 정밀화학 기업입니다. 케미칼사업부가 매출의 약 55%, 그린소재사업부가 약 30%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 7,526억 원으로 전년 대비 4.9% 늘었고 영업이익은 47.6%, 당기순이익은 191.6% 각각 크게 증가했습니다. 부채비율은 12.7%로 매우 낮아 재무구조가 안정적입니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.0%",
+        "revenue_share": 0.23,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "ECH",
       "가성소다",
@@ -164,24 +172,70 @@
       "애니코트",
       "애니애디"
     ],
-    "investor_note": "롯데정밀화학은 방수·방청 페인트 원료인 ECH, 가성소다, 암모니아, 질소산화물 저감제 유록스 등을 만드는 케미칼사업부와, 건축·의약·식품용 셀룰로스 계열 소재인 메셀로스·애니코트 등을 만드는 그린소재사업부로 구성된 정밀화학 기업입니다. 케미칼사업부가 매출의 약 55%, 그린소재사업부가 약 30%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 7,526억 원으로 전년 대비 4.9% 늘었고 영업이익은 47.6%, 당기순이익은 191.6% 각각 크게 증가했습니다. 부채비율은 12.7%로 매우 낮아 재무구조가 안정적입니다."
+    "investor_note": "롯데정밀화학은 방수·방청 페인트 원료인 ECH, 가성소다, 암모니아, 질소산화물 저감제 유록스 등을 만드는 케미칼사업부와, 건축·의약·식품용 셀룰로스 계열 소재인 메셀로스·애니코트 등을 만드는 그린소재사업부로 구성된 정밀화학 기업입니다. 케미칼사업부가 매출의 약 55%, 그린소재사업부가 약 30%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 7,526억 원으로 전년 대비 4.9% 늘었고 영업이익은 47.6%, 당기순이익은 191.6% 각각 크게 증가했습니다. 부채비율은 12.7%로 매우 낮아 재무구조가 안정적입니다.",
+    "product_service_segments": [
+      {
+        "name": "케미칼사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 47.4%",
+        "revenue_share": 0.474,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.0%",
+        "revenue_share": 0.23,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "그린소재사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.1%",
+        "revenue_share": 0.331,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "공통 및 기타",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.1%",
+        "revenue_share": 0.021,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "케미칼사업부",
-      "caption": "ECH·가성소다·암모니아·유록스 등 염소·암모니아 계열 제품",
-      "kind": "service",
-      "visual": "케미칼사업부",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "title": "케미칼사업부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 47.4%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "그린소재사업부",
-      "caption": "건축·의약·식품용 셀룰로스 계열 소재(메셀로스·애니코트 등)",
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.0%",
       "kind": "material",
-      "visual": "그린소재사업부",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "그린소재사업부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.1%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "공통 및 기타",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.1%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

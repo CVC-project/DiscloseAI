@@ -155,24 +155,18 @@
     "segment_finance": "가온그룹(주)의 주요 제품·서비스는 DRAM, OTT, OTT 등, AI, KAON 등, 네트워크입니다. 각 나라별 고객사의 요구사항에 맞춘 제품 및 서비스를 공급함에 따라 고객사별 제품 및 서비스의 종류가 상이하여 가격변동 추이 산정이 어렵습니다. 제품 또는 서비스의 가격변동 추이 당사는 세계 전역을 대상으로 사업을 영위하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "DRAM",
-        "desc": "DRAM 관련 제품·서비스",
-        "revenue_share": null
-      },
-      {
         "name": "OTT",
-        "desc": "OTT, OTT 등 관련 제품·서비스",
-        "revenue_share": null
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 60.3%",
+        "revenue_share": 0.603,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "OTT 등",
-        "desc": "OTT, OTT 등 관련 제품·서비스",
-        "revenue_share": null
-      },
-      {
-        "name": "AI",
-        "desc": "AI 관련 제품·서비스",
-        "revenue_share": null
+        "name": "네트워크",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.7%",
+        "revenue_share": 0.397,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -188,32 +182,40 @@
       "성과",
       "개발완료 시기"
     ],
-    "investor_note": "가온그룹(주)의 주요 제품·서비스는 DRAM, OTT, OTT 등, AI, KAON 등, 네트워크입니다. 각 나라별 고객사의 요구사항에 맞춘 제품 및 서비스를 공급함에 따라 고객사별 제품 및 서비스의 종류가 상이하여 가격변동 추이 산정이 어렵습니다. 제품 또는 서비스의 가격변동 추이 당사는 세계 전역을 대상으로 사업을 영위하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "가온그룹(주)의 주요 제품·서비스는 DRAM, OTT, OTT 등, AI, KAON 등, 네트워크입니다. 각 나라별 고객사의 요구사항에 맞춘 제품 및 서비스를 공급함에 따라 고객사별 제품 및 서비스의 종류가 상이하여 가격변동 추이 산정이 어렵습니다. 제품 또는 서비스의 가격변동 추이 당사는 세계 전역을 대상으로 사업을 영위하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "OTT",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 60.3%",
+        "revenue_share": 0.603,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "네트워크",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.7%",
+        "revenue_share": 0.397,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "DRAM",
-      "caption": "DRAM 관련 제품·서비스",
-      "kind": "chip",
-      "visual": "DRAM",
-      "image": "../data/business_images/business_image_10774ca82ea41202.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
       "title": "OTT",
-      "caption": "OTT, OTT 등 관련 제품·서비스",
-      "kind": "service",
-      "visual": "OTT",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 60.3%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "OTT 등",
-      "caption": "OTT, OTT 등 관련 제품·서비스",
-      "kind": "service",
-      "visual": "OTT",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "title": "네트워크",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.7%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

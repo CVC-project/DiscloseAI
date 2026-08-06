@@ -155,14 +155,25 @@
     "segment_finance": "삼화전기는 국내 콘덴서 종합 제조업체로, 생활가전·산업·전장용에 쓰이는 전해콘덴서를 주력으로 생산하고 자체 유통 상품도 함께 판매합니다(제조 약 52%, 유통 약 40%). 5G 통신과 자동차 부품용 고품질 콘덴서에 강점을 두고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,300억 원으로 전년 대비 1.3% 줄었고 영업이익은 120억 원(-51.4%), 순이익은 111억 원(-46.2%) 감소했습니다. 부채비율은 50.0%로 안정적인 편이며, 감사보고서에서는 특수관계자와의 거래 공시 적정성이 핵심감사사항으로 다뤄졌습니다.",
     "segment_breakdown": [
       {
-        "name": "전해콘덴서 제조",
-        "desc": "생활가전·전장·산업용 콘덴서 생산",
-        "revenue_share": 0.515
+        "name": "콘덴서 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.5%",
+        "revenue_share": 0.515,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "상품(유통)",
-        "desc": "콘덴서·자재 유통 판매",
-        "revenue_share": 0.398
+        "name": "Green-Cap",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.4%",
+        "revenue_share": 0.024,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.8%",
+        "revenue_share": 0.398,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -172,24 +183,55 @@
       "하이브리드콘덴서",
       "Green-Cap"
     ],
-    "investor_note": "삼화전기는 국내 콘덴서 종합 제조업체로, 생활가전·산업·전장용에 쓰이는 전해콘덴서를 주력으로 생산하고 자체 유통 상품도 함께 판매합니다(제조 약 52%, 유통 약 40%). 5G 통신과 자동차 부품용 고품질 콘덴서에 강점을 두고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,300억 원으로 전년 대비 1.3% 줄었고 영업이익은 120억 원(-51.4%), 순이익은 111억 원(-46.2%) 감소했습니다. 부채비율은 50.0%로 안정적인 편이며, 감사보고서에서는 특수관계자와의 거래 공시 적정성이 핵심감사사항으로 다뤄졌습니다."
+    "investor_note": "삼화전기는 국내 콘덴서 종합 제조업체로, 생활가전·산업·전장용에 쓰이는 전해콘덴서를 주력으로 생산하고 자체 유통 상품도 함께 판매합니다(제조 약 52%, 유통 약 40%). 5G 통신과 자동차 부품용 고품질 콘덴서에 강점을 두고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,300억 원으로 전년 대비 1.3% 줄었고 영업이익은 120억 원(-51.4%), 순이익은 111억 원(-46.2%) 감소했습니다. 부채비율은 50.0%로 안정적인 편이며, 감사보고서에서는 특수관계자와의 거래 공시 적정성이 핵심감사사항으로 다뤄졌습니다.",
+    "product_service_segments": [
+      {
+        "name": "콘덴서 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.5%",
+        "revenue_share": 0.515,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Green-Cap",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.4%",
+        "revenue_share": 0.024,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.8%",
+        "revenue_share": 0.398,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "전해콘덴서 제조",
-      "caption": "생활가전·전장·산업용 콘덴서 생산",
-      "kind": "consumer",
-      "visual": "전해콘덴서",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "title": "전자부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 51.5%",
+      "kind": "chip",
+      "visual": "MLCC",
+      "image": "../data/business_images/business_image_76a8c8f5ba93d5d3.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "상품(유통)",
-      "caption": "콘덴서·자재 유통 판매",
-      "kind": "service",
-      "visual": "상품",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "title": "Green-Cap",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.4%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "상 품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.8%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

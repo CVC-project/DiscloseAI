@@ -155,14 +155,32 @@
     "segment_finance": "삼현철강은 코일 전·절단 가공, 철판류·형강류 가공 및 판매를 주력으로 하는 철강 가공업체로, 철구조물·파이프파일·자동차 내장재 등 다양한 철강 제품을 생산·유통하고 있습니다. 자체 제조(약 51%)와 상품 유통(약 49%)이 비슷한 비중을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,179억 원으로 전년 대비 2.5% 감소했지만 영업이익은 50억 원(+43.2%), 순이익은 63억 원(+15.2%)으로 늘었습니다. 부채비율은 10.4%로 매우 낮아 재무구조가 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "제조/도매(코일·철판 가공)",
-        "desc": "철구조물·자동차 부품용 철강 가공·판매",
-        "revenue_share": 0.506
+        "name": "제조/도매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.3%",
+        "revenue_share": 0.4933,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "도매(상품)",
-        "desc": "조선·교량·건설용 철강 상품 유통",
-        "revenue_share": 0.494
+        "name": "임가공",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.3%",
+        "revenue_share": 0.0127,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "도매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.4%",
+        "revenue_share": 0.494,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,24 +192,70 @@
       "형강",
       "후판 가공품"
     ],
-    "investor_note": "삼현철강은 코일 전·절단 가공, 철판류·형강류 가공 및 판매를 주력으로 하는 철강 가공업체로, 철구조물·파이프파일·자동차 내장재 등 다양한 철강 제품을 생산·유통하고 있습니다. 자체 제조(약 51%)와 상품 유통(약 49%)이 비슷한 비중을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,179억 원으로 전년 대비 2.5% 감소했지만 영업이익은 50억 원(+43.2%), 순이익은 63억 원(+15.2%)으로 늘었습니다. 부채비율은 10.4%로 매우 낮아 재무구조가 안정적인 편입니다."
+    "investor_note": "삼현철강은 코일 전·절단 가공, 철판류·형강류 가공 및 판매를 주력으로 하는 철강 가공업체로, 철구조물·파이프파일·자동차 내장재 등 다양한 철강 제품을 생산·유통하고 있습니다. 자체 제조(약 51%)와 상품 유통(약 49%)이 비슷한 비중을 차지합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,179억 원으로 전년 대비 2.5% 감소했지만 영업이익은 50억 원(+43.2%), 순이익은 63억 원(+15.2%)으로 늘었습니다. 부채비율은 10.4%로 매우 낮아 재무구조가 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "제조/도매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.3%",
+        "revenue_share": 0.4933,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임가공",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.3%",
+        "revenue_share": 0.0127,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "도매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.4%",
+        "revenue_share": 0.494,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "제조/도매(코일·철판 가공)",
-      "caption": "철구조물·자동차 부품용 철강 가공·판매",
-      "kind": "auto",
-      "visual": "제조",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
+      "title": "제조/도매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.3%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "도매(상품)",
-      "caption": "조선·교량·건설용 철강 상품 유통",
-      "kind": "ship",
-      "visual": "도매",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "title": "임가공",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.3%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "도매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.4%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "총 계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

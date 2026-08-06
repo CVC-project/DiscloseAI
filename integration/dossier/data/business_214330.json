@@ -155,19 +155,25 @@
     "segment_finance": "금호에이치티는 자동차 전면·후면 조명에 쓰이는 LED모듈과 백열전구 등 자동차부품을 주력으로 하면서, 항체 기술을 활용한 바이오 신약 연구개발과 기술이전 사업도 함께 운영하는 회사입니다. 매출의 94%가 자동차부품에서 나오고 바이오의약과 대전방지 소재가 나머지를 채웁니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,854억 원으로 전년 대비 13.4% 줄었고 영업이익도 47.4% 감소했으며, 당기순이익은 232억 원 손실로 적자 폭이 더 커졌습니다. 부채비율은 42.5%로 관리 가능한 수준이지만 수익성 저하는 지켜볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "자동차부품",
-        "desc": "자동차용 LED모듈·백열전구·BMA 등 조명·전자부품 생산",
-        "revenue_share": 0.943
-      },
-      {
-        "name": "바이오의약",
-        "desc": "항체 기반 치료·진단제 연구개발 및 신약 기술이전",
-        "revenue_share": 0.049
+        "name": "자동차 부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 94.3%",
+        "revenue_share": 0.943,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "대전방지",
-        "desc": "전자제품 포장용 대전방지 Foam·Sheet 생산",
-        "revenue_share": 0.008
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.008,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "바이오 의약",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.9%",
+        "revenue_share": 0.049,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -177,31 +183,46 @@
       "대전방지 Foam/Sheet",
       "바이오 신약 기술이전"
     ],
-    "investor_note": "금호에이치티는 자동차 전면·후면 조명에 쓰이는 LED모듈과 백열전구 등 자동차부품을 주력으로 하면서, 항체 기술을 활용한 바이오 신약 연구개발과 기술이전 사업도 함께 운영하는 회사입니다. 매출의 94%가 자동차부품에서 나오고 바이오의약과 대전방지 소재가 나머지를 채웁니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,854억 원으로 전년 대비 13.4% 줄었고 영업이익도 47.4% 감소했으며, 당기순이익은 232억 원 손실로 적자 폭이 더 커졌습니다. 부채비율은 42.5%로 관리 가능한 수준이지만 수익성 저하는 지켜볼 필요가 있습니다."
+    "investor_note": "금호에이치티는 자동차 전면·후면 조명에 쓰이는 LED모듈과 백열전구 등 자동차부품을 주력으로 하면서, 항체 기술을 활용한 바이오 신약 연구개발과 기술이전 사업도 함께 운영하는 회사입니다. 매출의 94%가 자동차부품에서 나오고 바이오의약과 대전방지 소재가 나머지를 채웁니다. 과거 공시 기반 참고 정보로, 최근 매출액은 3,854억 원으로 전년 대비 13.4% 줄었고 영업이익도 47.4% 감소했으며, 당기순이익은 232억 원 손실로 적자 폭이 더 커졌습니다. 부채비율은 42.5%로 관리 가능한 수준이지만 수익성 저하는 지켜볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "자동차 부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 94.3%",
+        "revenue_share": 0.943,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "대전방지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.008,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "바이오 의약",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.9%",
+        "revenue_share": 0.049,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "자동차부품",
-      "caption": "자동차용 LED모듈·백열전구·BMA 등 조명·전자부품 생산",
+      "title": "자동차 부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 94.3%",
       "kind": "auto",
-      "visual": "자동차부품",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "바이오의약",
-      "caption": "항체 기반 치료·진단제 연구개발 및 신약 기술이전",
-      "kind": "bio",
-      "visual": "바이오의약",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "대전방지",
-      "caption": "전자제품 포장용 대전방지 Foam·Sheet 생산",
-      "kind": "service",
-      "visual": "대전방지",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "title": "바이오 의약",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.9%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
       "image_source": "Unsplash"
     }
   ],

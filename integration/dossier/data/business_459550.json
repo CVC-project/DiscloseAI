@@ -89,7 +89,22 @@
   "snippets": {
     "overview": "주식회사 알트의 주요 제품·서비스는 배터리, 특징, 매출처, 서비스로봇, 사업자, 배달플랫폼사입니다. 수주상황 당사의 수주잔고 상세내용은 제품가격 및 판매대수 등 영업과 관련된 비밀사항이며, 관련 내용을 공시할 경우 당사 및 고객사의 사업 등에 현저한 손실을 초래할 수 있다고 판단됩니다. 타겟군의 사용성 및 고객 피드백을 면밀히 검토하여, 결합형 추가 디바이스/악세서리 또는 앱, AI 기능 등의 개발 또는 연동 등을 통하여 제품의 기존 사용성에 새로운 가치를 제공하는 판매 전략을 추진하고자 합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "주식회사 알트의 주요 제품·서비스는 배터리, 특징, 매출처, 서비스로봇, 사업자, 배달플랫폼사입니다. 수주상황 당사의 수주잔고 상세내용은 제품가격 및 판매대수 등 영업과 관련된 비밀사항이며, 관련 내용을 공시할 경우 당사 및 고객사의 사업 등에 현저한 손실을 초래할 수 있다고 판단됩니다. 타겟군의 사용성 및 고객 피드백을 면밀히 검토하여, 결합형 추가 디바이스/악세서리 또는 앱, AI 기능 등의 개발 또는 연동 등을 통하여 제품의 기존 사용성에 새로운 가치를 제공하는 판매 전략을 추진하고자 합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "모바일",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 76.9%",
+        "revenue_share": 0.769,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "미디어",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.8%",
+        "revenue_share": 0.2275,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "배터리",
       "매출처",
@@ -103,24 +118,40 @@
       "AI5",
       "마이크 내장넷플릭스"
     ],
-    "investor_note": "주식회사 알트의 주요 제품·서비스는 배터리, 특징, 매출처, 서비스로봇, 사업자, 배달플랫폼사입니다. 수주상황 당사의 수주잔고 상세내용은 제품가격 및 판매대수 등 영업과 관련된 비밀사항이며, 관련 내용을 공시할 경우 당사 및 고객사의 사업 등에 현저한 손실을 초래할 수 있다고 판단됩니다. 타겟군의 사용성 및 고객 피드백을 면밀히 검토하여, 결합형 추가 디바이스/악세서리 또는 앱, AI 기능 등의 개발 또는 연동 등을 통하여 제품의 기존 사용성에 새로운 가치를 제공하는 판매 전략을 추진하고자 합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사 알트의 주요 제품·서비스는 배터리, 특징, 매출처, 서비스로봇, 사업자, 배달플랫폼사입니다. 수주상황 당사의 수주잔고 상세내용은 제품가격 및 판매대수 등 영업과 관련된 비밀사항이며, 관련 내용을 공시할 경우 당사 및 고객사의 사업 등에 현저한 손실을 초래할 수 있다고 판단됩니다. 타겟군의 사용성 및 고객 피드백을 면밀히 검토하여, 결합형 추가 디바이스/악세서리 또는 앱, AI 기능 등의 개발 또는 연동 등을 통하여 제품의 기존 사용성에 새로운 가치를 제공하는 판매 전략을 추진하고자 합니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "모바일",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 76.9%",
+        "revenue_share": 0.769,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "미디어",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.8%",
+        "revenue_share": 0.2275,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "미디어사업부문",
-      "caption": "미디어 관련 제품·서비스",
-      "kind": "service",
-      "visual": "미디어사업부문",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "title": "모바일",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 76.9%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "인터넷 멀티미디어 방송사업법",
-      "caption": "미디어 관련 제품·서비스",
-      "kind": "service",
-      "visual": "인터넷",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "title": "미디어",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.8%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

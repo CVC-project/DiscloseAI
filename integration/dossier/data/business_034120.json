@@ -156,18 +156,24 @@
     "segment_breakdown": [
       {
         "name": "지상파 TV 광고",
-        "desc": "TV 방송 프로그램에 붙는 광고 판매",
-        "revenue_share": 0.313
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.3%",
+        "revenue_share": 0.313,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "라디오 광고",
-        "desc": "AM·FM 라디오 광고 판매",
-        "revenue_share": 0.027
+        "name": "AM-RADIO 광고",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.005,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "프로그램 판매 등 콘텐츠유통",
-        "desc": "자체 제작 콘텐츠를 국내외 OTT·IPTV·케이블 등에 판매",
-        "revenue_share": 0.661
+        "name": "FM-RADIO 광고",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.2%",
+        "revenue_share": 0.022,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -176,32 +182,62 @@
       "라디오 광고",
       "프로그램 판매(콘텐츠유통)"
     ],
-    "investor_note": "SBS는 지상파 방송을 기반으로 콘텐츠를 제작하고 TV·라디오 광고 판매, 프로그램 판매 등 콘텐츠유통 사업을 함께 운영하는 방송사입니다. 매출의 약 66%는 프로그램 판매 등 콘텐츠유통에서, 나머지는 지상파 TV·라디오 광고에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 84억 원으로 전년 대비 3.6% 줄었으나 영업이익은 181억 원으로 적자에서 흑자로 전환됐습니다. 다만 당기순이익은 79억 원으로 전년보다 76.5% 줄어 순이익 규모는 크게 축소됐습니다. 부채비율은 57.4%로 무난한 수준입니다."
+    "investor_note": "SBS는 지상파 방송을 기반으로 콘텐츠를 제작하고 TV·라디오 광고 판매, 프로그램 판매 등 콘텐츠유통 사업을 함께 운영하는 방송사입니다. 매출의 약 66%는 프로그램 판매 등 콘텐츠유통에서, 나머지는 지상파 TV·라디오 광고에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 84억 원으로 전년 대비 3.6% 줄었으나 영업이익은 181억 원으로 적자에서 흑자로 전환됐습니다. 다만 당기순이익은 79억 원으로 전년보다 76.5% 줄어 순이익 규모는 크게 축소됐습니다. 부채비율은 57.4%로 무난한 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "지상파 TV 광고",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.3%",
+        "revenue_share": 0.313,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "AM-RADIO 광고",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.005,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "FM-RADIO 광고",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.2%",
+        "revenue_share": 0.022,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "프로그램 판매 등 기타",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 66.1%",
+        "revenue_share": 0.661,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "지상파 TV 광고",
-      "caption": "TV 방송 프로그램에 붙는 광고 판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.3%",
       "kind": "platform",
-      "visual": "지상파",
+      "visual": "APP",
       "image": "../data/business_images/business_image_141eab6519656e30.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "라디오 광고",
-      "caption": "AM·FM 라디오 광고 판매",
+      "title": "FM-RADIO 광고",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.2%",
       "kind": "platform",
-      "visual": "라디오",
-      "image": "../data/business_images/business_image_local_content.svg",
-      "image_source": "Local curated visual"
+      "visual": "APP",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "프로그램 판매 등 콘텐츠유통",
-      "caption": "자체 제작 콘텐츠를 국내외 OTT·IPTV·케이블 등에 판매",
-      "kind": "platform",
-      "visual": "프로그램",
-      "image": "../data/business_images/business_image_141eab6519656e30.jpg",
-      "image_source": "Wikimedia Commons"
+      "title": "프로그램 판매 등 기타",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 66.1%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

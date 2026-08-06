@@ -155,9 +155,32 @@
     "segment_finance": "이연제약은 1964년 설립된 전문의약품 제조사로, 순환기·항생제·점안제·소화기 등 다양한 처방의약품을 만들고 있으며, CT용 조영제 '옵티레이'를 독점 수입판매하고 타크로리무스 등 원료의약품도 함께 생산합니다. 매출은 자체 제품이 약 68%, 조영제 등 상품이 약 24%를 차지합니다. 최근에는 충주에 바이오·케미칼 공장을 새로 지어 위탁생산(CMO)과 신약 파이프라인 개발 사업으로 영역을 넓히는 중입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,459억 원으로 전년 대비 1.6% 줄었고, 영업손실 302억 원과 당기순손실 296억 원으로 전년 흑자에서 적자로 전환되어 신규 투자에 따른 비용 부담이 실적에 영향을 준 것으로 보입니다. 부채비율은 111.1%로 자본보다 빚이 다소 많은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "상품(조영제 등)",
-        "desc": "CT용 조영제 옵티레이 등 독점 수입판매",
-        "revenue_share": 0.239
+        "name": "의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.6%",
+        "revenue_share": 0.146,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "항생제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.8%",
+        "revenue_share": 0.128,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "점안제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.5%",
+        "revenue_share": 0.075,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "소화기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
+        "revenue_share": 0.063,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -170,24 +193,70 @@
       "테이코플라닌(원료의약품)",
       "바이오의약품 위탁생산(CMO, 충주공장)"
     ],
-    "investor_note": "이연제약은 1964년 설립된 전문의약품 제조사로, 순환기·항생제·점안제·소화기 등 다양한 처방의약품을 만들고 있으며, CT용 조영제 '옵티레이'를 독점 수입판매하고 타크로리무스 등 원료의약품도 함께 생산합니다. 매출은 자체 제품이 약 68%, 조영제 등 상품이 약 24%를 차지합니다. 최근에는 충주에 바이오·케미칼 공장을 새로 지어 위탁생산(CMO)과 신약 파이프라인 개발 사업으로 영역을 넓히는 중입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,459억 원으로 전년 대비 1.6% 줄었고, 영업손실 302억 원과 당기순손실 296억 원으로 전년 흑자에서 적자로 전환되어 신규 투자에 따른 비용 부담이 실적에 영향을 준 것으로 보입니다. 부채비율은 111.1%로 자본보다 빚이 다소 많은 편이라 재무 부담을 살펴볼 필요가 있습니다."
+    "investor_note": "이연제약은 1964년 설립된 전문의약품 제조사로, 순환기·항생제·점안제·소화기 등 다양한 처방의약품을 만들고 있으며, CT용 조영제 '옵티레이'를 독점 수입판매하고 타크로리무스 등 원료의약품도 함께 생산합니다. 매출은 자체 제품이 약 68%, 조영제 등 상품이 약 24%를 차지합니다. 최근에는 충주에 바이오·케미칼 공장을 새로 지어 위탁생산(CMO)과 신약 파이프라인 개발 사업으로 영역을 넓히는 중입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,459억 원으로 전년 대비 1.6% 줄었고, 영업손실 302억 원과 당기순손실 296억 원으로 전년 흑자에서 적자로 전환되어 신규 투자에 따른 비용 부담이 실적에 영향을 준 것으로 보입니다. 부채비율은 111.1%로 자본보다 빚이 다소 많은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.6%",
+        "revenue_share": 0.146,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "항생제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.8%",
+        "revenue_share": 0.128,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "점안제",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.5%",
+        "revenue_share": 0.075,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "소화기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
+        "revenue_share": 0.063,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "상품(조영제 등)",
-      "caption": "CT용 조영제 옵티레이 등 독점 수입판매",
-      "kind": "service",
-      "visual": "상품",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "의약품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.6%",
+      "kind": "bio",
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "의약품 제조업",
-      "caption": "의약품 제조업을 중심으로 매출을 만듭니다.",
+      "title": "항생제",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.8%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "점안제",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "소화기",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

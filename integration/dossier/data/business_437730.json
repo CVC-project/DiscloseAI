@@ -123,24 +123,25 @@
     "segment_finance": "삼현은 모터·제어기·감속기를 통합한 '3-in-1' 솔루션으로 자동차 전동화 부품을 만드는 정밀모터 전문기업입니다. CVVD·DCT·SBW 등 모빌리티용 전장부품이 매출의 대부분(약 83%)을 차지하고, 무인화 방산용 구동모터·제어기(7%)와 로봇 관절모듈 등 로봇 사업(2%)으로도 영역을 넓히고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 950억원으로 전년 대비 5.4% 줄었고 영업이익은 8억원으로 85.4% 크게 감소했지만, 당기순이익은 96억원으로 오히려 16.6% 늘었습니다. 총자산은 2,020억원으로 44.1% 증가했고 부채비율은 53.4%로 비교적 안정적인 수준입니다.",
     "segment_breakdown": [
       {
-        "name": "모빌리티(전장부품)",
-        "desc": "CVVD·DCT·SBW 등 자동차 전동화 구동부품",
-        "revenue_share": 0.83
+        "name": "DCT",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.0%",
+        "revenue_share": 0.22,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "방산",
-        "desc": "무인화 방산용 구동모터·제어기",
-        "revenue_share": 0.07
+        "name": "SBW",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.0%",
+        "revenue_share": 0.14,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "로봇/항공",
-        "desc": "로봇 관절모듈 등 로봇용 구동부품",
-        "revenue_share": 0.02
-      },
-      {
-        "name": "연구소(R&D용역)",
-        "desc": "전동화 부문 기술·시험 용역",
-        "revenue_share": 0.07
+        "name": "Disconnect Motor",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.03,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -155,38 +156,60 @@
       "고하중 자율주행로봇(HAMR)",
       "VCU"
     ],
-    "investor_note": "삼현은 모터·제어기·감속기를 통합한 '3-in-1' 솔루션으로 자동차 전동화 부품을 만드는 정밀모터 전문기업입니다. CVVD·DCT·SBW 등 모빌리티용 전장부품이 매출의 대부분(약 83%)을 차지하고, 무인화 방산용 구동모터·제어기(7%)와 로봇 관절모듈 등 로봇 사업(2%)으로도 영역을 넓히고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 950억원으로 전년 대비 5.4% 줄었고 영업이익은 8억원으로 85.4% 크게 감소했지만, 당기순이익은 96억원으로 오히려 16.6% 늘었습니다. 총자산은 2,020억원으로 44.1% 증가했고 부채비율은 53.4%로 비교적 안정적인 수준입니다."
+    "investor_note": "삼현은 모터·제어기·감속기를 통합한 '3-in-1' 솔루션으로 자동차 전동화 부품을 만드는 정밀모터 전문기업입니다. CVVD·DCT·SBW 등 모빌리티용 전장부품이 매출의 대부분(약 83%)을 차지하고, 무인화 방산용 구동모터·제어기(7%)와 로봇 관절모듈 등 로봇 사업(2%)으로도 영역을 넓히고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 950억원으로 전년 대비 5.4% 줄었고 영업이익은 8억원으로 85.4% 크게 감소했지만, 당기순이익은 96억원으로 오히려 16.6% 늘었습니다. 총자산은 2,020억원으로 44.1% 증가했고 부채비율은 53.4%로 비교적 안정적인 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "제품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 43.0%",
+        "revenue_share": 0.43,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "DCT",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.0%",
+        "revenue_share": 0.22,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "SBW",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.0%",
+        "revenue_share": 0.14,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Disconnect Motor",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.03,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "모빌리티(전장부품)",
-      "caption": "CVVD·DCT·SBW 등 자동차 전동화 구동부품",
+      "title": "DCT",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.0%",
       "kind": "auto",
-      "visual": "모빌리티",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "방산",
-      "caption": "무인화 방산용 구동모터·제어기",
-      "kind": "service",
-      "visual": "방산",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "로봇/항공",
-      "caption": "로봇 관절모듈 등 로봇용 구동부품",
+      "title": "SBW",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.0%",
       "kind": "auto",
-      "visual": "로봇",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "연구소(R&D용역)",
-      "caption": "전동화 부문 기술·시험 용역",
-      "kind": "service",
-      "visual": "연구소",
+      "title": "Disconnect Motor",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+      "kind": "auto",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     }

@@ -155,19 +155,25 @@
     "segment_finance": "컨설팅/SI 매출의 경우, 프로젝트 단위 별로 계약을 체결하며, 대부분이 경쟁 입찰 형태로 진행됩니다. 일반적으로 당사의 사업별 매출(수익)은 투입 원가를 기준으로 일정 수준의 마진을 적용하고, 고객사와 최종 협의를 통해 정해집니다.",
     "segment_breakdown": [
       {
-        "name": "은행/보험/카드/증권",
-        "desc": "은행, 증권, 보험 관련 제품·서비스",
-        "revenue_share": null
+        "name": "운영유지보수",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.5%",
+        "revenue_share": 0.685,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "유안타증권",
-        "desc": "증권 관련 제품·서비스",
-        "revenue_share": null
+        "name": "컨설팅/SI",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.7%",
+        "revenue_share": 0.177,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "신한라이프생명보험",
-        "desc": "보험 관련 제품·서비스",
-        "revenue_share": null
+        "name": "전산상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.8%",
+        "revenue_share": 0.138,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -180,40 +186,55 @@
       "항공",
       "설계"
     ],
-    "investor_note": "컨설팅/SI 매출의 경우, 프로젝트 단위 별로 계약을 체결하며, 대부분이 경쟁 입찰 형태로 진행됩니다. 일반적으로 당사의 사업별 매출(수익)은 투입 원가를 기준으로 일정 수준의 마진을 적용하고, 고객사와 최종 협의를 통해 정해집니다."
+    "investor_note": "컨설팅/SI 매출의 경우, 프로젝트 단위 별로 계약을 체결하며, 대부분이 경쟁 입찰 형태로 진행됩니다. 일반적으로 당사의 사업별 매출(수익)은 투입 원가를 기준으로 일정 수준의 마진을 적용하고, 고객사와 최종 협의를 통해 정해집니다.",
+    "product_service_segments": [
+      {
+        "name": "운영유지보수",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.5%",
+        "revenue_share": 0.685,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "컨설팅/SI",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.7%",
+        "revenue_share": 0.177,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전산상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.8%",
+        "revenue_share": 0.138,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "데이터센터 인프라",
-      "caption": "서버와 네트워크 장비가 안정적으로 돌아가도록 데이터센터 기반을 구축·운영합니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_datacenter.svg",
-      "image_source": "Local curated visual"
+      "title": "운영유지보수",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 68.5%",
+      "kind": "consumer",
+      "visual": "INGREDIENT",
+      "image": "../data/business_images/business_image_food_ingredient.svg",
+      "image_source": "Local visual"
     },
     {
-      "title": "IT 인프라 운영",
-      "caption": "서버, 네트워크, 보안 장비 같은 기업 IT 기반을 운영·관리하는 서비스입니다.",
+      "title": "시스템 구축·통합",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.7%",
       "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "visual": "SI",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "시스템 유지보수",
-      "caption": "고객사의 업무 시스템과 장비가 안정적으로 돌아가도록 운영·점검하는 IT 서비스입니다.",
+      "title": "전산상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.8%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "데이터베이스",
-      "caption": "데이터베이스 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

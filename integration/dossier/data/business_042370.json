@@ -155,19 +155,25 @@
     "segment_finance": "비츠로테크는 전력·전지·특수부문 자회사(비츠로일렉트릭, 비츠로셀, 비츠로넥스텍)를 둔 지주회사로, 스마트미터·군사통신용 리튬전지(전지부문, 매출의 56%)와 고압·저압 차단기 등 전력기기(전력부문, 34%), 항공우주·플라즈마 특수 제작(특수부문, 8%)을 함께 영위하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 4,322억 원으로 전년보다 0.9% 늘었고 영업이익은 557억 원으로 8.9%, 당기순이익은 426억 원으로 2.8% 증가했습니다. 부채비율은 32.8%로 낮은 편이라 재무구조는 안정적인 모습입니다.",
     "segment_breakdown": [
       {
-        "name": "전지부문(비츠로셀)",
-        "desc": "스마트미터·군사통신용 리튬일차전지 제조",
-        "revenue_share": 0.562
+        "name": "전력부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.9%",
+        "revenue_share": 0.069,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "전력부문(비츠로일렉트릭)",
-        "desc": "고압·저압 차단기, 계전기기, 수배전반 제조",
-        "revenue_share": 0.338
+        "name": "특수부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.4%",
+        "revenue_share": 0.084,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "특수부문(비츠로넥스텍)",
-        "desc": "플라즈마 폐액처리, 항공우주 시제품 등 주문제작",
-        "revenue_share": 0.084
+        "name": "전지부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 56.2%",
+        "revenue_share": 0.562,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -182,32 +188,62 @@
       "EDLC",
       "앰플전지"
     ],
-    "investor_note": "비츠로테크는 전력·전지·특수부문 자회사(비츠로일렉트릭, 비츠로셀, 비츠로넥스텍)를 둔 지주회사로, 스마트미터·군사통신용 리튬전지(전지부문, 매출의 56%)와 고압·저압 차단기 등 전력기기(전력부문, 34%), 항공우주·플라즈마 특수 제작(특수부문, 8%)을 함께 영위하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 4,322억 원으로 전년보다 0.9% 늘었고 영업이익은 557억 원으로 8.9%, 당기순이익은 426억 원으로 2.8% 증가했습니다. 부채비율은 32.8%로 낮은 편이라 재무구조는 안정적인 모습입니다."
+    "investor_note": "비츠로테크는 전력·전지·특수부문 자회사(비츠로일렉트릭, 비츠로셀, 비츠로넥스텍)를 둔 지주회사로, 스마트미터·군사통신용 리튬전지(전지부문, 매출의 56%)와 고압·저압 차단기 등 전력기기(전력부문, 34%), 항공우주·플라즈마 특수 제작(특수부문, 8%)을 함께 영위하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 4,322억 원으로 전년보다 0.9% 늘었고 영업이익은 557억 원으로 8.9%, 당기순이익은 426억 원으로 2.8% 증가했습니다. 부채비율은 32.8%로 낮은 편이라 재무구조는 안정적인 모습입니다.",
+    "product_service_segments": [
+      {
+        "name": "전력부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.9%",
+        "revenue_share": 0.069,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.0%",
+        "revenue_share": 0.18,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "특수부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.4%",
+        "revenue_share": 0.084,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전지부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 56.2%",
+        "revenue_share": 0.562,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "전지부문(비츠로셀)",
-      "caption": "스마트미터·군사통신용 리튬일차전지 제조",
-      "kind": "telecom",
-      "visual": "전지부문",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "전력부문(비츠로일렉트릭)",
-      "caption": "고압·저압 차단기, 계전기기, 수배전반 제조",
+      "title": "전력기기·발전",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.9%",
       "kind": "power",
-      "visual": "전력부문",
-      "image": "../data/business_images/business_image_local_power.svg",
-      "image_source": "Local curated visual"
+      "visual": "POWER",
+      "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "특수부문(비츠로넥스텍)",
-      "caption": "플라즈마 폐액처리, 항공우주 시제품 등 주문제작",
+      "title": "특수부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.4%",
       "kind": "service",
-      "visual": "특수부문",
-      "image": "../data/business_images/business_image_a36fe45e187e177c.jpg",
-      "image_source": "Wikimedia"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "전지부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 56.2%",
+      "kind": "battery",
+      "visual": "BATTERY",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

@@ -155,9 +155,25 @@
     "segment_finance": "(주)매커스의 주요 제품·서비스는 비메모리 반도체, 반도체 유통, 전자부품입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. (단위 : 백만원) 수주상황 비메모리 반도체 시장의 특성상 장기간이 공급계약은 미비하며, 고객이 요구할때 해당 품목에 대한 단가를 확정하고 매출을 발생 시킵니다. 당사는 비메모리 반도체 솔루션을 제공하는 업체로 고객사의 개발 초기단계부터 고난이도의 교육과 기술지원을 통해 고객의 제품을 개발할 수 있도록 솔루션을 제공하는 사업을 하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "반도체 유통",
-        "desc": "비메모리 반도체와 전자부품 유통",
-        "revenue_share": null
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 96.2%",
+        "revenue_share": 0.9625,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매커스시스템즈",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.2%",
+        "revenue_share": 0.0221,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매커스인베스트먼트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.0099,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -165,32 +181,39 @@
       "반도체 유통",
       "전자부품"
     ],
-    "investor_note": "(주)매커스의 주요 제품·서비스는 비메모리 반도체, 반도체 유통, 전자부품입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. (단위 : 백만원) 수주상황 비메모리 반도체 시장의 특성상 장기간이 공급계약은 미비하며, 고객이 요구할때 해당 품목에 대한 단가를 확정하고 매출을 발생 시킵니다. 당사는 비메모리 반도체 솔루션을 제공하는 업체로 고객사의 개발 초기단계부터 고난이도의 교육과 기술지원을 통해 고객의 제품을 개발할 수 있도록 솔루션을 제공하는 사업을 하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)매커스의 주요 제품·서비스는 비메모리 반도체, 반도체 유통, 전자부품입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. (단위 : 백만원) 수주상황 비메모리 반도체 시장의 특성상 장기간이 공급계약은 미비하며, 고객이 요구할때 해당 품목에 대한 단가를 확정하고 매출을 발생 시킵니다. 당사는 비메모리 반도체 솔루션을 제공하는 업체로 고객사의 개발 초기단계부터 고난이도의 교육과 기술지원을 통해 고객의 제품을 개발할 수 있도록 솔루션을 제공하는 사업을 하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 96.2%",
+        "revenue_share": 0.9625,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매커스시스템즈",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.2%",
+        "revenue_share": 0.0221,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매커스인베스트먼트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.0099,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "반도체 유통",
-      "caption": "비메모리 반도체와 전자부품 유통",
-      "kind": "chip",
-      "visual": "반도체",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "비메모리 반도체",
-      "caption": "비메모리 반도체 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "chip",
-      "visual": "비메모리",
-      "image": "../data/business_images/business_image_10774ca82ea41202.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "전자부품",
-      "caption": "전자부품 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "auto",
-      "visual": "전자부품",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "title": "매커스시스템즈",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

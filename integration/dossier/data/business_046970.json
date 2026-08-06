@@ -155,19 +155,25 @@
     "segment_finance": "우리로는 광통신 부품을 만들고 IT 저장장치와 음향기기도 유통하는 회사입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 424억 원으로 전년보다 10.3% 줄었고 영업손실 6억 원, 당기순손실 7억 원입니다. 부채비율은 44.1%로 낮은 편이지만 광통신 사업부 손상평가가 핵심 감사 이슈였습니다.",
     "segment_breakdown": [
       {
-        "name": "광통신",
-        "desc": "광분배기, AWG, 포토다이오드, 단일광자검출소자 등 광통신 핵심부품",
-        "revenue_share": 0.317
+        "name": "광분배기(PLC)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.6%",
+        "revenue_share": 0.086,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "SI·저장장치",
-        "desc": "Western Digital HDD·SSD 등 IT 저장장치 유통",
-        "revenue_share": 0.467
+        "name": "광다이오드(PD)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.2%",
+        "revenue_share": 0.232,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "음향기기",
-        "desc": "KLIPSCH, JAMO 등 오디오·스피커 유통",
-        "revenue_share": 0.216
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.7%",
+        "revenue_share": 0.217,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -179,32 +185,70 @@
       "HDD·SSD 저장장치",
       "KLIPSCH·JAMO 음향기기"
     ],
-    "investor_note": "우리로는 광통신 부품을 만들고 IT 저장장치와 음향기기도 유통하는 회사입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 424억 원으로 전년보다 10.3% 줄었고 영업손실 6억 원, 당기순손실 7억 원입니다. 부채비율은 44.1%로 낮은 편이지만 광통신 사업부 손상평가가 핵심 감사 이슈였습니다."
+    "investor_note": "우리로는 광통신 부품을 만들고 IT 저장장치와 음향기기도 유통하는 회사입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 424억 원으로 전년보다 10.3% 줄었고 영업손실 6억 원, 당기순손실 7억 원입니다. 부채비율은 44.1%로 낮은 편이지만 광통신 사업부 손상평가가 핵심 감사 이슈였습니다.",
+    "product_service_segments": [
+      {
+        "name": "광분배기(PLC)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.6%",
+        "revenue_share": 0.086,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "광다이오드(PD)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.2%",
+        "revenue_share": 0.232,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "SI 사업부",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.6%",
+        "revenue_share": 0.466,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "음향기기",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.7%",
+        "revenue_share": 0.217,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "광통신",
-      "caption": "광분배기, AWG, 포토다이오드, 단일광자검출소자 등 광통신 핵심부품",
-      "kind": "auto",
-      "visual": "광통신",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "title": "광분배기(PLC)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "SI·저장장치",
-      "caption": "Western Digital HDD·SSD 등 IT 저장장치 유통",
+      "title": "광다이오드(PD)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 23.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "시스템 구축·통합",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.6%",
       "kind": "service",
       "visual": "SI",
-      "image": "../data/business_images/business_image_b24ab2723180c79f.jpg",
-      "image_source": "Wikimedia Commons"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "음향기기",
-      "caption": "KLIPSCH, JAMO 등 오디오·스피커 유통",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.7%",
       "kind": "service",
-      "visual": "음향기기",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

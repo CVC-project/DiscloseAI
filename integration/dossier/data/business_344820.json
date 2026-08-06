@@ -155,14 +155,25 @@
     "segment_finance": "(주)케이씨씨글라스의 주요 사업은 유리 부문, 파일사업 부문, 파일사업, 정비사업 등입니다. 국내자동차사의 경우 경쟁입찰을 통해 공급 차종을 수주하게 되며, 5~6년간 수주 양산 차종에 대해 생산계획에 따라 공급 판매를 하고 있으며, 해외거래선 및 A/S의 경우 발주를 통해 제품 판매를 하고 있습니다. 파일사업 부문은 대형건설사 내수 위주의 안정적인 수요처 수주를 선점하고 특화된 제품의 개발을 통해 수익성 위주로 판매를 증대하고 있습니다.",
     "segment_breakdown": [
       {
-        "name": "유리 부문",
-        "desc": "유리 관련 제품·서비스",
-        "revenue_share": null
+        "name": "유리",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.4%",
+        "revenue_share": 0.4637,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "유통부문",
-        "desc": "유통 관련 제품·서비스",
-        "revenue_share": null
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.7%",
+        "revenue_share": 0.0266,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "인테리어및 유통",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
+        "revenue_share": 0.063,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -179,40 +190,70 @@
       "산업용 外",
       "중보행 바닥재"
     ],
-    "investor_note": "(주)케이씨씨글라스의 주요 사업은 유리 부문, 파일사업 부문, 파일사업, 정비사업 등입니다. 국내자동차사의 경우 경쟁입찰을 통해 공급 차종을 수주하게 되며, 5~6년간 수주 양산 차종에 대해 생산계획에 따라 공급 판매를 하고 있으며, 해외거래선 및 A/S의 경우 발주를 통해 제품 판매를 하고 있습니다. 파일사업 부문은 대형건설사 내수 위주의 안정적인 수요처 수주를 선점하고 특화된 제품의 개발을 통해 수익성 위주로 판매를 증대하고 있습니다."
+    "investor_note": "(주)케이씨씨글라스의 주요 사업은 유리 부문, 파일사업 부문, 파일사업, 정비사업 등입니다. 국내자동차사의 경우 경쟁입찰을 통해 공급 차종을 수주하게 되며, 5~6년간 수주 양산 차종에 대해 생산계획에 따라 공급 판매를 하고 있으며, 해외거래선 및 A/S의 경우 발주를 통해 제품 판매를 하고 있습니다. 파일사업 부문은 대형건설사 내수 위주의 안정적인 수요처 수주를 선점하고 특화된 제품의 개발을 통해 수익성 위주로 판매를 증대하고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "유리",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.4%",
+        "revenue_share": 0.4637,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.7%",
+        "revenue_share": 0.0266,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "인테리어및 유통",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
+        "revenue_share": 0.063,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "파일사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
+        "revenue_share": 0.0156,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "유리",
-      "caption": "유리 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.4%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "건축용",
-      "caption": "건축용 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.7%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "인테리어",
-      "caption": "인테리어 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "인테리어및 유통",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.3%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "유통",
-      "caption": "유통 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "title": "파일사업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

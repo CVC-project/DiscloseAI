@@ -156,13 +156,24 @@
     "segment_breakdown": [
       {
         "name": "시스템반도체",
-        "desc": "삼성 파운드리 디자인 솔루션 파트너(SoC 설계 서비스)",
-        "revenue_share": 0.162
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.2%",
+        "revenue_share": 0.162,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "전자부품 제조",
-        "desc": "스마트폰 카메라/렌즈모듈, LED, IT부품 등 제조",
-        "revenue_share": 0.853
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 85.3%",
+        "revenue_share": 0.853,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,40 +185,62 @@
       "Customizing SoC/Automotive AP(코아시아넥셀)",
       "신기술사업 투자(코아시아 계열)"
     ],
-    "investor_note": "과거 공시 기반 참고 정보로, 최근 연결 매출액은 3,751억 원으로 전년 대비 4.8% 늘었고, 영업손실과 당기순손실 규모도 전년 대비 각각 94.4%, 69.7% 줄며 적자 폭이 크게 개선됐습니다. 다만 부채비율이 195.9%로 자본보다 부채가 약 2배 많은 수준이라 재무 부담이 있는 편이고, ROE(자기자본이익률)도 -14.8%로 아직 이익을 내지 못하고 있어 개선 추이를 지켜볼 필요가 있습니다."
+    "investor_note": "과거 공시 기반 참고 정보로, 최근 연결 매출액은 3,751억 원으로 전년 대비 4.8% 늘었고, 영업손실과 당기순손실 규모도 전년 대비 각각 94.4%, 69.7% 줄며 적자 폭이 크게 개선됐습니다. 다만 부채비율이 195.9%로 자본보다 부채가 약 2배 많은 수준이라 재무 부담이 있는 편이고, ROE(자기자본이익률)도 -14.8%로 아직 이익을 내지 못하고 있어 개선 추이를 지켜볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "시스템반도체",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.2%",
+        "revenue_share": 0.162,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전자부품 제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 85.3%",
+        "revenue_share": 0.853,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "신기술사업금융",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.4%",
+        "revenue_share": 0.004,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "SoC Design Service(시스템반도체 설계)",
-      "caption": "SoC Design Service(시스템반도체 설계) 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "시스템반도체",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.2%",
       "kind": "chip",
       "visual": "CHIP",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "스마트폰 카메라모듈",
-      "caption": "스마트폰과 전장 카메라에 들어가는 이미지 처리 부품입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "광학렌즈 모듈",
-      "caption": "광학렌즈 모듈 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "자동차·가전용 LED",
-      "caption": "자동차·가전용 LED 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "전자부품 제조",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 85.3%",
       "kind": "auto",
       "visual": "AUTO",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "총 계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

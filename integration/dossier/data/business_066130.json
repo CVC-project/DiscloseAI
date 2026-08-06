@@ -155,14 +155,18 @@
     "segment_finance": "하츠는 레인지후드와 가스·전기쿡탑, 세대환기시스템(전열교환기), 욕실용품(바스) 등을 만드는 주방·공기질 관리 전문기업으로, 국내 레인지후드 시장에서 오랜 기간 1위를 지켜온 것으로 알려져 있습니다. 매출의 절반가량은 레인지후드·쿡탑 등 자체 제품에서, 나머지는 빌트인기기 유통과 세대환기 공사에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,769억 원으로 전년 대비 5.2% 줄었고 영업이익도 3.4% 감소했지만, 당기순이익은 2.1% 늘어 수익성은 오히려 개선됐습니다. 부채비율은 36.4%로 낮은 편이라 재무 안정성은 양호한 편입니다.",
     "segment_breakdown": [
       {
-        "name": "빌트인·바스 등 상품",
-        "desc": "빌트인기기·욕실용품(바스) 등 유통 상품 판매",
-        "revenue_share": 0.407
+        "name": "상품판매업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.9%",
+        "revenue_share": 0.339,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "환기시스템 공사",
-        "desc": "공동주택 세대환기시스템(전열교환기) 시공",
-        "revenue_share": 0.104
+        "name": "바스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.3%",
+        "revenue_share": 0.013,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -177,24 +181,70 @@
       "욕실 액세서리",
       "덕트공사(환기시스템)"
     ],
-    "investor_note": "하츠는 레인지후드와 가스·전기쿡탑, 세대환기시스템(전열교환기), 욕실용품(바스) 등을 만드는 주방·공기질 관리 전문기업으로, 국내 레인지후드 시장에서 오랜 기간 1위를 지켜온 것으로 알려져 있습니다. 매출의 절반가량은 레인지후드·쿡탑 등 자체 제품에서, 나머지는 빌트인기기 유통과 세대환기 공사에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,769억 원으로 전년 대비 5.2% 줄었고 영업이익도 3.4% 감소했지만, 당기순이익은 2.1% 늘어 수익성은 오히려 개선됐습니다. 부채비율은 36.4%로 낮은 편이라 재무 안정성은 양호한 편입니다."
+    "investor_note": "하츠는 레인지후드와 가스·전기쿡탑, 세대환기시스템(전열교환기), 욕실용품(바스) 등을 만드는 주방·공기질 관리 전문기업으로, 국내 레인지후드 시장에서 오랜 기간 1위를 지켜온 것으로 알려져 있습니다. 매출의 절반가량은 레인지후드·쿡탑 등 자체 제품에서, 나머지는 빌트인기기 유통과 세대환기 공사에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,769억 원으로 전년 대비 5.2% 줄었고 영업이익도 3.4% 감소했지만, 당기순이익은 2.1% 늘어 수익성은 오히려 개선됐습니다. 부채비율은 36.4%로 낮은 편이라 재무 안정성은 양호한 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "제품판매업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.3%",
+        "revenue_share": 0.333,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.6%",
+        "revenue_share": 0.156,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품판매업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.9%",
+        "revenue_share": 0.339,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "바스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.3%",
+        "revenue_share": 0.013,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "빌트인·바스 등 상품",
-      "caption": "빌트인기기·욕실용품(바스) 등 유통 상품 판매",
+      "title": "제품판매업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.3%",
       "kind": "service",
-      "visual": "빌트인",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "환기시스템 공사",
-      "caption": "공동주택 세대환기시스템(전열교환기) 시공",
+      "title": "기타제품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.6%",
       "kind": "service",
-      "visual": "환기시스템",
-      "image": "../data/business_images/business_image_local_housing.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "상품판매업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "바스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.3%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

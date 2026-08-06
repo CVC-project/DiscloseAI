@@ -155,14 +155,32 @@
     "segment_finance": "친환경 소재 개발과 차체 경량화를 위한 사업재편도 진행 중입니다. 과거 공시 기반 참고 정보로, 최근 연결기준 매출액은 2조 5,620억 원으로 전년 대비 13.6% 늘고 영업이익도 357억 원으로 8.7% 증가했지만, 당기순이익은 19억 원으로 84.9% 급감해 최종적으로 남는 돈은 크게 줄었습니다. 부채비율은 371.7%로 자본 대비 빚 부담이 큰 편이라 재무 구조를 유의해 볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "범퍼",
-        "desc": "차량 충돌 충격 흡수용 플라스틱 범퍼",
-        "revenue_share": 0.432
+        "name": "자동차 부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 43.2%",
+        "revenue_share": 0.432,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "콘솔",
-        "desc": "운전석·조수석 사이 수납공간 부품",
-        "revenue_share": 0.266
+        "name": "CONSOLE",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.6%",
+        "revenue_share": 0.266,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "MAIN CORE",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.7%",
+        "revenue_share": 0.007,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "W/COVER",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.002,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -176,22 +194,52 @@
       "루프렉",
       "카고레일"
     ],
-    "investor_note": "친환경 소재 개발과 차체 경량화를 위한 사업재편도 진행 중입니다. 과거 공시 기반 참고 정보로, 최근 연결기준 매출액은 2조 5,620억 원으로 전년 대비 13.6% 늘고 영업이익도 357억 원으로 8.7% 증가했지만, 당기순이익은 19억 원으로 84.9% 급감해 최종적으로 남는 돈은 크게 줄었습니다. 부채비율은 371.7%로 자본 대비 빚 부담이 큰 편이라 재무 구조를 유의해 볼 필요가 있습니다."
+    "investor_note": "친환경 소재 개발과 차체 경량화를 위한 사업재편도 진행 중입니다. 과거 공시 기반 참고 정보로, 최근 연결기준 매출액은 2조 5,620억 원으로 전년 대비 13.6% 늘고 영업이익도 357억 원으로 8.7% 증가했지만, 당기순이익은 19억 원으로 84.9% 급감해 최종적으로 남는 돈은 크게 줄었습니다. 부채비율은 371.7%로 자본 대비 빚 부담이 큰 편이라 재무 구조를 유의해 볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "자동차 부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 43.2%",
+        "revenue_share": 0.432,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "CONSOLE",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.6%",
+        "revenue_share": 0.266,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "MAIN CORE",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.7%",
+        "revenue_share": 0.007,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "W/COVER",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.002,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "범퍼",
-      "caption": "차량 충돌 충격 흡수용 플라스틱 범퍼",
-      "kind": "service",
-      "visual": "범퍼",
+      "title": "자동차 부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 43.2%",
+      "kind": "auto",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "콘솔",
-      "caption": "운전석·조수석 사이 수납공간 부품",
+      "title": "CONSOLE",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.6%",
       "kind": "auto",
-      "visual": "콘솔",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     }

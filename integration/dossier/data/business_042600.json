@@ -155,14 +155,32 @@
     "segment_finance": "새로닉스는 LCD TV용 디바이스·주방TV 등을 만드는 전자부문(72%)과 태양전지용 전류이동 와이어를 생산하는 태양광부문(28%, 자회사 JH머티리얼즈)으로 구성된 회사입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,649억 원으로 전년 대비 18.5% 줄었고 영업이익은 26억 원 손실로 적자 전환했습니다. 당기순손실도 320억 원으로 여전히 크지만 전년보다는 손실 폭이 줄었습니다. 부채비율은 130.3%로 부담이 있는 수준이며, 감사인은 태양광 자회사에 대한 자산 손상 여부를 핵심적으로 점검했습니다.",
     "segment_breakdown": [
       {
-        "name": "전자부문",
-        "desc": "TV용 디바이스·주방TV·사출성형 부품 제조",
-        "revenue_share": 0.719
+        "name": "전자",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.4%",
+        "revenue_share": 0.054,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "태양광부문",
-        "desc": "태양전지용 Photovoltaic Ribbon 제조(자회사 JH머티리얼즈)",
-        "revenue_share": 0.281
+        "name": "주방TV",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.8%",
+        "revenue_share": 0.028,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Plastic Injection Molding and Assembly",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 62.4%",
+        "revenue_share": 0.624,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "태양광",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.1%",
+        "revenue_share": 0.281,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -171,24 +189,62 @@
       "TV 케이스(사출성형)",
       "Photovoltaic Ribbon(태양광 전류이동 와이어)"
     ],
-    "investor_note": "새로닉스는 LCD TV용 디바이스·주방TV 등을 만드는 전자부문(72%)과 태양전지용 전류이동 와이어를 생산하는 태양광부문(28%, 자회사 JH머티리얼즈)으로 구성된 회사입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,649억 원으로 전년 대비 18.5% 줄었고 영업이익은 26억 원 손실로 적자 전환했습니다. 당기순손실도 320억 원으로 여전히 크지만 전년보다는 손실 폭이 줄었습니다. 부채비율은 130.3%로 부담이 있는 수준이며, 감사인은 태양광 자회사에 대한 자산 손상 여부를 핵심적으로 점검했습니다."
+    "investor_note": "새로닉스는 LCD TV용 디바이스·주방TV 등을 만드는 전자부문(72%)과 태양전지용 전류이동 와이어를 생산하는 태양광부문(28%, 자회사 JH머티리얼즈)으로 구성된 회사입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,649억 원으로 전년 대비 18.5% 줄었고 영업이익은 26억 원 손실로 적자 전환했습니다. 당기순손실도 320억 원으로 여전히 크지만 전년보다는 손실 폭이 줄었습니다. 부채비율은 130.3%로 부담이 있는 수준이며, 감사인은 태양광 자회사에 대한 자산 손상 여부를 핵심적으로 점검했습니다.",
+    "product_service_segments": [
+      {
+        "name": "전자",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.4%",
+        "revenue_share": 0.054,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "주방TV",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.8%",
+        "revenue_share": 0.028,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Plastic Injection Molding and Assembly",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 62.4%",
+        "revenue_share": 0.624,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "태양광",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.1%",
+        "revenue_share": 0.281,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "전자부문",
-      "caption": "TV용 디바이스·주방TV·사출성형 부품 제조",
+      "title": "전자",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.4%",
       "kind": "auto",
-      "visual": "전자부문",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "태양광부문",
-      "caption": "태양전지용 Photovoltaic Ribbon 제조(자회사 JH머티리얼즈)",
-      "kind": "service",
-      "visual": "AI",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "title": "주방TV",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.8%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_141eab6519656e30.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "신재생에너지",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.1%",
+      "kind": "power",
+      "visual": "RENEWABLE",
+      "image": "../data/business_images/business_image_93b560bdbc084531.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

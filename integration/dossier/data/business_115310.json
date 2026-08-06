@@ -155,9 +155,11 @@
     "segment_finance": "(주)인포바인의 주요 서비스는 모바일서비스, 휴대폰인증서보관서비스, 기타서비스, 게임 서비스, SKT, 모바일입니다. 이용자 활동을 광고·결제·콘텐츠·거래 수익으로 연결합니다. 제품 등의 가격변동 추이 휴대폰인증서 보관서비스의 가격은 이동통신사와 협의하여 결정하고, 게임서비스 매출은 부분 유료화를 통한 아이템 판매가 이뤄지므로 정액제 게임과 달리 고정가격 산정이 어렵습니다. 이러한 모바일 콘텐츠와 어플리케이션을 이용한 비즈니스를 모바일 비즈니스라고 합니다. 플랫폼 기업은 이용자 기반이 광고, 결제, 구독, 콘텐츠 수익으로 이어지는 구조가 핵심입니다.",
     "segment_breakdown": [
       {
-        "name": "은행",
-        "desc": "은행 관련 제품·서비스",
-        "revenue_share": null
+        "name": "매출총계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -173,24 +175,62 @@
       "은행",
       "PG"
     ],
-    "investor_note": "(주)인포바인의 주요 서비스는 모바일서비스, 휴대폰인증서보관서비스, 기타서비스, 게임 서비스, SKT, 모바일입니다. 이용자 활동을 광고·결제·콘텐츠·거래 수익으로 연결합니다. 제품 등의 가격변동 추이 휴대폰인증서 보관서비스의 가격은 이동통신사와 협의하여 결정하고, 게임서비스 매출은 부분 유료화를 통한 아이템 판매가 이뤄지므로 정액제 게임과 달리 고정가격 산정이 어렵습니다. 이러한 모바일 콘텐츠와 어플리케이션을 이용한 비즈니스를 모바일 비즈니스라고 합니다. 플랫폼 기업은 이용자 기반이 광고, 결제, 구독, 콘텐츠 수익으로 이어지는 구조가 핵심입니다."
+    "investor_note": "(주)인포바인의 주요 서비스는 모바일서비스, 휴대폰인증서보관서비스, 기타서비스, 게임 서비스, SKT, 모바일입니다. 이용자 활동을 광고·결제·콘텐츠·거래 수익으로 연결합니다. 제품 등의 가격변동 추이 휴대폰인증서 보관서비스의 가격은 이동통신사와 협의하여 결정하고, 게임서비스 매출은 부분 유료화를 통한 아이템 판매가 이뤄지므로 정액제 게임과 달리 고정가격 산정이 어렵습니다. 이러한 모바일 콘텐츠와 어플리케이션을 이용한 비즈니스를 모바일 비즈니스라고 합니다. 플랫폼 기업은 이용자 기반이 광고, 결제, 구독, 콘텐츠 수익으로 이어지는 구조가 핵심입니다.",
+    "product_service_segments": [
+      {
+        "name": "모바일서비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.3%",
+        "revenue_share": 0.4432,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타서비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 52.0%",
+        "revenue_share": 0.5198,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "게임 서비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.7%",
+        "revenue_share": 0.027,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매출총계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "은행",
-      "caption": "은행 관련 제품·서비스",
-      "kind": "bank",
-      "visual": "은행",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "title": "모바일서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.3%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "전기 통신업",
-      "caption": "전기 통신업을 중심으로 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "title": "기타서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 52.0%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "게임",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.7%",
+      "kind": "platform",
+      "visual": "GAME",
+      "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

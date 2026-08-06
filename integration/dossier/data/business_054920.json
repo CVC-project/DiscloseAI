@@ -155,9 +155,32 @@
     "segment_finance": "(주)한컴위드의 주요 제품·서비스는 SW, 솔루션, PKI인증, Hancom xPKI, CA, RA입니다. 제품 등의 가격 변동 추이 당사의 보안 소프트 사업매출은 고객사와의 개별 계약, 파트너사를 통한 계약 등을 통해 라이센스 및 용역의 형태로 발생하며 시스템 형태 등에 따라 그 가격이 상이하여 제품의 가격변동추이, 가격산출 기준 등을 산정하기 어렵습니다. 제품 판매가격 또한 각각의 판매형태 및 매출처별 매출규모에 따라 차이가 있습니다.금 관련 유통업의 경우, 국제 금 시세 및 환율 등 대외 거시경제 지표에 직접 연동되어 가격 변동이 실기간으로 발생하고 있기 때문에, 정확한 판매 추이를 제공하기는 어렵습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "● 무설치 인증/전자서명",
-        "desc": "전자서명 관련 제품·서비스",
-        "revenue_share": null
+        "name": "SW",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.3%",
+        "revenue_share": 0.0032,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "간편인증",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.0017,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "생체인증",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.0007,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "데이터보안",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.0049,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,32 +197,70 @@
       "다양한 전자서명인증사업자의 간편인증",
       "전자서명"
     ],
-    "investor_note": "(주)한컴위드의 주요 제품·서비스는 SW, 솔루션, PKI인증, Hancom xPKI, CA, RA입니다. 제품 등의 가격 변동 추이 당사의 보안 소프트 사업매출은 고객사와의 개별 계약, 파트너사를 통한 계약 등을 통해 라이센스 및 용역의 형태로 발생하며 시스템 형태 등에 따라 그 가격이 상이하여 제품의 가격변동추이, 가격산출 기준 등을 산정하기 어렵습니다. 제품 판매가격 또한 각각의 판매형태 및 매출처별 매출규모에 따라 차이가 있습니다.금 관련 유통업의 경우, 국제 금 시세 및 환율 등 대외 거시경제 지표에 직접 연동되어 가격 변동이 실기간으로 발생하고 있기 때문에, 정확한 판매 추이를 제공하기는 어렵습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)한컴위드의 주요 제품·서비스는 SW, 솔루션, PKI인증, Hancom xPKI, CA, RA입니다. 제품 등의 가격 변동 추이 당사의 보안 소프트 사업매출은 고객사와의 개별 계약, 파트너사를 통한 계약 등을 통해 라이센스 및 용역의 형태로 발생하며 시스템 형태 등에 따라 그 가격이 상이하여 제품의 가격변동추이, 가격산출 기준 등을 산정하기 어렵습니다. 제품 판매가격 또한 각각의 판매형태 및 매출처별 매출규모에 따라 차이가 있습니다.금 관련 유통업의 경우, 국제 금 시세 및 환율 등 대외 거시경제 지표에 직접 연동되어 가격 변동이 실기간으로 발생하고 있기 때문에, 정확한 판매 추이를 제공하기는 어렵습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "SW",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.3%",
+        "revenue_share": 0.0032,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "간편인증",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.0017,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "생체인증",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.0007,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "데이터보안",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.5%",
+        "revenue_share": 0.0049,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "소프트웨어·솔루션",
-      "caption": "고객 업무를 자동화하거나 관리 효율을 높이는 소프트웨어 제품군입니다.",
+      "title": "SW",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "PKI인증",
-      "caption": "PKI인증 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "소프트웨어·솔루션",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
       "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "visual": "SOFTWARE",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "보안 솔루션",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
+      "kind": "service",
+      "visual": "SECURITY",
+      "image": "../data/business_images/business_image_281a9ea62f3d74e6.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "Hancom xPKI",
-      "caption": "Hancom xPKI 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

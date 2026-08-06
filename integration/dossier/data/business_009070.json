@@ -155,29 +155,32 @@
     "segment_finance": "케이씨티시(KCTC)는 부산·인천 등 전국 주요 항만을 거점으로 컨테이너 운송, 선박블럭·해양플랜트 같은 중량화물 운송, 항만 하역, 보세창고(CY/CFS) 운영에 더해 이천·여주 등의 풀필먼트 물류센터를 통한 소화물 3자물류까지 종합물류 서비스를 제공하는 기업입니다. 베트남·태국·인도네시아 등 해외에도 거점을 두고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 9,867억 원으로 전년보다 11.9% 늘었지만 영업이익은 388억 원으로 0.4% 감소했고 당기순이익도 233억 원으로 15.7% 줄었습니다. 부채비율은 136.8%로 자본보다 빚이 다소 많은 편입니다.",
     "segment_breakdown": [
       {
-        "name": "운송(컨테이너·화물운송)",
-        "desc": "수출입 컨테이너·일반화물의 육상·철도 운송",
-        "revenue_share": 0.316
+        "name": "운송수입",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.6%",
+        "revenue_share": 0.3159,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "중량물",
-        "desc": "선박블럭·해양플랜트 등 초대형 중량화물 운송",
-        "revenue_share": 0.223
+        "name": "하역수입",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.3%",
+        "revenue_share": 0.0834,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "소화물(3자물류)",
-        "desc": "물류센터·풀필먼트를 통한 소화물 보관·배송",
-        "revenue_share": 0.328
+        "name": "CY수입",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.0077,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "하역",
-        "desc": "항만 컨테이너·일반화물 하역",
-        "revenue_share": 0.083
-      },
-      {
-        "name": "보세장치장(CY/CFS)",
-        "desc": "컨테이너 야드·보세창고 운영",
-        "revenue_share": 0.039
+        "name": "CFS수입",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.1%",
+        "revenue_share": 0.031,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -188,40 +191,62 @@
       "풀필먼트 물류센터",
       "철도 화물운송(철송)"
     ],
-    "investor_note": "케이씨티시(KCTC)는 부산·인천 등 전국 주요 항만을 거점으로 컨테이너 운송, 선박블럭·해양플랜트 같은 중량화물 운송, 항만 하역, 보세창고(CY/CFS) 운영에 더해 이천·여주 등의 풀필먼트 물류센터를 통한 소화물 3자물류까지 종합물류 서비스를 제공하는 기업입니다. 베트남·태국·인도네시아 등 해외에도 거점을 두고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 9,867억 원으로 전년보다 11.9% 늘었지만 영업이익은 388억 원으로 0.4% 감소했고 당기순이익도 233억 원으로 15.7% 줄었습니다. 부채비율은 136.8%로 자본보다 빚이 다소 많은 편입니다."
+    "investor_note": "케이씨티시(KCTC)는 부산·인천 등 전국 주요 항만을 거점으로 컨테이너 운송, 선박블럭·해양플랜트 같은 중량화물 운송, 항만 하역, 보세창고(CY/CFS) 운영에 더해 이천·여주 등의 풀필먼트 물류센터를 통한 소화물 3자물류까지 종합물류 서비스를 제공하는 기업입니다. 베트남·태국·인도네시아 등 해외에도 거점을 두고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 9,867억 원으로 전년보다 11.9% 늘었지만 영업이익은 388억 원으로 0.4% 감소했고 당기순이익도 233억 원으로 15.7% 줄었습니다. 부채비율은 136.8%로 자본보다 빚이 다소 많은 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "운송수입",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.6%",
+        "revenue_share": 0.3159,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "하역수입",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.3%",
+        "revenue_share": 0.0834,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "CY수입",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.0077,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "CFS수입",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.1%",
+        "revenue_share": 0.031,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "운송(컨테이너·화물운송)",
-      "caption": "수출입 컨테이너·일반화물의 육상·철도 운송",
+      "title": "운송수입",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.6%",
       "kind": "service",
-      "visual": "운송",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "중량물",
-      "caption": "선박블럭·해양플랜트 등 초대형 중량화물 운송",
-      "kind": "ship",
-      "visual": "중량물",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
+      "title": "하역수입",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.3%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "소화물(3자물류)",
-      "caption": "물류센터·풀필먼트를 통한 소화물 보관·배송",
+      "title": "CFS수입",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.1%",
       "kind": "service",
-      "visual": "소화물",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "하역",
-      "caption": "항만 컨테이너·일반화물 하역",
-      "kind": "service",
-      "visual": "하역",
-      "image": "../data/business_images/business_image_local_logistics.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

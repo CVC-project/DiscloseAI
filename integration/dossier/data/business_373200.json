@@ -155,9 +155,25 @@
     "segment_finance": "고객사의 신뢰성 테스트가 완료된 프로젝트는 정식 발주가 진행되며, 프로젝트별 초도 납품 시에는 생산된 제품에 대해 전수 검사를 실시합니다. 매출처 매출액 중 10% 이상을 차지하는 외부고객과 관련된 정보는 다음과 같습니다.",
     "segment_breakdown": [
       {
-        "name": "화학공업부문",
-        "desc": "화학공업부문 관련 제품·서비스",
-        "revenue_share": null
+        "name": "악세사리부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 43.0%",
+        "revenue_share": 0.4299,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "스마트폰케이스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.3%",
+        "revenue_share": 0.3729,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "버즈케이스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.3%",
+        "revenue_share": 0.1732,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -170,40 +186,55 @@
       "Leather shall cover",
       "제품개요"
     ],
-    "investor_note": "고객사의 신뢰성 테스트가 완료된 프로젝트는 정식 발주가 진행되며, 프로젝트별 초도 납품 시에는 생산된 제품에 대해 전수 검사를 실시합니다. 매출처 매출액 중 10% 이상을 차지하는 외부고객과 관련된 정보는 다음과 같습니다."
+    "investor_note": "고객사의 신뢰성 테스트가 완료된 프로젝트는 정식 발주가 진행되며, 프로젝트별 초도 납품 시에는 생산된 제품에 대해 전수 검사를 실시합니다. 매출처 매출액 중 10% 이상을 차지하는 외부고객과 관련된 정보는 다음과 같습니다.",
+    "product_service_segments": [
+      {
+        "name": "악세사리부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 43.0%",
+        "revenue_share": 0.4299,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "스마트폰케이스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.3%",
+        "revenue_share": 0.3729,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "버즈케이스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.3%",
+        "revenue_share": 0.1732,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "배터리",
-      "caption": "배터리 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
-      "image": "../data/business_images/business_image_local_battery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "전선",
-      "caption": "전선 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "악세사리부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 43.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "화학공업부문",
-      "caption": "화학공업부문 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "title": "대형마트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.3%",
+      "kind": "consumer",
+      "visual": "MART",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "가공",
-      "caption": "가공 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "버즈케이스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 17.3%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

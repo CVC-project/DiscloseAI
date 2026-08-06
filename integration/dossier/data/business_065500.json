@@ -155,9 +155,18 @@
     "segment_finance": "과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,571억 원으로 전년보다 9.4% 줄었고 영업이익도 9억 원으로 25.3% 감소했지만, 당기순이익은 17억 원으로 흑자 전환했습니다. 부채비율은 148.0%로 다소 높은 편입니다. 감사인은 회사가 보유한 4개 현금창출단위의 자산가치 평가(손상검사)를 핵심감사사항으로 선정했습니다.",
     "segment_breakdown": [
       {
-        "name": "플라스틱사출(오리엔트플라스틱)",
-        "desc": "범퍼·콘솔·공조 플라스틱 사출부품",
-        "revenue_share": 0.0278
+        "name": "브라켓 (변속기)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.6%",
+        "revenue_share": 0.1964,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "C-Plate, 포크9(변속기)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.0%",
+        "revenue_share": 0.0999,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -169,22 +178,52 @@
       "HVAC 부품",
       "라디에이터 탱크"
     ],
-    "investor_note": "과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,571억 원으로 전년보다 9.4% 줄었고 영업이익도 9억 원으로 25.3% 감소했지만, 당기순이익은 17억 원으로 흑자 전환했습니다. 부채비율은 148.0%로 다소 높은 편입니다. 감사인은 회사가 보유한 4개 현금창출단위의 자산가치 평가(손상검사)를 핵심감사사항으로 선정했습니다."
+    "investor_note": "과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,571억 원으로 전년보다 9.4% 줄었고 영업이익도 9억 원으로 25.3% 감소했지만, 당기순이익은 17억 원으로 흑자 전환했습니다. 부채비율은 148.0%로 다소 높은 편입니다. 감사인은 회사가 보유한 4개 현금창출단위의 자산가치 평가(손상검사)를 핵심감사사항으로 선정했습니다.",
+    "product_service_segments": [
+      {
+        "name": "자동차사업부(오리엔트정공)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.9%",
+        "revenue_share": 0.159,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "브라켓 (변속기)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.6%",
+        "revenue_share": 0.1964,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "C-Plate, 포크9(변속기)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.0%",
+        "revenue_share": 0.0999,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타 (변속기)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 6.5%",
+        "revenue_share": 0.0654,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "자동차사업부(오리엔트정공)",
-      "caption": "변속기·엔진용 알루미늄 가공·조립부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.9%",
       "kind": "auto",
-      "visual": "자동차사업부",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "플라스틱사출(오리엔트플라스틱)",
-      "caption": "범퍼·콘솔·공조 플라스틱 사출부품",
+      "title": "구동계 부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.6%",
       "kind": "auto",
-      "visual": "플라스틱사출",
+      "visual": "PARTS",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     }

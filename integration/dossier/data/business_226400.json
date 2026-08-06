@@ -153,7 +153,36 @@
   "snippets": {
     "overview": "(주)오스테오닉의 주요 제품·서비스는 두개, 구강악안면(CMF, CranioMaxilloFacial), 대퇴골, 관절보존(Sports Medicine), 어깨와 무릎입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품의 현황 주요사업부문별 매출 현황 제품 설명 당사에서 생산 및 판매하는 제품(의료기기)은 인체에 근간을 이루는 206개의 뼈중 척추 및 고관절등 일부 뼈를 제외한 대부분의 뼈의 접합, 대체 및 조정을 목적으로 사용됩니다. 수량을 주문하며, 이에 대하여 예측된 수요량에 근거하여 기 생산된 제품을 공급하는 구조로 판매하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "(주)오스테오닉의 주요 제품·서비스는 두개, 구강악안면(CMF, CranioMaxilloFacial), 대퇴골, 관절보존(Sports Medicine), 어깨와 무릎입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품의 현황 주요사업부문별 매출 현황 제품 설명 당사에서 생산 및 판매하는 제품(의료기기)은 인체에 근간을 이루는 206개의 뼈중 척추 및 고관절등 일부 뼈를 제외한 대부분의 뼈의 접합, 대체 및 조정을 목적으로 사용됩니다. 수량을 주문하며, 이에 대하여 예측된 수요량에 근거하여 기 생산된 제품을 공급하는 구조로 판매하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "금속소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.7%",
+        "revenue_share": 0.1965,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Trauma&Extremities",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.4%",
+        "revenue_share": 0.3136,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "SPINE",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+        "revenue_share": 0.0261,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "바이오소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.5%",
+        "revenue_share": 0.055,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "두개",
       "구강악안면(CMF",
@@ -167,40 +196,70 @@
       "CMF",
       "제품정책"
     ],
-    "investor_note": "(주)오스테오닉의 주요 제품·서비스는 두개, 구강악안면(CMF, CranioMaxilloFacial), 대퇴골, 관절보존(Sports Medicine), 어깨와 무릎입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품의 현황 주요사업부문별 매출 현황 제품 설명 당사에서 생산 및 판매하는 제품(의료기기)은 인체에 근간을 이루는 206개의 뼈중 척추 및 고관절등 일부 뼈를 제외한 대부분의 뼈의 접합, 대체 및 조정을 목적으로 사용됩니다. 수량을 주문하며, 이에 대하여 예측된 수요량에 근거하여 기 생산된 제품을 공급하는 구조로 판매하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)오스테오닉의 주요 제품·서비스는 두개, 구강악안면(CMF, CranioMaxilloFacial), 대퇴골, 관절보존(Sports Medicine), 어깨와 무릎입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품의 현황 주요사업부문별 매출 현황 제품 설명 당사에서 생산 및 판매하는 제품(의료기기)은 인체에 근간을 이루는 206개의 뼈중 척추 및 고관절등 일부 뼈를 제외한 대부분의 뼈의 접합, 대체 및 조정을 목적으로 사용됩니다. 수량을 주문하며, 이에 대하여 예측된 수요량에 근거하여 기 생산된 제품을 공급하는 구조로 판매하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "금속소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.7%",
+        "revenue_share": 0.1965,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Trauma&Extremities",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.4%",
+        "revenue_share": 0.3136,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "SPINE",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+        "revenue_share": 0.0261,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "바이오소재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.5%",
+        "revenue_share": 0.055,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "두개",
-      "caption": "두개 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "title": "금속소재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.7%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "구강악안면(CMF",
-      "caption": "구강악안면(CMF 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "Trauma&Extremities",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.4%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "CranioMaxilloFacial)",
-      "caption": "CranioMaxilloFacial) 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "SPINE",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "대퇴골",
-      "caption": "대퇴골 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "title": "바이오소재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.5%",
+      "kind": "bio",
+      "visual": "BIO",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -110,19 +110,32 @@
     "segment_finance": "",
     "segment_breakdown": [
       {
-        "name": "토목부문",
-        "desc": "항만, 철도, 도로, 교량, 해상풍력 등 인프라 건설",
-        "revenue_share": 0.088
+        "name": "토목",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.4%",
+        "revenue_share": 0.034,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "건축주택부문",
-        "desc": "공동주택, 데이터센터, 복합개발 등 건축 및 주택사업",
-        "revenue_share": 0.544
+        "name": "해외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.4%",
+        "revenue_share": 0.054,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "플랜트/뉴에너지부문",
-        "desc": "석유화학, 원전, SMR, 신재생에너지, 송변전 등",
-        "revenue_share": 0.317
+        "name": "건축/주택",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.6%",
+        "revenue_share": 0.446,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "플랜트/뉴에너지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.0%",
+        "revenue_share": 0.09,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "investor_note": "최근 매출은 3조 1천억 원으로 전년 대비 5% 감소했지만, 영업이익과 순이익은 적자에서 흑자로 전환해 사업 정상화 흐름을 보이고 있습니다(영업이익 653억 원, 순이익 559억 원). 다만 부채비율이 175%로 높은 수준이라는 점은 부채가 자본금의 1.75배라는 뜻으로, 재무 건전성 개선이 과제입니다. 현금은 4,813억 원 수준이며, 자본 대비 수익성을 나타내는 ROE는 4.5%로 개선 추세를 보이고 있습니다. 과거 공시 기반 참고 정보입니다.",
@@ -140,31 +153,61 @@
       "ESS(에너지저장장치)"
     ],
     "raw_moves": [],
-    "utilization": []
+    "utilization": [],
+    "product_service_segments": [
+      {
+        "name": "토목",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.4%",
+        "revenue_share": 0.034,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "해외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.4%",
+        "revenue_share": 0.054,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "건축/주택",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.6%",
+        "revenue_share": 0.446,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "플랜트/뉴에너지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.0%",
+        "revenue_share": 0.09,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "주택·건축",
-      "caption": "분양, 공정률, 원가율이 이익률을 흔듭니다.",
-      "kind": "factory",
-      "visual": "BUILD",
-      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "토목",
-      "caption": "인프라 공사와 공공 발주 흐름을 봅니다.",
-      "kind": "steel",
-      "visual": "CIVIL",
-      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "플랜트",
-      "caption": "해외 플랜트 수주와 원가 관리가 중요합니다.",
-      "kind": "energy",
-      "visual": "PLANT",
+      "title": "토목·플랜트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.4%",
+      "kind": "service",
+      "visual": "CONSTRUCTION",
       "image": "../data/business_images/business_image_5184e050831a4460.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "해외",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.4%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "건축·주택",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.6%",
+      "kind": "service",
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
       "image_source": "Unsplash"
     }
   ],

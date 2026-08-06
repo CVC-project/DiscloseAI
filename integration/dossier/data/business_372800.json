@@ -155,14 +155,32 @@
     "segment_finance": "판매 경로 당사의 솔루션 제공업무는 일반적으로 고객사들의 요청에 따라 이루어지고 있습니다. 이때, 당사는 계약 대상 업체와 계약을 체결하게 되며, 솔루션과 용역은 고객에게 직접 제공됩니다.",
     "segment_breakdown": [
       {
-        "name": "증권사은행카드사",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
+        "name": "용역매출_ Finance core",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.4%",
+        "revenue_share": 0.254,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "산업은행",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
+        "name": "용역매출_AI/big data",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.0%",
+        "revenue_share": 0.1,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역매출_Digital Flatform",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.1%",
+        "revenue_share": 0.501,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역매출 소계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 85.5%",
+        "revenue_share": 0.855,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -178,32 +196,70 @@
       "상무",
       "김**"
     ],
-    "investor_note": "판매 경로 당사의 솔루션 제공업무는 일반적으로 고객사들의 요청에 따라 이루어지고 있습니다. 이때, 당사는 계약 대상 업체와 계약을 체결하게 되며, 솔루션과 용역은 고객에게 직접 제공됩니다."
+    "investor_note": "판매 경로 당사의 솔루션 제공업무는 일반적으로 고객사들의 요청에 따라 이루어지고 있습니다. 이때, 당사는 계약 대상 업체와 계약을 체결하게 되며, 솔루션과 용역은 고객에게 직접 제공됩니다.",
+    "product_service_segments": [
+      {
+        "name": "용역매출_ Finance core",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.4%",
+        "revenue_share": 0.254,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역매출_AI/big data",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.0%",
+        "revenue_share": 0.1,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역매출_Digital Flatform",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.1%",
+        "revenue_share": 0.501,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역매출 소계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 85.5%",
+        "revenue_share": 0.855,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "클라우드 서비스",
-      "caption": "기업이 서버와 소프트웨어를 직접 보유하지 않고 빌려 쓰도록 돕는 IT 서비스입니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_cloud.svg",
-      "image_source": "Local curated visual"
+      "title": "의약품",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
+      "kind": "bio",
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "시스템 구축·통합",
-      "caption": "기업 업무에 필요한 서버, 네트워크, 소프트웨어를 묶어 하나의 시스템으로 구축합니다.",
+      "title": "클라우드·데이터센터",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
       "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "visual": "CLOUD",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "소프트웨어·솔루션",
-      "caption": "고객 업무를 자동화하거나 관리 효율을 높이는 소프트웨어 제품군입니다.",
+      "title": "이관",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "기술연구소",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

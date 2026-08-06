@@ -156,18 +156,31 @@
     "segment_breakdown": [
       {
         "name": "필름부문",
-        "desc": "커패시터필름(PPC)·BOPP 이축연신필름 제조판매",
-        "revenue_share": 0.5427
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.5%",
+        "revenue_share": 0.3455,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "BOPP",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.7%",
+        "revenue_share": 0.1972,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "조선기자재부문",
-        "desc": "선박엔진 실린더라이너·엔진프레임 등(자회사 삼영캐스코 포함)",
-        "revenue_share": 0.3473
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.0%",
+        "revenue_share": 0.2097,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "랩부문",
-        "desc": "베트남 생산 PVC·PO 식품포장용 랩",
-        "revenue_share": 0.0528
+        "name": "선박엔진프레임",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.8%",
+        "revenue_share": 0.1376,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -178,32 +191,70 @@
       "선박엔진 실린더라이너",
       "선박엔진프레임"
     ],
-    "investor_note": "필름부문이 매출의 54%, 조선기자재부문이 35%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,532억 원으로 전년 대비 21.6% 늘었고 영업이익·순이익도 각각 63.9%, 80.2% 증가했지만, 인수로 자산이 45.8% 늘며 부채비율도 124.7%로 높아졌습니다."
+    "investor_note": "필름부문이 매출의 54%, 조선기자재부문이 35%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 1,532억 원으로 전년 대비 21.6% 늘었고 영업이익·순이익도 각각 63.9%, 80.2% 증가했지만, 인수로 자산이 45.8% 늘며 부채비율도 124.7%로 높아졌습니다.",
+    "product_service_segments": [
+      {
+        "name": "필름부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.5%",
+        "revenue_share": 0.3455,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "BOPP",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.7%",
+        "revenue_share": 0.1972,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "조선기자재부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.0%",
+        "revenue_share": 0.2097,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "선박엔진프레임",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.8%",
+        "revenue_share": 0.1376,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "필름부문",
-      "caption": "커패시터필름(PPC)·BOPP 이축연신필름 제조판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.5%",
       "kind": "service",
-      "visual": "필름부문",
-      "image": "../data/business_images/business_image_local_cement.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "BOPP",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "조선기자재부문",
-      "caption": "선박엔진 실린더라이너·엔진프레임 등(자회사 삼영캐스코 포함)",
-      "kind": "ship",
-      "visual": "조선기자재부문",
-      "image": "../data/business_images/business_image_local_finance_hold.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_5184e050831a4460.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "랩부문",
-      "caption": "베트남 생산 PVC·PO 식품포장용 랩",
-      "kind": "consumer",
-      "visual": "랩부문",
-      "image": "../data/business_images/business_image_local_packaging.svg",
-      "image_source": "Local curated visual"
+      "title": "구동계 부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.8%",
+      "kind": "auto",
+      "visual": "PARTS",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

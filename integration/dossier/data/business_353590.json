@@ -153,7 +153,22 @@
   "snippets": {
     "overview": "제품을 만들고 판매하는 제조 기반 회사입니다. 자동차 산업은 차량 개발과 판매를 중심으로 한 1차 시장(비포마켓, Before-Market)과, 차량을 인도받은 이후의 고객 니즈를 충족하는 2차 시장(애프터마켓, After-Market)으로 나뉘며, 당사는 이 두 시장의 가교역할을 하는 통합형 플랫폼 전략을 바탕으로 사업을 운영하고 있습니다. 고객이 구매한 품목에 대해 구매확정하면 일주일 이내에 판매금액이 당사로 입금됩니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "제품을 만들고 판매하는 제조 기반 회사입니다. 자동차 산업은 차량 개발과 판매를 중심으로 한 1차 시장(비포마켓, Before-Market)과, 차량을 인도받은 이후의 고객 니즈를 충족하는 2차 시장(애프터마켓, After-Market)으로 나뉘며, 당사는 이 두 시장의 가교역할을 하는 통합형 플랫폼 전략을 바탕으로 사업을 운영하고 있습니다. 고객이 구매한 품목에 대해 구매확정하면 일주일 이내에 판매금액이 당사로 입금됩니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "이커머스 플랫폼",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.0%",
+        "revenue_share": 0.14,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "SPACE ZONE 플랫폼",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.0%",
+        "revenue_share": 0.07,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "배터리",
       "아연",
@@ -167,39 +182,38 @@
       "편의",
       "튜닝 제품 등"
     ],
-    "investor_note": "제품을 만들고 판매하는 제조 기반 회사입니다. 자동차 산업은 차량 개발과 판매를 중심으로 한 1차 시장(비포마켓, Before-Market)과, 차량을 인도받은 이후의 고객 니즈를 충족하는 2차 시장(애프터마켓, After-Market)으로 나뉘며, 당사는 이 두 시장의 가교역할을 하는 통합형 플랫폼 전략을 바탕으로 사업을 운영하고 있습니다. 고객이 구매한 품목에 대해 구매확정하면 일주일 이내에 판매금액이 당사로 입금됩니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "제품을 만들고 판매하는 제조 기반 회사입니다. 자동차 산업은 차량 개발과 판매를 중심으로 한 1차 시장(비포마켓, Before-Market)과, 차량을 인도받은 이후의 고객 니즈를 충족하는 2차 시장(애프터마켓, After-Market)으로 나뉘며, 당사는 이 두 시장의 가교역할을 하는 통합형 플랫폼 전략을 바탕으로 사업을 운영하고 있습니다. 고객이 구매한 품목에 대해 구매확정하면 일주일 이내에 판매금액이 당사로 입금됩니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "제품/서비스 플랫폼",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 79.0%",
+        "revenue_share": 0.79,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "이커머스 플랫폼",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.0%",
+        "revenue_share": 0.14,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "SPACE ZONE 플랫폼",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.0%",
+        "revenue_share": 0.07,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "배터리",
-      "caption": "배터리 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "아연",
-      "caption": "아연 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "auto",
-      "visual": "AUTO",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "장착",
-      "caption": "장착 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "auto",
-      "visual": "AUTO",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "렌터카플랫폼",
-      "caption": "렌터카플랫폼 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "auto",
-      "visual": "AUTO",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "title": "플랫폼 서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 79.0%",
+      "kind": "platform",
+      "visual": "PLATFORM",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
       "image_source": "Unsplash"
     }
   ],

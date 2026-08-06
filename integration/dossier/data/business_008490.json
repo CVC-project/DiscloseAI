@@ -155,29 +155,32 @@
     "segment_finance": "서흥은 의약품·건강기능식품용 하드캡슐에서 국내 점유율 약 95%, 세계 3위를 차지하는 캡슐 전문기업으로, 소프트캡슐 형태의 의약품 위탁생산과 건강기능식품 제조, 캡슐 원료인 젤라틴·콜라겐 생산, 화장품 위탁생산까지 사업을 넓히고 있습니다. 매출의 약 40%는 건강기능식품에서, 32%는 하드캡슐에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 7,223억 원으로 전년 대비 10.6% 늘었고 영업이익은 502억 원으로 48.3%, 당기순이익은 471억 원으로 118.7% 증가하는 등 실적이 크게 개선됐습니다. 부채비율은 96.1%로 무난한 수준입니다.",
     "segment_breakdown": [
       {
-        "name": "캡슐(하드캡슐)",
-        "desc": "의약품·건강기능식품용 하드캡슐 제조, 국내 점유율 약 95%",
-        "revenue_share": 0.32
+        "name": "캡슐 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.0%",
+        "revenue_share": 0.32,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "의약품 전공정 수탁",
-        "desc": "소프트캡슐 등 의약품 위탁생산(CDMO)",
-        "revenue_share": 0.078
+        "name": "의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.8%",
+        "revenue_share": 0.078,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "건강기능식품",
-        "desc": "소프트캡슐·정제·액상 등 다양한 제형의 건강기능식품 제조",
-        "revenue_share": 0.401
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.1%",
+        "revenue_share": 0.401,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "원료(젤라틴·콜라겐)",
-        "desc": "캡슐 주원료인 젤라틴·콜라겐 생산판매",
-        "revenue_share": 0.167
-      },
-      {
-        "name": "화장품",
-        "desc": "기초화장품 위탁생산(OEM/ODM)",
-        "revenue_share": 0.023
+        "name": "상품 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.1%",
+        "revenue_share": 0.011,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -188,40 +191,70 @@
       "콜라겐",
       "화장품(OEM/ODM)"
     ],
-    "investor_note": "서흥은 의약품·건강기능식품용 하드캡슐에서 국내 점유율 약 95%, 세계 3위를 차지하는 캡슐 전문기업으로, 소프트캡슐 형태의 의약품 위탁생산과 건강기능식품 제조, 캡슐 원료인 젤라틴·콜라겐 생산, 화장품 위탁생산까지 사업을 넓히고 있습니다. 매출의 약 40%는 건강기능식품에서, 32%는 하드캡슐에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 7,223억 원으로 전년 대비 10.6% 늘었고 영업이익은 502억 원으로 48.3%, 당기순이익은 471억 원으로 118.7% 증가하는 등 실적이 크게 개선됐습니다. 부채비율은 96.1%로 무난한 수준입니다."
+    "investor_note": "서흥은 의약품·건강기능식품용 하드캡슐에서 국내 점유율 약 95%, 세계 3위를 차지하는 캡슐 전문기업으로, 소프트캡슐 형태의 의약품 위탁생산과 건강기능식품 제조, 캡슐 원료인 젤라틴·콜라겐 생산, 화장품 위탁생산까지 사업을 넓히고 있습니다. 매출의 약 40%는 건강기능식품에서, 32%는 하드캡슐에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 7,223억 원으로 전년 대비 10.6% 늘었고 영업이익은 502억 원으로 48.3%, 당기순이익은 471억 원으로 118.7% 증가하는 등 실적이 크게 개선됐습니다. 부채비율은 96.1%로 무난한 수준입니다.",
+    "product_service_segments": [
+      {
+        "name": "캡슐 부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.0%",
+        "revenue_share": 0.32,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.8%",
+        "revenue_share": 0.078,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "건강기능식품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.1%",
+        "revenue_share": 0.401,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.1%",
+        "revenue_share": 0.011,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "캡슐(하드캡슐)",
-      "caption": "의약품·건강기능식품용 하드캡슐 제조, 국내 점유율 약 95%",
-      "kind": "bio",
-      "visual": "캡슐",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "title": "캡슐 부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "의약품 전공정 수탁",
-      "caption": "소프트캡슐 등 의약품 위탁생산(CDMO)",
+      "title": "의약품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.8%",
       "kind": "bio",
-      "visual": "CDMO",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "건강기능식품",
-      "caption": "소프트캡슐·정제·액상 등 다양한 제형의 건강기능식품 제조",
-      "kind": "consumer",
-      "visual": "건강기능식품",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 40.1%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "원료(젤라틴·콜라겐)",
-      "caption": "캡슐 주원료인 젤라틴·콜라겐 생산판매",
-      "kind": "service",
-      "visual": "원료",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "title": "상품 등",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.1%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

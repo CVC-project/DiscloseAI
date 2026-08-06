@@ -111,28 +111,24 @@
     "segment_breakdown": [
       {
         "name": "철강부문",
-        "desc": "자동차, 조선, 가전용 철강제품 생산 및 판매",
-        "revenue_share": 0.54
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.6%",
+        "revenue_share": 0.206,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "인프라(무역부문)",
-        "desc": "철강, 금속, 에너지 등 무역 및 LNG 사업",
-        "revenue_share": 0.27
+        "name": "냉연",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.1%",
+        "revenue_share": 0.321,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "인프라(건설부문)",
-        "desc": "건축, 플랜트, 인프라 건설사업",
-        "revenue_share": 0.08
-      },
-      {
-        "name": "인프라(물류 등 부문)",
-        "desc": "물류, 디지털 전환 및 자동화 사업",
-        "revenue_share": 0.05
-      },
-      {
-        "name": "이차전지소재부문",
-        "desc": "EV 배터리 양극재, 음극재, 리튬 등 소재",
-        "revenue_share": 0.03
+        "name": "스테인레스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.4%",
+        "revenue_share": 0.164,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "investor_note": "포스코홀딩스는 철강 제품 생산과 판매를 주력으로 하는 대형 종합 소재·에너지 기업으로, 열연강판·냉연강판·스테인리스강 등 다양한 철강제품을 자동차·조선·가전 업체에 공급합니다. 철강부문이 전체 매출의 54%를 차지하며, 철강·금속·에너지 무역과 LNG 사업(27%), 건설·물류 등 인프라 사업(13%)이 뒷받침하고 있고, 최근 전기차 배터리 소재인 양극재·음극재·리튬 사업도 확대 중입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 69조 원대로 전년 대비 5% 감소했으며, 철강·무역 시황 부진과 원가 상승으로 영업이익은 1조 8천억 원으로 16% 하락했고 순이익은 5천억 원으로 47% 급락했습니다(수익성 악화 = 매출 대비 남는 이익이 줄어든 상태). 다만 총자산 105조 원 규모를 유지하고 있으며, 부채비율 68.7%로 적정 수준의 재무 안정성을 지키고 있고, 영업현금흐름은 약 2조 원대로 실제 현금 창출 능력은 유지하고 있습니다.",
@@ -151,30 +147,68 @@
       "전력"
     ],
     "raw_moves": [],
-    "utilization": []
+    "utilization": [],
+    "product_service_segments": [
+      {
+        "name": "철강부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.6%",
+        "revenue_share": 0.206,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "냉연",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.1%",
+        "revenue_share": 0.321,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "스테인레스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.4%",
+        "revenue_share": 0.164,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타제품 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.9%",
+        "revenue_share": 0.309,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "철강",
-      "caption": "열연·냉연·후판 등 철강 업황과 스프레드를 봅니다.",
-      "kind": "steel",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 20.6%",
+      "kind": "material",
       "visual": "STEEL",
       "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
       "image_source": "Wikimedia Commons"
     },
     {
-      "title": "소재",
-      "caption": "리튬, 니켈 등 2차전지 소재 투자를 확인합니다.",
-      "kind": "battery",
-      "visual": "MATERIAL",
-      "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
-      "image_source": "Unsplash"
+      "title": "냉연",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 32.1%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "무역·인프라",
-      "caption": "그룹 내 무역, 에너지, 인프라 사업도 함께 봅니다.",
-      "kind": "platform",
-      "visual": "INFRA",
+      "title": "스테인레스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 16.4%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "기타제품 등",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.9%",
+      "kind": "material",
+      "visual": "MAT",
       "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
       "image_source": "Wikimedia Commons"
     }

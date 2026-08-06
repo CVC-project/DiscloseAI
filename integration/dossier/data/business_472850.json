@@ -121,47 +121,84 @@
   "snippets": {
     "overview": "폰드그룹(주)의 주요 제품·서비스는 패션사업부문, 디아도라, 스포츠이너웨어, 제품공급입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 원재료 구입 후 생산과 관련하여 국내 및 중국, 베트남, 인도네시아 등 임가공업체와 계약을 체결하고, 임가공 후 고객사를 통해 판매하고 있습니다. 생산에 관한 사항 당사는 보고서 작성 기준일 현재 자체 제조공장을 소유하고 있지 않습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "폰드그룹(주)의 주요 제품·서비스는 패션사업부문, 디아도라, 스포츠이너웨어, 제품공급입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 원재료 구입 후 생산과 관련하여 국내 및 중국, 베트남, 인도네시아 등 임가공업체와 계약을 체결하고, 임가공 후 고객사를 통해 판매하고 있습니다. 생산에 관한 사항 당사는 보고서 작성 기준일 현재 자체 제조공장을 소유하고 있지 않습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "수출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
+        "revenue_share": 0.016,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 48.6%",
+        "revenue_share": 0.486,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "패션사업부문",
       "디아도라",
       "스포츠이너웨어",
       "제품공급"
     ],
-    "investor_note": "폰드그룹(주)의 주요 제품·서비스는 패션사업부문, 디아도라, 스포츠이너웨어, 제품공급입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 원재료 구입 후 생산과 관련하여 국내 및 중국, 베트남, 인도네시아 등 임가공업체와 계약을 체결하고, 임가공 후 고객사를 통해 판매하고 있습니다. 생산에 관한 사항 당사는 보고서 작성 기준일 현재 자체 제조공장을 소유하고 있지 않습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "폰드그룹(주)의 주요 제품·서비스는 패션사업부문, 디아도라, 스포츠이너웨어, 제품공급입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 원재료 구입 후 생산과 관련하여 국내 및 중국, 베트남, 인도네시아 등 임가공업체와 계약을 체결하고, 임가공 후 고객사를 통해 판매하고 있습니다. 생산에 관한 사항 당사는 보고서 작성 기준일 현재 자체 제조공장을 소유하고 있지 않습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "패션사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.9%",
+        "revenue_share": 0.349,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "수출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
+        "revenue_share": 0.016,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 48.6%",
+        "revenue_share": 0.486,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역/기타",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.008,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "패션사업부문",
-      "caption": "패션사업부문 관련 제품·서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 34.9%",
       "kind": "service",
-      "visual": "패션사업부문",
-      "image": "../data/business_images/business_image_local_textile.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "할인점",
-      "caption": "이마트 점포를 중심으로 식품·생활용품을 판매합니다.",
-      "kind": "consumer",
-      "visual": "MART",
-      "image": "../data/business_images/business_image_local_textile.svg",
-      "image_source": "Local curated visual"
+      "title": "수출",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "트레이더스",
-      "caption": "창고형 매장으로 대용량 상품과 자체 브랜드를 판매합니다.",
-      "kind": "consumer",
-      "visual": "TRADERS",
-      "image": "../data/business_images/business_image_local_textile.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "전문점·푸드",
-      "caption": "노브랜드, 스타벅스 등 연결 자회사의 유통·식음료 사업이 포함됩니다.",
-      "kind": "consumer",
-      "visual": "FOOD",
-      "image": "../data/business_images/business_image_food_packaged.svg",
-      "image_source": "Local visual"
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 48.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

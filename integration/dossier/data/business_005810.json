@@ -155,14 +155,32 @@
     "segment_finance": "풍산홀딩스는 다른 회사 지분을 관리하는 지주회사이면서, 자체적으로 산업용 소재(MULTI GAGE)·포장재·기계설비를 만들고, 자회사 풍산특수금속을 통해 스테인레스강·특수합금·귀금속 소전 등을 생산합니다. 과거 공시 기반 참고 정보로, 최근 매출액(지분법 손익 포함)은 4,325억 원으로 전년 대비 3.8% 줄었고 영업이익도 36.2% 감소했으며, 당기순이익 역시 25.6% 줄어 전반적으로 실적이 둔화됐습니다. 다만 부채비율은 15.5%로 재무구조는 매우 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "지주부문(제조·기계)",
-        "desc": "MULTI GAGE 등 산업용 소재, 포장재, 기계설계제작",
-        "revenue_share": 0.495
+        "name": "㈜풍산홀딩스 (백만원)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 61.1%",
+        "revenue_share": 0.611,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "풍산특수금속(소재제조)",
-        "desc": "스테인레스 스틸·특수강(High Nickel)·Clad소재·귀금속 소전 제조",
-        "revenue_share": 0.505
+        "name": "기계설계제작 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.9%",
+        "revenue_share": 0.389,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "풍산특수금속㈜ (백만원)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.3%",
+        "revenue_share": 0.553,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "High Nickel",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.3%",
+        "revenue_share": 0.083,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,24 +192,70 @@
       "Clad 소재",
       "귀금속 메달·기념주화"
     ],
-    "investor_note": "풍산홀딩스는 다른 회사 지분을 관리하는 지주회사이면서, 자체적으로 산업용 소재(MULTI GAGE)·포장재·기계설비를 만들고, 자회사 풍산특수금속을 통해 스테인레스강·특수합금·귀금속 소전 등을 생산합니다. 과거 공시 기반 참고 정보로, 최근 매출액(지분법 손익 포함)은 4,325억 원으로 전년 대비 3.8% 줄었고 영업이익도 36.2% 감소했으며, 당기순이익 역시 25.6% 줄어 전반적으로 실적이 둔화됐습니다. 다만 부채비율은 15.5%로 재무구조는 매우 안정적인 편입니다."
+    "investor_note": "풍산홀딩스는 다른 회사 지분을 관리하는 지주회사이면서, 자체적으로 산업용 소재(MULTI GAGE)·포장재·기계설비를 만들고, 자회사 풍산특수금속을 통해 스테인레스강·특수합금·귀금속 소전 등을 생산합니다. 과거 공시 기반 참고 정보로, 최근 매출액(지분법 손익 포함)은 4,325억 원으로 전년 대비 3.8% 줄었고 영업이익도 36.2% 감소했으며, 당기순이익 역시 25.6% 줄어 전반적으로 실적이 둔화됐습니다. 다만 부채비율은 15.5%로 재무구조는 매우 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "㈜풍산홀딩스 (백만원)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 61.1%",
+        "revenue_share": 0.611,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기계설계제작 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.9%",
+        "revenue_share": 0.389,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "풍산특수금속㈜ (백만원)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.3%",
+        "revenue_share": 0.553,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "High Nickel",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.3%",
+        "revenue_share": 0.083,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "지주부문(제조·기계)",
-      "caption": "MULTI GAGE 등 산업용 소재, 포장재, 기계설계제작",
-      "kind": "material",
-      "visual": "지주부문",
-      "image": "../data/business_images/business_image_local_packaging.svg",
-      "image_source": "Local curated visual"
+      "title": "㈜풍산홀딩스 (백만원)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 61.1%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "풍산특수금속(소재제조)",
-      "caption": "스테인레스 스틸·특수강(High Nickel)·Clad소재·귀금속 소전 제조",
+      "title": "기계설계제작 등",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "풍산특수금속㈜ (백만원)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.3%",
       "kind": "material",
-      "visual": "풍산특수금속",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "High Nickel",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.3%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_6d251c6de8f8e995.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

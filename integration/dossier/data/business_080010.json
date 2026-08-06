@@ -153,7 +153,15 @@
   "snippets": {
     "overview": "(주)이상네트웍스의 주요 제품·서비스는 철강, 철강사업부문, 제품(플라즈마 가공품), 시화공장, 용역사업부문, 전시서비스입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품매출은 스테인리스 Plate를 플라즈마/레이저 가공하여 외부에 판매하는 것으로서, 주로 기계/설비 제조업체에 납품하고 있습니다. 신규 설비투자의 투자금액은 6.3억원이며, 2024년 9월 30일 기준 동 설비투자를 완료하고 생산을 가동하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "(주)이상네트웍스의 주요 제품·서비스는 철강, 철강사업부문, 제품(플라즈마 가공품), 시화공장, 용역사업부문, 전시서비스입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품매출은 스테인리스 Plate를 플라즈마/레이저 가공하여 외부에 판매하는 것으로서, 주로 기계/설비 제조업체에 납품하고 있습니다. 신규 설비투자의 투자금액은 6.3억원이며, 2024년 9월 30일 기준 동 설비투자를 완료하고 생산을 가동하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "기업PG",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.7%",
+        "revenue_share": 0.0874,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "철강",
       "철강사업부문",
@@ -168,40 +176,62 @@
       "건물 관리",
       "수입처 다변화"
     ],
-    "investor_note": "(주)이상네트웍스의 주요 제품·서비스는 철강, 철강사업부문, 제품(플라즈마 가공품), 시화공장, 용역사업부문, 전시서비스입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품매출은 스테인리스 Plate를 플라즈마/레이저 가공하여 외부에 판매하는 것으로서, 주로 기계/설비 제조업체에 납품하고 있습니다. 신규 설비투자의 투자금액은 6.3억원이며, 2024년 9월 30일 기준 동 설비투자를 완료하고 생산을 가동하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)이상네트웍스의 주요 제품·서비스는 철강, 철강사업부문, 제품(플라즈마 가공품), 시화공장, 용역사업부문, 전시서비스입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제품매출은 스테인리스 Plate를 플라즈마/레이저 가공하여 외부에 판매하는 것으로서, 주로 기계/설비 제조업체에 납품하고 있습니다. 신규 설비투자의 투자금액은 6.3억원이며, 2024년 9월 30일 기준 동 설비투자를 완료하고 생산을 가동하였습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "철강사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.2%",
+        "revenue_share": 0.0917,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.2%",
+        "revenue_share": 0.0925,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 69.9%",
+        "revenue_share": 0.6988,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기업PG",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.7%",
+        "revenue_share": 0.0874,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "철강",
-      "caption": "철강 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.2%",
       "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "제품(플라즈마 가공품)",
-      "caption": "제품(플라즈마 가공품) 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "시화공장",
-      "caption": "시화공장 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "visual": "STEEL",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "용역사업부문",
-      "caption": "용역사업부문 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 69.9%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "기업PG",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

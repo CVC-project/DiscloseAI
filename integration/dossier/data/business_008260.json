@@ -155,14 +155,18 @@
     "segment_finance": "NI스틸은 강재와 콘크리트를 결합한 합성보·합성기둥 등 건축용 강건재를 만들고, 토목 현장에 필요한 강재(Sheet Pile, H빔 등)를 임대해주는 강재리스 사업도 함께 하는 회사입니다. 제품 매출이 37%, 강재리스 매출이 27%를 차지하는 등 제조와 임대 사업이 고르게 매출을 뒷받침하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,479억 원으로 전년보다 9.9% 줄었고 영업이익은 301억 원으로 18.9%, 당기순이익은 189억 원으로 26.2% 각각 감소했습니다. 총자산은 5,159억 원으로 8.9% 늘었고 부채비율은 90.9%로 자본과 비슷한 수준의 빚을 유지하고 있으며, ROE(자기자본이익률, 투자한 자기 돈 대비 벌어들인 이익 비율)는 7.2%를 기록했습니다.",
     "segment_breakdown": [
       {
-        "name": "강재리스",
-        "desc": "토목·건축 현장용 강재 임대",
-        "revenue_share": 0.2657
+        "name": "상품 매출액",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.6%",
+        "revenue_share": 0.106,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "상품",
-        "desc": "건축·토목용 강재 상품 판매",
-        "revenue_share": 0.106
+        "name": "강재리스 매출액",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.6%",
+        "revenue_share": 0.2657,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -175,24 +179,70 @@
       "N.I-Strut",
       "System비계&Support"
     ],
-    "investor_note": "NI스틸은 강재와 콘크리트를 결합한 합성보·합성기둥 등 건축용 강건재를 만들고, 토목 현장에 필요한 강재(Sheet Pile, H빔 등)를 임대해주는 강재리스 사업도 함께 하는 회사입니다. 제품 매출이 37%, 강재리스 매출이 27%를 차지하는 등 제조와 임대 사업이 고르게 매출을 뒷받침하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,479억 원으로 전년보다 9.9% 줄었고 영업이익은 301억 원으로 18.9%, 당기순이익은 189억 원으로 26.2% 각각 감소했습니다. 총자산은 5,159억 원으로 8.9% 늘었고 부채비율은 90.9%로 자본과 비슷한 수준의 빚을 유지하고 있으며, ROE(자기자본이익률, 투자한 자기 돈 대비 벌어들인 이익 비율)는 7.2%를 기록했습니다."
+    "investor_note": "NI스틸은 강재와 콘크리트를 결합한 합성보·합성기둥 등 건축용 강건재를 만들고, 토목 현장에 필요한 강재(Sheet Pile, H빔 등)를 임대해주는 강재리스 사업도 함께 하는 회사입니다. 제품 매출이 37%, 강재리스 매출이 27%를 차지하는 등 제조와 임대 사업이 고르게 매출을 뒷받침하고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,479억 원으로 전년보다 9.9% 줄었고 영업이익은 301억 원으로 18.9%, 당기순이익은 189억 원으로 26.2% 각각 감소했습니다. 총자산은 5,159억 원으로 8.9% 늘었고 부채비율은 90.9%로 자본과 비슷한 수준의 빚을 유지하고 있으며, ROE(자기자본이익률, 투자한 자기 돈 대비 벌어들인 이익 비율)는 7.2%를 기록했습니다.",
+    "product_service_segments": [
+      {
+        "name": "제품 매출액",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.1%",
+        "revenue_share": 0.3713,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품 매출액",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.6%",
+        "revenue_share": 0.106,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "강재리스 매출액",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.6%",
+        "revenue_share": 0.2657,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타 매출액",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.7%",
+        "revenue_share": 0.227,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "강재리스",
-      "caption": "토목·건축 현장용 강재 임대",
-      "kind": "service",
-      "visual": "강재리스",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "title": "강건재 합성보",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "상품",
-      "caption": "건축·토목용 강재 상품 판매",
-      "kind": "service",
-      "visual": "상품",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "title": "합성기둥",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "Deck Plate",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "Steel Curtain Wall",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

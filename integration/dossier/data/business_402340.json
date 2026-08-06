@@ -98,33 +98,7 @@
     "raw_material": null,
     "capacity": "생산능력은 \"해당 연간 최대생산 일의 생산량ⅹ누적일수ⅹ평균원가\"의 방법으로 산출하고 있으며, 2025년 누적 생산능력은 41,216,512백만원입니다.",
     "segment_finance": "",
-    "segment_breakdown": [
-      {
-        "name": "투자사업",
-        "desc": "지주회사 기능 및 포트폴리오 투자 관리",
-        "revenue_share": 0.0008
-      },
-      {
-        "name": "커머스사업",
-        "desc": "온라인 전자상거래 플랫폼 운영 (11번가)",
-        "revenue_share": 0.3098
-      },
-      {
-        "name": "플랫폼사업",
-        "desc": "모바일 마케팅·앱스토어·정보통신 플랫폼",
-        "revenue_share": 0.2546
-      },
-      {
-        "name": "모빌리티사업",
-        "desc": "내비게이션·모빌리티 데이터·물류 서비스",
-        "revenue_share": 0.392
-      },
-      {
-        "name": "기타사업",
-        "desc": "디지털 광고 및 커머스 대행 서비스",
-        "revenue_share": 0.0428
-      }
-    ],
+    "segment_breakdown": [],
     "investor_note": "과거 공시 기반 참고 정보로, 최근 매출액은 1조 4,115억 원으로 전년 대비 14.4% 감소했지만, 계열사 투자에서 얻는 이익(지분법 이익이라고 하는데, 투자한 회사가 버는 돈을 지분만큼 나눠 갖는 것)이 크게 늘어나면서 영업이익은 8조 7,974억 원으로 124% 증가했고 순이익도 8조 8,187억 원으로 141% 증가했습니다. 부채비율이 9%로 매우 낮아 재무 상태가 건전하며, 총자산 30조 원 규모의 투자 포트폴리오를 관리하고 있습니다.",
     "products": [
       "DRAM",
@@ -140,31 +114,45 @@
       "기프티콘"
     ],
     "raw_moves": [],
-    "utilization": []
+    "utilization": [],
+    "product_service_segments": [
+      {
+        "name": "지주사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.0008,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "커머스사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.0%",
+        "revenue_share": 0.3098,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "플랫폼사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.5%",
+        "revenue_share": 0.2546,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "모빌리티 사업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.2%",
+        "revenue_share": 0.392,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "주력 자회사",
-      "caption": "실제 매출과 이익을 만드는 계열 사업을 먼저 봅니다.",
+      "title": "플랫폼 서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 31.0%",
       "kind": "platform",
-      "visual": "HOLD",
-      "image": "../data/business_images/business_image_c1540b930934e19f.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "신사업",
-      "caption": "포트폴리오 재편과 새 성장 사업을 확인합니다.",
-      "kind": "lab",
-      "visual": "NEW",
-      "image": "../data/business_images/business_image_c1540b930934e19f.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "브랜드·서비스",
-      "caption": "그룹 브랜드와 공통 서비스 수익 구조를 함께 봅니다.",
-      "kind": "platform",
-      "visual": "SERVICE",
-      "image": "../data/business_images/business_image_c1540b930934e19f.avif",
+      "visual": "PLATFORM",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
       "image_source": "Unsplash"
     }
   ],

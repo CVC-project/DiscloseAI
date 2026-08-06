@@ -155,29 +155,32 @@
     "segment_finance": "소량이지만 산업용 베어링(2.0%)도 생산합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 7,872억 원으로 전년 대비 8.3% 늘었고 영업이익도 6.8% 증가했지만, 당기순이익은 8.3% 줄었습니다. 부채비율은 126.8%로 자본보다 부채가 다소 많은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "Transmission Parts",
-        "desc": "변속기 관련 부품(밸브 스풀 등)",
-        "revenue_share": 0.214
+        "name": "자동차부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.4%",
+        "revenue_share": 0.214,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "Engine Parts",
-        "desc": "엔진 부품(워터펌프 등)",
-        "revenue_share": 0.21
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.0%",
+        "revenue_share": 0.21,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "Chassis Parts",
-        "desc": "섀시 부품(CV조인트 등)",
-        "revenue_share": 0.144
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.4%",
+        "revenue_share": 0.144,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "GreenEnergy Parts",
-        "desc": "전기차·하이브리드용 전동화 부품(전동워터펌프 등)",
-        "revenue_share": 0.289
-      },
-      {
-        "name": "Bearing Parts",
-        "desc": "볼베어링 등 기계부품",
-        "revenue_share": 0.02
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.9%",
+        "revenue_share": 0.289,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -187,38 +190,68 @@
       "친환경차 부품(Electric Water Pump)",
       "베어링 부품(Ball Bearing)"
     ],
-    "investor_note": "소량이지만 산업용 베어링(2.0%)도 생산합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 7,872억 원으로 전년 대비 8.3% 늘었고 영업이익도 6.8% 증가했지만, 당기순이익은 8.3% 줄었습니다. 부채비율은 126.8%로 자본보다 부채가 다소 많은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다."
+    "investor_note": "소량이지만 산업용 베어링(2.0%)도 생산합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 7,872억 원으로 전년 대비 8.3% 늘었고 영업이익도 6.8% 증가했지만, 당기순이익은 8.3% 줄었습니다. 부채비율은 126.8%로 자본보다 부채가 다소 많은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "자동차부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.4%",
+        "revenue_share": 0.214,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Engine Parts",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.0%",
+        "revenue_share": 0.21,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Chassis Parts",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.4%",
+        "revenue_share": 0.144,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "GreenEnergy Parts",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.9%",
+        "revenue_share": 0.289,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "Transmission Parts",
-      "caption": "변속기 관련 부품(밸브 스풀 등)",
+      "title": "자동차부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.4%",
       "kind": "auto",
-      "visual": "Transmissi",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
       "title": "Engine Parts",
-      "caption": "엔진 부품(워터펌프 등)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.0%",
       "kind": "auto",
-      "visual": "Engine",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "Chassis Parts",
-      "caption": "섀시 부품(CV조인트 등)",
-      "kind": "auto",
-      "visual": "Chassis",
+      "title": "시스템 구축·통합",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 14.4%",
+      "kind": "service",
+      "visual": "SI",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
       "title": "GreenEnergy Parts",
-      "caption": "전기차·하이브리드용 전동화 부품(전동워터펌프 등)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.9%",
       "kind": "auto",
-      "visual": "GreenEnerg",
+      "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     }

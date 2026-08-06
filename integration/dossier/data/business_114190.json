@@ -155,29 +155,18 @@
     "segment_finance": "강원에너지는 2차전지 소재(리튬 가공)와 설비, 그리고 산업단지용 증기발생기 등 플랜트 설비를 함께 만드는 회사입니다. 매출의 절반 이상은 양극재 원료인 수산화리튬 등 2차전지 소재 사업에서 나오고, 나머지는 2차전지 제조설비와 산업용 증기발생기·화공설비가 채우고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,122억 원으로 전년 대비 5.4% 감소했고, 영업이익은 60억 원 적자로 전환됐으며 당기순이익도 84억 원 손실을 기록했습니다. 부채비율은 129.0%로 자본보다 빚이 많은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "2차전지 소재",
-        "desc": "리튬을 가공해 양극재 원료용 수산화리튬을 생산·판매",
-        "revenue_share": 0.532
-      },
-      {
         "name": "2차전지 설비",
-        "desc": "양극재 제조공정 설계·생산 및 전극 슬러리 설비 공급",
-        "revenue_share": 0.304
-      },
-      {
-        "name": "산업용증기발생기",
-        "desc": "산업단지에 스팀·온수를 공급하는 증기발생기 턴키 공급",
-        "revenue_share": 0.1371
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.4%",
+        "revenue_share": 0.304,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "화공설비",
-        "desc": "정유공정용 황회수·열매체 증기발생기 등 화공설비",
-        "revenue_share": 0.0176
-      },
-      {
-        "name": "환경에너지설비",
-        "desc": "폐열을 회수해 재이용하는 환경에너지 설비",
-        "revenue_share": 0.0002
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
+        "revenue_share": 0.0176,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -190,40 +179,70 @@
       "폐열회수 증기발생기",
       "열매체 증기발생기"
     ],
-    "investor_note": "강원에너지는 2차전지 소재(리튬 가공)와 설비, 그리고 산업단지용 증기발생기 등 플랜트 설비를 함께 만드는 회사입니다. 매출의 절반 이상은 양극재 원료인 수산화리튬 등 2차전지 소재 사업에서 나오고, 나머지는 2차전지 제조설비와 산업용 증기발생기·화공설비가 채우고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,122억 원으로 전년 대비 5.4% 감소했고, 영업이익은 60억 원 적자로 전환됐으며 당기순이익도 84억 원 손실을 기록했습니다. 부채비율은 129.0%로 자본보다 빚이 많은 편이라 재무 부담을 살펴볼 필요가 있습니다."
+    "investor_note": "강원에너지는 2차전지 소재(리튬 가공)와 설비, 그리고 산업단지용 증기발생기 등 플랜트 설비를 함께 만드는 회사입니다. 매출의 절반 이상은 양극재 원료인 수산화리튬 등 2차전지 소재 사업에서 나오고, 나머지는 2차전지 제조설비와 산업용 증기발생기·화공설비가 채우고 있습니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2,122억 원으로 전년 대비 5.4% 감소했고, 영업이익은 60억 원 적자로 전환됐으며 당기순이익도 84억 원 손실을 기록했습니다. 부채비율은 129.0%로 자본보다 빚이 많은 편이라 재무 부담을 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "2차전지사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.2%",
+        "revenue_share": 0.532,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "2차전지 설비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.4%",
+        "revenue_share": 0.304,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "플랜트사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.7%",
+        "revenue_share": 0.1371,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "화공설비",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
+        "revenue_share": 0.0176,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "2차전지 소재",
-      "caption": "리튬을 가공해 양극재 원료용 수산화리튬을 생산·판매",
+      "title": "2차전지사업부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.2%",
       "kind": "battery",
-      "visual": "2차전지",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "visual": "BATTERY",
+      "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "2차전지 설비",
-      "caption": "양극재 제조공정 설계·생산 및 전극 슬러리 설비 공급",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 30.4%",
       "kind": "battery",
-      "visual": "2차전지",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "visual": "BATTERY",
+      "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "산업용증기발생기",
-      "caption": "산업단지에 스팀·온수를 공급하는 증기발생기 턴키 공급",
+      "title": "토목·플랜트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.7%",
       "kind": "service",
-      "visual": "산업용증기발생기",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "visual": "CONSTRUCTION",
+      "image": "../data/business_images/business_image_5184e050831a4460.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "화공설비",
-      "caption": "정유공정용 황회수·열매체 증기발생기 등 화공설비",
-      "kind": "material",
-      "visual": "화공설비",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -153,7 +153,15 @@
   "snippets": {
     "overview": "(주)아이디스의 주요 제품·서비스는 영상보안, Recorder, 영상저장장치, Camera, 카메라, 용역입니다. 생산 및 설비 당사는 주문생산방식(MTO: make-to-order)과 재고생산방식(MTS: make-to-stock)으로 제품을 생산하고 있으며, 대전 본사에 생산라인을 갖추고 있습니다. 이에 당사는 시스템 보안경비가 필요한 곳은 경비업체를 통해서, 리테일, 커머셜, 학교, 금융권 등의 시장은 국내 대리점을 통해서 제품을 공급하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "(주)아이디스의 주요 제품·서비스는 영상보안, Recorder, 영상저장장치, Camera, 카메라, 용역입니다. 생산 및 설비 당사는 주문생산방식(MTO: make-to-order)과 재고생산방식(MTS: make-to-stock)으로 제품을 생산하고 있으며, 대전 본사에 생산라인을 갖추고 있습니다. 이에 당사는 시스템 보안경비가 필요한 곳은 경비업체를 통해서, 리테일, 커머셜, 학교, 금융권 등의 시장은 국내 대리점을 통해서 제품을 공급하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "영상보안",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.6%",
+        "revenue_share": 0.276,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "영상보안",
       "Recorder",
@@ -166,32 +174,47 @@
       "개발품질보증",
       "광운대 공학석사"
     ],
-    "investor_note": "(주)아이디스의 주요 제품·서비스는 영상보안, Recorder, 영상저장장치, Camera, 카메라, 용역입니다. 생산 및 설비 당사는 주문생산방식(MTO: make-to-order)과 재고생산방식(MTS: make-to-stock)으로 제품을 생산하고 있으며, 대전 본사에 생산라인을 갖추고 있습니다. 이에 당사는 시스템 보안경비가 필요한 곳은 경비업체를 통해서, 리테일, 커머셜, 학교, 금융권 등의 시장은 국내 대리점을 통해서 제품을 공급하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "(주)아이디스의 주요 제품·서비스는 영상보안, Recorder, 영상저장장치, Camera, 카메라, 용역입니다. 생산 및 설비 당사는 주문생산방식(MTO: make-to-order)과 재고생산방식(MTS: make-to-stock)으로 제품을 생산하고 있으며, 대전 본사에 생산라인을 갖추고 있습니다. 이에 당사는 시스템 보안경비가 필요한 곳은 경비업체를 통해서, 리테일, 커머셜, 학교, 금융권 등의 시장은 국내 대리점을 통해서 제품을 공급하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "영상보안",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.6%",
+        "revenue_share": 0.276,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.8%",
+        "revenue_share": 0.498,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "제품,상품,용역,기타",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.6%",
+        "revenue_share": 0.226,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "영상보안",
-      "caption": "영상보안 관련 제품과 서비스를 통해 매출을 만듭니다.",
+      "title": "보안 솔루션",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.6%",
       "kind": "service",
-      "visual": "영상보안",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "visual": "SECURITY",
+      "image": "../data/business_images/business_image_281a9ea62f3d74e6.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "Recorder",
-      "caption": "Recorder 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "Recorder",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "영상저장장치",
-      "caption": "영상저장장치 관련 제품과 서비스를 통해 매출을 만듭니다.",
-      "kind": "service",
-      "visual": "영상저장장치",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "title": "제품,상품,용역,기타",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.6%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

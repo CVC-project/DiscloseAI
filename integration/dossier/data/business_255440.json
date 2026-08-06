@@ -155,19 +155,18 @@
     "segment_finance": "주식회사 야스의 주요 사업은 OLED, 제품매출, 증착시스템, 직판입니다. (주2) 해외수주 프로젝트의 경우, 원화 환산적용 환율 차이로 원화금액 기준의 기납품액, 수주잔고, 미청구공사 및 진행률 정보 상호간에 다소 차이가 발생할 수 있습니다.(주3) 공사기한은 고객사와의 협의에 따라 변경될 수 있습니다.(주4) 기재된 계약일은 계약 체결일 혹은 PO(Purchase Order) 발행일 중 빠른날을 기준으로 작성되었습니다.(주5) 해당 수주계약 관련 기재된 계약일은 회사가 인식하는 수익인식 개시일과 상이 할 수 있습니다. 당사는 OLED 디스플레이 패널 제작을 위한 장비 중 증착 장비의 제조 및 판매와 연구개발을 주요사업으로 영위하고 있습니다.",
     "segment_breakdown": [
       {
-        "name": "OLED",
-        "desc": "OLED 관련 제품·서비스",
-        "revenue_share": null
+        "name": "증착원",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.6%",
+        "revenue_share": 0.136,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "증착시스템",
-        "desc": "증착시스템 관련 제품·서비스",
-        "revenue_share": null
-      },
-      {
-        "name": "직판",
-        "desc": "직판 관련 제품·서비스",
-        "revenue_share": null
+        "name": "장비 개조 용역 및 부품판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 86.4%",
+        "revenue_share": 0.864,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -182,32 +181,47 @@
       "상품화",
       "알피이 자체"
     ],
-    "investor_note": "주식회사 야스의 주요 사업은 OLED, 제품매출, 증착시스템, 직판입니다. (주2) 해외수주 프로젝트의 경우, 원화 환산적용 환율 차이로 원화금액 기준의 기납품액, 수주잔고, 미청구공사 및 진행률 정보 상호간에 다소 차이가 발생할 수 있습니다.(주3) 공사기한은 고객사와의 협의에 따라 변경될 수 있습니다.(주4) 기재된 계약일은 계약 체결일 혹은 PO(Purchase Order) 발행일 중 빠른날을 기준으로 작성되었습니다.(주5) 해당 수주계약 관련 기재된 계약일은 회사가 인식하는 수익인식 개시일과 상이 할 수 있습니다. 당사는 OLED 디스플레이 패널 제작을 위한 장비 중 증착 장비의 제조 및 판매와 연구개발을 주요사업으로 영위하고 있습니다."
+    "investor_note": "주식회사 야스의 주요 사업은 OLED, 제품매출, 증착시스템, 직판입니다. (주2) 해외수주 프로젝트의 경우, 원화 환산적용 환율 차이로 원화금액 기준의 기납품액, 수주잔고, 미청구공사 및 진행률 정보 상호간에 다소 차이가 발생할 수 있습니다.(주3) 공사기한은 고객사와의 협의에 따라 변경될 수 있습니다.(주4) 기재된 계약일은 계약 체결일 혹은 PO(Purchase Order) 발행일 중 빠른날을 기준으로 작성되었습니다.(주5) 해당 수주계약 관련 기재된 계약일은 회사가 인식하는 수익인식 개시일과 상이 할 수 있습니다. 당사는 OLED 디스플레이 패널 제작을 위한 장비 중 증착 장비의 제조 및 판매와 연구개발을 주요사업으로 영위하고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "제품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 19.0%",
+        "revenue_share": 0.19,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "증착원",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.6%",
+        "revenue_share": 0.136,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "장비 개조 용역 및 부품판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 86.4%",
+        "revenue_share": 0.864,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "OLED",
-      "caption": "OLED 관련 제품·서비스",
-      "kind": "display",
-      "visual": "OLED",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
-      "image_source": "Wikimedia Commons"
+      "title": "증착원",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.6%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "증착시스템",
-      "caption": "증착시스템 관련 제품·서비스",
-      "kind": "service",
-      "visual": "증착시스템",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "직판",
-      "caption": "직판 관련 제품·서비스",
-      "kind": "service",
-      "visual": "직판",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "title": "장비 개조 용역 및 부품판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 86.4%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

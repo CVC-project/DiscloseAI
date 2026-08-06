@@ -155,19 +155,25 @@
     "segment_finance": "(주)아이티엠반도체의 주요 사업은 전자담배, 부품 부문, SET 부문, 배터리팩, 전자담배 등입니다. 또한 시장의 변화, 고객사의 개발 Trend를 반영한 신제품 제안을 통해 지속적인 매출 확대를 위한 영업활동을 전개하고 있습니다. PMP는 배터리팩 제조 공정의 단순화, 제품의 신뢰성 확보, 배터리팩의 공간활용 극대화 등의 이점을 고객에게 제공하며, 기존 보호회로의 설계적, 구조적 한계를 극복한 혁신적인 제품입니다.",
     "segment_breakdown": [
       {
+        "name": "POC",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.4%",
+        "revenue_share": 0.024,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
         "name": "전자담배",
-        "desc": "담배 관련 제품·서비스",
-        "revenue_share": null
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.5%",
+        "revenue_share": 0.225,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "부품 부문",
-        "desc": "부품 부문 관련 제품·서비스",
-        "revenue_share": null
-      },
-      {
-        "name": "배터리팩, 전자담배",
-        "desc": "배터리, 담배 관련 제품·서비스",
-        "revenue_share": null
+        "name": "etc.(*)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.2%",
+        "revenue_share": 0.092,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -180,24 +186,62 @@
       "진행중",
       "Multi-Cell용 PMP 개발"
     ],
-    "investor_note": "(주)아이티엠반도체의 주요 사업은 전자담배, 부품 부문, SET 부문, 배터리팩, 전자담배 등입니다. 또한 시장의 변화, 고객사의 개발 Trend를 반영한 신제품 제안을 통해 지속적인 매출 확대를 위한 영업활동을 전개하고 있습니다. PMP는 배터리팩 제조 공정의 단순화, 제품의 신뢰성 확보, 배터리팩의 공간활용 극대화 등의 이점을 고객에게 제공하며, 기존 보호회로의 설계적, 구조적 한계를 극복한 혁신적인 제품입니다."
+    "investor_note": "(주)아이티엠반도체의 주요 사업은 전자담배, 부품 부문, SET 부문, 배터리팩, 전자담배 등입니다. 또한 시장의 변화, 고객사의 개발 Trend를 반영한 신제품 제안을 통해 지속적인 매출 확대를 위한 영업활동을 전개하고 있습니다. PMP는 배터리팩 제조 공정의 단순화, 제품의 신뢰성 확보, 배터리팩의 공간활용 극대화 등의 이점을 고객에게 제공하며, 기존 보호회로의 설계적, 구조적 한계를 극복한 혁신적인 제품입니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 65.9%",
+        "revenue_share": 0.659,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "POC",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.4%",
+        "revenue_share": 0.024,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전자담배",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.5%",
+        "revenue_share": 0.225,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "etc.(*)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.2%",
+        "revenue_share": 0.092,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "담배",
-      "caption": "담배 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "consumer",
-      "visual": "SHOP",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "title": "POC",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.4%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "부품 부문",
-      "caption": "부품 부문 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "title": "전자담배",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.5%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "etc.(*)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.2%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

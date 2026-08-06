@@ -155,14 +155,32 @@
     "segment_finance": "카스는 국내 전자저울 시장의 약 70%를 점유한 계량기 전문기업으로, 카스전자저울과 무게감지센서인 로드셀(DG-CELL)을 주력으로 생산하며 중국·터키·일본 등 해외 법인을 통해 판매하고 있습니다. 매출의 약 62%가 자체 생산 제품, 38%가 산업용 전자저울 등 상품 판매에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,610억 원으로 전년보다 3.2% 늘었지만 영업이익은 44.2% 줄었고, 당기순이익은 16억 원 적자로 전환했습니다. 부채비율은 143.2%로 다소 높은 편이라 재무 상황을 함께 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "전자저울·로드셀 제조",
-        "desc": "카스전자저울·DG-CELL 등 자체 생산 제품",
-        "revenue_share": 0.618
+        "name": "전자저울제조 및 판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.2%",
+        "revenue_share": 0.4619,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "상품(산업용 전자저울 등)",
-        "desc": "수입·유통 산업용 전자저울 등",
-        "revenue_share": 0.382
+        "name": "로드셀",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.1%",
+        "revenue_share": 0.1312,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "라벨지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.5%",
+        "revenue_share": 0.0252,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.2%",
+        "revenue_share": 0.3817,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -171,24 +189,70 @@
       "카스라벨",
       "산업용 전자저울"
     ],
-    "investor_note": "카스는 국내 전자저울 시장의 약 70%를 점유한 계량기 전문기업으로, 카스전자저울과 무게감지센서인 로드셀(DG-CELL)을 주력으로 생산하며 중국·터키·일본 등 해외 법인을 통해 판매하고 있습니다. 매출의 약 62%가 자체 생산 제품, 38%가 산업용 전자저울 등 상품 판매에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,610억 원으로 전년보다 3.2% 늘었지만 영업이익은 44.2% 줄었고, 당기순이익은 16억 원 적자로 전환했습니다. 부채비율은 143.2%로 다소 높은 편이라 재무 상황을 함께 살펴볼 필요가 있습니다."
+    "investor_note": "카스는 국내 전자저울 시장의 약 70%를 점유한 계량기 전문기업으로, 카스전자저울과 무게감지센서인 로드셀(DG-CELL)을 주력으로 생산하며 중국·터키·일본 등 해외 법인을 통해 판매하고 있습니다. 매출의 약 62%가 자체 생산 제품, 38%가 산업용 전자저울 등 상품 판매에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1,610억 원으로 전년보다 3.2% 늘었지만 영업이익은 44.2% 줄었고, 당기순이익은 16억 원 적자로 전환했습니다. 부채비율은 143.2%로 다소 높은 편이라 재무 상황을 함께 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "전자저울제조 및 판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.2%",
+        "revenue_share": 0.4619,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "로드셀",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.1%",
+        "revenue_share": 0.1312,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "라벨지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.5%",
+        "revenue_share": 0.0252,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.2%",
+        "revenue_share": 0.3817,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "전자저울·로드셀 제조",
-      "caption": "카스전자저울·DG-CELL 등 자체 생산 제품",
+      "title": "전자저울제조 및 판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.2%",
       "kind": "service",
-      "visual": "전자저울",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "상품(산업용 전자저울 등)",
-      "caption": "수입·유통 산업용 전자저울 등",
+      "title": "로드셀",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 13.1%",
       "kind": "service",
-      "visual": "상품",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "라벨지",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.5%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "상품등",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 38.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

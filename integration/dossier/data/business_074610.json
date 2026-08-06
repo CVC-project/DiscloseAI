@@ -156,8 +156,24 @@
     "segment_breakdown": [
       {
         "name": "소방부문",
-        "desc": "소방 관련 제품·서비스",
-        "revenue_share": null
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 70.6%",
+        "revenue_share": 0.7058,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "2차전지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.4%",
+        "revenue_share": 0.2942,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "[ 합 계 ]",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -174,40 +190,55 @@
       "상품화에 따른 매출증가",
       "스프링클러헤드(1품목)"
     ],
-    "investor_note": "주식회사 이엔플러스의 주요 제품·서비스는 배터리, 방산, 2차전지, 방열제품 등, 이엔플러스, 소방입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 이와 같은 품질 관리와 맞춤형 생산 공정은 당사의 방열소재 제품이 시장에서 높은 신뢰를 얻고, 고객에게 최적화된 솔루션을 제공하는 데 중요한 역할을 하고 있습니다. 이는 제품의 사용 편의성을 크게 향상시키며, 고객의 생산 공정에서의 효율성을 높여줍니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사 이엔플러스의 주요 제품·서비스는 배터리, 방산, 2차전지, 방열제품 등, 이엔플러스, 소방입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 이와 같은 품질 관리와 맞춤형 생산 공정은 당사의 방열소재 제품이 시장에서 높은 신뢰를 얻고, 고객에게 최적화된 솔루션을 제공하는 데 중요한 역할을 하고 있습니다. 이는 제품의 사용 편의성을 크게 향상시키며, 고객의 생산 공정에서의 효율성을 높여줍니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "소방부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 70.6%",
+        "revenue_share": 0.7058,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "2차전지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.4%",
+        "revenue_share": 0.2942,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "[ 합 계 ]",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "배터리",
-      "caption": "배터리 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "방산",
-      "caption": "방산 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "소방부문",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 70.6%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_4ae102473975707c.jpg",
-      "image_source": "Wikimedia Commons"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "2차전지",
-      "caption": "2차전지 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.4%",
       "kind": "battery",
       "visual": "BATTERY",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "방열제품 등",
-      "caption": "방열제품 등 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "[ 합 계 ]",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

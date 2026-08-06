@@ -153,7 +153,22 @@
   "snippets": {
     "overview": "(주)코스메카코리아의 주요 사업은 생산사업, 글로벌영업사업입니다. 수주잔고는 매출처의 상황에 따라 수시로 확정되므로 특정일의 정확한 수주잔고를 표시할 수 없습니다. 수주상황 당사는 매출처의 판매계획에 따라 발주량과 납기를 결정하고 있습니다.",
     "segment_finance": "(주)코스메카코리아의 주요 사업은 생산사업, 글로벌영업사업입니다. 수주잔고는 매출처의 상황에 따라 수시로 확정되므로 특정일의 정확한 수주잔고를 표시할 수 없습니다. 수주상황 당사는 매출처의 판매계획에 따라 발주량과 납기를 결정하고 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "화장품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 98.6%",
+        "revenue_share": 0.986,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.002,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "화장품",
       "닥터자르트리쥬비네이팅뷰티밤",
@@ -164,24 +179,32 @@
       "D사 등",
       "반제품"
     ],
-    "investor_note": "(주)코스메카코리아의 주요 사업은 생산사업, 글로벌영업사업입니다. 수주잔고는 매출처의 상황에 따라 수시로 확정되므로 특정일의 정확한 수주잔고를 표시할 수 없습니다. 수주상황 당사는 매출처의 판매계획에 따라 발주량과 납기를 결정하고 있습니다."
+    "investor_note": "(주)코스메카코리아의 주요 사업은 생산사업, 글로벌영업사업입니다. 수주잔고는 매출처의 상황에 따라 수시로 확정되므로 특정일의 정확한 수주잔고를 표시할 수 없습니다. 수주상황 당사는 매출처의 판매계획에 따라 발주량과 납기를 결정하고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "화장품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 98.6%",
+        "revenue_share": 0.986,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.2%",
+        "revenue_share": 0.002,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "화장품",
-      "caption": "화장품 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 98.6%",
       "kind": "material",
       "visual": "MAT",
-      "image": "../data/business_images/business_image_local_cosmetics.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "닥터자르트리쥬비네이팅뷰티밤",
-      "caption": "닥터자르트리쥬비네이팅뷰티밤 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -155,9 +155,32 @@
     "segment_finance": "원재료이며, 한국, 중국, 태국, 미국 등에서 생산하고 있습니다.MS사업부문은 TV, Audio, 모니터, PC, 인포메이션 디스플레이 등 주로 영상 및 관련기기들을 생산ㆍ판매하며, 매출액은 194,263억원으로 전체 매출액 대비 약 21.8%를 차지하고 있습니다. 또한 B2C사업에서 축적해온 고객 이해와 노하우를 기반으로 차량 내 공간에서 이뤄지는 서비스에 대한 고객 경험 솔루션을 제공할 것입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "한국산업은행 등",
-        "desc": "은행 관련 제품·서비스",
-        "revenue_share": null
+        "name": "HS",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.3%",
+        "revenue_share": 0.293,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "MS",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.8%",
+        "revenue_share": 0.218,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "VS",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.5%",
+        "revenue_share": 0.125,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "ES",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.5%",
+        "revenue_share": 0.105,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -173,32 +196,70 @@
       "LG",
       "DIOS"
     ],
-    "investor_note": "원재료이며, 한국, 중국, 태국, 미국 등에서 생산하고 있습니다.MS사업부문은 TV, Audio, 모니터, PC, 인포메이션 디스플레이 등 주로 영상 및 관련기기들을 생산ㆍ판매하며, 매출액은 194,263억원으로 전체 매출액 대비 약 21.8%를 차지하고 있습니다. 또한 B2C사업에서 축적해온 고객 이해와 노하우를 기반으로 차량 내 공간에서 이뤄지는 서비스에 대한 고객 경험 솔루션을 제공할 것입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "원재료이며, 한국, 중국, 태국, 미국 등에서 생산하고 있습니다.MS사업부문은 TV, Audio, 모니터, PC, 인포메이션 디스플레이 등 주로 영상 및 관련기기들을 생산ㆍ판매하며, 매출액은 194,263억원으로 전체 매출액 대비 약 21.8%를 차지하고 있습니다. 또한 B2C사업에서 축적해온 고객 이해와 노하우를 기반으로 차량 내 공간에서 이뤄지는 서비스에 대한 고객 경험 솔루션을 제공할 것입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "HS",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.3%",
+        "revenue_share": 0.293,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "MS",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.8%",
+        "revenue_share": 0.218,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "VS",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.5%",
+        "revenue_share": 0.125,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "ES",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.5%",
+        "revenue_share": 0.105,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "OLED",
-      "caption": "스마트폰·TV·IT기기에 화면을 제공하는 디스플레이 제품입니다.",
-      "kind": "display",
-      "visual": "OLED",
-      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
-      "image_source": "Wikimedia Commons"
-    },
-    {
-      "title": "카메라모듈",
-      "caption": "스마트폰과 전장 카메라에 들어가는 이미지 처리 부품입니다.",
+      "title": "HS",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 29.3%",
       "kind": "telecom",
       "visual": "NET",
-      "image": "../data/business_images/business_image_141eab6519656e30.jpg",
-      "image_source": "Wikimedia Commons"
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "은행",
-      "caption": "예금과 대출에서 이자이익을 만드는 금융 서비스입니다.",
-      "kind": "bank",
-      "visual": "BANK",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "title": "MS",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 21.8%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "VS",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.5%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "ES",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.5%",
+      "kind": "telecom",
+      "visual": "NET",
+      "image": "../data/business_images/business_image_ca24250faeb63812.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

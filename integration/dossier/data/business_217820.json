@@ -153,7 +153,29 @@
   "snippets": {
     "overview": "(주)원익피앤이의 주요 사업은 각 사업부문별 상품매출, 전자부품, 관련사업입니다. 당사는 사업특성상 수주를 받아 제작 및 납품 등을 하므로 각 수주별 일자 및 금액을 구분하여 기재가 불가능하여 당기말 현재 수주잔고만 기재하였습니다. 더욱이 고객이 불만을 제기하기 전에 사전적인 품질 진단을 통해 문제 발생 가능성이높은 장비를 수리 및 교체하여 품질불량으로 인한 고객의 생산 효율 저하를 미리 방지하는 고객 중심의 서비스를 제공하고 있습니다.",
     "segment_finance": "(주)원익피앤이의 주요 사업은 각 사업부문별 상품매출, 전자부품, 관련사업입니다. 당사는 사업특성상 수주를 받아 제작 및 납품 등을 하므로 각 수주별 일자 및 금액을 구분하여 기재가 불가능하여 당기말 현재 수주잔고만 기재하였습니다. 더욱이 고객이 불만을 제기하기 전에 사전적인 품질 진단을 통해 문제 발생 가능성이높은 장비를 수리 및 교체하여 품질불량으로 인한 고객의 생산 효율 저하를 미리 방지하는 고객 중심의 서비스를 제공하고 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "전원공급장치",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.8%",
+        "revenue_share": 0.028,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "충전인프라",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.1%",
+        "revenue_share": 0.041,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.01,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "배터리",
       "2차전지 장비",
@@ -167,40 +189,54 @@
       "반제품",
       "조립공정 설비화성공정 설비싸이클러"
     ],
-    "investor_note": "(주)원익피앤이의 주요 사업은 각 사업부문별 상품매출, 전자부품, 관련사업입니다. 당사는 사업특성상 수주를 받아 제작 및 납품 등을 하므로 각 수주별 일자 및 금액을 구분하여 기재가 불가능하여 당기말 현재 수주잔고만 기재하였습니다. 더욱이 고객이 불만을 제기하기 전에 사전적인 품질 진단을 통해 문제 발생 가능성이높은 장비를 수리 및 교체하여 품질불량으로 인한 고객의 생산 효율 저하를 미리 방지하는 고객 중심의 서비스를 제공하고 있습니다."
+    "investor_note": "(주)원익피앤이의 주요 사업은 각 사업부문별 상품매출, 전자부품, 관련사업입니다. 당사는 사업특성상 수주를 받아 제작 및 납품 등을 하므로 각 수주별 일자 및 금액을 구분하여 기재가 불가능하여 당기말 현재 수주잔고만 기재하였습니다. 더욱이 고객이 불만을 제기하기 전에 사전적인 품질 진단을 통해 문제 발생 가능성이높은 장비를 수리 및 교체하여 품질불량으로 인한 고객의 생산 효율 저하를 미리 방지하는 고객 중심의 서비스를 제공하고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "제품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 88.3%",
+        "revenue_share": 0.883,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "전원공급장치",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.8%",
+        "revenue_share": 0.028,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "충전인프라",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.1%",
+        "revenue_share": 0.041,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.01,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "배터리",
-      "caption": "배터리 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "2차전지 장비",
-      "caption": "2차전지 장비 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "조립공정 설비",
-      "caption": "조립공정 설비 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "전원공급장치",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.8%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "화성공정 설비",
-      "caption": "화성공정 설비 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "충전인프라",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.1%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

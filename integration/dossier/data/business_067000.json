@@ -155,24 +155,18 @@
     "segment_finance": "주식회사 조이시티의 주요 제품·서비스는 게임, 게임서비스, 온라인게임, 구글, 애플, GSP입니다. 생산설비당사는 물적 형태의 제품을 고객에게 제공하지 않고, 무형의 제품을 고객에게 판매하는 S/W개발 및 서비스 회사입니다. 원재료당사는 원재료를 구매 후 제품을 제조하는 회사가 아닌 S/W 개발 및 서비스 회사입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "산업은행",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
+        "name": "온라인게임",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.0%",
+        "revenue_share": 0.28,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "농협은행",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
-      },
-      {
-        "name": "신한은행",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
-      },
-      {
-        "name": "부산은행",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
+        "name": "모바일게임",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 62.6%",
+        "revenue_share": 0.6261,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -185,40 +179,32 @@
       "자체 플랫폼",
       "채널링 등"
     ],
-    "investor_note": "주식회사 조이시티의 주요 제품·서비스는 게임, 게임서비스, 온라인게임, 구글, 애플, GSP입니다. 생산설비당사는 물적 형태의 제품을 고객에게 제공하지 않고, 무형의 제품을 고객에게 판매하는 S/W개발 및 서비스 회사입니다. 원재료당사는 원재료를 구매 후 제품을 제조하는 회사가 아닌 S/W 개발 및 서비스 회사입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사 조이시티의 주요 제품·서비스는 게임, 게임서비스, 온라인게임, 구글, 애플, GSP입니다. 생산설비당사는 물적 형태의 제품을 고객에게 제공하지 않고, 무형의 제품을 고객에게 판매하는 S/W개발 및 서비스 회사입니다. 원재료당사는 원재료를 구매 후 제품을 제조하는 회사가 아닌 S/W 개발 및 서비스 회사입니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "온라인게임",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.0%",
+        "revenue_share": 0.28,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "모바일게임",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 62.6%",
+        "revenue_share": 0.6261,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "플랫폼 서비스",
-      "caption": "여러 이용자와 서비스를 한곳에서 연결해 반복 이용을 만드는 디지털 서비스입니다.",
-      "kind": "platform",
-      "visual": "APP",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
       "title": "게임",
-      "caption": "게임 관련 제품·서비스가 매출에 연결됩니다.",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.0%",
       "kind": "platform",
-      "visual": "APP",
-      "image": "../data/business_images/business_image_local_content.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "구글",
-      "caption": "구글 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "애플",
-      "caption": "애플 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "visual": "GAME",
+      "image": "../data/business_images/business_image_7a64e307a92ba431.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

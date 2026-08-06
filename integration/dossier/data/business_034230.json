@@ -155,19 +155,25 @@
     "segment_finance": "파라다이스는 서울·인천·부산·제주에서 외국인전용 카지노를 운영하는 복합리조트 기업으로, 인천 파라다이스시티(카지노+호텔+엔터테인먼트)가 매출의 52%로 가장 크고 카지노 단독 사업이 36%를 차지합니다. 부산·미국 올랜도 호텔사업과 충남 도고 스파도 함께 운영합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 1,498억 원으로 전년 대비 7.3% 늘었고 영업이익은 14.5%, 당기순이익은 30.8% 증가하며 실적이 뚜렷하게 좋아졌습니다. 부채비율은 84.4%로 자본보다 다소 적은 수준의 빚을 지고 있어 재무구조는 비교적 안정적입니다.",
     "segment_breakdown": [
       {
-        "name": "복합리조트",
-        "desc": "인천 파라다이스시티 카지노·호텔·엔터테인먼트",
-        "revenue_share": 0.5196
-      },
-      {
         "name": "카지노",
-        "desc": "서울·부산·제주 외국인전용 카지노",
-        "revenue_share": 0.3647
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 36.5%",
+        "revenue_share": 0.3647,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "호텔",
-        "desc": "파라다이스 호텔 부산, 미국 올랜도 호텔",
-        "revenue_share": 0.1001
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.0%",
+        "revenue_share": 0.1001,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "복합리조트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 52.0%",
+        "revenue_share": 0.5196,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -177,32 +183,55 @@
       "미국 올랜도 호텔",
       "파라다이스 스파 도고"
     ],
-    "investor_note": "파라다이스는 서울·인천·부산·제주에서 외국인전용 카지노를 운영하는 복합리조트 기업으로, 인천 파라다이스시티(카지노+호텔+엔터테인먼트)가 매출의 52%로 가장 크고 카지노 단독 사업이 36%를 차지합니다. 부산·미국 올랜도 호텔사업과 충남 도고 스파도 함께 운영합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 1,498억 원으로 전년 대비 7.3% 늘었고 영업이익은 14.5%, 당기순이익은 30.8% 증가하며 실적이 뚜렷하게 좋아졌습니다. 부채비율은 84.4%로 자본보다 다소 적은 수준의 빚을 지고 있어 재무구조는 비교적 안정적입니다."
+    "investor_note": "파라다이스는 서울·인천·부산·제주에서 외국인전용 카지노를 운영하는 복합리조트 기업으로, 인천 파라다이스시티(카지노+호텔+엔터테인먼트)가 매출의 52%로 가장 크고 카지노 단독 사업이 36%를 차지합니다. 부산·미국 올랜도 호텔사업과 충남 도고 스파도 함께 운영합니다. 과거 공시 기반 참고 정보로, 최근 매출액은 1조 1,498억 원으로 전년 대비 7.3% 늘었고 영업이익은 14.5%, 당기순이익은 30.8% 증가하며 실적이 뚜렷하게 좋아졌습니다. 부채비율은 84.4%로 자본보다 다소 적은 수준의 빚을 지고 있어 재무구조는 비교적 안정적입니다.",
+    "product_service_segments": [
+      {
+        "name": "카지노",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 36.5%",
+        "revenue_share": 0.3647,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "호텔",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.0%",
+        "revenue_share": 0.1001,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "복합리조트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 52.0%",
+        "revenue_share": 0.5196,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "복합리조트",
-      "caption": "인천 파라다이스시티 카지노·호텔·엔터테인먼트",
-      "kind": "service",
-      "visual": "복합리조트",
-      "image": "../data/business_images/business_image_local_packaging.svg",
-      "image_source": "Local curated visual"
-    },
-    {
       "title": "카지노",
-      "caption": "서울·부산·제주 외국인전용 카지노",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 36.5%",
       "kind": "service",
-      "visual": "카지노",
-      "image": "../data/business_images/business_image_local_packaging.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "호텔",
-      "caption": "파라다이스 호텔 부산, 미국 올랜도 호텔",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 10.0%",
       "kind": "service",
-      "visual": "호텔",
-      "image": "../data/business_images/business_image_local_packaging.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "복합리조트",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 52.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

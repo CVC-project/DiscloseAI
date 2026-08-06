@@ -155,19 +155,32 @@
     "segment_finance": "한국주철관공업은 상하수도용 덕타일주철관과 강관을 만드는 회사를 지배회사로 하면서, 건설·농업용 구조용강관을 만드는 진방스틸 등 자회사와 홀리카홀리카 화장품 브랜드로 알려진 엔프라니까지 계열사로 둔 그룹입니다. 매출 비중은 구조용강관이 가장 크고, 주철관·강관, 화장품 순입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 4,066억 원으로 전년 대비 3.1% 줄었고 영업이익도 13.9% 감소했지만, 당기순이익은 171억 원으로 19.2% 늘었습니다. 부채비율은 19.3%로 빚 부담이 낮은 편입니다.",
     "segment_breakdown": [
       {
-        "name": "주철관·강관 제조(지배회사)",
-        "desc": "선철·고철·철코일로 상하수도용 주철관·강관 생산",
-        "revenue_share": 0.25
+        "name": "한국주철관공업 주식회사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 86.0%",
+        "revenue_share": 0.86,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "구조용강관(진방스틸·한국강재·에이스스틸)",
-        "desc": "철코일에 아연도금해 건설·농업용 원형관·각관 생산",
-        "revenue_share": 0.54
+        "name": "강관 제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.0%",
+        "revenue_share": 0.09,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "화장품(엔프라니)",
-        "desc": "홀리카홀리카 브랜드로 스킨케어 화장품 제조·판매",
-        "revenue_share": 0.21
+        "name": "도소매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
+        "revenue_share": 0.05,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "진방스틸㈜ 한국강재㈜ 에이스스틸㈜",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 82.0%",
+        "revenue_share": 0.82,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -178,32 +191,70 @@
       "24K골드리페어앰플",
       "레티노에이트 프로 딥링클 스팟코렉터"
     ],
-    "investor_note": "한국주철관공업은 상하수도용 덕타일주철관과 강관을 만드는 회사를 지배회사로 하면서, 건설·농업용 구조용강관을 만드는 진방스틸 등 자회사와 홀리카홀리카 화장품 브랜드로 알려진 엔프라니까지 계열사로 둔 그룹입니다. 매출 비중은 구조용강관이 가장 크고, 주철관·강관, 화장품 순입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 4,066억 원으로 전년 대비 3.1% 줄었고 영업이익도 13.9% 감소했지만, 당기순이익은 171억 원으로 19.2% 늘었습니다. 부채비율은 19.3%로 빚 부담이 낮은 편입니다."
+    "investor_note": "한국주철관공업은 상하수도용 덕타일주철관과 강관을 만드는 회사를 지배회사로 하면서, 건설·농업용 구조용강관을 만드는 진방스틸 등 자회사와 홀리카홀리카 화장품 브랜드로 알려진 엔프라니까지 계열사로 둔 그룹입니다. 매출 비중은 구조용강관이 가장 크고, 주철관·강관, 화장품 순입니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 4,066억 원으로 전년 대비 3.1% 줄었고 영업이익도 13.9% 감소했지만, 당기순이익은 171억 원으로 19.2% 늘었습니다. 부채비율은 19.3%로 빚 부담이 낮은 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "한국주철관공업 주식회사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 86.0%",
+        "revenue_share": 0.86,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "강관 제조",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.0%",
+        "revenue_share": 0.09,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "도소매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
+        "revenue_share": 0.05,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "진방스틸㈜ 한국강재㈜ 에이스스틸㈜",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 82.0%",
+        "revenue_share": 0.82,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "주철관·강관 제조(지배회사)",
-      "caption": "선철·고철·철코일로 상하수도용 주철관·강관 생산",
-      "kind": "service",
-      "visual": "주철관",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "title": "한국주철관공업 주식회사",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 86.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "구조용강관(진방스틸·한국강재·에이스스틸)",
-      "caption": "철코일에 아연도금해 건설·농업용 원형관·각관 생산",
-      "kind": "service",
-      "visual": "구조용강관",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "title": "철강",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.0%",
+      "kind": "material",
+      "visual": "STEEL",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "화장품(엔프라니)",
-      "caption": "홀리카홀리카 브랜드로 스킨케어 화장품 제조·판매",
-      "kind": "consumer",
-      "visual": "화장품",
-      "image": "../data/business_images/business_image_local_cosmetics.svg",
-      "image_source": "Local curated visual"
+      "title": "도소매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "진방스틸㈜ 한국강재㈜ 에이스스틸㈜",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 82.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

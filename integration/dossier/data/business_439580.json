@@ -123,14 +123,32 @@
     "segment_finance": "블루엠텍의 주요 제품·서비스는 의약품, 보험, 제품설명, 의료소모품, 경감(輕減), 살충입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제휴사(제약회사, 타도매업체, 협회 등)의 의약품 및 의료기기, 의료장비 등의 상품 판매를 제안하거나, 제안을 받으면 해당 상품을 e-커머스 플랫폼에 등록하여 병의원의 의사 또는 약국의 약사 고객에게 상품을 판매를 하는 방식입니다. e-커머스의 고객은 의사와 약사로 구성되어 있으며, 일반인들은 접근할 수 없는 폐쇄몰 형식으로 운영하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_breakdown": [
       {
-        "name": "국민건강보험",
-        "desc": "보험 관련 제품·서비스",
-        "revenue_share": null
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.8%",
+        "revenue_share": 0.2575,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "건강보험",
-        "desc": "보험 관련 제품·서비스",
-        "revenue_share": null
+        "name": "비급여",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.0%",
+        "revenue_share": 0.5496,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "의약외품 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.1%",
+        "revenue_share": 0.0509,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "급여",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.0%",
+        "revenue_share": 0.1101,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -147,24 +165,70 @@
       "B 제품",
       "C 제품"
     ],
-    "investor_note": "블루엠텍의 주요 제품·서비스는 의약품, 보험, 제품설명, 의료소모품, 경감(輕減), 살충입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제휴사(제약회사, 타도매업체, 협회 등)의 의약품 및 의료기기, 의료장비 등의 상품 판매를 제안하거나, 제안을 받으면 해당 상품을 e-커머스 플랫폼에 등록하여 병의원의 의사 또는 약국의 약사 고객에게 상품을 판매를 하는 방식입니다. e-커머스의 고객은 의사와 약사로 구성되어 있으며, 일반인들은 접근할 수 없는 폐쇄몰 형식으로 운영하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "블루엠텍의 주요 제품·서비스는 의약품, 보험, 제품설명, 의료소모품, 경감(輕減), 살충입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 제휴사(제약회사, 타도매업체, 협회 등)의 의약품 및 의료기기, 의료장비 등의 상품 판매를 제안하거나, 제안을 받으면 해당 상품을 e-커머스 플랫폼에 등록하여 병의원의 의사 또는 약국의 약사 고객에게 상품을 판매를 하는 방식입니다. e-커머스의 고객은 의사와 약사로 구성되어 있으며, 일반인들은 접근할 수 없는 폐쇄몰 형식으로 운영하고 있습니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.8%",
+        "revenue_share": 0.2575,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "비급여",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.0%",
+        "revenue_share": 0.5496,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "의약외품 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.1%",
+        "revenue_share": 0.0509,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "급여",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.0%",
+        "revenue_share": 0.1101,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "의료소모품",
-      "caption": "의료소모품 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 25.8%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "title": "경감(輕減)",
-      "caption": "경감(輕減) 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "비급여",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "의약외품 등",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.1%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "급여",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.0%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

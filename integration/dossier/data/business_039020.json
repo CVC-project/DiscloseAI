@@ -155,34 +155,32 @@
     "segment_finance": "이건홀딩스는 창호(이건창호), 합판·마루(이건산업), 조림(솔로몬제도), 열병합발전(이건에너지) 등 목재 관련 계열사를 거느린 지주회사입니다. 매출은 합판·마루 등 목재부문(60.2%)과 창호부문(24.5%)에 집중돼 있으며, 파레트부문은 시장 악화로 2025년 7월 그린파레트 생산을 중단했습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 4,471억 원으로 전년 대비 10.1% 줄었고 영업손실 12억 원으로 적자 전환했습니다. 당기순손실은 113억 원으로 적자가 지속됐지만 전년보다는 손실 폭이 29.7% 줄었습니다. 부채비율은 104.7%로 자본과 비슷한 규모의 빚을 지고 있습니다.",
     "segment_breakdown": [
       {
-        "name": "목재부문",
-        "desc": "합판·마루 제조·판매(국내·칠레)",
-        "revenue_share": 0.602
+        "name": "지주",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.4%",
+        "revenue_share": 0.014,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "창호부문",
-        "desc": "시스템창호·커튼월창호 제조·판매·시공",
-        "revenue_share": 0.245
+        "name": "창호",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.5%",
+        "revenue_share": 0.245,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "에너지부문",
-        "desc": "열병합발전을 통한 전기·증기 공급",
-        "revenue_share": 0.068
+        "name": "목재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 60.2%",
+        "revenue_share": 0.602,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "파레트부문",
-        "desc": "폐목재 활용 그린파레트 제조(2025.7 생산중단)",
-        "revenue_share": 0.053
-      },
-      {
-        "name": "조림부문",
-        "desc": "솔로몬제도 조림·원목판매",
-        "revenue_share": 0.018
-      },
-      {
-        "name": "지주부문",
-        "desc": "자회사 배당금·경영자문·브랜드수수료 등",
-        "revenue_share": 0.014
+        "name": "조림",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
+        "revenue_share": 0.018,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -194,40 +192,70 @@
       "증기(열병합발전)",
       "그린파레트(생산중단)"
     ],
-    "investor_note": "이건홀딩스는 창호(이건창호), 합판·마루(이건산업), 조림(솔로몬제도), 열병합발전(이건에너지) 등 목재 관련 계열사를 거느린 지주회사입니다. 매출은 합판·마루 등 목재부문(60.2%)과 창호부문(24.5%)에 집중돼 있으며, 파레트부문은 시장 악화로 2025년 7월 그린파레트 생산을 중단했습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 4,471억 원으로 전년 대비 10.1% 줄었고 영업손실 12억 원으로 적자 전환했습니다. 당기순손실은 113억 원으로 적자가 지속됐지만 전년보다는 손실 폭이 29.7% 줄었습니다. 부채비율은 104.7%로 자본과 비슷한 규모의 빚을 지고 있습니다."
+    "investor_note": "이건홀딩스는 창호(이건창호), 합판·마루(이건산업), 조림(솔로몬제도), 열병합발전(이건에너지) 등 목재 관련 계열사를 거느린 지주회사입니다. 매출은 합판·마루 등 목재부문(60.2%)과 창호부문(24.5%)에 집중돼 있으며, 파레트부문은 시장 악화로 2025년 7월 그린파레트 생산을 중단했습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 4,471억 원으로 전년 대비 10.1% 줄었고 영업손실 12억 원으로 적자 전환했습니다. 당기순손실은 113억 원으로 적자가 지속됐지만 전년보다는 손실 폭이 29.7% 줄었습니다. 부채비율은 104.7%로 자본과 비슷한 규모의 빚을 지고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "지주",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.4%",
+        "revenue_share": 0.014,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "창호",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.5%",
+        "revenue_share": 0.245,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "목재",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 60.2%",
+        "revenue_share": 0.602,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "조림",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
+        "revenue_share": 0.018,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "목재부문",
-      "caption": "합판·마루 제조·판매(국내·칠레)",
+      "title": "지주",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.4%",
       "kind": "service",
-      "visual": "목재부문",
-      "image": "../data/business_images/business_image_local_wood.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "창호부문",
-      "caption": "시스템창호·커튼월창호 제조·판매·시공",
+      "title": "창호",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 24.5%",
       "kind": "service",
-      "visual": "창호부문",
-      "image": "../data/business_images/business_image_local_wood.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "에너지부문",
-      "caption": "열병합발전을 통한 전기·증기 공급",
-      "kind": "power",
-      "visual": "에너지부문",
-      "image": "../data/business_images/business_image_local_wood.svg",
-      "image_source": "Local curated visual"
+      "title": "목재",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 60.2%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "파레트부문",
-      "caption": "폐목재 활용 그린파레트 제조(2025.7 생산중단)",
+      "title": "조림",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.8%",
       "kind": "service",
-      "visual": "파레트부문",
-      "image": "../data/business_images/business_image_local_wood.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

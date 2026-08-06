@@ -155,14 +155,32 @@
     "segment_finance": "디에이피는 이동통신단말기와 자동차 전장품용 인쇄회로기판(PCB)을 생산하는 본업에 더해, 청주를 기반으로 한 저비용항공사 에어로케이항공을 종속회사(에어로케이홀딩스)로 편입해 PCB 제조(61%)와 항공운송(39%) 두 축으로 사업을 운영하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 5,431억 원으로 전년보다 11.1% 늘었지만 영업손실 578억 원, 당기순손실 647억 원으로 손실 규모가 매우 컸습니다. 특히 자본총계가 마이너스(-207억 원)로 완전자본잠식 상태이며 이 때문에 부채비율도 통상적인 방식으로 계산할 수 없을 만큼 재무구조가 크게 악화된 상태입니다. 감사인은 항공사 인수로 생긴 영업권(202억 원)의 손상 여부와 수익인식 기간귀속을 핵심감사사항으로 선정했으며, 투자 판단 전 재무 위험을 각별히 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "인쇄회로기판(PCB) 제조",
-        "desc": "이동통신단말기·자동차 전장용 PCB",
-        "revenue_share": 0.606
+        "name": "제 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 52.3%",
+        "revenue_share": 0.5232,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "항공운송",
-        "desc": "청주 기반 저비용항공사 에어로케이항공",
-        "revenue_share": 0.394
+        "name": "자동차 전장용 인쇄회로기판",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 42.9%",
+        "revenue_share": 0.4289,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "부산물 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.8%",
+        "revenue_share": 0.0479,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "여객운송수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 0.9998,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -170,24 +188,70 @@
       "자동차 전장용 PCB",
       "항공 여객운송(에어로케이항공)"
     ],
-    "investor_note": "디에이피는 이동통신단말기와 자동차 전장품용 인쇄회로기판(PCB)을 생산하는 본업에 더해, 청주를 기반으로 한 저비용항공사 에어로케이항공을 종속회사(에어로케이홀딩스)로 편입해 PCB 제조(61%)와 항공운송(39%) 두 축으로 사업을 운영하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 5,431억 원으로 전년보다 11.1% 늘었지만 영업손실 578억 원, 당기순손실 647억 원으로 손실 규모가 매우 컸습니다. 특히 자본총계가 마이너스(-207억 원)로 완전자본잠식 상태이며 이 때문에 부채비율도 통상적인 방식으로 계산할 수 없을 만큼 재무구조가 크게 악화된 상태입니다. 감사인은 항공사 인수로 생긴 영업권(202억 원)의 손상 여부와 수익인식 기간귀속을 핵심감사사항으로 선정했으며, 투자 판단 전 재무 위험을 각별히 살펴볼 필요가 있습니다."
+    "investor_note": "디에이피는 이동통신단말기와 자동차 전장품용 인쇄회로기판(PCB)을 생산하는 본업에 더해, 청주를 기반으로 한 저비용항공사 에어로케이항공을 종속회사(에어로케이홀딩스)로 편입해 PCB 제조(61%)와 항공운송(39%) 두 축으로 사업을 운영하고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 5,431억 원으로 전년보다 11.1% 늘었지만 영업손실 578억 원, 당기순손실 647억 원으로 손실 규모가 매우 컸습니다. 특히 자본총계가 마이너스(-207억 원)로 완전자본잠식 상태이며 이 때문에 부채비율도 통상적인 방식으로 계산할 수 없을 만큼 재무구조가 크게 악화된 상태입니다. 감사인은 항공사 인수로 생긴 영업권(202억 원)의 손상 여부와 수익인식 기간귀속을 핵심감사사항으로 선정했으며, 투자 판단 전 재무 위험을 각별히 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "제 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 52.3%",
+        "revenue_share": 0.5232,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "자동차 전장용 인쇄회로기판",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 42.9%",
+        "revenue_share": 0.4289,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "부산물 외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.8%",
+        "revenue_share": 0.0479,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "여객운송수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 0.9998,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "인쇄회로기판(PCB) 제조",
-      "caption": "이동통신단말기·자동차 전장용 PCB",
+      "title": "제 품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 52.3%",
       "kind": "auto",
-      "visual": "인쇄회로기판",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "항공운송",
-      "caption": "청주 기반 저비용항공사 에어로케이항공",
-      "kind": "service",
-      "visual": "항공운송",
-      "image": "../data/business_images/business_image_local_electronic_part.svg",
-      "image_source": "Local curated visual"
+      "title": "전자부품·기판",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 42.9%",
+      "kind": "chip",
+      "visual": "PCB",
+      "image": "../data/business_images/business_image_63ecaf002e77f353.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "부산물 외",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.8%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "여객운송수익",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+      "kind": "auto",
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

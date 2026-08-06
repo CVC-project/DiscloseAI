@@ -153,7 +153,15 @@
   "snippets": {
     "overview": "주식회사 이엠앤아이의 주요 제품·서비스는 OLED, 배터리, 소프트웨어 판매, 임대매출, 개발용역, OLED 소재입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 수주 상황 당사는 완제품에 소요되는 유기소재를 제조하여 공급하므로 고객사의 생산 일정 계획에 따라 변동될 수 있으며, 대부분 개별 단기 발주 납품 형태로 판매되고 있습니다. 가격 변동 원인 : 당사 제품은 가격 경쟁력을 기반으로 하여 대량 생산에 의한 매출 이익을 꾀하는 형태의 산업이므로 주된 가격변동 추이는 원부재료의 상승과 인건비 상승 등이 중요한 가격 변동의 원인이 됩니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
     "segment_finance": "주식회사 이엠앤아이의 주요 제품·서비스는 OLED, 배터리, 소프트웨어 판매, 임대매출, 개발용역, OLED 소재입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 수주 상황 당사는 완제품에 소요되는 유기소재를 제조하여 공급하므로 고객사의 생산 일정 계획에 따라 변동될 수 있으며, 대부분 개별 단기 발주 납품 형태로 판매되고 있습니다. 가격 변동 원인 : 당사 제품은 가격 경쟁력을 기반으로 하여 대량 생산에 의한 매출 이익을 꾀하는 형태의 산업이므로 주된 가격변동 추이는 원부재료의 상승과 인건비 상승 등이 중요한 가격 변동의 원인이 됩니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "OLED",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 95.0%",
+        "revenue_share": 0.95,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "OLED",
       "배터리",
@@ -166,24 +174,40 @@
       "구매조건부 신제품개발사업(공동투자형)",
       "[국책과제]구매조건부신제품개발사업(공동투자형)"
     ],
-    "investor_note": "주식회사 이엠앤아이의 주요 제품·서비스는 OLED, 배터리, 소프트웨어 판매, 임대매출, 개발용역, OLED 소재입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 수주 상황 당사는 완제품에 소요되는 유기소재를 제조하여 공급하므로 고객사의 생산 일정 계획에 따라 변동될 수 있으며, 대부분 개별 단기 발주 납품 형태로 판매되고 있습니다. 가격 변동 원인 : 당사 제품은 가격 경쟁력을 기반으로 하여 대량 생산에 의한 매출 이익을 꾀하는 형태의 산업이므로 주된 가격변동 추이는 원부재료의 상승과 인건비 상승 등이 중요한 가격 변동의 원인이 됩니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다."
+    "investor_note": "주식회사 이엠앤아이의 주요 제품·서비스는 OLED, 배터리, 소프트웨어 판매, 임대매출, 개발용역, OLED 소재입니다. 제품을 만들고 판매하는 제조 기반 회사입니다. 수주 상황 당사는 완제품에 소요되는 유기소재를 제조하여 공급하므로 고객사의 생산 일정 계획에 따라 변동될 수 있으며, 대부분 개별 단기 발주 납품 형태로 판매되고 있습니다. 가격 변동 원인 : 당사 제품은 가격 경쟁력을 기반으로 하여 대량 생산에 의한 매출 이익을 꾀하는 형태의 산업이므로 주된 가격변동 추이는 원부재료의 상승과 인건비 상승 등이 중요한 가격 변동의 원인이 됩니다. 제조업은 제품 수요, 원재료 가격, 생산능력과 가동률이 이익률에 직접 영향을 줍니다.",
+    "product_service_segments": [
+      {
+        "name": "OLED",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 95.0%",
+        "revenue_share": 0.95,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "프로세스 솔루션 사업외",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
+        "revenue_share": 0.05,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "구매조건부 신제품개발사업(공동투자형)",
-      "caption": "구매조건부 신제품개발사업(공동투자형) 관련 제품·서비스",
-      "kind": "securities",
-      "visual": "구매조건부",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "title": "디스플레이",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 95.0%",
+      "kind": "display",
+      "visual": "OLED",
+      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "기초 화학물질 제조업",
-      "caption": "기초 화학물질 제조업을 중심으로 매출을 만듭니다.",
+      "title": "소프트웨어·솔루션",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.0%",
       "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "visual": "SOFTWARE",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

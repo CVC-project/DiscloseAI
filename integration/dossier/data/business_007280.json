@@ -155,14 +155,18 @@
     "segment_finance": "한국특강은 철 스크랩을 원료로 전기로에서 BILLET(반제품 강편)을 만들고, 이를 가열·압연·냉각해 철근과 봉형강을 생산하는 철강 제조회사입니다. 건설현장 등에 쓰이는 철근이 매출의 약 60%, 산업·건축용 봉형강이 37%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 7,671억 원으로 전년과 비슷한 수준(-0.2%)을 유지했고, 영업이익은 117억 원으로 10.6% 늘었으며, 당기순이익은 전년 적자에서 29억 원 흑자로 전환됐습니다. 다만 부채비율은 158.5%로 자본보다 많은 빚을 지고 있어 재무 부담을 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "철근",
-        "desc": "건설·산업기자재용 철근",
-        "revenue_share": 0.5965
+        "name": "제1차철강제조업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.0%",
+        "revenue_share": 0.3699,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "봉형강",
-        "desc": "산업·건축기자재용 봉형강",
-        "revenue_share": 0.3699
+        "name": "철근",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.7%",
+        "revenue_share": 0.5965,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -170,24 +174,32 @@
       "봉형강",
       "BILLET(강편 반제품)"
     ],
-    "investor_note": "한국특강은 철 스크랩을 원료로 전기로에서 BILLET(반제품 강편)을 만들고, 이를 가열·압연·냉각해 철근과 봉형강을 생산하는 철강 제조회사입니다. 건설현장 등에 쓰이는 철근이 매출의 약 60%, 산업·건축용 봉형강이 37%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 7,671억 원으로 전년과 비슷한 수준(-0.2%)을 유지했고, 영업이익은 117억 원으로 10.6% 늘었으며, 당기순이익은 전년 적자에서 29억 원 흑자로 전환됐습니다. 다만 부채비율은 158.5%로 자본보다 많은 빚을 지고 있어 재무 부담을 살펴볼 필요가 있습니다."
+    "investor_note": "한국특강은 철 스크랩을 원료로 전기로에서 BILLET(반제품 강편)을 만들고, 이를 가열·압연·냉각해 철근과 봉형강을 생산하는 철강 제조회사입니다. 건설현장 등에 쓰이는 철근이 매출의 약 60%, 산업·건축용 봉형강이 37%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 7,671억 원으로 전년과 비슷한 수준(-0.2%)을 유지했고, 영업이익은 117억 원으로 10.6% 늘었으며, 당기순이익은 전년 적자에서 29억 원 흑자로 전환됐습니다. 다만 부채비율은 158.5%로 자본보다 많은 빚을 지고 있어 재무 부담을 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "제1차철강제조업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.0%",
+        "revenue_share": 0.3699,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "철근",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.7%",
+        "revenue_share": 0.5965,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "철근",
-      "caption": "건설·산업기자재용 철근",
-      "kind": "service",
-      "visual": "철근",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "봉형강",
-      "caption": "산업·건축기자재용 봉형강",
-      "kind": "service",
-      "visual": "봉형강",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "title": "철강",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 37.0%",
+      "kind": "material",
+      "visual": "STEEL",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

@@ -137,7 +137,29 @@
   "snippets": {
     "overview": "모델솔루션 주식회사의 주요 사업은 화학물질관리법, 춘의사업, 부천사업, 국책사업입니다. 매입처 현황 당사의 사업은 대부분 계획생산이 불가능한 특성을 가지고 있어 단기 안전재고 보유를 기본으로 하고 있으며, 종종 수주와 동시에 수급하는 경우도 있어 원재료의 시장가격 및 공급상황 변동에 일정 부분 노출되어 있습니다. 시점 및 단계별 용도에 따라 PoC프로토타입, Design 프로토타입, Functional 프로토타입 및 소량생산 등 다양한 타입으로 분류되며, 생산 방식 및 고객의 요구 수량, 복잡도 및 정밀도, 신속성 등 각 시장의 차별적 특성을 가지고 있습니다.",
     "segment_finance": "모델솔루션 주식회사의 주요 사업은 화학물질관리법, 춘의사업, 부천사업, 국책사업입니다. 매입처 현황 당사의 사업은 대부분 계획생산이 불가능한 특성을 가지고 있어 단기 안전재고 보유를 기본으로 하고 있으며, 종종 수주와 동시에 수급하는 경우도 있어 원재료의 시장가격 및 공급상황 변동에 일정 부분 노출되어 있습니다. 시점 및 단계별 용도에 따라 PoC프로토타입, Design 프로토타입, Functional 프로토타입 및 소량생산 등 다양한 타입으로 분류되며, 생산 방식 및 고객의 요구 수량, 복잡도 및 정밀도, 신속성 등 각 시장의 차별적 특성을 가지고 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "Functional 프로토타입",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.2%",
+        "revenue_share": 0.032,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "IMB(舊. QDM)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.2%",
+        "revenue_share": 0.392,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "TSB",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.7%",
+        "revenue_share": 0.1271,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "배터리",
       "방산",
@@ -152,40 +174,62 @@
       "CM(Contract Manufacturing)",
       "제품의 개발"
     ],
-    "investor_note": "모델솔루션 주식회사의 주요 사업은 화학물질관리법, 춘의사업, 부천사업, 국책사업입니다. 매입처 현황 당사의 사업은 대부분 계획생산이 불가능한 특성을 가지고 있어 단기 안전재고 보유를 기본으로 하고 있으며, 종종 수주와 동시에 수급하는 경우도 있어 원재료의 시장가격 및 공급상황 변동에 일정 부분 노출되어 있습니다. 시점 및 단계별 용도에 따라 PoC프로토타입, Design 프로토타입, Functional 프로토타입 및 소량생산 등 다양한 타입으로 분류되며, 생산 방식 및 고객의 요구 수량, 복잡도 및 정밀도, 신속성 등 각 시장의 차별적 특성을 가지고 있습니다."
+    "investor_note": "모델솔루션 주식회사의 주요 사업은 화학물질관리법, 춘의사업, 부천사업, 국책사업입니다. 매입처 현황 당사의 사업은 대부분 계획생산이 불가능한 특성을 가지고 있어 단기 안전재고 보유를 기본으로 하고 있으며, 종종 수주와 동시에 수급하는 경우도 있어 원재료의 시장가격 및 공급상황 변동에 일정 부분 노출되어 있습니다. 시점 및 단계별 용도에 따라 PoC프로토타입, Design 프로토타입, Functional 프로토타입 및 소량생산 등 다양한 타입으로 분류되며, 생산 방식 및 고객의 요구 수량, 복잡도 및 정밀도, 신속성 등 각 시장의 차별적 특성을 가지고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.7%",
+        "revenue_share": 0.4474,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "Functional 프로토타입",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.2%",
+        "revenue_share": 0.032,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "IMB(舊. QDM)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.2%",
+        "revenue_share": 0.392,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "TSB",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.7%",
+        "revenue_share": 0.1271,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "배터리",
-      "caption": "배터리 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "방산",
-      "caption": "방산 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "Functional 프로토타입",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.2%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_4ae102473975707c.jpg",
-      "image_source": "Wikimedia Commons"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "구리",
-      "caption": "구리 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "IMB(舊. QDM)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 39.2%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "비철금속",
-      "caption": "비철금속 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "title": "TSB",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.7%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -155,14 +155,25 @@
     "segment_finance": "에이치케이는 1990년 설립된 레이저가공기 전문기업으로, 금속·비금속을 절단하는 산업용 고출력 레이저가공기(FS/FL, FE/HS 시리즈)를 제조·판매하고 관련 부품 판매와 유지보수 서비스도 함께 제공합니다. 매출의 약 80%가 레이저가공기 본체 판매에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 541억 원으로 전년과 비슷한 수준을 유지했고, 영업손실은 3억 원으로 줄었으며 당기순이익은 45억 원으로 흑자 전환했습니다. 부채비율은 31.0%로 낮은 편이라 재무 안정성은 양호한 편입니다.",
     "segment_breakdown": [
       {
-        "name": "레이저가공기 제조·판매",
-        "desc": "금속·비금속 절단용 산업용 레이저가공기 제조·판매",
-        "revenue_share": 0.797
+        "name": "레이저가공기제조 및 판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 42.8%",
+        "revenue_share": 0.428,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "FE, HS Serise",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.1%",
+        "revenue_share": 0.331,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "부품판매",
-        "desc": "렌즈 등 소모성 부품 판매",
-        "revenue_share": 0.158
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.8%",
+        "revenue_share": 0.158,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -172,24 +183,62 @@
       "소모부품(렌즈 외)",
       "유지보수 서비스"
     ],
-    "investor_note": "에이치케이는 1990년 설립된 레이저가공기 전문기업으로, 금속·비금속을 절단하는 산업용 고출력 레이저가공기(FS/FL, FE/HS 시리즈)를 제조·판매하고 관련 부품 판매와 유지보수 서비스도 함께 제공합니다. 매출의 약 80%가 레이저가공기 본체 판매에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 541억 원으로 전년과 비슷한 수준을 유지했고, 영업손실은 3억 원으로 줄었으며 당기순이익은 45억 원으로 흑자 전환했습니다. 부채비율은 31.0%로 낮은 편이라 재무 안정성은 양호한 편입니다."
+    "investor_note": "에이치케이는 1990년 설립된 레이저가공기 전문기업으로, 금속·비금속을 절단하는 산업용 고출력 레이저가공기(FS/FL, FE/HS 시리즈)를 제조·판매하고 관련 부품 판매와 유지보수 서비스도 함께 제공합니다. 매출의 약 80%가 레이저가공기 본체 판매에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 541억 원으로 전년과 비슷한 수준을 유지했고, 영업손실은 3억 원으로 줄었으며 당기순이익은 45억 원으로 흑자 전환했습니다. 부채비율은 31.0%로 낮은 편이라 재무 안정성은 양호한 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "레이저가공기제조 및 판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 42.8%",
+        "revenue_share": 0.428,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "FE, HS Serise",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.1%",
+        "revenue_share": 0.331,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "부품판매",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.8%",
+        "revenue_share": 0.158,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "서비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.5%",
+        "revenue_share": 0.045,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "레이저가공기 제조·판매",
-      "caption": "금속·비금속 절단용 산업용 레이저가공기 제조·판매",
-      "kind": "material",
-      "visual": "레이저가공기",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "title": "레이저가공기제조 및 판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 42.8%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "FE, HS Serise",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.1%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "부품판매",
-      "caption": "렌즈 등 소모성 부품 판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.8%",
       "kind": "auto",
-      "visual": "부품판매",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "visual": "AUTO",
+      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

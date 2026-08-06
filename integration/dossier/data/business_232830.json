@@ -121,7 +121,22 @@
   "snippets": {
     "overview": "주식회사 아이티센피엔에스의 주요 사업은 업부문, 사업내용, 디지털금융 서비스, - 용역 사업 등입니다. 원재료 가격변동추이 당사는 건설계약 및 소프트웨어 제조 및 판매업을 영위하므로 원재료가 발생하지 않습니다. 원재료의 제품별 비중 당사는 건설계약 및 소프트웨어 제조 및 판매업을 영위하므로 원재료가 발생하지 않습니다.",
     "segment_finance": "주식회사 아이티센피엔에스의 주요 사업은 업부문, 사업내용, 디지털금융 서비스, - 용역 사업 등입니다. 원재료 가격변동추이 당사는 건설계약 및 소프트웨어 제조 및 판매업을 영위하므로 원재료가 발생하지 않습니다. 원재료의 제품별 비중 당사는 건설계약 및 소프트웨어 제조 및 판매업을 영위하므로 원재료가 발생하지 않습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.0%",
+        "revenue_share": 0.0703,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.6%",
+        "revenue_share": 0.3563,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "디지털채널 서비스",
       "데이터 서비스",
@@ -130,40 +145,54 @@
       "캄보디아",
       "KISA"
     ],
-    "investor_note": "주식회사 아이티센피엔에스의 주요 사업은 업부문, 사업내용, 디지털금융 서비스, - 용역 사업 등입니다. 원재료 가격변동추이 당사는 건설계약 및 소프트웨어 제조 및 판매업을 영위하므로 원재료가 발생하지 않습니다. 원재료의 제품별 비중 당사는 건설계약 및 소프트웨어 제조 및 판매업을 영위하므로 원재료가 발생하지 않습니다."
+    "investor_note": "주식회사 아이티센피엔에스의 주요 사업은 업부문, 사업내용, 디지털금융 서비스, - 용역 사업 등입니다. 원재료 가격변동추이 당사는 건설계약 및 소프트웨어 제조 및 판매업을 영위하므로 원재료가 발생하지 않습니다. 원재료의 제품별 비중 당사는 건설계약 및 소프트웨어 제조 및 판매업을 영위하므로 원재료가 발생하지 않습니다.",
+    "product_service_segments": [
+      {
+        "name": "제품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.8%",
+        "revenue_share": 0.0478,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.0%",
+        "revenue_share": 0.0703,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.6%",
+        "revenue_share": 0.3563,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "서비스",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 46.2%",
+        "revenue_share": 0.4622,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "시스템 구축·통합",
-      "caption": "기업 업무에 필요한 서버, 네트워크, 소프트웨어를 묶어 하나의 시스템으로 구축합니다.",
+      "title": "용역",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.0%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_network.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "디지털채널 서비스",
-      "caption": "디지털채널 서비스 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 35.6%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "데이터 서비스",
-      "caption": "데이터 서비스 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "Applron",
-      "caption": "Applron 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "service",
-      "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

@@ -155,29 +155,32 @@
     "segment_finance": "플레이그램은 기업의 사무·생산 자재 구매를 대행하는 엠알오(MRO)사업과 영화·드라마를 기획·제작하는 영상콘텐츠사업을 지주회사로서 이끌면서, 자회사 MDS테크 등을 통해 임베디드 소프트웨어·IoT 솔루션 사업도 함께 하고 있으며 이 부문이 매출의 절반 이상을 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,509억 원으로 전년보다 6.5% 줄었고 영업손실 43억 원, 당기순손실 29억 원을 기록해 적자가 이어졌습니다(다만 영업손실 폭은 다소 줄었습니다). 부채비율은 59.1%로 재무구조는 비교적 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "엠알오(MRO) 구매대행",
-        "desc": "기업 부자재·유지보수자재 등 구매대행",
-        "revenue_share": 0.224
+        "name": "지배회사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.4%",
+        "revenue_share": 0.2237,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "임베디드 솔루션",
-        "desc": "임베디드 SW/HW 개발 솔루션·엔지니어링(MDS테크 등)",
-        "revenue_share": 0.582
+        "name": "영상콘텐츠매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.3%",
+        "revenue_share": 0.0228,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "소프트웨어",
-        "desc": "OS·미들웨어 등 시스템 소프트웨어 판매",
-        "revenue_share": 0.09
+        "name": "용역매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.9%",
+        "revenue_share": 0.0793,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "용역",
-        "desc": "컨설팅·엔지니어링 서비스 등",
-        "revenue_share": 0.079
-      },
-      {
-        "name": "영상콘텐츠",
-        "desc": "영화·드라마 기획·제작·배급 및 매니지먼트",
-        "revenue_share": 0.023
+        "name": "솔루션매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 58.2%",
+        "revenue_share": 0.5823,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -189,32 +192,46 @@
       "디지털트윈 솔루션",
       "무선통신 모듈"
     ],
-    "investor_note": "플레이그램은 기업의 사무·생산 자재 구매를 대행하는 엠알오(MRO)사업과 영화·드라마를 기획·제작하는 영상콘텐츠사업을 지주회사로서 이끌면서, 자회사 MDS테크 등을 통해 임베디드 소프트웨어·IoT 솔루션 사업도 함께 하고 있으며 이 부문이 매출의 절반 이상을 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,509억 원으로 전년보다 6.5% 줄었고 영업손실 43억 원, 당기순손실 29억 원을 기록해 적자가 이어졌습니다(다만 영업손실 폭은 다소 줄었습니다). 부채비율은 59.1%로 재무구조는 비교적 안정적인 편입니다."
+    "investor_note": "플레이그램은 기업의 사무·생산 자재 구매를 대행하는 엠알오(MRO)사업과 영화·드라마를 기획·제작하는 영상콘텐츠사업을 지주회사로서 이끌면서, 자회사 MDS테크 등을 통해 임베디드 소프트웨어·IoT 솔루션 사업도 함께 하고 있으며 이 부문이 매출의 절반 이상을 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,509억 원으로 전년보다 6.5% 줄었고 영업손실 43억 원, 당기순손실 29억 원을 기록해 적자가 이어졌습니다(다만 영업손실 폭은 다소 줄었습니다). 부채비율은 59.1%로 재무구조는 비교적 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "지배회사",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.4%",
+        "revenue_share": 0.2237,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "영상콘텐츠매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.3%",
+        "revenue_share": 0.0228,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 7.9%",
+        "revenue_share": 0.0793,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "솔루션매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 58.2%",
+        "revenue_share": 0.5823,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "엠알오(MRO) 구매대행",
-      "caption": "기업 부자재·유지보수자재 등 구매대행",
+      "title": "지배회사",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.4%",
       "kind": "service",
-      "visual": "엠알오",
-      "image": "../data/business_images/business_image_local_mro.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "임베디드 솔루션",
-      "caption": "임베디드 SW/HW 개발 솔루션·엔지니어링(MDS테크 등)",
-      "kind": "service",
-      "visual": "임베디드",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "소프트웨어",
-      "caption": "OS·미들웨어 등 시스템 소프트웨어 판매",
-      "kind": "service",
-      "visual": "소프트웨어",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

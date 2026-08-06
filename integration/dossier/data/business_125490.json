@@ -89,7 +89,29 @@
   "snippets": {
     "overview": "(주)한라캐스트의 주요 사업은 사업재편계획 승인기업, 가전부문, 신규사업입니다. 제품 가격 변동 추이 당사에서 생산하여 공급중인 디스플레이 및 자율주행 부품 등의 판매가격은 수주 당시 제시된 견적상 공급가격과 상황 변화에 따른 공급조건 기준으로 결정됩니다. 당사는 생산물량 및 신규 수주가 지속적으로 증가함에 따라 근래 매년 설비의 증설 및 신규 투입이 이루어지고 있습니다.",
     "segment_finance": "(주)한라캐스트의 주요 사업은 사업재편계획 승인기업, 가전부문, 신규사업입니다. 제품 가격 변동 추이 당사에서 생산하여 공급중인 디스플레이 및 자율주행 부품 등의 판매가격은 수주 당시 제시된 견적상 공급가격과 상황 변화에 따른 공급조건 기준으로 결정됩니다. 당사는 생산물량 및 신규 수주가 지속적으로 증가함에 따라 근래 매년 설비의 증설 및 신규 투입이 이루어지고 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "자동차부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.0%",
+        "revenue_share": 0.2201,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "디스플레이",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.0%",
+        "revenue_share": 0.3301,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "배터리",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.1%",
+        "revenue_share": 0.0511,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "배터리",
       "항공기",
@@ -101,28 +123,66 @@
       "특허(등록)",
       "대한민국"
     ],
-    "investor_note": "(주)한라캐스트의 주요 사업은 사업재편계획 승인기업, 가전부문, 신규사업입니다. 제품 가격 변동 추이 당사에서 생산하여 공급중인 디스플레이 및 자율주행 부품 등의 판매가격은 수주 당시 제시된 견적상 공급가격과 상황 변화에 따른 공급조건 기준으로 결정됩니다. 당사는 생산물량 및 신규 수주가 지속적으로 증가함에 따라 근래 매년 설비의 증설 및 신규 투입이 이루어지고 있습니다."
+    "investor_note": "(주)한라캐스트의 주요 사업은 사업재편계획 승인기업, 가전부문, 신규사업입니다. 제품 가격 변동 추이 당사에서 생산하여 공급중인 디스플레이 및 자율주행 부품 등의 판매가격은 수주 당시 제시된 견적상 공급가격과 상황 변화에 따른 공급조건 기준으로 결정됩니다. 당사는 생산물량 및 신규 수주가 지속적으로 증가함에 따라 근래 매년 설비의 증설 및 신규 투입이 이루어지고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "자동차부품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.0%",
+        "revenue_share": 0.2201,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "디스플레이",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.0%",
+        "revenue_share": 0.3301,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "배터리",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.1%",
+        "revenue_share": 0.0511,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "그외 기타",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.9%",
+        "revenue_share": 0.0486,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "배터리",
-      "caption": "배터리 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "battery",
-      "visual": "BATTERY",
-      "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
-      "image_source": "Unsplash"
-    },
-    {
-      "title": "항공기",
-      "caption": "항공기 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "자동차부품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 22.0%",
       "kind": "auto",
       "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",
       "image_source": "Unsplash"
     },
     {
-      "title": "아연",
-      "caption": "아연 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "디스플레이",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.0%",
+      "kind": "display",
+      "visual": "OLED",
+      "image": "../data/business_images/business_image_d41fecd0a3904c17.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "배터리",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 5.1%",
+      "kind": "battery",
+      "visual": "BATTERY",
+      "image": "../data/business_images/business_image_d2545c8e29d092d8.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "그외 기타",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.9%",
       "kind": "auto",
       "visual": "AUTO",
       "image": "../data/business_images/business_image_3918919e2e6dfce9.avif",

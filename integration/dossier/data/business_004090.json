@@ -156,18 +156,24 @@
     "segment_breakdown": [
       {
         "name": "아스팔트",
-        "desc": "도로포장용 아스팔트, 방수시트 제조·판매",
-        "revenue_share": 0.5
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.6%",
+        "revenue_share": 0.0857,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "케미칼",
-        "desc": "유기용제·모노머 등 석유화학 상품 유통",
-        "revenue_share": 0.289
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 43.7%",
+        "revenue_share": 0.4374,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "합성수지",
-        "desc": "PE·PP 합성수지 판매 및 BLOW 용기 생산",
-        "revenue_share": 0.207
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+        "revenue_share": 0.0256,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -176,32 +182,55 @@
       "PE·PP 합성수지(BLOW 용기)",
       "유기용제·케미칼 상품"
     ],
-    "investor_note": "한국석유공업은 도로 포장과 방수시트에 쓰이는 아스팔트 제품을 주력으로, PE·PP 등 합성수지 유통·가공, 유기용제 등 케미칼 상품 판매까지 함께 하는 석유화학 소재 기업입니다. 매출은 아스팔트 부문이 50%로 가장 크고, 케미칼 29%, 합성수지 21% 순입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,969억 원으로 전년 대비 3.4% 줄었고 영업이익은 14.9%, 당기순이익은 60.6% 각각 감소해 수익성이 둔화됐습니다. 부채비율은 100.5%로 자본과 비슷한 수준의 빚을 지고 있어 재무 부담을 살펴볼 필요가 있습니다."
+    "investor_note": "한국석유공업은 도로 포장과 방수시트에 쓰이는 아스팔트 제품을 주력으로, PE·PP 등 합성수지 유통·가공, 유기용제 등 케미칼 상품 판매까지 함께 하는 석유화학 소재 기업입니다. 매출은 아스팔트 부문이 50%로 가장 크고, 케미칼 29%, 합성수지 21% 순입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 6,969억 원으로 전년 대비 3.4% 줄었고 영업이익은 14.9%, 당기순이익은 60.6% 각각 감소해 수익성이 둔화됐습니다. 부채비율은 100.5%로 자본과 비슷한 수준의 빚을 지고 있어 재무 부담을 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "아스팔트",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.6%",
+        "revenue_share": 0.0857,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 43.7%",
+        "revenue_share": 0.4374,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "합성수지",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+        "revenue_share": 0.0256,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "아스팔트",
-      "caption": "도로포장용 아스팔트, 방수시트 제조·판매",
-      "kind": "service",
-      "visual": "아스팔트",
-      "image": "../data/business_images/business_image_local_packaging.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 8.6%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "케미칼",
-      "caption": "유기용제·모노머 등 석유화학 상품 유통",
+      "title": "상품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 43.7%",
       "kind": "material",
-      "visual": "케미칼",
-      "image": "../data/business_images/business_image_local_oil.svg",
-      "image_source": "Local curated visual"
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "합성수지",
-      "caption": "PE·PP 합성수지 판매 및 BLOW 용기 생산",
-      "kind": "service",
-      "visual": "합성수지",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.6%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

@@ -124,23 +124,24 @@
     "segment_breakdown": [
       {
         "name": "철강부문",
-        "desc": "철강, 철강부문 관련 제품·서비스",
-        "revenue_share": null
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 69.9%",
+        "revenue_share": 0.6993,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "신한은행",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
+        "name": "후판",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.8%",
+        "revenue_share": 0.2781,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "산업은행",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
-      },
-      {
-        "name": "제일은행",
-        "desc": "예대, 수수료, 투자 등 금융 서비스",
-        "revenue_share": null
+        "name": "총 합 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -155,40 +156,55 @@
       "후물",
       "제품개발"
     ],
-    "investor_note": "동국제강(주)의 주요 사업은 철강부문, 신한은행, 산업은행, 제일은행 등입니다. 스마트팩토리를 구현하여 최적의 생산 환경을 만들어 원가경쟁력 확보와 품질 고도화를 이루기 위해 매진하고 있습니다. 매출처는 중요성의 관점에서 내수 및 수출 매출액 중 보고기간말 현재 큰 부분을 차지하는 거래처를 표시하였습니다."
+    "investor_note": "동국제강(주)의 주요 사업은 철강부문, 신한은행, 산업은행, 제일은행 등입니다. 스마트팩토리를 구현하여 최적의 생산 환경을 만들어 원가경쟁력 확보와 품질 고도화를 이루기 위해 매진하고 있습니다. 매출처는 중요성의 관점에서 내수 및 수출 매출액 중 보고기간말 현재 큰 부분을 차지하는 거래처를 표시하였습니다.",
+    "product_service_segments": [
+      {
+        "name": "철강부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 69.9%",
+        "revenue_share": 0.6993,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "후판",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.8%",
+        "revenue_share": 0.2781,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총 합 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+        "revenue_share": 1.0,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "철강부문",
-      "caption": "철강, 철강부문 관련 제품·서비스",
+      "title": "철강",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 69.9%",
       "kind": "material",
-      "visual": "철강부문",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
+      "visual": "STEEL",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "신한은행",
-      "caption": "예대, 수수료, 투자 등 금융 서비스",
-      "kind": "bank",
-      "visual": "신한은행",
-      "image": "../data/business_images/business_image_local_bank.svg",
-      "image_source": "Local curated visual"
+      "title": "후판",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.8%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "산업은행",
-      "caption": "예대, 수수료, 투자 등 금융 서비스",
-      "kind": "bank",
-      "visual": "산업은행",
-      "image": "../data/business_images/business_image_local_bank.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "제일은행",
-      "caption": "예대, 수수료, 투자 등 금융 서비스",
-      "kind": "bank",
-      "visual": "제일은행",
-      "image": "../data/business_images/business_image_local_bank.svg",
-      "image_source": "Local curated visual"
+      "title": "총 합 계",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 100.0%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

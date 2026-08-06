@@ -153,7 +153,22 @@
   "snippets": {
     "overview": "큐렉소는 인공관절 수술로봇 '큐비스-조인트', 척추수술로봇 '큐비스-스파인', 보행재활로봇 '모닝워크' 등을 개발·판매하는 국내 대표 의료로봇 전문기업으로, 제조는 외주생산(OEM) 방식을 활용해 고정비 부담을 낮추고 있습니다. 매출은 의료로봇사업이 약 49%로 가장 크고, 발효유·라면 원재료를 유통하는 무역사업 34%, 임플란트 유통 17% 순입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 745억 원으로 전년 대비 34.2% 늘었고 영업이익과 당기순이익 모두 적자에서 흑자로 전환됐습니다. 부채비율은 5.1%로 재무구조가 매우 안정적인 편입니다.",
     "segment_finance": "큐렉소는 인공관절 수술로봇 '큐비스-조인트', 척추수술로봇 '큐비스-스파인', 보행재활로봇 '모닝워크' 등을 개발·판매하는 국내 대표 의료로봇 전문기업으로, 제조는 외주생산(OEM) 방식을 활용해 고정비 부담을 낮추고 있습니다. 매출은 의료로봇사업이 약 49%로 가장 크고, 발효유·라면 원재료를 유통하는 무역사업 34%, 임플란트 유통 17% 순입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 745억 원으로 전년 대비 34.2% 늘었고 영업이익과 당기순이익 모두 적자에서 흑자로 전환됐습니다. 부채비율은 5.1%로 재무구조가 매우 안정적인 편입니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "외부고객으로부터의 수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 48.8%",
+        "revenue_share": 0.488,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총자산",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.9%",
+        "revenue_share": 0.5593,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "인공관절 수술로봇 큐비스-조인트(Cuvis-joint)",
       "척추수술로봇 큐비스-스파인(Cuvis-spine)",
@@ -161,32 +176,70 @@
       "인공관절 임플란트",
       "발효유·라면 원재료 무역"
     ],
-    "investor_note": "큐렉소는 인공관절 수술로봇 '큐비스-조인트', 척추수술로봇 '큐비스-스파인', 보행재활로봇 '모닝워크' 등을 개발·판매하는 국내 대표 의료로봇 전문기업으로, 제조는 외주생산(OEM) 방식을 활용해 고정비 부담을 낮추고 있습니다. 매출은 의료로봇사업이 약 49%로 가장 크고, 발효유·라면 원재료를 유통하는 무역사업 34%, 임플란트 유통 17% 순입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 745억 원으로 전년 대비 34.2% 늘었고 영업이익과 당기순이익 모두 적자에서 흑자로 전환됐습니다. 부채비율은 5.1%로 재무구조가 매우 안정적인 편입니다."
+    "investor_note": "큐렉소는 인공관절 수술로봇 '큐비스-조인트', 척추수술로봇 '큐비스-스파인', 보행재활로봇 '모닝워크' 등을 개발·판매하는 국내 대표 의료로봇 전문기업으로, 제조는 외주생산(OEM) 방식을 활용해 고정비 부담을 낮추고 있습니다. 매출은 의료로봇사업이 약 49%로 가장 크고, 발효유·라면 원재료를 유통하는 무역사업 34%, 임플란트 유통 17% 순입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 745억 원으로 전년 대비 34.2% 늘었고 영업이익과 당기순이익 모두 적자에서 흑자로 전환됐습니다. 부채비율은 5.1%로 재무구조가 매우 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "의료로봇사업부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 48.8%",
+        "revenue_share": 0.488,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "외부고객으로부터의 수익",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 48.8%",
+        "revenue_share": 0.488,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "보고부문영업이익(손실)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 54.4%",
+        "revenue_share": 0.5438,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "총자산",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.9%",
+        "revenue_share": 0.5593,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "의료로봇사업부문",
-      "caption": "정형외과 수술로봇·척추수술로봇·재활로봇 개발판매",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 48.8%",
       "kind": "service",
-      "visual": "의료로봇사업부문",
-      "image": "../data/business_images/business_image_local_robot.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "무역사업부문",
-      "caption": "발효유·음료·라면 제조용 원재료 수입유통",
+      "title": "외부고객으로부터의 수익",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 48.8%",
       "kind": "service",
-      "visual": "무역사업부문",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
-      "title": "임플란트사업부문",
-      "caption": "인공관절 등 정형외과용 임플란트 수입판매",
+      "title": "보고부문영업이익(손실)",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 54.4%",
       "kind": "service",
-      "visual": "임플란트사업부문",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "총자산",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 55.9%",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

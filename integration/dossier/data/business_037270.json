@@ -155,9 +155,11 @@
     "segment_finance": "와이지플러스는 네이버 음악플랫폼 운영 대행과 음원·음반 유통을 주력으로 하면서 아티스트·캐릭터 굿즈(MD) 제작·판매, IP 라이선싱, 자회사를 통한 금융투자·음반인쇄 사업도 함께 운영합니다. 매출은 음악서비스(45%)와 상품·MD(43%)가 대부분을 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,360억 원으로 전년 대비 27.7% 늘었고 영업이익은 323억 원으로 흑자전환했으며 당기순이익도 236억 원으로 크게 늘어 수익성이 뚜렷하게 개선됐습니다. 총자산은 2,725억 원으로 증가했고 부채비율은 40.7%로 재무구조도 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "용역(음반유통·IP라이선싱)",
-        "desc": "음반 유통 수수료, IP 라이선싱 로열티",
-        "revenue_share": 0.1136
+        "name": "용역매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.4%",
+        "revenue_share": 0.1136,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -168,24 +170,70 @@
       "IP 라이선싱",
       "음반 인쇄·컨설팅"
     ],
-    "investor_note": "와이지플러스는 네이버 음악플랫폼 운영 대행과 음원·음반 유통을 주력으로 하면서 아티스트·캐릭터 굿즈(MD) 제작·판매, IP 라이선싱, 자회사를 통한 금융투자·음반인쇄 사업도 함께 운영합니다. 매출은 음악서비스(45%)와 상품·MD(43%)가 대부분을 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,360억 원으로 전년 대비 27.7% 늘었고 영업이익은 323억 원으로 흑자전환했으며 당기순이익도 236억 원으로 크게 늘어 수익성이 뚜렷하게 개선됐습니다. 총자산은 2,725억 원으로 증가했고 부채비율은 40.7%로 재무구조도 안정적인 편입니다."
+    "investor_note": "와이지플러스는 네이버 음악플랫폼 운영 대행과 음원·음반 유통을 주력으로 하면서 아티스트·캐릭터 굿즈(MD) 제작·판매, IP 라이선싱, 자회사를 통한 금융투자·음반인쇄 사업도 함께 운영합니다. 매출은 음악서비스(45%)와 상품·MD(43%)가 대부분을 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2,360억 원으로 전년 대비 27.7% 늘었고 영업이익은 323억 원으로 흑자전환했으며 당기순이익도 236억 원으로 크게 늘어 수익성이 뚜렷하게 개선됐습니다. 총자산은 2,725억 원으로 증가했고 부채비율은 40.7%로 재무구조도 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "음악서비스매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 45.2%",
+        "revenue_share": 0.4516,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상ㆍ제품매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 43.4%",
+        "revenue_share": 0.4341,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 11.4%",
+        "revenue_share": 0.1136,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.0007,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "상·제품(MD)",
-      "caption": "아티스트·캐릭터 IP 상품 제작·판매",
-      "kind": "service",
-      "visual": "상",
-      "image": "../data/business_images/business_image_local_default_a.svg",
-      "image_source": "Local curated visual"
+      "title": "플랫폼 서비스",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
+      "kind": "platform",
+      "visual": "PLATFORM",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "용역(음반유통·IP라이선싱)",
-      "caption": "음반 유통 수수료, IP 라이선싱 로열티",
+      "title": "음원 유통",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
       "kind": "service",
-      "visual": "용역",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "음반 유통",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "아티스트·캐릭터 MD상품",
+      "caption": "사업보고서에서 주요 제품·서비스로 확인되는 항목입니다.",
+      "kind": "service",
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

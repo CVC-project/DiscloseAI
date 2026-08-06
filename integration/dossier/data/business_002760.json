@@ -156,18 +156,24 @@
     "segment_breakdown": [
       {
         "name": "식품첨가물",
-        "desc": "향료·첨가물 제조판매(파인애플 엣센스 등)",
-        "revenue_share": 0.503
-      },
-      {
-        "name": "상품",
-        "desc": "식품첨가물 관련 상품 유통판매",
-        "revenue_share": 0.272
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.3%",
+        "revenue_share": 0.5028,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "원료의약품",
-        "desc": "생약 기반 원료의약품 제조(보락씨엠씨칼슘 등)",
-        "revenue_share": 0.185
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.5%",
+        "revenue_share": 0.1849,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.2%",
+        "revenue_share": 0.2721,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -181,32 +187,62 @@
       "식품 기능성 소재",
       "천연화장품 신소재"
     ],
-    "investor_note": "보락은 식품향료·첨가물(파인애플 엣센스 등)과 원료의약품(보락씨엠씨칼슘, 항암제 원료 도세탁셀 등)을 주력으로 하는 화학·바이오 소재 기업으로, 최근에는 천연화장품 신소재 연구도 넓혀가고 있습니다. 식품첨가물이 매출의 약 50%, 상품 매출이 27%, 원료의약품이 18%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 501억 원으로 전년 대비 5.3% 늘었고, 영업이익과 당기순이익 모두 전년 적자에서 흑자로 전환되며 수익성이 개선됐습니다. 부채비율은 21.6%로 재무구조도 비교적 안정적인 편입니다."
+    "investor_note": "보락은 식품향료·첨가물(파인애플 엣센스 등)과 원료의약품(보락씨엠씨칼슘, 항암제 원료 도세탁셀 등)을 주력으로 하는 화학·바이오 소재 기업으로, 최근에는 천연화장품 신소재 연구도 넓혀가고 있습니다. 식품첨가물이 매출의 약 50%, 상품 매출이 27%, 원료의약품이 18%를 차지합니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 501억 원으로 전년 대비 5.3% 늘었고, 영업이익과 당기순이익 모두 전년 적자에서 흑자로 전환되며 수익성이 개선됐습니다. 부채비율은 21.6%로 재무구조도 비교적 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "식품첨가물",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.3%",
+        "revenue_share": 0.5028,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "원료의약품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.5%",
+        "revenue_share": 0.1849,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "상 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.2%",
+        "revenue_share": 0.2721,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "기타 (임가공 외)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.0%",
+        "revenue_share": 0.0402,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
       "title": "식품첨가물",
-      "caption": "향료·첨가물 제조판매(파인애플 엣센스 등)",
-      "kind": "consumer",
-      "visual": "식품첨가물",
-      "image": "../data/business_images/business_image_local_chemical.svg",
-      "image_source": "Local curated visual"
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 50.3%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "상품",
-      "caption": "식품첨가물 관련 상품 유통판매",
-      "kind": "consumer",
-      "visual": "상품",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "원료의약품",
-      "caption": "생약 기반 원료의약품 제조(보락씨엠씨칼슘 등)",
+      "title": "의약품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 18.5%",
       "kind": "bio",
-      "visual": "원료의약품",
-      "image": "../data/business_images/business_image_local_pharma.svg",
-      "image_source": "Local curated visual"
+      "visual": "PHARMA",
+      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image_source": "Unsplash"
+    },
+    {
+      "title": "상 품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 27.2%",
+      "kind": "material",
+      "visual": "MAT",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
     }
   ],
   "custom_report_ideas": [

@@ -153,7 +153,29 @@
   "snippets": {
     "overview": "이마트는 할인점과 트레이더스 같은 오프라인 유통, 전문점·푸드, 온라인·물류를 함께 운영하는 종합소매 기업입니다.",
     "segment_finance": "회사는 시장 불확실성 확대에 따라 수익성 있는 공사를 선별 수주하기 위해 사업성 검토 후 사업을 추진하고 있습니다. SR(스타벅스 리워드) 정책을 운영하여 음료 쿠폰을 리워드로 제공하는 등 고객 만족을 위해 노력하고 있으며, 매장 외 디지털 등 다양한 판매채널을 활용하여 고객의 브랜드 경험 확대 및 상품 판매 경쟁력을 확보해 나갈 예정입니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "식품, 의류 등 상품, 수수료 및 임대료 수입 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 64.9%",
+        "revenue_share": 0.649,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "부동산 투자ㆍ개발 및 공급ㆍ임대업 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.3%",
+        "revenue_share": 0.003,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "식음료매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.008,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "객실판매",
       "식음료판매",
@@ -165,7 +187,37 @@
       "IT정보서비스 등",
       "IT정보서비스"
     ],
-    "investor_note": "이마트는 할인점과 트레이더스 같은 오프라인 유통, 전문점·푸드, 온라인·물류를 함께 운영하는 종합소매 기업입니다."
+    "investor_note": "이마트는 할인점과 트레이더스 같은 오프라인 유통, 전문점·푸드, 온라인·물류를 함께 운영하는 종합소매 기업입니다.",
+    "product_service_segments": [
+      {
+        "name": "식품, 의류 등 상품, 수수료 및 임대료 수입 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 64.9%",
+        "revenue_share": 0.649,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "부동산 투자ㆍ개발 및 공급ㆍ임대업 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.3%",
+        "revenue_share": 0.003,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "객실판매, 식음료판매 및서비스업 등",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.008,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "식음료매출",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.8%",
+        "revenue_share": 0.008,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
@@ -173,23 +225,23 @@
       "caption": "이마트 점포를 중심으로 식품·생활용품을 판매합니다.",
       "kind": "consumer",
       "visual": "MART",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_33f95df49fba7bd7.jpg",
+      "image_source": "Wikimedia Commons"
     },
     {
       "title": "트레이더스",
       "caption": "창고형 매장으로 대용량 상품과 자체 브랜드를 판매합니다.",
       "kind": "consumer",
       "visual": "TRADERS",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "전문점·푸드",
       "caption": "노브랜드, 스타벅스 등 연결 자회사의 유통·식음료 사업이 포함됩니다.",
       "kind": "consumer",
       "visual": "FOOD",
-      "image": "../data/business_images/business_image_food_packaged.svg",
+      "image": "../data/business_images/business_image_food_beverage.svg",
       "image_source": "Local visual"
     },
     {
@@ -197,8 +249,8 @@
       "caption": "SSG 등 온라인 판매와 물류 역량이 오프라인 유통을 보완합니다.",
       "kind": "platform",
       "visual": "ONLINE",
-      "image": "../data/business_images/business_image_local_retail.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

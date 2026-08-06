@@ -155,9 +155,32 @@
     "segment_finance": "에스케이오션플랜트주식회사의 주요 사업은 사업내용, 방위사업, 조선부문, 수리/개조부문 등입니다. 계약을 따낸 뒤 제작·공사·납품을 거쳐 매출을 만듭니다. 또한 대규모 설비가 필요한 장치산업이자 설계, 선형개발 등 기술력과 생산인력의 노동집약 산업으로 선박건조 시 계약, 제작 및 인도에 이르는 건조 과정이 장기적이며 주문자(선주)의 선호도와 요구에 따라 복잡하고 다양하게 건조가 이루어집니다. 관공선은 해상에서 공무를 집행하는 선박으로 국가나 지방공공단체 등에서 운영하는 선박을 말하며 양산체제가 불가능한 주문생산 방식 형태입니다. 수주형 사업은 계약 규모뿐 아니라 납기, 원가, 프로젝트 구성이 이익을 좌우합니다.",
     "segment_breakdown": [
       {
-        "name": "조선부문",
-        "desc": "조선 관련 제품·서비스",
-        "revenue_share": null
+        "name": "해상풍력",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.7%",
+        "revenue_share": 0.3373,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "특수선",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.0%",
+        "revenue_share": 0.5897,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "후육강관",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.8%",
+        "revenue_share": 0.0281,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "조선",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.0007,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -169,31 +192,61 @@
       "조선",
       "Dimension)"
     ],
-    "investor_note": "에스케이오션플랜트주식회사의 주요 사업은 사업내용, 방위사업, 조선부문, 수리/개조부문 등입니다. 계약을 따낸 뒤 제작·공사·납품을 거쳐 매출을 만듭니다. 또한 대규모 설비가 필요한 장치산업이자 설계, 선형개발 등 기술력과 생산인력의 노동집약 산업으로 선박건조 시 계약, 제작 및 인도에 이르는 건조 과정이 장기적이며 주문자(선주)의 선호도와 요구에 따라 복잡하고 다양하게 건조가 이루어집니다. 관공선은 해상에서 공무를 집행하는 선박으로 국가나 지방공공단체 등에서 운영하는 선박을 말하며 양산체제가 불가능한 주문생산 방식 형태입니다. 수주형 사업은 계약 규모뿐 아니라 납기, 원가, 프로젝트 구성이 이익을 좌우합니다."
+    "investor_note": "에스케이오션플랜트주식회사의 주요 사업은 사업내용, 방위사업, 조선부문, 수리/개조부문 등입니다. 계약을 따낸 뒤 제작·공사·납품을 거쳐 매출을 만듭니다. 또한 대규모 설비가 필요한 장치산업이자 설계, 선형개발 등 기술력과 생산인력의 노동집약 산업으로 선박건조 시 계약, 제작 및 인도에 이르는 건조 과정이 장기적이며 주문자(선주)의 선호도와 요구에 따라 복잡하고 다양하게 건조가 이루어집니다. 관공선은 해상에서 공무를 집행하는 선박으로 국가나 지방공공단체 등에서 운영하는 선박을 말하며 양산체제가 불가능한 주문생산 방식 형태입니다. 수주형 사업은 계약 규모뿐 아니라 납기, 원가, 프로젝트 구성이 이익을 좌우합니다.",
+    "product_service_segments": [
+      {
+        "name": "해상풍력",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.7%",
+        "revenue_share": 0.3373,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "특수선",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.0%",
+        "revenue_share": 0.5897,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "후육강관",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.8%",
+        "revenue_share": 0.0281,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "조선",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 0.1%",
+        "revenue_share": 0.0007,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "해양플랜트",
-      "caption": "해양플랜트 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "신재생에너지",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 33.7%",
+      "kind": "power",
+      "visual": "RENEWABLE",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
+      "image_source": "Wikimedia Commons"
+    },
+    {
+      "title": "방산·항공",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 59.0%",
       "kind": "ship",
-      "visual": "SHIP",
-      "image": "../data/business_images/business_image_local_offshore.svg",
-      "image_source": "Local curated visual"
+      "visual": "DEFENSE",
+      "image": "../data/business_images/business_image_1805fba8159acac6.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "특수선",
-      "caption": "특수선 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "철강",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.8%",
       "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_local_steel.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "방산",
-      "caption": "방산 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "material",
-      "visual": "MAT",
-      "image": "../data/business_images/business_image_4ae102473975707c.jpg",
+      "visual": "STEEL",
+      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
       "image_source": "Wikimedia Commons"
     }
   ],

@@ -153,7 +153,36 @@
   "snippets": {
     "overview": "(주)위드텍의 주요 사업은 다양한사업입니다. 고객사로부터의 수주에 의한 주문납품(P/O) 방식으로 생산 및 판매하고 있습니다. AMCs 모니터링 시스템, 공정 프로세스오염 모니터링 시스템, 대기환경 모니터링 시스템 등 모든 당사의 제품은 수주 단계로부터 고객사의 요구사항에 모두 충족하는 방식으로 생산하고 있습니다.",
     "segment_finance": "(주)위드텍의 주요 사업은 다양한사업입니다. 고객사로부터의 수주에 의한 주문납품(P/O) 방식으로 생산 및 판매하고 있습니다. AMCs 모니터링 시스템, 공정 프로세스오염 모니터링 시스템, 대기환경 모니터링 시스템 등 모든 당사의 제품은 수주 단계로부터 고객사의 요구사항에 모두 충족하는 방식으로 생산하고 있습니다.",
-    "segment_breakdown": [],
+    "segment_breakdown": [
+      {
+        "name": "자 사제 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.3%",
+        "revenue_share": 0.2834,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매출2위",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.6%",
+        "revenue_share": 0.1256,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매출3위",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.2%",
+        "revenue_share": 0.0917,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용 역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.6%",
+        "revenue_share": 0.4959,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ],
     "products": [
       "국내영업",
       "- 반도체",
@@ -166,32 +195,54 @@
       "국내 영업",
       "대전테크노파크"
     ],
-    "investor_note": "(주)위드텍의 주요 사업은 다양한사업입니다. 고객사로부터의 수주에 의한 주문납품(P/O) 방식으로 생산 및 판매하고 있습니다. AMCs 모니터링 시스템, 공정 프로세스오염 모니터링 시스템, 대기환경 모니터링 시스템 등 모든 당사의 제품은 수주 단계로부터 고객사의 요구사항에 모두 충족하는 방식으로 생산하고 있습니다."
+    "investor_note": "(주)위드텍의 주요 사업은 다양한사업입니다. 고객사로부터의 수주에 의한 주문납품(P/O) 방식으로 생산 및 판매하고 있습니다. AMCs 모니터링 시스템, 공정 프로세스오염 모니터링 시스템, 대기환경 모니터링 시스템 등 모든 당사의 제품은 수주 단계로부터 고객사의 요구사항에 모두 충족하는 방식으로 생산하고 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "자 사제 품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.3%",
+        "revenue_share": 0.2834,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매출2위",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 12.6%",
+        "revenue_share": 0.1256,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "매출3위",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.2%",
+        "revenue_share": 0.0917,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용 역",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.6%",
+        "revenue_share": 0.4959,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "국내영업",
-      "caption": "국내영업 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "자 사제 품",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.3%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
-      "title": "반도체",
-      "caption": "- 반도체 관련 제품·서비스가 매출에 연결됩니다.",
-      "kind": "chip",
-      "visual": "CHIP",
-      "image": "../data/business_images/business_image_local_semiconductor_part.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "암모니아",
-      "caption": "암모니아 관련 제품·서비스가 매출에 연결됩니다.",
+      "title": "용 역",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 49.6%",
       "kind": "service",
       "visual": "BUSINESS",
-      "image": "../data/business_images/business_image_local_software.svg",
-      "image_source": "Local curated visual"
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [

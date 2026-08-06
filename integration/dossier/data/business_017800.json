@@ -155,24 +155,18 @@
     "segment_finance": "현대엘리베이터는 엘리베이터·에스컬레이터·무빙워크를 만들고 유지보수까지 담당하는 국내 대표 승강기 회사로, 매출의 약 80%가 승강기 제조와 설치·보수 서비스에서 나옵니다. 자회사 현대무벡스를 통해 물류자동화·승강장안전문(PSD) 사업도 함께 하고, 현대아산(관광·건설)과 호텔 사업도 계열사로 두고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2조 4,673억 원으로 전년 대비 14.5% 줄었고 영업이익도 2,092억 원으로 7.3% 감소했습니다. 다만 당기순이익은 2,692억 원으로 38.9% 늘었는데, 부채비율은 157.8%로 자본보다 빚이 많은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다.",
     "segment_breakdown": [
       {
-        "name": "물품취급장비제조업(승강기 등)",
-        "desc": "엘리베이터·에스컬레이터·무빙워크 등 승강기 제조·판매",
-        "revenue_share": 0.5318
+        "name": "물품취급장비제조업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.2%",
+        "revenue_share": 0.5318,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "물류자동화",
-        "desc": "현대무벡스의 물류자동화 설비·솔루션 공급",
-        "revenue_share": 0.1501
-      },
-      {
-        "name": "여행 및 건설업",
-        "desc": "현대아산의 관광경협·MICE 및 건설사업",
-        "revenue_share": 0.0621
-      },
-      {
-        "name": "관광숙박업",
-        "desc": "반얀트리 클럽 앤 스파 서울 등 호텔·리조트 운영",
-        "revenue_share": 0.0416
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.0%",
+        "revenue_share": 0.1501,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -187,40 +181,62 @@
       "물류자동화 설비",
       "승강장안전문(PSD)"
     ],
-    "investor_note": "현대엘리베이터는 엘리베이터·에스컬레이터·무빙워크를 만들고 유지보수까지 담당하는 국내 대표 승강기 회사로, 매출의 약 80%가 승강기 제조와 설치·보수 서비스에서 나옵니다. 자회사 현대무벡스를 통해 물류자동화·승강장안전문(PSD) 사업도 함께 하고, 현대아산(관광·건설)과 호텔 사업도 계열사로 두고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2조 4,673억 원으로 전년 대비 14.5% 줄었고 영업이익도 2,092억 원으로 7.3% 감소했습니다. 다만 당기순이익은 2,692억 원으로 38.9% 늘었는데, 부채비율은 157.8%로 자본보다 빚이 많은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다."
+    "investor_note": "현대엘리베이터는 엘리베이터·에스컬레이터·무빙워크를 만들고 유지보수까지 담당하는 국내 대표 승강기 회사로, 매출의 약 80%가 승강기 제조와 설치·보수 서비스에서 나옵니다. 자회사 현대무벡스를 통해 물류자동화·승강장안전문(PSD) 사업도 함께 하고, 현대아산(관광·건설)과 호텔 사업도 계열사로 두고 있습니다. 과거 공시 기반 참고 정보로, 최근 연결 매출액은 2조 4,673억 원으로 전년 대비 14.5% 줄었고 영업이익도 2,092억 원으로 7.3% 감소했습니다. 다만 당기순이익은 2,692억 원으로 38.9% 늘었는데, 부채비율은 157.8%로 자본보다 빚이 많은 편이라 재무 부담을 함께 살펴볼 필요가 있습니다.",
+    "product_service_segments": [
+      {
+        "name": "물품취급장비제조업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.2%",
+        "revenue_share": 0.5318,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "설치 및 보수서비스업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.4%",
+        "revenue_share": 0.2643,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "물류자동화",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.0%",
+        "revenue_share": 0.1501,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "IT서비스업",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 1.0%",
+        "revenue_share": 0.0096,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
-      "title": "물품취급장비제조업(승강기 등)",
-      "caption": "엘리베이터·에스컬레이터·무빙워크 등 승강기 제조·판매",
+      "title": "물품취급장비제조업",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 53.2%",
       "kind": "service",
-      "visual": "물품취급장비제조업",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "설치 및 보수서비스업",
-      "caption": "승강기 설치·유지보수 서비스",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 26.4%",
       "kind": "service",
-      "visual": "설치",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
+      "image_source": "Unsplash"
     },
     {
       "title": "물류자동화",
-      "caption": "현대무벡스의 물류자동화 설비·솔루션 공급",
+      "caption": "사업보고서 주요 제품·서비스 표 기준 매출 비중 15.0%",
       "kind": "service",
-      "visual": "물류자동화",
-      "image": "../data/business_images/business_image_local_machinery.svg",
-      "image_source": "Local curated visual"
-    },
-    {
-      "title": "여행 및 건설업",
-      "caption": "현대아산의 관광경협·MICE 및 건설사업",
-      "kind": "service",
-      "visual": "여행",
-      "image": "../data/business_images/business_image_local_construction.svg",
-      "image_source": "Local curated visual"
+      "visual": "BUSINESS",
+      "image": "../data/business_images/business_image_3078a83d5189713b.avif",
+      "image_source": "Unsplash"
     }
   ],
   "custom_report_ideas": [
