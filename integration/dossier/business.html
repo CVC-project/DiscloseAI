@@ -517,6 +517,11 @@
     .segment-share-unknown { color:var(--soft); font-size:12px; font-weight:600; letter-spacing:0; }
     .segment-desc { margin:8px 0 10px; color:var(--soft); font-size:12px; line-height:1.5; }
     .segment-card-noshare .segment-desc { margin-top:4px; }
+    .audit-block { margin:0 0 14px; padding-bottom:14px; border-bottom:1px solid rgba(255,255,255,.08); font-size:12px; line-height:1.65; color:var(--soft); }
+    .audit-block:last-child { margin-bottom:0; padding-bottom:0; border-bottom:none; }
+    .audit-block strong { display:block; font-size:13px; margin-bottom:4px; }
+    .audit-block.audit-opinion-line { font-size:13px; }
+    .audit-block.audit-caution { color:#f87171; }
     .segment-bar {
       height:9px;
       border-radius:999px;
@@ -1743,6 +1748,12 @@
       }
       return '<ol class="money-flow">' + items.map((item) => '<li><strong>' + esc(item[0]) + '</strong><br>' + rich(item[1]) + '</li>').join('') + '</ol>';
     }
+    const AUDIT_OPINION_MEANING = {
+      '적정의견': '이 회사의 재무제표가 회계기준에 따라 전반적으로 올바르게 작성됐다는 뜻입니다.',
+      '한정의견': '일부 항목에는 문제가 있지만, 그 부분을 제외하면 재무제표가 대체로 올바르다는 뜻입니다.',
+      '부적정의견': '재무제표가 회계기준에 맞지 않게 작성돼 전반적으로 신뢰하기 어렵다는 뜻입니다.',
+      '의견거절': '감사인이 충분한 감사 증거를 확보하지 못해 의견 자체를 낼 수 없었다는 뜻입니다. 재무제표를 그대로 신뢰하기 어려울 수 있습니다.',
+    };
     function auditSummaryHtml(row) {
       // 감사의견·핵심감사사항(KAM) — 회계감사인이 이 회사 재무제표에서 가장 유심히
       // 들여다본 부분. 사업부문 설명은 이미 위쪽 사업 카드에서 보여줬으니, 매출비중
@@ -1750,26 +1761,28 @@
       const audit = row.audit;
       if (!audit || !audit.opinion) return '';
       const opinion = String(audit.opinion);
-      const isClean = opinion === '적정의견';
       const isSerious = opinion === '의견거절' || opinion === '부적정의견' || opinion === '한정의견';
-      const opinionColor = isSerious ? '#f87171' : (isClean ? '#4ade80' : 'var(--soft)');
+      const opinionColor = isSerious ? '#f87171' : '#4ade80';
+      const opinionMeaning = AUDIT_OPINION_MEANING[opinion] || '';
       const kamItems = Array.isArray(audit.kam) ? audit.kam : [];
       const emphasisItems = Array.isArray(audit.emphasis) ? audit.emphasis : [];
+      const opinionHtml = '<p class="audit-block audit-opinion-line">' +
+        '<strong style="color:' + opinionColor + '">감사의견: ' + esc(opinion) + '</strong>' +
+        (opinionMeaning ? rich(opinionMeaning) : '') +
+      '</p>';
       const kamHtml = kamItems.length
         ? kamItems.slice(0, 3).map((k) => (
-            '<article class="segment-card segment-card-noshare">' +
-              '<strong>' + rich(k.title || '핵심감사사항') + '</strong>' +
-              '<p class="segment-desc">' + rich(k.plain || k.summary || '') + '</p>' +
-            '</article>'
+            '<p class="audit-block"><strong>' + rich(k.title || '핵심감사사항') + '</strong>' + rich(k.plain || k.summary || '') + '</p>'
           )).join('')
-        : '<article class="segment-card segment-card-noshare"><p class="segment-desc">이번 감사에서 별도로 강조된 핵심감사사항은 없었습니다.</p></article>';
+        : '<p class="audit-block">이번 감사에서 별도로 강조된 핵심감사사항은 없었습니다.</p>';
+      // "강조사항"은 감사보고서의 정식 항목명이지만, 이용자가 일반적 의미(긍정적 강조)로
+      // 오해할 수 있어 화면에는 "주의"로 표기한다 — 의견거절 근거 등도 이 자리에 담기므로.
       const emphasisHtml = emphasisItems.length
-        ? '<p class="segment-tip" style="color:#f87171">⚠ 강조사항: ' + emphasisItems.map((e) => rich(e.plain || e.summary || e.title || '')).join(' · ') + '</p>'
+        ? emphasisItems.map((e) => '<p class="audit-block audit-caution">⚠ 주의: ' + rich(e.plain || e.summary || e.title || '') + '</p>').join('')
         : '';
       return '<div class="segment-breakdown">' +
-        '<div class="segment-breakdown-head"><div><h3>감사의견과 핵심감사사항</h3><p>회계감사인이 이 회사 재무제표를 감사하며 가장 신경 써서 들여다본 부분입니다.</p></div><div class="mini-label" style="color:' + opinionColor + '">' + esc(opinion) + '</div></div>' +
-        '<div class="segment-grid">' + kamHtml + '</div>' +
-        emphasisHtml +
+        '<div class="segment-breakdown-head"><div><h3>감사의견과 핵심감사사항</h3><p>회계감사인이 이 회사 재무제표를 감사하며 가장 신경 써서 들여다본 부분입니다.</p></div></div>' +
+        opinionHtml + kamHtml + emphasisHtml +
       '</div>';
     }
     function segmentBreakdownHtml(row) {
