@@ -971,6 +971,12 @@ def link_report(ticker: str) -> dict:
 
 
 def main() -> int:
+    # 진단 문구의 ✅·§ 기호가 Windows 기본 콘솔(cp949)에서 UnicodeEncodeError를 낸다 —
+    # 게이트 스크립트가 PYTHONUTF8=1 없이 호출돼도 살아남게 stdout을 UTF-8로 고정.
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    except (AttributeError, ValueError):  # 파이프·리다이렉트 등 reconfigure 불가 환경
+        pass
     args = sys.argv[1:]
     strict = (
         "--strict" in args
