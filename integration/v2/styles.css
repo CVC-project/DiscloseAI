@@ -168,6 +168,22 @@ html, body, #root { margin: 0px; padding: 0px; width: 100%; height: 100%; backgr
 .panel-body { flex: 1 1 0%; overflow-y: auto; padding: 8px 14px 12px; scrollbar-width: thin; scrollbar-color: rgba(116, 238, 198, 0.2) transparent; }
 .panel-body::-webkit-scrollbar { width: 4px; }
 .panel-body::-webkit-scrollbar-thumb { background: rgba(116, 238, 198, 0.2); }
+.live-disclosure-block { border-bottom: 1px solid rgba(116, 238, 198, 0.12); margin: 0 -2px 8px; padding: 0 2px 8px; }
+.live-disclosure-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 5px 8px 7px; font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; color: var(--cyan); }
+.live-disclosure-meta { display: inline-flex; align-items: center; gap: 5px; color: var(--text-3); letter-spacing: 0.04em; white-space: nowrap; }
+.live-disclosure-refresh { width: 20px; height: 20px; padding: 0; border: 1px solid rgba(116, 238, 198, 0.24); color: var(--cyan); background: transparent; cursor: pointer; font-size: 13px; line-height: 1; }
+.live-disclosure-refresh:hover { background: rgba(116, 238, 198, 0.1); }
+.live-disclosure-empty { padding: 8px; color: var(--text-3); font-size: 10.5px; line-height: 1.45; }
+.live-disclosure-row { width: 100%; display: grid; grid-template-columns: 36px minmax(0, 1fr) 12px; gap: 7px; align-items: start; padding: 8px; border: 0; border-top: 1px dashed rgba(148, 163, 184, 0.12); background: transparent; color: inherit; text-align: left; cursor: pointer; font-family: var(--font-body); }
+.live-disclosure-row:hover { background: rgba(116, 238, 198, 0.06); }
+.live-disclosure-date { color: var(--text-3); font-family: var(--font-mono); font-size: 9.5px; padding-top: 2px; }
+.live-disclosure-copy { min-width: 0; display: flex; flex-direction: column; gap: 2px; color: var(--text-1); font-size: 10.5px; line-height: 1.35; }
+.live-disclosure-copy b { color: var(--text-0); font-size: 10px; font-weight: 600; }
+.live-disclosure-copy span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.live-disclosure-arrow { color: var(--cyan); font-family: var(--font-mono); font-size: 11px; padding-top: 2px; }
+.stored-disclosure-label { padding: 5px 8px 4px; font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.08em; color: var(--text-3); border-bottom: 1px solid rgba(116, 238, 198, 0.08); }
+.company-disclosure-body { min-height: 0; }
+.disc-enter-footer { position: sticky; bottom: -12px; z-index: 2; margin-top: auto; padding: 10px; border-top: 1px solid rgba(116, 238, 198, 0.12); background: linear-gradient(to bottom, rgba(8, 12, 24, 0.92), rgba(8, 12, 24, 0.99)); }
 .disc-row { display: grid; grid-template-columns: 60px 1fr 4px; gap: 10px; padding: 10px 0px; border-bottom: 1px dashed rgba(148, 163, 184, 0.1); align-items: center; transition: background 200ms; }
 .disc-row.is-flash { background: rgba(116, 238, 198, 0.06); }
 .disc-time { font-family: var(--font-mono); font-size: 10px; color: var(--text-3); letter-spacing: 0.04em; }
