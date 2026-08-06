@@ -16,6 +16,8 @@ import os
 import pytest
 
 from modules.report import check_golden as CG
+
+from _dbguard import has_report_data
 from modules.report import series as S
 
 _DATA = os.path.join("integration", "dossier", "data")
@@ -52,8 +54,8 @@ def test_merge_per_year_name_fallback():
 
 def test_series_no_regression_on_goldens():
     """폴백 도입이 기존 골든의 완결 키를 줄이지 않는다."""
-    if not os.path.exists(S._DB):
-        pytest.skip("reports.db 없음(CI)")
+    if not has_report_data():
+        pytest.skip("reports.db 데이터 없음(CI) — 빈 스키마도 '없음'으로 본다")
     r = S.build_series("139480")
     for k in ("ocf", "icf", "fin", "oci", "tci"):
         assert S.is_complete(r["series"].get(k)), f"{k} 미완결 — per-year 병합 회귀"
@@ -108,8 +110,8 @@ def test_zone_label_subrows_exempt():
 # ── ⑤ §10 '잔액 0 + 전용 캡션' 무임계 ────────────────────────────────────
 def test_zero_balance_caption_still_requires_row():
     """CJ 주11 생물자산 케이스 — 0원이라도 캡션·전용 주석이 있으면 행이 있어야 한다."""
-    if not os.path.exists(os.path.join("shared", "data", "reports.db")):
-        pytest.skip("reports.db 없음(CI)")
+    if not has_report_data():
+        pytest.skip("reports.db 데이터 없음(CI) — 빈 스키마도 '없음'으로 본다")
     G = _g("097950")
     G2 = copy.deepcopy(G)
     G2["panels"]["D"] = [r for r in G2["panels"]["D"] if r["row"] != "bs-bio"]

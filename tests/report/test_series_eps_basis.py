@@ -14,6 +14,8 @@ import pytest
 
 from modules.report import series as S
 
+from _dbguard import has_report_data
+
 
 # ── ① capex 계정명 변이 병합 ──────────────────────────────────────────────
 def test_capex_merges_ppe_and_investment_property_caption():
@@ -60,15 +62,15 @@ def test_eps_rejects_continuing_when_discontinued_exists():
 
 def test_eps_basis_guard_keeps_hanwha_incomplete():
     """실데이터 회귀 — 012450은 FY23~25가 계속영업 EPS뿐이라 eps 미완결이 정답이다."""
-    if not os.path.exists(S._DB):
-        pytest.skip("reports.db 없음(CI)")
+    if not has_report_data():
+        pytest.skip("reports.db 데이터 없음(CI) — 빈 스키마도 '없음'으로 본다")
     assert "eps" in S.build_series("012450")["incomplete"]
 
 
 def test_003490_series_recovered():
     """대한항공은 capex·eps 둘 다 5점 완결(19/24 → 21/24)."""
-    if not os.path.exists(S._DB):
-        pytest.skip("reports.db 없음(CI)")
+    if not has_report_data():
+        pytest.skip("reports.db 데이터 없음(CI) — 빈 스키마도 '없음'으로 본다")
     r = S.build_series("003490")
     assert r["series"]["capex"] == [0.3, 0.8, 1.9, 2.9, 4.3]
     assert r["series"]["eps"] == [1743, 4787, 2866, 3566, 2133]

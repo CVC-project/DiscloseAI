@@ -84,8 +84,30 @@ def test_derived_keys_have_formula():
 
 
 # ── DB 스키마 스모크 ──
-def test_db_init_and_models():
+def test_db_init_and_models(tmp_path, monkeypatch):
+    """⚠️ **정본 `shared/data/reports.db`를 건드리면 안 된다** — 임시 경로로 격리한다.
+
+    종전에는 `init_local_db()`를 그대로 불러 정본 경로에 **빈 스키마 파일을 실제로 생성**했다.
+    로컬에는 이미 정본이 있어 무해했지만 CI에는 파일이 없으므로, 이 테스트가 먼저 돌면서
+    빈 DB를 만들어 놓고 → 알파벳 순으로 뒤에 오는 `test_series_*`의
+    `if not os.path.exists(_DB): skip` 가드가 **무력화**돼 빈 DB로 단정 검사를 돌다 실패했다
+    (PR #106 CI 실패의 근본 원인). 아래 두 층으로 막는다:
+      ① 여기서 정본 경로를 쓰지 않는다(이 함수)
+      ② 스킵 가드를 '파일 존재'가 아니라 '데이터 존재'로 판정한다(`_dbguard.has_report_data`)
+    """
+    from sqlalchemy import create_engine
+    from sqlalchemy.orm import sessionmaker
+
+    from modules.report import db as report_db
+
+    tmp_db = tmp_path / "reports.db"
+    eng = create_engine(f"sqlite:///{tmp_db}")
+    monkeypatch.setattr(report_db, "_DB_PATH", str(tmp_db))
+    monkeypatch.setattr(report_db, "engine", eng)
+    monkeypatch.setattr(report_db, "LocalSession", sessionmaker(bind=eng))
+
     init_local_db()
+    assert tmp_db.exists()
     s = get_local_session()
     try:
         # 테이블 존재 + 쿼리 가능
