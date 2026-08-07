@@ -1,0 +1,42 @@
+name: Refresh today's DART disclosures
+
+on:
+  push:
+    branches: [dev]
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    if: github.event_name != 'push' || github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: dev
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Fetch public disclosure feed
+        env:
+          DART_API_KEY: ${{ secrets.DART_API_KEY }}
+        run: |
+          if [ -z "$DART_API_KEY" ]; then
+            echo "DART_API_KEY is not configured; skipping refresh."
+            exit 0
+          fi
+          python scripts/refresh_today_disclosures.py
+      - name: Commit updated feed when changed
+        run: |
+          if git diff --quiet -- integration/data/today_disclosures.json; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add integration/data/today_disclosures.json
+          git commit -m "chore(disclosures): refresh today's DART feed"
+          git push origin HEAD:dev
