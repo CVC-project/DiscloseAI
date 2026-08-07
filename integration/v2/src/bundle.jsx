@@ -2421,13 +2421,82 @@ EQS 모듈: M1(현금이익률) ${n.m1 ?? '-'} / M2(회수건전성) ${n.m2 ?? '
 
 // ─── DISCLOSURES tab — TL panels ───────────────────────────────────────────
 
+function formatLiveDisclosureTime(asOfKst) {
+  if (!asOfKst) return '';
+  try {
+    return new Intl.DateTimeFormat('ko-KR', {
+      timeZone: 'Asia/Seoul', hour: '2-digit', minute: '2-digit', hour12: false,
+    }).format(new Date(asOfKst));
+  } catch (_) {
+    return '';
+  }
+}
+
+function useLiveDisclosures(limit = 40) {
+  const [state, setState] = React.useState({ items: [], loading: true, error: false, asOfKst: '' });
+  const refresh = React.useCallback(async () => {
+    setState(previous => ({ ...previous, loading: true, error: false }));
+    try {
+      const response = await fetch(`/api/disclosures?limit=${limit}`, {
+        headers: { Accept: 'application/json' }, cache: 'no-store',
+      });
+      if (!response.ok) throw new Error('live disclosure request failed');
+      const payload = await response.json();
+      setState({ items: Array.isArray(payload.items) ? payload.items : [], loading: false, error: false, asOfKst: payload.asOfKst || '' });
+    } catch (_) {
+      setState(previous => ({ ...previous, loading: false, error: true }));
+    }
+  }, [limit]);
+  React.useEffect(() => {
+    refresh();
+    const timer = window.setInterval(refresh, 120000);
+    return () => window.clearInterval(timer);
+  }, [refresh]);
+  return { ...state, refresh };
+}
+
+function LiveDisclosureBlock({ items, live, emptyText = '오늘 접수된 공시가 없습니다.' }) {
+  const openOriginal = React.useCallback((item) => {
+    if (item.dartUrl) window.open(item.dartUrl, '_blank', 'noopener,noreferrer');
+  }, []);
+  return (
+    <section className="live-disclosure-block">
+      <div className="live-disclosure-head">
+        <span>오늘의 DART 공시</span>
+        <span className="live-disclosure-meta">
+          {live.loading ? '불러오는 중' : (formatLiveDisclosureTime(live.asOfKst) ? `${formatLiveDisclosureTime(live.asOfKst)} KST` : 'KST')}
+          <button type="button" className="live-disclosure-refresh" onClick={live.refresh} aria-label="오늘 공시 새로고침">↻</button>
+        </span>
+      </div>
+      {live.loading && items.length === 0 && <div className="live-disclosure-empty">오늘 공시를 불러오는 중입니다.</div>}
+      {!live.loading && live.error && <div className="live-disclosure-empty">실시간 공시 연결을 다시 시도합니다.</div>}
+      {!live.loading && !live.error && items.length === 0 && <div className="live-disclosure-empty">{emptyText}</div>}
+      {items.map(item => (
+        <button type="button" key={item.rceptNo} className="live-disclosure-row" onClick={() => openOriginal(item)}>
+          <span className="live-disclosure-date">{(item.receiptDate || '').slice(5).replace('-', '/')}</span>
+          <span className="live-disclosure-copy">
+            <b>{item.company}</b>
+            <span>{item.title}</span>
+          </span>
+          <span className="live-disclosure-arrow">↗</span>
+        </button>
+      ))}
+    </section>
+  );
+}
+
 function SectorDisclosurePanel({ sector, onBack, onSelect }) {
   if (!sector) return null;
   const RD = window.__realData || {};
   const discAll = RD.discAll || [];
+  const live = useLiveDisclosures();
   const tickers = React.useMemo(
     () => new Set((sector.members || []).map(m => m.t)),
     [sector.id]
+  );
+  const liveItems = React.useMemo(
+    () => live.items.filter(d => tickers.has(d.stockCode)),
+    [live.items, tickers]
   );
   const items = React.useMemo(
     () => discAll
@@ -2447,6 +2516,8 @@ function SectorDisclosurePanel({ sector, onBack, onSelect }) {
         <button className="back-link" onClick={onBack}>← GALAXY</button>
       </div>
       <div className="panel-body">
+        <LiveDisclosureBlock items={liveItems} live={live} emptyText="오늘 이 섹터에서 접수된 공시가 없습니다." />
+        <div className="stored-disclosure-label">저장된 최근 공시</div>
         {items.length === 0 && (
           <div style={{padding: '20px', textAlign: 'center', color: '#475569', fontSize: 11}}>공시 데이터 없음</div>
         )}
@@ -2470,6 +2541,11 @@ function CompanyDisclosurePanel({ company, sector, onBack, onSelect, onEnterDisc
   if (!company) return null;
   const [showRel, setShowRel] = React.useState(false);
   const RD = window.__realData || {};
+  const live = useLiveDisclosures();
+  const liveItems = React.useMemo(
+    () => live.items.filter(d => d.stockCode === company.code),
+    [live.items, company.code]
+  );
   const ownDiscs = React.useMemo(
     () => ((RD.discByTicker && RD.discByTicker[company.code]) || []).slice(0, 8),
     [company.code]
@@ -2497,8 +2573,9 @@ function CompanyDisclosurePanel({ company, sector, onBack, onSelect, onEnterDisc
         </div>
         <button className="back-link" onClick={onBack}>← SECTOR</button>
       </div>
-      <div className="panel-body" style={{display: 'flex', flexDirection: 'column'}}>
-        <div style={{padding: '5px 10px 4px', fontFamily: 'var(--font-mono,monospace)', fontSize: 9, letterSpacing: '.08em', color: '#74EEC6', borderBottom: '1px solid rgba(116, 238, 198,0.1)'}}>RECENT DISCLOSURES</div>
+      <div className="panel-body company-disclosure-body" style={{display: 'flex', flexDirection: 'column'}}>
+        <LiveDisclosureBlock items={liveItems} live={live} />
+        <div className="stored-disclosure-label">저장된 최근 공시</div>
         {ownDiscs.length === 0 && <div style={{padding: '14px 10px', color: '#475569', fontSize: 11}}>수집된 공시 없음</div>}
         {ownDiscs.map((d, i) => (
           <div key={i} className={'disc-feed-row' + (!!d.high_impact ? ' hi' : '')} onClick={() => onSelect && onSelect(d)}>
@@ -2529,7 +2606,7 @@ function CompanyDisclosurePanel({ company, sector, onBack, onSelect, onEnterDisc
             ))}
           </div>
         )}
-        <div style={{marginTop: 'auto', padding: '10px', borderTop: '1px solid rgba(116, 238, 198,0.08)'}}>
+        <div className="disc-enter-footer">
           <button className="disc-enter-btn" onClick={onEnterDisclosures}>ENTER DISCLOSURES ↗</button>
         </div>
       </div>
