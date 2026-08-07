@@ -1,0 +1,208 @@
+[
+ {
+  "id": "n1",
+  "title": "외상값 — 매출보다 [28.9%] 빨리 늘었어요",
+  "what": [
+   "매출채권이 작년 [1.39조]에서 올해 [1.79조]로 늘었어요.",
+   "같은 기간 매출은 [10.29조]에서 [11.31조]로 [9.9%] 늘었는데, 아직 못 받은 외상값은 [28.9%] 늘었어요."
+  ],
+  "why": [
+   "표준(삼성전자) 은하수의 현금 전환 구간에서 봤던 '운전자본 변동'이 바로 이 자리예요 — 손익 성적표에는 이익으로 적혔지만 아직 통장에 안 들어온 돈이에요.",
+   "영업활동 현금이 매출 100 기준으로 [13.2]에 그쳐 표준의 [25.6]에 크게 못 미친 데는 이 외상값이 한몫했어요.",
+   "다만 아직 갚을 날이 오지 않은 몫이 [1.82조]로 전체 [1.86조]의 대부분이라, 떼일 위험이라기보다 '아직 못 받은' 성격에 가까워요."
+  ],
+  "src": {
+   "note_no": "6",
+   "title": "매출채권및기타채권"
+  },
+  "nums": [
+   {
+    "chip": "1.39조",
+    "check": {
+     "kind": "fact",
+     "key": "ar_current_bv_prior",
+     "fmt": "jo"
+    }
+   },
+   {
+    "chip": "1.79조",
+    "check": {
+     "kind": "fact",
+     "key": "ar_current_bv_cur",
+     "fmt": "jo"
+    }
+   },
+   {
+    "chip": "10.29조",
+    "check": {
+     "kind": "fact",
+     "key": "seg_revenue_total_prior",
+     "fmt": "jo"
+    }
+   },
+   {
+    "chip": "11.31조",
+    "check": {
+     "kind": "fact",
+     "key": "seg_revenue_total_cur",
+     "fmt": "jo"
+    }
+   },
+   {
+    "chip": "9.9%",
+    "check": {
+     "kind": "ratio",
+     "num": "seg_revenue_total_cur",
+     "den": "seg_revenue_total_prior",
+     "minus_one": true,
+     "fmt": "pct"
+    }
+   },
+   {
+    "chip": "28.9%",
+    "check": {
+     "kind": "ratio",
+     "num": "ar_current_bv_cur",
+     "den": "ar_current_bv_prior",
+     "minus_one": true,
+     "fmt": "pct"
+    }
+   },
+   {
+    "chip": "13.2",
+    "check": {
+     "kind": "norm",
+     "key": "ocf",
+     "year": "last",
+     "fmt": "num1"
+    }
+   },
+   {
+    "chip": "25.6",
+    "check": {
+     "kind": "std_norm",
+     "key": "ocf",
+     "year": "last",
+     "fmt": "num1"
+    }
+   },
+   {
+    "chip": "1.82조",
+    "check": {
+     "kind": "fact",
+     "key": "ar_aging_not_due_cur",
+     "fmt": "jo"
+    }
+   },
+   {
+    "chip": "1.86조",
+    "check": {
+     "kind": "fact",
+     "key": "ar_grand_total_gbv_cur",
+     "fmt": "jo"
+    }
+   }
+  ]
+ },
+ {
+  "id": "n2",
+  "title": "세 사업 중 하나가 이익의 [67%]를 만들어요",
+  "what": [
+   "매출은 컴포넌트 [5.20조], 광학솔루션 [3.81조], 패키지솔루션 [2.30조] 세 갈래로 나뉘어요.",
+   "그런데 영업이익은 컴포넌트 한 곳이 [6,094억]으로, 회사 전체 [9,133억]의 대부분을 차지해요."
+  ],
+  "why": [
+   "매출의 [46%]를 내는 컴포넌트가 이익의 [67%]를 만들고, 매출 [34%]인 광학솔루션은 이익의 [18.5%]만 내요 — 강줄기의 굵기와 이익의 굵기가 사업마다 다른 거예요.",
+   "한 사업이 회사 전체 이익을 떠받치는 구조라, 그 사업의 업황이 흔들리면 [FY23] 같은 골짜기가 다시 찾아올 수 있어요.",
+   "표준인 삼성전자에서도 반도체가 같은 역할을 했다는 걸 떠올리면, 이 회사의 골짜기가 왜 표준과 같은 해에 왔는지가 자연스럽게 읽혀요."
+  ],
+  "src": {
+   "note_no": "3",
+   "title": "영업부문정보"
+  },
+  "nums": [
+   {
+    "chip": "5.20조",
+    "check": {
+     "kind": "fact",
+     "key": "seg_컴포넌트_rev",
+     "fmt": "jo"
+    }
+   },
+   {
+    "chip": "3.81조",
+    "check": {
+     "kind": "fact",
+     "key": "seg_광학솔루션_rev",
+     "fmt": "jo"
+    }
+   },
+   {
+    "chip": "2.30조",
+    "check": {
+     "kind": "fact",
+     "key": "seg_패키지솔루션_rev",
+     "fmt": "jo"
+    }
+   },
+   {
+    "chip": "6,094억",
+    "check": {
+     "kind": "fact",
+     "key": "seg_컴포넌트_op",
+     "fmt": "eok"
+    }
+   },
+   {
+    "chip": "9,133억",
+    "check": {
+     "kind": "fact",
+     "key": "seg_op_total_cur",
+     "fmt": "eok"
+    }
+   },
+   {
+    "chip": "46%",
+    "check": {
+     "kind": "share",
+     "num": "seg_컴포넌트_rev",
+     "den": "seg_revenue_total_cur",
+     "fmt": "pct0"
+    }
+   },
+   {
+    "chip": "67%",
+    "check": {
+     "kind": "share",
+     "num": "seg_컴포넌트_op",
+     "den": "seg_op_total_cur",
+     "fmt": "pct0"
+    }
+   },
+   {
+    "chip": "34%",
+    "check": {
+     "kind": "share",
+     "num": "seg_광학솔루션_rev",
+     "den": "seg_revenue_total_cur",
+     "fmt": "pct0"
+    }
+   },
+   {
+    "chip": "18.5%",
+    "check": {
+     "kind": "share",
+     "num": "seg_광학솔루션_op",
+     "den": "seg_op_total_cur",
+     "fmt": "pct"
+    }
+   },
+   {
+    "chip": "FY23",
+    "check": {
+     "kind": "literal"
+    }
+   }
+  ]
+ }
+]

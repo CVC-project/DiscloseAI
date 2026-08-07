@@ -1,0 +1,112 @@
+{
+ "_source": "note-extractor (R6 S1) — 삼성전기 009150 FY2025 사업보고서 rcept_no=20260310003071",
+ "facts": [
+  {
+   "key": "ar_current_bv_cur",
+   "label": "유동매출채권 장부금액(당기)",
+   "value_raw": "1,792,567,378",
+   "unit": "천원",
+   "value_won": 1792567378000,
+   "period": "당기",
+   "source_quote": "유동매출채권 | 1,792,567,378 | 0 |",
+   "note_no": "6",
+   "note_title": "매출채권및기타채권"
+  },
+  {
+   "key": "ar_current_bv_prior",
+   "label": "유동매출채권 장부금액(전기)",
+   "value_raw": "1,390,503,186",
+   "unit": "천원",
+   "value_won": 1390503186000,
+   "period": "전기",
+   "source_quote": "유동매출채권 | 1,390,503,186 | 0 |",
+   "note_no": "6",
+   "note_title": "매출채권및기타채권"
+  },
+  {
+   "key": "ar_aging_not_due_cur",
+   "label": "연체상태-만기미도래(당기)",
+   "value_raw": "1,821,484,658",
+   "unit": "천원",
+   "value_won": 1821484658000,
+   "period": "당기",
+   "source_quote": "금융자산 | 1,821,484,658 | 21,047,195",
+   "note_no": "6",
+   "note_title": "매출채권및기타채권"
+  },
+  {
+   "key": "ar_grand_total_gbv_cur",
+   "label": "매출채권및기타채권 총장부금액 합계(당기)",
+   "value_raw": "1,855,575,989",
+   "unit": "천원",
+   "value_won": 1855575989000,
+   "period": "당기",
+   "source_quote": "574,164 | 67,716 | 1,855,575,989",
+   "note_no": "6",
+   "note_title": "매출채권및기타채권"
+  },
+  {
+   "key": "seg_revenue_total_cur",
+   "label": "3개 보고부문 매출액 합계(당기)",
+   "value_raw": "11,314,459",
+   "unit": "백만원",
+   "value_won": 11314459000000,
+   "period": "당기",
+   "source_quote": "3,814,205 | 11,314,459 |",
+   "note_no": "3",
+   "note_title": "영업부문정보"
+  },
+  {
+   "key": "seg_revenue_total_prior",
+   "label": "3개 보고부문 매출액 합계(전기)",
+   "value_raw": "10,294,103",
+   "unit": "백만원",
+   "value_won": 10294103000000,
+   "period": "전기",
+   "source_quote": "3,797,396 | 10,294,103 |",
+   "note_no": "3",
+   "note_title": "영업부문정보"
+  },
+  {
+   "key": "seg_op_total_cur",
+   "label": "3개 보고부문 영업이익 합계(당기)",
+   "value_raw": "913,331",
+   "unit": "백만원",
+   "value_won": 913331000000,
+   "period": "당기",
+   "source_quote": "168,746 | 913,331 |",
+   "note_no": "3",
+   "note_title": "영업부문정보"
+  }
+ ],
+ "segments": [
+  {
+   "name": "컴포넌트",
+   "revenue_raw": "5,198,501",
+   "revenue_won": 5198501000000,
+   "op_raw": "609,359",
+   "op_won": 609359000000,
+   "period": "당기",
+   "source_quote": "수익(매출액) | 5,198,501 | 2,301,753"
+  },
+  {
+   "name": "패키지솔루션",
+   "revenue_raw": "2,301,753",
+   "revenue_won": 2301753000000,
+   "op_raw": "135,226",
+   "op_won": 135226000000,
+   "period": "당기",
+   "source_quote": "5,198,501 | 2,301,753 | 3,814,205"
+  },
+  {
+   "name": "광학솔루션",
+   "revenue_raw": "3,814,205",
+   "revenue_won": 3814205000000,
+   "op_raw": "168,746",
+   "op_won": 168746000000,
+   "period": "당기",
+   "source_quote": "2,301,753 | 3,814,205 | 11,314,459"
+  }
+ ],
+ "notes_read": ["6", "3"]
+}

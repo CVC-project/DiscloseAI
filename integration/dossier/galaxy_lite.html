@@ -1,0 +1,384 @@
+<!-- galaxy_lite.html — 표준-델타 은하수 (lite)
+     설계 정본: GALAXY_LITE_PLAN.md · 디자인 정본: ../../DESIGN.md
+     데이터: data/galaxy_lite_<t>.json + 표준 data/galaxy_<std>.json(동시 fetch) + data/impact_<t>.json(선택)
+     골든 galaxy.html은 건드리지 않는다 (5존·panels·knots 전용 렌더러와 스키마가 다름). -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>현금 은하수 · 표준 대비</title>
+<link rel="stylesheet" href="tokens.css">
+<script>
+  (function(){ var a=new URLSearchParams(location.search).get('accent'); if(a) document.documentElement.style.setProperty('--edge-accent',a); })();
+</script>
+<style>
+@font-face{font-family:'Pretendard Variable';font-weight:400 700;font-display:swap;src:url('assets/fonts/pretendard/PretendardVariable.woff2') format('woff2-variations');}
+@font-face{font-family:'IBM Plex Mono';font-weight:400;font-display:swap;src:url('assets/fonts/ibm-plex-mono/IBMPlexMono-Regular.latin.woff2') format('woff2');}
+@font-face{font-family:'IBM Plex Mono';font-weight:500;font-display:swap;src:url('assets/fonts/ibm-plex-mono/IBMPlexMono-Medium.latin.woff2') format('woff2');}
+@font-face{font-family:'IBM Plex Mono';font-weight:600;font-display:swap;src:url('assets/fonts/ibm-plex-mono/IBMPlexMono-SemiBold.latin.woff2') format('woff2');}
+@font-face{font-family:'IBM Plex Mono';font-weight:700;font-display:swap;src:url('assets/fonts/ibm-plex-mono/IBMPlexMono-Bold.latin.woff2') format('woff2');}
+:root{
+  --mint:#74EEC6; --cyan:#5CC7EA; --gold:#E9C46B; --coral:#EC8C6A; --steel:#7590B0; --green:#63d68e;
+  --bg:#05060d; --text:#eef4fb; --dim:#8fa1b6; --dim2:#5c6b80;
+  --panel:rgba(12,17,30,.78); --line:rgba(140,170,210,.13);
+  --edge-accent:#74EEC6;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,monospace;
+  --sans:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:var(--t-body);line-height:1.72;}
+a{color:var(--cyan);text-decoration:none;} a:hover{color:var(--mint);}
+::-webkit-scrollbar{width:10px;height:10px;}
+::-webkit-scrollbar-thumb{background:#1c2739;border-radius:5px;}
+::-webkit-scrollbar-track{background:transparent;}
+
+.wrap{max-width:1080px;margin:0 auto;padding:var(--sp-7) var(--sp-5) var(--sp-8);}
+.mono{font-family:var(--mono);}
+.lbl{font-family:var(--mono);font-size:var(--t-mono-micro);letter-spacing:var(--ls-label);color:var(--dim2);text-transform:uppercase;}
+
+/* 패널 — DESIGN.md §4 (radius 3px + ㄱ자 브래킷) */
+.panel{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:var(--sp-5);}
+.panel.edge::before,.panel.edge::after{content:'';position:absolute;width:10px;height:10px;border:1px solid var(--edge-accent);opacity:.7;pointer-events:none;}
+.panel.edge::before{top:-1px;left:-1px;border-right:0;border-bottom:0;}
+.panel.edge::after{bottom:-1px;right:-1px;border-left:0;border-top:0;}
+
+/* ① 헤더 */
+header.hd{border-bottom:1px solid var(--line);padding-bottom:var(--sp-5);margin-bottom:var(--sp-6);}
+.hd .top{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--sp-3);}
+.hd h1{font-family:var(--mono);font-weight:700;font-size:var(--t-hero);margin:0;letter-spacing:var(--ls-tight);}
+.hd .sub{font-family:var(--mono);font-size:var(--t-caption);color:var(--dim);}
+.hero{font-size:var(--t-title);color:var(--text);margin:var(--sp-4) 0 0;}
+.stdcta{margin-top:var(--sp-4);display:flex;flex-wrap:wrap;align-items:center;gap:var(--sp-3);
+  background:rgba(116,238,198,.07);border:1px solid rgba(116,238,198,.22);border-radius:3px;padding:var(--sp-3) var(--sp-4);}
+.stdcta .t{font-size:var(--t-body-sm);color:var(--dim);}
+.stdcta b{color:var(--mint);font-weight:600;}
+.btn{font-family:var(--mono);font-size:var(--t-caption);letter-spacing:.08em;padding:6px 12px;border:1px solid var(--mint);
+  color:var(--mint);border-radius:3px;background:transparent;cursor:pointer;transition:background var(--dur-fast);}
+.btn:hover{background:rgba(116,238,198,.13);}
+.btn.ghost{border-color:var(--line);color:var(--dim);}
+.btn.ghost:hover{background:rgba(140,170,210,.08);color:var(--text);}
+.btn.on{background:rgba(116,238,198,.16);}
+
+/* 공시 배지 */
+.dbadge{margin-top:var(--sp-3);display:inline-flex;align-items:center;gap:var(--sp-2);cursor:pointer;
+  border:1px solid var(--line);border-radius:3px;padding:6px 12px;background:rgba(92,199,234,.06);font-size:var(--t-body-sm);}
+.dbadge:hover{border-color:var(--cyan);}
+.dbadge .dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);}
+.chip{font-family:var(--mono);font-size:var(--t-mono-micro);letter-spacing:.06em;padding:2px 7px;border-radius:2px;border:1px solid;}
+.c-cash{color:var(--cyan);border-color:rgba(92,199,234,.45);}
+.c-gov{color:var(--gold);border-color:rgba(233,196,107,.45);}
+.c-vc{color:var(--mint);border-color:rgba(116,238,198,.45);}
+.c-biz{color:var(--steel);border-color:rgba(117,144,176,.45);}
+
+/* ② 패턴 배지 */
+.sec{margin:var(--sp-8) 0 0;}
+.sec > .lbl{margin-bottom:var(--sp-3);display:block;}
+.patrow{display:flex;flex-wrap:wrap;gap:var(--sp-5);align-items:center;}
+.patname{font-family:var(--mono);font-size:var(--t-title);font-weight:700;color:var(--cyan);}
+.patdesc{color:var(--dim);font-size:var(--t-body-sm);}
+.path{display:flex;gap:var(--sp-2);flex-wrap:wrap;margin-top:var(--sp-3);}
+.pstep{font-family:var(--mono);font-size:var(--t-caption);border:1px solid var(--line);border-radius:2px;padding:3px 8px;color:var(--dim);}
+.pstep.last{color:var(--cyan);border-color:rgba(92,199,234,.45);}
+.intro p{margin:var(--sp-2) 0;color:var(--dim);font-size:var(--t-body-sm);}
+
+/* ③ 이중 항로 지도 */
+.maphead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:var(--sp-3);margin-bottom:var(--sp-5);}
+.legend{display:flex;gap:var(--sp-4);font-family:var(--mono);font-size:var(--t-mono-micro);color:var(--dim2);align-items:center;}
+.legend i{display:inline-block;width:16px;height:0;border-top:2px solid var(--mint);margin-right:6px;vertical-align:middle;}
+.legend i.gh{border-top:2px dashed var(--dim);}
+.rows{display:flex;flex-direction:column;gap:2px;}
+.rw{display:grid;grid-template-columns:132px 1fr 96px;gap:var(--sp-3);align-items:center;padding:var(--sp-2) var(--sp-2);
+  border-radius:3px;cursor:pointer;transition:background var(--dur-fast);border:1px solid transparent;}
+.rw:hover,.rw.hot{background:rgba(140,170,210,.07);}
+.rw.flag{border-color:rgba(233,196,107,.3);}
+.rw .nm{font-size:var(--t-body-sm);color:var(--dim);}
+.rw .nm b{color:var(--text);font-weight:500;}
+.rw .val{font-family:var(--mono);font-size:var(--t-body-sm);text-align:right;line-height:1.35;}
+.rw .vstd{font-size:var(--t-mono-micro);color:var(--dim2);}
+.rw .vstd.flag{color:var(--gold);}
+.bar{position:relative;height:26px;}
+.bar .zero{position:absolute;top:0;bottom:0;width:1px;background:var(--line);}
+.bar .me{position:absolute;top:6px;height:14px;border-radius:2px;opacity:.85;}
+.bar .std{position:absolute;top:2px;height:22px;border:1px dashed var(--dim);border-radius:2px;opacity:.55;}
+.cfnote{margin-top:var(--sp-4);font-size:var(--t-caption);color:var(--dim2);}
+
+/* ④⑤ 카드 */
+.cards{display:flex;flex-direction:column;gap:var(--sp-4);margin-top:var(--sp-4);}
+.card{scroll-margin-top:20px;}
+.card.hot{border-color:rgba(116,238,198,.45);}
+.card h3{margin:0 0 var(--sp-3);font-size:var(--t-body-lg);font-weight:600;color:var(--text);}
+.card .zn{font-family:var(--mono);font-size:var(--t-mono-micro);letter-spacing:var(--ls-label);color:var(--dim2);margin-right:var(--sp-2);}
+.card p{margin:0 0 var(--sp-2);color:var(--dim);font-size:var(--t-body-sm);}
+.card p:last-of-type{margin-bottom:0;color:var(--text);}
+.card p.std{color:var(--dim2);}
+.card .foot{margin-top:var(--sp-4);display:flex;gap:var(--sp-3);align-items:center;flex-wrap:wrap;}
+.num{font-family:var(--mono);color:var(--mint);background:rgba(116,238,198,.09);border-radius:2px;padding:1px 5px;letter-spacing:var(--ls-mono);}
+.card.note .num{color:var(--cyan);background:rgba(92,199,234,.09);}
+.src{font-family:var(--mono);font-size:var(--t-mono-micro);color:var(--dim2);}
+
+/* ⑥ 에필로그 */
+.epi{margin-top:var(--sp-8);border-top:1px solid var(--line);padding-top:var(--sp-5);}
+.epi .links{display:flex;gap:var(--sp-4);flex-wrap:wrap;margin-bottom:var(--sp-4);}
+.dis{font-size:var(--t-caption);color:var(--dim2);line-height:1.7;}
+
+/* 공시 오버레이 */
+.ov{position:fixed;inset:0;background:rgba(5,6,13,.97);backdrop-filter:blur(6px);z-index:50;display:none;overflow-y:auto;padding:var(--sp-7) var(--sp-4);}
+.ov.on{display:block;}
+.ovbox{max-width:860px;margin:0 auto;}
+.ovhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--sp-5);}
+.ovhead h2{font-family:var(--mono);font-size:var(--t-title);margin:0;}
+.grp{margin-bottom:var(--sp-6);}
+.grp > h4{font-size:var(--t-body-sm);margin:0 0 var(--sp-2);display:flex;align-items:center;gap:var(--sp-2);}
+.grp .why{font-size:var(--t-caption);color:var(--dim2);margin:0 0 var(--sp-3);}
+.di{border-top:1px solid var(--line);padding:var(--sp-3) 0;display:grid;grid-template-columns:88px 1fr auto;gap:var(--sp-3);align-items:start;}
+.di .dt{font-family:var(--mono);font-size:var(--t-caption);color:var(--dim2);}
+.di .tt{font-size:var(--t-body-sm);}
+.di .mn{font-size:var(--t-caption);color:var(--dim);margin-top:2px;}
+.di .after{font-family:var(--mono);font-size:var(--t-mono-micro);color:var(--gold);}
+.msg{padding:var(--sp-8);text-align:center;color:var(--dim);}
+@media(max-width:720px){
+  .rw{grid-template-columns:96px 1fr 74px;}
+  .di{grid-template-columns:1fr;}
+}
+</style>
+
+<div class="wrap" id="app"><div class="msg">불러오는 중…</div></div>
+<div class="ov" id="ov"><div class="ovbox"></div></div>
+
+<script>
+(function(){
+  var qs = new URLSearchParams(location.search);
+  var TICKER = qs.get('ticker') || '';
+  var app = document.getElementById('app');
+  var OV = document.getElementById('ov');
+  var G=null, STD=null, IMP=null, showStd=true;
+
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  // 산문 속 [숫자]를 모노 칩으로 (STYLE_GUIDE A7)
+  function chips(s){ return esc(s).replace(/\[([^\]]+)\]/g,'<span class="num">$1</span>'); }
+  function fmtWon(v){
+    if(v==null) return '—';
+    var a=Math.abs(v), sg=v<0?'-':'';
+    if(a>=1e12) return sg+(a/1e12).toFixed(1)+'조';
+    if(a>=1e8)  return sg+Math.round(a/1e8).toLocaleString()+'억';
+    return sg+Math.round(a).toLocaleString();
+  }
+
+  // ---- ③ 이중 항로 지도: 매출=100 정규화. 흐름 계정만(잔액 비교는 EQS 탭 영역) ----
+  var MAP = [
+    {k:'revenue', nm:'매출',          zone:'B', color:'--mint',  desc:'들어오는 강'},
+    {k:'cogs',    nm:'매출원가',      zone:'B', color:'--coral', desc:'만드는 데 나간 돈', neg:true},
+    {k:'op',      nm:'영업이익',      zone:'B', color:'--mint',  desc:'장사로 남은 몫'},
+    {k:'ni',      nm:'순이익',        zone:'B', color:'--mint',  desc:'세금까지 빼고 남은 몫'},
+    {k:'ocf',     nm:'영업활동 현금', zone:'C', color:'--cyan',  desc:'진짜 통장에 들어온 돈'},
+    {k:'icf',     nm:'투자활동 현금', zone:'C', color:'--coral', desc:'설비·투자로 나간 돈'},
+    {k:'fin',     nm:'재무활동 현금', zone:'D', color:'--gold',  desc:'빌리고 갚고 나눠준 돈'}
+  ];
+  var DELTA_FLAG = 6; // 정규화 격차(%p) 임계 — 이 이상이면 지도에 강조 배지
+
+  function lastIdx(arr){ for(var i=arr.length-1;i>=0;i--) if(arr[i]!=null) return i; return -1; }
+
+  function buildMap(){
+    var li = G.years.length-1, sli = G.std_years.length-1;
+    var rows = MAP.map(function(m){
+      var mine = (G.norm[m.k]||[])[li];
+      var std  = (G.std_norm[m.k]||[])[sli];
+      // 현금흐름은 결측 연도가 있을 수 있어 마지막 유효값으로 후퇴
+      if(mine==null && G.norm[m.k]){ var i=lastIdx(G.norm[m.k]); if(i>=0) mine=G.norm[m.k][i]; }
+      var gap = (mine!=null&&std!=null) ? (mine-std) : null;
+      return {m:m, mine:mine, std:std, gap:gap};
+    }).filter(function(r){ return r.mine!=null; });
+
+    var maxAbs = 0;
+    rows.forEach(function(r){
+      maxAbs = Math.max(maxAbs, Math.abs(r.mine), r.std!=null?Math.abs(r.std):0);
+    });
+    maxAbs = Math.max(maxAbs, 10);
+
+    var zeroPct = 50; // 0을 가운데 두고 좌우로 (음수 흐름이 왼쪽)
+    function seg(v){
+      var half = 48; // 좌우 최대 폭 %
+      var w = Math.abs(v)/maxAbs*half;
+      return v>=0 ? {left:zeroPct, width:w} : {left:zeroPct-w, width:w};
+    }
+
+    return '<div class="rows">' + rows.map(function(r,i){
+      var s1 = seg(r.mine), s2 = r.std!=null?seg(r.std):null;
+      var flag = (r.gap!=null && Math.abs(r.gap)>=DELTA_FLAG);
+      return '<div class="rw'+(flag?' flag':'')+'" data-zone="'+r.m.zone+'" data-k="'+r.m.k+'">'
+        + '<div class="nm"><b>'+esc(r.m.nm)+'</b><br><span style="font-size:11px;color:var(--dim2)">'+esc(r.m.desc)+'</span></div>'
+        + '<div class="bar">'
+          + '<div class="zero" style="left:'+zeroPct+'%"></div>'
+          + (s2&&showStd ? '<div class="std" style="left:'+s2.left+'%;width:'+s2.width+'%"></div>' : '')
+          + '<div class="me" style="left:'+s1.left+'%;width:'+s1.width+'%;background:var('+r.m.color+')"></div>'
+        + '</div>'
+        + '<div class="val"><span style="color:var('+r.m.color+')">'+r.mine.toFixed(1)+'</span>'
+          + (r.std!=null?'<br><span class="vstd'+(flag?' flag':'')+'">표준 '+r.std.toFixed(1)+'</span>':'')
+        + '</div>'
+      + '</div>';
+    }).join('') + '</div>';
+  }
+
+  function badgeHtml(){
+    if(!IMP || !IMP.items || !IMP.items.length) return '';
+    return '<div class="dbadge" id="dbadge"><span class="dot"></span>'+esc(IMP.badge)+' <span class="lbl" style="margin-left:4px">자세히</span></div>';
+  }
+
+  function cardHtml(c, kind){
+    var zoneNm = {A:'ZONE A',B:'ZONE B',C:'ZONE C',D:'ZONE D',E:'ZONE E'};
+    if(kind==='note'){
+      return '<div class="panel card note" id="card-'+esc(c.id)+'">'
+        + '<h3><span class="zn">NOTE</span>'+chips(c.title)+'</h3>'
+        + (c.what||[]).map(function(p){ return '<p>'+chips(p)+'</p>'; }).join('')
+        + (c.why||[]).map(function(p){ return '<p>'+chips(p)+'</p>'; }).join('')
+        + '<div class="foot"><span class="src">출처 · 사업보고서 주석 '+esc(c.src&&c.src.note_no||'')+'. '+esc(c.src&&c.src.title||'')+'</span></div>'
+        + '</div>';
+    }
+    var a = c.anchor||{};
+    var link = 'galaxy.html?ticker='+esc(a.std_ticker||G.std_ref.ticker)+'&focus='+esc(a.std_focus||'');
+    return '<div class="panel card" id="card-'+esc(c.id)+'" data-zone="'+esc(a.zone||'')+'">'
+      + '<h3><span class="zn">'+(zoneNm[a.zone]||'')+'</span>'+chips(c.title)+'</h3>'
+      + '<p class="std">'+chips(c.lines[0])+'</p>'
+      + '<p>'+chips(c.lines[1])+'</p>'
+      + '<p>'+chips(c.lines[2])+'</p>'
+      + '<div class="foot"><a class="btn ghost" href="'+link+'" target="_top">표준에서 이 대목 보기 →</a></div>'
+      + '</div>';
+  }
+
+  function render(){
+    var c=G.corp, s=G.std_ref, p=G.pattern;
+    var h = '';
+    // ① 헤더
+    h += '<header class="hd"><div class="top"><h1>'+esc(c.name)+'</h1>'
+       + '<span class="sub">'+esc(c.ticker)+' · '+esc(c.fiscal_label)+(c.sector?' · '+esc(c.sector):'')+'</span></div>'
+       + '<div class="hero">'+esc(G.strings.hero)+'</div>'
+       + '<div class="stdcta"><span class="t">이 업종의 표준 항로는 <b>'+esc(s.name)+'</b>예요'
+       + (s.adjacent?' <span class="lbl">(인접 업종 표준)</span>':'')+'. 아직 안 보셨다면 먼저 한 번 훑고 오세요.</span>'
+       + '<a class="btn" href="galaxy.html?ticker='+esc(s.ticker)+'" target="_top">표준으로 배우기 →</a></div>'
+       + badgeHtml()
+       + '</header>';
+
+    // ② 항로 요약
+    h += '<section class="sec"><span class="lbl">ROUTE SUMMARY</span><div class="panel edge">'
+       + '<div class="patrow"><div><div class="patname">'+esc(p.name||'—')+'</div>'
+       + '<div class="patdesc">'+esc(p.desc||'')+'</div></div></div>'
+       + '<div class="path">'+(p.path||[]).map(function(st,i,arr){
+            return '<span class="pstep'+(i===arr.length-1?' last':'')+'">'+esc(st.year)+' '+esc(st.name)+'</span>';
+         }).join('')+'</div>'
+       + '<div class="intro">'+(G.strings.intro_lines||[]).map(function(l){return '<p>'+esc(l)+'</p>';}).join('')+'</div>'
+       + '</div></section>';
+
+    // ③ 이중 항로 지도
+    h += '<section class="sec"><span class="lbl">DUAL ROUTE — 매출을 100으로 맞춰 겹쳐 보기</span>'
+       + '<div class="panel edge">'
+       + '<div class="maphead"><div class="legend"><span><i></i>'+esc(c.name)+'</span>'
+       + '<span><i class="gh"></i>표준 '+esc(s.name)+'</span></div>'
+       + '<button class="btn ghost'+(showStd?' on':'')+'" id="tgl">표준 겹쳐 보기 '+(showStd?'ON':'OFF')+'</button></div>'
+       + buildMap()
+       + '<div class="cfnote">규모가 30배 달라도 매출을 [100]으로 맞추면 <b>항로의 모양</b>을 견줄 수 있어요. 0선의 왼쪽은 빠져나간 돈, 오른쪽은 남거나 들어온 돈이에요.'
+       + (c.cash_flow_from?' 현금흐름은 <b>'+esc(c.cash_flow_from)+'</b>부터 확인돼요.':'')
+       + '</div></div></section>';
+
+    // ④ 델타 카드
+    h += '<section class="sec"><span class="lbl">DELTA — 표준과 무엇이 다른가</span>'
+       + '<div class="cards">'+ (G.cards||[]).map(function(c2){return cardHtml(c2,'delta');}).join('') +'</div></section>';
+
+    // ⑤ 주목할 점
+    if((G.notes||[]).length){
+      h += '<section class="sec"><span class="lbl">NOTES — 이 회사에서 눈여겨볼 곳</span>'
+         + '<div class="cards">'+ G.notes.map(function(c2){return cardHtml(c2,'note');}).join('') +'</div></section>';
+    }
+
+    // ⑥ 에필로그
+    h += '<div class="epi"><div class="links">'
+       + '<a class="btn" href="galaxy.html?ticker='+esc(s.ticker)+'" target="_top">표준 은하수 다시 보기</a>'
+       + '<a class="btn ghost" href="firm.html?ticker='+esc(c.ticker)+'&theme=galaxy" target="_top">지표로 평가된 성적은 EQS 탭에서 →</a>'
+       + (c.rcept_no?'<a class="btn ghost" href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo='+esc(c.rcept_no)+'" target="_blank" rel="noopener">사업보고서 원문</a>':'')
+       + '</div><div class="dis">이 화면은 공시된 재무제표와 사업보고서 주석에 기반한 <b>과거 통계 기반 참고 정보</b>예요. 투자 판단의 근거로 삼기 위한 조언이 아니며, 표준과의 비교는 이해를 돕기 위한 학습 장치예요.</div></div>';
+
+    app.innerHTML = h;
+    wire();
+  }
+
+  function wire(){
+    var tgl = document.getElementById('tgl');
+    if(tgl) tgl.onclick = function(){ showStd = !showStd; render(); };
+
+    // 지도 ↔ 카드 양방향 앵커
+    document.querySelectorAll('.rw').forEach(function(rw){
+      var z = rw.getAttribute('data-zone');
+      rw.onmouseenter = function(){
+        document.querySelectorAll('.card[data-zone="'+z+'"]').forEach(function(c){ c.classList.add('hot'); });
+      };
+      rw.onmouseleave = function(){
+        document.querySelectorAll('.card.hot').forEach(function(c){ c.classList.remove('hot'); });
+      };
+      rw.onclick = function(){
+        var c = document.querySelector('.card[data-zone="'+z+'"]');
+        if(c) c.scrollIntoView({behavior:'smooth', block:'center'});
+      };
+    });
+    document.querySelectorAll('.card[data-zone]').forEach(function(card){
+      var z = card.getAttribute('data-zone');
+      card.onmouseenter = function(){
+        document.querySelectorAll('.rw[data-zone="'+z+'"]').forEach(function(r){ r.classList.add('hot'); });
+      };
+      card.onmouseleave = function(){
+        document.querySelectorAll('.rw.hot').forEach(function(r){ r.classList.remove('hot'); });
+      };
+    });
+
+    var b = document.getElementById('dbadge');
+    if(b) b.onclick = openImpact;
+  }
+
+  // ---- 공시 영향 오버레이 ----
+  function openImpact(){
+    if(!IMP) return;
+    var order = ['cash','gov','vc','biz'];
+    var after = IMP.items.filter(function(i){return i.after_snapshot;});
+    var list  = after.length ? after : IMP.items.slice(0,20);
+    var h = '<div class="ovhead"><h2>공시가 바꾸는 것</h2><button class="btn ghost" id="ovx">닫기 (ESC)</button></div>';
+    h += '<div class="dis" style="margin-bottom:var(--sp-5)">은하수의 숫자는 <b>'+esc(IMP.snapshot.date||'')+'</b>에 낸 사업보고서 기준이에요. '
+       + (after.length? '그 뒤로 올라온 공시 <b>'+after.length+'건</b>을, 이 회사의 어느 면을 건드리는지에 따라 나눠 놨어요.'
+                      : '결산 이후 새 공시가 아직 없어서 최근 공시를 보여드려요.')+'</div>';
+    order.forEach(function(d){
+      var xs = list.filter(function(i){ return i.dims.indexOf(d)>=0; });
+      if(!xs.length) return;
+      var meta = IMP.dims[d];
+      h += '<div class="grp"><h4><span class="chip c-'+d+'">'+esc(meta.label)+'</span>'
+         + '<span style="color:var(--dim2);font-size:var(--t-caption)">'+xs.length+'건 · '+esc(meta.surface)+'</span></h4>';
+      h += xs.map(function(i){
+        return '<div class="di"><div class="dt">'+esc(i.date)+(i.after_snapshot?'<br><span class="after">결산 이후</span>':'')+'</div>'
+          + '<div><div class="tt">'+esc(i.title)+'</div>'
+          + (i.means?'<div class="mn">'+esc(i.means)+'</div>':'')
+          + '</div>'
+          + '<a class="btn ghost" href="'+esc(i.dart_url)+'" target="_blank" rel="noopener">원문</a></div>';
+      }).join('');
+      h += '</div>';
+    });
+    OV.querySelector('.ovbox').innerHTML = h;
+    OV.classList.add('on');
+    document.getElementById('ovx').onclick = closeImpact;
+  }
+  function closeImpact(){ OV.classList.remove('on'); }
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeImpact(); });
+  OV.onclick = function(e){ if(e.target===OV) closeImpact(); };
+
+  // ---- 로드 ----
+  if(!TICKER){ app.innerHTML='<div class="msg">기업 코드(ticker)가 지정되지 않았어요.</div>'; return; }
+  fetch('data/galaxy_lite_'+TICKER+'.json',{cache:'no-store'})
+    .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function(j){
+      G=j;
+      // 표준 골든을 함께 fetch — 표준 수치를 lite에 복사하지 않기 위한 확인용(있으면 이름·라벨 갱신)
+      return fetch('data/galaxy_'+j.std_ref.ticker+'.json',{cache:'no-store'})
+        .then(function(r){ return r.ok?r.json():null; }).catch(function(){ return null; });
+    })
+    .then(function(std){
+      STD=std;
+      return fetch('data/impact_'+TICKER+'.json',{cache:'no-store'})
+        .then(function(r){ return r.ok?r.json():null; }).catch(function(){ return null; });
+    })
+    .then(function(imp){ IMP=imp; render(); })
+    .catch(function(){ app.innerHTML='<div class="msg">이 기업의 은하수 데이터를 찾을 수 없어요 ('+esc(TICKER)+').</div>'; });
+})();
+</script>

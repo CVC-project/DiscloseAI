@@ -361,6 +361,13 @@ class Component extends DCLogic {
     document.addEventListener('keydown', this._onKey);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => this.queueMeasure());
     setTimeout(() => this.queueMeasure(), 600);
+    // lite 델타 뷰에서 넘어온 표준 딥링크(?focus=zoneB) — 해당 존으로 스크롤. 없으면 아무 일도 하지 않는다.
+    setTimeout(() => {
+      const f = new URLSearchParams(location.search).get('focus');
+      if (!f) return;
+      const el = document.querySelector('[data-zone="' + f + '"]');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 900);
     this.applyTokens();
   }
   componentWillUnmount() {
