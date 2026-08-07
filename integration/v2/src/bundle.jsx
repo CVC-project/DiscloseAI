@@ -2471,7 +2471,7 @@ function useCompanyDisclosures(stockCode, enabled) {
       .then(map => {
         const corpCode = map[stockCode];
         if (!corpCode) throw new Error('corp_code not found');
-        return fetch(`/api/disclosures?corp_code=${corpCode}&limit=8`, {
+        return fetch(`/api/disclosures?corp_code=${corpCode}&limit=15`, {
           headers: { Accept: 'application/json' }, cache: 'no-store',
         });
       })
@@ -2574,7 +2574,7 @@ function SectorDisclosurePanel({ sector, onBack, onSelect }) {
     () => discAll
       .filter(d => tickers.has(d.ticker || d.stock_code))
       .sort((a, b) => (b.disclosure_date || '').localeCompare(a.disclosure_date || ''))
-      .slice(0, 10),
+      .slice(0, 15),
     [tickers, discAll.length]
   );
   return (
@@ -2619,7 +2619,7 @@ function CompanyDisclosurePanel({ company, sector, onBack, onSelect, onEnterDisc
     [live.items, company.code]
   );
   const ownDiscs = React.useMemo(
-    () => ((RD.discByTicker && RD.discByTicker[company.code]) || []).slice(0, 8),
+    () => ((RD.discByTicker && RD.discByTicker[company.code]) || []).slice(0, 15),
     [company.code]
   );
   // 아카이브는 top50급 대형주만 사전 수집한다 — 그 밖의 기업(예: SK스퀘어, 이월드)은

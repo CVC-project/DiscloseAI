@@ -246,7 +246,7 @@ def extract_financial(corp_codes: set[str]) -> list[dict]:
 # --------------------------------------------------------------------------- #
 def extract_disclosures(
     corp_to_ticker: dict[str, str],
-    per_corp: int = 5,
+    per_corp: int = 30,
     statements_limit: int = 8,
 ) -> dict:
     """disclosure.db에서 기업당 최근 N건 + 분기 재무제표 최근 M분기 추출.
