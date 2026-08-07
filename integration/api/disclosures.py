@@ -81,7 +81,9 @@ class handler(BaseHTTPRequestHandler):
         self.send_response(status)
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Content-Length", str(len(encoded)))
-        self.send_header("Cache-Control", "public, s-maxage=120, stale-while-revalidate=300")
+        self.send_header(
+            "Cache-Control", "public, s-maxage=120, stale-while-revalidate=300"
+        )
         self.end_headers()
         self.wfile.write(encoded)
 
@@ -113,7 +115,9 @@ class handler(BaseHTTPRequestHandler):
             with urlopen(request, timeout=10) as response:
                 payload = json.loads(response.read().decode("utf-8"))
         except (HTTPError, URLError, TimeoutError, json.JSONDecodeError):
-            self._send_json(502, {"detail": "DART disclosure feed is temporarily unavailable"})
+            self._send_json(
+                502, {"detail": "DART disclosure feed is temporarily unavailable"}
+            )
             return
 
         status = str(payload.get("status", ""))
