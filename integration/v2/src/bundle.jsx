@@ -2437,8 +2437,13 @@ function useLiveDisclosures(limit = 40) {
   const refresh = React.useCallback(async () => {
     setState(previous => ({ ...previous, loading: true, error: false }));
     try {
-      const isGitHubPages = window.location.hostname.endsWith('github.io');
-      const feedUrl = isGitHubPages
+      const hostname = window.location.hostname;
+      const isStaticPreview = window.location.protocol === 'file:'
+        || hostname.endsWith('github.io')
+        || hostname === 'localhost'
+        || hostname === '127.0.0.1'
+        || hostname === '::1';
+      const feedUrl = isStaticPreview
         ? new URL('../data/today_disclosures.json', window.location.href).toString()
         : `/api/disclosures?limit=${limit}`;
       const response = await fetch(feedUrl, {
@@ -2446,8 +2451,15 @@ function useLiveDisclosures(limit = 40) {
       });
       if (!response.ok) throw new Error('live disclosure request failed');
       const payload = await response.json();
-      setState({ items: Array.isArray(payload.items) ? payload.items : [], loading: false, error: false, asOfKst: payload.asOfKst || '' });
-    } catch (_) {
+      setState({
+        items: Array.isArray(payload.items) ? payload.items : [],
+        loading: false,
+        error: false,
+        asOfKst: payload.asOfKst || payload.generatedAt || payload.generated_at || '',
+      });
+    } catch (err) {
+      // 이전엔 조용히 삼켜져서 로컬 재현이 오래 걸렸다 — 최소한 콘솔에는 남긴다.
+      console.error('[disclosures] live feed fetch failed:', err);
       setState(previous => ({ ...previous, loading: false, error: true }));
     }
   }, [limit]);
