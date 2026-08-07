@@ -77,6 +77,15 @@ def _read_limit(path: str) -> int:
     return max(1, min(requested, _MAX_LIMIT))
 
 
+def _read_corp_code(path: str) -> str:
+    raw = parse_qs(urlparse(path).query).get("corp_code", [""])[0]
+    raw = _clean_text(raw)
+    return raw if raw.isdigit() and len(raw) == 8 else ""
+
+
+_COMPANY_LOOKBACK_DAYS = 90
+
+
 class handler(BaseHTTPRequestHandler):
     """Vercel Python handler. Uses only the standard library by design."""
 
@@ -102,6 +111,7 @@ class handler(BaseHTTPRequestHandler):
             return
 
         day = _today_kst()
+        corp_code = _read_corp_code(self.path)
         params = {
             "crtfc_key": api_key,
             "bgn_de": day,
@@ -111,6 +121,14 @@ class handler(BaseHTTPRequestHandler):
             "page_no": "1",
             "page_count": str(_MAX_LIMIT),
         }
+        if corp_code:
+            # 아카이브(top50만 사전 수집)에 없는 기업을 조회할 때, 저장 없이 그 자리에서
+            # DART에 직접 물어본다 — corp_code가 있으면 오늘 하루가 아니라 최근 N일을 본다.
+            now = datetime.now(_KST)
+            params["bgn_de"] = (now - timedelta(days=_COMPANY_LOOKBACK_DAYS)).strftime(
+                "%Y%m%d"
+            )
+            params["corp_code"] = corp_code
         request = Request(
             f"{_DART_LIST_URL}?{urlencode(params)}",
             headers={"User-Agent": "DiscloseAI/1.0 (server disclosure feed)"},
