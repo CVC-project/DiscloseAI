@@ -2432,17 +2432,73 @@ function formatLiveDisclosureTime(asOfKst) {
   }
 }
 
+// 정적 배포(GitHub Pages·file://·로컬 미리보기)에는 Vercel 서버 API(/api/*)가
+// 없다 — 이 경우들을 하나로 판별해 여러 훅에서 재사용한다.
+function isStaticPreviewHost() {
+  const hostname = window.location.hostname;
+  return window.location.protocol === 'file:'
+    || hostname.endsWith('github.io')
+    || hostname === 'localhost'
+    || hostname === '127.0.0.1'
+    || hostname === '::1';
+}
+
+// 아카이브(disclosures.json)는 top50급 대형주만 사전 수집한다 — 그 밖의 기업을
+// 열었을 때 corp_code를 찾기 위해 dossier의 company_master.json을 지연 로드한다.
+let _corpCodeMapPromise = null;
+function loadCorpCodeMap() {
+  if (!_corpCodeMapPromise) {
+    _corpCodeMapPromise = fetch(new URL('../dossier/data/company_master.json', window.location.href).toString())
+      .then(r => r.json())
+      .then(d => Object.fromEntries((d.companies || []).map(c => [c.ticker, c.corp_code])))
+      .catch(() => ({}));
+  }
+  return _corpCodeMapPromise;
+}
+
+// 아카이브에 없는(top50 밖) 기업을 열었을 때, 저장 없이 그 자리에서 DART를
+// 직접 조회한다 — 정적 미리보기에는 서버가 없어 시도하지 않는다.
+function useCompanyDisclosures(stockCode, enabled) {
+  const [state, setState] = React.useState({ items: [], loading: false, error: false, tried: false });
+  React.useEffect(() => {
+    if (!enabled || !stockCode || isStaticPreviewHost()) {
+      setState({ items: [], loading: false, error: false, tried: false });
+      return;
+    }
+    let cancelled = false;
+    setState(previous => ({ ...previous, loading: true, error: false }));
+    loadCorpCodeMap()
+      .then(map => {
+        const corpCode = map[stockCode];
+        if (!corpCode) throw new Error('corp_code not found');
+        return fetch(`/api/disclosures?corp_code=${corpCode}&limit=8`, {
+          headers: { Accept: 'application/json' }, cache: 'no-store',
+        });
+      })
+      .then(response => {
+        if (!response.ok) throw new Error('company disclosure request failed');
+        return response.json();
+      })
+      .then(payload => {
+        if (cancelled) return;
+        setState({ items: Array.isArray(payload.items) ? payload.items : [], loading: false, error: false, tried: true });
+      })
+      .catch(err => {
+        if (cancelled) return;
+        console.error('[disclosures] company live fetch failed:', err);
+        setState({ items: [], loading: false, error: true, tried: true });
+      });
+    return () => { cancelled = true; };
+  }, [stockCode, enabled]);
+  return state;
+}
+
 function useLiveDisclosures(limit = 40) {
   const [state, setState] = React.useState({ items: [], loading: true, error: false, asOfKst: '' });
   const refresh = React.useCallback(async () => {
     setState(previous => ({ ...previous, loading: true, error: false }));
     try {
-      const hostname = window.location.hostname;
-      const isStaticPreview = window.location.protocol === 'file:'
-        || hostname.endsWith('github.io')
-        || hostname === 'localhost'
-        || hostname === '127.0.0.1'
-        || hostname === '::1';
+      const isStaticPreview = isStaticPreviewHost();
       const feedUrl = isStaticPreview
         ? new URL('../data/today_disclosures.json', window.location.href).toString()
         : `/api/disclosures?limit=${limit}`;
@@ -2566,6 +2622,9 @@ function CompanyDisclosurePanel({ company, sector, onBack, onSelect, onEnterDisc
     () => ((RD.discByTicker && RD.discByTicker[company.code]) || []).slice(0, 8),
     [company.code]
   );
+  // 아카이브는 top50급 대형주만 사전 수집한다 — 그 밖의 기업(예: SK스퀘어, 이월드)은
+  // ownDiscs가 항상 비어 있으므로, 그때만 저장 없이 그 자리에서 DART를 직접 조회한다.
+  const companyLive = useCompanyDisclosures(company.code, ownDiscs.length === 0);
   const relDiscs = React.useMemo(() => {
     if (!showRel) return [];
     const rels = RELATIONS[company.code] || [];
@@ -2592,17 +2651,38 @@ function CompanyDisclosurePanel({ company, sector, onBack, onSelect, onEnterDisc
       <div className="panel-body company-disclosure-body" style={{display: 'flex', flexDirection: 'column'}}>
         <LiveDisclosureBlock items={liveItems} live={live} />
         <div className="stored-disclosure-label">저장된 최근 공시</div>
-        {ownDiscs.length === 0 && <div style={{padding: '14px 10px', color: '#475569', fontSize: 11}}>수집된 공시 없음</div>}
-        {ownDiscs.map((d, i) => (
-          <div key={i} className={'disc-feed-row' + (!!d.high_impact ? ' hi' : '')} onClick={() => onSelect && onSelect(d)}>
-            <div style={{display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2}}>
-              <span className="disc-feed-date">{(d.disclosure_date || '').slice(5).replace('-', '/')}</span>
-              {!!d.high_impact && <span className="disc-hi-badge">HI</span>}
-              <span className="disc-type-badge">{d.disclosure_type || '기타'}</span>
+        {ownDiscs.length > 0 ? (
+          ownDiscs.map((d, i) => (
+            <div key={i} className={'disc-feed-row' + (!!d.high_impact ? ' hi' : '')} onClick={() => onSelect && onSelect(d)}>
+              <div style={{display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2}}>
+                <span className="disc-feed-date">{(d.disclosure_date || '').slice(5).replace('-', '/')}</span>
+                {!!d.high_impact && <span className="disc-hi-badge">HI</span>}
+                <span className="disc-type-badge">{d.disclosure_type || '기타'}</span>
+              </div>
+              <div className="disc-feed-title">{(d.title || '').slice(0, 32)}{(d.title || '').length > 32 ? '…' : ''}</div>
             </div>
-            <div className="disc-feed-title">{(d.title || '').slice(0, 32)}{(d.title || '').length > 32 ? '…' : ''}</div>
+          ))
+        ) : companyLive.loading ? (
+          <div style={{padding: '14px 10px', color: '#475569', fontSize: 11}}>실시간 조회 중…</div>
+        ) : companyLive.items.length > 0 ? (
+          companyLive.items.map((d, i) => (
+            <div key={i} className="disc-feed-row" onClick={() => window.open(d.dartUrl, '_blank', 'noopener,noreferrer')}>
+              <div style={{display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2}}>
+                <span className="disc-feed-date">{(d.receiptDate || '').slice(5).replace('-', '/')}</span>
+                <span className="disc-type-badge">실시간 조회</span>
+              </div>
+              <div className="disc-feed-title">{(d.title || '').slice(0, 32)}{(d.title || '').length > 32 ? '…' : ''}</div>
+            </div>
+          ))
+        ) : companyLive.tried ? (
+          <div style={{padding: '14px 10px', color: '#475569', fontSize: 11}}>
+            {companyLive.error ? '실시간 조회 실패 — 새로고침 해보세요' : '최근 90일간 접수된 공시가 없습니다'}
           </div>
-        ))}
+        ) : (
+          <div style={{padding: '14px 10px', color: '#475569', fontSize: 11}}>
+            이 기업은 정적 미리보기에서 조회할 수 없습니다 — 실제 서비스에서는 실시간으로 표시됩니다.
+          </div>
+        )}
         <div className="disc-rel-toggle" onClick={() => setShowRel(v => !v)}>
           <span>{showRel ? '▾' : '▸'} 관계 기업 공시</span>
           <span style={{color: '#64748b', fontSize: 9}}>{relCount}건</span>
