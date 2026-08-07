@@ -41,7 +41,9 @@ def _clean_text(value: Any) -> str:
     return " ".join(str(value or "").split())
 
 
-def _normalize_items(items: Iterable[Dict[str, Any]], limit: int) -> List[Dict[str, str]]:
+def _normalize_items(
+    items: Iterable[Dict[str, Any]], limit: int
+) -> List[Dict[str, str]]:
     """Keep only listed-company disclosures and expose safe public fields."""
     normalized: List[Dict[str, str]] = []
     for item in items:
@@ -67,7 +69,9 @@ def _normalize_items(items: Iterable[Dict[str, Any]], limit: int) -> List[Dict[s
 
 def _read_limit(path: str) -> int:
     try:
-        requested = int(parse_qs(urlparse(path).query).get("limit", [_DEFAULT_LIMIT])[0])
+        requested = int(
+            parse_qs(urlparse(path).query).get("limit", [_DEFAULT_LIMIT])[0]
+        )
     except (TypeError, ValueError):
         requested = _DEFAULT_LIMIT
     return max(1, min(requested, _MAX_LIMIT))
@@ -126,7 +130,9 @@ class handler(BaseHTTPRequestHandler):
         elif status == "000":
             raw_items = payload.get("list") or []
         else:
-            self._send_json(502, {"detail": "DART disclosure feed request failed", "status": status})
+            self._send_json(
+                502, {"detail": "DART disclosure feed request failed", "status": status}
+            )
             return
 
         items = _normalize_items(raw_items, _read_limit(self.path))
