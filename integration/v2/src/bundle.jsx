@@ -2437,7 +2437,11 @@ function useLiveDisclosures(limit = 40) {
   const refresh = React.useCallback(async () => {
     setState(previous => ({ ...previous, loading: true, error: false }));
     try {
-      const response = await fetch(`/api/disclosures?limit=${limit}`, {
+      const isGitHubPages = window.location.hostname.endsWith('github.io');
+      const feedUrl = isGitHubPages
+        ? new URL('../data/today_disclosures.json', window.location.href).toString()
+        : `/api/disclosures?limit=${limit}`;
+      const response = await fetch(feedUrl, {
         headers: { Accept: 'application/json' }, cache: 'no-store',
       });
       if (!response.ok) throw new Error('live disclosure request failed');
