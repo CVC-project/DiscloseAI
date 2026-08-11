@@ -161,17 +161,37 @@ def main() -> None:
     for key in ACCOUNT_KEYS:
         print(f"    {key:<20} {acct_cov[key]:>5}")
 
-    # G3 sanity — 파싱값 자체가 물리적으로 말이 되는지
-    print("\n[G3 sanity — 파싱값]")
-    bad_op = [(tk, fy) for (tk, fy, k) in pv if k == "revenue"
-              and (tk, fy, "operating_income") in pv
-              and pv[(tk, fy, "revenue")]["amount"]
-              and abs(pv[(tk, fy, "operating_income")]["amount"]) > abs(pv[(tk, fy, "revenue")]["amount"])]
-    print(f"  |영업이익| > |매출| : {len(bad_op)}건 {sorted(bad_op)[:10]}")
+    # G3 sanity — 파싱값 자체가 물리적으로 말이 되는지.
+    # ⚠️ 정답지 55사가 아니라 **파싱된 전 기업**에 건다 — 확장분(섹터 골든 범위)이 검사 밖으로
+    #    새면 게이트가 무의미해진다.
+    print("\n[G3 sanity — 파싱값 전수]")
+    allv: dict[tuple, float] = {}
+    best_s: dict[tuple, tuple] = {}
+    for r in allrows:
+        k = (r.ticker, r.fiscal_year, r.account_key)
+        score = (0 if r.fs_div == "CFS" else 1, r.col_kind, r.match_rank or 9)
+        if k not in best_s or score < best_s[k]:
+            best_s[k], allv[k] = score, r.amount
+    print(f"  대상 기업 {len({k[0] for k in allv})} · 셀 {len(allv)}")
+    # ⚠️ R14를 **원천**에 걸 때는 부호를 갈라야 한다. `|영업이익| > 매출`을 그대로 쓰면
+    #    매출이 미미한 R&D형(바이오·팹리스)과 코로나기 항공사가 대량 오탐된다(실측 127건).
+    #    FN-025식 계정 오매칭의 지문은 **매출만 작아지고 영업이익은 정상 규모로 남는 것**이므로,
+    #    원천 게이트는 **영업이익이 양수인데 매출보다 큰 경우**만 위반으로 본다.
+    pos_bad, neg_info = [], []
+    for (tk, fy, k) in allv:
+        if k != "revenue" or not allv[(tk, fy, k)]:
+            continue
+        op = allv.get((tk, fy, "operating_income"))
+        if op is None or abs(op) <= abs(allv[(tk, fy, k)]):
+            continue
+        (pos_bad if op > 0 else neg_info).append((tk, fy))
+    print(f"  영업이익(양수) > 매출 [위반] : {len(pos_bad)}건 {sorted(pos_bad)[:12]}")
+    print(f"  영업손실 |op| > 매출 [정보]  : {len(neg_info)}건 · 기업 {len({t for t, _ in neg_info})}"
+          f" — 매출 미미한 R&D형·적자 사이클. 위반 아님")
     rev = collections.defaultdict(dict)
-    for (tk, fy, k), d in pv.items():
+    for (tk, fy, k), amt in allv.items():
         if k == "revenue":
-            rev[tk][fy] = d["amount"]
+            rev[tk][fy] = amt
     dips = []
     for tk, ys in rev.items():
         for fy in sorted(ys):

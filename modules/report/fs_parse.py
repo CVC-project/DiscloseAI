@@ -30,6 +30,8 @@ revenue 별칭에서 **제외** — 금융업 top line은 `영업수익`(ifrs-fu
 from __future__ import annotations
 
 import argparse
+import collections
+import csv
 import os
 import re
 import sys
@@ -161,7 +163,9 @@ SIGN_ABS = frozenset({"cogs"})
 # ── 원문 마크업 상수 (실측 근거: FS_PARSE_PLAN §7.2) ───────────────────────────
 # 신형식: <TITLE>2-1. 연결 재무상태표</TITLE> / <TITLE>4-2. 포괄손익계산서</TITLE>
 _FS_TITLE_RE = re.compile(
-    r"<TITLE[^>]*>\s*\d+\s*[-.]\s*\d+\s*\.?\s*"
+    # 절 번호는 **선택**이다 — 연결 미작성사(211270 등)는 `<TITLE>재무상태표</TITLE>`로
+    # 번호 없이 싣는다. 번호를 필수로 두면 그런 회사의 본표를 통째로 놓친다.
+    r"<TITLE[^>]*>\s*(?:\d+\s*[-.]\s*\d+\s*\.?\s*)?"
     r"((?:연결\s*)?(?:재무상태표|대차대조표|포괄손익계산서|손익계산서|현금흐름표|자본변동표))"
     # 병기 괄호 허용 — KB금융 등은 `2-1. 연결 재무상태표(대차대조표)`로 쓴다.
     r"\s*(?:\([^<)]{0,20}\))?\s*</TITLE>",
@@ -460,7 +464,60 @@ def parse_file(path: str, src_fy: int) -> tuple[list[dict], dict]:
 # ── DB 적재 ─────────────────────────────────────────────────────────────────
 
 
-def run(tickers: list[str] | None = None, min_fy: int = 2021, quiet: bool = False) -> dict:
+def sector_golden_tickers() -> tuple[list[str], dict[str, list[str]]]:
+    """골든이 존재하는 산업에 속한 상장사 (FS_PARSE_PLAN §9).
+
+    매핑 정본은 `data/sector_golden_map.csv` — **CSV만 고치면 범위가 바뀐다**.
+    산업코드는 `data/industry_snapshot.csv`(1회 스냅샷)에서 읽는다.
+
+    ⚠️ 스냅샷을 두는 이유(경계 규칙): 산업코드 원천은 integration의 `company_master.json`인데,
+    modules/report가 이를 런타임에 읽으면 **모듈 → integration 역방향 의존**이 된다
+    (루트 CLAUDE.md: integration만 타 모듈 read-only). 자체 재수집은 이슈 #43의 3중 수집
+    부채를 늘린다. → 파생 데이터 1회 복사본을 report 자기 data/에 두고 출처를 명기한다.
+    """
+    snap_path = os.path.join(_HERE, "data", "industry_snapshot.csv")
+    map_path = os.path.join(_HERE, "data", "sector_golden_map.csv")
+    firms: dict[str, dict] = {}
+    with open(snap_path, encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            firms[r["ticker"]] = r
+    prefixes: list[tuple[str, str]] = []
+    inc: dict[str, str] = {}
+    exc: set[str] = set()
+    with open(map_path, encoding="utf-8") as f:
+        for line in f:
+            if line.startswith("#") or not line.strip():
+                continue
+            parts = next(csv.reader([line]))
+            if len(parts) < 3 or parts[0] == "cluster":
+                continue
+            cl, rule, val = parts[0].strip(), parts[1].strip(), parts[2].strip()
+            if rule == "prefix":
+                prefixes.append((val, cl))
+            elif rule == "ticker":
+                inc[val] = cl
+            elif rule == "exclude":
+                exc.add(val)
+    by_cluster: dict[str, list[str]] = collections.defaultdict(list)
+    for tk, r in firms.items():
+        if tk in exc:
+            continue
+        if r.get("is_financial") == "1" or r.get("is_reit") == "1":
+            continue
+        code = r.get("industry_code") or ""
+        cl = inc.get(tk)
+        if cl is None:
+            for val, c in prefixes:
+                if code.startswith(val):
+                    cl = c
+                    break
+        if cl:
+            by_cluster[cl].append(tk)
+    return sorted({t for v in by_cluster.values() for t in v}), dict(by_cluster)
+
+
+def run(tickers: list[str] | None = None, min_fy: int = 2021, quiet: bool = False,
+        fail_csv: str | None = None) -> dict:
     init_local_db()
     sess = get_local_session()
     q = sess.query(ReportRaw).filter(ReportRaw.fiscal_year >= min_fy)
@@ -469,10 +526,12 @@ def run(tickers: list[str] | None = None, min_fy: int = 2021, quiet: bool = Fals
     reports = q.order_by(ReportRaw.ticker, ReportRaw.fiscal_year).all()
     agg = {"보고서": 0, "파일없음": 0, "블록0": 0, "행": 0, "신형식": 0, "구형식": 0}
     done_t = set()
+    fails: list[tuple] = []  # collector 재수집 입력 (FS_PARSE_PLAN §9.3)
     for rep in reports:
         path = os.path.join(RAW_DIR, rep.ticker, f"{rep.rcept_no}.xml")
         if not os.path.exists(path):
             agg["파일없음"] += 1
+            fails.append((rep.ticker, rep.fiscal_year, rep.rcept_no, rep.report_nm or "", "파일없음", 0))
             continue
         picked, stats = parse_file(path, rep.fiscal_year)
         agg["보고서"] += 1
@@ -482,6 +541,8 @@ def run(tickers: list[str] | None = None, min_fy: int = 2021, quiet: bool = Fals
             agg["구형식"] += 1
         if not picked:
             agg["블록0"] += 1
+            fails.append((rep.ticker, rep.fiscal_year, rep.rcept_no, rep.report_nm or "",
+                          "본표없음", os.path.getsize(path)))
             continue
         sess.query(FsAccountXml).filter_by(rcept_no=rep.rcept_no).delete()
         for d in picked:
@@ -495,6 +556,14 @@ def run(tickers: list[str] | None = None, min_fy: int = 2021, quiet: bool = Fals
                   f"블록{stats['blocks']} 셀{stats['cells']} → {len(picked)}행")
     sess.close()
     agg["기업"] = len(done_t)
+    if fail_csv and fails:
+        # ⚠️ 원문 복구는 fs_parse가 못 한다 — report_raw는 (ticker,fy)당 rcept 1건이고
+        #    raw_cache 미등재 파일도 0건이라 폴백할 원본이 로컬에 없다. collector 재수집 대상.
+        with open(fail_csv, "w", encoding="utf-8", newline="") as f:
+            w = csv.writer(f)
+            w.writerow(["ticker", "fiscal_year", "rcept_no", "report_nm", "사유", "bytes"])
+            w.writerows(sorted(fails))
+        print(f"파싱 실패 {len(fails)}건 → {fail_csv} (collector 재수집 입력)")
     return agg
 
 
@@ -502,6 +571,10 @@ def main() -> None:
     ap = argparse.ArgumentParser(description="원문 XML 본표 → fs_account_xml")
     ap.add_argument("--tickers", help="쉼표 구분 종목코드")
     ap.add_argument("--pilot", action="store_true", help="fs_account 보유 55사만")
+    ap.add_argument("--scope", choices=["sector-golden"],
+                    help="골든 보유 산업 소속 상장사 (data/sector_golden_map.csv 정본)")
+    ap.add_argument("--dry-run", action="store_true", help="대상만 집계하고 파싱하지 않음")
+    ap.add_argument("--fail-csv", help="파싱 실패 목록 출력 경로 (collector 재수집 입력)")
     ap.add_argument("--min-fy", type=int, default=2021)
     ap.add_argument("--quiet", action="store_true")
     args = ap.parse_args()
@@ -509,13 +582,20 @@ def main() -> None:
     tickers = None
     if args.tickers:
         tickers = [t.strip() for t in args.tickers.split(",") if t.strip()]
+    elif args.scope == "sector-golden":
+        tickers, by_cluster = sector_golden_tickers()
+        print(f"섹터 골든 범위: {len(tickers)}사 / {len(by_cluster)}클러스터")
+        for cl in sorted(by_cluster, key=lambda c: -len(by_cluster[c])):
+            print(f"  {cl:<14}{len(by_cluster[cl]):>5}")
+        if args.dry_run:
+            return
     elif args.pilot:
         from .models import FsAccount
 
         s = get_local_session()
         tickers = [r[0] for r in s.query(FsAccount.ticker).distinct().all()]
         s.close()
-    agg = run(tickers, min_fy=args.min_fy, quiet=args.quiet)
+    agg = run(tickers, min_fy=args.min_fy, quiet=args.quiet, fail_csv=args.fail_csv)
     print("요약:", agg)
 
 
