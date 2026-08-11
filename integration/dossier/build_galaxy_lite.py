@@ -257,6 +257,43 @@ def load_report_meta(ticker: str) -> dict[str, Any]:
     return out
 
 
+def load_cf_gapfill(ticker: str, fiscal_years: list[int]) -> dict[int, dict[str, float]]:
+    """firm JSON에 빈 현금흐름 3계정을 fs_account(정형계정, read-only)에서 보충.
+
+    ⚠️ '미공시'가 아니다 — 현금흐름표는 매년 공시된다. firm JSON 쪽 수집 갭일 뿐이므로
+    reports.db에 있으면 채우고, 그래도 없으면 화면엔 '데이터 준비 중'으로 표기한다(FN-021).
+    fs_account 커버리지는 클러스터 부여 55사 — 그 밖은 빈 dict.
+    """
+    out: dict[int, dict[str, float]] = {}
+    if not REPORTS_DB.exists() or not fiscal_years:
+        return out
+    con = sqlite3.connect(f"file:{REPORTS_DB}?mode=ro", uri=True)
+    try:
+        cur = con.cursor()
+        q = ",".join("?" * len(fiscal_years))
+        cur.execute(
+            f"select fiscal_year, account_nm, amount from fs_account "
+            f"where ticker=? and sj_div='CF' and fiscal_year in ({q})",
+            (ticker, *fiscal_years),
+        )
+        for fy, nm, amt in cur.fetchall():
+            nm = (nm or "").replace(" ", "")
+            if amt is None or "현금흐름" not in nm or "창출" in nm:
+                continue
+            key = None
+            if "영업활동" in nm:
+                key = "ocf"
+            elif "투자활동" in nm:
+                key = "icf"
+            elif "재무활동" in nm:
+                key = "fin"
+            if key:
+                out.setdefault(int(fy), {})[key] = float(amt)
+    finally:
+        con.close()
+    return out
+
+
 # ---------- 계열 산출 ----------
 
 
@@ -507,7 +544,9 @@ def build_cards(
             [
                 f"표준인 {J(std_name, '은는')} 5년 동안 영업·투자·재무를 모두 합친 현금이 [{_fmt_jo(std_cum)}] "
                 + ("늘었어요." if std_cum >= 0 else "줄었어요."),
-                f"{J(name, '은는')} 현금흐름이 확인되는 [{yrs[0]}]부터 [{yrs[-1]}]까지 {span} 합계로 [{_fmt_won(cum)}] "
+                f"{J(name, '은는')} "
+                + ("" if cf["full"] else "현금흐름 데이터가 준비된 ")
+                + f"[{yrs[0]}]부터 [{yrs[-1]}]까지 {span} 합계로 [{_fmt_won(cum)}] "
                 + ("늘었어요." if cum >= 0 else "줄었어요."),
                 "번 돈에서 투자·상환·배당으로 나간 돈을 뺀 값이에요. (+)가 이어지면 다음 투자를 자기 돈으로 "
                 "시작할 수 있고, (−)가 이어지면 결국 외부에서 돈을 구해 와야 해요.",
@@ -571,6 +610,15 @@ def build(ticker: str, std_ticker: str | None = None) -> dict[str, Any]:
     rmeta = load_report_meta(ticker)
 
     labels, series = build_series(firm)
+    # 현금흐름 결측 연도를 fs_account에서 보충 (채운 값은 meta.cf_gapfill에 근거 기록)
+    fys = [int(lbl.replace("FY", "20")) for lbl in labels]
+    gap = load_cf_gapfill(ticker, fys)
+    cf_gapfill: dict[str, dict[str, float]] = {}
+    for i, lbl in enumerate(labels):
+        for key in ("ocf", "icf", "fin"):
+            if series[key][i] is None and gap.get(fys[i], {}).get(key) is not None:
+                series[key][i] = gap[fys[i]][key]
+                cf_gapfill.setdefault(lbl, {})[key] = gap[fys[i]][key]
     cf = cf_availability(series, labels)
     pattern = detect_pattern(series, labels, cf)
     norm = normalize(series)
@@ -628,7 +676,7 @@ def build(ticker: str, std_ticker: str | None = None) -> dict[str, Any]:
             "cluster": cluster,
             "rcept_no": rmeta["rcept_no"],
             "report_fiscal_year": rmeta["fiscal_year"],
-            "cash_flow_from": cf["from"],
+            "cash_flow_from": None if cf["full"] else cf["from"],
         },
         "std_ref": {
             "ticker": std_ticker,
@@ -670,6 +718,7 @@ def build(ticker: str, std_ticker: str | None = None) -> dict[str, Any]:
         "note_candidates": rmeta["note_candidates"][:8],
         "meta": {
             "generated_by": "build_galaxy_lite.py",
+            "cf_gapfill": cf_gapfill,  # firm JSON 결측을 fs_account로 채운 연도·계정 (원 단위)
             "validated": False,
             "std_source": f"galaxy_{std_ticker}.json",
             "firm_source": f"firm_{ticker}.json",
@@ -683,11 +732,17 @@ def selfcheck(doc: dict[str, Any], ticker: str) -> list[str]:
     errs = []
     firm = load_firm(ticker)
     years_raw = sorted(firm.get("years", []), key=lambda y: y["year"])
+    gapfill = doc.get("meta", {}).get("cf_gapfill", {})
     for i, y in enumerate(years_raw):
+        lbl = doc["years"][i]
         for src, dst in FIRM_KEYS.items():
             want = y.get(src)
             got = doc["series"][dst][i]
-            if (want is None) != (got is None):
+            if want is None and got is not None:
+                gv = gapfill.get(lbl, {}).get(dst)
+                if gv is None or abs(float(gv) - got) > 1:
+                    errs.append(f"series.{dst}[{i}] firm 결측인데 근거(cf_gapfill) 없음")
+            elif want is not None and got is None:
                 errs.append(f"series.{dst}[{i}] 결측 불일치")
             elif want is not None and abs(float(want) - got) > 1:
                 errs.append(f"series.{dst}[{i}] 값 불일치 {want} != {got}")

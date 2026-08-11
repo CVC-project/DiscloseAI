@@ -248,7 +248,7 @@ header.hd{border-bottom:1px solid var(--line);padding-bottom:var(--sp-5);margin-
        + '<div class="patrow"><div><div class="patname">'+esc(p.name||'—')+'</div>'
        + '<div class="patdesc">'+esc(p.desc||'')+'</div></div></div>'
        + '<div class="path">'+((p.path_full||p.path)||[]).map(function(st,i,arr){
-            if(!st.name) return '<span class="pstep" style="opacity:.45">'+esc(st.year)+' 현금흐름 미공시</span>';
+            if(!st.name) return '<span class="pstep" style="opacity:.45">'+esc(st.year)+' 현금흐름 데이터 준비 중</span>';
             return '<span class="pstep'+(i===arr.length-1?' last':'')+'">'+esc(st.year)+' '+esc(st.name)+'</span>';
          }).join('')+'</div>'
        + (p.legend ? '<details class="legend8"><summary>8가지 유형이 뭔가요?</summary><div class="lgrid">'
@@ -273,7 +273,7 @@ header.hd{border-bottom:1px solid var(--line);padding-bottom:var(--sp-5);margin-
        + '<button class="btn ghost'+(showStd?' on':'')+'" id="tgl">표준 겹쳐 보기 '+(showStd?'ON':'OFF')+'</button></div>'
        + buildMap()
        + '<div class="cfnote">회사 규모가 달라도 매출을 <b>100</b>으로 맞추면 구조를 나란히 비교할 수 있어요. 0선의 왼쪽은 나간 돈, 오른쪽은 남거나 들어온 돈이에요. 연도를 눌러 [FY21]부터 [FY25]까지 넘겨 보세요.'.replace(/\[(FY\d+)\]/g,function(_,y){return '<b>'+y+'</b>';})
-       + (c.cash_flow_from?' 현금흐름 세 줄은 <b>'+esc(c.cash_flow_from)+'</b>부터 공시돼 있어요.':'')
+       + (c.cash_flow_from?' 이 화면의 현금흐름 데이터는 <b>'+esc(c.cash_flow_from)+'</b>부터 준비돼 있어요(공시는 매년 존재 — 수집 보완 중).':'')
        + '</div></div></section>';
 
     // ④ 델타 카드 — 위에서 아래로 하나의 이야기 (order 정렬 + bridge 연결)
