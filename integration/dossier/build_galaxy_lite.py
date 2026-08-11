@@ -580,6 +580,16 @@ def build(ticker: str, std_ticker: str | None = None) -> dict[str, Any]:
     name = firm["corp"]["name"]
     fy = labels[-1].replace("FY", "20") if labels else ""
 
+    # 델타 카드 서사 순서 + 연결 문구(bridge) — 위에서 아래로 하나의 이야기로 읽히게 (UX-042)
+    # 수익성 격차 → 격차의 진원 → 경기 동조 → 현금 결산 → 최근 국면 전환
+    CARD_ORDER: dict[str, tuple[int, str | None]] = {
+        "d1": (1, None),
+        "d5": (2, "그 격차가 어디서 생기는지, 숫자가 가장 크게 갈라지는 항목부터 볼게요."),
+        "d2": (3, "구조가 이렇게 다른 두 회사가, 경기가 꺾일 때는 어떻게 움직였을까요?"),
+        "d4": (4, "그렇게 벌고 쓴 5년의 결과, 통장에는 무엇이 남았을까요?"),
+        "d3": (5, "그런데 가장 최근 연도에, 돈의 흐름이 방향을 바꿨어요."),
+    }
+
     ctx = {
         "labels": labels,
         "series": series,
@@ -596,6 +606,10 @@ def build(ticker: str, std_ticker: str | None = None) -> dict[str, Any]:
         "std_doc": std,
     }
     cards = build_cards(ctx)
+    for c in cards:
+        o, b = CARD_ORDER.get(c["id"], (99, None))
+        c["order"], c["bridge"] = o, b
+    cards.sort(key=lambda c: c["order"])
 
     intro = [
         f"이 화면은 {J(name, '을를')} 처음부터 설명하는 곳이 아니라, 먼저 배운 표준({std['corp']['name']}) 위에 겹쳐 차이만 보는 곳이에요.",
@@ -630,11 +644,26 @@ def build(ticker: str, std_ticker: str | None = None) -> dict[str, Any]:
         "std_series": sd,
         "std_norm": snorm,
         "cf_available": cf,
-        "pattern": pattern,
+        "pattern": {
+            **pattern,
+            # FY21~FY25 전 연도 경로 — 분류 불가 연도는 name=None (렌더러가 '현금흐름 미공시'로 표시)
+            "path_full": [
+                next((st for st in pattern["path"] if st["year"] == lbl),
+                     {"year": lbl, "code": None, "name": None})
+                for lbl in labels
+            ],
+            # 8상 전체 범례 (화면 '유형 안내' 소스 — SSOT는 이 파일의 PATTERNS)
+            "legend": [
+                {"code": code, "name": nm, "desc": desc}
+                for code, (nm, desc) in PATTERNS.items()
+            ],
+        },
         "strings": {
             "header": f"{name} · FY{fy} · 연결 기준",
             "hero": f"표준({std['corp']['name']})과 무엇이 어떻게 다를까요?",
             "intro_lines": intro,
+            "delta_intro": f"{name}의 5년을 표준 위에 겹치면, 이야기는 이렇게 이어져요.",
+            "notes_intro": "여기서부터는 사업보고서 주석으로 내려가, 위 이야기의 이유를 따라가요.",
         },
         "cards": cards,
         "notes": [],  # LLM '주목할 점' 카드 — inject_lite_notes.py가 채운다

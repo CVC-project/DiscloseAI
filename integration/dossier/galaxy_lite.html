@@ -67,6 +67,24 @@ header.hd{border-bottom:1px solid var(--line);padding-bottom:var(--sp-5);margin-
 .pstep{font-family:var(--mono);font-size:var(--t-caption);border:1px solid var(--line);border-radius:2px;padding:3px 8px;color:var(--dim);}
 .pstep.last{color:var(--cyan);border-color:rgba(92,199,234,.45);}
 .intro p{margin:var(--sp-2) 0;color:var(--dim);font-size:var(--t-body-sm);}
+.legend8{margin-top:var(--sp-4);}
+.legend8 summary{cursor:pointer;font-family:var(--mono);font-size:var(--t-caption);color:var(--cyan);letter-spacing:.06em;list-style:none;}
+.legend8 summary::before{content:'▸ ';}
+.legend8[open] summary::before{content:'▾ ';}
+.legend8 .lgrid{margin-top:var(--sp-3);display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-2) var(--sp-5);}
+.legend8 .lrow{display:flex;gap:var(--sp-2);align-items:baseline;font-size:var(--t-caption);color:var(--dim);}
+.legend8 .lrow.on{color:var(--text);}
+.legend8 .lrow.on .lnm{color:var(--cyan);}
+.legend8 .lcode{font-family:var(--mono);font-size:var(--t-mono-micro);color:var(--dim2);width:34px;flex:none;}
+.legend8 .lnm{font-weight:600;flex:none;}
+.yearchips{display:flex;gap:var(--sp-2);flex-wrap:wrap;}
+.ychip{font-family:var(--mono);font-size:var(--t-caption);padding:4px 10px;border:1px solid var(--line);border-radius:2px;color:var(--dim);cursor:pointer;background:transparent;}
+.ychip.on{color:var(--cyan);border-color:rgba(92,199,234,.55);background:rgba(92,199,234,.08);}
+.ychip:disabled{opacity:.4;cursor:default;}
+.bridge{display:flex;gap:var(--sp-3);align-items:center;padding:2px 0 2px var(--sp-5);color:var(--dim2);font-size:var(--t-body-sm);}
+.bridge::before{content:'';width:1px;height:26px;background:var(--line);margin-left:9px;flex:none;}
+.bridge .bt{padding:var(--sp-1) 0;}
+.secintro{color:var(--dim);font-size:var(--t-body-sm);margin:0 0 var(--sp-3);}
 
 /* ③ 이중 항로 지도 */
 .maphead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:var(--sp-3);margin-bottom:var(--sp-5);}
@@ -122,7 +140,7 @@ header.hd{border-bottom:1px solid var(--line);padding-bottom:var(--sp-5);margin-
   var TICKER = qs.get('ticker') || '';
   var app = document.getElementById('app');
   var OV = document.getElementById('ov');
-  var G=null, showStd=true;
+  var G=null, showStd=true, yearIdx=-1;
 
   function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
   // 산문 속 [숫자]를 모노 칩으로 (STYLE_GUIDE A7)
@@ -150,12 +168,12 @@ header.hd{border-bottom:1px solid var(--line);padding-bottom:var(--sp-5);margin-
   function lastIdx(arr){ for(var i=arr.length-1;i>=0;i--) if(arr[i]!=null) return i; return -1; }
 
   function buildMap(){
-    var li = G.years.length-1, sli = G.std_years.length-1;
+    var yi = (yearIdx<0? G.years.length-1 : yearIdx);
+    var lbl = G.years[yi];
+    var syi = G.std_years.indexOf(lbl);
     var rows = MAP.map(function(m){
-      var mine = (G.norm[m.k]||[])[li];
-      var std  = (G.std_norm[m.k]||[])[sli];
-      // 현금흐름은 결측 연도가 있을 수 있어 마지막 유효값으로 후퇴
-      if(mine==null && G.norm[m.k]){ var i=lastIdx(G.norm[m.k]); if(i>=0) mine=G.norm[m.k][i]; }
+      var mine = (G.norm[m.k]||[])[yi];
+      var std  = (syi>=0 ? (G.std_norm[m.k]||[])[syi] : null);
       var gap = (mine!=null&&std!=null) ? (mine-std) : null;
       return {m:m, mine:mine, std:std, gap:gap};
     }).filter(function(r){ return r.mine!=null; });
@@ -229,9 +247,16 @@ header.hd{border-bottom:1px solid var(--line);padding-bottom:var(--sp-5);margin-
     h += '<section class="sec"><span class="lbl">ROUTE SUMMARY</span><div class="panel edge">'
        + '<div class="patrow"><div><div class="patname">'+esc(p.name||'—')+'</div>'
        + '<div class="patdesc">'+esc(p.desc||'')+'</div></div></div>'
-       + '<div class="path">'+(p.path||[]).map(function(st,i,arr){
+       + '<div class="path">'+((p.path_full||p.path)||[]).map(function(st,i,arr){
+            if(!st.name) return '<span class="pstep" style="opacity:.45">'+esc(st.year)+' 현금흐름 미공시</span>';
             return '<span class="pstep'+(i===arr.length-1?' last':'')+'">'+esc(st.year)+' '+esc(st.name)+'</span>';
          }).join('')+'</div>'
+       + (p.legend ? '<details class="legend8"><summary>8가지 유형이 뭔가요?</summary><div class="lgrid">'
+          + p.legend.map(function(l){
+              var on = l.code===p.code;
+              return '<div class="lrow'+(on?' on':'')+'"><span class="lcode">'+esc(l.code)+'</span><span class="lnm">'+esc(l.name)+'</span><span>'+esc(l.desc)+'</span></div>';
+            }).join('')
+          + '</div><div class="cfnote" style="margin-top:8px">부호는 순서대로 영업·투자·재무활동 현금흐름이에요. (+)는 들어옴, (−)는 나감.</div></details>' : '')
        + (p.edge ? '<div class="intro"><p>일부 현금흐름이 0에 가까워서, 다음 결산에는 유형이 바뀔 수 있어요.</p></div>' : '')
        + '<div class="intro">'+(G.strings.intro_lines||[]).map(function(l){return '<p>'+esc(l)+'</p>';}).join('')+'</div>'
        + '</div></section>';
@@ -241,20 +266,33 @@ header.hd{border-bottom:1px solid var(--line);padding-bottom:var(--sp-5);margin-
        + '<div class="panel edge">'
        + '<div class="maphead"><div class="legend"><span><i></i>'+esc(c.name)+'</span>'
        + '<span><i class="gh"></i>표준 '+esc(s.name)+'</span></div>'
+       + '<div class="yearchips">'+G.years.map(function(y,i){
+            var cur = (yearIdx<0? G.years.length-1 : yearIdx)===i;
+            return '<button class="ychip'+(cur?' on':'')+'" data-yi="'+i+'">'+esc(y)+'</button>';
+         }).join('')+'</div>'
        + '<button class="btn ghost'+(showStd?' on':'')+'" id="tgl">표준 겹쳐 보기 '+(showStd?'ON':'OFF')+'</button></div>'
        + buildMap()
-       + '<div class="cfnote">회사 규모가 달라도 매출을 <b>100</b>으로 맞추면 구조를 나란히 비교할 수 있어요. 0선의 왼쪽은 나간 돈, 오른쪽은 남거나 들어온 돈이에요.'
-       + (c.cash_flow_from?' 현금흐름은 <b>'+esc(c.cash_flow_from)+'</b>부터 확인돼요.':'')
+       + '<div class="cfnote">회사 규모가 달라도 매출을 <b>100</b>으로 맞추면 구조를 나란히 비교할 수 있어요. 0선의 왼쪽은 나간 돈, 오른쪽은 남거나 들어온 돈이에요. 연도를 눌러 [FY21]부터 [FY25]까지 넘겨 보세요.'.replace(/\[(FY\d+)\]/g,function(_,y){return '<b>'+y+'</b>';})
+       + (c.cash_flow_from?' 현금흐름 세 줄은 <b>'+esc(c.cash_flow_from)+'</b>부터 공시돼 있어요.':'')
        + '</div></div></section>';
 
-    // ④ 델타 카드
+    // ④ 델타 카드 — 위에서 아래로 하나의 이야기 (order 정렬 + bridge 연결)
+    function storyList(cards, kind){
+      var xs = cards.slice().sort(function(a,b){ return (a.order||99)-(b.order||99); });
+      return xs.map(function(c2, i){
+        var br = (i>0 && c2.bridge) ? '<div class="bridge"><span class="bt">'+esc(c2.bridge)+'</span></div>' : '';
+        return br + cardHtml(c2, kind);
+      }).join('');
+    }
     h += '<section class="sec"><span class="lbl">DELTA — 표준과 무엇이 다른가</span>'
-       + '<div class="cards">'+ (G.cards||[]).map(function(c2){return cardHtml(c2,'delta');}).join('') +'</div></section>';
+       + (G.strings.delta_intro?'<p class="secintro">'+esc(G.strings.delta_intro)+'</p>':'')
+       + '<div class="cards">'+ storyList(G.cards||[], 'delta') +'</div></section>';
 
-    // ⑤ 주목할 점
+    // ⑤ 눈여겨볼 곳 — 같은 방식의 스레드
     if((G.notes||[]).length){
       h += '<section class="sec"><span class="lbl">NOTES — 이 회사에서 눈여겨볼 곳</span>'
-         + '<div class="cards">'+ G.notes.map(function(c2){return cardHtml(c2,'note');}).join('') +'</div></section>';
+         + (G.strings.notes_intro?'<p class="secintro">'+esc(G.strings.notes_intro)+'</p>':'')
+         + '<div class="cards">'+ storyList(G.notes, 'note') +'</div></section>';
     }
 
     // ⑥ 에필로그
@@ -271,6 +309,9 @@ header.hd{border-bottom:1px solid var(--line);padding-bottom:var(--sp-5);margin-
   function wire(){
     var tgl = document.getElementById('tgl');
     if(tgl) tgl.onclick = function(){ showStd = !showStd; render(); };
+    document.querySelectorAll('.ychip').forEach(function(b){
+      b.onclick = function(){ yearIdx = parseInt(b.getAttribute('data-yi'),10); render(); };
+    });
 
     // 지도 ↔ 카드 양방향 앵커
     document.querySelectorAll('.rw').forEach(function(rw){
