@@ -1699,14 +1699,22 @@
       const names = cardTitles(row);
       const captions = cardCaptions(row);
       const category = categoryOf(row, '핵심 사업');
-      const asSentence = (text) => {
+      const captionStem = (text) => {
         const value = String(text || '').trim();
-        if (!value) return '';
-        return /[.!?。]|다$|요$|임$/.test(value) ? value : value + '입니다.';
+        // 카드 설명은 이미 완결문인 경우가 많다. 합칠 때 종결어미는 한 번만 쓴다.
+        return value
+          .replace(/(?:입니다|합니다|됩니다|있습니다|였습니다)\s*[.!。]?$/u, '')
+          .replace(/[.!。]+$/u, '')
+          .trim();
       };
+      const captionSummary = captions
+        .slice(0, 3)
+        .map(captionStem)
+        .filter(Boolean)
+        .join(' / ');
       return [
         names.length ? row.name + '의 사업 축은 ' + names.join(' · ') + '입니다.' : row.name + '은 ' + category + ' 사업을 중심으로 매출을 만듭니다.',
-        captions.length ? asSentence('사업보고서 기준 핵심 품목은 ' + captions.slice(0, 3).join(' / ') + '입니다') : '사업보고서의 사업개요 문단을 바탕으로 회사가 돈을 버는 방식을 요약했습니다.',
+        captionSummary ? '사업보고서 기준 핵심 품목은 ' + captionSummary + '입니다.' : '사업보고서의 사업개요 문단을 바탕으로 회사가 돈을 버는 방식을 요약했습니다.',
         '아래 카드는 원문을 그대로 옮기지 않고, 회사 이해에 필요한 내용만 쉬운 말로 압축했습니다.'
       ];
     }
