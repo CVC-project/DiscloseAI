@@ -2494,6 +2494,11 @@ function SectorDisclosurePanel({ sector, onBack, onSelect }) {
   const RD = window.__realData || {};
   const discAll = RD.discAll || [];
   const live = useLiveDisclosures();
+  // UX-043: DAILY HIGHLIGHTS·SECTOR PULSE — 재무정보 탭 섹터 개요에서 공시 피드로 이동
+  const D = window.DiscloseAI || {};
+  const highlights = (D.highlightsForSector && discAll.length)
+    ? D.highlightsForSector(discAll, sector.members || [], 3)
+    : null;
   const tickers = React.useMemo(
     () => new Set((sector.members || []).map(m => m.t)),
     [sector.id]
@@ -2520,6 +2525,21 @@ function SectorDisclosurePanel({ sector, onBack, onSelect }) {
         <button className="back-link" onClick={onBack}>← GALAXY</button>
       </div>
       <div className="panel-body">
+        <div className="sector-ov-section" style={{marginBottom: 10}}>
+          <div className="ov-sec-title">DAILY HIGHLIGHTS · 오늘의 시그널</div>
+          <ul className="ov-sec-list">
+            {highlights && highlights.length ? highlights.map((h, i) => (
+              <li key={i}>
+                <span className="ov-bullet" style={{background: h.high_impact ? '#f87171' : sector.color}} />
+                {h.high_impact && <span style={{color:'#f87171', fontFamily:'var(--font-mono)', fontSize:9, marginRight:4}}>HIGH</span>}
+                <span style={{fontFamily:'var(--font-mono)', fontSize:10, color:'#94a3b8', marginRight:6}}>{h.time}</span>
+                {(h.title || '').slice(0, 30)} — {h.corp_name}
+              </li>
+            )) : (
+              <li style={{color:'#64748b'}}>최근 공시 데이터 없음</li>
+            )}
+          </ul>
+        </div>
         <LiveDisclosureBlock items={liveItems} live={live} emptyText="오늘 이 섹터에서 접수된 공시가 없습니다." />
         <div className="stored-disclosure-label">저장된 최근 공시</div>
         {items.length === 0 && (
@@ -2536,6 +2556,14 @@ function SectorDisclosurePanel({ sector, onBack, onSelect }) {
             <div className="disc-feed-title">{(d.title || '').slice(0, 36)}{(d.title || '').length > 36 ? '…' : ''}</div>
           </div>
         ))}
+        <div className="sector-ov-section" style={{marginTop: 10}}>
+          <div className="ov-sec-title">SECTOR PULSE · 섹터 지수</div>
+          <div className="ov-bars">
+            {[0.3, 0.5, 0.4, 0.7, 0.6, 0.8, 0.9, 0.75, 0.85, 0.95].map((v, i) => (
+              <div key={i} className="ov-bar" style={{height: `${v*100}%`, background: sector.color}} />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -3534,12 +3562,16 @@ function MascotPanel({ messages = ["섹터를 클릭하면, 기업을 확인할 
 // ─── PHASE 3: Sector overview panel (top-left) ─────────────────────────────
 // UX-008: 모드별 콘텐츠 — 성운 개요(activeMarket 없음)=DAILY HIGHLIGHTS+SECTOR PULSE,
 // 시장 드릴인(activeMarket)=그 시장 기업 목록(시총순, 클릭 시 기업 선택).
-function SectorOverviewPanel({ sector, companyCount, activeMarket, onBack, onSelectCompany }) {
+function SectorOverviewPanel({ sector, companyCount, activeMarket, onBack, onSelectCompany, galaxyTickers, onLearnGalaxy }) {
   if (!sector) return null;
   const D = window.DiscloseAI || {};
   const realData = window.__realData;
   const members = (sector.members || []).map(n => n);
-  const highlights = (D.highlightsForSector && realData) ? D.highlightsForSector(realData.discAll, members, 3) : null;
+  // UX-043: 이 섹터의 골든 은하수 보유 기업 (galaxy_index 매니페스트 ∩ 섹터 멤버 — 하드코딩 없음)
+  const goldenReps = React.useMemo(
+    () => members.filter(m => galaxyTickers && galaxyTickers.has(m.t)),
+    [sector.id, galaxyTickers]
+  );
   // 드릴인 기업 목록: named(시총 정확) 먼저 cap desc → dot 기업 cb desc·이름순
   const marketList = React.useMemo(() => {
     if (!activeMarket || !realData || !realData.sectorMarketData) return null;
@@ -3578,31 +3610,30 @@ function SectorOverviewPanel({ sector, companyCount, activeMarket, onBack, onSel
           <div className="ov-stat"><div className="ov-k">기업 수</div><div className="ov-v">{companyCount}</div></div>
           <div className="ov-stat"><div className="ov-k">P / E</div><div className="ov-v">{sectorPE != null ? sectorPE : '-'}</div></div>
         </div>
-        {!marketList && (<>
+        {!marketList && (
           <div className="sector-ov-section">
-            <div className="ov-sec-title">DAILY HIGHLIGHTS · 오늘의 시그널</div>
-            <ul className="ov-sec-list">
-              {highlights && highlights.length ? highlights.map((h, i) => (
-                <li key={i}>
-                  <span className="ov-bullet" style={{background: h.high_impact ? '#f87171' : sector.color}} />
-                  {h.high_impact && <span style={{color:'#f87171', fontFamily:'var(--font-mono)', fontSize:9, marginRight:4}}>HIGH</span>}
-                  <span style={{fontFamily:'var(--font-mono)', fontSize:10, color:'#94a3b8', marginRight:6}}>{h.time}</span>
-                  {(h.title || '').slice(0, 30)} — {h.corp_name}
-                </li>
-              )) : (
-                <li style={{color:'#64748b'}}>최근 공시 데이터 없음</li>
-              )}
-            </ul>
+            <div className="ov-sec-title">CASH MILKY WAY · 대표 은하수</div>
+            {goldenReps.length ? (<>
+              <div style={{fontSize: 11.5, color: '#94a3b8', lineHeight: 1.65, margin: '2px 0 8px'}}>
+                {sector.ko} 섹터의 대표 기업으로 사업보고서 읽는 법을 배워보세요!
+              </div>
+              <ul className="ov-sec-list">
+                {goldenReps.map((r) => (
+                  <li key={r.t} onClick={() => onLearnGalaxy && onLearnGalaxy(r.t)}
+                      style={{cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6}}>
+                    <span className="ov-bullet" style={{background: sector.color}} />
+                    <span style={{flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{r.n || r.name}</span>
+                    <span style={{fontFamily: 'var(--font-mono)', fontSize: 10, color: sector.color, whiteSpace: 'nowrap'}}>은하수 열기 →</span>
+                  </li>
+                ))}
+              </ul>
+            </>) : (
+              <div style={{fontSize: 11.5, color: '#64748b', margin: '2px 0'}}>
+                이 섹터의 대표 은하수는 준비 중이에요. 먼저 완성된 다른 섹터의 표준으로 배워보실 수 있어요.
+              </div>
+            )}
           </div>
-          <div className="sector-ov-section">
-            <div className="ov-sec-title">SECTOR PULSE · 섹터 지수</div>
-            <div className="ov-bars">
-              {[0.3, 0.5, 0.4, 0.7, 0.6, 0.8, 0.9, 0.75, 0.85, 0.95].map((v, i) => (
-                <div key={i} className="ov-bar" style={{height: `${v*100}%`, background: sector.color}} />
-              ))}
-            </div>
-          </div>
-        </>)}
+        )}
         {marketList && (
           <div className="sector-ov-section">
             <div className="ov-sec-title">{activeMarket} COMPANIES · 시총순 {marketList.length}사</div>
@@ -4432,6 +4463,13 @@ function App() {
   ];
   // hasData 판정 = 위 galaxyTickers(매니페스트). (구 하드코딩 GALAXY_TICKERS 제거 — V-054)
 
+  // UX-043: 섹터 개요의 "대표 은하수" 클릭 → 그 기업 dossier를 현금 은하수 탭으로 바로 연다
+  const learnGalaxy = useCallback((code) => {
+    if (!code) return;
+    setCorpOverlayTicker(code);
+    setDossierTab('galaxy');
+  }, []);
+
   const enterCorporation = useCallback(() => {
     if (!activeCompanyCode) return;
     setCorpOverlayTicker(activeCompanyCode);
@@ -4636,7 +4674,7 @@ function App() {
           {activeTab === 'finance' ? (
             <>
               {phase === 'galaxy' && <MascotPanel messages={["섹터를 클릭하면, 기업을 확인할 수 있어요!", "오른쪽 아래 섹터 INDEX에서도 선택할 수 있어요.", "AI 코파일럿에게 무엇이든 물어보세요."]} />}
-              {phase === 'sector' && <SectorOverviewPanel sector={sector} companyCount={sector.count || companies.length} activeMarket={activeMarket} onSelectCompany={selectCompany} onBack={activeMarket ? backToSectorOverview : backToGalaxy} />}
+              {phase === 'sector' && <SectorOverviewPanel sector={sector} companyCount={sector.count || companies.length} activeMarket={activeMarket} onSelectCompany={selectCompany} onBack={activeMarket ? backToSectorOverview : backToGalaxy} galaxyTickers={galaxyTickers} onLearnGalaxy={learnGalaxy} />}
               {phase === 'company' && <CompanyOverviewPanel company={company} sector={sector} onBack={backToSector} onEnter={enterCorporation} egoAnchor={egoStatus === 'ok' ? egoAnchor : null} />}
             </>
           ) : (
