@@ -61,10 +61,11 @@ S3 fact 추출:      note-extractor 서브에이전트 1회(배치) → data/fac
 S4 카드 작성:      '눈여겨볼 곳' 2~4장 → data/notes_lite_<t>.json
                    견본: notes_lite_009150.json — 스키마·nums 선언·order/bridge(서사: 조달→사용→마찰→구조) 그대로
 S5 게이트:         python integration/dossier/inject_lite_notes.py <t>   (FAIL 카드만 수정 재실행)
+S5.5 회귀 게이트:  python integration/dossier/check_lite_quality.py <t>  (원장 조문 R1~R15 — 아래 §8)
 S6 렌더 스모크:    galaxy_lite.html?ticker=<t> — 6단 렌더·스토리 스레드·표준 딥다이브 링크·콘솔 에러 0
 ```
 
-세션 말미: `build_galaxy_lite_index.py` 재실행 → 일괄 커밋(1커밋 = 그 세션 완주분) → 로컬 서버 URL 보고.
+세션 말미: `check_lite_quality.py`(전수) → `build_galaxy_lite_index.py` 재실행 → 일괄 커밋(1커밋 = 그 세션 완주분) → 로컬 서버 URL 보고.
 
 ## 4. 작성 규칙 (프로토에서 확정된 것 — 위반 = 게이트 반려)
 
@@ -111,3 +112,22 @@ S6 렌더 스모크:    galaxy_lite.html?ticker=<t> — 6단 렌더·스토리 �
 **빌더 교정 3종** (FN-022 — 22사에 그대로 반복될 결함이라 선행 수정): 표준 재무활동 부호·표준 패턴을 **읽어서** 서술 / 적자 기업 문구 분기 / cp949 stdout 고정(게이트 PASS가 FAIL로 보이던 문제).
 
 **남은 대상 19사**: 중공업방산 11 · 2차전지화학 2(003670·373220) · 자동차 1(012330) · 건설 2 · 플랫폼 1 · 에너지소재 1 · 바이오 1.
+
+## 8. 같은 실수를 두 번 하지 않기 위한 장치 (FN-023)
+
+원장에 적기만 하면 다음 기업에서 그대로 되살아난다. **원장 조문 1건 = 게이트 규칙 1개**로 승격해 둔다.
+
+| 파일 | 역할 | 언제 돈다 |
+|---|---|---|
+| [check_lite_quality.py](check_lite_quality.py) | 원장 조문 R1~R15를 전 기업 산출물에 재검사 | S5.5 + 세션 말미 전수 |
+| [../../tests/test_lite_quality_gate.py](../../tests/test_lite_quality_gate.py) | **음성 테스트** — 원장의 실수를 되살려 넣고 게이트가 잡는지 확인 | `pytest` |
+| [inject_lite_notes.py](inject_lite_notes.py) | 카드 브래킷 수치 재도출·원문 substring 대조 | S5 |
+| `build_galaxy_lite.py` selfcheck | 전 수치 firm JSON 재도출·3문장·격식체 | S1 |
+
+**규칙을 추가할 때 지켜야 할 것**: ① `check_lite_quality.py` 규칙 대장 표에 근거 원장 번호를 적는다 ② 같은 커밋에 음성 테스트 케이스를 함께 넣는다(케이스 없는 규칙 = 고무도장) ③ 임계는 '이례적'이 아니라 '설명 불가'에 맞춘다 — 실제로 가능한 값(한미반도체 FY23 순이익 168%)을 잡으면 게이트를 신뢰하지 않게 된다.
+
+### 산출 보류 목록 (원천 결함 — 고치기 전엔 만들지 말 것)
+
+| 티커 | 회사 | 사유 |
+|---|---|---|
+| 035720 | 카카오 | `firm_035720.json` 매출이 FY23·24만 별도 기준(6.80조 → **0.19조** → 8.10조) — 정규화 영업이익률 242%. 빌더는 정상 동작하므로 **화면은 완벽하게 그럴듯한 거짓**이 된다. firm JSON 재수집 후 재개(R14·R15가 자동 판정). |

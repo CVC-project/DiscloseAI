@@ -21,8 +21,10 @@ _DATA = os.path.join(_HERE, "data")
 _OUT = os.path.join(_DATA, "galaxy_lite_index.json")
 
 
-def build() -> list[dict[str, str]]:
+def build() -> tuple[list[dict[str, str]], list[tuple[str, str]]]:
+    """(매니페스트 등재분, 미완주로 제외한 것) — 제외분은 호출부가 눈에 보이게 출력한다."""
     entries: list[dict[str, str]] = []
+    skipped: list[tuple[str, str]] = []
     for p in sorted(glob.glob(os.path.join(_DATA, "galaxy_lite_*.json"))):
         base = os.path.basename(p)
         if base == "galaxy_lite_index.json":
@@ -34,8 +36,12 @@ def build() -> list[dict[str, str]]:
             continue
         corp = G.get("corp") or {}
         std = G.get("std_ref") or {}
-        # 렌더 가능 최소 조건: ticker + 델타 카드 (notes는 0장이어도 화면은 성립)
+        # **완주 정의 = 델타 카드 + '눈여겨볼 곳' 1장 이상.** 델타만 있는 반제품을 매니페스트에
+        # 올리면 사용자에겐 빈 섹션이 그냥 '없는 화면'으로 보인다 — 탭을 켜는 기준은 완주로 둔다.
         if not corp.get("ticker") or not G.get("cards"):
+            continue
+        if not G.get("notes"):
+            skipped.append((t, corp.get("name", "")))
             continue
         entries.append(
             {
@@ -52,15 +58,18 @@ def build() -> list[dict[str, str]]:
         "count": len(entries),
         "entries": entries,
         "note": "galaxy lite(표준-델타) 탭 활성 티커 — build_galaxy_lite_index.py가 생성. "
-        "골든(galaxy_index.json)과 겹치면 골든이 우선.",
+        "등재 기준 = 델타 카드 + 눈여겨볼 곳 1장 이상(완주). 골든(galaxy_index.json)과 겹치면 골든이 우선.",
     }
     json.dump(manifest, open(_OUT, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
-    return entries
+    return entries, skipped
 
 
 if __name__ == "__main__":
-    es = build()
+    es, sk = build()
     # 콘솔이 cp949인 윈도우에서 em dash 등 비cp949 문자를 print하면 크래시한다(FN-001 계보) — ASCII 구분자 사용
     print(f"galaxy_lite_index.json 생성: {len(es)}개")
     for e in es:
         print(f"  {e['ticker']} {e['name']} / 표준 {e['std_name']}({e['std_ticker']}) / 주목할점 {e['notes']}장")
+    if sk:
+        # 조용히 빠지면 '왜 탭이 안 켜지지'로 시간을 쓴다 — 제외분은 항상 이유와 함께 보인다
+        print(f"미등재(눈여겨볼 곳 0장 = 미완주) {len(sk)}개: " + ", ".join(f"{t} {n}" for t, n in sk))
