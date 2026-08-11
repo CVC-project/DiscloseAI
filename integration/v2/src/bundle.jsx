@@ -2416,7 +2416,7 @@ ${d.summary || '(요약 없음)'}`;
 현재 분석 대상: ${name} (${ticker || ''}) ${n.s ? '· ' + n.s : ''}
 EQS 종합 점수: ${n.eqs != null ? n.eqs + '점 (' + n.gr + '등급)' : '-'}
 EQS 모듈: M1(현금이익률) ${n.m1 ?? '-'} / M2(회수건전성) ${n.m2 ?? '-'} / M3(부채건전성) ${n.m3 ?? '-'} / M4(본업안정성) ${n.m4 ?? '-'} / M5(자본성장성) ${n.m5 ?? '-'}
-매출 ${n.rv ?? '-'}조 / 영업이익 ${n.oi ?? '-'}조 (영업이익률 ${n.oim ?? '-'}%) / 부채비율 ${n.dr ?? '-'}%`;
+매출 ${n.rv_label || (n.rv != null ? n.rv + '조원' : '-')} / 영업이익 ${n.oi_label || (n.oi != null ? n.oi + '조원' : '-')} (영업이익률 ${n.oim ?? '-'}%) / 부채비율 ${n.dr ?? '-'}%`;
 }
 
 // ─── DISCLOSURES tab — TL panels ───────────────────────────────────────────
@@ -3580,6 +3580,8 @@ function CompanyOverviewPanel({ company, sector, onBack, onEnter, egoAnchor }) {
   // #9: income / balance / cashflow fields from enrichNode
   const rv   = node && node.rv   ? node.rv   : null;   // revenue T
   const oi   = node && node.oi   ? node.oi   : null;   // op.income T
+  const rvLabel = node && node.rv_label ? node.rv_label : null;
+  const oiLabel = node && node.oi_label ? node.oi_label : null;
   const oim  = node && node.oim  ? node.oim  : null;   // op.margin %
   const dr   = node && node.dr   ? node.dr   : null;   // debt ratio %
   const ocf  = node && node.ocf  ? node.ocf  : null;   // op.cashflow T
@@ -3648,8 +3650,8 @@ function CompanyOverviewPanel({ company, sector, onBack, onEnter, egoAnchor }) {
           <div className="sector-ov-section">
             <div className="ov-sec-title">FINANCIALS · 재무 요약</div>
             <div className="company-ov-stats" style={{marginTop:6, flexWrap:'wrap'}}>
-              {rv  && <div className="ov-stat"><div className="ov-k">매출</div><div className="ov-v" style={{fontSize:13}}>{rv}조원</div></div>}
-              {oi  && <div className="ov-stat"><div className="ov-k">영업이익</div><div className="ov-v" style={{fontSize:13}}>{oi}조원</div></div>}
+              {rv  && <div className="ov-stat"><div className="ov-k">매출</div><div className="ov-v" style={{fontSize:13}}>{rvLabel || `${rv}조원`}</div></div>}
+              {oi  && <div className="ov-stat"><div className="ov-k">영업이익</div><div className="ov-v" style={{fontSize:13}}>{oiLabel || `${oi}조원`}</div></div>}
               {oim && <div className="ov-stat"><div className="ov-k">영업이익률</div><div className="ov-v" style={{fontSize:13, color: parseFloat(oim) > 0 ? '#4ade80' : '#f87171'}}>{oim}%</div></div>}
               {dr  && <div className="ov-stat"><div className="ov-k">부채비율</div><div className="ov-v" style={{fontSize:13, color: dr > 200 ? '#f87171' : '#e2e8f0'}}>{dr}%</div></div>}
               {ocf && <div className="ov-stat"><div className="ov-k">영업CF</div><div className="ov-v" style={{fontSize:13}}>{ocf}조원</div></div>}

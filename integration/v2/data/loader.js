@@ -12,7 +12,7 @@
   "use strict";
 
   const D = window.DiscloseAI || {};
-  const { trillionFmt, trillionLabel } = D;
+  const { trillionFmt, trillionLabel, financialAmountLabel } = D;
   const { eqsNarration } = D;
 
   // 보정의 재현 가능한 원문은 JSON과 문서에 남기되, 화면에는 초보 투자자가
@@ -98,6 +98,8 @@
       out.m5t = out.eqs_module_notes.M5 || eqsNarration(5, out.m5);
       out.rv = trillionFmt(fin.revenue);
       out.oi = trillionFmt(fin.operating_income);
+      out.rv_label = financialAmountLabel(fin.revenue);
+      out.oi_label = financialAmountLabel(fin.operating_income);
       out.ni = trillionFmt(fin.net_income);
       out.ta = fin.total_assets != null ? Math.round(fin.total_assets / 10000) : "-";
       out.tl = fin.total_liabilities != null ? Math.round(fin.total_liabilities / 10000) : "-";

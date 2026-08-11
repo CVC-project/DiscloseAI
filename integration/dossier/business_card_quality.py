@@ -1350,6 +1350,16 @@ def product_caption(name: str, sector: str, overview: str) -> str:
     return f"{name}을 중심으로 매출을 만듭니다."
 
 
+def normalize_caption_endings(value: object) -> str:
+    """Collapse accidental repeated Korean sentence endings in card copy."""
+    text = _text(value)
+    return re.sub(
+        r"(입니다|합니다|됩니다|있습니다|였습니다)\s*[.!。]?\s*\1(?:\s*[.!。])?",
+        r"\1.",
+        text,
+    )
+
+
 def cards_from_report_terms(payload: dict[str, Any]) -> list[dict[str, str]]:
     snippets = (
         payload.get("snippets") if isinstance(payload.get("snippets"), dict) else {}
@@ -1585,6 +1595,8 @@ def normalize_business_payload(payload: dict[str, Any]) -> dict[str, Any]:
                 for card in fallback_cards(data)
                 if card.get("title") not in {c.get("title") for c in cards}
             ]
+    for card in cards:
+        card["caption"] = normalize_caption_endings(card.get("caption"))
     data["business_cards"] = attach_images(cards[:4], data)
 
     # The 2025 annual report includes comparative 2024/2023 income-statement

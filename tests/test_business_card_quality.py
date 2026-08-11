@@ -46,6 +46,13 @@ def test_food_brands_are_collapsed_into_categories() -> None:
     ]
 
 
+def test_duplicate_sentence_endings_are_collapsed() -> None:
+    assert (
+        QUALITY.normalize_caption_endings("유전자 검사 서비스입니다.입니다")
+        == "유전자 검사 서비스입니다."
+    )
+
+
 def test_report_segments_take_priority_and_period_headers_are_rejected() -> None:
     payload = {
         "stock_code": "999998",

@@ -17,6 +17,19 @@
     return t.toFixed(2);
   }
 
+  // Financial statement values are stored in 억원. Keep small companies legible
+  // by switching to 억원 below one trillion won instead of showing 0.03조원.
+  function financialAmountLabel(v) {
+    if (v == null || !Number.isFinite(v)) return "-";
+    const abs = Math.abs(v);
+    if (abs < 10000) {
+      const digits = abs > 0 && abs < 10 ? 1 : 0;
+      const rounded = Number(v.toFixed(digits));
+      return rounded.toLocaleString("ko-KR", { maximumFractionDigits: digits }) + "억원";
+    }
+    return trillionFmt(v) + "조원";
+  }
+
   // 큰 단위 시총(원) → "조원" 라벨 (예: 980조원, 1,461조원).
   function trillionLabel(won) {
     if (!won) return "-";
@@ -142,6 +155,7 @@
   window.DiscloseAI = window.DiscloseAI || {};
   Object.assign(window.DiscloseAI, {
     trillionFmt,
+    financialAmountLabel,
     trillionLabel,
     parseMcString,
     resolveMarketCap,
