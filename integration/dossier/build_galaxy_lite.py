@@ -793,6 +793,22 @@ def selfcheck(doc: dict[str, Any], ticker: str) -> list[str]:
         for step in doc["pattern"]["path"]:
             if step["code"] not in PATTERNS:
                 errs.append(f"pattern code 미정의: {step['code']}")
+    # 입력 sanity — 원천이 깨져 있으면 빌더가 정상 동작하면서 '그럴듯한 거짓 화면'을 만든다(FN-023).
+    # 여기서 세워야 fact 추출·카드 작성에 시간을 쓰기 전에 멈춘다 (FN-025: firm JSON 매출 오매칭 269사).
+    rev = doc["series"].get("revenue") or []
+    op = doc["series"].get("operating_income") or doc["series"].get("op") or []
+    for i, (r, o) in enumerate(zip(rev, op)):
+        if r and o and abs(o) > abs(r):
+            errs.append(
+                f"[원천의심] {doc['years'][i]} 영업이익({o:,.0f})이 매출({r:,.0f})보다 큼 — "
+                "firm JSON 매출에 다른 계정이 들어갔을 수 있어요 (FN-025)"
+            )
+    for i in range(1, len(rev) - 1):
+        a, b, c = rev[i - 1], rev[i], rev[i + 1]
+        if a and b and c and b < a * 0.2 and c > b * 5:
+            errs.append(
+                f"[원천의심] {doc['years'][i]} 매출이 급락 후 급반등 — 계정 오매칭·기준 혼재 의심 (FN-025)"
+            )
     if not doc["cards"]:
         errs.append("델타 카드가 0장")
     for c in doc["cards"]:
