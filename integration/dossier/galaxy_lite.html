@@ -1,6 +1,6 @@
 <!-- galaxy_lite.html — 표준-델타 은하수 (lite)
      설계 정본: GALAXY_LITE_PLAN.md · 디자인 정본: ../../DESIGN.md
-     데이터: data/galaxy_lite_<t>.json + 표준 data/galaxy_<std>.json(동시 fetch) + data/impact_<t>.json(선택)
+     데이터: data/galaxy_lite_<t>.json 단일 fetch (표준 수치·딥링크 대상 포함)
      골든 galaxy.html은 건드리지 않는다 (5존·panels·knots 전용 렌더러와 스키마가 다름). -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -57,17 +57,6 @@ header.hd{border-bottom:1px solid var(--line);padding-bottom:var(--sp-5);margin-
 .btn.ghost:hover{background:rgba(140,170,210,.08);color:var(--text);}
 .btn.on{background:rgba(116,238,198,.16);}
 
-/* 공시 배지 */
-.dbadge{margin-top:var(--sp-3);display:inline-flex;align-items:center;gap:var(--sp-2);cursor:pointer;
-  border:1px solid var(--line);border-radius:3px;padding:6px 12px;background:rgba(92,199,234,.06);font-size:var(--t-body-sm);}
-.dbadge:hover{border-color:var(--cyan);}
-.dbadge .dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);}
-.chip{font-family:var(--mono);font-size:var(--t-mono-micro);letter-spacing:.06em;padding:2px 7px;border-radius:2px;border:1px solid;}
-.c-cash{color:var(--cyan);border-color:rgba(92,199,234,.45);}
-.c-gov{color:var(--gold);border-color:rgba(233,196,107,.45);}
-.c-vc{color:var(--mint);border-color:rgba(116,238,198,.45);}
-.c-biz{color:var(--steel);border-color:rgba(117,144,176,.45);}
-
 /* ② 패턴 배지 */
 .sec{margin:var(--sp-8) 0 0;}
 .sec > .lbl{margin-bottom:var(--sp-3);display:block;}
@@ -119,29 +108,13 @@ header.hd{border-bottom:1px solid var(--line);padding-bottom:var(--sp-5);margin-
 .epi .links{display:flex;gap:var(--sp-4);flex-wrap:wrap;margin-bottom:var(--sp-4);}
 .dis{font-size:var(--t-caption);color:var(--dim2);line-height:1.7;}
 
-/* 공시 오버레이 */
-.ov{position:fixed;inset:0;background:rgba(5,6,13,.97);backdrop-filter:blur(6px);z-index:50;display:none;overflow-y:auto;padding:var(--sp-7) var(--sp-4);}
-.ov.on{display:block;}
-.ovbox{max-width:860px;margin:0 auto;}
-.ovhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--sp-5);}
-.ovhead h2{font-family:var(--mono);font-size:var(--t-title);margin:0;}
-.grp{margin-bottom:var(--sp-6);}
-.grp > h4{font-size:var(--t-body-sm);margin:0 0 var(--sp-2);display:flex;align-items:center;gap:var(--sp-2);}
-.grp .why{font-size:var(--t-caption);color:var(--dim2);margin:0 0 var(--sp-3);}
-.di{border-top:1px solid var(--line);padding:var(--sp-3) 0;display:grid;grid-template-columns:88px 1fr auto;gap:var(--sp-3);align-items:start;}
-.di .dt{font-family:var(--mono);font-size:var(--t-caption);color:var(--dim2);}
-.di .tt{font-size:var(--t-body-sm);}
-.di .mn{font-size:var(--t-caption);color:var(--dim);margin-top:2px;}
-.di .after{font-family:var(--mono);font-size:var(--t-mono-micro);color:var(--gold);}
 .msg{padding:var(--sp-8);text-align:center;color:var(--dim);}
 @media(max-width:720px){
   .rw{grid-template-columns:96px 1fr 74px;}
-  .di{grid-template-columns:1fr;}
 }
 </style>
 
 <div class="wrap" id="app"><div class="msg">불러오는 중…</div></div>
-<div class="ov" id="ov"><div class="ovbox"></div></div>
 
 <script>
 (function(){
@@ -149,7 +122,7 @@ header.hd{border-bottom:1px solid var(--line);padding-bottom:var(--sp-5);margin-
   var TICKER = qs.get('ticker') || '';
   var app = document.getElementById('app');
   var OV = document.getElementById('ov');
-  var G=null, STD=null, IMP=null, showStd=true;
+  var G=null, showStd=true;
 
   function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
   // 산문 속 [숫자]를 모노 칩으로 (STYLE_GUIDE A7)
@@ -164,13 +137,13 @@ header.hd{border-bottom:1px solid var(--line);padding-bottom:var(--sp-5);margin-
 
   // ---- ③ 이중 항로 지도: 매출=100 정규화. 흐름 계정만(잔액 비교는 EQS 탭 영역) ----
   var MAP = [
-    {k:'revenue', nm:'매출',          zone:'B', color:'--mint',  desc:'들어오는 강'},
-    {k:'cogs',    nm:'매출원가',      zone:'B', color:'--coral', desc:'만드는 데 나간 돈', neg:true},
-    {k:'op',      nm:'영업이익',      zone:'B', color:'--mint',  desc:'장사로 남은 몫'},
-    {k:'ni',      nm:'순이익',        zone:'B', color:'--mint',  desc:'세금까지 빼고 남은 몫'},
-    {k:'ocf',     nm:'영업활동 현금', zone:'C', color:'--cyan',  desc:'진짜 통장에 들어온 돈'},
-    {k:'icf',     nm:'투자활동 현금', zone:'C', color:'--coral', desc:'설비·투자로 나간 돈'},
-    {k:'fin',     nm:'재무활동 현금', zone:'D', color:'--gold',  desc:'빌리고 갚고 나눠준 돈'}
+    {k:'revenue', nm:'매출',          zone:'B', color:'--mint',  desc:'1년 동안 판 금액'},
+    {k:'cogs',    nm:'매출원가',      zone:'B', color:'--coral', desc:'만드는 데 든 비용', neg:true},
+    {k:'op',      nm:'영업이익',      zone:'B', color:'--mint',  desc:'본업으로 남긴 이익'},
+    {k:'ni',      nm:'순이익',        zone:'B', color:'--mint',  desc:'세금·이자까지 뺀 최종 이익'},
+    {k:'ocf',     nm:'영업활동 현금', zone:'C', color:'--cyan',  desc:'실제 통장에 들어온 돈'},
+    {k:'icf',     nm:'투자활동 현금', zone:'C', color:'--coral', desc:'설비·투자에 쓴 돈'},
+    {k:'fin',     nm:'재무활동 현금', zone:'D', color:'--gold',  desc:'빌리고 갚고 배당한 돈'}
   ];
   var DELTA_FLAG = 6; // 정규화 격차(%p) 임계 — 이 이상이면 지도에 강조 배지
 
@@ -217,11 +190,6 @@ header.hd{border-bottom:1px solid var(--line);padding-bottom:var(--sp-5);margin-
     }).join('') + '</div>';
   }
 
-  function badgeHtml(){
-    if(!IMP || !IMP.items || !IMP.items.length) return '';
-    return '<div class="dbadge" id="dbadge"><span class="dot"></span>'+esc(IMP.badge)+' <span class="lbl" style="margin-left:4px">자세히</span></div>';
-  }
-
   function cardHtml(c, kind){
     var zoneNm = {A:'ZONE A',B:'ZONE B',C:'ZONE C',D:'ZONE D',E:'ZONE E'};
     if(kind==='note'){
@@ -229,7 +197,9 @@ header.hd{border-bottom:1px solid var(--line);padding-bottom:var(--sp-5);margin-
         + '<h3><span class="zn">NOTE</span>'+chips(c.title)+'</h3>'
         + (c.what||[]).map(function(p){ return '<p>'+chips(p)+'</p>'; }).join('')
         + (c.why||[]).map(function(p){ return '<p>'+chips(p)+'</p>'; }).join('')
-        + '<div class="foot"><span class="src">출처 · 사업보고서 주석 '+esc(c.src&&c.src.note_no||'')+'. '+esc(c.src&&c.src.title||'')+'</span></div>'
+        + '<div class="foot">'
+        + (c.std_focus ? '<a class="btn ghost" href="galaxy.html?ticker='+esc(G.std_ref.ticker)+'&focus='+esc(c.std_focus)+'" target="_top">표준의 이 항목 딥다이브 보기 →</a>' : '')
+        + '<span class="src">출처 · 사업보고서 주석 '+esc(c.src&&c.src.note_no||'')+'. '+esc(c.src&&c.src.title||'')+'</span></div>'
         + '</div>';
     }
     var a = c.anchor||{};
@@ -239,7 +209,7 @@ header.hd{border-bottom:1px solid var(--line);padding-bottom:var(--sp-5);margin-
       + '<p class="std">'+chips(c.lines[0])+'</p>'
       + '<p>'+chips(c.lines[1])+'</p>'
       + '<p>'+chips(c.lines[2])+'</p>'
-      + '<div class="foot"><a class="btn ghost" href="'+link+'" target="_top">표준에서 이 대목 보기 →</a></div>'
+      + '<div class="foot"><a class="btn ghost" href="'+link+'" target="_top">표준의 이 항목 딥다이브 보기 →</a></div>'
       + '</div>';
   }
 
@@ -250,10 +220,9 @@ header.hd{border-bottom:1px solid var(--line);padding-bottom:var(--sp-5);margin-
     h += '<header class="hd"><div class="top"><h1>'+esc(c.name)+'</h1>'
        + '<span class="sub">'+esc(c.ticker)+' · '+esc(c.fiscal_label)+(c.sector?' · '+esc(c.sector):'')+'</span></div>'
        + '<div class="hero">'+esc(G.strings.hero)+'</div>'
-       + '<div class="stdcta"><span class="t">이 업종의 표준 항로는 <b>'+esc(s.name)+'</b>예요'
+       + '<div class="stdcta"><span class="t">이 업종의 표준은 <b>'+esc(s.name)+'</b>예요'
        + (s.adjacent?' <span class="lbl">(인접 업종 표준)</span>':'')+'. 아직 안 보셨다면 먼저 한 번 훑고 오세요.</span>'
        + '<a class="btn" href="galaxy.html?ticker='+esc(s.ticker)+'" target="_top">표준으로 배우기 →</a></div>'
-       + badgeHtml()
        + '</header>';
 
     // ② 항로 요약
@@ -263,17 +232,18 @@ header.hd{border-bottom:1px solid var(--line);padding-bottom:var(--sp-5);margin-
        + '<div class="path">'+(p.path||[]).map(function(st,i,arr){
             return '<span class="pstep'+(i===arr.length-1?' last':'')+'">'+esc(st.year)+' '+esc(st.name)+'</span>';
          }).join('')+'</div>'
+       + (p.edge ? '<div class="intro"><p>일부 현금흐름이 0에 가까워서, 다음 결산에는 유형이 바뀔 수 있어요.</p></div>' : '')
        + '<div class="intro">'+(G.strings.intro_lines||[]).map(function(l){return '<p>'+esc(l)+'</p>';}).join('')+'</div>'
        + '</div></section>';
 
     // ③ 이중 항로 지도
-    h += '<section class="sec"><span class="lbl">DUAL ROUTE — 매출을 100으로 맞춰 겹쳐 보기</span>'
+    h += '<section class="sec"><span class="lbl">SIDE BY SIDE — 매출을 100으로 맞춰 나란히 보기</span>'
        + '<div class="panel edge">'
        + '<div class="maphead"><div class="legend"><span><i></i>'+esc(c.name)+'</span>'
        + '<span><i class="gh"></i>표준 '+esc(s.name)+'</span></div>'
        + '<button class="btn ghost'+(showStd?' on':'')+'" id="tgl">표준 겹쳐 보기 '+(showStd?'ON':'OFF')+'</button></div>'
        + buildMap()
-       + '<div class="cfnote">규모가 30배 달라도 매출을 [100]으로 맞추면 <b>항로의 모양</b>을 견줄 수 있어요. 0선의 왼쪽은 빠져나간 돈, 오른쪽은 남거나 들어온 돈이에요.'
+       + '<div class="cfnote">회사 규모가 달라도 매출을 <b>100</b>으로 맞추면 구조를 나란히 비교할 수 있어요. 0선의 왼쪽은 나간 돈, 오른쪽은 남거나 들어온 돈이에요.'
        + (c.cash_flow_from?' 현금흐름은 <b>'+esc(c.cash_flow_from)+'</b>부터 확인돼요.':'')
        + '</div></div></section>';
 
@@ -326,59 +296,13 @@ header.hd{border-bottom:1px solid var(--line);padding-bottom:var(--sp-5);margin-
       };
     });
 
-    var b = document.getElementById('dbadge');
-    if(b) b.onclick = openImpact;
   }
-
-  // ---- 공시 영향 오버레이 ----
-  function openImpact(){
-    if(!IMP) return;
-    var order = ['cash','gov','vc','biz'];
-    var after = IMP.items.filter(function(i){return i.after_snapshot;});
-    var list  = after.length ? after : IMP.items.slice(0,20);
-    var h = '<div class="ovhead"><h2>공시가 바꾸는 것</h2><button class="btn ghost" id="ovx">닫기 (ESC)</button></div>';
-    h += '<div class="dis" style="margin-bottom:var(--sp-5)">은하수의 숫자는 <b>'+esc(IMP.snapshot.date||'')+'</b>에 낸 사업보고서 기준이에요. '
-       + (after.length? '그 뒤로 올라온 공시 <b>'+after.length+'건</b>을, 이 회사의 어느 면을 건드리는지에 따라 나눠 놨어요.'
-                      : '결산 이후 새 공시가 아직 없어서 최근 공시를 보여드려요.')+'</div>';
-    order.forEach(function(d){
-      var xs = list.filter(function(i){ return i.dims.indexOf(d)>=0; });
-      if(!xs.length) return;
-      var meta = IMP.dims[d];
-      h += '<div class="grp"><h4><span class="chip c-'+d+'">'+esc(meta.label)+'</span>'
-         + '<span style="color:var(--dim2);font-size:var(--t-caption)">'+xs.length+'건 · '+esc(meta.surface)+'</span></h4>';
-      h += xs.map(function(i){
-        return '<div class="di"><div class="dt">'+esc(i.date)+(i.after_snapshot?'<br><span class="after">결산 이후</span>':'')+'</div>'
-          + '<div><div class="tt">'+esc(i.title)+'</div>'
-          + (i.means?'<div class="mn">'+esc(i.means)+'</div>':'')
-          + '</div>'
-          + '<a class="btn ghost" href="'+esc(i.dart_url)+'" target="_blank" rel="noopener">원문</a></div>';
-      }).join('');
-      h += '</div>';
-    });
-    OV.querySelector('.ovbox').innerHTML = h;
-    OV.classList.add('on');
-    document.getElementById('ovx').onclick = closeImpact;
-  }
-  function closeImpact(){ OV.classList.remove('on'); }
-  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeImpact(); });
-  OV.onclick = function(e){ if(e.target===OV) closeImpact(); };
 
   // ---- 로드 ----
   if(!TICKER){ app.innerHTML='<div class="msg">기업 코드(ticker)가 지정되지 않았어요.</div>'; return; }
   fetch('data/galaxy_lite_'+TICKER+'.json',{cache:'no-store'})
     .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
-    .then(function(j){
-      G=j;
-      // 표준 골든을 함께 fetch — 표준 수치를 lite에 복사하지 않기 위한 확인용(있으면 이름·라벨 갱신)
-      return fetch('data/galaxy_'+j.std_ref.ticker+'.json',{cache:'no-store'})
-        .then(function(r){ return r.ok?r.json():null; }).catch(function(){ return null; });
-    })
-    .then(function(std){
-      STD=std;
-      return fetch('data/impact_'+TICKER+'.json',{cache:'no-store'})
-        .then(function(r){ return r.ok?r.json():null; }).catch(function(){ return null; });
-    })
-    .then(function(imp){ IMP=imp; render(); })
+    .then(function(j){ G=j; render(); })
     .catch(function(){ app.innerHTML='<div class="msg">이 기업의 은하수 데이터를 찾을 수 없어요 ('+esc(TICKER)+').</div>'; });
 })();
 </script>

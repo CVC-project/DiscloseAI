@@ -316,7 +316,13 @@ def detect_pattern(series: dict[str, list[float | None]], labels: list[str], cf:
         return {"code": None, "name": None, "desc": None, "path": []}
     last = path[-1]
     name, desc = PATTERNS.get(last["code"], ("분류불가", ""))
-    return {"code": last["code"], "name": name, "desc": desc, "path": path}
+    # 근소값 경계: 세 계정 중 하나라도 |값| < 매출 1%면 부호가 쉽게 뒤집힌다 (전 시장 실측 21%)
+    i_last = cf["indices"][-1]
+    rev = series["revenue"][i_last]
+    edge = bool(rev) and min(
+        abs(series[k][i_last]) for k in ("ocf", "icf", "fin")
+    ) < abs(rev) * 0.01
+    return {"code": last["code"], "name": name, "desc": desc, "path": path, "edge": edge}
 
 
 def valley_index(vals: list[float | None]) -> int | None:
@@ -326,13 +332,26 @@ def valley_index(vals: list[float | None]) -> int | None:
     return min(pairs, key=lambda x: x[1])[0]
 
 
-# ---------- 델타 카드 (GALAXY_LITE_PLAN §6) ----------
+# ---------- 델타 카드 (GALAXY_LITE_PLAN §6 — 직관 서술, 비유 최소화) ----------
+
+# 카드 -> 표준 골든 딥다이브 착지 행 (dives의 row 값. focus=dive:<key>로 바로 고정)
+_ROW_BY_SERIES = {"cogs": "is-cogs", "op": "is-opincome", "ni": "is-netincome",
+                  "ocf": "cf-op", "icf": "cf-inv", "fin": "cf-fin"}
+
+
+def _std_dive_focus(std_doc: dict[str, Any], row: str | None, zone: str) -> str:
+    """골든 dives에서 row 일치 키를 찾아 'dive:<key>'로. 없으면 존 스크롤 폴백."""
+    if row:
+        for k, v in (std_doc.get("dives") or {}).items():
+            if isinstance(v, dict) and v.get("row") == row:
+                return f"dive:{k}"
+    return f"zone{zone}"
 
 
 def build_cards(
     ctx: dict[str, Any],
 ) -> list[dict[str, Any]]:
-    """5~6장. 멘트 규격: ①표준에서는 A였어요 ②이 회사는 B예요 ③그래서 C를 뜻해요 (경어체)."""
+    """5~6장. 멘트 규격: ①표준은 A였어요 ②이 회사는 B예요 ③그래서 C예요 (경어체, 직관 서술)."""
     labels: list[str] = ctx["labels"]
     S: dict[str, list[float | None]] = ctx["series"]
     N: dict[str, list[float | None]] = ctx["norm"]
@@ -344,126 +363,132 @@ def build_cards(
     pattern: dict[str, Any] = ctx["pattern"]
     std_years: list[str] = ctx["std_years"]
     std_ticker: str = ctx["std_ticker"]
+    std_doc: dict[str, Any] = ctx["std_doc"]
 
     cards: list[dict[str, Any]] = []
-    li = len(labels) - 1  # 최신 연도 인덱스
+    li = len(labels) - 1
     sli = len(std_years) - 1
 
-    def card(cid, title, lines, zone, focus, nums):
+    def card(cid, title, lines, zone, row, nums):
         cards.append(
             {
                 "id": cid,
                 "kind": "delta",
                 "title": title,
                 "lines": lines,
-                "anchor": {"zone": zone, "std_focus": focus, "std_ticker": std_ticker},
+                "anchor": {"zone": zone,
+                           "std_focus": _std_dive_focus(std_doc, row, zone),
+                           "std_ticker": std_ticker},
                 "nums": nums,
             }
         )
 
-    # 1) 항로 개형 — 매출 100원이 영업 존에서 얼마 남는가
+    # 1) 이익률 격차 — 100원 팔면 몇 원 남나
     op_m = _pct(S["op"][li], S["revenue"][li])
     std_op_m = _pct(SD["op"][sli], SD["revenue"][sli])
     if op_m is not None and std_op_m is not None:
         gap = op_m - std_op_m
-        verdict = (
-            f"같은 100원을 팔아도 이 회사 강줄기는 영업 존을 지나며 [{abs(gap):.1f}%p] 더 가늘어져요"
-            if gap < 0
-            else f"같은 100원을 팔아도 이 회사 강줄기는 영업 존에서 [{gap:.1f}%p] 더 두껍게 남아요"
-        )
+        if gap < 0:
+            verdict = (
+                f"같은 100원을 팔아도 남는 돈이 [{abs(gap):.1f}%p] 적은 거예요. "
+                "남는 돈이 적으면 그만큼 투자·빚 상환·배당에 쓸 여력도 줄어요."
+            )
+        else:
+            verdict = (
+                f"같은 100원을 팔아도 남는 돈이 [{gap:.1f}%p] 많은 거예요. "
+                "그만큼 투자·빚 상환·배당에 쓸 여력이 커요."
+            )
         card(
             "d1",
-            "항로 개형 — 100원이 영업 존을 지나면",
+            "100원 팔면 몇 원이 남나",
             [
                 f"표준인 {J(std_name, '은는')} 매출 [{_fmt_jo(SD['revenue'][sli])}] 가운데 영업이익 "
-                f"{JB(_fmt_jo(SD['op'][sli]), '을를')} 남겼어요. 100원을 팔면 [{std_op_m:.1f}원]이 남는 항로예요.",
+                f"{JB(_fmt_jo(SD['op'][sli]), '을를')} 남겼어요 — 100원어치를 팔면 [{std_op_m:.1f}원]이 남는 구조예요.",
                 f"{J(name, '은는')} 매출 [{_fmt_won(S['revenue'][li])}]에 영업이익 "
                 f"{JB(_fmt_won(S['op'][li]), '으로')}, 100원당 [{op_m:.1f}원]이 남아요.",
-                f"{verdict} — 규모가 아니라 강폭의 문제라, 뒤에 나오는 투자·재무 존에서 쓸 수 있는 여력도 그만큼 달라져요.",
+                verdict,
             ],
             "B",
-            "zoneB",
+            "is-opincome",
             [{"k": "op_margin", "v": op_m}, {"k": "std_op_margin", "v": std_op_m}],
         )
 
-    # 2) 골짜기 비교 — 사이클 동조 여부
+    # 2) 최악의 해 — 산업 경기 동조 여부
     vi = valley_index(S["op"])
     svi = ctx["std_anchor"].get("valley_index")
     if vi is not None and svi is not None:
         same = labels[vi] == (std_years[svi] if svi < len(std_years) else None)
         peak = max(v for v in S["op"] if v is not None)
         drop = (1 - S["op"][vi] / peak) * 100 if peak else None
-        std_label = ctx["std_anchor"].get("label") or "골짜기"
+        std_label = ctx["std_anchor"].get("label") or "부진"
         if same:
             third = (
-                f"두 회사가 같은 해에 함께 꺾였다는 건, 이 회사의 부진이 개별 사정이 아니라 "
-                f"산업 사이클을 함께 탄 결과라는 뜻이에요. 표준의 골짜기 이야기를 읽어 두면 이 회사의 [{labels[vi]}]도 같은 문법으로 읽혀요."
+                "두 회사가 같은 해에 나빠졌다는 건, 이 회사만의 문제가 아니라 산업 경기가 함께 꺾였다는 "
+                f"뜻이에요. 표준의 그 해 설명을 읽어 두면 이 회사의 [{labels[vi]}]도 같은 맥락으로 읽을 수 있어요."
             )
         else:
             third = (
-                f"표준과 다른 해에 꺾였다는 건, 산업 전체보다 이 회사 고유의 사정이 더 크게 작용했다는 신호예요. "
-                f"무엇이 그해를 눌렀는지는 아래 '주목할 점'에서 주석으로 확인해 보세요."
+                "표준과 다른 해에 나빠졌다는 건, 산업 경기보다 이 회사 고유의 사정이 컸다는 신호예요. "
+                "무엇이 그 해를 눌렀는지는 아래 '눈여겨볼 곳'에서 주석으로 확인해 보세요."
             )
+        jl = "로" if (not _tail(std_label)[0] or _tail(std_label)[1]) else "으로"
         card(
             "d2",
-            f"골짜기 비교 — {labels[vi]}에 무슨 일이",
+            f"가장 나빴던 해 — {labels[vi]}",
             [
-                f"표준인 {J(std_name, '은는')} [{std_years[svi]}]이 골짜기였어요. "
-                f"'{std_label}'{'로' if not _tail(std_label)[0] or _tail(std_label)[1] else '으로'} 영업이익이 [{_fmt_jo(SD['op'][svi])}]까지 내려앉은 해예요.",
-                f"{name}의 최저점은 [{labels[vi]}]이고, 영업이익은 [{_fmt_won(S['op'][vi])}]"
-                + (
-                    f"{'로' if not _tail(_fmt_won(S['op'][vi]))[0] else '으로'} 5년 최고치 대비 [{drop:.0f}%] 낮아요."
-                    if drop
-                    else "예요."
-                ),
+                f"표준인 {J(std_name, '은는')} [{std_years[svi]}]이 5년 중 가장 나빴던 해예요 — "
+                f"'{std_label}'{jl} 영업이익이 [{_fmt_jo(SD['op'][svi])}]까지 줄었어요.",
+                f"{name}의 최저점도 [{labels[vi]}]이고, 영업이익 {JB(_fmt_won(S['op'][vi]), '으로')} "
+                + (f"5년 최고치보다 [{drop:.0f}%] 적었어요." if drop else "내려앉았어요."),
                 third,
             ],
             "B",
-            "zoneB",  # 골든의 data-zone 앵커명 (focus 딥링크가 이 값으로 스크롤한다)
+            "is-opincome",
             [{"k": "valley", "v": labels[vi]}, {"k": "std_valley", "v": std_years[svi]}],
         )
 
-    # 3) 항로 전환 — 8상 경로
+    # 3) 지금 국면 — 8상 전환
     if pattern["path"]:
         first, last = pattern["path"][0], pattern["path"][-1]
-        std_path_code = (
+        std_code = (
             _sign(SD["ocf"][sli]) + _sign(SD["icf"][sli]) + _sign(SD["fin"][sli])
             if all(SD.get(k) for k in ("ocf", "icf", "fin"))
             else None
         )
-        std_pname = PATTERNS.get(std_path_code, ("—", ""))[0] if std_path_code else "—"
+        std_pname, std_pdesc = PATTERNS.get(std_code, ("—", "")) if std_code else ("—", "")
         changed = first["code"] != last["code"]
         line2 = (
             f"{J(name, '은는')} [{first['year']}] {first['name']}에서 [{last['year']}] "
-            f"{J(last['name'], '으로')} 항로를 바꿨어요."
+            f"{J(last['name'], '으로')} 바뀌었어요 — {pattern['desc']}."
             if changed
-            else f"{name}도 [{first['year']}]부터 [{last['year']}]까지 줄곧 {last['name']}이에요."
+            else f"{name}도 [{first['year']}]부터 [{last['year']}]까지 줄곧 {last['name']}이에요 — {pattern['desc']}."
         )
         fin_v = S["fin"][li]
         if fin_v is not None and fin_v > 0:
             third = (
-                f"재무 존의 화살표가 바깥이 아니라 안으로 향한다는 건, 번 돈만으로는 투자를 다 대지 못해 "
-                f"외부에서 {JB(_fmt_won(fin_v), '을를')} 더 당겨왔다는 뜻이에요. 표준은 같은 해 그 반대 방향이었어요."
+                f"재무활동 현금이 (+)라는 건, 갚은 돈보다 새로 빌리거나 조달한 돈이 "
+                f"{JB(_fmt_won(fin_v), '이가')} 더 많았다는 뜻이에요. 번 것만으로는 투자를 다 대지 "
+                "못했다는 신호이고, 표준은 같은 해 반대로 빚을 갚고 주주에게 돌려줬어요."
             )
         else:
             third = (
-                "재무 존의 화살표가 바깥으로 향하면 번 돈으로 빚을 갚고 주주에게 돌려주는 국면이에요. "
-                "표준과 같은 방향이라면, 현금을 다루는 방식이 업계 성숙 기업의 문법을 따르고 있다는 신호예요."
+                "재무활동 현금이 (−)면 번 돈으로 빚을 갚고 주주에게 돌려주는 국면이에요 — "
+                "돈을 다루는 방식이 표준과 같은 방향이에요."
             )
         card(
             "d3",
-            f"항로 전환 — 지금은 {pattern['name']}",
+            f"지금 국면 — {pattern['name']}",
             [
-                f"표준인 {J(std_name, '은는')} 최근 연도가 {std_pname}이에요. 벌어들인 현금으로 투자와 상환을 모두 감당하는 항로예요.",
-                line2 + f" ({pattern['desc']})",
+                f"표준인 {J(std_name, '은는')} 최근 연도가 {std_pname}이에요 — {std_pdesc}.",
+                line2,
                 third,
             ],
             "D",
-            "zoneD",
-            [{"k": "pattern", "v": pattern["code"]}, {"k": "std_pattern", "v": std_path_code}],
+            "cf-fin",
+            [{"k": "pattern", "v": pattern["code"]}, {"k": "std_pattern", "v": std_code}],
         )
 
-    # 4) 저수지 궤적 — 순현금 누적
+    # 4) 5년간 현금 증감
     if cf["indices"]:
         net = [
             (S["ocf"][i] or 0) + (S["icf"][i] or 0) + (S["fin"][i] or 0) for i in cf["indices"]
@@ -478,26 +503,21 @@ def build_cards(
         span = f"{len(yrs)}개년" if len(yrs) < len(labels) else "5년"
         card(
             "d4",
-            "저수지 궤적 — 현금은 쌓였을까 말랐을까",
+            "5년간 현금이 늘었나, 줄었나",
             [
-                f"표준인 {J(std_name, '은는')} 5년간 영업·투자·재무를 모두 합친 현금이 [{_fmt_jo(std_cum)}] "
+                f"표준인 {J(std_name, '은는')} 5년 동안 영업·투자·재무를 모두 합친 현금이 [{_fmt_jo(std_cum)}] "
                 + ("늘었어요." if std_cum >= 0 else "줄었어요."),
                 f"{J(name, '은는')} 현금흐름이 확인되는 [{yrs[0]}]부터 [{yrs[-1]}]까지 {span} 합계로 [{_fmt_won(cum)}] "
                 + ("늘었어요." if cum >= 0 else "줄었어요."),
-                "영업에서 번 돈(들어오는 물)과 투자·재무로 나간 돈(빠지는 물)의 차이가 저수지 수위를 정해요. "
-                + (
-                    "수위가 오르는 항해예요 — 다음 투자를 자기 힘으로 시작할 수 있다는 뜻이에요."
-                    if cum >= 0
-                    else "수위가 내려가는 항해예요 — 이 상태가 이어지면 어디선가 물을 더 끌어와야 해요."
-                ),
+                "번 돈에서 투자·상환·배당으로 나간 돈을 뺀 값이에요. (+)가 이어지면 다음 투자를 자기 돈으로 "
+                "시작할 수 있고, (−)가 이어지면 결국 외부에서 돈을 구해 와야 해요.",
             ],
             "D",
-            "zoneD",
+            "bs-cash",
             [{"k": "cum_net", "v": cum}, {"k": "std_cum_net", "v": std_cum}],
         )
 
-    # 5) 가장 다른 대목 — 정규화 편차 최대
-    # 흐름(flow) 계정만 비교한다 — 잔액(assets·debt·equity) 대비는 EQS 탭의 영역(§1 차별선)
+    # 5) 가장 다른 항목 — 정규화 편차 최대 (흐름 계정만, 잔액 비교는 EQS 영역)
     diffs = []
     for k in ("cogs", "op", "ni", "ocf", "icf", "fin"):
         a = N.get(k, [None] * len(labels))[li] if k in N else None
@@ -516,17 +536,19 @@ def build_cards(
             "fin": "재무활동 현금",
         }
         ko = KO.get(gk, gk)
+        updown = "높아요" if a > b else "낮아요"
         card(
             "d5",
-            f"가장 다른 대목 — {ko}",
+            f"가장 다른 항목 — {ko}",
             [
-                f"매출을 100으로 맞춰 놓고 보면, 표준인 {std_name}의 {J(ko, '은는')} [{b:.1f}]이에요.",
-                f"{J(name, '은는')} 같은 자리에서 [{a:.1f}]{'로' if not _tail(f'{a:.1f}')[0] else '으로'}, "
-                f"표준과 [{gapv:.1f}]만큼 벌어져요. 5년 항로에서 두 회사가 가장 크게 갈라지는 지점이에요.",
-                "규모를 지우고 모양만 남겼을 때 남는 차이라서, 이 대목이 이 회사를 표준과 다르게 만드는 구조적 특징이에요. 위 지도에서 강조된 마디가 바로 여기예요.",
+                f"매출을 100으로 놓고 보면, 표준인 {std_name}의 {J(ko, '은는')} [{b:.1f}]이에요.",
+                f"{J(name, '은는')} 같은 기준에서 [{a:.1f}]{'로' if not _tail(f'{a:.1f}')[0] else '으로'} "
+                f"표준보다 [{gapv:.1f}]만큼 {updown}. 두 회사 숫자가 가장 크게 갈라지는 항목이에요.",
+                "회사 크기를 지우고 구조만 남겨 비교했을 때 남는 차이라서, 이 항목이 이 회사의 구조적 "
+                "특징이에요. 위 비교 차트에서 강조된 줄이 바로 여기예요.",
             ],
             "C",
-            "zoneC",
+            _ROW_BY_SERIES.get(gk),
             [{"k": gk, "v": a}, {"k": "std_" + gk, "v": b}, {"k": "gap", "v": gapv}],
         )
 
@@ -571,12 +593,13 @@ def build(ticker: str, std_ticker: str | None = None) -> dict[str, Any]:
         "name": name,
         "cf": cf,
         "pattern": pattern,
+        "std_doc": std,
     }
     cards = build_cards(ctx)
 
     intro = [
-        f"이 화면은 {name}만 따로 읽는 곳이 아니라, 먼저 배운 표준 항로 위에 {name}을 겹쳐 보는 곳이에요.",
-        f"같은 업종의 표준은 {std['corp']['name']}이에요. 표준을 아직 안 보셨다면 먼저 그 은하수를 한 번 훑고 오시면 이 차이들이 훨씬 잘 읽혀요.",
+        f"이 화면은 {J(name, '을를')} 처음부터 설명하는 곳이 아니라, 먼저 배운 표준({std['corp']['name']}) 위에 겹쳐 차이만 보는 곳이에요.",
+        "표준 은하수를 아직 안 보셨다면 먼저 한 번 보고 오세요 — 여기 나오는 차이들이 훨씬 잘 읽혀요.",
     ]
 
     out = {
