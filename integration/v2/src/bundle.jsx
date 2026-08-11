@@ -2591,7 +2591,7 @@ function SectorDisclosurePanel({ sector, onBack, onSelect }) {
         <LiveDisclosureBlock items={liveItems} live={live} emptyText="오늘 이 섹터에서 접수된 공시가 없습니다." />
         <div className="stored-disclosure-label">저장된 최근 공시</div>
         {items.length === 0 && (
-          <div style={{padding: '20px', textAlign: 'center', color: '#475569', fontSize: 11}}>공시 데이터 없음</div>
+          <div style={{padding: '20px', textAlign: 'center', color: 'var(--text-3)', fontSize: 11}}>공시 데이터 없음</div>
         )}
         {items.map((d, i) => (
           <div key={i} className={'disc-feed-row' + (!!d.high_impact ? ' hi' : '')} onClick={() => onSelect && onSelect(d)}>
@@ -2663,7 +2663,7 @@ function CompanyDisclosurePanel({ company, sector, onBack, onSelect, onEnterDisc
             </div>
           ))
         ) : companyLive.loading ? (
-          <div style={{padding: '14px 10px', color: '#475569', fontSize: 11}}>실시간 조회 중…</div>
+          <div style={{padding: '14px 10px', color: 'var(--text-3)', fontSize: 11}}>실시간 조회 중…</div>
         ) : companyLive.items.length > 0 ? (
           companyLive.items.map((d, i) => (
             <div key={i} className="disc-feed-row" onClick={() => window.open(d.dartUrl, '_blank', 'noopener,noreferrer')}>
@@ -2675,21 +2675,21 @@ function CompanyDisclosurePanel({ company, sector, onBack, onSelect, onEnterDisc
             </div>
           ))
         ) : companyLive.tried ? (
-          <div style={{padding: '14px 10px', color: '#475569', fontSize: 11}}>
+          <div style={{padding: '14px 10px', color: 'var(--text-3)', fontSize: 11}}>
             {companyLive.error ? '실시간 조회 실패 — 새로고침 해보세요' : '최근 90일간 접수된 공시가 없습니다'}
           </div>
         ) : (
-          <div style={{padding: '14px 10px', color: '#475569', fontSize: 11}}>
+          <div style={{padding: '14px 10px', color: 'var(--text-3)', fontSize: 11}}>
             이 기업은 정적 미리보기에서 조회할 수 없습니다 — 실제 서비스에서는 실시간으로 표시됩니다.
           </div>
         )}
         <div className="disc-rel-toggle" onClick={() => setShowRel(v => !v)}>
           <span>{showRel ? '▾' : '▸'} 관계 기업 공시</span>
-          <span style={{color: '#64748b', fontSize: 9}}>{relCount}건</span>
+          <span style={{color: 'var(--text-3)', fontSize: 9}}>{relCount}건</span>
         </div>
         {showRel && (
           <div className="disc-rel-section">
-            {relDiscs.length === 0 && <div style={{padding: '8px 10px', color: '#475569', fontSize: 11}}>관계 기업 공시 없음</div>}
+            {relDiscs.length === 0 && <div style={{padding: '8px 10px', color: 'var(--text-3)', fontSize: 11}}>관계 기업 공시 없음</div>}
             {relDiscs.map((d, i) => (
               <div key={i} className={'disc-rel-row' + (!!d.high_impact ? ' hi' : '')} onClick={() => onSelect && onSelect(d)}>
                 <div style={{display: 'flex', alignItems: 'center', gap: 4, marginBottom: 2}}>
@@ -2779,16 +2779,16 @@ function QuarterlyTable({ disc }) {
         <thead>
           <tr style={{borderBottom: '1px solid rgba(116, 238, 198,0.2)'}}>
             {['시점', '매출(조)', '영업이익(조)', 'ROE%'].map(h => (
-              <td key={h} style={{padding: '5px 0', color: '#64748b', fontWeight: 600}}>{h}</td>
+              <td key={h} style={{padding: '5px 0', color: 'var(--text-3)', fontWeight: 600}}>{h}</td>
             ))}
           </tr>
         </thead>
         <tbody>
           {sorted.map((s, i) => {
-            const oiColor = s.operating_income != null ? (s.operating_income >= 0 ? '#4ade80' : '#f87171') : '#94a3b8';
+            const oiColor = s.operating_income != null ? (s.operating_income >= 0 ? '#4ade80' : '#f87171') : 'var(--text-1)';
             return (
               <tr key={i} style={{borderBottom: '1px solid rgba(116, 238, 198,0.06)'}}>
-                <td style={{padding: '5px 0', color: '#94a3b8'}}>{s.year}Q{s.quarter}</td>
+                <td style={{padding: '5px 0', color: 'var(--text-1)'}}>{s.year}Q{s.quarter}</td>
                 <td style={{padding: '5px 0', color: '#e2e8f0'}}>{fmtT(s.revenue)}</td>
                 <td style={{padding: '5px 0', color: oiColor}}>{fmtOi(s.operating_income)}</td>
                 <td style={{padding: '5px 0', color: '#e2e8f0'}}>{s.roe != null ? s.roe.toFixed(1) : '-'}</td>
@@ -2843,14 +2843,14 @@ function DisclosureDetailOverlay({ disc, onClose, onHome, onSelectCompany }) {
           )}
           {disc.summary
             ? <DisclosureSummaryView summary={disc.summary} />
-            : <div style={{color: '#475569', fontSize: 12, fontStyle: 'italic'}}>AI 요약 없음 (수집 중)</div>
+            : <div style={{color: 'var(--text-3)', fontSize: 12, fontStyle: 'italic'}}>AI 요약 없음 (수집 중)</div>
           }
           {dartDiscUrl && <div><a href={dartDiscUrl} target="_blank" rel="noopener" className="disc-dart-btn">📄 DART 원문 보기 ↗</a></div>}
           <QuarterlyTable disc={disc} />
         </div>
         <OverlayAiChat companyName={corpName} ticker={ticker} context="disclosure" disc={disc} node={node} />
       </div>
-      <div style={{textAlign: 'center', padding: '6px', fontFamily: 'var(--font-mono,monospace)', fontSize: 9, color: '#475569', borderTop: '1px solid rgba(251,191,36,0.1)', background: 'rgba(8,14,26,0.9)', flexShrink: 0}}>
+      <div style={{textAlign: 'center', padding: '6px', fontFamily: 'var(--font-mono,monospace)', fontSize: 9, color: 'var(--text-3)', borderTop: '1px solid rgba(251,191,36,0.1)', background: 'rgba(8,14,26,0.9)', flexShrink: 0}}>
         ⚠ 과거 통계 기반 참고 정보 — 투자 조언 아님
       </div>
     </div>
@@ -2897,13 +2897,13 @@ function DisclosureFullOverlay({ ticker, onClose, onHome, onSelectCompany }) {
       <div style={{flex: '1 1 0%', overflowY: 'auto', padding: '20px 28px', display: 'flex', flexDirection: 'column', gap: 10}}>
         <div style={{display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 6, flexWrap: 'wrap'}}>
           <span style={{color: '#f1f5f9', fontSize: 20, fontWeight: 700}}>{corpName}</span>
-          {sectorKo && <span style={{color: '#64748b', fontSize: 11}}>{sectorKo}</span>}
+          {sectorKo && <span style={{color: 'var(--text-3)', fontSize: 11}}>{sectorKo}</span>}
           {capLabel && <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 11, color: '#74EEC6'}}>{capLabel}</span>}
-          <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 10, color: '#475569', marginLeft: 'auto'}}>총 {items.length}건</span>
+          <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 10, color: 'var(--text-3)', marginLeft: 'auto'}}>총 {items.length}건</span>
         </div>
         {view === 'list' ? (
           <>
-            {items.length === 0 && <div style={{color: '#475569', fontSize: 12}}>공시 데이터 없음</div>}
+            {items.length === 0 && <div style={{color: 'var(--text-3)', fontSize: 12}}>공시 데이터 없음</div>}
             {items.map((d, i) => (
               <div key={i} className={'disc-full-list-row' + (!!d.high_impact ? ' hi' : '')} onClick={() => { setSelectedDisc(d); setView('detail'); }}>
                 <div style={{display: 'flex', alignItems: 'center', gap: 8, marginBottom: 3}}>
@@ -2934,7 +2934,7 @@ function DisclosureFullOverlay({ ticker, onClose, onHome, onSelectCompany }) {
             )}
             {selectedDisc.summary
               ? <DisclosureSummaryView summary={selectedDisc.summary} />
-              : <div style={{color: '#475569', fontSize: 12, fontStyle: 'italic'}}>AI 요약 없음</div>
+              : <div style={{color: 'var(--text-3)', fontSize: 12, fontStyle: 'italic'}}>AI 요약 없음</div>
             }
             {dartUrl && <div><a href={dartUrl} target="_blank" rel="noopener" className="disc-dart-btn">📄 DART 원문 보기 ↗</a></div>}
             <QuarterlyTable disc={selectedDisc} />
@@ -2943,7 +2943,7 @@ function DisclosureFullOverlay({ ticker, onClose, onHome, onSelectCompany }) {
       </div>{/* end left content */}
       <OverlayAiChat companyName={corpName} ticker={ticker} context="disclosure" disc={view === 'detail' ? selectedDisc : null} node={node} />
       </div>{/* end flex row */}
-      <div style={{textAlign: 'center', padding: '6px', fontFamily: 'var(--font-mono,monospace)', fontSize: 9, color: '#475569', borderTop: '1px solid rgba(116, 238, 198,0.1)', background: 'rgba(8,14,26,0.9)', flexShrink: 0}}>
+      <div style={{textAlign: 'center', padding: '6px', fontFamily: 'var(--font-mono,monospace)', fontSize: 9, color: 'var(--text-3)', borderTop: '1px solid rgba(116, 238, 198,0.1)', background: 'rgba(8,14,26,0.9)', flexShrink: 0}}>
         ⚠ 과거 통계 기반 참고 정보 — 투자 조언 아님
       </div>
     </div>
