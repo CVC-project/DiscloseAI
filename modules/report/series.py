@@ -85,6 +85,48 @@ def is_complete(vals) -> bool:
     )
 
 
+# ── 규모 적응형 반올림 (V-116, 2026-08-12 — KOSDAQ 첫 골든에서 승격) ──────────────
+# 종전에는 조 단위 **1자리 고정**이었다. 대형 KOSPI(매출 100조대)에서는 문제가 없었으나,
+# KOSDAQ 중형사에서는 서사가 통째로 뭉개진다 — 원익IPS 240810 실측:
+#   revenue [1.2, 1.0, 0.7, 0.7, 0.9]  ← 실제 12,323 → 6,903 → 9,098억 (사이클 진폭 소실)
+#   op      [0.2, 0.1, -0.0, 0.0, 0.1] ← 실제 1,641 → **-181(적자)** → 738억
+# `-0.0`은 적자를 0으로 보이게 하고, tax·div·dep는 5개년이 전부 0.0이 된다.
+# → 키마다 **최댓값 크기에 맞춰 유효숫자 ~3자리**를 유지한다. 대형주는 1자리 그대로라 무회귀.
+# ⚠️ 기존 골든 JSON의 series는 정적이라 영향 없다(check_golden은 JSON만 읽는다).
+#    `check_golden §18`은 series 마지막 값의 소수 자릿수를 그때그때 파생하므로 자릿수가 늘어도 정합.
+
+
+def _dec_for(vals) -> int:
+    """조 단위 배열에 적용할 소수 자릿수. ≥10조=1 · ≥1조=2 · 그 미만=3(억 단위 해상도)."""
+    m = max((abs(v) for v in vals if v is not None), default=0.0)
+    if m >= 10:
+        return 1
+    if m >= 1:
+        return 2
+    return 3
+
+
+def _scale(vals: list, div: float) -> list:
+    """원 단위 → 조(eps는 원). **반올림하지 않는다** — 파생키가 원값에서 계산되도록."""
+    return [v / div for v in vals]
+
+
+def _round_scaled(vals: list, *, is_eps: bool = False) -> list:
+    """이미 조(또는 eps는 원)로 환산된 배열을 규모 적응형으로 반올림. -0.0은 0.0으로 정규화.
+
+    ⚠️ 분기는 **불리언 플래그**로 한다 — `div == 1`로 가르면 `1.0 == 1`이 True라
+       전 키가 eps 취급돼 정수로 뭉개진다(2026-08-12 실측).
+    """
+    if is_eps:  # 원 단위 그대로
+        return [round(v) for v in vals]
+    dec = _dec_for(vals)
+    out = []
+    for v in vals:
+        r = round(v, dec)
+        out.append(0.0 if r == 0 else r)  # -0.0 → 0.0 (적자를 0으로 보이게 하지 않는다)
+    return out
+
+
 import os
 import re
 import sqlite3
@@ -135,9 +177,7 @@ def _series_for(key: str, acc_ids: list[str], by_acc: dict, fy_list: list[int], 
                 continue
             vals = [yv.get(fy) for fy in fy_list]
             if all(v is not None for v in vals):
-                if div == 1:  # eps 등 원 단위 그대로
-                    return [round(v) for v in vals]
-                return [round(v / div, 1) for v in vals]
+                return _scale(vals, div)  # 반올림은 build_series가 파생 후 일괄
     return None
 
 
@@ -223,9 +263,7 @@ def _merge_per_year(key: str, acc_ids: list[str], by_acc: dict, fy_list: list[in
         out.append(got)
     if key in ABS_KEYS:
         out = [abs(v) for v in out]
-    if div == 1:
-        return [round(v) for v in out]
-    return [round(v / div, 1) for v in out]
+    return _scale(out, div)  # 반올림은 build_series가 파생 후 일괄
 
 
 def build_series(ticker: str, db_path: str = _DB) -> dict:
@@ -248,11 +286,16 @@ def build_series(ticker: str, db_path: str = _DB) -> dict:
         if vals is not None:
             series[key] = vals
 
-    # ⓓ D: 파생 (양쪽 완결 시)
+    # ⓓ D: 파생 (양쪽 완결 시) — ⚠️ **반올림 전 원값**에서 계산한다(V-116).
+    #    이미 반올림된 배열끼리 빼면 오차가 누적돼 실계정과 어긋난다(전 골든 11본 부채, §18 주석).
     if is_complete(series.get("revenue")) and is_complete(series.get("cogs")):
-        series["gross"] = [round(r - c, 1) for r, c in zip(series["revenue"], series["cogs"])]
+        series["gross"] = [r - c for r, c in zip(series["revenue"], series["cogs"])]
     if is_complete(series.get("ni")) and is_complete(series.get("oci")):
-        series["tci"] = [round(n + o, 1) for n, o in zip(series["ni"], series["oci"])]
+        series["tci"] = [n + o for n, o in zip(series["ni"], series["oci"])]
+
+    # ⓡ 반올림 일괄 적용 — 키마다 규모에 맞춘 자릿수(V-116)
+    for key, vals in list(series.items()):
+        series[key] = _round_scaled(vals, is_eps=(key == "eps"))
 
     # ⓝ N: rnd·dsOp 는 주석 추출(Phase4) 전까지 미완성
     incomplete = [k for k in SOURCE_MAP if not is_complete(series.get(k))]
