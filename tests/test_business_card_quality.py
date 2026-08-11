@@ -162,3 +162,27 @@ def test_product_service_table_wins_over_research_and_development_headings() -> 
         "의료기기",
         "화장품",
     ]
+
+
+def test_gcg_genome_uses_service_categories_and_comparative_history() -> None:
+    result = QUALITY.normalize_business_payload(
+        {
+            "stock_code": "340450",
+            "sector": "자연과학 및 공학 연구개발업",
+            "latest_year": {
+                "year": 2025,
+                "revenue": 31533860809,
+                "operating_income": 1235615079,
+                "net_income": 4044351288,
+            },
+        }
+    )
+
+    assert [card["title"] for card in result["business_cards"]] == [
+        "산전검사",
+        "암검사",
+        "유전희귀질환 검사",
+        "건강검진",
+    ]
+    assert len({card["image"] for card in result["business_cards"]}) == 4
+    assert [item["year"] for item in result["history"]] == [2023, 2024, 2025]

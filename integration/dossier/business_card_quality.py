@@ -17,6 +17,26 @@ IMG = "../data/business_images/"
 
 IMAGE_RULES: list[tuple[tuple[str, ...], str, str]] = [
     (
+        ("산전", "PRENATAL"),
+        "business_image_local_healthcare.svg",
+        "Local visual",
+    ),
+    (
+        ("암검사", "암스크린", "CANCER"),
+        "business_image_local_pharma.svg",
+        "Local visual",
+    ),
+    (
+        ("유전희귀", "희귀유전", "유전체", "GENETIC"),
+        "business_image_local_instrument.svg",
+        "Local visual",
+    ),
+    (
+        ("건강검진", "검진", "CHECKUP"),
+        "business_image_local_medical_device.svg",
+        "Local visual",
+    ),
+    (
         ("면제품", "라면", "당면", "국수", "NOODLE"),
         "business_image_food_noodle.svg",
         "Local visual",
@@ -225,6 +245,90 @@ KIND_IMAGE: dict[str, tuple[str, str]] = {
     "service": ("business_image_d205f8d7b04d385e.avif", "Unsplash"),
 }
 
+# A company can legitimately have several cards in the same broad industry.
+# Do not render those cards with an identical fallback image: pick the next
+# stable local visual when a more specific keyword did not select one.
+KIND_IMAGE_VARIANTS: dict[str, list[tuple[str, str]]] = {
+    "bank": [
+        ("business_image_local_bank.svg", "Local visual"),
+        ("business_image_local_card.svg", "Local visual"),
+        ("business_image_local_finance_hold.svg", "Local visual"),
+    ],
+    "securities": [
+        ("business_image_local_securities.svg", "Local visual"),
+        ("business_image_local_finance_hold.svg", "Local visual"),
+        ("business_image_local_cloud.svg", "Local visual"),
+    ],
+    "insurance": [
+        ("business_image_local_insurance.svg", "Local visual"),
+        ("business_image_local_healthcare.svg", "Local visual"),
+        ("business_image_local_finance_hold.svg", "Local visual"),
+    ],
+    "chip": [
+        ("business_image_local_semiconductor_part.svg", "Local visual"),
+        ("business_image_local_semiconductor_pkg.svg", "Local visual"),
+        ("business_image_local_silicon_part.svg", "Local visual"),
+        ("business_image_local_probe.svg", "Local visual"),
+    ],
+    "battery": [
+        ("business_image_local_battery.svg", "Local visual"),
+        ("business_image_local_chemical.svg", "Local visual"),
+        ("business_image_local_electrode_ring.svg", "Local visual"),
+    ],
+    "auto": [
+        ("business_image_local_auto_part.svg", "Local visual"),
+        ("business_image_local_tire.svg", "Local visual"),
+        ("business_image_local_machinery.svg", "Local visual"),
+    ],
+    "ship": [
+        ("business_image_local_ship.svg", "Local visual"),
+        ("business_image_local_offshore.svg", "Local visual"),
+        ("business_image_local_machinery.svg", "Local visual"),
+    ],
+    "bio": [
+        ("business_image_local_pharma.svg", "Local visual"),
+        ("business_image_local_healthcare.svg", "Local visual"),
+        ("business_image_local_instrument.svg", "Local visual"),
+        ("business_image_local_medical_device.svg", "Local visual"),
+    ],
+    "display": [
+        ("business_image_local_display.svg", "Local visual"),
+        ("business_image_local_electronic_part.svg", "Local visual"),
+        ("business_image_local_crystal.svg", "Local visual"),
+    ],
+    "telecom": [
+        ("business_image_local_network.svg", "Local visual"),
+        ("business_image_local_cable.svg", "Local visual"),
+        ("business_image_local_software.svg", "Local visual"),
+    ],
+    "power": [
+        ("business_image_local_power.svg", "Local visual"),
+        ("business_image_local_cable.svg", "Local visual"),
+        ("business_image_local_safety.svg", "Local visual"),
+    ],
+    "platform": [
+        ("business_image_local_software.svg", "Local visual"),
+        ("business_image_local_content.svg", "Local visual"),
+        ("business_image_local_cloud.svg", "Local visual"),
+    ],
+    "material": [
+        ("business_image_local_chemical.svg", "Local visual"),
+        ("business_image_local_steel.svg", "Local visual"),
+        ("business_image_local_rubber.svg", "Local visual"),
+    ],
+    "consumer": [
+        ("business_image_local_convenience.svg", "Local visual"),
+        ("business_image_local_cosmetics.svg", "Local visual"),
+        ("business_image_local_retail.svg", "Local visual"),
+    ],
+    "service": [
+        ("business_image_local_software.svg", "Local visual"),
+        ("business_image_local_mro.svg", "Local visual"),
+        ("business_image_local_default_a.svg", "Local visual"),
+        ("business_image_local_default_b.svg", "Local visual"),
+    ],
+}
+
 
 BAD_TITLE_PARTS = (
     "기타부문",
@@ -332,6 +436,32 @@ PRODUCT_KIND_RULES: list[tuple[tuple[str, ...], str, str]] = [
 
 
 COMPANY_OVERRIDES: dict[str, list[dict[str, str]]] = {
+    "340450": [
+        {
+            "title": "산전검사",
+            "caption": "임신 전·임신 중 유전질환 위험을 확인하는 유전자 검사 서비스입니다.",
+            "kind": "bio",
+            "visual": "PRENATAL",
+        },
+        {
+            "title": "암검사",
+            "caption": "유전체 분석을 바탕으로 암 위험과 관련 변이를 살피는 검사 서비스입니다.",
+            "kind": "bio",
+            "visual": "CANCER",
+        },
+        {
+            "title": "유전희귀질환 검사",
+            "caption": "희귀 유전질환의 원인을 찾기 위해 유전자·유전체를 분석하는 서비스입니다.",
+            "kind": "bio",
+            "visual": "GENETIC",
+        },
+        {
+            "title": "건강검진",
+            "caption": "유전체 정보를 활용해 건강 위험을 살피는 검진 서비스입니다.",
+            "kind": "bio",
+            "visual": "CHECKUP",
+        },
+    ],
     "317770": [
         {
             "title": "바이오인식 솔루션",
@@ -830,6 +960,8 @@ def is_good_product_name(name: str) -> bool:
         return False
     if clean == "제조":
         return False
+    if clean in {"용역", "제품외", "상품외", "제조외", "임대외", "투자외"}:
+        return False
     if any(part == clean for part in GENERIC_PRODUCT_PARTS):
         return False
     if re.fullmatch(r"제?\s*\d+\s*기", clean):
@@ -1289,7 +1421,20 @@ def cards_from_report_terms(payload: dict[str, Any]) -> list[dict[str, str]]:
     return result
 
 
-def choose_image(card: dict[str, Any], payload: dict[str, Any]) -> tuple[str, str]:
+def _first_unused_image(
+    candidates: list[tuple[str, str]], used_images: set[str]
+) -> tuple[str, str]:
+    for filename, source in candidates:
+        image = _image_path(filename)
+        if image not in used_images:
+            return image, source
+    filename, source = candidates[0]
+    return _image_path(filename), source
+
+
+def choose_image(
+    card: dict[str, Any], payload: dict[str, Any], used_images: set[str]
+) -> tuple[str, str]:
     card_text = " ".join(
         [
             _text(card.get("title")),
@@ -1298,30 +1443,34 @@ def choose_image(card: dict[str, Any], payload: dict[str, Any]) -> tuple[str, st
         ]
     )
     lower = card_text.lower()
+    candidates: list[tuple[str, str]] = []
     for words, filename, source in IMAGE_RULES:
         if any(word.lower() in lower for word in words):
-            return _image_path(filename), source
+            candidates.append((filename, source))
     sector_text = (
         f"{_text(payload.get('sector'))} " f"{_text(payload.get('display_category'))}"
     ).lower()
     for words, filename, source in IMAGE_RULES:
         if any(word.lower() in sector_text for word in words):
-            return _image_path(filename), source
+            candidates.append((filename, source))
     kind = _text(card.get("kind"))
-    filename, source = KIND_IMAGE.get(kind, KIND_IMAGE["service"])
-    return _image_path(filename), source
+    candidates.extend(KIND_IMAGE_VARIANTS.get(kind, []))
+    candidates.append(KIND_IMAGE.get(kind, KIND_IMAGE["service"]))
+    return _first_unused_image(candidates, used_images)
 
 
 def attach_images(
     cards: list[dict[str, Any]], payload: dict[str, Any]
 ) -> list[dict[str, Any]]:
     result: list[dict[str, Any]] = []
+    used_images: set[str] = set()
     for card in cards:
         clean = dict(card)
-        image, source = choose_image(clean, payload)
+        image, source = choose_image(clean, payload, used_images)
         clean["image"] = image
         clean["image_source"] = source
         result.append(clean)
+        used_images.add(image)
     return result
 
 
@@ -1437,6 +1586,55 @@ def normalize_business_payload(payload: dict[str, Any]) -> dict[str, Any]:
                 if card.get("title") not in {c.get("title") for c in cards}
             ]
     data["business_cards"] = attach_images(cards[:4], data)
+
+    # The 2025 annual report includes comparative 2024/2023 income-statement
+    # values, but the original integrated payload retained only 2025. Keep the
+    # report's comparative columns so the business tab does not claim they are
+    # unavailable.
+    if ticker == "340450":
+        latest = (
+            data.get("latest_year") if isinstance(data.get("latest_year"), dict) else {}
+        )
+        history = data.get("history") if isinstance(data.get("history"), list) else []
+        by_year = {
+            int(item.get("year")): item
+            for item in history
+            if isinstance(item, dict) and str(item.get("year", "")).isdigit()
+        }
+        by_year.update(
+            {
+                2023: {
+                    "year": 2023,
+                    "revenue": 27292051619,
+                    "cogs": 13594981381,
+                    "operating_income": 160076955,
+                    "net_income": -550095144,
+                },
+                2024: {
+                    "year": 2024,
+                    "revenue": 25887798646,
+                    "cogs": 14706763974,
+                    "operating_income": -1233500726,
+                    "net_income": -1256914171,
+                },
+                2025: latest,
+            }
+        )
+        data["history"] = [by_year[year] for year in sorted(by_year)]
+        data["custom_report_ideas"] = [
+            {
+                "title": "2025년 흑자 전환",
+                "value": "매출 315억 · 영업이익 12억",
+                "fact": "매출은 2024년 259억원에서 2025년 315억원으로 늘었고, 영업손실 12억원은 영업이익 12억원으로 전환했습니다.",
+                "view": "검사 서비스 매출 성장과 본업 수익성 회복이 함께 나타났는지 보는 것이 핵심입니다.",
+            },
+            {
+                "title": "유전체 검사 서비스 구성",
+                "value": "암검사 · 산전검사 · 유전희귀질환 · 건강검진",
+                "fact": "사업보고서의 주요 제품 및 서비스 표는 네 검사 서비스로 매출을 구분합니다.",
+                "view": "단일 제품 판매가 아니라 검사 목적별 서비스 포트폴리오로 매출을 만드는 구조입니다.",
+            },
+        ]
 
     snippets = data.get("snippets")
     if isinstance(snippets, dict):
