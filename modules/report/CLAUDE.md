@@ -23,7 +23,8 @@ series.py      firm_json + fs_account + (Phase4)주석추출 → S 24키×5점 (
 [생성기]       /galaxy-golden 스킬(S1~S5 루프: note-extractor→조립→prose-writer→accuracy-verifier→completeness-auditor)
                + check_golden.py(기계 게이트) + tests/report/test_galaxy_interaction.py(S6) → integration/dossier/data/galaxy_<t>.json
 ```
-DART 키 필요: `python -m modules.report.collector` / `.fs_enrich` / `.sectioner`.
+DART 키 필요: `python -m modules.report.collector` / `.fs_enrich --tickers <t>` / `.sectioner`.
+> ⚠️ `fs_enrich`는 `--tickers` 또는 `--all` **명시 필수**(V-115) — 종전엔 argparse가 없어 인자가 조용히 무시되고 전량이 돌았다.
 
 ## reports.db 비커밋 사유
 
