@@ -155,29 +155,32 @@
     "segment_finance": "신일제약은 정제·캡슐제·연고·플라스타제 등 다양한 제형의 의약품을 만드는 제약회사로, 자체 제품 외에 타 제약사를 위한 위탁생산(CDMO)도 함께 하고 있습니다. 최근에는 제약 기술을 활용해 '팜트리' 브랜드로 기능성 화장품과 건강기능식품 사업도 넓혀가고 있지만, 매출의 96%는 여전히 의약품에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 805억 원으로 전년 대비 9.9% 줄었고 영업이익은 73억 원으로 51.5%, 당기순이익은 75억 원으로 47.3% 각각 크게 감소했습니다. 다만 총자산은 1,694억 원으로 소폭 늘었고 부채비율은 11.2%로 매우 낮아 재무구조 자체는 안정적인 편입니다.",
     "segment_breakdown": [
       {
-        "name": "의약품(일반·전문·동물용·OEM)",
-        "desc": "정제·캡슐제·연고·주사제·플라스타제 등 다품종 의약품 및 CDMO(위탁생산)",
-        "revenue_share": 0.956
+        "name": "의약품 (일반 / 전문 동물용, OEM)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.2%",
+        "revenue_share": 0.092,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "화장품(팜트리)",
-        "desc": "제약기술 기반 기능성 화장품",
-        "revenue_share": 0.028
+        "name": "하루펜플라스타",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.3%",
+        "revenue_share": 0.033,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "건강기능식품",
-        "desc": "비타민 등 팜트리 건기식",
-        "revenue_share": 0.003
+        "name": "리피칸정",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.03,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "의약외품",
-        "desc": "황사마스크 등",
-        "revenue_share": 0.002
-      },
-      {
-        "name": "부동산업",
-        "desc": "임대수입",
-        "revenue_share": 0.011
+        "name": "스티모린",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.8%",
+        "revenue_share": 0.028,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -189,7 +192,37 @@
       "팜트리 화장품",
       "팜트리 건강기능식품"
     ],
-    "investor_note": "신일제약은 정제·캡슐제·연고·플라스타제 등 다양한 제형의 의약품을 만드는 제약회사로, 자체 제품 외에 타 제약사를 위한 위탁생산(CDMO)도 함께 하고 있습니다. 최근에는 제약 기술을 활용해 '팜트리' 브랜드로 기능성 화장품과 건강기능식품 사업도 넓혀가고 있지만, 매출의 96%는 여전히 의약품에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 805억 원으로 전년 대비 9.9% 줄었고 영업이익은 73억 원으로 51.5%, 당기순이익은 75억 원으로 47.3% 각각 크게 감소했습니다. 다만 총자산은 1,694억 원으로 소폭 늘었고 부채비율은 11.2%로 매우 낮아 재무구조 자체는 안정적인 편입니다."
+    "investor_note": "신일제약은 정제·캡슐제·연고·플라스타제 등 다양한 제형의 의약품을 만드는 제약회사로, 자체 제품 외에 타 제약사를 위한 위탁생산(CDMO)도 함께 하고 있습니다. 최근에는 제약 기술을 활용해 '팜트리' 브랜드로 기능성 화장품과 건강기능식품 사업도 넓혀가고 있지만, 매출의 96%는 여전히 의약품에서 나옵니다. 과거 공시 기반 참고 정보로, 최근 매출액은 805억 원으로 전년 대비 9.9% 줄었고 영업이익은 73억 원으로 51.5%, 당기순이익은 75억 원으로 47.3% 각각 크게 감소했습니다. 다만 총자산은 1,694억 원으로 소폭 늘었고 부채비율은 11.2%로 매우 낮아 재무구조 자체는 안정적인 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "의약품 (일반 / 전문 동물용, OEM)",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 9.2%",
+        "revenue_share": 0.092,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "하루펜플라스타",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.3%",
+        "revenue_share": 0.033,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "리피칸정",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 3.0%",
+        "revenue_share": 0.03,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "스티모린",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.8%",
+        "revenue_share": 0.028,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
@@ -205,7 +238,7 @@
       "caption": "제약 기술을 바탕으로 팜트리 브랜드 화장품을 판매합니다.",
       "kind": "consumer",
       "visual": "COSMETIC",
-      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
+      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
       "image_source": "Unsplash"
     },
     {
@@ -213,16 +246,16 @@
       "caption": "비타민 등 건강기능식품이 의약품 외 제품군을 보완합니다.",
       "kind": "consumer",
       "visual": "HEALTH",
-      "image": "../data/business_images/business_image_88477d76a420ca8a.avif",
-      "image_source": "Unsplash"
+      "image": "../data/business_images/business_image_local_convenience.svg",
+      "image_source": "Local visual"
     },
     {
       "title": "의약외품",
       "caption": "마스크 등 생활 방역·위생 관련 제품을 함께 취급합니다.",
       "kind": "bio",
       "visual": "MED",
-      "image": "../data/business_images/business_image_c346f28a524bc889.avif",
-      "image_source": "Unsplash"
+      "image": "../data/business_images/business_image_local_pharma.svg",
+      "image_source": "Local visual"
     }
   ],
   "custom_report_ideas": [

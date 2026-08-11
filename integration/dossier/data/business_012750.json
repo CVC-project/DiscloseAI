@@ -155,14 +155,32 @@
     "segment_finance": "에스원은 무인경비·출동 서비스인 물리보안과 해킹 방어 등 디지털보안을 아우르는 시큐리티 사업(48%), 건물 시설관리(FM)·자산관리(PM)와 보안시스템 구축(보안SI)을 담당하는 인프라 사업(52%)으로 구성된 국내 대표 종합 보안·부동산관리 기업입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 2조 8,894억 원으로 전년 대비 3.0% 늘었고 영업이익은 12.1%, 당기순이익은 1.0% 각각 증가해 안정적인 실적을 이어갔습니다. 감사인은 건물관리사업의 영업권 손상 여부를 핵심감사사항으로 짚었습니다. 부채비율은 38.5%로 낮은 편이라 재무구조가 안정적입니다.",
     "segment_breakdown": [
       {
-        "name": "인프라",
-        "desc": "부동산 시설·자산관리(FM/PM), 통합보안, 보안SI",
-        "revenue_share": 0.5153
+        "name": "시큐리티",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.6%",
+        "revenue_share": 0.4457,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "시큐리티",
-        "desc": "출동경비 등 물리보안, 디지털보안, 보안상품 판매",
-        "revenue_share": 0.4796
+        "name": "보안상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.0%",
+        "revenue_share": 0.0401,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "부문 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 48.0%",
+        "revenue_share": 0.4796,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "인프라",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.6%",
+        "revenue_share": 0.2862,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -175,7 +193,37 @@
       "블루스캔",
       "스마트케어존"
     ],
-    "investor_note": "에스원은 출동경비와 디지털 보안, 건물 시설관리(FM)·자산관리(PM), 보안SI를 함께 제공하는 보안·인프라 서비스 기업입니다."
+    "investor_note": "에스원은 출동경비와 디지털 보안, 건물 시설관리(FM)·자산관리(PM), 보안SI를 함께 제공하는 보안·인프라 서비스 기업입니다.",
+    "product_service_segments": [
+      {
+        "name": "시큐리티",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 44.6%",
+        "revenue_share": 0.4457,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "보안상품",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 4.0%",
+        "revenue_share": 0.0401,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "부문 계",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 48.0%",
+        "revenue_share": 0.4796,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "인프라",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 28.6%",
+        "revenue_share": 0.2862,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
@@ -199,8 +247,8 @@
       "caption": "기업·시설에 필요한 통합보안 시스템을 구축합니다.",
       "kind": "service",
       "visual": "SI",
-      "image": "../data/business_images/business_image_281a9ea62f3d74e6.avif",
-      "image_source": "Unsplash"
+      "image": "../data/business_images/business_image_local_software.svg",
+      "image_source": "Local visual"
     }
   ],
   "custom_report_ideas": [

@@ -26,6 +26,14 @@ _NON_BUSINESS_LABELS = {
     "비고",
     "구분",
     "품목",
+    # Revenue type labels are table metadata, not a product or service group.
+    "용역",
+    "매출유형",
+    "제품외",
+    "상품외",
+    "제조외",
+    "임대외",
+    "투자외",
 }
 
 
@@ -57,6 +65,20 @@ def _is_business_label(value: str) -> bool:
     return not any(
         token in label for token in ("연구부문", "개발부문", "용역기간", "판매금액")
     )
+
+
+def _business_label_from_row(row: list[Any]) -> str:
+    """Return the first real product/service label in a DART revenue row.
+
+    Some II.2 tables begin with a generic sales-type column such as ``용역``.
+    In that layout the following column, for example ``암검사``, is the item
+    an investor should see on a business card.
+    """
+    for value in row[:4]:
+        label = _text(value)
+        if _is_business_label(label):
+            return label
+    return ""
 
 
 def _find_chapter_ii(parsed: dict[str, Any]) -> dict[str, Any] | None:
@@ -117,7 +139,7 @@ def extract_product_service_segments(parsed: dict[str, Any]) -> list[dict[str, A
         for row in rows:
             if not isinstance(row, list) or not row:
                 continue
-            name = _text(row[0])
+            name = _business_label_from_row(row)
             share = _share_from_row(row)
             if share is None or share <= 0 or not _is_business_label(name):
                 continue

@@ -10,6 +10,7 @@ companies from their extracted DART business-section data.
 
 from __future__ import annotations
 
+import argparse
 import json
 import pathlib
 import sys
@@ -43,6 +44,39 @@ def product_segments_by_corp() -> dict[str, list[dict]]:
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--tickers",
+        nargs="+",
+        help="Restrict re-application to selected six-digit stock codes.",
+    )
+    parser.add_argument(
+        "--quality-report",
+        type=pathlib.Path,
+        help="Restrict re-application to companies with actionable issues in an audit report.",
+    )
+    parser.add_argument(
+        "--issue-types",
+        nargs="+",
+        default=(
+            "duplicate_generic_images",
+            "unfinished_caption",
+            "bad_caption",
+            "counterparty_text",
+            "bad_title",
+        ),
+        help="Audit issue types to repair when --quality-report is supplied.",
+    )
+    args = parser.parse_args()
+    requested = {str(ticker).zfill(6) for ticker in args.tickers or []}
+    if args.quality_report:
+        report = json.loads(args.quality_report.read_text(encoding="utf-8"))
+        actionable = set(args.issue_types)
+        requested.update(
+            str(company.get("code") or "").zfill(6)
+            for company in report.get("companies", [])
+            if actionable.intersection(company.get("issues") or [])
+        )
     curated = curated_tickers()
     product_segments = product_segments_by_corp()
     changed = 0
@@ -52,6 +86,8 @@ def main() -> int:
         if path.name == "business_index.json":
             continue
         ticker = path.stem.replace("business_", "")
+        if requested and ticker not in requested:
+            continue
         try:
             payload = json.loads(path.read_text(encoding="utf-8"))
         except Exception as exc:  # noqa: BLE001
@@ -82,7 +118,12 @@ def main() -> int:
             unchanged += 1
     print(
         json.dumps(
-            {"changed": changed, "unchanged": unchanged, "errors": errors},
+            {
+                "requested": len(requested),
+                "changed": changed,
+                "unchanged": unchanged,
+                "errors": errors,
+            },
             ensure_ascii=False,
         )
     )

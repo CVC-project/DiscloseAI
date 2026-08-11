@@ -89,16 +89,7 @@ for (const file of fs.readdirSync(DATA_DIR).filter((name) => /^business_\d{6}\.j
     if (sectorMismatch(payload, combined)) issues.push("sector_mismatch");
   }
   const images = cards.map((card) => clean(card.image)).filter(Boolean);
-  const genericImageDupes = [
-    "business_image_c346f28a524bc889.avif",
-    "business_image_d205f8d7b04d385e.avif",
-  ];
-  if (
-    cards.length >= 3 &&
-    images.length === cards.length &&
-    new Set(images).size === 1 &&
-    genericImageDupes.some((name) => images[0].includes(name))
-  ) {
+  if (cards.length >= 2 && images.length === cards.length && new Set(images).size < images.length) {
     issues.push("duplicate_generic_images");
   }
   for (const issue of issues) issueCounts[issue] = (issueCounts[issue] || 0) + 1;
@@ -117,10 +108,16 @@ const report = {
   scanned: fs.readdirSync(DATA_DIR).filter((name) => /^business_\d{6}\.json$/.test(name)).length,
   companies_with_issues: companies.length,
   issueCounts,
+  companies,
   sample: companies.slice(0, 30),
 };
 
 const reportDir = path.join(ROOT, "dossier", "reports");
 fs.mkdirSync(reportDir, { recursive: true });
 fs.writeFileSync(path.join(reportDir, "business_card_quality_quick.json"), JSON.stringify(report, null, 2), "utf8");
-console.log(JSON.stringify(report, null, 2));
+console.log(JSON.stringify({
+  scanned: report.scanned,
+  companies_with_issues: report.companies_with_issues,
+  issueCounts: report.issueCounts,
+  report: "integration/dossier/reports/business_card_quality_quick.json",
+}, null, 2));

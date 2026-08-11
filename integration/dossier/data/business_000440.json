@@ -155,24 +155,25 @@
     "segment_finance": "중앙에너비스는 1946년 설립돼 1972년부터 SK에너지 대리점으로 서울·경기·인천 지역에서 주유소 8곳과 LPG충전소·저유소·휴게소를 운영하는 석유류 판매회사로, 종속회사를 통해 태양광 발전 사업도 함께 하고 있습니다. 전기차 확산으로 주유 기능이 위축되자 보유 부동산을 임대·복합화하는 방향으로 사업을 전환하는 중입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 495억 원으로 전년과 비슷한 수준(-0.4%)이었고 영업손실 17억 원, 당기순손실 11억 원으로 적자가 이어지고 있습니다. 다만 부채비율은 5.7%로 매우 낮아 재무 안정성은 양호한 편입니다.",
     "segment_breakdown": [
       {
-        "name": "유류판매부문",
-        "desc": "일반유·LPG 도소매(SK에너지 대리점)",
-        "revenue_share": 0.956
+        "name": "유류판매부문外",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 95.6%",
+        "revenue_share": 0.956,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
-        "name": "용역수익부문",
-        "desc": "부대 용역수익",
-        "revenue_share": 0.021
+        "name": "용역수익부문外",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.1%",
+        "revenue_share": 0.021,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       },
       {
         "name": "임대부문",
-        "desc": "지점 부동산 임대(중화·의정부지점 등)",
-        "revenue_share": 0.023
-      },
-      {
-        "name": "전기부문(종속회사)",
-        "desc": "태양광 전기발전",
-        "revenue_share": 0.0002
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.3%",
+        "revenue_share": 0.023,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
       }
     ],
     "products": [
@@ -183,7 +184,30 @@
       "LPG",
       "태양광 전기(종속회사 에너비스솔라)"
     ],
-    "investor_note": "중앙에너비스는 1946년 설립돼 1972년부터 SK에너지 대리점으로 서울·경기·인천 지역에서 주유소 8곳과 LPG충전소·저유소·휴게소를 운영하는 석유류 판매회사로, 종속회사를 통해 태양광 발전 사업도 함께 하고 있습니다. 전기차 확산으로 주유 기능이 위축되자 보유 부동산을 임대·복합화하는 방향으로 사업을 전환하는 중입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 495억 원으로 전년과 비슷한 수준(-0.4%)이었고 영업손실 17억 원, 당기순손실 11억 원으로 적자가 이어지고 있습니다. 다만 부채비율은 5.7%로 매우 낮아 재무 안정성은 양호한 편입니다."
+    "investor_note": "중앙에너비스는 1946년 설립돼 1972년부터 SK에너지 대리점으로 서울·경기·인천 지역에서 주유소 8곳과 LPG충전소·저유소·휴게소를 운영하는 석유류 판매회사로, 종속회사를 통해 태양광 발전 사업도 함께 하고 있습니다. 전기차 확산으로 주유 기능이 위축되자 보유 부동산을 임대·복합화하는 방향으로 사업을 전환하는 중입니다. 과거 공시 기반 참고 정보로, 최근 매출액은 495억 원으로 전년과 비슷한 수준(-0.4%)이었고 영업손실 17억 원, 당기순손실 11억 원으로 적자가 이어지고 있습니다. 다만 부채비율은 5.7%로 매우 낮아 재무 안정성은 양호한 편입니다.",
+    "product_service_segments": [
+      {
+        "name": "유류판매부문外",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 95.6%",
+        "revenue_share": 0.956,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "용역수익부문外",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.1%",
+        "revenue_share": 0.021,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      },
+      {
+        "name": "임대부문",
+        "desc": "사업보고서 주요 제품·서비스 표 기준 매출 비중 2.3%",
+        "revenue_share": 0.023,
+        "source": "product_service_table",
+        "source_section": "II.2 주요 제품 및 서비스"
+      }
+    ]
   },
   "business_cards": [
     {
@@ -191,24 +215,24 @@
       "caption": "주유소와 대리점 채널을 통해 일반유·LPG 등 에너지 제품을 판매합니다.",
       "kind": "material",
       "visual": "OIL",
-      "image": "../data/business_images/business_image_c5e03278f3aee100.jpg",
-      "image_source": "Wikimedia Commons"
+      "image": "../data/business_images/business_image_local_chemical.svg",
+      "image_source": "Local visual"
     },
     {
       "title": "부대 용역",
       "caption": "유류 판매와 함께 발생하는 부대 서비스 수익을 더합니다.",
       "kind": "service",
       "visual": "SERVICE",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
+      "image": "../data/business_images/business_image_local_software.svg",
+      "image_source": "Local visual"
     },
     {
       "title": "부동산 임대",
       "caption": "보유 지점 부동산 임대수익이 보조 수익원으로 붙습니다.",
       "kind": "service",
       "visual": "RENT",
-      "image": "../data/business_images/business_image_d205f8d7b04d385e.avif",
-      "image_source": "Unsplash"
+      "image": "../data/business_images/business_image_local_mro.svg",
+      "image_source": "Local visual"
     },
     {
       "title": "태양광 발전",
