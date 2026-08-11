@@ -33,15 +33,18 @@ fs_account_xml 384행 ✓ · firm_json ✓
 fs_account 0행  →  series 완결 0/24 (24키 전부 미완성)
 ```
 
-**갈림길 — 리더 판단** (착수 첫머리에 확인할 것):
+**경로 확정 — (a) 즉시 착수** (리더 결정 2026-08-12, 병행 방침):
 
-- **(a) 즉시 착수**: `python -m modules.report.fs_enrich --tickers 240810` (DART 키 필요, 1사면 수 분).
-  이번 1본을 빨리 끝내는 길. 다음 골든마다 같은 작업이 반복된다.
-- **(b) 구조 해결 먼저**: `fs_parse`가 **13계정 → 본표 전 계정** 저장으로 확장 + `series.py`가
-  `fs_account_xml`을 소스로 인정. 그러면 **DART 재호출 없이 2,590사 전부** series가 선다.
-  비용: 저장 행수가 커진다(당기·CFS 우선만 저장하면 억제 가능). 이후 모든 골든·lite가 무료로 열린다.
+```bash
+python -m modules.report.fs_enrich --tickers 240810   # DART 키 필요, 1사면 수 분
+```
 
-권고는 **(a)로 1본 완주 → 틀 검증 후 (b)**. 틀이 안 맞으면 (b)에 들인 비용이 헛돈다.
+구조적 해결(= `fs_parse` 전 계정 확장 + `series.py`가 `fs_account_xml`을 소스로 인정)은
+**별도 plan으로 분리했다** — [ACCOUNT_SOURCE_PLAN.md](ACCOUNT_SOURCE_PLAN.md) R1~R2.
+그쪽은 R0(읽기 전용 실측)이 병행으로 돌므로 이 세션은 신경 쓰지 않는다.
+
+이유: R1~R4는 이 선결 조건을 구조적으로 없애지만, KOSDAQ 서술 틀이 안 맞으면 그 비용이 헛돈다.
+틀을 먼저 검증하는 게 순서다.
 
 ## 실행 규약
 
