@@ -66,6 +66,33 @@ class FsAccount(Base):
     currency = Column(String, default="KRW")
 
 
+class FsAccountXml(Base):
+    """원문 XML 본표 파싱 결과 (fs_parse.py). fs_account(DART API=정답지)와 **별도 테이블**.
+
+    한 보고서에 당기·전기·전전기 3열이 있어 (ticker, fiscal_year)당 여러 보고서가 후보가 된다.
+    `col_kind` 0=당기 · 1=전기 · 2=전전기 — 소비 측은 **작은 값 우선**으로 접는다
+    (전전기 열은 재작성값일 수 있다 — FS_PARSE_PLAN §7.4).
+    """
+
+    __tablename__ = "fs_account_xml"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    rcept_no = Column(String, index=True)  # 이 값을 실은 보고서
+    ticker = Column(String, nullable=False, index=True)
+    fiscal_year = Column(Integer, nullable=False, index=True)  # 이 금액이 속한 사업연도
+    src_fiscal_year = Column(Integer, index=True)  # 보고서 자체의 사업연도
+    col_kind = Column(Integer)  # 0=당기 1=전기 2=전전기
+    fs_div = Column(String, index=True)  # CFS(연결) | OFS(별도)
+    sj_div = Column(String, index=True)  # BS/IS/CIS/CF/SCE
+    account_key = Column(String, index=True)  # revenue/cogs/... (fs_parse.ACCOUNT_RULES 키)
+    match_rank = Column(Integer)  # 채택된 규칙 순위 (1=표준계정ID, 2+=계정명)
+    account_id = Column(String, index=True)  # ACODE (구형식·FY23은 빈 문자열)
+    account_nm = Column(String)
+    amount = Column(Float)  # 원 단위 (표 단위 스케일링 적용 후)
+    unit_scale = Column(Float)  # 적용한 배율 (1 / 1e3 / 1e6)
+    currency = Column(String, default="KRW")
+
+
 class PipelineState(Base):
     """rcept×target(collect/section/enrich/series/generate)별 진행 상태."""
 
