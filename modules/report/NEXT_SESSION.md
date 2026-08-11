@@ -1,58 +1,106 @@
-# 다음 세션 프롬프트 — Wave 2 종료 후 트랙 선택 · 브랜치 `feat/golden-wave2-industries`
+# 다음 세션 프롬프트 — **KOSDAQ 첫 골든(292 반도체·디스플레이 장비)** · 새 브랜치
 
-> 이 파일은 다음 세션에 붙여넣을 핸드오프다. 갱신: 2026-08-06.
+> 이 파일은 다음 세션에 붙여넣을 핸드오프다. 갱신: 2026-08-12.
+> 로드맵 근거는 [MILKYWAY_GENERATOR.md 부록 A](MILKYWAY_GENERATOR.md)(실측), 데이터 근거는 [FS_PARSE_PLAN.md §10](FS_PARSE_PLAN.md).
 
-## 🎉 현재 상태 — 섹터 20/20 완성
+## 현재 상태
 
-**골든 20본 전원 `--strict` §1~§19 갭 0.** 삼성 005930(T0) + T1 19사.
-Wave 2 신규 산업 8본이 전부 끝났다 — 철강 004020(V-102) · 정유 010950(V-104) · 식품 097950(V-105) ·
-유통 139480(V-107) · 항공 003490(V-109) · 게임 259960(V-111) · 엔터 352820(V-112) ·
-**유틸리티 015760(V-113, 08-06)**. 8본 모두 **`--strict` 첫 조립 0**(retrofit 라운드 0)으로 완주했다.
+- **골든 20/20 · lite 23본 — 전부 KOSPI.** KOSDAQ 골든 **0본**.
+- **데이터는 다 있다**: `fs_parse` 전량 완주로 `fs_account_xml` **2,590사 · 816,306행 · 217,231셀**(FY2019~2025),
+  정답지 55사 대비 **G1 일치율 100.00%**. firm JSON 매출 오염도 **67사·132셀 보정** 완료(FN-025 해소).
+- **병목이 뒤집혔다** — 이제 부족한 건 데이터가 아니라 **해석 템플릿(골든)**이다.
+  파싱된 2,590사 중 **2,111사(81%)가 골든 없는 산업**이고, 그중 KOSDAQ 미커버가 **1,464사**다.
 
-- `WAVE2_BATCH_PROMPT.md`는 **삭제**했고, 반복 방지 체크리스트 29항은
-  **[BUILD_CHECKLIST.md](BUILD_CHECKLIST.md)로 승격 이관**했다(신규 골든 착수 시 필독).
-- 이번 세션에 **`check_golden --strict` §19 신설**(V-112 C 승격) + `facts_lint` 인코딩 수정.
-- 확인 URL: `python -m http.server 8000` → `http://localhost:8000/integration/dossier/galaxy.html?ticker=015760`
+## ▶ 이번 세션 목표 — 원익IPS 240810 골든 1본 완주
 
-## ✅ 리더 판단 대기 — **없음**
+**왜 이 회사인가** (리더 결정 2026-08-12):
+- 292 특수 목적용 기계 = 미커버 **163사(KOSDAQ 145)**로 갭 최대.
+- 이미 완주한 반도체 골든(삼성전자·SK하이닉스)의 **하류 밸류체인**이라 서술 재사용이 가장 크다.
+- 원익IPS는 FY2024 매출 7,482억·영업이익 106억으로 **KOSDAQ 중형 흑자 제조**의 전형.
+  (SFA 056190은 매출 2조지만 영업적자 −484억, 피엔티 137400은 2차전지 장비라 클러스터가 어긋난다.)
+- **이 1본의 진짜 목적은 산업 커버가 아니라 "KOSDAQ 소형·중형 제조" 서술 틀을 세우는 것**이다.
+  기존 20본은 전부 대형 KOSPI라 틀이 안 맞는다 — 매출 중앙값이 9배 차이(6,352억 vs 699억),
+  적자비율 39.7% vs 20.3%. 이 틀이 서야 2~4순위 산업 골든이 KOSDAQ 1,761사에 쓰인다.
 
-발견하면 채록하고 **고치는 데까지 간다**(V-110 교훈). 대기열에 넣는 건 ⓐ진짜 갈림길(작업 *순서* 등)
-ⓑ리더만 아는 사업 판단일 때뿐이다.
+## ⚠️ 착수 전 선결 1건 — **`fs_account`가 비어 있다** (실측 완료, 추정 아님)
 
-## 🆕 직전 세션(한국전력 V-113)에서 새로 박힌 것 — 착수 전 필독
+`series.py`는 경계 단방향 원칙상 **`fs_account`(reports.db)만** 읽는다 — firm_json은 integration 소유라 안 읽는다.
+그런데 `fs_enrich`(DART API)는 골든 클러스터 **55사에만** 돌렸다. 240810 실측:
 
-1. **viz가 0장이어도 `--strict` 19개 절이 전부 통과한다.** 산문 배치 프롬프트에 viz 지시를 빼먹었더니
-   58장 전부 `why.viz=null`인 채 게이트 0이 나왔다(직전 골든은 25~39장). `VIZ_ITEM_FIELDS`(V-112 A)는
-   **viz가 지정된 카드만** 보므로 '한 장도 없음'은 사각이다. → **S2 조립 때 viz를 코드로 배정**하고,
-   완주 보고에 `viz N장`을 반드시 적을 것.
-2. **`strings.intro_lines`는 정확히 2줄로 저작하라.** 렌더러는 `[0]`·`[1]`만 바인딩하는데 §16은 `≥2`만
-   요구해, 3줄을 쓰면 3번째가 조용히 죽고 게이트는 0이다(V-109 C·V-110의 3회째).
-3. **§19는 '창 밖 근거'만 차단한다** — `N ≥ 5`인데 `처음`·`첫` 표지가 없을 때만 발화하므로,
-   **"2년 만에"처럼 창 안 거리로 잘못 센 서술은 못 잡는다**(한전 strings에서 실제로 통과, 실제는 3년).
-   경과연수는 **series 배열로 손으로 재계수**하는 습관을 유지할 것.
-4. **은닉 제4형** — 재무상태표가 금융/비금융 뭉치로만 묶여 개별 계정 자체가 없는 회사가 있다.
-   차입금·사채 [129.77조]가 이름 없이 뭉치 안에 있었다. 처방은 뭉치 행 앵커 + `hl`, 또는 **흐름 행 앵커**
-   (`n23`→`cf-fin-lease`, V-111③ 2회째). 패턴표 참조.
-5. **S0 가설은 실주석이 반증한다(2회째)** — 핸드오프가 기타자본 [12.71조]를 신종자본증권으로 지목했으나
-   실제는 **법률상재평가적립금**이었다. 가설을 산문에 그대로 실으면 REFUTED 확정이다.
-6. **병렬 서브에이전트의 임시 스크립트는 고유 파일명으로** — 공용 스크래치에서 `build_facts.py` 같은
-   범용 이름을 4명이 동시에 써 서로의 파일을 덮어썼다. 호출 프롬프트에 명시할 것(2회째면 계약 승격).
-7. **모든 서브에이전트 호출 프롬프트에 이 한 줄을 유지할 것** (V-113에서도 재발 0):
-   > 저장소 안의 파일을 삭제·이동하지 말 것. 임시 파일은 지정된 스크래치 경로에만 만들고, 정리도 하지 말 것.
-8. **prose-writer에는 Write 도구가 없다**(`tools: Read`) — 산출물은 인라인으로 돌아오니 **출력 축약을
-   프롬프트에 명시**하라(`what/links/lnote/why/five` + n카드는 `tag`/`amt`까지). note-extractor·
-   accuracy-verifier·completeness-auditor는 Bash가 있어 파일 출력이 된다.
+```
+report_raw 5개년(2021~2025) ✓ · sectioner --health OK ✓ · report_section 182건 ✓
+fs_account_xml 384행 ✓ · firm_json ✓
+fs_account 0행  →  series 완결 0/24 (24키 전부 미완성)
+```
 
----
+**갈림길 — 리더 판단** (착수 첫머리에 확인할 것):
 
-## ▶ 다음 트랙 — 셋 중 하나를 골라 착수 (리더 선택)
+- **(a) 즉시 착수**: `python -m modules.report.fs_enrich --tickers 240810` (DART 키 필요, 1사면 수 분).
+  이번 1본을 빨리 끝내는 길. 다음 골든마다 같은 작업이 반복된다.
+- **(b) 구조 해결 먼저**: `fs_parse`가 **13계정 → 본표 전 계정** 저장으로 확장 + `series.py`가
+  `fs_account_xml`을 소스로 인정. 그러면 **DART 재호출 없이 2,590사 전부** series가 선다.
+  비용: 저장 행수가 커진다(당기·CFS 우선만 저장하면 억제 가능). 이후 모든 골든·lite가 무료로 열린다.
 
-### 트랙 A. T2 클러스터 확장 (**별도 브랜치** 필수)
-20클러스터의 나머지 기업을 각자 T1을 견본으로 캐스케이드(MILKYWAY §8.5).
-현재 미작성 기업이 남은 섹터: **중공업방산 11사 · 2차전지화학 3 · 반도체 2 · 자동차 2 · 건설 2 ·
-바이오 1 · 플랫폼 1 · 에너지소재 1**. 착수 전 `corps.csv`의 `cluster`·`tier`로 대상 확정.
+권고는 **(a)로 1본 완주 → 틀 검증 후 (b)**. 틀이 안 맞으면 (b)에 들인 비용이 헛돈다.
 
-### 트랙 B. 렌더러 트랙 (콘텐츠 무관 · 전 골든 동형)
+## 실행 규약
+
+**브랜치**: `feat/golden-kosdaq-292` 를 `dev`(또는 리더 지정)에서 새로 판다. main 직접 push·force push 금지.
+
+선행 정본을 이 순서로 읽는다:
+[MILKYWAY_GENERATOR.md](MILKYWAY_GENERATOR.md)(하네스 + **부록 A 로드맵**) → [VARIATIONS.md](VARIATIONS.md)(S0 전체 정독) →
+[BUILD_CHECKLIST.md](BUILD_CHECKLIST.md)(29항) → [.claude/skills/galaxy-golden/SKILL.md](../../.claude/skills/galaxy-golden/SKILL.md)
+
+### S0 프리플라이트
+```bash
+export PYTHONUTF8=1
+python -m modules.report.fs_enrich --tickers 240810   # ← 선결 (a) 선택 시. DART 키 필요
+python -m modules.report.sectioner --health 240810
+python -m modules.report.series 240810                # 완결 N/24 를 보고에 적을 것
+python integration/dossier/build_report_source.py 240810
+```
+`corps.csv`에 240810은 있으나 `cluster`·`tier`가 **비어 있다** — 착수 시 `cluster=반도체장비`(신규) 부여를 함께 결정할 것.
+신규 클러스터를 만들면 [sector_golden_map.csv](data/sector_golden_map.csv)에 `반도체장비,prefix,292,...` 한 줄을 더해
+`fs_parse --scope sector-golden` 범위도 같이 넓어진다.
+
+### 완주 정의
+```bash
+python -m modules.report.facts_lint 240810              # ERROR 0
+python -m modules.report.check_golden 240810 --strict   # §1~§19 갭 0(무핀 0 포함)
+python -m modules.report.check_golden 240810 --links    # 계정셀 링크 실측 → 보고
+python -m modules.report.check_golden --all --strict    # 전 골든 무회귀(현재 20본 0)
+GALAXY_TICKER=240810 python -m pytest tests/report/test_galaxy_interaction.py
+python -m pytest tests/report/ -q
+```
+\+ **accuracy-verifier REFUTED 0** · **completeness 삼성 T0 패리티** · **라이브 렌더 스윕**(클릭 사이 **Esc** 필수 ·
+APPENDIX 나브 접힘 0@1440·1280·1024 · 1024px 가로 오버플로 0 · 콘솔 0 · **원문 TOC 전 주석 착지 실패 0** ·
+**viz 박스가 실제로 그려지는지 눈으로 확인**)
+
+완주 후: VARIATIONS 정본 §4에 **V-114부터** 채록(증상→원인→**게이트가 왜 못 잡았나**→처리) + 채록 로그 1줄 ·
+`corps.csv` cluster·tier 부여 · `build_report_source.py 240810` · `build_galaxy_index.py` · 1커밋.
+
+> ⚠️ **KOSDAQ 첫 본이라 변형이 쏟아질 것으로 예상한다.** 기존 20본에서 안 나온 실패는 전부
+> VARIATIONS에 채록하고, **2회 반복되면 코드·조문으로 승격**한다(MILKYWAY §9).
+> 특히 소형사에서 흔한 것: 부문정보 없음 · 성격별 비용(cogs/gross 결측) · 연결 미작성(별도만) ·
+> 주석 수 적음 · 분기 급변동. `five=skip` 남발 대신 **그 회사 보고서가 정의하는 구조**를 따를 것(§4).
+
+## 보고 규약 (컨텍스트 절약 — 리더 지시 2026-08-03)
+
+- **착수** 1줄: `[티커/회사] S0: health OK · series N/24 · 주석 M개`
+- **단계 전환** 1줄: `S1 fact N건 / S2 dive N장 / S3 산문 N카드`
+- **게이트**: 숫자만 — `strict 0 · --all 20본 0 · accuracy REFUTED n건(정정) · links N/N · viz N장 · pytest N + 인터랙션 N/M`
+- **완주**: 5줄 이내 + localhost URL
+- **상세 보고는** ⓐ게이트 3회 미수렴 ⓑ리더 판단 필요한 구조 결정 ⓒ데이터 결함 ⓓ코드 승격 후보(2회+) **일 때만**
+- **금지**: 파일 내용·JSON·카드 목록 덤프 · 카드별 산문 나열 · 진행 과정 서술 · 이미 문서에 있는 규칙 재설명
+
+## 대기 중인 백로그 (이번 세션 대상 아님)
+
+### 신규 골든 2~4순위 (부록 A.2)
+582 소프트웨어 143사 → 303 자동차부품 103사 → 262/212/204 (132/104/94).
+**별도 유형**: 701 연구개발업 62사 + 적자형 229사 — 매출 미미·적자가 정상이라 **새 서술 유형 설계** 필요.
+**별도 트랙**: 금융 118사 — top line 정의부터 다름.
+
+### 렌더러 부채 (콘텐츠 무관 · 전 골든 동형)
 1. **dead-click 2~3행**(V-059) — 그룹헤더 행에서 펼침 캐럿이 정중앙 클릭을 가로챈다. 처방 후보: 캐럿 `marginLeft:auto`.
 2. **900px 나브 접힘**(V-103) — 1440·1280·1024는 전 골든 0이나 900px에서는 공통으로 접힌다.
 3. **`five.valley`가 `anchor.label`을 그대로 찍는 문제**(V-111 B → strict 게이트 **기각 확정**) —
@@ -60,61 +108,24 @@ Wave 2 신규 산업 8본이 전부 끝났다 — 철강 004020(V-102) · 정유
 4. **JOURNEY 하이라이트 데드존**(V-111 C) — 인터랙션 테스트가 결정론적으로 skip되는 구간.
 5. **`intro_lines` 3번째 줄 바인딩**(V-113 B) — 게이트(`≥2`)와 렌더러(`정확히 2`)의 비대칭 해소.
 
-### 트랙 C. 데이터 부채 정리
+### 데이터 부채
 1. **`series.py` `gross` 실계정 승격 캐스케이드**(V-112 후속) — 파생 `revenue−cogs`가 실계정과 어긋나는 게
    **11본**(000660·000720·003490·005380·010130·011200·012450·033780·051910·097950·139480)에 퍼져 있고
    그 11본은 **k4 산문이 전부 옛 파생값을 인용**한다. 데이터+산문 동시 수리가 필요하다.
 2. **viz 하한 게이트**(V-113 A) — `--strict`에 '흐름 dive 중 viz 지정 ≥ N'. **기존 골든 실측 후 임계 결정.**
 3. **`strings.header`·`hero` 중복 저작 정리**(V-110 후단) · **`report_<t>.json` 완전성 계측**(V-109 사각 A).
-4. **클러스터 미부여 2,596사** — `corps.csv`의 `cluster` 열은 55사에만 붙어 있다. 순수화학·제약·조선·
-   미디어광고·호텔레저·기계 등은 **섹터 정의 자체가 아직 없다**(신규 클러스터 선정이 별도 과제).
-5. **금융 8사·지주 4사 스코프아웃** — 계정 체계가 달라 별도 변형 템플릿 대상(MILKYWAY §8.5).
-
----
-
-## 실행 규약 (트랙 A를 고른 경우)
-
-선행 정본을 이 순서로 읽는다:
-[MILKYWAY_GENERATOR.md](MILKYWAY_GENERATOR.md)(하네스) → [VARIATIONS.md](VARIATIONS.md)(S0 전체 정독) →
-[BUILD_CHECKLIST.md](BUILD_CHECKLIST.md)(29항) → [.claude/skills/galaxy-golden/SKILL.md](../../.claude/skills/galaxy-golden/SKILL.md)
-
-### S0 프리플라이트
-```bash
-export PYTHONUTF8=1
-python -m modules.report.sectioner --health <ticker>
-python -m modules.report.series <ticker>
-python integration/dossier/build_report_source.py <ticker>   # 패널 C 소스(체크리스트 28항)
-```
-
-### 완주 정의
-```bash
-python -m modules.report.facts_lint <t>                 # ERROR 0
-python -m modules.report.check_golden <t> --strict      # §1~§19 갭 0(무핀 0 포함)
-python -m modules.report.check_golden <t> --links       # 계정셀 링크 실측 → 보고
-python -m modules.report.check_golden --all --strict    # 전 골든 무회귀(현재 20본 0)
-GALAXY_TICKER=<t> python -m pytest tests/report/test_galaxy_interaction.py
-python -m pytest tests/report/ -q                       # 현재 219 passed, 3 skipped
-```
-\+ **accuracy-verifier REFUTED 0** · **completeness 삼성 T0 패리티** · **라이브 렌더 스윕**(클릭 사이 **Esc** 필수 ·
-APPENDIX 나브 접힘 0@1440·1280·1024 · 1024px 가로 오버플로 0 · 콘솔 0 · **원문 TOC 전 주석 착지 실패 0** ·
-**viz 박스가 실제로 그려지는지 눈으로 확인**)
-
-완주 후: VARIATIONS 정본 §4에 **V-114부터** 채록(증상→원인→**게이트가 왜 못 잡았나**→처리) + 채록 로그 1줄 ·
-`corps.csv` tier 승격 · `build_report_source.py <t>` · `build_galaxy_index.py` · 1커밋.
-
-## 보고 규약 (컨텍스트 절약 — 리더 지시 2026-08-03)
-
-- **착수** 1줄: `[티커/회사] S0: health OK · series N/24 · 주석 M개`
-- **단계 전환** 1줄: `S1 fact N건 / S2 dive N장 / S3 산문 N카드`
-- **게이트**: 숫자만 — `strict 0 · --all 20본 0 · accuracy REFUTED n건(정정) · links N/N · viz N장 · pytest 219 + 인터랙션 N/M`
-- **완주**: 5줄 이내 + localhost URL
-- **상세 보고는** ⓐ게이트 3회 미수렴 ⓑ리더 판단 필요한 구조 결정 ⓒ데이터 결함 ⓓ코드 승격 후보(2회+) **일 때만**
-- **금지**: 파일 내용·JSON·카드 목록 덤프 · 카드별 산문 나열 · 진행 과정 서술 · 이미 문서에 있는 규칙 재설명
+4. **`strings.overview` 키 부재** — `tests/report/test_strings_knots_gate.py`가 전 `galaxy_lite_*.json`에서
+   실패한다(현재 **24건**, 브랜치 기존 baseline). 빌더 스키마 ↔ 테스트 요구 불일치라 한쪽을 맞춰야 한다.
+5. **`[첨부정정]` 재수집 104건** — [fs_parse_failures.csv](data/fs_parse_failures.csv)가 입력.
+   `report_raw`는 (ticker,fy)당 rcept 1건이라 폴백할 원본이 로컬에 없다 → **collector 재수집**으로만 풀린다.
+6. **financial `collector.py` 근본 수정 미완** — 조건 없는 이자수익 별칭 + first-wins가 **그대로다**.
+   다음 수집에서 FN-025 오염이 재발한다. financial(A) 소관이라 담당자 PR 필요.
 
 ## 주의
 
 - 인코딩 `PYTHONUTF8=1`. 로컬 서버 `python -m http.server 8000`.
 - `reports.db`(shared/data/)·`facts/`·`raw_cache/`는 gitignore — `--strict` §7·§10·§13·`--links`·`facts_lint`는
   **이 머신에서만** 유효(CI skip).
-- **main 직접 push·force push 금지.** T2 확장은 **별도 브랜치**에서.
+- **main 직접 push·force push 금지.** 신규 골든은 **별도 브랜치**에서.
 - ⚠️ **세션 한도**로 서브에이전트가 중도 실패할 수 있다 — 실패하면 그 단계를 **직접** 수행하거나 재실행할 것.
+- ⚠️ **"준비됨" 전제를 믿지 말고 S0에서 실측할 것.** 이번 핸드오프의 `fs_account 0행`이 그렇게 발견됐다.
