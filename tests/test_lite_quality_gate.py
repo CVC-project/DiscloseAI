@@ -184,6 +184,44 @@ def test_notes_thread_is_checked_independently() -> None:
     assert any(e.startswith("R9") and "n2" in e for e in GATE.check_doc("999999", d))
 
 
+def test_segments_schema_drift_is_normalized_not_silently_dropped() -> None:
+    """FN-024 — fact 추출은 기업마다 새 실행이라 segments 스키마가 흔들린다.
+
+    `segment`(이름 키가 다름)·`revenue_won_cur`(당기/전기 한 행) 두 변종을 실제로 받았다.
+    조용히 누락되면 카드가 근거 없는 값을 참조하게 되므로, 정규화하거나 세워야 한다.
+    """
+    inject_path = (
+        Path(__file__).resolve().parents[1] / "integration" / "dossier" / "inject_lite_notes.py"
+    )
+    spec = importlib.util.spec_from_file_location("inject_lite_notes", inject_path)
+    assert spec and spec.loader
+    inject = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(inject)
+
+    # 변종 A: name 대신 segment
+    flat = inject.flatten_facts(
+        {"facts": [], "segments": [{"segment": "A/S", "period": "당기", "revenue_won": 5, "op_won": 1}]}
+    )
+    assert flat["seg_A/S_rev"] == 5 and flat["seg_A/S_op"] == 1
+
+    # 변종 B: 당기·전기가 한 행에 _cur/_prior로
+    flat = inject.flatten_facts(
+        {
+            "facts": [],
+            "segments": [{"segment": "배터리", "revenue_won_cur": 7, "revenue_won_prior": 6,
+                          "op_won_cur": -1, "op_won_prior": -2}],
+        }
+    )
+    assert flat["seg_배터리_rev"] == 7 and flat["seg_배터리_rev_prior"] == 6
+    assert flat["seg_배터리_op"] == -1 and flat["seg_배터리_op_prior"] == -2
+
+    # 이름이 없으면 조용히 넘기지 않고 세운다 (seg__rev 로 뭉개지는 것 방지)
+    import pytest
+
+    with pytest.raises(SystemExit):
+        inject.flatten_facts({"facts": [], "segments": [{"period": "당기", "revenue_won": 1}]})
+
+
 def test_real_outputs_pass_the_gate() -> None:
     """실제 산출물 전수 — 회귀가 들어오면 여기서 먼저 터진다."""
     data = Path(__file__).resolve().parents[1] / "integration" / "dossier" / "data"

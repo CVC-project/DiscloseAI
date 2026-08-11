@@ -212,14 +212,43 @@ def verify_quotes(facts_doc: dict[str, Any], rcept_no: str | None) -> list[str]:
     return errs
 
 
+def normalize_segments(segments: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """segments를 (name, period, revenue_won, op_won) 한 형태로 맞춘다.
+
+    fact 추출은 매 기업 새 실행이라 **스키마가 조용히 흔들린다** — 실제로 `name` 대신
+    `segment`, 당기/전기 분리 행 대신 `revenue_won_cur`/`_prior` 한 행으로 온 적이 있다.
+    그대로 두면 부문 키가 통째로 사라지거나 이름 없는 키로 뭉개져(seg__rev) 값이
+    엉뚱하게 덮인다. 여기서 허용 형태를 명시하고, 벗어나면 **조용히 넘기지 않고 세운다**.
+    """
+    out: list[dict[str, Any]] = []
+    for i, s in enumerate(segments):
+        nm = (s.get("name") or s.get("segment") or "").strip()
+        if not nm:
+            raise SystemExit(f"[FATAL] segments[{i}]에 부문 이름이 없어요 (name/segment 키 확인)")
+        if "revenue_won" in s or "op_won" in s:
+            out.append({"name": nm, "period": s.get("period", "당기"),
+                        "revenue_won": s.get("revenue_won"), "op_won": s.get("op_won")})
+        elif "revenue_won_cur" in s or "op_won_cur" in s:
+            out.append({"name": nm, "period": "당기",
+                        "revenue_won": s.get("revenue_won_cur"), "op_won": s.get("op_won_cur")})
+            out.append({"name": nm, "period": "전기",
+                        "revenue_won": s.get("revenue_won_prior"), "op_won": s.get("op_won_prior")})
+        else:
+            raise SystemExit(
+                f"[FATAL] segments[{i}] '{nm}' 형태를 모르겠어요 — "
+                "revenue_won(+period) 또는 revenue_won_cur/_prior 중 하나여야 해요"
+            )
+    return out
+
+
 def flatten_facts(doc: dict[str, Any]) -> dict[str, float]:
     out: dict[str, float] = {}
     for f in doc.get("facts", []):
         if f.get("value_won") is not None:
             out[f["key"]] = float(f["value_won"])
-    for s in doc.get("segments", []):
-        per = "_prior" if s.get("period") == "전기" else ""
-        nm = s.get("name", "").strip()
+    for s in normalize_segments(doc.get("segments", [])):
+        per = "_prior" if s["period"] == "전기" else ""
+        nm = s["name"]
         if s.get("revenue_won") is not None:
             out[f"seg_{nm}_rev{per}"] = float(s["revenue_won"])
         if s.get("op_won") is not None:
