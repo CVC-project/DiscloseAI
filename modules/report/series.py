@@ -50,7 +50,12 @@ SOURCE_MAP: dict[str, dict] = {
     },
     # 성격별/판관 2 (주석 의존)
     "dep": {"src": "B|N", "acc": ["ifrs-full_DepreciationAndAmortisationExpense"]},
-    "rnd": {"src": "N", "note": "연구개발활동 / 성격별비용"},
+    # ⚠️ V-116 승격 — `rnd`는 주석 전용이 아니다. R&D 집약 업종은 **손익계산서 본표에
+    #    `경상연구개발비` 실계정**을 둔다(원익IPS 240810: 총이익−판관비−R&D=영업이익 항등식이
+    #    FY23·24·25 전부 0.00억 오차로 성립). 정답지 55사 중 **13사**가 IS/CIS 실계정 보유
+    #    (8사는 5개년 전부) → 2회+ 규칙 충족. 없으면 종전대로 주석 추출(N) 소관.
+    "rnd": {"src": "B|N", "acc": ["ifrs-full_ResearchAndDevelopmentExpense"],
+            "note": "경상연구개발비 실계정 우선 · 없으면 연구개발활동/성격별비용 주석"},
     # BS 4
     "cash": {"src": "A|B", "acc": ["ifrs-full_CashAndCashEquivalents"]},
     "assets": {"src": "A|B", "acc": ["ifrs-full_Assets"]},
@@ -71,6 +76,7 @@ SJ_PRIORITY: dict[str, list[str]] = {
     "ocf": ["CF"], "icf": ["CF"], "capex": ["CF"], "fin": ["CF"],
     "div": ["CF"], "buyback": ["CF"], "dep": ["CF", "IS"],
     "cash": ["BS"], "assets": ["BS"], "debt": ["BS"], "equity": ["BS"],
+    "rnd": ["IS", "CIS"],
 }
 
 YEARS_LEN = 5
@@ -203,6 +209,10 @@ ALT_NAME: dict[str, str] = {
     #    (V-105 ③ `pretax−ni` 파생과 같은 사고 계열). 판정은 _eps_basis_ok()가 연도별로 한다.
     "eps": r"^(계속영업\s*)?기본주당(순)?이익",
     "dep": r"감가상각비",
+    # 원익IPS 240810 — FY21~23은 `-표준계정코드 미사용-`, FY24~25는 `ifrs-full_ResearchAndDevelopmentExpense`로
+    # account_id가 갈린다(V-061 변이의 전형). ⚠️ **앵커 고정 필수** — 앵커를 풀면
+    # `정부보조금(연구개발비)`·`연구개발비환입` 같은 구성·조정 항목이 본계정을 밀어낸다.
+    "rnd": r"^(경상)?연구개발비$|^연구개발비용$|^경상개발비$",
     # 크래프톤 259960 — 게임·플랫폼형은 최상단 계정명이 `매출액`이 아니라 `영업수익`이고,
     # FY21·22는 `-표준계정코드 미사용-`, FY23~25는 `ifrs-full_Revenue`로 account_id가 갈린다.
     # ⚠️ 앵커 고정(`^영업수익$`)이 필수 — `기타영업수익`·`보험영업수익`(금융·보험 스코프아웃사)에
