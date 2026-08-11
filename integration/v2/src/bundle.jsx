@@ -2525,21 +2525,22 @@ function SectorDisclosurePanel({ sector, onBack, onSelect }) {
         <button className="back-link" onClick={onBack}>← GALAXY</button>
       </div>
       <div className="panel-body">
-        <div className="sector-ov-section" style={{marginBottom: 10}}>
-          <div className="ov-sec-title">DAILY HIGHLIGHTS · 오늘의 시그널</div>
-          <ul className="ov-sec-list">
-            {highlights && highlights.length ? highlights.map((h, i) => (
-              <li key={i}>
-                <span className="ov-bullet" style={{background: h.high_impact ? '#f87171' : sector.color}} />
-                {h.high_impact && <span style={{color:'#f87171', fontFamily:'var(--font-mono)', fontSize:9, marginRight:4}}>HIGH</span>}
-                <span style={{fontFamily:'var(--font-mono)', fontSize:10, color:'#94a3b8', marginRight:6}}>{h.time}</span>
-                {(h.title || '').slice(0, 30)} — {h.corp_name}
-              </li>
-            )) : (
-              <li style={{color:'#64748b'}}>최근 공시 데이터 없음</li>
-            )}
-          </ul>
-        </div>
+        {/* UX-044: AI 판별 주요 공시(high_impact)만 — 없으면 블록 자체를 숨긴다 (최신 공시 폴백 금지, 저장 목록과 중복 방지) */}
+        {highlights && highlights.length > 0 && (
+          <div className="sector-ov-section" style={{marginBottom: 10}}>
+            <div className="ov-sec-title">DAILY HIGHLIGHTS · AI 판별 주요 공시</div>
+            <ul className="ov-sec-list">
+              {highlights.map((h, i) => (
+                <li key={i}>
+                  <span className="ov-bullet" style={{background: '#f87171'}} />
+                  <span style={{color:'#f87171', fontFamily:'var(--font-mono)', fontSize:9, marginRight:4}}>HIGH</span>
+                  <span style={{fontFamily:'var(--font-mono)', fontSize:10, color:'#94a3b8', marginRight:6}}>{h.time}</span>
+                  {(h.title || '').slice(0, 30)} — {h.corp_name}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
         <LiveDisclosureBlock items={liveItems} live={live} emptyText="오늘 이 섹터에서 접수된 공시가 없습니다." />
         <div className="stored-disclosure-label">저장된 최근 공시</div>
         {items.length === 0 && (
