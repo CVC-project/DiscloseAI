@@ -57,8 +57,9 @@ ACCOUNT_RULES: dict[str, list[tuple[int, str, frozenset[str]]]] = {
         (2, CODE, frozenset({"dart_Revenue", "ifrs_Revenue"})),
         # ⚠️ 이자수익·수수료수익·보험수익은 넣지 않는다 (FN-025).
         (3, NAME, frozenset({"매출액", "수익(매출액)", "영업수익", "매출",
-                             "영업수익(매출액)", "매출액(영업수익)", "매출및지분법손익",
-                             "매출수익", "영업수익합계", "매출액합계", "수익"})),
+                             "영업수익(매출액)", "매출액(영업수익)", "매출(영업수익)",
+                             "매출및지분법손익", "매출수익", "영업수익합계", "매출액합계",
+                             "수익", "매출(수익)", "영업수익(수익)"})),
     ],
     "cogs": [
         (1, CODE, frozenset({"ifrs-full_CostOfSales"})),
@@ -155,6 +156,11 @@ NAME_EXCLUDE: dict[str, tuple[str, ...]] = {
     "revenue": ("이자수익", "수수료수익", "보험수익", "금융수익", "기타수익"),
 }
 
+# 계정명이 **이것뿐**이면 그 행은 정체 불명이다 — 표준계정ID가 붙어 있어도 채택하지 않는다.
+# 실측(363280): 본표 블록에 딸려온 소계 표의 `합계` 행에 `ifrs-full_Revenue`가 붙어 있어,
+# 진짜 top line(`매출(영업수익)`)을 제치고 rank 1로 뽑혔다.
+NAME_BLANK = frozenset({"합계", "계", "소계", "총계", "구분", "과목", "합 계"})
+
 # 부호 규약 — 원문의 괄호는 '차감 표시'지 음수 값이 아니다. 매출원가를 괄호로 싣는
 # 회사와 양수로 싣는 회사가 갈리는데(실측 24건), DART API 정본은 항상 양수다.
 # ⚠️ 파생·합산이 아니라 **표기 정규화**다. 값 자체는 원문 그대로.
@@ -185,6 +191,8 @@ _CAP_EL_RE = re.compile(r"<(TD|TE|TH|P)\b[^>]*>(.*?)</\1>", re.I | re.S)
 _CAP_NAME_RE = re.compile(
     r"(?:연결|별도|개별)?(?:재무상태표|대차대조표|포괄손익계산서|손익계산서|현금흐름표|자본변동표)"
 )
+# 데이터 표 헤더의 기수 셀: '제 31 기' · '제72(당)기' · '제53기말'
+_PERIOD_HDR_RE = re.compile(r"^제\d+(?:\((?:당|전|전전)\))?기")
 _TR_RE = re.compile(r"<TR\b[^>]*>(.*?)</TR>", re.I | re.S)
 _CELL_RE = re.compile(r"<(TE|TD|TH)\b([^>]*)>(.*?)</\1>", re.I | re.S)
 _ATTR_RE = re.compile(r'([A-Za-z_][A-Za-z0-9_-]*)\s*=\s*"([^"]*)"')
@@ -303,13 +311,15 @@ def pick_account(rows: Iterable, key: str):
         if getattr(r, "amount", None) is None:
             continue
         nm = norm_name(getattr(r, "account_nm", ""))
-        if any(b in nm for b in bans):
+        if nm in NAME_BLANK or any(b in nm for b in bans):
             continue
         rank = _rank_of(rules, getattr(r, "account_id", "") or "", nm)
         if rank is None:
             continue
         order = getattr(r, "order", i)
-        score = (rank, pref.index(sj), order)
+        # 0은 '보고된 값'과 '표시 안 함'을 구분할 수 없다. 같은 순위에 0이 아닌 후보가 있으면
+        # 그쪽을 쓴다(088350 실측: IFRS17 전환으로 0인 `영업수익` 행이 진짜 top line을 이겼다).
+        score = (rank, 0 if r.amount else 1, pref.index(sj), order)
         if best_score is None or score < best_score:
             best, best_score = r, score
     return best, (best_score[0] if best_score else None)
@@ -395,14 +405,31 @@ def parse_report(html: str) -> tuple[list[Row], dict]:
     for fs_div, sj, body in blocks:
         stats["blocks"] += 1
         scale = _unit_scale(body)
-        for tr in _TR_RE.findall(body):
+        trs = _TR_RE.findall(body)
+        # 값 열의 위치를 **헤더에서 확정**한다. 고정 `cells[1:4]`로 두면 `주석` 열이 있는
+        # 표(계정명|주석|당기|전기|전전기)에서 주석 번호를 당기 금액으로 읽고 **연도가 한 칸씩
+        # 밀린다**(487580 실측: 당기 매출 = 22원, 전기 열에 당기 값). 헤더가 없으면 종전 규약.
+        val_idx: list[int] | None = None
+        for tr in trs:
+            idx = [i for i, c in enumerate(_CELL_RE.findall(tr))
+                   if _PERIOD_HDR_RE.match(norm_name(c[2]))]
+            if len(idx) >= 2:
+                val_idx = idx[:3]
+                break
+        for tr in trs:
             cells = _CELL_RE.findall(tr)
             if len(cells) < 2:
                 continue
             name = norm_name(cells[0][2])
             if not name:
                 continue
-            for ci, (_tag, attrs, txt) in enumerate(cells[1:4]):
+            if val_idx and max(val_idx) < len(cells):
+                picked = [cells[i] for i in val_idx]
+            elif val_idx:
+                continue  # 열 수가 헤더와 안 맞는 행은 버린다 (추측하지 않는다)
+            else:
+                picked = cells[1:4]
+            for ci, (_tag, attrs, txt) in enumerate(picked):
                 amt = parse_amount(txt)
                 if amt is None:
                     continue
@@ -436,6 +463,11 @@ def select_core(rows: list[Row], src_fy: int) -> list[dict]:
                 hit, rank = pick_account(sub, key)
                 if hit is None:
                     continue  # 미발견 — 0으로 채우지 않는다
+                if key == "revenue" and not hit.amount:
+                    # 매출 0은 '보고된 0'과 '이 표에선 안 쓰는 행'을 가를 수 없다.
+                    # 088350(보험) 실측: IFRS17 전환으로 `영업수익` 행이 0이고 실제 top line은
+                    # 보험손익 구조에 있다 → **미발견**이 옳다. 0을 소비처로 흘리지 않는다.
+                    continue
                 out.append(
                     {
                         "fiscal_year": src_fy - col,
