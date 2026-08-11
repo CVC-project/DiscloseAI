@@ -16,8 +16,13 @@ import argparse
 import csv
 import json
 import sqlite3
+import sys
 from pathlib import Path
 from typing import Any
+
+# cp949 콘솔에서 비cp949 문자 print가 크래시하는 것을 막는다(FN-001 계보 — 성공을 실패로 오인시킴)
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent.parent
@@ -435,14 +440,33 @@ def build_cards(
                 f"같은 100원을 팔아도 남는 돈이 [{gap:.1f}%p] 많은 거예요. "
                 "그만큼 투자·빚 상환·배당에 쓸 여력이 커요."
             )
+        # 적자면 '남아요'가 오독을 부른다 — 부호에 따라 서술을 바꾼다
+        def _per100(v: float) -> str:
+            return f"[{v:.1f}원]이 남아요" if v >= 0 else f"[{abs(v):.1f}원]씩 오히려 손해예요"
+
+        def _pl(v: float | None, jo: bool) -> str:
+            f = _fmt_jo if jo else _fmt_won
+            if v is not None and v < 0:
+                return f"영업손실 {JB(f(abs(v)), '으로')}"
+            return f"영업이익 {JB(f(v), '으로')}"
+
         card(
             "d1",
             "100원 팔면 몇 원이 남나",
             [
-                f"표준인 {J(std_name, '은는')} 매출 [{_fmt_jo(SD['revenue'][sli])}] 가운데 영업이익 "
-                f"{JB(_fmt_jo(SD['op'][sli]), '을를')} 남겼어요 — 100원어치를 팔면 [{std_op_m:.1f}원]이 남는 구조예요.",
-                f"{J(name, '은는')} 매출 [{_fmt_won(S['revenue'][li])}]에 영업이익 "
-                f"{JB(_fmt_won(S['op'][li]), '으로')}, 100원당 [{op_m:.1f}원]이 남아요.",
+                f"표준인 {J(std_name, '은는')} 매출 [{_fmt_jo(SD['revenue'][sli])}] 가운데 "
+                + (
+                    f"영업이익 {JB(_fmt_jo(SD['op'][sli]), '을를')} 남겼어요 "
+                    if SD["op"][sli] is not None and SD["op"][sli] >= 0
+                    else f"영업손실 {JB(_fmt_jo(abs(SD['op'][sli])), '을를')} 냈어요 "
+                )
+                + (
+                    f"— 100원어치를 팔면 [{std_op_m:.1f}원]이 남는 구조예요."
+                    if std_op_m >= 0
+                    else f"— 100원어치를 팔 때마다 [{abs(std_op_m):.1f}원]씩 손해가 나는 구조예요."
+                ),
+                f"{J(name, '은는')} 매출 [{_fmt_won(S['revenue'][li])}]에 {_pl(S['op'][li], False)}, "
+                f"100원당 {_per100(op_m)}.",
                 verdict,
             ],
             "B",
@@ -475,8 +499,14 @@ def build_cards(
             [
                 f"표준인 {J(std_name, '은는')} [{std_years[svi]}]이 5년 중 가장 나빴던 해예요 — "
                 f"'{std_label}'{jl} 영업이익이 [{_fmt_jo(SD['op'][svi])}]까지 줄었어요.",
-                f"{name}의 최저점도 [{labels[vi]}]이고, 영업이익 {JB(_fmt_won(S['op'][vi]), '으로')} "
-                + (f"5년 최고치보다 [{drop:.0f}%] 적었어요." if drop else "내려앉았어요."),
+                (
+                    # 적자로 내려간 해에 '최고치보다 몇 % 적다'는 계산은 성립해도 읽히지 않는다
+                    f"{name}의 최저점도 [{labels[vi]}]이고, 이 해에는 영업손실 "
+                    f"{JB(_fmt_won(abs(S['op'][vi])), '이가')} 나면서 영업이익이 (−)로 내려갔어요."
+                    if (S["op"][vi] is not None and S["op"][vi] < 0)
+                    else f"{name}의 최저점도 [{labels[vi]}]이고, 영업이익 {JB(_fmt_won(S['op'][vi]), '으로')} "
+                    + (f"5년 최고치보다 [{drop:.0f}%] 적었어요." if drop else "내려앉았어요.")
+                ),
                 third,
             ],
             "B",
@@ -494,24 +524,37 @@ def build_cards(
         )
         std_pname, std_pdesc = PATTERNS.get(std_code, ("—", "")) if std_code else ("—", "")
         changed = first["code"] != last["code"]
+        # '…도'(동조)는 표준과 국면이 같을 때만 — 다른데 '도'를 쓰면 바로 위 문장과 모순된다
+        same_as_std = std_code == last["code"]
         line2 = (
             f"{J(name, '은는')} [{first['year']}] {first['name']}에서 [{last['year']}] "
             f"{J(last['name'], '으로')} 바뀌었어요 — {pattern['desc']}."
             if changed
-            else f"{name}도 [{first['year']}]부터 [{last['year']}]까지 줄곧 {last['name']}이에요 — {pattern['desc']}."
+            else f"{name}{'도' if same_as_std else '는'} [{first['year']}]부터 [{last['year']}]까지 "
+            f"줄곧 {last['name']}이에요 — {pattern['desc']}."
         )
         fin_v = S["fin"][li]
+        # 표준의 재무활동 방향을 **실측**해서 말한다 (고정 문구로 단정하면 표준이 같은 방향일 때 거짓이 된다)
+        std_fin = SD.get("fin", [None] * len(std_years))[sli] if SD.get("fin") else None
+        std_fin_pos = std_fin is not None and std_fin > 0
         if fin_v is not None and fin_v > 0:
+            tail = (
+                "표준도 같은 해 외부에서 자금을 더 당겨왔어요 — 이 대목만큼은 두 회사가 같은 방향이에요."
+                if std_fin_pos
+                else "표준은 같은 해 반대로 빚을 갚고 주주에게 돌려줬어요."
+            )
             third = (
                 f"재무활동 현금이 (+)라는 건, 갚은 돈보다 새로 빌리거나 조달한 돈이 "
                 f"{JB(_fmt_won(fin_v), '이가')} 더 많았다는 뜻이에요. 번 것만으로는 투자를 다 대지 "
-                "못했다는 신호이고, 표준은 같은 해 반대로 빚을 갚고 주주에게 돌려줬어요."
+                f"못했다는 신호이고, {tail}"
             )
         else:
-            third = (
-                "재무활동 현금이 (−)면 번 돈으로 빚을 갚고 주주에게 돌려주는 국면이에요 — "
-                "돈을 다루는 방식이 표준과 같은 방향이에요."
+            tail = (
+                "표준은 같은 해 오히려 외부에서 자금을 더 당겨왔으니, 돈을 다루는 방식이 표준과 반대예요."
+                if std_fin_pos
+                else "돈을 다루는 방식이 표준과 같은 방향이에요."
             )
+            third = f"재무활동 현금이 (−)면 번 돈으로 빚을 갚고 주주에게 돌려주는 국면이에요 — {tail}"
         card(
             "d3",
             f"지금 국면 — {pattern['name']}",

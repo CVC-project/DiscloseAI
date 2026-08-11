@@ -4448,21 +4448,38 @@ function App() {
   // 현금 은하수 탭 활성 티커 — dossier/data/galaxy_index.json 매니페스트 로드(build_galaxy_index.py 생성).
   // 하드코딩 대신 매니페스트라 새 골든 추가 시 스크립트 재실행만으로 UI 자동 반영(V-054).
   const [galaxyTickers, setGalaxyTickers] = useState(() => new Set(['005930']));
+  // lite(표준-델타) 매니페스트 — build_galaxy_lite_index.py 생성. 골든이 없는 기업의 탭② 소스(FN-019)
+  const [liteTickers, setLiteTickers] = useState(() => new Set());
   useEffect(() => {
     let alive = true;
     fetch('../dossier/data/galaxy_index.json')
       .then((r) => (r.ok ? r.json() : null))
       .then((m) => { if (alive && m && Array.isArray(m.tickers)) setGalaxyTickers(new Set(m.tickers)); })
       .catch(() => {});
+    fetch('../dossier/data/galaxy_lite_index.json')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((m) => { if (alive && m && Array.isArray(m.tickers)) setLiteTickers(new Set(m.tickers)); })
+      .catch(() => {});
     return () => { alive = false; };
   }, []);
   // DOSSIER_TABS (D1) — 탭 추가 = 이 배열 한 줄 + dossier/<id>.html + <id>_<ticker>.json
   const DOSSIER_TABS = [
     { id: 'business', label: '사업·기업',   src: 'business.html', context: 'business', activeWhen: 'always'  }, // ① 사업·기업 개요
-    { id: 'galaxy',   label: '현금 은하수', src: 'galaxy.html',   context: 'galaxy',   activeWhen: 'hasData' }, // ② 현금 은하수 (galaxy_<t>.json 티커만)
+    { id: 'galaxy',   label: '현금 은하수', src: 'galaxy.html',   context: 'galaxy',   activeWhen: 'hasData' }, // ② 현금 은하수 (골든 galaxy_<t>.json · lite galaxy_lite_<t>.json)
     { id: 'eqs',      label: 'EQS 재무분석', src: 'firm.html',    context: 'finance',  activeWhen: 'always'  }, // ③ EQS 재무분석
   ];
-  // hasData 판정 = 위 galaxyTickers(매니페스트). (구 하드코딩 GALAXY_TICKERS 제거 — V-054)
+  // hasData 판정 = 골든 ∪ lite 매니페스트. (구 하드코딩 GALAXY_TICKERS 제거 — V-054)
+  const tabEnabled = useCallback(
+    (tab, ticker) => tab.activeWhen === 'always' || galaxyTickers.has(ticker) || liteTickers.has(ticker),
+    [galaxyTickers, liteTickers]
+  );
+  // 탭② 소스 분기 — 골든 보유면 galaxy.html, 아니면 lite. 둘 다 있으면 골든 우선(lite는 표준의 델타 뷰라 표준이 우선)
+  const tabSrc = useCallback(
+    (tab, ticker) => (tab.id === 'galaxy' && !galaxyTickers.has(ticker) && liteTickers.has(ticker)
+      ? 'galaxy_lite.html'
+      : tab.src),
+    [galaxyTickers, liteTickers]
+  );
 
   // UX-043: 섹터 개요의 "대표 은하수" 클릭 → 그 기업 dossier를 현금 은하수 탭으로 바로 연다
   const learnGalaxy = useCallback((code) => {
@@ -4742,7 +4759,7 @@ function App() {
           {/* Tab bar — DOSSIER_TABS (D1), 활성 탭 = 산업군 색 */}
           <div style={{display:'flex', padding:'0 20px', flexShrink:0, background:'rgba(5,6,13,0.95)', borderBottom:'1px solid rgba(140,170,210,0.13)'}}>
             {DOSSIER_TABS.map((tab) => {
-              const enabled = tab.activeWhen === 'always' || galaxyTickers.has(corpOverlayTicker);
+              const enabled = tabEnabled(tab, corpOverlayTicker);
               const active = dossierTab === tab.id;
               return (
                 <button key={tab.id} disabled={!enabled} onClick={() => enabled && setDossierTab(tab.id)}
@@ -4762,12 +4779,12 @@ function App() {
           <div style={{flex:'1 1 0%', display:'flex', overflow:'hidden', position:'relative'}}>
             <div style={{flex:'1 1 0%', position:'relative', minWidth:0}}>
               {DOSSIER_TABS.map((tab) => {
-                const enabled = tab.activeWhen === 'always' || galaxyTickers.has(corpOverlayTicker);
+                const enabled = tabEnabled(tab, corpOverlayTicker);
                 if (!enabled) return null;
                 const active = dossierTab === tab.id;
                 return (
                   <iframe key={tab.id}
-                    src={`../dossier/${tab.src}?ticker=${corpOverlayTicker}${tab.id === 'eqs' ? '&theme=galaxy&v=eqs-feqs-m4-20260728' : ''}&accent=${encodeURIComponent(sectorAccent)}`}
+                    src={`../dossier/${tabSrc(tab, corpOverlayTicker)}?ticker=${corpOverlayTicker}${tab.id === 'eqs' ? '&theme=galaxy&v=eqs-feqs-m4-20260728' : ''}&accent=${encodeURIComponent(sectorAccent)}`}
                     title={`${tab.id}-${corpOverlayTicker}`}
                     style={{position:'absolute', inset:0, width:'100%', height:'100%', border:'none', background:'#020408', display: active ? 'block' : 'none'}}
                     onLoad={undefined /* firm.html은 ?theme=galaxy 자체 테마(스코프 CSS) */}

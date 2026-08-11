@@ -33,8 +33,14 @@ import argparse
 import json
 import re
 import sqlite3
+import sys
 from pathlib import Path
 from typing import Any
+
+# 윈도우 콘솔(cp949)에서 em dash 등이 섞이면 print가 크래시해 **게이트 PASS가 FAIL로 보인다**(FN-001 계보).
+# 카드 제목·주석 원문은 우리가 통제할 수 없으므로 출력 스트림 자체를 UTF-8로 고정한다.
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent.parent
@@ -268,7 +274,8 @@ def main() -> None:
     lite["notes"] = ok
     lite["meta"]["notes_gate"] = {"passed": len(ok), "facts_used": len(facts)}
     lite_p.write_text(json.dumps(lite, ensure_ascii=False, indent=1), encoding="utf-8")
-    print(f"[OK] {lite_p.name} — 주목할 점 {len(ok)}장 주입, 게이트 PASS")
+    # cp949 콘솔에서 em dash는 크래시한다(FN-001 계보) — 성공 직후 print가 죽어 FAIL로 오인되므로 ASCII만
+    print(f"[OK] {lite_p.name} / 주목할 점 {len(ok)}장 주입, 게이트 PASS")
 
 
 if __name__ == "__main__":
