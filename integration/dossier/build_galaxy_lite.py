@@ -127,8 +127,18 @@ def _pp(v: float | None, digits: int = 1) -> str:
 
 
 # 숫자 읽기의 받침 유무 (영·일·삼·육·칠·팔은 받침 있음 / 이·사·오·구는 없음)
-_DIGIT_JONG = {"0": True, "1": True, "2": False, "3": True, "4": False,
-               "5": False, "6": True, "7": True, "8": True, "9": False}
+_DIGIT_JONG = {
+    "0": True,
+    "1": True,
+    "2": False,
+    "3": True,
+    "4": False,
+    "5": False,
+    "6": True,
+    "7": True,
+    "8": True,
+    "9": False,
+}
 _DIGIT_RIEUL = {"1", "7", "8"}  # ㄹ 받침 — '으로'가 아니라 '로'
 
 
@@ -168,7 +178,12 @@ def JB(word: str, kind: str) -> str:
     if kind == "으로":
         josa = "로" if (not has or rieul) else "으로"
     else:
-        pair = {"은는": ("은", "는"), "이가": ("이", "가"), "을를": ("을", "를"), "과와": ("과", "와")}
+        pair = {
+            "은는": ("은", "는"),
+            "이가": ("이", "가"),
+            "을를": ("을", "를"),
+            "과와": ("과", "와"),
+        }
         a, b = pair[kind]
         josa = a if has else b
     return f"[{word}]{josa}"
@@ -199,23 +214,31 @@ def load_corps() -> dict[str, dict[str, str]]:
     return rows
 
 
-def resolve_standard(ticker: str, corps: dict[str, dict[str, str]]) -> tuple[str, str, bool]:
+def resolve_standard(
+    ticker: str, corps: dict[str, dict[str, str]]
+) -> tuple[str, str, bool]:
     """(표준 티커, 클러스터, 인접여부) — 같은 cluster의 tier<=1 대표를 찾는다."""
     me = corps.get(ticker)
     if not me or not me.get("cluster"):
-        raise SystemExit(f"[FATAL] corps.csv에 {ticker}의 cluster가 없어요 — 표준 매핑 불가")
+        raise SystemExit(
+            f"[FATAL] corps.csv에 {ticker}의 cluster가 없어요 — 표준 매핑 불가"
+        )
     cluster = me["cluster"]
     cands = [
         (t, r)
         for t, r in corps.items()
-        if r.get("cluster") == cluster and (r.get("tier") or "").strip() in ("0", "1") and t != ticker
+        if r.get("cluster") == cluster
+        and (r.get("tier") or "").strip() in ("0", "1")
+        and t != ticker
     ]
     # tier 0(T0) 우선
     cands.sort(key=lambda x: (x[1].get("tier") or "9"))
     for t, _ in cands:
         if (DATA / f"galaxy_{t}.json").exists():
             return t, cluster, False
-    raise SystemExit(f"[FATAL] 클러스터 '{cluster}'에 골든 표준이 없어요 — 신규 골든 빌드가 선행돼야 해요")
+    raise SystemExit(
+        f"[FATAL] 클러스터 '{cluster}'에 골든 표준이 없어요 — 신규 골든 빌드가 선행돼야 해요"
+    )
 
 
 def load_sector(ticker: str) -> str:
@@ -262,7 +285,9 @@ def load_report_meta(ticker: str) -> dict[str, Any]:
     return out
 
 
-def load_cf_gapfill(ticker: str, fiscal_years: list[int]) -> dict[int, dict[str, float]]:
+def load_cf_gapfill(
+    ticker: str, fiscal_years: list[int]
+) -> dict[int, dict[str, float]]:
     """firm JSON에 빈 현금흐름 3계정을 fs_account(정형계정, read-only)에서 보충.
 
     ⚠️ '미공시'가 아니다 — 현금흐름표는 매년 공시된다. firm JSON 쪽 수집 갭일 뿐이므로
@@ -302,7 +327,9 @@ def load_cf_gapfill(ticker: str, fiscal_years: list[int]) -> dict[int, dict[str,
 # ---------- 계열 산출 ----------
 
 
-def build_series(firm: dict[str, Any]) -> tuple[list[str], dict[str, list[float | None]]]:
+def build_series(
+    firm: dict[str, Any]
+) -> tuple[list[str], dict[str, list[float | None]]]:
     years_raw = sorted(firm.get("years", []), key=lambda y: y["year"])
     labels = [f"FY{str(y['year'])[2:]}" for y in years_raw]
     series: dict[str, list[float | None]] = {k: [] for k in FIRM_KEYS.values()}
@@ -316,11 +343,24 @@ def build_series(firm: dict[str, Any]) -> tuple[list[str], dict[str, list[float 
 def std_series(std: dict[str, Any]) -> dict[str, list[float | None]]:
     """골든 series(조원) 중 lite와 비교 가능한 키만."""
     s = std.get("series", {})
-    keep = ["revenue", "cogs", "op", "ni", "ocf", "icf", "fin", "assets", "debt", "equity"]
+    keep = [
+        "revenue",
+        "cogs",
+        "op",
+        "ni",
+        "ocf",
+        "icf",
+        "fin",
+        "assets",
+        "debt",
+        "equity",
+    ]
     return {k: s.get(k, []) for k in keep if k in s}
 
 
-def normalize(series: dict[str, list[float | None]], base_key: str = "revenue") -> dict[str, list[float | None]]:
+def normalize(
+    series: dict[str, list[float | None]], base_key: str = "revenue"
+) -> dict[str, list[float | None]]:
     """매출=100 정규화 — 규모가 달라도 '모양'을 비교하기 위한 축."""
     base = series.get(base_key, [])
     out: dict[str, list[float | None]] = {}
@@ -333,7 +373,9 @@ def normalize(series: dict[str, list[float | None]], base_key: str = "revenue") 
     return out
 
 
-def cf_availability(series: dict[str, list[float | None]], labels: list[str]) -> dict[str, Any]:
+def cf_availability(
+    series: dict[str, list[float | None]], labels: list[str]
+) -> dict[str, Any]:
     """현금흐름 3계정이 모두 있는 연도 인덱스 (GALAXY_LITE_PLAN §2.1 결측 규칙)."""
     idx = [
         i
@@ -348,10 +390,14 @@ def cf_availability(series: dict[str, list[float | None]], labels: list[str]) ->
     }
 
 
-def detect_pattern(series: dict[str, list[float | None]], labels: list[str], cf: dict[str, Any]) -> dict[str, Any]:
+def detect_pattern(
+    series: dict[str, list[float | None]], labels: list[str], cf: dict[str, Any]
+) -> dict[str, Any]:
     path = []
     for i in cf["indices"]:
-        code = _sign(series["ocf"][i]) + _sign(series["icf"][i]) + _sign(series["fin"][i])
+        code = (
+            _sign(series["ocf"][i]) + _sign(series["icf"][i]) + _sign(series["fin"][i])
+        )
         name = PATTERNS.get(code, ("분류불가", ""))[0]
         path.append({"year": labels[i], "code": code, "name": name})
     if not path:
@@ -361,10 +407,17 @@ def detect_pattern(series: dict[str, list[float | None]], labels: list[str], cf:
     # 근소값 경계: 세 계정 중 하나라도 |값| < 매출 1%면 부호가 쉽게 뒤집힌다 (전 시장 실측 21%)
     i_last = cf["indices"][-1]
     rev = series["revenue"][i_last]
-    edge = bool(rev) and min(
-        abs(series[k][i_last]) for k in ("ocf", "icf", "fin")
-    ) < abs(rev) * 0.01
-    return {"code": last["code"], "name": name, "desc": desc, "path": path, "edge": edge}
+    edge = (
+        bool(rev)
+        and min(abs(series[k][i_last]) for k in ("ocf", "icf", "fin")) < abs(rev) * 0.01
+    )
+    return {
+        "code": last["code"],
+        "name": name,
+        "desc": desc,
+        "path": path,
+        "edge": edge,
+    }
 
 
 def valley_index(vals: list[float | None]) -> int | None:
@@ -377,8 +430,14 @@ def valley_index(vals: list[float | None]) -> int | None:
 # ---------- 델타 카드 (GALAXY_LITE_PLAN §6 — 직관 서술, 비유 최소화) ----------
 
 # 카드 -> 표준 골든 딥다이브 착지 행 (dives의 row 값. focus=dive:<key>로 바로 고정)
-_ROW_BY_SERIES = {"cogs": "is-cogs", "op": "is-opincome", "ni": "is-netincome",
-                  "ocf": "cf-op", "icf": "cf-inv", "fin": "cf-fin"}
+_ROW_BY_SERIES = {
+    "cogs": "is-cogs",
+    "op": "is-opincome",
+    "ni": "is-netincome",
+    "ocf": "cf-op",
+    "icf": "cf-inv",
+    "fin": "cf-fin",
+}
 
 
 def _std_dive_focus(std_doc: dict[str, Any], row: str | None, zone: str) -> str:
@@ -418,9 +477,11 @@ def build_cards(
                 "kind": "delta",
                 "title": title,
                 "lines": lines,
-                "anchor": {"zone": zone,
-                           "std_focus": _std_dive_focus(std_doc, row, zone),
-                           "std_ticker": std_ticker},
+                "anchor": {
+                    "zone": zone,
+                    "std_focus": _std_dive_focus(std_doc, row, zone),
+                    "std_ticker": std_ticker,
+                },
                 "nums": nums,
             }
         )
@@ -440,9 +501,14 @@ def build_cards(
                 f"같은 100원을 팔아도 남는 돈이 [{gap:.1f}%p] 많은 거예요. "
                 "그만큼 투자·빚 상환·배당에 쓸 여력이 커요."
             )
+
         # 적자면 '남아요'가 오독을 부른다 — 부호에 따라 서술을 바꾼다
         def _per100(v: float) -> str:
-            return f"[{v:.1f}원]이 남아요" if v >= 0 else f"[{abs(v):.1f}원]씩 오히려 손해예요"
+            return (
+                f"[{v:.1f}원]이 남아요"
+                if v >= 0
+                else f"[{abs(v):.1f}원]씩 오히려 손해예요"
+            )
 
         def _pl(v: float | None, jo: bool) -> str:
             f = _fmt_jo if jo else _fmt_won
@@ -505,13 +571,20 @@ def build_cards(
                     f"{JB(_fmt_won(abs(S['op'][vi])), '이가')} 나면서 영업이익이 (−)로 내려갔어요."
                     if (S["op"][vi] is not None and S["op"][vi] < 0)
                     else f"{name}의 최저점도 [{labels[vi]}]이고, 영업이익 {JB(_fmt_won(S['op'][vi]), '으로')} "
-                    + (f"5년 최고치보다 [{drop:.0f}%] 적었어요." if drop else "내려앉았어요.")
+                    + (
+                        f"5년 최고치보다 [{drop:.0f}%] 적었어요."
+                        if drop
+                        else "내려앉았어요."
+                    )
                 ),
                 third,
             ],
             "B",
             "is-opincome",
-            [{"k": "valley", "v": labels[vi]}, {"k": "std_valley", "v": std_years[svi]}],
+            [
+                {"k": "valley", "v": labels[vi]},
+                {"k": "std_valley", "v": std_years[svi]},
+            ],
         )
 
     # 3) 지금 국면 — 8상 전환
@@ -522,7 +595,9 @@ def build_cards(
             if all(SD.get(k) for k in ("ocf", "icf", "fin"))
             else None
         )
-        std_pname, std_pdesc = PATTERNS.get(std_code, ("—", "")) if std_code else ("—", "")
+        std_pname, std_pdesc = (
+            PATTERNS.get(std_code, ("—", "")) if std_code else ("—", "")
+        )
         changed = first["code"] != last["code"]
         # '…도'(동조)는 표준과 국면이 같을 때만 — 다른데 '도'를 쓰면 바로 위 문장과 모순된다
         same_as_std = std_code == last["code"]
@@ -565,13 +640,17 @@ def build_cards(
             ],
             "D",
             "cf-fin",
-            [{"k": "pattern", "v": pattern["code"]}, {"k": "std_pattern", "v": std_code}],
+            [
+                {"k": "pattern", "v": pattern["code"]},
+                {"k": "std_pattern", "v": std_code},
+            ],
         )
 
     # 4) 5년간 현금 증감
     if cf["indices"]:
         net = [
-            (S["ocf"][i] or 0) + (S["icf"][i] or 0) + (S["fin"][i] or 0) for i in cf["indices"]
+            (S["ocf"][i] or 0) + (S["icf"][i] or 0) + (S["fin"][i] or 0)
+            for i in cf["indices"]
         ]
         cum = sum(net)
         yrs = [labels[i] for i in cf["indices"]]
@@ -675,8 +754,14 @@ def build(ticker: str, std_ticker: str | None = None) -> dict[str, Any]:
     # 수익성 격차 → 격차의 진원 → 경기 동조 → 현금 결산 → 최근 국면 전환
     CARD_ORDER: dict[str, tuple[int, str | None]] = {
         "d1": (1, None),
-        "d5": (2, "그 격차가 어디서 생기는지, 숫자가 가장 크게 갈라지는 항목부터 볼게요."),
-        "d2": (3, "구조가 이렇게 다른 두 회사가, 경기가 꺾일 때는 어떻게 움직였을까요?"),
+        "d5": (
+            2,
+            "그 격차가 어디서 생기는지, 숫자가 가장 크게 갈라지는 항목부터 볼게요.",
+        ),
+        "d2": (
+            3,
+            "구조가 이렇게 다른 두 회사가, 경기가 꺾일 때는 어떻게 움직였을까요?",
+        ),
         "d4": (4, "그렇게 벌고 쓴 5년의 결과, 통장에는 무엇이 남았을까요?"),
         "d3": (5, "그런데 가장 최근 연도에, 돈의 흐름이 방향을 바꿨어요."),
     }
@@ -739,8 +824,10 @@ def build(ticker: str, std_ticker: str | None = None) -> dict[str, Any]:
             **pattern,
             # FY21~FY25 전 연도 경로 — 분류 불가 연도는 name=None (렌더러가 '현금흐름 미공시'로 표시)
             "path_full": [
-                next((st for st in pattern["path"] if st["year"] == lbl),
-                     {"year": lbl, "code": None, "name": None})
+                next(
+                    (st for st in pattern["path"] if st["year"] == lbl),
+                    {"year": lbl, "code": None, "name": None},
+                )
                 for lbl in labels
             ],
             # 8상 전체 범례 (화면 '유형 안내' 소스 — SSOT는 이 파일의 PATTERNS)
@@ -784,7 +871,9 @@ def selfcheck(doc: dict[str, Any], ticker: str) -> list[str]:
             if want is None and got is not None:
                 gv = gapfill.get(lbl, {}).get(dst)
                 if gv is None or abs(float(gv) - got) > 1:
-                    errs.append(f"series.{dst}[{i}] firm 결측인데 근거(cf_gapfill) 없음")
+                    errs.append(
+                        f"series.{dst}[{i}] firm 결측인데 근거(cf_gapfill) 없음"
+                    )
             elif want is not None and got is None:
                 errs.append(f"series.{dst}[{i}] 결측 불일치")
             elif want is not None and abs(float(want) - got) > 1:
@@ -823,7 +912,9 @@ def selfcheck(doc: dict[str, Any], ticker: str) -> list[str]:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("ticker")
-    ap.add_argument("--std", default=None, help="표준 티커 강제 지정 (기본: cluster에서 자동)")
+    ap.add_argument(
+        "--std", default=None, help="표준 티커 강제 지정 (기본: cluster에서 자동)"
+    )
     ap.add_argument("--out", default=None)
     args = ap.parse_args()
 
@@ -837,9 +928,11 @@ def main() -> None:
 
     path = Path(args.out) if args.out else DATA / f"galaxy_lite_{args.ticker}.json"
     path.write_text(json.dumps(doc, ensure_ascii=False, indent=1), encoding="utf-8")
-    print(f"[OK] {path.name}  표준={doc['std_ref']['name']}({doc['std_ref']['ticker']})  "
-          f"카드={len(doc['cards'])}  패턴={doc['pattern']['name']}  "
-          f"현금흐름={doc['cf_available']['count']}개년  주석후보={len(doc['note_candidates'])}")
+    print(
+        f"[OK] {path.name}  표준={doc['std_ref']['name']}({doc['std_ref']['ticker']})  "
+        f"카드={len(doc['cards'])}  패턴={doc['pattern']['name']}  "
+        f"현금흐름={doc['cf_available']['count']}개년  주석후보={len(doc['note_candidates'])}"
+    )
 
 
 if __name__ == "__main__":

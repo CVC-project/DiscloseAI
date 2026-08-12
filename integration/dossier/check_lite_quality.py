@@ -45,7 +45,16 @@ HERE = Path(__file__).resolve().parent
 DATA = HERE / "data"
 
 BANNED_METAPHOR = ["골짜기", "강줄기", "저수지", "항로", "영업 존", "매듭", "물길"]
-BANNED_EQS = ["백분위", "업계 평균", "업계평균", "동종업계", "ROE", "ROA", "종합점수", "등급은"]
+BANNED_EQS = [
+    "백분위",
+    "업계 평균",
+    "업계평균",
+    "동종업계",
+    "ROE",
+    "ROA",
+    "종합점수",
+    "등급은",
+]
 BANNED_ADVICE = ["매수", "매도", "추천", "보장", "확실", "장부이익"]
 
 # 브래킷 안에 허용되는 것: 숫자(+단위) · FY 라벨 · 8상 부호코드
@@ -79,7 +88,9 @@ def check_doc(t: str, doc: dict[str, Any]) -> list[str]:
 
     for where, s in lines:
         if "미공시" in s:
-            errs.append(f"R1 {where}: '미공시' — 수집 갭은 '데이터 준비 중'으로 (FN-021)")
+            errs.append(
+                f"R1 {where}: '미공시' — 수집 갭은 '데이터 준비 중'으로 (FN-021)"
+            )
         for w in BANNED_METAPHOR:
             if w in s:
                 errs.append(f"R2 {where}: 은유 '{w}' (UX-041)")
@@ -107,19 +118,30 @@ def check_doc(t: str, doc: dict[str, Any]) -> list[str]:
         same_claim = ("표준도" in body) or ("같은 방향" in body)
         actually_same = (fin >= 0) == (std_fin >= 0)
         if opposite_claim and actually_same:
-            errs.append("R5 d3: '표준과 반대'라고 했는데 표준 재무활동 부호가 같음 (FN-022)")
+            errs.append(
+                "R5 d3: '표준과 반대'라고 했는데 표준 재무활동 부호가 같음 (FN-022)"
+            )
         if same_claim and not actually_same:
-            errs.append("R5 d3: '표준과 같은 방향'이라고 했는데 표준 재무활동 부호가 반대 (FN-022)")
+            errs.append(
+                "R5 d3: '표준과 같은 방향'이라고 했는데 표준 재무활동 부호가 반대 (FN-022)"
+            )
     if d3:
         name = (doc.get("corp") or {}).get("name", "")
         line2 = (d3.get("lines") or ["", "", ""])[1]
         if line2.startswith(f"{name}도"):
             my = (doc.get("pattern") or {}).get("code")
-            std_code = "".join(
-                "+" if (SD.get(k) or [0])[-1] >= 0 else "-" for k in ("ocf", "icf", "fin")
-            ) if all(SD.get(k) for k in ("ocf", "icf", "fin")) else None
+            std_code = (
+                "".join(
+                    "+" if (SD.get(k) or [0])[-1] >= 0 else "-"
+                    for k in ("ocf", "icf", "fin")
+                )
+                if all(SD.get(k) for k in ("ocf", "icf", "fin"))
+                else None
+            )
             if std_code and my != std_code:
-                errs.append(f"R6 d3: '{name}도'인데 국면이 표준과 다름({my} vs {std_code}) (FN-022)")
+                errs.append(
+                    f"R6 d3: '{name}도'인데 국면이 표준과 다름({my} vs {std_code}) (FN-022)"
+                )
     op = (S.get("op") or [None])[-1]
     if op is not None and op < 0:
         for where, s in lines:
@@ -131,7 +153,7 @@ def check_doc(t: str, doc: dict[str, Any]) -> list[str]:
     gp = DATA / f"galaxy_{std_t}.json"
     dives = {}
     if gp.exists():
-        dives = (json.loads(gp.read_text(encoding="utf-8")).get("dives") or {})
+        dives = json.loads(gp.read_text(encoding="utf-8")).get("dives") or {}
     for c in doc.get("cards", []):
         f = (c.get("anchor") or {}).get("std_focus")
         if f and f.startswith("dive:") and dives and f[5:] not in dives:
@@ -142,7 +164,10 @@ def check_doc(t: str, doc: dict[str, Any]) -> list[str]:
             errs.append(f"R8 {n['id']}: std_focus '{f}' 가 {std_t} dives에 없음")
 
     # R9 — 스토리 스레드 (델타·노트 각각 1..N 연속, 첫 카드만 bridge 없음)
-    for label, items in (("cards", doc.get("cards", [])), ("notes", doc.get("notes", []))):
+    for label, items in (
+        ("cards", doc.get("cards", [])),
+        ("notes", doc.get("notes", [])),
+    ):
         if not items:
             continue
         orders = [i.get("order") for i in items]
@@ -190,11 +215,21 @@ def check_manifests() -> list[str]:
     """R10 — 골든/lite 매니페스트가 서로 오염되지 않았는가."""
     errs: list[str] = []
     gi, li = DATA / "galaxy_index.json", DATA / "galaxy_lite_index.json"
-    g = json.loads(gi.read_text(encoding="utf-8")).get("tickers", []) if gi.exists() else []
-    l = json.loads(li.read_text(encoding="utf-8")).get("tickers", []) if li.exists() else []
+    g = (
+        json.loads(gi.read_text(encoding="utf-8")).get("tickers", [])
+        if gi.exists()
+        else []
+    )
+    l = (
+        json.loads(li.read_text(encoding="utf-8")).get("tickers", [])
+        if li.exists()
+        else []
+    )
     for t in g:
         if not re.fullmatch(r"\d{6}", t):
-            errs.append(f"R10 galaxy_index: 티커가 아닌 항목 '{t}' — lite 산출물 혼입 (FN-022)")
+            errs.append(
+                f"R10 galaxy_index: 티커가 아닌 항목 '{t}' — lite 산출물 혼입 (FN-022)"
+            )
     for t in set(g) & set(l):
         errs.append(f"R10 {t}: 골든·lite 매니페스트 동시 등록 — 골든 우선 규칙 위반")
     return errs

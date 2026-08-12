@@ -44,4 +44,6 @@ def build() -> list[str]:
 
 if __name__ == "__main__":
     ts = build()
-    print(f"galaxy_index.json 생성: {len(ts)}개 / {ts}")  # cp949 콘솔 크래시 회피(em dash 금지)
+    print(
+        f"galaxy_index.json 생성: {len(ts)}개 / {ts}"
+    )  # cp949 콘솔 크래시 회피(em dash 금지)

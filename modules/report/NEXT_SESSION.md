@@ -120,8 +120,10 @@ APPENDIX 나브 접힘 0@1440·1280·1024 · 1024px 가로 오버플로 0 · 콘
    그 11본은 **k4 산문이 전부 옛 파생값을 인용**한다. 데이터+산문 동시 수리가 필요하다.
 2. **viz 하한 게이트**(V-113 A) — `--strict`에 '흐름 dive 중 viz 지정 ≥ N'. **기존 골든 실측 후 임계 결정.**
 3. **`strings.header`·`hero` 중복 저작 정리**(V-110 후단) · **`report_<t>.json` 완전성 계측**(V-109 사각 A).
-4. **`strings.overview` 키 부재** — `tests/report/test_strings_knots_gate.py`가 전 `galaxy_lite_*.json`에서
-   실패한다(현재 **24건**, 브랜치 기존 baseline). 빌더 스키마 ↔ 테스트 요구 불일치라 한쪽을 맞춰야 한다.
+4. ~~`strings.overview` 키 부재~~ — **해소(2026-08-12, PR #117 lint 수습)**. 원인은 빌더가 아니라
+   **테스트 glob 과대매칭**이었다: V-110 게이트는 골든 렌더러(galaxy.html) 필드의 계약인데 glob이
+   `galaxy_lite_*`(별도 렌더러·별도 스키마 — overview·epilogue·knots 자체가 없음)까지 삼켰다.
+   `_goldens()`에서 lite 제외 → **전체 pytest 1,257 passed / 0 failed**.
 5. **`[첨부정정]` 재수집 104건** — [fs_parse_failures.csv](data/fs_parse_failures.csv)가 입력.
    `report_raw`는 (ticker,fy)당 rcept 1건이라 폴백할 원본이 로컬에 없다 → **collector 재수집**으로만 풀린다.
 6. **financial `collector.py` 근본 수정 미완** — 조건 없는 이자수익 별칭 + first-wins가 **그대로다**.

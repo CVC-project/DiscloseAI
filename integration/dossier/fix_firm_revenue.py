@@ -92,16 +92,25 @@ def main() -> None:
     ap = argparse.ArgumentParser(description="firm JSON 매출 보정 (FN-025)")
     ap.add_argument("--apply", action="store_true", help="실제로 파일을 고친다")
     ap.add_argument("--limit", type=int, default=40, help="상세 출력 건수")
-    ap.add_argument("--include-financial", action="store_true",
-                    help="금융사도 포함 (기본은 제외 — 매출 정의가 다르다)")
-    ap.add_argument("--force-all", action="store_true",
-                    help="역방향(firm > 파싱)도 보정 — 기본은 제외")
+    ap.add_argument(
+        "--include-financial",
+        action="store_true",
+        help="금융사도 포함 (기본은 제외 — 매출 정의가 다르다)",
+    )
+    ap.add_argument(
+        "--force-all",
+        action="store_true",
+        help="역방향(firm > 파싱)도 보정 — 기본은 제외",
+    )
     args = ap.parse_args()
 
     pv = parsed_revenue()
     fin = set() if args.include_financial else financial_tickers()
-    files = [p for p in sorted(glob.glob(os.path.join(DATA, "firm_*.json")))
-             if os.path.basename(p)[5:-5] not in fin]
+    files = [
+        p
+        for p in sorted(glob.glob(os.path.join(DATA, "firm_*.json")))
+        if os.path.basename(p)[5:-5] not in fin
+    ]
     verdict = collections.Counter()
     bad: list[tuple] = []
     fixed_files = 0
@@ -136,14 +145,16 @@ def main() -> None:
             log = d.setdefault("meta", {}).setdefault("revenue_fix", [])
             for y, fy, firm_v, parsed_v, rcept in fixes:
                 y["revenue"] = parsed_v
-                log.append({
-                    "year": fy,
-                    "from": firm_v,
-                    "to": parsed_v,
-                    "source": "fs_account_xml",
-                    "rcept_no": rcept,
-                    "reason": "FN-025 이자수익 오매핑 — 원문 XML 본표 파싱값으로 대체",
-                })
+                log.append(
+                    {
+                        "year": fy,
+                        "from": firm_v,
+                        "to": parsed_v,
+                        "source": "fs_account_xml",
+                        "rcept_no": rcept,
+                        "reason": "FN-025 이자수익 오매핑 — 원문 XML 본표 파싱값으로 대체",
+                    }
+                )
                 fixed_cells += 1
             with open(p, "w", encoding="utf-8") as f:
                 json.dump(d, f, ensure_ascii=False, separators=(",", ":"))
@@ -159,15 +170,25 @@ def main() -> None:
     # 오염의 지문: firm 매출이 파싱값보다 **작다**(이자수익이 매출을 밀어냄)
     smaller = [b for b in bad if b[2] is not None and b[3] and abs(b[2]) < abs(b[3])]
     larger = [b for b in bad if b not in smaller]
-    print(f"  firm < 파싱 (오염 지문) : {len(smaller)}셀 · {len({b[0] for b in smaller})}사")
-    print(f"  firm > 파싱             : {len(larger)}셀 · {len({b[0] for b in larger})}사")
+    print(
+        f"  firm < 파싱 (오염 지문) : {len(smaller)}셀 · {len({b[0] for b in smaller})}사"
+    )
+    print(
+        f"  firm > 파싱             : {len(larger)}셀 · {len({b[0] for b in larger})}사"
+    )
     print(f"\n[상세 상위 {args.limit}]")
-    for tk, fy, fv, pvv, op in sorted(bad, key=lambda b: -(abs(b[3] or 0)))[:args.limit]:
+    for tk, fy, fv, pvv, op in sorted(bad, key=lambda b: -(abs(b[3] or 0)))[
+        : args.limit
+    ]:
         ratio = (pvv / fv) if fv else float("inf")
-        print(f"  {tk} FY{fy}  firm={fv:>20,.0f}  파싱={pvv:>20,.0f}  배율={ratio:>8.1f}x"
-              f"  영업이익={op if op is None else format(op, ',.0f')}")
+        print(
+            f"  {tk} FY{fy}  firm={fv:>20,.0f}  파싱={pvv:>20,.0f}  배율={ratio:>8.1f}x"
+            f"  영업이익={op if op is None else format(op, ',.0f')}"
+        )
     if args.apply:
-        print(f"\n적용: 파일 {fixed_files}개 · 셀 {fixed_cells}개 보정 (meta.revenue_fix 기록)")
+        print(
+            f"\n적용: 파일 {fixed_files}개 · 셀 {fixed_cells}개 보정 (meta.revenue_fix 기록)"
+        )
     else:
         print("\n(리포트 전용 — 실제 보정은 --apply)")
 

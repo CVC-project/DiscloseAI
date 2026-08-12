@@ -77,7 +77,14 @@ def fmt_num1(v: float) -> str:
     return f"{v:.1f}"
 
 
-FMT = {"jo": fmt_jo, "jo1": fmt_jo1, "eok": fmt_eok, "pct": fmt_pct, "pct0": fmt_pct0, "num1": fmt_num1}
+FMT = {
+    "jo": fmt_jo,
+    "jo1": fmt_jo1,
+    "eok": fmt_eok,
+    "pct": fmt_pct,
+    "pct0": fmt_pct0,
+    "num1": fmt_num1,
+}
 
 
 def parse_chip(chip: str) -> float | None:
@@ -98,7 +105,9 @@ def parse_chip(chip: str) -> float | None:
 # ---------- 검증 ----------
 
 
-def resolve(check: dict[str, Any], facts: dict[str, float], lite: dict[str, Any]) -> tuple[float | None, str]:
+def resolve(
+    check: dict[str, Any], facts: dict[str, float], lite: dict[str, Any]
+) -> tuple[float | None, str]:
     """(기대값, 포맷된 기대 문자열)"""
     kind = check.get("kind")
     fmt = FMT.get(check.get("fmt", "jo"), fmt_jo)
@@ -135,15 +144,23 @@ def resolve(check: dict[str, Any], facts: dict[str, float], lite: dict[str, Any]
         return (None, "") if v is None else (v, fmt(v))
     if kind == "std_norm":  # 표준(골든)의 정규화 값 — 표준 대비 서술의 근거
         vals = lite["std_norm"].get(check["key"], [])
-        i = len(lite["std_years"]) - 1 if check.get("year", "last") == "last" else lite["std_years"].index(check["year"])
+        i = (
+            len(lite["std_years"]) - 1
+            if check.get("year", "last") == "last"
+            else lite["std_years"].index(check["year"])
+        )
         v = vals[i] if i < len(vals) else None
         return (None, "") if v is None else (v, fmt(v))
     return None, ""
 
 
-def verify_card(card: dict[str, Any], facts: dict[str, float], lite: dict[str, Any]) -> list[str]:
+def verify_card(
+    card: dict[str, Any], facts: dict[str, float], lite: dict[str, Any]
+) -> list[str]:
     errs: list[str] = []
-    prose = " ".join(card.get("what", []) + card.get("why", []) + [card.get("title", "")])
+    prose = " ".join(
+        card.get("what", []) + card.get("why", []) + [card.get("title", "")]
+    )
     chips = re.findall(r"\[([^\]]+)\]", prose)
     declared = {n["chip"]: n for n in card.get("nums", [])}
 
@@ -224,15 +241,35 @@ def normalize_segments(segments: list[dict[str, Any]]) -> list[dict[str, Any]]:
     for i, s in enumerate(segments):
         nm = (s.get("name") or s.get("segment") or "").strip()
         if not nm:
-            raise SystemExit(f"[FATAL] segments[{i}]에 부문 이름이 없어요 (name/segment 키 확인)")
+            raise SystemExit(
+                f"[FATAL] segments[{i}]에 부문 이름이 없어요 (name/segment 키 확인)"
+            )
         if "revenue_won" in s or "op_won" in s:
-            out.append({"name": nm, "period": s.get("period", "당기"),
-                        "revenue_won": s.get("revenue_won"), "op_won": s.get("op_won")})
+            out.append(
+                {
+                    "name": nm,
+                    "period": s.get("period", "당기"),
+                    "revenue_won": s.get("revenue_won"),
+                    "op_won": s.get("op_won"),
+                }
+            )
         elif "revenue_won_cur" in s or "op_won_cur" in s:
-            out.append({"name": nm, "period": "당기",
-                        "revenue_won": s.get("revenue_won_cur"), "op_won": s.get("op_won_cur")})
-            out.append({"name": nm, "period": "전기",
-                        "revenue_won": s.get("revenue_won_prior"), "op_won": s.get("op_won_prior")})
+            out.append(
+                {
+                    "name": nm,
+                    "period": "당기",
+                    "revenue_won": s.get("revenue_won_cur"),
+                    "op_won": s.get("op_won_cur"),
+                }
+            )
+            out.append(
+                {
+                    "name": nm,
+                    "period": "전기",
+                    "revenue_won": s.get("revenue_won_prior"),
+                    "op_won": s.get("op_won_prior"),
+                }
+            )
         else:
             raise SystemExit(
                 f"[FATAL] segments[{i}] '{nm}' 형태를 모르겠어요 — "

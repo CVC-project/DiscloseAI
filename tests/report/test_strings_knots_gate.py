@@ -18,9 +18,16 @@ _DATA = os.path.join("integration", "dossier", "data")
 
 
 def _goldens():
+    """골든 galaxy_<ticker>.json만 — V-110 게이트는 **골든 렌더러(galaxy.html)가 그리는 필드**의 계약이다.
+
+    ⚠️ `galaxy_lite_*`는 별도 렌더러(galaxy_lite.html)·별도 스키마다(overview·epilogue·knots 자체가
+    없고 hero·delta_intro·notes_intro를 쓴다 — 파일 헤더에 "골든과 스키마가 다름" 명시).
+    종전 glob이 lite까지 삼켜 24건이 구조적으로 FAIL했다(NEXT_SESSION 데이터부채 #4 → 해소).
+    """
     return sorted(
         p for p in glob.glob(os.path.join(_DATA, "galaxy_*.json"))
         if os.path.basename(p) != "galaxy_index.json"
+        and not os.path.basename(p).startswith("galaxy_lite_")
     )
 
 

@@ -26,7 +26,11 @@ REPORTS_DB = ROOT / "shared" / "data" / "reports.db"
 
 # ---- 영향 차원 (4종) — dossier 표면과 1:1 ----
 DIMS = {
-    "cash": {"label": "재무구조", "surface": "현금 은하수 · EQS 재무분석", "color_key": "cyan"},
+    "cash": {
+        "label": "재무구조",
+        "surface": "현금 은하수 · EQS 재무분석",
+        "color_key": "cyan",
+    },
     "gov": {"label": "지배구조", "surface": "관계 지도(지배구조)", "color_key": "gold"},
     "vc": {"label": "밸류체인", "surface": "관계 지도(밸류체인)", "color_key": "mint"},
     "biz": {"label": "산업·기업", "surface": "사업·기업 탭", "color_key": "steel"},
@@ -53,19 +57,59 @@ TYPE_ROUTE: dict[str, list[str]] = {
 # ---- 2차 라우팅: '기타'(전체의 절반 이상)를 제목 키워드로 구제 ----
 # (정규식, 차원들, 한 줄 설명) — 위에서부터 먼저 맞는 것 하나만 적용
 TITLE_RULES: list[tuple[str, list[str], str]] = [
-    (r"사업보고서|반기보고서|분기보고서", ["cash", "biz"], "결산 숫자가 갱신되는 공시예요 — 은하수의 기준 스냅샷이 바뀌어요."),
-    (r"배당", ["cash"], "번 돈의 일부가 주주에게 나가요 — 저수지에서 물이 빠지는 자리예요."),
-    (r"기업가치제고|밸류업", ["cash", "biz"], "주주환원·자본 활용 계획이라 재무 존의 방향을 예고해요."),
-    (r"특수관계인|계열회사|기업집단|상품ㆍ용역거래|상품·용역거래", ["vc", "gov"], "그룹 안 거래·출자 관계라 밸류체인과 지배구조를 함께 건드려요."),
-    (r"대량보유|소유주식|의결권|주주명부|주주총회|사외이사|이사의|감사", ["gov"], "누가 회사를 통제하는지에 관한 공시예요."),
-    (r"합병|분할|영업양수|영업양도|주식교환", ["vc", "gov"], "사업의 경계가 바뀌어요 — 밸류체인과 지배구조가 함께 움직여요."),
+    (
+        r"사업보고서|반기보고서|분기보고서",
+        ["cash", "biz"],
+        "결산 숫자가 갱신되는 공시예요 — 은하수의 기준 스냅샷이 바뀌어요.",
+    ),
+    (
+        r"배당",
+        ["cash"],
+        "번 돈의 일부가 주주에게 나가요 — 저수지에서 물이 빠지는 자리예요.",
+    ),
+    (
+        r"기업가치제고|밸류업",
+        ["cash", "biz"],
+        "주주환원·자본 활용 계획이라 재무 존의 방향을 예고해요.",
+    ),
+    (
+        r"특수관계인|계열회사|기업집단|상품ㆍ용역거래|상품·용역거래",
+        ["vc", "gov"],
+        "그룹 안 거래·출자 관계라 밸류체인과 지배구조를 함께 건드려요.",
+    ),
+    (
+        r"대량보유|소유주식|의결권|주주명부|주주총회|사외이사|이사의|감사",
+        ["gov"],
+        "누가 회사를 통제하는지에 관한 공시예요.",
+    ),
+    (
+        r"합병|분할|영업양수|영업양도|주식교환",
+        ["vc", "gov"],
+        "사업의 경계가 바뀌어요 — 밸류체인과 지배구조가 함께 움직여요.",
+    ),
     (r"공급계약|수주|납품", ["vc", "biz"], "매출이 어디서 오는지가 바뀌는 자리예요."),
     (r"투자판단|풍문|조회공시", ["biz"], "시장의 관심사에 회사가 답한 공시예요."),
     (r"기업설명회|IR", ["biz"], "회사가 사업을 직접 설명하는 자리예요."),
-    (r"단일판매|공급계약체결", ["vc", "biz"], "매출이 어디서 오는지가 바뀌는 자리예요."),
-    (r"지배구조보고서", ["gov"], "이사회·주주권 같은 통제 장치를 회사가 스스로 점검한 보고서예요."),
-    (r"지급수단별|하도급|대금지급", ["vc"], "협력사에 언제 어떤 방식으로 돈을 주는지에 관한 공시예요 — 공급망의 현금 흐름이에요."),
-    (r"지속가능경영|ESG|환경", ["biz"], "사업을 둘러싼 환경·사회 측면을 회사가 설명한 보고서예요."),
+    (
+        r"단일판매|공급계약체결",
+        ["vc", "biz"],
+        "매출이 어디서 오는지가 바뀌는 자리예요.",
+    ),
+    (
+        r"지배구조보고서",
+        ["gov"],
+        "이사회·주주권 같은 통제 장치를 회사가 스스로 점검한 보고서예요.",
+    ),
+    (
+        r"지급수단별|하도급|대금지급",
+        ["vc"],
+        "협력사에 언제 어떤 방식으로 돈을 주는지에 관한 공시예요 — 공급망의 현금 흐름이에요.",
+    ),
+    (
+        r"지속가능경영|ESG|환경",
+        ["biz"],
+        "사업을 둘러싼 환경·사회 측면을 회사가 설명한 보고서예요.",
+    ),
 ]
 
 # ---- 유형별 "이 공시가 바꾸는 것" 1문장 (collector._CPA_TEMPLATES 취지의 경어체 축약) ----
@@ -178,10 +222,13 @@ def build(ticker: str) -> dict[str, Any]:
             after_counts[d] += 1
 
     badge_parts = [
-        f"{DIMS[k]['label']} {after_counts[k]}" for k in ("cash", "gov", "vc", "biz") if after_counts[k]
+        f"{DIMS[k]['label']} {after_counts[k]}"
+        for k in ("cash", "gov", "vc", "biz")
+        if after_counts[k]
     ]
     badge = (
-        f"결산 이후 공시 {len(after_items)}건" + (" — " + " · ".join(badge_parts) if badge_parts else "")
+        f"결산 이후 공시 {len(after_items)}건"
+        + (" — " + " · ".join(badge_parts) if badge_parts else "")
         if after_items
         else f"최근 공시 {len(items)}건"
     )
@@ -192,8 +239,13 @@ def build(ticker: str) -> dict[str, Any]:
         "snapshot": snap,
         "dims": DIMS,
         "badge": badge,
-        "counts": {"total": len(items), "after_snapshot": len(after_items),
-                   "by_dim": counts, "after_by_dim": after_counts, "unrouted": unrouted},
+        "counts": {
+            "total": len(items),
+            "after_snapshot": len(after_items),
+            "by_dim": counts,
+            "after_by_dim": after_counts,
+            "unrouted": unrouted,
+        },
         "items": items,
         "meta": {
             "generated_by": "build_disclosure_impact.py",

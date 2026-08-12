@@ -69,7 +69,12 @@ if __name__ == "__main__":
     # 콘솔이 cp949인 윈도우에서 em dash 등 비cp949 문자를 print하면 크래시한다(FN-001 계보) — ASCII 구분자 사용
     print(f"galaxy_lite_index.json 생성: {len(es)}개")
     for e in es:
-        print(f"  {e['ticker']} {e['name']} / 표준 {e['std_name']}({e['std_ticker']}) / 주목할점 {e['notes']}장")
+        print(
+            f"  {e['ticker']} {e['name']} / 표준 {e['std_name']}({e['std_ticker']}) / 주목할점 {e['notes']}장"
+        )
     if sk:
         # 조용히 빠지면 '왜 탭이 안 켜지지'로 시간을 쓴다 — 제외분은 항상 이유와 함께 보인다
-        print(f"미등재(눈여겨볼 곳 0장 = 미완주) {len(sk)}개: " + ", ".join(f"{t} {n}" for t, n in sk))
+        print(
+            f"미등재(눈여겨볼 곳 0장 = 미완주) {len(sk)}개: "
+            + ", ".join(f"{t} {n}" for t, n in sk)
+        )
