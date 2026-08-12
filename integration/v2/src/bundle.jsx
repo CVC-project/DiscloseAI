@@ -1064,8 +1064,11 @@ window.groupVcSide = groupVcSide;
 // ─── Sector map: companies as glowing nodes inside the chosen sector ────
 const { useRef: _useRef, useEffect: _useEffect, useState: _useState, useMemo: _useMemo } = React;
 
-function SectorMap({ sectorId, activeMarket, activeCompanyCode, onSelectMarket, onSelectCompany, onSelectGhost }) {
+function SectorMap({ sectorId, activeMarket, activeCompanyCode, onSelectMarket, onSelectCompany, onSelectGhost, glowSet }) {
   const canvasRef = _useRef(null);
+  // UX-045: 현금 은하수 보유(골든∪lite) 티커 — draw 루프는 ref로 읽는다(effect deps 불변 유지, DESIGN §9-1).
+  const glowSetRef = _useRef(null);
+  glowSetRef.current = glowSet || null;
   const rafRef = _useRef(0);
   const startRef = _useRef(performance.now());
   const sizeRef = _useRef({ w: 0, h: 0, dpr: 1 });
@@ -1348,6 +1351,19 @@ function SectorMap({ sectorId, activeMarket, activeCompanyCode, onSelectMarket, 
         ctx.globalAlpha = activeCompanyCode ? 0.35 : (0.72 + Math.sin(t * 0.6) * 0.08);
         ctx.drawImage(dotsCanvasRef.current, 0, 0, w, h);
         ctx.restore();
+        // UX-045: dot 기업 중 현금 은하수 보유(골든∪lite)는 프리렌더 위에 트윙클 오버레이 —
+        // 프리렌더는 정적이라 개별 반짝임이 불가하므로 메인 루프에서 덧그린다(좌표는 dotsScreenRef).
+        const _gsd = glowSetRef.current;
+        if (_gsd && dotsScreenRef.current.length) {
+          for (const dsc of dotsScreenRef.current) {
+            if (!dsc.t || !_gsd.has(dsc.t)) continue;
+            const ph = (dsc.t.charCodeAt(3) * 11 + dsc.t.charCodeAt(5)) % 63 / 10;
+            const tw = (Math.sin(t * 2.6 + ph) + 1) / 2;
+            const a = activeCompanyCode ? 0.25 : 0.35 + tw * 0.55;
+            ctx.fillStyle = `rgba(92,199,234,${a})`;
+            ctx.beginPath(); ctx.arc(dsc.x, dsc.y, dsc.r + 0.6 + tw * 1.6, 0, Math.PI * 2); ctx.fill();
+          }
+        }
       }
 
       // Lerp
@@ -1503,16 +1519,36 @@ function SectorMap({ sectorId, activeMarket, activeCompanyCode, onSelectMarket, 
           ctx.lineWidth = 1.5;
           ctx.beginPath(); ctx.arc(x, y, nodeR * (2 + p * 0.5), 0, Math.PI * 2); ctx.stroke();
         }
+        // UX-045: 현금 은하수 보유 기업 트윙클 — cyan(#5CC7EA = 현금, DESIGN 팔레트) 링 + 4점 스파클.
+        // 위상은 코드 해시로 흩뜨려 전 노드가 동시에 깜빡이지 않게.
+        const _gs = glowSetRef.current;
+        if (_gs && _gs.has(c.code) && !c.isMarket) {
+          const ph = (c.code.charCodeAt(4) * 7 + c.code.charCodeAt(5)) % 63 / 10;
+          const tw = (Math.sin(t * 2.2 + ph) + 1) / 2;          // 0~1 트윙클
+          const gr = nodeR + 5 + tw * 3;
+          ctx.strokeStyle = `rgba(92,199,234,${0.35 + tw * 0.45})`;
+          ctx.lineWidth = 1.2;
+          ctx.beginPath(); ctx.arc(x, y, gr, 0, Math.PI * 2); ctx.stroke();
+          const sl = gr + 2 + tw * 4;                            // 스파클 십자
+          ctx.strokeStyle = `rgba(92,199,234,${0.5 + tw * 0.5})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(x - sl, y); ctx.lineTo(x - gr, y); ctx.moveTo(x + gr, y); ctx.lineTo(x + sl, y);
+          ctx.moveTo(x, y - sl); ctx.lineTo(x, y - gr); ctx.moveTo(x, y + gr); ctx.lineTo(x, y + sl);
+          ctx.stroke();
+        }
         positions.push({ x, y, r: nodeR, c });
       });
       // Labels for sector companies
       ctx.textAlign = 'center';
       positions.forEach(({ x, y, r: nr, c }) => {
         const isActive = c.code === activeCompanyCode;
+        const hasGx = glowSetRef.current && glowSetRef.current.has(c.code) && !c.isMarket;
         ctx.globalAlpha = isActive ? 1 : 0.8;
-        ctx.fillStyle = isActive ? sec.color : 'rgba(148,163,184,0.9)';
+        ctx.fillStyle = isActive ? sec.color : hasGx ? 'rgba(92,199,234,0.95)' : 'rgba(148,163,184,0.9)';
         ctx.font = `${isActive ? '600 ' : ''}10px sans-serif`;
-        ctx.fillText(c.name.length > 7 ? c.name.slice(0,7)+'…' : c.name, x, y - nr - 5);
+        const nm = c.name.length > 7 ? c.name.slice(0,7)+'…' : c.name;
+        ctx.fillText(hasGx ? '✦ ' + nm : nm, x, y - nr - 5);  // UX-045: 은하수 보유 표식
         ctx.globalAlpha = 1;
       });
       ctx.textAlign = 'left';
@@ -3569,10 +3605,29 @@ function SectorOverviewPanel({ sector, companyCount, activeMarket, onBack, onSel
   const realData = window.__realData;
   const members = (sector.members || []).map(n => n);
   // UX-043: 이 섹터의 골든 은하수 보유 기업 (galaxy_index 매니페스트 ∩ 섹터 멤버 — 하드코딩 없음)
-  const goldenReps = React.useMemo(
-    () => members.filter(m => galaxyTickers && galaxyTickers.has(m.t)),
-    [sector.id, galaxyTickers]
-  );
+  // UX-045: ⓐ 멤버(top50 기반)에 없는 골든은 companies_index(전 상장사, s=섹터명)로 보충 —
+  //   KOSDAQ 골든(원익IPS 등)은 top50 밖이라 멤버 교집합만으로는 영영 안 뜬다.
+  //   ⓑ KOSPI/KOSDAQ 시장 그룹으로 나눠 표시(시장은 indexByCode.mkt — 리더 지시 08-12).
+  const goldenReps = React.useMemo(() => {
+    const idx = (realData && realData.indexByCode) || {};
+    const seen = new Set(); const out = [];
+    for (const m of members) {
+      if (galaxyTickers && galaxyTickers.has(m.t) && !seen.has(m.t)) {
+        seen.add(m.t);
+        out.push({ t: m.t, n: m.n || m.name, mkt: (idx[m.t] && idx[m.t].mkt) || '' });
+      }
+    }
+    if (galaxyTickers) for (const t of galaxyTickers) {
+      const c = idx[t];
+      if (c && !seen.has(t) && c.s === sector.ko) { seen.add(t); out.push({ t, n: c.n, mkt: c.mkt || '' }); }
+    }
+    return out;
+  }, [sector.id, sector.ko, galaxyTickers, realData]);
+  const repGroups = React.useMemo(() => {
+    const g = { KOSPI: [], KOSDAQ: [], '': [] };
+    for (const r of goldenReps) (g[r.mkt] || g['']).push(r);
+    return [['KOSPI', g.KOSPI], ['KOSDAQ', g.KOSDAQ], ['', g['']]].filter(([, v]) => v.length);
+  }, [goldenReps]);
   // 드릴인 기업 목록: named(시총 정확) 먼저 cap desc → dot 기업 cb desc·이름순
   const marketList = React.useMemo(() => {
     if (!activeMarket || !realData || !realData.sectorMarketData) return null;
@@ -3618,16 +3673,26 @@ function SectorOverviewPanel({ sector, companyCount, activeMarket, onBack, onSel
               <div style={{fontSize: 11.5, color: '#94a3b8', lineHeight: 1.65, margin: '2px 0 8px'}}>
                 {sector.ko} 섹터의 대표 기업으로 사업보고서 읽는 법을 배워보세요!
               </div>
-              <ul className="ov-sec-list">
-                {goldenReps.map((r) => (
-                  <li key={r.t} onClick={() => onLearnGalaxy && onLearnGalaxy(r.t)}
-                      style={{cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6}}>
-                    <span className="ov-bullet" style={{background: sector.color}} />
-                    <span style={{flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{r.n || r.name}</span>
-                    <span style={{fontFamily: 'var(--font-mono)', fontSize: 10, color: sector.color, whiteSpace: 'nowrap'}}>은하수 열기 →</span>
-                  </li>
-                ))}
-              </ul>
+              {repGroups.map(([mkt, reps]) => (
+                <div key={mkt || 'etc'}>
+                  {mkt && (
+                    <div style={{fontFamily: 'var(--font-mono)', fontSize: 9.5, letterSpacing: '.08em',
+                                 color: mkt === 'KOSPI' ? '#94a3b8' : '#5CC7EA', margin: '6px 0 3px'}}>
+                      {mkt}
+                    </div>
+                  )}
+                  <ul className="ov-sec-list" style={{marginTop: 0}}>
+                    {reps.map((r) => (
+                      <li key={r.t} onClick={() => onLearnGalaxy && onLearnGalaxy(r.t)}
+                          style={{cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6}}>
+                        <span className="ov-bullet" style={{background: sector.color}} />
+                        <span style={{flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{r.n || r.name}</span>
+                        <span style={{fontFamily: 'var(--font-mono)', fontSize: 10, color: sector.color, whiteSpace: 'nowrap'}}>은하수 열기 →</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </>) : (
               <div style={{fontSize: 11.5, color: '#64748b', margin: '2px 0'}}>
                 이 섹터의 대표 은하수는 준비 중이에요. 먼저 완성된 다른 섹터의 표준으로 배워보실 수 있어요.
@@ -4462,6 +4527,11 @@ function App() {
       .catch(() => {});
     return () => { alive = false; };
   }, []);
+  // UX-045: 우주 맵 트윙클 대상 = 현금 은하수 보유(골든 ∪ lite) — 매니페스트 합집합.
+  const galaxyGlowSet = React.useMemo(
+    () => new Set([...galaxyTickers, ...liteTickers]),
+    [galaxyTickers, liteTickers]
+  );
   // DOSSIER_TABS (D1) — 탭 추가 = 이 배열 한 줄 + dossier/<id>.html + <id>_<ticker>.json
   const DOSSIER_TABS = [
     { id: 'business', label: '사업·기업',   src: 'business.html', context: 'business', activeWhen: 'always'  }, // ① 사업·기업 개요
@@ -4681,6 +4751,7 @@ function App() {
                   onSelectMarket={enterMarket}
                   onSelectCompany={selectCompany}
                   onSelectGhost={selectGhost}
+                  glowSet={galaxyGlowSet}
                 />
               )}
             </div>
