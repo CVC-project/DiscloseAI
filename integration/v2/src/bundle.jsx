@@ -1359,9 +1359,14 @@ function SectorMap({ sectorId, activeMarket, activeCompanyCode, onSelectMarket, 
             if (!dsc.t || !_gsd.has(dsc.t)) continue;
             const ph = (dsc.t.charCodeAt(3) * 11 + dsc.t.charCodeAt(5)) % 63 / 10;
             const tw = (Math.sin(t * 2.6 + ph) + 1) / 2;
-            const a = activeCompanyCode ? 0.25 : 0.35 + tw * 0.55;
-            ctx.fillStyle = `rgba(92,199,234,${a})`;
-            ctx.beginPath(); ctx.arc(dsc.x, dsc.y, dsc.r + 0.6 + tw * 1.6, 0, Math.PI * 2); ctx.fill();
+            const a = activeCompanyCode ? 0.25 : 0.35 + tw * 0.6;
+            // 섹터 고유색으로 반짝(개정 08-12b) — 피크에서 흰 심이 살짝 맺혀 '별' 인상
+            ctx.fillStyle = sec.color + Math.round(a * 255).toString(16).padStart(2, '0');
+            ctx.beginPath(); ctx.arc(dsc.x, dsc.y, dsc.r + 0.8 + tw * 2.2, 0, Math.PI * 2); ctx.fill();
+            if (tw > 0.72 && !activeCompanyCode) {
+              ctx.fillStyle = `rgba(255,255,255,${(tw - 0.72) * 2.5})`;
+              ctx.beginPath(); ctx.arc(dsc.x, dsc.y, dsc.r * 0.7, 0, Math.PI * 2); ctx.fill();
+            }
           }
         }
       }
@@ -1519,23 +1524,38 @@ function SectorMap({ sectorId, activeMarket, activeCompanyCode, onSelectMarket, 
           ctx.lineWidth = 1.5;
           ctx.beginPath(); ctx.arc(x, y, nodeR * (2 + p * 0.5), 0, Math.PI * 2); ctx.stroke();
         }
-        // UX-045: 현금 은하수 보유 기업 트윙클 — cyan(#5CC7EA = 현금, DESIGN 팔레트) 링 + 4점 스파클.
-        // 위상은 코드 해시로 흩뜨려 전 노드가 동시에 깜빡이지 않게.
+        // UX-045(개정 08-12b, 리더 피드백 "표적처럼 하지 말고 반짝반짝") — 링+십자(조준경 인상)를
+        // 폐기하고 **별 광휘**로: 호흡하는 섹터색 헤일로 + 노드 가장자리의 4점 별 글린트 2개.
+        // 색은 cyan 고정이 아니라 **섹터 고유색**(sec.color). 위상은 코드 해시로 분산.
         const _gs = glowSetRef.current;
         if (_gs && _gs.has(c.code) && !c.isMarket) {
           const ph = (c.code.charCodeAt(4) * 7 + c.code.charCodeAt(5)) % 63 / 10;
-          const tw = (Math.sin(t * 2.2 + ph) + 1) / 2;          // 0~1 트윙클
-          const gr = nodeR + 5 + tw * 3;
-          ctx.strokeStyle = `rgba(92,199,234,${0.35 + tw * 0.45})`;
-          ctx.lineWidth = 1.2;
-          ctx.beginPath(); ctx.arc(x, y, gr, 0, Math.PI * 2); ctx.stroke();
-          const sl = gr + 2 + tw * 4;                            // 스파클 십자
-          ctx.strokeStyle = `rgba(92,199,234,${0.5 + tw * 0.5})`;
-          ctx.lineWidth = 1;
-          ctx.beginPath();
-          ctx.moveTo(x - sl, y); ctx.lineTo(x - gr, y); ctx.moveTo(x + gr, y); ctx.lineTo(x + sl, y);
-          ctx.moveTo(x, y - sl); ctx.lineTo(x, y - gr); ctx.moveTo(x, y + gr); ctx.lineTo(x, y + sl);
-          ctx.stroke();
+          const tw = (Math.sin(t * 2.4 + ph) + 1) / 2;           // 0~1 호흡
+          // ⓐ 헤일로 — 노드 주위가 섹터색으로 환해졌다 어두워졌다
+          const fr = nodeR * (2.2 + tw * 1.1);
+          const fg = ctx.createRadialGradient(x, y, nodeR * 0.4, x, y, fr);
+          fg.addColorStop(0, sec.color + Math.round(64 + tw * 96).toString(16).padStart(2, '0'));
+          fg.addColorStop(1, sec.color + '00');
+          ctx.fillStyle = fg;
+          ctx.beginPath(); ctx.arc(x, y, fr, 0, Math.PI * 2); ctx.fill();
+          // ⓑ 별 글린트 — 가장자리에서 반짝이는 4점 별(테이퍼드 광선), 위상 어긋난 2개
+          const glint = (gx, gy, sz, a) => {
+            if (a <= 0.02 || sz <= 0.4) return;
+            const g2 = ctx.createRadialGradient(gx, gy, 0, gx, gy, sz);
+            g2.addColorStop(0, `rgba(255,255,255,${a})`);
+            g2.addColorStop(0.4, sec.color + Math.round(a * 200).toString(16).padStart(2, '0'));
+            g2.addColorStop(1, sec.color + '00');
+            ctx.fillStyle = g2;
+            ctx.beginPath();                                     // 4점 별(다이아 광선)
+            ctx.moveTo(gx, gy - sz); ctx.quadraticCurveTo(gx + sz * 0.18, gy - sz * 0.18, gx + sz, gy);
+            ctx.quadraticCurveTo(gx + sz * 0.18, gy + sz * 0.18, gx, gy + sz);
+            ctx.quadraticCurveTo(gx - sz * 0.18, gy + sz * 0.18, gx - sz, gy);
+            ctx.quadraticCurveTo(gx - sz * 0.18, gy - sz * 0.18, gx, gy - sz);
+            ctx.fill();
+          };
+          const tw2 = (Math.sin(t * 3.1 + ph + 2.1) + 1) / 2;    // 두 번째 글린트는 다른 박자
+          glint(x + nodeR * 0.72, y - nodeR * 0.72, nodeR * (0.45 + tw * 0.55), 0.25 + tw * 0.75);
+          glint(x - nodeR * 0.6, y + nodeR * 0.55, nodeR * (0.25 + tw2 * 0.35), 0.15 + tw2 * 0.55);
         }
         positions.push({ x, y, r: nodeR, c });
       });
@@ -1545,7 +1565,7 @@ function SectorMap({ sectorId, activeMarket, activeCompanyCode, onSelectMarket, 
         const isActive = c.code === activeCompanyCode;
         const hasGx = glowSetRef.current && glowSetRef.current.has(c.code) && !c.isMarket;
         ctx.globalAlpha = isActive ? 1 : 0.8;
-        ctx.fillStyle = isActive ? sec.color : hasGx ? 'rgba(92,199,234,0.95)' : 'rgba(148,163,184,0.9)';
+        ctx.fillStyle = isActive || hasGx ? sec.color : 'rgba(148,163,184,0.9)';  // 보유 = 섹터색(개정 08-12b)
         ctx.font = `${isActive ? '600 ' : ''}10px sans-serif`;
         const nm = c.name.length > 7 ? c.name.slice(0,7)+'…' : c.name;
         ctx.fillText(hasGx ? '✦ ' + nm : nm, x, y - nr - 5);  // UX-045: 은하수 보유 표식
