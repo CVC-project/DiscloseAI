@@ -1,0 +1,101 @@
+[
+ {
+  "id": "n1",
+  "title": "빚을 작년의 [63.6%] 수준으로 줄였어요",
+  "what": [
+   "총차입부채가 [3.22조]에서 [2.05조]로, 작년의 [63.6%] 수준으로 줄었어요.",
+   "1년 안에 갚아야 하는 단기차입금도 [2.16조]에서 [1.45조]로 줄었어요."
+  ],
+  "why": [
+   "배를 만드는 회사는 배를 넘기기 전까지 돈이 묶여서 한동안 빚으로 버티는 일이 흔해요. 그 빚을 줄였다는 건 영업에서 들어온 돈으로 갚을 여력이 생겼다는 뜻이에요.",
+   "만기가 긴 몫도 [619억]에서 [167억]으로 줄었어요 — 짧은 쪽만 갚고 긴 쪽으로 미룬 게 아니에요.",
+   "위에서 본 자가발전형이 이런 모습이에요 — 벌어서 투자하고 빚도 갚는 국면이요."
+  ],
+  "src": {"note_no": "20", "title": "차입금 및 사채"},
+  "nums": [
+   {"chip": "3.22조", "check": {"kind": "fact", "key": "borrow_total_prior", "fmt": "jo"}},
+   {"chip": "2.05조", "check": {"kind": "fact", "key": "borrow_total_cur", "fmt": "jo"}},
+   {"chip": "63.6%", "check": {"kind": "share", "num": "borrow_total_cur", "den": "borrow_total_prior", "fmt": "pct"}},
+   {"chip": "2.16조", "check": {"kind": "fact", "key": "st_borrow_prior", "fmt": "jo"}},
+   {"chip": "1.45조", "check": {"kind": "fact", "key": "st_borrow_cur", "fmt": "jo"}},
+   {"chip": "619억", "check": {"kind": "fact", "key": "lt_borrow_prior", "fmt": "eok"}},
+   {"chip": "167억", "check": {"kind": "fact", "key": "lt_borrow_cur", "fmt": "eok"}}
+  ],
+  "std_focus": "dive:n20",
+  "order": 1,
+  "bridge": null
+ },
+ {
+  "id": "n2",
+  "title": "청구하지 않았던 몫이 대금으로 넘어갔어요",
+  "what": [
+   "아직 청구하지 못한 계약자산이 [3.57조]에서 [2.18조]로 줄었어요.",
+   "대신 이미 청구한 매출채권이 [1.03조]에서 [1.31조]로 늘었어요."
+  ],
+  "why": [
+   "계약자산이 줄고 매출채권이 늘었다는 건, 일한 몫을 실제로 청구하는 단계로 넘어갔다는 뜻이에요 — 현금에 한 걸음 가까워진 거예요.",
+   "미리 받아 둔 계약부채는 [5.46조]에서 [4.58조]로 줄었어요. 받아 둔 돈을 배로 갚아 나가고 있다는 신호예요.",
+   "이 세 항목이 같이 움직이는 걸 보면, 수주한 배가 어느 단계에 와 있는지를 짐작할 수 있어요."
+  ],
+  "src": {"note_no": "10", "title": "매출채권, 계약자산과 미수금"},
+  "nums": [
+   {"chip": "3.57조", "check": {"kind": "fact", "key": "contract_asset_prior", "fmt": "jo"}},
+   {"chip": "2.18조", "check": {"kind": "fact", "key": "contract_asset_cur", "fmt": "jo"}},
+   {"chip": "1.03조", "check": {"kind": "fact", "key": "ar_prior", "fmt": "jo"}},
+   {"chip": "1.31조", "check": {"kind": "fact", "key": "ar_cur", "fmt": "jo"}},
+   {"chip": "5.46조", "check": {"kind": "fact", "key": "contract_liab_prior", "fmt": "jo"}},
+   {"chip": "4.58조", "check": {"kind": "fact", "key": "contract_liab_cur", "fmt": "jo"}}
+  ],
+  "std_focus": "dive:n11",
+  "order": 2,
+  "bridge": "빚을 갚을 돈은 어디서 들어왔을까요?"
+ },
+ {
+  "id": "n3",
+  "title": "앞으로 나갈 돈으로 [8,829억]을 새로 잡았어요",
+  "what": [
+   "소송 등에 대비한 기타충당부채가 [440억]에서 [9,032억]으로 늘었어요.",
+   "올해 새로 잡은 금액만 [8,829억]이에요."
+  ],
+  "why": [
+   "충당부채는 아직 실제로 나가지 않았지만 앞으로 나갈 가능성이 높다고 판단한 돈을, 판단한 그 해에 미리 비용으로 잡아 두는 금액이에요.",
+   "현금은 아직 나가지 않았어요 — 그래서 이익은 줄지만 영업활동 현금은 그만큼 줄지 않아요.",
+   "이익이 좋아진 해에 이런 금액이 크게 잡히면, 좋아진 이익만 보고 판단하지 말고 이 자리도 함께 봐야 해요."
+  ],
+  "src": {"note_no": "22", "title": "충당부채, 우발부채 및 약정사항"},
+  "nums": [
+   {"chip": "440억", "check": {"kind": "fact", "key": "prov_end_prior", "fmt": "eok"}},
+   {"chip": "9,032억", "check": {"kind": "fact", "key": "prov_end_cur", "fmt": "eok"}},
+   {"chip": "8,829억", "check": {"kind": "fact", "key": "prov_add_cur", "fmt": "eok"}}
+  ],
+  "std_focus": "dive:n22",
+  "order": 3,
+  "bridge": "그런데 좋아진 이익 옆에 새로 생긴 자리가 하나 있어요."
+ },
+ {
+  "id": "n4",
+  "title": "이익은 조선해양에서 나와요",
+  "what": [
+   "조선해양 부문이 매출 [10.44조]에 영업이익 [7,887억]을 냈어요 — 작년 [2,935억]의 두 배가 넘어요.",
+   "토건 부문은 매출이 [0.79조]에서 [0.45조]로 줄면서 영업이익도 [2,463억]에서 [1,158억]으로 줄었어요."
+  ],
+  "why": [
+   "회사 이익의 대부분이 조선해양에서 나와요 — 비싸게 수주한 배가 지금 매출로 바뀌고 있다는 뜻이에요.",
+   "토건은 규모가 줄었지만 여전히 이익을 내고 있어요. 한 사업이 흔들릴 때 다른 사업이 받쳐 주는 구조인지 보는 게 중요해요.",
+   "표준인 한화에어로스페이스의 영업이익 항목과 나란히 보면, 같은 중공업 안에서도 이익이 나는 자리가 회사마다 다르다는 게 보여요."
+  ],
+  "src": {"note_no": "35", "title": "영업부문 정보"},
+  "nums": [
+   {"chip": "10.44조", "check": {"kind": "fact", "key": "seg_조선해양_rev", "fmt": "jo"}},
+   {"chip": "7,887억", "check": {"kind": "fact", "key": "seg_조선해양_op", "fmt": "eok"}},
+   {"chip": "2,935억", "check": {"kind": "fact", "key": "seg_조선해양_op_prior", "fmt": "eok"}},
+   {"chip": "0.79조", "check": {"kind": "fact", "key": "seg_토건_rev_prior", "fmt": "jo"}},
+   {"chip": "0.45조", "check": {"kind": "fact", "key": "seg_토건_rev", "fmt": "jo"}},
+   {"chip": "2,463억", "check": {"kind": "fact", "key": "seg_토건_op_prior", "fmt": "eok"}},
+   {"chip": "1,158억", "check": {"kind": "fact", "key": "seg_토건_op", "fmt": "eok"}}
+  ],
+  "std_focus": "dive:k6",
+  "order": 4,
+  "bridge": "마지막으로, 그 이익이 어느 사업에서 나오는지 봐요."
+ }
+]

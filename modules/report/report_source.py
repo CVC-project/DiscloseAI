@@ -103,6 +103,16 @@ def _html_to_blocks(html: str, *, row_cap: int | None = _ROW_CAP) -> list[dict]:
             if t:
                 blocks.append({"t": "p", "v": t})
         else:  # table
+            # V-119 — **1열 표는 표가 아니라 레이아웃 컨테이너다.** DART 원문은 산문 주석을
+            #   1열×1행 표의 <td> 안에 <p>로 싣는 경우가 있다(원익IPS 주5 실측: <p> 19개 전부
+            #   표 안 → 표 안 <p> 스킵 + 셀 초과 비정형 판정 → 본문 통째 소실). 셀 안 문단을 전개한다.
+            _tds = el.find_all("td")
+            if len(_tds) <= 2 and not el.find("table"):
+                _ps = [q.get_text(" ", strip=True) for q in el.find_all("p")]
+                _ps = [t for t in _ps if t]
+                if len(_ps) >= 3:  # 문단 여럿 = 산문 컨테이너. 값 표(1~2셀 짧은 표)는 종전 경로.
+                    blocks.extend({"t": "p", "v": t} for t in _ps)
+                    continue
             rows = _table_grid(el)
             if not rows:
                 continue

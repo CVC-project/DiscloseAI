@@ -296,23 +296,30 @@ def check(ticker: str, strict: bool = False) -> list[str]:
         v = S.get(key)
         return v[-1] if isinstance(v, list) and v else None
 
+    # V-117 — 항등식 허용오차는 **표시 단위에 비례**한다. 종전 상수(0.15조·1.0조)를 억 표기
+    #   티커에 그대로 쓰면 0.15억(=1,500만원)이 되어 반올림 잔차에도 늘 FAIL이다.
+    #   조 기준 상수 × (조÷표시단위 배율) 로 환산한다: 억이면 ×1e4.
+    TOLX = {"조 원": 1.0, "억 원": 1e4}.get((G.get("corp") or {}).get("unit_label", "조 원"), 1.0)
+
     if all(S.get(x) for x in ("revenue", "cogs", "gross")):
         ident(
-            "매출−원가=총이익", S["revenue"][-1] - S["cogs"][-1], S["gross"][-1], 0.15
+            "매출−원가=총이익", S["revenue"][-1] - S["cogs"][-1], S["gross"][-1],
+            0.15 * TOLX,
         )
     if all(S.get(x) for x in ("ni", "oci", "tci")):
-        ident("ni+oci=tci", S["ni"][-1] + S["oci"][-1], S["tci"][-1], 0.15)
+        ident("ni+oci=tci", S["ni"][-1] + S["oci"][-1], S["tci"][-1], 0.15 * TOLX)
     if all(S.get(x) for x in ("cash", "ocf", "icf", "fin")) and len(S["cash"]) >= 2:
         ident(
             "현금워크(환율 허용)",
             S["cash"][-2] + S["ocf"][-1] + S["icf"][-1] + S["fin"][-1],
             S["cash"][-1],
-            1.0,
+            1.0 * TOLX,
         )
     pb = {r.get("row"): _num(r.get("v")) for r in panels.get("B", [])}
     if all(pb.get(x) is not None for x in ("is-revenue", "is-cogs", "is-grossprofit")):
         ident(
-            "패널B 총이익", pb["is-revenue"] + pb["is-cogs"], pb["is-grossprofit"], 0.2
+            "패널B 총이익", pb["is-revenue"] + pb["is-cogs"], pb["is-grossprofit"],
+            0.2 * TOLX,
         )
 
     # ── 5) 서브행 합 = 부모 (grp, 잔차 '그 외'·'기타' 명시 규약) ──
@@ -340,7 +347,10 @@ def check(ticker: str, strict: bool = False) -> list[str]:
         ]
         vals = [v for v, _ in kids if v is not None]
         pv = _num(row2v.get(prow))
-        if vals and pv is not None and abs(sum(vals) - pv) > 0.25:
+        # V-117 — 억 표기 티커는 서브행이 정수로 표시돼 **반올림 누적**이 생긴다(18행이면 최대 ±9).
+        #   조 표기는 종전 상수 0.25 그대로 두어 기존 골든 무회귀. 억은 부모의 0.1%(최소 2)로.
+        _sub_tol = 0.25 if TOLX == 1.0 else max(2.0, abs(pv or 0) * 0.001)
+        if vals and pv is not None and abs(sum(vals) - pv) > _sub_tol:
             gaps.append(f"[서브행합] {g}: 합 {sum(vals):.1f} ≠ 부모 {pv:.1f}")
 
     # ── 6) 링크 a값 정합 / viz_data 스키마 ──
@@ -762,7 +772,12 @@ def _check_strict(ticker: str, G: dict, dives: dict) -> list[str]:
         ]
         if wc_src:
             nm_src, amt_src = max(wc_src, key=lambda x: abs(x[1]))
-            src_jo = amt_src / 1e12
+            # V-117 — 패널 표시 단위가 티커 속성이므로 본표 원값도 그 단위로 환산해 비교한다.
+            #   종전 `/1e12`(조) 고정이면 억 표기 티커에서 1만 배 어긋나 항상 FAIL이다.
+            _u13 = {"조 원": 1e12, "억 원": 1e8}
+            _div13 = _u13.get((G.get("corp") or {}).get("unit_label", "조 원"), 1e12)
+            _ulab = (G.get("corp") or {}).get("unit_label", "조 원").replace(" 원", "")
+            src_jo = amt_src / _div13
             rows13 = {
                 r.get("row"): r
                 for z, rs in (G.get("panels") or {}).items()
@@ -772,7 +787,7 @@ def _check_strict(ticker: str, G: dict, dives: dict) -> list[str]:
             if wc_row is None:
                 nc_name = (rows13.get("cf-noncash") or {}).get("name", "")
                 gaps.append(
-                    f"[CF운전자본] 본표에 '{nm_src}' {src_jo:+.2f}조 별도 라인이 있는데 패널에 cf-wc 행 없음"
+                    f"[CF운전자본] 본표에 '{nm_src}' {src_jo:+,.1f}{_ulab} 별도 라인이 있는데 패널에 cf-wc 행 없음"
                     + (f" — cf-noncash('{nc_name}')에 뭉뚱그림" if nc_name else "")
                     + " — 행 분리 필요(V-099)"
                 )
@@ -780,9 +795,10 @@ def _check_strict(ticker: str, G: dict, dives: dict) -> list[str]:
                 v = _num(wc_row.get("v"))
                 if v is None:
                     gaps.append(f"[CF운전자본] cf-wc 행 값 파싱 불가('{wc_row.get('v')}')")
-                elif abs(v - src_jo) > max(0.05, abs(src_jo) * 0.02):
+                elif abs(v - src_jo) > max(0.05 * (_div13 / 1e12), abs(src_jo) * 0.02):
                     gaps.append(
-                        f"[CF운전자본] cf-wc {v:+.2f}조 ≠ 본표 '{nm_src}' {src_jo:+.2f}조 — 부호·집계 확인(V-099)"
+                        f"[CF운전자본] cf-wc {v:+,.1f}{_ulab} ≠ 본표 '{nm_src}' {src_jo:+,.1f}{_ulab}"
+                        " — 부호·집계 확인(V-099)"
                     )
                 if "운전자본" in (rows13.get("cf-noncash") or {}).get("name", ""):
                     gaps.append(
@@ -881,6 +897,10 @@ def _check_strict(ticker: str, G: dict, dives: dict) -> list[str]:
         "ni": "is-netincome", "ocf": "cf-op", "icf": "cf-inv", "fin": "cf-fin",
         "cash": "bs-cash", "assets": "bs-assets", "equity": "bs-equity",
     }
+    # V-117 — 표시 단위가 티커 속성이 되면서 환산 제수도 티커에서 읽는다.
+    #   조 = raw_mn/1e6 · 억 = raw_mn/1e2. 필드가 없으면 종전(조).
+    _UDIV = {"조 원": 1e6, "억 원": 1e2}
+    udiv = _UDIV.get((G.get("corp") or {}).get("unit_label", "조 원"), 1e6)
     for sk, rid in SERIES_ROW.items():
         arr, row = (G.get("series") or {}).get(sk), rows17.get(rid)
         if not (isinstance(arr, list) and arr and row) or row.get("raw_mn") is None:
@@ -889,9 +909,9 @@ def _check_strict(ticker: str, G: dict, dives: dict) -> list[str]:
         if not isinstance(last, (int, float)):
             continue
         dec = len(str(last).split(".")[1]) if "." in str(last) else 0
-        if abs(round(row["raw_mn"] / 1e6, dec) - last) > 10 ** -(dec + 2):
+        if abs(round(row["raw_mn"] / udiv, dec) - last) > 10 ** -(dec + 2):
             gaps.append(
-                f"[series] {sk}[-1]={last} ≠ 패널 {rid} {row['raw_mn'] / 1e6:.{dec + 2}f} "
+                f"[series] {sk}[-1]={last} ≠ 패널 {rid} {row['raw_mn'] / udiv:.{dec + 2}f} "
                 f"(소수 {dec}자리 반올림 기준) — 차트와 카드가 다른 값을 가리킨다(V-112 B)"
             )
 
@@ -922,6 +942,34 @@ def _check_strict(ticker: str, G: dict, dives: dict) -> list[str]:
                     f"{span - 1}년이다('{span}년 만에 처음'이면 표지를 명시). series로 "
                     f"재계수할 것(V-112 C)"
                 )
+
+    # ── 20) (strict) 표시 계층 계약 3종 (V-119 — "값은 맞는데 화면이 틀리다"의 기계화) ──
+    apx = G.get("appendix", [])
+    # V-116~118에서 4회 연속으로 검출 경로가 '사람 눈'이었던 표면 결함을 게이트로 승격한다.
+    # (a) five.skip 타입 — 렌더러가 skip 값을 그대로 자식으로 그리므로(galaxy.html §④)
+    #     불리언 true면 React가 렌더하지 않아 섹션이 빈 문단이 된다(240810 실측 7장).
+    for k, d20 in list(dives.items()) + [("apx:" + a20.get("n", "?"), a20) for a20 in apx]:
+        sk20 = (d20.get("five") or {}).get("skip")
+        if sk20 is not None and not isinstance(sk20, str):
+            gaps.append(f"[표시] {k} five.skip이 {type(sk20).__name__} — 화면 ④섹션이 빈다. 설명 문자열로(V-118)")
+    # (b) 양면 amt 라벨 병기(R6.6c 2칙) — `346 · 7억원`처럼 라벨 없는 숫자 병기는 의미 불명.
+    #     기존 골든 6건(한전 5·크래프톤 1)은 리더 검수를 통과한 baseline이라 화이트리스트로
+    #     면제하고(§10 '잔액 0 무임계' 승격 때와 같은 절충 — V-106 B), 신규부터 강제한다.
+    _AMT_PAIR_EXEMPT = {("015760", "n13"), ("015760", "n15"), ("015760", "n16"),
+                        ("015760", "n21"), ("015760", "n28"), ("259960", "n24")}
+    _pair20 = re.compile(r"^[+−-]?[\d][\d,.]*\s*(억원|조|원)?\s*·\s*[+−-]?[\d][\d,.]*")
+    for k, d20 in list(dives.items()) + [(a20.get("n", "?"), a20) for a20 in apx]:
+        amt20 = d20.get("amt") or ""
+        if _pair20.match(amt20) and (ticker, k.replace("apx:", "")) not in _AMT_PAIR_EXEMPT:
+            gaps.append(f"[표시] {k} amt '{amt20}' — 양면 병기에 라벨이 없다(R6.6c 2칙: `금융수익 346억원 · 금융원가 7억원` 꼴)")
+    # (c) APPENDIX note_no 혼용 — 일부 카드만 note_no가 있으면 나브에 그 카드만 '주N' 접두가
+    #     떠서 튄다(240810 n18 실측). 전부 있거나 전부 없어야 한다.
+    #     ⚠️ 000720·010130·051910은 혼용 상태로 리더 검수를 통과한 baseline — 면제(신규부터 강제).
+    _NN_MIX_EXEMPT = {"000720", "010130", "051910"}
+    _nn20 = [bool(a20.get("note_no")) for a20 in apx]
+    if ticker not in _NN_MIX_EXEMPT and _nn20 and any(_nn20) and not all(_nn20):
+        _mix = [a20.get("n") for a20 in apx if bool(a20.get("note_no")) != (sum(_nn20) > len(_nn20) / 2)]
+        gaps.append(f"[표시] APPENDIX note_no 혼용 — {_mix} 만 다르다. 전부 채우거나 전부 비울 것(V-119)")
     return gaps
 
 

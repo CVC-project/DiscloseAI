@@ -1,0 +1,124 @@
+[
+ {
+  "id": "n1",
+  "title": "매출보다 비용이 더 빨리 늘었어요",
+  "what": [
+   "차를 만드는 데 들어간 원재료·소모품이 [73.27조]에서 [80.11조]로 [9.3%] 늘었어요.",
+   "비용을 성격별로 모두 더하면 [94.78조]에서 [105.06조]로 [10.8%] 늘었어요."
+  ],
+  "why": [
+   "같은 기간 매출은 [107.4조]에서 [114.1조]로 늘었어요 — 매출보다 비용이 빠르게 늘면 100원을 팔아 남는 돈은 줄어요.",
+   "매출을 100으로 놓고 보면 매출원가가 [76.9]에서 [80.3]으로 올라갔어요. 위에서 본 영업이익 감소가 여기서 시작돼요 — 차를 못 판 게 아니라 같은 차를 만드는 데 돈이 더 들어간 거예요.",
+   "설비가 늘면서 붙는 감가상각비도 [2.01조]에서 [2.07조]로 늘었어요 — 이건 차가 팔리든 안 팔리든 해마다 나가는 비용이에요."
+  ],
+  "src": {
+   "note_no": "31",
+   "title": "비용의 성격별 분류"
+  },
+  "nums": [
+   {"chip": "73.27조", "check": {"kind": "fact", "key": "mat_used_prior", "fmt": "jo"}},
+   {"chip": "80.11조", "check": {"kind": "fact", "key": "mat_used_cur", "fmt": "jo"}},
+   {"chip": "9.3%", "check": {"kind": "ratio", "num": "mat_used_cur", "den": "mat_used_prior", "minus_one": true, "fmt": "pct"}},
+   {"chip": "94.78조", "check": {"kind": "fact", "key": "total_expense_prior", "fmt": "jo"}},
+   {"chip": "105.06조", "check": {"kind": "fact", "key": "total_expense_cur", "fmt": "jo"}},
+   {"chip": "10.8%", "check": {"kind": "ratio", "num": "total_expense_cur", "den": "total_expense_prior", "minus_one": true, "fmt": "pct"}},
+   {"chip": "107.4조", "check": {"kind": "series", "key": "revenue", "year": "FY24", "fmt": "jo1"}},
+   {"chip": "114.1조", "check": {"kind": "series", "key": "revenue", "year": "FY25", "fmt": "jo1"}},
+   {"chip": "76.9", "check": {"kind": "norm", "key": "cogs", "year": "FY24", "fmt": "num1"}},
+   {"chip": "80.3", "check": {"kind": "norm", "key": "cogs", "year": "FY25", "fmt": "num1"}},
+   {"chip": "2.01조", "check": {"kind": "fact", "key": "dep_prior", "fmt": "jo"}},
+   {"chip": "2.07조", "check": {"kind": "fact", "key": "dep_cur", "fmt": "jo"}}
+  ],
+  "std_focus": "dive:k3",
+  "order": 1,
+  "bridge": null
+ },
+ {
+  "id": "n2",
+  "title": "만든 물량이 창고에 더 쌓였어요",
+  "what": [
+   "재고자산 총장부금액이 [12.58조]에서 [14.77조]로 [17.5%] 늘었어요.",
+   "그중 이미 다 만들어 팔기만 하면 되는 제품이 [9.04조]에서 [10.89조]로 [20.5%] 늘었어요."
+  ],
+  "why": [
+   "매출이 늘어난 폭보다 재고가 훨씬 빠르게 늘었어요 — 만드는 속도가 파는 속도보다 빨랐다는 뜻이에요.",
+   "재고는 팔리기 전까지 비용으로 잡히지 않아요. 팔리는 순간 매출원가가 되기 때문에, 지금 쌓인 물량은 다음 해 이익에 그대로 영향을 줘요.",
+   "아직 목적지에 도착하지 않은 미착품도 [9,411억]이에요 — 바다 건너로 실어 보낸 물량이 그만큼 많다는 뜻이에요."
+  ],
+  "src": {
+   "note_no": "9",
+   "title": "재고자산"
+  },
+  "nums": [
+   {"chip": "12.58조", "check": {"kind": "fact", "key": "inv_gross_prior", "fmt": "jo"}},
+   {"chip": "14.77조", "check": {"kind": "fact", "key": "inv_gross_cur", "fmt": "jo"}},
+   {"chip": "17.5%", "check": {"kind": "ratio", "num": "inv_gross_cur", "den": "inv_gross_prior", "minus_one": true, "fmt": "pct"}},
+   {"chip": "9.04조", "check": {"kind": "fact", "key": "inv_fg_gross_prior", "fmt": "jo"}},
+   {"chip": "10.89조", "check": {"kind": "fact", "key": "inv_fg_gross_cur", "fmt": "jo"}},
+   {"chip": "20.5%", "check": {"kind": "ratio", "num": "inv_fg_gross_cur", "den": "inv_fg_gross_prior", "minus_one": true, "fmt": "pct"}},
+   {"chip": "9,411억", "check": {"kind": "fact", "key": "inv_intransit_cur", "fmt": "eok"}}
+  ],
+  "std_focus": "dive:n6",
+  "order": 2,
+  "bridge": "그렇게 만든 물량이 그 해에 다 팔린 것도 아니에요."
+ },
+ {
+  "id": "n3",
+  "title": "차를 판 뒤에 남는 약속이 [8.55조] 쌓여 있어요",
+  "what": [
+   "판 차를 나중에 고쳐 주기로 한 약속을 미리 비용으로 잡아 둔 게 판매보증충당부채예요. 올해 말 잔액이 [8.55조]예요.",
+   "올해 새로 [3.85조]를 쌓았고, 실제 수리 등에 [3.80조]를 썼어요."
+  ],
+  "why": [
+   "판매비와관리비 [13.43조] 가운데 판매보증비가 [4.07조]로 [30.3%]를 차지해요 — 작년 [3.73조]보다 더 늘었어요.",
+   "이 돈은 차를 파는 해에 비용으로 먼저 잡히고, 실제 지출은 그 뒤 몇 해에 걸쳐 나가요. 이익은 지금 줄고 현금은 나중에 나가는 구조예요.",
+   "잔액 가운데 [5.31조]는 1년 안에, [3.24조]는 그 이후에 나갈 몫으로 나눠 뒀어요 — 앞으로도 매년 비슷한 규모가 이익에서 먼저 빠진다는 뜻이에요."
+  ],
+  "src": {
+   "note_no": "19",
+   "title": "충당부채"
+  },
+  "nums": [
+   {"chip": "8.55조", "check": {"kind": "fact", "key": "warranty_end_cur", "fmt": "jo"}},
+   {"chip": "3.85조", "check": {"kind": "fact", "key": "warranty_add_cur", "fmt": "jo"}},
+   {"chip": "3.80조", "check": {"kind": "fact", "key": "warranty_used_cur", "fmt": "jo"}},
+   {"chip": "13.43조", "check": {"kind": "fact", "key": "sgna_total_cur", "fmt": "jo"}},
+   {"chip": "4.07조", "check": {"kind": "fact", "key": "sgna_warranty_cur", "fmt": "jo"}},
+   {"chip": "30.3%", "check": {"kind": "share", "num": "sgna_warranty_cur", "den": "sgna_total_cur", "fmt": "pct"}},
+   {"chip": "3.73조", "check": {"kind": "fact", "key": "sgna_warranty_prior", "fmt": "jo"}},
+   {"chip": "5.31조", "check": {"kind": "fact", "key": "warranty_current_cur", "fmt": "jo"}},
+   {"chip": "3.24조", "check": {"kind": "fact", "key": "warranty_noncurrent_cur", "fmt": "jo"}}
+  ],
+  "std_focus": "dive:n16",
+  "order": 3,
+  "bridge": "차를 팔고 난 뒤에도 돈이 나가는 자리가 있어요."
+ },
+ {
+  "id": "n4",
+  "title": "이익은 줄었는데 배당은 늘렸어요",
+  "what": [
+   "지배주주 몫 순이익이 [9.77조]에서 [7.56조]로 줄었어요.",
+   "그런데 배당으로 정한 금액은 [2.56조]에서 [2.64조]로 늘었어요."
+  ],
+  "why": [
+   "번 돈 가운데 배당으로 나가는 비율이 [26.2%]에서 [34.9%]로 올라갔어요.",
+   "이익이 줄어든 해에 배당을 늘렸다는 건, 회사가 앞으로 들어올 현금을 그만큼 든든하게 본다는 뜻으로 읽혀요. 다만 이익이 계속 줄면 회사 안에 남겨 둘 몫은 그만큼 얇아져요.",
+   "위에서 본 자가발전형이라는 국면이 이걸 받쳐 줘요 — 영업에서 번 돈이 투자와 배당을 모두 감당하고 있어요."
+  ],
+  "src": {
+   "note_no": "25",
+   "title": "배당금"
+  },
+  "nums": [
+   {"chip": "9.77조", "check": {"kind": "fact", "key": "ni_owners_prior", "fmt": "jo"}},
+   {"chip": "7.56조", "check": {"kind": "fact", "key": "ni_owners_cur", "fmt": "jo"}},
+   {"chip": "2.56조", "check": {"kind": "fact", "key": "div_declared_prior", "fmt": "jo"}},
+   {"chip": "2.64조", "check": {"kind": "fact", "key": "div_declared_cur", "fmt": "jo"}},
+   {"chip": "26.2%", "check": {"kind": "share", "num": "div_declared_prior", "den": "ni_owners_prior", "fmt": "pct"}},
+   {"chip": "34.9%", "check": {"kind": "share", "num": "div_declared_cur", "den": "ni_owners_cur", "fmt": "pct"}}
+  ],
+  "std_focus": "dive:n23",
+  "order": 4,
+  "bridge": "이익이 줄어든 해에, 주주 몫은 어떻게 됐을까요?"
+ }
+]

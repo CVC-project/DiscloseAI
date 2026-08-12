@@ -40,7 +40,10 @@ def test_merge_per_year_recovers_split_account_id():
                          by, fys, div=S.JO) is None, "단일 키로는 5점이 안 채워져야 함(전제)"
     out = S._merge_per_year("ocf", ["ifrs-full_CashFlowsFromUsedInOperatingActivities",
                                     "-표준계정코드 미사용-"], by, fys, div=S.JO)
-    assert out == [1.0, 0.7, 1.1, 1.5, 1.3], out
+    # ⚠️ V-116 — 픽커는 **반올림 전** 조 배열을 돌려준다(파생키를 원값에서 계산하려고).
+    #    반올림은 build_series가 규모 적응형으로 일괄 적용한다.
+    assert out == [0.987, 0.746, 1.135, 1.46, 1.319], out
+    assert S._round_scaled(out) == [0.99, 0.75, 1.14, 1.46, 1.32], "≥1조 → 2자리"
 
 
 def test_merge_per_year_name_fallback():
@@ -49,7 +52,8 @@ def test_merge_per_year_name_fallback():
     by = {("__NAME__", "CF"): {
         "영업활동으로부터의 순현금유입": {2021: 9.87e11},
         "영업활동현금흐름": {2022: 1.32e12}}}
-    assert S._merge_per_year("ocf", ["nope"], by, fys, div=S.JO) == [1.0, 1.3]
+    # V-116 — 반올림 전 원값(조)
+    assert S._merge_per_year("ocf", ["nope"], by, fys, div=S.JO) == [0.987, 1.32]
 
 
 def test_series_no_regression_on_goldens():

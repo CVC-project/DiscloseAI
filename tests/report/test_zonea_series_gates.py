@@ -52,6 +52,10 @@ def test_series_last_matches_panel(path):
     """series 최종값이 패널 표시값과 같은 원값에서 나왔는지(series 소수 자릿수 기준)."""
     g = json.load(open(path, encoding="utf-8"))
     R, S = _rows(g), (g.get("series") or {})
+    # V-117 — 표시 단위가 티커 속성이므로 환산 제수도 티커에서 읽는다(check_golden §18과 동식).
+    #   `/1e6` 고정이면 억 표기 티커에서 1만 배 어긋나 항상 FAIL이다.
+    udiv = {"조 원": 1e6, "억 원": 1e2}.get(
+        (g.get("corp") or {}).get("unit_label", "조 원"), 1e6)
     bad = []
     for sk, rid in {
         "revenue": "is-revenue", "op": "is-opincome", "ni": "is-netincome",
@@ -65,8 +69,8 @@ def test_series_last_matches_panel(path):
         if not isinstance(last, (int, float)):
             continue
         dec = len(str(last).split(".")[1]) if "." in str(last) else 0
-        if abs(round(row["raw_mn"] / 1e6, dec) - last) > 10 ** -(dec + 2):
-            bad.append(f"{sk}[-1]={last} vs {rid} {row['raw_mn'] / 1e6:.{dec + 2}f}")
+        if abs(round(row["raw_mn"] / udiv, dec) - last) > 10 ** -(dec + 2):
+            bad.append(f"{sk}[-1]={last} vs {rid} {row['raw_mn'] / udiv:.{dec + 2}f}")
     assert not bad, f"{os.path.basename(path)}: {bad}"
 
 

@@ -216,16 +216,15 @@
   }
 
   // Sector 단위 highlights — 해당 섹터 ticker로 필터.
-  // high_impact 우선, 없으면 최근 공시 fallback (현재 데이터는 high_impact 1건뿐).
+  // UX-044: AI가 판별한 주요 공시(high_impact)만 반환 — 최신 공시 폴백 금지.
+  // 폴백을 두면 '저장된 최근 공시' 상위와 같은 항목이 두 번 보인다(중복). 없으면 빈 배열 → 블록 숨김.
   function highlightsForSector(discAll, members, n = 3) {
     if (!Array.isArray(discAll) || !members) return [];
     const tickers = new Set(members.map((m) => m.t));
-    const inSector = discAll
-      .filter((d) => d && tickers.has(d.ticker || d.stock_code))
+    const items = discAll
+      .filter((d) => d && d.high_impact && tickers.has(d.ticker || d.stock_code))
       .slice()
       .sort((a, b) => (b.disclosure_date || "").localeCompare(a.disclosure_date || ""));
-    const high = inSector.filter((d) => d.high_impact);
-    const items = high.length >= n ? high : [...high, ...inSector.filter((d) => !d.high_impact)];
     return items.slice(0, n).map((d) => ({
       time: (d.disclosure_date || "").slice(5).replace("-", "/"),
       title: (d.title || "").trim(),

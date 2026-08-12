@@ -1,0 +1,118 @@
+[
+ {
+  "id": "n1",
+  "title": "모자란 돈을 빚이 아니라 주주에게서 받았어요",
+  "what": [
+   "2025년에 새 주식을 발행해 [1.65조]를 조달했어요 — 유상증자예요.",
+   "그 결과 주식발행초과금이 [4.84조]에서 [6.43조]로 [32.8%] 늘었어요."
+  ],
+  "why": [
+   "유상증자는 빌리는 게 아니라 주주에게서 직접 받는 돈이라, 이자도 갚을 날짜도 없어요. 대신 주식 수가 늘어난 만큼 기존 주주 한 사람의 몫은 얇아져요.",
+   "같은 기간 차입금은 [11.58조]에서 [10.88조]로 오히려 줄었어요 — 단기차입금이 [6.51조]에서 [5.39조]로 줄고, 만기가 긴 장기차입금이 [5.06조]에서 [5.49조]로 늘었어요.",
+   "위에서 본 확장투자형, 그러니까 벌면서도 외부 자금을 당겨 투자하는 국면에서 이 회사가 당긴 자금의 성격이 바로 이거예요 — 빚보다 자본 쪽이에요."
+  ],
+  "src": {
+   "note_no": "21-1",
+   "title": "자본금 및 자본잉여금"
+  },
+  "nums": [
+   {"chip": "1.65조", "check": {"kind": "fact", "key": "rights_issue_amount", "fmt": "jo"}},
+   {"chip": "4.84조", "check": {"kind": "fact", "key": "share_premium_prior", "fmt": "jo"}},
+   {"chip": "6.43조", "check": {"kind": "fact", "key": "share_premium_cur", "fmt": "jo"}},
+   {"chip": "32.8%", "check": {"kind": "ratio", "num": "share_premium_cur", "den": "share_premium_prior", "minus_one": true, "fmt": "pct"}},
+   {"chip": "11.58조", "check": {"kind": "fact", "key": "borrow_total_prior", "fmt": "jo"}},
+   {"chip": "10.88조", "check": {"kind": "fact", "key": "borrow_total_cur", "fmt": "jo"}},
+   {"chip": "6.51조", "check": {"kind": "fact", "key": "st_borrow_prior", "fmt": "jo"}},
+   {"chip": "5.39조", "check": {"kind": "fact", "key": "st_borrow_cur", "fmt": "jo"}},
+   {"chip": "5.06조", "check": {"kind": "fact", "key": "lt_borrow_prior", "fmt": "jo"}},
+   {"chip": "5.49조", "check": {"kind": "fact", "key": "lt_borrow_cur", "fmt": "jo"}}
+  ],
+  "std_focus": "dive:n19",
+  "order": 1,
+  "bridge": null
+ },
+ {
+  "id": "n2",
+  "title": "설비의 [37.4%]가 아직 돌아가지 않아요",
+  "what": [
+   "유형자산 장부금액이 한 해 동안 [17.71조]에서 [19.24조]로 늘었어요.",
+   "그중 아직 짓고 있는 건설중인자산이 [7.19조]로, 전체의 [37.4%]예요."
+  ],
+  "why": [
+   "건설중인자산은 완성될 때까지 감가상각을 하지 않아요 — 지금 손익에는 비용으로 잡히지 않지만, 완공되는 순간부터 해마다 비용이 붙기 시작해요.",
+   "이미 돌아가고 있는 기계장치의 장부금액이 [4.25조]인데, 아직 안 돌아가는 설비가 그보다 커요.",
+   "매출이 줄어드는 동안에도 설비는 계속 늘었다는 뜻이에요. 이 설비가 언제부터 물건을 만들어 파느냐가 다음 몇 해의 이익을 좌우해요."
+  ],
+  "src": {
+   "note_no": "13",
+   "title": "유형자산"
+  },
+  "nums": [
+   {"chip": "17.71조", "check": {"kind": "fact", "key": "ppe_bv_begin_cur", "fmt": "jo"}},
+   {"chip": "19.24조", "check": {"kind": "fact", "key": "ppe_bv_end_cur", "fmt": "jo"}},
+   {"chip": "7.19조", "check": {"kind": "fact", "key": "cip_bv_end_cur", "fmt": "jo"}},
+   {"chip": "37.4%", "check": {"kind": "share", "num": "cip_bv_end_cur", "den": "ppe_bv_end_cur", "fmt": "pct"}},
+   {"chip": "4.25조", "check": {"kind": "fact", "key": "machinery_bv_end_cur", "fmt": "jo"}}
+  ],
+  "std_focus": "dive:n11",
+  "order": 2,
+  "bridge": "그렇게 받은 돈은 지금 어디에 들어가 있을까요?"
+ },
+ {
+  "id": "n3",
+  "title": "판 제품에서 돌아온 비용이 두 배 가까이 늘었어요",
+  "what": [
+   "품질 문제·교환에 대비해 쌓아 두는 품질보상충당부채가 [4,952억]에서 [9,517억]으로 [92.2%] 늘었어요.",
+   "올해 새로 쌓은 금액이 [7,807억]이고, 실제로 쓴 금액은 [3,241억]이에요."
+  ],
+  "why": [
+   "새로 쌓은 [7,807억]은 쌓는 그 해에 비용으로 먼저 잡혀요 — 올해 영업손실에 그대로 들어가 있는 금액이에요.",
+   "충당부채는 앞으로 나갈 것으로 예상되는 돈이라, 예상이 커지면 현금이 나가기 전에 이익이 먼저 줄어요.",
+   "쌓아 둔 [9,517억]은 앞으로 실제 수리·교환에 쓰일 때 현금으로 빠져나가요 — 지금은 이익만 줄었고, 그 현금은 아직 회사 안에 있어요."
+  ],
+  "src": {
+   "note_no": "18",
+   "title": "충당부채"
+  },
+  "nums": [
+   {"chip": "4,952억", "check": {"kind": "fact", "key": "warranty_end_prior", "fmt": "eok"}},
+   {"chip": "9,517억", "check": {"kind": "fact", "key": "warranty_end_cur", "fmt": "eok"}},
+   {"chip": "92.2%", "check": {"kind": "ratio", "num": "warranty_end_cur", "den": "warranty_end_prior", "minus_one": true, "fmt": "pct"}},
+   {"chip": "7,807억", "check": {"kind": "fact", "key": "warranty_add_cur", "fmt": "eok"}},
+   {"chip": "3,241억", "check": {"kind": "fact", "key": "warranty_used_cur", "fmt": "eok"}}
+  ],
+  "std_focus": "dive:n15",
+  "order": 3,
+  "bridge": "만들어 판 제품 쪽에서도 예상 못 한 비용이 돌아왔어요."
+ },
+ {
+  "id": "n4",
+  "title": "적자는 배터리 한 곳에서 났어요",
+  "what": [
+   "에너지솔루션(배터리) 매출이 [15.69조]에서 [12.38조]로 줄면서, 영업손익이 [2,177억]에서 [-1.85조]로 돌아섰어요.",
+   "반면 전자재료는 매출 [8,826억]에 영업이익 [1,295억]으로 벌이를 유지했어요."
+  ],
+  "why": [
+   "회사 전체 손실은 사실상 배터리 한 사업에서 나왔어요 — 작은 쪽 사업은 여전히 이익을 내고 있어요.",
+   "여기엔 미국에서 만들어 판 배터리에 붙는 세액공제가 기타영업수익 [2,752억]으로 들어 있어요. 작년 [899억]보다 크게 늘었는데, 이걸 빼고 보면 배터리의 손실 폭은 더 커져요.",
+   "한 사업에 매출이 몰려 있으면 그 사업의 업황이 그대로 회사 성적이 돼요 — 표준인 LG화학처럼 여러 사업을 함께 가진 회사와 갈리는 지점이에요."
+  ],
+  "src": {
+   "note_no": "6",
+   "title": "영업부문"
+  },
+  "nums": [
+   {"chip": "15.69조", "check": {"kind": "fact", "key": "seg_에너지솔루션_rev_prior", "fmt": "jo"}},
+   {"chip": "12.38조", "check": {"kind": "fact", "key": "seg_에너지솔루션_rev", "fmt": "jo"}},
+   {"chip": "2,177억", "check": {"kind": "fact", "key": "seg_에너지솔루션_op_prior", "fmt": "eok"}},
+   {"chip": "-1.85조", "check": {"kind": "fact", "key": "seg_에너지솔루션_op", "fmt": "jo"}},
+   {"chip": "8,826억", "check": {"kind": "fact", "key": "seg_전자재료_rev", "fmt": "eok"}},
+   {"chip": "1,295억", "check": {"kind": "fact", "key": "seg_전자재료_op", "fmt": "eok"}},
+   {"chip": "2,752억", "check": {"kind": "fact", "key": "other_op_income_cur", "fmt": "eok"}},
+   {"chip": "899억", "check": {"kind": "fact", "key": "other_op_income_prior", "fmt": "eok"}}
+  ],
+  "std_focus": "dive:k6",
+  "order": 4,
+  "bridge": "그래서 그 적자는 어느 사업에서 났을까요?"
+ }
+]

@@ -28,7 +28,9 @@ def test_capex_merges_ppe_and_investment_property_caption():
         }
     }
     out = S._merge_per_year("capex", ["nope"], by, fys, div=S.JO)
-    assert out == [0.3, 0.8, 1.9, 2.9, 4.3], out  # ABS_KEYS로 부호 반전도 정규화
+    # V-116 — 픽커는 반올림 전 원값(조). ABS_KEYS로 부호 반전은 여기서 이미 정규화됐다.
+    assert out == [0.342965, 0.761763, 1.90852, 2.8941, 4.28914], out
+    assert S._round_scaled(out) == [0.34, 0.76, 1.91, 2.89, 4.29], "최댓값 4.29조 → 2자리"
 
 
 # ── ② eps 기준 혼용 차단 ──────────────────────────────────────────────────
@@ -72,6 +74,7 @@ def test_003490_series_recovered():
     if not has_report_data():
         pytest.skip("reports.db 데이터 없음(CI) — 빈 스키마도 '없음'으로 본다")
     r = S.build_series("003490")
-    assert r["series"]["capex"] == [0.3, 0.8, 1.9, 2.9, 4.3]
+    # V-116 규모 적응형 — 최댓값 4.29조(<10조)라 2자리. 종전 1자리 [0.3,0.8,1.9,2.9,4.3]
+    assert r["series"]["capex"] == [0.34, 0.76, 1.91, 2.89, 4.29]
     assert r["series"]["eps"] == [1743, 4787, 2866, 3566, 2133]
     assert set(r["incomplete"]) == {"buyback", "rnd", "dsOp"}

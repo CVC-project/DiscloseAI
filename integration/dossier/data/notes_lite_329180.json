@@ -1,0 +1,102 @@
+[
+ {
+  "id": "n1",
+  "title": "빚을 절반 가까이 줄였어요",
+  "what": [
+   "차입금과 사채 잔액이 [1.15조]에서 [0.65조]로, 작년의 [56.1%] 수준으로 줄었어요.",
+   "1년 안에 갚아야 하는 몫도 [3,996억]에서 [1,570억]으로 줄었어요."
+  ],
+  "why": [
+   "배를 만드는 회사는 배를 넘기기 전까지 돈이 묶여서, 한동안 빚으로 버티는 일이 흔해요. 그 빚을 줄였다는 건 영업에서 들어온 돈으로 갚을 여력이 생겼다는 뜻이에요.",
+   "만기가 긴 몫도 [7,520억]에서 [4,885억]으로 함께 줄었어요 — 짧은 쪽만 갚고 긴 쪽으로 미룬 게 아니에요.",
+   "위에서 본 자가발전형이 이런 모습이에요 — 벌어서 투자하고 빚도 갚는 국면이요."
+  ],
+  "src": {"note_no": "23", "title": "차입금과 사채"},
+  "nums": [
+   {"chip": "1.15조", "check": {"kind": "fact", "key": "borrow_total_prior", "fmt": "jo"}},
+   {"chip": "0.65조", "check": {"kind": "fact", "key": "borrow_total_cur", "fmt": "jo"}},
+   {"chip": "56.1%", "check": {"kind": "share", "num": "borrow_total_cur", "den": "borrow_total_prior", "fmt": "pct"}},
+   {"chip": "3,996억", "check": {"kind": "fact", "key": "st_borrow_prior", "fmt": "eok"}},
+   {"chip": "1,570억", "check": {"kind": "fact", "key": "st_borrow_cur", "fmt": "eok"}},
+   {"chip": "7,520억", "check": {"kind": "fact", "key": "lt_borrow_prior", "fmt": "eok"}},
+   {"chip": "4,885억", "check": {"kind": "fact", "key": "lt_borrow_cur", "fmt": "eok"}}
+  ],
+  "std_focus": "dive:n20",
+  "order": 1,
+  "bridge": null
+ },
+ {
+  "id": "n2",
+  "title": "배 만드는 설비를 키웠어요",
+  "what": [
+   "유형자산 장부금액이 [6.61조]에서 [8.78조]로 늘었어요.",
+   "그중 올해 새로 사들인 설비가 [5,364억]이에요."
+  ],
+  "why": [
+   "짓고 있는 건설중인자산은 [2,690억]에서 [2,618억]으로 거의 그대로예요 — 새로 벌인 공사보다 이미 쓸 수 있는 설비가 늘었다는 뜻이에요.",
+   "설비가 늘면 그만큼 감가상각비가 해마다 붙어요. 대신 한 번에 더 많은 배를 만들 수 있게 돼요.",
+   "빚을 갚으면서 동시에 설비를 키웠다는 건, 영업에서 들어온 돈이 두 가지를 다 감당했다는 뜻이에요."
+  ],
+  "src": {"note_no": "16", "title": "유형자산"},
+  "nums": [
+   {"chip": "6.61조", "check": {"kind": "fact", "key": "ppe_bv_begin_cur", "fmt": "jo"}},
+   {"chip": "8.78조", "check": {"kind": "fact", "key": "ppe_bv_end_cur", "fmt": "jo"}},
+   {"chip": "5,364억", "check": {"kind": "fact", "key": "ppe_acq_cur", "fmt": "eok"}},
+   {"chip": "2,690억", "check": {"kind": "fact", "key": "cip_bv_begin_cur", "fmt": "eok"}},
+   {"chip": "2,618억", "check": {"kind": "fact", "key": "cip_bv_end_cur", "fmt": "eok"}}
+  ],
+  "std_focus": "dive:ppe",
+  "order": 2,
+  "bridge": "갚고도 남은 돈은 어디로 갔을까요?"
+ },
+ {
+  "id": "n3",
+  "title": "일은 했는데 아직 청구하지 않은 돈이 [5.13조]예요",
+  "what": [
+   "계약자산이 [3.57조]에서 [5.13조]로 [43.6%] 늘었어요.",
+   "이미 청구해서 받을 일만 남은 매출채권은 [1.39조]에서 [1.43조]로 거의 그대로예요."
+  ],
+  "why": [
+   "계약자산은 배를 만드는 일은 진행했는데 아직 대금을 청구하지 못한 몫이에요 — 매출로는 잡혔지만 통장에는 안 들어온 돈이라는 점에서 매출채권과 성격이 비슷해요.",
+   "일감이 늘면 이 금액도 함께 늘어요. 다만 그만큼 회사 돈이 배 안에 묶여 있다는 뜻이기도 해요.",
+   "배가 인도되고 대금이 청구되면 이 금액이 매출채권을 거쳐 현금으로 바뀌어요 — 그 시점이 늦어지면 이익이 나도 현금은 늦게 들어와요."
+  ],
+  "src": {"note_no": "9", "title": "매출채권및기타채권과 계약자산"},
+  "nums": [
+   {"chip": "3.57조", "check": {"kind": "fact", "key": "contract_asset_prior", "fmt": "jo"}},
+   {"chip": "5.13조", "check": {"kind": "fact", "key": "contract_asset_cur", "fmt": "jo"}},
+   {"chip": "43.6%", "check": {"kind": "ratio", "num": "contract_asset_cur", "den": "contract_asset_prior", "minus_one": true, "fmt": "pct"}},
+   {"chip": "1.39조", "check": {"kind": "fact", "key": "ar_prior", "fmt": "jo"}},
+   {"chip": "1.43조", "check": {"kind": "fact", "key": "ar_cur", "fmt": "jo"}}
+  ],
+  "std_focus": "dive:n33",
+  "order": 3,
+  "bridge": "그런데 늘어난 일감이 전부 현금으로 들어온 건 아니에요."
+ },
+ {
+  "id": "n4",
+  "title": "이익은 조선에서 나와요",
+  "what": [
+   "조선 부문이 매출 [12.52조]에 영업이익 [1.53조]를 냈어요 — 작년 [7,026억]의 두 배가 넘어요.",
+   "엔진기계는 [6,936억], 해양플랜트는 작년 [-1,001억] 적자에서 [1,426억] 흑자로 돌아섰어요."
+  ],
+  "why": [
+   "세 부문이 모두 좋아졌지만 이익의 중심은 조선이에요 — 배를 비싸게 수주한 물량이 지금 매출로 바뀌고 있다는 뜻이에요.",
+   "기타 부문은 [-3,248억]으로 여전히 손실이에요. 전체가 좋아 보여도 안에서 갈리는 부분이 있어요.",
+   "표준인 한화에어로스페이스의 영업이익 항목과 나란히 보면, 같은 중공업·방산 안에서도 이익이 어느 사업에서 나오는지가 회사마다 다르다는 게 보여요."
+  ],
+  "src": {"note_no": "32", "title": "영업부문"},
+  "nums": [
+   {"chip": "12.52조", "check": {"kind": "fact", "key": "seg_조선_rev", "fmt": "jo"}},
+   {"chip": "1.53조", "check": {"kind": "fact", "key": "seg_조선_op", "fmt": "jo"}},
+   {"chip": "7,026억", "check": {"kind": "fact", "key": "seg_조선_op_prior", "fmt": "eok"}},
+   {"chip": "6,936억", "check": {"kind": "fact", "key": "seg_엔진기계_op", "fmt": "eok"}},
+   {"chip": "-1,001억", "check": {"kind": "fact", "key": "seg_해양플랜트_op_prior", "fmt": "eok"}},
+   {"chip": "1,426억", "check": {"kind": "fact", "key": "seg_해양플랜트_op", "fmt": "eok"}},
+   {"chip": "-3,248억", "check": {"kind": "fact", "key": "seg_기타_op", "fmt": "eok"}}
+  ],
+  "std_focus": "dive:k6",
+  "order": 4,
+  "bridge": "마지막으로, 그 이익이 어느 사업에서 나오는지 봐요."
+ }
+]
