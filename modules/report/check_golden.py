@@ -942,6 +942,34 @@ def _check_strict(ticker: str, G: dict, dives: dict) -> list[str]:
                     f"{span - 1}년이다('{span}년 만에 처음'이면 표지를 명시). series로 "
                     f"재계수할 것(V-112 C)"
                 )
+
+    # ── 20) (strict) 표시 계층 계약 3종 (V-119 — "값은 맞는데 화면이 틀리다"의 기계화) ──
+    apx = G.get("appendix", [])
+    # V-116~118에서 4회 연속으로 검출 경로가 '사람 눈'이었던 표면 결함을 게이트로 승격한다.
+    # (a) five.skip 타입 — 렌더러가 skip 값을 그대로 자식으로 그리므로(galaxy.html §④)
+    #     불리언 true면 React가 렌더하지 않아 섹션이 빈 문단이 된다(240810 실측 7장).
+    for k, d20 in list(dives.items()) + [("apx:" + a20.get("n", "?"), a20) for a20 in apx]:
+        sk20 = (d20.get("five") or {}).get("skip")
+        if sk20 is not None and not isinstance(sk20, str):
+            gaps.append(f"[표시] {k} five.skip이 {type(sk20).__name__} — 화면 ④섹션이 빈다. 설명 문자열로(V-118)")
+    # (b) 양면 amt 라벨 병기(R6.6c 2칙) — `346 · 7억원`처럼 라벨 없는 숫자 병기는 의미 불명.
+    #     기존 골든 6건(한전 5·크래프톤 1)은 리더 검수를 통과한 baseline이라 화이트리스트로
+    #     면제하고(§10 '잔액 0 무임계' 승격 때와 같은 절충 — V-106 B), 신규부터 강제한다.
+    _AMT_PAIR_EXEMPT = {("015760", "n13"), ("015760", "n15"), ("015760", "n16"),
+                        ("015760", "n21"), ("015760", "n28"), ("259960", "n24")}
+    _pair20 = re.compile(r"^[+−-]?[\d][\d,.]*\s*(억원|조|원)?\s*·\s*[+−-]?[\d][\d,.]*")
+    for k, d20 in list(dives.items()) + [(a20.get("n", "?"), a20) for a20 in apx]:
+        amt20 = d20.get("amt") or ""
+        if _pair20.match(amt20) and (ticker, k.replace("apx:", "")) not in _AMT_PAIR_EXEMPT:
+            gaps.append(f"[표시] {k} amt '{amt20}' — 양면 병기에 라벨이 없다(R6.6c 2칙: `금융수익 346억원 · 금융원가 7억원` 꼴)")
+    # (c) APPENDIX note_no 혼용 — 일부 카드만 note_no가 있으면 나브에 그 카드만 '주N' 접두가
+    #     떠서 튄다(240810 n18 실측). 전부 있거나 전부 없어야 한다.
+    #     ⚠️ 000720·010130·051910은 혼용 상태로 리더 검수를 통과한 baseline — 면제(신규부터 강제).
+    _NN_MIX_EXEMPT = {"000720", "010130", "051910"}
+    _nn20 = [bool(a20.get("note_no")) for a20 in apx]
+    if ticker not in _NN_MIX_EXEMPT and _nn20 and any(_nn20) and not all(_nn20):
+        _mix = [a20.get("n") for a20 in apx if bool(a20.get("note_no")) != (sum(_nn20) > len(_nn20) / 2)]
+        gaps.append(f"[표시] APPENDIX note_no 혼용 — {_mix} 만 다르다. 전부 채우거나 전부 비울 것(V-119)")
     return gaps
 
 
