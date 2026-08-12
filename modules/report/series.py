@@ -149,7 +149,11 @@ def _round_scaled(vals: list, *, is_eps: bool = False, unit: str = "조 원") ->
     out = []
     for v in vals:
         r = round(v, dec)
-        out.append(0.0 if r == 0 else r)  # -0.0 → 0.0 (적자를 0으로 보이게 하지 않는다)
+        if r == 0:
+            r = 0
+        # ⚠️ dec=0이면 **int**로 낸다. float 738.0은 `str()`이 "738.0"이라
+        #    check_golden §18이 소수 1자리로 오인해 패널 738.14와 어긋난다고 잡는다.
+        out.append(int(r) if dec == 0 else r)
     return out
 
 

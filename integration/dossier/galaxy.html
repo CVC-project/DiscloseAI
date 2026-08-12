@@ -893,8 +893,15 @@ class Component extends DCLogic {
     };
     res(K.k1, CF.reservoirs.rBegin);
     res(K.k15, CF.reservoirs.rEnd);
-    const _dd = (K.k15.raw_mn - K.k1.raw_mn) / 1e6;
-    els.push(chip('delta', K.k15.x, K.k15.y - CF.reservoirs.rEnd - 26, [(_dd >= 0 ? '+' : '−') + Math.abs(_dd).toFixed(1) + '조 ' + (_dd >= 0 ? '늘었어요' : '줄었어요')], C.gold, 10));
+    // V-117 — 델타 칩도 표시 단위를 따른다. `/1e6 + '조'` 고정이면 억 표기 티커에서
+    //   −278억이 '−0.0조'로 찍혀 무의미해진다(원익IPS 실측). 단위는 corp.unit_label이 정본.
+    const _ul = ((this._G && this._G.corp && this._G.corp.unit_label) || '조 원');
+    const _ud = _ul === '억 원' ? 1e2 : 1e6;
+    const _dd = (K.k15.raw_mn - K.k1.raw_mn) / _ud;
+    const _dtxt = _ul === '억 원'
+      ? Math.round(Math.abs(_dd)).toLocaleString() + '억 '
+      : Math.abs(_dd).toFixed(1) + '조 ';
+    els.push(chip('delta', K.k15.x, K.k15.y - CF.reservoirs.rEnd - 26, [(_dd >= 0 ? '+' : '−') + _dtxt + (_dd >= 0 ? '늘었어요' : '줄었어요')], C.gold, 10));
 
     // knots
     for (const k of this.KNOTS) {

@@ -296,23 +296,30 @@ def check(ticker: str, strict: bool = False) -> list[str]:
         v = S.get(key)
         return v[-1] if isinstance(v, list) and v else None
 
+    # V-117 — 항등식 허용오차는 **표시 단위에 비례**한다. 종전 상수(0.15조·1.0조)를 억 표기
+    #   티커에 그대로 쓰면 0.15억(=1,500만원)이 되어 반올림 잔차에도 늘 FAIL이다.
+    #   조 기준 상수 × (조÷표시단위 배율) 로 환산한다: 억이면 ×1e4.
+    TOLX = {"조 원": 1.0, "억 원": 1e4}.get((G.get("corp") or {}).get("unit_label", "조 원"), 1.0)
+
     if all(S.get(x) for x in ("revenue", "cogs", "gross")):
         ident(
-            "매출−원가=총이익", S["revenue"][-1] - S["cogs"][-1], S["gross"][-1], 0.15
+            "매출−원가=총이익", S["revenue"][-1] - S["cogs"][-1], S["gross"][-1],
+            0.15 * TOLX,
         )
     if all(S.get(x) for x in ("ni", "oci", "tci")):
-        ident("ni+oci=tci", S["ni"][-1] + S["oci"][-1], S["tci"][-1], 0.15)
+        ident("ni+oci=tci", S["ni"][-1] + S["oci"][-1], S["tci"][-1], 0.15 * TOLX)
     if all(S.get(x) for x in ("cash", "ocf", "icf", "fin")) and len(S["cash"]) >= 2:
         ident(
             "현금워크(환율 허용)",
             S["cash"][-2] + S["ocf"][-1] + S["icf"][-1] + S["fin"][-1],
             S["cash"][-1],
-            1.0,
+            1.0 * TOLX,
         )
     pb = {r.get("row"): _num(r.get("v")) for r in panels.get("B", [])}
     if all(pb.get(x) is not None for x in ("is-revenue", "is-cogs", "is-grossprofit")):
         ident(
-            "패널B 총이익", pb["is-revenue"] + pb["is-cogs"], pb["is-grossprofit"], 0.2
+            "패널B 총이익", pb["is-revenue"] + pb["is-cogs"], pb["is-grossprofit"],
+            0.2 * TOLX,
         )
 
     # ── 5) 서브행 합 = 부모 (grp, 잔차 '그 외'·'기타' 명시 규약) ──
@@ -340,7 +347,10 @@ def check(ticker: str, strict: bool = False) -> list[str]:
         ]
         vals = [v for v, _ in kids if v is not None]
         pv = _num(row2v.get(prow))
-        if vals and pv is not None and abs(sum(vals) - pv) > 0.25:
+        # V-117 — 억 표기 티커는 서브행이 정수로 표시돼 **반올림 누적**이 생긴다(18행이면 최대 ±9).
+        #   조 표기는 종전 상수 0.25 그대로 두어 기존 골든 무회귀. 억은 부모의 0.1%(최소 2)로.
+        _sub_tol = 0.25 if TOLX == 1.0 else max(2.0, abs(pv or 0) * 0.001)
+        if vals and pv is not None and abs(sum(vals) - pv) > _sub_tol:
             gaps.append(f"[서브행합] {g}: 합 {sum(vals):.1f} ≠ 부모 {pv:.1f}")
 
     # ── 6) 링크 a값 정합 / viz_data 스키마 ──
@@ -762,7 +772,12 @@ def _check_strict(ticker: str, G: dict, dives: dict) -> list[str]:
         ]
         if wc_src:
             nm_src, amt_src = max(wc_src, key=lambda x: abs(x[1]))
-            src_jo = amt_src / 1e12
+            # V-117 — 패널 표시 단위가 티커 속성이므로 본표 원값도 그 단위로 환산해 비교한다.
+            #   종전 `/1e12`(조) 고정이면 억 표기 티커에서 1만 배 어긋나 항상 FAIL이다.
+            _u13 = {"조 원": 1e12, "억 원": 1e8}
+            _div13 = _u13.get((G.get("corp") or {}).get("unit_label", "조 원"), 1e12)
+            _ulab = (G.get("corp") or {}).get("unit_label", "조 원").replace(" 원", "")
+            src_jo = amt_src / _div13
             rows13 = {
                 r.get("row"): r
                 for z, rs in (G.get("panels") or {}).items()
@@ -772,7 +787,7 @@ def _check_strict(ticker: str, G: dict, dives: dict) -> list[str]:
             if wc_row is None:
                 nc_name = (rows13.get("cf-noncash") or {}).get("name", "")
                 gaps.append(
-                    f"[CF운전자본] 본표에 '{nm_src}' {src_jo:+.2f}조 별도 라인이 있는데 패널에 cf-wc 행 없음"
+                    f"[CF운전자본] 본표에 '{nm_src}' {src_jo:+,.1f}{_ulab} 별도 라인이 있는데 패널에 cf-wc 행 없음"
                     + (f" — cf-noncash('{nc_name}')에 뭉뚱그림" if nc_name else "")
                     + " — 행 분리 필요(V-099)"
                 )
@@ -780,9 +795,10 @@ def _check_strict(ticker: str, G: dict, dives: dict) -> list[str]:
                 v = _num(wc_row.get("v"))
                 if v is None:
                     gaps.append(f"[CF운전자본] cf-wc 행 값 파싱 불가('{wc_row.get('v')}')")
-                elif abs(v - src_jo) > max(0.05, abs(src_jo) * 0.02):
+                elif abs(v - src_jo) > max(0.05 * (_div13 / 1e12), abs(src_jo) * 0.02):
                     gaps.append(
-                        f"[CF운전자본] cf-wc {v:+.2f}조 ≠ 본표 '{nm_src}' {src_jo:+.2f}조 — 부호·집계 확인(V-099)"
+                        f"[CF운전자본] cf-wc {v:+,.1f}{_ulab} ≠ 본표 '{nm_src}' {src_jo:+,.1f}{_ulab}"
+                        " — 부호·집계 확인(V-099)"
                     )
                 if "운전자본" in (rows13.get("cf-noncash") or {}).get("name", ""):
                     gaps.append(
