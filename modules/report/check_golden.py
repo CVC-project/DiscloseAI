@@ -881,6 +881,10 @@ def _check_strict(ticker: str, G: dict, dives: dict) -> list[str]:
         "ni": "is-netincome", "ocf": "cf-op", "icf": "cf-inv", "fin": "cf-fin",
         "cash": "bs-cash", "assets": "bs-assets", "equity": "bs-equity",
     }
+    # V-117 — 표시 단위가 티커 속성이 되면서 환산 제수도 티커에서 읽는다.
+    #   조 = raw_mn/1e6 · 억 = raw_mn/1e2. 필드가 없으면 종전(조).
+    _UDIV = {"조 원": 1e6, "억 원": 1e2}
+    udiv = _UDIV.get((G.get("corp") or {}).get("unit_label", "조 원"), 1e6)
     for sk, rid in SERIES_ROW.items():
         arr, row = (G.get("series") or {}).get(sk), rows17.get(rid)
         if not (isinstance(arr, list) and arr and row) or row.get("raw_mn") is None:
@@ -889,9 +893,9 @@ def _check_strict(ticker: str, G: dict, dives: dict) -> list[str]:
         if not isinstance(last, (int, float)):
             continue
         dec = len(str(last).split(".")[1]) if "." in str(last) else 0
-        if abs(round(row["raw_mn"] / 1e6, dec) - last) > 10 ** -(dec + 2):
+        if abs(round(row["raw_mn"] / udiv, dec) - last) > 10 ** -(dec + 2):
             gaps.append(
-                f"[series] {sk}[-1]={last} ≠ 패널 {rid} {row['raw_mn'] / 1e6:.{dec + 2}f} "
+                f"[series] {sk}[-1]={last} ≠ 패널 {rid} {row['raw_mn'] / udiv:.{dec + 2}f} "
                 f"(소수 {dec}자리 반올림 기준) — 차트와 카드가 다른 값을 가리킨다(V-112 B)"
             )
 

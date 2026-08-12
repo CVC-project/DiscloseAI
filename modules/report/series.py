@@ -102,9 +102,29 @@ def is_complete(vals) -> bool:
 #    `check_golden §18`은 series 마지막 값의 소수 자릿수를 그때그때 파생하므로 자릿수가 늘어도 정합.
 
 
-def _dec_for(vals) -> int:
-    """조 단위 배열에 적용할 소수 자릿수. ≥10조=1 · ≥1조=2 · 그 미만=3(억 단위 해상도)."""
+# ── 표시 단위 (V-117, 리더 결정 2026-08-12 — "금액이 작으면 억으로 간다") ────────
+# 조 단위는 대형 KOSPI 전용이다. 자산총계 1.16조인 원익IPS에서는 영업이익 738억이
+# `0.074`가 돼 읽히지 않는다. → **자산총계 3조 미만이면 억 원**으로 적는다.
+# 임계 3조 근거: 기존 골든 20본의 최소가 하이브 5.5조(다음이 크래프톤 9.4조)라
+# 전 골든이 조를 유지한다(무회귀). 표시 단위는 `corp.unit_label`로 JSON에 실려
+# 렌더러·`check_golden §18`이 함께 읽는다. `raw_mn`(백만원)은 단위와 무관하게 불변.
+EOK = 100_000_000  # 원 → 억
+UNIT_THRESHOLD_WON = 3_000_000_000_000  # 자산총계 3조 — 이 미만이면 억 표기
+
+
+def pick_unit(assets_won: float | None) -> tuple[str, float]:
+    """자산총계(원) → (unit_label, div). 판정 불가면 종전 조."""
+    if assets_won is not None and abs(assets_won) < UNIT_THRESHOLD_WON:
+        return "억 원", float(EOK)
+    return "조 원", float(JO)
+
+
+def _dec_for(vals, unit: str = "조 원") -> int:
+    """표시 단위 배열에 적용할 소수 자릿수 — 유효숫자 ~3자리를 유지한다."""
     m = max((abs(v) for v in vals if v is not None), default=0.0)
+    if unit == "억 원":
+        # 억은 정수로 읽는 단위다. 1,000억 이상은 소수를 두지 않는다.
+        return 0 if m >= 1000 else 1
     if m >= 10:
         return 1
     if m >= 1:
@@ -117,7 +137,7 @@ def _scale(vals: list, div: float) -> list:
     return [v / div for v in vals]
 
 
-def _round_scaled(vals: list, *, is_eps: bool = False) -> list:
+def _round_scaled(vals: list, *, is_eps: bool = False, unit: str = "조 원") -> list:
     """이미 조(또는 eps는 원)로 환산된 배열을 규모 적응형으로 반올림. -0.0은 0.0으로 정규화.
 
     ⚠️ 분기는 **불리언 플래그**로 한다 — `div == 1`로 가르면 `1.0 == 1`이 True라
@@ -125,7 +145,7 @@ def _round_scaled(vals: list, *, is_eps: bool = False) -> list:
     """
     if is_eps:  # 원 단위 그대로
         return [round(v) for v in vals]
-    dec = _dec_for(vals)
+    dec = _dec_for(vals, unit)
     out = []
     for v in vals:
         r = round(v, dec)
@@ -276,20 +296,30 @@ def _merge_per_year(key: str, acc_ids: list[str], by_acc: dict, fy_list: list[in
     return _scale(out, div)  # 반올림은 build_series가 파생 후 일괄
 
 
-def build_series(ticker: str, db_path: str = _DB) -> dict:
+def build_series(ticker: str, db_path: str = _DB, unit: str | None = None) -> dict:
     """fs_account(B) + 파생(D) → S 24키 × 5점(조 단위, eps만 원). N(rnd·dsOp)은 Phase4 extract 주입.
 
     반환: {"series": {key: [5점]}, "incomplete": [키...], "years": ["FY.."]}
     5점 완결 못한 키는 galaxy_<t>.json 해당 dive의 five=skip 대상.
     """
     by_acc, fy_list = _load_fs(ticker, db_path)
+    # V-117 — 표시 단위 결정(자산총계 기준). 호출자가 unit을 주면 그것을 따른다.
+    _assets = None
+    for _sj in ("BS",):
+        _yv = by_acc.get((_sj, "ifrs-full_Assets")) or {}
+        if fy_list and fy_list[-1] in _yv:
+            _assets = _yv[fy_list[-1]]
+    if unit is None:
+        unit, div_unit = pick_unit(_assets)
+    else:
+        div_unit = float(EOK) if unit == "억 원" else float(JO)
     series: dict[str, list] = {}
 
     # ⓑ B: fs_account 직접 매핑
     for key, spec in SOURCE_MAP.items():
         if spec["src"] == "D" or spec["src"] == "N":
             continue
-        _div = 1 if key == "eps" else JO
+        _div = 1 if key == "eps" else div_unit
         vals = _series_for(key, spec.get("acc", []), by_acc, fy_list, div=_div)
         if vals is None:  # V-061 폴백 — 연도별 account_id·계정명 변이를 병합
             vals = _merge_per_year(key, spec.get("acc", []), by_acc, fy_list, div=_div)
@@ -305,12 +335,13 @@ def build_series(ticker: str, db_path: str = _DB) -> dict:
 
     # ⓡ 반올림 일괄 적용 — 키마다 규모에 맞춘 자릿수(V-116)
     for key, vals in list(series.items()):
-        series[key] = _round_scaled(vals, is_eps=(key == "eps"))
+        series[key] = _round_scaled(vals, is_eps=(key == "eps"), unit=unit)
 
     # ⓝ N: rnd·dsOp 는 주석 추출(Phase4) 전까지 미완성
     incomplete = [k for k in SOURCE_MAP if not is_complete(series.get(k))]
     years = [f"FY{fy % 100:02d}" for fy in fy_list]
-    return {"series": series, "incomplete": incomplete, "years": years}
+    return {"series": series, "incomplete": incomplete, "years": years,
+            "unit_label": unit, "unit_div": div_unit}
 
 
 if __name__ == "__main__":
@@ -319,4 +350,5 @@ if __name__ == "__main__":
     t = sys.argv[1] if len(sys.argv) > 1 else "005930"
     r = build_series(t)
     done = 24 - len(r["incomplete"])
-    print(f"[{t}] {r['years']}  완결 {done}/24, 미완성 {len(r['incomplete'])}: {r['incomplete']}")
+    print(f"[{t}] {r['years']}  단위 {r['unit_label']}  완결 {done}/24, "
+          f"미완성 {len(r['incomplete'])}: {r['incomplete']}")
