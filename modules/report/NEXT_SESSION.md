@@ -7,71 +7,85 @@
 
 - **골든 20/20 · lite 23본 — 전부 KOSPI.** KOSDAQ 골든 **0본**.
 - **데이터는 다 있다**: `fs_parse` 전량 완주로 `fs_account_xml` **2,590사 · 816,306행 · 217,231셀**(FY2019~2025),
-  정답지 55사 대비 **G1 일치율 100.00%**. firm JSON 매출 오염도 **67사·132셀 보정** 완료(FN-025 해소).
+  정답지 대비 G1 **299사 99.90%(16,029/16,045)** — 55사 표본에서는 100.00%(3,174/3,174).
+  ⚠️ 정답지가 55사 → **299사**로 확대됐다(V-115 사고 + 리더 보존 결정). 무회귀 기준선은 **99.90%**다.
 - **병목이 뒤집혔다** — 이제 부족한 건 데이터가 아니라 **해석 템플릿(골든)**이다.
   파싱된 2,590사 중 **2,111사(81%)가 골든 없는 산업**이고, 그중 KOSDAQ 미커버가 **1,464사**다.
 
-## ▶ 이번 세션 목표 — 원익IPS 240810 골든 1본 완주
+## ▶ 이번 세션 목표 — 원익IPS 240810 골든 **S3부터 이어서 완주**
 
-**왜 이 회사인가** (리더 결정 2026-08-12):
-- 292 특수 목적용 기계 = 미커버 **163사(KOSDAQ 145)**로 갭 최대.
-- 이미 완주한 반도체 골든(삼성전자·SK하이닉스)의 **하류 밸류체인**이라 서술 재사용이 가장 크다.
-- 원익IPS는 FY2024 매출 7,482억·영업이익 106억으로 **KOSDAQ 중형 흑자 제조**의 전형.
-  (SFA 056190은 매출 2조지만 영업적자 −484억, 피엔티 137400은 2차전지 장비라 클러스터가 어긋난다.)
-- **이 1본의 진짜 목적은 산업 커버가 아니라 "KOSDAQ 소형·중형 제조" 서술 틀을 세우는 것**이다.
-  기존 20본은 전부 대형 KOSPI라 틀이 안 맞는다 — 매출 중앙값이 9배 차이(6,352억 vs 699억),
-  적자비율 39.7% vs 20.3%. 이 틀이 서야 2~4순위 산업 골든이 KOSDAQ 1,761사에 쓰인다.
+> ⚠️ **2026-08-12 세션이 S0~S2를 이미 끝냈다.** 아래 "완료분"을 다시 하지 말 것.
+> 브랜치 `feat/golden-kosdaq-292` (dev가 85커밋 뒤라 `feat/report-fs-parse` 위에서 팠다).
 
-## ⚠️ 착수 전 선결 1건 — **`fs_account`가 비어 있다** (실측 완료, 추정 아님)
+### 완료분 (재실행 불요 — 전부 실측 확인됨)
 
-`series.py`는 경계 단방향 원칙상 **`fs_account`(reports.db)만** 읽는다 — firm_json은 integration 소유라 안 읽는다.
-그런데 `fs_enrich`(DART API)는 골든 클러스터 **55사에만** 돌렸다. 240810 실측:
+| 단계 | 상태 | 산출물 |
+|---|---|---|
+| S0 프리플라이트 | ✅ | `sectioner --health` OK · `corps.csv` cluster=`반도체장비`/tier=`1c` · `sector_golden_map.csv`에 292 추가 · `report_240810.json`(재무제표 4본·주석 35) |
+| `fs_enrich` | ✅ | fs_account **932행**(FY21~25) — ⚠️ **V-115** 참조, `--tickers` 필수 |
+| `series` | ✅ | **22/24** (미완 `buyback`·`dsOp`만) |
+| **S1 fact-sheet** | ✅ | `data/facts/facts_240810_b1~b6.json` — **주석 36 · 항목 884 · `facts_lint` ERROR 0·WARN 0 PASS** |
+| **S2 골격** | ✅ | `data/facts/_skeleton_240810.json` — panels **A1·B16·C11·D40·E5** + series + corp. **항등식 9종 전부 오차 0.00억 PASS**. 재생성기: `data/facts/_build_skeleton_240810.py` |
 
-```
-report_raw 5개년(2021~2025) ✓ · sectioner --health OK ✓ · report_section 182건 ✓
-fs_account_xml 384행 ✓ · firm_json ✓
-fs_account 0행  →  series 완결 0/24 (24키 전부 미완성)
-```
+### 이번 세션이 할 일 — S2.5 → S3 → S4 → S5 → S6 → S7
 
-**경로 확정 — (a) 즉시 착수** (리더 결정 2026-08-12, 병행 방침):
+1. **S2.5 구조 확정** — 골격의 40개 BS 행 · 36개 주석을 놓고 dive 목록을 확정(§4 보고서 기반).
+   ⚠️ 이 회사 고유 구조는 **§ 아래 "KOSDAQ 첫 본에서 실측된 것"** 참조.
+2. **S3 산문** — prose-writer로 카드별. 브래킷은 **억원**으로 쓴다(단위 결정 아래 참조).
+3. **S4~S6** — accuracy-verifier · completeness-auditor · 인터랙션 pytest · 라이브 스윕.
+4. **S7** — VARIATIONS 채록 로그의 240810 행을 **미완주 → 완주**로 갱신 + `corps.csv` tier `1c`→`1`.
 
-```bash
-python -m modules.report.fs_enrich --tickers 240810   # DART 키 필요, 1사면 수 분
-```
+### KOSDAQ 첫 본에서 실측된 것 (S2.5·S3 입력 — 추정 아님)
 
-구조적 해결(= `fs_parse` 전 계정 확장 + `series.py`가 `fs_account_xml`을 소스로 인정)은
-**별도 plan으로 분리했다** — [ACCOUNT_SOURCE_PLAN.md](ACCOUNT_SOURCE_PLAN.md) R1~R2.
-그쪽은 R0(읽기 전용 실측)이 병행으로 돌므로 이 세션은 신경 쓰지 않는다.
+- **손익 구조가 다르다** — `경상연구개발비`가 판관비와 **별개 본표 행**이다:
+  `총이익 3,828.4 − 판관비 1,415.7 − R&D 1,674.6 = 영업이익 738.1억`(FY23·24·25 오차 0.00억).
+  R&D가 **매출의 18.4%**. 패널 B에 `is-rnd` 행이 이미 있다.
+- **투자활동 −1,785억의 실체는 설비가 아니다** — capex는 **257억**뿐이고 대부분이
+  **상각후원가측정금융자산 취득 1,992억**(여유자금 운용). 대형 KOSPI 골든의
+  *"capex가 영업현금을 삼킨다"* 서사를 그대로 쓰면 **틀린다**.
+- **무차입 경영** — 부채비율 20%(부채 1,946억 / 자본 9,700억), 단기차입 2,000억을
+  빌렸다가 2,000억 그대로 갚아 **순증 0**.
+- **수주형 구조** — 계약자산 534억(유동 454+비유동 80) · 계약부채 1,091억 · 재고 2,727억(자산의 23%).
+- **품질보증충당부채 156억** — 장비 납품 후 무상보증이 구조적 비용(주23에 롤포워드 있음).
+- **5개년 사이클** — 매출 12,323 → 10,115 → 6,903 → 7,482 → **9,098억**,
+  영업이익 1,641 → 976 → **−181(적자)** → 106 → 738억, EPS 3,007 → 1,854 → −282 → 426 → 1,727원.
+  **FY23이 밸리** — `anchor`는 여기.
+- **OCF 1,566억이 5년 최대**인데 순이익은 840억 — 감가상각 340억·재고평가손실 162억 등 비현금 조정 609억.
 
-이유: R1~R4는 이 선결 조건을 구조적으로 없애지만, KOSDAQ 서술 틀이 안 맞으면 그 비용이 헛돈다.
-틀을 먼저 검증하는 게 순서다.
+### ⚠️ 미결 1건 — 리더 판단 대기 (단위 표시)
+
+렌더러가 `단위: 조 원`을 **하드코딩**(`galaxy.html:69`)해 영업이익 738억이 패널에 **`0.074`** 로 뜬다.
+`meta.unit_label`을 읽어 라벨만 바꾸는 **후방호환 설계**가 가능하나(기존 20본은 필드 부재 → 조 기본)
+공용 템플릿 변경이라 2026-08-12 세션이 **단독 결정하지 않았다**.
+→ 현재 방침: **패널 단위는 조 유지 · 산문 브래킷은 억원**(기존 골든이 소액을 그렇게 쓴다 — 015760 `[2,469억원]`).
+결정이 내려오면 V-116 ⑤로 승격한다.
 
 ## 실행 규약
 
-**브랜치**: `feat/golden-kosdaq-292` 를 `dev`(또는 리더 지정)에서 새로 판다. main 직접 push·force push 금지.
+**브랜치**: `feat/golden-kosdaq-292` — **이미 생성돼 있다**(2026-08-12). `dev`가 85커밋 뒤라
+`feat/report-fs-parse` 위에서 팠다(dev에서 파면 골든 20본 베이스라인이 없다). main 직접 push·force push 금지.
 
 선행 정본을 이 순서로 읽는다:
 [MILKYWAY_GENERATOR.md](MILKYWAY_GENERATOR.md)(하네스 + **부록 A 로드맵**) → [VARIATIONS.md](VARIATIONS.md)(S0 전체 정독) →
 [BUILD_CHECKLIST.md](BUILD_CHECKLIST.md)(29항) → [.claude/skills/galaxy-golden/SKILL.md](../../.claude/skills/galaxy-golden/SKILL.md)
 
-### S0 프리플라이트
+### S0 재확인만 (전부 완료 — 값만 대조하고 넘어갈 것)
 ```bash
 export PYTHONUTF8=1
-python -m modules.report.fs_enrich --tickers 240810   # ← 선결 (a) 선택 시. DART 키 필요
-python -m modules.report.sectioner --health 240810
-python -m modules.report.series 240810                # 완결 N/24 를 보고에 적을 것
-python integration/dossier/build_report_source.py 240810
+python -m modules.report.sectioner --health 240810     # → OK
+python -m modules.report.series 240810                 # → 완결 22/24 (미완 buyback·dsOp)
+python -m modules.report.facts_lint 240810             # → 주석 36 · 항목 884 · ERROR 0
 ```
-`corps.csv`에 240810은 있으나 `cluster`·`tier`가 **비어 있다** — 착수 시 `cluster=반도체장비`(신규) 부여를 함께 결정할 것.
-신규 클러스터를 만들면 [sector_golden_map.csv](data/sector_golden_map.csv)에 `반도체장비,prefix,292,...` 한 줄을 더해
-`fs_parse --scope sector-golden` 범위도 같이 넓어진다.
+⚠️ **`fs_enrich`를 다시 돌리지 말 것** — 이미 932행 적재됐다. 돌려야 한다면 **반드시 `--tickers 240810`**
+(인자 없이 실행하면 전 2,651사 재수집이 돈다 — 이제 argparse가 막지만, V-115 참조).
+`corps.csv` cluster=`반도체장비`·tier=`1c`, `sector_golden_map.csv` 292 행, `report_240810.json`은 **이미 있다**.
 
 ### 완주 정의
 ```bash
 python -m modules.report.facts_lint 240810              # ERROR 0
 python -m modules.report.check_golden 240810 --strict   # §1~§19 갭 0(무핀 0 포함)
 python -m modules.report.check_golden 240810 --links    # 계정셀 링크 실측 → 보고
-python -m modules.report.check_golden --all --strict    # 전 골든 무회귀(현재 20본 0)
+python -m modules.report.check_golden --all --strict    # 골든 20본 0 (lite 24본 379건은 기존 baseline)
 GALAXY_TICKER=240810 python -m pytest tests/report/test_galaxy_interaction.py
 python -m pytest tests/report/ -q
 ```
@@ -79,8 +93,9 @@ python -m pytest tests/report/ -q
 APPENDIX 나브 접힘 0@1440·1280·1024 · 1024px 가로 오버플로 0 · 콘솔 0 · **원문 TOC 전 주석 착지 실패 0** ·
 **viz 박스가 실제로 그려지는지 눈으로 확인**)
 
-완주 후: VARIATIONS 정본 §4에 **V-114부터** 채록(증상→원인→**게이트가 왜 못 잡았나**→처리) + 채록 로그 1줄 ·
-`corps.csv` cluster·tier 부여 · `build_report_source.py 240810` · `build_galaxy_index.py` · 1커밋.
+완주 후: VARIATIONS 정본 §4에 **V-117부터** 채록(V-116이 이 티커의 S0~S2 채록이다 — 증상→원인→**게이트가 왜
+못 잡았나**→처리) + 채록 로그의 240810 행을 **미완주 → 완주**로 갱신 · `corps.csv` tier `1c`→`1` ·
+`build_galaxy_index.py` · 1커밋.
 
 > ⚠️ **KOSDAQ 첫 본이라 변형이 쏟아질 것으로 예상한다.** 기존 20본에서 안 나온 실패는 전부
 > VARIATIONS에 채록하고, **2회 반복되면 코드·조문으로 승격**한다(MILKYWAY §9).
