@@ -553,9 +553,9 @@ def _mark(sess, rcept_no, ticker, status):
     st.attempts = (st.attempts or 0) + 1
 
 
-def sectioning_health(ticker: str) -> list[str]:
+def sectioning_health(ticker: str, deep: bool = True) -> list[str]:
     """빌드 전 프리플라이트(S0) — 최신 사업보고서 주석이 제대로 분할됐는지 검증.
-    이번 세션 3종 사고(1주석 붕괴·괴물블록·하위번호 조용한 누락)를 자동 포착.
+    3종 사고(1주석 붕괴·괴물블록·하위번호 조용한 누락) + **stale 꼬리 절단**(deep)을 자동 포착.
     반환: 문제 목록(빈 리스트=정상). /galaxy-golden이 착수 전 게이트로 호출.
     """
     sess = get_local_session()
@@ -574,6 +574,7 @@ def sectioning_health(ticker: str) -> list[str]:
         .all()
     )
     notes = [(s.note_no, s.char_len or 0) for s in secs]
+    raw_path = raw.raw_path
     sess.close()
     issues: list[str] = []
     n = len(notes)
@@ -587,7 +588,50 @@ def sectioning_health(ticker: str) -> list[str]:
         gaps = [m for m in range(1, majors[-1] + 1) if m not in majors]
         if len(gaps) > majors[-1] * 0.3:
             issues.append(f"번호 결번 과다 {gaps} — 하위번호/포맷 누락 의심")
+    if deep:
+        issues += _stale_tail_issues(ticker, raw_path, majors, n)
     return issues
+
+
+def _stale_tail_issues(
+    ticker: str, raw_path: str, db_majors: list[int], db_count: int
+) -> list[str]:
+    """stale 섹션 꼬리 절단 검출 (V-058 → V-100 코드화).
+
+    DB의 주석은 **그때의 sectioner**가 만든 결과다. 그 뒤 코드가 개선됐거나(V-070~071·V-098)
+    재섹션 없이 잔재가 남으면 **꼬리 주석이 통째로 없는데도 위 3종 검사는 전부 통과**한다
+    — 붕괴·괴물블록·결번만 보기 때문. 고려아연은 주29에서 잘린 25노트로 조용히 PASS했고,
+    법인세(32)·주당이익(33)·특수관계자(37)·부문(39)이 사라진 채 빌드에 들어갈 뻔했다.
+
+    → 원문을 **지금 코드로 다시 갈라** 최대 주번호·개수를 DB와 대조한다. 원문 캐시가 없으면
+    (raw_cache는 로컬 전용) 판정을 생략한다 — 없는 근거로 FAIL시키지 않는다.
+    """
+    xml = _load_raw(raw_path) if raw_path else None
+    if not xml:
+        return []
+    try:
+        fresh = _split_conn_notes(xml)
+    except Exception as e:  # 원문 파싱 실패는 health의 판정 대상이 아님
+        return [f"원문 재분할 실패({type(e).__name__}) — 수동 확인 필요"]
+    if not fresh:
+        return []
+    fresh_majors = sorted({_note_key(no)[0] for no, _, _ in fresh})
+    db_max = db_majors[-1] if db_majors else 0
+    lost = [m for m in fresh_majors if m > db_max]
+    if lost:
+        tail = ", ".join(
+            f"주{no}({t[:14]})" for no, t, _ in fresh if _note_key(no)[0] in lost[:4]
+        )
+        return [
+            f"stale 꼬리 절단 — DB 최대 주{db_max}({db_count}개)이나 원문 재분할은 주{fresh_majors[-1]}"
+            f"({len(fresh)}개). 유실: {tail} … → `section_all(['{ticker}'])` 재섹션 필요(V-058)"
+        ]
+    if len(fresh) > db_count * 1.15 + 2:
+        return [
+            f"stale 섹션 의심 — DB {db_count}개 vs 원문 재분할 {len(fresh)}개(현행 코드 기준). "
+            f"→ `section_all(['{ticker}'])` 재섹션 권장"
+        ]
+    return []
 
 
 if __name__ == "__main__":

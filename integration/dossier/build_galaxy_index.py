@@ -22,7 +22,8 @@ def build() -> list[str]:
     tickers = []
     for p in sorted(glob.glob(os.path.join(_DATA, "galaxy_*.json"))):
         base = os.path.basename(p)
-        if base == "galaxy_index.json":
+        # lite(표준-델타) 산출물은 별도 매니페스트(build_galaxy_lite_index.py) — 골든 목록 오염 방지
+        if base == "galaxy_index.json" or base.startswith("galaxy_lite_"):
             continue
         t = base[len("galaxy_") : -len(".json")]
         # 실제 렌더 가능한지 최소 확인(corp.ticker 존재)
@@ -43,4 +44,6 @@ def build() -> list[str]:
 
 if __name__ == "__main__":
     ts = build()
-    print(f"galaxy_index.json 생성: {len(ts)}개 — {ts}")
+    print(
+        f"galaxy_index.json 생성: {len(ts)}개 / {ts}"
+    )  # cp949 콘솔 크래시 회피(em dash 금지)

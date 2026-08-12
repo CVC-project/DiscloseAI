@@ -82,8 +82,14 @@ def _table_grid(table) -> list[list[str]]:
     return [r for r in rows if any(c.strip() for c in r)]
 
 
-def _html_to_blocks(html: str) -> list[dict]:
-    """HTML을 문서 순서의 blocks로: 표→{t:'table',rows}, 문단→{t:'p',v}. (표는 격자 전개)"""
+def _html_to_blocks(html: str, *, row_cap: int | None = _ROW_CAP) -> list[dict]:
+    """HTML을 문서 순서의 blocks로: 표→{t:'table',rows}, 문단→{t:'p',v}. (표는 격자 전개)
+
+    ⚠️ `row_cap=None`이면 행 절단을 하지 않는다 — **재무제표 본표 전용**(V-109).
+    _ROW_CAP은 주석의 초장문 표(종속기업 목록 등)를 위한 가드인데, 본표에 적용하면
+    대한항공 연결현금흐름표(119행)처럼 투자·재무활동 절반이 통째로 잘려 3-way
+    계정셀 링크가 그 행들에 닿지 못한다. 본표는 열 ≤ ~12·셀이 짧아 비대 위험이 없다.
+    """
     from bs4 import BeautifulSoup
 
     soup = BeautifulSoup(html, "html.parser")
@@ -97,6 +103,16 @@ def _html_to_blocks(html: str) -> list[dict]:
             if t:
                 blocks.append({"t": "p", "v": t})
         else:  # table
+            # V-119 — **1열 표는 표가 아니라 레이아웃 컨테이너다.** DART 원문은 산문 주석을
+            #   1열×1행 표의 <td> 안에 <p>로 싣는 경우가 있다(원익IPS 주5 실측: <p> 19개 전부
+            #   표 안 → 표 안 <p> 스킵 + 셀 초과 비정형 판정 → 본문 통째 소실). 셀 안 문단을 전개한다.
+            _tds = el.find_all("td")
+            if len(_tds) <= 2 and not el.find("table"):
+                _ps = [q.get_text(" ", strip=True) for q in el.find_all("p")]
+                _ps = [t for t in _ps if t]
+                if len(_ps) >= 3:  # 문단 여럿 = 산문 컨테이너. 값 표(1~2셀 짧은 표)는 종전 경로.
+                    blocks.extend({"t": "p", "v": t} for t in _ps)
+                    continue
             rows = _table_grid(el)
             if not rows:
                 continue
@@ -112,14 +128,14 @@ def _html_to_blocks(html: str) -> list[dict]:
                 )
                 continue
             n = len(rows)
-            if n > _ROW_CAP:
-                rows = rows[:_ROW_CAP]
+            if row_cap and n > row_cap:
+                rows = rows[:row_cap]
             blocks.append({"t": "table", "rows": rows})
-            if n > _ROW_CAP:
+            if row_cap and n > row_cap:
                 blocks.append(
                     {
                         "t": "p",
-                        "v": f"… (표가 길어 상위 {_ROW_CAP}행만 표시했어요 · 원문 총 {n}행)",
+                        "v": f"… (표가 길어 상위 {row_cap}행만 표시했어요 · 원문 총 {n}행)",
                     }
                 )
     return blocks
@@ -139,7 +155,11 @@ def _extract_statements(doc: str) -> dict:
             if match(txt):
                 end = titles[i + 1][0] if i + 1 < len(titles) else len(doc)
                 disp = _STMT_NUMPREFIX.sub("", txt)
-                out[key] = {"title": disp, "blocks": _html_to_blocks(doc[pos:end])}
+                # 본표는 행 절단 금지(V-109) — 절단하면 잘린 행의 계정셀 링크가 사라진다.
+                out[key] = {
+                    "title": disp,
+                    "blocks": _html_to_blocks(doc[pos:end], row_cap=None),
+                }
                 break
     return out
 

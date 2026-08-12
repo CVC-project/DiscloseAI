@@ -1,0 +1,99 @@
+[
+ {
+  "id": "n1",
+  "title": "일한 몫이 [10,707억] 쌓였는데 아직 청구 전이에요",
+  "what": [
+   "계약자산이 [4,590억]에서 [10,707억]으로 [133.3%] 늘었어요.",
+   "이미 청구한 매출채권도 [3,655억]에서 [5,106억]으로 늘었어요."
+  ],
+  "why": [
+   "계약자산은 만드는 일은 진행했는데 아직 대금을 청구하지 못한 몫이에요 — 매출로는 잡혔지만 통장에는 안 들어온 돈이에요.",
+   "미리 받아 둔 계약부채는 [3.46조]에서 [3.83조]로 [10.9%] 느는 데 그쳤어요. 들어오는 속도보다 묶이는 속도가 훨씬 빨랐다는 뜻이에요.",
+   "위 차트에서 영업활동 현금이 (−)로 뒤집힌 자리가 바로 여기예요 — 매출은 늘었는데 그 돈이 아직 회사 밖에 있어요."
+  ],
+  "src": {"note_no": "5", "title": "매출채권 및 계약자산"},
+  "nums": [
+   {"chip": "4,590억", "check": {"kind": "fact", "key": "contract_asset_prior", "fmt": "eok"}},
+   {"chip": "10,707억", "check": {"kind": "fact", "key": "contract_asset_cur", "fmt": "eok"}},
+   {"chip": "133.3%", "check": {"kind": "ratio", "num": "contract_asset_cur", "den": "contract_asset_prior", "minus_one": true, "fmt": "pct"}},
+   {"chip": "3,655억", "check": {"kind": "fact", "key": "ar_prior", "fmt": "eok"}},
+   {"chip": "5,106억", "check": {"kind": "fact", "key": "ar_cur", "fmt": "eok"}},
+   {"chip": "3.46조", "check": {"kind": "fact", "key": "contract_liab_prior", "fmt": "jo"}},
+   {"chip": "3.83조", "check": {"kind": "fact", "key": "contract_liab_cur", "fmt": "jo"}},
+   {"chip": "10.9%", "check": {"kind": "ratio", "num": "contract_liab_cur", "den": "contract_liab_prior", "minus_one": true, "fmt": "pct"}}
+  ],
+  "std_focus": "dive:n11",
+  "order": 1,
+  "bridge": null
+ },
+ {
+  "id": "n2",
+  "title": "모자란 돈은 은행에서 당겨왔어요",
+  "what": [
+   "1년 안에 갚아야 하는 단기차입금이 [1,626억]에서 [5,685억]으로 [249.6%] 늘었어요.",
+   "만기가 긴 장기차입금도 [511억]에서 [1,633억]으로 늘었어요."
+  ],
+  "why": [
+   "영업에서 들어올 돈이 계약자산과 재고에 묶여 있으니, 당장 쓸 돈은 밖에서 빌려 와야 해요 — 위에서 본 외부수혈형이라는 국면이 이런 모습이에요.",
+   "특히 늘어난 쪽이 짧은 빚이에요. 짧은 빚은 1년마다 다시 빌려야 해서 금리와 시장 분위기에 더 자주 부딪혀요.",
+   "묶인 돈이 대금으로 들어오기 시작하면 이 빚은 다시 줄어들 수 있어요 — 그 시점이 언제인지가 이 회사를 볼 때의 관전 포인트예요."
+  ],
+  "src": {"note_no": "4-1", "title": "범주별 금융상품"},
+  "nums": [
+   {"chip": "1,626억", "check": {"kind": "fact", "key": "st_borrow_prior", "fmt": "eok"}},
+   {"chip": "5,685억", "check": {"kind": "fact", "key": "st_borrow_cur", "fmt": "eok"}},
+   {"chip": "249.6%", "check": {"kind": "ratio", "num": "st_borrow_cur", "den": "st_borrow_prior", "minus_one": true, "fmt": "pct"}},
+   {"chip": "511억", "check": {"kind": "fact", "key": "lt_borrow_prior", "fmt": "eok"}},
+   {"chip": "1,633억", "check": {"kind": "fact", "key": "lt_borrow_cur", "fmt": "eok"}}
+  ],
+  "std_focus": "dive:n20",
+  "order": 2,
+  "bridge": "그럼 당장 쓸 돈은 어디서 구했을까요?"
+ },
+ {
+  "id": "n3",
+  "title": "창고에 쌓인 물량도 [61.5%] 늘었어요",
+  "what": [
+   "재고자산 총장부금액이 [3,778억]에서 [6,100억]으로 [61.5%] 늘었어요.",
+   "장부금액 기준으로도 [3,635억]에서 [5,931억]으로 늘었어요."
+  ],
+  "why": [
+   "만들 물량이 늘면 원재료와 재공품도 함께 늘어요 — 앞으로 넘길 물건을 준비하고 있다는 신호예요.",
+   "다만 재고는 팔리기 전까지 현금이 아니에요. 계약자산과 재고가 함께 늘면 그만큼 회사 돈이 한꺼번에 묶여요.",
+   "매출이 늘어나는 회사에서 영업활동 현금이 (−)로 나오는 건 이런 이유가 많아요 — 장사가 안돼서가 아니라, 벌 준비에 돈이 먼저 들어가서요."
+  ],
+  "src": {"note_no": "6", "title": "재고자산"},
+  "nums": [
+   {"chip": "3,778억", "check": {"kind": "fact", "key": "inv_gross_prior", "fmt": "eok"}},
+   {"chip": "6,100억", "check": {"kind": "fact", "key": "inv_gross_cur", "fmt": "eok"}},
+   {"chip": "61.5%", "check": {"kind": "ratio", "num": "inv_gross_cur", "den": "inv_gross_prior", "minus_one": true, "fmt": "pct"}},
+   {"chip": "3,635억", "check": {"kind": "fact", "key": "inv_bv_prior", "fmt": "eok"}},
+   {"chip": "5,931억", "check": {"kind": "fact", "key": "inv_bv_cur", "fmt": "eok"}}
+  ],
+  "std_focus": "dive:n13",
+  "order": 3,
+  "bridge": "돈이 묶인 자리는 하나 더 있어요."
+ },
+ {
+  "id": "n4",
+  "title": "손해가 예상되는 공사에 [1,121억]을 미리 잡았어요",
+  "what": [
+   "공사손실충당부채가 [621억]에서 [1,121억]으로 늘었어요.",
+   "올해 새로 잡은 금액이 [500억]이에요."
+  ],
+  "why": [
+   "공사손실충당부채는 '이 계약은 끝까지 가면 손해가 날 것 같다'고 판단할 때, 그 손해를 미리 비용으로 잡아 두는 금액이에요.",
+   "미리 잡아 두기 때문에 실제 손해가 나는 해가 아니라 판단한 해의 이익이 먼저 줄어요 — 나쁜 소식을 앞당겨 반영하는 장치예요.",
+   "일감이 빠르게 늘어나는 국면에서는 이 금액도 함께 보는 게 좋아요 — 늘어난 수주가 전부 남는 장사는 아니라는 뜻이니까요."
+  ],
+  "src": {"note_no": "15", "title": "충당부채"},
+  "nums": [
+   {"chip": "621억", "check": {"kind": "fact", "key": "prov_end_prior", "fmt": "eok"}},
+   {"chip": "1,121억", "check": {"kind": "fact", "key": "prov_end_cur", "fmt": "eok"}},
+   {"chip": "500억", "check": {"kind": "fact", "key": "prov_add_cur", "fmt": "eok"}}
+  ],
+  "std_focus": "dive:n22",
+  "order": 4,
+  "bridge": "마지막으로, 늘어난 일감에 붙은 위험도 봐야 해요."
+ }
+]

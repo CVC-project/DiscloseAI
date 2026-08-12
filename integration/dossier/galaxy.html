@@ -66,13 +66,13 @@ a{color:var(--cyan);} a:hover{color:var(--mint);}
       </div>
       <span style="margin-left:10px;font-size:13px;color:var(--text);border:1px solid var(--line);border-radius:6px;padding:5px 12px;background:rgba(255,255,255,.02);">{{ corp.name }} · FY{{ corp.fiscal_year }} <span style="color:var(--dim);">{{ corp.period }}</span> · <span style="color:var(--cyan);">{{ corp.basis }}</span></span>
     </div>
-    <div style="font-family:var(--mono);font-size:11px;color:var(--dim2);letter-spacing:.08em;">단위: 조 원 · 행 위에 마우스를 올리면 백만 원 원본</div>
+    <div style="font-family:var(--mono);font-size:11px;color:var(--dim2);letter-spacing:.08em;">단위: {{ corp.unit_label }} · 행 위에 마우스를 올리면 백만 원 원본</div>
   </div>
 
   <div data-screen-label="인트로" style="position:relative;z-index:2;display:grid;grid-template-columns:1.1fr 1.6fr;gap:28px;padding:26px 28px 24px;border-bottom:1px solid var(--line);">
     <div>
       <div style="font-size:24px;font-weight:800;line-height:1.45;letter-spacing:-.01em;">작년 통장의 <span style="font-family:var(--mono);color:var(--cyan);">{{ corp.cash_begin }}</span>는, 어떻게 올해 <span style="font-family:var(--mono);color:var(--cyan);">{{ corp.cash_end }}</span>가 됐을까요?</div>
-      <div style="margin-top:12px;font-size:15px;line-height:1.7;">이 이야기의 핵심은 <b>'손익 성적표의 이익'과 '통장의 현금'이 왜 다른가</b>예요.</div>
+      <div style="margin-top:12px;font-size:15px;line-height:1.7;">{{ strings.intro_lead }}</div>
       <div style="margin-top:8px;font-size:13px;line-height:1.65;color:var(--dim);">{{ strings.intro_lines.1 }}</div>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
@@ -219,12 +219,12 @@ a{color:var(--cyan);} a:hover{color:var(--mint);}
         </div>
         <sc-if value="{{ exp.bsa }}" hint-placeholder-val="{{ false }}"><div>{{ sub.bsa }}</div></sc-if>
         <div data-row="bs-liab" onclick="{{ onRow }}" title="{{ pt.bs_liab }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;font-weight:700;" style-hover="background:rgba(140,190,230,.06)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--coral);letter-spacing:.08em;">부채</span><span>부채총계 <span style="font-size:11px;color:var(--dim);font-weight:400;">갚아야 할 남의 돈</span></span><span data-g="bsl" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.bsl }}</span></div>
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--coral);letter-spacing:.08em;">부채</span><span>부채총계</span><span data-g="bsl" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.bsl }}</span></div>
           <span style="font-family:var(--mono);font-size:15.5px;font-weight:700;color:var(--steel);">{{ pv.bs_liab }}</span>
         </div>
         <sc-if value="{{ exp.bsl }}" hint-placeholder-val="{{ false }}"><div>{{ sub.bsl }}</div></sc-if>
         <div data-row="bs-equity" onclick="{{ onRow }}" title="{{ pt.bs_equity }}" style="display:flex;align-items:center;justify-content:space-between;height:var(--row-s);padding:0 16px;border-top:1px solid var(--line);cursor:pointer;font-weight:700;" style-hover="background:rgba(140,190,230,.06)">
-          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:.08em;">자본</span><span>자본총계 <span style="font-size:11px;color:var(--dim);font-weight:400;">주주의 몫 → 존 E</span></span><span data-g="bse" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.bse }}</span></div>
+          <div style="display:flex;align-items:center;gap:10px;"><span style="font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:.08em;">자본</span><span>자본총계</span><span data-g="bse" onclick="{{ onToggle }}" style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:4px;font-size:9px;color:var(--dim);cursor:pointer;flex-shrink:0;">{{ car.bse }}</span></div>
           <span style="font-family:var(--mono);font-size:15.5px;font-weight:700;color:var(--gold);">{{ pv.bs_equity }}</span>
         </div>
         <sc-if value="{{ exp.bse }}" hint-placeholder-val="{{ false }}"><div>{{ sub.bse }}</div></sc-if>
@@ -361,6 +361,32 @@ class Component extends DCLogic {
     document.addEventListener('keydown', this._onKey);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => this.queueMeasure());
     setTimeout(() => this.queueMeasure(), 600);
+    // lite 델타 뷰에서 넘어온 표준 딥링크 — focus=dive:<key>면 그 딥다이브를 바로 고정(pin),
+    // focus=zone<X>면 존 스크롤. 데이터 로드 전이면 재시도. 파라미터 없으면 아무 일도 하지 않는다.
+    setTimeout(() => {
+      const f = new URLSearchParams(location.search).get('focus');
+      if (!f) return;
+      let tries = 0;
+      const go = () => {
+        if (f.indexOf('dive:') === 0) {
+          const k = f.slice(5);
+          if (this.getDives()[k]) {
+            this.pin(k);
+            const rs = this._hlRows(k);
+            if (rs && rs.length) {
+              const el = document.querySelector('[data-row="' + rs[0] + '"]');
+              if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            return;
+          }
+        } else {
+          const el = document.querySelector('[data-zone="' + f + '"]');
+          if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
+        }
+        if (++tries < 20) setTimeout(go, 300);
+      };
+      go();
+    }, 600);
     this.applyTokens();
   }
   componentWillUnmount() {
@@ -867,8 +893,15 @@ class Component extends DCLogic {
     };
     res(K.k1, CF.reservoirs.rBegin);
     res(K.k15, CF.reservoirs.rEnd);
-    const _dd = (K.k15.raw_mn - K.k1.raw_mn) / 1e6;
-    els.push(chip('delta', K.k15.x, K.k15.y - CF.reservoirs.rEnd - 26, [(_dd >= 0 ? '+' : '−') + Math.abs(_dd).toFixed(1) + '조 ' + (_dd >= 0 ? '늘었어요' : '줄었어요')], C.gold, 10));
+    // V-117 — 델타 칩도 표시 단위를 따른다. `/1e6 + '조'` 고정이면 억 표기 티커에서
+    //   −278억이 '−0.0조'로 찍혀 무의미해진다(원익IPS 실측). 단위는 corp.unit_label이 정본.
+    const _ul = ((this._G && this._G.corp && this._G.corp.unit_label) || '조 원');
+    const _ud = _ul === '억 원' ? 1e2 : 1e6;
+    const _dd = (K.k15.raw_mn - K.k1.raw_mn) / _ud;
+    const _dtxt = _ul === '억 원'
+      ? Math.round(Math.abs(_dd)).toLocaleString() + '억 '
+      : Math.abs(_dd).toFixed(1) + '조 ';
+    els.push(chip('delta', K.k15.x, K.k15.y - CF.reservoirs.rEnd - 26, [(_dd >= 0 ? '+' : '−') + _dtxt + (_dd >= 0 ? '늘었어요' : '줄었어요')], C.gold, 10));
 
     // knots
     for (const k of this.KNOTS) {
@@ -1503,8 +1536,21 @@ class Component extends DCLogic {
     const safe = (fn, fb) => { try { return fn.call(this); } catch (e) { console.warn('galaxy 빌더 오류(' + fn.name + '): ' + e.message); return fb; } };
     return {
       pv, pt,
-      corp: this._G ? this._G.corp : { name: '', fiscal_year: '', period: '', basis: '', cash_begin: '', cash_end: '' },
-      strings: this._G ? this._G.strings : { intro_lines: ['', ''] },
+      // V-117: 표시 단위는 티커 속성이다 — 자산총계 3조 미만(KOSDAQ 중소형)은 조 단위로 적으면
+      //  영업이익 738억이 `0.074`가 돼 읽히지 않는다. `corp.unit_label`이 없으면 종전 '조 원'.
+      //  ⚠️ `raw_mn`(백만원)은 단위와 무관하게 불변 — 툴팁 원본과 게이트 환산의 기준이다.
+      corp: Object.assign(
+        { name: '', fiscal_year: '', period: '', basis: '', cash_begin: '', cash_end: '', unit_label: '조 원' },
+        this._G ? this._G.corp : {}),
+      // V-110: `intro_lines[0]`은 티커마다 저작해 두고도 템플릿이 고정 문구를 쓰는 바람에
+      //  한 번도 렌더되지 않았다. 여기서 배선하되, 비어 있으면 종전 문구로 폴백한다.
+      strings: this._G
+        ? Object.assign({}, this._G.strings, {
+            intro_lead:
+              (((this._G.strings || {}).intro_lines || [])[0] || '').trim() ||
+              "이 이야기의 핵심은 '손익 성적표의 이익'과 '통장의 현금'이 왜 다른가예요.",
+          })
+        : { intro_lines: ['', ''], intro_lead: '' },
       galaxySvg: safe(this.buildGalaxy, null),
       midOverlay: safe(this.buildMidOverlay, null),
       inspectorCard: safe(this.buildCard, null),

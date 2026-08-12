@@ -1064,8 +1064,11 @@ window.groupVcSide = groupVcSide;
 // ─── Sector map: companies as glowing nodes inside the chosen sector ────
 const { useRef: _useRef, useEffect: _useEffect, useState: _useState, useMemo: _useMemo } = React;
 
-function SectorMap({ sectorId, activeMarket, activeCompanyCode, onSelectMarket, onSelectCompany, onSelectGhost }) {
+function SectorMap({ sectorId, activeMarket, activeCompanyCode, onSelectMarket, onSelectCompany, onSelectGhost, glowSet }) {
   const canvasRef = _useRef(null);
+  // UX-045: 현금 은하수 보유(골든∪lite) 티커 — draw 루프는 ref로 읽는다(effect deps 불변 유지, DESIGN §9-1).
+  const glowSetRef = _useRef(null);
+  glowSetRef.current = glowSet || null;
   const rafRef = _useRef(0);
   const startRef = _useRef(performance.now());
   const sizeRef = _useRef({ w: 0, h: 0, dpr: 1 });
@@ -1348,6 +1351,20 @@ function SectorMap({ sectorId, activeMarket, activeCompanyCode, onSelectMarket, 
         ctx.globalAlpha = activeCompanyCode ? 0.35 : (0.72 + Math.sin(t * 0.6) * 0.08);
         ctx.drawImage(dotsCanvasRef.current, 0, 0, w, h);
         ctx.restore();
+        // UX-045: dot 기업 중 현금 은하수 보유(골든∪lite)는 프리렌더 위에 트윙클 오버레이 —
+        // 프리렌더는 정적이라 개별 반짝임이 불가하므로 메인 루프에서 덧그린다(좌표는 dotsScreenRef).
+        const _gsd = glowSetRef.current;
+        if (_gsd && dotsScreenRef.current.length) {
+          for (const dsc of dotsScreenRef.current) {
+            if (!dsc.t || !_gsd.has(dsc.t)) continue;
+            const ph = (dsc.t.charCodeAt(3) * 11 + dsc.t.charCodeAt(5)) % 63 / 10;
+            const tw = (Math.sin(t * 2.6 + ph) + 1) / 2;
+            const a = activeCompanyCode ? 0.25 : 0.35 + tw * 0.6;
+            // 섹터 고유색 펄스(개정 08-12c — 흰 심 플래시 제거, 은은한 발광만)
+            ctx.fillStyle = sec.color + Math.round(a * 255).toString(16).padStart(2, '0');
+            ctx.beginPath(); ctx.arc(dsc.x, dsc.y, dsc.r + 0.8 + tw * 1.8, 0, Math.PI * 2); ctx.fill();
+          }
+        }
       }
 
       // Lerp
@@ -1503,16 +1520,36 @@ function SectorMap({ sectorId, activeMarket, activeCompanyCode, onSelectMarket, 
           ctx.lineWidth = 1.5;
           ctx.beginPath(); ctx.arc(x, y, nodeR * (2 + p * 0.5), 0, Math.PI * 2); ctx.stroke();
         }
+        // UX-045(개정 08-12c, 리더 피드백 "별 말고 테두리가 빛나게") — 글린트·헤일로 폐기,
+        // **빛나는 테두리(림 글로우)**: 섹터색 소프트 글로우 겹스트로크가 은은히 호흡한다.
+        const _gs = glowSetRef.current;
+        if (_gs && _gs.has(c.code) && !c.isMarket) {
+          const ph = (c.code.charCodeAt(4) * 7 + c.code.charCodeAt(5)) % 63 / 10;
+          const tw = (Math.sin(t * 2.0 + ph) + 1) / 2;           // 0~1 호흡
+          const rr = nodeR + 2.5;
+          const a2h = (v) => Math.round(Math.max(0, Math.min(1, v)) * 255).toString(16).padStart(2, '0');
+          ctx.lineWidth = 7;                                      // 바깥 번짐
+          ctx.strokeStyle = sec.color + a2h(0.14 + tw * 0.2);
+          ctx.beginPath(); ctx.arc(x, y, rr + 2, 0, Math.PI * 2); ctx.stroke();
+          ctx.lineWidth = 3;                                      // 중간 발광
+          ctx.strokeStyle = sec.color + a2h(0.4 + tw * 0.35);
+          ctx.beginPath(); ctx.arc(x, y, rr, 0, Math.PI * 2); ctx.stroke();
+          ctx.lineWidth = 1.2;                                    // 밝은 림
+          ctx.strokeStyle = sec.color + a2h(0.75 + tw * 0.25);
+          ctx.beginPath(); ctx.arc(x, y, rr - 1, 0, Math.PI * 2); ctx.stroke();
+        }
         positions.push({ x, y, r: nodeR, c });
       });
       // Labels for sector companies
       ctx.textAlign = 'center';
       positions.forEach(({ x, y, r: nr, c }) => {
         const isActive = c.code === activeCompanyCode;
+        const hasGx = glowSetRef.current && glowSetRef.current.has(c.code) && !c.isMarket;
         ctx.globalAlpha = isActive ? 1 : 0.8;
-        ctx.fillStyle = isActive ? sec.color : 'rgba(148,163,184,0.9)';
+        ctx.fillStyle = isActive || hasGx ? sec.color : 'rgba(148,163,184,0.9)';  // 보유 = 섹터색(개정 08-12b)
         ctx.font = `${isActive ? '600 ' : ''}10px sans-serif`;
-        ctx.fillText(c.name.length > 7 ? c.name.slice(0,7)+'…' : c.name, x, y - nr - 5);
+        const nm = c.name.length > 7 ? c.name.slice(0,7)+'…' : c.name;
+        ctx.fillText(hasGx ? '✦ ' + nm : nm, x, y - nr - 5);  // UX-045: 은하수 보유 표식
         ctx.globalAlpha = 1;
       });
       ctx.textAlign = 'left';
@@ -2416,24 +2453,170 @@ ${d.summary || '(요약 없음)'}`;
 현재 분석 대상: ${name} (${ticker || ''}) ${n.s ? '· ' + n.s : ''}
 EQS 종합 점수: ${n.eqs != null ? n.eqs + '점 (' + n.gr + '등급)' : '-'}
 EQS 모듈: M1(현금이익률) ${n.m1 ?? '-'} / M2(회수건전성) ${n.m2 ?? '-'} / M3(부채건전성) ${n.m3 ?? '-'} / M4(본업안정성) ${n.m4 ?? '-'} / M5(자본성장성) ${n.m5 ?? '-'}
-매출 ${n.rv ?? '-'}조 / 영업이익 ${n.oi ?? '-'}조 (영업이익률 ${n.oim ?? '-'}%) / 부채비율 ${n.dr ?? '-'}%`;
+매출 ${n.rv_label || (n.rv != null ? n.rv + '조원' : '-')} / 영업이익 ${n.oi_label || (n.oi != null ? n.oi + '조원' : '-')} (영업이익률 ${n.oim ?? '-'}%) / 부채비율 ${n.dr ?? '-'}%`;
 }
 
 // ─── DISCLOSURES tab — TL panels ───────────────────────────────────────────
+
+function formatLiveDisclosureTime(asOfKst) {
+  if (!asOfKst) return '';
+  try {
+    return new Intl.DateTimeFormat('ko-KR', {
+      timeZone: 'Asia/Seoul', hour: '2-digit', minute: '2-digit', hour12: false,
+    }).format(new Date(asOfKst));
+  } catch (_) {
+    return '';
+  }
+}
+
+// 정적 배포(GitHub Pages·file://·로컬 미리보기)에는 Vercel 서버 API(/api/*)가
+// 없다 — 이 경우들을 하나로 판별해 여러 훅에서 재사용한다.
+function isStaticPreviewHost() {
+  const hostname = window.location.hostname;
+  return window.location.protocol === 'file:'
+    || hostname.endsWith('github.io')
+    || hostname === 'localhost'
+    || hostname === '127.0.0.1'
+    || hostname === '::1';
+}
+
+// 아카이브(disclosures.json)는 top50급 대형주만 사전 수집한다 — 그 밖의 기업을
+// 열었을 때 corp_code를 찾기 위해 dossier의 company_master.json을 지연 로드한다.
+let _corpCodeMapPromise = null;
+function loadCorpCodeMap() {
+  if (!_corpCodeMapPromise) {
+    _corpCodeMapPromise = fetch(new URL('../dossier/data/company_master.json', window.location.href).toString())
+      .then(r => r.json())
+      .then(d => Object.fromEntries((d.companies || []).map(c => [c.ticker, c.corp_code])))
+      .catch(() => ({}));
+  }
+  return _corpCodeMapPromise;
+}
+
+// 아카이브에 없는(top50 밖) 기업을 열었을 때, 저장 없이 그 자리에서 DART를
+// 직접 조회한다 — 정적 미리보기에는 서버가 없어 시도하지 않는다.
+function useCompanyDisclosures(stockCode, enabled) {
+  const [state, setState] = React.useState({ items: [], loading: false, error: false, tried: false });
+  React.useEffect(() => {
+    if (!enabled || !stockCode || isStaticPreviewHost()) {
+      setState({ items: [], loading: false, error: false, tried: false });
+      return;
+    }
+    let cancelled = false;
+    setState(previous => ({ ...previous, loading: true, error: false }));
+    loadCorpCodeMap()
+      .then(map => {
+        const corpCode = map[stockCode];
+        if (!corpCode) throw new Error('corp_code not found');
+        return fetch(`/api/disclosures?corp_code=${corpCode}&limit=15`, {
+          headers: { Accept: 'application/json' }, cache: 'no-store',
+        });
+      })
+      .then(response => {
+        if (!response.ok) throw new Error('company disclosure request failed');
+        return response.json();
+      })
+      .then(payload => {
+        if (cancelled) return;
+        setState({ items: Array.isArray(payload.items) ? payload.items : [], loading: false, error: false, tried: true });
+      })
+      .catch(err => {
+        if (cancelled) return;
+        console.error('[disclosures] company live fetch failed:', err);
+        setState({ items: [], loading: false, error: true, tried: true });
+      });
+    return () => { cancelled = true; };
+  }, [stockCode, enabled]);
+  return state;
+}
+
+function useLiveDisclosures(limit = 40) {
+  const [state, setState] = React.useState({ items: [], loading: true, error: false, asOfKst: '' });
+  const refresh = React.useCallback(async () => {
+    setState(previous => ({ ...previous, loading: true, error: false }));
+    try {
+      const isStaticPreview = isStaticPreviewHost();
+      const feedUrl = isStaticPreview
+        ? new URL('../data/today_disclosures.json', window.location.href).toString()
+        : `/api/disclosures?limit=${limit}`;
+      const response = await fetch(feedUrl, {
+        headers: { Accept: 'application/json' }, cache: 'no-store',
+      });
+      if (!response.ok) throw new Error('live disclosure request failed');
+      const payload = await response.json();
+      setState({
+        items: Array.isArray(payload.items) ? payload.items : [],
+        loading: false,
+        error: false,
+        asOfKst: payload.asOfKst || payload.generatedAt || payload.generated_at || '',
+      });
+    } catch (err) {
+      // 이전엔 조용히 삼켜져서 로컬 재현이 오래 걸렸다 — 최소한 콘솔에는 남긴다.
+      console.error('[disclosures] live feed fetch failed:', err);
+      setState(previous => ({ ...previous, loading: false, error: true }));
+    }
+  }, [limit]);
+  React.useEffect(() => {
+    refresh();
+    const timer = window.setInterval(refresh, 120000);
+    return () => window.clearInterval(timer);
+  }, [refresh]);
+  return { ...state, refresh };
+}
+
+function LiveDisclosureBlock({ items, live, emptyText = '오늘 접수된 공시가 없습니다.' }) {
+  const openOriginal = React.useCallback((item) => {
+    if (item.dartUrl) window.open(item.dartUrl, '_blank', 'noopener,noreferrer');
+  }, []);
+  return (
+    <section className="live-disclosure-block">
+      <div className="live-disclosure-head">
+        <span>오늘의 DART 공시</span>
+        <span className="live-disclosure-meta">
+          {live.loading ? '불러오는 중' : (formatLiveDisclosureTime(live.asOfKst) ? `${formatLiveDisclosureTime(live.asOfKst)} KST` : 'KST')}
+          <button type="button" className="live-disclosure-refresh" onClick={live.refresh} aria-label="오늘 공시 새로고침">↻</button>
+        </span>
+      </div>
+      {live.loading && items.length === 0 && <div className="live-disclosure-empty">오늘 공시를 불러오는 중입니다.</div>}
+      {!live.loading && live.error && <div className="live-disclosure-empty">실시간 공시 연결을 다시 시도합니다.</div>}
+      {!live.loading && !live.error && items.length === 0 && <div className="live-disclosure-empty">{emptyText}</div>}
+      {items.map(item => (
+        <button type="button" key={item.rceptNo} className="live-disclosure-row" onClick={() => openOriginal(item)}>
+          <span className="live-disclosure-date">{(item.receiptDate || '').slice(5).replace('-', '/')}</span>
+          <span className="live-disclosure-copy">
+            <b>{item.company}</b>
+            <span>{item.title}</span>
+          </span>
+          <span className="live-disclosure-arrow">↗</span>
+        </button>
+      ))}
+    </section>
+  );
+}
 
 function SectorDisclosurePanel({ sector, onBack, onSelect }) {
   if (!sector) return null;
   const RD = window.__realData || {};
   const discAll = RD.discAll || [];
+  const live = useLiveDisclosures();
+  // UX-043: DAILY HIGHLIGHTS·SECTOR PULSE — 재무정보 탭 섹터 개요에서 공시 피드로 이동
+  const D = window.DiscloseAI || {};
+  const highlights = (D.highlightsForSector && discAll.length)
+    ? D.highlightsForSector(discAll, sector.members || [], 3)
+    : null;
   const tickers = React.useMemo(
     () => new Set((sector.members || []).map(m => m.t)),
     [sector.id]
+  );
+  const liveItems = React.useMemo(
+    () => live.items.filter(d => tickers.has(d.stockCode)),
+    [live.items, tickers]
   );
   const items = React.useMemo(
     () => discAll
       .filter(d => tickers.has(d.ticker || d.stock_code))
       .sort((a, b) => (b.disclosure_date || '').localeCompare(a.disclosure_date || ''))
-      .slice(0, 10),
+      .slice(0, 15),
     [tickers, discAll.length]
   );
   return (
@@ -2447,8 +2630,26 @@ function SectorDisclosurePanel({ sector, onBack, onSelect }) {
         <button className="back-link" onClick={onBack}>← GALAXY</button>
       </div>
       <div className="panel-body">
+        {/* UX-044: AI 판별 주요 공시(high_impact)만 — 없으면 블록 자체를 숨긴다 (최신 공시 폴백 금지, 저장 목록과 중복 방지) */}
+        {highlights && highlights.length > 0 && (
+          <div className="sector-ov-section" style={{marginBottom: 10}}>
+            <div className="ov-sec-title">DAILY HIGHLIGHTS · AI 판별 주요 공시</div>
+            <ul className="ov-sec-list">
+              {highlights.map((h, i) => (
+                <li key={i}>
+                  <span className="ov-bullet" style={{background: '#f87171'}} />
+                  <span style={{color:'#f87171', fontFamily:'var(--font-mono)', fontSize:9, marginRight:4}}>HIGH</span>
+                  <span style={{fontFamily:'var(--font-mono)', fontSize:10, color:'#94a3b8', marginRight:6}}>{h.time}</span>
+                  {(h.title || '').slice(0, 30)} — {h.corp_name}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        <LiveDisclosureBlock items={liveItems} live={live} emptyText="오늘 이 섹터에서 접수된 공시가 없습니다." />
+        <div className="stored-disclosure-label">저장된 최근 공시</div>
         {items.length === 0 && (
-          <div style={{padding: '20px', textAlign: 'center', color: '#475569', fontSize: 11}}>공시 데이터 없음</div>
+          <div style={{padding: '20px', textAlign: 'center', color: 'var(--text-3)', fontSize: 11}}>공시 데이터 없음</div>
         )}
         {items.map((d, i) => (
           <div key={i} className={'disc-feed-row' + (!!d.high_impact ? ' hi' : '')} onClick={() => onSelect && onSelect(d)}>
@@ -2461,6 +2662,14 @@ function SectorDisclosurePanel({ sector, onBack, onSelect }) {
             <div className="disc-feed-title">{(d.title || '').slice(0, 36)}{(d.title || '').length > 36 ? '…' : ''}</div>
           </div>
         ))}
+        <div className="sector-ov-section" style={{marginTop: 10}}>
+          <div className="ov-sec-title">SECTOR PULSE · 섹터 지수</div>
+          <div className="ov-bars">
+            {[0.3, 0.5, 0.4, 0.7, 0.6, 0.8, 0.9, 0.75, 0.85, 0.95].map((v, i) => (
+              <div key={i} className="ov-bar" style={{height: `${v*100}%`, background: sector.color}} />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -2470,10 +2679,18 @@ function CompanyDisclosurePanel({ company, sector, onBack, onSelect, onEnterDisc
   if (!company) return null;
   const [showRel, setShowRel] = React.useState(false);
   const RD = window.__realData || {};
+  const live = useLiveDisclosures();
+  const liveItems = React.useMemo(
+    () => live.items.filter(d => d.stockCode === company.code),
+    [live.items, company.code]
+  );
   const ownDiscs = React.useMemo(
-    () => ((RD.discByTicker && RD.discByTicker[company.code]) || []).slice(0, 8),
+    () => ((RD.discByTicker && RD.discByTicker[company.code]) || []).slice(0, 15),
     [company.code]
   );
+  // 아카이브는 top50급 대형주만 사전 수집한다 — 그 밖의 기업(예: SK스퀘어, 이월드)은
+  // ownDiscs가 항상 비어 있으므로, 그때만 저장 없이 그 자리에서 DART를 직접 조회한다.
+  const companyLive = useCompanyDisclosures(company.code, ownDiscs.length === 0);
   const relDiscs = React.useMemo(() => {
     if (!showRel) return [];
     const rels = RELATIONS[company.code] || [];
@@ -2497,26 +2714,48 @@ function CompanyDisclosurePanel({ company, sector, onBack, onSelect, onEnterDisc
         </div>
         <button className="back-link" onClick={onBack}>← SECTOR</button>
       </div>
-      <div className="panel-body" style={{display: 'flex', flexDirection: 'column'}}>
-        <div style={{padding: '5px 10px 4px', fontFamily: 'var(--font-mono,monospace)', fontSize: 9, letterSpacing: '.08em', color: '#74EEC6', borderBottom: '1px solid rgba(116, 238, 198,0.1)'}}>RECENT DISCLOSURES</div>
-        {ownDiscs.length === 0 && <div style={{padding: '14px 10px', color: '#475569', fontSize: 11}}>수집된 공시 없음</div>}
-        {ownDiscs.map((d, i) => (
-          <div key={i} className={'disc-feed-row' + (!!d.high_impact ? ' hi' : '')} onClick={() => onSelect && onSelect(d)}>
-            <div style={{display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2}}>
-              <span className="disc-feed-date">{(d.disclosure_date || '').slice(5).replace('-', '/')}</span>
-              {!!d.high_impact && <span className="disc-hi-badge">HI</span>}
-              <span className="disc-type-badge">{d.disclosure_type || '기타'}</span>
+      <div className="panel-body company-disclosure-body" style={{display: 'flex', flexDirection: 'column'}}>
+        <LiveDisclosureBlock items={liveItems} live={live} />
+        <div className="stored-disclosure-label">저장된 최근 공시</div>
+        {ownDiscs.length > 0 ? (
+          ownDiscs.map((d, i) => (
+            <div key={i} className={'disc-feed-row' + (!!d.high_impact ? ' hi' : '')} onClick={() => onSelect && onSelect(d)}>
+              <div style={{display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2}}>
+                <span className="disc-feed-date">{(d.disclosure_date || '').slice(5).replace('-', '/')}</span>
+                {!!d.high_impact && <span className="disc-hi-badge">HI</span>}
+                <span className="disc-type-badge">{d.disclosure_type || '기타'}</span>
+              </div>
+              <div className="disc-feed-title">{(d.title || '').slice(0, 32)}{(d.title || '').length > 32 ? '…' : ''}</div>
             </div>
-            <div className="disc-feed-title">{(d.title || '').slice(0, 32)}{(d.title || '').length > 32 ? '…' : ''}</div>
+          ))
+        ) : companyLive.loading ? (
+          <div style={{padding: '14px 10px', color: 'var(--text-3)', fontSize: 11}}>실시간 조회 중…</div>
+        ) : companyLive.items.length > 0 ? (
+          companyLive.items.map((d, i) => (
+            <div key={i} className="disc-feed-row" onClick={() => window.open(d.dartUrl, '_blank', 'noopener,noreferrer')}>
+              <div style={{display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2}}>
+                <span className="disc-feed-date">{(d.receiptDate || '').slice(5).replace('-', '/')}</span>
+                <span className="disc-type-badge">실시간 조회</span>
+              </div>
+              <div className="disc-feed-title">{(d.title || '').slice(0, 32)}{(d.title || '').length > 32 ? '…' : ''}</div>
+            </div>
+          ))
+        ) : companyLive.tried ? (
+          <div style={{padding: '14px 10px', color: 'var(--text-3)', fontSize: 11}}>
+            {companyLive.error ? '실시간 조회 실패 — 새로고침 해보세요' : '최근 90일간 접수된 공시가 없습니다'}
           </div>
-        ))}
+        ) : (
+          <div style={{padding: '14px 10px', color: 'var(--text-3)', fontSize: 11}}>
+            이 기업은 정적 미리보기에서 조회할 수 없습니다 — 실제 서비스에서는 실시간으로 표시됩니다.
+          </div>
+        )}
         <div className="disc-rel-toggle" onClick={() => setShowRel(v => !v)}>
           <span>{showRel ? '▾' : '▸'} 관계 기업 공시</span>
-          <span style={{color: '#64748b', fontSize: 9}}>{relCount}건</span>
+          <span style={{color: 'var(--text-3)', fontSize: 9}}>{relCount}건</span>
         </div>
         {showRel && (
           <div className="disc-rel-section">
-            {relDiscs.length === 0 && <div style={{padding: '8px 10px', color: '#475569', fontSize: 11}}>관계 기업 공시 없음</div>}
+            {relDiscs.length === 0 && <div style={{padding: '8px 10px', color: 'var(--text-3)', fontSize: 11}}>관계 기업 공시 없음</div>}
             {relDiscs.map((d, i) => (
               <div key={i} className={'disc-rel-row' + (!!d.high_impact ? ' hi' : '')} onClick={() => onSelect && onSelect(d)}>
                 <div style={{display: 'flex', alignItems: 'center', gap: 4, marginBottom: 2}}>
@@ -2529,7 +2768,7 @@ function CompanyDisclosurePanel({ company, sector, onBack, onSelect, onEnterDisc
             ))}
           </div>
         )}
-        <div style={{marginTop: 'auto', padding: '10px', borderTop: '1px solid rgba(116, 238, 198,0.08)'}}>
+        <div className="disc-enter-footer">
           <button className="disc-enter-btn" onClick={onEnterDisclosures}>ENTER DISCLOSURES ↗</button>
         </div>
       </div>
@@ -2606,16 +2845,16 @@ function QuarterlyTable({ disc }) {
         <thead>
           <tr style={{borderBottom: '1px solid rgba(116, 238, 198,0.2)'}}>
             {['시점', '매출(조)', '영업이익(조)', 'ROE%'].map(h => (
-              <td key={h} style={{padding: '5px 0', color: '#64748b', fontWeight: 600}}>{h}</td>
+              <td key={h} style={{padding: '5px 0', color: 'var(--text-3)', fontWeight: 600}}>{h}</td>
             ))}
           </tr>
         </thead>
         <tbody>
           {sorted.map((s, i) => {
-            const oiColor = s.operating_income != null ? (s.operating_income >= 0 ? '#4ade80' : '#f87171') : '#94a3b8';
+            const oiColor = s.operating_income != null ? (s.operating_income >= 0 ? '#4ade80' : '#f87171') : 'var(--text-1)';
             return (
               <tr key={i} style={{borderBottom: '1px solid rgba(116, 238, 198,0.06)'}}>
-                <td style={{padding: '5px 0', color: '#94a3b8'}}>{s.year}Q{s.quarter}</td>
+                <td style={{padding: '5px 0', color: 'var(--text-1)'}}>{s.year}Q{s.quarter}</td>
                 <td style={{padding: '5px 0', color: '#e2e8f0'}}>{fmtT(s.revenue)}</td>
                 <td style={{padding: '5px 0', color: oiColor}}>{fmtOi(s.operating_income)}</td>
                 <td style={{padding: '5px 0', color: '#e2e8f0'}}>{s.roe != null ? s.roe.toFixed(1) : '-'}</td>
@@ -2670,14 +2909,14 @@ function DisclosureDetailOverlay({ disc, onClose, onHome, onSelectCompany }) {
           )}
           {disc.summary
             ? <DisclosureSummaryView summary={disc.summary} />
-            : <div style={{color: '#475569', fontSize: 12, fontStyle: 'italic'}}>AI 요약 없음 (수집 중)</div>
+            : <div style={{color: 'var(--text-3)', fontSize: 12, fontStyle: 'italic'}}>AI 요약 없음 (수집 중)</div>
           }
           {dartDiscUrl && <div><a href={dartDiscUrl} target="_blank" rel="noopener" className="disc-dart-btn">📄 DART 원문 보기 ↗</a></div>}
           <QuarterlyTable disc={disc} />
         </div>
         <OverlayAiChat companyName={corpName} ticker={ticker} context="disclosure" disc={disc} node={node} />
       </div>
-      <div style={{textAlign: 'center', padding: '6px', fontFamily: 'var(--font-mono,monospace)', fontSize: 9, color: '#475569', borderTop: '1px solid rgba(251,191,36,0.1)', background: 'rgba(8,14,26,0.9)', flexShrink: 0}}>
+      <div style={{textAlign: 'center', padding: '6px', fontFamily: 'var(--font-mono,monospace)', fontSize: 9, color: 'var(--text-3)', borderTop: '1px solid rgba(251,191,36,0.1)', background: 'rgba(8,14,26,0.9)', flexShrink: 0}}>
         ⚠ 과거 통계 기반 참고 정보 — 투자 조언 아님
       </div>
     </div>
@@ -2724,13 +2963,13 @@ function DisclosureFullOverlay({ ticker, onClose, onHome, onSelectCompany }) {
       <div style={{flex: '1 1 0%', overflowY: 'auto', padding: '20px 28px', display: 'flex', flexDirection: 'column', gap: 10}}>
         <div style={{display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 6, flexWrap: 'wrap'}}>
           <span style={{color: '#f1f5f9', fontSize: 20, fontWeight: 700}}>{corpName}</span>
-          {sectorKo && <span style={{color: '#64748b', fontSize: 11}}>{sectorKo}</span>}
+          {sectorKo && <span style={{color: 'var(--text-3)', fontSize: 11}}>{sectorKo}</span>}
           {capLabel && <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 11, color: '#74EEC6'}}>{capLabel}</span>}
-          <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 10, color: '#475569', marginLeft: 'auto'}}>총 {items.length}건</span>
+          <span style={{fontFamily: 'var(--font-mono,monospace)', fontSize: 10, color: 'var(--text-3)', marginLeft: 'auto'}}>총 {items.length}건</span>
         </div>
         {view === 'list' ? (
           <>
-            {items.length === 0 && <div style={{color: '#475569', fontSize: 12}}>공시 데이터 없음</div>}
+            {items.length === 0 && <div style={{color: 'var(--text-3)', fontSize: 12}}>공시 데이터 없음</div>}
             {items.map((d, i) => (
               <div key={i} className={'disc-full-list-row' + (!!d.high_impact ? ' hi' : '')} onClick={() => { setSelectedDisc(d); setView('detail'); }}>
                 <div style={{display: 'flex', alignItems: 'center', gap: 8, marginBottom: 3}}>
@@ -2761,7 +3000,7 @@ function DisclosureFullOverlay({ ticker, onClose, onHome, onSelectCompany }) {
             )}
             {selectedDisc.summary
               ? <DisclosureSummaryView summary={selectedDisc.summary} />
-              : <div style={{color: '#475569', fontSize: 12, fontStyle: 'italic'}}>AI 요약 없음</div>
+              : <div style={{color: 'var(--text-3)', fontSize: 12, fontStyle: 'italic'}}>AI 요약 없음</div>
             }
             {dartUrl && <div><a href={dartUrl} target="_blank" rel="noopener" className="disc-dart-btn">📄 DART 원문 보기 ↗</a></div>}
             <QuarterlyTable disc={selectedDisc} />
@@ -2770,7 +3009,7 @@ function DisclosureFullOverlay({ ticker, onClose, onHome, onSelectCompany }) {
       </div>{/* end left content */}
       <OverlayAiChat companyName={corpName} ticker={ticker} context="disclosure" disc={view === 'detail' ? selectedDisc : null} node={node} />
       </div>{/* end flex row */}
-      <div style={{textAlign: 'center', padding: '6px', fontFamily: 'var(--font-mono,monospace)', fontSize: 9, color: '#475569', borderTop: '1px solid rgba(116, 238, 198,0.1)', background: 'rgba(8,14,26,0.9)', flexShrink: 0}}>
+      <div style={{textAlign: 'center', padding: '6px', fontFamily: 'var(--font-mono,monospace)', fontSize: 9, color: 'var(--text-3)', borderTop: '1px solid rgba(116, 238, 198,0.1)', background: 'rgba(8,14,26,0.9)', flexShrink: 0}}>
         ⚠ 과거 통계 기반 참고 정보 — 투자 조언 아님
       </div>
     </div>
@@ -3453,12 +3692,35 @@ function MascotPanel({ messages = ["섹터를 클릭하면, 기업을 확인할 
 // ─── PHASE 3: Sector overview panel (top-left) ─────────────────────────────
 // UX-008: 모드별 콘텐츠 — 성운 개요(activeMarket 없음)=DAILY HIGHLIGHTS+SECTOR PULSE,
 // 시장 드릴인(activeMarket)=그 시장 기업 목록(시총순, 클릭 시 기업 선택).
-function SectorOverviewPanel({ sector, companyCount, activeMarket, onBack, onSelectCompany }) {
+function SectorOverviewPanel({ sector, companyCount, activeMarket, onBack, onSelectCompany, galaxyTickers, onLearnGalaxy }) {
   if (!sector) return null;
   const D = window.DiscloseAI || {};
   const realData = window.__realData;
   const members = (sector.members || []).map(n => n);
-  const highlights = (D.highlightsForSector && realData) ? D.highlightsForSector(realData.discAll, members, 3) : null;
+  // UX-043: 이 섹터의 골든 은하수 보유 기업 (galaxy_index 매니페스트 ∩ 섹터 멤버 — 하드코딩 없음)
+  // UX-045: ⓐ 멤버(top50 기반)에 없는 골든은 companies_index(전 상장사, s=섹터명)로 보충 —
+  //   KOSDAQ 골든(원익IPS 등)은 top50 밖이라 멤버 교집합만으로는 영영 안 뜬다.
+  //   ⓑ KOSPI/KOSDAQ 시장 그룹으로 나눠 표시(시장은 indexByCode.mkt — 리더 지시 08-12).
+  const goldenReps = React.useMemo(() => {
+    const idx = (realData && realData.indexByCode) || {};
+    const seen = new Set(); const out = [];
+    for (const m of members) {
+      if (galaxyTickers && galaxyTickers.has(m.t) && !seen.has(m.t)) {
+        seen.add(m.t);
+        out.push({ t: m.t, n: m.n || m.name, mkt: (idx[m.t] && idx[m.t].mkt) || '' });
+      }
+    }
+    if (galaxyTickers) for (const t of galaxyTickers) {
+      const c = idx[t];
+      if (c && !seen.has(t) && c.s === sector.ko) { seen.add(t); out.push({ t, n: c.n, mkt: c.mkt || '' }); }
+    }
+    return out;
+  }, [sector.id, sector.ko, galaxyTickers, realData]);
+  const repGroups = React.useMemo(() => {
+    const g = { KOSPI: [], KOSDAQ: [], '': [] };
+    for (const r of goldenReps) (g[r.mkt] || g['']).push(r);
+    return [['KOSPI', g.KOSPI], ['KOSDAQ', g.KOSDAQ], ['', g['']]].filter(([, v]) => v.length);
+  }, [goldenReps]);
   // 드릴인 기업 목록: named(시총 정확) 먼저 cap desc → dot 기업 cb desc·이름순
   const marketList = React.useMemo(() => {
     if (!activeMarket || !realData || !realData.sectorMarketData) return null;
@@ -3497,31 +3759,40 @@ function SectorOverviewPanel({ sector, companyCount, activeMarket, onBack, onSel
           <div className="ov-stat"><div className="ov-k">기업 수</div><div className="ov-v">{companyCount}</div></div>
           <div className="ov-stat"><div className="ov-k">P / E</div><div className="ov-v">{sectorPE != null ? sectorPE : '-'}</div></div>
         </div>
-        {!marketList && (<>
+        {!marketList && (
           <div className="sector-ov-section">
-            <div className="ov-sec-title">DAILY HIGHLIGHTS · 오늘의 시그널</div>
-            <ul className="ov-sec-list">
-              {highlights && highlights.length ? highlights.map((h, i) => (
-                <li key={i}>
-                  <span className="ov-bullet" style={{background: h.high_impact ? '#f87171' : sector.color}} />
-                  {h.high_impact && <span style={{color:'#f87171', fontFamily:'var(--font-mono)', fontSize:9, marginRight:4}}>HIGH</span>}
-                  <span style={{fontFamily:'var(--font-mono)', fontSize:10, color:'#94a3b8', marginRight:6}}>{h.time}</span>
-                  {(h.title || '').slice(0, 30)} — {h.corp_name}
-                </li>
-              )) : (
-                <li style={{color:'#64748b'}}>최근 공시 데이터 없음</li>
-              )}
-            </ul>
-          </div>
-          <div className="sector-ov-section">
-            <div className="ov-sec-title">SECTOR PULSE · 섹터 지수</div>
-            <div className="ov-bars">
-              {[0.3, 0.5, 0.4, 0.7, 0.6, 0.8, 0.9, 0.75, 0.85, 0.95].map((v, i) => (
-                <div key={i} className="ov-bar" style={{height: `${v*100}%`, background: sector.color}} />
+            <div className="ov-sec-title">CASH MILKY WAY · 대표 은하수</div>
+            {goldenReps.length ? (<>
+              <div style={{fontSize: 11.5, color: '#94a3b8', lineHeight: 1.65, margin: '2px 0 8px'}}>
+                {sector.ko} 섹터의 대표 기업으로 사업보고서 읽는 법을 배워보세요!
+              </div>
+              {repGroups.map(([mkt, reps]) => (
+                <div key={mkt || 'etc'}>
+                  {mkt && (
+                    <div style={{fontFamily: 'var(--font-mono)', fontSize: 9.5, letterSpacing: '.08em',
+                                 color: mkt === 'KOSPI' ? '#94a3b8' : '#5CC7EA', margin: '6px 0 3px'}}>
+                      {mkt}
+                    </div>
+                  )}
+                  <ul className="ov-sec-list" style={{marginTop: 0}}>
+                    {reps.map((r) => (
+                      <li key={r.t} onClick={() => onLearnGalaxy && onLearnGalaxy(r.t)}
+                          style={{cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6}}>
+                        <span className="ov-bullet" style={{background: sector.color}} />
+                        <span style={{flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{r.n || r.name}</span>
+                        <span style={{fontFamily: 'var(--font-mono)', fontSize: 10, color: sector.color, whiteSpace: 'nowrap'}}>은하수 열기 →</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ))}
-            </div>
+            </>) : (
+              <div style={{fontSize: 11.5, color: '#64748b', margin: '2px 0'}}>
+                이 섹터의 대표 은하수는 준비 중이에요. 먼저 완성된 다른 섹터의 표준으로 배워보실 수 있어요.
+              </div>
+            )}
           </div>
-        </>)}
+        )}
         {marketList && (
           <div className="sector-ov-section">
             <div className="ov-sec-title">{activeMarket} COMPANIES · 시총순 {marketList.length}사</div>
@@ -3580,6 +3851,8 @@ function CompanyOverviewPanel({ company, sector, onBack, onEnter, egoAnchor }) {
   // #9: income / balance / cashflow fields from enrichNode
   const rv   = node && node.rv   ? node.rv   : null;   // revenue T
   const oi   = node && node.oi   ? node.oi   : null;   // op.income T
+  const rvLabel = node && node.rv_label ? node.rv_label : null;
+  const oiLabel = node && node.oi_label ? node.oi_label : null;
   const oim  = node && node.oim  ? node.oim  : null;   // op.margin %
   const dr   = node && node.dr   ? node.dr   : null;   // debt ratio %
   const ocf  = node && node.ocf  ? node.ocf  : null;   // op.cashflow T
@@ -3648,8 +3921,8 @@ function CompanyOverviewPanel({ company, sector, onBack, onEnter, egoAnchor }) {
           <div className="sector-ov-section">
             <div className="ov-sec-title">FINANCIALS · 재무 요약</div>
             <div className="company-ov-stats" style={{marginTop:6, flexWrap:'wrap'}}>
-              {rv  && <div className="ov-stat"><div className="ov-k">매출</div><div className="ov-v" style={{fontSize:13}}>{rv}조원</div></div>}
-              {oi  && <div className="ov-stat"><div className="ov-k">영업이익</div><div className="ov-v" style={{fontSize:13}}>{oi}조원</div></div>}
+              {rv  && <div className="ov-stat"><div className="ov-k">매출</div><div className="ov-v" style={{fontSize:13}}>{rvLabel || `${rv}조원`}</div></div>}
+              {oi  && <div className="ov-stat"><div className="ov-k">영업이익</div><div className="ov-v" style={{fontSize:13}}>{oiLabel || `${oi}조원`}</div></div>}
               {oim && <div className="ov-stat"><div className="ov-k">영업이익률</div><div className="ov-v" style={{fontSize:13, color: parseFloat(oim) > 0 ? '#4ade80' : '#f87171'}}>{oim}%</div></div>}
               {dr  && <div className="ov-stat"><div className="ov-k">부채비율</div><div className="ov-v" style={{fontSize:13, color: dr > 200 ? '#f87171' : '#e2e8f0'}}>{dr}%</div></div>}
               {ocf && <div className="ov-stat"><div className="ov-k">영업CF</div><div className="ov-v" style={{fontSize:13}}>{ocf}조원</div></div>}
@@ -4335,21 +4608,50 @@ function App() {
   // 현금 은하수 탭 활성 티커 — dossier/data/galaxy_index.json 매니페스트 로드(build_galaxy_index.py 생성).
   // 하드코딩 대신 매니페스트라 새 골든 추가 시 스크립트 재실행만으로 UI 자동 반영(V-054).
   const [galaxyTickers, setGalaxyTickers] = useState(() => new Set(['005930']));
+  // lite(표준-델타) 매니페스트 — build_galaxy_lite_index.py 생성. 골든이 없는 기업의 탭② 소스(FN-019)
+  const [liteTickers, setLiteTickers] = useState(() => new Set());
   useEffect(() => {
     let alive = true;
     fetch('../dossier/data/galaxy_index.json')
       .then((r) => (r.ok ? r.json() : null))
       .then((m) => { if (alive && m && Array.isArray(m.tickers)) setGalaxyTickers(new Set(m.tickers)); })
       .catch(() => {});
+    fetch('../dossier/data/galaxy_lite_index.json')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((m) => { if (alive && m && Array.isArray(m.tickers)) setLiteTickers(new Set(m.tickers)); })
+      .catch(() => {});
     return () => { alive = false; };
   }, []);
+  // UX-045: 우주 맵 트윙클 대상 = 현금 은하수 보유(골든 ∪ lite) — 매니페스트 합집합.
+  const galaxyGlowSet = React.useMemo(
+    () => new Set([...galaxyTickers, ...liteTickers]),
+    [galaxyTickers, liteTickers]
+  );
   // DOSSIER_TABS (D1) — 탭 추가 = 이 배열 한 줄 + dossier/<id>.html + <id>_<ticker>.json
   const DOSSIER_TABS = [
     { id: 'business', label: '사업·기업',   src: 'business.html', context: 'business', activeWhen: 'always'  }, // ① 사업·기업 개요
-    { id: 'galaxy',   label: '현금 은하수', src: 'galaxy.html',   context: 'galaxy',   activeWhen: 'hasData' }, // ② 현금 은하수 (galaxy_<t>.json 티커만)
+    { id: 'galaxy',   label: '현금 은하수', src: 'galaxy.html',   context: 'galaxy',   activeWhen: 'hasData' }, // ② 현금 은하수 (골든 galaxy_<t>.json · lite galaxy_lite_<t>.json)
     { id: 'eqs',      label: 'EQS 재무분석', src: 'firm.html',    context: 'finance',  activeWhen: 'always'  }, // ③ EQS 재무분석
   ];
-  // hasData 판정 = 위 galaxyTickers(매니페스트). (구 하드코딩 GALAXY_TICKERS 제거 — V-054)
+  // hasData 판정 = 골든 ∪ lite 매니페스트. (구 하드코딩 GALAXY_TICKERS 제거 — V-054)
+  const tabEnabled = useCallback(
+    (tab, ticker) => tab.activeWhen === 'always' || galaxyTickers.has(ticker) || liteTickers.has(ticker),
+    [galaxyTickers, liteTickers]
+  );
+  // 탭② 소스 분기 — 골든 보유면 galaxy.html, 아니면 lite. 둘 다 있으면 골든 우선(lite는 표준의 델타 뷰라 표준이 우선)
+  const tabSrc = useCallback(
+    (tab, ticker) => (tab.id === 'galaxy' && !galaxyTickers.has(ticker) && liteTickers.has(ticker)
+      ? 'galaxy_lite.html'
+      : tab.src),
+    [galaxyTickers, liteTickers]
+  );
+
+  // UX-043: 섹터 개요의 "대표 은하수" 클릭 → 그 기업 dossier를 현금 은하수 탭으로 바로 연다
+  const learnGalaxy = useCallback((code) => {
+    if (!code) return;
+    setCorpOverlayTicker(code);
+    setDossierTab('galaxy');
+  }, []);
 
   const enterCorporation = useCallback(() => {
     if (!activeCompanyCode) return;
@@ -4544,6 +4846,7 @@ function App() {
                   onSelectMarket={enterMarket}
                   onSelectCompany={selectCompany}
                   onSelectGhost={selectGhost}
+                  glowSet={galaxyGlowSet}
                 />
               )}
             </div>
@@ -4555,7 +4858,7 @@ function App() {
           {activeTab === 'finance' ? (
             <>
               {phase === 'galaxy' && <MascotPanel messages={["섹터를 클릭하면, 기업을 확인할 수 있어요!", "오른쪽 아래 섹터 INDEX에서도 선택할 수 있어요.", "AI 코파일럿에게 무엇이든 물어보세요."]} />}
-              {phase === 'sector' && <SectorOverviewPanel sector={sector} companyCount={sector.count || companies.length} activeMarket={activeMarket} onSelectCompany={selectCompany} onBack={activeMarket ? backToSectorOverview : backToGalaxy} />}
+              {phase === 'sector' && <SectorOverviewPanel sector={sector} companyCount={sector.count || companies.length} activeMarket={activeMarket} onSelectCompany={selectCompany} onBack={activeMarket ? backToSectorOverview : backToGalaxy} galaxyTickers={galaxyTickers} onLearnGalaxy={learnGalaxy} />}
               {phase === 'company' && <CompanyOverviewPanel company={company} sector={sector} onBack={backToSector} onEnter={enterCorporation} egoAnchor={egoStatus === 'ok' ? egoAnchor : null} />}
             </>
           ) : (
@@ -4622,7 +4925,7 @@ function App() {
           {/* Tab bar — DOSSIER_TABS (D1), 활성 탭 = 산업군 색 */}
           <div style={{display:'flex', padding:'0 20px', flexShrink:0, background:'rgba(5,6,13,0.95)', borderBottom:'1px solid rgba(140,170,210,0.13)'}}>
             {DOSSIER_TABS.map((tab) => {
-              const enabled = tab.activeWhen === 'always' || galaxyTickers.has(corpOverlayTicker);
+              const enabled = tabEnabled(tab, corpOverlayTicker);
               const active = dossierTab === tab.id;
               return (
                 <button key={tab.id} disabled={!enabled} onClick={() => enabled && setDossierTab(tab.id)}
@@ -4642,12 +4945,12 @@ function App() {
           <div style={{flex:'1 1 0%', display:'flex', overflow:'hidden', position:'relative'}}>
             <div style={{flex:'1 1 0%', position:'relative', minWidth:0}}>
               {DOSSIER_TABS.map((tab) => {
-                const enabled = tab.activeWhen === 'always' || galaxyTickers.has(corpOverlayTicker);
+                const enabled = tabEnabled(tab, corpOverlayTicker);
                 if (!enabled) return null;
                 const active = dossierTab === tab.id;
                 return (
                   <iframe key={tab.id}
-                    src={`../dossier/${tab.src}?ticker=${corpOverlayTicker}${tab.id === 'eqs' ? '&theme=galaxy&v=eqs-feqs-m4-20260728' : ''}&accent=${encodeURIComponent(sectorAccent)}`}
+                    src={`../dossier/${tabSrc(tab, corpOverlayTicker)}?ticker=${corpOverlayTicker}${tab.id === 'eqs' ? '&theme=galaxy&v=eqs-feqs-m4-20260728' : ''}&accent=${encodeURIComponent(sectorAccent)}`}
                     title={`${tab.id}-${corpOverlayTicker}`}
                     style={{position:'absolute', inset:0, width:'100%', height:'100%', border:'none', background:'#020408', display: active ? 'block' : 'none'}}
                     onLoad={undefined /* firm.html은 ?theme=galaxy 자체 테마(스코프 CSS) */}

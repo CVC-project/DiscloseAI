@@ -59,8 +59,11 @@ FORMAL_RE = re.compile(
     r"(습니다|합니다|입니다|됩니다|납니다|립니다|칩니다|줍니다|봅니다|랍니다|겁니다|였다[.\s]|한다[.\s])"
 )
 YEAR_RE = re.compile(r"(20(1\d|2[0-4]))년\s*(기준|현재)")
+# ⚠️ '매수'는 정규식이다(V-109) — 원문 계정명 `판매수수료`·`구매수량`처럼 **복합어 안의 '매수'**를
+#    부분일치로 잡아 산문이 계정명을 띄어쓰기로 뭉개는 회피를 부른다(대한항공 k3 실사례).
+#    금칙의 취지는 투자권유의 '매수'이므로 앞 글자가 판/구/도이면 면제한다(염가매수차익은 계속 잡힌다).
 FORBIDDEN = [
-    "매수",
+    r"(?<![판구도])매수",
     "매도 추천",
     "투자 조언",
     "확실히 오",
@@ -75,6 +78,18 @@ VIZ_SCHEMA = {  # viz_data 필수 키 (R6.3-7: 형식 불일치=빈 박스 사�
     "vSteps": ("rows", list),
     "vPuddle": ("ar", (int, float, str)),
     "vBubbles": ("segs", list),
+}
+# 원소 **내부 필드**까지 검사 (V-112 — 상위 키만 보면 빈 박스를 못 잡는다).
+# 실사고: 하이브 k6이 vBubbles에 `{l,v,p}`를 넣었는데 렌더러(`galaxy.html` vBubbles)는
+# `{l,rev,op}`를 읽어 `Math.sqrt(undefined)=NaN` → cx/r/x/y가 전부 NaN이 되며 차트 박스가
+# **통째로 공백**으로 렌더됐다(콘솔 에러 21건). 상위 키 `segs`는 list라 종전 게이트는 통과.
+# 필드 집합은 `galaxy.html`의 각 viz 렌더러가 실제로 읽는 이름에서 뽑았다.
+VIZ_ITEM_FIELDS = {
+    "vHBar": {"l", "v"},
+    "vChips": {"t"},
+    "vWater": {"l", "v"},
+    "vSteps": {"l", "v"},
+    "vBubbles": {"l", "rev", "op"},
 }
 SKIP_ALLOWED_NO_LINKS = True  # appendix는 links 없어도 됨
 
@@ -230,7 +245,19 @@ def check(ticker: str, strict: bool = False) -> list[str]:
     # 골든 레퍼런스는 문체 기준 그 자체(리더 수작업 정본) — 문체 스캔 면제, 구조·항등식·잔재는 검사.
     allow = FORBIDDEN_ALLOW.get(ticker, [])
     style_scan = ticker != GOLDEN_REF
-    for k, d in list(dives.items()) + [("apx:" + a.get("n", "?"), a) for a in apx]:
+    # ⚠️ `strings`(개요·에필로그·인트로)는 종전에 **어느 규칙도 보지 않았다**(V-109 후속).
+    #    화면 상단·하단에 그대로 실리는 산문인데 금칙어·격식체·빈 브래킷 스캔 밖이었다.
+    _STR = G.get("strings") or {}
+    _strcards = {
+        "strings:overview": {"what": [_STR.get("overview") or ""]},
+        "strings:epilogue": {"what": [_STR.get("epilogue") or ""]},
+        "strings:intro": {"what": list(_STR.get("intro_lines") or [])},
+    }
+    for k, d in (
+        list(dives.items())
+        + [("apx:" + a.get("n", "?"), a) for a in apx]
+        + list(_strcards.items())
+    ):
         for t in _texts(
             {
                 "w": d.get("what"),
@@ -247,8 +274,12 @@ def check(ticker: str, strict: bool = False) -> list[str]:
             if "[·]" in (t or "") or "[?]" in (t or ""):
                 gaps.append(f"[{k}] 빈 브래킷")
             for f in FORBIDDEN:
-                if f in (t or "") and f not in allow:
-                    gaps.append(f"[{k}] 금칙어 '{f}'")
+                if f in allow:
+                    continue
+                hit = re.search(f, t or "") if f.startswith("(?") else (f in (t or ""))
+                if hit:
+                    lab = hit.group(0) if hasattr(hit, "group") else f
+                    gaps.append(f"[{k}] 금칙어 '{lab}'")
     blob_all = json.dumps(G, ensure_ascii=False)
     for tok in LEAK_TOKENS.get(ticker, LEAK_TOKENS["_default"]):
         if tok in blob_all:
@@ -265,23 +296,30 @@ def check(ticker: str, strict: bool = False) -> list[str]:
         v = S.get(key)
         return v[-1] if isinstance(v, list) and v else None
 
+    # V-117 — 항등식 허용오차는 **표시 단위에 비례**한다. 종전 상수(0.15조·1.0조)를 억 표기
+    #   티커에 그대로 쓰면 0.15억(=1,500만원)이 되어 반올림 잔차에도 늘 FAIL이다.
+    #   조 기준 상수 × (조÷표시단위 배율) 로 환산한다: 억이면 ×1e4.
+    TOLX = {"조 원": 1.0, "억 원": 1e4}.get((G.get("corp") or {}).get("unit_label", "조 원"), 1.0)
+
     if all(S.get(x) for x in ("revenue", "cogs", "gross")):
         ident(
-            "매출−원가=총이익", S["revenue"][-1] - S["cogs"][-1], S["gross"][-1], 0.15
+            "매출−원가=총이익", S["revenue"][-1] - S["cogs"][-1], S["gross"][-1],
+            0.15 * TOLX,
         )
     if all(S.get(x) for x in ("ni", "oci", "tci")):
-        ident("ni+oci=tci", S["ni"][-1] + S["oci"][-1], S["tci"][-1], 0.15)
+        ident("ni+oci=tci", S["ni"][-1] + S["oci"][-1], S["tci"][-1], 0.15 * TOLX)
     if all(S.get(x) for x in ("cash", "ocf", "icf", "fin")) and len(S["cash"]) >= 2:
         ident(
             "현금워크(환율 허용)",
             S["cash"][-2] + S["ocf"][-1] + S["icf"][-1] + S["fin"][-1],
             S["cash"][-1],
-            1.0,
+            1.0 * TOLX,
         )
     pb = {r.get("row"): _num(r.get("v")) for r in panels.get("B", [])}
     if all(pb.get(x) is not None for x in ("is-revenue", "is-cogs", "is-grossprofit")):
         ident(
-            "패널B 총이익", pb["is-revenue"] + pb["is-cogs"], pb["is-grossprofit"], 0.2
+            "패널B 총이익", pb["is-revenue"] + pb["is-cogs"], pb["is-grossprofit"],
+            0.2 * TOLX,
         )
 
     # ── 5) 서브행 합 = 부모 (grp, 잔차 '그 외'·'기타' 명시 규약) ──
@@ -309,7 +347,10 @@ def check(ticker: str, strict: bool = False) -> list[str]:
         ]
         vals = [v for v, _ in kids if v is not None]
         pv = _num(row2v.get(prow))
-        if vals and pv is not None and abs(sum(vals) - pv) > 0.25:
+        # V-117 — 억 표기 티커는 서브행이 정수로 표시돼 **반올림 누적**이 생긴다(18행이면 최대 ±9).
+        #   조 표기는 종전 상수 0.25 그대로 두어 기존 골든 무회귀. 억은 부모의 0.1%(최소 2)로.
+        _sub_tol = 0.25 if TOLX == 1.0 else max(2.0, abs(pv or 0) * 0.001)
+        if vals and pv is not None and abs(sum(vals) - pv) > _sub_tol:
             gaps.append(f"[서브행합] {g}: 합 {sum(vals):.1f} ≠ 부모 {pv:.1f}")
 
     # ── 6) 링크 a값 정합 / viz_data 스키마 ──
@@ -367,6 +408,16 @@ def check(ticker: str, strict: bool = False) -> list[str]:
                     gaps.append(
                         f"[{k}] viz_data 스키마: {w['viz']}에 '{key}' 없음/형식 오류"
                     )
+                elif w["viz"] in VIZ_ITEM_FIELDS:  # V-112: 원소 내부 필드까지
+                    need = VIZ_ITEM_FIELDS[w["viz"]]
+                    for i, it in enumerate(vd.get(key) or []):
+                        miss = need - set(it) if isinstance(it, dict) else need
+                        if miss:
+                            gaps.append(
+                                f"[{k}] viz_data {w['viz']}.{key}[{i}] 필드 누락 "
+                                f"{sorted(miss)} — 렌더러가 읽는 이름과 불일치(빈 박스, V-112)"
+                            )
+                            break
     # ── 7) 주석 라우팅 원장 — "모든 실주석이 처리됐는가" (사용자 요구: 전 주석 완전성) ──
     # reports.db가 있으면: DB 주석 전수가 ledger에 있고, MISSING 0, excluded는 reason 필수,
     # 본문 주N 인용이 실재 주석인지(유령 인용) 검사.
@@ -454,6 +505,12 @@ _STMT_NEED = {
     "eq": "자본변동",
     "cf": "현금흐름",
 }
+# CF 본표의 '운전자본 집계' 라인 판별(§13) — 공백 제거한 계정명에 매칭.
+# 실측 변이: '영업활동으로인한자산부채의변동'·'…자산·부채의변동'·'…자산(부채)의감소(증가)'·'운전자본의변동'.
+# 개별 명세행(매출채권의감소 등)은 '영업활동' 접두가 없어 매칭되지 않는다.
+_CF_WC_RE = re.compile(
+    r"(영업활동.{0,8}자산.{0,4}부채.{0,10}(변동|증감|감소|증가)|운전자본.{0,4}(변동|증감))"
+)
 
 
 def _check_strict(ticker: str, G: dict, dives: dict) -> list[str]:
@@ -621,7 +678,20 @@ def _check_strict(ticker: str, G: dict, dives: dict) -> list[str]:
                 tot = sum(
                     abs(a) / 1e12 for nm, a in bs_acc if any(k in nm for k in akw)
                 )
-                if tot >= MAT_A and not any(k in bs_panel_names for k in akw):
+                # V-106 B(코드 승격 2026-08-04): MAT_A가 **0원 계정을 자동 면제**하는 구멍만 막는다.
+                # 주11 생물자산은 잔액이 0인데 전용 주석 2,865자 + 원문 BS 캡션이 실재했고,
+                # 그 구멍으로 §12·§9·§10을 모두 통과한 채 남의 카드(주13)로 중복 착지했다.
+                # ⚠️ 소액(0 < x < MAT_A)은 종전대로 임계 적용 — '캡션 실재'만으로 전 계정을
+                #    행으로 올리면 잔차 흡수를 정당하게 쓰는 기존 골든이 무더기로 깨진다(실측 4본).
+                zero_caption = any(
+                    any(k in nm for k in akw) for nm, _ in bs_acc
+                ) and tot == 0
+                if zero_caption and not any(k in bs_panel_names for k in akw):
+                    gaps.append(
+                        f"[BS앵커] '{lab}' 원문 재무상태표에 전용 계정(잔액 0)이 있고 전용 주석도 "
+                        f"있는데 패널 행 없음 — '잔액 0'은 '근거 없음'이 아니다, 행 신설(V-106)"
+                    )
+                elif tot >= MAT_A and not any(k in bs_panel_names for k in akw):
                     gaps.append(
                         f"[BS앵커] '{lab}' 실계정 {tot:.2f}조·전용 주석 있음인데 재무상태표(패널) 행 없음(잔차 흡수) — 행 신설+승격 필요(V-082)"
                     )
@@ -678,15 +748,313 @@ def _check_strict(ticker: str, G: dict, dives: dict) -> list[str]:
             f"전용카드 승격(new-dive:n{{N}})·note_dive 연결 필요(V-085): "
             f"{lst}{'…' if len(unpinned) > 10 else ''}"
         )
+
+    # ── 13) (strict) CF 운전자본 분리 정합 (V-099 — 2회+ 반복 패턴의 코드 승격) ──
+    # 원칙: 현금흐름표 **본표에 '영업활동으로 인한 자산·부채의 변동' 집계 라인이 별도로 있으면**
+    # 패널 CF도 cf-wc 행으로 분리한다. cf-noncash(조정)에 뭉뚱그리면 운전자본형 −OCF 서사
+    # (이익은 나는데 재고·매출채권에 현금이 묶임)가 화면에서 사라진다 — V-056(제련)·V-060(건설) 2회.
+    # 근거 없는 회사(본표에 집계 라인 없음)에는 강제하지 않는다 — 없는 근거로 행을 만들지 않는다(R6.9·D7).
+    # 캘리브레이션: 본표 라인 보유 = 삼성 T0(−9.61조)·현대차(−34.33조)·SKT(−0.14조)·한전(−5.38조), 전부 분리 보유.
+    if os.path.exists(db10) and fy:
+        import sqlite3
+
+        con13 = sqlite3.connect(db10)
+        cf_acc = con13.execute(
+            "select account_nm, amount from fs_account "
+            "where ticker=? and fiscal_year=? and sj_div='CF'",
+            (ticker, fy),
+        ).fetchall()
+        con13.close()
+        wc_src = [
+            (nm, a)
+            for nm, a in cf_acc
+            if a is not None and _CF_WC_RE.search((nm or "").replace(" ", ""))
+        ]
+        if wc_src:
+            nm_src, amt_src = max(wc_src, key=lambda x: abs(x[1]))
+            # V-117 — 패널 표시 단위가 티커 속성이므로 본표 원값도 그 단위로 환산해 비교한다.
+            #   종전 `/1e12`(조) 고정이면 억 표기 티커에서 1만 배 어긋나 항상 FAIL이다.
+            _u13 = {"조 원": 1e12, "억 원": 1e8}
+            _div13 = _u13.get((G.get("corp") or {}).get("unit_label", "조 원"), 1e12)
+            _ulab = (G.get("corp") or {}).get("unit_label", "조 원").replace(" 원", "")
+            src_jo = amt_src / _div13
+            rows13 = {
+                r.get("row"): r
+                for z, rs in (G.get("panels") or {}).items()
+                for r in (rs or [])
+            }
+            wc_row = rows13.get("cf-wc")
+            if wc_row is None:
+                nc_name = (rows13.get("cf-noncash") or {}).get("name", "")
+                gaps.append(
+                    f"[CF운전자본] 본표에 '{nm_src}' {src_jo:+,.1f}{_ulab} 별도 라인이 있는데 패널에 cf-wc 행 없음"
+                    + (f" — cf-noncash('{nc_name}')에 뭉뚱그림" if nc_name else "")
+                    + " — 행 분리 필요(V-099)"
+                )
+            else:
+                v = _num(wc_row.get("v"))
+                if v is None:
+                    gaps.append(f"[CF운전자본] cf-wc 행 값 파싱 불가('{wc_row.get('v')}')")
+                elif abs(v - src_jo) > max(0.05 * (_div13 / 1e12), abs(src_jo) * 0.02):
+                    gaps.append(
+                        f"[CF운전자본] cf-wc {v:+,.1f}{_ulab} ≠ 본표 '{nm_src}' {src_jo:+,.1f}{_ulab}"
+                        " — 부호·집계 확인(V-099)"
+                    )
+                if "운전자본" in (rows13.get("cf-noncash") or {}).get("name", ""):
+                    gaps.append(
+                        "[CF운전자본] cf-wc 행이 있는데 cf-noncash 라벨도 '운전자본'을 포함 — 이중 표기(V-099)"
+                    )
+
+    # ── 14) (strict) anchor 자기정합 (V-107 C — 리더 지시 코드 승격) ──────────────
+    # 원칙: anchor.shared_keys에 든 series 키를 five.key로 쓰는 dive가 있으면, 그 카드의
+    # five.valley와 anchor.valley_index가 같아야 한다. 같은 파일 안에서 서로 다른 해를 골짜기로
+    # 가리키면 화면에서 앵커 라벨과 카드 캡션이 어긋난다(이마트 tci: anchor 3 vs totalcomp 2).
+    # ⚠️ 'shared_keys의 argmin == valley_index'는 규칙이 아니다 — anchor는 최저점이 아니라
+    #    '그 해의 사건'을 가리키므로(한화·KT&G·NAVER 등 실측), 자기정합만 강제한다.
+    anc = G.get("anchor") or {}
+    vi = anc.get("valley_index")
+    if isinstance(vi, int):
+        for sk in anc.get("shared_keys") or []:
+            for dk, dd in dives.items():
+                fv = dd.get("five") or {}
+                if fv.get("key") == sk and fv.get("valley") is not None and fv["valley"] != vi:
+                    gaps.append(
+                        f"[anchor] shared_keys '{sk}'의 valley_index {vi} ≠ dive '{dk}'.five.valley "
+                        f"{fv['valley']} — 같은 지표가 두 해를 가리킴(V-107)"
+                    )
+
+    # ── 15) (strict) Zone C/E 헤드라인 행 라벨 길이 (V-103·V-106 → 2회+ 코드 승격) ──
+    # 원칙: 흐름 패널(C 현금흐름·E 자본변동)의 **헤드라인 행**(grp 없음) 라벨이 길면 나브·패널에서
+    # 두 줄로 접힌다. 라벨 접힘 지적이 리더 검수에서 2회 나왔고(V-103 APPENDIX 나브 → V-106 Zone E),
+    # 체커·감사 어느 쪽도 라벨 길이를 보지 않아 스크린샷 말고는 검출 경로가 없었다.
+    # 임계 22자 = 전 골든 실측 캘리브레이션(T0 삼성 최대 21자 '영업활동 자산·부채의 변동 (운전자본)').
+    # R6.6a '행 라벨 = 원문 계정명'은 **재무상태표·손익계산서 행 한정**이고 Zone C/E는
+    # V-063 '원문 primary + 짧은 부연' 계약이므로 축약이 허용된다.
+    LABEL_MAX = 22
+    for z in ("C", "E"):
+        for r in (G.get("panels") or {}).get(z, []) or []:
+            if r.get("grp"):
+                continue  # 서브행은 설명 라벨이라 대상 밖
+            nm = r.get("name") or ""
+            if len(nm) > LABEL_MAX:
+                gaps.append(
+                    f"[라벨] Zone {z} 헤드라인 '{r.get('row')}' 라벨 {len(nm)}자(>{LABEL_MAX}) — "
+                    f"두 줄 접힘 위험, 짧은 이름으로 축약(V-106): '{nm}'"
+                )
+
+    # ── 16) (strict) strings 필수 필드 — 화면에 실리는데 게이트가 없었다 (V-109 후속) ──
+    # 실사고: HMM·한화에어로·SKT·KT&G 4본이 `overview`·`epilogue`·`intro_lines` 전부 공란인 채
+    # `--all --strict` 17본 0을 통과하며 서빙됐다. 라이브에서 개요 문단과 에필로그 본문이
+    # 통째로 비어 있는데도 어느 게이트도 보지 않았다(check_golden에 'strings' 참조 자체가 없었음).
+    # 렌더러가 실제로 읽는 필드만 강제한다 — `header`·`hero`는 템플릿이 corp.*로 대체해 쓰므로 제외.
+    st = G.get("strings") or {}
+    il = st.get("intro_lines") or []
+    if len([x for x in il if (x or "").strip()]) < 2:
+        gaps.append(
+            f"[strings] intro_lines 채워진 줄 {len([x for x in il if (x or '').strip()])}개(<2) — "
+            "인트로 문단이 화면에서 빈다(V-109 후속)"
+        )
+    for f in ("overview", "epilogue"):
+        if not (st.get(f) or "").strip():
+            gaps.append(f"[strings] {f} 공란 — 화면 본문이 통째로 빈다(V-109 후속)")
+
+    # 매듭 카드 본문(`knots[].story`)도 같은 사각이었다 — 렌더러 `storyCard()`가 그대로 그리는데
+    # 7본이 전량 공란인 채 서빙됐다(현대건설·현대차·고려아연·한화에어로·NAVER·LG화학·셀트리온).
+    # 계약은 '해당 dive의 what[0] 동기화'(SKILL S3-2)라 조립이 결정론으로 채울 수 있다.
+    ke = [k.get("id") for k in (G.get("knots") or []) if not (k.get("story") or "").strip()]
+    if ke:
+        gaps.append(
+            f"[knots] story 공란 {len(ke)}개 — 매듭 카드 본문이 빈다, 해당 dive의 what[0] "
+            f"동기화 필요(V-110): {ke[:8]}{'…' if len(ke) > 8 else ''}"
+        )
+
+    # ── 17) (strict) Zone A 기초현금 = 현금흐름표 기초 (V-111 A → 승격) ────────────
+    # `pbs-cash`는 '작년 말 통장'이라 `cf-begincash`와 같은 값이어야 한다. 크래프톤에서
+    # 당기말 값을 넣었는데 표시 반올림이 우연히 같아 **16개 절이 전부 통과**했다
+    # (§5는 Zone A에 grp가 없어 미적용, §6은 "0.6"이 패널에 실존해 통과, §13은 cf-begincash만 봄).
+    # 실측(2026-08-06, 전 골든): 비교 가능한 17본 전부 일치 — 무회귀.
+    rows17 = {r.get("row"): r for z, rs in (G.get("panels") or {}).items() for r in (rs or [])}
+    _pa, _pb = rows17.get("pbs-cash"), rows17.get("cf-begincash")
+    if _pa and _pb and _pa.get("raw_mn") is not None and _pb.get("raw_mn") is not None:
+        if _pa["raw_mn"] != _pb["raw_mn"]:
+            gaps.append(
+                f"[Zone A] pbs-cash {_pa['raw_mn']:,} ≠ cf-begincash {_pb['raw_mn']:,} — "
+                f"기초현금은 현금흐름표 기초와 같은 값이어야 한다(V-111 A)"
+            )
+
+    # ── 18) (strict) series 최종값 = 패널 표시값 (V-112 B → 승격) ────────────────
+    # 차트를 그리는 series와 패널 숫자가 **같은 원값에서 나왔는지**만 본다. 하이브에서
+    # 2단 반올림으로 `cash` FY25가 [0.54]인데 패널 `bs-cash`는 "0.53"이었고, §4는 series끼리·
+    # §6은 패널끼리만 봐서 **둘 사이 정합은 아무도 안 봤다**(선과 캡션이 다른 값을 가리킴).
+    # ⚠️ 기존 골든은 1소수 series + 2소수 패널을 정당하게 섞어 쓴다(대한항공 25.2 vs 25.23 등
+    #    실측 16건) → **패널 값을 series의 소수 자릿수로 반올림해** 비교한다. 실측 결과 무회귀.
+    # ⚠️ 파생키(`gross`=revenue−cogs, `tci`=ni+oci)는 **제외**한다 — 이미 반올림된 값끼리
+    #    계산해 실계정과 ±0.1 어긋나는 게 전 골든 11본에 퍼져 있고(2026-08-06 실측), 그 11본은
+    #    k4 산문이 전부 옛 파생값을 인용한다. 근본 수리는 `series.py`가 매출총이익 **실계정**을
+    #    우선 읽게 바꾸는 캐스케이드 작업이라 별도 트랙 — 이 게이트는 **실계정 키만** 주장한다.
+    SERIES_ROW = {
+        "revenue": "is-revenue", "op": "is-opincome",
+        "ni": "is-netincome", "ocf": "cf-op", "icf": "cf-inv", "fin": "cf-fin",
+        "cash": "bs-cash", "assets": "bs-assets", "equity": "bs-equity",
+    }
+    # V-117 — 표시 단위가 티커 속성이 되면서 환산 제수도 티커에서 읽는다.
+    #   조 = raw_mn/1e6 · 억 = raw_mn/1e2. 필드가 없으면 종전(조).
+    _UDIV = {"조 원": 1e6, "억 원": 1e2}
+    udiv = _UDIV.get((G.get("corp") or {}).get("unit_label", "조 원"), 1e6)
+    for sk, rid in SERIES_ROW.items():
+        arr, row = (G.get("series") or {}).get(sk), rows17.get(rid)
+        if not (isinstance(arr, list) and arr and row) or row.get("raw_mn") is None:
+            continue
+        last = arr[-1]
+        if not isinstance(last, (int, float)):
+            continue
+        dec = len(str(last).split(".")[1]) if "." in str(last) else 0
+        if abs(round(row["raw_mn"] / udiv, dec) - last) > 10 ** -(dec + 2):
+            gaps.append(
+                f"[series] {sk}[-1]={last} ≠ 패널 {rid} {row['raw_mn'] / udiv:.{dec + 2}f} "
+                f"(소수 {dec}자리 반올림 기준) — 차트와 카드가 다른 값을 가리킨다(V-112 B)"
+            )
+
+    # ── 19) (strict) 경과연수 서술 재계수 (V-112 C → 승격, 3회 규칙) ────────────────
+    # "N년 만에"·"N년 내리"는 숫자가 전부 원문에 있고 **세는 방식만** 틀리므로 브래킷
+    # 화이트리스트(§2)도 항등식(§4)도 못 잡는다. V-102ⓑ(추세 서술)·V-104(e)(기준연도 혼용)에
+    # 이어 V-112(e)에서 "5년 만에 플러스"가 3곳에 퍼졌다(fin FY21이 이미 +2.23조라 4년 만).
+    # 두 계열을 나눠 본다:
+    # `N년 만에`는 두 뜻으로 쓰인다:
+    #   ⓐ **"N년 만에 처음/첫"** = 창 안에서 한 번도 없던 일 → N == 창 길이(5)가 정당하다.
+    #   ⓑ **"N년 만에 (다시) X"** = 마지막으로 X였던 게 N년 전 → 그 연도가 창 안에 있어야
+    #      재도출되므로 **N ≤ 창-1(4)**. 하이브가 정확히 여기서 틀렸다(FY21이 이미 +2.23조).
+    # 그래서 N ≥ 창 길이인데 `처음`·`첫` 표지가 인접하지 않으면 갭. series 불요 · 지표 무관.
+    # ⚠️ `N년 내리|연속|내내`의 series 재계수는 **게이트로 기각**했다(2026-08-06 `--all` 실측):
+    #    9본 9건이 전부 정당한 불일치였다 — ⓐ 런이 말단이 아님("3년 내리 커지다 올해 숨 고름")
+    #    ⓑ 서술 지표가 `five.key`와 다름(원가 비중·판매량 등 비series 지표) ⓒ 부호 반대
+    #    ("유출이 4년 내리 커졌다" = icf series는 감소). V-108 ③ valley 기각과 같은 계열.
+    span = max(
+        [len(a) for a in (G.get("series") or {}).values() if isinstance(a, list)] or [5]
+    )
+    for k, d in dives.items():
+        blob = " ".join(t for t in _texts(d) if isinstance(t, str))
+        for m in re.finditer(r"(\d+)년\s*만에", blob):
+            ctx = blob[max(0, m.start() - 40): m.end() + 30]
+            if int(m.group(1)) >= span and not re.search(r"처음|첫", ctx):
+                gaps.append(
+                    f"[{k}] '{m.group(0)}' — {span}점 창으로 재도출되는 최대 경과는 "
+                    f"{span - 1}년이다('{span}년 만에 처음'이면 표지를 명시). series로 "
+                    f"재계수할 것(V-112 C)"
+                )
+
+    # ── 20) (strict) 표시 계층 계약 3종 (V-119 — "값은 맞는데 화면이 틀리다"의 기계화) ──
+    apx = G.get("appendix", [])
+    # V-116~118에서 4회 연속으로 검출 경로가 '사람 눈'이었던 표면 결함을 게이트로 승격한다.
+    # (a) five.skip 타입 — 렌더러가 skip 값을 그대로 자식으로 그리므로(galaxy.html §④)
+    #     불리언 true면 React가 렌더하지 않아 섹션이 빈 문단이 된다(240810 실측 7장).
+    for k, d20 in list(dives.items()) + [("apx:" + a20.get("n", "?"), a20) for a20 in apx]:
+        sk20 = (d20.get("five") or {}).get("skip")
+        if sk20 is not None and not isinstance(sk20, str):
+            gaps.append(f"[표시] {k} five.skip이 {type(sk20).__name__} — 화면 ④섹션이 빈다. 설명 문자열로(V-118)")
+    # (b) 양면 amt 라벨 병기(R6.6c 2칙) — `346 · 7억원`처럼 라벨 없는 숫자 병기는 의미 불명.
+    #     기존 골든 6건(한전 5·크래프톤 1)은 리더 검수를 통과한 baseline이라 화이트리스트로
+    #     면제하고(§10 '잔액 0 무임계' 승격 때와 같은 절충 — V-106 B), 신규부터 강제한다.
+    _AMT_PAIR_EXEMPT = {("015760", "n13"), ("015760", "n15"), ("015760", "n16"),
+                        ("015760", "n21"), ("015760", "n28"), ("259960", "n24")}
+    _pair20 = re.compile(r"^[+−-]?[\d][\d,.]*\s*(억원|조|원)?\s*·\s*[+−-]?[\d][\d,.]*")
+    for k, d20 in list(dives.items()) + [(a20.get("n", "?"), a20) for a20 in apx]:
+        amt20 = d20.get("amt") or ""
+        if _pair20.match(amt20) and (ticker, k.replace("apx:", "")) not in _AMT_PAIR_EXEMPT:
+            gaps.append(f"[표시] {k} amt '{amt20}' — 양면 병기에 라벨이 없다(R6.6c 2칙: `금융수익 346억원 · 금융원가 7억원` 꼴)")
+    # (c) APPENDIX note_no 혼용 — 일부 카드만 note_no가 있으면 나브에 그 카드만 '주N' 접두가
+    #     떠서 튄다(240810 n18 실측). 전부 있거나 전부 없어야 한다.
+    #     ⚠️ 000720·010130·051910은 혼용 상태로 리더 검수를 통과한 baseline — 면제(신규부터 강제).
+    _NN_MIX_EXEMPT = {"000720", "010130", "051910"}
+    _nn20 = [bool(a20.get("note_no")) for a20 in apx]
+    if ticker not in _NN_MIX_EXEMPT and _nn20 and any(_nn20) and not all(_nn20):
+        _mix = [a20.get("n") for a20 in apx if bool(a20.get("note_no")) != (sum(_nn20) > len(_nn20) / 2)]
+        gaps.append(f"[표시] APPENDIX note_no 혼용 — {_mix} 만 다르다. 전부 채우거나 전부 비울 것(V-119)")
     return gaps
 
 
+# ── 계정셀 링크 계측 (V-104⑪ → 계측 코드화, 2026-08-04) ────────────────────────────
+# 원문 재무제표 표의 계정셀이 딥다이브로 연결되려면 패널 D 행 `name`이 원문 캡션과
+# 글자까지 같아야 한다(렌더러 `_nameDive`의 norm()이 '(' 이후·공백···:만 흡수).
+# 게이트로 두면 병합 행(`매출채권 및 미수금`)·잔차 행(`그 외 …`)을 정당하게 쓰는 기존
+# 골든 14본이 전부 FAIL하므로, **완주 보고용 계측**으로 승격한다(`--links`).
+_LINK_EXEMPT = ("그 외", "잔차", "(계)", "기타 (", "등 (")
+# 재무상태표 값 셀 판정 — 콤마 없는 `0`·괄호 음수·소수점까지 수치로 인정(V-109).
+_CAPVAL = re.compile(r"\(?-?[\d][\d,]*(\.\d+)?\)?")
+
+
+def _norm_cap(s: str) -> str:
+    return str(s or "").split("(")[0].replace(" ", "").replace("·", "").replace(":", "")
+
+
+def link_report(ticker: str) -> dict:
+    """패널 D 행 ↔ 원문 재무상태표 캡션 매칭 실측. 완주 보고에 N/N으로 남긴다."""
+    gp = os.path.join(_DATA, f"galaxy_{ticker}.json")
+    rp = os.path.join(_DATA, f"report_{ticker}.json")
+    if not (os.path.exists(gp) and os.path.exists(rp)):
+        return {"ticker": ticker, "error": "galaxy/report json 없음"}
+    G = json.load(open(gp, encoding="utf-8"))
+    R = json.load(open(rp, encoding="utf-8"))
+    caps = []
+    for b in ((R.get("statements") or {}).get("bs") or {}).get("blocks") or []:
+        if b.get("t") == "table":
+            for row in b.get("rows") or []:
+                # 값 셀이 수치면 계정 행. ⚠️ `"," in 값`으로 좁히면 **잔액이 0인 계정**(콤마 없음)이
+                # 캡션 집계에서 통째로 빠진다 — V-106②가 '잔액 0 + 전용 캡션'을 1급으로 올린 것과
+                # 어긋나 실제로는 링크되는 행을 미링크로 오계측한다(대한항공 `매각예정부채`, V-109).
+                if len(row) > 1 and row[0] and _CAPVAL.fullmatch(str(row[1]).strip()):
+                    caps.append(str(row[0]).strip())
+    capset = {_norm_cap(c) for c in caps}
+    rows = [r.get("name", "") for r in (G.get("panels") or {}).get("D", [])]
+    merged = [r for r in rows if any(x in r for x in _LINK_EXEMPT)]
+    checked = [r for r in rows if r not in merged]
+    hit = [r for r in checked if _norm_cap(r) in capset]
+    unlinked = [c for c in caps if _norm_cap(c) not in {_norm_cap(r) for r in rows}]
+    return {
+        "ticker": ticker, "captions": len(caps), "panel_rows": len(rows),
+        "checked": len(checked), "linked": len(hit), "merged_exempt": len(merged),
+        "miss": [r for r in checked if _norm_cap(r) not in capset],
+        "unlinked_captions": unlinked,
+    }
+
+
 def main() -> int:
+    # 진단 문구의 ✅·§ 기호가 Windows 기본 콘솔(cp949)에서 UnicodeEncodeError를 낸다 —
+    # 게이트 스크립트가 PYTHONUTF8=1 없이 호출돼도 살아남게 stdout을 UTF-8로 고정.
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    except (AttributeError, ValueError):  # 파이프·리다이렉트 등 reconfigure 불가 환경
+        pass
     args = sys.argv[1:]
     strict = (
         "--strict" in args
     )  # V-068·069 캐스케이드 계약 게이트(원문·amt·승격) 추가 — 수렴 판정용
-    args = [a for a in args if a != "--strict"]
+    links = "--links" in args
+    args = [a for a in args if a not in ("--strict", "--links")]
+    if links:  # 계정셀 링크 계측(V-104⑪) — 게이트가 아니라 완주 보고용 실측
+        import glob
+
+        ts = (
+            sorted(
+                os.path.basename(p)[7:-5]
+                for p in glob.glob(os.path.join(_DATA, "galaxy_*.json"))
+                if os.path.basename(p) != "galaxy_index.json"
+            )
+            if (args and args[0] == "--all")
+            else [args[0] if args else GOLDEN_REF]
+        )
+        for t in ts:
+            r = link_report(t)
+            if r.get("error"):
+                print(f"  {t}: {r['error']}")
+                continue
+            print(
+                f"  {t}: 패널 D {r['panel_rows']}행 · 캡션대조 {r['linked']}/{r['checked']}"
+                f" (병합·잔차 면제 {r['merged_exempt']}) · 미링크 캡션 {len(r['unlinked_captions'])}"
+            )
+            if r["miss"]:
+                print(f"      캡션 불일치 행: {r['miss'][:6]}")
+        return 0
     if args and args[0] == "--all":  # 전 골든 회귀 게이트 (galaxy_*.json 전수 — R8)
         import glob
 

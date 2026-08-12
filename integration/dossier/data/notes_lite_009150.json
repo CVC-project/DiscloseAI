@@ -1,0 +1,359 @@
+[
+ {
+  "id": "n1",
+  "title": "외상값 — 매출보다 [28.9%] 빨리 늘었어요",
+  "what": [
+   "매출채권이 작년 [1.39조]에서 올해 [1.79조]로 늘었어요.",
+   "같은 기간 매출은 [10.29조]에서 [11.31조]로 [9.9%] 늘었는데, 아직 못 받은 외상값은 [28.9%] 늘었어요."
+  ],
+  "why": [
+   "장부에는 이익으로 잡혔지만 아직 통장에 안 들어온 돈이에요 — 표준 은하수에서 '운전자본 변동'이라고 배운 항목이 바로 이거예요.",
+   "영업활동 현금이 매출 100 기준으로 [13.2]에 그쳐 표준의 [25.6]에 크게 못 미쳤는데, 여기엔 이 외상값 증가가 한몫했어요.",
+   "다만 아직 갚을 날이 오지 않은 몫이 [1.82조]로 전체 [1.86조]의 대부분이라, 떼일 위험이라기보다 '아직 못 받은' 성격에 가까워요."
+  ],
+  "src": {
+   "note_no": "6",
+   "title": "매출채권및기타채권"
+  },
+  "nums": [
+   {
+    "chip": "1.39조",
+    "check": {
+     "kind": "fact",
+     "key": "ar_current_bv_prior",
+     "fmt": "jo"
+    }
+   },
+   {
+    "chip": "1.79조",
+    "check": {
+     "kind": "fact",
+     "key": "ar_current_bv_cur",
+     "fmt": "jo"
+    }
+   },
+   {
+    "chip": "10.29조",
+    "check": {
+     "kind": "fact",
+     "key": "seg_revenue_total_prior",
+     "fmt": "jo"
+    }
+   },
+   {
+    "chip": "11.31조",
+    "check": {
+     "kind": "fact",
+     "key": "seg_revenue_total_cur",
+     "fmt": "jo"
+    }
+   },
+   {
+    "chip": "9.9%",
+    "check": {
+     "kind": "ratio",
+     "num": "seg_revenue_total_cur",
+     "den": "seg_revenue_total_prior",
+     "minus_one": true,
+     "fmt": "pct"
+    }
+   },
+   {
+    "chip": "28.9%",
+    "check": {
+     "kind": "ratio",
+     "num": "ar_current_bv_cur",
+     "den": "ar_current_bv_prior",
+     "minus_one": true,
+     "fmt": "pct"
+    }
+   },
+   {
+    "chip": "13.2",
+    "check": {
+     "kind": "norm",
+     "key": "ocf",
+     "year": "last",
+     "fmt": "num1"
+    }
+   },
+   {
+    "chip": "25.6",
+    "check": {
+     "kind": "std_norm",
+     "key": "ocf",
+     "year": "last",
+     "fmt": "num1"
+    }
+   },
+   {
+    "chip": "1.82조",
+    "check": {
+     "kind": "fact",
+     "key": "ar_aging_not_due_cur",
+     "fmt": "jo"
+    }
+   },
+   {
+    "chip": "1.86조",
+    "check": {
+     "kind": "fact",
+     "key": "ar_grand_total_gbv_cur",
+     "fmt": "jo"
+    }
+   }
+  ],
+  "std_focus": "dive:n7",
+  "order": 3,
+  "bridge": "한편, 번 이익이 현금으로 돌아오는 길목에서는 다른 일이 벌어지고 있어요."
+ },
+ {
+  "id": "n2",
+  "title": "세 사업 중 하나가 이익의 [67%]를 만들어요",
+  "what": [
+   "매출은 컴포넌트 [5.20조], 광학솔루션 [3.81조], 패키지솔루션 [2.30조] 세 갈래로 나뉘어요.",
+   "그런데 영업이익은 컴포넌트 한 곳이 [6,094억]으로, 회사 전체 [9,133억]의 대부분을 차지해요."
+  ],
+  "why": [
+   "매출의 [46%]를 내는 컴포넌트가 이익의 [67%]를 만들고, 매출 [34%]인 광학솔루션은 이익의 [18.5%]만 내요 — 매출 비중과 이익 비중이 사업마다 크게 다른 거예요.",
+   "한 사업이 회사 전체 이익을 떠받치는 구조라, 그 사업의 업황이 흔들리면 [FY23] 같은 부진이 다시 올 수 있어요.",
+   "표준인 삼성전자에서도 반도체가 같은 역할을 했다는 걸 떠올리면, 이 회사의 부진이 왜 표준과 같은 해에 왔는지가 자연스럽게 읽혀요."
+  ],
+  "src": {
+   "note_no": "3",
+   "title": "영업부문정보"
+  },
+  "nums": [
+   {
+    "chip": "5.20조",
+    "check": {
+     "kind": "fact",
+     "key": "seg_컴포넌트_rev",
+     "fmt": "jo"
+    }
+   },
+   {
+    "chip": "3.81조",
+    "check": {
+     "kind": "fact",
+     "key": "seg_광학솔루션_rev",
+     "fmt": "jo"
+    }
+   },
+   {
+    "chip": "2.30조",
+    "check": {
+     "kind": "fact",
+     "key": "seg_패키지솔루션_rev",
+     "fmt": "jo"
+    }
+   },
+   {
+    "chip": "6,094억",
+    "check": {
+     "kind": "fact",
+     "key": "seg_컴포넌트_op",
+     "fmt": "eok"
+    }
+   },
+   {
+    "chip": "9,133억",
+    "check": {
+     "kind": "fact",
+     "key": "seg_op_total_cur",
+     "fmt": "eok"
+    }
+   },
+   {
+    "chip": "46%",
+    "check": {
+     "kind": "share",
+     "num": "seg_컴포넌트_rev",
+     "den": "seg_revenue_total_cur",
+     "fmt": "pct0"
+    }
+   },
+   {
+    "chip": "67%",
+    "check": {
+     "kind": "share",
+     "num": "seg_컴포넌트_op",
+     "den": "seg_op_total_cur",
+     "fmt": "pct0"
+    }
+   },
+   {
+    "chip": "34%",
+    "check": {
+     "kind": "share",
+     "num": "seg_광학솔루션_rev",
+     "den": "seg_revenue_total_cur",
+     "fmt": "pct0"
+    }
+   },
+   {
+    "chip": "18.5%",
+    "check": {
+     "kind": "share",
+     "num": "seg_광학솔루션_op",
+     "den": "seg_op_total_cur",
+     "fmt": "pct"
+    }
+   },
+   {
+    "chip": "FY23",
+    "check": {
+     "kind": "literal"
+    }
+   }
+  ],
+  "order": 4,
+  "bridge": "마지막으로, 그 이익이 애초에 어디서 나오는지도 봐 둘 필요가 있어요."
+ },
+ {
+  "id": "n3",
+  "title": "외부에서 당겨온 돈은 짧은 빚이었어요",
+  "what": [
+   "1년 안에 갚아야 하는 단기차입금이 [1.31조]에서 [2.00조]로 [52.5%] 늘었어요.",
+   "반대로 만기가 긴 장기차입금은 [2,441억]에서 [1,884억]으로 줄었어요."
+  ],
+  "why": [
+   "위 비교 차트에서 재무활동 현금이 표준과 반대로 (+)였던 [4,181억], 그 실체가 바로 이 짧은 빚이에요.",
+   "짧은 빚은 이자가 싸고 빨리 끌어올 수 있지만 1년마다 다시 빌려야 해요 — 금리가 오르거나 은행이 등을 돌리면 갚을 돈을 새로 마련해야 하는 자리예요.",
+   "표준인 삼성전자는 같은 해 재무 존에서 오히려 돈을 내보냈다는 걸 떠올리면, 두 회사가 지금 서 있는 국면이 얼마나 다른지가 분명해져요."
+  ],
+  "src": {
+   "note_no": "14",
+   "title": "차입금"
+  },
+  "nums": [
+   {
+    "chip": "1.31조",
+    "check": {
+     "kind": "fact",
+     "key": "st_debt_prior",
+     "fmt": "jo"
+    }
+   },
+   {
+    "chip": "2.00조",
+    "check": {
+     "kind": "fact",
+     "key": "st_debt_cur",
+     "fmt": "jo"
+    }
+   },
+   {
+    "chip": "52.5%",
+    "check": {
+     "kind": "ratio",
+     "num": "st_debt_cur",
+     "den": "st_debt_prior",
+     "minus_one": true,
+     "fmt": "pct"
+    }
+   },
+   {
+    "chip": "2,441억",
+    "check": {
+     "kind": "fact",
+     "key": "lt_debt_prior",
+     "fmt": "eok"
+    }
+   },
+   {
+    "chip": "1,884억",
+    "check": {
+     "kind": "fact",
+     "key": "lt_debt_cur",
+     "fmt": "eok"
+    }
+   },
+   {
+    "chip": "4,181억",
+    "check": {
+     "kind": "series",
+     "key": "fin",
+     "year": "last",
+     "fmt": "eok"
+    }
+   }
+  ],
+  "std_focus": "dive:n12",
+  "order": 1,
+  "bridge": null
+ },
+ {
+  "id": "n4",
+  "title": "그 돈은 아직 완성되지 않은 설비로 갔어요",
+  "what": [
+   "설비에 쓴 돈이 [6,909억]에서 [1.22조]로 [76.2%] 늘었어요.",
+   "그중 [1.15조], 그러니까 [94%]가 '건설중인자산'이에요 — 아직 짓고 있어 돌아가지 않는 설비예요."
+  ],
+  "why": [
+   "건설중인자산은 완성될 때까지 감가상각을 하지 않아요. 지금 손익에는 비용으로 잡히지 않지만, 완공되는 순간부터 매년 비용이 붙기 시작해요.",
+   "이미 돌고 있는 설비의 감가상각비만 올해 [8,621억]인데, 여기에 새 설비 몫이 더해지는 거예요 — 이 투자가 매출로 돌아오지 않으면 이익이 먼저 눌려요.",
+   "짧은 빚으로 당긴 돈이 당장 돈을 벌지 않는 자산에 들어가 있다는 것 — 그게 이 회사가 표준과 가장 다른 국면에 서 있는 이유예요."
+  ],
+  "src": {
+   "note_no": "10",
+   "title": "유형자산"
+  },
+  "nums": [
+   {
+    "chip": "6,909억",
+    "check": {
+     "kind": "fact",
+     "key": "ppe_acq_prior",
+     "fmt": "eok"
+    }
+   },
+   {
+    "chip": "1.22조",
+    "check": {
+     "kind": "fact",
+     "key": "ppe_acq_cur",
+     "fmt": "jo"
+    }
+   },
+   {
+    "chip": "76.2%",
+    "check": {
+     "kind": "ratio",
+     "num": "ppe_acq_cur",
+     "den": "ppe_acq_prior",
+     "minus_one": true,
+     "fmt": "pct"
+    }
+   },
+   {
+    "chip": "1.15조",
+    "check": {
+     "kind": "fact",
+     "key": "cip_acq_cur",
+     "fmt": "jo"
+    }
+   },
+   {
+    "chip": "94%",
+    "check": {
+     "kind": "share",
+     "num": "cip_acq_cur",
+     "den": "ppe_acq_cur",
+     "fmt": "pct0"
+    }
+   },
+   {
+    "chip": "8,621억",
+    "check": {
+     "kind": "fact",
+     "key": "dep_ppe_cur",
+     "fmt": "eok"
+    }
+   }
+  ],
+  "std_focus": "dive:ppe",
+  "order": 2,
+  "bridge": "그렇게 당겨온 돈이 어디로 갔는지는, 유형자산 주석에 적혀 있어요."
+ }
+]
